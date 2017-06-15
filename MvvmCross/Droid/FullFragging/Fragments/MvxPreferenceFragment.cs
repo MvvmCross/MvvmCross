@@ -5,6 +5,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.FullFragging.Fragments.EventSource;
 using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Views;
 
 namespace MvvmCross.Droid.FullFragging.Fragments
 {

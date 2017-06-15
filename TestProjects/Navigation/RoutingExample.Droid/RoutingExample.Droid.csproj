@@ -97,6 +97,7 @@
     <Compile Include="FragmentA.cs" />
     <Compile Include="FragmentB.cs" />
     <Compile Include="FragmentC.cs" />
+    <Compile Include="FragmentDialogA.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

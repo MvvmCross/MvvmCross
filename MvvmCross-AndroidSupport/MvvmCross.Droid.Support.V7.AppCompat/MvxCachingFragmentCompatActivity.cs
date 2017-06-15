@@ -23,6 +23,7 @@ using MvvmCross.Droid.Shared.Caching;
 using MvvmCross.Droid.Shared.Fragments;
 using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Droid.Views;
+using MvvmCross.Droid.Views.Caching;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
