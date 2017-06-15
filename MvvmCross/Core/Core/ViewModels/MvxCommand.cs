@@ -163,14 +163,10 @@ namespace MvvmCross.Core.ViewModels
         }
 
         public bool CanExecute(object parameter)
-        {
-            return _canExecute == null || _canExecute();
-        }
+            => _canExecute == null || _canExecute();
 
         public bool CanExecute()
-        {
-            return CanExecute(null);
-        }
+            => CanExecute(null);
 
         public void Execute(object parameter)
         {
@@ -181,14 +177,12 @@ namespace MvvmCross.Core.ViewModels
         }
 
         public void Execute()
-        {
-            Execute(null);
-        }
+            => Execute(null);
     }
 
     public class MvxCommand<T>
         : MvxCommandBase
-        , IMvxCommand
+        , IMvxCommand, IMvxCommand<T>
     {
         private readonly Func<T, bool> _canExecute;
         private readonly Action<T> _execute;
@@ -205,26 +199,29 @@ namespace MvvmCross.Core.ViewModels
         }
 
         public bool CanExecute(object parameter)
-        {
-            return _canExecute == null || _canExecute((T)typeof(T).MakeSafeValueCore(parameter));
-        }
+            => _canExecute == null || _canExecute((T)typeof(T).MakeSafeValueCore(parameter));
 
         public bool CanExecute()
-        {
-            return CanExecute(null);
-        }
+            => CanExecute(null);
+
+        public bool CanExecute(T parameter)
+            => _canExecute == null || _canExecute(parameter);
 
         public void Execute(object parameter)
         {
-            if (CanExecute(parameter))
-            {
-                _execute((T)typeof(T).MakeSafeValueCore(parameter));
-            }
+            if (!CanExecute(parameter)) return;
+
+            _execute((T)typeof(T).MakeSafeValueCore(parameter));
         }
 
         public void Execute()
+            => Execute(null);
+
+        public void Execute(T parameter)
         {
-            Execute(null);
+            if (!CanExecute(parameter)) return;
+
+            _execute(parameter);
         }
     }
 }
