@@ -110,7 +110,7 @@ public class NextViewModel : MvxViewModel<MyObject, MyReturnObject>
     
     public async Task SomeMethod()
     {
-        await Close(new MyObject());
+        await Close(new MyReturnObject());
     }
 }
 ```
