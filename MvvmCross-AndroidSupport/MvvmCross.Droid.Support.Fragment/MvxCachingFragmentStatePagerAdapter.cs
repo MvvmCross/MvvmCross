@@ -7,7 +7,7 @@ using Android.Support.V4.App;
 using Java.Lang;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Views.Attributes;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 using String = Java.Lang.String;

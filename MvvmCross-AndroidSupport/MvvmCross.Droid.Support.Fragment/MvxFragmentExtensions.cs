@@ -13,11 +13,10 @@ using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Shared.Caching;
 using MvvmCross.Droid.Shared.Fragments;
-using MvvmCross.Droid.Shared.Fragments.EventSource;
 using MvvmCross.Droid.Support.V4.EventSource;
 using MvvmCross.Droid.Views;
+using MvvmCross.Droid.Views.Caching;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 

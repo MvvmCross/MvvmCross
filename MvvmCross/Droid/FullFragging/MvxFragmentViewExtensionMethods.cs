@@ -9,6 +9,7 @@ using Android.App;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.FullFragging.Views;
 using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 
 namespace MvvmCross.Droid.FullFragging

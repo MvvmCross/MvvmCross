@@ -8,9 +8,9 @@ using RoutingExample.Core.ViewModels;
 
 namespace RoutingExample.Droid
 {
-    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame, true)]
+    [MvxDialog]
     [Register(nameof(FragmentA))]
-    public class FragmentA : MvxFragment<ViewModelA>
+    public class FragmentDialogA : MvxDialogFragment<ViewModelDialogA>
     {
         public override void OnCreate(Bundle savedInstanceState)
         {
