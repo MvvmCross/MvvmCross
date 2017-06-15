@@ -187,10 +187,7 @@ namespace MvvmCross.Core.ViewModels
         public MvxAsyncCommand(Func<CancellationToken, Task> execute, Func<bool> canExecute = null, bool allowConcurrentExecutions = false)
             : base(allowConcurrentExecutions)
         {
-            if (execute == null)
-                throw new ArgumentNullException(nameof(execute));
-
-            _execute = execute;
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
         }
 
@@ -222,7 +219,7 @@ namespace MvvmCross.Core.ViewModels
 
     public class MvxAsyncCommand<T>
         : MvxAsyncCommandBase
-        , IMvxAsyncCommand
+        , IMvxAsyncCommand<T>
     {
         private readonly Func<T, CancellationToken, Task> _execute;
         private readonly Func<T, bool> _canExecute;
@@ -240,26 +237,23 @@ namespace MvvmCross.Core.ViewModels
         public MvxAsyncCommand(Func<T, CancellationToken, Task> execute, Func<T, bool> canExecute = null, bool allowConcurrentExecutions = false)
             : base(allowConcurrentExecutions)
         {
-            if (execute == null)
-                throw new ArgumentNullException(nameof(execute));
-
-            _execute = execute;
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
         }
 
+        public Task ExecuteAsync(T parameter)
+            => ExecuteAsync(parameter, false);
+    
+        public void Execute(T parameter)
+            => base.Execute(parameter);
+
+        public bool CanExecute(T parameter)
+            => base.CanExecute(parameter);
+
         protected override bool CanExecuteImpl(object parameter)
-        {
-            return _canExecute == null || _canExecute((T)typeof(T).MakeSafeValueCore(parameter));
-        }
+            => _canExecute == null || _canExecute((T)typeof(T).MakeSafeValueCore(parameter));
 
         protected override Task ExecuteAsyncImpl(object parameter)
-        {
-            return _execute((T)typeof(T).MakeSafeValueCore(parameter), CancelToken);
-        }
-
-        public async Task ExecuteAsync(object parameter)
-        {
-            await base.ExecuteAsync(parameter, false).ConfigureAwait(false);
-        }
+            => _execute((T)typeof(T).MakeSafeValueCore(parameter), CancelToken);
     }
 }

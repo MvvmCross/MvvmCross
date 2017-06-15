@@ -7,4 +7,10 @@ namespace MvvmCross.Core.ViewModels
         Task ExecuteAsync(object parameter = null);
         void Cancel();
     }
+
+    public interface IMvxAsyncCommand<T> : IMvxCommand<T>
+    {
+        Task ExecuteAsync(T parameter);
+        void Cancel();
+    }
 }
