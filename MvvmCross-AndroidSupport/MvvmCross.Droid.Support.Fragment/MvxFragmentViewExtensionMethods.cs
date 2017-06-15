@@ -8,6 +8,7 @@
 using Android.Support.V4.App;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 
 namespace MvvmCross.Droid.Support.V4

@@ -12,6 +12,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Shared.Fragments;
 using MvvmCross.Droid.Support.V4.EventSource;
+using MvvmCross.Droid.Views;
 
 namespace MvvmCross.Droid.Support.V4
 {

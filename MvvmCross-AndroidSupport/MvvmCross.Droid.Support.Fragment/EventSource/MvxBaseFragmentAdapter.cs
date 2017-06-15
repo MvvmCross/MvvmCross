@@ -9,9 +9,8 @@ using System;
 using Android.Content;
 using Android.OS;
 using Android.Support.V4.App;
-
 using MvvmCross.Droid.Shared;
-using MvvmCross.Droid.Shared.Fragments.EventSource;
+using MvvmCross.Droid.Views;
 using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Droid.Support.V4.EventSource
