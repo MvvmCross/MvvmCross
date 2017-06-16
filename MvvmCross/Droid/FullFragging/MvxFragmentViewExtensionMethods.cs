@@ -8,8 +8,6 @@
 using Android.App;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.FullFragging.Views;
-using MvvmCross.Droid.Shared.Fragments;
-using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 
 namespace MvvmCross.Droid.FullFragging
@@ -54,7 +52,7 @@ namespace MvvmCross.Droid.FullFragging
             return (TFragment)fragment;
         }
 
-        public static void LoadViewModelFrom(this IMvxFragmentView view, MvxViewModelRequest request, IMvxBundle savedState = null)
+        public static void LoadViewModelFrom(this Droid.Views.IMvxFragmentView view, MvxViewModelRequest request, IMvxBundle savedState = null)
         {
             var loader = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(request, savedState);

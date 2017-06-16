@@ -1,7 +1,6 @@
 using System;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Shared.Fragments;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Views.Caching

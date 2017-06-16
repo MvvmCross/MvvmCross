@@ -11,7 +11,6 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using MvvmCross.Droid.Shared;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform.Core;
 

@@ -8,7 +8,7 @@
 using Android.Views;
 using MvvmCross.Binding.Droid.Views;
 
-namespace MvvmCross.Droid.Shared.Fragments
+namespace MvvmCross.Droid.Views
 {
     public class MvxSimpleLayoutInflaterHolder : IMvxLayoutInflaterHolder
     {
