@@ -10,9 +10,9 @@ using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Shared.Fragments;
 using MvvmCross.Droid.Support.Design.EventSource;
 using MvvmCross.Droid.Support.V4;
+using MvvmCross.Droid.Views;
 
 namespace MvvmCross.Droid.Support.Design
 {

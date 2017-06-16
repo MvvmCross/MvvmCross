@@ -4,10 +4,9 @@ using Android.Content;
 using Android.Support.V4.App;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Shared.Fragments;
-using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Views;
+using MvvmCross.Droid.Views.Attributes;
 using RoutingExample.Core;
 
 namespace RoutingExample.Droid
@@ -41,7 +40,7 @@ namespace RoutingExample.Droid
                     bundle) as IMvxFragmentView;
         }
 
-        protected override void ReplaceFragment(MvvmCross.Droid.Shared.Attributes.MvxFragmentAttribute mvxFragmentAttributeAssociated, IMvxFragmentView fragment, string fragmentTag)
+        protected override void ReplaceFragment(MvxFragmentAttribute mvxFragmentAttributeAssociated, IMvxFragmentView fragment, string fragmentTag)
         {
             var ft = (Activity as MvxCachingFragmentCompatActivity).SupportFragmentManager.BeginTransaction();
             ft.Replace(mvxFragmentAttributeAssociated.FragmentContentId, fragment as Fragment, fragmentTag);
