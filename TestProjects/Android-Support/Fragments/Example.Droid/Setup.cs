@@ -9,7 +9,6 @@ using Example.Core;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Droid.Views;
@@ -53,7 +52,7 @@ namespace Example.Droid
         /// </summary>
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
-            return new MvxFragmentsPresenter(AndroidViewAssemblies); ;
+            return new MvxAndroidViewPresenter(AndroidViewAssemblies); ;
         }
 
         protected override IMvxTrace CreateDebugTrace()

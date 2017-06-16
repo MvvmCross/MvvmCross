@@ -44,7 +44,6 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Fragments\MvxSimpleLayoutInflaterHolder.cs" />
     <Compile Include="Presenter\MvxFragmentsPresenter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
   </ItemGroup>

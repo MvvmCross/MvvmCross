@@ -1,5 +1,4 @@
 using System;
-using MvvmCross.Droid.Shared.Fragments;
 
 namespace MvvmCross.Droid.Views.Caching
 {

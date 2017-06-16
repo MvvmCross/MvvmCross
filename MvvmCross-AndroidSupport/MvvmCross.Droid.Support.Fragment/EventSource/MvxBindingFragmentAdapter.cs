@@ -11,7 +11,6 @@ using Android.Support.V4.App;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Shared;
 using MvvmCross.Droid.Views;
 using MvvmCross.Droid.Views.Attributes;
 using MvvmCross.Platform;
