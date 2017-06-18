@@ -54,6 +54,19 @@ namespace RoutingExample.Core.ViewModels
             }
         }
 
+        private IMvxCommand _showDialogACommand;
+
+        public IMvxCommand ShowDialogACommand
+        {
+            get
+            {
+                return _showDialogACommand ?? (_showDialogACommand = new MvxAsyncCommand(async () =>
+                {
+                    var result = await _navigationService.Navigate<ViewModelDialogA, string, string>("input");
+                }));
+            }
+        }
+
         private IMvxCommand _showRandomCommand;
 
         public IMvxCommand ShowRandomCommand

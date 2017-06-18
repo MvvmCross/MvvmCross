@@ -59,6 +59,8 @@ namespace MvvmCross.Droid.Views
             _lazyNavigationSerializerFactory = new Lazy<IMvxNavigationSerializer>(Mvx.Resolve<IMvxNavigationSerializer>);
             _fragmentHostRegistrationSettings = new FragmentHostRegistrationSettings(AndroidViewAssemblies);
 
+            _attributeTypesToShowMethodDictionary = new Dictionary<Type, Action<MvxBasePresentationAttribute, MvxViewModelRequest>>();
+
             RegisterAttributeTypes();
         }
 
@@ -77,6 +79,16 @@ namespace MvvmCross.Droid.Views
             MvxDialogAttribute attribute,
             MvxViewModelRequest request)
         {
+            //var dialog = DialogFragment.Instantiate(this, FragmentJavaName());
+
+            var fragmentType = _fragmentHostRegistrationSettings.GetFragmentTypeAssociatedWith(request.ViewModelType);
+
+            var fragmentTag = GetFragmentTag(request);
+            FragmentCacheConfiguration.RegisterFragmentToCache(fragmentTag, fragmentType, request.ViewModelType, false);
+
+            //TODO: handle show here
+            CreateFragment(fragmentType, null);
+
             //TODO: Check if class implements IDialogInterface
             //TODO: Check if class is a Fragment
             //TODO: Show as Dialog or DialogFragment
@@ -84,6 +96,21 @@ namespace MvvmCross.Droid.Views
 
         public override void Show(MvxViewModelRequest request)
         {
+            var isFragment = _fragmentHostRegistrationSettings.IsTypeRegisteredAsFragment(request.ViewModelType);
+
+            if (!isFragment)
+                ShowActivity(request);
+            else
+            {
+                var attribute = _fragmentHostRegistrationSettings.GetAttributesForFragment(request.ViewModelType);
+
+                Action<MvxBasePresentationAttribute, MvxViewModelRequest> showAction;
+                if (!_attributeTypesToShowMethodDictionary.TryGetValue(attribute.GetType(), out showAction))
+                    throw new KeyNotFoundException($"The type {attribute.GetType().Name} is not configured in the presenter dictionary");
+
+                showAction.Invoke(attribute, request);
+            }
+            /*
             var isFragment = _fragmentHostRegistrationSettings.IsTypeRegisteredAsFragment(request.ViewModelType);
 
             var attribute = _fragmentHostRegistrationSettings.GetMvxFragmentAttributeAssociatedWithCurrentHost(request.ViewModelType);
@@ -169,7 +196,7 @@ namespace MvvmCross.Droid.Views
             var fragmentType = _fragmentHostRegistrationSettings.GetFragmentTypeAssociatedWith(request.ViewModelType);
 
             var fragmentTag = GetFragmentTag(request);
-            FragmentCacheConfiguration.RegisterFragmentToCache(fragmentTag, fragmentType, request.ViewModelType, mvxFragmentAttributeAssociated.AddToBackStack);
+            //FragmentCacheConfiguration.RegisterFragmentToCache(fragmentTag, fragmentType, request.ViewModelType, mvxFragmentAttributeAssociated.AddToBackStack);
 
             var fragment = CreateFragment(fragmentType, bundle);
 
@@ -181,7 +208,7 @@ namespace MvvmCross.Droid.Views
                 childViewModelCache.Remove(viewModelType);
             }
 
-            ReplaceFragment(mvxFragmentAttributeAssociated, fragment, fragmentTag);
+            //ReplaceFragment(mvxFragmentAttributeAssociated, fragment, fragmentTag);
         }
 
         protected virtual void ReplaceFragment(MvxFragmentAttribute mvxFragmentAttributeAssociated, IMvxFragmentView fragment, string fragmentTag)
@@ -190,10 +217,10 @@ namespace MvvmCross.Droid.Views
             ft.Replace(mvxFragmentAttributeAssociated.FragmentContentId, fragment as Fragment, fragmentTag);
         }
 
-        protected virtual IMvxFragmentView CreateFragment(Type fragType, Bundle bundle)
+        protected virtual IMvxFragmentView CreateFragment(Type fragType, Bundle bundle = null)
         {
-            return Fragment.Instantiate(Activity, FragmentJavaName(fragType),
-                    bundle) as IMvxFragmentView;
+            return Fragment.Instantiate(Activity, FragmentJavaName(fragType)
+                    ) as IMvxFragmentView;
         }
 
         protected virtual string FragmentJavaName(Type fragmentType)
