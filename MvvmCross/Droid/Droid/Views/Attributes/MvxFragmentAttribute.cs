@@ -20,19 +20,9 @@ namespace MvvmCross.Droid.Views.Attributes
         }
 
         /// <summary>
-        /// That shall be used only if you are using non generic fragments.
-        /// </summary>
-        public Type ViewModelType { get; set; }
-
-        /// <summary>
         /// Indicates if the fragment can be cached. True by default.
         /// </summary>
         public bool IsCacheableFragment { get; set; } = true;
-
-        /// <summary>
-        /// Fragment parent activity ViewModel Type. This activity is shown if ShowToViewModel call for Fragment is called from other activity.
-        /// </summary>
-        public Type ParentActivityViewModelType { get; private set; }
 
         /// <summary>
         /// Content id - place where to show fragment.

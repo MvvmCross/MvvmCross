@@ -15,7 +15,7 @@ namespace MvvmCross.Droid.Views
         private readonly IEnumerable<Assembly> _assembliesToLookup;
         private readonly IMvxViewModelTypeFinder _viewModelTypeFinder;
 
-        private readonly Dictionary<Type, IList<MvxFragmentAttribute>> _fragmentTypeToMvxFragmentAttributeMap;
+        private readonly Dictionary<Type, IList<MvxBasePresentationAttribute>> _fragmentTypeToMvxFragmentAttributeMap;
         private Dictionary<Type, Type> _viewModelToFragmentTypeMap;
 
         private bool isInitialized;
@@ -24,7 +24,7 @@ namespace MvvmCross.Droid.Views
         {
             _assembliesToLookup = assembliesToLookup;
             _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
-            _fragmentTypeToMvxFragmentAttributeMap = new Dictionary<Type, IList<MvxFragmentAttribute>>();
+            _fragmentTypeToMvxFragmentAttributeMap = new Dictionary<Type, IList<MvxBasePresentationAttribute>>();
         }
 
         private void InitializeIfNeeded()
@@ -46,7 +46,7 @@ namespace MvvmCross.Droid.Views
                 foreach (var typeWithMvxFragmentAttribute in typesWithMvxFragmentAttribute)
                 {
                     if (!_fragmentTypeToMvxFragmentAttributeMap.ContainsKey(typeWithMvxFragmentAttribute))
-                        _fragmentTypeToMvxFragmentAttributeMap.Add(typeWithMvxFragmentAttribute, new List<MvxFragmentAttribute>());
+                        _fragmentTypeToMvxFragmentAttributeMap.Add(typeWithMvxFragmentAttribute, new List<MvxBasePresentationAttribute>());
 
                     foreach (var mvxAttribute in typeWithMvxFragmentAttribute.GetMvxFragmentAttributes())
                         _fragmentTypeToMvxFragmentAttributeMap[typeWithMvxFragmentAttribute].Add(mvxAttribute);
@@ -111,13 +111,25 @@ namespace MvvmCross.Droid.Views
             return _viewModelToFragmentTypeMap[viewModelType];
         }
 
-        private IList<MvxFragmentAttribute> GetMvxFragmentAssociatedAttributes(Type withFragmentViewModelType)
+        private IList<MvxBasePresentationAttribute> GetMvxFragmentAssociatedAttributes(Type withFragmentViewModelType)
         {
             var fragmentTypeAssociatedWithViewModel = GetFragmentTypeAssociatedWith(withFragmentViewModelType);
             return _fragmentTypeToMvxFragmentAttributeMap[fragmentTypeAssociatedWithViewModel];
         }
 
-        public virtual MvxFragmentAttribute GetMvxFragmentAttributeAssociatedWithCurrentHost(Type fragmentViewModelType)
+        public virtual MvxBasePresentationAttribute GetAttributesForFragment(Type fragmentViewModelType)
+        {
+            InitializeIfNeeded();
+
+            var currentActivityViewModelType = GetCurrentActivityViewModelType();
+            Activity currentActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
+
+            var fragmentAttributes = GetMvxFragmentAssociatedAttributes(fragmentViewModelType);
+
+            return fragmentAttributes.First();
+        }
+
+        public virtual MvxBasePresentationAttribute GetMvxFragmentAttributeAssociatedWithCurrentHost(Type fragmentViewModelType)
         {
             InitializeIfNeeded();
 
@@ -126,11 +138,11 @@ namespace MvvmCross.Droid.Views
 
             var fragmentAttributes = GetMvxFragmentAssociatedAttributes(fragmentViewModelType)
                 .Where(x => x.ParentActivityViewModelType == currentActivityViewModelType);
-            MvxFragmentAttribute attribute = fragmentAttributes.FirstOrDefault();
+            MvxBasePresentationAttribute attribute = fragmentAttributes.FirstOrDefault();
 
             if (fragmentAttributes.Count() > 1)
             {
-                foreach (var item in fragmentAttributes)
+                foreach (var item in fragmentAttributes.OfType<MvxFragmentAttribute>())
                 {
                     if (currentActivity.FindViewById(item.FragmentContentId) != null)
                     {

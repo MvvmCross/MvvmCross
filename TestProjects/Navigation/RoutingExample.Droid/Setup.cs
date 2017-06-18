@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
 using Android.Support.V4.App;
+using Android.Support.V7.App;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Support.V7.AppCompat;
@@ -36,8 +37,14 @@ namespace RoutingExample.Droid
 
         protected override IMvxFragmentView CreateFragment(System.Type fragType, Android.OS.Bundle bundle)
         {
-            return Fragment.Instantiate(Activity, FragmentJavaName(fragType),
-                    bundle) as IMvxFragmentView;
+            var fragment = Fragment.Instantiate(Activity, FragmentJavaName(fragType)) as IMvxFragmentView;
+
+            if(fragment is DialogFragment)
+            {
+                ((DialogFragment)fragment).Show(((AppCompatActivity)Activity).SupportFragmentManager, "test");
+            }
+
+            return fragment;
         }
 
         protected override void ReplaceFragment(MvxFragmentAttribute mvxFragmentAttributeAssociated, IMvxFragmentView fragment, string fragmentTag)
