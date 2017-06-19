@@ -8,7 +8,7 @@ MvvmCross
 ==========
 [![Twitter: @MvvmCross](https://img.shields.io/badge/contact-@MvvmCross-blue.svg?style=flat)](https://twitter.com/MvvmCross)
 ![license](https://img.shields.io/github/license/mvvmcross/mvvmcross.svg)
-![Visual Studio Team services](https://img.shields.io/vso/build/osteost/3472a0ca-2abe-44b8-9897-98bdf5ab78a5/3.svg)
+[![Build status](https://ci.appveyor.com/api/projects/status/eih9kn75kujmmuf1?svg=true)](https://ci.appveyor.com/project/MvvmCross/mvvmcross)
 [![NuGet](https://img.shields.io/nuget/v/MvvmCross.svg)](https://www.nuget.org/packages/MvvmCross/)
 [![NuGet Pre Release](https://img.shields.io/nuget/vpre/MvvmCross.svg)](https://www.nuget.org/packages/MvvmCross/)
 [![GitHub tag](https://img.shields.io/github/tag/mvvmcross/mvvmcross.svg)](https://github.com/MvvmCross/MvvmCross/releases)
