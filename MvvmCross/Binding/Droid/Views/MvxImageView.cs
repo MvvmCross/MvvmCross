@@ -93,19 +93,23 @@ namespace MvvmCross.Binding.Droid.Views
 
         public MvxImageView(Context context, IAttributeSet attrs, int defStyleAttr)
             : this(context, attrs, defStyleAttr, 0)
-        { }
+        {
+        }
 
         public MvxImageView(Context context, IAttributeSet attrs)
             : this(context, attrs, 0)
-        { }
+        {
+        }
 
         public MvxImageView(Context context)
             : this(context, null)
-        { }
+        {
+        }
 
         protected MvxImageView(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        { }
+        {
+        }
 
         protected override void Dispose(bool disposing)
         {
