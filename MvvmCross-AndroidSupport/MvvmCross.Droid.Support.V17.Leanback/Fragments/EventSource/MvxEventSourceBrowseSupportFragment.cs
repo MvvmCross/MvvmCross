@@ -11,8 +11,7 @@ using MvvmCross.Platform.Core;
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource
 {
     public class MvxEventSourceBrowseSupportFragment
-        : BrowseSupportFragment
-        , IMvxEventSourceFragment
+        : BrowseSupportFragment, IMvxEventSourceFragment
     {
         public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
 

@@ -33,21 +33,21 @@ namespace MvvmCross.Binding.Test.Binders
             {
                 add
                 {
-                    _propertyChanged += value;
+                    InternalPropertyChanged += value;
                     SubscriptionCount++;
                 }
                 remove
                 {
-                    _propertyChanged -= value;
+                    InternalPropertyChanged -= value;
                     SubscriptionCount--;
                 }
             }
 
-            private event PropertyChangedEventHandler _propertyChanged;
+            private event PropertyChangedEventHandler InternalPropertyChanged;
 
             protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
             {
-                _propertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                InternalPropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 

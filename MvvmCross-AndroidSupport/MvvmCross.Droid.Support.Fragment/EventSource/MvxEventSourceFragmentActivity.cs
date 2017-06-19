@@ -17,8 +17,7 @@ using MvvmCross.Platform.Core;
 namespace MvvmCross.Droid.Support.V4.EventSource
 {
     public abstract class MvxEventSourceFragmentActivity
-        : FragmentActivity
-        , IMvxEventSourceActivity
+        : FragmentActivity, IMvxEventSourceActivity
     {
         protected MvxEventSourceFragmentActivity()
         {

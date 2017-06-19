@@ -17,14 +17,14 @@ using MvvmCross.Platform.Droid.Views;
 namespace MvvmCross.Droid.Support.V7.AppCompat.EventSource
 {
     public abstract class MvxEventSourceAppCompatActivity
-        : AppCompatActivity
-        , IMvxEventSourceActivity
+        : AppCompatActivity, IMvxEventSourceActivity
     {
         protected MvxEventSourceAppCompatActivity()
         {
         }
 
-        protected MvxEventSourceAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected MvxEventSourceAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
         {
         }
 

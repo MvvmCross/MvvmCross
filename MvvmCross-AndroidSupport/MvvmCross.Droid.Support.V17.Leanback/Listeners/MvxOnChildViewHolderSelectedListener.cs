@@ -9,7 +9,8 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Listeners
 	/// <summary>
 	/// Forwards "OnChildViewHolderSelected"-Events to a command.
 	/// </summary>
-	public class MvxOnChildViewHolderSelectedListener : OnChildViewHolderSelectedListener
+	public class MvxOnChildViewHolderSelectedListener 
+        : OnChildViewHolderSelectedListener
 	{
 		public ICommand ItemSelection { get; set; }
 

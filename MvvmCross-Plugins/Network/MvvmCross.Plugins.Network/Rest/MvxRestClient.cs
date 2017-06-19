@@ -321,58 +321,55 @@ namespace MvvmCross.Plugins.Network.Rest
         protected virtual void ProcessResponse(MvxRestRequest restRequest, HttpWebRequest httpRequest, Action<MvxRestResponse> successAction, Action<Exception> errorAction)
         {
             httpRequest.BeginGetResponse(result =>
-                                         TryCatch(() =>
-                                         {
-                                             var response = (HttpWebResponse)httpRequest.EndGetResponse(result);
+                TryCatch(() =>
+                {
+                    var response = (HttpWebResponse)httpRequest.EndGetResponse(result);
 
-                                             var code = response.StatusCode;
+                    var code = response.StatusCode;
 
-                                             var restResponse = new MvxRestResponse
-                                             {
-                                                 CookieCollection = response.Cookies,
-                                                 Tag = restRequest.Tag,
-                                                 StatusCode = code
-                                             };
-                                             successAction?.Invoke(restResponse);
-                                         }, errorAction)
-                                         , null);
+                    var restResponse = new MvxRestResponse
+                    {
+                        CookieCollection = response.Cookies,
+                        Tag = restRequest.Tag,
+                        StatusCode = code
+                    };
+                    successAction?.Invoke(restResponse);
+                }, errorAction), null);
         }
 
         protected virtual void ProcessResponse(MvxRestRequest restRequest, HttpWebRequest httpRequest, Action<MvxStreamRestResponse> successAction, Action<Exception> errorAction)
         {
             httpRequest.BeginGetResponse(result =>
-                                         TryCatch(() =>
-                                         {
-                                             var response = (HttpWebResponse)httpRequest.EndGetResponse(result);
+                TryCatch(() =>
+                {
+                    var response = (HttpWebResponse)httpRequest.EndGetResponse(result);
 
-                                             var code = response.StatusCode;
-                                             var responseStream = response.GetResponseStream();
-                                             var restResponse = new MvxStreamRestResponse
-                                             {
-                                                 CookieCollection = response.Cookies,
-                                                 Stream = responseStream,
-                                                 Tag = restRequest.Tag,
-                                                 StatusCode = code
-                                             };
-                                             successAction?.Invoke(restResponse);
-                                         }, errorAction)
-                , null);
+                    var code = response.StatusCode;
+                    var responseStream = response.GetResponseStream();
+                    var restResponse = new MvxStreamRestResponse
+                    {
+                        CookieCollection = response.Cookies,
+                        Stream = responseStream,
+                        Tag = restRequest.Tag,
+                        StatusCode = code
+                    };
+                    successAction?.Invoke(restResponse);
+                }, errorAction), null);
         }
 
         protected virtual void ProcessRequestThen(MvxRestRequest restRequest, HttpWebRequest httpRequest, Action continueAction, Action<Exception> errorAction)
         {
             httpRequest.BeginGetRequestStream(result =>
-                                              TryCatch(() =>
-                                              {
-                                                  using (var stream = httpRequest.EndGetRequestStream(result))
-                                                  {
-                                                      restRequest.ProcessRequestStream(stream);
-                                                      stream.Flush();
-                                                  }
+                TryCatch(() =>
+                {
+                    using (var stream = httpRequest.EndGetRequestStream(result))
+                    {
+                        restRequest.ProcessRequestStream(stream);
+                        stream.Flush();
+                    }
 
-                                                  continueAction?.Invoke();
-                                              }, errorAction)
-                                              , null);
+                    continueAction?.Invoke();
+                }, errorAction), null);
         }
     }
 }
