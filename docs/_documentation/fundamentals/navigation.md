@@ -55,8 +55,6 @@ public static class MvxNavigationExtensions
 }
 ```
 
-The Uri navigation will build the navigation stack if required. This will also enable deeplinking and building up the navigationstack for it. Every ViewModel added to the stack can split up into multiple paths of it's own backstack. This will enable all kinds of layout structures as Hamburger, Tab or Top navigation.
-
 In your ViewModel this could look like:
 
 ```c#
@@ -115,7 +113,11 @@ public class NextViewModel : MvxViewModel<MyObject, MyReturnObject>
 }
 ```
 
-You can provide a CancellationToken to abort waiting for a Result. This will close the ViewModel and cancel the Task.
+You can provide a CancellationToken to abort waiting for a Result. This will close the ViewModel and cancel the Task. 
+
+If you have a BaseViewModel you might not be able to inherit `MvxViewModel<TParameter>` or `MvxViewModel<TParameter, TResult>` because you already have the BaseViewModel as base class. In this case you can implement the following interface:
+
+`IMvxViewModel<TParameter>`, `IMvxViewModelResult<TResult>` or `IMvxViewModel<TParameter, TResult>`
 
 To check if you are able to navigate to a certain ViewModel you can use the `CanNavigate` method.
 
@@ -140,11 +142,93 @@ The events available are:
 * BeforeClose
 * AfterClose
 
-If you have a BaseViewModel you might not be able to inherit `MvxViewModel<TParameter>` or `MvxViewModel<TParameter, TResult>` because you already have the BaseViewModel as base class. In this case you can implement the following interface:
-
-`IMvxViewModel<TParameter>`, `IMvxViewModelResult<TResult>` or `IMvxViewModel<TParameter, TResult>`
-
 You might be using `Init()` or `Start()` methods in your ViewModels when updating from MvvmCross 4.x. This is now deprecated because it was done using reflection and therefor not very safe. With the new navigation a method called `Task Initialize()` will be called. This method is typed and async.
+
+### Uri navigation
+
+The Uri navigation of the NavigationService will build the navigation stack if required. This will also enable deeplinking and building up the navigationstack for it. Every ViewModel added to the stack can split up into multiple paths of it's own backstack. This will enable all kinds of layout structures as Hamburger, Tab or Top navigation.
+
+The NavigationService supports multiple URIs per ViewModel as well as "NavigationFacades" that return the right ViewModel + parameters depending on the URI.
+
+The solution is composed of:
+
+* Navigation Attribute (ViewModel/Facade, URI regex)
+* NavigationFacades are constructed via Mvx.IocConstruct to profit from dependency injection
+* NavigationService, registered as a singleton, uses IMvxViewDispatcher to show the viewmodels
+* Necessary additions to Android (Activity.OnNewIntent) + iOS (AppDelegate.OpenUrl) (look a the example project for more infos)
+You can also use this solution for triggering deeplink from outside the app:
+
+Register a custom scheme (i.e. "foo") in our app (look a the example project for me info)
+Push-Messages: Depending on the status of the app you can pass a uri as the Notification Parameter, so when the app starts you can deep link directly to the view you want.
+
+Supply your routings as assembly attributes. We would recommend putting them in the same file as the referenced ViewModel.
+
+```c#
+[assembly: MvxRouting(typeof(ViewModelA), @"mvx://test/\?id=(?<id>[A-Z0-9]{32})$")]
+namespace *.ViewModels
+{
+    public class ViewModelA
+        : MvxViewModel
+    {
+    	public void Initialize(string id) // you can use captured groups defined in the regex as parameters here
+        {
+
+        }
+    }
+}
+```
+
+Routing in a ViewModel.
+
+```c#
+public class MainViewModel : MvxViewModel
+{
+    private readonly IMvxNavigationService _routingService;
+
+    public MainViewModel(IMvxNavigationService routingService)
+    {
+        _routingService = routingService;
+    }
+
+    private IMvxAsyncCommand _showACommand;
+    public IMvxAsyncCommand ShowACommand
+    {
+        get
+        {
+            return _showACommand ?? (_showACommand = new MvxAsyncCommand(async () =>
+            {
+                await _routingService.Navigate("mvx://test/?id=" + Guid.NewGuid().ToString("N"));
+            }));
+        }
+    }
+}
+```
+
+#### Facades
+
+Say you are building a task app and depending on the type of task you want to show a different view. This is where NavigationFacades come in handy (there is only so much regular expressions can do for you).
+
+mvx://task/?id=00000000000000000000000000000000 <-- this task is done, show read-only view (ViewModelA) mvx://task/?id=00000000000000000000000000000001 <-- this task isn't, go straight to edit view (ViewModelB)
+
+```c#
+[assembly: MvxRouting(typeof(SimpleNavigationFacade), @"mvx://task/\?id=(?<id>[A-Z0-9]{32})$")]
+namespace *.NavigationFacades
+{
+	public class SimpleNavigationFacade
+	    : IMvxNavigationFacade
+	{
+	    public Task<MvxViewModelRequest> BuildViewModelRequest(string url,
+	        IDictionary<string, string> currentParameters, MvxRequestedBy requestedBy)
+	    {
+	    	// you can load data from a database etc.
+	    	// try not to do a lot of work here, as the user is waiting for the UI to do something ;)
+	        var viewModelType = currentParameters["id"] == Guid.Empty.ToString("N") ? typeof(ViewModelA) : typeof(ViewModelB);
+
+	        return Task.FromResult(new MvxViewModelRequest(viewModelType, new MvxBundle(), null, requestedBy));
+	    }
+	}
+}
+```
 
 ## Upgrading from 4.x to 5.x
 
