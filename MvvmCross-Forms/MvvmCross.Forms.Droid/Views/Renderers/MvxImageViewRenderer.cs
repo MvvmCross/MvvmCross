@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System
+using System.ComponentModel;
 using Android.Widget;
 using MvvmCross.Forms.Droid.Views.Renderers;
 using MvvmCross.Forms.Views;
@@ -18,7 +19,8 @@ namespace MvvmCross.Forms.Droid.Views.Renderers
 
         protected override ImageView CreateNativeControl()
         {
-            _nativeControl = new MvxDroidImageView(Context, OnSourceImageChanged);
+            _nativeControl = new MvxDroidImageView(Context);
+            _nativeControl.ImageChanged += OnSourceImageChanged;
 
             return _nativeControl;
         }
@@ -29,6 +31,7 @@ namespace MvvmCross.Forms.Droid.Views.Renderers
             {
                 if (_nativeControl != null)
                 {
+                    _nativeControl.ImageChanged -= OnSourceImageChanged;
                     _nativeControl.Dispose();
                     _nativeControl = null;
                 }
@@ -88,7 +91,7 @@ namespace MvvmCross.Forms.Droid.Views.Renderers
             }
         }
 
-        private void OnSourceImageChanged()
+        private void OnSourceImageChanged(object sender, EventArgs args)
         {
             (SharedControl as IVisualElementController).InvalidateMeasure(InvalidationTrigger.MeasureChanged);
         }

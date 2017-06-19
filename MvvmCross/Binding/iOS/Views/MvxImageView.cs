@@ -17,6 +17,7 @@ namespace MvvmCross.Binding.iOS.Views
         : UIImageView
     {
         private MvxImageViewLoader _imageHelper;
+        public event EventHandler ImageChanged;
 
         public string ImageUrl
         {
@@ -36,9 +37,9 @@ namespace MvvmCross.Binding.iOS.Views
             set { _imageHelper.ErrorImagePath = value; }
         }
 
-        public MvxImageView(Action imageChanged = null)
+        public MvxImageView()
         {
-            InitializeImageHelper(imageChanged);
+            InitializeImageHelper();
         }
 
         public MvxImageView(IntPtr handle)
@@ -55,7 +56,12 @@ namespace MvvmCross.Binding.iOS.Views
 
         private void InitializeImageHelper(Action imageChanged = null)
         {
-            _imageHelper = new MvxImageViewLoader(() => this, imageChanged);
+            _imageHelper = new MvxImageViewLoader(() => this, AfterImageChanged);
+        }
+
+        protected virtual void AfterImageChanged()
+        {
+            ImageChanged?.Invoke(this, EventArgs.Empty);
         }
 
         protected override void Dispose(bool disposing)

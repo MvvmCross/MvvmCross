@@ -24,7 +24,7 @@ namespace MvvmCross.Binding.Droid.Views
         : ImageView
     {
         private IMvxImageHelper<Bitmap> _imageHelper;
-        private Action _imageChangedCallback;
+        public event EventHandler ImageChanged;
 
         public string ImageUrl
         {
@@ -88,18 +88,22 @@ namespace MvvmCross.Binding.Droid.Views
             }
         }
 
-        public MvxImageView(Context context, IAttributeSet attrs, int defStyleAttr, Action imageChanged = null)
-            : base(context, attrs, defStyleAttr)
+        public MvxImageView(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) 
+            : base(context, attrs, defStyleAttr, defStyleRes)
         {
-            Init(context, attrs, imageChanged);
+            Init(context, attrs);
         }
 
-        public MvxImageView(Context context, IAttributeSet attrs, Action imageChanged = null)
-            : this(context, attrs, 0, imageChanged)
+        public MvxImageView(Context context, IAttributeSet attrs, int defStyleAttr)
+            : this(context, attrs, defStyleAttr, 0)
         { }
 
-        public MvxImageView(Context context, Action imageChanged = null)
-            : this(context, null, imageChanged)
+        public MvxImageView(Context context, IAttributeSet attrs)
+            : this(context, attrs, 0)
+        { }
+
+        public MvxImageView(Context context)
+            : this(context, null)
         { }
 
         protected MvxImageView(IntPtr javaReference, JniHandleOwnership transfer)
@@ -129,7 +133,7 @@ namespace MvvmCross.Binding.Droid.Views
                 });
         }
 
-        private void Init(Context context, IAttributeSet attrs, Action imageChanged)
+        private void Init(Context context, IAttributeSet attrs)
         {
             var typedArray = context.ObtainStyledAttributes(attrs, MvxAndroidBindingResource.Instance.ImageViewStylableGroupId);
 
@@ -143,8 +147,6 @@ namespace MvvmCross.Binding.Droid.Views
                 }
             }
             typedArray.Recycle();
-
-            _imageChangedCallback = imageChanged;
         }
 
         public override void SetImageBitmap (Bitmap bm)
@@ -160,7 +162,7 @@ namespace MvvmCross.Binding.Droid.Views
 
                 MvxMainThreadDispatcher.Instance.RequestMainThreadAction(() =>
                                                                          {
-                                                                             _imageChangedCallback?.Invoke();
+                    ImageChanged?.Invoke(this, EventArgs.Empty);
                                                                          });
             }
         }
