@@ -428,6 +428,10 @@
       <Project>{0D471B62-CB8E-4814-81A6-4C0B774A8825}</Project>
       <Name>MvvmCross.Plugins.Visibility</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross-Plugins\Visibility\MvvmCross.Plugins.Visibility.Droid\MvvmCross.Plugins.Visibility.Droid.csproj">
+      <Project>{36228B32-A08B-477B-9320-EC5EA5DF05A3}</Project>
+      <Name>MvvmCross.Plugins.Visibility.Droid</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

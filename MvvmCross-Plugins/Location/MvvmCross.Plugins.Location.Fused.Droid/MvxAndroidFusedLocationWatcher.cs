@@ -22,7 +22,7 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 			if (_locationHandler == null)
 				_locationHandler = new FusedLocationHandler(this, Context);
 
-			_locationHandler.Start (options);
+			_locationHandler.Start(options);
 		}
 
         protected override void PlatformSpecificStop() => _locationHandler.Stop();

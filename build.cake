@@ -267,8 +267,23 @@ Task("PublishPackages")
 	}
 });
 
+Task("UploadAppVeyorArtifact")
+	.IsDependentOn("Package")
+	.WithCriteria(() => !AppVeyor.Environment.PullRequest.IsPullRequest)
+	.WithCriteria(() => isRunningOnAppVeyor)
+	.Does(() => {
+
+	Information("Artifacts Dir: {0}", outputDir.FullPath);
+
+	foreach(var file in GetFiles(outputDir.FullPath + "/*")) {
+		Information("Uploading {0}", file.FullPath);
+		AppVeyor.UploadArtifact(file.FullPath);
+	}
+});
+
 Task("Default")
 	.IsDependentOn("PublishPackages")
+	.IsDependentOn("UploadAppVeyorArtifact")
 	.Does(() => 
 {
 });
