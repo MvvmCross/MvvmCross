@@ -164,7 +164,7 @@ Push-Messages: Depending on the status of the app you can pass a uri as the Noti
 Supply your routings as assembly attributes. We would recommend putting them in the same file as the referenced ViewModel.
 
 ```c#
-[assembly: MvxRouting(typeof(ViewModelA), @"mvx://test/\?id=(?<id>[A-Z0-9]{32})$")]
+[assembly: MvxNavigation(typeof(ViewModelA), @"mvx://test/\?id=(?<id>[A-Z0-9]{32})$")]
 namespace *.ViewModels
 {
     public class ViewModelA
@@ -183,11 +183,11 @@ Routing in a ViewModel.
 ```c#
 public class MainViewModel : MvxViewModel
 {
-    private readonly IMvxNavigationService _routingService;
+    private readonly IMvxNavigationService _navigationService;
 
-    public MainViewModel(IMvxNavigationService routingService)
+    public MainViewModel(IMvxNavigationService navigationService)
     {
-        _routingService = routingService;
+        _navigationService = navigationService;
     }
 
     private IMvxAsyncCommand _showACommand;
@@ -197,7 +197,7 @@ public class MainViewModel : MvxViewModel
         {
             return _showACommand ?? (_showACommand = new MvxAsyncCommand(async () =>
             {
-                await _routingService.Navigate("mvx://test/?id=" + Guid.NewGuid().ToString("N"));
+                await _navigationService.Navigate("mvx://test/?id=" + Guid.NewGuid().ToString("N"));
             }));
         }
     }
