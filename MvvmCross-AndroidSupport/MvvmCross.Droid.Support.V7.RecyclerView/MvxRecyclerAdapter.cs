@@ -27,7 +27,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerAdapter")]
     public class MvxRecyclerAdapter 
-        : Android.Support.V7.Widget.RecyclerView.Adapter, IMvxRecyclerAdapter , IMvxRecyclerAdapterBindableHolder
+        : Android.Support.V7.Widget.RecyclerView.Adapter, IMvxRecyclerAdapter, IMvxRecyclerAdapterBindableHolder
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
 

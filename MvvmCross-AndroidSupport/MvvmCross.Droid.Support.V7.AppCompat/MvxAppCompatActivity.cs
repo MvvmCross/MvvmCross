@@ -22,9 +22,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     [Register("mvvmcross.droid.support.v7.appcompat.MvxAppCompatActivity")]
     public class MvxAppCompatActivity
-        : MvxEventSourceAppCompatActivity
-        , IMvxAndroidView
-        , ViewTreeObserver.IOnGlobalLayoutListener 
+        : MvxEventSourceAppCompatActivity, IMvxAndroidView, ViewTreeObserver.IOnGlobalLayoutListener 
     {
         private View _view;
 
@@ -36,7 +34,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected MvxAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public object DataContext
         {
@@ -128,17 +127,16 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     }
 
     public abstract class MvxAppCompatActivity<TViewModel>
-        : MvxAppCompatActivity
-        , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxAppCompatActivity, IMvxAndroidView<TViewModel>
+        where TViewModel : class, IMvxViewModel
     {
-        protected MvxAppCompatActivity(IntPtr ptr, JniHandleOwnership ownership) : base(ptr, ownership)
+        protected MvxAppCompatActivity(IntPtr ptr, JniHandleOwnership ownership) 
+            : base(ptr, ownership)
         {
-            
         }
 
         protected MvxAppCompatActivity()
         {
-            
         }
 
         public new TViewModel ViewModel

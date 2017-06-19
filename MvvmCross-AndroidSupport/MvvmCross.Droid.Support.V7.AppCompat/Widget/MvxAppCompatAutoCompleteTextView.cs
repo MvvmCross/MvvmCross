@@ -30,8 +30,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         }
 
         public MvxAppCompatAutoCompleteTextView(Context context, IAttributeSet attrs,
-                                       MvxFilteringAdapter adapter)
-            : base(context, attrs)
+            MvxFilteringAdapter adapter) : base(context, attrs)
         {
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             adapter.ItemTemplateId = itemTemplateId;

@@ -11,8 +11,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 {
     [Register("mvvmcross.droid.support.v17.leanback.fragments.MvxSearchSupportFragment")]
     public class MvxSearchSupportFragment
-        : MvxEventSourceSearchSupportFragment
-        , IMvxFragmentView
+        : MvxEventSourceSearchSupportFragment, IMvxFragmentView
     {
         /// <summary>
         /// Create new instance of a MvxSearchSupportFragment
@@ -35,7 +34,8 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         protected MvxSearchSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public IMvxBindingContext BindingContext { get; set; }
 
@@ -70,14 +70,15 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
     }
 
     public abstract class MvxSearchSupportFragment<TViewModel>
-    : MvxSearchSupportFragment
-        , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxSearchSupportFragment, IMvxFragmentView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         protected MvxSearchSupportFragment()
         {
         }
 
-        protected MvxSearchSupportFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected MvxSearchSupportFragment(IntPtr javaReference, JniHandleOwnership transfer) 
+            : base(javaReference, transfer)
         {
         }
 

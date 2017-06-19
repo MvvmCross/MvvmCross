@@ -17,8 +17,7 @@ namespace MvvmCross.Droid.Support.V4
 {
     [Register("mvvmcross.droid.support.v4.MvxDialogFragment")]
     public abstract class MvxDialogFragment
-        : MvxEventSourceDialogFragment
-        , IMvxFragmentView
+        : MvxEventSourceDialogFragment, IMvxFragmentView
     {
         protected MvxDialogFragment()
         {
@@ -27,7 +26,8 @@ namespace MvvmCross.Droid.Support.V4
 
         protected MvxDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public IMvxBindingContext BindingContext { get; set; }
 
@@ -89,8 +89,8 @@ namespace MvvmCross.Droid.Support.V4
     }
 
     public abstract class MvxDialogFragment<TViewModel>
-        : MvxDialogFragment
-        , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxDialogFragment, IMvxFragmentView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {

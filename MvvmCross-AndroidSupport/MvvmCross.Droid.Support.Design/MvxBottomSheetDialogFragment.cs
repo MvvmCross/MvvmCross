@@ -18,17 +18,17 @@ namespace MvvmCross.Droid.Support.Design
 {
     [Register("mvvmcross.droid.support.design.MvxBottomSheetDialogFragment")]
     public abstract class MvxBottomSheetDialogFragment
-		: MvxEventSourceBottomSheetDialogFragment
-		, IMvxFragmentView
+		: MvxEventSourceBottomSheetDialogFragment, IMvxFragmentView
 	{
 		protected MvxBottomSheetDialogFragment()
 		{
 			this.AddEventListeners();
 		}
 
-		protected MvxBottomSheetDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-		{ }
+	    protected MvxBottomSheetDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
+	        : base(javaReference, transfer)
+	    {
+	    }
 
 		public IMvxBindingContext BindingContext { get; set; }
 
