@@ -1,29 +1,68 @@
 # Change Log
 
-## [Unreleased](https://github.com/MvvmCross/MvvmCross/tree/HEAD)
+## [5.0.3](https://github.com/MvvmCross/MvvmCross/tree/5.0.3) (2017-06-19)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.2...5.0.3)
 
-[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.1...HEAD)
+**Closed issues:**
+
+- Cannot resolve Assembly or Windows Metadata file 'MvvmCross.WindowsUWP.dll' [\#1952](https://github.com/MvvmCross/MvvmCross/issues/1952)
+- mvvmcross 5.0 Fatal signal 11 \(SIGSEGV\) [\#1881](https://github.com/MvvmCross/MvvmCross/issues/1881)
+- CanExecute does not fire when RaiseCanExecuteChanged\(\) is called. [\#1877](https://github.com/MvvmCross/MvvmCross/issues/1877)
+- Website issues/features [\#1727](https://github.com/MvvmCross/MvvmCross/issues/1727)
+- Add generic interface for IMvxCommand [\#1946](https://github.com/MvvmCross/MvvmCross/issues/1946)
+- Feature suggestion - PictureChooser WPF - Add gif and png files in DialogBox [\#1891](https://github.com/MvvmCross/MvvmCross/issues/1891)
+
+**Merged pull requests:**
+
+- Fix Testproject compiling & runtime errors [\#1965](https://github.com/MvvmCross/MvvmCross/pull/1965) ([flyingxu](https://github.com/flyingxu))
+- \#1921 Changed wpf implementation to use view model parameter sent wit… [\#1963](https://github.com/MvvmCross/MvvmCross/pull/1963) ([Bowman74](https://github.com/Bowman74))
+- Add more checks to avoid illegal states [\#1956](https://github.com/MvvmCross/MvvmCross/pull/1956) ([Cheesebaron](https://github.com/Cheesebaron))
+- Updated namespace for UWP project. [\#1953](https://github.com/MvvmCross/MvvmCross/pull/1953) ([Daniel-Krzyczkowski](https://github.com/Daniel-Krzyczkowski))
+- Add Caledos Runner as showcase for the website [\#1951](https://github.com/MvvmCross/MvvmCross/pull/1951) ([domedellolio](https://github.com/domedellolio))
+- Add cancelation and presentation bundle to extensions as well [\#1949](https://github.com/MvvmCross/MvvmCross/pull/1949) ([martijn00](https://github.com/martijn00))
+- Add generic interfaces for IMvxCommand [\#1948](https://github.com/MvvmCross/MvvmCross/pull/1948) ([willsb](https://github.com/willsb))
+- \#1940 Made changes to UWP navigation so: [\#1945](https://github.com/MvvmCross/MvvmCross/pull/1945) ([Bowman74](https://github.com/Bowman74))
+- Don't depend on NUnit, no code uses it in this package [\#1944](https://github.com/MvvmCross/MvvmCross/pull/1944) ([Cheesebaron](https://github.com/Cheesebaron))
+- \#1920 Made changes to multi region presenter for UWP so new navigatio… [\#1942](https://github.com/MvvmCross/MvvmCross/pull/1942) ([Bowman74](https://github.com/Bowman74))
+- Enable Unit Tests on CI [\#1938](https://github.com/MvvmCross/MvvmCross/pull/1938) ([Cheesebaron](https://github.com/Cheesebaron))
+- PreferredContentSize [\#1937](https://github.com/MvvmCross/MvvmCross/pull/1937) ([g0rdan](https://github.com/g0rdan))
+- Document: Fix header layout [\#1936](https://github.com/MvvmCross/MvvmCross/pull/1936) ([jz5](https://github.com/jz5))
+- Fix codefactor comments warnings [\#1935](https://github.com/MvvmCross/MvvmCross/pull/1935) ([Cheesebaron](https://github.com/Cheesebaron))
+- Reduce complexity of Binding Parsers [\#1933](https://github.com/MvvmCross/MvvmCross/pull/1933) ([Cheesebaron](https://github.com/Cheesebaron))
+- Update the picture chooser for WPF [\#1932](https://github.com/MvvmCross/MvvmCross/pull/1932) ([mathieumack](https://github.com/mathieumack))
+- Fix markdown syntax [\#1931](https://github.com/MvvmCross/MvvmCross/pull/1931) ([jz5](https://github.com/jz5))
+- Implemented correct behavior as for resource name generation [\#1929](https://github.com/MvvmCross/MvvmCross/pull/1929) ([LeRondPoint](https://github.com/LeRondPoint))
+- Remove unused references [\#1927](https://github.com/MvvmCross/MvvmCross/pull/1927) ([martijn00](https://github.com/martijn00))
+- Fix codefactor warnings "Arithmetic expressions must declare precedence" [\#1926](https://github.com/MvvmCross/MvvmCross/pull/1926) ([mvanbeusekom](https://github.com/mvanbeusekom))
+- Cleanup codebase with Resharper [\#1925](https://github.com/MvvmCross/MvvmCross/pull/1925) ([martijn00](https://github.com/martijn00))
+- Add support for canceling awaiting a result on a viewmodel [\#1923](https://github.com/MvvmCross/MvvmCross/pull/1923) ([martijn00](https://github.com/martijn00))
+- Create IMvxInteraction docs [\#1919](https://github.com/MvvmCross/MvvmCross/pull/1919) ([Cheesebaron](https://github.com/Cheesebaron))
+- \[WIP\] New MacOS ViewPresenter \(missing documentation update\) [\#1913](https://github.com/MvvmCross/MvvmCross/pull/1913) ([nmilcoff](https://github.com/nmilcoff))
+
+## [5.0.2](https://github.com/MvvmCross/MvvmCross/tree/5.0.2) (2017-06-06)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.1...5.0.2)
 
 **Fixed bugs:**
 
+- Problem with Visibility plugin [\#1876](https://github.com/MvvmCross/MvvmCross/issues/1876)
+- Uwp Navigation Service doesn't work with Parameter [\#1905](https://github.com/MvvmCross/MvvmCross/issues/1905)
 - android.support.v7.widget.SearchView Query binding not working [\#1882](https://github.com/MvvmCross/MvvmCross/issues/1882)
 - Error MvvmCross.Uwp.rd.xml does not exist when compiling 5.0.1 [\#1879](https://github.com/MvvmCross/MvvmCross/issues/1879)
-- Problem with Visibility plugin [\#1876](https://github.com/MvvmCross/MvvmCross/issues/1876)
 - Kevinf/1880 memory leak [\#1907](https://github.com/MvvmCross/MvvmCross/pull/1907) ([Bowman74](https://github.com/Bowman74))
 - Consolidate library output and embed rd.xml [\#1901](https://github.com/MvvmCross/MvvmCross/pull/1901) ([Cheesebaron](https://github.com/Cheesebaron))
 
 **Closed issues:**
 
-- Synchronous view model initialization [\#1902](https://github.com/MvvmCross/MvvmCross/issues/1902)
 - FloatingActionButton Click event binding not working [\#1896](https://github.com/MvvmCross/MvvmCross/issues/1896)
-- Appearing event called multiple times on Android platform [\#1894](https://github.com/MvvmCross/MvvmCross/issues/1894)
 - Documentation: ViewModel lifecycle doesn't explain how to deal with tombstoning [\#1892](https://github.com/MvvmCross/MvvmCross/issues/1892)
-- Add a way to change presentation attribute of ViewController at runtime [\#1887](https://github.com/MvvmCross/MvvmCross/issues/1887)
 - Documents: Plugins README are old [\#1886](https://github.com/MvvmCross/MvvmCross/issues/1886)
-- Navigation Bug introduced in 5.0.1: View.OnCreate reinstantiates existing target ViewModel  [\#1880](https://github.com/MvvmCross/MvvmCross/issues/1880)
 - Back button navigation with navigation drawer in android not directly go back [\#1875](https://github.com/MvvmCross/MvvmCross/issues/1875)
 - Rework 'tagged' logic in build script [\#1874](https://github.com/MvvmCross/MvvmCross/issues/1874)
 - PictureChooser.iOS scales incorrectly on high DPI devices [\#1759](https://github.com/MvvmCross/MvvmCross/issues/1759)
+- Synchronous view model initialization [\#1902](https://github.com/MvvmCross/MvvmCross/issues/1902)
+- Appearing event called multiple times on Android platform [\#1894](https://github.com/MvvmCross/MvvmCross/issues/1894)
+- Add a way to change presentation attribute of ViewController at runtime [\#1887](https://github.com/MvvmCross/MvvmCross/issues/1887)
+- Navigation Bug introduced in 5.0.1: View.OnCreate reinstantiates existing target ViewModel  [\#1880](https://github.com/MvvmCross/MvvmCross/issues/1880)
 
 **Merged pull requests:**
 
@@ -947,10 +986,10 @@
 - Fixed usings in BindingEx. [\#1202](https://github.com/MvvmCross/MvvmCross/pull/1202) ([lothrop](https://github.com/lothrop))
 - Remove unused/outdated scripts and updated packaging script. [\#1201](https://github.com/MvvmCross/MvvmCross/pull/1201) ([lothrop](https://github.com/lothrop))
 - Restructure and cleanup of projects and files [\#1200](https://github.com/MvvmCross/MvvmCross/pull/1200) ([martijn00](https://github.com/martijn00))
-- Windows Store and Windows Phone [\#1199](https://github.com/MvvmCross/MvvmCross/pull/1199) ([djrocksmith](https://github.com/djrocksmith))
+- Windows Store and Windows Phone [\#1199](https://github.com/MvvmCross/MvvmCross/pull/1199) ([clintonrocksmith](https://github.com/clintonrocksmith))
 - Rework of Mac implementation. [\#1198](https://github.com/MvvmCross/MvvmCross/pull/1198) ([lothrop](https://github.com/lothrop))
 - Use XIB and auto layouts for iOS Starter Pack example [\#1196](https://github.com/MvvmCross/MvvmCross/pull/1196) ([lothrop](https://github.com/lothrop))
-- Restructure [\#1195](https://github.com/MvvmCross/MvvmCross/pull/1195) ([djrocksmith](https://github.com/djrocksmith))
+- Restructure [\#1195](https://github.com/MvvmCross/MvvmCross/pull/1195) ([clintonrocksmith](https://github.com/clintonrocksmith))
 - Introduce non-support-dependent version of MvxPreferenceFragment [\#1189](https://github.com/MvvmCross/MvvmCross/pull/1189) ([mgj](https://github.com/mgj))
 - Fix merge of PR 1186 [\#1188](https://github.com/MvvmCross/MvvmCross/pull/1188) ([dbeattie71](https://github.com/dbeattie71))
 - Moved caching logic from support library. [\#1186](https://github.com/MvvmCross/MvvmCross/pull/1186) ([thefex](https://github.com/thefex))
