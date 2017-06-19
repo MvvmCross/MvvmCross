@@ -21,20 +21,20 @@ namespace MvvmCross.Binding.iOS.Views
 
         public string ImageUrl
         {
-            get { return _imageHelper.ImageUrl; }
-            set { _imageHelper.ImageUrl = value; }
+            get => _imageHelper.ImageUrl;
+            set => _imageHelper.ImageUrl = value;
         }
 
         public string DefaultImagePath
         {
-            get { return _imageHelper.DefaultImagePath; }
-            set { _imageHelper.DefaultImagePath = value; }
+            get => _imageHelper.DefaultImagePath;
+            set => _imageHelper.DefaultImagePath = value;
         }
 
         public string ErrorImagePath
         {
-            get { return _imageHelper.ErrorImagePath; }
-            set { _imageHelper.ErrorImagePath = value; }
+            get => _imageHelper.ErrorImagePath;
+            set => _imageHelper.ErrorImagePath = value;
         }
 
         public MvxImageView()

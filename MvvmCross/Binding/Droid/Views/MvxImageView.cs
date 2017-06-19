@@ -28,10 +28,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         public string ImageUrl
         {
-            get
-            {
-                return ImageHelper?.ImageUrl;
-            }
+            get => ImageHelper?.ImageUrl;
             set
             {
                 if (ImageHelper == null)
@@ -42,14 +39,14 @@ namespace MvvmCross.Binding.Droid.Views
 
         public string DefaultImagePath
         {
-            get { return ImageHelper.DefaultImagePath; }
-            set { ImageHelper.DefaultImagePath = value; }
+            get => ImageHelper.DefaultImagePath;
+            set => ImageHelper.DefaultImagePath = value;
         }
 
         public string ErrorImagePath
         {
-            get { return ImageHelper.ErrorImagePath; }
-            set { ImageHelper.ErrorImagePath = value; }
+            get => ImageHelper.ErrorImagePath;
+            set => ImageHelper.ErrorImagePath = value;
         }
 
         public override void SetMaxHeight(int maxHeight)
@@ -161,9 +158,9 @@ namespace MvvmCross.Binding.Droid.Views
                 base.SetImageBitmap (bm);
 
                 MvxMainThreadDispatcher.Instance.RequestMainThreadAction(() =>
-                                                                         {
+                {
                     ImageChanged?.Invoke(this, EventArgs.Empty);
-                                                                         });
+                });
             }
         }
     }
