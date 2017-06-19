@@ -1,4 +1,4 @@
-﻿using System
+﻿using System;
 using System.ComponentModel;
 using Android.Widget;
 using MvvmCross.Forms.Droid.Views.Renderers;
