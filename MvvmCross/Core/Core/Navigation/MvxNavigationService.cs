@@ -129,6 +129,7 @@ namespace MvvmCross.Core.Navigation
             var regex = entry.Key;
             var match = regex.Match(path);
             var paramDict = BuildParamDictionary(regex, match);
+            var parameterValues = new MvxBundle(paramDict);
 
             var viewModelType = entry.Value;
             IMvxViewModel viewModel;
@@ -159,7 +160,7 @@ namespace MvvmCross.Core.Navigation
             {
                 viewModel = (IMvxViewModel)Mvx.IocConstruct(viewModelType);
             }
-            var parameterValues = new MvxBundle(paramDict);
+
             RunViewModelLifecycle(viewModel, parameterValues);
 
             return new MvxViewModelInstanceRequest(viewModel) { ParameterValues = parameterValues.SafeGetData(), PresentationValues = presentationBundle?.SafeGetData() };
@@ -218,7 +219,7 @@ namespace MvvmCross.Core.Navigation
 
         public virtual Task<bool> Close(IMvxViewModel viewModel)
         {
-            var args = new NavigateEventArgs();
+            var args = new NavigateEventArgs(viewModel);
             OnBeforeClose(this, args);
             var close = ViewDispatcher.ChangePresentation(new MvxClosePresentationHint(viewModel));
             OnAfterClose(this, args);
@@ -234,8 +235,8 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
-            ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize();
+            ViewDispatcher.ShowViewModel(request);
 
             OnAfterNavigate(this, args);
         }
@@ -248,8 +249,8 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
-            ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize(param);
+            ViewDispatcher.ShowViewModel(request);
 
             OnAfterNavigate(this, args);
         }
@@ -265,8 +266,8 @@ namespace MvvmCross.Core.Navigation
             var tcs = new TaskCompletionSource<TResult>();
             viewModel.SetClose(tcs, cancellationToken);
 
-            ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize();
+            ViewDispatcher.ShowViewModel(request);
 
             OnAfterNavigate(this, args);
 
@@ -291,8 +292,8 @@ namespace MvvmCross.Core.Navigation
             var tcs = new TaskCompletionSource<TResult>();
             viewModel.SetClose(tcs, cancellationToken);
 
-            ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize(param);
+            ViewDispatcher.ShowViewModel(request);
 
             OnAfterNavigate(this, args);
 
@@ -314,8 +315,8 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
-            ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize();
+            ViewDispatcher.ShowViewModel(request);
 
             OnAfterNavigate(this, args);
         }
@@ -330,8 +331,8 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
-            ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize(param);
+            ViewDispatcher.ShowViewModel(request);
 
             OnAfterNavigate(this, args);
         }
@@ -349,8 +350,8 @@ namespace MvvmCross.Core.Navigation
             var tcs = new TaskCompletionSource<TResult>();
             viewModel.SetClose(tcs, cancellationToken);
 
-            ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize();
+            ViewDispatcher.ShowViewModel(request);
 
             OnAfterNavigate(this, args);
 
@@ -378,8 +379,8 @@ namespace MvvmCross.Core.Navigation
             var tcs = new TaskCompletionSource<TResult>();
             viewModel.SetClose(tcs, cancellationToken);
 
-            ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize(param);
+            ViewDispatcher.ShowViewModel(request);
 
             OnAfterNavigate(this, args);
 
@@ -401,8 +402,8 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
-            ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize();
+            ViewDispatcher.ShowViewModel(request);
 
             OnAfterNavigate(this, args);
         }
@@ -415,8 +416,8 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
-            ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize(param);
+            ViewDispatcher.ShowViewModel(request);
 
             OnAfterNavigate(this, args);
         }
@@ -432,8 +433,8 @@ namespace MvvmCross.Core.Navigation
             var tcs = new TaskCompletionSource<TResult>();
             viewModel.SetClose(tcs, cancellationToken);
 
-            ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize();
+            ViewDispatcher.ShowViewModel(request);
 
             OnAfterNavigate(this, args);
 
@@ -460,8 +461,8 @@ namespace MvvmCross.Core.Navigation
             var tcs = new TaskCompletionSource<TResult>();
             viewModel.SetClose(tcs, cancellationToken);
 
-            ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize(param);
+            ViewDispatcher.ShowViewModel(request);
 
             OnAfterNavigate(this, args);
 
