@@ -22,7 +22,7 @@ namespace RoutingExample.Core.ViewModels
 
         public override async Task Initialize()
         {
-            await _navigationService.Navigate<ViewModelA>();
+            //await _navigationService.Navigate<ViewModelA>();
         }
 
         private IMvxCommand _showACommand;
