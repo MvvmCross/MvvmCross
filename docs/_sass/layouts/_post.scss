@@ -43,6 +43,32 @@
   img {
     max-width: 100%;
   }
+  
+  table {
+      border-spacing: 0px;
+      border-collapse: collapse;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid $gray-color;
+    }
+
+    table tr:nth-child(2n) {
+        background-color: $zebra-color;
+    }
+
+    table tr th {
+        font-weight: bold;
+        background-color: $zebra-color;
+    }
+
+    table tr th,
+    table tr td {
+        text-align: left;
+        padding: 5px 10px;
+    }
 
   > .post-header {
     margin-bottom: $header-bottom-margin;
