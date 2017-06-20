@@ -514,7 +514,7 @@ For situations where this default binding doesn't work, custom bindings can be w
 
 For more on this, see the N+1 video on custom binding - N=28.
 
-##Overriding View-ViewModel associations
+## Overriding View-ViewModel associations
 
 By default, MvvmCross discovers the ViewModel that a View is associated with using the type of ViewModel discovered by name convention
 
