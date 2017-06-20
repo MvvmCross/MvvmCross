@@ -102,9 +102,9 @@ namespace MvvmCross.Test.Navigation
             Assert.IsTrue(cache.Contains("f"));
             Assert.IsTrue(cache.Contains("h"));
         }
-    }
 
-    public class TestObject
-    {
+        public class TestObject
+        {
+        }
     }
 }

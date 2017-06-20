@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Moq;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
 using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.Dispatchers;
 using NUnit.Framework;
@@ -77,18 +75,16 @@ namespace MvvmCross.Test.Navigation
             mockVm.Verify(vm => vm.Init(), Times.Once);
             Assert.IsTrue(MockDispatcher.Object.Requests.Count > 0);
         }
-    }
 
-    public class SimpleTestViewModel : MvxViewModel
-    {
-        public virtual void Init()
+        public class SimpleTestViewModel : MvxViewModel
         {
-            
-        }
+            public virtual void Init()
+            {
+            }
 
-        public virtual void Init(string hello)
-        {
-            
+            public virtual void Init(string hello)
+            {
+            }
         }
     }
 }
