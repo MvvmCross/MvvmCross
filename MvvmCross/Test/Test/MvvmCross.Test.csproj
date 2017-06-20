@@ -59,6 +59,7 @@
     <Compile Include="Mocks\TestViews\NotTest2View.cs" />
     <Compile Include="Mocks\TestViews\NotTest3View.cs" />
     <Compile Include="Mocks\TestViews\OddNameOddness.cs" />
+    <Compile Include="Navigation\NavigationCacheTests.cs" />
     <Compile Include="Parse\MvxStringDictionaryTextSerializerTest.cs" />
     <Compile Include="Platform\MvxSimplePropertyDictionaryExtensionMethodsTests.cs" />
     <Compile Include="Platform\MvxStringToTypeParserTest.cs" />
