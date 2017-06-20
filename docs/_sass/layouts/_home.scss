@@ -70,6 +70,28 @@
       max-width: 1140px;
     }
   }
+  
+ > .companies {
+   .showcases-button {
+      background-color: $brand-color;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-weight: $base-font-weight;
+      color: #FAFAFA;
+      text-decoration: none;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: $home-text-margin;
+      // start-button hover effect
+      &:hover {
+        background-color: darken($brand-color, 5%);
+      }
+      // start-button active effect
+      &:active {
+        background-color: $brand-color;
+      }
+    } 
+  }
 
   .company-gallerys {
     display: flex;
