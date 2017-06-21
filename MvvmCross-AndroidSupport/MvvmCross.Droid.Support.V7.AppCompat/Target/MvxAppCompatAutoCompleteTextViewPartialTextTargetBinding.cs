@@ -23,7 +23,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
         public MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-            var autoComplete = this.View;
+            var autoComplete = View;
             if (autoComplete == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
@@ -33,14 +33,14 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 
         private void AutoCompleteOnPartialTextChanged(object sender, EventArgs eventArgs)
         {
-            this.FireValueChanged(this.View.PartialText);
+            FireValueChanged(View.PartialText);
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;
 
         public override void SubscribeToEvents()
         {
-            var autoComplete = this.View;
+            var autoComplete = View;
             if (autoComplete == null)
                 return;
 

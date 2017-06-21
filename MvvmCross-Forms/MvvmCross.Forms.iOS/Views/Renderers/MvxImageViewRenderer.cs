@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using MvvmCross.Forms.iOS.Views.Renderers;
 using MvvmCross.Forms.Views;
 using MvvmCross.Platform.Platform;
@@ -20,6 +21,7 @@ namespace MvvmCross.Forms.iOS.Views.Renderers
         {
             if (disposing && _nativeControl != null)
             {
+                _nativeControl.ImageChanged -= OnSourceImageChanged;
                 _nativeControl.Image = null; // Prevent the base renderer from disposing of this image, DownloadCache takes care of it
             }
 
@@ -32,6 +34,7 @@ namespace MvvmCross.Forms.iOS.Views.Renderers
             {
                 if (_nativeControl != null)
                 {
+                    _nativeControl.ImageChanged -= OnSourceImageChanged;
                     _nativeControl.Dispose();
                     _nativeControl = null;
                 }
@@ -39,9 +42,12 @@ namespace MvvmCross.Forms.iOS.Views.Renderers
 
             if (Control == null && args.NewElement != null)
             {
-                _nativeControl = new MvxIosImageView(OnSourceImageChanged);
-                _nativeControl.ContentMode = UIViewContentMode.ScaleAspectFit;
-                _nativeControl.ClipsToBounds = true;
+                _nativeControl = new MvxIosImageView()
+                {
+                    ContentMode = UIViewContentMode.ScaleAspectFit,
+                    ClipsToBounds = true
+                };
+                _nativeControl.ImageChanged += OnSourceImageChanged;
 
                 SetNativeControl(_nativeControl);
             }
@@ -72,7 +78,7 @@ namespace MvvmCross.Forms.iOS.Views.Renderers
             }
         }
 
-        private void OnSourceImageChanged()
+        private void OnSourceImageChanged(object sender, EventArgs args)
         {
             (SharedControl as IVisualElementController).InvalidateMeasure(InvalidationTrigger.MeasureChanged);
         }

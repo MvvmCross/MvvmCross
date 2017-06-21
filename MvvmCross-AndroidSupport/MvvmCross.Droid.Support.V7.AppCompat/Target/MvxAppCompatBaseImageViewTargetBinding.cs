@@ -18,7 +18,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
     public abstract class MvxAppCompatBaseImageViewTargetBinding
         : MvxAndroidTargetBinding
     {
-        protected AppCompatImageView ImageView => (AppCompatImageView)this.Target;
+        protected AppCompatImageView ImageView => (AppCompatImageView)Target;
 
         protected MvxAppCompatBaseImageViewTargetBinding(AppCompatImageView imageView)
             : base(imageView)

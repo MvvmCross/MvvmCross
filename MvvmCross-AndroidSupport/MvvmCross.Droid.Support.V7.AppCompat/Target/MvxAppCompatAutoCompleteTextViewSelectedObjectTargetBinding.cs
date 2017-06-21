@@ -27,13 +27,13 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             if (autoComplete == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - autoComplete is null in MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding");
+                    "Error - autoComplete is null in MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding");
             }
         }
 
         private void AutoCompleteOnSelectedObjectChanged(object sender, EventArgs eventArgs)
         {
-            this.FireValueChanged(this.View.SelectedObject);
+            FireValueChanged(View.SelectedObject);
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;

@@ -11,8 +11,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 {
     [Register("mvvmcross.droid.support.v17.leanback.fragments.MvxGuidedStepSupportFragment")]
     public class MvxGuidedStepSupportFragment
-        : MvxEventSourceGuidedStepSupportFragment
-        , IMvxFragmentView
+        : MvxEventSourceGuidedStepSupportFragment, IMvxFragmentView
     {
         /// <summary>
         /// Create new instance of a MvxGuidedStepSupportFragment
@@ -35,7 +34,8 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         protected MvxGuidedStepSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public IMvxBindingContext BindingContext { get; set; }
 
@@ -70,8 +70,8 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
     }
 
     public abstract class MvxGuidedStepSupportFragment<TViewModel>
-        : MvxGuidedStepSupportFragment
-        , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxGuidedStepSupportFragment, IMvxFragmentView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         protected MvxGuidedStepSupportFragment()
         {

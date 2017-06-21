@@ -269,12 +269,12 @@ To:
 
 This requires the addition of:
 
-```using MvvmCross.WindowsUWP.Views;```
+```using MvvmCross.Uwp.Views;``
 
 Altogether this looks like:
 
 ```c#
-using MvvmCross.WindowsUWP.Views;
+using MvvmCross.Uwp.Views;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -319,7 +319,7 @@ The full page will look like:
     xmlns:local="using:TipCalc.UI.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:views="using:MvvmCross.WindowsUWP.Views"
+    xmlns:views="using MvvmCross.Uwp.Views"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

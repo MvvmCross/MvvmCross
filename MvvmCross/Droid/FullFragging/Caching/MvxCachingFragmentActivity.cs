@@ -29,7 +29,8 @@ using MvxActivity = MvvmCross.Droid.FullFragging.Views.MvxActivity;
 namespace MvvmCross.Droid.FullFragging.Caching
 {
     [Register("mvvmcross.droid.fullfragging.caching.MvxCachingFragmentActivity")]
-    public class MvxCachingFragmentActivity : MvxActivity, IFragmentCacheableActivity, IMvxFragmentHost
+    public class MvxCachingFragmentActivity 
+        : MvxActivity, IFragmentCacheableActivity, IMvxFragmentHost
 	{
 		public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
 		private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
@@ -483,8 +484,8 @@ namespace MvvmCross.Droid.FullFragging.Caching
     }
 
     public abstract class MvxCachingFragmentActivity<TViewModel>
-        : MvxCachingFragmentActivity
-    , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxCachingFragmentActivity, IMvxAndroidView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
+using System.Linq;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Test.Mocks.Dispatchers
 {
-    public class NavigationMockDispatcher : MvxMainThreadDispatcher
-      , IMvxViewDispatcher
+    public class NavigationMockDispatcher 
+        : MvxMainThreadDispatcher, IMvxViewDispatcher
     {
         public readonly List<MvxViewModelRequest> Requests = new List<MvxViewModelRequest>();
         public readonly List<MvxPresentationHint> Hints = new List<MvxPresentationHint>();
@@ -22,25 +22,13 @@ namespace MvvmCross.Test.Mocks.Dispatchers
 
         public virtual bool ShowViewModel(MvxViewModelRequest request)
         {
-            var sb = new StringBuilder();
-
+            var debugString = $"ShowViewModel: '{request.ViewModelType.Name}' ";
             if (request.ParameterValues != null)
-            {
-                foreach (var pair in request.ParameterValues)
-                {
-                    sb.Append(string.Format("{{ {0}={1} }},", pair.Key, pair.Value));
-                }
-            }
-
-            if (sb.Length == 0)
-            {
-                Debug.WriteLine("ShowViewModel: '{0}' without parameters", request.ViewModelType.Name, string.Empty);
-            }
+                debugString += $"with parameters: {string.Join(",", request.ParameterValues.Select(pair => $"{{ {pair.Key}={pair.Value} }}"))}";
             else
-            {
-                Debug.WriteLine("ShowViewModel: '{0}' with parameters: {1}", request.ViewModelType.Name, sb);
-            }
-            
+                debugString += "without parameters";
+            Debug.WriteLine(debugString);
+
             Requests.Add(request);
             return true;
         }

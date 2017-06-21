@@ -24,14 +24,11 @@ namespace MvvmCross.Binding.Droid.Views
         : ImageView
     {
         private IMvxImageHelper<Bitmap> _imageHelper;
-        private Action _imageChangedCallback;
+        public event EventHandler ImageChanged;
 
         public string ImageUrl
         {
-            get
-            {
-                return ImageHelper?.ImageUrl;
-            }
+            get => ImageHelper?.ImageUrl;
             set
             {
                 if (ImageHelper == null)
@@ -42,14 +39,14 @@ namespace MvvmCross.Binding.Droid.Views
 
         public string DefaultImagePath
         {
-            get { return ImageHelper.DefaultImagePath; }
-            set { ImageHelper.DefaultImagePath = value; }
+            get => ImageHelper.DefaultImagePath;
+            set => ImageHelper.DefaultImagePath = value;
         }
 
         public string ErrorImagePath
         {
-            get { return ImageHelper.ErrorImagePath; }
-            set { ImageHelper.ErrorImagePath = value; }
+            get => ImageHelper.ErrorImagePath;
+            set => ImageHelper.ErrorImagePath = value;
         }
 
         public override void SetMaxHeight(int maxHeight)
@@ -88,23 +85,31 @@ namespace MvvmCross.Binding.Droid.Views
             }
         }
 
-        public MvxImageView(Context context, IAttributeSet attrs, int defStyleAttr, Action imageChanged = null)
-            : base(context, attrs, defStyleAttr)
+        public MvxImageView(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) 
+            : base(context, attrs, defStyleAttr, defStyleRes)
         {
-            Init(context, attrs, imageChanged);
+            Init(context, attrs);
         }
 
-        public MvxImageView(Context context, IAttributeSet attrs, Action imageChanged = null)
-            : this(context, attrs, 0, imageChanged)
-        { }
+        public MvxImageView(Context context, IAttributeSet attrs, int defStyleAttr)
+            : this(context, attrs, defStyleAttr, 0)
+        {
+        }
 
-        public MvxImageView(Context context, Action imageChanged = null)
-            : this(context, null, imageChanged)
-        { }
+        public MvxImageView(Context context, IAttributeSet attrs)
+            : this(context, attrs, 0)
+        {
+        }
+
+        public MvxImageView(Context context)
+            : this(context, null)
+        {
+        }
 
         protected MvxImageView(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        { }
+        {
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -129,7 +134,7 @@ namespace MvvmCross.Binding.Droid.Views
                 });
         }
 
-        private void Init(Context context, IAttributeSet attrs, Action imageChanged)
+        private void Init(Context context, IAttributeSet attrs)
         {
             var typedArray = context.ObtainStyledAttributes(attrs, MvxAndroidBindingResource.Instance.ImageViewStylableGroupId);
 
@@ -143,8 +148,6 @@ namespace MvvmCross.Binding.Droid.Views
                 }
             }
             typedArray.Recycle();
-
-            _imageChangedCallback = imageChanged;
         }
 
         public override void SetImageBitmap (Bitmap bm)
@@ -159,9 +162,9 @@ namespace MvvmCross.Binding.Droid.Views
                 base.SetImageBitmap (bm);
 
                 MvxMainThreadDispatcher.Instance.RequestMainThreadAction(() =>
-                                                                         {
-                                                                             _imageChangedCallback?.Invoke();
-                                                                         });
+                {
+                    ImageChanged?.Invoke(this, EventArgs.Empty);
+                });
             }
         }
     }

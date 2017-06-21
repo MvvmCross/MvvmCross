@@ -37,8 +37,15 @@ namespace MvvmCross.Wpf.Views
             if (viewControl == null)
                 throw new MvxException("Loaded View is not a FrameworkElement " + viewType);
 
-            var viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
-            wpfView.ViewModel = viewModelLoader.LoadViewModel(request, null);
+            if (request is MvxViewModelInstanceRequest instanceRequest)
+            {
+                wpfView.ViewModel = instanceRequest.ViewModelInstance;
+            }
+            else
+            {
+                var viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
+                wpfView.ViewModel = viewModelLoader.LoadViewModel(request, null);
+            }
 
             return viewControl;
         }

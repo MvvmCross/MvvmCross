@@ -29,7 +29,8 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Droid.Support.V4
 {
     [Register("mvvmcross.droid.support.v4.MvxCachingFragmentActivity")]
-    public class MvxCachingFragmentActivity : MvxFragmentActivity, IFragmentCacheableActivity, IMvxFragmentHost
+    public class MvxCachingFragmentActivity 
+        : MvxFragmentActivity, IFragmentCacheableActivity, IMvxFragmentHost
     {
 		public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
 		private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
@@ -489,8 +490,9 @@ namespace MvvmCross.Droid.Support.V4
     }
 
     public abstract class MvxCachingFragmentActivity<TViewModel>
-        : MvxCachingFragmentActivity
-    , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxCachingFragmentActivity, 
+        IMvxAndroidView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {

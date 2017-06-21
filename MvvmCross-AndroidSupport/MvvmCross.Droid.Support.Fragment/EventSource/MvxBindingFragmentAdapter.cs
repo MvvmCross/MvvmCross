@@ -91,7 +91,7 @@ namespace MvvmCross.Droid.Support.V4.EventSource
         }
 
         protected override void HandleCreateViewCalled(object sender,
-                                               MvxValueEventArgs<MvxCreateViewParameters> args)
+            MvxValueEventArgs<MvxCreateViewParameters> args)
         {
             FragmentView.EnsureBindingContextIsSet(args.Value.Inflater);
         }
