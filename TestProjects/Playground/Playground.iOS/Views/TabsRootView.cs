@@ -7,7 +7,7 @@ using UIKit;
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
-    [MvxRootPresentation]
+    //[MvxRootPresentation]
     public partial class TabsRootView : MvxTabBarViewController<TabsRootViewModel>
     {
         private bool _isPresentedFirstTime = true;
@@ -20,7 +20,7 @@ namespace Playground.iOS.Views
         {
             base.ViewWillAppear(animated);
 
-            if(ViewModel != null && _isPresentedFirstTime)
+            if (ViewModel != null && _isPresentedFirstTime)
             {
                 _isPresentedFirstTime = false;
                 ViewModel.ShowInitialViewModelsCommand.Execute(null);
@@ -30,9 +30,9 @@ namespace Playground.iOS.Views
         protected override void SetTitleAndTabBarItem(UIViewController viewController, string title, string iconName)
         {
             // you can override this method to set title or iconName
-            if(string.IsNullOrEmpty(title))
+            if (string.IsNullOrEmpty(title))
                 title = "Tab 2";
-            if(string.IsNullOrEmpty(iconName))
+            if (string.IsNullOrEmpty(iconName))
                 iconName = "ic_tabbar_menu";
 
             base.SetTitleAndTabBarItem(viewController, title, iconName);

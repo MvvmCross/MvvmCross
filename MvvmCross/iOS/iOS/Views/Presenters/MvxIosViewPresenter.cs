@@ -1,4 +1,4 @@
-﻿﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using CoreGraphics;
@@ -151,9 +151,6 @@ namespace MvvmCross.iOS.Views.Presenters
             MvxChildPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            if (viewController is IMvxTabBarViewController)
-                throw new MvxException("A TabBarViewController cannot be presented as a child. Consider using Root instead");
-
             if (viewController is IMvxSplitViewController)
                 throw new MvxException("A SplitViewController cannot be presented as a child. Consider using Root instead");
 
@@ -163,15 +160,18 @@ namespace MvvmCross.iOS.Views.Presenters
                 return;
             }
 
-            if (TabBarViewController != null)
+            if (TabBarViewController != null && TabBarViewController.ShowChildView(viewController))
             {
-                TabBarViewController.ShowChildView(viewController);
                 return;
             }
 
             if (MasterNavigationController != null)
             {
                 MasterNavigationController.PushViewController(viewController, attribute.Animated);
+
+                if (viewController is IMvxTabBarViewController)
+                    TabBarViewController = viewController as IMvxTabBarViewController;
+
                 return;
             }
 
@@ -356,7 +356,7 @@ namespace MvvmCross.iOS.Views.Presenters
             ModalNavigationController = null;
         }
 
-        protected void CloseTabBarViewController()
+        public void CloseTabBarViewController()
         {
             if (TabBarViewController == null)
                 return;
