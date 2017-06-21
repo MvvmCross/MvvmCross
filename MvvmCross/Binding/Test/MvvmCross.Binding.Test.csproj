@@ -49,11 +49,14 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Binders\MvxSourceStepTests.cs" />
+    <Compile Include="Mocks\MockSourceBinding.cs" />
+    <Compile Include="Mocks\MockTargetBinding.cs" />
     <Compile Include="Bindings\MvxFullBindingConstructionTest.cs" />
     <Compile Include="Bindings\MvxFullBindingTest.cs" />
     <Compile Include="Bindings\MvxFullBindingValueConversionTest.cs" />
     <Compile Include="ExpressionParse\MvxExpressionBindingTest.cs" />
     <Compile Include="ExtensionMethods\MakeSafeValueTest.cs" />
+    <Compile Include="Mocks\MockValueConverter.cs" />
     <Compile Include="Parse\Binding\MvxBindingTest.cs" />
     <Compile Include="Parse\Binding\Lang\MvxLangBindingTest.cs" />
     <Compile Include="Parse\Binding\Swiss\MvxBaseSwissBindingTest.cs" />

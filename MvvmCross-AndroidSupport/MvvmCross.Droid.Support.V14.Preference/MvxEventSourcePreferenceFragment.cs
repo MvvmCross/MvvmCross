@@ -10,8 +10,8 @@ using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Droid.Support.V14.Preference
 {
-	public abstract class MvxEventSourcePreferenceFragment : PreferenceFragment
-	, IMvxEventSourceFragment
+	public abstract class MvxEventSourcePreferenceFragment 
+        : PreferenceFragment, IMvxEventSourceFragment
 	{
 		public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
 		public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
@@ -28,15 +28,13 @@ namespace MvvmCross.Droid.Support.V14.Preference
 		public event EventHandler DisposeCalled;
 		public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
 
-		public MvxEventSourcePreferenceFragment()
+		protected MvxEventSourcePreferenceFragment()
 		{
-
 		}
 
-		public MvxEventSourcePreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer)
+	    protected MvxEventSourcePreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer)
 			: base(javaReference, transfer)
 		{
-
 		}
 
 		public override void OnAttach(Context context)

@@ -18,8 +18,7 @@ using MvvmCross.Platform.Core;
 namespace MvvmCross.Droid.Support.V7.AppCompat.EventSource
 {
     public class MvxEventSourceAppCompatDialogFragment
-        : AppCompatDialogFragment
-        , IMvxEventSourceFragment
+        : AppCompatDialogFragment, IMvxEventSourceFragment
     {
 
         public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;

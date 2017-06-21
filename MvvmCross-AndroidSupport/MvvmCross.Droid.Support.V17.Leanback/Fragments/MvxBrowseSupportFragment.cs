@@ -34,7 +34,8 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         protected MvxBrowseSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public IMvxBindingContext BindingContext { get; set; }
 
@@ -69,14 +70,15 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
     }
 
     public abstract class MvxBrowseSupportFragment<TViewModel>
-        : MvxBrowseSupportFragment
-            , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxBrowseSupportFragment, IMvxFragmentView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         protected MvxBrowseSupportFragment()
         {
         }
 
-        protected MvxBrowseSupportFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected MvxBrowseSupportFragment(IntPtr javaReference, JniHandleOwnership transfer) 
+            : base(javaReference, transfer)
         {
         }
 

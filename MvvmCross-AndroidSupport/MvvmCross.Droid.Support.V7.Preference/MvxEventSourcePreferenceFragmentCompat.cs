@@ -28,15 +28,13 @@ namespace MvvmCross.Droid.Support.V7.Preference
         public event EventHandler DisposeCalled;
         public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
 
-        public MvxEventSourcePreferenceFragmentCompat()
+        protected MvxEventSourcePreferenceFragmentCompat()
         {
-
         }
 
-        public MvxEventSourcePreferenceFragmentCompat(IntPtr javaReference, JniHandleOwnership transfer)
+        protected MvxEventSourcePreferenceFragmentCompat(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
-
         }
 
 		public override void OnAttach(Context context)
