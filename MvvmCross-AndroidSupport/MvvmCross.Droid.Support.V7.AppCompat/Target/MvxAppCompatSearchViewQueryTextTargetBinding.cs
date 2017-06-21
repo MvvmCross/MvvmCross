@@ -6,7 +6,8 @@ using MvvmCross.Platform.Droid.WeakSubscription;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
-    public class MvxAppCompatSearchViewQueryTextTargetBinding : MvxAndroidTargetBinding
+    public class MvxAppCompatSearchViewQueryTextTargetBinding 
+        : MvxAndroidTargetBinding
     {
         private IDisposable _subscription;
 
@@ -44,15 +45,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 
         private void HandleQueryTextChanged(object sender, SearchView.QueryTextChangeEventArgs e)
         {
-            var target = Target as SearchView;
-
-            if (target == null)
+            if (Target is SearchView searchView)
             {
-                return;
+                var value = searchView.Query;
+                FireValueChanged(value);
             }
-
-            var value = target.Query;
-            FireValueChanged(value);
         }
     }
 }

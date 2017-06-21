@@ -73,7 +73,8 @@ namespace MvvmCross.Droid.Support.V17.Leanback
         /// </summary>
         /// <param name="instance">The C# instance to be wrapped in a Java-Object</param>
         /// <param name="useStrongReference">Set to true, if instance isn't referenced anywhere else (e.g. in your MvxViewModel)</param>
-        public MvxObjectWrapper(T instance, bool useStrongReference = false) : base(instance, useStrongReference)
+        public MvxObjectWrapper(T instance, bool useStrongReference = false) 
+            : base(instance, useStrongReference)
         {
         }
     }

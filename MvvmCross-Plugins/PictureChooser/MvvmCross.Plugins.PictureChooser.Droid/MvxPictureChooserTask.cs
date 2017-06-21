@@ -27,9 +27,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
 {
     [Preserve(AllMembers = true)]
 	public class MvxPictureChooserTask
-        : MvxAndroidTask
-          , IMvxPictureChooserTask
-          
+        : MvxAndroidTask, IMvxPictureChooserTask
     {
         private Uri _cachedUriLocation;
         private RequestParameters _currentRequestParameters;

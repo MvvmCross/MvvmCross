@@ -53,10 +53,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         public string ImageUrl
         {
-            get
-            {
-                return ImageHelper?.ImageUrl;
-            }
+            get => ImageHelper?.ImageUrl;
             set
             {
                 if (ImageHelper == null)
@@ -69,26 +66,14 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         public string DefaultImagePath
         {
-            get
-            {
-                return ImageHelper.DefaultImagePath;
-            }
-            set
-            {
-                ImageHelper.DefaultImagePath = value;
-            }
+            get => ImageHelper.DefaultImagePath;
+            set => ImageHelper.DefaultImagePath = value;
         }
 
         public string ErrorImagePath
         {
-            get
-            {
-                return ImageHelper.ErrorImagePath;
-            }
-            set
-            {
-                ImageHelper.ErrorImagePath = value;
-            }
+            get => ImageHelper.ErrorImagePath;
+            set => ImageHelper.ErrorImagePath = value;
         }
 
         protected IMvxImageHelper<Bitmap> ImageHelper

@@ -33,7 +33,8 @@ namespace MvvmCross.Droid.Support.V4
 
         protected MvxFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public object DataContext
         {
@@ -113,8 +114,8 @@ namespace MvvmCross.Droid.Support.V4
     }
 
     public abstract class MvxFragmentActivity<TViewModel>
-        : MvxFragmentActivity
-    , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxFragmentActivity, IMvxAndroidView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {

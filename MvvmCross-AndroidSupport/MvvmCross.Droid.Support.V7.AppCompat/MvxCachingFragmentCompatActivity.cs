@@ -30,7 +30,8 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     [Register("mvvmcross.droid.support.v7.appcompat.MvxCachingFragmentCompatActivity")]
-    public class MvxCachingFragmentCompatActivity : MvxAppCompatActivity, IFragmentCacheableActivity, IMvxFragmentHost
+    public class MvxCachingFragmentCompatActivity 
+        : MvxAppCompatActivity, IFragmentCacheableActivity, IMvxFragmentHost
     {
         public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
         private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
@@ -55,7 +56,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected MvxCachingFragmentCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         private static void RestoreViewModelsFromBundle(IMvxJsonConverter serializer, Bundle savedInstanceState)
         {
@@ -303,8 +305,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         protected virtual List<IMvxCachedFragmentInfo> GetCurrentCacheableFragmentsInfo()
         {
             return GetCurrentCacheableFragments()
-                    .Select(frag => GetFragmentInfoByTag(GetTagFromFragment(frag)))
-                    .ToList();
+                .Select(frag => GetFragmentInfoByTag(GetTagFromFragment(frag)))
+                .ToList();
         }
 
         protected virtual IEnumerable<Fragment> GetCurrentCacheableFragments()
@@ -479,18 +481,19 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     }
 
     public abstract class MvxCachingFragmentCompatActivity<TViewModel>
-        : MvxCachingFragmentCompatActivity
-        , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxCachingFragmentCompatActivity, 
+        IMvxAndroidView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
-        protected MvxCachingFragmentCompatActivity(IntPtr ptr, JniHandleOwnership ownership) : base(ptr, ownership)
+        protected MvxCachingFragmentCompatActivity(IntPtr ptr, JniHandleOwnership ownership) 
+            : base(ptr, ownership)
         {
-            
         }
 
         protected MvxCachingFragmentCompatActivity()
-        {
-                
+        {       
         }
+
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
