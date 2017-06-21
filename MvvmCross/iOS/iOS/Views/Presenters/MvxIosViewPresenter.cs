@@ -355,7 +355,7 @@ namespace MvvmCross.iOS.Views.Presenters
             ModalNavigationController = null;
         }
 
-        protected void CloseTabBarViewController()
+        public void CloseTabBarViewController()
         {
             if (TabBarViewController == null)
                 return;
