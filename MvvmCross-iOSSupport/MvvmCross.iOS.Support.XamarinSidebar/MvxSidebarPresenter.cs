@@ -115,14 +115,10 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
                 SideBarViewController = viewController as IMvxSidebarViewController;
                 SideBarViewController.SetNavigationController(MasterNavigationController);
-
+                SetTopViewController(viewController);
                 SetWindowRootViewController(viewController);
 
                 Mvx.RegisterSingleton<IMvxSidebarViewController>(SideBarViewController);
-
-                CloseMasterNavigationController();
-                CloseModalNavigationController();
-                CloseSplitViewController();
 
                 return;
             }

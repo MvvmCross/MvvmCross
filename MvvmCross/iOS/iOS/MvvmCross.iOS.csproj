@@ -91,7 +91,6 @@
     <Compile Include="Views\MvxSplitViewController.cs" />
     <Compile Include="Views\IMvxTabBarItemViewController.cs" />
     <Compile Include="Views\Presenters\Attributes\IMvxOverridePresentationAttribute.cs" />
-    <Compile Include="Views\Presenters\MvxIosFlexibleViewPresenter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />

@@ -22,5 +22,14 @@ namespace Playground.Core.ViewModels
                 return _closeCommand ?? (_closeCommand = new MvxCommand(() => Close(this)));
             }
         }
+
+        private ICommand _openNavModalCommand;
+        public ICommand OpenNavModalCommand
+        {
+            get
+            {
+                return _openNavModalCommand ?? (_openNavModalCommand = new MvxCommand(() => ShowViewModel<ModalNavViewModel>()));
+            }
+        }
     }
 }

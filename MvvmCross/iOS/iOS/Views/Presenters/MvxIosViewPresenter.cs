@@ -1,4 +1,4 @@
-﻿﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using CoreGraphics;
@@ -18,11 +18,11 @@ namespace MvvmCross.iOS.Views.Presenters
 
         public UINavigationController MasterNavigationController { get; protected set; }
 
-        public UINavigationController ModalNavigationController { get; protected set; }
-
         public IMvxTabBarViewController TabBarViewController { get; protected set; }
 
         public IMvxSplitViewController SplitViewController { get; protected set; }
+
+        protected UIViewController TopViewController { get; private set; }
 
         public MvxIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
         {
@@ -71,6 +71,38 @@ namespace MvvmCross.iOS.Views.Presenters
             }
         }
 
+        protected virtual MvxNavigationController CreateNavigationController(UIViewController viewController)
+        {
+            return new MvxNavigationController(viewController);
+        }
+
+        protected void SetTopViewController(UIViewController viewController)
+        {
+            if (viewController == null)
+                return;
+
+            // clear view controllers
+            MasterNavigationController = null;
+            TabBarViewController = null;
+            SplitViewController = null;
+
+            // check if viewController is a TabBarController
+            if (viewController is IMvxTabBarViewController tabBarVc)
+                TabBarViewController = tabBarVc;
+
+            // check if viewController is a SplitViewController
+            if (viewController is IMvxSplitViewController splitVc)
+                SplitViewController = splitVc;
+
+            // check if viewController is trying to initialize a navigation stack
+            if (viewController is UINavigationController navVc)
+                MasterNavigationController = navVc;
+
+            // Control of the top modal view controller
+            // Because the modal view can be a UIviewController
+            TopViewController = viewController;
+        }
+
         public override void Show(MvxViewModelRequest request)
         {
             var view = this.CreateViewControllerFor(request);
@@ -100,47 +132,9 @@ namespace MvvmCross.iOS.Views.Presenters
             MvxRootPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            // check if viewController is a TabBarController
-            if (viewController is IMvxTabBarViewController)
-            {
-                TabBarViewController = viewController as IMvxTabBarViewController;
-                SetWindowRootViewController(viewController);
-
-                CloseMasterNavigationController();
-                CloseModalNavigationController();
-                CloseSplitViewController();
-
-                return;
-            }
-
-            // check if viewController is a SplitViewController
-            if (viewController is IMvxSplitViewController)
-            {
-                SplitViewController = viewController as IMvxSplitViewController;
-                SetWindowRootViewController(viewController);
-
-                CloseMasterNavigationController();
-                CloseModalNavigationController();
-                CloseTabBarViewController();
-
-                return;
-            }
-
-            // check if viewController is trying to initialize a navigation stack
-            if (attribute.WrapInNavigationController)
-            {
-                viewController = CreateNavigationController(viewController);
-                MasterNavigationController = viewController as MvxNavigationController;
-                SetWindowRootViewController(viewController);
-
-                CloseModalNavigationController();
-                CloseTabBarViewController();
-                CloseSplitViewController();
-
-                return;
-            }
-
-            // last scenario: display the plain viewController as root
+            // check navigation controller
+            viewController = attribute.WrapInNavigationController ? CreateNavigationController(viewController) : viewController;
+            SetTopViewController(viewController);
             SetWindowRootViewController(viewController);
         }
 
@@ -154,12 +148,6 @@ namespace MvvmCross.iOS.Views.Presenters
 
             if (viewController is IMvxSplitViewController)
                 throw new MvxException("A SplitViewController cannot be presented as a child. Consider using Root instead");
-
-            if (ModalNavigationController != null)
-            {
-                ModalNavigationController.PushViewController(viewController, attribute.Animated);
-                return;
-            }
 
             if (TabBarViewController != null)
             {
@@ -193,7 +181,7 @@ namespace MvvmCross.iOS.Views.Presenters
             }
 
             if (attribute.WrapInNavigationController)
-                viewController = new MvxNavigationController(viewController);
+                viewController = CreateNavigationController(viewController);
 
             TabBarViewController.ShowTabView(
                 viewController,
@@ -207,26 +195,17 @@ namespace MvvmCross.iOS.Views.Presenters
             MvxModalPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            // if there is currently a modal ViewController, dismiss it forced (otherwise nothing happens when presenting)
-            if (_window.RootViewController.PresentedViewController != null)
-                _window.RootViewController.DismissViewController(attribute.Animated, null);
-
             // setup modal based on attribute
             if (attribute.WrapInNavigationController)
-            {
-                viewController = new MvxNavigationController(viewController);
-                ModalNavigationController = viewController as MvxNavigationController;
-            }
+                viewController = CreateNavigationController(viewController);
 
             viewController.ModalPresentationStyle = attribute.ModalPresentationStyle;
             viewController.ModalTransitionStyle = attribute.ModalTransitionStyle;
             if (attribute.PreferredContentSize != default(CGSize))
                 viewController.PreferredContentSize = attribute.PreferredContentSize;
 
-            _window.RootViewController.PresentViewController(
-                viewController,
-                attribute.Animated,
-                null);
+            TopViewController?.PresentViewController(viewController, attribute.Animated, null);
+            SetTopViewController(viewController);
         }
 
         protected virtual void ShowMasterSplitViewController(
@@ -260,7 +239,7 @@ namespace MvvmCross.iOS.Views.Presenters
         public override void Close(IMvxViewModel toClose)
         {
             // check if there is a modal presented
-            if (_window.RootViewController.PresentedViewController != null && CloseModalViewController(toClose))
+            if (CloseModalViewController(toClose))
                 return;
 
             // if the current root is a TabBarViewController, delegate close responsibility to it
@@ -278,30 +257,19 @@ namespace MvvmCross.iOS.Views.Presenters
             MvxTrace.Warning($"Could not close ViewModel type {toClose.GetType().Name}");
         }
 
-        protected virtual MvxNavigationController CreateNavigationController(UIViewController viewController)
-        {
-            return new MvxNavigationController(viewController);
-        }
-
         protected virtual bool CloseModalViewController(IMvxViewModel toClose)
         {
-            // check if there is a modal stack presented
-            if (ModalNavigationController != null)
+            // try get MvxModalPresentationAttribute or presentingViewController
+            var topViewController = TopViewController;
+            if (!(GetPresentationAttributes(topViewController) is MvxModalPresentationAttribute) || topViewController?.PresentingViewController == null)
             {
-                if (TryCloseViewControllerInsideStack(ModalNavigationController, toClose))
-                {
-                    // First() is the RootViewController of the stack. If it is being closed, then remove the nav stack
-                    if (ModalNavigationController.ViewControllers.First().GetIMvxIosView().ViewModel == toClose)
-                    {
-                        _window.RootViewController.DismissViewController(true, null);
-                        CloseModalNavigationController();
-                    }
-                    return true;
-                }
+                return false;
             }
 
-            // close any plain modal presented
-            _window.RootViewController.PresentedViewController.DismissViewController(true, null);
+            var presentingVc = topViewController.PresentingViewController;
+            topViewController.DismissViewController(true, null);
+            SetTopViewController(presentingVc);
+
             return true;
         }
 
@@ -331,48 +299,12 @@ namespace MvvmCross.iOS.Views.Presenters
 
         public override void NativeModalViewControllerDisappearedOnItsOwn()
         {
-            _window.RootViewController.DismissViewController(false, null);
-            CloseModalNavigationController();
-        }
-
-        protected void CloseMasterNavigationController()
-        {
-            if (MasterNavigationController == null)
+            base.NativeModalViewControllerDisappearedOnItsOwn();
+            if (CloseModalViewController(null))
                 return;
 
-            foreach (var item in MasterNavigationController.ViewControllers)
-                item.DidMoveToParentViewController(null);
-            MasterNavigationController = null;
-        }
-
-        protected void CloseModalNavigationController()
-        {
-            if (ModalNavigationController == null)
-                return;
-
-            foreach (var item in ModalNavigationController.ViewControllers)
-                item.DidMoveToParentViewController(null);
-            ModalNavigationController = null;
-        }
-
-        protected void CloseTabBarViewController()
-        {
-            if (TabBarViewController == null)
-                return;
-
-            foreach (var item in (TabBarViewController as UITabBarController).ViewControllers)
-                item.DidMoveToParentViewController(null);
-            TabBarViewController = null;
-        }
-
-        protected void CloseSplitViewController()
-        {
-            if (SplitViewController == null)
-                return;
-
-            foreach (var item in (SplitViewController as UISplitViewController).ViewControllers)
-                item.DidMoveToParentViewController(null);
-            SplitViewController = null;
+            if (MasterNavigationController != null)
+                MasterNavigationController.PopToRootViewController(true);
         }
 
         protected virtual void SetWindowRootViewController(UIViewController controller)
@@ -394,10 +326,30 @@ namespace MvvmCross.iOS.Views.Presenters
                     return presentationAttribute;
             }
 
-            var attribute = viewController.GetType().GetCustomAttributes(typeof(MvxBasePresentationAttribute), true).FirstOrDefault() as MvxBasePresentationAttribute;
-            if (attribute != null)
+            // first try
+            if (viewController.GetType().GetCustomAttributes(typeof(MvxBasePresentationAttribute), true).FirstOrDefault() is MvxBasePresentationAttribute attribute)
             {
                 return attribute;
+            }
+
+            UIViewController childViewController;
+            if (MasterNavigationController != null)
+                childViewController = MasterNavigationController.TopViewController;
+            else if (TabBarViewController != null)
+                childViewController = (TabBarViewController as UITabBarController)?.SelectedViewController;
+            else if (SplitViewController != null)
+                childViewController = (SplitViewController as UISplitViewController)?.ViewControllers?.FirstOrDefault();
+            else
+                childViewController = null;
+
+            // last try
+            if (childViewController != null)
+            {
+                attribute = childViewController.GetType().GetCustomAttributes(typeof(MvxBasePresentationAttribute), true).FirstOrDefault() as MvxBasePresentationAttribute;
+                if (attribute != null)
+                {
+                    return attribute;
+                }
             }
 
             if (MasterNavigationController == null
