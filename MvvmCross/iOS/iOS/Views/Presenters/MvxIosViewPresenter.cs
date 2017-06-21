@@ -14,7 +14,8 @@ namespace MvvmCross.iOS.Views.Presenters
     {
         protected readonly IUIApplicationDelegate _applicationDelegate;
         protected readonly UIWindow _window;
-        protected Dictionary<Type, Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest>> _attributeTypesToShowMethodDictionary;
+        protected Dictionary<Type, Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest>> 
+            _attributeTypesToShowMethodDictionary;
 
         public UINavigationController MasterNavigationController { get; protected set; }
 
@@ -29,7 +30,8 @@ namespace MvvmCross.iOS.Views.Presenters
             _applicationDelegate = applicationDelegate;
             _window = window;
 
-            _attributeTypesToShowMethodDictionary = new Dictionary<Type, Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest>>();
+            _attributeTypesToShowMethodDictionary = 
+                new Dictionary<Type, Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest>>();
 
             RegisterAttributeTypes();
         }
@@ -85,14 +87,14 @@ namespace MvvmCross.iOS.Views.Presenters
         public virtual void Show(IMvxIosView view, MvxViewModelRequest request)
         {
             var viewController = view as UIViewController;
-
             var attribute = GetPresentationAttributes(viewController);
+            var attributeType = attribute.GetType();
 
-            Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest> showAction;
-            if (!_attributeTypesToShowMethodDictionary.TryGetValue(attribute.GetType(), out showAction))
-                throw new KeyNotFoundException($"The type {attribute.GetType().Name} is not configured in the presenter dictionary");
+            if (_attributeTypesToShowMethodDictionary.TryGetValue(attributeType, 
+                out Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest> showAction))
+                showAction.Invoke(viewController, attribute, request);
 
-            showAction.Invoke(viewController, attribute, request);
+            throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
         }
 
         protected virtual void ShowRootViewController(
@@ -101,9 +103,9 @@ namespace MvvmCross.iOS.Views.Presenters
             MvxViewModelRequest request)
         {
             // check if viewController is a TabBarController
-            if (viewController is IMvxTabBarViewController)
+            if (viewController is IMvxTabBarViewController tabBarController)
             {
-                TabBarViewController = viewController as IMvxTabBarViewController;
+                TabBarViewController = tabBarController;
                 SetWindowRootViewController(viewController);
 
                 CloseMasterNavigationController();
@@ -114,9 +116,9 @@ namespace MvvmCross.iOS.Views.Presenters
             }
 
             // check if viewController is a SplitViewController
-            if (viewController is IMvxSplitViewController)
+            if (viewController is IMvxSplitViewController splitController)
             {
-                SplitViewController = viewController as IMvxSplitViewController;
+                SplitViewController = splitController;
                 SetWindowRootViewController(viewController);
 
                 CloseMasterNavigationController();
@@ -214,8 +216,7 @@ namespace MvvmCross.iOS.Views.Presenters
             // setup modal based on attribute
             if (attribute.WrapInNavigationController)
             {
-                viewController = new MvxNavigationController(viewController);
-                ModalNavigationController = viewController as MvxNavigationController;
+                viewController = ModalNavigationController = new MvxNavigationController(viewController);
             }
 
             viewController.ModalPresentationStyle = attribute.ModalPresentationStyle;
@@ -394,22 +395,25 @@ namespace MvvmCross.iOS.Views.Presenters
                     return presentationAttribute;
             }
 
-            var attribute = viewController.GetType().GetCustomAttributes(typeof(MvxBasePresentationAttribute), true).FirstOrDefault() as MvxBasePresentationAttribute;
+            var attribute = viewController.GetType()
+                .GetCustomAttributes(typeof(MvxBasePresentationAttribute), true)
+                .FirstOrDefault() as MvxBasePresentationAttribute;
             if (attribute != null)
             {
                 return attribute;
             }
 
-            if (MasterNavigationController == null
-                &&
-               (TabBarViewController == null || !TabBarViewController.CanShowChildView(viewController))
-              )
+            if (MasterNavigationController == null &&
+               (TabBarViewController == null ||
+               !TabBarViewController.CanShowChildView(viewController)))
             {
-                MvxTrace.Trace($"PresentationAttribute nor MasterNavigationController found for {viewController.GetType().Name}. Assuming Root presentation");
+                MvxTrace.Trace($"PresentationAttribute nor MasterNavigationController found for {viewController.GetType().Name}. " +
+                    $"Assuming Root presentation");
                 return new MvxRootPresentationAttribute() { WrapInNavigationController = true };
             }
 
-            MvxTrace.Trace($"PresentationAttribute not found for {viewController.GetType().Name}. Assuming animated Child presentation");
+            MvxTrace.Trace($"PresentationAttribute not found for {viewController.GetType().Name}. " +
+                $"Assuming animated Child presentation");
             return new MvxChildPresentationAttribute();
         }
     }
