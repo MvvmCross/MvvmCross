@@ -34,6 +34,12 @@ namespace MvvmCross.iOS.Views
             }
         }
 
+        //keep changes for selected icon from breaking current release
+        public virtual void ShowTabView(UIViewController viewController, string tabTitle, string tabIconName, string tabAccessibilityIdentifier = null)
+        {
+            ShowTabView(viewController, tabTitle, tabIconName, null, tabAccessibilityIdentifier);
+        }
+
         public virtual void ShowTabView(UIViewController viewController, string tabTitle, string tabIconName, string tabSelectedIconName = null, string tabAccessibilityIdentifier = null)
         {
             if (!string.IsNullOrEmpty(tabAccessibilityIdentifier))
@@ -53,6 +59,12 @@ namespace MvvmCross.iOS.Views
 
             // update current Tabs
             ViewControllers = currentTabs.ToArray();
+        }
+
+        //keep changes for selected icon from breaking current release
+        protected virtual void SetTitleAndTabBarItem(UIViewController viewController, string title, string iconName)
+        {
+            SetTitleAndTabBarItem(viewController, title, iconName, null);
         }
 
         protected virtual void SetTitleAndTabBarItem(UIViewController viewController, string title, string iconName, string selectedIconName = null)
