@@ -34,13 +34,13 @@ namespace MvvmCross.iOS.Views
             }
         }
 
-        public virtual void ShowTabView(UIViewController viewController, string tabTitle, string tabIconName, string tabAccessibilityIdentifier = null)
+        public virtual void ShowTabView(UIViewController viewController, string tabTitle, string tabIconName, string tabSelectedIconName = null, string tabAccessibilityIdentifier = null)
         {
             if (!string.IsNullOrEmpty(tabAccessibilityIdentifier))
                 viewController.View.AccessibilityIdentifier = tabAccessibilityIdentifier;
 
             // setup Tab
-            SetTitleAndTabBarItem(viewController, tabTitle, tabIconName);
+            SetTitleAndTabBarItem(viewController, tabTitle, tabIconName, tabSelectedIconName);
 
             // add Tab
             var currentTabs = new List<UIViewController>();
@@ -55,12 +55,15 @@ namespace MvvmCross.iOS.Views
             ViewControllers = currentTabs.ToArray();
         }
 
-        protected virtual void SetTitleAndTabBarItem(UIViewController viewController, string title, string iconName)
+        protected virtual void SetTitleAndTabBarItem(UIViewController viewController, string title, string iconName, string selectedIconName = null)
         {
             viewController.Title = title;
 
             if (!string.IsNullOrEmpty(iconName))
                 viewController.TabBarItem = new UITabBarItem(title, UIImage.FromBundle(iconName), _tabsCount);
+
+            if (!string.IsNullOrEmpty(selectedIconName))
+                viewController.TabBarItem.SelectedImage = UIImage.FromBundle(selectedIconName);
 
             _tabsCount++;
         }
