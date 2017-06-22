@@ -27,7 +27,6 @@ namespace MvvmCross.Droid.Support.V4
     public abstract class MvxTabsFragmentActivity
         : MvxFragmentActivity, TabHost.IOnTabChangeListener, ViewTreeObserver.IOnGlobalLayoutListener
     {
-
         private const string SavedTabIndexStateKey = "__savedTabIndex";
 
         private readonly Dictionary<string, TabInfo> _lookup = new Dictionary<string, TabInfo>();

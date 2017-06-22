@@ -1,4 +1,4 @@
-// MvxValueCombinerRegistry.cs
+﻿// MvxValueCombinerRegistry.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,9 +10,7 @@ using MvvmCross.Binding.Binders;
 namespace MvvmCross.Binding.Combiners
 {
     public class MvxValueCombinerRegistry
-        : MvxNamedInstanceRegistry<IMvxValueCombiner>
-          , IMvxValueCombinerLookup
-          , IMvxValueCombinerRegistry
+        : MvxNamedInstanceRegistry<IMvxValueCombiner>, IMvxValueCombinerLookup, IMvxValueCombinerRegistry
     {
     }
 }

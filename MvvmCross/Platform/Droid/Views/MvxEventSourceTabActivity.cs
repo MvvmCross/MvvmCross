@@ -1,4 +1,4 @@
-// MvxEventSourceTabActivity.cs
+﻿// MvxEventSourceTabActivity.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -17,8 +17,7 @@ namespace MvvmCross.Platform.Droid.Views
     [Obsolete("TabActivity is obsolete. Use ViewPager + Indicator or any other Activity with Toolbar support.")]
     [Register("mvvmcross.platform.droid.views.MvxEventSourceTabActivity")]
     public abstract class MvxEventSourceTabActivity
-        : TabActivity
-          , IMvxEventSourceActivity
+        : TabActivity, IMvxEventSourceActivity
     {
         protected override void OnCreate(Bundle bundle)
         {

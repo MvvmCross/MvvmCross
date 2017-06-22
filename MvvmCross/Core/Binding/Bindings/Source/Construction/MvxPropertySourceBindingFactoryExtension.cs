@@ -102,8 +102,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
             PropertyInfo pi;
             if (PropertyInfoCache.TryGetValue(key, out pi))
                 return pi;
-
-
+            
             //Try top level properties first
             //This extension method "GetProperty" always uses the DeclaredOnly flag
             pi = sourceType.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public);

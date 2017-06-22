@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
@@ -63,8 +63,7 @@ namespace MvvmCross.Mac.Views
     }
 
     public class MvxViewController<TViewModel>
-        : MvxViewController
-          , IMvxMacView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxViewController, IMvxMacView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public MvxViewController()
         {

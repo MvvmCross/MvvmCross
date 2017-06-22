@@ -54,7 +54,8 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 
         protected MvxEventSourceDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        { }
+        {
+        }
 
         public override void OnAttach(Context context)
         {
@@ -79,7 +80,6 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
             base.OnAttach(activity);
 #pragma warning restore CS0618 // Type or member is obsolete
         }
-
 
         public override void OnCreate(Bundle savedInstanceState)
         {

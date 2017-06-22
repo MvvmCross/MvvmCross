@@ -25,16 +25,16 @@ namespace Example.Droid.Fragments
             {
 				var fragments = new List<MvxCachingFragmentStatePagerAdapter.FragmentInfo>
                 {
-					new MvxCachingFragmentStatePagerAdapter.FragmentInfo("RecyclerView 1", typeof (RecyclerViewFragment),
-                                                                       typeof (RecyclerViewModel)),
-					new MvxCachingFragmentStatePagerAdapter.FragmentInfo("RecyclerView 2", typeof (RecyclerViewFragment),
-                                                                       typeof (RecyclerViewModel)),
-					new MvxCachingFragmentStatePagerAdapter.FragmentInfo("RecyclerView 3", typeof (RecyclerViewFragment),
-                                                                       typeof (RecyclerViewModel)),
-					new MvxCachingFragmentStatePagerAdapter.FragmentInfo("RecyclerView 4", typeof (RecyclerViewFragment),
-                                                                       typeof (RecyclerViewModel)),
-					new MvxCachingFragmentStatePagerAdapter.FragmentInfo("RecyclerView 5", typeof (RecyclerViewFragment),
-                                                                       typeof (RecyclerViewModel))
+					new MvxCachingFragmentStatePagerAdapter.FragmentInfo("RecyclerView 1", typeof(RecyclerViewFragment),
+                                                                       typeof(RecyclerViewModel)),
+					new MvxCachingFragmentStatePagerAdapter.FragmentInfo("RecyclerView 2", typeof(RecyclerViewFragment),
+                                                                       typeof(RecyclerViewModel)),
+					new MvxCachingFragmentStatePagerAdapter.FragmentInfo("RecyclerView 3", typeof(RecyclerViewFragment),
+                                                                       typeof(RecyclerViewModel)),
+					new MvxCachingFragmentStatePagerAdapter.FragmentInfo("RecyclerView 4", typeof(RecyclerViewFragment),
+                                                                       typeof(RecyclerViewModel)),
+					new MvxCachingFragmentStatePagerAdapter.FragmentInfo("RecyclerView 5", typeof(RecyclerViewFragment),
+                                                                       typeof(RecyclerViewModel))
                 };
 				viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(Activity, ChildFragmentManager, fragments);
             }

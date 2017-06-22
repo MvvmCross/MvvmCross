@@ -1,4 +1,4 @@
-// MvxActivity.cs
+﻿// MvxActivity.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -28,7 +28,8 @@ namespace MvvmCross.Droid.Views
 
         protected MvxActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         protected MvxActivity()
         {

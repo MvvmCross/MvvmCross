@@ -5,7 +5,6 @@
 //
 // Contributed by Tim Uy, tim@loqu8.com
 
-
 using System;
 using AppKit;
 using MvvmCross.Platform.Platform;

@@ -58,7 +58,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             adapter.ItemTemplateSelector = itemTemplateSelector;
             Adapter = adapter;
 
-            if (itemTemplateSelector.GetType() == typeof (MvxDefaultTemplateSelector))
+            if (itemTemplateSelector.GetType() == typeof(MvxDefaultTemplateSelector))
                 ItemTemplateId = itemTemplateId;
         }
 
@@ -144,7 +144,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 Adapter.ItemTemplateSelector = singleItemDefaultTemplateSelector;
             }
         }
-
 
         public IMvxTemplateSelector ItemTemplateSelector
         {

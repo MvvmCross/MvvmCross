@@ -85,7 +85,7 @@ namespace MvvmCross.Forms.iOS.Views.Renderers
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            if(args.PropertyName == nameof(MvxImageView.Source))
+            if (args.PropertyName == nameof(MvxImageView.Source))
             {
                 MvxTrace.Warning("Source property ignored on MvxImageView");
             }

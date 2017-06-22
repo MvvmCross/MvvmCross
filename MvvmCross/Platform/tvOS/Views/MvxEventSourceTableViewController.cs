@@ -1,4 +1,4 @@
-// MvxEventSourceTableViewController.cs
+﻿// MvxEventSourceTableViewController.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,8 +13,7 @@ using UIKit;
 namespace MvvmCross.Platform.tvOS.Views
 {
     public class MvxEventSourceTableViewController
-        : UITableViewController
-          , IMvxEventSourceViewController
+        : UITableViewController, IMvxEventSourceViewController
     {
         protected MvxEventSourceTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
             : base(style)

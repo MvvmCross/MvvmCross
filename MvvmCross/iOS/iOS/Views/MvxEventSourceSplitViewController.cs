@@ -60,7 +60,7 @@ namespace MvvmCross.iOS.Views
 
         protected override void Dispose(bool disposing)
         {
-            if(disposing)
+            if (disposing)
             {
                 DisposeCalled.Raise(this);
             }

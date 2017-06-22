@@ -23,7 +23,8 @@ namespace MvvmCross.Binding.Droid.Views
 
         public MvxExpandableListView(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxExpandableListAdapter(context))
-        { }
+        {
+        }
 
         public MvxExpandableListView(Context context, IAttributeSet attrs, MvxExpandableListAdapter adapter)
             : base(context, attrs)

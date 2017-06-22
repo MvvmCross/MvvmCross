@@ -1,4 +1,4 @@
-// MvxTableViewCell.cs
+﻿// MvxTableViewCell.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,8 +16,7 @@ using UIKit;
 namespace MvvmCross.Binding.tvOS.Views
 {
     public class MvxTableViewCell
-        : UITableViewCell
-          , IMvxBindable
+        : UITableViewCell, IMvxBindable
     {
         public IMvxBindingContext BindingContext { get; set; }
 

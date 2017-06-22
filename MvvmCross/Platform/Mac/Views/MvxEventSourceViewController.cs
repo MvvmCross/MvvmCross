@@ -16,8 +16,7 @@ namespace MvvmCross.Platform.Mac.Views
     using MvvmCross.Platform.Core;
 
     public class MvxEventSourceViewController
-        : NSViewController
-          , IMvxEventSourceViewController
+        : NSViewController, IMvxEventSourceViewController
     {
         protected MvxEventSourceViewController()
         {
@@ -90,7 +89,7 @@ namespace MvvmCross.Platform.Mac.Views
 
         protected override void Dispose(bool disposing)
         {
-            if(disposing)
+            if (disposing)
             {
                 this.DisposeCalled.Raise(this);
             }

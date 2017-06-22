@@ -20,8 +20,7 @@ namespace MvvmCross.Binding.Droid.Views
 {
     [Register("mvvmcross.binding.droid.views.MvxFrameControl")]
     public class MvxFrameControl
-        : FrameLayout
-          , IMvxBindingContextOwner
+        : FrameLayout, IMvxBindingContextOwner
     {
         private readonly int _templateId;
         private readonly IMvxAndroidBindingContext _bindingContext;
@@ -110,7 +109,9 @@ namespace MvvmCross.Binding.Droid.Views
             }
         }
 
-        protected virtual void OnContentSet() { }
+        protected virtual void OnContentSet()
+        {
+        }
 
         [MvxSetToNullAfterBinding]
         public object DataContext

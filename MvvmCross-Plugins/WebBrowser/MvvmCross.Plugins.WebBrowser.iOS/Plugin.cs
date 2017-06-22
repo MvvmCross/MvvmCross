@@ -13,7 +13,6 @@ namespace MvvmCross.Plugins.WebBrowser.iOS
     [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin
-
     {
         public void Load()
         {

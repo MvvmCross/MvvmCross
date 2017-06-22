@@ -8,7 +8,6 @@ namespace MvvmCross.Forms.Uwp
 {
     public class MvxPageRenderer : PageRenderer, IMvxBindingContextOwner
     {
-
         public IMvxBindingContext BindingContext { get; set; }
 
         protected override void OnElementChanged(ElementChangedEventArgs<Page> e)
@@ -22,7 +21,6 @@ namespace MvvmCross.Forms.Uwp
     public class MvxPageRenderer<TViewModel>
         : MvxPageRenderer where TViewModel : class, IMvxViewModel
     {
-
         public TViewModel ViewModel
         {
             get { return BindingContext.DataContext as TViewModel; }

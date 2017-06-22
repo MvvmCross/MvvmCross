@@ -83,8 +83,6 @@ namespace Example.Pages
             // Fixed in next version of Xamarin.Forms. BindingContext is not properly set on ToolbarItem.
             var aboutItem = new ToolbarItem { Text = "About", ClassId = "About", Order = ToolbarItemOrder.Primary, BindingContext = BindingContext };
             aboutItem.SetBinding(MenuItem.CommandProperty, new Binding("ShowAboutPageCommand"));
-
-
             ToolbarItems.Add(aboutItem);
         }
     }

@@ -31,7 +31,8 @@ namespace MvvmCross.Droid.FullFragging.Views
 
         protected MvxActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         protected MvxActivity()
         {
