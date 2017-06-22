@@ -436,9 +436,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		AssemblyInfo.cs = AssemblyInfo.cs
 	EndProjectSection
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.CodeAnalysis.Vsix", "CodeAnalysis\MvvmCross.CodeAnalysis.Vsix\MvvmCross.CodeAnalysis.Vsix.csproj", "{44DCCC0D-A1F3-46A5-8A40-813A83164F6E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.ResourceLoader.Test", "MvvmCross-Plugins\ResourceLoader\MvvmCross.Plugins.ResourceLoader.Test\MvvmCross.Plugins.ResourceLoader.Test.csproj", "{4584C230-63F9-4D0F-A8C3-D63424AC9A1A}"
+EndProject
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.CodeAnalysis.Vsix", "CodeAnalysis\MvvmCross.CodeAnalysis.Vsix\MvvmCross.CodeAnalysis.Vsix.csproj", "{44DCCC0D-A1F3-46A5-8A40-813A83164F6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -470,6 +470,7 @@ Global
 		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
+		Debug-FlexiblePresenter|iPhoneSimulator = Debug-FlexiblePresenter|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
@@ -8344,7 +8345,7 @@ Global
 		{DD2571F4-5610-4F27-B6C3-39D4C32AD6CA} = {B508A72D-FCDE-4DB5-92E5-54469D4CA366}
 		{0B7F2A10-627B-4F94-A87C-631FD9AC337C} = {1A5811B5-DE52-4608-BE67-588A982574A6}
 		{3BD0462A-71C0-4240-A780-0C0BD284A0D5} = {C5DF51EF-15E4-4C74-B8CB-A48C45F0ADD6}
-		{44DCCC0D-A1F3-46A5-8A40-813A83164F6E} = {ADECD310-4AD0-4EAF-9C97-23A7095229E6}
 		{4584C230-63F9-4D0F-A8C3-D63424AC9A1A} = {B508A72D-FCDE-4DB5-92E5-54469D4CA366}
+		{44DCCC0D-A1F3-46A5-8A40-813A83164F6E} = {ADECD310-4AD0-4EAF-9C97-23A7095229E6}
 	EndGlobalSection
 EndGlobal

@@ -25,6 +25,7 @@ namespace Playground.iOS.Views
 
             set.Bind(btnTabs).To(vm => vm.ShowTabsCommand);
             set.Bind(btnClose).To(vm => vm.CloseCommand);
+            set.Bind(btnNavModal).To(vm => vm.OpenNavModalCommand);
 
             set.Apply();
         }
