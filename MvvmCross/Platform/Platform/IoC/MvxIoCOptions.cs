@@ -11,7 +11,6 @@ namespace MvvmCross.Platform.IoC
 {
     public class MvxIocOptions : IMvxIocOptions
     {
-
         public MvxIocOptions()
         {
             TryToDetectSingletonCircularReferences = true;

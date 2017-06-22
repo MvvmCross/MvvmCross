@@ -13,7 +13,7 @@ namespace MvvmCross.Platform.IoC
     public class MvxPropertyInjectingIoCContainer
         : MvxSimpleIoCContainer
     {
-        public new static IMvxIoCProvider Initialize(IMvxIocOptions options)
+        public static new IMvxIoCProvider Initialize(IMvxIocOptions options)
         {
             if (Instance != null)
             {

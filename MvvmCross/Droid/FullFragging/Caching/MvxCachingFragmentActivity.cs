@@ -44,11 +44,13 @@ namespace MvvmCross.Droid.FullFragging.Caching
 		}
 
         protected MvxCachingFragmentActivity()
-        {}
+        {
+        }
 
 		protected MvxCachingFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer)
 			: base(javaReference, transfer)
-		{}
+		{
+        }
 
 		protected override void OnPostCreate(Bundle savedInstanceState)
 		{
@@ -154,7 +156,7 @@ namespace MvvmCross.Droid.FullFragging.Caching
 				savedStateConverter.Write(bundle, mvxBundle);
 				outState.PutBundle(info.Tag, bundle);
 
-				if(!typesForKeys.ContainsKey(info.Tag))
+				if (!typesForKeys.ContainsKey(info.Tag))
 					typesForKeys.Add(info.Tag, info.ViewModelType);
 			}
 
@@ -364,10 +366,10 @@ namespace MvvmCross.Droid.FullFragging.Caching
 				if (fragmentRequestText == null)
 					return;
 
-				var converter = Mvx.Resolve<IMvxNavigationSerializer> ();
-				var fragmentRequest = converter.Serializer.DeserializeObject<MvxViewModelRequest> (fragmentRequestText);
+				var converter = Mvx.Resolve<IMvxNavigationSerializer>();
+				var fragmentRequest = converter.Serializer.DeserializeObject<MvxViewModelRequest>(fragmentRequestText);
 
-				var mvxAndroidViewPresenter = Mvx.Resolve<IMvxAndroidViewPresenter> ();
+				var mvxAndroidViewPresenter = Mvx.Resolve<IMvxAndroidViewPresenter>();
 				mvxAndroidViewPresenter.Show (fragmentRequest);
 			}
 		}
@@ -402,7 +404,9 @@ namespace MvvmCross.Droid.FullFragging.Caching
 		}
 
 		// Called before the transaction is commited
-		public virtual void OnFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction) { }
+		public virtual void OnFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction)
+        {
+        }
 
 		public virtual void OnFragmentChanged(IMvxCachedFragmentInfo fragmentInfo)
 		{

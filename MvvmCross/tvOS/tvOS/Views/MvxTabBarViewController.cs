@@ -1,4 +1,4 @@
-// MvxTabBarViewController.cs
+﻿// MvxTabBarViewController.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,8 +13,7 @@ using MvvmCross.Platform.tvOS.Views;
 namespace MvvmCross.tvOS.Views
 {
     public class MvxTabBarViewController
-        : MvxEventSourceTabBarController
-          , IMvxTvosView
+        : MvxEventSourceTabBarController, IMvxTvosView
     {
         protected MvxTabBarViewController()
         {
@@ -49,8 +48,7 @@ namespace MvvmCross.tvOS.Views
     }
 
     public class MvxTabBarViewController<TViewModel>
-        : MvxTabBarViewController
-          , IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxTabBarViewController, IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         protected MvxTabBarViewController()
         {

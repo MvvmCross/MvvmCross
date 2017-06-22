@@ -103,7 +103,6 @@ namespace MvvmCross.Binding.BindingContext
             }
         }
 
-
         /// <summary>
         /// Must be called on main thread as it creates the target bindings, and creating target bindings might subscribe to events that
         /// needs to be done on main thread (like touchupinside). 

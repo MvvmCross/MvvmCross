@@ -167,7 +167,6 @@ namespace MvvmCross.Uwp.Views
             frameState[_pageKey] = bundle.Data;
         }
 
-
         public void Dispose()
         {
             Dispose(true);

@@ -31,7 +31,7 @@ namespace MvvmCross.Binding.Droid.Target
 		{
 			var imageView = (ImageView)target;
 
-			if(!(value is int))
+			if (!(value is int))
 			{
 				MvxBindingTrace.Trace(MvxTraceLevel.Warning,
 					"Value was not a valid Drawable");
@@ -41,7 +41,7 @@ namespace MvvmCross.Binding.Droid.Target
 
 			var intValue = (int)value;
 
-			if(intValue == 0)
+			if (intValue == 0)
 				imageView.SetImageDrawable(null);
 			else
 				SetImage(imageView, intValue);
@@ -51,14 +51,14 @@ namespace MvvmCross.Binding.Droid.Target
 		{
 			var context = imageView.Context;
 			Drawable drawable;
-			if(Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+			if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
 				drawable = context?.Resources?.GetDrawable(id, context.Theme);
 			else
 #pragma warning disable CS0618 // Type or member is obsolete
                 drawable = context?.Resources?.GetDrawable(id);
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            if(drawable != null)
+            if (drawable != null)
 				imageView.SetImageDrawable(drawable);
 		}
 	}

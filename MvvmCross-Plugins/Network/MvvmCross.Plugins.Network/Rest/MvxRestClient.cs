@@ -30,7 +30,7 @@ namespace MvvmCross.Plugins.Network.Rest
             }
         }
 
-        protected Dictionary<string, object> Options { set; private get; }
+        protected Dictionary<string, object> Options { private get; set; }
 
         public MvxRestClient()
         {

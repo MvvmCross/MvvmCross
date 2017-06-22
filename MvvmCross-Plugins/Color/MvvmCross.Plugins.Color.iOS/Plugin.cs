@@ -14,7 +14,6 @@ namespace MvvmCross.Plugins.Color.iOS
     [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin
-
     {
         public void Load()
         {

@@ -11,8 +11,7 @@ using MvvmCross.Platform.Core;
 namespace MvvmCross.Binding.Mac.Views
 {
     public interface IMvxBindable
-        : IMvxBindingContextOwner
-          , IMvxDataConsumer
+        : IMvxBindingContextOwner, IMvxDataConsumer
     {
     }
 }

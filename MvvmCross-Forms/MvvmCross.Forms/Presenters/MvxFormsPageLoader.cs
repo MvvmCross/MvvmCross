@@ -42,7 +42,7 @@ namespace MvvmCross.Forms.Presenters
 		protected virtual Type GetPageType(MvxViewModelRequest request)
         {
 			if (_viewFinder == null)
-				_viewFinder = Mvx.Resolve<IMvxViewsContainer> ();
+				_viewFinder = Mvx.Resolve<IMvxViewsContainer>();
 
 			try
 			{

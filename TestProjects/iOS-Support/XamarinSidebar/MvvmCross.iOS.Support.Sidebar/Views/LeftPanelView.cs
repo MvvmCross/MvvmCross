@@ -35,7 +35,6 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
             exampleButton.BackgroundColor = UIColor.White;
             exampleButton.SetTitleColor(UIColor.Black, UIControlState.Normal);
 
-
             var bindingSet = this.CreateBindingSet<LeftPanelView, LeftPanelViewModel>();
             bindingSet.Bind(exampleButton).To(vm => vm.ShowExampleMenuItemCommand);
             bindingSet.Bind(centerButton).To(vm => vm.ShowMasterViewCommand);

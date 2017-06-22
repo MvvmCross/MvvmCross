@@ -1,4 +1,4 @@
-// MvxCollectionViewController.cs
+﻿// MvxCollectionViewController.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -15,8 +15,7 @@ using UIKit;
 namespace MvvmCross.tvOS.Views
 {
     public class MvxCollectionViewController
-        : MvxEventSourceCollectionViewController
-          , IMvxTvosView
+        : MvxEventSourceCollectionViewController, IMvxTvosView
     {
         protected MvxCollectionViewController(UICollectionViewLayout layout)
             : base(layout)
@@ -54,8 +53,7 @@ namespace MvvmCross.tvOS.Views
     }
 
     public class MvxCollectionViewController<TViewModel>
-        : MvxCollectionViewController
-          , IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxCollectionViewController, IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         protected MvxCollectionViewController(UICollectionViewLayout layout) : base(layout)
         {

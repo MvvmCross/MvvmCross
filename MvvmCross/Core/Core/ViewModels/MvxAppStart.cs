@@ -1,4 +1,4 @@
-// MvxAppStart.cs
+﻿// MvxAppStart.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,8 +10,7 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Core.ViewModels
 {
     public class MvxAppStart<TViewModel>
-        : MvxNavigatingObject
-          , IMvxAppStart
+        : MvxNavigatingObject, IMvxAppStart
         where TViewModel : IMvxViewModel
     {
         public void Start(object hint = null)

@@ -57,7 +57,8 @@ namespace MvvmCross.Binding.Droid.Target
             }
 
             bool changed = CheckValueChanged(newValue);
-            if (!changed) { return; }
+            if (!changed)
+                return;
 
             _currentValue = newValue;
             FireValueChanged(newValue);
@@ -66,10 +67,12 @@ namespace MvvmCross.Binding.Droid.Target
         protected override void SetValueImpl(object target, object newValue)
         {
             var radioGroup = (MvxRadioGroup)target;
-            if (radioGroup == null) { return; }
+            if (radioGroup == null)
+                return;
 
             bool changed = CheckValueChanged(newValue);
-            if (!changed) { return; }
+            if (!changed)
+                return;
 
             int checkid = View.NoId;
 

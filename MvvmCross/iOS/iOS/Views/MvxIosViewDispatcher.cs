@@ -14,8 +14,7 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.iOS.Views
 {
     public class MvxIosViewDispatcher
-        : MvxIosUIThreadDispatcher
-          , IMvxViewDispatcher
+        : MvxIosUIThreadDispatcher, IMvxViewDispatcher
     {
         private readonly IMvxIosViewPresenter _presenter;
 

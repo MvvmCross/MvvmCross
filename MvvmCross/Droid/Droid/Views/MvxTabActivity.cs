@@ -22,9 +22,7 @@ namespace MvvmCross.Droid.Views
     [Obsolete("TabActivity is obsolete. Use ViewPager + Indicator or any other Activity with Toolbar support.")]
     [Register("mvvmcross.droid.views.MvxTabActivity")]
     public abstract class MvxTabActivity
-        : MvxEventSourceTabActivity
-          , IMvxAndroidView
-          , IMvxChildViewModelOwner
+        : MvxEventSourceTabActivity, IMvxAndroidView, IMvxChildViewModelOwner
           , ViewTreeObserver.IOnGlobalLayoutListener
     {
         private View _view;

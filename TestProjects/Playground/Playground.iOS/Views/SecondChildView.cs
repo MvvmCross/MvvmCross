@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters;
@@ -48,7 +48,7 @@ namespace Playground.iOS.Views
             var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
             var presenter = Mvx.GetSingleton<IMvxIosModalHost>() as MvxIosViewPresenter;
 
-            if(appDelegate.Window.RootViewController.PresentedViewController != null)
+            if (appDelegate.Window.RootViewController.PresentedViewController != null)
             {
                 appDelegate.Window.RootViewController.DismissViewController(true, null);
                 presenter.NativeModalViewControllerDisappearedOnItsOwn();

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Android.Content;
 using Android.Content.Res;
 using Android.Util;
@@ -36,7 +36,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
             }
             
             if (string.IsNullOrEmpty(className))
-                return typeof (MvxDefaultTemplateSelector).FullName;
+                return typeof(MvxDefaultTemplateSelector).FullName;
 
             return className;
         }
@@ -55,7 +55,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
                 throw new InvalidOperationException(message);
             }
          
-            if (!typeof (IMvxTemplateSelector).IsAssignableFrom(type))
+            if (!typeof(IMvxTemplateSelector).IsAssignableFrom(type))
             {
                 string message = $"Sorry but type: {type} does not implement {nameof(IMvxTemplateSelector)} interface.";
                 Mvx.Error(message);
@@ -71,7 +71,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
 
             return Activator.CreateInstance(type) as IMvxTemplateSelector;
         }
-
 
         private static bool areBindingResourcesInitialized = false;
         private static void TryInitializeBindingResourcePaths()

@@ -13,8 +13,7 @@ using UIKit;
 namespace MvvmCross.Platform.iOS.Views
 {
     public class MvxEventSourceViewController
-        : UIViewController
-          , IMvxEventSourceViewController
+        : UIViewController, IMvxEventSourceViewController
     {
         protected MvxEventSourceViewController()
         {

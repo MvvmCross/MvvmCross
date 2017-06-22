@@ -11,8 +11,7 @@ using MvvmCross.Platform.Core;
 namespace MvvmCross.Test.Mocks.Dispatchers
 {
     public class CountingMockMainThreadDispatcher
-        : MvxMainThreadDispatcher
-          , IMvxMainThreadDispatcher
+        : MvxMainThreadDispatcher, IMvxMainThreadDispatcher
     {
         public int Count { get; set; }
 

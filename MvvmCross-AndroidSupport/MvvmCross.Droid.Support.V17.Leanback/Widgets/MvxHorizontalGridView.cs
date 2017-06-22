@@ -79,7 +79,6 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
 		/// </summary>
 		public bool FocusFirstChildOnLaidOut { get; private set; }
 
-
         public new IMvxRecyclerAdapter Adapter
         {
             get { return GetAdapter() as IMvxRecyclerAdapter; }

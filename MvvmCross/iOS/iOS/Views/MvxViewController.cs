@@ -1,4 +1,4 @@
-// MvxViewController.cs
+﻿// MvxViewController.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -15,8 +15,7 @@ using UIKit;
 namespace MvvmCross.iOS.Views
 {
     public class MvxViewController
-        : MvxEventSourceViewController
-          , IMvxIosView
+        : MvxEventSourceViewController, IMvxIosView
     {
         public MvxViewController()
         {
@@ -90,8 +89,7 @@ namespace MvvmCross.iOS.Views
     }
 
     public class MvxViewController<TViewModel>
-        : MvxViewController
-          , IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxViewController, IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public MvxViewController()
         {

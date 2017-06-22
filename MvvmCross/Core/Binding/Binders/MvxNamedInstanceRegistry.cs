@@ -1,4 +1,4 @@
-// MvxNamedInstanceRegistry.cs
+﻿// MvxNamedInstanceRegistry.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,8 +12,7 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Binding.Binders
 {
     public class MvxNamedInstanceRegistry<T>
-        : IMvxNamedInstanceLookup<T>
-          , IMvxNamedInstanceRegistry<T>
+        : IMvxNamedInstanceLookup<T>, IMvxNamedInstanceRegistry<T>
         where T : class
     {
         private readonly Dictionary<string, T> _converters =

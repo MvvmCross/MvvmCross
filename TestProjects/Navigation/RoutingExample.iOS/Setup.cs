@@ -8,7 +8,9 @@ namespace RoutingExample.iOS
     public class Setup : MvxIosSetup
     {
         public Setup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
-            : base(applicationDelegate, window) { }
+            : base(applicationDelegate, window)
+        {
+        }
 
         protected override IMvxApplication CreateApp()
         {

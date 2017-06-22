@@ -1,4 +1,4 @@
-// MvxResourceObjectLoader.cs
+﻿// MvxResourceObjectLoader.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,9 +13,7 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Plugins.ResourceLoader
 {
     public abstract class MvxResourceObjectLoader<TResource>
-        : MvxResourceProvider
-          , IMvxResourceObjectLoaderConfiguration<TResource>
-          , IMvxResourceObjectLoader<TResource>
+        : MvxResourceProvider, IMvxResourceObjectLoaderConfiguration<TResource>, IMvxResourceObjectLoader<TResource>
 
         where TResource : IMvxResourceObject
     {

@@ -5,7 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-
 using System;
 using System.Drawing;
 using AppKit;

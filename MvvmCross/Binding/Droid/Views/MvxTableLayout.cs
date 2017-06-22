@@ -19,8 +19,7 @@ namespace MvvmCross.Binding.Droid.Views
 {
     [Register("mvvmcross.binding.droid.views.MvxTableLayout")]
     public class MvxTableLayout
-        : TableLayout
-          , IMvxWithChangeAdapter
+        : TableLayout, IMvxWithChangeAdapter
     {
         public MvxTableLayout(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxAdapterWithChangedEvent(context))

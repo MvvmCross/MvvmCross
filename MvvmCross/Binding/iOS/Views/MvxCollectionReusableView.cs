@@ -16,8 +16,7 @@ using UIKit;
 namespace MvvmCross.Binding.iOS.Views
 {
     public class MvxCollectionReusableView
-        : UICollectionReusableView
-          , IMvxBindable
+        : UICollectionReusableView, IMvxBindable
     {
         public IMvxBindingContext BindingContext { get; set; }
 
@@ -67,7 +66,7 @@ namespace MvvmCross.Binding.iOS.Views
 
         protected override void Dispose(bool disposing)
         {
-            if(disposing)
+            if (disposing)
             {
                 BindingContext.ClearAllBindings();
             }

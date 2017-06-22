@@ -8,7 +8,6 @@ using MvvmCross.Platform;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
-
     [Register("mvvmcross.droid.support.v7.appcompat." + nameof(MvxSplashScreenAppCompatActivity))]
     public abstract class MvxSplashScreenAppCompatActivity
         : MvxAppCompatActivity, IMvxAndroidSplashScreenActivity

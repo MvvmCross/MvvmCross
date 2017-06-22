@@ -14,11 +14,17 @@ namespace MvvmCross.Platform.Test
     [TestFixture]
     public class MvxIocPropertyInjectionTest
     {
-        public interface IA { }
+        public interface IA
+        {
+        }
 
-        public interface IB { }
+        public interface IB 
+        {
+        }
 
-        public interface IC { }
+        public interface IC
+        {
+        }
 
         public class A : IA
         {
@@ -37,9 +43,13 @@ namespace MvvmCross.Platform.Test
             public C CNever { get; set; }
         }
 
-        public class B : IB { }
+        public class B : IB 
+        {
+        }
 
-        public class C : IC { }
+        public class C : IC
+        {
+        }
 
         [Test]
         public void TryResolve_WithNoInjection_NothingGetsInjected()

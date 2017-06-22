@@ -13,8 +13,7 @@ using UIKit;
 namespace MvvmCross.Platform.iOS.Views
 {
     public class MvxEventSourceCollectionViewController
-        : UICollectionViewController
-          , IMvxEventSourceViewController
+        : UICollectionViewController, IMvxEventSourceViewController
     {
         protected MvxEventSourceCollectionViewController(UICollectionViewLayout layout)
             : base(layout)

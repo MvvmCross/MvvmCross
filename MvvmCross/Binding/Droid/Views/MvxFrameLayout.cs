@@ -19,8 +19,7 @@ namespace MvvmCross.Binding.Droid.Views
 {
     [Register("mvvmcross.binding.droid.views.MvxFrameLayout")]
     public class MvxFrameLayout
-        : FrameLayout
-          , IMvxWithChangeAdapter
+        : FrameLayout, IMvxWithChangeAdapter
     {
         public MvxFrameLayout(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxAdapterWithChangedEvent(context))

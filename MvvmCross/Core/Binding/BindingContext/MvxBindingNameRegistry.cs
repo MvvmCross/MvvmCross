@@ -1,4 +1,4 @@
-// MvxBindingNameRegistry.cs
+﻿// MvxBindingNameRegistry.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,8 +14,7 @@ using MvvmCross.Platform;
 namespace MvvmCross.Binding.BindingContext
 {
     public class MvxBindingNameRegistry
-        : IMvxBindingNameLookup
-          , IMvxBindingNameRegistry
+        : IMvxBindingNameLookup, IMvxBindingNameRegistry
     {
         private readonly Dictionary<Type, string> _lookup = new Dictionary<Type, string>();
 

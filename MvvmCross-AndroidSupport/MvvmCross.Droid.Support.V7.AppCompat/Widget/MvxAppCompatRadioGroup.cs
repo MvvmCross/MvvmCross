@@ -126,7 +126,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         private static long _nextGeneratedViewId = 1;
 
-        private new static int GenerateViewId()
+        private static new int GenerateViewId()
         {
             for (;;)
             {
