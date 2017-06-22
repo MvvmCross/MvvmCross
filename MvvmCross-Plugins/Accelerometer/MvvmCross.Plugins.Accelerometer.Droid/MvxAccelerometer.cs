@@ -20,9 +20,7 @@ namespace MvvmCross.Plugins.Accelerometer.Droid
 {
     [Preserve(AllMembers = true)]
     public class MvxAccelerometer
-        : Object
-          , ISensorEventListener
-          , IMvxAccelerometer
+        : Object, ISensorEventListener, IMvxAccelerometer
     {
         private Sensor _accelerometer;
         private SensorManager _sensorManager;

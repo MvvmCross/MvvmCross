@@ -11,7 +11,6 @@ namespace RoutingExample.Core.ViewModels
     public class TestAViewModel
         : MvxViewModel<User>
     {
-
         public TestAViewModel()
         {
             

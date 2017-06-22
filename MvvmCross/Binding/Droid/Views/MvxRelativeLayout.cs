@@ -19,8 +19,7 @@ namespace MvvmCross.Binding.Droid.Views
 {
     [Register("mvvmcross.binding.droid.views.MvxRelativeLayout")]
     public class MvxRelativeLayout
-        : RelativeLayout
-          , IMvxWithChangeAdapter
+        : RelativeLayout, IMvxWithChangeAdapter
     {
         public MvxRelativeLayout(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxAdapterWithChangedEvent(context))

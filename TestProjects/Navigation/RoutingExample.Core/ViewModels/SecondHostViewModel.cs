@@ -3,7 +3,6 @@ using MvvmCross.Core.ViewModels;
 
 namespace RoutingExample.Core.ViewModels
 {
-
     public class SecondHostViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _routingService;

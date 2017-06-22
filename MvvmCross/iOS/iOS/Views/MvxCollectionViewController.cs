@@ -15,8 +15,7 @@ using UIKit;
 namespace MvvmCross.iOS.Views
 {
     public class MvxCollectionViewController
-        : MvxEventSourceCollectionViewController
-          , IMvxIosView
+        : MvxEventSourceCollectionViewController, IMvxIosView
     {
         protected MvxCollectionViewController(UICollectionViewLayout layout)
             : base(layout)
@@ -91,8 +90,7 @@ namespace MvvmCross.iOS.Views
     }
 
     public class MvxCollectionViewController<TViewModel>
-        : MvxCollectionViewController
-          , IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxCollectionViewController, IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         protected MvxCollectionViewController(UICollectionViewLayout layout) : base(layout)
         {

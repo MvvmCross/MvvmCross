@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -37,7 +37,7 @@ namespace MvvmCross.Platform
         {
             var ctors = type.GetTypeInfo().DeclaredConstructors;
 
-            foreach(var ctor in ctors)
+            foreach (var ctor in ctors)
                 if (ctor.IsPublic)
                     yield return ctor;
         }
@@ -149,7 +149,7 @@ namespace MvvmCross.Platform
         {
             var properties = GetProperties(type, flags);
 
-            foreach(var property in properties)
+            foreach (var property in properties)
                 if (property.Name == name)
                     return property;
 
@@ -160,7 +160,7 @@ namespace MvvmCross.Platform
         {
             var properties = GetProperties(type, BindingFlags.Public | BindingFlags.FlattenHierarchy);
 
-            foreach(var property in properties)
+            foreach (var property in properties)
                 if (property.Name == name)
                     return property;
 
@@ -195,7 +195,7 @@ namespace MvvmCross.Platform
         {
             var methods = GetMethods(type, flags);
 
-            foreach(var method in methods)
+            foreach (var method in methods)
             {
                 if (method.Name == name)
                     return method;

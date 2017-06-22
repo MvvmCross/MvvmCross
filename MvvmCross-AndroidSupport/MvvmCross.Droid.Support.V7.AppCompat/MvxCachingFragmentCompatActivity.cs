@@ -143,7 +143,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 savedStateConverter.Write(bundle, mvxBundle);
                 outState.PutBundle(info.Tag, bundle);
 
-				if(!typesForKeys.ContainsKey(info.Tag))
+				if (!typesForKeys.ContainsKey(info.Tag))
                 	typesForKeys.Add(info.Tag, info.ViewModelType);
             }
 
@@ -215,7 +215,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
                 var childViewModelCache = Mvx.GetSingleton<IMvxChildViewModelCache>();
                 var viewModelType = fragInfo.CachedFragment.ViewModel.GetType();
-                if(childViewModelCache.Exists(viewModelType))
+                if (childViewModelCache.Exists(viewModelType))
                 {
                     fragInfo.CachedFragment.ViewModel = childViewModelCache.Get(viewModelType);
                     childViewModelCache.Remove(viewModelType);
@@ -412,7 +412,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
 
         // Called before the transaction is commited
-        public virtual void OnFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction) { }
+        public virtual void OnFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction)
+        {
+        }
 
         public virtual void OnFragmentChanged(IMvxCachedFragmentInfo fragmentInfo)
         {

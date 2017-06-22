@@ -16,8 +16,7 @@ using UIKit;
 namespace MvvmCross.Binding.iOS.Views
 {
     public class MvxTableViewCell
-        : UITableViewCell
-          , IMvxBindable
+        : UITableViewCell, IMvxBindable
     {
         public IMvxBindingContext BindingContext { get; set; }
 

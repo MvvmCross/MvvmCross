@@ -18,7 +18,6 @@ namespace Example.ViewModels
             get { return "Hello " + YourNickname; }
         }
 
-
         public ICommand ShowAboutPageCommand
         {
             get

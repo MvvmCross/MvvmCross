@@ -24,7 +24,8 @@ namespace MvvmCross.Platform.Droid.Views
 
         protected MvxEventSourceActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        { }
+        {
+        }
 
         protected override void OnCreate(Bundle bundle)
         {

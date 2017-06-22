@@ -5,13 +5,11 @@ namespace MvvmCross.Test.Mocks.TestViewModels
     public class ViewModelA
         : MvxViewModel
     {
-
     }
 
     public class ViewModelB
         : MvxViewModel
     {
-
     }
 
 
@@ -20,7 +18,6 @@ namespace MvvmCross.Test.Mocks.TestViewModels
     {
         public void Init(string id)
         {
-
         }
     }
 

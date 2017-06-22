@@ -19,8 +19,7 @@ namespace MvvmCross.Binding.Droid.Views
 {
     [Register("mvvmcross.binding.droid.views.MvxLinearLayout")]
     public class MvxLinearLayout
-        : LinearLayout
-          , IMvxWithChangeAdapter
+        : LinearLayout, IMvxWithChangeAdapter
     {
         public MvxLinearLayout(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxAdapterWithChangedEvent(context))

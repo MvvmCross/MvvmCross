@@ -15,8 +15,7 @@ namespace MvvmCross.Plugins.Share.iOS
 {
     [Preserve(AllMembers = true)]
 	public class MvxShareTask
-        : MvxIosTask
-          , IMvxShareTask
+        : MvxIosTask, IMvxShareTask
 
     {
         private readonly IMvxIosModalHost _modalHost;

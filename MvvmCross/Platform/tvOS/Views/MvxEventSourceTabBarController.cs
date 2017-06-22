@@ -1,4 +1,4 @@
-// MvxEventSourceTabBarController.cs
+﻿// MvxEventSourceTabBarController.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,8 +12,7 @@ using UIKit;
 namespace MvvmCross.Platform.tvOS.Views
 {
     public class MvxEventSourceTabBarController
-        : UITabBarController
-          , IMvxEventSourceViewController
+        : UITabBarController, IMvxEventSourceViewController
     {
         protected MvxEventSourceTabBarController()
         {

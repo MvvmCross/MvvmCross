@@ -1,4 +1,4 @@
-﻿﻿﻿﻿using System;
+﻿﻿﻿using System;
    using System.Collections.Generic;
    using System.Linq;
    using System.Reflection;
@@ -226,7 +226,7 @@ namespace MvvmCross.Core.Navigation
             OnBeforeNavigate(this, args);
 
             var tcs = new TaskCompletionSource<TResult>();
-            if(viewModel is IMvxViewModel<TParameter, TResult> vmParamResult)
+            if (viewModel is IMvxViewModel<TParameter, TResult> vmParamResult)
             {
                 vmParamResult.SetClose(tcs, cancellationToken);
                 await vmParamResult.Initialize(param);

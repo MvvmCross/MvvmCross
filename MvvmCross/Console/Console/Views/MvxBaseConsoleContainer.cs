@@ -1,4 +1,4 @@
-// MvxBaseConsoleContainer.cs
+﻿// MvxBaseConsoleContainer.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,8 +14,7 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Console.Views
 {
     public abstract class MvxBaseConsoleContainer
-        : MvxViewsContainer
-          , IMvxConsoleNavigation
+        : MvxViewsContainer, IMvxConsoleNavigation
     {
         private readonly Dictionary<Type, Func<MvxPresentationHint, bool>> _presentationHintHandlers = new Dictionary<Type, Func<MvxPresentationHint, bool>>();
 

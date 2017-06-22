@@ -15,8 +15,7 @@ using UIKit;
 namespace MvvmCross.iOS.Views
 {
     public class MvxTableViewController
-        : MvxEventSourceTableViewController
-          , IMvxIosView
+        : MvxEventSourceTableViewController, IMvxIosView
     {
         protected MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
             : base(style)
@@ -116,8 +115,7 @@ namespace MvvmCross.iOS.Views
     }
 
     public class MvxTableViewController<TViewModel>
-        : MvxTableViewController
-          , IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxTableViewController, IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         protected MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
             : base(style)

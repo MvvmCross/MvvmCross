@@ -41,7 +41,6 @@ namespace MvvmCross.Uwp.Views
             _frame.ClearValue(property);
         }
 
-
         public object GetValue(DependencyProperty property)
         {
             return _frame.GetValue(property);

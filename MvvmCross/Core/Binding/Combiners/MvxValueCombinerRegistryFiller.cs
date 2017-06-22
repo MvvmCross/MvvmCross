@@ -1,4 +1,4 @@
-// MvxValueCombinerRegistryFiller.cs
+﻿// MvxValueCombinerRegistryFiller.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,8 +11,7 @@ using MvvmCross.Binding.Binders;
 namespace MvvmCross.Binding.Combiners
 {
     public class MvxValueCombinerRegistryFiller
-        : MvxNamedInstanceRegistryFiller<IMvxValueCombiner>
-          , IMvxValueCombinerRegistryFiller
+        : MvxNamedInstanceRegistryFiller<IMvxValueCombiner>, IMvxValueCombinerRegistryFiller
     {
         public override string FindName(Type type)
         {

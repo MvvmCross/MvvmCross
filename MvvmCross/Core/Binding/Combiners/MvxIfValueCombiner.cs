@@ -1,4 +1,4 @@
-// MvxIfValueCombiner.cs
+﻿// MvxIfValueCombiner.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -22,10 +22,10 @@ namespace MvvmCross.Binding.Combiners
             switch (list.Count)
             {
                 case 2:
-                    return TryEvaluateIf(list[0], list[1], null, out value);
+                    return TryEvaluateif (list[0], list[1], null, out value);
 
                 case 3:
-                    return TryEvaluateIf(list[0], list[1], list[2], out value);
+                    return TryEvaluateif (list[0], list[1], list[2], out value);
 
                 default:
                     MvxBindingTrace.Warning("Unexpected substep count of {0} in 'If' ValueCombiner", list.Count);
@@ -33,7 +33,7 @@ namespace MvvmCross.Binding.Combiners
             }
         }
 
-        private bool TryEvaluateIf(IMvxSourceStep testStep, IMvxSourceStep ifStep, IMvxSourceStep elseStep, out object value)
+        private bool TryEvaluateif (IMvxSourceStep testStep, IMvxSourceStep ifStep, IMvxSourceStep elseStep, out object value)
         {
             var result = testStep.GetValue();
             if (result == MvxBindingConstant.DoNothing)

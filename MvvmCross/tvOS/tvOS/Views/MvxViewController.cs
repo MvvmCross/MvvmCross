@@ -1,4 +1,4 @@
-// MvxViewController.cs
+﻿// MvxViewController.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,8 +14,7 @@ using MvvmCross.Platform.tvOS.Views;
 namespace MvvmCross.tvOS.Views
 {
     public class MvxViewController
-        : MvxEventSourceViewController
-          , IMvxTvosView
+        : MvxEventSourceViewController, IMvxTvosView
     {
         public MvxViewController()
         {
@@ -52,8 +51,7 @@ namespace MvvmCross.tvOS.Views
     }
 
     public class MvxViewController<TViewModel>
-        : MvxViewController
-          , IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxViewController, IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public MvxViewController()
         {

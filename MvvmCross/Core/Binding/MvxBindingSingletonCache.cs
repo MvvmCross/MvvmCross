@@ -22,8 +22,7 @@ namespace MvvmCross.Binding
     // this class is not perfect OO and it gets in the way of testing
     // however, it is here for speed - to help avoid obscene numbers of Mvx.Resolve<T> calls during binding
     public class MvxBindingSingletonCache
-        : MvxSingleton<IMvxBindingSingletonCache>
-          , IMvxBindingSingletonCache
+        : MvxSingleton<IMvxBindingSingletonCache>, IMvxBindingSingletonCache
     {
         public static IMvxBindingSingletonCache Initialize()
         {
@@ -46,7 +45,6 @@ namespace MvvmCross.Binding
         private IMvxSourceStepFactory _sourceStepFactory;
         private IMvxValueCombinerLookup _valueCombinerLookup;
         private IMvxMainThreadDispatcher _mainThreadDispatcher;
-
 
         public IMvxAutoValueConverters AutoValueConverters
         {

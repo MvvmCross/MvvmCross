@@ -19,7 +19,6 @@ namespace RoutingExample.Droid
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     public class MainView : MvxCachingFragmentCompatActivity<MainViewModel>
     {
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -31,7 +30,7 @@ namespace RoutingExample.Droid
         {
             base.OnNewIntent(intent);
 
-            if(!Mvx.CanResolve<IMvxNavigationService>()) return;
+            if (!Mvx.CanResolve<IMvxNavigationService>()) return;
 
             var url = WebUtility.UrlDecode(intent.DataString);
 

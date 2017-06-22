@@ -38,14 +38,19 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         protected IMvxAndroidBindingContext BindingContext => _bindingContext;
 
-        public MvxRecyclerAdapter() : this(MvxAndroidBindingContextHelpers.Current()) { }
+        public MvxRecyclerAdapter() : this(MvxAndroidBindingContextHelpers.Current())
+        {
+        }
+
         public MvxRecyclerAdapter(IMvxAndroidBindingContext bindingContext)
         {
             _bindingContext = bindingContext;
         }
 
         public MvxRecyclerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer) { }
+            : base(javaReference, transfer)
+        {
+        }
 
         public bool ReloadOnAllItemsSourceSets { get; set; }
 

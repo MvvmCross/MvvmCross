@@ -11,8 +11,6 @@ namespace MvvmCross.Forms.Presenters
     /// <summary>
     /// Presenter provinding MasterDetailPage functionality for the MainView in a MvxForms App.
     /// </summary>
-
-    // Based on code used MvxFormsPagePresenter code
     public abstract class MvxFormsMasterDetailPagePresenter : MvxViewPresenter
     {
         private Application _mvxFormsApp;
@@ -81,7 +79,8 @@ namespace MvvmCross.Forms.Presenters
             if (mvxContentPage != null) {
                 mvxContentPage.Request = request;
                 mvxContentPage.ViewModel = viewModel;                
-            } else {
+            } 
+            else {
                 page.BindingContext = viewModel;
             }
         }

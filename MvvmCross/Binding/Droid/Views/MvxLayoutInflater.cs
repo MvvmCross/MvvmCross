@@ -93,7 +93,8 @@ namespace MvvmCross.Binding.Droid.Views
 
         public MvxLayoutInflater(IntPtr handle, JniHandleOwnership transfer)
             : base(handle, transfer)
-        { }
+        {
+        }
 
         public override LayoutInflater CloneInContext(Context newContext)
         {
@@ -185,7 +186,9 @@ namespace MvvmCross.Binding.Droid.Views
                 {
                     return CreateView(name, prefix, attrs);
                 }
-                catch (ClassNotFoundException) { }
+                catch (ClassNotFoundException) 
+                {
+                }
             }
             return null;
         }
@@ -311,7 +314,9 @@ namespace MvvmCross.Binding.Droid.Views
                     {
                         view = CreateView(name, null, attrs);
                     }
-                    catch (ClassNotFoundException) { }
+                    catch (ClassNotFoundException) 
+                    {
+                    }
                     finally
                     {
                         constructorArgsArr[0] = lastContext;
@@ -393,7 +398,8 @@ namespace MvvmCross.Binding.Droid.Views
 
             public PrivateFactoryWrapper2(IntPtr handle, JniHandleOwnership transfer)
                 : base(handle, transfer)
-            { }
+            {
+            }
 
             public View OnCreateView(string name, Context context, IAttributeSet attrs)
             {

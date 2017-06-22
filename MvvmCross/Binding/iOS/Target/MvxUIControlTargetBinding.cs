@@ -153,7 +153,6 @@ namespace MvvmCross.Binding.iOS.Target
                     MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - Invalid controlEvent in MvxUIControlTargetBinding");
                     break;
             }
-           
 		}
 
 		private void RemoveHandler(UIControl control)

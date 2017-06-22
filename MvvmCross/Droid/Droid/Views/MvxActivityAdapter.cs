@@ -37,10 +37,8 @@ namespace MvvmCross.Droid.Views
             AndroidView.OnViewStart();
         }
 
-        protected override void EventSourceOnStartActivityForResultCalled(object sender,
-                                                                          MvxValueEventArgs
-                                                                              <MvxStartActivityForResultParameters>
-                                                                              MvxValueEventArgs)
+        protected override void EventSourceOnStartActivityForResultCalled(object sender, 
+                                                                          MvxValueEventArgs<MvxStartActivityForResultParameters> MvxValueEventArgs)
         {
             var requestCode = MvxValueEventArgs.Value.RequestCode;
             switch (requestCode)
