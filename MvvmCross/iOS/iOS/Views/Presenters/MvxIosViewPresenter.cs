@@ -188,10 +188,13 @@ namespace MvvmCross.iOS.Views.Presenters
 
             string tabName = attribute.TabName;
             string tabIconName = attribute.TabIconName;
+            string tabSelectedIconName = attribute.TabSelectedIconName;
+
             if (viewController is IMvxTabBarItemViewController tabBarItem)
             {
                 tabName = tabBarItem.TabName;
                 tabIconName = tabBarItem.TabIconName;
+                tabSelectedIconName = tabBarItem.TabSelectedIconName;
             }
 
             if (attribute.WrapInNavigationController)
@@ -201,6 +204,7 @@ namespace MvvmCross.iOS.Views.Presenters
                 viewController,
                 tabName,
                 tabIconName,
+                tabSelectedIconName,
                 attribute.TabAccessibilityIdentifier);
         }
 
