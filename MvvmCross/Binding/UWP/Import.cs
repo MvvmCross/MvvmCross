@@ -25,7 +25,10 @@ namespace MvvmCross.Binding.Uwp
 
         public object From
         {
-            get { return _from; }
+            get 
+            { 
+                return _from; 
+            }
             set
             {
                 if (_from == value)

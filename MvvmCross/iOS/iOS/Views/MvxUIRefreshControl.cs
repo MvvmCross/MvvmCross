@@ -37,7 +37,10 @@ namespace MvvmCross.iOS.Views
 		/// <value>The message.</value>
 		public string Message
 		{
-			get { return _message; }
+            get
+            {
+                return _message;
+            }
 			set
 			{
 				_message = value ?? string.Empty;
@@ -53,7 +56,10 @@ namespace MvvmCross.iOS.Views
 		/// <value><c>true</c> if this instance is refreshing; otherwise, <c>false</c>.</value>
 		public bool IsRefreshing
 		{
-			get { return _isRefreshing; }
+			get
+            {
+                return _isRefreshing;
+            }
 			set
 			{
 				_isRefreshing = value;

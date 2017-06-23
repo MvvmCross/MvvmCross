@@ -65,10 +65,12 @@ namespace MvvmCross.FieldBinding
         }
 
         private object _value;
-
         public object Value
         {
-            get { return _value; }
+            get
+            {
+                return _value;
+            }
             set
             {
                 _value = value;

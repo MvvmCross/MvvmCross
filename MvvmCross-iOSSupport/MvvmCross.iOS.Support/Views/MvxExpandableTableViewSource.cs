@@ -17,7 +17,6 @@ namespace MvvmCross.iOS.Support.Views
         public MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
         {
         }
-
     }
 
     public abstract class MvxExpandableTableViewSource<TItemSource, TItem> : MvxTableViewSource where TItemSource : IEnumerable<TItem>
@@ -213,7 +212,10 @@ namespace MvvmCross.iOS.Support.Views
 	    private bool isAccordionExpandCollapseEnabled;
 	    public bool IsAccordionExpandCollapseEnabled
 	    {
-		    get { return isAccordionExpandCollapseEnabled; }
+		    get
+            {
+                return isAccordionExpandCollapseEnabled;
+            }
 		    set
 		    {
 				if (isAccordionExpandCollapseEnabled == value)

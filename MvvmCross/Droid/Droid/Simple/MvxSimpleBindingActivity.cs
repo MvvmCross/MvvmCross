@@ -18,7 +18,10 @@ namespace MvvmCross.Droid.Simple
     {
         public new IMvxViewModel ViewModel
         {
-            get { return base.ViewModel; }
+            get
+            {
+                return base.ViewModel;
+            }
             set
             {
                 throw new MvxException(

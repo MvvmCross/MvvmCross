@@ -34,4 +34,3 @@ namespace MvvmCross.Forms.iOS
         }
     }
 }
-

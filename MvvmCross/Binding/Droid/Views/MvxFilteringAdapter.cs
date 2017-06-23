@@ -86,7 +86,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public string PartialText
         {
-            get { return _partialText; }
+            get
+            {
+                return _partialText;
+            }
             private set
             {
                 _partialText = value;

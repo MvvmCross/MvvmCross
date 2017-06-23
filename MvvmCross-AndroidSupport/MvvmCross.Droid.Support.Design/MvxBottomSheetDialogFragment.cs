@@ -36,7 +36,10 @@ namespace MvvmCross.Droid.Support.Design
 
 		public object DataContext
 		{
-			get { return _dataContext; }
+			get
+            {
+                return _dataContext;
+            }
 			set
 			{
 				_dataContext = value;

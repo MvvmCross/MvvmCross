@@ -11,7 +11,6 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Binding.Uwp
-
 {
     public class MvxWindowsAssemblyCache
         : MvxSingleton<IMvxWindowsAssemblyCache>, IMvxWindowsAssemblyCache

@@ -22,7 +22,10 @@ namespace MvvmCross.Plugins.Location
 
         protected MvxLocationPermission Permission
         {
-            get { return _permission; }
+            get
+            {
+                return _permission;
+            }
             set
             {
                 if (_permission != value)

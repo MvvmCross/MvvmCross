@@ -37,7 +37,10 @@ namespace MvvmCross.Droid.Support.V4
 
         public ICommand RefreshCommand
         {
-            get { return _refreshCommand; }
+            get
+            {
+                return _refreshCommand;
+            }
             set
             {
                 _refreshCommand = value;

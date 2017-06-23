@@ -233,13 +233,15 @@ namespace MvvmCross.Binding.Droid.Views
             // own secret sauce.
             if (Sdk > BuildVersionCodes.Honeycomb)
             {
-                if (Factory2 != null && !(Factory2 is MvxLayoutInflaterCompat.FactoryWrapper2)) // Check for FactoryWrapper2 may be too loose
+                // Check for FactoryWrapper2 may be too loose
+                if (Factory2 != null && !(Factory2 is MvxLayoutInflaterCompat.FactoryWrapper2))
                 {
                     MvxLayoutInflaterCompat.SetFactory(this, new DelegateFactory2(Factory2, _bindingVisitor));
                 }
             }
 
-            if (Factory != null && !(Factory is MvxLayoutInflaterCompat.FactoryWrapper)) // Check for FactoryWrapper may be too loose
+            // Check for FactoryWrapper may be too loose
+            if (Factory != null && !(Factory is MvxLayoutInflaterCompat.FactoryWrapper))
             {
                 MvxLayoutInflaterCompat.SetFactory(this, new DelegateFactory1(Factory, _bindingVisitor));
             }

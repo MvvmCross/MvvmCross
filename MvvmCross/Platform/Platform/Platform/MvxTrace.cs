@@ -13,7 +13,6 @@ namespace MvvmCross.Platform.Platform
 {
     public class MvxTrace
         : MvxSingleton<IMvxTrace>, IMvxTrace
-
     {
         #region public static Interface
 

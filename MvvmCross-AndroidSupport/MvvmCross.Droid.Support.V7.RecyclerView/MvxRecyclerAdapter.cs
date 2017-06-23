@@ -56,7 +56,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public ICommand ItemClick
         {
-            get { return _itemClick; }
+            get
+            {
+                return _itemClick;
+            }
             set
             {
                 if (ReferenceEquals(_itemClick, value))
@@ -75,7 +78,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public ICommand ItemLongClick
         {
-            get { return _itemLongClick; }
+            get
+            {
+                return _itemLongClick;
+            }
             set
             {
                 if (ReferenceEquals(_itemLongClick, value))
@@ -101,7 +107,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         
         public virtual IMvxTemplateSelector ItemTemplateSelector
         {
-            get { return _itemTemplateSelector; }
+            get
+            {
+                return _itemTemplateSelector;
+            }
             set
             {
                 if (ReferenceEquals(_itemTemplateSelector, value))
