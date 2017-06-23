@@ -30,21 +30,13 @@ namespace Example.Core.ViewModels
         public ObservableCollection<ListItem> Items
         {
             get { return _items; }
-            set
-            {
-                _items = value;
-                RaisePropertyChanged(() => Items);
-            }
+            set { SetProperty(ref _items, value); }
         }
 
         public ListItem SelectedItem
         {
             get { return _selectedItem; }
-            set
-            {
-                _selectedItem = value;
-                RaisePropertyChanged(() => SelectedItem);
-            }
+            set { SetProperty(ref _selectedItem, value); }
         }
 
         public virtual ICommand ItemSelected
@@ -63,11 +55,7 @@ namespace Example.Core.ViewModels
         public virtual bool IsRefreshing
         {
             get { return _isRefreshing; }
-            set
-            {
-                _isRefreshing = value;
-                RaisePropertyChanged(() => IsRefreshing);
-            }
+            set { SetProperty(ref _isRefreshing, value); }
         }
 
         public ICommand ReloadCommand

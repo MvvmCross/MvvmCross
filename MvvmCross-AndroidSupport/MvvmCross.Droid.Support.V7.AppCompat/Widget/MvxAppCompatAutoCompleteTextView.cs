@@ -67,7 +67,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         public new MvxFilteringAdapter Adapter
         {
-            get { return base.Adapter as MvxFilteringAdapter; }
+            get
+            {
+                return base.Adapter as MvxFilteringAdapter;
+            }
             set
             {
                 var existing = Adapter;
@@ -114,7 +117,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         public object SelectedObject
         {
-            get { return _selectedObject; }
+            get
+            {
+                return _selectedObject;
+            }
             private set
             {
                 if (_selectedObject == value)

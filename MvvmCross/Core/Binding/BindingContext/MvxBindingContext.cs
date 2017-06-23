@@ -181,7 +181,10 @@ namespace MvvmCross.Binding.BindingContext
 
         public object DataContext
         {
-            get { return _dataContext; }
+            get
+            {
+                return _dataContext;
+            }
             set
             {
                 if (_dataContext == value)

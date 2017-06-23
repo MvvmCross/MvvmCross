@@ -29,7 +29,10 @@ namespace MvvmCross.tvOS.Views
 
         public IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get
+            {
+                return DataContext as IMvxViewModel;
+            }
             set
             {
                 DataContext = value;

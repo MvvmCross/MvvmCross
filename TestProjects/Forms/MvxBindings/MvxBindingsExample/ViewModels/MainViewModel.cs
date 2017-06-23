@@ -13,7 +13,10 @@ namespace MvxBindingsExample.ViewModels
         private string _bindableText = "I'm bound!";
         public string BindableText
         {
-            get { return _bindableText; }
+            get 
+            { 
+                return _bindableText; 
+            }
             set
             {
                 if (BindableText != value)

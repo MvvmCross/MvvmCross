@@ -5,11 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-
 namespace MvvmCross.Platform.Mac.Views
 {
     using AppKit;
-
     using System;
 
     public class MvxBaseViewControllerAdapter
