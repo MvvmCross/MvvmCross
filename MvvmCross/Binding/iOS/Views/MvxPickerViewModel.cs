@@ -49,7 +49,10 @@ namespace MvvmCross.Binding.iOS.Views
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return _itemsSource; }
+            get
+            {
+                return _itemsSource;
+            }
             set
             {
                 if (ReferenceEquals(_itemsSource, value)
@@ -125,7 +128,10 @@ namespace MvvmCross.Binding.iOS.Views
 
         public object SelectedItem
         {
-            get { return _selectedItem; }
+            get
+            {
+                return _selectedItem;
+            }
             set
             {
                 _selectedItem = value;

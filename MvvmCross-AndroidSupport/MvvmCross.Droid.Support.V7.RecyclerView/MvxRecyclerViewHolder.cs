@@ -32,7 +32,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public object DataContext
         {
-            get { return _bindingContext.DataContext; }
+            get
+            {
+                return _bindingContext.DataContext;
+            }
             set
             {
                 _bindingContext.DataContext = value;
@@ -46,7 +49,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public ICommand Click
         {
-            get { return _click; }
+            get
+            {
+                return _click;
+            }
             set
             {
                 _click = value;
@@ -65,7 +71,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public ICommand LongClick
         {
-            get { return _longClick; }
+            get
+            {
+                return _longClick;
+            }
             set
             {
                 _longClick = value;

@@ -13,7 +13,6 @@ namespace MvvmCross.Plugins.ResourceLoader
     [Preserve(AllMembers = true)]
     public class PluginLoader
         : IMvxPluginLoader
-
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 

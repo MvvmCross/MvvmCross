@@ -24,7 +24,10 @@ namespace MvvmCross.Forms.Presenters
 
         public Application MvxFormsApp
         {
-            get { return _mvxFormsApp; }
+            get
+            {
+                return _mvxFormsApp;
+            }
             set
             {
                 if (value == null)
@@ -86,7 +89,6 @@ namespace MvvmCross.Forms.Presenters
             else {
                 page.BindingContext = viewModel;
             }
-
         }
 
         private bool TryShowPage(MvxViewModelRequest request)

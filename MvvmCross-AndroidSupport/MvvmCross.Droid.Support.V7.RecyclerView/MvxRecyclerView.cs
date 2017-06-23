@@ -80,7 +80,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public new IMvxRecyclerAdapter Adapter
         {
-            get { return GetAdapter() as IMvxRecyclerAdapter; }
+            get
+            {
+                return GetAdapter() as IMvxRecyclerAdapter;
+            }
             set
             {
                 var existing = Adapter;

@@ -60,7 +60,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             }
 
             bool changed = CheckValueChanged(newValue);
-            if (!changed) { return; }
+            if (!changed)
+                return;
 
             _currentValue = newValue;
             FireValueChanged(newValue);

@@ -131,8 +131,8 @@ namespace MvvmCross.Uwp.Views
                     foundChild = FindChild<T>(item, childName);
 
                     // If the child is found, break so we do not overwrite the found child. 
-                    if (foundChild != null) break;
-
+                    if (foundChild != null)
+                        break;
                 }
             }
 

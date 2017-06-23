@@ -31,7 +31,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public int GroupTemplateId
         {
-            get { return _groupTemplateId; }
+            get
+            {
+                return _groupTemplateId;
+            }
             set
             {
                 if (_groupTemplateId == value)
