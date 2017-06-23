@@ -54,4 +54,3 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
     }
 }
-

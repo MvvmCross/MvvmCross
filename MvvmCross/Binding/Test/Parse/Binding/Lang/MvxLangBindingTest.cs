@@ -63,7 +63,6 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                          }
                     }
                 },
-
                 {
                     "Text Key=Fred",
                     new  MvxSerializableBindingSpecification()
@@ -90,7 +89,6 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                          }
                     }
                 },
-
                 {
                     "Text 'Fred.Life Jim'",
                     new  MvxSerializableBindingSpecification()
@@ -104,7 +102,6 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                          }
                     }
                 },
-
                 {
                     "Text Key='Fred.Life Jim'",
                     new  MvxSerializableBindingSpecification()
@@ -118,7 +115,6 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                          }
                     }
                 },
-
                 {
                     "Text Key=Fred.Life",
                     new  MvxSerializableBindingSpecification()
@@ -132,7 +128,6 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                          }
                     }
                 },
-
                 {
                     "Text Fred.Life Jim",
                     new  MvxSerializableBindingSpecification()
@@ -146,7 +141,6 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                          }
                     }
                 },
-
                 {
                     "Text Fred.Life Jim,Converter=MyConv",
                     new  MvxSerializableBindingSpecification()
@@ -161,7 +155,6 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                          }
                     }
                 },
-
                 {
                     "Text Fred.Life Jim,Converter=MyConv,FallbackValue=Hello World",
                     new  MvxSerializableBindingSpecification()
@@ -177,7 +170,6 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                          }
                     }
                 },
-
                 {
                     "SpecialText Fred.Life Jim,Converter=MyConv,FallbackValue=Hello World,Source=SharedTextSource",
                     new  MvxSerializableBindingSpecification()

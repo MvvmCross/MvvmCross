@@ -1,4 +1,4 @@
-// MvxBindingContextStack.cs
+﻿// MvxBindingContextStack.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,8 +10,7 @@ using System.Collections.Generic;
 namespace MvvmCross.Binding.BindingContext
 {
     public class MvxBindingContextStack<TContext>
-        : Stack<TContext>
-          , IMvxBindingContextStack<TContext>
+        : Stack<TContext>, IMvxBindingContextStack<TContext>
     {
         public TContext Current
         {

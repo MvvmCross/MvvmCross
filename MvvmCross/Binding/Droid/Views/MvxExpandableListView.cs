@@ -23,7 +23,8 @@ namespace MvvmCross.Binding.Droid.Views
 
         public MvxExpandableListView(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxExpandableListAdapter(context))
-        { }
+        {
+        }
 
         public MvxExpandableListView(Context context, IAttributeSet attrs, MvxExpandableListAdapter adapter)
             : base(context, attrs)
@@ -69,37 +70,52 @@ namespace MvvmCross.Binding.Droid.Views
 
         public new ICommand ItemClick
         {
-            get { return _itemClick; }
+            get
+            {
+                return _itemClick;
+            }
             set
             {
                 _itemClick = value;
-                if (_itemClick != null) EnsureItemClickOverloaded();
+                if (_itemClick != null)
+                    EnsureItemClickOverloaded();
             }
         }
 
         public new ICommand ItemLongClick
         {
-            get { return _itemLongClick; }
+            get
+            {
+                return _itemLongClick;
+            }
             set
             {
                 _itemLongClick = value;
-                if (_itemLongClick != null) EnsureItemLongClickOverloaded();
+                if (_itemLongClick != null)
+                    EnsureItemLongClickOverloaded();
             }
         }
 
         public new ICommand GroupClick
         {
-            get { return _groupClick; }
+            get
+            {
+                return _groupClick;
+            }
             set
             {
                 _groupClick = value;
-                if (_groupClick != null) EnsureGroupClickOverloaded();
+                if (_groupClick != null)
+                    EnsureGroupClickOverloaded();
             }
         }
 
         public ICommand GroupLongClick
         {
-            get { return _groupLongClick; }
+            get
+            {
+                return _groupLongClick;
+            }
             set
             {
                 _groupLongClick = value;

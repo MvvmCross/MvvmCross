@@ -25,14 +25,10 @@ namespace MvvmCross.Droid.FullFragging
 {
     [Register("mvvmcross.droid.fullfragging.MvxTabsFragmentActivity")]
     public abstract class MvxTabsFragmentActivity
-        : MvxActivity
-        , TabHost.IOnTabChangeListener
+        : MvxActivity, TabHost.IOnTabChangeListener
     {
-
         private const string SavedTabIndexStateKey = "__savedTabIndex";
-
         private readonly Dictionary<string, TabInfo> _lookup = new Dictionary<string, TabInfo>();
-
         private readonly int _layoutId;
         private TabHost _tabHost;
         private TabInfo _currentTab;
@@ -231,6 +227,5 @@ namespace MvvmCross.Droid.FullFragging
         public virtual void OnTabFragmentChanging(string tag, FragmentTransaction transaction)
         {
         }
-
     }
 }

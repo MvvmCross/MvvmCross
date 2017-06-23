@@ -11,8 +11,7 @@ using MvvmCross.Platform.Core;
 namespace MvvmCross.Test.Mocks.Dispatchers
 {
     public class InlineMockMainThreadDispatcher
-        : MvxMainThreadDispatcher
-          , IMvxMainThreadDispatcher
+        : MvxMainThreadDispatcher, IMvxMainThreadDispatcher
     {
         public virtual bool RequestMainThreadAction(Action action)
         {

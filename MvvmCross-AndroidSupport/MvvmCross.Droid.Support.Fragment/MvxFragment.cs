@@ -17,8 +17,7 @@ namespace MvvmCross.Droid.Support.V4
 {
     [Register("mvvmcross.droid.support.v4.MvxFragment")]
     public class MvxFragment
-        : MvxEventSourceFragment
-        , IMvxFragmentView
+        : MvxEventSourceFragment, IMvxFragmentView
     {
         /// <summary>
         /// Create new instance of a Fragment
@@ -41,7 +40,8 @@ namespace MvvmCross.Droid.Support.V4
 
         protected MvxFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public IMvxBindingContext BindingContext { get; set; }
 
@@ -49,7 +49,10 @@ namespace MvvmCross.Droid.Support.V4
 
         public object DataContext
         {
-            get { return _dataContext; }
+            get
+            {
+                return _dataContext;
+            }
             set
             {
                 _dataContext = value;
@@ -60,7 +63,10 @@ namespace MvvmCross.Droid.Support.V4
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get
+            {
+                return DataContext as IMvxViewModel;
+            }
             set
             {
                 DataContext = value;
@@ -106,8 +112,8 @@ namespace MvvmCross.Droid.Support.V4
     }
 
     public abstract class MvxFragment<TViewModel>
-        : MvxFragment
-        , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxFragment, IMvxFragmentView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         protected MvxFragment()
         {

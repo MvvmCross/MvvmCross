@@ -4,7 +4,6 @@ using MvvmCross.Core.ViewModels;
 
 namespace RoutingExample.Core.ViewModels
 {
-
     public class MainViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
@@ -17,12 +16,11 @@ namespace RoutingExample.Core.ViewModels
         public override void Start()
         {
             base.Start();
-
         }
 
         public override async Task Initialize()
         {
-            await _navigationService.Navigate<ViewModelA>();
+            //await _navigationService.Navigate<ViewModelA>();
         }
 
         private IMvxCommand _showACommand;

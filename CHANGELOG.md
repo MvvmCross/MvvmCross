@@ -1,7 +1,37 @@
 # Change Log
 
+## [5.0.4](https://github.com/MvvmCross/MvvmCross/tree/5.0.4) (2017-06-23)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.3...5.0.4)
+
+**Fixed bugs:**
+
+- MvxTabBarViewController cannot be shown as child [\#1967](https://github.com/MvvmCross/MvvmCross/issues/1967)
+- App crash with missing constructor on MvxImageView [\#1915](https://github.com/MvvmCross/MvvmCross/issues/1915)
+- MvxImageView ctor missing [\#1966](https://github.com/MvvmCross/MvvmCross/pull/1966) ([Cheesebaron](https://github.com/Cheesebaron))
+
+**Closed issues:**
+
+- Enable tests on CI builds [\#1751](https://github.com/MvvmCross/MvvmCross/issues/1751)
+
+**Merged pull requests:**
+
+- StyleCop run on some issue's [\#1988](https://github.com/MvvmCross/MvvmCross/pull/1988) ([martijn00](https://github.com/martijn00))
+- Fix a couple of style cop issues [\#1985](https://github.com/MvvmCross/MvvmCross/pull/1985) ([martijn00](https://github.com/martijn00))
+- added features to be able to provided the selected image on tab item [\#1984](https://github.com/MvvmCross/MvvmCross/pull/1984) ([biozal](https://github.com/biozal))
+- Update nugets [\#1980](https://github.com/MvvmCross/MvvmCross/pull/1980) ([Cheesebaron](https://github.com/Cheesebaron))
+- MvxIosViewPresenter: TabBarViewController as child  [\#1977](https://github.com/MvvmCross/MvvmCross/pull/1977) ([nmilcoff](https://github.com/nmilcoff))
+- Added FishAngler showcase [\#1976](https://github.com/MvvmCross/MvvmCross/pull/1976) ([jstawski](https://github.com/jstawski))
+- Fix header [\#1973](https://github.com/MvvmCross/MvvmCross/pull/1973) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix Initialize order [\#1971](https://github.com/MvvmCross/MvvmCross/pull/1971) ([martijn00](https://github.com/martijn00))
+- \[WIP\] Codefactor cleanup [\#1939](https://github.com/MvvmCross/MvvmCross/pull/1939) ([Cheesebaron](https://github.com/Cheesebaron))
+
 ## [5.0.3](https://github.com/MvvmCross/MvvmCross/tree/5.0.3) (2017-06-19)
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.2...5.0.3)
+
+**Fixed bugs:**
+
+- New navigation service creates two instances of VM and initialize the wrong one [\#1943](https://github.com/MvvmCross/MvvmCross/issues/1943)
+- JsonLocalization plugin can't load resources with dash \( - \) in path [\#1645](https://github.com/MvvmCross/MvvmCross/issues/1645)
 
 **Closed issues:**
 
@@ -31,7 +61,7 @@
 - Reduce complexity of Binding Parsers [\#1933](https://github.com/MvvmCross/MvvmCross/pull/1933) ([Cheesebaron](https://github.com/Cheesebaron))
 - Update the picture chooser for WPF [\#1932](https://github.com/MvvmCross/MvvmCross/pull/1932) ([mathieumack](https://github.com/mathieumack))
 - Fix markdown syntax [\#1931](https://github.com/MvvmCross/MvvmCross/pull/1931) ([jz5](https://github.com/jz5))
-- Implemented correct behavior as for resource name generation [\#1929](https://github.com/MvvmCross/MvvmCross/pull/1929) ([LeRondPoint](https://github.com/LeRondPoint))
+- Implemented correct behavior as for resource name generation [\#1929](https://github.com/MvvmCross/MvvmCross/pull/1929) ([LRP-sgravel](https://github.com/LRP-sgravel))
 - Remove unused references [\#1927](https://github.com/MvvmCross/MvvmCross/pull/1927) ([martijn00](https://github.com/martijn00))
 - Fix codefactor warnings "Arithmetic expressions must declare precedence" [\#1926](https://github.com/MvvmCross/MvvmCross/pull/1926) ([mvanbeusekom](https://github.com/mvanbeusekom))
 - Cleanup codebase with Resharper [\#1925](https://github.com/MvvmCross/MvvmCross/pull/1925) ([martijn00](https://github.com/martijn00))
@@ -279,13 +309,13 @@
 - Updates for documentation [\#1766](https://github.com/MvvmCross/MvvmCross/pull/1766) ([martijn00](https://github.com/martijn00))
 - Add documentation about the new navigation and fix copy pasta error [\#1765](https://github.com/MvvmCross/MvvmCross/pull/1765) ([martijn00](https://github.com/martijn00))
 - change parameter type to TInit [\#1764](https://github.com/MvvmCross/MvvmCross/pull/1764) ([Hobbes1987](https://github.com/Hobbes1987))
-- Android Forms activity needs to forward events to ActivityLifetimeListener [\#1762](https://github.com/MvvmCross/MvvmCross/pull/1762) ([LeRondPoint](https://github.com/LeRondPoint))
-- Forms MvxImageView [\#1761](https://github.com/MvvmCross/MvvmCross/pull/1761) ([LeRondPoint](https://github.com/LeRondPoint))
+- Android Forms activity needs to forward events to ActivityLifetimeListener [\#1762](https://github.com/MvvmCross/MvvmCross/pull/1762) ([LRP-sgravel](https://github.com/LRP-sgravel))
+- Forms MvxImageView [\#1761](https://github.com/MvvmCross/MvvmCross/pull/1761) ([LRP-sgravel](https://github.com/LRP-sgravel))
 - Moving from Old wiki - Create Customizing using App and Setup [\#1760](https://github.com/MvvmCross/MvvmCross/pull/1760) ([AnthonyNjuguna](https://github.com/AnthonyNjuguna))
 - Revert MvxRecyclerView Header/Footer and Grouping Features [\#1758](https://github.com/MvvmCross/MvvmCross/pull/1758) ([kjeremy](https://github.com/kjeremy))
 - Make Example.Droid deployable in debug [\#1757](https://github.com/MvvmCross/MvvmCross/pull/1757) ([kjeremy](https://github.com/kjeremy))
 - Create docs for ViewPresenter in fundamentals [\#1756](https://github.com/MvvmCross/MvvmCross/pull/1756) ([nmilcoff](https://github.com/nmilcoff))
-- MvxForms lang bindings [\#1755](https://github.com/MvvmCross/MvvmCross/pull/1755) ([LeRondPoint](https://github.com/LeRondPoint))
+- MvxForms lang bindings [\#1755](https://github.com/MvvmCross/MvvmCross/pull/1755) ([LRP-sgravel](https://github.com/LRP-sgravel))
 - More clean up of Warnings [\#1753](https://github.com/MvvmCross/MvvmCross/pull/1753) ([Cheesebaron](https://github.com/Cheesebaron))
 - Added null checking on ViewModel for life-cycle events [\#1752](https://github.com/MvvmCross/MvvmCross/pull/1752) ([Plac3hold3r](https://github.com/Plac3hold3r))
 - Fix a bunch of warnings [\#1749](https://github.com/MvvmCross/MvvmCross/pull/1749) ([Cheesebaron](https://github.com/Cheesebaron))
@@ -294,7 +324,7 @@
 - Cleanup of Forms project and packages [\#1745](https://github.com/MvvmCross/MvvmCross/pull/1745) ([martijn00](https://github.com/martijn00))
 - Cleanup some code [\#1744](https://github.com/MvvmCross/MvvmCross/pull/1744) ([kjeremy](https://github.com/kjeremy))
 - Check phone capabilities before calling [\#1742](https://github.com/MvvmCross/MvvmCross/pull/1742) ([Cheesebaron](https://github.com/Cheesebaron))
-- Added MvxBindings to Forms integration [\#1741](https://github.com/MvvmCross/MvvmCross/pull/1741) ([LeRondPoint](https://github.com/LeRondPoint))
+- Added MvxBindings to Forms integration [\#1741](https://github.com/MvvmCross/MvvmCross/pull/1741) ([LRP-sgravel](https://github.com/LRP-sgravel))
 - Unify MvxTableViewCell, MvxCollectionViewCell and MvxCollectionReusableView constructors [\#1740](https://github.com/MvvmCross/MvvmCross/pull/1740) ([nmilcoff](https://github.com/nmilcoff))
 - Add editorconfig file to help with with formatting and conventions [\#1739](https://github.com/MvvmCross/MvvmCross/pull/1739) ([Plac3hold3r](https://github.com/Plac3hold3r))
 - Don't throw exception in ctor for Fused [\#1738](https://github.com/MvvmCross/MvvmCross/pull/1738) ([Cheesebaron](https://github.com/Cheesebaron))

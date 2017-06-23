@@ -13,7 +13,6 @@ namespace MvvmCross.Plugins.WebBrowser.Wpf
 {
     public class Plugin
         : IMvxPlugin
-
     {
         public void Load()
         {

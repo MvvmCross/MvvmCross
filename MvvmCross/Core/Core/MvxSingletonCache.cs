@@ -14,8 +14,7 @@ using MvvmCross.Platform.Exceptions;
 namespace MvvmCross.Core
 {
     public class MvxSingletonCache
-        : MvxSingleton<IMvxSingletonCache>
-          , IMvxSingletonCache
+        : MvxSingleton<IMvxSingletonCache>, IMvxSingletonCache
     {
         public static MvxSingletonCache Initialize()
         {

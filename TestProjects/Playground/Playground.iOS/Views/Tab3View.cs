@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters.Attributes;
@@ -7,7 +7,7 @@ using Playground.Core.ViewModels;
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
-    [MvxTabPresentation]
+    [MvxTabPresentation(WrapInNavigationController = false)]
     public partial class Tab3View : MvxViewController<Tab3ViewModel>, IMvxTabBarItemViewController
     {
         public Tab3View(IntPtr handle) : base(handle)
@@ -16,6 +16,8 @@ namespace Playground.iOS.Views
 
         public string TabName => "Third";
         public string TabIconName => "settings";
+
+        public string TabSelectedIconName => "settings";
 
         public override void ViewDidLoad()
         {

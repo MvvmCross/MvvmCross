@@ -12,7 +12,6 @@ namespace MvvmCross.Uwp.Views.Suspension
         public MvxSuspensionManagerException(Exception e)
             : base(e, "MvxSuspensionManager failed")
         {
-
         }
     }
 }

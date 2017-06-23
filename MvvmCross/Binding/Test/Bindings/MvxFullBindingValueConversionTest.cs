@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using Moq;
 using MvvmCross.Binding.Bindings;
-using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Test.Mocks;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
 using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.Dispatchers;
 using NUnit.Framework;
@@ -20,120 +19,7 @@ namespace MvvmCross.Binding.Test.Bindings
     [TestFixture]
     public class MvxFullBindingValueConversionTest : MvxIoCSupportingTest
     {
-        public class MockSourceBinding : IMvxSourceBinding
-        {
-            public MockSourceBinding()
-            {
-                SourceType = typeof(object);
-            }
-
-            public int DisposeCalled = 0;
-
-            public void Dispose()
-            {
-                DisposeCalled++;
-            }
-
-            public Type SourceType { get; set; }
-
-            public List<object> ValuesSet = new List<object>();
-
-            public void SetValue(object value)
-            {
-                ValuesSet.Add(value);
-            }
-
-            public void FireSourceChanged()
-            {
-                Changed?.Invoke(this, EventArgs.Empty);
-            }
-
-            public event EventHandler Changed;
-
-            public bool TryGetValueResult;
-            public object TryGetValueValue;
-
-            public object GetValue()
-            {
-                if (!TryGetValueResult)
-                    return MvxBindingConstant.UnsetValue;
-
-                return TryGetValueValue;
-            }
-        }
-
-        public class MockTargetBinding : IMvxTargetBinding
-        {
-            public MockTargetBinding()
-            {
-                TargetType = typeof(object);
-            }
-
-            public int DisposeCalled = 0;
-
-            public void Dispose()
-            {
-                DisposeCalled++;
-            }
-
-            public void SubscribeToEvents()
-            { }
-
-            public Type TargetType { get; set; }
-            public MvxBindingMode DefaultMode { get; set; }
-
-            public List<object> Values = new List<object>();
-
-            public void SetValue(object value)
-            {
-                Values.Add(value);
-            }
-
-            public void FireValueChanged(MvxTargetChangedEventArgs args)
-            {
-                ValueChanged?.Invoke(this, args);
-            }
-
-            public event EventHandler<MvxTargetChangedEventArgs> ValueChanged;
-        }
-
-        public class MockValueConverter : IMvxValueConverter
-        {
-            public object ConversionResult;
-            public bool ThrowOnConversion;
-
-            public List<object> ConversionsRequested = new List<object>();
-            public List<object> ConversionParameters = new List<object>();
-            public List<Type> ConversionTypes = new List<Type>();
-
-            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                ConversionsRequested.Add(value);
-                ConversionParameters.Add(parameter);
-                ConversionTypes.Add(targetType);
-                if (ThrowOnConversion)
-                    throw new MvxException("Conversion throw requested");
-                return ConversionResult;
-            }
-
-            public object ConversionBackResult;
-            public bool ThrowOnConversionBack;
-            public List<object> ConversionsBackRequested = new List<object>();
-            public List<object> ConversionBackParameters = new List<object>();
-            public List<Type> ConversionBackTypes = new List<Type>();
-
-            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                ConversionsBackRequested.Add(value);
-                ConversionBackParameters.Add(parameter);
-                ConversionBackTypes.Add(targetType);
-                if (ThrowOnConversionBack)
-                    throw new MvxException("Conversion throw requested");
-                return ConversionBackResult;
-            }
-        }
-
-        [Test]
+ [Test]
         public void TestConverterIsUsedForConvert()
         {
             MockSourceBinding mockSource;

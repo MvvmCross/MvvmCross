@@ -12,8 +12,7 @@ using MvvmCross.Platform.Core;
 namespace MvvmCross.FieldBinding
 {
     public class NotifyChange
-        : MvxMainThreadDispatchingObject
-          , INotifyChange
+        : MvxMainThreadDispatchingObject, INotifyChange
     {
         private bool _shouldAlwaysRaiseChangedOnUserInterfaceThread;
 
@@ -66,10 +65,12 @@ namespace MvvmCross.FieldBinding
         }
 
         private object _value;
-
         public object Value
         {
-            get { return _value; }
+            get
+            {
+                return _value;
+            }
             set
             {
                 _value = value;
@@ -81,8 +82,7 @@ namespace MvvmCross.FieldBinding
     }
 
     public class NotifyChange<T>
-        : NotifyChange
-          , INotifyChange<T>
+        : NotifyChange, INotifyChange<T>
     {
         public new T Value
         {

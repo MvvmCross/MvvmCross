@@ -1,4 +1,4 @@
-// MvxView.cs
+﻿// MvxView.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,8 +14,7 @@ using UIKit;
 namespace MvvmCross.Binding.tvOS.Views
 {
     public class MvxView
-        : UIView
-          , IMvxBindable
+        : UIView, IMvxBindable
     {
         public IMvxBindingContext BindingContext { get; set; }
 

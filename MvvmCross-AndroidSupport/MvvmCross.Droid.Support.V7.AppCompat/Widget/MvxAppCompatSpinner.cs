@@ -25,14 +25,14 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
     public class MvxAppCompatSpinner : AppCompatSpinner
     {
         public MvxAppCompatSpinner(Context context, IAttributeSet attrs)
-            : this(
-                context, attrs,
+            : this(context, attrs,
                 new MvxAdapter(context)
                 {
                     SimpleViewLayoutId = Android.Resource.Layout.SimpleSpinnerItem,
                     DropDownItemTemplateId = Resource.Layout.support_simple_spinner_dropdown_item
                 })
-        { }
+        {
+        }
 
         public MvxAppCompatSpinner(Context context, IAttributeSet attrs, IMvxAdapter adapter)
             : base(context, attrs)
@@ -47,11 +47,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         protected MvxAppCompatSpinner(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        { }
+        {
+        }
 
         public new IMvxAdapter Adapter
         {
-            get { return base.Adapter as IMvxAdapter; }
+            get => base.Adapter as IMvxAdapter;
             set
             {
                 var existing = Adapter;
@@ -72,20 +73,20 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return Adapter.ItemsSource; }
-            set { Adapter.ItemsSource = value; }
+            get => Adapter.ItemsSource;
+            set => Adapter.ItemsSource = value;
         }
 
         public int ItemTemplateId
         {
-            get { return Adapter.ItemTemplateId; }
-            set { Adapter.ItemTemplateId = value; }
+            get => Adapter.ItemTemplateId;
+            set => Adapter.ItemTemplateId = value;
         }
 
         public int DropDownItemTemplateId
         {
-            get { return Adapter.DropDownItemTemplateId; }
-            set { Adapter.DropDownItemTemplateId = value; }
+            get => Adapter.DropDownItemTemplateId;
+            set => Adapter.DropDownItemTemplateId = value;
         }
 
         public ICommand HandleItemSelected { get; set; }

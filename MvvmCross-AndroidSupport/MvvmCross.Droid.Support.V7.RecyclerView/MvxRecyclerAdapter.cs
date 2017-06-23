@@ -27,7 +27,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerAdapter")]
     public class MvxRecyclerAdapter 
-        : Android.Support.V7.Widget.RecyclerView.Adapter, IMvxRecyclerAdapter , IMvxRecyclerAdapterBindableHolder
+        : Android.Support.V7.Widget.RecyclerView.Adapter, IMvxRecyclerAdapter, IMvxRecyclerAdapterBindableHolder
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
 
@@ -38,20 +38,28 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         protected IMvxAndroidBindingContext BindingContext => _bindingContext;
 
-        public MvxRecyclerAdapter() : this(MvxAndroidBindingContextHelpers.Current()) { }
+        public MvxRecyclerAdapter() : this(MvxAndroidBindingContextHelpers.Current())
+        {
+        }
+
         public MvxRecyclerAdapter(IMvxAndroidBindingContext bindingContext)
         {
             _bindingContext = bindingContext;
         }
 
         public MvxRecyclerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer) { }
+            : base(javaReference, transfer)
+        {
+        }
 
         public bool ReloadOnAllItemsSourceSets { get; set; }
 
         public ICommand ItemClick
         {
-            get { return _itemClick; }
+            get
+            {
+                return _itemClick;
+            }
             set
             {
                 if (ReferenceEquals(_itemClick, value))
@@ -70,7 +78,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public ICommand ItemLongClick
         {
-            get { return _itemLongClick; }
+            get
+            {
+                return _itemLongClick;
+            }
             set
             {
                 if (ReferenceEquals(_itemLongClick, value))
@@ -96,7 +107,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         
         public virtual IMvxTemplateSelector ItemTemplateSelector
         {
-            get { return _itemTemplateSelector; }
+            get
+            {
+                return _itemTemplateSelector;
+            }
             set
             {
                 if (ReferenceEquals(_itemTemplateSelector, value))

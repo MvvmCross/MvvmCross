@@ -24,7 +24,8 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
     /// This class is actually (almost) the same as MvxRecylerView. Please keep this in mind if fixing bugs or implementing improvements!
     /// </remarks>
     [Register("mvvmcross.droid.support.v17.leanback.widgets.MvxHorizontalGridView")]
-    public class MvxHorizontalGridView : HorizontalGridView
+    public class MvxHorizontalGridView 
+        : HorizontalGridView
     {
         #region ctor
 
@@ -78,10 +79,12 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
 		/// </summary>
 		public bool FocusFirstChildOnLaidOut { get; private set; }
 
-
         public new IMvxRecyclerAdapter Adapter
         {
-            get { return GetAdapter() as IMvxRecyclerAdapter; }
+            get
+            {
+                return GetAdapter() as IMvxRecyclerAdapter;
+            }
             set
             {
                 var existing = Adapter;

@@ -83,8 +83,7 @@ namespace MvvmCross.Binding.Mac
             registry.RegisterCustomBindingFactory<NSButton>(
                 MvxMacPropertyBinding.NSButton_Title,
                 button => new MvxNSButtonTitleTargetBinding(button));
-
-
+            
             /* Todo: Address this for trackpad
             registry.RegisterCustomBindingFactory<NSView>("Tap", view => new MvxNSViewTapTargetBinding(view));
             registry.RegisterCustomBindingFactory<NSView>("DoubleTap", view => new MvxNSViewTapTargetBinding(view, 2, 1));
@@ -120,11 +119,11 @@ namespace MvvmCross.Binding.Mac
             registry.AddOrOverwrite(typeof(NSSlider), MvxMacPropertyBinding.NSSlider_IntValue);
             registry.AddOrOverwrite(typeof(NSSegmentedControl), MvxMacPropertyBinding.NSSegmentedControl_SelectedSegment);
 
-            //registry.AddOrOverwrite(typeof (MvxCollectionViewSource), "ItemsSource");
-            //registry.AddOrOverwrite(typeof (MvxTableViewSource), "ItemsSource");
-            //registry.AddOrOverwrite(typeof (MvxImageView), "ImageUrl");
-            //registry.AddOrOverwrite(typeof (IMvxImageHelper<UIImage>), "ImageUrl");
-            //registry.AddOrOverwrite(typeof (MvxImageViewLoader), "ImageUrl");
+            //registry.AddOrOverwrite(typeof(MvxCollectionViewSource), "ItemsSource");
+            //registry.AddOrOverwrite(typeof(MvxTableViewSource), "ItemsSource");
+            //registry.AddOrOverwrite(typeof(MvxImageView), "ImageUrl");
+            //registry.AddOrOverwrite(typeof(IMvxImageHelper<UIImage>), "ImageUrl");
+            //registry.AddOrOverwrite(typeof(MvxImageViewLoader), "ImageUrl");
             _fillBindingNamesAction?.Invoke(registry);
         }
     }

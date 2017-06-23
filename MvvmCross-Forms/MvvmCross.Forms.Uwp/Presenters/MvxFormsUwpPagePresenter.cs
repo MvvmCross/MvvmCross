@@ -6,7 +6,6 @@
 // Project Lead - Tomasz Cielecki, @cheesebaron, mvxplugins@ostebaronen.dk
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 
-
 using MvvmCross.Forms.Presenters;
 using MvvmCross.Uwp.Views;
 using Xamarin.Forms;

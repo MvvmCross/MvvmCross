@@ -33,8 +33,7 @@ using MvvmCross.Platform.Plugins;
 namespace MvvmCross.Droid.Platform
 {
     public abstract class MvxAndroidSetup
-        : MvxSetup
-          , IMvxAndroidGlobals
+        : MvxSetup, IMvxAndroidGlobals
     {
         private readonly Context _applicationContext;
 
@@ -226,8 +225,8 @@ namespace MvvmCross.Droid.Platform
 
         protected virtual IEnumerable<Assembly> AndroidViewAssemblies => new List<Assembly>()
         {
-            typeof (View).Assembly,
-            typeof (MvxDatePicker).Assembly,
+            typeof(View).Assembly,
+            typeof(MvxDatePicker).Assembly,
             GetType().Assembly,
         };
 

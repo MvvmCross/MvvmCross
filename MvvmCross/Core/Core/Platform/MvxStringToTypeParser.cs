@@ -15,8 +15,7 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Core.Platform
 {
     public class MvxStringToTypeParser
-        : IMvxStringToTypeParser
-          , IMvxFillableStringToTypeParser
+        : IMvxStringToTypeParser, IMvxFillableStringToTypeParser
     {
         public interface IParser
         {
@@ -242,18 +241,18 @@ namespace MvvmCross.Core.Platform
         {
             TypeParsers = new Dictionary<Type, IParser>
             {
-                {typeof (string), new StringParser()},
-                {typeof (short), new ShortParser()},
-                {typeof (int), new IntParser()},
-                {typeof (long), new LongParser()},
-                {typeof (ushort), new UshortParser()},
-                {typeof (uint), new UintParser()},
-                {typeof (ulong), new UlongParser()},
-                {typeof (double), new DoubleParser()},
-                {typeof (float), new FloatParser()},
-                {typeof (bool), new BoolParser()},
-                {typeof (Guid), new GuidParser()},
-                {typeof (DateTime), new DateTimeParser()},
+                {typeof(string), new StringParser()},
+                {typeof(short), new ShortParser()},
+                {typeof(int), new IntParser()},
+                {typeof(long), new LongParser()},
+                {typeof(ushort), new UshortParser()},
+                {typeof(uint), new UintParser()},
+                {typeof(ulong), new UlongParser()},
+                {typeof(double), new DoubleParser()},
+                {typeof(float), new FloatParser()},
+                {typeof(bool), new BoolParser()},
+                {typeof(Guid), new GuidParser()},
+                {typeof(DateTime), new DateTimeParser()},
             };
 
             ExtraParsers = new List<IExtraParser>

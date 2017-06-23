@@ -50,7 +50,10 @@ namespace MvvmCross.Binding.iOS.Views
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return _itemsSource; }
+            get
+            {
+                return _itemsSource;
+            }
             set
             {
                 if (ReferenceEquals(_itemsSource, value)

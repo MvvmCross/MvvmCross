@@ -8,16 +8,18 @@ using MvvmCross.Droid.Support.V4;
 namespace MvvmCross.Droid.Support.V14.Preference
 {
     [Register("mvvmcross.droid.support.v14.preference.MvxPreferenceFragment")]
-    public abstract class MvxPreferenceFragment : MvxEventSourcePreferenceFragment, IMvxFragmentView
+    public abstract class MvxPreferenceFragment 
+        : MvxEventSourcePreferenceFragment, IMvxFragmentView
 	{
 		protected MvxPreferenceFragment()
 		{
 			this.AddEventListeners();
 		}
 
-		protected MvxPreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-		{}
+	    protected MvxPreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer)
+	        : base(javaReference, transfer)
+	    {
+	    }
 
 		public IMvxBindingContext BindingContext { get; set; }
 
@@ -25,7 +27,10 @@ namespace MvvmCross.Droid.Support.V14.Preference
 
 		public object DataContext
 		{
-			get { return _dataContext; }
+			get
+            {
+                return _dataContext;
+            }
 			set
 			{
 				_dataContext = value;
@@ -36,7 +41,10 @@ namespace MvvmCross.Droid.Support.V14.Preference
 
 		public virtual IMvxViewModel ViewModel
 		{
-			get { return DataContext as IMvxViewModel; }
+			get
+            {
+                return DataContext as IMvxViewModel;
+            }
 			set
 			{
 				DataContext = value;
@@ -52,17 +60,17 @@ namespace MvvmCross.Droid.Support.V14.Preference
     }
 
 	public abstract class MvxPreferenceFragment<TViewModel>
-		: MvxPreferenceFragment
-	, IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+		: MvxPreferenceFragment, IMvxFragmentView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
 	{
-
 		protected MvxPreferenceFragment()
 		{
-
 		}
 
-		protected MvxPreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
-
+	    protected MvxPreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer) 
+            : base(javaReference, transfer)
+	    {
+	    }
 
 		public new TViewModel ViewModel
 		{

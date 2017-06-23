@@ -13,7 +13,6 @@ namespace MvvmCross.Plugins.WebBrowser.Droid
     [Preserve(AllMembers = true)]
     public class Plugin
         : IMvxPlugin
-          
     {
         public void Load()
         {

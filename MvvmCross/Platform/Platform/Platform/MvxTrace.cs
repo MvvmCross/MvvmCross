@@ -1,4 +1,4 @@
-// MvxTrace.cs
+﻿// MvxTrace.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,9 +12,7 @@ using MvvmCross.Platform.Exceptions;
 namespace MvvmCross.Platform.Platform
 {
     public class MvxTrace
-        : MvxSingleton<IMvxTrace>
-          , IMvxTrace
-
+        : MvxSingleton<IMvxTrace>, IMvxTrace
     {
         #region public static Interface
 

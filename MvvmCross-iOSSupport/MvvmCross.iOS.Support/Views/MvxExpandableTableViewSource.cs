@@ -17,7 +17,6 @@ namespace MvvmCross.iOS.Support.Views
         public MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
         {
         }
-
     }
 
     public abstract class MvxExpandableTableViewSource<TItemSource, TItem> : MvxTableViewSource where TItemSource : IEnumerable<TItem>
@@ -75,12 +74,10 @@ namespace MvvmCross.iOS.Support.Views
 
 	    protected virtual void OnSectionExpanded(IEnumerable<int> sectionIndexes)
 	    {
-		    
 	    }
 
 	    protected virtual void OnSectionCollapsed(IEnumerable<int> collapsedSectionIndexes)
 	    {
-		    
 	    }
 
 	    private void ScrollToSection(UITableView tableView, nint atIndex)
@@ -215,7 +212,10 @@ namespace MvvmCross.iOS.Support.Views
 	    private bool isAccordionExpandCollapseEnabled;
 	    public bool IsAccordionExpandCollapseEnabled
 	    {
-		    get { return isAccordionExpandCollapseEnabled; }
+		    get
+            {
+                return isAccordionExpandCollapseEnabled;
+            }
 		    set
 		    {
 				if (isAccordionExpandCollapseEnabled == value)
@@ -235,6 +235,8 @@ namespace MvvmCross.iOS.Support.Views
 
     public class HiddenHeaderButton : UIButton
     {
-        public HiddenHeaderButton(CGRect frame) : base(frame) { }
+        public HiddenHeaderButton(CGRect frame) : base(frame)
+        {
+        }
     }
 }

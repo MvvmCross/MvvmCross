@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.Platform;
 using UIKit;
 
 namespace MvvmCross.iOS.Views
@@ -21,17 +23,34 @@ namespace MvvmCross.iOS.Views
         {
         }
 
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+
+            if (IsMovingFromParentViewController)
+            {
+                var presenter = Mvx.Resolve<IMvxIosViewPresenter>() as MvxIosViewPresenter;
+                presenter.CloseTabBarViewController();
+            }
+        }
+
+        //keep changes for selected icon from breaking current release
         public virtual void ShowTabView(UIViewController viewController, string tabTitle, string tabIconName, string tabAccessibilityIdentifier = null)
         {
-            if(!string.IsNullOrEmpty(tabAccessibilityIdentifier))
+            ShowTabView(viewController, tabTitle, tabIconName, null, tabAccessibilityIdentifier);
+        }
+
+        public virtual void ShowTabView(UIViewController viewController, string tabTitle, string tabIconName, string tabSelectedIconName = null, string tabAccessibilityIdentifier = null)
+        {
+            if (!string.IsNullOrEmpty(tabAccessibilityIdentifier))
                 viewController.View.AccessibilityIdentifier = tabAccessibilityIdentifier;
 
             // setup Tab
-            SetTitleAndTabBarItem(viewController, tabTitle, tabIconName);
+            SetTitleAndTabBarItem(viewController, tabTitle, tabIconName, tabSelectedIconName);
 
             // add Tab
             var currentTabs = new List<UIViewController>();
-            if(ViewControllers != null)
+            if (ViewControllers != null)
             {
                 currentTabs = ViewControllers.ToList();
             }
@@ -42,12 +61,21 @@ namespace MvvmCross.iOS.Views
             ViewControllers = currentTabs.ToArray();
         }
 
+        //keep changes for selected icon from breaking current release
         protected virtual void SetTitleAndTabBarItem(UIViewController viewController, string title, string iconName)
+        {
+            SetTitleAndTabBarItem(viewController, title, iconName, null);
+        }
+
+        protected virtual void SetTitleAndTabBarItem(UIViewController viewController, string title, string iconName, string selectedIconName = null)
         {
             viewController.Title = title;
 
-            if(!string.IsNullOrEmpty(iconName))
+            if (!string.IsNullOrEmpty(iconName))
                 viewController.TabBarItem = new UITabBarItem(title, UIImage.FromBundle(iconName), _tabsCount);
+
+            if (!string.IsNullOrEmpty(selectedIconName))
+                viewController.TabBarItem.SelectedImage = UIImage.FromBundle(selectedIconName);
 
             _tabsCount++;
         }
@@ -57,7 +85,7 @@ namespace MvvmCross.iOS.Views
             var navigationController = (UINavigationController)SelectedViewController;
 
             // if the current selected ViewController is not a NavigationController, then a child cannot be shown
-            if(navigationController == null)
+            if (navigationController == null)
             {
                 return false;
             }
@@ -75,7 +103,7 @@ namespace MvvmCross.iOS.Views
         public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
         {
             var navController = SelectedViewController as UINavigationController;
-            if(navController != null)
+            if (navController != null)
             {
                 navController.PopViewController(true);
                 return true;
@@ -85,7 +113,7 @@ namespace MvvmCross.iOS.Views
             var toClose = ViewControllers.Where(v => v.GetType() != typeof(MvxNavigationController))
                                          .Select(v => v.GetIMvxIosView())
                                          .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
-            if(toClose != null)
+            if (toClose != null)
             {
                 var newTabs = ViewControllers.Where(v => v.GetIMvxIosView() != toClose);
                 ViewControllers = newTabs.ToArray();
@@ -116,10 +144,10 @@ namespace MvvmCross.iOS.Views
             {
                 var topViewController = (SelectedViewController as UINavigationController)?.TopViewController ?? SelectedViewController;
 
-                if(topViewController.PresentedViewController != null)
+                if (topViewController.PresentedViewController != null)
                 {
                     var presentedNavigationController = topViewController.PresentedViewController as UINavigationController;
-                    if(presentedNavigationController != null)
+                    if (presentedNavigationController != null)
                     {
                         return presentedNavigationController.TopViewController;
                     }

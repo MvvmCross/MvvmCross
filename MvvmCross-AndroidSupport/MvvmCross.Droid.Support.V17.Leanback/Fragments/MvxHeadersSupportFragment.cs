@@ -11,8 +11,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 {
     [Register("mvvmcross.droid.support.v17.leanback.fragments.MvxHeadersSupportFragment")]
     public class MvxHeadersSupportFragment
-        : MvxEventSourceHeadersSupportFragment
-        , IMvxFragmentView
+        : MvxEventSourceHeadersSupportFragment, IMvxFragmentView
     {
         /// <summary>
         /// Create new instance of a MvxHeadersSupportFragment
@@ -35,7 +34,8 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         protected MvxHeadersSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public IMvxBindingContext BindingContext { get; set; }
 
@@ -43,7 +43,10 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         public object DataContext
         {
-            get { return _dataContext; }
+            get
+            {
+                return _dataContext;
+            }
             set
             {
                 _dataContext = value;
@@ -54,7 +57,10 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get
+            {
+                return DataContext as IMvxViewModel;
+            }
             set
             {
                 DataContext = value;
@@ -70,14 +76,15 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
     }
 
     public abstract class MvxHeadersSupportFragment<TViewModel>
-        : MvxHeadersSupportFragment
-            , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxHeadersSupportFragment, IMvxFragmentView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         protected MvxHeadersSupportFragment()
         {
         }
 
-        protected MvxHeadersSupportFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected MvxHeadersSupportFragment(IntPtr javaReference, JniHandleOwnership transfer) 
+            : base(javaReference, transfer)
         {
         }
 

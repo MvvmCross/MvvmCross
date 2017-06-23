@@ -6,8 +6,7 @@ using MvvmCross.Platform.Core;
 namespace MvvmCross.Platform.Mac.Views
 {
     public class MvxEventSourceTabViewController
-    : NSTabViewController
-          , IMvxEventSourceViewController
+    : NSTabViewController, IMvxEventSourceViewController
     {
         protected MvxEventSourceTabViewController()
             : base()

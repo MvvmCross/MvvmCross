@@ -75,7 +75,10 @@ namespace MvvmCross.Binding.tvOS.Views
 
         public object SelectedItem
         {
-            get { return _selectedItem; }
+            get
+            {
+                return _selectedItem;
+            }
             set
             {
                 // note that we only expect this to be called from the control/Table

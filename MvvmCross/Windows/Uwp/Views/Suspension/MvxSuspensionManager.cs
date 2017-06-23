@@ -130,7 +130,7 @@ namespace MvvmCross.Uwp.Views.Suspension
             DependencyProperty.RegisterAttached("_MvxFrameSessionStateKey", typeof(string), typeof(MvxSuspensionManager), null);
         private readonly DependencyProperty MvxFrameSessionStateProperty =
             DependencyProperty.RegisterAttached("_MvxFrameSessionState",
-                typeof (Dictionary<string, object>), typeof (MvxSuspensionManager), null);
+                typeof(Dictionary<string, object>), typeof(MvxSuspensionManager), null);
         private readonly List<WeakReference<IMvxWindowsFrame>> _registeredFrames = new List<WeakReference<IMvxWindowsFrame>>();
 
         /// <summary>

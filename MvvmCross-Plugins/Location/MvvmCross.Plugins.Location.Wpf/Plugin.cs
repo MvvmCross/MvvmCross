@@ -12,7 +12,6 @@ namespace MvvmCross.Plugins.Location.Wpf
 {
     public class Plugin
         : IMvxPlugin
-
     {
         public void Load()
         {

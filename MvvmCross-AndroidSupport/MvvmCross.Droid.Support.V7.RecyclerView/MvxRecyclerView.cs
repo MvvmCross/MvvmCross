@@ -21,10 +21,23 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView")]
     public class MvxRecyclerView : Android.Support.V7.Widget.RecyclerView
     {
-        public MvxRecyclerView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
-        public MvxRecyclerView(Context context, IAttributeSet attrs) : this(context, attrs, 0, new MvxRecyclerAdapter()) { }
-        public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle) : this(context, attrs, defStyle, new MvxRecyclerAdapter()) { }
-        public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter) : base(context, attrs, defStyle)
+        public MvxRecyclerView(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
+
+        public MvxRecyclerView(Context context, IAttributeSet attrs) :
+            this(context, attrs, 0, new MvxRecyclerAdapter())
+        {
+        }
+
+        public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle) 
+            : this(context, attrs, defStyle, new MvxRecyclerAdapter())
+        {
+        }
+
+        public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter) 
+            : base(context, attrs, defStyle)
         {
             // Note: Any calling derived class passing a null adapter is responsible for setting
             // it's own ItemTemplateSelector
@@ -45,7 +58,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             adapter.ItemTemplateSelector = itemTemplateSelector;
             Adapter = adapter;
 
-            if (itemTemplateSelector.GetType() == typeof (MvxDefaultTemplateSelector))
+            if (itemTemplateSelector.GetType() == typeof(MvxDefaultTemplateSelector))
                 ItemTemplateId = itemTemplateId;
         }
 
@@ -67,7 +80,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public new IMvxRecyclerAdapter Adapter
         {
-            get { return GetAdapter() as IMvxRecyclerAdapter; }
+            get
+            {
+                return GetAdapter() as IMvxRecyclerAdapter;
+            }
             set
             {
                 var existing = Adapter;
@@ -131,7 +147,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 Adapter.ItemTemplateSelector = singleItemDefaultTemplateSelector;
             }
         }
-
 
         public IMvxTemplateSelector ItemTemplateSelector
         {

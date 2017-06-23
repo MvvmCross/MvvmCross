@@ -48,7 +48,10 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         public override Type TargetType
         {
-            get { return base.TargetType; }
+            get
+            {
+                return base.TargetType;
+            }
             set
             {
                 base.TargetType = value;

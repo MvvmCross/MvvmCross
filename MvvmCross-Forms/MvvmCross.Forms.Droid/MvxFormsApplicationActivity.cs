@@ -36,10 +36,7 @@ namespace MvvmCross.Forms.Droid
         public IMvxViewModel ViewModel
         {
             get { return DataContext as IMvxViewModel; }
-            set
-            {
-                DataContext = value;
-            }
+            set { DataContext = value; }
         }
 
         protected override void OnCreate(Bundle bundle)

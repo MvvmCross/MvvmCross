@@ -1,4 +1,4 @@
-// WARNING
+﻿// WARNING
 //
 // This file has been generated automatically by Xamarin Studio from the outlets and
 // actions declared in your storyboard file.
@@ -20,7 +20,7 @@ namespace Playground.iOS.Views
 
         void ReleaseDesignerOutlets()
         {
-            if(btnClose != null)
+            if (btnClose != null)
             {
                 btnClose.Dispose();
                 btnClose = null;

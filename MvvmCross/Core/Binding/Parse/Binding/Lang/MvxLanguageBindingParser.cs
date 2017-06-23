@@ -1,4 +1,4 @@
-// MvxLanguageBindingParser.cs
+﻿// MvxLanguageBindingParser.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,8 +10,7 @@ using MvvmCross.Platform.Exceptions;
 namespace MvvmCross.Binding.Parse.Binding.Lang
 {
     public class MvxLanguageBindingParser
-        : MvxBindingParser
-          , IMvxLanguageBindingParser
+        : MvxBindingParser, IMvxLanguageBindingParser
     {
         public MvxBindingMode DefaultBindingMode { get; set; }
 

@@ -12,7 +12,6 @@ using UIKit;
 
 namespace MvvmCross.iOS.Support.XamarinSidebar.Views
 {
-
     public class MvxSidebarViewController : UIViewController, IMvxSidebarViewController
     {
         private readonly UIViewController _subRootViewController;
@@ -40,14 +39,14 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
             var leftSideMenu = ResolveSideMenu(MvxPanelEnum.Left);
             var rightSideMenu = ResolveSideMenu(MvxPanelEnum.Right);
 
-            if(leftSideMenu == null && rightSideMenu == null)
+            if (leftSideMenu == null && rightSideMenu == null)
             {
                 Mvx.Trace(MvxTraceLevel.Warning, $"No sidemenu found. To use a sidemenu decorate the viewcontroller class with the 'MvxPanelPresentationAttribute' class and set the panel to 'Left' or 'Right'.");
                 AttachNavigationController();
                 return;
             }
 
-            if(leftSideMenu != null && rightSideMenu != null)
+            if (leftSideMenu != null && rightSideMenu != null)
             {
                 LeftSidebarController = new SidebarController(_subRootViewController, NavigationController, leftSideMenu);
                 ConfigureSideMenu(LeftSidebarController);
@@ -55,13 +54,13 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
                 RightSidebarController = new SidebarController(this, _subRootViewController, rightSideMenu);
                 ConfigureSideMenu(RightSidebarController);
             }
-            else if(leftSideMenu != null)
+            else if (leftSideMenu != null)
             {
                 LeftSidebarController = new SidebarController(this, NavigationController, leftSideMenu);
                 RightSidebarController = null;
                 ConfigureSideMenu(LeftSidebarController);
             }
-            else if(rightSideMenu != null)
+            else if (rightSideMenu != null)
             {
                 LeftSidebarController = null;
                 RightSidebarController = new SidebarController(this, NavigationController, rightSideMenu);
@@ -84,12 +83,12 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
                          where attribute.Panel == location
                          select type).ToArray();
 
-            if(types == null || types.Length == 0)
+            if (types == null || types.Length == 0)
             {
                 return null;
             }
 
-            if(types != null && types.Length > 1)
+            if (types != null && types.Length > 1)
             {
                 Mvx.Trace(MvxTraceLevel.Warning, $"Found more then one {location.ToString()} panel, using the first one in the array ({types[0].ToString()}).");
             }
@@ -106,14 +105,14 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
 
         protected virtual Type GetBaseType(Type type)
         {
-            while(type.BaseType != null)
+            while (type.BaseType != null)
             {
                 type = type.BaseType;
-                if(type.IsGenericType)
+                if (type.IsGenericType)
                 {
                     var viewModelType = type.GetGenericArguments().FirstOrDefault(argument => typeof(IMvxViewModel).IsAssignableFrom(argument));
 
-                    if(viewModelType != null)
+                    if (viewModelType != null)
                     {
                         return viewModelType;
                     }
@@ -127,7 +126,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
         {
             var mvxSideMenuSettings = sidebarController.MenuAreaController as IMvxSidebarMenu;
 
-            if(mvxSideMenuSettings != null)
+            if (mvxSideMenuSettings != null)
             {
                 sidebarController.DarkOverlayAlpha = mvxSideMenuSettings.DarkOverlayAlpha;
                 sidebarController.HasDarkOverlay = mvxSideMenuSettings.HasDarkOverlay;
@@ -190,9 +189,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
 
         public void Open(MvxPanelEnum panelEnum)
         {
-            if(panelEnum == MvxPanelEnum.Left)
+            if (panelEnum == MvxPanelEnum.Left)
                 OpenMenu(LeftSidebarController);
-            else if(panelEnum == MvxPanelEnum.Right)
+            else if (panelEnum == MvxPanelEnum.Right)
                 OpenMenu(RightSidebarController);
         }
 
@@ -218,7 +217,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
 
         public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
         {
-            if(NavigationController.ViewControllers.Count() > 1)
+            if (NavigationController.ViewControllers.Count() > 1)
             {
                 NavigationController.PopViewController(true);
                 return true;

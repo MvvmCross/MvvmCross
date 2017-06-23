@@ -1,4 +1,5 @@
-﻿using MvvmCross.Core.Navigation;
+﻿using System.Threading.Tasks;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using RoutingExample.Core.ViewModels;
 
@@ -15,7 +16,13 @@ namespace RoutingExample.Core
 
         public void Start(object hint = null)
         {
-            _navigationService.Navigate<MainViewModel>();
+            try
+            {
+                _navigationService.Navigate<MainViewModel>().GetAwaiter().GetResult();
+            }
+            catch (System.Exception e)
+            {
+            }
         }
     }
 }

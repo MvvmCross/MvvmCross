@@ -11,8 +11,7 @@ using MvvmCross.Core.Views;
 namespace MvvmCross.Uwp.Views
 {
     public class MvxWindowsViewDispatcher
-        : MvxWindowsMainThreadDispatcher
-          , IMvxViewDispatcher
+        : MvxWindowsMainThreadDispatcher, IMvxViewDispatcher
     {
         private readonly IMvxWindowsViewPresenter _presenter;
 

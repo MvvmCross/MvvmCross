@@ -20,7 +20,8 @@ namespace MvvmCross.Binding.Droid.Target
 
         public MvxExpandableListViewSelectedItemTargetBinding(MvxExpandableListView target)
             : base(target)
-        { }
+        {
+        }
 
         protected MvxExpandableListView ListView => (MvxExpandableListView)Target;
 

@@ -25,7 +25,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 
         public MvxAppCompatSpinnerSelectedItemBinding(MvxAppCompatSpinner spinner)
             : base(spinner)
-        { }
+        {
+        }
 
         private void SpinnerItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {

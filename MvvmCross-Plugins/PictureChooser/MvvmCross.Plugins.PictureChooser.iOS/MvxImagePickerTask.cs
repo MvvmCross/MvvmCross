@@ -20,8 +20,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
 {
     [Preserve(AllMembers = true)]
 	public class MvxImagePickerTask
-        : MvxIosTask
-          , IMvxPictureChooserTask
+        : MvxIosTask, IMvxPictureChooserTask
     {
         private readonly UIImagePickerController _picker;
         private readonly IMvxIosModalHost _modalHost;

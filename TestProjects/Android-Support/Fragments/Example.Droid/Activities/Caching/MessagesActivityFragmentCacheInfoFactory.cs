@@ -1,4 +1,4 @@
-namespace Example.Droid.Activities.Caching
+﻿namespace Example.Droid.Activities.Caching
 {
     /*internal class MessagesActivityFragmentCacheInfoFactory : MvxCachedFragmentInfoFactory
     {
@@ -6,10 +6,10 @@ namespace Example.Droid.Activities.Caching
             <string, CustomFragmentInfo>
         {
             {
-                typeof (ComposeMessageViewModel).ToString(),
-                new CustomFragmentInfo(typeof (ComposeMessageViewModel).Name,
-                                       typeof (MessageComposeFragment),
-                                       typeof (MenuViewModel))
+                typeof(ComposeMessageViewModel).ToString(),
+                new CustomFragmentInfo(typeof(ComposeMessageViewModel).Name,
+                                       typeof(MessageComposeFragment),
+                                       typeof(MenuViewModel))
             },
             
         };
@@ -61,7 +61,6 @@ namespace Example.Droid.Activities.Caching
         {
             public SerializableCustomFragmentInfo()
             {
-
             }
 
             public SerializableCustomFragmentInfo(SerializableMvxCachedFragmentInfo baseFragmentInfo)

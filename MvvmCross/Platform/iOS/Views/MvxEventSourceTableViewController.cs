@@ -13,8 +13,7 @@ using UIKit;
 namespace MvvmCross.Platform.iOS.Views
 {
     public class MvxEventSourceTableViewController
-        : UITableViewController
-          , IMvxEventSourceViewController
+        : UITableViewController, IMvxEventSourceViewController
     {
         protected MvxEventSourceTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
             : base(style)

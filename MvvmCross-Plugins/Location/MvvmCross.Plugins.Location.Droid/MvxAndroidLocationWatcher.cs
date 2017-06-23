@@ -20,8 +20,7 @@ namespace MvvmCross.Plugins.Location.Droid
 {
     [Preserve(AllMembers = true)]
 	public sealed class MvxAndroidLocationWatcher
-        : MvxLocationWatcher
-          , IMvxLocationReceiver
+        : MvxLocationWatcher, IMvxLocationReceiver
     {
         private Context _context;
         private LocationManager _locationManager;

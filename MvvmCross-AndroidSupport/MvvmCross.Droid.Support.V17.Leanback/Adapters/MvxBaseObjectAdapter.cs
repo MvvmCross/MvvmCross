@@ -11,7 +11,8 @@ using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
 {
-    public abstract class MvxBaseObjectAdapter : ObjectAdapter, IMvxObjectAdapter
+    public abstract class MvxBaseObjectAdapter 
+        : ObjectAdapter, IMvxObjectAdapter
     {
         public event EventHandler DataSetChanged;
 
@@ -23,7 +24,10 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
 
         public IEnumerable ItemsSource
         {
-            get { return _itemsSource; }
+            get
+            {
+                return _itemsSource;
+            }
             set
             {
                 if (ReferenceEquals(_itemsSource, value))
@@ -66,25 +70,30 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
             BindingContext = bindingContext;
         }
 
-        protected MvxBaseObjectAdapter(Presenter presenter) : this(presenter, MvxAndroidBindingContextHelpers.Current())
+        protected MvxBaseObjectAdapter(Presenter presenter) 
+            : this(presenter, MvxAndroidBindingContextHelpers.Current())
         {
         }
 
-        protected MvxBaseObjectAdapter(Presenter presenter, IMvxAndroidBindingContext bindingContext) : base(presenter)
-        {
-            BindingContext = bindingContext;
-        }
-
-        protected MvxBaseObjectAdapter(PresenterSelector presenterSelector) : this(presenterSelector, MvxAndroidBindingContextHelpers.Current())
-        {
-        }
-
-        protected MvxBaseObjectAdapter(PresenterSelector presenterSelector, IMvxAndroidBindingContext bindingContext) : base(presenterSelector)
+        protected MvxBaseObjectAdapter(Presenter presenter, IMvxAndroidBindingContext bindingContext) 
+            : base(presenter)
         {
             BindingContext = bindingContext;
         }
 
-        protected MvxBaseObjectAdapter(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected MvxBaseObjectAdapter(PresenterSelector presenterSelector) 
+            : this(presenterSelector, MvxAndroidBindingContextHelpers.Current())
+        {
+        }
+
+        protected MvxBaseObjectAdapter(PresenterSelector presenterSelector, IMvxAndroidBindingContext bindingContext) 
+            : base(presenterSelector)
+        {
+            BindingContext = bindingContext;
+        }
+
+        protected MvxBaseObjectAdapter(IntPtr javaReference, JniHandleOwnership transfer) 
+            : base(javaReference, transfer)
         {
         }
 
@@ -129,12 +138,12 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
             }
         }
 
-        private void RaiseDataSetChanged()
+        protected virtual void RaiseDataSetChanged()
         {
             DataSetChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        private void NotifyAndRaiseDataSetChanged()
+        protected virtual void NotifyAndRaiseDataSetChanged()
         {
             RaiseDataSetChanged();
             NotifyChanged();

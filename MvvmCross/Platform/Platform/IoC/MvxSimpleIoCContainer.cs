@@ -1,4 +1,4 @@
-// MvxSimpleIoCContainer.cs
+﻿// MvxSimpleIoCContainer.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -15,8 +15,7 @@ using MvvmCross.Platform.Exceptions;
 namespace MvvmCross.Platform.IoC
 {
     public class MvxSimpleIoCContainer
-        : MvxSingleton<IMvxIoCProvider>
-          , IMvxIoCProvider
+        : MvxSingleton<IMvxIoCProvider>, IMvxIoCProvider
     {
         public static IMvxIoCProvider Initialize(IMvxIocOptions options = null)
         {

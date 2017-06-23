@@ -39,7 +39,10 @@ namespace MvvmCross.Binding.Mac.Views
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return this._itemsSource; }
+            get
+            {
+                return this._itemsSource;
+            }
             set
             {
                 if (ReferenceEquals(this._itemsSource, value)

@@ -15,8 +15,7 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Core.ViewModels
 {
     public abstract class MvxViewModel
-        : MvxNavigatingObject
-          , IMvxViewModel
+        : MvxNavigatingObject, IMvxViewModel
     {
         protected MvxViewModel()
         {

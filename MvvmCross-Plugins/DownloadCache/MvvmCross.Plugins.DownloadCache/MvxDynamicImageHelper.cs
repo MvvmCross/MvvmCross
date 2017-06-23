@@ -43,7 +43,10 @@ namespace MvvmCross.Plugins.DownloadCache
 
         public string DefaultImagePath
         {
-            get { return _defaultImagePath; }
+            get
+            {
+                return _defaultImagePath;
+            }
             set
             {
                 if (_defaultImagePath == value)
@@ -58,7 +61,10 @@ namespace MvvmCross.Plugins.DownloadCache
 
         public string ErrorImagePath
         {
-            get { return _errorImagePath; }
+            get
+            {
+                return _errorImagePath;
+            }
             set
             {
                 if (_errorImagePath == value)
@@ -70,7 +76,10 @@ namespace MvvmCross.Plugins.DownloadCache
 
         public string ImageUrl
         {
-            get { return _imageUrl; }
+            get
+            {
+                return _imageUrl;
+            }
             set
             {
                 if (_imageUrl == value)
