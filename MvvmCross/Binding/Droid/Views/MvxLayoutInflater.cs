@@ -93,7 +93,8 @@ namespace MvvmCross.Binding.Droid.Views
 
         public MvxLayoutInflater(IntPtr handle, JniHandleOwnership transfer)
             : base(handle, transfer)
-        { }
+        {
+        }
 
         public override LayoutInflater CloneInContext(Context newContext)
         {
@@ -185,7 +186,9 @@ namespace MvvmCross.Binding.Droid.Views
                 {
                     return CreateView(name, prefix, attrs);
                 }
-                catch (ClassNotFoundException) { }
+                catch (ClassNotFoundException) 
+                {
+                }
             }
             return null;
         }
@@ -230,13 +233,15 @@ namespace MvvmCross.Binding.Droid.Views
             // own secret sauce.
             if (Sdk > BuildVersionCodes.Honeycomb)
             {
-                if (Factory2 != null && !(Factory2 is MvxLayoutInflaterCompat.FactoryWrapper2)) // Check for FactoryWrapper2 may be too loose
+                // Check for FactoryWrapper2 may be too loose
+                if (Factory2 != null && !(Factory2 is MvxLayoutInflaterCompat.FactoryWrapper2))
                 {
                     MvxLayoutInflaterCompat.SetFactory(this, new DelegateFactory2(Factory2, _bindingVisitor));
                 }
             }
 
-            if (Factory != null && !(Factory is MvxLayoutInflaterCompat.FactoryWrapper)) // Check for FactoryWrapper may be too loose
+            // Check for FactoryWrapper may be too loose
+            if (Factory != null && !(Factory is MvxLayoutInflaterCompat.FactoryWrapper))
             {
                 MvxLayoutInflaterCompat.SetFactory(this, new DelegateFactory1(Factory, _bindingVisitor));
             }
@@ -311,7 +316,9 @@ namespace MvvmCross.Binding.Droid.Views
                     {
                         view = CreateView(name, null, attrs);
                     }
-                    catch (ClassNotFoundException) { }
+                    catch (ClassNotFoundException) 
+                    {
+                    }
                     finally
                     {
                         constructorArgsArr[0] = lastContext;
@@ -393,7 +400,8 @@ namespace MvvmCross.Binding.Droid.Views
 
             public PrivateFactoryWrapper2(IntPtr handle, JniHandleOwnership transfer)
                 : base(handle, transfer)
-            { }
+            {
+            }
 
             public View OnCreateView(string name, Context context, IAttributeSet attrs)
             {

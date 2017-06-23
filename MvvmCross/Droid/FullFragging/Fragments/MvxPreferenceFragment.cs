@@ -17,7 +17,8 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         protected MvxPreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public IMvxBindingContext BindingContext { get; set; }
 
@@ -25,7 +26,10 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         public object DataContext
         {
-            get { return _dataContext; }
+            get
+            {
+                return _dataContext;
+            }
             set
             {
                 _dataContext = value;
@@ -36,7 +40,10 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get
+            {
+                return DataContext as IMvxViewModel;
+            }
             set
             {
                 DataContext = value;
@@ -85,14 +92,13 @@ namespace MvvmCross.Droid.FullFragging.Fragments
         : MvxPreferenceFragment
         , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
     {
-
         protected MvxPreferenceFragment()
         {
-
         }
 
-        protected MvxPreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
-
+        protected MvxPreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
 
         public new TViewModel ViewModel
         {

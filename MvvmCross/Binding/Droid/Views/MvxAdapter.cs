@@ -87,7 +87,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public virtual int ItemTemplateId
         {
-            get { return _itemTemplateId; }
+            get 
+            { 
+                return _itemTemplateId; 
+            }
             set
             {
                 if (_itemTemplateId == value)
@@ -102,7 +105,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public virtual int DropDownItemTemplateId
         {
-            get { return _dropDownItemTemplateId; }
+            get 
+            { 
+                return _dropDownItemTemplateId; 
+            }
             set
             {
                 if (_dropDownItemTemplateId == value)

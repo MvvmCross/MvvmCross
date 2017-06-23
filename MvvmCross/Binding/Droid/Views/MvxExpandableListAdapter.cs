@@ -14,11 +14,13 @@ namespace MvvmCross.Binding.Droid.Views
     {
         public MvxExpandableListAdapter(Context context)
             : base(context)
-        { }
+        {
+        }
         
         public MvxExpandableListAdapter(Context context, IMvxAndroidBindingContext bindingContext)
             : base(context, bindingContext)
-        { }
+        {
+        }
 
         protected MvxExpandableListAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
@@ -29,7 +31,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public int GroupTemplateId
         {
-            get { return _groupTemplateId; }
+            get
+            {
+                return _groupTemplateId;
+            }
             set
             {
                 if (_groupTemplateId == value)

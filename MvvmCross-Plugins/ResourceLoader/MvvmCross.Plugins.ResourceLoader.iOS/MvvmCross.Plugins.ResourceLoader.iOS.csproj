@@ -39,7 +39,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MvxTouchResourceLoader.cs" />
+    <Compile Include="MvxIosResourceLoader.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>

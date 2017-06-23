@@ -6,6 +6,8 @@
 
         public string TabIconName { get; set; }
 
+        public string TabSelectedIconName { get; set; }
+
         public bool WrapInNavigationController { get; set; } = true;
 
         public string TabAccessibilityIdentifier { get; set; }

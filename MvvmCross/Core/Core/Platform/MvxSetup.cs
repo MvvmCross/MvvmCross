@@ -383,7 +383,10 @@ namespace MvvmCross.Core.Platform
 
         public MvxSetupState State
         {
-            get { return _state; }
+            get
+            {
+                return _state;
+            }
             private set
             {
                 _state = value;

@@ -5,19 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-
 namespace MvvmCross.Platform.Mac.Views
 {
     using System;
-
     using AppKit;
     using Foundation;
-
     using MvvmCross.Platform.Core;
 
     public class MvxEventSourceViewController
-        : NSViewController
-          , IMvxEventSourceViewController
+        : NSViewController, IMvxEventSourceViewController
     {
         protected MvxEventSourceViewController()
         {
@@ -90,7 +86,7 @@ namespace MvvmCross.Platform.Mac.Views
 
         protected override void Dispose(bool disposing)
         {
-            if(disposing)
+            if (disposing)
             {
                 this.DisposeCalled.Raise(this);
             }

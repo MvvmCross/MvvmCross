@@ -12,8 +12,7 @@ namespace MvvmCross.Plugins.Share.Droid
 {
     [Preserve(AllMembers = true)]
 	public class MvxShareTask
-        : MvxAndroidTask
-          , IMvxShareTask
+        : MvxAndroidTask, IMvxShareTask
     {
         public void ShareShort(string message)
         {

@@ -45,6 +45,5 @@ namespace MvvmCross.Forms.Presenters
                 contextOwner.BindingContext.DataContext = mvxPage.ViewModel;
             }
         }
-
     }
 }

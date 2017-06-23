@@ -91,7 +91,10 @@ namespace MvvmCross.Binding.BindingContext
 
         public object DataContext
         {
-            get { return _dataContext; }
+            get
+            {
+                return _dataContext;
+            }
             set
             {
                 if (_dataContext == value)
@@ -102,7 +105,6 @@ namespace MvvmCross.Binding.BindingContext
                 DataContextChanged?.Invoke(this, EventArgs.Empty);
             }
         }
-
 
         /// <summary>
         /// Must be called on main thread as it creates the target bindings, and creating target bindings might subscribe to events that

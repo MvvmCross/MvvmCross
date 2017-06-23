@@ -103,4 +103,3 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 		}
 	}
 }
-

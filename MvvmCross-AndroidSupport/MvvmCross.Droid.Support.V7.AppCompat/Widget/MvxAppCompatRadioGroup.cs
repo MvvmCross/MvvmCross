@@ -75,7 +75,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         public IMvxAdapterWithChangedEvent Adapter
         {
-            get { return _adapter; }
+            get
+            {
+                return _adapter;
+            }
             protected set
             {
                 var existing = _adapter;
@@ -114,19 +117,19 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return Adapter.ItemsSource; }
-            set { Adapter.ItemsSource = value; }
+            get => Adapter.ItemsSource;
+            set => Adapter.ItemsSource = value;
         }
 
         public int ItemTemplateId
         {
-            get { return Adapter.ItemTemplateId; }
-            set { Adapter.ItemTemplateId = value; }
+            get => Adapter.ItemTemplateId;
+            set => Adapter.ItemTemplateId = value;
         }
 
         private static long _nextGeneratedViewId = 1;
 
-        private new static int GenerateViewId()
+        private static new int GenerateViewId()
         {
             for (;;)
             {

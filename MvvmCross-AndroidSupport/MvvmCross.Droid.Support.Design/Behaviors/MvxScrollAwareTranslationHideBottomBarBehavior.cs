@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Android.Content;
 using Android.Runtime;
 using Android.Support.Design.Widget;
@@ -11,7 +11,8 @@ using Object = Java.Lang.Object;
 namespace MvvmCross.Droid.Support.Design.Behaviors
 {
     [Register("mvvmcross.droid.support.design.behaviors.MvxScrollAwareTranslationAutoHideBehavior")]
-    public class MvxScrollAwareTranslationHideBottomBarBehavior : CoordinatorLayout.Behavior
+    public class MvxScrollAwareTranslationHideBottomBarBehavior 
+        : CoordinatorLayout.Behavior
     {
         private static readonly float MinimalScrollDistance = 25;
         private bool isBottomBarVisible = true;
@@ -27,6 +28,7 @@ namespace MvvmCross.Droid.Support.Design.Behaviors
         }
 
         public MvxScrollAwareTranslationHideBottomBarBehavior(Context context, IAttributeSet attributeSet)
+            : base(context, attributeSet)
         {
         }
 

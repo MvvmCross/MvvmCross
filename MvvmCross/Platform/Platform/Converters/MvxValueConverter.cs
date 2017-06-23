@@ -1,4 +1,4 @@
-// MvxValueConverter.cs
+﻿// MvxValueConverter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -36,7 +36,7 @@ namespace MvvmCross.Platform.Converters
             catch (Exception e)
             {
                 Mvx.TaggedError("MvxValueConverter",
-                    $"Failed to Convert from {typeof (TFrom)} to {typeof (TTo)} with Exception: {e}");
+                    $"Failed to Convert from {typeof(TFrom)} to {typeof(TTo)} with Exception: {e}");
                 return MvxBindingConstant.UnsetValue;
             }
         }

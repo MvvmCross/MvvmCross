@@ -20,8 +20,7 @@ namespace MvvmCross.Binding.Droid.Views
 {
     [Register("mvvmcross.binding.droid.views.MvxFrameControl")]
     public class MvxFrameControl
-        : FrameLayout
-          , IMvxBindingContextOwner
+        : FrameLayout, IMvxBindingContextOwner
     {
         private readonly int _templateId;
         private readonly IMvxAndroidBindingContext _bindingContext;
@@ -102,7 +101,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         protected View Content
         {
-            get { return _content; }
+            get
+            {
+                return _content;
+            }
             set
             {
                 _content = value;
@@ -110,12 +112,17 @@ namespace MvvmCross.Binding.Droid.Views
             }
         }
 
-        protected virtual void OnContentSet() { }
+        protected virtual void OnContentSet()
+        {
+        }
 
         [MvxSetToNullAfterBinding]
         public object DataContext
         {
-            get { return _bindingContext.DataContext; }
+            get
+            {
+                return _bindingContext.DataContext;
+            }
             set
             {
                 if (_isAttachedToWindow)

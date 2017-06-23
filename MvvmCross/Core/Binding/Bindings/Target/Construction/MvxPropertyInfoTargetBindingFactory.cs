@@ -32,7 +32,10 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 
         #region IMvxPluginTargetBindingFactory Members
 
-        public IEnumerable<MvxTypeAndNamePair> SupportedTypes => new[] { new MvxTypeAndNamePair { Name = _targetName, Type = _targetType } };
+        public IEnumerable<MvxTypeAndNamePair> SupportedTypes => new[]
+        { 
+            new MvxTypeAndNamePair { Name = _targetName, Type = _targetType } 
+        };
 
         public IMvxTargetBinding CreateBinding(object target, string targetName)
         {

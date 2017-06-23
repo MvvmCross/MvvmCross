@@ -17,8 +17,7 @@ namespace MvvmCross.Plugins.Network.Rest
 {
     [Preserve(AllMembers = true)]
 	public class MvxJsonRestClient
-        : MvxRestClient
-          , IMvxJsonRestClient
+        : MvxRestClient, IMvxJsonRestClient
     {
         public Func<IMvxJsonConverter> JsonConverterProvider { get; set; }
 
@@ -50,7 +49,7 @@ namespace MvvmCross.Plugins.Network.Rest
             {
                 var streamResponse = await MakeStreamRequestAsync(restRequest, cancellationToken).ConfigureAwait(false);
 
-                if(streamResponse.StatusCode == HttpStatusCode.BadRequest)
+                if (streamResponse.StatusCode == HttpStatusCode.BadRequest)
                 {
                     decodedResponse.StatusCode = HttpStatusCode.BadRequest;
                 }

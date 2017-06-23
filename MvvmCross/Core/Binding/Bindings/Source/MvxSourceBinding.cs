@@ -1,4 +1,4 @@
-// MvxSourceBinding.cs
+﻿// MvxSourceBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,8 +10,7 @@ using System;
 namespace MvvmCross.Binding.Bindings.Source
 {
     public abstract class MvxSourceBinding
-        : MvxBinding
-          , IMvxSourceBinding
+        : MvxBinding, IMvxSourceBinding
     {
         private readonly object _source;
 

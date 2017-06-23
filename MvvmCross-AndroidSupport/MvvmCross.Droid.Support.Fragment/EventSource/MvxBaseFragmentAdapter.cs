@@ -85,7 +85,7 @@ namespace MvvmCross.Droid.Support.V4.EventSource
         }
 
         protected virtual void HandleCreateViewCalled(object sender,
-                                                      MvxValueEventArgs<MvxCreateViewParameters> mvxValueEventArgs)
+            MvxValueEventArgs<MvxCreateViewParameters> mvxValueEventArgs)
         {
         }
     }

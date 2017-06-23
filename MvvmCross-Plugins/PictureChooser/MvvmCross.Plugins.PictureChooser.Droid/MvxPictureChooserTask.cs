@@ -27,9 +27,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
 {
     [Preserve(AllMembers = true)]
 	public class MvxPictureChooserTask
-        : MvxAndroidTask
-          , IMvxPictureChooserTask
-          
+        : MvxAndroidTask, IMvxPictureChooserTask
     {
         private Uri _cachedUriLocation;
         private RequestParameters _currentRequestParameters;
@@ -64,7 +62,6 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
             ChoosePictureCommon(MvxIntentRequestCode.PickFromCamera, intent, maxPixelDimension, percentQuality,
                                 (stream, name) => pictureAvailable(stream), assumeCancelled);
         }
-
 
         public Task<Stream> ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality)
         {
@@ -199,8 +196,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
         {
             ContentResolver contentResolver = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.ContentResolver;
             var maxDimensionSize = GetMaximumDimension(contentResolver, uri);
-            var sampleSize = (int) Math.Ceiling(maxDimensionSize/
-                                                (double) _currentRequestParameters.MaxPixelDimension);
+            var sampleSize = (int) Math.Ceiling(maxDimensionSize / (double) _currentRequestParameters.MaxPixelDimension);
             if (sampleSize < 1)
             {
                 // this shouldn't happen, but if it does... then trace the error and set sampleSize to 1

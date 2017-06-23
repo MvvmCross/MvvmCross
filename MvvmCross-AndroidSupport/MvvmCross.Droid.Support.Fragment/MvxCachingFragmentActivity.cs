@@ -29,7 +29,8 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Droid.Support.V4
 {
     [Register("mvvmcross.droid.support.v4.MvxCachingFragmentActivity")]
-    public class MvxCachingFragmentActivity : MvxFragmentActivity, IFragmentCacheableActivity, IMvxFragmentHost
+    public class MvxCachingFragmentActivity 
+        : MvxFragmentActivity, IFragmentCacheableActivity, IMvxFragmentHost
     {
 		public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
 		private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
@@ -48,7 +49,8 @@ namespace MvvmCross.Droid.Support.V4
 
 		protected MvxCachingFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer)
 			: base(javaReference, transfer)
-		{}
+		{
+        }
 
 		protected override void OnCreate(Bundle bundle)
 		{
@@ -194,7 +196,7 @@ namespace MvvmCross.Droid.Support.V4
 				savedStateConverter.Write(bundle, mvxBundle);
 				outState.PutBundle(info.Tag, bundle);
 
-				if(!typesForKeys.ContainsKey(info.Tag))
+				if (!typesForKeys.ContainsKey(info.Tag))
 					typesForKeys.Add(info.Tag, info.ViewModelType);
 			}
 
@@ -414,7 +416,9 @@ namespace MvvmCross.Droid.Support.V4
 		}
 
 		// Called before the transaction is commited
-		public virtual void OnFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction) { }
+		public virtual void OnFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction)
+        {
+        }
 
 		public virtual void OnFragmentChanged(IMvxCachedFragmentInfo fragmentInfo)
 		{
@@ -489,8 +493,9 @@ namespace MvvmCross.Droid.Support.V4
     }
 
     public abstract class MvxCachingFragmentActivity<TViewModel>
-        : MvxCachingFragmentActivity
-    , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxCachingFragmentActivity, 
+        IMvxAndroidView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {

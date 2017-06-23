@@ -63,7 +63,8 @@ namespace MvvmCross.Test.Navigation
 
         protected void SetupRoutings()
         {
-            RoutingService = new MvxNavigationService(){
+            RoutingService = new MvxNavigationService
+            {
                 ViewDispatcher = MockDispatcher.Object
             };
         }
@@ -94,7 +95,6 @@ namespace MvvmCross.Test.Navigation
                 Times.Once);
         }
 
-
         [Test]
         public async Task TestRegexWithParametersAsync()
         {
@@ -105,7 +105,6 @@ namespace MvvmCross.Test.Navigation
                 Times.Once);
         }
 
-
         [Test]
         public async Task TestFacadeAsync()
         {
@@ -115,6 +114,5 @@ namespace MvvmCross.Test.Navigation
                 x => x.ShowViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(ViewModelA))),
                 Times.Once);
         }
-
     }
 }

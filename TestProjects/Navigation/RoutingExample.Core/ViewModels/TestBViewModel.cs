@@ -10,10 +10,8 @@ namespace RoutingExample.Core.ViewModels
     public class TestBViewModel
         : MvxViewModel<User, User>
     {
-
         public TestBViewModel()
         {
-
         }
 
         private string _id;

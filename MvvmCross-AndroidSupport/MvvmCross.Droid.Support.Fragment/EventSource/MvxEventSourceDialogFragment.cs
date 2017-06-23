@@ -18,8 +18,7 @@ using MvvmCross.Platform.Core;
 namespace MvvmCross.Droid.Support.V4.EventSource
 {
     public class MvxEventSourceDialogFragment
-        : DialogFragment
-        , IMvxEventSourceFragment
+        : DialogFragment, IMvxEventSourceFragment
     {
         public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
 
@@ -53,7 +52,8 @@ namespace MvvmCross.Droid.Support.V4.EventSource
 
         protected MvxEventSourceDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        { }
+        {
+        }
 
 		public override void OnAttach(Context context)
         {

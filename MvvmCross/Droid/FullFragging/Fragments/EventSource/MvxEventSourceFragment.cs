@@ -54,7 +54,8 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 
         protected MvxEventSourceFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        { }
+        {
+        }
 
 		public override void OnAttach(Context context)
 		{

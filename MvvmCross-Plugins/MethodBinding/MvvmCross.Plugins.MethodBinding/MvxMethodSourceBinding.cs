@@ -15,8 +15,7 @@ namespace MvvmCross.Plugins.MethodBinding
 {
     [Preserve(AllMembers = true)]
 	public class MvxMethodSourceBinding
-        : MvxSourceBinding
-          , ICommand
+        : MvxSourceBinding, ICommand
     {
         private readonly MethodInfo _methodInfo;
 

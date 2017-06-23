@@ -6,7 +6,6 @@ namespace Example.Core.ViewModels
 {
     public class RecyclerViewMultiItemTemplateViewModel : MvxViewModel
     {
-
         public RecyclerViewMultiItemTemplateViewModel()
         {
             Items = new ObservableCollection<MultiItemTemplateModel>();

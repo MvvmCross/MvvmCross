@@ -1,4 +1,4 @@
-// MvxSplashScreenActivity.cs
+﻿// MvxSplashScreenActivity.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,8 +16,7 @@ namespace MvvmCross.Droid.Views
 {
     [Register("mvvmcross.droid.views.MvxSplashScreenActivity")]
     public abstract class MvxSplashScreenActivity
-        : MvxActivity
-          , IMvxAndroidSplashScreenActivity
+        : MvxActivity, IMvxAndroidSplashScreenActivity
     {
         private const int NoContent = 0;
 

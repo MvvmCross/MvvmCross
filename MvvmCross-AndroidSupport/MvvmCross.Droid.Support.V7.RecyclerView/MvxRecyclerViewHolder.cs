@@ -15,7 +15,8 @@ using MvvmCross.Binding.Droid.BindingContext;
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerViewHolder")]
-    public class MvxRecyclerViewHolder : Android.Support.V7.Widget.RecyclerView.ViewHolder, IMvxRecyclerViewHolder, IMvxBindingContextOwner
+    public class MvxRecyclerViewHolder 
+        : Android.Support.V7.Widget.RecyclerView.ViewHolder, IMvxRecyclerViewHolder, IMvxBindingContextOwner
     {
         private readonly IMvxBindingContext _bindingContext;
 
@@ -31,7 +32,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public object DataContext
         {
-            get { return _bindingContext.DataContext; }
+            get
+            {
+                return _bindingContext.DataContext;
+            }
             set
             {
                 _bindingContext.DataContext = value;
@@ -45,7 +49,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public ICommand Click
         {
-            get { return _click; }
+            get
+            {
+                return _click;
+            }
             set
             {
                 _click = value;
@@ -64,7 +71,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public ICommand LongClick
         {
-            get { return _longClick; }
+            get
+            {
+                return _longClick;
+            }
             set
             {
                 _longClick = value;

@@ -56,7 +56,10 @@ namespace MvvmCross.Uwp.Views
 
         public IMvxViewModel ViewModel
         {
-            get { return _viewModel; }
+            get
+            {
+                return _viewModel;
+            }
             set
             {
                 if (_viewModel == value)
@@ -166,7 +169,6 @@ namespace MvvmCross.Uwp.Views
             var frameState = SuspensionManager.SessionStateForFrame(WrappedFrame);
             frameState[_pageKey] = bundle.Data;
         }
-
 
         public void Dispose()
         {

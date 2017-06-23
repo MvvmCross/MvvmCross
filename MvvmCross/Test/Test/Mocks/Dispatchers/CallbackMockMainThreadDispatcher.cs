@@ -11,8 +11,7 @@ using MvvmCross.Platform.Core;
 namespace MvvmCross.Test.Mocks.Dispatchers
 {
     public class CallbackMockMainThreadDispatcher
-        : MvxMainThreadDispatcher
-          , IMvxMainThreadDispatcher
+        : MvxMainThreadDispatcher, IMvxMainThreadDispatcher
     {
         private readonly Func<Action, bool> _callback;
 

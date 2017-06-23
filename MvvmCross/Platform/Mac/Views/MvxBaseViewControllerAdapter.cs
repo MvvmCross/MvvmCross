@@ -5,11 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-
 namespace MvvmCross.Platform.Mac.Views
 {
     using AppKit;
-
     using System;
 
     public class MvxBaseViewControllerAdapter
@@ -23,10 +21,10 @@ namespace MvvmCross.Platform.Mac.Views
 
         public MvxBaseViewControllerAdapter(IMvxEventSourceViewController eventSource)
         {
-            if(eventSource == null)
+            if (eventSource == null)
                 throw new ArgumentException("eventSource - eventSource should not be null");
 
-            if(!(eventSource is NSViewController))
+            if (!(eventSource is NSViewController))
                 throw new ArgumentException("eventSource - eventSource should be a NSViewController");
 
             this._eventSource = eventSource;

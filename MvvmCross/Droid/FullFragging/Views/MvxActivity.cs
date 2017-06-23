@@ -31,7 +31,8 @@ namespace MvvmCross.Droid.FullFragging.Views
 
         protected MvxActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         protected MvxActivity()
         {
@@ -47,7 +48,10 @@ namespace MvvmCross.Droid.FullFragging.Views
 
         public IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get 
+            { 
+                return DataContext as IMvxViewModel; 
+            }
             set
             {
                 DataContext = value;

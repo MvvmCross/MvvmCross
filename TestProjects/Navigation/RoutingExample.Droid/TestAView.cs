@@ -10,7 +10,6 @@ namespace RoutingExample.Droid
     [Activity(Label = "A", Icon = "@mipmap/icon")]
     public class TestAView : MvxActivity<TestAViewModel>
     {
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);

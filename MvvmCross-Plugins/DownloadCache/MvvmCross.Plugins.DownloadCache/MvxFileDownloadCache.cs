@@ -19,8 +19,7 @@ namespace MvvmCross.Plugins.DownloadCache
 {
     [Preserve(AllMembers = true)]
 	public class MvxFileDownloadCache
-        : MvxLockableObject
-        , IMvxFileDownloadCache
+        : MvxLockableObject, IMvxFileDownloadCache
     {
         private const string CacheIndexFileName = "_CacheIndex.txt";
         private static readonly TimeSpan PeriodSaveInterval = TimeSpan.FromSeconds(1.0);
@@ -73,8 +72,8 @@ namespace MvvmCross.Plugins.DownloadCache
                 Success = success;
             }
 
-            public Action<string> Success { get; private set; }
-            public Action<Exception> Error { get; private set; }
+            public Action<string> Success { get; }
+            public Action<Exception> Error { get; }
         }
 
         private readonly List<string> _toDeleteFiles = new List<string>();
@@ -105,7 +104,7 @@ namespace MvvmCross.Plugins.DownloadCache
             QueueOutOfDateFilesForDelete();
 
             _indexNeedsSaving = false;
-            _periodicTaskTimer = new Timer((ignored) => DoPeriodicTasks(), null, PeriodSaveInterval, PeriodSaveInterval);
+            _periodicTaskTimer = new Timer(ignored => DoPeriodicTasks(), null, PeriodSaveInterval, PeriodSaveInterval);
         }
 
         #region Constructor helper methods
@@ -170,10 +169,6 @@ namespace MvvmCross.Plugins.DownloadCache
                     return list.ToDictionary(x => x.HttpSource, x => x);
                 }
             }
-            //catch (ThreadAbortException)
-            //{
-            //    throw;
-            //}
             catch (Exception exception)
             {
                 MvxTrace.Warning("Failed to read cache index {0} - reason {1}", _cacheFolder,

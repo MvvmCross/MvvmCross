@@ -17,12 +17,12 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 {
     [Register("mvvmcross.droid.fullfragging.fragments.MvxDialogFragment")]
     public abstract class MvxDialogFragment
-        : MvxEventSourceDialogFragment
-          , IMvxFragmentView
+        : MvxEventSourceDialogFragment, IMvxFragmentView
     {
         protected MvxDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         protected MvxDialogFragment()
         {
@@ -35,7 +35,10 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         public object DataContext
         {
-            get { return _dataContext; }
+            get
+            {
+                return _dataContext;
+            }
             set
             {
                 _dataContext = value;
@@ -89,8 +92,7 @@ namespace MvvmCross.Droid.FullFragging.Fragments
     }
 
     public abstract class MvxDialogFragment<TViewModel>
-        : MvxDialogFragment
-          , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxDialogFragment, IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {

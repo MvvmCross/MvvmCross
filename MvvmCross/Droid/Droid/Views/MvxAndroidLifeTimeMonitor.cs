@@ -1,4 +1,4 @@
-// MvxAndroidLifeTimeMonitor.cs
+﻿// MvxAndroidLifeTimeMonitor.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -17,9 +17,7 @@ namespace MvvmCross.Droid.Views
     // basically we just want to intercept the activity as early as possible
     // regardless of whether the activity has come from an app switch or a new start or...
     public class MvxAndroidLifetimeMonitor
-        : MvxLifetimeMonitor
-          , IMvxAndroidActivityLifetimeListener
-          , IMvxAndroidCurrentTopActivity
+        : MvxLifetimeMonitor, IMvxAndroidActivityLifetimeListener, IMvxAndroidCurrentTopActivity
     {
         private int _createdActivityCount;
 

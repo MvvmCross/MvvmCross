@@ -25,11 +25,8 @@ namespace MvvmCross.Droid.Support.V4
 {
     [Register("mvvmcross.droid.support.v4.MvxTabsFragmentActivity")]
     public abstract class MvxTabsFragmentActivity
-        : MvxFragmentActivity
-          , TabHost.IOnTabChangeListener
-          , ViewTreeObserver.IOnGlobalLayoutListener
+        : MvxFragmentActivity, TabHost.IOnTabChangeListener, ViewTreeObserver.IOnGlobalLayoutListener
     {
-
         private const string SavedTabIndexStateKey = "__savedTabIndex";
 
         private readonly Dictionary<string, TabInfo> _lookup = new Dictionary<string, TabInfo>();
@@ -68,8 +65,7 @@ namespace MvvmCross.Droid.Support.V4
         }
 
         private class TabFactory
-            : Object
-              , TabHost.ITabContentFactory
+            : Object, TabHost.ITabContentFactory
         {
             private readonly Context _context;
 
@@ -148,9 +144,9 @@ namespace MvvmCross.Droid.Support.V4
         }
 
         private static void AddTab(MvxTabsFragmentActivity activity,
-                                   TabHost tabHost,
-                                   TabHost.TabSpec tabSpec,
-                                   TabInfo tabInfo)
+            TabHost tabHost,
+            TabHost.TabSpec tabSpec,
+            TabInfo tabInfo)
         {
             // Attach a Tab view factory to the spec
             tabSpec.SetContent(new TabFactory(activity));

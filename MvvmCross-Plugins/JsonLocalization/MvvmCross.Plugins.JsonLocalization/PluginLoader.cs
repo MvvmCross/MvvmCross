@@ -25,7 +25,6 @@ namespace MvvmCross.Plugins.JsonLocalization
             }
 
             // nothing to register here - this isn't much of a plugin really!
-
             _loaded = true;
         }
     }

@@ -20,7 +20,7 @@ namespace MvvmCross.CodeAnalysis.Analyzers
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        private static readonly string[] SubscribeMethods = new []
+        private static readonly string[] SubscribeMethods = new[]
         {
             "Subscribe",
             "SubscribeOnMainThread",

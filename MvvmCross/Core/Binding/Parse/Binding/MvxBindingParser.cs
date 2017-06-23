@@ -1,4 +1,4 @@
-// MvxBindingParser.cs
+﻿// MvxBindingParser.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,8 +16,7 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Binding.Parse.Binding
 {
     public abstract class MvxBindingParser
-        : MvxParser
-          , IMvxBindingParser
+        : MvxParser, IMvxBindingParser
     {
         protected abstract MvxSerializableBindingDescription ParseBindingDescription();
 

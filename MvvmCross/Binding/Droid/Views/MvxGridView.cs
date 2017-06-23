@@ -51,7 +51,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public new IMvxAdapter Adapter
         {
-            get { return base.Adapter as IMvxAdapter; }
+            get
+            {
+                return base.Adapter as IMvxAdapter;
+            }
             set
             {
                 var existing = Adapter;
@@ -86,7 +89,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public new ICommand ItemClick
         {
-            get { return _itemClick; }
+            get
+            {
+                return _itemClick;
+            }
             set
             {
                 _itemClick = value;
@@ -111,7 +117,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public new ICommand ItemLongClick
         {
-            get { return _itemLongClick; }
+            get
+            {
+                return _itemLongClick;
+            }
             set
             {
                 _itemLongClick = value;

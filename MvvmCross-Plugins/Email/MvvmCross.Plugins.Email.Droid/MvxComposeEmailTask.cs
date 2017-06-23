@@ -29,7 +29,7 @@ namespace MvvmCross.Plugins.Email.Droid
 
         public void ComposeEmail(string to, string cc = null, string subject = null, string body = null, bool isHtml = false, string dialogTitle = null)
         {
-            var toArray = to == null ? null: new[] { to };
+            var toArray = to == null ? null : new[] { to };
             var ccArray = cc == null ? null : new[] { cc };
             ComposeEmail(
                 toArray,
@@ -66,7 +66,7 @@ namespace MvvmCross.Plugins.Email.Droid
                 emailIntent.SetType("text/html");
 
                 ICharSequence htmlBody;
-                if(Build.VERSION.SdkInt >= BuildVersionCodes.N)
+                if (Build.VERSION.SdkInt >= BuildVersionCodes.N)
                     htmlBody = Html.FromHtml(body, FromHtmlOptions.ModeLegacy);
                 else
 #pragma warning disable CS0618 // Type or member is obsolete

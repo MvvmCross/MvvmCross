@@ -20,7 +20,7 @@ namespace MvvmCross.Platform.Plugins
 
         protected virtual void PreLoad(IMvxPluginManager manager)
         {
-            manager.Registry.Register<TPlugin, TPlatformPlugin> ();
+            manager.Registry.Register<TPlugin, TPlatformPlugin>();
         }
     }
 }

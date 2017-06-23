@@ -11,8 +11,8 @@ using UIKit;
 
 namespace MvvmCross.iOS.Views
 {
-    internal static class MvxSegueExtensionMethods {
-
+    internal static class MvxSegueExtensionMethods 
+    {
         internal static Type GetViewModelType(this IMvxView view)
         {
             var viewType = view.GetType();
