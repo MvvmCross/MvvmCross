@@ -92,4 +92,3 @@ namespace MvvmCross.Droid.Support.V4
         }
     }
 }
-

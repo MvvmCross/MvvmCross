@@ -8,7 +8,6 @@ namespace MvvmCross.Binding.Droid.Target
         protected MvxAndroidPropertyInfoTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-            
         }
 
         protected override bool ShouldSkipSetValueForPlatformSpecificReasons(object target, object value)

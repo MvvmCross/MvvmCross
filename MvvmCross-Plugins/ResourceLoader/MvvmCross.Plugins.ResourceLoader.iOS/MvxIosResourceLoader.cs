@@ -13,7 +13,6 @@ namespace MvvmCross.Plugins.ResourceLoader.iOS
 {
     public class MvxIosResourceLoader
         : MvxResourceLoader
-
     {
         public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {

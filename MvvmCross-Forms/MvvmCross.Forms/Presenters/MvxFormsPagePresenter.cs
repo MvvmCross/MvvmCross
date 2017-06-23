@@ -86,7 +86,6 @@ namespace MvvmCross.Forms.Presenters
             else {
                 page.BindingContext = viewModel;
             }
-
         }
 
         private bool TryShowPage(MvxViewModelRequest request)

@@ -18,4 +18,3 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
         void MenuDidClose();
     }
 }
-

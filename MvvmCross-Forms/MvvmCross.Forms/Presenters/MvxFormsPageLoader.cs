@@ -48,7 +48,7 @@ namespace MvvmCross.Forms.Presenters
 			{
 				return _viewFinder.GetViewType (request.ViewModelType);
 			}
-			catch(KeyNotFoundException) 
+			catch (KeyNotFoundException) 
 			{
 				var pageName = GetPageName(request);
 				return request.ViewModelType.GetTypeInfo().Assembly.CreatableTypes()

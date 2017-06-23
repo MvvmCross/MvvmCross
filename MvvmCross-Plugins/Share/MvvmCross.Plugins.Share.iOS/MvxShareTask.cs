@@ -16,7 +16,6 @@ namespace MvvmCross.Plugins.Share.iOS
     [Preserve(AllMembers = true)]
 	public class MvxShareTask
         : MvxIosTask, IMvxShareTask
-
     {
         private readonly IMvxIosModalHost _modalHost;
         private TWTweetComposeViewController _tweet;
