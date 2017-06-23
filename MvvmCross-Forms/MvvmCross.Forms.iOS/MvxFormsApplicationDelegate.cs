@@ -53,4 +53,3 @@ namespace MvvmCross.Forms.iOS
         #endregion IMvxLifetime implementation
     }
 }
-

@@ -21,7 +21,5 @@ namespace MvvmCross.iOS.Support.Views.Expandable.Controllers
 
 			return new ToggleExpandStateResponse(expandedIndexes, collapsedIndexes);
 		}
-
-	
 	}
 }

@@ -22,6 +22,5 @@ namespace MvvmCross.Forms.ViewModels
     internal interface IMvxMasterDetailViewModel<TRootContentPageViewModel> : IMvxMasterDetailViewModel
         where TRootContentPageViewModel : IMvxViewModel
     {
-        
     }
 }

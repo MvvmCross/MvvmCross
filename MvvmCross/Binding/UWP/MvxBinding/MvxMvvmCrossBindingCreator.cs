@@ -14,8 +14,6 @@ using MvvmCross.Binding.Bindings;
 
 namespace MvvmCross.Binding.Uwp.MvxBinding
 {
-
-
     public class MvxMvvmCrossBindingCreator : MvxBindingCreator
     {
         protected override void ApplyBindings(FrameworkElement attachedObject,

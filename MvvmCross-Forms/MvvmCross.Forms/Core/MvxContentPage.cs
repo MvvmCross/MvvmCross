@@ -45,5 +45,3 @@ namespace MvvmCross.Forms.Core
         }
     }
 }
-
-

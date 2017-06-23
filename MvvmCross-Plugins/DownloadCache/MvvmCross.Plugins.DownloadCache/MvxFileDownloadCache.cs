@@ -169,10 +169,6 @@ namespace MvvmCross.Plugins.DownloadCache
                     return list.ToDictionary(x => x.HttpSource, x => x);
                 }
             }
-            //catch (ThreadAbortException)
-            //{
-            //    throw;
-            //}
             catch (Exception exception)
             {
                 MvxTrace.Warning("Failed to read cache index {0} - reason {1}", _cacheFolder,

@@ -88,6 +88,5 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
 
         private static int[] MvxRecyclerViewItemTemplateSelectorGroupId { get; set; }
         private static int MvxRecyclerViewItemTemplateSelector { get; set; }
-
     }
 }

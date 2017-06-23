@@ -13,7 +13,6 @@ namespace MvvmCross.Plugins.WebBrowser
     [Preserve(AllMembers = true)]
     public class PluginLoader
         : IMvxPluginLoader
-
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 

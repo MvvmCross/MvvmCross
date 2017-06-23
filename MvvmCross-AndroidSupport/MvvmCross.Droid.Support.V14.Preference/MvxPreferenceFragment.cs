@@ -57,7 +57,6 @@ namespace MvvmCross.Droid.Support.V14.Preference
 		: MvxPreferenceFragment, IMvxFragmentView<TViewModel> 
         where TViewModel : class, IMvxViewModel
 	{
-
 		protected MvxPreferenceFragment()
 		{
 		}

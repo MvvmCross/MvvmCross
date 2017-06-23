@@ -17,7 +17,6 @@ namespace MvvmCross.iOS.Support.Views
         public MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
         {
         }
-
     }
 
     public abstract class MvxExpandableTableViewSource<TItemSource, TItem> : MvxTableViewSource where TItemSource : IEnumerable<TItem>
