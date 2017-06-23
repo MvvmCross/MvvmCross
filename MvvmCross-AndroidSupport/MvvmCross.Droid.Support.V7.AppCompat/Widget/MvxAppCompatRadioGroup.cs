@@ -75,7 +75,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         public IMvxAdapterWithChangedEvent Adapter
         {
-            get { return _adapter; }
+            get
+            {
+                return _adapter;
+            }
             protected set
             {
                 var existing = _adapter;

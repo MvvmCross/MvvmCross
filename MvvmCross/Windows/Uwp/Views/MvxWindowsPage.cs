@@ -56,7 +56,10 @@ namespace MvvmCross.Uwp.Views
 
         public IMvxViewModel ViewModel
         {
-            get { return _viewModel; }
+            get
+            {
+                return _viewModel;
+            }
             set
             {
                 if (_viewModel == value)

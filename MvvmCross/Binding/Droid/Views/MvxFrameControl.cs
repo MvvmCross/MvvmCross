@@ -101,7 +101,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         protected View Content
         {
-            get { return _content; }
+            get
+            {
+                return _content;
+            }
             set
             {
                 _content = value;
@@ -116,7 +119,10 @@ namespace MvvmCross.Binding.Droid.Views
         [MvxSetToNullAfterBinding]
         public object DataContext
         {
-            get { return _bindingContext.DataContext; }
+            get
+            {
+                return _bindingContext.DataContext;
+            }
             set
             {
                 if (_isAttachedToWindow)

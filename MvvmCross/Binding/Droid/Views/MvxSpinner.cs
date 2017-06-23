@@ -48,7 +48,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public new IMvxAdapter Adapter
         {
-            get { return base.Adapter as IMvxAdapter; }
+            get
+            {
+                return base.Adapter as IMvxAdapter;
+            }
             set
             {
                 var existing = Adapter;

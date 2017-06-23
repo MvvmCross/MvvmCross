@@ -10,14 +10,14 @@ namespace Playground.Core.ViewModels
         public string Hello
         {
             get { return _hello; }
-            set { _hello = value; RaisePropertyChanged(() => Hello); }
+            set { SetProperty(ref _hello, value); }
         }
 
         private int _counter = 2;
         public int Counter
         {
             get { return _counter; }
-            set { _counter = value; RaisePropertyChanged(() => Counter); }
+            set { SetProperty(ref _counter, value); }
         }
 
         private ICommand _showChildCommand;

@@ -212,7 +212,10 @@ namespace MvvmCross.iOS.Support.Views
 	    private bool isAccordionExpandCollapseEnabled;
 	    public bool IsAccordionExpandCollapseEnabled
 	    {
-		    get { return isAccordionExpandCollapseEnabled; }
+		    get
+            {
+                return isAccordionExpandCollapseEnabled;
+            }
 		    set
 		    {
 				if (isAccordionExpandCollapseEnabled == value)

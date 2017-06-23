@@ -17,11 +17,14 @@ namespace MasterDetailExample.Core.ViewModels
     {
         private MenuItem _menuItem;
         public MenuItem SelectedMenu {
-            get { return _menuItem; }
+            get { 
+                return _menuItem; 
+            }
             set {
                 if (SetProperty(ref _menuItem, value))
                     OnSelectedChangedCommand.Execute(value);
-            } }
+            } 
+        }
 
         private IEnumerable<MenuItem> _menu;
         public IEnumerable<MenuItem> Menu { get { return _menu; } set { SetProperty(ref _menu, value); } }

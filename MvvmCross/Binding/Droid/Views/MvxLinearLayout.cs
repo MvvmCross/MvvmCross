@@ -58,7 +58,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public IMvxAdapterWithChangedEvent Adapter
         {
-            get { return _adapter; }
+            get
+            {
+                return _adapter;
+            }
             protected set
             {
                 var existing = _adapter;

@@ -38,7 +38,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public DateTime Value
         {
-            get { return MvxJavaDateUtils.DateTimeFromJava(Year, Month, DayOfMonth); }
+            get
+            {
+                return MvxJavaDateUtils.DateTimeFromJava(Year, Month, DayOfMonth);
+            }
             set
             {
                 var javaYear = value.Year;

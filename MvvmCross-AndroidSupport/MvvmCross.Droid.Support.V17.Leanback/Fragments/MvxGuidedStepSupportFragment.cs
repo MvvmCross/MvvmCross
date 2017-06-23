@@ -43,7 +43,10 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         public object DataContext
         {
-            get { return _dataContext; }
+            get
+            {
+                return _dataContext;
+            }
             set
             {
                 _dataContext = value;
@@ -54,7 +57,10 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get
+            { 
+                return DataContext as IMvxViewModel;
+            }
             set
             {
                 DataContext = value;

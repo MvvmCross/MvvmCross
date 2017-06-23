@@ -81,7 +81,10 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
 
         public new IMvxRecyclerAdapter Adapter
         {
-            get { return GetAdapter() as IMvxRecyclerAdapter; }
+            get
+            {
+                return GetAdapter() as IMvxRecyclerAdapter;
+            }
             set
             {
                 var existing = Adapter;

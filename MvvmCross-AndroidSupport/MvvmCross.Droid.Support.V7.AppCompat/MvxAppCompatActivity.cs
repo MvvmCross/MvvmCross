@@ -45,7 +45,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         public IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get
+            {
+                return DataContext as IMvxViewModel;
+            }
             set
             {
                 DataContext = value;

@@ -10,7 +10,7 @@ namespace Example.ViewModels
         public string YourNickname
 		{ 
 			get { return _yourNickname; }
-			set { _yourNickname = value; RaisePropertyChanged(() => YourNickname); RaisePropertyChanged(() => Hello); }
+			set { SetProperty(ref _yourNickname, value); RaisePropertyChanged(() => Hello); }
 		}
 
         public string Hello
