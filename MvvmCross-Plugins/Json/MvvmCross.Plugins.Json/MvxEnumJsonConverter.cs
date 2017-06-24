@@ -23,8 +23,7 @@ namespace MvvmCross.Plugins.Json
 #endif
         }
 
-        public override void WriteJson(JsonWriter writer, object
-                                                              value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             writer.WriteValue(value.ToString());
         }

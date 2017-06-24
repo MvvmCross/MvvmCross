@@ -18,24 +18,21 @@ namespace MvvmCross.Platform.WeakSubscription
     public static class MvxWeakSubscriptionExtensionMethods
     {
         public static MvxNotifyPropertyChangedEventSubscription WeakSubscribe(this INotifyPropertyChanged source,
-                                                                              EventHandler<PropertyChangedEventArgs>
-                                                                                  eventHandler)
+                                                                              EventHandler<PropertyChangedEventArgs> eventHandler)
         {
             return new MvxNotifyPropertyChangedEventSubscription(source, eventHandler);
         }
 
         public static MvxNamedNotifyPropertyChangedEventSubscription<T> WeakSubscribe<T>(this INotifyPropertyChanged source,
                                                                                Expression<Func<T>> property,
-                                                                               EventHandler<PropertyChangedEventArgs>
-                                                                                   eventHandler)
+                                                                               EventHandler<PropertyChangedEventArgs> eventHandler)
         {
             return new MvxNamedNotifyPropertyChangedEventSubscription<T>(source, property, eventHandler);
         }
 
         public static MvxNamedNotifyPropertyChangedEventSubscription<T> WeakSubscribe<T>(this INotifyPropertyChanged source,
                                                                                string property,
-                                                                               EventHandler<PropertyChangedEventArgs>
-                                                                                   eventHandler)
+                                                                               EventHandler<PropertyChangedEventArgs> eventHandler)
         {
             return new MvxNamedNotifyPropertyChangedEventSubscription<T>(source, property, eventHandler);
         }

@@ -212,7 +212,7 @@ namespace MvvmCross.Droid.Platform
 
         protected virtual IDictionary<string, string> ViewNamespaceAbbreviations => new Dictionary<string, string>
         {
-            {"Mvx", "MvvmCross.Binding.Droid.Views"}
+            { "Mvx", "MvvmCross.Binding.Droid.Views" }
         };
 
         protected virtual IEnumerable<string> ViewNamespaces => new List<string>

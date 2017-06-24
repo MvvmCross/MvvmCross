@@ -65,8 +65,7 @@ namespace MvvmCross.Binding.iOS.Views
         }
 
         public MvxTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
-                                UITableViewCellAccessory tableViewCellAccessory =
-                                    UITableViewCellAccessory.None)
+                                UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(cellStyle, cellIdentifier)
         {
             Accessory = tableViewCellAccessory;
@@ -75,8 +74,7 @@ namespace MvvmCross.Binding.iOS.Views
 
         public MvxTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
                                 UITableViewCellStyle cellStyle, NSString cellIdentifier,
-                                UITableViewCellAccessory tableViewCellAccessory =
-                                    UITableViewCellAccessory.None)
+                                UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(cellStyle, cellIdentifier)
         {
             // note that we allow the virtual Accessory property to be set here - but do not seal

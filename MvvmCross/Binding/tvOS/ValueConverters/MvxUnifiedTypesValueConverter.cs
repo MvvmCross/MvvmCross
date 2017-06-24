@@ -24,9 +24,9 @@ namespace MvvmCross.Binding.tvOS.ValueConverters
         {
             var initDictionary = new Dictionary<Type, Type>()
                 {
-                    {typeof(float), typeof(nfloat)},
-                    {typeof(int), typeof(nint)},
-                    {typeof(uint), typeof(nuint)}
+                    { typeof(float), typeof(nfloat) },
+                    { typeof(int), typeof(nint) },
+                    { typeof(uint), typeof(nuint) }
                 };
 
             UnifiedTypeConversions = new ReadOnlyDictionary<Type, Type>(initDictionary);
