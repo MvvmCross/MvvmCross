@@ -29,8 +29,8 @@ namespace MvvmCross.Test.ViewModels
             {
                 AdditionalSaveStateFields = new Dictionary<string, string>
                 {
-                    {"Life1", "John"},
-                    {"Life2", "Jane"},
+                    { "Life1", "John" },
+                    { "Life2", "Jane" }
                 },
                 SaveStateBundleObject = new BundleObject
                 {
