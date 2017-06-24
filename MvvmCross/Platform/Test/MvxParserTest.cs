@@ -128,14 +128,14 @@ namespace MvvmCross.Platform.Test
         {
             var testStrings = new Dictionary<string, string>
                 {
-                    {"''", ""},
-                    {"\"Hello \\\"\\\'\"", "Hello \"\'"},
-                    {"\"Hello\"", "Hello"},
-                    {"'Hello'", "Hello"},
-                    {"'Hello World'", "Hello World"},
-                    {"'Hello \\r'", "Hello \r"},
-                    {"'Hello \\u1234'", "Hello \u1234"},
-                    {"'Hello \\U00001234'", "Hello \U00001234"},
+                    { "''", "" },
+                    { "\"Hello \\\"\\\'\"", "Hello \"\'" },
+                    { "\"Hello\"", "Hello" },
+                    { "'Hello'", "Hello" },
+                    { "'Hello World'", "Hello World" },
+                    { "'Hello \\r'", "Hello \r" },
+                    { "'Hello \\u1234'", "Hello \u1234" },
+                    { "'Hello \\U00001234'", "Hello \U00001234" }
                 };
 
             foreach (var testString in testStrings)
@@ -153,10 +153,10 @@ namespace MvvmCross.Platform.Test
         {
             var testStrings = new Dictionary<string, uint>
                 {
-                    {"2", 2},
-                    {"1234", 1234},
-                    {uint.MaxValue.ToString(), uint.MaxValue},
-                    {uint.MinValue.ToString(), uint.MinValue},
+                    { "2", 2 },
+                    { "1234", 1234 },
+                    { uint.MaxValue.ToString(), uint.MaxValue },
+                    { uint.MinValue.ToString(), uint.MinValue }
                 };
 
             foreach (var testString in testStrings)
@@ -174,10 +174,10 @@ namespace MvvmCross.Platform.Test
         {
             var tests = new Dictionary<string, object>
                 {
-                    {"\'Foo Bar\'", "Foo Bar"},
-                    {"\"Foo Bar\"", "Foo Bar"},
-                    {"\'Foo \\\' \\\" Bar\'", "Foo \' \" Bar"},
-                    {"\"Foo \\\' \\\" Bar\"", "Foo \' \" Bar"},
+                    { "\'Foo Bar\'", "Foo Bar" },
+                    { "\"Foo Bar\"", "Foo Bar" },
+                    { "\'Foo \\\' \\\" Bar\'", "Foo \' \" Bar" },
+                    { "\"Foo \\\' \\\" Bar\"", "Foo \' \" Bar" },
                 };
             DoReadValueTests(tests);
         }
@@ -202,12 +202,12 @@ namespace MvvmCross.Platform.Test
         {
             var tests = new Dictionary<string, object>
                 {
-                    {"TruE", true},
-                    {"true", true},
-                    {"TRUE", true},
-                    {"faLsE", false},
-                    {"FALSE", false},
-                    {"false", false},
+                    { "TruE", true },
+                    { "true", true },
+                    { "TRUE", true },
+                    { "faLsE", false },
+                    { "FALSE", false },
+                    { "false", false }
                 };
             DoReadValueTests(tests);
         }
