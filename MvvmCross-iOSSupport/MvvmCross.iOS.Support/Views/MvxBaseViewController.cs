@@ -190,7 +190,6 @@ namespace MvvmCross.iOS.Support.Views
             View.AddGestureRecognizer(tap);
         }
 
-
 		/// <summary>
 		/// Selects next TextField to become FirstResponder.
 		/// Usage: textField.ShouldReturn += TextFieldShouldReturn;

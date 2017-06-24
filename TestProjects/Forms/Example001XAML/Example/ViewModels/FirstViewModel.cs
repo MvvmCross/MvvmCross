@@ -9,8 +9,14 @@ namespace Example.ViewModels
 		private string _yourNickname = string.Empty;
         public string YourNickname
 		{ 
-			get { return _yourNickname; }
-			set { SetProperty(ref _yourNickname, value); RaisePropertyChanged(() => Hello); }
+			get
+            {
+                return _yourNickname;
+            }
+			set
+            {
+                SetProperty(ref _yourNickname, value); RaisePropertyChanged(() => Hello);
+            }
 		}
 
         public string Hello

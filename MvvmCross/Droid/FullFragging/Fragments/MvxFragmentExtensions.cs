@@ -55,7 +55,6 @@ namespace MvvmCross.Droid.FullFragging.Fragments
             var cached = cache.GetAndClear(viewModelType, fragmentView.UniqueImmutableCacheTag);
 
             view.OnViewCreate(() => cached ?? fragmentView.LoadViewModel(bundle, fragment.Activity.GetType(), request));
-
         }
 
         public static Fragment ToFragment(this IMvxFragmentView fragmentView)
