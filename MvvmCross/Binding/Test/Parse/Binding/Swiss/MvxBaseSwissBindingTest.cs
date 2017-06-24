@@ -206,11 +206,11 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
 
         private readonly Dictionary<string, object> _values = new Dictionary<string, object>
             {
-                {string.Empty, null},
-                {"'One'", "One"},
-                {"true", true},
-                {"123", 123L},
-                {"1.23", 1.23},
+                { string.Empty, null },
+                { "'One'", "One" },
+                { "true", true },
+                { "123", 123L },
+                { "1.23", 1.23 },
             };
 
         private IEnumerable<PerformSimpleTestParams> GenerateSampledTestParameters(int everyN, int maxToReturn)

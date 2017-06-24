@@ -21,9 +21,9 @@ namespace MvvmCross.Test.Platform
             const string value = "42";
             var dictionary = new Dictionary<string, string>
             {
-                {"ChildProperty", value},
-                {"BasePropertyInternalSet", value},
-                {"BasePropertyPublicSet", value}
+                { "ChildProperty", value },
+                { "BasePropertyInternalSet", value },
+                { "BasePropertyPublicSet", value }
             };
 
             var deserialized = dictionary.Read<ObjectWithValidPropertiesInBaseClass>();

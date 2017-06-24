@@ -226,7 +226,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
         {
             using (var inputStream = contentResolver.OpenInputStream(uri))
             {
-                var optionsDecode = new BitmapFactory.Options {InSampleSize = sampleSize};
+                var optionsDecode = new BitmapFactory.Options { InSampleSize = sampleSize };
 
                 return BitmapFactory.DecodeStream(inputStream, null, optionsDecode);
             }
