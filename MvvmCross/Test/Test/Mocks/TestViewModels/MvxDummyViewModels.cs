@@ -12,7 +12,6 @@ namespace MvvmCross.Test.Mocks.TestViewModels
     {
     }
 
-
     public class ViewModelC
         : MvxViewModel
     {

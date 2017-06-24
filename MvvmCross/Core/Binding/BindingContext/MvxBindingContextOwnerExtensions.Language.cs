@@ -59,8 +59,7 @@ namespace MvvmCross.Binding.BindingContext
                                                              Expression<Func<TTarget, object>> targetPropertyExpression
                                                              , string sourceKey
                                                              ,
-                                                             Expression<Func<TViewModel, IMvxLanguageBinder>>
-                                                                 sourcePropertyExpression
+                                                             Expression<Func<TViewModel, IMvxLanguageBinder>> sourcePropertyExpression
                                                              , string fallbackValue = null
                                                              , string converterName = null)
         {

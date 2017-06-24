@@ -12,7 +12,6 @@ namespace MasterDetailExample.Core.ViewModels
     /// This sample will put a simple ListView in the Master and reacts to changes in 
     /// In every platform: use the right Presenter (MvxFormsDroidMasterDetailPagePresenter, ...)
     /// </summary>
-
     public class MainViewModel : MvxMasterDetailViewModel<RootContentViewModel>
     {
         private MenuItem _menuItem;
@@ -27,7 +26,12 @@ namespace MasterDetailExample.Core.ViewModels
         }
 
         private IEnumerable<MenuItem> _menu;
-        public IEnumerable<MenuItem> Menu { get { return _menu; } set { SetProperty(ref _menu, value); } }
+        public IEnumerable<MenuItem> Menu 
+        { 
+            get { return _menu; } 
+            set { SetProperty(ref _menu, value); 
+            } 
+        }
 
         private MvxCommand<MenuItem> _onSelectedChangedCommand;
 

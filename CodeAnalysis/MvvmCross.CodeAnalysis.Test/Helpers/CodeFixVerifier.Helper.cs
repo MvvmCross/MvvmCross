@@ -82,4 +82,3 @@ namespace MvvmCross.CodeAnalysis.Test
         }
     }
 }
-

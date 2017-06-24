@@ -24,8 +24,7 @@ namespace MvvmCross.Platform.WeakSubscription
         }
 
         public MvxNotifyCollectionChangedEventSubscription(INotifyCollectionChanged source,
-                                                           EventHandler<NotifyCollectionChangedEventArgs>
-                                                               targetEventHandler)
+                                                           EventHandler<NotifyCollectionChangedEventArgs> targetEventHandler)
             : base(source, EventInfo, targetEventHandler)
         {
         }

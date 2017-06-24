@@ -18,7 +18,10 @@ namespace MvvmCross.Wpf.Views
 
         public IMvxViewModel ViewModel
         {
-            get { return _viewModel; }
+            get
+            { 
+                return _viewModel;
+            }
             set
             {
                 _viewModel = value;
