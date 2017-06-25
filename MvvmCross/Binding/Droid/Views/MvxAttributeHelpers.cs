@@ -16,39 +16,29 @@ namespace MvvmCross.Binding.Droid.Views
         public static int ReadDropDownListItemTemplateId(Context context, IAttributeSet attrs)
         {
             return ReadAttributeValue(context, attrs,
-                                                                   MvxAndroidBindingResource
-                                                                       .Instance
-                                                                       .ListViewStylableGroupId,
-                                                                   MvxAndroidBindingResource
-                                                                       .Instance
-                                                                       .DropDownListItemTemplateId);
+                                      MvxAndroidBindingResource.Instance.ListViewStylableGroupId,
+                                      MvxAndroidBindingResource.Instance.DropDownListItemTemplateId);
         }
 
         public static int ReadListItemTemplateId(Context context, IAttributeSet attrs)
         {
             return ReadAttributeValue(context, attrs,
-                                                   MvxAndroidBindingResource.Instance
-                                                                            .ListViewStylableGroupId,
-                                                   MvxAndroidBindingResource.Instance
-                                                                            .ListItemTemplateId);
+                                      MvxAndroidBindingResource.Instance.ListViewStylableGroupId,
+                                      MvxAndroidBindingResource.Instance.ListItemTemplateId);
         }
 
         public static int ReadTemplateId(Context context, IAttributeSet attrs)
         {
             return ReadAttributeValue(context, attrs,
-                                                         MvxAndroidBindingResource.Instance
-                                                                                  .ControlStylableGroupId,
-                                                         MvxAndroidBindingResource.Instance
-                                                                                  .TemplateId);
+                                      MvxAndroidBindingResource.Instance.ControlStylableGroupId,
+                                      MvxAndroidBindingResource.Instance.TemplateId);
         }
 
         public static int ReadGroupItemTemplateId(Context context, IAttributeSet attrs)
         {
             return ReadAttributeValue(context, attrs,
-                                                   MvxAndroidBindingResource.Instance
-                                                                            .ExpandableListViewStylableGroupId,
-                                                   MvxAndroidBindingResource.Instance
-                                                                            .GroupItemTemplateId);
+                                      MvxAndroidBindingResource.Instance.ExpandableListViewStylableGroupId,
+                                      MvxAndroidBindingResource.Instance.GroupItemTemplateId);
         }
 
         public static int ReadAttributeValue(Context context, IAttributeSet attrs, int[] groupId,

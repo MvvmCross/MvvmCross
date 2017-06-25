@@ -369,19 +369,19 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
         {
             var operators = new Dictionary<string, string>()
                 {
-                    {"+", "Add"},
-                    {"-", "Subtract"},
-                    {"*", "Multiply"},
-                    {"/", "Divide"},
-                    {"%", "Modulus"},
-                    {">", "GreaterThan"},
-                    {"<", "LessThan"},
-                    {">=", "GreaterThanOrEqualTo"},
-                    {"<=", "LessThanOrEqualTo"},
-                    {"!=", "NotEqualTo"},
-                    {"==", "EqualTo"},
-                    {"&&", "And"},
-                    {"||", "Or"},
+                    { "+", "Add" },
+                    { "-", "Subtract" },
+                    { "*", "Multiply" },
+                    { "/", "Divide" },
+                    { "%", "Modulus" },
+                    { ">", "GreaterThan" },
+                    { "<", "LessThan" },
+                    { ">=", "GreaterThanOrEqualTo" },
+                    { "<=", "LessThanOrEqualTo" },
+                    { "!=", "NotEqualTo" },
+                    { "==", "EqualTo" },
+                    { "&&", "And" },
+                    { "||", "Or" }
                 };
 
             foreach (var kvp in operators)

@@ -102,8 +102,10 @@ namespace MvvmCross.Wpf.Commands
         /// </summary>
         public object CommandParameterValue
         {
-            get { return _commandParameterValue ?? CommandParameter; }
-
+            get
+            {
+                return _commandParameterValue ?? CommandParameter;
+            }
             set
             {
                 _commandParameterValue = value;

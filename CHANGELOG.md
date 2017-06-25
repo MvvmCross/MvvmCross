@@ -1,5 +1,18 @@
 # Change Log
 
+## [5.0.5](https://github.com/MvvmCross/MvvmCross/tree/5.0.5) (2017-06-25)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.4...5.0.5)
+
+**Closed issues:**
+
+- iOS - MvxIosViewPresenter throwing KeyNotFoundException via Show\(\) [\#1991](https://github.com/MvvmCross/MvvmCross/issues/1991)
+
+**Merged pull requests:**
+
+- Prevent KeyNotFoundException from always being throw MvxIosViewPresenter  [\#1992](https://github.com/MvvmCross/MvvmCross/pull/1992) ([Plac3hold3r](https://github.com/Plac3hold3r))
+- Style fixes [\#1990](https://github.com/MvvmCross/MvvmCross/pull/1990) ([martijn00](https://github.com/martijn00))
+
 ## [5.0.4](https://github.com/MvvmCross/MvvmCross/tree/5.0.4) (2017-06-23)
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.3...5.0.4)
 
@@ -15,6 +28,7 @@
 
 **Merged pull requests:**
 
+- Codefactor cleanup [\#1939](https://github.com/MvvmCross/MvvmCross/pull/1939) ([Cheesebaron](https://github.com/Cheesebaron))
 - StyleCop run on some issue's [\#1988](https://github.com/MvvmCross/MvvmCross/pull/1988) ([martijn00](https://github.com/martijn00))
 - Fix a couple of style cop issues [\#1985](https://github.com/MvvmCross/MvvmCross/pull/1985) ([martijn00](https://github.com/martijn00))
 - added features to be able to provided the selected image on tab item [\#1984](https://github.com/MvvmCross/MvvmCross/pull/1984) ([biozal](https://github.com/biozal))
@@ -23,7 +37,6 @@
 - Added FishAngler showcase [\#1976](https://github.com/MvvmCross/MvvmCross/pull/1976) ([jstawski](https://github.com/jstawski))
 - Fix header [\#1973](https://github.com/MvvmCross/MvvmCross/pull/1973) ([Cheesebaron](https://github.com/Cheesebaron))
 - Fix Initialize order [\#1971](https://github.com/MvvmCross/MvvmCross/pull/1971) ([martijn00](https://github.com/martijn00))
-- \[WIP\] Codefactor cleanup [\#1939](https://github.com/MvvmCross/MvvmCross/pull/1939) ([Cheesebaron](https://github.com/Cheesebaron))
 
 ## [5.0.3](https://github.com/MvvmCross/MvvmCross/tree/5.0.3) (2017-06-19)
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.0.2...5.0.3)
@@ -1328,7 +1341,7 @@
 - Unified enum-compatible segmented control with default binding [\#913](https://github.com/MvvmCross/MvvmCross/pull/913) ([TheAlmightyBob](https://github.com/TheAlmightyBob))
 - Set GroupTemplateId on MvxExpandableListView [\#911](https://github.com/MvvmCross/MvvmCross/pull/911) ([kjeremy](https://github.com/kjeremy))
 - Fix crash caused by the MvvmCross environment not being initialized yet ... [\#909](https://github.com/MvvmCross/MvvmCross/pull/909) ([davidschwegler](https://github.com/davidschwegler))
-- SeekBar binding to use event subscription instead of on change listener [\#905](https://github.com/MvvmCross/MvvmCross/pull/905) ([Tom-Pratt](https://github.com/Tom-Pratt))
+- SeekBar binding to use event subscription instead of on change listener [\#905](https://github.com/MvvmCross/MvvmCross/pull/905) ([tom-pratt](https://github.com/tom-pratt))
 - MvxExpandableListView, adapter and selected item binding [\#903](https://github.com/MvvmCross/MvvmCross/pull/903) ([kjeremy](https://github.com/kjeremy))
 - Added virtual IocOptions property [\#897](https://github.com/MvvmCross/MvvmCross/pull/897) ([geirsagberg](https://github.com/geirsagberg))
 - Make presenter serializer protected so it can be used when inheriting MvxFragmentsPresenter [\#895](https://github.com/MvvmCross/MvvmCross/pull/895) ([martijn00](https://github.com/martijn00))

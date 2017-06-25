@@ -18,6 +18,5 @@ namespace MvvmCross.TestProjects.CustomBinding.Core.ViewModels
             get { return _counter; }
             set { SetProperty(ref _counter, value); }
         }
-        
     }
 }

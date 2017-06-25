@@ -158,7 +158,6 @@ namespace AndroidApp.Core.ViewModels
 
         #region Work around to missing IMvxMessengerReferences
 
-
         private const string MvxSubscriptionToken = @"
 using System;
 
