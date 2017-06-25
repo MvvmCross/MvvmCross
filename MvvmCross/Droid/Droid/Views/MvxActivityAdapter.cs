@@ -100,8 +100,7 @@ namespace MvvmCross.Droid.Views
         }
 
         protected override void EventSourceOnActivityResultCalled(object sender,
-                                                                  MvxValueEventArgs<MvxActivityResultParameters>
-                                                                      args)
+                                                                  MvxValueEventArgs<MvxActivityResultParameters> args)
         {
             var sink = Mvx.Resolve<IMvxIntentResultSink>();
             var resultParameters = args.Value;

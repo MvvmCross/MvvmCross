@@ -43,7 +43,6 @@ namespace MvvmCross.Plugins.Network.Test
             Exception exception = null;
             theResponse = await client.MakeRequestForAsync<BookSearchResult>(request);
 
-            
             Assert.IsNotNull(theResponse);
             Assert.IsNull(exception);
             Assert.IsNotNull(theResponse.Result);

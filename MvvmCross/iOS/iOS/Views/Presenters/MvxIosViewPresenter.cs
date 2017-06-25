@@ -92,8 +92,11 @@ namespace MvvmCross.iOS.Views.Presenters
 
             if (_attributeTypesToShowMethodDictionary.TryGetValue(attributeType, 
                 out Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest> showAction))
+            {
                 showAction.Invoke(viewController, attribute, request);
-
+                return;
+            }
+            
             throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
         }
 

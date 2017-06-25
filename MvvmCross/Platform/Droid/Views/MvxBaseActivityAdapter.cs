@@ -91,8 +91,7 @@ namespace MvvmCross.Platform.Droid.Views
         }
 
         protected virtual void EventSourceOnActivityResultCalled(object sender,
-                                                                 MvxValueEventArgs<MvxActivityResultParameters>
-                                                                     MvxValueEventArgs)
+                                                                 MvxValueEventArgs<MvxActivityResultParameters> MvxValueEventArgs)
         {
         }
     }
