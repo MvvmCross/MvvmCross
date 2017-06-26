@@ -122,7 +122,7 @@ When filing issues, please use our [ISSUE_TEMPLATE](/.github/ISSUE_TEMPLATE.md).
 Providing a minimal git repository with a project showing how to reproduce the problem is ideal. Here are a couple of questions you can answer before filing a bug.
 
 1. Did you try find your answer in the [documentation](https://www.mvvmcross.com)
-2. Did you inclide a snippet of the broken code in the issue?
+2. Did you include a snippet of the broken code in the issue?
 3. Can you reproduce the problem in a brand new project?
 4. What are the _*EXACT*_ steps to reproduce this problem?
 5. What platform(s) are you experiencing the problem on?
