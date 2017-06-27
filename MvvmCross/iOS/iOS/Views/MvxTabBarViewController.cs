@@ -64,20 +64,20 @@ namespace MvvmCross.iOS.Views
         //keep changes for selected icon from breaking current release
         protected virtual void SetTitleAndTabBarItem(UIViewController viewController, string title, string iconName)
         {
-            SetTitleAndTabBarItem(viewController, title, iconName, null);
-        }
+            _tabsCount++;
 
-        protected virtual void SetTitleAndTabBarItem(UIViewController viewController, string title, string iconName, string selectedIconName = null)
-        {
             viewController.Title = title;
 
             if (!string.IsNullOrEmpty(iconName))
                 viewController.TabBarItem = new UITabBarItem(title, UIImage.FromBundle(iconName), _tabsCount);
+        }
+
+        protected virtual void SetTitleAndTabBarItem(UIViewController viewController, string title, string iconName, string selectedIconName)
+        {
+            SetTitleAndTabBarItem(viewController, title, iconName);
 
             if (!string.IsNullOrEmpty(selectedIconName))
                 viewController.TabBarItem.SelectedImage = UIImage.FromBundle(selectedIconName);
-
-            _tabsCount++;
         }
 
         public virtual bool ShowChildView(UIViewController viewController)
