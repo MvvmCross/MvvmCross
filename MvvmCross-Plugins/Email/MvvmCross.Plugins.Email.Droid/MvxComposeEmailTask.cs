@@ -134,6 +134,9 @@ namespace MvvmCross.Plugins.Email.Droid
         {
             base.ProcessMvxIntentResult(result);
 
+            if (filesToDelete?.Count == 0)
+                return;
+
             // on return, delete all attachments from external cache
             foreach (File file in filesToDelete)
             {
