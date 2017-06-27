@@ -1,4 +1,6 @@
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Navigation;
+using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
 
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core
@@ -13,7 +15,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart(new AppStart());
+            RegisterAppStart(new AppStart(Mvx.Resolve<IMvxNavigationService>()));
         }
     }
 }
