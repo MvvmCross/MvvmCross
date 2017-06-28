@@ -8,16 +8,10 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core
     public class AppStart : MvxNavigatingObject, IMvxAppStart
     {
         private readonly IMvxNavigationService _navigationService;
-        private Func<IMvxNavigationService> resolve;
 
         public AppStart(IMvxNavigationService navigationService)
         {
             _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
-        }
-
-        public AppStart(Func<IMvxNavigationService> resolve)
-        {
-            this.resolve = resolve;
         }
 
         /// <summary>
