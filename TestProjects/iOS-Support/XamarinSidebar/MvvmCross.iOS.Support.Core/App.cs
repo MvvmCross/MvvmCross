@@ -15,7 +15,11 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart(new AppStart(Mvx.Resolve<IMvxNavigationService>()));
+            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, AppStart>();
+            var appStart = Mvx.Resolve<IMvxAppStart>();
+
+            // register the appstart object
+            RegisterAppStart(appStart);
         }
     }
 }
