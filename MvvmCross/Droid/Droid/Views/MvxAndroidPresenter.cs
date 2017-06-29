@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reflection;
 using Android.App;
 using Android.Content;
+using Android.OS;
+using Java.Lang;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Views.Attributes;
@@ -75,12 +77,12 @@ namespace MvvmCross.Droid.Views
 
         public override void Show(MvxViewModelRequest request)
         {
-            var test = _viewModelToFragmentTypeMap.ContainsKey(request.ViewModelType);
-
             if(_viewModelToFragmentTypeMap.ContainsKey(request.ViewModelType))
             {
                 var fragmentType = _viewModelToFragmentTypeMap.GetValueOrDefault(request.ViewModelType);
+
                 var attribute = _fragmentTypeToPresentationAttributeMap.GetValueOrDefault(fragmentType).FirstOrDefault();
+                attribute.ViewType = fragmentType;
 
                 Action<MvxBasePresentationAttribute, MvxViewModelRequest> showAction;
                 if (!_attributeTypesToShowMethodDictionary.TryGetValue(attribute.GetType(), out showAction))
@@ -123,6 +125,13 @@ namespace MvvmCross.Droid.Views
             MvxFragmentAttribute attribute,
             MvxViewModelRequest request)
         {
+            var fragmentName = FragmentJavaName(attribute.ViewType);
+            var fragment = Fragment.Instantiate(CurrentActivity, fragmentName);
+
+            var ft = CurrentActivity.FragmentManager.BeginTransaction();
+            ft.Replace(attribute.FragmentContentId, fragment, fragmentName);
+            ft.CommitNowAllowingStateLoss();
+
             //TODO: Check if Activity host is already on screen
             //TODO: Check if Activity base extends FragmentActivity
             //TODO: Load Activity if not shown yet
@@ -134,7 +143,10 @@ namespace MvvmCross.Droid.Views
             MvxDialogAttribute attribute,
             MvxViewModelRequest request)
         {
-            //var dialog = DialogFragment.Instantiate(this, FragmentJavaName());
+            var fragmentName = FragmentJavaName(attribute.ViewType);
+            var dialog = Fragment.Instantiate(CurrentActivity, fragmentName) as DialogFragment;
+            dialog.Show(CurrentActivity.FragmentManager, fragmentName);
+
 
             //var fragmentType = _fragmentHostRegistrationSettings.GetFragmentTypeAssociatedWith(request.ViewModelType);
 
@@ -147,6 +159,11 @@ namespace MvvmCross.Droid.Views
             //TODO: Check if class implements IDialogInterface
             //TODO: Check if class is a Fragment
             //TODO: Show as Dialog or DialogFragment
+        }
+
+        protected virtual string FragmentJavaName(Type fragmentType)
+        {
+            return Class.FromType(fragmentType).Name;
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)

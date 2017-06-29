@@ -38,7 +38,7 @@ namespace MvvmCross.Droid.Views.Attributes
         {
             var mvxFragmentAttributes = fromFragmentType.GetBasePresentationAttributes();
             var activityViewModelType = GetActivityViewModelType(fragmentActivityParentType);
-            var mvxFragmentAttribute = mvxFragmentAttributes.FirstOrDefault(x => x.ParentActivityViewModelType == activityViewModelType);
+            var mvxFragmentAttribute = mvxFragmentAttributes.FirstOrDefault();
 
             if (mvxFragmentAttribute == null)
                 throw new InvalidOperationException($"Sorry but Fragment Type: {fromFragmentType} hasn't registered any Activity with ViewModel Type {fragmentActivityParentType}");
@@ -63,8 +63,12 @@ namespace MvvmCross.Droid.Views.Attributes
             if (!fragmentType.HasBasePresentationAttribute())
                 return false;
 
-            var mvxFragmentAttribute = (MvxFragmentAttribute)fragmentType.GetBasePresentationAttribute(fragmentActivityParentType);
-            return mvxFragmentAttribute.IsCacheableFragment;
+            var attribute = fragmentType.GetBasePresentationAttribute(fragmentActivityParentType);
+
+            if (attribute is MvxFragmentAttribute fragmentAttribute)
+                return fragmentAttribute.IsCacheableFragment;
+            else
+                return false;
         }
 
         public static Type GetViewModelType(this Type fragmentType)
