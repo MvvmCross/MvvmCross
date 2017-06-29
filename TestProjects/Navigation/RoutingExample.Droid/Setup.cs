@@ -29,28 +29,10 @@ namespace RoutingExample.Droid
         }
     }
 
-    public class MyViewPresenter : MvxAndroidViewPresenter
+    public class MyViewPresenter : MvxAndroidPresenter
     {
         public MyViewPresenter(IEnumerable<Assembly> AndroidViewAssemblies) : base(AndroidViewAssemblies)
         {
-        }
-
-        protected override IMvxFragmentView CreateFragment(System.Type fragType, Android.OS.Bundle bundle)
-        {
-            var fragment = Fragment.Instantiate(Activity, FragmentJavaName(fragType)) as IMvxFragmentView;
-
-            if(fragment is DialogFragment)
-            {
-                ((DialogFragment)fragment).Show(((AppCompatActivity)Activity).SupportFragmentManager, "test");
-            }
-
-            return fragment;
-        }
-
-        protected override void ReplaceFragment(MvxFragmentAttribute mvxFragmentAttributeAssociated, IMvxFragmentView fragment, string fragmentTag)
-        {
-            var ft = (Activity as MvxCachingFragmentCompatActivity).SupportFragmentManager.BeginTransaction();
-            ft.Replace(mvxFragmentAttributeAssociated.FragmentContentId, fragment as Fragment, fragmentTag);
         }
     }
 }

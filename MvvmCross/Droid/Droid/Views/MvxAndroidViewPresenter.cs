@@ -43,6 +43,16 @@ namespace MvvmCross.Droid.Views
 
         protected Dictionary<Type, Action<MvxBasePresentationAttribute, MvxViewModelRequest>> _attributeTypesToShowMethodDictionary;
 
+        public MvxAndroidViewPresenter(IEnumerable<Assembly> AndroidViewAssemblies)
+        {
+            _lazyNavigationSerializerFactory = new Lazy<IMvxNavigationSerializer>(Mvx.Resolve<IMvxNavigationSerializer>);
+            _fragmentHostRegistrationSettings = new FragmentHostRegistrationSettings(AndroidViewAssemblies);
+
+            _attributeTypesToShowMethodDictionary = new Dictionary<Type, Action<MvxBasePresentationAttribute, MvxViewModelRequest>>();
+
+            RegisterAttributeTypes();
+        }
+
         protected virtual void RegisterAttributeTypes()
         {
             _attributeTypesToShowMethodDictionary.Add(
@@ -52,16 +62,6 @@ namespace MvvmCross.Droid.Views
             _attributeTypesToShowMethodDictionary.Add(
                typeof(MvxDialogAttribute),
                (attribute, request) => ShowDialogFragment((MvxDialogAttribute)attribute, request));
-        }
-
-        public MvxAndroidViewPresenter(IEnumerable<Assembly> AndroidViewAssemblies)
-        {
-            _lazyNavigationSerializerFactory = new Lazy<IMvxNavigationSerializer>(Mvx.Resolve<IMvxNavigationSerializer>);
-            _fragmentHostRegistrationSettings = new FragmentHostRegistrationSettings(AndroidViewAssemblies);
-
-            _attributeTypesToShowMethodDictionary = new Dictionary<Type, Action<MvxBasePresentationAttribute, MvxViewModelRequest>>();
-
-            RegisterAttributeTypes();
         }
 
         protected virtual void ShowFragment(
@@ -81,13 +81,13 @@ namespace MvvmCross.Droid.Views
         {
             //var dialog = DialogFragment.Instantiate(this, FragmentJavaName());
 
-            var fragmentType = _fragmentHostRegistrationSettings.GetFragmentTypeAssociatedWith(request.ViewModelType);
+            //var fragmentType = _fragmentHostRegistrationSettings.GetFragmentTypeAssociatedWith(request.ViewModelType);
 
-            var fragmentTag = GetFragmentTag(request);
-            FragmentCacheConfiguration.RegisterFragmentToCache(fragmentTag, fragmentType, request.ViewModelType, false);
+            //var fragmentTag = GetFragmentTag(request);
+            //FragmentCacheConfiguration.RegisterFragmentToCache(fragmentTag, fragmentType, request.ViewModelType, false);
 
             //TODO: handle show here
-            CreateFragment(fragmentType, null);
+            //CreateFragment(fragmentType, null);
 
             //TODO: Check if class implements IDialogInterface
             //TODO: Check if class is a Fragment
@@ -96,19 +96,19 @@ namespace MvvmCross.Droid.Views
 
         public override void Show(MvxViewModelRequest request)
         {
-            var isFragment = _fragmentHostRegistrationSettings.IsTypeRegisteredAsFragment(request.ViewModelType);
+            //var isFragment = _fragmentHostRegistrationSettings.IsTypeRegisteredAsFragment(request.ViewModelType);
 
-            if (!isFragment)
+            //if (!isFragment)
                 ShowActivity(request);
-            else
+            //else
             {
-                var attribute = _fragmentHostRegistrationSettings.GetAttributesForFragment(request.ViewModelType);
+                //var attribute = _fragmentHostRegistrationSettings.GetAttributesForFragment(request.ViewModelType);
 
-                Action<MvxBasePresentationAttribute, MvxViewModelRequest> showAction;
+                /*Action<MvxBasePresentationAttribute, MvxViewModelRequest> showAction;
                 if (!_attributeTypesToShowMethodDictionary.TryGetValue(attribute.GetType(), out showAction))
                     throw new KeyNotFoundException($"The type {attribute.GetType().Name} is not configured in the presenter dictionary");
 
-                showAction.Invoke(attribute, request);
+                showAction.Invoke(attribute, request);*/
             }
             /*
             var isFragment = _fragmentHostRegistrationSettings.IsTypeRegisteredAsFragment(request.ViewModelType);
