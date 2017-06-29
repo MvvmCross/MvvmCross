@@ -1,6 +1,6 @@
 ﻿using MvvmCross.iOS.Views.Presenters.Attributes;
 
-namespace MvvmCross.iOS.Support.XamarinSidebar.Attributes
+namespace MvvmCross.iOS.Support.XamarinSidebar
 {
     public class MvxSidebarPresentationAttribute : MvxBasePresentationAttribute
     {

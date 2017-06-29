@@ -3,7 +3,6 @@ using CoreGraphics;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Support.XamarinSidebar;
-using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
 using MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels;
 using UIKit;
 
