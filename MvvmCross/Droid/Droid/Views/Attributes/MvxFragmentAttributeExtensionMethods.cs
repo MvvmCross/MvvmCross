@@ -16,13 +16,14 @@ namespace MvvmCross.Droid.Views.Attributes
 {
     public static class MvxFragmentAttributeExtensionMethods
     {
-        public static bool HasMvxFragmentAttribute(this Type candidateType)
+        //TODO: Move to core
+        public static bool HasBasePresentationAttribute(this Type candidateType)
         {
             var attributes = candidateType.GetCustomAttributes(typeof(MvxBasePresentationAttribute), true);
             return attributes.Length > 0;
         }
 
-        public static IEnumerable<MvxBasePresentationAttribute> GetMvxFragmentAttributes(this Type fromFragmentType)
+        public static IEnumerable<MvxBasePresentationAttribute> GetBasePresentationAttributes(this Type fromFragmentType)
         {
             var attributes = fromFragmentType.GetCustomAttributes(typeof(MvxBasePresentationAttribute), true);
 
@@ -32,10 +33,10 @@ namespace MvvmCross.Droid.Views.Attributes
             return attributes.Cast<MvxBasePresentationAttribute>();
         }
 
-        public static MvxBasePresentationAttribute GetMvxFragmentAttribute(this Type fromFragmentType,
+        public static MvxBasePresentationAttribute GetBasePresentationAttribute(this Type fromFragmentType,
             Type fragmentActivityParentType)
         {
-            var mvxFragmentAttributes = fromFragmentType.GetMvxFragmentAttributes();
+            var mvxFragmentAttributes = fromFragmentType.GetBasePresentationAttributes();
             var activityViewModelType = GetActivityViewModelType(fragmentActivityParentType);
             var mvxFragmentAttribute = mvxFragmentAttributes.FirstOrDefault(x => x.ParentActivityViewModelType == activityViewModelType);
 
@@ -59,19 +60,19 @@ namespace MvvmCross.Droid.Views.Attributes
 
         public static bool IsFragmentCacheable(this Type fragmentType, Type fragmentActivityParentType)
         {
-            if (!fragmentType.HasMvxFragmentAttribute())
+            if (!fragmentType.HasBasePresentationAttribute())
                 return false;
 
-            var mvxFragmentAttribute = (MvxFragmentAttribute)fragmentType.GetMvxFragmentAttribute(fragmentActivityParentType);
+            var mvxFragmentAttribute = (MvxFragmentAttribute)fragmentType.GetBasePresentationAttribute(fragmentActivityParentType);
             return mvxFragmentAttribute.IsCacheableFragment;
         }
 
         public static Type GetViewModelType(this Type fragmentType)
         {
-            if (!fragmentType.HasMvxFragmentAttribute())
+            if (!fragmentType.HasBasePresentationAttribute())
                 return null;
 
-            return fragmentType.GetMvxFragmentAttributes()
+            return fragmentType.GetBasePresentationAttributes()
                                .OfType<MvxFragmentAttribute>()
                 .Select(x => x.ViewModelType)
                 .First();

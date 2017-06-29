@@ -40,7 +40,7 @@ namespace MvvmCross.Droid.Views
                     _assembliesToLookup
                         .SelectMany(x => x.DefinedTypes)
                         .Select(x => x.AsType())
-                        .Where(x => x.HasMvxFragmentAttribute())
+                        .Where(x => x.HasBasePresentationAttribute())
                         .ToList();
 
                 foreach (var typeWithMvxFragmentAttribute in typesWithMvxFragmentAttribute)
@@ -48,7 +48,7 @@ namespace MvvmCross.Droid.Views
                     if (!_fragmentTypeToMvxFragmentAttributeMap.ContainsKey(typeWithMvxFragmentAttribute))
                         _fragmentTypeToMvxFragmentAttributeMap.Add(typeWithMvxFragmentAttribute, new List<MvxBasePresentationAttribute>());
 
-                    foreach (var mvxAttribute in typeWithMvxFragmentAttribute.GetMvxFragmentAttributes())
+                    foreach (var mvxAttribute in typeWithMvxFragmentAttribute.GetBasePresentationAttributes())
                         _fragmentTypeToMvxFragmentAttributeMap[typeWithMvxFragmentAttribute].Add(mvxAttribute);
                 }
 
@@ -61,7 +61,7 @@ namespace MvvmCross.Droid.Views
         {
             Type viewModelType = _viewModelTypeFinder.FindTypeOrNull(fromFragmentType);
 
-            return viewModelType ?? fromFragmentType.GetMvxFragmentAttributes().First().ViewModelType;
+            return viewModelType ?? fromFragmentType.GetBasePresentationAttributes().First().ViewModelType;
         }
 
         public virtual bool IsTypeRegisteredAsFragment(Type viewModelType)
