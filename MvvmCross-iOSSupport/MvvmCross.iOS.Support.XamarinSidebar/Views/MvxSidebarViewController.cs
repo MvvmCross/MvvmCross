@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
 using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Platform;
