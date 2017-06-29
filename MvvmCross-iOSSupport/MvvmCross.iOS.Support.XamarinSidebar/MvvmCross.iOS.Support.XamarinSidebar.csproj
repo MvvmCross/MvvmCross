@@ -43,7 +43,6 @@
     </Compile>
     <Compile Include="MvxSidebarPresenter.cs" />
     <Compile Include="Extensions\ViewControllerExtensions.cs" />
-    <Compile Include="Attributes\MvxSidebarPresentationAttribute.cs" />
     <Compile Include="MvxPanelEnum.cs" />
     <Compile Include="MvxPanelHintType.cs" />
     <Compile Include="MvxSplitViewBehaviour.cs" />
@@ -52,6 +51,7 @@
     <Compile Include="Views\MvxBaseSplitViewController.cs" />
     <Compile Include="Views\MvxSidebarViewController.cs" />
     <Compile Include="Views\MvxSplitViewControllerHost.cs" />
+    <Compile Include="MvxSidebarPresentationAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
