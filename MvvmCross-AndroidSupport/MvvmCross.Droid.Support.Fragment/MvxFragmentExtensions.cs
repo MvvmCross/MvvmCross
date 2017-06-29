@@ -122,7 +122,7 @@ namespace MvvmCross.Droid.Support.V4
 
             IFragmentCacheableActivity cacheableActivity = fragmentParentActivtiy as IFragmentCacheableActivity;
 
-            if (cacheableActivity == null)
+            /*if (cacheableActivity == null)
                 throw new InvalidOperationException($"Fragment has activity attached but it does not implement {nameof(IFragmentCacheableActivity)} ! Cannot register fragment to cache!");
 
             if (string.IsNullOrEmpty(fragmentView.UniqueImmutableCacheTag))
@@ -130,6 +130,7 @@ namespace MvvmCross.Droid.Support.V4
 
             var fragmentCacheConfiguration = cacheableActivity.FragmentCacheConfiguration;
             fragmentCacheConfiguration.RegisterFragmentToCache(fragmentView.UniqueImmutableCacheTag, fragmentView.GetType(), fragmentView.FindAssociatedViewModelType(fragmentParentActivityType));
+*/
         }
     }
 }
