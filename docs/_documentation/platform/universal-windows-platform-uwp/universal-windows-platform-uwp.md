@@ -181,3 +181,54 @@ Now everything should be correctly set up and you can try to launch the applicat
 ![Hello MvvmCross](./hello-mvvmcross.png)
 
 Change the contents of the `TextBox`, and click elsewhere. The text below the `TextBox` should automatically update, proving that the data-binding is working as expected.
+
+## Pages abstraction and ViewModel binding
+This section shows how to abstract Universal Windows Platform Page object to provide generic ViewModel binding.
+
+If you would like to provide generic way of binding Page with ViewModel, you would propably do it like presented below:
+
+```c#
+ public sealed partial class LoginPage<LoginViewModel>
+   {
+       public LoginPage()
+        {
+           this.InitializeComponent();
+        }
+    }
+```
+Unfortunately this is not possible and that is why you have to provide abstraction for Pages.
+To achieve that you can create generic base class like below which derives from MvxWindowsPage class:
+
+```c#
+public abstract class BaseApplicationMvxPage<TViewModel> : MvxWindowsPage<TViewModel> where TViewModel : MvxViewModel
+ {
+ }
+```
+Now you have to create abstract class of Page you would like to use (in this case LoginPage) with selected ViewModel:
+
+```c#
+public abstract class LoginPageAbstract : BaseApplicationMvxPage<LoginViewModel>
+ {
+ }
+```
+Now your code-behind page (LoginPage.xaml.cs) code should look like below:
+
+```c#
+public sealed partial class LoginPage : LoginPageAbstract
+ {
+     public LoginPage()
+      {
+        this.InitializeComponent();
+      }
+ }
+```
+In XAML code page declaration should be provided like presented below:
+
+```c#
+<abstract:LoginPageAbstract
+    xmlns:abstract="using:MvvmCrossDemo.UWP.Pages.Abstract"
+    x:Class="MvvmCrossDemo.UWP.Pages.LoginPage"
+   <!--rest of standard code here-->
+>
+    // Your UI code here
+```
