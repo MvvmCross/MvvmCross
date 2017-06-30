@@ -33,7 +33,7 @@ Each mobile platform has its own View Presenter:
 
 When you navigate to selected ViewModel, platform specific View Presenter handles displaying View properly.
 
- ![Sketch](../../assets/img/ViewPresenterSchema.png)
+ ![View Presenter schema](../../assets/img/ViewPresenterSchema.png)
 
 ***Android*** platform has two important types of View Presenters:
 - [MvxAndroidViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Droid/Views/MvxAndroidViewPresenter.cs) - to switch between Activities
