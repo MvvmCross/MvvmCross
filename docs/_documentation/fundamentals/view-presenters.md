@@ -25,6 +25,43 @@ Let's take a look now at the methods of that interface:
 - `ChangePresentation(MvxPresentationHint hint)`: This method is the one that gets called whenever a PresentationHint is requested. It is responsible for handling the requested change.
 - `Close(IMvxViewModel toClose)`: As you can imagine, this method is used to handle the close request of a ViewModel. It takes the ViewModel instance to be closed as parameter.
 
+## View Presenters on each platform
+Each mobile platform has its own View Presenter:
+- Android: [MvxAndroidViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Droid/Views/MvxAndroidViewPresenter.cs)
+- iOS: [MvxIosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/iOS/iOS/Views/Presenters/MvxIosViewPresenter.cs)
+- Windows: [MvxWindowsViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Windows/Uwp/Views/MvxWindowsViewPresenter.cs)
+
+When you navigate to selected ViewModel, platform specific View Presenter handles displaying View properly.
+
+<p align="center">
+  <img src="https://preview.ibb.co/cGuy8Q/View_Presenters.png">
+</p>
+
+***Android*** platform has two important types of View Presenters:
+- [MvxAndroidViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Droid/Views/MvxAndroidViewPresenter.cs) - to switch between Activities
+- [MvxFragmentsPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Shared/Presenter/MvxFragmentsPresenter.cs) - to provide support for Android fragments
+
+***iOS*** navigation is handled by [MvxIosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/iOS/iOS/Views/Presenters/MvxIosViewPresenter.cs) which provide sopport for the following navigation patterns:
+- Tabs
+- SplitView
+- Modal
+- Stack
+
+Key functionality here is set of attributes ([Presenter Attributes](https://github.com/MvvmCross/MvvmCross/tree/develop/MvvmCross/iOS/iOS/Views/Presenters/Attributes)) which we can use to define how selected view will be displayed:
+- MvxTabPresentationAttribute – for tabs
+- MvxRootPresentationAttribute – to set ViewController as root
+- MvxModalPresentationAttribute – to display ViewController modally
+- MvxMasterSplitViewPresentationAttribute – for SplitView master controller
+- MvxDetailSplitViewPresentationAttribute – for SplitView details controller
+
+Here is example how you can use them:
+
+ ```c#
+    [MvxModalPresentation]
+    public class DetailsViewController : ApplicationBaseMvxViewController<DetailsViewModel>
+```
+
+***Windows (UWP)*** is responsible for proper navigation between Pages. When navigating between ViewModels, Windows View Presenter controls Frame stack and displays specific Pages.
 
 ## Showing ViewModels
 The key and most important method of a ViewPresenter is `Show`. It is in charge of transforming a request coming from the _Core_ project into a View the user can interact with.
