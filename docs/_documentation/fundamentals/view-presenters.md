@@ -37,6 +37,32 @@ When you navigate to selected ViewModel, platform specific View Presenter handle
   <img src="https://preview.ibb.co/cGuy8Q/View_Presenters.png">
 </p>
 
+***Android*** platform has two important types of View Presenters:
+- [MvxAndroidViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Droid/Views/MvxAndroidViewPresenter.cs) - to switch between Activities
+- [MvxFragmentsPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Shared/Presenter/MvxFragmentsPresenter.cs) - to provide support for Android fragments
+
+***iOS*** navigation is handled by [MvxIosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/iOS/iOS/Views/Presenters/MvxIosViewPresenter.cs) which provide sopport for the following navigation patterns:
+- Tabs
+- SplitView
+- Modal
+- Stack
+
+Key functionality here is set of attributes ([Presenter Attributes](https://github.com/MvvmCross/MvvmCross/tree/develop/MvvmCross/iOS/iOS/Views/Presenters/Attributes)) which we can use to define how selected view will be displayed:
+- MvxTabPresentationAttribute – for tabs
+- MvxRootPresentationAttribute – to set ViewController as root
+- MvxModalPresentationAttribute – to display ViewController modally
+- MvxMasterSplitViewPresentationAttribute – for SplitView master controller
+- MvxDetailSplitViewPresentationAttribute – for SplitView details controller
+
+Here is example how you can use them:
+
+ ```c#
+    [MvxModalPresentation]
+    public class DetailsViewController : ApplicationBaseMvxViewController<DetailsViewModel>
+```
+
+***Windows (UWP)*** is responsible for proper navigation between Pages. When navigating between ViewModels, Windows View Presenter controls Frame stack and displays specific Pages.
+
 ## Showing ViewModels
 The key and most important method of a ViewPresenter is `Show`. It is in charge of transforming a request coming from the _Core_ project into a View the user can interact with.
 There are several techniques to implement this method, but the preferred way by the MvvmCross default presenters is to use custom class attributes. These let the presenter know how a View wants to be presented on the UI. For instance, on iOS you would typically declare a ViewController like this:
