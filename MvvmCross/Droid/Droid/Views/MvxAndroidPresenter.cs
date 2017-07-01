@@ -17,12 +17,16 @@ namespace MvvmCross.Droid.Views
 {
     public class MvxAndroidPresenter : MvxViewPresenter, IMvxAndroidViewPresenter
     {
-        protected Activity CurrentActivity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
+        protected virtual Activity CurrentActivity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
         protected IEnumerable<Assembly> _androidViewAssemblies;
         protected Dictionary<Type, Action<MvxBasePresentationAttribute, MvxViewModelRequest>> _attributeTypesToShowMethodDictionary;
-        private readonly Dictionary<Type, IList<MvxBasePresentationAttribute>> _fragmentTypeToPresentationAttributeMap;
-        private Dictionary<Type, Type> _viewModelToFragmentTypeMap;
-        private readonly IMvxViewModelTypeFinder _viewModelTypeFinder;
+        protected readonly Dictionary<Type, IList<MvxBasePresentationAttribute>> _fragmentTypeToPresentationAttributeMap;
+        protected Dictionary<Type, Type> _viewModelToFragmentTypeMap;
+        protected readonly IMvxViewModelTypeFinder _viewModelTypeFinder;
+
+        protected Lazy<IMvxNavigationSerializer> _lazyNavigationSerializerFactory;
+        protected IMvxNavigationSerializer Serializer;
+        public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
 
         public MvxAndroidPresenter(IEnumerable<Assembly> androidViewAssemblies)
         {
@@ -30,6 +34,8 @@ namespace MvvmCross.Droid.Views
             _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
             _fragmentTypeToPresentationAttributeMap = new Dictionary<Type, IList<MvxBasePresentationAttribute>>();
             _attributeTypesToShowMethodDictionary = new Dictionary<Type, Action<MvxBasePresentationAttribute, MvxViewModelRequest>>();
+
+            //Serializer = Mvx.Resolve<IMvxNavigationSerializer>();
 
             init();
 
@@ -60,7 +66,6 @@ namespace MvvmCross.Droid.Views
         private Type GetAssociatedViewModelType(Type fromFragmentType)
         {
             Type viewModelType = _viewModelTypeFinder.FindTypeOrNull(fromFragmentType);
-
             return viewModelType ?? fromFragmentType.GetBasePresentationAttributes().First().ViewModelType;
         }
 
@@ -79,10 +84,7 @@ namespace MvvmCross.Droid.Views
         {
             if(_viewModelToFragmentTypeMap.ContainsKey(request.ViewModelType))
             {
-                var fragmentType = _viewModelToFragmentTypeMap.GetValueOrDefault(request.ViewModelType);
-
-                var attribute = _fragmentTypeToPresentationAttributeMap.GetValueOrDefault(fragmentType).FirstOrDefault();
-                attribute.ViewType = fragmentType;
+                var attribute = GetAttributeForViewModel(request.ViewModelType);
 
                 Action<MvxBasePresentationAttribute, MvxViewModelRequest> showAction;
                 if (!_attributeTypesToShowMethodDictionary.TryGetValue(attribute.GetType(), out showAction))
@@ -96,6 +98,14 @@ namespace MvvmCross.Droid.Views
                 var intent = CreateIntentForRequest(request);
                 ShowIntent(intent);
             }
+        }
+
+        private MvxBasePresentationAttribute GetAttributeForViewModel(Type viewModelType)
+        {
+            var fragmentType = _viewModelToFragmentTypeMap.GetValueOrDefault(viewModelType);
+            var attribute = _fragmentTypeToPresentationAttributeMap.GetValueOrDefault(fragmentType).FirstOrDefault();
+            attribute.ViewType = fragmentType;
+            return attribute;
         }
 
         protected virtual Intent CreateIntentForRequest(MvxViewModelRequest request)
@@ -125,8 +135,39 @@ namespace MvvmCross.Droid.Views
             MvxFragmentAttribute attribute,
             MvxViewModelRequest request)
         {
+            var hostViewType = GetCurrentActivityViewModelType();
+            var hostViewModelType = _viewModelToFragmentTypeMap[hostViewType];
+
+            if(attribute.ParentActivityViewModelType != hostViewModelType)
+            {
+                var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(hostViewModelType);
+                Show(hostViewModelRequest);
+            }
+
+            //var bundle = new Bundle();
+            //var serializedRequest = Serializer.Serializer.SerializeObject(request);
+            //bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
+
+            //if (request is MvxViewModelInstanceRequest)
+            //{
+            //    Mvx.Resolve<IMvxChildViewModelCache>().Cache(((MvxViewModelInstanceRequest)request).ViewModelInstance);
+            //}
+
+
+            //var validHostViewModelType = 
+
+
+            /*if (hostViewModelType != hostViewModelType)
+            {
+                Type newFragmentHostViewModelType = 
+
+                var fragmentHostMvxViewModelRequest = MvxViewModelRequest.GetDefaultRequest(newFragmentHostViewModelType);
+                ShowActivity(fragmentHostMvxViewModelRequest, request);
+                return;
+            }*/
+
             var fragmentName = FragmentJavaName(attribute.ViewType);
-            var fragment = Fragment.Instantiate(CurrentActivity, fragmentName);
+            var fragment = CreateFragment(fragmentName);
 
             var ft = CurrentActivity.FragmentManager.BeginTransaction();
             ft.Replace(attribute.FragmentContentId, fragment, fragmentName);
@@ -137,6 +178,21 @@ namespace MvvmCross.Droid.Views
             //TODO: Load Activity if not shown yet
             //TODO: Check if FragmentContentId can be found on Activity
             //TODO: Show fragment on Activity
+        }
+
+        protected IMvxFragmentView CreateFragment(string fragmentName)
+        {
+            var fragment = Fragment.Instantiate(CurrentActivity, fragmentName);
+            return fragment as IMvxFragmentView;
+        }
+
+        protected Type GetCurrentActivityViewModelType()
+        {
+            Activity currentActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
+            Type currentActivityType = currentActivity.GetType();
+
+            var activityViewModelType = _viewModelTypeFinder.FindTypeOrNull(currentActivityType);
+            return activityViewModelType;
         }
 
         protected virtual void ShowDialogFragment(
