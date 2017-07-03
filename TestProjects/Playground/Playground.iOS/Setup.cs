@@ -1,4 +1,4 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Platform;
 using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Platform.Platform;
@@ -32,6 +32,7 @@ namespace Playground.iOS
         protected override IMvxIosViewPresenter CreatePresenter()
         {
             return new MvxIosViewPresenter(ApplicationDelegate, Window);
+
         }
     }
 }
