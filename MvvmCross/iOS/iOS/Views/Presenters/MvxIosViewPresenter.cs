@@ -201,7 +201,7 @@ namespace MvvmCross.iOS.Views.Presenters
             }
 
             if (attribute.WrapInNavigationController)
-                viewController = new MvxNavigationController(viewController);
+                viewController = CreateNavigationController(viewController);
 
             TabBarViewController.ShowTabView(
                 viewController,
@@ -223,7 +223,7 @@ namespace MvvmCross.iOS.Views.Presenters
             // setup modal based on attribute
             if (attribute.WrapInNavigationController)
             {
-                viewController = ModalNavigationController = new MvxNavigationController(viewController);
+                viewController = ModalNavigationController = CreateNavigationController(viewController);
             }
 
             viewController.ModalPresentationStyle = attribute.ModalPresentationStyle;
