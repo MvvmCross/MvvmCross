@@ -85,15 +85,17 @@ namespace MvvmCross.Binding.Droid.Views
             }
         }
 
-        public MvxImageView(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) 
+        public MvxImageView(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes)
             : base(context, attrs, defStyleAttr, defStyleRes)
         {
             Init(context, attrs);
         }
 
         public MvxImageView(Context context, IAttributeSet attrs, int defStyleAttr)
-            : this(context, attrs, defStyleAttr, 0)
+            : base(context, attrs, defStyleAttr) // Don't call overload constructor since it is added in API 21
+                                                 // which could cause missing method exceptions on earlier API levels 
         {
+            Init(context, attrs);
         }
 
         public MvxImageView(Context context, IAttributeSet attrs)
@@ -150,7 +152,7 @@ namespace MvvmCross.Binding.Droid.Views
             typedArray.Recycle();
         }
 
-        public override void SetImageBitmap (Bitmap bm)
+        public override void SetImageBitmap(Bitmap bm)
         {
             if (Handle != IntPtr.Zero)
             {
@@ -159,7 +161,7 @@ namespace MvvmCross.Binding.Droid.Views
                     // Don't try to update disposed or recycled bitmap
                     return;
                 }
-                base.SetImageBitmap (bm);
+                base.SetImageBitmap(bm);
 
                 MvxMainThreadDispatcher.Instance.RequestMainThreadAction(() =>
                 {
