@@ -199,7 +199,7 @@ While we have used the terms `View` and `ViewModel` throughout this article, you
 `ViewModel` and `DataContext` can be considered as the same thing.
 
 
-##MvvmCross Databinding
+## MvvmCross Databinding
 
 Databinding has always been at the heart of MvvmCross, and the functionality has grown over the different versions of MvvmCross.
   
