@@ -14,7 +14,7 @@ using MvvmCross.Platform.Converters;
 namespace MvvmCross.Platform.Wpf.Converters
 {
     public class MvxNativeValueConverter
-        : IValueConverter
+        : MarkupExtension, IValueConverter
     {
         private readonly IMvxValueConverter _wrapped;
 
@@ -50,6 +50,11 @@ namespace MvvmCross.Platform.Wpf.Converters
             }
 
             return toReturn;
+        }
+
+        public override object ProvideValue(IServiceProvider serviceProvider) 
+        { 
+            return this; 
         }
     }
 
