@@ -8,6 +8,8 @@ using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Views;
 using MvvmCross.Droid.Views.Attributes;
 using RoutingExample.Core;
+using System;
+using System.Threading.Tasks;
 
 namespace RoutingExample.Droid
 {
@@ -28,36 +30,40 @@ namespace RoutingExample.Droid
         }
     }
 
-    public class MyViewPresenter : MvxAndroidPresenter
+    public class MyViewPresenter : MvxAndroidViewPresenter
     {
-        public MyViewPresenter(IEnumerable<Assembly> AndroidViewAssemblies) : base(AndroidViewAssemblies)
+        public MyViewPresenter(IEnumerable<Assembly> androidViewAssemblies) : base(androidViewAssemblies)
         {
         }
 
-        AppCompatActivity currentActivity => (AppCompatActivity)CurrentActivity;
+        protected new AppCompatActivity CurrentActivity => (AppCompatActivity)base.CurrentActivity;
+        protected new FragmentManager CurrentFragmentManager => CurrentActivity.SupportFragmentManager;
 
-        protected override void ShowDialogFragment(MvxDialogAttribute attribute, MvxViewModelRequest request)
+        protected override void ShowDialogFragment(Type view, 
+           MvxDialogAttribute attribute, 
+           MvxViewModelRequest request)
         {
-            var dialog = Fragment.Instantiate(currentActivity, FragmentJavaName(attribute.ViewType)) as DialogFragment;
-            dialog.Show(currentActivity.SupportFragmentManager, attribute.ViewType.Name);
+            var dialog = Fragment.Instantiate(CurrentActivity, FragmentJavaName(attribute.ViewType)) as DialogFragment;
+            dialog.Show(CurrentFragmentManager, attribute.ViewType.Name);
         }
 
-        protected override void ShowFragment(MvxFragmentAttribute attribute, MvxViewModelRequest request)
+        protected override IMvxFragmentView CreateFragment(string fragmentName)
         {
-            var hostViewType = GetCurrentActivityViewModelType();
-            var hostViewModelType = _viewModelToFragmentTypeMap[hostViewType];
+            var fragment = Fragment.Instantiate(CurrentActivity, fragmentName);
+            return fragment as IMvxFragmentView;
+        }
 
-            if (attribute.ParentActivityViewModelType != hostViewModelType)
-            {
-                var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(hostViewModelType);
-                Show(hostViewModelRequest);
-            }
+        protected override void ShowFragment(Type view,
+            MvxFragmentAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            ShowHostActivity(attribute);
 
             var fragmentName = FragmentJavaName(attribute.ViewType);
-            var fragment = Fragment.Instantiate(currentActivity, fragmentName);
+            var fragment = CreateFragment(fragmentName);
 
-            var ft = currentActivity.SupportFragmentManager.BeginTransaction();
-            ft.Replace(attribute.FragmentContentId, fragment, fragmentName);
+            var ft = CurrentFragmentManager.BeginTransaction();
+            ft.Replace(attribute.FragmentContentId, fragment as Fragment, fragmentName);
             ft.CommitNowAllowingStateLoss();
         }
     }
