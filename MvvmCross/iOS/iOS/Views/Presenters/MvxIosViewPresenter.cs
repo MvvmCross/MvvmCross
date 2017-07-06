@@ -96,7 +96,7 @@ namespace MvvmCross.iOS.Views.Presenters
             var attribute = GetPresentationAttributes(viewController);
             var attributeType = attribute.GetType();
 
-            if (_attributeTypesToShowMethodDictionary.TryGetValue(attributeType, 
+            if (AttributeTypesToShowMethodDictionary.TryGetValue(attributeType, 
                 out Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest> showAction))
             {
                 showAction.Invoke(viewController, attribute, request);

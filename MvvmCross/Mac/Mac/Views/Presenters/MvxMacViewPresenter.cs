@@ -96,7 +96,7 @@ namespace MvvmCross.Mac.Views.Presenters
             var attribute = GetPresentationAttributes(viewController);
 
             Action<NSViewController, MvxBasePresentationAttribute, MvxViewModelRequest> showAction;
-            if (!_attributeTypesToShowMethodDictionary.TryGetValue(attribute.GetType(), out showAction))
+            if (!AttributeTypesToShowMethodDictionary.TryGetValue(attribute.GetType(), out showAction))
                 throw new KeyNotFoundException($"The type {attribute.GetType().Name} is not configured in the presenter dictionary");
 
             showAction.Invoke(viewController, attribute, request);
