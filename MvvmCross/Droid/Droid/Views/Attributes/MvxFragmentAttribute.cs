@@ -33,5 +33,10 @@ namespace MvvmCross.Droid.Views.Attributes
         /// Indicates if the fragment can be cached. False by default.
         /// </summary>
         public bool AddToBackStack { get; set; } = false;
+
+        /// <summary>
+        /// Fragment parent activity ViewModel Type. This activity is shown if ShowToViewModel call for Fragment is called from other activity.
+        /// </summary>
+        public Type ParentActivityViewModelType { get; set; }
     }
 }
