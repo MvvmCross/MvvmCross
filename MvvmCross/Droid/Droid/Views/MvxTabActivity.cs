@@ -84,20 +84,20 @@ namespace MvvmCross.Droid.Views
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            ViewModel?.Created();
+            ViewModel?.ViewCreated();
         }
 
         public override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();
-            ViewModel?.Appearing();
+            ViewModel?.ViewAppearing();
         }
 
         public override void OnDetachedFromWindow()
         {
             base.OnDetachedFromWindow();
-            ViewModel?.Disappearing(); // we don't have anywhere to get this info
-            ViewModel?.Disappeared();
+            ViewModel?.ViewDisappearing(); // we don't have anywhere to get this info
+            ViewModel?.ViewDisappeared();
         }
 
         public void OnGlobalLayout()
@@ -118,7 +118,7 @@ namespace MvvmCross.Droid.Views
                     }
                 }
                 _view = null;
-                ViewModel?.Appeared();
+                ViewModel?.ViewAppeared();
             }
         }
     }
