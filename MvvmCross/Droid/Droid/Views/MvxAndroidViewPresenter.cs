@@ -220,7 +220,7 @@ namespace MvvmCross.Droid.Views
             var fragment = CreateFragment(fragmentName);
 
             var ft = CurrentActivity.FragmentManager.BeginTransaction();
-            ft.Replace(attribute.FragmentContentId, fragment as Fragment, fragmentName);
+            ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
             ft.CommitNowAllowingStateLoss();
 
             //TODO: Check if Activity host is already on screen
@@ -233,7 +233,7 @@ namespace MvvmCross.Droid.Views
         protected virtual IMvxFragmentView CreateFragment(string fragmentName)
         {
             var fragment = Fragment.Instantiate(CurrentActivity, fragmentName);
-            return fragment as IMvxFragmentView;
+            return (IMvxFragmentView)fragment;
         }
 
         protected virtual void ShowDialogFragment(
@@ -242,8 +242,8 @@ namespace MvvmCross.Droid.Views
             MvxViewModelRequest request)
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
-            var dialog = CreateFragment(fragmentName) as DialogFragment;
-            dialog.Show(CurrentActivity.FragmentManager, fragmentName);
+            var dialog = (DialogFragment)CreateFragment(fragmentName);
+            dialog.Show(CurrentFragmentManager, fragmentName);
 
             //TODO: Check if class implements IDialogInterface
             //TODO: Check if class is a Fragment
@@ -275,6 +275,8 @@ namespace MvvmCross.Droid.Views
 
             if (attribute is MvxActivityAttribute)
             {
+                //TODO: Check if a Dialog is shown or any fragments are hosted within this Activity
+
                 var activity = CurrentActivity;
 
                 var currentView = activity as IMvxView;
