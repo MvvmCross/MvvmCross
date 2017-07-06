@@ -85,6 +85,7 @@ namespace MvvmCross.Uwp.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            ViewModel?.Created();
 
             if (_reqData != string.Empty)
             {

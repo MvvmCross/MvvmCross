@@ -81,6 +81,12 @@ namespace MvvmCross.Droid.Views
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
 
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            ViewModel?.Created();
+        }
+
         public override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();

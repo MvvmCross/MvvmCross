@@ -220,6 +220,12 @@ namespace MvvmCross.Droid.Support.V4
         {
         }
 
+        public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
+        {
+            base.OnCreate(savedInstanceState, persistentState);
+            ViewModel?.Created();
+        }
+
         public override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();

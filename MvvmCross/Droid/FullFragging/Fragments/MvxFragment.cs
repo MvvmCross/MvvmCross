@@ -81,6 +81,12 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         public string UniqueImmutableCacheTag => Tag;
 
+        public override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            ViewModel?.Created();
+        }
+
         public override void OnDestroy()
         {
             base.OnDestroy();

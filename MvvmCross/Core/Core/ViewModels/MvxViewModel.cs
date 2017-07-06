@@ -21,6 +21,10 @@ namespace MvvmCross.Core.ViewModels
         {
         }
 
+        public virtual void Created()
+        {
+        }
+
         public virtual void Appearing()
         {
         }

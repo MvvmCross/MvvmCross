@@ -22,7 +22,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     [Register("mvvmcross.droid.support.v7.appcompat.MvxAppCompatActivity")]
     public class MvxAppCompatActivity
-        : MvxEventSourceAppCompatActivity, IMvxAndroidView, ViewTreeObserver.IOnGlobalLayoutListener 
+        : MvxEventSourceAppCompatActivity, IMvxAndroidView, ViewTreeObserver.IOnGlobalLayoutListener
     {
         private View _view;
 
@@ -87,7 +87,13 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
 
-		public override void OnAttachedToWindow()
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            ViewModel?.Created();
+        }
+
+        public override void OnAttachedToWindow()
 		{
 			base.OnAttachedToWindow();
 			ViewModel?.Appearing();
@@ -133,7 +139,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         : MvxAppCompatActivity, IMvxAndroidView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
-        protected MvxAppCompatActivity(IntPtr ptr, JniHandleOwnership ownership) 
+        protected MvxAppCompatActivity(IntPtr ptr, JniHandleOwnership ownership)
             : base(ptr, ownership)
         {
         }

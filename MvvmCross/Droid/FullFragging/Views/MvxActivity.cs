@@ -48,9 +48,9 @@ namespace MvvmCross.Droid.FullFragging.Views
 
         public IMvxViewModel ViewModel
         {
-            get 
-            { 
-                return DataContext as IMvxViewModel; 
+            get
+            {
+                return DataContext as IMvxViewModel;
             }
             set
             {
@@ -107,6 +107,12 @@ namespace MvvmCross.Droid.FullFragging.Views
 
                 return ret;
             }
+        }
+
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            ViewModel?.Created();
         }
 
         protected override void OnDestroy()

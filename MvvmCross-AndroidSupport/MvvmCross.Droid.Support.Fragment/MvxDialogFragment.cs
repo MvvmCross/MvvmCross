@@ -60,6 +60,13 @@ namespace MvvmCross.Droid.Support.V4
 
         public virtual string UniqueImmutableCacheTag => Tag;
 
+
+        public override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            ViewModel?.Created();
+        }
+
         public override void OnDestroy()
         {
             base.OnDestroy();
@@ -92,7 +99,7 @@ namespace MvvmCross.Droid.Support.V4
     }
 
     public abstract class MvxDialogFragment<TViewModel>
-        : MvxDialogFragment, IMvxFragmentView<TViewModel> 
+        : MvxDialogFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
