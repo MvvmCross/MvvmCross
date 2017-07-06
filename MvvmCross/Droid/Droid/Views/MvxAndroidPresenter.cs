@@ -19,7 +19,21 @@ namespace MvvmCross.Droid.Views
     {
         protected virtual Activity CurrentActivity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
         protected IEnumerable<Assembly> _androidViewAssemblies;
-        protected Dictionary<Type, Action<MvxBasePresentationAttribute, MvxViewModelRequest>> _attributeTypesToShowMethodDictionary;
+
+        private Dictionary<Type, Action<MvxBasePresentationAttribute, MvxViewModelRequest>> _attributeTypesToShowMethodDictionary;
+        protected Dictionary<Type, Action<MvxBasePresentationAttribute, MvxViewModelRequest>> AttributeTypesToShowMethodDictionary
+        {
+            get
+            {
+                if (_attributeTypesToShowMethodDictionary == null)
+                {
+                    _attributeTypesToShowMethodDictionary = new Dictionary<Type, Action<MvxBasePresentationAttribute, MvxViewModelRequest>>();
+                    RegisterAttributeTypes();
+                }
+                return _attributeTypesToShowMethodDictionary;
+            }
+        }
+
         protected readonly Dictionary<Type, IList<MvxBasePresentationAttribute>> _fragmentTypeToPresentationAttributeMap;
         protected Dictionary<Type, Type> _viewModelToFragmentTypeMap;
         protected readonly IMvxViewModelTypeFinder _viewModelTypeFinder;
@@ -33,13 +47,10 @@ namespace MvvmCross.Droid.Views
             _androidViewAssemblies = androidViewAssemblies;
             _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
             _fragmentTypeToPresentationAttributeMap = new Dictionary<Type, IList<MvxBasePresentationAttribute>>();
-            _attributeTypesToShowMethodDictionary = new Dictionary<Type, Action<MvxBasePresentationAttribute, MvxViewModelRequest>>();
 
             //Serializer = Mvx.Resolve<IMvxNavigationSerializer>();
 
             init();
-
-            RegisterAttributeTypes();
         }
 
         private void init()
