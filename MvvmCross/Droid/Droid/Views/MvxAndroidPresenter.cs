@@ -170,7 +170,7 @@ namespace MvvmCross.Droid.Views
             var fragment = CreateFragment(fragmentName);
 
             var ft = CurrentActivity.FragmentManager.BeginTransaction();
-            ft.Replace(attribute.FragmentContentId, fragment, fragmentName);
+            ft.Replace(attribute.FragmentContentId, fragment as Fragment, fragmentName);
             ft.CommitNowAllowingStateLoss();
 
             //TODO: Check if Activity host is already on screen
