@@ -1,4 +1,5 @@
 ﻿using System;
+using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
@@ -56,6 +57,12 @@ namespace MvvmCross.Droid.FullFragging.Fragments
         }
 
         public string UniqueImmutableCacheTag => Tag;
+
+        public override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            ViewModel?.Created();
+        }
 
         public override void OnDestroy ()
         {

@@ -12,6 +12,8 @@ namespace MvvmCross.Core.ViewModels
 {
     public interface IMvxViewModel
     {
+        void Created();
+
         void Appearing();
 
         void Appeared();

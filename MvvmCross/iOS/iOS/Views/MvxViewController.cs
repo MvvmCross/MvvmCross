@@ -50,7 +50,13 @@ namespace MvvmCross.iOS.Views
 
         public IMvxBindingContext BindingContext { get; set; }
 
-		public override void ViewWillAppear(bool animated)
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            ViewModel?.Created();
+        }
+
+        public override void ViewWillAppear(bool animated)
 		{
 			base.ViewWillAppear(animated);
 			ViewModel?.Appearing();

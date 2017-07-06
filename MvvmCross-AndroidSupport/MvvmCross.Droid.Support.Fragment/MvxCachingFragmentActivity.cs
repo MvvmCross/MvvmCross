@@ -29,7 +29,7 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Droid.Support.V4
 {
     [Register("mvvmcross.droid.support.v4.MvxCachingFragmentActivity")]
-    public class MvxCachingFragmentActivity 
+    public class MvxCachingFragmentActivity
         : MvxFragmentActivity, IFragmentCacheableActivity, IMvxFragmentHost
     {
 		public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
@@ -54,7 +54,7 @@ namespace MvvmCross.Droid.Support.V4
 
 		protected override void OnCreate(Bundle bundle)
 		{
-			// Prevents crash when activity in background with history enable is reopened after 
+			// Prevents crash when activity in background with history enable is reopened after
 			// Android does some auto memory management.
 			var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(this);
 			setup.EnsureInitialized();
@@ -478,6 +478,12 @@ namespace MvvmCross.Droid.Support.V4
 			return true;
 		}
 
+        public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
+        {
+            base.OnCreate(savedInstanceState, persistentState);
+            ViewModel?.Created();
+        }
+
         public override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();
@@ -493,8 +499,8 @@ namespace MvvmCross.Droid.Support.V4
     }
 
     public abstract class MvxCachingFragmentActivity<TViewModel>
-        : MvxCachingFragmentActivity, 
-        IMvxAndroidView<TViewModel> 
+        : MvxCachingFragmentActivity,
+        IMvxAndroidView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel

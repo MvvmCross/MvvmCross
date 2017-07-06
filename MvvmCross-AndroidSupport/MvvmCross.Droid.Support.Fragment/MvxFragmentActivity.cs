@@ -80,6 +80,12 @@ namespace MvvmCross.Droid.Support.V4
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
 
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            ViewModel?.Created();
+        }
+
         public override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();
@@ -117,7 +123,7 @@ namespace MvvmCross.Droid.Support.V4
     }
 
     public abstract class MvxFragmentActivity<TViewModel>
-        : MvxFragmentActivity, IMvxAndroidView<TViewModel> 
+        : MvxFragmentActivity, IMvxAndroidView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel

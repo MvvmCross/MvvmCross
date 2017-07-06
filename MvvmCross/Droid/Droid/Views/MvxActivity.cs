@@ -45,9 +45,9 @@ namespace MvvmCross.Droid.Views
 
         public IMvxViewModel ViewModel
         {
-            get 
-            { 
-                return DataContext as IMvxViewModel; 
+            get
+            {
+                return DataContext as IMvxViewModel;
             }
             set
             {
@@ -85,6 +85,18 @@ namespace MvvmCross.Droid.Views
                 return;
             }
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
+        }
+
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            ViewModel?.Created();
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            ViewModel?.Destroy();
         }
 
         public override void OnAttachedToWindow()
