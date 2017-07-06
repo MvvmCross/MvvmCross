@@ -1,11 +1,6 @@
-// MvxUnconventionalAttribute.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
-// MvvmCross is licensed using Microsoft Public License (Ms-PL)
-// Contributions and inspirations noted in readme.md and license.txt
-//
-// Project Lead - Stuart Lodge, @slodge, me@slodge.com
-
 using System;
+using System.Collections.Generic;
+using Android.Views;
 
 namespace MvvmCross.Droid.Views.Attributes
 {
@@ -38,5 +33,14 @@ namespace MvvmCross.Droid.Views.Attributes
         /// Fragment parent activity ViewModel Type. This activity is shown if ShowToViewModel call for Fragment is called from other activity.
         /// </summary>
         public Type ParentActivityViewModelType { get; set; }
+
+        /// <summary>
+        /// SharedElements that will be added to the transition. String may be left empty when using AppCompat
+        /// </summary>
+        public IDictionary<string, View> SharedElements { get; set; }
+
+        public (int enter, int exit, int popEnter, int popExit) CustomAnimations { get; set; } = (int.MinValue, int.MinValue, int.MinValue, int.MinValue);
+
+        public int TransitionStyle { get; set; } = int.MinValue;
     }
 }
