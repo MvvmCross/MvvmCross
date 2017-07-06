@@ -14,8 +14,19 @@ namespace MvvmCross.iOS.Views.Presenters
     {
         protected readonly IUIApplicationDelegate _applicationDelegate;
         protected readonly UIWindow _window;
-        protected Dictionary<Type, Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest>> 
-            _attributeTypesToShowMethodDictionary;
+        private Dictionary<Type, Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest>> _attributeTypesToShowMethodDictionary;
+        protected Dictionary<Type, Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest>> AttributeTypesToShowMethodDictionary
+        {
+            get
+            {
+                if(_attributeTypesToShowMethodDictionary == null)
+                {
+                    _attributeTypesToShowMethodDictionary = new Dictionary<Type, Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest>>();
+                    RegisterAttributeTypes();
+                }
+                return _attributeTypesToShowMethodDictionary;
+            }
+        }
 
         public UINavigationController MasterNavigationController { get; protected set; }
 
@@ -29,11 +40,6 @@ namespace MvvmCross.iOS.Views.Presenters
         {
             _applicationDelegate = applicationDelegate;
             _window = window;
-
-            _attributeTypesToShowMethodDictionary = 
-                new Dictionary<Type, Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest>>();
-
-            RegisterAttributeTypes();
         }
 
         protected virtual void RegisterAttributeTypes()
@@ -90,7 +96,7 @@ namespace MvvmCross.iOS.Views.Presenters
             var attribute = GetPresentationAttributes(viewController);
             var attributeType = attribute.GetType();
 
-            if (_attributeTypesToShowMethodDictionary.TryGetValue(attributeType, 
+            if (AttributeTypesToShowMethodDictionary.TryGetValue(attributeType, 
                 out Action<UIViewController, MvxBasePresentationAttribute, MvxViewModelRequest> showAction))
             {
                 showAction.Invoke(viewController, attribute, request);
