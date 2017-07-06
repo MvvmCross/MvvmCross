@@ -58,7 +58,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 foreach (var item in attribute.SharedElements)
                 {
                     intent.PutExtra(item.Key, ViewCompat.GetTransitionName(item.Value));
-                    sharedElements.Add(new Pair(item.Value, item.Key));
+                    sharedElements.Add(Pair.Create(item.Value, item.Key));
                 }
                 ActivityOptionsCompat options = ActivityOptionsCompat.MakeSceneTransitionAnimation(CurrentActivity, sharedElements.ToArray());
                 activity.StartActivity(intent, options.ToBundle());
