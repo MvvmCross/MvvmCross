@@ -49,8 +49,19 @@ namespace MvvmCross.Droid.Support.V4
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
-            set { DataContext = value; }
+            get
+            {
+                return DataContext as IMvxViewModel;
+            }
+            set
+            {
+                DataContext = value;
+                OnViewModelSet();
+            }
+        }
+
+        public virtual void OnViewModelSet()
+        {
         }
 
         protected void EnsureBindingContextSet(Bundle b0)
@@ -102,6 +113,14 @@ namespace MvvmCross.Droid.Support.V4
         : MvxDialogFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
+        protected MvxDialogFragment()
+        {
+        }
+
+        protected MvxDialogFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
+
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
