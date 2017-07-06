@@ -44,31 +44,31 @@ namespace MvvmCross.iOS.Views
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            ViewModel?.Created();
+            ViewModel?.ViewCreated();
         }
 
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            ViewModel?.Appearing();
+            ViewModel?.ViewAppearing();
         }
 
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-            ViewModel?.Appeared();
+            ViewModel?.ViewAppeared();
         }
 
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);
-            ViewModel?.Disappearing();
+            ViewModel?.ViewDisappearing();
         }
 
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
-            ViewModel?.Disappeared();
+            ViewModel?.ViewDisappeared();
         }
 
         public override void DidMoveToParentViewController(UIViewController parent)
@@ -76,7 +76,7 @@ namespace MvvmCross.iOS.Views
             base.DidMoveToParentViewController(parent);
             if (parent == null)
             {
-                ViewModel?.Destroy();
+                ViewModel?.ViewDestroy();
             }
         }
 

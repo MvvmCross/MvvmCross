@@ -12,23 +12,23 @@ namespace MvvmCross.Core.ViewModels
 {
     public interface IMvxViewModel
     {
-        void Created();
+        void ViewCreated();
 
-        void Appearing();
+        void ViewAppearing();
 
-        void Appeared();
+        void ViewAppeared();
 
-        void Disappearing();
+        void ViewDisappearing();
 
-        void Disappeared();
+        void ViewDisappeared();
+
+        void ViewDestroy();
 
         void Init(IMvxBundle parameters);
 
         void ReloadState(IMvxBundle state);
 
         void Start();
-
-        void Destroy ();
 
         void SaveState(IMvxBundle state);
 

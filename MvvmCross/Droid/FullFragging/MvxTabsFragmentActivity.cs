@@ -106,20 +106,20 @@ namespace MvvmCross.Droid.FullFragging
         public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
         {
             base.OnCreate(savedInstanceState, persistentState);
-            ViewModel?.Created();
+            ViewModel?.ViewCreated();
         }
 
         public override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();
-            ViewModel?.Appearing();
+            ViewModel?.ViewAppearing();
         }
 
         public override void OnDetachedFromWindow()
         {
             base.OnDetachedFromWindow();
-            ViewModel?.Disappearing(); // we don't have anywhere to get this info
-            ViewModel?.Disappeared();
+            ViewModel?.ViewDisappearing(); // we don't have anywhere to get this info
+            ViewModel?.ViewDisappeared();
         }
 
         protected override void OnSaveInstanceState(Bundle outState)
