@@ -5,6 +5,8 @@ using System.Reflection;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Views;
+using Android.Widget;
 using Java.Lang;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
@@ -141,6 +143,11 @@ namespace MvvmCross.Droid.Views
             }
 
             //TODO: Find view Type if attribute is unknown
+
+            //TODO: Check if class implements IDialogInterface
+            //TODO: Check if class is a Fragment
+
+
             //TODO: Check if it is a Dialog
             //TODO: Check if it is a Fragment
 
@@ -153,6 +160,8 @@ namespace MvvmCross.Droid.Views
             MvxViewModelRequest request)
         {
             var intent = CreateIntentForRequest(request);
+            if (attribute.Extras != null)
+                intent.PutExtras(attribute.Extras);
             ShowIntent(intent);
         }
 
@@ -182,10 +191,9 @@ namespace MvvmCross.Droid.Views
         protected void ShowHostActivity(MvxFragmentAttribute attribute)
         {
             var currentHostViewModelType = GetCurrentActivityViewModelType();
-            //var hostViewModelType = _viewModelToFragmentTypeMap[hostViewType];
-
             if (attribute.ParentActivityViewModelType != currentHostViewModelType)
             {
+                //TODO: Check if Activity base extends FragmentActivity
                 var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(currentHostViewModelType);
                 Show(hostViewModelRequest);
             }
@@ -207,27 +215,31 @@ namespace MvvmCross.Droid.Views
         {
             ShowHostActivity(attribute);
 
-            //var bundle = new Bundle();
-            //var serializedRequest = Serializer.Serializer.SerializeObject(request);
-            //bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
-
-            //if (request is MvxViewModelInstanceRequest)
-            //{
-            //    Mvx.Resolve<IMvxChildViewModelCache>().Cache(((MvxViewModelInstanceRequest)request).ViewModelInstance);
-            //}
+            if (CurrentActivity.FindViewById(attribute.FragmentContentId) == null)
+                throw new NullReferenceException("FrameLayout to show Fragment not found");
 
             var fragmentName = FragmentJavaName(attribute.ViewType);
             var fragment = CreateFragment(fragmentName);
 
             var ft = CurrentActivity.FragmentManager.BeginTransaction();
+
+            if(attribute.SharedElements != null)
+            {
+                foreach (var item in attribute.SharedElements)
+                {
+                    ft.AddSharedElement(item.Value, item.Key);
+                }
+            }
+            if(!attribute.CustomAnimations.Equals((int.MinValue,int.MinValue,int.MinValue,int.MinValue)))
+            {
+                var customAnimations = attribute.CustomAnimations;
+                ft.SetCustomAnimations(customAnimations.enter, customAnimations.exit, customAnimations.popEnter, customAnimations.popExit);
+            }
+            if(attribute.TransitionStyle != int.MinValue)
+                ft.SetTransitionStyle(attribute.TransitionStyle);
+            
             ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
             ft.CommitNowAllowingStateLoss();
-
-            //TODO: Check if Activity host is already on screen
-            //TODO: Check if Activity base extends FragmentActivity
-            //TODO: Load Activity if not shown yet
-            //TODO: Check if FragmentContentId can be found on Activity
-            //TODO: Show fragment on Activity
         }
 
         protected virtual IMvxFragmentView CreateFragment(string fragmentName)
@@ -243,11 +255,8 @@ namespace MvvmCross.Droid.Views
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
             var dialog = (DialogFragment)CreateFragment(fragmentName);
+            dialog.Cancelable = attribute.Cancelable;
             dialog.Show(CurrentFragmentManager, fragmentName);
-
-            //TODO: Check if class implements IDialogInterface
-            //TODO: Check if class is a Fragment
-            //TODO: Show as Dialog or DialogFragment
         }
 
         protected virtual string FragmentJavaName(Type fragmentType)
@@ -275,7 +284,10 @@ namespace MvvmCross.Droid.Views
 
             if (attribute is MvxActivityAttribute)
             {
-                //TODO: Check if a Dialog is shown or any fragments are hosted within this Activity
+                //TODO: Check if a Dialog is shown
+
+                if (CurrentFragmentManager.BackStackEntryCount > 0)
+                    CurrentFragmentManager.PopBackStackImmediate(null, PopBackStackFlags.Inclusive);
 
                 var activity = CurrentActivity;
 

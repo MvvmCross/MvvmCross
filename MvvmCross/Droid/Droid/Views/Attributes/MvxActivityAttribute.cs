@@ -1,12 +1,7 @@
-// MvxUnconventionalAttribute.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
-// MvvmCross is licensed using Microsoft Public License (Ms-PL)
-// Contributions and inspirations noted in readme.md and license.txt
-//
-// Project Lead - Stuart Lodge, @slodge, me@slodge.com
-
 using System;
+using System.Collections.Generic;
 using Android.OS;
+using Android.Views;
 
 namespace MvvmCross.Droid.Views.Attributes
 {
@@ -21,5 +16,10 @@ namespace MvvmCross.Droid.Views.Attributes
         /// Add extras to the Intent that will be started for this Activity
         /// </summary>
         public Bundle Extras { get; set; }
+
+        /// <summary>
+        /// SharedElements that will be added to the transition. String may be left empty when using AppCompat
+        /// </summary>
+        public IDictionary<string, View> SharedElements { get; set; }
     }
 }
