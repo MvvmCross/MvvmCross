@@ -199,17 +199,17 @@ namespace MvvmCross.Droid.Views
         protected virtual async Task ShowHostActivity(MvxFragmentAttribute attribute)
         {
             var currentHostViewModelType = GetCurrentActivityViewModelType();
-            if (attribute.ParentActivityViewModelType != currentHostViewModelType)
+            if (attribute.ActivityHostViewModelType != currentHostViewModelType)
             {
-                var viewType = ViewsContainer.GetViewType(attribute.ParentActivityViewModelType);
+                var viewType = ViewsContainer.GetViewType(attribute.ActivityHostViewModelType);
                 if (!viewType.IsSubclassOf(typeof(Activity)))
                     throw new MvxException("The host activity doesnt inherit Activity");
                 
-                var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(attribute.ParentActivityViewModelType);
+                var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(attribute.ActivityHostViewModelType);
                 Show(hostViewModelRequest);
 
                 int tries = 10;
-                while ((GetCurrentActivityViewModelType() != attribute.ParentActivityViewModelType) && (tries > 0))
+                while ((GetCurrentActivityViewModelType() != attribute.ActivityHostViewModelType) && (tries > 0))
                 {
                     await Task.Delay(1);
                     tries--;
@@ -233,8 +233,8 @@ namespace MvvmCross.Droid.Views
             MvxFragmentAttribute attribute,
             MvxViewModelRequest request)
         {
-            if (attribute.ParentActivityViewModelType == null)
-                attribute.ParentActivityViewModelType = GetCurrentActivityViewModelType();
+            if (attribute.ActivityHostViewModelType == null)
+                attribute.ActivityHostViewModelType = GetCurrentActivityViewModelType();
 
             Task.Run(async () => {
                 await ShowHostActivity(attribute);
