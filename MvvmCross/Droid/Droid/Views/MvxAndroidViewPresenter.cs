@@ -2,17 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Views;
-using Android.Widget;
 using Java.Lang;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Views.Attributes;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Droid.Platform;
+using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Views
@@ -22,6 +22,17 @@ namespace MvvmCross.Droid.Views
         protected virtual Activity CurrentActivity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
         protected virtual FragmentManager CurrentFragmentManager => CurrentActivity.FragmentManager;
         protected IEnumerable<Assembly> _androidViewAssemblies;
+
+        private IMvxViewsContainer _viewsContainer;
+        protected IMvxViewsContainer ViewsContainer
+        {
+            get
+            {
+                if(_viewsContainer == null)
+                    _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
+                return _viewsContainer;
+            }
+        }
 
         private Dictionary<Type, Action<Type, MvxBasePresentationAttribute, MvxViewModelRequest>> _attributeTypesToShowMethodDictionary;
         protected Dictionary<Type, Action<Type, MvxBasePresentationAttribute, MvxViewModelRequest>> AttributeTypesToShowMethodDictionary
@@ -126,7 +137,7 @@ namespace MvvmCross.Droid.Views
             throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
         }
 
-        private MvxBasePresentationAttribute GetAttributeForViewModel(Type viewModelType)
+        protected virtual MvxBasePresentationAttribute GetAttributeForViewModel(Type viewModelType)
         {
             IList<MvxBasePresentationAttribute> attributes;
             if (ViewModelToPresentationAttributeMap.TryGetValue(viewModelType, out attributes))
@@ -142,14 +153,11 @@ namespace MvvmCross.Droid.Views
                 return attribute;
             }
 
-            //TODO: Find view Type if attribute is unknown
-
-            //TODO: Check if class implements IDialogInterface
-            //TODO: Check if class is a Fragment
-
-
-            //TODO: Check if it is a Dialog
-            //TODO: Check if it is a Fragment
+            var viewType = ViewsContainer.GetViewType(viewModelType);
+            if (viewType.GetInterfaces().Contains(typeof(IDialogInterface)))
+                return new MvxDialogAttribute();
+            if (viewType.IsSubclassOf(typeof(Fragment)))
+                return new MvxFragmentAttribute(GetCurrentActivityViewModelType(), Android.Resource.Id.Content);
 
             return new MvxActivityAttribute() { ViewModelType = viewModelType };
         }
@@ -188,14 +196,26 @@ namespace MvvmCross.Droid.Views
             activity.StartActivity(intent);
         }
 
-        protected void ShowHostActivity(MvxFragmentAttribute attribute)
+        protected virtual async Task ShowHostActivity(MvxFragmentAttribute attribute)
         {
             var currentHostViewModelType = GetCurrentActivityViewModelType();
             if (attribute.ParentActivityViewModelType != currentHostViewModelType)
             {
-                //TODO: Check if Activity base extends FragmentActivity
-                var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(currentHostViewModelType);
+                var viewType = ViewsContainer.GetViewType(attribute.ParentActivityViewModelType);
+                if (!viewType.IsSubclassOf(typeof(Activity)))
+                    throw new MvxException("The host activity doesnt inherit Activity");
+                
+                var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(attribute.ParentActivityViewModelType);
                 Show(hostViewModelRequest);
+
+                int tries = 10;
+                while ((GetCurrentActivityViewModelType() != attribute.ParentActivityViewModelType) && (tries > 0))
+                {
+                    await Task.Delay(1);
+                    tries--;
+                }
+                if (tries == 0)
+                    throw new MvxException("Cannot load activity for Fragment");
             }
         }
 
@@ -213,33 +233,40 @@ namespace MvvmCross.Droid.Views
             MvxFragmentAttribute attribute,
             MvxViewModelRequest request)
         {
-            ShowHostActivity(attribute);
+            if (attribute.ParentActivityViewModelType == null)
+                attribute.ParentActivityViewModelType = GetCurrentActivityViewModelType();
 
-            if (CurrentActivity.FindViewById(attribute.FragmentContentId) == null)
-                throw new NullReferenceException("FrameLayout to show Fragment not found");
+            Task.Run(async () => {
+                await ShowHostActivity(attribute);
+            }).ContinueWith((result) => {
+                Mvx.Resolve<IMvxMainThreadDispatcher>().RequestMainThreadAction(() => {
+                    if (CurrentActivity.FindViewById(attribute.FragmentContentId) == null)
+                        throw new NullReferenceException("FrameLayout to show Fragment not found");
 
-            var fragmentName = FragmentJavaName(attribute.ViewType);
-            var fragment = CreateFragment(fragmentName);
+                    var fragmentName = FragmentJavaName(attribute.ViewType);
+                    var fragment = CreateFragment(fragmentName);
 
-            var ft = CurrentActivity.FragmentManager.BeginTransaction();
+                    var ft = CurrentActivity.FragmentManager.BeginTransaction();
 
-            if(attribute.SharedElements != null)
-            {
-                foreach (var item in attribute.SharedElements)
-                {
-                    ft.AddSharedElement(item.Value, item.Key);
-                }
-            }
-            if(!attribute.CustomAnimations.Equals((int.MinValue,int.MinValue,int.MinValue,int.MinValue)))
-            {
-                var customAnimations = attribute.CustomAnimations;
-                ft.SetCustomAnimations(customAnimations.enter, customAnimations.exit, customAnimations.popEnter, customAnimations.popExit);
-            }
-            if(attribute.TransitionStyle != int.MinValue)
-                ft.SetTransitionStyle(attribute.TransitionStyle);
-            
-            ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
-            ft.CommitNowAllowingStateLoss();
+                    if(attribute.SharedElements != null)
+                    {
+                        foreach (var item in attribute.SharedElements)
+                        {
+                            ft.AddSharedElement(item.Value, item.Key);
+                        }
+                    }
+                    if(!attribute.CustomAnimations.Equals((int.MinValue,int.MinValue,int.MinValue,int.MinValue)))
+                    {
+                        var customAnimations = attribute.CustomAnimations;
+                        ft.SetCustomAnimations(customAnimations.enter, customAnimations.exit, customAnimations.popEnter, customAnimations.popExit);
+                    }
+                    if(attribute.TransitionStyle != int.MinValue)
+                        ft.SetTransitionStyle(attribute.TransitionStyle);
+                    
+                    ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
+                    ft.CommitNowAllowingStateLoss();
+                });
+            });
         }
 
         protected virtual IMvxFragmentView CreateFragment(string fragmentName)
