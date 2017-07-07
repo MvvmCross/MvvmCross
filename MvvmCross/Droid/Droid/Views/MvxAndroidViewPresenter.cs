@@ -21,6 +21,8 @@ namespace MvvmCross.Droid.Views
     {
         protected virtual Activity CurrentActivity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
         protected virtual FragmentManager CurrentFragmentManager => CurrentActivity.FragmentManager;
+        protected virtual DialogFragment Dialog { get; set; }
+
         protected IEnumerable<Assembly> _androidViewAssemblies;
 
         private IMvxViewsContainer _viewsContainer;
@@ -72,8 +74,6 @@ namespace MvvmCross.Droid.Views
         {
             _androidViewAssemblies = androidViewAssemblies;
             _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
-
-            //Serializer = Mvx.Resolve<IMvxNavigationSerializer>();
         }
 
         private void RegisterAttributes()
@@ -245,6 +245,8 @@ namespace MvvmCross.Droid.Views
 
                     var fragmentName = FragmentJavaName(attribute.ViewType);
                     var fragment = CreateFragment(fragmentName);
+                    //TODO: Find a better way to set the ViewModel at the Fragment
+                    fragment.ViewModel = ((MvxViewModelInstanceRequest)request).ViewModelInstance;
 
                     var ft = CurrentActivity.FragmentManager.BeginTransaction();
 
@@ -281,9 +283,11 @@ namespace MvvmCross.Droid.Views
             MvxViewModelRequest request)
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
-            var dialog = (DialogFragment)CreateFragment(fragmentName);
-            dialog.Cancelable = attribute.Cancelable;
-            dialog.Show(CurrentFragmentManager, fragmentName);
+            Dialog = (DialogFragment)CreateFragment(fragmentName);
+            //TODO: Find a better way to set the ViewModel at the Fragment
+            ((IMvxFragmentView)Dialog).ViewModel = ((MvxViewModelInstanceRequest)request).ViewModelInstance;
+            Dialog.Cancelable = attribute.Cancelable;
+            Dialog.Show(CurrentFragmentManager, fragmentName);
         }
 
         protected virtual string FragmentJavaName(Type fragmentType)
@@ -336,11 +340,21 @@ namespace MvvmCross.Droid.Views
             }
             else if (attribute is MvxFragmentAttribute fragment)
             {
-                CurrentFragmentManager.PopBackStackImmediate();
+                if (CurrentFragmentManager.BackStackEntryCount > 0)
+                {
+                    var fragmentName = FragmentJavaName(attribute.ViewType);
+                    CurrentFragmentManager.PopBackStackImmediate(fragmentName, PopBackStackFlags.Inclusive);
+                }
+                else
+                    CurrentActivity.Finish();
             }
             else if (attribute is MvxDialogAttribute dialog)
             {
-                CurrentFragmentManager.PopBackStackImmediate();
+                if (Dialog != null)
+                {
+                    Dialog.Dismiss();
+                    Dialog = null;
+                }
             }
         }
     }
