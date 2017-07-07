@@ -25,7 +25,7 @@ namespace RoutingExample.Droid
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.Layout.secondhost);
+            SetContentView(Resource.Layout.Main);
         }
 
         protected override void OnNewIntent(Intent intent)

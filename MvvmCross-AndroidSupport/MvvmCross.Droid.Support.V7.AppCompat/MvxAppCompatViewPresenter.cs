@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Android.Support.V4.App;
+using Android.Support.V4.Util;
 using Android.Support.V4.View;
 using Android.Support.V7.App;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Views;
 using MvvmCross.Droid.Views.Attributes;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
-using System.Linq;
-using Android.Support.V4.Util;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
@@ -73,39 +77,94 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return (IMvxFragmentView)fragment;
         }
 
+        protected override async Task ShowHostActivity(MvxFragmentAttribute attribute)
+        {
+            var currentHostViewModelType = GetCurrentActivityViewModelType();
+            if (attribute.ParentActivityViewModelType != currentHostViewModelType)
+            {
+                var viewType = ViewsContainer.GetViewType(attribute.ParentActivityViewModelType);
+                if (!viewType.IsSubclassOf(typeof(FragmentActivity)))
+                    throw new MvxException("The host activity doesnt inherit FragmentActivity");
+
+                var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(attribute.ParentActivityViewModelType);
+                Show(hostViewModelRequest);
+
+                int tries = 10;
+                while ((GetCurrentActivityViewModelType() != attribute.ParentActivityViewModelType) && (tries > 0))
+                {
+                    await Task.Delay(1);
+                    tries--;
+                }
+                if (tries == 0)
+                    throw new MvxException("Cannot load activity for Fragment");
+            }
+        }
+
         protected override void ShowFragment(Type view,
             MvxFragmentAttribute attribute,
             MvxViewModelRequest request)
         {
-            ShowHostActivity(attribute);
+            if (attribute.ParentActivityViewModelType == null)
+                attribute.ParentActivityViewModelType = GetCurrentActivityViewModelType();
+            
+            Task.Run(async () => {
+                await ShowHostActivity(attribute);
+            }).ContinueWith((result) => {
+                Mvx.Resolve<IMvxMainThreadDispatcher>().RequestMainThreadAction(() => {
+                    if (CurrentActivity.FindViewById(attribute.FragmentContentId) == null)
+                        throw new NullReferenceException("FrameLayout to show Fragment not found");
 
-            if (CurrentActivity.FindViewById(attribute.FragmentContentId) == null)
-                throw new NullReferenceException("FrameLayout to show Fragment not found");
+                    var fragmentName = FragmentJavaName(attribute.ViewType);
+                    var fragment = CreateFragment(fragmentName);
 
-            var fragmentName = FragmentJavaName(attribute.ViewType);
-            var fragment = CreateFragment(fragmentName);
+                    var ft = CurrentFragmentManager.BeginTransaction();
+                    if (attribute.SharedElements != null)
+                    {
+                        foreach (var item in attribute.SharedElements)
+                        {
+                            string name = item.Key;
+                            if (string.IsNullOrEmpty(name))
+                                name = ViewCompat.GetTransitionName(item.Value);
+                            ft.AddSharedElement(item.Value, name);
+                        }
+                    }
+                    if (!attribute.CustomAnimations.Equals((int.MinValue, int.MinValue, int.MinValue, int.MinValue)))
+                    {
+                        var customAnimations = attribute.CustomAnimations;
+                        ft.SetCustomAnimations(customAnimations.enter, customAnimations.exit, customAnimations.popEnter, customAnimations.popExit);
+                    }
+                    if (attribute.TransitionStyle != int.MinValue)
+                        ft.SetTransitionStyle(attribute.TransitionStyle);
 
-            var ft = CurrentFragmentManager.BeginTransaction();
-            if (attribute.SharedElements != null)
+                    ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
+                    ft.CommitNowAllowingStateLoss();
+                });
+            });
+        }
+
+        protected override MvxBasePresentationAttribute GetAttributeForViewModel(Type viewModelType)
+        {
+            IList<MvxBasePresentationAttribute> attributes;
+            if (ViewModelToPresentationAttributeMap.TryGetValue(viewModelType, out attributes))
             {
-                foreach (var item in attribute.SharedElements)
+                var attribute = attributes.FirstOrDefault();
+                if (attribute.ViewType?.GetInterfaces().OfType<IMvxOverridePresentationAttribute>().FirstOrDefault() is IMvxOverridePresentationAttribute view)
                 {
-                    string name = item.Key;
-                    if (string.IsNullOrEmpty(name))
-                        name = ViewCompat.GetTransitionName(item.Value);
-                    ft.AddSharedElement(item.Value, name);
-                }
-            }
-            if (!attribute.CustomAnimations.Equals((int.MinValue, int.MinValue, int.MinValue, int.MinValue)))
-            {
-                var customAnimations = attribute.CustomAnimations;
-                ft.SetCustomAnimations(customAnimations.enter, customAnimations.exit, customAnimations.popEnter, customAnimations.popExit);
-            }
-            if (attribute.TransitionStyle != int.MinValue)
-                ft.SetTransitionStyle(attribute.TransitionStyle);
+                    var presentationAttribute = view.PresentationAttribute();
 
-            ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
-            ft.CommitNowAllowingStateLoss();
+                    if (presentationAttribute != null)
+                        return presentationAttribute;
+                }
+                return attribute;
+            }
+
+            var viewType = ViewsContainer.GetViewType(viewModelType);
+            if (viewType.GetInterfaces().Contains(typeof(Android.Content.IDialogInterface)))
+                return new MvxDialogAttribute();
+            if (viewType.IsSubclassOf(typeof(Fragment)))
+                return new MvxFragmentAttribute(GetCurrentActivityViewModelType());
+
+            return new MvxActivityAttribute() { ViewModelType = viewModelType };
         }
     }
 }
