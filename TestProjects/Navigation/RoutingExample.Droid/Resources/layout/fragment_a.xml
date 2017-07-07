@@ -31,4 +31,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/button1"
         app:MvxBind="Click GoToBCommand" />
+    <Button
+        android:text="Close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1"
+        app:MvxBind="Click CloseCommand" />
 </LinearLayout>
