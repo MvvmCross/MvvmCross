@@ -84,7 +84,7 @@ namespace MvvmCross.Droid.Views
 
             return
                 GetMvxFragmentAssociatedAttributes(forViewModelType).OfType<MvxFragmentAttribute>()
-                    .Any(x => x.ParentActivityViewModelType == activityViewModelType);
+                    .Any(x => x.ActivityHostViewModelType == activityViewModelType);
         }
 
         private Type GetCurrentActivityViewModelType()
@@ -101,7 +101,7 @@ namespace MvvmCross.Droid.Views
             InitializeIfNeeded();
 
             var associatedMvxFragmentAttributes = GetMvxFragmentAssociatedAttributes(forViewModelType).ToList();
-            return associatedMvxFragmentAttributes.OfType<MvxFragmentAttribute>().First().ParentActivityViewModelType;
+            return associatedMvxFragmentAttributes.OfType<MvxFragmentAttribute>().First().ActivityHostViewModelType;
         }
 
         public virtual Type GetFragmentTypeAssociatedWith(Type viewModelType)
@@ -137,7 +137,7 @@ namespace MvvmCross.Droid.Views
             Activity currentActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
 
             var fragmentAttributes = GetMvxFragmentAssociatedAttributes(fragmentViewModelType).OfType<MvxFragmentAttribute>()
-                .Where(x => x.ParentActivityViewModelType == currentActivityViewModelType);
+                .Where(x => x.ActivityHostViewModelType == currentActivityViewModelType);
             MvxBasePresentationAttribute attribute = fragmentAttributes.FirstOrDefault();
 
             if (fragmentAttributes.Count() > 1)
