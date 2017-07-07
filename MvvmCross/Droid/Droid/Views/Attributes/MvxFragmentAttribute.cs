@@ -7,7 +7,7 @@ namespace MvvmCross.Droid.Views.Attributes
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class MvxFragmentAttribute : MvxBasePresentationAttribute
     {
-        public MvxFragmentAttribute(Type parentActivityViewModelType, int fragmentContentId, bool addToBackStack = false)
+        public MvxFragmentAttribute(Type parentActivityViewModelType = null, int fragmentContentId = Android.Resource.Id.Content, bool addToBackStack = false)
         {
             ParentActivityViewModelType = parentActivityViewModelType;
             FragmentContentId = fragmentContentId;
