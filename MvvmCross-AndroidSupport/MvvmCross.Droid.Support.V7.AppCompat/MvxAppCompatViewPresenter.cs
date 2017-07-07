@@ -9,6 +9,7 @@ using Android.Support.V4.Util;
 using Android.Support.V4.View;
 using Android.Support.V7.App;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Views;
 using MvvmCross.Droid.Views.Attributes;
@@ -49,6 +50,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
             var dialog = (DialogFragment)CreateFragment(fragmentName);
+            //TODO: Find a better way to set the ViewModel at the Fragment
+            ((IMvxFragmentView)dialog).ViewModel = ((MvxViewModelInstanceRequest)request).ViewModelInstance;
             dialog.Cancelable = attribute.Cancelable;
             dialog.Show(CurrentFragmentManager, fragmentName);
         }
@@ -170,6 +173,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
                     var fragmentName = FragmentJavaName(attribute.ViewType);
                     var fragment = CreateFragment(fragmentName);
+                    //TODO: Find a better way to set the ViewModel at the Fragment
+                    fragment.ViewModel = ((MvxViewModelInstanceRequest)request).ViewModelInstance;
 
                     var ft = CurrentFragmentManager.BeginTransaction();
                     if (attribute.SharedElements != null)
@@ -219,6 +224,46 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 return new MvxFragmentAttribute(GetCurrentActivityViewModelType());
 
             return new MvxActivityAttribute() { ViewModelType = viewModelType };
+        }
+
+        public override void Close(IMvxViewModel viewModel)
+        {
+            var attribute = GetAttributeForViewModel(viewModel.GetType());
+
+            if (attribute is MvxActivityAttribute)
+            {
+                //TODO: Check if a Dialog is shown
+
+                if (CurrentFragmentManager.BackStackEntryCount > 0)
+                    CurrentFragmentManager.PopBackStackImmediate(null, 0);
+
+                var activity = CurrentActivity;
+                var currentView = activity as IMvxView;
+
+                if (currentView == null)
+                {
+                    Mvx.Warning("Ignoring close for viewmodel - rootframe has no current page");
+                    return;
+                }
+
+                if (currentView.ViewModel != viewModel)
+                {
+                    Mvx.Warning("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
+                    return;
+                }
+
+                activity.Finish();
+            }
+            else if (attribute is MvxFragmentAttribute fragment)
+            {
+                var fragmentName = FragmentJavaName(attribute.ViewType);
+                CurrentFragmentManager.PopBackStackImmediate(fragmentName, 1);
+            }
+            else if (attribute is MvxDialogAttribute dialog)
+            {
+                var fragmentName = FragmentJavaName(attribute.ViewType);
+                CurrentFragmentManager.PopBackStackImmediate(fragmentName, 1);
+            }
         }
     }
 }
