@@ -26,7 +26,7 @@ namespace MvvmCross.Droid.Support.V4
         }
 
 		public MvxCachingFragmentStatePagerAdapter(Context context, FragmentManager fragmentManager,
-            IEnumerable<FragmentInfo> fragments) : base(fragmentManager)
+            List<FragmentInfo> fragments) : base(fragmentManager)
         {
             _context = context;
             Fragments = fragments;
@@ -34,7 +34,7 @@ namespace MvvmCross.Droid.Support.V4
 
         public override int Count => Fragments.Count();
 
-        public IEnumerable<FragmentInfo> Fragments { get; }
+        public List<FragmentInfo> Fragments { get; }
 
         protected static string FragmentJavaName(Type fragmentType)
         {
