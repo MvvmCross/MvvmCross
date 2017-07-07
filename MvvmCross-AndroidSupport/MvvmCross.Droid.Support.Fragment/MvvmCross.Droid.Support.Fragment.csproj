@@ -73,7 +73,6 @@
     <Compile Include="EventSource\MvxEventSourceFragment.cs" />
     <Compile Include="EventSource\MvxEventSourceFragmentActivity.cs" />
     <Compile Include="EventSource\MvxEventSourceListFragment.cs" />
-    <Compile Include="MvxCachingFragmentActivity.cs" />
     <Compile Include="MvxCachingFragmentPagerAdapter.cs" />
     <Compile Include="MvxCachingFragmentStatePagerAdapter.cs" />
     <Compile Include="MvxDialogFragment.cs" />

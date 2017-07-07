@@ -26,15 +26,17 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
         }
 
-        protected new FragmentManager CurrentFragmentManager 
+        protected new FragmentManager CurrentFragmentManager
         {
             get
             {
-                if(CurrentActivity is AppCompatActivity activity)
+                if (CurrentActivity is FragmentActivity activity)
                     return activity.SupportFragmentManager;
                 throw new InvalidCastException("Cannot use Android Support Fragment within non AppCompat Activity");
             }
         }
+
+        protected new DialogFragment Dialog { get; set; }
 
         protected override void RegisterAttributeTypes()
         {
@@ -49,11 +51,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
            MvxViewModelRequest request)
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
-            var dialog = (DialogFragment)CreateFragment(fragmentName);
+            Dialog = (DialogFragment)CreateFragment(fragmentName);
             //TODO: Find a better way to set the ViewModel at the Fragment
-            ((IMvxFragmentView)dialog).ViewModel = ((MvxViewModelInstanceRequest)request).ViewModelInstance;
-            dialog.Cancelable = attribute.Cancelable;
-            dialog.Show(CurrentFragmentManager, fragmentName);
+            ((IMvxFragmentView)Dialog).ViewModel = ((MvxViewModelInstanceRequest)request).ViewModelInstance;
+            Dialog.Cancelable = attribute.Cancelable;
+            Dialog.Show(CurrentFragmentManager, fragmentName);
         }
 
         protected override void ShowActivity(Type view, MvxActivityAttribute attribute, MvxViewModelRequest request)
@@ -232,7 +234,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             if (attribute is MvxActivityAttribute)
             {
-                //TODO: Check if a Dialog is shown
+                if (Dialog != null)
+                    Dialog.Dismiss();
 
                 if (CurrentFragmentManager.BackStackEntryCount > 0)
                     CurrentFragmentManager.PopBackStackImmediate(null, 0);
@@ -256,13 +259,21 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
             else if (attribute is MvxFragmentAttribute fragment)
             {
-                var fragmentName = FragmentJavaName(attribute.ViewType);
-                CurrentFragmentManager.PopBackStackImmediate(fragmentName, 1);
+                if (CurrentFragmentManager.BackStackEntryCount > 0)
+                {
+                    var fragmentName = FragmentJavaName(attribute.ViewType);
+                    CurrentFragmentManager.PopBackStackImmediate(fragmentName, 1);
+                }
+                else
+                    CurrentActivity.Finish();
             }
             else if (attribute is MvxDialogAttribute dialog)
             {
-                var fragmentName = FragmentJavaName(attribute.ViewType);
-                CurrentFragmentManager.PopBackStackImmediate(fragmentName, 1);
+                if(Dialog != null)
+                {
+                    Dialog.Dismiss();
+                    Dialog = null;
+                }
             }
         }
     }

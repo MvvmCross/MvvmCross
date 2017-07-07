@@ -39,6 +39,11 @@ namespace RoutingExample.Core.ViewModels
             ReturnedFrom = $"Returned from View B {_returnedFromCount} times";
         });
 
+        public MvxCommand CloseCommand => new MvxCommand(async () =>
+        {
+            await Close(Title);
+        });
+
         public ViewModelDialogA(IMvxNavigationService navigationService)
         {
             _navigationService = navigationService;

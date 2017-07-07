@@ -46,7 +46,6 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Caching\MvxCachingFragmentActivity.cs" />
     <Compile Include="Fragments\EventSource\MvxBaseFragmentAdapter.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceDialogFragment.cs" />
     <Compile Include="Fragments\EventSource\MvxEventSourceFragment.cs" />
