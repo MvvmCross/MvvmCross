@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
 using Android.Support.V4.Util;
@@ -10,6 +13,7 @@ using Android.Support.V4.View;
 using Android.Support.V7.App;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
+using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Views;
 using MvvmCross.Droid.Views.Attributes;
@@ -24,6 +28,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     {
         public MvxAppCompatViewPresenter(IEnumerable<Assembly> androidViewAssemblies) : base(androidViewAssemblies)
         {
+            
         }
 
         protected new FragmentManager CurrentFragmentManager
@@ -92,27 +97,14 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return (IMvxFragmentView)fragment;
         }
 
-        protected override async Task ShowHostActivity(MvxFragmentAttribute attribute)
+        protected override void ShowHostActivity(MvxFragmentAttribute attribute)
         {
-            var currentHostViewModelType = GetCurrentActivityViewModelType();
-            if (attribute.ActivityHostViewModelType != currentHostViewModelType)
-            {
-                var viewType = ViewsContainer.GetViewType(attribute.ActivityHostViewModelType);
-                if (!viewType.IsSubclassOf(typeof(FragmentActivity)))
-                    throw new MvxException("The host activity doesnt inherit FragmentActivity");
+            var viewType = ViewsContainer.GetViewType(attribute.ActivityHostViewModelType);
+            if (!viewType.IsSubclassOf(typeof(FragmentActivity)))
+                throw new MvxException("The host activity doesnt inherit FragmentActivity");
 
-                var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(attribute.ActivityHostViewModelType);
-                Show(hostViewModelRequest);
-
-                int tries = 10;
-                while ((GetCurrentActivityViewModelType() != attribute.ActivityHostViewModelType) && (tries > 0))
-                {
-                    await Task.Delay(1);
-                    tries--;
-                }
-                if (tries == 0)
-                    throw new MvxException("Cannot load activity for Fragment");
-            }
+            var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(attribute.ActivityHostViewModelType);
+            Show(hostViewModelRequest);
         }
 
         protected virtual void ShowTab(
@@ -123,40 +115,43 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             if (attribute.ActivityHostViewModelType == null)
                 attribute.ActivityHostViewModelType = GetCurrentActivityViewModelType();
 
-            Task.Run(async () => {
-                await ShowHostActivity(attribute);
-            }).ContinueWith((result) => {
-                Mvx.Resolve<IMvxMainThreadDispatcher>().RequestMainThreadAction(() => {
-                    if (CurrentActivity.FindViewById(attribute.FragmentContentId) == null)
-                        throw new NullReferenceException("FrameLayout to show Fragment not found");
+            var currentHostViewModelType = GetCurrentActivityViewModelType();
+            if (attribute.ActivityHostViewModelType != currentHostViewModelType)
+            {
+                _pendingRequest = request;
+                ShowHostActivity(attribute);
+            }
+            else
+            {
+                if (CurrentActivity.FindViewById(attribute.FragmentContentId) == null)
+                    throw new NullReferenceException("FrameLayout to show Fragment not found");
 
-                    var viewPager = CurrentActivity.FindViewById<ViewPager>(attribute.ViewPagerResourceId);
-                    var tabLayout = CurrentActivity.FindViewById<TabLayout>(attribute.TabLayoutResourceId);
-                    if (viewPager != null && tabLayout != null)
+                var viewPager = CurrentActivity.FindViewById<ViewPager>(attribute.ViewPagerResourceId);
+                var tabLayout = CurrentActivity.FindViewById<TabLayout>(attribute.TabLayoutResourceId);
+                if (viewPager != null && tabLayout != null)
+                {
+                    if (viewPager.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
                     {
-                        if (viewPager.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
-                        {
-                            //TODO: Check if adapter already contains this Tab and just navigate to it
-                            //var index = adapter.Fragments.FindIndex(f => f.Tag == attribute.Title);
-                            //viewPager.CurrentItem = index > -1 ? index : 0;
+                        //TODO: Check if adapter already contains this Tab and just navigate to it
+                        //var index = adapter.Fragments.FindIndex(f => f.Tag == attribute.Title);
+                        //viewPager.CurrentItem = index > -1 ? index : 0;
 
-                            adapter.Fragments.Add(new MvxCachingFragmentStatePagerAdapter.FragmentInfo(attribute.Title, attribute.ViewType, attribute.ViewModelType));
-                        }
-                        else
-                        {
-                            var fragments = new List<MvxCachingFragmentStatePagerAdapter.FragmentInfo>
+                        adapter.Fragments.Add(new MvxCachingFragmentStatePagerAdapter.FragmentInfo(attribute.Title, attribute.ViewType, attribute.ViewModelType));
+                    }
+                    else
+                    {
+                        var fragments = new List<MvxCachingFragmentStatePagerAdapter.FragmentInfo>
                             {
                                 new MvxCachingFragmentStatePagerAdapter.FragmentInfo(attribute.Title, attribute.ViewType, attribute.ViewModelType),
                             };
-                            //TODO: Maybe we need to use ChildFragmentManager here if it is nested
-                            viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(CurrentActivity, CurrentFragmentManager, fragments);
-                        }
-                        tabLayout.SetupWithViewPager(viewPager);
+                        //TODO: Maybe we need to use ChildFragmentManager here if it is nested
+                        viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(CurrentActivity, CurrentFragmentManager, fragments);
                     }
-                    else
-                        throw new MvxException("ViewPager or TabLayout not found");
-                });
-            });
+                    tabLayout.SetupWithViewPager(viewPager);
+                }
+                else
+                    throw new MvxException("ViewPager or TabLayout not found");
+            }
         }
 
         protected override void ShowFragment(Type view,
@@ -165,42 +160,45 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             if (attribute.ActivityHostViewModelType == null)
                 attribute.ActivityHostViewModelType = GetCurrentActivityViewModelType();
-            
-            Task.Run(async () => {
-                await ShowHostActivity(attribute);
-            }).ContinueWith((result) => {
-                Mvx.Resolve<IMvxMainThreadDispatcher>().RequestMainThreadAction(() => {
-                    if (CurrentActivity.FindViewById(attribute.FragmentContentId) == null)
-                        throw new NullReferenceException("FrameLayout to show Fragment not found");
 
-                    var fragmentName = FragmentJavaName(attribute.ViewType);
-                    var fragment = CreateFragment(fragmentName);
-                    //TODO: Find a better way to set the ViewModel at the Fragment
-                    fragment.ViewModel = ((MvxViewModelInstanceRequest)request).ViewModelInstance;
+            var currentHostViewModelType = GetCurrentActivityViewModelType();
+            if (attribute.ActivityHostViewModelType != currentHostViewModelType)
+            {
+                _pendingRequest = request;
+                ShowHostActivity(attribute);
+            }
+            else
+            {
+                if (CurrentActivity.FindViewById(attribute.FragmentContentId) == null)
+                    throw new NullReferenceException("FrameLayout to show Fragment not found");
 
-                    var ft = CurrentFragmentManager.BeginTransaction();
-                    if (attribute.SharedElements != null)
+                var fragmentName = FragmentJavaName(attribute.ViewType);
+                var fragment = CreateFragment(fragmentName);
+                //TODO: Find a better way to set the ViewModel at the Fragment
+                fragment.ViewModel = ((MvxViewModelInstanceRequest)request).ViewModelInstance;
+
+                var ft = CurrentFragmentManager.BeginTransaction();
+                if (attribute.SharedElements != null)
+                {
+                    foreach (var item in attribute.SharedElements)
                     {
-                        foreach (var item in attribute.SharedElements)
-                        {
-                            string name = item.Key;
-                            if (string.IsNullOrEmpty(name))
-                                name = ViewCompat.GetTransitionName(item.Value);
-                            ft.AddSharedElement(item.Value, name);
-                        }
+                        string name = item.Key;
+                        if (string.IsNullOrEmpty(name))
+                            name = ViewCompat.GetTransitionName(item.Value);
+                        ft.AddSharedElement(item.Value, name);
                     }
-                    if (!attribute.CustomAnimations.Equals((int.MinValue, int.MinValue, int.MinValue, int.MinValue)))
-                    {
-                        var customAnimations = attribute.CustomAnimations;
-                        ft.SetCustomAnimations(customAnimations.enter, customAnimations.exit, customAnimations.popEnter, customAnimations.popExit);
-                    }
-                    if (attribute.TransitionStyle != int.MinValue)
-                        ft.SetTransitionStyle(attribute.TransitionStyle);
+                }
+                if (!attribute.CustomAnimations.Equals((int.MinValue, int.MinValue, int.MinValue, int.MinValue)))
+                {
+                    var customAnimations = attribute.CustomAnimations;
+                    ft.SetCustomAnimations(customAnimations.enter, customAnimations.exit, customAnimations.popEnter, customAnimations.popExit);
+                }
+                if (attribute.TransitionStyle != int.MinValue)
+                    ft.SetTransitionStyle(attribute.TransitionStyle);
 
-                    ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
-                    ft.CommitNowAllowingStateLoss();
-                });
-            });
+                ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
+                ft.CommitNowAllowingStateLoss();
+            }
         }
 
         protected override MvxBasePresentationAttribute GetAttributeForViewModel(Type viewModelType)
@@ -265,6 +263,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     CurrentFragmentManager.PopBackStackImmediate(fragmentName, 1);
                 }
                 else
+                    //TODO: Not sure if we really should finish the Activity
                     CurrentActivity.Finish();
             }
             else if (attribute is MvxDialogAttribute dialog)
