@@ -45,7 +45,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             get
             {
-                return _dialog.Target as DialogFragment;
+                return _dialog?.Target as DialogFragment;
             }
         }
 

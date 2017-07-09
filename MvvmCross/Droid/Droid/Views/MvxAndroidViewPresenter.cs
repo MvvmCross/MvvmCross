@@ -27,7 +27,7 @@ namespace MvvmCross.Droid.Views
         protected virtual DialogFragment Dialog { 
             get 
             {
-                return _dialog.Target as DialogFragment;
+                return _dialog?.Target as DialogFragment;
             }
         }
 
