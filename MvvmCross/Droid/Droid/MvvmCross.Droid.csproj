@@ -113,6 +113,8 @@
     <Compile Include="Views\MvxSimpleLayoutInflaterHolder.cs" />
     <Compile Include="Views\Attributes\MvxActivityAttribute.cs" />
     <Compile Include="Views\Attributes\IMvxOverridePresentationAttribute.cs" />
+    <Compile Include="Views\MvxActivityState.cs" />
+    <Compile Include="Views\MvxActivityEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Droid\MvvmCross.Platform.Droid.csproj">

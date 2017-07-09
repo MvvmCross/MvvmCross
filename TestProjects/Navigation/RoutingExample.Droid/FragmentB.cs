@@ -8,7 +8,7 @@ using RoutingExample.Core.ViewModels;
 
 namespace RoutingExample.Droid
 {
-    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame, true)]
+    [MvxFragment(typeof(SecondHostViewModel), Resource.Id.content_frame, true)]
     [Register(nameof(FragmentB))]
     public class FragmentB : MvxFragment<ViewModelB>
     {

@@ -5,11 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.App;
+using MvvmCross.Core.Platform;
+using MvvmCross.Droid.Views;
 
 namespace MvvmCross.Droid.Platform
 {
-    public interface IMvxAndroidActivityLifetimeListener
+    public interface IMvxAndroidActivityLifetimeListener : IMvxLifetime
     {
         void OnCreate(Activity activity);
 
@@ -26,5 +29,7 @@ namespace MvvmCross.Droid.Platform
         void OnDestroy(Activity activity);
 
         void OnViewNewIntent(Activity activity);
+
+        event EventHandler<MvxActivityEventArgs> ActivityChanged;
     }
 }
