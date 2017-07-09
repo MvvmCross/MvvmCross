@@ -41,7 +41,13 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
         }
 
-        protected new DialogFragment Dialog { get; set; }
+        protected new DialogFragment Dialog
+        {
+            get
+            {
+                return _dialog.Target as DialogFragment;
+            }
+        }
 
         protected override void RegisterAttributeTypes()
         {
@@ -56,7 +62,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
            MvxViewModelRequest request)
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
-            Dialog = (DialogFragment)CreateFragment(fragmentName);
+            _dialog = new WeakReference((DialogFragment)CreateFragment(fragmentName));
             //TODO: Find a better way to set the ViewModel at the Fragment
             ((IMvxFragmentView)Dialog).ViewModel = ((MvxViewModelInstanceRequest)request).ViewModelInstance;
             Dialog.Cancelable = attribute.Cancelable;
@@ -233,7 +239,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             if (attribute is MvxActivityAttribute)
             {
                 if (Dialog != null)
+                {
                     Dialog.Dismiss();
+                    _dialog = null;
+                }
 
                 if (CurrentFragmentManager.BackStackEntryCount > 0)
                     CurrentFragmentManager.PopBackStackImmediate(null, 0);
@@ -268,10 +277,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
             else if (attribute is MvxDialogAttribute dialog)
             {
-                if(Dialog != null)
+                if (Dialog != null)
                 {
                     Dialog.Dismiss();
-                    Dialog = null;
+                    _dialog = null;
                 }
             }
         }
