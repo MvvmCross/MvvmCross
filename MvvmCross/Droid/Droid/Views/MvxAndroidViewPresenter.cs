@@ -22,7 +22,15 @@ namespace MvvmCross.Droid.Views
     {
         protected virtual Activity CurrentActivity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
         protected virtual FragmentManager CurrentFragmentManager => CurrentActivity.FragmentManager;
-        protected virtual DialogFragment Dialog { get; set; }
+
+        protected WeakReference _dialog;
+        protected virtual DialogFragment Dialog { 
+            get 
+            {
+                return _dialog.Target as DialogFragment;
+            }
+        }
+
         protected MvxViewModelRequest _pendingRequest;
         protected virtual IMvxAndroidActivityLifetimeListener ActivityLifetimeListener { get; set; } = Mvx.Resolve<IMvxAndroidActivityLifetimeListener>();
 
@@ -290,7 +298,7 @@ namespace MvvmCross.Droid.Views
             MvxViewModelRequest request)
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
-            Dialog = (DialogFragment)CreateFragment(fragmentName);
+            _dialog = new WeakReference((DialogFragment)CreateFragment(fragmentName));
             //TODO: Find a better way to set the ViewModel at the Fragment
             ((IMvxFragmentView)Dialog).ViewModel = ((MvxViewModelInstanceRequest)request).ViewModelInstance;
             Dialog.Cancelable = attribute.Cancelable;
@@ -322,8 +330,10 @@ namespace MvvmCross.Droid.Views
 
             if (attribute is MvxActivityAttribute)
             {
-                if (Dialog != null)
+                if (Dialog != null){
                     Dialog.Dismiss();
+                    _dialog = null;
+                }
 
                 if (CurrentFragmentManager.BackStackEntryCount > 0)
                     CurrentFragmentManager.PopBackStackImmediate(null, PopBackStackFlags.Inclusive);
@@ -362,7 +372,7 @@ namespace MvvmCross.Droid.Views
                 if (Dialog != null)
                 {
                     Dialog.Dismiss();
-                    Dialog = null;
+                    _dialog = null;
                 }
             }
         }
