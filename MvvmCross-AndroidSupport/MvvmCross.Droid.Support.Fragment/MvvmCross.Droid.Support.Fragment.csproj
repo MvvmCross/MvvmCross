@@ -83,6 +83,7 @@
     <Compile Include="MvxFragmentStatePagerAdapter.cs" />
     <Compile Include="MvxFragmentViewExtensionMethods.cs" />
     <Compile Include="MvxTabsFragmentActivity.cs" />
+    <Compile Include="MvxViewPagerFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

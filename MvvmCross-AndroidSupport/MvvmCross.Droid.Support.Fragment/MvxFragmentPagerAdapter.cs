@@ -17,7 +17,7 @@ namespace MvvmCross.Droid.Support.V4
     public class MvxFragmentPagerAdapter : FragmentPagerAdapter
     {
         private readonly Context _context;
-        public IEnumerable<FragmentInfo> Fragments { get; private set; }
+        public IEnumerable<MvxViewPagerFragment> Fragments { get; private set; }
 
         public override int Count => Fragments.Count();
 
@@ -27,7 +27,7 @@ namespace MvvmCross.Droid.Support.V4
         }
 
         public MvxFragmentPagerAdapter(
-            Context context, FragmentManager fragmentManager, IEnumerable<FragmentInfo> fragments)
+            Context context, FragmentManager fragmentManager, IEnumerable<MvxViewPagerFragment> fragments)
             : base(fragmentManager)
         {
             _context = context;
@@ -63,21 +63,6 @@ namespace MvvmCross.Droid.Support.V4
         {
             //Don't call restore to prevent crash on rotation
             //base.RestoreState (state, loader);
-        }
-
-        public class FragmentInfo
-        {
-            public FragmentInfo(string title, Type fragmentType, Type viewModelType)
-            {
-                Title = title;
-                FragmentType = fragmentType;
-                ViewModelType = viewModelType;
-            }
-
-            public string Title { get; set; }
-            public Type FragmentType { get; private set; }
-            public Type ViewModelType { get; private set; }
-            public Fragment CachedFragment { get; set; }
         }
     }
 }
