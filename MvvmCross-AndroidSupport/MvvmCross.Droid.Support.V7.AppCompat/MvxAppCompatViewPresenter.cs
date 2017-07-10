@@ -142,13 +142,13 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                         //var index = adapter.Fragments.FindIndex(f => f.Tag == attribute.Title);
                         //viewPager.CurrentItem = index > -1 ? index : 0;
 
-                        adapter.Fragments.Add(new MvxCachingFragmentStatePagerAdapter.FragmentInfo(attribute.Title, attribute.ViewType, attribute.ViewModelType));
+                        adapter.Fragments.Add(new MvxViewPagerFragment(attribute.Title, attribute.ViewType, attribute.ViewModelType));
                     }
                     else
                     {
-                        var fragments = new List<MvxCachingFragmentStatePagerAdapter.FragmentInfo>
+                        var fragments = new List<MvxViewPagerFragment>
                             {
-                                new MvxCachingFragmentStatePagerAdapter.FragmentInfo(attribute.Title, attribute.ViewType, attribute.ViewModelType),
+                                new MvxViewPagerFragment(attribute.Title, attribute.ViewType, attribute.ViewModelType),
                             };
                         //TODO: Maybe we need to use ChildFragmentManager here if it is nested
                         viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(CurrentActivity, CurrentFragmentManager, fragments);

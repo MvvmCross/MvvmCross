@@ -23,17 +23,17 @@ namespace Example.Droid.Fragments
             var viewPager = view.FindViewById<ViewPager>(Resource.Id.viewpager);
             if (viewPager != null)
             {
-                var fragments = new List<MvxFragmentPagerAdapter.FragmentInfo>
+                var fragments = new List<MvxViewPagerFragment>
                 {
-                    new MvxFragmentPagerAdapter.FragmentInfo("RecyclerView 1", typeof(RecyclerViewFragment),
+                    new MvxViewPagerFragment("RecyclerView 1", typeof(RecyclerViewFragment),
                         typeof(RecyclerViewModel)),
-                    new MvxFragmentPagerAdapter.FragmentInfo("RecyclerView 2", typeof(RecyclerViewFragment),
+                    new MvxViewPagerFragment("RecyclerView 2", typeof(RecyclerViewFragment),
                         typeof(RecyclerViewModel)),
-                    new MvxFragmentPagerAdapter.FragmentInfo("RecyclerView 3", typeof(RecyclerViewFragment),
+                    new MvxViewPagerFragment("RecyclerView 3", typeof(RecyclerViewFragment),
                         typeof(RecyclerViewModel)),
-                    new MvxFragmentPagerAdapter.FragmentInfo("RecyclerView 4", typeof(RecyclerViewFragment),
+                    new MvxViewPagerFragment("RecyclerView 4", typeof(RecyclerViewFragment),
                         typeof(RecyclerViewModel)),
-                    new MvxFragmentPagerAdapter.FragmentInfo("RecyclerView 5", typeof(RecyclerViewFragment),
+                    new MvxViewPagerFragment("RecyclerView 5", typeof(RecyclerViewFragment),
                         typeof(RecyclerViewModel))
                 };
                 viewPager.Adapter = new MvxFragmentPagerAdapter(Activity, ChildFragmentManager, fragments);
