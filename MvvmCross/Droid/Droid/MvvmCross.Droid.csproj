@@ -87,8 +87,8 @@
     <Compile Include="Views\MvxAndroidViewDispatcher.cs" />
     <Compile Include="Views\MvxAndroidViewsContainer.cs" />
     <Compile Include="Views\MvxActivity.cs" />
-    <Compile Include="Views\MvxApplication.cs" />
-    <Compile Include="Views\IMvxApplication.cs" />
+    <Compile Include="Views\MvxAndroidApplication.cs" />
+    <Compile Include="Views\IMvxAndroidApplication.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Droid\MvvmCross.Platform.Droid.csproj">
