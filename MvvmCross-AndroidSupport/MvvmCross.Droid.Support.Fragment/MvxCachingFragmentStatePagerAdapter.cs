@@ -26,7 +26,7 @@ namespace MvvmCross.Droid.Support.V4
         }
 
 		public MvxCachingFragmentStatePagerAdapter(Context context, FragmentManager fragmentManager,
-            List<FragmentInfo> fragments) : base(fragmentManager)
+            List<MvxViewPagerFragment> fragments) : base(fragmentManager)
         {
             _context = context;
             Fragments = fragments;
@@ -34,7 +34,7 @@ namespace MvvmCross.Droid.Support.V4
 
         public override int Count => Fragments.Count();
 
-        public List<FragmentInfo> Fragments { get; }
+        public List<MvxViewPagerFragment> Fragments { get; }
 
         protected static string FragmentJavaName(Type fragmentType)
         {
@@ -80,48 +80,6 @@ namespace MvvmCross.Droid.Support.V4
             var request = new MvxViewModelRequest(fragInfo.ViewModelType, mvxBundle, null);
 
             return Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(request, null);
-        }
-
-        public class FragmentInfo
-        {
-            public FragmentInfo(string title, Type fragmentType, Type viewModelType, object parameterValuesObject = null)
-                : this(title, null, fragmentType, viewModelType, parameterValuesObject)
-            {
-            }
-
-            public FragmentInfo(string title, string tag, Type fragmentType, Type viewModelType,
-                                object parameterValuesObject = null)
-            {
-                Title = title;
-                Tag = tag ?? title;
-                FragmentType = fragmentType;
-                ViewModelType = viewModelType;
-                ParameterValuesObject = parameterValuesObject;
-            }
-            
-            public FragmentInfo(string title, Type fragmentType, IMvxViewModel viewModel, object parameterValuesObject = null)
-		        : this(title, null, fragmentType, viewModel.GetType(), parameterValuesObject)
-	        {
-		        ViewModel = viewModel;
-	        }
-
-	        public FragmentInfo(string title, string tag, Type fragmentType, IMvxViewModel viewModel, object parameterValuesObject = null)
-		        : this(title, tag, fragmentType, viewModel.GetType(), parameterValuesObject)
-	        {  
-		        ViewModel = viewModel;
-	        }
-
-            public Type FragmentType { get; }
-
-            public object ParameterValuesObject { get; }
-
-            public string Tag { get; }
-
-            public string Title { get; }
-
-            public Type ViewModelType { get; }
-            
-            public IMvxViewModel ViewModel { get; }
         }
     }
 }
