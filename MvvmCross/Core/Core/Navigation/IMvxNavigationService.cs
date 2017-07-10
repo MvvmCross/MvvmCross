@@ -48,5 +48,7 @@ namespace MvvmCross.Core.Navigation
         Task<bool> CanNavigate(string path);
 
         Task<bool> Close(IMvxViewModel viewModel);
+
+        bool ChangePresentation(MvxPresentationHint hint);
     }
 }
