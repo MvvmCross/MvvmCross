@@ -5,10 +5,13 @@ using Android.Runtime;
 
 namespace MvvmCross.Droid.Views
 {
-    [Application]
-    public class MvxApplication : Application, IMvxApplication, Application.IActivityLifecycleCallbacks
+    public class MvxAndroidApplication : Application, IMvxAndroidApplication, Application.IActivityLifecycleCallbacks
     {
-        public MvxApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        public MvxAndroidApplication()
+        {
+        }
+
+        public MvxAndroidApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
 

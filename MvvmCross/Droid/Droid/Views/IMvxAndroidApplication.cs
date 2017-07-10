@@ -1,7 +1,7 @@
 ﻿using System;
 namespace MvvmCross.Droid.Views
 {
-    public interface IMvxApplication
+    public interface IMvxAndroidApplication
     {
     }
 }
