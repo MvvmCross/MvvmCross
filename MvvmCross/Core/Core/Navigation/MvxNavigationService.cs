@@ -12,6 +12,7 @@
    using MvvmCross.Platform;
    using MvvmCross.Platform.Core;
    using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Core.Navigation
 {
@@ -351,6 +352,12 @@ namespace MvvmCross.Core.Navigation
         {
             var request = new MvxViewModelInstanceRequest(viewModel){ PresentationValues = presentationBundle?.SafeGetData() };
             return await Navigate<TParameter, TResult>(request, viewModel, param, presentationBundle, cancellationToken);
+        }
+
+        public bool ChangePresentation(MvxPresentationHint hint)
+        {
+            MvxTrace.Trace("Requesting presentation change");
+            return ViewDispatcher.ChangePresentation(hint);
         }
 
         protected virtual void OnBeforeNavigate(object sender, NavigateEventArgs e)
