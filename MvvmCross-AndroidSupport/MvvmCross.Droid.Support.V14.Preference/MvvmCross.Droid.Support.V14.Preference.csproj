@@ -102,10 +102,6 @@
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>MvvmCross.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MvvmCross\Droid\Shared\MvvmCross.Droid.Shared.csproj">
-      <Project>{85EE0907-158C-481C-87B8-E4C0FA93C00A}</Project>
-      <Name>MvvmCross.Droid.Shared</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>MvvmCross.Platform</Name>
