@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using MvvmCross.Platform.Core;
+using JetBrains.Annotations;
 
 namespace MvvmCross.Core.ViewModels
 {
@@ -39,12 +40,14 @@ namespace MvvmCross.Core.ViewModels
             ShouldAlwaysRaiseInpcOnUserInterfaceThread(alwaysOnUIThread);
         }
 
+        [NotifyPropertyChangedInvocator]
         public void RaisePropertyChanged<T>(Expression<Func<T>> property)
         {
             var name = this.GetPropertyNameFromExpression(property);
             RaisePropertyChanged(name);
         }
 
+        [NotifyPropertyChangedInvocator]
         public void RaisePropertyChanged([CallerMemberName] string whichProperty = "")
         {
             var changedArgs = new PropertyChangedEventArgs(whichProperty);
@@ -77,6 +80,7 @@ namespace MvvmCross.Core.ViewModels
             }
         }
 
+        [NotifyPropertyChangedInvocator]
         protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(storage, value))

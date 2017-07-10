@@ -23,7 +23,20 @@ namespace MvvmCross.Mac.Views.Presenters
     {
         private readonly INSApplicationDelegate _applicationDelegate;
         private List<NSWindow> _windows;
-        protected Dictionary<Type, Action<NSViewController, MvxBasePresentationAttribute, MvxViewModelRequest>> _attributeTypesToShowMethodDictionary;
+        private Dictionary<Type, Action<NSViewController, MvxBasePresentationAttribute, MvxViewModelRequest>> _attributeTypesToShowMethodDictionary;
+        protected Dictionary<Type, Action<NSViewController, MvxBasePresentationAttribute, MvxViewModelRequest>> AttributeTypesToShowMethodDictionary
+        {
+            get
+            {
+                if (_attributeTypesToShowMethodDictionary == null)
+                {
+                    _attributeTypesToShowMethodDictionary = new Dictionary<Type, Action<NSViewController, MvxBasePresentationAttribute, MvxViewModelRequest>>();
+                    RegisterAttributeTypes();
+                }
+                return _attributeTypesToShowMethodDictionary;
+            }
+        }
+
 
         protected virtual INSApplicationDelegate ApplicationDelegate => _applicationDelegate;
 
@@ -33,10 +46,6 @@ namespace MvvmCross.Mac.Views.Presenters
         {
             _applicationDelegate = applicationDelegate;
             _windows = new List<NSWindow>();
-
-            _attributeTypesToShowMethodDictionary = new Dictionary<Type, Action<NSViewController, MvxBasePresentationAttribute, MvxViewModelRequest>>();
-
-            RegisterAttributeTypes();
         }
 
         protected virtual void RegisterAttributeTypes()
@@ -87,7 +96,7 @@ namespace MvvmCross.Mac.Views.Presenters
             var attribute = GetPresentationAttributes(viewController);
 
             Action<NSViewController, MvxBasePresentationAttribute, MvxViewModelRequest> showAction;
-            if (!_attributeTypesToShowMethodDictionary.TryGetValue(attribute.GetType(), out showAction))
+            if (!AttributeTypesToShowMethodDictionary.TryGetValue(attribute.GetType(), out showAction))
                 throw new KeyNotFoundException($"The type {attribute.GetType().Name} is not configured in the presenter dictionary");
 
             showAction.Invoke(viewController, attribute, request);

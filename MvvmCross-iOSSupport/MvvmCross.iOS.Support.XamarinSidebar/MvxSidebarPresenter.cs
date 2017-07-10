@@ -22,7 +22,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
         {
             base.RegisterAttributeTypes();
 
-            _attributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToShowMethodDictionary.Add(
                 typeof(MvxSidebarPresentationAttribute),
                 (vc, attribute, request) => ShowSidebarViewController(vc, (MvxSidebarPresentationAttribute)attribute, request));
         }
