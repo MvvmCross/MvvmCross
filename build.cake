@@ -191,7 +191,6 @@ Task("Package")
 		"MvvmCross.Console.Platform.nuspec",
 		"MvvmCross.Core.nuspec",
 		"MvvmCross.Droid.FullFragging.nuspec",
-		"MvvmCross.Droid.Shared.nuspec",
 		"MvvmCross.Droid.Support.Core.UI.nuspec",
 		"MvvmCross.Droid.Support.Core.Utils.nuspec",
 		"MvvmCross.Droid.Support.Design.nuspec",
