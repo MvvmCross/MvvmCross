@@ -63,8 +63,14 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
             _dialog = new WeakReference((DialogFragment)CreateFragment(fragmentName));
+
             //TODO: Find a better way to set the ViewModel at the Fragment
-            ((IMvxFragmentView)Dialog).ViewModel = ((MvxViewModelInstanceRequest)request).ViewModelInstance;
+            if (request is MvxViewModelInstanceRequest instanceRequest)
+                ((IMvxFragmentView)Dialog).ViewModel = instanceRequest.ViewModelInstance;
+            else
+            {
+                ((IMvxFragmentView)Dialog).ViewModel = (IMvxViewModel)Mvx.IocConstruct(request.ViewModelType);
+            }
             Dialog.Cancelable = attribute.Cancelable;
             Dialog.Show(CurrentFragmentManager, fragmentName);
         }
@@ -99,8 +105,15 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected override IMvxFragmentView CreateFragment(string fragmentName)
         {
-            var fragment = Fragment.Instantiate(CurrentActivity, fragmentName);
-            return (IMvxFragmentView)fragment;
+            try
+            {
+                var fragment = Fragment.Instantiate(CurrentActivity, fragmentName);
+                return (IMvxFragmentView)fragment;
+            }
+            catch
+            {
+                throw new MvxException($"Cannot create Fragment '{fragmentName}'. Are you use the wrong base class?");
+            }
         }
 
         protected override void ShowHostActivity(MvxFragmentAttribute attribute)
@@ -180,8 +193,14 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
                 var fragmentName = FragmentJavaName(attribute.ViewType);
                 var fragment = CreateFragment(fragmentName);
+
                 //TODO: Find a better way to set the ViewModel at the Fragment
-                fragment.ViewModel = ((MvxViewModelInstanceRequest)request).ViewModelInstance;
+                if(request is MvxViewModelInstanceRequest instanceRequest)
+                    fragment.ViewModel = instanceRequest.ViewModelInstance;
+                else
+                {
+                    fragment.ViewModel = (IMvxViewModel)Mvx.IocConstruct(request.ViewModelType);
+                }
 
                 var ft = CurrentFragmentManager.BeginTransaction();
                 if (attribute.SharedElements != null)
