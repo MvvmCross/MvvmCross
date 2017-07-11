@@ -52,7 +52,7 @@ namespace Example.Droid
         /// </summary>
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
-            return new MvxAndroidViewPresenter(AndroidViewAssemblies); ;
+            return new MvxAppCompatViewPresenter(AndroidViewAssemblies);
         }
 
         protected override IMvxTrace CreateDebugTrace()
