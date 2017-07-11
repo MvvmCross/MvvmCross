@@ -15,7 +15,7 @@ This package contains the 'PictureChooser' plugin for MvvmCross</description>
 	<files>
 		<!-- PCL -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" 
-			target="lib\portable-net45+win+wpa81" />
+			target="lib\portable-net45+win+wpa81+wp80" />
 
 		<!-- dotnet -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.PictureChooser.*" 
