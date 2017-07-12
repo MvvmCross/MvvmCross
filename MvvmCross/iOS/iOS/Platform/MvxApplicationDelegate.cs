@@ -1,4 +1,4 @@
-// MvxApplicationDelegate.cs
+﻿// MvxApplicationDelegate.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,13 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Foundation;
 using MvvmCross.Core.Platform;
 using UIKit;
 
 namespace MvvmCross.iOS.Platform
 {
-    public class MvxApplicationDelegate : UIApplicationDelegate
-                                          , IMvxApplicationDelegate
+    public class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplicationDelegate
     {
         public override void WillEnterForeground(UIApplication application)
         {
@@ -29,9 +29,10 @@ namespace MvvmCross.iOS.Platform
             FireLifetimeChanged(MvxLifetimeEvent.Closing);
         }
 
-        public override void FinishedLaunching(UIApplication application)
+        public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
+            return true;
         }
 
         private void FireLifetimeChanged(MvxLifetimeEvent which)
