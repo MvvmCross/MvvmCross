@@ -11,7 +11,7 @@ namespace Example.iOS
 {
     public class Setup : MvxIosSetup
     {
-        public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
+        public Setup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
         {
         }
