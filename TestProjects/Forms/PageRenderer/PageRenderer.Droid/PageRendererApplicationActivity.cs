@@ -24,7 +24,7 @@ namespace PageRendererExample.UI.Droid
             LoadApplication(mvxFormsApp);
 
             var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsDroidPagePresenter;
-            presenter.MvxFormsApp = mvxFormsApp;
+            presenter.FormsApplication = mvxFormsApp;
 
             Mvx.Resolve<IMvxAppStart>().Start();
         }
