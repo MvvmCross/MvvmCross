@@ -1,4 +1,6 @@
-﻿using Windows.ApplicationModel.Activation;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using Windows.ApplicationModel.Activation;
 using MvvmCross.Binding;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Bindings;
@@ -20,12 +22,42 @@ namespace MvvmCross.Forms.Uwp
             _launchActivatedEventArgs = e;
         }
 
+        private List<Assembly> viewAssemblies;
+        protected override IEnumerable<Assembly> GetViewAssemblies()
+        {
+            if (viewAssemblies == null)
+                viewAssemblies = new List<Assembly>(base.GetViewAssemblies());
+
+            return viewAssemblies;
+        }
+
+        protected override void InitializeApp(Platform.Plugins.IMvxPluginManager pluginManager)
+        {
+            base.InitializeApp(pluginManager);
+            viewAssemblies.AddRange(GetViewModelAssemblies());
+        }
+
+        private MvxFormsApplication _formsApplication;
+        public MvxFormsApplication FormsApplication
+        {
+            get
+            {
+                if (_formsApplication == null)
+                    _formsApplication = CreateFormsApplication();
+                return _formsApplication;
+            }
+        }
+
+        protected virtual MvxFormsApplication CreateFormsApplication()
+        {
+            return new MvxFormsApplication();
+        }
+
         protected override IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
         {
             Xamarin.Forms.Forms.Init(_launchActivatedEventArgs);
 
-            var xamarinFormsApp = new MvxFormsApplication();
-            var presenter = new MvxFormsUwpPagePresenter(rootFrame, xamarinFormsApp);
+            var presenter = new MvxFormsUwpPagePresenter(rootFrame, FormsApplication);
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
 
             return presenter;

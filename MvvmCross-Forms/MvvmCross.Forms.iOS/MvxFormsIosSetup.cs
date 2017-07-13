@@ -13,18 +13,50 @@ namespace MvvmCross.Forms.iOS
 {
     public abstract class MvxFormsIosSetup : MvxIosSetup
     {
-        public MvxFormsIosSetup(MvxApplicationDelegate applicationDelegate, UIWindow window)
+        protected MvxFormsIosSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
         {
         }
 
+        protected MvxFormsIosSetup(IMvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter)
+            : base(applicationDelegate, presenter)
+        {
+        }
+
+        private List<Assembly> viewAssemblies;
+        protected override IEnumerable<Assembly> GetViewAssemblies()
+        {
+            if (viewAssemblies == null)
+                viewAssemblies = new List<Assembly>(base.GetViewAssemblies());
+            
+            return viewAssemblies;
+        }
+
+        protected override void InitializeApp(Platform.Plugins.IMvxPluginManager pluginManager)
+        {
+            base.InitializeApp(pluginManager);
+            viewAssemblies.AddRange(GetViewModelAssemblies());
+        }
+
+        private MvxFormsApplication _formsApplication;
+        public MvxFormsApplication FormsApplication {
+            get
+            {
+                if(_formsApplication == null)
+                    _formsApplication = CreateFormsApplication();
+                return _formsApplication;
+            }
+        }
+
+        protected virtual MvxFormsApplication CreateFormsApplication()
+        {
+            return new MvxFormsApplication();
+        }
+
         protected override IMvxIosViewPresenter CreatePresenter()
         {
-            Xamarin.Forms.Forms.Init();
-
-            var xamarinFormsApp = new MvxFormsApplication();
-
-            return new MvxFormsIosPagePresenter(Window, xamarinFormsApp);
+            global::Xamarin.Forms.Forms.Init();
+            return new MvxFormsIosPagePresenter(Window, FormsApplication);
         }
 
         protected override IEnumerable<Assembly> ValueConverterAssemblies
