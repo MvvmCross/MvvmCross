@@ -4,6 +4,8 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Views;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Presenters;
 using MvvmCross.Platform;
 using Xamarin.Forms.Platform.Android;
 
@@ -24,6 +26,15 @@ namespace MvvmCross.Forms.Droid
                 }
 
                 return _lifetimeListener;
+            }
+        }
+
+        protected MvxFormsApplication FormsApplication
+        {
+            get
+            {
+                var formsPresenter = (IMvxFormsPagePresenter)Mvx.Resolve<IMvxAndroidViewPresenter>();
+                return formsPresenter.FormsApplication;
             }
         }
 
