@@ -8,7 +8,7 @@ using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Views
 {
-    public static class MvxSharedFragmentExtensions
+    public static class MvxFragmentExtensions
     {
         public static Type FindAssociatedViewModelType(this IMvxFragmentView fragmentView, Type fragmentActivityParentType)
         {

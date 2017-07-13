@@ -10,7 +10,7 @@ using MvvmCross.Platform.Droid.Platform;
 
 namespace MvvmCross.Droid.Views
 {
-    public class FragmentHostRegistrationSettings
+    /*public class FragmentHostRegistrationSettings
     {
         private readonly IEnumerable<Assembly> _assembliesToLookup;
         private readonly IMvxViewModelTypeFinder _viewModelTypeFinder;
@@ -154,5 +154,5 @@ namespace MvvmCross.Droid.Views
 
             return attribute;
         }
-    }
+    }*/
 }

@@ -11,7 +11,7 @@ namespace MvvmCross.Droid.Views.Attributes
         public Type ViewModelType { get; set; }
 
         /// <summary>
-        /// That shall be used only if you are using non generic fragments.
+        /// Type of the view
         /// </summary>
         public Type ViewType { get; set; }
     }
