@@ -9,6 +9,7 @@ namespace MvvmCross.Droid.Views
         OnResume,
         OnPause,
         OnStop,
-        OnDestroy
+        OnDestroy,
+        OnSaveInstanceState
     }
 }

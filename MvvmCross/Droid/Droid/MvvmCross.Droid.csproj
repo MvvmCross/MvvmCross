@@ -93,7 +93,7 @@
     <Compile Include="Views\Attributes\MvxFragmentAttribute.cs" />
     <Compile Include="Views\Attributes\MvxFragmentAttributeExtensionMethods.cs" />
     <Compile Include="Views\Attributes\MvxDialogAttribute.cs" />
-    <Compile Include="Views\MvxSharedFragmentExtensions.cs" />
+    <Compile Include="Views\MvxFragmentExtensions.cs" />
     <Compile Include="Views\IMvxFragmentView.cs" />
     <Compile Include="Views\FragmentHostRegistrationSettings.cs" />
     <Compile Include="Views\IMvxFragmentHost.cs" />

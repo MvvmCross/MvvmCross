@@ -7,6 +7,7 @@
 
 using System;
 using Android.App;
+using Android.OS;
 using MvvmCross.Core.Platform;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Platform.Droid.Platform;
@@ -22,7 +23,7 @@ namespace MvvmCross.Droid.Views
     {
         private int _createdActivityCount;
 
-        public virtual void OnCreate(Activity activity)
+        public virtual void OnCreate(Activity activity, Bundle eventArgs)
         {
             _createdActivityCount++;
             if (_createdActivityCount == 1)
@@ -30,7 +31,7 @@ namespace MvvmCross.Droid.Views
                 FireLifetimeChange(MvxLifetimeEvent.ActivatedFromDisk);
             }
             Activity = activity;
-            FireActivityChange(activity, MvxActivityState.OnCreate);
+            FireActivityChange(activity, MvxActivityState.OnCreate, eventArgs);
         }
 
         public virtual void OnStart(Activity activity)
@@ -81,11 +82,17 @@ namespace MvvmCross.Droid.Views
             Activity = activity;
         }
 
+        public void OnSaveInstanceState(Activity activity, Bundle eventArgs)
+        {
+            Activity = activity;
+            FireActivityChange(activity, MvxActivityState.OnSaveInstanceState, eventArgs);
+        }
+
         public Activity Activity { get; private set; }
 
-        protected void FireActivityChange(Activity activity, MvxActivityState state)
+        protected void FireActivityChange(Activity activity, MvxActivityState state, object extras = null)
         {
-            ActivityChanged?.Invoke(this, new MvxActivityEventArgs(activity, state));
+            ActivityChanged?.Invoke(this, new MvxActivityEventArgs(activity, state, extras));
         }
 
         public event EventHandler<MvxActivityEventArgs> ActivityChanged;

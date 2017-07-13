@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
+using Android.OS;
 using Java.Lang;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
@@ -75,6 +77,8 @@ namespace MvvmCross.Droid.Views
             }
         }
 
+        protected ConditionalWeakTable<Type, IMvxFragmentView> _cachedFragments = new ConditionalWeakTable<Type, IMvxFragmentView>();
+
         protected readonly IMvxViewModelTypeFinder _viewModelTypeFinder;
 
         protected Lazy<IMvxNavigationSerializer> _lazyNavigationSerializerFactory;
@@ -88,12 +92,20 @@ namespace MvvmCross.Droid.Views
             ActivityLifetimeListener.ActivityChanged += ActivityLifetimeListener_ActivityChanged;
         }
 
-        void ActivityLifetimeListener_ActivityChanged(object sender, MvxActivityEventArgs e)
+        protected virtual void ActivityLifetimeListener_ActivityChanged(object sender, MvxActivityEventArgs e)
         {
             if (e.ActivityState == MvxActivityState.OnResume && _pendingRequest != null)
             {
                 Show(_pendingRequest);
                 _pendingRequest = null;
+            }
+            else if(e.ActivityState == MvxActivityState.OnCreate && e.Extras is Bundle savedBundle)
+            {
+                //TODO: Restore fragments from bundle
+            }
+            else if(e.ActivityState == MvxActivityState.OnSaveInstanceState && e.Extras is Bundle outBundle)
+            {
+                //TODO: Save fragments into bundle
             }
             else if(e.ActivityState == MvxActivityState.OnDestroy)
             {
@@ -149,6 +161,7 @@ namespace MvvmCross.Droid.Views
         public override void Show(MvxViewModelRequest request)
         {
             var attribute = GetAttributeForViewModel(request.ViewModelType);
+            attribute.ViewModelType = request.ViewModelType;
             var view = attribute.ViewType;
             var attributeType = attribute.GetType();
 
@@ -260,7 +273,7 @@ namespace MvvmCross.Droid.Views
                     throw new NullReferenceException("FrameLayout to show Fragment not found");
 
                 var fragmentName = FragmentJavaName(attribute.ViewType);
-                var fragment = CreateFragment(fragmentName);
+                var fragment = CreateFragment(attribute, fragmentName);
 
                 //TODO: Find a better way to set the ViewModel at the Fragment
                 if (request is MvxViewModelInstanceRequest instanceRequest)
@@ -292,12 +305,26 @@ namespace MvvmCross.Droid.Views
             }
         }
 
-        protected virtual IMvxFragmentView CreateFragment(string fragmentName)
+        protected virtual IMvxFragmentView CreateFragment(MvxBasePresentationAttribute attribute, string fragmentName)
         {
             try
             {
-                var fragment = Fragment.Instantiate(CurrentActivity, fragmentName);
-                return (IMvxFragmentView)fragment;
+                IMvxFragmentView fragment;
+                if (attribute is MvxFragmentAttribute fragmentAttribute && fragmentAttribute.IsCacheableFragment)
+                {
+                    if (_cachedFragments.TryGetValue(attribute.ViewModelType, out fragment))
+                    {
+
+                    }
+                    else
+                    {
+                        fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
+                        _cachedFragments.Add(attribute.ViewModelType, fragment);
+                    }
+                }
+                else
+                    fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
+                return fragment;
             }
             catch
             {
@@ -311,7 +338,7 @@ namespace MvvmCross.Droid.Views
             MvxViewModelRequest request)
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
-            _dialog = new WeakReference((DialogFragment)CreateFragment(fragmentName));
+            _dialog = new WeakReference((DialogFragment)CreateFragment(attribute, fragmentName));
 
             //TODO: Find a better way to set the ViewModel at the Fragment
             if (request is MvxViewModelInstanceRequest instanceRequest)

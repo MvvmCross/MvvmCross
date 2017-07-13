@@ -62,7 +62,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
            MvxViewModelRequest request)
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
-            _dialog = new WeakReference((DialogFragment)CreateFragment(fragmentName));
+            _dialog = new WeakReference((DialogFragment)CreateFragment(attribute, fragmentName));
 
             //TODO: Find a better way to set the ViewModel at the Fragment
             if (request is MvxViewModelInstanceRequest instanceRequest)
@@ -103,12 +103,27 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 activity.StartActivity(intent);
         }
 
-        protected override IMvxFragmentView CreateFragment(string fragmentName)
+        protected override IMvxFragmentView CreateFragment(MvxBasePresentationAttribute attribute, string fragmentName)
         {
             try
             {
-                var fragment = Fragment.Instantiate(CurrentActivity, fragmentName);
-                return (IMvxFragmentView)fragment;
+                IMvxFragmentView fragment;
+                if (attribute is MvxFragmentAttribute fragmentAttribute && fragmentAttribute.IsCacheableFragment)
+                {
+                    if (_cachedFragments.TryGetValue(attribute.ViewModelType, out fragment))
+                    {
+
+                    }
+                    else
+                    {
+                        fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
+                        ((Fragment)fragment).RetainInstance = true;
+                        _cachedFragments.Add(attribute.ViewModelType, fragment);
+                    }
+                }
+                else
+                    fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
+                return fragment;
             }
             catch
             {
@@ -192,7 +207,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     throw new NullReferenceException("FrameLayout to show Fragment not found");
 
                 var fragmentName = FragmentJavaName(attribute.ViewType);
-                var fragment = CreateFragment(fragmentName);
+                var fragment = CreateFragment(attribute, fragmentName);
 
                 //TODO: Find a better way to set the ViewModel at the Fragment
                 if(request is MvxViewModelInstanceRequest instanceRequest)
