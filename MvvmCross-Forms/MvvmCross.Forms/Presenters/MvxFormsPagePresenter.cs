@@ -20,32 +20,20 @@ namespace MvvmCross.Forms.Presenters
     {
         public const string ModalPresentationParameter = "modal";
 
-        private Application _mvxFormsApp;
-
-        public Application MvxFormsApp
+        private MvxFormsApplication _formsApplication;
+        public MvxFormsApplication FormsApplication
         {
-            get
-            {
-                return _mvxFormsApp;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentException("MvxFormsApp cannot be null");
-                }
-
-                _mvxFormsApp = value;
-            }
+            get { return _formsApplication; }
+            set { _formsApplication = value; }
         }
 
         protected MvxFormsPagePresenter()
         {
         }
 
-        protected MvxFormsPagePresenter(Application mvxFormsApp)
+        protected MvxFormsPagePresenter(MvxFormsApplication formsApplication)
         {
-            MvxFormsApp = mvxFormsApp;
+            FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApp cannot be null");
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
@@ -54,7 +42,7 @@ namespace MvvmCross.Forms.Presenters
 
             if (hint is MvxClosePresentationHint)
             {
-                var mainPage = MvxFormsApp.MainPage as NavigationPage;
+                var mainPage = FormsApplication.MainPage as NavigationPage;
 
                 if (mainPage == null)
                 {
@@ -81,10 +69,10 @@ namespace MvvmCross.Forms.Presenters
 
         private void SetupForBinding(Page page, IMvxViewModel viewModel, MvxViewModelRequest request)
         {
-            var mvxContentPage = page as IMvxContentPage;
-            if (mvxContentPage != null) {
-                mvxContentPage.Request = request;
-                mvxContentPage.ViewModel = viewModel;
+            var contentPage = page as IMvxContentPage;
+            if (contentPage != null) {
+                contentPage.Request = request;
+                contentPage.ViewModel = viewModel;
             } 
             else {
                 page.BindingContext = viewModel;
@@ -101,12 +89,12 @@ namespace MvvmCross.Forms.Presenters
 
             SetupForBinding(page, viewModel, request);
 
-            var mainPage = _mvxFormsApp.MainPage as NavigationPage;
+            var mainPage = _formsApplication.MainPage as NavigationPage;
 
             if (mainPage == null)
             {
-                _mvxFormsApp.MainPage = new NavigationPage(page);
-                mainPage = MvxFormsApp.MainPage as NavigationPage;
+                _formsApplication.MainPage = new NavigationPage(page);
+                mainPage = FormsApplication.MainPage as NavigationPage;
                 CustomPlatformInitialization(mainPage);
             }
             else
