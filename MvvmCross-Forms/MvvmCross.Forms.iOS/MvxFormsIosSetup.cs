@@ -8,7 +8,6 @@ using MvvmCross.iOS.Platform;
 using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Localization;
 using UIKit;
-using System.Linq;
 
 namespace MvvmCross.Forms.iOS
 {
@@ -19,8 +18,8 @@ namespace MvvmCross.Forms.iOS
         {
         }
 
-        protected MvxFormsIosSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window, IMvxIosViewPresenter presenter)
-            : base(applicationDelegate, window, presenter)
+        protected MvxFormsIosSetup(IMvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter)
+            : base(applicationDelegate, presenter)
         {
         }
 
