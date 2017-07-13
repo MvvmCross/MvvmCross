@@ -29,12 +29,17 @@ namespace MvvmCross.Forms.Droid
             }
         }
 
+        private MvxFormsApplication _formsApplication;
         protected MvxFormsApplication FormsApplication
         {
             get
             {
-                var formsPresenter = (IMvxFormsPagePresenter)Mvx.Resolve<IMvxAndroidViewPresenter>();
-                return formsPresenter.FormsApplication;
+                if (_formsApplication == null)
+                {
+                    var formsPresenter = (IMvxFormsPagePresenter)Mvx.Resolve<IMvxAndroidViewPresenter>();
+                    _formsApplication = formsPresenter.FormsApplication;
+                }
+                return _formsApplication;
             }
         }
 
