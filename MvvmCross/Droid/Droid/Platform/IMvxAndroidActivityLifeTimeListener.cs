@@ -7,6 +7,7 @@
 
 using System;
 using Android.App;
+using Android.OS;
 using MvvmCross.Core.Platform;
 using MvvmCross.Droid.Views;
 
@@ -14,7 +15,7 @@ namespace MvvmCross.Droid.Platform
 {
     public interface IMvxAndroidActivityLifetimeListener : IMvxLifetime
     {
-        void OnCreate(Activity activity);
+        void OnCreate(Activity activity, Bundle eventArgs);
 
         void OnStart(Activity activity);
 
@@ -29,6 +30,8 @@ namespace MvvmCross.Droid.Platform
         void OnDestroy(Activity activity);
 
         void OnViewNewIntent(Activity activity);
+
+        void OnSaveInstanceState(Activity activity, Bundle eventArgs);
 
         event EventHandler<MvxActivityEventArgs> ActivityChanged;
     }

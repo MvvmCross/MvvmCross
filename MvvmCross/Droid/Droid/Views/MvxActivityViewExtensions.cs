@@ -40,7 +40,7 @@ namespace MvvmCross.Droid.Views
         public static void OnViewCreate(this IMvxAndroidView androidView, Bundle bundle)
         {
             androidView.EnsureSetupInitialized();
-            androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity));
+            androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity, bundle));
 
             var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
             var cached = cache.GetAndClear(bundle);

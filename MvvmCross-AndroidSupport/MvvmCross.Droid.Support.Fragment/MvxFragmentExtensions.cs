@@ -37,7 +37,7 @@ namespace MvvmCross.Droid.Support.V4
             {
                 //TODO call MvxViewModelLoader.Reload when it's added in MvvmCross, tracked by #1165
                 //until then, we're going to re-run the viewmodel lifecycle here.
-                MvxSharedFragmentExtensions.RunViewModelLifecycle(fragmentView.ViewModel, bundle, request);
+                Views.MvxFragmentExtensions.RunViewModelLifecycle(fragmentView.ViewModel, bundle, request);
 
                 return;
             }
