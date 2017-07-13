@@ -1,4 +1,6 @@
-﻿using Windows.ApplicationModel.Activation;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using Windows.ApplicationModel.Activation;
 using MvvmCross.Binding;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Bindings;

@@ -16,7 +16,7 @@ using Xamarin.Forms;
 namespace MvvmCross.Forms.Presenters
 {
     public abstract class MvxFormsPagePresenter
-        : MvxViewPresenter
+        : MvxViewPresenter, IMvxFormsPagePresenter
     {
         public const string ModalPresentationParameter = "modal";
 
