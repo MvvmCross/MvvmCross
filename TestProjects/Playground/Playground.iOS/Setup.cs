@@ -14,8 +14,8 @@ namespace Playground.iOS
         {
         }
 
-        public Setup(MvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter)
-            : base(applicationDelegate, presenter)
+        public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window, IMvxIosViewPresenter presenter)
+            : base(applicationDelegate, window, presenter)
         {
         }
 

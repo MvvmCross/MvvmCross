@@ -42,10 +42,11 @@ namespace MvvmCross.iOS.Platform
             _applicationDelegate = applicationDelegate;
         }
 
-        protected MvxIosSetup(IMvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter)
+        protected MvxIosSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window, IMvxIosViewPresenter presenter) : this (applicationDelegate, window)
         {
-            _presenter = presenter;
+            _window = window;
             _applicationDelegate = applicationDelegate;
+            _presenter = presenter;
         }
 
         protected UIWindow Window => _window;
