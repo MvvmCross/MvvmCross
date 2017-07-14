@@ -1,17 +1,18 @@
+using Foundation;
 using System;
-using MvvmCross.Binding.BindingContext;
+using UIKit;
 using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters.Attributes;
+using MvvmCross.Binding.BindingContext;
 using Playground.Core.ViewModels;
-using UIKit;
 
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
-    [MvxModalPresentation(ModalPresentationStyle = UIModalPresentationStyle.OverFullScreen, ModalTransitionStyle = UIModalTransitionStyle.CrossDissolve)]
-    public partial class ModalView : MvxViewController<ModalViewModel>
+    [MvxModalPresentation(WrapInNavigationController = true)]
+    public partial class NestedModalView : MvxViewController<NestedModalViewModel>
     {
-        public ModalView(IntPtr handle) : base(handle)
+        public NestedModalView(IntPtr handle) : base(handle)
         {
         }
 
@@ -21,11 +22,10 @@ namespace Playground.iOS.Views
 
             View.BackgroundColor = UIColor.Orange;
 
-            var set = this.CreateBindingSet<ModalView, ModalViewModel>();
+            var set = this.CreateBindingSet<NestedModalView, NestedModalViewModel>();
 
             set.Bind(btnTabs).To(vm => vm.ShowTabsCommand);
             set.Bind(btnClose).To(vm => vm.CloseCommand);
-            set.Bind(btnNestedModal).To(vm => vm.ShowNestedModalCommand);
 
             set.Apply();
         }
