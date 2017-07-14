@@ -49,13 +49,17 @@ namespace MvvmCross.Core.Navigation
         }
 
         private IMvxViewModelLoader _viewModelLoader;
-        protected virtual IMvxViewModelLoader ViewModelLoader
+        public virtual IMvxViewModelLoader ViewModelLoader
         {
             get
             {
                 if (_viewModelLoader == null)
                     _viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
                 return _viewModelLoader;
+            }
+            set
+            {
+                _viewModelLoader = value;
             }
         }
 
