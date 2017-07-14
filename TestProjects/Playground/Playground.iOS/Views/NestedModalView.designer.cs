@@ -11,8 +11,8 @@ using UIKit;
 
 namespace Playground.iOS.Views
 {
-    [Register ("ModalNavView")]
-    partial class ModalNavView
+    [Register ("NestedModalView")]
+    partial class NestedModalView
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -20,11 +20,7 @@ namespace Playground.iOS.Views
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton btnNestedModal { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton btnShowChild { get; set; }
+        UIKit.UIButton btnTabs { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
@@ -33,14 +29,9 @@ namespace Playground.iOS.Views
                 btnClose = null;
             }
 
-            if (btnNestedModal != null) {
-                btnNestedModal.Dispose ();
-                btnNestedModal = null;
-            }
-
-            if (btnShowChild != null) {
-                btnShowChild.Dispose ();
-                btnShowChild = null;
+            if (btnTabs != null) {
+                btnTabs.Dispose ();
+                btnTabs = null;
             }
         }
     }

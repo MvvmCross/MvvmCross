@@ -1,6 +1,6 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
+// This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
@@ -20,6 +20,10 @@ namespace Playground.iOS.Views
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton btnNestedModal { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton btnTabs { get; set; }
 
         void ReleaseDesignerOutlets ()
@@ -27,6 +31,11 @@ namespace Playground.iOS.Views
             if (btnClose != null) {
                 btnClose.Dispose ();
                 btnClose = null;
+            }
+
+            if (btnNestedModal != null) {
+                btnNestedModal.Dispose ();
+                btnNestedModal = null;
             }
 
             if (btnTabs != null) {

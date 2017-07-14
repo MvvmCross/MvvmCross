@@ -25,6 +25,7 @@ namespace Playground.iOS.Views
 
             set.Bind(btnShowChild).To(vm => vm.ShowChildCommand);
             set.Bind(btnClose).To(vm => vm.CloseCommand);
+            set.Bind(btnNestedModal).To(vm => vm.ShowNestedModalCommand);
 
             set.Apply();
         }
