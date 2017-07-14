@@ -149,6 +149,12 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="562" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="232" y="259" width="137" height="30"/>
+                                <state key="normal" title="Show Nested Modal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -156,11 +162,14 @@
                             <constraint firstItem="350" firstAttribute="centerX" secondItem="22" secondAttribute="centerX" id="352"/>
                             <constraint firstItem="51" firstAttribute="centerX" secondItem="22" secondAttribute="centerX" id="353"/>
                             <constraint firstItem="51" firstAttribute="top" secondItem="350" secondAttribute="bottom" constant="46" id="354"/>
+                            <constraint id="563" firstItem="562" firstAttribute="top" secondItem="51" secondAttribute="bottom" constant="33"/>
+                            <constraint id="564" firstItem="562" firstAttribute="centerX" secondItem="22" secondAttribute="centerX"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="btnClose" destination="51" id="name-outlet-51"/>
                         <outlet property="btnTabs" destination="350" id="name-outlet-350"/>
+                        <outlet property="btnNestedModal" destination="562" id="name-outlet-562"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="23" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -191,6 +200,12 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="565" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="232" y="246" width="137" height="30"/>
+                                <state key="normal" title="Show Nested Modal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -198,11 +213,14 @@
                             <constraint firstItem="54" firstAttribute="centerX" secondItem="29" secondAttribute="centerX" id="399"/>
                             <constraint firstItem="55" firstAttribute="top" secondItem="54" secondAttribute="bottom" constant="38" id="400"/>
                             <constraint firstItem="55" firstAttribute="centerX" secondItem="29" secondAttribute="centerX" id="401"/>
+                            <constraint id="566" firstItem="565" firstAttribute="top" secondItem="55" secondAttribute="bottom" constant="42"/>
+                            <constraint id="567" firstItem="565" firstAttribute="centerX" secondItem="29" secondAttribute="centerX"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="btnClose" destination="55" id="name-outlet-55"/>
                         <outlet property="btnShowChild" destination="54" id="name-outlet-54"/>
+                        <outlet property="btnNestedModal" destination="565" id="name-outlet-565"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="30" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -650,6 +668,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="499" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2540" y="-3"/>
+        </scene>
+        <scene sceneID="518">
+            <objects>
+                <viewController id="519" sceneMemberID="viewController" customClass="NestedModalView" storyboardIdentifier="NestedModalView">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="516"/>
+                        <viewControllerLayoutGuide type="bottom" id="517"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="520">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="539" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="263" y="64" width="75" height="30"/>
+                                <state key="normal" title="Show Tabs">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="542" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="281" y="158" width="39" height="30"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint id="540" firstItem="539" firstAttribute="top" secondItem="516" secondAttribute="bottom" constant="44"/>
+                            <constraint id="541" firstItem="539" firstAttribute="centerX" secondItem="520" secondAttribute="centerX"/>
+                            <constraint id="543" firstItem="542" firstAttribute="top" secondItem="539" secondAttribute="bottom" constant="64"/>
+                            <constraint id="544" firstItem="542" firstAttribute="centerX" secondItem="520" secondAttribute="centerX"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="542" id="name-outlet-542"/>
+                        <outlet property="btnTabs" destination="539" id="name-outlet-539"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="521" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3284" y="667"/>
         </scene>
     </scenes>
     <resources>
