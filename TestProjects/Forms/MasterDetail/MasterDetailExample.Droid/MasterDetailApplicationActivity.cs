@@ -22,7 +22,7 @@ namespace MasterDetailExample.Droid
             LoadApplication(mvxFormsApp);
 
             var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsDroidMasterDetailPagePresenter;
-            presenter.MvxFormsApp = mvxFormsApp;
+            presenter.FormsApplication = mvxFormsApp;
 
             Mvx.Resolve<IMvxAppStart>().Start();
         }
