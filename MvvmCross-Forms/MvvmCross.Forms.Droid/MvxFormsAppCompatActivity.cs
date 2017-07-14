@@ -62,8 +62,7 @@ namespace MvvmCross.Forms.Droid
             // Required for proper Push notifications handling
             var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setupSingleton.EnsureInitialized();
-
-            LifetimeListener.OnCreate(this);
+            LifetimeListener.OnCreate(this, bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(FormsApplication);
