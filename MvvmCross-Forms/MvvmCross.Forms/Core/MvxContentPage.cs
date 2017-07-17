@@ -20,15 +20,15 @@ namespace MvvmCross.Forms.Core
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            ViewModel?.Appearing();
-            ViewModel?.Appeared();
+            ViewModel?.ViewAppearing();
+            ViewModel?.ViewAppeared();
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            ViewModel?.Disappearing();
-            ViewModel?.Disappeared();
+            ViewModel?.ViewDisappearing();
+            ViewModel?.ViewDisappeared();
         }
 
         public MvxViewModelRequest Request { get; set; }

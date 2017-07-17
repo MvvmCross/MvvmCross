@@ -37,14 +37,14 @@ namespace MvvmCross.Wpf.Views
 
         private void MvxWpfView_Unloaded(object sender, RoutedEventArgs e)
         {
-            ViewModel?.Disappearing();
-            ViewModel?.Disappeared();
+            ViewModel?.ViewDisappearing();
+            ViewModel?.ViewDisappeared();
         }
 
         private void MvxWpfView_Loaded(object sender, RoutedEventArgs e)
         {
-            ViewModel?.Appearing();
-            ViewModel?.Appeared();
+            ViewModel?.ViewAppearing();
+            ViewModel?.ViewAppeared();
         }
 
         public void Dispose()

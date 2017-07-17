@@ -141,7 +141,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="MvvmSetup.cs" />
+    <Compile Include="Setup.cs" />
     <Compile Include="CameraRendererPage.cs" />
     <Compile Include="..\..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>

@@ -1,5 +1,6 @@
 ﻿using Foundation;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Forms.iOS;
 using MvvmCross.iOS.Platform;
 using MvvmCross.Platform;
 using UIKit;
@@ -7,21 +8,23 @@ using UIKit;
 namespace MvxBindingsExample.iOS
 {
     [Register("AppDelegate")]
-    public class AppDelegate : MvxApplicationDelegate
+    public class AppDelegate : MvxFormsApplicationDelegate
     {
-        private UIWindow _window;
+        public override UIWindow Window { get; set; }
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            _window = new UIWindow(UIScreen.MainScreen.Bounds);
+            Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            var setup = new Setup(this, _window);
+            var setup = new Setup(this, Window);
             setup.Initialize();
 
             var startup = Mvx.Resolve<IMvxAppStart>();
             startup.Start();
 
-            _window.MakeKeyAndVisible();
+            LoadApplication(setup.FormsApplication);
+
+            Window.MakeKeyAndVisible();
 
             return true;
         }

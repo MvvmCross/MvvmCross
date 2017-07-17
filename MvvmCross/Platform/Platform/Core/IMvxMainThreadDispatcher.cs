@@ -11,6 +11,6 @@ namespace MvvmCross.Platform.Core
 {
     public interface IMvxMainThreadDispatcher
     {
-        bool RequestMainThreadAction(Action action);
+        bool RequestMainThreadAction(Action action, bool maskExceptions = true);
     }
 }

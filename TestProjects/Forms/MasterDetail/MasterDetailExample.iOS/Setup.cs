@@ -1,6 +1,7 @@
 ﻿using MasterDetailExample.Core;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Core;
+using MvvmCross.Forms.iOS;
 using MvvmCross.Forms.iOS.Presenters;
 using MvvmCross.iOS.Platform;
 using MvvmCross.iOS.Views.Presenters;
@@ -9,9 +10,9 @@ using Xamarin.Forms;
 
 namespace MasterDetailExample.iOS
 {
-    public class Setup : MvxIosSetup
+    public class Setup : MvxFormsIosSetup
     {
-        public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
+        public Setup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
         {
         }        
@@ -23,11 +24,7 @@ namespace MasterDetailExample.iOS
 
         protected override IMvxIosViewPresenter CreatePresenter()
         {
-            Forms.Init();
-
-            var xamarinFormsApp = new MvxFormsApplication();
-
-            return new MvxFormsIosMasterDetailPagePresenter(Window, xamarinFormsApp);
+            return new MvxFormsIosMasterDetailPagePresenter(Window, FormsApplication);
         }
     }
 }

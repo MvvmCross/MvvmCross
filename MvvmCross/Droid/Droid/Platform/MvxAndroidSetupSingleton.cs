@@ -52,7 +52,7 @@ namespace MvvmCross.Droid.Platform
                         dispatcher.RequestMainThreadAction(() =>
                         {
                             _currentSplashScreen?.InitializationComplete();
-                        });
+                        }, false);
                     }
 
                     IsInitialisedTaskCompletionSource.SetResult(true);

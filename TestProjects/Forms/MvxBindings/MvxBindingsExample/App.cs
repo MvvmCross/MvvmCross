@@ -18,7 +18,13 @@ namespace MvxBindingsExample
                 .RegisterAsLazySingleton();
 
             InitializeText();
-            RegisterAppStart<MainViewModel>();
+
+            // Construct custom application start object    
+            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, AppStart>();
+            var appStart = Mvx.Resolve<IMvxAppStart>();
+
+            // register the appstart object
+            RegisterAppStart(appStart);
         }
 
         private void InitializeText()

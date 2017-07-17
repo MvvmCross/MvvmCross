@@ -20,7 +20,7 @@ namespace MvvmCross.Uwp.Views
             _uiDispatcher = uiDispatcher;
         }
 
-        public bool RequestMainThreadAction(Action action)
+        public bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (_uiDispatcher.HasThreadAccess)
             {
@@ -28,7 +28,13 @@ namespace MvvmCross.Uwp.Views
                 return true;
             }
 
-            _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => ExceptionMaskedAction(action));
+            _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => 
+            {
+                if (maskExceptions)
+                    ExceptionMaskedAction(action);
+                else
+                    action();
+            });
             return true;
         }
     }
