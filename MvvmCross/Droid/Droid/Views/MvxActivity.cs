@@ -45,9 +45,9 @@ namespace MvvmCross.Droid.Views
 
         public IMvxViewModel ViewModel
         {
-            get 
-            { 
-                return DataContext as IMvxViewModel; 
+            get
+            {
+                return DataContext as IMvxViewModel;
             }
             set
             {
@@ -87,17 +87,29 @@ namespace MvvmCross.Droid.Views
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
 
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            ViewModel?.ViewCreated();
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            ViewModel?.ViewDestroy();
+        }
+
         public override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();
-            ViewModel?.Appearing();
+            ViewModel?.ViewAppearing();
         }
 
         public override void OnDetachedFromWindow()
         {
             base.OnDetachedFromWindow();
-            ViewModel?.Disappearing(); // we don't have anywhere to get this info
-            ViewModel?.Disappeared();
+            ViewModel?.ViewDisappearing(); // we don't have anywhere to get this info
+            ViewModel?.ViewDisappeared();
         }
 
         public void OnGlobalLayout()
@@ -118,7 +130,7 @@ namespace MvvmCross.Droid.Views
                     }
                 }
                 _view = null;
-                ViewModel?.Appeared();
+                ViewModel?.ViewAppeared();
             }
         }
     }

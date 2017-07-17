@@ -21,19 +21,27 @@ namespace MvvmCross.Core.ViewModels
         {
         }
 
-        public virtual void Appearing()
+        public virtual void ViewCreated()
         {
         }
 
-        public virtual void Appeared()
+        public virtual void ViewAppearing()
         {
         }
 
-        public virtual void Disappearing()
+        public virtual void ViewAppeared()
         {
         }
 
-        public virtual void Disappeared()
+        public virtual void ViewDisappearing()
+        {
+        }
+
+        public virtual void ViewDisappeared()
+        {
+        }
+
+        public virtual void ViewDestroy()
         {
         }
 
@@ -48,10 +56,6 @@ namespace MvvmCross.Core.ViewModels
         }
 
         public virtual void Start()
-        {
-        }
-
-        public virtual void Destroy()
         {
         }
 
@@ -137,11 +141,11 @@ namespace MvvmCross.Core.ViewModels
             }
         }
 
-        public override void Destroy()
+        public override void ViewDestroy()
         {
             if (!_isClosing)
                 _tcs?.TrySetCanceled();
-            base.Destroy();
+            base.ViewDestroy();
         }
     }
 
