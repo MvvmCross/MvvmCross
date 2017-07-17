@@ -7,19 +7,25 @@
 
 // ReSharper disable all
 
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.File
 {
-    public abstract class MvxIoFileStoreBase
+    public class MvxIoFileStoreBase
         : MvxFileStoreBase
     {
         #region IMvxFileStore Members
+
+        public MvxIoFileStoreBase(bool appendDefaultPath, string basePath)
+        {
+            BasePath = basePath;
+            AppendDefaultPath = appendDefaultPath;
+        }
 
         public override Stream OpenRead(string path)
         {
@@ -94,19 +100,22 @@ namespace MvvmCross.Plugins.File
                 var fullFrom = FullPath(from);
                 var fullTo = FullPath(to);
 
-				if (!System.IO.File.Exists(fullFrom)) {
-					MvxTrace.Error("Error during file move {0} : {1}. File does not exist!", from, to);
+                if (!System.IO.File.Exists(fullFrom))
+                {
+                    MvxTrace.Error("Error during file move {0} : {1}. File does not exist!", from, to);
                     return false;
-				}
+                }
 
                 if (System.IO.File.Exists(fullTo))
                 {
-					if (overwrite) {
+                    if (overwrite)
+                    {
                         System.IO.File.Delete(fullTo);
-					}
-					else {
+                    }
+                    else
+                    {
                         return false;
-					}
+                    }
                 }
 
                 System.IO.File.Move(fullFrom, fullTo);
@@ -119,36 +128,49 @@ namespace MvvmCross.Plugins.File
             }
         }
 
-		public override bool TryCopy (string from, string to, bool overwrite)
-		{
-			try
-			{
-				var fullFrom = FullPath(from);
-				var fullTo = FullPath(to);
+        public override bool TryCopy(string from, string to, bool overwrite)
+        {
+            try
+            {
+                var fullFrom = FullPath(from);
+                var fullTo = FullPath(to);
 
-				if (!System.IO.File.Exists(fullFrom)) {
-					MvxTrace.Error("Error during file copy {0} : {1}. File does not exist!", from, to);
-					return false;
-				}
+                if (!System.IO.File.Exists(fullFrom))
+                {
+                    MvxTrace.Error("Error during file copy {0} : {1}. File does not exist!", from, to);
+                    return false;
+                }
 
-				System.IO.File.Copy(fullFrom, fullTo, overwrite);
-				return true;
-			}
-			catch (Exception exception)
-			{
-				MvxTrace.Error("Error during file copy {0} : {1} : {2}", from, to, exception.ToLongString());
-				return false;
-			}
-		}
+                System.IO.File.Copy(fullFrom, fullTo, overwrite);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                MvxTrace.Error("Error during file copy {0} : {1} : {2}", from, to, exception.ToLongString());
+                return false;
+            }
+        }
 
         public override string NativePath(string path)
         {
             return FullPath(path);
         }
 
+        public override long GetSize(string path)
+        {
+            return new FileInfo(path).Length;
+        }
+
+        public override DateTime GetLastWriteTimeUtc(string path)
+        {
+            return System.IO.File.GetLastWriteTimeUtc(path);
+        }
+
         #endregion IMvxFileStore Members
 
-        protected abstract string FullPath(string path);
+        protected string BasePath { get; }
+
+        protected bool AppendDefaultPath { get; }
 
         protected override void WriteFileCommon(string path, Action<Stream> streamAction)
         {
@@ -206,6 +228,16 @@ namespace MvvmCross.Plugins.File
                 return await streamAction(fileStream).ConfigureAwait(false);
             }
         }
+
+        private string FullPath(string path)
+        {
+            if (!AppendDefaultPath) return path;
+
+            return AppendPath(path);
+        }
+
+        protected virtual string AppendPath(string path)
+            => Path.Combine(BasePath, path);
     }
 }
 

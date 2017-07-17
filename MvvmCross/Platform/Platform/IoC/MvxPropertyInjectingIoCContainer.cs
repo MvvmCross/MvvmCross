@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Platform.IoC
 {
-    using System;
-
     [Obsolete("This functionality is now moved into MvxSimpleIoCContainer and can be enabled using MvxIocOptions")]
     public class MvxPropertyInjectingIoCContainer
         : MvxSimpleIoCContainer
     {
-        public new static IMvxIoCProvider Initialize(IMvxIocOptions options)
+        public static new IMvxIoCProvider Initialize(IMvxIocOptions options)
         {
             if (Instance != null)
             {

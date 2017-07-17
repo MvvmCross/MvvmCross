@@ -1,13 +1,13 @@
-﻿namespace MvvmCross.iOS.Support.Views
-{
-	using System;
-	using Core.ViewModels;
-	using CoreGraphics;
-	using Foundation;
-	using iOS.Views;
-	using UIKit;
+﻿using System;
+using CoreGraphics;
+using Foundation;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.iOS.Views;
+using UIKit;
 
-	/// <summary>
+namespace MvvmCross.iOS.Support.Views
+{
+    /// <summary>
 	/// Mvx base view controller that provides a few extra bits of implementation over the standard View Controllers.
 	/// </summary>
 	public abstract class MvxBaseViewController<TViewModel> : MvxViewController where TViewModel : IMvxViewModel
@@ -189,7 +189,6 @@
             tap.ShouldReceiveTouch = (recognizer, touch) => !(touch.View is UIControl || touch.View.FindSuperviewOfType(View, typeof(UITableViewCell)) != null);
             View.AddGestureRecognizer(tap);
         }
-
 
 		/// <summary>
 		/// Selects next TextField to become FirstResponder.

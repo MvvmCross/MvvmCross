@@ -1,14 +1,14 @@
-// MvxEmbeddedJsonDictionaryTextProvider.cs
+﻿// MvxEmbeddedJsonDictionaryTextProvider.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Exceptions;
 using System;
 using System.IO;
 using System.Reflection;
+using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Plugins.JsonLocalization
 {
@@ -31,7 +31,8 @@ namespace MvvmCross.Plugins.JsonLocalization
 
         private string GetTextFromEmbeddedResource(string namespaceKey, string resourcePath)
         {
-            var path = namespaceKey + "." + resourcePath.Replace("/", ".");
+            string path = namespaceKey + "." + GenerateResourceNameFromPath(resourcePath);
+
             try
             {
                 string text = null;

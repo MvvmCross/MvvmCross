@@ -26,7 +26,7 @@ Known issues:
 
 ## Download Cache and Android Bitmap
 
-When loading images from remote source, you have to be carefull with the images size. Loading a 2000x2000 pixels bitmap in a 40dp x 40dp ImageView will do no good to your application. You want eventually to scale down the image to a more pragmatic size.
+When loading images from remote source, you have to be careful with the images size. Loading a 2000x2000 pixels bitmap in a 40dp x 40dp ImageView will do no good to your application. You want eventually to scale down the image to a more pragmatic size.
 
 [Xamarin wrote a recipe for this].(https://developer.xamarin.com/recipes/android/resources/general/load_large_bitmaps_efficiently/)
 

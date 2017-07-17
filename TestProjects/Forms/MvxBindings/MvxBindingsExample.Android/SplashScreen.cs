@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Content.PM;
+using Android.OS;
 using MvvmCross.Droid.Views;
 using Xamarin.Forms;
 
@@ -18,19 +19,14 @@ namespace MvxBindingsExample.Droid
         {
         }
 
-        private bool isInitializationComplete = false;
-        public override void InitializationComplete()
+        protected override void TriggerFirstNavigate()
         {
-            if (!isInitializationComplete)
-            {
-                isInitializationComplete = true;
-                StartActivity(typeof(MvxFormsApplicationActivity));
-            }
+            StartActivity(typeof(BindingsApplicationActivity));
+            base.TriggerFirstNavigate();
         }
 
-        protected override void OnCreate(Android.OS.Bundle bundle)
+        protected override void OnCreate(Bundle bundle)
         {
-            Forms.Init(this, bundle);
             // Leverage controls' StyleId attrib. to Xamarin.UITest
             Forms.ViewInitialized += (object sender, ViewInitializedEventArgs e) => {
                                          if (!string.IsNullOrWhiteSpace(e.View.StyleId))

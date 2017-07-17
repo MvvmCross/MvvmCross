@@ -1,5 +1,4 @@
-﻿using System;
-using Android.Support.V4.Widget;
+﻿using Android.Support.V4.Widget;
 
 namespace Example.Droid.Activities
 {

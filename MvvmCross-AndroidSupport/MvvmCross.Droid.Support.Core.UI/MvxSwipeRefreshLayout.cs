@@ -1,4 +1,4 @@
-// MvxSwipeRefreshLayout.cs
+﻿// MvxSwipeRefreshLayout.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,22 +16,31 @@ namespace MvvmCross.Droid.Support.V4
 {
     [Register("mvvmcross.droid.support.v4.MvxSwipeRefreshLayout")]
     public class MvxSwipeRefreshLayout : SwipeRefreshLayout 
-    {	 
+    {
         protected MvxSwipeRefreshLayout(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer) { }
+            : base(javaReference, transfer)
+        {
+        }
 
         public MvxSwipeRefreshLayout(Context context)
-            : this (context, null) { }
+            : this(context, null)
+        {
+        }
 
         public MvxSwipeRefreshLayout(Context context, IAttributeSet attributes)
-            : base (context, attributes) { }
+            : base(context, attributes)
+        {
+        }
     
         private ICommand _refreshCommand;
         private bool _refreshOverloaded;
 
         public ICommand RefreshCommand
         {
-            get { return _refreshCommand; }
+            get
+            {
+                return _refreshCommand;
+            }
             set
             {
                 _refreshCommand = value;
@@ -62,14 +71,14 @@ namespace MvvmCross.Droid.Support.V4
 
         private void OnRefresh(object sender, EventArgs args)
         {
-            this.ExecuteRefreshCommand(this.RefreshCommand);
+            ExecuteRefreshCommand(RefreshCommand);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                Refresh -= this.OnRefresh;
+                Refresh -= OnRefresh;
             }
 
             base.Dispose(disposing);

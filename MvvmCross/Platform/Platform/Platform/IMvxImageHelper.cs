@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Platform.Platform
 {
-    using System;
-
-    using MvvmCross.Platform.Core;
-
     public interface IMvxImageHelper<T>
         : IDisposable
         where T : class

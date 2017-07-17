@@ -33,21 +33,21 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="HackFileShare\MvxIoFileStoreBase.cs" />
     <Compile Include="IMvxFileStore.cs" />
     <Compile Include="MvxFileStoreBase.cs" />
     <Compile Include="PluginLoader.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="TryResult.cs" />
     <Compile Include="IMvxFileStoreAsync.cs" />
     <Compile Include="..\..\All\MvvmCross.Plugins.All\Preserve.cs">
       <Link>Preserve.cs</Link>
     </Compile>
+    <Compile Include="MvxFileConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">

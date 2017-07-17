@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using System;
 using MvvmCross.Droid.Shared.Fragments;
 using MvvmCross.Droid.Support.V4.EventSource;
 
@@ -17,8 +17,7 @@ namespace MvvmCross.Droid.Support.V4
 {
     [Register("mvvmcross.droid.support.v4.MvxFragment")]
     public class MvxFragment
-        : MvxEventSourceFragment
-        , IMvxFragmentView
+        : MvxEventSourceFragment, IMvxFragmentView
     {
         /// <summary>
         /// Create new instance of a Fragment
@@ -41,7 +40,8 @@ namespace MvvmCross.Droid.Support.V4
 
         protected MvxFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public IMvxBindingContext BindingContext { get; set; }
 
@@ -49,7 +49,10 @@ namespace MvvmCross.Droid.Support.V4
 
         public object DataContext
         {
-            get { return _dataContext; }
+            get
+            {
+                return _dataContext;
+            }
             set
             {
                 _dataContext = value;
@@ -60,7 +63,10 @@ namespace MvvmCross.Droid.Support.V4
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get
+            {
+                return DataContext as IMvxViewModel;
+            }
             set
             {
                 DataContext = value;
@@ -74,40 +80,46 @@ namespace MvvmCross.Droid.Support.V4
 
         public virtual string UniqueImmutableCacheTag => Tag;
 
+        public override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            ViewModel?.ViewCreated();
+        }
+
         public override void OnDestroy()
         {
             base.OnDestroy();
-            ViewModel?.Destroy();
+            ViewModel?.ViewDestroy();
         }
 
         public override void OnStart()
         {
             base.OnStart();
-            ViewModel?.Appearing();
+            ViewModel?.ViewAppearing();
         }
 
         public override void OnResume()
         {
             base.OnResume();
-            ViewModel?.Appeared();
+            ViewModel?.ViewAppeared();
         }
 
         public override void OnPause()
         {
             base.OnPause();
-            ViewModel?.Disappearing();
+            ViewModel?.ViewDisappearing();
         }
 
         public override void OnStop()
         {
             base.OnStop();
-            ViewModel?.Disappeared();
+            ViewModel?.ViewDisappeared();
         }
     }
 
     public abstract class MvxFragment<TViewModel>
-        : MvxFragment
-        , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxFragment, IMvxFragmentView<TViewModel>
+        where TViewModel : class, IMvxViewModel
     {
         protected MvxFragment()
         {

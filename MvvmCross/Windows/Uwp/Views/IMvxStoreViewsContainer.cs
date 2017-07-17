@@ -5,12 +5,14 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.Uwp.Views
 {
-    using MvvmCross.Core.Views;
-
     public interface IMvxStoreViewsContainer
         : IMvxViewsContainer
+            , IMvxWindowsViewModelLoader
+            , IMvxWindowsViewModelRequestTranslator
     {        
     }
 }

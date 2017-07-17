@@ -1,28 +1,25 @@
-// MvxView.cs
+﻿// MvxView.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Windows.Input;
+using AppKit;
+using Foundation;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Mac.Views
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Specialized;
-    using System.Linq;
-    using System.Windows.Input;
-
-    using AppKit;
-    using Foundation;
-
-    using global::MvvmCross.Binding.Attributes;
-    using global::MvvmCross.Binding.BindingContext;
-    using global::MvvmCross.Binding.ExtensionMethods;
-    using global::MvvmCross.Platform.Core;
-    using global::MvvmCross.Platform.WeakSubscription;
-
     public class MvxTableViewSource : NSTableViewSource
     {
         private IEnumerable _itemsSource;
@@ -42,10 +39,13 @@ namespace MvvmCross.Binding.Mac.Views
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return this._itemsSource; }
+            get
+            {
+                return this._itemsSource;
+            }
             set
             {
-                if (Object.ReferenceEquals(this._itemsSource, value)
+                if (ReferenceEquals(this._itemsSource, value)
                     && !this.ReloadOnAllItemsSourceSets)
                     return;
 

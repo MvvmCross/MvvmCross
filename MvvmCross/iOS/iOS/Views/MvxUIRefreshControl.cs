@@ -16,7 +16,7 @@ namespace MvvmCross.iOS.Views
 		/// </summary>
 		public MvxUIRefreshControl()
 		{
-			this.ValueChanged += (object sender, EventArgs e) =>
+			ValueChanged += (object sender, EventArgs e) =>
 			{
 				var command = RefreshCommand;
 				if (command == null)
@@ -37,11 +37,14 @@ namespace MvvmCross.iOS.Views
 		/// <value>The message.</value>
 		public string Message
 		{
-			get { return _message; }
+            get
+            {
+                return _message;
+            }
 			set
 			{
 				_message = value ?? string.Empty;
-				this.AttributedTitle = new NSAttributedString(_message);
+				AttributedTitle = new NSAttributedString(_message);
 			}
 		}
 
@@ -53,7 +56,10 @@ namespace MvvmCross.iOS.Views
 		/// <value><c>true</c> if this instance is refreshing; otherwise, <c>false</c>.</value>
 		public bool IsRefreshing
 		{
-			get { return _isRefreshing; }
+			get
+            {
+                return _isRefreshing;
+            }
 			set
 			{
 				_isRefreshing = value;

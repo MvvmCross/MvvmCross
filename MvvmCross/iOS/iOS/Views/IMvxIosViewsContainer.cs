@@ -5,12 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.Views;
+
 namespace MvvmCross.iOS.Views
 {
-    using MvvmCross.Core.Views;
-
     public interface IMvxIosViewsContainer
-        : IMvxViewsContainer
-          , IMvxIosViewCreator
-    { }
+        : IMvxViewsContainer, IMvxIosViewCreator
+    {
+    }
 }

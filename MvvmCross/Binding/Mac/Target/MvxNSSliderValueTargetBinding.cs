@@ -1,22 +1,19 @@
-// MvxUISliderValueTargetBinding.cs
+﻿// MvxUISliderValueTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using AppKit;
+using Foundation;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Mac.Target
 {
-    using System.Reflection;
-
-    using AppKit;
-    using Foundation;
-
-    using global::MvvmCross.Platform.Platform;
-
-    using MvvmCross.Binding.Bindings.Target;
-
     public class MvxNSSliderValueTargetBinding : MvxPropertyInfoTargetBinding<NSSlider>
     {
         public MvxNSSliderValueTargetBinding(object target, PropertyInfo targetPropertyInfo)
@@ -35,7 +32,7 @@ namespace MvvmCross.Binding.Mac.Target
         }
 
         [Export("sliderChanged:")]
-        private void HandleSliderActivation(object sender, System.EventArgs args)
+        private void HandleSliderActivation(object sender, EventArgs args)
         {
             var view = View;
             if (view == null)

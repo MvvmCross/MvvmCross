@@ -5,36 +5,36 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Globalization;
+using System.Windows;
+using System.Windows.Data;
+using System.Windows.Markup;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Platform.Wpf.Converters
 {
-    using System;
-    using System.Globalization;
-    using System.Windows;
-    using System.Windows.Data;
-
-    using MvvmCross.Platform.Converters;
-
     public class MvxNativeValueConverter
-        : IValueConverter
+        : MarkupExtension, IValueConverter
     {
         private readonly IMvxValueConverter _wrapped;
 
         public MvxNativeValueConverter(IMvxValueConverter wrapped)
         {
-            this._wrapped = wrapped;
+            _wrapped = wrapped;
         }
 
-        protected IMvxValueConverter Wrapped => this._wrapped;
+        protected IMvxValueConverter Wrapped => _wrapped;
 
         public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var toReturn = this._wrapped.Convert(value, targetType, parameter, culture);
+            var toReturn = _wrapped.Convert(value, targetType, parameter, culture);
             return MapIfSpecialValue(toReturn);
         }
 
         public virtual object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var toReturn = this._wrapped.ConvertBack(value, targetType, parameter, culture);
+            var toReturn = _wrapped.ConvertBack(value, targetType, parameter, culture);
             return MapIfSpecialValue(toReturn);
         }
 
@@ -51,6 +51,11 @@ namespace MvvmCross.Platform.Wpf.Converters
             }
 
             return toReturn;
+        }
+
+        public override object ProvideValue(IServiceProvider serviceProvider) 
+        { 
+            return this; 
         }
     }
 

@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Foundation;
+using UIKit;
+
 namespace MvvmCross.Platform.tvOS.Platform
 {
-    using Foundation;
-
-    using UIKit;
-
     public class MvxTvosTask
     {
         protected bool DoUrlOpen(NSUrl url)

@@ -1,11 +1,17 @@
+using System;
+using MvvmCross.Core.Navigation;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels
 {
-    using MvvmCross.Core.ViewModels;
-
     public class CenterPanelViewModel : BaseViewModel
     {
-        public CenterPanelViewModel()
+        private readonly IMvxNavigationService _navigationService;
+
+        public CenterPanelViewModel(IMvxNavigationService navigationService)
         {
+            _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
+
             ExampleValue = "Center Panel";
         }
 
@@ -31,7 +37,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels
         /// </remarks>
         private void ShowMasterCommandExecuted()
         {
-            ShowViewModel<MasterViewModel>();
+            _navigationService.Navigate<MasterViewModel>();
         }
 
         public IMvxCommand ShowKeyboardHandlingCommand
@@ -47,7 +53,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels
         /// </summary>
         private void ShowKeyboardHandlingCommandExecuted()
         {
-            ShowViewModel<KeyboardHandlingViewModel>();
+            _navigationService.Navigate<KeyboardHandlingViewModel>();
         }
     }
 }

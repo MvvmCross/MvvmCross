@@ -1,8 +1,8 @@
-using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MvvmCross.Core.ViewModels;
 
 namespace Example.Core.ViewModels
 {
@@ -30,21 +30,13 @@ namespace Example.Core.ViewModels
         public ObservableCollection<ListItem> Items
         {
             get { return _items; }
-            set
-            {
-                _items = value;
-                RaisePropertyChanged(() => Items);
-            }
+            set { SetProperty(ref _items, value); }
         }
 
         public ListItem SelectedItem
         {
             get { return _selectedItem; }
-            set
-            {
-                _selectedItem = value;
-                RaisePropertyChanged(() => SelectedItem);
-            }
+            set { SetProperty(ref _selectedItem, value); }
         }
 
         public virtual ICommand ItemSelected
@@ -63,11 +55,7 @@ namespace Example.Core.ViewModels
         public virtual bool IsRefreshing
         {
             get { return _isRefreshing; }
-            set
-            {
-                _isRefreshing = value;
-                RaisePropertyChanged(() => IsRefreshing);
-            }
+            set { SetProperty(ref _isRefreshing, value); }
         }
 
         public ICommand ReloadCommand
@@ -93,7 +81,7 @@ namespace Example.Core.ViewModels
             var rand = new Random();
             Func<char> randChar = () => (char)rand.Next(65, 90);
             Func<int, string> randStr = null;
-            randStr = x => (x > 0) ? randStr(--x) + randChar() : "";
+            randStr = x => x > 0 ? randStr(--x) + randChar() : "";
 
             var newItemCount = rand.Next(3);
 

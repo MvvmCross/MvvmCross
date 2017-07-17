@@ -118,7 +118,7 @@ The `object parameter` parameter is a general purpose field which you can use in
   
   Both of these would result in the Power ValueConverter being passed a parameter value of `long` 2.
   
-- you might choose to use a binding in Touch like:
+- you might choose to use a binding in iOS like:
 
         set.Bind(label).For(l => l.Text).To(vm => vm.FullName).WithConversion("AbbreviateIfLongerThan", 12L);
        
@@ -131,7 +131,7 @@ The `object parameter` parameter is a general purpose field which you can use in
 Note that the only types that are used when parameters are parsed from text binding descriptions are: `long`, `double`, `bool` or `string` (for more on the binding parsing engine, see [wiki/Databinding](https://github.com/slodge/MvvmCross/wiki/Databinding))
     
 
-### Referencing Value Converters in Touch and Droid
+### Referencing Value Converters in iOS and Droid
 
 Data-Binding syntax including how to specify ValueConverters using Swiss, Fluent and Tibet binding is discussed in [wiki/Databinding](https://github.com/slodge/MvvmCross/wiki/Databinding). This covers all syntax including:
 
@@ -156,7 +156,7 @@ To find the specified ValueConverter, MvvmCross maintains a registry of ValueCon
 
 Typically, this registry is created using a one-pass Reflection sweep on your application's Core and UI (platform-specific) projects. This sweep:
 
-- locates all instanciable classes which implement `IMvxValueConverter` within your assemblies
+- locates all instantiable classes which implement `IMvxValueConverter` within your assemblies
 - creates an instance of each one
 - registers the instance with the name stripped of any `Mvx` prefix and any `ValueConverter` or `Converter` postfix.
 
@@ -197,12 +197,12 @@ protected override FillValueConverters (IMvxValueConverterRegistry registry)
 }
 ```
 
-Finally, ValueConverters can also be registered using a technique called "ValueConverter holders". This technique uses Reflection against indidivual Types which then hold ValueConverters in public instance or static fields. This technique was common in earlier MvvmCross versions, but is not recommended within v3 - it's kept only for backwards compatability.
+Finally, ValueConverters can also be registered using a technique called "ValueConverter holders". This technique uses Reflection against individual Types which then hold ValueConverters in public instance or static fields. This technique was common in earlier MvvmCross versions, but is not recommended within v3 - it's kept only for backwards compatibility.
 
 
-### Preventing the ValueConverter Reflection Sweeps in Touch and Droid
+### Preventing the ValueConverter Reflection Sweeps in iOS and Droid
 
-The ValueConverter sweeps do use a small amount of Reflection and so can add a very small amount of lag to application start time. If you'd prefer to minimise this small startup lag in your application, then you can, of course, disable the sweeps and can use direct registration instead.
+The ValueConverter sweeps do use a small amount of Reflection and so can add a very small amount of lag to application start time. If you'd prefer to minimize this small startup lag in your application, then you can, of course, disable the sweeps and can use direct registration instead.
 
 To do this, override the `FillValueConverters` method in your `Setup` class, do not call the base class method and instead use just register your own value converters - e.g.
 
@@ -216,7 +216,7 @@ protected override FillValueConverters (IMvxValueConverterRegistry registry)
 }
 ```
 
-Note: unless your application is very large, this is most likely only a micro-optimisation and will most likely not significantly change your app's startup time.
+Note: unless your application is very large, this is most likely only a micro-optimization and will most likely not significantly change your app's startup time.
  
 ### Using Value Converters in Windows (conventional Xaml binding)
 
@@ -264,7 +264,7 @@ public class TheNativeTruthValueConverter
 
 In addition to 'traditional' Xaml bindings, MvvmCross also allows 'Tibet' binding within Windows - for more on this see [wiki/Databinding](https://github.com/slodge/MvvmCross/wiki/Databinding).
 
-When Tibet binding is used, then Value Converters can be accessed by name - exactly as in Droid and Touch binding - without the above native Xaml wrapping.
+When Tibet binding is used, then Value Converters can be accessed by name - exactly as in Droid and iOS binding - without the above native Xaml wrapping.
 
 Further, if using 'Tibet' binding then an entire assembly's worth of value converters can be registered using the Reflection sweep technique and this can be specified at the Xaml level - meaning it can be used in both design and run-time.
 
@@ -273,7 +273,7 @@ To include all value converters within an Assembly at the Xaml level, then use a
 This may sound complicated... but actually it is quite simple. 
 
 - Suppose you have an Assembly `MyTools` containing `FooValueConverter`, `BarValueConverter`, etc
-- Within this Assembly add a simple, instanciable public Class which we will use only for the import - e.g. `public class MarkerClass {}`
+- Within this Assembly add a simple, instantiable public Class which we will use only for the import - e.g. `public class MarkerClass {}`
 - Then within the xaml, you can include a static resource import block like:
 
 ```xml
@@ -319,7 +319,7 @@ To use these converters on each platform, use:
   
         local:MvxBind="Visibility Visibility(VMProperty)"
         
-- Touch:
+- iOS:
 
         set.Bind(field)
            .For("Visibility")
@@ -371,7 +371,7 @@ On each platform, the native color format output from these converters is:
 
 - Windows - a `SolidColorBrush` for the appropriate Windows flavor
 - Droid - an `Android.Graphics.Color`
-- Touch - an `MonoTouch.UIKit.UIColor`
+- iOS - an `UIKit.UIColor`
 
 On Droid, the Color plugin also includes a couple of custom bindings to assist with binding. These are:
 
@@ -384,7 +384,7 @@ To use Color on each platform - for example, with a ViewModel property `public M
   
         local:MvxBind="BackgroundColor NativeColor(CurrentColor)"
         
-- Touch:
+- iOS:
 
         set.Bind(field)
            .For(field => field.BackgroundColor)
@@ -406,7 +406,7 @@ Note: to use the Color converters at design-time on the Windows platforms, you c
 
 ### The Mvx Language ValueConverter
 
-The MvvmCross internationalisation (i18n) techniques are based on the JsonLocalisation plugin with `TextSource` properties in each ViewModel and with `mvxLang` binding attributes.
+The MvvmCross internationalization (i18n) techniques are based on the JsonLocalisation plugin with `TextSource` properties in each ViewModel and with `mvxLang` binding attributes.
 
 Under the covers, these `mvxLang` bindings are actually just normal bindings which make use of the `MvxLanguageValueConverter`. This is automatically registered using the name `Language`.
 This consumes the `TextSource` as it's `value` and the `Key` as its `parameter`.
@@ -421,7 +421,7 @@ Is actually equivalent to a normal binding:
  
 ### Using internationalised text in your ValueConverters
 
-Earlier we considered a `MyTimeAgoValueConverer` which returned strings like "just now" from it's `Convert` implementation,
+Earlier we considered a `MyTimeAgoValueConverter` which returned strings like "just now" from it's `Convert` implementation,
 
 If using the MvvmCross JsonLocalisation system, then that same value converter could be rewritten to make use of a `IMvxTextProvider` reference.
 
@@ -525,11 +525,11 @@ When specifying a binding, you can also provide a `FallbackValue` - see [wiki/Da
   
 Note that in 'normal binding' `FallbackValue`s are not themselves passed through the ValueConverter. So, this conversion is **not** correct:
 
-     local:MvxBind="Text Visibility(IsEnabled), FalllbackValue=false"
+     local:MvxBind="Text Visibility(IsEnabled), FallbackValue=false"
 
 If you do want to pass a `FallbackValue` through the Value Converter then you can do this using recursive binding syntax within the `Tibet` binding engine - e.g.
 
-     local:MvxBind="Text Visibility((IsEnabled, FalllbackValue=false))"
+     local:MvxBind="Text Visibility((IsEnabled, FallbackValue=false))"
 
 ### Tibet: ValueCombiners
 
@@ -605,7 +605,7 @@ The 'standard' ValueCombiners available in MvvmCross are:
 
 - `If` - used for if-else conditional display with syntax 
 
-        If(booleab-test, value-if-true, value-if-false)
+        If(boolean-test, value-if-true, value-if-false)
 
    For example:
 
@@ -633,7 +633,7 @@ The 'standard' ValueCombiners available in MvvmCross are:
         And(HasProAccount, HasCreditCardDetails)
         HasProAccount && HasCreditCardDetails
 
-- Add - used for contatenation or addition - works with `string`, `int`, `double` Types (other input types may be accepted, but will be converted to one of these types). Also available as the `+` operator
+- Add - used for concatenation or addition - works with `string`, `int`, `double` Types (other input types may be accepted, but will be converted to one of these types). Also available as the `+` operator
 
         Add(item-one, item-two, ...)
      
@@ -646,7 +646,7 @@ The 'standard' ValueCombiners available in MvvmCross are:
 
          FirstName + ' ' + LastName
 
-- To be coninued... Subtract, Multiply, Divide, Modulus, etc
+- To be continued... Subtract, Multiply, Divide, Modulus, etc
 
 - To be continued... GreaterThan, EqualTo, LessThan, GreaterThanOrEqualTo, LessThanOrEqualTo etc
 

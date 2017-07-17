@@ -1,25 +1,21 @@
-// MvxCollectionViewController.cs
+﻿// MvxCollectionViewController.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.tvOS.Views;
+using UIKit;
+
 namespace MvvmCross.tvOS.Views
 {
-    using System;
-
-    using Foundation;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform.tvOS.Views;
-
-    using UIKit;
-
     public class MvxCollectionViewController
-        : MvxEventSourceCollectionViewController
-          , IMvxTvosView
+        : MvxEventSourceCollectionViewController, IMvxTvosView
     {
         protected MvxCollectionViewController(UICollectionViewLayout layout)
             : base(layout)
@@ -41,14 +37,14 @@ namespace MvvmCross.tvOS.Views
 
         public object DataContext
         {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return this.DataContext as IMvxViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IMvxViewModel; }
+            set { DataContext = value; }
         }
 
         public MvxViewModelRequest Request { get; set; }
@@ -57,8 +53,7 @@ namespace MvvmCross.tvOS.Views
     }
 
     public class MvxCollectionViewController<TViewModel>
-        : MvxCollectionViewController
-          , IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxCollectionViewController, IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         protected MvxCollectionViewController(UICollectionViewLayout layout) : base(layout)
         {

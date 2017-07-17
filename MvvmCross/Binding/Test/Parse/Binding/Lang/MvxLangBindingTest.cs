@@ -5,16 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Binding.Parse.Binding;
+using MvvmCross.Binding.Parse.Binding.Lang;
+using NUnit.Framework;
+
 namespace MvvmCross.Binding.Test.Parse.Binding.Lang
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using MvvmCross.Binding.Parse.Binding;
-    using MvvmCross.Binding.Parse.Binding.Lang;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxLangBindingTest
         : MvxBindingTest
@@ -22,9 +20,9 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
         [Test]
         public void TestAll()
         {
-            foreach (var testPair in this._toTest)
+            foreach (var testPair in _toTest)
             {
-                this.DoTest(testPair);
+                DoTest(testPair);
             }
         }
 
@@ -65,7 +63,6 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                          }
                     }
                 },
-
                 {
                     "Text Key=Fred",
                     new  MvxSerializableBindingSpecification()
@@ -92,7 +89,6 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                          }
                     }
                 },
-
                 {
                     "Text 'Fred.Life Jim'",
                     new  MvxSerializableBindingSpecification()
@@ -106,7 +102,6 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                          }
                     }
                 },
-
                 {
                     "Text Key='Fred.Life Jim'",
                     new  MvxSerializableBindingSpecification()
@@ -120,7 +115,6 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                          }
                     }
                 },
-
                 {
                     "Text Key=Fred.Life",
                     new  MvxSerializableBindingSpecification()
@@ -134,7 +128,6 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                          }
                     }
                 },
-
                 {
                     "Text Fred.Life Jim",
                     new  MvxSerializableBindingSpecification()
@@ -148,7 +141,6 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                          }
                     }
                 },
-
                 {
                     "Text Fred.Life Jim,Converter=MyConv",
                     new  MvxSerializableBindingSpecification()
@@ -163,7 +155,6 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                          }
                     }
                 },
-
                 {
                     "Text Fred.Life Jim,Converter=MyConv,FallbackValue=Hello World",
                     new  MvxSerializableBindingSpecification()
@@ -179,7 +170,6 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                          }
                     }
                 },
-
                 {
                     "SpecialText Fred.Life Jim,Converter=MyConv,FallbackValue=Hello World,Source=SharedTextSource",
                     new  MvxSerializableBindingSpecification()

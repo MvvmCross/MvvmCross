@@ -1,4 +1,4 @@
-// MvxAppCompatSetupHelper.cs
+﻿// MvxAppCompatSetupHelper.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -48,7 +48,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             registry.AddOrOverwrite(typeof(SearchView), MvxAppCompatPropertyBinding.SearchView_Query);
             registry.AddOrOverwrite(typeof(MvxAppCompatImageView), nameof(MvxAppCompatImageView.ImageUrl));
-
         }
     }
 }

@@ -11,8 +11,8 @@ namespace MvvmCross.Platform.IoC
     {
         public MvxPropertyInjectorOptions()
         {
-            this.InjectIntoProperties = MvxPropertyInjection.None;
-            this.ThrowIfPropertyInjectionFails = false;
+            InjectIntoProperties = MvxPropertyInjection.None;
+            ThrowIfPropertyInjectionFails = false;
         }
 
         public MvxPropertyInjection InjectIntoProperties { get; set; }

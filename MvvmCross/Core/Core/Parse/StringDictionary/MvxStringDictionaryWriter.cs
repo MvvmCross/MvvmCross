@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.Text;
+
 namespace MvvmCross.Core.Parse.StringDictionary
 {
-    using System.Collections.Generic;
-    using System.Text;
-
     public class MvxStringDictionaryWriter : IMvxStringDictionaryWriter
     {
         public string Write(IDictionary<string, string> dictionary)
@@ -26,7 +26,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
                 if (output.Length > 0)
                     output.Append(";");
 
-                output.AppendFormat("{0}={1}", this.Quote(kvp.Key), this.Quote(kvp.Value));
+                output.AppendFormat("{0}={1}", Quote(kvp.Key), Quote(kvp.Value));
             }
             return output.ToString();
         }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
-using UIKit;
-using MvvmCross.iOS.Platform;
+﻿using Foundation;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Forms.iOS;
+using MvvmCross.iOS.Platform;
 using MvvmCross.Platform;
+using UIKit;
 
 namespace Example.iOS
 {
@@ -14,21 +11,23 @@ namespace Example.iOS
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.
     [Register("AppDelegate")]
-    public partial class AppDelegate : MvxApplicationDelegate
+    public partial class AppDelegate : MvxFormsApplicationDelegate
     {
-        UIWindow _window;
+        public override UIWindow Window { get; set; }
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            _window = new UIWindow(UIScreen.MainScreen.Bounds);
+            Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            var setup = new Setup(this, _window);
+            var setup = new Setup(this, Window);
             setup.Initialize();
 
             var startup = Mvx.Resolve<IMvxAppStart>();
             startup.Start();
 
-            _window.MakeKeyAndVisible();
+            LoadApplication(setup.FormsApplication);
+
+            Window.MakeKeyAndVisible();
 
             return true;
         }

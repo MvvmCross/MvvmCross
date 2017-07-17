@@ -1,19 +1,17 @@
-// MvxValueConverterRegistryFiller.cs
+﻿// MvxValueConverterRegistryFiller.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Binders
 {
-    using System;
-
-    using MvvmCross.Platform.Converters;
-
     public class MvxValueConverterRegistryFiller
-        : MvxNamedInstanceRegistryFiller<IMvxValueConverter>
-          , IMvxValueConverterRegistryFiller
+        : MvxNamedInstanceRegistryFiller<IMvxValueConverter>, IMvxValueConverterRegistryFiller
     {
         public override string FindName(Type type)
         {

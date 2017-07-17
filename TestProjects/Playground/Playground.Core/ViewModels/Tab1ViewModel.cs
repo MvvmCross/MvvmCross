@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 
 namespace Playground.Core.ViewModels
@@ -30,6 +29,15 @@ namespace Playground.Core.ViewModels
             get
             {
                 return _openNavModalCommand ?? (_openNavModalCommand = new MvxCommand(() => ShowViewModel<ModalNavViewModel>()));
+            }
+        }
+
+        private ICommand _closeCommand;
+        public ICommand CloseCommand
+        {
+            get
+            {
+                return _closeCommand ?? (_closeCommand = new MvxCommand(() => Close(this)));
             }
         }
     }

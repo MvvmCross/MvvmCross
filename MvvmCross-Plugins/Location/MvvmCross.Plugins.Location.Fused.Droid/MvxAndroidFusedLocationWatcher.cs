@@ -2,10 +2,10 @@
 using System.Threading;
 using Android.Content;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Droid.Platform;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.Location.Fused.Droid
 {
@@ -22,7 +22,7 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 			if (_locationHandler == null)
 				_locationHandler = new FusedLocationHandler(this, Context);
 
-			_locationHandler.Start (options);
+			_locationHandler.Start(options);
 		}
 
         protected override void PlatformSpecificStop() => _locationHandler.Stop();
@@ -103,4 +103,3 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 		}
 	}
 }
-

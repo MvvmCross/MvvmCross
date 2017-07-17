@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Parse;
+using NUnit.Framework;
+
 namespace MvvmCross.Platform.Test
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Parse;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxParserTest
     {
@@ -27,82 +26,82 @@ namespace MvvmCross.Platform.Test
         {
             public void CallReset(string toParse)
             {
-                this.Reset(toParse);
+                Reset(toParse);
             }
 
             public string GetFullText()
             {
-                return this.FullText;
+                return FullText;
             }
 
             public bool GetIsComplete()
             {
-                return this.IsComplete;
+                return IsComplete;
             }
 
             public int GetCurrentIndex()
             {
-                return this.CurrentIndex;
+                return CurrentIndex;
             }
 
             public char GetCurrentChar()
             {
-                return this.CurrentChar;
+                return CurrentChar;
             }
 
             public void CallMoveNext(uint increment = 1)
             {
-                this.MoveNext(increment);
+                MoveNext(increment);
             }
 
             public string CallReadQuotedString()
             {
-                return this.ReadQuotedString();
+                return ReadQuotedString();
             }
 
             public uint CallReadUnsignedInteger()
             {
-                return this.ReadUnsignedInteger();
+                return ReadUnsignedInteger();
             }
 
             public char CallReadEscapedCharacter()
             {
-                return this.ReadEscapedCharacter();
+                return ReadEscapedCharacter();
             }
 
             public void CallSkipWhitespace()
             {
-                this.SkipWhitespace();
+                SkipWhitespace();
             }
 
             public void CallSkipWhitespaceAndCharacters(Dictionary<char, bool> toSkip)
             {
-                this.SkipWhitespaceAndCharacters(toSkip);
+                SkipWhitespaceAndCharacters(toSkip);
             }
 
             public void CallSkipWhitespaceAndCharacters(IEnumerable<char> toSkip)
             {
-                this.SkipWhitespaceAndCharacters(toSkip);
+                SkipWhitespaceAndCharacters(toSkip);
             }
 
             public object CallReadValue()
             {
-                return this.ReadValue();
+                return ReadValue();
             }
 
             public object CallReadEnumerationValue(Type enumerationType, bool ignoreCase = true)
             {
-                return this.ReadEnumerationValue(enumerationType, ignoreCase);
+                return ReadEnumerationValue(enumerationType, ignoreCase);
             }
 
             public string CallReadValidCSharpName()
             {
-                return this.ReadValidCSharpName();
+                return ReadValidCSharpName();
             }
 
             public string CallReadTextUntilWhitespaceOr(params char[] items)
             {
-                return this.ReadTextUntilWhitespaceOr(items);
+                return ReadTextUntilWhitespaceOr(items);
             }
         }
 
@@ -129,14 +128,14 @@ namespace MvvmCross.Platform.Test
         {
             var testStrings = new Dictionary<string, string>
                 {
-                    {"''", ""},
-                    {"\"Hello \\\"\\\'\"", "Hello \"\'"},
-                    {"\"Hello\"", "Hello"},
-                    {"'Hello'", "Hello"},
-                    {"'Hello World'", "Hello World"},
-                    {"'Hello \\r'", "Hello \r"},
-                    {"'Hello \\u1234'", "Hello \u1234"},
-                    {"'Hello \\U00001234'", "Hello \U00001234"},
+                    { "''", "" },
+                    { "\"Hello \\\"\\\'\"", "Hello \"\'" },
+                    { "\"Hello\"", "Hello" },
+                    { "'Hello'", "Hello" },
+                    { "'Hello World'", "Hello World" },
+                    { "'Hello \\r'", "Hello \r" },
+                    { "'Hello \\u1234'", "Hello \u1234" },
+                    { "'Hello \\U00001234'", "Hello \U00001234" }
                 };
 
             foreach (var testString in testStrings)
@@ -154,10 +153,10 @@ namespace MvvmCross.Platform.Test
         {
             var testStrings = new Dictionary<string, uint>
                 {
-                    {"2", 2},
-                    {"1234", 1234},
-                    {UInt32.MaxValue.ToString(), UInt32.MaxValue},
-                    {UInt32.MinValue.ToString(), UInt32.MinValue},
+                    { "2", 2 },
+                    { "1234", 1234 },
+                    { uint.MaxValue.ToString(), uint.MaxValue },
+                    { uint.MinValue.ToString(), uint.MinValue }
                 };
 
             foreach (var testString in testStrings)
@@ -175,18 +174,18 @@ namespace MvvmCross.Platform.Test
         {
             var tests = new Dictionary<string, object>
                 {
-                    {"\'Foo Bar\'", "Foo Bar"},
-                    {"\"Foo Bar\"", "Foo Bar"},
-                    {"\'Foo \\\' \\\" Bar\'", "Foo \' \" Bar"},
-                    {"\"Foo \\\' \\\" Bar\"", "Foo \' \" Bar"},
+                    { "\'Foo Bar\'", "Foo Bar" },
+                    { "\"Foo Bar\"", "Foo Bar" },
+                    { "\'Foo \\\' \\\" Bar\'", "Foo \' \" Bar" },
+                    { "\"Foo \\\' \\\" Bar\"", "Foo \' \" Bar" },
                 };
-            this.DoReadValueTests(tests);
+            DoReadValueTests(tests);
         }
 
         private void DoReadValueTests(Dictionary<string, object> tests)
         {
             foreach (var t in tests)
-                this.DoReadValueTest(t.Key, t.Value);
+                DoReadValueTest(t.Key, t.Value);
         }
 
         private void DoReadValueTest(string input, object expectedOutput)
@@ -203,14 +202,14 @@ namespace MvvmCross.Platform.Test
         {
             var tests = new Dictionary<string, object>
                 {
-                    {"TruE", true},
-                    {"true", true},
-                    {"TRUE", true},
-                    {"faLsE", false},
-                    {"FALSE", false},
-                    {"false", false},
+                    { "TruE", true },
+                    { "true", true },
+                    { "TRUE", true },
+                    { "faLsE", false },
+                    { "FALSE", false },
+                    { "false", false }
                 };
-            this.DoReadValueTests(tests);
+            DoReadValueTests(tests);
         }
 
         [Test]
@@ -229,10 +228,10 @@ namespace MvvmCross.Platform.Test
         [Test]
         public void Test_ReadValue_Reads_Integers()
         {
-            var tests = new[] { 0, 1, 2, 3, -123, -1, Int64.MinValue, Int64.MaxValue };
-            var dict = tests.ToDictionary(x => x.ToString(System.Globalization.CultureInfo.InvariantCulture),
+            var tests = new[] { 0, 1, 2, 3, -123, -1, long.MinValue, long.MaxValue };
+            var dict = tests.ToDictionary(x => x.ToString(CultureInfo.InvariantCulture),
                                           x => (object)x);
-            this.DoReadValueTests(dict);
+            DoReadValueTests(dict);
         }
 
         [Test]
@@ -240,9 +239,9 @@ namespace MvvmCross.Platform.Test
         {
             // note - we don't run any tests on things like double.MinValue - those would fail due to rounding errors.
             var tests = new[] { 0.001, 1.123, 2.2343, -123.1232, -1.2323, -99999.93454, 9999.343455 };
-            var dict = tests.ToDictionary(x => x.ToString(System.Globalization.CultureInfo.InvariantCulture),
+            var dict = tests.ToDictionary(x => x.ToString(CultureInfo.InvariantCulture),
                                           x => (object)x);
-            this.DoReadValueTests(dict);
+            DoReadValueTests(dict);
         }
 
         public enum MyEnum
@@ -266,9 +265,9 @@ namespace MvvmCross.Platform.Test
         {
             foreach (var value in Enum.GetValues(typeof(MyEnum)))
             {
-                this.DoReadEnumerationTest(typeof(MyEnum), value.ToString(), value);
-                this.DoReadEnumerationTest(typeof(MyEnum), value.ToString().ToUpper(), value);
-                this.DoReadEnumerationTest(typeof(MyEnum), value.ToString().ToLower(), value);
+                DoReadEnumerationTest(typeof(MyEnum), value.ToString(), value);
+                DoReadEnumerationTest(typeof(MyEnum), value.ToString().ToUpper(), value);
+                DoReadEnumerationTest(typeof(MyEnum), value.ToString().ToLower(), value);
             }
         }
 

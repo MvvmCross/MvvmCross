@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.iOS.Views;
+
 namespace MvvmCross.iOS.Views
 {
-    using MvvmCross.Platform.iOS.Views;
-
     public static class MvxViewControllerAdaptingExtensions
     {
         public static void AdaptForBinding(this IMvxEventSourceViewController view)

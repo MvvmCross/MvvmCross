@@ -1,5 +1,5 @@
-using MvvmCross.Core.ViewModels;
 using System.Windows.Input;
+using MvvmCross.Core.ViewModels;
 
 namespace Example.ViewModels
 {
@@ -9,15 +9,21 @@ namespace Example.ViewModels
 		private string _yourNickname = "???";
         public string YourNickname
 		{ 
-			get { return _yourNickname; }
-			set { _yourNickname = value; RaisePropertyChanged(() => YourNickname); RaisePropertyChanged(() => Hello); }
+			get 
+            {
+                return _yourNickname;
+            }
+			set
+            {
+                SetProperty(ref _yourNickname, value);
+                RaisePropertyChanged(() => Hello);
+            }
 		}
 
         public string Hello
         {
             get { return "Hello " + YourNickname; }
         }
-
 
         public ICommand ShowAboutPageCommand
         {

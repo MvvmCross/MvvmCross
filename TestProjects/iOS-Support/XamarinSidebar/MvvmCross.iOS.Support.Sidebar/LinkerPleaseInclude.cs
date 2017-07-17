@@ -1,15 +1,18 @@
-// ReSharper disable RedundantToStringCall
+﻿// ReSharper disable RedundantToStringCall
 // ReSharper disable UnusedVariable
 // ReSharper disable UnusedParameter.Global
 // ReSharper disable RedundantAssignment
+
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Windows.Input;
+using Foundation;
+using MvvmCross.iOS.Views;
+using MvvmCross.Platform.IoC;
+using UIKit;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS
 {
-    using System.Collections.Specialized;
-    using System.Windows.Input;
-    using MvvmCross.iOS.Views;
-    using Foundation;
-    using UIKit;
-
     // This class is never actually executed, but when Xamarin linking is enabled it does ensure types and properties
     // are preserved in the deployed app
     [Preserve(AllMembers = true)]
@@ -100,12 +103,12 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS
             command.CanExecuteChanged += (s, e) => { if (command.CanExecute(null)) command.Execute(null); };
         }
 
-        public void Include(MvvmCross.Platform.IoC.MvxPropertyInjector injector)
+        public void Include(MvxPropertyInjector injector)
         {
-            injector = new MvvmCross.Platform.IoC.MvxPropertyInjector();
+            injector = new MvxPropertyInjector();
         }
 
-        public void Include(System.ComponentModel.INotifyPropertyChanged changed)
+        public void Include(INotifyPropertyChanged changed)
         {
             changed.PropertyChanged += (sender, e) => { var test = e.PropertyName; };
         }

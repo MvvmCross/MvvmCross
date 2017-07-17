@@ -1,37 +1,36 @@
-// MvxLoaderPluginRegistry.cs
+﻿// MvxLoaderPluginRegistry.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Platform.Plugins
 {
-    using System;
-    using System.Collections.Generic;
-
-    using MvvmCross.Platform.Exceptions;
-
     public class MvxLoaderPluginRegistry
     {
-        private readonly IDictionary<string, Func<IMvxPlugin>> _loaders = new Dictionary<string, Func<IMvxPlugin>> ();
+        private readonly IDictionary<string, Func<IMvxPlugin>> _loaders = new Dictionary<string, Func<IMvxPlugin>>();
 
         public void Register<TPlugin, TPlatformPlugin>()
             where TPlugin : IMvxPluginLoader
             where TPlatformPlugin : IMvxPlugin
         {
-            this.Register(typeof(TPlugin), typeof (TPlatformPlugin));
+            Register(typeof(TPlugin), typeof(TPlatformPlugin));
         }
 
         public void Register(Type plugin, Type platformPlugin)
         {
-            this.Register (plugin, () => (IMvxPlugin)Activator.CreateInstance (platformPlugin));
+            Register (plugin, () => (IMvxPlugin)Activator.CreateInstance (platformPlugin));
         }
 
-        public void Register<TPlugin> (Func<IMvxPlugin> loader)
+        public void Register<TPlugin>(Func<IMvxPlugin> loader)
             where TPlugin : IMvxPlugin
         {
-            this.Register (typeof (TPlugin), loader);
+            Register (typeof(TPlugin), loader);
         }
 
         public void Register(Type plugin, Func<IMvxPlugin> loader)
@@ -47,13 +46,13 @@ namespace MvvmCross.Platform.Plugins
                 throw new MvxException("Loader function can not be null");
             }
 
-            this._loaders.Add(name, loader);
+            _loaders.Add(name, loader);
         }
 
         public Func<IMvxPlugin> FindLoader (Type plugin)
         {
             Func<IMvxPlugin> loader = null;
-            this._loaders.TryGetValue (plugin.Namespace, out loader);
+            _loaders.TryGetValue (plugin.Namespace, out loader);
             return loader;
         }
     }

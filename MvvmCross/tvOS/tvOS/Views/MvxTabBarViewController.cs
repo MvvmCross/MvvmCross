@@ -1,21 +1,19 @@
-// MvxTabBarViewController.cs
+﻿// MvxTabBarViewController.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.tvOS.Views;
+
 namespace MvvmCross.tvOS.Views
 {
-    using System;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform.tvOS.Views;
-
     public class MvxTabBarViewController
-        : MvxEventSourceTabBarController
-          , IMvxTvosView
+        : MvxEventSourceTabBarController, IMvxTvosView
     {
         protected MvxTabBarViewController()
         {
@@ -33,15 +31,15 @@ namespace MvvmCross.tvOS.Views
             get
             {
                 // special code needed in TabBar because View is initialized during construction
-                return this.BindingContext?.DataContext;
+                return BindingContext?.DataContext;
             }
-            set { this.BindingContext.DataContext = value; }
+            set { BindingContext.DataContext = value; }
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return this.DataContext as IMvxViewModel; }
-            set { this.DataContext = value; }
+            get { return DataContext as IMvxViewModel; }
+            set { DataContext = value; }
         }
 
         public MvxViewModelRequest Request { get; set; }
@@ -50,8 +48,7 @@ namespace MvvmCross.tvOS.Views
     }
 
     public class MvxTabBarViewController<TViewModel>
-        : MvxTabBarViewController
-          , IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxTabBarViewController, IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         protected MvxTabBarViewController()
         {

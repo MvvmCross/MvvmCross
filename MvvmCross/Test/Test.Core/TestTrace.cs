@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Diagnostics;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Test.Core
 {
-    using System;
-    using System.Diagnostics;
-
-    using MvvmCross.Platform.Platform;
-
     public class TestTrace : IMvxTrace
     {
         public void Trace(MvxTraceLevel level, string tag, Func<string> message)

@@ -1,19 +1,18 @@
-// MvxUISwitchOnTargetBinding.cs
+﻿// MvxUISwitchOnTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Target
 {
-    using System.Reflection;
-
-    using MvvmCross.Binding.Bindings.Target;
-    using MvvmCross.Platform.Platform;
-
-    using UIKit;
-
     public class MvxUISwitchOnTargetBinding
         : MvxPropertyInfoTargetBinding<UISwitch>
     {
@@ -31,7 +30,7 @@ namespace MvvmCross.Binding.iOS.Target
             }
         }
 
-        private void HandleValueChanged(object sender, System.EventArgs e)
+        private void HandleValueChanged(object sender, EventArgs e)
         {
             var view = View;
             if (view == null)

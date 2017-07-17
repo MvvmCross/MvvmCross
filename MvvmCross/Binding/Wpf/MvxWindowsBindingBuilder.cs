@@ -5,14 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using MvvmCross.Binding;
-using MvvmCross.Binding.Binders;
-using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Core;
-
 #if WINDOWS_COMMON
 using Windows.UI.Xaml;
 using MvvmCross.BindingEx.WindowsCommon.MvxBinding;
@@ -23,12 +15,19 @@ namespace MvvmCross.BindingEx.WindowsCommon
 #endif
 
 #if WINDOWS_WPF
+using System;
 using System.Windows;
-using MvvmCross.BindingEx.Wpf.MvxBinding;
-using MvvmCross.BindingEx.Wpf.MvxBinding.Target;
-using MvvmCross.BindingEx.Wpf.WindowsBinding;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Combiners;
+using MvvmCross.Binding.Wpf.MvxBinding;
+using MvvmCross.Binding.Wpf.MvxBinding.Target;
+using MvvmCross.Binding.Wpf.WindowsBinding;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Core;
 
-namespace MvvmCross.BindingEx.Wpf
+namespace MvvmCross.Binding.Wpf
 #endif
 {
     public class MvxWindowsBindingBuilder : MvxBindingBuilder
@@ -119,7 +118,7 @@ namespace MvvmCross.BindingEx.Wpf
             }
         }
 
-        protected override void FillValueCombiners(Binding.Combiners.IMvxValueCombinerRegistry registry)
+        protected override void FillValueCombiners(IMvxValueCombinerRegistry registry)
         {
             base.FillValueCombiners(registry);
 

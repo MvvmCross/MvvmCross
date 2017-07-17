@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Platform.Droid.Platform
 {
-    using System;
-
     public static class MvxDateTimeExtensionMethods
     {
         private static readonly DateTime UnixZeroUtc = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
@@ -34,7 +34,7 @@ namespace MvvmCross.Platform.Droid.Platform
 
         public static long FromUtcToUnixTime(this DateTime dateTimeUtc)
         {
-            var timeSpan = (dateTimeUtc - UnixZeroUtc);
+            var timeSpan = dateTimeUtc - UnixZeroUtc;
             var timestamp = (long)timeSpan.TotalSeconds;
             return timestamp;
         }

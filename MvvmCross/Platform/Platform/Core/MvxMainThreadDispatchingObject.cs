@@ -5,17 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Platform.Core
 {
-    using System;
-
     public abstract class MvxMainThreadDispatchingObject
     {
         protected IMvxMainThreadDispatcher Dispatcher => MvxMainThreadDispatcher.Instance;
 
         protected void InvokeOnMainThread(Action action)
         {
-            this.Dispatcher?.RequestMainThreadAction(action);
+            Dispatcher?.RequestMainThreadAction(action);
         }
     }
 }

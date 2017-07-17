@@ -1,28 +1,25 @@
-// MvxTableLayout.cs
+﻿// MvxTableLayout.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+using Android.Content;
+using Android.Runtime;
+using Android.Util;
+using Android.Widget;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.BindingContext;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Specialized;
-
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Util;
-    using Android.Widget;
-
-    using MvvmCross.Binding.Attributes;
-    using MvvmCross.Binding.BindingContext;
-
     [Register("mvvmcross.binding.droid.views.MvxTableLayout")]
     public class MvxTableLayout
-        : TableLayout
-          , IMvxWithChangeAdapter
+        : TableLayout, IMvxWithChangeAdapter
     {
         public MvxTableLayout(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxAdapterWithChangedEvent(context))
@@ -61,7 +58,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public IMvxAdapterWithChangedEvent Adapter
         {
-            get { return _adapter; }
+            get
+            {
+                return _adapter;
+            }
             protected set
             {
                 var existing = _adapter;

@@ -5,15 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Platform;
+using System;
+using System.Collections.Generic;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using System;
-using System.Collections.Generic;
 using MvvmCross.FieldBinding;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.FieldBinding
 {

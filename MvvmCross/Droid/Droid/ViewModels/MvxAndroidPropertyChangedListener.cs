@@ -1,12 +1,10 @@
+using System;
+using System.ComponentModel;
+using Android.Runtime;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Droid.ViewModels
 {
-    using System;
-    using System.ComponentModel;
-
-    using Android.Runtime;
-
-    using MvvmCross.Core.ViewModels;
-
     /// <summary>
     ///     Just like <see cref="MvxPropertyChangedListener"/> but
     ///     won't call handlers if the target (being an activity, fragment,
@@ -23,14 +21,14 @@ namespace MvvmCross.Droid.ViewModels
             if (target == null)
                 throw new ArgumentNullException(nameof(target));
 
-            this._target = new WeakReference<IJavaObject>(target);
+            _target = new WeakReference<IJavaObject>(target);
         }
 
         public override void NotificationObjectOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             IJavaObject target;
 
-            if (!this._target.TryGetTarget(out target) || target.Handle == IntPtr.Zero)
+            if (!_target.TryGetTarget(out target) || target.Handle == IntPtr.Zero)
                 return;
 
             base.NotificationObjectOnPropertyChanged(sender, e);

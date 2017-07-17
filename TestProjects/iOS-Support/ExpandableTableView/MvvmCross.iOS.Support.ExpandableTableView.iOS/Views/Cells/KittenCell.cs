@@ -1,8 +1,8 @@
 ﻿using System;
-using MvvmCross.Binding.iOS.Views;
 using Foundation;
+using MvvmCross.Binding.iOS.Views;
 
-namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
+namespace MvvmCross.iOS.Support.ExpandableTableView.iOS.Views.Cells
 {
     [Register("KittenCell")]
     public partial class KittenCell : MvxTableViewCell

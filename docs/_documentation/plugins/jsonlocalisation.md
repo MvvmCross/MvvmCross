@@ -16,7 +16,7 @@ Notes:
 
 - the standard `JsonLocalization` implementation relies on the `ResourceLoader` and `Json` plugins for loading Json files from the application package contents.
 - several alternative localization implementations have been suggested including:
-  - using Microsoft RESX files works using the [`ResxLocalization`](doc:resxlocalization) plugin.
+  - using Microsoft RESX files works using the [`ResxLocalization`](https://www.mvvmcross.com/documentation/plugins/resxlocalization) plugin.
   - using EmbeddedResources to store the Json files in the Core PCL assembly (see https://github.com/slodge/MvvmCross/issues/55)
   - using a single JSON file or a single CSV (Comma Separated Variables) file to store all languages in one single file (again see https://github.com/slodge/MvvmCross/issues/55)
   

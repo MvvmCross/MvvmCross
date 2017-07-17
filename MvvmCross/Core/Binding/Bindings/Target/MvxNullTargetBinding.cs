@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Binding.Bindings.Target
 {
-    using System;
-
     public class MvxNullTargetBinding : MvxTargetBinding
     {
         public MvxNullTargetBinding()
@@ -18,7 +18,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneTime;
 
-        public override Type TargetType => typeof(Object);
+        public override Type TargetType => typeof(object);
 
         public override void SetValue(object value)
         {

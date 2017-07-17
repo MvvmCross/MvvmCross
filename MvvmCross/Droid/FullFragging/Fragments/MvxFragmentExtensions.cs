@@ -1,4 +1,4 @@
-// MvxFragmentExtensions.cs
+﻿// MvxFragmentExtensions.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,12 +13,12 @@ using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Platform;
+using MvvmCross.Droid.Shared.Caching;
+using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Droid.Shared.Fragments;
-using MvvmCross.Droid.Shared.Caching;
-using MvvmCross.Droid.Shared.Fragments.EventSource;
 
 namespace MvvmCross.Droid.FullFragging.Fragments
 {
@@ -55,7 +55,6 @@ namespace MvvmCross.Droid.FullFragging.Fragments
             var cached = cache.GetAndClear(viewModelType, fragmentView.UniqueImmutableCacheTag);
 
             view.OnViewCreate(() => cached ?? fragmentView.LoadViewModel(bundle, fragment.Activity.GetType(), request));
-
         }
 
         public static Fragment ToFragment(this IMvxFragmentView fragmentView)

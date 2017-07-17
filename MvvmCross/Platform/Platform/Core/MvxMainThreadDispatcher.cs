@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Platform.Core
 {
-    using System;
-    using System.Reflection;
-
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public abstract class MvxMainThreadDispatcher : MvxSingleton<IMvxMainThreadDispatcher>
     {
         protected static void ExceptionMaskedAction(Action action)

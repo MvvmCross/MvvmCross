@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.tvOS.Views;
+
 namespace MvvmCross.tvOS.Views
 {
-    using MvvmCross.Platform.tvOS.Views;
-
     public static class MvxViewControllerAdaptingExtensions
     {
         public static void AdaptForBinding(this IMvxEventSourceViewController view)

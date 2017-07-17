@@ -1,34 +1,30 @@
-﻿using MvvmCross.iOS.Views.Presenters;
+﻿using MasterDetailExample.Core;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.iOS;
 using MvvmCross.Forms.iOS.Presenters;
 using MvvmCross.iOS.Platform;
+using MvvmCross.iOS.Views.Presenters;
 using UIKit;
 using Xamarin.Forms;
-using MvvmCross.Platform;
 
 namespace MasterDetailExample.iOS
 {
-    public class Setup : MvxIosSetup
+    public class Setup : MvxFormsIosSetup
     {
-        public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
+        public Setup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
         {
         }        
 
         protected override IMvxApplication CreateApp()
         {
-            return new Core.App();
+            return new App();
         }
 
         protected override IMvxIosViewPresenter CreatePresenter()
         {
-            Forms.Init();
-
-            var xamarinFormsApp = new MvxFormsApp();
-
-            return new MvxFormsIosMasterDetailPagePresenter(Window, xamarinFormsApp);
+            return new MvxFormsIosMasterDetailPagePresenter(Window, FormsApplication);
         }
     }
 }

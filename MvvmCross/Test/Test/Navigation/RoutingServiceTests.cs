@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
+using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using Moq;
 using MvvmCross.Core.Navigation;
+using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
 using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.Dispatchers;
 using MvvmCross.Test.Mocks.TestViewModels;
@@ -40,7 +37,7 @@ namespace MvvmCross.Test.Navigation
         public void SetupTest()
         {
             // ReSharper disable once AssignNullToNotNullAttribute
-            Environment.CurrentDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
             Debug.Listeners.Clear();
             Debug.Listeners.Add(new ConsoleTraceListener());
@@ -54,16 +51,26 @@ namespace MvvmCross.Test.Navigation
         {
             base.AdditionalSetup();
 
+            var mockLocator = new Mock<IMvxViewModelLocator>();
+            mockLocator.Setup(
+                m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>())).Returns(() => new NavigationServiceTests.SimpleTestViewModel());
+            mockLocator.Setup(
+                m => m.Reload(It.IsAny<IMvxViewModel>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>())).Returns(() => new NavigationServiceTests.SimpleTestViewModel());
+
+            var mockCollection = new Mock<IMvxViewModelLocatorCollection>();
+            mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
+                          .Returns(() => mockLocator.Object);
+
+            Ioc.RegisterSingleton(mockLocator.Object);
+
+            var loader = new MvxViewModelLoader(mockCollection.Object);
             MockDispatcher = new Mock<NavigationMockDispatcher>(MockBehavior.Loose) { CallBase = true };
-            Ioc.RegisterSingleton<IMvxViewDispatcher>(MockDispatcher.Object);
-            Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(MockDispatcher.Object);
-
-            SetupRoutings();
-        }
-
-        protected void SetupRoutings()
-        {
-            RoutingService = new MvxNavigationService(MockDispatcher.Object);
+            var navigationService = RoutingService = new MvxNavigationService(null, loader)
+            {
+                ViewDispatcher = MockDispatcher.Object,
+            };
+            Ioc.RegisterSingleton(navigationService);
+            Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
         }
 
         [Test]
@@ -71,8 +78,13 @@ namespace MvvmCross.Test.Navigation
         {
             var url = "mvx://fail/?id=" + Guid.NewGuid();
 
-            Assert.That(RoutingService.CanNavigate(url), Is.False);
-            await RoutingService.Navigate(url);
+            var canNavigate = await RoutingService.CanNavigate(url);
+            Assert.That(canNavigate, Is.False);
+
+            Assert.CatchAsync(async () =>
+            {
+                await RoutingService.Navigate(url);
+            });
 
             MockDispatcher.Verify(x => x.ShowViewModel(It.IsAny<MvxViewModelRequest>()), Times.Never);
         }
@@ -87,7 +99,6 @@ namespace MvvmCross.Test.Navigation
                 Times.Once);
         }
 
-
         [Test]
         public async Task TestRegexWithParametersAsync()
         {
@@ -98,7 +109,6 @@ namespace MvvmCross.Test.Navigation
                 Times.Once);
         }
 
-
         [Test]
         public async Task TestFacadeAsync()
         {
@@ -108,6 +118,5 @@ namespace MvvmCross.Test.Navigation
                 x => x.ShowViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(ViewModelA))),
                 Times.Once);
         }
-
     }
 }

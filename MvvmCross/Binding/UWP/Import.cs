@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Reflection;
-
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
@@ -26,7 +25,10 @@ namespace MvvmCross.Binding.Uwp
 
         public object From
         {
-            get { return _from; }
+            get 
+            { 
+                return _from; 
+            }
             set
             {
                 if (_from == value)

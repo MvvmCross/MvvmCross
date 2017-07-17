@@ -1,44 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace MvvmCross.Core.Navigation
 {
     public class MvxNavigationCache : IMvxNavigationCache
     {
-        private IDictionary<string, object> cache => new Dictionary<string, object>();
+        private IDictionary<string, object> Cache { get; } = new Dictionary<string, object>();
 
         public bool AddValue<T>(string key, T value)
         {
             if (Contains(key))
                 return false;
-            cache.Add(key, value);
+            Cache.Add(key, value);
             return true;
         }
 
         public T GetValueOrDefault<T>(string key, T defaultValue = default(T))
         {
-            object item;
-            bool found = cache.TryGetValue(key, out item);
-            if (found)
-            {
+            if (Cache.TryGetValue(key, out object item))
                 return (T)item;
-            }
+
             return defaultValue;
         }
 
         public void Remove(string key)
         {
-            cache.Remove(key);
+            Cache.Remove(key);
         }
 
         public void Clear()
         {
-            cache.Clear();
+            Cache.Clear();
         }
 
         public bool Contains(string key)
         {
-            return cache.ContainsKey(key);
+            return Cache.ContainsKey(key);
         }
     }
 }

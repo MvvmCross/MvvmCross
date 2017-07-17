@@ -1,24 +1,21 @@
-// MvxView.cs
+﻿// MvxView.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using CoreGraphics;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.BindingContext;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-    using System;
-
-    using CoreGraphics;
-
-    using MvvmCross.Binding.Attributes;
-    using MvvmCross.Binding.BindingContext;
-
-    using UIKit;
-
     public class MvxView
         : UIView
-          , IMvxBindable
+        , IMvxBindable
     {
         public IMvxBindingContext BindingContext { get; set; }
 
@@ -43,7 +40,7 @@ namespace MvvmCross.Binding.iOS.Views
         {
             if (disposing)
             {
-                this.BindingContext.ClearAllBindings();
+                BindingContext.ClearAllBindings();
             }
             base.Dispose(disposing);
         }
@@ -51,8 +48,8 @@ namespace MvvmCross.Binding.iOS.Views
         [MvxSetToNullAfterBinding]
         public object DataContext
         {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
         }
     }
 }

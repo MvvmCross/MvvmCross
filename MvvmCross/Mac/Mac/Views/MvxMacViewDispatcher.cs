@@ -1,13 +1,13 @@
+using System;
+
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Platform;
+
+using MvvmCross.Mac.Views.Presenters;
+
 namespace MvvmCross.Mac.Views
 {
-    using System;
-
-    using global::MvvmCross.Core.ViewModels;
-    using global::MvvmCross.Core.Views;
-    using global::MvvmCross.Platform.Platform;
-
-    using MvvmCross.Mac.Views.Presenters;
-
     public class MvxMacViewDispatcher
         : MvxMacUIThreadDispatcher
         , IMvxViewDispatcher
@@ -16,7 +16,7 @@ namespace MvvmCross.Mac.Views
 
         public MvxMacViewDispatcher(IMvxMacViewPresenter presenter)
         {
-            this._presenter = presenter;
+            _presenter = presenter;
         }
 
         public bool ShowViewModel(MvxViewModelRequest request)
@@ -24,9 +24,9 @@ namespace MvvmCross.Mac.Views
             Action action = () =>
             {
                 MvxTrace.TaggedTrace("MacNavigation", "Navigate requested");
-                this._presenter.Show(request);
+                _presenter.Show(request);
             };
-            return this.RequestMainThreadAction(action);
+            return RequestMainThreadAction(action);
         }
 
         public bool ChangePresentation(MvxPresentationHint hint)
@@ -34,9 +34,9 @@ namespace MvvmCross.Mac.Views
             Action action = () =>
                                 {
                                     MvxTrace.TaggedTrace("MacNavigation", "Change presentation requested");
-                                    this._presenter.ChangePresentation(hint);
+                                    _presenter.ChangePresentation(hint);
                                 };
-            return this.RequestMainThreadAction(action);
+            return RequestMainThreadAction(action);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using MvvmCross.Core.ViewModels;
+﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Platform;
 
 namespace Eventhooks.Core.ViewModels
@@ -7,29 +6,39 @@ namespace Eventhooks.Core.ViewModels
 	public class FirstViewModel
 		: MvxViewModel
 	{
-		public override void Appearing()
+	    public override void ViewCreated()
+	    {
+	        MvxTrace.Trace(MvxTraceLevel.Diagnostic, "View is created");
+	    }
+
+	    public override void ViewDestroy()
+	    {
+	        MvxTrace.Trace(MvxTraceLevel.Diagnostic, "View is destroyed");
+	    }
+
+	    public override void ViewAppearing()
 		{
 			MvxTrace.Trace(MvxTraceLevel.Diagnostic, "View is appearing");
 		}
 
-		public override void Appeared()
+		public override void ViewAppeared()
 		{
 			MvxTrace.Trace(MvxTraceLevel.Diagnostic, "View appeared");
 		}
 
-		public override void Disappearing()
+		public override void ViewDisappearing()
 		{
 			MvxTrace.Trace(MvxTraceLevel.Diagnostic, "View is disappearing");
 		}
 
-		public override void Disappeared()
+		public override void ViewDisappeared()
 		{
 			MvxTrace.Trace(MvxTraceLevel.Diagnostic, "View has disappeared");
 		}
 
-		public IMvxCommand ShowSecondView 
-		{ 
-			get { return new MvxCommand(ExecuteSecondViewCommand); } 
+		public IMvxCommand ShowSecondView
+		{
+			get { return new MvxCommand(ExecuteSecondViewCommand); }
 		}
 
 		private void ExecuteSecondViewCommand()

@@ -1,18 +1,16 @@
-// MvxUIDatePickerDateTargetBinding.cs
+﻿// MvxUIDatePickerDateTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using AppKit;
+using Foundation;
 
 namespace MvvmCross.Binding.Mac.Target
 {
-    using System;
-
-    using AppKit;
-    using Foundation;
-
     public class MvxNSDatePickerDateTargetBinding : MvxBaseNSDatePickerTargetBinding
     {
         public MvxNSDatePickerDateTargetBinding(NSDatePicker datePicker)

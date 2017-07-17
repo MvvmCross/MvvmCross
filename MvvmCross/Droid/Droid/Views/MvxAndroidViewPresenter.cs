@@ -5,17 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.App;
+using Android.Content;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid.Platform;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Droid.Views
 {
-    using Android.App;
-    using Android.Content;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Droid.Platform;
-    using MvvmCross.Platform.Platform;
-
     public class MvxAndroidViewPresenter
         : MvxViewPresenter, IMvxAndroidViewPresenter
     {
@@ -23,13 +22,13 @@ namespace MvvmCross.Droid.Views
 
         public override void Show(MvxViewModelRequest request)
         {
-            var intent = this.CreateIntentForRequest(request);
+            var intent = CreateIntentForRequest(request);
             Show(intent);
         }
 
         protected virtual void Show(Intent intent)
         {
-            var activity = this.Activity;
+            var activity = Activity;
             if (activity == null)
             {
                 MvxTrace.Warning("Cannot Resolve current top activity");
@@ -40,9 +39,14 @@ namespace MvvmCross.Droid.Views
 
         protected virtual Intent CreateIntentForRequest(MvxViewModelRequest request)
         {
-            var requestTranslator = Mvx.Resolve<IMvxAndroidViewModelRequestTranslator>();
-            var intent = requestTranslator.GetIntentFor(request);
-            return intent;
+            IMvxAndroidViewModelRequestTranslator requestTranslator = Mvx.Resolve<IMvxAndroidViewModelRequestTranslator>();
+
+            if (request is MvxViewModelInstanceRequest)
+            {
+                var instanceRequest = requestTranslator.GetIntentWithKeyFor(((MvxViewModelInstanceRequest)request).ViewModelInstance);
+                return instanceRequest.Item1;
+            }
+            return requestTranslator.GetIntentFor(request);
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
@@ -52,7 +56,7 @@ namespace MvvmCross.Droid.Views
             var presentationHint = hint as MvxClosePresentationHint;
             if (presentationHint != null)
             {
-                this.Close(presentationHint.ViewModelToClose);
+                Close(presentationHint.ViewModelToClose);
                 return;
             }
 
@@ -61,7 +65,7 @@ namespace MvvmCross.Droid.Views
 
         public override void Close(IMvxViewModel viewModel)
         {
-            var activity = this.Activity;
+            var activity = Activity;
 
             var currentView = activity as IMvxView;
 

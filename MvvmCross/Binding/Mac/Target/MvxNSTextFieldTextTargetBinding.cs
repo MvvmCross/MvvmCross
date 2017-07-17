@@ -1,23 +1,18 @@
-// MvxUITextFieldTextTargetBinding.cs
+﻿// MvxUITextFieldTextTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using AppKit;
+using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Mac.Target
 {
-    using System;
-    using System.Reflection;
-
-    using AppKit;
-    using Foundation;
-
-    using global::MvvmCross.Platform.Platform;
-
-    using MvvmCross.Binding.Bindings.Target;
-
     public class MvxNSTextFieldTextTargetBinding : MvxPropertyInfoTargetBinding<NSTextField>
     {
         public MvxNSTextFieldTextTargetBinding(object target, PropertyInfo targetPropertyInfo)

@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {
-    using System;
-    using System.Collections.Generic;
-
-    using MvvmCross.Platform.Exceptions;
-
     public class MvxSourceStepFactory : IMvxSourceStepFactoryRegistry
     {
         private readonly Dictionary<Type, IMvxSourceStepFactory> _subFactories =
@@ -19,13 +18,13 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         public void AddOrOverwrite(Type type, IMvxSourceStepFactory factory)
         {
-            this._subFactories[type] = factory;
+            _subFactories[type] = factory;
         }
 
         public IMvxSourceStep Create(MvxSourceStepDescription description)
         {
             IMvxSourceStepFactory subFactory;
-            if (!this._subFactories.TryGetValue(description.GetType(), out subFactory))
+            if (!_subFactories.TryGetValue(description.GetType(), out subFactory))
             {
                 throw new MvxException("Failed to get factory for step type {0}", description.GetType().Name);
             }

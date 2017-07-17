@@ -1,7 +1,9 @@
 #tool nuget:?package=GitVersion.CommandLine
 #tool nuget:?package=gitlink
 #tool nuget:?package=vswhere
-#addin "Cake.Incubator"
+#tool nuget:?package=NUnit.ConsoleRunner
+#addin nuget:?package=Cake.Incubator
+#addin nuget:?package=Cake.Git
 
 var sln = new FilePath("MvvmCross_All.sln");
 var outputDir = new DirectoryPath("artifacts");
@@ -15,6 +17,8 @@ Task("Clean").Does(() =>
     CleanDirectories("./**/bin");
     CleanDirectories("./**/obj");
 	CleanDirectories(outputDir.FullPath);
+
+	EnsureDirectoryExists(outputDir);
 });
 
 GitVersion versionInfo = null;
@@ -73,8 +77,28 @@ Task("Build")
 	MSBuild(sln, settings);
 });
 
-Task("GitLink")
+Task("UnitTest")
 	.IsDependentOn("Build")
+	.Does(() =>
+{
+	var testPaths = new List<string> {
+		new FilePath("./MvvmCross/Test/Test/bin/Release/MvvmCross.Test.dll").FullPath,
+		new FilePath("./MvvmCross/Binding/Test/bin/Release/MvvmCross.Binding.Test.dll").FullPath,
+		new FilePath("./MvvmCross/Platform/Test/bin/Release/MvvmCross.Platform.Test.dll").FullPath,
+		new FilePath("./MvvmCross-Plugins/Color/MvvmCross.Plugins.Color.Test/bin/Release/MvvmCross.Plugins.Color.Test.dll").FullPath,
+		new FilePath("./MvvmCross-Plugins/Messenger/MvvmCross.Plugins.Messenger.Test/bin/Release/MvvmCross.Plugins.Messenger.Test.dll").FullPath,
+		new FilePath("./MvvmCross-Plugins/Network/MvvmCross.Plugins.Network.Test/bin/Release/MvvmCross.Plugins.Network.Test.dll").FullPath
+	};
+
+	NUnit3(testPaths, new NUnit3Settings {
+		Timeout = 30000,
+		OutputFile = new FilePath(outputDir + "/NUnitOutput.txt"),
+		Results = new FilePath(outputDir + "/NUnitTestResult.xml")
+	});
+});
+
+Task("GitLink")
+	.IsDependentOn("UnitTest")
 	//pdbstr.exe and costura are not xplat currently
 	.WithCriteria(() => IsRunningOnWindows())
 	.WithCriteria(() => 
@@ -121,6 +145,7 @@ Task("GitLink")
 		"playground",
 		"playground.core",
 		"playground.ios",
+        "playground.mac",
 		"MvxBindingsExample",
 		"MvxBindingsExample.Android",
 		"MvxBindingsExample.iOS",
@@ -242,8 +267,23 @@ Task("PublishPackages")
 	}
 });
 
+Task("UploadAppVeyorArtifact")
+	.IsDependentOn("Package")
+	.WithCriteria(() => !AppVeyor.Environment.PullRequest.IsPullRequest)
+	.WithCriteria(() => isRunningOnAppVeyor)
+	.Does(() => {
+
+	Information("Artifacts Dir: {0}", outputDir.FullPath);
+
+	foreach(var file in GetFiles(outputDir.FullPath + "/*")) {
+		Information("Uploading {0}", file.FullPath);
+		AppVeyor.UploadArtifact(file.FullPath);
+	}
+});
+
 Task("Default")
 	.IsDependentOn("PublishPackages")
+	.IsDependentOn("UploadAppVeyorArtifact")
 	.Does(() => 
 {
 });
@@ -271,24 +311,43 @@ bool IsRepository(string repoName)
 	}
 	else
 	{
-		return true;
+		try
+		{
+			var path = MakeAbsolute(sln).GetDirectory().FullPath;
+			using (var repo = new LibGit2Sharp.Repository(path))
+			{
+				var origin = repo.Network.Remotes.FirstOrDefault(
+					r => r.Name.ToLowerInvariant() == "origin");
+				return origin.Url.ToLowerInvariant() == 
+					"https://github.com/" + repoName.ToLowerInvariant();
+			}
+		}
+		catch(Exception ex)
+		{
+			Information("Failed to lookup repository: {0}", ex);
+			return false;
+		}
 	}
 }
 
 bool IsTagged()
 {
-	var toReturn = false;
-	int commitsSinceTag = -1;
-	if (int.TryParse(versionInfo.CommitsSinceVersionSource, out commitsSinceTag))
+	var path = MakeAbsolute(sln).GetDirectory().FullPath;
+	using (var repo = new LibGit2Sharp.Repository(path))
 	{
-		// if tag is current commit this will be 0
-		if (commitsSinceTag == 0)
-			toReturn = true;
+		var head = repo.Head;
+		var headSha = head.Tip.Sha;
+		
+		var tag = repo.Tags.FirstOrDefault(t => t.Target.Sha == headSha);
+		if (tag == null)
+		{
+			Information("HEAD is not tagged");
+			return false;
+		}
+
+		Information("HEAD is tagged: {0}", tag.FriendlyName);
+		return true;
 	}
-
-	Information("Commits since tag {0}, is tagged: {1}", commitsSinceTag, toReturn);
-
-	return toReturn;
 }
 
 Tuple<string, string> GetNugetKeyAndSource()

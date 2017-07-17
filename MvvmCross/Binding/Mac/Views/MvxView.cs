@@ -1,24 +1,21 @@
-// MvxView.cs
+﻿// MvxView.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Drawing;
+using AppKit;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
 
 namespace MvvmCross.Binding.Mac.Views
 {
-    using System;
-    using System.Drawing;
-
-    using AppKit;
-    using Foundation;
-
-    using global::MvvmCross.Binding.BindingContext;
-
     public class MvxView
         : NSView
-          , IMvxBindable
+        , IMvxBindable
     {
         public IMvxBindingContext BindingContext { get; set; }
 

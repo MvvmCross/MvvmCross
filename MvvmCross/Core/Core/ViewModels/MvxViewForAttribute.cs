@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxViewForAttribute : Attribute
     {
@@ -16,7 +16,7 @@ namespace MvvmCross.Core.ViewModels
 
         public MvxViewForAttribute(Type viewModel)
         {
-            this.ViewModel = viewModel;
+            ViewModel = viewModel;
         }
     }
 }

@@ -14,12 +14,12 @@ namespace MvvmCross.Core.ViewModels
 
         public MvxPostfixAwareViewToViewModelNameMapping(params string[] postfixes)
         {
-            this._postfixes = postfixes;
+            _postfixes = postfixes;
         }
 
         public override string Map(string inputName)
         {
-            foreach (var postfix in this._postfixes)
+            foreach (var postfix in _postfixes)
             {
                 if (inputName.EndsWith(postfix) && inputName.Length > postfix.Length)
                 {

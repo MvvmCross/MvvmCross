@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Uwp.Platform;
 using System;
 using Windows.Devices.Geolocation;
+using MvvmCross.Platform.Exceptions;
 
-namespace MvvmCross.Plugins.Location.WindowsCommon
+namespace MvvmCross.Plugins.Location.Uwp
 {
     public sealed class MvxWCommonLocationWatcher : MvxLocationWatcher
     {

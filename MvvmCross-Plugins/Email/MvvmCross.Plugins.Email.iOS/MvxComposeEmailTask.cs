@@ -1,4 +1,4 @@
-// MvxComposeEmailTask.cs
+﻿// MvxComposeEmailTask.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,12 +8,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Foundation;
+using MessageUI;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.iOS.Platform;
 using MvvmCross.Platform.iOS.Views;
-using Foundation;
-using MessageUI;
 using UIKit;
 
 namespace MvvmCross.Plugins.Email.iOS

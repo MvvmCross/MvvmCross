@@ -1,30 +1,27 @@
-// MvxBaseTableViewSource.cs
+﻿// MvxBaseTableViewSource.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Windows.Input;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-    using System;
-    using System.Windows.Input;
-
-    using Foundation;
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-
-    using UIKit;
-
     public abstract class MvxBaseTableViewSource : UITableViewSource
     {
         private readonly UITableView _tableView;
 
         protected MvxBaseTableViewSource(UITableView tableView)
         {
-            this._tableView = tableView;
+            _tableView = tableView;
         }
 
         protected MvxBaseTableViewSource(IntPtr handle)
@@ -33,7 +30,7 @@ namespace MvvmCross.Binding.iOS.Views
             Mvx.Warning("MvxBaseTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
-        protected UITableView TableView => this._tableView;
+        protected UITableView TableView => _tableView;
 
         public bool DeselectAutomatically { get; set; }
 
@@ -43,11 +40,11 @@ namespace MvvmCross.Binding.iOS.Views
 
         public override void AccessoryButtonTapped(UITableView tableView, NSIndexPath indexPath)
         {
-            var command = this.AccessoryTappedCommand;
+            var command = AccessoryTappedCommand;
             if (command == null)
                 return;
 
-            var item = this.GetItemAt(indexPath);
+            var item = GetItemAt(indexPath);
             if (command.CanExecute(item))
                 command.Execute(item);
         }
@@ -56,7 +53,7 @@ namespace MvvmCross.Binding.iOS.Views
         {
             try
             {
-                this._tableView.ReloadData();
+                _tableView.ReloadData();
             }
             catch (Exception exception)
             {
@@ -70,31 +67,34 @@ namespace MvvmCross.Binding.iOS.Views
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
-            if (this.DeselectAutomatically)
+            if (DeselectAutomatically)
             {
                 tableView.DeselectRow(indexPath, true);
             }
 
-            var item = this.GetItemAt(indexPath);
+            var item = GetItemAt(indexPath);
 
-            var command = this.SelectionChangedCommand;
+            var command = SelectionChangedCommand;
             if (command != null && command.CanExecute(item))
                 command.Execute(item);
 
-            this.SelectedItem = item;
+            SelectedItem = item;
         }
 
         private object _selectedItem;
 
         public object SelectedItem
         {
-            get { return this._selectedItem; }
+            get
+            {
+                return _selectedItem;
+            }
             set
             {
                 // note that we only expect this to be called from the control/Table
                 // we don't have any multi-select or any scroll into view functionality here
-                this._selectedItem = value;
-                var handler = this.SelectedItemChanged;
+                _selectedItem = value;
+                var handler = SelectedItemChanged;
                 handler?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -103,15 +103,15 @@ namespace MvvmCross.Binding.iOS.Views
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
-            var item = this.GetItemAt(indexPath);
-            var cell = this.GetOrCreateCellFor(tableView, indexPath, item);
+            var item = GetItemAt(indexPath);
+            var cell = GetOrCreateCellFor(tableView, indexPath, item);
 
             var bindable = cell as IMvxBindable;
 
             if (bindable != null)
             {
                 var bindingContext = bindable.BindingContext as MvxTaskBasedBindingContext;
-                if (bindingContext != null && this._tableView.RowHeight == UITableView.AutomaticDimension)
+                if (bindingContext != null && _tableView.RowHeight == UITableView.AutomaticDimension)
                     bindingContext.RunSynchronously = true;
                 bindable.DataContext = item;
             }

@@ -1,18 +1,20 @@
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Android.Support.V17.Leanback.Widget;
-using MvvmCross.Platform.Platform;
+using Android.Support.V7.Widget;
 using MvvmCross.Droid.Support.V7.RecyclerView;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Listeners
 {
 	/// <summary>
 	/// Forwards "OnChildViewHolderSelected"-Events to a command.
 	/// </summary>
-	public class MvxOnChildViewHolderSelectedListener : OnChildViewHolderSelectedListener
+	public class MvxOnChildViewHolderSelectedListener 
+        : OnChildViewHolderSelectedListener
 	{
 		public ICommand ItemSelection { get; set; }
 
-		public override void OnChildViewHolderSelected(Android.Support.V7.Widget.RecyclerView parent, Android.Support.V7.Widget.RecyclerView.ViewHolder child, int position, int subposition)
+		public override void OnChildViewHolderSelected(RecyclerView parent, RecyclerView.ViewHolder child, int position, int subposition)
 		{
 			base.OnChildViewHolderSelected(parent, child, position, subposition);
 

@@ -5,14 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Collections.Generic;
-using MvvmCross.Binding;
-using MvvmCross.Binding.Bindings;
-using MvvmCross.Binding.Bindings.SourceSteps;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-
 #if WINDOWS_COMMON
 using MvvmCross.Platform.WindowsCommon.Converters;
 
@@ -24,13 +16,18 @@ namespace MvvmCross.BindingEx.WindowsCommon.WindowsBinding
 #endif
 
 #if WINDOWS_WPF
+using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
-
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Wpf.Converters;
 
-namespace MvvmCross.BindingEx.Wpf.WindowsBinding
+namespace MvvmCross.Binding.Wpf.WindowsBinding
 #endif
 {
     public class MvxWindowsBindingCreator : MvxBindingCreator

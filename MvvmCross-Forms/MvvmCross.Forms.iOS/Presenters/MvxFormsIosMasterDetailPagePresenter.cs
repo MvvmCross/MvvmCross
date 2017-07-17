@@ -1,4 +1,5 @@
-﻿using MvvmCross.Forms.Presenters;
+﻿using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Presenters;
 using MvvmCross.iOS.Views.Presenters;
 using UIKit;
 using Xamarin.Forms;
@@ -11,8 +12,8 @@ namespace MvvmCross.Forms.iOS.Presenters
     {
         private readonly UIWindow _window;
 
-        public MvxFormsIosMasterDetailPagePresenter(UIWindow window, Application mvxFormsApp)
-            : base(mvxFormsApp)
+        public MvxFormsIosMasterDetailPagePresenter(UIWindow window, MvxFormsApplication formsApplication)
+            : base(formsApplication)
         {
             _window = window;
         }

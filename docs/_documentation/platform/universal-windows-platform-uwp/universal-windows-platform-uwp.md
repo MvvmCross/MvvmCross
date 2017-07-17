@@ -10,7 +10,7 @@ Create a new solution in Visual Studio. Right-click the solution in `Solution Ex
 
 In the `Add New Project` dialog select the `Windows Universal` tab and select the `Blank App` template. In the bottom you can set the name. We will use `MvvmCrossDocs.WindowsUniversal` in this example.
 
-![Add new project UWP](../new-project.png)
+![Add new project UWP](./new-project.png)
 
 Now, we will open the New Project dialog again and create a Portable Class Library, that will act as the `Core` shared library in MvvmCross. In the dialog click the `Visual C#` node and find `Class Library (Portable for iOS, Android and Windows)`. Name the project, in our case `MvvmCrossDocs.Core`.
 
@@ -19,7 +19,7 @@ We will now want to reference the `Core` project inside of our Universal Windows
 
 Our projects are now ready and we can install `MvvmCross` from **NuGet**. First right-click the solution in `Solution Explorer` and then select `Manage NuGet Packages for Solution`.
 
-![Select MvvmCross in nuget](../mvvmcross-select-nuget.png)
+![Select MvvmCross in nuget](./mvvmcross-select-nuget.png)
 
 In the NuGet Package Manager window choose the **Browse** tab and enter *mvvmcross* into the search box. MvvmCross package should appear as the first result, which you can select and then check the boxes next to your project names in the right hand pane. When you are done, you can click the **Install** button to install the package. The installation might take a while and you will be prompted to agree with the changes. Confirm the prompt with **OK** and continue.
 
@@ -178,6 +178,57 @@ public sealed partial class FirstView : MvxWindowsPage
 
 Now everything should be correctly set up and you can try to launch the application. If everything is correct, you should see a UI very similar to the following.
 
-![Hello MvvmCross](../hello-mvvmcross.png)
+![Hello MvvmCross](./hello-mvvmcross.png)
 
 Change the contents of the `TextBox`, and click elsewhere. The text below the `TextBox` should automatically update, proving that the data-binding is working as expected.
+
+## Pages abstraction and ViewModel binding
+This section shows how to abstract Universal Windows Platform Page object to provide generic ViewModel binding.
+
+If you would like to provide generic way of binding Page with ViewModel, you would propably do it like presented below:
+
+```c#
+ public sealed partial class LoginPage<LoginViewModel>
+   {
+       public LoginPage()
+        {
+           this.InitializeComponent();
+        }
+    }
+```
+Unfortunately this is not possible and that is why you have to provide abstraction for Pages.
+To achieve that you can create generic base class like below which derives from MvxWindowsPage class:
+
+```c#
+public abstract class BaseApplicationMvxPage<TViewModel> : MvxWindowsPage<TViewModel> where TViewModel : MvxViewModel
+ {
+ }
+```
+Now you have to create abstract class of Page you would like to use (in this case LoginPage) with selected ViewModel:
+
+```c#
+public abstract class LoginPageAbstract : BaseApplicationMvxPage<LoginViewModel>
+ {
+ }
+```
+Now your code-behind page (LoginPage.xaml.cs) code should look like below:
+
+```c#
+public sealed partial class LoginPage : LoginPageAbstract
+ {
+     public LoginPage()
+      {
+        this.InitializeComponent();
+      }
+ }
+```
+In XAML code page declaration should be provided like presented below:
+
+```c#
+<abstract:LoginPageAbstract
+    xmlns:abstract="using:MvvmCrossDemo.UWP.Pages.Abstract"
+    x:Class="MvvmCrossDemo.UWP.Pages.LoginPage"
+   <!--rest of standard code here-->
+>
+    // Your UI code here
+```

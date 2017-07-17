@@ -5,8 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Binding.ExtensionMethods;
 using System;
+using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.FieldBinding;
 
 namespace MvvmCross.Plugins.FieldBinding
@@ -22,7 +22,7 @@ namespace MvvmCross.Plugins.FieldBinding
 
         protected override void NotifyChangeOnChanged(object sender, EventArgs eventArgs)
         {
-            base.FireChanged();
+            FireChanged();
         }
 
         public override void SetValue(object value)

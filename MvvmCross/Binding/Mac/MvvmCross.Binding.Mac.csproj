@@ -53,6 +53,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="MvxMacBindingBuilder.cs" />
     <Compile Include="MvxMacPropertyBinding.cs" />
     <Compile Include="MvxMacPropertyBindingExtensions.cs" />
@@ -74,7 +77,6 @@
     <Compile Include="Views\MvxTableColumn.cs" />
     <Compile Include="Target\MvxMacTargetBinding.cs" />
     <Compile Include="Target\MvxNSSegmentedControlSelectedSegmentTargetBinding.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <ItemGroup />

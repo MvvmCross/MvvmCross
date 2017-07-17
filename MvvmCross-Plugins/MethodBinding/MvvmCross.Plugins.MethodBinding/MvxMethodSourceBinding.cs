@@ -5,18 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Binding.Bindings.Source;
 using System;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Input;
+using MvvmCross.Binding.Bindings.Source;
 
 namespace MvvmCross.Plugins.MethodBinding
 {
     [Preserve(AllMembers = true)]
 	public class MvxMethodSourceBinding
-        : MvxSourceBinding
-          , ICommand
+        : MvxSourceBinding, ICommand
     {
         private readonly MethodInfo _methodInfo;
 

@@ -1,18 +1,17 @@
-// MvxEventHandlerEventInfoTargetBinding.cs
+﻿// MvxEventHandlerEventInfoTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using System.Windows.Input;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Binding.Bindings.Target
 {
-    using System;
-    using System.Reflection;
-    using System.Windows.Input;
-
-    using MvvmCross.Platform;
-
     public class MvxEventHandlerEventInfoTargetBinding : MvxTargetBinding
     {
         private readonly EventInfo _targetEventInfo;
@@ -23,19 +22,18 @@ namespace MvvmCross.Binding.Bindings.Target
         public MvxEventHandlerEventInfoTargetBinding(object target, EventInfo targetEventInfo)
             : base(target)
         {
-            this._targetEventInfo = targetEventInfo;
+            _targetEventInfo = targetEventInfo;
 
             // 	addMethod is used because of error:
             // "Attempting to JIT compile method '(wrapper delegate-invoke) <Module>:invoke_void__this___UIControl_EventHandler (UIKit.UIControl,System.EventHandler)' while running with --aot-only."
             // see https://bugzilla.xamarin.com/show_bug.cgi?id=3682
-
-            var addMethod = this._targetEventInfo.GetAddMethod();
+            var addMethod = _targetEventInfo.GetAddMethod();
 
             // we only handle EventHandler's here
             // EventHandler<T> event types will need to be handled by custom bindings
-            this._eventHandler = new EventHandler(this.HandleEvent);
+            _eventHandler = new EventHandler(HandleEvent);
 
-            addMethod.Invoke(target, new[] { this._eventHandler });
+            addMethod.Invoke(target, new[] { _eventHandler });
         }
 
         public override Type TargetType => typeof(ICommand);
@@ -46,11 +44,11 @@ namespace MvvmCross.Binding.Bindings.Target
         {
             if (isDisposing)
             {
-                var target = this.Target;
+                var target = Target;
                 if (target != null)
                 {
-                    var removeMethod = this._targetEventInfo.GetRemoveMethod();
-                    removeMethod.Invoke(target, new[] { this._eventHandler });
+                    var removeMethod = _targetEventInfo.GetRemoveMethod();
+                    removeMethod.Invoke(target, new[] { _eventHandler });
                 }
             }
 
@@ -59,13 +57,13 @@ namespace MvvmCross.Binding.Bindings.Target
 
         private void HandleEvent(object sender, EventArgs args)
         {
-            this._currentCommand?.Execute(null);
+            _currentCommand?.Execute(null);
         }
 
         public override void SetValue(object value)
         {
             var command = value as ICommand;
-            this._currentCommand = command;
+            _currentCommand = command;
         }
     }
 }

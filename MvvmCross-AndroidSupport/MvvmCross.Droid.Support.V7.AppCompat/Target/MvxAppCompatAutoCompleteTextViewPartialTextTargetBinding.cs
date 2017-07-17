@@ -1,22 +1,20 @@
-// MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding.cs
+﻿// MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Droid.Target;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Droid.Support.V7.AppCompat.Widget;
+using MvvmCross.Platform.Droid.WeakSubscription;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
-    using System;
-    using System.Reflection;
-
-    using MvvmCross.Binding;
-    using MvvmCross.Droid.Support.V7.AppCompat.Widget;
-    using MvvmCross.Platform.Platform;
-
     public class MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding
        : MvxAndroidPropertyInfoTargetBinding<MvxAppCompatAutoCompleteTextView>
     {
@@ -25,7 +23,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
         public MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-            var autoComplete = this.View;
+            var autoComplete = View;
             if (autoComplete == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
@@ -35,14 +33,14 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 
         private void AutoCompleteOnPartialTextChanged(object sender, EventArgs eventArgs)
         {
-            this.FireValueChanged(this.View.PartialText);
+            FireValueChanged(View.PartialText);
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;
 
         public override void SubscribeToEvents()
         {
-            var autoComplete = this.View;
+            var autoComplete = View;
             if (autoComplete == null)
                 return;
 

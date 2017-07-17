@@ -1,15 +1,15 @@
-// MvxUIViewVisibleTargetBinding.cs
+﻿// MvxUIViewVisibleTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Contributed by Tim Uy, tim@loqu8.com
 
+using System;
+using AppKit;
 
 namespace MvvmCross.Binding.Mac.Target
 {
-    using AppKit;
-
     public class MvxNSViewVisibleTargetBinding : MvxMacTargetBinding
     {
         protected NSView View
@@ -27,7 +27,7 @@ namespace MvvmCross.Binding.Mac.Target
             get { return MvxBindingMode.OneWay; }
         }
 
-        public override System.Type TargetType
+        public override Type TargetType
         {
             get { return typeof(bool); }
         }

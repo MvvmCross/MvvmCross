@@ -1,31 +1,31 @@
-// MvxIfValueCombiner.cs
+﻿// MvxIfValueCombiner.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.Linq;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Combiners
 {
-    using System.Linq;
-
-    using MvvmCross.Binding.Bindings.SourceSteps;
-    using MvvmCross.Binding.ExtensionMethods;
-    using MvvmCross.Platform.Converters;
-
     public class MvxIfValueCombiner
         : MvxValueCombiner
     {
-        public override bool TryGetValue(System.Collections.Generic.IEnumerable<Bindings.SourceSteps.IMvxSourceStep> steps, out object value)
+        public override bool TryGetValue(IEnumerable<IMvxSourceStep> steps, out object value)
         {
             var list = steps.ToList();
             switch (list.Count)
             {
                 case 2:
-                    return this.TryEvaluateIf(list[0], list[1], null, out value);
+                    return TryEvaluateif (list[0], list[1], null, out value);
 
                 case 3:
-                    return this.TryEvaluateIf(list[0], list[1], list[2], out value);
+                    return TryEvaluateif (list[0], list[1], list[2], out value);
 
                 default:
                     MvxBindingTrace.Warning("Unexpected substep count of {0} in 'If' ValueCombiner", list.Count);
@@ -33,7 +33,7 @@ namespace MvvmCross.Binding.Combiners
             }
         }
 
-        private bool TryEvaluateIf(IMvxSourceStep testStep, IMvxSourceStep ifStep, IMvxSourceStep elseStep, out object value)
+        private bool TryEvaluateif (IMvxSourceStep testStep, IMvxSourceStep ifStep, IMvxSourceStep elseStep, out object value)
         {
             var result = testStep.GetValue();
             if (result == MvxBindingConstant.DoNothing)
@@ -48,13 +48,13 @@ namespace MvvmCross.Binding.Combiners
                 return true;
             }
 
-            if (this.IsTrue(result))
+            if (IsTrue(result))
             {
-                value = this.ReturnSubStepResult(ifStep);
+                value = ReturnSubStepResult(ifStep);
                 return true;
             }
 
-            value = this.ReturnSubStepResult(elseStep);
+            value = ReturnSubStepResult(elseStep);
             return true;
         }
 

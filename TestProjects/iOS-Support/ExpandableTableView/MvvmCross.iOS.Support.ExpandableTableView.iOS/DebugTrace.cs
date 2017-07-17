@@ -1,10 +1,10 @@
-﻿namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
-{
-	using MvvmCross.Platform.Platform;
-	using System;
-	using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using MvvmCross.Platform.Platform;
 
-	public class DebugTrace : IMvxTrace
+namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
+{
+    public class DebugTrace : IMvxTrace
 	{
 		public void Trace(MvxTraceLevel level, string tag, Func<string> message)
 		{

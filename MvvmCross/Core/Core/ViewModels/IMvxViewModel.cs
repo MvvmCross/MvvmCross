@@ -5,19 +5,24 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MvvmCross.Core.ViewModels
 {
     public interface IMvxViewModel
     {
-        void Appearing();
+        void ViewCreated();
 
-        void Appeared();
+        void ViewAppearing();
 
-        void Disappearing();
+        void ViewAppeared();
 
-        void Disappeared();
+        void ViewDisappearing();
+
+        void ViewDisappeared();
+
+        void ViewDestroy();
 
         void Init(IMvxBundle parameters);
 
@@ -25,23 +30,24 @@ namespace MvvmCross.Core.ViewModels
 
         void Start();
 
-        void Destroy ();
-
         void SaveState(IMvxBundle state);
+
+        Task Initialize();
     }
 
     public interface IMvxViewModel<TParameter> : IMvxViewModel where TParameter : class
     {
-        Task Init(TParameter parameter);
+        Task Initialize(TParameter parameter);
     }
 
     //TODO: Can we keep the IMvxViewModel syntax here? Compiler complains
-    public interface IMvxViewModelReturn<TResult> : IMvxViewModel where TResult : class
+    public interface IMvxViewModelResult<TResult> : IMvxViewModel where TResult : class
     {
-    	Task<TResult> Close();
+        void SetClose(TaskCompletionSource<TResult> tcs, CancellationToken cancellationToken);
+        Task<bool> Close(TResult result);
     }
 
-    public interface IMvxViewModel<TParameter, TResult> : IMvxViewModel<TParameter>, IMvxViewModelReturn<TResult> where TParameter : class where TResult : class
+    public interface IMvxViewModel<TParameter, TResult> : IMvxViewModel<TParameter>, IMvxViewModelResult<TResult> where TParameter : class where TResult : class
     {
     }
 }

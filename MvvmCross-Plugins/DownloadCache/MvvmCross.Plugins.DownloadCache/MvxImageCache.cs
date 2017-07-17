@@ -1,23 +1,23 @@
-// MvxImageCache.cs
+﻿// MvxImageCache.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Immutable;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
     [Preserve(AllMembers = true)]
 	public class MvxImageCache<T>
-        : MvxAllThreadDispatchingObject
+        : MvxMainThreadDispatchingObject
         , IMvxImageCache<T>
     {
         private ImmutableDictionary<string, Entry> _entriesByHttpUrl = ImmutableDictionary.Create<string, Entry>();
@@ -86,7 +86,7 @@ namespace MvvmCross.Plugins.DownloadCache
 
         private void ReduceSizeIfNecessary()
         {
-            RunSyncOrAsyncWithLock(() =>
+            Task.Run(() =>
             {
                 var entries = _entriesByHttpUrl.Select (kvp => kvp.Value).ToList ();
 

@@ -5,13 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
-using System;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
@@ -43,7 +43,10 @@ namespace MvvmCross.Plugins.DownloadCache
 
         public string DefaultImagePath
         {
-            get { return _defaultImagePath; }
+            get
+            {
+                return _defaultImagePath;
+            }
             set
             {
                 if (_defaultImagePath == value)
@@ -58,7 +61,10 @@ namespace MvvmCross.Plugins.DownloadCache
 
         public string ErrorImagePath
         {
-            get { return _errorImagePath; }
+            get
+            {
+                return _errorImagePath;
+            }
             set
             {
                 if (_errorImagePath == value)
@@ -70,7 +76,10 @@ namespace MvvmCross.Plugins.DownloadCache
 
         public string ImageUrl
         {
-            get { return _imageUrl; }
+            get
+            {
+                return _imageUrl;
+            }
             set
             {
                 if (_imageUrl == value)

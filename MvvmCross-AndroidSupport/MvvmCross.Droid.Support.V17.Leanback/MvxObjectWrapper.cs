@@ -1,10 +1,11 @@
 ﻿using System;
 using Android.Runtime;
+using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.Support.V17.Leanback
 {
     [Register("mvvmcross.droid.support.v17.leanback.MvxObjectWrapper")]
-    public class MvxObjectWrapper : Java.Lang.Object
+    public class MvxObjectWrapper : Object
     {
         /// <summary>
         /// Strong Reference for special cases. Beware of memory leaks by reference cycles!
@@ -72,7 +73,8 @@ namespace MvvmCross.Droid.Support.V17.Leanback
         /// </summary>
         /// <param name="instance">The C# instance to be wrapped in a Java-Object</param>
         /// <param name="useStrongReference">Set to true, if instance isn't referenced anywhere else (e.g. in your MvxViewModel)</param>
-        public MvxObjectWrapper(T instance, bool useStrongReference = false) : base(instance, useStrongReference)
+        public MvxObjectWrapper(T instance, bool useStrongReference = false) 
+            : base(instance, useStrongReference)
         {
         }
     }

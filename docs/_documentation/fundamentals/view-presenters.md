@@ -25,6 +25,41 @@ Let's take a look now at the methods of that interface:
 - `ChangePresentation(MvxPresentationHint hint)`: This method is the one that gets called whenever a PresentationHint is requested. It is responsible for handling the requested change.
 - `Close(IMvxViewModel toClose)`: As you can imagine, this method is used to handle the close request of a ViewModel. It takes the ViewModel instance to be closed as parameter.
 
+## View Presenters on each platform
+Each mobile platform has its own View Presenter:
+- Android: [MvxAndroidViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Droid/Views/MvxAndroidViewPresenter.cs)
+- iOS: [MvxIosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/iOS/iOS/Views/Presenters/MvxIosViewPresenter.cs)
+- Windows: [MvxWindowsViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Windows/Uwp/Views/MvxWindowsViewPresenter.cs)
+
+When you navigate to selected ViewModel, platform specific View Presenter handles displaying View properly.
+
+ ![View Presenter schema](../../assets/img/ViewPresenterSchema.png)
+
+***Android*** platform has two important types of View Presenters:
+- [MvxAndroidViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Droid/Views/MvxAndroidViewPresenter.cs) - to switch between Activities
+- [MvxFragmentsPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Shared/Presenter/MvxFragmentsPresenter.cs) - to provide support for Android fragments
+
+***iOS*** navigation is handled by [MvxIosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/iOS/iOS/Views/Presenters/MvxIosViewPresenter.cs) which provide sopport for the following navigation patterns:
+- Tabs
+- SplitView
+- Modal
+- Stack
+
+Key functionality here is set of attributes ([Presenter Attributes](https://github.com/MvvmCross/MvvmCross/tree/develop/MvvmCross/iOS/iOS/Views/Presenters/Attributes)) which we can use to define how selected view will be displayed:
+- MvxTabPresentationAttribute – for tabs
+- MvxRootPresentationAttribute – to set ViewController as root
+- MvxModalPresentationAttribute – to display ViewController modally
+- MvxMasterSplitViewPresentationAttribute – for SplitView master controller
+- MvxDetailSplitViewPresentationAttribute – for SplitView details controller
+
+Here is example how you can use them:
+
+ ```c#
+    [MvxModalPresentation]
+    public class DetailsViewController : ApplicationBaseMvxViewController<DetailsViewModel>
+```
+
+***Windows (UWP)*** is responsible for proper navigation between Pages. When navigating between ViewModels, Windows View Presenter controls Frame stack and displays specific Pages.
 
 ## Showing ViewModels
 The key and most important method of a ViewPresenter is `Show`. It is in charge of transforming a request coming from the _Core_ project into a View the user can interact with.
@@ -54,56 +89,53 @@ To add your own `MvxPresentationHint` you should follow these steps:
 
 1. Create a MvxPresentationHint subclass:
 
-```c#
-public class MyCustomHint : MvxPresentationHint
-{
-    public string ImportantInformation { get; set; }
-
-    public MyCustomHint(string importantInformation)
+    ```c#
+    public class MyCustomHint : MvxPresentationHint
     {
-        ImportantInformation = importantInformation;
+        public string ImportantInformation { get; set; }
+
+        public MyCustomHint(string importantInformation)
+        {
+            ImportantInformation = importantInformation;
+        }
     }
-}
-```
+    ```
 
-2. Subclass the ViewPresenter that you are using in each platform. If you are not using a custom presenter already, you can take a look at the ViewPresenter that is created in the Setup class [(example: iOS)](https://github.com/MvvmCross/MvvmCross/blob/0bc56a0228c9a17b9a9660580d4e2fb905464b13/MvvmCross/iOS/iOS/Platform/MvxIosSetup.cs#L123)).
+2. Override the method `CreatePresenter()` in the Setup class and register your custom hint in it. For example, on iOS:
+    ```c#
+    protected override IMvxIosViewPresenter CreatePresenter()
+    {
+        var presenter = base.CreatePresenter();
+        presenter.AddPresentationHintHandler<MyCustomHint>(hint => HandleMyCustomHint(hint));
+        return presenter;
+    }
+    ```
 
-3. Override the `CreatePresenter` method in the Setup class and make it return your custom presenter.
+3. Implement `HandleMyCustomHint` method, which will return true if the presentation change was successfully handled or false otherwise:
+    ```c#
+    private bool HandleMyCustomHint(MyCustomHint hint)
+    {
+        bool result;
 
-4. In the constructor of your custom presenter, register your custom hint in the internal dictionary:
-```c#
-public MyCustomPresenter //some parameters here and a call to base constructor
-{
-    AddPresentationHintHandler<MyCustomHint>(hint => HandleMyCustomHint(hint));
-}
-```
+        if(hint.ImportantInformation != null)
+        // your code
 
-5. Implement `HandleMyCustomHint` method, which will return true if the presentation change was successfully handled or false otherwise:
+        return result;
+    }
+    ```
+    **Now repeat steps 2 and 3 for each platform (if a platform should just ignore the MvxPresentationHint, it's not necessary to do anything).**
 
-```c#
-private bool HandleMyCustomHint(MyCustomHint hint)
-{
-    bool result;
+4. Finally, make a call to the ChangePresentation method from a MvxViewModel or a MvxNavigatingObject when necessary:
+    ```c#
+    private void AMethod()
+    {
+        // your code
 
-    if(hint.ImportantInformation != null)
-    // your code
+        ChangePresentation(new MyCustomHint("example"));
 
-    return result;
-}
-```
-
-**Now repeat steps 2, 3, 4 and 5 for each platform (if a platform should just ignore the MvxPresentationHint, it's not necessary to do anything).**
-
-6. Finally, make a call to the ChangePresentation method from a MvxViewModel or a MvxNavigatingObject when necessary:
-
-```c#
-
-// your code
-
-ChangePresentation(new MyCustomHint("example"));
-
-// your code
-```
+        // your code
+    }
+    ```
 
 Ready!
 

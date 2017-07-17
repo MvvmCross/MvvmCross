@@ -1,4 +1,4 @@
-// MvxHorizontalGridView.cs
+﻿// MvxHorizontalGridView.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,11 +12,11 @@ using Android.Content;
 using Android.Runtime;
 using Android.Support.V17.Leanback.Widget;
 using Android.Util;
-using MvvmCross.Platform.Platform;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Droid.Support.V17.Leanback.Listeners;
 using MvvmCross.Droid.Support.V7.RecyclerView;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
 {
@@ -24,7 +24,8 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
     /// This class is actually (almost) the same as MvxRecylerView. Please keep this in mind if fixing bugs or implementing improvements!
     /// </remarks>
     [Register("mvvmcross.droid.support.v17.leanback.widgets.MvxHorizontalGridView")]
-    public class MvxHorizontalGridView : Android.Support.V17.Leanback.Widget.HorizontalGridView
+    public class MvxHorizontalGridView 
+        : HorizontalGridView
     {
         #region ctor
 
@@ -78,10 +79,12 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
 		/// </summary>
 		public bool FocusFirstChildOnLaidOut { get; private set; }
 
-
         public new IMvxRecyclerAdapter Adapter
         {
-            get { return base.GetAdapter() as IMvxRecyclerAdapter; }
+            get
+            {
+                return GetAdapter() as IMvxRecyclerAdapter;
+            }
             set
             {
                 var existing = Adapter;
@@ -91,7 +94,6 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
 
                 // Support lib doesn't seem to have anything similar to IListAdapter yet
                 // hence cast to Adapter.
-
                 if (value != null && existing != null)
                 {
                     value.ItemsSource = existing.ItemsSource;
@@ -140,14 +142,14 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
 
         public ICommand ItemClick
         {
-            get { return this.Adapter.ItemClick; }
-            set { this.Adapter.ItemClick = value; }
+            get { return Adapter.ItemClick; }
+            set { Adapter.ItemClick = value; }
         }
 
         public ICommand ItemLongClick
         {
-            get { return this.Adapter.ItemLongClick; }
-            set { this.Adapter.ItemLongClick = value; }
+            get { return Adapter.ItemLongClick; }
+            set { Adapter.ItemLongClick = value; }
         }
 
 		public ICommand ItemSelection

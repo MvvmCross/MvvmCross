@@ -8,15 +8,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MvvmCross.Binding;
-using MvvmCross.Binding.Bindings;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
+using MvvmCross.Binding.Bindings;
 
-namespace MvvmCross.Binding.Uwp
+namespace MvvmCross.Binding.Uwp.MvxBinding
 {
-
-
     public class MvxMvvmCrossBindingCreator : MvxBindingCreator
     {
         protected override void ApplyBindings(FrameworkElement attachedObject,

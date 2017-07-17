@@ -9,7 +9,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 using MvvmCross.Platform.UI;
 
-namespace MvvmCross.Plugins.Visibility.WindowsCommon
+namespace MvvmCross.Plugins.Visibility.Uwp
 {
     public class Plugin
         : IMvxPlugin

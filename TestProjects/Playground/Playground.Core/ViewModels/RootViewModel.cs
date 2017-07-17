@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 
@@ -10,14 +10,14 @@ namespace Playground.Core.ViewModels
         public string Hello
         {
             get { return _hello; }
-            set { _hello = value; RaisePropertyChanged(() => Hello); }
+            set { SetProperty(ref _hello, value); }
         }
 
         private int _counter = 2;
         public int Counter
         {
             get { return _counter; }
-            set { _counter = value; RaisePropertyChanged(() => Counter); }
+            set { SetProperty(ref _counter, value); }
         }
 
         private ICommand _showChildCommand;
@@ -62,6 +62,33 @@ namespace Playground.Core.ViewModels
             get
             {
                 return _showSplitCommand ?? (_showSplitCommand = new MvxCommand(() => ShowViewModel<SplitRootViewModel>()));
+            }
+        }
+
+        private ICommand _showOverrideAttributeCommand;
+        public ICommand ShowOverrideAttributeCommand
+        {
+            get
+            {
+                return _showOverrideAttributeCommand ?? (_showOverrideAttributeCommand = new MvxCommand(() => ShowViewModel<OverrideAttributeViewModel>()));
+            }
+        }
+
+        private ICommand _showSheetCommand;
+        public ICommand ShowSheetCommand
+        {
+            get
+            {
+                return _showSheetCommand ?? (_showSheetCommand = new MvxCommand(() => ShowViewModel<SheetViewModel>()));
+            }
+        }
+
+        private ICommand _showWindowCommand;
+        public ICommand ShowWindowCommand
+        {
+            get
+            {
+                return _showWindowCommand ?? (_showWindowCommand = new MvxCommand(() => ShowViewModel<WindowViewModel>()));
             }
         }
     }

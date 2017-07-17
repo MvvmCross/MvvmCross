@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Binding.Bindings.Target
 {
-    using System;
-
     public interface IMvxTargetBinding : IMvxBinding
     {
         Type TargetType { get; }

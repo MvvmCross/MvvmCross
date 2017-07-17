@@ -1,4 +1,4 @@
-// MvxShareTask.cs
+﻿// MvxShareTask.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,23 +12,22 @@ namespace MvvmCross.Plugins.Share.Droid
 {
     [Preserve(AllMembers = true)]
 	public class MvxShareTask
-        : MvxAndroidTask
-          , IMvxShareTask
+        : MvxAndroidTask, IMvxShareTask
     {
         public void ShareShort(string message)
         {
-            var shareIntent = new Intent(global::Android.Content.Intent.ActionSend);
-            shareIntent.PutExtra(global::Android.Content.Intent.ExtraText, message ?? string.Empty);
+            var shareIntent = new Intent(Intent.ActionSend);
+            shareIntent.PutExtra(Intent.ExtraText, message ?? string.Empty);
             shareIntent.SetType("text/plain");
             StartActivity(shareIntent);
         }
 
         public void ShareLink(string title, string message, string link)
         {
-            var shareIntent = new Intent(global::Android.Content.Intent.ActionSend);
+            var shareIntent = new Intent(Intent.ActionSend);
 
-            shareIntent.PutExtra(global::Android.Content.Intent.ExtraSubject, title ?? string.Empty);
-            shareIntent.PutExtra(global::Android.Content.Intent.ExtraText, message + " " + link);
+            shareIntent.PutExtra(Intent.ExtraSubject, title ?? string.Empty);
+            shareIntent.PutExtra(Intent.ExtraText, message + " " + link);
             shareIntent.SetType("text/plain");
 
             StartActivity(shareIntent);

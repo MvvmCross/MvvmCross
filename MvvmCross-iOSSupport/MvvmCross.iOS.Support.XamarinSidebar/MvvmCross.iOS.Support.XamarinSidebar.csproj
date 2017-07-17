@@ -30,7 +30,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
     <Reference Include="Xamarin-Sidebar-Unified">
@@ -39,10 +38,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="MvxSidebarPresenter.cs" />
     <Compile Include="Extensions\ViewControllerExtensions.cs" />
-    <Compile Include="Attributes\MvxSidebarPresentationAttribute.cs" />
     <Compile Include="MvxPanelEnum.cs" />
     <Compile Include="MvxPanelHintType.cs" />
     <Compile Include="MvxSplitViewBehaviour.cs" />
@@ -51,6 +51,7 @@
     <Compile Include="Views\MvxBaseSplitViewController.cs" />
     <Compile Include="Views\MvxSidebarViewController.cs" />
     <Compile Include="Views\MvxSplitViewControllerHost.cs" />
+    <Compile Include="MvxSidebarPresentationAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -61,10 +62,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\MvvmCross.iOS.Support\MvvmCross.iOS.Support.csproj">
-      <Project>{E6A71CD5-82A0-49E9-A04D-166F9E8F76F9}</Project>
-      <Name>MvvmCross.iOS.Support</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>MvvmCross.Platform</Name>
@@ -86,8 +83,5 @@
       <Name>MvvmCross.Binding</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Attributes\" />
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

@@ -5,21 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Content;
+using Android.OS;
+using MvvmCross.Core.Views;
+using MvvmCross.Droid.Platform;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Droid.Platform;
+using MvvmCross.Platform.Droid.Views;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Droid.Views
 {
-    using System;
-
-    using Android.Content;
-    using Android.OS;
-
-    using MvvmCross.Core.Views;
-    using MvvmCross.Droid.Platform;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Droid.Platform;
-    using MvvmCross.Platform.Droid.Views;
-    using MvvmCross.Platform.Platform;
-
     public class MvxActivityAdapter : MvxBaseActivityAdapter
     {
         protected IMvxAndroidView AndroidView => Activity as IMvxAndroidView;
@@ -31,18 +29,16 @@ namespace MvvmCross.Droid.Views
 
         protected override void EventSourceOnStopCalled(object sender, EventArgs eventArgs)
         {
-            this.AndroidView.OnViewStop();
+            AndroidView.OnViewStop();
         }
 
         protected override void EventSourceOnStartCalled(object sender, EventArgs eventArgs)
         {
-            this.AndroidView.OnViewStart();
+            AndroidView.OnViewStart();
         }
 
-        protected override void EventSourceOnStartActivityForResultCalled(object sender,
-                                                                          MvxValueEventArgs
-                                                                              <MvxStartActivityForResultParameters>
-                                                                              MvxValueEventArgs)
+        protected override void EventSourceOnStartActivityForResultCalled(object sender, 
+                                                                          MvxValueEventArgs<MvxStartActivityForResultParameters> MvxValueEventArgs)
         {
             var requestCode = MvxValueEventArgs.Value.RequestCode;
             switch (requestCode)
@@ -56,37 +52,37 @@ namespace MvvmCross.Droid.Views
 
         protected override void EventSourceOnResumeCalled(object sender, EventArgs eventArgs)
         {
-            this.AndroidView.OnViewResume();
+            AndroidView.OnViewResume();
         }
 
         protected override void EventSourceOnRestartCalled(object sender, EventArgs eventArgs)
         {
-            this.AndroidView.OnViewRestart();
+            AndroidView.OnViewRestart();
         }
 
         protected override void EventSourceOnPauseCalled(object sender, EventArgs eventArgs)
         {
-            this.AndroidView.OnViewPause();
+            AndroidView.OnViewPause();
         }
 
         protected override void EventSourceOnNewIntentCalled(object sender, MvxValueEventArgs<Intent> MvxValueEventArgs)
         {
-            this.AndroidView.OnViewNewIntent();
+            AndroidView.OnViewNewIntent();
         }
 
         protected override void EventSourceOnDestroyCalled(object sender, EventArgs eventArgs)
         {
-            this.AndroidView.OnViewDestroy();
+            AndroidView.OnViewDestroy();
         }
 
         protected override void EventSourceOnCreateCalled(object sender, MvxValueEventArgs<Bundle> eventArgs)
         {
-            this.AndroidView.OnViewCreate(eventArgs.Value);
+            AndroidView.OnViewCreate(eventArgs.Value);
         }
 
         protected override void EventSourceOnSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
         {
-            var mvxBundle = this.AndroidView.CreateSaveStateBundle();
+            var mvxBundle = AndroidView.CreateSaveStateBundle();
             if (mvxBundle != null)
             {
                 IMvxSavedStateConverter converter;
@@ -100,12 +96,11 @@ namespace MvvmCross.Droid.Views
                 }
             }
             var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
-            cache.Cache(this.AndroidView.ViewModel, bundleArgs.Value);
+            cache.Cache(AndroidView.ViewModel, bundleArgs.Value);
         }
 
         protected override void EventSourceOnActivityResultCalled(object sender,
-                                                                  MvxValueEventArgs<MvxActivityResultParameters>
-                                                                      args)
+                                                                  MvxValueEventArgs<MvxActivityResultParameters> args)
         {
             var sink = Mvx.Resolve<IMvxIntentResultSink>();
             var resultParameters = args.Value;

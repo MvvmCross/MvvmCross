@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Core.Platform;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-
-    using MvvmCross.Core.Platform;
-
     public class MvxViewModelRequest
     {
         public MvxViewModelRequest()
@@ -20,16 +19,16 @@ namespace MvvmCross.Core.ViewModels
 
         public MvxViewModelRequest(Type viewModelType)
         {
-            this.ViewModelType = viewModelType;
+            ViewModelType = viewModelType;
         }
 
         public MvxViewModelRequest(Type viewModelType,
                                    IMvxBundle parameterBundle,
                                    IMvxBundle presentationBundle)
         {
-            this.ViewModelType = viewModelType;
-            this.ParameterValues = parameterBundle.SafeGetData();
-            this.PresentationValues = presentationBundle.SafeGetData();
+            ViewModelType = viewModelType;
+            ParameterValues = parameterBundle.SafeGetData();
+            PresentationValues = presentationBundle.SafeGetData();
         }
 
         public Type ViewModelType { get; set; }

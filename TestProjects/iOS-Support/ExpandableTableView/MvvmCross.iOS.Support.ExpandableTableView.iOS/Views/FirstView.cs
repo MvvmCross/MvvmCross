@@ -4,10 +4,10 @@ using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Support.Views;
 using MvvmCross.iOS.Views;
-using UIKit;
 using MvvmCross.iOS.Views.Presenters.Attributes;
+using UIKit;
 
-namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
+namespace MvvmCross.iOS.Support.ExpandableTableView.iOS.Views
 {
     [MvxRootPresentation(WrapInNavigationController = true)]
     public class FirstView : MvxTableViewController
@@ -27,9 +27,9 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
             };
 
             this.AddBindings(new Dictionary<object, string>
-                {
-                    {source, "ItemsSource KittenGroups"}
-                });
+            {
+                { source, "ItemsSource KittenGroups" }
+            });
 
             TableView.Source = source;
             TableView.ReloadData();
@@ -50,7 +50,6 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
             string nibName = "KittenCell";
             _cellIdentifier = new NSString(nibName);
             tableView.RegisterNibForCellReuse(UINib.FromName(nibName, NSBundle.MainBundle), CellIdentifier);
-
 
             string nibName2 = "HeaderCell";
             _headerCellIdentifier = new NSString(nibName2);
@@ -96,7 +95,6 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
         {
             var indexes = sectionIndexes;
             // you can handle on section expanded
-
         }
 
         protected override void OnSectionCollapsed(IEnumerable<int> collapsedSectionIndexes)

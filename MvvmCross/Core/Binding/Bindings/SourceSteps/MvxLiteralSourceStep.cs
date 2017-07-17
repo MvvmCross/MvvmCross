@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {
-    using System;
-
     public class MvxLiteralSourceStep : MvxSourceStep<MvxLiteralSourceStepDescription>
     {
         public MvxLiteralSourceStep(MvxLiteralSourceStepDescription description)
@@ -20,10 +20,10 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
         {
             get
             {
-                if (this.Description.Literal == null)
+                if (Description.Literal == null)
                     return typeof(object);
 
-                return this.Description.Literal.GetType();
+                return Description.Literal.GetType();
             }
         }
 
@@ -34,7 +34,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         protected override object GetSourceValue()
         {
-            return this.Description.Literal;
+            return Description.Literal;
         }
     }
 }

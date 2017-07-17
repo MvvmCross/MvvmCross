@@ -5,12 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System.Collections.Generic;
-using MvvmCross.Binding;
-using MvvmCross.Binding.Bindings;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-
 #if WINDOWS_COMMON
 using Windows.UI.Xaml;
 
@@ -18,9 +12,15 @@ namespace MvvmCross.BindingEx.WindowsCommon
 #endif
 
 #if WINDOWS_WPF
+using System;
 using System.Windows;
+using System.Collections.Generic;
 
-namespace MvvmCross.BindingEx.Wpf
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+
+namespace MvvmCross.Binding.Wpf
 #endif
 {
     // ReSharper disable InconsistentNaming

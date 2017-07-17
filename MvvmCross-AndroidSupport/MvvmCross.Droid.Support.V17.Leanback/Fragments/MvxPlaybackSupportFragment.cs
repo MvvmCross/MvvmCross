@@ -1,18 +1,17 @@
-﻿using Android.OS;
+﻿using System;
+using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource;
-using System;
 using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource;
 using MvvmCross.Droid.Support.V4;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 {
     [Register("mvvmcross.droid.support.v17.leanback.fragments.MvxPlaybackSupportFragment")]
     public class MvxPlaybackSupportFragment
-        : MvxEventSourcePlaybackSupportFragment
-        , IMvxFragmentView
+        : MvxEventSourcePlaybackSupportFragment, IMvxFragmentView
     {
         /// <summary>
         /// Create new instance of a MvxSearchSupportFragment
@@ -35,7 +34,8 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         protected MvxPlaybackSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public IMvxBindingContext BindingContext { get; set; }
 
@@ -43,7 +43,10 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         public object DataContext
         {
-            get { return _dataContext; }
+            get
+            {
+                return _dataContext;
+            }
             set
             {
                 _dataContext = value;
@@ -54,7 +57,10 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get
+            {
+                return DataContext as IMvxViewModel;
+            }
             set
             {
                 DataContext = value;
@@ -70,14 +76,15 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
     }
 
     public abstract class MvxPlaybackSupportFragment<TViewModel>
-        : MvxPlaybackSupportFragment
-        , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxPlaybackSupportFragment, IMvxFragmentView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         protected MvxPlaybackSupportFragment()
         {
         }
 
-        protected MvxPlaybackSupportFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected MvxPlaybackSupportFragment(IntPtr javaReference, JniHandleOwnership transfer) 
+            : base(javaReference, transfer)
         {
         }
 

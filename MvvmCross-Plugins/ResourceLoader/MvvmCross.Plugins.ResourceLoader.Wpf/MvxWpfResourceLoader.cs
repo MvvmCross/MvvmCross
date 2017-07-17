@@ -7,6 +7,7 @@
 
 using System;
 using System.IO;
+using System.Windows;
 
 namespace MvvmCross.Plugins.ResourceLoader.Wpf
 {
@@ -16,7 +17,7 @@ namespace MvvmCross.Plugins.ResourceLoader.Wpf
 
         public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {
-            var streamInfo = System.Windows.Application.GetResourceStream(new Uri(resourcePath, UriKind.Relative));
+            var streamInfo = Application.GetResourceStream(new Uri(resourcePath, UriKind.Relative));
             streamAction?.Invoke(streamInfo?.Stream);
         }
 

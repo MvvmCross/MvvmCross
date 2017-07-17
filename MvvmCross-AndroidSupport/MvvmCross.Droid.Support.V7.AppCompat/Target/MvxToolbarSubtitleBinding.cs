@@ -1,13 +1,17 @@
-using System;
+﻿using System;
 using Android.Support.V7.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
-    public class MvxToolbarSubtitleBinding : MvxConvertingTargetBinding
+    public class MvxToolbarSubtitleBinding
+        : MvxConvertingTargetBinding
     {
-        public MvxToolbarSubtitleBinding(Toolbar toolbar) : base(toolbar) {}
+        public MvxToolbarSubtitleBinding(Toolbar toolbar)
+            : base(toolbar)
+        {
+        }
 
         public override Type TargetType => typeof(string);
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
@@ -17,6 +21,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             ((Toolbar)target).Subtitle = (string)value;
         }
 
-        protected Toolbar Toolbar => (Toolbar)this.Target;
+        protected Toolbar Toolbar => (Toolbar)Target;
     }
 }

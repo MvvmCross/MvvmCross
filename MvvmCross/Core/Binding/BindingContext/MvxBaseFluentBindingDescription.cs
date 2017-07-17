@@ -5,21 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Binding.Combiners;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Binding.BindingContext
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-
-    using MvvmCross.Binding.Binders;
-    using MvvmCross.Binding.Bindings;
-    using MvvmCross.Binding.Bindings.SourceSteps;
-    using MvvmCross.Binding.Combiners;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Converters;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-
     public class MvxBaseFluentBindingDescription<TTarget>
         : MvxApplicableTo<TTarget>
         where TTarget : class
@@ -43,7 +42,7 @@ namespace MvvmCross.Binding.BindingContext
 
             public KnownPathSourceSpec(string knownSourcePath)
             {
-                this._knownSourcePath = knownSourcePath;
+                _knownSourcePath = knownSourcePath;
             }
 
             public MvxSourceStepDescription CreateSourceStep(MvxSourceStepDescription inputs)
@@ -53,7 +52,7 @@ namespace MvvmCross.Binding.BindingContext
                     Converter = inputs.Converter,
                     ConverterParameter = inputs.ConverterParameter,
                     FallbackValue = inputs.FallbackValue,
-                    SourcePropertyPath = this._knownSourcePath
+                    SourcePropertyPath = _knownSourcePath
                 };
             }
         }
@@ -65,13 +64,13 @@ namespace MvvmCross.Binding.BindingContext
 
             public FreeTextSourceSpec(string freeText)
             {
-                this._freeText = freeText;
+                _freeText = freeText;
             }
 
             public MvxSourceStepDescription CreateSourceStep(MvxSourceStepDescription inputs)
             {
                 var parser = Mvx.Resolve<IMvxBindingDescriptionParser>();
-                var parsedDescription = parser.ParseSingle(this._freeText);
+                var parsedDescription = parser.ParseSingle(_freeText);
 
                 if (inputs.Converter == null
                     && inputs.FallbackValue == null)
@@ -100,17 +99,17 @@ namespace MvvmCross.Binding.BindingContext
 
             public FullySourceSpec(MvxSourceStepDescription sourceStepDescription)
             {
-                this._sourceStepDescription = sourceStepDescription;
+                _sourceStepDescription = sourceStepDescription;
             }
 
             public MvxSourceStepDescription CreateSourceStep(MvxSourceStepDescription inputs)
             {
                 if (inputs.Converter == null || inputs.FallbackValue == null)
                 {
-                    return this._sourceStepDescription;
+                    return _sourceStepDescription;
                 }
 
-                return SourceSpecHelpers.WrapInsideSingleCombiner(inputs, this._sourceStepDescription);
+                return SourceSpecHelpers.WrapInsideSingleCombiner(inputs, _sourceStepDescription);
             }
         }
 
@@ -135,55 +134,55 @@ namespace MvvmCross.Binding.BindingContext
 
         protected object ClearBindingKey { get; set; }
 
-        protected MvxBindingDescription BindingDescription => this._bindingDescription;
+        protected MvxBindingDescription BindingDescription => _bindingDescription;
 
-        protected MvxSourceStepDescription SourceStepDescription => this._sourceStepDescription;
+        protected MvxSourceStepDescription SourceStepDescription => _sourceStepDescription;
 
         protected void SetFreeTextPropertyPath(string sourcePropertyPath)
         {
-            if (this._sourceSpec != null)
+            if (_sourceSpec != null)
                 throw new MvxException("You cannot set the source path of a Fluent binding more than once");
 
-            this._sourceSpec = new FreeTextSourceSpec(sourcePropertyPath);
+            _sourceSpec = new FreeTextSourceSpec(sourcePropertyPath);
         }
 
         protected void SetKnownTextPropertyPath(string sourcePropertyPath)
         {
-            if (this._sourceSpec != null)
+            if (_sourceSpec != null)
                 throw new MvxException("You cannot set the source path of a Fluent binding more than once");
 
-            this._sourceSpec = new KnownPathSourceSpec(sourcePropertyPath);
+            _sourceSpec = new KnownPathSourceSpec(sourcePropertyPath);
         }
 
         [Obsolete("Please use SourceOverwrite instead")]
         protected void Overwrite(MvxBindingDescription bindingDescription)
         {
-            this.SourceOverwrite(bindingDescription);
+            SourceOverwrite(bindingDescription);
         }
 
         protected void SourceOverwrite(MvxBindingDescription bindingDescription)
         {
-            if (this._sourceSpec != null)
+            if (_sourceSpec != null)
                 throw new MvxException("You cannot set the source path of a Fluent binding more than once");
 
-            this._bindingDescription.Mode = bindingDescription.Mode;
-            this._bindingDescription.TargetName = bindingDescription.TargetName;
+            _bindingDescription.Mode = bindingDescription.Mode;
+            _bindingDescription.TargetName = bindingDescription.TargetName;
 
-            this._sourceSpec = new FullySourceSpec(bindingDescription.Source);
+            _sourceSpec = new FullySourceSpec(bindingDescription.Source);
         }
 
         protected void FullOverwrite(MvxBindingDescription bindingDescription)
         {
-            if (this._sourceSpec != null)
+            if (_sourceSpec != null)
                 throw new MvxException("You cannot set the source path of a Fluent binding more than once");
 
-            this._sourceSpec = new FullySourceSpec(bindingDescription.Source);
+            _sourceSpec = new FullySourceSpec(bindingDescription.Source);
         }
 
         public MvxBaseFluentBindingDescription(IMvxBindingContextOwner bindingContextOwner, TTarget target)
         {
-            this._bindingContextOwner = bindingContextOwner;
-            this._target = target;
+            _bindingContextOwner = bindingContextOwner;
+            _target = target;
         }
 
         protected static string TargetPropertyName(Expression<Func<TTarget, object>> targetPropertyPath)
@@ -208,27 +207,27 @@ namespace MvvmCross.Binding.BindingContext
 
         protected MvxBindingDescription CreateBindingDescription()
         {
-            this.EnsureTargetNameSet();
+            EnsureTargetNameSet();
 
             MvxSourceStepDescription source;
-            if (this._sourceSpec == null)
+            if (_sourceSpec == null)
             {
                 source = new MvxPathSourceStepDescription()
                 {
-                    Converter = this._sourceStepDescription.Converter,
-                    ConverterParameter = this._sourceStepDescription.ConverterParameter,
-                    FallbackValue = this._sourceStepDescription.FallbackValue
+                    Converter = _sourceStepDescription.Converter,
+                    ConverterParameter = _sourceStepDescription.ConverterParameter,
+                    FallbackValue = _sourceStepDescription.FallbackValue
                 };
             }
             else
             {
-                source = this._sourceSpec.CreateSourceStep(this._sourceStepDescription);
+                source = _sourceSpec.CreateSourceStep(_sourceStepDescription);
             }
 
             var toReturn = new MvxBindingDescription()
             {
-                Mode = this.BindingDescription.Mode,
-                TargetName = this.BindingDescription.TargetName,
+                Mode = BindingDescription.Mode,
+                TargetName = BindingDescription.TargetName,
                 Source = source
             };
 
@@ -237,24 +236,24 @@ namespace MvvmCross.Binding.BindingContext
 
         public override void Apply()
         {
-            var bindingDescription = this.CreateBindingDescription();
-            this._bindingContextOwner.AddBinding(this._target, bindingDescription, this.ClearBindingKey);
+            var bindingDescription = CreateBindingDescription();
+            _bindingContextOwner.AddBinding(_target, bindingDescription, ClearBindingKey);
             base.Apply();
         }
 
         public override void ApplyTo(TTarget what)
         {
-            var bindingDescription = this.CreateBindingDescription();
-            this._bindingContextOwner.AddBinding(what, bindingDescription, this.ClearBindingKey);
+            var bindingDescription = CreateBindingDescription();
+            _bindingContextOwner.AddBinding(what, bindingDescription, ClearBindingKey);
             base.ApplyTo(what);
         }
 
         protected void EnsureTargetNameSet()
         {
-            if (!string.IsNullOrEmpty(this.BindingDescription.TargetName))
+            if (!string.IsNullOrEmpty(BindingDescription.TargetName))
                 return;
 
-            this.BindingDescription.TargetName =
+            BindingDescription.TargetName =
                 MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
         }
     }

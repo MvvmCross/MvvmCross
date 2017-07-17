@@ -1,40 +1,36 @@
-// MvxStoreExtensionMethods.cs
+﻿// MvxStoreExtensionMethods.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Linq;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Uwp.Views
 {
-    using System;
-    using System.Linq;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform;
-
     public static class MvxWindowsExtensionMethods
     {
-        public static void OnViewCreate(this IMvxWindowsView storeView, MvxViewModelRequest viewModelRequest, Func<IMvxBundle> bundleLoader)
+        public static void OnViewCreate(this IMvxWindowsView storeView, string requestText, Func<IMvxBundle> bundleLoader)
         {
-            storeView.OnViewCreate(() => { return storeView.LoadViewModel(viewModelRequest, bundleLoader()); });
+            storeView.OnViewCreate(() => { return storeView.LoadViewModel(requestText, bundleLoader()); });
         }
 
         private static IMvxViewModel LoadViewModel(this IMvxWindowsView storeView,
-                                                   MvxViewModelRequest viewModelRequest,
+                                                   string requestText,
                                                    IMvxBundle bundle)
         {
 #warning ClearingBackStack disabled for now
-//            if (viewModelRequest.ClearTop)
-//            {
-//#warning TODO - BackStack not cleared for WinRT
-                //phoneView.ClearBackStack();
-//            }
-
-            var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
-            var viewModel = loaderService.LoadViewModel(viewModelRequest, bundle);
-
-            return viewModel;
+            //            if (viewModelRequest.ClearTop)
+            //            {
+            //#warning TODO - BackStack not cleared for WinRT
+            //phoneView.ClearBackStack();
+            //            }
+            var viewModelLoader = Mvx.Resolve<IMvxWindowsViewModelLoader>();
+            return viewModelLoader.Load(requestText, bundle);
         }
 
         public static void OnViewCreate(this IMvxWindowsView storeView, Func<IMvxViewModel> viewModelLoader)
@@ -46,9 +42,13 @@ namespace MvvmCross.Uwp.Views
             storeView.ViewModel = viewModel;
         }
 
-        public static void OnViewDestroy(this IMvxWindowsView storeView)
+        public static void OnViewDestroy(this IMvxWindowsView storeView, int key)
         {
-            // nothing to do currently
+            if (key > 0)
+            {
+                var viewModelLoader = Mvx.Resolve<IMvxWindowsViewModelRequestTranslator>();
+                viewModelLoader.RemoveSubViewModelWithKey(key);
+            }
         }
 
         public static bool HasRegionAttribute(this Type view)

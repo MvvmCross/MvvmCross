@@ -36,6 +36,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Attributes\MvxSetToNullAfterBindingAttribute.cs" />
     <Compile Include="Binders\IMvxAutoValueConverters.cs" />
     <Compile Include="Binders\IMvxValueConverterRegistryFiller.cs" />
@@ -174,7 +177,6 @@
     <Compile Include="MvxBindingRequest.cs" />
     <Compile Include="MvxBindingBuilder.cs" />
     <Compile Include="MvxBindingTrace.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parse\Binding\MvxBindingDescriptionParser.cs" />
     <Compile Include="BindingContext\IMvxBindingNameLookup.cs" />
     <Compile Include="BindingContext\MvxBindingContextOwnerExtensions.Fluent.cs" />

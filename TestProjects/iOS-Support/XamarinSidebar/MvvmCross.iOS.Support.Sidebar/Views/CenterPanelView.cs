@@ -1,13 +1,12 @@
+using Cirrious.FluentLayouts.Touch;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.iOS.Support.XamarinSidebar;
+using MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels;
+using UIKit;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
 {
-    using Binding.BindingContext;
-    using Cirrious.FluentLayouts.Touch;
-    using Core.ViewModels;
-    using Foundation;
-    using MvvmCross.iOS.Support.XamarinSidebar;
-    using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
-    using UIKit;
-
     [Register("CenterPanelView")]
     [MvxSidebarPresentation(MvxPanelEnum.Center, MvxPanelHintType.ResetRoot, true)]
     public class CenterPanelView : BaseViewController<CenterPanelViewModel>
@@ -42,7 +41,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
             var bindingSet = this.CreateBindingSet<CenterPanelView, CenterPanelViewModel>();
             bindingSet.Bind(label).To(vm => vm.ExampleValue);
             bindingSet.Bind(rightPanelInstructions).To(vm => vm.RightPanelInstructions);
-            bindingSet.Bind(masterButton).To(vm => vm.ShowMasterCommand);
+			bindingSet.Bind(masterButton).For("TouchDown").To(vm => vm.ShowMasterCommand);
             bindingSet.Bind(keyboardHandlingButton).To(vm => vm.ShowKeyboardHandlingCommand);
             bindingSet.Apply();
 

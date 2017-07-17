@@ -1,4 +1,4 @@
-// MvxIosBindingBuilder.cs
+﻿// MvxIosBindingBuilder.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -32,12 +32,12 @@ namespace MvvmCross.Binding.iOS
                                     Action<IMvxAutoValueConverters> fillAutoValueConvertersAction = null,
                                     Action<IMvxBindingNameRegistry> fillBindingNamesAction = null)
         {
-            this._fillRegistryAction = fillRegistryAction;
-            this._fillValueConvertersAction = fillValueConvertersAction;
-            this._fillAutoValueConvertersAction = fillAutoValueConvertersAction;
-            this._fillBindingNamesAction = fillBindingNamesAction;
+            _fillRegistryAction = fillRegistryAction;
+            _fillValueConvertersAction = fillValueConvertersAction;
+            _fillAutoValueConvertersAction = fillAutoValueConvertersAction;
+            _fillBindingNamesAction = fillBindingNamesAction;
 
-            this._unifiedValueTypesConverter = new MvxUnifiedTypesValueConverter();
+            _unifiedValueTypesConverter = new MvxUnifiedTypesValueConverter();
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
@@ -45,12 +45,56 @@ namespace MvvmCross.Binding.iOS
             base.FillTargetFactories(registry);
 
             registry.RegisterCustomBindingFactory<UIControl>(
-                MvxIosPropertyBinding.UIControl_TouchUpInside,
-                view => new MvxUIControlTouchUpInsideTargetBinding(view));
+                MvxIosPropertyBinding.UIControl_TouchDown,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_TouchDown));
 
-            registry.RegisterCustomBindingFactory<UIControl>(
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_TouchDownRepeat,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_TouchDownRepeat));
+            
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_TouchDragInside,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_TouchDragInside));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_TouchUpInside,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_TouchUpInside));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_ValueChanged,
-                view => new MvxUIControlValueChangedTargetBinding(view));
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_ValueChanged));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_PrimaryActionTriggered,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_PrimaryActionTriggered));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_EditingDidBegin,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_EditingDidBegin));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_EditingChanged,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_EditingChanged));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_EditingDidEnd,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_EditingDidEnd));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_EditingDidEndOnExit,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_EditingDidEndOnExit));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_AllTouchEvents,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_AllTouchEvents));
+
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_AllEditingEvents,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_AllEditingEvents));
+            
+			registry.RegisterCustomBindingFactory<UIControl>(
+                MvxIosPropertyBinding.UIControl_AllEvents,
+                view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_AllEvents));
 
             registry.RegisterCustomBindingFactory<UIView>(
                 MvxIosPropertyBinding.UIView_Visibility,
@@ -79,6 +123,11 @@ namespace MvvmCross.Binding.iOS
                 MvxIosPropertyBinding.UIStepper_Value);
 
             registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxUIPageControlCurrentPageTargetBinding),
+                typeof(UIPageControl),
+                MvxIosPropertyBinding.UIPageControl_CurrentPage);
+
+            registry.RegisterPropertyInfoBindingFactory(
                 typeof(MvxUISegmentedControlSelectedSegmentTargetBinding),
                 typeof(UISegmentedControl),
                 MvxIosPropertyBinding.UISegmentedControl_SelectedSegment);
@@ -94,7 +143,7 @@ namespace MvvmCross.Binding.iOS
 
             registry.RegisterCustomBindingFactory<UIDatePicker>(
                 MvxIosPropertyBinding.UIDatePicker_Time,
-                view => new MvxUIDatePickerTimeTargetBinding(view, (typeof(UIDatePicker).GetProperty(nameof(UIDatePicker.Date)))));
+                view => new MvxUIDatePickerTimeTargetBinding(view, typeof(UIDatePicker).GetProperty(nameof(UIDatePicker.Date))));
 
             registry.RegisterCustomBindingFactory<UILabel>(
                 MvxIosPropertyBinding.UILabel_Text,
@@ -163,14 +212,14 @@ namespace MvvmCross.Binding.iOS
                                                           view => new MvxUIViewTapTargetBinding(view, 3, 3));
             */
 
-            this._fillRegistryAction?.Invoke(registry);
+            _fillRegistryAction?.Invoke(registry);
         }
 
         protected override void FillValueConverters(IMvxValueConverterRegistry registry)
         {
             base.FillValueConverters(registry);
 
-            this._fillValueConvertersAction?.Invoke(registry);
+            _fillValueConvertersAction?.Invoke(registry);
         }
 
         protected override void FillAutoValueConverters(IMvxAutoValueConverters autoValueConverters)
@@ -179,9 +228,9 @@ namespace MvvmCross.Binding.iOS
 
             //register converter for xamarin unified types
             foreach (var kvp in MvxUnifiedTypesValueConverter.UnifiedTypeConversions)
-                autoValueConverters.Register(kvp.Key, kvp.Value, this._unifiedValueTypesConverter);
+                autoValueConverters.Register(kvp.Key, kvp.Value, _unifiedValueTypesConverter);
 
-            this._fillAutoValueConvertersAction?.Invoke(autoValueConverters);
+            _fillAutoValueConvertersAction?.Invoke(autoValueConverters);
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
@@ -207,7 +256,7 @@ namespace MvvmCross.Binding.iOS
             registry.AddOrOverwrite(typeof(UISegmentedControl), MvxIosPropertyBinding.UISegmentedControl_SelectedSegment);
             registry.AddOrOverwrite(typeof(UIActivityIndicatorView), MvxIosPropertyBinding.UIActivityIndicatorView_Hidden);
 
-            this._fillBindingNamesAction?.Invoke(registry);
+            _fillBindingNamesAction?.Invoke(registry);
         }
     }
 }

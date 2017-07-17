@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.UI;
+using NUnit.Framework;
+
 namespace MvvmCross.Platform.Test.UI
 {
-    using MvvmCross.Platform.UI;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxColorTests
     {
@@ -91,11 +90,11 @@ namespace MvvmCross.Platform.Test.UI
                 Assert.AreEqual(tests[i, 3], c.B);
                 var argb = tests[i, 0] & 0xFF;
                 argb <<= 8;
-                argb |= (tests[i, 1] & 0xFF);
+                argb |= tests[i, 1] & 0xFF;
                 argb <<= 8;
-                argb |= (tests[i, 2] & 0xFF);
+                argb |= tests[i, 2] & 0xFF;
                 argb <<= 8;
-                argb |= (tests[i, 3] & 0xFF);
+                argb |= tests[i, 3] & 0xFF;
                 Assert.AreEqual(argb, (uint)c.ARGB);
             }
         }
@@ -127,11 +126,11 @@ namespace MvvmCross.Platform.Test.UI
                     Assert.AreEqual(tests[i, 3], c.B);
                     var argb = (uint)j & 0xFF;
                     argb <<= 8;
-                    argb |= (tests[i, 1] & 0xFF);
+                    argb |= tests[i, 1] & 0xFF;
                     argb <<= 8;
-                    argb |= (tests[i, 2] & 0xFF);
+                    argb |= tests[i, 2] & 0xFF;
                     argb <<= 8;
-                    argb |= (tests[i, 3] & 0xFF);
+                    argb |= tests[i, 3] & 0xFF;
                     Assert.AreEqual(argb, (uint)c.ARGB);
                 }
             }
@@ -164,11 +163,11 @@ namespace MvvmCross.Platform.Test.UI
                     Assert.AreEqual(tests[i, 3], c.B);
                     var argb = tests[i, 0] & 0xFF;
                     argb <<= 8;
-                    argb |= ((uint)j & 0xFF);
+                    argb |= (uint)j & 0xFF;
                     argb <<= 8;
-                    argb |= (tests[i, 2] & 0xFF);
+                    argb |= tests[i, 2] & 0xFF;
                     argb <<= 8;
-                    argb |= (tests[i, 3] & 0xFF);
+                    argb |= tests[i, 3] & 0xFF;
                     Assert.AreEqual(argb, (uint)c.ARGB);
                 }
             }
@@ -201,11 +200,11 @@ namespace MvvmCross.Platform.Test.UI
                     Assert.AreEqual(tests[i, 3], c.B);
                     var argb = tests[i, 0] & 0xFF;
                     argb <<= 8;
-                    argb |= (tests[i, 1] & 0xFF);
+                    argb |= tests[i, 1] & 0xFF;
                     argb <<= 8;
-                    argb |= ((uint)j & 0xFF);
+                    argb |= (uint)j & 0xFF;
                     argb <<= 8;
-                    argb |= (tests[i, 3] & 0xFF);
+                    argb |= tests[i, 3] & 0xFF;
                     Assert.AreEqual(argb, (uint)c.ARGB);
                 }
             }
@@ -238,11 +237,11 @@ namespace MvvmCross.Platform.Test.UI
                     Assert.AreEqual(j, c.B);
                     var argb = tests[i, 0] & 0xFF;
                     argb <<= 8;
-                    argb |= (tests[i, 1] & 0xFF);
+                    argb |= tests[i, 1] & 0xFF;
                     argb <<= 8;
-                    argb |= (tests[i, 2] & 0xFF);
+                    argb |= tests[i, 2] & 0xFF;
                     argb <<= 8;
-                    argb |= ((uint)j & 0xFF);
+                    argb |= (uint)j & 0xFF;
                     Assert.AreEqual(argb, (uint)c.ARGB);
                 }
             }

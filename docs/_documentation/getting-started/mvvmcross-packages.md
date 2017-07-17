@@ -66,7 +66,6 @@ Name | Description | Link
 `MvvmCross.Plugin.ResourceLoader`   |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.ResourceLoader/)
 `MvvmCross.Plugin.Share`            |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Share/)
 `MvvmCross.Plugin.SoundEffects`     |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.SoundEffects/)
-`MvvmCross.Plugin.SQLite`           |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.SQLite/)
 `MvvmCross.Plugin.SQLitePCL`        |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.SQLitePCL/)
 `MvvmCross.Plugin.ThreadUtils`      |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.ThreadUtils/)
 `MvvmCross.Plugin.Visibility`       |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Visibility/)

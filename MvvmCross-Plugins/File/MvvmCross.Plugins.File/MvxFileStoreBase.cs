@@ -1,4 +1,4 @@
-﻿// MvxFileStoreBase.cs
+﻿﻿// MvxFileStoreBase.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -62,9 +62,9 @@ namespace MvvmCross.Plugins.File
             return toReturn;
         }
 
-        public bool TryReadBinaryFile(string path, out Byte[] contents)
+        public bool TryReadBinaryFile(string path, out byte[] contents)
         {
-            Byte[] result = null;
+            byte[] result = null;
             var toReturn = TryReadFileCommon(path, (stream) =>
                 {
                     using (var binaryReader = new BinaryReader(stream))
@@ -100,7 +100,7 @@ namespace MvvmCross.Plugins.File
                 });
         }
 
-        public void WriteFile(string path, IEnumerable<Byte> contents)
+        public void WriteFile(string path, IEnumerable<byte> contents)
         {
             WriteFileCommon(path, (stream) =>
                 {
@@ -122,6 +122,10 @@ namespace MvvmCross.Plugins.File
         public abstract string NativePath(string path);
 
 		public abstract bool TryCopy(string from, string to, bool overwrite);
+
+        public abstract long GetSize(string path);
+
+        public abstract DateTime GetLastWriteTimeUtc(string path);
 
         #endregion IMvxFileStore Members
 

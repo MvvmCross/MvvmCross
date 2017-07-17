@@ -39,9 +39,12 @@
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Services\TextProviderBuilder.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="AppStart.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\MainPage.xaml">
@@ -62,10 +65,6 @@
       <Project>{71d719fa-95b0-4a05-b064-ab8d0b7085df}</Project>
       <Name>MvvmCross.Plugins.JsonLocalization</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\MvvmCross-Plugins\Json\MvvmCross.Plugins.Json\MvvmCross.Plugins.Json.csproj">
-      <Project>{d518e8e6-3ce6-4706-a286-e8bc6a2f64dc}</Project>
-      <Name>MvvmCross.Plugins.Json</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\MvvmCross-Plugins\ResourceLoader\MvvmCross.Plugins.ResourceLoader\MvvmCross.Plugins.ResourceLoader.csproj">
       <Project>{75ca1824-c7f3-4827-93ed-e75b2c01cb2c}</Project>
       <Name>MvvmCross.Plugins.ResourceLoader</Name>
@@ -84,6 +83,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\Xamarin.Forms.2.3.5.235-pre2\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
     </Reference>

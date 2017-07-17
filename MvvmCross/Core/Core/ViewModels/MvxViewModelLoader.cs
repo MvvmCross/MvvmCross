@@ -5,32 +5,24 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-
     public class MvxViewModelLoader
         : IMvxViewModelLoader
     {
-        private IMvxViewModelLocatorCollection _locatorCollection;
+        protected IMvxViewModelLocatorCollection LocatorCollection { get; private set; }
 
-        protected IMvxViewModelLocatorCollection LocatorCollection
-        {
-            get
-            {
-                this._locatorCollection = this._locatorCollection ?? Mvx.Resolve<IMvxViewModelLocatorCollection>();
-                return this._locatorCollection;
-            }
-        }
+        public MvxViewModelLoader(IMvxViewModelLocatorCollection locatorCollection) =>
+            LocatorCollection = locatorCollection;
 
         // Reload should be used to re-run cached ViewModels lifecycle if required.
         public IMvxViewModel ReloadViewModel(IMvxViewModel viewModel, MvxViewModelRequest request, IMvxBundle savedState)
         {
-            var viewModelLocator = this.FindViewModelLocator(request);
-            return this.ReloadViewModel(viewModel, request, savedState, viewModelLocator);
+            var viewModelLocator = FindViewModelLocator(request);
+            return ReloadViewModel(viewModel, request, savedState, viewModelLocator);
         }
 
         private IMvxViewModel ReloadViewModel(IMvxViewModel viewModel, MvxViewModelRequest request, IMvxBundle savedState,
@@ -62,9 +54,9 @@ namespace MvvmCross.Core.ViewModels
                 return new MvxNullViewModel();
             }
 
-            var viewModelLocator = this.FindViewModelLocator(request);
+            var viewModelLocator = FindViewModelLocator(request);
 
-            return this.LoadViewModel(request, savedState, viewModelLocator);
+            return LoadViewModel(request, savedState, viewModelLocator);
         }
 
         private IMvxViewModel LoadViewModel(MvxViewModelRequest request, IMvxBundle savedState,
@@ -87,7 +79,7 @@ namespace MvvmCross.Core.ViewModels
 
         private IMvxViewModelLocator FindViewModelLocator(MvxViewModelRequest request)
         {
-            var viewModelLocator = this.LocatorCollection.FindViewModelLocator(request);
+            var viewModelLocator = LocatorCollection.FindViewModelLocator(request);
 
             if (viewModelLocator == null)
             {

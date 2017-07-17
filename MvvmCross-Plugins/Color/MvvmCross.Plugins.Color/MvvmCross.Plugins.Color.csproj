@@ -33,9 +33,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MvxARGBValueConverter.cs" />
@@ -43,7 +40,9 @@
     <Compile Include="MvxRGBIntColorValueConverter.cs" />
     <Compile Include="MvxRGBValueConverter.cs" />
     <Compile Include="PluginLoader.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="MvxColorValueConverter.cs" />
     <Compile Include="MvxNativeColorValueConverter.cs" />
     <Compile Include="..\..\All\MvvmCross.Plugins.All\Preserve.cs">

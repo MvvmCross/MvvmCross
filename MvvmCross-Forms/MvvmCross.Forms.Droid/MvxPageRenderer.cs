@@ -9,15 +9,16 @@
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Presenters;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 
 namespace MvvmCross.Forms.Droid
 {
-    public class MvxPageRenderer : Xamarin.Forms.Platform.Android.PageRenderer, IMvxBindingContextOwner
+    public class MvxPageRenderer : PageRenderer, IMvxBindingContextOwner
     {
+        public IMvxBindingContext BindingContext { get; set; }
 
-        public IMvxBindingContext BindingContext { get; set;}
-
-        protected override void OnElementChanged(Xamarin.Forms.Platform.Android.ElementChangedEventArgs<Xamarin.Forms.Page> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Page> e)
         {
             base.OnElementChanged(e);
 
@@ -26,11 +27,11 @@ namespace MvvmCross.Forms.Droid
     }
 
     public class MvxPageRenderer<TViewModel>
-        : MvxPageRenderer where TViewModel : class, IMvxViewModel {
-
+        : MvxPageRenderer where TViewModel : class, IMvxViewModel 
+    {
         public TViewModel ViewModel {
             get { return BindingContext.DataContext as TViewModel; }
-            set { BindingContext.DataContext = value;}
+            set { BindingContext.DataContext = value; }
         }
     }
 }

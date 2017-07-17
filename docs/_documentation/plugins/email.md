@@ -14,7 +14,7 @@ public interface IMvxComposeEmailTask
 
 The Email plugins is supported on all platforms.
 
-The implementation on Windows Store and Wpf is very simplistic - using only 'mailto:' url-open requests.
+The implementation on Windows Uwp and Wpf is very simplistic - using only 'mailto:' url-open requests.
 
 To send an email you can use:
 

@@ -1,25 +1,21 @@
-// MvxTableViewController.cs
+﻿// MvxTableViewController.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.tvOS.Views;
+using UIKit;
+
 namespace MvvmCross.tvOS.Views
 {
-    using System;
-
-    using Foundation;
-
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform.tvOS.Views;
-
-    using UIKit;
-
     public class MvxTableViewController
-        : MvxEventSourceTableViewController
-          , IMvxTvosView
+        : MvxEventSourceTableViewController, IMvxTvosView
     {
         protected MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
             : base(style)
@@ -41,8 +37,8 @@ namespace MvvmCross.tvOS.Views
 
         public object DataContext
         {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
         }
 
         public IMvxViewModel ViewModel
@@ -71,9 +67,9 @@ namespace MvvmCross.tvOS.Views
 				if (e == null)
 					Mvx.Trace ("e was null!");
 				*/
-                return this.DataContext as IMvxViewModel;
+                return DataContext as IMvxViewModel;
             }
-            set { this.DataContext = value; }
+            set { DataContext = value; }
         }
 
         public MvxViewModelRequest Request { get; set; }
@@ -82,8 +78,7 @@ namespace MvvmCross.tvOS.Views
     }
 
     public class MvxTableViewController<TViewModel>
-        : MvxTableViewController
-          , IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxTableViewController, IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         protected MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
             : base(style)

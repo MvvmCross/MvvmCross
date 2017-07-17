@@ -13,7 +13,7 @@ namespace MvvmCross.Platform.tvOS.Platform
 
         public MvxTvosMajorVersionChecker(int major, bool defaultValue = true)
         {
-            this.IsVersionOrHigher = ReadIsTvosVersionOrHigher(major, defaultValue);
+            IsVersionOrHigher = ReadIsTvosVersionOrHigher(major, defaultValue);
         }
 
         private static bool ReadIsTvosVersionOrHigher(int target, bool defaultValue)

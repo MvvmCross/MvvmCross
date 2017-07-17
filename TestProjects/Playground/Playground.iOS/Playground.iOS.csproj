@@ -79,7 +79,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
@@ -91,10 +90,7 @@
       <InProject>false</InProject>
     </ImageAsset>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
@@ -156,6 +152,21 @@
     <Compile Include="Views\SplitDetailNavView.designer.cs">
       <DependentUpon>SplitDetailNavView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Tab3View.cs" />
+    <Compile Include="Views\Tab3View.designer.cs">
+      <DependentUpon>Tab3View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OverrideAttributeView.cs" />
+    <Compile Include="Views\OverrideAttributeView.designer.cs">
+      <DependentUpon>OverrideAttributeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Views\NestedModalView.cs" />
+    <Compile Include="Views\NestedModalView.designer.cs">
+      <DependentUpon>NestedModalView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
@@ -165,10 +176,6 @@
     <ProjectReference Include="..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>MvvmCross.Binding</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Binding\iOS\MvvmCross.Binding.iOS.csproj">
-      <Project>{913B13B5-7B2C-4DDA-BECB-DADC827ED895}</Project>
-      <Name>MvvmCross.Binding.iOS</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross\iOS\iOS\MvvmCross.iOS.csproj">
       <Project>{E042EDD9-E89D-4928-BF4D-27F0FC29CEDA}</Project>
@@ -194,6 +201,9 @@
     <BundleResource Include="Resources\ic_tabbar_menu.png" />
     <BundleResource Include="Resources\ic_tabbar_menu%402x.png" />
     <BundleResource Include="Resources\ic_tabbar_menu%403x.png" />
+    <BundleResource Include="Resources\settings%402x.png" />
+    <BundleResource Include="Resources\settings%403x.png" />
+    <BundleResource Include="Resources\settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

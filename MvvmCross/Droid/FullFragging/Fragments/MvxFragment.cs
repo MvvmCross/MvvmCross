@@ -5,9 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.OS;
 using Android.Runtime;
-using System;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.FullFragging.Fragments.EventSource;
@@ -36,7 +36,8 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         protected MvxFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         protected MvxFragment()
         {
@@ -49,7 +50,10 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         public object DataContext
         {
-            get { return _dataContext; }
+            get
+            {
+                return _dataContext;
+            }
             set
             {
                 _dataContext = value;
@@ -60,7 +64,10 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get
+            {
+                return DataContext as IMvxViewModel;
+            }
             set
             {
                 DataContext = value;
@@ -74,34 +81,40 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         public string UniqueImmutableCacheTag => Tag;
 
+        public override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            ViewModel?.ViewCreated();
+        }
+
         public override void OnDestroy()
         {
             base.OnDestroy();
-            ViewModel?.Destroy();
+            ViewModel?.ViewDestroy();
         }
 
         public override void OnStart()
         {
             base.OnStart();
-            ViewModel?.Appearing();
+            ViewModel?.ViewAppearing();
         }
 
         public override void OnResume()
         {
             base.OnResume();
-            ViewModel?.Appeared();
+            ViewModel?.ViewAppeared();
         }
 
         public override void OnPause()
         {
             base.OnPause();
-            ViewModel?.Disappearing();
+            ViewModel?.ViewDisappearing();
         }
 
         public override void OnStop()
         {
             base.OnStop();
-            ViewModel?.Disappeared();
+            ViewModel?.ViewDisappeared();
         }
     }
 

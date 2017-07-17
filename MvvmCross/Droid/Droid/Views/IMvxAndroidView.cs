@@ -5,14 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Droid.Views;
+
 namespace MvvmCross.Droid.Views
 {
-    using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Binding.Droid.Views;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform.Droid.Views;
-
     public interface IMvxAndroidView
         : IMvxView
         , IMvxLayoutInflaterHolder

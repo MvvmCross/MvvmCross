@@ -1,5 +1,4 @@
-﻿using MvvmCross.iOS.Support.XamarinSidebar.Attributes;
-using UIKit;
+﻿using UIKit;
 
 namespace MvvmCross.iOS.Support.XamarinSidebar.Views
 {

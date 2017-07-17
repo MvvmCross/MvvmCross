@@ -5,23 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Windows;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Wpf.Views
 {
-    using System;
-    using System.Windows;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Exceptions;
-
     public class MvxWpfViewsContainer
         : MvxViewsContainer
         , IMvxWpfViewsContainer
     {
         public virtual FrameworkElement CreateView(MvxViewModelRequest request)
         {
-            var viewType = this.GetViewType(request.ViewModelType);
+            var viewType = GetViewType(request.ViewModelType);
             if (viewType == null)
                 throw new MvxException("View Type not found for " + request.ViewModelType);
 
@@ -38,8 +37,15 @@ namespace MvvmCross.Wpf.Views
             if (viewControl == null)
                 throw new MvxException("Loaded View is not a FrameworkElement " + viewType);
 
-            var viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
-            wpfView.ViewModel = viewModelLoader.LoadViewModel(request, null);
+            if (request is MvxViewModelInstanceRequest instanceRequest)
+            {
+                wpfView.ViewModel = instanceRequest.ViewModelInstance;
+            }
+            else
+            {
+                var viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
+                wpfView.ViewModel = viewModelLoader.LoadViewModel(request, null);
+            }
 
             return viewControl;
         }

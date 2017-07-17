@@ -1,23 +1,19 @@
-// MvxView.cs
+﻿// MvxView.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using AppKit;
+using CoreGraphics;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Binding.Mac.Views
 {
-    using System;
-    using System.Drawing;
-
-    using AppKit;
-    using CoreGraphics;
-    using Foundation;
-
-    using global::MvvmCross.Binding.BindingContext;
-    using global::MvvmCross.Platform.Core;
-
     [Register("MvxTableCellView")]
     public class MvxTableCellView : NSTableCellView, IMvxBindingContextOwner, IMvxDataConsumer
     {

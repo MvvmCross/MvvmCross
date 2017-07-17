@@ -35,13 +35,16 @@
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <EmbeddedResource Include="Properties\MvvmCross.Plugins.Accelerometer.Uwp.rd.xml" />
     <Compile Include="MvxWindowsCommonAccelerometer.cs" />
     <Compile Include="Plugin.cs" />
@@ -50,10 +53,6 @@
     <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
       <Name>MvvmCross.Platform</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Platform\UWP\MvvmCross.Platform.Uwp.csproj">
-      <Project>{ce025c02-196a-4bd7-9097-e4646f4033b7}</Project>
-      <Name>MvvmCross.Platform.Uwp</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvvmCross.Plugins.Accelerometer\MvvmCross.Plugins.Accelerometer.csproj">
       <Project>{b81c8f9a-fe2c-4807-90ba-d34cb25d8ce6}</Project>

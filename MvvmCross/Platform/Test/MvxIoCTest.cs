@@ -5,24 +5,29 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.IoC;
+using NUnit.Framework;
+
 namespace MvvmCross.Platform.Test
 {
-    using System.Collections.Generic;
-
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.IoC;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxIocTest
     {
-        public interface IA { IB B { get; } }
+        public interface IA 
+        { 
+            IB B { get; } 
+        }
 
-        public interface IB { }
+        public interface IB
+        {
+        }
 
-        public interface IC { }
+        public interface IC
+        {
+        }
 
         public class A : IA
         {
@@ -35,7 +40,6 @@ namespace MvvmCross.Platform.Test
         }
 
         public class B : IB
-
         {
             public B(IC c)
             {
@@ -43,7 +47,6 @@ namespace MvvmCross.Platform.Test
         }
 
         public class C : IC
-
         {
             public C(IA a)
             {
@@ -51,7 +54,6 @@ namespace MvvmCross.Platform.Test
         }
 
         public class C2 : IC
-
         {
             public C2()
             {

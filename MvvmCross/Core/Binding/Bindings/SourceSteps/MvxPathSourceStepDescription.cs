@@ -13,7 +13,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         public override string ToString()
         {
-            return this.SourcePropertyPath ?? "-empty-";
+            return SourcePropertyPath ?? "-empty-";
         }
     }
 }

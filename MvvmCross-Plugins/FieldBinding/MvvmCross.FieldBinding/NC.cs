@@ -29,11 +29,17 @@ namespace MvvmCross.FieldBinding
 
     public class NCString : NC<string>, INCString
     {
-        public NCString() : base() { }
+        public NCString() : base()
+        {
+        }
 
-        public NCString(string value) : base(value) { }
+        public NCString(string value) : base(value)
+        {
+        }
 
-        public NCString(string value, Action<string> valueChanged) : base(value, valueChanged) { }
+        public NCString(string value, Action<string> valueChanged) : base(value, valueChanged)
+        {
+        }
 
         public NCString(int maxLength) : this()
         {

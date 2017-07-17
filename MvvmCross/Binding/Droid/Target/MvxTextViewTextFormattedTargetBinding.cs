@@ -1,4 +1,4 @@
-// MvxTextViewTextFormattedTargetBinding.cs
+﻿// MvxTextViewTextFormattedTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,8 +9,8 @@ using System;
 using Android.Text;
 using Android.Widget;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform.WeakSubscription;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
 {

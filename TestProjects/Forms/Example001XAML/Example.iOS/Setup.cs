@@ -1,18 +1,18 @@
-using MvvmCross.Platform.Platform;
-using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.iOS;
 using MvvmCross.Forms.iOS.Presenters;
 using MvvmCross.iOS.Platform;
+using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.Platform.Platform;
 using UIKit;
 using Xamarin.Forms;
 
 namespace Example.iOS
 {
-    public class Setup : MvxIosSetup
+    public class Setup : MvxFormsIosSetup
     {
-        public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
+        public Setup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
         {
         }
@@ -25,15 +25,6 @@ namespace Example.iOS
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();
-        }
-
-        protected override IMvxIosViewPresenter CreatePresenter()
-        {
-            Forms.Init();
-
-            var xamarinFormsApp = new MvxFormsApp();
-
-            return new MvxFormsIosPagePresenter(Window, xamarinFormsApp);
         }
     }
 }

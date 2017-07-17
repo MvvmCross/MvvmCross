@@ -5,20 +5,20 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Binding.Bindings.Target
 {
-    using System;
-
     public abstract class MvxTargetBinding : MvxBinding, IMvxTargetBinding
     {
         private readonly WeakReference _target;
 
         protected MvxTargetBinding(object target)
         {
-            this._target = new WeakReference(target);
+            _target = new WeakReference(target);
         }
 
-        protected object Target => this._target.Target;
+        protected object Target => _target.Target;
 
         public virtual void SubscribeToEvents()
         {
@@ -80,7 +80,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
         public void SetValue(object value)
         {
-            this.SetValue((TValue)value);
+            SetValue((TValue)value);
         }
     }
 }

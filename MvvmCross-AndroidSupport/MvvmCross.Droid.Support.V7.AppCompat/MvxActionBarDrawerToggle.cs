@@ -1,16 +1,17 @@
-// MvxActionBarDrawerToggle.cs
+﻿// MvxActionBarDrawerToggle.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.App;
+using Android.Runtime;
 using Android.Support.V4.Widget;
+using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
-using System;
-using Android.Runtime;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
@@ -46,20 +47,24 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     }
 
     [Register("mvvmcross.droid.support.v7.appcompat.MvxActionBarDrawerToggle")]
-    public sealed class MvxActionBarDrawerToggle : Android.Support.V7.App.ActionBarDrawerToggle
+    public sealed class MvxActionBarDrawerToggle : ActionBarDrawerToggle
     {
-        public MvxActionBarDrawerToggle(IntPtr ptr, JniHandleOwnership ownership) : base(ptr, ownership)
+        public MvxActionBarDrawerToggle(IntPtr ptr, JniHandleOwnership ownership) 
+            : base(ptr, ownership)
         {
-                
         }
 
-        public MvxActionBarDrawerToggle(Activity activity, DrawerLayout drawerLayout, int openDrawerContentDescRes, int closeDrawerContentDescRes)
+        public MvxActionBarDrawerToggle(Activity activity, DrawerLayout drawerLayout, int openDrawerContentDescRes,
+            int closeDrawerContentDescRes) 
             : base(activity, drawerLayout, openDrawerContentDescRes, closeDrawerContentDescRes)
-        { }
+        {
+        }
 
-        public MvxActionBarDrawerToggle(Activity activity, DrawerLayout drawerLayout, Toolbar toolbar, int openDrawerContentDescRes, int closeDrawerContentDescRes)
+        public MvxActionBarDrawerToggle(Activity activity, DrawerLayout drawerLayout, Toolbar toolbar,
+            int openDrawerContentDescRes, int closeDrawerContentDescRes)
             : base(activity, drawerLayout, toolbar, openDrawerContentDescRes, closeDrawerContentDescRes)
-        { }
+        {
+        }
 
         public event EventHandler<ActionBarDrawerEventArgs> DrawerClosed;
 
