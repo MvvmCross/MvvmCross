@@ -1,17 +1,16 @@
-﻿﻿﻿using System;
-   using System.Collections.Generic;
-   using System.Linq;
-   using System.Reflection;
-   using System.Text.RegularExpressions;
-   using System.Threading;
-   using System.Threading.Tasks;
-   using MvvmCross.Core.Navigation.EventArguments;
-   using MvvmCross.Core.Platform;
-   using MvvmCross.Core.ViewModels;
-   using MvvmCross.Core.Views;
-   using MvvmCross.Platform;
-   using MvvmCross.Platform.Core;
-   using MvvmCross.Platform.Exceptions;
+﻿﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
+using MvvmCross.Core.Navigation.EventArguments;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Core.Navigation
@@ -20,56 +19,39 @@ namespace MvvmCross.Core.Navigation
     {
         private IMvxViewDispatcher _viewDispatcher;
         public IMvxViewDispatcher ViewDispatcher 
-        { 
-            get 
-            {
-                return _viewDispatcher ?? (IMvxViewDispatcher)MvxMainThreadDispatcher.Instance;
-            } 
-            set 
-            { 
-                _viewDispatcher = value; 
-            } 
-        }
-
-        private static readonly Dictionary<Regex, Type> Routes = new Dictionary<Regex, Type>();
-
-        private IMvxNavigationCache navigationCache;
-        protected virtual IMvxNavigationCache NavigationCache
         {
-            get
-            {
-                if (navigationCache == null)
-                {
-                    navigationCache = new MvxNavigationCache();
-                    Mvx.RegisterSingleton<IMvxNavigationCache>(navigationCache);
-                }
-
-                return navigationCache;
-            }
+            get => _viewDispatcher ?? (IMvxViewDispatcher)MvxMainThreadDispatcher.Instance;
+            set => _viewDispatcher = value;
         }
 
-        private IMvxViewModelLoader _viewModelLoader;
-        public virtual IMvxViewModelLoader ViewModelLoader
-        {
-            get
-            {
-                if (_viewModelLoader == null)
-                    _viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
-                return _viewModelLoader;
-            }
-            set
-            {
-                _viewModelLoader = value;
-            }
-        }
+        protected static readonly Dictionary<Regex, Type> Routes = new Dictionary<Regex, Type>();
+
+        protected virtual IMvxNavigationCache NavigationCache { get; private set; }
+
+        public virtual IMvxViewModelLoader ViewModelLoader { get; set; }
 
         public event BeforeNavigateEventHandler BeforeNavigate;
         public event AfterNavigateEventHandler AfterNavigate;
         public event BeforeCloseEventHandler BeforeClose;
         public event AfterCloseEventHandler AfterClose;
 
-        public MvxNavigationService()
+        public MvxNavigationService() : this(null, null)
         {
+        }
+
+        public MvxNavigationService(IMvxNavigationCache navigationCache, IMvxViewModelLoader viewModelLoader)
+        {
+            if(navigationCache == null)
+            {
+                navigationCache = new MvxNavigationCache();
+                Mvx.RegisterSingleton(navigationCache);
+            }
+
+            if (viewModelLoader == null)
+                viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
+
+            NavigationCache = navigationCache;
+            ViewModelLoader = viewModelLoader;
         }
 
         public static void LoadRoutes(IEnumerable<Assembly> assemblies)
