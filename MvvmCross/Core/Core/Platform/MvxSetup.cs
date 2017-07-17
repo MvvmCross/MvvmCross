@@ -74,12 +74,15 @@ namespace MvvmCross.Core.Platform
             InitializeCommandHelper();
             MvxTrace.Trace("Setup: PluginManagerFramework start");
             var pluginManager = InitializePluginFramework();
-            MvxTrace.Trace("Setup: App start");
-            var app = InitializeApp(pluginManager);
+            MvxTrace.Trace("Setup: Create App");
+            var app = CreateApp();
+            Mvx.RegisterSingleton(app);
             MvxTrace.Trace("Setup: NavigationService");
             InitializeNavigationService(app);
             MvxTrace.Trace("Setup: Load navigation routes");
             LoadNavigationServiceRoutes();
+            MvxTrace.Trace("Setup: App start");
+            InitializeApp(pluginManager, app);
             MvxTrace.Trace("Setup: ViewModelTypeFinder start");
             InitializeViewModelTypeFinder();
             MvxTrace.Trace("Setup: ViewsContainer start");
@@ -239,21 +242,11 @@ namespace MvvmCross.Core.Platform
         {
         }
 
-        protected virtual IMvxViewModelLocatorCollection InitializeApp(IMvxPluginManager pluginManager)
+        protected virtual void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
         {
-            var app = CreateAndInitializeApp(pluginManager);
-            Mvx.RegisterSingleton(app);
-            Mvx.RegisterSingleton<IMvxViewModelLocatorCollection>(app);
-
-            return app;
-        }
-
-        protected virtual IMvxApplication CreateAndInitializeApp(IMvxPluginManager pluginManager)
-        {
-            var app = CreateApp();
             app.LoadPlugins(pluginManager);
             app.Initialize();
-            return app;
+            Mvx.RegisterSingleton<IMvxViewModelLocatorCollection>(app);
         }
 
         protected virtual void InitializeViewsContainer()
