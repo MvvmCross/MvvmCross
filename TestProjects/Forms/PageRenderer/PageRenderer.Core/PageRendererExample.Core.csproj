@@ -35,7 +35,7 @@
     <Compile Include="..\..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="MvvmApp.cs" />
+    <Compile Include="CoreApp.cs" />
     <Compile Include="BootViewModel.cs" />
     <Compile Include="BootPage.xaml.cs">
       <DependentUpon>BootPage.xaml</DependentUpon>
