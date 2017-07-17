@@ -21,7 +21,7 @@ namespace MvvmCross.Wpf.Views
             _dispatcher = dispatcher;
         }
 
-        public bool RequestMainThreadAction(Action action)
+        public bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (_dispatcher.CheckAccess())
             {
@@ -29,7 +29,13 @@ namespace MvvmCross.Wpf.Views
             }
             else
             {
-                _dispatcher.Invoke(() => ExceptionMaskedAction(action));
+                _dispatcher.Invoke(() => 
+                {
+                    if (maskExceptions)
+                        ExceptionMaskedAction(action);
+                    else
+                        action();
+                });
             }
 
             // TODO - why return bool at all?

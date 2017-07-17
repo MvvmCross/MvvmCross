@@ -17,7 +17,7 @@ namespace MvvmCross.Console.Views
         : MvxMainThreadDispatcher
         , IMvxViewDispatcher
     {
-        public bool RequestMainThreadAction(Action action)
+        public bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             action();
             return true;

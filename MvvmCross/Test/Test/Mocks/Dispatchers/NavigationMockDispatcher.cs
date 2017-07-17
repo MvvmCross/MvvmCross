@@ -14,7 +14,8 @@ namespace MvvmCross.Test.Mocks.Dispatchers
         public readonly List<MvxViewModelRequest> Requests = new List<MvxViewModelRequest>();
         public readonly List<MvxPresentationHint> Hints = new List<MvxPresentationHint>();
 
-        public virtual bool RequestMainThreadAction(Action action)
+        public virtual bool RequestMainThreadAction(Action action, 
+                                                    bool maskExceptions = true)
         {
             action();
             return true;
