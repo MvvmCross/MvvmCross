@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Core.ViewModels
@@ -16,17 +15,8 @@ namespace MvvmCross.Core.ViewModels
     {
         protected IMvxViewModelLocatorCollection LocatorCollection { get; private set; }
 
-        public MvxViewModelLoader() : this(null)
-        {
-        }
-
-        public MvxViewModelLoader(IMvxViewModelLocatorCollection locatorCollection)
-        {
-            if (locatorCollection == null)
-                locatorCollection = Mvx.Resolve<IMvxViewModelLocatorCollection>();
-
+        public MvxViewModelLoader(IMvxViewModelLocatorCollection locatorCollection) =>
             LocatorCollection = locatorCollection;
-        }
 
         // Reload should be used to re-run cached ViewModels lifecycle if required.
         public IMvxViewModel ReloadViewModel(IMvxViewModel viewModel, MvxViewModelRequest request, IMvxBundle savedState)
