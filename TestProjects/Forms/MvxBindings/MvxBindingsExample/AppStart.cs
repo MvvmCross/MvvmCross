@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
-using RoutingExample.Core.ViewModels;
+using MvxBindingsExample.ViewModels;
 
-namespace RoutingExample.Core
+namespace MvxBindingsExample
 {
     public class AppStart : IMvxAppStart
     {
