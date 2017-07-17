@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -7,8 +7,6 @@ using Moq;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Platform.Core;
 using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.Dispatchers;
 using MvvmCross.Test.Mocks.TestViewModels;
@@ -67,7 +65,6 @@ namespace MvvmCross.Test.Navigation
 
             Ioc.RegisterSingleton(mockLocator.Object);
             Ioc.RegisterSingleton(mockCollection.Object);
-
 
             Ioc.RegisterSingleton<IMvxViewModelLoader>(loader);
 

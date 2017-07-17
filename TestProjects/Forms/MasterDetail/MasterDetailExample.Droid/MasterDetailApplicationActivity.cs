@@ -1,4 +1,4 @@
-﻿using Android.App;
+using Android.App;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace MasterDetailExample.Droid
 {
-    [Activity(Label = "MasterDetailApplicationActivity", Icon="@android:color/transparent")]
+    [Activity(Label = "MasterDetailApplicationActivity", Icon = "@android:color/transparent")]
     public class MasterDetailApplicationActivity : MvxFormsApplicationActivity
     {
         protected override void OnCreate(Bundle bundle)
