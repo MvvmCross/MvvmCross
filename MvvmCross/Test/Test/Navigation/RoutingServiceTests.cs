@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -7,8 +7,6 @@ using Moq;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Platform.Core;
 using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.Dispatchers;
 using MvvmCross.Test.Mocks.TestViewModels;
@@ -53,20 +51,26 @@ namespace MvvmCross.Test.Navigation
         {
             base.AdditionalSetup();
 
+            var mockLocator = new Mock<IMvxViewModelLocator>();
+            mockLocator.Setup(
+                m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>())).Returns(() => new NavigationServiceTests.SimpleTestViewModel());
+            mockLocator.Setup(
+                m => m.Reload(It.IsAny<IMvxViewModel>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>())).Returns(() => new NavigationServiceTests.SimpleTestViewModel());
+
+            var mockCollection = new Mock<IMvxViewModelLocatorCollection>();
+            mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
+                          .Returns(() => mockLocator.Object);
+
+            Ioc.RegisterSingleton(mockLocator.Object);
+
+            var loader = new MvxViewModelLoader(mockCollection.Object);
             MockDispatcher = new Mock<NavigationMockDispatcher>(MockBehavior.Loose) { CallBase = true };
-            Ioc.RegisterSingleton<IMvxViewDispatcher>(MockDispatcher.Object);
-            Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(MockDispatcher.Object);
-            Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
-
-            SetupRoutings();
-        }
-
-        protected void SetupRoutings()
-        {
-            RoutingService = new MvxNavigationService
+            var navigationService = RoutingService = new MvxNavigationService(null, loader)
             {
-                ViewDispatcher = MockDispatcher.Object
+                ViewDispatcher = MockDispatcher.Object,
             };
+            Ioc.RegisterSingleton(navigationService);
+            Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
         }
 
         [Test]

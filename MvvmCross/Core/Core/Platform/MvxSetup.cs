@@ -1,4 +1,4 @@
-﻿// MvxSetup.cs
+// MvxSetup.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -72,16 +72,17 @@ namespace MvvmCross.Core.Platform
             InitializeStringToTypeParser();
             MvxTrace.Trace("Setup: CommandHelper start");
             InitializeCommandHelper();
-            MvxTrace.Trace("Setup: ViewModelFramework start");
-            InitializeViewModelFramework();
             MvxTrace.Trace("Setup: PluginManagerFramework start");
             var pluginManager = InitializePluginFramework();
+            MvxTrace.Trace("Setup: Create App");
+            var app = CreateApp();
+            Mvx.RegisterSingleton(app);
             MvxTrace.Trace("Setup: NavigationService");
-            InitializeNavigationService();
-            MvxTrace.Trace("Setup: App start");
-            InitializeApp(pluginManager);
+            InitializeNavigationService(app);
             MvxTrace.Trace("Setup: Load navigation routes");
             LoadNavigationServiceRoutes();
+            MvxTrace.Trace("Setup: App start");
+            InitializeApp(pluginManager, app);
             MvxTrace.Trace("Setup: ViewModelTypeFinder start");
             InitializeViewModelTypeFinder();
             MvxTrace.Trace("Setup: ViewsContainer start");
@@ -211,14 +212,9 @@ namespace MvvmCross.Core.Platform
             MvxTrace.Initialize();
         }
 
-        protected virtual void InitializeViewModelFramework()
+        protected virtual IMvxViewModelLoader CreateViewModelLoader(IMvxViewModelLocatorCollection collection)
         {
-            Mvx.RegisterSingleton<IMvxViewModelLoader>(CreateViewModelLoader());
-        }
-
-        protected virtual IMvxViewModelLoader CreateViewModelLoader()
-        {
-            return new MvxViewModelLoader();
+            return new MvxViewModelLoader(collection);
         }
 
         protected virtual IMvxPluginManager InitializePluginFramework()
@@ -246,19 +242,11 @@ namespace MvvmCross.Core.Platform
         {
         }
 
-        protected virtual void InitializeApp(IMvxPluginManager pluginManager)
+        protected virtual void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
         {
-            var app = CreateAndInitializeApp(pluginManager);
-            Mvx.RegisterSingleton(app);
-            Mvx.RegisterSingleton<IMvxViewModelLocatorCollection>(app);
-        }
-
-        protected virtual IMvxApplication CreateAndInitializeApp(IMvxPluginManager pluginManager)
-        {
-            var app = CreateApp();
             app.LoadPlugins(pluginManager);
             app.Initialize();
-            return app;
+            Mvx.RegisterSingleton<IMvxViewModelLocatorCollection>(app);
         }
 
         protected virtual void InitializeViewsContainer()
@@ -274,9 +262,11 @@ namespace MvvmCross.Core.Platform
             Mvx.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
         }
 
-        protected virtual IMvxNavigationService InitializeNavigationService()
+        protected virtual IMvxNavigationService InitializeNavigationService(IMvxViewModelLocatorCollection collection)
         {
-            var navigationService = new MvxNavigationService();
+            var loader = CreateViewModelLoader(collection);
+            Mvx.RegisterSingleton<IMvxViewModelLoader>(loader);
+            var navigationService = new MvxNavigationService(null, loader);
             Mvx.RegisterSingleton<IMvxNavigationService>(navigationService);
             return navigationService;
         }

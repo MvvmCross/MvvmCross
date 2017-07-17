@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Binding;
 using MvvmCross.Forms.Bindings;
@@ -8,11 +8,16 @@ using MvvmCross.iOS.Platform;
 using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Localization;
 using UIKit;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Forms.iOS
 {
     public abstract class MvxFormsIosSetup : MvxIosSetup
     {
+        private List<Assembly> _viewAssemblies;
+        private MvxFormsApplication _formsApplication;
+
         protected MvxFormsIosSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
         {
@@ -23,22 +28,20 @@ namespace MvvmCross.Forms.iOS
         {
         }
 
-        private List<Assembly> viewAssemblies;
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
-            if (viewAssemblies == null)
-                viewAssemblies = new List<Assembly>(base.GetViewAssemblies());
+            if (_viewAssemblies == null)
+                _viewAssemblies = new List<Assembly>(base.GetViewAssemblies());
             
-            return viewAssemblies;
+            return _viewAssemblies;
         }
 
-        protected override void InitializeApp(Platform.Plugins.IMvxPluginManager pluginManager)
+        protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
         {
-            base.InitializeApp(pluginManager);
-            viewAssemblies.AddRange(GetViewModelAssemblies());
+            base.InitializeApp(pluginManager, app);
+            _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        private MvxFormsApplication _formsApplication;
         public MvxFormsApplication FormsApplication {
             get
             {
@@ -48,14 +51,11 @@ namespace MvvmCross.Forms.iOS
             }
         }
 
-        protected virtual MvxFormsApplication CreateFormsApplication()
-        {
-            return new MvxFormsApplication();
-        }
+        protected virtual MvxFormsApplication CreateFormsApplication() => new MvxFormsApplication();
 
         protected override IMvxIosViewPresenter CreatePresenter()
         {
-            global::Xamarin.Forms.Forms.Init();
+            Xamarin.Forms.Forms.Init();
             return new MvxFormsIosPagePresenter(Window, FormsApplication);
         }
 
