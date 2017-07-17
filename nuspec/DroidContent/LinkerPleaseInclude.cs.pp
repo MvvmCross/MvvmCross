@@ -101,5 +101,10 @@ namespace $rootnamespace$
             var context2 = new MvxTaskBasedBindingContext();
             context2.Dispose();
         }
+
+        public void Include(MvvmCross.Core.Navigation.MvxNavigationService navigationService)
+        {
+            navigationService = new MvvmCross.Core.Navigation.MvxNavigationService()
+        }
     }
 }
