@@ -13,7 +13,8 @@ namespace MvvmCross.Test.Mocks.Dispatchers
     public class InlineMockMainThreadDispatcher
         : MvxMainThreadDispatcher, IMvxMainThreadDispatcher
     {
-        public virtual bool RequestMainThreadAction(Action action)
+        public virtual bool RequestMainThreadAction(Action action, 
+            bool maskExceptions = true)
         {
             action();
             return true;

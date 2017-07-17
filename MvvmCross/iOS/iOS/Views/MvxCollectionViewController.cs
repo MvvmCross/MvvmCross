@@ -51,35 +51,41 @@ namespace MvvmCross.iOS.Views
 
         public IMvxBindingContext BindingContext { get; set; }
 
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            ViewModel?.ViewCreated();
+        }
+
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            ViewModel?.Appearing();
+            ViewModel?.ViewAppearing();
         }
 
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-            ViewModel?.Appeared();
+            ViewModel?.ViewAppeared();
         }
 
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);
-            ViewModel?.Disappearing();
+            ViewModel?.ViewDisappearing();
         }
 
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
-            ViewModel?.Disappeared();
+            ViewModel?.ViewDisappeared();
         }
 
         public override void DidMoveToParentViewController(UIViewController parent)
         {
             base.DidMoveToParentViewController(parent);
             if (parent == null)
-                ViewModel?.Destroy();
+                ViewModel?.ViewDestroy();
         }
 
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
@@ -108,6 +114,6 @@ namespace MvvmCross.iOS.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
-        }   
+        }
     }
 }

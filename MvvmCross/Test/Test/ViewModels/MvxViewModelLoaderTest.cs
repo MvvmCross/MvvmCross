@@ -1,4 +1,4 @@
-﻿// MvxViewModelLoaderTest.cs
+// MvxViewModelLoaderTest.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -26,7 +26,7 @@ namespace MvvmCross.Test.ViewModels
 
             var request = new MvxViewModelRequest<MvxNullViewModel>(null, null);
             var state = new MvxBundle();
-            var loader = new MvxViewModelLoader();
+            var loader = new MvxViewModelLoader(null);
             var viewModel = loader.LoadViewModel(request, state);
 
             Assert.IsInstanceOf<MvxNullViewModel>(viewModel);
@@ -48,12 +48,10 @@ namespace MvvmCross.Test.ViewModels
             mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
                           .Returns(() => mockLocator.Object);
 
-            Ioc.RegisterSingleton(mockCollection.Object);
-
             var parameters = new Dictionary<string, string> { { "foo", "bar" } };
             var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null);
             var state = new MvxBundle();
-            var loader = new MvxViewModelLoader();
+            var loader = new MvxViewModelLoader(mockCollection.Object);
             var viewModel = loader.LoadViewModel(request, state);
 
             Assert.AreSame(outViewModel, viewModel);
@@ -73,12 +71,10 @@ namespace MvvmCross.Test.ViewModels
             mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
                           .Returns(() => mockLocator.Object);
 
-            Ioc.RegisterSingleton(mockCollection.Object);
-
             var parameters = new Dictionary<string, string> { { "foo", "bar" } };
             var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null);
             var state = new MvxBundle();
-            var loader = new MvxViewModelLoader();
+            var loader = new MvxViewModelLoader(mockCollection.Object);
             Assert.Throws<MvxException>(() => {
                 var viewModel = loader.LoadViewModel(request, state);
             });
@@ -93,12 +89,10 @@ namespace MvvmCross.Test.ViewModels
             mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
                           .Returns(() => null);
 
-            Ioc.RegisterSingleton(mockCollection.Object);
-
             var parameters = new Dictionary<string, string> { { "foo", "bar" } };
             var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null);
             var state = new MvxBundle();
-            var loader = new MvxViewModelLoader();
+            var loader = new MvxViewModelLoader(mockCollection.Object);
 
             Assert.Throws<MvxException>(() => {
                 var viewModel = loader.LoadViewModel(request, state);

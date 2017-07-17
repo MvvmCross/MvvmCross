@@ -15,7 +15,7 @@ namespace MvvmCross.Test.Mocks.Dispatchers
     {
         public int Count { get; set; }
 
-        public bool RequestMainThreadAction(Action action)
+        public bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             Count++;
             return true;

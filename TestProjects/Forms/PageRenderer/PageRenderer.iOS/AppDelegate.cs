@@ -1,5 +1,7 @@
 ﻿using Foundation;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.iOS;
+using MvvmCross.Platform;
 using UIKit;
 
 namespace PageRendererExample.UI.iOS
@@ -7,19 +9,23 @@ namespace PageRendererExample.UI.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : MvxFormsApplicationDelegate
     {
-        private UIWindow _window;
+        public override UIWindow Window { get; set; }
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            _window = new UIWindow(UIScreen.MainScreen.Bounds);
-            var setup = new MvvmSetup(this, _window);
+            Window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+            var setup = new Setup(this, Window);
             setup.Initialize();
 
-            _window.MakeKeyAndVisible();
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            startup.Start();
 
-            LoadApplication(setup.MvxFormsApp);
+            LoadApplication(setup.FormsApplication);
 
-            return base.FinishedLaunching(app, options);
+            Window.MakeKeyAndVisible();
+
+            return true;
         }
     }
 }

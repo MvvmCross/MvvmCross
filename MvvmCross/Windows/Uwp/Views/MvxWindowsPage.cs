@@ -31,22 +31,22 @@ namespace MvvmCross.Uwp.Views
 
         private void MvxWindowsPage_Loading(FrameworkElement sender, object args)
         {
-            ViewModel?.Appearing();
+            ViewModel?.ViewAppearing();
         }
 
         private void MvxWindowsPage_Loaded(object sender, RoutedEventArgs e)
         {
-            ViewModel?.Appeared();
+            ViewModel?.ViewAppeared();
         }
 
         private void MvxWindowsPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            ViewModel?.Disappeared();
+            ViewModel?.ViewDisappeared();
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            ViewModel?.Disappearing();
+            ViewModel?.ViewDisappearing();
             base.OnNavigatingFrom(e);
         }
 
@@ -85,6 +85,7 @@ namespace MvvmCross.Uwp.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            ViewModel?.ViewCreated();
 
             if (_reqData != string.Empty)
             {

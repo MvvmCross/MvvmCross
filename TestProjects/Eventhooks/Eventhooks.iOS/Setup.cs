@@ -9,12 +9,12 @@ namespace Eventhooks.iOS
 {
     public class Setup : MvxIosSetup
 	{
-		public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
+		public Setup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
 			: base(applicationDelegate, window)
 		{
 		}
 
-		public Setup(MvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter)
+		public Setup(IMvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter)
 			: base(applicationDelegate, presenter)
 		{
 		}
