@@ -32,12 +32,10 @@ namespace MvvmCross.Forms.Droid
             return _viewAssemblies;
         }
 
-        protected override IMvxViewModelLocatorCollection InitializeApp(IMvxPluginManager pluginManager)
+        protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
         {
-            var collection = base.InitializeApp(pluginManager);
+            base.InitializeApp(pluginManager, app);
             _viewAssemblies.AddRange(GetViewModelAssemblies());
-
-            return collection;
         }
 
         public MvxFormsApplication FormsApplication
