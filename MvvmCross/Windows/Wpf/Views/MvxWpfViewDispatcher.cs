@@ -12,8 +12,7 @@ using MvvmCross.Core.Views;
 namespace MvvmCross.Wpf.Views
 {
     public class MvxWpfViewDispatcher
-        : MvxWpfUIThreadDispatcher
-          , IMvxViewDispatcher
+        : MvxWpfUIThreadDispatcher, IMvxViewDispatcher
     {
         private readonly IMvxWpfViewPresenter _presenter;
 
