@@ -4,12 +4,13 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Views;
+using MvvmCross.Forms.Droid;
 using MvvmCross.Forms.Droid.Presenters;
 using MvvmCross.Platform;
 
 namespace MasterDetailExample.Droid
 {
-    public class Setup : MvxAndroidSetup
+    public class Setup : MvxFormsAndroidSetup
     {
         public Setup(Context applicationContext)
             : base(applicationContext)
@@ -24,10 +25,7 @@ namespace MasterDetailExample.Droid
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
-            var presenter = new MvxFormsDroidMasterDetailPagePresenter();
-            Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
-
-            return presenter;
+            return new MvxFormsDroidMasterDetailPagePresenter();
         }
     }
 }

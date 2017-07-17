@@ -64,6 +64,9 @@ namespace MvvmCross.Forms.Droid
             setupSingleton.EnsureInitialized();
 
             LifetimeListener.OnCreate(this);
+
+            global::Xamarin.Forms.Forms.Init(this, bundle);
+            LoadApplication(FormsApplication);
         }
 
         public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
