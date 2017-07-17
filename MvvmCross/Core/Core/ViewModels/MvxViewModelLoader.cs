@@ -14,15 +14,18 @@ namespace MvvmCross.Core.ViewModels
     public class MvxViewModelLoader
         : IMvxViewModelLoader
     {
-        private IMvxViewModelLocatorCollection _locatorCollection;
+        protected IMvxViewModelLocatorCollection LocatorCollection { get; private set; }
 
-        protected IMvxViewModelLocatorCollection LocatorCollection
+        public MvxViewModelLoader() : this(null)
         {
-            get
-            {
-                _locatorCollection = _locatorCollection ?? Mvx.Resolve<IMvxViewModelLocatorCollection>();
-                return _locatorCollection;
-            }
+        }
+
+        public MvxViewModelLoader(IMvxViewModelLocatorCollection locatorCollection)
+        {
+            if (locatorCollection == null)
+                locatorCollection = Mvx.Resolve<IMvxViewModelLocatorCollection>();
+
+            LocatorCollection = locatorCollection;
         }
 
         // Reload should be used to re-run cached ViewModels lifecycle if required.
