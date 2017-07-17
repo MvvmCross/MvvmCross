@@ -5,6 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.Support.V7.Preferences;
+
 namespace MvvmCross.Droid.Support.V7.Preference
 {
     public static class MvxPreferencePropertyBindingExtensions
@@ -12,13 +14,13 @@ namespace MvvmCross.Droid.Support.V7.Preference
         public static string BindValue(this Android.Support.V7.Preferences.Preference preference)
             => MvxPreferencePropertyBinding.Preference_Value;
 
-        public static string BindText(this Android.Support.V7.Preferences.EditTextPreference editTextPreference)
+        public static string BindText(this EditTextPreference editTextPreference)
             => MvxPreferencePropertyBinding.EditTextPreference_Text;
 
-        public static string BindValue(this Android.Support.V7.Preferences.ListPreference listPreference)
+        public static string BindValue(this ListPreference listPreference)
             => MvxPreferencePropertyBinding.ListPreference_Value;
 
-        public static string BindChecked(this Android.Support.V7.Preferences.TwoStatePreference twoStatePreference)
+        public static string BindChecked(this TwoStatePreference twoStatePreference)
             => MvxPreferencePropertyBinding.TwoStatePreference_Checked;
     }
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -28,7 +28,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="MvxIoCSupportingTest.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="TestTrace.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -40,14 +42,6 @@
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>MvvmCross.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\..\packages\NUnit.3.6.0\lib\portable-net45+win8+wp8+wpa81\nunit.framework.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

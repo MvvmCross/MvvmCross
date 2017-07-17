@@ -42,13 +42,13 @@ namespace MvvmCross.Forms.Presenters
 		protected virtual Type GetPageType(MvxViewModelRequest request)
         {
 			if (_viewFinder == null)
-				_viewFinder = Mvx.Resolve<IMvxViewsContainer> ();
+				_viewFinder = Mvx.Resolve<IMvxViewsContainer>();
 
 			try
 			{
 				return _viewFinder.GetViewType (request.ViewModelType);
 			}
-			catch(KeyNotFoundException) 
+			catch (KeyNotFoundException) 
 			{
 				var pageName = GetPageName(request);
 				return request.ViewModelType.GetTypeInfo().Assembly.CreatableTypes()

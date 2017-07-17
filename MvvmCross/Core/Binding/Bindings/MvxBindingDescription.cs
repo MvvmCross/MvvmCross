@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Bindings
 {
-    using MvvmCross.Binding.Bindings.SourceSteps;
-    using MvvmCross.Platform.Converters;
-
     public class MvxBindingDescription
     {
         public MvxBindingDescription()
@@ -19,9 +19,9 @@ namespace MvvmCross.Binding.Bindings
         public MvxBindingDescription(string targetName, string sourcePropertyPath, IMvxValueConverter converter,
                                      object converterParameter, object fallbackValue, MvxBindingMode mode)
         {
-            this.TargetName = targetName;
-            this.Mode = mode;
-            this.Source = new MvxPathSourceStepDescription
+            TargetName = targetName;
+            Mode = mode;
+            Source = new MvxPathSourceStepDescription
             {
                 SourcePropertyPath = sourcePropertyPath,
                 Converter = converter,
@@ -36,7 +36,7 @@ namespace MvvmCross.Binding.Bindings
 
         public override string ToString()
         {
-            return $"binding {this.TargetName} for {(this.Source == null ? "-null" : this.Source.ToString())}";
+            return $"binding {TargetName} for {(Source == null ? "-null" : Source.ToString())}";
         }
     }
 }

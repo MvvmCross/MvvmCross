@@ -5,17 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.Uwp.Platform;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Uwp.Platform;
 
-namespace MvvmCross.Plugins.File.WindowsCommon
+namespace MvvmCross.Plugins.File.Uwp
 {
     // note that we use the full WindowsStore name here deliberately to avoid 'Store' naming confusion
     public class MvxWindowsCommonFileStore : MvxFileStoreBase
@@ -148,7 +148,7 @@ namespace MvvmCross.Plugins.File.WindowsCommon
                 var thisFolder = StorageFolder.GetFolderFromPathAsync(folderPath).Await();
                 return true;
             }
-            catch (System.UnauthorizedAccessException)
+            catch (UnauthorizedAccessException)
             {
                 return false;
             }
@@ -185,7 +185,6 @@ namespace MvvmCross.Plugins.File.WindowsCommon
                 return currentFolder;
             else
                 return await currentFolder.CreateFolderAsync(Path.GetFileName(folderPath), CreationCollisionOption.OpenIfExists).AsTask().ConfigureAwait(false);
-
         }
 
         public override IEnumerable<string> GetFilesIn(string folderPath)
@@ -384,8 +383,22 @@ namespace MvvmCross.Plugins.File.WindowsCommon
 
         private static string ToFullPath(string path)
         {
-            var localFolderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
-            return System.IO.Path.Combine(localFolderPath, path);
+            var localFolderPath = ApplicationData.Current.LocalFolder.Path;
+            return Path.Combine(localFolderPath, path);
+        }
+
+        public override long GetSize(string path)
+        {
+            var storageFile = StorageFileFromRelativePath(path);
+            var result = storageFile.GetBasicPropertiesAsync().GetAwaiter().GetResult();
+            return (long)result.Size;
+        }
+
+        public override DateTime GetLastWriteTimeUtc(string path)
+        {
+            var storageFile = StorageFileFromRelativePath(path);
+            var result = storageFile.GetBasicPropertiesAsync().GetAwaiter().GetResult();
+            return result.DateModified.UtcDateTime;
         }
     }
 }

@@ -1,4 +1,4 @@
-// MvxPictureChooserTask.cs
+﻿// MvxPictureChooserTask.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -116,7 +116,7 @@ namespace MvvmCross.Plugins.PictureChooser.Uwp
 
             var destinationStream = new InMemoryRandomAccessStream();
             var bitmapPropertiesSet = new BitmapPropertySet();
-            bitmapPropertiesSet.Add("ImageQuality", new BitmapTypedValue(((double)percentQuality) / 100.0, PropertyType.Single));
+            bitmapPropertiesSet.Add("ImageQuality", new BitmapTypedValue((double)percentQuality / 100.0, PropertyType.Single));
             var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, destinationStream, bitmapPropertiesSet);
             encoder.SetPixelData(BitmapPixelFormat.Rgba8, BitmapAlphaMode.Premultiplied, (uint)targetWidth, (uint)targetHeight, decoder.DpiX, decoder.DpiY, pixelData.DetachPixelData());
             await encoder.FlushAsync();

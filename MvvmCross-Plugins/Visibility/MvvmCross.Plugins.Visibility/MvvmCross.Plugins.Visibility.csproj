@@ -36,7 +36,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PluginLoader.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="MvxBaseVisibilityValueConverter.cs" />
     <Compile Include="MvxInvertedVisibilityValueConverter.cs" />
     <Compile Include="MvxVisibilityValueConverter.cs" />

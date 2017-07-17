@@ -22,11 +22,11 @@ For a basic .Net 4.5 test setup for, for example, a ViewModel, you can:
   * `MvvmCross`
   * `MvvmCross.Tests`
 
-**Note:** The last assembly (`MvvmCross.Tests`) is key, as it is defines a base class `MvxIoCSupportingTest` which can help with initialising IoC setup. 
+**Note:** The last assembly (`MvvmCross.Tests`) is key, as it is defines a base class `MvxIoCSupportingTest` which can help with initializing IoC setup. 
 
 ## Test class declaration and setup
 
-Your test classes should inherit from [`MvxIoCSupportingTest`](https://github.com/slodge/MvvmCross/blob/v3/Cirrious/Test/Cirrious.MvvmCross.Test.Core/MvxIoCSupportingTest.cs)
+Your test classes should inherit from `MvxIoCSupportingTest`
 
 Each test method should then call the `Setup` method:
 
@@ -52,7 +52,7 @@ public class MyTest : MvxIoCSupportingTest
 
 Now that you have the bare bones for your test to work, you can use the `Ioc` property to register any singleton or regular types within MvvmCross. 
 
-Also, there's a special method named `AdditionalSetup()` which can be overridden to automatically do custom initialisation: 
+Also, there's a special method named `AdditionalSetup()` which can be overridden to automatically do custom initialization: 
 
 ```c#
 protected override void AdditionalSetup()

@@ -12,6 +12,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
         UIImage MenuButtonImage { get; }
         int MenuWidth { get; }
         bool ReopenOnRotate { get; }
+        void MenuWillOpen();
+        void MenuDidOpen();
+        void MenuWillClose();
+        void MenuDidClose();
     }
 }
-

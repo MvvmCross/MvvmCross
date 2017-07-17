@@ -5,19 +5,17 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Core;
+using MvvmCross.Test.Core;
+using MvvmCross.Test.Mocks.Dispatchers;
+using NUnit.Framework;
+
 namespace MvvmCross.Test.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Test.Core;
-    using MvvmCross.Test.Mocks.Dispatchers;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxNotifyPropertyChangedTest : MvxIoCSupportingTest
     {
@@ -105,7 +103,7 @@ namespace MvvmCross.Test.ViewModels
 
             public MvxInpcInterceptionResult Intercept(IMvxNotifyPropertyChanged sender, PropertyChangedEventArgs args)
             {
-                return this.Handler(sender, args);
+                return Handler(sender, args);
             }
         }
 

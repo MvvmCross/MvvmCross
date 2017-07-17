@@ -1,4 +1,4 @@
-// MvxCachingFragmentActivity.cs
+﻿// MvxCachingFragmentActivity.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,6 +12,7 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
+using Java.Lang;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
@@ -24,12 +25,12 @@ using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
-using Fragment = Android.Support.V4.App.Fragment;
 
 namespace MvvmCross.Droid.Support.V4
 {
     [Register("mvvmcross.droid.support.v4.MvxCachingFragmentActivity")]
-    public class MvxCachingFragmentActivity : MvxFragmentActivity, IFragmentCacheableActivity, IMvxFragmentHost
+    public class MvxCachingFragmentActivity
+        : MvxFragmentActivity, IFragmentCacheableActivity, IMvxFragmentHost
     {
 		public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
 		private const string SavedFragmentTypesKey = "__mvxSavedFragmentTypes";
@@ -48,27 +49,21 @@ namespace MvvmCross.Droid.Support.V4
 
 		protected MvxCachingFragmentActivity(IntPtr javaReference, JniHandleOwnership transfer)
 			: base(javaReference, transfer)
-		{}
+		{
+        }
 
 		protected override void OnCreate(Bundle bundle)
 		{
-			// Prevents crash when activity in background with history enable is reopened after 
+			// Prevents crash when activity in background with history enable is reopened after
 			// Android does some auto memory management.
 			var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(this);
 			setup.EnsureInitialized();
 
 			base.OnCreate(bundle);
 
-            var rootView = Window.DecorView.RootView;
+            _view = Window.DecorView.RootView;
 
-            EventHandler onGlobalLayout = null;
-            onGlobalLayout = (sender, args) =>
-            {
-                rootView.ViewTreeObserver.GlobalLayout -= onGlobalLayout;
-                ViewModel.Appeared();
-            };
-
-            rootView.ViewTreeObserver.GlobalLayout += onGlobalLayout;
+            _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
 
             if (bundle == null)
 				HandleIntent(Intent);
@@ -89,6 +84,13 @@ namespace MvvmCross.Droid.Support.V4
 				RestoreViewModelsFromBundle(serializer, bundle);
 			}
 		}
+
+        public override void SetContentView(int layoutResId)
+        {
+            var view = this.BindingInflate(layoutResId, null);
+
+            SetContentView(view);
+        }
 
 		protected override void OnNewIntent(Intent intent)
 		{
@@ -194,7 +196,7 @@ namespace MvvmCross.Droid.Support.V4
 				savedStateConverter.Write(bundle, mvxBundle);
 				outState.PutBundle(info.Tag, bundle);
 
-				if(!typesForKeys.ContainsKey(info.Tag))
+				if (!typesForKeys.ContainsKey(info.Tag))
 					typesForKeys.Add(info.Tag, info.ViewModelType);
 			}
 
@@ -203,7 +205,7 @@ namespace MvvmCross.Droid.Support.V4
 
 		protected virtual void ReplaceFragment(FragmentTransaction ft, IMvxCachedFragmentInfo fragInfo)
 		{
-			ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment as Android.Support.V4.App.Fragment, fragInfo.Tag);
+			ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment as Fragment, fragInfo.Tag);
 		}
 
 		protected override void OnSaveInstanceState(Bundle outState)
@@ -261,19 +263,27 @@ namespace MvvmCross.Droid.Support.V4
 			//If we already have a previously created fragment, we only need to send the new parameters
 			if (fragInfo.CachedFragment != null && fragmentReplaceMode == FragmentReplaceMode.ReplaceFragment)
 			{
-				((Android.Support.V4.App.Fragment)fragInfo.CachedFragment).Arguments.Clear();
-				((Android.Support.V4.App.Fragment)fragInfo.CachedFragment).Arguments.PutAll(bundle);
+				((Fragment)fragInfo.CachedFragment).Arguments.Clear();
+				((Fragment)fragInfo.CachedFragment).Arguments.PutAll(bundle);
+
+                var childViewModelCache = Mvx.GetSingleton<IMvxChildViewModelCache>();
+                var viewModelType = fragInfo.CachedFragment.ViewModel.GetType();
+                if (childViewModelCache.Exists(viewModelType))
+                {
+                    fragInfo.CachedFragment.ViewModel = childViewModelCache.Get(viewModelType);
+                    childViewModelCache.Remove(viewModelType);
+                }
 			}
 			else
 			{
 				//Otherwise, create one and cache it
-				fragInfo.CachedFragment = Android.Support.V4.App.Fragment.Instantiate(this, FragmentJavaName(fragInfo.FragmentType),
+				fragInfo.CachedFragment = Fragment.Instantiate(this, FragmentJavaName(fragInfo.FragmentType),
 					bundle) as IMvxFragmentView;
 				OnFragmentCreated(fragInfo, ft);
 			}
 
-			currentFragment = fragInfo.CachedFragment as Android.Support.V4.App.Fragment;
-			ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment as Android.Support.V4.App.Fragment, fragInfo.Tag);
+			currentFragment = fragInfo.CachedFragment as Fragment;
+			ft.Replace(fragInfo.ContentId, fragInfo.CachedFragment as Fragment, fragInfo.Tag);
 
 			//if replacing ViewModel then clear the cache after the fragment
 			//has been added to the transaction so that the Tag property is not null
@@ -281,10 +291,10 @@ namespace MvvmCross.Droid.Support.V4
 			if (fragmentReplaceMode == FragmentReplaceMode.ReplaceFragmentAndViewModel)
 			{
 				var cache = Mvx.GetSingleton<IMvxMultipleViewModelCache>();
-				cache.GetAndClear(fragInfo.ViewModelType, GetTagFromFragment(fragInfo.CachedFragment as Android.Support.V4.App.Fragment));
+				cache.GetAndClear(fragInfo.ViewModelType, GetTagFromFragment(fragInfo.CachedFragment as Fragment));
 			}
 
-			if ((currentFragment != null && fragInfo.AddToBackStack) || forceAddToBackStack)
+			if (currentFragment != null && fragInfo.AddToBackStack || forceAddToBackStack)
 			{
 				ft.AddToBackStack(fragInfo.Tag);
 			}
@@ -297,7 +307,7 @@ namespace MvvmCross.Droid.Support.V4
 
 		protected virtual FragmentReplaceMode ShouldReplaceCurrentFragment(IMvxCachedFragmentInfo newFragment, IMvxCachedFragmentInfo currentFragment, Bundle replacementBundle)
 		{
-			var oldBundle = ((Android.Support.V4.App.Fragment)newFragment.CachedFragment)?.Arguments;
+			var oldBundle = ((Fragment)newFragment.CachedFragment)?.Arguments;
 			if (oldBundle == null) return FragmentReplaceMode.ReplaceFragment;
 
 			var serializer = Mvx.Resolve<IMvxNavigationSerializer>();
@@ -310,9 +320,9 @@ namespace MvvmCross.Droid.Support.V4
 			var replacementRequest = serializer.Serializer.DeserializeObject<MvxViewModelRequest>(json);
 			if (replacementRequest == null) return FragmentReplaceMode.ReplaceFragment;
 
-			var areParametersEqual = ((oldRequest.ParameterValues == replacementRequest.ParameterValues) ||
-				(oldRequest.ParameterValues.Count == replacementRequest.ParameterValues.Count &&
-					!oldRequest.ParameterValues.Except(replacementRequest.ParameterValues).Any()));
+			var areParametersEqual = oldRequest.ParameterValues == replacementRequest.ParameterValues ||
+			                         oldRequest.ParameterValues.Count == replacementRequest.ParameterValues.Count &&
+			                         !oldRequest.ParameterValues.Except(replacementRequest.ParameterValues).Any();
 
 			if (currentFragment?.Tag != newFragment.Tag)
 			{
@@ -352,9 +362,9 @@ namespace MvvmCross.Droid.Support.V4
 				.ToList();
 		}
 
-		protected virtual IEnumerable<Android.Support.V4.App.Fragment> GetCurrentCacheableFragments()
+		protected virtual IEnumerable<Fragment> GetCurrentCacheableFragments()
 		{
-			var currentFragments = SupportFragmentManager.Fragments ?? Enumerable.Empty<Android.Support.V4.App.Fragment>();
+			var currentFragments = SupportFragmentManager.Fragments ?? Enumerable.Empty<Fragment>();
 
 			return currentFragments
 				.Where(fragment => fragment != null)
@@ -374,7 +384,7 @@ namespace MvvmCross.Droid.Support.V4
 			return GetFragmentInfoByTag(tagFragment);
 		}
 
-		protected virtual string GetTagFromFragment(Android.Support.V4.App.Fragment fragment)
+		protected virtual string GetTagFromFragment(Fragment fragment)
 		{
 			var mvxFragmentView = fragment as IMvxFragmentView;
 
@@ -398,7 +408,7 @@ namespace MvvmCross.Droid.Support.V4
 
 		protected virtual string FragmentJavaName(Type fragmentType)
 		{
-            return Java.Lang.Class.FromType(fragmentType).Name;
+            return Class.FromType(fragmentType).Name;
         }
 
 		public virtual void OnBeforeFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction)
@@ -406,7 +416,9 @@ namespace MvvmCross.Droid.Support.V4
 		}
 
 		// Called before the transaction is commited
-		public virtual void OnFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction) { }
+		public virtual void OnFragmentChanging(IMvxCachedFragmentInfo fragmentInfo, FragmentTransaction transaction)
+        {
+        }
 
 		public virtual void OnFragmentChanged(IMvxCachedFragmentInfo fragmentInfo)
 		{
@@ -466,23 +478,30 @@ namespace MvvmCross.Droid.Support.V4
 			return true;
 		}
 
+        public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
+        {
+            base.OnCreate(savedInstanceState, persistentState);
+            ViewModel?.ViewCreated();
+        }
+
         public override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();
-            ViewModel.Appearing();
+            ViewModel?.ViewAppearing();
         }
 
         public override void OnDetachedFromWindow()
         {
             base.OnDetachedFromWindow();
-            ViewModel.Disappearing(); // we don't have anywhere to get this info
-            ViewModel.Disappeared();
+            ViewModel?.ViewDisappearing(); // we don't have anywhere to get this info
+            ViewModel?.ViewDisappeared();
         }
     }
 
     public abstract class MvxCachingFragmentActivity<TViewModel>
-        : MvxCachingFragmentActivity
-    , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxCachingFragmentActivity,
+        IMvxAndroidView<TViewModel>
+        where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {

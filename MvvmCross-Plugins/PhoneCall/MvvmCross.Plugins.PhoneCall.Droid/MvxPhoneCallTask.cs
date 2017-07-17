@@ -1,4 +1,4 @@
-// MvxPhoneCallTask.cs
+﻿// MvxPhoneCallTask.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,14 +16,15 @@ namespace MvvmCross.Plugins.PhoneCall.Droid
 {
     [Preserve(AllMembers = true)]
 	public class MvxPhoneCallTask
-        : MvxAndroidTask
-          , IMvxPhoneCallTask
+        : MvxAndroidTask, IMvxPhoneCallTask
     {
         public void MakePhoneCall(string name, string number)
         {
             string phoneNumber;
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.N)
                 phoneNumber = PhoneNumberUtils.FormatNumber(number, Locale.GetDefault(Locale.Category.Format).Country);
+            else if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+                phoneNumber = PhoneNumberUtils.FormatNumber(number, Locale.Default.Country);
             else
 #pragma warning disable 618
                 phoneNumber = PhoneNumberUtils.FormatNumber(number);

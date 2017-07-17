@@ -10,7 +10,7 @@ This package contains MvvmCross to use with Xamarin.Forms</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms windows8 winrt netcore wp wpdev windowsphone windowsstore uwp forms</tags>
 		<dependencies>
 			<dependency id="MvvmCross.Core" version="[$version$]" />
-			<dependency id="Xamarin.Forms" version="2.3.4.231" />
+			<dependency id="Xamarin.Forms" version="2.3.4.247" />
 		</dependencies>
 	</metadata>
 	<files>   
@@ -23,8 +23,6 @@ This package contains MvvmCross to use with Xamarin.Forms</description>
 		<!-- uap -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.*" target="lib\uap10.0" />
 		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Forms.Uwp.*" target="lib\uap10.0" />
-		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Forms.Uwp\Properties\MvvmCross.Forms.Uwp.rd.xml" 
-			target="lib\uap10.0\MvvmCross.Forms.Uwp\Properties" />
 
 		<!-- droid -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.*" target="lib\MonoAndroid70" />

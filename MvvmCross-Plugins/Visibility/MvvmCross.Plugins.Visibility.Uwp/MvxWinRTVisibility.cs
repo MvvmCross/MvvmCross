@@ -7,7 +7,7 @@
 
 using MvvmCross.Platform.UI;
 
-namespace MvvmCross.Plugins.Visibility.WindowsCommon
+namespace MvvmCross.Plugins.Visibility.Uwp
 {
     public class MvxWinRTVisibility : IMvxNativeVisibility
     {

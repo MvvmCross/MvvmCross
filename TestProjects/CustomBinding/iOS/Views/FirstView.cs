@@ -1,14 +1,14 @@
 using System.Drawing;
+using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Views;
+using MvvmCross.iOS.Views.Presenters.Attributes;
 using MvvmCross.TestProjects.CustomBinding.Core.ViewModels;
+using MvvmCross.TestProjects.CustomBinding.iOS.Controls;
 using ObjCRuntime;
 using UIKit;
-using Foundation;
-using MvvmCross.TestProjects.CustomBinding.iOS.Controls;
-using MvvmCross.iOS.Views.Presenters.Attributes;
 
-namespace MvvmCross.TestProjects.CustomBinding.iOS
+namespace MvvmCross.TestProjects.CustomBinding.iOS.Views
 {
     [Register("FirstView")]
     [MvxRootPresentation]
@@ -20,7 +20,7 @@ namespace MvvmCross.TestProjects.CustomBinding.iOS
             base.ViewDidLoad();
 
             // ios7 layout
-            if(RespondsToSelector(new Selector("edgesForExtendedLayout")))
+            if (RespondsToSelector(new Selector("edgesForExtendedLayout")))
                 EdgesForExtendedLayout = UIRectEdge.None;
 
             var binaryEdit = new BinaryEdit(new RectangleF(10, 70, 300, 120));

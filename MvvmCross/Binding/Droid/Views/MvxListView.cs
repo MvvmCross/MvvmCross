@@ -1,23 +1,21 @@
-// MvxListView.cs
+﻿// MvxListView.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using System.Windows.Input;
+using Android.Content;
+using Android.Runtime;
+using Android.Util;
+using Android.Widget;
+using MvvmCross.Binding.Attributes;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-    using System.Collections;
-    using System.Windows.Input;
-
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Util;
-    using Android.Widget;
-
-    using MvvmCross.Binding.Attributes;
-
     [Register("mvvmcross.binding.droid.views.MvxListView")]
     public class MvxListView
         : ListView
@@ -53,7 +51,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public new IMvxAdapter Adapter
         {
-            get { return base.Adapter as IMvxAdapter; }
+            get
+            {
+                return base.Adapter as IMvxAdapter;
+            }
             set
             {
                 var existing = Adapter;
@@ -88,7 +89,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public new ICommand ItemClick
         {
-            get { return _itemClick; }
+            get
+            {
+                return _itemClick;
+            }
             set
             {
                 _itemClick = value;
@@ -108,7 +112,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public new ICommand ItemLongClick
         {
-            get { return _itemLongClick; }
+            get
+            {
+                return _itemLongClick;
+            }
             set
             {
                 _itemLongClick = value;

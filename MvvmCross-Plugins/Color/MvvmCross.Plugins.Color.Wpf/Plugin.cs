@@ -13,7 +13,6 @@ namespace MvvmCross.Plugins.Color.Wpf
 {
     public class Plugin
         : IMvxPlugin
-
     {
         public void Load()
         {

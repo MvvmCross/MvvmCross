@@ -5,16 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using MvvmCross.Binding.Bindings;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Localization;
+
 namespace MvvmCross.Binding.BindingContext
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-
-    using MvvmCross.Binding.Bindings;
-    using MvvmCross.Binding.Bindings.SourceSteps;
-    using MvvmCross.Localization;
-
     public static partial class MvxBindingContextOwnerExtensions
     {
         // note that we don't add more default parameters here
@@ -60,8 +59,7 @@ namespace MvvmCross.Binding.BindingContext
                                                              Expression<Func<TTarget, object>> targetPropertyExpression
                                                              , string sourceKey
                                                              ,
-                                                             Expression<Func<TViewModel, IMvxLanguageBinder>>
-                                                                 sourcePropertyExpression
+                                                             Expression<Func<TViewModel, IMvxLanguageBinder>> sourcePropertyExpression
                                                              , string fallbackValue = null
                                                              , string converterName = null)
         {

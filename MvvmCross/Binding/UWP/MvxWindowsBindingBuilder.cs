@@ -6,13 +6,15 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Windows.UI.Xaml;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Binding.Uwp.Target;
+using MvvmCross.Binding.Combiners;
+using MvvmCross.Binding.Uwp.MvxBinding;
+using MvvmCross.Binding.Uwp.MvxBinding.Target;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Core;
-using Windows.UI.Xaml;
 
 namespace MvvmCross.Binding.Uwp
 {
@@ -104,7 +106,7 @@ namespace MvvmCross.Binding.Uwp
             }
         }
 
-        protected override void FillValueCombiners(Binding.Combiners.IMvxValueCombinerRegistry registry)
+        protected override void FillValueCombiners(IMvxValueCombinerRegistry registry)
         {
             base.FillValueCombiners(registry);
 

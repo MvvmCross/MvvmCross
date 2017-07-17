@@ -5,13 +5,12 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+
 namespace MvvmCross.Uwp.Views
 {
-    using System;
-
-    using Windows.UI.Xaml;
-    using Windows.UI.Xaml.Controls;
-
     public interface IMvxWindowsFrame
     {
         Control UnderlyingControl { get; }

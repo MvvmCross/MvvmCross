@@ -1,25 +1,24 @@
-// MvxDialogFragment.cs
+﻿// MvxDialogFragment.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using System;
 using MvvmCross.Droid.Shared.Fragments;
-using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
 using MvvmCross.Droid.Support.V4;
+using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     [Register("mvvmcross.droid.support.v7.appcompat.MvxAppCompatDialogFragment")]
     public abstract class MvxAppCompatDialogFragment
-        : MvxEventSourceAppCompatDialogFragment
-        , IMvxFragmentView
+        : MvxEventSourceAppCompatDialogFragment, IMvxFragmentView
     {
         protected MvxAppCompatDialogFragment()
         {
@@ -28,7 +27,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected MvxAppCompatDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public IMvxBindingContext BindingContext { get; set; }
 
@@ -36,7 +36,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         public object DataContext
         {
-            get { return _dataContext; }
+            get
+            {
+                return _dataContext;
+            }
             set
             {
                 _dataContext = value;
@@ -60,8 +63,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     }
 
     public abstract class MvxAppCompatDialogFragment<TViewModel>
-        : MvxAppCompatDialogFragment
-        , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxAppCompatDialogFragment, IMvxFragmentView<TViewModel>
+        where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {

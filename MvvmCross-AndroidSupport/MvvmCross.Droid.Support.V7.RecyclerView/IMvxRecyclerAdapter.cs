@@ -17,13 +17,12 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         [MvxSetToNullAfterBinding]
         IEnumerable ItemsSource { get; set; }
 
-        MvxBaseTemplateSelector ItemTemplateSelector { get; set; }
+        IMvxTemplateSelector ItemTemplateSelector { get; set; }
         ICommand ItemClick { get; set; }
         ICommand ItemLongClick { get; set; }
 
-        object GetItem(int position);
+        object GetItem(int viewPosition);
 
         int ItemTemplateId { get; set; }
-
     }
 }

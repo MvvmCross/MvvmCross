@@ -1,22 +1,20 @@
-// MvxAutoCompleteTextView.cs
+﻿// MvxAutoCompleteTextView.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using Android.Content;
+using Android.Runtime;
+using Android.Util;
+using Android.Widget;
+using MvvmCross.Binding.Attributes;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-    using System.Collections;
-
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Util;
-    using Android.Widget;
-
-    using MvvmCross.Binding.Attributes;
-
     [Register("mvvmcross.binding.droid.views.MvxAutoCompleteTextView")]
     public class MvxAutoCompleteTextView
         : AutoCompleteTextView
@@ -68,7 +66,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public new MvxFilteringAdapter Adapter
         {
-            get { return base.Adapter as MvxFilteringAdapter; }
+            get
+            {
+                return base.Adapter as MvxFilteringAdapter;
+            }
             set
             {
                 var existing = Adapter;
@@ -118,7 +119,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public object SelectedObject
         {
-            get { return _selectedObject; }
+            get
+            {
+                return _selectedObject;
+            }
             private set
             {
                 if (_selectedObject == value)

@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.Core.Views
 {
-    using System;
-
-    using MvvmCross.Core.ViewModels;
-
     public interface IMvxViewPresenter
     {
         void Show(MvxViewModelRequest request);

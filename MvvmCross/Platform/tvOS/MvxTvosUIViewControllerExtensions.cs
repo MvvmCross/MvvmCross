@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using UIKit;
+
 namespace MvvmCross.Platform.tvOS
 {
-    using UIKit;
-
     public static class MvxTvosUIViewControllerExtensions
     {
         public static bool IsVisible(this UIViewController controller)

@@ -1,26 +1,25 @@
-// MvxFileDownloadCache.cs
+﻿// MvxFileDownloadCache.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.DownloadCache
 {
     [Preserve(AllMembers = true)]
 	public class MvxFileDownloadCache
-        : MvxLockableObject
-        , IMvxFileDownloadCache
+        : MvxLockableObject, IMvxFileDownloadCache
     {
         private const string CacheIndexFileName = "_CacheIndex.txt";
         private static readonly TimeSpan PeriodSaveInterval = TimeSpan.FromSeconds(1.0);
@@ -73,8 +72,8 @@ namespace MvvmCross.Plugins.DownloadCache
                 Success = success;
             }
 
-            public Action<string> Success { get; private set; }
-            public Action<Exception> Error { get; private set; }
+            public Action<string> Success { get; }
+            public Action<Exception> Error { get; }
         }
 
         private readonly List<string> _toDeleteFiles = new List<string>();
@@ -105,7 +104,7 @@ namespace MvvmCross.Plugins.DownloadCache
             QueueOutOfDateFilesForDelete();
 
             _indexNeedsSaving = false;
-            _periodicTaskTimer = new Timer((ignored) => DoPeriodicTasks(), null, PeriodSaveInterval, PeriodSaveInterval);
+            _periodicTaskTimer = new Timer(ignored => DoPeriodicTasks(), null, PeriodSaveInterval, PeriodSaveInterval);
         }
 
         #region Constructor helper methods
@@ -113,7 +112,7 @@ namespace MvvmCross.Plugins.DownloadCache
         private void QueueOutOfDateFilesForDelete()
         {
             var now = DateTime.UtcNow;
-            var toRemove = _entriesByHttpUrl.Values.Where(x => (now - x.WhenDownloadedUtc) > _maxFileAge).ToList();
+            var toRemove = _entriesByHttpUrl.Values.Where(x => now - x.WhenDownloadedUtc > _maxFileAge).ToList();
             foreach (var entry in toRemove)
             {
                 _entriesByHttpUrl.Remove(entry.HttpSource);
@@ -170,10 +169,6 @@ namespace MvvmCross.Plugins.DownloadCache
                     return list.ToDictionary(x => x.HttpSource, x => x);
                 }
             }
-            //catch (ThreadAbortException)
-            //{
-            //    throw;
-            //}
             catch (Exception exception)
             {
                 MvxTrace.Warning("Failed to read cache index {0} - reason {1}", _cacheFolder,
@@ -412,7 +407,7 @@ namespace MvvmCross.Plugins.DownloadCache
 
             public new void Dispose()
             {
-                base.Cancel();
+                Cancel();
             }
         }
     }

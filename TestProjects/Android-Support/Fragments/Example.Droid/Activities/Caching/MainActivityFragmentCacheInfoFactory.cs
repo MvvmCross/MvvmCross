@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using Example.Core.ViewModels;
-using Example.Droid.Fragments;
-
-namespace Example.Droid.Activities.Caching
+﻿namespace Example.Droid.Activities.Caching
 {
     /*internal class MainActivityFragmentCacheInfoFactory : MvxCachedFragmentInfoFactory
     {
@@ -11,31 +6,31 @@ namespace Example.Droid.Activities.Caching
             <string, CustomFragmentInfo>
         {
             {
-                typeof (MenuViewModel).ToString(),
-                new CustomFragmentInfo(typeof (MenuViewModel).Name,
-                                       typeof (MenuFragment),
-                                       typeof (MenuViewModel))
+                typeof(MenuViewModel).ToString(),
+                new CustomFragmentInfo(typeof(MenuViewModel).Name,
+                                       typeof(MenuFragment),
+                                       typeof(MenuViewModel))
             },
             {
-                typeof (HomeViewModel).ToString(),
-                new CustomFragmentInfo(typeof (HomeViewModel).Name, typeof (HomeFragment), typeof (HomeViewModel),
+                typeof(HomeViewModel).ToString(),
+                new CustomFragmentInfo(typeof(HomeViewModel).Name, typeof(HomeFragment), typeof(HomeViewModel),
                                        isRoot: true)
             },
             {
-                typeof (ExampleViewPagerViewModel).ToString(),
-                new CustomFragmentInfo(typeof (ExampleViewPagerViewModel).Name, typeof (ExampleViewPagerFragment),
-                                       typeof (ExampleViewPagerViewModel), isRoot: true)
+                typeof(ExampleViewPagerViewModel).ToString(),
+                new CustomFragmentInfo(typeof(ExampleViewPagerViewModel).Name, typeof(ExampleViewPagerFragment),
+                                       typeof(ExampleViewPagerViewModel), isRoot: true)
             },
             {
-                typeof (ExampleViewPagerStateViewModel).ToString(),
-                new CustomFragmentInfo(typeof (ExampleViewPagerStateViewModel).Name,
-                                       typeof (ExampleViewPagerStateFragment),
-                                       typeof (ExampleViewPagerStateViewModel), isRoot: true, cacheFragment: false)
+                typeof(ExampleViewPagerStateViewModel).ToString(),
+                new CustomFragmentInfo(typeof(ExampleViewPagerStateViewModel).Name,
+                                       typeof(ExampleViewPagerStateFragment),
+                                       typeof(ExampleViewPagerStateViewModel), isRoot: true, cacheFragment: false)
             },
             {
-                typeof (ExampleRecyclerViewModel).ToString(),
-                new CustomFragmentInfo(typeof (ExampleRecyclerViewModel).Name, typeof (ExampleRecyclerViewFragment),
-                                       typeof (ExampleRecyclerViewModel), isRoot: true)
+                typeof(ExampleRecyclerViewModel).ToString(),
+                new CustomFragmentInfo(typeof(ExampleRecyclerViewModel).Name, typeof(ExampleRecyclerViewFragment),
+                                       typeof(ExampleRecyclerViewModel), isRoot: true)
             },
             {
                 typeof(RecyclerViewMultiItemTemplateViewModel).ToString(),
@@ -44,9 +39,9 @@ namespace Example.Droid.Activities.Caching
                                        typeof(RecyclerViewMultiItemTemplateViewModel), isRoot: true)
             },
             {
-                typeof (SettingsViewModel).ToString(),
-                new CustomFragmentInfo(typeof (SettingsViewModel).Name, typeof (SettingsFragment),
-                                       typeof (SettingsViewModel), isRoot: true)
+                typeof(SettingsViewModel).ToString(),
+                new CustomFragmentInfo(typeof(SettingsViewModel).Name, typeof(SettingsFragment),
+                                       typeof(SettingsViewModel), isRoot: true)
             }
         };
 

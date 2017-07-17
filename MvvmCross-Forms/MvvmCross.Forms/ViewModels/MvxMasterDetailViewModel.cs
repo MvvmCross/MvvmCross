@@ -12,7 +12,6 @@ namespace MvvmCross.Forms.ViewModels
 
         public virtual void RootContentPageActivated()
         {
-
         }
     }
 
@@ -23,7 +22,6 @@ namespace MvvmCross.Forms.ViewModels
     public class MvxMasterDetailViewModel<TRootContentPageViewModel> : MvxMasterDetailViewModel,
         IMvxMasterDetailViewModel<TRootContentPageViewModel> where TRootContentPageViewModel : IMvxViewModel
     {
-
         public MvxMasterDetailViewModel()
         {
             RootContentPageViewModelType = typeof(TRootContentPageViewModel);

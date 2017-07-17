@@ -5,18 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.Binding.Bindings.Target
 {
-    using System;
-
     public class MvxTargetChangedEventArgs
         : EventArgs
     {
         public MvxTargetChangedEventArgs(object value)
         {
-            this.Value = value;
+            Value = value;
         }
 
-        public Object Value { get; private set; }
+        public object Value { get; private set; }
     }
 }

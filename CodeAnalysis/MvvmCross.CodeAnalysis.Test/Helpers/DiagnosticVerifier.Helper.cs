@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Views;
 using MvvmCross.iOS.Views;
+using MvvmCross.Platform;
 
 namespace MvvmCross.CodeAnalysis.Test
 {
@@ -25,7 +26,7 @@ namespace MvvmCross.CodeAnalysis.Test
         private static readonly MetadataReference _cSharpSymbolsReference = MetadataReference.CreateFromFile(typeof(CSharpCompilation).Assembly.Location);
         private static readonly MetadataReference _codeAnalysisReference = MetadataReference.CreateFromFile(typeof(Compilation).Assembly.Location);
         private static readonly MetadataReference _mvvmCrossCoreReference = MetadataReference.CreateFromFile(typeof(MvxViewPresenter).Assembly.Location);
-        private static readonly MetadataReference _mvvmCrossPlatformReference = MetadataReference.CreateFromFile(typeof(Platform.Mvx).Assembly.Location);
+        private static readonly MetadataReference _mvvmCrossPlatformReference = MetadataReference.CreateFromFile(typeof(Mvx).Assembly.Location);
         private static readonly MetadataReference _mvvmCrossDroidReference = MetadataReference.CreateFromFile(typeof(MvxActivity).Assembly.Location);
         private static readonly MetadataReference _mvvmCrossIosReference = MetadataReference.CreateFromFile(typeof(MvxViewController).Assembly.Location);
         private static readonly MetadataReference _componentModelReference = MetadataReference.CreateFromFile(typeof(INotifyPropertyChanged).Assembly.Location);

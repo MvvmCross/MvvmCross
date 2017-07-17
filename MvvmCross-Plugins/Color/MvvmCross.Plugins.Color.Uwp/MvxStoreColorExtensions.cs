@@ -7,7 +7,7 @@
 
 using MvvmCross.Platform.UI;
 
-namespace MvvmCross.Plugins.Color.WindowsCommon
+namespace MvvmCross.Plugins.Color.Uwp
 {
     public static class MvxStoreColorExtensions
     {

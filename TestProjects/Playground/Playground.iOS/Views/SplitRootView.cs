@@ -1,9 +1,7 @@
-using Foundation;
-using System;
-using UIKit;
+﻿using System;
 using MvvmCross.iOS.Views;
-using Playground.Core.ViewModels;
 using MvvmCross.iOS.Views.Presenters.Attributes;
+using Playground.Core.ViewModels;
 
 namespace Playground.iOS.Views
 {
@@ -28,7 +26,7 @@ namespace Playground.iOS.Views
         {
             base.ViewWillAppear(animated);
 
-            if(ViewModel != null && _isPresentedFirstTime)
+            if (ViewModel != null && _isPresentedFirstTime)
             {
                 _isPresentedFirstTime = false;
                 ViewModel.ShowInitialViewModelsCommand.Execute(null);

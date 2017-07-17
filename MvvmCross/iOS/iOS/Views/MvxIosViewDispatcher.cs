@@ -5,24 +5,22 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
+using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.iOS.Views
 {
-    using System;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Core.Views;
-    using MvvmCross.Platform.Platform;
-    using MvvmCross.iOS.Views.Presenters;
-
     public class MvxIosViewDispatcher
-        : MvxIosUIThreadDispatcher
-          , IMvxViewDispatcher
+        : MvxIosUIThreadDispatcher, IMvxViewDispatcher
     {
         private readonly IMvxIosViewPresenter _presenter;
 
         public MvxIosViewDispatcher(IMvxIosViewPresenter presenter)
         {
-            this._presenter = presenter;
+            _presenter = presenter;
         }
 
         public bool ShowViewModel(MvxViewModelRequest request)
@@ -30,14 +28,14 @@ namespace MvvmCross.iOS.Views
             Action action = () =>
                 {
                     MvxTrace.TaggedTrace("iOSNavigation", "Navigate requested");
-                    this._presenter.Show(request);
+                    _presenter.Show(request);
                 };
-            return this.RequestMainThreadAction(action);
+            return RequestMainThreadAction(action);
         }
 
         public bool ChangePresentation(MvxPresentationHint hint)
         {
-            return this.RequestMainThreadAction(() => this._presenter.ChangePresentation(hint));
+            return RequestMainThreadAction(() => _presenter.ChangePresentation(hint));
         }
     }
 }

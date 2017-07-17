@@ -1,4 +1,4 @@
-// MvxImagePickerTask.cs
+﻿// MvxImagePickerTask.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,19 +9,18 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using CoreGraphics;
+using Foundation;
 using MvvmCross.Platform;
 using MvvmCross.Platform.iOS.Platform;
 using MvvmCross.Platform.iOS.Views;
-using CoreGraphics;
-using Foundation;
 using UIKit;
 
 namespace MvvmCross.Plugins.PictureChooser.iOS
 {
     [Preserve(AllMembers = true)]
 	public class MvxImagePickerTask
-        : MvxIosTask
-          , IMvxPictureChooserTask
+        : MvxIosTask, IMvxPictureChooserTask
     {
         private readonly UIImagePickerController _picker;
         private readonly IMvxIosModalHost _modalHost;
@@ -54,7 +53,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
                                              Action assumeCancelled)
         {
-            this.ChoosePictureFromLibrary(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
+            ChoosePictureFromLibrary(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
         }
 
         public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,

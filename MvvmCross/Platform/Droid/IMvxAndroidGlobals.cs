@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Reflection;
+using Android.Content;
+
 namespace MvvmCross.Platform.Droid
 {
-    using System.Reflection;
-
-    using Android.Content;
-
     public interface IMvxAndroidGlobals
     {
         string ExecutableNamespace { get; }

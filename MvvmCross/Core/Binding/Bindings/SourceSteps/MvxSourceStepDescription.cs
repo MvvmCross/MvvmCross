@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Converters;
+
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {
-    using MvvmCross.Platform.Converters;
-
     public class MvxSourceStepDescription
     {
         public IMvxValueConverter Converter { get; set; }

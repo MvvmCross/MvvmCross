@@ -17,9 +17,9 @@ namespace MvvmCross.Plugins.Color.Droid
             return ToAndroidColor(mvxColor);
         }
 
-        public global::Android.Graphics.Color ToAndroidColor(MvxColor mvxColor)
+        public Android.Graphics.Color ToAndroidColor(MvxColor mvxColor)
         {
-            return new global::Android.Graphics.Color(mvxColor.R, mvxColor.G, mvxColor.B, mvxColor.A);
+            return new Android.Graphics.Color(mvxColor.R, mvxColor.G, mvxColor.B, mvxColor.A);
         }
     }
 }

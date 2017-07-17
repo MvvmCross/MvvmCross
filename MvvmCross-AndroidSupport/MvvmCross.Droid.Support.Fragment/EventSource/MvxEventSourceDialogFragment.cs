@@ -1,25 +1,24 @@
-// MvxEventSourceDialogFragment.cs
+﻿// MvxEventSourceDialogFragment.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V4.App;
 using Android.Views;
-using MvvmCross.Platform.Core;
-using System;
-using DialogFragment = Android.Support.V4.App.DialogFragment;
-using MvvmCross.Droid.Shared.Fragments.EventSource;
 using MvvmCross.Droid.Shared;
-using Android.Content;
+using MvvmCross.Droid.Shared.Fragments.EventSource;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Droid.Support.V4.EventSource
 {
     public class MvxEventSourceDialogFragment
-        : DialogFragment
-        , IMvxEventSourceFragment
+        : DialogFragment, IMvxEventSourceFragment
     {
         public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
 
@@ -53,7 +52,8 @@ namespace MvvmCross.Droid.Support.V4.EventSource
 
         protected MvxEventSourceDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        { }
+        {
+        }
 
 		public override void OnAttach(Context context)
         {

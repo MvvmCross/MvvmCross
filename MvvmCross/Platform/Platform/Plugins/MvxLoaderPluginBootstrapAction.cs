@@ -7,8 +7,6 @@
 
 namespace MvvmCross.Platform.Plugins
 {
-    using System;
-
     public class MvxLoaderPluginBootstrapAction<TPlugin, TPlatformPlugin>
         : MvxPluginBootstrapAction<TPlugin>
         where TPlugin : IMvxPluginLoader
@@ -16,13 +14,13 @@ namespace MvvmCross.Platform.Plugins
     {
         protected override void Load(IMvxPluginManager manager)
         {
-            this.PreLoad(manager);
+            PreLoad(manager);
             base.Load(manager);
         }
 
         protected virtual void PreLoad(IMvxPluginManager manager)
         {
-            manager.Registry.Register<TPlugin, TPlatformPlugin> ();
+            manager.Registry.Register<TPlugin, TPlatformPlugin>();
         }
     }
 }

@@ -5,18 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using Android.OS;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.Platform;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Droid.Views
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Android.OS;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Droid.Platform;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Platform;
-
     public class MvxSavedStateConverter : IMvxSavedStateConverter
     {
         private const string ExtrasKey = "MvxSaved";

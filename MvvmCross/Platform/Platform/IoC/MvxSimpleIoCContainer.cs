@@ -1,23 +1,21 @@
-// MvxSimpleIoCContainer.cs
+﻿// MvxSimpleIoCContainer.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+
 namespace MvvmCross.Platform.IoC
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-
     public class MvxSimpleIoCContainer
-        : MvxSingleton<IMvxIoCProvider>
-          , IMvxIoCProvider
+        : MvxSingleton<IMvxIoCProvider>, IMvxIoCProvider
     {
         public static IMvxIoCProvider Initialize(IMvxIocOptions options = null)
         {
@@ -40,19 +38,19 @@ namespace MvvmCross.Platform.IoC
         private readonly IMvxIocOptions _options;
         private readonly IMvxPropertyInjector _propertyInjector;
 
-        protected object LockObject => this._lockObject;
-        protected IMvxIocOptions Options => this._options;
+        protected object LockObject => _lockObject;
+        protected IMvxIocOptions Options => _options;
 
         protected MvxSimpleIoCContainer(IMvxIocOptions options)
         {
-            this._options = options ?? new MvxIocOptions();
-            if (this._options.PropertyInjectorType != null)
+            _options = options ?? new MvxIocOptions();
+            if (_options.PropertyInjectorType != null)
             {
-                this._propertyInjector = Activator.CreateInstance(this._options.PropertyInjectorType) as IMvxPropertyInjector;
+                _propertyInjector = Activator.CreateInstance(_options.PropertyInjectorType) as IMvxPropertyInjector;
             }
-            if (this._propertyInjector != null)
+            if (_propertyInjector != null)
             {
-                this.RegisterSingleton(typeof(IMvxPropertyInjector), this._propertyInjector);
+                RegisterSingleton(typeof(IMvxPropertyInjector), _propertyInjector);
             }
         }
 
@@ -70,13 +68,13 @@ namespace MvvmCross.Platform.IoC
 
             public ConstructingResolver(Type type, MvxSimpleIoCContainer parent)
             {
-                this._type = type;
-                this._parent = parent;
+                _type = type;
+                _parent = parent;
             }
 
             public object Resolve()
             {
-                return this._parent.IoCConstruct(this._type);
+                return _parent.IoCConstruct(_type);
             }
 
             public ResolverType ResolveType => ResolverType.DynamicPerResolve;
@@ -88,12 +86,12 @@ namespace MvvmCross.Platform.IoC
 
             public FuncConstructingResolver(Func<object> constructor)
             {
-                this._constructor = constructor;
+                _constructor = constructor;
             }
 
             public object Resolve()
             {
-                return this._constructor();
+                return _constructor();
             }
 
             public ResolverType ResolveType => ResolverType.DynamicPerResolve;
@@ -105,12 +103,12 @@ namespace MvvmCross.Platform.IoC
 
             public SingletonResolver(object theObject)
             {
-                this._theObject = theObject;
+                _theObject = theObject;
             }
 
             public object Resolve()
             {
-                return this._theObject;
+                return _theObject;
             }
 
             public ResolverType ResolveType => ResolverType.Singleton;
@@ -124,21 +122,21 @@ namespace MvvmCross.Platform.IoC
 
             public ConstructingSingletonResolver(Func<object> theConstructor)
             {
-                this._constructor = theConstructor;
+                _constructor = theConstructor;
             }
 
             public object Resolve()
             {
-                if (this._theObject != null)
-                    return this._theObject;
+                if (_theObject != null)
+                    return _theObject;
 
-                lock (this._syncObject)
+                lock (_syncObject)
                 {
-                    if (this._theObject == null)
-                        this._theObject = this._constructor();
+                    if (_theObject == null)
+                        _theObject = _constructor();
                 }
 
-                return this._theObject;
+                return _theObject;
             }
 
             public ResolverType ResolveType => ResolverType.Singleton;
@@ -147,14 +145,14 @@ namespace MvvmCross.Platform.IoC
         public bool CanResolve<T>()
             where T : class
         {
-            return this.CanResolve(typeof(T));
+            return CanResolve(typeof(T));
         }
 
         public bool CanResolve(Type t)
         {
-            lock (this._lockObject)
+            lock (_lockObject)
             {
-                return this._resolvers.ContainsKey(t);
+                return _resolvers.ContainsKey(t);
             }
         }
 
@@ -164,7 +162,7 @@ namespace MvvmCross.Platform.IoC
             try
             {
                 object item;
-                var toReturn = this.TryResolve(typeof(T), out item);
+                var toReturn = TryResolve(typeof(T), out item);
                 resolved = (T)item;
                 return toReturn;
             }
@@ -177,24 +175,24 @@ namespace MvvmCross.Platform.IoC
 
         public bool TryResolve(Type type, out object resolved)
         {
-            lock (this._lockObject)
+            lock (_lockObject)
             {
-                return this.InternalTryResolve(type, out resolved);
+                return InternalTryResolve(type, out resolved);
             }
         }
 
         public T Resolve<T>()
             where T : class
         {
-            return (T)this.Resolve(typeof(T));
+            return (T)Resolve(typeof(T));
         }
 
         public object Resolve(Type t)
         {
-            lock (this._lockObject)
+            lock (_lockObject)
             {
                 object resolved;
-                if (!this.InternalTryResolve(t, out resolved))
+                if (!InternalTryResolve(t, out resolved))
                 {
                     throw new MvxIoCResolveException("Failed to resolve type {0}", t.FullName);
                 }
@@ -205,15 +203,15 @@ namespace MvvmCross.Platform.IoC
         public T GetSingleton<T>()
             where T : class
         {
-            return (T)this.GetSingleton(typeof(T));
+            return (T)GetSingleton(typeof(T));
         }
 
         public object GetSingleton(Type t)
         {
-            lock (this._lockObject)
+            lock (_lockObject)
             {
                 object resolved;
-                if (!this.InternalTryResolve(t, ResolverType.Singleton, out resolved))
+                if (!InternalTryResolve(t, ResolverType.Singleton, out resolved))
                 {
                     throw new MvxIoCResolveException("Failed to resolve type {0}", t.FullName);
                 }
@@ -224,15 +222,15 @@ namespace MvvmCross.Platform.IoC
         public T Create<T>()
             where T : class
         {
-            return (T)this.Create(typeof(T));
+            return (T)Create(typeof(T));
         }
 
         public object Create(Type t)
         {
-            lock (this._lockObject)
+            lock (_lockObject)
             {
                 object resolved;
-                if (!this.InternalTryResolve(t, ResolverType.DynamicPerResolve, out resolved))
+                if (!InternalTryResolve(t, ResolverType.DynamicPerResolve, out resolved))
                 {
                     throw new MvxIoCResolveException("Failed to resolve type {0}", t.FullName);
                 }
@@ -244,14 +242,14 @@ namespace MvvmCross.Platform.IoC
             where TInterface : class
             where TToConstruct : class, TInterface
         {
-            this.RegisterType(typeof(TInterface), typeof(TToConstruct));
+            RegisterType(typeof(TInterface), typeof(TToConstruct));
         }
 
         public void RegisterType<TInterface>(Func<TInterface> constructor)
             where TInterface : class
         {
             var resolver = new FuncConstructingResolver(constructor);
-            this.InternalSetResolver(typeof(TInterface), resolver);
+            InternalSetResolver(typeof(TInterface), resolver);
         }
 
         public void RegisterType(Type t, Func<object> constructor)
@@ -259,48 +257,48 @@ namespace MvvmCross.Platform.IoC
             var resolver = new FuncConstructingResolver(() =>
             {
                 var ret = constructor();
-                if ((ret != null) && !t.IsInstanceOfType(ret))
+                if (ret != null && !t.IsInstanceOfType(ret))
                     throw new MvxIoCResolveException("Constructor failed to return a compatibly object for type {0}", t.FullName);
 
                 return ret;
             });
 
-            this.InternalSetResolver(t, resolver);
+            InternalSetResolver(t, resolver);
         }
 
         public void RegisterType(Type tInterface, Type tConstruct)
         {
             var resolver = new ConstructingResolver(tConstruct, this);
-            this.InternalSetResolver(tInterface, resolver);
+            InternalSetResolver(tInterface, resolver);
         }
 
         public void RegisterSingleton<TInterface>(TInterface theObject)
             where TInterface : class
         {
-            this.RegisterSingleton(typeof(TInterface), theObject);
+            RegisterSingleton(typeof(TInterface), theObject);
         }
 
         public void RegisterSingleton(Type tInterface, object theObject)
         {
-            this.InternalSetResolver(tInterface, new SingletonResolver(theObject));
+            InternalSetResolver(tInterface, new SingletonResolver(theObject));
         }
 
         public void RegisterSingleton<TInterface>(Func<TInterface> theConstructor)
             where TInterface : class
         {
 #warning when the MonoTouch/Droid code fully supports CoVariance (Contra?) then we can change this)
-            this.RegisterSingleton(typeof(TInterface), () => (object)theConstructor());
+            RegisterSingleton(typeof(TInterface), () => (object)theConstructor());
         }
 
         public void RegisterSingleton(Type tInterface, Func<object> theConstructor)
         {
-            this.InternalSetResolver(tInterface, new ConstructingSingletonResolver(theConstructor));
+            InternalSetResolver(tInterface, new ConstructingSingletonResolver(theConstructor));
         }
 
         public T IoCConstruct<T>()
             where T : class
         {
-            return (T)this.IoCConstruct(typeof(T));
+            return (T)IoCConstruct(typeof(T));
         }
 
         public virtual object IoCConstruct(Type type)
@@ -311,7 +309,7 @@ namespace MvvmCross.Platform.IoC
             if (firstConstructor == null)
                 throw new MvxIoCResolveException("Failed to find constructor for type {0}", type.FullName);
 
-            var parameters = this.GetIoCParameterValues(type, firstConstructor);
+            var parameters = GetIoCParameterValues(type, firstConstructor);
             object toReturn;
             try
             {
@@ -324,11 +322,11 @@ namespace MvvmCross.Platform.IoC
 
             try
             {
-                this.InjectProperties(toReturn);
+                InjectProperties(toReturn);
             }
             catch (Exception)
             {
-                if (!this.Options.CheckDisposeIfPropertyInjectionFails)
+                if (!Options.CheckDisposeIfPropertyInjectionFails)
                     throw;
 
                 toReturn.DisposeIfDisposable();
@@ -339,24 +337,24 @@ namespace MvvmCross.Platform.IoC
 
         public void CallbackWhenRegistered<T>(Action action)
         {
-            this.CallbackWhenRegistered(typeof(T), action);
+            CallbackWhenRegistered(typeof(T), action);
         }
 
         public void CallbackWhenRegistered(Type type, Action action)
         {
-            lock (this._lockObject)
+            lock (_lockObject)
             {
-                if (!this.CanResolve(type))
+                if (!CanResolve(type))
                 {
                     List<Action> actions;
-                    if (this._waiters.TryGetValue(type, out actions))
+                    if (_waiters.TryGetValue(type, out actions))
                     {
                         actions.Add(action);
                     }
                     else
                     {
                         actions = new List<Action> { action };
-                        this._waiters[type] = actions;
+                        _waiters[type] = actions;
                     }
                     return;
                 }
@@ -384,25 +382,25 @@ namespace MvvmCross.Platform.IoC
 
         private bool InternalTryResolve(Type type, out object resolved)
         {
-            return this.InternalTryResolve(type, ResolverTypeNoneSpecified, out resolved);
+            return InternalTryResolve(type, ResolverTypeNoneSpecified, out resolved);
         }
 
         private bool InternalTryResolve(Type type, ResolverType? requiredResolverType, out object resolved)
         {
             IResolver resolver;
-            if (!this._resolvers.TryGetValue(type, out resolver))
+            if (!_resolvers.TryGetValue(type, out resolver))
             {
                 resolved = type.CreateDefault();
                 return false;
             }
 
-            if (!this.Supports(resolver, requiredResolverType))
+            if (!Supports(resolver, requiredResolverType))
             {
                 resolved = type.CreateDefault();
                 return false;
             }
 
-            return this.InternalTryResolve(type, resolver, out resolved);
+            return InternalTryResolve(type, resolver, out resolved);
         }
 
         private bool ShouldDetectCircularReferencesFor(IResolver resolver)
@@ -410,10 +408,10 @@ namespace MvvmCross.Platform.IoC
             switch (resolver.ResolveType)
             {
                 case ResolverType.DynamicPerResolve:
-                    return this.Options.TryToDetectDynamicCircularReferences;
+                    return Options.TryToDetectDynamicCircularReferences;
 
                 case ResolverType.Singleton:
-                    return this.Options.TryToDetectSingletonCircularReferences;
+                    return Options.TryToDetectSingletonCircularReferences;
 
                 case ResolverType.Unknown:
                     throw new MvxException("A resolver must have a known type - error in {0}", resolver.GetType().Name);
@@ -424,12 +422,12 @@ namespace MvvmCross.Platform.IoC
 
         private bool InternalTryResolve(Type type, IResolver resolver, out object resolved)
         {
-            var detectingCircular = this.ShouldDetectCircularReferencesFor(resolver);
+            var detectingCircular = ShouldDetectCircularReferencesFor(resolver);
             if (detectingCircular)
             {
                 try
                 {
-                    this._circularTypeDetection.Add(type, true);
+                    _circularTypeDetection.Add(type, true);
                 }
                 catch (ArgumentException)
                 {
@@ -458,7 +456,7 @@ namespace MvvmCross.Platform.IoC
             {
                 if (detectingCircular)
                 {
-                    this._circularTypeDetection.Remove(type);
+                    _circularTypeDetection.Remove(type);
                 }
             }
         }
@@ -466,11 +464,11 @@ namespace MvvmCross.Platform.IoC
         private void InternalSetResolver(Type tInterface, IResolver resolver)
         {
             List<Action> actions;
-            lock (this._lockObject)
+            lock (_lockObject)
             {
-                this._resolvers[tInterface] = resolver;
-                if (this._waiters.TryGetValue(tInterface, out actions))
-                    this._waiters.Remove(tInterface);
+                _resolvers[tInterface] = resolver;
+                if (_waiters.TryGetValue(tInterface, out actions))
+                    _waiters.Remove(tInterface);
             }
 
             if (actions != null)
@@ -484,7 +482,7 @@ namespace MvvmCross.Platform.IoC
 
         protected virtual void InjectProperties(object toReturn)
         {
-            this._propertyInjector?.Inject(toReturn, this._options.PropertyInjectorOptions);
+            _propertyInjector?.Inject(toReturn, _options.PropertyInjectorOptions);
         }
 
         protected virtual List<object> GetIoCParameterValues(Type type, ConstructorInfo firstConstructor)
@@ -493,7 +491,7 @@ namespace MvvmCross.Platform.IoC
             foreach (var parameterInfo in firstConstructor.GetParameters())
             {
                 object parameterValue;
-                if (!this.TryResolve(parameterInfo.ParameterType, out parameterValue))
+                if (!TryResolve(parameterInfo.ParameterType, out parameterValue))
                 {
                     if (parameterInfo.IsOptional)
                     {

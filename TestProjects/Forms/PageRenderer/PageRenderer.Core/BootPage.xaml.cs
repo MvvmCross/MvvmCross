@@ -1,21 +1,22 @@
 ﻿using System.IO;
-
 using Xamarin.Forms;
 
-namespace PageRendererExample.Pages
+namespace PageRendererExample
 {
     public partial class BootPage : BootContentPage
     {
-        Button _showCameraButton;
-        Image _capturedImage;
+        private Button _showCameraButton;
+        private Image _capturedImage;
 
         public BootPage()
         {
             InitializeComponent();
 
-            _capturedImage = new Image {
+            _capturedImage = new Image 
+            {
                 BackgroundColor = Color.White
             };
+
             _relativeLayout.Children.Add(
                 _capturedImage,
                 Constraint.RelativeToParent(parent => 0.10 * parent.Width),
@@ -24,16 +25,17 @@ namespace PageRendererExample.Pages
                 Constraint.RelativeToParent(parent => 0.80 * parent.Height)
             );
 
-            _showCameraButton = new Button {
-                HeightRequest=44,
-                WidthRequest=200,
+            _showCameraButton = new Button 
+            {
+                HeightRequest = 44,
+                WidthRequest = 200,
                 Text = "Show Camera",
                 StyleId = "ShowCustomPageRendererButton"
             };
 
             _relativeLayout.Children.Add(
                 _showCameraButton,
-                Constraint.RelativeToParent(parent => 0.5 * parent.Width - 100.0),
+                Constraint.RelativeToParent(parent => (0.5 * parent.Width) - 100.0),
                 Constraint.RelativeToParent(parent => parent.Height - 44.0)
             );
         }

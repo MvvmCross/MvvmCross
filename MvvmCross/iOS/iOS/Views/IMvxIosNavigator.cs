@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.iOS.Views
 {
-    using MvvmCross.Core.ViewModels;
-
     public interface IMvxIosNavigator
     {
         void NavigateTo(MvxViewModelRequest request);

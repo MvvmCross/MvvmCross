@@ -1,6 +1,5 @@
-using System;
+﻿using System;
 using MvvmCross.Binding;
-using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Droid.Target;
 using MvvmCross.Platform;
 
@@ -10,7 +9,8 @@ namespace MvvmCross.Droid.Support.V7.Preference.Target
     {
         public MvxPreferenceValueTargetBinding(Android.Support.V7.Preferences.Preference preference)
             : base(preference)
-        { }
+        {
+        }
 
         public Android.Support.V7.Preferences.Preference Preference => Target as Android.Support.V7.Preferences.Preference;
 
@@ -38,7 +38,7 @@ namespace MvvmCross.Droid.Support.V7.Preference.Target
             {
                 if (Preference != null)
                 {
-                    Preference.PreferenceChange -= this.HandlePreferenceChange;
+                    Preference.PreferenceChange -= HandlePreferenceChange;
                 }
             }
 

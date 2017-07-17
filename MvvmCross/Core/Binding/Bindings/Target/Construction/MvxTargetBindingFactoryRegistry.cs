@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Bindings.Target.Construction
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Platform;
-
     public class MvxTargetBindingFactoryRegistry : IMvxTargetBindingFactoryRegistry
     {
         private readonly Dictionary<int, IMvxPluginTargetBindingFactory> _lookups =
@@ -22,10 +21,10 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         public virtual IMvxTargetBinding CreateBinding(object target, string targetName)
         {
             IMvxTargetBinding binding;
-            if (this.TryCreateSpecificFactoryBinding(target, targetName, out binding))
+            if (TryCreateSpecificFactoryBinding(target, targetName, out binding))
                 return binding;
 
-            if (this.TryCreateReflectionBasedBinding(target, targetName, out binding))
+            if (TryCreateReflectionBasedBinding(target, targetName, out binding))
                 return binding;
 
             return null;
@@ -83,7 +82,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
                 return false;
             }
 
-            var factory = this.FindSpecificFactory(target.GetType(), targetName);
+            var factory = FindSpecificFactory(target.GetType(), targetName);
             if (factory != null)
             {
                 binding = factory.CreateBinding(target, targetName);
@@ -99,31 +98,31 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             foreach (var supported in factory.SupportedTypes)
             {
                 var key = GenerateKey(supported.Type, supported.Name);
-                this._lookups[key] = factory;
+                _lookups[key] = factory;
             }
         }
 
         private static int GenerateKey(Type type, string name)
         {
-			return type.GetHashCode () * 9 ^ name.GetHashCode ();
+			return (type.GetHashCode () * 9) ^ name.GetHashCode ();
         }
 
         private IMvxPluginTargetBindingFactory FindSpecificFactory(Type type, string name)
         {
             IMvxPluginTargetBindingFactory factory;
             var key = GenerateKey(type, name);
-            if (this._lookups.TryGetValue(key, out factory))
+            if (_lookups.TryGetValue(key, out factory))
             {
                 return factory;
             }
             var baseType = type.GetTypeInfo().BaseType;
             if (baseType != null)
-                factory = this.FindSpecificFactory(baseType, name);
+                factory = FindSpecificFactory(baseType, name);
             if (factory != null) return factory;
             var implementedInterfaces = type.GetTypeInfo().ImplementedInterfaces;
             foreach (var implementedInterface in implementedInterfaces)
             {
-                factory = this.FindSpecificFactory(implementedInterface, name);
+                factory = FindSpecificFactory(implementedInterface, name);
                 if (factory != null) return factory;
             }
             return null;

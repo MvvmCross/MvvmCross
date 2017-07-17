@@ -1,23 +1,21 @@
-// MvxSpinner.cs
+﻿// MvxSpinner.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using System.Windows.Input;
+using Android.Content;
+using Android.Runtime;
+using Android.Util;
+using Android.Widget;
+using MvvmCross.Binding.Attributes;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-    using System.Collections;
-    using System.Windows.Input;
-
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Util;
-    using Android.Widget;
-
-    using MvvmCross.Binding.Attributes;
-
     [Register("mvvmcross.binding.droid.views.MvxSpinner")]
     public class MvxSpinner : Spinner
     {
@@ -26,8 +24,8 @@ namespace MvvmCross.Binding.Droid.Views
                 context, attrs,
                 new MvxAdapter(context)
                 {
-                    SimpleViewLayoutId = global::Android.Resource.Layout.SimpleSpinnerItem,
-                    DropDownItemTemplateId = global::Android.Resource.Layout.SimpleSpinnerDropDownItem
+                    SimpleViewLayoutId = Android.Resource.Layout.SimpleSpinnerItem,
+                    DropDownItemTemplateId = Android.Resource.Layout.SimpleSpinnerDropDownItem
                 })
         {
         }
@@ -50,7 +48,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public new IMvxAdapter Adapter
         {
-            get { return base.Adapter as IMvxAdapter; }
+            get
+            {
+                return base.Adapter as IMvxAdapter;
+            }
             set
             {
                 var existing = Adapter;

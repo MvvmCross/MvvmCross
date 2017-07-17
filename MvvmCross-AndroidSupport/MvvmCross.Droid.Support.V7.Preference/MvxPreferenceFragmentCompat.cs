@@ -1,15 +1,15 @@
+﻿using System;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
-
 using MvvmCross.Core.ViewModels;
-using System;
 using MvvmCross.Droid.Shared.Fragments;
 using MvvmCross.Droid.Support.V4;
 
 namespace MvvmCross.Droid.Support.V7.Preference
 {
     [Register("mvvmcross.droid.support.v7.preference.MvxPreferenceFragmentCompat")]
-    public abstract class MvxPreferenceFragmentCompat : MvxEventSourcePreferenceFragmentCompat, IMvxFragmentView
+    public abstract class MvxPreferenceFragmentCompat 
+        : MvxEventSourcePreferenceFragmentCompat, IMvxFragmentView
     {
         protected MvxPreferenceFragmentCompat()
         {
@@ -17,8 +17,9 @@ namespace MvvmCross.Droid.Support.V7.Preference
         }
 
         protected MvxPreferenceFragmentCompat(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(javaReference, transfer)
-		{}
+            : base(javaReference, transfer)
+        {
+        }
 
         public IMvxBindingContext BindingContext { get; set; }
 
@@ -26,7 +27,10 @@ namespace MvvmCross.Droid.Support.V7.Preference
 
         public object DataContext
         {
-            get { return _dataContext; }
+            get
+            {
+                return _dataContext;
+            }
             set
             {
                 _dataContext = value;
@@ -37,7 +41,10 @@ namespace MvvmCross.Droid.Support.V7.Preference
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get
+            {
+                return DataContext as IMvxViewModel;
+            }
             set
             {
                 DataContext = value;
@@ -53,17 +60,17 @@ namespace MvvmCross.Droid.Support.V7.Preference
     }
 
     public abstract class MvxPreferenceFragmentCompat<TViewModel>
-        : MvxPreferenceFragmentCompat
-    , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxPreferenceFragmentCompat, IMvxFragmentView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
-
         protected MvxPreferenceFragmentCompat()
         {
-
         }
 
-        protected MvxPreferenceFragmentCompat(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
-
+        protected MvxPreferenceFragmentCompat(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
 
         public new TViewModel ViewModel
         {

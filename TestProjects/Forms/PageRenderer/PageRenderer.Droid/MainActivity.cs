@@ -1,6 +1,7 @@
 ﻿
 using Android.App;
 using Android.Content.PM;
+using Android.OS;
 using MvvmCross.Droid.Views;
 using Xamarin.Forms;
 
@@ -15,11 +16,11 @@ namespace PageRendererExample.UI.Droid
             if (!isInitializationComplete)
             {
                 isInitializationComplete = true;
-                StartActivity(typeof(MvxFormsApplicationActivity));
+                StartActivity(typeof(PageRendererApplicationActivity));
             }
         }
 
-        protected override void OnCreate(Android.OS.Bundle bundle)
+        protected override void OnCreate(Bundle bundle)
         {
             Forms.Init(this, bundle);
 

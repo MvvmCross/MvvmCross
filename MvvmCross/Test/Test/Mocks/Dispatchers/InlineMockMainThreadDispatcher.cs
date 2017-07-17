@@ -5,15 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Test.Mocks.Dispatchers
 {
-    using System;
-
-    using MvvmCross.Platform.Core;
-
     public class InlineMockMainThreadDispatcher
-        : MvxMainThreadDispatcher
-          , IMvxMainThreadDispatcher
+        : MvxMainThreadDispatcher, IMvxMainThreadDispatcher
     {
         public virtual bool RequestMainThreadAction(Action action)
         {

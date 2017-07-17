@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Content;
+using Android.Net;
 using MvvmCross.Platform.Droid.Platform;
 
 namespace MvvmCross.Plugins.WebBrowser.Droid
@@ -15,7 +16,7 @@ namespace MvvmCross.Plugins.WebBrowser.Droid
     {
         public void ShowWebPage(string url)
         {
-            var intent = new Intent(Intent.ActionView, global::Android.Net.Uri.Parse(url));
+            var intent = new Intent(Intent.ActionView, Uri.Parse(url));
             StartActivity(intent);
         }
     }

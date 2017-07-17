@@ -18,6 +18,9 @@ namespace MvvmCross.Forms.Presenters
     {
         public static IMvxViewModel LoadViewModel(MvxViewModelRequest request)
         {
+            if(request is MvxViewModelInstanceRequest instanceRequest)
+                return instanceRequest.ViewModelInstance;
+            
             var viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = viewModelLoader.LoadViewModel(request, null);
             return viewModel;
@@ -45,6 +48,5 @@ namespace MvvmCross.Forms.Presenters
                 contextOwner.BindingContext.DataContext = mvxPage.ViewModel;
             }
         }
-
     }
 }

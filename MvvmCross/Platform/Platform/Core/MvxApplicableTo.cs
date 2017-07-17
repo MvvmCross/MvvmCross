@@ -13,7 +13,7 @@ namespace MvvmCross.Platform.Core
     {
         public virtual void ApplyTo(T what)
         {
-            this.SuppressFinalizer();
+            SuppressFinalizer();
         }
     }
 }

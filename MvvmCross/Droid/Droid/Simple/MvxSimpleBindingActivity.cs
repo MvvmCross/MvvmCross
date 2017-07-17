@@ -6,20 +6,22 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Runtime;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.Views;
+using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Droid.Simple
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Droid.Views;
-    using MvvmCross.Platform.Exceptions;
-
     [Register("mvvmcross.droid.simple.MvxSimpleBindingActivity")]
     public class MvxSimpleBindingActivity
         : MvxActivity
     {
         public new IMvxViewModel ViewModel
         {
-            get { return base.ViewModel; }
+            get
+            {
+                return base.ViewModel;
+            }
             set
             {
                 throw new MvxException(

@@ -5,31 +5,30 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Globalization;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {
-    using System;
-    using System.Globalization;
-
-    using MvvmCross.Platform.Converters;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public abstract class MvxSourceStep
         : IMvxSourceStep
     {
         private readonly MvxSourceStepDescription _description;
         private object _dataContext;
 
-        protected MvxSourceStepDescription Description => this._description;
+        protected MvxSourceStepDescription Description => _description;
 
         protected MvxSourceStep(MvxSourceStepDescription description)
         {
-            this._description = description;
+            _description = description;
         }
 
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -44,14 +43,17 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         public object DataContext
         {
-            get { return this._dataContext; }
+            get
+            {
+                return _dataContext;
+            }
             set
             {
-                if (this._dataContext == value)
+                if (_dataContext == value)
                     return;
 
-                this._dataContext = value;
-                this.OnDataContextChanged();
+                _dataContext = value;
+                OnDataContextChanged();
             }
         }
 
@@ -62,7 +64,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         public void SetValue(object value)
         {
-            var sourceValue = this.ApplyValueConverterTargetToSource(value);
+            var sourceValue = ApplyValueConverterTargetToSource(value);
 
             if (sourceValue == MvxBindingConstant.DoNothing)
                 return;
@@ -70,23 +72,23 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             if (sourceValue == MvxBindingConstant.UnsetValue)
                 return;
 
-            this.SetSourceValue(sourceValue);
+            SetSourceValue(sourceValue);
         }
 
         private object ApplyValueConverterTargetToSource(object value)
         {
-            if (this._description.Converter == null)
+            if (_description.Converter == null)
                 return value;
 
-            return this._description.Converter.ConvertBack(value,
-                                                      this.SourceType,
-                                                      this._description.ConverterParameter,
+            return _description.Converter.ConvertBack(value,
+                                                      SourceType,
+                                                      _description.ConverterParameter,
                                                       CultureInfo.CurrentUICulture);
         }
 
         private object ApplyValueConverterSourceToTarget(object value)
         {
-            if (this._description.Converter == null)
+            if (_description.Converter == null)
             {
                 return value;
             }
@@ -94,9 +96,9 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             try
             {
                 return
-                    this._description.Converter.Convert(value,
-                                                   this.TargetType,
-                                                   this._description.ConverterParameter,
+                    _description.Converter.Convert(value,
+                                                   TargetType,
+                                                   _description.ConverterParameter,
                                                    CultureInfo.CurrentUICulture);
             }
             catch (Exception exception)
@@ -106,7 +108,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
                 MvxBindingTrace.Trace(
                     MvxTraceLevel.Diagnostic,
                     "Problem seen during binding execution for {0} - problem {1}",
-                    this._description.ToString(),
+                    _description.ToString(),
                     exception.ToLongString());
             }
 
@@ -117,7 +119,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         protected virtual void SendSourcePropertyChanged()
         {
-            this._changed?.Invoke(this, EventArgs.Empty);
+            _changed?.Invoke(this, EventArgs.Empty);
         }
 
         private object ConvertSourceToTarget(object value)
@@ -127,7 +129,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
             if (value != MvxBindingConstant.UnsetValue)
             {
-                value = this.ApplyValueConverterSourceToTarget(value);
+                value = ApplyValueConverterSourceToTarget(value);
             }
 
             if (value != MvxBindingConstant.UnsetValue)
@@ -135,8 +137,8 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
                 return value;
             }
 
-            if (this._description.FallbackValue != null)
-                return this._description.FallbackValue;
+            if (_description.FallbackValue != null)
+                return _description.FallbackValue;
 
             return MvxBindingConstant.UnsetValue;
         }
@@ -147,16 +149,16 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
         {
             add
             {
-                var alreadyHasListeners = this._changed != null;
-                this._changed += value;
+                var alreadyHasListeners = _changed != null;
+                _changed += value;
                 if (!alreadyHasListeners)
-                    this.OnFirstChangeListenerAdded();
+                    OnFirstChangeListenerAdded();
             }
             remove
             {
-                this._changed -= value;
-                if (this._changed == null)
-                    this.OnLastChangeListenerRemoved();
+                _changed -= value;
+                if (_changed == null)
+                    OnLastChangeListenerRemoved();
             }
         }
 
@@ -172,8 +174,8 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         public object GetValue()
         {
-            var sourceValue = this.GetSourceValue();
-            var value = this.ConvertSourceToTarget(sourceValue);
+            var sourceValue = GetSourceValue();
+            var value = ConvertSourceToTarget(sourceValue);
             return value;
         }
 

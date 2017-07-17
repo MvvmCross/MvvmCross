@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
+using MvvmCross.Core.Views;
+using MvvmCross.Platform.Mac.Views;
+
 namespace MvvmCross.Mac.Views
 {
-    using System;
-
-    using global::MvvmCross.Core.Views;
-
-    using MvvmCross.Platform.Mac.Views;
-
     public class MvxViewControllerAdapter : MvxBaseViewControllerAdapter
     {
         protected IMvxMacView MacView
@@ -29,13 +28,13 @@ namespace MvvmCross.Mac.Views
 
         public override void HandleViewDidLoadCalled(object sender, EventArgs e)
         {
-            this.MacView.OnViewCreate();
+            MacView.OnViewCreate();
             base.HandleViewDidLoadCalled(sender, e);
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)
         {
-            this.MacView.OnViewDestroy();
+            MacView.OnViewDestroy();
             base.HandleDisposeCalled(sender, e);
         }
     }

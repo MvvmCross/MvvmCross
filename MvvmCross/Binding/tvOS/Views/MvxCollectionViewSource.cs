@@ -5,21 +5,18 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+using System.Threading.Tasks;
+using Foundation;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform.WeakSubscription;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Specialized;
-    using System.Threading.Tasks;
-
-    using Foundation;
-
-    using MvvmCross.Binding.Attributes;
-    using MvvmCross.Binding.ExtensionMethods;
-    using MvvmCross.Platform.WeakSubscription;
-
-    using UIKit;
-
     public class MvxCollectionViewSource : MvxBaseCollectionViewSource
     {
         private IEnumerable _itemsSource;
@@ -36,10 +33,10 @@ namespace MvvmCross.Binding.tvOS.Views
         {
             if (disposing)
             {
-                if (this._subscription != null)
+                if (_subscription != null)
                 {
-                    this._subscription.Dispose();
-                    this._subscription = null;
+                    _subscription.Dispose();
+                    _subscription = null;
                 }
             }
 
@@ -55,31 +52,34 @@ namespace MvvmCross.Binding.tvOS.Views
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return this._itemsSource; }
+            get
+            {
+                return _itemsSource;
+            }
             set
             {
-                if (Object.ReferenceEquals(this._itemsSource, value)
-                    && !this.ReloadOnAllItemsSourceSets)
+                if (ReferenceEquals(_itemsSource, value)
+                    && !ReloadOnAllItemsSourceSets)
                     return;
 
-                if (this._subscription != null)
+                if (_subscription != null)
                 {
-                    this._subscription.Dispose();
-                    this._subscription = null;
+                    _subscription.Dispose();
+                    _subscription = null;
                 }
-                this._itemsSource = value;
-                var collectionChanged = this._itemsSource as INotifyCollectionChanged;
+                _itemsSource = value;
+                var collectionChanged = _itemsSource as INotifyCollectionChanged;
                 if (collectionChanged != null)
                 {
-                    this._subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
+                    _subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
                 }
-                this.ReloadData();
+                ReloadData();
             }
         }
 
         protected override object GetItemAt(NSIndexPath indexPath)
         {
-            return this.ItemsSource?.ElementAt(indexPath.Row);
+            return ItemsSource?.ElementAt(indexPath.Row);
         }
             
         /// <summary>
@@ -97,10 +97,10 @@ namespace MvvmCross.Binding.tvOS.Views
         
         public override nint GetItemsCount(UICollectionView collectionView, nint section)
         {
-            if (this.ItemsSource == null)
+            if (ItemsSource == null)
                 return 0;
 
-            return this.ItemsSource.Count();
+            return ItemsSource.Count();
         }
     }
 }

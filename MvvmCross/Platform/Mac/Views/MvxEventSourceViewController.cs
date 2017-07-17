@@ -5,19 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-
 namespace MvvmCross.Platform.Mac.Views
 {
     using System;
-
     using AppKit;
     using Foundation;
-
     using MvvmCross.Platform.Core;
 
     public class MvxEventSourceViewController
-        : NSViewController
-          , IMvxEventSourceViewController
+        : NSViewController, IMvxEventSourceViewController
     {
         protected MvxEventSourceViewController()
         {
@@ -49,36 +45,43 @@ namespace MvvmCross.Platform.Mac.Views
         public override void LoadView()
         {
             base.LoadView();
-            this.ViewDidLoad();
+            //this.ViewDidLoad();
         }
 
-        //        public override void ViewWillDisappear(bool animated)
-        //		{
-        //            base.ViewWillDisappear(animated);
-        //            ViewWillDisappearCalled.Raise(this, animated);
-        //        }
-        //
-        //        public override void ViewDidAppear(bool animated)
-        //        {
-        //            base.ViewDidAppear(animated);
-        //            ViewDidDisappearCalled.Raise(this, animated);
-        //        }
-        //
-        //        public override void ViewWillAppear(bool animated)
-        //        {
-        //            base.ViewWillAppear(animated);
-        //            ViewWillAppearCalled.Raise(this, animated);
-        //        }
-        //
-        //        public override void ViewDidDisappear(bool animated)
-        //        {
-        //            base.ViewDidDisappear(animated);
-        //            ViewDidAppearCalled.Raise(this, animated);
-        //        }
-        //
         public override void ViewDidLoad()
         {
-            this.ViewDidLoadCalled.Raise(this);
+            base.ViewDidLoad();
+            ViewDidLoadCalled?.Raise(this);
+        }
+
+        public override void ViewDidLayout()
+        {
+            base.ViewDidLayout();
+            ViewDidLayoutCalled?.Raise(this);
+        }
+
+        public override void ViewWillAppear()
+        {
+            base.ViewWillAppear();
+            ViewWillAppearCalled?.Raise(this);
+        }
+
+        public override void ViewDidAppear()
+        {
+            base.ViewDidAppear();
+            ViewDidAppearCalled?.Raise(this);
+        }
+
+        public override void ViewWillDisappear()
+        {
+            base.ViewWillDisappear();
+            ViewWillDisappearCalled?.Raise(this);
+        }
+
+        public override void ViewDidDisappear()
+        {
+            base.ViewDidDisappear();
+            ViewDidDisappearCalled?.Raise(this);
         }
 
         protected override void Dispose(bool disposing)
@@ -91,6 +94,16 @@ namespace MvvmCross.Platform.Mac.Views
         }
 
         public event EventHandler ViewDidLoadCalled;
+
+        public event EventHandler ViewDidLayoutCalled;
+
+        public event EventHandler ViewWillAppearCalled;
+
+        public event EventHandler ViewDidAppearCalled;
+
+        public event EventHandler ViewDidDisappearCalled;
+
+        public event EventHandler ViewWillDisappearCalled;
 
         public event EventHandler DisposeCalled;
     }

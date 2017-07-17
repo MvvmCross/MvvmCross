@@ -1,16 +1,15 @@
-// MvxUIViewVisibleTargetBinding.cs
+﻿// MvxUIViewVisibleTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.ExtensionMethods;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Target
 {
-    using MvvmCross.Binding.ExtensionMethods;
-
-    using UIKit;
-
     public class MvxUIViewVisibleTargetBinding : MvxBaseUIViewVisibleTargetBinding
     {
         public MvxUIViewVisibleTargetBinding(UIView target)
@@ -20,7 +19,7 @@ namespace MvvmCross.Binding.iOS.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            var view = this.View;
+            var view = View;
             if (view == null)
                 return;
 

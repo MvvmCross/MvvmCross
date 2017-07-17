@@ -4,7 +4,7 @@ using MvvmCross.Binding.iOS.Views;
 using MvvmCross.iOS.Support.Views.Expandable;
 using UIKit;
 
-namespace MvvmCross.iOS.Support.ExpandableTableView.iOS
+namespace MvvmCross.iOS.Support.ExpandableTableView.iOS.Views.Cells
 {
 	public partial class HeaderCell : MvxTableViewCell, IExpandableHeaderCell
 	{

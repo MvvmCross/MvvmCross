@@ -8,8 +8,7 @@
 namespace MvvmCross.Droid.Views
 {
     public interface IMvxAndroidViewsContainer
-        : IMvxAndroidViewModelLoader
-          , IMvxAndroidViewModelRequestTranslator
+        : IMvxAndroidViewModelLoader, IMvxAndroidViewModelRequestTranslator
     {
     }
 }

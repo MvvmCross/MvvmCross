@@ -2,7 +2,6 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Example.Core.ViewModels;
-using Example.Droid.Activities.Caching;
 using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace Example.Droid.Activities

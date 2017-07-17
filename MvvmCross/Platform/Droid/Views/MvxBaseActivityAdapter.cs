@@ -5,40 +5,38 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.App;
+using Android.Content;
+using Android.OS;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Platform.Droid.Views
 {
-    using System;
-
-    using Android.App;
-    using Android.Content;
-    using Android.OS;
-
-    using MvvmCross.Platform.Core;
-
     public abstract class MvxBaseActivityAdapter
     {
         private readonly IMvxEventSourceActivity _eventSource;
 
-        protected Activity Activity => this._eventSource as Activity;
+        protected Activity Activity => _eventSource as Activity;
 
         protected MvxBaseActivityAdapter(IMvxEventSourceActivity eventSource)
         {
-            this._eventSource = eventSource;
+            _eventSource = eventSource;
 
-            this._eventSource.CreateCalled += this.EventSourceOnCreateCalled;
-            this._eventSource.CreateWillBeCalled += this.EventSourceOnCreateWillBeCalled;
-            this._eventSource.StartCalled += this.EventSourceOnStartCalled;
-            this._eventSource.RestartCalled += this.EventSourceOnRestartCalled;
-            this._eventSource.ResumeCalled += this.EventSourceOnResumeCalled;
-            this._eventSource.PauseCalled += this.EventSourceOnPauseCalled;
-            this._eventSource.StopCalled += this.EventSourceOnStopCalled;
-            this._eventSource.DestroyCalled += this.EventSourceOnDestroyCalled;
-            this._eventSource.DisposeCalled += this.EventSourceOnDisposeCalled;
-            this._eventSource.SaveInstanceStateCalled += this.EventSourceOnSaveInstanceStateCalled;
-            this._eventSource.NewIntentCalled += this.EventSourceOnNewIntentCalled;
+            _eventSource.CreateCalled += EventSourceOnCreateCalled;
+            _eventSource.CreateWillBeCalled += EventSourceOnCreateWillBeCalled;
+            _eventSource.StartCalled += EventSourceOnStartCalled;
+            _eventSource.RestartCalled += EventSourceOnRestartCalled;
+            _eventSource.ResumeCalled += EventSourceOnResumeCalled;
+            _eventSource.PauseCalled += EventSourceOnPauseCalled;
+            _eventSource.StopCalled += EventSourceOnStopCalled;
+            _eventSource.DestroyCalled += EventSourceOnDestroyCalled;
+            _eventSource.DisposeCalled += EventSourceOnDisposeCalled;
+            _eventSource.SaveInstanceStateCalled += EventSourceOnSaveInstanceStateCalled;
+            _eventSource.NewIntentCalled += EventSourceOnNewIntentCalled;
 
-            this._eventSource.ActivityResultCalled += this.EventSourceOnActivityResultCalled;
-            this._eventSource.StartActivityForResultCalled += this.EventSourceOnStartActivityForResultCalled;
+            _eventSource.ActivityResultCalled += EventSourceOnActivityResultCalled;
+            _eventSource.StartActivityForResultCalled += EventSourceOnStartActivityForResultCalled;
         }
 
         protected virtual void EventSourceOnSaveInstanceStateCalled(object sender,
@@ -59,10 +57,8 @@ namespace MvvmCross.Platform.Droid.Views
         {
         }
 
-        protected virtual void EventSourceOnStartActivityForResultCalled(object sender,
-                                                                         MvxValueEventArgs
-                                                                             <MvxStartActivityForResultParameters>
-                                                                             MvxValueEventArgs)
+        protected virtual void EventSourceOnStartActivityForResultCalled(object sender, 
+                                                                         MvxValueEventArgs<MvxStartActivityForResultParameters> MvxValueEventArgs)
         {
         }
 
@@ -95,8 +91,7 @@ namespace MvvmCross.Platform.Droid.Views
         }
 
         protected virtual void EventSourceOnActivityResultCalled(object sender,
-                                                                 MvxValueEventArgs<MvxActivityResultParameters>
-                                                                     MvxValueEventArgs)
+                                                                 MvxValueEventArgs<MvxActivityResultParameters> MvxValueEventArgs)
         {
         }
     }

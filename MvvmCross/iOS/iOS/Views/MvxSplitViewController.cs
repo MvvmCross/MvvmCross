@@ -43,7 +43,7 @@ namespace MvvmCross.iOS.Views
 
             viewController = wrapInNavigationController ? new MvxNavigationController(viewController) : viewController;
 
-            if(newStack.Any())
+            if (newStack.Any())
                 newStack.RemoveAt(0);
 
             newStack.Insert(0, viewController);
@@ -53,13 +53,13 @@ namespace MvvmCross.iOS.Views
 
         public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
         {
-            if(!ViewControllers.Any())
+            if (!ViewControllers.Any())
                 return false;
 
             var toClose = ViewControllers.ToList()
                                          .Select(v => v.GetIMvxIosView())
                                          .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
-            if(toClose != null)
+            if (toClose != null)
             {
                 var newStack = ViewControllers.Where(v => v.GetIMvxIosView() != toClose);
                 ViewControllers = newStack.ToArray();

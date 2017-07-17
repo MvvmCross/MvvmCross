@@ -5,12 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Linq;
+using UIKit;
+
 namespace MvvmCross.Platform.tvOS.Platform
 {
-    using System.Linq;
-
-    using UIKit;
-
     public class MvxTvosSystem
         : IMvxTvosSystem
     {
@@ -18,14 +17,14 @@ namespace MvvmCross.Platform.tvOS.Platform
 
         public MvxTvosSystem()
         {
-            this.BuildVersion();
+            BuildVersion();
         }
 
         private void BuildVersion()
         {
             var version = UIDevice.CurrentDevice.SystemVersion;
             var parts = version.Split('.').Select(int.Parse).ToArray();
-            this.Version = new MvxTvosVersion(parts);
+            Version = new MvxTvosVersion(parts);
         }
     }
 }

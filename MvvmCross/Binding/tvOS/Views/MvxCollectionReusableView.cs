@@ -5,18 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using CoreGraphics;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.BindingContext;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-	using System;
-
-	using CoreGraphics;
-
-	using MvvmCross.Binding.Attributes;
-	using MvvmCross.Binding.BindingContext;
-
-	using UIKit;
-
-	public class MvxCollectionReusableView
+    public class MvxCollectionReusableView
 		: UICollectionReusableView
 		  , IMvxBindable
 	{
@@ -43,7 +40,7 @@ namespace MvvmCross.Binding.tvOS.Views
 		{
 			if (disposing)
 			{
-				this.BindingContext.ClearAllBindings();
+				BindingContext.ClearAllBindings();
 			}
 			base.Dispose(disposing);
 		}
@@ -51,8 +48,8 @@ namespace MvvmCross.Binding.tvOS.Views
 		[MvxSetToNullAfterBinding]
 		public object DataContext
 		{
-			get { return this.BindingContext.DataContext; }
-			set { this.BindingContext.DataContext = value; }
+			get { return BindingContext.DataContext; }
+			set { BindingContext.DataContext = value; }
 		}
 	}
 }

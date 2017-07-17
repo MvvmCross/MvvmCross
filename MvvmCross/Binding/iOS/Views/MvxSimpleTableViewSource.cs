@@ -1,27 +1,24 @@
-// MvxSimpleTableViewSource.cs
+﻿// MvxSimpleTableViewSource.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Foundation;
+using MvvmCross.Platform;
+using MvvmCross.Platform.iOS.Platform;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-    using System;
-
-    using Foundation;
-
-    using MvvmCross.Platform;
-    using Platform.iOS.Platform;
-
-    using UIKit;
-
     public class MvxSimpleTableViewSource : MvxTableViewSource
     {
         private readonly NSString _cellIdentifier;
         private readonly MvxIosMajorVersionChecker _iosVersion6Checker = new MvxIosMajorVersionChecker(6);
 
-        protected virtual NSString CellIdentifier => this._cellIdentifier;
+        protected virtual NSString CellIdentifier => _cellIdentifier;
 
         public MvxSimpleTableViewSource(IntPtr handle)
             : base(handle)
@@ -35,7 +32,7 @@ namespace MvvmCross.Binding.iOS.Views
         {
             // if no cellIdentifier supplied, then use the nibName as cellId
             cellIdentifier = cellIdentifier ?? nibName;
-            this._cellIdentifier = new NSString(cellIdentifier);
+            _cellIdentifier = new NSString(cellIdentifier);
             tableView.RegisterNibForCellReuse(UINib.FromName(nibName, bundle ?? NSBundle.MainBundle), cellIdentifier);
         }
 
@@ -44,16 +41,16 @@ namespace MvvmCross.Binding.iOS.Views
         {
             // if no cellIdentifier supplied, then use the cell type name as cellId
             cellIdentifier = cellIdentifier ?? cellType.Name;
-            this._cellIdentifier = new NSString(cellIdentifier);
-            tableView.RegisterClassForCellReuse(cellType, this._cellIdentifier);
+            _cellIdentifier = new NSString(cellIdentifier);
+            tableView.RegisterClassForCellReuse(cellType, _cellIdentifier);
         }
 
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)
         {
-            if (this._iosVersion6Checker.IsVersionOrHigher)
-                return tableView.DequeueReusableCell(this.CellIdentifier, indexPath);
+            if (_iosVersion6Checker.IsVersionOrHigher)
+                return tableView.DequeueReusableCell(CellIdentifier, indexPath);
 
-            return tableView.DequeueReusableCell(this.CellIdentifier);
+            return tableView.DequeueReusableCell(CellIdentifier);
         }
     }
 }

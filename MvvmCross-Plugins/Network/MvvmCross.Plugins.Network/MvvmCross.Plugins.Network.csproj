@@ -55,7 +55,9 @@
     <Compile Include="Rest\MvxVerbs.cs" />
     <Compile Include="Rest\MvxWwwFormRestRequest.cs" />
     <Compile Include="PluginLoader.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

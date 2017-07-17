@@ -5,21 +5,19 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Test.Mocks.Dispatchers
 {
-    using System;
-
-    using MvvmCross.Platform.Core;
-
     public class CountingMockMainThreadDispatcher
-        : MvxMainThreadDispatcher
-          , IMvxMainThreadDispatcher
+        : MvxMainThreadDispatcher, IMvxMainThreadDispatcher
     {
         public int Count { get; set; }
 
         public bool RequestMainThreadAction(Action action)
         {
-            this.Count++;
+            Count++;
             return true;
         }
     }

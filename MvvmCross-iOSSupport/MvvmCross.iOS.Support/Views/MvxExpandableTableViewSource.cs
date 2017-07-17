@@ -1,25 +1,22 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using CoreGraphics;
+using Foundation;
+using MvvmCross.Binding.iOS.Views;
 using MvvmCross.iOS.Support.Views.Expandable;
 using MvvmCross.iOS.Support.Views.Expandable.Controllers;
+using MvvmCross.Platform.Core;
+using UIKit;
 
 namespace MvvmCross.iOS.Support.Views
 {
-    using Foundation;
-    using Binding.ExtensionMethods;
-    using Binding.iOS.Views;
-    using MvvmCross.Platform.Core;
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.Specialized;
-    using System.Linq;
-    using UIKit;
-    using CoreGraphics;
-
     public abstract class MvxExpandableTableViewSource : MvxExpandableTableViewSource<IEnumerable<object>, object>
     {
         public MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
         {
         }
-
     }
 
     public abstract class MvxExpandableTableViewSource<TItemSource, TItem> : MvxTableViewSource where TItemSource : IEnumerable<TItem>
@@ -77,12 +74,10 @@ namespace MvvmCross.iOS.Support.Views
 
 	    protected virtual void OnSectionExpanded(IEnumerable<int> sectionIndexes)
 	    {
-		    
 	    }
 
 	    protected virtual void OnSectionCollapsed(IEnumerable<int> collapsedSectionIndexes)
 	    {
-		    
 	    }
 
 	    private void ScrollToSection(UITableView tableView, nint atIndex)
@@ -103,8 +98,8 @@ namespace MvvmCross.iOS.Support.Views
             if (ItemsSource == null)
                 return 0;
             // If the section is not colapsed return the rows in that section otherwise return 0
-            if ((ItemsSource.ElementAt((int)section)).Any() && _sectionExpandableController.IsExpanded((int)section))
-                return (ItemsSource.ElementAt((int)section)).Count();
+            if (ItemsSource.ElementAt((int)section).Any() && _sectionExpandableController.IsExpanded((int)section))
+                return ItemsSource.ElementAt((int)section).Count();
             return 0;
         }
 
@@ -217,7 +212,10 @@ namespace MvvmCross.iOS.Support.Views
 	    private bool isAccordionExpandCollapseEnabled;
 	    public bool IsAccordionExpandCollapseEnabled
 	    {
-		    get { return isAccordionExpandCollapseEnabled; }
+		    get
+            {
+                return isAccordionExpandCollapseEnabled;
+            }
 		    set
 		    {
 				if (isAccordionExpandCollapseEnabled == value)
@@ -237,6 +235,8 @@ namespace MvvmCross.iOS.Support.Views
 
     public class HiddenHeaderButton : UIButton
     {
-        public HiddenHeaderButton(CGRect frame) : base(frame) { }
+        public HiddenHeaderButton(CGRect frame) : base(frame)
+        {
+        }
     }
 }

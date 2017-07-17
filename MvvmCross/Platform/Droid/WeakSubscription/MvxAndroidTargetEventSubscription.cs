@@ -39,7 +39,7 @@ namespace MvvmCross.Platform.Droid.WeakSubscription
 
         protected override Delegate CreateEventHandler()
         {
-            return new EventHandler<TEventArgs>(this.OnSourceEvent);
+            return new EventHandler<TEventArgs>(OnSourceEvent);
         }
     }
 
@@ -70,7 +70,7 @@ namespace MvvmCross.Platform.Droid.WeakSubscription
 
         protected override Delegate CreateEventHandler()
         {
-            return new EventHandler(this.OnSourceEvent);
+            return new EventHandler(OnSourceEvent);
         }
     }
 }

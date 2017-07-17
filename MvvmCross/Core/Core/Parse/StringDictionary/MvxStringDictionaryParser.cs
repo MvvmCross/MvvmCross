@@ -5,13 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Parse;
+
 namespace MvvmCross.Core.Parse.StringDictionary
 {
-    using System.Collections.Generic;
-
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Parse;
-
     public class MvxStringDictionaryParser
         : MvxParser, IMvxStringDictionaryParser
     {
@@ -19,58 +18,58 @@ namespace MvvmCross.Core.Parse.StringDictionary
 
         public IDictionary<string, string> Parse(string textToParse)
         {
-            this.Reset(textToParse);
+            Reset(textToParse);
 
-            while (!this.IsComplete)
+            while (!IsComplete)
             {
-                this.ParseNextKeyValuePair();
-                this.SkipWhitespaceAndCharacters(';');
+                ParseNextKeyValuePair();
+                SkipWhitespaceAndCharacters(';');
             }
 
-            return this.CurrentEntries;
+            return CurrentEntries;
         }
 
         protected override void Reset(string textToParse)
         {
-            this.CurrentEntries = new Dictionary<string, string>();
+            CurrentEntries = new Dictionary<string, string>();
             base.Reset(textToParse);
         }
 
         private void ParseNextKeyValuePair()
         {
-            this.SkipWhitespace();
+            SkipWhitespace();
 
-            if (this.IsComplete)
+            if (IsComplete)
             {
                 return;
             }
 
-            var key = this.ReadValue();
+            var key = ReadValue();
             if (!(key is string))
             {
                 throw new MvxException("Unexpected object in key for keyvalue pair {0} at position {1}",
-                                       key.GetType().Name, this.CurrentIndex);
+                                       key.GetType().Name, CurrentIndex);
             }
 
-            this.SkipWhitespace();
+            SkipWhitespace();
 
-            if (this.CurrentChar != '=')
+            if (CurrentChar != '=')
             {
-                throw new MvxException("Unexpected character in keyvalue pair {0} at position {1}", this.CurrentChar,
-                                       this.CurrentIndex);
+                throw new MvxException("Unexpected character in keyvalue pair {0} at position {1}", CurrentChar,
+                                       CurrentIndex);
             }
 
-            this.MoveNext();
-            this.SkipWhitespace();
+            MoveNext();
+            SkipWhitespace();
 
-            var value = this.ReadValue();
+            var value = ReadValue();
             if (value != null && !(value is string))
             {
                 throw new MvxException("Unexpected object in value for keyvalue pair {0} for key {1} at position {2}",
-                                       value.GetType().Name, key, this.CurrentIndex);
+                                       value.GetType().Name, key, CurrentIndex);
             }
 
-            this.CurrentEntries[(string)key] = (string)value;
+            CurrentEntries[(string)key] = (string)value;
         }
     }
 }

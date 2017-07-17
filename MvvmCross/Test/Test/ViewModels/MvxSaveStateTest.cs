@@ -5,18 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using MvvmCross.Core.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Test.Core;
+using MvvmCross.Test.Mocks.TestViewModels;
+using NUnit.Framework;
+
 namespace MvvmCross.Test.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-
-    using MvvmCross.Core.Platform;
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Test.Core;
-    using MvvmCross.Test.Mocks.TestViewModels;
-
-    using NUnit.Framework;
-
     [TestFixture]
     public class MvxSaveStateTest : MvxIoCSupportingTest
     {
@@ -31,8 +29,8 @@ namespace MvvmCross.Test.ViewModels
             {
                 AdditionalSaveStateFields = new Dictionary<string, string>
                 {
-                    {"Life1", "John"},
-                    {"Life2", "Jane"},
+                    { "Life1", "John" },
+                    { "Life2", "Jane" }
                 },
                 SaveStateBundleObject = new BundleObject
                 {

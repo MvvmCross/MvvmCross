@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using System.Windows.Input;
+using MvvmCross.Platform;
+using MvvmCross.Platform.WeakSubscription;
+
 namespace MvvmCross.Binding.ValueConverters
 {
-    using System;
-    using System.Reflection;
-    using System.Windows.Input;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.WeakSubscription;
-
     public class MvxWrappingCommand
         : ICommand
     {
@@ -25,12 +24,12 @@ namespace MvvmCross.Binding.ValueConverters
 
         public MvxWrappingCommand(ICommand wrapped, object commandParameterOverride)
         {
-            this._wrapped = wrapped;
-            this._commandParameterOverride = commandParameterOverride;
+            _wrapped = wrapped;
+            _commandParameterOverride = commandParameterOverride;
 
-            if (this._wrapped != null)
+            if (_wrapped != null)
             {
-                this._canChangedEventSubscription = CanExecuteChangedEventInfo.WeakSubscribe(this._wrapped, WrappedOnCanExecuteChanged);
+                _canChangedEventSubscription = CanExecuteChangedEventInfo.WeakSubscribe(_wrapped, WrappedOnCanExecuteChanged);
             }
         }
 
@@ -42,23 +41,23 @@ namespace MvvmCross.Binding.ValueConverters
 
         public bool CanExecute(object parameter = null)
         {
-            if (this._wrapped == null)
+            if (_wrapped == null)
                 return false;
 
             if (parameter != null)
                 Mvx.Warning("Non-null parameter will be ignored in MvxWrappingCommand.CanExecute");
 
-            return this._wrapped.CanExecute(this._commandParameterOverride);
+            return _wrapped.CanExecute(_commandParameterOverride);
         }
 
         public void Execute(object parameter = null)
         {
-            if (this._wrapped == null)
+            if (_wrapped == null)
                 return;
 
             if (parameter != null)
                 Mvx.Warning("Non-null parameter overridden in MvxWrappingCommand");
-            this._wrapped.Execute(this._commandParameterOverride);
+            _wrapped.Execute(_commandParameterOverride);
         }
 
         public event EventHandler CanExecuteChanged;

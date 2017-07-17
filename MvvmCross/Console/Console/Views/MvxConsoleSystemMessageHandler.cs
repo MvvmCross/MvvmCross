@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Console.Views
 {
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Platform;
-
     public class MvxConsoleSystemMessageHandler
     {
         public bool ExitFlag { get; set; }
@@ -23,13 +23,13 @@ namespace MvvmCross.Console.Views
             {
                 case "BACK":
                 case "B":
-                    if (this.ConsoleNavigation.CanGoBack())
-                        this.ConsoleNavigation.GoBack();
+                    if (ConsoleNavigation.CanGoBack())
+                        ConsoleNavigation.GoBack();
                     return true;
 
                 case "QUIT":
                 case "Q":
-                    this.ExitFlag = true;
+                    ExitFlag = true;
                     return true;
             }
 

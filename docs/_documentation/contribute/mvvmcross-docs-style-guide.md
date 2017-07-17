@@ -37,6 +37,14 @@ In the end contributions will be reviewed to iron out any issues.
 
 The documentation uses the same markdown as GitHub uses. Please refer to [this markdown reference][markdown] for information on how to format a post.
 
+### Adding relative links
+
+To reference other pages inside the documentation use the following syntax:
+
+```
+[Getting started]({{ site.url }}/documentation/getting-started/getting-started)
+```
+
 ### Adding images
 
 Please add any images for the documentation in the `assets/docs` folder. Then you can reference you image like:

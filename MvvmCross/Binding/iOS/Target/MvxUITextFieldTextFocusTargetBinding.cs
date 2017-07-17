@@ -1,18 +1,16 @@
-// MvxUITextFieldTextFocusTargetBinding.cs
+﻿// MvxUITextFieldTextFocusTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Binding.Bindings.Target;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Target
 {
-    using System;
-
-    using MvvmCross.Binding.Bindings.Target;
-
-    using UIKit;
-
     public class MvxUITextFieldTextFocusTargetBinding : MvxTargetBinding
     {
         private bool _subscribed;
@@ -30,25 +28,25 @@ namespace MvvmCross.Binding.iOS.Target
 
         public override void SetValue(object value)
         {
-            if (this.TextField == null) return;
+            if (TextField == null) return;
 
             value = value ?? string.Empty;
-            this.TextField.Text = value.ToString();
+            TextField.Text = value.ToString();
         }
 
         public override void SubscribeToEvents()
         {
-            if (this.TextField == null) return;
+            if (TextField == null) return;
 
-            this.TextField.EditingDidEnd += this.HandleLostFocus;
-            this._subscribed = true;
+            TextField.EditingDidEnd += HandleLostFocus;
+            _subscribed = true;
         }
 
         private void HandleLostFocus(object sender, EventArgs e)
         {
-            if (this.TextField == null) return;
+            if (TextField == null) return;
 
-            FireValueChanged(this.TextField.Text);
+            FireValueChanged(TextField.Text);
         }
 
         protected override void Dispose(bool isDisposing)
@@ -56,10 +54,10 @@ namespace MvvmCross.Binding.iOS.Target
             base.Dispose(isDisposing);
             if (!isDisposing) return;
 
-            if (this.TextField != null && this._subscribed)
+            if (TextField != null && _subscribed)
             {
-                this.TextField.EditingDidEnd -= this.HandleLostFocus;
-                this._subscribed = false;
+                TextField.EditingDidEnd -= HandleLostFocus;
+                _subscribed = false;
             }
         }
     }

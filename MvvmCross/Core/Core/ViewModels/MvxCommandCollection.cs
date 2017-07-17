@@ -5,14 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Core.ViewModels
 {
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq;
-
-    using MvvmCross.Platform.Platform;
-
     public class MvxCommandCollection
         : IMvxCommandCollection
     {
@@ -22,17 +21,17 @@ namespace MvvmCross.Core.ViewModels
 
         public MvxCommandCollection(object owner)
         {
-            this._owner = owner;
-            this.SubscribeToNotifyPropertyChanged();
+            _owner = owner;
+            SubscribeToNotifyPropertyChanged();
         }
 
         private void SubscribeToNotifyPropertyChanged()
         {
-            var inpc = this._owner as INotifyPropertyChanged;
+            var inpc = _owner as INotifyPropertyChanged;
             if (inpc == null)
                 return;
 
-            inpc.PropertyChanged += this.OnPropertyChanged;
+            inpc.PropertyChanged += OnPropertyChanged;
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs args)
@@ -40,12 +39,12 @@ namespace MvvmCross.Core.ViewModels
             // if args.PropertyName is empty then it means all properties have changed.
             if (string.IsNullOrEmpty(args.PropertyName))
             {
-                this.RaiseAllCanExecuteChanged();
+                RaiseAllCanExecuteChanged();
                 return;
             }
 
             List<IMvxCommand> commands;
-            if (!this._canExecuteLookup.TryGetValue(args.PropertyName, out commands))
+            if (!_canExecuteLookup.TryGetValue(args.PropertyName, out commands))
                 return;
 
             foreach (var command in commands)
@@ -56,7 +55,7 @@ namespace MvvmCross.Core.ViewModels
 
         private void RaiseAllCanExecuteChanged()
         {
-            foreach (var command in this._commandLookup)
+            foreach (var command in _commandLookup)
             {
                 command.Value.RaiseCanExecuteChanged();
             }
@@ -66,22 +65,22 @@ namespace MvvmCross.Core.ViewModels
         {
             get
             {
-                if (!this._commandLookup.Any())
+                if (!_commandLookup.Any())
                 {
                     MvxTrace.Trace("MvxCommandCollection is empty - did you forget to add your commands?");
                     return null;
                 }
 
                 IMvxCommand toReturn;
-                this._commandLookup.TryGetValue(name, out toReturn);
+                _commandLookup.TryGetValue(name, out toReturn);
                 return toReturn;
             }
         }
 
         public void Add(IMvxCommand command, string name, string canExecuteName)
         {
-            AddToLookup(this._commandLookup, command, name);
-            AddToLookup(this._canExecuteLookup, command, canExecuteName);
+            AddToLookup(_commandLookup, command, name);
+            AddToLookup(_canExecuteLookup, command, canExecuteName);
         }
 
         private static void AddToLookup(IDictionary<string, IMvxCommand> lookup, IMvxCommand command, string name)

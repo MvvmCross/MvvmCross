@@ -1,4 +1,4 @@
-// MvxRadioGroupSelectedItemBinding.cs
+﻿// MvxRadioGroupSelectedItemBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,11 +7,12 @@
 
 using System;
 using Android.Support.V7.Widget;
+using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Droid.Target;
 using MvvmCross.Droid.Support.V7.AppCompat.Widget;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Platform.Droid.WeakSubscription;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
@@ -59,7 +60,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             }
 
             bool changed = CheckValueChanged(newValue);
-            if (!changed) { return; }
+            if (!changed)
+                return;
 
             _currentValue = newValue;
             FireValueChanged(newValue);
@@ -68,12 +70,14 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
         protected override void SetValueImpl(object target, object newValue)
         {
             var radioGroup = (MvxAppCompatRadioGroup)target;
-            if (radioGroup == null) { return; }
+            if (radioGroup == null)
+                return;
 
             bool changed = CheckValueChanged(newValue);
-            if (!changed) { return; }
+            if (!changed)
+                return;
 
-            int checkid = Android.Views.View.NoId;
+            int checkid = View.NoId;
 
             // find the radio button associated with the new value
             if (newValue != null)
@@ -97,7 +101,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
                 }
             }
 
-            if (checkid == Android.Views.View.NoId)
+            if (checkid == View.NoId)
             {
                 radioGroup.ClearCheck();
             }

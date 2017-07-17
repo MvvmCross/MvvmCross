@@ -5,15 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Bindings.Target.Construction
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Platform;
-
     public class MvxPropertyInfoTargetBindingFactory
         : IMvxPluginTargetBindingFactory
     {
@@ -24,16 +23,19 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         public MvxPropertyInfoTargetBindingFactory(Type targetType, string targetName,
                                                    Func<object, PropertyInfo, IMvxTargetBinding> bindingCreator)
         {
-            this._targetType = targetType;
-            this._targetName = targetName;
-            this._bindingCreator = bindingCreator;
+            _targetType = targetType;
+            _targetName = targetName;
+            _bindingCreator = bindingCreator;
         }
 
-        protected Type TargetType => this._targetType;
+        protected Type TargetType => _targetType;
 
         #region IMvxPluginTargetBindingFactory Members
 
-        public IEnumerable<MvxTypeAndNamePair> SupportedTypes => new[] { new MvxTypeAndNamePair { Name = this._targetName, Type = this._targetType } };
+        public IEnumerable<MvxTypeAndNamePair> SupportedTypes => new[]
+        { 
+            new MvxTypeAndNamePair { Name = _targetName, Type = _targetType } 
+        };
 
         public IMvxTargetBinding CreateBinding(object target, string targetName)
         {
@@ -42,13 +44,13 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             {
                 try
                 {
-                    return this._bindingCreator(target, targetPropertyInfo);
+                    return _bindingCreator(target, targetPropertyInfo);
                 }
                 catch (Exception exception)
                 {
                     MvxBindingTrace.Trace(
                         MvxTraceLevel.Error,
-                        "Problem creating target binding for {0} - exception {1}", this._targetType.Name,
+                        "Problem creating target binding for {0} - exception {1}", _targetType.Name,
                         exception.ToString());
                 }
             }

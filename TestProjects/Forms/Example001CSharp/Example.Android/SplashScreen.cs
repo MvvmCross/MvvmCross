@@ -1,5 +1,6 @@
 using Android.App;
 using Android.Content.PM;
+using Android.OS;
 using MvvmCross.Droid.Views;
 using Xamarin.Forms;
 
@@ -26,11 +27,11 @@ namespace Example.Droid
             if (!isInitializationComplete)
             {
                 isInitializationComplete = true;
-                StartActivity(typeof(MvxFormsApplicationActivity));
+                StartActivity(typeof(ExampleApplicationActivity));
             }
         }
 
-        protected override void OnCreate(Android.OS.Bundle bundle)
+        protected override void OnCreate(Bundle bundle)
         {
             Forms.Init(this, bundle);
             // Leverage controls' StyleId attrib. to Xamarin.UITest

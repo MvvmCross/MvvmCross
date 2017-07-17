@@ -1,25 +1,22 @@
-// MvxSplashScreenActivity.cs
+﻿// MvxSplashScreenActivity.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Android.OS;
 using Android.Runtime;
+using Android.Views;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.Platform;
+using MvvmCross.Platform;
 
 namespace MvvmCross.Droid.Views
 {
-    using Android.OS;
-    using Android.Views;
-
-    using MvvmCross.Core.ViewModels;
-    using MvvmCross.Droid.Platform;
-    using MvvmCross.Platform;
-
     [Register("mvvmcross.droid.views.MvxSplashScreenActivity")]
     public abstract class MvxSplashScreenActivity
-        : MvxActivity
-          , IMvxAndroidSplashScreenActivity
+        : MvxActivity, IMvxAndroidSplashScreenActivity
     {
         private const int NoContent = 0;
 
@@ -33,7 +30,7 @@ namespace MvvmCross.Droid.Views
 
         protected MvxSplashScreenActivity(int resourceId = NoContent)
         {
-            this._resourceId = resourceId;
+            _resourceId = resourceId;
         }
 
         protected virtual void RequestWindowFeatures()
@@ -43,19 +40,19 @@ namespace MvvmCross.Droid.Views
 
         protected override void OnCreate(Bundle bundle)
         {
-            this.RequestWindowFeatures();
+            RequestWindowFeatures();
 
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setup.InitializeFromSplashScreen(this);
 
             base.OnCreate(bundle);
 
-            if (this._resourceId != NoContent)
+            if (_resourceId != NoContent)
             {
                 // Set our view from the "splash" layout resource
                 // Be careful to use non-binding inflation
-                var content = LayoutInflater.Inflate(this._resourceId, null);
-                this.SetContentView(content);
+                var content = LayoutInflater.Inflate(_resourceId, null);
+                SetContentView(content);
             }
         }
 
@@ -64,14 +61,14 @@ namespace MvvmCross.Droid.Views
         protected override void OnResume()
         {
             base.OnResume();
-            this._isResumed = true;
+            _isResumed = true;
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setup.InitializeFromSplashScreen(this);
         }
 
         protected override void OnPause()
         {
-            this._isResumed = false;
+            _isResumed = false;
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setup.RemoveSplashScreen(this);
             base.OnPause();
@@ -79,10 +76,10 @@ namespace MvvmCross.Droid.Views
 
         public virtual void InitializationComplete()
         {
-            if (!this._isResumed)
+            if (!_isResumed)
                 return;
 
-            this.TriggerFirstNavigate();
+            TriggerFirstNavigate();
         }
 
         protected virtual void TriggerFirstNavigate()

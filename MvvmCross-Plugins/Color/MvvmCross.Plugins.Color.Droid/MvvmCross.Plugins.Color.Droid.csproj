@@ -37,12 +37,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
-    <Reference Include="Mono.Android.Export" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingTargets\MvxDefaultColorBindingSet.cs" />
@@ -54,7 +51,9 @@
     <Compile Include="BindingTargets\MvxTextViewTextColorBinding.cs" />
     <Compile Include="BindingTargets\MvxViewBackgroundColorBinding.cs" />
     <Compile Include="Plugin.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Binding\Droid\MvvmCross.Binding.Droid.csproj">
@@ -64,10 +63,6 @@
     <ProjectReference Include="..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
       <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
       <Name>MvvmCross.Binding</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Platform\Droid\MvvmCross.Platform.Droid.csproj">
-      <Project>{caf8935f-56fe-4485-9d34-4a38fe79f6c9}</Project>
-      <Name>MvvmCross.Platform.Droid</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>

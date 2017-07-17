@@ -1,21 +1,18 @@
-// MvxEventSourceTabBarController.cs
+﻿// MvxEventSourceTabBarController.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using MvvmCross.Platform.Core;
+using UIKit;
+
 namespace MvvmCross.Platform.tvOS.Views
 {
-    using System;
-
-    using MvvmCross.Platform.Core;
-
-    using UIKit;
-
     public class MvxEventSourceTabBarController
-        : UITabBarController
-          , IMvxEventSourceViewController
+        : UITabBarController, IMvxEventSourceViewController
     {
         protected MvxEventSourceTabBarController()
         {
@@ -29,44 +26,44 @@ namespace MvvmCross.Platform.tvOS.Views
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);
-            this.ViewWillDisappearCalled.Raise(this, animated);
+            ViewWillDisappearCalled.Raise(this, animated);
         }
 
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-            this.ViewDidAppearCalled.Raise(this, animated);
+            ViewDidAppearCalled.Raise(this, animated);
         }
 
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            this.ViewWillAppearCalled.Raise(this, animated);
+            ViewWillAppearCalled.Raise(this, animated);
         }
 
         public override void ViewDidDisappear(bool animated)
         {
             base.ViewDidDisappear(animated);
-            this.ViewDidDisappearCalled.Raise(this, animated);
+            ViewDidDisappearCalled.Raise(this, animated);
         }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            this.ViewDidLoadCalled.Raise(this);
+            ViewDidLoadCalled.Raise(this);
         }
 
         public override void ViewDidLayoutSubviews()
         {
             base.ViewDidLayoutSubviews();
-            this.ViewDidLayoutSubviewsCalled.Raise(this);
+            ViewDidLayoutSubviewsCalled.Raise(this);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                this.DisposeCalled.Raise(this);
+                DisposeCalled.Raise(this);
             }
             base.Dispose(disposing);
         }

@@ -51,7 +51,7 @@ namespace MvvmCross.Binding.iOS.Target
                 return;
             }
 
-            this._subscribed = true;
+            _subscribed = true;
             slider.ValueChanged += HandleSliderValueChanged;
         }
 
@@ -61,10 +61,10 @@ namespace MvvmCross.Binding.iOS.Target
             if (isDisposing)
             {
                 var slider = View;
-                if (slider != null && this._subscribed)
+                if (slider != null && _subscribed)
                 {
                     slider.ValueChanged -= HandleSliderValueChanged;
-                    this._subscribed = false;
+                    _subscribed = false;
                 }
             }
         }

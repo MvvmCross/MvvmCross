@@ -1,13 +1,13 @@
 ﻿using System;
+using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Preferences;
 using Android.Runtime;
 using Android.Views;
-using Android.Preferences;
-using MvvmCross.Platform.Core;
 using MvvmCross.Droid.Shared;
 using MvvmCross.Droid.Shared.Fragments.EventSource;
-using Android.App;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 {
@@ -32,13 +32,11 @@ namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
 
         public MvxEventSourcePreferenceFragment()
         {
-
         }
 
         public MvxEventSourcePreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
-
         }
 
 		public override void OnAttach(Context context)

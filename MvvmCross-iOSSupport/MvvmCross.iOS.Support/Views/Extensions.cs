@@ -1,13 +1,13 @@
-﻿namespace MvvmCross.iOS.Support.Views
-{
-	using CoreGraphics;
-	using Foundation;
-	using System;
-	using System.Linq;
-	using UIKit;
-	using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 
-	public static class ViewExtensions
+namespace MvvmCross.iOS.Support.Views
+{
+    public static class ViewExtensions
     {
         /// <summary>
         /// Find the first responder in the <paramref name="view"/>'s subview hierarchy
@@ -129,7 +129,7 @@
             var spaceAboveKeyboard = scrollView.Frame.Height - keyboardHeight;
 
             // Move the active field to the center of the available space
-            var offset = relativeFrame.Y - (spaceAboveKeyboard - viewToCenter.Frame.Height) / 2;
+            var offset = relativeFrame.Y - ((spaceAboveKeyboard - viewToCenter.Frame.Height) / 2);
             if (scrollView.ContentOffset.Y < offset)
             {
                 scrollView.SetContentOffset(new CGPoint(0, offset), animated);

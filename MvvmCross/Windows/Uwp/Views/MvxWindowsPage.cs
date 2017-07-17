@@ -7,10 +7,9 @@
 
 using System;
 using System.Collections.Generic;
-
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
@@ -30,24 +29,24 @@ namespace MvvmCross.Uwp.Views
             Unloaded += MvxWindowsPage_Unloaded;
         }
 
-        private void MvxWindowsPage_Loading(Windows.UI.Xaml.FrameworkElement sender, object args)
+        private void MvxWindowsPage_Loading(FrameworkElement sender, object args)
         {
-            ViewModel?.Appearing();
+            ViewModel?.ViewAppearing();
         }
 
-        private void MvxWindowsPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void MvxWindowsPage_Loaded(object sender, RoutedEventArgs e)
         {
-            ViewModel?.Appeared();
+            ViewModel?.ViewAppeared();
         }
 
-        private void MvxWindowsPage_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void MvxWindowsPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            ViewModel?.Disappeared();
+            ViewModel?.ViewDisappeared();
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            ViewModel?.Disappearing();
+            ViewModel?.ViewDisappearing();
             base.OnNavigatingFrom(e);
         }
 
@@ -57,7 +56,10 @@ namespace MvvmCross.Uwp.Views
 
         public IMvxViewModel ViewModel
         {
-            get { return _viewModel; }
+            get
+            {
+                return _viewModel;
+            }
             set
             {
                 if (_viewModel == value)
@@ -78,27 +80,49 @@ namespace MvvmCross.Uwp.Views
          */
         }
 
+        private string _reqData = string.Empty;
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            ViewModel?.ViewCreated();
 
-            var reqData = (string)e.Parameter;
-            var converter = Mvx.Resolve<IMvxNavigationSerializer>();
-            var req = converter.Serializer.DeserializeObject<MvxViewModelRequest>(reqData);
+            if (_reqData != string.Empty)
+            {
+                var viewModelLoader = Mvx.Resolve<IMvxWindowsViewModelLoader>();
+                ViewModel = viewModelLoader.Load(e.Parameter.ToString(), LoadStateBundle(e));
+            }
+            _reqData = (string)e.Parameter;
 
-            this.OnViewCreate(req, () => LoadStateBundle(e));
+            this.OnViewCreate(_reqData, () => LoadStateBundle(e));
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-
             var bundle = this.CreateSaveStateBundle();
             SaveStateBundle(e, bundle);
-            
+
+            var translator = Mvx.Resolve<IMvxWindowsViewModelRequestTranslator>();
+
             if (e.NavigationMode == NavigationMode.Back)
-                this.OnViewDestroy();
+            {
+                var key = translator.RequestTextGetKey(_reqData);
+                this.OnViewDestroy(key);
+            }
+            else
+            {
+                var backstack = Frame.BackStack;
+                var currentEntry = backstack[backstack.Count - 1];
+                var key = translator.RequestTextGetKey(currentEntry.Parameter.ToString());
+                if (key == 0)
+                {
+                    var newParamter = translator.GetRequestTextWithKeyFor(ViewModel);
+                    var entry = new PageStackEntry(currentEntry.SourcePageType, newParamter, currentEntry.NavigationTransitionInfo);
+                    backstack.Remove(currentEntry);
+                    backstack.Add(entry);
+                }
+            }
         }
 
         private string _pageKey;
@@ -146,7 +170,6 @@ namespace MvvmCross.Uwp.Views
             var frameState = SuspensionManager.SessionStateForFrame(WrappedFrame);
             frameState[_pageKey] = bundle.Data;
         }
-
 
         public void Dispose()
         {

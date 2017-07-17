@@ -1,22 +1,20 @@
-// MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding.cs
+﻿// MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Droid.Target;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Droid.Support.V7.AppCompat.Widget;
+using MvvmCross.Platform.Droid.WeakSubscription;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
-    using System;
-    using System.Reflection;
-
-    using MvvmCross.Binding;
-    using MvvmCross.Droid.Support.V7.AppCompat.Widget;
-    using MvvmCross.Platform.Platform;
-
     public class MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding
         : MvxAndroidPropertyInfoTargetBinding<MvxAppCompatAutoCompleteTextView>
     {
@@ -29,13 +27,13 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             if (autoComplete == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - autoComplete is null in MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding");
+                    "Error - autoComplete is null in MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding");
             }
         }
 
         private void AutoCompleteOnSelectedObjectChanged(object sender, EventArgs eventArgs)
         {
-            this.FireValueChanged(this.View.SelectedObject);
+            FireValueChanged(View.SelectedObject);
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;

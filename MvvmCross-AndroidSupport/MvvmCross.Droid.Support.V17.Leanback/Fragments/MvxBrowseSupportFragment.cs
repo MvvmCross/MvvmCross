@@ -1,10 +1,10 @@
+﻿using System;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource;
-using System;
 using MvvmCross.Droid.Shared.Fragments;
+using MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource;
 using MvvmCross.Droid.Support.V4;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
@@ -34,7 +34,8 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         protected MvxBrowseSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public IMvxBindingContext BindingContext { get; set; }
 
@@ -42,7 +43,10 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         public object DataContext
         {
-            get { return _dataContext; }
+            get
+            {
+                return _dataContext;
+            }
             set
             {
                 _dataContext = value;
@@ -53,7 +57,10 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get
+            {
+                return DataContext as IMvxViewModel;
+            }
             set
             {
                 DataContext = value;
@@ -69,14 +76,15 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
     }
 
     public abstract class MvxBrowseSupportFragment<TViewModel>
-        : MvxBrowseSupportFragment
-            , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxBrowseSupportFragment, IMvxFragmentView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         protected MvxBrowseSupportFragment()
         {
         }
 
-        protected MvxBrowseSupportFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected MvxBrowseSupportFragment(IntPtr javaReference, JniHandleOwnership transfer) 
+            : base(javaReference, transfer)
         {
         }
 

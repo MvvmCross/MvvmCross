@@ -1,11 +1,11 @@
-﻿namespace MvvmCross.Core.ViewModels
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq.Expressions;
-    using System.Runtime.CompilerServices;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
+namespace MvvmCross.Core.ViewModels
+{
     public static class MvxNotifyPropertyChangedExtensions
     {
         private static TReturn RaiseAndSetIfChanged<TSource, TReturn, TActionParameter>(

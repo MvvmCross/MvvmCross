@@ -22,7 +22,7 @@ namespace Playground.iOS
             {
                 Debug.WriteLine(tag + ":" + level + ":" + message, args);
             }
-            catch(FormatException)
+            catch (FormatException)
             {
                 Trace(MvxTraceLevel.Error, tag, "Exception during trace of {0} {1}", level, message);
             }

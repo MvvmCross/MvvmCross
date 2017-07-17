@@ -1,20 +1,19 @@
-// MvxBindingBuilder.cs
+﻿// MvxBindingBuilder.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.IoC;
+
 namespace MvvmCross.Binding.tvOS.ValueConverters
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Globalization;
-
-    using MvvmCross.Platform.Converters;
-    using MvvmCross.Platform.IoC;
-
     internal class MvxUnifiedTypesValueConverter
         : MvxValueConverter
     {
@@ -25,9 +24,9 @@ namespace MvvmCross.Binding.tvOS.ValueConverters
         {
             var initDictionary = new Dictionary<Type, Type>()
                 {
-                    {typeof (float), typeof (nfloat)},
-                    {typeof (int), typeof (nint)},
-                    {typeof (uint), typeof (nuint)}
+                    { typeof(float), typeof(nfloat) },
+                    { typeof(int), typeof(nint) },
+                    { typeof(uint), typeof(nuint) }
                 };
 
             UnifiedTypeConversions = new ReadOnlyDictionary<Type, Type>(initDictionary);

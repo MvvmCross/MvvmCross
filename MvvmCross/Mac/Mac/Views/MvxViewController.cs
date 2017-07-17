@@ -1,15 +1,11 @@
+﻿using System;
+using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Mac.Views;
+
 namespace MvvmCross.Mac.Views
 {
-    using System;
-
-    using AppKit;
-    using Foundation;
-
-    using global::MvvmCross.Binding.BindingContext;
-    using global::MvvmCross.Core.ViewModels;
-
-    using MvvmCross.Platform.Mac.Views;
-
     public class MvxViewController
         : MvxEventSourceViewController
             , IMvxMacView
@@ -17,31 +13,30 @@ namespace MvvmCross.Mac.Views
         // Called when created from unmanaged code
         public MvxViewController(IntPtr handle) : base(handle)
         {
-            this.Initialize();
+            Initialize();
         }
 
         // Called when created directly from a XIB file
-        [Export("initWithCoder:")]
         public MvxViewController(NSCoder coder) : base(coder)
         {
-            this.Initialize();
+            Initialize();
         }
 
         // Call to load from the XIB/NIB file
         public MvxViewController(string viewName, NSBundle bundle) : base(viewName, bundle)
         {
-            this.Initialize();
+            Initialize();
         }
 
         // Call to load from the XIB/NIB file
         public MvxViewController(string viewName) : base(viewName, NSBundle.MainBundle)
         {
-            this.Initialize();
+            Initialize();
         }
 
         public MvxViewController() : base()
         {
-            this.Initialize();
+            Initialize();
         }
 
         // Shared initialization code
@@ -52,18 +47,46 @@ namespace MvvmCross.Mac.Views
 
         public object DataContext
         {
-            get { return this.BindingContext.DataContext; }
-            set { this.BindingContext.DataContext = value; }
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
         }
 
         public IMvxViewModel ViewModel
         {
-            get { return (IMvxViewModel)this.DataContext; }
-            set { this.DataContext = value; }
+            get { return (IMvxViewModel)DataContext; }
+            set { DataContext = value; }
         }
 
         public MvxViewModelRequest Request { get; set; }
 
         public IMvxBindingContext BindingContext { get; set; }
+    }
+
+    public class MvxViewController<TViewModel>
+        : MvxViewController, IMvxMacView<TViewModel> where TViewModel : class, IMvxViewModel
+    {
+        public MvxViewController()
+        {
+        }
+
+        public MvxViewController(IntPtr handle)
+            : base(handle)
+        {
+        }
+
+        protected MvxViewController(string nibName, NSBundle bundle)
+            : base(nibName, bundle)
+        {
+        }
+
+        public MvxViewController(NSCoder coder) : base(coder)
+        {
+        }
+
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
+        }
     }
 }

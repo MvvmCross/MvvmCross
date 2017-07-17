@@ -32,29 +32,20 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\MvvmCross.Plugins.File\HackFileShare\MvxIoFileStoreBase.cs">
       <Link>MvxIoFileStoreBase.cs</Link>
     </Compile>
-    <Compile Include="MvxWpfFileStore.cs" />
     <Compile Include="Plugin.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WpfFileStoreConfiguration.cs" />
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
       <Name>MvvmCross.Platform</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Platform\Wpf\MvvmCross.Platform.Wpf.csproj">
-      <Project>{3688d6fc-e7f4-485f-8b27-96c0a8c7eaed}</Project>
-      <Name>MvvmCross.Platform.Wpf</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvvmCross.Plugins.File\MvvmCross.Plugins.File.csproj">
       <Project>{19EE04D6-7EE0-4FE8-AB10-4623D93F165A}</Project>

@@ -15,6 +15,7 @@ The default presenter that comes with MvvmCross offers out of the box support fo
 - SplitView
 - Modal
 - Modal navigation
+- Nested modals
 
 Also if your app needs another kind of presentation mode, you can easily extend it!
 
@@ -32,7 +33,7 @@ The view root can be one of the following types:
 
 
 ### MvxChildPresentationAttribute
-Used to set a view as a _child_. You should use this attribute over a view class that will be displayed inside a navigation stack.
+Used to set a view as a _child_. You should use this attribute over a view class that will be displayed inside a navigation stack (modal or not).
 The view class can decide if wants to be displayed animated or not through the attribute member `Animated` (the default value is `true`).
 
 
@@ -43,6 +44,7 @@ There are several attribute members that the view class can customize:
 - WrapInNavigationController: If set to `true`, a modal navigation stack will be initiated (following child presentations will be displayed inside the modal stack). The default value is `false`.
 - ModalPresentationStyle: Corresponds to the `ModalPresentationStyle` property of UIViewController. The default value is `UIModalPresentationStyle.FullScreen`.
 - ModalTransitionStyle: Corresponds to the `ModalTransitionStyle` property of UIViewController. The default value is `UIModalTransitionStyle.CoverVertical`.
+- PreferredContentSize : Corresponds to the `PreferredContentSize` property of UIViewController. The property works for iPad only.
 - Animated: If set to true, the presentation will be animated. The default value is `true`.
 
 
@@ -75,9 +77,22 @@ There is an attribute member that can be used to customize the presentation:
 ## Views without attributes: Default values
 
 - If the initial view class of your app has no attribute over it, the presenter will assume stack navigation and will wrap your initial view in a `MvxNavigationController`.
-- If a view class has no attribute over it, the presenter will assume _animated_ child presentation.
+- If a view class has no attribute over it, the presenter will assume _animated_ child presentation and will display the view in the current navigation stack (could be modal or not).
 
+## Override a presentation attribute at runtime
+To override a presentation attribute at runtime you can implement the `IMvxOverridePresentationAttribute` in your view controller and determine the presentation attribute in the `PresentationAttribute` method like this:
+```c#
+public MvxBasePresentationAttribute PresentationAttribute()
+{
+    return new MvxModalPresentationAttribute
+    {
+        ModalPresentationStyle = UIModalPresentationStyle.OverFullScreen,
+        ModalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+    };
+}
+```
 
+If you return `null` from the `PresentationAttribute` the iOS View Presenter will fallback to the attribute used to decorate the view controller. If the view controller is not decorated with a presentation attribute it will use the default presentation attribute (a _animated_ child presentation).
 
 ## Extensibility
 The presenter is completely extensible! You can override any attribute and customize attribute members.

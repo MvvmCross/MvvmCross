@@ -1,10 +1,11 @@
-// MvxEventSourceAppCompatActivity.cs
+﻿// MvxEventSourceAppCompatActivity.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -12,19 +13,18 @@ using Android.Runtime;
 using Android.Support.V7.App;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Droid.Views;
-using System;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.EventSource
 {
     public abstract class MvxEventSourceAppCompatActivity
-        : AppCompatActivity
-        , IMvxEventSourceActivity
+        : AppCompatActivity, IMvxEventSourceActivity
     {
         protected MvxEventSourceAppCompatActivity()
         {
         }
 
-        protected MvxEventSourceAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected MvxEventSourceAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
         {
         }
 

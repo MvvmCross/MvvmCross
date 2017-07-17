@@ -5,16 +5,13 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Foundation;
+using MvvmCross.Binding.Views;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using System;
-
-    using Foundation;
-
-    using MvvmCross.Binding.Views;
-
-    using UIKit;
-
     public class MvxImageViewLoader
         : MvxBaseImageViewLoader<UIImage>
     {

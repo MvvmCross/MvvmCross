@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.UI;
 using Windows.UI.Xaml.Media;
+using MvvmCross.Platform.UI;
 
-namespace MvvmCross.Plugins.Color.WindowsCommon
+namespace MvvmCross.Plugins.Color.Uwp
 {
     public class MvxWindowsCommonColor : IMvxNativeColor
     {

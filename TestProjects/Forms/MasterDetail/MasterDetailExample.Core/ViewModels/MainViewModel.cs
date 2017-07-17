@@ -1,7 +1,7 @@
-﻿using MvvmCross.Core.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.ViewModels;
 
 namespace MasterDetailExample.Core.ViewModels
@@ -12,22 +12,30 @@ namespace MasterDetailExample.Core.ViewModels
     /// This sample will put a simple ListView in the Master and reacts to changes in 
     /// In every platform: use the right Presenter (MvxFormsDroidMasterDetailPagePresenter, ...)
     /// </summary>
-
     public class MainViewModel : MvxMasterDetailViewModel<RootContentViewModel>
     {
-        MenuItem _menuItem;
+        private MenuItem _menuItem;
         public MenuItem SelectedMenu {
-            get { return _menuItem; }
+            get { 
+                return _menuItem; 
+            }
             set {
                 if (SetProperty(ref _menuItem, value))
                     OnSelectedChangedCommand.Execute(value);
-            } }
+            } 
+        }
 
-        IEnumerable<MenuItem> _menu;
-        public IEnumerable<MenuItem> Menu { get { return _menu; } set { SetProperty(ref _menu, value); } }
+        private IEnumerable<MenuItem> _menu;
+        public IEnumerable<MenuItem> Menu 
+        { 
+            get { return _menu; } 
+            set { SetProperty(ref _menu, value); 
+            } 
+        }
 
-        MvxCommand<MenuItem> _onSelectedChangedCommand;
-        ICommand OnSelectedChangedCommand { get
+        private MvxCommand<MenuItem> _onSelectedChangedCommand;
+
+        private ICommand OnSelectedChangedCommand { get
             {
                 return _onSelectedChangedCommand ?? (_onSelectedChangedCommand = new MvxCommand<MenuItem>((item) =>
                 {

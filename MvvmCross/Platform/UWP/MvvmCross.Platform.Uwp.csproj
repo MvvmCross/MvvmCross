@@ -35,16 +35,19 @@
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Converters\MvxNativeValueConverter.cs" />
     <Compile Include="Platform\MvxDesignTimeHelper.cs" />
     <Compile Include="Platform\MvxPseudoAsyncExtensionMethods.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\MvvmCross.Platform.Uwp.rd.xml" />
   </ItemGroup>
   <ItemGroup>

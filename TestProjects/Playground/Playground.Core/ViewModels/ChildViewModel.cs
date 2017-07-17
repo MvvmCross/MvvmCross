@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 
 namespace Playground.Core.ViewModels
@@ -25,6 +24,15 @@ namespace Playground.Core.ViewModels
             get
             {
                 return _showSecondChildCommand ?? (_showSecondChildCommand = new MvxCommand(() => ShowViewModel<SecondChildViewModel>()));
+            }
+        }
+
+        private ICommand _showRootCommand;
+        public ICommand ShowRootCommand
+        {
+            get
+            {
+                return _showRootCommand ?? (_showRootCommand = new MvxCommand(() => ShowViewModel<RootViewModel>()));
             }
         }
     }

@@ -1,26 +1,24 @@
-// MvxAppCompatBaseImageViewTargetBinding.cs
+﻿// MvxAppCompatBaseImageViewTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Graphics;
+using Android.Support.V7.Widget;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Droid.Target;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
-    using System;
-
-    using Android.Graphics;
-    using Android.Support.V7.Widget;
-
-    using MvvmCross.Binding;
-    using MvvmCross.Binding.Droid.Target;
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public abstract class MvxAppCompatBaseImageViewTargetBinding
         : MvxAndroidTargetBinding
     {
-        protected AppCompatImageView ImageView => (AppCompatImageView)this.Target;
+        protected AppCompatImageView ImageView => (AppCompatImageView)Target;
 
         protected MvxAppCompatBaseImageViewTargetBinding(AppCompatImageView imageView)
             : base(imageView)
@@ -36,9 +34,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             try
             {
                 Bitmap bitmap;
-                if (!this.GetBitmap(value, out bitmap))
+                if (!GetBitmap(value, out bitmap))
                     return;
-                this.SetImageBitmap(imageView, bitmap);
+                SetImageBitmap(imageView, bitmap);
             }
             catch (Exception ex)
             {

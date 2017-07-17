@@ -5,11 +5,11 @@ using Android.Support.Design.Widget;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using MvvmCross.Platform.WeakSubscription;
-using MvvmCross.Droid.Support.V7.RecyclerView;
-using MvvmCross.Droid.Support.V4;
 using Example.Core.ViewModels;
 using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Support.V4;
+using MvvmCross.Droid.Support.V7.RecyclerView;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace Example.Droid.Fragments
 {

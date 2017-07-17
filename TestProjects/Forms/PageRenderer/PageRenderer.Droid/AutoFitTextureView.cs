@@ -13,17 +13,16 @@ public class AutoFitTextureView : TextureView
         public AutoFitTextureView(Context context)
             : this(context, null)
         {
-
         }
+
         public AutoFitTextureView(Context context, IAttributeSet attrs)
             : this(context, attrs, 0)
         {
-
         }
+
         public AutoFitTextureView(Context context, IAttributeSet attrs, int defStyle)
             : base(context, attrs, defStyle)
         {
-
         }
 
         public void SetAspectRatio(int width, int height)

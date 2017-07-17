@@ -1,19 +1,17 @@
-// MvxUIDatePickerTimeTargetBinding.cs
+﻿// MvxUIDatePickerTimeTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Reflection;
+using Foundation;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Target
 {
-    using System;
-    using System.Reflection;
-
-    using Foundation;
-
-    using UIKit;
-
     public class MvxUIDatePickerTimeTargetBinding : MvxBaseUIDatePickerTargetBinding
     {
         public MvxUIDatePickerTimeTargetBinding(object target, PropertyInfo targetPropertyInfo)

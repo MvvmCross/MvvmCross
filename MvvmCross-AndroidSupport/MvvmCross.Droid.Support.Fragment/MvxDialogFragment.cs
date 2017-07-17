@@ -1,15 +1,15 @@
-// MvxDialogFragment.cs
+﻿// MvxDialogFragment.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using System;
 using MvvmCross.Droid.Shared.Fragments;
 using MvvmCross.Droid.Support.V4.EventSource;
 
@@ -17,8 +17,7 @@ namespace MvvmCross.Droid.Support.V4
 {
     [Register("mvvmcross.droid.support.v4.MvxDialogFragment")]
     public abstract class MvxDialogFragment
-        : MvxEventSourceDialogFragment
-        , IMvxFragmentView
+        : MvxEventSourceDialogFragment, IMvxFragmentView
     {
         protected MvxDialogFragment()
         {
@@ -27,7 +26,8 @@ namespace MvvmCross.Droid.Support.V4
 
         protected MvxDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public IMvxBindingContext BindingContext { get; set; }
 
@@ -35,7 +35,10 @@ namespace MvvmCross.Droid.Support.V4
 
         public object DataContext
         {
-            get { return _dataContext; }
+            get
+            {
+                return _dataContext;
+            }
             set
             {
                 _dataContext = value;
@@ -57,40 +60,47 @@ namespace MvvmCross.Droid.Support.V4
 
         public virtual string UniqueImmutableCacheTag => Tag;
 
+
+        public override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            ViewModel?.ViewCreated();
+        }
+
         public override void OnDestroy()
         {
             base.OnDestroy();
-            ViewModel?.Destroy();
+            ViewModel?.ViewDestroy();
         }
 
         public override void OnStart()
         {
             base.OnStart();
-            ViewModel.Appearing();
+            ViewModel?.ViewAppearing();
         }
 
         public override void OnResume()
         {
             base.OnResume();
-            ViewModel.Appeared();
+            ViewModel?.ViewAppeared();
         }
 
         public override void OnPause()
         {
             base.OnPause();
-            ViewModel.Disappearing();
+            ViewModel?.ViewDisappearing();
         }
 
         public override void OnStop()
         {
             base.OnStop();
-            ViewModel.Disappeared();
+            ViewModel?.ViewDisappeared();
         }
     }
 
     public abstract class MvxDialogFragment<TViewModel>
-        : MvxDialogFragment
-        , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        : MvxDialogFragment, IMvxFragmentView<TViewModel>
+        where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {

@@ -18,8 +18,7 @@ namespace MvvmCross.CodeAnalysis.Test
         
         protected override CodeFixProvider GetCSharpCodeFixProvider() => new TU();
     }
-
-
+    
     /// <summary>
     /// Superclass of all Unit tests made for diagnostics with codefixes.
     /// Contains methods used to verify correctness of codefixes

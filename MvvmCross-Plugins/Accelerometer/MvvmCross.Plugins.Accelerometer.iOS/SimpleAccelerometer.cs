@@ -18,7 +18,7 @@ namespace MvvmCross.Plugins.Accelerometer.iOS
     public class MvxAccelerometer
         : IMvxAccelerometer
     {
-        private bool _initialized = false;
+        private bool _initialized;
 
         public void Start()
         {

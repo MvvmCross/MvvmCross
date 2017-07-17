@@ -1,24 +1,22 @@
-// MvxAppCompatAutoCompleteTextView.cs
+﻿// MvxAppCompatAutoCompleteTextView.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using Android.Content;
+using Android.Runtime;
+using Android.Support.V7.Widget;
+using Android.Util;
+using Android.Widget;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.Droid.Views;
+
 namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 {
-    using System;
-    using System.Collections;
-
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Support.V7.Widget;
-    using Android.Util;
-    using Android.Widget;
-
-    using MvvmCross.Binding.Attributes;
-    using MvvmCross.Binding.Droid.Views;
-
     [Register("mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatAutoCompleteTextView")]
     public class MvxAppCompatAutoCompleteTextView
         : AppCompatAutoCompleteTextView
@@ -32,8 +30,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
         }
 
         public MvxAppCompatAutoCompleteTextView(Context context, IAttributeSet attrs,
-                                       MvxFilteringAdapter adapter)
-            : base(context, attrs)
+            MvxFilteringAdapter adapter) : base(context, attrs)
         {
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             adapter.ItemTemplateId = itemTemplateId;
@@ -70,10 +67,13 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         public new MvxFilteringAdapter Adapter
         {
-            get { return base.Adapter as MvxFilteringAdapter; }
+            get
+            {
+                return base.Adapter as MvxFilteringAdapter;
+            }
             set
             {
-                var existing = this.Adapter;
+                var existing = Adapter;
                 if (existing == value)
                     return;
 
@@ -117,7 +117,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
         public object SelectedObject
         {
-            get { return _selectedObject; }
+            get
+            {
+                return _selectedObject;
+            }
             private set
             {
                 if (_selectedObject == value)

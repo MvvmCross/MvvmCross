@@ -5,10 +5,10 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+
 namespace MvvmCross.tvOS.Views
 {
-    using System;
-
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxFromStoryboardAttribute : Attribute
     {
@@ -16,7 +16,7 @@ namespace MvvmCross.tvOS.Views
 
         public MvxFromStoryboardAttribute(string storyboardName = null)
         {
-            this.StoryboardName = storyboardName;
+            StoryboardName = storyboardName;
         }
     }
 }

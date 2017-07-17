@@ -1,25 +1,22 @@
-// MvxTableViewSource.cs
+﻿// MvxTableViewSource.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+using Foundation;
+using MvvmCross.Binding.Attributes;
+using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Platform;
+using MvvmCross.Platform.WeakSubscription;
+using UIKit;
+
 namespace MvvmCross.Binding.iOS.Views
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Specialized;
-
-    using Foundation;
-
-    using MvvmCross.Binding.Attributes;
-    using MvvmCross.Binding.ExtensionMethods;
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.WeakSubscription;
-
-    using UIKit;
-
     public abstract class MvxTableViewSource : MvxBaseTableViewSource
     {
         private IEnumerable _itemsSource;
@@ -53,10 +50,13 @@ namespace MvvmCross.Binding.iOS.Views
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return _itemsSource; }
+            get
+            {
+                return _itemsSource;
+            }
             set
             {
-                if (Object.ReferenceEquals(_itemsSource, value)
+                if (ReferenceEquals(_itemsSource, value)
                     && !ReloadOnAllItemsSourceSets)
                     return;
 

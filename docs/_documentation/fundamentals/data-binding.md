@@ -156,7 +156,7 @@ Further, MvvmCross provides some supporting base classes to help with writing va
 - `MvxValueConverter<TFrom>`
 - `MvxValueConverter<TFrom, TTo>`
 
-As an example, a `LengthValueConverter` which is only used to help display the lenght of a string - with no `ConvertBack` use - might be implemented:
+As an example, a `LengthValueConverter` which is only used to help display the length of a string - with no `ConvertBack` use - might be implemented:
 
 ```c#
 public class LengthValueConverter
@@ -199,7 +199,7 @@ While we have used the terms `View` and `ViewModel` throughout this article, you
 `ViewModel` and `DataContext` can be considered as the same thing.
 
 
-##MvvmCross Databinding
+## MvvmCross Databinding
 
 Databinding has always been at the heart of MvvmCross, and the functionality has grown over the different versions of MvvmCross.
   
@@ -268,7 +268,7 @@ As the MvvmCross binding format evolved from its JSON origins through to Swiss a
 
 The future of MvvmCross continues to aim to include cosmetic improvements, but also aims to deliver functional enhancements as well.
 
-The current ideads for improvements and enhancements include:
+The current ideas for improvements and enhancements include:
 
 - Tibet binding
   - multi-binding
@@ -361,7 +361,7 @@ Beyond this basic `$TargetPath$` to `$SourcePath$` syntax:
   
   - the `ToString()` representation of an Enum value.
   
-  This is especially useful in, for example, the binding of `Visibililty` properties.
+  This is especially useful in, for example, the binding of `Visibility` properties.
 
 - If a specific Binding Mode is needed, then this can be added:
 
@@ -439,7 +439,84 @@ where `$ViewObject$` is the view target for binding.
 
 where `$ViewProperty$` is the property on the view for binding.
 
-If `For` is not provided, then the default view property is used - e.g. for a `UILabel` the default is `Text`
+If `For` is not provided, then the default view property is used. The following tables show all the default bindings used for each platforms control type.
+
+**Android**
+
+Base Control | Default
+---- | ---------
+Android.Widget.Button| Click
+Android.Widget.CheckBox | Checked
+Android.Widget.TextView | Text
+Android.Widget.CompoundButton | Checked
+Android.Widget.SeekBar | Progress
+Android.Widget.SearchView | Query
+MvvmCross.Binding.Droid.Views.MvxListView | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxLinearLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxGridView | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxRelativeLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxFrameLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxTableLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxFrameControl | DataContext
+MvvmCross.Binding.Droid.Views.MvxImageView | ImageUrl
+MvvmCross.Binding.Droid.Views.MvxDatePicker | Value
+MvvmCross.Binding.Droid.Views.MvxTimePicker | Value
+
+**iOS**
+
+Base Control | Default
+---- | ---------
+UIKit.UIButton | TouchUpInside
+UIKit.UIBarButtonItem | Clicked
+UIKit.UISearchBar | Text
+UIKit.UITextField | Text
+UIKit.UITextView | Text
+UIKit.UILabel | Text
+UIKit.UIImageView | Image
+UIKit.UIDatePicker | Date
+UIKit.UISlider | Value
+UIKit.UISwitch | On
+UIKit.UIProgressView | Progress
+UIKit.UISegmentedControl | SelectedSegment
+UIKit.UIPageControl | CurrentPage
+UIKit.UIActivityIndicatorView | Hidden
+MvvmCross.Binding.iOS.Views.MvxCollectionViewSource | ItemsSource
+MvvmCross.Binding.iOS.Views.MvxTableViewSource | ItemsSource
+MvvmCross.Binding.iOS.Views.MvxImageView | ImageUrl
+MvvmCross.Binding.iOS.Views.MvxImageViewLoader | ImageUrl
+
+**Mac**
+
+Base Control | Default
+---- | ---------
+AppKit.NSButton | Activated
+AppKit.NSButtonCell | Activated
+AppKit.NSSegmentedControl | SelectedSegment
+AppKit.NSSearchField | Text
+AppKit.NSTextField | StringValue
+AppKit.NSTextView | StringValue
+AppKit.NSImageView | Image
+AppKit.NSDatePicker | Date
+AppKit.NSSlider | IntValue
+
+**tvOS**
+
+Base Control | Default
+---- | ---------
+UIKit.UIButton | TouchUpInside
+UIKit.UIBarButtonItem | Clicked
+UIKit.UISearchBar | Text
+UIKit.UITextField | Text
+UIKit.UITextView | Text
+UIKit.UILabel | Text
+UIKit.UIImageView | Image
+UIKit.UIProgressView | Progress
+UIKit.UISegmentedControl | SelectedSegment
+UIKit.UIActivityIndicatorView | Hidden
+MvvmCross.Binding.tvOS.Views.MvxCollectionViewSource | ItemsSource
+MvvmCross.Binding.tvOS.Views.MvxTableViewSource | ItemsSource
+MvvmCross.Binding.tvOS.Views.MvxImageView | ImageUrl
+MvvmCross.Binding.tvOS.Views.MvxImageViewLoader | ImageUrl
 
     To(vm => vm.$ViewModelPath$)
 
@@ -479,15 +556,184 @@ Using this syntax, an example binding set is:
         .FallbackValue(true);
      set.Apply();  
 
-In addition to the `Expression` based Fluent bindings, string based Fluent bindings are also available. This is particularly useful for situations where bindings are needed to View events or to binding targets which are not fully exposed as C# properties. For example, even though a `UIButton` does not have a `Title` property in C#, a 'Title' property can still be set using:
+ **Note:** when using a fluent binding, always remember to use `.Apply()` - if this is missed then the binding won't ever be created.
+
+### MvvmCross Defined Custom bindings
+
+In addition to the `Expression` based Fluent bindings, `String` and `Extension Method` based Fluent bindings are also available. They are particularly useful for situations where bindings are needed to View events or to binding targets which are not fully exposed as C# properties. For example, even though a `UIButton` does not have a `Title` property in C#, a `Title` property can still be set via the use of custom bindings:
 
     set.Bind(okButton)
        .For("Title")
        .To(vm => vm.Caption);
            
+    set.Bind(okButton)
+        .For(c => c.BindText())
+        .To(vm => vm.Caption);
 
-**Note:** when using a fluent binding, always remember to use `.Apply()` - if this is missed then the binding won't ever be created.
+The following tables shows all the custom bindings offered by MvvmCross. 
 
+ **Note:** When using extension method based bindings you will have to include the relevant using namespace to access the extension methods. Additionally, extension method based bindings is only supported starting with MvvmCross 5.
+
+**Android - `using MvvmCross.Binding.Droid`**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Android.Views.View | Visible | BindVisible()
+Android.Views.View | Hidden | BindHidden()
+Android.Views.View | Click | BindClick()
+Android.Views.View | LongClick | BindLongClick()
+Android.Widget.TextView | Text | BindText()
+Android.Widget.TextView | TextFormatted | BindTextFormatted()
+Android.Widget.CompoundButton | Checked | BindChecked()
+Android.Widget.SeekBar | Progress | BindProgress()
+Android.Widget.ImageView | Bitmap | BindBitmap()
+Android.Widget.ImageView | Drawable | BindDrawable()
+Android.Widget.ImageView | DrawableId | BindDrawableId()
+Android.Widget.ImageView | DrawableName | BindDrawableName()
+Android.Widget.ImageView | ResourceName | BindResourceName()
+Android.Widget.ImageView | AssetImagePath | BindAssetImagePath()
+Android.Widget.EditText | TextFocus | BindTextFocus()
+Android.Widget.SearchView | Query | BindQuery()
+Android.Widget.RatingBar | Rating | BindRating()
+Android.Widget.AdapterView | SelectedItemPosition | BindSelectedItemPosition()
+Android.Preferences.Preference | Value | BindValue()
+Android.Preferences.EditTextPreference | Text | BindText()
+Android.Preferences.ListPreference | Value | BindValue()
+Android.Preferences.TwoStatePreference | Checked | BindChecked()
+MvvmCross.Binding.Droid.Views.MvxAutoCompleteTextView | PartialText | BindPartialText()
+MvvmCross.Binding.Droid.Views.MvxAutoCompleteTextView | SelectedObject | BindSelectedObject()
+MvvmCross.Binding.Droid.Views.MvxSpinner | SelectedItem | BindSelectedItem()
+MvvmCross.Binding.Droid.Views.MvxListView | SelectedItem | BindSelectedItem()
+MvvmCross.Binding.Droid.Views.MvxExpandableListView | SelectedItem | BindSelectedItem()
+MvvmCross.Binding.Droid.Views.MvxRadioGroup | SelectedItem | BindSelectedItem()
+
+**Android - `using MvvmCross.Plugins.Color.Droid`**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Android.Widget.TextView | TextColor | BindTextColor()
+Android.Views.View | BackgroundColor | BindBackgroundColor()
+
+**Android - `using MvvmCross.Droid.Support.V7.AppCompat`**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Android.Support.V7.Widget.SearchView | Query | BindQuery()
+Android.Support.V7.Widget.Toolbar | Subtitle | BindSubtitle()
+MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatAutoCompleteTextView | PartialText | BindPartialText()
+MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatAutoCompleteTextView | SelectedObject | BindSelectedObject()
+MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatSpinner | SelectedItem | BindSelectedItem()
+MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatRadioGroup | SelectedItem | BindSelectedItem()
+
+**Android - `using MvvmCross.Droid.Support.V7.Preference`**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Android.Support.V7.Preferences.Preference | Value | BindValue()
+Android.Support.V7.Preferences.ListPreference | Value | BindValue()
+Android.Support.V7.Preferences.EditTextPreference | Text | BindText()
+Android.Support.V7.Preferences.TwoStatePreference | Checked | BindChecked()
+
+**iOS - `using MvvmCross.Binding.iOS`**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+UIKit.UIControl | TouchDown | BindTouchDown()
+UIKit.UIControl | TouchDownRepeat | BindTouchDownRepeat()
+UIKit.UIControl | TouchDragInside | BindTouchDragInside()
+UIKit.UIControl | TouchUpInside | BindTouchUpInside()
+UIKit.UIControl | ValueChanged | BindValueChanged()
+UIKit.UIControl | PrimaryActionTriggered | BindPrimaryActionTriggered()
+UIKit.UIControl | EditingDidBegin | BindEditingDidBegin()
+UIKit.UIControl | EditingChanged | BindEditingChanged()
+UIKit.UIControl | EditingDidEnd | BindEditingDidEnd()
+UIKit.UIControl | EditingDidEndOnExit | BindEditingDidEndOnExit()
+UIKit.UIControl | AllTouchEvents | BindAllTouchEvents()
+UIKit.UIControl | AllEditingEvents | BindAllEditingEvents()
+UIKit.UIControl | AllEvents | BindAllEvents()
+UIKit.UIActivityIndicatorView | Hidden | BindHidden()
+UIKit.UISlider | Value | BindValue()
+UIKit.UIStepper | Value | BindValue()
+UIKit.UISegmentedControl | SelectedSegment | BindSelectedSegment()
+UIKit.UIPageControl | CurrentPage | BindCurrentPage()
+UIKit.UIDatePicker | Date | BindDate()
+UIKit.UITextField | ShouldReturn | BindShouldReturn()
+UIKit.UIDatePicker | Time | BindTime()
+UIKit.UILabel | Text | BindText()
+UIKit.UITextField | Text | BindText()
+UIKit.UITextView | Text | BindText()
+UIKit.UISwitch | On | BindOn()
+UIKit.UISearchBar | Text | BindText()
+UIKit.UIButton | Title | BindTitle()
+UIKit.UIButton | DisabledTitle | BindDisabledTitle()
+UIKit.UIButton | HighlightedTitle | BindHighlightedTitle()
+UIKit.UIButton | SelectedTitle | BindSelectedTitle()
+UIKit.UIView | Tap | BindTap()
+UIKit.UIView | Hidden | BindHidden()
+UIKit.UIView | Visible | BindVisible()
+UIKit.UIView | DoubleTap | BindDoubleTap()
+UIKit.UIView | TextFocus | BindTextFocus()
+UIKit.UIView | Visibility | BindVisibility()
+UIKit.UIView | TwoFingerTap | BindTwoFingerTap()
+UIKit.UIView | LayerBorderWidth | BindLayerBorderWidth()
+
+**Mac - `using MvvmCross.Binding.Mac`**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+AppKit.NSView | Visibility | BindVisibility()
+AppKit.NSView | Visible | BindVisible()
+AppKit.NSSlider | IntValue | BindIntValue()
+AppKit.NSSegmentedControl | SelectedSegment | BindSelectedSegment()
+AppKit.NSDatePicker | Time | BindTime()
+AppKit.NSDatePicker | Date | BindDate()
+AppKit.NSTextField | StringValue | BindStringValue()
+AppKit.NSTextView | StringValue | BindStringValue()
+AppKit.NSButton | Visibility | BindVisibility()
+AppKit.NSButton | Title | BindTitle()
+AppKit.NSSearchField | Text | BindText()
+
+**tvOS - `using MvvmCross.Binding.tvOS`**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+UIKit.UIControl | TouchUpInside | BindTouchUpInside()
+UIKit.UIControl | ValueChanged | BindValueChanged()
+UIKit.UIActivityIndicatorView | Hidden | BindHidden()
+UIKit.UISegmentedControl | SelectedSegment | BindSelectedSegment()
+UIKit.UITextField | ShouldReturn | BindShouldReturn()
+UIKit.UILabel | Text | BindText()
+UIKit.UITextField | Text | BindText()
+UIKit.UITextView | Text | BindText()
+UIKit.UISearchBar | Text | BindText()
+UIKit.UIButton | Title | BindTitle()
+UIKit.UIButton | DisabledTitle | BindDisabledTitle()
+UIKit.UIButton | HighlightedTitle | BindHighlightedTitle()
+UIKit.UIButton | SelectedTitle | BindSelectedTitle()
+UIKit.UIView | Tap | BindTap()
+UIKit.UIView | Hidden | BindHidden()
+UIKit.UIView | Visible | BindVisible()
+UIKit.UIView | TextFocus | BindTextFocus()
+UIKit.UIView | DoubleTap | BindDoubleTap()
+UIKit.UIView | Visibility | BindVisibility()
+UIKit.UIView | TwoFingerTap | BindTwoFingerTap()
+UIKit.UIView | LayerBorderWidth | BindLayerBorderWidth()
+
+**UWP - `using MvvmCross.Binding.Uwp`**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Windows.UI.Xaml.FrameworkElement | Visible | BindVisible()
+Windows.UI.Xaml.FrameworkElement | Collapsed | BindCollapsed()
+Windows.UI.Xaml.FrameworkElement | Hidden | BindHidden()
+
+**WPF - `using MvvmCross.BindingEx.Wpf` / `using MvvmCross.BindingEx.WindowsCommon`**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Windows.UI.Xaml.FrameworkElement | Visible | BindVisible()
+Windows.UI.Xaml.FrameworkElement | Collapsed | BindCollapsed()
+Windows.UI.Xaml.FrameworkElement | Hidden | BindHidden()
 
 ### Tibet
 
@@ -572,7 +818,7 @@ Notes:
 - some ValueCombiners are also available in `operator` form - e.g. `Add` can be used as `+` and `GreaterThan` can be used as `>`
 - combination is an interpretation, not a compilation step - especially because dynamic code generation is not supported on all MvvmCross platforms.
 - for direct comparison/combination of simple `string`, `long` and `double` values, this 'interpretation' should work well. Using combiners for more complicated combinations is less well defined.
-- currenly ValueCombiners typically try to use `long` rather than `int` and `double` rather than `float`.
+- currently ValueCombiners typically try to use `long` rather than `int` and `double` rather than `float`.
 
 **Important note:** The current interface of value combiners is currently a proposal and working prototype only. As we learn more about the real use, benefits and challenges of value combination we may revise the API, including making breaking changes to any value combiners produced by the community. In particular, it's possible we may make changes to the type safety of the APIs, and we may try to reduce the complexity of the APIs - as Value Combiners are currently quite 'open' in the source/target types they accept and this makes developing them quite complicated.
 
@@ -606,7 +852,7 @@ Ideas being considered in this area include:
 
 - access to `parent`, `global` and `named(name)` binding contexts
 - access to shared variables - e.g, shared numbers, strings and Colors which could provide more theming/styling options
-- access to i18n resources to make text localisation more straight-forward
+- access to i18n resources to make text localization more straight-forward
 
 It is likely that that prefix characters, such as `$`, `#` or `@`, might be used as simple markers to enable the identification of these 'macros'
 
@@ -638,9 +884,9 @@ For example, Length and Trim value converters could be applied with the Add valu
 
 Tibet binding provides developers with many options for more advanced bindings.
 
-This advancement is, of course, not free - it does come with a small memory and processing cost during both the construction and the exceution of the bindings.
+This advancement is, of course, not free - it does come with a small memory and processing cost during both the construction and the execution of the bindings.
 
-In general, this additional overhead is very small and so should not be of concern to developers. However, it's always important to be aware of your application's performance - so always consider how a binding will be constructed and evaluated, especially when applying large numbers of bindings, when applying bindings within loops (collections) or when applying bindings to data which changes very frequently. Always consider applying source (ViewModel-based) data manipulation, writing a single optimised combiner/converter or consider simple `OneTime` binding as potential ways to avoid performance issues.
+In general, this additional overhead is very small and so should not be of concern to developers. However, it's always important to be aware of your application's performance - so always consider how a binding will be constructed and evaluated, especially when applying large numbers of bindings, when applying bindings within loops (collections) or when applying bindings to data which changes very frequently. Always consider applying source (ViewModel-based) data manipulation, writing a single optimized combiner/converter or consider simple `OneTime` binding as potential ways to avoid performance issues.
 
 ### Rio
 
@@ -673,7 +919,7 @@ and this is further enhanced using `ICommand` properties for action callbacks - 
 
 This syntax is well understood by experienced Mvvm developers, but can also appear quite verbose when dealing with very small view models.
 
-Some developers have worked around this verbosity by using techniques such as post-compilation injectio of code - e.g. using the AOP Property plugin from Fody.
+Some developers have worked around this verbosity by using techniques such as post-compilation injection of code - e.g. using the AOP Property plugin from Fody.
 
 Rio binding offers developers a different approach - using the new FieldBinding and MethodBinding plugins.
 
@@ -700,7 +946,7 @@ To use FieldBinding, import the Field binding plugin into both your `core` and y
 
 **Notes:** 
 
-- In addition to the syntatic changes of Rio, there are also some slight performance improvements - achieved by avoiding some Reflection-based get/set and by avoiding string-based event notifications.
+- In addition to the syntactic changes of Rio, there are also some slight performance improvements - achieved by avoiding some Reflection-based get/set and by avoiding string-based event notifications.
 - `INotifyChanged` binding has no way to support the `INotifyPropertyChanged` feature 'all changed' which is achieved by signalling a property change with a null or empty property name.
 - `INotifyChanged` itself is a very simple interface - so you can easily implement your own classes to implement this if you require extensions.
 
@@ -775,7 +1021,7 @@ is equivalent to a `INotifyPropertyChanged` ViewModel of:
            }
         } 
         
-     	private double _precent;
+     	private double _percent;
         public double Percent
         {
            get { return _percent; }
@@ -815,7 +1061,7 @@ is equivalent to a `INotifyPropertyChanged` ViewModel of:
      
 **BindingEx - Tibet and Rio in Xaml**
 
-Xaml is a platform and product from Microsoft which offers excellent tooling, lots of extensibility for adding new controls, but only limited extensibility for adding customisation.
+Xaml is a platform and product from Microsoft which offers excellent tooling, lots of extensibility for adding new controls, but only limited extensibility for adding customization.
 
 Unfortunately, this means MvvmCross can't intercept the 'normal' Xaml binding syntax which might look like:
 
@@ -826,12 +1072,12 @@ However, MvvmCross Swiss, Tibet and Rio binding can be enabled through `Attached
 In particular two `AttachedProperties` is supplied in the BindingEx package:
 
 - `mvx:Bi.nd` - for bindings
-- `mvx:La.ng` - for internationalisation extensions
+- `mvx:La.ng` - for internationalization extensions
 
-To add these properties to your Windows Phone, Store or WPF MvvmCross app:
+To add these properties to your Windows Uwp or WPF MvvmCross app:
 
-- include the BindingEx package
-- include an additional step in Setup which initialises the WindowsBinding framework
+- include the MvvmCross.Binding package
+- include an additional step in Setup which initializes the WindowsBinding framework
 
         protected override void InitializeLastChance()
         {
@@ -843,17 +1089,13 @@ To add these properties to your Windows Phone, Store or WPF MvvmCross app:
 
 - in your Xaml files include an xml attribute for `mvx` - this will be different according to the platform:
 
- - phone
- 
-       xmlns:mvx="clr-namespace:mvx;assembly=Cirrious.MvvmCross.BindingEx.WindowsPhone"
- 
- - store
+ - Uwp
  
        xmlns:mvx="using:mvx"
         
  - WPF
 
-       xmlns:mvx="clr-namespace:mvx;assembly=Cirrious.MvvmCross.BindingEx.Wpf"
+       xmlns:mvx="clr-namespace:mvx;assembly=MvvmCross.Binding.Wpf"
 
 
 - in your Xaml files you can now include bindings within tags such as:
@@ -872,3 +1114,13 @@ The framework that enables the Rio and Tibet binding extensions is interface-bas
 We're excited by the possibilities that this framework can provide - by the inventions that the community can now develop.
 
 Anyone wishing to experiment with creating their own source binding plugins is encouraged to get started by looking at the source code for the MethodBinding and FieldBinding plugins.
+
+### Generic and typed bindings
+
+This change will add a generic "WithConversion" method. This will allow developers to strongly type the use of value converters, making refactoring a lot easier and more save. For example:
+
+```c#
+set.Bind(textField).To(vm => vm.Counter).WithConversion<SomeValueConverter>();
+```
+
+Add something about the Generic implementation of IMvxTargetBinding [#1610](https://github.com/MvvmCross/MvvmCross/pull/1610)

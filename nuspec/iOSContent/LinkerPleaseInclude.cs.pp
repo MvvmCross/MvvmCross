@@ -113,5 +113,10 @@ namespace $rootnamespace$
         {
             changed.PropertyChanged += (sender, e) => { var test = e.PropertyName; };
         }
+        
+        public void Include(MvvmCross.Core.Navigation.MvxNavigationService navigationService)
+        {
+            navigationService = new MvvmCross.Core.Navigation.MvxNavigationService()
+        }
     }
 }

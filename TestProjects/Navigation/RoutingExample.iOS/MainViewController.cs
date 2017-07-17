@@ -1,10 +1,8 @@
-using Foundation;
 using System;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Views;
-using RoutingExample.Core.ViewModels;
-using UIKit;
 using MvvmCross.iOS.Views.Presenters.Attributes;
+using RoutingExample.Core.ViewModels;
 
 namespace RoutingExample.iOS
 {

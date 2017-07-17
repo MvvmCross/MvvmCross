@@ -6,9 +6,9 @@ namespace Example.Core.ViewModels
     {
         public LoginViewModel()
         {
-            this.Username = "TestUser";
-            this.Password = "YouCantSeeMe";
-            this.IsLoading = false;
+            Username = "TestUser";
+            Password = "YouCantSeeMe";
+            IsLoading = false;
         }
 
         private string _username;
@@ -16,10 +16,7 @@ namespace Example.Core.ViewModels
         public string Username
         {
             get { return _username; }
-            set
-            {
-                SetProperty(ref _username, value);
-            }
+            set { SetProperty(ref _username, value); }
         }
 
         private string _password;
@@ -27,10 +24,7 @@ namespace Example.Core.ViewModels
         public string Password
         {
             get { return _password; }
-            set
-            {
-                SetProperty(ref _password, value);
-            }
+            set { SetProperty(ref _password, value); }
         }
 
         private bool _isLoading = false;
@@ -38,17 +32,18 @@ namespace Example.Core.ViewModels
         public bool IsLoading
         {
             get { return _isLoading; }
-            set
-            {
-                SetProperty(ref _isLoading, value);
-            }
+            set { SetProperty(ref _isLoading, value); }
         }
 
         public virtual IMvxCommand LoginCommand
         {
             get
             {
-				return new MvxCommand(() => ShowViewModel<HomeViewModel>());
+				return new MvxCommand(() =>
+				{
+					IsLoading = !IsLoading; //Toggle for testing
+					ShowViewModel<HomeViewModel>();
+				});
             }
         }
     }

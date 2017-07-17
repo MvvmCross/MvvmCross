@@ -40,7 +40,7 @@ This package contains the 'ResourceLoader' plugin for MvvmCross</description>
 		<!-- uwp  -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.dll" target="lib\uap10.0\MvvmCross.Plugins.ResourceLoader.dll" />
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Plugins.ResourceLoader.pdb" target="lib\uap10.0\MvvmCross.Plugins.ResourceLoader.pdb" />
-		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Plugins.ResourceLoader.Wpf.*" target="lib\uap10.0" />
+		<file src="..\bin\Release\Mvx\Uwp\MvvmCross.Plugins.ResourceLoader.Uwp.*" target="lib\uap10.0" />
 		<file src="BootstrapContent\ResourceLoaderPluginBootstrap.cs.pp" target="content\uap10.0\Bootstrap\ResourceLoaderPluginBootstrap.cs.pp" />
 
 		<!-- droid -->

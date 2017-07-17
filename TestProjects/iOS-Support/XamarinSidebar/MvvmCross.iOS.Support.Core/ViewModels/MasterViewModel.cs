@@ -1,11 +1,17 @@
+using System;
+using MvvmCross.Core.Navigation;
+using MvvmCross.Core.ViewModels;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels
 {
-    using MvvmCross.Core.ViewModels;
-
     public class MasterViewModel : BaseViewModel
     {
-        public MasterViewModel()
+        private readonly IMvxNavigationService _navigationService;
+
+        public MasterViewModel(IMvxNavigationService navigationService)
         {
+            _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
+
             ExampleValue = "Master View";
         }
 
@@ -19,7 +25,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels
 
         private void ShowDetailCommandExecuted()
         {
-            ShowViewModel<DetailViewModel>();
+            _navigationService.Navigate<DetailViewModel>();
         }
     }
 }

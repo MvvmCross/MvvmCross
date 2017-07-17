@@ -5,37 +5,37 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Binding.Bindings.Source.Construction;
+using MvvmCross.Binding.Bindings.SourceSteps;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Platform;
+
 namespace MvvmCross.Binding
 {
-    using MvvmCross.Binding.Bindings.Source.Construction;
-    using MvvmCross.Binding.Bindings.SourceSteps;
-    using MvvmCross.Binding.Bindings.Target.Construction;
-    using MvvmCross.Platform;
-
     public class MvxBindingBuilder : MvxCoreBindingBuilder
     {
         public override void DoRegistration()
         {
             base.DoRegistration();
-            this.RegisterBindingFactories();
+            RegisterBindingFactories();
         }
 
         protected virtual void RegisterBindingFactories()
         {
-            this.RegisterMvxBindingFactories();
+            RegisterMvxBindingFactories();
         }
 
         protected virtual void RegisterMvxBindingFactories()
         {
-            this.RegisterSourceStepFactory();
-            this.RegisterSourceFactory();
-            this.RegisterTargetFactory();
+            RegisterSourceStepFactory();
+            RegisterSourceFactory();
+            RegisterTargetFactory();
         }
 
         protected virtual void RegisterSourceStepFactory()
         {
-            var sourceStepFactory = this.CreateSourceStepFactoryRegistry();
-            this.FillSourceStepFactory(sourceStepFactory);
+            var sourceStepFactory = CreateSourceStepFactoryRegistry();
+            FillSourceStepFactory(sourceStepFactory);
             Mvx.RegisterSingleton<IMvxSourceStepFactoryRegistry>(sourceStepFactory);
             Mvx.RegisterSingleton<IMvxSourceStepFactory>(sourceStepFactory);
         }
@@ -54,12 +54,12 @@ namespace MvvmCross.Binding
 
         protected virtual void RegisterSourceFactory()
         {
-            var sourceFactory = this.CreateSourceBindingFactory();
+            var sourceFactory = CreateSourceBindingFactory();
             Mvx.RegisterSingleton<IMvxSourceBindingFactory>(sourceFactory);
             var extensionHost = sourceFactory as IMvxSourceBindingFactoryExtensionHost;
             if (extensionHost != null)
             {
-                this.RegisterSourceBindingFactoryExtensions(extensionHost);
+                RegisterSourceBindingFactoryExtensions(extensionHost);
                 Mvx.RegisterSingleton<IMvxSourceBindingFactoryExtensionHost>(extensionHost);
             }
             else
@@ -78,10 +78,10 @@ namespace MvvmCross.Binding
 
         protected virtual void RegisterTargetFactory()
         {
-            var targetRegistry = this.CreateTargetBindingRegistry();
+            var targetRegistry = CreateTargetBindingRegistry();
             Mvx.RegisterSingleton<IMvxTargetBindingFactoryRegistry>(targetRegistry);
             Mvx.RegisterSingleton<IMvxTargetBindingFactory>(targetRegistry);
-            this.FillTargetFactories(targetRegistry);
+            FillTargetFactories(targetRegistry);
         }
 
         protected virtual IMvxTargetBindingFactoryRegistry CreateTargetBindingRegistry()

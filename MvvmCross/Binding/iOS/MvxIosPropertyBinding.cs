@@ -1,4 +1,4 @@
-// MvxIosPropertyBinding.cs
+﻿// MvxIosPropertyBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,14 +9,26 @@ namespace MvvmCross.Binding.iOS
 {
     internal static class MvxIosPropertyBinding
     {
+		public const string UIControl_TouchDown = "TouchDown";
+		public const string UIControl_TouchDownRepeat = "TouchDownRepeat";
+		public const string UIControl_TouchDragInside = "TouchDragInside";
         public const string UIControl_TouchUpInside = "TouchUpInside";
         public const string UIControl_ValueChanged = "ValueChanged";
-        public const string UIView_Visibility = "Visibility";
+		public const string UIControl_PrimaryActionTriggered = "PrimaryActionTriggered";
+		public const string UIControl_EditingDidBegin = "EditingDidBegin";
+		public const string UIControl_EditingChanged = "EditingChanged";
+		public const string UIControl_EditingDidEnd = "EditingDidEnd";
+		public const string UIControl_EditingDidEndOnExit = "EditingDidEndOnExit";
+		public const string UIControl_AllTouchEvents = "AllTouchEvents";
+		public const string UIControl_AllEditingEvents = "AllEditingEvents";
+		public const string UIControl_AllEvents = "AllEvents";
+		public const string UIView_Visibility = "Visibility";
         public const string UIView_Visible = "Visible";
         public const string UIActivityIndicatorView_Hidden = "Hidden";
         public const string UIView_Hidden = "Hidden";
         public const string UISlider_Value = "Value";
         public const string UIStepper_Value = "Value";
+        public const string UIPageControl_CurrentPage = "CurrentPage";
         public const string UISegmentedControl_SelectedSegment = "SelectedSegment";
         public const string UIDatePicker_Date = "Date";
         public const string UITextField_ShouldReturn = "ShouldReturn";

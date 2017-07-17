@@ -5,19 +5,16 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Windows.Input;
+using Foundation;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
+using UIKit;
+
 namespace MvvmCross.Binding.tvOS.Views
 {
-    using System;
-    using System.Windows.Input;
-
-    using Foundation;
-
-    using MvvmCross.Platform;
-    using MvvmCross.Platform.Core;
-    using MvvmCross.Platform.Exceptions;
-
-    using UIKit;
-
     public abstract class MvxBaseCollectionViewSource : UICollectionViewSource
     {
         public static readonly NSString UnknownCellIdentifier = null;
@@ -25,7 +22,7 @@ namespace MvvmCross.Binding.tvOS.Views
         private readonly NSString _cellIdentifier;
         private readonly UICollectionView _collectionView;
 
-        protected virtual NSString DefaultCellIdentifier => this._cellIdentifier;
+        protected virtual NSString DefaultCellIdentifier => _cellIdentifier;
 
         protected MvxBaseCollectionViewSource(UICollectionView collectionView)
             : this(collectionView, UnknownCellIdentifier)
@@ -35,11 +32,11 @@ namespace MvvmCross.Binding.tvOS.Views
         protected MvxBaseCollectionViewSource(UICollectionView collectionView,
                                               NSString cellIdentifier)
         {
-            this._collectionView = collectionView;
-            this._cellIdentifier = cellIdentifier;
+            _collectionView = collectionView;
+            _cellIdentifier = cellIdentifier;
         }
 
-        protected UICollectionView CollectionView => this._collectionView;
+        protected UICollectionView CollectionView => _collectionView;
 
         public ICommand SelectionChangedCommand { get; set; }
 
@@ -47,7 +44,7 @@ namespace MvvmCross.Binding.tvOS.Views
         {
             try
             {
-                this._collectionView.ReloadData();
+                _collectionView.ReloadData();
             }
             catch (Exception exception)
             {
@@ -58,33 +55,36 @@ namespace MvvmCross.Binding.tvOS.Views
         protected virtual UICollectionViewCell GetOrCreateCellFor(UICollectionView collectionView, NSIndexPath indexPath,
                                                                   object item)
         {
-            return (UICollectionViewCell)collectionView.DequeueReusableCell(this.DefaultCellIdentifier, indexPath);
+            return (UICollectionViewCell)collectionView.DequeueReusableCell(DefaultCellIdentifier, indexPath);
         }
 
         protected abstract object GetItemAt(NSIndexPath indexPath);
 
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            var item = this.GetItemAt(indexPath);
+            var item = GetItemAt(indexPath);
 
-            var command = this.SelectionChangedCommand;
+            var command = SelectionChangedCommand;
             if (command != null && command.CanExecute(item))
                 command.Execute(item);
 
-            this.SelectedItem = item;
+            SelectedItem = item;
         }
 
         private object _selectedItem;
 
         public object SelectedItem
         {
-            get { return this._selectedItem; }
+            get
+            {
+                return _selectedItem;
+            }
             set
             {
                 // note that we only expect this to be called from the control/Table
                 // we don't have any multi-select or any scroll into view functionality here
-                this._selectedItem = value;
-                var handler = this.SelectedItemChanged;
+                _selectedItem = value;
+                var handler = SelectedItemChanged;
                 handler?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -93,8 +93,8 @@ namespace MvvmCross.Binding.tvOS.Views
 
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {
-            var item = this.GetItemAt(indexPath);
-            var cell = this.GetOrCreateCellFor(collectionView, indexPath, item);
+            var item = GetItemAt(indexPath);
+            var cell = GetOrCreateCellFor(collectionView, indexPath, item);
 
             var bindable = cell as IMvxDataConsumer;
             if (bindable != null)

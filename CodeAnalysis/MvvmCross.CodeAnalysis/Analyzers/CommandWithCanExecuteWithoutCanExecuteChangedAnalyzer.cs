@@ -1,4 +1,8 @@
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Input;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -6,9 +10,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using MvvmCross.CodeAnalysis.Core;
 using MvvmCross.CodeAnalysis.Extensions;
 using MvvmCross.Core.ViewModels;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Windows.Input;
 
 namespace MvvmCross.CodeAnalysis.Analyzers
 {
@@ -131,7 +132,7 @@ namespace MvvmCross.CodeAnalysis.Analyzers
         private static bool IsViewModelType(SyntaxNodeAnalysisContext context, ITypeSymbol symbol)
         {
             var iMvxViewModelType = context.SemanticModel.Compilation.GetTypeByMetadataName(typeof(IMvxViewModel).FullName);
-            var iNotifyPropertyChangedType = context.SemanticModel.Compilation.GetTypeByMetadataName(typeof(System.ComponentModel.INotifyPropertyChanged).FullName);
+            var iNotifyPropertyChangedType = context.SemanticModel.Compilation.GetTypeByMetadataName(typeof(INotifyPropertyChanged).FullName);
 
             return symbol.ImplementsSymbol(iMvxViewModelType) ||
                    symbol.ImplementsSymbol(iNotifyPropertyChangedType);

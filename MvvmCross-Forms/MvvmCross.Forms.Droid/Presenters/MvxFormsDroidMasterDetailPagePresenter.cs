@@ -12,8 +12,8 @@ namespace MvvmCross.Forms.Droid.Presenters
         {
         }
 
-        public MvxFormsDroidMasterDetailPagePresenter(MvxFormsApp mvxFormsApp)
-            : base(mvxFormsApp)
+        public MvxFormsDroidMasterDetailPagePresenter(MvxFormsApplication formsApplication)
+            : base(formsApplication)
         {
         }
     }

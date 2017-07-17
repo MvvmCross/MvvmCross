@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
@@ -17,7 +18,8 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         protected MvxPreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
-        {}
+        {
+        }
 
         public IMvxBindingContext BindingContext { get; set; }
 
@@ -25,7 +27,10 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         public object DataContext
         {
-            get { return _dataContext; }
+            get
+            {
+                return _dataContext;
+            }
             set
             {
                 _dataContext = value;
@@ -36,7 +41,10 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
+            get
+            {
+                return DataContext as IMvxViewModel;
+            }
             set
             {
                 DataContext = value;
@@ -50,49 +58,54 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         public string UniqueImmutableCacheTag => Tag;
 
+        public override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            ViewModel?.ViewCreated();
+        }
+
         public override void OnDestroy ()
         {
             base.OnDestroy ();
-            ViewModel?.Destroy ();
+            ViewModel?.ViewDestroy ();
         }
 
         public override void OnStart()
         {
             base.OnStart();
-            ViewModel.Appearing();
+            ViewModel?.ViewAppearing();
         }
 
         public override void OnResume()
         {
             base.OnResume();
-            ViewModel.Appeared();
+            ViewModel?.ViewAppeared();
         }
 
         public override void OnPause()
         {
             base.OnPause();
-            ViewModel.Disappearing();
+            ViewModel?.ViewDisappearing();
         }
 
         public override void OnStop()
         {
             base.OnStop();
-            ViewModel.Disappeared();
+            ViewModel?.ViewDisappeared();
         }
     }
 
     public abstract class MvxPreferenceFragment<TViewModel>
         : MvxPreferenceFragment
-    , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+        , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
     {
-
         protected MvxPreferenceFragment()
         {
-
         }
 
-        protected MvxPreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) { }
-
+        protected MvxPreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
 
         public new TViewModel ViewModel
         {

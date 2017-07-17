@@ -1,4 +1,4 @@
-// MvxRecyclerViewHolder.cs
+﻿// MvxRecyclerViewHolder.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,16 +11,13 @@ using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Droid.Support.V7.RecyclerView.Grouping;
-using MvvmCross.Droid.Support.V7.RecyclerView.ItemSources.Data;
-using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerViewHolder")]
-    public class MvxRecyclerViewHolder : Android.Support.V7.Widget.RecyclerView.ViewHolder, IMvxRecyclerViewHolder, IMvxBindingContextOwner
+    public class MvxRecyclerViewHolder 
+        : Android.Support.V7.Widget.RecyclerView.ViewHolder, IMvxRecyclerViewHolder, IMvxBindingContextOwner
     {
-        private readonly int _viewType;
         private readonly IMvxBindingContext _bindingContext;
 
         private object _cachedDataContext;
@@ -35,7 +32,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public object DataContext
         {
-            get { return _bindingContext.DataContext; }
+            get
+            {
+                return _bindingContext.DataContext;
+            }
             set
             {
                 _bindingContext.DataContext = value;
@@ -43,53 +43,53 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 // This is just a precaution.  If we've set the DataContext to something
                 // then we don't need to have the old one still cached.
                 if (value != null)
-                    this._cachedDataContext = null;
+                    _cachedDataContext = null;
             }
         }
 
         public ICommand Click
         {
-            get { return this._click; }
+            get
+            {
+                return _click;
+            }
             set
             {
-                this._click = value;
-                if (this._click != null)
-                    this.EnsureClickOverloaded();
+                _click = value;
+                if (_click != null)
+                    EnsureClickOverloaded();
             }
         }
 
         private void EnsureClickOverloaded()
         {
-            if (this._clickOverloaded)
+            if (_clickOverloaded)
                 return;
-            this._clickOverloaded = true;
-            this.ItemView.Click += OnItemViewOnClick;
+            _clickOverloaded = true;
+            ItemView.Click += OnItemViewOnClick;
         }
 
         public ICommand LongClick
         {
-            get { return this._longClick; }
+            get
+            {
+                return _longClick;
+            }
             set
             {
-                this._longClick = value;
-                if (this._longClick != null)
-                    this.EnsureLongClickOverloaded();
+                _longClick = value;
+                if (_longClick != null)
+                    EnsureLongClickOverloaded();
             }
         }
 
         private void EnsureLongClickOverloaded()
         {
-            if (this._longClickOverloaded)
+            if (_longClickOverloaded)
                 return;
-            this._longClickOverloaded = true;
-            this.ItemView.LongClick += OnItemViewOnLongClick;
+            _longClickOverloaded = true;
+            ItemView.LongClick += OnItemViewOnLongClick;
         }
-
-        public ICommand HeaderClickCommand { get; set; }
-    
-        public ICommand FooterClickCommand { get; set; }
-
-        public ICommand GroupHeaderClickCommand { get; set; }
 
         protected virtual void ExecuteCommandOnItem(ICommand command)
         {
@@ -100,34 +100,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             if (item == null)
                 return;
 
-            if (_viewType == MvxBaseTemplateSelector.HeaderViewTypeId)
-            {
-                if (item is MvxHeaderItemData)
-                {
-                    if (HeaderClickCommand != null && HeaderClickCommand.CanExecute(null))
-                        HeaderClickCommand.Execute(null);
-                }
-                return;
-            }
-
-            if (_viewType == MvxBaseTemplateSelector.FooterViewTypeId)
-            {
-                if (item is MvxFooterItemData)
-                {
-                    if (FooterClickCommand != null && FooterClickCommand.CanExecute(null))
-                        FooterClickCommand.Execute(null);
-                }
-                return;
-            }
-
-            if (item is MvxGroupedData)
-            {
-                var groupedData = item as MvxGroupedData;
-                if (GroupHeaderClickCommand != null && GroupHeaderClickCommand.CanExecute(groupedData.Key))
-                    GroupHeaderClickCommand.Execute(groupedData.Key);
-                return;
-            }
-                
             if (!command.CanExecute(item))
                 return;
 
@@ -136,24 +108,18 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         private void OnItemViewOnClick(object sender, EventArgs args)
         {
-            this.ExecuteCommandOnItem(this.Click);
+            ExecuteCommandOnItem(Click);
         }
 
         private void OnItemViewOnLongClick(object sender, View.LongClickEventArgs args)
         {
-            this.ExecuteCommandOnItem(this.LongClick);
+            ExecuteCommandOnItem(LongClick);
         }
 
         public MvxRecyclerViewHolder(View itemView, IMvxAndroidBindingContext context)
-            : this(itemView, context, 0)
-        {
-        }
-
-        public MvxRecyclerViewHolder(View itemView, IMvxAndroidBindingContext context, int viewType = 0)
             : base(itemView)
         {
-            _viewType = viewType;
-            this._bindingContext = context;
+            _bindingContext = context;
         }
 
         public MvxRecyclerViewHolder(IntPtr handle, JniHandleOwnership ownership)
@@ -191,8 +157,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
                 if (ItemView != null)
                 {
-                    ItemView.Click -= this.OnItemViewOnClick;
-                    ItemView.LongClick -= this.OnItemViewOnLongClick;
+                    ItemView.Click -= OnItemViewOnClick;
+                    ItemView.LongClick -= OnItemViewOnLongClick;
                 }
             }
 

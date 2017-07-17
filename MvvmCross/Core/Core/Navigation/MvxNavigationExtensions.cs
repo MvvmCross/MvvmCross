@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 
 namespace MvvmCross.Core.Navigation
 {
@@ -17,24 +20,32 @@ namespace MvvmCross.Core.Navigation
 
         /// <summary>
         /// Translates the provided Uri to a ViewModel request and dispatches it.
-        /// The ViewModel will be dispatched with MvxRequestedBy.Bookmark
         /// </summary>
         /// <param name="path">URI to route</param>
         /// <returns>A task to await upon</returns>
-        public static Task Navigate(this IMvxNavigationService navigationService, Uri path)
+        public static Task Navigate(this IMvxNavigationService navigationService, Uri path, IMvxBundle presentationBundle = null)
         {
-            return navigationService.Navigate(path.ToString());
+            return navigationService.Navigate(path.ToString(), presentationBundle);
         }
 
-        //Task Navigate<TParameter>(Uri path, TParameter param);
-        //Task<TResult> Navigate<TResult>(Uri path);
-        //Task<TResult> Navigate<TParameter, TResult>(Uri path, TParameter param);
+        public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null) where TParameter : class
+        {
+            return navigationService.Navigate<TParameter>(path.ToString(), param, presentationBundle);
+        }
+
+        public static Task Navigate<TResult>(this IMvxNavigationService navigationService, Uri path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TResult : class
+        {
+            return navigationService.Navigate<TResult>(path.ToString(), presentationBundle, cancellationToken);
+        }
+
+        public static Task Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TParameter : class where TResult : class
+        {
+            return navigationService.Navigate<TParameter, TResult>(path.ToString(), param, presentationBundle, cancellationToken);
+        }
 
         public static Task<bool> Close<TViewModel>(this IMvxNavigationService navigationService)
         {
-            //TODO: Find viewmodel with this type in stack and close it
-            throw new NotImplementedException();
-            //return navigationService.Close();
+            return navigationService.Close((IMvxViewModel)Mvx.IocConstruct<TViewModel>());
         }
     }
 }

@@ -5,46 +5,40 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Windows.Input;
+using MvvmCross.Platform.Core;
+
 namespace MvvmCross.Platform.WeakSubscription
 {
-    using System;
-    using System.Collections.Specialized;
-    using System.ComponentModel;
-    using System.Linq.Expressions;
-    using System.Reflection;
-    using System.Windows.Input;
-
-    using MvvmCross.Platform.Core;
-
     public static class MvxWeakSubscriptionExtensionMethods
     {
         public static MvxNotifyPropertyChangedEventSubscription WeakSubscribe(this INotifyPropertyChanged source,
-                                                                              EventHandler<PropertyChangedEventArgs>
-                                                                                  eventHandler)
+                                                                              EventHandler<PropertyChangedEventArgs> eventHandler)
         {
             return new MvxNotifyPropertyChangedEventSubscription(source, eventHandler);
         }
 
         public static MvxNamedNotifyPropertyChangedEventSubscription<T> WeakSubscribe<T>(this INotifyPropertyChanged source,
                                                                                Expression<Func<T>> property,
-                                                                               EventHandler<PropertyChangedEventArgs>
-                                                                                   eventHandler)
+                                                                               EventHandler<PropertyChangedEventArgs> eventHandler)
         {
             return new MvxNamedNotifyPropertyChangedEventSubscription<T>(source, property, eventHandler);
         }
 
         public static MvxNamedNotifyPropertyChangedEventSubscription<T> WeakSubscribe<T>(this INotifyPropertyChanged source,
                                                                                string property,
-                                                                               EventHandler<PropertyChangedEventArgs>
-                                                                                   eventHandler)
+                                                                               EventHandler<PropertyChangedEventArgs> eventHandler)
         {
             return new MvxNamedNotifyPropertyChangedEventSubscription<T>(source, property, eventHandler);
         }
 
         public static MvxNotifyCollectionChangedEventSubscription WeakSubscribe(this INotifyCollectionChanged source,
-                                                                                EventHandler
-                                                                                    <NotifyCollectionChangedEventArgs>
-                                                                                    eventHandler)
+                                                                                EventHandler<NotifyCollectionChangedEventArgs> eventHandler)
         {
             return new MvxNotifyCollectionChangedEventSubscription(source, eventHandler);
         }

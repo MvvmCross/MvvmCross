@@ -1,4 +1,4 @@
-// MvxInMemoryImageValueConverter.cs
+﻿// MvxInMemoryImageValueConverter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Globalization;
 using Android.Graphics;
 using MvvmCross.Platform.Converters;
 
@@ -14,7 +15,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
     [Preserve(AllMembers = true)]
 	public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], Bitmap>
     {
-        protected override Bitmap Convert(byte[] value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        protected override Bitmap Convert(byte[] value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
                 return null;

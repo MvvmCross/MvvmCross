@@ -1,11 +1,14 @@
-using Android.Support.V7.Preferences;
+﻿using Android.Support.V7.Preferences;
 
 namespace MvvmCross.Droid.Support.V7.Preference.Target
 {
-    public class MvxEditTextPreferenceTextTargetBinding : MvxPreferenceValueTargetBinding
+    public class MvxEditTextPreferenceTextTargetBinding 
+        : MvxPreferenceValueTargetBinding
     {
         public MvxEditTextPreferenceTextTargetBinding(EditTextPreference preference)
-            : base(preference) { }
+            : base(preference)
+        {
+        }
 
         protected override void SetValueImpl(object target, object value)
         {

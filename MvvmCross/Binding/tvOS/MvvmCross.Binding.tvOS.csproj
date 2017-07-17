@@ -41,7 +41,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.TVOS" />
   </ItemGroup>
@@ -49,9 +48,11 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="MvxTvosPropertyBinding.cs" />
     <Compile Include="MvxTvosPropertyBindingExtensions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvxTvosBindingBuilder.cs" />
     <Compile Include="Target\MvxBaseUIViewVisibleTargetBinding.cs" />
     <Compile Include="Target\MvxUIActivityIndicatorViewHiddenTargetBinding.cs" />

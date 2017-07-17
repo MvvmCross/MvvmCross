@@ -5,9 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using MvvmCross.Binding;
-
 #if WINDOWS_COMMON
 using Windows.UI.Xaml;
 
@@ -15,9 +12,10 @@ namespace MvvmCross.BindingEx.WindowsCommon.MvxBinding.Target
 #endif
 
 #if WINDOWS_WPF
+using System;
 using System.Windows;
 
-namespace MvvmCross.BindingEx.Wpf.MvxBinding.Target
+namespace MvvmCross.Binding.Wpf.MvxBinding.Target
 #endif
 {
     public class MvxVisibleTargetBinding : MvxDependencyPropertyTargetBinding

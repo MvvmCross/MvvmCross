@@ -1,4 +1,4 @@
-// MvxIosPropertyBindingExtensions.cs
+﻿// MvxIosPropertyBindingExtensions.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,6 +16,39 @@ namespace MvvmCross.Binding.iOS
 
         public static string BindValueChanged(this UIControl uiControl)
             => MvxIosPropertyBinding.UIControl_ValueChanged;
+
+		public static string BindTouchDown(this UIControl uiControl)
+			=> MvxIosPropertyBinding.UIControl_TouchDown;
+
+		public static string BindTouchDownRepeat(this UIControl uiControl)
+			=> MvxIosPropertyBinding.UIControl_TouchDownRepeat;
+
+		public static string BindTouchDragInside(this UIControl uiControl)
+			=> MvxIosPropertyBinding.UIControl_TouchDragInside;
+
+		public static string BindPrimaryActionTriggered(this UIControl uiControl)
+			=> MvxIosPropertyBinding.UIControl_PrimaryActionTriggered;
+
+		public static string BindEditingDidBegin(this UIControl uiControl)
+			=> MvxIosPropertyBinding.UIControl_EditingDidBegin;
+
+		public static string BindEditingChanged(this UIControl uiControl)
+			=> MvxIosPropertyBinding.UIControl_EditingChanged;
+
+		public static string BindEditingDidEnd(this UIControl uiControl)
+			=> MvxIosPropertyBinding.UIControl_EditingDidEnd;
+
+		public static string BindEditingDidEndOnExit(this UIControl uiControl)
+			=> MvxIosPropertyBinding.UIControl_EditingDidEndOnExit;
+
+		public static string BindAllTouchEvents(this UIControl uiControl)
+			=> MvxIosPropertyBinding.UIControl_AllTouchEvents;
+
+		public static string BindAllEditingEvents(this UIControl uiControl)
+			=> MvxIosPropertyBinding.UIControl_AllEditingEvents;
+
+		public static string BindAllEvents(this UIControl uiControl)
+			=> MvxIosPropertyBinding.UIControl_AllEvents;
 
         public static string BindVisibility(this UIView uiView)
             => MvxIosPropertyBinding.UIView_Visibility;
@@ -86,7 +119,7 @@ namespace MvvmCross.Binding.iOS
         public static string BindTwoFingerTap(this UIView uiView)
             => MvxIosPropertyBinding.UIView_TwoFingerTap;
 
-        public static string BindTextFocusk(this UIView uiView)
+        public static string BindTextFocus(this UIView uiView)
             => MvxIosPropertyBinding.UITextField_TextFocus;
     }
 }

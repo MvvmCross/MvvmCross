@@ -1,21 +1,19 @@
-// MvxDatePicker.cs
+﻿// MvxDatePicker.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
+using Android.Content;
+using Android.Runtime;
+using Android.Util;
+using Android.Widget;
+using MvvmCross.Platform.Droid.Platform;
+
 namespace MvvmCross.Binding.Droid.Views
 {
-    using System;
-
-    using Android.Content;
-    using Android.Runtime;
-    using Android.Util;
-    using Android.Widget;
-
-    using MvvmCross.Platform.Droid.Platform;
-
     [Register("mvvmcross.binding.droid.views.MvxDatePicker")]
     public class MvxDatePicker
         : DatePicker
@@ -40,7 +38,10 @@ namespace MvvmCross.Binding.Droid.Views
 
         public DateTime Value
         {
-            get { return MvxJavaDateUtils.DateTimeFromJava(this.Year, this.Month, this.DayOfMonth); }
+            get
+            {
+                return MvxJavaDateUtils.DateTimeFromJava(Year, Month, DayOfMonth);
+            }
             set
             {
                 var javaYear = value.Year;
@@ -48,14 +49,14 @@ namespace MvvmCross.Binding.Droid.Views
                 var javaMonth = value.Month - 1;
                 var javaDay = value.Day;
 
-                if (!this._initialized)
+                if (!_initialized)
                 {
-                    this.Init(javaYear, javaMonth, javaDay, this);
-                    this._initialized = true;
+                    Init(javaYear, javaMonth, javaDay, this);
+                    _initialized = true;
                 }
-                else if (this.Year != javaYear || this.Month != javaMonth || this.DayOfMonth != javaDay)
+                else if (Year != javaYear || Month != javaMonth || DayOfMonth != javaDay)
                 {
-                    this.UpdateDate(javaYear, javaMonth, javaDay);
+                    UpdateDate(javaYear, javaMonth, javaDay);
                 }
             }
         }

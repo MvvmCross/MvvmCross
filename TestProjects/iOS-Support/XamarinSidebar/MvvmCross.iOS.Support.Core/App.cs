@@ -1,8 +1,10 @@
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Navigation;
+using MvvmCross.Platform;
+using MvvmCross.Platform.IoC;
+
 namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core
 {
-    using MvvmCross.Core.ViewModels;
-    using Platform.IoC;
-
     public class App : MvxApplication
     {
         /// <summary>The initialize.</summary>
@@ -13,7 +15,11 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart(new AppStart());
+            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, AppStart>();
+            var appStart = Mvx.Resolve<IMvxAppStart>();
+
+            // register the appstart object
+            RegisterAppStart(appStart);
         }
     }
 }

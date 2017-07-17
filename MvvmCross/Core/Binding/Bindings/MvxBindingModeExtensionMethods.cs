@@ -5,11 +5,11 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+
 namespace MvvmCross.Binding.Bindings
 {
-    using MvvmCross.Platform.Exceptions;
-    using MvvmCross.Platform.Platform;
-
     public static class MvxBindingModeExtensionMethods
     {
         public static MvxBindingMode IfDefault(this MvxBindingMode bindingMode, MvxBindingMode modeIfDefault)
