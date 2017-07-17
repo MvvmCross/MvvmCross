@@ -14,12 +14,20 @@ namespace MvvmCross.Droid.Views
 {
     public class MvxAndroidMainThreadDispatcher : MvxMainThreadDispatcher
     {
-        public bool RequestMainThreadAction(Action action)
+        public bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (Application.SynchronizationContext == SynchronizationContext.Current)
                 action();
             else
-                Application.SynchronizationContext.Post(ignored => ExceptionMaskedAction(action), null);
+            {
+                Application.SynchronizationContext.Post(ignored => 
+                {
+                    if (maskExceptions)
+                        ExceptionMaskedAction(action);
+                    else
+                        action();
+                }, null);
+            }
 
             return true;
         }
