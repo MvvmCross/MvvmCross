@@ -23,12 +23,19 @@ namespace MvvmCross.Mac.Views
             _uiSynchronizationContext = SynchronizationContext.Current;
         }
 
-        public bool RequestMainThreadAction(Action action)
+        public bool RequestMainThreadAction(Action action, 
+            bool maskExceptions = true)
         {
             if (_uiSynchronizationContext == SynchronizationContext.Current)
                 action();
             else
-                NSApplication.SharedApplication.BeginInvokeOnMainThread(() => ExceptionMaskedAction(action));
+                NSApplication.SharedApplication.BeginInvokeOnMainThread(() => 
+                {
+                    if (maskExceptions)
+                        ExceptionMaskedAction(action);
+                    else
+                        action();
+                });
             return true;
         }
     }
