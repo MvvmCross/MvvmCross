@@ -81,34 +81,40 @@ namespace MvvmCross.Droid.FullFragging.Fragments
 
         public string UniqueImmutableCacheTag => Tag;
 
+        public override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            ViewModel?.ViewCreated();
+        }
+
         public override void OnDestroy()
         {
             base.OnDestroy();
-            ViewModel?.Destroy();
+            ViewModel?.ViewDestroy();
         }
 
         public override void OnStart()
         {
             base.OnStart();
-            ViewModel?.Appearing();
+            ViewModel?.ViewAppearing();
         }
 
         public override void OnResume()
         {
             base.OnResume();
-            ViewModel?.Appeared();
+            ViewModel?.ViewAppeared();
         }
 
         public override void OnPause()
         {
             base.OnPause();
-            ViewModel?.Disappearing();
+            ViewModel?.ViewDisappearing();
         }
 
         public override void OnStop()
         {
             base.OnStop();
-            ViewModel?.Disappeared();
+            ViewModel?.ViewDisappeared();
         }
     }
 

@@ -29,7 +29,7 @@ using MvxActivity = MvvmCross.Droid.FullFragging.Views.MvxActivity;
 namespace MvvmCross.Droid.FullFragging.Caching
 {
     [Register("mvvmcross.droid.fullfragging.caching.MvxCachingFragmentActivity")]
-    public class MvxCachingFragmentActivity 
+    public class MvxCachingFragmentActivity
         : MvxActivity, IFragmentCacheableActivity, IMvxFragmentHost
 	{
 		public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
@@ -473,22 +473,28 @@ namespace MvvmCross.Droid.FullFragging.Caching
 			return true;
 		}
 
-        public override void OnAttachedToWindow()
+	    public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
+	    {
+	        base.OnCreate(savedInstanceState, persistentState);
+	        ViewModel?.ViewCreated();
+	    }
+
+	    public override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();
-            ViewModel?.Appearing();
+            ViewModel?.ViewAppearing();
         }
 
         public override void OnDetachedFromWindow()
         {
             base.OnDetachedFromWindow();
-            ViewModel?.Disappearing(); // we don't have anywhere to get this info
-            ViewModel?.Disappeared();
+            ViewModel?.ViewDisappearing(); // we don't have anywhere to get this info
+            ViewModel?.ViewDisappeared();
         }
     }
 
     public abstract class MvxCachingFragmentActivity<TViewModel>
-        : MvxCachingFragmentActivity, IMvxAndroidView<TViewModel> 
+        : MvxCachingFragmentActivity, IMvxAndroidView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel

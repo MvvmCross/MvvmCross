@@ -22,7 +22,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     [Register("mvvmcross.droid.support.v7.appcompat.MvxAppCompatActivity")]
     public class MvxAppCompatActivity
-        : MvxEventSourceAppCompatActivity, IMvxAndroidView, ViewTreeObserver.IOnGlobalLayoutListener 
+        : MvxEventSourceAppCompatActivity, IMvxAndroidView, ViewTreeObserver.IOnGlobalLayoutListener
     {
         private View _view;
 
@@ -87,17 +87,23 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
 
-		public override void OnAttachedToWindow()
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            ViewModel?.ViewCreated();
+        }
+
+        public override void OnAttachedToWindow()
 		{
 			base.OnAttachedToWindow();
-			ViewModel?.Appearing();
+			ViewModel?.ViewAppearing();
 		}
 
 		public override void OnDetachedFromWindow()
 		{
             base.OnDetachedFromWindow();
-            ViewModel?.Disappearing(); // we don't have anywhere to get this info
-            ViewModel?.Disappeared();
+            ViewModel?.ViewDisappearing(); // we don't have anywhere to get this info
+            ViewModel?.ViewDisappeared();
 		}
 
         public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
@@ -124,7 +130,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     }
                 }
                 _view = null;
-                ViewModel?.Appeared();
+                ViewModel?.ViewAppeared();
             }
         }
     }
@@ -133,7 +139,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         : MvxAppCompatActivity, IMvxAndroidView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
-        protected MvxAppCompatActivity(IntPtr ptr, JniHandleOwnership ownership) 
+        protected MvxAppCompatActivity(IntPtr ptr, JniHandleOwnership ownership)
             : base(ptr, ownership)
         {
         }
