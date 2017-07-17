@@ -20,7 +20,8 @@ namespace MvvmCross.Test.Mocks.Dispatchers
             _callback = callback;
         }
 
-        public virtual bool RequestMainThreadAction(Action action)
+        public virtual bool RequestMainThreadAction(Action action, 
+                                                    bool maskExceptions = true)
         {
             return _callback(action);
         }
