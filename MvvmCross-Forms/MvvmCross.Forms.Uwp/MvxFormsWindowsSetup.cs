@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection;
 using Windows.ApplicationModel.Activation;
 using MvvmCross.Binding;
@@ -10,48 +10,42 @@ using MvvmCross.Platform;
 using MvvmCross.Uwp.Platform;
 using MvvmCross.Uwp.Views;
 using XamlControls = Windows.UI.Xaml.Controls;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Forms.Uwp
 {
     public abstract class MvxFormsWindowsSetup : MvxWindowsSetup
     {
         private readonly LaunchActivatedEventArgs _launchActivatedEventArgs;
+        private List<Assembly> _viewAssemblies;
 
-        public MvxFormsWindowsSetup(XamlControls.Frame rootFrame, LaunchActivatedEventArgs e) : base(rootFrame)
+        public MvxFormsWindowsSetup(XamlControls.Frame rootFrame, LaunchActivatedEventArgs e)
+            : base(rootFrame)
         {
             _launchActivatedEventArgs = e;
         }
 
-        private List<Assembly> viewAssemblies;
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
-            if (viewAssemblies == null)
-                viewAssemblies = new List<Assembly>(base.GetViewAssemblies());
+            if (_viewAssemblies == null)
+                _viewAssemblies = new List<Assembly>(base.GetViewAssemblies());
 
-            return viewAssemblies;
+            return _viewAssemblies;
         }
 
-        protected override void InitializeApp(Platform.Plugins.IMvxPluginManager pluginManager)
+        protected override IMvxViewModelLocatorCollection InitializeApp(IMvxPluginManager pluginManager)
         {
-            base.InitializeApp(pluginManager);
-            viewAssemblies.AddRange(GetViewModelAssemblies());
+            var collection = base.InitializeApp(pluginManager);
+            _viewAssemblies.AddRange(GetViewModelAssemblies());
+            return collection;
         }
 
         private MvxFormsApplication _formsApplication;
-        public MvxFormsApplication FormsApplication
-        {
-            get
-            {
-                if (_formsApplication == null)
-                    _formsApplication = CreateFormsApplication();
-                return _formsApplication;
-            }
-        }
+        public MvxFormsApplication FormsApplication =>
+            _formsApplication = _formsApplication ?? CreateFormsApplication();
 
-        protected virtual MvxFormsApplication CreateFormsApplication()
-        {
-            return new MvxFormsApplication();
-        }
+        protected virtual MvxFormsApplication CreateFormsApplication() => new MvxFormsApplication();
 
         protected override IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
         {
@@ -75,9 +69,6 @@ namespace MvvmCross.Forms.Uwp
             bindingBuilder.DoRegistration();
         }
 
-        protected virtual MvxBindingBuilder CreateBindingBuilder()
-        {
-            return new MvxFormsBindingBuilder();
-        }
+        protected virtual MvxBindingBuilder CreateBindingBuilder() => new MvxFormsBindingBuilder();
     }
 }

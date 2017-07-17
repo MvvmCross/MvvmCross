@@ -35,21 +35,8 @@ namespace MvvmCross.Core.Navigation
         public event BeforeCloseEventHandler BeforeClose;
         public event AfterCloseEventHandler AfterClose;
 
-        public MvxNavigationService() : this(null, null)
-        {
-        }
-
         public MvxNavigationService(IMvxNavigationCache navigationCache, IMvxViewModelLoader viewModelLoader)
         {
-            if(navigationCache == null)
-            {
-                navigationCache = new MvxNavigationCache();
-                Mvx.RegisterSingleton(navigationCache);
-            }
-
-            if (viewModelLoader == null)
-                viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
-
             NavigationCache = navigationCache;
             ViewModelLoader = viewModelLoader;
         }
@@ -60,7 +47,8 @@ namespace MvvmCross.Core.Navigation
             foreach (var routeAttr in
                 assemblies.SelectMany(a => a.GetCustomAttributes<MvxNavigationAttribute>()))
             {
-                Routes.Add(new Regex(routeAttr.UriRegex, RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Singleline),
+                Routes.Add(new Regex(routeAttr.UriRegex,
+                    RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Singleline),
                     routeAttr.ViewModelOrFacade);
             }
         }
