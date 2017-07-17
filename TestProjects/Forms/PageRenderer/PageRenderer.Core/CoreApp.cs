@@ -3,9 +3,9 @@ using MvvmCross.Platform.IoC;
 
 namespace PageRendererExample
 {
-    public class MvvmApp : MvxApplication
+    public class CoreApp : MvxApplication
     {
-        public MvvmApp()
+        public CoreApp()
         {
             CreatableTypes()
                 .EndingWith("Page")
