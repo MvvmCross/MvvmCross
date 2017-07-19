@@ -115,11 +115,40 @@ namespace MvvmCross.iOS.Views.Presenters
             if (viewController is IMvxTabBarViewController tabBarController)
             {
                 TabBarViewController = tabBarController;
+                if (!attribute.WrapInNavigationController)
+                    SetWindowRootViewController(viewController);
+                else
+                {
+                    viewController = CreateNavigationController(viewController);
+                    MasterNavigationController = viewController as MvxNavigationController;
+                    SetWindowRootViewController(viewController);
+                }
+
+                CloseMasterNavigationController();
+                CleanupModalViewControllers();
+                CloseSplitViewController();
+
+                return;
             }
             // check if viewController is a SplitViewController
             else if (viewController is IMvxSplitViewController splitController)
             {
                 SplitViewController = splitController;
+
+                if (!attribute.WrapInNavigationController)
+                    SetWindowRootViewController(viewController);
+                else
+                {
+                    viewController = CreateNavigationController(viewController);
+                    MasterNavigationController = viewController as MvxNavigationController;
+                    SetWindowRootViewController(viewController);
+                }
+
+                CloseMasterNavigationController();
+                CleanupModalViewControllers();
+                CloseTabBarViewController();
+
+                return;
             }
 
             // check if viewController is trying to initialize a navigation stack
