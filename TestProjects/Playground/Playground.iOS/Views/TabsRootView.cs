@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters.Attributes;
 using Playground.Core.ViewModels;
@@ -7,7 +7,7 @@ using UIKit;
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
-    //[MvxRootPresentation]
+    [MvxRootPresentation(WrapInNavigationController = true)]
     public partial class TabsRootView : MvxTabBarViewController<TabsRootViewModel>
     {
         private bool _isPresentedFirstTime = true;
@@ -36,6 +36,15 @@ namespace Playground.iOS.Views
                 iconName = "ic_tabbar_menu";
 
             base.SetTitleAndTabBarItem(viewController, title, iconName);
+        }
+
+        public override bool ShowChildView(UIViewController viewController)
+        {
+            var type = viewController.GetType();
+
+            return type == typeof(ChildView)
+                ? false
+                : base.ShowChildView(viewController);
         }
     }
 }
