@@ -1,4 +1,5 @@
-# configuration for "master" branch
+hosts:
+  api.nuget.org: 93.184.221.200
 -
   branches:
       only:
