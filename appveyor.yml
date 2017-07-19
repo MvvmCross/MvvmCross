@@ -11,10 +11,6 @@
   build_script:
   - ps: .\build.ps1 -verbosity Diagnostic
   test: off
-  hosts:
-    api.nuget.org: 93.184.221.200
-  init:
-  - ps: '[System.IO.File]::AppendAllText("C:\Windows\System32\drivers\etc\hosts", "`n93.184.221.200`tapi.nuget.org")'
 -
   branches:
       only:
@@ -28,7 +24,3 @@
   build_script:
   - ps: .\build.ps1 -verbosity Diagnostic
   test: off
-  hosts:
-    api.nuget.org: 93.184.221.200
-  init:
-  - ps: '[System.IO.File]::AppendAllText("C:\Windows\System32\drivers\etc\hosts", "`n93.184.221.200`tapi.nuget.org")'
