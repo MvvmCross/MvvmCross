@@ -114,9 +114,9 @@ namespace MvvmCross.iOS.Views.Presenters
             // check if viewController is trying to initialize a navigation stack
             if (attribute.WrapInNavigationController)
             {
-                viewController = CreateNavigationController(viewController);
-                MasterNavigationController = viewController as MvxNavigationController;
-                SetWindowRootViewController(viewController);
+                var navigationController = CreateNavigationController(viewController);
+                MasterNavigationController = navigationController as MvxNavigationController;
+                SetWindowRootViewController(navigationController);
             }
             else
             // display the plain viewController as root
@@ -142,7 +142,6 @@ namespace MvvmCross.iOS.Views.Presenters
                 CloseSplitViewController();
                 CleanupModalViewControllers();
             }
-
         }
 
         protected virtual void ShowChildViewController(
