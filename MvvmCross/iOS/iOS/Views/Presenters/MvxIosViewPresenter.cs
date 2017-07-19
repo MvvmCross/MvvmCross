@@ -142,6 +142,12 @@ namespace MvvmCross.iOS.Views.Presenters
                 CloseSplitViewController();
                 CleanupModalViewControllers();
             }
+            else
+            {
+                CloseTabBarViewController();
+                CloseSplitViewController();
+                CleanupModalViewControllers();
+            }
         }
 
         protected virtual void ShowChildViewController(
