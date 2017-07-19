@@ -1,5 +1,3 @@
-hosts:
-  api.nuget.org: 93.184.221.200
 -
   branches:
       only:
@@ -13,7 +11,8 @@ hosts:
   build_script:
   - ps: .\build.ps1 -verbosity Diagnostic
   test: off
-  # configuration for "master" branch
+  hosts:
+    api.nuget.org: 93.184.221.200
 -
   branches:
       only:
@@ -27,3 +26,5 @@ hosts:
   build_script:
   - ps: .\build.ps1 -verbosity Diagnostic
   test: off
+  hosts:
+    api.nuget.org: 93.184.221.200
