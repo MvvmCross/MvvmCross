@@ -111,69 +111,38 @@ namespace MvvmCross.iOS.Views.Presenters
             MvxRootPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            // check if viewController is a TabBarController
-            if (viewController is IMvxTabBarViewController tabBarController)
-            {
-                TabBarViewController = tabBarController;
-
-                if (!attribute.WrapInNavigationController)
-                {
-                    SetWindowRootViewController(viewController);
-
-                    CloseMasterNavigationController();
-                }
-                else
-                {
-                    viewController = CreateNavigationController(viewController);
-                    MasterNavigationController = viewController as MvxNavigationController;
-                    SetWindowRootViewController(viewController);
-                }
-
-                CleanupModalViewControllers();
-                CloseSplitViewController();
-
-                return;
-            }
-            // check if viewController is a SplitViewController
-            else if (viewController is IMvxSplitViewController splitController)
-            {
-                SplitViewController = splitController;
-
-                if (!attribute.WrapInNavigationController)
-                {
-                    SetWindowRootViewController(viewController);
-
-                    CloseMasterNavigationController();
-                }
-                else
-                {
-                    viewController = CreateNavigationController(viewController);
-                    MasterNavigationController = viewController as MvxNavigationController;
-                    SetWindowRootViewController(viewController);
-                }
-
-                CleanupModalViewControllers();
-                CloseTabBarViewController();
-
-                return;
-            }
-
             // check if viewController is trying to initialize a navigation stack
             if (attribute.WrapInNavigationController)
             {
                 viewController = CreateNavigationController(viewController);
                 MasterNavigationController = viewController as MvxNavigationController;
                 SetWindowRootViewController(viewController);
+            }
+            else
+            // display the plain viewController as root
+            {
+                SetWindowRootViewController(viewController);
 
-                CleanupModalViewControllers();
-                CloseTabBarViewController();
-                CloseSplitViewController();
-
-                return;
+                CloseMasterNavigationController();
             }
 
-            // last scenario: display the plain viewController as root
-            SetWindowRootViewController(viewController);
+            // check if viewController is a TabBarController
+            if (viewController is IMvxTabBarViewController tabBarController)
+            {
+                TabBarViewController = tabBarController;
+
+                CloseTabBarViewController();
+                CleanupModalViewControllers();
+            }
+            // check if viewController is a SplitViewController
+            else if (viewController is IMvxSplitViewController splitController)
+            {
+                SplitViewController = splitController;
+
+                CloseSplitViewController();
+                CleanupModalViewControllers();
+            }
+
         }
 
         protected virtual void ShowChildViewController(
