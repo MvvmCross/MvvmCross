@@ -115,8 +115,13 @@ namespace MvvmCross.iOS.Views.Presenters
             if (viewController is IMvxTabBarViewController tabBarController)
             {
                 TabBarViewController = tabBarController;
+
                 if (!attribute.WrapInNavigationController)
+                {
                     SetWindowRootViewController(viewController);
+
+                    CloseMasterNavigationController();
+                }
                 else
                 {
                     viewController = CreateNavigationController(viewController);
@@ -124,7 +129,6 @@ namespace MvvmCross.iOS.Views.Presenters
                     SetWindowRootViewController(viewController);
                 }
 
-                CloseMasterNavigationController();
                 CleanupModalViewControllers();
                 CloseSplitViewController();
 
@@ -136,7 +140,11 @@ namespace MvvmCross.iOS.Views.Presenters
                 SplitViewController = splitController;
 
                 if (!attribute.WrapInNavigationController)
+                {
                     SetWindowRootViewController(viewController);
+
+                    CloseMasterNavigationController();
+                }
                 else
                 {
                     viewController = CreateNavigationController(viewController);
@@ -144,7 +152,6 @@ namespace MvvmCross.iOS.Views.Presenters
                     SetWindowRootViewController(viewController);
                 }
 
-                CloseMasterNavigationController();
                 CleanupModalViewControllers();
                 CloseTabBarViewController();
 
