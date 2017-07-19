@@ -131,7 +131,7 @@ namespace MvvmCross.iOS.Views.Presenters
             {
                 TabBarViewController = tabBarController;
 
-                CloseTabBarViewController();
+                CloseSplitViewController();
                 CleanupModalViewControllers();
             }
             // check if viewController is a SplitViewController
@@ -139,7 +139,7 @@ namespace MvvmCross.iOS.Views.Presenters
             {
                 SplitViewController = splitController;
 
-                CloseSplitViewController();
+                CloseTabBarViewController();
                 CleanupModalViewControllers();
             }
             else
