@@ -5,10 +5,12 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Core.ViewModels
 {
+    [Obsolete("Please use MvxNavigationServiceAppStart instead")]
     public class MvxAppStart<TViewModel>
         : MvxNavigatingObject, IMvxAppStart
         where TViewModel : IMvxViewModel
