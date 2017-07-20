@@ -56,7 +56,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
         }
 
-		public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
+        public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
         {
             StartActivityForResult(intent, requestCode);
         }
@@ -69,11 +69,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         public override void SetContentView(int layoutResId)
         {
-			_view = this.BindingInflate(layoutResId, null);
+            _view = this.BindingInflate(layoutResId, null);
 
-			_view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
+            _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
 
-			SetContentView(_view);
+            SetContentView(_view);
         }
 
         protected override void AttachBaseContext(Context @base)
@@ -93,18 +93,35 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             ViewModel?.ViewCreated();
         }
 
-        public override void OnAttachedToWindow()
-		{
-			base.OnAttachedToWindow();
-			ViewModel?.ViewAppearing();
-		}
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            ViewModel?.ViewDestroy();
+        }
 
-		public override void OnDetachedFromWindow()
-		{
-            base.OnDetachedFromWindow();
-            ViewModel?.ViewDisappearing(); // we don't have anywhere to get this info
-            ViewModel?.ViewDisappeared();
-		}
+        protected override void OnStart()
+        {
+            base.OnStart();
+            ViewModel?.ViewAppearing();
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+            ViewModel?.ViewAppeared();
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+            ViewModel?.ViewDisappearing();
+        }
+
+        protected override void OnStop()
+        {
+            base.OnStop();
+            ViewModel.ViewDisappeared();
+        }
 
         public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
         {
@@ -130,7 +147,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     }
                 }
                 _view = null;
-                ViewModel?.ViewAppeared();
             }
         }
     }

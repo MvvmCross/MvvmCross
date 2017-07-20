@@ -7,5 +7,5 @@
         android:id="@+id/myButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show 2nd" />
+        android:text="Close" />
 </LinearLayout>
