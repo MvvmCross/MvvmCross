@@ -23,9 +23,22 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels
             }
         }
 
+        public IMvxCommand ShowDetailRightCommand
+        {
+            get
+            {
+                return new MvxCommand(ShowDetailRightCommandExecuted);
+            }
+        }
+
         private void ShowDetailCommandExecuted()
         {
             _navigationService.Navigate<DetailViewModel>();
+        }
+
+        private void ShowDetailRightCommandExecuted()
+        {
+            _navigationService.Navigate<DetailRightViewModel>();
         }
     }
 }
