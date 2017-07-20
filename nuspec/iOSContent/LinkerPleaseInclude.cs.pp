@@ -4,6 +4,8 @@ using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Views;
 using UIKit;
+using MvvmCross.Core.Navigation;
+using MvvmCross.Core.ViewModels;
 
 namespace $rootnamespace$
 {
@@ -114,9 +116,9 @@ namespace $rootnamespace$
             changed.PropertyChanged += (sender, e) => { var test = e.PropertyName; };
         }
         
-        public void Include(MvvmCross.Core.Navigation.MvxNavigationService navigationService)
+        public void Include(MvxNavigationService service, IMvxViewModelLoader loader)
         {
-            navigationService = new MvvmCross.Core.Navigation.MvxNavigationService()
+            service = new MvxNavigationService(null, loader);
         }
     }
 }
