@@ -1,4 +1,4 @@
-﻿// MvxActivity.cs
+﻿﻿// MvxActivity.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -22,7 +22,6 @@ namespace MvvmCross.Droid.Views
     public abstract class MvxActivity
         : MvxEventSourceActivity
         , IMvxAndroidView
-        , ViewTreeObserver.IOnGlobalLayoutListener
     {
         private View _view;
 
@@ -66,8 +65,6 @@ namespace MvvmCross.Droid.Views
         public override void SetContentView(int layoutResId)
         {
             _view = this.BindingInflate(layoutResId, null);
-
-            _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
 
             SetContentView(_view);
         }
@@ -121,27 +118,6 @@ namespace MvvmCross.Droid.Views
         {
             base.OnStop();
             ViewModel?.ViewDisappeared();
-        }
-
-        public void OnGlobalLayout()
-        {
-            if (_view != null)
-            {
-                if (_view.ViewTreeObserver.IsAlive)
-                {
-                    if (Build.VERSION.SdkInt < BuildVersionCodes.JellyBean)
-                    {
-#pragma warning disable CS0618 // Type or member is obsolete
-                        _view.ViewTreeObserver.RemoveGlobalOnLayoutListener(this);
-#pragma warning restore CS0618 // Type or member is obsolete
-                    }
-                    else
-                    {
-                        _view.ViewTreeObserver.RemoveOnGlobalLayoutListener(this);
-                    }
-                }
-                _view = null;
-            }
         }
     }
 

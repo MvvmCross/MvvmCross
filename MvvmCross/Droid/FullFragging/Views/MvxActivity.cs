@@ -25,7 +25,6 @@ namespace MvvmCross.Droid.FullFragging.Views
     public abstract class MvxActivity
         : MvxEventSourceActivity
         , IMvxAndroidView
-        , ViewTreeObserver.IOnGlobalLayoutListener
     {
         protected View _view;
 
@@ -69,8 +68,6 @@ namespace MvvmCross.Droid.FullFragging.Views
         public override void SetContentView(int layoutResId)
         {
             _view = this.BindingInflate(layoutResId, null);
-
-            _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
 
             SetContentView(_view);
         }
@@ -143,26 +140,6 @@ namespace MvvmCross.Droid.FullFragging.Views
         {
             base.OnStop();
             ViewModel?.ViewDisappeared();
-        }
-
-        public void OnGlobalLayout()
-        {
-            if (_view != null)
-            {
-                {
-                    if (Build.VERSION.SdkInt < BuildVersionCodes.JellyBean)
-                    {
-#pragma warning disable CS0618 // Type or member is obsolete
-                        _view.ViewTreeObserver.RemoveGlobalOnLayoutListener(this);
-#pragma warning restore CS0618 // Type or member is obsolete
-                    }
-                    else
-                    {
-                        _view.ViewTreeObserver.RemoveOnGlobalLayoutListener(this);
-                    }
-                }
-                _view = null;
-            }
         }
     }
 

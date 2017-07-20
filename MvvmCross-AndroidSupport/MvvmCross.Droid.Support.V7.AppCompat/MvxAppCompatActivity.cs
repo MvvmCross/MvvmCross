@@ -22,7 +22,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     [Register("mvvmcross.droid.support.v7.appcompat.MvxAppCompatActivity")]
     public class MvxAppCompatActivity
-        : MvxEventSourceAppCompatActivity, IMvxAndroidView, ViewTreeObserver.IOnGlobalLayoutListener
+        : MvxEventSourceAppCompatActivity, IMvxAndroidView
     {
         private View _view;
 
@@ -70,8 +70,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         public override void SetContentView(int layoutResId)
         {
             _view = this.BindingInflate(layoutResId, null);
-
-            _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
 
             SetContentView(_view);
         }
@@ -127,27 +125,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             var view = MvxAppCompatActivityHelper.OnCreateView(parent, name, context, attrs);
             return view ?? base.OnCreateView(parent, name, context, attrs);
-        }
-
-        public void OnGlobalLayout()
-        {
-            if (_view != null)
-            {
-                if (_view.ViewTreeObserver.IsAlive)
-                {
-                    if (Build.VERSION.SdkInt < BuildVersionCodes.JellyBean)
-                    {
-#pragma warning disable CS0618 // Type or member is obsolete
-                        _view.ViewTreeObserver.RemoveGlobalOnLayoutListener(this);
-#pragma warning restore CS0618 // Type or member is obsolete
-                    }
-                    else
-                    {
-                        _view.ViewTreeObserver.RemoveOnGlobalLayoutListener(this);
-                    }
-                }
-                _view = null;
-            }
         }
     }
 
