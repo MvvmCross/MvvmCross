@@ -121,16 +121,27 @@ namespace MvvmCross.Droid.FullFragging.Views
             ViewModel?.ViewDestroy();
         }
 
-        public override void OnAttachedToWindow()
+        protected override void OnStart()
         {
-            base.OnAttachedToWindow();
+            base.OnStart();
             ViewModel?.ViewAppearing();
         }
 
-        public override void OnDetachedFromWindow()
+        protected override void OnResume()
         {
-            base.OnDetachedFromWindow();
-            ViewModel?.ViewDisappearing(); // we don't have anywhere to get this info
+            base.OnResume();
+            ViewModel?.ViewAppeared();
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+            ViewModel?.ViewDisappearing();
+        }
+
+        protected override void OnStop()
+        {
+            base.OnStop();
             ViewModel?.ViewDisappeared();
         }
 
@@ -151,7 +162,6 @@ namespace MvvmCross.Droid.FullFragging.Views
                     }
                 }
                 _view = null;
-                ViewModel?.ViewAppeared();
             }
         }
     }
