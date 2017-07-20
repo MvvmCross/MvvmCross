@@ -4,6 +4,8 @@ using Android.App;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.Navigation;
+using MvvmCross.Core.ViewModels;
 
 namespace $rootnamespace$
 {
@@ -102,9 +104,9 @@ namespace $rootnamespace$
             context2.Dispose();
         }
 
-        public void Include(MvvmCross.Core.Navigation.MvxNavigationService navigationService)
+        public void Include(MvxNavigationService service, IMvxViewModelLoader loader)
         {
-            navigationService = new MvvmCross.Core.Navigation.MvxNavigationService()
+            service = new MvxNavigationService(null, loader);
         }
     }
 }
