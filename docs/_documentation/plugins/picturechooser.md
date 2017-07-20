@@ -40,7 +40,7 @@ The reason for this is because of Android's Activity lifecycle. The Android life
 
 If you want to use this `IMvxPictureChooserTask` effectively and reliably on Android then you really need to call this API via a service class, to use Messaging to pass the returned message back to a ViewModel and to implement 'tombstoning' support for that ViewModel.
 
-There is a simple demo for `IMvxPictureChooserTask` in [PictureTaking](https://github.com/slodge/MvvmCross-Tutorials/tree/master/PictureTaking) - however, this simple demo doesn't currently show this full Android technique. 
+There is a simple demo for `IMvxPictureChooserTask` in [PictureTaking](https://github.com/MvvmCross/MvvmCross-Samples/tree/master/PictureTaking) - however, this simple demo doesn't currently show this full Android technique. 
 
 **Note:** On Windows Phone 8.0, an additional implementation is available:
 
@@ -67,7 +67,7 @@ var isAvailable = Mvx.TryResolve(out combined);
 
 Finally, the `PictureChooser` plugin also provides an "InMemoryImage" ValueConverter - `MvxInMemoryImageValueConverter`. This value converter allows images to be decoded from byte arrays for use on-screen.
 
-The "InMemoryImage" ValueConverter can be seen in use in the PictureTaking sample - see https://github.com/slodge/MvvmCross-Tutorials/tree/master/PictureTaking.
+The "InMemoryImage" ValueConverter can be seen in use in the PictureTaking sample - see https://github.com/MvvmCross/MvvmCross-Samples/tree/master/PictureTaking.
 
 #### Windows Phone 8.1 <a name="picturechooserwp81" />
 Windows Phone 8.1 and Windows 8.1 API hasn't converged entirely and there are differences in how pictures are handled. If you want to choose pictures from the gallery, you need to implement a `EventHandler` on your `Page`, which listens to `Activated` events. This is due to the picture data is returned on that event on Windows Phone 8.1.
