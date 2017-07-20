@@ -475,25 +475,6 @@ namespace MvvmCross.Droid.Support.V4
 			CloseFragment(frag.Tag, frag.ContentId);
 			return true;
 		}
-
-        public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
-        {
-            base.OnCreate(savedInstanceState, persistentState);
-            ViewModel?.ViewCreated();
-        }
-
-        public override void OnAttachedToWindow()
-        {
-            base.OnAttachedToWindow();
-            ViewModel?.ViewAppearing();
-        }
-
-        public override void OnDetachedFromWindow()
-        {
-            base.OnDetachedFromWindow();
-            ViewModel?.ViewDisappearing(); // we don't have anywhere to get this info
-            ViewModel?.ViewDisappeared();
-        }
     }
 
     public abstract class MvxCachingFragmentActivity<TViewModel>
