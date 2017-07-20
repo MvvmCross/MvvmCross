@@ -359,8 +359,6 @@ namespace MvvmCross.Droid.FullFragging.Caching
 
             _view = Window.DecorView.RootView;
 
-            _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
-
             if (bundle == null) {
 				var fragmentRequestText = Intent.Extras?.GetString (ViewModelRequestBundleKey);
 				if (fragmentRequestText == null)
@@ -472,25 +470,6 @@ namespace MvvmCross.Droid.FullFragging.Caching
 			CloseFragment(frag.Tag, frag.ContentId);
 			return true;
 		}
-
-	    public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
-	    {
-	        base.OnCreate(savedInstanceState, persistentState);
-	        ViewModel?.ViewCreated();
-	    }
-
-	    public override void OnAttachedToWindow()
-        {
-            base.OnAttachedToWindow();
-            ViewModel?.ViewAppearing();
-        }
-
-        public override void OnDetachedFromWindow()
-        {
-            base.OnDetachedFromWindow();
-            ViewModel?.ViewDisappearing(); // we don't have anywhere to get this info
-            ViewModel?.ViewDisappeared();
-        }
     }
 
     public abstract class MvxCachingFragmentActivity<TViewModel>
