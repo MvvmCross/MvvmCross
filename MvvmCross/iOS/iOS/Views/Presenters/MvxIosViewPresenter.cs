@@ -131,23 +131,22 @@ namespace MvvmCross.iOS.Views.Presenters
             {
                 TabBarViewController = tabBarController;
 
-                CloseTabBarViewController();
-                CleanupModalViewControllers();
+                CloseSplitViewController();
             }
             // check if viewController is a SplitViewController
             else if (viewController is IMvxSplitViewController splitController)
             {
                 SplitViewController = splitController;
 
-                CloseSplitViewController();
-                CleanupModalViewControllers();
+                CloseTabBarViewController();
             }
             else
             {
                 CloseTabBarViewController();
                 CloseSplitViewController();
-                CleanupModalViewControllers();
             }
+
+            CleanupModalViewControllers();
         }
 
         protected virtual void ShowChildViewController(
@@ -172,15 +171,15 @@ namespace MvvmCross.iOS.Views.Presenters
                 }
             }
 
-            if (TabBarViewController != null && TabBarViewController.ShowChildView(viewController))
-            {
-                return;
-            }
-
             if (MasterNavigationController != null)
             {
                 PushViewControllerIntoStack(MasterNavigationController, viewController, attribute.Animated);
 
+                return;
+            }
+
+            if (TabBarViewController != null && TabBarViewController.ShowChildView(viewController))
+            {
                 return;
             }
 

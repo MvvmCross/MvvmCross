@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters.Attributes;
 using Playground.Core.ViewModels;
@@ -7,7 +7,7 @@ using UIKit;
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
-    //[MvxRootPresentation]
+    [MvxRootPresentation(WrapInNavigationController =true)]
     public partial class TabsRootView : MvxTabBarViewController<TabsRootViewModel>
     {
         private bool _isPresentedFirstTime = true;
