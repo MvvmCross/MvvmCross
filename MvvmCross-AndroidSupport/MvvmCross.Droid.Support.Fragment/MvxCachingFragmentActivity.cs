@@ -63,8 +63,6 @@ namespace MvvmCross.Droid.Support.V4
 
             _view = Window.DecorView.RootView;
 
-            _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
-
             if (bundle == null)
 				HandleIntent(Intent);
 			else
