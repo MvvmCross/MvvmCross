@@ -7,7 +7,7 @@ using UIKit;
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
-    [MvxRootPresentation(WrapInNavigationController =true)]
+    [MvxRootPresentation(WrapInNavigationController = true)]
     public partial class TabsRootView : MvxTabBarViewController<TabsRootViewModel>
     {
         private bool _isPresentedFirstTime = true;
