@@ -5,7 +5,7 @@ using MvvmCross.Core.ViewModels;
 
 namespace RoutingExample.Core.ViewModels
 {
-    public class ViewModelDialogA : MvxViewModel<string, string>
+    public class ViewModelDialogA : MvxViewModel<IMvxViewModel, string>
     {
         private readonly IMvxNavigationService _navigationService;
         private int _navigatedAwayFromCount = 0;
@@ -44,6 +44,11 @@ namespace RoutingExample.Core.ViewModels
             await Close(Title);
         });
 
+        public MvxCommand CloseHostCommand => new MvxCommand(async () =>
+        {
+            Close(viewmodel);
+        });
+
         public ViewModelDialogA(IMvxNavigationService navigationService)
         {
             _navigationService = navigationService;
@@ -52,8 +57,11 @@ namespace RoutingExample.Core.ViewModels
             ReturnedFrom = $"Returned from View B {_returnedFromCount} times";
         }
 
-        public override Task Initialize(string parameter)
+        private IMvxViewModel viewmodel;
+
+        public override Task Initialize(IMvxViewModel parameter)
         {
+            viewmodel = parameter;
             return Task.FromResult(true);
         }
     }
