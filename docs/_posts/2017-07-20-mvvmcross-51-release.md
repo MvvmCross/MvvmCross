@@ -19,10 +19,11 @@ Noteworthy are:
 
 # .NET Summer Hackfest 2017
 
-With MvvmCross we are joining the .NET Summer Hackfest 2017! 
+With MvvmCross we are joining the .NET Summer Hackfest 2017!
 
-The goals for this 2 week session will be:
+The goals for this 2 week session from 21 August to 2 September will be:
 * Convert MvvmCross to .NET Standard
+* Update samples to latest version
 * More Async await
 * Websites fixes
 * Documentation improvements
@@ -30,7 +31,7 @@ The goals for this 2 week session will be:
 
 We'll use the social media hashtag #dotnetsummer and #mvvmcross
 
-More information on this is available at: https://dotnetfoundation.org/blog/announcing-net-summer-hackfest-2017
+More information on this is available at: [https://dotnetfoundation.org/blog/announcing-net-summer-hackfest-2017](https://dotnetfoundation.org/blog/announcing-net-summer-hackfest-2017)
 
 # Change Log
 
