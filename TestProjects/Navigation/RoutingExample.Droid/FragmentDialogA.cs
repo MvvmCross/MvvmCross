@@ -1,4 +1,5 @@
-﻿using Android.OS;
+﻿using System;
+using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.Droid.BindingContext;
@@ -12,6 +13,16 @@ namespace RoutingExample.Droid
     [Register(nameof(FragmentDialogA))]
     public class FragmentDialogA : MvxDialogFragment<ViewModelDialogA>
     {
+        public FragmentDialogA()
+        {
+
+        }
+
+        protected FragmentDialogA(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

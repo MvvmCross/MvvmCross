@@ -2,23 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
+using System.Runtime.CompilerServices;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
 using Android.Support.V4.Util;
 using Android.Support.V4.View;
-using Android.Support.V7.App;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Views;
 using MvvmCross.Droid.Views.Attributes;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 
@@ -31,6 +25,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             
         }
 
+        private ConditionalWeakTable<IMvxViewModel, DialogFragment> _dialogs = new ConditionalWeakTable<IMvxViewModel, DialogFragment>();
+
         protected new FragmentManager CurrentFragmentManager
         {
             get
@@ -38,14 +34,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 if (CurrentActivity is FragmentActivity activity)
                     return activity.SupportFragmentManager;
                 throw new InvalidCastException("Cannot use Android Support Fragment within non AppCompat Activity");
-            }
-        }
-
-        protected new DialogFragment Dialog
-        {
-            get
-            {
-                return _dialog?.Target as DialogFragment;
             }
         }
 
@@ -57,25 +45,34 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                (view, attribute, request) => ShowTab(view, (MvxTabAttribute)attribute, request));
         }
 
-        protected override void ShowDialogFragment(Type view,
-           MvxDialogAttribute attribute,
-           MvxViewModelRequest request)
+        protected override MvxBasePresentationAttribute GetAttributeForViewModel(Type viewModelType)
         {
-            var fragmentName = FragmentJavaName(attribute.ViewType);
-            _dialog = new WeakReference((DialogFragment)CreateFragment(attribute, fragmentName));
-
-            //TODO: Find a better way to set the ViewModel at the Fragment
-            if (request is MvxViewModelInstanceRequest instanceRequest)
-                ((IMvxFragmentView)Dialog).ViewModel = instanceRequest.ViewModelInstance;
-            else
+            IList<MvxBasePresentationAttribute> attributes;
+            if (ViewModelToPresentationAttributeMap.TryGetValue(viewModelType, out attributes))
             {
-                ((IMvxFragmentView)Dialog).ViewModel = (IMvxViewModel)Mvx.IocConstruct(request.ViewModelType);
+                var attribute = attributes.FirstOrDefault();
+                if (attribute.ViewType?.GetInterfaces().OfType<IMvxOverridePresentationAttribute>().FirstOrDefault() is IMvxOverridePresentationAttribute view)
+                {
+                    var presentationAttribute = view.PresentationAttribute();
+
+                    if (presentationAttribute != null)
+                        return presentationAttribute;
+                }
+                return attribute;
             }
-            Dialog.Cancelable = attribute.Cancelable;
-            Dialog.Show(CurrentFragmentManager, fragmentName);
+
+            var viewType = ViewsContainer.GetViewType(viewModelType);
+            if (viewType.GetInterfaces().Contains(typeof(Android.Content.IDialogInterface)))
+                return new MvxDialogAttribute();
+            if (viewType.IsSubclassOf(typeof(Fragment)))
+                return new MvxFragmentAttribute(GetCurrentActivityViewModelType());
+
+            return new MvxActivityAttribute() { ViewModelType = viewModelType };
         }
 
-        protected override void ShowActivity(Type view, MvxActivityAttribute attribute, MvxViewModelRequest request)
+        protected override void ShowActivity(Type view, 
+            MvxActivityAttribute attribute, 
+            MvxViewModelRequest request)
         {
             var intent = CreateIntentForRequest(request);
             if(attribute.Extras != null)
@@ -103,34 +100,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 activity.StartActivity(intent);
         }
 
-        protected override IMvxFragmentView CreateFragment(MvxBasePresentationAttribute attribute, string fragmentName)
-        {
-            try
-            {
-                IMvxFragmentView fragment;
-                if (attribute is MvxFragmentAttribute fragmentAttribute && fragmentAttribute.IsCacheableFragment)
-                {
-                    if (_cachedFragments.TryGetValue(attribute.ViewModelType, out fragment))
-                    {
-
-                    }
-                    else
-                    {
-                        fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
-                        ((Fragment)fragment).RetainInstance = true;
-                        _cachedFragments.Add(attribute.ViewModelType, fragment);
-                    }
-                }
-                else
-                    fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
-                return fragment;
-            }
-            catch
-            {
-                throw new MvxException($"Cannot create Fragment '{fragmentName}'. Are you use the wrong base class?");
-            }
-        }
-
         protected override void ShowHostActivity(MvxFragmentAttribute attribute)
         {
             var viewType = ViewsContainer.GetViewType(attribute.ActivityHostViewModelType);
@@ -139,6 +108,81 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(attribute.ActivityHostViewModelType);
             Show(hostViewModelRequest);
+        }
+
+        protected override void ShowFragment(Type view,
+            MvxFragmentAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            if (attribute.ActivityHostViewModelType == null)
+                attribute.ActivityHostViewModelType = GetCurrentActivityViewModelType();
+
+            var currentHostViewModelType = GetCurrentActivityViewModelType();
+            if (attribute.ActivityHostViewModelType != currentHostViewModelType)
+            {
+                _pendingRequest = request;
+                ShowHostActivity(attribute);
+            }
+            else
+            {
+                if (CurrentActivity.FindViewById(attribute.FragmentContentId) == null)
+                    throw new NullReferenceException("FrameLayout to show Fragment not found");
+
+                var fragmentName = FragmentJavaName(attribute.ViewType);
+                var fragment = CreateFragment(attribute, fragmentName);
+
+                //TODO: Find a better way to set the ViewModel at the Fragment
+                if (request is MvxViewModelInstanceRequest instanceRequest)
+                    fragment.ViewModel = instanceRequest.ViewModelInstance;
+                else
+                {
+                    fragment.ViewModel = (IMvxViewModel)Mvx.IocConstruct(request.ViewModelType);
+                }
+
+                var ft = CurrentFragmentManager.BeginTransaction();
+                if (attribute.SharedElements != null)
+                {
+                    foreach (var item in attribute.SharedElements)
+                    {
+                        string name = item.Key;
+                        if (string.IsNullOrEmpty(name))
+                            name = ViewCompat.GetTransitionName(item.Value);
+                        ft.AddSharedElement(item.Value, name);
+                    }
+                }
+                if (!attribute.CustomAnimations.Equals((int.MinValue, int.MinValue, int.MinValue, int.MinValue)))
+                {
+                    var customAnimations = attribute.CustomAnimations;
+                    ft.SetCustomAnimations(customAnimations.enter, customAnimations.exit, customAnimations.popEnter, customAnimations.popExit);
+                }
+                if (attribute.TransitionStyle != int.MinValue)
+                    ft.SetTransitionStyle(attribute.TransitionStyle);
+
+                ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
+                ft.CommitNowAllowingStateLoss();
+            }
+        }
+
+        protected override void ShowDialogFragment(Type view,
+           MvxDialogAttribute attribute,
+           MvxViewModelRequest request)
+        {
+            var fragmentName = FragmentJavaName(attribute.ViewType);
+            var dialog = (DialogFragment)CreateFragment(attribute, fragmentName);
+
+            //TODO: Find a better way to set the ViewModel at the Fragment
+            IMvxViewModel viewModel;
+            if (request is MvxViewModelInstanceRequest instanceRequest)
+                viewModel = instanceRequest.ViewModelInstance;
+            else
+            {
+                viewModel = (IMvxViewModel)Mvx.IocConstruct(request.ViewModelType);
+            }
+            ((IMvxFragmentView)dialog).ViewModel = viewModel;
+            dialog.Cancelable = attribute.Cancelable;
+
+            _dialogs.Add(viewModel, dialog);
+            dialog.Show(CurrentFragmentManager, fragmentName);
         }
 
         protected virtual void ShowTab(
@@ -188,95 +232,13 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
         }
 
-        protected override void ShowFragment(Type view,
-            MvxFragmentAttribute attribute,
-            MvxViewModelRequest request)
-        {
-            if (attribute.ActivityHostViewModelType == null)
-                attribute.ActivityHostViewModelType = GetCurrentActivityViewModelType();
-
-            var currentHostViewModelType = GetCurrentActivityViewModelType();
-            if (attribute.ActivityHostViewModelType != currentHostViewModelType)
-            {
-                _pendingRequest = request;
-                ShowHostActivity(attribute);
-            }
-            else
-            {
-                if (CurrentActivity.FindViewById(attribute.FragmentContentId) == null)
-                    throw new NullReferenceException("FrameLayout to show Fragment not found");
-
-                var fragmentName = FragmentJavaName(attribute.ViewType);
-                var fragment = CreateFragment(attribute, fragmentName);
-
-                //TODO: Find a better way to set the ViewModel at the Fragment
-                if(request is MvxViewModelInstanceRequest instanceRequest)
-                    fragment.ViewModel = instanceRequest.ViewModelInstance;
-                else
-                {
-                    fragment.ViewModel = (IMvxViewModel)Mvx.IocConstruct(request.ViewModelType);
-                }
-
-                var ft = CurrentFragmentManager.BeginTransaction();
-                if (attribute.SharedElements != null)
-                {
-                    foreach (var item in attribute.SharedElements)
-                    {
-                        string name = item.Key;
-                        if (string.IsNullOrEmpty(name))
-                            name = ViewCompat.GetTransitionName(item.Value);
-                        ft.AddSharedElement(item.Value, name);
-                    }
-                }
-                if (!attribute.CustomAnimations.Equals((int.MinValue, int.MinValue, int.MinValue, int.MinValue)))
-                {
-                    var customAnimations = attribute.CustomAnimations;
-                    ft.SetCustomAnimations(customAnimations.enter, customAnimations.exit, customAnimations.popEnter, customAnimations.popExit);
-                }
-                if (attribute.TransitionStyle != int.MinValue)
-                    ft.SetTransitionStyle(attribute.TransitionStyle);
-
-                ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
-                ft.CommitNowAllowingStateLoss();
-            }
-        }
-
-        protected override MvxBasePresentationAttribute GetAttributeForViewModel(Type viewModelType)
-        {
-            IList<MvxBasePresentationAttribute> attributes;
-            if (ViewModelToPresentationAttributeMap.TryGetValue(viewModelType, out attributes))
-            {
-                var attribute = attributes.FirstOrDefault();
-                if (attribute.ViewType?.GetInterfaces().OfType<IMvxOverridePresentationAttribute>().FirstOrDefault() is IMvxOverridePresentationAttribute view)
-                {
-                    var presentationAttribute = view.PresentationAttribute();
-
-                    if (presentationAttribute != null)
-                        return presentationAttribute;
-                }
-                return attribute;
-            }
-
-            var viewType = ViewsContainer.GetViewType(viewModelType);
-            if (viewType.GetInterfaces().Contains(typeof(Android.Content.IDialogInterface)))
-                return new MvxDialogAttribute();
-            if (viewType.IsSubclassOf(typeof(Fragment)))
-                return new MvxFragmentAttribute(GetCurrentActivityViewModelType());
-
-            return new MvxActivityAttribute() { ViewModelType = viewModelType };
-        }
-
         public override void Close(IMvxViewModel viewModel)
         {
             var attribute = GetAttributeForViewModel(viewModel.GetType());
 
             if (attribute is MvxActivityAttribute)
             {
-                if (Dialog != null)
-                {
-                    Dialog.Dismiss();
-                    _dialog = null;
-                }
+                //TODO: Find something to close the dialogs
 
                 if (CurrentFragmentManager.BackStackEntryCount > 0)
                     CurrentFragmentManager.PopBackStackImmediate(null, 0);
@@ -306,16 +268,40 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     CurrentFragmentManager.PopBackStackImmediate(fragmentName, 1);
                 }
                 else
-                    //TODO: Not sure if we really should finish the Activity
                     CurrentActivity.Finish();
             }
-            else if (attribute is MvxDialogAttribute dialog)
+            else if (attribute is MvxDialogAttribute dialogAttribute)
             {
-                if (Dialog != null)
+                if (_dialogs.TryGetValue(viewModel, out DialogFragment dialog))
                 {
-                    Dialog.Dismiss();
-                    _dialog = null;
+                    dialog.DismissAllowingStateLoss();
+                    dialog.Dispose();
+                    _dialogs.Remove(viewModel);
                 }
+            }
+        }
+
+        protected override IMvxFragmentView CreateFragment(MvxBasePresentationAttribute attribute,
+            string fragmentName)
+        {
+            try
+            {
+                IMvxFragmentView fragment;
+                if (attribute is MvxFragmentAttribute fragmentAttribute && fragmentAttribute.IsCacheableFragment)
+                {
+                    if (_cachedFragments.TryGetValue(attribute, out fragment))
+                        return fragment;
+
+                    fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
+                    _cachedFragments.Add(attribute, fragment);
+                }
+                else
+                    fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
+                return fragment;
+            }
+            catch
+            {
+                throw new MvxException($"Cannot create Fragment '{fragmentName}'. Are you use the wrong base class?");
             }
         }
     }
