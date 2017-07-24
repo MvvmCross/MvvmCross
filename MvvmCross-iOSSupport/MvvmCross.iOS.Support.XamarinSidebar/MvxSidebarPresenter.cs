@@ -80,8 +80,22 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
             navigationController.ViewControllers = new[] { viewController };
 
-            if (panel == MvxPanelEnum.Center)
-                viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController);
+            switch (panel)
+            {
+                case MvxPanelEnum.Left:
+                case MvxPanelEnum.Right:
+                    break;
+                case MvxPanelEnum.Center:
+                default:
+                    viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController);
+                    break;
+                case MvxPanelEnum.CenterWithLeft:
+                    viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController, showLeft: true, showRight: false);
+                    break;
+                case MvxPanelEnum.CenterWithRight:
+                    viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController, showLeft: false, showRight: true);
+                    break;
+            }
 
             return true;
         }
@@ -90,6 +104,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
         {
             var navigationController = (SideBarViewController as MvxSidebarViewController).NavigationController;
 
+            if (navigationController == null)
+                return false;
+
             switch (panel)
             {
                 case MvxPanelEnum.Left:
@@ -97,7 +114,15 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
                     break;
                 case MvxPanelEnum.Center:
                 default:
-                    navigationController?.PushViewController(viewController, true);
+                    navigationController.PushViewController(viewController, true);
+                    break;
+                case MvxPanelEnum.CenterWithLeft:
+                    navigationController.PushViewController(viewController, true);
+                    viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController, showLeft: true, showRight: false);
+                    break;
+                case MvxPanelEnum.CenterWithRight:
+                    navigationController.PushViewController(viewController, true);
+                    viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController, showLeft: false, showRight: true);
                     break;
             }
 
