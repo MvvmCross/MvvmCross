@@ -5,6 +5,8 @@
         None,
         Center,
         Left,
-        Right
+        Right,
+        CenterWithLeft,
+        CenterWithRight
     }
 }
