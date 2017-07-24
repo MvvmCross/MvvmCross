@@ -118,11 +118,11 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
                     break;
                 case MvxPanelEnum.CenterWithLeft:
                     navigationController.PushViewController(viewController, true);
-                    viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController, true, false);
+                    viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController, showLeft: true, showRight: false);
                     break;
                 case MvxPanelEnum.CenterWithRight:
                     navigationController.PushViewController(viewController, true);
-                    viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController, false, true);
+                    viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController, showLeft: false, showRight: true);
                     break;
             }
 
