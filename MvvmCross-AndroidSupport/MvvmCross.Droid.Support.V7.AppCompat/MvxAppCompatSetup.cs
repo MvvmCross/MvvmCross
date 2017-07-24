@@ -20,8 +20,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
         }
 
-        protected abstract override IMvxApplication CreateApp();
-
         protected override IEnumerable<Assembly> AndroidViewAssemblies => new List<Assembly>(base.AndroidViewAssemblies)
         {
             typeof(Toolbar).Assembly,

@@ -15,6 +15,7 @@ The default presenter that comes with MvvmCross offers out of the box support fo
 - SplitView
 - Modal
 - Modal navigation
+- Nested modals
 
 Also if your app needs another kind of presentation mode, you can easily extend it!
 
@@ -32,7 +33,7 @@ The view root can be one of the following types:
 
 
 ### MvxChildPresentationAttribute
-Used to set a view as a _child_. You should use this attribute over a view class that will be displayed inside a navigation stack.
+Used to set a view as a _child_. You should use this attribute over a view class that will be displayed inside a navigation stack (modal or not).
 The view class can decide if wants to be displayed animated or not through the attribute member `Animated` (the default value is `true`).
 
 
@@ -76,7 +77,7 @@ There is an attribute member that can be used to customize the presentation:
 ## Views without attributes: Default values
 
 - If the initial view class of your app has no attribute over it, the presenter will assume stack navigation and will wrap your initial view in a `MvxNavigationController`.
-- If a view class has no attribute over it, the presenter will assume _animated_ child presentation.
+- If a view class has no attribute over it, the presenter will assume _animated_ child presentation and will display the view in the current navigation stack (could be modal or not).
 
 ## Override a presentation attribute at runtime
 To override a presentation attribute at runtime you can implement the `IMvxOverridePresentationAttribute` in your view controller and determine the presentation attribute in the `PresentationAttribute` method like this:

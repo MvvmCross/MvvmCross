@@ -1,4 +1,5 @@
-﻿using MvvmCross.Forms.Presenters;
+﻿using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Presenters;
 using MvvmCross.Uwp.Views;
 using Xamarin.Forms;
 
@@ -10,8 +11,8 @@ namespace MvvmCross.Forms.Uwp.Presenters
     {
         private readonly IMvxWindowsFrame _rootFrame;        
 
-        public MvxFormsUwpMasterDetailPagePresenter(IMvxWindowsFrame rootFrame, Application mvxFormsApp)
-            : base(mvxFormsApp)
+        public MvxFormsUwpMasterDetailPagePresenter(IMvxWindowsFrame rootFrame, MvxFormsApplication formsApplication)
+            : base(formsApplication)
         {
             _rootFrame = rootFrame;
         }

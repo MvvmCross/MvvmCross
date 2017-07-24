@@ -22,5 +22,14 @@ namespace Playground.Core.ViewModels
                 return _closeCommand ?? (_closeCommand = new MvxCommand(() => Close(this)));
             }
         }
+
+        private ICommand _showNestedModalCommand;
+        public ICommand ShowNestedModalCommand
+        {
+            get
+            {
+                return _showNestedModalCommand ?? (_showNestedModalCommand = new MvxCommand(() => ShowViewModel<NestedModalViewModel>()));
+            }
+        }
     }
 }

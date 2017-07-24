@@ -4,6 +4,8 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Views;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Presenters;
 using MvvmCross.Platform;
 using Xamarin.Forms.Platform.Android;
 
@@ -24,6 +26,20 @@ namespace MvvmCross.Forms.Droid
                 }
 
                 return _lifetimeListener;
+            }
+        }
+
+        private MvxFormsApplication _formsApplication;
+        protected MvxFormsApplication FormsApplication
+        {
+            get
+            {
+                if (_formsApplication == null)
+                {
+                    var formsPresenter = (IMvxFormsPagePresenter)Mvx.Resolve<IMvxAndroidViewPresenter>();
+                    _formsApplication = formsPresenter.FormsApplication;
+                }
+                return _formsApplication;
             }
         }
 
@@ -48,6 +64,9 @@ namespace MvvmCross.Forms.Droid
             setupSingleton.EnsureInitialized();
 
             LifetimeListener.OnCreate(this);
+
+            global::Xamarin.Forms.Forms.Init(this, bundle);
+            LoadApplication(FormsApplication);
         }
 
         public void MvxInternalStartActivityForResult(Intent intent, int requestCode)

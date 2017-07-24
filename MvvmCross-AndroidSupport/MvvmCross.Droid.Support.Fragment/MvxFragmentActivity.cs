@@ -80,17 +80,23 @@ namespace MvvmCross.Droid.Support.V4
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
 
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            ViewModel?.ViewCreated();
+        }
+
         public override void OnAttachedToWindow()
         {
             base.OnAttachedToWindow();
-            ViewModel?.Appearing();
+            ViewModel?.ViewAppearing();
         }
 
         public override void OnDetachedFromWindow()
         {
             base.OnDetachedFromWindow();
-            ViewModel?.Disappearing(); // we don't have anywhere to get this info
-            ViewModel?.Disappeared();
+            ViewModel?.ViewDisappearing(); // we don't have anywhere to get this info
+            ViewModel?.ViewDisappeared();
         }
 
         public void OnGlobalLayout()
@@ -111,13 +117,13 @@ namespace MvvmCross.Droid.Support.V4
                     }
                 }
                 _view = null;
-                ViewModel?.Appeared();
+                ViewModel?.ViewAppeared();
             }
         }
     }
 
     public abstract class MvxFragmentActivity<TViewModel>
-        : MvxFragmentActivity, IMvxAndroidView<TViewModel> 
+        : MvxFragmentActivity, IMvxAndroidView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel

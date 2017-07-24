@@ -198,6 +198,14 @@
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>MvvmCross.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms.iOS\MvvmCross.Forms.iOS.csproj">
+      <Project>{F2270784-C153-4B1C-BB04-15CB29F0F945}</Project>
+      <Name>MvvmCross.Forms.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms\MvvmCross.Forms.csproj">
+      <Project>{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}</Project>
+      <Name>MvvmCross.Forms</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

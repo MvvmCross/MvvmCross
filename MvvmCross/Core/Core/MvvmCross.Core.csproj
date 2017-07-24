@@ -131,6 +131,8 @@
     <Compile Include="Navigation\EventArguments\NavigateEventArgs.cs" />
     <Compile Include="Navigation\IMvxNavigationCache.cs" />
     <Compile Include="Navigation\MvxNavigationCache.cs" />
+    <Compile Include="Annotations\JetbrainsAnnotations.cs" />
+    <Compile Include="ViewModels\MvxNavigationServiceAppStart.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -148,4 +150,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Annotations\" />
+  </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@
 // Project Lead - Tomasz Cielecki, @cheesebaron, mvxplugins@ostebaronen.dk
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 
+using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.Uwp.Views;
 using Xamarin.Forms;
@@ -18,8 +19,8 @@ namespace MvvmCross.Forms.Uwp.Presenters
     {
         private readonly IMvxWindowsFrame _rootFrame;
 
-        public MvxFormsUwpPagePresenter(IMvxWindowsFrame rootFrame, Application mvxFormsApp)
-            : base(mvxFormsApp)
+        public MvxFormsUwpPagePresenter(IMvxWindowsFrame rootFrame, MvxFormsApplication formsApplication)
+            : base(formsApplication)
         {
             _rootFrame = rootFrame;
         }

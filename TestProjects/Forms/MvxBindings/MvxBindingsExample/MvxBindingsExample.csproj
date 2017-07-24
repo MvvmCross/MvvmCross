@@ -44,6 +44,7 @@
     </Compile>
     <Compile Include="Services\TextProviderBuilder.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="AppStart.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\MainPage.xaml">
