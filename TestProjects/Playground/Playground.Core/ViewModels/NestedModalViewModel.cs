@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Windows.Input;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
     public class NestedModalViewModel : MvxViewModel
     {
-        private ICommand _showTabsCommand;
-        public ICommand ShowTabsCommand
+        private readonly IMvxNavigationService _navigationService;
+
+        public NestedModalViewModel(IMvxNavigationService navigationService)
         {
-            get
-            {
-                return _showTabsCommand ?? (_showTabsCommand = new MvxCommand(() => ShowViewModel<TabsRootViewModel>()));
-            }
+            _navigationService = navigationService;
+
+            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
+
+            ShowTabsCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<TabsRootViewModel>());
         }
 
-        private ICommand _closeCommand;
-        public ICommand CloseCommand
-        {
-            get
-            {
-                return _closeCommand ?? (_closeCommand = new MvxCommand(() => Close(this)));
-            }
-        }
+        public IMvxAsyncCommand ShowTabsCommand { get; private set; }
+
+        public IMvxAsyncCommand CloseCommand { get; private set; }
     }
 }

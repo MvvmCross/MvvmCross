@@ -1,22 +1,26 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
     public class SplitRootViewModel : MvxViewModel
     {
-        private ICommand _showInitialViewModelsCommand;
-        public ICommand ShowInitialViewModelsCommand
+        private readonly IMvxNavigationService _navigationService;
+
+        public SplitRootViewModel(IMvxNavigationService navigationService)
         {
-            get
-            {
-                return _showInitialViewModelsCommand ?? (_showInitialViewModelsCommand = new MvxCommand(ShowInitialViewModels));
-            }
+            _navigationService = navigationService;
+
+            ShowInitialViewModelsCommand = new MvxAsyncCommand(ShowInitialViewModels);
         }
 
-        private void ShowInitialViewModels()
+        public IMvxAsyncCommand ShowInitialViewModelsCommand { get; private set; }
+
+        private async Task ShowInitialViewModels()
         {
-            ShowViewModel<SplitMasterViewModel>();
+            await _navigationService.Navigate<SplitMasterViewModel>();
         }
     }
 }
