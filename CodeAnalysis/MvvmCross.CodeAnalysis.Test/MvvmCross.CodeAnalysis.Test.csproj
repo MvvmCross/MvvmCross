@@ -36,9 +36,7 @@
     <Reference Include="Esent.Interop, Version=1.9.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ManagedEsent.1.9.4\lib\net40\Esent.Interop.dll</HintPath>
     </Reference>
-    <Reference Include="Java.Interop">
-      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\Java.Interop.dll</HintPath>
-    </Reference>
+    <Reference Include="Java.Interop" />
     <Reference Include="Microsoft.CodeAnalysis, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.CodeAnalysis.Common.2.3.0\lib\netstandard1.3\Microsoft.CodeAnalysis.dll</HintPath>
     </Reference>
@@ -60,9 +58,7 @@
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Mono.Android">
-      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v6.0\Mono.Android.dll</HintPath>
-    </Reference>
+    <Reference Include="Mono.Android" />
     <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
@@ -147,9 +143,7 @@
       <HintPath>..\..\packages\System.Xml.XPath.XDocument.4.3.0\lib\net46\System.Xml.XPath.XDocument.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="Xamarin.iOS">
-      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\Xamarin.iOS\v1.0\Xamarin.iOS.dll</HintPath>
-    </Reference>
+    <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplyMustBeCalledWhenUsingFluentBindingSetAnalyzerTests.cs" />
