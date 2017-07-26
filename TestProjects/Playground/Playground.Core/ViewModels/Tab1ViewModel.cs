@@ -1,44 +1,32 @@
 ﻿using System.Windows.Input;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
     public class Tab1ViewModel : MvxViewModel
     {
-        private ICommand _openChildCommand;
-        public ICommand OpenChildCommand
+        private readonly IMvxNavigationService _navigationService;
+
+        public Tab1ViewModel(IMvxNavigationService navigationService)
         {
-            get
-            {
-                return _openChildCommand ?? (_openChildCommand = new MvxCommand(() => ShowViewModel<ChildViewModel>()));
-            }
+            _navigationService = navigationService;
+
+            OpenChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel>());
+
+            OpenModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalViewModel>());
+
+            OpenNavModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalNavViewModel>());
+
+            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
         }
 
-        private ICommand _openModalCommand;
-        public ICommand OpenModalCommand
-        {
-            get
-            {
-                return _openModalCommand ?? (_openModalCommand = new MvxCommand(() => ShowViewModel<ModalViewModel>()));
-            }
-        }
+        public IMvxAsyncCommand OpenChildCommand { get; private set; }
 
-        private ICommand _openNavModalCommand;
-        public ICommand OpenNavModalCommand
-        {
-            get
-            {
-                return _openNavModalCommand ?? (_openNavModalCommand = new MvxCommand(() => ShowViewModel<ModalNavViewModel>()));
-            }
-        }
+        public IMvxAsyncCommand OpenModalCommand { get; private set; }
 
-        private ICommand _closeCommand;
-        public ICommand CloseCommand
-        {
-            get
-            {
-                return _closeCommand ?? (_closeCommand = new MvxCommand(() => Close(this)));
-            }
-        }
+        public IMvxAsyncCommand OpenNavModalCommand { get; private set; }
+
+        public IMvxAsyncCommand CloseCommand { get; private set; }
     }
 }
