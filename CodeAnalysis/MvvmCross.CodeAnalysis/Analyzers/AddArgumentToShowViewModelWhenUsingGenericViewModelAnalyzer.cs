@@ -17,7 +17,7 @@ namespace MvvmCross.CodeAnalysis.Analyzers
         internal static readonly LocalizableString Description = "When calling 'ShowViewModel<TViewModel, TParameter>()', if TViewModel inherits from the generic 'MvxViewModel<TParameter>' or implements 'IMvxViewModel<TInit>', then the method call to ShowViewModel should be passing a TInit argument";
         internal const string Category = Categories.Usage;
 
-        internal static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticIds.AddArgumentToShowViewModelWhenUsingGenericViewModelId, Title, MessageFormat, Category, DiagnosticSeverity.Warning, true, "Required Matching Type");
+        internal static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticIds.AddArgumentToShowViewModelWhenUsingGenericViewModelId, Title, MessageFormat, Category, DiagnosticSeverity.Warning, true, Description);
         private static readonly string MvxViewModelInitializerName = typeof(IMvxViewModel<>).Name;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
