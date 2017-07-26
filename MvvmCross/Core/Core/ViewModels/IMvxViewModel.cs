@@ -43,8 +43,7 @@ namespace MvvmCross.Core.ViewModels
     //TODO: Can we keep the IMvxViewModel syntax here? Compiler complains
     public interface IMvxViewModelResult<TResult> : IMvxViewModel where TResult : class
     {
-        void SetClose(TaskCompletionSource<TResult> tcs, CancellationToken cancellationToken);
-        Task<bool> Close(TResult result);
+        void SetClose(TaskCompletionSource<object> tcs);
     }
 
     public interface IMvxViewModel<TParameter, TResult> : IMvxViewModel<TParameter>, IMvxViewModelResult<TResult> where TParameter : class where TResult : class

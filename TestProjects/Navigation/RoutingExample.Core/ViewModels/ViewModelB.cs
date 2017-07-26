@@ -49,7 +49,7 @@ namespace RoutingExample.Core.ViewModels
 
         public MvxCommand CloseCommand => new MvxCommand(async () =>
         {
-            await Close(Title);
+            await _navigationService.Close(this, Title);
         });
 
         public ViewModelB(IMvxNavigationService navigationService)
