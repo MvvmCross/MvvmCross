@@ -42,10 +42,5 @@ namespace MvvmCross.Core.Navigation
         {
             return navigationService.Navigate<TParameter, TResult>(path.ToString(), param, presentationBundle, cancellationToken);
         }
-
-        public static Task<bool> Close<TViewModel>(this IMvxNavigationService navigationService)
-        {
-            return navigationService.Close((IMvxViewModel)Mvx.IocConstruct<TViewModel>());
-        }
     }
 }

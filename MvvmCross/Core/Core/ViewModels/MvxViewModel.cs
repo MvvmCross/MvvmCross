@@ -105,45 +105,16 @@ namespace MvvmCross.Core.ViewModels
     //TODO: Not possible to name MvxViewModel, name is MvxViewModelResult for now
     public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult> where TResult : class
     {
-        private TaskCompletionSource<TResult> _tcs;
-        private CancellationToken _cancellationToken;
-        private bool _isClosing;
+        private TaskCompletionSource<object> _tcs;
 
-        public void SetClose(TaskCompletionSource<TResult> tcs, CancellationToken cancellationToken)
+        public void SetClose(TaskCompletionSource<object> tcs)
         {
-            _tcs = tcs ?? throw new ArgumentNullException(nameof(tcs));
-            _cancellationToken = cancellationToken;
-            _cancellationToken.Register(() => {
-                Close(this);
-            });
-        }
-
-        public virtual Task<bool> Close(TResult result)
-        {
-            _isClosing = true;
-
-            try
-            {
-                var closeResult = Close(this);
-                if (closeResult)
-                    _tcs?.TrySetResult(result);
-
-                return Task.FromResult(closeResult);
-            }
-            catch (Exception ex)
-            {
-                _tcs?.TrySetException(ex);
-                return Task.FromResult(false);
-            }
-            finally
-            {
-                _isClosing = false;
-            }
+            _tcs = tcs;
         }
 
         public override void ViewDestroy()
         {
-            if (!_isClosing)
+            if (_tcs != null && !_tcs.Task.IsCompleted && !_tcs.Task.IsFaulted)
                 _tcs?.TrySetCanceled();
             base.ViewDestroy();
         }
