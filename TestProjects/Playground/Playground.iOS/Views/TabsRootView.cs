@@ -23,7 +23,7 @@ namespace Playground.iOS.Views
             if (ViewModel != null && _isPresentedFirstTime)
             {
                 _isPresentedFirstTime = false;
-                ViewModel.ShowInitialViewModelsCommand.Execute(null);
+                ViewModel.ShowInitialViewModelsCommand.ExecuteAsync(null);
             }
         }
 
