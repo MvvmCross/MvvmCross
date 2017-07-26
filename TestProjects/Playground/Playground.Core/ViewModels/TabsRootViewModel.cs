@@ -16,7 +16,7 @@ namespace Playground.Core.ViewModels
             ShowInitialViewModelsCommand = new MvxAsyncCommand(ShowInitialViewModels);
         }
 
-        public ICommand ShowInitialViewModelsCommand { get; private set; }
+        public IMvxAsyncCommand ShowInitialViewModelsCommand { get; private set; }
 
         private async Task ShowInitialViewModels()
         {
