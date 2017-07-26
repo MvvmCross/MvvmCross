@@ -148,8 +148,7 @@ namespace AndroidApp.Core.ViewModels
             var expectedDiagnostic = new DiagnosticResult
             {
                 Id = DiagnosticIds.AddArgumentToShowViewModelWhenUsingGenericViewModelId,
-                Message =
-                    "When calling 'ShowViewModel<T>()', if T inherits from the generic 'MvxViewModel<TU>', then the method call to ShowViewModel should be passing a TU argument",
+                Message = "'SecondViewModel' inherits from generic 'MvxViewModel<TParameter>' or implements 'IMvxViewModel<TParameter>' and requires an argument of type Int32",
                 Severity = DiagnosticSeverity.Warning,
                 Locations =
                     new[]
@@ -192,8 +191,7 @@ namespace AndroidApp.Core.ViewModels
             var expectedDiagnostic = new DiagnosticResult
             {
                 Id = DiagnosticIds.AddArgumentToShowViewModelWhenUsingGenericViewModelId,
-                Message =
-                    "When calling 'ShowViewModel<T>()', if T inherits from the generic 'MvxViewModel<TU>', then the method call to ShowViewModel should be passing a TU argument",
+                Message = "'SecondViewModel' inherits from generic 'MvxViewModel<TParameter>' or implements 'IMvxViewModel<TParameter>' and requires an argument of type Int32",
                 Severity = DiagnosticSeverity.Warning,
                 Locations =
                     new[]
@@ -216,8 +214,7 @@ namespace AndroidApp.Core.ViewModels
             var expectedDiagnostic = new DiagnosticResult
             {
                 Id = DiagnosticIds.AddArgumentToShowViewModelWhenUsingGenericViewModelId,
-                Message =
-                    "When calling 'ShowViewModel<T>()', if T inherits from the generic 'MvxViewModel<TU>', then the method call to ShowViewModel should be passing a TU argument",
+                Message = "'SecondViewModel' inherits from generic 'MvxViewModel<TParameter>' or implements 'IMvxViewModel<TParameter>' and requires an argument of type Int32",
                 Severity = DiagnosticSeverity.Warning,
                 Locations =
                     new[]
