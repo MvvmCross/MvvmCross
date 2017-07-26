@@ -1,35 +1,28 @@
 ﻿using System.Windows.Input;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
     public class SplitMasterViewModel : MvxViewModel
     {
-        private ICommand _openDetailCommand;
-        public ICommand OpenDetailCommand
+        private readonly IMvxNavigationService _navigationService;
+
+        public SplitMasterViewModel(IMvxNavigationService navigationService)
         {
-            get
-            {
-                return _openDetailCommand ?? (_openDetailCommand = new MvxCommand(() => ShowViewModel<SplitDetailViewModel>()));
-            }
+            _navigationService = navigationService;
+
+            OpenDetailCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SplitDetailViewModel>());
+
+            OpenDetailNavCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SplitDetailNavViewModel>());
+
+            ShowRootViewModel = new MvxAsyncCommand(async () => await _navigationService.Navigate<RootViewModel>());
         }
 
-        private ICommand _openDetailNavCommand;
-        public ICommand OpenDetailNavCommand
-        {
-            get
-            {
-                return _openDetailNavCommand ?? (_openDetailNavCommand = new MvxCommand(() => ShowViewModel<SplitDetailNavViewModel>()));
-            }
-        }
+        public IMvxAsyncCommand OpenDetailCommand { get; private set; }
 
-        private ICommand _showRootViewModel;
-        public ICommand ShowRootViewModel
-        {
-            get
-            {
-                return _showRootViewModel ?? (_showRootViewModel = new MvxCommand(() => ShowViewModel<RootViewModel>()));
-            }
-        }
+        public IMvxAsyncCommand OpenDetailNavCommand { get; private set; }
+
+        public IMvxAsyncCommand ShowRootViewModel { get; private set; }
     }
 }
