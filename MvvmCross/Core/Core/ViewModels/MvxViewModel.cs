@@ -76,7 +76,7 @@ namespace MvvmCross.Core.ViewModels
         {
         }
 
-        public virtual void Declare()
+        public virtual void Prepare()
         {
             
         }
@@ -100,12 +100,12 @@ namespace MvvmCross.Core.ViewModels
                 }
 
                 var deserialized = serializer.DeserializeObject<TParameter>(parameter);
-                Declare(deserialized);
+                Prepare(deserialized);
                 await Initialize();
             }
         }
 
-        public abstract void Declare(TParameter parameter);
+        public abstract void Prepare(TParameter parameter);
     }
 
     //TODO: Not possible to name MvxViewModel, name is MvxViewModelResult for now
@@ -123,6 +123,6 @@ namespace MvvmCross.Core.ViewModels
 
     public abstract class MvxViewModel<TParameter, TResult> : MvxViewModelResult<TResult>, IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class
     {
-        public abstract void Declare(TParameter parameter);
+        public abstract void Prepare(TParameter parameter);
     }
 }

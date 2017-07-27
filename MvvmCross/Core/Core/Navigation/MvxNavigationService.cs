@@ -169,7 +169,7 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
-            viewModel.Declare();
+            viewModel.Prepare();
             ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize().ConfigureAwait(false);
 
@@ -181,7 +181,7 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
-            viewModel.Declare(param);
+            viewModel.Prepare(param);
             ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize().ConfigureAwait(false);
 
@@ -204,7 +204,7 @@ namespace MvvmCross.Core.Navigation
             viewModel.CloseCompletionSource = tcs;
             _tcsResults.Add(viewModel, tcs);
 
-            viewModel.Declare();
+            viewModel.Prepare();
             ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize().ConfigureAwait(false);
 
@@ -236,7 +236,7 @@ namespace MvvmCross.Core.Navigation
             viewModel.CloseCompletionSource = tcs;
             _tcsResults.Add(viewModel, tcs);
 
-            viewModel.Declare(param);
+            viewModel.Prepare(param);
             ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize().ConfigureAwait(false);
 

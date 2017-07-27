@@ -24,7 +24,7 @@ namespace RoutingExample.Core.ViewModels
             
         }
 
-        public override void Declare(User parameter)
+        public override void Prepare(User parameter)
         {
             var test = parameter;
         }
