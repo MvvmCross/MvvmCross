@@ -29,7 +29,7 @@ namespace Playground.Core.ViewModels
         }
 
         string para;
-        public override void Declare(string parameter)
+        public override void Prepare(string parameter)
         {
             para = parameter;
         }

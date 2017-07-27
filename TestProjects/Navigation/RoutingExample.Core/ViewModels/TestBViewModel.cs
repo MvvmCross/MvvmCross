@@ -39,7 +39,7 @@ namespace RoutingExample.Core.ViewModels
         public IMvxAsyncCommand OpenViewModelBCommand => new MvxAsyncCommand(
             () =>  _navigationService.Navigate<TestBViewModel, User, User>(new User($"To B from {GetHashCode()}", "Something")));
 
-        public override void Declare(User parameter)
+        public override void Prepare(User parameter)
         {
             _user = parameter;
         }

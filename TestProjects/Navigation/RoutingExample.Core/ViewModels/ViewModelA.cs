@@ -47,7 +47,7 @@ namespace RoutingExample.Core.ViewModels
             ReturnedFrom = $"Returned from View B {_returnedFromCount} times";
         }
 
-        public override void Declare(string parameter)
+        public override void Prepare(string parameter)
         {
             
         }
