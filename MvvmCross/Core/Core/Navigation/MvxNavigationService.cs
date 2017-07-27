@@ -378,7 +378,10 @@ namespace MvvmCross.Core.Navigation
             {
                 var closeResult = await Close(viewModel);
                 if (closeResult)
+                {
                     _tcs?.TrySetResult(result);
+                    _tcsResults.Remove(viewModel);
+                }
                 else
                     viewModel.CloseCompletionSource = _tcs;
                 return closeResult;
