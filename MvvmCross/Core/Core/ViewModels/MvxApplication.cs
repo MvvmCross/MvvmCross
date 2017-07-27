@@ -51,7 +51,7 @@ namespace MvvmCross.Core.ViewModels
         protected void RegisterNavigationServiceAppStart<TViewModel>()
             where TViewModel : IMvxViewModel
         {
-            Mvx.RegisterSingleton<IMvxAppStart>(new MvxNavigationServiceAppStart<TViewModel>());
+            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, MvxNavigationServiceAppStart<TViewModel>>();
         }
 
         protected void RegisterAppStart<TViewModel>()

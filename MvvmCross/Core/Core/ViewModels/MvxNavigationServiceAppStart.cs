@@ -18,9 +18,9 @@ namespace MvvmCross.Core.ViewModels
     {
         protected readonly IMvxNavigationService NavigationService;
 
-        public MvxNavigationServiceAppStart()
+        public MvxNavigationServiceAppStart(IMvxNavigationService navigationService)
         {
-            NavigationService = Mvx.Resolve<IMvxNavigationService>();
+            NavigationService = navigationService;
         }
 
         public void Start(object hint = null)
