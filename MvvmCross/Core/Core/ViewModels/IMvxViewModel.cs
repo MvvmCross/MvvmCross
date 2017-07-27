@@ -32,6 +32,8 @@ namespace MvvmCross.Core.ViewModels
 
         void SaveState(IMvxBundle state);
 
+        void Declare();
+
         Task Initialize();
     }
 

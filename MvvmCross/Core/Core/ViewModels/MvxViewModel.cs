@@ -76,6 +76,11 @@ namespace MvvmCross.Core.ViewModels
         {
         }
 
+        public virtual void Declare()
+        {
+            
+        }
+
         public virtual Task Initialize()
         {
             return Task.FromResult(true);
