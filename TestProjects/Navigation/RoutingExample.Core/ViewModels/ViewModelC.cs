@@ -28,11 +28,9 @@ namespace RoutingExample.Core.ViewModels
             await _navigationService.Close(this, Title);
         });
 
-        public override Task Initialize(Tuple<string, int> parameter)
+        public override void Declare(Tuple<string, int> parameter)
         {
             NavigatedTo = $"Navigated to from {parameter.Item1} {parameter.Item2} times";
-
-            return Task.FromResult(true);
         }
     }
 }

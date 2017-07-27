@@ -24,10 +24,9 @@ namespace RoutingExample.Core.ViewModels
             
         }
 
-        public override async Task Initialize(User parameter)
+        public override void Declare(User parameter)
         {
             var test = parameter;
-            await Task.FromResult(true);
         }
     }
 }

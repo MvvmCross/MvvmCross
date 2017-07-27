@@ -61,11 +61,9 @@ namespace RoutingExample.Core.ViewModels
             ReturnedFrom = $"Returned from View C {_returnedFromCount} times";
         }
 
-        public override Task Initialize(Tuple<string, int> parameter)
+        public override void Declare(Tuple<string, int> parameter)
         {
             NavigatedTo = $"Navigated to from {parameter.Item1} {parameter.Item2} times";
-
-            return Task.FromResult(true);
         }
     }
 }

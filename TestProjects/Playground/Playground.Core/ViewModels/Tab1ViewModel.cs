@@ -29,10 +29,9 @@ namespace Playground.Core.ViewModels
         }
 
         string para;
-        public override async Task Initialize(string parameter)
+        public override void Declare(string parameter)
         {
             para = parameter;
-            await Task.Delay(3000);
         }
 
         public override void ViewAppeared()
