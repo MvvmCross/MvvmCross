@@ -169,9 +169,9 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
+            ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize().ConfigureAwait(false);
 
-            ViewDispatcher.ShowViewModel(request);
             OnAfterNavigate(this, args);
         }
 
@@ -180,10 +180,10 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
-            await viewModel.Initialize(param).ConfigureAwait(false);
+            viewModel.Declare(param);
+            ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize().ConfigureAwait(false);
 
-            ViewDispatcher.ShowViewModel(request);
             OnAfterNavigate(this, args);
         }
 
@@ -200,12 +200,12 @@ namespace MvvmCross.Core.Navigation
             }
 
             var tcs = new TaskCompletionSource<object>();
-            viewModel.SetClose(tcs);
+            viewModel.CloseCompletionSource = tcs;
             _tcsResults.Add(viewModel, tcs);
 
+            ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize().ConfigureAwait(false);
 
-            ViewDispatcher.ShowViewModel(request);
             OnAfterNavigate(this, args);
 
             try
@@ -231,13 +231,14 @@ namespace MvvmCross.Core.Navigation
             }
 
             var tcs = new TaskCompletionSource<object>();
-            viewModel.SetClose(tcs);
+            viewModel.CloseCompletionSource = tcs;
             _tcsResults.Add(viewModel, tcs);
 
-            await viewModel.Initialize(param).ConfigureAwait(false);
+            viewModel.Declare(param);
+            ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize().ConfigureAwait(false);
 
-            ViewDispatcher.ShowViewModel(request);
+
             OnAfterNavigate(this, args);
 
             try
@@ -371,7 +372,7 @@ namespace MvvmCross.Core.Navigation
             _tcsResults.TryGetValue(viewModel, out TaskCompletionSource<object> _tcs);
 
             //Disable cancelation of the Task when closing ViewModel through the service
-            viewModel.SetClose(null);
+            viewModel.CloseCompletionSource = null;
 
             try
             {
@@ -379,7 +380,7 @@ namespace MvvmCross.Core.Navigation
                 if (closeResult)
                     _tcs?.TrySetResult(result);
                 else
-                    viewModel.SetClose(_tcs);
+                    viewModel.CloseCompletionSource = _tcs;
                 return closeResult;
             }
             catch (Exception ex)

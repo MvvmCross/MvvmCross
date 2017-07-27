@@ -95,33 +95,29 @@ namespace MvvmCross.Core.ViewModels
                 }
 
                 var deserialized = serializer.DeserializeObject<TParameter>(parameter);
-                await Initialize(deserialized);
+                Declare(deserialized);
+                await Initialize();
             }
         }
 
-        public abstract Task Initialize(TParameter parameter);
+        public abstract void Declare(TParameter parameter);
     }
 
     //TODO: Not possible to name MvxViewModel, name is MvxViewModelResult for now
     public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult> where TResult : class
     {
-        private TaskCompletionSource<object> _tcs;
-
-        public void SetClose(TaskCompletionSource<object> tcs)
-        {
-            _tcs = tcs;
-        }
+        public TaskCompletionSource<object> CloseCompletionSource { get; set; }
 
         public override void ViewDestroy()
         {
-            if (_tcs != null && !_tcs.Task.IsCompleted && !_tcs.Task.IsFaulted)
-                _tcs?.TrySetCanceled();
+            if (CloseCompletionSource != null && !CloseCompletionSource.Task.IsCompleted && !CloseCompletionSource.Task.IsFaulted)
+                CloseCompletionSource?.TrySetCanceled();
             base.ViewDestroy();
         }
     }
 
     public abstract class MvxViewModel<TParameter, TResult> : MvxViewModelResult<TResult>, IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class
     {
-        public abstract Task Initialize(TParameter parameter);
+        public abstract void Declare(TParameter parameter);
     }
 }
