@@ -1,0 +1,265 @@
+.hackfest {
+  color: $text-color;
+  > .banner {
+    .background {
+      top: $header-height + $header-border-width;
+      right: 0;
+      left: 0;
+      bottom: 0;
+    }
+    .background .img {
+      background: url($baseurl + "/assets/img/hackfest/banner.jpg") no-repeat center center;
+      height: 500px;
+    }
+    .background .shadow, .background .text {
+      background-color: rgba(0, 0, 0, 0.2);
+      position: absolute;
+      top: $header-height + $header-border-width;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 500px;
+    }
+    .background .shadow {
+      z-index: 1;
+      width: 100%;
+    }
+    .background .text {
+      z-index: 2;
+      color: #FFFFFF;
+      padding-left: 16%;
+      padding-right: 16%;
+      display: -webkit-flex;
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: center;
+    }
+    .background .text .time {
+      font-size: 2rem;
+      margin-top: 0;
+    }
+    .background .text .title {
+      font-size: 4.625rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin: 0;
+    }
+  }
+  > .info {
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    .main-content {
+      width: 42%;
+    }
+    .line {
+      border-left: 1px solid $text-color;
+      height: 300px;
+      align-self: center;
+    }
+    .goals .golas-list {
+      list-style: none;
+      font-size: 1.25rem;
+      padding-left: 0;
+    }
+    .goals .golas-list li::before {
+      content: "\f024";
+      font-family: FontAwesome;
+      font-size: inherit;
+      display: inline-block;
+      margin-right: 8px;
+    }
+  }
+  > .take-part-in {
+    .take-part-in-content {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    .take-part-in-content .sign-up {
+      background-color: $brand-color;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-weight: $base-font-weight;
+      color: #FAFAFA;
+      text-decoration: none;
+      text-transform: uppercase;
+      display: inline-block;
+      cursor: pointer;
+      // start-button hover effect
+      &:hover {
+        background-color: darken($brand-color, 5%);
+      }
+      // start-button active effect
+      &:active {
+        background-color: $brand-color;
+      }
+    }
+  }
+  > .member-list {
+    .member-list-content {
+      padding-left: 40px;
+      padding-right: 40px;
+      @include clearfix();
+    }
+    .member-list-content .list {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .member-list-content .widget {
+      width: 195px;
+      text-align: center;
+      float: right;
+    }
+  }
+  > .join-us {
+    .join-us-content,
+    .mail-subscribe {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    .mail-subscribe #mc_embed_signup {
+      width: 600px;
+      form {
+        display: block;
+        text-align: left;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      input {
+        border: 1px solid #ABB0B2;
+        border-radius: 3px;
+      }
+      input:focus {
+        border-color: #333;
+      }
+      .button {
+        color: #FFFFFF;
+        background-color: $brand-color;
+        border: 0 none;
+        border-radius: 4px;
+        transition: all 0.23s ease-in-out 0s;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: $base-font-weight;
+        text-decoration: none;
+        text-transform: uppercase;
+        padding: 8px 16px;
+        &:hover {
+          background-color: darken($brand-color, 5%);
+        }
+      }
+      .mc-field-group {
+        min-height: 50px;
+        padding-bottom: 10px;
+        width: 90%;
+        label {
+          display: block;
+          margin-bottom: 3px;
+        }
+        input {
+          display: block;
+          width: 100%;
+          padding: 8px 0;
+          text-indent: 2%;
+        }
+      }
+      .indicates-required {
+        text-align: right;
+        font-size: 11px;
+        margin-right: 10%;
+      }
+      .asterisk {
+        color: #e85c41;
+        font-size: 150%;
+        font-weight: normal;
+        position: relative;
+        top: 5px;
+      }
+      .clear {
+        clear: both;
+      }
+      div#mce-responses {
+        float: left;
+        overflow: hidden;
+        width: 90%;
+      }
+      div.response {
+        font-weight: bold;
+        float: left;
+        width: 80%;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        z-index: 1;
+      }
+      #mce-error-response {
+        display: none;
+      }
+      #mce-success-response {
+        color: #529214;
+        display: none;
+      }
+      label.error {
+        display: block;
+        float: none;
+        width: auto;
+        text-align: left;
+      }
+      #mc-embedded-subscribe {
+        width: auto;
+        display: block;
+      }
+      #mc-embedded-subscribe-form {
+        div.mce_inline_error {
+          display: inline-block;
+          background-color: rgba(255,255,255,0.85);
+          color: #e85c41;
+          border-radius: 3px;
+          font-size: 14px;
+          font-weight: normal;
+          margin-top: 10px;
+          z-index: 1;
+        }
+        input.mce_inline_error {
+          border: 2px solid #e85c41;
+        }
+      }
+    }
+  }
+  > section {
+    &:nth-child(odd) {
+      background-color: $zebra-color;
+    }
+    .text-center {
+      text-align: center;
+    }
+  }
+  .hackfest-padding {
+    padding-left: 14%;
+    padding-right: 14%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  a {
+    color: $brand-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1.25rem;
+  }
+}
