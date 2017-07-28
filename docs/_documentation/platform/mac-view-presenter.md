@@ -80,6 +80,8 @@ public MvxBasePresentationAttribute PresentationAttribute()
 
 If you return `null` from the `PresentationAttribute` the Mac View Presenter will fallback to the attribute used to decorate the view controller. If the view controller is not decorated with a presentation attribute it will use the default presentation attribute (a new window).
 
+__Note:__ Be aware that your ViewModel will be null during `PresentationAttribute`, so the logic you can perform there is limited here. Reason to this limitation is MvvmCross Presenters are stateless, you can't connect an already instantiated ViewModel with a new View.
+
 ## Extensibility
 The presenter is completely extensible! You can override any attribute and customize attribute members.
 

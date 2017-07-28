@@ -27,9 +27,11 @@ The presenter uses a set of `PresentationAttributes` to define how a view will b
 Used to set a view as _Root_. You should use this attribute over the view class that will be the root of your application (your app can have several root views, one at a time).
 The view root can be one of the following types:
 
-- To use stack navigation, your view can just be a `MvxViewController`, but it needs to set the attribute member `WrapInNavigationController` to true.
-- To use Tabs, your view needs to implement `IMvxTabBarViewController` or simply extend `MvxTabBarViewController`, which has all the needed behavior built in.
-- To use a SplitView, your view needs to implement `IMvxSplitViewController` or simply extend `MvxSplitViewController`, which has all the needed behavior built in.
+- `MvxViewController`
+- `MvxTabBarViewController` (actually implementing `IMvxTabBarViewController` is enough)
+- `MvxSplitViewController` (actually implementing `IMvxSplitViewController` is enough)
+
+If you want to initiate a stack navigation, just set the attribute member `WrapInNavigationController` to true.
 
 
 ### MvxChildPresentationAttribute
@@ -79,8 +81,11 @@ There is an attribute member that can be used to customize the presentation:
 - If the initial view class of your app has no attribute over it, the presenter will assume stack navigation and will wrap your initial view in a `MvxNavigationController`.
 - If a view class has no attribute over it, the presenter will assume _animated_ child presentation and will display the view in the current navigation stack (could be modal or not).
 
+
 ## Override a presentation attribute at runtime
+
 To override a presentation attribute at runtime you can implement the `IMvxOverridePresentationAttribute` in your view controller and determine the presentation attribute in the `PresentationAttribute` method like this:
+
 ```c#
 public MvxBasePresentationAttribute PresentationAttribute()
 {
@@ -93,6 +98,8 @@ public MvxBasePresentationAttribute PresentationAttribute()
 ```
 
 If you return `null` from the `PresentationAttribute` the iOS View Presenter will fallback to the attribute used to decorate the view controller. If the view controller is not decorated with a presentation attribute it will use the default presentation attribute (a _animated_ child presentation).
+
+__Note:__ Be aware that your ViewModel will be null during `PresentationAttribute`, so the logic you can perform there is limited here. Reason to this limitation is MvvmCross Presenters are stateless, you can't connect an already instantiated ViewModel with a new View.
 
 ## Extensibility
 The presenter is completely extensible! You can override any attribute and customize attribute members.
