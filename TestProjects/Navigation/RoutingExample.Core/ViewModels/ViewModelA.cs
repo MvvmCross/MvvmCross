@@ -47,9 +47,9 @@ namespace RoutingExample.Core.ViewModels
             ReturnedFrom = $"Returned from View B {_returnedFromCount} times";
         }
 
-        public override Task Initialize(string parameter)
+        public override void Prepare(string parameter)
         {
-            return Task.FromResult(true);
+            
         }
     }
 }

@@ -49,7 +49,7 @@ namespace RoutingExample.Core.ViewModels
 
         public MvxCommand CloseCommand => new MvxCommand(async () =>
         {
-            await Close(Title);
+            await _navigationService.Close(this, Title);
         });
 
         public ViewModelB(IMvxNavigationService navigationService)
@@ -61,11 +61,9 @@ namespace RoutingExample.Core.ViewModels
             ReturnedFrom = $"Returned from View C {_returnedFromCount} times";
         }
 
-        public override Task Initialize(Tuple<string, int> parameter)
+        public override void Prepare(Tuple<string, int> parameter)
         {
             NavigatedTo = $"Navigated to from {parameter.Item1} {parameter.Item2} times";
-
-            return Task.FromResult(true);
         }
     }
 }
