@@ -38,6 +38,9 @@ public interface IMvxNavigationService
 
     Task<bool> CanNavigate(string path);
     Task<bool> Close(IMvxViewModel viewModel);
+    Task<bool> Close<TResult>(IMvxViewModelResult<TResult> viewModel, TResult result) where TResult : class;
+
+    bool ChangePresentation(MvxPresentationHint hint);
 }
 ```
 
@@ -51,7 +54,6 @@ public static class MvxNavigationExtensions
     public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null) where TParameter : class
     public static Task Navigate<TResult>(this IMvxNavigationService navigationService, Uri path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TResult : class
     public static Task Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TParameter : class where TResult : class
-    public static Task<bool> Close<TViewModel>(this IMvxNavigationService navigationService)
 }
 ```
 
@@ -65,6 +67,11 @@ public class MyViewModel : MvxViewModel
     {
         _navigationService = navigationService;
     }
+    
+    public override void Prepare()
+    {
+        //Do anything before navigating to the view
+    }
 
     public async Task SomeMethod()
     {
@@ -74,9 +81,15 @@ public class MyViewModel : MvxViewModel
 
 public class NextViewModel : MvxViewModel<MyObject>
 {
-    public async Task Initialize(MyObject parameter)
+    public override void Prepare(MyObject parameter)
     {
-        //Do something with parameter
+        //Do anything before navigating to the view
+        //Save the parameter to a property if you want to use it later
+    }
+    
+    public override async Task Initialize()
+    {
+        //Do heavy work and data loading here
     }
 }
 ```
@@ -91,6 +104,11 @@ public class MyViewModel : MvxViewModel
     {
         _navigationService = navigationService;
     }
+    
+    public override async Task Initialize()
+    {
+        //Do heavy work and data loading here
+    }
 
     public async Task SomeMethod()
     {
@@ -101,14 +119,26 @@ public class MyViewModel : MvxViewModel
 
 public class NextViewModel : MvxViewModel<MyObject, MyReturnObject>
 {
-    public async Task Initialize(MyObject parameter)
+    private readonly IMvxNavigationService _navigationService;
+    public MyViewModel(IMvxNavigationService navigation)
     {
-        //Do something with parameter
+        _navigationService = navigationService;
     }
     
-    public async Task SomeMethod()
+    public override void Prepare(MyObject parameter)
     {
-        await Close(new MyReturnObject());
+        //Do anything before navigating to the view
+        //Save the parameter to a property if you want to use it later
+    }
+    
+    public override async Task Initialize()
+    {
+        //Do heavy work and data loading here
+    }
+    
+    public async Task SomeMethodToClose()
+    {
+        await _navigationService.Close(this, new MyReturnObject());
     }
 }
 ```
@@ -118,6 +148,19 @@ You can provide a CancellationToken to abort waiting for a Result. This will clo
 If you have a BaseViewModel you might not be able to inherit `MvxViewModel<TParameter>` or `MvxViewModel<TParameter, TResult>` because you already have the BaseViewModel as base class. In this case you can implement the following interface:
 
 `IMvxViewModel<TParameter>`, `IMvxViewModelResult<TResult>` or `IMvxViewModel<TParameter, TResult>`
+
+To implement returning your own result add the following to your (Base)ViewModel:
+
+```c#
+public override TaskCompletionSource<object> CloseCompletionSource { get; set; }
+
+public override void ViewDestroy()
+{
+    if (CloseCompletionSource != null && !CloseCompletionSource.Task.IsCompleted && !CloseCompletionSource.Task.IsFaulted)
+        CloseCompletionSource?.TrySetCanceled();
+    base.ViewDestroy();
+}
+```
 
 To check if you are able to navigate to a certain ViewModel you can use the `CanNavigate` method.
 
@@ -170,7 +213,7 @@ namespace *.ViewModels
     public class ViewModelA
         : MvxViewModel
     {
-    	public void Initialize(string id) // you can use captured groups defined in the regex as parameters here
+    	public void Init(string id) // you can use captured groups defined in the regex as parameters here
         {
 
         }
@@ -304,7 +347,7 @@ public class MyViewModel : MvxViewModel<TParameter>
 If you have a BaseViewModel you might not be able to inherit `MvxViewModel<TParameter>` because you already have the BaseViewModel as base class. In this case you can implement the following interface:
 
 ```c#
-IMvxViewModelInitializer<TInit>
+IMvxViewModel<TParameter>
 ```
 
 MvvmCross uses JSON to serialize the object and to use complex parameters you should have the MvvmCross Json plugin installed or register your own IMvxJsonConverter.

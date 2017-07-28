@@ -48,6 +48,7 @@ namespace MvvmCross.Core.Navigation
         Task<bool> CanNavigate(string path);
 
         Task<bool> Close(IMvxViewModel viewModel);
+        Task<bool> Close<TResult>(IMvxViewModelResult<TResult> viewModel, TResult result) where TResult : class;
 
         bool ChangePresentation(MvxPresentationHint hint);
     }
