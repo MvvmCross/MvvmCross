@@ -25,7 +25,6 @@ namespace MvvmCross.Droid.FullFragging.Views
     public abstract class MvxActivity
         : MvxEventSourceActivity
         , IMvxAndroidView
-        , ViewTreeObserver.IOnGlobalLayoutListener
     {
         protected View _view;
 
@@ -69,8 +68,6 @@ namespace MvvmCross.Droid.FullFragging.Views
         public override void SetContentView(int layoutResId)
         {
             _view = this.BindingInflate(layoutResId, null);
-
-            _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
 
             SetContentView(_view);
         }
@@ -121,38 +118,28 @@ namespace MvvmCross.Droid.FullFragging.Views
             ViewModel?.ViewDestroy();
         }
 
-        public override void OnAttachedToWindow()
+        protected override void OnStart()
         {
-            base.OnAttachedToWindow();
+            base.OnStart();
             ViewModel?.ViewAppearing();
         }
 
-        public override void OnDetachedFromWindow()
+        protected override void OnResume()
         {
-            base.OnDetachedFromWindow();
-            ViewModel?.ViewDisappearing(); // we don't have anywhere to get this info
-            ViewModel?.ViewDisappeared();
+            base.OnResume();
+            ViewModel?.ViewAppeared();
         }
 
-        public void OnGlobalLayout()
+        protected override void OnPause()
         {
-            if (_view != null)
-            {
-                {
-                    if (Build.VERSION.SdkInt < BuildVersionCodes.JellyBean)
-                    {
-#pragma warning disable CS0618 // Type or member is obsolete
-                        _view.ViewTreeObserver.RemoveGlobalOnLayoutListener(this);
-#pragma warning restore CS0618 // Type or member is obsolete
-                    }
-                    else
-                    {
-                        _view.ViewTreeObserver.RemoveOnGlobalLayoutListener(this);
-                    }
-                }
-                _view = null;
-                ViewModel?.ViewAppeared();
-            }
+            base.OnPause();
+            ViewModel?.ViewDisappearing();
+        }
+
+        protected override void OnStop()
+        {
+            base.OnStop();
+            ViewModel?.ViewDisappeared();
         }
     }
 
