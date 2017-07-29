@@ -50,7 +50,22 @@ permalink: /hackfest/
   <section class="member-list hackfest-padding">
     <h1 class="text-center">Join these developers who’ve already committed</h1>
     <div class="member-list-content">
-      <div class="list"></div>
+      <div class="list">
+        <table id="member-list">
+          <thead>
+            <th>Avatar</th>
+            <th>Name</th>
+            <th>GitHub</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td><img src="https://avatars1.githubusercontent.com/u/6221156?v=4&s=460" alt="GitHub Avatar"></td>
+              <td>Martijn v.</td>
+              <td><a href="https://github.com/martijn00">@martijn00</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div class="widget">
         <iframe src="https://www.eventbrite.co.uk/countdown-widget?eid=36537277982" frameborder="0" height="381" width="195" marginheight="0"
           marginwidth="0" scrolling="no" allowtransparency="true"></iframe>
@@ -104,17 +119,21 @@ permalink: /hackfest/
   </section>
 </article>
 <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.6/footable.min.js"></script>
 <script type='text/javascript' src='https://s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
 <script type='text/javascript'>
     (function ($) {
-        window.fnames = new Array();
-        window.ftypes = new Array();
-        fnames[0] = 'EMAIL';
-        ftypes[0] = 'email';
-        fnames[1] = 'FNAME';
-        ftypes[1] = 'text';
-        fnames[2] = 'LNAME';
-        ftypes[2] = 'text';
+      window.fnames = new Array();
+      window.ftypes = new Array();
+      fnames[0] = 'EMAIL';
+      ftypes[0] = 'email';
+      fnames[1] = 'FNAME';
+      ftypes[1] = 'text';
+      fnames[2] = 'LNAME';
+      ftypes[2] = 'text';
     }(jQuery));
     var $mcj = jQuery.noConflict(true);
+    jQuery(function($) {
+      $('#member-list').footable();
+    });
 </script>
