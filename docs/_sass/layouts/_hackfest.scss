@@ -104,16 +104,38 @@
     .member-list-content {
       padding-left: 40px;
       padding-right: 40px;
-      @include clearfix();
+      display: flex;
+      display: -webkit-flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
     }
     .member-list-content .list {
       padding-left: 20px;
       padding-right: 20px;
+      width: 60%;
+      max-height: 380px;
+      overflow: auto;
+    }
+    .member-list-content .list table {
+      width: 100%;
+      text-align: center;
+    }
+    .member-list-content .list table thead {
+      background-color: $gray-color;
+    }
+    .member-list-content .list table tbody tr td {
+      padding-top: 10px;
+    }
+    .member-list-content .list table tbody tr:nth-child(even) td {
+      background-color: $zebra-color;
+    }
+    .member-list-content .list table img {
+      width: 32px;
+      height: 32px;
     }
     .member-list-content .widget {
       width: 195px;
       text-align: center;
-      float: right;
     }
   }
   > .join-us {
@@ -123,7 +145,7 @@
       padding-right: 40px;
     }
     .mail-subscribe #mc_embed_signup {
-      width: 600px;
+      max-width: 600px;
       form {
         display: block;
         text-align: left;
@@ -261,5 +283,137 @@
   }
   p {
     font-size: 1.25rem;
+  }
+}
+@include media-query-max($on-mobile) {
+  .hackfest {
+    > .banner {
+      .background {
+        .img,
+        .shadow,
+        .text {
+          height: 300px;
+        }
+        .text {
+          .time {
+            font-size: 1.25rem;
+          }
+          .title {
+            font-size: 2rem;
+          }
+        }
+      }
+    }
+    > .info {
+      .goals {
+        .golas-list {
+          li {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+    .hackfest-padding {
+      padding: $base-mobile-padding;
+    }
+    h1 {
+      font-size: 1.5rem;
+    }
+    h2 {
+      font-size: 1.25rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+@media screen and (min-width: $on-mobile + 1) and (max-width: $on-desktop - 1) {
+  .hackfest {
+    > .banner {
+      .background {
+        .img,
+        .shadow,
+        .text {
+          height: 320px;
+        }
+        .text {
+          .time {
+            font-size: 1.5rem;
+          }
+          .title {
+            font-size: 2.25rem;
+          }
+        }
+      }
+    }
+    > .info {
+      .goals {
+        .golas-list {
+          li {
+            font-size: 1.25rem;
+          }
+        }
+      }
+    }
+    .hackfest-padding {
+      padding: $base-tablet-padding;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+    }
+    p {
+      font-size: 1.25rem;
+    }
+  }
+}
+@include media-query-max($on-desktop - 1) {
+  .hackfest {
+    > .info {
+      flex-flow: column wrap;
+      .main-content {
+        width: 100%;
+      }
+      .line {
+        border-left: 0;
+        border-bottom: 1px solid $text-color;
+        width: 100%;
+        height: 0;
+      }
+    }
+    > .take-part-in {
+      .take-part-in-content {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }
+    > .member-list {
+      .member-list-content {
+        padding-left: 10px;
+        padding-right: 10px;
+        justify-content: center;
+        .list {
+          padding: 0;
+          width: 100%;
+        }
+        .widget {
+          margin-top: 20px;
+        }
+      }
+    }
+    > .join-us {
+      .join-us-content,
+      .mail-subscribe {
+        padding-left: 10px;
+        padding-right: 10px;
+        #mc_embed_signup {
+          .mc-field-group {
+            width: 100%;
+          }
+        }
+      }
+    }
   }
 }
