@@ -132,7 +132,7 @@ namespace MvvmCross.Droid.Shared.Presenter
             {
                 foreach (var item in fragmentAttributes)
                 {
-                    if (currentActivity.FindViewById(item.FragmentContentId) != null)
+                    if (currentActivity.FindViewById(item.GetFragmentContentId(currentActivity)) != null)
                     {
                         attribute = item;
                         break;

@@ -1,4 +1,4 @@
-﻿// MvxCachingFragmentActivityCompat.cs
+// MvxCachingFragmentActivityCompat.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -457,7 +457,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 			var fragmentTag = GetFragmentTag(request, bundle, fragmentType);
 			FragmentCacheConfiguration.RegisterFragmentToCache(fragmentTag, fragmentType, request.ViewModelType, fragmentAttribute.AddToBackStack);
 
-			ShowFragment(fragmentTag, fragmentAttribute.FragmentContentId, bundle);
+			ShowFragment(fragmentTag, fragmentAttribute.GetFragmentContentId(this), bundle);
 			return true;
 		}
 
