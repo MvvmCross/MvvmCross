@@ -147,7 +147,7 @@ namespace MvvmCross.iOS.Views.Presenters
             CloseSplitViewController();
         }
 
-        private void SetupWindowRootNavigation(UIViewController viewController, MvxRootPresentationAttribute attribute)
+        protected void SetupWindowRootNavigation(UIViewController viewController, MvxRootPresentationAttribute attribute)
         {
             if (attribute.WrapInNavigationController)
             {
@@ -381,12 +381,15 @@ namespace MvvmCross.iOS.Views.Presenters
             if (MasterNavigationController == null)
                 return;
 
-            foreach (var item in MasterNavigationController.ViewControllers)
-                item.DidMoveToParentViewController(null);
+            if (MasterNavigationController.ViewControllers != null)
+            {
+                foreach (var item in MasterNavigationController.ViewControllers)
+                    item.DidMoveToParentViewController(null);
+            }
             MasterNavigationController = null;
         }
 
-        protected void CloseModalViewController(UIViewController modalController)
+        protected virtual void CloseModalViewController(UIViewController modalController)
         {
             if (modalController == null)
                 return;
