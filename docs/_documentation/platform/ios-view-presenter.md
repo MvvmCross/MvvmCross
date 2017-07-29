@@ -37,6 +37,7 @@ If you want to initiate a stack navigation, just set the attribute member `WrapI
 ### MvxChildPresentationAttribute
 Used to set a view as a _child_. You should use this attribute over a view class that will be displayed inside a navigation stack (modal or not).
 The view class can decide if wants to be displayed animated or not through the attribute member `Animated` (the default value is `true`).
+If your app uses a TabBarController as a child ViewController of a "master" NavigationController, you can decide whether to display a new child ViewController inside a Tab of the TabBarViewController (assuming that Tab  is a NavigationController) or to display it as a child of the "master" NavigationController. You can take control of this behavior by overriding `MvxTabBarController.ShowChildView`.
 
 
 ### MvxModalPresentationAttribute
