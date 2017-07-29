@@ -41,12 +41,12 @@ namespace RoutingExample.Core.ViewModels
 
         public MvxCommand CloseCommand => new MvxCommand(async () =>
         {
-            await Close(Title);
+            await _navigationService.Close(this, Title);
         });
 
         public MvxCommand CloseHostCommand => new MvxCommand(async () =>
         {
-            Close(viewmodel);
+            await _navigationService.Close(viewmodel);
         });
 
         public ViewModelDialogA(IMvxNavigationService navigationService)
@@ -59,10 +59,9 @@ namespace RoutingExample.Core.ViewModels
 
         private IMvxViewModel viewmodel;
 
-        public override Task Initialize(IMvxViewModel parameter)
+        public override void Prepare(IMvxViewModel parameter)
         {
             viewmodel = parameter;
-            return Task.FromResult(true);
         }
     }
 }
