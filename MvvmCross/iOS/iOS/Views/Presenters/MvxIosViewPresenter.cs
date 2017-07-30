@@ -445,7 +445,6 @@ namespace MvvmCross.iOS.Views.Presenters
             foreach (var v in _window.Subviews)
                 v.RemoveFromSuperview();
 
-            //_window.AddSubview(controller.View);
             _window.RootViewController = controller;
         }
 
