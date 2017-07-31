@@ -82,7 +82,7 @@ namespace MvvmCross.iOS.Views
 
         public virtual bool ShowChildView(UIViewController viewController)
         {
-            var navigationController = (UINavigationController)SelectedViewController;
+            var navigationController = SelectedViewController as UINavigationController;
 
             // if the current selected ViewController is not a NavigationController, then a child cannot be shown
             if (navigationController == null)
@@ -105,7 +105,21 @@ namespace MvvmCross.iOS.Views
             var navController = SelectedViewController as UINavigationController;
             if (navController != null)
             {
-                navController.PopViewController(true);
+                var root = navController.ViewControllers.FirstOrDefault();
+
+                // check if the ViewModel to close is the Root of the Navigation Stack, 
+                // otherwise pop the last in stack
+                if (root != null
+                   && root is IMvxIosView iosView
+                   && iosView.ViewModel == viewModel)
+                {
+                    RemoveTabController(navController);
+                }
+                else
+                {
+                    navController.PopViewController(true);
+                }
+
                 return true;
             }
 
@@ -115,8 +129,7 @@ namespace MvvmCross.iOS.Views
                                          .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
             if (toClose != null)
             {
-                var newTabs = ViewControllers.Where(v => v.GetIMvxIosView() != toClose);
-                ViewControllers = newTabs.ToArray();
+                RemoveTabController((UIViewController)toClose);
                 return true;
             }
 
@@ -126,6 +139,12 @@ namespace MvvmCross.iOS.Views
         public void PresentViewControllerWithNavigation(UIViewController controller, bool animated = true, Action completionHandler = null)
         {
             PresentViewController(new UINavigationController(controller), animated, completionHandler);
+        }
+
+        protected virtual void RemoveTabController(UIViewController toClose)
+        {
+            var newTabs = ViewControllers.Where(v => v != toClose);
+            ViewControllers = newTabs.ToArray();
         }
     }
 
