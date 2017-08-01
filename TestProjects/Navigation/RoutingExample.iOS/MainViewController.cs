@@ -23,6 +23,7 @@ namespace RoutingExample.iOS
             set.Bind(BtnTestA).To(vm => vm.ShowACommand);
             set.Bind(BtnTestB).To(vm => vm.ShowBCommand);
             set.Bind(BtnRandom).To(vm => vm.ShowRandomCommand);
+            set.Bind(BtnPrePop).To(vm => vm.ShowPrePopCommand);
 
             set.Apply();
 

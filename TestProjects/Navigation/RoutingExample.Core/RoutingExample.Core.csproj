@@ -48,6 +48,8 @@
     <Compile Include="ViewModels\ViewModelA.cs" />
     <Compile Include="ViewModels\ViewModelB.cs" />
     <Compile Include="ViewModels\ViewModelC.cs" />
+    <Compile Include="ViewModels\TestCViewModel.cs" />
+    <Compile Include="RoutingFacades\PrePopulateRoutingFacade.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">

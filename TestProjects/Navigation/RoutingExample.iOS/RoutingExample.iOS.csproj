@@ -110,6 +110,10 @@
       <SubType>Designer</SubType>
     </Content>
     <InterfaceDefinition Include="Main.storyboard" />
+    <Compile Include="TestCViewController.cs" />
+    <Compile Include="TestCViewController.designer.cs">
+      <DependentUpon>TestCViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
