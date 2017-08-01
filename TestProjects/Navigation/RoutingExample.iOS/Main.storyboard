@@ -187,9 +187,6 @@
                                 <state key="normal" title="Close with Result">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="CloseButton:" destination="Yyt-ZP-EJU" eventType="touchUpInside" id="dNe-3y-uYV"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parameter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ylb-DU-MoP">
                                 <rect key="frame" x="16" y="84" width="171.5" height="21"/>
