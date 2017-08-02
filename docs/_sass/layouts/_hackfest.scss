@@ -45,6 +45,28 @@
       margin: 0;
     }
   }
+  > .sign-up {
+      background-color: $brand-color;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-weight: $base-font-weight;
+      color: #FAFAFA;
+      text-decoration: none;
+      text-transform: uppercase;
+      display: inline-block;
+      cursor: pointer;
+      // start-button hover effect
+      &:hover {
+        background-color: darken($brand-color, 5%);
+      }
+      // start-button active effect
+      &:active {
+        background-color: $brand-color;
+      }
   > .info {
     display: flex;
     display: -webkit-flex;
@@ -75,29 +97,6 @@
     .take-part-in-content {
       padding-left: 40px;
       padding-right: 40px;
-    }
-    .take-part-in-content .sign-up {
-      background-color: $brand-color;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      border-radius: 4px;
-      padding: 8px 16px;
-      font-weight: $base-font-weight;
-      color: #FAFAFA;
-      text-decoration: none;
-      text-transform: uppercase;
-      display: inline-block;
-      cursor: pointer;
-      // start-button hover effect
-      &:hover {
-        background-color: darken($brand-color, 5%);
-      }
-      // start-button active effect
-      &:active {
-        background-color: $brand-color;
-      }
     }
   }
   > .member-list {
