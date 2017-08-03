@@ -6,6 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid;
+using MvvmCross.Platform.Droid.Platform;
 
 namespace MvvmCross.Droid.Shared.Attributes
 {
@@ -16,6 +19,15 @@ namespace MvvmCross.Droid.Shared.Attributes
         {
             ParentActivityViewModelType = parentActivityViewModelType;
             FragmentContentId = fragmentContentId;
+            AddToBackStack = addToBackStack;
+        }
+
+        public MvxFragmentAttribute(Type parentActivityViewModelType, string fragmentContentResourceName, bool addToBackStack = false)
+        {
+            var context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext;
+
+            ParentActivityViewModelType = parentActivityViewModelType;
+            FragmentContentId = context?.Resources.GetIdentifier(fragmentContentResourceName, "id", context.PackageName) ?? 0;
             AddToBackStack = addToBackStack;
         }
 
