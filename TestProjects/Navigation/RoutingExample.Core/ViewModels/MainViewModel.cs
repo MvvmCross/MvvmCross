@@ -66,5 +66,18 @@ namespace RoutingExample.Core.ViewModels
                 }));
             }
         }
+
+        private IMvxCommand _showPrePopCommand;
+
+        public IMvxCommand ShowPrePopCommand
+        {
+            get
+            {
+                return _showPrePopCommand ?? (_showPrePopCommand = new MvxAsyncCommand(async () =>
+                {
+                    await _navigationService.Navigate("mvx://prepop");
+                }));
+            }
+        }
     }
 }
