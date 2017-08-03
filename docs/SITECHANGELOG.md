@@ -1,5 +1,13 @@
 # MvvmCross site changelog
 
+## Mvxtheme 1.5 (2017-08-03)
+
+* Add XABLU and Microsoft logo.
+
+* Fix button styles and add logo styles.
+
+* Fix some tag bug, add logos, remove unused javascript
+
 ## Mvxtheme 1.4 (2017-07-29)
 
 * Add member list table.
