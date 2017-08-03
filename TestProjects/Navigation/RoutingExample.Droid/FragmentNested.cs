@@ -8,9 +8,9 @@ using RoutingExample.Core.ViewModels;
 
 namespace RoutingExample.Droid
 {
-    [MvxFragment(typeof(SecondHostViewModel), Resource.Id.content_frame, true)]
-    [Register(nameof(FragmentA))]
-    public class FragmentA : MvxFragment<ViewModelA>
+    [MvxFragment(typeof(SecondHostViewModel), Resource.Id.nested_content_frame, true)]
+    [Register(nameof(FragmentNested))]
+    public class FragmentNested : MvxFragment<ViewModelNested>
     {
         public override void OnCreate(Bundle savedInstanceState)
         {

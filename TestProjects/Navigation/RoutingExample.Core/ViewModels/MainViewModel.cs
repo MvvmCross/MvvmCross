@@ -31,7 +31,8 @@ namespace RoutingExample.Core.ViewModels
             {
                 return _showACommand ?? (_showACommand = new MvxAsyncCommand(async () =>
                 {
-                    await _navigationService.Navigate<TestAViewModel, User>(new User("MvvmCross", "Test"));
+                    await _navigationService.Navigate<ViewModelA, string, string>("test");
+                    //await _navigationService.Navigate<TestAViewModel, User>(new User("MvvmCross", "Test"));
 
                     //await _navigationService.Navigate("mvx://test/a");
                 }));
