@@ -7,7 +7,7 @@ using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Views.Attributes
 {
-    public static class MvxFragmentAttributeExtensionMethods
+    public static class MvxPresentationAttributeExtensions
     {
         //TODO: Move to core
         public static bool HasBasePresentationAttribute(this Type candidateType)

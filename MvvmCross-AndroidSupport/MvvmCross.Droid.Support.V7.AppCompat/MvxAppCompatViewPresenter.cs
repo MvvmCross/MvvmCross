@@ -150,16 +150,21 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                         ft.AddSharedElement(item.Value, name);
                     }
                 }
-                if (!attribute.CustomAnimations.Equals((int.MinValue, int.MinValue, int.MinValue, int.MinValue)))
+                if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
                 {
-                    var customAnimations = attribute.CustomAnimations;
-                    ft.SetCustomAnimations(customAnimations.enter, customAnimations.exit, customAnimations.popEnter, customAnimations.popExit);
+                    if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
+                        ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation, attribute.PopEnterAnimation, attribute.PopExitAnimation);
+                    else
+                        ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
                 }
                 if (attribute.TransitionStyle != int.MinValue)
                     ft.SetTransitionStyle(attribute.TransitionStyle);
 
+                if(attribute.AddToBackStack == true)
+                    ft.AddToBackStack(fragmentName);
+
                 ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
-                ft.CommitNowAllowingStateLoss();
+                ft.CommitAllowingStateLoss();
             }
         }
 
