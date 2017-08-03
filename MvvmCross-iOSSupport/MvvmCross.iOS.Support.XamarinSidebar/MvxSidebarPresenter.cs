@@ -143,9 +143,10 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
                 Mvx.RegisterSingleton<IMvxSidebarViewController>(SideBarViewController);
 
-                CloseMasterNavigationController();
                 CleanupModalViewControllers();
+                CloseTabBarViewController();
                 CloseSplitViewController();
+                CloseMasterNavigationController();
 
                 return;
             }

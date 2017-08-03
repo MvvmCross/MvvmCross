@@ -15,25 +15,32 @@ permalink: /hackfest/
     </div>
   </section>
   <section class="info hackfest-padding">
-    <div class="main-content">
-      <h2 class="title">The .NET Summer Hackfest</h2>
-      <p class="content">MvvmCross is one of the projects taking part in the inaugural <a href="https://dotnetfoundation.org/blog/announcing-net-summer-hackfest-2017">.NET Summer Hackfest</a>, organized by the .NET Foundation! Running for two weeks from August 21st to September 2nd, 2017, the MvvmCross session will see contributors from around the world work together virtually to build and improve the framework, with two exciting in-person events also planned! Participation is open to all, whether you’re a first-time or long-time contributor.</p>
+    <div class="companie-logos">
+      <img src="{{ '/assets/img/logo/MvvmCross-logo.png' | relative_url }}" alt="Logo">
+      <img src="{{ '/assets/img/logo/dotnet-foundation-logo.png' | relative_url }}" alt="Logo">
+      <img src="{{ '/assets/img/logo/logo-xablu-blue.png' | relative_url }}" alt="Logo">
+      <img src="{{ '/assets/img/logo/Microsoft_logo.png' | relative_url }}" alt="Logo">
     </div>
-          <a class="sign-up" href="https://www.eventbrite.com/e/mvvmcross-net-summer-hackfest-registration-36537277982">Register Now!</a>
+    <div class="info-content">
+      <div class="main-content">
+        <h2 class="title">The .NET Summer Hackfest</h2>
+        <p class="content">MvvmCross is one of the projects taking part in the inaugural <a href="https://dotnetfoundation.org/blog/announcing-net-summer-hackfest-2017">.NET Summer Hackfest</a>, organized by the .NET Foundation! Running for two weeks from August 21st to September 2nd, 2017, the MvvmCross session will see contributors from around the world work together virtually to build and improve the framework, with two exciting in-person events also planned! Participation is open to all, whether you’re a first-time or long-time contributor.</p>
+      </div>
+      <div class="line"></div>
+      <div class="goals">
+        <h2 class="title">The main goals are to:</h2>
+        <ul class="golas-list">
+          <li>Convert MvvmCross to the .NET Standard</li>
+          <li>Update samples to latest version</li>
+          <li>Add more async Task based code</li>
+          <li>Update and create more website content</li>
+          <li>Improve the documentation</li>
+          <li>Work on up-for-grabs issues</li>
+          <li>Join the .NET Foundation</li>
+        </ul>
+      </div>
     </div>
-    <div class="line"></div>
-    <div class="goals">
-      <h2 class="title">The main goals are to:</h2>
-      <ul class="golas-list">
-        <li>Convert MvvmCross to the .NET Standard</li>
-        <li>Update samples to latest version</li>
-        <li>Add more async Task based code</li>
-        <li>Update and create more website content</li>
-        <li>Improve the documentation</li>
-        <li>Work on up-for-grabs issues</li>
-        <li>Join the .NET Foundation</li>
-      </ul>
-    </div>
+    <a class="sign-up" href="https://www.eventbrite.com/e/mvvmcross-net-summer-hackfest-registration-36537277982">Register Now!</a>    
   </section>
   <section class="take-part-in hackfest-padding">
     <h1 class="text-center">Take part in the MvvmCross .NET Summer Hackfest!</h1>
@@ -46,7 +53,7 @@ permalink: /hackfest/
         <h2>How does it work?</h2>
         <p>We've created a new <a href="https://github.com/MvvmCross/MvvmCross/projects/2">GitHub project</a> which lists all of the tasks planned during the two week period. Once you register, you can ask to get assigned to an issue and make a pull request! The MvvmCross Core team will review any new issue and pull request as soon as possible in the two week hackfest to make the experience of contributing as smooth as possible.</p>
       </div>
-            <div class="kickoff">
+      <div class="kickoff">
         <h2>Virtual kickoff event</h2>
         <p>We’ll kick-off the hackfest together on Monday, August 21st at 19:00 CEST with a livestream hosted by MvvmCross lead contributor Martijn van Dijk. This will be a chance to ask questions and watch a demo on getting started!</p>
       </div>
@@ -81,8 +88,8 @@ permalink: /hackfest/
         </table>
       </div>
       <div class="widget">
-        <iframe src="https://www.eventbrite.co.uk/countdown-widget?eid=36537277982" frameborder="0" height="381" width="195" marginheight="0"
-          marginwidth="0" scrolling="no" allowtransparency="true"></iframe>
+        <iframe src="https://www.eventbrite.co.uk/countdown-widget?eid=36537277982" frameborder="0" height="381" width="195" 
+        marginheight="0" marginwidth="0" scrolling="no" allowtransparency="true"></iframe>
       </div>
     </div>
   </section>
@@ -96,29 +103,11 @@ permalink: /hackfest/
       </div>
       <a class="sign-up" href="https://www.eventbrite.com/e/mvvmcross-hackday-tickets-36684529415">RSVP</a>
     </div>
-
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
   </section>
 </article>
 <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery-footable/3.1.6/footable.min.js"></script>
-<script type='text/javascript' src='https://s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
 <script type='text/javascript'>
-    (function ($) {
-      window.fnames = new Array();
-      window.ftypes = new Array();
-      fnames[0] = 'EMAIL';
-      ftypes[0] = 'email';
-      fnames[1] = 'FNAME';
-      ftypes[1] = 'text';
-      fnames[2] = 'LNAME';
-      ftypes[2] = 'text';
-    }(jQuery));
-    var $mcj = jQuery.noConflict(true);
     jQuery(function($) {
       $('#member-list').footable();
     });
