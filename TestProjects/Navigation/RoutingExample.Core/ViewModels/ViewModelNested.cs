@@ -5,7 +5,7 @@ using MvvmCross.Core.ViewModels;
 
 namespace RoutingExample.Core.ViewModels
 {
-    public class ViewModelA : MvxViewModel<string, string>
+    public class ViewModelNested : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
         private int _navigatedAwayFromCount = 0;
@@ -39,22 +39,12 @@ namespace RoutingExample.Core.ViewModels
             ReturnedFrom = $"Returned from View B {_returnedFromCount} times";
         });
 
-        public MvxCommand GoToNestedCommand => new MvxCommand(async () =>
-        {
-            await _navigationService.Navigate<ViewModelNested>();
-        });
-
-        public ViewModelA(IMvxNavigationService navigationService)
+        public ViewModelNested(IMvxNavigationService navigationService)
         {
             _navigationService = navigationService;
 
             NavigatedAwayFrom = $"Navigated to View B {_navigatedAwayFromCount} times";
             ReturnedFrom = $"Returned from View B {_returnedFromCount} times";
-        }
-
-        public override void Prepare(string parameter)
-        {
-            
         }
     }
 }
