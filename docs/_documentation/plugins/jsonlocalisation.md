@@ -9,7 +9,7 @@ The `JsonLocalization` plugin is a single PCL Assembly and isn't really a typica
 
 For advice on using the `JsonLocalization` library, see:
 
-- the Babel sample - https://github.com/slodge/MvvmCross-Tutorials/tree/master/Babel
+- the Babel sample - https://github.com/MvvmCross/MvvmCross-Samples/tree/master/Babel
 - the N+1 video N=21 which discusses how i18n is built - http://slodge.blogspot.co.uk/2013/05/n21-internationalisation-i18n-n1-days.html
 
 Notes:
