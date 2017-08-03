@@ -207,15 +207,11 @@ namespace MvvmCross.iOS.Views.Presenters
             if (TabBarViewController == null)
                 throw new MvxException("Trying to show a tab without a TabBarViewController, this is not possible!");
 
-            string tabName = attribute.TabName;
-            string tabIconName = attribute.TabIconName;
-            string tabSelectedIconName = attribute.TabSelectedIconName;
-
             if (viewController is IMvxTabBarItemViewController tabBarItem)
             {
-                tabName = tabBarItem.TabName;
-                tabIconName = tabBarItem.TabIconName;
-                tabSelectedIconName = tabBarItem.TabSelectedIconName;
+                attribute.TabName = tabBarItem.TabName;
+                attribute.TabIconName = tabBarItem.TabIconName;
+                attribute.TabSelectedIconName = tabBarItem.TabSelectedIconName;
             }
 
             if (attribute.WrapInNavigationController)
@@ -223,10 +219,7 @@ namespace MvvmCross.iOS.Views.Presenters
 
             TabBarViewController.ShowTabView(
                 viewController,
-                tabName,
-                tabIconName,
-                tabSelectedIconName,
-                attribute.TabAccessibilityIdentifier);
+                attribute);
         }
 
         protected virtual void ShowModalViewController(
