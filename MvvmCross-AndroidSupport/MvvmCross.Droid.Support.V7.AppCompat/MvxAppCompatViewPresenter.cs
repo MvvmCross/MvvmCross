@@ -25,8 +25,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             
         }
 
-        private ConditionalWeakTable<IMvxViewModel, DialogFragment> _dialogs = new ConditionalWeakTable<IMvxViewModel, DialogFragment>();
-
+        protected new ConditionalWeakTable<IMvxViewModel, DialogFragment> Dialogs { get; } = new ConditionalWeakTable<IMvxViewModel, DialogFragment>();
+                                                                      
         protected new FragmentManager CurrentFragmentManager
         {
             get
@@ -181,7 +181,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             ((IMvxFragmentView)dialog).ViewModel = viewModel;
             dialog.Cancelable = attribute.Cancelable;
 
-            _dialogs.Add(viewModel, dialog);
+            Dialogs.Add(viewModel, dialog);
             dialog.Show(CurrentFragmentManager, fragmentName);
         }
 
@@ -272,11 +272,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
             else if (attribute is MvxDialogAttribute dialogAttribute)
             {
-                if (_dialogs.TryGetValue(viewModel, out DialogFragment dialog))
+                if (Dialogs.TryGetValue(viewModel, out DialogFragment dialog))
                 {
                     dialog.DismissAllowingStateLoss();
                     dialog.Dispose();
-                    _dialogs.Remove(viewModel);
+                    Dialogs.Remove(viewModel);
                 }
             }
         }
@@ -289,11 +289,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 IMvxFragmentView fragment;
                 if (attribute is MvxFragmentAttribute fragmentAttribute && fragmentAttribute.IsCacheableFragment)
                 {
-                    if (_cachedFragments.TryGetValue(attribute, out fragment))
+                    if (CachedFragments.TryGetValue(attribute, out fragment))
                         return fragment;
 
                     fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
-                    _cachedFragments.Add(attribute, fragment);
+                    CachedFragments.Add(attribute, fragment);
                 }
                 else
                     fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
