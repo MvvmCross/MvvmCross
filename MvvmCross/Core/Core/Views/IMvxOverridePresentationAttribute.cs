@@ -1,4 +1,4 @@
-﻿namespace MvvmCross.iOS.Views.Presenters.Attributes
+﻿namespace MvvmCross.Core.Views
 {
     public interface IMvxOverridePresentationAttribute
     {

@@ -95,13 +95,13 @@
       <Project>{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}</Project>
       <Name>MvvmCross.Platform.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Droid\Shared\MvvmCross.Droid.Shared.csproj">
-      <Project>{85EE0907-158C-481C-87B8-E4C0FA93C00A}</Project>
-      <Name>MvvmCross.Droid.Shared</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross\Binding\Droid\MvvmCross.Binding.Droid.csproj">
       <Project>{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}</Project>
       <Name>MvvmCross.Binding.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross-AndroidSupport\MvvmCross.Droid.Support.V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj">
+      <Project>{911D9032-EA82-41B9-80D7-5DB84951B6E5}</Project>
+      <Name>MvvmCross.Droid.Support.V7.AppCompat</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
