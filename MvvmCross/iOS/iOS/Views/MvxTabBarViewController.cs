@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.iOS.Views.Presenters.Attributes;
 using MvvmCross.Platform;
 using UIKit;
 
@@ -34,19 +35,13 @@ namespace MvvmCross.iOS.Views
             }
         }
 
-        //keep changes for selected icon from breaking current release
-        public virtual void ShowTabView(UIViewController viewController, string tabTitle, string tabIconName, string tabAccessibilityIdentifier = null)
+        public virtual void ShowTabView(UIViewController viewController, MvxTabPresentationAttribute attribute)
         {
-            ShowTabView(viewController, tabTitle, tabIconName, null, tabAccessibilityIdentifier);
-        }
-
-        public virtual void ShowTabView(UIViewController viewController, string tabTitle, string tabIconName, string tabSelectedIconName = null, string tabAccessibilityIdentifier = null)
-        {
-            if (!string.IsNullOrEmpty(tabAccessibilityIdentifier))
-                viewController.View.AccessibilityIdentifier = tabAccessibilityIdentifier;
+            if (!string.IsNullOrEmpty(attribute.TabAccessibilityIdentifier))
+                viewController.View.AccessibilityIdentifier = attribute.TabAccessibilityIdentifier;
 
             // setup Tab
-            SetTitleAndTabBarItem(viewController, tabTitle, tabIconName, tabSelectedIconName);
+            SetTitleAndTabBarItem(viewController, attribute);
 
             // add Tab
             var currentTabs = new List<UIViewController>();
@@ -61,28 +56,22 @@ namespace MvvmCross.iOS.Views
             ViewControllers = currentTabs.ToArray();
         }
 
-        //keep changes for selected icon from breaking current release
-        protected virtual void SetTitleAndTabBarItem(UIViewController viewController, string title, string iconName)
+        protected virtual void SetTitleAndTabBarItem(UIViewController viewController, MvxTabPresentationAttribute attribute)
         {
             _tabsCount++;
 
-            viewController.Title = title;
+            viewController.Title = attribute.TabName;
 
-            if (!string.IsNullOrEmpty(iconName))
-                viewController.TabBarItem = new UITabBarItem(title, UIImage.FromBundle(iconName), _tabsCount);
-        }
+            if (!string.IsNullOrEmpty(attribute.TabIconName))
+                viewController.TabBarItem = new UITabBarItem(attribute.TabName, UIImage.FromBundle(attribute.TabIconName), _tabsCount);
 
-        protected virtual void SetTitleAndTabBarItem(UIViewController viewController, string title, string iconName, string selectedIconName)
-        {
-            SetTitleAndTabBarItem(viewController, title, iconName);
-
-            if (!string.IsNullOrEmpty(selectedIconName))
-                viewController.TabBarItem.SelectedImage = UIImage.FromBundle(selectedIconName);
+            if (!string.IsNullOrEmpty(attribute.TabSelectedIconName))
+                viewController.TabBarItem.SelectedImage = UIImage.FromBundle(attribute.TabSelectedIconName);
         }
 
         public virtual bool ShowChildView(UIViewController viewController)
         {
-            var navigationController = (UINavigationController)SelectedViewController;
+            var navigationController = SelectedViewController as UINavigationController;
 
             // if the current selected ViewController is not a NavigationController, then a child cannot be shown
             if (navigationController == null)
@@ -105,7 +94,21 @@ namespace MvvmCross.iOS.Views
             var navController = SelectedViewController as UINavigationController;
             if (navController != null)
             {
-                navController.PopViewController(true);
+                var root = navController.ViewControllers.FirstOrDefault();
+
+                // check if the ViewModel to close is the Root of the Navigation Stack, 
+                // otherwise pop the last in stack
+                if (root != null
+                   && root is IMvxIosView iosView
+                   && iosView.ViewModel == viewModel)
+                {
+                    RemoveTabController(navController);
+                }
+                else
+                {
+                    navController.PopViewController(true);
+                }
+
                 return true;
             }
 
@@ -115,8 +118,7 @@ namespace MvvmCross.iOS.Views
                                          .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
             if (toClose != null)
             {
-                var newTabs = ViewControllers.Where(v => v.GetIMvxIosView() != toClose);
-                ViewControllers = newTabs.ToArray();
+                RemoveTabController((UIViewController)toClose);
                 return true;
             }
 
@@ -126,6 +128,12 @@ namespace MvvmCross.iOS.Views
         public void PresentViewControllerWithNavigation(UIViewController controller, bool animated = true, Action completionHandler = null)
         {
             PresentViewController(new UINavigationController(controller), animated, completionHandler);
+        }
+
+        protected virtual void RemoveTabController(UIViewController toClose)
+        {
+            var newTabs = ViewControllers.Where(v => v != toClose);
+            ViewControllers = newTabs.ToArray();
         }
     }
 

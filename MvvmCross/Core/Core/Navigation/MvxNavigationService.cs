@@ -133,6 +133,12 @@ namespace MvvmCross.Core.Navigation
                 {
                     var facadeRequest = await facade.BuildViewModelRequest(path, paramDict).ConfigureAwait(false);
                     request.ViewModelType = facadeRequest.ViewModelType;
+
+                    if (facadeRequest.ParameterValues != null)
+                    {
+                        request.ParameterValues = facadeRequest.ParameterValues;
+                    }
+
                     request.ViewModelInstance = ViewModelLoader.LoadViewModel(request, null);
 
                     if (facadeRequest == null)

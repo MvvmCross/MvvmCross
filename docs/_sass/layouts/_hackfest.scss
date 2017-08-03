@@ -45,53 +45,49 @@
       margin: 0;
     }
   }
-  > .sign-up {
-      background-color: $brand-color;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      border-radius: 4px;
-      padding: 8px 16px;
-      font-weight: $base-font-weight;
-      color: #FAFAFA;
-      text-decoration: none;
-      text-transform: uppercase;
-      display: inline-block;
-      cursor: pointer;
-      // start-button hover effect
-      &:hover {
-        background-color: darken($brand-color, 5%);
-      }
-      // start-button active effect
-      &:active {
-        background-color: $brand-color;
-      }
-  }
   > .info {
     display: flex;
     display: -webkit-flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-    .main-content {
-      width: 42%;
+    flex-flow: column wrap;
+    .companie-logos {
+      display: flex;
+      display: -webkit-flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+      img {
+        height: 50px;
+        margin-bottom: 20px;
+      }
     }
-    .line {
-      border-left: 1px solid $text-color;
-      height: 300px;
+    .sign-up {
       align-self: center;
+      margin-top: 20px;
     }
-    .goals .golas-list {
-      list-style: none;
-      font-size: 1.25rem;
-      padding-left: 0;
-    }
-    .goals .golas-list li::before {
-      content: "\f024";
-      font-family: FontAwesome;
-      font-size: inherit;
-      display: inline-block;
-      margin-right: 8px;
+    .info-content {
+      display: flex;
+      display: -webkit-flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+      .main-content {
+        width: 42%;
+      }
+      .line {
+        border-left: 1px solid $text-color;
+        height: 300px;
+        align-self: center;
+      }
+      .goals .golas-list {
+        list-style: none;
+        font-size: 1.25rem;
+        padding-left: 0;
+      }
+      .goals .golas-list li::before {
+        content: "\f024";
+        font-family: FontAwesome;
+        font-size: inherit;
+        display: inline-block;
+        margin-right: 8px;
+      }
     }
   }
   > .take-part-in {
@@ -284,6 +280,28 @@
   p {
     font-size: 1.25rem;
   }
+  .sign-up {
+    background-color: $brand-color;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-weight: $base-font-weight;
+    color: #FAFAFA;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    cursor: pointer; // start-button hover effect
+    &:hover {
+      background-color: darken($brand-color, 5%);
+      text-decoration: none;
+    } // start-button active effect
+    &:active {
+      background-color: $brand-color;
+    }
+  }
 }
 @include media-query-max($on-mobile) {
   .hackfest {
@@ -305,10 +323,12 @@
       }
     }
     > .info {
-      .goals {
-        .golas-list {
-          li {
-            font-size: 1rem;
+      .info-content {
+        .goals {
+          .golas-list {
+            li {
+              font-size: 1rem;
+            }
           }
         }
       }
@@ -347,10 +367,12 @@
       }
     }
     > .info {
-      .goals {
-        .golas-list {
-          li {
-            font-size: 1.25rem;
+      .info-content {
+        .goals {
+          .golas-list {
+            li {
+              font-size: 1.25rem;
+            }
           }
         }
       }
@@ -372,15 +394,17 @@
 @include media-query-max($on-desktop - 1) {
   .hackfest {
     > .info {
-      flex-flow: column wrap;
-      .main-content {
-        width: 100%;
-      }
-      .line {
-        border-left: 0;
-        border-bottom: 1px solid $text-color;
-        width: 100%;
-        height: 0;
+      .info-content {
+        flex-flow: column wrap;
+        .main-content {
+          width: 100%;
+        }
+        .line {
+          border-left: 0;
+          border-bottom: 1px solid $text-color;
+          width: 100%;
+          height: 0;
+        }
       }
     }
     > .take-part-in {
