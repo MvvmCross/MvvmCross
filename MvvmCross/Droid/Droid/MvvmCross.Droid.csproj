@@ -89,7 +89,6 @@
     <Compile Include="Views\MvxActivity.cs" />
     <Compile Include="Views\MvxAndroidApplication.cs" />
     <Compile Include="Views\IMvxAndroidApplication.cs" />
-    <Compile Include="Views\Attributes\MvxBasePresentationAttribute.cs" />
     <Compile Include="Views\Attributes\MvxFragmentAttribute.cs" />
     <Compile Include="Views\Attributes\MvxPresentationAttributeExtensions.cs" />
     <Compile Include="Views\Attributes\MvxDialogAttribute.cs" />
@@ -112,7 +111,6 @@
     <Compile Include="Views\Attributes\MvxTabAttribute.cs" />
     <Compile Include="Views\MvxSimpleLayoutInflaterHolder.cs" />
     <Compile Include="Views\Attributes\MvxActivityAttribute.cs" />
-    <Compile Include="Views\Attributes\IMvxOverridePresentationAttribute.cs" />
     <Compile Include="Views\MvxActivityState.cs" />
     <Compile Include="Views\MvxActivityEventArgs.cs" />
   </ItemGroup>

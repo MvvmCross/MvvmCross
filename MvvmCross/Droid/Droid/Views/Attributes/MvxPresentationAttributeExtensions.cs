@@ -4,6 +4,7 @@ using System.Linq;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Core.Views;
 
 namespace MvvmCross.Droid.Views.Attributes
 {

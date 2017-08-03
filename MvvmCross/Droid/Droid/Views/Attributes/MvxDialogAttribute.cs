@@ -1,4 +1,5 @@
 using System;
+using MvvmCross.Core.Views;
 
 namespace MvvmCross.Droid.Views.Attributes
 {

@@ -136,7 +136,8 @@ namespace MvvmCross.Droid.Views
                 foreach (var attribute in typeWithAttribute.GetBasePresentationAttributes())
                 {
                     //TODO: Can we set the viewType from somewhere else?
-                    attribute.ViewType = typeWithAttribute;
+                    if(attribute.ViewType == null)
+                        attribute.ViewType = typeWithAttribute;
                     ViewModelToPresentationAttributeMap[viewModelType].Add(attribute);
                 }
             }

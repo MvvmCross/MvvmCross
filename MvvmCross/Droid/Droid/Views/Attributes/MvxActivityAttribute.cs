@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Android.OS;
 using Android.Views;
+using MvvmCross.Core.Views;
 
 namespace MvvmCross.Droid.Views.Attributes
 {
