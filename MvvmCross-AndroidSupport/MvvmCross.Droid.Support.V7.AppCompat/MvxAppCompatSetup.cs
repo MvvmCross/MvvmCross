@@ -26,7 +26,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             typeof(NestedScrollView).Assembly,
             typeof(SlidingPaneLayout).Assembly,
             typeof(ViewPager).Assembly,
-            typeof(Support.V4.MvxSwipeRefreshLayout).Assembly,
+            typeof(Support.V4.MvxSwipeRefreshLayout).Assembly
         };
 
         /// <summary>

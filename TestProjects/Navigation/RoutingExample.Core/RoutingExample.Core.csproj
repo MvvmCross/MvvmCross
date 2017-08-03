@@ -51,6 +51,7 @@
     <Compile Include="ViewModels\TestCViewModel.cs" />
     <Compile Include="RoutingFacades\PrePopulateRoutingFacade.cs" />
     <Compile Include="ViewModels\ViewModelDialogA.cs" />
+    <Compile Include="ViewModels\ViewModelNested.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">

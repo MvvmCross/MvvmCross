@@ -99,6 +99,7 @@
     <Compile Include="FragmentC.cs" />
     <Compile Include="TestCView.cs" />
     <Compile Include="FragmentDialogA.cs" />
+    <Compile Include="FragmentNested.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
