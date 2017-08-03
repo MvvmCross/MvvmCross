@@ -1,4 +1,6 @@
-﻿namespace MvvmCross.iOS.Views.Presenters.Attributes
+﻿using MvvmCross.Core.Views;
+
+namespace MvvmCross.iOS.Views.Presenters.Attributes
 {
     public class MvxTabPresentationAttribute : MvxBasePresentationAttribute
     {

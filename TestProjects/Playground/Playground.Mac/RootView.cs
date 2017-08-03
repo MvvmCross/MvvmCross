@@ -9,6 +9,7 @@ using MvvmCross.Mac.Views.Presenters.Attributes;
 using Playground.Core.ViewModels;
 using MvvmCross.Binding.BindingContext;
 using System.Linq;
+using MvvmCross.Core.Views;
 
 namespace Playground.Mac
 {

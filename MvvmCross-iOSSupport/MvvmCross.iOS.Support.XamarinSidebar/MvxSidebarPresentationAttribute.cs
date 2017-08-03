@@ -1,4 +1,5 @@
-﻿using MvvmCross.iOS.Views.Presenters.Attributes;
+﻿using MvvmCross.Core.Views;
+using MvvmCross.iOS.Views.Presenters.Attributes;
 
 namespace MvvmCross.iOS.Support.XamarinSidebar
 {

@@ -6,6 +6,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Views.Presenters.Attributes;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Core.Views;
 using UIKit;
 
 namespace MvvmCross.iOS.Views.Presenters

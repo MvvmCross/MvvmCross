@@ -80,12 +80,10 @@
     <Compile Include="Views\IMvxMacViewsContainer.cs" />
     <Compile Include="Views\MvxWindowController.cs" />
     <Compile Include="Views\MvxFromStoryboardAttribute.cs" />
-    <Compile Include="Views\Presenters\Attributes\MvxBasePresentationAttribute.cs" />
     <Compile Include="Views\Presenters\Attributes\MvxModalPresentationAttribute.cs" />
     <Compile Include="Views\Presenters\Attributes\MvxWindowPresentationAttribute.cs" />
     <Compile Include="Views\Presenters\Attributes\MvxSheetPresentationAttribute.cs" />
     <Compile Include="Views\Presenters\Attributes\MvxContentPresentationAttribute.cs" />
-    <Compile Include="Views\Presenters\Attributes\IMvxOverridePresentationAttribute.cs" />
     <Compile Include="Views\MvxTabViewController.cs" />
     <Compile Include="Views\IMvxTabViewController.cs" />
     <Compile Include="Views\Presenters\Attributes\MvxTabPresentationAttribute.cs" />
