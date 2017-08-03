@@ -58,6 +58,7 @@ The presentation can be highly customized through this attribute members:
 
 - TabName: Defines the title of the tab that will be displayed below the tab icon. It has to be a magic string, but it can be for example a key to a localized string that you can grab overriding the method `SetTitleAndTabBarItem` in your TabBarController.
 - TabIconName: Defines the name of the resource that will be used as icon for the tab. It also has to be a magic string, but same as before, your app can take control of what happens by overriding the method `SetTitleAndTabBarItem` in your TabBarController.
+- TabSelectedIconName: Defines the name of the resource that will be used as icon for the tab when it becomes selected. It also has to be a magic string, your app can take control of what happens by overriding the method `SetTitleAndTabBarItem` in your TabBarController.
 - WrapInNavigationController: If set to `true`, the view will be wrapped in a `MvxNavigationController`, which will allow the tab to have its own navigation stack. **Important note**: When the current _Root_ is a TabBarController and there is no current modal navigation stack, child presentations will be tried to be displayed in the current selected _Tab_.
 - TabAccessibilityIdentifier: Corresponds to the UIViewController.View `AccessibilityIdentifier` property.
 

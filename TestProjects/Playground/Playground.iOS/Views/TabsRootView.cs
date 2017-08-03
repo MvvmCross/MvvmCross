@@ -29,15 +29,15 @@ namespace Playground.iOS.Views
             }
         }
 
-        protected override void SetTitleAndTabBarItem(UIViewController viewController, string title, string iconName)
+        protected override void SetTitleAndTabBarItem(UIViewController viewController, MvxTabPresentationAttribute attribute)
         {
             // you can override this method to set title or iconName
-            if (string.IsNullOrEmpty(title))
-                title = "Tab 2";
-            if (string.IsNullOrEmpty(iconName))
-                iconName = "ic_tabbar_menu";
+            if (string.IsNullOrEmpty(attribute.TabName))
+                attribute.TabName = "Tab 2";
+            if (string.IsNullOrEmpty(attribute.TabIconName))
+                attribute.TabIconName = "ic_tabbar_menu";
 
-            base.SetTitleAndTabBarItem(viewController, title, iconName);
+            base.SetTitleAndTabBarItem(viewController, attribute);
         }
 
         public override bool ShowChildView(UIViewController viewController)
