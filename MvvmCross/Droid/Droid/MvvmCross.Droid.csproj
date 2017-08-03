@@ -91,7 +91,7 @@
     <Compile Include="Views\IMvxAndroidApplication.cs" />
     <Compile Include="Views\Attributes\MvxBasePresentationAttribute.cs" />
     <Compile Include="Views\Attributes\MvxFragmentAttribute.cs" />
-    <Compile Include="Views\Attributes\MvxFragmentAttributeExtensionMethods.cs" />
+    <Compile Include="Views\Attributes\MvxPresentationAttributeExtensions.cs" />
     <Compile Include="Views\Attributes\MvxDialogAttribute.cs" />
     <Compile Include="Views\MvxFragmentExtensions.cs" />
     <Compile Include="Views\IMvxFragmentView.cs" />
