@@ -20,20 +20,37 @@ namespace MvvmCross.Droid.Views
 {
     public class MvxAndroidViewPresenter : MvxViewPresenter, IMvxAndroidViewPresenter
     {
-        protected virtual Activity CurrentActivity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
-        protected virtual FragmentManager CurrentFragmentManager => CurrentActivity.FragmentManager;
-        protected virtual IMvxAndroidActivityLifetimeListener ActivityLifetimeListener { get; set; } = Mvx.Resolve<IMvxAndroidActivityLifetimeListener>();
-
-        protected IEnumerable<Assembly> _androidViewAssemblies;
-        protected ConditionalWeakTable<MvxBasePresentationAttribute, IMvxFragmentView> _cachedFragments = new ConditionalWeakTable<MvxBasePresentationAttribute, IMvxFragmentView>();
-        private ConditionalWeakTable<IMvxViewModel, DialogFragment> _dialogs = new ConditionalWeakTable<IMvxViewModel, DialogFragment>();
-
-        protected Lazy<IMvxNavigationSerializer> _lazyNavigationSerializerFactory;
-        protected IMvxNavigationSerializer Serializer;
+        protected IEnumerable<Assembly> AndroidViewAssemblies { get; set; }
         public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
         protected MvxViewModelRequest _pendingRequest;
 
-        protected IMvxViewModelTypeFinder _viewModelTypeFinder { get; } = Mvx.Resolve<IMvxViewModelTypeFinder>();
+        protected virtual Activity CurrentActivity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
+        protected virtual FragmentManager CurrentFragmentManager => CurrentActivity.FragmentManager;
+
+        protected virtual ConditionalWeakTable<MvxBasePresentationAttribute, IMvxFragmentView> CachedFragments { get; } = new ConditionalWeakTable<MvxBasePresentationAttribute, IMvxFragmentView>();
+        protected virtual ConditionalWeakTable<IMvxViewModel, DialogFragment> Dialogs { get; } = new ConditionalWeakTable<IMvxViewModel, DialogFragment>();
+
+        private IMvxAndroidActivityLifetimeListener _activityLifetimeListener;
+        protected IMvxAndroidActivityLifetimeListener ActivityLifetimeListener
+        {
+            get
+            {
+                if(_activityLifetimeListener == null)
+                    _activityLifetimeListener = Mvx.Resolve<IMvxAndroidActivityLifetimeListener>();
+                return _activityLifetimeListener;
+            }
+        }
+
+        private IMvxViewModelTypeFinder _viewModelTypeFinder;
+        protected IMvxViewModelTypeFinder ViewModelTypeFinder
+        {
+            get 
+            {
+                if (_viewModelTypeFinder == null)
+                    _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
+                return _viewModelTypeFinder; 
+            } 
+        }
 
         private IMvxViewsContainer _viewsContainer;
         protected IMvxViewsContainer ViewsContainer
@@ -76,7 +93,7 @@ namespace MvvmCross.Droid.Views
 
         public MvxAndroidViewPresenter(IEnumerable<Assembly> androidViewAssemblies)
         {
-            _androidViewAssemblies = androidViewAssemblies;
+            AndroidViewAssemblies = androidViewAssemblies;
             ActivityLifetimeListener.ActivityChanged += ActivityLifetimeListener_ActivityChanged;
         }
 
@@ -103,7 +120,7 @@ namespace MvvmCross.Droid.Views
 
         private void RegisterAttributes()
         {
-            var typesWithBasePresentationAttribute = _androidViewAssemblies
+            var typesWithBasePresentationAttribute = AndroidViewAssemblies
                          .SelectMany(x => x.DefinedTypes)
                          .Select(x => x.AsType())
                          .Where(x => x.HasBasePresentationAttribute())
@@ -127,7 +144,7 @@ namespace MvvmCross.Droid.Views
 
         protected Type GetAssociatedViewModelType(Type fromFragmentType)
         {
-            Type viewModelType = _viewModelTypeFinder.FindTypeOrNull(fromFragmentType);
+            Type viewModelType = ViewModelTypeFinder.FindTypeOrNull(fromFragmentType);
             return viewModelType ?? fromFragmentType.GetBasePresentationAttributes().First().ViewModelType;
         }
 
@@ -175,7 +192,7 @@ namespace MvvmCross.Droid.Views
         {
             Type currentActivityType = CurrentActivity.GetType();
 
-            var activityViewModelType = _viewModelTypeFinder.FindTypeOrNull(currentActivityType);
+            var activityViewModelType = ViewModelTypeFinder.FindTypeOrNull(currentActivityType);
             return activityViewModelType;
         }
 
@@ -311,7 +328,7 @@ namespace MvvmCross.Droid.Views
             ((IMvxFragmentView)dialog).ViewModel = viewModel;
             dialog.Cancelable = attribute.Cancelable;
 
-            _dialogs.Add(viewModel, dialog);
+            Dialogs.Add(viewModel, dialog);
             dialog.Show(CurrentFragmentManager, fragmentName);
         }
 
@@ -370,11 +387,11 @@ namespace MvvmCross.Droid.Views
             }
             else if (attribute is MvxDialogAttribute dialogAttribute)
             {
-                if (_dialogs.TryGetValue(viewModel, out DialogFragment dialog))
+                if (Dialogs.TryGetValue(viewModel, out DialogFragment dialog))
                 {
                     dialog.DismissAllowingStateLoss();
                     dialog.Dispose();
-                    _dialogs.Remove(viewModel);
+                    Dialogs.Remove(viewModel);
                 }
             }
         }
@@ -392,11 +409,11 @@ namespace MvvmCross.Droid.Views
                 IMvxFragmentView fragment;
                 if (attribute is MvxFragmentAttribute fragmentAttribute && fragmentAttribute.IsCacheableFragment)
                 {
-                    if (_cachedFragments.TryGetValue(attribute, out fragment))
+                    if (CachedFragments.TryGetValue(attribute, out fragment))
                         return fragment;
 
                     fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
-                    _cachedFragments.Add(attribute, fragment);
+                    CachedFragments.Add(attribute, fragment);
                 }
                 else
                     fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
