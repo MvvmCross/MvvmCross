@@ -20,6 +20,6 @@ Our main goals for the two week session are to:
 
 [Learn more and sign up as a contributor now!](https://www.mvvmcross.com/hackfest/)
 
-After a virtual kickoff livestream on Monday, August 21, full-day closing event with speakers and hackathon on Saturday, September 2nd. Be sure to pencil these into your agenda if you’re in the area! 
+We’ll kickoff on Monday, August 21, and then wrap up the two weeks of hard work on Saturday, September 2nd with the MvvmCross HackDay in Amsterdam, complete with talks by the MvvmCross leadership team and an afternoon hackathon!
 
 The .NET Summer Hackfest is a new initiative from the .NET Foundation, aiming at inspiring substantial contributions to .NET open source projects over the summer while getting more people involved in the community. Learn more and take a look at all the projects participating on the [.NET Foundation blog](https://dotnetfoundation.org/blog/announcing-net-summer-hackfest-2017)
