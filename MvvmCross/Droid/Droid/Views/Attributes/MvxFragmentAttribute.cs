@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Android.Views;
 using MvvmCross.Core.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Droid;
 
 namespace MvvmCross.Droid.Views.Attributes
 {
@@ -32,6 +34,31 @@ namespace MvvmCross.Droid.Views.Attributes
             PopEnterAnimation = popEnterAnimation;
             PopExitAnimation = popExitAnimation;
             TransitionStyle = transitionStyle;
+            IsCacheableFragment = isCacheableFragment;
+        }
+
+        public MvxFragmentAttribute(
+            Type activityHostViewModelType, 
+            string fragmentContentResourceName, 
+            bool addToBackStack = false,
+            string enterAnimation = null,
+            string exitAnimation = null,
+            string popEnterAnimation = null,
+            string popExitAnimation = null,
+            string transitionStyle = null,
+            bool isCacheableFragment = true
+        )
+        {
+            var context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext;
+
+            ActivityHostViewModelType = activityHostViewModelType;
+            FragmentContentId = fragmentContentResourceName!=null ? context.Resources.GetIdentifier(fragmentContentResourceName, "id", context.PackageName) : Android.Resource.Id.Content;
+            AddToBackStack = addToBackStack;
+            EnterAnimation = enterAnimation!=null ? context.Resources.GetIdentifier(enterAnimation, "animation", context.PackageName) : int.MinValue;
+            ExitAnimation = exitAnimation!= null ? context.Resources.GetIdentifier(exitAnimation, "animation", context.PackageName) : int.MinValue;
+            PopEnterAnimation = popEnterAnimation!= null ? context.Resources.GetIdentifier(popEnterAnimation, "animation", context.PackageName) : int.MinValue;
+            PopExitAnimation = popExitAnimation!= null ? context.Resources.GetIdentifier(popExitAnimation, "animation", context.PackageName) : int.MinValue;
+            TransitionStyle = transitionStyle!= null ? context.Resources.GetIdentifier(transitionStyle, "style", context.PackageName) : int.MinValue;
             IsCacheableFragment = isCacheableFragment;
         }
 
