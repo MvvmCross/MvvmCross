@@ -1,5 +1,6 @@
 ﻿using CoreGraphics;
 using UIKit;
+using MvvmCross.Core.Views;
 
 namespace MvvmCross.iOS.Views.Presenters.Attributes
 {

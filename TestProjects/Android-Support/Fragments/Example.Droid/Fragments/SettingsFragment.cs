@@ -1,6 +1,6 @@
 ﻿using Android.Runtime;
 using Example.Core.ViewModels;
-using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Views.Attributes;
 
 namespace Example.Droid.Fragments
 {

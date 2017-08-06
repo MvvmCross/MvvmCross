@@ -39,6 +39,11 @@ namespace RoutingExample.Core.ViewModels
             ReturnedFrom = $"Returned from View B {_returnedFromCount} times";
         });
 
+        public MvxCommand GoToNestedCommand => new MvxCommand(async () =>
+        {
+            await _navigationService.Navigate<ViewModelNested>();
+        });
+
         public ViewModelA(IMvxNavigationService navigationService)
         {
             _navigationService = navigationService;

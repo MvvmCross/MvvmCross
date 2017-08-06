@@ -8,7 +8,6 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Droid.Views;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
@@ -27,7 +26,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             typeof(NestedScrollView).Assembly,
             typeof(SlidingPaneLayout).Assembly,
             typeof(ViewPager).Assembly,
-            typeof(Support.V4.MvxSwipeRefreshLayout).Assembly,
+            typeof(Support.V4.MvxSwipeRefreshLayout).Assembly
         };
 
         /// <summary>
@@ -35,8 +34,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         /// </summary>
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
-            var mvxFragmentsPresenter = new MvxFragmentsPresenter(AndroidViewAssemblies);
-            return mvxFragmentsPresenter;
+            return new MvxAppCompatViewPresenter(AndroidViewAssemblies);
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)

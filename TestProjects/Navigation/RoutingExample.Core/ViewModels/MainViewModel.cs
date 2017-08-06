@@ -31,7 +31,8 @@ namespace RoutingExample.Core.ViewModels
             {
                 return _showACommand ?? (_showACommand = new MvxAsyncCommand(async () =>
                 {
-                    await _navigationService.Navigate<TestAViewModel, User>(new User("MvvmCross", "Test"));
+                    await _navigationService.Navigate<ViewModelA, string, string>("test");
+                    //await _navigationService.Navigate<TestAViewModel, User>(new User("MvvmCross", "Test"));
 
                     //await _navigationService.Navigate("mvx://test/a");
                 }));
@@ -49,7 +50,20 @@ namespace RoutingExample.Core.ViewModels
                     //var result = await _navigationService.Navigate<User, User>("mvx://test/?id=" + Guid.NewGuid().ToString("N"), new User("MvvmCross2", "Test2"));
                     var result = await _navigationService.Navigate<TestBViewModel, User, User>(new User("MvvmCross", "Test"));
                     var test = result?.FirstName;
-                    await _navigationService.Close(this, new User("Close parent", "Test"));
+                    //await _navigationService.Close(this, new User("Close parent", "Test"));
+                }));
+            }
+        }
+
+        private IMvxCommand _showDialogACommand;
+
+        public IMvxCommand ShowDialogACommand
+        {
+            get
+            {
+                return _showDialogACommand ?? (_showDialogACommand = new MvxAsyncCommand(async () =>
+                {
+                    var result = await _navigationService.Navigate<ViewModelDialogA, IMvxViewModel, string>(this);
                 }));
             }
         }
