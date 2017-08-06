@@ -13,14 +13,22 @@ namespace Playground.Core.ViewModels
         {
             _navigationService = navigationService;
 
-            ShowInitialViewModelsCommand = new MvxAsyncCommand(ShowInitialViewModels);
+            ShowInitialMenuCommand = new MvxAsyncCommand(ShowInitialViewModels);
+            ShowDetailCommand = new MvxAsyncCommand(ShowDetailViewModel);
         }
 
-        public IMvxAsyncCommand ShowInitialViewModelsCommand { get; private set; }
+        public IMvxAsyncCommand ShowInitialMenuCommand { get; private set; }
+
+        public IMvxAsyncCommand ShowDetailCommand { get; private set; }
 
         private async Task ShowInitialViewModels()
         {
             await _navigationService.Navigate<SplitMasterViewModel>();
+        }
+
+        private async Task ShowDetailViewModel()
+        {
+            await _navigationService.Navigate<SplitDetailViewModel>();
         }
     }
 }

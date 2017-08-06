@@ -6,6 +6,11 @@ namespace MvvmCross.Droid.Views.Attributes
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class MvxTabAttribute : MvxFragmentAttribute
     {
+        public MvxTabAttribute()
+        {
+
+        }
+
         public MvxTabAttribute(string title, int viewPagerResourceId, int tabLayoutResourceId, Type activityHostViewModelType = null)
         {
             Title = title;
