@@ -96,6 +96,7 @@
     <Compile Include="Views\SplitRootView.cs" />
     <Compile Include="Views\SplitMasterView.cs" />
     <Compile Include="Views\SplitDetailView.cs" />
+    <Compile Include="Views\ModalView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

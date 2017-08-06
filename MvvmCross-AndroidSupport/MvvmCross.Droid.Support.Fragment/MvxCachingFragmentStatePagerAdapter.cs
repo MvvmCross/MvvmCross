@@ -32,7 +32,7 @@ namespace MvvmCross.Droid.Support.V4
             Fragments = fragments;
         }
 
-        public override int Count => Fragments.Count();
+        public override int Count => Fragments?.Count() ?? 0;
 
         public List<MvxViewPagerFragment> Fragments { get; }
 

@@ -206,7 +206,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
             else
             {
-                if (CurrentActivity.FindViewById(attribute.FragmentContentId) == null)
+                if (CurrentActivity.FindViewById(attribute.TabLayoutResourceId) == null)
                     throw new NullReferenceException("FrameLayout to show Fragment not found");
 
                 var viewPager = CurrentActivity.FindViewById<ViewPager>(attribute.ViewPagerResourceId);
