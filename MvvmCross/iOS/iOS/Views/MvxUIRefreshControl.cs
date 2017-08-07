@@ -18,14 +18,7 @@ namespace MvvmCross.iOS.Views
 		{
 			ValueChanged += (object sender, EventArgs e) =>
 			{
-				var command = RefreshCommand;
-				if (command == null)
-					return;
-
-				if (!command.CanExecute(null))
-					return;
-
-				command.Execute(null);
+				ExecuteRefreshCommand(RefreshCommand);
 			};
 		}
 
@@ -75,5 +68,16 @@ namespace MvvmCross.iOS.Views
 		/// </summary>
 		/// <value>The refresh command.</value>
 		public ICommand RefreshCommand { get; set; }
+
+		protected virtual void ExecuteRefreshCommand(ICommand command)
+        {
+            if (command == null)
+                return;
+
+            if (!command.CanExecute(null))
+                return;
+
+            command.Execute(null);
+        }
 	}
 }
