@@ -13,8 +13,8 @@ namespace $rootnamespace$
         {
         }
         
-        public Setup(IMvxApplicationDelegate applicationDelegate, UIWindow window, IMvxIosViewPresenter presenter)
-            : base(applicationDelegate, window, presenter)
+        public Setup(IMvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter)
+            : base(applicationDelegate, presenter)
         {
         }
 
