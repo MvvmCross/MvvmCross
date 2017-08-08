@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 
@@ -7,6 +8,7 @@ namespace RoutingExample.Core.ViewModels
     public class MainViewModel : MvxViewModelResult<User>
     {
         private readonly IMvxNavigationService _navigationService;
+        private readonly Random _random = new Random(100);
 
         public MainViewModel(IMvxNavigationService navigationService)
         {
@@ -53,6 +55,20 @@ namespace RoutingExample.Core.ViewModels
                 }));
             }
         }
+
+		private IMvxCommand _showCCommand;
+
+		public IMvxCommand ShowCCommand
+		{
+			get
+			{
+				return _showCCommand ?? (_showCCommand = new MvxAsyncCommand(async () =>
+				{
+                    var randomNumber = _random.Next();
+					await _navigationService.Navigate<TestCViewModel, int>(randomNumber);
+				}));
+			}
+		}
 
         private IMvxCommand _showRandomCommand;
 

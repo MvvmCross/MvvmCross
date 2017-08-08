@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,6 +35,14 @@
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agm-Fb-bfh" userLabel="Btn TestC">
+                                <rect key="frame" x="146.5" y="318" width="82" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="82" id="rxX-aE-dMd"/>
+                                    <constraint firstAttribute="height" constant="30" id="zt0-cA-UJ1"/>
+                                </constraints>
+                                <state key="normal" title="mvx://test/c"/>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="11">
                                 <rect key="frame" x="15" y="194" width="345" height="30"/>
                                 <state key="normal" title="mvx://random">
@@ -59,9 +67,11 @@
                             <constraint firstItem="11" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="15" id="18"/>
                             <constraint firstAttribute="trailing" secondItem="11" secondAttribute="trailing" constant="15" id="20"/>
                             <constraint firstItem="9" firstAttribute="top" secondItem="2" secondAttribute="bottom" constant="54" id="21"/>
+                            <constraint firstItem="agm-Fb-bfh" firstAttribute="centerX" secondItem="6" secondAttribute="centerX" id="CQo-yK-hA0"/>
                             <constraint firstItem="4CL-wn-i6a" firstAttribute="trailing" secondItem="11" secondAttribute="trailing" id="TGw-3F-9ZG"/>
                             <constraint firstItem="4CL-wn-i6a" firstAttribute="top" secondItem="11" secondAttribute="bottom" constant="30" id="qNS-gg-Fs8"/>
                             <constraint firstItem="4CL-wn-i6a" firstAttribute="leading" secondItem="11" secondAttribute="leading" id="yPH-Um-2Z8"/>
+                            <constraint firstItem="agm-Fb-bfh" firstAttribute="top" secondItem="4CL-wn-i6a" secondAttribute="bottom" constant="34" id="z8q-b5-l6h"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Example" id="201"/>
@@ -70,11 +80,12 @@
                         <outlet property="BtnRandom" destination="11" id="name-outlet-11"/>
                         <outlet property="BtnTestA" destination="9" id="name-outlet-9"/>
                         <outlet property="BtnTestB" destination="10" id="name-outlet-10"/>
+                        <outlet property="BtnTestC" destination="agm-Fb-bfh" id="hZQ-UG-l1H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="340" y="-82"/>
+            <point key="canvasLocation" x="340" y="-82.3088455772114"/>
         </scene>
         <!--Example A-->
         <scene sceneID="28">
@@ -170,8 +181,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="C" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="rgV-oF-Hux">
-                                <rect key="frame" x="208" y="192" width="132" height="125"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="C" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="rgV-oF-Hux">
+                                <rect key="frame" x="112.5" y="258.5" width="150" height="150"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="46h-Ar-j2N"/>
@@ -181,13 +192,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6C-GC-KuY">
-                                <rect key="frame" x="170" y="285" width="259" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Close with Result">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parameter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ylb-DU-MoP">
                                 <rect key="frame" x="16" y="84" width="171.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -200,14 +204,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6C-GC-KuY">
+                                <rect key="frame" x="168" y="183" width="39" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="39" id="NPK-vZ-EB2"/>
+                                    <constraint firstAttribute="height" constant="30" id="t4P-B1-fhS"/>
+                                </constraints>
+                                <state key="normal" title="Close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="rgV-oF-Hux" secondAttribute="centerX" id="2r8-S1-bPj"/>
                             <constraint firstItem="ylb-DU-MoP" firstAttribute="leading" secondItem="c5L-db-Fbi" secondAttribute="leadingMargin" id="OuK-HN-SaX"/>
                             <constraint firstAttribute="centerX" secondItem="ylb-DU-MoP" secondAttribute="trailing" id="PPF-T6-P2J"/>
+                            <constraint firstItem="v6C-GC-KuY" firstAttribute="centerX" secondItem="c5L-db-Fbi" secondAttribute="centerX" id="R7i-C9-pLJ"/>
                             <constraint firstItem="rgV-oF-Hux" firstAttribute="centerY" secondItem="c5L-db-Fbi" secondAttribute="centerY" id="Wy6-Id-Oht"/>
                             <constraint firstAttribute="trailingMargin" secondItem="OZO-OP-O3P" secondAttribute="trailing" id="XSf-Yz-gO1"/>
+                            <constraint firstItem="v6C-GC-KuY" firstAttribute="top" secondItem="OZO-OP-O3P" secondAttribute="bottom" constant="78" id="Yl4-MU-1mt"/>
                             <constraint firstItem="OZO-OP-O3P" firstAttribute="leading" secondItem="ylb-DU-MoP" secondAttribute="trailing" id="bbz-cv-LLA"/>
                             <constraint firstItem="ylb-DU-MoP" firstAttribute="top" secondItem="9th-Se-wdV" secondAttribute="bottom" constant="20" id="csg-TM-oHK"/>
                             <constraint firstItem="OZO-OP-O3P" firstAttribute="top" secondItem="ylb-DU-MoP" secondAttribute="top" id="xTt-om-NdD"/>

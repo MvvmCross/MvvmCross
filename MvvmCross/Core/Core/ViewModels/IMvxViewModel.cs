@@ -37,7 +37,7 @@ namespace MvvmCross.Core.ViewModels
         Task Initialize();
     }
 
-    public interface IMvxViewModel<TParameter> : IMvxViewModel where TParameter : class
+    public interface IMvxViewModel<TParameter> : IMvxViewModel
     {
         void Prepare(TParameter parameter);
     }
@@ -48,7 +48,7 @@ namespace MvvmCross.Core.ViewModels
         TaskCompletionSource<object> CloseCompletionSource { get; set; }
     }
 
-    public interface IMvxViewModel<TParameter, TResult> : IMvxViewModel<TParameter>, IMvxViewModelResult<TResult> where TParameter : class where TResult : class
+    public interface IMvxViewModel<TParameter, TResult> : IMvxViewModel<TParameter>, IMvxViewModelResult<TResult> where TResult : class
     {
     }
 }
