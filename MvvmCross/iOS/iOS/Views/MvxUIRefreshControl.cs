@@ -16,10 +16,7 @@ namespace MvvmCross.iOS.Views
 		/// </summary>
 		public MvxUIRefreshControl()
 		{
-			ValueChanged += (object sender, EventArgs e) =>
-			{
-				ExecuteRefreshCommand(RefreshCommand);
-			};
+			ValueChanged += OnValueChanged;
 		}
 
 		private string _message;
@@ -69,6 +66,11 @@ namespace MvvmCross.iOS.Views
 		/// <value>The refresh command.</value>
 		public ICommand RefreshCommand { get; set; }
 
+		private void OnValueChanged(object sender, EventArgs args)
+		{
+			ExecuteRefreshCommand(RefreshCommand);
+		}
+
 		protected virtual void ExecuteRefreshCommand(ICommand command)
         {
             if (command == null)
@@ -79,5 +81,15 @@ namespace MvvmCross.iOS.Views
 
             command.Execute(null);
         }
+
+		protected override void Dispose(bool disposing)
+		{
+			if(disposing)
+			{
+				ValueChanged -= OnValueChanged;
+			}
+
+			base.Dispose(disposing);
+		}
 	}
 }
