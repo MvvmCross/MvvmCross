@@ -20,7 +20,8 @@ namespace MvvmCross.Binding.Droid.ResourceHelpers
             var resourceTypeName = setup.ExecutableNamespace + ".Resource";
             var resourceType = setup.ExecutableAssembly.GetType(resourceTypeName);
             if (resourceType == null)
-                throw new MvxException("Unable to find resource type - " + resourceTypeName);
+                throw new MvxException("Unable to find resource type - " + resourceTypeName +
+                                       ". Please check if your setup class is in your application's root namespace.");
             return resourceType;
         }
     }
