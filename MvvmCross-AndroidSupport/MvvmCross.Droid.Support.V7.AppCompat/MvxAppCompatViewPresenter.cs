@@ -202,7 +202,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             if (attribute.ActivityHostViewModelType != currentHostViewModelType)
             {
                 _pendingRequest = request;
-                ShowHostActivity(attribute);
+                //TODO: Fix host activity
+                //ShowHostActivity(attribute);
             }
             else
             {
@@ -215,20 +216,35 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 {
                     if (viewPager.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
                     {
-                        //TODO: Check if adapter already contains this Tab and just navigate to it
-                        //var index = adapter.Fragments.FindIndex(f => f.Tag == attribute.Title);
-                        //viewPager.CurrentItem = index > -1 ? index : 0;
-
-                        adapter.Fragments.Add(new MvxViewPagerFragment(attribute.Title, attribute.ViewType, attribute.ViewModelType));
+                        if(adapter.Fragments.Any(f => f.Tag == attribute.Title))
+                        {
+                            var index = adapter.Fragments.FindIndex(f => f.Tag == attribute.Title);
+                            viewPager.CurrentItem = index > -1 ? index : 0;
+                        }
+                        else
+                        {
+                            if(request is MvxViewModelInstanceRequest instanceRequest)
+                                adapter.Fragments.Add(new MvxViewPagerFragment(attribute.Title, attribute.ViewType, instanceRequest.ViewModelInstance));
+                            else
+                                adapter.Fragments.Add(new MvxViewPagerFragment(attribute.Title, attribute.ViewType, attribute.ViewModelType));
+                            adapter.NotifyDataSetChanged();
+                        }
                     }
                     else
                     {
-                        var fragments = new List<MvxViewPagerFragment>
-                            {
-                                new MvxViewPagerFragment(attribute.Title, attribute.ViewType, attribute.ViewModelType),
-                            };
-                        //TODO: Maybe we need to use ChildFragmentManager here if it is nested
-                        viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(CurrentActivity, CurrentFragmentManager, fragments);
+                        var fragments = new List<MvxViewPagerFragment>();
+                        if (request is MvxViewModelInstanceRequest instanceRequest)
+                            fragments.Add(new MvxViewPagerFragment(attribute.Title, attribute.ViewType, instanceRequest.ViewModelInstance));
+                        else
+                            fragments.Add(new MvxViewPagerFragment(attribute.Title, attribute.ViewType, attribute.ViewModelType));
+
+                        if(attribute.FragmentHostViewModelType != null)
+                        {
+                            //TODO: We need to use ChildFragmentManager here if it is nested
+                            viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(CurrentActivity, CurrentFragmentManager, fragments);
+                        }
+                        else
+                            viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(CurrentActivity, CurrentFragmentManager, fragments);
                     }
                     tabLayout.SetupWithViewPager(viewPager);
                 }

@@ -63,7 +63,7 @@ namespace MvvmCross.Droid.Views.Attributes
         }
 
         /// <summary>
-        /// Fragment parent activity ViewModel Type. This activity is shown if ShowToViewModel call for Fragment is called from other activity.
+        /// Fragment parent activity ViewModel Type. This activity is shown if the current hosting activity viewmodel is different.
         /// </summary>
         public Type ActivityHostViewModelType { get; set; }
 
