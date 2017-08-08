@@ -87,7 +87,7 @@ namespace MvvmCross.Core.ViewModels
         }
     }
 
-    public abstract class MvxViewModel<TParameter> : MvxViewModel, IMvxViewModel<TParameter> where TParameter : class
+    public abstract class MvxViewModel<TParameter> : MvxViewModel, IMvxViewModel<TParameter>
     {
         public async Task Init(string parameter)
         {
@@ -121,7 +121,7 @@ namespace MvvmCross.Core.ViewModels
         }
     }
 
-    public abstract class MvxViewModel<TParameter, TResult> : MvxViewModelResult<TResult>, IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class
+    public abstract class MvxViewModel<TParameter, TResult> : MvxViewModelResult<TResult>, IMvxViewModel<TParameter, TResult> where TResult : class
     {
         public abstract void Prepare(TParameter parameter);
     }
