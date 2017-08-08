@@ -21,10 +21,10 @@ namespace MvvmCross.Droid.Views.Attributes
             TabLayoutResourceId = tabLayoutResourceId;
         }
 
-        public MvxTabAttribute(string title, int viewPagerResourceId, int tabLayoutResourceId, Type activityHostViewModelType = null, Type fragmentHostViewModelType = null) : this(title, viewPagerResourceId, tabLayoutResourceId)
+        public MvxTabAttribute(string title, int viewPagerResourceId, int tabLayoutResourceId, Type activityHostViewModelType = null, Type fragmentHostViewType = null) : this(title, viewPagerResourceId, tabLayoutResourceId)
         {
             ActivityHostViewModelType = activityHostViewModelType;
-            FragmentHostViewModelType = fragmentHostViewModelType;
+            FragmentHostViewType = fragmentHostViewType;
         }
 
         public MvxTabAttribute(string title, string viewPagerResourceId, string tabLayoutResourceId, Type activityHostViewModelType = null, Type fragmentHostViewModelType = null)
@@ -48,6 +48,6 @@ namespace MvvmCross.Droid.Views.Attributes
         /// <summary>
         /// Fragment parent activity ViewModel Type.
         /// </summary>
-        public Type FragmentHostViewModelType { get; set; }
+        public Type FragmentHostViewType { get; set; }
     }
 }

@@ -238,10 +238,14 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                         else
                             fragments.Add(new MvxViewPagerFragment(attribute.Title, attribute.ViewType, attribute.ViewModelType));
 
-                        if(attribute.FragmentHostViewModelType != null)
+                        if(attribute.FragmentHostViewType != null)
                         {
-                            //TODO: We need to use ChildFragmentManager here if it is nested
-                            viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(CurrentActivity, CurrentFragmentManager, fragments);
+                            var fragmentName = FragmentJavaName(attribute.FragmentHostViewType);
+                            var fragment = CurrentFragmentManager.FindFragmentByTag(fragmentName);
+
+                            if (fragment == null)
+                                throw new MvxException("Fragment not found", fragmentName);
+                            viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(CurrentActivity, fragment.ChildFragmentManager, fragments);
                         }
                         else
                             viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(CurrentActivity, CurrentFragmentManager, fragments);
