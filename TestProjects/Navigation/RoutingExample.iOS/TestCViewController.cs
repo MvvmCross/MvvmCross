@@ -20,7 +20,7 @@ namespace RoutingExample.iOS
             base.ViewDidLoad();
             var set = this.CreateBindingSet<TestCViewController, TestCViewModel>();
             set.Bind(CloseButton).To(vm => vm.CloseViewModelCommand);
-            set.Bind(ValueLabel).To(vm => vm.Parameter);
+            set.Bind(ValueLabel).To(vm => vm.UserId);
             set.Apply();
         }
     }

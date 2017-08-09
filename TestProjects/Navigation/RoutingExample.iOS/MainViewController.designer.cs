@@ -9,49 +9,61 @@ using System.CodeDom.Compiler;
 
 namespace RoutingExample.iOS
 {
-    [Register("MainViewController")]
-    partial class MainViewController
-    {
-        [Outlet]
-        UIKit.UIButton BtnPrePop { get; set; }
+	[Register ("MainViewController")]
+	partial class MainViewController
+	{
+		[Outlet]
+		UIKit.UIButton BtnPrePop { get; set; }
 
-        [Outlet]
-        [GeneratedCode("iOS Designer", "1.0")]
-        UIKit.UIButton BtnRandom { get; set; }
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIKit.UIButton BtnRandom { get; set; }
 
-        [Outlet]
-        [GeneratedCode("iOS Designer", "1.0")]
-        UIKit.UIButton BtnTestA { get; set; }
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIKit.UIButton BtnTestA { get; set; }
 
-        [Outlet]
-        [GeneratedCode("iOS Designer", "1.0")]
-        UIKit.UIButton BtnTestB { get; set; }
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIKit.UIButton BtnTestB { get; set; }
 
-        void ReleaseDesignerOutlets()
-        {
-            if (BtnRandom != null)
-            {
-                BtnRandom.Dispose();
-                BtnRandom = null;
-            }
+		[Outlet]
+		UIKit.UIButton BtnTestC { get; set; }
 
-            if (BtnTestA != null)
-            {
-                BtnTestA.Dispose();
-                BtnTestA = null;
-            }
+		[Outlet]
+		UIKit.UILabel ResultLabel { get; set; }
+		
+		void ReleaseDesignerOutlets ()
+		{
+			if (BtnPrePop != null) {
+				BtnPrePop.Dispose ();
+				BtnPrePop = null;
+			}
 
-            if (BtnTestB != null)
-            {
-                BtnTestB.Dispose();
-                BtnTestB = null;
-            }
+			if (BtnRandom != null) {
+				BtnRandom.Dispose ();
+				BtnRandom = null;
+			}
 
-            if (BtnPrePop != null)
-            {
-                BtnPrePop.Dispose();
-                BtnPrePop = null;
-            }
-        }
-    }
+			if (BtnTestA != null) {
+				BtnTestA.Dispose ();
+				BtnTestA = null;
+			}
+
+			if (BtnTestB != null) {
+				BtnTestB.Dispose ();
+				BtnTestB = null;
+			}
+
+			if (BtnTestC != null) {
+				BtnTestC.Dispose ();
+				BtnTestC = null;
+			}
+
+			if (ResultLabel != null) {
+				ResultLabel.Dispose ();
+				ResultLabel = null;
+			}
+		}
+	}
 }

@@ -111,9 +111,7 @@
     </Content>
     <InterfaceDefinition Include="Main.storyboard" />
     <Compile Include="TestCViewController.cs" />
-    <Compile Include="TestCViewController.designer.cs">
-      <DependentUpon>TestCViewController.cs</DependentUpon>
-    </Compile>
+    <Compile Include="TestCViewController.designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
