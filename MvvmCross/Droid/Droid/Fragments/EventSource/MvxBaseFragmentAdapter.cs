@@ -12,7 +12,7 @@ using Android.OS;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
+namespace MvvmCross.Droid.Fragments.EventSource
 {
     public class MvxBaseFragmentAdapter
     {
