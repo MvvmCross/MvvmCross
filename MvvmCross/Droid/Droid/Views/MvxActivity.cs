@@ -6,6 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
+using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
@@ -23,7 +25,7 @@ namespace MvvmCross.Droid.Views
         : MvxEventSourceActivity
         , IMvxAndroidView
     {
-        private View _view;
+        protected View _view;
 
         protected MvxActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
@@ -82,6 +84,31 @@ namespace MvvmCross.Droid.Views
                 return;
             }
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
+        }
+
+        private readonly List<WeakReference<Fragment>> _fragList = new List<WeakReference<Fragment>>();
+
+        public override void OnAttachFragment(Fragment fragment)
+        {
+            base.OnAttachFragment(fragment);
+            _fragList.Add(new WeakReference<Fragment>(fragment));
+        }
+
+        public List<Fragment> Fragments
+        {
+            get
+            {
+                var ret = new List<Fragment>();
+                foreach (var wref in _fragList)
+                {
+                    Fragment f;
+                    if (!wref.TryGetTarget(out f)) continue;
+                    if (f.IsVisible)
+                        ret.Add(f);
+                }
+
+                return ret;
+            }
         }
 
         protected override void OnCreate(Bundle bundle)

@@ -14,9 +14,9 @@ using Android.Views;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Droid.FullFragging.Fragments.EventSource
+namespace MvvmCross.Droid.Fragments.EventSource
 {
-    [Register("mvvmcross.droid.fullfragging.fragments.eventsource.MvxEventSourceDialogFragment")]
+    [Register("mvvmcross.droid.fragments.eventsource.MvxEventSourceDialogFragment")]
     public class MvxEventSourceDialogFragment
         : DialogFragment
         , IMvxEventSourceFragment

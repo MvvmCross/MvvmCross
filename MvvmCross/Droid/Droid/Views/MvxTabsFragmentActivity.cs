@@ -17,13 +17,12 @@ using Android.Widget;
 using Java.Lang;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.FullFragging.Views;
 using MvvmCross.Platform.Core;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Droid.FullFragging
+namespace MvvmCross.Droid.Views
 {
-    [Register("mvvmcross.droid.fullfragging.MvxTabsFragmentActivity")]
+    [Register("mvvmcross.droid.views.MvxTabsFragmentActivity")]
     public abstract class MvxTabsFragmentActivity
         : MvxActivity, TabHost.IOnTabChangeListener
     {
