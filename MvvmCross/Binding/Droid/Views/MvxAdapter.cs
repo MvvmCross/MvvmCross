@@ -235,7 +235,6 @@ namespace MvvmCross.Binding.Droid.Views
             return new MvxListItemView(Context, BindingContext.LayoutInflaterHolder,
                 dataContext, parent, templateId);
         }
-            
     }
 
 	public class MvxAdapter<TItem> : MvxAdapter where TItem : class
