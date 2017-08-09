@@ -23,9 +23,9 @@ namespace RoutingExample.Core.ViewModels
             set => SetProperty(ref _userId, value);
         }
 
-		public IMvxAsyncCommand CloseViewModelCommand => new MvxAsyncCommand(
-	            () => _navigationService.Close(this));
-        
+        public IMvxAsyncCommand CloseViewModelCommand => new MvxAsyncCommand(
+                () => _navigationService.Close(this));
+
         public override void Prepare(int parameter)
         {
             UserId = parameter;
