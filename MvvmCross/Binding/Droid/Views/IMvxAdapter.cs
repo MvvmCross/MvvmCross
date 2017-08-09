@@ -15,8 +15,6 @@ namespace MvvmCross.Binding.Droid.Views
         : ISpinnerAdapter
         , IListAdapter
     {
-        int SimpleViewLayoutId { get; set; }
-
         [MvxSetToNullAfterBinding]
         IEnumerable ItemsSource { get; set; }
 
