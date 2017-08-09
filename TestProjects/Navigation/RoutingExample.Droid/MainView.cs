@@ -10,7 +10,7 @@ using RoutingExample.Core.ViewModels;
 namespace RoutingExample.Droid
 {
     [Activity(
-        Label = "Example", 
+        Label = "Example",
         Theme = "@style/AppTheme",
         Icon = "@mipmap/icon")]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "mvx",

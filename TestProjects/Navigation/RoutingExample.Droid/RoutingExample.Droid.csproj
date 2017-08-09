@@ -97,6 +97,7 @@
     <Compile Include="FragmentA.cs" />
     <Compile Include="FragmentB.cs" />
     <Compile Include="FragmentC.cs" />
+    <Compile Include="TestCView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -122,6 +123,7 @@
     <AndroidResource Include="Resources\layout\fragment_a.xml" />
     <AndroidResource Include="Resources\layout\fragment_b.xml" />
     <AndroidResource Include="Resources\layout\fragment_c.xml" />
+    <AndroidResource Include="Resources\layout\fragment_testviewc.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
