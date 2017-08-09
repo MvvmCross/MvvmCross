@@ -349,7 +349,29 @@ namespace MvvmCross.Droid.Views
             dialog.Cancelable = attribute.Cancelable;
 
             Dialogs.Add(viewModel, dialog);
-            dialog.Show(CurrentFragmentManager, fragmentName);
+
+            var ft = CurrentFragmentManager.BeginTransaction();
+            if (attribute.SharedElements != null)
+            {
+                foreach (var item in attribute.SharedElements)
+                {
+                    ft.AddSharedElement(item.Value, item.Key);
+                }
+            }
+            if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
+            {
+                if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
+                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation, attribute.PopEnterAnimation, attribute.PopExitAnimation);
+                else
+                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
+            }
+            if (attribute.TransitionStyle != int.MinValue)
+                ft.SetTransitionStyle(attribute.TransitionStyle);
+
+            if (attribute.AddToBackStack == true)
+                ft.AddToBackStack(fragmentName);
+
+            dialog.Show(ft, fragmentName);
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)

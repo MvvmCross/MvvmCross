@@ -6,7 +6,7 @@ using MvvmCross.Platform.Droid;
 
 namespace MvvmCross.Droid.Views.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class MvxTabAttribute : MvxBasePresentationAttribute
     {
         public MvxTabAttribute()
