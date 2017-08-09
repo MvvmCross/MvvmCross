@@ -16,36 +16,29 @@ using Object = Java.Lang.Object;
 namespace MvvmCross.Binding.Droid.Views
 {
     [Register("mvvmcross.binding.droid.views.MvxListItemView")]
-    public class MvxListItemView 
-        : Object
-        , IMvxListItemView
-        , IMvxBindingContextOwner
-        , View.IOnAttachStateChangeListener
+    public class MvxListItemView : Object, IMvxListItemView, 
+        IMvxBindingContextOwner, View.IOnAttachStateChangeListener
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
+        private View _content;
+		private object _cachedDataContext;
+		private bool _isAttachedToWindow;
 
         public MvxListItemView(Context context,
-                               IMvxLayoutInflaterHolder layoutInflaterHolder,
-                               object dataContext,
-                               ViewGroup parent,
-                               int templateId)
+            IMvxLayoutInflaterHolder layoutInflaterHolder, object dataContext, 
+            ViewGroup parent, int templateId)
         {
             _bindingContext = new MvxAndroidBindingContext(context, layoutInflaterHolder, dataContext);
             TemplateId = templateId;
             Content = _bindingContext.BindingInflate(templateId, parent, false);
         }
 
-        private object _cachedDataContext;
-        private bool _isAttachedToWindow;
-
         public void OnViewAttachedToWindow(View attachedView)
         {
             _isAttachedToWindow = true;
-            if (_cachedDataContext != null
-                && DataContext == null)
-            {
+
+            if (_cachedDataContext != null && DataContext == null)
                 DataContext = _cachedDataContext;
-            }
         }
 
         public void OnViewDetachedFromWindow(View detachedView)
@@ -57,17 +50,13 @@ namespace MvvmCross.Binding.Droid.Views
 
         public IMvxBindingContext BindingContext
         {
-            get { return _bindingContext; }
-            set { throw new NotImplementedException("BindingContext is readonly in the list item"); }
+            get => _bindingContext; 
+            set => throw new NotImplementedException("BindingContext is readonly in the list item");
         }
 
-        private View _content;
         public View Content
         {
-            get
-            {
-                return _content;
-            }
+            get => _content;
             set
             {
                 _content = value;
@@ -75,12 +64,9 @@ namespace MvvmCross.Binding.Droid.Views
             }
         }
 
-        public object DataContext
+        public virtual object DataContext
         {
-            get
-            {
-                return _bindingContext.DataContext;
-            }
+            get => _bindingContext.DataContext;
             set
             {
                 if (_isAttachedToWindow)
@@ -90,14 +76,11 @@ namespace MvvmCross.Binding.Droid.Views
                 else
                 {
                     _cachedDataContext = value;
-                    if (_bindingContext.DataContext != null)
-                    {
-                        _bindingContext.DataContext = null;
-                    }
+                    _bindingContext.DataContext = null;
                 }
             }
         }
 
-        public int TemplateId { get; }
+        public int TemplateId { get; protected set; }
     }
 }
