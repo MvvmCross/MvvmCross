@@ -29,6 +29,9 @@ namespace RoutingExample.iOS
 
 		[Outlet]
 		UIKit.UIButton BtnTestC { get; set; }
+
+		[Outlet]
+		UIKit.UILabel ResultLabel { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
@@ -55,6 +58,11 @@ namespace RoutingExample.iOS
 			if (BtnTestC != null) {
 				BtnTestC.Dispose ();
 				BtnTestC = null;
+			}
+
+			if (ResultLabel != null) {
+				ResultLabel.Dispose ();
+				ResultLabel = null;
 			}
 		}
 	}

@@ -55,6 +55,15 @@
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKd-hB-D8c" userLabel="Result Label">
+                                <rect key="frame" x="24" y="45" width="327" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="RZY-AC-o45"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -67,8 +76,11 @@
                             <constraint firstItem="11" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="15" id="18"/>
                             <constraint firstAttribute="trailing" secondItem="11" secondAttribute="trailing" constant="15" id="20"/>
                             <constraint firstItem="9" firstAttribute="top" secondItem="2" secondAttribute="bottom" constant="54" id="21"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cKd-hB-D8c" secondAttribute="trailing" constant="8" id="1u2-8G-QHs"/>
                             <constraint firstItem="agm-Fb-bfh" firstAttribute="centerX" secondItem="6" secondAttribute="centerX" id="CQo-yK-hA0"/>
                             <constraint firstItem="4CL-wn-i6a" firstAttribute="trailing" secondItem="11" secondAttribute="trailing" id="TGw-3F-9ZG"/>
+                            <constraint firstItem="cKd-hB-D8c" firstAttribute="leading" secondItem="6" secondAttribute="leadingMargin" constant="8" id="bDH-en-BQ4"/>
+                            <constraint firstItem="cKd-hB-D8c" firstAttribute="top" secondItem="2" secondAttribute="bottom" constant="25" id="d8V-6n-YVZ"/>
                             <constraint firstItem="4CL-wn-i6a" firstAttribute="top" secondItem="11" secondAttribute="bottom" constant="30" id="qNS-gg-Fs8"/>
                             <constraint firstItem="4CL-wn-i6a" firstAttribute="leading" secondItem="11" secondAttribute="leading" id="yPH-Um-2Z8"/>
                             <constraint firstItem="agm-Fb-bfh" firstAttribute="top" secondItem="4CL-wn-i6a" secondAttribute="bottom" constant="34" id="z8q-b5-l6h"/>
@@ -81,6 +93,7 @@
                         <outlet property="BtnTestA" destination="9" id="name-outlet-9"/>
                         <outlet property="BtnTestB" destination="10" id="name-outlet-10"/>
                         <outlet property="BtnTestC" destination="agm-Fb-bfh" id="hZQ-UG-l1H"/>
+                        <outlet property="ResultLabel" destination="cKd-hB-D8c" id="ubC-eo-yGw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7" userLabel="First Responder" sceneMemberID="firstResponder"/>
