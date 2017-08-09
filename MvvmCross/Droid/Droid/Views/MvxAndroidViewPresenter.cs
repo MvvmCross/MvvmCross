@@ -169,7 +169,21 @@ namespace MvvmCross.Droid.Views
             IList<MvxBasePresentationAttribute> attributes;
             if (ViewModelToPresentationAttributeMap.TryGetValue(viewModelType, out attributes))
             {
-                var attribute = attributes.FirstOrDefault();
+                MvxBasePresentationAttribute attribute = attributes.FirstOrDefault();
+
+                if (attributes.Count > 1)
+                {
+                    var currentHostViewModelType = GetCurrentActivityViewModelType();
+                    foreach (var item in attributes.OfType<MvxFragmentAttribute>())
+                    {
+                        if (CurrentActivity.FindViewById(item.FragmentContentId) != null && item.ActivityHostViewModelType == currentHostViewModelType)
+                        {
+                            attribute = item;
+                            break;
+                        }
+                    }
+                }
+
                 if (attribute.ViewType?.GetInterfaces().OfType<IMvxOverridePresentationAttribute>().FirstOrDefault() is IMvxOverridePresentationAttribute view)
                 {
                     var presentationAttribute = view.PresentationAttribute();
@@ -381,12 +395,30 @@ namespace MvvmCross.Droid.Views
 
                 activity.Finish();
             }
-            else if (attribute is MvxFragmentAttribute fragment)
+            else if (attribute is MvxFragmentAttribute fragmentAttribute)
             {
                 if (CurrentFragmentManager.BackStackEntryCount > 0)
                 {
                     var fragmentName = FragmentJavaName(attribute.ViewType);
                     CurrentFragmentManager.PopBackStackImmediate(fragmentName, PopBackStackFlags.Inclusive);
+                }
+                else if (CurrentFragmentManager.FindFragmentByTag(fragmentAttribute.ViewType.Name) != null)
+                {
+                    var ft = CurrentFragmentManager.BeginTransaction();
+                    var fragment = CurrentFragmentManager.FindFragmentByTag(fragmentAttribute.ViewType.Name);
+
+                    if (!fragmentAttribute.EnterAnimation.Equals(int.MinValue) && !fragmentAttribute.ExitAnimation.Equals(int.MinValue))
+                    {
+                        if (!fragmentAttribute.PopEnterAnimation.Equals(int.MinValue) && !fragmentAttribute.PopExitAnimation.Equals(int.MinValue))
+                            ft.SetCustomAnimations(fragmentAttribute.EnterAnimation, fragmentAttribute.ExitAnimation, fragmentAttribute.PopEnterAnimation, fragmentAttribute.PopExitAnimation);
+                        else
+                            ft.SetCustomAnimations(fragmentAttribute.EnterAnimation, fragmentAttribute.ExitAnimation);
+                    }
+                    if (fragmentAttribute.TransitionStyle != int.MinValue)
+                        ft.SetTransitionStyle(fragmentAttribute.TransitionStyle);
+
+                    ft.Remove(fragment);
+                    ft.CommitAllowingStateLoss();
                 }
                 else
                     CurrentActivity.Finish();

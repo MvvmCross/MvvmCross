@@ -97,6 +97,12 @@
     <Compile Include="Views\SplitMasterView.cs" />
     <Compile Include="Views\SplitDetailView.cs" />
     <Compile Include="Views\ModalView.cs" />
+    <Compile Include="Views\ModalNavView.cs" />
+    <Compile Include="Views\NestedModalView.cs" />
+    <Compile Include="Views\OverrideAttributeView.cs" />
+    <Compile Include="Views\SecondChildView.cs" />
+    <Compile Include="Views\SheetView.cs" />
+    <Compile Include="Views\SplitDetailNavView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
