@@ -52,10 +52,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         public new IMvxAdapter Adapter
         {
-            get
-            {
-                return base.Adapter as IMvxAdapter;
-            }
+            get => base.Adapter as IMvxAdapter;
             set
             {
                 var existing = Adapter;
@@ -78,22 +75,19 @@ namespace MvvmCross.Binding.Droid.Views
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return Adapter.ItemsSource; }
-            set { Adapter.ItemsSource = value; }
+            get => Adapter.ItemsSource; 
+            set => Adapter.ItemsSource = value;
         }
 
         public int ItemTemplateId
         {
-            get { return Adapter.ItemTemplateId; }
-            set { Adapter.ItemTemplateId = value; }
+            get => Adapter.ItemTemplateId;
+            set => Adapter.ItemTemplateId = value;
         }
 
         public new ICommand ItemClick
         {
-            get
-            {
-                return _itemClick;
-            }
+            get => _itemClick;
             set
             {
                 _itemClick = value;
@@ -113,10 +107,7 @@ namespace MvvmCross.Binding.Droid.Views
 
         public new ICommand ItemLongClick
         {
-            get
-            {
-                return _itemLongClick;
-            }
+            get => _itemLongClick;
             set
             {
                 _itemLongClick = value;
@@ -150,14 +141,10 @@ namespace MvvmCross.Binding.Droid.Views
         }
 
         private void OnItemClick(object sender, ItemClickEventArgs e)
-        {
-            ExecuteCommandOnItem(ItemClick, e.Position);
-        }
+            => ExecuteCommandOnItem(ItemClick, e.Position);
 
         private void OnItemLongClick(object sender, ItemLongClickEventArgs e)
-        {
-            ExecuteCommandOnItem(ItemLongClick, e.Position);
-        }
+            => ExecuteCommandOnItem(ItemLongClick, e.Position);
 
         protected override void Dispose(bool disposing)
         {
