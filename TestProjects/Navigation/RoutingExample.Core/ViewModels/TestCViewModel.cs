@@ -8,7 +8,7 @@ using RoutingExample.Core.ViewModels;
 namespace RoutingExample.Core.ViewModels
 {
     public class TestCViewModel
-        : MvxViewModel<int>
+        : MvxViewModel<int, int>
     {
         private readonly IMvxNavigationService _navigationService;
         public TestCViewModel(IMvxNavigationService navigationService)
@@ -24,7 +24,7 @@ namespace RoutingExample.Core.ViewModels
         }
 
         public IMvxAsyncCommand CloseViewModelCommand => new MvxAsyncCommand(
-                () => _navigationService.Close(this));
+                () => _navigationService.Close(this, UserId));
 
         public override void Prepare(int parameter)
         {
