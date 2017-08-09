@@ -24,7 +24,7 @@ namespace MvvmCross.Binding.Droid.Views
                 context, attrs,
                 new MvxAdapter(context)
                 {
-                    SimpleViewLayoutId = Android.Resource.Layout.SimpleSpinnerItem,
+                    ItemTemplateId = Android.Resource.Layout.SimpleSpinnerItem,
                     DropDownItemTemplateId = Android.Resource.Layout.SimpleSpinnerDropDownItem
                 })
         {
@@ -35,8 +35,12 @@ namespace MvvmCross.Binding.Droid.Views
         {
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
             var dropDownItemTemplateId = MvxAttributeHelpers.ReadDropDownListItemTemplateId(context, attrs);
-            adapter.ItemTemplateId = itemTemplateId;
-            adapter.DropDownItemTemplateId = dropDownItemTemplateId;
+
+            if (itemTemplateId > 0)
+                adapter.ItemTemplateId = itemTemplateId;
+            if (dropDownItemTemplateId > 0)
+                adapter.DropDownItemTemplateId = dropDownItemTemplateId;
+
             Adapter = adapter;
             ItemSelected += OnItemSelected;
         }
