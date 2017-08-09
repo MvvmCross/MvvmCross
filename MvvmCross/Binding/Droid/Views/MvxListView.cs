@@ -64,8 +64,8 @@ namespace MvvmCross.Binding.Droid.Views
 
                 if (value != null && existing != null)
                 {
-                    value.ItemsSource = existing.ItemsSource;
                     value.ItemTemplateId = existing.ItemTemplateId;
+                    value.ItemsSource = existing.ItemsSource;
                 }
                 
                 base.Adapter = value;
