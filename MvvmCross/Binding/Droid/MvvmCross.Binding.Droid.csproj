@@ -129,6 +129,7 @@
     <Compile Include="Views\MvxAutoCompleteTextView.cs" />
     <Compile Include="Views\MvxLayoutInflater.cs" />
     <Compile Include="Views\MvxRadioGroup.cs" />
+    <Compile Include="Views\MvxSimpleListItemView.cs" />
     <Compile Include="Views\MvxSpinner.cs" />
     <Compile Include="Views\MvxFilteringAdapter.cs" />
     <Compile Include="Views\IMvxListItemView.cs" />
