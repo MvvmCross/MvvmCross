@@ -28,7 +28,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
             : this(context, attrs,
                 new MvxAdapter(context)
                 {
-                    SimpleViewLayoutId = Android.Resource.Layout.SimpleSpinnerItem,
+                    ItemTemplateId = Android.Resource.Layout.SimpleSpinnerItem,
                     DropDownItemTemplateId = Resource.Layout.support_simple_spinner_dropdown_item
                 })
         {
@@ -61,9 +61,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 
                 if (existing != null && value != null)
                 {
-                    value.ItemsSource = existing.ItemsSource;
                     value.ItemTemplateId = existing.ItemTemplateId;
                     value.DropDownItemTemplateId = existing.DropDownItemTemplateId;
+                    value.ItemsSource = existing.ItemsSource;
                 }
 
                 base.Adapter = value;
