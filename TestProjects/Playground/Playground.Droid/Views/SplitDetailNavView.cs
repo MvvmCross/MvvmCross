@@ -1,4 +1,5 @@
 ﻿using System;
+using Android;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -9,20 +10,15 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Views
 {
-    [MvxFragment(typeof(RootViewModel), Resource.Id.content_frame, false, Resource.Animation.abc_fade_in,
-                Resource.Animation.abc_fade_out,
-                Resource.Animation.abc_fade_in,
-                Resource.Animation.abc_fade_out)]
     [MvxFragment(typeof(SplitRootViewModel), FragmentContentId = Resource.Id.split_content_frame)]
-    [MvxFragment(typeof(TabsRootViewModel), Resource.Id.content_frame)]
-    [Register(nameof(ChildView))]
-    public class ChildView : MvxFragment<ChildViewModel>
+    [Register(nameof(SplitDetailNavView))]
+    public class SplitDetailNavView : MvxFragment<SplitDetailNavViewModel>
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.ChildView, null);
+            var view = this.BindingInflate(Resource.Layout.SplitDetailView, null);
 
             return view;
         }

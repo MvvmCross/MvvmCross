@@ -3,20 +3,17 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Core.Views;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Views.Attributes;
 using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Views
 {
-    [MvxFragment(typeof(RootViewModel), Resource.Id.content_frame, false, Resource.Animation.abc_fade_in,
-                Resource.Animation.abc_fade_out,
-                Resource.Animation.abc_fade_in,
-                Resource.Animation.abc_fade_out)]
+    [MvxFragment(typeof(RootViewModel), FragmentContentId = Resource.Id.content_frame)]
     [MvxFragment(typeof(SplitRootViewModel), FragmentContentId = Resource.Id.split_content_frame)]
-    [MvxFragment(typeof(TabsRootViewModel), Resource.Id.content_frame)]
-    [Register(nameof(ChildView))]
-    public class ChildView : MvxFragment<ChildViewModel>
+    [Register(nameof(OverrideAttributeView))]
+    public class OverrideAttributeView : MvxFragment<OverrideAttributeViewModel>, IMvxOverridePresentationAttribute
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -25,6 +22,14 @@ namespace Playground.Droid.Views
             var view = this.BindingInflate(Resource.Layout.ChildView, null);
 
             return view;
+        }
+
+        public MvxBasePresentationAttribute PresentationAttribute()
+        {
+            return new MvxDialogAttribute
+            {
+                Cancelable = true
+            };
         }
     }
 }

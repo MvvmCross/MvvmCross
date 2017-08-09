@@ -9,14 +9,10 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Views
 {
-    [MvxFragment(typeof(RootViewModel), Resource.Id.content_frame, false, Resource.Animation.abc_fade_in,
-                Resource.Animation.abc_fade_out,
-                Resource.Animation.abc_fade_in,
-                Resource.Animation.abc_fade_out)]
+    [MvxFragment(typeof(RootViewModel), FragmentContentId = Resource.Id.content_frame)]
     [MvxFragment(typeof(SplitRootViewModel), FragmentContentId = Resource.Id.split_content_frame)]
-    [MvxFragment(typeof(TabsRootViewModel), Resource.Id.content_frame)]
-    [Register(nameof(ChildView))]
-    public class ChildView : MvxFragment<ChildViewModel>
+    [Register(nameof(SecondChildView))]
+    public class SecondChildView : MvxFragment<SecondChildViewModel>
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {

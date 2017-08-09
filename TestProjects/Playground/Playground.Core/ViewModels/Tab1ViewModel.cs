@@ -25,7 +25,7 @@ namespace Playground.Core.ViewModels
 
         public override async Task Initialize()
         {
-            await Task.Delay(3000);
+            //await Task.Delay(3000);
         }
 
         string para;
