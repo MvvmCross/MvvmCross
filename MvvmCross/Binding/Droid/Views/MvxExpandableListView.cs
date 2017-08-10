@@ -37,8 +37,11 @@ namespace MvvmCross.Binding.Droid.Views
 
             SetAdapter(adapter);
 
-            adapter.GroupTemplateId = groupTemplateId;
-            adapter.ItemTemplateId = itemTemplateId;
+            if (groupTemplateId > 0)
+                adapter.GroupTemplateId = groupTemplateId;
+
+            if (itemTemplateId > 0)
+                adapter.ItemTemplateId = itemTemplateId;
         }
 
         protected MvxExpandableListView(IntPtr javaReference, JniHandleOwnership transfer)
