@@ -90,11 +90,10 @@
     <Compile Include="Views\MvxAndroidApplication.cs" />
     <Compile Include="Views\IMvxAndroidApplication.cs" />
     <Compile Include="Views\Attributes\MvxFragmentPresentationAttribute.cs" />
-    <Compile Include="Views\Attributes\MvxPresentationAttributeExtensions.cs" />
+    <Compile Include="Views\Attributes\MvxAndroidPresentationAttributeExtensions.cs" />
     <Compile Include="Views\Attributes\MvxDialogFragmentPresentationAttribute.cs" />
     <Compile Include="Views\MvxFragmentExtensions.cs" />
     <Compile Include="Views\IMvxFragmentView.cs" />
-    <Compile Include="Views\FragmentHostRegistrationSettings.cs" />
     <Compile Include="Views\IMvxEventSourceFragment.cs" />
     <Compile Include="Views\Caching\CachedFragmentManager.cs" />
     <Compile Include="Views\Caching\DefaultFragmentCacheConfiguration.cs" />
