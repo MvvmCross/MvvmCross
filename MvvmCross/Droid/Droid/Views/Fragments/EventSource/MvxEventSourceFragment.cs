@@ -1,39 +1,57 @@
-﻿using System;
+﻿// MvxEventSourceFragment.cs
+// (c) Copyright Cirrious Ltd. http://www.cirrious.com
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+//
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Preferences;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Droid.Fragments.EventSource
+namespace MvvmCross.Droid.Views.Fragments.EventSource
 {
-    [Register("mvvmcross.droid.fragments.eventsource.MvxEventSourcePreferenceFragment")]
-    public abstract class MvxEventSourcePreferenceFragment : PreferenceFragment
-    , IMvxEventSourceFragment
+    [Register("mvvmcross.droid.fragments.eventsource.MvxEventSourceFragment")]
+    public class MvxEventSourceFragment
+        : Fragment
+        , IMvxEventSourceFragment
     {
         public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
+
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
+
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
+
         public event EventHandler<MvxValueEventArgs<MvxCreateViewParameters>> CreateViewCalled;
+
         public event EventHandler StartCalled;
+
         public event EventHandler ResumeCalled;
+
         public event EventHandler PauseCalled;
+
         public event EventHandler StopCalled;
+
         public event EventHandler DestroyViewCalled;
+
         public event EventHandler DestroyCalled;
+
         public event EventHandler DetachCalled;
 
         public event EventHandler DisposeCalled;
+
         public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
 
-        public MvxEventSourcePreferenceFragment()
+        protected MvxEventSourceFragment()
         {
         }
 
-        public MvxEventSourcePreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer)
+        protected MvxEventSourceFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
@@ -48,19 +66,15 @@ namespace MvvmCross.Droid.Fragments.EventSource
 			base.OnAttach(context);
 		}
 
-#pragma warning disable CS0672 // Member overrides obsolete member
-        public override void OnAttach(Activity activity)
-#pragma warning restore CS0672 // Member overrides obsolete member
-        {
+		public override void OnAttach(Activity activity)
+		{
 			if (Build.VERSION.SdkInt < BuildVersionCodes.M)
 			{
 				AttachCalled.Raise(this, activity);
 			}
 
-#pragma warning disable CS0618 // Type or member is obsolete
-            base.OnAttach(activity);
-#pragma warning restore CS0618 // Type or member is obsolete
-        }
+			base.OnAttach(activity);
+		}
 
         public override void OnCreate(Bundle savedInstanceState)
         {

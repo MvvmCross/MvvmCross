@@ -9,7 +9,7 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Views
 {
-    [MvxTab(TabLayoutResourceId = Resource.Id.tabs, ViewPagerResourceId = Resource.Id.viewpager, Title = "Tab 3")]
+    [MvxTabLayoutPresentation(TabLayoutResourceId = Resource.Id.tabs, ViewPagerResourceId = Resource.Id.viewpager, Title = "Tab 3")]
     [Register(nameof(Tab3View))]
     public class Tab3View : MvxFragment<Tab3ViewModel>
     {

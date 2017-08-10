@@ -1,57 +1,39 @@
-﻿// MvxEventSourceListFragment.cs
-// (c) Copyright Cirrious Ltd. http://www.cirrious.com
-// MvvmCross is licensed using Microsoft Public License (Ms-PL)
-// Contributions and inspirations noted in readme.md and license.txt
-//
-// Project Lead - Stuart Lodge, @slodge, me@slodge.com
-
-using System;
+﻿using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Preferences;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Droid.Fragments.EventSource
+namespace MvvmCross.Droid.Views.Fragments.EventSource
 {
-    [Register("mvvmcross.droid.fragments.eventsource.MvxEventSourceListFragment")]
-    public class MvxEventSourceListFragment
-        : ListFragment
-        , IMvxEventSourceFragment
+    [Register("mvvmcross.droid.fragments.eventsource.MvxEventSourcePreferenceFragment")]
+    public abstract class MvxEventSourcePreferenceFragment : PreferenceFragment
+    , IMvxEventSourceFragment
     {
         public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
-
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
-
         public event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
-
         public event EventHandler<MvxValueEventArgs<MvxCreateViewParameters>> CreateViewCalled;
-
         public event EventHandler StartCalled;
-
         public event EventHandler ResumeCalled;
-
         public event EventHandler PauseCalled;
-
         public event EventHandler StopCalled;
-
         public event EventHandler DestroyViewCalled;
-
         public event EventHandler DestroyCalled;
-
         public event EventHandler DetachCalled;
 
         public event EventHandler DisposeCalled;
-
         public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
 
-        protected MvxEventSourceListFragment()
+        public MvxEventSourcePreferenceFragment()
         {
         }
 
-        protected MvxEventSourceListFragment(IntPtr javaReference, JniHandleOwnership transfer)
+        public MvxEventSourcePreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }

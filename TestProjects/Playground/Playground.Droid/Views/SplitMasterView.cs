@@ -11,7 +11,7 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Views
 {
-    [MvxFragment(typeof(SplitRootViewModel), Resource.Id.split_navigation_frame)]
+    [MvxFragmentPresentation(typeof(SplitRootViewModel), Resource.Id.split_navigation_frame)]
     [Register(nameof(SplitMasterView))]
     public class SplitMasterView : MvxFragment<SplitMasterViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {

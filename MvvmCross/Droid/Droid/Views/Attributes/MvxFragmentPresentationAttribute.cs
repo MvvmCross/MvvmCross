@@ -8,13 +8,13 @@ using MvvmCross.Platform.Droid;
 namespace MvvmCross.Droid.Views.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public class MvxFragmentAttribute : MvxBasePresentationAttribute
+    public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute
     {
-        public MvxFragmentAttribute()
+        public MvxFragmentPresentationAttribute()
         {
         }
 
-        public MvxFragmentAttribute(
+        public MvxFragmentPresentationAttribute(
             Type activityHostViewModelType = null, 
             int fragmentContentId = Android.Resource.Id.Content, 
             bool addToBackStack = false,
@@ -23,6 +23,7 @@ namespace MvvmCross.Droid.Views.Attributes
             int popEnterAnimation = int.MinValue,
             int popExitAnimation = int.MinValue,
             int transitionStyle = int.MinValue,
+            Type fragmentHostViewType = null,
             bool isCacheableFragment = true
         )
         {
@@ -34,31 +35,34 @@ namespace MvvmCross.Droid.Views.Attributes
             PopEnterAnimation = popEnterAnimation;
             PopExitAnimation = popExitAnimation;
             TransitionStyle = transitionStyle;
+            FragmentHostViewType = fragmentHostViewType;
             IsCacheableFragment = isCacheableFragment;
         }
 
-        public MvxFragmentAttribute(
-            Type activityHostViewModelType, 
-            string fragmentContentResourceName, 
+        public MvxFragmentPresentationAttribute(
+            Type activityHostViewModelType = null, 
+            string fragmentContentResourceName = null, 
             bool addToBackStack = false,
             string enterAnimation = null,
             string exitAnimation = null,
             string popEnterAnimation = null,
             string popExitAnimation = null,
             string transitionStyle = null,
+            Type fragmentHostViewType = null,
             bool isCacheableFragment = true
         )
         {
             var context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext;
 
             ActivityHostViewModelType = activityHostViewModelType;
-            FragmentContentId = fragmentContentResourceName!=null ? context.Resources.GetIdentifier(fragmentContentResourceName, "id", context.PackageName) : Android.Resource.Id.Content;
+            FragmentContentId = !string.IsNullOrEmpty(fragmentContentResourceName) ? context.Resources.GetIdentifier(fragmentContentResourceName, "id", context.PackageName) : Android.Resource.Id.Content;
             AddToBackStack = addToBackStack;
-            EnterAnimation = enterAnimation!=null ? context.Resources.GetIdentifier(enterAnimation, "animation", context.PackageName) : int.MinValue;
-            ExitAnimation = exitAnimation!= null ? context.Resources.GetIdentifier(exitAnimation, "animation", context.PackageName) : int.MinValue;
-            PopEnterAnimation = popEnterAnimation!= null ? context.Resources.GetIdentifier(popEnterAnimation, "animation", context.PackageName) : int.MinValue;
-            PopExitAnimation = popExitAnimation!= null ? context.Resources.GetIdentifier(popExitAnimation, "animation", context.PackageName) : int.MinValue;
-            TransitionStyle = transitionStyle!= null ? context.Resources.GetIdentifier(transitionStyle, "style", context.PackageName) : int.MinValue;
+            EnterAnimation = !string.IsNullOrEmpty(enterAnimation) ? context.Resources.GetIdentifier(enterAnimation, "animation", context.PackageName) : int.MinValue;
+            ExitAnimation = !string.IsNullOrEmpty(exitAnimation) ? context.Resources.GetIdentifier(exitAnimation, "animation", context.PackageName) : int.MinValue;
+            PopEnterAnimation = !string.IsNullOrEmpty(popEnterAnimation) ? context.Resources.GetIdentifier(popEnterAnimation, "animation", context.PackageName) : int.MinValue;
+            PopExitAnimation = !string.IsNullOrEmpty(popExitAnimation) ? context.Resources.GetIdentifier(popExitAnimation, "animation", context.PackageName) : int.MinValue;
+            TransitionStyle = !string.IsNullOrEmpty(transitionStyle) ? context.Resources.GetIdentifier(transitionStyle, "style", context.PackageName) : int.MinValue;
+            FragmentHostViewType = fragmentHostViewType;
             IsCacheableFragment = isCacheableFragment;
         }
 
@@ -68,23 +72,37 @@ namespace MvvmCross.Droid.Views.Attributes
         public Type ActivityHostViewModelType { get; set; }
 
         /// <summary>
+        /// Fragment parent activity ViewModel Type. When set ChildFragmentManager of this Fragment will be used
+        /// </summary>
+        public Type FragmentHostViewType { get; set; }
+
+        /// <summary>
         /// Content id - place where to show fragment.
         /// </summary>
         public int FragmentContentId { get; set; }
 
         /// <summary>
-        /// Indicates if the fragment can be cached. False by default.
+        /// Will add the Fragment to the FragmentManager backstack
         /// </summary>
         public bool AddToBackStack { get; set; } = false;
 
+        /// <summary>
+        /// Animation when Fragment is shown
+        /// </summary>
         public int EnterAnimation { get; set; } = int.MinValue;
 
+        /// <summary>
+        /// Animation when Fragment is closed
+        /// </summary>
         public int ExitAnimation { get; set; } = int.MinValue;
 
         public int PopEnterAnimation { get; set; } = int.MinValue;
 
         public int PopExitAnimation { get; set; } = int.MinValue;
 
+        /// <summary>
+        /// TransitionStyle for Fragment
+        /// </summary>
         public int TransitionStyle { get; set; } = int.MinValue;
 
         /// <summary>

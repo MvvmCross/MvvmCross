@@ -9,7 +9,7 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Views
 {
-    [MvxDialog]
+    [MvxDialogFragmentPresentation]
     [Register(nameof(NestedModalView))]
     public class NestedModalView : MvxDialogFragment<NestedModalViewModel>
     {

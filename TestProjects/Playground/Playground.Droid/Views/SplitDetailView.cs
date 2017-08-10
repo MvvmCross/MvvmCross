@@ -13,7 +13,7 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Views
 {
-    [MvxFragment(typeof(SplitRootViewModel), FragmentContentId = Resource.Id.split_content_frame)]
+    [MvxFragmentPresentation(typeof(SplitRootViewModel), Resource.Id.split_content_frame)]
     [Register(nameof(SplitDetailView))]
     public class SplitDetailView : MvxFragment<SplitDetailViewModel>
     {

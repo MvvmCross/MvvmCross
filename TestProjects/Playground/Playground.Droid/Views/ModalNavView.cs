@@ -9,7 +9,7 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Views
 {
-    [MvxDialog]
+    [MvxDialogFragmentPresentation]
     [Register(nameof(ModalNavView))]
     public class ModalNavView : MvxDialogFragment<ModalNavViewModel>
     {

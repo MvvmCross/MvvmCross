@@ -59,7 +59,7 @@ namespace MvvmCross.Droid.Views.Attributes
 
             var attribute = fragmentType.GetBasePresentationAttribute(fragmentActivityParentType);
 
-            if (attribute is MvxFragmentAttribute fragmentAttribute)
+            if (attribute is MvxFragmentPresentationAttribute fragmentAttribute)
                 return fragmentAttribute.IsCacheableFragment;
             else
                 return false;
@@ -71,7 +71,7 @@ namespace MvvmCross.Droid.Views.Attributes
                 return null;
 
             return fragmentType.GetBasePresentationAttributes()
-                               .OfType<MvxFragmentAttribute>()
+                               .OfType<MvxFragmentPresentationAttribute>()
                 .Select(x => x.ViewModelType)
                 .First();
         }

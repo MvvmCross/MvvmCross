@@ -41,8 +41,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             base.RegisterAttributeTypes();
             AttributeTypesToShowMethodDictionary.Add(
-               typeof(MvxTabAttribute),
-               (view, attribute, request) => ShowTab(view, (MvxTabAttribute)attribute, request));
+               typeof(MvxTabLayoutPresentationAttribute),
+               (view, attribute, request) => ShowTabLayout(view, (MvxTabLayoutPresentationAttribute)attribute, request));
+
+            AttributeTypesToShowMethodDictionary.Add(
+                typeof(MvxViewPagerFragmentPresentationAttribute),
+               (view, attribute, request) => ShowViewPagerFragment(view, (MvxViewPagerFragmentPresentationAttribute)attribute, request));
         }
 
         protected override MvxBasePresentationAttribute GetAttributeForViewModel(Type viewModelType)
@@ -55,7 +59,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 if (attributes.Count > 1)
                 {
                     var currentHostViewModelType = GetCurrentActivityViewModelType();
-                    foreach (var item in attributes.OfType<MvxFragmentAttribute>())
+                    foreach (var item in attributes.OfType<MvxFragmentPresentationAttribute>())
                     {
                         if (CurrentActivity.FindViewById(item.FragmentContentId) != null && item.ActivityHostViewModelType == currentHostViewModelType)
                         {
@@ -76,16 +80,16 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
 
             var viewType = ViewsContainer.GetViewType(viewModelType);
-            if (viewType.GetInterfaces().Contains(typeof(Android.Content.IDialogInterface)))
-                return new MvxDialogAttribute();
+            if (viewType.IsSubclassOf(typeof(DialogFragment)))
+                return new MvxDialogFragmentPresentationAttribute();
             if (viewType.IsSubclassOf(typeof(Fragment)))
-                return new MvxFragmentAttribute(GetCurrentActivityViewModelType());
+                return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), Android.Resource.Id.Content);
 
-            return new MvxActivityAttribute() { ViewModelType = viewModelType };
+            return new MvxActivityPresentationAttribute() { ViewModelType = viewModelType };
         }
 
         protected override void ShowActivity(Type view, 
-            MvxActivityAttribute attribute, 
+            MvxActivityPresentationAttribute attribute, 
             MvxViewModelRequest request)
         {
             var intent = CreateIntentForRequest(request);
@@ -114,7 +118,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 activity.StartActivity(intent);
         }
 
-        protected override void ShowHostActivity(MvxFragmentAttribute attribute)
+        protected override void ShowHostActivity(MvxFragmentPresentationAttribute attribute)
         {
             var viewType = ViewsContainer.GetViewType(attribute.ActivityHostViewModelType);
             if (!viewType.IsSubclassOf(typeof(FragmentActivity)))
@@ -125,7 +129,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
 
         protected override void ShowFragment(Type view,
-            MvxFragmentAttribute attribute,
+            MvxFragmentPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
             if (attribute.ActivityHostViewModelType == null)
@@ -183,7 +187,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
 
         protected override void ShowDialogFragment(Type view,
-           MvxDialogAttribute attribute,
+           MvxDialogFragmentPresentationAttribute attribute,
            MvxViewModelRequest request)
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
@@ -229,9 +233,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             dialog.Show(ft, fragmentName);
         }
 
-        protected virtual void ShowTab(
+        protected virtual void ShowViewPagerFragment(
             Type view,
-            MvxTabAttribute attribute,
+            MvxViewPagerFragmentPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
             if (attribute.ActivityHostViewModelType == null)
@@ -241,28 +245,23 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             if (attribute.ActivityHostViewModelType != currentHostViewModelType)
             {
                 _pendingRequest = request;
-                //TODO: Fix host activity
-                //ShowHostActivity(attribute);
+                ShowHostActivity(attribute);
             }
             else
             {
-                if (CurrentActivity.FindViewById(attribute.TabLayoutResourceId) == null)
-                    throw new NullReferenceException("FrameLayout to show Fragment not found");
-
                 var viewPager = CurrentActivity.FindViewById<ViewPager>(attribute.ViewPagerResourceId);
-                var tabLayout = CurrentActivity.FindViewById<TabLayout>(attribute.TabLayoutResourceId);
-                if (viewPager != null && tabLayout != null)
+                if (viewPager != null)
                 {
                     if (viewPager.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
                     {
-                        if(adapter.FragmentsInfo.Any(f => f.Tag == attribute.Title))
+                        if (adapter.FragmentsInfo.Any(f => f.Tag == attribute.Title))
                         {
                             var index = adapter.FragmentsInfo.FindIndex(f => f.Tag == attribute.Title);
                             viewPager.SetCurrentItem(index > -1 ? index : 0, true);
                         }
                         else
                         {
-                            if(request is MvxViewModelInstanceRequest instanceRequest)
+                            if (request is MvxViewModelInstanceRequest instanceRequest)
                                 adapter.FragmentsInfo.Add(new MvxViewPagerFragmentInfo(attribute.Title, attribute.ViewType, instanceRequest.ViewModelInstance));
                             else
                                 adapter.FragmentsInfo.Add(new MvxViewPagerFragmentInfo(attribute.Title, attribute.ViewType, attribute.ViewModelType));
@@ -277,7 +276,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                         else
                             fragments.Add(new MvxViewPagerFragmentInfo(attribute.Title, attribute.ViewType, attribute.ViewModelType));
 
-                        if(attribute.FragmentHostViewType != null)
+                        if (attribute.FragmentHostViewType != null)
                         {
                             var fragmentName = FragmentJavaName(attribute.FragmentHostViewType);
                             var fragment = CurrentFragmentManager.FindFragmentByTag(fragmentName);
@@ -289,18 +288,34 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                         else
                             viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(CurrentActivity, CurrentFragmentManager, fragments);
                     }
-                    tabLayout.SetupWithViewPager(viewPager);
                 }
                 else
-                    throw new MvxException("ViewPager or TabLayout not found");
+                    throw new MvxException("ViewPager not found");
             }
+        }
+
+        protected virtual void ShowTabLayout(
+            Type view,
+            MvxTabLayoutPresentationAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            ShowViewPagerFragment(view, attribute, request);
+
+            var viewPager = CurrentActivity.FindViewById<ViewPager>(attribute.ViewPagerResourceId);
+            var tabLayout = CurrentActivity.FindViewById<TabLayout>(attribute.TabLayoutResourceId);
+            if (viewPager != null && tabLayout != null)
+            {
+                tabLayout.SetupWithViewPager(viewPager);
+            }
+            else
+                throw new MvxException("ViewPager or TabLayout not found");
         }
 
         public override void Close(IMvxViewModel viewModel)
         {
             var attribute = GetAttributeForViewModel(viewModel.GetType());
 
-            if (attribute is MvxActivityAttribute)
+            if (attribute is MvxActivityPresentationAttribute)
             {
                 //TODO: Find something to close the dialogs
 
@@ -333,7 +348,33 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
                 activity.Finish();
             }
-            else if (attribute is MvxFragmentAttribute fragmentAttribute)
+            else if (attribute is MvxDialogFragmentPresentationAttribute dialogAttribute)
+            {
+                if (Dialogs.TryGetValue(viewModel, out DialogFragment dialog))
+                {
+                    dialog.DismissAllowingStateLoss();
+                    dialog.Dispose();
+                    Dialogs.Remove(viewModel);
+                }
+            }
+            else if (attribute is MvxViewPagerFragmentPresentationAttribute viewPagerAttribute)
+            {
+                var viewPager = CurrentActivity.FindViewById<ViewPager>(viewPagerAttribute.ViewPagerResourceId);
+                if (viewPager != null)
+                {
+                    if (viewPager.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
+                    {
+                        var ft = CurrentFragmentManager.BeginTransaction();
+                        var fragmentInfo = adapter.FragmentsInfo.Find(x => x.FragmentType == viewPagerAttribute.ViewType && x.ViewModelType == viewPagerAttribute.ViewModelType);
+                        var fragment = CurrentFragmentManager.FindFragmentByTag(fragmentInfo.Tag);
+                        adapter.FragmentsInfo.Remove(fragmentInfo);
+                        ft.Remove(fragment);
+                        ft.CommitAllowingStateLoss();
+                        adapter.NotifyDataSetChanged();
+                    }
+                }
+            }
+            else if (attribute is MvxFragmentPresentationAttribute fragmentAttribute)
             {
                 if (CurrentFragmentManager.BackStackEntryCount > 0)
                 {
@@ -361,33 +402,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 else
                     CurrentActivity.Finish();
             }
-            else if (attribute is MvxDialogAttribute dialogAttribute)
-            {
-                if (Dialogs.TryGetValue(viewModel, out DialogFragment dialog))
-                {
-                    dialog.DismissAllowingStateLoss();
-                    dialog.Dispose();
-                    Dialogs.Remove(viewModel);
-                }
-            }
-            else if (attribute is MvxTabAttribute tabAttribute)
-            {
-                var viewPager = CurrentActivity.FindViewById<ViewPager>(tabAttribute.ViewPagerResourceId);
-                var tabLayout = CurrentActivity.FindViewById<TabLayout>(tabAttribute.TabLayoutResourceId);
-                if (viewPager != null && tabLayout != null)
-                {
-                    if (viewPager.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
-                    {
-                        var ft = CurrentFragmentManager.BeginTransaction();
-                        var fragmentInfo = adapter.FragmentsInfo.Find(x => x.FragmentType == tabAttribute.ViewType && x.ViewModelType == tabAttribute.ViewModelType);
-                        var fragment = CurrentFragmentManager.FindFragmentByTag(fragmentInfo.Tag);
-                        adapter.FragmentsInfo.Remove(fragmentInfo);
-                        ft.Remove(fragment);
-                        ft.CommitAllowingStateLoss();
-                        adapter.NotifyDataSetChanged();
-                    }
-                }
-            }
         }
 
         protected override IMvxFragmentView CreateFragment(MvxBasePresentationAttribute attribute,
@@ -396,7 +410,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             try
             {
                 IMvxFragmentView fragment;
-                if (attribute is MvxFragmentAttribute fragmentAttribute && fragmentAttribute.IsCacheableFragment)
+                if (attribute is MvxFragmentPresentationAttribute fragmentAttribute && fragmentAttribute.IsCacheableFragment)
                 {
                     if (CachedFragments.TryGetValue(attribute, out fragment))
                         return fragment;

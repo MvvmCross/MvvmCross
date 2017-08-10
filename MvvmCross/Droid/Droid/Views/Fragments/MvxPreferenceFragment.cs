@@ -3,10 +3,10 @@ using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Fragments.EventSource;
+using MvvmCross.Droid.Views.Fragments.EventSource;
 using MvvmCross.Droid.Views;
 
-namespace MvvmCross.Droid.Fragments
+namespace MvvmCross.Droid.Views.Fragments
 {
     [Register("mvvmcross.droid.fragments.MvxPreferenceFragment")]
     public abstract class MvxPreferenceFragment : MvxEventSourcePreferenceFragment, IMvxFragmentView

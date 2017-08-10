@@ -10,7 +10,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 
-namespace MvvmCross.Droid.Fragments
+namespace MvvmCross.Droid.Views.Fragments
 {
     public static class MvxFragmentExtensionMethods
     {

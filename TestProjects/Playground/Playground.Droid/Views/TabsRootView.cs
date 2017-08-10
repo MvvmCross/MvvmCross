@@ -7,7 +7,7 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Views
 {
-    [MvxActivity]
+    [MvxActivityPresentation]
     [Activity(Theme = "@style/AppTheme")]
     public class TabsRootView : MvxAppCompatActivity<TabsRootViewModel>
     {
