@@ -4,16 +4,8 @@
 	android:orientation="vertical"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="@color/gray"
+	android:background="#008800"
 	android:padding="@dimen/margin_medium">
-	<TextView android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center"
-		android:text="I'm a Fragment!" />
-	<Button android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="Show second child"
-		local:MvxBind="Click ShowSecondChildCommand" />
 	<Button android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:text="Close"
