@@ -9,7 +9,7 @@ using RoutingExample.Core.ViewModels;
 
 namespace RoutingExample.Droid
 {
-    [MvxDialog]
+    [MvxDialogFragmentPresentation]
     [Register(nameof(FragmentDialogA))]
     public class FragmentDialogA : MvxDialogFragment<ViewModelDialogA>
     {

@@ -7,9 +7,9 @@ using MvvmCross.Core.Views;
 namespace MvvmCross.Droid.Views.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class MvxActivityAttribute : MvxBasePresentationAttribute
+    public class MvxActivityPresentationAttribute : MvxBasePresentationAttribute
     {
-        public MvxActivityAttribute()
+        public MvxActivityPresentationAttribute()
         {
         }
 

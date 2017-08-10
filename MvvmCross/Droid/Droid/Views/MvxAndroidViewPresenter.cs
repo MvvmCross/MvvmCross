@@ -152,16 +152,16 @@ namespace MvvmCross.Droid.Views
         protected virtual void RegisterAttributeTypes()
         {
             _attributeTypesToShowMethodDictionary.Add(
-               typeof(MvxActivityAttribute),
-               (view, attribute, request) => ShowActivity(view, (MvxActivityAttribute)attribute, request));
+               typeof(MvxActivityPresentationAttribute),
+               (view, attribute, request) => ShowActivity(view, (MvxActivityPresentationAttribute)attribute, request));
 
             _attributeTypesToShowMethodDictionary.Add(
-               typeof(MvxFragmentAttribute),
-               (view, attribute, request) => ShowFragment(view, (MvxFragmentAttribute)attribute, request));
+               typeof(MvxFragmentPresentationAttribute),
+               (view, attribute, request) => ShowFragment(view, (MvxFragmentPresentationAttribute)attribute, request));
 
             _attributeTypesToShowMethodDictionary.Add(
-               typeof(MvxDialogAttribute),
-               (view, attribute, request) => ShowDialogFragment(view, (MvxDialogAttribute)attribute, request));
+               typeof(MvxDialogFragmentPresentationAttribute),
+               (view, attribute, request) => ShowDialogFragment(view, (MvxDialogFragmentPresentationAttribute)attribute, request));
         }
 
         protected virtual MvxBasePresentationAttribute GetAttributeForViewModel(Type viewModelType)
@@ -174,7 +174,7 @@ namespace MvvmCross.Droid.Views
                 if (attributes.Count > 1)
                 {
                     var currentHostViewModelType = GetCurrentActivityViewModelType();
-                    foreach (var item in attributes.OfType<MvxFragmentAttribute>())
+                    foreach (var item in attributes.OfType<MvxFragmentPresentationAttribute>())
                     {
                         if (CurrentActivity.FindViewById(item.FragmentContentId) != null && item.ActivityHostViewModelType == currentHostViewModelType)
                         {
@@ -195,12 +195,13 @@ namespace MvvmCross.Droid.Views
             }
 
             var viewType = ViewsContainer.GetViewType(viewModelType);
-            if (viewType.GetInterfaces().Contains(typeof(IDialogInterface)))
-                return new MvxDialogAttribute();
-            if (viewType.IsSubclassOf(typeof(Fragment)))
-                return new MvxFragmentAttribute(GetCurrentActivityViewModelType(), Android.Resource.Id.Content);
 
-            return new MvxActivityAttribute() { ViewModelType = viewModelType };
+            if (viewType.IsSubclassOf(typeof(DialogFragment)))
+                return new MvxDialogFragmentPresentationAttribute();
+            if (viewType.IsSubclassOf(typeof(Fragment)))
+                return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), Android.Resource.Id.Content);
+
+            return new MvxActivityPresentationAttribute() { ViewModelType = viewModelType };
         }
 
         protected Type GetCurrentActivityViewModelType()
@@ -230,7 +231,7 @@ namespace MvvmCross.Droid.Views
 
         protected virtual void ShowActivity(
             Type view,
-            MvxActivityAttribute attribute,
+            MvxActivityPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
             var intent = CreateIntentForRequest(request);
@@ -262,7 +263,7 @@ namespace MvvmCross.Droid.Views
             activity.StartActivity(intent);
         }
 
-        protected virtual void ShowHostActivity(MvxFragmentAttribute attribute)
+        protected virtual void ShowHostActivity(MvxFragmentPresentationAttribute attribute)
         {
             var viewType = ViewsContainer.GetViewType(attribute.ActivityHostViewModelType);
             if (!viewType.IsSubclassOf(typeof(Activity)))
@@ -274,7 +275,7 @@ namespace MvvmCross.Droid.Views
 
         protected virtual void ShowFragment(
             Type view,
-            MvxFragmentAttribute attribute,
+            MvxFragmentPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
             if (attribute.ActivityHostViewModelType == null)
@@ -331,7 +332,7 @@ namespace MvvmCross.Droid.Views
 
         protected virtual void ShowDialogFragment(
             Type view,
-            MvxDialogAttribute attribute,
+            MvxDialogFragmentPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
@@ -392,7 +393,7 @@ namespace MvvmCross.Droid.Views
         {
             var attribute = GetAttributeForViewModel(viewModel.GetType());
 
-            if (attribute is MvxActivityAttribute)
+            if (attribute is MvxActivityPresentationAttribute)
             {
                 //TODO: Find something to close the dialogs
 
@@ -417,7 +418,16 @@ namespace MvvmCross.Droid.Views
 
                 activity.Finish();
             }
-            else if (attribute is MvxFragmentAttribute fragmentAttribute)
+            else if (attribute is MvxDialogFragmentPresentationAttribute dialogAttribute)
+            {
+                if (Dialogs.TryGetValue(viewModel, out DialogFragment dialog))
+                {
+                    dialog.DismissAllowingStateLoss();
+                    dialog.Dispose();
+                    Dialogs.Remove(viewModel);
+                }
+            }
+            else if (attribute is MvxFragmentPresentationAttribute fragmentAttribute)
             {
                 if (CurrentFragmentManager.BackStackEntryCount > 0)
                 {
@@ -445,15 +455,6 @@ namespace MvvmCross.Droid.Views
                 else
                     CurrentActivity.Finish();
             }
-            else if (attribute is MvxDialogAttribute dialogAttribute)
-            {
-                if (Dialogs.TryGetValue(viewModel, out DialogFragment dialog))
-                {
-                    dialog.DismissAllowingStateLoss();
-                    dialog.Dispose();
-                    Dialogs.Remove(viewModel);
-                }
-            }
         }
 
         protected virtual string FragmentJavaName(Type fragmentType)
@@ -467,7 +468,7 @@ namespace MvvmCross.Droid.Views
             try
             {
                 IMvxFragmentView fragment;
-                if (attribute is MvxFragmentAttribute fragmentAttribute && fragmentAttribute.IsCacheableFragment)
+                if (attribute is MvxFragmentPresentationAttribute fragmentAttribute && fragmentAttribute.IsCacheableFragment)
                 {
                     if (CachedFragments.TryGetValue(attribute, out fragment))
                         return fragment;

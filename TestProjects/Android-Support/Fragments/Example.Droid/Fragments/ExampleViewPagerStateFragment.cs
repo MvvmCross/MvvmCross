@@ -10,7 +10,7 @@ using MvvmCross.Droid.Support.V4;
 
 namespace Example.Droid.Fragments
 {
-    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame, true)]
+    [MvxFragmentPresentation(typeof(MainViewModel), Resource.Id.content_frame, true)]
     [Register("example.droid.fragments.ExampleViewPagerStateFragment")]
     public class ExampleViewPagerStateFragment : BaseStateFragment<ExampleViewPagerStateViewModel>
     {

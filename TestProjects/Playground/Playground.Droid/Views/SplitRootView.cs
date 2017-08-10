@@ -9,7 +9,7 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Views
 {
-    [MvxActivity]
+    [MvxActivityPresentation]
     [Activity(
         Theme = "@style/AppTheme",
         LaunchMode = LaunchMode.SingleTop)]

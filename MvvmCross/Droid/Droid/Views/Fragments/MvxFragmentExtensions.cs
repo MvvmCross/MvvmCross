@@ -18,7 +18,7 @@ using MvvmCross.Droid.Views.Caching;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 
-namespace MvvmCross.Droid.Fragments
+namespace MvvmCross.Droid.Views.Fragments
 {
     public static class MvxFragmentExtensions
     {

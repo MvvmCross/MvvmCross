@@ -34,15 +34,12 @@ namespace MvvmCross.Droid.Support.V4
         {
         }
 
-		[Obsolete("MvxFragmentStatePagerAdapter is deprecated, please use MvxCachingFragmentStatePagerAdapter instead.")]
         public MvxFragmentStatePagerAdapter(
             Context context, FragmentManager fragmentManager, IEnumerable<MvxViewPagerFragmentInfo> fragments)
             : base(fragmentManager)
         {
             _context = context;
             Fragments = fragments;
-
-            throw new InvalidOperationException("MvxFragmentStatePagerAdapter has broken cache implementation, use MvxFragmentPagerAdapter at this moment.");
         }
 
         public override Fragment GetItem(int position)

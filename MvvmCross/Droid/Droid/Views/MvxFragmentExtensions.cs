@@ -19,11 +19,11 @@ namespace MvvmCross.Droid.Views
             if (viewModelType == null)
             {
                 if (!type.HasBasePresentationAttribute())
-                    throw new InvalidOperationException($"Your fragment is not generic and it does not have {nameof(MvxFragmentAttribute)} attribute set!");
+                    throw new InvalidOperationException($"Your fragment is not generic and it does not have {nameof(MvxFragmentPresentationAttribute)} attribute set!");
 
                 var cacheableFragmentAttribute = type.GetBasePresentationAttribute(fragmentActivityParentType);
                 if (cacheableFragmentAttribute.ViewModelType == null)
-                    throw new InvalidOperationException($"Your fragment is not generic and it does not use {nameof(MvxFragmentAttribute)} with ViewModel Type constructor.");
+                    throw new InvalidOperationException($"Your fragment is not generic and it does not use {nameof(MvxFragmentPresentationAttribute)} with ViewModel Type constructor.");
 
                 viewModelType = cacheableFragmentAttribute.ViewModelType;
             }

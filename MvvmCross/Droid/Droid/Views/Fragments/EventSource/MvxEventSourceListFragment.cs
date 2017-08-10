@@ -1,4 +1,4 @@
-﻿// MvxEventSourceFragment.cs
+﻿// MvxEventSourceListFragment.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,11 +14,11 @@ using Android.Views;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Droid.Fragments.EventSource
+namespace MvvmCross.Droid.Views.Fragments.EventSource
 {
-    [Register("mvvmcross.droid.fragments.eventsource.MvxEventSourceFragment")]
-    public class MvxEventSourceFragment
-        : Fragment
+    [Register("mvvmcross.droid.fragments.eventsource.MvxEventSourceListFragment")]
+    public class MvxEventSourceListFragment
+        : ListFragment
         , IMvxEventSourceFragment
     {
         public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
@@ -47,11 +47,11 @@ namespace MvvmCross.Droid.Fragments.EventSource
 
         public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
 
-        protected MvxEventSourceFragment()
+        protected MvxEventSourceListFragment()
         {
         }
 
-        protected MvxEventSourceFragment(IntPtr javaReference, JniHandleOwnership transfer)
+        protected MvxEventSourceListFragment(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
@@ -66,15 +66,19 @@ namespace MvvmCross.Droid.Fragments.EventSource
 			base.OnAttach(context);
 		}
 
-		public override void OnAttach(Activity activity)
-		{
+#pragma warning disable CS0672 // Member overrides obsolete member
+        public override void OnAttach(Activity activity)
+#pragma warning restore CS0672 // Member overrides obsolete member
+        {
 			if (Build.VERSION.SdkInt < BuildVersionCodes.M)
 			{
 				AttachCalled.Raise(this, activity);
 			}
 
-			base.OnAttach(activity);
-		}
+#pragma warning disable CS0618 // Type or member is obsolete
+            base.OnAttach(activity);
+#pragma warning restore CS0618 // Type or member is obsolete
+        }
 
         public override void OnCreate(Bundle savedInstanceState)
         {

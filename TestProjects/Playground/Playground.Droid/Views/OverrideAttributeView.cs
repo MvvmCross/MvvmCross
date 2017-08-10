@@ -10,8 +10,8 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Views
 {
-    [MvxFragment(typeof(RootViewModel), FragmentContentId = Resource.Id.content_frame)]
-    [MvxFragment(typeof(SplitRootViewModel), FragmentContentId = Resource.Id.split_content_frame)]
+    [MvxFragmentPresentation(typeof(RootViewModel), Resource.Id.content_frame)]
+    [MvxFragmentPresentation(typeof(SplitRootViewModel), Resource.Id.split_content_frame)]
     [Register(nameof(OverrideAttributeView))]
     public class OverrideAttributeView : MvxFragment<OverrideAttributeViewModel>, IMvxOverridePresentationAttribute
     {
@@ -26,7 +26,7 @@ namespace Playground.Droid.Views
 
         public MvxBasePresentationAttribute PresentationAttribute()
         {
-            return new MvxDialogAttribute
+            return new MvxDialogFragmentPresentationAttribute
             {
                 Cancelable = true
             };
