@@ -18,7 +18,7 @@ namespace Playground.Droid.Views
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.ChildView, null);
+            var view = this.BindingInflate(Resource.Layout.SecondChildView, null);
 
             return view;
         }
