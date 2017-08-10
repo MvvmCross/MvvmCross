@@ -2,11 +2,15 @@
 
 ## Mvxtheme 1.6 (2017-08-10)
 
+* Jekyll 3.5.0 rename `gem` to `plugins`.
+
 * Update Jekyll and plugins version.
 
 * Fix RSVP button in the middle.
 
 * Add speakers section.
+
+* Remove Gemfile.lock from .gitignore.
 
 ## Mvxtheme 1.5 (2017-08-03)
 
