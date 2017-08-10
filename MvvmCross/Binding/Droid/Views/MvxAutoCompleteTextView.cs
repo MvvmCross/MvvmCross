@@ -29,7 +29,9 @@ namespace MvvmCross.Binding.Droid.Views
             : base(context, attrs)
         {
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
-            adapter.ItemTemplateId = itemTemplateId;
+            if (itemTemplateId > 0)
+                adapter.ItemTemplateId = itemTemplateId;
+
             Adapter = adapter;
 
             // note - we shouldn't realy need both of these... but we do
