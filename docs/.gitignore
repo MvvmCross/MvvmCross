@@ -3,4 +3,3 @@ _site
 .jekyll-metadata
 *.gem
 .bundle
-Gemfile.lock
