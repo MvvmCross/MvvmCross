@@ -60,7 +60,6 @@
       }
     }
     .sign-up {
-      align-self: center;
       margin-top: 20px;
     }
     .info-content {
@@ -135,6 +134,11 @@
     }
   }
   > .join-us {
+    .join-us-content {
+      display: flex;
+      display: -webkit-flex;
+      flex-flow: column wrap;
+    }
     .join-us-content,
     .mail-subscribe {
       padding-left: 40px;
@@ -249,6 +253,27 @@
       }
     }
   }
+  > .speakers {
+    .speaker-cards {
+      display: flex;
+      display: -webkit-flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+      .speaker-card {
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid $text-color;
+        border-radius: 4px;
+        text-align: center;
+        img {
+          width: 140px;
+        }
+        p {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
   > section {
     &:nth-child(odd) {
       background-color: $zebra-color;
@@ -293,6 +318,7 @@
     text-decoration: none;
     text-transform: uppercase;
     display: inline-block;
+    align-self: center;
     cursor: pointer; // start-button hover effect
     &:hover {
       background-color: darken($brand-color, 5%);
