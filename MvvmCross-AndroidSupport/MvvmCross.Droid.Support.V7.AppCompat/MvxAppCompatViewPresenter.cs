@@ -177,7 +177,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 if(attribute.AddToBackStack == true)
                     ft.AddToBackStack(fragmentName);
 
-                ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
+                ft.Add(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
                 ft.CommitAllowingStateLoss();
             }
         }
@@ -255,27 +255,27 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 {
                     if (viewPager.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
                     {
-                        if(adapter.Fragments.Any(f => f.Tag == attribute.Title))
+                        if(adapter.FragmentsInfo.Any(f => f.Tag == attribute.Title))
                         {
-                            var index = adapter.Fragments.FindIndex(f => f.Tag == attribute.Title);
-                            viewPager.CurrentItem = index > -1 ? index : 0;
+                            var index = adapter.FragmentsInfo.FindIndex(f => f.Tag == attribute.Title);
+                            viewPager.SetCurrentItem(index > -1 ? index : 0, true);
                         }
                         else
                         {
                             if(request is MvxViewModelInstanceRequest instanceRequest)
-                                adapter.Fragments.Add(new MvxViewPagerFragment(attribute.Title, attribute.ViewType, instanceRequest.ViewModelInstance));
+                                adapter.FragmentsInfo.Add(new MvxViewPagerFragmentInfo(attribute.Title, attribute.ViewType, instanceRequest.ViewModelInstance));
                             else
-                                adapter.Fragments.Add(new MvxViewPagerFragment(attribute.Title, attribute.ViewType, attribute.ViewModelType));
+                                adapter.FragmentsInfo.Add(new MvxViewPagerFragmentInfo(attribute.Title, attribute.ViewType, attribute.ViewModelType));
                             adapter.NotifyDataSetChanged();
                         }
                     }
                     else
                     {
-                        var fragments = new List<MvxViewPagerFragment>();
+                        var fragments = new List<MvxViewPagerFragmentInfo>();
                         if (request is MvxViewModelInstanceRequest instanceRequest)
-                            fragments.Add(new MvxViewPagerFragment(attribute.Title, attribute.ViewType, instanceRequest.ViewModelInstance));
+                            fragments.Add(new MvxViewPagerFragmentInfo(attribute.Title, attribute.ViewType, instanceRequest.ViewModelInstance));
                         else
-                            fragments.Add(new MvxViewPagerFragment(attribute.Title, attribute.ViewType, attribute.ViewModelType));
+                            fragments.Add(new MvxViewPagerFragmentInfo(attribute.Title, attribute.ViewType, attribute.ViewModelType));
 
                         if(attribute.FragmentHostViewType != null)
                         {
@@ -306,6 +306,15 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
                 if (CurrentFragmentManager.BackStackEntryCount > 0)
                     CurrentFragmentManager.PopBackStackImmediate(null, 0);
+                if (CurrentFragmentManager.Fragments.Count > 0)
+                {
+                    foreach (var fragment in CurrentFragmentManager.Fragments)
+                    {
+                        var ft = CurrentFragmentManager.BeginTransaction();
+                        ft.Remove(fragment);
+                        ft.CommitAllowingStateLoss();
+                    }
+                }
 
                 var activity = CurrentActivity;
                 var currentView = activity as IMvxView;
@@ -359,6 +368,24 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     dialog.DismissAllowingStateLoss();
                     dialog.Dispose();
                     Dialogs.Remove(viewModel);
+                }
+            }
+            else if (attribute is MvxTabAttribute tabAttribute)
+            {
+                var viewPager = CurrentActivity.FindViewById<ViewPager>(tabAttribute.ViewPagerResourceId);
+                var tabLayout = CurrentActivity.FindViewById<TabLayout>(tabAttribute.TabLayoutResourceId);
+                if (viewPager != null && tabLayout != null)
+                {
+                    if (viewPager.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
+                    {
+                        var ft = CurrentFragmentManager.BeginTransaction();
+                        var fragmentInfo = adapter.FragmentsInfo.Find(x => x.FragmentType == tabAttribute.ViewType && x.ViewModelType == tabAttribute.ViewModelType);
+                        var fragment = CurrentFragmentManager.FindFragmentByTag(fragmentInfo.Tag);
+                        adapter.FragmentsInfo.Remove(fragmentInfo);
+                        ft.Remove(fragment);
+                        ft.CommitAllowingStateLoss();
+                        adapter.NotifyDataSetChanged();
+                    }
                 }
             }
         }

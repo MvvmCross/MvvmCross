@@ -25,7 +25,7 @@ namespace MvvmCross.Droid.Support.V4
         : FragmentStatePagerAdapter
     {
         private readonly Context _context;
-        public IEnumerable<MvxViewPagerFragment> Fragments { get; private set; }
+        public IEnumerable<MvxViewPagerFragmentInfo> Fragments { get; private set; }
 
         public override int Count => Fragments.Count();
 
@@ -36,7 +36,7 @@ namespace MvvmCross.Droid.Support.V4
 
 		[Obsolete("MvxFragmentStatePagerAdapter is deprecated, please use MvxCachingFragmentStatePagerAdapter instead.")]
         public MvxFragmentStatePagerAdapter(
-            Context context, FragmentManager fragmentManager, IEnumerable<MvxViewPagerFragment> fragments)
+            Context context, FragmentManager fragmentManager, IEnumerable<MvxViewPagerFragmentInfo> fragments)
             : base(fragmentManager)
         {
             _context = context;
