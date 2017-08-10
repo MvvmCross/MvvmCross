@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Core.Views;
-using Android.App;
-using MvvmCross.Platform.Droid.Platform;
 
 namespace MvvmCross.Droid.Views.Attributes
 {
@@ -14,14 +10,11 @@ namespace MvvmCross.Droid.Views.Attributes
     {
         private static Type GetActivityViewModelType(Type activityType)
         {
-            IMvxViewModelTypeFinder associatedTypeFinder;
-            if (!Mvx.TryResolve(out associatedTypeFinder))
-            {
-                MvxTrace.Trace("No view model type finder available - assuming we are looking for a splash screen - returning null");
-                return typeof(MvxNullViewModel);
-            }
+            if (Mvx.TryResolve(out IMvxViewModelTypeFinder associatedTypeFinder))
+                return associatedTypeFinder.FindTypeOrNull(activityType);
 
-            return associatedTypeFinder.FindTypeOrNull(activityType);
+            MvxTrace.Trace("No view model type finder available - assuming we are looking for a splash screen - returning null");
+            return typeof(MvxNullViewModel);
         }
 
         public static bool IsFragmentCacheable(this Type fragmentType, Type fragmentActivityParentType)
@@ -32,8 +25,8 @@ namespace MvvmCross.Droid.Views.Attributes
             var attribute = fragmentType.GetBasePresentationAttribute();
             if (attribute is MvxFragmentPresentationAttribute fragmentAttribute)
                 return fragmentAttribute.IsCacheableFragment;
-            else
-                return false;
+
+            return false;
         }
     }
 }
