@@ -98,16 +98,17 @@ namespace MvvmCross.Droid.Views
         {
             get
             {
-                var ret = new List<Fragment>();
-                foreach (var wref in _fragList)
+                var fragments = new List<Fragment>();
+                foreach (var weakReference in _fragList)
                 {
-                    Fragment f;
-                    if (!wref.TryGetTarget(out f)) continue;
-                    if (f.IsVisible)
-                        ret.Add(f);
+                    if (weakReference.TryGetTarget(out Fragment f))
+                    {
+                        if (f.IsVisible)
+                            fragments.Add(f);
+                    }   
                 }
 
-                return ret;
+                return fragments;
             }
         }
 
