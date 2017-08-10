@@ -1,5 +1,13 @@
 # MvvmCross site changelog
 
+## Mvxtheme 1.6 (2017-08-10)
+
+* Update Jekyll and plugins version.
+
+* Fix RSVP button in the middle.
+
+* Add speakers section.
+
 ## Mvxtheme 1.5 (2017-08-03)
 
 * Add XABLU and Microsoft logo.
