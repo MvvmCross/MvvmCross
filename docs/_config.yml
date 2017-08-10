@@ -35,7 +35,7 @@ sass:
 # End
 
 # Gem settings
-plugins:
+gems:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
