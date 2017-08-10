@@ -17,7 +17,7 @@ namespace MvvmCross.Droid.Support.V4
     public class MvxFragmentPagerAdapter : FragmentPagerAdapter
     {
         private readonly Context _context;
-        public IEnumerable<MvxViewPagerFragment> Fragments { get; private set; }
+        public IEnumerable<MvxViewPagerFragmentInfo> Fragments { get; private set; }
 
         public override int Count => Fragments.Count();
 
@@ -27,7 +27,7 @@ namespace MvvmCross.Droid.Support.V4
         }
 
         public MvxFragmentPagerAdapter(
-            Context context, FragmentManager fragmentManager, IEnumerable<MvxViewPagerFragment> fragments)
+            Context context, FragmentManager fragmentManager, IEnumerable<MvxViewPagerFragmentInfo> fragments)
             : base(fragmentManager)
         {
             _context = context;

@@ -4,6 +4,7 @@ using System.Linq;
 using Android.Content;
 using Android.Runtime;
 using Android.Support.V4.App;
+using Android.Support.V4.View;
 using Java.Lang;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
@@ -26,15 +27,15 @@ namespace MvvmCross.Droid.Support.V4
         }
 
 		public MvxCachingFragmentStatePagerAdapter(Context context, FragmentManager fragmentManager,
-            List<MvxViewPagerFragment> fragments) : base(fragmentManager)
+            List<MvxViewPagerFragmentInfo> fragmentsInfo) : base(fragmentManager)
         {
             _context = context;
-            Fragments = fragments;
+            FragmentsInfo = fragmentsInfo;
         }
 
-        public override int Count => Fragments?.Count() ?? 0;
+        public override int Count => FragmentsInfo?.Count() ?? 0;
 
-        public List<MvxViewPagerFragment> Fragments { get; }
+        public List<MvxViewPagerFragmentInfo> FragmentsInfo { get; }
 
         protected static string FragmentJavaName(Type fragmentType)
         {
@@ -43,7 +44,7 @@ namespace MvvmCross.Droid.Support.V4
 
         public override Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null)
         {
-            var fragInfo = Fragments.ElementAt(position);
+            var fragInfo = FragmentsInfo.ElementAt(position);
             var fragment = Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
 
             var mvxFragment = fragment as MvxFragment;
@@ -59,19 +60,24 @@ namespace MvvmCross.Droid.Support.V4
             return fragment;
         }
 
+        public override int GetItemPosition(Java.Lang.Object @object)
+        {
+            return PagerAdapter.PositionNone;
+        }
+
         public override ICharSequence GetPageTitleFormatted(int position)
         {
-            return new String(Fragments.ElementAt(position).Title);
+            return new String(FragmentsInfo.ElementAt(position).Title);
         }
 
         protected override string GetTag(int position)
         {
-            return Fragments.ElementAt(position).Tag;
+            return FragmentsInfo.ElementAt(position).Tag;
         }
 
         private IMvxViewModel CreateViewModel(int position)
         {
-            var fragInfo = Fragments.ElementAt(position);
+            var fragInfo = FragmentsInfo.ElementAt(position);
 
             MvxBundle mvxBundle = null;
             if (fragInfo.ParameterValuesObject != null)
