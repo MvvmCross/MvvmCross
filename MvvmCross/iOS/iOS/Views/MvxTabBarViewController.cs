@@ -30,8 +30,10 @@ namespace MvvmCross.iOS.Views
 
             if (IsMovingFromParentViewController)
             {
-                var presenter = Mvx.Resolve<IMvxIosViewPresenter>() as MvxIosViewPresenter;
-                presenter.CloseTabBarViewController();
+                if (Mvx.Resolve<IMvxIosViewPresenter>() is MvxIosViewPresenter presenter)
+                {
+                    presenter.CloseTabBarViewController();
+                };
             }
         }
 
