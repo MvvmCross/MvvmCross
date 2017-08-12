@@ -22,11 +22,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     {
         public MvxAppCompatViewPresenter(IEnumerable<Assembly> androidViewAssemblies) : base(androidViewAssemblies)
         {
-            
+
         }
 
         protected new ConditionalWeakTable<IMvxViewModel, DialogFragment> Dialogs { get; } = new ConditionalWeakTable<IMvxViewModel, DialogFragment>();
-                                                                      
+
         protected new FragmentManager CurrentFragmentManager
         {
             get
@@ -65,7 +65,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                         {
                             attribute = item;
                             break;
-                        } 
+                        }
                     }
                 }
 
@@ -81,19 +81,29 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             var viewType = ViewsContainer.GetViewType(viewModelType);
             if (viewType.IsSubclassOf(typeof(DialogFragment)))
+            {
+                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                    $"Assuming DialogFragment presentation");
                 return new MvxDialogFragmentPresentationAttribute();
+            }
             if (viewType.IsSubclassOf(typeof(Fragment)))
+            {
+                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                    $"Assuming Fragment presentation");
                 return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), Android.Resource.Id.Content);
+            }
 
+            MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                    $"Assuming Activity presentation");
             return new MvxActivityPresentationAttribute() { ViewModelType = viewModelType };
         }
 
-        protected override void ShowActivity(Type view, 
-            MvxActivityPresentationAttribute attribute, 
+        protected override void ShowActivity(Type view,
+            MvxActivityPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
             var intent = CreateIntentForRequest(request);
-            if(attribute.Extras != null)
+            if (attribute.Extras != null)
                 intent.PutExtras(attribute.Extras);
 
             var activity = CurrentActivity;
@@ -178,7 +188,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 if (attribute.TransitionStyle != int.MinValue)
                     ft.SetTransitionStyle(attribute.TransitionStyle);
 
-                if(attribute.AddToBackStack == true)
+                if (attribute.AddToBackStack == true)
                     ft.AddToBackStack(fragmentName);
 
                 ft.Add(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
