@@ -24,18 +24,28 @@ namespace MvvmCross.Droid.Views
         public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
         protected MvxViewModelRequest _pendingRequest;
 
-        protected virtual Activity CurrentActivity => Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
         protected virtual FragmentManager CurrentFragmentManager => CurrentActivity.FragmentManager;
 
         protected virtual ConditionalWeakTable<MvxBasePresentationAttribute, IMvxFragmentView> CachedFragments { get; } = new ConditionalWeakTable<MvxBasePresentationAttribute, IMvxFragmentView>();
         protected virtual ConditionalWeakTable<IMvxViewModel, DialogFragment> Dialogs { get; } = new ConditionalWeakTable<IMvxViewModel, DialogFragment>();
+
+        private IMvxAndroidCurrentTopActivity _mvxAndroidCurrentTopActivity;
+        protected virtual Activity CurrentActivity
+        {
+            get
+            {
+                if (_mvxAndroidCurrentTopActivity == null)
+                    _mvxAndroidCurrentTopActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>();
+                return _mvxAndroidCurrentTopActivity.Activity;
+            }
+        }
 
         private IMvxAndroidActivityLifetimeListener _activityLifetimeListener;
         protected IMvxAndroidActivityLifetimeListener ActivityLifetimeListener
         {
             get
             {
-                if(_activityLifetimeListener == null)
+                if (_activityLifetimeListener == null)
                     _activityLifetimeListener = Mvx.Resolve<IMvxAndroidActivityLifetimeListener>();
                 return _activityLifetimeListener;
             }
@@ -44,12 +54,12 @@ namespace MvvmCross.Droid.Views
         private IMvxViewModelTypeFinder _viewModelTypeFinder;
         protected IMvxViewModelTypeFinder ViewModelTypeFinder
         {
-            get 
+            get
             {
                 if (_viewModelTypeFinder == null)
                     _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
-                return _viewModelTypeFinder; 
-            } 
+                return _viewModelTypeFinder;
+            }
         }
 
         private IMvxViewsContainer _viewsContainer;
@@ -57,7 +67,7 @@ namespace MvvmCross.Droid.Views
         {
             get
             {
-                if(_viewsContainer == null)
+                if (_viewsContainer == null)
                     _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
                 return _viewsContainer;
             }
@@ -104,15 +114,15 @@ namespace MvvmCross.Droid.Views
                 Show(_pendingRequest);
                 _pendingRequest = null;
             }
-            else if(e.ActivityState == MvxActivityState.OnCreate && e.Extras is Bundle savedBundle)
+            else if (e.ActivityState == MvxActivityState.OnCreate && e.Extras is Bundle savedBundle)
             {
                 //TODO: Restore fragments from bundle
             }
-            else if(e.ActivityState == MvxActivityState.OnSaveInstanceState && e.Extras is Bundle outBundle)
+            else if (e.ActivityState == MvxActivityState.OnSaveInstanceState && e.Extras is Bundle outBundle)
             {
                 //TODO: Save fragments into bundle
             }
-            else if(e.ActivityState == MvxActivityState.OnDestroy)
+            else if (e.ActivityState == MvxActivityState.OnDestroy)
             {
                 //TODO: Should be check for Fragments on this Activity and destroy them?
             }
@@ -136,7 +146,7 @@ namespace MvvmCross.Droid.Views
                 foreach (var attribute in typeWithAttribute.GetBasePresentationAttributes())
                 {
                     //TODO: Can we set the viewType from somewhere else?
-                    if(attribute.ViewType == null)
+                    if (attribute.ViewType == null)
                         attribute.ViewType = typeWithAttribute;
                     ViewModelToPresentationAttributeMap[viewModelType].Add(attribute);
                 }
@@ -197,10 +207,20 @@ namespace MvvmCross.Droid.Views
             var viewType = ViewsContainer.GetViewType(viewModelType);
 
             if (viewType.IsSubclassOf(typeof(DialogFragment)))
+            {
+                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                    $"Assuming DialogFragment presentation");
                 return new MvxDialogFragmentPresentationAttribute();
+            }
             if (viewType.IsSubclassOf(typeof(Fragment)))
+            {
+                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                    $"Assuming Fragment presentation");
                 return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), Android.Resource.Id.Content);
+            }
 
+            MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                    $"Assuming Activity presentation");
             return new MvxActivityPresentationAttribute() { ViewModelType = viewModelType };
         }
 
@@ -314,7 +334,7 @@ namespace MvvmCross.Droid.Views
                 }
                 if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
                 {
-                    if(!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
+                    if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
                         ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation, attribute.PopEnterAnimation, attribute.PopExitAnimation);
                     else
                         ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
@@ -462,7 +482,7 @@ namespace MvvmCross.Droid.Views
             return Class.FromType(fragmentType).Name;
         }
 
-        protected virtual IMvxFragmentView CreateFragment(MvxBasePresentationAttribute attribute, 
+        protected virtual IMvxFragmentView CreateFragment(MvxBasePresentationAttribute attribute,
             string fragmentName)
         {
             try
