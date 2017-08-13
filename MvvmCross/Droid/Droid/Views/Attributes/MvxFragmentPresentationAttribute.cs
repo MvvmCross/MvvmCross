@@ -15,8 +15,8 @@ namespace MvvmCross.Droid.Views.Attributes
         }
 
         public MvxFragmentPresentationAttribute(
-            Type activityHostViewModelType = null, 
-            int fragmentContentId = Android.Resource.Id.Content, 
+            Type activityHostViewModelType = null,
+            int fragmentContentId = Android.Resource.Id.Content,
             bool addToBackStack = false,
             int enterAnimation = int.MinValue,
             int exitAnimation = int.MinValue,
@@ -40,8 +40,8 @@ namespace MvvmCross.Droid.Views.Attributes
         }
 
         public MvxFragmentPresentationAttribute(
-            Type activityHostViewModelType = null, 
-            string fragmentContentResourceName = null, 
+            Type activityHostViewModelType = null,
+            string fragmentContentResourceName = null,
             bool addToBackStack = false,
             string enterAnimation = null,
             string exitAnimation = null,
@@ -72,7 +72,7 @@ namespace MvvmCross.Droid.Views.Attributes
         public Type ActivityHostViewModelType { get; set; }
 
         /// <summary>
-        /// Fragment parent activity ViewModel Type. When set ChildFragmentManager of this Fragment will be used
+        /// Fragment parent View Type. When set ChildFragmentManager of this Fragment will be used
         /// </summary>
         public Type FragmentHostViewType { get; set; }
 
