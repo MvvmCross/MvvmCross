@@ -64,7 +64,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     // check if fragment can be displayed as child fragment first
                     foreach (var item in fragmentAttributes.Where(att => att.FragmentHostViewType != null))
                     {
-                        var fragment = GetSupportFragmentByViewType(item.FragmentHostViewType);
+                        var fragment = GetFragmentByViewType(item.FragmentHostViewType);
 
                         // if the fragment exists, and is on top, then use the current attribute 
                         if (fragment != null && fragment.IsVisible && fragment.View.FindViewById(item.FragmentContentId) != null)
@@ -168,7 +168,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             // if attribute has a Fragment Host, then show it as nested and return
             if (attribute.FragmentHostViewType != null)
             {
-                var fragmentHost = GetSupportFragmentByViewType(attribute.FragmentHostViewType);
+                var fragmentHost = GetFragmentByViewType(attribute.FragmentHostViewType);
                 if (fragmentHost == null)
                     throw new NullReferenceException($"Fragment host not found when trying to show View {view.Name} as Nested Fragment");
 
@@ -293,7 +293,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
                         if (attribute.FragmentHostViewType != null)
                         {
-                            var fragment = GetSupportFragmentByViewType(attribute.FragmentHostViewType);
+                            var fragment = GetFragmentByViewType(attribute.FragmentHostViewType);
                             if (fragment == null)
                                 throw new MvxException("Fragment not found", attribute.FragmentHostViewType.Name);
 
@@ -393,7 +393,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 // try to close nested fragment first
                 if (fragmentAttribute.FragmentHostViewType != null)
                 {
-                    var fragmentHost = GetSupportFragmentByViewType(fragmentAttribute.FragmentHostViewType);
+                    var fragmentHost = GetFragmentByViewType(fragmentAttribute.FragmentHostViewType);
                     if (fragmentHost != null
                         && TryPerformCloseFragmentTransaction(fragmentHost.ChildFragmentManager, fragmentAttribute))
                         return;
@@ -447,7 +447,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
 
-            ft.Add(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
+            ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
             ft.CommitAllowingStateLoss();
         }
 
@@ -508,7 +508,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
         }
 
-        protected virtual Fragment GetSupportFragmentByViewType(Type type)
+        protected new Fragment GetFragmentByViewType(Type type)
         {
             var fragmentName = FragmentJavaName(type);
             var fragment = CurrentFragmentManager.FindFragmentByTag(fragmentName);

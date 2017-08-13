@@ -510,7 +510,7 @@ namespace MvvmCross.Droid.Views
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
 
-            ft.Add(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
+            ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
             ft.CommitAllowingStateLoss();
         }
 
