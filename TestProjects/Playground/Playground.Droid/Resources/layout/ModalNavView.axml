@@ -12,6 +12,11 @@
 	<Button android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="10dp"
+		android:text="Close"
+		local:MvxBind="Click CloseCommand;" />
+	<Button android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dp"
 		android:text="Show Child"
 		local:MvxBind="Click ShowChildCommand;" />
 	<FrameLayout android:id="@+id/dialog_content_frame"
