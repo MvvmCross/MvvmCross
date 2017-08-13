@@ -41,13 +41,21 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             base.RegisterAttributeTypes();
 
-            AttributeTypesToShowMethodDictionary.Add(
-               typeof(MvxTabLayoutPresentationAttribute),
-               (view, attribute, request) => ShowTabLayout(view, (MvxTabLayoutPresentationAttribute)attribute, request));
+            AttributeTypesToActionsDictionary.Add(
+                typeof(MvxTabLayoutPresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                    ShowAction = (view, attribute, request) => ShowTabLayout(view, (MvxTabLayoutPresentationAttribute)attribute, request),
+                    CloseAction = (viewModel, attribute) => CloseViewPagerFragment(viewModel, (MvxViewPagerFragmentPresentationAttribute)attribute)
+                });
 
-            AttributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxViewPagerFragmentPresentationAttribute),
-               (view, attribute, request) => ShowViewPagerFragment(view, (MvxViewPagerFragmentPresentationAttribute)attribute, request));
+                new MvxPresentationAttributeAction
+                {
+                    ShowAction = (view, attribute, request) => ShowViewPagerFragment(view, (MvxViewPagerFragmentPresentationAttribute)attribute, request),
+                    CloseAction = (viewModel, attribute) => CloseViewPagerFragment(viewModel, (MvxViewPagerFragmentPresentationAttribute)attribute)
+                });
         }
 
         protected override MvxBasePresentationAttribute GetAttributeForViewModel(Type viewModelType)
@@ -151,6 +159,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 activity.StartActivity(intent);
         }
 
+        #region Show implementations
         protected override void ShowHostActivity(MvxFragmentPresentationAttribute attribute)
         {
             var viewType = ViewsContainer.GetViewType(attribute.ActivityHostViewModelType);
@@ -199,6 +208,50 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
                 PerformShowFragmentTransaction(CurrentFragmentManager, attribute, request);
             }
+        }
+
+        protected virtual void PerformShowFragmentTransaction(
+            FragmentManager fragmentManager,
+            MvxFragmentPresentationAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            var fragmentName = FragmentJavaName(attribute.ViewType);
+            var fragment = CreateFragment(attribute, fragmentName);
+
+            //TODO: Find a better way to set the ViewModel at the Fragment
+            if (request is MvxViewModelInstanceRequest instanceRequest)
+                fragment.ViewModel = instanceRequest.ViewModelInstance;
+            else
+            {
+                fragment.ViewModel = (IMvxViewModel)Mvx.IocConstruct(request.ViewModelType);
+            }
+
+            var ft = fragmentManager.BeginTransaction();
+            if (attribute.SharedElements != null)
+            {
+                foreach (var item in attribute.SharedElements)
+                {
+                    string name = item.Key;
+                    if (string.IsNullOrEmpty(name))
+                        name = ViewCompat.GetTransitionName(item.Value);
+                    ft.AddSharedElement(item.Value, name);
+                }
+            }
+            if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
+            {
+                if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
+                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation, attribute.PopEnterAnimation, attribute.PopExitAnimation);
+                else
+                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
+            }
+            if (attribute.TransitionStyle != int.MinValue)
+                ft.SetTransitionStyle(attribute.TransitionStyle);
+
+            if (attribute.AddToBackStack == true)
+                ft.AddToBackStack(fragmentName);
+
+            ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
+            ft.CommitAllowingStateLoss();
         }
 
         protected override void ShowDialogFragment(Type view,
@@ -324,116 +377,64 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             else
                 throw new MvxException("ViewPager or TabLayout not found");
         }
+        #endregion
 
-        public override void Close(IMvxViewModel viewModel)
+        #region Close implementations
+        protected override bool CloseFragmentDialog(IMvxViewModel viewModel, MvxDialogFragmentPresentationAttribute attribute)
         {
-            var attribute = GetAttributeForViewModel(viewModel.GetType());
-
-            if (attribute is MvxActivityPresentationAttribute)
+            if (Dialogs.TryGetValue(viewModel, out DialogFragment dialog))
             {
-                var currentView = CurrentActivity as IMvxView;
+                dialog.DismissAllowingStateLoss();
+                dialog.Dispose();
+                Dialogs.Remove(viewModel);
 
-                if (currentView == null)
-                {
-                    Mvx.Warning("Ignoring close for viewmodel - rootframe has no current page");
-                    return;
-                }
-
-                if (currentView.ViewModel != viewModel)
-                {
-                    Mvx.Warning("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
-                    return;
-                }
-
-                CurrentActivity.Finish();
+                return true;
             }
-            else if (attribute is MvxDialogFragmentPresentationAttribute dialogAttribute)
-            {
-                if (Dialogs.TryGetValue(viewModel, out DialogFragment dialog))
-                {
-                    dialog.DismissAllowingStateLoss();
-                    dialog.Dispose();
-                    Dialogs.Remove(viewModel);
-                }
-            }
-            else if (attribute is MvxViewPagerFragmentPresentationAttribute viewPagerAttribute)
-            {
-                var viewPager = CurrentActivity.FindViewById<ViewPager>(viewPagerAttribute.ViewPagerResourceId);
-                if (viewPager != null)
-                {
-                    if (viewPager.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
-                    {
-                        var ft = CurrentFragmentManager.BeginTransaction();
-                        var fragmentInfo = adapter.FragmentsInfo.Find(x => x.FragmentType == viewPagerAttribute.ViewType && x.ViewModelType == viewPagerAttribute.ViewModelType);
-                        var fragment = CurrentFragmentManager.FindFragmentByTag(fragmentInfo.Tag);
-                        adapter.FragmentsInfo.Remove(fragmentInfo);
-                        ft.Remove(fragment);
-                        ft.CommitAllowingStateLoss();
-                        adapter.NotifyDataSetChanged();
-                    }
-                }
-            }
-            else if (attribute is MvxFragmentPresentationAttribute fragmentAttribute)
-            {
-                // try to close nested fragment first
-                if (fragmentAttribute.FragmentHostViewType != null)
-                {
-                    var fragmentHost = GetFragmentByViewType(fragmentAttribute.FragmentHostViewType);
-                    if (fragmentHost != null
-                        && TryPerformCloseFragmentTransaction(fragmentHost.ChildFragmentManager, fragmentAttribute))
-                        return;
-                }
-
-                // Close fragment. If it isn't successful, then close the current Activity
-                if (!TryPerformCloseFragmentTransaction(CurrentFragmentManager, fragmentAttribute))
-                {
-                    CurrentActivity.Finish();
-                }
-            }
+            return false;
         }
 
-        protected virtual void PerformShowFragmentTransaction(
-            FragmentManager fragmentManager,
-            MvxFragmentPresentationAttribute attribute,
-            MvxViewModelRequest request)
+        protected virtual bool CloseViewPagerFragment(IMvxViewModel viewModel, MvxViewPagerFragmentPresentationAttribute attribute)
         {
-            var fragmentName = FragmentJavaName(attribute.ViewType);
-            var fragment = CreateFragment(attribute, fragmentName);
-
-            //TODO: Find a better way to set the ViewModel at the Fragment
-            if (request is MvxViewModelInstanceRequest instanceRequest)
-                fragment.ViewModel = instanceRequest.ViewModelInstance;
-            else
+            var viewPager = CurrentActivity.FindViewById<ViewPager>(attribute.ViewPagerResourceId);
+            if (viewPager != null)
             {
-                fragment.ViewModel = (IMvxViewModel)Mvx.IocConstruct(request.ViewModelType);
-            }
-
-            var ft = fragmentManager.BeginTransaction();
-            if (attribute.SharedElements != null)
-            {
-                foreach (var item in attribute.SharedElements)
+                if (viewPager.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
                 {
-                    string name = item.Key;
-                    if (string.IsNullOrEmpty(name))
-                        name = ViewCompat.GetTransitionName(item.Value);
-                    ft.AddSharedElement(item.Value, name);
+                    var ft = CurrentFragmentManager.BeginTransaction();
+                    var fragmentInfo = adapter.FragmentsInfo.Find(x => x.FragmentType == attribute.ViewType && x.ViewModelType == attribute.ViewModelType);
+                    var fragment = CurrentFragmentManager.FindFragmentByTag(fragmentInfo.Tag);
+                    adapter.FragmentsInfo.Remove(fragmentInfo);
+                    ft.Remove(fragment);
+                    ft.CommitAllowingStateLoss();
+                    adapter.NotifyDataSetChanged();
+
+                    return true;
                 }
             }
-            if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
+            return false;
+        }
+
+        protected override bool CloseFragment(IMvxViewModel viewModel, MvxFragmentPresentationAttribute attribute)
+        {
+            // try to close nested fragment first
+            if (attribute.FragmentHostViewType != null)
             {
-                if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
-                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation, attribute.PopEnterAnimation, attribute.PopExitAnimation);
-                else
-                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
+                var fragmentHost = GetFragmentByViewType(attribute.FragmentHostViewType);
+                if (fragmentHost != null
+                    && TryPerformCloseFragmentTransaction(fragmentHost.ChildFragmentManager, attribute))
+                    return true;
             }
-            if (attribute.TransitionStyle != int.MinValue)
-                ft.SetTransitionStyle(attribute.TransitionStyle);
 
-            if (attribute.AddToBackStack == true)
-                ft.AddToBackStack(fragmentName);
-
-            ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
-            ft.CommitAllowingStateLoss();
+            // Close fragment. If it isn't successful, then close the current Activity
+            if (TryPerformCloseFragmentTransaction(CurrentFragmentManager, attribute))
+            {
+                return true;
+            }
+            else
+            {
+                CurrentActivity.Finish();
+                return true;
+            }
         }
 
         protected virtual bool TryPerformCloseFragmentTransaction(
@@ -468,6 +469,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
             return false;
         }
+        #endregion
 
         protected override IMvxFragmentView CreateFragment(MvxBasePresentationAttribute attribute,
             string fragmentName)
