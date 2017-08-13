@@ -455,31 +455,20 @@ namespace MvvmCross.Droid.Views
             }
             else if (attribute is MvxFragmentPresentationAttribute fragmentAttribute)
             {
-                if (CurrentFragmentManager.BackStackEntryCount > 0)
+                // try to close nested fragment first
+                if (fragmentAttribute.FragmentHostViewType != null)
                 {
-                    var fragmentName = FragmentJavaName(attribute.ViewType);
-                    CurrentFragmentManager.PopBackStackImmediate(fragmentName, PopBackStackFlags.Inclusive);
+                    var fragmentHost = GetFragmentByViewType(fragmentAttribute.FragmentHostViewType);
+                    if (fragmentHost != null
+                        && TryPerformCloseFragmentTransaction(fragmentHost.ChildFragmentManager, fragmentAttribute))
+                        return;
                 }
-                else if (CurrentFragmentManager.FindFragmentByTag(fragmentAttribute.ViewType.Name) != null)
+
+                // Close fragment. If it isn't successful, then close the current Activity
+                if (!TryPerformCloseFragmentTransaction(CurrentFragmentManager, fragmentAttribute))
                 {
-                    var ft = CurrentFragmentManager.BeginTransaction();
-                    var fragment = CurrentFragmentManager.FindFragmentByTag(fragmentAttribute.ViewType.Name);
-
-                    if (!fragmentAttribute.EnterAnimation.Equals(int.MinValue) && !fragmentAttribute.ExitAnimation.Equals(int.MinValue))
-                    {
-                        if (!fragmentAttribute.PopEnterAnimation.Equals(int.MinValue) && !fragmentAttribute.PopExitAnimation.Equals(int.MinValue))
-                            ft.SetCustomAnimations(fragmentAttribute.EnterAnimation, fragmentAttribute.ExitAnimation, fragmentAttribute.PopEnterAnimation, fragmentAttribute.PopExitAnimation);
-                        else
-                            ft.SetCustomAnimations(fragmentAttribute.EnterAnimation, fragmentAttribute.ExitAnimation);
-                    }
-                    if (fragmentAttribute.TransitionStyle != int.MinValue)
-                        ft.SetTransitionStyle(fragmentAttribute.TransitionStyle);
-
-                    ft.Remove(fragment);
-                    ft.CommitAllowingStateLoss();
-                }
-                else
                     CurrentActivity.Finish();
+                }
             }
         }
 
@@ -523,6 +512,39 @@ namespace MvvmCross.Droid.Views
 
             ft.Add(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
             ft.CommitAllowingStateLoss();
+        }
+
+        protected virtual bool TryPerformCloseFragmentTransaction(
+            FragmentManager fragmentManager,
+            MvxFragmentPresentationAttribute fragmentAttribute)
+        {
+            if (fragmentManager.BackStackEntryCount > 0)
+            {
+                var fragmentName = FragmentJavaName(fragmentAttribute.ViewType);
+                fragmentManager.PopBackStackImmediate(fragmentName, PopBackStackFlags.Inclusive);
+                return true;
+            }
+            else if (CurrentFragmentManager.FindFragmentByTag(fragmentAttribute.ViewType.Name) != null)
+            {
+                var ft = fragmentManager.BeginTransaction();
+                var fragment = fragmentManager.FindFragmentByTag(fragmentAttribute.ViewType.Name);
+
+                if (!fragmentAttribute.EnterAnimation.Equals(int.MinValue) && !fragmentAttribute.ExitAnimation.Equals(int.MinValue))
+                {
+                    if (!fragmentAttribute.PopEnterAnimation.Equals(int.MinValue) && !fragmentAttribute.PopExitAnimation.Equals(int.MinValue))
+                        ft.SetCustomAnimations(fragmentAttribute.EnterAnimation, fragmentAttribute.ExitAnimation, fragmentAttribute.PopEnterAnimation, fragmentAttribute.PopExitAnimation);
+                    else
+                        ft.SetCustomAnimations(fragmentAttribute.EnterAnimation, fragmentAttribute.ExitAnimation);
+                }
+                if (fragmentAttribute.TransitionStyle != int.MinValue)
+                    ft.SetTransitionStyle(fragmentAttribute.TransitionStyle);
+
+                ft.Remove(fragment);
+                ft.CommitAllowingStateLoss();
+
+                return true;
+            }
+            return false;
         }
 
         protected virtual string FragmentJavaName(Type fragmentType)
