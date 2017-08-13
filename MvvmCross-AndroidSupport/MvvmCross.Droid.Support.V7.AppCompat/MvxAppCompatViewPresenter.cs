@@ -331,22 +331,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             if (attribute is MvxActivityPresentationAttribute)
             {
-                //TODO: Find something to close the dialogs
-
-                if (CurrentFragmentManager.BackStackEntryCount > 0)
-                    CurrentFragmentManager.PopBackStackImmediate(null, 0);
-                if (CurrentFragmentManager.Fragments.Count > 0)
-                {
-                    foreach (var fragment in CurrentFragmentManager.Fragments)
-                    {
-                        var ft = CurrentFragmentManager.BeginTransaction();
-                        ft.Remove(fragment);
-                        ft.CommitAllowingStateLoss();
-                    }
-                }
-
-                var activity = CurrentActivity;
-                var currentView = activity as IMvxView;
+                var currentView = CurrentActivity as IMvxView;
 
                 if (currentView == null)
                 {
@@ -360,7 +345,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     return;
                 }
 
-                activity.Finish();
+                CurrentActivity.Finish();
             }
             else if (attribute is MvxDialogFragmentPresentationAttribute dialogAttribute)
             {
@@ -508,7 +493,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
         }
 
-        protected new Fragment GetFragmentByViewType(Type type)
+        protected virtual new Fragment GetFragmentByViewType(Type type)
         {
             var fragmentName = FragmentJavaName(type);
             var fragment = CurrentFragmentManager.FindFragmentByTag(fragmentName);

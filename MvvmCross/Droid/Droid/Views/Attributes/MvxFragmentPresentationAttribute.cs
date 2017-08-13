@@ -108,7 +108,7 @@ namespace MvvmCross.Droid.Views.Attributes
         /// <summary>
         /// Indicates if the fragment can be cached. True by default.
         /// </summary>
-        public bool IsCacheableFragment { get; set; } = true;
+        public virtual bool IsCacheableFragment { get; set; } = true;
 
         /// <summary>
         /// SharedElements that will be added to the transition. String may be left empty when using AppCompat

@@ -421,14 +421,7 @@ namespace MvvmCross.Droid.Views
 
             if (attribute is MvxActivityPresentationAttribute)
             {
-                //TODO: Find something to close the dialogs
-
-                if (CurrentFragmentManager.BackStackEntryCount > 0)
-                    CurrentFragmentManager.PopBackStackImmediate(null, PopBackStackFlags.Inclusive);
-
-                var activity = CurrentActivity;
-
-                var currentView = activity as IMvxView;
+                var currentView = CurrentActivity as IMvxView;
 
                 if (currentView == null)
                 {
@@ -442,7 +435,7 @@ namespace MvvmCross.Droid.Views
                     return;
                 }
 
-                activity.Finish();
+                CurrentActivity.Finish();
             }
             else if (attribute is MvxDialogFragmentPresentationAttribute dialogAttribute)
             {
