@@ -27,7 +27,7 @@ namespace Playground.Droid.Views
         {
             var ignore = base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.ChildView, null);
+            var view = this.BindingInflate(Resource.Layout.ModalNavView, null);
 
             return view;
         }

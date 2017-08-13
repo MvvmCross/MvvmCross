@@ -179,20 +179,42 @@ namespace MvvmCross.Droid.Views
             IList<MvxBasePresentationAttribute> attributes;
             if (ViewModelToPresentationAttributeMap.TryGetValue(viewModelType, out attributes))
             {
-                MvxBasePresentationAttribute attribute = attributes.FirstOrDefault();
+                MvxBasePresentationAttribute attribute = null;
 
                 if (attributes.Count > 1)
                 {
-                    var currentHostViewModelType = GetCurrentActivityViewModelType();
-                    foreach (var item in attributes.OfType<MvxFragmentPresentationAttribute>())
+                    var fragmentAttributes = attributes.OfType<MvxFragmentPresentationAttribute>();
+
+                    // check if fragment can be displayed as child fragment first
+                    foreach (var item in fragmentAttributes.Where(att => att.FragmentHostViewType != null))
                     {
-                        if (CurrentActivity.FindViewById(item.FragmentContentId) != null && item.ActivityHostViewModelType == currentHostViewModelType)
+                        var fragment = GetFragmentByViewType(item.FragmentHostViewType);
+
+                        // if the fragment exists, and is on top, then use the current attribute 
+                        if (fragment != null && fragment.IsVisible && fragment.View.FindViewById(item.FragmentContentId) != null)
                         {
                             attribute = item;
                             break;
                         }
                     }
+
+                    // if attribute is still null, check if fragment can be displayed in current activity
+                    if (attribute == null)
+                    {
+                        var currentActivityHostViewModelType = GetCurrentActivityViewModelType();
+                        foreach (var item in fragmentAttributes.Where(att => att.ActivityHostViewModelType != null))
+                        {
+                            if (CurrentActivity.FindViewById(item.FragmentContentId) != null && item.ActivityHostViewModelType == currentActivityHostViewModelType)
+                            {
+                                attribute = item;
+                                break;
+                            }
+                        }
+                    }
                 }
+
+                if (attribute == null)
+                    attribute = attributes.FirstOrDefault();
 
                 if (attribute.ViewType?.GetInterfaces().OfType<IMvxOverridePresentationAttribute>().FirstOrDefault() is IMvxOverridePresentationAttribute view)
                 {
@@ -298,12 +320,30 @@ namespace MvvmCross.Droid.Views
             MvxFragmentPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
+            // if attribute has a Fragment Host, then show it as nested and return
+            if (attribute.FragmentHostViewType != null)
+            {
+                var fragmentHost = GetFragmentByViewType(attribute.FragmentHostViewType);
+                if (fragmentHost == null)
+                    throw new NullReferenceException($"Fragment host not found when trying to show View {view.Name} as Nested Fragment");
+
+                if (!fragmentHost.IsVisible)
+                    throw new InvalidOperationException($"Fragment host is not visible when trying to show View {view.Name} as Nested Fragment");
+
+                PerformShowFragmentTransaction(fragmentHost.ChildFragmentManager, attribute, request);
+
+                return;
+            }
+
+            // if there is no Actitivty host associated, assume is the current activity
             if (attribute.ActivityHostViewModelType == null)
                 attribute.ActivityHostViewModelType = GetCurrentActivityViewModelType();
 
             var currentHostViewModelType = GetCurrentActivityViewModelType();
             if (attribute.ActivityHostViewModelType != currentHostViewModelType)
             {
+                MvxTrace.Trace($"Activity host with ViewModelType {attribute.ActivityHostViewModelType} is not CurrentTopActivity. " +
+                               $"Showing Activity before showing Fragment for {attribute.ViewModelType}");
                 _pendingRequest = request;
                 ShowHostActivity(attribute);
             }
@@ -312,41 +352,7 @@ namespace MvvmCross.Droid.Views
                 if (CurrentActivity.FindViewById(attribute.FragmentContentId) == null)
                     throw new NullReferenceException("FrameLayout to show Fragment not found");
 
-                var fragmentName = FragmentJavaName(attribute.ViewType);
-                var fragment = CreateFragment(attribute, fragmentName);
-
-                //TODO: Find a better way to set the ViewModel at the Fragment
-                if (request is MvxViewModelInstanceRequest instanceRequest)
-                    fragment.ViewModel = instanceRequest.ViewModelInstance;
-                else
-                {
-                    fragment.ViewModel = (IMvxViewModel)Mvx.IocConstruct(request.ViewModelType);
-                }
-
-                var ft = CurrentActivity.FragmentManager.BeginTransaction();
-
-                if (attribute.SharedElements != null)
-                {
-                    foreach (var item in attribute.SharedElements)
-                    {
-                        ft.AddSharedElement(item.Value, item.Key);
-                    }
-                }
-                if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
-                {
-                    if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
-                        ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation, attribute.PopEnterAnimation, attribute.PopExitAnimation);
-                    else
-                        ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
-                }
-                if (attribute.TransitionStyle != int.MinValue)
-                    ft.SetTransitionStyle(attribute.TransitionStyle);
-
-                if (attribute.AddToBackStack == true)
-                    ft.AddToBackStack(fragmentName);
-
-                ft.Add(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
-                ft.CommitAllowingStateLoss();
+                PerformShowFragmentTransaction(CurrentActivity.FragmentManager, attribute, request);
             }
         }
 
@@ -477,6 +483,48 @@ namespace MvvmCross.Droid.Views
             }
         }
 
+        protected virtual void PerformShowFragmentTransaction(
+            FragmentManager fragmentManager,
+            MvxFragmentPresentationAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            var fragmentName = FragmentJavaName(attribute.ViewType);
+            var fragment = CreateFragment(attribute, fragmentName);
+
+            //TODO: Find a better way to set the ViewModel at the Fragment
+            if (request is MvxViewModelInstanceRequest instanceRequest)
+                fragment.ViewModel = instanceRequest.ViewModelInstance;
+            else
+            {
+                fragment.ViewModel = (IMvxViewModel)Mvx.IocConstruct(request.ViewModelType);
+            }
+
+            var ft = fragmentManager.BeginTransaction();
+
+            if (attribute.SharedElements != null)
+            {
+                foreach (var item in attribute.SharedElements)
+                {
+                    ft.AddSharedElement(item.Value, item.Key);
+                }
+            }
+            if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
+            {
+                if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
+                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation, attribute.PopEnterAnimation, attribute.PopExitAnimation);
+                else
+                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
+            }
+            if (attribute.TransitionStyle != int.MinValue)
+                ft.SetTransitionStyle(attribute.TransitionStyle);
+
+            if (attribute.AddToBackStack == true)
+                ft.AddToBackStack(fragmentName);
+
+            ft.Add(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
+            ft.CommitAllowingStateLoss();
+        }
+
         protected virtual string FragmentJavaName(Type fragmentType)
         {
             return Class.FromType(fragmentType).Name;
@@ -504,6 +552,14 @@ namespace MvvmCross.Droid.Views
             {
                 throw new MvxException($"Cannot create Fragment '{fragmentName}'. Use the MvxAppCompatViewPresenter when using Android Support Fragments");
             }
+        }
+
+        protected virtual Fragment GetFragmentByViewType(Type type)
+        {
+            var fragmentName = FragmentJavaName(type);
+            var fragment = CurrentFragmentManager.FindFragmentByTag(fragmentName);
+
+            return fragment;
         }
     }
 }

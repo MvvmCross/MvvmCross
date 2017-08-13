@@ -15,6 +15,7 @@ namespace Playground.Droid.Views
                 Resource.Animation.abc_fade_out)]
     [MvxFragmentPresentation(typeof(SplitRootViewModel), Resource.Id.split_content_frame)]
     [MvxFragmentPresentation(typeof(TabsRootViewModel), Resource.Id.content_frame)]
+    [MvxFragmentPresentation(fragmentHostViewType: typeof(ModalNavView), fragmentContentId: Resource.Id.dialog_content_frame)]
     [Register(nameof(ChildView))]
     public class ChildView : MvxFragment<ChildViewModel>
     {

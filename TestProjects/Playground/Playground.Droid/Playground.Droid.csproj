@@ -134,6 +134,7 @@
     <AndroidResource Include="Resources\menu\navigation_drawer.axml" />
     <AndroidResource Include="Resources\layout\SplitDetailView.axml" />
     <AndroidResource Include="Resources\layout\SecondChildView.axml" />
+    <AndroidResource Include="Resources\layout\ModalNavView.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

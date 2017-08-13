@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 using MvvmCross.Core.Navigation;
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using MvvmCross.Core.ViewModels;
 
@@ -25,7 +25,7 @@ namespace Playground.Core.ViewModels
 
         public override async Task Initialize()
         {
-            //await Task.Delay(3000);
+            await Task.Delay(3000);
         }
 
         string para;
