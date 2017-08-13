@@ -1,23 +1,19 @@
-﻿using System.Windows.Input;
+﻿using System;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class SecondChildViewModel : MvxViewModel
+    public class NestedChildViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
 
-        public SecondChildViewModel(IMvxNavigationService navigationService)
+        public NestedChildViewModel(IMvxNavigationService navigationService)
         {
             _navigationService = navigationService;
 
-            ShowNestedChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<NestedChildViewModel>());
-
             CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
         }
-
-        public IMvxAsyncCommand ShowNestedChildCommand { get; private set; }
 
         public IMvxAsyncCommand CloseCommand { get; private set; }
     }
