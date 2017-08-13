@@ -103,6 +103,7 @@
     <Compile Include="Views\SecondChildView.cs" />
     <Compile Include="Views\SheetView.cs" />
     <Compile Include="Views\SplitDetailNavView.cs" />
+    <Compile Include="Views\NestedChildView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -135,6 +136,7 @@
     <AndroidResource Include="Resources\layout\SplitDetailView.axml" />
     <AndroidResource Include="Resources\layout\SecondChildView.axml" />
     <AndroidResource Include="Resources\layout\ModalNavView.axml" />
+    <AndroidResource Include="Resources\layout\NestedChildView.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
