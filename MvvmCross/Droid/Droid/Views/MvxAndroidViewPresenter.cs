@@ -73,17 +73,17 @@ namespace MvvmCross.Droid.Views
             }
         }
 
-        private Dictionary<Type, Action<Type, MvxBasePresentationAttribute, MvxViewModelRequest>> _attributeTypesToShowMethodDictionary;
-        protected Dictionary<Type, Action<Type, MvxBasePresentationAttribute, MvxViewModelRequest>> AttributeTypesToShowMethodDictionary
+        private Dictionary<Type, MvxPresentationAttributeAction> _attributeTypesActionsDictionary;
+        protected Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
         {
             get
             {
-                if (_attributeTypesToShowMethodDictionary == null)
+                if (_attributeTypesActionsDictionary == null)
                 {
-                    _attributeTypesToShowMethodDictionary = new Dictionary<Type, Action<Type, MvxBasePresentationAttribute, MvxViewModelRequest>>();
+                    _attributeTypesActionsDictionary = new Dictionary<Type, MvxPresentationAttributeAction>();
                     RegisterAttributeTypes();
                 }
-                return _attributeTypesToShowMethodDictionary;
+                return _attributeTypesActionsDictionary;
             }
         }
 
@@ -161,17 +161,29 @@ namespace MvvmCross.Droid.Views
 
         protected virtual void RegisterAttributeTypes()
         {
-            _attributeTypesToShowMethodDictionary.Add(
-               typeof(MvxActivityPresentationAttribute),
-               (view, attribute, request) => ShowActivity(view, (MvxActivityPresentationAttribute)attribute, request));
+            _attributeTypesActionsDictionary.Add(
+                typeof(MvxActivityPresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                    ShowAction = (view, attribute, request) => ShowActivity(view, (MvxActivityPresentationAttribute)attribute, request),
+                    CloseAction = (viewModel, attribute) => CloseActivity(viewModel, (MvxActivityPresentationAttribute)attribute)
+                });
 
-            _attributeTypesToShowMethodDictionary.Add(
-               typeof(MvxFragmentPresentationAttribute),
-               (view, attribute, request) => ShowFragment(view, (MvxFragmentPresentationAttribute)attribute, request));
+            _attributeTypesActionsDictionary.Add(
+                typeof(MvxFragmentPresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                    ShowAction = (view, attribute, request) => ShowFragment(view, (MvxFragmentPresentationAttribute)attribute, request),
+                    CloseAction = (viewModel, attribute) => CloseFragment(viewModel, (MvxFragmentPresentationAttribute)attribute)
+                });
 
-            _attributeTypesToShowMethodDictionary.Add(
-               typeof(MvxDialogFragmentPresentationAttribute),
-               (view, attribute, request) => ShowDialogFragment(view, (MvxDialogFragmentPresentationAttribute)attribute, request));
+            _attributeTypesActionsDictionary.Add(
+                typeof(MvxDialogFragmentPresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                    ShowAction = (view, attribute, request) => ShowDialogFragment(view, (MvxDialogFragmentPresentationAttribute)attribute, request),
+                    CloseAction = (viewModel, attribute) => CloseFragmentDialog(viewModel, (MvxDialogFragmentPresentationAttribute)attribute)
+                });
         }
 
         protected virtual MvxBasePresentationAttribute GetAttributeForViewModel(Type viewModelType)
@@ -261,16 +273,21 @@ namespace MvvmCross.Droid.Views
             var view = attribute.ViewType;
             var attributeType = attribute.GetType();
 
-            if (AttributeTypesToShowMethodDictionary.TryGetValue(attributeType,
-                out Action<Type, MvxBasePresentationAttribute, MvxViewModelRequest> showAction))
+            if (AttributeTypesToActionsDictionary.TryGetValue(
+                attributeType,
+                out MvxPresentationAttributeAction attributeAction))
             {
-                showAction.Invoke(view, attribute, request);
+                if (attributeAction.ShowAction == null)
+                    throw new NullReferenceException($"attributeAction.ShowAction is null for attribute: {attributeType.Name}");
+
+                attributeAction.ShowAction.Invoke(view, attribute, request);
                 return;
             }
 
             throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
         }
 
+        #region Show implementations
         protected virtual void ShowActivity(
             Type view,
             MvxActivityPresentationAttribute attribute,
@@ -356,6 +373,48 @@ namespace MvvmCross.Droid.Views
             }
         }
 
+        protected virtual void PerformShowFragmentTransaction(
+            FragmentManager fragmentManager,
+            MvxFragmentPresentationAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            var fragmentName = FragmentJavaName(attribute.ViewType);
+            var fragment = CreateFragment(attribute, fragmentName);
+
+            //TODO: Find a better way to set the ViewModel at the Fragment
+            if (request is MvxViewModelInstanceRequest instanceRequest)
+                fragment.ViewModel = instanceRequest.ViewModelInstance;
+            else
+            {
+                fragment.ViewModel = (IMvxViewModel)Mvx.IocConstruct(request.ViewModelType);
+            }
+
+            var ft = fragmentManager.BeginTransaction();
+
+            if (attribute.SharedElements != null)
+            {
+                foreach (var item in attribute.SharedElements)
+                {
+                    ft.AddSharedElement(item.Value, item.Key);
+                }
+            }
+            if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
+            {
+                if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
+                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation, attribute.PopEnterAnimation, attribute.PopExitAnimation);
+                else
+                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
+            }
+            if (attribute.TransitionStyle != int.MinValue)
+                ft.SetTransitionStyle(attribute.TransitionStyle);
+
+            if (attribute.AddToBackStack == true)
+                ft.AddToBackStack(fragmentName);
+
+            ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
+            ft.CommitAllowingStateLoss();
+        }
+
         protected virtual void ShowDialogFragment(
             Type view,
             MvxDialogFragmentPresentationAttribute attribute,
@@ -400,6 +459,7 @@ namespace MvvmCross.Droid.Views
 
             dialog.Show(ft, fragmentName);
         }
+        #endregion
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
@@ -418,93 +478,78 @@ namespace MvvmCross.Droid.Views
         public override void Close(IMvxViewModel viewModel)
         {
             var attribute = GetAttributeForViewModel(viewModel.GetType());
+            var attributeType = attribute.GetType();
 
-            if (attribute is MvxActivityPresentationAttribute)
+            if (AttributeTypesToActionsDictionary.TryGetValue(
+                attributeType,
+                out MvxPresentationAttributeAction attributeAction))
             {
-                var currentView = CurrentActivity as IMvxView;
+                if (attributeAction.CloseAction == null)
+                    throw new NullReferenceException($"attributeAction.CloseAction is null for attribute: {attributeType.Name}");
 
-                if (currentView == null)
-                {
-                    Mvx.Warning("Ignoring close for viewmodel - rootframe has no current page");
-                    return;
-                }
-
-                if (currentView.ViewModel != viewModel)
-                {
-                    Mvx.Warning("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
-                    return;
-                }
-
-                CurrentActivity.Finish();
+                attributeAction.CloseAction.Invoke(viewModel, attribute);
+                return;
             }
-            else if (attribute is MvxDialogFragmentPresentationAttribute dialogAttribute)
-            {
-                if (Dialogs.TryGetValue(viewModel, out DialogFragment dialog))
-                {
-                    dialog.DismissAllowingStateLoss();
-                    dialog.Dispose();
-                    Dialogs.Remove(viewModel);
-                }
-            }
-            else if (attribute is MvxFragmentPresentationAttribute fragmentAttribute)
-            {
-                // try to close nested fragment first
-                if (fragmentAttribute.FragmentHostViewType != null)
-                {
-                    var fragmentHost = GetFragmentByViewType(fragmentAttribute.FragmentHostViewType);
-                    if (fragmentHost != null
-                        && TryPerformCloseFragmentTransaction(fragmentHost.ChildFragmentManager, fragmentAttribute))
-                        return;
-                }
 
-                // Close fragment. If it isn't successful, then close the current Activity
-                if (!TryPerformCloseFragmentTransaction(CurrentFragmentManager, fragmentAttribute))
-                {
-                    CurrentActivity.Finish();
-                }
-            }
+            throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
         }
 
-        protected virtual void PerformShowFragmentTransaction(
-            FragmentManager fragmentManager,
-            MvxFragmentPresentationAttribute attribute,
-            MvxViewModelRequest request)
+        #region Close implementations
+        protected virtual bool CloseActivity(IMvxViewModel viewModel, MvxActivityPresentationAttribute attribute)
         {
-            var fragmentName = FragmentJavaName(attribute.ViewType);
-            var fragment = CreateFragment(attribute, fragmentName);
+            var currentView = CurrentActivity as IMvxView;
 
-            //TODO: Find a better way to set the ViewModel at the Fragment
-            if (request is MvxViewModelInstanceRequest instanceRequest)
-                fragment.ViewModel = instanceRequest.ViewModelInstance;
+            if (currentView == null)
+            {
+                Mvx.Warning("Ignoring close for viewmodel - rootframe has no current page");
+                return false;
+            }
+
+            if (currentView.ViewModel != viewModel)
+            {
+                Mvx.Warning("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
+                return false;
+            }
+
+            CurrentActivity.Finish();
+
+            return true;
+        }
+
+        protected virtual bool CloseFragmentDialog(IMvxViewModel viewModel, MvxDialogFragmentPresentationAttribute attribute)
+        {
+            if (Dialogs.TryGetValue(viewModel, out DialogFragment dialog))
+            {
+                dialog.DismissAllowingStateLoss();
+                dialog.Dispose();
+                Dialogs.Remove(viewModel);
+
+                return true;
+            }
+            return false;
+        }
+
+        protected virtual bool CloseFragment(IMvxViewModel viewModel, MvxFragmentPresentationAttribute attribute)
+        {
+            // try to close nested fragment first
+            if (attribute.FragmentHostViewType != null)
+            {
+                var fragmentHost = GetFragmentByViewType(attribute.FragmentHostViewType);
+                if (fragmentHost != null
+                    && TryPerformCloseFragmentTransaction(fragmentHost.ChildFragmentManager, attribute))
+                    return true;
+            }
+
+            // Close fragment. If it isn't successful, then close the current Activity
+            if (TryPerformCloseFragmentTransaction(CurrentFragmentManager, attribute))
+            {
+                return true;
+            }
             else
             {
-                fragment.ViewModel = (IMvxViewModel)Mvx.IocConstruct(request.ViewModelType);
+                CurrentActivity.Finish();
+                return true;
             }
-
-            var ft = fragmentManager.BeginTransaction();
-
-            if (attribute.SharedElements != null)
-            {
-                foreach (var item in attribute.SharedElements)
-                {
-                    ft.AddSharedElement(item.Value, item.Key);
-                }
-            }
-            if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
-            {
-                if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
-                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation, attribute.PopEnterAnimation, attribute.PopExitAnimation);
-                else
-                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
-            }
-            if (attribute.TransitionStyle != int.MinValue)
-                ft.SetTransitionStyle(attribute.TransitionStyle);
-
-            if (attribute.AddToBackStack == true)
-                ft.AddToBackStack(fragmentName);
-
-            ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
-            ft.CommitAllowingStateLoss();
         }
 
         protected virtual bool TryPerformCloseFragmentTransaction(
@@ -539,6 +584,7 @@ namespace MvvmCross.Droid.Views
             }
             return false;
         }
+        #endregion
 
         protected virtual string FragmentJavaName(Type fragmentType)
         {
