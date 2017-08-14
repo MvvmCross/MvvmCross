@@ -7,12 +7,12 @@ using Android.Views;
 using Example.Core.ViewModels;
 using Example.Droid.Activities;
 using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Views.Attributes;
 using MvvmCross.Droid.Support.V4;
 
 namespace Example.Droid.Fragments
 {
-    [MvxFragment(typeof(MainViewModel), Resource.Id.navigation_frame)]
+    [MvxFragmentPresentation(typeof(MainViewModel), Resource.Id.navigation_frame)]
     [Register("example.droid.fragments.MenuFragment")]
     public class MenuFragment : MvxFragment<MenuViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {

@@ -4,10 +4,11 @@ using System.Linq;
 using Android.Content;
 using Android.Runtime;
 using Android.Support.V4.App;
+using Android.Support.V4.View;
 using Java.Lang;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Views.Attributes;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 using String = Java.Lang.String;
@@ -26,15 +27,15 @@ namespace MvvmCross.Droid.Support.V4
         }
 
 		public MvxCachingFragmentStatePagerAdapter(Context context, FragmentManager fragmentManager,
-            IEnumerable<FragmentInfo> fragments) : base(fragmentManager)
+            List<MvxViewPagerFragmentInfo> fragmentsInfo) : base(fragmentManager)
         {
             _context = context;
-            Fragments = fragments;
+            FragmentsInfo = fragmentsInfo;
         }
 
-        public override int Count => Fragments.Count();
+        public override int Count => FragmentsInfo?.Count() ?? 0;
 
-        public IEnumerable<FragmentInfo> Fragments { get; }
+        public List<MvxViewPagerFragmentInfo> FragmentsInfo { get; }
 
         protected static string FragmentJavaName(Type fragmentType)
         {
@@ -43,7 +44,7 @@ namespace MvvmCross.Droid.Support.V4
 
         public override Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null)
         {
-            var fragInfo = Fragments.ElementAt(position);
+            var fragInfo = FragmentsInfo.ElementAt(position);
             var fragment = Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
 
             var mvxFragment = fragment as MvxFragment;
@@ -59,19 +60,24 @@ namespace MvvmCross.Droid.Support.V4
             return fragment;
         }
 
+        public override int GetItemPosition(Java.Lang.Object @object)
+        {
+            return PagerAdapter.PositionNone;
+        }
+
         public override ICharSequence GetPageTitleFormatted(int position)
         {
-            return new String(Fragments.ElementAt(position).Title);
+            return new String(FragmentsInfo.ElementAt(position).Title);
         }
 
         protected override string GetTag(int position)
         {
-            return Fragments.ElementAt(position).Tag;
+            return FragmentsInfo.ElementAt(position).Tag;
         }
 
         private IMvxViewModel CreateViewModel(int position)
         {
-            var fragInfo = Fragments.ElementAt(position);
+            var fragInfo = FragmentsInfo.ElementAt(position);
 
             MvxBundle mvxBundle = null;
             if (fragInfo.ParameterValuesObject != null)
@@ -80,48 +86,6 @@ namespace MvvmCross.Droid.Support.V4
             var request = new MvxViewModelRequest(fragInfo.ViewModelType, mvxBundle, null);
 
             return Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(request, null);
-        }
-
-        public class FragmentInfo
-        {
-            public FragmentInfo(string title, Type fragmentType, Type viewModelType, object parameterValuesObject = null)
-                : this(title, null, fragmentType, viewModelType, parameterValuesObject)
-            {
-            }
-
-            public FragmentInfo(string title, string tag, Type fragmentType, Type viewModelType,
-                                object parameterValuesObject = null)
-            {
-                Title = title;
-                Tag = tag ?? title;
-                FragmentType = fragmentType;
-                ViewModelType = viewModelType;
-                ParameterValuesObject = parameterValuesObject;
-            }
-            
-            public FragmentInfo(string title, Type fragmentType, IMvxViewModel viewModel, object parameterValuesObject = null)
-		        : this(title, null, fragmentType, viewModel.GetType(), parameterValuesObject)
-	        {
-		        ViewModel = viewModel;
-	        }
-
-	        public FragmentInfo(string title, string tag, Type fragmentType, IMvxViewModel viewModel, object parameterValuesObject = null)
-		        : this(title, tag, fragmentType, viewModel.GetType(), parameterValuesObject)
-	        {  
-		        ViewModel = viewModel;
-	        }
-
-            public Type FragmentType { get; }
-
-            public object ParameterValuesObject { get; }
-
-            public string Tag { get; }
-
-            public string Title { get; }
-
-            public Type ViewModelType { get; }
-            
-            public IMvxViewModel ViewModel { get; }
         }
     }
 }

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
     <TextView
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -31,4 +32,27 @@
         android:layout_height="wrap_content"
         android:id="@+id/button1"
         app:MvxBind="Click GoToBCommand" />
+    <Button
+        android:text="Go To Nested Fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1"
+        app:MvxBind="Click GoToNestedCommand" />
+    <Button
+        android:text="Close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1"
+        app:MvxBind="Click CloseCommand" />
+    <Button
+        android:text="Close Host"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1"
+        app:MvxBind="Click CloseHostCommand" />
+    <FrameLayout
+        android:id="@+id/nested_content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true" />
 </LinearLayout>

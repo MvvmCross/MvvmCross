@@ -49,6 +49,7 @@
     <Compile Include="ViewModels\SheetViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
     <Compile Include="ViewModels\NestedModalViewModel.cs" />
+    <Compile Include="ViewModels\NestedChildViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">

@@ -77,7 +77,6 @@
     <Compile Include="Views\MvxNavigationController.cs" />
     <Compile Include="Views\UIViewControllerExtensionMethods.cs" />
     <Compile Include="Views\Presenters\Attributes\MvxModalPresentationAttribute.cs" />
-    <Compile Include="Views\Presenters\Attributes\MvxBasePresentationAttribute.cs" />
     <Compile Include="Views\Presenters\Attributes\MvxRootPresentationAttribute.cs" />
     <Compile Include="Views\Presenters\Attributes\MvxChildPresentationAttribute.cs" />
     <Compile Include="Views\Presenters\Attributes\MvxTabPresentationAttribute.cs" />
@@ -90,7 +89,6 @@
     <Compile Include="Views\MvxEventSourceSplitViewController.cs" />
     <Compile Include="Views\MvxSplitViewController.cs" />
     <Compile Include="Views\IMvxTabBarItemViewController.cs" />
-    <Compile Include="Views\Presenters\Attributes\IMvxOverridePresentationAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
