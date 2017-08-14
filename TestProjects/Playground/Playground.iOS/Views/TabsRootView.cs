@@ -1,6 +1,7 @@
 
 using System;
 using System.Threading.Tasks;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters.Attributes;
 using Playground.Core.ViewModels;
@@ -47,6 +48,15 @@ namespace Playground.iOS.Views
             return type == typeof(ChildView)
                 ? false
                 : base.ShowChildView(viewController);
+        }
+
+        public override bool CloseChildViewModel(IMvxViewModel viewModel)
+        {
+            var type = viewModel.GetType();
+
+            return type == typeof(ChildViewModel)
+                ? false
+                : base.CloseChildViewModel(viewModel);
         }
     }
 }
