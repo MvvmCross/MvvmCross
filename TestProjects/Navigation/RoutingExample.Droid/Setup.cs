@@ -1,9 +1,16 @@
+using System.Collections.Generic;
+using System.Reflection;
 using Android.Content;
+using Android.Support.V4.App;
+using Android.Support.V7.App;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Shared.Presenter;
 using MvvmCross.Droid.Views;
+using MvvmCross.Droid.Views.Attributes;
 using RoutingExample.Core;
+using System;
+using System.Threading.Tasks;
+using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace RoutingExample.Droid
 {
@@ -20,7 +27,7 @@ namespace RoutingExample.Droid
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
-            return new MvxFragmentsPresenter(AndroidViewAssemblies);
+            return new MvxAppCompatViewPresenter(AndroidViewAssemblies);
         }
     }
 }

@@ -3,7 +3,7 @@ using Android.Content;
 using Eventhooks.Core;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Shared.Presenter;
+using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace Eventhooks.Droid
 {
@@ -20,7 +20,7 @@ namespace Eventhooks.Droid
 
         protected override MvvmCross.Droid.Views.IMvxAndroidViewPresenter CreateViewPresenter()
         {
-            return new MvxFragmentsPresenter(AndroidViewAssemblies);
+            return new MvxAppCompatViewPresenter(AndroidViewAssemblies);
         }
     }
 }

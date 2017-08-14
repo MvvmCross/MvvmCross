@@ -7,14 +7,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Reflection;
 using AppKit;
 using CoreGraphics;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
 using MvvmCross.Mac.Views.Presenters.Attributes;
-using System.Reflection;
-using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Mac.Views.Presenters
 {

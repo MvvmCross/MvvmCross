@@ -12,7 +12,7 @@ namespace Example.Droid.Activities
        LaunchMode = LaunchMode.SingleTop,
        Name = "example.droid.activities.AnotherFragmentHostActivity"
        )]
-    public class MessagesActivity : MvxCachingFragmentCompatActivity<MessagesViewModel>
+    public class MessagesActivity : MvxAppCompatActivity<MessagesViewModel>
     {
         /*public override IFragmentCacheConfiguration BuildFragmentCacheConfiguration()
         {

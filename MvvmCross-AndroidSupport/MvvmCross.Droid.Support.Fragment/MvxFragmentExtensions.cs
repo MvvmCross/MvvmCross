@@ -13,11 +13,9 @@ using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Shared.Caching;
-using MvvmCross.Droid.Shared.Fragments;
-using MvvmCross.Droid.Shared.Fragments.EventSource;
 using MvvmCross.Droid.Support.V4.EventSource;
 using MvvmCross.Droid.Views;
+using MvvmCross.Droid.Views.Caching;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 
@@ -39,7 +37,7 @@ namespace MvvmCross.Droid.Support.V4
             {
                 //TODO call MvxViewModelLoader.Reload when it's added in MvvmCross, tracked by #1165
                 //until then, we're going to re-run the viewmodel lifecycle here.
-                MvxSharedFragmentExtensions.RunViewModelLifecycle(fragmentView.ViewModel, bundle, request);
+                Views.MvxFragmentExtensions.RunViewModelLifecycle(fragmentView.ViewModel, bundle, request);
 
                 return;
             }
@@ -124,7 +122,7 @@ namespace MvvmCross.Droid.Support.V4
 
             IFragmentCacheableActivity cacheableActivity = fragmentParentActivtiy as IFragmentCacheableActivity;
 
-            if (cacheableActivity == null)
+            /*if (cacheableActivity == null)
                 throw new InvalidOperationException($"Fragment has activity attached but it does not implement {nameof(IFragmentCacheableActivity)} ! Cannot register fragment to cache!");
 
             if (string.IsNullOrEmpty(fragmentView.UniqueImmutableCacheTag))
@@ -132,6 +130,7 @@ namespace MvvmCross.Droid.Support.V4
 
             var fragmentCacheConfiguration = cacheableActivity.FragmentCacheConfiguration;
             fragmentCacheConfiguration.RegisterFragmentToCache(fragmentView.UniqueImmutableCacheTag, fragmentView.GetType(), fragmentView.FindAssociatedViewModelType(fragmentParentActivityType));
+*/
         }
     }
 }

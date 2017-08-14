@@ -3,6 +3,7 @@ using System;
 using System.Windows.Input;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using System.Collections.Generic;
 
 namespace Playground.Core.ViewModels
 {
@@ -20,9 +21,11 @@ namespace Playground.Core.ViewModels
 
         private async Task ShowInitialViewModels()
         {
-            await _navigationService.Navigate<Tab1ViewModel, string>("test");
-            await _navigationService.Navigate<Tab2ViewModel>();
-            await _navigationService.Navigate<Tab3ViewModel>();
+            var tasks = new List<Task>();
+            tasks.Add(_navigationService.Navigate<Tab1ViewModel, string>("test"));
+            tasks.Add(_navigationService.Navigate<Tab2ViewModel>());
+            tasks.Add(_navigationService.Navigate<Tab3ViewModel>());
+            await Task.WhenAll(tasks);
         }
     }
 }

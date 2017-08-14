@@ -89,6 +89,42 @@
     <Compile Include="Views\MvxActivity.cs" />
     <Compile Include="Views\MvxAndroidApplication.cs" />
     <Compile Include="Views\IMvxAndroidApplication.cs" />
+    <Compile Include="Views\Attributes\MvxFragmentPresentationAttribute.cs" />
+    <Compile Include="Views\Attributes\MvxAndroidPresentationAttributeExtensions.cs" />
+    <Compile Include="Views\Attributes\MvxDialogFragmentPresentationAttribute.cs" />
+    <Compile Include="Views\MvxFragmentExtensions.cs" />
+    <Compile Include="Views\IMvxFragmentView.cs" />
+    <Compile Include="Views\IMvxEventSourceFragment.cs" />
+    <Compile Include="Views\Caching\CachedFragmentManager.cs" />
+    <Compile Include="Views\Caching\DefaultFragmentCacheConfiguration.cs" />
+    <Compile Include="Views\Caching\FragmentCacheConfiguration.cs" />
+    <Compile Include="Views\Caching\IFragmentCacheableActivity.cs" />
+    <Compile Include="Views\Caching\IFragmentCacheConfiguration.cs" />
+    <Compile Include="Views\Caching\IMvxCachedFragmentInfo.cs" />
+    <Compile Include="Views\Caching\IMvxCachedFragmentInfoFactory.cs" />
+    <Compile Include="Views\Caching\MvxCachedFragmentInfo.cs" />
+    <Compile Include="Views\Caching\MvxCachedFragmentInfoFactory.cs" />
+    <Compile Include="Views\Caching\SerializableMvxCachedFragmentInfo.cs" />
+    <Compile Include="Views\MvxCreateViewParameters.cs" />
+    <Compile Include="Views\Attributes\MvxTabLayoutPresentationAttribute.cs" />
+    <Compile Include="Views\MvxSimpleLayoutInflaterHolder.cs" />
+    <Compile Include="Views\Attributes\MvxActivityPresentationAttribute.cs" />
+    <Compile Include="Views\MvxActivityState.cs" />
+    <Compile Include="Views\MvxActivityEventArgs.cs" />
+    <Compile Include="Views\MvxTabsFragmentActivity.cs" />
+    <Compile Include="Views\Attributes\MvxViewPagerFragmentPresentationAttribute.cs" />
+    <Compile Include="Views\Fragments\EventSource\MvxBaseFragmentAdapter.cs" />
+    <Compile Include="Views\Fragments\EventSource\MvxEventSourceDialogFragment.cs" />
+    <Compile Include="Views\Fragments\EventSource\MvxEventSourceFragment.cs" />
+    <Compile Include="Views\Fragments\EventSource\MvxEventSourceListFragment.cs" />
+    <Compile Include="Views\Fragments\EventSource\MvxEventSourcePreferenceFragment.cs" />
+    <Compile Include="Views\Fragments\MvxBindingFragmentAdapter.cs" />
+    <Compile Include="Views\Fragments\MvxDialogFragment.cs" />
+    <Compile Include="Views\Fragments\MvxFragment.cs" />
+    <Compile Include="Views\Fragments\MvxFragmentExtensions.cs" />
+    <Compile Include="Views\Fragments\MvxFragmentViewExtensionMethods.cs" />
+    <Compile Include="Views\Fragments\MvxPreferenceFragment.cs" />
+    <Compile Include="Views\MvxPresentationAttributeAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Droid\MvvmCross.Platform.Droid.csproj">
@@ -123,5 +159,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Views\Attributes\" />
+    <Folder Include="Views\Caching\" />
+    <Folder Include="Views\Fragments\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

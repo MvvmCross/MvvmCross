@@ -11,8 +11,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Views;
-using MvvmCross.Droid.Shared;
-using MvvmCross.Droid.Shared.Fragments.EventSource;
+using MvvmCross.Droid.Views;
 using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Droid.Support.Design.EventSource

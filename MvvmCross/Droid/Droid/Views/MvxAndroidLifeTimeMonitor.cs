@@ -5,7 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using Android.App;
+using Android.OS;
 using MvvmCross.Core.Platform;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Platform.Droid.Platform;
@@ -21,9 +23,7 @@ namespace MvvmCross.Droid.Views
     {
         private int _createdActivityCount;
 
-        #region IMvxAndroidActivityLifetimeListener Members
-
-        public virtual void OnCreate(Activity activity)
+        public virtual void OnCreate(Activity activity, Bundle eventArgs)
         {
             _createdActivityCount++;
             if (_createdActivityCount == 1)
@@ -31,31 +31,37 @@ namespace MvvmCross.Droid.Views
                 FireLifetimeChange(MvxLifetimeEvent.ActivatedFromDisk);
             }
             Activity = activity;
+            FireActivityChange(activity, MvxActivityState.OnCreate, eventArgs);
         }
 
         public virtual void OnStart(Activity activity)
         {
             Activity = activity;
+            FireActivityChange(activity, MvxActivityState.OnStart);
         }
 
         public virtual void OnRestart(Activity activity)
         {
             Activity = activity;
+            FireActivityChange(activity, MvxActivityState.OnRestart);
         }
 
         public virtual void OnResume(Activity activity)
         {
             Activity = activity;
+            FireActivityChange(activity, MvxActivityState.OnResume);
         }
 
         public virtual void OnPause(Activity activity)
         {
             // ignored
+            FireActivityChange(activity, MvxActivityState.OnPause);
         }
 
         public virtual void OnStop(Activity activity)
         {
             // ignored
+            FireActivityChange(activity, MvxActivityState.OnStop);
         }
 
         public virtual void OnDestroy(Activity activity)
@@ -68,6 +74,7 @@ namespace MvvmCross.Droid.Views
             {
                 FireLifetimeChange(MvxLifetimeEvent.Closing);
             }
+            FireActivityChange(activity, MvxActivityState.OnDestroy);
         }
 
         public virtual void OnViewNewIntent(Activity activity)
@@ -75,12 +82,19 @@ namespace MvvmCross.Droid.Views
             Activity = activity;
         }
 
-        #endregion IMvxAndroidActivityLifetimeListener Members
-
-        #region IMvxAndroidCurrentTopActivity Members
+        public void OnSaveInstanceState(Activity activity, Bundle eventArgs)
+        {
+            Activity = activity;
+            FireActivityChange(activity, MvxActivityState.OnSaveInstanceState, eventArgs);
+        }
 
         public Activity Activity { get; private set; }
 
-        #endregion IMvxAndroidCurrentTopActivity Members
+        protected void FireActivityChange(Activity activity, MvxActivityState state, object extras = null)
+        {
+            ActivityChanged?.Invoke(this, new MvxActivityEventArgs(activity, state, extras));
+        }
+
+        public event EventHandler<MvxActivityEventArgs> ActivityChanged;
     }
 }
