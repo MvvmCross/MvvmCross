@@ -1,6 +1,6 @@
 #tool nuget:?package=GitVersion.CommandLine
 #tool nuget:?package=gitlink
-#tool nuget:?package=vswhere
+#tool nuget:?package=vswhere&version=2.4.0
 #tool nuget:?package=NUnit.ConsoleRunner
 #addin nuget:?package=Cake.Incubator
 #addin nuget:?package=Cake.Git
