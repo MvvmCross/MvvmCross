@@ -26,4 +26,3 @@ namespace MvxBindingsExample.Pages
         }
     }
 }
-
