@@ -57,7 +57,6 @@ namespace MvvmCross.Forms.iOS
 
         protected override IMvxIosViewPresenter CreatePresenter()
         {
-            Xamarin.Forms.Forms.Init();
             return new MvxFormsIosPagePresenter(Window, FormsApplication);
         }
 
