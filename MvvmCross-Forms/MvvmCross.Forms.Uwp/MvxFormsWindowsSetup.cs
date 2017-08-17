@@ -41,15 +41,20 @@ namespace MvvmCross.Forms.Uwp
         }
 
         private MvxFormsApplication _formsApplication;
-        public MvxFormsApplication FormsApplication =>
-            _formsApplication = _formsApplication ?? CreateFormsApplication();
+        public MvxFormsApplication FormsApplication
+        {
+            get
+            {
+                if (!Xamarin.Forms.Forms.IsInitialized)
+                    Xamarin.Forms.Forms.Init(_launchActivatedEventArgs);
+                _formsApplication = _formsApplication ?? CreateFormsApplication();
+            }
+        }
 
         protected virtual MvxFormsApplication CreateFormsApplication() => new MvxFormsApplication();
 
         protected override IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
         {
-            Xamarin.Forms.Forms.Init(_launchActivatedEventArgs);
-
             var presenter = new MvxFormsUwpPagePresenter(rootFrame, FormsApplication);
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
 
