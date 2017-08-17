@@ -15,7 +15,7 @@ namespace MasterDetailExample.iOS
         public Setup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
         {
-        }        
+        }
 
         protected override IMvxApplication CreateApp()
         {
@@ -24,6 +24,7 @@ namespace MasterDetailExample.iOS
 
         protected override IMvxIosViewPresenter CreatePresenter()
         {
+            Forms.Init();
             return new MvxFormsIosMasterDetailPagePresenter(Window, FormsApplication);
         }
     }
