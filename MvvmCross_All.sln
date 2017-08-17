@@ -108,6 +108,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{73E029D9-EA9B-49ED-BBF7-5444AA032B15}"
 	ProjectSection(SolutionItems) = preProject
 		AssemblyInfo.cs = AssemblyInfo.cs
+		build.cake = build.cake
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Platform.Droid", "MvvmCross\Platform\Droid\MvvmCross.Platform.Droid.csproj", "{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}"
