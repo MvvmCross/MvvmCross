@@ -90,11 +90,18 @@ Task("UnitTest")
 		new FilePath("./MvvmCross-Plugins/Network/MvvmCross.Plugins.Network.Test/bin/Release/MvvmCross.Plugins.Network.Test.dll").FullPath
 	};
 
+    var testResultsPath = new FilePath(outputDir + "/NUnitTestResult.xml");
+
 	NUnit3(testPaths, new NUnit3Settings {
 		Timeout = 30000,
 		OutputFile = new FilePath(outputDir + "/NUnitOutput.txt"),
-		Results = new FilePath(outputDir + "/NUnitTestResult.xml")
+		Results = testResultsPath
 	});
+
+    if (isRunningOnAppVeyor)
+    {
+        AppVeyor.UploadTestResults(testResultsPath, AppVeyorTestResultsType.NUnit3);
+    }
 });
 
 Task("GitLink")
