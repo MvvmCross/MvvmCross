@@ -32,7 +32,7 @@ namespace MvvmCross.Forms.iOS
         {
             if (_viewAssemblies == null)
                 _viewAssemblies = new List<Assembly>(base.GetViewAssemblies());
-            
+
             return _viewAssemblies;
         }
 
@@ -45,6 +45,8 @@ namespace MvvmCross.Forms.iOS
         public MvxFormsApplication FormsApplication {
             get
             {
+                if (!Xamarin.Forms.Forms.IsInitialized)
+                    Xamarin.Forms.Forms.Init();
                 if(_formsApplication == null)
                     _formsApplication = CreateFormsApplication();
                 return _formsApplication;
