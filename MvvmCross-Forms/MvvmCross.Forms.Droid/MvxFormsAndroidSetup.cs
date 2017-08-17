@@ -42,6 +42,8 @@ namespace MvvmCross.Forms.Droid
         {
             get
             {
+                if (!Xamarin.Forms.Forms.IsInitialized)
+                    Xamarin.Forms.Forms.Init(Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity, null);
                 if (_formsApplication == null)
                     _formsApplication = CreateFormsApplication();
                 return _formsApplication;
@@ -52,7 +54,6 @@ namespace MvvmCross.Forms.Droid
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
-            Xamarin.Forms.Forms.Init(Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity, null);
             return new MvxFormsDroidPagePresenter(FormsApplication);
         }
 
