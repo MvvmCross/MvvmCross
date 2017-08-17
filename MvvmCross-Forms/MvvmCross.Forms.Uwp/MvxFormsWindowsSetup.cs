@@ -45,9 +45,12 @@ namespace MvvmCross.Forms.Uwp
         {
             get
             {
-                if (!Xamarin.Forms.Forms.IsInitialized)
+                if (_formsApplication == null)
+                {
                     Xamarin.Forms.Forms.Init(_launchActivatedEventArgs);
-                _formsApplication = _formsApplication ?? CreateFormsApplication();
+                    _formsApplication = _formsApplication ?? CreateFormsApplication();
+                }
+                return _formsApplication;
             }
         }
 
