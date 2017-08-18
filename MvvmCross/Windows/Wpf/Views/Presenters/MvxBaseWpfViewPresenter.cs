@@ -1,4 +1,4 @@
-// MvxWpfViewPresenter.cs
+﻿// MvxBaseWpfViewPresenter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,16 +13,16 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Wpf.Views
+namespace MvvmCross.Wpf.Views.Presenters
 {
-    public abstract class MvxWpfViewPresenter
+    public abstract class MvxBaseWpfViewPresenter
         : MvxViewPresenter, IMvxWpfViewPresenter
     {
         public override void Show(MvxViewModelRequest request)
         {
             try
             {
-                var loader = Mvx.Resolve<IMvxSimpleWpfViewLoader>();
+                var loader = Mvx.Resolve<IMvxWpfViewLoader>();
                 var view = loader.CreateView(request);
                 Present(view);
             }

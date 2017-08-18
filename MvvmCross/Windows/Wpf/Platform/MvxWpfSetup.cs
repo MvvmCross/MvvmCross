@@ -13,6 +13,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
 using MvvmCross.Wpf.Views;
+using MvvmCross.Wpf.Views.Presenters;
 
 namespace MvvmCross.Wpf.Platform
 {
@@ -36,7 +37,7 @@ namespace MvvmCross.Wpf.Platform
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
             var toReturn = CreateWpfViewsContainer();
-            Mvx.RegisterSingleton<IMvxSimpleWpfViewLoader>(toReturn);
+            Mvx.RegisterSingleton<IMvxWpfViewLoader>(toReturn);
             return toReturn;
         }
 

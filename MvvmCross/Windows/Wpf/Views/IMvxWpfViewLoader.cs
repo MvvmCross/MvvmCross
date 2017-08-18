@@ -1,4 +1,4 @@
-﻿// IMvxSimpleWpfViewLoader.cs
+﻿// IMvxWpfViewLoader.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,7 +10,7 @@ using MvvmCross.Core.ViewModels;
 
 namespace MvvmCross.Wpf.Views
 {
-    public interface IMvxSimpleWpfViewLoader
+    public interface IMvxWpfViewLoader
     {
         FrameworkElement CreateView(MvxViewModelRequest request);
     }
