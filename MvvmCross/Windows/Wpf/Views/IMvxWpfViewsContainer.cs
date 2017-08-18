@@ -11,7 +11,7 @@ namespace MvvmCross.Wpf.Views
 {
     public interface IMvxWpfViewsContainer
         : IMvxViewsContainer
-          , IMvxSimpleWpfViewLoader
+          , IMvxWpfViewLoader
     {
     }
 }

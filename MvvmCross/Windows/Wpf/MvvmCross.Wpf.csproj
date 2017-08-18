@@ -45,17 +45,22 @@
     <Compile Include="Commands\MvxSelectionChangedEventToCommand.cs" />
     <Compile Include="Commands\MvxSimpleSelectionChangedEventArgs.cs" />
     <Compile Include="Commands\MvxWithArgsEventToCommand.cs" />
-    <Compile Include="Views\IMvxWpfViewPresenter.cs" />
+    <Compile Include="Views\IMvxWindow.cs" />
+    <Compile Include="Views\MvxWindow.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxContentPresentationAttribute.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxWindowPresentationAttribute.cs" />
+    <Compile Include="Views\Presenters\IMvxWpfViewPresenter.cs" />
     <Compile Include="Views\IMvxWpfView.cs" />
     <Compile Include="Converters\MvxNativeValueConverter.cs" />
     <Compile Include="Platform\MvxWpfSetup.cs" />
     <Compile Include="Platform\MvxTraceTrace.cs" />
-    <Compile Include="Views\IMvxSimpleWpfViewLoader.cs" />
+    <Compile Include="Views\IMvxWpfViewLoader.cs" />
     <Compile Include="Views\IMvxWpfViewsContainer.cs" />
-    <Compile Include="Views\MvxSimpleWpfViewPresenter.cs" />
+    <Compile Include="Views\Presenters\MvxWpfViewPresenter.cs" />
+    <Compile Include="Views\Presenters\MvxSimpleWpfViewPresenter.cs" />
     <Compile Include="Views\MvxWpfUIThreadDispatcher.cs" />
     <Compile Include="Views\MvxWpfView.cs" />
-    <Compile Include="Views\MvxWpfViewPresenter.cs" />
+    <Compile Include="Views\Presenters\MvxBaseWpfViewPresenter.cs" />
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>

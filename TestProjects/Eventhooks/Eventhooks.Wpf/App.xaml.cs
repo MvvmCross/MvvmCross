@@ -3,6 +3,7 @@ using MvvmCross.Platform;
 using MvvmCross.Wpf.Views;
 using System.Windows;
 using System;
+using MvvmCross.Wpf.Views.Presenters;
 
 namespace Eventhooks.Wpf
 {
