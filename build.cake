@@ -53,7 +53,8 @@ Task("Restore")
 	.IsDependentOn("ResolveBuildTools")
 	.Does(() => {
 	NuGetRestore(sln, new NuGetRestoreSettings {
-		ToolPath = "tools/nuget.exe"
+		ToolPath = "tools/nuget.exe",
+		Verbosity = NuGetVerbosity.Quiet
 	});
 	// MSBuild(sln, settings => settings.WithTarget("Restore"));
 });
@@ -68,7 +69,8 @@ Task("Build")
 	var settings = new MSBuildSettings 
 	{
 		Configuration = "Release",
-		ToolPath = msBuildPath
+		ToolPath = msBuildPath,
+		Verbosity = Verbosity.Minimal
 	};
 
 	settings.Properties.Add("DebugSymbols", new List<string> { "True" });
