@@ -12,10 +12,10 @@ using MvvmCross.Platform.Platform;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MvvmCross.Wpf.Views
+namespace MvvmCross.Wpf.Views.Presenters
 {
     public class MvxSimpleWpfViewPresenter
-        : MvxWpfViewPresenter
+        : MvxBaseWpfViewPresenter
     {
         private readonly ContentControl _contentControl;
         private Stack<FrameworkElement> _frameworkElements = new Stack<FrameworkElement>();
