@@ -45,7 +45,7 @@ namespace MvvmCross.Droid.Views
             var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
             var cached = cache.GetAndClear(bundle);
 
-            var view = androidView as IMvxView;
+            var view = (IMvxView)androidView;
             var savedState = GetSavedStateFromBundle(bundle);
             view.OnViewCreate(() => cached ?? androidView.LoadViewModel(savedState));
         }
