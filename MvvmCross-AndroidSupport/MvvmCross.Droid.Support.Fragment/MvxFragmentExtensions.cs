@@ -56,7 +56,7 @@ namespace MvvmCross.Droid.Support.V4
             view.OnViewCreate(() => cached ?? fragmentView.LoadViewModel(bundle, fragment.Activity.GetType(), request));
         }
 
-        private static Fragment ToFragment(this IMvxFragmentView fragmentView)
+        public static Fragment ToFragment(this IMvxFragmentView fragmentView)
         {
             return fragmentView as Fragment;
         }

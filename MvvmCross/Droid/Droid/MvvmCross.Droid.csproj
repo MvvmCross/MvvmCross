@@ -95,7 +95,6 @@
     <Compile Include="Views\MvxFragmentExtensions.cs" />
     <Compile Include="Views\IMvxFragmentView.cs" />
     <Compile Include="Views\IMvxEventSourceFragment.cs" />
-    <Compile Include="Views\Caching\CachedFragmentManager.cs" />
     <Compile Include="Views\Caching\DefaultFragmentCacheConfiguration.cs" />
     <Compile Include="Views\Caching\FragmentCacheConfiguration.cs" />
     <Compile Include="Views\Caching\IFragmentCacheableActivity.cs" />
