@@ -8,6 +8,7 @@ using Android.Support.V4.View;
 using Java.Lang;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Droid.Views;
 using MvvmCross.Droid.Views.Attributes;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
@@ -47,7 +48,7 @@ namespace MvvmCross.Droid.Support.V4
             var fragInfo = FragmentsInfo.ElementAt(position);
             var fragment = Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
 
-            var mvxFragment = fragment as MvxFragment;
+            var mvxFragment = fragment as IMvxFragmentView;
             if (mvxFragment == null)
                 return fragment;
 
