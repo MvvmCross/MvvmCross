@@ -9,11 +9,15 @@ namespace Playground.Core.ViewModels
     {
         private readonly IMvxNavigationService _navigationService;
 
+        private int _counter = 2;
+
         public RootViewModel(IMvxNavigationService navigationService)
         {
             _navigationService = navigationService;
 
-            ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel>());
+            //ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel>());
+
+            ShowChildCommand = new MvxAsyncCommand(async () => ShowViewModel<ChildViewModel>());
 
             ShowModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalViewModel>());
 
@@ -28,20 +32,22 @@ namespace Playground.Core.ViewModels
             ShowSheetCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SheetViewModel>());
 
             ShowWindowCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<WindowViewModel>());
+
+            _counter = 3;
         }
 
-        private string _hello = "Hello MvvmCross";
-        public string Hello
+        protected override void SaveStateToBundle(IMvxBundle bundle)
         {
-            get { return _hello; }
-            set { SetProperty(ref _hello, value); }
+            base.SaveStateToBundle(bundle);
+
+            bundle.Data["MyKey"] = _counter.ToString();
         }
 
-        private int _counter = 2;
-        public int Counter
+        protected override void ReloadFromBundle(IMvxBundle state)
         {
-            get { return _counter; }
-            set { SetProperty(ref _counter, value); }
+            base.ReloadFromBundle(state);
+
+            _counter = int.Parse(state.Data["MyKey"]);
         }
 
         public IMvxAsyncCommand ShowChildCommand { get; private set; }
