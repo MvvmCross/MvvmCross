@@ -11,6 +11,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Views.Attributes;
+using MvvmCross.Droid.Views.Fragments;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Exceptions;
@@ -70,6 +71,17 @@ namespace MvvmCross.Droid.Views
                 if (_viewsContainer == null)
                     _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
                 return _viewsContainer;
+            }
+        }
+
+        private IMvxNavigationSerializer _navigationSerializer;
+        protected IMvxNavigationSerializer NavigationSerializer
+        {
+            get
+            {
+                if (_navigationSerializer == null)
+                    _navigationSerializer = Mvx.Resolve<IMvxNavigationSerializer>();
+                return _navigationSerializer;
             }
         }
 
@@ -340,14 +352,7 @@ namespace MvvmCross.Droid.Views
             // if attribute has a Fragment Host, then show it as nested and return
             if (attribute.FragmentHostViewType != null)
             {
-                var fragmentHost = GetFragmentByViewType(attribute.FragmentHostViewType);
-                if (fragmentHost == null)
-                    throw new NullReferenceException($"Fragment host not found when trying to show View {view.Name} as Nested Fragment");
-
-                if (!fragmentHost.IsVisible)
-                    throw new InvalidOperationException($"Fragment host is not visible when trying to show View {view.Name} as Nested Fragment");
-
-                PerformShowFragmentTransaction(fragmentHost.ChildFragmentManager, attribute, request);
+                ShowNestedFragment(view, attribute, request);
 
                 return;
             }
@@ -373,6 +378,23 @@ namespace MvvmCross.Droid.Views
             }
         }
 
+        protected virtual void ShowNestedFragment(
+            Type view,
+            MvxFragmentPresentationAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            // current implementation only supports one level of nesting 
+
+            var fragmentHost = GetFragmentByViewType(attribute.FragmentHostViewType);
+            if (fragmentHost == null)
+                throw new NullReferenceException($"Fragment host not found when trying to show View {view.Name} as Nested Fragment");
+
+            if (!fragmentHost.IsVisible)
+                throw new InvalidOperationException($"Fragment host is not visible when trying to show View {view.Name} as Nested Fragment");
+
+            PerformShowFragmentTransaction(fragmentHost.ChildFragmentManager, attribute, request);
+        }
+
         protected virtual void PerformShowFragmentTransaction(
             FragmentManager fragmentManager,
             MvxFragmentPresentationAttribute attribute,
@@ -381,12 +403,23 @@ namespace MvvmCross.Droid.Views
             var fragmentName = FragmentJavaName(attribute.ViewType);
             var fragment = CreateFragment(attribute, fragmentName);
 
-            //TODO: Find a better way to set the ViewModel at the Fragment
+            // MvxNavigationService provides an already instantiated ViewModel here,
+            // therefore just assign it
             if (request is MvxViewModelInstanceRequest instanceRequest)
+            {
                 fragment.ViewModel = instanceRequest.ViewModelInstance;
+            }
             else
             {
-                fragment.ViewModel = (IMvxViewModel)Mvx.IocConstruct(request.ViewModelType);
+                var bundle = new Bundle();
+                var serializedRequest = NavigationSerializer.Serializer.SerializeObject(request);
+                bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
+
+                var fragmentView = fragment.ToFragment();
+                if (fragmentView != null)
+                {
+                    fragmentView.Arguments = bundle;
+                }
             }
 
             var ft = fragmentManager.BeginTransaction();
@@ -423,18 +456,21 @@ namespace MvvmCross.Droid.Views
             var fragmentName = FragmentJavaName(attribute.ViewType);
             var dialog = (DialogFragment)CreateFragment(attribute, fragmentName);
 
-            //TODO: Find a better way to set the ViewModel at the Fragment
-            IMvxViewModel viewModel;
+            var mvxFragmentView = (IMvxFragmentView)dialog;
+            // MvxNavigationService provides an already instantiated ViewModel here,
+            // therefore just assign it
             if (request is MvxViewModelInstanceRequest instanceRequest)
-                viewModel = instanceRequest.ViewModelInstance;
+            {
+                mvxFragmentView.ViewModel = instanceRequest.ViewModelInstance;
+            }
             else
             {
-                viewModel = (IMvxViewModel)Mvx.IocConstruct(request.ViewModelType);
+                mvxFragmentView.LoadViewModelFrom(request, null);
             }
-            ((IMvxFragmentView)dialog).ViewModel = viewModel;
+
             dialog.Cancelable = attribute.Cancelable;
 
-            Dialogs.Add(viewModel, dialog);
+            Dialogs.Add(mvxFragmentView.ViewModel, dialog);
 
             var ft = CurrentFragmentManager.BeginTransaction();
             if (attribute.SharedElements != null)

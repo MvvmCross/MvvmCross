@@ -19,6 +19,21 @@ namespace Playground.Core.ViewModels
             ShowNestedModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<NestedModalViewModel>());
         }
 
+        public override System.Threading.Tasks.Task Initialize()
+        {
+            return base.Initialize();
+        }
+
+        public void Init()
+        {
+
+        }
+
+        public override void Start()
+        {
+            base.Start();
+        }
+
         public IMvxAsyncCommand ShowTabsCommand { get; private set; }
 
         public IMvxAsyncCommand CloseCommand { get; private set; }

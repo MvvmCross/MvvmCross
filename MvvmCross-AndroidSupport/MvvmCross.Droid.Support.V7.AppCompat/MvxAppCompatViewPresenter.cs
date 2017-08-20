@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
 using Android.Support.V4.Util;
@@ -177,14 +178,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             // if attribute has a Fragment Host, then show it as nested and return
             if (attribute.FragmentHostViewType != null)
             {
-                var fragmentHost = GetFragmentByViewType(attribute.FragmentHostViewType);
-                if (fragmentHost == null)
-                    throw new NullReferenceException($"Fragment host not found when trying to show View {view.Name} as Nested Fragment");
-
-                if (!fragmentHost.IsVisible)
-                    throw new InvalidOperationException($"Fragment host is not visible when trying to show View {view.Name} as Nested Fragment");
-
-                PerformShowFragmentTransaction(fragmentHost.ChildFragmentManager, attribute, request);
+                ShowNestedFragment(view, attribute, request);
 
                 return;
             }
@@ -210,6 +204,20 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
         }
 
+        protected override void ShowNestedFragment(Type view, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
+        {
+            // current implementation only supports one level of nesting 
+
+            var fragmentHost = GetFragmentByViewType(attribute.FragmentHostViewType);
+            if (fragmentHost == null)
+                throw new NullReferenceException($"Fragment host not found when trying to show View {view.Name} as Nested Fragment");
+
+            if (!fragmentHost.IsVisible)
+                throw new InvalidOperationException($"Fragment host is not visible when trying to show View {view.Name} as Nested Fragment");
+
+            PerformShowFragmentTransaction(fragmentHost.ChildFragmentManager, attribute, request);
+        }
+
         protected virtual void PerformShowFragmentTransaction(
             FragmentManager fragmentManager,
             MvxFragmentPresentationAttribute attribute,
@@ -218,12 +226,23 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             var fragmentName = FragmentJavaName(attribute.ViewType);
             var fragment = CreateFragment(attribute, fragmentName);
 
-            //TODO: Find a better way to set the ViewModel at the Fragment
+            // MvxNavigationService provides an already instantiated ViewModel here,
+            // therefore just assign it
             if (request is MvxViewModelInstanceRequest instanceRequest)
+            {
                 fragment.ViewModel = instanceRequest.ViewModelInstance;
+            }
             else
             {
-                fragment.ViewModel = (IMvxViewModel)Mvx.IocConstruct(request.ViewModelType);
+                var bundle = new Bundle();
+                var serializedRequest = NavigationSerializer.Serializer.SerializeObject(request);
+                bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
+
+                var fragmentView = fragment.ToFragment();
+                if (fragmentView != null)
+                {
+                    fragmentView.Arguments = bundle;
+                }
             }
 
             var ft = fragmentManager.BeginTransaction();
@@ -261,18 +280,21 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             var fragmentName = FragmentJavaName(attribute.ViewType);
             var dialog = (DialogFragment)CreateFragment(attribute, fragmentName);
 
-            //TODO: Find a better way to set the ViewModel at the Fragment
-            IMvxViewModel viewModel;
+            var mvxFragmentView = (IMvxFragmentView)dialog;
+            // MvxNavigationService provides an already instantiated ViewModel here,
+            // therefore just assign it
             if (request is MvxViewModelInstanceRequest instanceRequest)
-                viewModel = instanceRequest.ViewModelInstance;
+            {
+                mvxFragmentView.ViewModel = instanceRequest.ViewModelInstance;
+            }
             else
             {
-                viewModel = (IMvxViewModel)Mvx.IocConstruct(request.ViewModelType);
+                mvxFragmentView.LoadViewModelFrom(request, null);
             }
-            ((IMvxFragmentView)dialog).ViewModel = viewModel;
+
             dialog.Cancelable = attribute.Cancelable;
 
-            Dialogs.Add(viewModel, dialog);
+            Dialogs.Add(mvxFragmentView.ViewModel, dialog);
 
             var ft = CurrentFragmentManager.BeginTransaction();
             if (attribute.SharedElements != null)
