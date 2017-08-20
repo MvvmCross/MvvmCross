@@ -280,18 +280,21 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             var fragmentName = FragmentJavaName(attribute.ViewType);
             var dialog = (DialogFragment)CreateFragment(attribute, fragmentName);
 
-            //TODO: Find a better way to set the ViewModel at the Fragment
-            IMvxViewModel viewModel;
+            var mvxFragmentView = (IMvxFragmentView)dialog;
+            // MvxNavigationService provides an already instantiated ViewModel here,
+            // therefore just assign it
             if (request is MvxViewModelInstanceRequest instanceRequest)
-                viewModel = instanceRequest.ViewModelInstance;
+            {
+                mvxFragmentView.ViewModel = instanceRequest.ViewModelInstance;
+            }
             else
             {
-                viewModel = (IMvxViewModel)Mvx.IocConstruct(request.ViewModelType);
+                mvxFragmentView.LoadViewModelFrom(request, null);
             }
-            ((IMvxFragmentView)dialog).ViewModel = viewModel;
+
             dialog.Cancelable = attribute.Cancelable;
 
-            Dialogs.Add(viewModel, dialog);
+            Dialogs.Add(mvxFragmentView.ViewModel, dialog);
 
             var ft = CurrentFragmentManager.BeginTransaction();
             if (attribute.SharedElements != null)
