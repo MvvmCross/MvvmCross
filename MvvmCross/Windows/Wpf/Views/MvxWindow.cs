@@ -1,18 +1,10 @@
-﻿// MvxWpfView.cs
-
-// MvvmCross is licensed using Microsoft Public License (Ms-PL)
-// Contributions and inspirations noted in readme.md and license.txt
-//
-// Project Lead - Stuart Lodge, @slodge, me@slodge.com
-
-using MvvmCross.Core.ViewModels;
+﻿using MvvmCross.Core.ViewModels;
 using System;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace MvvmCross.Wpf.Views
 {
-    public class MvxWpfView : UserControl, IMvxWpfView, IDisposable
+    public class MvxWindow : Window, IMvxWindow, IMvxWpfView, IDisposable
     {
         private IMvxViewModel _viewModel;
 
@@ -26,19 +18,21 @@ namespace MvvmCross.Wpf.Views
             }
         }
 
-        public MvxWpfView()
+        public string Identifier { get; set; }
+
+        public MvxWindow()
         {
-            Unloaded += MvxWpfView_Unloaded;
-            Loaded += MvxWpfView_Loaded;
+            Unloaded += MvxWindow_Unloaded;
+            Loaded += MvxWindow_Loaded;
         }
 
-        private void MvxWpfView_Unloaded(object sender, RoutedEventArgs e)
+        private void MvxWindow_Unloaded(object sender, RoutedEventArgs e)
         {
             ViewModel?.ViewDisappearing();
             ViewModel?.ViewDisappeared();
         }
 
-        private void MvxWpfView_Loaded(object sender, RoutedEventArgs e)
+        private void MvxWindow_Loaded(object sender, RoutedEventArgs e)
         {
             ViewModel?.ViewAppearing();
             ViewModel?.ViewAppeared();
@@ -50,7 +44,7 @@ namespace MvvmCross.Wpf.Views
             GC.SuppressFinalize(this);
         }
 
-        ~MvxWpfView()
+        ~MvxWindow()
         {
             Dispose(false);
         }
@@ -59,14 +53,14 @@ namespace MvvmCross.Wpf.Views
         {
             if (disposing)
             {
-                Unloaded -= MvxWpfView_Unloaded;
-                Loaded -= MvxWpfView_Loaded;
+                Unloaded -= MvxWindow_Unloaded;
+                Loaded -= MvxWindow_Loaded;
             }
         }
     }
 
-    public class MvxWpfView<TViewModel>
-        : MvxWpfView
+    public class MvxWindow<TViewModel>
+        : MvxWindow
           , IMvxWpfView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel

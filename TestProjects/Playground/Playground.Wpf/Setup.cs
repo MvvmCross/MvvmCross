@@ -1,15 +1,9 @@
-﻿using MvvmCross.Wpf.Platform;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MvvmCross.Wpf.Views;
-using System.Windows.Threading;
-using MvvmCross.Core.ViewModels;
+﻿using MvvmCross.Core.ViewModels;
+using MvvmCross.Wpf.Platform;
 using MvvmCross.Wpf.Views.Presenters;
+using System.Windows.Threading;
 
-namespace Eventhooks.Wpf
+namespace Playground.Wpf
 {
     public class Setup : MvxWpfSetup
     {

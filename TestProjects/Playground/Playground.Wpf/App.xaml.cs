@@ -1,11 +1,10 @@
 ﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
-using MvvmCross.Wpf.Views;
-using System.Windows;
-using System;
 using MvvmCross.Wpf.Views.Presenters;
+using System;
+using System.Windows;
 
-namespace Eventhooks.Wpf
+namespace Playground.Wpf
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -16,7 +15,7 @@ namespace Eventhooks.Wpf
 
         void DoSetup()
         {
-            var presenter = new MvxSimpleWpfViewPresenter(MainWindow);
+            var presenter = new MvxWpfViewPresenter(MainWindow);
 
             var setup = new Setup(Dispatcher, presenter);
             setup.Initialize();
