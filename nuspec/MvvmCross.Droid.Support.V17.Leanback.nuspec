@@ -10,7 +10,6 @@ This package contains Support v17 Leanback support for MvvmCross.
 		</description>
 		<tags>mvvm mvvmcross cross xamarin android forms monodroid xamarin.android xamarin.forms net net45 netcore support leanback</tags>
 		<dependencies>
-			<dependency id="MvvmCross.Droid.Shared" version="[$version$]" />
 			<dependency id="MvvmCross.Droid.Support.Fragment" version="[$version$]" />
 			<dependency id="MvvmCross.Droid.Support.V7.RecyclerView" version="[$version$]" />
 			<dependency id="MvvmCross.Platform" version="[$version$]" />
