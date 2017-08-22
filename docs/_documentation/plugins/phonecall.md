@@ -18,7 +18,7 @@ The PhoneCall plugin is very simple - e.g. it doesn't provide any detection of w
 
 ## Setup
 
-Install the ```MvvmCross.Plugin.PhoneCall``` nuget in the Core, Droid and iOS. After that you can inject the ```IMvxPhoneCallTask``` in your constructor and use it.
+Install the ```MvvmCross.Plugin.PhoneCall``` nuget in the Core and the platforms you want to support. After that you can inject the ```IMvxPhoneCallTask``` in your constructor and use it:
 
 ```c#
 public class MyViewModel : MvxViewModel
