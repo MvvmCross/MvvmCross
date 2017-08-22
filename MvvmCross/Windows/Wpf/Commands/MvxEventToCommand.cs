@@ -261,8 +261,7 @@ namespace MvvmCross.Wpf.Commands
             var element = GetAssociatedObject();
 
             return AssociatedObject == null
-                   || element != null
-                   && !element.IsEnabled;
+                   || (element != null && !element.IsEnabled);
         }
 
         private void EnableDisableElement()
