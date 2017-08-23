@@ -26,7 +26,6 @@ namespace Playground.Core.ViewModels
 
         public void Init()
         {
-
         }
 
         public override void Start()

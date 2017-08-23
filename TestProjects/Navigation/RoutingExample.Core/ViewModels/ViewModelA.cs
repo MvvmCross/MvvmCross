@@ -54,7 +54,6 @@ namespace RoutingExample.Core.ViewModels
 
         public override void Prepare(string parameter)
         {
-            
         }
     }
 }

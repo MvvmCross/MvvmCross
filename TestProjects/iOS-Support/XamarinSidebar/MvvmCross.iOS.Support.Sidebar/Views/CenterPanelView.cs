@@ -1,4 +1,4 @@
-using Cirrious.FluentLayouts.Touch;
+﻿using Cirrious.FluentLayouts.Touch;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.iOS.Support.XamarinSidebar;
@@ -69,7 +69,6 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
                 keyboardHandlingButton.WithSameCenterX(View)
 
                 );
-
         }
     }
 }
