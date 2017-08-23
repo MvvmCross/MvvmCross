@@ -12,11 +12,11 @@ namespace Playground.Core.ViewModels
         {
             _navigationService = navigationService;
 
-            OpenDetailCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SplitDetailViewModel>());
+            OpenDetailCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<SplitDetailViewModel>());
 
-            OpenDetailNavCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SplitDetailNavViewModel>());
+            OpenDetailNavCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<SplitDetailNavViewModel>());
 
-            ShowRootViewModel = new MvxAsyncCommand(async () => await _navigationService.Navigate<RootViewModel>());
+            ShowRootViewModel = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<RootViewModel>());
         }
 
         public IMvxAsyncCommand OpenDetailCommand { get; private set; }

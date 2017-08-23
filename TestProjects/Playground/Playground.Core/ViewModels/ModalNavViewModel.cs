@@ -14,9 +14,9 @@ namespace Playground.Core.ViewModels
 
             CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
 
-            ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel>());
+            ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<ChildViewModel>());
 
-            ShowNestedModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<NestedModalViewModel>());
+            ShowNestedModalCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<NestedModalViewModel>());
         }
 
         public IMvxAsyncCommand CloseCommand { get; private set; }

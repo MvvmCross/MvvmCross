@@ -40,7 +40,7 @@ namespace RoutingExample.Core.ViewModels
 
             NavigatedAwayFrom = $"Navigated to View C {_navigatedAwayFromCount} times";
 
-            var result = await _navigationService.Navigate<ViewModelC, Tuple<string, int>, string>(new Tuple<string, int>(Title, _navigatedAwayFromCount));
+            var result = await _navigationService.NavigateAsync<ViewModelC, Tuple<string, int>, string>(new Tuple<string, int>(Title, _navigatedAwayFromCount));
 
             _returnedFromCount++;
 
@@ -49,7 +49,7 @@ namespace RoutingExample.Core.ViewModels
 
         public MvxCommand CloseCommand => new MvxCommand(async () =>
         {
-            await _navigationService.Close(this, Title);
+            await _navigationService.CloseAsync(this, Title);
         });
 
         public ViewModelB(IMvxNavigationService navigationService)

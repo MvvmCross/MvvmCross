@@ -32,7 +32,7 @@ namespace RoutingExample.Core.ViewModels
             _navigatedAwayFromCount++;
             NavigatedAwayFrom = $"Navigated to View B {_navigatedAwayFromCount} times";
 
-            var result = await _navigationService.Navigate<ViewModelB, Tuple<string, int>, string>(new Tuple<string, int>(Title, _navigatedAwayFromCount));
+            var result = await _navigationService.NavigateAsync<ViewModelB, Tuple<string, int>, string>(new Tuple<string, int>(Title, _navigatedAwayFromCount));
 
             _returnedFromCount++;
 

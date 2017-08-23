@@ -18,7 +18,7 @@ namespace RoutingExample.Core
         {
             try
             {
-                _navigationService.Navigate<MainViewModel>().GetAwaiter().GetResult();
+                _navigationService.NavigateAsync<MainViewModel>().GetAwaiter().GetResult();
             }
             catch (System.Exception e)
             {

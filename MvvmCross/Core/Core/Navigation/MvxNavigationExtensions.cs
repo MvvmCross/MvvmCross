@@ -25,22 +25,22 @@ namespace MvvmCross.Core.Navigation
         /// <returns>A task to await upon</returns>
         public static Task Navigate(this IMvxNavigationService navigationService, Uri path, IMvxBundle presentationBundle = null)
         {
-            return navigationService.Navigate(path.ToString(), presentationBundle);
+            return navigationService.NavigateAsync(path.ToString(), presentationBundle);
         }
 
         public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null) where TParameter : class
         {
-            return navigationService.Navigate<TParameter>(path.ToString(), param, presentationBundle);
+            return navigationService.NavigateAsync<TParameter>(path.ToString(), param, presentationBundle);
         }
 
         public static Task Navigate<TResult>(this IMvxNavigationService navigationService, Uri path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TResult : class
         {
-            return navigationService.Navigate<TResult>(path.ToString(), presentationBundle, cancellationToken);
+            return navigationService.NavigateAsync<TResult>(path.ToString(), presentationBundle, cancellationToken);
         }
 
         public static Task Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TParameter : class where TResult : class
         {
-            return navigationService.Navigate<TParameter, TResult>(path.ToString(), param, presentationBundle, cancellationToken);
+            return navigationService.NavigateAsync<TParameter, TResult>(path.ToString(), param, presentationBundle, cancellationToken);
         }
     }
 }

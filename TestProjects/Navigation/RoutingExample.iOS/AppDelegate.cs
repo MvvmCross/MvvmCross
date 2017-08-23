@@ -44,7 +44,7 @@ namespace RoutingExample.iOS
             var navigationService = Mvx.Resolve<IMvxNavigationService>();
 
             if (navigationService.CanNavigate(normalized).Result)
-                navigationService.Navigate(normalized);
+                navigationService.NavigateAsync(normalized);
 
             return true;
         }

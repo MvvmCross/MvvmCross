@@ -25,7 +25,7 @@ namespace RoutingExample.Core.ViewModels
 
         public MvxCommand CloseCommand => new MvxCommand(async () =>
         {
-            await _navigationService.Close(this, Title);
+            await _navigationService.CloseAsync(this, Title);
         });
 
         public override void Prepare(Tuple<string, int> parameter)

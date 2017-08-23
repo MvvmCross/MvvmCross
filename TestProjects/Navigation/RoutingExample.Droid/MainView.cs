@@ -34,7 +34,7 @@ namespace RoutingExample.Droid
 
             var url = WebUtility.UrlDecode(intent.DataString);
 
-            Mvx.Resolve<IMvxNavigationService>().Navigate(url);
+            Mvx.Resolve<IMvxNavigationService>().NavigateAsync(url);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace MvxBindingsExample
             try
             {
                 // Use this start to try the xaml bindings
-                _navigationService.Navigate<MainViewModel>().GetAwaiter().GetResult();
+                _navigationService.NavigateAsync<MainViewModel>().GetAwaiter().GetResult();
 
                 // Use this start to try the code behind View & ViewModel
                 //_navigationService.Navigate<CodeBehindViewModel>().GetAwaiter().GetResult();

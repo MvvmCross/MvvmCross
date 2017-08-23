@@ -55,7 +55,7 @@ namespace MvvmCross.Test.Navigation
         {
             var navigationService = Ioc.Resolve<IMvxNavigationService>();
 
-            await navigationService.Navigate<SimpleTestViewModel>();
+            await navigationService.NavigateAsync<SimpleTestViewModel>();
 
             MockDispatcher.Verify(
                 x => x.ShowViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(SimpleTestViewModel))),
@@ -72,7 +72,7 @@ namespace MvvmCross.Test.Navigation
             var bundle = new MvxBundle();
             bundle.Write(new { hello = "world" });
 
-            await navigationService.Navigate(mockVm.Object, bundle);
+            await navigationService.NavigateAsync(mockVm.Object, bundle);
 
             mockVm.Verify(vm => vm.Initialize(), Times.Once);
             //mockVm.Verify(vm => vm.Init(), Times.Once);
@@ -88,7 +88,7 @@ namespace MvvmCross.Test.Navigation
 
             var mockVm = new Mock<SimpleTestViewModel>();
 
-            await navigationService.Navigate(mockVm.Object);
+            await navigationService.NavigateAsync(mockVm.Object);
 
             mockVm.Verify(vm => vm.Initialize(), Times.Once);
             //mockVm.Verify(vm => vm.Init(), Times.Once);

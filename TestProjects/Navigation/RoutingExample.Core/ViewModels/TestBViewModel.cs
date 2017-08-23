@@ -31,13 +31,13 @@ namespace RoutingExample.Core.ViewModels
         private User _user;
 
         public IMvxAsyncCommand CloseViewModelCommand => new MvxAsyncCommand(
-            () => _navigationService.Close(this, new User("Return result", "Something")));
+            () => _navigationService.CloseAsync(this, new User("Return result", "Something")));
         public IMvxAsyncCommand OpenViewModelMainCommand => new MvxAsyncCommand(
-            () => _navigationService.Navigate<MainViewModel>());
+            () => _navigationService.NavigateAsync<MainViewModel>());
         public IMvxAsyncCommand OpenViewModelACommand => new MvxAsyncCommand(
-            () =>  _navigationService.Navigate<TestAViewModel, User>(new User($"To A from {GetHashCode()}", "Something")));
+            () =>  _navigationService.NavigateAsync<TestAViewModel, User>(new User($"To A from {GetHashCode()}", "Something")));
         public IMvxAsyncCommand OpenViewModelBCommand => new MvxAsyncCommand(
-            () =>  _navigationService.Navigate<TestBViewModel, User, User>(new User($"To B from {GetHashCode()}", "Something")));
+            () =>  _navigationService.NavigateAsync<TestBViewModel, User, User>(new User($"To B from {GetHashCode()}", "Something")));
 
         public override void Prepare(User parameter)
         {

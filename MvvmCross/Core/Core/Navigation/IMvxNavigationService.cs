@@ -20,15 +20,15 @@ namespace MvvmCross.Core.Navigation
         event BeforeCloseEventHandler BeforeClose;
         event AfterCloseEventHandler AfterClose;
 
-        Task Navigate<TViewModel>(IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel;
-        Task Navigate<TViewModel, TParameter>(TParameter param, IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel<TParameter>;
-        Task<TResult> Navigate<TViewModel, TResult>(IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModelResult<TResult>;
-        Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModel<TParameter, TResult>;
+        Task NavigateAsync<TViewModel>(IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel;
+        Task NavigateAsync<TViewModel, TParameter>(TParameter param, IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel<TParameter>;
+        Task<TResult> NavigateAsync<TViewModel, TResult>(IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModelResult<TResult>;
+        Task<TResult> NavigateAsync<TViewModel, TParameter, TResult>(TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModel<TParameter, TResult>;
 
-        Task Navigate(IMvxViewModel viewModel, IMvxBundle presentationBundle = null);
-        Task Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle presentationBundle = null);
-        Task<TResult> Navigate<TResult>(IMvxViewModelResult<TResult> viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
-        Task<TResult> Navigate<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task NavigateAsync(IMvxViewModel viewModel, IMvxBundle presentationBundle = null);
+        Task NavigateAsync<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle presentationBundle = null);
+        Task<TResult> NavigateAsync<TResult>(IMvxViewModelResult<TResult> viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<TResult> NavigateAsync<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Translates the provided Uri to a ViewModel request and dispatches it.
@@ -48,7 +48,7 @@ namespace MvvmCross.Core.Navigation
         Task<bool> CanNavigate(string path);
 
         Task<bool> Close(IMvxViewModel viewModel);
-        Task<bool> Close<TResult>(IMvxViewModelResult<TResult> viewModel, TResult result);
+        Task<bool> CloseAsync<TResult>(IMvxViewModelResult<TResult> viewModel, TResult result);
 
         bool ChangePresentation(MvxPresentationHint hint);
     }

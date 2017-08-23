@@ -33,12 +33,12 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels
 
         private void ShowDetailCommandExecuted()
         {
-            _navigationService.Navigate<DetailViewModel>();
+            _navigationService.NavigateAsync<DetailViewModel>();
         }
 
         private void ShowDetailRightCommandExecuted()
         {
-            _navigationService.Navigate<DetailRightViewModel>();
+            _navigationService.NavigateAsync<DetailRightViewModel>();
         }
     }
 }

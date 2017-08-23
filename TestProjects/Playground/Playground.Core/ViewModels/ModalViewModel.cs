@@ -12,11 +12,11 @@ namespace Playground.Core.ViewModels
         {
             _navigationService = navigationService;
 
-            ShowTabsCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<TabsRootViewModel>());
+            ShowTabsCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<TabsRootViewModel>());
 
             CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
 
-            ShowNestedModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<NestedModalViewModel>());
+            ShowNestedModalCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<NestedModalViewModel>());
         }
 
         public override System.Threading.Tasks.Task Initialize()

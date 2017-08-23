@@ -19,17 +19,17 @@ namespace Playground.Core.ViewModels
 
             ShowModalCommand = new MvxAsyncCommand(async () => ShowViewModel<ModalViewModel>());
 
-            ShowModalNavCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalNavViewModel>());
+            ShowModalNavCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<ModalNavViewModel>());
 
-            ShowTabsCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<TabsRootViewModel>());
+            ShowTabsCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<TabsRootViewModel>());
 
-            ShowSplitCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SplitRootViewModel>());
+            ShowSplitCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<SplitRootViewModel>());
 
-            ShowOverrideAttributeCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<OverrideAttributeViewModel>());
+            ShowOverrideAttributeCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<OverrideAttributeViewModel>());
 
-            ShowSheetCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SheetViewModel>());
+            ShowSheetCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<SheetViewModel>());
 
-            ShowWindowCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<WindowViewModel>());
+            ShowWindowCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<WindowViewModel>());
 
             _counter = 3;
         }

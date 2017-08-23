@@ -14,11 +14,11 @@ namespace Playground.Core.ViewModels
         {
             _navigationService = navigationService;
 
-            OpenChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel>());
+            OpenChildCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<ChildViewModel>());
 
-            OpenModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalViewModel>());
+            OpenModalCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<ModalViewModel>());
 
-            OpenNavModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalNavViewModel>());
+            OpenNavModalCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<ModalNavViewModel>());
 
             CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
         }

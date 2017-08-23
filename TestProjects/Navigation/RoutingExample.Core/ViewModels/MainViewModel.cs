@@ -31,7 +31,7 @@ namespace RoutingExample.Core.ViewModels
             {
                 return _showACommand ?? (_showACommand = new MvxAsyncCommand(async () =>
                 {
-                    await _navigationService.Navigate<ViewModelA, string, string>("test");
+                    await _navigationService.NavigateAsync<ViewModelA, string, string>("test");
                     //await _navigationService.Navigate<TestAViewModel, User>(new User("MvvmCross", "Test"));
 
                     //await _navigationService.Navigate("mvx://test/a");
@@ -48,7 +48,7 @@ namespace RoutingExample.Core.ViewModels
                 return _showBCommand ?? (_showBCommand = new MvxAsyncCommand(async () =>
                 {
                     //var result = await _navigationService.Navigate<User, User>("mvx://test/?id=" + Guid.NewGuid().ToString("N"), new User("MvvmCross2", "Test2"));
-                    var result = await _navigationService.Navigate<TestBViewModel, User, User>(new User("MvvmCross", "Test"));
+                    var result = await _navigationService.NavigateAsync<TestBViewModel, User, User>(new User("MvvmCross", "Test"));
                     var test = result?.FirstName;
                     //await _navigationService.Close(this, new User("Close parent", "Test"));
                 }));
@@ -63,7 +63,7 @@ namespace RoutingExample.Core.ViewModels
             {
                 return _showDialogACommand ?? (_showDialogACommand = new MvxAsyncCommand(async () =>
                 {
-                    var result = await _navigationService.Navigate<ViewModelDialogA, IMvxViewModel, string>(this);
+                    var result = await _navigationService.NavigateAsync<ViewModelDialogA, IMvxViewModel, string>(this);
                 }));
             }
         }
@@ -76,7 +76,7 @@ namespace RoutingExample.Core.ViewModels
             {
                 return _showRandomCommand ?? (_showRandomCommand = new MvxAsyncCommand(async () =>
                 {
-                    await _navigationService.Navigate("mvx://random");
+                    await _navigationService.NavigateAsync("mvx://random");
                 }));
             }
         }
@@ -89,7 +89,7 @@ namespace RoutingExample.Core.ViewModels
             {
                 return _showPrePopCommand ?? (_showPrePopCommand = new MvxAsyncCommand(async () =>
                 {
-                    await _navigationService.Navigate("mvx://prepop");
+                    await _navigationService.NavigateAsync("mvx://prepop");
                 }));
             }
         }

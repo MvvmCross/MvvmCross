@@ -20,7 +20,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core
         /// </summary>
         public void Start(object hint = null)
         {
-            _navigationService.Navigate<CenterPanelViewModel>();
+            _navigationService.NavigateAsync<CenterPanelViewModel>();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace RoutingExample.Core.ViewModels
         }
 
         public IMvxAsyncCommand OpenViewModelBCommand => new MvxAsyncCommand(
-            async () => await Mvx.Resolve<IMvxNavigationService>().Navigate<TestBViewModel, User, User>(new User($"To B from {GetHashCode()}", "Something")));
+            async () => await Mvx.Resolve<IMvxNavigationService>().NavigateAsync<TestBViewModel, User, User>(new User($"To B from {GetHashCode()}", "Something")));
 
         public void Init()
         {

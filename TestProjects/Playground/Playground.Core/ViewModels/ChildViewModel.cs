@@ -14,9 +14,9 @@ namespace Playground.Core.ViewModels
 
             CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
 
-            ShowSecondChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SecondChildViewModel>());
+            ShowSecondChildCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<SecondChildViewModel>());
 
-            ShowRootCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<RootViewModel>());
+            ShowRootCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<RootViewModel>());
         }
 
         public override System.Threading.Tasks.Task Initialize()
