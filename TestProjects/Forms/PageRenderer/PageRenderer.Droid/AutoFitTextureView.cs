@@ -41,10 +41,15 @@ public class AutoFitTextureView : TextureView
             int height = MeasureSpec.GetSize(heightMeasureSpec);
             if (0 == mRatioWidth || 0 == mRatioHeight) {
                 SetMeasuredDimension(width, height);
-            } else {
-                if (width < (float)height * mRatioWidth / (float)mRatioHeight) {
+            }
+            else
+            {
+                if (width < (float)height * mRatioWidth / (float)mRatioHeight)
+                {
                     SetMeasuredDimension(width, width * mRatioHeight / mRatioWidth);
-                } else {
+                }
+                else
+                {
                     SetMeasuredDimension(height * mRatioWidth / mRatioHeight, height);
                 }
             }
