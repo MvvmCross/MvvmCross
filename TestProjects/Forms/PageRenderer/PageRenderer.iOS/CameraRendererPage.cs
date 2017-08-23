@@ -31,46 +31,55 @@ namespace PageRendererExample.UI.iOS
         {
             base.OnElementChanged(e);
 
-            if (e.OldElement != null || Element == null) {
+            if (e.OldElement != null || Element == null)
+            {
                 return;
             }
 
-            try {
+            try
+            {
                 SetupUserInterface();
                 BindViewModel();
                 SetupEventHandlers();
                 SetupLiveCameraStream();
                 AuthorizeCameraUse();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Debug.WriteLine(@"          ERROR: ", ex.Message);
             }
         }
 
         private void SetupUserInterface()
         {
-            _liveCameraStream = new UIView {
+            _liveCameraStream = new UIView
+            {
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
 
-            _takePhotoButton = new UIButton {
+            _takePhotoButton = new UIButton
+            {
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
 
             _takePhotoButton.SetBackgroundImage(UIImage.FromFile("TakePhotoButton.png"), UIControlState.Normal);
 
-            _toggleCameraButton = new UIButton {
+            _toggleCameraButton = new UIButton
+            {
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
 
             _toggleCameraButton.SetBackgroundImage(UIImage.FromFile("ToggleCameraButton.png"), UIControlState.Normal);
 
-            _toggleFlashButton = new UIButton {
+            _toggleFlashButton = new UIButton
+            {
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
             _toggleFlashButton.SetBackgroundImage(UIImage.FromFile("NoFlashButton.png"), UIControlState.Normal);
 
-            _cancelButton = new UIButton(UIButtonType.Custom) {
-                TranslatesAutoresizingMaskIntoConstraints = false 
+            _cancelButton = new UIButton(UIButtonType.Custom)
+            {
+                TranslatesAutoresizingMaskIntoConstraints = false
             };
             _cancelButton.SetTitle("Cancel", UIControlState.Normal);
             _cancelButton.SetTitleColor(UIColor.White, UIControlState.Normal);
@@ -173,15 +182,12 @@ namespace PageRendererExample.UI.iOS
             var device = _captureDeviceInput.Device;
 
             NSError error = null;
-            if (device.HasFlash) {
+            if (device.HasFlash)
+            {
                 if (device.FlashMode == AVCaptureFlashMode.On)
-                {
                     error = SetFlashOff(device);
-                }
                 else
-                {
                     error = SetFlashOn(device);
-                }
             }
         }
 
@@ -209,8 +215,10 @@ namespace PageRendererExample.UI.iOS
         {
             var devices = AVCaptureDevice.DevicesWithMediaType(AVMediaType.Video);
 
-            foreach (var device in devices) {
-                if (device.Position == orientation) {
+            foreach (var device in devices)
+            {
+                if (device.Position == orientation)
+                {
                     return device;
                 }
             }
@@ -222,14 +230,17 @@ namespace PageRendererExample.UI.iOS
         {
             base.ViewWillTransitionToSize(toSize, coordinator);
 
-            if (_videoPreviewLayer.Connection == null) {
+            if (_videoPreviewLayer.Connection == null)
+            {
                 return;
             }
 
-            if (_videoPreviewLayer.Connection.SupportsVideoOrientation) {
+            if (_videoPreviewLayer.Connection.SupportsVideoOrientation)
+            {
                 var orientation = UIDevice.CurrentDevice.Orientation;
 
-                switch (orientation) {
+                switch (orientation)
+                {
                     case UIDeviceOrientation.Portrait:
                         _videoPreviewLayer.Connection.VideoOrientation = AVCaptureVideoOrientation.Portrait;
                         break;
@@ -261,7 +272,8 @@ namespace PageRendererExample.UI.iOS
             _captureSession = new AVCaptureSession();
 
             var viewLayer = _liveCameraStream.Layer;
-            _videoPreviewLayer = new AVCaptureVideoPreviewLayer(_captureSession) {
+            _videoPreviewLayer = new AVCaptureVideoPreviewLayer(_captureSession)
+            {
                 Frame = _liveCameraStream.Bounds
             };
 
@@ -275,7 +287,8 @@ namespace PageRendererExample.UI.iOS
 
             var dictionary = new NSMutableDictionary();
             dictionary[AVVideo.CodecKey] = new NSNumber((int)AVVideoCodec.JPEG);
-            _stillImageOutput = new AVCaptureStillImageOutput {
+            _stillImageOutput = new AVCaptureStillImageOutput
+            {
                 OutputSettings = new NSDictionary()
             };
 
@@ -287,15 +300,20 @@ namespace PageRendererExample.UI.iOS
         private void ConfigureCameraForDevice(AVCaptureDevice device)
         {
             NSError error = null;
-            if (device.IsFocusModeSupported(AVCaptureFocusMode.ContinuousAutoFocus)) {
+            if (device.IsFocusModeSupported(AVCaptureFocusMode.ContinuousAutoFocus))
+            {
                 device.LockForConfiguration(out error);
                 device.FocusMode = AVCaptureFocusMode.ContinuousAutoFocus;
                 device.UnlockForConfiguration();
-            } else if (device.IsExposureModeSupported(AVCaptureExposureMode.ContinuousAutoExposure)) {
+            }
+            else if (device.IsExposureModeSupported(AVCaptureExposureMode.ContinuousAutoExposure))
+            {
                 device.LockForConfiguration(out error);
                 device.ExposureMode = AVCaptureExposureMode.ContinuousAutoExposure;
                 device.UnlockForConfiguration();
-            } else if (device.IsWhiteBalanceModeSupported(AVCaptureWhiteBalanceMode.ContinuousAutoWhiteBalance)) {
+            }
+            else if (device.IsWhiteBalanceModeSupported(AVCaptureWhiteBalanceMode.ContinuousAutoWhiteBalance))
+            {
                 device.LockForConfiguration(out error);
                 device.WhiteBalanceMode = AVCaptureWhiteBalanceMode.ContinuousAutoWhiteBalance;
                 device.UnlockForConfiguration();
@@ -305,7 +323,8 @@ namespace PageRendererExample.UI.iOS
         private async void AuthorizeCameraUse()
         {
             var authorizationStatus = AVCaptureDevice.GetAuthorizationStatus(AVMediaType.Video);
-            if (authorizationStatus != AVAuthorizationStatus.Authorized) {
+            if (authorizationStatus != AVAuthorizationStatus.Authorized)
+            {
                 await AVCaptureDevice.RequestAccessForMediaTypeAsync(AVMediaType.Video);
             }
         }
