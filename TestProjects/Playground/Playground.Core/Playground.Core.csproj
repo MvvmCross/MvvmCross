@@ -32,6 +32,7 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ViewModels\WindowChildViewModel.cs" />
     <Compile Include="ViewModels\RootViewModel.cs" />
     <Compile Include="ViewModels\ChildViewModel.cs" />
     <Compile Include="ViewModels\ModalNavViewModel.cs" />

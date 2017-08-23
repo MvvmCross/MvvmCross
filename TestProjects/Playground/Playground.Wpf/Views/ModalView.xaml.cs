@@ -7,8 +7,8 @@ namespace Playground.Wpf.Views
     /// <summary>
     /// Interaction logic for ModalView.xaml
     /// </summary>
-    [MvxWindowPresentation(ViewModelType = typeof(ModalViewModel), Identifier = nameof(ModalView), Modal = true)]
-    public partial class ModalView : MvxWpfView
+    [MvxWindowPresentation(Identifier = nameof(ModalView), Modal = true)]
+    public partial class ModalView : MvxWpfView<ModalViewModel>
     {
         public ModalView()
         {
