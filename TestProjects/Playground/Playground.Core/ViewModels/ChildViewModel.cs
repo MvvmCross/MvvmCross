@@ -12,7 +12,7 @@ namespace Playground.Core.ViewModels
         {
             _navigationService = navigationService;
 
-            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
+            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.CloseAsync(this));
 
             ShowSecondChildCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<SecondChildViewModel>());
 

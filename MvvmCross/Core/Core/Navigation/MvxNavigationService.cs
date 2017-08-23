@@ -163,7 +163,7 @@ namespace MvvmCross.Core.Navigation
             return request;
         }
 
-        public virtual Task<bool> CanNavigate(string path)
+        public virtual Task<bool> CanNavigateAsync(string path)
         {
             KeyValuePair<Regex, Type> entry;
 
@@ -362,7 +362,7 @@ namespace MvvmCross.Core.Navigation
             return ViewDispatcher.ChangePresentation(hint);
         }
 
-        public virtual Task<bool> Close(IMvxViewModel viewModel)
+        public virtual Task<bool> CloseAsync(IMvxViewModel viewModel)
         {
             var args = new NavigateEventArgs(viewModel);
             OnBeforeClose(this, args);
@@ -381,7 +381,7 @@ namespace MvvmCross.Core.Navigation
 
             try
             {
-                var closeResult = await Close(viewModel);
+                var closeResult = await CloseAsync(viewModel);
                 if (closeResult)
                 {
                     _tcs?.TrySetResult(result);

@@ -45,9 +45,9 @@ namespace MvvmCross.Core.Navigation
         /// </summary>
         /// <param name="path">URI to route</param>
         /// <returns>True if the uri can be routed or false if it cannot.</returns>
-        Task<bool> CanNavigate(string path);
+        Task<bool> CanNavigateAsync(string path);
 
-        Task<bool> Close(IMvxViewModel viewModel);
+        Task<bool> CloseAsync(IMvxViewModel viewModel);
         Task<bool> CloseAsync<TResult>(IMvxViewModelResult<TResult> viewModel, TResult result);
 
         bool ChangePresentation(MvxPresentationHint hint);

@@ -78,7 +78,7 @@ namespace MvvmCross.Test.Navigation
         {
             var url = "mvx://fail/?id=" + Guid.NewGuid();
 
-            var canNavigate = await RoutingService.CanNavigate(url);
+            var canNavigate = await RoutingService.CanNavigateAsync(url);
             Assert.That(canNavigate, Is.False);
 
             Assert.CatchAsync(async () =>

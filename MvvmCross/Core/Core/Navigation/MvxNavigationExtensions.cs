@@ -15,7 +15,7 @@ namespace MvvmCross.Core.Navigation
         /// <returns>True if the uri can be routed or false if it cannot.</returns>
         public static Task<bool> CanNavigate(this IMvxNavigationService navigationService, Uri path)
         {
-            return navigationService.CanNavigate(path.ToString());
+            return navigationService.CanNavigateAsync(path.ToString());
         }
 
         /// <summary>

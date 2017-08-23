@@ -20,7 +20,7 @@ namespace Playground.Core.ViewModels
 
             OpenNavModalCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<ModalNavViewModel>());
 
-            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
+            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.CloseAsync(this));
         }
 
         public override async Task Initialize()

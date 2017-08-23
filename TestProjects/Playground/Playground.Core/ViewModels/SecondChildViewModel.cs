@@ -14,7 +14,7 @@ namespace Playground.Core.ViewModels
 
             ShowNestedChildCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<NestedChildViewModel>());
 
-            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
+            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.CloseAsync(this));
         }
 
         public IMvxAsyncCommand ShowNestedChildCommand { get; private set; }

@@ -46,7 +46,7 @@ namespace RoutingExample.Core.ViewModels
 
         public MvxCommand CloseHostCommand => new MvxCommand(async () =>
         {
-            await _navigationService.Close(viewmodel);
+            await _navigationService.CloseAsync(viewmodel);
         });
 
         public ViewModelDialogA(IMvxNavigationService navigationService)

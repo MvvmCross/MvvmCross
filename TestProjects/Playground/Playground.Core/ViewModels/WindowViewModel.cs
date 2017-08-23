@@ -13,7 +13,7 @@ namespace Playground.Core.ViewModels
         {
             _navigationService = navigationService;
 
-            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
+            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.CloseAsync(this));
         }
 
         public IMvxAsyncCommand CloseCommand { get; private set; }
