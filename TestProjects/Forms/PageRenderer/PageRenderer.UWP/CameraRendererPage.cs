@@ -194,7 +194,6 @@ namespace PageRendererExample.WindowsUWP
                 {
                     Debug.WriteLine(@"          Error: ", ex.Message);
                 }
-              
             }
 
             if (_mediaCapture != null)

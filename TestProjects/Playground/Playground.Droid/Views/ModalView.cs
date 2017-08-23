@@ -15,7 +15,6 @@ namespace Playground.Droid.Views
     {
         public ModalView()
         {
-
         }
 
         protected ModalView(IntPtr javaReference, JniHandleOwnership transfer)

@@ -15,6 +15,5 @@ namespace Example.Droid
     [Activity(Label = "ExampleApplicationActivity", ScreenOrientation=ScreenOrientation.Portrait)]
     public class ExampleApplicationActivity : MvxFormsApplicationActivity
     {
-        
     }
 }

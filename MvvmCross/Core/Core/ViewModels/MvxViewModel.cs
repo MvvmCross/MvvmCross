@@ -78,7 +78,6 @@ namespace MvvmCross.Core.ViewModels
 
         public virtual void Prepare()
         {
-            
         }
 
         public virtual Task Initialize()

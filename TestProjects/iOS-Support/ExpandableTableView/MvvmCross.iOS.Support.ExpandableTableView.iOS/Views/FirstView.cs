@@ -101,7 +101,6 @@ namespace MvvmCross.iOS.Support.ExpandableTableView.iOS.Views
         {
             var indexes = collapsedSectionIndexes;
             // you can handle on section collapsed
-
         }
     }
 }
