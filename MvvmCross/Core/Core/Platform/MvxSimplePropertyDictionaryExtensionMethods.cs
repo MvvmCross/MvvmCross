@@ -13,6 +13,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
+using System.Globalization;
 
 namespace MvvmCross.Core.Platform
 {
@@ -24,7 +25,7 @@ namespace MvvmCross.Core.Platform
             if (input == null)
                 return new Dictionary<string, string>();
 
-            return input.ToDictionary(x => x.Key, x => x.Value?.ToString());
+            return input.ToDictionary(x => x.Key, x => x.Value?.ToStringInvariant());
         }
 
         public static IDictionary<string, string> SafeGetData(this IMvxBundle bundle)
@@ -148,13 +149,24 @@ namespace MvvmCross.Core.Platform
             try
             {
                 var value = propertyInfo.GetValue(input, new object[] { });
-
-                return value?.ToString();
+                return value?.ToStringInvariant();
             }
             catch (Exception suspectedMethodAccessException)
             {
                 throw suspectedMethodAccessException.MvxWrap(
                     "Problem accessing object - most likely this is caused by an anonymous object being generated as Internal - please see http://stackoverflow.com/questions/8273399/anonymous-types-and-get-accessors-on-wp7-1");
+            }
+        }
+
+        private static string ToStringInvariant(this object value)
+        {
+            switch (value)
+            {
+                case DateTime dateTime: return dateTime.ToString("o", CultureInfo.InvariantCulture);
+                case double doubleValue: return doubleValue.ToString("r", CultureInfo.InvariantCulture);
+                case float floatValue: return floatValue.ToString("r", CultureInfo.InvariantCulture);
+                case IFormattable formattableValue: return formattableValue.ToString(null, CultureInfo.InvariantCulture);
+                default: return value.ToString();
             }
         }
     }
