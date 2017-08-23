@@ -3,12 +3,12 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Core.Views;
 using Xamarin.Forms;
 using Windows.ApplicationModel.Activation;
-using XamlControls = Windows.UI.Xaml.Controls;
 using MvvmCross.Uwp.Views;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Core;
 using MvvmCross.Uwp.Platform;
 using MvvmCross.Forms.Uwp.Presenters;
+using XamlControls = Windows.UI.Xaml.Controls;
 
 namespace Example.UWP
 {
