@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MvvmCross.Wpf.Views.Presenters
 {
@@ -45,13 +46,15 @@ namespace MvvmCross.Wpf.Views.Presenters
             }
         }
 
-        private readonly Dictionary<Window, Stack<FrameworkElement>> _frameworkElementsDictionary = new Dictionary<Window, Stack<FrameworkElement>>();
+        private readonly Dictionary<ContentControl, Stack<FrameworkElement>> _frameworkElementsDictionary = new Dictionary<ContentControl, Stack<FrameworkElement>>();
         private IMvxWpfViewLoader _loader;
 
-        public MvxWpfViewPresenter(Window window)
+        public MvxWpfViewPresenter(ContentControl contentControl) // Accept ContentControl only for the first host view 
         {
-            window.Closed += Window_Closed;
-            _frameworkElementsDictionary.Add(window, new Stack<FrameworkElement>());
+            if (contentControl is Window window)
+                window.Closed += Window_Closed;
+
+            _frameworkElementsDictionary.Add(contentControl, new Stack<FrameworkElement>());
         }
 
         protected virtual void RegisterAttributeTypes()
@@ -84,14 +87,14 @@ namespace MvvmCross.Wpf.Views.Presenters
             Show(view, request);
         }
 
-        protected virtual void Show(FrameworkElement view, MvxViewModelRequest request)
+        protected virtual void Show(FrameworkElement element, MvxViewModelRequest request)
         {
-            var attribute = GetAttributeForViewModel(request.ViewModelType);
+            var attribute = GetPresentationAttributes(element);
 
             if (!AttributeTypesToShowMethodDictionary.TryGetValue(attribute.GetType(), out Action<FrameworkElement, MvxBasePresentationAttribute, MvxViewModelRequest> showAction))
                 throw new KeyNotFoundException($"The type {attribute.GetType().Name} is not configured in the presenter dictionary");
 
-            showAction.Invoke(view, attribute, request);
+            showAction.Invoke(element, attribute, request);
         }
 
         protected virtual void ShowWindow(FrameworkElement element, MvxWindowPresentationAttribute attribute, MvxViewModelRequest request)
@@ -141,10 +144,15 @@ namespace MvvmCross.Wpf.Views.Presenters
 
         protected virtual void ShowContentView(FrameworkElement element, MvxContentPresentationAttribute attribute, MvxViewModelRequest request)
         {
-            var window = _frameworkElementsDictionary.Keys.FirstOrDefault(w => (w as MvxWindow)?.Identifier == attribute.WindowIdentifier) ?? _frameworkElementsDictionary.Keys.Last();
-            _frameworkElementsDictionary[window].Push(element);
-            window.Content = element;
+            var contentControl = _frameworkElementsDictionary.Keys.FirstOrDefault(w => (w as MvxWindow)?.Identifier == attribute.WindowIdentifier) ?? _frameworkElementsDictionary.Keys.Last();
+
+            if (!attribute.StackNavigation && _frameworkElementsDictionary[contentControl].Any())
+                _frameworkElementsDictionary[contentControl].Pop(); // Close previous view
+
+            _frameworkElementsDictionary[contentControl].Push(element);
+            contentControl.Content = element;
         }
+
 
         public override void Close(IMvxViewModel toClose)
         {
@@ -162,17 +170,21 @@ namespace MvvmCross.Wpf.Views.Presenters
         protected virtual bool CloseWindow(IMvxViewModel toClose)
         {
             var item = _frameworkElementsDictionary.FirstOrDefault(i => (i.Key as IMvxWpfView)?.ViewModel == toClose);
-            var window = item.Key;
-            window.Close();
-            _frameworkElementsDictionary.Remove(window);
+            var contentControl = item.Key;
+            if (contentControl is Window window)
+            {
+                _frameworkElementsDictionary.Remove(window);
+                window.Close();
+                return true;
+            }
 
-            return true;
+            return false;
         }
 
         protected virtual bool CloseContentView(IMvxViewModel toClose)
         {
             var item = _frameworkElementsDictionary.FirstOrDefault(i => i.Value.Any() && (i.Value.Peek() as IMvxWpfView)?.ViewModel == toClose);
-            var window = item.Key;
+            var contentControl = item.Key;
             var elements = item.Value;
 
             if (elements.Any())
@@ -180,32 +192,42 @@ namespace MvvmCross.Wpf.Views.Presenters
 
             if (elements.Any())
             {
-                window.Content = elements.Peek();
+                contentControl.Content = elements.Peek();
                 return true;
             }
 
             // Close window if no contents
-            _frameworkElementsDictionary.Remove(window);
-            window.Close();
+            if (contentControl is Window window)
+            {
+                _frameworkElementsDictionary.Remove(window);
+                window.Close();
+                return true;
+            }
 
-            return true;
+            return false;
         }
 
-        protected virtual MvxBasePresentationAttribute GetAttributeForViewModel(Type viewModelType)
+        protected virtual MvxBasePresentationAttribute GetPresentationAttributes(FrameworkElement element)
         {
-            var viewType = ViewsContainer.GetViewType(viewModelType);
+            if (element is IMvxOverridePresentationAttribute view)
+            {
+                var presentationAttribute = view.PresentationAttribute();
+                if (presentationAttribute != null)
+                    return presentationAttribute;
+            }
 
+            var viewType = element.GetType();
             if (viewType.HasBasePresentationAttribute())
                 return viewType.GetBasePresentationAttribute();
 
             if (viewType.IsSubclassOf(typeof(Window)))
             {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. " +
                     $"Assuming window presentation");
                 return new MvxWindowPresentationAttribute();
             }
 
-            MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+            MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. " +
                     $"Assuming content presentation");
             return new MvxContentPresentationAttribute();
         }
