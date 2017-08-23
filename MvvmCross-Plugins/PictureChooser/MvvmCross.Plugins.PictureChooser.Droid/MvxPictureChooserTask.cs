@@ -1,4 +1,4 @@
-﻿// MvxPictureChooserTask.cs
+// MvxPictureChooserTask.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -22,11 +22,12 @@ using MvvmCross.Platform.Platform;
 using Path = System.IO.Path;
 using Stream = System.IO.Stream;
 using Uri = Android.Net.Uri;
+using ExifInterface = Android.Support.Media.ExifInterface;
 
 namespace MvvmCross.Plugins.PictureChooser.Droid
 {
     [Preserve(AllMembers = true)]
-	public class MvxPictureChooserTask
+    public class MvxPictureChooserTask
         : MvxAndroidTask, IMvxPictureChooserTask
     {
         private Uri _cachedUriLocation;
@@ -103,7 +104,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
 
             _currentRequestParameters = new RequestParameters(maxPixelDimension, percentQuality, pictureAvailable,
                                                               assumeCancelled);
-            StartActivityForResult((int) pickId, intent);
+            StartActivityForResult((int)pickId, intent);
         }
 
         protected override void ProcessMvxIntentResult(MvxIntentResultEventArgs result)
@@ -112,7 +113,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
 
             Uri uri;
 
-            switch ((MvxIntentRequestCode) result.RequestCode)
+            switch ((MvxIntentRequestCode)result.RequestCode)
             {
                 case MvxIntentRequestCode.PickFromFile:
                     uri = result.Data?.Data;
@@ -196,7 +197,7 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
         {
             ContentResolver contentResolver = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.ContentResolver;
             var maxDimensionSize = GetMaximumDimension(contentResolver, uri);
-            var sampleSize = (int) Math.Ceiling(maxDimensionSize / (double) _currentRequestParameters.MaxPixelDimension);
+            var sampleSize = (int)Math.Ceiling(maxDimensionSize / (double)_currentRequestParameters.MaxPixelDimension);
             if (sampleSize < 1)
             {
                 // this shouldn't happen, but if it does... then trace the error and set sampleSize to 1
@@ -237,9 +238,9 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
             using (var inputStream = contentResolver.OpenInputStream(uri))
             {
                 var optionsJustBounds = new BitmapFactory.Options
-                    {
-                        InJustDecodeBounds = true
-                    };
+                {
+                    InJustDecodeBounds = true
+                };
                 var metadataResult = BitmapFactory.DecodeStream(inputStream, null, optionsJustBounds);
                 var maxDimensionSize = Math.Max(optionsJustBounds.OutWidth, optionsJustBounds.OutHeight);
                 return maxDimensionSize;
@@ -251,27 +252,20 @@ namespace MvvmCross.Plugins.PictureChooser.Droid
             if (bitmap == null)
                 return null;
 
-            var exif = new ExifInterface(GetRealPathFromUri(contentResolver, uri));
-            var rotation = exif.GetAttributeInt(ExifInterface.TagOrientation, (int)Orientation.Normal);
-            var rotationInDegrees = ExifToDegrees(rotation);
-            if (rotationInDegrees == 0)
-                return bitmap;
-
-            using (var matrix = new Matrix())
+            using (var inputStream = contentResolver.OpenInputStream(uri))
             {
-                matrix.PreRotate(rotationInDegrees);
-                return Bitmap.CreateBitmap(bitmap, 0, 0, bitmap.Width, bitmap.Height, matrix, true);
-            }
-        }
+                var exifInterface = new ExifInterface(inputStream);
+                var orientation = exifInterface.GetAttributeInt(ExifInterface.TagOrientation, (int)Orientation.Normal);
 
-        private string GetRealPathFromUri(ContentResolver contentResolver, Uri uri)
-        {
-            var proj = new string[] { MediaStore.Images.ImageColumns.Data };
-            using (var cursor = contentResolver.Query(uri, proj, null, null, null))
-            {
-                var columnIndex = cursor.GetColumnIndexOrThrow(MediaStore.Images.ImageColumns.Data);
-                cursor.MoveToFirst();
-                return cursor.GetString(columnIndex);
+                var rotationInDegrees = ExifToDegrees(orientation);
+                if (rotationInDegrees == 0)
+                    return bitmap;
+
+                using (var matrix = new Matrix())
+                {
+                    matrix.PreRotate(rotationInDegrees);
+                    return Bitmap.CreateBitmap(bitmap, 0, 0, bitmap.Width, bitmap.Height, matrix, true);
+                }
             }
         }
 
