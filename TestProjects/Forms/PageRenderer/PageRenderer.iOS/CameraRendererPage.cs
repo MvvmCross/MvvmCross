@@ -154,11 +154,9 @@ namespace PageRendererExample.UI.iOS
         private void ToggleFrontBackCamera(object sender, EventArgs e)
         {
             var devicePosition = _captureDeviceInput.Device.Position;
-            if (devicePosition == AVCaptureDevicePosition.Front) {
-                devicePosition = AVCaptureDevicePosition.Back;
-            } else {
-                devicePosition = AVCaptureDevicePosition.Front;
-            }
+            devicePosition = devicePosition == AVCaptureDevicePosition.Front ?
+                AVCaptureDevicePosition.Back :
+                AVCaptureDevicePosition.Front;
 
             var device = GetCameraForOrientation(devicePosition);
             ConfigureCameraForDevice(device);
@@ -176,18 +174,35 @@ namespace PageRendererExample.UI.iOS
 
             NSError error = null;
             if (device.HasFlash) {
-                if (device.FlashMode == AVCaptureFlashMode.On) {
-                    device.LockForConfiguration(out error);
-                    device.FlashMode = AVCaptureFlashMode.Off;
-                    device.UnlockForConfiguration();
-                    _toggleFlashButton.SetBackgroundImage(UIImage.FromFile("NoFlashButton.png"), UIControlState.Normal);
-                } else {
-                    device.LockForConfiguration(out error);
-                    device.FlashMode = AVCaptureFlashMode.On;
-                    device.UnlockForConfiguration();
-                    _toggleFlashButton.SetBackgroundImage(UIImage.FromFile("FlashButton.png"), UIControlState.Normal);
+                if (device.FlashMode == AVCaptureFlashMode.On)
+                {
+                    error = SetFlashOff(device);
+                }
+                else
+                {
+                    error = SetFlashOn(device);
                 }
             }
+        }
+
+        private NSError SetFlashOn(AVCaptureDevice device)
+        {
+            NSError error;
+            device.LockForConfiguration(out error);
+            device.FlashMode = AVCaptureFlashMode.On;
+            device.UnlockForConfiguration();
+            _toggleFlashButton.SetBackgroundImage(UIImage.FromFile("FlashButton.png"), UIControlState.Normal);
+            return error;
+        }
+
+        private NSError SetFlashOff(AVCaptureDevice device)
+        {
+            NSError error;
+            device.LockForConfiguration(out error);
+            device.FlashMode = AVCaptureFlashMode.Off;
+            device.UnlockForConfiguration();
+            _toggleFlashButton.SetBackgroundImage(UIImage.FromFile("NoFlashButton.png"), UIControlState.Normal);
+            return error;
         }
 
         private AVCaptureDevice GetCameraForOrientation(AVCaptureDevicePosition orientation)
