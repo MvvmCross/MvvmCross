@@ -35,10 +35,10 @@ namespace MvvmCross.Core.Navigation
         /// </summary>
         /// <param name="path">URI to route</param>
         /// <returns>A task to await upon</returns>
-        Task Navigate(string path, IMvxBundle presentationBundle = null);
-        Task Navigate<TParameter>(string path, TParameter param, IMvxBundle presentationBundle = null);
-        Task<TResult> Navigate<TResult>(string path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
-        Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task NavigateAsync(string path, IMvxBundle presentationBundle = null);
+        Task NavigateAsync<TParameter>(string path, TParameter param, IMvxBundle presentationBundle = null);
+        Task<TResult> NavigateAsync<TResult>(string path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<TResult> NavigateAsync<TParameter, TResult>(string path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Verifies if the provided Uri can be routed to a ViewModel request.

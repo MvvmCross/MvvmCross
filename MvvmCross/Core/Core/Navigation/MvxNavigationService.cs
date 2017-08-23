@@ -170,7 +170,7 @@ namespace MvvmCross.Core.Navigation
             return Task.FromResult(TryGetRoute(path, out entry));
         }
 
-        protected virtual async Task Navigate(MvxViewModelRequest request, IMvxViewModel viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
+        protected virtual async Task NavigateAsync(MvxViewModelRequest request, IMvxViewModel viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
@@ -182,7 +182,7 @@ namespace MvvmCross.Core.Navigation
             OnAfterNavigate(this, args);
         }
 
-        protected virtual async Task Navigate<TParameter>(MvxViewModelRequest request, IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
+        protected virtual async Task NavigateAsync<TParameter>(MvxViewModelRequest request, IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
@@ -194,7 +194,7 @@ namespace MvvmCross.Core.Navigation
             OnAfterNavigate(this, args);
         }
 
-        protected virtual async Task<TResult> Navigate<TResult>(MvxViewModelRequest request, IMvxViewModelResult<TResult> viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
+        protected virtual async Task<TResult> NavigateAsync<TResult>(MvxViewModelRequest request, IMvxViewModelResult<TResult> viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
@@ -227,7 +227,7 @@ namespace MvvmCross.Core.Navigation
             }
         }
 
-        protected virtual async Task<TResult> Navigate<TParameter, TResult>(MvxViewModelRequest request, IMvxViewModel<TParameter, TResult> viewModel, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
+        protected virtual async Task<TResult> NavigateAsync<TParameter, TResult>(MvxViewModelRequest request, IMvxViewModel<TParameter, TResult> viewModel, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
@@ -264,25 +264,25 @@ namespace MvvmCross.Core.Navigation
         public virtual async Task NavigateAsync(string path, IMvxBundle presentationBundle = null)
         {
             var request = await NavigationRouteRequest(path, presentationBundle).ConfigureAwait(false);
-            await Navigate(request, request.ViewModelInstance, presentationBundle).ConfigureAwait(false);
+            await NavigateAsync(request, request.ViewModelInstance, presentationBundle).ConfigureAwait(false);
         }
 
         public virtual async Task NavigateAsync<TParameter>(string path, TParameter param, IMvxBundle presentationBundle = null)
         {
             var request = await NavigationRouteRequest(path, presentationBundle).ConfigureAwait(false);
-            await Navigate<TParameter>(request, (IMvxViewModel<TParameter>)request.ViewModelInstance, param, presentationBundle).ConfigureAwait(false);
+            await NavigateAsync(request, (IMvxViewModel<TParameter>)request.ViewModelInstance, param, presentationBundle).ConfigureAwait(false);
         }
 
         public virtual async Task<TResult> NavigateAsync<TResult>(string path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             var request = await NavigationRouteRequest(path, presentationBundle).ConfigureAwait(false);
-            return await Navigate<TResult>(request, (IMvxViewModelResult<TResult>)request.ViewModelInstance, presentationBundle, cancellationToken).ConfigureAwait(false);
+            return await NavigateAsync(request, (IMvxViewModelResult<TResult>)request.ViewModelInstance, presentationBundle, cancellationToken).ConfigureAwait(false);
         }
 
         public virtual async Task<TResult> NavigateAsync<TParameter, TResult>(string path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             var request = await NavigationRouteRequest(path, presentationBundle).ConfigureAwait(false);
-            return await Navigate<TParameter, TResult>(request, (IMvxViewModel<TParameter, TResult>)request.ViewModelInstance, param, presentationBundle, cancellationToken).ConfigureAwait(false);
+            return await NavigateAsync(request, (IMvxViewModel<TParameter, TResult>)request.ViewModelInstance, param, presentationBundle, cancellationToken).ConfigureAwait(false);
         }
 
         public virtual async Task NavigateAsync<TViewModel>(IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel
@@ -292,7 +292,7 @@ namespace MvvmCross.Core.Navigation
                 PresentationValues = presentationBundle?.SafeGetData()
             };
             request.ViewModelInstance = ViewModelLoader.LoadViewModel(request, null);
-            await Navigate(request, request.ViewModelInstance, presentationBundle).ConfigureAwait(false);
+            await NavigateAsync(request, request.ViewModelInstance, presentationBundle).ConfigureAwait(false);
         }
 
         public virtual async Task NavigateAsync<TViewModel, TParameter>(TParameter param, IMvxBundle presentationBundle = null)
@@ -303,7 +303,7 @@ namespace MvvmCross.Core.Navigation
                 PresentationValues = presentationBundle?.SafeGetData()
             };
             request.ViewModelInstance = (IMvxViewModel<TParameter>)ViewModelLoader.LoadViewModel(request, null);
-            await Navigate<TParameter>(request, (IMvxViewModel<TParameter>)request.ViewModelInstance, param, presentationBundle).ConfigureAwait(false);
+            await NavigateAsync(request, (IMvxViewModel<TParameter>)request.ViewModelInstance, param, presentationBundle).ConfigureAwait(false);
         }
 
         public virtual async Task<TResult> NavigateAsync<TViewModel, TResult>(IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -314,7 +314,7 @@ namespace MvvmCross.Core.Navigation
                 PresentationValues = presentationBundle?.SafeGetData()
             };
             request.ViewModelInstance = (IMvxViewModelResult<TResult>)ViewModelLoader.LoadViewModel(request, null);
-            return await Navigate<TResult>(request, (IMvxViewModelResult<TResult>)request.ViewModelInstance, presentationBundle, cancellationToken).ConfigureAwait(false);
+            return await NavigateAsync(request, (IMvxViewModelResult<TResult>)request.ViewModelInstance, presentationBundle, cancellationToken).ConfigureAwait(false);
         }
 
         public virtual async Task<TResult> NavigateAsync<TViewModel, TParameter, TResult>(TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -325,35 +325,35 @@ namespace MvvmCross.Core.Navigation
                 PresentationValues = presentationBundle?.SafeGetData()
             };
             request.ViewModelInstance = (IMvxViewModel<TParameter, TResult>)ViewModelLoader.LoadViewModel(request, null);
-            return await Navigate<TParameter, TResult>(request, (IMvxViewModel<TParameter, TResult>)request.ViewModelInstance, param, presentationBundle, cancellationToken).ConfigureAwait(false);
+            return await NavigateAsync(request, (IMvxViewModel<TParameter, TResult>)request.ViewModelInstance, param, presentationBundle, cancellationToken).ConfigureAwait(false);
         }
 
         public virtual async Task NavigateAsync(IMvxViewModel viewModel, IMvxBundle presentationBundle = null)
         {
             var request = new MvxViewModelInstanceRequest(viewModel) { PresentationValues = presentationBundle?.SafeGetData() };
             ViewModelLoader.ReloadViewModel(viewModel, request, null);
-            await Navigate(request, viewModel, presentationBundle).ConfigureAwait(false);
+            await NavigateAsync(request, viewModel, presentationBundle).ConfigureAwait(false);
         }
 
         public virtual async Task NavigateAsync<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle presentationBundle = null)
         {
             var request = new MvxViewModelInstanceRequest(viewModel) { PresentationValues = presentationBundle?.SafeGetData() };
             ViewModelLoader.ReloadViewModel(viewModel, request, null);
-            await Navigate<TParameter>(request, viewModel, param, presentationBundle).ConfigureAwait(false);
+            await NavigateAsync(request, viewModel, param, presentationBundle).ConfigureAwait(false);
         }
 
         public virtual async Task<TResult> NavigateAsync<TResult>(IMvxViewModelResult<TResult> viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             var request = new MvxViewModelInstanceRequest(viewModel) { PresentationValues = presentationBundle?.SafeGetData() };
             ViewModelLoader.ReloadViewModel(viewModel, request, null);
-            return await Navigate<TResult>(request, viewModel, presentationBundle, cancellationToken).ConfigureAwait(false);
+            return await NavigateAsync(request, viewModel, presentationBundle, cancellationToken).ConfigureAwait(false);
         }
 
         public virtual async Task<TResult> NavigateAsync<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             var request = new MvxViewModelInstanceRequest(viewModel) { PresentationValues = presentationBundle?.SafeGetData() };
             ViewModelLoader.ReloadViewModel(viewModel, request, null);
-            return await Navigate<TParameter, TResult>(request, viewModel, param, presentationBundle, cancellationToken).ConfigureAwait(false);
+            return await NavigateAsync(request, viewModel, param, presentationBundle, cancellationToken).ConfigureAwait(false);
         }
 
         public bool ChangePresentation(MvxPresentationHint hint)
