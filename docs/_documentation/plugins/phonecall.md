@@ -25,7 +25,7 @@ public class MyViewModel : MvxViewModel
 {
     public MyViewModel(IMvxPhoneCallTask phoneCallTask)
     {
-        phoneCallTask.MakePhoneCall("Contact name", +310631798511);
+        phoneCallTask.MakePhoneCall("Contact name", "+310631798511");
     }
 }
 ```
