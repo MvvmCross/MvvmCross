@@ -17,7 +17,6 @@ namespace RoutingExample.iOS
             return new App();
         }
 
-        
         protected override void InitializePlatformServices()
         {
             base.InitializePlatformServices();

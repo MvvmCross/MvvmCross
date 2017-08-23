@@ -296,4 +296,3 @@ namespace PageRendererExample.UI.iOS
         }
     }
 }
-

@@ -28,4 +28,3 @@ namespace PageRendererExample.UI.Droid
         }
     }
 }
-

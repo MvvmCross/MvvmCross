@@ -20,7 +20,6 @@ using PageRendererExample;
 using Xamarin.Forms.Platform.UWP;
 using Panel = Windows.UI.Xaml.Controls.Panel;
 
-
 [assembly: ExportRenderer(typeof(CameraRendererPage), typeof(PageRendererExample.WindowsUWP.CameraRendererPage))]
 
 namespace PageRendererExample.WindowsUWP

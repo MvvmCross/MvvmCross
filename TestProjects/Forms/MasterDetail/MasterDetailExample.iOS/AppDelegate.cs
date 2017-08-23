@@ -32,5 +32,3 @@ namespace MasterDetailExample.iOS
         }
     }
 }
-
-

@@ -78,4 +78,3 @@ namespace Example.Droid.Fragments
         }
     }
 }
-
