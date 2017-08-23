@@ -9,4 +9,3 @@ namespace PageRendererExample
         void Update(byte[] imageBytes, string mimeType);
     }
 }
-

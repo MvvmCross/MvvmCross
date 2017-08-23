@@ -109,4 +109,3 @@ namespace MasterDetailExample.iOS
         }
     }
 }
-

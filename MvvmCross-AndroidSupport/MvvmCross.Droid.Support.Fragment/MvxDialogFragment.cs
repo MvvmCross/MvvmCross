@@ -71,7 +71,6 @@ namespace MvvmCross.Droid.Support.V4
 
         public virtual string UniqueImmutableCacheTag => Tag;
 
-
         public override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);

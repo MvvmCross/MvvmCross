@@ -22,4 +22,3 @@ namespace Example.Droid.Activities
         }
     }
 }
-
