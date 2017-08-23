@@ -1,5 +1,4 @@
-﻿
-namespace PageRendererExample
+﻿namespace PageRendererExample
 {
     public interface IImageHolder
     {        

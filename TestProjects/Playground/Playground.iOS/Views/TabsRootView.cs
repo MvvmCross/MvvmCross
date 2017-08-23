@@ -1,5 +1,4 @@
-
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Views;
