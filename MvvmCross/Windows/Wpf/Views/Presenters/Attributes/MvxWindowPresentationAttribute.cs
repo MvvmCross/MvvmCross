@@ -1,6 +1,4 @@
-﻿using System;
-using MvvmCross.Core.Views;
-using System.Windows;
+﻿using MvvmCross.Core.Views;
 
 namespace MvvmCross.Wpf.Views.Presenters.Attributes
 {

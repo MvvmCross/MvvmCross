@@ -1,5 +1,5 @@
-﻿using MvvmCross.Core.ViewModels;
-using MvvmCross.Wpf.Views;
+﻿using MvvmCross.Wpf.Views;
+using MvvmCross.Wpf.Views.Presenters.Attributes;
 using Playground.Core.ViewModels;
 
 namespace Playground.Wpf.Views
@@ -7,8 +7,8 @@ namespace Playground.Wpf.Views
     /// <summary>
     /// Interaction logic for ChildView.xaml
     /// </summary>
-    [MvxViewFor(typeof(ChildViewModel))]
-    public partial class ChildView : MvxWpfView
+    [MvxContentPresentation]
+    public partial class ChildView : MvxWpfView<ChildViewModel>
     {
         public ChildView()
         {
