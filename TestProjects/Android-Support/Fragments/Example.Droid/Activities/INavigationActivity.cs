@@ -7,4 +7,3 @@ namespace Example.Droid.Activities
 		DrawerLayout DrawerLayout { get; set; }
 	}
 }
-

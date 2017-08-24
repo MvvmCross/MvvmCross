@@ -8,13 +8,13 @@ namespace PageRendererExample
         private readonly IImageHolder _imageHolder;
 
         private MvxCommand _showCustomPageRenderer;
-        public ICommand  ShowCustomPageRenderer 
+        public ICommand ShowCustomPageRenderer
         {
-            get 
+            get
             {
-                if (_showCustomPageRenderer == null) 
+                if (_showCustomPageRenderer == null)
                 {
-                    _showCustomPageRenderer = 
+                    _showCustomPageRenderer =
                         new MvxCommand(() => ShowViewModel<CameraRendererViewModel>());
                 }
 
@@ -22,7 +22,7 @@ namespace PageRendererExample
             }
         }
 
-        public string PageTitle { get { return "Custom Renderer MvvmCross Style";} }
+        public string PageTitle { get { return "Custom Renderer MvvmCross Style"; } }
         public byte[] ImageBytes { get { return _imageHolder.ImageBytes; } }
         public string ImageMimeType { get { return _imageHolder.MimeType; } }
 

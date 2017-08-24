@@ -1,5 +1,4 @@
-﻿
-using MvvmCross.Platform;
+﻿using MvvmCross.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Core;
 
@@ -19,4 +18,3 @@ namespace PageRendererExample
         }
     }
 }
-

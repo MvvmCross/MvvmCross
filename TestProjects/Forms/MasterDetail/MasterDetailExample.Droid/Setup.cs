@@ -17,7 +17,6 @@ namespace MasterDetailExample.Droid
         {
         }
 
-        
         protected override IMvxApplication CreateApp()
         {
             return new App();

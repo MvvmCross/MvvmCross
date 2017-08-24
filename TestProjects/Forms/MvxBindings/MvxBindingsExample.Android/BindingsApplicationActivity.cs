@@ -20,4 +20,3 @@ namespace MvxBindingsExample.Droid
         }
     }
 }
-

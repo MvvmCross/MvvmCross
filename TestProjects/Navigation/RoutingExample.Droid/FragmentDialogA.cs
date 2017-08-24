@@ -15,7 +15,6 @@ namespace RoutingExample.Droid
     {
         public FragmentDialogA()
         {
-
         }
 
         protected FragmentDialogA(IntPtr javaReference, JniHandleOwnership transfer)

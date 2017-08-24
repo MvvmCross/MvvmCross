@@ -1,23 +1,24 @@
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 
 namespace Example.ViewModels
 {
-    public class FirstViewModel 
-		: MvxViewModel
+    public class FirstViewModel
+        : MvxViewModel
     {
-		private string _yourNickname = string.Empty;
+        private string _yourNickname = string.Empty;
         public string YourNickname
-		{ 
-			get
+        {
+            get
             {
                 return _yourNickname;
             }
-			set
+            set
             {
-                SetProperty(ref _yourNickname, value); RaisePropertyChanged(() => Hello);
+                SetProperty(ref _yourNickname, value);
+                RaisePropertyChanged(() => Hello);
             }
-		}
+        }
 
         public string Hello
         {
