@@ -37,7 +37,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels
         /// </remarks>
         private void ShowMasterCommandExecuted()
         {
-            _navigationService.Navigate<MasterViewModel>();
+            _navigationService.NavigateAsync<MasterViewModel>();
         }
 
         public IMvxCommand ShowKeyboardHandlingCommand
@@ -53,7 +53,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels
         /// </summary>
         private void ShowKeyboardHandlingCommandExecuted()
         {
-            _navigationService.Navigate<KeyboardHandlingViewModel>();
+            _navigationService.NavigateAsync<KeyboardHandlingViewModel>();
         }
     }
 }

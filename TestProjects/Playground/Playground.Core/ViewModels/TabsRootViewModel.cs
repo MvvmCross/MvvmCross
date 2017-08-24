@@ -22,9 +22,9 @@ namespace Playground.Core.ViewModels
         private async Task ShowInitialViewModels()
         {
             var tasks = new List<Task>();
-            tasks.Add(_navigationService.Navigate<Tab1ViewModel, string>("test"));
-            tasks.Add(_navigationService.Navigate<Tab2ViewModel>());
-            tasks.Add(_navigationService.Navigate<Tab3ViewModel>());
+            tasks.Add(_navigationService.NavigateAsync<Tab1ViewModel, string>("test"));
+            tasks.Add(_navigationService.NavigateAsync<Tab2ViewModel>());
+            tasks.Add(_navigationService.NavigateAsync<Tab3ViewModel>());
             await Task.WhenAll(tasks);
         }
     }

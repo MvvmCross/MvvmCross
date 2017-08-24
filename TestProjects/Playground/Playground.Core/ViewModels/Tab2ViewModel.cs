@@ -12,9 +12,9 @@ namespace Playground.Core.ViewModels
         {
             _navigationService = navigationService;
 
-            ShowRootViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<RootViewModel>());
+            ShowRootViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.NavigateAsync<RootViewModel>());
 
-            CloseViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
+            CloseViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.CloseAsync(this));
         }
 
         public IMvxAsyncCommand ShowRootViewModelCommand { get; private set; }

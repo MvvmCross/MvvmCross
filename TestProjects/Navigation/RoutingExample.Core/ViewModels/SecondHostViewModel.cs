@@ -20,7 +20,7 @@ namespace RoutingExample.Core.ViewModels
             {
                 return _showACommand ?? (_showACommand = new MvxAsyncCommand(async () =>
                 {
-                    await _routingService.Navigate<TestAViewModel, User>(new User("MvvmCross", "Test"));
+                    await _routingService.NavigateAsync<TestAViewModel, User>(new User("MvvmCross", "Test"));
 
                     //await _routingService.Navigate("mvx://test/a");
                 }));
@@ -36,7 +36,7 @@ namespace RoutingExample.Core.ViewModels
                 return _showBCommand ?? (_showBCommand = new MvxAsyncCommand(async () =>
                 {
                     //var result = await _routingService.Navigate<User, User>("mvx://test/?id=" + Guid.NewGuid().ToString("N"), new User("MvvmCross2", "Test2"));
-                    var result = await _routingService.Navigate<TestBViewModel, User, User>(new User("MvvmCross", "Test"));
+                    var result = await _routingService.NavAsyncigate<TestBViewModel, User, User>(new User("MvvmCross", "Test"));
                     var test = result?.FirstName;
                 }));
             }
@@ -50,7 +50,7 @@ namespace RoutingExample.Core.ViewModels
             {
                 return _showRandomCommand ?? (_showRandomCommand = new MvxAsyncCommand(async () =>
                 {
-                    await _routingService.Navigate("mvx://random");
+                    await _routingService.NavigateAsync("mvx://random");
                 }));
             }
         }

@@ -27,7 +27,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels
 
         private void DoShowExampleMenuItem()
         {
-            _navigationService.Navigate<ExampleMenuItemViewModel>();
+            _navigationService.NavigateAsync<ExampleMenuItemViewModel>();
         }
 
         public MvxCommand ShowMasterViewCommand
@@ -41,7 +41,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.Core.ViewModels
 
         private void ShowMasterView()
         {
-            _navigationService.Navigate<MasterViewModel>();
+            _navigationService.NavigateAsync<MasterViewModel>();
         }
     }
 }

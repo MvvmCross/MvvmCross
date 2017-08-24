@@ -13,7 +13,7 @@ namespace Example.Core
         /// </summary>
         public void Start(object hint = null)
         {
-            Mvx.Resolve<IMvxNavigationService>().Navigate<LoginViewModel>();
+            Mvx.Resolve<IMvxNavigationService>().NavigateAsync<LoginViewModel>();
 			//ShowViewModel<LoginViewModel>();
         }
     }

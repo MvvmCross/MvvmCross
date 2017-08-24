@@ -23,12 +23,12 @@ namespace Playground.Core.ViewModels
 
         private async Task ShowInitialViewModels()
         {
-            await _navigationService.Navigate<SplitMasterViewModel>();
+            await _navigationService.NavigateAsync<SplitMasterViewModel>();
         }
 
         private async Task ShowDetailViewModel()
         {
-            await _navigationService.Navigate<SplitDetailViewModel>();
+            await _navigationService.NavigateAsync<SplitDetailViewModel>();
         }
     }
 }

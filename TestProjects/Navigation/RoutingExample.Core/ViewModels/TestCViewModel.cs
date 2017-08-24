@@ -24,7 +24,7 @@ namespace RoutingExample.Core.ViewModels
         }
 
         public IMvxAsyncCommand CloseViewModelCommand => new MvxAsyncCommand(
-                () => _navigationService.Close(this, UserId));
+                () => _navigationService.CloseAsync(this, UserId));
 
         public override void Prepare(int parameter)
         {
