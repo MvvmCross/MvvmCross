@@ -1,8 +1,9 @@
-﻿using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using MvvmCross.Wpf.Views.Presenters;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Playground.Wpf
 {
@@ -15,9 +16,9 @@ namespace Playground.Wpf
 
         void DoSetup()
         {
-            var presenter = new MvxWpfViewPresenter(MainWindow);
-
-            var setup = new Setup(Dispatcher, presenter);
+            // Hint: You can also set a ContentControl of the Window.
+            // var setup = new Setup(Dispatcher, MainWindow.FindName("FooContentControl") as ContentControl);
+            var setup = new Setup(Dispatcher, MainWindow);
             setup.Initialize();
 
             var start = Mvx.Resolve<IMvxAppStart>();

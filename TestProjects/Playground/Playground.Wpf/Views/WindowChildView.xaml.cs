@@ -1,4 +1,3 @@
-using System;
 using MvvmCross.Core.Views;
 using MvvmCross.Wpf.Views;
 using MvvmCross.Wpf.Views.Presenters.Attributes;
@@ -7,20 +6,21 @@ using Playground.Core.ViewModels;
 namespace Playground.Wpf.Views
 {
     /// <summary>
-    /// Interaction logic for WindowView.xaml
+    /// Interaction logic for WindowChildView.xaml
     /// </summary>
-    public partial class WindowView : MvxWindow<WindowViewModel>, IMvxOverridePresentationAttribute
+    public partial class WindowChildView : MvxWpfView<WindowChildViewModel>, IMvxOverridePresentationAttribute
     {
-        public WindowView()
+        public WindowChildView()
         {
             InitializeComponent();
         }
 
         public MvxBasePresentationAttribute PresentationAttribute()
         {
-            return new MvxWindowPresentationAttribute
+            return new MvxContentPresentationAttribute
             {
-                Identifier = $"{nameof(WindowView)}.{ViewModel.Count}"
+                WindowIdentifier = $"{nameof(WindowView)}.{ViewModel.ParentNo}",
+                StackNavigation = false
             };
         }
     }

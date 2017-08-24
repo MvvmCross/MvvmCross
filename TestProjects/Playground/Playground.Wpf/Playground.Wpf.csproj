@@ -59,6 +59,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Setup.cs" />
+    <Compile Include="Views\WindowChildView.xaml.cs">
+      <DependentUpon>WindowChildView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NestedModalView.xaml.cs">
       <DependentUpon>NestedModalView.xaml</DependentUpon>
     </Compile>
@@ -89,6 +92,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\WindowChildView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\NestedModalView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
