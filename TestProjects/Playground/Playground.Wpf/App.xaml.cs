@@ -16,11 +16,9 @@ namespace Playground.Wpf
 
         void DoSetup()
         {
-            var presenter = new MvxWpfViewPresenter(MainWindow);
             // Hint: You can also set a ContentControl of the Window.
-            // var presenter = new MvxWpfViewPresenter(MainWindow.FindName("FooContentControl") as ContentControl);
-
-            var setup = new Setup(Dispatcher, presenter);
+            // var setup = new Setup(Dispatcher, MainWindow.FindName("FooContentControl") as ContentControl);
+            var setup = new Setup(Dispatcher, MainWindow);
             setup.Initialize();
 
             var start = Mvx.Resolve<IMvxAppStart>();
