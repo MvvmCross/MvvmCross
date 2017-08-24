@@ -1,5 +1,4 @@
-﻿
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
@@ -15,7 +14,5 @@ namespace Example.Droid
     [Activity(Label = "ExampleApplicationActivity", ScreenOrientation=ScreenOrientation.Portrait)]
     public class ExampleApplicationActivity : MvxFormsApplicationActivity
     {
-        
     }
 }
-

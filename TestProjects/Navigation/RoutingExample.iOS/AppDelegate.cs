@@ -50,5 +50,3 @@ namespace RoutingExample.iOS
         }
     }
 }
-
-

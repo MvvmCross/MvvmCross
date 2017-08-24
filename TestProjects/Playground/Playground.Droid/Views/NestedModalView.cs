@@ -15,7 +15,6 @@ namespace Playground.Droid.Views
     {
         public NestedModalView()
         {
-
         }
 
         protected NestedModalView(IntPtr javaReference, JniHandleOwnership transfer)

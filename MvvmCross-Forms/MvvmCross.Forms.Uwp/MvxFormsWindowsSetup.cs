@@ -9,9 +9,9 @@ using MvvmCross.Forms.Uwp.Presenters;
 using MvvmCross.Platform;
 using MvvmCross.Uwp.Platform;
 using MvvmCross.Uwp.Views;
-using XamlControls = Windows.UI.Xaml.Controls;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Plugins;
+using XamlControls = Windows.UI.Xaml.Controls;
 
 namespace MvvmCross.Forms.Uwp
 {

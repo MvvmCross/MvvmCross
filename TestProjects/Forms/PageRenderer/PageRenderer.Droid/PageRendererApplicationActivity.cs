@@ -17,8 +17,6 @@ namespace PageRendererExample.UI.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            
         }
     }
 }
-
