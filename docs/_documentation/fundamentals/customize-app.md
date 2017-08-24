@@ -341,6 +341,10 @@ This can then be registered in `App` using:
 
     RegisterAppStart(new CustomAppStart());
 
+Alternatively if your custom `IMvxAppStart` class requires any IoC dependencies, like the `IMvxNavigationService`, you can register your class using:
+
+    RegisterCustomAppStart<CustomAppStart>();
+
 **Note:** For situations where the app is launched using a `protocol` - e.g. from a Push notification or from an email link - then the `object hint` parameter start can be used to transfer a hint from the UI to the start object. Currently, it's up to you - the app developer - to write the UI side code to do this.
 
 ## Custom Presenters
