@@ -77,7 +77,7 @@ The specific jobs that your `App` should do during its `Initialize` are:
 - to construct and/or IoC-register any objects specific to your applications - services, models, etc
 - to register an `IMvxAppStart` object
 
-A default `App` supplied via nuget, looks like:
+A default `App` supplied via NuGet, looks like:
 
 ```c#
 using MvvmCross.Platform.Ioc;
@@ -89,11 +89,11 @@ namespace MyName.Core
         public override void Initialize()
         {
             CreatableTypes()
-            .EndingWith("Service")
-            .AsInterfaces()
-            .RegisterAsLazySingleton();
+                .EndingWith("Service")
+                .AsInterfaces()
+                .RegisterAsLazySingleton();
 
-            RegisterAppStart<ViewModels.FirstViewModel>();
+            RegisterAppStart<ViewModels.MainViewModel>();
         }
     }
 }
@@ -103,7 +103,7 @@ This `App`:
 
 - within Initialize
  - looks within the current `Assembly` (the "core" Assembly) and uses Reflection to register all classes ending in `Service` as lazily-constructed singletons
- - calls `RegisterAppStart<TViewModel>` to create and register a very simple `IMvxAppStart` implementation - an implementation which always shows a single `FirstViewModel` when `Start()` is called
+ - calls `RegisterAppStart<TViewModel>` to create and register a very simple `IMvxAppStart` implementation - an implementation which always shows a single `MainViewModel` when `Start()` is called
 - uses the default `ViewModelLocator` - this default uses naming conventions to locate and construct `ViewModels` and creates a new `ViewModel` for each and every request from a `View`
 
 If you wanted to use a custom `IMvxAppStart` object, see https://github.com/slodge/MvvmCross/wiki/Customising-using-App-and-Setup.
@@ -123,42 +123,38 @@ For MvvmCross, `ViewModels` normally inherit from `MvxViewModel`
 A typical `ViewModel` might look like:
 
 ```c#
-public class FirstViewModel
-    : MvxViewModel
+public class MainViewModel : MvxViewModel
 {
-    private string _name;
-    public string Name
+    public MainViewModel()
     {
-        get {
-            return _name;
-        }
-        set {
-            _name = value;
-            RaisePropertyChanged(() => Name);
-        }
+    }
+        
+    public override Task Initialize()
+    {
+        //TODO: Add starting logic here
+            
+        return base.Initialize();
+    }
+        
+    public IMvxCommand ResetTextCommand => new MvxCommand(ResetText);
+    private void ResetText()
+    {
+        Text = "Hello MvvmCross";
     }
 
-    private MvxCommand _resetCommand;
-    public ICommand ResetCommand
+    private string _text = "Hello MvvmCross";
+    public string Text
     {
-        get
-        {
-            _resetCommand = _resetCommand ?? new MvxCommand(() => Reset());
-            return _resetCommand;
-        }
-    }
-
-    private void Reset()
-    {
-        Name = string.Empty;
+        get { return _text; }
+        set { SetProperty(ref _text, value); }
     }
 }
 ```
 
-This `FirstViewModel` has:
+This `MainViewModel` has:
 
-- a single `Name` property which raises a `PropertyChanged` notification when it changes
-- a single `ResetCommand` command which will call the `Reset()` method whenever the command is executed.
+- a single `Text` property which raises a `PropertyChanged` notification when it changes
+- a single `ResetTextCommand` command which will call the `ResetText()` method whenever the command is executed.
  
 Beyond this simple example, `ViewModels` can also:
 
@@ -197,22 +193,22 @@ using MvvmCross.Core.ViewModels;
 
 namespace MyName.iOS
 {
-    [Register ("AppDelegate")]
+    [Register("AppDelegate")]
     public partial class AppDelegate : MvxApplicationDelegate
     {
-        UIWindow _window;
+        public override UIWindow Window { get; set; }
 
-        public override bool FinishedLaunching (UIApplication app, NSDictionary options)
+        public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            _window = new UIWindow (UIScreen.MainScreen.Bounds);
+            Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            var setup = new Setup(this, _window);
+            var setup = new Setup(this, Window);
             setup.Initialize();
 
             var startup = Mvx.Resolve<IMvxAppStart>();
             startup.Start();
 
-            _window.MakeKeyAndVisible ();
+            Window.MakeKeyAndVisible();
 
             return true;
         }
@@ -250,9 +246,9 @@ namespace MyName.Droid
     
 Importantly, please note that this class is marked with `MainLauncher = true` to ensure that this is the first thing created when the native platform starts.
 
-#### Wpf
+#### WPF
 
-On Wpf, a new project will contain a native `App.xaml.cs`.  After adding the MvvmCross libraries via Nuget a new file is added called 'App.Xam.Mvx.cs'.  This file contains -
+On WPF, a new project will contain a native `App.xaml.cs`.  After adding the MvvmCross libraries via NuGet a new file is added called 'App.Xam.Mvx.cs'.  This file contains -
 
 ```c#
 using System;
@@ -271,9 +267,7 @@ namespace MyName.Wpf
         {
             LoadMvxAssemblyResources();
 
-            var presenter = new MvxSimpleWpfViewPresenter(MainWindow);
-
-            var setup = new Setup(Dispatcher, presenter);
+            var setup = new Setup(Dispatcher, MainWindow);
             setup.Initialize();
 
             var start = Mvx.Resolve<IMvxAppStart>();
@@ -304,11 +298,11 @@ namespace MyName.Wpf
 }
 ```
 
-A default FirstView should also exist.
+A default MainWindow should also exist.
 
-#### Uwp
+#### UWP
 
-On Uwp, a new project will again contain a native `App.xaml.cs`
+On UWP, a new project will again contain a native `App.xaml.cs`
 
 To adapt this for MvvmCross, we simply find the method `OnLaunched` and replace the `if (rootFrame.Content == null)` block with:
 
@@ -381,7 +375,7 @@ namespace MyName.iOS
 }
 ```
     
-#### Minimal Setup - Wpf
+#### Minimal Setup - WPF
 
 ```c#
 using System.Windows.Threading;
@@ -394,8 +388,8 @@ namespace MyName.Wpf
 {
     public class Setup : MvxWpfSetup
     {
-        public Setup(Dispatcher dispatcher, IMvxWpfViewPresenter presenter)
-        : base(dispatcher, presenter)
+        public Setup(Dispatcher uiThreadDispatcher, ContentControl root)
+            : base(uiThreadDispatcher, root)
         {
         }
 
@@ -403,16 +397,11 @@ namespace MyName.Wpf
         {
             return new Core.App();
         }
-
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new DebugTrace();
-        }
     }
 }
 ```
     
-#### Setup - Uwp
+#### Setup - UWP
 
 ```c#
 using MvvmCross.ViewModels;
@@ -443,7 +432,7 @@ Each View is normally databound to a single ViewModel for its entire lifetime.
 
 On each platform, Views in the Mvvm sense are typically implemented using data-bound versions of:
 
-- On Windows platforms a `UserControl` - for Uwp is very often specialized into a `Page`
+- On Windows platforms a `UserControl` - for UWP is very often specialized into a `Page`
 - On Android, an `Activity` or `Fragment`
 - On iOS, a `UIViewController`
 
