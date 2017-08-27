@@ -84,11 +84,14 @@ namespace MvvmCross.Binding.BindingContext
             => To($"{combinerName}({string.Join(", ", properties)})");
 
         public MvxFluentBindingDescription<TTarget, TSource> ByCombining(IMvxValueCombiner combiner, params Expression<Func<TSource, object>>[] properties)
-            => ByCombining(combiner, properties.Select(SourcePropertyPath).ToArray());
+        {
+            SetCombiner(combiner, properties.Select(SourcePropertyPath).ToArray(), useParser: false);
+            return this;
+        }
 
         public MvxFluentBindingDescription<TTarget, TSource> ByCombining(IMvxValueCombiner combiner, params string[] properties)
         {
-            SetCombiner(combiner, properties);
+            SetCombiner(combiner, properties, useParser: true);
             return this;
         }
 
