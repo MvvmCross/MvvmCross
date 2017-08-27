@@ -10,6 +10,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
+using MvvmCross.Binding.Combiners;
 using MvvmCross.Binding.ValueConverters;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
@@ -73,6 +74,21 @@ namespace MvvmCross.Binding.BindingContext
         {
             var sourcePropertyPath = SourcePropertyPath(sourceProperty);
             SetKnownTextPropertyPath(sourcePropertyPath);
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> ByCombining(string combinerName, params Expression<Func<TSource, object>>[] properties)
+            => ByCombining(combinerName, properties.Select(SourcePropertyPath).ToArray());
+
+        public MvxFluentBindingDescription<TTarget, TSource> ByCombining(string combinerName, params string[] properties)
+            => To($"{combinerName}({string.Join(", ", properties)})");
+
+        public MvxFluentBindingDescription<TTarget, TSource> ByCombining(IMvxValueCombiner combiner, params Expression<Func<TSource, object>>[] properties)
+            => ByCombining(combiner, properties.Select(SourcePropertyPath).ToArray());
+
+        public MvxFluentBindingDescription<TTarget, TSource> ByCombining(IMvxValueCombiner combiner, params string[] properties)
+        {
+            SetCombiner(combiner, properties);
             return this;
         }
 
