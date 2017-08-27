@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
@@ -113,6 +114,33 @@ namespace MvvmCross.Binding.BindingContext
             }
         }
 
+        public class CombinerSourceSpec
+            : ISourceSpec
+        {
+            private readonly string[] _properties;
+            private readonly IMvxValueCombiner _combiner;
+
+            public CombinerSourceSpec(IMvxValueCombiner combiner, string[] properties)
+            {
+                _combiner = combiner;
+                _properties = properties;
+            }
+
+            public MvxSourceStepDescription CreateSourceStep(MvxSourceStepDescription inputs)
+            {
+                return new MvxCombinerSourceStepDescription
+                {
+                    Combiner = _combiner,
+                    Converter = inputs.Converter,
+                    ConverterParameter = inputs.ConverterParameter,
+                    FallbackValue = inputs.FallbackValue,
+                    InnerSteps = _properties
+                        .Select(propertyPath => new MvxPathSourceStepDescription { SourcePropertyPath = propertyPath })
+                        .ToList<MvxSourceStepDescription>()
+                };
+            }
+        }
+
         public static class SourceSpecHelpers
         {
             public static MvxSourceStepDescription WrapInsideSingleCombiner(MvxSourceStepDescription inputs,
@@ -152,6 +180,14 @@ namespace MvvmCross.Binding.BindingContext
                 throw new MvxException("You cannot set the source path of a Fluent binding more than once");
 
             _sourceSpec = new KnownPathSourceSpec(sourcePropertyPath);
+        }
+
+        protected void SetCombiner(IMvxValueCombiner combiner, string[] properties)
+        {
+            if (_sourceSpec != null)
+                throw new MvxException("You cannot set the source path of a Fluent binding more than once");
+
+            _sourceSpec = new CombinerSourceSpec(combiner, properties); 
         }
 
         [Obsolete("Please use SourceOverwrite instead")]
