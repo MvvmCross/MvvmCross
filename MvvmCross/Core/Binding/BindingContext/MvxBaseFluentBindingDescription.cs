@@ -117,26 +117,30 @@ namespace MvvmCross.Binding.BindingContext
         public class CombinerSourceSpec
             : ISourceSpec
         {
+            private readonly bool _useParser;
             private readonly string[] _properties;
             private readonly IMvxValueCombiner _combiner;
 
-            public CombinerSourceSpec(IMvxValueCombiner combiner, string[] properties)
+            public CombinerSourceSpec(IMvxValueCombiner combiner, string[] properties, bool useParser)
             {
                 _combiner = combiner;
+                _useParser = useParser;
                 _properties = properties;
             }
 
             public MvxSourceStepDescription CreateSourceStep(MvxSourceStepDescription inputs)
             {
+                var innerSteps = _useParser ?
+                    _properties.Select(p => Mvx.Resolve<IMvxBindingDescriptionParser>().ParseSingle(p).Source) :
+                    _properties.Select(p => new MvxPathSourceStepDescription { SourcePropertyPath = p });
+                
                 return new MvxCombinerSourceStepDescription
                 {
                     Combiner = _combiner,
                     Converter = inputs.Converter,
                     ConverterParameter = inputs.ConverterParameter,
                     FallbackValue = inputs.FallbackValue,
-                    InnerSteps = _properties
-                        .Select(propertyPath => new MvxPathSourceStepDescription { SourcePropertyPath = propertyPath })
-                        .ToList<MvxSourceStepDescription>()
+                    InnerSteps = innerSteps.ToList()
                 };
             }
         }
@@ -182,12 +186,12 @@ namespace MvvmCross.Binding.BindingContext
             _sourceSpec = new KnownPathSourceSpec(sourcePropertyPath);
         }
 
-        protected void SetCombiner(IMvxValueCombiner combiner, string[] properties)
+        protected void SetCombiner(IMvxValueCombiner combiner, string[] properties, bool useParser)
         {
             if (_sourceSpec != null)
                 throw new MvxException("You cannot set the source path of a Fluent binding more than once");
 
-            _sourceSpec = new CombinerSourceSpec(combiner, properties); 
+            _sourceSpec = new CombinerSourceSpec(combiner, properties, useParser); 
         }
 
         [Obsolete("Please use SourceOverwrite instead")]
