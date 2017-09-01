@@ -30,6 +30,11 @@
 		android:layout_marginTop="10dp"
 		android:text="Show Master/Detail"
 		local:MvxBind="Click ShowSplitCommand;" />
+	<Button android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dp"
+		android:text="Show BottomSheet"
+		local:MvxBind="Click ShowSheetCommand" />
 	<FrameLayout android:id="@+id/content_frame"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent" />
