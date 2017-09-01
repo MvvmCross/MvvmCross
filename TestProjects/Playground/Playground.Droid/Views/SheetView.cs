@@ -23,7 +23,6 @@ namespace Playground.Droid.Views
         {
         }
 
-
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);

@@ -68,7 +68,6 @@ namespace MvvmCross.Droid.Support.Design
     {
         public MvxBottomSheetDialogFragment()
         {
-
         }
 
         protected MvxBottomSheetDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
