@@ -16,40 +16,71 @@ namespace MvvmCross.Plugins.JsonLocalization.Tests
         {
         }
 
+        #region Tests covering the 'TryGetText' method
+
         [Test]
         public void TryGetExistingValueReturnsTrueWhenMaskingErrors()
         {
-            var textProvider = MockMvxDictionaryTextProvider.CreateAndInitializeWithDummyData(true);
+            var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(true);
 
             string value;
-            Assert.IsTrue(textProvider.TryGetText(out value, MockMvxDictionaryTextProvider.LocalizationNamespace, MockMvxDictionaryTextProvider.TypeKey, "DummyKey"));
+            Assert.IsTrue(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "DummyKey"));
         }
 
         [Test]
         public void TryGetExistingValueReturnsTrueWhenNotMaskingErrors()
         {
-            var textProvider = MockMvxDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
+            var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
 
             string value;
-            Assert.IsTrue(textProvider.TryGetText(out value, MockMvxDictionaryTextProvider.LocalizationNamespace, MockMvxDictionaryTextProvider.TypeKey, "DummyKey"));
+            Assert.IsTrue(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "DummyKey"));
         }
 
         [Test]
         public void TryGetNonExistingValueReturnsFalseWhenMaskingErrors()
         {
-            var textProvider = MockMvxDictionaryTextProvider.CreateAndInitializeWithDummyData(true);
+            var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(true);
 
             string value;
-            Assert.IsFalse(textProvider.TryGetText(out value, MockMvxDictionaryTextProvider.LocalizationNamespace, MockMvxDictionaryTextProvider.TypeKey, "NonExistingKey"));
+            Assert.IsFalse(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "NonExistingKey"));
         }
 
         [Test]
         public void TryGetNonExistingValueReturnsFalseWhenNotMaskingErrors()
         {
-            var textProvider = MockMvxDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
+            var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
 
             string value;
-            Assert.IsFalse(textProvider.TryGetText(out value, MockMvxDictionaryTextProvider.LocalizationNamespace, MockMvxDictionaryTextProvider.TypeKey, "NonExistingKey"));
+            Assert.IsFalse(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "NonExistingKey"));
         }
+
+        [Test]
+        public void TryGetNonExistingValueShouldOutputKeyWhenMaskingErrors()
+        {
+            var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(true);
+            var expected = $"{TestDictionaryTextProvider.LocalizationNamespace}|{TestDictionaryTextProvider.TypeKey}|NonExistingKey";
+
+            string actual;
+            textProvider.TryGetText(out actual, 
+                TestDictionaryTextProvider.LocalizationNamespace,
+                TestDictionaryTextProvider.TypeKey, "NonExistingKey");
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void TryGetNonExistingValueShouldOutputKeyWhenNotMaskingErrors()
+        {
+            var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
+            var expected = $"{TestDictionaryTextProvider.LocalizationNamespace}|{TestDictionaryTextProvider.TypeKey}|NonExistingKey";
+
+            string actual;
+            textProvider.TryGetText(out actual,
+                TestDictionaryTextProvider.LocalizationNamespace,
+                TestDictionaryTextProvider.TypeKey, "NonExistingKey");
+
+            Assert.AreEqual(expected, actual);
+        }
+        #endregion
     }
 }
