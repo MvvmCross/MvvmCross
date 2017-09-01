@@ -51,7 +51,6 @@ namespace MvvmCross.Plugins.JsonLocalization
                 return true;
 
             MvxTrace.Trace("Text value missing for " + key);
-            if (!_maskErrors) throw new KeyNotFoundException("Could not find text lookup for " + key);
 
             textValue = key;
             return false;
