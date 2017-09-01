@@ -4,15 +4,15 @@ title: Data binding
 category: Fundamentals
 order: 2
 ---
-DataBinding is the key technology that MVVM relies on, to link Views with their View-Models.
+Data binding is the key technology that MVVM relies on, to link Views with their View-Models.
 
-DataBinding provides and maintains the automated Two-Way connection between View and ViewModel. A good understanding of Data binding is essential for every MVVM developer.
+Data binding provides and maintains the automated Two-Way connection between View and ViewModel. A good understanding of data binding is essential for every MVVM developer.
 
-Within MvvmCross, data binding was initially built to mirror the structure provided by Microsoft in their XAML based frameworks, but in more recent developments MvvmCross has extended databinding in new directions.
+Within MvvmCross, data binding was initially built to mirror the structure provided by Microsoft in their XAML based frameworks, but in more recent developments MvvmCross has extended data binding in new directions.
 
-This article focuses first on the core 'Windows' databinding approach, but then later extends to some of the newer ideas.
+This article focuses first on the core 'Windows' data binding approach, but then later extends to some of the newer ideas.
 
-### Core Windows DataBinding
+### Core Windows Data binding
 In this structure, for each binding:
 
 - C# properties are used in both View and ViewModel
@@ -21,9 +21,9 @@ In this structure, for each binding:
 - can optionally be specified with a ValueConverter - and this can optionally also be parameterised
 - can also optionally be specified with a FallbackValue for when binding fails.
 
-### C# properties and DataBinding
+### C# properties and Data binding
 
-C# properties are used for Data Binding on both the View and the ViewModel.
+C# properties are used for data binding on both the View and the ViewModel.
 
 On the ViewModel, these properties often look like:
 
@@ -189,11 +189,11 @@ While we have used the terms `View` and `ViewModel` throughout this article, you
 `ViewModel` and `DataContext` can be considered as the same thing.
 
 
-## MvvmCross Databinding
+## MvvmCross Data binding
 
-Databinding has always been at the heart of MvvmCross, and the functionality has grown over the different versions of MvvmCross.
+Data binding has always been at the heart of MvvmCross, and the functionality has grown over the different versions of MvvmCross.
   
-The evolution of MvvmCross Data-Binding can be trace over a path of:
+The evolution of MvvmCross data binding can be trace over a path of:
 
 - JSON
 - Swiss
@@ -202,13 +202,13 @@ The evolution of MvvmCross Data-Binding can be trace over a path of:
 
 **JSON**
 
-In the first versions of MvvmCross the databinding framework used strings based on JSON to achieve databinding.
+In the first versions of MvvmCross the data binding framework used strings based on JSON to achieve data binding.
 
 This JSON version is now retired - it is no longer easily available in MvvmCross v3. If you come across any samples or documents which use JSON binding, then be aware that these samples are now **out of date**.
 
 **Swiss**
 
-The replacement for JSON databinding was called 'Swiss'. It provides the same functionality as the JSON binding, but used a cleaner, less verbose syntax that is easier to use.
+The replacement for JSON data binding was called 'Swiss'. It provides the same functionality as the JSON binding, but used a cleaner, less verbose syntax that is easier to use.
 
 For example:
 
@@ -295,7 +295,7 @@ or perhaps even:
 
 These ideas and their current development status are discussed further later in this article.
 
-Beyond these, of course, the opportunity is there for plenty more ideas and improvements from the community - the evolution of MvvmCross and its databinding is driven by real users and the invention and ideas their real apps require.
+Beyond these, of course, the opportunity is there for plenty more ideas and improvements from the community - the evolution of MvvmCross and its data binding is driven by real users and the invention and ideas their real apps require.
 
 
 ### JSON
@@ -727,7 +727,7 @@ Rio binding offers developers a different approach - using the new FieldBinding 
 
 **FieldBinding**
 
-With the field binding plugin, MvvmCross databinding can use ViewModel public fields as data-sources for binding - e.g.
+With the field binding plugin, MvvmCross data binding can use ViewModel public fields as data-sources for binding - e.g.
 
 ```c#
 public string LastName;
@@ -762,7 +762,7 @@ To use FieldBinding, import the Field binding plugin into both your `core` and y
 
 **MethodBinding**
 
-With the method binding plugin, MvvmCross databinding can use ViewModel public methods as sources for `ICommand` without declaring an `ICommand` property.
+With the method binding plugin, MvvmCross data binding can use ViewModel public methods as sources for `ICommand` without declaring an `ICommand` property.
 
 For example, a method
 
