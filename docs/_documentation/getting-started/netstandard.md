@@ -27,3 +27,5 @@ This line would normaly belong in the `PropertyGroup` which contains the `Target
   <!-- other entries -->
 </Project>
 ```
+
+From here you should be able to add MvvmCross and other PCL based NuGet packages to your .NET Standard project.
