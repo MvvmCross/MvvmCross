@@ -78,7 +78,7 @@ namespace MvvmCross.Plugins.JsonLocalization.Tests
         #region Tests covering the 'TryGetText' method
 
         [Test]
-        public void TryGetExistingValueReturnsTrueWhenMaskingErrors()
+        public void TryGetTextForExistingValueReturnsTrueWhenMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(true);
 
@@ -87,7 +87,7 @@ namespace MvvmCross.Plugins.JsonLocalization.Tests
         }
 
         [Test]
-        public void TryGetExistingValueReturnsTrueWhenNotMaskingErrors()
+        public void TryGetTextForExistingValueReturnsTrueWhenNotMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
 
@@ -96,7 +96,7 @@ namespace MvvmCross.Plugins.JsonLocalization.Tests
         }
 
         [Test]
-        public void TryGetNonExistingValueReturnsFalseWhenMaskingErrors()
+        public void TryGetTextForNonExistingValueReturnsFalseWhenMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(true);
 
@@ -105,7 +105,7 @@ namespace MvvmCross.Plugins.JsonLocalization.Tests
         }
 
         [Test]
-        public void TryGetNonExistingValueReturnsFalseWhenNotMaskingErrors()
+        public void TryGetTextForNonExistingValueReturnsFalseWhenNotMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
 
@@ -114,7 +114,7 @@ namespace MvvmCross.Plugins.JsonLocalization.Tests
         }
 
         [Test]
-        public void TryGetNonExistingValueShouldOutputKeyWhenMaskingErrors()
+        public void TryGetTextForNonExistingValueShouldOutputKeyWhenMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(true);
             var expected = $"{TestDictionaryTextProvider.LocalizationNamespace}|{TestDictionaryTextProvider.TypeKey}|NonExistingKey";
@@ -128,7 +128,7 @@ namespace MvvmCross.Plugins.JsonLocalization.Tests
         }
 
         [Test]
-        public void TryGetNonExistingValueShouldOutputKeyWhenNotMaskingErrors()
+        public void TryGetTextForNonExistingValueShouldOutputKeyWhenNotMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
             var expected = $"{TestDictionaryTextProvider.LocalizationNamespace}|{TestDictionaryTextProvider.TypeKey}|NonExistingKey";
