@@ -6,6 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Windows.UI.Core;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
@@ -22,6 +24,21 @@ namespace MvvmCross.Uwp.Views
         public MvxWindowsViewPresenter(IMvxWindowsFrame rootFrame)
         {
             _rootFrame = rootFrame;
+
+            SystemNavigationManager.GetForCurrentView().BackRequested += BackButtonOnBackRequested;
+        }
+
+        protected virtual void BackButtonOnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
+        {
+            var currentView = _rootFrame.Content as IMvxView;
+            if (currentView == null)
+            {
+                Mvx.Warning("Ignoring close for viewmodel - rootframe has no current page");
+                return;
+            }
+
+            var navigationService = Mvx.Resolve<IMvxNavigationService>();
+            navigationService.Close(currentView.ViewModel);
         }
 
         public override void Show(MvxViewModelRequest request)
@@ -33,6 +50,8 @@ namespace MvvmCross.Uwp.Views
                 var viewType = viewsContainer.GetViewType(request.ViewModelType);
 
                 _rootFrame.Navigate(viewType, requestText); //Frame won't allow serialization of it's nav-state if it gets a non-simple type as a nav param
+
+                HandleBackButtonVisibility();
             }
             catch (Exception exception)
             {
@@ -92,6 +111,14 @@ namespace MvvmCross.Uwp.Views
             }
 
             _rootFrame.GoBack();
+
+            HandleBackButtonVisibility();
+        }
+
+        protected virtual void HandleBackButtonVisibility()
+        {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                _rootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
     }
 }
