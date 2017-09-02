@@ -106,7 +106,7 @@ namespace MvvmCross.Core.Platform
             protected override bool TryParse(string input, out object result)
             {
                 short value;
-                var toReturn = short.TryParse(input, out value);
+                var toReturn = short.TryParse(input, NumberStyles.Any, CultureInfo.InvariantCulture, out value);
                 result = value;
                 return toReturn;
             }
@@ -117,7 +117,7 @@ namespace MvvmCross.Core.Platform
             protected override bool TryParse(string input, out object result)
             {
                 int value;
-                var toReturn = int.TryParse(input, out value);
+                var toReturn = int.TryParse(input, NumberStyles.Any, CultureInfo.InvariantCulture, out value);
                 result = value;
                 return toReturn;
             }
@@ -128,7 +128,7 @@ namespace MvvmCross.Core.Platform
             protected override bool TryParse(string input, out object result)
             {
                 long value;
-                var toReturn = long.TryParse(input, out value);
+                var toReturn = long.TryParse(input, NumberStyles.Any, CultureInfo.InvariantCulture, out value);
                 result = value;
                 return toReturn;
             }
@@ -139,7 +139,7 @@ namespace MvvmCross.Core.Platform
             protected override bool TryParse(string input, out object result)
             {
                 ushort value;
-                var toReturn = ushort.TryParse(input, out value);
+                var toReturn = ushort.TryParse(input, NumberStyles.Any, CultureInfo.InvariantCulture, out value);
                 result = value;
                 return toReturn;
             }
@@ -150,7 +150,7 @@ namespace MvvmCross.Core.Platform
             protected override bool TryParse(string input, out object result)
             {
                 uint value;
-                var toReturn = uint.TryParse(input, out value);
+                var toReturn = uint.TryParse(input, NumberStyles.Any, CultureInfo.InvariantCulture, out value);
                 result = value;
                 return toReturn;
             }
@@ -161,7 +161,7 @@ namespace MvvmCross.Core.Platform
             protected override bool TryParse(string input, out object result)
             {
                 ulong value;
-                var toReturn = ulong.TryParse(input, out value);
+                var toReturn = ulong.TryParse(input, NumberStyles.Any, CultureInfo.InvariantCulture, out value);
                 result = value;
                 return toReturn;
             }
@@ -228,7 +228,7 @@ namespace MvvmCross.Core.Platform
             protected override bool TryParse(string input, out object result)
             {
                 DateTime value;
-                var toReturn = DateTime.TryParse(input, out value);
+                var toReturn = DateTime.TryParse(input, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out value);
                 result = value;
                 return toReturn;
             }

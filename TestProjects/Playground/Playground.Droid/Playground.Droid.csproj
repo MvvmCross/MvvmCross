@@ -137,6 +137,7 @@
     <AndroidResource Include="Resources\layout\SecondChildView.axml" />
     <AndroidResource Include="Resources\layout\ModalNavView.axml" />
     <AndroidResource Include="Resources\layout\NestedChildView.axml" />
+    <AndroidResource Include="Resources\layout\SheetView.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
