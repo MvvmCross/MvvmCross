@@ -140,6 +140,7 @@ namespace MvvmCross.Plugins.JsonLocalization.Tests
 
             Assert.AreEqual(expected, actual);
         }
+
         #endregion
     }
 }
