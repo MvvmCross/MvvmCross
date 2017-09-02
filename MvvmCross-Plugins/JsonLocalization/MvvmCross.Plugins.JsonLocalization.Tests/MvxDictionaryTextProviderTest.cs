@@ -1,5 +1,7 @@
-﻿using MvvmCross.Plugins.JsonLocalization.Tests.Mocks;
+﻿using System.Collections.Generic;
+using MvvmCross.Plugins.JsonLocalization.Tests.Mocks;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 
 namespace MvvmCross.Plugins.JsonLocalization.Tests
 {
@@ -15,6 +17,63 @@ namespace MvvmCross.Plugins.JsonLocalization.Tests
         public void TearDown()
         {
         }
+
+        #region Tests covertin the 'GetText' method
+
+        [Test]
+        public void GetTextWithExistingValueReturnsTheValueWhenMaskingErrors()
+        {
+            var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(true);
+            var expected = "DummyValue";
+
+            var actual = textProvider.GetText(
+                TestDictionaryTextProvider.LocalizationNamespace,
+                TestDictionaryTextProvider.TypeKey, 
+                "DummyKey");
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void GetTextWithNonExistingValueReturnsTheKeyWhenMaskingErrors()
+        {
+            var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(true);
+            var expected = $"{TestDictionaryTextProvider.LocalizationNamespace}|{TestDictionaryTextProvider.TypeKey}|NonExistingKey";
+
+            var actual = textProvider.GetText(
+                TestDictionaryTextProvider.LocalizationNamespace,
+                TestDictionaryTextProvider.TypeKey,
+                "NonExistingKey");
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void GetTextWithExistingValueReturnsTheValueWhenNotMaskingErrors()
+        {
+            var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
+            var expected = "DummyValue";
+
+            var actual = textProvider.GetText(
+                TestDictionaryTextProvider.LocalizationNamespace,
+                TestDictionaryTextProvider.TypeKey,
+                "DummyKey");
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void GetTextWithNonExistingValueThrowsKeyNotFoundExceptionWhenNotMaskingErrors()
+        {
+            var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
+            
+            Assert.Throws<KeyNotFoundException>(() => textProvider.GetText(
+                TestDictionaryTextProvider.LocalizationNamespace,
+                TestDictionaryTextProvider.TypeKey,
+                "NonExistingKey"));
+        }
+
+        #endregion
 
         #region Tests covering the 'TryGetText' method
 
