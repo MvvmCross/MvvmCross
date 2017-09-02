@@ -84,14 +84,14 @@ This means that, for example, a `DetailViewModel` constructor might now look lik
 ```c#
 public class DetailViewModel : MvxViewModel
 {
-  private readonly IDetailRepository _repository;
+    private readonly IDetailRepository _repository;
 
-  public DetailViewModel(IDetailRepository repository)
-  {
-    _repository = repository;
-  }
+    public DetailViewModel(IDetailRepository repository)
+    {
+        _repository = repository;
+    }
 
-  // ...
+    // ...
 }
 ```
 This Dependency Injection is, of course, optional - your code can instead continue to use ServiceLocation if you prefer:
@@ -99,14 +99,14 @@ This Dependency Injection is, of course, optional - your code can instead contin
 ```c#
 public class DetailViewModel : MvxViewModel
 {
-  private readonly IDetailRepository _repository;
+    private readonly IDetailRepository _repository;
 
-  public DetailViewModel()
-  {
-    repository = Mvx.Resolve<IDetailRepository>();
-  }
+    public DetailViewModel()
+    {
+        repository = Mvx.Resolve<IDetailRepository>();
+    }
 
-  // ...
+    // ...
 }
 ```
 
@@ -132,49 +132,49 @@ you could implement any of:
 ```c#
 public class DetailViewModel : MvxViewModel
 {
-  // ...
+    // ...
 
-  public void Init(string First, string Second, int Answer)
-  {
-    // use the values
-  }
+    public void Init(string First, string Second, int Answer)
+    {
+        // use the values
+    }
 
-  // ...
+    // ...
 }
 ```
 or:
 ```c#
 public class DetailViewModel : MvxViewModel
 {
-  // ...
+    // ...
 
-  public class NavObject
-  {
-    public string First {get;set;}
-    public string Second {get;set;}
-    public int Answer {get;set;}
-  }
+    public class NavObject
+    {
+        public string First {get;set;}
+        public string Second {get;set;}
+        public int Answer {get;set;}
+    }
 
-  public void Init(NavObject navObject)
-  {
-  // use navObject
-  }
+    public void Init(NavObject navObject)
+    {
+        // use navObject
+    }
 
-  // ...
+    // ...
 }
 ```
 or:
 ```c#
 public class DetailViewModel : MvxViewModel
 {  
-  // ...
+    // ...
 
-  public override void InitFromBundle(IMvxBundle bundle)
-  {
-    // use bundle - e.g. bundle.Data["First"]
-  }
+    public override void InitFromBundle(IMvxBundle bundle)
+    {
+        // use bundle - e.g. bundle.Data["First"]
+    }
 
-  // ...
+    // ...
 }
 ```
 
@@ -182,30 +182,30 @@ Note that multiple calls can be used together if required. This allows for some 
 ```c#
 public class DetailViewModel : MvxViewModel
 {
-  // ...
+    // ...
 
-  public class FirstNavObject
-  {
-    public string First {get;set;}
-    public string Second {get;set;}
-  }
+    public class FirstNavObject
+    {
+        public string First {get;set;}
+        public string Second {get;set;}
+    }
 
-  public class SecondNavObject
-  {
-    public int Answer {get;set;}
-  }
+    public class SecondNavObject
+    {
+        public int Answer {get;set;}
+    }
 
-  public void Init(FirstNavObject firstNavObject)
-  {
-    // use firstNavObject
-  }
+    public void Init(FirstNavObject firstNavObject)
+    {
+        // use firstNavObject
+    }
 
-  public void Init(SecondNavObject secondNavObject)
-  {
-    // use secondNavObject
-  }
+    public void Init(SecondNavObject secondNavObject)
+    {
+        // use secondNavObject
+    }
 
-  // ...
+    // ...
 }
 ```
 
@@ -225,20 +225,20 @@ Normally, I'd expect this to be called as:
 ```c#
 public class DetailViewModel : MvxViewModel
 {
-  // ...
+    // ...
 
-  public class SavedState
-  {
-    public string Name {get;set;}
-    public int Position {get;set;}
-  }
+    public class SavedState
+    {
+        public string Name {get;set;}
+        public int Position {get;set;}
+    }
 
-  public void ReloadState(SavedState savedState)
-  {
-    // use savedState
-  }
+    public void ReloadState(SavedState savedState)
+    {
+        // use savedState
+    }
 
-  // ...
+    // ...
 }
 ```
 
@@ -255,39 +255,39 @@ Using a Typed state object:
 ```c#
 public class DetailViewModel : MvxViewModel
 {
-  // ...
+    // ...
 
-  public class SavedState
-  {
-    public string Name {get;set;}
-    public int Position {get;set;}
-  }
-
-  public SavedState SaveState()
-  {
-    return new SavedState()
+    public class SavedState
     {
-      Name = _name,
-      Position = _position
-    };
-  }
+        public string Name {get;set;}
+        public int Position {get;set;}
+    }
 
-  // ...
+    public SavedState SaveState()
+    {
+        return new SavedState()
+        {
+            Name = _name,
+            Position = _position
+        };
+    }
+
+    // ...
 }
 ```
 Using `SavedStateToBundle`:
 ```c#
 public class DetailViewModel : MvxViewModel
 {
-  // ...
+    // ...
 
-  protected override void SaveStateToBundle(IMvxBundle bundle)
-  {
-    bundle.Data["Name"] = _name;
-    bundle.Data["Position"] = _position.ToString();
-  }
+    protected override void SaveStateToBundle(IMvxBundle bundle)
+    {
+        bundle.Data["Name"] = _name;
+        bundle.Data["Position"] = _position.ToString();
+    }
 
-  // ...
+    // ...
 }
 ```
 
@@ -299,14 +299,14 @@ This method is simply:
 ```c#
 public class DetailViewModel : MvxViewModel
 {
-  // ...
+    // ...
 
-  public override void Start()
-  {
-    // do any start
-  }
+    public override void Start()
+    {
+        // do any start
+    }
 
-  // ...
+    // ...
 }
 ```
 
@@ -315,63 +315,63 @@ public class DetailViewModel : MvxViewModel
 For a real app, I would expect the navigation, construction and state saving/loading code to actually look like:
 ```c#
 ShowViewModel<DetailViewModel>(
-  new DetailViewMode.NavObject
-  {
-    First = "Hello",
-    Second = "World",
-    Answer = 42
-  });
+    new DetailViewMode.NavObject
+    {
+        First = "Hello",
+        Second = "World",
+        Answer = 42
+    });
 ```
 
 and
 ```c#
 public class DetailViewModel : MvxViewModel
 {
-  public class SavedState
-  {
-    public string Name {get;set;}
-    public int Position {get;set;}
-  }
-
-  public class NavObject
-  {
-    public string First {get;set;}
-    public string Second {get;set;}
-    public int Answer {get;set;}
-  }
-
-  private readonly IDetailRepository _repository;
-
-  public DetailViewModel(IDetailRepository repository)
-  {
-    _repository = repository;
-  }
-
-  public void Init(NavObject navObject)
-  {
-    // use navObject
-  }
-
-  public void ReloadState(SavedState savedState)
-  {
-    // use savedState
-  }
-
-  public override void Start()
-  {
-    // do any start
-  }
-
-  public SavedState SaveState()
-  {
-    return new SavedState()
+    public class SavedState
     {
-      Name = _name,
-      Position = _position
-    };
-  }
+        public string Name {get;set;}
+        public int Position {get;set;}
+    }
 
-  // ...
+    public class NavObject
+    {
+        public string First {get;set;}
+        public string Second {get;set;}
+        public int Answer {get;set;}
+    }
+
+    private readonly IDetailRepository _repository;
+
+    public DetailViewModel(IDetailRepository repository)
+    {
+        _repository = repository;
+    }
+
+    public void Init(NavObject navObject)
+    {
+        // use navObject
+    }
+
+    public void ReloadState(SavedState savedState)
+    {
+        // use savedState
+    }
+
+    public override void Start()
+    {
+        // do any start
+    }
+
+    public SavedState SaveState()
+    {
+        return new SavedState()
+        {
+        Name = _name,
+        Position = _position
+        };
+    }
+
+    // ...
 }
 ```
 
