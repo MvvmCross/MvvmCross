@@ -236,6 +236,7 @@ Task("Package")
 		"MvvmCross.Plugin.Visibility.nuspec",
 		"MvvmCross.Plugin.WebBrowser.nuspec",
 		"MvvmCross.StarterPack.nuspec",
+		"MvvmCross.Forms.StarterPack.nuspec",
 		"MvvmCross.Tests.nuspec"
 	};
 
