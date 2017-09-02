@@ -1,4 +1,4 @@
-// MvxTextProvider.cs
+﻿// MvxTextProvider.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -27,6 +27,24 @@ namespace MvvmCross.Plugins.JsonLocalization
                 return baseText;
             }
             return string.Format(baseText, formatArgs);
+        }
+
+        public abstract bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name);
+
+        public bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name, params object[] formatArgs)
+        {
+            if (!TryGetText(out textValue, namespaceKey, typeKey, name)) return false;
+
+            if (string.IsNullOrEmpty(textValue))
+                return true;
+
+            if (formatArgs.Length == 0)
+            {
+                return true;
+            }
+
+            textValue = string.Format(textValue, formatArgs);
+            return true;
         }
 
         #endregion Implementation of IMvxTextProvider
