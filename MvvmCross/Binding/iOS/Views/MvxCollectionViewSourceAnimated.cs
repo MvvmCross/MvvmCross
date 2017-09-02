@@ -80,18 +80,16 @@ namespace MvvmCross.Binding.iOS.Views
             {
                 await CollectionView.PerformBatchUpdatesAsync(() =>
                 {
-                    var oldCount = args.OldItems.Count;
-                    var newCount = args.NewItems.Count;
-                    var indexes = new NSIndexPath[oldCount + newCount];
+                    if (args.NewItems.Count != 1 && args.OldItems.Count != 1)
+                    {
+                        Mvx.Trace($"CollectionChanged {args.Action} action called with more than one movement. All data will be reloaded");
+                        CollectionView.ReloadData();
+                        return;
+                    }
 
-                    var startIndex = args.OldStartingIndex;
-                    for (var i = 0; i < oldCount; i++)
-                        indexes[i] = NSIndexPath.FromRowSection(startIndex + i, 0);
-                    startIndex = args.NewStartingIndex;
-                    for (var i = oldCount; i < oldCount + newCount; i++)
-                        indexes[i] = NSIndexPath.FromRowSection(startIndex + i, 0);
-
-                    CollectionView.ReloadItems(indexes);
+                    var oldIndexPath = NSIndexPath.FromRowSection(args.OldStartingIndex, 0);
+                    var newIndexPath = NSIndexPath.FromRowSection(args.NewStartingIndex, 0);
+                    CollectionView.MoveItem(oldIndexPath, newIndexPath);
                 });
             }
             else if (args.Action == NotifyCollectionChangedAction.Remove)
