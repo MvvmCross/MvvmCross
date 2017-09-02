@@ -14,6 +14,11 @@ Abstract classes
 - [MvxTableViewSource.cs](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Binding/iOS/Views/MvxTableViewSource.cs)
   - inherits from the basetable and adds `ItemsSource` for data-binding
   - inheriting classes need only to implement `protected abstract UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);`
+- [MvxExpandableTableViewSource.cs](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross-iOSSupport/MvvmCross.iOS.Support/Views/MvxExpandableTableViewSource.cs)
+  - inherits from [MvxTableViewSource.cs](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Binding/iOS/Views/MvxTableViewSource.cs)
+  - changes `ItemSource` to `IEnumerable<TItemSource> ItemsSource` for data-binding groups
+  - inheriting classes need to implement `protected abstract UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);` and register a header cell and table cell
+  - **Note** available in [MvvmCross.iOS.Support](https://www.nuget.org/packages/MvvmCross.iOS.Support/) nuget package
 
 Concrete classes
 
@@ -51,6 +56,7 @@ public class PolymorphicListItemTypesView : MvxTableViewController
             });
 
         TableView.Source = source;
+        TableView.RowHeight = KittenCell.GetCellHeight();
         TableView.ReloadData();
     }
 
@@ -62,14 +68,10 @@ public class PolymorphicListItemTypesView : MvxTableViewController
         public TableSource(UITableView tableView)
             : base(tableView)
         {
+            tableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
             tableView.RegisterNibForCellReuse(UINib.FromName("KittenCell", NSBundle.MainBundle),
                                               KittenCellIdentifier);
             tableView.RegisterNibForCellReuse(UINib.FromName("DogCell", NSBundle.MainBundle), DogCellIdentifier);
-        }
-
-        public override float GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
-        {
-            return KittenCell.GetCellHeight();
         }
 
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath,
