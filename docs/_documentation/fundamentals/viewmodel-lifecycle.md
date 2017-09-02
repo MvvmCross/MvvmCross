@@ -15,13 +15,13 @@ Alongside [a new Navigation Service](https://www.mvvmcross.com/documentation/fun
 Also note that starting from MvvmCross 5.0 ViewModels will be coupled to the lifecycle of the view. This means that the ViewModel has the following methods available:
 
 ```c#
-    void Appearing();
+void Appearing();
 
-    void Appeared();
+void Appeared();
 
-    void Disappearing();
+void Disappearing();
 
-    void Disappeared();
+void Disappeared();
 ```
 
 The MvxViewController, MvxFragment(s), MvxActivity and the UWP views will call those methods open the platform specific events that are fired. This will give us a more refined control of the ViewModel and the state of its lifecycle. There may be binding that you want to update or resources to clean up, these lifecycle events can help with that.
@@ -65,49 +65,49 @@ The default ViewModelLocator builds new ViewModel instances using a 4-step proce
 ### 1 Construction
 
 In MvvmCross, you can navigate to a `ViewModel` using parameter like:
-
-    ShowViewModel<DetailViewModel>( 
-      new 
-      {
+```c#
+ShowViewModel<DetailViewModel>( 
+    new 
+    {
         First="Hello",
         Second="World",
         Answer=42
-      });
-
+    });
+```
 
 In older version of MvvmCross, these navigation parameters were passed to the constructor of the `ViewModel`.
 
 However, from v3 moving forwards, these navigation parameters are instead passed to the `Init()` method, and the constructor is now free to be used for Dependency Injection.
 
 This means that, for example, a `DetailViewModel` constructor might now look like:
+```c#
+public class DetailViewModel : MvxViewModel
+{
+    private readonly IDetailRepository _repository;
 
-    public class DetailViewModel : MvxViewModel
+    public DetailViewModel(IDetailRepository repository)
     {
-      private readonly IDetailRepository _repository;
- 
-      public DetailViewModel(IDetailRepository repository)
-      {
         _repository = repository;
-      }
- 
-      // ...
     }
 
+    // ...
+}
+```
 This Dependency Injection is, of course, optional - your code can instead continue to use ServiceLocation if you prefer:
 
+```c#
+public class DetailViewModel : MvxViewModel
+{
+    private readonly IDetailRepository _repository;
 
-    public class DetailViewModel : MvxViewModel
+    public DetailViewModel()
     {
-      private readonly IDetailRepository _repository;
- 
-      public DetailViewModel()
-      {
         repository = Mvx.Resolve<IDetailRepository>();
-      }
- 
-      // ...
     }
 
+    // ...
+}
+```
 
 ### 2. Init()
 
@@ -128,85 +128,85 @@ So, for example, to support the navigation:
     RequestNavigate<DetailViewModel>(new { First="Hello", Second="World", Answer=42 });
 
 you could implement any of:
-
-    public class DetailViewModel : MvxViewModel
-    {
-      // ...
+```c#
+public class DetailViewModel : MvxViewModel
+{
+    // ...
     
-      public void Init(string First, string Second, int Answer)
-      {
+    public void Init(string First, string Second, int Answer)
+    {
         // use the values
-      }
-
-      // ...
     }
 
+    // ...
+}
+```
 or:
-
-    public class DetailViewModel : MvxViewModel
-    {
-      // ...
+```c#
+public class DetailViewModel : MvxViewModel
+{
+    // ...
     
-      public class NavObject
-      {
+    public class NavObject
+    {
         public string First {get;set;}
         public string Second {get;set;}
         public int Answer {get;set;}
-      }
-    
-      public void Init(NavObject navObject)
-      {
-      // use navObject
-      }
-    
-      // ...
     }
-
+    
+    public void Init(NavObject navObject)
+    {
+    // use navObject
+    }
+    
+    // ...
+}
+```
 or:
-
-    public class DetailViewModel : MvxViewModel
-    {  
-      // ...
+```c#
+public class DetailViewModel : MvxViewModel
+{  
+    // ...
     
-      public override void InitFromBundle(IMvxBundle bundle)
-      {
+    public override void InitFromBundle(IMvxBundle bundle)
+    {
         // use bundle - e.g. bundle.Data["First"]
-      }
-    
-      // ...
     }
-
+    
+    // ...
+}
+```
 
 Note that multiple calls can be used together if required. This allows for some separation of logic in your code. However, the separate objects cannot share field names and generally this approach is confusing... so is not really recommended:
-
-    public class DetailViewModel : MvxViewModel
-    {
-      // ...
+```c#
+public class DetailViewModel : MvxViewModel
+{
+    // ...
     
-      public class FirstNavObject
-      {
+    public class FirstNavObject
+    {
         public string First {get;set;}
         public string Second {get;set;}
-      }
- 
-      public class SecondNavObject
-      {
-        public int Answer {get;set;}
-      }
- 
-      public void Init(FirstNavObject firstNavObject)
-      {
-        // use firstNavObject
-      }
- 
-      public void Init(SecondNavObject secondNavObject)
-      {
-        // use secondNavObject
-      }
- 
-      // ...
     }
 
+    public class SecondNavObject
+    {
+        public int Answer {get;set;}
+    }
+
+    public void Init(FirstNavObject firstNavObject)
+    {
+        // use firstNavObject
+    }
+
+    public void Init(SecondNavObject secondNavObject)
+    {
+        // use secondNavObject
+    }
+
+    // ...
+}
+```
 
 ### 3. ReloadState
 
@@ -221,25 +221,25 @@ Exactly as with `Init()`, `ReloadState` can be called in several different ways.
 - as `ReloadStateFromBundle()` using an `IMvxBundle` parameter - this last flavor is always supported via the `IMvxViewModel` interface.
 
 Normally, I'd expect this to be called as:
-
-    public class DetailViewModel : MvxViewModel
-    {
-      // ...
+```c#
+public class DetailViewModel : MvxViewModel
+{
+    // ...
     
-      public class SavedState
-      {
+    public class SavedState
+    {
         public string Name {get;set;}
         public int Position {get;set;}
-      }
+    }
     
-      public void ReloadState(SavedState savedState)
-      {
+    public void ReloadState(SavedState savedState)
+    {
         // use savedState
-      }
- 
-      // ...
     }
 
+    // ...
+}
+```
 
 #### Aside: where does the SavedState come from?
 
@@ -251,128 +251,128 @@ This can be implemented in one of two ways:
 - using the override `SavedStateToBundle(IMvxBundle bundle)`
 
 Using a Typed state object:
-
-    public class DetailViewModel : MvxViewModel
-    {
-      // ...
+```c#
+public class DetailViewModel : MvxViewModel
+{
+    // ...
     
-      public class SavedState
-      {
+    public class SavedState
+    {
         public string Name {get;set;}
         public int Position {get;set;}
-      }
- 
-      public SavedState SaveState()
-      {
+    }
+
+    public SavedState SaveState()
+    {
         return new SavedState()
         {
-          Name = _name,
-          Position = _position
+        Name = _name,
+        Position = _position
         };
-      }
- 
-      // ...
     }
 
+    // ...
+}
+```
 Using `SavedStateToBundle`:
+```c#
+public class DetailViewModel : MvxViewModel
+{
+    // ...
 
-    public class DetailViewModel : MvxViewModel
+    protected override void SaveStateToBundle(IMvxBundle bundle)
     {
-      // ...
- 
-      protected override void SaveStateToBundle(IMvxBundle bundle)
-      {
         bundle.Data["Name"] = _name;
         bundle.Data["Position"] = _position.ToString();
-      }
-    
-      // ...
     }
-
+    
+    // ...
+}
+```
 
 ### 4. Start()
 
 After all of `Construction`, `Init`, and `ReloadState` is complete, then the `Start()` method will be called.
 
 This method is simply:
-
-    public class DetailViewModel : MvxViewModel
-    {
-      // ...
+```c#
+public class DetailViewModel : MvxViewModel
+{
+    // ...
     
-      public override void Start()
-      {
+    public override void Start()
+    {
         // do any start
-      }
- 
-      // ...
     }
 
+    // ...
+}
+```
 
 ### Putting it all together
 
 For a real app, I would expect the navigation, construction and state saving/loading code to actually look like:
-
-    ShowViewModel<DetailViewModel>(
-      new DetailViewMode.NavObject
-      {
+```c#
+ShowViewModel<DetailViewModel>(
+    new DetailViewMode.NavObject
+    {
         First = "Hello",
         Second = "World",
         Answer = 42
-      });
-
+    });
+```
 
 and
-
-    public class DetailViewModel : MvxViewModel
+```c#
+public class DetailViewModel : MvxViewModel
+{
+    public class SavedState
     {
-      public class SavedState
-      {
         public string Name {get;set;}
         public int Position {get;set;}
-      }
+    }
     
-      public class NavObject
-      {
+    public class NavObject
+    {
         public string First {get;set;}
         public string Second {get;set;}
         public int Answer {get;set;}
-      }
- 
-      private readonly IDetailRepository _repository;
-    
-      public DetailViewModel(IDetailRepository repository)
-      {
-        _repository = repository;
-      }
-
-      public void Init(NavObject navObject)
-      {
-        // use navObject
-      }
-    
-      public void ReloadState(SavedState savedState)
-      {
-        // use savedState
-      }
-    
-      public override void Start()
-      {
-        // do any start
-      }
-    
-      public SavedState SaveState()
-      {
-        return new SavedState()
-        {
-          Name = _name,
-          Position = _position
-        };
-      }
-    
-      // ...
     }
 
+    private readonly IDetailRepository _repository;
+    
+    public DetailViewModel(IDetailRepository repository)
+    {
+        _repository = repository;
+    }
+
+    public void Init(NavObject navObject)
+    {
+        // use navObject
+    }
+    
+    public void ReloadState(SavedState savedState)
+    {
+        // use savedState
+    }
+    
+    public override void Start()
+    {
+        // do any start
+    }
+    
+    public SavedState SaveState()
+    {
+        return new SavedState()
+        {
+        Name = _name,
+        Position = _position
+        };
+    }
+    
+    // ...
+}
+```
 
 ### Overriding CIRS.
 
