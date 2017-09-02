@@ -1,0 +1,8 @@
+The steps to get this Core project working are:
+
+1. Ensure your PCL is targeting a profile compatible with the MvvmCross.Forms dependency i.e.: Profile111
+
+2. Change the Build Action of the following files from 'Page' to 'Embedded Resource':
+
+    * Core|Pages|MvxFormsPage.xaml
+    * Core|App.xaml
