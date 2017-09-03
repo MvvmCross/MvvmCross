@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
-using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
+using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Views;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
@@ -19,15 +18,13 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
         }
 
-        protected override IEnumerable<Assembly> AndroidViewAssemblies => new List<Assembly>(base.AndroidViewAssemblies)
-        {
-            typeof(Toolbar).Assembly,
-            typeof(DrawerLayout).Assembly,
-            typeof(NestedScrollView).Assembly,
-            typeof(SlidingPaneLayout).Assembly,
-            typeof(ViewPager).Assembly,
-            typeof(Support.V4.MvxSwipeRefreshLayout).Assembly
-        };
+        protected override IEnumerable<Assembly> AndroidViewAssemblies => 
+            new List<Assembly>(base.AndroidViewAssemblies)
+            {
+                typeof(Toolbar).Assembly,
+                typeof(DrawerLayout).Assembly,
+                typeof(MvxSwipeRefreshLayout).Assembly
+            };
 
         /// <summary>
         /// This is very important to override. The default view presenter does not know how to show fragments!
