@@ -157,6 +157,7 @@ Task("GitLink")
         "playground.mac",
 		"playground.wpf",
         "Playground.Droid",
+        "Playground.Uwp",
 		"MvxBindingsExample",
 		"MvxBindingsExample.Android",
 		"MvxBindingsExample.iOS",
