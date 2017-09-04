@@ -63,9 +63,6 @@
     <Compile Include="Views\MvxTranslatedIntent.cs" />
     <Compile Include="Views\IMvxAndroidViewPresenter.cs" />
     <Compile Include="Platform\MvxAndroidSetupSingleton.cs" />
-    <Compile Include="Simple\MvxSimpleAndroidSetup.cs" />
-    <Compile Include="Simple\MvxSimpleBindingActivity.cs" />
-    <Compile Include="Simple\MvxSimpleEmptyAndroidApp.cs" />
     <Compile Include="Views\IMvxChildViewModelOwner.cs" />
     <Compile Include="Platform\IMvxSavedStateConverter.cs" />
     <Compile Include="Views\MvxActivityAdapter.cs" />
