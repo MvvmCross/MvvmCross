@@ -401,12 +401,15 @@ public void Init(DetailParameters parameters)
 - it must contain a parameterless constructor
 - it should contain only public properties with both `get` and `set` access
 - these properties should be only of types:
-- `int`
-- `long`
-- `double`
-- `string`
-- `Guid`
-- enumeration values
+    - `bool`
+    - Integral types: `sbyte`, `short`, `int`, `long`, `byte`, `ushort`, `uint`, `ulong`
+    - Floating-point types: `float`, `double`
+    - `decimal`
+    - `char`
+    - `string`
+    - `DateTime`
+    - `Guid`
+    - Enumeration values
 
 ## Navigation with parameters - using an anonymous parameter object
 
@@ -425,15 +428,18 @@ For example, you can:
 ```c#
 public void Init(int index)
 {
-// use the index here
+    // use the index here
 }
 ```
 
 **Note** that due to serialization requirements, the only available parameter types used within this technique are only:
 
-- `int`
-- `long`
-- `double`
+- `bool`
+- Integral types: `sbyte`, `short`, `int`, `long`, `byte`, `ushort`, `uint`, `ulong`
+- Floating-point types: `float`, `double`
+- `decimal`
+- `char`
 - `string`
+- `DateTime`
 - `Guid`
-- enumeration values
+- Enumeration values
