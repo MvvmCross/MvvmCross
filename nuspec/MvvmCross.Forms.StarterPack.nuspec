@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.Forms.StarterPack</id>
+		<version>$version$</version>
+		<title>MvvmCross - Forms Starter Pack</title>
+		<description>
+		MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains the 'Getting Started' libraries for MvvmCross and installs sample files. This package can be removed after installation so the sample files don't get recreated on each update.
+		</description>
+		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
+		<dependencies>
+			<dependency id="MvvmCross" version="[$version$]" />
+      <dependency id="MvvmCross.Forms" version="[$version$]" />
+		</dependencies>
+	</metadata>
+	<files>		
+		<!-- PCL - Content -->
+    <file src="Forms\CoreContent\_ Core.txt" target="content\portable-net45+win+wpa81+wp80\ToDo-MvvmCross\_ Core.txt" />
+		<file src="Forms\CoreContent\MvxFormsViewModel.cs.pp" target="content\portable-net45+win+wpa81+wp80\ViewModels\MvxFormsViewModel.cs.pp" />
+    <file src="Forms\CoreContent\MvxFormsPage.xaml.cs.pp" target="content\portable-net45+win+wpa81+wp80\Pages\MvxFormsPage.xaml.cs.pp" />
+    <file src="Forms\CoreContent\MvxFormsPage.xaml.pp" target="content\portable-net45+win+wpa81+wp80\Pages\MvxFormsPage.xaml.pp" />
+		<file src="Forms\CoreContent\App.xaml.pp" target="content\portable-net45+win+wpa81+wp80\App.xaml.pp" />
+    <file src="Forms\CoreContent\App.xaml.cs.pp" target="content\portable-net45+win+wpa81+wp80\App.xaml.cs.pp" />
+    <file src="Forms\CoreContent\CoreApp.cs.pp" target="content\portable-net45+win+wpa81+wp80\CoreApp.cs.pp" />
+
+		<!-- Droid - Content -->
+    <file src="Forms\DroidContent\DebugTrace.cs.pp" target="content\MonoAndroid\DebugTrace.cs.pp" />
+    <file src="Forms\DroidContent\MainActivity.cs.pp" target="content\MonoAndroid\MainActivity.cs.pp" />
+    <file src="Forms\DroidContent\Setup.cs.pp" target="content\MonoAndroid\Setup.cs.pp" />
+    <file src="Forms\DroidContent\SplashScreen.cs.pp" target="content\MonoAndroid\SplashScreen.cs.pp" />
+    <file src="Forms\DroidContent\splash.png" target="content\MonoAndroid\Resources\drawable\splash.png" />
+    <file src="Forms\DroidContent\SplashScreen.axml" target="content\MonoAndroid\Resources\layout\SplashScreen.axml" />
+    <file src="Forms\DroidContent\SplashStyle.xml" target="content\MonoAndroid\Resources\values\SplashStyle.xml" />
+
+    <!-- iOS - Content -->
+    <file src="Forms\iOSContent\AppDelegate.cs.pp" target="content\Xamarin.iOS10\AppDelegate.cs.pp" />
+    <file src="Forms\iOSContent\DebugTrace.cs.pp" target="content\Xamarin.iOS10\DebugTrace.cs.pp" />
+    <file src="Forms\iOSContent\Setup.cs.pp" target="content\Xamarin.iOS10\Setup.cs.pp" />
+						
+	</files>
+</package>
