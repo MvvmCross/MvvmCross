@@ -8,7 +8,8 @@ using MvvmCross.Platform;
 
 namespace $rootnamespace$
 {
-    [Activity(Label = "$rootnamespace$.Droid", Icon = "@drawable/icon", Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "$rootnamespace$.Droid", Icon = "@drawable/icon", Theme = "@style/MainTheme", 
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : MvxFormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
