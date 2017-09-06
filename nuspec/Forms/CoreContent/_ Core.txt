@@ -4,5 +4,5 @@ The steps to get this Core project working are:
 
 2. Change the Build Action of the following files from 'Page' to 'Embedded Resource':
 
-    * Core|Pages|MvxFormsPage.xaml
+    * Core|Pages|MainPage.xaml
     * Core|App.xaml

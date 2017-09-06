@@ -3,20 +3,18 @@ using MvvmCross.Core.ViewModels;
 
 namespace $rootnamespace$.Core.ViewModels
 {
-    public class MvxFormsViewModel : MvxViewModel
+    public class MainViewModel : MvxViewModel
     {
         private string _text;
+        private IMvxCommand _showTextCommand;
 
-        public MvxFormsViewModel()
-        {
-        }
-
-        public IMvxCommand ShowTextCommand => new MvxCommand(ShowText);
+        public IMvxCommand ShowTextCommand => 
+            _showTextCommand = _showTextCommand ?? new MvxCommand(DoShowTextCommand);
 
         public string Text
         {
-            get { return _text; }
-            set { SetProperty(ref _text, value); }
+            get => _text;
+            set => SetProperty(ref _text, value);
         }
 
         public override Task Initialize()
@@ -24,7 +22,7 @@ namespace $rootnamespace$.Core.ViewModels
             return base.Initialize();
         }        
         
-        private void ShowText()
+        private void DoShowTextCommand()
         {
             Text = "Hello MvvmCross!";
         }               

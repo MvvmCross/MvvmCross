@@ -6,9 +6,9 @@ using Xamarin.Forms;
 
 namespace $rootnamespace$.Core.Pages
 {
-    public partial class MvxFormsPage : MvxContentPage<MvxFormsViewModel>
+    public partial class MainPage : MvxContentPage<MainViewModel>
     {
-        public MvxFormsPage()
+        public MainPage()
         {
             InitializeComponent();
         }
