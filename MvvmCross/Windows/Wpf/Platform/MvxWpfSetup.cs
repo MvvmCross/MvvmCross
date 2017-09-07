@@ -13,6 +13,8 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
 using MvvmCross.Wpf.Views;
+using MvvmCross.Wpf.Views.Presenters;
+using System.Windows.Controls;
 
 namespace MvvmCross.Wpf.Platform
 {
@@ -28,6 +30,12 @@ namespace MvvmCross.Wpf.Platform
             _presenter = presenter;
         }
 
+        protected MvxWpfSetup(Dispatcher uiThreadDispatcher, ContentControl root)
+        {
+            _uiThreadDispatcher = uiThreadDispatcher;
+            _presenter = CreateViewPresenter(root);
+        }
+
         protected override IMvxTrace CreateDebugTrace()
         {
             return new MvxTraceTrace();
@@ -36,13 +44,18 @@ namespace MvvmCross.Wpf.Platform
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
             var toReturn = CreateWpfViewsContainer();
-            Mvx.RegisterSingleton<IMvxSimpleWpfViewLoader>(toReturn);
+            Mvx.RegisterSingleton<IMvxWpfViewLoader>(toReturn);
             return toReturn;
         }
 
         protected virtual IMvxWpfViewsContainer CreateWpfViewsContainer()
         {
             return new MvxWpfViewsContainer();
+        }
+
+        protected virtual IMvxWpfViewPresenter CreateViewPresenter(ContentControl root)
+        {
+            return new MvxWpfViewPresenter(root);
         }
 
         protected override IMvxViewDispatcher CreateViewDispatcher()

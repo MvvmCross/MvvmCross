@@ -23,7 +23,6 @@ namespace MvvmCross.Droid.Views
     [Register("mvvmcross.droid.views.MvxTabActivity")]
     public abstract class MvxTabActivity
         : MvxEventSourceTabActivity, IMvxAndroidView, IMvxChildViewModelOwner
-          , ViewTreeObserver.IOnGlobalLayoutListener
     {
         private View _view;
 
@@ -71,8 +70,6 @@ namespace MvvmCross.Droid.Views
         {
             _view = this.BindingInflate(layoutResId, null);
 
-            _view.ViewTreeObserver.AddOnGlobalLayoutListener(this);
-
             SetContentView(_view);
         }
 
@@ -86,41 +83,35 @@ namespace MvvmCross.Droid.Views
             base.OnCreate(bundle);
             ViewModel?.ViewCreated();
         }
+		protected override void OnDestroy()
+		{
+			base.OnDestroy();
+			ViewModel?.ViewDestroy();
+		}
 
-        public override void OnAttachedToWindow()
-        {
-            base.OnAttachedToWindow();
-            ViewModel?.ViewAppearing();
-        }
+		protected override void OnStart()
+		{
+			base.OnStart();
+			ViewModel?.ViewAppearing();
+		}
 
-        public override void OnDetachedFromWindow()
-        {
-            base.OnDetachedFromWindow();
-            ViewModel?.ViewDisappearing(); // we don't have anywhere to get this info
-            ViewModel?.ViewDisappeared();
-        }
+		protected override void OnResume()
+		{
+			base.OnResume();
+			ViewModel?.ViewAppeared();
+		}
 
-        public void OnGlobalLayout()
-        {
-            if (_view != null)
-            {
-                if (_view.ViewTreeObserver.IsAlive)
-                {
-                    if (Build.VERSION.SdkInt < BuildVersionCodes.JellyBean)
-                    {
-#pragma warning disable CS0618 // Type or member is obsolete
-                        _view.ViewTreeObserver.RemoveGlobalOnLayoutListener(this);
-#pragma warning restore CS0618 // Type or member is obsolete
-                    }
-                    else
-                    {
-                        _view.ViewTreeObserver.RemoveOnGlobalLayoutListener(this);
-                    }
-                }
-                _view = null;
-                ViewModel?.ViewAppeared();
-            }
-        }
+		protected override void OnPause()
+		{
+			base.OnPause();
+			ViewModel?.ViewDisappearing();
+		}
+
+		protected override void OnStop()
+		{
+			base.OnStop();
+			ViewModel?.ViewDisappeared();
+		}
     }
 
     [Obsolete("TabActivity is obsolete. Use ViewPager + Indicator or any other Activity with Toolbar support.")]

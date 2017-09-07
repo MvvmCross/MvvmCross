@@ -1,39 +1,42 @@
 ﻿using System.Windows.Input;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
     public class ChildViewModel : MvxViewModel
     {
-        public ChildViewModel()
+        private readonly IMvxNavigationService _navigationService;
+
+        public ChildViewModel(IMvxNavigationService navigationService)
+        {
+            _navigationService = navigationService;
+
+            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
+
+            ShowSecondChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SecondChildViewModel>());
+
+            ShowRootCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<RootViewModel>());
+        }
+
+        public override System.Threading.Tasks.Task Initialize()
+        {
+            return base.Initialize();
+        }
+
+        public void Init()
         {
         }
 
-        private ICommand _closeCommand;
-        public ICommand CloseCommand
+        public override void Start()
         {
-            get
-            {
-                return _closeCommand ?? (_closeCommand = new MvxCommand(() => Close(this)));
-            }
+            base.Start();
         }
 
-        private ICommand _showSecondChildCommand;
-        public ICommand ShowSecondChildCommand
-        {
-            get
-            {
-                return _showSecondChildCommand ?? (_showSecondChildCommand = new MvxCommand(() => ShowViewModel<SecondChildViewModel>()));
-            }
-        }
+        public IMvxAsyncCommand CloseCommand { get; private set; }
 
-        private ICommand _showRootCommand;
-        public ICommand ShowRootCommand
-        {
-            get
-            {
-                return _showRootCommand ?? (_showRootCommand = new MvxCommand(() => ShowViewModel<RootViewModel>()));
-            }
-        }
+        public IMvxAsyncCommand ShowSecondChildCommand { get; private set; }
+
+        public IMvxAsyncCommand ShowRootCommand { get; private set; }
     }
 }

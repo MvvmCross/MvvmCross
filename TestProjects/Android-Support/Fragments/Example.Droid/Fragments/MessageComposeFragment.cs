@@ -3,12 +3,12 @@ using Android.Runtime;
 using Android.Views;
 using Example.Core.ViewModels;
 using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Support.V4;
+using MvvmCross.Droid.Views.Attributes;
 
 namespace Example.Droid.Fragments
 {
-    [MvxFragment(typeof(MessagesViewModel), Resource.Id.content_frame, true)]
+    [MvxFragmentPresentation(typeof(MessagesViewModel), Resource.Id.content_frame, true)]
     [Register("example.droid.fragments.MessageComposeFragment")]
     public class MessageComposeFragment : MvxFragment<ComposeMessageViewModel>
     {

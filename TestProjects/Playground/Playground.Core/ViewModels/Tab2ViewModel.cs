@@ -1,26 +1,24 @@
 ﻿using System.Windows.Input;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
     public class Tab2ViewModel : MvxViewModel
     {
-        private ICommand _showRootViewModelCommand;
-        public ICommand ShowRootViewModelCommand
+        private readonly IMvxNavigationService _navigationService;
+
+        public Tab2ViewModel(IMvxNavigationService navigationService)
         {
-            get
-            {
-                return _showRootViewModelCommand ?? (_showRootViewModelCommand = new MvxCommand(() => ShowViewModel<RootViewModel>()));
-            }
+            _navigationService = navigationService;
+
+            ShowRootViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<RootViewModel>());
+
+            CloseViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
         }
 
-        private ICommand _closeViewModelCommand;
-        public ICommand CloseViewModelCommand
-        {
-            get
-            {
-                return _closeViewModelCommand ?? (_closeViewModelCommand = new MvxCommand(() => Close(this)));
-            }
-        }
+        public IMvxAsyncCommand ShowRootViewModelCommand { get; private set; }
+
+        public IMvxAsyncCommand CloseViewModelCommand { get; private set; }
     }
 }

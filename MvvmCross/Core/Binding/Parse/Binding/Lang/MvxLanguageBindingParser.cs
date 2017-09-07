@@ -83,8 +83,8 @@ namespace MvvmCross.Binding.Parse.Binding.Lang
             if (block.Length < 2)
                 return block;
 
-            if (block.StartsWith("\'") && block.EndsWith("\'")
-                || block.StartsWith("\"") && block.EndsWith("\""))
+            if ((block.StartsWith("\'") && block.EndsWith("\'"))
+                || (block.StartsWith("\"") && block.EndsWith("\"")))
                 return block.Substring(1, block.Length - 2);
 
             return block;

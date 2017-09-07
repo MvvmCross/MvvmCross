@@ -1,5 +1,35 @@
 # MvvmCross site changelog
 
+## Mvxtheme 1.6 (2017-08-10)
+
+* Jekyll 3.5.0 rename `gem` to `plugins`.
+
+* Update Jekyll and plugins version.
+
+* Fix RSVP button in the middle.
+
+* Add speakers section.
+
+* Remove Gemfile.lock from .gitignore.
+
+## Mvxtheme 1.5 (2017-08-03)
+
+* Add XABLU and Microsoft logo.
+
+* Fix button styles and add logo styles.
+
+* Fix some tag bug, add logos, remove unused javascript
+
+## Mvxtheme 1.4 (2017-07-29)
+
+* Add member list table.
+
+* Make mobile friendly.
+
+## Mvxtheme 1.3 (2017-07-28)
+
+* Add Hackfest page
+
 ## Mvxtheme 1.2 (2017-05-26)
 
 New features:

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MvvmCross.Wpf.Views;
 using System.Windows.Threading;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Wpf.Views.Presenters;
 
 namespace Eventhooks.Wpf
 {

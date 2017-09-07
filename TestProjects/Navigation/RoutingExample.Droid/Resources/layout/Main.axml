@@ -25,6 +25,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:text="Show dialog"
+            local:MvxBind="Click ShowDialogACommand;" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="mvx://test/random"
             local:MvxBind="Click ShowRandomCommand;" />
         <FrameLayout

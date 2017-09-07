@@ -1,5 +1,4 @@
-﻿
-namespace PageRendererExample
+﻿namespace PageRendererExample
 {
     public interface IImageHolder
     {        
@@ -9,4 +8,3 @@ namespace PageRendererExample
         void Update(byte[] imageBytes, string mimeType);
     }
 }
-

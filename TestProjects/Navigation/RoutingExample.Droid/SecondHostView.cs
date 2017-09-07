@@ -19,13 +19,13 @@ namespace RoutingExample.Droid
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "mvvmcross.com",
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
-    public class SecondHostView : MvxCachingFragmentCompatActivity<SecondHostViewModel>
+    public class SecondHostView : MvxAppCompatActivity<SecondHostViewModel>
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.Layout.secondhost);
+            SetContentView(Resource.Layout.Main);
         }
 
         protected override void OnNewIntent(Intent intent)
@@ -40,4 +40,3 @@ namespace RoutingExample.Droid
         }
     }
 }
-

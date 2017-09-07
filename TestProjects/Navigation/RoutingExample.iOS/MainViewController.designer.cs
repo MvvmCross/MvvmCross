@@ -1,47 +1,69 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
-// actions declared in your storyboard file.
-// Manual changes to this file will not be maintained.
+// This file has been generated automatically by Visual Studio to store outlets and
+// actions made in the UI designer. If it is removed, they will be lost.
+// Manual changes to this file may not be handled correctly.
 //
 using Foundation;
-using System;
 using System.CodeDom.Compiler;
-using UIKit;
 
 namespace RoutingExample.iOS
 {
-    [Register ("MainViewController")]
-    partial class MainViewController
-    {
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton BtnRandom { get; set; }
+	[Register ("MainViewController")]
+	partial class MainViewController
+	{
+		[Outlet]
+		UIKit.UIButton BtnPrePop { get; set; }
 
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton BtnTestA { get; set; }
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIKit.UIButton BtnRandom { get; set; }
 
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton BtnTestB { get; set; }
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIKit.UIButton BtnTestA { get; set; }
 
-        void ReleaseDesignerOutlets ()
-        {
-            if (BtnRandom != null) {
-                BtnRandom.Dispose ();
-                BtnRandom = null;
-            }
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIKit.UIButton BtnTestB { get; set; }
 
-            if (BtnTestA != null) {
-                BtnTestA.Dispose ();
-                BtnTestA = null;
-            }
+		[Outlet]
+		UIKit.UIButton BtnTestC { get; set; }
 
-            if (BtnTestB != null) {
-                BtnTestB.Dispose ();
-                BtnTestB = null;
-            }
-        }
-    }
+		[Outlet]
+		UIKit.UILabel ResultLabel { get; set; }
+		
+		void ReleaseDesignerOutlets ()
+		{
+			if (BtnPrePop != null) {
+				BtnPrePop.Dispose ();
+				BtnPrePop = null;
+			}
+
+			if (BtnRandom != null) {
+				BtnRandom.Dispose ();
+				BtnRandom = null;
+			}
+
+			if (BtnTestA != null) {
+				BtnTestA.Dispose ();
+				BtnTestA = null;
+			}
+
+			if (BtnTestB != null) {
+				BtnTestB.Dispose ();
+				BtnTestB = null;
+			}
+
+			if (BtnTestC != null) {
+				BtnTestC.Dispose ();
+				BtnTestC = null;
+			}
+
+			if (ResultLabel != null) {
+				ResultLabel.Dispose ();
+				ResultLabel = null;
+			}
+		}
+	}
 }

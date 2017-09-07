@@ -43,6 +43,19 @@ namespace MvvmCross.Plugins.JsonLocalization
             throw new KeyNotFoundException("Could not find text lookup for " + key);
         }
 
+        public override bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name)
+        {
+            var key = MakeLookupKey(namespaceKey, typeKey, name);
+            
+            if (_entries.TryGetValue(key, out textValue))
+                return true;
+
+            MvxTrace.Trace("Text value missing for " + key);
+
+            textValue = key;
+            return false;
+        }
+
         #endregion Implementation of IMvxTextProvider
     }
 }

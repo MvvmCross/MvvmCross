@@ -21,23 +21,27 @@ public interface IMvxNavigationService
     event BeforeCloseEventHandler BeforeClose;
     event AfterCloseEventHandler AfterClose;
 
-    Task Navigate<TViewModel>(IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel;
-    Task Navigate<TViewModel, TParameter>(TParameter param, IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel<TParameter> where TParameter : class;
-    Task<TResult> Navigate<TViewModel, TResult>(IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModelResult<TResult> where TResult : class;
-    Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class;
-
     Task Navigate(IMvxViewModel viewModel, IMvxBundle presentationBundle = null);
-    Task Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle presentationBundle = null) where TParameter : class;
-    Task<TResult> Navigate<TResult>(IMvxViewModelResult<TResult> viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TResult : class;
-    Task<TResult> Navigate<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TParameter : class where TResult : class;
+    Task Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle presentationBundle = null);
+    Task<TResult> Navigate<TResult>(IMvxViewModelResult<TResult> viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+    Task<TResult> Navigate<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+
+    Task Navigate(Type viewModelType, IMvxBundle presentationBundle = null);
+    Task Navigate<TParameter>(Type viewModelType, TParameter param, IMvxBundle presentationBundle = null);
+    Task<TResult> Navigate<TResult>(Type viewModelType, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+    Task<TResult> Navigate<TParameter, TResult>(Type viewModelType, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
 
     Task Navigate(string path, IMvxBundle presentationBundle = null);
-    Task Navigate<TParameter>(string path, TParameter param, IMvxBundle presentationBundle = null) where TParameter : class;
-    Task<TResult> Navigate<TResult>(string path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TResult : class;
-    Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TParameter : class where TResult : class;
+    Task Navigate<TParameter>(string path, TParameter param, IMvxBundle presentationBundle = null);
+    Task<TResult> Navigate<TResult>(string path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+    Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
 
     Task<bool> CanNavigate(string path);
+
     Task<bool> Close(IMvxViewModel viewModel);
+    Task<bool> Close<TResult>(IMvxViewModelResult<TResult> viewModel, TResult result);
+
+    bool ChangePresentation(MvxPresentationHint hint);
 }
 ```
 
@@ -47,11 +51,16 @@ Some extension methods make it easier to use your already existing code:
 public static class MvxNavigationExtensions
 {
     public static Task<bool> CanNavigate(this IMvxNavigationService navigationService, Uri path)
+
     public static Task Navigate(this IMvxNavigationService navigationService, Uri path, IMvxBundle presentationBundle = null)
-    public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null) where TParameter : class
-    public static Task Navigate<TResult>(this IMvxNavigationService navigationService, Uri path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TResult : class
-    public static Task Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TParameter : class where TResult : class
-    public static Task<bool> Close<TViewModel>(this IMvxNavigationService navigationService)
+    public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null)
+    public static Task Navigate<TResult>(this IMvxNavigationService navigationService, Uri path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
+    public static Task Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
+
+    public static Task Navigate<TViewModel>(this IMvxNavigationService navigationService, IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel
+    public static Task Navigate<TViewModel, TParameter>(this IMvxNavigationService navigationService, TParameter param, IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel<TParameter>
+    public static Task<TResult> Navigate<TViewModel, TResult>(this IMvxNavigationService navigationService, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModelResult<TResult>
+    public static Task<TResult> Navigate<TViewModel, TParameter, TResult>(this IMvxNavigationService navigationService, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModel<TParameter, TResult>
 }
 ```
 
@@ -65,18 +74,29 @@ public class MyViewModel : MvxViewModel
     {
         _navigationService = navigationService;
     }
+    
+    public override void Prepare()
+    {
+        //Do anything before navigating to the view
+    }
 
     public async Task SomeMethod()
     {
-        _navigationService.Navigate<NextViewModel, MyObject>(new MyObject());
+        await _navigationService.Navigate<NextViewModel, MyObject>(new MyObject());
     }
 }
 
 public class NextViewModel : MvxViewModel<MyObject>
 {
-    public async Task Initialize(MyObject parameter)
+    public override void Prepare(MyObject parameter)
     {
-        //Do something with parameter
+        //Do anything before navigating to the view
+        //Save the parameter to a property if you want to use it later
+    }
+    
+    public override async Task Initialize()
+    {
+        //Do heavy work and data loading here
     }
 }
 ```
@@ -91,6 +111,11 @@ public class MyViewModel : MvxViewModel
     {
         _navigationService = navigationService;
     }
+    
+    public override async Task Initialize()
+    {
+        //Do heavy work and data loading here
+    }
 
     public async Task SomeMethod()
     {
@@ -101,14 +126,26 @@ public class MyViewModel : MvxViewModel
 
 public class NextViewModel : MvxViewModel<MyObject, MyReturnObject>
 {
-    public async Task Initialize(MyObject parameter)
+    private readonly IMvxNavigationService _navigationService;
+    public MyViewModel(IMvxNavigationService navigation)
     {
-        //Do something with parameter
+        _navigationService = navigationService;
     }
     
-    public async Task SomeMethod()
+    public override void Prepare(MyObject parameter)
     {
-        await Close(new MyReturnObject());
+        //Do anything before navigating to the view
+        //Save the parameter to a property if you want to use it later
+    }
+    
+    public override async Task Initialize()
+    {
+        //Do heavy work and data loading here
+    }
+    
+    public async Task SomeMethodToClose()
+    {
+        await _navigationService.Close(this, new MyReturnObject());
     }
 }
 ```
@@ -118,6 +155,19 @@ You can provide a CancellationToken to abort waiting for a Result. This will clo
 If you have a BaseViewModel you might not be able to inherit `MvxViewModel<TParameter>` or `MvxViewModel<TParameter, TResult>` because you already have the BaseViewModel as base class. In this case you can implement the following interface:
 
 `IMvxViewModel<TParameter>`, `IMvxViewModelResult<TResult>` or `IMvxViewModel<TParameter, TResult>`
+
+To implement returning your own result add the following to your (Base)ViewModel:
+
+```c#
+public override TaskCompletionSource<object> CloseCompletionSource { get; set; }
+
+public override void ViewDestroy()
+{
+    if (CloseCompletionSource != null && !CloseCompletionSource.Task.IsCompleted && !CloseCompletionSource.Task.IsFaulted)
+        CloseCompletionSource?.TrySetCanceled();
+    base.ViewDestroy();
+}
+```
 
 To check if you are able to navigate to a certain ViewModel you can use the `CanNavigate` method.
 
@@ -170,7 +220,7 @@ namespace *.ViewModels
     public class ViewModelA
         : MvxViewModel
     {
-    	public void Initialize(string id) // you can use captured groups defined in the regex as parameters here
+    	public void Init(string id) // you can use captured groups defined in the regex as parameters here
         {
 
         }
@@ -304,7 +354,7 @@ public class MyViewModel : MvxViewModel<TParameter>
 If you have a BaseViewModel you might not be able to inherit `MvxViewModel<TParameter>` because you already have the BaseViewModel as base class. In this case you can implement the following interface:
 
 ```c#
-IMvxViewModelInitializer<TInit>
+IMvxViewModel<TParameter>
 ```
 
 MvvmCross uses JSON to serialize the object and to use complex parameters you should have the MvvmCross Json plugin installed or register your own IMvxJsonConverter.
@@ -351,12 +401,15 @@ public void Init(DetailParameters parameters)
 - it must contain a parameterless constructor
 - it should contain only public properties with both `get` and `set` access
 - these properties should be only of types:
-- `int`
-- `long`
-- `double`
-- `string`
-- `Guid`
-- enumeration values
+    - `bool`
+    - Integral types: `sbyte`, `short`, `int`, `long`, `byte`, `ushort`, `uint`, `ulong`
+    - Floating-point types: `float`, `double`
+    - `decimal`
+    - `char`
+    - `string`
+    - `DateTime`
+    - `Guid`
+    - Enumeration values
 
 ## Navigation with parameters - using an anonymous parameter object
 
@@ -375,15 +428,18 @@ For example, you can:
 ```c#
 public void Init(int index)
 {
-// use the index here
+    // use the index here
 }
 ```
 
 **Note** that due to serialization requirements, the only available parameter types used within this technique are only:
 
-- `int`
-- `long`
-- `double`
+- `bool`
+- Integral types: `sbyte`, `short`, `int`, `long`, `byte`, `ushort`, `uint`, `ulong`
+- Floating-point types: `float`, `double`
+- `decimal`
+- `char`
 - `string`
+- `DateTime`
 - `Guid`
-- enumeration values
+- Enumeration values

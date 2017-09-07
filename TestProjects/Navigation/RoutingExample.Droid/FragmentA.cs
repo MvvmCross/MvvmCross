@@ -2,13 +2,13 @@
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Support.V4;
+using MvvmCross.Droid.Views.Attributes;
 using RoutingExample.Core.ViewModels;
 
 namespace RoutingExample.Droid
 {
-    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame, true)]
+    [MvxFragmentPresentation(typeof(SecondHostViewModel), Resource.Id.content_frame, true)]
     [Register(nameof(FragmentA))]
     public class FragmentA : MvxFragment<ViewModelA>
     {

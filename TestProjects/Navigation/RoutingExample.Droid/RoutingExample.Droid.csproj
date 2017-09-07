@@ -97,6 +97,9 @@
     <Compile Include="FragmentA.cs" />
     <Compile Include="FragmentB.cs" />
     <Compile Include="FragmentC.cs" />
+    <Compile Include="TestCView.cs" />
+    <Compile Include="FragmentDialogA.cs" />
+    <Compile Include="FragmentNested.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -122,6 +125,7 @@
     <AndroidResource Include="Resources\layout\fragment_a.xml" />
     <AndroidResource Include="Resources\layout\fragment_b.xml" />
     <AndroidResource Include="Resources\layout\fragment_c.xml" />
+    <AndroidResource Include="Resources\layout\fragment_testviewc.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
@@ -162,10 +166,6 @@
     <ProjectReference Include="..\..\..\MvvmCross-AndroidSupport\MvvmCross.Droid.Support.Fragment\MvvmCross.Droid.Support.Fragment.csproj">
       <Project>{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}</Project>
       <Name>MvvmCross.Droid.Support.Fragment</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Droid\Shared\MvvmCross.Droid.Shared.csproj">
-      <Project>{85EE0907-158C-481C-87B8-E4C0FA93C00A}</Project>
-      <Name>MvvmCross.Droid.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<d:MvxContentPage x:TypeArguments="viewModels:MvxFormsViewModel"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:$rootnamespace$.Core.Pages"
+    x:Class="$rootnamespace$.Core.Pages.MvxFormsPage"
+    xmlns:viewModels="clr-namespace:$rootnamespace$.Core.ViewModels;assembly=$rootnamespace$.Core"
+    xmlns:d="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Core">
+	<ContentPage.Content>
+    <StackLayout>
+      <Button Text="Show text" Command="{Binding ShowTextCommand}" />
+      <Label Text="{Binding Text}" />
+    </StackLayout>
+	</ContentPage.Content>
+</d:MvxContentPage>

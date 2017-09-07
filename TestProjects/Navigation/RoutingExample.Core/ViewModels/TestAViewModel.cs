@@ -13,7 +13,6 @@ namespace RoutingExample.Core.ViewModels
     {
         public TestAViewModel()
         {
-            
         }
 
         public IMvxAsyncCommand OpenViewModelBCommand => new MvxAsyncCommand(
@@ -21,13 +20,11 @@ namespace RoutingExample.Core.ViewModels
 
         public void Init()
         {
-            
         }
 
-        public override async Task Initialize(User parameter)
+        public override void Prepare(User parameter)
         {
             var test = parameter;
-            await Task.FromResult(true);
         }
     }
 }

@@ -10,14 +10,14 @@ using RoutingExample.Core.ViewModels;
 namespace RoutingExample.Droid
 {
     [Activity(
-        Label = "Example", 
+        Label = "Example",
         Theme = "@style/AppTheme",
         Icon = "@mipmap/icon")]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "mvx",
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Intent.ActionView }, DataScheme = "https", DataHost = "mvvmcross.com",
         Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable })]
-    public class MainView : MvxCachingFragmentCompatActivity<MainViewModel>
+    public class MainView : MvxAppCompatActivity<MainViewModel>
     {
         protected override void OnCreate(Bundle bundle)
         {
@@ -38,4 +38,3 @@ namespace RoutingExample.Droid
         }
     }
 }
-

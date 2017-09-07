@@ -1,35 +1,42 @@
 ﻿using System.Windows.Input;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
     public class ModalViewModel : MvxViewModel
     {
-        private ICommand _showTabsCommand;
-        public ICommand ShowTabsCommand
+        private readonly IMvxNavigationService _navigationService;
+
+        public ModalViewModel(IMvxNavigationService navigationService)
         {
-            get
-            {
-                return _showTabsCommand ?? (_showTabsCommand = new MvxCommand(() => ShowViewModel<TabsRootViewModel>()));
-            }
+            _navigationService = navigationService;
+
+            ShowTabsCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<TabsRootViewModel>());
+
+            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
+
+            ShowNestedModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<NestedModalViewModel>());
         }
 
-        private ICommand _closeCommand;
-        public ICommand CloseCommand
+        public override System.Threading.Tasks.Task Initialize()
         {
-            get
-            {
-                return _closeCommand ?? (_closeCommand = new MvxCommand(() => Close(this)));
-            }
+            return base.Initialize();
         }
 
-        private ICommand _showNestedModalCommand;
-        public ICommand ShowNestedModalCommand
+        public void Init()
         {
-            get
-            {
-                return _showNestedModalCommand ?? (_showNestedModalCommand = new MvxCommand(() => ShowViewModel<NestedModalViewModel>()));
-            }
         }
+
+        public override void Start()
+        {
+            base.Start();
+        }
+
+        public IMvxAsyncCommand ShowTabsCommand { get; private set; }
+
+        public IMvxAsyncCommand CloseCommand { get; private set; }
+
+        public IMvxAsyncCommand ShowNestedModalCommand { get; private set; }
     }
 }

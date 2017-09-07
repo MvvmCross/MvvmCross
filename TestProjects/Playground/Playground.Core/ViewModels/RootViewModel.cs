@@ -1,95 +1,67 @@
 using System;
 using System.Windows.Input;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
     public class RootViewModel : MvxViewModel
     {
-        private string _hello = "Hello MvvmCross";
-        public string Hello
-        {
-            get { return _hello; }
-            set { SetProperty(ref _hello, value); }
-        }
+        private readonly IMvxNavigationService _navigationService;
 
         private int _counter = 2;
-        public int Counter
+
+        public RootViewModel(IMvxNavigationService navigationService)
         {
-            get { return _counter; }
-            set { SetProperty(ref _counter, value); }
+            _navigationService = navigationService;
+
+            ShowChildCommand = new MvxAsyncCommand(async () => ShowViewModel<ChildViewModel>());
+
+            ShowModalCommand = new MvxAsyncCommand(async () => ShowViewModel<ModalViewModel>());
+
+            ShowModalNavCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalNavViewModel>());
+
+            ShowTabsCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<TabsRootViewModel>());
+
+            ShowSplitCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SplitRootViewModel>());
+
+            ShowOverrideAttributeCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<OverrideAttributeViewModel>());
+
+            ShowSheetCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SheetViewModel>());
+
+            ShowWindowCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<WindowViewModel>());
+
+            _counter = 3;
         }
 
-        private ICommand _showChildCommand;
-        public ICommand ShowChildCommand
+        protected override void SaveStateToBundle(IMvxBundle bundle)
         {
-            get
-            {
-                return _showChildCommand ?? (_showChildCommand = new MvxCommand(() => this.ShowViewModel<ChildViewModel>()));
-            }
+            base.SaveStateToBundle(bundle);
+
+            bundle.Data["MyKey"] = _counter.ToString();
         }
 
-        private ICommand _showModalCommand;
-        public ICommand ShowModalCommand
+        protected override void ReloadFromBundle(IMvxBundle state)
         {
-            get
-            {
-                return _showModalCommand ?? (_showModalCommand = new MvxCommand(() => this.ShowViewModel<ModalViewModel>()));
-            }
+            base.ReloadFromBundle(state);
+
+            _counter = int.Parse(state.Data["MyKey"]);
         }
 
-        private ICommand _showModalNavCommand;
-        public ICommand ShowModalNavCommand
-        {
-            get
-            {
-                return _showModalNavCommand ?? (_showModalNavCommand = new MvxCommand(() => ShowViewModel<ModalNavViewModel>()));
-            }
-        }
+        public IMvxAsyncCommand ShowChildCommand { get; private set; }
 
-        private ICommand _showTabsCommand;
-        public ICommand ShowTabsCommand
-        {
-            get
-            {
-                return _showTabsCommand ?? (_showTabsCommand = new MvxCommand(() => ShowViewModel<TabsRootViewModel>()));
-            }
-        }
+        public IMvxAsyncCommand ShowModalCommand { get; private set; }
 
-        private ICommand _showSplitCommand;
-        public ICommand ShowSplitCommand
-        {
-            get
-            {
-                return _showSplitCommand ?? (_showSplitCommand = new MvxCommand(() => ShowViewModel<SplitRootViewModel>()));
-            }
-        }
+        public IMvxAsyncCommand ShowModalNavCommand { get; private set; }
 
-        private ICommand _showOverrideAttributeCommand;
-        public ICommand ShowOverrideAttributeCommand
-        {
-            get
-            {
-                return _showOverrideAttributeCommand ?? (_showOverrideAttributeCommand = new MvxCommand(() => ShowViewModel<OverrideAttributeViewModel>()));
-            }
-        }
+        public IMvxAsyncCommand ShowTabsCommand { get; private set; }
 
-        private ICommand _showSheetCommand;
-        public ICommand ShowSheetCommand
-        {
-            get
-            {
-                return _showSheetCommand ?? (_showSheetCommand = new MvxCommand(() => ShowViewModel<SheetViewModel>()));
-            }
-        }
+        public IMvxAsyncCommand ShowSplitCommand { get; private set; }
 
-        private ICommand _showWindowCommand;
-        public ICommand ShowWindowCommand
-        {
-            get
-            {
-                return _showWindowCommand ?? (_showWindowCommand = new MvxCommand(() => ShowViewModel<WindowViewModel>()));
-            }
-        }
+        public IMvxAsyncCommand ShowOverrideAttributeCommand { get; private set; }
+
+        public IMvxAsyncCommand ShowSheetCommand { get; private set; }
+
+        public IMvxAsyncCommand ShowWindowCommand { get; private set; }
     }
 }

@@ -1,14 +1,15 @@
 ﻿using Android.App;
 using Android.OS;
 using Android.Widget;
+using Eventhooks.Core.ViewModels;
+using MvvmCross.Droid.Views;
+using MvvmCross.Binding.BindingContext;
 
 namespace Eventhooks.Droid
 {
     [Activity(Label = "Eventhooks", MainLauncher = true, Icon = "@mipmap/icon")]
-    public class MainActivity : Activity
+    public class MainActivity : MvxActivity<FirstViewModel>
     {
-        private int count = 1;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -20,8 +21,9 @@ namespace Eventhooks.Droid
             // and attach an event to it
             Button button = FindViewById<Button>(Resource.Id.myButton);
 
-            button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+            var bindingSet = this.CreateBindingSet<MainActivity, FirstViewModel>();
+            bindingSet.Bind(button).To(vm => vm.ShowSecondView);
+            bindingSet.Apply();
         }
     }
 }
-

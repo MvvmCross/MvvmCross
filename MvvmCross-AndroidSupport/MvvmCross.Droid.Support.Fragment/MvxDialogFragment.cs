@@ -10,8 +10,8 @@ using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Shared.Fragments;
 using MvvmCross.Droid.Support.V4.EventSource;
+using MvvmCross.Droid.Views;
 
 namespace MvvmCross.Droid.Support.V4
 {
@@ -49,8 +49,19 @@ namespace MvvmCross.Droid.Support.V4
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
-            set { DataContext = value; }
+            get
+            {
+                return DataContext as IMvxViewModel;
+            }
+            set
+            {
+                DataContext = value;
+                OnViewModelSet();
+            }
+        }
+
+        public virtual void OnViewModelSet()
+        {
         }
 
         protected void EnsureBindingContextSet(Bundle b0)
@@ -59,7 +70,6 @@ namespace MvvmCross.Droid.Support.V4
         }
 
         public virtual string UniqueImmutableCacheTag => Tag;
-
 
         public override void OnCreate(Bundle bundle)
         {
@@ -102,6 +112,14 @@ namespace MvvmCross.Droid.Support.V4
         : MvxDialogFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
+        protected MvxDialogFragment()
+        {
+        }
+
+        protected MvxDialogFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
+
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }

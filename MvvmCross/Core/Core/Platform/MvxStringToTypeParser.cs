@@ -90,100 +90,39 @@ namespace MvvmCross.Core.Platform
             }
         }
 
+        public class NumberParser<T> : ValueParser where T : struct
+        {
+            // See also https://stackoverflow.com/questions/2961656/generic-tryparse/6553694
+            // Piers Myers(https://stackoverflow.com/users/275751/piers-myers)'s question and
+            // Charlie Brown(https://stackoverflow.com/users/825578/charlie-brown)'s answer
+            public delegate bool TryParseHandler(string input, NumberStyles style, IFormatProvider provider, out T result);
+            private TryParseHandler _tryParseHandler;
+
+            public NumberParser(TryParseHandler handler) => _tryParseHandler = handler;
+
+            protected override bool TryParse(string input, out object result)
+            {
+                var toReturn = _tryParseHandler(input, NumberStyles.Any, CultureInfo.InvariantCulture, out T value);
+                result = value;
+                return toReturn;
+            }
+        }
+
+        public class CharParser : ValueParser
+        {
+            protected override bool TryParse(string input, out object result)
+            {
+                var toReturn = char.TryParse(input, out var value);
+                result = value;
+                return toReturn;
+            }
+        }
+
         public class BoolParser : ValueParser
         {
             protected override bool TryParse(string input, out object result)
             {
-                bool value;
-                var toReturn = bool.TryParse(input, out value);
-                result = value;
-                return toReturn;
-            }
-        }
-
-        public class ShortParser : ValueParser
-        {
-            protected override bool TryParse(string input, out object result)
-            {
-                short value;
-                var toReturn = short.TryParse(input, out value);
-                result = value;
-                return toReturn;
-            }
-        }
-
-        public class IntParser : ValueParser
-        {
-            protected override bool TryParse(string input, out object result)
-            {
-                int value;
-                var toReturn = int.TryParse(input, out value);
-                result = value;
-                return toReturn;
-            }
-        }
-
-        public class LongParser : ValueParser
-        {
-            protected override bool TryParse(string input, out object result)
-            {
-                long value;
-                var toReturn = long.TryParse(input, out value);
-                result = value;
-                return toReturn;
-            }
-        }
-
-        public class UshortParser : ValueParser
-        {
-            protected override bool TryParse(string input, out object result)
-            {
-                ushort value;
-                var toReturn = ushort.TryParse(input, out value);
-                result = value;
-                return toReturn;
-            }
-        }
-
-        public class UintParser : ValueParser
-        {
-            protected override bool TryParse(string input, out object result)
-            {
-                uint value;
-                var toReturn = uint.TryParse(input, out value);
-                result = value;
-                return toReturn;
-            }
-        }
-
-        public class UlongParser : ValueParser
-        {
-            protected override bool TryParse(string input, out object result)
-            {
-                ulong value;
-                var toReturn = ulong.TryParse(input, out value);
-                result = value;
-                return toReturn;
-            }
-        }
-
-        public class FloatParser : ValueParser
-        {
-            protected override bool TryParse(string input, out object result)
-            {
-                float value;
-                var toReturn = float.TryParse(input, NumberStyles.Any, CultureInfo.InvariantCulture, out value);
-                result = value;
-                return toReturn;
-            }
-        }
-
-        public class DoubleParser : ValueParser
-        {
-            protected override bool TryParse(string input, out object result)
-            {
-                double value;
-                var toReturn = double.TryParse(input, NumberStyles.Any, CultureInfo.InvariantCulture, out value);
+                var toReturn = bool.TryParse(input, out var value);
                 result = value;
                 return toReturn;
             }
@@ -228,7 +167,7 @@ namespace MvvmCross.Core.Platform
             protected override bool TryParse(string input, out object result)
             {
                 DateTime value;
-                var toReturn = DateTime.TryParse(input, out value);
+                var toReturn = DateTime.TryParse(input, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out value);
                 result = value;
                 return toReturn;
             }
@@ -241,15 +180,19 @@ namespace MvvmCross.Core.Platform
         {
             TypeParsers = new Dictionary<Type, IParser>
             {
+                { typeof(char), new CharParser() },
                 { typeof(string), new StringParser() },
-                { typeof(short), new ShortParser() },
-                { typeof(int), new IntParser() },
-                { typeof(long), new LongParser() },
-                { typeof(ushort), new UshortParser() },
-                { typeof(uint), new UintParser() },
-                { typeof(ulong), new UlongParser() },
-                { typeof(double), new DoubleParser() },
-                { typeof(float), new FloatParser() },
+                { typeof(sbyte), new NumberParser<sbyte>(sbyte.TryParse) },
+                { typeof(short), new NumberParser<short>(short.TryParse) },
+                { typeof(int), new NumberParser<int>(int.TryParse) },
+                { typeof(long), new NumberParser<long>(long.TryParse) },
+                { typeof(byte), new NumberParser<byte>(byte.TryParse) },
+                { typeof(ushort), new NumberParser<ushort>(ushort.TryParse) },
+                { typeof(uint), new NumberParser<uint>(uint.TryParse) },
+                { typeof(ulong), new NumberParser<ulong>(ulong.TryParse) },
+                { typeof(double), new NumberParser<double>(double.TryParse) },
+                { typeof(float), new NumberParser<float>(float.TryParse) },
+                { typeof(decimal), new NumberParser<decimal>(decimal.TryParse) },
                 { typeof(bool), new BoolParser() },
                 { typeof(Guid), new GuidParser() },
                 { typeof(DateTime), new DateTimeParser() }

@@ -1,5 +1,4 @@
-﻿using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
+using MvvmCross.Core.ViewModels;
 
 namespace RoutingExample.Core
 {
@@ -9,12 +8,11 @@ namespace RoutingExample.Core
         {
             base.Initialize();
 
-            // Construct custom application start object    
-            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, AppStart>();
-            var appStart = Mvx.Resolve<IMvxAppStart>();
+            // register the generic appstart object and navigate to View Model with navigation service
+            //RegisterNavigationServiceAppStart<MainViewModel>();
 
-            // register the appstart object
-            RegisterAppStart(appStart);
+            // register the custom appstart object 
+            RegisterCustomAppStart<AppStart>();
         }
     }
 }

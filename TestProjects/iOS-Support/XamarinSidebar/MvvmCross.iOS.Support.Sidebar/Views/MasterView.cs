@@ -32,6 +32,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
             var detailButton = new UIButton();
             detailButton.SetTitle("Show Detail", UIControlState.Normal);
 
+            var detailRightButton = new UIButton();
+            detailRightButton.SetTitle("Show Detail with right menu", UIControlState.Normal);
+
             var toggleMenuButton = new UIButton();
             toggleMenuButton.SetTitle("Open menu", UIControlState.Normal);
             toggleMenuButton.TouchUpInside += (s, e) =>
@@ -43,10 +46,12 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
             var bindingSet = this.CreateBindingSet<MasterView, MasterViewModel>();
             bindingSet.Bind(label).To(vm => vm.ExampleValue);
             bindingSet.Bind(detailButton).To(vm => vm.ShowDetailCommand);
+            bindingSet.Bind(detailRightButton).To(vm => vm.ShowDetailRightCommand);
             bindingSet.Apply();
 
             Add(label);
             Add(detailButton);
+            Add(detailRightButton);
             Add(toggleMenuButton);
 
             View.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
@@ -60,7 +65,10 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
                 detailButton.WithSameCenterX(View),
 
                 toggleMenuButton.Below(detailButton, 10),
-                toggleMenuButton.WithSameCenterX(View)
+                toggleMenuButton.WithSameCenterX(View),
+
+                detailRightButton.Below(toggleMenuButton, 10),
+                detailRightButton.WithSameCenterX(View)
 
                 );
         }

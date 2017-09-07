@@ -15,7 +15,7 @@ namespace MasterDetailExample.iOS
         public Setup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
         {
-        }        
+        }
 
         protected override IMvxApplication CreateApp()
         {
