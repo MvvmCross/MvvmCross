@@ -3,6 +3,7 @@ using MvvmCross.Droid.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Droid.Views;
+using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Droid.Presenters;
 using MvvmCross.Forms.Droid;
 
@@ -14,7 +15,7 @@ namespace $rootnamespace$
         {
         }
 
-        protected override MvvmCross.Forms.Core.MvxFormsApplication CreateFormsApplication()
+        protected override MvxFormsApplication CreateFormsApplication()
         {
             return new Core.App();
         }

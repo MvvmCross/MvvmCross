@@ -9,7 +9,7 @@
 
 This package contains the 'Getting Started' libraries for MvvmCross and installs sample files. This package can be removed after installation so the sample files don't get recreated on each update.
 		</description>
-		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp</tags>
+		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf net net45 uwp</tags>
 		<dependencies>
 			<dependency id="MvvmCross" version="[$version$]" />
       <dependency id="MvvmCross.Forms" version="[$version$]" />
@@ -18,9 +18,9 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
 	<files>		
 		<!-- PCL - Content -->
     <file src="Forms\CoreContent\_ Core.txt" target="content\portable-net45+win+wpa81+wp80\ToDo-MvvmCross\_ Core.txt" />
-		<file src="Forms\CoreContent\MvxFormsViewModel.cs.pp" target="content\portable-net45+win+wpa81+wp80\ViewModels\MvxFormsViewModel.cs.pp" />
-    <file src="Forms\CoreContent\MvxFormsPage.xaml.cs.pp" target="content\portable-net45+win+wpa81+wp80\Pages\MvxFormsPage.xaml.cs.pp" />
-    <file src="Forms\CoreContent\MvxFormsPage.xaml.pp" target="content\portable-net45+win+wpa81+wp80\Pages\MvxFormsPage.xaml.pp" />
+		<file src="Forms\CoreContent\MainViewModel.cs.pp" target="content\portable-net45+win+wpa81+wp80\ViewModels\MainViewModel.cs.pp" />
+    <file src="Forms\CoreContent\MainPage.xaml.cs.pp" target="content\portable-net45+win+wpa81+wp80\Pages\MainViewModel.xaml.cs.pp" />
+    <file src="Forms\CoreContent\MainPage.xaml.pp" target="content\portable-net45+win+wpa81+wp80\Pages\MainViewModel.xaml.pp" />
 		<file src="Forms\CoreContent\App.xaml.pp" target="content\portable-net45+win+wpa81+wp80\App.xaml.pp" />
     <file src="Forms\CoreContent\App.xaml.cs.pp" target="content\portable-net45+win+wpa81+wp80\App.xaml.cs.pp" />
     <file src="Forms\CoreContent\CoreApp.cs.pp" target="content\portable-net45+win+wpa81+wp80\CoreApp.cs.pp" />
