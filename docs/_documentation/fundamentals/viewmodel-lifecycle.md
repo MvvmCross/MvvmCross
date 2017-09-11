@@ -15,13 +15,17 @@ Alongside [a new Navigation Service](https://www.mvvmcross.com/documentation/fun
 Also note that starting from MvvmCross 5.0 ViewModels will be coupled to the lifecycle of the view. This means that the ViewModel has the following methods available:
 
 ```c#
-void Appearing();
+void ViewCreated();
 
-void Appeared();
+void ViewAppearing();
 
-void Disappearing();
+void ViewAppeared();
 
-void Disappeared();
+void ViewDisappearing();
+
+void ViewDisappeared();
+
+void ViewDestroy();
 ```
 
 The MvxViewController, MvxFragment(s), MvxActivity and the UWP views will call those methods open the platform specific events that are fired. This will give us a more refined control of the ViewModel and the state of its lifecycle. There may be binding that you want to update or resources to clean up, these lifecycle events can help with that.
