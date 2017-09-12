@@ -56,7 +56,7 @@ There are breaking changes in the signature to prevent problems with async code.
 public class MyViewModel : MvxViewModel
 {
     private readonly IMvxNavigationService _navigationService;
-    public MyViewModel(IMvxNavigationService navigation)
+    public MyViewModel(IMvxNavigationService navigationService)
     {
         _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
     }
@@ -76,7 +76,7 @@ public class MyViewModel : MvxViewModel
 public class NextViewModel : MvxViewModel<MyObject, MyReturnObject>
 {
     private readonly IMvxNavigationService _navigationService;
-    public MyViewModel(IMvxNavigationService navigation)
+    public MyViewModel(IMvxNavigationService navigationService)
     {
         _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
     }
