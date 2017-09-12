@@ -40,13 +40,13 @@ Additionally it adds support for:
 
 The new presenter is very easy to customize and extend. If you have an existing custom presenter we would advice to check compatibility and possible replace it with the new default. 
 
-Read more in the [documentation](https://www.mvvmcross.com/documentation/fundamentals/navigation)
+Read more in the [documentation](https://www.mvvmcross.com/documentation/presenters/android-view-presenter)
 
 ## A new default WPF presenter [#2124](https://github.com/MvvmCross/MvvmCross/pull/2124)
 
 The new WPF presenter enables to show modal/modal less window. It also changes the signature and some methods.
 
-Read more in the [documentation](https://www.mvvmcross.com/documentation/fundamentals/navigation)
+Read more in the [documentation](https://www.mvvmcross.com/documentation/presenters/wpf-view-presenter)
 
 ## NavigationService improvements [#2072](https://github.com/MvvmCross/MvvmCross/pull/2072)
 
@@ -112,7 +112,7 @@ Just install the MvvmCross.Forms.StarterPack nuget package and you are good to g
 
 You can now use Expressions, pass each property individually and even pass an instance of your combiner instead of relying on a string that will retrieve a registered combiner.
 
-Read more in the [documentation](https://www.mvvmcross.com/documentation/fundamentals/value-converters)
+Read more in the [documentation](https://www.mvvmcross.com/documentation/fundamentals/value-combiners)
 
 ## Ongoing work to clean the samples
 
