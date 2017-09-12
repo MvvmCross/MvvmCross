@@ -8,7 +8,7 @@ categories: mvvmcross
 # Announcing MvvmCross 5.2!
 
 With the release of 5.2 we focused on creating new presenters who are able to handle almost all navigation patterns for the platform. Since we already had new ones for iOS and MacOS we are now introducing new presenters for Android and WPF!
-The next release(5.3) we will continue with this for UWP and Xamarin.Forms. Also a lot of work was done during the .NET Summer Hackfest, where you can read all about in [this page]().
+The next release(5.3) we will continue with this for UWP and Xamarin.Forms. Also a lot of work was done during the .NET Summer Hackfest, where you can read all about in [this page](https://www.xablu.com/2017/09/05/mvvmcross-xamarin-hackday-results/).
 
 Read carefully about the changes because some of them are breaking, but easy to fix.
 
