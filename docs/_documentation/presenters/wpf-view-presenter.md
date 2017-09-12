@@ -1,14 +1,12 @@
 ---
 layout: documentation
 title: WPF View Presenter
-category: Platform specifics
+category: Presenters
 ---
-
-Starting with MvvmCross 5.2, there is a new default Presenter for Views, namely `MvxWpfViewPresenter`.
 
 ## View Presenter Overview
 
-The default presenter that comes with MvvmCross offers out of the box support for the following navigation patterns / strategies:
+The default presenter for WPF named `MvxWpfViewPresenter` offers out of the box support for the following navigation patterns / strategies:
 
 - Single window and Multiple windows app
 - Content inside window with stack/non-stack navigation

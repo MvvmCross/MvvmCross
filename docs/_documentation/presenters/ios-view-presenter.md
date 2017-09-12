@@ -1,14 +1,12 @@
 ---
 layout: documentation
 title: iOS View Presenter
-category: Platform specifics
+category: Presenters
 ---
-
-Starting with MvvmCross 5.0, there is a new default Presenter for Views, namely `MvxIosViewPresenter`.
 
 ## View Presenter Overview
 
-The default presenter that comes with MvvmCross offers out of the box support for the following navigation patterns / strategies:
+The default presenter for iOS named `MvxIosViewPresenter` offers out of the box support for the following navigation patterns / strategies:
 
 - Stack navigation
 - Tabs
