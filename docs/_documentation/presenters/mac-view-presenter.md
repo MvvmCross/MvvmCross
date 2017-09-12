@@ -1,14 +1,12 @@
 ---
 layout: documentation
 title: Mac View Presenter
-category: Platform specifics
+category: Presenters
 ---
-
-Starting with MvvmCross 5, there is a new default Presenter for macOS Views, namely `MvxMacViewPresenter`.
 
 ## View Presenter Overview
 
-The default presenter provided by MvvmCross works in a similar way as the default ViewPresenter for iOS does. Together with the ViewsContainer, the presenter supports Storyboards, .xibs and coded interfaces.
+The default presenter for Mac named `MvxMacViewPresenter` works in a similar way as the default ViewPresenter for iOS does. Together with the ViewsContainer, the presenter supports Storyboards, .xibs and coded interfaces.
 
 It offers out of the box support for the following navigation patterns / strategies:
 
