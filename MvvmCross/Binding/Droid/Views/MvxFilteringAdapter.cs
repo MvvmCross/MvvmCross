@@ -116,22 +116,16 @@ namespace MvvmCross.Binding.Droid.Views
             base.NotifyDataSetChanged();
         }
 
-        public MvxFilteringAdapter(Context context) : base(context)
+        public MvxFilteringAdapter(Context context) : base(context, MvxAndroidBindingContextHelpers.Current())
         {
-            CommonInitialize();
         }
 
         public MvxFilteringAdapter(Context context, IMvxAndroidBindingContext bindingContext) : base(context, bindingContext)
         {
-            CommonInitialize();
-        }
-
-        private void CommonInitialize()
-        {
             ReturnSingleObjectFromGetItem = true;
             Filter = new MyFilter(this);
         }
-
+        
         protected MvxFilteringAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
