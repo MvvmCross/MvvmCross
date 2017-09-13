@@ -12,6 +12,7 @@ using Android.Content;
 using Android.Runtime;
 using Android.Widget;
 using Java.Lang;
+using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Platform;
 using Object = Java.Lang.Object;
@@ -115,12 +116,16 @@ namespace MvvmCross.Binding.Droid.Views
             base.NotifyDataSetChanged();
         }
 
-        public MvxFilteringAdapter(Context context) : base(context)
+        public MvxFilteringAdapter(Context context) : this(context, MvxAndroidBindingContextHelpers.Current())
+        {
+        }
+
+        public MvxFilteringAdapter(Context context, IMvxAndroidBindingContext bindingContext) : base(context, bindingContext)
         {
             ReturnSingleObjectFromGetItem = true;
             Filter = new MyFilter(this);
         }
-
+        
         protected MvxFilteringAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
