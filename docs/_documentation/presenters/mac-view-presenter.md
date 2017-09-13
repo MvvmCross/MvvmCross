@@ -103,7 +103,7 @@ You can also define new attributes to satisfy your needs. The steps to do so are
 3. Override the method `RegisterAttributeTypes` and add a registry to the dictionary like this:
 
 ```c#
-_attributeTypesToShowMethodDictionary.Add(
+AttributeTypesToShowMethodDictionary.Add(
     typeof(MyCustomModePresentationAttribute),
     (vc, attribute, request) => ShowMyCustomModeViewController(vc, (MyCustomPresentationAttribute)attribute, request));
 ```
