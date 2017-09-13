@@ -87,6 +87,7 @@
     <Compile Include="Views\MvxTabViewController.cs" />
     <Compile Include="Views\IMvxTabViewController.cs" />
     <Compile Include="Views\Presenters\Attributes\MvxTabPresentationAttribute.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxStoryboardWindowPresentationAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <ItemGroup>
