@@ -12,6 +12,7 @@ using Android.Content;
 using Android.Runtime;
 using Android.Widget;
 using Java.Lang;
+using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Platform;
 using Object = Java.Lang.Object;
@@ -116,6 +117,16 @@ namespace MvvmCross.Binding.Droid.Views
         }
 
         public MvxFilteringAdapter(Context context) : base(context)
+        {
+            CommonInitialize();
+        }
+
+        public MvxFilteringAdapter(Context context, IMvxAndroidBindingContext bindingContext) : base(context, bindingContext)
+        {
+            CommonInitialize();
+        }
+
+        private void CommonInitialize()
         {
             ReturnSingleObjectFromGetItem = true;
             Filter = new MyFilter(this);
