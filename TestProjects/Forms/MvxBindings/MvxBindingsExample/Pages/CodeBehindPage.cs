@@ -1,4 +1,4 @@
-﻿using MvvmCross.Forms.Core;
+﻿using MvvmCross.Forms.Views;
 using Xamarin.Forms;
 using MvxBindingsExample.ViewModels;
 using MvvmCross.Binding.BindingContext;

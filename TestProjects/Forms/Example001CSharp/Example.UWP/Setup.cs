@@ -5,7 +5,7 @@ using Xamarin.Forms;
 using Windows.ApplicationModel.Activation;
 using MvvmCross.Uwp.Views;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform;
 using MvvmCross.Uwp.Platform;
 using MvvmCross.Forms.Uwp.Presenters;
 using XamlControls = Windows.UI.Xaml.Controls;

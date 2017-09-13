@@ -112,13 +112,12 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="MvxFormsApplicationActivity.cs" />
-    <Compile Include="MvxFormsAppCompatActivity.cs" />
-    <Compile Include="Presenters\MvxFormsDroidMasterDetailPagePresenter.cs" />
-    <Compile Include="Presenters\MvxFormsDroidPagePresenter.cs" />
-    <Compile Include="MvxPageRenderer.cs" />
-    <Compile Include="Views\Renderers\MvxImageViewRenderer.cs" />
-    <Compile Include="MvxFormsAndroidSetup.cs" />
+    <Compile Include="Views\MvxFormsAndroidViewPresenter.cs" />
+    <Compile Include="Platform\MvxFormsAndroidSetup.cs" />
+    <Compile Include="Views\MvxFormsAppCompatActivity.cs" />
+    <Compile Include="Views\MvxFormsApplicationActivity.cs" />
+    <Compile Include="Views\MvxImageViewRenderer.cs" />
+    <Compile Include="Views\MvxPageRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\Binding\Droid\MvvmCross.Binding.Droid.csproj">
@@ -153,10 +152,16 @@
       <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
       <Name>MvvmCross.Localization</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MvvmCross-AndroidSupport\MvvmCross.Droid.Support.V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj">
+      <Project>{911D9032-EA82-41B9-80D7-5DB84951B6E5}</Project>
+      <Name>MvvmCross.Droid.Support.V7.AppCompat</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="TODO.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Platform\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="AfterBuild">

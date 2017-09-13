@@ -1,6 +1,6 @@
 ﻿using MasterDetailExample.Core;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.iOS;
 using MvvmCross.Forms.iOS.Presenters;
 using MvvmCross.iOS.Platform;

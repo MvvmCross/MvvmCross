@@ -9,8 +9,13 @@
 This package contains MvvmCross to use with Xamarin.Forms</description>
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms windows8 winrt netcore wp wpdev windowsphone windowsstore uwp forms</tags>
 		<dependencies>
-			<dependency id="MvvmCross.Core" version="[$version$]" />
-			<dependency id="Xamarin.Forms" version="2.4.0.280" />
+            <group>
+				<dependency id="MvvmCross.Core" version="[$version$]" />
+                <dependency id="Xamarin.Forms" version="2.4.0.280" />
+			</group>
+            <group targetFramework="MonoAndroid10">
+				<dependency id="MvvmCross.Droid.Support.V7.AppCompat" version="[$version$]" />
+			</group>
 		</dependencies>
 	</metadata>
 	<files>   
