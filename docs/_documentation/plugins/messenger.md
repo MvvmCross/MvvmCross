@@ -19,6 +19,12 @@ The `IMvxMessenger` API includes:
 
 The basic use of the `Messenger` is:
 
+- Add the following to `app.cs` in the `Initialize()` method, this will make the messenger accessible through injection.
+
+```
+Mvx.LazyConstructAndRegisterSingleton<IMvxMessenger, MvxMessengerHub>();
+```
+
 - define one or more Message classes for communication between components. These should inherit from `MvxMessage` - e.g.:
 
 ```c#
@@ -54,6 +60,8 @@ var message = new LocationMessage(
 
 _messenger.Publish(message);
 ```
+
+`_messenger` can be assigned through injection in the constructor.
 
 - define the classes which will subscribe to and receive these messages. Each of these classes must call one of the `Subscribe` methods on the `IMvxMessenger` and **must store the returned token**. For example part of a ViewModel receiving `LocationMessage`s might look like:
 
