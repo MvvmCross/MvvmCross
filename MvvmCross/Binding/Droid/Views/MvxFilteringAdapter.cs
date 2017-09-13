@@ -116,7 +116,7 @@ namespace MvvmCross.Binding.Droid.Views
             base.NotifyDataSetChanged();
         }
 
-        public MvxFilteringAdapter(Context context) : base(context, MvxAndroidBindingContextHelpers.Current())
+        public MvxFilteringAdapter(Context context) : this(context, MvxAndroidBindingContextHelpers.Current())
         {
         }
 
