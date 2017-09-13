@@ -108,6 +108,10 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ToolbarWindow.cs" />
+    <Compile Include="ToolbarWindow.designer.cs">
+      <DependentUpon>ToolbarWindow.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
