@@ -10,7 +10,7 @@ The default presenter for Mac named `MvxMacViewPresenter` works in a similar way
 
 It offers out of the box support for the following navigation patterns / strategies:
 
-- Multiple windows
+- Multiple windows by properties or via storyboard
 - Content inside windows
 - Modals
 - Sheets
@@ -59,6 +59,19 @@ The presentation can be customized through this properties:
 - TabTitle: Defines the title of the tab that will be displayed in the segmented control for tabs.
 - WindowIdentifier: identifier for the window where the view should be displayed.
 
+### MvxStoryboardWindowPresentationAttribute
+
+Similar to MvxWindowPresentationAttribute, used to initiate a new _Window_ based on a WindowController created in Storyboard. The first view of your app can use this attribute as an alternative to MvxWindowPresentationAttribute.
+
+You can customize how the window will look in your storyboard. Click on the storyboard and create a new WindowController in IB. You may delete the default ViewController. This attribute requires two parameters, the WindowController name followed by the storyboard name, e.g.,
+```c#
+[MvxStoryboardWindowPresentation("CustomWindowController", "Main")]
+```
+
+Additional properties:
+
+- Identifier: Window identifier, used to identify the window for other attributes. If an identifier is not provided by the developer, it will be set to the name of the view class.
+
 ## Views without attributes: Default values
 
 - If a view class has no attribute over it, the presenter will assume a _new window_ presentation.
@@ -90,7 +103,7 @@ You can also define new attributes to satisfy your needs. The steps to do so are
 3. Override the method `RegisterAttributeTypes` and add a registry to the dictionary like this:
 
 ```c#
-_attributeTypesToShowMethodDictionary.Add(
+AttributeTypesToShowMethodDictionary.Add(
     typeof(MyCustomModePresentationAttribute),
     (vc, attribute, request) => ShowMyCustomModeViewController(vc, (MyCustomPresentationAttribute)attribute, request));
 ```
