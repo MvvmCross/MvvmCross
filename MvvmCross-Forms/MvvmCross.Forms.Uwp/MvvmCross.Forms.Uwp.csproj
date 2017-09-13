@@ -45,12 +45,11 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Presenters\MvxFormsUwpMasterDetailPagePresenter.cs" />
-    <Compile Include="Presenters\MvxFormsUwpPagePresenter.cs" />
-    <Compile Include="MvxPageRenderer.cs" />
     <EmbeddedResource Include="Properties\MvvmCross.Forms.Uwp.rd.xml" />
-    <None Include="TODO.txt" />
-    <Compile Include="MvxFormsWindowsSetup.cs" />
+    <Compile Include="Views\MvxFormsUwpMasterDetailPagePresenter.cs" />
+    <Compile Include="Views\MvxFormsUwpPagePresenter.cs" />
+    <Compile Include="Platform\MvxFormsWindowsSetup.cs" />
+    <Compile Include="Views\MvxPageRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
@@ -73,6 +72,10 @@
       <Project>{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}</Project>
       <Name>MvvmCross.Forms</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Platform\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
