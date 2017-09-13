@@ -39,12 +39,12 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Presenters\MvxFormsIosMasterDetailPagePresenter.cs" />
-    <Compile Include="Presenters\MvxFormsIosPagePresenter.cs" />
-    <Compile Include="MvxFormsApplicationDelegate.cs" />
-    <Compile Include="MvxPageRenderer.cs" />
-    <Compile Include="Views\Renderers\MvxImageViewRenderer.cs" />
-    <Compile Include="MvxFormsIosSetup.cs" />
+    <Compile Include="Views\MvxPageRenderer.cs" />
+    <Compile Include="Views\MvxImageViewRenderer.cs" />
+    <Compile Include="Platform\MvxFormsIosSetup.cs" />
+    <Compile Include="Platform\MvxFormsApplicationDelegate.cs" />
+    <Compile Include="Views\MvxFormsIosMasterDetailPagePresenter.cs" />
+    <Compile Include="Views\MvxFormsIosPagePresenter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -64,7 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="AfterBuild">
@@ -110,6 +109,9 @@
       <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
       <Name>MvvmCross.Localization</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Platform\" />
   </ItemGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -12,7 +12,7 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
 		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf net net45 uwp</tags>
 		<dependencies>
 			<dependency id="MvvmCross" version="[$version$]" />
-      <dependency id="MvvmCross.Forms" version="[$version$]" />
+            <dependency id="MvvmCross.Forms" version="[$version$]" />
 		</dependencies>
 	</metadata>
 	<files>

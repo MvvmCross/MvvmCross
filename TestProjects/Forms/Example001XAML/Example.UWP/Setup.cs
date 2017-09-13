@@ -3,7 +3,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using Xamarin.Forms;
 using Windows.ApplicationModel.Activation;
-using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform;
 using MvvmCross.Uwp.Platform;
 using MvvmCross.Uwp.Views;
 using MvvmCross.Forms.Uwp.Presenters;

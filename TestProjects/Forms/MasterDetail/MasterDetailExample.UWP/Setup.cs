@@ -1,7 +1,7 @@
 ﻿using Windows.ApplicationModel.Activation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Uwp.Presenters;
 using MvvmCross.Platform;
 using MvvmCross.Uwp.Platform;
