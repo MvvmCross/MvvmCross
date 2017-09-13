@@ -10,7 +10,7 @@ categories: mvvmcross
 With the release of 5.2 we focused on creating new presenters who are able to handle almost all navigation patterns for the platform. Since we already had new ones for iOS and MacOS we are now introducing new presenters for Android and WPF!
 For the next release (5.3) we plan to continue working on this for UWP and Xamarin.Forms. Also a lot of work was done during the .NET Summer Hackfest, where you can read all about in [this page](https://www.xablu.com/2017/09/05/mvvmcross-xamarin-hackday-results/).
 
-### Updating packages in your solution
+#### Updating packages in your solution
 
 As the nuget package `MvvmCross.Droid.Shared` was no longer exists, please __force remove__ it first, and then update the rest of the packages.
 
@@ -58,7 +58,9 @@ Read more in the [documentation](https://www.mvvmcross.com/documentation/present
 
 ## NavigationService improvements 
 
-### Prepare method and bug fixes [#2072](https://github.com/MvvmCross/MvvmCross/pull/2072)
+Same as the previous 5.x releases, we continued improving and fixing our new NavigationService!
+
+### Prepare method and close bug fixes [#2072](https://github.com/MvvmCross/MvvmCross/pull/2072)
 There are breaking changes in the signature to prevent problems with async code. Any navigation done with the NavigationService and a parameter or result will now be triggered in the `Prepare` method. 
 
 `Prepare` is therefore now part of the ViewModel lifecycle: It runs before the navigation is performed, But please note that all of your starter async code should still be called in `Initialize`.
