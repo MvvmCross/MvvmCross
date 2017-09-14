@@ -1,8 +1,8 @@
 ﻿using MvvmCross.Forms.Platform;
-using MvvmCross.Forms.Presenters;
 using MvvmCross.Uwp.Views;
 using Xamarin.Forms;
 
+/*
 namespace MvvmCross.Forms.Uwp.Presenters
 {
     public class MvxFormsUwpMasterDetailPagePresenter
@@ -22,4 +22,4 @@ namespace MvvmCross.Forms.Uwp.Presenters
             _rootFrame.Navigate(mainPage.GetType(), _rootFrame);            
         }      
     }
-}
+}*/
