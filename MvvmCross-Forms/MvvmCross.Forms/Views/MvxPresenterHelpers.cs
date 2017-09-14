@@ -42,7 +42,7 @@ namespace MvvmCross.Forms.Views
 
         public static void AdaptForBinding(VisualElement element, IMvxBindingContextOwner contextOwner)
         {
-            var mvxPage = element as IMvxContentPage;
+            var mvxPage = element as IMvxPage;
             if (mvxPage != null) {
                 contextOwner.BindingContext = new MvxBindingContext();
                 contextOwner.BindingContext.DataContext = mvxPage.ViewModel;
