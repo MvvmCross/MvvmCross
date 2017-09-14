@@ -27,5 +27,19 @@ namespace Playground.Core.ViewModels
             tasks.Add(_navigationService.Navigate<Tab3ViewModel>());
             await Task.WhenAll(tasks);
         }
+
+        /*
+        private int _itemIndex;
+
+        public int ItemIndex {
+            get { return _itemIndex; }
+            set
+            {
+                if (_itemIndex == value) return;
+                _itemIndex = value;
+                RaisePropertyChanged(() => ItemIndex);
+            }
+        }
+        */
     }
 }

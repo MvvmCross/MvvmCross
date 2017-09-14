@@ -13,7 +13,8 @@ namespace Playground.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterNavigationServiceAppStart<RootViewModel>();
+//            RegisterNavigationServiceAppStart<RootViewModel>();
+            RegisterNavigationServiceAppStart<TabsRootViewModel>();
         }
     }
 }
