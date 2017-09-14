@@ -111,7 +111,11 @@ namespace MvvmCross.Forms.Droid.Views
 				return attribute;
             }
 
-            //TODO: Move to override CreateAttributeForViewModel
+            return CreateAttributeForViewModel(viewModelType);
+        }
+
+        protected override MvxBasePresentationAttribute CreateAttributeForViewModel(Type viewModelType)
+        {
             var viewType = ViewsContainer.GetViewType(viewModelType);
             if (viewType.IsSubclassOf(typeof(ContentPage)))
             {
@@ -137,14 +141,14 @@ namespace MvvmCross.Forms.Droid.Views
                                $"Assuming MasterDetailPage presentation");
                 return new MvxMasterDetailPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
-			if (viewType.IsSubclassOf(typeof(NavigationPage)))
-			{
-				MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+            if (viewType.IsSubclassOf(typeof(NavigationPage)))
+            {
+                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
                                $"Assuming NavigationPage presentation");
                 return new MvxNavigationPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
-			}
+            }
 
-            return base.GetAttributeForViewModel(viewModelType);
+            return base.CreateAttributeForViewModel(viewModelType);
         }
 
         protected virtual Page CreatePage(Type viewType, MvxViewModelRequest request)
