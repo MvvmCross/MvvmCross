@@ -3,11 +3,7 @@ using Android.Content;
 
 using MvvmCross.Droid.Platform;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
-using MvvmCross.Core.Views;
-using MvvmCross.Forms.Droid;
-using MvvmCross.Forms.Droid.Presenters;
 using PageRendererExample;
 
 namespace PageRendererExample.UI.Droid
@@ -25,4 +21,3 @@ namespace PageRendererExample.UI.Droid
         }
     }
 }
-

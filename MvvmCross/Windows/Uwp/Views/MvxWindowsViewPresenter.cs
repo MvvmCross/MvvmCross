@@ -19,7 +19,7 @@ namespace MvvmCross.Uwp.Views
     public class MvxWindowsViewPresenter
         : MvxViewPresenter, IMvxWindowsViewPresenter
     {
-        private readonly IMvxWindowsFrame _rootFrame;
+        protected readonly IMvxWindowsFrame _rootFrame;
 
         public MvxWindowsViewPresenter(IMvxWindowsFrame rootFrame)
         {

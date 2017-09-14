@@ -3,7 +3,7 @@ using MvvmCross.Forms.Platform;
 using MvvmCross.iOS.Views.Presenters;
 using UIKit;
 using Xamarin.Forms;
-
+/*
 namespace MvvmCross.Forms.iOS.Presenters
 {
     public class MvxFormsIosMasterDetailPagePresenter
@@ -32,4 +32,4 @@ namespace MvvmCross.Forms.iOS.Presenters
             _window.RootViewController = mainPage.CreateViewController();
         }
     }
-}
+}*/
