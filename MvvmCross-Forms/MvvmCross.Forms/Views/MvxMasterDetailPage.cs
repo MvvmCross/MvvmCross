@@ -1,10 +1,11 @@
-﻿using MvvmCross.Binding.BindingContext;
+﻿using System;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views
 {
-    public class MvxContentPage : ContentPage, IMvxPage
+    public class MvxMasterDetailPage : MasterDetailPage, IMvxPage 
     {
         public object DataContext
         {
@@ -40,16 +41,16 @@ namespace MvvmCross.Forms.Views
             {
                 return DataContext as IMvxViewModel;
             }
-            set 
+            set
             {
                 DataContext = value;
                 OnViewModelSet();
             }
         }
 
-		protected virtual void OnViewModelSet()
-		{
-		}
+        protected virtual void OnViewModelSet()
+        {
+        }
 
         protected override void OnAppearing()
         {
@@ -66,8 +67,8 @@ namespace MvvmCross.Forms.Views
         }
     }
 
-    public class MvxContentPage<TViewModel>
-        : MvxContentPage
+    public class MvxMasterDetailPage<TViewModel>
+        : MvxMasterDetailPage
     , IMvxPage<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel

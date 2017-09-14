@@ -42,33 +42,60 @@ namespace MvvmCross.Forms.Droid.Views
 			set { _formsApplication = value; }
 		}
 
-        protected virtual NavigationPage MainPage => _formsApplication.MainPage as NavigationPage;
-
-		private IMvxFormsPageLoader _formsPageLoader;
-		protected IMvxFormsPageLoader FormsPageLoader
-		{
-			get
-			{
-				if (_formsPageLoader == null)
-					_formsPageLoader = Mvx.Resolve<IMvxFormsPageLoader>();
-				return _formsPageLoader;
-			}
-		}
-
 		protected override void RegisterAttributeTypes()
         {
             base.RegisterAttributeTypes();
 
 			AttributeTypesToActionsDictionary.Add(
-                typeof(MvxFormsPagePresentationAttribute),
+                typeof(MvxCarouselPagePresentationAttribute),
 				new MvxPresentationAttributeAction
 				{
-					ShowAction = (view, attribute, request) => ShowFormsPage(view, (MvxFormsPagePresentationAttribute)attribute, request),
-					CloseAction = (viewModel, attribute) => CloseFormsPage(viewModel, (MvxFormsPagePresentationAttribute)attribute)
+                ShowAction = (view, attribute, request) => ShowCarouselPage(view, (MvxCarouselPagePresentationAttribute)attribute, request),
+                CloseAction = (viewModel, attribute) => CloseCarouselPage(viewModel, (MvxCarouselPagePresentationAttribute)attribute)
 				});
+
+            AttributeTypesToActionsDictionary.Add(
+                typeof(MvxContentPagePresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                ShowAction = (view, attribute, request) => ShowContentPage(view, (MvxContentPagePresentationAttribute)attribute, request),
+                CloseAction = (viewModel, attribute) => CloseContentPage(viewModel, (MvxContentPagePresentationAttribute)attribute)
+                });
+
+            AttributeTypesToActionsDictionary.Add(
+                typeof(MvxMasterDetailPagePresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                ShowAction = (view, attribute, request) => ShowMasterDetailPage(view, (MvxMasterDetailPagePresentationAttribute)attribute, request),
+                CloseAction = (viewModel, attribute) => CloseMasterDetailPage(viewModel, (MvxMasterDetailPagePresentationAttribute)attribute)
+                });
+
+            AttributeTypesToActionsDictionary.Add(
+                typeof(MvxModalPresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                ShowAction = (view, attribute, request) => ShowModal(view, (MvxModalPresentationAttribute)attribute, request),
+                CloseAction = (viewModel, attribute) => CloseModal(viewModel, (MvxModalPresentationAttribute)attribute)
+                });
+
+            AttributeTypesToActionsDictionary.Add(
+                typeof(MvxNavigationPagePresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                ShowAction = (view, attribute, request) => ShowNavigationPage(view, (MvxNavigationPagePresentationAttribute)attribute, request),
+                CloseAction = (viewModel, attribute) => CloseNavigationPage(viewModel, (MvxNavigationPagePresentationAttribute)attribute)
+                });
+
+            AttributeTypesToActionsDictionary.Add(
+                typeof(MvxTabbedPagePresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                ShowAction = (view, attribute, request) => ShowTabbedPage(view, (MvxTabbedPagePresentationAttribute)attribute, request),
+                CloseAction = (viewModel, attribute) => CloseTabbedPage(viewModel, (MvxTabbedPagePresentationAttribute)attribute)
+                });
         }
 
-        protected override MvvmCross.Core.Views.MvxBasePresentationAttribute GetAttributeForViewModel(Type viewModelType)
+        protected override MvxBasePresentationAttribute GetAttributeForViewModel(Type viewModelType)
         {
 			IList<MvxBasePresentationAttribute> attributes;
             if (ViewModelToPresentationAttributeMap.TryGetValue(viewModelType, out attributes))
@@ -83,46 +110,159 @@ namespace MvvmCross.Forms.Droid.Views
 				}
 				return attribute;
             }
-            var viewType = ViewsContainer.GetViewType(viewModelType);
 
-			if (viewType.IsSubclassOf(typeof(Page)))
+            //TODO: Move to override CreateAttributeForViewModel
+            var viewType = ViewsContainer.GetViewType(viewModelType);
+            if (viewType.IsSubclassOf(typeof(ContentPage)))
+            {
+                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                               $"Assuming ContentPage presentation");
+                return new MvxContentPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
+            }
+            if (viewType.IsSubclassOf(typeof(CarouselPage)))
+            {
+                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                               $"Assuming CarouselPage presentation");
+                return new MvxCarouselPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
+            }
+            if (viewType.IsSubclassOf(typeof(TabbedPage)))
+            {
+                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                               $"Assuming TabbedPage presentation");
+                return new MvxTabbedPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
+            }
+            if (viewType.IsSubclassOf(typeof(MasterDetailPage)))
+            {
+                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                               $"Assuming MasterDetailPage presentation");
+                return new MvxMasterDetailPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
+            }
+			if (viewType.IsSubclassOf(typeof(NavigationPage)))
 			{
 				MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-					$"Assuming Page presentation");
-                return new MvxFormsPagePresentationAttribute(){ ViewType = viewType };
+                               $"Assuming NavigationPage presentation");
+                return new MvxNavigationPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
 			}
 
             return base.GetAttributeForViewModel(viewModelType);
         }
 
-		protected virtual void ShowFormsPage(
+        protected virtual Page CreatePage(Type viewType, MvxViewModelRequest request)
+        {
+            var page = Activator.CreateInstance(viewType) as Page;
+
+            if (page is IMvxPage contentPage)
+            {
+                if (request is MvxViewModelInstanceRequest instanceRequest)
+                {
+                    contentPage.ViewModel = instanceRequest.ViewModelInstance;
+                }
+                else
+                {
+                    contentPage.ViewModel = MvxPresenterHelpers.LoadViewModel(request);
+                }
+            }
+            return page;
+        }
+
+        protected virtual void ShowCarouselPage(
 			Type view,
-			MvxFormsPagePresentationAttribute attribute,
+			MvxCarouselPagePresentationAttribute attribute,
 			MvxViewModelRequest request)
 		{
-            var page = Activator.CreateInstance(view) as Page;
-
-			if (MainPage == null)
-			{
-				_formsApplication.MainPage = new NavigationPage(page);
-			}
-
-            if(page is IMvxContentPage contentPage)
-			if (request is MvxViewModelInstanceRequest instanceRequest)
-			{
-				contentPage.ViewModel = instanceRequest.ViewModelInstance;
-			}
-			else
-			{
-                contentPage.ViewModel = MvxPresenterHelpers.LoadViewModel(request);
-			}
-
-            MainPage.PushAsync(page);
+            var page = CreatePage(view, request) as CarouselPage;
+            FormsApplication.MainPage = page;
 		}
 
-		protected virtual bool CloseFormsPage(IMvxViewModel viewModel, MvxFormsPagePresentationAttribute attribute)
+        protected virtual bool CloseCarouselPage(IMvxViewModel viewModel, MvxCarouselPagePresentationAttribute attribute)
 		{
-            return true;
+            return false;
 		}
+
+        protected virtual void ShowContentPage(
+            Type view,
+            MvxContentPagePresentationAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            var page = CreatePage(view, request);
+
+            if(attribute.WrapInNavigationPage && (FormsApplication.MainPage == null || FormsApplication.MainPage.GetType() != typeof(MvxNavigationPage)))
+            {
+                FormsApplication.MainPage = new MvxNavigationPage(page);
+            }
+            else if(attribute.WrapInNavigationPage && FormsApplication.MainPage is MvxNavigationPage navigationPage)
+            {
+                navigationPage.PushAsync(page, attribute.Animated);
+            }
+            else
+            {
+                FormsApplication.MainPage = page;
+            }
+        }
+
+        protected virtual bool CloseContentPage(IMvxViewModel viewModel, MvxContentPagePresentationAttribute attribute)
+        {
+            return true;
+        }
+
+        protected virtual void ShowMasterDetailPage(
+            Type view,
+            MvxMasterDetailPagePresentationAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            var page = CreatePage(view, request) as MasterDetailPage;
+            FormsApplication.MainPage = page;
+        }
+
+        protected virtual bool CloseMasterDetailPage(IMvxViewModel viewModel, MvxMasterDetailPagePresentationAttribute attribute)
+        {
+            return true;
+        }
+
+        protected virtual void ShowModal(
+            Type view,
+            MvxModalPresentationAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            var page = CreatePage(view, request);
+
+            if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
+                navigationPage.CurrentPage.Navigation.PushModalAsync(page);
+        }
+
+        protected virtual bool CloseModal(IMvxViewModel viewModel, MvxModalPresentationAttribute attribute)
+        {
+            if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
+                navigationPage.CurrentPage.Navigation.PopModalAsync();
+            return true;
+        }
+
+        protected virtual void ShowNavigationPage(
+            Type view,
+            MvxNavigationPagePresentationAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            var page = CreatePage(view, request);
+            FormsApplication.MainPage = page;
+        }
+
+        protected virtual bool CloseNavigationPage(IMvxViewModel viewModel, MvxNavigationPagePresentationAttribute attribute)
+        {
+            return true;
+        }
+
+        protected virtual void ShowTabbedPage(
+            Type view,
+            MvxTabbedPagePresentationAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            var page = CreatePage(view, request) as TabbedPage;
+            FormsApplication.MainPage = page;
+        }
+
+        protected virtual bool CloseTabbedPage(IMvxViewModel viewModel, MvxTabbedPagePresentationAttribute attribute)
+        {
+            return true;
+        }
     }
 }
