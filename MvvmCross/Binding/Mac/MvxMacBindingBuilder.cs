@@ -83,6 +83,11 @@ namespace MvvmCross.Binding.Mac
             registry.RegisterCustomBindingFactory<NSButton>(
                 MvxMacPropertyBinding.NSButton_Title,
                 button => new MvxNSButtonTitleTargetBinding(button));
+
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding),
+                typeof(NSTabViewController),
+                MvxMacPropertyBinding.NSTabViewController_SelectedTabViewItemIndex);
             
             /* Todo: Address this for trackpad
             registry.RegisterCustomBindingFactory<NSView>("Tap", view => new MvxNSViewTapTargetBinding(view));
