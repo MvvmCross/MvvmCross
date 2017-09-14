@@ -44,7 +44,7 @@
     <Compile Include="Platform\MvxFormsIosSetup.cs" />
     <Compile Include="Platform\MvxFormsApplicationDelegate.cs" />
     <Compile Include="Views\MvxFormsIosMasterDetailPagePresenter.cs" />
-    <Compile Include="Views\MvxFormsIosPagePresenter.cs" />
+    <Compile Include="Views\MvxFormsIosViewPresenter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

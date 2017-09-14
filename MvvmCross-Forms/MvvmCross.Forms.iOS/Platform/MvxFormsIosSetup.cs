@@ -10,8 +10,12 @@ using MvvmCross.Localization;
 using UIKit;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Plugins;
+<<<<<<< HEAD
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Forms.Bindings.Target;
+=======
+using MvvmCross.Platform;
+>>>>>>> Cleanup the other Forms presenters
 using MvvmCross.Forms.Views;
 
 namespace MvvmCross.Forms.iOS
@@ -61,7 +65,7 @@ namespace MvvmCross.Forms.iOS
 
         protected override IMvxIosViewPresenter CreatePresenter()
         {
-            var presenter = new MvxFormsIosPagePresenter(Window, FormsApplication);
+            var presenter = new MvxFormsIosViewPresenter(ApplicationDelegate, Window, FormsApplication);
             Mvx.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
             return presenter;
         }

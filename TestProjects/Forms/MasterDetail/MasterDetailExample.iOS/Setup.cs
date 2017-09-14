@@ -21,10 +21,5 @@ namespace MasterDetailExample.iOS
         {
             return new App();
         }
-
-        protected override IMvxIosViewPresenter CreatePresenter()
-        {
-            return new MvxFormsIosMasterDetailPagePresenter(Window, FormsApplication);
-        }
     }
 }
