@@ -31,7 +31,7 @@ namespace MvvmCross.Core.ViewModels
             }
             try
             {
-                NavigationService.Navigate<TViewModel>().GetAwaiter().GetResult();
+                NavigationService.Navigate<TViewModel>();
             }
             catch (System.Exception exception)
             {
