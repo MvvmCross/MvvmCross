@@ -9,12 +9,18 @@ using System.CodeDom.Compiler;
 
 namespace Playground.Mac
 {
-	[Register ("ToolbarWindow")]
-	partial class ToolbarWindow
-	{
-		
-		void ReleaseDesignerOutlets ()
-		{
-		}
-	}
+    [Register ("ToolbarWindow")]
+    partial class ToolbarWindow
+    {
+        [Outlet]
+        AppKit.NSTextField textTitle { get; set; }
+        
+        void ReleaseDesignerOutlets ()
+        {
+            if (textTitle != null) {
+                textTitle.Dispose ();
+                textTitle = null;
+            }
+        }
+    }
 }
