@@ -913,6 +913,9 @@
                             </defaultToolbarItems>
                         </toolbar>
                     </window>
+                    <connections>
+                        <outlet property="textTitle" destination="GAa-jz-qCp" id="Eml-kM-92x"/>
+                    </connections>
                 </windowController>
                 <customObject id="U41-pH-aT0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

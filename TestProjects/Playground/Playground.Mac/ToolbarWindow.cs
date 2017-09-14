@@ -14,5 +14,9 @@ namespace Playground.Mac
 		public ToolbarWindow (IntPtr handle) : base (handle)
 		{
 		}
+
+        public NSTextField TextTitle {
+            get { return textTitle; }
+        }
     }
 }

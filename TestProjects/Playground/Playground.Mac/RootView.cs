@@ -14,8 +14,7 @@ using MvvmCross.Core.Views;
 namespace Playground.Mac
 {
     [MvxFromStoryboard("Main")]
-//    [MvxWindowPresentation]
-    [MvxStoryboardWindowPresentation("ToolbarWindow", "Main")]
+    [MvxWindowPresentation(PositionX = 300)]
     public partial class RootView : MvxViewController<RootViewModel>, IMvxOverridePresentationAttribute
     {
         public bool MyValue { get; set; } = true;
