@@ -1,5 +1,6 @@
 using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
+using System.Threading.Tasks;
 
 namespace Example.ViewModels
 {
@@ -19,6 +20,11 @@ namespace Example.ViewModels
                 RaisePropertyChanged(() => Hello);
             }
 		}
+
+        public override async Task Initialize()
+        {
+            await Task.Delay(1);
+        }
 
         public string Hello
         {
