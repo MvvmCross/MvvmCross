@@ -16,8 +16,7 @@ namespace Playground.Mac
         }
 
         public TabsRootView()
-        {
-            
+        {            
         }
 
         public override void LoadView()
