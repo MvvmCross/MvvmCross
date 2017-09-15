@@ -68,11 +68,7 @@ namespace MvvmCross.Mac.Views.Presenters
 
             _attributeTypesToShowMethodDictionary.Add(
                 typeof(MvxTabPresentationAttribute),
-                (vc, attribute, request) => ShowTabViewController(vc, (MvxTabPresentationAttribute)attribute, request));
-
-            _attributeTypesToShowMethodDictionary.Add(
-                typeof(MvxStoryboardWindowPresentationAttribute),
-                (vc, attribute, request) => ShowStoryboardWindowViewController(vc, (MvxStoryboardWindowPresentationAttribute)attribute, request));        
+                (vc, attribute, request) => ShowTabViewController(vc, (MvxTabPresentationAttribute)attribute, request));                
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
