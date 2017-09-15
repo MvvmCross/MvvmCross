@@ -3,6 +3,7 @@ using System.Reflection;
 using AppKit;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.Mac.Views;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Mac.Target
@@ -32,15 +33,27 @@ namespace MvvmCross.Binding.Mac.Target
 
         public override void SubscribeToEvents()
         {
-            var tabViewController = View;
-            if (tabViewController == null)
+            var view = View;
+            if (view == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - NSTabViewController is null in MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding");
                 return;
             }
 
             this._subscribed = true;
-            tabViewController.TabView.DidSelect += HandleValueChanged;
+            if (view is MvxEventSourceTabViewController)
+            {
+                ((MvxEventSourceTabViewController)view).DidSelectCalled += HandleValueChanged;
+            }
+            else {
+                try {
+                    view.TabView.DidSelect += HandleValueChanged;
+                }
+                catch (Exception ex)
+                {
+                    MvxBindingTrace.Error(ex.Message);
+                }
+            }
         }
 
         protected override void SetValueImpl(object target, object value)
@@ -60,7 +73,21 @@ namespace MvvmCross.Binding.Mac.Target
                 var view = View;
                 if (view != null && this._subscribed)
                 {
-                    view.TabView.DidSelect -= HandleValueChanged;
+                    if (view is MvxEventSourceTabViewController)
+                    {
+                        ((MvxEventSourceTabViewController)view).DidSelectCalled -= HandleValueChanged;
+                    }
+                    else
+                    {
+                        try
+                        {
+                            view.TabView.DidSelect -= HandleValueChanged;
+                        }
+                        catch (Exception ex)
+                        {
+                            MvxBindingTrace.Error(ex.Message);
+                        }
+                    }
                     this._subscribed = false;
                 }
             }

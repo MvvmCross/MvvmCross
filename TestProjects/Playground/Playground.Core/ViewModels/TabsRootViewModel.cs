@@ -4,6 +4,7 @@ using System.Windows.Input;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System.Collections.Generic;
+using MvvmCross.Platform.Platform;
 
 namespace Playground.Core.ViewModels
 {
@@ -28,7 +29,6 @@ namespace Playground.Core.ViewModels
             await Task.WhenAll(tasks);
         }
 
-        /*
         private int _itemIndex;
 
         public int ItemIndex {
@@ -37,9 +37,9 @@ namespace Playground.Core.ViewModels
             {
                 if (_itemIndex == value) return;
                 _itemIndex = value;
+                MvxTrace.Trace("Tab item changed to {0}", _itemIndex.ToString());
                 RaisePropertyChanged(() => ItemIndex);
             }
         }
-        */
     }
 }

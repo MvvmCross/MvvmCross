@@ -16,6 +16,11 @@ namespace Playground.Mac
         {
         }
 
+        public TabsRootView()
+        {
+            
+        }
+
         public override void LoadView()
         {
             base.LoadView();
@@ -43,9 +48,9 @@ namespace Playground.Mac
         {
             base.ViewDidAppear();
 
-            //var set = this.CreateBindingSet<TabsRootView, TabsRootViewModel>();
-            //set.Bind(this).For(v => v.SelectedTabViewItemIndex).To(vm => vm.ItemIndex);
-            //set.Apply();
+            var set = this.CreateBindingSet<TabsRootView, TabsRootViewModel>();
+            set.Bind(this).For(v => v.SelectedTabViewItemIndex).To(vm => vm.ItemIndex);
+            set.Apply();
         }
     }
 }

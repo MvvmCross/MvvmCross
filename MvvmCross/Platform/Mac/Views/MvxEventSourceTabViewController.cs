@@ -77,6 +77,18 @@ namespace MvvmCross.Platform.Mac.Views
             ViewDidDisappearCalled?.Raise(this);
         }
 
+        public override void DidSelect(NSTabView tabView, NSTabViewItem item)
+        {
+            base.DidSelect(tabView, item);
+            DidSelectCalled?.Raise(this);
+        }
+
+        public override void WillSelect(NSTabView tabView, NSTabViewItem item)
+        {
+            base.WillSelect(tabView, item);
+            WillSelectCalled?.Raise(this);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -97,6 +109,10 @@ namespace MvvmCross.Platform.Mac.Views
         public event EventHandler ViewDidDisappearCalled;
 
         public event EventHandler ViewWillDisappearCalled;
+
+        public event EventHandler DidSelectCalled;
+
+        public event EventHandler WillSelectCalled;
 
         public event EventHandler DisposeCalled;
     }
