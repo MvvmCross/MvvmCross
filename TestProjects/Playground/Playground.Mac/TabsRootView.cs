@@ -6,7 +6,6 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Mac
 {
-    //[MvxFromStoryboard("Main")]
     [MvxWindowPresentation(PositionX = 150)]
     public partial class TabsRootView : MvxTabViewController<TabsRootViewModel>
     {
