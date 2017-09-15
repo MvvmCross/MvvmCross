@@ -98,7 +98,6 @@
     <Compile Include="WindowView.designer.cs">
       <DependentUpon>WindowView.cs</DependentUpon>
     </Compile>
-    <Compile Include="TabsRootView.cs" />
     <Compile Include="Tab1View.cs" />
     <Compile Include="Tab1View.designer.cs">
       <DependentUpon>Tab1View.cs</DependentUpon>
@@ -112,6 +111,7 @@
     <Compile Include="ToolbarWindow.designer.cs">
       <DependentUpon>ToolbarWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabsRootView.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />

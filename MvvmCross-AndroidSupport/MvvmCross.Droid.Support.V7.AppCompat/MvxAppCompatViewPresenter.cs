@@ -111,23 +111,26 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 return attribute;
             }
 
+            return CreateAttributeForViewModel(viewModelType);
+        }
+
+        protected override MvxBasePresentationAttribute CreateAttributeForViewModel(Type viewModelType)
+        {
             var viewType = ViewsContainer.GetViewType(viewModelType);
             if (viewType.IsSubclassOf(typeof(DialogFragment)))
             {
                 MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
                     $"Assuming DialogFragment presentation");
-                return new MvxDialogFragmentPresentationAttribute();
+                return new MvxDialogFragmentPresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
             if (viewType.IsSubclassOf(typeof(Fragment)))
             {
                 MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
                     $"Assuming Fragment presentation");
-                return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), Android.Resource.Id.Content);
+                return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), Android.Resource.Id.Content) { ViewType = viewType, ViewModelType = viewModelType };
             }
 
-            MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-                    $"Assuming Activity presentation");
-            return new MvxActivityPresentationAttribute() { ViewModelType = viewModelType };
+            return base.CreateAttributeForViewModel(viewModelType);
         }
 
         protected override void ShowActivity(Type view,
