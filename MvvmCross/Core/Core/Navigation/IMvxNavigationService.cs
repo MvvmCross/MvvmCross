@@ -141,6 +141,18 @@ namespace MvvmCross.Core.Navigation
         /// <returns></returns>
         Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        Task Navigate<TViewModel>(IMvxBundle presentationBundle = null) 
+            where TViewModel : IMvxViewModel;
+
+        Task Navigate<TViewModel, TParameter>(TParameter param, IMvxBundle presentationBundle = null)
+            where TViewModel : IMvxViewModel<TParameter>;
+
+        Task<TResult> Navigate<TViewModel, TResult>(IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
+            where TViewModel : IMvxViewModelResult<TResult>;
+
+        Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
+            where TViewModel : IMvxViewModel<TParameter, TResult>;
+
         /// <summary>
         /// Verifies if the provided Uri can be routed to a ViewModel request.
         /// </summary>
