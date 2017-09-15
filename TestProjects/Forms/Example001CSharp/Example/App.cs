@@ -13,7 +13,7 @@ namespace Example
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 				
-            RegisterAppStart<FirstViewModel>();
+            RegisterNavigationServiceAppStart<FirstViewModel>();
         }
     }
 }

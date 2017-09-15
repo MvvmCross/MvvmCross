@@ -43,5 +43,8 @@ namespace MvvmCross.Binding.Mac
 
         public static string BindTitle(this NSButton nsButton)
             => MvxMacPropertyBinding.NSButton_Title;
+
+        public static string BindSelectedTabViewItemIndex(this NSTabViewController nsTabViewController)
+            => MvxMacPropertyBinding.NSTabViewController_SelectedTabViewItemIndex;
     }
 }
