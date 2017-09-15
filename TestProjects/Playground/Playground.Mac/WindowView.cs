@@ -12,8 +12,7 @@ using Playground.Core.ViewModels;
 namespace Playground.Mac
 {
     [MvxFromStoryboard("Main")]
-//    [MvxWindowPresentation(PositionX = 300)]
-    [MvxWindowPresentation("ToolbarWindow", "Main")]
+    [MvxWindowPresentation("ToolbarWindow", "Main", Width = 200)]
     public partial class WindowView : MvxViewController<WindowViewModel>
     {
         public WindowView(IntPtr handle) : base(handle)
