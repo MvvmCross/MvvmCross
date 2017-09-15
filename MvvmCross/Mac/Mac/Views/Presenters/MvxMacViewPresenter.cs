@@ -228,28 +228,6 @@ namespace MvvmCross.Mac.Views.Presenters
             tabViewController.ShowTabView(viewController, attribute.TabTitle);
         }
 
-
-        protected virtual void ShowStoryboardWindowViewController(
-            NSViewController viewController, 
-            MvxStoryboardWindowPresentationAttribute attribute, 
-            MvxViewModelRequest request)
-        {
-            var storyboard = NSStoryboard.FromName(attribute.StoryboardName, null);
-            var controller = (NSWindowController)storyboard.InstantiateControllerWithIdentifier(attribute.WindowControllerName);
-
-            var window = controller.Window;
-            window.Identifier = attribute.Identifier ?? viewController.GetType().Name;
-            if (!string.IsNullOrEmpty(viewController.Title))
-                window.Title = viewController.Title;
-
-            Windows.Add(window);
-            window.ContentView = viewController.View;
-            window.ContentViewController = viewController;
-            window.TitleVisibility = NSWindowTitleVisibility.Hidden;
-
-            controller.ShowWindow(null);
-        }
-
         public override void Close(IMvxViewModel toClose)
         {
             for (int i = Windows.Count - 1; i >= 0; i--)
