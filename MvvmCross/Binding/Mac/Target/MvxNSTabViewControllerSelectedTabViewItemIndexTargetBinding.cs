@@ -40,7 +40,7 @@ namespace MvvmCross.Binding.Mac.Target
                 return;
             }
 
-            this._subscribed = true;
+            _subscribed = true;
             if (view is MvxEventSourceTabViewController)
             {
                 ((MvxEventSourceTabViewController)view).DidSelectCalled += HandleValueChanged;
@@ -71,7 +71,7 @@ namespace MvvmCross.Binding.Mac.Target
             if (isDisposing)
             {
                 var view = View;
-                if (view != null && this._subscribed)
+                if (view != null && _subscribed)
                 {
                     if (view is MvxEventSourceTabViewController)
                     {
@@ -88,7 +88,7 @@ namespace MvvmCross.Binding.Mac.Target
                             MvxBindingTrace.Error(ex.Message);
                         }
                     }
-                    this._subscribed = false;
+                    _subscribed = false;
                 }
             }
         }
