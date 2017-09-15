@@ -1143,6 +1143,7 @@ AppKit.NSTextView | StringValue | BindStringValue()
 AppKit.NSButton | Visibility | BindVisibility()
 AppKit.NSButton | Title | BindTitle()
 AppKit.NSSearchField | Text | BindText()
+AppKit.NSTabViewController | SelectedTabViewItemIndex | BindSelectedTabViewItemIndex()
 
 **tvOS - `using MvvmCross.Binding.tvOS`**
 
