@@ -83,6 +83,11 @@ namespace MvvmCross.Binding.Mac
             registry.RegisterCustomBindingFactory<NSButton>(
                 MvxMacPropertyBinding.NSButton_Title,
                 button => new MvxNSButtonTitleTargetBinding(button));
+
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding),
+                typeof(NSTabViewController),
+                MvxMacPropertyBinding.NSTabViewController_SelectedTabViewItemIndex);
             
             /* Todo: Address this for trackpad
             registry.RegisterCustomBindingFactory<NSView>("Tap", view => new MvxNSViewTapTargetBinding(view));
@@ -118,6 +123,7 @@ namespace MvvmCross.Binding.Mac
             registry.AddOrOverwrite(typeof(NSDatePicker), MvxMacPropertyBinding.NSDatePicker_Date);
             registry.AddOrOverwrite(typeof(NSSlider), MvxMacPropertyBinding.NSSlider_IntValue);
             registry.AddOrOverwrite(typeof(NSSegmentedControl), MvxMacPropertyBinding.NSSegmentedControl_SelectedSegment);
+            registry.AddOrOverwrite(typeof(NSTabViewController), MvxMacPropertyBinding.NSTabViewController_SelectedTabViewItemIndex);
 
             //registry.AddOrOverwrite(typeof(MvxCollectionViewSource), "ItemsSource");
             //registry.AddOrOverwrite(typeof(MvxTableViewSource), "ItemsSource");
