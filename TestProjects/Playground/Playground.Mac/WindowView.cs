@@ -13,7 +13,7 @@ namespace Playground.Mac
 {
     [MvxFromStoryboard("Main")]
 //    [MvxWindowPresentation(PositionX = 300)]
-    [MvxStoryboardWindowPresentation("ToolbarWindow", "Main")]
+    [MvxWindowPresentation("ToolbarWindow", "Main")]
     public partial class WindowView : MvxViewController<WindowViewModel>
     {
         public WindowView(IntPtr handle) : base(handle)

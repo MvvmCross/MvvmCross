@@ -111,26 +111,73 @@ namespace MvvmCross.Mac.Views.Presenters
             MvxWindowPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var window = new NSWindow(
-                new CGRect(attribute.PositionX, attribute.PositionY, attribute.Width, attribute.Height),
-                attribute.WindowStyle,
-                attribute.BufferingType,
-                false,
-                NSScreen.MainScreen)
+            NSWindow window = null;
+            NSWindowController windowController = null;
+            float positionX, positionY, width, height;
+
+            if (!string.IsNullOrEmpty(attribute.WindowControllerName))
             {
-                Identifier = attribute.Identifier ?? viewController.GetType().Name
-            };
+                if (!string.IsNullOrEmpty(attribute.StoryboardName))
+                {
+                    // Instantiate from storyboard
+                    var storyboard = NSStoryboard.FromName(attribute.StoryboardName, null);
+                    windowController = (NSWindowController)storyboard.InstantiateControllerWithIdentifier(attribute.WindowControllerName);
+                }
+                else {
+                    // Instantiate using Reflection - failure is possible if blank constructor is missing
+                    windowController = (NSWindowController)Activator.CreateInstance(Type.GetType(attribute.WindowControllerName));
+                }
+                windowController.ShouldCascadeWindows = attribute.ShouldCascadeWindows ?? windowController.ShouldCascadeWindows;
+                window = windowController.Window;
+            }
+
+            if (window == null)
+            {
+                positionX = attribute.PositionX != MvxWindowPresentationAttribute.InitialPositionX ? attribute.PositionX : MvxWindowPresentationAttribute.DefaultPositionX;
+                positionY = attribute.PositionY != MvxWindowPresentationAttribute.InitialPositionY ? attribute.PositionY : MvxWindowPresentationAttribute.DefaultPositionY;
+                width = attribute.Width != MvxWindowPresentationAttribute.InitialWidth ? attribute.Width : MvxWindowPresentationAttribute.DefaultWidth;
+                height = attribute.Height != MvxWindowPresentationAttribute.InitialHeight ? attribute.Height : MvxWindowPresentationAttribute.DefaultHeight;
+
+                window = new NSWindow(
+                    new CGRect(positionX, positionY, width, height),
+                    attribute.WindowStyle ?? MvxWindowPresentationAttribute.DefaultWindowStyle,
+                    attribute.BufferingType ?? MvxWindowPresentationAttribute.DefaultBufferingType,
+                    false,
+                    NSScreen.MainScreen)
+                {
+                    TitleVisibility = attribute.TitleVisibility ?? MvxWindowPresentationAttribute.DefaultTitleVisibility,
+                };
+
+                if (windowController == null)
+                {
+                    windowController = CreateWindowController(window);
+                    windowController.ShouldCascadeWindows = attribute.ShouldCascadeWindows ?? MvxWindowPresentationAttribute.DefaultShouldCascadeWindows;
+                }
+                windowController.Window = window;
+            }
+            else {
+                positionX = attribute.PositionX != MvxWindowPresentationAttribute.InitialPositionX ? attribute.PositionX : (float)window.Frame.X;
+                positionY = attribute.PositionY != MvxWindowPresentationAttribute.InitialPositionY ? attribute.PositionY : (float)window.Frame.Y;
+                width = attribute.Width != MvxWindowPresentationAttribute.InitialWidth ? attribute.Width : (float)window.Frame.Width;
+                height = attribute.Height != MvxWindowPresentationAttribute.InitialHeight ? attribute.Height : (float)window.Frame.Height;
+
+                var newFrame = new CGRect(positionX, positionY, width, height);
+                window.SetFrame(newFrame, false);
+
+                window.StyleMask = attribute.WindowStyle ?? window.StyleMask;
+                window.BackingType = attribute.BufferingType ?? window.BackingType;
+                window.TitleVisibility = attribute.TitleVisibility ?? window.TitleVisibility;
+            }
+
+            window.Identifier = attribute.Identifier ?? viewController.GetType().Name;
 
             if (!string.IsNullOrEmpty(viewController.Title))
                 window.Title = viewController.Title;
-
+                    
             Windows.Add(window);
             window.ContentView = viewController.View;
             window.ContentViewController = viewController;
-
-            var windowController = CreateWindowController(window);
-            windowController.ShouldCascadeWindows = true;
-            windowController.ShowWindow(null);
+            windowController.ShowWindow(null);                
         }
 
         protected virtual void ShowContentViewController(
