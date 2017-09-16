@@ -36,6 +36,17 @@ You can customize how the window will look through the following properties:
 - Width: float, default value is 600.
 - Height: float, default value is 400.
 
+To use a window generated in Storyboard, click on the storyboard and create a new Window Controller in Interface Builder. You may delete the generated View Controller. Back in Visual Studio for Mac, change the resulting _NSWindowController_ to a _MvxWindowController_. Add two parameters to the _MvxWindowPresentationAttribute_, the WindowControllerName followed by the StoryboardName, e.g.,
+```c#
+[MvxWindowPresentation("CustomWindow", "Main")]
+```
+
+Properties introduced inside the attribute will override the storyboard properties, e.g.,
+```c#
+[MvxWindowPresentation("CustomWindow", "Main", Width = 800)]
+```
+will set the CustomWindow Width to 800.
+
 ### MvxContentPresentationAttribute
 
 Used to set a view as content of a _Window_. Please notice that changing the content of a window does not automatically generate a navigation stack as it would be on iOS. Changing the content of a window dismisses the old content.
@@ -58,19 +69,6 @@ The presentation can be customized through this properties:
 
 - TabTitle: Defines the title of the tab that will be displayed in the segmented control for tabs.
 - WindowIdentifier: identifier for the window where the view should be displayed.
-
-### MvxStoryboardWindowPresentationAttribute
-
-Similar to MvxWindowPresentationAttribute, used to initiate a new _Window_ based on a WindowController created in Storyboard. The first view of your app can use this attribute as an alternative to MvxWindowPresentationAttribute.
-
-You can customize how the window will look in your storyboard. Click on the storyboard and create a new WindowController in IB. You may delete the default ViewController. This attribute requires two parameters, the WindowController name followed by the storyboard name, e.g.,
-```c#
-[MvxStoryboardWindowPresentation("CustomWindowController", "Main")]
-```
-
-Additional properties:
-
-- Identifier: Window identifier, used to identify the window for other attributes. If an identifier is not provided by the developer, it will be set to the name of the view class.
 
 ## Views without attributes: Default values
 
