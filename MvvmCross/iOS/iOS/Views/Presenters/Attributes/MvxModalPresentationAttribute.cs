@@ -6,14 +6,19 @@ namespace MvvmCross.iOS.Views.Presenters.Attributes
 {
     public class MvxModalPresentationAttribute : MvxBasePresentationAttribute
     {
-        public bool WrapInNavigationController { get; set; } = false;
+        public static bool DefaultWrapInNavigationController = false;
+        public bool WrapInNavigationController { get; set; } = DefaultWrapInNavigationController;
 
-        public UIModalPresentationStyle ModalPresentationStyle { get; set; } = UIModalPresentationStyle.FullScreen;
+        public static UIModalPresentationStyle DefaultModalPresentationStyle = UIModalPresentationStyle.FullScreen;
+        public UIModalPresentationStyle ModalPresentationStyle { get; set; } = DefaultModalPresentationStyle;
 
-        public UIModalTransitionStyle ModalTransitionStyle { get; set; } = UIModalTransitionStyle.CoverVertical;
+        public static UIModalTransitionStyle DefaultModalTransitionStyle = UIModalTransitionStyle.CoverVertical;
+        public UIModalTransitionStyle ModalTransitionStyle { get; set; } = DefaultModalTransitionStyle;
 
-        public CGSize PreferredContentSize { get; set; }
+        public static CGSize DefaultPreferredContentSize = CGSize.Empty;
+        public CGSize PreferredContentSize { get; set; } = DefaultPreferredContentSize;
 
-        public bool Animated { get; set; } = true;
+        public static bool DefaultAnimated = true;
+        public bool Animated { get; set; } = DefaultAnimated;
     }
 }

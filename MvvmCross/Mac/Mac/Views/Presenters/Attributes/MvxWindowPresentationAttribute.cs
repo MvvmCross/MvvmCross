@@ -6,14 +6,14 @@ namespace MvvmCross.Mac.Views.Presenters.Attributes
 {
     public class MvxWindowPresentationAttribute : MvxBasePresentationAttribute
     {
-        public static float DefaultPositionX { get; set; } = 200;
-        public static float DefaultPositionY { get; set; } = 200;
-        public static float DefaultWidth { get; set; } = 600;
-        public static float DefaultHeight { get; set; } = 400;
-        public static NSWindowStyle DefaultWindowStyle { get; set; } = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
-        public static NSBackingStore DefaultBufferingType { get; set; } = NSBackingStore.Buffered;
-        public static NSWindowTitleVisibility DefaultTitleVisibility { get; set; } = NSWindowTitleVisibility.Visible;
-        public static bool DefaultShouldCascadeWindows { get; set; } = true;
+        public static float DefaultPositionX = 200;
+        public static float DefaultPositionY = 200;
+        public static float DefaultWidth = 600;
+        public static float DefaultHeight = 400;
+        public static NSWindowStyle DefaultWindowStyle = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
+        public static NSBackingStore DefaultBufferingType = NSBackingStore.Buffered;
+        public static NSWindowTitleVisibility DefaultTitleVisibility = NSWindowTitleVisibility.Visible;
+        public static bool DefaultShouldCascadeWindows = true;
 
         public static float InitialPositionX { get; } = float.MinValue;
         public static float InitialPositionY { get; } = float.MinValue;
