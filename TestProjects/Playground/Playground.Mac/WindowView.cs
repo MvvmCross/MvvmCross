@@ -12,12 +12,16 @@ using Playground.Core.ViewModels;
 namespace Playground.Mac
 {
     [MvxFromStoryboard("Main")]
-    [MvxWindowPresentation(PositionX = 300)]
+    [MvxWindowPresentation("ToolbarWindow", "Main", Width = 200)]
     public partial class WindowView : MvxViewController<WindowViewModel>
     {
         public WindowView(IntPtr handle) : base(handle)
         {
             Title = "Window view";
+        }
+
+        public ToolbarWindow WindowController {
+            get { return View.Window != null ? (ToolbarWindow)View.Window.WindowController : null; }
         }
 
         public override void ViewDidLoad()
@@ -26,6 +30,15 @@ namespace Playground.Mac
 
             var set = this.CreateBindingSet<WindowView, WindowViewModel>();
             set.Bind(btnClose).To(vm => vm.CloseCommand);
+            set.Apply();
+        }
+
+        public override void ViewDidAppear()
+        {
+            base.ViewDidAppear();
+
+            var set = this.CreateBindingSet<WindowView, WindowViewModel>();
+            set.Bind(WindowController.TextTitle).For(v => v.StringValue).To(vm => vm.Title);
             set.Apply();
         }
     }

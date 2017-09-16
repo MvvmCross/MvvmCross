@@ -872,5 +872,53 @@
             </objects>
             <point key="canvasLocation" x="2585" y="652"/>
         </scene>
+        <!--Toolbar Window-->
+        <scene sceneID="T7X-NF-hJh">
+            <objects>
+                <windowController storyboardIdentifier="ToolbarWindow" id="VBd-kr-Qq4" userLabel="Toolbar Window" customClass="ToolbarWindow" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="jcZ-bg-Chx">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" texturedBackground="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="1685" y="527" width="300" height="300"/>
+                        <rect key="screenRect" x="1440" y="226" width="1680" height="1027"/>
+                        <toolbar key="toolbar" implicitIdentifier="54147DE5-A6E4-4161-9637-CEDE9E3B8824" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="small" id="Z27-JP-bBi">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="V11-Z1-YtT"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="a0v-0X-HyC"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="Sq9-6o-ZDm"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="LNz-96-XxG"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="vn7-LH-rdg"/>
+                                <toolbarItem implicitItemIdentifier="6D7ECB52-9DE3-4759-9811-3D10AC9739B1" label="Text" paletteLabel="Text" id="leD-bj-Lg3">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="96" height="22"/>
+                                    <size key="maxSize" width="96" height="22"/>
+                                    <textField key="view" verticalHuggingPriority="750" id="GAa-jz-qCp">
+                                        <rect key="frame" x="0.0" y="14" width="96" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" bezelStyle="round" id="TOT-sG-WKE">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </toolbarItem>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="V11-Z1-YtT"/>
+                                <toolbarItem reference="a0v-0X-HyC"/>
+                                <toolbarItem reference="vn7-LH-rdg"/>
+                                <toolbarItem reference="leD-bj-Lg3"/>
+                                <toolbarItem reference="vn7-LH-rdg"/>
+                                <toolbarItem reference="Sq9-6o-ZDm"/>
+                            </defaultToolbarItems>
+                        </toolbar>
+                    </window>
+                    <connections>
+                        <outlet property="textTitle" destination="GAa-jz-qCp" id="Eml-kM-92x"/>
+                    </connections>
+                </windowController>
+                <customObject id="U41-pH-aT0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
 </document>

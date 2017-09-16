@@ -107,6 +107,10 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ToolbarWindow.cs" />
+    <Compile Include="ToolbarWindow.designer.cs">
+      <DependentUpon>ToolbarWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabsRootView.cs" />
   </ItemGroup>
   <ItemGroup>
