@@ -40,6 +40,8 @@ namespace Playground.Mac
             var set = this.CreateBindingSet<WindowView, WindowViewModel>();
             set.Bind(WindowController.TextTitle).For(v => v.StringValue).To(vm => vm.Title);
             set.Apply();
+
+            GC.Collect();       // test to make sure WindowController does not get removed prematurely
         }
     }
 }
