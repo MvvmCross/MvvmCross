@@ -12,8 +12,6 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Views.Fragments.EventSource;
 using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Views;
-using MvvmCross.Droid.Views.Attributes;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Platform;
@@ -56,9 +54,6 @@ namespace MvvmCross.Droid.Views.Fragments
                 MvxTrace.Warning($"ViewModel type for Activity {Fragment.Activity.GetType()} not found when trying to show fragment: {Fragment.GetType()}");
                 return;
             }
-
-            //if (!FragmentView.GetType().IsFragmentCacheable(viewModelType))
-            //return;
 
             FragmentView.RegisterFragmentViewToCacheIfNeeded(Fragment.Activity.GetType());
 
@@ -117,8 +112,6 @@ namespace MvvmCross.Droid.Views.Fragments
         {
             // it is guarannted that SaveInstanceState call will be executed before OnStop (thus before Fragment detach)
             // it is safe to assume that Fragment has activity attached
-            //if (!FragmentView.GetType().IsFragmentCacheable(Fragment.Activity.GetType()))
-            //return;
 
             var mvxBundle = FragmentView.CreateSaveStateBundle();
             if (mvxBundle != null)

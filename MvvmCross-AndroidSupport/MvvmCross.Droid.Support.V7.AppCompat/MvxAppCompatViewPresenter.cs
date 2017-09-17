@@ -133,6 +133,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return base.CreateAttributeForViewModel(viewModelType);
         }
 
+        #region Show implementations
         protected override void ShowActivity(Type view,
             MvxActivityPresentationAttribute attribute,
             MvxViewModelRequest request)
@@ -163,7 +164,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 activity.StartActivity(intent);
         }
 
-        #region Show implementations
         protected override void ShowHostActivity(MvxFragmentPresentationAttribute attribute)
         {
             var viewType = ViewsContainer.GetViewType(attribute.ActivityHostViewModelType);
