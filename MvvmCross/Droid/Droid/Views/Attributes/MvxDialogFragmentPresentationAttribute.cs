@@ -37,6 +37,6 @@ namespace MvvmCross.Droid.Views.Attributes
         /// <summary>
         /// Indicates if the fragment can be cached. For dialogs it is false by default.
         /// </summary>
-        public override bool IsCacheableFragment { get; set; } = false;
+        public new bool IsCacheableFragment { get; set; } = false;
     }
 }
