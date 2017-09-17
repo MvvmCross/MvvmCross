@@ -27,7 +27,6 @@ namespace MvvmCross.Droid.Views
 
         protected virtual FragmentManager CurrentFragmentManager => CurrentActivity.FragmentManager;
 
-        protected virtual ConditionalWeakTable<MvxBasePresentationAttribute, IMvxFragmentView> CachedFragments { get; } = new ConditionalWeakTable<MvxBasePresentationAttribute, IMvxFragmentView>();
         protected virtual ConditionalWeakTable<IMvxViewModel, DialogFragment> Dialogs { get; } = new ConditionalWeakTable<IMvxViewModel, DialogFragment>();
 
         private IMvxAndroidCurrentTopActivity _mvxAndroidCurrentTopActivity;
@@ -406,7 +405,13 @@ namespace MvvmCross.Droid.Views
             MvxViewModelRequest request)
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
-            var fragment = CreateFragment(attribute, fragmentName);
+
+            IMvxFragmentView fragment = null;
+            if (attribute.IsCacheableFragment)
+            {
+                fragment = (IMvxFragmentView)fragmentManager.FindFragmentByTag(fragmentName);
+            }
+            fragment = fragment ?? CreateFragment(attribute, fragmentName);
 
             // MvxNavigationService provides an already instantiated ViewModel here,
             // therefore just assign it
@@ -423,7 +428,15 @@ namespace MvvmCross.Droid.Views
                 var fragmentView = fragment.ToFragment();
                 if (fragmentView != null)
                 {
-                    fragmentView.Arguments = bundle;
+                    if (fragmentView.Arguments == null)
+                    {
+                        fragmentView.Arguments = bundle;
+                    }
+                    else
+                    {
+                        fragmentView.Arguments.Clear();
+                        fragmentView.Arguments.PutAll(bundle);
+                    }
                 }
             }
 
@@ -637,17 +650,7 @@ namespace MvvmCross.Droid.Views
         {
             try
             {
-                IMvxFragmentView fragment;
-                if (attribute is MvxFragmentPresentationAttribute fragmentAttribute && fragmentAttribute.IsCacheableFragment)
-                {
-                    if (CachedFragments.TryGetValue(attribute, out fragment))
-                        return fragment;
-
-                    fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
-                    CachedFragments.Add(attribute, fragment);
-                }
-                else
-                    fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
+                var fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
                 return fragment;
             }
             catch

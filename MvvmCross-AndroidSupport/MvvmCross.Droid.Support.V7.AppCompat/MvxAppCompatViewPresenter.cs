@@ -227,7 +227,13 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             MvxViewModelRequest request)
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
-            var fragment = CreateFragment(attribute, fragmentName);
+
+            IMvxFragmentView fragment = null;
+            if (attribute.IsCacheableFragment)
+            {
+                fragment = (IMvxFragmentView)fragmentManager.FindFragmentByTag(fragmentName);
+            }
+            fragment = fragment ?? CreateFragment(attribute, fragmentName);
 
             // MvxNavigationService provides an already instantiated ViewModel here,
             // therefore just assign it
@@ -244,7 +250,15 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 var fragmentView = fragment.ToFragment();
                 if (fragmentView != null)
                 {
-                    fragmentView.Arguments = bundle;
+                    if (fragmentView.Arguments == null)
+                    {
+                        fragmentView.Arguments = bundle;
+                    }
+                    else
+                    {
+                        fragmentView.Arguments.Clear();
+                        fragmentView.Arguments.PutAll(bundle);
+                    }
                 }
             }
 
@@ -501,17 +515,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             try
             {
-                IMvxFragmentView fragment;
-                if (attribute is MvxFragmentPresentationAttribute fragmentAttribute && fragmentAttribute.IsCacheableFragment)
-                {
-                    if (CachedFragments.TryGetValue(attribute, out fragment))
-                        return fragment;
-
-                    fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
-                    CachedFragments.Add(attribute, fragment);
-                }
-                else
-                    fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
+                var fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
                 return fragment;
             }
             catch
