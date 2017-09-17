@@ -55,8 +55,6 @@ namespace MvvmCross.Droid.Support.V4.EventSource
                 return;
             }
 
-            FragmentView.RegisterFragmentViewToCacheIfNeeded(Fragment.Activity.GetType());
-
             Bundle bundle = null;
             MvxViewModelRequest request = null;
             if (bundleArgs?.Value != null)
