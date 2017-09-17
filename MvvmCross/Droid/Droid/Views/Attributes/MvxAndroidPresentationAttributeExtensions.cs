@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
@@ -22,11 +23,13 @@ namespace MvvmCross.Droid.Views.Attributes
             if (!fragmentType.HasBasePresentationAttribute())
                 return false;
 
-            var attribute = fragmentType.GetBasePresentationAttribute();
-            if (attribute is MvxFragmentPresentationAttribute fragmentAttribute)
-                return fragmentAttribute.IsCacheableFragment;
+            var fragmentAttributes = fragmentType.GetBasePresentationAttributes()
+                                                 .Select(baseAttribute => baseAttribute as MvxFragmentPresentationAttribute)
+                                                 .Where(fragmentAttribute => fragmentAttribute != null);
 
-            return false;
+            var currentAttribute = fragmentAttributes.FirstOrDefault(fragmentAttribute => fragmentAttribute.ActivityHostViewModelType == fragmentActivityParentType);
+
+            return currentAttribute != null ? currentAttribute.IsCacheableFragment : false;
         }
     }
 }
