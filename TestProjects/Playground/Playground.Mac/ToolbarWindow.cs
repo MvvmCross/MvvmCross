@@ -26,6 +26,5 @@ namespace Playground.Mac
         public NSTextField TextTitle {
             get { return textTitle; }
         }
-
     }
 }
