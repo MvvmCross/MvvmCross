@@ -11,9 +11,17 @@ namespace Playground.Mac
     [MvxFromStoryboard("Main")]
     public partial class ToolbarWindow : MvxWindowController
 	{
+        private static int _count;
+
 		public ToolbarWindow (IntPtr handle) : base (handle)
 		{
+            _count++;
 		}
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+        }
 
         public NSTextField TextTitle {
             get { return textTitle; }

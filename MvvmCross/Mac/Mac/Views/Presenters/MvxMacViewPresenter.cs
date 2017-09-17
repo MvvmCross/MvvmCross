@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using AppKit;
 using CoreGraphics;
 using MvvmCross.Core.ViewModels;
@@ -23,6 +24,8 @@ namespace MvvmCross.Mac.Views.Presenters
     {
         private readonly INSApplicationDelegate _applicationDelegate;
         private List<NSWindow> _windows;
+        private ConditionalWeakTable<NSWindow, NSWindowController> _windowsToWindowControllers = new ConditionalWeakTable<NSWindow, NSWindowController>();
+
         private Dictionary<Type, Action<NSViewController, MvxBasePresentationAttribute, MvxViewModelRequest>> _attributeTypesToShowMethodDictionary;
         protected Dictionary<Type, Action<NSViewController, MvxBasePresentationAttribute, MvxViewModelRequest>> AttributeTypesToShowMethodDictionary
         {
@@ -36,7 +39,6 @@ namespace MvvmCross.Mac.Views.Presenters
                 return _attributeTypesToShowMethodDictionary;
             }
         }
-
 
         protected virtual INSApplicationDelegate ApplicationDelegate => _applicationDelegate;
 
@@ -140,7 +142,9 @@ namespace MvvmCross.Mac.Views.Presenters
             Windows.Add(window);
             window.ContentView = viewController.View;
             window.ContentViewController = viewController;
-            windowController.ShowWindow(null);                
+            windowController.ShowWindow(null);  
+
+            _windowsToWindowControllers.Add(window, windowController);
         }
 
         protected virtual void UpdateWindow(MvxWindowPresentationAttribute attribute, NSWindow window)
