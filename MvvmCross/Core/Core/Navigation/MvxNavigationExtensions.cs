@@ -42,28 +42,5 @@ namespace MvvmCross.Core.Navigation
         {
             return navigationService.Navigate<TParameter, TResult>(path.ToString(), param, presentationBundle, cancellationToken);
         }
-
-        public static Task Navigate<TViewModel>(this IMvxNavigationService navigationService, IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel
-        {
-            return navigationService.Navigate(typeof(TViewModel), presentationBundle);
-        }
-
-        public static Task Navigate<TViewModel, TParameter>(this IMvxNavigationService navigationService, TParameter param, IMvxBundle presentationBundle = null)
-            where TViewModel : IMvxViewModel<TParameter>
-        {
-            return navigationService.Navigate<TParameter>(typeof(TViewModel), param, presentationBundle);
-        }
-
-        public static Task<TResult> Navigate<TViewModel, TResult>(this IMvxNavigationService navigationService, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
-            where TViewModel : IMvxViewModelResult<TResult>
-        {
-            return navigationService.Navigate<TResult>(typeof(TViewModel), presentationBundle, cancellationToken);
-        }
-
-        public static Task<TResult> Navigate<TViewModel, TParameter, TResult>(this IMvxNavigationService navigationService, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
-            where TViewModel : IMvxViewModel<TParameter, TResult>
-        {
-            return navigationService.Navigate<TParameter, TResult>(typeof(TViewModel), param, presentationBundle, cancellationToken);
-        }
     }
 }
