@@ -3,9 +3,9 @@ using MvvmCross.Droid.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Droid.Views;
-using MvvmCross.Forms.Core;
-using MvvmCross.Forms.Droid.Presenters;
 using MvvmCross.Forms.Droid;
+using MvvmCross.Forms.Droid.Platform;
+using MvvmCross.Forms.Platform;
 
 namespace Playground.Forms.Droid
 {
@@ -15,14 +15,14 @@ namespace Playground.Forms.Droid
         {
         }
 
-        protected override MvxFormsApplication CreateFormsApplication()
-        {
-            return new Core.App();
-        }
+        //protected override MvxFormsApplication CreateFormsApplication()
+        //{
+        //    return new Core.App();
+        //}
 
         protected override IMvxApplication CreateApp()
         {
-            return new Core.CoreApp();
+            return new Core.App();
         }
 
         protected override IMvxTrace CreateDebugTrace()

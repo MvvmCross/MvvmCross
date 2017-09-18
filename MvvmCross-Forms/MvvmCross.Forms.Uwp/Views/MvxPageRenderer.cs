@@ -1,6 +1,6 @@
-﻿using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Presenters;
+using MvvmCross.Forms.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;
 
