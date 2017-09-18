@@ -345,7 +345,7 @@ public class SayPleaseVisibilityValueConverter : MvxBaseVisibilityValueConverter
 {
     protected override MvxVisibility Convert(string value, object parameter, CultureInfo culture)
     {
-        return (value == "Please) ? MvxVisibility.Visible : MvxVisibility.Collapsed;
+        return (value == "Please") ? MvxVisibility.Visible : MvxVisibility.Collapsed;
     }
 }
 ```
