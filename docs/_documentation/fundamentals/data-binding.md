@@ -999,6 +999,7 @@ AppKit.NSTextView | StringValue
 AppKit.NSImageView | Image
 AppKit.NSDatePicker | Date
 AppKit.NSSlider | IntValue
+AppKit.NSMenuItem | Activated
 
 **tvOS**
 
@@ -1140,8 +1141,9 @@ AppKit.NSDatePicker | Time | BindTime()
 AppKit.NSDatePicker | Date | BindDate()
 AppKit.NSTextField | StringValue | BindStringValue()
 AppKit.NSTextView | StringValue | BindStringValue()
-AppKit.NSButton | Visibility | BindVisibility()
+AppKit.NSButton | State | BindState()
 AppKit.NSButton | Title | BindTitle()
+AppKit.NSMenuItem | State | BindState()
 AppKit.NSSearchField | Text | BindText()
 AppKit.NSTabViewController | SelectedTabViewItemIndex | BindSelectedTabViewItemIndex()
 
