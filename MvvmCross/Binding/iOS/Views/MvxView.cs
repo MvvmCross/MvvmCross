@@ -38,10 +38,20 @@ namespace MvvmCross.Binding.iOS.Views
             this.CreateBindingContext();
         }
 
-        public MvxView(NSCoder coder) 
+        public MvxView(NSCoder coder)
             : base(coder)
         {
             this.CreateBindingContext();
+        }
+
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+
+            if (BindingContext == null)
+            {
+                this.CreateBindingContext();
+            }
         }
 
         protected override void Dispose(bool disposing)
