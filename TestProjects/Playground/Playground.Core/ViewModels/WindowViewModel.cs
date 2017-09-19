@@ -20,7 +20,7 @@ namespace Playground.Core.ViewModels
 
         public string Title => $"No.{Count} Window View";
 
-        private bool _isItem1 = false;
+        private bool _isItem1 = true;
         public bool IsItem1 {
             get { return _isItem1; }
             set { 
@@ -54,7 +54,7 @@ namespace Playground.Core.ViewModels
             }
         }
 
-        private bool _isItemSetting = false;
+        private bool _isItemSetting = true;
         public bool IsItemSetting
         {
             get { return _isItemSetting; }
