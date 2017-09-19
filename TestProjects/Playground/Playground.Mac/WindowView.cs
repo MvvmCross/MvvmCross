@@ -37,13 +37,15 @@ namespace Playground.Mac
         {
             base.ViewDidAppear();
 
+            //WindowController.MenuItemSetting.State = ViewModel.IsItemSetting ? NSCellStateValue.On : NSCellStateValue.Off;
+
             var set = this.CreateBindingSet<WindowView, WindowViewModel>();
             set.Bind(WindowController.TextTitle).For(v => v.StringValue).To(vm => vm.Title);
             set.Bind(WindowController.MenuItem1).For(v => v.State).To(vm => vm.IsItem1);
             set.Bind(WindowController.MenuItem2).For(v => v.State).To(vm => vm.IsItem2);
             set.Bind(WindowController.MenuItem3).For(v => v.State).To(vm => vm.IsItem3);
             set.Bind(WindowController.MenuItemSetting).To(vm => vm.ToggleSettingCommand);
-            set.Bind(WindowController.MenuItemSetting).For(v => v.State).To(vm => vm.IsItemSetting);
+            set.Bind(WindowController.MenuItemSetting).For(v => v.State).To(vm => vm.IsItemSetting).OneWay();
             set.Apply();
 
             GC.Collect();       // test to make sure WindowController does not get removed prematurely
