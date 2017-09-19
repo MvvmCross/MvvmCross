@@ -78,6 +78,7 @@
     <Compile Include="Target\MvxMacTargetBinding.cs" />
     <Compile Include="Target\MvxNSSegmentedControlSelectedSegmentTargetBinding.cs" />
     <Compile Include="Target\MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding.cs" />
+    <Compile Include="Target\MvxNSMenuItemOnTargetBinding.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <ItemGroup />
