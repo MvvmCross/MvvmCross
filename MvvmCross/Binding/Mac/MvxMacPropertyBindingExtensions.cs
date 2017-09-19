@@ -38,6 +38,9 @@ namespace MvvmCross.Binding.Mac
         public static string BindState(this NSButton nsButton)
             => MvxMacPropertyBinding.NSButton_State;
 
+        public static string BindState(this NSMenuItem nsMenuItem)
+            => MvxMacPropertyBinding.NSMenuItem_State;
+
         public static string BindText(this NSSearchField nsSearchField)
             => MvxMacPropertyBinding.NSSearchField_Text;
 

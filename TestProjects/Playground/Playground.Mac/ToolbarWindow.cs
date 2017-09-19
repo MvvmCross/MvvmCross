@@ -10,21 +10,42 @@ namespace Playground.Mac
 {
     [MvxFromStoryboard("Main")]
     public partial class ToolbarWindow : MvxWindowController
-	{
+    {
         private static int _count;
 
-		public ToolbarWindow (IntPtr handle) : base (handle)
-		{
+        public ToolbarWindow(IntPtr handle) : base(handle)
+        {
             _count++;
-		}
+        }
 
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
         }
 
-        public NSTextField TextTitle {
+        public NSTextField TextTitle
+        {
             get { return textTitle; }
+        }
+
+        public NSMenuItem MenuItem1
+        {
+            get { return menuItem1; }
+        }
+
+        public NSMenuItem MenuItem2
+        {
+            get { return menuItem2; }
+        }
+
+        public NSMenuItem MenuItem3
+        {
+            get { return menuItem3; }
+        }
+
+        public NSMenuItem MenuItemSetting
+        {
+            get { return menuItemSetting; }
         }
     }
 }

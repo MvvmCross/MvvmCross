@@ -13,9 +13,9 @@ using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Mac.Target
 {
-    public class MvxNSSwitchOnTargetBinding : MvxPropertyInfoTargetBinding<NSButton>
+    public class MvxNSMenuItemOnTargetBinding : MvxPropertyInfoTargetBinding<NSMenuItem>
     {
-        public MvxNSSwitchOnTargetBinding(object target, PropertyInfo targetPropertyInfo)
+        public MvxNSMenuItemOnTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
             var checkBox = View;
@@ -25,15 +25,16 @@ namespace MvvmCross.Binding.Mac.Target
             }
             else
             {
-                checkBox.Activated += HandleButtonCheckBoxAction;
+                checkBox.Activated += HandleMenuItemCheckBoxAction;
             }
         }
 
-        private void HandleButtonCheckBoxAction(object sender, EventArgs e)
+        private void HandleMenuItemCheckBoxAction(object sender, EventArgs e)
         {
             var view = View;
             if (view == null)
                 return;
+
             FireValueChanged(view.State == NSCellStateValue.On);
         }
 
@@ -66,7 +67,7 @@ namespace MvvmCross.Binding.Mac.Target
                 var view = View;
                 if (view != null)
                 {
-                    view.Activated -= HandleButtonCheckBoxAction;
+                    view.Activated -= HandleMenuItemCheckBoxAction;
                 }
             }
         }
