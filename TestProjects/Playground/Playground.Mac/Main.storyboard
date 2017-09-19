@@ -715,7 +715,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="-2" y="487"/>
         </scene>
         <!--Child View-->
         <scene sceneID="Z0v-PO-st2">
@@ -902,10 +902,51 @@
                                         </textFieldCell>
                                     </textField>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="815C7135-B362-45B7-92FA-0D86A805F646" label="Pulldown" paletteLabel="Pulldown" id="6ML-Um-2OT">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="100" height="28"/>
+                                    <size key="maxSize" width="100" height="28"/>
+                                    <popUpButton key="view" verticalHuggingPriority="750" id="IPA-ER-uD6" userLabel="Pulldown">
+                                        <rect key="frame" x="0.0" y="14" width="100" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <popUpButtonCell key="cell" type="roundTextured" title="Settings" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="Jf1-6c-g2z">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="menu"/>
+                                            <menu key="menu" id="89B-4R-kS8">
+                                                <items>
+                                                    <menuItem title="Settings" state="on" hidden="YES" id="3xr-j4-9vp"/>
+                                                    <menuItem title="A Toggle" keyEquivalent="s" id="hyv-8F-xQx"/>
+                                                </items>
+                                            </menu>
+                                        </popUpButtonCell>
+                                    </popUpButton>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="23C8C19A-3F97-465A-B9F1-30FE2A476C26" label="Popup" paletteLabel="Popup" id="6i0-qi-OoC">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="100" height="28"/>
+                                    <size key="maxSize" width="100" height="28"/>
+                                    <popUpButton key="view" verticalHuggingPriority="750" id="LQ6-rk-2lP" userLabel="Popup">
+                                        <rect key="frame" x="0.0" y="14" width="100" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <popUpButtonCell key="cell" type="roundTextured" title="Item 1" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="gsR-CX-7Ga" id="QIk-ut-Mpb">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="menu"/>
+                                            <menu key="menu" id="s0Z-qK-0jg">
+                                                <items>
+                                                    <menuItem title="Item 1" state="on" id="gsR-CX-7Ga"/>
+                                                    <menuItem title="Item 2" id="Wfx-q4-S4B"/>
+                                                    <menuItem title="Item 3" id="9w3-k0-j45"/>
+                                                </items>
+                                            </menu>
+                                        </popUpButtonCell>
+                                    </popUpButton>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="V11-Z1-YtT"/>
                                 <toolbarItem reference="a0v-0X-HyC"/>
+                                <toolbarItem reference="6ML-Um-2OT"/>
+                                <toolbarItem reference="6i0-qi-OoC"/>
                                 <toolbarItem reference="vn7-LH-rdg"/>
                                 <toolbarItem reference="leD-bj-Lg3"/>
                                 <toolbarItem reference="vn7-LH-rdg"/>
@@ -914,6 +955,10 @@
                         </toolbar>
                     </window>
                     <connections>
+                        <outlet property="menuItem1" destination="gsR-CX-7Ga" id="Srs-fE-LRv"/>
+                        <outlet property="menuItem2" destination="Wfx-q4-S4B" id="F69-bb-8od"/>
+                        <outlet property="menuItem3" destination="9w3-k0-j45" id="3QW-1H-ox5"/>
+                        <outlet property="menuItemSetting" destination="hyv-8F-xQx" id="ECK-RF-UOF"/>
                         <outlet property="textTitle" destination="GAa-jz-qCp" id="Eml-kM-92x"/>
                     </connections>
                 </windowController>

@@ -76,6 +76,11 @@ namespace MvvmCross.Binding.Mac
                 MvxMacPropertyBinding.NSButton_State);
 
             registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxNSMenuItemOnTargetBinding),
+                typeof(NSMenuItem),
+                MvxMacPropertyBinding.NSMenuItem_State);
+
+            registry.RegisterPropertyInfoBindingFactory(
                 typeof(MvxNSSearchFieldTextTargetBinding),
                 typeof(NSSearchField),
                 MvxMacPropertyBinding.NSSearchField_Text);
@@ -116,6 +121,7 @@ namespace MvvmCross.Binding.Mac
 
             registry.AddOrOverwrite(typeof(NSButton), nameof(NSButton.Activated));
             registry.AddOrOverwrite(typeof(NSButtonCell), nameof(NSButtonCell.Activated));
+            registry.AddOrOverwrite(typeof(NSMenuItem), nameof(NSMenuItem.Activated));
             registry.AddOrOverwrite(typeof(NSSearchField), MvxMacPropertyBinding.NSSearchField_Text);
             registry.AddOrOverwrite(typeof(NSTextField), MvxMacPropertyBinding.NSTextField_StringValue);
             registry.AddOrOverwrite(typeof(NSTextView), MvxMacPropertyBinding.NSTextView_StringValue);
