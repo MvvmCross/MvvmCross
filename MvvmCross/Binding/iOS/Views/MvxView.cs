@@ -18,6 +18,8 @@ namespace MvvmCross.Binding.iOS.Views
         : UIView
         , IMvxBindable
     {
+        private bool _isInitialized;
+
         public IMvxBindingContext BindingContext { get; set; }
 
         // Constructor that will bind managed object to its unmanaged counterpart. This constructor 
@@ -29,19 +31,33 @@ namespace MvvmCross.Binding.iOS.Views
 
         public MvxView()
         {
-            this.CreateBindingContext();
+            Initialize();
         }
 
         public MvxView(CGRect frame)
             : base(frame)
         {
-            this.CreateBindingContext();
+            Initialize();
         }
 
-        public MvxView(NSCoder coder) 
+        public MvxView(NSCoder coder)
             : base(coder)
         {
+            Initialize();
+        }
+
+        public override void AwakeFromNib()
+        {
+            if (!_isInitialized)
+            {
+                Initialize();
+            }
+        }
+
+        private void Initialize()
+        {
             this.CreateBindingContext();
+            _isInitialized = true;
         }
 
         protected override void Dispose(bool disposing)
