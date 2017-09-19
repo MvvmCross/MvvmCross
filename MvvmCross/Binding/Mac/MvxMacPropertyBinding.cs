@@ -18,6 +18,7 @@ namespace MvvmCross.Binding.Mac
         public const string NSTextField_StringValue = "StringValue";
         public const string NSTextView_StringValue = "StringValue";
         public const string NSButton_State = "State";
+        public const string NSMenuItem_State = "State";
         public const string NSSearchField_Text = "Text";
         public const string NSButton_Title = "Title";
         public const string NSTabViewController_SelectedTabViewItemIndex = "SelectedTabViewItemIndex";
