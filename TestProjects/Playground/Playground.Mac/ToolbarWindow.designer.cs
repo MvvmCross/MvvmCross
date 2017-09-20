@@ -25,6 +25,9 @@ namespace Playground.Mac
 		AppKit.NSMenuItem menuItemSetting { get; set; }
 
 		[Outlet]
+		AppKit.NSPopUpButton popupModes { get; set; }
+
+		[Outlet]
 		AppKit.NSTextField textTitle { get; set; }
 
 		[Action ("ToggleSetting:")]
@@ -55,6 +58,11 @@ namespace Playground.Mac
 			if (textTitle != null) {
 				textTitle.Dispose ();
 				textTitle = null;
+			}
+
+			if (popupModes != null) {
+				popupModes.Dispose ();
+				popupModes = null;
 			}
 		}
 	}
