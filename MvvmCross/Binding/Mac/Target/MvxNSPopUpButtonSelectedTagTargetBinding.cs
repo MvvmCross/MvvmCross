@@ -6,11 +6,11 @@ using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Mac.Target
 {
-    public class MvxNSSegmentedControlSelectedSegmentTargetBinding : MvxPropertyInfoTargetBinding<NSSegmentedControl>
+    public class MvxNSPopUpButtonSelectedTagTargetBinding : MvxPropertyInfoTargetBinding<NSPopUpButton>
     {
         private bool _subscribed;
 
-        public MvxNSSegmentedControlSelectedSegmentTargetBinding(object target, PropertyInfo targetPropertyInfo)
+        public MvxNSPopUpButtonSelectedTagTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
         }
@@ -20,7 +20,7 @@ namespace MvvmCross.Binding.Mac.Target
             var view = View;
             if (view == null)
                 return;
-            FireValueChanged((int)view.SelectedSegment);
+            FireValueChanged((int)view.SelectedTag);
         }
 
         public override MvxBindingMode DefaultMode
@@ -30,24 +30,24 @@ namespace MvvmCross.Binding.Mac.Target
 
         public override void SubscribeToEvents()
         {
-            var segmentedControl = View;
-            if (segmentedControl == null)
+            var popupButton = View;
+            if (popupButton == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - NSSegmentedControl is null in MvxNSSegmentedControlSelectedSegmentTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - NSPopUpButton is null in MvxNSPopUpButtonSelectedTagTargetBinding");
                 return;
             }
 
             _subscribed = true;
-            segmentedControl.Activated += HandleValueChanged;
+            popupButton.Activated += HandleValueChanged;
         }
 
         protected override void SetValueImpl(object target, object value)
         {
-            var view = target as NSSegmentedControl;
+            var view = target as NSPopUpButton;
             if (view == null)
                 return;
             
-            view.SelectSegment((int)value);
+            view.SelectItemWithTag((int)value);
         }
 
         protected override void Dispose(bool isDisposing)

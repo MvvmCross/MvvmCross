@@ -52,6 +52,11 @@ namespace MvvmCross.Binding.Mac
                 typeof(NSSegmentedControl),
                 MvxMacPropertyBinding.NSSegmentedControl_SelectedSegment);
 
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxNSPopUpButtonSelectedTagTargetBinding),
+                typeof(NSPopUpButton),
+                MvxMacPropertyBinding.NSPopUpButton_SelectedTag);
+            
             registry.RegisterCustomBindingFactory<NSDatePicker>(
                 MvxMacPropertyBinding.NSDatePicker_Time,
                 view => new MvxNSDatePickerTimeTargetBinding(view));
@@ -129,6 +134,7 @@ namespace MvvmCross.Binding.Mac
             registry.AddOrOverwrite(typeof(NSDatePicker), MvxMacPropertyBinding.NSDatePicker_Date);
             registry.AddOrOverwrite(typeof(NSSlider), MvxMacPropertyBinding.NSSlider_IntValue);
             registry.AddOrOverwrite(typeof(NSSegmentedControl), MvxMacPropertyBinding.NSSegmentedControl_SelectedSegment);
+            registry.AddOrOverwrite(typeof(NSPopUpButton), MvxMacPropertyBinding.NSPopUpButton_SelectedTag);
             registry.AddOrOverwrite(typeof(NSTabViewController), MvxMacPropertyBinding.NSTabViewController_SelectedTabViewItemIndex);
 
             //registry.AddOrOverwrite(typeof(MvxCollectionViewSource), "ItemsSource");

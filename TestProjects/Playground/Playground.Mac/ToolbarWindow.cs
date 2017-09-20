@@ -23,29 +23,16 @@ namespace Playground.Mac
             base.Dispose(disposing);
         }
 
-        public NSTextField TextTitle
-        {
-            get { return textTitle; }
-        }
+        public NSTextField TextTitle => textTitle;
 
-        public NSMenuItem MenuItem1
-        {
-            get { return menuItem1; }
-        }
+        public NSMenuItem MenuItem1 => menuItem1;
 
-        public NSMenuItem MenuItem2
-        {
-            get { return menuItem2; }
-        }
+        public NSMenuItem MenuItem2 => menuItem2;
 
-        public NSMenuItem MenuItem3
-        {
-            get { return menuItem3; }
-        }
+        public NSMenuItem MenuItem3 => menuItem3;
 
-        public NSMenuItem MenuItemSetting
-        {
-            get { return menuItemSetting; }
-        }
+        public NSMenuItem MenuItemSetting => menuItemSetting;
+
+        public NSPopUpButton PopupModes => popupModes;
     }
 }

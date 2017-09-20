@@ -23,6 +23,9 @@ namespace MvvmCross.Binding.Mac
         public static string BindSelectedSegment(this NSSegmentedControl nsSegmentedControl)
             => MvxMacPropertyBinding.NSSegmentedControl_SelectedSegment;
 
+        public static string BindSelectedTag(this NSPopUpButton nsPopUpButton)
+        => MvxMacPropertyBinding.NSPopUpButton_SelectedTag;
+
         public static string BindTime(this NSDatePicker nsDatePicker)
             => MvxMacPropertyBinding.NSDatePicker_Time;
 
