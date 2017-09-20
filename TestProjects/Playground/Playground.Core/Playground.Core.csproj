@@ -51,6 +51,7 @@
     <Compile Include="ViewModels\WindowViewModel.cs" />
     <Compile Include="ViewModels\NestedModalViewModel.cs" />
     <Compile Include="ViewModels\NestedChildViewModel.cs" />
+    <Compile Include="Models\Modes.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
@@ -63,5 +64,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>
