@@ -3,7 +3,7 @@ version: 5.0.{build}
 image: Visual Studio 2017
 environment:
   SONAR_KEY:
-    secure: syUy5XjTN470o/hTUv3I73aPrNPeISxXZ8dNDYp2WNTxyibpzIbtTpabn8w36/l2
+    secure: LQJ29ZRlb8t4lCkIDOoFz7iK06dDxoAeuzcOwHV2gMnoPYZ3uFt6+htWzu59Tsqk
 build_script:
   - ps: .\build.ps1
 test: off
