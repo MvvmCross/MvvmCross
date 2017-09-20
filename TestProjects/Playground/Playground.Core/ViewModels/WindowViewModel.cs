@@ -3,6 +3,7 @@ using System.Windows.Input;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System.Threading.Tasks;
+using Playground.Core.Models;
 
 namespace Playground.Core.ViewModels
 {
@@ -19,6 +20,16 @@ namespace Playground.Core.ViewModels
         private static int _count;
 
         public string Title => $"No.{Count} Window View";
+
+        private Modes _mode = Modes.Blue;
+        public Modes Mode {
+            get { return _mode; }
+            set {
+                if (value == _mode) return;
+                _mode = value;
+                RaisePropertyChanged(() => Mode);
+            }
+        }
 
         private bool _isItem1 = true;
         public bool IsItem1 {
