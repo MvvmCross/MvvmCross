@@ -9,19 +9,19 @@ using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Bindings.Target
 {
-    public class MvxFormsListViewItemClickPropertyTargetBinding : MvxPropertyInfoTargetBinding<MvxFormsListView>
+    public class MvxListViewItemClickPropertyTargetBinding : MvxPropertyInfoTargetBinding<MvxListView>
     {
         private bool _subscribed;
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
-        public MvxFormsListViewItemClickPropertyTargetBinding(object target, PropertyInfo targetPropertyInfo) : base(target, targetPropertyInfo)
+        public MvxListViewItemClickPropertyTargetBinding(object target, PropertyInfo targetPropertyInfo) : base(target, targetPropertyInfo)
         {
         }
 
         protected override void SetValueImpl(object target, object value)
         {
-            var view = target as MvxFormsListView;
+            var view = target as MvxListView;
             if (view == null) return;
 
             view.ItemClick = (ICommand)value;
@@ -32,7 +32,7 @@ namespace MvvmCross.Forms.Bindings.Target
             var myView = View;
             if (myView == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - MyView is null in MvxFormsListViewItemClickPropertyTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, $"Error - MyView is null in {nameof(MvxListViewItemClickPropertyTargetBinding)}");
                 return;
             }
 
@@ -42,7 +42,7 @@ namespace MvvmCross.Forms.Bindings.Target
 
         private void HandleMyPropertyChanged(object sender, EventArgs e)
         {
-            var view = sender as MvxFormsListView;
+            var view = sender as MvxListView;
             var args = e as ItemTappedEventArgs;
             if (args == null) return;
 
