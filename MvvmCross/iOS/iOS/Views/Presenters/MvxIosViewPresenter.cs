@@ -442,7 +442,7 @@ namespace MvvmCross.iOS.Views.Presenters
             _window.RootViewController = controller;
         }
 
-        protected MvxBasePresentationAttribute GetPresentationAttributes(UIViewController viewController)
+        protected virtual MvxBasePresentationAttribute GetPresentationAttributes(UIViewController viewController)
         {
             if (viewController is IMvxOverridePresentationAttribute vc)
             {
