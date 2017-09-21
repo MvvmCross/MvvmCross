@@ -76,6 +76,18 @@ namespace MvvmCross.Forms.Uwp
             bindingBuilder.DoRegistration();
         }
 
+        protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+        {
+            MvxFormsSetupHelper.FillTargetFactories(registry);
+            base.FillTargetFactories(registry);
+        }
+
+        protected override void FillBindingNames(Binding.BindingContext.IMvxBindingNameRegistry registry)
+        {
+            MvxFormsSetupHelper.FillBindingNames(registry);
+            base.FillBindingNames(registry);
+        }
+
         protected virtual MvxBindingBuilder CreateBindingBuilder() => new MvxFormsBindingBuilder();
     }
 }

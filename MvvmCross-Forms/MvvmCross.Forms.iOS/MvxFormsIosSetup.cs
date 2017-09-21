@@ -78,11 +78,14 @@ namespace MvvmCross.Forms.iOS
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
-            registry.RegisterPropertyInfoBindingFactory(
-                  typeof(MvxFormsListViewItemClickPropertyTargetBinding),
-                  typeof(MvxFormsListView), "ItemClick");
-
+            MvxFormsSetupHelper.FillTargetFactories(registry);
             base.FillTargetFactories(registry);
+        }
+
+        protected override void FillBindingNames(Binding.BindingContext.IMvxBindingNameRegistry registry)
+        {
+            MvxFormsSetupHelper.FillBindingNames(registry);
+            base.FillBindingNames(registry);
         }
 
         protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsBindingBuilder();
