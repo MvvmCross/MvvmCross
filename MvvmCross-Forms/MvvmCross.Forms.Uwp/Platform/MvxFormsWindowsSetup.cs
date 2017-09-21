@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection;
 using Windows.ApplicationModel.Activation;
 using MvvmCross.Binding;
@@ -13,6 +13,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Plugins;
 using XamlControls = Windows.UI.Xaml.Controls;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Forms.Views;
 
 namespace MvvmCross.Forms.Uwp
 {
@@ -59,7 +60,7 @@ namespace MvvmCross.Forms.Uwp
 
         protected override IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
         {
-            var presenter = new MvxFormsUwpPagePresenter(rootFrame, FormsApplication);
+            var presenter = new MvxFormsUwpViewPresenter(rootFrame, FormsApplication);
             Mvx.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
             return presenter;
         }

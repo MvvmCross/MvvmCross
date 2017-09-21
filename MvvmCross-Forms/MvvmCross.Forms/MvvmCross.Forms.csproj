@@ -67,11 +67,9 @@
     <Compile Include="Views\IMvxPage.cs" />
     <Compile Include="Views\MvxContentPage.cs" />
     <Compile Include="Platform\MvxFormsApplication.cs" />
-<<<<<<< HEAD
     <Compile Include="Bindings\MvxFormsPropertyBinding.cs" />
     <Compile Include="Bindings\MvxFormsPropertyBindingExtensions.cs" />
     <Compile Include="Platform\MvxFormsSetupHelper.cs" />
-=======
     <Compile Include="Views\Attributes\MvxModalPresentationAttribute.cs" />
     <Compile Include="Views\MvxNavigationPage.cs" />
     <Compile Include="Views\MvxTabbedPage.cs" />
@@ -81,7 +79,6 @@
     <Compile Include="Views\Attributes\MvxMasterDetailPagePresentationAttribute.cs" />
     <Compile Include="Views\Attributes\MvxContentPagePresentationAttribute.cs" />
     <Compile Include="Views\Attributes\MvxCarouselPagePresentationAttribute.cs" />
->>>>>>> Add attributes for other pages
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
