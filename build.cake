@@ -89,7 +89,9 @@ Task("UnitTest")
 		new FilePath("./MvvmCross/Platform/Test/bin/Release/MvvmCross.Platform.Test.dll").FullPath,
 		new FilePath("./MvvmCross-Plugins/Color/MvvmCross.Plugins.Color.Test/bin/Release/MvvmCross.Plugins.Color.Test.dll").FullPath,
 		new FilePath("./MvvmCross-Plugins/Messenger/MvvmCross.Plugins.Messenger.Test/bin/Release/MvvmCross.Plugins.Messenger.Test.dll").FullPath,
-		new FilePath("./MvvmCross-Plugins/Network/MvvmCross.Plugins.Network.Test/bin/Release/MvvmCross.Plugins.Network.Test.dll").FullPath
+		new FilePath("./MvvmCross-Plugins/Network/MvvmCross.Plugins.Network.Test/bin/Release/MvvmCross.Plugins.Network.Test.dll").FullPath,
+        new FilePath("./MvvmCross-Plugins/Network/MvvmCross.Plugins.JsonLocalization.Tests/bin/Release/MvvmCross.Plugins.JsonLocalization.Tests.dll").FullPath,
+        new FilePath("./MvvmCross-Plugins/Network/MvvmCross.Plugins.ResxLocalization.Tests/bin/Release/MvvmCross.Plugins.ResxLocalization.Tests.dll").FullPath
 	};
 
     var testResultsPath = new FilePath(outputDir + "/NUnitTestResult.xml");
