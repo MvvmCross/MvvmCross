@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<views:MvxContentPage x:TypeArguments="viewModels:RootViewModel"
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+    xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
+    x:Class="Playground.Core.Pages.RootPage" Title="Root page">
+	<ContentPage.Content>
+        <StackLayout Margin="10">
+            <Button Text="Show Child" mvx:Bi.nd="Command ShowChildCommand"/>
+            <Button Text="Show Modal" mvx:Bi.nd="Command ShowModalCommand"/>
+            <Button Text="Show Modal Navigation" mvx:Bi.nd="Command ShowModalNavCommand"/>
+            <Button Text="Show Tabs" mvx:Bi.nd="Command ShowTabsCommand"/>
+            <Button Text="Show Master/Detail" mvx:Bi.nd="Command ShowSplitCommand"/>
+            <Button Text="Show BottomSheet" mvx:Bi.nd="Command ShowSheetCommand"/>
+        </StackLayout>
+	</ContentPage.Content>
+</views:MvxContentPage>

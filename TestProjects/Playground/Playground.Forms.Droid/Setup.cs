@@ -15,10 +15,10 @@ namespace Playground.Forms.Droid
         {
         }
 
-        //protected override MvxFormsApplication CreateFormsApplication()
-        //{
-        //    return new Core.App();
-        //}
+        protected override MvxFormsApplication CreateFormsApplication()
+        {
+            return new Core.FormsApp();
+        }
 
         protected override IMvxApplication CreateApp()
         {

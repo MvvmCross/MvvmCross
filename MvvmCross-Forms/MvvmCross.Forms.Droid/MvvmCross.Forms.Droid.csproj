@@ -118,6 +118,7 @@
     <Compile Include="Views\MvxFormsApplicationActivity.cs" />
     <Compile Include="Views\MvxImageViewRenderer.cs" />
     <Compile Include="Views\MvxPageRenderer.cs" />
+    <Compile Include="Bindings\MvxFormsAndroidBindingBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\Binding\Droid\MvvmCross.Binding.Droid.csproj">
@@ -162,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Platform\" />
+    <Folder Include="Bindings\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="AfterBuild">
