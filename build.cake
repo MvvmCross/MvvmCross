@@ -77,7 +77,8 @@ Task("Initialise-Sonar")
 	{
 		Name = "MvvmCross",
 		Organization = "mvvmcross",
-		Key = sonarKey,
+		Key = "MvvmCross",
+		Login = sonarKey,
 		Url = "https://sonarcloud.io"
 	});
 });
