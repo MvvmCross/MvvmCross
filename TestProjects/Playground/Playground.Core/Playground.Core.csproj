@@ -53,9 +53,7 @@
     <Compile Include="ViewModels\NestedModalViewModel.cs" />
     <Compile Include="ViewModels\NestedChildViewModel.cs" />
     <Compile Include="Models\Modes.cs" />
-<<<<<<< HEAD
     <Compile Include="ViewModels\TabsRootBViewModel.cs" />
-=======
 	<Compile Include="Resources\BaseTheme.xaml.cs">
       <DependentUpon>BaseTheme.xaml</DependentUpon>
     </Compile>
@@ -74,7 +72,60 @@
 	<Compile Include="Pages\RootPage.xaml.cs">
       <DependentUpon>RootPage.xaml</DependentUpon>
     </Compile>
->>>>>>> Fix sample and mixing of Android views
+	<EmbeddedResource Include="Pages\ModalPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<Compile Include="Pages\ModalPage.xaml.cs">
+	  <DependentUpon>ModalPage.xaml</DependentUpon>
+	</Compile>
+	<EmbeddedResource Include="Pages\ModalNavPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<Compile Include="Pages\ModalNavPage.xaml.cs">
+	  <DependentUpon>ModalNavPage.xaml</DependentUpon>
+	</Compile>
+	<EmbeddedResource Include="Pages\ChildPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<Compile Include="Pages\ChildPage.xaml.cs">
+	  <DependentUpon>ChildPage.xaml</DependentUpon>
+	</Compile>
+	<EmbeddedResource Include="Pages\NestedChildPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<Compile Include="Pages\NestedChildPage.xaml.cs">
+	  <DependentUpon>NestedChildPage.xaml</DependentUpon>
+	</Compile>
+	<EmbeddedResource Include="Pages\NestedModalPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<Compile Include="Pages\NestedModalPage.xaml.cs">
+	  <DependentUpon>NestedModalPage.xaml</DependentUpon>
+	</Compile>
+	<EmbeddedResource Include="Pages\SplitMasterPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<Compile Include="Pages\SplitMasterPage.xaml.cs">
+	  <DependentUpon>SplitMasterPage.xaml</DependentUpon>
+	</Compile>
+	<EmbeddedResource Include="Pages\SplitRootPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<Compile Include="Pages\SplitRootPage.xaml.cs">
+	  <DependentUpon>SplitRootPage.xaml</DependentUpon>
+	</Compile>
+	<EmbeddedResource Include="Pages\SplitDetailPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<Compile Include="Pages\SplitDetailPage.xaml.cs">
+	  <DependentUpon>SplitDetailPage.xaml</DependentUpon>
+	</Compile>
+	<EmbeddedResource Include="Pages\SplitDetailNavPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	</EmbeddedResource>
+	<Compile Include="Pages\SplitDetailNavPage.xaml.cs">
+	  <DependentUpon>SplitDetailNavPage.xaml</DependentUpon>
+	</Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">

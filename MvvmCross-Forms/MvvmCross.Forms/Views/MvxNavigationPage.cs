@@ -7,11 +7,11 @@ namespace MvvmCross.Forms.Views
 {
     public class MvxNavigationPage : NavigationPage, IMvxPage
     {
-        public MvxNavigationPage(Page root)
+        public MvxNavigationPage(Page root) : base (root)
         {
         }
 
-        public MvxNavigationPage()
+        public MvxNavigationPage() : base()
         {
         }
 

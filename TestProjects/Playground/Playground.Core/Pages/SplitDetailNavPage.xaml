@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<views:MvxContentPage x:TypeArguments="viewModels:SplitDetailNavViewModel"
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+    xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
+    x:Class="Playground.Core.Pages.SplitDetailNavPage" Title="SplitDetailNav page">
+    <ContentPage.Content>
+      
+    </ContentPage.Content>
+</views:MvxContentPage>

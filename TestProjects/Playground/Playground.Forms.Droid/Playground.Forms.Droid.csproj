@@ -117,6 +117,10 @@
     <Compile Include="Setup.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="Views\SheetView.cs" />
+    <Compile Include="Views\Tab1View.cs" />
+    <Compile Include="Views\Tab2View.cs" />
+    <Compile Include="Views\Tab3View.cs" />
+    <Compile Include="Views\TabsRootView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

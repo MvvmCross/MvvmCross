@@ -45,6 +45,7 @@
     <Compile Include="Platform\MvxFormsApplicationDelegate.cs" />
     <Compile Include="Views\MvxFormsIosMasterDetailPagePresenter.cs" />
     <Compile Include="Views\MvxFormsIosViewPresenter.cs" />
+    <Compile Include="Bindings\MvxFormsIosBindingBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -112,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Platform\" />
+    <Folder Include="Bindings\" />
   </ItemGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
