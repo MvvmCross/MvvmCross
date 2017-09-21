@@ -32,6 +32,7 @@ namespace MvvmCross.Forms.iOS.Presenters
         public MvxFormsIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window, MvxFormsApplication formsApplication) : this(applicationDelegate, window)
         {
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
+            FormsApplication.MainPage = new MvxNavigationPage();
         }
 
         private MvxFormsApplication _formsApplication;
@@ -45,7 +46,42 @@ namespace MvvmCross.Forms.iOS.Presenters
         {
             base.RegisterAttributeTypes();
 
-            //TODO: register Forms types
+            AttributeTypesToShowMethodDictionary.Add(
+                typeof(MvxCarouselPagePresentationAttribute),
+                (vc, attribute, request) => ShowCarouselPage(vc.GetType(), (MvxCarouselPagePresentationAttribute)attribute, request));
+
+            AttributeTypesToShowMethodDictionary.Add(
+                typeof(MvxContentPagePresentationAttribute),
+                (vc, attribute, request) => ShowContentPage(vc.GetType(), (MvxContentPagePresentationAttribute)attribute, request));
+
+            AttributeTypesToShowMethodDictionary.Add(
+                typeof(MvxMasterDetailPagePresentationAttribute),
+                (vc, attribute, request) => ShowMasterDetailPage(vc.GetType(), (MvxMasterDetailPagePresentationAttribute)attribute, request));
+
+            AttributeTypesToShowMethodDictionary.Add(
+                typeof(MvxModalPresentationAttribute),
+                (vc, attribute, request) => ShowModal(vc.GetType(), (MvxModalPresentationAttribute)attribute, request));
+
+
+            AttributeTypesToShowMethodDictionary.Add(
+                typeof(MvxNavigationPagePresentationAttribute),
+                (vc, attribute, request) => ShowNavigationPage(vc.GetType(), (MvxNavigationPagePresentationAttribute)attribute, request));
+
+            AttributeTypesToShowMethodDictionary.Add(
+                typeof(MvxTabbedPagePresentationAttribute),
+                (vc, attribute, request) => ShowTabbedPage(vc.GetType(), (MvxTabbedPagePresentationAttribute)attribute, request));
+        }
+
+        protected override MvxBasePresentationAttribute GetPresentationAttributes(UIViewController viewController)
+        {
+            return base.GetPresentationAttributes(viewController);
+        }
+
+        public override void Show(MvxViewModelRequest request)
+        {
+            //TODO: Find a way to show Forms views
+
+            base.Show(request);
         }
 
         protected virtual Page CreatePage(Type viewType, MvxViewModelRequest request)
@@ -103,6 +139,8 @@ namespace MvvmCross.Forms.iOS.Presenters
 
         protected virtual bool CloseContentPage(IMvxViewModel viewModel, MvxContentPagePresentationAttribute attribute)
         {
+            if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
+                navigationPage.PopAsync(attribute.Animated);
             return true;
         }
 
@@ -117,6 +155,8 @@ namespace MvvmCross.Forms.iOS.Presenters
 
         protected virtual bool CloseMasterDetailPage(IMvxViewModel viewModel, MvxMasterDetailPagePresentationAttribute attribute)
         {
+            if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
+                navigationPage.PopAsync();
             return true;
         }
 
