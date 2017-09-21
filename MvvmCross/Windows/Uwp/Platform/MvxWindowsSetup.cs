@@ -1,4 +1,4 @@
-﻿// MvxStoreSetup.cs
+// MvxStoreSetup.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,6 +16,14 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
 using MvvmCross.Uwp.Views;
 using MvvmCross.Uwp.Views.Suspension;
+using MvvmCross.Platform.Converters;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Uwp;
+using MvvmCross.Binding.Binders;
+using System;
+using System.Reflection;
 
 namespace MvvmCross.Uwp.Platform
 {
@@ -96,6 +104,60 @@ namespace MvvmCross.Uwp.Platform
         {
             var presenter = CreateViewPresenter(_rootFrame);
             return new MvxWindowsViewDispatcher(presenter, rootFrame);
+        }
+
+        protected override void InitializeLastChance()
+        {
+            InitializeBindingBuilder();
+            base.InitializeLastChance();
+        }
+
+        protected virtual void InitializeBindingBuilder()
+        {
+            RegisterBindingBuilderCallbacks();
+            var bindingBuilder = CreateBindingBuilder();
+            bindingBuilder.DoRegistration();
+        }
+
+        protected virtual void RegisterBindingBuilderCallbacks()
+        {
+            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
+            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+        }
+
+        protected virtual void FillBindingNames(IMvxBindingNameRegistry registry)
+        {
+            // this base class does nothing
+        }
+
+        protected virtual void FillValueConverters(IMvxValueConverterRegistry registry)
+        {
+            registry.Fill(ValueConverterAssemblies);
+            registry.Fill(ValueConverterHolders);
+        }
+
+        protected virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+        {
+            // this base class does nothing
+        }
+
+        protected virtual List<Type> ValueConverterHolders => new List<Type>();
+
+        protected virtual IEnumerable<Assembly> ValueConverterAssemblies
+        {
+            get
+            {
+                var toReturn = new List<Assembly>();
+                toReturn.AddRange(GetViewModelAssemblies());
+                toReturn.AddRange(GetViewAssemblies());
+                return toReturn;
+            }
+        }
+
+        protected virtual MvxBindingBuilder CreateBindingBuilder()
+        {
+            return new MvxWindowsBindingBuilder();
         }
 
         protected override IMvxNameMapping CreateViewToViewModelNaming()
