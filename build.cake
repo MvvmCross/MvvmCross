@@ -2,8 +2,11 @@
 #tool nuget:?package=gitlink&version=2.4.0
 #tool nuget:?package=vswhere
 #tool nuget:?package=NUnit.ConsoleRunner
+#tool nuget:?package=MSBuild.SonarQube.Runner.Tool
 #addin nuget:?package=Cake.Incubator
 #addin nuget:?package=Cake.Git
+#addin nuget:?package=Cake.Sonar
+
 
 var sln = new FilePath("MvvmCross_All.sln");
 var outputDir = new DirectoryPath("artifacts");
@@ -14,8 +17,10 @@ var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 
 Task("Clean").Does(() =>
 {
-    CleanDirectories("./**/bin");
-    CleanDirectories("./**/obj");
+    CleanDirectories("./MvvmCross*/**/bin");
+    CleanDirectories("./MvvmCross*/**/obj");
+	CleanDirectories("./obj");
+	CleanDirectories("./bin");
 	CleanDirectories(outputDir.FullPath);
 
 	EnsureDirectoryExists(outputDir);
@@ -56,7 +61,35 @@ Task("Restore")
 		ToolPath = "tools/nuget.exe",
 		Verbosity = NuGetVerbosity.Quiet
 	});
-	// MSBuild(sln, settings => settings.WithTarget("Restore"));
+});
+
+string sonarKey;
+Task("Initialise-Sonar")
+	.WithCriteria(() => !BuildSystem.IsLocalBuild)
+	.Does(() => 
+{
+	sonarKey = EnvironmentVariable("SONAR_KEY");
+
+	if (string.IsNullOrEmpty(sonarKey))
+		throw new Exception(string.Format("The {0} environment variable is not defined.", "SONAR_KEY"));
+
+	SonarBegin(new SonarBeginSettings
+	{
+		Name = "MvvmCross",
+		Organization = "mvvmcross",
+		Key = "MvvmCross",
+		Login = sonarKey,
+		Url = "https://sonarcloud.io"
+	});
+});
+
+Task("Sonar-Analyse")
+	.IsDependentOn("Initialise-Sonar")
+	.IsDependentOn("Build")
+	.WithCriteria(() => !BuildSystem.IsLocalBuild)
+	.Does(() => 
+{
+	SonarEnd(new SonarEndSettings { Login = sonarKey });
 });
 
 Task("Build")
@@ -64,13 +97,14 @@ Task("Build")
 	.IsDependentOn("Clean")
 	.IsDependentOn("UpdateAppVeyorBuildNumber")
 	.IsDependentOn("Restore")
+	.IsDependentOn("Initialise-Sonar")
 	.Does(() =>  {
 
 	var settings = new MSBuildSettings 
 	{
 		Configuration = "Release",
 		ToolPath = msBuildPath,
-		Verbosity = Verbosity.Minimal
+		Verbosity = Verbosity.Minimal 
 	};
 
 	settings.Properties.Add("DebugSymbols", new List<string> { "True" });
@@ -81,6 +115,7 @@ Task("Build")
 
 Task("UnitTest")
 	.IsDependentOn("Build")
+	.IsDependentOn("Sonar-Analyse")
 	.Does(() =>
 {
 	var testPaths = new List<string> {
