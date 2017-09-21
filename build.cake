@@ -70,7 +70,6 @@ Task("Build")
 	{
 		Configuration = "Release",
 		ToolPath = msBuildPath,
-		Verbosity = Verbosity.Minimal
 	};
 
 	settings.Properties.Add("DebugSymbols", new List<string> { "True" });
