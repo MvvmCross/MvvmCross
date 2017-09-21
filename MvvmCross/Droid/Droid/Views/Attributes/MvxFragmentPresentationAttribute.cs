@@ -81,34 +81,41 @@ namespace MvvmCross.Droid.Views.Attributes
         /// </summary>
         public int FragmentContentId { get; set; }
 
+        public static bool DefaultAddToBackStack = false;
         /// <summary>
         /// Will add the Fragment to the FragmentManager backstack
         /// </summary>
-        public bool AddToBackStack { get; set; } = false;
+        public bool AddToBackStack { get; set; } = DefaultAddToBackStack;
 
+        public static int DefaultEnterAnimation = int.MinValue;
         /// <summary>
         /// Animation when Fragment is shown
         /// </summary>
-        public int EnterAnimation { get; set; } = int.MinValue;
+        public int EnterAnimation { get; set; } = DefaultEnterAnimation;
 
+        public static int DefaultExitAnimation = int.MinValue;
         /// <summary>
         /// Animation when Fragment is closed
         /// </summary>
-        public int ExitAnimation { get; set; } = int.MinValue;
+        public int ExitAnimation { get; set; } = DefaultExitAnimation;
 
-        public int PopEnterAnimation { get; set; } = int.MinValue;
+        public static int DefaultPopEnterAnimation = int.MinValue;
+        public int PopEnterAnimation { get; set; } = DefaultPopEnterAnimation;
 
-        public int PopExitAnimation { get; set; } = int.MinValue;
+        public static int DefaultPopExitAnimation = int.MinValue;
+        public int PopExitAnimation { get; set; } = DefaultPopExitAnimation;
 
+        public static int DefaultTransitionStyle = int.MinValue;
         /// <summary>
         /// TransitionStyle for Fragment
         /// </summary>
-        public int TransitionStyle { get; set; } = int.MinValue;
+        public int TransitionStyle { get; set; } = DefaultTransitionStyle;
 
+        public static bool DefaultIsCacheableFragment = true;
         /// <summary>
         /// Indicates if the fragment can be cached. True by default.
         /// </summary>
-        public virtual bool IsCacheableFragment { get; set; } = true;
+        public virtual bool IsCacheableFragment { get; set; } = DefaultIsCacheableFragment;
 
         /// <summary>
         /// SharedElements that will be added to the transition. String may be left empty when using AppCompat

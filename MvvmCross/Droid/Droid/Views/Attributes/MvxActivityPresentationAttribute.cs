@@ -13,14 +13,16 @@ namespace MvvmCross.Droid.Views.Attributes
         {
         }
 
+        public static Bundle DefaultExtras = null;
         /// <summary>
         /// Add extras to the Intent that will be started for this Activity
         /// </summary>
-        public Bundle Extras { get; set; }
+        public Bundle Extras { get; set; } = DefaultExtras;
 
+        public static IDictionary<string, View> DefaultSharedElements = null;
         /// <summary>
         /// SharedElements that will be added to the transition. String may be left empty when using AppCompat
         /// </summary>
-        public IDictionary<string, View> SharedElements { get; set; }
+        public IDictionary<string, View> SharedElements { get; set; } = DefaultSharedElements;
     }
 }
