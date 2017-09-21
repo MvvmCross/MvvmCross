@@ -1,5 +1,4 @@
-﻿using System;
-using MvvmCross.Binding.BindingContext;
+﻿using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Forms.Bindings;
 using MvvmCross.Forms.Bindings.Target;

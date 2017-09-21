@@ -1,4 +1,4 @@
-﻿// MvxFormsWindowsPhonePagePresenter.cs
+// MvxFormsWindowsPhonePagePresenter.cs
 // 2015 (c) Copyright Cheesebaron. http://ostebaronen.dk
 // MvvmCross.Forms is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,6 +9,7 @@
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
 using MvvmCross.Uwp.Views;
+using System;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Uwp.Presenters
@@ -32,7 +33,5 @@ namespace MvvmCross.Forms.Uwp.Presenters
             get { return _formsApplication; }
             set { _formsApplication = value; }
         }
-
-        protected virtual NavigationPage MainPage => _formsApplication.MainPage as NavigationPage;
     }
 }

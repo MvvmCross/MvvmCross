@@ -17,7 +17,6 @@ using MvvmCross.Droid.Views;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
 using MvvmCross.Forms.Views.Attributes;
-using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 

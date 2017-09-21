@@ -1,22 +1,18 @@
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Binding;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Bindings;
-using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.iOS.Presenters;
+using MvvmCross.Forms.Platform;
+using MvvmCross.Forms.Views;
 using MvvmCross.iOS.Platform;
 using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Localization;
-using UIKit;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Plugins;
-<<<<<<< HEAD
-using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Forms.Bindings.Target;
-=======
 using MvvmCross.Platform;
->>>>>>> Cleanup the other Forms presenters
-using MvvmCross.Forms.Views;
+using MvvmCross.Platform.Plugins;
+using UIKit;
 
 namespace MvvmCross.Forms.iOS
 {
