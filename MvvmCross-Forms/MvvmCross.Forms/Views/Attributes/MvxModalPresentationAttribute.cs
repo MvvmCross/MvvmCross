@@ -9,5 +9,7 @@ namespace MvvmCross.Forms.Views.Attributes
         public MvxModalPresentationAttribute()
         {
         }
+
+        public bool WrapInNavigationPage { get; set; } = false;
     }
 }

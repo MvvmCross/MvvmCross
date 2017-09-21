@@ -32,6 +32,7 @@ namespace MvvmCross.Forms.Droid.Views
         public MvxFormsAndroidViewPresenter(IEnumerable<Assembly> androidViewAssemblies, MvxFormsApplication formsApplication) : this(androidViewAssemblies)
         {
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
+            FormsApplication.MainPage = new MvxNavigationPage();
         }
 
 		private MvxFormsApplication _formsApplication;
@@ -205,6 +206,8 @@ namespace MvvmCross.Forms.Droid.Views
 
         protected virtual bool CloseContentPage(IMvxViewModel viewModel, MvxContentPagePresentationAttribute attribute)
         {
+            if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
+                navigationPage.PopAsync(attribute.Animated);
             return true;
         }
 
@@ -219,6 +222,8 @@ namespace MvvmCross.Forms.Droid.Views
 
         protected virtual bool CloseMasterDetailPage(IMvxViewModel viewModel, MvxMasterDetailPagePresentationAttribute attribute)
         {
+            if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
+                navigationPage.PopAsync();
             return true;
         }
 

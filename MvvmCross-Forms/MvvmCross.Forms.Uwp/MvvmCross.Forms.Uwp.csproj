@@ -50,6 +50,7 @@
     <Compile Include="Views\MvxFormsUwpViewPresenter.cs" />
     <Compile Include="Platform\MvxFormsWindowsSetup.cs" />
     <Compile Include="Views\MvxPageRenderer.cs" />
+    <Compile Include="Bindings\MvxFormsWindowsBindingBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
@@ -76,6 +77,7 @@
   <ItemGroup>
     <Folder Include="Platform\" />
     <Folder Include="Views\" />
+    <Folder Include="Bindings\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
