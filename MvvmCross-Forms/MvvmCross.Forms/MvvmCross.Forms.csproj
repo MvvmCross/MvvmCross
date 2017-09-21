@@ -60,6 +60,8 @@
     <Compile Include="Bindings\Target\MvxBindablePropertyTargetBinding.cs" />
     <Compile Include="Views\MvxImageView.cs" />
     <Compile Include="Presenters\IMvxFormsPagePresenter.cs" />
+    <Compile Include="Bindings\Target\MvxFormsListViewItemClickPropertyTargetBinding.cs" />
+    <Compile Include="Views\MvxFormsListView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

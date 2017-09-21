@@ -12,6 +12,9 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Plugins;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Forms.Bindings.Target;
+using MvvmCross.Forms.Views;
 
 namespace MvvmCross.Forms.Droid
 {
@@ -75,6 +78,15 @@ namespace MvvmCross.Forms.Droid
 
             RegisterBindingBuilderCallbacks();
             bindingBuilder.DoRegistration();
+        }
+
+        protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+        {
+            registry.RegisterPropertyInfoBindingFactory(
+                  typeof(MvxFormsListViewItemClickPropertyTargetBinding),
+                  typeof(MvxFormsListView), "ItemClick");
+
+            base.FillTargetFactories(registry);
         }
 
         protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsBindingBuilder();
