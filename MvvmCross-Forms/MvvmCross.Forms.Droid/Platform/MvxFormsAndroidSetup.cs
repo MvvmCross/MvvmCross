@@ -58,7 +58,7 @@ namespace MvvmCross.Forms.Droid.Platform
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
-            var presenter = new MvxFormsAndroidViewPresenter(AndroidViewAssemblies, FormsApplication);
+            var presenter = new MvxFormsAndroidViewPresenter(GetViewAssemblies(), FormsApplication);
             Mvx.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
             return presenter;
         }
