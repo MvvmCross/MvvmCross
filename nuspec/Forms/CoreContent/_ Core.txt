@@ -2,7 +2,22 @@ The steps to get this Core project working are:
 
 1. Ensure your PCL is targeting a profile compatible with the MvvmCross.Forms dependency i.e.: Profile111
 
-2. Change the Build Action of the following files from 'Page' to 'Embedded Resource':
+2. Add .Core to the name of the PCL project.
 
-    * Core|Pages|MainPage.xaml
+3. Change the Build Action of the following files from 'Page' to 'Embedded Resource':
+
+    * Core|Pages|MvxFormsPage.xaml
     * Core|App.xaml
+
+4. Delete the page that was created by Xamarin forms.
+
+4. Add the MvvmCross forms starterpack package to the platform specific projects.
+
+5. In the platform specific projects remove the reference to the core project and click ok. Then add the reference again.
+   (This has to be done because the platform specific projects wont recognise the renamed core project)
+
+6. In Android: in SplachScreen.cs change the label property in the attribute to your app name. Is now "YourAppName".
+
+Note: It might be a good idea to manually remove the MvvmCross.Forms.Starterpack from the packages.config file,
+      otherwise your files will be overwritten the next time you update your nugets. The ToDo folder can also
+      be removed.
