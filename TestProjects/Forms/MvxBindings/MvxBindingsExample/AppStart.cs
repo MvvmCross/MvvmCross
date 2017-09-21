@@ -19,10 +19,14 @@ namespace MvxBindingsExample
             try
             {
                 // Use this start to try the xaml bindings
-                _navigationService.Navigate<MainViewModel>().GetAwaiter().GetResult();
+                // _navigationService.Navigate<MainViewModel>().GetAwaiter().GetResult();
 
                 // Use this start to try the code behind View & ViewModel
                 //_navigationService.Navigate<CodeBehindViewModel>().GetAwaiter().GetResult();
+
+
+                // Use this start to try the MvxFormsListview
+                _navigationService.Navigate<ListViewModel>().GetAwaiter().GetResult();
             }
             catch (System.Exception e)
             {
