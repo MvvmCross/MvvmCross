@@ -5,7 +5,7 @@ using MvvmCross.Droid.Views;
 namespace $rootnamespace$
 {
     [Activity(
-        Label = "MvxForms"
+        Label = "YourAppName"
         , MainLauncher = true
         , Icon = "@drawable/icon"
         , Theme = "@style/Theme.Splash"

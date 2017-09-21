@@ -15,12 +15,12 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
       <dependency id="MvvmCross.Forms" version="[$version$]" />
 		</dependencies>
 	</metadata>
-	<files>		
+	<files>
 		<!-- PCL - Content -->
     <file src="Forms\CoreContent\_ Core.txt" target="content\portable-net45+win+wpa81+wp80\ToDo-MvvmCross\_ Core.txt" />
-		<file src="Forms\CoreContent\MainViewModel.cs.pp" target="content\portable-net45+win+wpa81+wp80\ViewModels\MainViewModel.cs.pp" />
-    <file src="Forms\CoreContent\MainPage.xaml.cs.pp" target="content\portable-net45+win+wpa81+wp80\Pages\MainViewModel.xaml.cs.pp" />
-    <file src="Forms\CoreContent\MainPage.xaml.pp" target="content\portable-net45+win+wpa81+wp80\Pages\MainViewModel.xaml.pp" />
+		<file src="Forms\CoreContent\MvxFormsViewModel.cs.pp" target="content\portable-net45+win+wpa81+wp80\ViewModels\MvxFormsViewModel.cs.pp" />
+    <file src="Forms\CoreContent\MvxFormsPage.xaml.cs.pp" target="content\portable-net45+win+wpa81+wp80\Pages\MvxFormsPage.xaml.cs.pp" />
+    <file src="Forms\CoreContent\MvxFormsPage.xaml.pp" target="content\portable-net45+win+wpa81+wp80\Pages\MvxFormsPage.xaml.pp" />
 		<file src="Forms\CoreContent\App.xaml.pp" target="content\portable-net45+win+wpa81+wp80\App.xaml.pp" />
     <file src="Forms\CoreContent\App.xaml.cs.pp" target="content\portable-net45+win+wpa81+wp80\App.xaml.cs.pp" />
     <file src="Forms\CoreContent\CoreApp.cs.pp" target="content\portable-net45+win+wpa81+wp80\CoreApp.cs.pp" />
@@ -38,6 +38,6 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
     <file src="Forms\iOSContent\AppDelegate.cs.pp" target="content\Xamarin.iOS10\AppDelegate.cs.pp" />
     <file src="Forms\iOSContent\DebugTrace.cs.pp" target="content\Xamarin.iOS10\DebugTrace.cs.pp" />
     <file src="Forms\iOSContent\Setup.cs.pp" target="content\Xamarin.iOS10\Setup.cs.pp" />
-						
+
 	</files>
 </package>
