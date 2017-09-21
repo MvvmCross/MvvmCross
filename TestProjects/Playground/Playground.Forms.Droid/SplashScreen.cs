@@ -5,10 +5,10 @@ using MvvmCross.Droid.Views;
 namespace Playground.Forms.Droid
 {
     [Activity(
-        Label = "MvxForms"
+        Label = "Playground.Forms"
         , MainLauncher = true
         , Icon = "@mipmap/icon"
-        , Theme = "@style/Theme.Splash"
+        , Theme = "@style/AppTheme.Splash"
         , NoHistory = true
         , ScreenOrientation = ScreenOrientation.Portrait)]
     public class SplashScreen : MvxSplashScreenActivity

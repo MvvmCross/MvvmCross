@@ -15,6 +15,7 @@ using MvvmCross.Platform.Plugins;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Forms.Bindings.Target;
 using MvvmCross.Forms.Views;
+using MvvmCross.Forms.Droid.Bindings;
 
 namespace MvvmCross.Forms.Droid.Platform
 {
@@ -94,6 +95,6 @@ namespace MvvmCross.Forms.Droid.Platform
             base.FillBindingNames(registry);
         }
 
-        protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsBindingBuilder();
+        protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsAndroidBindingBuilder();
     }
 }

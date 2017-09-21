@@ -15,10 +15,10 @@ namespace Playground.Forms.iOS
         {
         }
 
-        //protected override MvvmCross.Forms.Core.MvxFormsApplication CreateFormsApplication()
-        //{
-        //    return new Core.App();
-        //}
+        protected override MvvmCross.Forms.Core.MvxFormsApplication CreateFormsApplication()
+        {
+            return new Core.FormsApp();
+        }
 
         protected override IMvxApplication CreateApp()
         {

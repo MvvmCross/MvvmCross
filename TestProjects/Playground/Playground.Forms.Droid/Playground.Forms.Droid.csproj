@@ -45,9 +45,6 @@
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Android.Export" />
-    <Reference Include="Xamarin.Android.Support.v7.CardView">
-      <HintPath>..\..\..\packages\Xamarin.Android.Support.v7.CardView.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.CardView.dll</HintPath>
-    </Reference>
     <Reference Include="FormsViewGroup">
       <HintPath>..\..\..\packages\Xamarin.Forms.2.3.4.270\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
     </Reference>
@@ -108,6 +105,9 @@
     <Reference Include="Xamarin.Android.Support.v4">
       <HintPath>..\..\..\packages\Xamarin.Android.Support.v4.25.3.1\lib\MonoAndroid70\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.CardView">
+      <HintPath>..\..\..\packages\Xamarin.Android.Support.v7.CardView.25.3.1\lib\MonoAndroid70\Xamarin.Android.Support.v7.CardView.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -116,6 +116,7 @@
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="DebugTrace.cs" />
+    <Compile Include="Views\SheetView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -131,12 +132,33 @@
     <AndroidResource Include="Resources\mipmap-xhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
-    <AndroidResource Include="Resources\values\SplashStyle.xml" />
     <AndroidResource Include="Resources\layout\SplashScreen.axml" />
     <AndroidResource Include="Resources\drawable\splash.png" />
+    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\values\dimens.xml" />
+    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\values-v21\styles.xml" />
+    <AndroidResource Include="Resources\layout\ChildView.axml" />
+    <AndroidResource Include="Resources\layout\ModalNavView.axml" />
+    <AndroidResource Include="Resources\layout\navigation_header.axml" />
+    <AndroidResource Include="Resources\layout\NestedChildView.axml" />
+    <AndroidResource Include="Resources\layout\RootView.axml" />
+    <AndroidResource Include="Resources\layout\SecondChildView.axml" />
+    <AndroidResource Include="Resources\layout\SheetView.axml" />
+    <AndroidResource Include="Resources\layout\SplitDetailView.axml" />
+    <AndroidResource Include="Resources\layout\SplitMasterView.axml" />
+    <AndroidResource Include="Resources\layout\SplitRootView.axml" />
+    <AndroidResource Include="Resources\layout\Tab1View.axml" />
+    <AndroidResource Include="Resources\layout\Tab2View.axml" />
+    <AndroidResource Include="Resources\layout\Tab3View.axml" />
+    <AndroidResource Include="Resources\layout\TabsRootView.axml" />
+    <AndroidResource Include="Resources\menu\navigation_drawer.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+    <Folder Include="Views\" />
+    <Folder Include="Resources\layout\" />
+    <Folder Include="Resources\menu\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Playground.Core\Playground.Core.csproj">
@@ -175,6 +197,22 @@
       <Project>{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}</Project>
       <Name>MvvmCross.Platform.Droid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross-AndroidSupport\MvvmCross.Droid.Support.V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj">
+      <Project>{911D9032-EA82-41B9-80D7-5DB84951B6E5}</Project>
+      <Name>MvvmCross.Droid.Support.V7.AppCompat</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross-AndroidSupport\MvvmCross.Droid.Support.Fragment\MvvmCross.Droid.Support.Fragment.csproj">
+      <Project>{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}</Project>
+      <Name>MvvmCross.Droid.Support.Fragment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross-AndroidSupport\MvvmCross.Droid.Support.Design\MvvmCross.Droid.Support.Design.csproj">
+      <Project>{AC97FC60-7A13-47F9-B3AC-2B2C25147EB8}</Project>
+      <Name>MvvmCross.Droid.Support.Design</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross-AndroidSupport\MvvmCross.Droid.Support.V7.RecyclerView\MvvmCross.Droid.Support.V7.RecyclerView.csproj">
+      <Project>{31C39E0F-116E-4EAC-921D-A79E6AA28204}</Project>
+      <Name>MvvmCross.Droid.Support.V7.RecyclerView</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
@@ -194,4 +232,5 @@
   <Import Project="..\..\..\packages\Xamarin.Android.Support.Design.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.Design.targets" Condition="Exists('..\..\..\packages\Xamarin.Android.Support.Design.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.Design.targets')" />
   <Import Project="..\..\..\packages\Xamarin.Android.Support.v7.MediaRouter.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.v7.MediaRouter.targets" Condition="Exists('..\..\..\packages\Xamarin.Android.Support.v7.MediaRouter.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.v7.MediaRouter.targets')" />
   <Import Project="..\..\..\packages\Xamarin.Android.Support.v4.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.v4.targets" Condition="Exists('..\..\..\packages\Xamarin.Android.Support.v4.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.v4.targets')" />
+  <Import Project="..\..\..\packages\Xamarin.Android.Support.v7.CardView.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets" Condition="Exists('..\..\..\packages\Xamarin.Android.Support.v7.CardView.25.3.1\build\MonoAndroid70\Xamarin.Android.Support.v7.CardView.targets')" />
 </Project>
