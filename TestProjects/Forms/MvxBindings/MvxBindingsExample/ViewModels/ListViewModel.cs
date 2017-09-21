@@ -6,7 +6,7 @@ namespace MvxBindingsExample.ViewModels
 {
     public class ListViewModel : MvxViewModel
     {
-        public MvxObservableCollection<TestItem> TestItems = new MvxObservableCollection<TestItem>();
+        public MvxObservableCollection<TestItem> TestItems { get; } = new MvxObservableCollection<TestItem>();
         public IMvxAsyncCommand<TestItem> ItemClickedCommand => new MvxAsyncCommand<TestItem>(ItemClicked);
 
         public ListViewModel()
