@@ -7,8 +7,9 @@ using MvvmCross.Platform;
 namespace Playground.Forms.Droid
 {
     [Activity(
-        Label = "Playground.Forms.Droid.Droid", 
+        Label = "Playground.Forms", 
         Icon = "@mipmap/icon",
+        Theme = "@style/AppTheme",
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : MvxFormsAppCompatActivity
     {
