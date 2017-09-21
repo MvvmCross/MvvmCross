@@ -7,7 +7,7 @@
                      xmlns:viewModels="clr-namespace:MvxBindingsExample.ViewModels;assembly=MvxBindingsExample"
                      xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
                      x:Class="MvxBindingsExample.Pages.ListViewPage">
-         <views:MvxFormsListView mvx:Bi.nd="ItemsSource TestItems">
+         <views:MvxListView mvx:Bi.nd="ItemsSource TestItems; ItemClick ItemClickedCommand">
             <ListView.ItemTemplate>
                  <DataTemplate>
                      <ViewCell>
@@ -17,7 +17,7 @@
                      </ViewCell>
                  </DataTemplate>
              </ListView.ItemTemplate>
-         </views:MvxFormsListView>
+         </views:MvxListView>
 </core:MvxContentPage>
 
 

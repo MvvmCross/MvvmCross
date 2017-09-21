@@ -8,18 +8,16 @@ namespace MvvmCross.Forms.Views
     {
         public MvxListView(ListViewCachingStrategy strategy) : base(strategy)
         {
-
         }
 
         public MvxListView() : base()
         {
-            
         }
 
         public ICommand ItemClick
         {
             get;
             set;
-        } = new Command(() => { });
+        }
     }
 }
