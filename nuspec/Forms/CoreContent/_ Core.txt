@@ -6,12 +6,14 @@ The steps to get this Core project working are:
 
 3. Change the Build Action of the following files from 'Page' to 'Embedded Resource':
 
-    * Core|Pages|MvxFormsPage.xaml
+    * Core|Pages|MainPage.xaml
     * Core|App.xaml
 
 4. Delete the page that was created by Xamarin forms.
 
 4. Add the MvvmCross Forms StarterPack package to the platform specific projects.
+
+5. In Android: Remove the MainActivity.cs.
 
 5. In the platform specific projects remove the reference to the core project and click ok. Then add the reference again.
    (This has to be done because the platform specific projects wont recognise the renamed core project)
