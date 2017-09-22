@@ -8,7 +8,7 @@ namespace $rootnamespace$.Core.ViewModels
         private string _text;
         private IMvxCommand _showTextCommand;
 
-        public IMvxCommand ShowTextCommand => 
+        public IMvxCommand ShowTextCommand =>
             _showTextCommand = _showTextCommand ?? new MvxCommand(DoShowTextCommand);
 
         public string Text
@@ -18,13 +18,13 @@ namespace $rootnamespace$.Core.ViewModels
         }
 
         public override Task Initialize()
-        {		    
+        {
             return base.Initialize();
-        }        
-        
+        }
+
         private void DoShowTextCommand()
         {
             Text = "Hello MvvmCross!";
-        }               
+        }
     }
 }
