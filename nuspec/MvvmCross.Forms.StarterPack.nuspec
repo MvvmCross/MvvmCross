@@ -15,19 +15,19 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
       <dependency id="MvvmCross.Forms" version="[$version$]" />
 		</dependencies>
 	</metadata>
-	<files>		
+	<files>
 		<!-- PCL - Content -->
     <file src="Forms\CoreContent\_ Core.txt" target="content\portable-net45+win+wpa81+wp80\ToDo-MvvmCross\_ Core.txt" />
 		<file src="Forms\CoreContent\MainViewModel.cs.pp" target="content\portable-net45+win+wpa81+wp80\ViewModels\MainViewModel.cs.pp" />
-    <file src="Forms\CoreContent\MainPage.xaml.cs.pp" target="content\portable-net45+win+wpa81+wp80\Pages\MainViewModel.xaml.cs.pp" />
-    <file src="Forms\CoreContent\MainPage.xaml.pp" target="content\portable-net45+win+wpa81+wp80\Pages\MainViewModel.xaml.pp" />
+    <file src="Forms\CoreContent\MainPage.xaml.cs.pp" target="content\portable-net45+win+wpa81+wp80\Pages\MainPage.xaml.cs.pp" />
+    <file src="Forms\CoreContent\MainPage.xaml.pp" target="content\portable-net45+win+wpa81+wp80\Pages\MainPage.xaml.pp" />
 		<file src="Forms\CoreContent\App.xaml.pp" target="content\portable-net45+win+wpa81+wp80\App.xaml.pp" />
     <file src="Forms\CoreContent\App.xaml.cs.pp" target="content\portable-net45+win+wpa81+wp80\App.xaml.cs.pp" />
     <file src="Forms\CoreContent\CoreApp.cs.pp" target="content\portable-net45+win+wpa81+wp80\CoreApp.cs.pp" />
 
 		<!-- Droid - Content -->
     <file src="Forms\DroidContent\DebugTrace.cs.pp" target="content\MonoAndroid\DebugTrace.cs.pp" />
-    <file src="Forms\DroidContent\MainActivity.cs.pp" target="content\MonoAndroid\MainActivity.cs.pp" />
+    <file src="Forms\DroidContent\FormsActivity.cs.pp" target="content\MonoAndroid\FormsActivity.cs.pp" />
     <file src="Forms\DroidContent\Setup.cs.pp" target="content\MonoAndroid\Setup.cs.pp" />
     <file src="Forms\DroidContent\SplashScreen.cs.pp" target="content\MonoAndroid\SplashScreen.cs.pp" />
     <file src="Forms\DroidContent\splash.png" target="content\MonoAndroid\Resources\drawable\splash.png" />
@@ -38,6 +38,6 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
     <file src="Forms\iOSContent\AppDelegate.cs.pp" target="content\Xamarin.iOS10\AppDelegate.cs.pp" />
     <file src="Forms\iOSContent\DebugTrace.cs.pp" target="content\Xamarin.iOS10\DebugTrace.cs.pp" />
     <file src="Forms\iOSContent\Setup.cs.pp" target="content\Xamarin.iOS10\Setup.cs.pp" />
-						
+
 	</files>
 </package>
