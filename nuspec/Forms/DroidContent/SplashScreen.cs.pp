@@ -20,7 +20,7 @@ namespace $rootnamespace$
 
         protected override void TriggerFirstNavigate()
         {
-            StartActivity(typeof(MainActivity));
+            StartActivity(typeof(FormsActivity));
             base.TriggerFirstNavigate();
         }
     }
