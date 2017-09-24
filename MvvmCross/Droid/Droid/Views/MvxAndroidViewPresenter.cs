@@ -683,14 +683,14 @@ namespace MvvmCross.Droid.Views
             {
                 MvxBasePresentationAttribute presentationAttribute = overridePresentationView.PresentationAttribute();
 
-                if (presentationAttribute == null || !(presentationAttribute is TPresentationAttribute fragmentAttribute))
+                if (presentationAttribute == null || !(presentationAttribute is TPresentationAttribute correctTypeAttribute))
                 {
                     MvxTrace.Trace("Override PresentationAttribute null or not matching required type {0} found type {1}. Falling back to existing attribute.",
                         typeof(TPresentationAttribute).Name, presentationAttribute?.GetType());
                 }
                 else
                 {
-                    attribute = fragmentAttribute;
+                    attribute = correctTypeAttribute;
                 }
             }
 

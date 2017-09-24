@@ -13,7 +13,6 @@ using MvvmCross.Core.Views;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Views;
 using MvvmCross.Droid.Views.Attributes;
-using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 
@@ -101,13 +100,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 if (attribute == null)
                     attribute = attributes.FirstOrDefault();
 
-                if (attribute.ViewType?.GetInterfaces().OfType<IMvxOverridePresentationAttribute>().FirstOrDefault() is IMvxOverridePresentationAttribute view)
-                {
-                    var presentationAttribute = view.PresentationAttribute();
-
-                    if (presentationAttribute != null)
-                        return presentationAttribute;
-                }
                 return attribute;
             }
 
@@ -235,6 +227,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
             fragment = fragment ?? CreateFragment(attribute, fragmentName);
 
+            var presentationAttribute = GetOverridePresentationAttribute<MvxFragmentPresentationAttribute>((Fragment)fragment);
+            if (presentationAttribute != null)
+            {
+                attribute = presentationAttribute;
+            }
+
             // MvxNavigationService provides an already instantiated ViewModel here,
             // therefore just assign it
             if (request is MvxViewModelInstanceRequest instanceRequest)
@@ -295,9 +293,15 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
            MvxViewModelRequest request)
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
-            var dialog = (DialogFragment)CreateFragment(attribute, fragmentName);
+            IMvxFragmentView mvxFragmentView = CreateFragment(attribute, fragmentName);
+            var dialog = (DialogFragment)mvxFragmentView;
 
-            var mvxFragmentView = (IMvxFragmentView)dialog;
+            var presentationAttribute = GetOverridePresentationAttribute<MvxDialogFragmentPresentationAttribute>(dialog);
+            if (presentationAttribute != null)
+            {
+                attribute = presentationAttribute;
+            }
+
             // MvxNavigationService provides an already instantiated ViewModel here,
             // therefore just assign it
             if (request is MvxViewModelInstanceRequest instanceRequest)
