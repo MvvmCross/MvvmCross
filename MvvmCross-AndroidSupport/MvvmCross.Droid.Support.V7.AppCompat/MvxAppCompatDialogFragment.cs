@@ -66,6 +66,15 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         : MvxAppCompatDialogFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
+        protected MvxAppCompatDialogFragment()
+        {
+        }
+
+        protected MvxAppCompatDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
+
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
