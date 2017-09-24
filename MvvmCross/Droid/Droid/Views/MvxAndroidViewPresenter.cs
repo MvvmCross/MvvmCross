@@ -239,13 +239,6 @@ namespace MvvmCross.Droid.Views
                 if (attribute == null)
                     attribute = attributes.FirstOrDefault();
 
-                if (attribute.ViewType?.GetInterfaces().OfType<IMvxOverridePresentationAttribute>().FirstOrDefault() is IMvxOverridePresentationAttribute view)
-                {
-                    var presentationAttribute = view.PresentationAttribute();
-
-                    if (presentationAttribute != null)
-                        return presentationAttribute;
-                }
                 return attribute;
             }
 
@@ -413,6 +406,12 @@ namespace MvvmCross.Droid.Views
             }
             fragment = fragment ?? CreateFragment(attribute, fragmentName);
 
+            var presentationAttribute = GetOverridePresentationAttribute<MvxFragmentPresentationAttribute>((Fragment)fragment);
+            if (presentationAttribute != null)
+            {
+                attribute = presentationAttribute;
+            }
+
             // MvxNavigationService provides an already instantiated ViewModel here,
             // therefore just assign it
             if (request is MvxViewModelInstanceRequest instanceRequest)
@@ -449,6 +448,7 @@ namespace MvvmCross.Droid.Views
                     ft.AddSharedElement(item.Value, item.Key);
                 }
             }
+
             if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
             {
                 if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
@@ -456,6 +456,7 @@ namespace MvvmCross.Droid.Views
                 else
                     ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
             }
+
             if (attribute.TransitionStyle != int.MinValue)
                 ft.SetTransitionStyle(attribute.TransitionStyle);
 
@@ -472,9 +473,15 @@ namespace MvvmCross.Droid.Views
             MvxViewModelRequest request)
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
-            var dialog = (DialogFragment)CreateFragment(attribute, fragmentName);
+            IMvxFragmentView mvxFragmentView = CreateFragment(attribute, fragmentName);
+            var dialog = (DialogFragment)mvxFragmentView;
 
-            var mvxFragmentView = (IMvxFragmentView)dialog;
+            var presentationAttribute = GetOverridePresentationAttribute<MvxDialogFragmentPresentationAttribute>(dialog);
+            if (presentationAttribute != null)
+            {
+                attribute = presentationAttribute;
+            }
+
             // MvxNavigationService provides an already instantiated ViewModel here,
             // therefore just assign it
             if (request is MvxViewModelInstanceRequest instanceRequest)
@@ -665,6 +672,29 @@ namespace MvvmCross.Droid.Views
             var fragment = CurrentFragmentManager.FindFragmentByTag(fragmentName);
 
             return fragment;
+        }
+
+        protected virtual TPresentationAttribute GetOverridePresentationAttribute<TPresentationAttribute>(Java.Lang.Object view)
+            where TPresentationAttribute : MvxBasePresentationAttribute
+        {
+            var attribute = default(TPresentationAttribute);
+
+            if (view is IMvxOverridePresentationAttribute overridePresentationView)
+            {
+                MvxBasePresentationAttribute presentationAttribute = overridePresentationView.PresentationAttribute();
+
+                if (presentationAttribute == null || !(presentationAttribute is TPresentationAttribute fragmentAttribute))
+                {
+                    MvxTrace.Trace("Override PresentationAttribute null or not matching required type {0} found type {1}. Falling back to existing attribute.",
+                        typeof(TPresentationAttribute).Name, presentationAttribute?.GetType());
+                }
+                else
+                {
+                    attribute = fragmentAttribute;
+                }
+            }
+
+            return attribute;
         }
     }
 }
