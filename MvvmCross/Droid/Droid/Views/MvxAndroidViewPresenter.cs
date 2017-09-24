@@ -312,9 +312,9 @@ namespace MvvmCross.Droid.Views
         {
             IMvxAndroidViewModelRequestTranslator requestTranslator = Mvx.Resolve<IMvxAndroidViewModelRequestTranslator>();
 
-            if (request is MvxViewModelInstanceRequest)
+            if (request is MvxViewModelInstanceRequest viewModelInstanceRequest)
             {
-                var instanceRequest = requestTranslator.GetIntentWithKeyFor(((MvxViewModelInstanceRequest)request).ViewModelInstance);
+                var instanceRequest = requestTranslator.GetIntentWithKeyFor(viewModelInstanceRequest.ViewModelInstance);
                 return instanceRequest.Item1;
             }
             return requestTranslator.GetIntentFor(request);
@@ -628,6 +628,12 @@ namespace MvvmCross.Droid.Views
                 var ft = fragmentManager.BeginTransaction();
                 var fragment = fragmentManager.FindFragmentByTag(fragmentAttribute.ViewType.Name);
 
+                var presentationAttribute = GetOverridePresentationAttribute<MvxFragmentPresentationAttribute>(fragment);
+                if (presentationAttribute != null)
+                {
+                    fragmentAttribute = presentationAttribute;
+                }
+
                 if (!fragmentAttribute.EnterAnimation.Equals(int.MinValue) && !fragmentAttribute.ExitAnimation.Equals(int.MinValue))
                 {
                     if (!fragmentAttribute.PopEnterAnimation.Equals(int.MinValue) && !fragmentAttribute.PopExitAnimation.Equals(int.MinValue))
@@ -669,9 +675,7 @@ namespace MvvmCross.Droid.Views
         protected virtual Fragment GetFragmentByViewType(Type type)
         {
             var fragmentName = FragmentJavaName(type);
-            var fragment = CurrentFragmentManager.FindFragmentByTag(fragmentName);
-
-            return fragment;
+            return CurrentFragmentManager.FindFragmentByTag(fragmentName);
         }
 
         protected virtual TPresentationAttribute GetOverridePresentationAttribute<TPresentationAttribute>(Java.Lang.Object view)
