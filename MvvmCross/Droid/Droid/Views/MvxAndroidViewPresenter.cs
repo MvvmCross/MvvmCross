@@ -662,19 +662,22 @@ namespace MvvmCross.Droid.Views
         {
             if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
             {
-                var viewInstance = Activator.CreateInstance(viewType) as IMvxOverridePresentationAttribute;
-                var presentationAttribute = viewInstance.PresentationAttribute();
-
-                if (presentationAttribute == null)
+                var viewInstance = Activator.CreateInstance(viewType) as Java.Lang.Object;
+                using (viewInstance)
                 {
-                    MvxTrace.Warning("Override PresentationAttribute null. Falling back to existing attribute.");
-                }
-                else
-                {
-                    if (presentationAttribute.ViewType == null)
-                        presentationAttribute.ViewType = viewType;
+                    var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute();
 
-                    return presentationAttribute;
+                    if (presentationAttribute == null)
+                    {
+                        MvxTrace.Warning("Override PresentationAttribute null. Falling back to existing attribute.");
+                    }
+                    else
+                    {
+                        if (presentationAttribute.ViewType == null)
+                            presentationAttribute.ViewType = viewType;
+
+                        return presentationAttribute;
+                    }
                 }
             }
 
