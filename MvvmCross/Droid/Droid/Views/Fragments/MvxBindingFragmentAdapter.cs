@@ -12,8 +12,6 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Views.Fragments.EventSource;
 using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Views;
-using MvvmCross.Droid.Views.Attributes;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Platform;
@@ -38,10 +36,24 @@ namespace MvvmCross.Droid.Views.Fragments
 
             // Create is called after Fragment is attached to Activity
             // it's safe to assume that Fragment has activity
-            if (!FragmentView.GetType().IsFragmentCacheable(Fragment.Activity.GetType()))
-                return;
 
-            FragmentView.RegisterFragmentViewToCacheIfNeeded(Fragment.Activity.GetType());
+            var hostMvxView = Fragment.Activity as IMvxAndroidView;
+            if (hostMvxView == null)
+            {
+                MvxTrace.Warning($"Fragment host for fragment type {Fragment.GetType()} is not of type IMvxAndroidView");
+                return;
+            }
+
+            // if restoring state, Activity.ViewModel might be null, so a harder mechanism is necessary
+            var viewModelType = hostMvxView.ViewModel != null
+                                       ? hostMvxView.ViewModel.GetType()
+                                       : hostMvxView.FindAssociatedViewModelTypeOrNull();
+
+            if (viewModelType == null)
+            {
+                MvxTrace.Warning($"ViewModel type for Activity {Fragment.Activity.GetType()} not found when trying to show fragment: {Fragment.GetType()}");
+                return;
+            }
 
             Bundle bundle = null;
             MvxViewModelRequest request = null;
@@ -98,8 +110,6 @@ namespace MvvmCross.Droid.Views.Fragments
         {
             // it is guarannted that SaveInstanceState call will be executed before OnStop (thus before Fragment detach)
             // it is safe to assume that Fragment has activity attached
-            if (!FragmentView.GetType().IsFragmentCacheable(Fragment.Activity.GetType()))
-                return;
 
             var mvxBundle = FragmentView.CreateSaveStateBundle();
             if (mvxBundle != null)
