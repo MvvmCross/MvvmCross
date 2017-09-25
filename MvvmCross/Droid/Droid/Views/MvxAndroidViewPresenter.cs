@@ -251,19 +251,17 @@ namespace MvvmCross.Droid.Views
 
             if (viewType.IsSubclassOf(typeof(DialogFragment)))
             {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-                    $"Assuming DialogFragment presentation");
+                MvxTrace.Trace("PresentationAttribute not found for {0}. Assuming DialogFragment presentation", viewModelType.Name);
                 return new MvxDialogFragmentPresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
+
             if (viewType.IsSubclassOf(typeof(Fragment)))
             {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-                    $"Assuming Fragment presentation");
+                MvxTrace.Trace("PresentationAttribute not found for {0}. Assuming Fragment presentation", viewModelType.Name);
                 return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), Android.Resource.Id.Content) { ViewType = viewType, ViewModelType = viewModelType };
             }
 
-            MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-                    $"Assuming Activity presentation");
+            MvxTrace.Trace("PresentationAttribute not found for {0}. Assuming Activity presentation", viewModelType.Name);
             return new MvxActivityPresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
         }
 
@@ -361,8 +359,8 @@ namespace MvvmCross.Droid.Views
             var currentHostViewModelType = GetCurrentActivityViewModelType();
             if (attribute.ActivityHostViewModelType != currentHostViewModelType)
             {
-                MvxTrace.Trace($"Activity host with ViewModelType {attribute.ActivityHostViewModelType} is not CurrentTopActivity. " +
-                               $"Showing Activity before showing Fragment for {attribute.ViewModelType}");
+                MvxTrace.Trace("Activity host with ViewModelType {0} is not CurrentTopActivity. Showing Activity before showing Fragment for {1}",
+                    attribute.ActivityHostViewModelType, attribute.ViewModelType);
                 _pendingRequest = request;
                 ShowHostActivity(attribute);
             }
