@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -100,7 +100,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 if (attribute == null)
                     attribute = attributes.FirstOrDefault();
 
-                return attribute;
+                return GetOverridePresentationAttribute(attribute.ViewType) ?? attribute;
             }
 
             return CreateAttributeForViewModel(viewModelType);
@@ -227,12 +227,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
             fragment = fragment ?? CreateFragment(attribute, fragmentName);
 
-            var presentationAttribute = GetOverridePresentationAttribute<MvxFragmentPresentationAttribute>((Fragment)fragment);
-            if (presentationAttribute != null)
-            {
-                attribute = presentationAttribute;
-            }
-
             // MvxNavigationService provides an already instantiated ViewModel here,
             // therefore just assign it
             if (request is MvxViewModelInstanceRequest instanceRequest)
@@ -295,12 +289,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             var fragmentName = FragmentJavaName(attribute.ViewType);
             IMvxFragmentView mvxFragmentView = CreateFragment(attribute, fragmentName);
             var dialog = (DialogFragment)mvxFragmentView;
-
-            var presentationAttribute = GetOverridePresentationAttribute<MvxDialogFragmentPresentationAttribute>(dialog);
-            if (presentationAttribute != null)
-            {
-                attribute = presentationAttribute;
-            }
 
             // MvxNavigationService provides an already instantiated ViewModel here,
             // therefore just assign it
@@ -491,12 +479,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             {
                 var ft = fragmentManager.BeginTransaction();
                 var fragment = fragmentManager.FindFragmentByTag(fragmentAttribute.ViewType.Name);
-
-                var presentationAttribute = GetOverridePresentationAttribute<MvxFragmentPresentationAttribute>(fragment);
-                if (presentationAttribute != null)
-                {
-                    fragmentAttribute = presentationAttribute;
-                }
 
                 if (!fragmentAttribute.EnterAnimation.Equals(int.MinValue) && !fragmentAttribute.ExitAnimation.Equals(int.MinValue))
                 {
