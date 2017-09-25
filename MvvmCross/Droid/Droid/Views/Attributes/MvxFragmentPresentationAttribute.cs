@@ -24,7 +24,7 @@ namespace MvvmCross.Droid.Views.Attributes
             int popExitAnimation = int.MinValue,
             int transitionStyle = int.MinValue,
             Type fragmentHostViewType = null,
-            bool isCacheableFragment = true
+            bool isCacheableFragment = false
         )
         {
             ActivityHostViewModelType = activityHostViewModelType;
@@ -49,7 +49,7 @@ namespace MvvmCross.Droid.Views.Attributes
             string popExitAnimation = null,
             string transitionStyle = null,
             Type fragmentHostViewType = null,
-            bool isCacheableFragment = true
+            bool isCacheableFragment = false
         )
         {
             var context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext;
@@ -111,11 +111,11 @@ namespace MvvmCross.Droid.Views.Attributes
         /// </summary>
         public int TransitionStyle { get; set; } = DefaultTransitionStyle;
 
-        public static bool DefaultIsCacheableFragment = true;
+        public static bool DefaultIsCacheableFragment = false;
         /// <summary>
-        /// Indicates if the fragment can be cached. True by default.
+        /// Indicates if the fragment can be cached. False by default.
         /// </summary>
-        public virtual bool IsCacheableFragment { get; set; } = DefaultIsCacheableFragment;
+        public bool IsCacheableFragment { get; set; } = DefaultIsCacheableFragment;
 
         /// <summary>
         /// SharedElements that will be added to the transition. String may be left empty when using AppCompat
