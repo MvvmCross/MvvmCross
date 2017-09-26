@@ -23,6 +23,9 @@ namespace MvvmCross.Binding.Mac
         public static string BindSelectedSegment(this NSSegmentedControl nsSegmentedControl)
             => MvxMacPropertyBinding.NSSegmentedControl_SelectedSegment;
 
+        public static string BindSelectedTag(this NSPopUpButton nsPopUpButton)
+            => MvxMacPropertyBinding.NSPopUpButton_SelectedTag;
+
         public static string BindTime(this NSDatePicker nsDatePicker)
             => MvxMacPropertyBinding.NSDatePicker_Time;
 
@@ -38,10 +41,16 @@ namespace MvvmCross.Binding.Mac
         public static string BindState(this NSButton nsButton)
             => MvxMacPropertyBinding.NSButton_State;
 
+        public static string BindState(this NSMenuItem nsMenuItem)
+            => MvxMacPropertyBinding.NSMenuItem_State;
+
         public static string BindText(this NSSearchField nsSearchField)
             => MvxMacPropertyBinding.NSSearchField_Text;
 
         public static string BindTitle(this NSButton nsButton)
             => MvxMacPropertyBinding.NSButton_Title;
+
+        public static string BindSelectedTabViewItemIndex(this NSTabViewController nsTabViewController)
+            => MvxMacPropertyBinding.NSTabViewController_SelectedTabViewItemIndex;
     }
 }

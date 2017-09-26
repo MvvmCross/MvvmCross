@@ -2,6 +2,7 @@
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Mac.Platform;
 using MvvmCross.Mac.Views.Presenters;
+using MvvmCross.Mac.Views.Presenters.Attributes;
 using Playground.Core;
 
 namespace Playground.Mac
@@ -15,6 +16,9 @@ namespace Playground.Mac
 
         protected override IMvxApplication CreateApp()
         {
+            MvxWindowPresentationAttribute.DefaultWidth = 250;
+            MvxWindowPresentationAttribute.DefaultHeight = 250;
+
             return new App();
         }
     }

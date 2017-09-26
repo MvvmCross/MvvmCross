@@ -92,15 +92,6 @@
     <Compile Include="Views\MvxFragmentExtensions.cs" />
     <Compile Include="Views\IMvxFragmentView.cs" />
     <Compile Include="Views\IMvxEventSourceFragment.cs" />
-    <Compile Include="Views\Caching\DefaultFragmentCacheConfiguration.cs" />
-    <Compile Include="Views\Caching\FragmentCacheConfiguration.cs" />
-    <Compile Include="Views\Caching\IFragmentCacheableActivity.cs" />
-    <Compile Include="Views\Caching\IFragmentCacheConfiguration.cs" />
-    <Compile Include="Views\Caching\IMvxCachedFragmentInfo.cs" />
-    <Compile Include="Views\Caching\IMvxCachedFragmentInfoFactory.cs" />
-    <Compile Include="Views\Caching\MvxCachedFragmentInfo.cs" />
-    <Compile Include="Views\Caching\MvxCachedFragmentInfoFactory.cs" />
-    <Compile Include="Views\Caching\SerializableMvxCachedFragmentInfo.cs" />
     <Compile Include="Views\MvxCreateViewParameters.cs" />
     <Compile Include="Views\Attributes\MvxTabLayoutPresentationAttribute.cs" />
     <Compile Include="Views\MvxSimpleLayoutInflaterHolder.cs" />
@@ -157,7 +148,6 @@
   -->
   <ItemGroup>
     <Folder Include="Views\Attributes\" />
-    <Folder Include="Views\Caching\" />
     <Folder Include="Views\Fragments\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

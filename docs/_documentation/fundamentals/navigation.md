@@ -192,7 +192,7 @@ The events available are:
 * BeforeClose
 * AfterClose
 
-You might be using `Init()` or `Start()` methods in your ViewModels when updating from MvvmCross 4.x. This is now deprecated because it was done using reflection and therefor not very safe. With the new navigation a method called `Task Initialize()` will be called. This method is typed and async.
+You might be using `Init()` or `Start()` methods in your ViewModels when updating from MvvmCross 4.x. This is now deprecated because it was done using reflection and therefore not very safe. When MvxNavigationService is used, a typed method called `Task Initialize()` will be available for you to perform any async heavy operations.
 
 ### Uri navigation
 

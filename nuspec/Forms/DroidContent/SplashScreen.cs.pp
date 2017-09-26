@@ -5,7 +5,7 @@ using MvvmCross.Droid.Views;
 namespace $rootnamespace$
 {
     [Activity(
-        Label = "MvxForms"
+        Label = "YourAppName"
         , MainLauncher = true
         , Icon = "@drawable/icon"
         , Theme = "@style/Theme.Splash"
@@ -20,7 +20,7 @@ namespace $rootnamespace$
 
         protected override void TriggerFirstNavigate()
         {
-            StartActivity(typeof(MainActivity));
+            StartActivity(typeof(FormsActivity));
             base.TriggerFirstNavigate();
         }
     }

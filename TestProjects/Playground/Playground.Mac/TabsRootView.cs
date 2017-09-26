@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Mac.Views;
 using MvvmCross.Mac.Views.Presenters.Attributes;
 using Playground.Core.ViewModels;
@@ -6,12 +7,16 @@ using Playground.Core.ViewModels;
 namespace Playground.Mac
 {
     [MvxWindowPresentation(PositionX = 150)]
-    public class TabsRootView : MvxTabViewController<TabsRootViewModel>
+    public partial class TabsRootView : MvxTabViewController<TabsRootViewModel>
     {
         private bool _firstTime = true;
 
-        public TabsRootView()
+        public TabsRootView(IntPtr handle) : base(handle)
         {
+        }
+
+        public TabsRootView()
+        {            
         }
 
         public override void LoadView()
@@ -30,6 +35,20 @@ namespace Playground.Mac
                 ViewModel.ShowInitialViewModelsCommand.Execute(null);
                 _firstTime = false;
             }
+        }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+        }
+
+        public override void ViewDidAppear()
+        {
+            base.ViewDidAppear();
+
+            var set = this.CreateBindingSet<TabsRootView, TabsRootViewModel>();
+            set.Bind(this).For(v => v.SelectedTabViewItemIndex).To(vm => vm.ItemIndex);
+            set.Apply();
         }
     }
 }

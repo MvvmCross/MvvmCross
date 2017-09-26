@@ -1,23 +1,21 @@
-// MvxUISwitchOnTargetBinding.cs
+﻿// MvxUISwitchOnTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Reflection;
 using AppKit;
-using Foundation;
-using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.Platform;
-using ObjCRuntime;
 
-namespace MvvmCross.Mac.Views.Presenters
+namespace MvvmCross.Binding.Mac.Target
 {
-    public class MvxNSSwitchOnTargetBinding : MvxPropertyInfoTargetBinding<NSButton>
+    public class MvxNSMenuItemOnTargetBinding : MvxPropertyInfoTargetBinding<NSMenuItem>
     {
-        public MvxNSSwitchOnTargetBinding(object target, PropertyInfo targetPropertyInfo)
+        public MvxNSMenuItemOnTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
             var checkBox = View;
@@ -27,17 +25,33 @@ namespace MvvmCross.Mac.Views.Presenters
             }
             else
             {
-                checkBox.Action = new Selector("checkBoxAction:");
+                checkBox.Activated += HandleMenuItemCheckBoxAction;
             }
         }
 
-        [Export("checkBoxAction:")]
-        private void checkBoxAction()
+        private void HandleMenuItemCheckBoxAction(object sender, EventArgs e)
         {
             var view = View;
             if (view == null)
                 return;
+
             FireValueChanged(view.State == NSCellStateValue.On);
+        }
+
+        protected override object MakeSafeValue(object value)
+        {
+            if (value is bool)
+            {
+                if ((bool)value)
+                {
+                    return (NSCellStateValue.On);
+                }
+                else
+                {
+                    return (NSCellStateValue.Off);
+                }
+            }
+            return base.MakeSafeValue(value);
         }
 
         public override MvxBindingMode DefaultMode
@@ -53,7 +67,7 @@ namespace MvvmCross.Mac.Views.Presenters
                 var view = View;
                 if (view != null)
                 {
-                    //                    view.ValueChanged -= HandleValueChanged;
+                    view.Activated -= HandleMenuItemCheckBoxAction;
                 }
             }
         }

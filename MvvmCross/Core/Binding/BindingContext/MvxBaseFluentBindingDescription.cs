@@ -130,8 +130,9 @@ namespace MvvmCross.Binding.BindingContext
 
             public MvxSourceStepDescription CreateSourceStep(MvxSourceStepDescription inputs)
             {
+                var parser = Mvx.Resolve<IMvxBindingDescriptionParser>();
                 var innerSteps = _useParser ?
-                    _properties.Select(p => Mvx.Resolve<IMvxBindingDescriptionParser>().ParseSingle(p).Source) :
+                    _properties.Select(p => parser.ParseSingle(p).Source) :
                     _properties.Select(p => new MvxPathSourceStepDescription { SourcePropertyPath = p });
                 
                 return new MvxCombinerSourceStepDescription

@@ -37,7 +37,7 @@ namespace MvvmCross.Binding.Mac.Target
                 return;
             }
 
-            this._subscribed = true;
+            _subscribed = true;
             segmentedControl.Activated += HandleValueChanged;
         }
 
@@ -46,8 +46,8 @@ namespace MvvmCross.Binding.Mac.Target
             var view = target as NSSegmentedControl;
             if (view == null)
                 return;
-
-            view.SelectedSegment = (int)value;
+            
+            view.SelectSegment((int)value);
         }
 
         protected override void Dispose(bool isDisposing)
@@ -56,10 +56,10 @@ namespace MvvmCross.Binding.Mac.Target
             if (isDisposing)
             {
                 var view = View;
-                if (view != null && this._subscribed)
+                if (view != null && _subscribed)
                 {
                     view.Activated -= HandleValueChanged;
-                    this._subscribed = false;
+                    _subscribed = false;
                 }
             }
         }

@@ -10,6 +10,9 @@ using MvvmCross.Localization;
 using UIKit;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Plugins;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Forms.Bindings.Target;
+using MvvmCross.Forms.Views;
 
 namespace MvvmCross.Forms.iOS
 {
@@ -42,12 +45,13 @@ namespace MvvmCross.Forms.iOS
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public MvxFormsApplication FormsApplication {
+        public MvxFormsApplication FormsApplication
+        {
             get
             {
                 if (!Xamarin.Forms.Forms.IsInitialized)
                     Xamarin.Forms.Forms.Init();
-                if(_formsApplication == null)
+                if (_formsApplication == null)
                     _formsApplication = CreateFormsApplication();
                 return _formsApplication;
             }
@@ -70,6 +74,18 @@ namespace MvvmCross.Forms.iOS
                 };
                 return toReturn;
             }
+        }
+
+        protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+        {
+            MvxFormsSetupHelper.FillTargetFactories(registry);
+            base.FillTargetFactories(registry);
+        }
+
+        protected override void FillBindingNames(Binding.BindingContext.IMvxBindingNameRegistry registry)
+        {
+            MvxFormsSetupHelper.FillBindingNames(registry);
+            base.FillBindingNames(registry);
         }
 
         protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsBindingBuilder();

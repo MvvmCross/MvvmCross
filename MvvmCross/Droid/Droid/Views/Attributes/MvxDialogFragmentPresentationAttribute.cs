@@ -28,14 +28,10 @@ namespace MvvmCross.Droid.Views.Attributes
             Cancelable = cancelable;
         }
 
+        public static bool DefaultCancelable = true;
         /// <summary>
         ///     Indicates if the dialog can be canceled
         /// </summary>
-        public bool Cancelable { get; set; } = true;
-
-        /// <summary>
-        /// Indicates if the fragment can be cached. For dialogs it is false by default.
-        /// </summary>
-        public override bool IsCacheableFragment { get; set; } = false;
+        public bool Cancelable { get; set; } = DefaultCancelable;
     }
 }
