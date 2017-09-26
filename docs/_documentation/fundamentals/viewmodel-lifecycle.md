@@ -31,7 +31,7 @@ void ViewDestroy();
 
 The MvxViewController, MvxFragment(s), MvxActivity and the UWP views will call those methods when the platform specific events are fired. This will give you a more refined control of the ViewModel and its state. There may be certain bindings that you want to update or resources that you want to clean up in these calls.
 
-However, it should be noted that it is not 100% reliable, due to the natural complex process of any View in different contexts. It _will_ work for most of the apps and most of the cases. But we aware that we don't know what you plan to do in the lifecycle of your app and what whether that could interfere with the called order of the viewmodel lifecycle events.
+However, it should be noted that it is not 100% reliable, due to the natural complex process of any View in different contexts. It _will_ work for most of the apps and most of the cases. But we aware that we don't know what you plan to do in the lifecycle of your app!
 
 ## Mapping view event to ViewModel events
 
