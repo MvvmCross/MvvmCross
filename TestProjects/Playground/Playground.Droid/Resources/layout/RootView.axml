@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:local="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/main_frame"
@@ -30,6 +30,11 @@
 		android:layout_marginTop="10dp"
 		android:text="Show Master/Detail"
 		local:MvxBind="Click ShowSplitCommand;" />
+	<Button android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dp"
+		android:text="Show Override Attribute"
+		local:MvxBind="Click ShowOverrideAttributeCommand" />
 	<Button android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="10dp"

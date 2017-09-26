@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -26,10 +26,14 @@ namespace Playground.Droid.Views
 
         public MvxBasePresentationAttribute PresentationAttribute()
         {
-            return new MvxDialogFragmentPresentationAttribute
-            {
-                Cancelable = true
-            };
+            return new MvxFragmentPresentationAttribute(
+                typeof(RootViewModel),
+                Resource.Id.content_frame,
+                false,
+                Resource.Animation.abc_fade_in,
+                Resource.Animation.abc_fade_out,
+                Resource.Animation.abc_fade_in,
+                Resource.Animation.abc_fade_out);
         }
     }
 }
