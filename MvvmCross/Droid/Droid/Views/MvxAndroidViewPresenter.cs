@@ -239,14 +239,7 @@ namespace MvvmCross.Droid.Views
                 if (attribute == null)
                     attribute = attributes.FirstOrDefault();
 
-                if (attribute.ViewType?.GetInterfaces().OfType<IMvxOverridePresentationAttribute>().FirstOrDefault() is IMvxOverridePresentationAttribute view)
-                {
-                    var presentationAttribute = view.PresentationAttribute();
-
-                    if (presentationAttribute != null)
-                        return presentationAttribute;
-                }
-                return attribute;
+                return GetOverridePresentationAttribute(attribute.ViewType) ?? attribute;
             }
 
             return CreateAttributeForViewModel(viewModelType);
@@ -258,19 +251,17 @@ namespace MvvmCross.Droid.Views
 
             if (viewType.IsSubclassOf(typeof(DialogFragment)))
             {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-                    $"Assuming DialogFragment presentation");
+                MvxTrace.Trace("PresentationAttribute not found for {0}. Assuming DialogFragment presentation", viewModelType.Name);
                 return new MvxDialogFragmentPresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
+
             if (viewType.IsSubclassOf(typeof(Fragment)))
             {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-                    $"Assuming Fragment presentation");
+                MvxTrace.Trace("PresentationAttribute not found for {0}. Assuming Fragment presentation", viewModelType.Name);
                 return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), Android.Resource.Id.Content) { ViewType = viewType, ViewModelType = viewModelType };
             }
 
-            MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-                    $"Assuming Activity presentation");
+            MvxTrace.Trace("PresentationAttribute not found for {0}. Assuming Activity presentation", viewModelType.Name);
             return new MvxActivityPresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
         }
 
@@ -319,9 +310,9 @@ namespace MvvmCross.Droid.Views
         {
             IMvxAndroidViewModelRequestTranslator requestTranslator = Mvx.Resolve<IMvxAndroidViewModelRequestTranslator>();
 
-            if (request is MvxViewModelInstanceRequest)
+            if (request is MvxViewModelInstanceRequest viewModelInstanceRequest)
             {
-                var instanceRequest = requestTranslator.GetIntentWithKeyFor(((MvxViewModelInstanceRequest)request).ViewModelInstance);
+                var instanceRequest = requestTranslator.GetIntentWithKeyFor(viewModelInstanceRequest.ViewModelInstance);
                 return instanceRequest.Item1;
             }
             return requestTranslator.GetIntentFor(request);
@@ -368,8 +359,8 @@ namespace MvvmCross.Droid.Views
             var currentHostViewModelType = GetCurrentActivityViewModelType();
             if (attribute.ActivityHostViewModelType != currentHostViewModelType)
             {
-                MvxTrace.Trace($"Activity host with ViewModelType {attribute.ActivityHostViewModelType} is not CurrentTopActivity. " +
-                               $"Showing Activity before showing Fragment for {attribute.ViewModelType}");
+                MvxTrace.Trace("Activity host with ViewModelType {0} is not CurrentTopActivity. Showing Activity before showing Fragment for {1}",
+                    attribute.ActivityHostViewModelType, attribute.ViewModelType);
                 _pendingRequest = request;
                 ShowHostActivity(attribute);
             }
@@ -449,6 +440,7 @@ namespace MvvmCross.Droid.Views
                     ft.AddSharedElement(item.Value, item.Key);
                 }
             }
+
             if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
             {
                 if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
@@ -456,6 +448,7 @@ namespace MvvmCross.Droid.Views
                 else
                     ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
             }
+
             if (attribute.TransitionStyle != int.MinValue)
                 ft.SetTransitionStyle(attribute.TransitionStyle);
 
@@ -472,9 +465,9 @@ namespace MvvmCross.Droid.Views
             MvxViewModelRequest request)
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
-            var dialog = (DialogFragment)CreateFragment(attribute, fragmentName);
+            IMvxFragmentView mvxFragmentView = CreateFragment(attribute, fragmentName);
+            var dialog = (DialogFragment)mvxFragmentView;
 
-            var mvxFragmentView = (IMvxFragmentView)dialog;
             // MvxNavigationService provides an already instantiated ViewModel here,
             // therefore just assign it
             if (request is MvxViewModelInstanceRequest instanceRequest)
@@ -662,9 +655,33 @@ namespace MvvmCross.Droid.Views
         protected virtual Fragment GetFragmentByViewType(Type type)
         {
             var fragmentName = FragmentJavaName(type);
-            var fragment = CurrentFragmentManager.FindFragmentByTag(fragmentName);
+            return CurrentFragmentManager.FindFragmentByTag(fragmentName);
+        }
 
-            return fragment;
+        protected virtual MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewType)
+        {
+            if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
+            {
+                var viewInstance = Activator.CreateInstance(viewType) as Java.Lang.Object;
+                using (viewInstance)
+                {
+                    var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute();
+
+                    if (presentationAttribute == null)
+                    {
+                        MvxTrace.Warning("Override PresentationAttribute null. Falling back to existing attribute.");
+                    }
+                    else
+                    {
+                        if (presentationAttribute.ViewType == null)
+                            presentationAttribute.ViewType = viewType;
+
+                        return presentationAttribute;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }
