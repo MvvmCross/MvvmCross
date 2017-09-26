@@ -12,6 +12,7 @@ using MvvmCross.Uwp.Views;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Plugins;
 using XamlControls = Windows.UI.Xaml.Controls;
+using MvvmCross.Binding.Bindings.Target.Construction;
 
 namespace MvvmCross.Forms.Uwp
 {
@@ -64,18 +65,18 @@ namespace MvvmCross.Forms.Uwp
             return presenter;
         }
 
-        protected override void InitializeLastChance()
+        protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
-            InitializeBindingBuilder();
-            base.InitializeLastChance();
+            MvxFormsSetupHelper.FillTargetFactories(registry);
+            base.FillTargetFactories(registry);
         }
 
-        protected virtual void InitializeBindingBuilder()
+        protected override void FillBindingNames(Binding.BindingContext.IMvxBindingNameRegistry registry)
         {
-            MvxBindingBuilder bindingBuilder = CreateBindingBuilder();
-            bindingBuilder.DoRegistration();
+            MvxFormsSetupHelper.FillBindingNames(registry);
+            base.FillBindingNames(registry);
         }
 
-        protected virtual MvxBindingBuilder CreateBindingBuilder() => new MvxFormsBindingBuilder();
+        protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsBindingBuilder();
     }
 }

@@ -52,6 +52,11 @@ namespace MvvmCross.Binding.Mac
                 typeof(NSSegmentedControl),
                 MvxMacPropertyBinding.NSSegmentedControl_SelectedSegment);
 
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxNSPopUpButtonSelectedTagTargetBinding),
+                typeof(NSPopUpButton),
+                MvxMacPropertyBinding.NSPopUpButton_SelectedTag);
+            
             registry.RegisterCustomBindingFactory<NSDatePicker>(
                 MvxMacPropertyBinding.NSDatePicker_Time,
                 view => new MvxNSDatePickerTimeTargetBinding(view));
@@ -76,6 +81,11 @@ namespace MvvmCross.Binding.Mac
                 MvxMacPropertyBinding.NSButton_State);
 
             registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxNSMenuItemOnTargetBinding),
+                typeof(NSMenuItem),
+                MvxMacPropertyBinding.NSMenuItem_State);
+
+            registry.RegisterPropertyInfoBindingFactory(
                 typeof(MvxNSSearchFieldTextTargetBinding),
                 typeof(NSSearchField),
                 MvxMacPropertyBinding.NSSearchField_Text);
@@ -83,6 +93,11 @@ namespace MvvmCross.Binding.Mac
             registry.RegisterCustomBindingFactory<NSButton>(
                 MvxMacPropertyBinding.NSButton_Title,
                 button => new MvxNSButtonTitleTargetBinding(button));
+
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding),
+                typeof(NSTabViewController),
+                MvxMacPropertyBinding.NSTabViewController_SelectedTabViewItemIndex);
             
             /* Todo: Address this for trackpad
             registry.RegisterCustomBindingFactory<NSView>("Tap", view => new MvxNSViewTapTargetBinding(view));
@@ -111,6 +126,7 @@ namespace MvvmCross.Binding.Mac
 
             registry.AddOrOverwrite(typeof(NSButton), nameof(NSButton.Activated));
             registry.AddOrOverwrite(typeof(NSButtonCell), nameof(NSButtonCell.Activated));
+            registry.AddOrOverwrite(typeof(NSMenuItem), nameof(NSMenuItem.Activated));
             registry.AddOrOverwrite(typeof(NSSearchField), MvxMacPropertyBinding.NSSearchField_Text);
             registry.AddOrOverwrite(typeof(NSTextField), MvxMacPropertyBinding.NSTextField_StringValue);
             registry.AddOrOverwrite(typeof(NSTextView), MvxMacPropertyBinding.NSTextView_StringValue);
@@ -118,6 +134,8 @@ namespace MvvmCross.Binding.Mac
             registry.AddOrOverwrite(typeof(NSDatePicker), MvxMacPropertyBinding.NSDatePicker_Date);
             registry.AddOrOverwrite(typeof(NSSlider), MvxMacPropertyBinding.NSSlider_IntValue);
             registry.AddOrOverwrite(typeof(NSSegmentedControl), MvxMacPropertyBinding.NSSegmentedControl_SelectedSegment);
+            registry.AddOrOverwrite(typeof(NSPopUpButton), MvxMacPropertyBinding.NSPopUpButton_SelectedTag);
+            registry.AddOrOverwrite(typeof(NSTabViewController), MvxMacPropertyBinding.NSTabViewController_SelectedTabViewItemIndex);
 
             //registry.AddOrOverwrite(typeof(MvxCollectionViewSource), "ItemsSource");
             //registry.AddOrOverwrite(typeof(MvxTableViewSource), "ItemsSource");

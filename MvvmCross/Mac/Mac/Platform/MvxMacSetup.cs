@@ -151,7 +151,7 @@ namespace MvvmCross.Mac.Platform
             return bindingBuilder;
         }
 
-        protected virtual void FillBindingNames(IMvxBindingNameRegistry obj)
+        protected virtual void FillBindingNames(IMvxBindingNameRegistry registry)
         {
             // this base class does nothing
         }

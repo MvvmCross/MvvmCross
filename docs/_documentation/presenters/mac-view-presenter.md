@@ -10,7 +10,7 @@ The default presenter for Mac named `MvxMacViewPresenter` works in a similar way
 
 It offers out of the box support for the following navigation patterns / strategies:
 
-- Multiple windows
+- Multiple windows by properties or via storyboard
 - Content inside windows
 - Modals
 - Sheets
@@ -35,6 +35,17 @@ You can customize how the window will look through the following properties:
 - PositionY: float, default value is 200.
 - Width: float, default value is 600.
 - Height: float, default value is 400.
+
+To use a window generated in Storyboard, click on the storyboard and create a new Window Controller in Interface Builder. You may delete the generated View Controller. Back in Visual Studio for Mac, change the resulting _NSWindowController_ to a _MvxWindowController_. Add two parameters to the _MvxWindowPresentationAttribute_, the WindowControllerName followed by the StoryboardName, e.g.,
+```c#
+[MvxWindowPresentation("CustomWindow", "Main")]
+```
+
+Properties introduced inside the attribute will override the storyboard properties, e.g.,
+```c#
+[MvxWindowPresentation("CustomWindow", "Main", Width = 800)]
+```
+will set the CustomWindow Width to 800.
 
 ### MvxContentPresentationAttribute
 
@@ -90,7 +101,7 @@ You can also define new attributes to satisfy your needs. The steps to do so are
 3. Override the method `RegisterAttributeTypes` and add a registry to the dictionary like this:
 
 ```c#
-_attributeTypesToShowMethodDictionary.Add(
+AttributeTypesToShowMethodDictionary.Add(
     typeof(MyCustomModePresentationAttribute),
     (vc, attribute, request) => ShowMyCustomModeViewController(vc, (MyCustomPresentationAttribute)attribute, request));
 ```

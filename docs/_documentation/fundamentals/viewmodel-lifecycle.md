@@ -9,10 +9,11 @@ order: 5
 
 Alongside [a new Navigation Service](https://www.mvvmcross.com/documentation/fundamentals/navigation), MvvmCross provides a new lifecycle for ViewModels with many enhancements such as async initialization. The current lifecycle includes:
 
-1. Construction
-2. Initialization
+1. Construction: Called when the object is instantiated. You can use Dependency Injection here to introduce all dependencies!
+2. Prepare: Called before the navigation is done. You can use this method to receive and store all parameters (it is your responsibility to handle them).
+3. Initialize: Called right after the navigation is done. This method returns a Task, which means you can mark it as async and use the await safely. If this method fails, the `Navigate` call that you are probably awaiting will fail, so you might want to catch that exception.
 
-Also note that starting from MvvmCross 5.0 ViewModels will be coupled to the lifecycle of the view. This means that the ViewModel has the following methods available:
+Also note that starting from MvvmCross 5.0, ViewModels will be coupled to the lifecycle of the view. This means that the ViewModel has the following methods available:
 
 ```c#
 void ViewCreated();
@@ -28,11 +29,11 @@ void ViewDisappeared();
 void ViewDestroy();
 ```
 
-The MvxViewController, MvxFragment(s), MvxActivity and the UWP views will call those methods open the platform specific events that are fired. This will give us a more refined control of the ViewModel and the state of its lifecycle. There may be binding that you want to update or resources to clean up, these lifecycle events can help with that.
+The MvxViewController, MvxFragment(s), MvxActivity and the UWP views will call those methods when the platform specific events are fired. This will give you a more refined control of the ViewModel and its state. There may be certain bindings that you want to update or resources that you want to clean up in these calls.
 
-It should be noted however that it is not 100% reliable but it should work for most of the apps. We don't know what you do in the lifecycle of your app and what could interfere with the called order of the viewmodel lifecycle events.
+However, it should be noted that it is not 100% reliable, due to the natural complex process of any View in different contexts. It _will_ work for most of the apps and most of the cases. But we aware that we don't know what you plan to do in the lifecycle of your app and what whether that could interfere with the called order of the viewmodel lifecycle events.
 
-## Mapping view event to viewmodel events
+## Mapping view event to ViewModel events
 
 There has been a thread going on on the [Xamarin forums](https://forums.xamarin.com/discussion/comment/240043/) where the implementation is discussed of this functionality. MvvmCross has based its lifecycle support on this thread and those events. 
 

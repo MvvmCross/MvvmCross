@@ -25,11 +25,11 @@ namespace MvvmCross.Binding.Mac.Target
             }
             else
             {
-                checkBox.Activated += HandleCheckBoxAction;
+                checkBox.Activated += HandleButtonCheckBoxAction;
             }
         }
 
-        private void HandleCheckBoxAction(object sender, EventArgs e)
+        private void HandleButtonCheckBoxAction(object sender, EventArgs e)
         {
             var view = View;
             if (view == null)
@@ -66,7 +66,7 @@ namespace MvvmCross.Binding.Mac.Target
                 var view = View;
                 if (view != null)
                 {
-                    view.Activated -= HandleCheckBoxAction;
+                    view.Activated -= HandleButtonCheckBoxAction;
                 }
             }
         }
