@@ -30,16 +30,16 @@ The presenter uses a set of `PresentationAttributes` to define how a view will b
 
 ### MvxActivityPresentationAttribute
 
-Use this attribute if you want to display an Activity in your application. An Activity will be the root of your application and also can act as a host for fragments. Alongside the attribute, your view can customize the presentation by using these attribute properties:
+Use this attribute if you want to display an Activity in your application. An Activity will be the root of your application and can also act as a host for fragments. Alongside the attribute, your view can customize the presentation by using these attribute properties:
 
 - Extras: Use this `Bundle` to add any extra parameters to the Activity Intent.
 - SharedElements: Consists on a `IDictionary<string, View>` that you can use to add shared view elements to the transition. When using the AppCompat version, the string keys are not relevant.
 
 ### MvxFragmentPresentationAttribute
 
-A Fragment is hosted inside an Activity (or a fragment). By using this ViewPresenter, you can decide whether to make all of your screens Activities, or to use an Activity host and many Fragments inside of it. The framework will then help you setting up the navigation and backstack.
+A Fragment is hosted inside an Activity (or a fragment). By using this ViewPresenter, you can decide whether to make all of your screens Activities, or to use an Activity host and many Fragments inside of it. MvvmCross can handle both scenarios smoothly.
 
-The ViewPresenter supports also nested fragments in one level: This means you can show fragments inside of a Fragment without extending any code!.
+The ViewPresenter supports also nested fragments in one level: This means you can show fragments inside of a Fragment without extending any code!
 
 Use this attribute over a Fragment view class and customize its presentation by using these properties:
 
@@ -57,20 +57,20 @@ Use this attribute over a Fragment view class and customize its presentation by 
 
 ### MvxDialogFragmentPresentationAttribute
 
-This attribute extends `MvxFragmentPresentationAttribute`, which means you can use all the properties it provedes to customize the presentation. Use this attribute over a FragmentDialog view class to display a dialog and take advantage of even more customization with this property:
+This attribute extends `MvxFragmentPresentationAttribute`, which means you can use all the properties it provides to customize the presentation. Use this attribute over a FragmentDialog view class to display a dialog and take advantage of even more customization with this property:
 
 - Cancelable: Default value is `true`. This property indicates if the dialog can be canceled.
 
 ### MvxViewPagerFragmentPresentationAttribute (AppCompat only)
 
-This attribute extends `MvxFragmentPresentationAttribute`, which means you can use all the properties it provedes to customize the presentation. use this attribute over a Fragment view class to display a fragment inside of a ViewPager and take advantage of even more customization with these properties:
+This attribute extends `MvxFragmentPresentationAttribute`, which means you can use all the properties it provides to customize the presentation. use this attribute over a Fragment view class to display a fragment inside of a ViewPager and take advantage of even more customization with these properties:
 
 - Title: Title for the ViewPager. It will also be used as Title for the TabLayout when using MvxTabLayoutPresentationAttribute.
 - ViewPagerResourceId: The resource id for the ViewPager that will be used as host.
 
 ### MvxTabLayoutPresentationAttribute (AppCompat only)
 
-This attribute extends `MvxViewPagerFragmentPresentationAttribute`, which means you can use all the properties it provedes to customize the presentation. use this attribute over a Fragment view class to display a fragment inside of a ViewPager with TabLayout and take advantage of even more customization with this property:
+This attribute extends `MvxViewPagerFragmentPresentationAttribute`, which means you can use all the properties it provides to customize the presentation. use this attribute over a Fragment view class to display a fragment inside of a ViewPager with TabLayout and take advantage of even more customization with this property:
 
 - TabLayoutResourceId: The resource id for the TabLayout that will be used.
 
@@ -106,7 +106,7 @@ The presenter is completely extensible! You can override any attribute and custo
 You can also define new attributes to satisfy your needs. The steps to do so are:
 
 1. Add a new attribute that extends `MvxBasePresentationAttribute`
-2. Subclass `MvxAndroidViewPresente` or `MvxAppCompatViewPresenter` and make it the presenter of your application in Setup.cs (by overriding the method `CreatePresenter`).
+2. Subclass `MvxAndroidViewPresenter` or `MvxAppCompatViewPresenter` and make it the presenter of your application in Setup.cs (by overriding the method `CreatePresenter`).
 3. Override the method `RegisterAttributeTypes` and add a registry to the dictionary like this:
 
 ```c#
