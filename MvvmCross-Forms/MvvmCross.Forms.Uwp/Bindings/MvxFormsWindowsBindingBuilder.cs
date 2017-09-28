@@ -1,4 +1,4 @@
-﻿// MvxWindowsBindingBuilder.cs
+// MvxWindowsBindingBuilder.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -36,7 +36,7 @@ namespace MvvmCross.Forms.Uwp.Bindings
             Mvx.RegisterSingleton(creator);
         }
 
-        protected virtual IMvxBindingCreator CreateBindingCreator()
+        protected new virtual Forms.Bindings.IMvxBindingCreator CreateBindingCreator()
         {
             return new MvxFormsBindingCreator();
         }
