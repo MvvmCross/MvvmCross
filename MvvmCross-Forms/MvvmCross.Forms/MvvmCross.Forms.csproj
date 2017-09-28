@@ -40,6 +40,9 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bindings\La.n.g.cs" />
+    <Compile Include="Markup\MvxBind.cs" />
+    <Compile Include="Markup\MvxLang.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\IMvxContentPage.cs" />
     <Compile Include="Presenters\IMvxFormsPageLoader.cs" />
     <Compile Include="ViewModels\IMvxMasterDetailViewModel.cs" />
