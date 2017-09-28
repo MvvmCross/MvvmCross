@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<core:MvxContentPage x:TypeArguments="viewModels:ListViewModel"
+<views:MvxContentPage x:TypeArguments="viewModels:ListViewModel"
                      xmlns="http://xamarin.com/schemas/2014/forms"
                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                     xmlns:core="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
                      xmlns:viewModels="clr-namespace:MvxBindingsExample.ViewModels;assembly=MvxBindingsExample"
                      xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
@@ -18,7 +17,7 @@
                  </DataTemplate>
              </ListView.ItemTemplate>
          </views:MvxListView>
-</core:MvxContentPage>
+</views:MvxContentPage>
 
 
 

@@ -27,7 +27,7 @@ namespace Example.Pages
                     }
                 }
             };
-            if (Device.RuntimePlatform == Device.Windows || Device.RuntimePlatform == Device.WinPhone)
+            if (Device.RuntimePlatform == Device.WinRT || Device.RuntimePlatform == Device.WinPhone)
                 Padding = new Thickness(Padding.Left, Padding.Top, Padding.Right, 95);
         }
     }

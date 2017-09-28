@@ -13,7 +13,7 @@ namespace MasterDetailExample.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart<MainViewModel>();
+            RegisterNavigationServiceAppStart<MainViewModel>();
         }
     }
 }
