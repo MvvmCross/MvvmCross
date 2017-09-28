@@ -11,7 +11,7 @@ namespace Example.Pages
             Padding = new Thickness(10);
 
             // see https://forums.xamarin.com/discussion/45111/has-anybody-managed-to-get-a-toolbar-working-on-winrt-windows-using-xf
-            if (Device.RuntimePlatform == Device.Windows || Device.RuntimePlatform == Device.WinPhone)
+            if (Device.RuntimePlatform == Device.WinRT || Device.RuntimePlatform == Device.WinPhone)
                 Padding = new Thickness(Padding.Left, Padding.Top, Padding.Right, 95);
 
             ForceLayout();

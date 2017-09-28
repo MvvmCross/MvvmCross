@@ -42,8 +42,6 @@
     <Compile Include="Bindings\La.n.g.cs" />
     <Compile Include="Markup\MvxBind.cs" />
     <Compile Include="Markup\MvxLang.cs" />
-    <Compile Include="Core\IMvxContentPage.cs" />
-    <Compile Include="Presenters\IMvxFormsPageLoader.cs" />
     <Compile Include="ViewModels\IMvxMasterDetailViewModel.cs" />
     <Compile Include="ViewModels\MvxMasterDetailViewModel.cs" />
     <Compile Include="Bindings\Bi.n.d.cs" />
