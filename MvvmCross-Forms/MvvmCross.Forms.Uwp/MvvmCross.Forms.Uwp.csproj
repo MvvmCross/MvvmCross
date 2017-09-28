@@ -11,7 +11,7 @@
     <AssemblyName>MvvmCross.Forms.Uwp</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -53,6 +53,10 @@
     <Compile Include="Bindings\MvxFormsWindowsBindingBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MvvmCross\Binding\UWP\MvvmCross.Binding.Uwp.csproj">
+      <Project>{637533ee-756b-4817-94b2-7c1e56132208}</Project>
+      <Name>MvvmCross.Binding.Uwp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
       <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
       <Name>MvvmCross.Binding</Name>
@@ -74,11 +78,7 @@
       <Name>MvvmCross.Forms</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Platform\" />
-    <Folder Include="Views\" />
-    <Folder Include="Bindings\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
