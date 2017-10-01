@@ -142,6 +142,32 @@ namespace MvvmCross.Platform.IoC
             public ResolverType ResolveType => ResolverType.Singleton;
         }
 
+        public class ConstructingOpenGenericResolver : IResolver
+        {
+            private readonly Type _genericTypeDefinition;
+            private readonly MvxSimpleIoCContainer _parent;
+
+            private Type[] _genericTypeParameters;
+
+            public ConstructingOpenGenericResolver(Type genericTypeDefinition, MvxSimpleIoCContainer parent)
+            {
+                _genericTypeDefinition = genericTypeDefinition;
+                _parent = parent;
+            }
+
+            public void SetGenericTypeParameters(Type[] genericTypeParameters)
+            {
+                _genericTypeParameters = genericTypeParameters;
+            }
+
+            public object Resolve()
+            {
+                return _parent.IoCConstruct(_genericTypeDefinition.MakeGenericType(_genericTypeParameters));
+            }
+
+            public ResolverType ResolveType => ResolverType.DynamicPerResolve;
+        }
+
         public bool CanResolve<T>()
             where T : class
         {
@@ -268,7 +294,12 @@ namespace MvvmCross.Platform.IoC
 
         public void RegisterType(Type tInterface, Type tConstruct)
         {
-            var resolver = new ConstructingResolver(tConstruct, this);
+            IResolver resolver = null;
+            if (tInterface.GetTypeInfo().IsGenericTypeDefinition)
+                resolver = new ConstructingOpenGenericResolver(tConstruct, this);
+            else
+                resolver = new ConstructingResolver(tConstruct, this);
+
             InternalSetResolver(tInterface, resolver);
         }
 
@@ -364,6 +395,13 @@ namespace MvvmCross.Platform.IoC
             action();
         }
 
+        public void CleanAllResolvers()
+        {
+            this._resolvers.Clear();
+            this._waiters.Clear();
+            this._circularTypeDetection.Clear();
+        }
+
         public enum ResolverType
         {
             DynamicPerResolve,
@@ -388,7 +426,7 @@ namespace MvvmCross.Platform.IoC
         private bool InternalTryResolve(Type type, ResolverType? requiredResolverType, out object resolved)
         {
             IResolver resolver;
-            if (!_resolvers.TryGetValue(type, out resolver))
+            if (!this.TryGetResolver(type, out resolver))
             {
                 resolved = type.CreateDefault();
                 return false;
@@ -401,6 +439,17 @@ namespace MvvmCross.Platform.IoC
             }
 
             return InternalTryResolve(type, resolver, out resolved);
+        }
+
+        private bool TryGetResolver(Type type, out IResolver resolver)
+        {
+            if (_resolvers.TryGetValue(type, out resolver))
+                return true;
+
+            if (!type.GetTypeInfo().IsGenericType)
+                return false;
+
+            return _resolvers.TryGetValue(type.GetTypeInfo().GetGenericTypeDefinition(), out resolver);
         }
 
         private bool ShouldDetectCircularReferencesFor(IResolver resolver)
@@ -442,6 +491,10 @@ namespace MvvmCross.Platform.IoC
 
             try
             {
+                var openGenericResolver = resolver as ConstructingOpenGenericResolver;
+                if (openGenericResolver != null)
+                    openGenericResolver.SetGenericTypeParameters(type.GetTypeInfo().GenericTypeArguments);
+
                 var raw = resolver.Resolve();
                 if (!type.IsInstanceOfType(raw))
                 {

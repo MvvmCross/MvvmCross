@@ -1,4 +1,4 @@
-// MvxTypeExtensions.cs
+﻿// MvxTypeExtensions.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -104,6 +104,11 @@ namespace MvvmCross.Platform.IoC
                 return types.Where(x => !except.Contains(x));
             }
         }
+
+        public static bool IsGenericPartiallyClosed(this Type type) =>
+            type.GetTypeInfo().IsGenericType
+            && type.GetTypeInfo().ContainsGenericParameters
+            && type.GetGenericTypeDefinition() != type;
 
         public class ServiceTypeAndImplementationTypePair
         {
