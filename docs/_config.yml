@@ -89,8 +89,6 @@ menu:
     url: "/documentation"
   - title: "Support"
     url: "/support"
-  - title: ".NET Summer Hackfest"
-    url: "/hackfest"
 # End
 
 category_order:
