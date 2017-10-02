@@ -21,7 +21,7 @@ namespace MvvmCross.iOS.Views
             : base(eventSource)
         {
             if (!(eventSource is IMvxIosView))
-                throw new ArgumentException("eventSource", "eventSource should be a IMvxIosView");
+                throw new ArgumentException(nameof(eventSource), $"{nameof(eventSource)} should be a {nameof(IMvxIosView)}");
 
             IosView.BindingContext = Mvx.Resolve<IMvxBindingContext>();
         }
@@ -30,8 +30,7 @@ namespace MvvmCross.iOS.Views
         {
             if (IosView == null)
             {
-                MvxTrace.Warning("iosView is null for clearup of bindings in type {0}",
-                               IosView?.GetType().Name);
+                MvxTrace.Warning($"{nameof(IosView)} is null for clearup of bindings");
                 return;
             }
             IosView.ClearAllBindings();
