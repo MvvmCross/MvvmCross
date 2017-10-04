@@ -86,9 +86,26 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     if (attribute == null)
                     {
                         var currentActivityHostViewModelType = GetCurrentActivityViewModelType();
-                        foreach (var item in fragmentAttributes.Where(att => att.ActivityHostViewModelType != null))
+                        foreach (var item in fragmentAttributes.Where(att => att.ActivityHostViewModelType != null && att.ActivityHostViewModelType == currentActivityHostViewModelType))
                         {
-                            if (CurrentActivity.FindViewById(item.FragmentContentId) != null && item.ActivityHostViewModelType == currentActivityHostViewModelType)
+                            // check for MvxTabLayoutPresentationAttribute 
+                            if (item is MvxTabLayoutPresentationAttribute tabLayoutAttribute
+                                && CurrentActivity.FindViewById(tabLayoutAttribute.TabLayoutResourceId) != null)
+                            {
+                                attribute = item;
+                                break;
+                            }
+
+                            // check for MvxViewPagerFragmentPresentationAttribute 
+                            if (item is MvxViewPagerFragmentPresentationAttribute viewPagerAttribute
+                                && CurrentActivity.FindViewById(viewPagerAttribute.ViewPagerResourceId) != null)
+                            {
+                                attribute = item;
+                                break;
+                            }
+
+                            // check for MvxFragmentPresentationAttribute
+                            if (CurrentActivity.FindViewById(item.FragmentContentId) != null)
                             {
                                 attribute = item;
                                 break;
