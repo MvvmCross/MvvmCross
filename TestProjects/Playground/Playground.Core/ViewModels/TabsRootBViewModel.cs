@@ -1,35 +1,29 @@
-﻿using System.Threading.Tasks;
-using System;
-using System.Windows.Input;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
-using System.Collections.Generic;
 using MvvmCross.Platform.Platform;
 
 namespace Playground.Core.ViewModels
 {
-    public class TabsRootViewModel : MvxViewModel
+    public class TabsRootBViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
 
-        public TabsRootViewModel(IMvxNavigationService navigationService)
+        public TabsRootBViewModel(IMvxNavigationService navigationService)
         {
             _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
-
             ShowInitialViewModelsCommand = new MvxAsyncCommand(ShowInitialViewModels);
-            ShowTabsRootBCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<TabsRootBViewModel>());
         }
 
         public IMvxAsyncCommand ShowInitialViewModelsCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowTabsRootBCommand { get; private set; }
 
         private async Task ShowInitialViewModels()
         {
             var tasks = new List<Task>();
             tasks.Add(_navigationService.Navigate<Tab1ViewModel, string>("test"));
             tasks.Add(_navigationService.Navigate<Tab2ViewModel>());
-            tasks.Add(_navigationService.Navigate<Tab3ViewModel>());
             await Task.WhenAll(tasks);
         }
 
