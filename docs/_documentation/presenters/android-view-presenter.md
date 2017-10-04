@@ -68,11 +68,15 @@ This attribute extends `MvxFragmentPresentationAttribute`, which means you can u
 - Title: Title for the ViewPager. It will also be used as Title for the TabLayout when using MvxTabLayoutPresentationAttribute.
 - ViewPagerResourceId: The resource id for the ViewPager that will be used as host.
 
+Note: If you intend to display your fragment in more than one host activity, please remember to set the property ActivityHostViewModelType on each attribute!
+
 ### MvxTabLayoutPresentationAttribute (AppCompat only)
 
 This attribute extends `MvxViewPagerFragmentPresentationAttribute`, which means you can use all the properties it provides to customize the presentation. use this attribute over a Fragment view class to display a fragment inside of a ViewPager with TabLayout and take advantage of even more customization with this property:
 
 - TabLayoutResourceId: The resource id for the TabLayout that will be used.
+
+Note: If you intend to display your fragment in more than one host activity, please remember to set the property ActivityHostViewModelType on each attribute!
 
 ## Views without attributes: Default values
 
