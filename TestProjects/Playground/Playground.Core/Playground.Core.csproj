@@ -52,6 +52,7 @@
     <Compile Include="ViewModels\NestedModalViewModel.cs" />
     <Compile Include="ViewModels\NestedChildViewModel.cs" />
     <Compile Include="Models\Modes.cs" />
+    <Compile Include="ViewModels\TabsRootBViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
