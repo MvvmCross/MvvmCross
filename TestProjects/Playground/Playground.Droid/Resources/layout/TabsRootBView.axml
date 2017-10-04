@@ -12,19 +12,13 @@
 		<android.support.v7.widget.Toolbar android:id="@+id/toolbar"
 			android:layout_width="match_parent"
 			android:layout_height="?attr/actionBarSize"
-			android:background="?attr/colorPrimary"
+			android:background="?attr/colorPrimaryDark"
 			local:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-			local:layout_scrollFlags="scroll|enterAlways">
-			<Button android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="10dp"
-				android:layout_alignParentRight="true"
-				android:text="Show TabsRootB"
-				local:MvxBind="Click ShowTabsRootBCommand;" />
-		</android.support.v7.widget.Toolbar>
+			local:layout_scrollFlags="scroll|enterAlways" />
 		<android.support.design.widget.TabLayout android:id="@+id/tabs"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:background="?attr/colorPrimaryDark"
 			android:paddingLeft="16dp"
 			local:tabGravity="center"
 			local:tabMode="scrollable" />
