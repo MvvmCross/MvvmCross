@@ -404,6 +404,8 @@ namespace MvvmCross.Droid.Views
             }
             fragment = fragment ?? CreateFragment(attribute, fragmentName);
 
+            var fragmentView = fragment.ToFragment();
+
             // MvxNavigationService provides an already instantiated ViewModel here,
             // therefore just assign it
             if (request is MvxViewModelInstanceRequest instanceRequest)
@@ -416,7 +418,6 @@ namespace MvvmCross.Droid.Views
                 var serializedRequest = NavigationSerializer.Serializer.SerializeObject(request);
                 bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
 
-                var fragmentView = fragment.ToFragment();
                 if (fragmentView != null)
                 {
                     if (fragmentView.Arguments == null)
@@ -438,12 +439,12 @@ namespace MvvmCross.Droid.Views
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
 
-            OnFragmentChanging(ft, attribute);
+            OnFragmentChanging(ft, fragmentView, attribute);
 
             ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
             ft.CommitAllowingStateLoss();
 
-            OnFragmentChanged(ft, attribute);
+            OnFragmentChanged(ft, fragmentView, attribute);
         }
 
 		protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, MvxFragmentPresentationAttribute attribute)
@@ -468,17 +469,17 @@ namespace MvvmCross.Droid.Views
 				ft.SetTransitionStyle(attribute.TransitionStyle);
 		}
 
-		protected virtual void OnFragmentChanged(FragmentTransaction ft, MvxFragmentPresentationAttribute attribute)
+		protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
 		{
 
 		}
 
-		protected virtual void OnFragmentChanging(FragmentTransaction ft, MvxFragmentPresentationAttribute attribute)
+		protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
 		{
 
 		}
 
-		protected virtual void OnFragmentPopped(FragmentTransaction ft, MvxFragmentPresentationAttribute attribute)
+		protected virtual void OnFragmentPopped(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
 		{
 
 		}
@@ -618,7 +619,7 @@ namespace MvvmCross.Droid.Views
                 var fragmentName = FragmentJavaName(fragmentAttribute.ViewType);
                 fragmentManager.PopBackStackImmediate(fragmentName, PopBackStackFlags.Inclusive);
 
-                OnFragmentPopped(null, fragmentAttribute);
+                OnFragmentPopped(null, null, fragmentAttribute);
                 return true;
             }
             else if (CurrentFragmentManager.FindFragmentByTag(fragmentAttribute.ViewType.Name) != null)
@@ -639,7 +640,7 @@ namespace MvvmCross.Droid.Views
                 ft.Remove(fragment);
                 ft.CommitAllowingStateLoss();
 
-                OnFragmentPopped(ft, fragmentAttribute);
+                OnFragmentPopped(ft, fragment, fragmentAttribute);
                 return true;
             }
             return false;
