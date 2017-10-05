@@ -280,7 +280,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             ft.CommitAllowingStateLoss();
         }
 
-        protected virtual void AddTransitionToFragmentManager(FragmentTransaction ft,MvxFragmentPresentationAttribute attribute){
+        protected virtual void AddTransitionToFragmentManager(FragmentTransaction ft, MvxFragmentPresentationAttribute attribute){
 			if (attribute.SharedElements != null)
 			{
 				foreach (var item in attribute.SharedElements)
@@ -326,29 +326,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             Dialogs.Add(mvxFragmentView.ViewModel, dialog);
 
             var ft = CurrentFragmentManager.BeginTransaction();
-            if (attribute.SharedElements != null)
-            {
-                foreach (var item in attribute.SharedElements)
-                {
-                    string name = item.Key;
-                    if (string.IsNullOrEmpty(name))
-                        name = ViewCompat.GetTransitionName(item.Value);
-                    ft.AddSharedElement(item.Value, name);
-                }
-            }
-            if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
-            {
-                if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
-                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation, attribute.PopEnterAnimation, attribute.PopExitAnimation);
-                else
-                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
-            }
-            if (attribute.TransitionStyle != int.MinValue)
-                ft.SetTransitionStyle(attribute.TransitionStyle);
 
-            if (attribute.AddToBackStack == true)
-                ft.AddToBackStack(fragmentName);
+            AddTransitionToFragmentManager(ft, attribute);
 
+			if (attribute.AddToBackStack == true)
+				ft.AddToBackStack(fragmentName);
+            
             dialog.Show(ft, fragmentName);
         }
 
