@@ -156,19 +156,29 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 return;
             }
 
-            if (attribute.SharedElements != null)
+            var activityOptions = CreateActivityTransitionOptions(intent, attribute);
+            if (activityOptions != null)
             {
-                IList<Pair> sharedElements = new List<Pair>();
-                foreach (var item in attribute.SharedElements)
-                {
-                    intent.PutExtra(item.Key, ViewCompat.GetTransitionName(item.Value));
-                    sharedElements.Add(Pair.Create(item.Value, item.Key));
-                }
-                ActivityOptionsCompat options = ActivityOptionsCompat.MakeSceneTransitionAnimation(CurrentActivity, sharedElements.ToArray());
-                activity.StartActivity(intent, options.ToBundle());
+                activity.StartActivity(intent, activityOptions.ToBundle());
             }
             else
                 activity.StartActivity(intent);
+        }
+
+        protected virtual ActivityOptionsCompat CreateActivityTransitionOptions(Android.Content.Intent intent,MvxActivityPresentationAttribute attribute){
+            ActivityOptionsCompat options = null;
+            if (attribute.SharedElements != null)
+			{
+				IList<Pair> sharedElements = new List<Pair>();
+				foreach (var item in attribute.SharedElements)
+				{
+					intent.PutExtra(item.Key, ViewCompat.GetTransitionName(item.Value));
+					sharedElements.Add(Pair.Create(item.Value, item.Key));
+				}
+				options = ActivityOptionsCompat.MakeSceneTransitionAnimation(CurrentActivity, sharedElements.ToArray());
+			}
+
+            return options;
         }
 
         protected override void ShowHostActivity(MvxFragmentPresentationAttribute attribute)
