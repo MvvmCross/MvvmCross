@@ -11,7 +11,7 @@ This package contains MvvmCross to use with Xamarin.Forms</description>
 		<dependencies>
             <group>
 				<dependency id="MvvmCross.Core" version="[$version$]" />
-                <dependency id="Xamarin.Forms" version="2.4.0.280" />
+                <dependency id="Xamarin.Forms" version="2.4.0.282" />
 			</group>
             <group targetFramework="MonoAndroid10">
 				<dependency id="MvvmCross.Droid.Support.V7.AppCompat" version="[$version$]" />
