@@ -438,8 +438,12 @@ namespace MvvmCross.Droid.Views
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
 
+            OnFragmentChanging(ft, attribute);
+
             ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
             ft.CommitAllowingStateLoss();
+
+            OnFragmentChanged(ft, attribute);
         }
 
 		protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, MvxFragmentPresentationAttribute attribute)
@@ -462,6 +466,21 @@ namespace MvvmCross.Droid.Views
 
 			if (attribute.TransitionStyle != int.MinValue)
 				ft.SetTransitionStyle(attribute.TransitionStyle);
+		}
+
+		protected virtual void OnFragmentChanged(FragmentTransaction ft, MvxFragmentPresentationAttribute attribute)
+		{
+
+		}
+
+		protected virtual void OnFragmentChanging(FragmentTransaction ft, MvxFragmentPresentationAttribute attribute)
+		{
+
+		}
+
+		protected virtual void OnFragmentPopped(FragmentTransaction ft, MvxFragmentPresentationAttribute attribute)
+		{
+
 		}
 
         protected virtual void ShowDialogFragment(
@@ -598,6 +617,8 @@ namespace MvvmCross.Droid.Views
             {
                 var fragmentName = FragmentJavaName(fragmentAttribute.ViewType);
                 fragmentManager.PopBackStackImmediate(fragmentName, PopBackStackFlags.Inclusive);
+
+                OnFragmentPopped(null, fragmentAttribute);
                 return true;
             }
             else if (CurrentFragmentManager.FindFragmentByTag(fragmentAttribute.ViewType.Name) != null)
@@ -618,6 +639,7 @@ namespace MvvmCross.Droid.Views
                 ft.Remove(fragment);
                 ft.CommitAllowingStateLoss();
 
+                OnFragmentPopped(ft, fragmentAttribute);
                 return true;
             }
             return false;
