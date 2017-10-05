@@ -281,7 +281,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             var ft = fragmentManager.BeginTransaction();
 
-            AddTransitionToFragmentManager(ft, attribute);
+            OnBeforeFragmentChanging(ft, attribute);
 
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
@@ -290,7 +290,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             ft.CommitAllowingStateLoss();
         }
 
-        protected virtual void AddTransitionToFragmentManager(FragmentTransaction ft, MvxFragmentPresentationAttribute attribute){
+        protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, MvxFragmentPresentationAttribute attribute){
 			if (attribute.SharedElements != null)
 			{
 				foreach (var item in attribute.SharedElements)
@@ -337,7 +337,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             var ft = CurrentFragmentManager.BeginTransaction();
 
-            AddTransitionToFragmentManager(ft, attribute);
+            OnBeforeFragmentChanging(ft, attribute);
 
 			if (attribute.AddToBackStack == true)
 				ft.AddToBackStack(fragmentName);
