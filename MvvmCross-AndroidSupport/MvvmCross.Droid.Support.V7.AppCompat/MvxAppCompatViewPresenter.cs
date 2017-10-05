@@ -156,19 +156,29 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 return;
             }
 
-            if (attribute.SharedElements != null)
+            var activityOptions = CreateActivityTransitionOptions(intent, attribute);
+            if (activityOptions != null)
             {
-                IList<Pair> sharedElements = new List<Pair>();
-                foreach (var item in attribute.SharedElements)
-                {
-                    intent.PutExtra(item.Key, ViewCompat.GetTransitionName(item.Value));
-                    sharedElements.Add(Pair.Create(item.Value, item.Key));
-                }
-                ActivityOptionsCompat options = ActivityOptionsCompat.MakeSceneTransitionAnimation(CurrentActivity, sharedElements.ToArray());
-                activity.StartActivity(intent, options.ToBundle());
+                activity.StartActivity(intent, activityOptions.ToBundle());
             }
             else
                 activity.StartActivity(intent);
+        }
+
+        protected virtual ActivityOptionsCompat CreateActivityTransitionOptions(Android.Content.Intent intent,MvxActivityPresentationAttribute attribute){
+            ActivityOptionsCompat options = null;
+            if (attribute.SharedElements != null)
+			{
+				IList<Pair> sharedElements = new List<Pair>();
+				foreach (var item in attribute.SharedElements)
+				{
+					intent.PutExtra(item.Key, ViewCompat.GetTransitionName(item.Value));
+					sharedElements.Add(Pair.Create(item.Value, item.Key));
+				}
+				options = ActivityOptionsCompat.MakeSceneTransitionAnimation(CurrentActivity, sharedElements.ToArray());
+			}
+
+            return options;
         }
 
         protected override void ShowHostActivity(MvxFragmentPresentationAttribute attribute)
@@ -242,6 +252,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
             fragment = fragment ?? CreateFragment(attribute, fragmentName);
 
+            var fragmentView = fragment.ToFragment();
+
             // MvxNavigationService provides an already instantiated ViewModel here,
             // therefore just assign it
             if (request is MvxViewModelInstanceRequest instanceRequest)
@@ -254,7 +266,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 var serializedRequest = NavigationSerializer.Serializer.SerializeObject(request);
                 bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
 
-                var fragmentView = fragment.ToFragment();
+
                 if (fragmentView != null)
                 {
                     if (fragmentView.Arguments == null)
@@ -270,32 +282,55 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
 
             var ft = fragmentManager.BeginTransaction();
-            if (attribute.SharedElements != null)
-            {
-                foreach (var item in attribute.SharedElements)
-                {
-                    string name = item.Key;
-                    if (string.IsNullOrEmpty(name))
-                        name = ViewCompat.GetTransitionName(item.Value);
-                    ft.AddSharedElement(item.Value, name);
-                }
-            }
-            if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
-            {
-                if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
-                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation, attribute.PopEnterAnimation, attribute.PopExitAnimation);
-                else
-                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
-            }
-            if (attribute.TransitionStyle != int.MinValue)
-                ft.SetTransitionStyle(attribute.TransitionStyle);
+
+            OnBeforeFragmentChanging(ft, fragmentView, attribute);
 
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
 
+            OnFragmentChanging(ft, fragmentView, attribute);
+
             ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
             ft.CommitAllowingStateLoss();
+
+            OnFragmentChanged(ft, fragmentView, attribute);
         }
+
+        protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute){
+			if (attribute.SharedElements != null)
+			{
+				foreach (var item in attribute.SharedElements)
+				{
+					string name = item.Key;
+					if (string.IsNullOrEmpty(name))
+						name = ViewCompat.GetTransitionName(item.Value);
+					ft.AddSharedElement(item.Value, name);
+				}
+			}
+			if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
+			{
+				if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
+					ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation, attribute.PopEnterAnimation, attribute.PopExitAnimation);
+				else
+					ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
+			}
+			if (attribute.TransitionStyle != int.MinValue)
+				ft.SetTransitionStyle(attribute.TransitionStyle);
+        }
+
+        protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute){
+            
+        }
+
+		protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+		{
+
+		}
+
+        protected virtual void OnFragmentPopped(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+		{
+
+		}
 
         protected override void ShowDialogFragment(Type view,
            MvxDialogFragmentPresentationAttribute attribute,
@@ -321,30 +356,17 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             Dialogs.Add(mvxFragmentView.ViewModel, dialog);
 
             var ft = CurrentFragmentManager.BeginTransaction();
-            if (attribute.SharedElements != null)
-            {
-                foreach (var item in attribute.SharedElements)
-                {
-                    string name = item.Key;
-                    if (string.IsNullOrEmpty(name))
-                        name = ViewCompat.GetTransitionName(item.Value);
-                    ft.AddSharedElement(item.Value, name);
-                }
-            }
-            if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
-            {
-                if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
-                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation, attribute.PopEnterAnimation, attribute.PopExitAnimation);
-                else
-                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
-            }
-            if (attribute.TransitionStyle != int.MinValue)
-                ft.SetTransitionStyle(attribute.TransitionStyle);
 
-            if (attribute.AddToBackStack == true)
-                ft.AddToBackStack(fragmentName);
+            OnBeforeFragmentChanging(ft, dialog, attribute);
+
+			if (attribute.AddToBackStack == true)
+				ft.AddToBackStack(fragmentName);
+
+            OnFragmentChanging(ft, dialog, attribute);
 
             dialog.Show(ft, fragmentName);
+
+            OnFragmentChanged(ft, dialog, attribute);
         }
 
         protected virtual void ShowViewPagerFragment(
@@ -452,6 +474,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 ft.CommitAllowingStateLoss();
                 adapter.NotifyDataSetChanged();
 
+                OnFragmentPopped(ft, fragment, attribute);
                 return true;
             }
             return false;
@@ -488,6 +511,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             {
                 var fragmentName = FragmentJavaName(fragmentAttribute.ViewType);
                 fragmentManager.PopBackStackImmediate(fragmentName, 1);
+
+                OnFragmentPopped(null,null,fragmentAttribute);
+
                 return true;
             }
             else if (fragmentManager.Fragments.Count > 0 && fragmentManager.FindFragmentByTag(fragmentAttribute.ViewType.Name) != null)
@@ -507,6 +533,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
                 ft.Remove(fragment);
                 ft.CommitAllowingStateLoss();
+
+                OnFragmentPopped(ft, fragment ,fragmentAttribute);
 
                 return true;
             }
