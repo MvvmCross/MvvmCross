@@ -117,9 +117,10 @@ namespace MvvmCross.Droid.Views.Attributes
         /// </summary>
         public bool IsCacheableFragment { get; set; } = DefaultIsCacheableFragment;
 
+        public static IDictionary<string, View> DefaultSharedElements = null;
         /// <summary>
         /// SharedElements that will be added to the transition. String may be left empty when using AppCompat
         /// </summary>
-        public IDictionary<string, View> SharedElements { get; set; }
+        public IDictionary<string, View> SharedElements { get; set; } = DefaultSharedElements;
     }
 }
