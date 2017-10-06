@@ -83,11 +83,6 @@ namespace MvvmCross.iOS.Views.Presenters
         public override void Show(MvxViewModelRequest request)
         {
             var view = this.CreateViewControllerFor(request);
-
-#warning Need to reinsert ClearTop type functionality here
-            //if (request.ClearTop)
-            //    ClearBackStack();
-
             Show(view, request);
         }
 

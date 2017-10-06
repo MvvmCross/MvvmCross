@@ -43,7 +43,6 @@
     <Compile Include="Views\MvxImageViewRenderer.cs" />
     <Compile Include="Platform\MvxFormsIosSetup.cs" />
     <Compile Include="Platform\MvxFormsApplicationDelegate.cs" />
-    <Compile Include="Views\MvxFormsIosMasterDetailPagePresenter.cs" />
     <Compile Include="Views\MvxFormsIosViewPresenter.cs" />
     <Compile Include="Bindings\MvxFormsIosBindingBuilder.cs" />
   </ItemGroup>

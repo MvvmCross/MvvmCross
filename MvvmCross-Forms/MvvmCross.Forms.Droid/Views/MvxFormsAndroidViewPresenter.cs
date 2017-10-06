@@ -57,7 +57,7 @@ namespace MvvmCross.Forms.Droid.Views
             }
         }
 
-		protected override void RegisterAttributeTypes()
+        public override void RegisterAttributeTypes()
         {
             base.RegisterAttributeTypes();
 
@@ -110,7 +110,7 @@ namespace MvvmCross.Forms.Droid.Views
                 });
         }
 
-        protected override MvxBasePresentationAttribute GetAttributeForViewModel(Type viewModelType)
+        /*public override MvxBasePresentationAttribute GetAttributeForViewModel(Type viewModelType)
         {
 			IList<MvxBasePresentationAttribute> attributes;
             if (ViewModelToPresentationAttributeMap.TryGetValue(viewModelType, out attributes))
@@ -127,9 +127,9 @@ namespace MvvmCross.Forms.Droid.Views
             }
 
             return CreateAttributeForViewModel(viewModelType);
-        }
+        }*/
 
-        protected override MvxBasePresentationAttribute CreateAttributeForViewModel(Type viewModelType)
+        public override MvxBasePresentationAttribute CreateAttributeForViewModel(Type viewModelType)
         {
             var viewType = ViewsContainer.GetViewType(viewModelType);
             if (viewType.IsSubclassOf(typeof(ContentPage)))
