@@ -7,6 +7,9 @@
     xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
     x:Class="Playground.Core.Pages.ModalPage" Title="Modal page">
     <ContentPage.Content>
-      
+      <StackLayout Margin="10">
+            <Label Text="I'm a Modal page" />
+            <Button Text="Close" mvx:Bi.nd="Command CloseCommand"/>
+        </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>

@@ -14,8 +14,8 @@
             <Button Text="Show Modal Navigation" mvx:Bi.nd="Command ShowModalNavCommand"/>
             <Button Text="Show Tabs" mvx:Bi.nd="Command ShowTabsCommand"/>
             <Button Text="Show Master/Detail" mvx:Bi.nd="Command ShowSplitCommand"/>
-            <Label Text="Native views" />
             <Button Text="Show Tabs" mvx:Bi.nd="Command ShowTabsCommand"/>
+            <Label Text="Native views" />
             <Button Text="Show BottomSheet" mvx:Bi.nd="Command ShowSheetCommand"/>
         </StackLayout>
 	</ContentPage.Content>
