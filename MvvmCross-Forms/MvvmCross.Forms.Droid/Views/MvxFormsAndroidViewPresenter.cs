@@ -42,6 +42,21 @@ namespace MvvmCross.Forms.Droid.Views
 			set { _formsApplication = value; }
 		}
 
+        private MvxFormsPagePresenter _formsPagePresenter;
+        public virtual MvxFormsPagePresenter FormsPagePresenter
+        {
+            get
+            {
+                if (_formsPagePresenter == null)
+                    _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication);
+                return _formsPagePresenter;
+            }
+            set
+            {
+                _formsPagePresenter = value;
+            }
+        }
+
 		protected override void RegisterAttributeTypes()
         {
             base.RegisterAttributeTypes();
@@ -151,36 +166,17 @@ namespace MvvmCross.Forms.Droid.Views
             return base.CreateAttributeForViewModel(viewModelType);
         }
 
-        protected virtual Page CreatePage(Type viewType, MvxViewModelRequest request)
-        {
-            var page = Activator.CreateInstance(viewType) as Page;
-
-            if (page is IMvxPage contentPage)
-            {
-                if (request is MvxViewModelInstanceRequest instanceRequest)
-                {
-                    contentPage.ViewModel = instanceRequest.ViewModelInstance;
-                }
-                else
-                {
-                    contentPage.ViewModel = MvxPresenterHelpers.LoadViewModel(request);
-                }
-            }
-            return page;
-        }
-
         protected virtual void ShowCarouselPage(
 			Type view,
 			MvxCarouselPagePresentationAttribute attribute,
 			MvxViewModelRequest request)
 		{
-            var page = CreatePage(view, request) as CarouselPage;
-            FormsApplication.MainPage = page;
+            FormsPagePresenter.ShowCarouselPage(view, attribute, request);
 		}
 
         protected virtual bool CloseCarouselPage(IMvxViewModel viewModel, MvxCarouselPagePresentationAttribute attribute)
 		{
-            return false;
+            return FormsPagePresenter.CloseCarouselPage(viewModel, attribute);
 		}
 
         protected virtual void ShowContentPage(
@@ -188,27 +184,12 @@ namespace MvvmCross.Forms.Droid.Views
             MvxContentPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var page = CreatePage(view, request);
-
-            if(attribute.WrapInNavigationPage && (FormsApplication.MainPage == null || FormsApplication.MainPage.GetType() != typeof(MvxNavigationPage)))
-            {
-                FormsApplication.MainPage = new MvxNavigationPage(page);
-            }
-            else if(attribute.WrapInNavigationPage && FormsApplication.MainPage is MvxNavigationPage navigationPage)
-            {
-                navigationPage.PushAsync(page, attribute.Animated);
-            }
-            else
-            {
-                FormsApplication.MainPage = page;
-            }
+            FormsPagePresenter.ShowContentPage(view, attribute, request);
         }
 
         protected virtual bool CloseContentPage(IMvxViewModel viewModel, MvxContentPagePresentationAttribute attribute)
         {
-            if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
-                navigationPage.PopAsync(attribute.Animated);
-            return true;
+            return FormsPagePresenter.CloseContentPage(viewModel, attribute);
         }
 
         protected virtual void ShowMasterDetailPage(
@@ -216,15 +197,12 @@ namespace MvvmCross.Forms.Droid.Views
             MvxMasterDetailPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var page = CreatePage(view, request) as MasterDetailPage;
-            FormsApplication.MainPage = page;
+            FormsPagePresenter.ShowMasterDetailPage(view, attribute, request);
         }
 
         protected virtual bool CloseMasterDetailPage(IMvxViewModel viewModel, MvxMasterDetailPagePresentationAttribute attribute)
         {
-            if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
-                navigationPage.PopAsync();
-            return true;
+            return FormsPagePresenter.CloseMasterDetailPage(viewModel, attribute);
         }
 
         protected virtual void ShowModal(
@@ -232,17 +210,12 @@ namespace MvvmCross.Forms.Droid.Views
             MvxModalPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var page = CreatePage(view, request);
-
-            if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
-                navigationPage.CurrentPage.Navigation.PushModalAsync(page);
+            FormsPagePresenter.ShowModal(view, attribute, request);
         }
 
         protected virtual bool CloseModal(IMvxViewModel viewModel, MvxModalPresentationAttribute attribute)
         {
-            if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
-                navigationPage.CurrentPage.Navigation.PopModalAsync();
-            return true;
+            return FormsPagePresenter.CloseModal(viewModel, attribute);
         }
 
         protected virtual void ShowNavigationPage(
@@ -250,13 +223,12 @@ namespace MvvmCross.Forms.Droid.Views
             MvxNavigationPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var page = CreatePage(view, request);
-            FormsApplication.MainPage = page;
+            FormsPagePresenter.ShowNavigationPage(view, attribute, request);
         }
 
         protected virtual bool CloseNavigationPage(IMvxViewModel viewModel, MvxNavigationPagePresentationAttribute attribute)
         {
-            return true;
+            return FormsPagePresenter.CloseNavigationPage(viewModel, attribute);
         }
 
         protected virtual void ShowTabbedPage(
@@ -264,13 +236,12 @@ namespace MvvmCross.Forms.Droid.Views
             MvxTabbedPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var page = CreatePage(view, request) as TabbedPage;
-            FormsApplication.MainPage = page;
+            FormsPagePresenter.ShowTabbedPage(view, attribute, request);
         }
 
         protected virtual bool CloseTabbedPage(IMvxViewModel viewModel, MvxTabbedPagePresentationAttribute attribute)
         {
-            return true;
+            return FormsPagePresenter.CloseTabbedPage(viewModel, attribute);
         }
     }
 }

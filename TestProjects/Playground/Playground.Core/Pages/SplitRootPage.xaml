@@ -7,6 +7,8 @@
     xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
     x:Class="Playground.Core.Pages.SplitRootPage" Title="SplitRoot page">
     <ContentPage.Content>
-      
+      <StackLayout Margin="10">
+            <Label Text="I'm a split root page" />
+        </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>

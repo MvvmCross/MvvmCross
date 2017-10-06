@@ -7,6 +7,9 @@
     xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
     x:Class="Playground.Core.Pages.NestedChildPage" Title="NestedChild page">
     <ContentPage.Content>
-      
+      <StackLayout Margin="10">
+            <Label Text="I'm a nested page" />
+            <Button Text="Close" mvx:Bi.nd="Command CloseCommand"/>
+        </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>

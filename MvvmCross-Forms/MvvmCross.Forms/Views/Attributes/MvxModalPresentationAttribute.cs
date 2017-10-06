@@ -4,12 +4,10 @@ using MvvmCross.Core.Views;
 namespace MvvmCross.Forms.Views.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class MvxModalPresentationAttribute : MvxBasePresentationAttribute
+    public class MvxModalPresentationAttribute : MvxPagePresentationAttribute
     {
         public MvxModalPresentationAttribute()
         {
         }
-
-        public bool WrapInNavigationPage { get; set; } = false;
     }
 }

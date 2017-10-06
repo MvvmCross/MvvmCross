@@ -7,6 +7,9 @@
     xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
     x:Class="Playground.Core.Pages.SplitDetailPage" Title="SplitDetail page">
     <ContentPage.Content>
-      
+      <StackLayout Margin="10">
+            <Label Text="I'm a detail navigation page" />
+            <Button Text="Show Child" mvx:Bi.nd="Command ShowChildCommand"/>
+        </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>

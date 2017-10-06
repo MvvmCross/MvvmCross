@@ -15,9 +15,9 @@ namespace Playground.Core.ViewModels
         {
             _navigationService = navigationService;
 
-            ShowChildCommand = new MvxAsyncCommand(async () => ShowViewModel<ChildViewModel>());
+            ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel>());
 
-            ShowModalCommand = new MvxAsyncCommand(async () => ShowViewModel<ModalViewModel>());
+            ShowModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalViewModel>());
 
             ShowModalNavCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalNavViewModel>());
 

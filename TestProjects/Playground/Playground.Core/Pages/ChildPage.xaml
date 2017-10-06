@@ -7,6 +7,10 @@
     xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
     x:Class="Playground.Core.Pages.ChildPage" Title="Child page">
     <ContentPage.Content>
-      
+      <StackLayout Margin="10">
+            <Label Text="Im a child view" />
+            <Button Text="Show Second Child" mvx:Bi.nd="Command ShowSecondChildCommand"/>
+            <Button Text="Close" mvx:Bi.nd="Command CloseCommand"/>
+        </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>
