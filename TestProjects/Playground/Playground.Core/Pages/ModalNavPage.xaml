@@ -7,6 +7,10 @@
     xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
     x:Class="Playground.Core.Pages.ModalNavPage" Title="ModalNav page">
     <ContentPage.Content>
-      
+      <StackLayout Margin="10">
+            <Label Text="I'm a Modal page that will host a Page!" />
+            <Button Text="Show Child" mvx:Bi.nd="Command ShowChildCommand"/>
+            <Button Text="Close" mvx:Bi.nd="Command CloseCommand"/>
+        </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>

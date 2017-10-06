@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<views:MvxContentPage x:TypeArguments="viewModels:NestedModalViewModel"
+<views:MvxContentPage x:TypeArguments="viewModels:Tab3ViewModel"
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
     xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
     xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
-    x:Class="Playground.Core.Pages.NestedModalPage" Title="NestedModal page">
+    x:Class="Playground.Core.Pages.Tab3Page" Title="Tab3 page">
     <ContentPage.Content>
       <StackLayout Margin="10">
-            <Label Text="I'm a Nested Modal page" />
-            <Button Text="Close" mvx:Bi.nd="Command CloseCommand"/>
+            <Label Text="I'm a tab page" />
+            <Button Text="Show root" mvx:Bi.nd="Command ShowRootViewModelCommand"/>
+            <Button Text="Close tab" mvx:Bi.nd="Command CloseViewModelCommand"/>
         </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>

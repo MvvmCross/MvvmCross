@@ -128,6 +128,36 @@
     <Compile Include="Pages\SplitDetailNavPage.xaml.cs">
       <DependentUpon>SplitDetailNavPage.xaml</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Pages\TabsRootPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <Compile Include="Pages\TabsRootPage.xaml.cs">
+      <DependentUpon>TabsRootPage.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Pages\Tab1Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <Compile Include="Pages\Tab1Page.xaml.cs">
+      <DependentUpon>Tab1Page.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Pages\Tab2Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <Compile Include="Pages\Tab2Page.xaml.cs">
+      <DependentUpon>Tab2Page.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Pages\Tab3Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <Compile Include="Pages\Tab3Page.xaml.cs">
+      <DependentUpon>Tab3Page.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Pages\SecondChildPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <Compile Include="Pages\SecondChildPage.xaml.cs">
+      <DependentUpon>SecondChildPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
