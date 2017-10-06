@@ -329,7 +329,7 @@ namespace MvvmCross.Platform.Test
         #region Open-Generics
 
         [Test]
-        public void Resolves_successfully_when_registered_open_generic_with_one_generic_type_parameter()
+        public static void Resolves_successfully_when_registered_open_generic_with_one_generic_type_parameter()
         {
             var instance = MvxSimpleIoCContainer.Initialize();
             ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
@@ -345,7 +345,7 @@ namespace MvvmCross.Platform.Test
         }
 
         [Test]
-        public void Resolves_successfully_when_registered_closed_generic_with_one_generic_type_parameter()
+        public static void Resolves_successfully_when_registered_closed_generic_with_one_generic_type_parameter()
         {
             var instance = MvxSimpleIoCContainer.Initialize();
             ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
@@ -361,7 +361,7 @@ namespace MvvmCross.Platform.Test
         }
 
         [Test]
-        public void Resolves_successfully_when_registered_open_generic_with_two_generic_type_parameter()
+        public static void Resolves_successfully_when_registered_open_generic_with_two_generic_type_parameter()
         {
             var instance = MvxSimpleIoCContainer.Initialize();
             ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
@@ -377,7 +377,7 @@ namespace MvvmCross.Platform.Test
         }
 
         [Test]
-        public void Resolves_successfully_when_registered_closed_generic_with_two_generic_type_parameter()
+        public static void Resolves_successfully_when_registered_closed_generic_with_two_generic_type_parameter()
         {
             var instance = MvxSimpleIoCContainer.Initialize();
             ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
@@ -393,7 +393,7 @@ namespace MvvmCross.Platform.Test
         }
 
         [Test]
-        public void Resolves_unsuccessfully_when_registered_open_generic_with_one_generic_parameter_that_was_not_registered()
+        public static void Resolves_unsuccessfully_when_registered_open_generic_with_one_generic_parameter_that_was_not_registered()
         {
             var instance = MvxSimpleIoCContainer.Initialize();
             ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
@@ -407,7 +407,7 @@ namespace MvvmCross.Platform.Test
         }
 
         [Test]
-        public void Resolves_successfully_when_resolving_entity_that_has_injected_an_open_generic_parameter()
+        public static void Resolves_successfully_when_resolving_entity_that_has_injected_an_open_generic_parameter()
         {
             var instance = MvxSimpleIoCContainer.Initialize();
             ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
