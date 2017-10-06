@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views.Attributes;
 using MvvmCross.Platform.Platform;
@@ -61,6 +62,8 @@ namespace MvvmCross.Forms.Views
             MvxViewModelRequest request)
         {
             var page = CreatePage(view, request);
+
+            //TODO: Check ModalStack and push there if applied
 
             if (attribute.WrapInNavigationPage && (FormsApplication.MainPage == null || FormsApplication.MainPage.GetType() != typeof(MvxNavigationPage)))
             {
@@ -155,7 +158,12 @@ namespace MvvmCross.Forms.Views
             var page = CreatePage(view, request);
 
             if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
-                navigationPage.CurrentPage.Navigation.PushModalAsync(page);
+            {
+                if(attribute.WrapInNavigationPage == true)
+                    navigationPage.CurrentPage.Navigation.PushModalAsync(new MvxNavigationPage(page));
+                else
+                    navigationPage.CurrentPage.Navigation.PushModalAsync(page);
+            }
         }
 
         public virtual bool CloseModal(IMvxViewModel viewModel, MvxModalPresentationAttribute attribute)
