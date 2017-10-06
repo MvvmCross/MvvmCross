@@ -14,7 +14,9 @@ using MvvmCross.Core.Views;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
 using MvvmCross.Forms.Views.Attributes;
+using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using UIKit;
 using Xamarin.Forms;
@@ -40,6 +42,21 @@ namespace MvvmCross.Forms.iOS.Presenters
         {
             get { return _formsApplication; }
             set { _formsApplication = value; }
+        }
+
+        private MvxFormsPagePresenter _formsPagePresenter;
+        public virtual MvxFormsPagePresenter FormsPagePresenter
+        {
+            get
+            {
+                if (_formsPagePresenter == null)
+                    _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication);
+                return _formsPagePresenter;
+            }
+            set
+            {
+                _formsPagePresenter = value;
+            }
         }
 
         protected override void RegisterAttributeTypes()
@@ -79,9 +96,15 @@ namespace MvvmCross.Forms.iOS.Presenters
 
         public override void Show(MvxViewModelRequest request)
         {
-            //TODO: Find a way to show Forms views
+            //TODO: Find a better way to show Forms views
 
-            base.Show(request);
+            var viewType = Mvx.Resolve<IMvxViewsContainer>().GetViewType(request.ViewModelType);
+            if(viewType.IsSubclassOf(typeof(Page)))
+            {
+                //FormsPagePresenter.ShowContentPage(viewType, (MvxContentPagePresentationAttribute)attribute, request);
+            }
+            else
+                base.Show(request);
         }
 
         protected virtual Page CreatePage(Type viewType, MvxViewModelRequest request)

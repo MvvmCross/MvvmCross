@@ -2,7 +2,7 @@
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Core.Views
 {
     public class MvxPresentationAttributeAction
     {
