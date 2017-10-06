@@ -59,6 +59,8 @@ namespace MvvmCross.Platform.IoC
             object Resolve();
 
             ResolverType ResolveType { get; }
+
+            void SetGenericTypeParameters(Type[] genericTypeParameters);
         }
 
         public class ConstructingResolver : IResolver
@@ -75,6 +77,11 @@ namespace MvvmCross.Platform.IoC
             public object Resolve()
             {
                 return _parent.IoCConstruct(_type);
+            }
+
+            public void SetGenericTypeParameters(Type[] genericTypeParameters)
+            {
+                throw new InvalidOperationException("This Resolver does not set generic type parameters");
             }
 
             public ResolverType ResolveType => ResolverType.DynamicPerResolve;
@@ -94,6 +101,11 @@ namespace MvvmCross.Platform.IoC
                 return _constructor();
             }
 
+            public void SetGenericTypeParameters(Type[] genericTypeParameters)
+            {
+                throw new InvalidOperationException("This Resolver does not set generic type parameters");
+            }
+
             public ResolverType ResolveType => ResolverType.DynamicPerResolve;
         }
 
@@ -109,6 +121,11 @@ namespace MvvmCross.Platform.IoC
             public object Resolve()
             {
                 return _theObject;
+            }
+
+            public void SetGenericTypeParameters(Type[] genericTypeParameters)
+            {
+                throw new InvalidOperationException("This Resolver does not set generic type parameters");
             }
 
             public ResolverType ResolveType => ResolverType.Singleton;
@@ -137,6 +154,11 @@ namespace MvvmCross.Platform.IoC
                 }
 
                 return _theObject;
+            }
+
+            public void SetGenericTypeParameters(Type[] genericTypeParameters)
+            {
+                throw new InvalidOperationException("This Resolver does not set generic type parameters");
             }
 
             public ResolverType ResolveType => ResolverType.Singleton;
@@ -499,10 +521,9 @@ namespace MvvmCross.Platform.IoC
 
             try
             {
-                var openGenericResolver = resolver as ConstructingOpenGenericResolver;
-                if (openGenericResolver != null)
+                if(resolver is ConstructingOpenGenericResolver)
                 {
-                    openGenericResolver.SetGenericTypeParameters(type.GetTypeInfo().GenericTypeArguments);
+                    resolver.SetGenericTypeParameters(type.GetTypeInfo().GenericTypeArguments);
                 }
 
                 var raw = resolver.Resolve();
@@ -531,7 +552,9 @@ namespace MvvmCross.Platform.IoC
             {
                 _resolvers[interfaceType] = resolver;
                 if (_waiters.TryGetValue(interfaceType, out actions))
+                {
                     _waiters.Remove(interfaceType);
+                }
             }
 
             if (actions != null)
