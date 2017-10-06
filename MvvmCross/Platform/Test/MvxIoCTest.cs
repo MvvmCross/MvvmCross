@@ -329,7 +329,7 @@ namespace MvvmCross.Platform.Test
         #region Open-Generics
 
         [Test]
-        public void Resolves_successfully_when_registered_open_generic_with_one_generic_type_parameter_()
+        public void Resolves_successfully_when_registered_open_generic_with_one_generic_type_parameter()
         {
             var instance = MvxSimpleIoCContainer.Initialize();
             ((MvxSimpleIoCContainer)instance).CleanAllResolvers();

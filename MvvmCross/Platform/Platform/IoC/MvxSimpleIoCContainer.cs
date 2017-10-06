@@ -292,15 +292,19 @@ namespace MvvmCross.Platform.IoC
             InternalSetResolver(t, resolver);
         }
 
-        public void RegisterType(Type tInterface, Type tConstruct)
+        public void RegisterType(Type interfaceType, Type constructType)
         {
             IResolver resolver = null;
-            if (tInterface.GetTypeInfo().IsGenericTypeDefinition)
-                resolver = new ConstructingOpenGenericResolver(tConstruct, this);
+            if (interfaceType.GetTypeInfo().IsGenericTypeDefinition)
+            {
+                resolver = new ConstructingOpenGenericResolver(constructType, this);
+            }
             else
-                resolver = new ConstructingResolver(tConstruct, this);
+            {
+                resolver = new ConstructingResolver(constructType, this);
+            }
 
-            InternalSetResolver(tInterface, resolver);
+            InternalSetResolver(interfaceType, resolver);
         }
 
         public void RegisterSingleton<TInterface>(TInterface theObject)
@@ -309,9 +313,9 @@ namespace MvvmCross.Platform.IoC
             RegisterSingleton(typeof(TInterface), theObject);
         }
 
-        public void RegisterSingleton(Type tInterface, object theObject)
+        public void RegisterSingleton(Type interfaceType, object theObject)
         {
-            InternalSetResolver(tInterface, new SingletonResolver(theObject));
+            InternalSetResolver(interfaceType, new SingletonResolver(theObject));
         }
 
         public void RegisterSingleton<TInterface>(Func<TInterface> theConstructor)
@@ -321,9 +325,9 @@ namespace MvvmCross.Platform.IoC
             RegisterSingleton(typeof(TInterface), () => (object)theConstructor());
         }
 
-        public void RegisterSingleton(Type tInterface, Func<object> theConstructor)
+        public void RegisterSingleton(Type interfaceType, Func<object> theConstructor)
         {
-            InternalSetResolver(tInterface, new ConstructingSingletonResolver(theConstructor));
+            InternalSetResolver(interfaceType, new ConstructingSingletonResolver(theConstructor));
         }
 
         public T IoCConstruct<T>()
@@ -397,9 +401,9 @@ namespace MvvmCross.Platform.IoC
 
         public void CleanAllResolvers()
         {
-            this._resolvers.Clear();
-            this._waiters.Clear();
-            this._circularTypeDetection.Clear();
+            _resolvers.Clear();
+            _waiters.Clear();
+            _circularTypeDetection.Clear();
         }
 
         public enum ResolverType
@@ -426,7 +430,7 @@ namespace MvvmCross.Platform.IoC
         private bool InternalTryResolve(Type type, ResolverType? requiredResolverType, out object resolved)
         {
             IResolver resolver;
-            if (!this.TryGetResolver(type, out resolver))
+            if (!TryGetResolver(type, out resolver))
             {
                 resolved = type.CreateDefault();
                 return false;
@@ -444,10 +448,14 @@ namespace MvvmCross.Platform.IoC
         private bool TryGetResolver(Type type, out IResolver resolver)
         {
             if (_resolvers.TryGetValue(type, out resolver))
+            {
                 return true;
+            }
 
             if (!type.GetTypeInfo().IsGenericType)
+            {
                 return false;
+            }
 
             return _resolvers.TryGetValue(type.GetTypeInfo().GetGenericTypeDefinition(), out resolver);
         }
@@ -493,7 +501,9 @@ namespace MvvmCross.Platform.IoC
             {
                 var openGenericResolver = resolver as ConstructingOpenGenericResolver;
                 if (openGenericResolver != null)
+                {
                     openGenericResolver.SetGenericTypeParameters(type.GetTypeInfo().GenericTypeArguments);
+                }
 
                 var raw = resolver.Resolve();
                 if (!type.IsInstanceOfType(raw))
@@ -514,14 +524,14 @@ namespace MvvmCross.Platform.IoC
             }
         }
 
-        private void InternalSetResolver(Type tInterface, IResolver resolver)
+        private void InternalSetResolver(Type interfaceType, IResolver resolver)
         {
             List<Action> actions;
             lock (_lockObject)
             {
-                _resolvers[tInterface] = resolver;
-                if (_waiters.TryGetValue(tInterface, out actions))
-                    _waiters.Remove(tInterface);
+                _resolvers[interfaceType] = resolver;
+                if (_waiters.TryGetValue(interfaceType, out actions))
+                    _waiters.Remove(interfaceType);
             }
 
             if (actions != null)
