@@ -125,6 +125,7 @@
     <Compile Include="Fragments\ExampleRecyclerViewFragment.cs" />
     <Compile Include="Activities\SecondHostActivity.cs" />
     <Compile Include="Activities\INavigationActivity.cs" />
+    <Compile Include="Fragments\ConfirmationFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

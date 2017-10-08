@@ -1,11 +1,18 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using System.Threading.Tasks;
+using MvvmCross.Core.Navigation;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 
 namespace Example.Core.ViewModels
 {
     public class LoginViewModel : MvxViewModel
     {
-        public LoginViewModel()
+        private readonly IMvxNavigationService _mvxNavigationService;
+
+        public LoginViewModel(IMvxNavigationService mvxNavigationService)
         {
+            _mvxNavigationService = mvxNavigationService;
+
             Username = "TestUser";
             Password = "YouCantSeeMe";
             IsLoading = false;
@@ -39,12 +46,34 @@ namespace Example.Core.ViewModels
         {
             get
             {
-				return new MvxCommand(() =>
-				{
-					IsLoading = !IsLoading; //Toggle for testing
-					ShowViewModel<HomeViewModel>();
-				});
+                return new MvxCommand(() =>
+                {
+                    IsLoading = !IsLoading; //Toggle for testing
+                    ShowViewModel<HomeViewModel>();
+                });
             }
+        }
+
+        public virtual IMvxAsyncCommand ShowDialogCommand
+        {
+            get
+            {
+                return new MvxAsyncCommand(ExecuteShowDialogCommandAsync);
+            }
+        }
+
+        private async Task ExecuteShowDialogCommandAsync()
+        {
+            var confirmationResult = await _mvxNavigationService.Navigate<ConfirmationViewModel, ConfirmationConfiguration, bool?>(
+                 new ConfirmationConfiguration
+                 {
+                     Body = "Confirm this message",
+                     Title = "Example App",
+                     PositiveCommandText = "Yes",
+                     NegativeCommandText = "No"
+                 });
+
+            Mvx.Trace($"ConfirmationViewModel navigation returned {confirmationResult}.");
         }
     }
 }
