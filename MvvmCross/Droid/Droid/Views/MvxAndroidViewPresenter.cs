@@ -333,9 +333,10 @@ namespace MvvmCross.Droid.Views
         {
             var viewType = ViewsContainer.GetViewType(attribute.ActivityHostViewModelType);
             if (!viewType.IsSubclassOf(typeof(Activity)))
-                throw new MvxException("The host activity doesnt inherit Activity");
+                throw new MvxException("The host activity doesn't inherit Activity");
 
             var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(attribute.ActivityHostViewModelType);
+            hostViewModelRequest.PresentationValues = _pendingRequest.PresentationValues;
             Show(hostViewModelRequest);
         }
 
