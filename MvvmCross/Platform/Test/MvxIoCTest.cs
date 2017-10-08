@@ -10,6 +10,8 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.IoC;
 using NUnit.Framework;
+using System.Reflection;
+using System.Linq;
 
 namespace MvvmCross.Platform.Test
 {
@@ -27,6 +29,19 @@ namespace MvvmCross.Platform.Test
 
         public interface IC
         {
+        }
+
+        public interface IOG<T>
+        {
+        }
+
+        public interface IOG2<T, T2>
+        {
+        }
+
+        public interface IHasOGParameter
+        {
+            IOG<C> OpenGeneric { get; }
         }
 
         public class A : IA
@@ -72,6 +87,24 @@ namespace MvvmCross.Platform.Test
                     var a = Mvx.Resolve<IA>();
                 }
             }
+        }
+
+        public class OG<T> : IOG<T>
+        {
+        }
+
+        public class OG2<T, T2> : IOG2<T, T2>
+        {
+        }
+
+        public class HasOGParameter : IHasOGParameter
+        {
+            public HasOGParameter(IOG<C> openGeneric)
+            {
+                this.OpenGeneric = openGeneric;
+            }
+
+            public IOG<C> OpenGeneric { get; }
         }
 
         [Test]
@@ -292,6 +325,107 @@ namespace MvvmCross.Platform.Test
                 var c1 = Mvx.Resolve<IC>();
             });
         }
+
+        #region Open-Generics
+
+        [Test]
+        public static void Resolves_successfully_when_registered_open_generic_with_one_generic_type_parameter()
+        {
+            var instance = MvxSimpleIoCContainer.Initialize();
+            ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
+
+            instance.RegisterType(typeof(IOG<>), typeof(OG<>));
+
+            IOG<C2> toResolve = null;
+            Mvx.TryResolve<IOG<C2>>(out toResolve);
+
+            Assert.IsNotNull(toResolve);
+            Assert.IsTrue(toResolve.GetType().GetTypeInfo().ImplementedInterfaces.Any(i => i == typeof(IOG<C2>)));
+            Assert.IsTrue(toResolve.GetType() == typeof(OG<C2>));
+        }
+
+        [Test]
+        public static void Resolves_successfully_when_registered_closed_generic_with_one_generic_type_parameter()
+        {
+            var instance = MvxSimpleIoCContainer.Initialize();
+            ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
+
+            instance.RegisterType(typeof(IOG<C2>), typeof(OG<C2>));
+            
+            IOG<C2> toResolve = null;
+            Mvx.TryResolve<IOG<C2>>(out toResolve);
+
+            Assert.IsNotNull(toResolve);
+            Assert.IsTrue(toResolve.GetType().GetTypeInfo().ImplementedInterfaces.Any(i => i == typeof(IOG<C2>)));
+            Assert.IsTrue(toResolve.GetType() == typeof(OG<C2>));
+        }
+
+        [Test]
+        public static void Resolves_successfully_when_registered_open_generic_with_two_generic_type_parameter()
+        {
+            var instance = MvxSimpleIoCContainer.Initialize();
+            ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
+
+            instance.RegisterType(typeof(IOG2<,>), typeof(OG2<,>));
+
+            IOG2<C2, C> toResolve = null;
+            Mvx.TryResolve<IOG2<C2,C>>(out toResolve);
+
+            Assert.IsNotNull(toResolve);
+            Assert.IsTrue(toResolve.GetType().GetTypeInfo().ImplementedInterfaces.Any(i => i == typeof(IOG2<C2, C>)));
+            Assert.IsTrue(toResolve.GetType() == typeof(OG2<C2, C>));
+        }
+
+        [Test]
+        public static void Resolves_successfully_when_registered_closed_generic_with_two_generic_type_parameter()
+        {
+            var instance = MvxSimpleIoCContainer.Initialize();
+            ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
+
+            instance.RegisterType(typeof(IOG2<C2,C>), typeof(OG2<C2,C>));
+
+            IOG2<C2, C> toResolve = null;
+            Mvx.TryResolve<IOG2<C2, C>>(out toResolve);
+
+            Assert.IsNotNull(toResolve);
+            Assert.IsTrue(toResolve.GetType().GetTypeInfo().ImplementedInterfaces.Any(i => i == typeof(IOG2<C2, C>)));
+            Assert.IsTrue(toResolve.GetType() == typeof(OG2<C2, C>));
+        }
+
+        [Test]
+        public static void Resolves_unsuccessfully_when_registered_open_generic_with_one_generic_parameter_that_was_not_registered()
+        {
+            var instance = MvxSimpleIoCContainer.Initialize();
+            ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
+
+            IOG<C2> toResolve = null;
+
+            var isResolved = Mvx.TryResolve<IOG<C2>>(out toResolve);
+
+            Assert.IsFalse(isResolved);
+            Assert.IsNull(toResolve);
+        }
+
+        [Test]
+        public static void Resolves_successfully_when_resolving_entity_that_has_injected_an_open_generic_parameter()
+        {
+            var instance = MvxSimpleIoCContainer.Initialize();
+            ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
+
+            instance.RegisterType<IHasOGParameter, HasOGParameter>();
+            instance.RegisterType(typeof(IOG<>), typeof(OG<>));
+
+            IHasOGParameter toResolve = null;
+            Mvx.TryResolve<IHasOGParameter>(out toResolve);
+
+            Assert.IsNotNull(toResolve);
+            Assert.IsTrue(toResolve.GetType().GetTypeInfo().ImplementedInterfaces.Any(i => i == typeof(IHasOGParameter)));
+            Assert.IsTrue(toResolve.GetType() == typeof(HasOGParameter));
+            Assert.IsTrue(toResolve.OpenGeneric.GetType().GetTypeInfo().ImplementedInterfaces.Any(i => i == typeof(IOG<C>)));
+            Assert.IsTrue(toResolve.OpenGeneric.GetType() == typeof(OG<C>));
+        }
+
+        #endregion
 
         // TODO - there are so many tests we could and should do here!
     }
