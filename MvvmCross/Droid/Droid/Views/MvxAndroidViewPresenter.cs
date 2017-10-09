@@ -333,9 +333,10 @@ namespace MvvmCross.Droid.Views
         {
             var viewType = ViewsContainer.GetViewType(attribute.ActivityHostViewModelType);
             if (!viewType.IsSubclassOf(typeof(Activity)))
-                throw new MvxException("The host activity doesnt inherit Activity");
+                throw new MvxException("The host activity doesn't inherit Activity");
 
             var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(attribute.ActivityHostViewModelType);
+            hostViewModelRequest.PresentationValues = _pendingRequest.PresentationValues;
             Show(hostViewModelRequest);
         }
 
@@ -447,42 +448,42 @@ namespace MvvmCross.Droid.Views
             OnFragmentChanged(ft, fragmentView, attribute);
         }
 
-		protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, MvxFragmentPresentationAttribute attribute)
-		{
-			if (attribute.SharedElements != null)
-			{
-				foreach (var item in attribute.SharedElements)
-				{
-					ft.AddSharedElement(item.Value, item.Key);
-				}
-			}
+        protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, MvxFragmentPresentationAttribute attribute)
+        {
+            if (attribute.SharedElements != null)
+            {
+                foreach (var item in attribute.SharedElements)
+                {
+                    ft.AddSharedElement(item.Value, item.Key);
+                }
+            }
 
-			if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
-			{
-				if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
-					ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation, attribute.PopEnterAnimation, attribute.PopExitAnimation);
-				else
-					ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
-			}
+            if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
+            {
+                if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
+                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation, attribute.PopEnterAnimation, attribute.PopExitAnimation);
+                else
+                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
+            }
 
-			if (attribute.TransitionStyle != int.MinValue)
-				ft.SetTransitionStyle(attribute.TransitionStyle);
-		}
+            if (attribute.TransitionStyle != int.MinValue)
+                ft.SetTransitionStyle(attribute.TransitionStyle);
+        }
 
-		protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
-		{
+        protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        {
 
-		}
+        }
 
-		protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
-		{
+        protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        {
 
-		}
+        }
 
-		protected virtual void OnFragmentPopped(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
-		{
+        protected virtual void OnFragmentPopped(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        {
 
-		}
+        }
 
         protected virtual void ShowDialogFragment(
             Type view,
