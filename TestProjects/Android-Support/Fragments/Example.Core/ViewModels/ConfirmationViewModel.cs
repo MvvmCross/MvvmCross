@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Example.Core.Model;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 
@@ -17,7 +18,9 @@ namespace Example.Core.ViewModels
         public override void Prepare(ConfirmationConfiguration parameter)
         {
             if (parameter == null)
+            {
                 throw new ArgumentNullException(nameof(parameter));
+            }
 
             Title = parameter.Title;
             Body = parameter.Body;
@@ -69,14 +72,4 @@ namespace Example.Core.ViewModels
             return _mvxNavigationService.Close(this, false);
         }
     }
-
-    public class ConfirmationConfiguration
-    {
-        public string Title { get; set; }
-        public string Body { get; set; }
-        public string PositiveCommandText { get; set; }
-        public string NegativeCommandText { get; set; }
-    }
-
-
 }

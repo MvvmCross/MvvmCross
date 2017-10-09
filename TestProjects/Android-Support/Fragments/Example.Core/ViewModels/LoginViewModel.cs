@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Example.Core.Model;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
