@@ -15,14 +15,18 @@ public interface IMvxFileStore
     void WriteFile(string path, IEnumerable<Byte> contents);
     void WriteFile(string path, Action<Stream> writeMethod);
     bool TryMove(string from, string to, bool deleteExistingTo);
+    bool TryCopy(string from, string to, bool overwrite);
     bool Exists(string path);
     bool FolderExists(string folderPath);
     string PathCombine(string items0, string items1);
     string NativePath(string path);
     void EnsureFolderExists(string folderPath);
     IEnumerable<string> GetFilesIn(string folderPath);
+    IEnumerable<string> GetFoldersIn(string folderPath);
     void DeleteFile(string path);
     void DeleteFolder(string folderPath, bool recursive);
+    Stream OpenRead(string path);
+    Stream OpenWrite(string path);
     long GetSize(string path);
     DateTime GetLastWriteTimeUtc(string path);
 }
