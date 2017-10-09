@@ -32,7 +32,7 @@ MvvmCross is extendable by you. We strive to let as much code be configurable an
 
 <hr />
 <h4 align="center">
-  Check out the new <a href="https://www.mvvmcross.com/documentation">MvvmCross docs</a>
+  Check out the <a href="https://www.mvvmcross.com/documentation">MvvmCross docs</a>
 </h4>
 <hr />
 
