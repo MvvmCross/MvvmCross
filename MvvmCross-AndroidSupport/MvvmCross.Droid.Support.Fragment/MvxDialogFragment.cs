@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
@@ -71,9 +72,9 @@ namespace MvvmCross.Droid.Support.V4
 
         public virtual string UniqueImmutableCacheTag => Tag;
 
-        public override void OnCreate(Bundle bundle)
+        public override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(bundle);
+            base.OnCreate(savedInstanceState);
             ViewModel?.ViewCreated();
         }
 
@@ -105,6 +106,24 @@ namespace MvvmCross.Droid.Support.V4
         {
             base.OnStop();
             ViewModel?.ViewDisappeared();
+        }
+
+        public override void OnCancel(IDialogInterface dialog)
+        {
+            base.OnCancel(dialog);
+            ViewModel?.ViewDestroy();
+        }
+
+        public override void DismissAllowingStateLoss()
+        {
+            base.DismissAllowingStateLoss();
+            ViewModel?.ViewDestroy();
+        }
+
+        public override void Dismiss()
+        {
+            base.Dismiss();
+            ViewModel?.ViewDestroy();
         }
     }
 
