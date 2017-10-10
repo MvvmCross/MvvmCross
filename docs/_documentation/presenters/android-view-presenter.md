@@ -105,6 +105,8 @@ If you return `null` from the `PresentationAttribute` the View Presenter will fa
 __Note:__ Be aware that your ViewModel will be null during `PresentationAttribute`, so the logic you can perform there is limited here. Reason to this limitation is MvvmCross Presenters are stateless, you can't connect an already instantiated ViewModel with a new View.
 
 ## Extensibility
+
+### Attributes
 The presenter is completely extensible! You can override any attribute and customize attribute members.
 
 You can also define new attributes to satisfy your needs. The steps to do so are:
@@ -126,6 +128,42 @@ _attributeTypesToShowMethodDictionary.Add(
 4. Implement a method that takes care of the presentation mode (in the example above, `ShowMyCustomModeView`) and a method that takes care of a ViewModel closing (in the example above, `CloseMyCustomModeView`).
 5. Use your attribute over a view class. Ready!
 
+
+###  Fragment Lifecycle
+
+To get more control over your Fragment lifecycle (or activity) and transitions, you can override the folling methods. You can also modify your fragment transitions :
+
+__MvxAndroidViewPresenter__
+
+```c#
+void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+
+void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+
+void OnFragmentPopped(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+```
+
+__MvxAppCompatViewPresenter__
+
+```c#
+void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        
+void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+		
+void OnFragmentPopped(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+
+```
+
+### Activity Transitions
+
+In case you want to override the transition options between 2 activities you can override the folling method :
+
+__MvxAppCompatViewPresenter__
+
+```c#
+
+ActivityOptionsCompat CreateActivityTransitionOptions(Android.Content.Intent intent,MvxActivityPresentationAttribute attribute)
+```
 
 ## Sample please!
 You can browse the code of the [Playground](https://github.com/MvvmCross/MvvmCross/tree/master/TestProjects/Playground) Android project to see this presenter in action.
