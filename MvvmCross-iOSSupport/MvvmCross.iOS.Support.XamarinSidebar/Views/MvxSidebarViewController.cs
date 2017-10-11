@@ -130,6 +130,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
                 sidebarController.DarkOverlayAlpha = mvxSideMenuSettings.DarkOverlayAlpha;
                 sidebarController.HasDarkOverlay = mvxSideMenuSettings.HasDarkOverlay;
                 sidebarController.HasShadowing = mvxSideMenuSettings.HasShadowing;
+                sidebarController.ShadowColor = mvxSideMenuSettings.ShadowColor;
+                sidebarController.ShadowRadius = mvxSideMenuSettings.ShadowRadius;
+                sidebarController.ShadowOpacity = mvxSideMenuSettings.ShadowOpacity;
                 sidebarController.DisablePanGesture = mvxSideMenuSettings.DisablePanGesture;
                 sidebarController.ReopenOnRotate = mvxSideMenuSettings.ReopenOnRotate;
                 sidebarController.StateChangeHandler += (object sender, bool isOpen) =>
