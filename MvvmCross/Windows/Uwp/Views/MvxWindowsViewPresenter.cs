@@ -28,8 +28,11 @@ namespace MvvmCross.Uwp.Views
             SystemNavigationManager.GetForCurrentView().BackRequested += BackButtonOnBackRequested;
         }
 
-        protected virtual void BackButtonOnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
+        protected virtual async void BackButtonOnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
         {
+            if (backRequestedEventArgs.Handled)
+                return;
+
             var currentView = _rootFrame.Content as IMvxView;
             if (currentView == null)
             {
@@ -38,7 +41,7 @@ namespace MvvmCross.Uwp.Views
             }
 
             var navigationService = Mvx.Resolve<IMvxNavigationService>();
-            navigationService.Close(currentView.ViewModel);
+            backRequestedEventArgs.Handled = await navigationService.Close(currentView.ViewModel);
         }
 
         public override void Show(MvxViewModelRequest request)
