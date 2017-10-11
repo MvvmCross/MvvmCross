@@ -86,7 +86,7 @@ namespace MvvmCross.iOS.Views
             return true;
         }
 
-        public virtual bool CanShowChildView(UIViewController viewController)
+        public virtual bool CanShowChildView()
         {
             return SelectedViewController is UINavigationController;
         }
