@@ -143,11 +143,37 @@ namespace MvvmCross.Forms.Views
             MvxMasterDetailPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
+            var page = CreatePage(view, request);
             var masterDetailHost = FormsApplication.MainPage as MasterDetailPage;
+
+            switch (attribute.Position)
+            {
+                case MasterDetailPosition.Root:
+                    FormsApplication.MainPage = page;
+                    break;
+                case MasterDetailPosition.Master:
+                    masterDetailHost.Master = page;
+                    break;
+                case MasterDetailPosition.Detail:
+                    masterDetailHost.Detail = page;
+                    break;
+                default:
+                    break;
+            }
+
+            /*var masterDetailHost = FormsApplication.MainPage as MasterDetailPage;
             if (masterDetailHost == null && FormsApplication.MainPage is MvxNavigationPage navigationPage)
             {
                 masterDetailHost = navigationPage.CurrentPage as MasterDetailPage;
-                if (masterDetailHost == null)
+                if(attribute.Position == MasterDetailPosition.Root)
+                {
+                    if (masterDetailHost == null)
+                        
+                    else
+                        masterDetailHost.
+                        
+                }
+                else if (masterDetailHost == null)
                 {
                     MvxTrace.Trace($"Current root is not a MasterDetailPage show your own first to use custom Host. Assuming we need to create one.");
                     masterDetailHost = CreateMasterDetailHost(view, request);
@@ -196,20 +222,7 @@ namespace MvvmCross.Forms.Views
                     masterDetailHost.Detail = new MvxNavigationPage(page);
                 else
                     masterDetailHost.Detail = page;
-            }
-        }
-
-        private MasterDetailPage CreateMasterDetailHost(Type view, MvxViewModelRequest request)
-        {
-            var masterDetailHost = new MvxMasterDetailPage
-            {
-                Master = CreatePage(view, request),
-
-                // TODO: Good way to retrieve view and viewmodel type for detail here if possible. If not create content page
-                Detail = new ContentPage()
-            };
-
-            return masterDetailHost;
+            }*/
         }
 
         public virtual bool CloseMasterDetailPage(IMvxViewModel viewModel, MvxMasterDetailPagePresentationAttribute attribute)

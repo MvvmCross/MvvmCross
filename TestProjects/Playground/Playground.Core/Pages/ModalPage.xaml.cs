@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace Playground.Core.Pages
 {
-    [MvxModalPresentation]
+    [MvxModalPresentation(WrapInNavigationPage = false)]
     public partial class ModalPage : MvxContentPage<ModalViewModel>
     {
         public ModalPage()
