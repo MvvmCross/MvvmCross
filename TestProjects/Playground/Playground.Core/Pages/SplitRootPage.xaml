@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<views:MvxContentPage x:TypeArguments="viewModels:SplitRootViewModel"
+<views:MvxMasterDetailPage x:TypeArguments="viewModels:SplitRootViewModel"
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
@@ -11,4 +11,4 @@
             <Label Text="I'm a split root page" />
         </StackLayout>
     </ContentPage.Content>
-</views:MvxContentPage>
+</views:MvxMasterDetailPage>

@@ -35,6 +35,9 @@ namespace MvvmCross.Forms.iOS.Presenters
         {
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
             FormsApplication.MainPage = new MvxNavigationPage();
+
+            //TODO: Why do i need to set the root here?
+            window.RootViewController = FormsApplication.MainPage.CreateViewController();
         }
 
         private MvxFormsApplication _formsApplication;

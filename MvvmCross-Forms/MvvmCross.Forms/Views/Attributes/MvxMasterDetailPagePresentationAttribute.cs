@@ -16,6 +16,7 @@ namespace MvvmCross.Forms.Views.Attributes
 
     public enum MasterDetailPosition
     {
+        Root,
         Master,
         Detail
     }
