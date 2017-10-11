@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
@@ -40,6 +41,57 @@ namespace MvvmCross.Forms.Views
                 }
             }
             return page;
+        }
+
+        public virtual void RegisterAttributeTypes(Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary)
+        {
+            AttributeTypesToActionsDictionary.Add(
+                typeof(MvxCarouselPagePresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                ShowAction = (view, attribute, request) => ShowCarouselPage(view, (MvxCarouselPagePresentationAttribute)attribute, request),
+                CloseAction = (viewModel, attribute) => CloseCarouselPage(viewModel, (MvxCarouselPagePresentationAttribute)attribute)
+                });
+
+            AttributeTypesToActionsDictionary.Add(
+                typeof(MvxContentPagePresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                ShowAction = (view, attribute, request) => ShowContentPage(view, (MvxContentPagePresentationAttribute)attribute, request),
+                CloseAction = (viewModel, attribute) => CloseContentPage(viewModel, (MvxContentPagePresentationAttribute)attribute)
+                });
+
+            AttributeTypesToActionsDictionary.Add(
+                typeof(MvxMasterDetailPagePresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                ShowAction = (view, attribute, request) => ShowMasterDetailPage(view, (MvxMasterDetailPagePresentationAttribute)attribute, request),
+                CloseAction = (viewModel, attribute) => CloseMasterDetailPage(viewModel, (MvxMasterDetailPagePresentationAttribute)attribute)
+                });
+
+            AttributeTypesToActionsDictionary.Add(
+                typeof(MvxModalPresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                ShowAction = (view, attribute, request) => ShowModal(view, (MvxModalPresentationAttribute)attribute, request),
+                CloseAction = (viewModel, attribute) => CloseModal(viewModel, (MvxModalPresentationAttribute)attribute)
+                });
+
+            AttributeTypesToActionsDictionary.Add(
+                typeof(MvxNavigationPagePresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                ShowAction = (view, attribute, request) => ShowNavigationPage(view, (MvxNavigationPagePresentationAttribute)attribute, request),
+                CloseAction = (viewModel, attribute) => CloseNavigationPage(viewModel, (MvxNavigationPagePresentationAttribute)attribute)
+                });
+
+            AttributeTypesToActionsDictionary.Add(
+                typeof(MvxTabbedPagePresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                ShowAction = (view, attribute, request) => ShowTabbedPage(view, (MvxTabbedPagePresentationAttribute)attribute, request),
+                CloseAction = (viewModel, attribute) => CloseTabbedPage(viewModel, (MvxTabbedPagePresentationAttribute)attribute)
+                });
         }
 
         public virtual void ShowCarouselPage(
