@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using MvvmCross.Forms.Views;
 using MvvmCross.Forms.Views.Attributes;

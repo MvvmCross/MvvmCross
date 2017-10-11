@@ -31,6 +31,8 @@ namespace Playground.Core.ViewModels
 
             ShowWindowCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<WindowViewModel>());
 
+            ShowMixedNavigationCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<MixedNavFirstViewModel>());
+
             _counter = 3;
         }
 
@@ -63,5 +65,7 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowSheetCommand { get; private set; }
 
         public IMvxAsyncCommand ShowWindowCommand { get; private set; }
+
+        public IMvxAsyncCommand ShowMixedNavigationCommand { get; private set; }
     }
 }

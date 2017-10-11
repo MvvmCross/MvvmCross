@@ -10,7 +10,7 @@
     <RootNamespace>Playground.Core</RootNamespace>
     <AssemblyName>Playground.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -35,6 +35,22 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Pages\MixedNavFirstPage.xaml.cs">
+      <DependentUpon>MixedNavFirstPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MixedNavMasterDetailPage.xaml.cs">
+      <DependentUpon>MixedNavMasterDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MixedNavMasterRootContentPage.xaml.cs">
+      <DependentUpon>MixedNavMasterRootContentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MixedNavTabsPage.xaml.cs">
+      <DependentUpon>MixedNavTabsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\MixedNavFirstViewModel.cs" />
+    <Compile Include="ViewModels\MixedNavMasterDetailViewModel.cs" />
+    <Compile Include="ViewModels\MixedNavMasterRootContentViewModel.cs" />
+    <Compile Include="ViewModels\MixedNavTabsViewModel.cs" />
     <Compile Include="ViewModels\WindowChildViewModel.cs" />
     <Compile Include="ViewModels\RootViewModel.cs" />
     <Compile Include="ViewModels\ChildViewModel.cs" />
@@ -160,6 +176,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\MvvmCross-Forms\MvvmCross.Forms\MvvmCross.Forms.csproj">
+      <Project>{0797d39c-c59b-4fe2-bb16-ab6fa0119c69}</Project>
+      <Name>MvvmCross.Forms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>MvvmCross.Core</Name>
@@ -167,10 +187,6 @@
     <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>MvvmCross.Platform</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross-Forms\MvvmCross.Forms\MvvmCross.Forms.csproj">
-      <Project>{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}</Project>
-      <Name>MvvmCross.Forms</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +205,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\MixedNavFirstPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\MixedNavMasterDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\MixedNavMasterRootContentPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\MixedNavTabsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\..\packages\Xamarin.Forms.2.4.0.282\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\..\..\packages\Xamarin.Forms.2.4.0.282\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />
