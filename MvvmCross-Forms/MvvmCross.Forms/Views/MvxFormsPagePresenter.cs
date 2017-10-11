@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
@@ -97,25 +97,42 @@ namespace MvvmCross.Forms.Views
                 masterDetailHost = navigationPage.CurrentPage as MasterDetailPage;
                 if (masterDetailHost == null)
                 {
-                    MvxTrace.Trace($"Current root is not a TabbedPage show your own first to use custom Host. Assuming we need to create one.");
-                    masterDetailHost = new MvxMasterDetailPage();
+                    MvxTrace.Trace($"Current root is not a MasterDetailPage show your own first to use custom Host. Assuming we need to create one.");
+                    masterDetailHost = CreateMasterDetailHost(view, request);
+
+                    // Crash here if you dont have master and detail property set for the masterDetailHost
                     navigationPage.PushAsync(masterDetailHost);
                 }
             }
             else if (masterDetailHost == null)
             {
-                MvxTrace.Trace($"Current root is not a TabbedPage show your own first to use custom Host. Assuming we need to create one.");
-                masterDetailHost = new MvxMasterDetailPage();
+                MvxTrace.Trace($"Current root is not a MasterDetailPage show your own first to use custom Host. Assuming we need to create one.");
+                masterDetailHost = CreateMasterDetailHost(view, request);
                 FormsApplication.MainPage = masterDetailHost;
             }
 
+
+            // Creating page here a second time when method CreateMasterDetailHost was executed already.
+            // Maybe the better approach is to not push the masterDetailHost in line 103, do it later instead when everything is
+            // setup correctly
             var page = CreatePage(view, request);
+
             if (attribute.Position == MasterDetailPosition.Master)
             {
                 if (masterDetailHost.Master is NavigationPage navigationMasterPage)
                     navigationMasterPage.PushAsync(page);
-                else if (attribute.WrapInNavigationPage == true)
+                else if (attribute.WrapInNavigationPage == true) {
+
+                    // In the beginning I have not set the WrapInNavigationPage to true in my master page, so this part got executed.
+                    // It crashed saying "Title must be set in master" even tho it was set already. I think this happends because the new created
+                    // Navigation page needs the title of page. like so: navPage.Title = page.Title before setting Master property of masterDetailHost
                     masterDetailHost.Master = new MvxNavigationPage(page);
+
+                    // Another thing came into my mind while typing, who on earth wants to have navigation inside a master / navigation drawer. From
+                    // my view thats odd. If you dont want to support this you could set the default of WrapInNavigationPage to false 
+                    // inside of MvxMasterDetailPagePresentation
+
+                }
                 else
                     masterDetailHost.Master = page;
             }
@@ -128,6 +145,19 @@ namespace MvvmCross.Forms.Views
                 else
                     masterDetailHost.Detail = page;
             }
+        }
+
+        private MasterDetailPage CreateMasterDetailHost(Type view, MvxViewModelRequest request)
+        {
+            var masterDetailHost = new MvxMasterDetailPage
+            {
+                Master = CreatePage(view, request),
+
+                // TODO: Good way to retrieve view and viewmodel type for detail here if possible. If not create content page
+                Detail = new ContentPage()
+            };
+
+            return masterDetailHost;
         }
 
         public virtual bool CloseMasterDetailPage(IMvxViewModel viewModel, MvxMasterDetailPagePresentationAttribute attribute)
