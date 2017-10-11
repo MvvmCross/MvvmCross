@@ -12,6 +12,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS.Views
         public virtual float DarkOverlayAlpha => 0;
         public virtual bool HasDarkOverlay => false;
         public virtual bool HasShadowing => true;
+        public virtual float ShadowOpacity => 0.5f;
+        public virtual float ShadowRadius => 4.0f;
+        public virtual UIColor ShadowColor => UIColor.Black;
         public virtual bool DisablePanGesture => false;
         public virtual bool ReopenOnRotate => true;
 

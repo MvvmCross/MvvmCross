@@ -9,6 +9,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
         float DarkOverlayAlpha { get; }
         bool HasDarkOverlay { get; }
         bool HasShadowing { get; }
+        float ShadowOpacity { get; }
+        float ShadowRadius { get; }
+        UIColor ShadowColor { get; }
         UIImage MenuButtonImage { get; }
         int MenuWidth { get; }
         bool ReopenOnRotate { get; }
