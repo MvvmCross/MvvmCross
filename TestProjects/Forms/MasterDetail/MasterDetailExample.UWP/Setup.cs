@@ -1,4 +1,4 @@
-﻿using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Activation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Platform;
@@ -30,7 +30,7 @@ namespace MasterDetailExample.UWP
             Forms.Init(_launchActivatedEventArgs);
 
             var xamarinFormsApp = new MvxFormsApplication();
-            var presenter = new MvxFormsUwpMasterDetailPagePresenter(rootFrame, xamarinFormsApp);
+            var presenter = new MvxFormsUwpViewPresenter(rootFrame, xamarinFormsApp);
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
 
             return presenter;
