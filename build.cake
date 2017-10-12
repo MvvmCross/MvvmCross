@@ -2,8 +2,8 @@
 #tool nuget:?package=gitlink&version=2.4.0
 #tool nuget:?package=vswhere
 #tool nuget:?package=NUnit.ConsoleRunner
-#addin nuget:?package=Cake.Incubator
-#addin nuget:?package=Cake.Git
+#addin nuget:?package=Cake.Incubator&version=1.5.0
+#addin nuget:?package=Cake.Git&version=0.16.0
 
 var sln = new FilePath("MvvmCross_All.sln");
 var outputDir = new DirectoryPath("artifacts");
