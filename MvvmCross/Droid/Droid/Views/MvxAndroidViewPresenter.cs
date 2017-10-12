@@ -172,7 +172,7 @@ namespace MvvmCross.Droid.Views
 
         public virtual void RegisterAttributeTypes()
         {
-            _attributeTypesActionsDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxActivityPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
@@ -180,7 +180,7 @@ namespace MvvmCross.Droid.Views
                     CloseAction = (viewModel, attribute) => CloseActivity(viewModel, (MvxActivityPresentationAttribute)attribute)
                 });
 
-            _attributeTypesActionsDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxFragmentPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
@@ -188,7 +188,7 @@ namespace MvvmCross.Droid.Views
                     CloseAction = (viewModel, attribute) => CloseFragment(viewModel, (MvxFragmentPresentationAttribute)attribute)
                 });
 
-            _attributeTypesActionsDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxDialogFragmentPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {

@@ -139,7 +139,7 @@ namespace MvvmCross.iOS.Views.Presenters
 
         public virtual void RegisterAttributeTypes()
         {
-            _attributeTypesActionsDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxRootPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
@@ -151,7 +151,7 @@ namespace MvvmCross.iOS.Views.Presenters
                     CloseAction = (viewModel, attribute) => CloseRootViewController(viewModel, (MvxRootPresentationAttribute)attribute)
                 });
 
-            _attributeTypesActionsDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxChildPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
@@ -163,7 +163,7 @@ namespace MvvmCross.iOS.Views.Presenters
                     CloseAction = (viewModel, attribute) => CloseChildViewController(viewModel, (MvxChildPresentationAttribute)attribute)
                 });
 
-            _attributeTypesActionsDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxTabPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
@@ -176,7 +176,7 @@ namespace MvvmCross.iOS.Views.Presenters
                 });
 
 
-            _attributeTypesActionsDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxModalPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
@@ -188,7 +188,7 @@ namespace MvvmCross.iOS.Views.Presenters
                     CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel, (MvxModalPresentationAttribute)attribute)
                 });
 
-            _attributeTypesActionsDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxMasterSplitViewPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
@@ -200,7 +200,7 @@ namespace MvvmCross.iOS.Views.Presenters
                     CloseAction = (viewModel, attribute) => CloseMasterSplitViewController(viewModel, (MvxMasterSplitViewPresentationAttribute)attribute)
                 });
 
-            _attributeTypesActionsDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxDetailSplitViewPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {

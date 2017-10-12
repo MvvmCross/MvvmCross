@@ -52,25 +52,25 @@ namespace MvvmCross.Mac.Views.Presenters
 
         protected virtual void RegisterAttributeTypes()
         {
-            _attributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToShowMethodDictionary.Add(
                 typeof(MvxWindowPresentationAttribute),
                 (vc, attribute, request) => ShowWindowViewController(vc, (MvxWindowPresentationAttribute)attribute, request));
 
-            _attributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToShowMethodDictionary.Add(
                 typeof(MvxContentPresentationAttribute),
                 (vc, attribute, request) => ShowContentViewController(vc, (MvxContentPresentationAttribute)attribute, request));
 
-            _attributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToShowMethodDictionary.Add(
                 typeof(MvxModalPresentationAttribute),
                 (vc, attribute, request) => ShowModalViewController(vc, (MvxModalPresentationAttribute)attribute, request));
 
-            _attributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToShowMethodDictionary.Add(
                 typeof(MvxSheetPresentationAttribute),
                 (vc, attribute, request) => ShowSheetViewController(vc, (MvxSheetPresentationAttribute)attribute, request));
 
-            _attributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToShowMethodDictionary.Add(
                 typeof(MvxTabPresentationAttribute),
-                (vc, attribute, request) => ShowTabViewController(vc, (MvxTabPresentationAttribute)attribute, request));                
+                (vc, attribute, request) => ShowTabViewController(vc, (MvxTabPresentationAttribute)attribute, request));
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
@@ -138,11 +138,11 @@ namespace MvvmCross.Mac.Views.Presenters
 
             if (!string.IsNullOrEmpty(viewController.Title))
                 window.Title = viewController.Title;
-                    
+
             Windows.Add(window);
             window.ContentView = viewController.View;
             window.ContentViewController = viewController;
-            windowController.ShowWindow(null);  
+            windowController.ShowWindow(null);
 
             _windowsToWindowControllers.Add(window, windowController);
         }
