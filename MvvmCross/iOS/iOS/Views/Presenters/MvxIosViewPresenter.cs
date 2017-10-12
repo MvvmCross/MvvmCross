@@ -433,24 +433,6 @@ namespace MvvmCross.iOS.Views.Presenters
                 if (attributeAction.CloseAction == null)
                     throw new NullReferenceException($"attributeAction.CloseAction is null for attribute: {attributeType.Name}");
 
-                // check if there is a modal presented
-                //if (ModalViewControllers.Any() && CloseModalViewController(viewModel))
-                //    return;
-
-                // if the current root is a TabBarViewController, delegate close responsibility to it
-                //if (TabBarViewController != null && TabBarViewController.CloseChildViewModel(viewModel))
-                //    return;
-
-                // if the current root is a SplitViewController, delegate close responsibility to it
-                //if (SplitViewController != null && SplitViewController.CloseChildViewModel(viewModel))
-                //    return;
-
-                // if the current root is a NavigationController, close it in the stack
-                //if (MasterNavigationController != null && TryCloseViewControllerInsideStack(MasterNavigationController, viewModel))
-                //    return;
-
-                //MvxTrace.Warning($"Could not close ViewModel type {viewModel.GetType().Name}");
-
                 attributeAction.CloseAction.Invoke(viewModel, attribute);
                 return;
             }
@@ -527,6 +509,14 @@ namespace MvvmCross.iOS.Views.Presenters
             if (ModalViewControllers == null || !ModalViewControllers.Any())
                 return false;
 
+            // check for plain modals
+            var modalToClose = ModalViewControllers.FirstOrDefault(v => v is IMvxIosView && v.GetIMvxIosView().ViewModel == toClose);
+            if (modalToClose != null)
+            {
+                CloseModalViewController(modalToClose);
+                return true;
+            }
+
             // check for modal navigation stacks
             UIViewController controllerToClose = null;
             foreach (var vc in ModalViewControllers.Where(v => v is UINavigationController))
@@ -541,14 +531,6 @@ namespace MvvmCross.iOS.Views.Presenters
             if (controllerToClose != null)
             {
                 CloseModalViewController(controllerToClose);
-                return true;
-            }
-
-            // check for plain modals
-            var modalToClose = ModalViewControllers.FirstOrDefault(v => v is IMvxIosView && v.GetIMvxIosView().ViewModel == toClose);
-            if (modalToClose != null)
-            {
-                CloseModalViewController(modalToClose);
                 return true;
             }
 
