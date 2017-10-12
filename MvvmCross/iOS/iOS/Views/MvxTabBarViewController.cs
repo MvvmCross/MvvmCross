@@ -135,14 +135,19 @@ namespace MvvmCross.iOS.Views
             }
 
             // loop through nav stack Tabs
-            var toClose = ViewControllers.Where(v => v is UINavigationController)
-                                         .Select(v => ((UINavigationController)v).ViewControllers.FirstOrDefault())
-                                         .Where(vc => vc != null)
-                                         .Select(vc => vc.GetIMvxIosView())
-                                         .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
+            UIViewController toClose = null;
+            foreach (var vc in ViewControllers.Where(v => v is UINavigationController))
+            {
+                var root = ((UINavigationController)vc).ViewControllers.FirstOrDefault();
+                if (root != null && root.GetIMvxIosView().ViewModel == viewModel)
+                {
+                    toClose = root;
+                    break;
+                }
+            }
             if (toClose != null)
             {
-                RemoveTabController((UIViewController)plainToClose);
+                RemoveTabController((UIViewController)toClose);
                 return true;
             }
 

@@ -469,8 +469,25 @@ namespace MvvmCross.iOS.Views.Presenters
 
         protected virtual bool CloseChildViewController(IMvxViewModel viewModel, MvxChildPresentationAttribute attribute)
         {
+            // if there are modals presented
+            if (ModalViewControllers.Any())
+            {
+                foreach (var modalNav in ModalViewControllers.Where(v => v is UINavigationController))
+                {
+                    if (TryCloseViewControllerInsideStack((UINavigationController)modalNav, viewModel))
+                        return true;
+                }
+            }
+
             //if the current root is a TabBarViewController, delegate close responsibility to it
             if (TabBarViewController != null && TabBarViewController.CloseChildViewModel(viewModel))
+                return true;
+
+            if (SplitViewController != null && SplitViewController.CloseChildViewModel(viewModel))
+                return true;
+
+            // if the current root is a NavigationController, close it in the stack
+            if (MasterNavigationController != null && TryCloseViewControllerInsideStack(MasterNavigationController, viewModel))
                 return true;
 
             return false;
@@ -486,58 +503,53 @@ namespace MvvmCross.iOS.Views.Presenters
 
         protected virtual bool CloseModalViewController(IMvxViewModel viewModel, MvxModalPresentationAttribute attribute)
         {
-            return true;
+            return CloseModalViewController(viewModel);
         }
 
         protected virtual bool CloseMasterSplitViewController(IMvxViewModel viewModel, MvxMasterSplitViewPresentationAttribute attribute)
         {
+            if (SplitViewController != null && SplitViewController.CloseChildViewModel(viewModel))
+                return true;
+
             return true;
         }
 
         protected virtual bool CloseDetailSplitViewController(IMvxViewModel viewModel, MvxDetailSplitViewPresentationAttribute attribute)
         {
+            if (SplitViewController != null && SplitViewController.CloseChildViewModel(viewModel))
+                return true;
+
             return true;
-        }
-
-        #endregion
-
-        protected virtual MvxNavigationController CreateNavigationController(UIViewController viewController)
-        {
-            return new MvxNavigationController(viewController);
-        }
-
-        protected virtual void PushViewControllerIntoStack(UINavigationController navigationController, UIViewController viewController, bool animated)
-        {
-            navigationController.PushViewController(viewController, animated);
-
-            if (viewController is IMvxTabBarViewController)
-                TabBarViewController = viewController as IMvxTabBarViewController;
         }
 
         protected virtual bool CloseModalViewController(IMvxViewModel toClose)
         {
-            // check if there is a modal stack presented
-            if (ModalViewControllers.LastOrDefault() is UINavigationController modalNavController)
+            if (ModalViewControllers == null || !ModalViewControllers.Any())
+                return false;
+
+            // check for modal navigation stacks
+            UIViewController controllerToClose = null;
+            foreach (var vc in ModalViewControllers.Where(v => v is UINavigationController))
             {
-                if (TryCloseViewControllerInsideStack(modalNavController, toClose))
+                var root = ((UINavigationController)vc).ViewControllers.FirstOrDefault();
+                if (root != null && root.GetIMvxIosView().ViewModel == toClose)
                 {
-                    // First() is the RootViewController of the stack. If it is being closed, then remove the nav stack
-                    if (modalNavController.ViewControllers.First().GetIMvxIosView().ViewModel == toClose)
-                    {
-                        CloseModalViewController(modalNavController);
-                    }
-                    return true;
+                    controllerToClose = root;
+                    break;
                 }
             }
-            else
+            if (controllerToClose != null)
             {
-                // close any plain modal presented
-                var last = ModalViewControllers.Last();
-                if (last.GetIMvxIosView().ViewModel == toClose)
-                {
-                    CloseModalViewController(last);
-                    return true;
-                }
+                CloseModalViewController(controllerToClose);
+                return true;
+            }
+
+            // check for plain modals
+            var modalToClose = ModalViewControllers.FirstOrDefault(v => v is IMvxIosView && v.GetIMvxIosView().ViewModel == toClose);
+            if (modalToClose != null)
+            {
+                CloseModalViewController(modalToClose);
+                return true;
             }
 
             return false;
@@ -554,17 +566,32 @@ namespace MvvmCross.iOS.Views.Presenters
             }
 
             // loop through stack
-            foreach (var viewController in navController.ViewControllers)
+            var controllers = navController.ViewControllers.ToList();
+            var controllerToClose = controllers.FirstOrDefault(vc => vc.GetIMvxIosView().ViewModel == toClose);
+            if (controllerToClose != null)
             {
-                var mvxView = viewController.GetIMvxIosView();
-                if (mvxView.ViewModel == toClose)
-                {
-                    var newViewControllers = navController.ViewControllers.Where(v => v != viewController).ToArray();
-                    navController.ViewControllers = newViewControllers;
-                    return true;
-                }
+                controllers.Remove(controllerToClose);
+                navController.ViewControllers = controllers.ToArray();
+
+                return true;
             }
+
             return false;
+        }
+
+        #endregion
+
+        protected virtual MvxNavigationController CreateNavigationController(UIViewController viewController)
+        {
+            return new MvxNavigationController(viewController);
+        }
+
+        protected virtual void PushViewControllerIntoStack(UINavigationController navigationController, UIViewController viewController, bool animated)
+        {
+            navigationController.PushViewController(viewController, animated);
+
+            if (viewController is IMvxTabBarViewController tabBarController)
+                TabBarViewController = tabBarController;
         }
 
         public virtual void NativeModalViewControllerDisappearedOnItsOwn()
