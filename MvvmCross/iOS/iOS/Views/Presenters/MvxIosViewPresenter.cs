@@ -148,7 +148,7 @@ namespace MvvmCross.iOS.Views.Presenters
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
                         ShowRootViewController(viewController, (MvxRootPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel)
+                    CloseAction = (viewModel, attribute) => CloseRootViewController(viewModel, (MvxRootPresentationAttribute)attribute)
                 });
 
             _attributeTypesActionsDictionary.Add(
@@ -160,7 +160,7 @@ namespace MvvmCross.iOS.Views.Presenters
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
                         ShowChildViewController(viewController, (MvxChildPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel)
+                    CloseAction = (viewModel, attribute) => CloseChildViewController(viewModel, (MvxChildPresentationAttribute)attribute)
                 });
 
             _attributeTypesActionsDictionary.Add(
@@ -172,7 +172,7 @@ namespace MvvmCross.iOS.Views.Presenters
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
                         ShowTabViewController(viewController, (MvxTabPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel)
+                    CloseAction = (viewModel, attribute) => CloseTabViewController(viewModel, (MvxTabPresentationAttribute)attribute)
                 });
 
 
@@ -185,7 +185,7 @@ namespace MvvmCross.iOS.Views.Presenters
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
                         ShowModalViewController(viewController, (MvxModalPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel)
+                    CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel, (MvxModalPresentationAttribute)attribute)
                 });
 
             _attributeTypesActionsDictionary.Add(
@@ -197,7 +197,7 @@ namespace MvvmCross.iOS.Views.Presenters
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
                         ShowMasterSplitViewController(viewController, (MvxMasterSplitViewPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel)
+                    CloseAction = (viewModel, attribute) => CloseMasterSplitViewController(viewModel, (MvxMasterSplitViewPresentationAttribute)attribute)
                 });
 
             _attributeTypesActionsDictionary.Add(
@@ -209,7 +209,7 @@ namespace MvvmCross.iOS.Views.Presenters
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
                         ShowDetailSplitViewController(viewController, (MvxDetailSplitViewPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel)
+                    CloseAction = (viewModel, attribute) => CloseDetailSplitViewController(viewModel, (MvxDetailSplitViewPresentationAttribute)attribute)
                 });
         }
 
@@ -245,6 +245,8 @@ namespace MvvmCross.iOS.Views.Presenters
 
             throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
         }
+
+        #region Show implementations
 
         protected virtual void ShowRootViewController(
             UIViewController viewController,
@@ -417,6 +419,8 @@ namespace MvvmCross.iOS.Views.Presenters
             return true;
         }
 
+        #endregion
+
         public override void Close(IMvxViewModel viewModel)
         {
             var attribute = GetPresentationAttribute(viewModel.GetType());
@@ -453,6 +457,49 @@ namespace MvvmCross.iOS.Views.Presenters
 
             throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
         }
+
+        #region Close implementations
+
+        protected virtual bool CloseRootViewController(IMvxViewModel viewModel, MvxRootPresentationAttribute attribute)
+        {
+            Mvx.Warning($"Ignored attempt to close the window root (ViewModel type: {viewModel.GetType().Name}");
+
+            return false;
+        }
+
+        protected virtual bool CloseChildViewController(IMvxViewModel viewModel, MvxChildPresentationAttribute attribute)
+        {
+            //if the current root is a TabBarViewController, delegate close responsibility to it
+            if (TabBarViewController != null && TabBarViewController.CloseChildViewModel(viewModel))
+                return true;
+
+            return false;
+        }
+
+        protected virtual bool CloseTabViewController(IMvxViewModel viewModel, MvxTabPresentationAttribute attribute)
+        {
+            if (TabBarViewController != null && TabBarViewController.CloseTabViewModel(viewModel))
+                return true;
+
+            return false;
+        }
+
+        protected virtual bool CloseModalViewController(IMvxViewModel viewModel, MvxModalPresentationAttribute attribute)
+        {
+            return true;
+        }
+
+        protected virtual bool CloseMasterSplitViewController(IMvxViewModel viewModel, MvxMasterSplitViewPresentationAttribute attribute)
+        {
+            return true;
+        }
+
+        protected virtual bool CloseDetailSplitViewController(IMvxViewModel viewModel, MvxDetailSplitViewPresentationAttribute attribute)
+        {
+            return true;
+        }
+
+        #endregion
 
         protected virtual MvxNavigationController CreateNavigationController(UIViewController viewController)
         {
