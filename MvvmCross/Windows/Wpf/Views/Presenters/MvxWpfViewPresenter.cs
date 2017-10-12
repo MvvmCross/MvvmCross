@@ -59,11 +59,11 @@ namespace MvvmCross.Wpf.Views.Presenters
 
         protected virtual void RegisterAttributeTypes()
         {
-            _attributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToShowMethodDictionary.Add(
                 typeof(MvxWindowPresentationAttribute),
                 (element, attribute, request) => ShowWindow(element, (MvxWindowPresentationAttribute)attribute, request));
 
-            _attributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToShowMethodDictionary.Add(
                 typeof(MvxContentPresentationAttribute),
                 (element, attribute, request) => ShowContentView(element, (MvxContentPresentationAttribute)attribute, request));
         }
