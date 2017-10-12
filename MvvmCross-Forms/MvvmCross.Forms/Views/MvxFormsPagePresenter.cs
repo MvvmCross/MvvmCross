@@ -5,6 +5,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views.Attributes;
+using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 
@@ -146,83 +147,49 @@ namespace MvvmCross.Forms.Views
             var page = CreatePage(view, request);
             var masterDetailHost = FormsApplication.MainPage as MasterDetailPage;
 
+            if (masterDetailHost == null && FormsApplication.MainPage is MvxNavigationPage navigationPage)
+            {
+                masterDetailHost = navigationPage.CurrentPage as MasterDetailPage;
+            }
+
             switch (attribute.Position)
             {
                 case MasterDetailPosition.Root:
-                    FormsApplication.MainPage = page;
+
+                    if(page is MasterDetailPage masterDetailRoot)
+                    {
+                        masterDetailRoot.Master = new MvxContentPage() { Title = "test" };
+                        masterDetailRoot.Detail = new MvxContentPage() { Title = "test" };
+
+                        if (FormsApplication.MainPage is MvxNavigationPage currentPage)
+                            currentPage.PushAsync(page);
+                        else
+                            //TODO: This fails
+                            FormsApplication.MainPage = page;
+                    }
+                    else
+                        throw new MvxException($"A root page should be of type {nameof(MasterDetailPage)}");
+
                     break;
                 case MasterDetailPosition.Master:
-                    masterDetailHost.Master = page;
+                    if (attribute.WrapInNavigationPage && masterDetailHost.Master is MvxNavigationPage navigationMasterPage)
+                        navigationMasterPage.PushAsync(page);
+                    else if (attribute.WrapInNavigationPage)
+                        masterDetailHost.Master = new MvxNavigationPage(page);
+                    else
+                        masterDetailHost.Master = page;
                     break;
                 case MasterDetailPosition.Detail:
-                    masterDetailHost.Detail = page;
+                    if (masterDetailHost.Master is MvxNavigationPage navigationDetailPage)
+                        navigationDetailPage.PushAsync(page);
+                    else if (attribute.WrapInNavigationPage)
+                        masterDetailHost.Master = new MvxNavigationPage(page);
+                    else
+                        masterDetailHost.Master = page;
                     break;
                 default:
                     break;
             }
-
-            /*var masterDetailHost = FormsApplication.MainPage as MasterDetailPage;
-            if (masterDetailHost == null && FormsApplication.MainPage is MvxNavigationPage navigationPage)
-            {
-                masterDetailHost = navigationPage.CurrentPage as MasterDetailPage;
-                if(attribute.Position == MasterDetailPosition.Root)
-                {
-                    if (masterDetailHost == null)
-                        
-                    else
-                        masterDetailHost.
-                        
-                }
-                else if (masterDetailHost == null)
-                {
-                    MvxTrace.Trace($"Current root is not a MasterDetailPage show your own first to use custom Host. Assuming we need to create one.");
-                    masterDetailHost = CreateMasterDetailHost(view, request);
-
-                    // Crash here if you dont have master and detail property set for the masterDetailHost
-                    navigationPage.PushAsync(masterDetailHost);
-                }
-            }
-            else if (masterDetailHost == null)
-            {
-                MvxTrace.Trace($"Current root is not a MasterDetailPage show your own first to use custom Host. Assuming we need to create one.");
-                masterDetailHost = CreateMasterDetailHost(view, request);
-                FormsApplication.MainPage = masterDetailHost;
-            }
-
-
-            // Creating page here a second time when method CreateMasterDetailHost was executed already.
-            // Maybe the better approach is to not push the masterDetailHost in line 103, do it later instead when everything is
-            // setup correctly
-            var page = CreatePage(view, request);
-
-            if (attribute.Position == MasterDetailPosition.Master)
-            {
-                if (masterDetailHost.Master is NavigationPage navigationMasterPage)
-                    navigationMasterPage.PushAsync(page);
-                else if (attribute.WrapInNavigationPage == true) {
-
-                    // In the beginning I have not set the WrapInNavigationPage to true in my master page, so this part got executed.
-                    // It crashed saying "Title must be set in master" even tho it was set already. I think this happends because the new created
-                    // Navigation page needs the title of page. like so: navPage.Title = page.Title before setting Master property of masterDetailHost
-                    masterDetailHost.Master = new MvxNavigationPage(page);
-
-                    // Another thing came into my mind while typing, who on earth wants to have navigation inside a master / navigation drawer. From
-                    // my view thats odd. If you dont want to support this you could set the default of WrapInNavigationPage to false 
-                    // inside of MvxMasterDetailPagePresentation
-
-                }
-                else
-                    masterDetailHost.Master = page;
-            }
-            else if (attribute.Position == MasterDetailPosition.Detail)
-            {
-                if (masterDetailHost.Detail is NavigationPage navigationDetailPage)
-                    navigationDetailPage.PushAsync(page);
-                else if (attribute.WrapInNavigationPage == true)
-                    masterDetailHost.Detail = new MvxNavigationPage(page);
-                else
-                    masterDetailHost.Detail = page;
-            }*/
         }
 
         public virtual bool CloseMasterDetailPage(IMvxViewModel viewModel, MvxMasterDetailPagePresentationAttribute attribute)

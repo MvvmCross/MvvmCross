@@ -20,7 +20,7 @@ namespace Playground.Wpf.Views
         {
             return new MvxWindowPresentationAttribute
             {
-                Identifier = $"{nameof(WindowView)}.{ViewModel.Count}"
+                Identifier = $"{nameof(WindowView)}"
             };
         }
     }

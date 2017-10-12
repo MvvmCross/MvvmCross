@@ -1,4 +1,4 @@
-﻿// MvxWpfViewsContainer.cs
+// MvxWpfViewsContainer.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -24,7 +24,23 @@ namespace MvvmCross.Wpf.Views
             if (viewType == null)
                 throw new MvxException("View Type not found for " + request.ViewModelType);
 
-            // , request
+            var wpfView = CreateView(viewType) as IMvxWpfView;        
+
+            if (request is MvxViewModelInstanceRequest instanceRequest)
+            {
+                wpfView.ViewModel = instanceRequest.ViewModelInstance;
+            }
+            else
+            {
+                var viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
+                wpfView.ViewModel = viewModelLoader.LoadViewModel(request, null);
+            }
+
+            return wpfView as FrameworkElement;
+        }
+
+        public FrameworkElement CreateView(Type viewType)
+        {
             var viewObject = Activator.CreateInstance(viewType);
             if (viewObject == null)
                 throw new MvxException("View not loaded for " + viewType);
@@ -36,16 +52,6 @@ namespace MvvmCross.Wpf.Views
             var viewControl = viewObject as FrameworkElement;
             if (viewControl == null)
                 throw new MvxException("Loaded View is not a FrameworkElement " + viewType);
-
-            if (request is MvxViewModelInstanceRequest instanceRequest)
-            {
-                wpfView.ViewModel = instanceRequest.ViewModelInstance;
-            }
-            else
-            {
-                var viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
-                wpfView.ViewModel = viewModelLoader.LoadViewModel(request, null);
-            }
 
             return viewControl;
         }
