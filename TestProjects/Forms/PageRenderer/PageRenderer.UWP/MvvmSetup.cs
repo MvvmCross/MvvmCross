@@ -1,4 +1,4 @@
-﻿using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Activation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Uwp;
 using MvvmCross.Platform;
@@ -17,7 +17,7 @@ namespace PageRendererExample.WindowsUWP
         protected override IMvxApplication CreateApp()
         {
             Mvx.LazyConstructAndRegisterSingleton<IImageHolder, ImageHolder>();
-            return new MvvmApp();
+            return new CoreApp();
         }
     }
 }
