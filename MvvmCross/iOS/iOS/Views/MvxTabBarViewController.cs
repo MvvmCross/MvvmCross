@@ -93,34 +93,56 @@ namespace MvvmCross.iOS.Views
 
         public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
         {
-            var navController = SelectedViewController as UINavigationController;
-            if (navController != null)
+            if (SelectedViewController is UINavigationController navController
+                && navController.ViewControllers != null
+                && navController.ViewControllers.Any())
             {
-                var root = navController.ViewControllers.FirstOrDefault();
-
-                // check if the ViewModel to close is the Root of the Navigation Stack, 
-                // otherwise pop the last in stack
-                if (root != null
-                   && root is IMvxIosView iosView
-                   && iosView.ViewModel == viewModel)
-                {
-                    RemoveTabController(navController);
-                }
-                else
+                // if the ViewModel to close if the last in the stack, close it animated
+                if (navController.TopViewController.GetIMvxIosView().ViewModel == viewModel)
                 {
                     navController.PopViewController(true);
+                    return true;
                 }
 
+                var controllers = navController.ViewControllers.ToList();
+                var controllerToClose = controllers.FirstOrDefault(vc => vc.GetIMvxIosView().ViewModel == viewModel);
+
+                if (controllerToClose != null)
+                {
+                    controllers.Remove(controllerToClose);
+                    navController.ViewControllers = controllers.ToArray();
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public virtual bool CloseTabViewModel(IMvxViewModel viewModel)
+        {
+            if (ViewControllers == null || !ViewControllers.Any())
+                return false;
+
+            // loop through plain Tabs
+            var plainToClose = ViewControllers.Where(v => !(v is UINavigationController))
+                                              .Select(v => v.GetIMvxIosView())
+                                              .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
+            if (plainToClose != null)
+            {
+                RemoveTabController((UIViewController)plainToClose);
                 return true;
             }
 
-            // loop through Tabs
-            var toClose = ViewControllers.Where(v => v.GetType() != typeof(MvxNavigationController))
-                                         .Select(v => v.GetIMvxIosView())
+            // loop through nav stack Tabs
+            var toClose = ViewControllers.Where(v => v is UINavigationController)
+                                         .Select(v => ((UINavigationController)v).ViewControllers.FirstOrDefault())
+                                         .Where(vc => vc != null)
+                                         .Select(vc => vc.GetIMvxIosView())
                                          .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
             if (toClose != null)
             {
-                RemoveTabController((UIViewController)toClose);
+                RemoveTabController((UIViewController)plainToClose);
                 return true;
             }
 
