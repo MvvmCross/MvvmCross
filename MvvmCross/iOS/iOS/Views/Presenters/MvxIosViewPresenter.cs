@@ -68,7 +68,7 @@ namespace MvvmCross.iOS.Views.Presenters
             var overrideAttribute = GetOverridePresentationAttribute(viewModelType, viewType);
             if (overrideAttribute != null)
                 return overrideAttribute;
-            
+
             var attribute = viewType
                 .GetCustomAttributes(typeof(MvxBasePresentationAttribute), true)
                 .FirstOrDefault() as MvxBasePresentationAttribute;
@@ -143,10 +143,11 @@ namespace MvvmCross.iOS.Views.Presenters
                 typeof(MvxRootPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
-                ShowAction = (viewType, attribute, request) => {
-                    var viewController = this.CreateViewControllerFor(request) as UIViewController;
-                    ShowRootViewController(viewController, (MvxRootPresentationAttribute)attribute, request);
-                },
+                    ShowAction = (viewType, attribute, request) =>
+                    {
+                        var viewController = (UIViewController)this.CreateViewControllerFor(request);
+                        ShowRootViewController(viewController, (MvxRootPresentationAttribute)attribute, request);
+                    },
                     CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel)
                 });
 
@@ -154,8 +155,9 @@ namespace MvvmCross.iOS.Views.Presenters
                 typeof(MvxChildPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
-                    ShowAction = (viewType, attribute, request) => {
-                        var viewController = this.CreateViewControllerFor(request) as UIViewController;
+                    ShowAction = (viewType, attribute, request) =>
+                    {
+                        var viewController = (UIViewController)this.CreateViewControllerFor(request);
                         ShowChildViewController(viewController, (MvxChildPresentationAttribute)attribute, request);
                     },
                     CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel)
@@ -165,8 +167,9 @@ namespace MvvmCross.iOS.Views.Presenters
                 typeof(MvxTabPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
-                    ShowAction = (viewType, attribute, request) => {
-                        var viewController = this.CreateViewControllerFor(request) as UIViewController;
+                    ShowAction = (viewType, attribute, request) =>
+                    {
+                        var viewController = (UIViewController)this.CreateViewControllerFor(request);
                         ShowTabViewController(viewController, (MvxTabPresentationAttribute)attribute, request);
                     },
                     CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel)
@@ -177,8 +180,9 @@ namespace MvvmCross.iOS.Views.Presenters
                 typeof(MvxModalPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
-                    ShowAction = (viewType, attribute, request) => {
-                        var viewController = this.CreateViewControllerFor(request) as UIViewController;
+                    ShowAction = (viewType, attribute, request) =>
+                    {
+                        var viewController = (UIViewController)this.CreateViewControllerFor(request);
                         ShowModalViewController(viewController, (MvxModalPresentationAttribute)attribute, request);
                     },
                     CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel)
@@ -188,8 +192,9 @@ namespace MvvmCross.iOS.Views.Presenters
                 typeof(MvxMasterSplitViewPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
-                    ShowAction = (viewType, attribute, request) => {
-                        var viewController = this.CreateViewControllerFor(request) as UIViewController;
+                    ShowAction = (viewType, attribute, request) =>
+                    {
+                        var viewController = (UIViewController)this.CreateViewControllerFor(request);
                         ShowMasterSplitViewController(viewController, (MvxMasterSplitViewPresentationAttribute)attribute, request);
                     },
                     CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel)
@@ -199,8 +204,9 @@ namespace MvvmCross.iOS.Views.Presenters
                 typeof(MvxDetailSplitViewPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
-                    ShowAction = (viewType, attribute, request) => {
-                        var viewController = this.CreateViewControllerFor(request) as UIViewController;
+                    ShowAction = (viewType, attribute, request) =>
+                    {
+                        var viewController = (UIViewController)this.CreateViewControllerFor(request);
                         ShowDetailSplitViewController(viewController, (MvxDetailSplitViewPresentationAttribute)attribute, request);
                     },
                     CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel)
@@ -211,8 +217,7 @@ namespace MvvmCross.iOS.Views.Presenters
         {
             if (HandlePresentationChange(hint)) return;
 
-            var presentationHint = hint as MvxClosePresentationHint;
-            if (presentationHint != null)
+            if (hint is MvxClosePresentationHint presentationHint)
             {
                 Close(presentationHint.ViewModelToClose);
                 return;
