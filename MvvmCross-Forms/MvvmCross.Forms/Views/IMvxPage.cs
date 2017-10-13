@@ -4,12 +4,12 @@ using MvvmCross.Core.Views;
 
 namespace MvvmCross.Forms.Views
 {
-    public interface IMvxPage : IMvxView, IMvxBindingContextOwner
+    public interface IMvxPage : IMvxFormsView
     {
     }
 
     public interface IMvxPage<TViewModel>
-        : IMvxPage, IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
+        : IMvxPage, IMvxFormsView<TViewModel> where TViewModel : class, IMvxViewModel
     {
     }
 }
