@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace Playground.Core.Pages
 {
-    [MvxNavigationPagePresentation]
+    [MvxTabbedPagePresentation(TabbedPosition.Root)]
     public partial class TabsRootPage : MvxTabbedPage<TabsRootViewModel>
     {
         public TabsRootPage()

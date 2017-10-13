@@ -10,7 +10,7 @@ namespace MvvmCross.Forms.Views.Attributes
         {
         }
 
-        public bool WrapInNavigationPage { get; set; } = true;
+        public virtual bool WrapInNavigationPage { get; set; } = true;
         public string Title { get; set; }
         public string Icon { get; set; }
     }
