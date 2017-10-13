@@ -38,12 +38,16 @@ There are also new MvvmCross base classes for all Xamarin.Forms Page types suppo
 
 ## Already possible
 
+```c#
 <Label mvx:La.ng="Text ThisIsLocalized" />
+```
 
 ## New bindings
 
+```c#
 <Label Text="{mvx:MvxLang ThisIsLocalizedToo}" />
 <Label Text="{mvx:MvxBind TextSource, Mode=OneTime, Converter=Language, ConverterParameter=ThisIsLocalizedThroughMvxBind}" />
+```
 
 # Other improvements
 
