@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace Playground.Core.Pages
 {
-    [MvxModalPresentation]
+    [MvxModalPresentation(WrapInNavigationPage = true, Title = "Nested")]
     public partial class NestedModalPage : MvxContentPage<NestedModalViewModel>
     {
         public NestedModalPage()

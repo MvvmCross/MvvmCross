@@ -40,8 +40,6 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bindings\La.n.g.cs" />
-    <Compile Include="Markup\MvxBind.cs" />
-    <Compile Include="Markup\MvxLang.cs" />
     <Compile Include="ViewModels\IMvxMasterDetailViewModel.cs" />
     <Compile Include="ViewModels\MvxMasterDetailViewModel.cs" />
     <Compile Include="Bindings\Bi.n.d.cs" />
@@ -80,6 +78,8 @@
     <Compile Include="Views\MvxContentView.cs" />
     <Compile Include="Views\IMvxFormsView.cs" />
     <Compile Include="Views\MvxBoxView.cs" />
+    <Compile Include="Bindings\MvxBind.cs" />
+    <Compile Include="Bindings\MvxLang.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
