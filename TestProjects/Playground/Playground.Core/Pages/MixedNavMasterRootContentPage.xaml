@@ -4,9 +4,9 @@
              xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
              xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
              x:Class="Playground.Core.Pages.MixedNavMasterRootContentPage" Title="Root">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Root content page" />
-        </StackLayout>
-    </ContentPage.Content>
+
+    <StackLayout>
+        <Label Text="Root content page" />
+    </StackLayout>
+
 </views:MvxContentPage>

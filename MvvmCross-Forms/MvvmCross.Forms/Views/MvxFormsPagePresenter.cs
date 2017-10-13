@@ -381,7 +381,7 @@ namespace MvvmCross.Forms.Views
                 }
                 else if (FormsApplication.MainPage is MasterDetailPage masterDetailPage)
                 {
-                    tabHost = masterDetailPage.Detail as MvxTabbedPage;
+                    tabHost = masterDetailPage.Detail as TabbedPage;
                     if (tabHost == null && masterDetailPage.Detail is MvxNavigationPage detailNavigationPage)
                     {
                         tabHost = detailNavigationPage.CurrentPage as TabbedPage;
