@@ -10,6 +10,7 @@
       <StackLayout Margin="10">
             <Label Text="I'm a Modal page that will host a Page!" />
             <Button Text="Show Child" mvx:Bi.nd="Command ShowChildCommand"/>
+            <Button Text="Show NestedModal" mvx:Bi.nd="Command ShowNestedModalCommand"/>
             <Button Text="Close" mvx:Bi.nd="Command CloseCommand"/>
         </StackLayout>
     </ContentPage.Content>

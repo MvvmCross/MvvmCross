@@ -101,12 +101,60 @@ namespace MvvmCross.Forms.Views
             MvxViewModelRequest request)
         {
             var page = CreatePage(view, request);
-            FormsApplication.MainPage = page;
+
+            if (attribute.Position == CarouselPosition.Root)
+            {
+                if (page is CarouselPage carouselPageRoot)
+                {
+                    if (attribute.WrapInNavigationPage && FormsApplication.MainPage is MvxNavigationPage currentPage)
+                        currentPage.PushAsync(page);
+                    else if (attribute.WrapInNavigationPage)
+                        FormsApplication.MainPage = new MvxNavigationPage(page);
+                    else
+                        FormsApplication.MainPage = page;
+                }
+                else
+                    throw new MvxException($"A root page should be of type {nameof(CarouselPage)}");
+            }
+            else
+            {
+                var carouselHost = FormsApplication.MainPage as CarouselPage;
+                if (carouselHost == null && FormsApplication.MainPage is MvxNavigationPage navigationPage)
+                {
+                    carouselHost = navigationPage.CurrentPage as CarouselPage;
+                    if (carouselHost == null)
+                    {
+                        MvxTrace.Trace($"Current root is not a CarouselPage show your own first to use custom Host. Assuming we need to create one.");
+                        carouselHost = new MvxCarouselPage();
+                        navigationPage.PushAsync(carouselHost);
+                    }
+                }
+                else if (carouselHost == null)
+                {
+                    MvxTrace.Trace($"Current root is not a CarouselPage show your own first to use custom Host. Assuming we need to create one.");
+                    carouselHost = new MvxCarouselPage();
+                    FormsApplication.MainPage = carouselHost;
+                }
+
+                if (string.IsNullOrEmpty(page.Title))
+                    page.Title = attribute.Title;
+                carouselHost.Children.Add(page as ContentPage);
+            }
         }
 
         public virtual bool CloseCarouselPage(IMvxViewModel viewModel, MvxCarouselPagePresentationAttribute attribute)
         {
-            return false;
+            var carouselHost = FormsApplication.MainPage as CarouselPage;
+            if (carouselHost == null && FormsApplication.MainPage is MvxNavigationPage navigationPage)
+            {
+                carouselHost = navigationPage.CurrentPage as CarouselPage;
+            }
+            var page = carouselHost.Children.OfType<IMvxPage>().FirstOrDefault(x => x.ViewModel == viewModel);
+            if (page is ContentPage carouselPage)
+                carouselHost.Children.Remove(carouselPage);
+            else
+                return false;
+            return true;
         }
 
         public virtual void ShowContentPage(
@@ -128,6 +176,7 @@ namespace MvvmCross.Forms.Views
             }
             else
             {
+                //TODO: Crashes on iOS
                 FormsApplication.MainPage = page;
             }
         }
@@ -145,68 +194,66 @@ namespace MvvmCross.Forms.Views
             MvxViewModelRequest request)
         {
             var page = CreatePage(view, request);
-            var masterDetailHost = FormsApplication.MainPage as MasterDetailPage;
 
-            if (masterDetailHost == null && FormsApplication.MainPage is MvxNavigationPage navigationPage)
+            if(attribute.Position == MasterDetailPosition.Root)
             {
-                masterDetailHost = navigationPage.CurrentPage as MasterDetailPage;
-                if(masterDetailHost == null)
+                if (page is MasterDetailPage masterDetailRoot)
                 {
+                    if (masterDetailRoot.Master == null)
+                        masterDetailRoot.Master = new MvxContentPage() { Title = "MvvmCross" };
+                    if (masterDetailRoot.Detail == null)
+                        masterDetailRoot.Detail = new MvxContentPage() { Title = "MvvmCross" };
+
+                    if (attribute.WrapInNavigationPage && FormsApplication.MainPage is MvxNavigationPage currentPage)
+                        currentPage.PushAsync(page);
+                    else if (attribute.WrapInNavigationPage)
+                        FormsApplication.MainPage = new MvxNavigationPage(page);
+                    else
+                        FormsApplication.MainPage = page;
+                }
+                else
+                    throw new MvxException($"A root page should be of type {nameof(MasterDetailPage)}");
+            }
+            else
+            {
+                var masterDetailHost = FormsApplication.MainPage as MasterDetailPage;
+                if (masterDetailHost == null && FormsApplication.MainPage is MvxNavigationPage navigationPage)
+                {
+                    masterDetailHost = navigationPage.CurrentPage as MasterDetailPage;
+                    if (masterDetailHost == null)
+                    {
+                        masterDetailHost = new MasterDetailPage();
+                        masterDetailHost.Master = new MvxContentPage() { Title = "MvvmCross" };
+                        masterDetailHost.Detail = new MvxContentPage() { Title = "MvvmCross" };
+                        navigationPage.PushAsync(masterDetailHost);
+                    }
+                }
+                else if (masterDetailHost == null)
+                {
+                    //Assume we have to create the host
                     masterDetailHost = new MasterDetailPage();
                     masterDetailHost.Master = new MvxContentPage() { Title = "MvvmCross" };
                     masterDetailHost.Detail = new MvxContentPage() { Title = "MvvmCross" };
-                    navigationPage.PushAsync(masterDetailHost);
+                    FormsApplication.MainPage = masterDetailHost;
                 }
-            }
-            if(masterDetailHost == null)
-            {
-                //Assume we have to create the host
-                masterDetailHost = new MasterDetailPage();
-                masterDetailHost.Master = new MvxContentPage() { Title = "MvvmCross" };
-                masterDetailHost.Detail = new MvxContentPage() { Title = "MvvmCross" };
-                FormsApplication.MainPage = masterDetailHost;
-            }
-
-            switch (attribute.Position)
-            {
-                case MasterDetailPosition.Root:
-
-                    if(page is MasterDetailPage masterDetailRoot)
-                    {
-                        if(masterDetailRoot.Master == null)
-                            masterDetailRoot.Master = new MvxContentPage() { Title = "MvvmCross" };
-                        if (masterDetailRoot.Detail == null)
-                            masterDetailRoot.Detail = new MvxContentPage() { Title = "MvvmCross" };
-
-                        if (attribute.WrapInNavigationPage && FormsApplication.MainPage is MvxNavigationPage currentPage)
-                            currentPage.PushAsync(page);
-                        else if (attribute.WrapInNavigationPage)
-                            FormsApplication.MainPage = new MvxNavigationPage(page);
-                        else
-                            FormsApplication.MainPage = page;
-                    }
-                    else
-                        throw new MvxException($"A root page should be of type {nameof(MasterDetailPage)}");
-
-                    break;
-                case MasterDetailPosition.Master:
+                if(attribute.Position == MasterDetailPosition.Master)
+                {
                     if (attribute.WrapInNavigationPage && masterDetailHost.Master is MvxNavigationPage navigationMasterPage)
                         navigationMasterPage.PushAsync(page);
                     else if (attribute.WrapInNavigationPage)
                         masterDetailHost.Master = new MvxNavigationPage(page);
                     else
                         masterDetailHost.Master = page;
-                    break;
-                case MasterDetailPosition.Detail:
+                }
+                else
+                {
                     if (attribute.WrapInNavigationPage && masterDetailHost.Detail is MvxNavigationPage navigationDetailPage)
                         navigationDetailPage.PushAsync(page);
                     else if (attribute.WrapInNavigationPage)
                         masterDetailHost.Detail = new MvxNavigationPage(page);
                     else
                         masterDetailHost.Detail = page;
-                    break;
-                default:
-                    break;
+                }
             }
         }
 
@@ -247,17 +294,40 @@ namespace MvvmCross.Forms.Views
 
             if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
             {
-                if(attribute.WrapInNavigationPage == true)
+                if (attribute.WrapInNavigationPage == true && navigationPage.Navigation.ModalStack.LastOrDefault() is MvxNavigationPage modalNavigationPage)
+                    modalNavigationPage.PushAsync(page);
+                else if (attribute.WrapInNavigationPage == true)
                     navigationPage.CurrentPage.Navigation.PushModalAsync(new MvxNavigationPage(page));
                 else
                     navigationPage.CurrentPage.Navigation.PushModalAsync(page);
+            }
+            else
+            {
+                if (attribute.WrapInNavigationPage == true && FormsApplication.MainPage.Navigation.ModalStack.LastOrDefault() is MvxNavigationPage modalNavigationPage)
+                    modalNavigationPage.PushAsync(page);
+                else if (attribute.WrapInNavigationPage == true)
+                    FormsApplication.MainPage.Navigation.PushModalAsync(new MvxNavigationPage(page));
+                else
+                    FormsApplication.MainPage.Navigation.PushModalAsync(page);
             }
         }
 
         public virtual bool CloseModal(IMvxViewModel viewModel, MvxModalPresentationAttribute attribute)
         {
             if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
-                navigationPage.CurrentPage.Navigation.PopModalAsync();
+            {
+                if (attribute.WrapInNavigationPage == true && navigationPage.Navigation.ModalStack.LastOrDefault() is MvxNavigationPage modalNavigationPage && modalNavigationPage.Navigation.NavigationStack.Count > 1)
+                    modalNavigationPage.PopAsync();
+                else
+                    navigationPage.CurrentPage.Navigation.PopModalAsync();
+            }
+            else
+            {
+                if (attribute.WrapInNavigationPage == true && FormsApplication.MainPage.Navigation.ModalStack.LastOrDefault() is MvxNavigationPage modalNavigationPage)
+                    modalNavigationPage.PopAsync();
+                else
+                    FormsApplication.MainPage.Navigation.PopModalAsync();
+            }
             return true;
         }
 
@@ -280,28 +350,46 @@ namespace MvvmCross.Forms.Views
             MvxTabbedPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var tabHost = FormsApplication.MainPage as TabbedPage;
-            if (tabHost == null && FormsApplication.MainPage is MvxNavigationPage navigationPage)
+            var page = CreatePage(view, request);
+
+            if(attribute.Position == TabbedPosition.Root)
             {
-                tabHost = navigationPage.CurrentPage as TabbedPage;
-                if (tabHost == null)
+                if (page is TabbedPage tabbedPageRoot)
+                {
+                    if (attribute.WrapInNavigationPage && FormsApplication.MainPage is MvxNavigationPage currentPage)
+                        currentPage.PushAsync(page);
+                    else if (attribute.WrapInNavigationPage)
+                        FormsApplication.MainPage = new MvxNavigationPage(page);
+                    else
+                        FormsApplication.MainPage = page;
+                }
+                else
+                    throw new MvxException($"A root page should be of type {nameof(TabbedPage)}");
+            }
+            else
+            {
+                var tabHost = FormsApplication.MainPage as TabbedPage;
+                if (tabHost == null && FormsApplication.MainPage is MvxNavigationPage navigationPage)
+                {
+                    tabHost = navigationPage.CurrentPage as TabbedPage;
+                    if (tabHost == null)
+                    {
+                        MvxTrace.Trace($"Current root is not a TabbedPage show your own first to use custom Host. Assuming we need to create one.");
+                        tabHost = new MvxTabbedPage();
+                        navigationPage.PushAsync(tabHost);
+                    }
+                }
+                else if (tabHost == null)
                 {
                     MvxTrace.Trace($"Current root is not a TabbedPage show your own first to use custom Host. Assuming we need to create one.");
                     tabHost = new MvxTabbedPage();
-                    navigationPage.PushAsync(tabHost);
+                    FormsApplication.MainPage = tabHost;
                 }
-            }
-            else if (tabHost == null)
-            {
-                MvxTrace.Trace($"Current root is not a TabbedPage show your own first to use custom Host. Assuming we need to create one.");
-                tabHost = new MvxTabbedPage();
-                FormsApplication.MainPage = tabHost;
-            }
 
-            var page = CreatePage(view, request);
-            if (string.IsNullOrEmpty(page.Title))
-                page.Title = attribute.Title;
-            tabHost.Children.Add(page);
+                if (string.IsNullOrEmpty(page.Title))
+                    page.Title = attribute.Title;
+                tabHost.Children.Add(page);
+            }
         }
 
         public virtual bool CloseTabbedPage(IMvxViewModel viewModel, MvxTabbedPagePresentationAttribute attribute)
