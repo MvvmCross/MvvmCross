@@ -19,7 +19,7 @@ using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Views
 {
-    public class MvxAndroidViewPresenter : MvxViewPresenter, IMvxAndroidViewPresenter
+    public class MvxAndroidViewPresenter : MvxViewPresenter, IMvxAndroidViewPresenter, IMvxAttributeViewPresenter
     {
         protected IEnumerable<Assembly> AndroidViewAssemblies { get; set; }
         public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
@@ -52,7 +52,7 @@ namespace MvvmCross.Droid.Views
         }
 
         private IMvxViewModelTypeFinder _viewModelTypeFinder;
-        protected IMvxViewModelTypeFinder ViewModelTypeFinder
+        public IMvxViewModelTypeFinder ViewModelTypeFinder
         {
             get
             {
@@ -63,7 +63,7 @@ namespace MvvmCross.Droid.Views
         }
 
         private IMvxViewsContainer _viewsContainer;
-        protected IMvxViewsContainer ViewsContainer
+        public IMvxViewsContainer ViewsContainer
         {
             get
             {
@@ -85,7 +85,7 @@ namespace MvvmCross.Droid.Views
         }
 
         private Dictionary<Type, MvxPresentationAttributeAction> _attributeTypesActionsDictionary;
-        protected Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
+        public Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
         {
             get
             {
@@ -95,20 +95,6 @@ namespace MvvmCross.Droid.Views
                     RegisterAttributeTypes();
                 }
                 return _attributeTypesActionsDictionary;
-            }
-        }
-
-        private Dictionary<Type, IList<MvxBasePresentationAttribute>> _viewModelToPresentationAttributeMap;
-        protected Dictionary<Type, IList<MvxBasePresentationAttribute>> ViewModelToPresentationAttributeMap
-        {
-            get
-            {
-                if (_viewModelToPresentationAttributeMap == null)
-                {
-                    _viewModelToPresentationAttributeMap = new Dictionary<Type, IList<MvxBasePresentationAttribute>>();
-                    RegisterAttributes();
-                }
-                return _viewModelToPresentationAttributeMap;
             }
         }
 
@@ -139,40 +125,15 @@ namespace MvvmCross.Droid.Views
             }
         }
 
-        private void RegisterAttributes()
-        {
-            var typesWithBasePresentationAttribute = AndroidViewAssemblies
-                         .SelectMany(x => x.DefinedTypes)
-                         .Select(x => x.AsType())
-                         .Where(x => x.HasBasePresentationAttribute())
-                         .ToList();
-
-            foreach (var typeWithAttribute in typesWithBasePresentationAttribute)
-            {
-                var viewModelType = GetAssociatedViewModelType(typeWithAttribute);
-
-                if (!ViewModelToPresentationAttributeMap.ContainsKey(viewModelType))
-                    ViewModelToPresentationAttributeMap.Add(viewModelType, new List<MvxBasePresentationAttribute>());
-
-                foreach (var attribute in typeWithAttribute.GetBasePresentationAttributes())
-                {
-                    //TODO: Can we set the viewType from somewhere else?
-                    if (attribute.ViewType == null)
-                        attribute.ViewType = typeWithAttribute;
-                    ViewModelToPresentationAttributeMap[viewModelType].Add(attribute);
-                }
-            }
-        }
-
         protected Type GetAssociatedViewModelType(Type fromFragmentType)
         {
             Type viewModelType = ViewModelTypeFinder.FindTypeOrNull(fromFragmentType);
             return viewModelType ?? fromFragmentType.GetBasePresentationAttributes().First().ViewModelType;
         }
 
-        protected virtual void RegisterAttributeTypes()
+        public virtual void RegisterAttributeTypes()
         {
-            _attributeTypesActionsDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxActivityPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
@@ -180,7 +141,7 @@ namespace MvvmCross.Droid.Views
                     CloseAction = (viewModel, attribute) => CloseActivity(viewModel, (MvxActivityPresentationAttribute)attribute)
                 });
 
-            _attributeTypesActionsDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxFragmentPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
@@ -188,7 +149,7 @@ namespace MvvmCross.Droid.Views
                     CloseAction = (viewModel, attribute) => CloseFragment(viewModel, (MvxFragmentPresentationAttribute)attribute)
                 });
 
-            _attributeTypesActionsDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxDialogFragmentPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
@@ -197,10 +158,16 @@ namespace MvvmCross.Droid.Views
                 });
         }
 
-        protected virtual MvxBasePresentationAttribute GetAttributeForViewModel(Type viewModelType)
+        public virtual MvxBasePresentationAttribute GetPresentationAttribute(Type viewModelType)
         {
-            IList<MvxBasePresentationAttribute> attributes;
-            if (ViewModelToPresentationAttributeMap.TryGetValue(viewModelType, out attributes))
+            var viewType = ViewsContainer.GetViewType(viewModelType);
+
+            var overrideAttribute = GetOverridePresentationAttribute(viewModelType, viewType);
+            if (overrideAttribute != null)
+                return overrideAttribute;
+
+            IList<MvxBasePresentationAttribute> attributes = viewType.GetCustomAttributes<MvxBasePresentationAttribute>(true).ToList();
+            if(attributes != null && attributes.Count > 0)
             {
                 MvxBasePresentationAttribute attribute = null;
 
@@ -239,30 +206,61 @@ namespace MvvmCross.Droid.Views
                 if (attribute == null)
                     attribute = attributes.FirstOrDefault();
 
-                return GetOverridePresentationAttribute(attribute.ViewType) ?? attribute;
+                attribute.ViewType = viewType;
+
+                return attribute;
             }
 
-            return CreateAttributeForViewModel(viewModelType);
+            return CreatePresentationAttribute(viewModelType, viewType);
         }
 
-        protected virtual MvxBasePresentationAttribute CreateAttributeForViewModel(Type viewModelType)
+        public virtual MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
-            var viewType = ViewsContainer.GetViewType(viewModelType);
-
             if (viewType.IsSubclassOf(typeof(DialogFragment)))
             {
-                MvxTrace.Trace("PresentationAttribute not found for {0}. Assuming DialogFragment presentation", viewModelType.Name);
+                MvxTrace.Trace("PresentationAttribute not found for {0}. Assuming DialogFragment presentation", viewType.Name);
                 return new MvxDialogFragmentPresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
-
-            if (viewType.IsSubclassOf(typeof(Fragment)))
+            else if (viewType.IsSubclassOf(typeof(Fragment)))
             {
-                MvxTrace.Trace("PresentationAttribute not found for {0}. Assuming Fragment presentation", viewModelType.Name);
+                MvxTrace.Trace("PresentationAttribute not found for {0}. Assuming Fragment presentation", viewType.Name);
                 return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), Android.Resource.Id.Content) { ViewType = viewType, ViewModelType = viewModelType };
             }
+            else if (viewType.IsSubclassOf(typeof(Activity)))
+            {
+                MvxTrace.Trace("PresentationAttribute not found for {0}. Assuming Activity presentation", viewType.Name);
+                return new MvxActivityPresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
+            }
+            return null;
+        }
 
-            MvxTrace.Trace("PresentationAttribute not found for {0}. Assuming Activity presentation", viewModelType.Name);
-            return new MvxActivityPresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
+        public virtual MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, Type viewType)
+        {
+            if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
+            {
+                var viewInstance = Activator.CreateInstance(viewType) as Java.Lang.Object;
+                using (viewInstance)
+                {
+                    var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute();
+
+                    if (presentationAttribute == null)
+                    {
+                        MvxTrace.Warning("Override PresentationAttribute null. Falling back to existing attribute.");
+                    }
+                    else
+                    {
+                        if (presentationAttribute.ViewType == null)
+                            presentationAttribute.ViewType = viewType;
+
+                        if (presentationAttribute.ViewModelType == null)
+                            presentationAttribute.ViewModelType = viewModelType;
+
+                        return presentationAttribute;
+                    }
+                }
+            }
+
+            return null;
         }
 
         protected Type GetCurrentActivityViewModelType()
@@ -275,9 +273,9 @@ namespace MvvmCross.Droid.Views
 
         public override void Show(MvxViewModelRequest request)
         {
-            var attribute = GetAttributeForViewModel(request.ViewModelType);
+            var attribute = GetPresentationAttribute(request.ViewModelType);
             attribute.ViewModelType = request.ViewModelType;
-            var view = attribute.ViewType;
+            var viewType = attribute.ViewType;
             var attributeType = attribute.GetType();
 
             if (AttributeTypesToActionsDictionary.TryGetValue(
@@ -287,7 +285,7 @@ namespace MvvmCross.Droid.Views
                 if (attributeAction.ShowAction == null)
                     throw new NullReferenceException($"attributeAction.ShowAction is null for attribute: {attributeType.Name}");
 
-                attributeAction.ShowAction.Invoke(view, attribute, request);
+                attributeAction.ShowAction.Invoke(viewType, attribute, request);
                 return;
             }
 
@@ -536,7 +534,7 @@ namespace MvvmCross.Droid.Views
 
         public override void Close(IMvxViewModel viewModel)
         {
-            var attribute = GetAttributeForViewModel(viewModel.GetType());
+            var attribute = GetPresentationAttribute(viewModel.GetType());
             var attributeType = attribute.GetType();
 
             if (AttributeTypesToActionsDictionary.TryGetValue(
@@ -671,32 +669,6 @@ namespace MvvmCross.Droid.Views
         {
             var fragmentName = FragmentJavaName(type);
             return CurrentFragmentManager.FindFragmentByTag(fragmentName);
-        }
-
-        protected virtual MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewType)
-        {
-            if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
-            {
-                var viewInstance = Activator.CreateInstance(viewType) as Java.Lang.Object;
-                using (viewInstance)
-                {
-                    var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute();
-
-                    if (presentationAttribute == null)
-                    {
-                        MvxTrace.Warning("Override PresentationAttribute null. Falling back to existing attribute.");
-                    }
-                    else
-                    {
-                        if (presentationAttribute.ViewType == null)
-                            presentationAttribute.ViewType = viewType;
-
-                        return presentationAttribute;
-                    }
-                }
-            }
-
-            return null;
         }
     }
 }

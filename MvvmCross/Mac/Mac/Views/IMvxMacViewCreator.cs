@@ -5,6 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using MvvmCross.Core.ViewModels;
 
 namespace MvvmCross.Mac.Views
@@ -14,5 +15,7 @@ namespace MvvmCross.Mac.Views
         IMvxMacView CreateView(MvxViewModelRequest request);
 
         IMvxMacView CreateView(IMvxViewModel viewModel);
+
+        IMvxMacView CreateViewOfType(Type viewType, MvxViewModelRequest request);
     }
 }

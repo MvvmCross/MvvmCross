@@ -136,6 +136,8 @@
     <Compile Include="Views\MvxBasePresentationAttribute.cs" />
     <Compile Include="Views\IMvxOverridePresentationAttribute.cs" />
     <Compile Include="Views\MvxPresentationAttributeExtensions.cs" />
+    <Compile Include="Views\IMvxAttributeViewPresenter.cs" />
+    <Compile Include="Views\MvxPresentationAttributeAction.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

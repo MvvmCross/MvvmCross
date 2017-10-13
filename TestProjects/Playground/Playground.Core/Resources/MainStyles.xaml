@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="Playground.Core.Resources.MainStyles"
+                    xmlns:local="clr-namespace:Playground.Core.Resources"
+                    MergedWith="local:BaseTheme">
+
+    <Color x:Key="PrimaryColor">#333333</Color>
+    <Color x:Key="SecondaryColor">#141215</Color>
+    <Color x:Key="AccentColor">#0099CC</Color>
+
+    
+    <Style x:Key="ListItemTitle" TargetType="Label">
+        <Setter Property="FontSize" Value="Medium" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="ListItemSubtitle" TargetType="Label">
+        <Setter Property="FontSize" Value="Small" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+</ResourceDictionary>

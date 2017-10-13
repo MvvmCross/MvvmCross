@@ -6,9 +6,9 @@ using Xamarin.Forms;
 using MvvmCross.Platform;
 using MvvmCross.Core.Views;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Droid;
-using MvvmCross.Forms.Droid.Presenters;
+using MvvmCross.Forms.Droid.Views;
 
 namespace PageRendererExample.UI.Droid
 {

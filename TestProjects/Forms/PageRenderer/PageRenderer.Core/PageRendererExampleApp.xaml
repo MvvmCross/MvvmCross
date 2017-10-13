@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <d:MvxFormsApplication 
    xmlns="http://xamarin.com/schemas/2014/forms" 
    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
    x:Class="PageRendererExample.PageRendererExampleApp"
-   xmlns:d="clr-namespace:MvvmCross.Forms.Core;assembly=PageRendererExample">
+   xmlns:d="clr-namespace:MvvmCross.Forms.Platform;assembly=PageRendererExample">
 
    <Application.Resources>
         <ResourceDictionary>

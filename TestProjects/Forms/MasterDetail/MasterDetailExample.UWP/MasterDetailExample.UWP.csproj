@@ -11,8 +11,8 @@
     <AssemblyName>MasterDetailExample.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -137,6 +137,14 @@
     <ProjectReference Include="..\..\..\..\MvvmCross-Forms\MvvmCross.Forms\MvvmCross.Forms.csproj">
       <Project>{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}</Project>
       <Name>MvvmCross.Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Binding\UWP\MvvmCross.Binding.Uwp.csproj">
+      <Project>{637533ee-756b-4817-94b2-7c1e56132208}</Project>
+      <Name>MvvmCross.Binding.Uwp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
+      <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
+      <Name>MvvmCross.Binding</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
       <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>

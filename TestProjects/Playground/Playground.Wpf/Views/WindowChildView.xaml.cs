@@ -19,7 +19,7 @@ namespace Playground.Wpf.Views
         {
             return new MvxContentPresentationAttribute
             {
-                WindowIdentifier = $"{nameof(WindowView)}.{ViewModel.ParentNo}",
+                WindowIdentifier = $"{nameof(WindowView)}.ViewModel.ParentNo",
                 StackNavigation = false
             };
         }

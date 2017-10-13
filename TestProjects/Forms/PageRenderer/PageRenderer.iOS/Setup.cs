@@ -2,7 +2,7 @@
 using MvvmCross.iOS.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
-using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.iOS;
 
 namespace PageRendererExample.UI.iOS

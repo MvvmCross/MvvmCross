@@ -15,9 +15,9 @@ namespace Playground.Core.ViewModels
         {
             _navigationService = navigationService;
 
-            ShowChildCommand = new MvxAsyncCommand(async () => ShowViewModel<ChildViewModel>());
+            ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel>());
 
-            ShowModalCommand = new MvxAsyncCommand(async () => ShowViewModel<ModalViewModel>());
+            ShowModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalViewModel>());
 
             ShowModalNavCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalNavViewModel>());
 
@@ -30,6 +30,8 @@ namespace Playground.Core.ViewModels
             ShowSheetCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SheetViewModel>());
 
             ShowWindowCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<WindowViewModel>());
+
+            ShowMixedNavigationCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<MixedNavFirstViewModel>());
 
             _counter = 3;
         }
@@ -63,5 +65,7 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowSheetCommand { get; private set; }
 
         public IMvxAsyncCommand ShowWindowCommand { get; private set; }
+
+        public IMvxAsyncCommand ShowMixedNavigationCommand { get; private set; }
     }
 }

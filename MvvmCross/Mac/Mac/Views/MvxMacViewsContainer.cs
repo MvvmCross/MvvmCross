@@ -31,7 +31,7 @@ namespace MvvmCross.Mac.Views
             }
         }
 
-        protected virtual IMvxMacView CreateViewOfType(Type viewType, MvxViewModelRequest request)
+        public virtual IMvxMacView CreateViewOfType(Type viewType, MvxViewModelRequest request)
         {
             var storyboardAttribute = viewType.GetCustomAttribute<MvxFromStoryboardAttribute>();
             if (storyboardAttribute != null)

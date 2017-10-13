@@ -49,8 +49,19 @@ namespace MvvmCross.Droid.Views.Fragments
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
-            set { DataContext = value; }
+            get
+            {
+                return DataContext as IMvxViewModel;
+            }
+            set
+            {
+                DataContext = value;
+                OnViewModelSet();
+            }
+        }
+
+        public virtual void OnViewModelSet()
+        {
         }
 
         protected void EnsureBindingContextSet(Bundle b0)

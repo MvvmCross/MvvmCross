@@ -13,6 +13,7 @@ using PageRendererExample;
 using Button = Android.Widget.Button;
 using Camera = Android.Hardware.Camera;
 using View = Android.Views.View;
+using MvvmCross.Forms.Droid.Views;
 
 [assembly: ExportRenderer(typeof(CameraRendererPage), typeof(PageRendererExample.UI.Droid.CameraRendererPage))]
 namespace PageRendererExample.UI.Droid

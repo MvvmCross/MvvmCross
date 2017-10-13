@@ -1,4 +1,4 @@
-﻿using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Uwp.Presenters;
 using MvvmCross.Platform;
@@ -18,9 +18,9 @@ namespace MasterDetailExample.UWP
             var start = Mvx.Resolve<IMvxAppStart>();
             start.Start();
 
-            var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsUwpMasterDetailPagePresenter;
+            var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsUwpViewPresenter;
 
-            LoadApplication(presenter.MvxFormsApp);
+            LoadApplication(presenter.FormsApplication);
         }
     }
 }

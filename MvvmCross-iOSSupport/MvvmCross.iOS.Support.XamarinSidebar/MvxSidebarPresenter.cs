@@ -1,4 +1,5 @@
 ﻿using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
 using MvvmCross.iOS.Support.XamarinSidebar.Extensions;
 using MvvmCross.iOS.Support.XamarinSidebar.Views;
 using MvvmCross.iOS.Views;
@@ -18,13 +19,21 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
         {
         }
 
-        protected override void RegisterAttributeTypes()
+        public override void RegisterAttributeTypes()
         {
             base.RegisterAttributeTypes();
 
-            AttributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxSidebarPresentationAttribute),
-                (vc, attribute, request) => ShowSidebarViewController(vc, (MvxSidebarPresentationAttribute)attribute, request));
+                new MvxPresentationAttributeAction
+                {
+                    ShowAction = (viewType, attribute, request) =>
+                    {
+                        var viewController = (UIViewController)this.CreateViewControllerFor(request);
+                        ShowSidebarViewController(viewController, (MvxSidebarPresentationAttribute)attribute, request);
+                    },
+                    CloseAction = (viewModel, attribute) => CloseSidebarViewController(viewModel, (MvxSidebarPresentationAttribute)attribute)
+                });
         }
 
         protected virtual void ShowSidebarViewController(
@@ -159,13 +168,12 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             base.ShowRootViewController(viewController, attribute, request);
         }
 
-        public override void Close(IMvxViewModel toClose)
+        protected virtual bool CloseSidebarViewController(IMvxViewModel viewModel, MvxSidebarPresentationAttribute attribute)
         {
-            // if the current root is a SideBarViewController, delegate close responsibility to it
-            if (SideBarViewController != null && SideBarViewController.CloseChildViewModel(toClose))
-                return;
+            if (SideBarViewController != null && SideBarViewController.CloseChildViewModel(viewModel))
+                return true;
 
-            base.Close(toClose);
+            return false;
         }
     }
 }
