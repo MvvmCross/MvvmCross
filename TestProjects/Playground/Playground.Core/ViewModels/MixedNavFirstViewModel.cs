@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Forms.Views.Attributes;
 
 namespace Playground.Core.ViewModels
 {
@@ -18,24 +19,17 @@ namespace Playground.Core.ViewModels
             _navigationService = navigationService;
         }
 
-        public ICommand LoginCommand => new MvxCommand(ExecuteLogin);
-
-        private void ExecuteLogin()
-        {
-            if (CanLogin())
-            {
-                GotoMasterDetailPage();
-            }
-        }
+        public IMvxAsyncCommand LoginCommand => new MvxAsyncCommand(GotoMasterDetailPage, CanLogin);
 
         private bool CanLogin()
         {
             return true;
         }
 
-        private void GotoMasterDetailPage()
+        private async Task GotoMasterDetailPage()
         {
-            _navigationService.Navigate<MixedNavMasterDetailViewModel>();
+            await _navigationService.Navigate<MixedNavMasterDetailViewModel>();
+            await _navigationService.Navigate<MixedNavMasterRootContentViewModel>();
         }
     }
 }
