@@ -34,6 +34,7 @@ public partial class NestedModalPage : MvxContentPage<NestedModalViewModel>
 
 There are also new MvvmCross base classes for all Xamarin.Forms Page types supporting DataBinding, ViewModels and more from code and layout files!
 
+To take advantage of all those new features make sure to use the Xamarin.Forms base classes for Setup, Appdelegate and others.
 # Extended MvvmCross bindings support
 
 ## Already possible
