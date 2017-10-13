@@ -44,12 +44,20 @@
     <Compile Include="Pages\MixedNavMasterRootContentPage.xaml.cs">
       <DependentUpon>MixedNavMasterRootContentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MixedNavTab2Page.xaml.cs">
+      <DependentUpon>MixedNavTab2Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MixedNavTab1Page.xaml.cs">
+      <DependentUpon>MixedNavTab1Page.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MixedNavTabsPage.xaml.cs">
       <DependentUpon>MixedNavTabsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\MixedNavFirstViewModel.cs" />
     <Compile Include="ViewModels\MixedNavMasterDetailViewModel.cs" />
     <Compile Include="ViewModels\MixedNavMasterRootContentViewModel.cs" />
+    <Compile Include="ViewModels\MixedNavTab2ViewModel.cs" />
+    <Compile Include="ViewModels\MixedNavTab1ViewModel.cs" />
     <Compile Include="ViewModels\MixedNavTabsViewModel.cs" />
     <Compile Include="ViewModels\WindowChildViewModel.cs" />
     <Compile Include="ViewModels\RootViewModel.cs" />
@@ -226,6 +234,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\MixedNavTabsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\MixedNavTab1Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\MixedNavTab2Page.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
