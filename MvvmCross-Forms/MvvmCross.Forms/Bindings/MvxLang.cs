@@ -5,7 +5,7 @@ using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MvvmCross.Forms.Markup
+namespace MvvmCross.Forms.Bindings
 {
     [ContentProperty("Binding")]
     public class MvxLang : IMarkupExtension

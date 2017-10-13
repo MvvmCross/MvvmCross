@@ -7,7 +7,7 @@ using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace MvvmCross.Forms.Markup
+namespace MvvmCross.Forms.Bindings
 {
     [ContentProperty("Binding")]
     public class MvxBind : IMarkupExtension
@@ -47,7 +47,7 @@ namespace MvvmCross.Forms.Markup
             }
             else
             {
-                Mvx.Trace(MvxTraceLevel.Diagnostic, "Cannot only use MvxLang on a bindable property");
+                Mvx.Trace(MvxTraceLevel.Diagnostic, "Cannot only use MvxBind on a bindable property");
             }
 
             return null;
