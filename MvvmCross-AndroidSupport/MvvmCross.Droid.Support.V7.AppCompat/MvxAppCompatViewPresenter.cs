@@ -66,8 +66,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             if (overrideAttribute != null)
                 return overrideAttribute;
 
-            IList<MvxBasePresentationAttribute> attributes;
-            if (ViewModelToPresentationAttributeMap.TryGetValue(viewModelType, out attributes))
+            IList<MvxBasePresentationAttribute> attributes = viewType.GetCustomAttributes<MvxBasePresentationAttribute>(true).ToList();
+            if (attributes != null && attributes.Count > 0)
             {
                 MvxBasePresentationAttribute attribute = null;
 
@@ -122,6 +122,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
                 if (attribute == null)
                     attribute = attributes.FirstOrDefault();
+
+                attribute.ViewType = viewType;
 
                 return attribute;
             }

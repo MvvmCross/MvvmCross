@@ -13,7 +13,7 @@ namespace Playground.Core.ViewModels
     {
         private readonly IMvxNavigationService _navigationService;
         private MenuItem _menuItem;
-        private IMvxCommand _onSelectedChangedCommand;
+        private IMvxAsyncCommand<MenuItem> _onSelectedChangedCommand;
 
         public class MenuItem
         {
@@ -43,16 +43,16 @@ namespace Playground.Core.ViewModels
             }
         }
 
-        private IMvxCommand OnSelectedChangedCommand {
+        private IMvxAsyncCommand<MenuItem> OnSelectedChangedCommand {
             get {
-                return _onSelectedChangedCommand ?? (_onSelectedChangedCommand = new MvxCommand<MenuItem>(item =>
+                return _onSelectedChangedCommand ?? (_onSelectedChangedCommand = new MvxAsyncCommand<MenuItem>(async (item) => 
                 {
                     if (item == null)
                         return;
 
                     var vmType = item.ViewModelType;
 
-                    _navigationService.Navigate(vmType);
+                    await _navigationService.Navigate(vmType);
                 }));
             }
         }

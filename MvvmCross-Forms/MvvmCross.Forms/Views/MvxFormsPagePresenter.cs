@@ -100,7 +100,7 @@ namespace MvvmCross.Forms.Views
             MvxCarouselPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var page = CreatePage(view, request) as CarouselPage;
+            var page = CreatePage(view, request);
             FormsApplication.MainPage = page;
         }
 
@@ -150,6 +150,21 @@ namespace MvvmCross.Forms.Views
             if (masterDetailHost == null && FormsApplication.MainPage is MvxNavigationPage navigationPage)
             {
                 masterDetailHost = navigationPage.CurrentPage as MasterDetailPage;
+                if(masterDetailHost == null)
+                {
+                    masterDetailHost = new MasterDetailPage();
+                    masterDetailHost.Master = new MvxContentPage() { Title = "MvvmCross" };
+                    masterDetailHost.Detail = new MvxContentPage() { Title = "MvvmCross" };
+                    navigationPage.PushAsync(masterDetailHost);
+                }
+            }
+            if(masterDetailHost == null)
+            {
+                //Assume we have to create the host
+                masterDetailHost = new MasterDetailPage();
+                masterDetailHost.Master = new MvxContentPage() { Title = "MvvmCross" };
+                masterDetailHost.Detail = new MvxContentPage() { Title = "MvvmCross" };
+                FormsApplication.MainPage = masterDetailHost;
             }
 
             switch (attribute.Position)
@@ -158,13 +173,16 @@ namespace MvvmCross.Forms.Views
 
                     if(page is MasterDetailPage masterDetailRoot)
                     {
-                        masterDetailRoot.Master = new MvxContentPage() { Title = "test" };
-                        masterDetailRoot.Detail = new MvxContentPage() { Title = "test" };
+                        if(masterDetailRoot.Master == null)
+                            masterDetailRoot.Master = new MvxContentPage() { Title = "MvvmCross" };
+                        if (masterDetailRoot.Detail == null)
+                            masterDetailRoot.Detail = new MvxContentPage() { Title = "MvvmCross" };
 
-                        if (FormsApplication.MainPage is MvxNavigationPage currentPage)
+                        if (attribute.WrapInNavigationPage && FormsApplication.MainPage is MvxNavigationPage currentPage)
                             currentPage.PushAsync(page);
+                        else if (attribute.WrapInNavigationPage)
+                            FormsApplication.MainPage = new MvxNavigationPage(page);
                         else
-                            //TODO: This fails
                             FormsApplication.MainPage = page;
                     }
                     else
@@ -180,12 +198,12 @@ namespace MvvmCross.Forms.Views
                         masterDetailHost.Master = page;
                     break;
                 case MasterDetailPosition.Detail:
-                    if (masterDetailHost.Master is MvxNavigationPage navigationDetailPage)
+                    if (attribute.WrapInNavigationPage && masterDetailHost.Detail is MvxNavigationPage navigationDetailPage)
                         navigationDetailPage.PushAsync(page);
                     else if (attribute.WrapInNavigationPage)
-                        masterDetailHost.Master = new MvxNavigationPage(page);
+                        masterDetailHost.Detail = new MvxNavigationPage(page);
                     else
-                        masterDetailHost.Master = page;
+                        masterDetailHost.Detail = page;
                     break;
                 default:
                     break;
@@ -199,15 +217,23 @@ namespace MvvmCross.Forms.Views
             {
                 masterDetailHost = navigationPage.CurrentPage as MasterDetailPage;
             }
-            if (attribute.Position == MasterDetailPosition.Master)
+
+            switch (attribute.Position)
             {
-                if (masterDetailHost.Master is NavigationPage navigationMasterPage)
-                    navigationMasterPage.PopAsync();
-            }
-            else if (attribute.Position == MasterDetailPosition.Detail)
-            {
-                if (masterDetailHost.Detail is NavigationPage navigationDetailPage)
-                    navigationDetailPage.PopAsync();
+                case MasterDetailPosition.Root:
+                    if (FormsApplication.MainPage is MvxNavigationPage rootNavigationPage)
+                        rootNavigationPage.PopAsync();
+                    break;
+                case MasterDetailPosition.Master:
+                    if (masterDetailHost.Master is NavigationPage navigationMasterPage)
+                        navigationMasterPage.PopAsync();
+                    break;
+                case MasterDetailPosition.Detail:
+                    if (masterDetailHost.Detail is NavigationPage navigationDetailPage)
+                        navigationDetailPage.PopAsync();
+                    break;
+                default:
+                    break;
             }
             return true;
         }
