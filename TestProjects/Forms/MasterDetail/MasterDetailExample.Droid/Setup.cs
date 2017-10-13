@@ -5,7 +5,7 @@ using MvvmCross.Core.Views;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Views;
 using MvvmCross.Forms.Droid;
-using MvvmCross.Forms.Droid.Presenters;
+using MvvmCross.Forms.Droid.Platform;
 using MvvmCross.Platform;
 
 namespace MasterDetailExample.Droid
@@ -20,11 +20,6 @@ namespace MasterDetailExample.Droid
         protected override IMvxApplication CreateApp()
         {
             return new App();
-        }
-
-        protected override IMvxAndroidViewPresenter CreateViewPresenter()
-        {
-            return new MvxFormsDroidMasterDetailPagePresenter();
         }
     }
 }

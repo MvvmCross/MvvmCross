@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -193,9 +193,21 @@
       <Project>{75ca1824-c7f3-4827-93ed-e75b2c01cb2c}</Project>
       <Name>MvvmCross.Plugins.ResourceLoader</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Binding\UWP\MvvmCross.Binding.Uwp.csproj">
+      <Project>{637533ee-756b-4817-94b2-7c1e56132208}</Project>
+      <Name>MvvmCross.Binding.Uwp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
+      <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
+      <Name>MvvmCross.Binding</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>MvvmCross.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Core\Localization\MvvmCross.Localization.csproj">
+      <Project>{d89351c1-d48f-4ad0-a0b9-353a93425ab7}</Project>
+      <Name>MvvmCross.Localization</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>

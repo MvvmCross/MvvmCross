@@ -69,7 +69,6 @@
     <Compile Include="Views\IMvxMacViewCreator.cs" />
     <Compile Include="Views\IMvxCanCreateMacView.cs" />
     <Compile Include="Views\IMvxCurrentRequest.cs" />
-    <Compile Include="Views\Presenters\MvxBaseMacViewPresenter.cs" />
     <Compile Include="Views\Presenters\IMvxMacViewPresenter.cs" />
     <Compile Include="Views\MvxViewControllerAdaptingExtensions.cs" />
     <Compile Include="Views\MvxViewControllerAdapter.cs" />
