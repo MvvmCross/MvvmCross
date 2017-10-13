@@ -7,7 +7,7 @@ namespace Playground.Core.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	[MvxMasterDetailPagePresentation(Position = MasterDetailPosition.Detail)]
-    public partial class MixedNavTabsPage : MvxContentPage<MixedNavTabsViewModel>
+    public partial class MixedNavTabsPage : MvxTabbedPage<MixedNavTabsViewModel>
 	{
 		public MixedNavTabsPage ()
 		{
