@@ -379,6 +379,14 @@ namespace MvvmCross.Forms.Views
                         navigationPage.PushAsync(tabHost);
                     }
                 }
+                else if (FormsApplication.MainPage is MasterDetailPage masterDetailPage)
+                {
+                    tabHost = masterDetailPage.Detail as TabbedPage;
+                    if (tabHost == null && masterDetailPage.Detail is MvxNavigationPage detailNavigationPage)
+                    {
+                        tabHost = detailNavigationPage.CurrentPage as TabbedPage;
+                    }
+                }
                 else if (tabHost == null)
                 {
                     MvxTrace.Trace($"Current root is not a TabbedPage show your own first to use custom Host. Assuming we need to create one.");
