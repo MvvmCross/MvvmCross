@@ -19,3 +19,4 @@ Mvx.CreditCardScan | Scan credit cards using OCR | Android, iOS | [Github](https
 Mvx.Flashlight | Access the device's flash/torch | Android, iOS | [Github](https://github.com/willsb/Mvx.Flashlight)
 Mvx.Microphone | Access the device's microphone | Android, iOS | [Github](https://github.com/willsb/Mvx.Microphone)
 Mvx.Picasso | Target Bindings for Picasso | Android | [Github](https://github.com/willsb/Mvx.Picasso)
+ExRam.MvvmCross.ObservableBinding | Support MvvmCross-Bindings to IObservable&lt;T&gt;-properties in view models. | All | [Github](https://github.com/ExRam/ExRam.MvvmCross.ObservableBinding)
