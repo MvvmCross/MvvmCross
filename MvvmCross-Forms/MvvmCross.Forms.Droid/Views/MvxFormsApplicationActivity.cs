@@ -1,4 +1,4 @@
-﻿using Android.Content;
+using Android.Content;
 using Android.OS;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
@@ -7,6 +7,7 @@ using MvvmCross.Droid.Views;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Droid.Platform;
 using Xamarin.Forms.Platform.Android;
 
 namespace MvvmCross.Forms.Droid.Views
@@ -75,7 +76,8 @@ namespace MvvmCross.Forms.Droid.Views
             setupSingleton.EnsureInitialized();
             LifetimeListener.OnCreate(this, bundle);
 
-            global::Xamarin.Forms.Forms.Init(this, bundle);
+            var resourceAssembly = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType().Assembly;
+            global::Xamarin.Forms.Forms.Init(this, bundle, resourceAssembly);
             LoadApplication(FormsApplication);
         }
 
