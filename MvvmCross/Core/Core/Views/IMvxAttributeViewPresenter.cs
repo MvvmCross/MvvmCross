@@ -9,7 +9,6 @@ namespace MvvmCross.Core.Views
         IMvxViewModelTypeFinder ViewModelTypeFinder { get; }
         IMvxViewsContainer ViewsContainer { get; }
         Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary { get; }
-        //Dictionary<Type, IList<MvxBasePresentationAttribute>> ViewModelToPresentationAttributeMap { get; }
         void RegisterAttributeTypes();
 
         //TODO: Maybe move those to helper class
