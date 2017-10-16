@@ -37,16 +37,21 @@ public partial class MyModalViewPage : MvxContentPage<MyModalViewModel>
 
 There are also new MvvmCross base classes for all Xamarin.Forms Page types supporting DataBinding, ViewModels and more from code and layout files!
 
+To take advantage of all those new features make sure to use the Xamarin.Forms base classes for Setup, Appdelegate and others.
 # Extended MvvmCross bindings support
 
 ## Already possible
 
+```c#
 <Label mvx:La.ng="Text ThisIsLocalized" />
+```
 
 ## New bindings
 
+```c#
 <Label Text="{mvx:MvxLang ThisIsLocalizedToo}" />
 <Label Text="{mvx:MvxBind TextSource, Mode=OneTime, Converter=Language, ConverterParameter=ThisIsLocalizedThroughMvxBind}" />
+```
 
 # Presenters improvements
 
