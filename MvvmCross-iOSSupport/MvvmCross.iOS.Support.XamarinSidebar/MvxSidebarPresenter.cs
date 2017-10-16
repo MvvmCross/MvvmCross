@@ -1,4 +1,4 @@
-﻿using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.iOS.Support.XamarinSidebar.Extensions;
 using MvvmCross.iOS.Support.XamarinSidebar.Views;
@@ -47,16 +47,16 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             switch (attribute.HintType)
             {
                 case MvxPanelHintType.PopToRoot:
-                    ShowPanelAndPopToRoot(attribute.Panel, viewController);
+                    ShowPanelAndPopToRoot(attribute, viewController);
                     break;
 
                 case MvxPanelHintType.ResetRoot:
-                    ShowPanelAndResetToRoot(attribute.Panel, viewController);
+                    ShowPanelAndResetToRoot(attribute, viewController);
                     break;
 
                 case MvxPanelHintType.PushPanel:
                 default:
-                    ShowPanel(attribute.Panel, viewController);
+                    ShowPanel(attribute, viewController);
                     break;
             }
 
@@ -67,7 +67,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             }
         }
 
-        protected virtual bool ShowPanelAndPopToRoot(MvxPanelEnum panel, UIViewController viewController)
+        protected virtual bool ShowPanelAndPopToRoot(MvxSidebarPresentationAttribute attribute, UIViewController viewController)
         {
             var navigationController = (SideBarViewController as MvxSidebarViewController).NavigationController;
 
@@ -80,7 +80,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             return true;
         }
 
-        protected virtual bool ShowPanelAndResetToRoot(MvxPanelEnum panel, UIViewController viewController)
+        protected virtual bool ShowPanelAndResetToRoot(MvxSidebarPresentationAttribute attribute, UIViewController viewController)
         {
             var navigationController = (SideBarViewController as MvxSidebarViewController).NavigationController;
 
@@ -89,7 +89,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
             navigationController.ViewControllers = new[] { viewController };
 
-            switch (panel)
+            switch (attribute.Panel)
             {
                 case MvxPanelEnum.Left:
                 case MvxPanelEnum.Right:
@@ -109,28 +109,28 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             return true;
         }
 
-        protected virtual bool ShowPanel(MvxPanelEnum panel, UIViewController viewController)
+        protected virtual bool ShowPanel(MvxSidebarPresentationAttribute attribute, UIViewController viewController)
         {
             var navigationController = (SideBarViewController as MvxSidebarViewController).NavigationController;
 
             if (navigationController == null)
                 return false;
 
-            switch (panel)
+            switch (attribute.Panel)
             {
                 case MvxPanelEnum.Left:
                 case MvxPanelEnum.Right:
                     break;
                 case MvxPanelEnum.Center:
                 default:
-                    navigationController.PushViewController(viewController, true);
+                    navigationController.PushViewController(viewController, attribute.Animated);
                     break;
                 case MvxPanelEnum.CenterWithLeft:
-                    navigationController.PushViewController(viewController, true);
+                    navigationController.PushViewController(viewController, attribute.Animated);
                     viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController, showLeft: true, showRight: false);
                     break;
                 case MvxPanelEnum.CenterWithRight:
-                    navigationController.PushViewController(viewController, true);
+                    navigationController.PushViewController(viewController, attribute.Animated);
                     viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController, showLeft: false, showRight: true);
                     break;
             }
