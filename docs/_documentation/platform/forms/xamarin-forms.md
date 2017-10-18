@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Xamarin.Forms with MvvmCross
+title: Xamarin.Forms Tutorial
 category: Platform specifics
 ---
 
