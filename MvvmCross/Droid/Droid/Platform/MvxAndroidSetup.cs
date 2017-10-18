@@ -237,7 +237,7 @@ namespace MvvmCross.Droid.Platform
 
         protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
-            return new MvxPostfixAwareViewToViewModelNameMapping("View", "Activity");
+            return new MvxPostfixAwareViewToViewModelNameMapping("View", "Activity", "Fragment");
         }
     }
 }

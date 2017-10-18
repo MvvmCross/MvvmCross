@@ -96,5 +96,10 @@ namespace MvvmCross.Forms.Droid.Platform
         }
 
         protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsAndroidBindingBuilder();
+
+        protected override IMvxNameMapping CreateViewToViewModelNaming()
+        {
+            return new MvxPostfixAwareViewToViewModelNameMapping("View", "Activity", "Fragment", "Page");
+        }
     }
 }

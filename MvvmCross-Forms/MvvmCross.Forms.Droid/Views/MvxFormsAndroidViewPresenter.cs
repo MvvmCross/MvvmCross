@@ -32,15 +32,14 @@ namespace MvvmCross.Forms.Droid.Views
         public MvxFormsAndroidViewPresenter(IEnumerable<Assembly> androidViewAssemblies, MvxFormsApplication formsApplication) : this(androidViewAssemblies)
         {
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
-            FormsApplication.MainPage = new MvxNavigationPage();
         }
 
-		private MvxFormsApplication _formsApplication;
-		public MvxFormsApplication FormsApplication
-		{
-			get { return _formsApplication; }
-			set { _formsApplication = value; }
-		}
+        private MvxFormsApplication _formsApplication;
+        public MvxFormsApplication FormsApplication
+        {
+            get { return _formsApplication; }
+            set { _formsApplication = value; }
+        }
 
         private MvxFormsPagePresenter _formsPagePresenter;
         public virtual MvxFormsPagePresenter FormsPagePresenter
