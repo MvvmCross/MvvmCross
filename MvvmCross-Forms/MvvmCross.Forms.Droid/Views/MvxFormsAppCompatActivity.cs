@@ -1,4 +1,5 @@
-﻿using Android.Content;
+using System.Reflection;
+using Android.Content;
 using Android.OS;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
@@ -7,6 +8,7 @@ using MvvmCross.Droid.Views;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Droid.Platform;
 using Xamarin.Forms.Platform.Android;
 
 namespace MvvmCross.Forms.Droid.Views
@@ -45,16 +47,13 @@ namespace MvvmCross.Forms.Droid.Views
 
         public object DataContext
         {
-            get { return BindingContext?.DataContext; }
-            set { BindingContext.DataContext = value; }
+            get => BindingContext?.DataContext;
+            set => BindingContext.DataContext = value;
         }
 
         public IMvxViewModel ViewModel
         {
-            get
-            {
-                return DataContext as IMvxViewModel;
-            }
+            get => DataContext as IMvxViewModel;
             set
             {
                 DataContext = value;
@@ -70,13 +69,24 @@ namespace MvvmCross.Forms.Droid.Views
         {
             base.OnCreate(bundle);
 
+            InitializeForms(bundle);
+        }
+
+        protected virtual void InitializeForms(Bundle bundle)
+        {
             // Required for proper Push notifications handling
             var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setupSingleton.EnsureInitialized();
             LifetimeListener.OnCreate(this, bundle);
 
-            global::Xamarin.Forms.Forms.Init(this, bundle);
+            var resourceAssembly = GetResourceAssembly();
+            global::Xamarin.Forms.Forms.Init(this, bundle, resourceAssembly);
             LoadApplication(FormsApplication);
+        }
+
+        protected virtual Assembly GetResourceAssembly()
+        {
+            return Assembly.GetCallingAssembly();
         }
 
         public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
@@ -94,7 +104,7 @@ namespace MvvmCross.Forms.Droid.Views
         protected override void OnStop()
         {
             base.OnStop();
-            
+
             LifetimeListener.OnStop(this);
         }
 
@@ -118,7 +128,7 @@ namespace MvvmCross.Forms.Droid.Views
 
             LifetimeListener.OnPause(this);
         }
-        
+
         protected override void OnRestart()
         {
             base.OnRestart();
