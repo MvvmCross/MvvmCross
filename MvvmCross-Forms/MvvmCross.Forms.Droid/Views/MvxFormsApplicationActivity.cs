@@ -47,16 +47,13 @@ namespace MvvmCross.Forms.Droid.Views
 
         public object DataContext
         {
-            get { return BindingContext?.DataContext; }
-            set { BindingContext.DataContext = value; }
+            get => BindingContext?.DataContext;
+            set => BindingContext.DataContext = value;
         }
 
         public IMvxViewModel ViewModel
         {
-            get
-            {
-                return DataContext as IMvxViewModel;
-            }
+            get => DataContext as IMvxViewModel;
             set
             {
                 DataContext = value;
@@ -107,7 +104,7 @@ namespace MvvmCross.Forms.Droid.Views
         protected override void OnStop()
         {
             base.OnStop();
-            
+
             LifetimeListener.OnStop(this);
         }
 
@@ -131,7 +128,7 @@ namespace MvvmCross.Forms.Droid.Views
 
             LifetimeListener.OnPause(this);
         }
-        
+
         protected override void OnRestart()
         {
             base.OnRestart();
