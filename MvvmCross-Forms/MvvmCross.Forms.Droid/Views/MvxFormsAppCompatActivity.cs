@@ -1,3 +1,4 @@
+using System.Reflection;
 using Android.Content;
 using Android.OS;
 using MvvmCross.Binding.BindingContext;
@@ -71,14 +72,24 @@ namespace MvvmCross.Forms.Droid.Views
         {
             base.OnCreate(bundle);
 
+            InitializeForms();
+        }
+
+        protected virtual void InitializeForms()
+        {
             // Required for proper Push notifications handling
             var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setupSingleton.EnsureInitialized();
             LifetimeListener.OnCreate(this, bundle);
 
-            var resourceAssembly = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType().Assembly;
+            var resourceAssembly = GetResourceAssembly();
             global::Xamarin.Forms.Forms.Init(this, bundle, resourceAssembly);
             LoadApplication(FormsApplication);
+        }
+
+        protected virtual Assembly GetResourceAssembly()
+        {
+            return Assembly.GetCallingAssembly();
         }
 
         public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
