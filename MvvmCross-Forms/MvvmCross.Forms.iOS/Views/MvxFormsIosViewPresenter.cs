@@ -34,10 +34,6 @@ namespace MvvmCross.Forms.iOS.Presenters
         public MvxFormsIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window, MvxFormsApplication formsApplication) : this(applicationDelegate, window)
         {
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
-            FormsApplication.MainPage = new MvxNavigationPage();
-
-            //TODO: Why do i need to set the root here?
-            window.RootViewController = FormsApplication.MainPage.CreateViewController();
         }
 
         private MvxFormsApplication _formsApplication;
@@ -60,6 +56,14 @@ namespace MvvmCross.Forms.iOS.Presenters
             {
                 _formsPagePresenter = value;
             }
+        }
+
+        public override void Show(MvxViewModelRequest request)
+        {
+            base.Show(request);
+
+            if (_window.RootViewController == null)
+                SetWindowRootViewController(FormsApplication.MainPage.CreateViewController());
         }
 
         public override void RegisterAttributeTypes()
