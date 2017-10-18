@@ -91,5 +91,10 @@ namespace MvvmCross.Forms.iOS
         }
 
         protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsBindingBuilder();
+
+        protected override IMvxNameMapping CreateViewToViewModelNaming()
+        {
+            return new MvxPostfixAwareViewToViewModelNameMapping("View", "ViewController", "Page");
+        }
     }
 }

@@ -100,6 +100,8 @@ namespace MvvmCross.Forms.Views
             MvxCarouselPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
+            CloseAllModals();
+
             var page = CreatePage(view, request);
 
             if (attribute.Position == CarouselPosition.Root)
@@ -162,17 +164,17 @@ namespace MvvmCross.Forms.Views
             MvxContentPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
+            CloseAllModals();
+
             var page = CreatePage(view, request);
 
-            //TODO: Check ModalStack and push there if applied
-
-            if (attribute.WrapInNavigationPage && (FormsApplication.MainPage == null || FormsApplication.MainPage.GetType() != typeof(MvxNavigationPage)))
-            {
-                FormsApplication.MainPage = new MvxNavigationPage(page);
-            }
-            else if (attribute.WrapInNavigationPage && FormsApplication.MainPage is MvxNavigationPage navigationPage)
+            if (attribute.WrapInNavigationPage && FormsApplication.MainPage is MvxNavigationPage navigationPage)
             {
                 navigationPage.PushAsync(page, attribute.Animated);
+            }
+            else if (attribute.WrapInNavigationPage)
+            {
+                FormsApplication.MainPage = new MvxNavigationPage(page);
             }
             else
             {
@@ -193,6 +195,8 @@ namespace MvvmCross.Forms.Views
             MvxMasterDetailPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
+            CloseAllModals();
+
             var page = CreatePage(view, request);
 
             if(attribute.Position == MasterDetailPosition.Root)
@@ -294,18 +298,18 @@ namespace MvvmCross.Forms.Views
 
             if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
             {
-                if (attribute.WrapInNavigationPage == true && navigationPage.Navigation.ModalStack.LastOrDefault() is MvxNavigationPage modalNavigationPage)
+                if (attribute.WrapInNavigationPage && navigationPage.Navigation.ModalStack.LastOrDefault() is MvxNavigationPage modalNavigationPage)
                     modalNavigationPage.PushAsync(page);
-                else if (attribute.WrapInNavigationPage == true)
-                    navigationPage.CurrentPage.Navigation.PushModalAsync(new MvxNavigationPage(page));
+                else if (attribute.WrapInNavigationPage)
+                    navigationPage.Navigation.PushModalAsync(new MvxNavigationPage(page));
                 else
-                    navigationPage.CurrentPage.Navigation.PushModalAsync(page);
+                    navigationPage.Navigation.PushModalAsync(page);
             }
             else
             {
-                if (attribute.WrapInNavigationPage == true && FormsApplication.MainPage.Navigation.ModalStack.LastOrDefault() is MvxNavigationPage modalNavigationPage)
+                if (attribute.WrapInNavigationPage && FormsApplication.MainPage.Navigation.ModalStack.LastOrDefault() is MvxNavigationPage modalNavigationPage)
                     modalNavigationPage.PushAsync(page);
-                else if (attribute.WrapInNavigationPage == true)
+                else if (attribute.WrapInNavigationPage)
                     FormsApplication.MainPage.Navigation.PushModalAsync(new MvxNavigationPage(page));
                 else
                     FormsApplication.MainPage.Navigation.PushModalAsync(page);
@@ -316,14 +320,14 @@ namespace MvvmCross.Forms.Views
         {
             if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
             {
-                if (attribute.WrapInNavigationPage == true && navigationPage.Navigation.ModalStack.LastOrDefault() is MvxNavigationPage modalNavigationPage && modalNavigationPage.Navigation.NavigationStack.Count > 1)
+                if (attribute.WrapInNavigationPage && navigationPage.Navigation.ModalStack.LastOrDefault() is MvxNavigationPage modalNavigationPage && modalNavigationPage.Navigation.NavigationStack.Count > 1)
                     modalNavigationPage.PopAsync();
                 else
-                    navigationPage.CurrentPage.Navigation.PopModalAsync();
+                    navigationPage.Navigation.PopModalAsync();
             }
             else
             {
-                if (attribute.WrapInNavigationPage == true && FormsApplication.MainPage.Navigation.ModalStack.LastOrDefault() is MvxNavigationPage modalNavigationPage)
+                if (attribute.WrapInNavigationPage && FormsApplication.MainPage.Navigation.ModalStack.LastOrDefault() is MvxNavigationPage modalNavigationPage)
                     modalNavigationPage.PopAsync();
                 else
                     FormsApplication.MainPage.Navigation.PopModalAsync();
@@ -336,6 +340,8 @@ namespace MvvmCross.Forms.Views
             MvxNavigationPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
+            CloseAllModals();
+
             var page = CreatePage(view, request);
             FormsApplication.MainPage = page;
         }
@@ -350,6 +356,8 @@ namespace MvvmCross.Forms.Views
             MvxTabbedPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
+            CloseAllModals();
+
             var page = CreatePage(view, request);
 
             if(attribute.Position == TabbedPosition.Root)
@@ -413,6 +421,36 @@ namespace MvvmCross.Forms.Views
             else
                 return false;
             return true;
+        }
+
+        public virtual void CloseAllModals()
+        {
+            if (FormsApplication.MainPage != null)
+            {
+                if (FormsApplication.MainPage is MvxNavigationPage rootNavigationPage && rootNavigationPage.CurrentPage is MvxNavigationPage nestedNavigationPage)
+                {
+                    CloseModalStack(nestedNavigationPage.Navigation.ModalStack);
+                }
+                else if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
+                {
+                    CloseModalStack(navigationPage.Navigation.ModalStack);
+                }
+                else if (FormsApplication.MainPage.Navigation.ModalStack.Count > 0)
+                {
+                    CloseModalStack(FormsApplication.MainPage.Navigation.ModalStack);
+                }
+            }
+        }
+
+        protected virtual void CloseModalStack(IReadOnlyList<Page> modals)
+        {
+            if (modals != null && modals.Count > 0)
+            {
+                foreach (var modal in modals)
+                {
+                    modal.Navigation.PopModalAsync();
+                }
+            }
         }
     }
 }
