@@ -524,7 +524,7 @@ namespace MvvmCross.iOS.Views.Presenters
                 var root = ((UINavigationController)vc).ViewControllers.FirstOrDefault();
                 if (root != null && root.GetIMvxIosView().ViewModel == toClose)
                 {
-                    controllerToClose = root;
+                    controllerToClose = vc;
                     break;
                 }
             }
