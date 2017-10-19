@@ -42,7 +42,7 @@ namespace MvvmCross.Forms.iOS
             }
         }
 
-        public IMvxViewModel ViewModel
+        public virtual IMvxViewModel ViewModel
         {
             get
             {

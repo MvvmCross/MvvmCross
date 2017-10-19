@@ -35,7 +35,7 @@ namespace MvvmCross.Forms.Uwp
             }
         }
 
-        public IMvxViewModel ViewModel
+        public virtual IMvxViewModel ViewModel
         {
             get
             {
