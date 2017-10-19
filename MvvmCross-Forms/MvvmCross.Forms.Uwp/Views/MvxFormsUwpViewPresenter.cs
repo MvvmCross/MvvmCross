@@ -55,32 +55,6 @@ namespace MvvmCross.Forms.Uwp.Presenters
             }
         }
 
-        private IMvxViewModelTypeFinder _viewModelTypeFinder;
-        public IMvxViewModelTypeFinder ViewModelTypeFinder
-        {
-            get
-            {
-                if (_viewModelTypeFinder == null)
-                    _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
-                return _viewModelTypeFinder;
-            }
-            set
-            {
-                _viewModelTypeFinder = value;
-            }
-        }
-
-        private IMvxViewsContainer _viewsContainer;
-        public IMvxViewsContainer ViewsContainer
-        {
-            get
-            {
-                if (_viewsContainer == null)
-                    _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
-                return _viewsContainer;
-            }
-        }
-
         //TODO: Refactor to new presenter code
         public const string ModalPresentationParameter = "modal";
 

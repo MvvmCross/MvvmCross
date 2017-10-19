@@ -43,7 +43,7 @@ namespace MvvmCross.Forms.Droid.Views
             }
         }
 
-        public IMvxViewModel ViewModel
+        public virtual IMvxViewModel ViewModel
         {
             get
             {
