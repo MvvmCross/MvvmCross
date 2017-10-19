@@ -208,7 +208,7 @@
       <Name>MvvmCross.Platform</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvvmCross.CodeAnalysis\MvvmCrossCodeAnalysis.csproj">
-      <Project>{c8f9f6a5-4083-4c51-b84c-8ac1f27a8aa6}</Project>
+      <Project>{A2FF620D-D3E6-451A-959E-9867472B3EE1}</Project>
       <Name>MvvmCrossCodeAnalysis</Name>
     </ProjectReference>
   </ItemGroup>
