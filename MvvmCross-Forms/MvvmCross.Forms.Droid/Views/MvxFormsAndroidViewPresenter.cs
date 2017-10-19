@@ -17,6 +17,7 @@ using MvvmCross.Droid.Views;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
 using MvvmCross.Forms.Views.Attributes;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 
@@ -47,7 +48,10 @@ namespace MvvmCross.Forms.Droid.Views
             get
             {
                 if (_formsPagePresenter == null)
-                    _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication);
+                {
+                    _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder);
+                    Mvx.RegisterSingleton<IMvxFormsPagePresenter>(_formsPagePresenter);
+                }
                 return _formsPagePresenter;
             }
             set

@@ -5,6 +5,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views.Attributes;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
@@ -12,11 +13,14 @@ using Xamarin.Forms;
 namespace MvvmCross.Forms.Views
 {
     //Handles common Forms Presenter code
-    public class MvxFormsPagePresenter
+    public class MvxFormsPagePresenter : IMvxFormsPagePresenter
     {
-        public MvxFormsPagePresenter(MvxFormsApplication formsApplication)
+        public MvxFormsPagePresenter(MvxFormsApplication formsApplication, IMvxViewsContainer viewsContainer = null, IMvxViewModelTypeFinder viewModelTypeFinder = null, IMvxViewModelLoader viewModelLoader = null)
         {
             FormsApplication = formsApplication;
+            ViewModelLoader = viewModelLoader;
+            ViewsContainer = viewsContainer;
+            ViewModelTypeFinder = viewModelTypeFinder;
         }
 
         private MvxFormsApplication _formsApplication;
@@ -24,6 +28,51 @@ namespace MvvmCross.Forms.Views
         {
             get { return _formsApplication; }
             set { _formsApplication = value; }
+        }
+
+        private IMvxViewModelLoader _viewModelLoader;
+        public IMvxViewModelLoader ViewModelLoader
+        {
+            get
+            {
+                if (_viewModelLoader == null)
+                    _viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
+                return _viewModelLoader;
+            }
+            set
+            {
+                _viewModelLoader = value;
+            }
+        }
+
+        private IMvxViewsContainer _viewsContainer;
+        public IMvxViewsContainer ViewsContainer
+        {
+            get
+            {
+                if (_viewsContainer == null)
+                    _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
+                return _viewsContainer;
+            }
+            set
+            {
+                _viewsContainer = value;
+            }
+        }
+
+        private IMvxViewModelTypeFinder _viewModelTypeFinder;
+        public IMvxViewModelTypeFinder ViewModelTypeFinder
+        {
+            get
+            {
+                if (_viewModelTypeFinder == null)
+                    _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
+                return _viewModelTypeFinder;
+            }
+            set
+            {
+                _viewModelTypeFinder = value;
+            }
         }
 
         public virtual Page CreatePage(Type viewType, MvxViewModelRequest request)
@@ -38,7 +87,7 @@ namespace MvvmCross.Forms.Views
                 }
                 else
                 {
-                    contentPage.ViewModel = MvxPresenterHelpers.LoadViewModel(request);
+                    contentPage.ViewModel = ViewModelLoader.LoadViewModel(request, null);
                 }
             }
             return page;
