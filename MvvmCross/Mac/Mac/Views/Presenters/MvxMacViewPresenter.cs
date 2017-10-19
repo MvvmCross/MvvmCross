@@ -36,6 +36,10 @@ namespace MvvmCross.Mac.Views.Presenters
                     _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
                 return _viewModelTypeFinder;
             }
+            set
+            {
+                _viewModelTypeFinder = value;
+            }
         }
 
         private IMvxViewsContainer _viewsContainer;
@@ -46,6 +50,10 @@ namespace MvvmCross.Mac.Views.Presenters
                 if (_viewsContainer == null)
                     _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
                 return _viewsContainer;
+            }
+            set
+            {
+                _viewsContainer = value;
             }
         }
 

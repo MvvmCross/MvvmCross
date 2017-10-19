@@ -7,6 +7,7 @@
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
 using MvvmCross.Platform;
@@ -34,6 +35,24 @@ namespace MvvmCross.Forms.Uwp.Presenters
         {
             get { return _formsApplication; }
             set { _formsApplication = value; }
+        }
+
+        private MvxFormsPagePresenter _formsPagePresenter;
+        public virtual MvxFormsPagePresenter FormsPagePresenter
+        {
+            get
+            {
+                if (_formsPagePresenter == null)
+                {
+                    _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder);
+                    Mvx.RegisterSingleton<IMvxFormsPagePresenter>(_formsPagePresenter);
+                }
+                return _formsPagePresenter;
+            }
+            set
+            {
+                _formsPagePresenter = value;
+            }
         }
 
         //TODO: Refactor to new presenter code
@@ -70,29 +89,12 @@ namespace MvvmCross.Forms.Uwp.Presenters
         {
         }
 
-        private void SetupForBinding(Page page, IMvxViewModel viewModel, MvxViewModelRequest request)
-        {
-            var contentPage = page as IMvxPage;
-            if (contentPage != null)
-            {
-                //contentPage.Request = request;
-                contentPage.ViewModel = viewModel;
-            }
-            else
-            {
-                page.BindingContext = viewModel;
-            }
-        }
-
         private bool TryShowPage(MvxViewModelRequest request)
         {
-            var page = MvxPresenterHelpers.CreatePage(request);
+            var viewType = ViewsContainer.GetViewType(request.ViewModelType);
+            var page = FormsPagePresenter.CreatePage(viewType, request);
             if (page == null)
                 return false;
-
-            var viewModel = MvxPresenterHelpers.LoadViewModel(request);
-
-            SetupForBinding(page, viewModel, request);
 
             var mainPage = _formsApplication.MainPage as NavigationPage;
 

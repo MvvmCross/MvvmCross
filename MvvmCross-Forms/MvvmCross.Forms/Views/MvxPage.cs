@@ -1,20 +1,12 @@
-﻿// MvxFormsIosPagePresenter.cs
-// 2015 (c) Copyright Cheesebaron. http://ostebaronen.dk
-// MvvmCross.Forms is licensed using Microsoft Public License (Ms-PL)
-// Contributions and inspirations noted in readme.md and license.txt
-//
-// Project Lead - Tomasz Cielecki, @cheesebaron, mvxplugins@ostebaronen.dk
-// Contributor - Martin Nygren, @zzcgumn, zzcgumn@me.com
-
+﻿using System;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Views;
-using Xamarin.Forms.Platform.iOS;
+using Xamarin.Forms;
 
-namespace MvvmCross.Forms.iOS
+namespace MvvmCross.Forms.Views
 {
-    public class MvxPageRenderer : PageRenderer, IMvxBindingContextOwner
-    {            
+    public class MvxPage : Page, IMvxPage
+    {
         public object DataContext
         {
             get
@@ -23,17 +15,18 @@ namespace MvvmCross.Forms.iOS
             }
             set
             {
+                base.BindingContext = value;
                 BindingContext.DataContext = value;
             }
         }
 
         private IMvxBindingContext _bindingContext;
-        public IMvxBindingContext BindingContext
+        public new IMvxBindingContext BindingContext
         {
             get
             {
                 if (_bindingContext == null)
-                    BindingContext = new MvxBindingContext();
+                    BindingContext = new MvxBindingContext(base.BindingContext);
                 return _bindingContext;
             }
             set
@@ -42,7 +35,7 @@ namespace MvvmCross.Forms.iOS
             }
         }
 
-        public virtual IMvxViewModel ViewModel
+        public IMvxViewModel ViewModel
         {
             get
             {
@@ -58,10 +51,25 @@ namespace MvvmCross.Forms.iOS
         protected virtual void OnViewModelSet()
         {
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ViewModel?.ViewAppearing();
+            ViewModel?.ViewAppeared();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            ViewModel?.ViewDisappearing();
+            ViewModel?.ViewDisappeared();
+        }
     }
 
-    public class MvxPageRenderer<TViewModel>
-        : MvxPageRenderer where TViewModel : class, IMvxViewModel
+    public class MvxPage<TViewModel>
+        : MvxPage
+    , IMvxPage<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {

@@ -79,7 +79,7 @@ namespace MvvmCross.Droid.Views.Attributes
         /// <summary>
         /// Content id - place where to show fragment.
         /// </summary>
-        public int FragmentContentId { get; set; }
+        public int FragmentContentId { get; set; } = Android.Resource.Id.Content;
 
         public static bool DefaultAddToBackStack = false;
         /// <summary>
