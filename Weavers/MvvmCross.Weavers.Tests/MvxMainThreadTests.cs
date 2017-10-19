@@ -14,35 +14,32 @@ using NUnit.Framework;
 [TestFixture]
 public class WeaverTests
 {
-    Assembly assembly;
-    string newAssemblyPath;
-    string assemblyPath;
+    private Assembly wovenAssembly;
 
     [OneTimeSetUp]
     public void Setup()
     {
-        assemblyPath = Path.GetFullPath("/users/will/Documents/Projects/MvvmCross/Weavers/MvxMainThread.AssemblyToProcess/bin/Debug/MvxMainThread.AssemblyToProcess.dll");
-
-        //var projectPath = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, @"../../../MvvmCross.Weavers.AssembliesToProcess\MvvmCross.Weavers.AssembliesToProcess.csproj123"));
-        //assemblyPath = Path.Combine(Path.GetDirectoryName(projectPath), @"bin/Debug/MvvmCross.Weavers.AssembliesToProcess.dll");
+        var assemblyPath = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, @"../../../MvxMainThread.AssemblyToProcess/bin/Debug/MvxMainThread.AssemblyToProcess.dll"));
 #if (!DEBUG)
         assemblyPath = assemblyPath.Replace("Debug", "Release");
 #endif
 
-        newAssemblyPath = assemblyPath.Replace(".dll", "Woven.dll");
-        File.Copy(assemblyPath, newAssemblyPath, true);
+        var wovenAssemblyPath = assemblyPath.Replace(".dll", "Woven.dll");
+        File.Copy(assemblyPath, wovenAssemblyPath, true);
 
         var moduleDefinition = ModuleDefinition.ReadModule(assemblyPath);
-        var weavingTask = new ModuleWeaver
-        {
-            ModuleDefinition = moduleDefinition
-        };
-
+        var weavingTask = new ModuleWeaver { ModuleDefinition = moduleDefinition };
+       
         weavingTask.Execute();
-        moduleDefinition.Write(newAssemblyPath);
+        moduleDefinition.Write(wovenAssemblyPath);
 
-        assembly = Assembly.LoadFile(newAssemblyPath);
+        wovenAssembly = Assembly.LoadFile(wovenAssemblyPath);
 
+        InitializeSingletonsIfNeeded();
+    }
+
+    private void InitializeSingletonsIfNeeded()
+    {
         if (MvxSingleton<IMvxIoCProvider>.Instance != null) return;
 
         MvxSingletonCache.Initialize();
@@ -58,25 +55,13 @@ public class WeaverTests
         MvxTrace.Initialize();
     }
 
-    public class CountingDispatcher : MvxSingleton<IMvxMainThreadDispatcher>, IMvxMainThreadDispatcher
-    {
-        public int Calls { get; private set; }
-
-        public bool RequestMainThreadAction(Action action, bool maskExceptions = true)
-        {
-            Calls++;
-            action();
-            return true;
-        }
-    }
-
     [Test]
-    public void MarshallsToTheMainThread()
+    public void MethodsAnnotedWithTheRunOnMainThreadAttributeCallTheMainThreadDispatcher()
     {
         var dispatcher = Mvx.Resolve<IMvxMainThreadDispatcher>() as CountingDispatcher;
         var calls = dispatcher.Calls;
 
-        var instance = (dynamic)Activator.CreateInstance(assembly.GetType(nameof(ToBeWoven)));
+        var instance = (dynamic)Activator.CreateInstance(wovenAssembly.GetType(nameof(ToBeWoven)));
         instance.SomeWovenMainThreadMethod();
 
         Assert.Greater(dispatcher.Calls, calls);
