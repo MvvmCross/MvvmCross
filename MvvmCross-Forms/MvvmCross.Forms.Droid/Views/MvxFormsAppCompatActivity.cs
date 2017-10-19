@@ -1,10 +1,16 @@
 using System.Reflection;
 using Android.Content;
 using Android.OS;
+using Android.Util;
+using Android.Views;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
+using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Views;
+using MvvmCross.Forms.Droid.Views.EventSource;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
 using MvvmCross.Platform;
@@ -13,21 +19,32 @@ using Xamarin.Forms.Platform.Android;
 
 namespace MvvmCross.Forms.Droid.Views
 {
-    public class MvxFormsAppCompatActivity : FormsAppCompatActivity, IMvxAndroidView
+    public class MvxFormsAppCompatActivity : MvxEventSourceFormsAppCompatActivity, IMvxAndroidView
     {
-        public IMvxBindingContext BindingContext { get; set; }
+        private View _view;
 
-        private IMvxAndroidActivityLifetimeListener _lifetimeListener;
-        private IMvxAndroidActivityLifetimeListener LifetimeListener
+        protected MvxFormsAppCompatActivity()
+        {
+            BindingContext = new MvxAndroidBindingContext(this, this);
+            this.AddEventListeners();
+        }
+
+        public object DataContext
+        {
+            get { return BindingContext.DataContext; }
+            set { BindingContext.DataContext = value; }
+        }
+
+        public IMvxViewModel ViewModel
         {
             get
             {
-                if (_lifetimeListener == null)
-                {
-                    _lifetimeListener = Mvx.Resolve<IMvxAndroidActivityLifetimeListener>();
-                }
-
-                return _lifetimeListener;
+                return DataContext as IMvxViewModel;
+            }
+            set
+            {
+                DataContext = value;
+                OnViewModelSet();
             }
         }
 
@@ -45,40 +62,44 @@ namespace MvvmCross.Forms.Droid.Views
             }
         }
 
-        public object DataContext
+        public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
         {
-            get => BindingContext?.DataContext;
-            set => BindingContext.DataContext = value;
-        }
-
-        public IMvxViewModel ViewModel
-        {
-            get => DataContext as IMvxViewModel;
-            set
-            {
-                DataContext = value;
-                OnViewModelSet();
-            }
+            StartActivityForResult(intent, requestCode);
         }
 
         protected virtual void OnViewModelSet()
         {
         }
 
+        public IMvxBindingContext BindingContext { get; set; }
+
+        public override void SetContentView(int layoutResId)
+        {
+            _view = this.BindingInflate(layoutResId, null);
+
+            SetContentView(_view);
+        }
+
+        protected override void AttachBaseContext(Context @base)
+        {
+            if (this is IMvxAndroidSplashScreenActivity)
+            {
+                // Do not attach our inflater to splash screens.
+                base.AttachBaseContext(@base);
+                return;
+            }
+            base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
+        }
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
+            ViewModel?.ViewCreated();
             InitializeForms(bundle);
         }
 
         protected virtual void InitializeForms(Bundle bundle)
         {
-            // Required for proper Push notifications handling
-            var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setupSingleton.EnsureInitialized();
-            LifetimeListener.OnCreate(this, bundle);
-
             var resourceAssembly = GetResourceAssembly();
             global::Xamarin.Forms.Forms.Init(this, bundle, resourceAssembly);
             LoadApplication(FormsApplication);
@@ -89,51 +110,40 @@ namespace MvvmCross.Forms.Droid.Views
             return Assembly.GetCallingAssembly();
         }
 
-        public void MvxInternalStartActivityForResult(Intent intent, int requestCode)
+        protected override void OnDestroy()
         {
-            StartActivityForResult(intent, requestCode);
+            base.OnDestroy();
+            ViewModel?.ViewDestroy();
         }
 
         protected override void OnStart()
         {
             base.OnStart();
-
-            LifetimeListener.OnStart(this);
-        }
-
-        protected override void OnStop()
-        {
-            base.OnStop();
-
-            LifetimeListener.OnStop(this);
+            ViewModel?.ViewAppearing();
         }
 
         protected override void OnResume()
         {
             base.OnResume();
-
-            LifetimeListener.OnResume(this);
-        }
-
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-
-            LifetimeListener.OnDestroy(this);
+            ViewModel?.ViewAppeared();
         }
 
         protected override void OnPause()
         {
             base.OnPause();
-
-            LifetimeListener.OnPause(this);
+            ViewModel?.ViewDisappearing();
         }
 
-        protected override void OnRestart()
+        protected override void OnStop()
         {
-            base.OnRestart();
+            base.OnStop();
+            ViewModel?.ViewDisappeared();
+        }
 
-            LifetimeListener.OnRestart(this);
+        public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
+        {
+            var view = MvxAppCompatActivityHelper.OnCreateView(parent, name, context, attrs);
+            return view ?? base.OnCreateView(parent, name, context, attrs);
         }
     }
 
