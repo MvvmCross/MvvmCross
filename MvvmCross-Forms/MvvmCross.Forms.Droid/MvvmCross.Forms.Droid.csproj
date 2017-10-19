@@ -119,6 +119,8 @@
     <Compile Include="Views\MvxImageViewRenderer.cs" />
     <Compile Include="Views\MvxPageRenderer.cs" />
     <Compile Include="Bindings\MvxFormsAndroidBindingBuilder.cs" />
+    <Compile Include="Views\EventSource\MvxEventSourceFormsAppCompatActivity.cs" />
+    <Compile Include="Views\EventSource\MvxEventSourceFormsApplicationActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\Binding\Droid\MvvmCross.Binding.Droid.csproj">
@@ -162,6 +164,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\EventSource\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="AfterBuild">
     <ItemGroup>
