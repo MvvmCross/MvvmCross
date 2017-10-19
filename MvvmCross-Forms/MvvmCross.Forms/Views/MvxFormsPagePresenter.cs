@@ -298,7 +298,7 @@ namespace MvvmCross.Forms.Views
 
             if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
             {
-                if (attribute.WrapInNavigationPage && navigationPage.Navigation.ModalStack.LastOrDefault() is MvxNavigationPage modalNavigationPage)
+                if (attribute.WrapInNavigationPage && navigationPage?.Navigation?.ModalStack?.LastOrDefault() is MvxNavigationPage modalNavigationPage)
                     modalNavigationPage.PushAsync(page);
                 else if (attribute.WrapInNavigationPage)
                     navigationPage.Navigation.PushModalAsync(new MvxNavigationPage(page));
@@ -307,12 +307,17 @@ namespace MvvmCross.Forms.Views
             }
             else
             {
-                if (attribute.WrapInNavigationPage && FormsApplication.MainPage.Navigation.ModalStack.LastOrDefault() is MvxNavigationPage modalNavigationPage)
+                if (attribute.WrapInNavigationPage && FormsApplication.MainPage?.Navigation?.ModalStack?.LastOrDefault() is MvxNavigationPage modalNavigationPage)
                     modalNavigationPage.PushAsync(page);
-                else if (attribute.WrapInNavigationPage)
+                else if (attribute.WrapInNavigationPage && FormsApplication.MainPage?.Navigation != null)
                     FormsApplication.MainPage.Navigation.PushModalAsync(new MvxNavigationPage(page));
                 else
+                {
+                    if (FormsApplication.MainPage?.Navigation == null)
+                        FormsApplication.MainPage = new MvxNavigationPage(new MvxPage());
                     FormsApplication.MainPage.Navigation.PushModalAsync(page);
+                }
+                
             }
         }
 
@@ -320,17 +325,17 @@ namespace MvvmCross.Forms.Views
         {
             if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
             {
-                if (attribute.WrapInNavigationPage && navigationPage.Navigation.ModalStack.LastOrDefault() is MvxNavigationPage modalNavigationPage && modalNavigationPage.Navigation.NavigationStack.Count > 1)
+                if (attribute.WrapInNavigationPage && navigationPage?.Navigation?.ModalStack?.LastOrDefault() is MvxNavigationPage modalNavigationPage && modalNavigationPage?.Navigation?.NavigationStack?.Count > 1)
                     modalNavigationPage.PopAsync();
                 else
                     navigationPage.Navigation.PopModalAsync();
             }
             else
             {
-                if (attribute.WrapInNavigationPage && FormsApplication.MainPage.Navigation.ModalStack.LastOrDefault() is MvxNavigationPage modalNavigationPage)
+                if (attribute.WrapInNavigationPage && FormsApplication.MainPage?.Navigation?.ModalStack?.LastOrDefault() is MvxNavigationPage modalNavigationPage)
                     modalNavigationPage.PopAsync();
                 else
-                    FormsApplication.MainPage.Navigation.PopModalAsync();
+                    FormsApplication.MainPage?.Navigation?.PopModalAsync();
             }
             return true;
         }
@@ -435,7 +440,7 @@ namespace MvvmCross.Forms.Views
                 {
                     CloseModalStack(navigationPage.Navigation.ModalStack);
                 }
-                else if (FormsApplication.MainPage.Navigation.ModalStack.Count > 0)
+                else if (FormsApplication.MainPage.Navigation?.ModalStack?.Count > 0)
                 {
                     CloseModalStack(FormsApplication.MainPage.Navigation.ModalStack);
                 }

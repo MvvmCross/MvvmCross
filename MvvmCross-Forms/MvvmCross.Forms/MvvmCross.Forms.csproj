@@ -80,6 +80,7 @@
     <Compile Include="Views\MvxBoxView.cs" />
     <Compile Include="Bindings\MvxBind.cs" />
     <Compile Include="Bindings\MvxLang.cs" />
+    <Compile Include="Views\MvxPage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
