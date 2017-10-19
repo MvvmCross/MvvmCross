@@ -47,6 +47,8 @@
     <Compile Include="ModuleWeaver.Weave.cs" />
     <Compile Include="ModuleWeaver.TypeCheck.cs" />
     <Compile Include="ModuleWeaver.ShouldWeave.cs" />
+    <Compile Include="ModuleWeaver.Fields.cs" />
+    <Compile Include="ModuleWeaver.InitializeDefinitions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
