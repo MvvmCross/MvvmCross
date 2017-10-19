@@ -79,7 +79,7 @@ namespace MvvmCross.Droid.Views.Fragments
             }
         }
 
-        public static void EnsureBindingContextIsSet(this IMvxFragmentView fragment, Bundle b0)
+        public static void EnsureBindingContextIsSet(this IMvxFragmentView fragment)
         {
             var actualFragment = fragment.ToFragment();
             if (actualFragment == null)
