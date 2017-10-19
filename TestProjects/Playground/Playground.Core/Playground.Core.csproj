@@ -182,6 +182,7 @@
     <Compile Include="Pages\SecondChildPage.xaml.cs">
       <DependentUpon>SecondChildPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\MainViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross-Forms\MvvmCross.Forms\MvvmCross.Forms.csproj">
