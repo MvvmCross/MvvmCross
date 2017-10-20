@@ -283,9 +283,9 @@ namespace MvvmCross.Forms.Views
                 if (page is MasterDetailPage masterDetailRoot)
                 {
                     if (masterDetailRoot.Master == null)
-                        masterDetailRoot.Master = new MvxContentPage() { Title = attribute.Title };
+                        masterDetailRoot.Master = new MvxContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : "MvvmCross"  };
                     if (masterDetailRoot.Detail == null)
-                        masterDetailRoot.Detail = new MvxContentPage() { Title = attribute.Title };
+                        masterDetailRoot.Detail = new MvxContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : "MvvmCross" };
 
                     if (attribute.WrapInNavigationPage && FormsApplication.MainPage is MvxNavigationPage currentNavigationPage)
                     {
@@ -310,8 +310,8 @@ namespace MvvmCross.Forms.Views
                     if (masterDetailHost == null)
                     {
                         masterDetailHost = new MasterDetailPage();
-                        masterDetailHost.Master = new MvxContentPage() { Title = attribute.Title };
-                        masterDetailHost.Detail = new MvxContentPage() { Title = attribute.Title };
+                        masterDetailHost.Master = new MvxContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : "MvvmCross" };
+                        masterDetailHost.Detail = new MvxContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : "MvvmCross" };
                         if (attribute.NoHistory)
                             navigationPage.PopToRootAsync(attribute.Animated);
                         navigationPage.PushAsync(masterDetailHost, attribute.Animated);
@@ -321,8 +321,8 @@ namespace MvvmCross.Forms.Views
                 {
                     //Assume we have to create the host
                     masterDetailHost = new MasterDetailPage();
-                    masterDetailHost.Master = new MvxContentPage() { Title = attribute.Title };
-                    masterDetailHost.Detail = new MvxContentPage() { Title = attribute.Title };
+                    masterDetailHost.Master = new MvxContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : "MvvmCross" };
+                    masterDetailHost.Detail = new MvxContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : "MvvmCross" };
                     FormsApplication.MainPage = masterDetailHost;
                 }
                 if(attribute.Position == MasterDetailPosition.Master)
