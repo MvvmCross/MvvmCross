@@ -77,6 +77,6 @@ namespace MvvmCross.Forms.Uwp
             base.FillBindingNames(registry);
         }
 
-        protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsBindingBuilder();
+        protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsWindowsBindingBuilder();
     }
 }
