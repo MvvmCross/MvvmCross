@@ -441,12 +441,13 @@ namespace MvvmCross.Forms.Views
                 }
             }
         }
-
+       
         protected virtual void CloseModalStack(IReadOnlyList<Page> modals)
         {
-            if (modals != null && modals.Count > 0)
+            var modalList = modals.ToList();
+            if (modalList != null && modalList.Count > 0)
             {
-                foreach (var modal in modals)
+                foreach (var modal in modalList)
                 {
                     modal.Navigation.PopModalAsync();
                 }
