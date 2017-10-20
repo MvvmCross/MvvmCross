@@ -4,6 +4,7 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Bindings;
+using MvvmCross.Forms.iOS.Bindings;
 using MvvmCross.Forms.iOS.Presenters;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
@@ -90,7 +91,7 @@ namespace MvvmCross.Forms.iOS
             base.FillBindingNames(registry);
         }
 
-        protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsBindingBuilder();
+        protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsIosBindingBuilder();
 
         protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
