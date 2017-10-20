@@ -46,7 +46,6 @@
     <Compile Include="Bindings\IMvxBindingCreator.cs" />
     <Compile Include="Bindings\MvxBindablePropertyExtensionMethods.cs" />
     <Compile Include="Bindings\MvxBindingCreator.cs" />
-    <Compile Include="Bindings\MvxFormsBindingBuilder.cs" />
     <Compile Include="Bindings\MvxFormsBindingCreator.cs" />
     <Compile Include="Bindings\MvxFormsTargetBindingFactoryRegistry.cs" />
     <Compile Include="Bindings\Target\MvxBindablePropertyTargetBinding.cs" />
