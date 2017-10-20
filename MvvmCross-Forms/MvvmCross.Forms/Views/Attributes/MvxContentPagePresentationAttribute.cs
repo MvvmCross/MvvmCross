@@ -9,7 +9,5 @@ namespace MvvmCross.Forms.Views.Attributes
         public MvxContentPagePresentationAttribute()
         {
         }
-
-        public bool Animated { get; set; } = true;
     }
 }

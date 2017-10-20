@@ -16,6 +16,6 @@ namespace MvvmCross.Forms.Views
 
         IMvxViewModelTypeFinder ViewModelTypeFinder { get; set; }
 
-        Page CreatePage(Type viewType, MvxViewModelRequest request);
+        Page CreatePage(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute);
     }
 }
