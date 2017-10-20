@@ -92,7 +92,7 @@ namespace MvvmCross.Forms.Uwp.Presenters
         private bool TryShowPage(MvxViewModelRequest request)
         {
             var viewType = ViewsContainer.GetViewType(request.ViewModelType);
-            var page = FormsPagePresenter.CreatePage(viewType, request);
+            var page = FormsPagePresenter.CreatePage(viewType, request, null);
             if (page == null)
                 return false;
 
