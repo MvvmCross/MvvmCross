@@ -249,7 +249,6 @@ namespace MvvmCross.Forms.Views
             }
             else
             {
-                //TODO: Crashes on iOS
                 FormsApplication.MainPage = page;
             }
         }
