@@ -44,8 +44,7 @@ XabluCross for MvvmCross | XabluCross | [Visual Studio](https://marketplace.visu
 MvvmCross for Visual Studio | Jim Bennett | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=JimBobBennett.MvvmCrossforVisualStudio-19327) - [Visual Studio for Mac](http://addins.monodevelop.com/Project/Index/227)
 MvvmCross Plugin Template for Visual Studio | EShy | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=EShy.MvvmCrossPluginTemplateforVisualStudio)
 Xamarin MvvmCross Dreams | Artmdev | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=Artmdev.XamarinMvvmCrossDREAMS)
-Xamarin Forms with MvvmCross Solution Template | Cristian Chereches | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=CristianChereches.XamarinFormswithMvvmCrossSolutionTemplate)
-Xamarin Forms with MvvmCross 5 Solution Template | Paul Datsiuk | Visual Studio](https://marketplace.visualstudio.com/items?itemName=PaulDatsiuk.XamarinFormswithMvvmCross5SolutionTemplate)
+Xamarin Forms with MvvmCross 5 Solution Template | Paul Datsiuk | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=PaulDatsiuk.XamarinFormswithMvvmCross5SolutionTemplate)
 Ninja Coder For MvvmCross and Xamarin Forms | Ninja Coder for MvvmCross | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=NinjaCoderforMvvmCross.NinjaCoderForMvvmCrossandXamarinForms)
 MVXTemplates | Luke Pothier | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=LukePothier.MVXTemplates)
 
