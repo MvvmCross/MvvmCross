@@ -6,8 +6,8 @@ namespace MvvmCross.Core.Views
 {
     public interface IMvxAttributeViewPresenter : IMvxViewPresenter
     {
-        IMvxViewModelTypeFinder ViewModelTypeFinder { get; }
-        IMvxViewsContainer ViewsContainer { get; }
+        IMvxViewModelTypeFinder ViewModelTypeFinder { get; set; }
+        IMvxViewsContainer ViewsContainer { get; set; }
         Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary { get; }
         void RegisterAttributeTypes();
 

@@ -3,6 +3,7 @@ using Android.Content.PM;
 using Android.OS;
 using MvvmCross.Forms.Droid.Views;
 using MvvmCross.Platform;
+using Playground.Core.ViewModels;
 
 namespace Playground.Forms.Droid
 {
@@ -11,7 +12,7 @@ namespace Playground.Forms.Droid
         Icon = "@mipmap/icon",
         Theme = "@style/AppTheme",
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : MvxFormsAppCompatActivity
+    public class MainActivity : MvxFormsAppCompatActivity<MainViewModel>
     {
         protected override void OnCreate(Bundle bundle)
         {

@@ -120,6 +120,7 @@
     <Compile Include="Setup.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="Views\SheetView.cs" />
+    <Compile Include="Views\OverrideAttributeView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

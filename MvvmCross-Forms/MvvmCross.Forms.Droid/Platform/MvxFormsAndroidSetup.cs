@@ -47,7 +47,10 @@ namespace MvvmCross.Forms.Droid.Platform
             get
             {
                 if (!Xamarin.Forms.Forms.IsInitialized)
-                    Xamarin.Forms.Forms.Init(Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity, null);
+                {
+                    var activity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity ?? ApplicationContext;
+                    Xamarin.Forms.Forms.Init(activity, null);
+                }
                 if (_formsApplication == null)
                     _formsApplication = CreateFormsApplication();
                 return _formsApplication;

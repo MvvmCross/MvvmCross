@@ -66,11 +66,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
         }
 
-        protected void EnsureBindingContextSet(Bundle b0)
-        {
-            this.EnsureBindingContextIsSet(b0);
-        }
-
         public virtual string UniqueImmutableCacheTag => Tag;
 
         public override void OnCreate(Bundle savedInstanceState)

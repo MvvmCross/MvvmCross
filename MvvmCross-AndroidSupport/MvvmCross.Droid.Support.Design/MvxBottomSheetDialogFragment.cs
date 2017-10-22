@@ -33,7 +33,7 @@ namespace MvvmCross.Droid.Support.Design
         public IMvxBindingContext BindingContext { get; set; }
 
         private object _dataContext;
-       
+
         public object DataContext
         {
             get
@@ -63,11 +63,6 @@ namespace MvvmCross.Droid.Support.Design
 
         public virtual void OnViewModelSet()
         {
-        }
-
-        protected void EnsureBindingContextSet(Bundle b0)
-        {
-            this.EnsureBindingContextIsSet(b0);
         }
 
         public virtual string UniqueImmutableCacheTag => Tag;

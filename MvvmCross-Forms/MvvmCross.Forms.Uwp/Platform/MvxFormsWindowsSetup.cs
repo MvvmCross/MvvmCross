@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using Windows.ApplicationModel.Activation;
 using MvvmCross.Binding;
-using MvvmCross.Core.Views;
-using MvvmCross.Forms.Bindings;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Uwp.Presenters;
 using MvvmCross.Platform;
@@ -14,6 +12,7 @@ using MvvmCross.Platform.Plugins;
 using XamlControls = Windows.UI.Xaml.Controls;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Forms.Views;
+using MvvmCross.Forms.Uwp.Bindings;
 
 namespace MvvmCross.Forms.Uwp
 {
@@ -77,6 +76,6 @@ namespace MvvmCross.Forms.Uwp
             base.FillBindingNames(registry);
         }
 
-        protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsBindingBuilder();
+        protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsWindowsBindingBuilder();
     }
 }

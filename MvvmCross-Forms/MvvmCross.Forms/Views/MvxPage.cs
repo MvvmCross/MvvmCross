@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views
 {
-    public class MvxBoxView : BoxView, IMvxElement
+    public class MvxPage : Page, IMvxPage
     {
         public object DataContext
         {
@@ -51,11 +51,25 @@ namespace MvvmCross.Forms.Views
         protected virtual void OnViewModelSet()
         {
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ViewModel?.ViewAppearing();
+            ViewModel?.ViewAppeared();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            ViewModel?.ViewDisappearing();
+            ViewModel?.ViewDisappeared();
+        }
     }
 
-    public class MvxBoxView<TViewModel>
-        : MvxBoxView
-    , IMvxElement<TViewModel> where TViewModel : class, IMvxViewModel
+    public class MvxPage<TViewModel>
+        : MvxPage
+    , IMvxPage<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {

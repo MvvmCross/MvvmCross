@@ -49,7 +49,10 @@ namespace MvvmCross.Forms.iOS.Presenters
             get
             {
                 if (_formsPagePresenter == null)
-                    _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication);
+                {
+                    _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder);
+                    Mvx.RegisterSingleton<IMvxFormsPagePresenter>(_formsPagePresenter);
+                }
                 return _formsPagePresenter;
             }
             set

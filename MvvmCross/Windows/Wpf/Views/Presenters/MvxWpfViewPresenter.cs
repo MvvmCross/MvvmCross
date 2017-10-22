@@ -21,6 +21,21 @@ namespace MvvmCross.Wpf.Views.Presenters
     public class MvxWpfViewPresenter
         : MvxBaseWpfViewPresenter, IMvxAttributeViewPresenter
     {
+        private IMvxViewModelTypeFinder _viewModelTypeFinder;
+        public IMvxViewModelTypeFinder ViewModelTypeFinder
+        {
+            get
+            {
+                if (_viewModelTypeFinder == null)
+                    _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
+                return _viewModelTypeFinder;
+            }
+            set
+            {
+                _viewModelTypeFinder = value;
+            }
+        }
+
         private IMvxViewsContainer _viewsContainer;
         public IMvxViewsContainer ViewsContainer
         {
@@ -30,16 +45,9 @@ namespace MvvmCross.Wpf.Views.Presenters
                     _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
                 return _viewsContainer;
             }
-        }
-
-        private IMvxViewModelTypeFinder _viewModelTypeFinder;
-        public IMvxViewModelTypeFinder ViewModelTypeFinder
-        {
-            get
+            set
             {
-                if (_viewModelTypeFinder == null)
-                    _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
-                return _viewModelTypeFinder;
+                _viewsContainer = value;
             }
         }
 
