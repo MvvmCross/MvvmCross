@@ -46,7 +46,6 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <EmbeddedResource Include="Properties\MvvmCross.Forms.Uwp.rd.xml" />
-    <Compile Include="Views\MvxFormsUwpMasterDetailPagePresenter.cs" />
     <Compile Include="Views\MvxFormsUwpViewPresenter.cs" />
     <Compile Include="Platform\MvxFormsWindowsSetup.cs" />
     <Compile Include="Views\MvxPageRenderer.cs" />

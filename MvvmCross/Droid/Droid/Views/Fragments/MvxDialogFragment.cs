@@ -64,11 +64,6 @@ namespace MvvmCross.Droid.Views.Fragments
         {
         }
 
-        protected void EnsureBindingContextSet(Bundle b0)
-        {
-            this.EnsureBindingContextIsSet(b0);
-        }
-
         public string UniqueImmutableCacheTag => Tag;
 
         public override void OnCreate(Bundle bundle)
@@ -77,10 +72,10 @@ namespace MvvmCross.Droid.Views.Fragments
             ViewModel?.ViewCreated();
         }
 
-        public override void OnDestroy ()
+        public override void OnDestroy()
         {
-            base.OnDestroy ();
-            ViewModel?.ViewDestroy ();
+            base.OnDestroy();
+            ViewModel?.ViewDestroy();
         }
 
         public override void OnStart()

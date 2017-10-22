@@ -46,17 +46,13 @@
     <Compile Include="Bindings\IMvxBindingCreator.cs" />
     <Compile Include="Bindings\MvxBindablePropertyExtensionMethods.cs" />
     <Compile Include="Bindings\MvxBindingCreator.cs" />
-    <Compile Include="Bindings\MvxFormsBindingBuilder.cs" />
     <Compile Include="Bindings\MvxFormsBindingCreator.cs" />
     <Compile Include="Bindings\MvxFormsTargetBindingFactoryRegistry.cs" />
     <Compile Include="Bindings\Target\MvxBindablePropertyTargetBinding.cs" />
     <Compile Include="Views\MvxImageView.cs" />
     <Compile Include="Bindings\Target\MvxListViewItemClickPropertyTargetBinding.cs" />
     <Compile Include="Views\MvxListView.cs" />
-    <Compile Include="Views\IMvxFormsPageLoader.cs" />
     <Compile Include="Views\IMvxFormsViewPresenter.cs" />
-    <Compile Include="Views\MvxFormsPageLoader.cs" />
-    <Compile Include="Views\MvxPresenterHelpers.cs" />
     <Compile Include="Views\Attributes\MvxNavigationPagePresentationAttribute.cs" />
     <Compile Include="Views\IMvxPage.cs" />
     <Compile Include="Views\MvxContentPage.cs" />
@@ -76,10 +72,17 @@
     <Compile Include="Views\Attributes\MvxPagePresentationAttribute.cs" />
     <Compile Include="Views\MvxFormsPagePresenter.cs" />
     <Compile Include="Views\MvxContentView.cs" />
-    <Compile Include="Views\IMvxFormsView.cs" />
+    <Compile Include="Views\IMvxElement.cs" />
     <Compile Include="Views\MvxBoxView.cs" />
     <Compile Include="Bindings\MvxBind.cs" />
     <Compile Include="Bindings\MvxLang.cs" />
+    <Compile Include="Views\MvxPage.cs" />
+    <Compile Include="Views\IMvxFormsPagePresenter.cs" />
+    <Compile Include="Views\MvxViewCell.cs" />
+    <Compile Include="Views\MvxSwitchCell.cs" />
+    <Compile Include="Views\MvxTextCell.cs" />
+    <Compile Include="Views\MvxImageCell.cs" />
+    <Compile Include="Views\MvxEntryCell.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

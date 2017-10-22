@@ -34,6 +34,10 @@ namespace MvvmCross.iOS.Views.Presenters
                     _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
                 return _viewModelTypeFinder;
             }
+            set
+            {
+                _viewModelTypeFinder = value;
+            }
         }
 
         private IMvxViewsContainer _viewsContainer;
@@ -44,6 +48,10 @@ namespace MvvmCross.iOS.Views.Presenters
                 if (_viewsContainer == null)
                     _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
                 return _viewsContainer;
+            }
+            set
+            {
+                _viewsContainer = value;
             }
         }
 
@@ -524,7 +532,7 @@ namespace MvvmCross.iOS.Views.Presenters
                 var root = ((UINavigationController)vc).ViewControllers.FirstOrDefault();
                 if (root != null && root.GetIMvxIosView().ViewModel == toClose)
                 {
-                    controllerToClose = root;
+                    controllerToClose = vc;
                     break;
                 }
             }

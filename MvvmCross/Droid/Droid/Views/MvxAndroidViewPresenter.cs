@@ -60,6 +60,10 @@ namespace MvvmCross.Droid.Views
                     _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
                 return _viewModelTypeFinder;
             }
+            set
+            {
+                _viewModelTypeFinder = value;
+            }
         }
 
         private IMvxViewsContainer _viewsContainer;
@@ -70,6 +74,10 @@ namespace MvvmCross.Droid.Views
                 if (_viewsContainer == null)
                     _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
                 return _viewsContainer;
+            }
+            set
+            {
+                _viewsContainer = value;
             }
         }
 

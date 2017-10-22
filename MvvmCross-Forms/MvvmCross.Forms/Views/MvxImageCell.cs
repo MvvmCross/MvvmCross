@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views
 {
-    public class MvxBoxView : BoxView, IMvxElement
+    public class MvxImageCell : ImageCell, IMvxElement
     {
         public object DataContext
         {
@@ -53,8 +53,8 @@ namespace MvvmCross.Forms.Views
         }
     }
 
-    public class MvxBoxView<TViewModel>
-        : MvxBoxView
+    public class MvxImageCell<TViewModel>
+        : MvxImageCell
     , IMvxElement<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
