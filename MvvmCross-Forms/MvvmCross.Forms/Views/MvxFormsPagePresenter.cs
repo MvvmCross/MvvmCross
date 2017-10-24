@@ -173,9 +173,9 @@ namespace MvvmCross.Forms.Views
                         currentPage.PushAsync(page, attribute.Animated);
                     }
                     else if (attribute.WrapInNavigationPage)
-                        FormsApplication.MainPage = new MvxNavigationPage(page);
+                        ReplaceRoot(new MvxNavigationPage(page));
                     else
-                        FormsApplication.MainPage = page;
+                        ReplaceRoot(page);
                 }
                 else
                     throw new MvxException($"A root page should be of type {nameof(CarouselPage)}");
@@ -245,11 +245,11 @@ namespace MvvmCross.Forms.Views
             }
             else if (attribute.WrapInNavigationPage)
             {
-                FormsApplication.MainPage = new MvxNavigationPage(page);
+                ReplaceRoot(new MvxNavigationPage(page));
             }
             else
             {
-                FormsApplication.MainPage = page;
+                ReplaceRoot(page);
             }
         }
 
@@ -294,9 +294,9 @@ namespace MvvmCross.Forms.Views
                         currentNavigationPage.PushAsync(page, attribute.Animated);
                     }
                     else if (attribute.WrapInNavigationPage)
-                        FormsApplication.MainPage = new MvxNavigationPage(page);
+                        ReplaceRoot(new MvxNavigationPage(page));
                     else
-                        FormsApplication.MainPage = page;
+                        ReplaceRoot(page);
                 }
                 else
                     throw new MvxException($"A root page should be of type {nameof(MasterDetailPage)}");
@@ -495,9 +495,9 @@ namespace MvvmCross.Forms.Views
                         currentPage.PushAsync(page, attribute.Animated);
                     }
                     else if (attribute.WrapInNavigationPage)
-                        FormsApplication.MainPage = new MvxNavigationPage(page);
+                        ReplaceRoot(new MvxNavigationPage(page));
                     else
-                        FormsApplication.MainPage = page;
+                        ReplaceRoot(page);
                 }
                 else
                     throw new MvxException($"A root page should be of type {nameof(TabbedPage)}");
@@ -577,6 +577,22 @@ namespace MvvmCross.Forms.Views
                 {
                     modal.Navigation.PopModalAsync();
                 }
+            }
+        }
+
+        public virtual void ReplaceRoot(Page page)
+        {
+            if(FormsApplication.MainPage == null)
+                FormsApplication.MainPage = page;
+            else if(FormsApplication.MainPage is MvxNavigationPage navigationPage)
+            {
+                navigationPage.Navigation.InsertPageBefore(page, navigationPage.CurrentPage);
+                navigationPage.Navigation.PopToRootAsync();
+            }
+            else
+            {
+                //This may fail
+                FormsApplication.MainPage = page;
             }
         }
     }
