@@ -7,12 +7,18 @@
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 
 using System;
+using MvvmCross.Forms.Views;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platform
 {
     public class MvxFormsApplication : Application
     {
+        public MvxFormsApplication()
+        {
+            MainPage = new MvxNavigationPage();
+        }
+
         public event EventHandler Start;
 
         public event EventHandler Sleep;
