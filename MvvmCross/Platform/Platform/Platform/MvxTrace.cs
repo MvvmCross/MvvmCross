@@ -11,6 +11,7 @@ using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Platform.Platform
 {
+    [Obsolete]
     public class MvxTrace
         : MvxSingleton<IMvxTrace>, IMvxTrace
     {
