@@ -207,9 +207,13 @@ namespace MvvmCross.Core.Platform
 
         protected virtual void InitializeDebugServices()
         {
+            //Deprecated
             var debugTrace = CreateDebugTrace();
             Mvx.RegisterSingleton<IMvxTrace>(debugTrace);
             MvxTrace.Initialize();
+
+            //New logging
+            Mvx.ConstructAndRegisterSingleton<IMvxLog, MvxLog>();
         }
 
         protected virtual IMvxViewModelLoader CreateViewModelLoader(IMvxViewModelLocatorCollection collection)

@@ -20,7 +20,7 @@
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
     <OutputPath>..\..\..\bin\Debug\Mvx\Portable\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;LIBLOG_PORTABLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -127,6 +127,9 @@
     <Compile Include="WeakSubscription\MvxValueEventSubscription.cs" />
     <Compile Include="WeakSubscription\MvxWeakEventSubscription.cs" />
     <Compile Include="WeakSubscription\MvxWeakSubscriptionExtensionMethods.cs" />
+    <Compile Include="Platform\LibLog.cs" />
+    <Compile Include="Platform\MvxLog.cs" />
+    <Compile Include="Platform\IMvxLog.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
