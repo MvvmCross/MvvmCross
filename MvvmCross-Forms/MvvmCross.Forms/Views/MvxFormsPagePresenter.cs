@@ -334,7 +334,7 @@ namespace MvvmCross.Forms.Views
                         navigationMasterPage.PushAsync(page, attribute.Animated);
                     }
                     else if (attribute.WrapInNavigationPage)
-                        masterDetailHost.Master = new MvxNavigationPage(page);
+                        masterDetailHost.Master = new MvxNavigationPage(page) { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : "MvvmCross" };
                     else
                         masterDetailHost.Master = page;
                 }
