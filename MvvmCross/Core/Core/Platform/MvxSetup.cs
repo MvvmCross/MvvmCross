@@ -211,22 +211,28 @@ namespace MvvmCross.Core.Platform
         {
             //Deprecated
             var debugTrace = CreateDebugTrace();
-            Mvx.RegisterSingleton<IMvxTrace>(debugTrace);
+            Mvx.RegisterSingleton(debugTrace);
             MvxTrace.Initialize();
 
             //New logging
             var logProvider = CreateLogProvider();
             if (logProvider != null)
+            {
                 Mvx.RegisterSingleton(logProvider);
+                var log = logProvider.GetLogFor("MvxLog");
+                Mvx.RegisterSingleton(log);
+            }
         }
 
-        protected virtual MvxLogProviderType GetDefaultLogProvider()
-            => MvxLogProviderType.None;
+        protected virtual MvxLogProviderType GetDefaultLogProviderType()
+            => MvxLogProviderType.Console;
        
         protected virtual IMvxLogProvider CreateLogProvider()
         {
-            switch(GetDefaultLogProvider())
+            switch(GetDefaultLogProviderType())
             {
+                case MvxLogProviderType.Console:
+                    return new ConsoleLogProvider();
                 case MvxLogProviderType.EntLib:
                     return new EntLibLogProvider();
                 case MvxLogProviderType.Log4Net:
