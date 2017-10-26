@@ -1,10 +1,9 @@
-﻿using System;
-
-namespace MvvmCross.Platform.Logging
+﻿namespace MvvmCross.Platform.Logging
 {
     public enum MvxLogProviderType
     {
         None,
+        Console,
         EntLib,
         Log4Net,
         Loupe,
