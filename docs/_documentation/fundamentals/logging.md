@@ -72,7 +72,16 @@ If you have your own logging provider or want to implement one, you need to over
 In the case of Serilog you could do:
 
 ```c#
-Some code
+protected override IMvxLogProvider CreateLogProvider()
+{
+	Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.LiterateConsole()
+                .WriteTo.AndroidLog()
+                .CreateLogger();
+	return base.CreateLogProvider();
+}
 ```
 
+This would install a sink for the Serilog Xamarin extension.
 Similair customilization can be done for other providers as well.

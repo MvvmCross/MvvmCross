@@ -111,6 +111,13 @@
     <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Xamarin.Forms.2.4.0.282\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Serilog.Sinks.Xamarin.Droid">
+      <HintPath>..\..\..\packages\Serilog.Sinks.Xamarin.0.1.29\lib\MonoAndroid403\Serilog.Sinks.Xamarin.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog">
+      <HintPath>..\..\..\packages\Serilog.2.5.0\lib\netstandard1.3\Serilog.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
