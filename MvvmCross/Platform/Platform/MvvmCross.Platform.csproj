@@ -131,6 +131,7 @@
     <Compile Include="Logging\MvxLogLevel.cs" />
     <Compile Include="Logging\MvxLogExtensions.cs" />
     <Compile Include="Logging\IMvxLogProvider.cs" />
+    <Compile Include="Logging\MvxLogProviderType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
