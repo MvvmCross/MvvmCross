@@ -16,7 +16,7 @@ icons and more in your App.
 You can customize this behavior by overriding `GetResourceAssembly()` in your subclass:
 
 ```csharp
-protected override Assembly GetResourcesAssembly()
+protected override Assembly GetResourceAssembly()
 {
     // return your Assembly here
 }
