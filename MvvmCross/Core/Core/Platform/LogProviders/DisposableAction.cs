@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MvvmCross.Platform.Logging.LogProviders
+namespace MvvmCross.Core.Platform.LogProviders
 {
     internal class DisposableAction : IDisposable
     {

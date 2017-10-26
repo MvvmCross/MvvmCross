@@ -1,6 +1,7 @@
 ﻿using System;
+using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Platform.Logging
+namespace MvvmCross.Core.Platform.LogProviders
 {
     internal class MvxLog : IMvxLog
     {
@@ -17,7 +18,7 @@ namespace MvvmCross.Platform.Logging
         {
             if (messageFunc == null)
                 return _logger(logLevel, null);
-            
+
             Func<string> wrappedMessageFunc = () =>
             {
                 try

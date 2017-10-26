@@ -4,8 +4,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Platform.Logging.LogProviders
+namespace MvvmCross.Core.Platform.LogProviders
 {
     internal class Log4NetLogProvider : MvxBaseLogProvider
     {
@@ -289,23 +290,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
                 if (s_callerStackBoundaryType == null)
                 {
                     lock (CallerStackBoundaryTypeSync)
-                    {
-#if !LIBLOG_PORTABLE
-                        StackTrace stack = new StackTrace();
-                        Type thisType = GetType();
-                        s_callerStackBoundaryType = Type.GetType("LoggerExecutionWrapper");
-                        for (var i = 1; i < stack.FrameCount; i++)
-                        {
-                            if (!IsInTypeHierarchy(thisType, stack.GetFrame(i).GetMethod().DeclaringType))
-                            {
-                                s_callerStackBoundaryType = stack.GetFrame(i - 1).GetMethod().DeclaringType;
-                                break;
-                            }
-                        }
-#else
                         s_callerStackBoundaryType = typeof(MvxLog);
-#endif
-                    }
                 }
 
                 var translatedLevel = TranslateLevel(logLevel);
@@ -366,7 +351,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
                     case MvxLogLevel.Fatal:
                         return _levelFatal;
                     default:
-                        throw new ArgumentOutOfRangeException("logLevel", logLevel, null);
+                        throw new ArgumentOutOfRangeException(nameof(logLevel), logLevel, null);
                 }
             }
         }

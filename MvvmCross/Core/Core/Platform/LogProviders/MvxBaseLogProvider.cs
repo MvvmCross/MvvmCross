@@ -1,9 +1,13 @@
 ﻿using System;
+using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Platform.Logging.LogProviders
+namespace MvvmCross.Core.Platform.LogProviders
 {
+    internal delegate bool Logger(MvxLogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters);
+
     internal abstract class MvxBaseLogProvider : IMvxLogProvider
     {
+
         protected delegate IDisposable OpenNdc(string message);
         protected delegate IDisposable OpenMdc(string key, string value);
 

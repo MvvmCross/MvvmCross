@@ -129,17 +129,6 @@
     <Compile Include="WeakSubscription\MvxWeakSubscriptionExtensionMethods.cs" />
     <Compile Include="Logging\IMvxLog.cs" />
     <Compile Include="Logging\MvxLogLevel.cs" />
-    <Compile Include="Logging\LogProviders\DisposableAction.cs" />
-    <Compile Include="Logging\LogProviders\EntLibLogProvider.cs" />
-    <Compile Include="Logging\LogProviders\Log4NetLogProvider.cs" />
-    <Compile Include="Logging\LogProviders\LogMessageFormatter.cs" />
-    <Compile Include="Logging\LogProviders\LoupeLogProvider.cs" />
-    <Compile Include="Logging\LogProviders\MvxBaseLogProvider.cs" />
-    <Compile Include="Logging\LogProviders\NLogLogProvider.cs" />
-    <Compile Include="Logging\LogProviders\SerilogLogProvider.cs" />
-    <Compile Include="Logging\LogProviders\TraceEventTypeValues.cs" />
-    <Compile Include="Logging\LogProviders\TypeExtensions.cs" />
-    <Compile Include="Logging\MvxLog.cs" />
     <Compile Include="Logging\MvxLogExtensions.cs" />
     <Compile Include="Logging\IMvxLogProvider.cs" />
   </ItemGroup>
