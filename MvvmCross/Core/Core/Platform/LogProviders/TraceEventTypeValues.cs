@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace MvvmCross.Platform.Logging.LogProviders
+namespace MvvmCross.Core.Platform.LogProviders
 {
     internal static class TraceEventTypeValues
     {

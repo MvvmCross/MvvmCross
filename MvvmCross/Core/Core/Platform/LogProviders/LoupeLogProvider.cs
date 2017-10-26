@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Reflection;
+using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Platform.Logging.LogProviders
+namespace MvvmCross.Core.Platform.LogProviders
 {
     internal class LoupeLogProvider : MvxBaseLogProvider
     {
