@@ -86,7 +86,6 @@
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
     <None Include="packages.config" />
-    <None Include="ToDo-MvvmCross\_ iOS UI.txt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
