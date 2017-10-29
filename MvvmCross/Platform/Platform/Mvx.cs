@@ -192,56 +192,67 @@ namespace MvvmCross.Platform
             ioc.CallbackWhenRegistered(type, action);
         }
 
+        [Obsolete]
         public static void TaggedTrace(MvxTraceLevel level, string tag, string message, params object[] args)
         {
             MvxTrace.TaggedTrace(level, tag, message, args);
         }
 
+        [Obsolete]
         public static void Trace(MvxTraceLevel level, string message, params object[] args)
         {
             MvxTrace.Trace(level, message, args);
         }
 
+        [Obsolete]
         public static void TaggedTrace(string tag, string message, params object[] args)
         {
             TaggedTrace(MvxTraceLevel.Diagnostic, tag, message, args);
         }
 
+        [Obsolete]
         public static void TaggedWarning(string tag, string message, params object[] args)
         {
             TaggedTrace(MvxTraceLevel.Warning, tag, message, args);
         }
 
+        [Obsolete]
         public static void TaggedError(string tag, string message, params object[] args)
         {
             TaggedTrace(MvxTraceLevel.Error, tag, message, args);
         }
 
+        [Obsolete]
         public static void Trace(string message, params object[] args)
         {
             Trace(MvxTraceLevel.Diagnostic, message, args);
         }
 
+        [Obsolete]
         public static void Warning(string message, params object[] args)
         {
             Trace(MvxTraceLevel.Warning, message, args);
         }
 
+        [Obsolete]
         public static void Error(string message, params object[] args)
         {
             Trace(MvxTraceLevel.Error, message, args);
         }
 
+        [Obsolete]
         public static MvxException Exception(string message)
         {
             return new MvxException(message);
         }
 
+        [Obsolete]
         public static MvxException Exception(string message, params object[] args)
         {
             return new MvxException(message, args);
         }
 
+        [Obsolete]
         public static MvxException Exception(Exception innerException, string message, params object[] args)
         {
             return new MvxException(innerException, message, args);

@@ -138,6 +138,18 @@
     <Compile Include="Views\MvxPresentationAttributeExtensions.cs" />
     <Compile Include="Views\IMvxAttributeViewPresenter.cs" />
     <Compile Include="Views\MvxPresentationAttributeAction.cs" />
+    <Compile Include="Platform\LogProviders\DisposableAction.cs" />
+    <Compile Include="Platform\LogProviders\EntLibLogProvider.cs" />
+    <Compile Include="Platform\LogProviders\Log4NetLogProvider.cs" />
+    <Compile Include="Platform\LogProviders\LogMessageFormatter.cs" />
+    <Compile Include="Platform\LogProviders\LoupeLogProvider.cs" />
+    <Compile Include="Platform\LogProviders\MvxBaseLogProvider.cs" />
+    <Compile Include="Platform\LogProviders\NLogLogProvider.cs" />
+    <Compile Include="Platform\LogProviders\SerilogLogProvider.cs" />
+    <Compile Include="Platform\LogProviders\TraceEventTypeValues.cs" />
+    <Compile Include="Platform\LogProviders\TypeExtensions.cs" />
+    <Compile Include="Platform\LogProviders\MvxLog.cs" />
+    <Compile Include="Platform\LogProviders\ConsoleLogProvider.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -157,5 +169,6 @@
   <ItemGroup />
   <ItemGroup>
     <Folder Include="Annotations\" />
+    <Folder Include="Platform\LogProviders\" />
   </ItemGroup>
 </Project>

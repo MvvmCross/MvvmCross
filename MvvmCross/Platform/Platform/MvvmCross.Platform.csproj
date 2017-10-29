@@ -127,6 +127,11 @@
     <Compile Include="WeakSubscription\MvxValueEventSubscription.cs" />
     <Compile Include="WeakSubscription\MvxWeakEventSubscription.cs" />
     <Compile Include="WeakSubscription\MvxWeakSubscriptionExtensionMethods.cs" />
+    <Compile Include="Logging\IMvxLog.cs" />
+    <Compile Include="Logging\MvxLogLevel.cs" />
+    <Compile Include="Logging\MvxLogExtensions.cs" />
+    <Compile Include="Logging\IMvxLogProvider.cs" />
+    <Compile Include="Logging\MvxLogProviderType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -137,4 +142,7 @@
   </Target>
   -->
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Logging\" />
+  </ItemGroup>
 </Project>
