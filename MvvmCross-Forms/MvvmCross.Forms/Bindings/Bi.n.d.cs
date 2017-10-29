@@ -20,6 +20,7 @@ namespace MvvmCross.Forms.Bindings
     {
         static Bi()
         {
+            MvxDesignTimeChecker.Check();
         }
 
         // ReSharper disable once InconsistentNaming
