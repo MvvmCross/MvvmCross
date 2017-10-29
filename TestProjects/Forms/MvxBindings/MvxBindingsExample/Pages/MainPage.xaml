@@ -1,11 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <core:MvxContentPage x:TypeArguments="viewModels:MainViewModel"
                      xmlns="http://xamarin.com/schemas/2014/forms"
                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                      xmlns:core="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
                      xmlns:viewModels="clr-namespace:MvxBindingsExample.ViewModels;assembly=MvxBindingsExample"
                      xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
-                     xmlns:markup="clr-namespace:MvvmCross.Forms.Markup;assembly=MvvmCross.Forms"
                      x:Class="MvxBindingsExample.Pages.MainPage">
 
     <ScrollView>
@@ -32,8 +31,8 @@
                      Color="Black" />
             <Label Text="Lang Binding" />
             <Label mvx:La.ng="Text ThisIsLocalized" />
-            <Label Text="{markup:MvxLang ThisIsLocalizedToo}" />
-            <Label Text="{markup:MvxBind TextSource, Mode=OneTime, Converter=Language, ConverterParameter=ThisIsLocalizedThroughMvxBind}" />
+            <Label Text="{mvx:MvxLang ThisIsLocalizedToo}" />
+            <Label Text="{mvx:MvxBind TextSource, Mode=OneTime, Converter=Language, ConverterParameter=ThisIsLocalizedThroughMvxBind}" />
         </StackLayout>
     </ScrollView>
 </core:MvxContentPage>
