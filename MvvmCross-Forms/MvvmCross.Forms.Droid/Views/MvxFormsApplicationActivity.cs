@@ -18,7 +18,7 @@ namespace MvvmCross.Forms.Droid.Views
     public class MvxFormsApplicationActivity : MvxEventSourceFormsApplicationActivity, IMvxAndroidView
     {
         protected View _view;
-        private Assembly _resourceAssembly;
+        private readonly Assembly _resourceAssembly;
 
         protected MvxFormsApplicationActivity()
         {
