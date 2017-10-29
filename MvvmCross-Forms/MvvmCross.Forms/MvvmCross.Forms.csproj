@@ -83,6 +83,7 @@
     <Compile Include="Views\MvxTextCell.cs" />
     <Compile Include="Views\MvxImageCell.cs" />
     <Compile Include="Views\MvxEntryCell.cs" />
+    <Compile Include="Bindings\MvxDesignTimeChecker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

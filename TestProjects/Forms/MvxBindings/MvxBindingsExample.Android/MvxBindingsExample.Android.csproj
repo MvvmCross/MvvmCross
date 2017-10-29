@@ -235,6 +235,10 @@
       <Project>{0797D39C-C59B-4FE2-BB16-AB6FA0119C69}</Project>
       <Name>MvvmCross.Forms</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross\Binding\Droid\MvvmCross.Binding.Droid.csproj">
+      <Project>{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}</Project>
+      <Name>MvvmCross.Binding.Droid</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\SplashStyle.xml" />
