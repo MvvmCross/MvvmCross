@@ -14,8 +14,6 @@ using MvvmCross.Forms.Droid.Views.EventSource;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Droid.Platform;
-using Xamarin.Forms.Platform.Android;
 
 namespace MvvmCross.Forms.Droid.Views
 {
