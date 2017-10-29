@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using MvvmCross.Binding;
-using MvvmCross.Forms.Bindings;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
@@ -9,14 +8,28 @@ using Xamarin.Forms.Xaml;
 
 namespace MvvmCross.Forms.Bindings
 {
-    [ContentProperty("Binding")]
-    public class MvxBind : IMarkupExtension
+    [ContentProperty("Path")]
+    public class MvxBindExtension : IMarkupExtension
     {
-        public string Binding { get; set; }
-        public MvxBindingMode Mode { get; set; } = MvxBindingMode.Default;
+        public MvxBindExtension()
+        {
+            Mode = MvxBindingMode.Default;
+            Path = ".";
+        }
+
+        public string Path { get; set; }
+
+        public MvxBindingMode Mode { get; set; }
+
         public string Converter { get; set; }
+
         public string ConverterParameter { get; set; }
+
+        public string StringFormat { get; set; }
+
         public string FallbackValue { get; set; }
+
+        public string CommandParameter { get; set; }
 
         public object ProvideValue(IServiceProvider serviceProvider)
         {
@@ -24,9 +37,11 @@ namespace MvvmCross.Forms.Bindings
             BindableObject obj = target.TargetObject as BindableObject;
             BindableProperty bindableProperty = target.TargetProperty as BindableProperty;
 
+            IRootObjectProvider rootObjectProvider = serviceProvider.GetService(typeof(IRootObjectProvider)) as IRootObjectProvider;
+
             if (obj != null && bindableProperty != null)
             {
-                StringBuilder bindingBuilder = new StringBuilder($"{bindableProperty.PropertyName} {Binding}, Mode={Mode}");
+                StringBuilder bindingBuilder = new StringBuilder($"{bindableProperty.PropertyName} {Path}, Mode={Mode}");
 
                 if (!string.IsNullOrEmpty(Converter))
                 {
@@ -41,6 +56,11 @@ namespace MvvmCross.Forms.Bindings
                 if (!string.IsNullOrEmpty(FallbackValue))
                 {
                     bindingBuilder.Append($", FallbackValue={FallbackValue}");
+                }
+
+                if (!string.IsNullOrEmpty(CommandParameter))
+                {
+                    bindingBuilder.Append($", CommandParameter={CommandParameter}");
                 }
 
                 obj.SetValue(Bi.ndProperty, bindingBuilder.ToString());

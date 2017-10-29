@@ -72,8 +72,8 @@
     <Compile Include="Views\MvxContentView.cs" />
     <Compile Include="Views\IMvxElement.cs" />
     <Compile Include="Views\MvxBoxView.cs" />
-    <Compile Include="Bindings\MvxBind.cs" />
-    <Compile Include="Bindings\MvxLang.cs" />
+    <Compile Include="Bindings\MvxBindExtension.cs" />
+    <Compile Include="Bindings\MvxLangExtension.cs" />
     <Compile Include="Views\MvxPage.cs" />
     <Compile Include="Views\IMvxFormsPagePresenter.cs" />
     <Compile Include="Views\MvxViewCell.cs" />
