@@ -20,7 +20,7 @@ namespace MvvmCross.Forms.Droid.Views
     public class MvxFormsAppCompatActivity : MvxEventSourceFormsAppCompatActivity, IMvxAndroidView
     {
         private View _view;
-        private Assembly _resourceAssembly;
+        private readonly Assembly _resourceAssembly;
 
         protected MvxFormsAppCompatActivity()
         {
