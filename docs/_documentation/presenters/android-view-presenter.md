@@ -55,6 +55,10 @@ Use this attribute over a Fragment view class and customize its presentation by 
 - SharedElements: Consists on a `IDictionary<string, View>` that you can use to add shared view elements to the transition. When using the AppCompat version, the string keys are not relevant.
 - IsCacheableFragment: Default value is false. You should leave it that way unless you really want/need to reuse a fragment view (for example, in case you are displaying a WebView, you might want to cache the already loaded URL). If it is set to `true`, the ViewPresenter will try to find a Fragment instance already present in the FragmentManager object before instantiating a new one and will reuse that object. 
 
+When providing a value for EnterAnimation you need to provide one for ExitAnimation as well, otherwise the animation won't work (same applies in the other way around). 
+
+Same as above, if you want to set a Pop animation, you will need to set four animation resources: EnterAnimation, ExitAnimation, PopEnterAnimation and PopExitAnimation. Otherwise the animation won't work.
+
 ### MvxDialogFragmentPresentationAttribute
 
 This attribute extends `MvxFragmentPresentationAttribute`, which means you can use all the properties it provides to customize the presentation. Use this attribute over a FragmentDialog view class to display a dialog and take advantage of even more customization with this property:
