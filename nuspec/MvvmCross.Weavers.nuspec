@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>MvvmCross.Weavers</id>
+		<version>$version$</version>
+		<title>MvvmCross - Weavers</title>
+		<description>
+		MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains the 'Weavers' libraries for MvvmCross
+		</description>
+		<tags>mvvm mvvmcross cross xamarin android ios forms monodroid monotouch xamarin.android xamarin.ios xamarin.forms wpf windows8 winrt net net45 netcore wp wpdev windowsphone windowsstore uwp, Weavers</tags>
+	</metadata>
+	<files>
+		<!-- PCL -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Weavers.*" target="lib\portable-net45+win+wpa81+wp80" />
+
+		<!-- dotnet -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Weavers.*" target="lib\dotnet" />
+		
+		<!-- wpf -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Weavers.*" target="lib\net45" />
+
+		<!-- uwp -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Weavers.*" target="lib\uap10.0" />
+
+		<!-- droid -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Weavers.*" target="lib\MonoAndroid" />
+
+		<!-- iOS -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Weavers.*" target="lib\Xamarin.iOS10" />
+
+		<!-- mac -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Weavers.*" target="lib\Xamarin.Mac20" />
+		
+		<!-- tvOS -->
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Weavers.*" target="lib\Xamarin.tvOS" />
+	</files>
+</package>
+
+
+
+
+
+
+
+

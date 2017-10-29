@@ -244,7 +244,8 @@ Task("Package")
 		"MvvmCross.Plugin.WebBrowser.nuspec",
 		"MvvmCross.StarterPack.nuspec",
 		"MvvmCross.Forms.StarterPack.nuspec",
-		"MvvmCross.Tests.nuspec"
+		"MvvmCross.Tests.nuspec",
+		"MvvmCross.Weavers.nuspec"
 	};
 
 	foreach(var nuspec in nuspecs)
