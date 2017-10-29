@@ -2,6 +2,8 @@ using System;
 using System.Windows.Input;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace Playground.Core.ViewModels
 {
@@ -11,9 +13,11 @@ namespace Playground.Core.ViewModels
 
         private int _counter = 2;
 
-        public RootViewModel(IMvxNavigationService navigationService)
+        public RootViewModel(IMvxNavigationService navigationService, IMvxLogProvider logProvider)
         {
             _navigationService = navigationService;
+
+            logProvider.GetLogFor<RootViewModel>().Warn(() => "Testing log");
 
             ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel>());
 

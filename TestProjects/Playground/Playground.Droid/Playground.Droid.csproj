@@ -81,6 +81,13 @@
     <Reference Include="Xamarin.Android.Support.Design">
       <HintPath>..\..\..\packages\Xamarin.Android.Support.Design.25.3.1\lib\MonoAndroid70\Xamarin.Android.Support.Design.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Serilog">
+      <HintPath>..\..\..\packages\Serilog.2.5.0\lib\netstandard1.3\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.Xamarin.Droid">
+      <HintPath>..\..\..\packages\Serilog.Sinks.Xamarin.0.1.29\lib\MonoAndroid403\Serilog.Sinks.Xamarin.Droid.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
