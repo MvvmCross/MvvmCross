@@ -13,7 +13,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
+    <OutputPath>..\..\bin\Debug\Mvx\Portable</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -21,7 +21,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>..\..\bin\Release\Mvx\Portable</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
@@ -53,13 +53,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MvxMainThread.csproj">
-      <Project>{CF1EA82B-DDD9-4D32-AC46-5ACE7F549A07}</Project>
-      <Name>MvxMainThread</Name>
+    <ProjectReference Include="..\MvvmCross.Weavers.csproj">
+      <Project>{557A2DCB-5EC4-44FC-87CE-EEBA284B2D1F}</Project>
+      <Name>MvvmCross.Weavers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MvxMainThread.Fody\MvxMainThread.Fody.csproj">
+    <ProjectReference Include="..\MvvmCross.Weavers.Fody\MvvmCross.Weavers.Fody.csproj">
       <Project>{67A6EA62-468F-4609-BFB8-4C081E9A1FF6}</Project>
-      <Name>MvxMainThread.Fody</Name>
+      <Name>MvvmCross.Weavers.Fody</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
@@ -73,9 +73,9 @@
       <Project>{0E0242BC-0141-4D1E-9976-8363A670917C}</Project>
       <Name>MvvmCross.Test.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MvxMainThread.AssemblyToProcess\MvxMainThread.AssemblyToProcess.csproj">
+    <ProjectReference Include="..\MvvmCross.Weavers.AssemblyToProcess\MvvmCross.Weavers.AssemblyToProcess.csproj">
       <Project>{F47D1A7F-C2F2-44E6-8420-C0C87EEB15D2}</Project>
-      <Name>MvxMainThread.AssemblyToProcess</Name>
+      <Name>MvvmCross.Weavers.AssemblyToProcess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
