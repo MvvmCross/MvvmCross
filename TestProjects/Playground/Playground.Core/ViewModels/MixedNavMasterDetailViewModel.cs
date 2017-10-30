@@ -32,6 +32,17 @@ namespace Playground.Core.ViewModels
                 new MenuItem { Title = "Root", Description = "The root page", ViewModelType = typeof(MixedNavMasterRootContentViewModel) },
                 new MenuItem { Title = "Tabs", Description = "Tabbed detail page", ViewModelType = typeof(MixedNavTabsViewModel)},
             };
+
+#if __IOS__
+            if(Xamarin.Forms.Application.Current.MainPage is MasterDetailPage masterDetailPage)
+            {
+                masterDetailPage.IsGestureEnabled = false;
+            }
+            else if(Xamarin.Forms.Application.Current.MainPage is NavigationPage navigationPage && navigationPage.CurrentPage is MasterDetailPage nestedMasterDetail)
+            {
+                nestedMasterDetail.IsGestureEnabled = false;
+            }
+#endif
         }
 
         public IEnumerable<MenuItem> Menu { get; set; }
