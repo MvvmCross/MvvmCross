@@ -11,6 +11,7 @@ using MvvmCross.Core.Views;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Platform;
 using MvvmCross.Uwp.Views;
 using System;
 using Xamarin.Forms;
@@ -133,6 +134,7 @@ namespace MvvmCross.Forms.Uwp.Presenters
 
         public virtual bool ClosePlatformViews()
         {
+            MvxTrace.Trace($"Closing of native Views in Forms is not supported on UWP.");
             return false;
         }
     }
