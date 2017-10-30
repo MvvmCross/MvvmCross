@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.iOS.Support.XamarinSidebar.Extensions;
 using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Platform;
@@ -15,6 +16,8 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
     {
         private readonly UIViewController _subRootViewController;
 
+        private bool _menuSetupSet;
+
         public MvxSidebarViewController()
         {
             _subRootViewController = new UIViewController();
@@ -26,12 +29,40 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
         }
 
         public bool StatusBarHidden { get; set; }
+
         public bool ToggleStatusBarHiddenOnOpen { get; set; } = false;
+
         public new UINavigationController NavigationController { get; private set; }
+
         public SidebarController LeftSidebarController { get; private set; }
+
         public SidebarController RightSidebarController { get; private set; }
-        public bool HasLeftMenu => LeftSidebarController != null && LeftSidebarController.MenuAreaController != null;
-        public bool HasRightMenu => RightSidebarController != null && RightSidebarController.MenuAreaController != null;
+
+        public bool HasLeftMenu
+        {
+            get
+            {
+                if (!_menuSetupSet)
+                {
+                    SetupSideMenu();
+                    _menuSetupSet = true;
+                }
+                return LeftSidebarController != null && LeftSidebarController.MenuAreaController != null;
+            }
+        }
+
+        public bool HasRightMenu
+        {
+            get
+            {
+                if (!_menuSetupSet)
+                {
+                    SetupSideMenu();
+                    _menuSetupSet = true;
+                }
+                return RightSidebarController != null && RightSidebarController.MenuAreaController != null;
+            }
+        }
 
         protected virtual void SetupSideMenu()
         {
@@ -123,9 +154,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
 
         protected virtual void ConfigureSideMenu(SidebarController sidebarController)
         {
-            var mvxSideMenuSettings = sidebarController.MenuAreaController as IMvxSidebarMenu;
-
-            if (mvxSideMenuSettings != null)
+            if (sidebarController.MenuAreaController is IMvxSidebarMenu mvxSideMenuSettings)
             {
                 sidebarController.DarkOverlayAlpha = mvxSideMenuSettings.DarkOverlayAlpha;
                 sidebarController.HasDarkOverlay = mvxSideMenuSettings.HasDarkOverlay;
@@ -150,13 +179,6 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
                     }
                 };
             }
-        }
-
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-            SetupSideMenu();
         }
 
         public override UIStatusBarAnimation PreferredStatusBarUpdateAnimation
