@@ -40,8 +40,6 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bindings\La.n.g.cs" />
-    <Compile Include="ViewModels\IMvxMasterDetailViewModel.cs" />
-    <Compile Include="ViewModels\MvxMasterDetailViewModel.cs" />
     <Compile Include="Bindings\Bi.n.d.cs" />
     <Compile Include="Bindings\IMvxBindingCreator.cs" />
     <Compile Include="Bindings\MvxBindablePropertyExtensionMethods.cs" />
