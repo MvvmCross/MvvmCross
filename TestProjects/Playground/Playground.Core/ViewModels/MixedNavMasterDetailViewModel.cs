@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.ViewModels;
+using MvvmCross.Forms.Views;
+using Xamarin.Forms;
 
 namespace Playground.Core.ViewModels
 {
-    public class MixedNavMasterDetailViewModel : MvxMasterDetailViewModel<MixedNavMasterRootContentViewModel>
+    public class MixedNavMasterDetailViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
         private MenuItem _menuItem;
@@ -31,6 +32,17 @@ namespace Playground.Core.ViewModels
                 new MenuItem { Title = "Root", Description = "The root page", ViewModelType = typeof(MixedNavMasterRootContentViewModel) },
                 new MenuItem { Title = "Tabs", Description = "Tabbed detail page", ViewModelType = typeof(MixedNavTabsViewModel)},
             };
+
+#if __IOS__
+            if(Xamarin.Forms.Application.Current.MainPage is MasterDetailPage masterDetailPage)
+            {
+                masterDetailPage.IsGestureEnabled = false;
+            }
+            else if(Xamarin.Forms.Application.Current.MainPage is NavigationPage navigationPage && navigationPage.CurrentPage is MasterDetailPage nestedMasterDetail)
+            {
+                nestedMasterDetail.IsGestureEnabled = false;
+            }
+#endif
         }
 
         public IEnumerable<MenuItem> Menu { get; set; }
@@ -51,7 +63,14 @@ namespace Playground.Core.ViewModels
                         return;
 
                     var vmType = item.ViewModelType;
-
+                    if(Xamarin.Forms.Application.Current.MainPage is MasterDetailPage masterDetailPage)
+                    {
+                        masterDetailPage.IsPresented = false;
+                    }
+                    else if(Xamarin.Forms.Application.Current.MainPage is NavigationPage navigationPage && navigationPage.CurrentPage is MasterDetailPage nestedMasterDetail)
+                    {
+                        nestedMasterDetail.IsPresented = false;
+                    }
                     await _navigationService.Navigate(vmType);
                 }));
             }
