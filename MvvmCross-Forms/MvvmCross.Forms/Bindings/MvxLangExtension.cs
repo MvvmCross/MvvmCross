@@ -9,27 +9,17 @@ using Xamarin.Forms.Xaml;
 namespace MvvmCross.Forms.Bindings
 {
     [ContentProperty("Source")]
-    public class MvxLangExtension : IMarkupExtension
+    public class MvxLangExtension : MvxBaseBindExtension
     {
         public string Source { get; set; }
 
-        public string Converter { get; set; }
-
-        public string ConverterParameter { get; set; }
-
         public string Key { get; set; }
 
-        public string FallbackValue { get; set; }
-
-        public object ProvideValue(IServiceProvider serviceProvider)
+        public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            IProvideValueTarget target = serviceProvider.GetService(typeof(IProvideValueTarget)) as IProvideValueTarget;
-            BindableObject obj = target.TargetObject as BindableObject;
-            BindableProperty bindableProperty = target.TargetProperty as BindableProperty;
-
-            if (obj != null && bindableProperty != null)
+            if (BindableObj != null && BindableProp != null)
             {
-                StringBuilder bindingBuilder = new StringBuilder($"{bindableProperty.PropertyName} {Source}");
+                StringBuilder bindingBuilder = new StringBuilder($"{BindableProp.PropertyName} {Source}");
 
                 if (!string.IsNullOrEmpty(Converter))
                 {
@@ -51,7 +41,7 @@ namespace MvvmCross.Forms.Bindings
                     bindingBuilder.Append($", FallbackValue={FallbackValue}");
                 }
 
-                obj.SetValue(La.ngProperty, bindingBuilder.ToString());
+                BindableObj.SetValue(La.ngProperty, bindingBuilder.ToString());
             }
             else
             {
@@ -59,11 +49,6 @@ namespace MvvmCross.Forms.Bindings
             }
 
             return null;
-        }
-
-        object IMarkupExtension.ProvideValue(IServiceProvider serviceProvider)
-        {
-            return ProvideValue(serviceProvider);
         }
     }
 }
