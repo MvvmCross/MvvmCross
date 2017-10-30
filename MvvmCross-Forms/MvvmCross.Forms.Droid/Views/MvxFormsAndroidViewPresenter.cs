@@ -50,6 +50,7 @@ namespace MvvmCross.Forms.Droid.Views
                 if (_formsPagePresenter == null)
                 {
                     _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder);
+                    _formsPagePresenter.ClosePlatformViews = ClosePlatformViews;
                     Mvx.RegisterSingleton<IMvxFormsPagePresenter>(_formsPagePresenter);
                 }
                 return _formsPagePresenter;
@@ -101,6 +102,15 @@ namespace MvvmCross.Forms.Droid.Views
             }
 
             return base.CreatePresentationAttribute(viewModelType, viewType);
+        }
+
+        public virtual bool ClosePlatformViews()
+        {
+            CloseFragments();
+            if (!(CurrentActivity is MvxFormsAppCompatActivity || CurrentActivity is MvxFormsApplicationActivity) && 
+                !(CurrentActivity is MvxSplashScreenActivity || CurrentActivity is MvxSplashScreenAppCompatActivity))
+                CurrentActivity.Finish();
+            return true;
         }
     }
 }

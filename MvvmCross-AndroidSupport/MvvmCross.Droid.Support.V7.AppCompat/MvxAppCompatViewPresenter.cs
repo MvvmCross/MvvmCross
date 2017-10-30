@@ -487,6 +487,20 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return false;
         }
 
+        protected override bool CloseFragments()
+        {
+            try
+            {
+                CurrentFragmentManager.PopBackStackImmediate();
+            }
+            catch (Exception ex)
+            {
+                return base.CloseFragments();
+                MvxTrace.Trace("Cannot close any fragments", ex);
+            }
+            return true;
+        }
+
         protected override bool CloseFragment(IMvxViewModel viewModel, MvxFragmentPresentationAttribute attribute)
         {
             // try to close nested fragment first

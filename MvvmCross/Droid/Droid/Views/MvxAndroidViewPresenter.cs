@@ -594,6 +594,19 @@ namespace MvvmCross.Droid.Views
             return false;
         }
 
+        protected virtual bool CloseFragments()
+        {
+            try
+            {
+                CurrentFragmentManager.PopBackStackImmediate();
+            }
+            catch (System.Exception ex)
+            {
+                MvxTrace.Trace("Cannot close any fragments", ex);
+            }
+            return true;
+        }
+
         protected virtual bool CloseFragment(IMvxViewModel viewModel, MvxFragmentPresentationAttribute attribute)
         {
             // try to close nested fragment first

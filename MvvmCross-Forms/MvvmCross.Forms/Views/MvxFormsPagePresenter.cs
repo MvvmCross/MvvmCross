@@ -75,6 +75,8 @@ namespace MvvmCross.Forms.Views
             }
         }
 
+        public virtual Func<bool> ClosePlatformViews { get; set; }
+
         public virtual Page CreatePage(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute)
         {
             var page = Activator.CreateInstance(viewType) as Page;
@@ -159,6 +161,7 @@ namespace MvvmCross.Forms.Views
             MvxViewModelRequest request)
         {
             CloseAllModals();
+            ClosePlatformViews?.Invoke();
 
             var page = CreatePage(view, request, attribute);
 
@@ -234,6 +237,7 @@ namespace MvvmCross.Forms.Views
             MvxViewModelRequest request)
         {
             CloseAllModals();
+            ClosePlatformViews?.Invoke();
 
             var page = CreatePage(view, request, attribute);
 
@@ -275,6 +279,7 @@ namespace MvvmCross.Forms.Views
             MvxViewModelRequest request)
         {
             CloseAllModals();
+            ClosePlatformViews?.Invoke();
 
             var page = CreatePage(view, request, attribute);
 
@@ -387,6 +392,8 @@ namespace MvvmCross.Forms.Views
             MvxModalPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
+            ClosePlatformViews?.Invoke();
+
             var page = CreatePage(view, request, attribute);
 
             if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
@@ -442,6 +449,7 @@ namespace MvvmCross.Forms.Views
             MvxViewModelRequest request)
         {
             CloseAllModals();
+            ClosePlatformViews?.Invoke();
 
             var page = CreatePage(view, request, attribute);
 
@@ -481,6 +489,7 @@ namespace MvvmCross.Forms.Views
             MvxViewModelRequest request)
         {
             CloseAllModals();
+            ClosePlatformViews?.Invoke();
 
             var page = CreatePage(view, request, attribute);
 

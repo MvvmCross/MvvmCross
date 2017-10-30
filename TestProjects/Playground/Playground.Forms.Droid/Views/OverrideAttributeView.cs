@@ -11,6 +11,7 @@ using Playground.Core.ViewModels;
 namespace Playground.Forms.Droid.Views
 {
     [Register(nameof(OverrideAttributeView))]
+    [MvxFragmentPresentation(AddToBackStack = true)]
     public class OverrideAttributeView : MvxFragment<OverrideAttributeViewModel>, IMvxOverridePresentationAttribute
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -24,7 +25,7 @@ namespace Playground.Forms.Droid.Views
 
         public MvxBasePresentationAttribute PresentationAttribute()
         {
-            return new MvxFragmentPresentationAttribute();
+            return new MvxFragmentPresentationAttribute(){ AddToBackStack = true };
         }
     }
 }

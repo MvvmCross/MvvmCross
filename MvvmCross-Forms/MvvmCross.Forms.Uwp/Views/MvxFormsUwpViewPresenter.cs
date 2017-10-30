@@ -45,6 +45,7 @@ namespace MvvmCross.Forms.Uwp.Presenters
                 if (_formsPagePresenter == null)
                 {
                     _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder);
+                    _formsPagePresenter.ClosePlatformViews = ClosePlatformViews;
                     Mvx.RegisterSingleton<IMvxFormsPagePresenter>(_formsPagePresenter);
                 }
                 return _formsPagePresenter;
@@ -128,6 +129,11 @@ namespace MvvmCross.Forms.Uwp.Presenters
 
         public override void Close(IMvxViewModel toClose)
         {
+        }
+
+        public virtual bool ClosePlatformViews()
+        {
+            return false;
         }
     }
 }

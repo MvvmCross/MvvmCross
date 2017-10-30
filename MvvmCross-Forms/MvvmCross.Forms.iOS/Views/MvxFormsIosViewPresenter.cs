@@ -51,6 +51,7 @@ namespace MvvmCross.Forms.iOS.Presenters
                 if (_formsPagePresenter == null)
                 {
                     _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder);
+                    _formsPagePresenter.ClosePlatformViews = ClosePlatformViews;
                     Mvx.RegisterSingleton<IMvxFormsPagePresenter>(_formsPagePresenter);
                 }
                 return _formsPagePresenter;
@@ -110,6 +111,15 @@ namespace MvvmCross.Forms.iOS.Presenters
             }
 
             return base.CreatePresentationAttribute(viewModelType, viewType);
+        }
+
+        public virtual bool ClosePlatformViews()
+        {
+            CloseMasterNavigationController();
+            CleanupModalViewControllers();
+            CloseTabBarViewController();
+            CloseSplitViewController();
+            return true;
         }
     }
 }
