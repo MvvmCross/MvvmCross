@@ -495,7 +495,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
             catch (Exception ex)
             {
-                return base.CloseFragments();
                 MvxTrace.Trace("Cannot close any fragments", ex);
             }
             return true;
