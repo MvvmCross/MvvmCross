@@ -2,6 +2,7 @@ using System;
 using System.Windows.Input;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Localization;
 
 namespace Playground.Core.ViewModels
 {
@@ -67,5 +68,27 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowWindowCommand { get; private set; }
 
         public IMvxAsyncCommand ShowMixedNavigationCommand { get; private set; }
+
+        public IMvxLanguageBinder TextSource
+        {
+            get { return new MvxLanguageBinder("MvxBindingsExample", "Text"); }
+        }
+
+        private string _bindableText = "I'm bound!";
+        public string BindableText
+        {
+            get
+            {
+                return _bindableText;
+            }
+            set
+            {
+                if (BindableText != value)
+                {
+                    _bindableText = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
     }
 }
