@@ -111,7 +111,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
         protected virtual bool ShowPanel(MvxSidebarPresentationAttribute attribute, UIViewController viewController)
         {
-            var navigationController = (SideBarViewController).NavigationController;
+            var navigationController = SideBarViewController.NavigationController;
 
             if (navigationController == null)
                 return false;
@@ -163,9 +163,9 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             {
                 SideBarViewController = null;
                 MasterNavigationController = null;
+            
+                base.ShowRootViewController(viewController, attribute, request);
             }
-
-            base.ShowRootViewController(viewController, attribute, request);
         }
 
         protected virtual bool CloseSidebarViewController(IMvxViewModel viewModel, MvxSidebarPresentationAttribute attribute)
