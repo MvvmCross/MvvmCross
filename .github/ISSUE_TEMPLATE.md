@@ -28,3 +28,6 @@ Tell us what happens instead
 - [ ] Android
 - [ ] WPF
 - [ ] UWP
+- [ ] MacOS
+- [ ] tvOS
+- [ ] Xamarin.Forms
