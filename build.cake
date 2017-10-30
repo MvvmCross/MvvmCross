@@ -117,20 +117,12 @@ Task("GitLink")
 	.Does(() => 
 {
 	var projectsToIgnore = new string[] {
-		"MasterDetailExample.Core",
-		"MasterDetailExample.Droid",
-		"MasterDetailExample.iOS",
-		"MasterDetailExample.UWP",
 		"PageRendererExample.Core",
 		"PageRendererExample.Droid",
 		"PageRendererExample.iOS",
 		"PageRendererExample.WindowsUWP",
 		"MvvmCross.iOS.Support.ExpandableTableView.Core",
 		"MvvmCross.iOS.Support.ExpandableTableView.iOS",
-		"MvvmCross.iOS.Support.JASidePanelsSample.Core",
-		"MvvmCross.iOS.Support.JASidePanelsSample.iOS",
-		"MvvmCross.iOS.Support.Tabs.Core",
-		"MvvmCross.iOS.Support.Tabs.iOS",
 		"MvvmCross.iOS.Support.XamarinSidebarSample.Core",
 		"MvvmCross.iOS.Support.XamarinSidebarSample.iOS",
 		"mvvmcross.codeanalysis.vsix",
@@ -163,11 +155,7 @@ Task("GitLink")
         "Playground.Forms.iOS",
 		"Playground.Forms.Mac",
 		"Playground.Forms.Uwp",
-		"Playground.Forms.Wpf",
-		"MvxBindingsExample",
-		"MvxBindingsExample.Android",
-		"MvxBindingsExample.iOS",
-		"MvxBindingsExample.UWP"
+		"Playground.Forms.Wpf"
 	};
 
 	GitLink("./", 
