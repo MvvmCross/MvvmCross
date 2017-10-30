@@ -71,5 +71,11 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowWindowCommand { get; private set; }
 
         public IMvxAsyncCommand ShowMixedNavigationCommand { get; private set; }
+
+        public IMvxAsyncCommand ShowListViewCommand => new MvxAsyncCommand(async () => await _navigationService.Navigate<ListViewModel>());
+
+        public IMvxAsyncCommand ShowBindingsViewCommand => new MvxAsyncCommand(async () => await _navigationService.Navigate<BindingsViewModel>());
+
+        public IMvxAsyncCommand ShowCodeBehindViewCommand => new MvxAsyncCommand(async () => await _navigationService.Navigate<CodeBehindViewModel>());
     }
 }
