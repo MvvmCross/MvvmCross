@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Views;
 using $rootnamespace$.Core.ViewModels;
 using Xamarin.Forms;
 
