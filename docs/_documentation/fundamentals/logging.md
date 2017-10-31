@@ -19,11 +19,11 @@ public class MyViewModel : MvxViewModel
     {
         _log = log;
     }
-	
-	private void SomeMethod()
-	{
-		_log.Trace("Some message");
-	}
+
+    private void SomeMethod()
+    {
+            _log.Trace("Some message");
+    }
 }
 ```
 
