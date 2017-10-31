@@ -1,6 +1,52 @@
 # Change Log
 
-## [5.3.2](https://github.com/MvvmCross/MvvmCross/tree/5.3.2) (2017-10-22)
+## [5.4.0](https://github.com/MvvmCross/MvvmCross/tree/5.4.0) (2017-10-31)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.3.2...5.4.0)
+
+**Fixed bugs:**
+
+- MvxSidebarPresenter not adding drawer bar button and showing drawer [\#2247](https://github.com/MvvmCross/MvvmCross/issues/2247)
+- Sidebar menu doesn't get initialised for first root controller in 5.2 [\#2188](https://github.com/MvvmCross/MvvmCross/issues/2188)
+
+**Closed issues:**
+
+- How to custom navigation animation? [\#2318](https://github.com/MvvmCross/MvvmCross/issues/2318)
+- Xamarin Forms application not working after upadating MvvmCross from 5.2.1 to 5.3.0 or above. [\#2317](https://github.com/MvvmCross/MvvmCross/issues/2317)
+- Issues with binding string that contain any numeric value to a label text [\#2316](https://github.com/MvvmCross/MvvmCross/issues/2316)
+- Xamarin.Forms / MasterDetailPage and ModalDialog: Navigation will break, if a page inside a MasterDetail navigation opens a modal dialog [\#2311](https://github.com/MvvmCross/MvvmCross/issues/2311)
+- Xamarin.Forms / MasterDetailPage: Android crashes as soon as the master menu page has an icon [\#2310](https://github.com/MvvmCross/MvvmCross/issues/2310)
+- Xamarin.Forms / MasterDetailPage: The master menu stays open after navigation [\#2307](https://github.com/MvvmCross/MvvmCross/issues/2307)
+- Xamarin.Forms / MasterDetailPage breaks my app because of the slide to open menu gesture [\#2306](https://github.com/MvvmCross/MvvmCross/issues/2306)
+- MasterDetailExample.Droid crashes with 'System.InvalidOperationException: NavigationPage must have a root Page before being used' [\#2303](https://github.com/MvvmCross/MvvmCross/issues/2303)
+- Lack one constructor inside MvxDialogFragment [\#2294](https://github.com/MvvmCross/MvvmCross/issues/2294)
+- Navigation between native and Forms is not correct [\#2292](https://github.com/MvvmCross/MvvmCross/issues/2292)
+- IOS: The view in the modal view stack is not removed [\#2290](https://github.com/MvvmCross/MvvmCross/issues/2290)
+- iOS - Crashing on navigation [\#2289](https://github.com/MvvmCross/MvvmCross/issues/2289)
+- Xamarin Sidebar doesn't opens at first launch [\#2268](https://github.com/MvvmCross/MvvmCross/issues/2268)
+- Crash MvxTabBarViewController ViewWillDisappear [\#2267](https://github.com/MvvmCross/MvvmCross/issues/2267)
+- Bug with toolbar on android MvvmCross 5.2.1 and Forms 2.4.0.282 [\#2252](https://github.com/MvvmCross/MvvmCross/issues/2252)
+- Xamarin.Forms: TextCell Command does not work in latest update [\#2248](https://github.com/MvvmCross/MvvmCross/issues/2248)
+- mvx:La.ng in Xamarin.Forms not working [\#2176](https://github.com/MvvmCross/MvvmCross/issues/2176)
+- Null reference error in MvxFormsAppCompatActivity on GetAccentColor [\#2117](https://github.com/MvvmCross/MvvmCross/issues/2117)
+- Improve logging and IMvxTrace [\#1649](https://github.com/MvvmCross/MvvmCross/issues/1649)
+
+**Merged pull requests:**
+
+- Fix the namespace in the MvvmCross.Forms.StarterPack [\#2325](https://github.com/MvvmCross/MvvmCross/pull/2325) ([flyingxu](https://github.com/flyingxu))
+- Fixes for Forms presenter [\#2321](https://github.com/MvvmCross/MvvmCross/pull/2321) ([martijn00](https://github.com/martijn00))
+- Move samples to playground to cleanup forms projects [\#2319](https://github.com/MvvmCross/MvvmCross/pull/2319) ([martijn00](https://github.com/martijn00))
+- Droid ViewPresenter document: Add note for animations [\#2315](https://github.com/MvvmCross/MvvmCross/pull/2315) ([nmilcoff](https://github.com/nmilcoff))
+- Fix Xamarin-Sidebar initialization  [\#2314](https://github.com/MvvmCross/MvvmCross/pull/2314) ([nmilcoff](https://github.com/nmilcoff))
+- Add some missing binding extension properties [\#2313](https://github.com/MvvmCross/MvvmCross/pull/2313) ([martijn00](https://github.com/martijn00))
+- Add design time checker to Forms bindings [\#2312](https://github.com/MvvmCross/MvvmCross/pull/2312) ([martijn00](https://github.com/martijn00))
+- Mvxforms droid resources fix [\#2305](https://github.com/MvvmCross/MvvmCross/pull/2305) ([johnnywebb](https://github.com/johnnywebb))
+- Improve MvvmCross Logging [\#2300](https://github.com/MvvmCross/MvvmCross/pull/2300) ([willsb](https://github.com/willsb))
+- Corrected documentation [\#2298](https://github.com/MvvmCross/MvvmCross/pull/2298) ([gi097](https://github.com/gi097))
+- Add Forms projects and test projects for UWP WPF and Mac [\#2296](https://github.com/MvvmCross/MvvmCross/pull/2296) ([martijn00](https://github.com/martijn00))
+- Fix: When wrapping master page into navigation page, title was missing [\#2293](https://github.com/MvvmCross/MvvmCross/pull/2293) ([Grrbrr404](https://github.com/Grrbrr404))
+- Add replace root to add safety check to replace it [\#2291](https://github.com/MvvmCross/MvvmCross/pull/2291) ([martijn00](https://github.com/martijn00))
+
+## [5.3.2](https://github.com/MvvmCross/MvvmCross/tree/5.3.2) (2017-10-23)
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.3.1...5.3.2)
 
 **Fixed bugs:**
@@ -9,9 +55,9 @@
 
 **Merged pull requests:**
 
+- ToList modals, as can't change list you are modifying [\#2284](https://github.com/MvvmCross/MvvmCross/pull/2284) ([adamped](https://github.com/adamped))
 - Add new extension to the list [\#2286](https://github.com/MvvmCross/MvvmCross/pull/2286) ([CherechesC](https://github.com/CherechesC))
 - Add option to clear root, set icon, and animate [\#2285](https://github.com/MvvmCross/MvvmCross/pull/2285) ([martijn00](https://github.com/martijn00))
-- ToList modals, as can't change list you are modifying [\#2284](https://github.com/MvvmCross/MvvmCross/pull/2284) ([adamped](https://github.com/adamped))
 - Make it possible to start Forms app without splashscreen [\#2283](https://github.com/MvvmCross/MvvmCross/pull/2283) ([martijn00](https://github.com/martijn00))
 - Align Forms presenters, fix Modal issue and add MvxPage [\#2282](https://github.com/MvvmCross/MvvmCross/pull/2282) ([martijn00](https://github.com/martijn00))
 - Update LinkerPleaseInclude files on TestProjects [\#2281](https://github.com/MvvmCross/MvvmCross/pull/2281) ([nmilcoff](https://github.com/nmilcoff))
@@ -575,6 +621,7 @@
 - Switch to ViewHolder pattern instead of wrapping in FrameLayout for MvxListView items [\#1465](https://github.com/MvvmCross/MvvmCross/issues/1465)
 - Figure out what to do with MvvmCross.Binding.Combiners.VeryExperimental namespace [\#1443](https://github.com/MvvmCross/MvvmCross/issues/1443)
 - Binding.Mac does not build on Windows [\#1437](https://github.com/MvvmCross/MvvmCross/issues/1437)
+- MvvmCross roadmap 5.x [\#1415](https://github.com/MvvmCross/MvvmCross/issues/1415)
 - Add build test of UWP project [\#1392](https://github.com/MvvmCross/MvvmCross/issues/1392)
 - MvvmCross.Tests nuget can't be added to a PCL project [\#1375](https://github.com/MvvmCross/MvvmCross/issues/1375)
 - MyGet Nuget feed [\#1369](https://github.com/MvvmCross/MvvmCross/issues/1369)
