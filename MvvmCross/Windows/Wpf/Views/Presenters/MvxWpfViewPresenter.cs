@@ -1,4 +1,4 @@
-﻿// MvxWpfViewPresenter.cs
+// MvxWpfViewPresenter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -19,24 +19,25 @@ using System.Windows.Controls;
 namespace MvvmCross.Wpf.Views.Presenters
 {
     public class MvxWpfViewPresenter
-        : MvxBaseWpfViewPresenter
+        : MvxBaseWpfViewPresenter, IMvxAttributeViewPresenter
     {
-        private Dictionary<Type, Action<FrameworkElement, MvxBasePresentationAttribute, MvxViewModelRequest>> _attributeTypesToShowMethodDictionary;
-        protected Dictionary<Type, Action<FrameworkElement, MvxBasePresentationAttribute, MvxViewModelRequest>> AttributeTypesToShowMethodDictionary
+        private IMvxViewModelTypeFinder _viewModelTypeFinder;
+        public IMvxViewModelTypeFinder ViewModelTypeFinder
         {
             get
             {
-                if (_attributeTypesToShowMethodDictionary == null)
-                {
-                    _attributeTypesToShowMethodDictionary = new Dictionary<Type, Action<FrameworkElement, MvxBasePresentationAttribute, MvxViewModelRequest>>();
-                    RegisterAttributeTypes();
-                }
-                return _attributeTypesToShowMethodDictionary;
+                if (_viewModelTypeFinder == null)
+                    _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
+                return _viewModelTypeFinder;
+            }
+            set
+            {
+                _viewModelTypeFinder = value;
             }
         }
 
         private IMvxViewsContainer _viewsContainer;
-        protected IMvxViewsContainer ViewsContainer
+        public IMvxViewsContainer ViewsContainer
         {
             get
             {
@@ -44,10 +45,38 @@ namespace MvvmCross.Wpf.Views.Presenters
                     _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
                 return _viewsContainer;
             }
+            set
+            {
+                _viewsContainer = value;
+            }
+        }
+
+        private Dictionary<Type, MvxPresentationAttributeAction> _attributeTypesActionsDictionary;
+        public Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
+        {
+            get
+            {
+                if (_attributeTypesActionsDictionary == null)
+                {
+                    _attributeTypesActionsDictionary = new Dictionary<Type, MvxPresentationAttributeAction>();
+                    RegisterAttributeTypes();
+                }
+                return _attributeTypesActionsDictionary;
+            }
+        }
+
+        private IMvxWpfViewLoader _wpfViewLoader;
+        protected IMvxWpfViewLoader WpfViewLoader
+        {
+            get
+            {
+                if (_wpfViewLoader == null)
+                    _wpfViewLoader = Mvx.Resolve<IMvxWpfViewLoader>();
+                return _wpfViewLoader;
+            }
         }
 
         private readonly Dictionary<ContentControl, Stack<FrameworkElement>> _frameworkElementsDictionary = new Dictionary<ContentControl, Stack<FrameworkElement>>();
-        private IMvxWpfViewLoader _loader;
 
         public MvxWpfViewPresenter(ContentControl contentControl) // Accept ContentControl only for the first host view 
         {
@@ -57,15 +86,101 @@ namespace MvvmCross.Wpf.Views.Presenters
             _frameworkElementsDictionary.Add(contentControl, new Stack<FrameworkElement>());
         }
 
-        protected virtual void RegisterAttributeTypes()
+        public virtual void RegisterAttributeTypes()
         {
-            _attributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxWindowPresentationAttribute),
-                (element, attribute, request) => ShowWindow(element, (MvxWindowPresentationAttribute)attribute, request));
+                new MvxPresentationAttributeAction
+                {
+                    ShowAction = (viewType, attribute, request) =>
+                    {
+                        var view = WpfViewLoader.CreateView(request);
+                        ShowWindow(view, (MvxWindowPresentationAttribute)attribute, request);
+                    },
+                    CloseAction = (viewModel, attribute) => CloseWindow(viewModel)
+                });
 
-            _attributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxContentPresentationAttribute),
-                (element, attribute, request) => ShowContentView(element, (MvxContentPresentationAttribute)attribute, request));
+                new MvxPresentationAttributeAction
+                {
+                    ShowAction = (viewType, attribute, request) =>
+                    {
+                        var view = WpfViewLoader.CreateView(request);
+                        ShowContentView(view, (MvxContentPresentationAttribute)attribute, request);
+                    },
+                    CloseAction = (viewModel, attribute) => CloseContentView(viewModel)
+                });
+        }
+
+        public virtual MvxBasePresentationAttribute GetPresentationAttribute(Type viewModelType)
+        {
+            var viewType = ViewsContainer.GetViewType(viewModelType);
+
+            var overrideAttribute = GetOverridePresentationAttribute(viewModelType, viewType);
+            if (overrideAttribute != null)
+                return overrideAttribute;
+
+            var attribute = viewType
+                .GetCustomAttributes(typeof(MvxBasePresentationAttribute), true)
+                .FirstOrDefault() as MvxBasePresentationAttribute;
+            if (attribute != null)
+            {
+                if (attribute.ViewType == null)
+                    attribute.ViewType = viewType;
+
+                if (attribute.ViewModelType == null)
+                    attribute.ViewModelType = viewModelType;
+
+                return attribute;
+            }
+
+            return CreatePresentationAttribute(viewModelType, viewType);            
+        }
+
+        public virtual MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
+        {
+            if (viewType.IsSubclassOf(typeof(Window)))
+            {
+                MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. " +
+                    $"Assuming window presentation");
+                return new MvxWindowPresentationAttribute();
+            }
+
+            MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. " +
+                    $"Assuming content presentation");
+            return new MvxContentPresentationAttribute();
+        }
+
+        public virtual MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, Type viewType)
+        {
+            if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
+            {
+                var viewInstance = WpfViewLoader.CreateView(viewType) as IDisposable;
+                using (viewInstance)
+                {
+                    MvxBasePresentationAttribute presentationAttribute = null;
+                    if (viewInstance is IMvxOverridePresentationAttribute overrideInstance)
+                        presentationAttribute = overrideInstance.PresentationAttribute();
+
+                    if (presentationAttribute == null)
+                    {
+                        MvxTrace.Warning("Override PresentationAttribute null. Falling back to existing attribute.");
+                    }
+                    else
+                    {
+                        if (presentationAttribute.ViewType == null)
+                            presentationAttribute.ViewType = viewType;
+
+                        if (presentationAttribute.ViewModelType == null)
+                            presentationAttribute.ViewModelType = viewModelType;
+
+                        return presentationAttribute;
+                    }
+                }
+            }
+
+            return null;
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
@@ -80,21 +195,22 @@ namespace MvvmCross.Wpf.Views.Presenters
 
         public override void Show(MvxViewModelRequest request)
         {
-            if (_loader == null)
-                _loader = Mvx.Resolve<IMvxWpfViewLoader>();
+            var attribute = GetPresentationAttribute(request.ViewModelType);
+            attribute.ViewModelType = request.ViewModelType;
+            var attributeType = attribute.GetType();
 
-            var view = _loader.CreateView(request);
-            Show(view, request);
-        }
+            if (AttributeTypesToActionsDictionary.TryGetValue(
+                attributeType,
+                out MvxPresentationAttributeAction attributeAction))
+            {
+                if (attributeAction.ShowAction == null)
+                    throw new NullReferenceException($"attributeAction.ShowAction is null for attribute: {attributeType.Name}");
 
-        protected virtual void Show(FrameworkElement element, MvxViewModelRequest request)
-        {
-            var attribute = GetPresentationAttributes(element);
+                attributeAction.ShowAction.Invoke(attribute.ViewType, attribute, request);
+                return;
+            }
 
-            if (!AttributeTypesToShowMethodDictionary.TryGetValue(attribute.GetType(), out Action<FrameworkElement, MvxBasePresentationAttribute, MvxViewModelRequest> showAction))
-                throw new KeyNotFoundException($"The type {attribute.GetType().Name} is not configured in the presenter dictionary");
-
-            showAction.Invoke(element, attribute, request);
+            throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
         }
 
         protected virtual void ShowWindow(FrameworkElement element, MvxWindowPresentationAttribute attribute, MvxViewModelRequest request)
@@ -153,7 +269,6 @@ namespace MvvmCross.Wpf.Views.Presenters
             contentControl.Content = element;
         }
 
-
         public override void Close(IMvxViewModel toClose)
         {
             // toClose is window
@@ -205,31 +320,6 @@ namespace MvvmCross.Wpf.Views.Presenters
             }
 
             return false;
-        }
-
-        protected virtual MvxBasePresentationAttribute GetPresentationAttributes(FrameworkElement element)
-        {
-            if (element is IMvxOverridePresentationAttribute view)
-            {
-                var presentationAttribute = view.PresentationAttribute();
-                if (presentationAttribute != null)
-                    return presentationAttribute;
-            }
-
-            var viewType = element.GetType();
-            if (viewType.HasBasePresentationAttribute())
-                return viewType.GetBasePresentationAttribute();
-
-            if (viewType.IsSubclassOf(typeof(Window)))
-            {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. " +
-                    $"Assuming window presentation");
-                return new MvxWindowPresentationAttribute();
-            }
-
-            MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. " +
-                    $"Assuming content presentation");
-            return new MvxContentPresentationAttribute();
         }
 
         public override void Present(FrameworkElement frameworkElement)

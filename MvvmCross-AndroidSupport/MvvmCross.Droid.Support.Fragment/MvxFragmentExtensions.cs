@@ -1,4 +1,4 @@
-﻿// MvxFragmentExtensions.cs
+// MvxFragmentExtensions.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -41,9 +41,9 @@ namespace MvvmCross.Droid.Support.V4
                 return;
             }
 
-            Fragment fragment = fragmentView.ToFragment();
-            if (fragmentView == null)
-                throw new InvalidOperationException($"Something really weird. ${nameof(fragmentView)} passed is not a Fragment!");
+            var fragment = fragmentView.ToFragment();
+            if (fragment == null)
+                throw new MvxException($"{nameof(OnCreate)} called on an {nameof(IMvxFragmentView)} which is not an Android Fragment: {fragmentView}");
 
             // as it is called during onCreate it is safe to assume that fragment has Activity attached.
             var viewModelType = fragmentView.FindAssociatedViewModelType(fragment.Activity.GetType());
@@ -63,6 +63,8 @@ namespace MvvmCross.Droid.Support.V4
         public static void EnsureBindingContextIsSet(this IMvxFragmentView fragment, LayoutInflater inflater)
         {
             var actualFragment = fragment.ToFragment();
+            if (actualFragment == null)
+                throw new MvxException($"{nameof(EnsureBindingContextIsSet)} called on an {nameof(IMvxFragmentView)} which is not an Android Fragment: {fragment}");
 
             if (fragment.BindingContext == null)
             {
@@ -78,9 +80,11 @@ namespace MvvmCross.Droid.Support.V4
             }
         }
 
-        public static void EnsureBindingContextIsSet(this IMvxFragmentView fragment, Bundle b0)
+        public static void EnsureBindingContextIsSet(this IMvxFragmentView fragment)
         {
             var actualFragment = fragment.ToFragment();
+            if (actualFragment == null)
+                throw new MvxException($"{nameof(EnsureBindingContextIsSet)} called on an {nameof(IMvxFragmentView)} which is not an Android Fragment: {fragment}");
 
             if (fragment.BindingContext == null)
             {
@@ -101,7 +105,7 @@ namespace MvvmCross.Droid.Support.V4
         {
             var fragment = fragmentView.ToFragment();
             if (fragment == null)
-                throw new MvxException("EnsureSetupInitialized called on an IMvxFragmentView which is not an Android Fragment: {0}", fragmentView);
+                throw new MvxException($"{nameof(EnsureSetupInitialized)} called on an {nameof(IMvxFragmentView)} which is not an Android Fragment: {fragmentView}");
 
             var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(fragment.Activity.ApplicationContext);
             setupSingleton.EnsureInitialized();

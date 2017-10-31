@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="Playground.Core.Resources.BaseTheme">
+
+    <Color x:Key="PrimaryColor">#333333</Color>
+    <Color x:Key="SecondaryColor">#141215</Color>
+    <Color x:Key="AccentColor">#0099CC</Color>
+</ResourceDictionary>

@@ -39,7 +39,7 @@ namespace MvvmCross.iOS.Views
             }
         }
 
-        protected virtual IMvxIosView CreateViewOfType(Type viewType, MvxViewModelRequest request)
+        public virtual IMvxIosView CreateViewOfType(Type viewType, MvxViewModelRequest request)
         {
             var storyboardAttribute = viewType.GetCustomAttribute<MvxFromStoryboardAttribute>();
             if (storyboardAttribute != null)

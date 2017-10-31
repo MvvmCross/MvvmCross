@@ -5,7 +5,7 @@ using MvvmCross.Platform.Droid;
 
 namespace MvvmCross.Droid.Views.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class MvxTabLayoutPresentationAttribute : MvxViewPagerFragmentPresentationAttribute
     {
         public MvxTabLayoutPresentationAttribute()

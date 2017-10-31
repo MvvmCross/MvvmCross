@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
@@ -50,16 +51,76 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
-            set { DataContext = value; }
+            get
+            {
+                return DataContext as IMvxViewModel;
+            }
+            set
+            {
+                DataContext = value;
+                OnViewModelSet();
+            }
         }
 
-        protected void EnsureBindingContextSet(Bundle b0)
+        public virtual void OnViewModelSet()
         {
-            this.EnsureBindingContextIsSet(b0);
         }
 
         public virtual string UniqueImmutableCacheTag => Tag;
+
+        public override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            ViewModel?.ViewCreated();
+        }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            ViewModel?.ViewDestroy();
+        }
+
+        public override void OnStart()
+        {
+            base.OnStart();
+            ViewModel?.ViewAppearing();
+        }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+            ViewModel?.ViewAppeared();
+        }
+
+        public override void OnPause()
+        {
+            base.OnPause();
+            ViewModel?.ViewDisappearing();
+        }
+
+        public override void OnStop()
+        {
+            base.OnStop();
+            ViewModel?.ViewDisappeared();
+        }
+
+        public override void OnCancel(IDialogInterface dialog)
+        {
+            base.OnCancel(dialog);
+            ViewModel?.ViewDestroy();
+        }
+
+        public override void DismissAllowingStateLoss()
+        {
+            base.DismissAllowingStateLoss();
+            ViewModel?.ViewDestroy();
+        }
+
+        public override void Dismiss()
+        {
+            base.Dismiss();
+            ViewModel?.ViewDestroy();
+        }
     }
 
     public abstract class MvxAppCompatDialogFragment<TViewModel>

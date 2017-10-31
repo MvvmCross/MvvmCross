@@ -10,12 +10,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Core.Navigation;
+using MvvmCross.Core.Platform.LogProviders;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
 
@@ -207,9 +209,43 @@ namespace MvvmCross.Core.Platform
 
         protected virtual void InitializeDebugServices()
         {
+            //Deprecated
             var debugTrace = CreateDebugTrace();
-            Mvx.RegisterSingleton<IMvxTrace>(debugTrace);
+            Mvx.RegisterSingleton(debugTrace);
             MvxTrace.Initialize();
+
+            //New logging
+            var logProvider = CreateLogProvider();
+            if (logProvider != null)
+            {
+                Mvx.RegisterSingleton(logProvider);
+                var log = logProvider.GetLogFor("MvxLog");
+                Mvx.RegisterSingleton(log);
+            }
+        }
+
+        protected virtual MvxLogProviderType GetDefaultLogProviderType()
+            => MvxLogProviderType.Console;
+       
+        protected virtual IMvxLogProvider CreateLogProvider()
+        {
+            switch(GetDefaultLogProviderType())
+            {
+                case MvxLogProviderType.Console:
+                    return new ConsoleLogProvider();
+                case MvxLogProviderType.EntLib:
+                    return new EntLibLogProvider();
+                case MvxLogProviderType.Log4Net:
+                    return new Log4NetLogProvider();
+                case MvxLogProviderType.Loupe:
+                    return new LoupeLogProvider();
+                case MvxLogProviderType.NLog:
+                    return new NLogLogProvider();
+                case MvxLogProviderType.Serilog:
+                    return new SerilogLogProvider();
+                default:
+                    return null;
+            }
         }
 
         protected virtual IMvxViewModelLoader CreateViewModelLoader(IMvxViewModelLocatorCollection collection)

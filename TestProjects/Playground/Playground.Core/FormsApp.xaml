@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<d:MvxFormsApplication xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Playground.Core.FormsApp" 
+    xmlns:d="clr-namespace:MvvmCross.Forms.Platform;assembly=MvvmCross.Forms"
+    xmlns:theme="clr-namespace:Playground.Core.Resources">
+	<Application.Resources>
+        <ResourceDictionary MergedWith="theme:MainStyles">
+        </ResourceDictionary>
+	</Application.Resources>
+</d:MvxFormsApplication>

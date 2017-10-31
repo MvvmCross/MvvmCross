@@ -5,6 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using System.Collections.Generic;
 
 using MvvmCross.Core.Platform;
@@ -81,6 +82,13 @@ namespace MvvmCross.Mac.Views
             MvxViewModelRequest request)
         {
             return Mvx.Resolve<IMvxMacViewCreator>().CreateView(request);
+        }
+
+        public static IMvxMacView CreateViewControllerFor(
+            this IMvxCanCreateMacView view, Type viewType,
+            MvxViewModelRequest request)
+        {
+            return Mvx.Resolve<IMvxMacViewCreator>().CreateViewOfType(viewType, request);
         }
 
         public static IMvxMacView CreateViewControllerFor(

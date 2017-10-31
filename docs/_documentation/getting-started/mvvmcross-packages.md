@@ -9,11 +9,12 @@ MvvmCross is a very extensible framework. There is a lot already been made by th
 Name | Description | Link
 ---- | ----------- | ----
 `MvvmCross.StarterPack`        | When starting a fresh project you should install this nuget. This will add all files to get you started. Afterwards you need to remove the nuget reference again manually from all your `packages.config` files (not through Nuget as this will delete the source files). | [NuGet](https://www.nuget.org/packages/MvvmCross.StarterPack/)
+`MvvmCross.Forms.StarterPack`  | When starting a fresh Xamarin Forms project and want to use MvvmCross you should install this nuget. This will add all files to get started. In the core project you will find a ToDo file to get the project working. | [NuGet](https://www.nuget.org/packages/MvvmCross.Forms.StarterPack/)
 `MvvmCross`                    | Main nuget. This will add Core and Binding. | [NuGet](https://www.nuget.org/packages/MvvmCross/)
 `MvvmCross.Platform`           | Contains the libraries for all the separate platforms. | [NuGet](https://www.nuget.org/packages/MvvmCross.Platform/)
 `MvvmCross.Core`               | Core libraries for the base of your app. | [NuGet](https://www.nuget.org/packages/MvvmCross.Core/)
+`MvvmCross.Forms`              | Main nuget for Xamarin Forms. | [NuGet](https://www.nuget.org/packages/MvvmCross.Forms/)
 `MvvmCross.Tests`              | Test helpers | [NuGet](https://www.nuget.org/packages/MvvmCross.Tests/)
-`MvvmCross.Droid.FullFragging` | Support for native (Android > 4.0) fragments, and more Android helpers | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.FullFragging/)
 `MvvmCross.Console.Platform`   |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Console.Platform/)
 `MvvmCross.CodeAnalysis`       | Code fixes for MvvmCross | [NuGet](https://www.nuget.org/packages/MvvmCross.CodeAnalysis/)
 `MvvmCross.Binding`            | Bindings system for all platforms | [NuGet](https://www.nuget.org/packages/MvvmCross.Binding/)

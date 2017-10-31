@@ -14,30 +14,121 @@ using CoreGraphics;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Mac.Views.Presenters.Attributes;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Mac.Views.Presenters
 {
     public class MvxMacViewPresenter
-        : MvxBaseMacViewPresenter
+        : MvxViewPresenter, IMvxMacViewPresenter, IMvxAttributeViewPresenter
     {
         private readonly INSApplicationDelegate _applicationDelegate;
         private List<NSWindow> _windows;
         private ConditionalWeakTable<NSWindow, NSWindowController> _windowsToWindowControllers = new ConditionalWeakTable<NSWindow, NSWindowController>();
 
-        private Dictionary<Type, Action<NSViewController, MvxBasePresentationAttribute, MvxViewModelRequest>> _attributeTypesToShowMethodDictionary;
-        protected Dictionary<Type, Action<NSViewController, MvxBasePresentationAttribute, MvxViewModelRequest>> AttributeTypesToShowMethodDictionary
+        private IMvxViewModelTypeFinder _viewModelTypeFinder;
+        public IMvxViewModelTypeFinder ViewModelTypeFinder
         {
             get
             {
-                if (_attributeTypesToShowMethodDictionary == null)
+                if (_viewModelTypeFinder == null)
+                    _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
+                return _viewModelTypeFinder;
+            }
+            set
+            {
+                _viewModelTypeFinder = value;
+            }
+        }
+
+        private IMvxViewsContainer _viewsContainer;
+        public IMvxViewsContainer ViewsContainer
+        {
+            get
+            {
+                if (_viewsContainer == null)
+                    _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
+                return _viewsContainer;
+            }
+            set
+            {
+                _viewsContainer = value;
+            }
+        }
+
+        private Dictionary<Type, MvxPresentationAttributeAction> _attributeTypesActionsDictionary;
+        public Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
+        {
+            get
+            {
+                if (_attributeTypesActionsDictionary == null)
                 {
-                    _attributeTypesToShowMethodDictionary = new Dictionary<Type, Action<NSViewController, MvxBasePresentationAttribute, MvxViewModelRequest>>();
+                    _attributeTypesActionsDictionary = new Dictionary<Type, MvxPresentationAttributeAction>();
                     RegisterAttributeTypes();
                 }
-                return _attributeTypesToShowMethodDictionary;
+                return _attributeTypesActionsDictionary;
             }
+        }
+
+        public virtual MvxBasePresentationAttribute GetPresentationAttribute(Type viewModelType)
+        {
+            var viewType = ViewsContainer.GetViewType(viewModelType);
+
+            var overrideAttribute = GetOverridePresentationAttribute(viewModelType, viewType);
+            if (overrideAttribute != null)
+                return overrideAttribute;
+
+            var attribute = viewType
+                .GetCustomAttributes(typeof(MvxBasePresentationAttribute), true)
+                .FirstOrDefault() as MvxBasePresentationAttribute;
+            if (attribute != null)
+            {
+                if (attribute.ViewType == null)
+                    attribute.ViewType = viewType;
+
+                if (attribute.ViewModelType == null)
+                    attribute.ViewModelType = viewModelType;
+
+                return attribute;
+            }
+
+            return CreatePresentationAttribute(viewModelType, viewType);
+        }
+
+        public virtual MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
+        {
+            MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new window presentation");
+            return new MvxWindowPresentationAttribute();
+        }
+
+        public virtual MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, Type viewType)
+        {
+            if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
+            {
+                var viewInstance = this.CreateViewControllerFor(viewType, null) as NSViewController;
+                using (viewInstance)
+                {
+                    var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute();
+
+                    if (presentationAttribute == null)
+                    {
+                        MvxTrace.Warning("Override PresentationAttribute null. Falling back to existing attribute.");
+                    }
+                    else
+                    {
+                        if (presentationAttribute.ViewType == null)
+                            presentationAttribute.ViewType = viewType;
+
+                        if (presentationAttribute.ViewModelType == null)
+                            presentationAttribute.ViewModelType = viewModelType;
+
+                        return presentationAttribute;
+                    }
+                }
+            }
+
+            return null;
         }
 
         protected virtual INSApplicationDelegate ApplicationDelegate => _applicationDelegate;
@@ -50,58 +141,115 @@ namespace MvvmCross.Mac.Views.Presenters
             _windows = new List<NSWindow>();
         }
 
-        protected virtual void RegisterAttributeTypes()
+        public virtual void RegisterAttributeTypes()
         {
-            _attributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxWindowPresentationAttribute),
-                (vc, attribute, request) => ShowWindowViewController(vc, (MvxWindowPresentationAttribute)attribute, request));
+                new MvxPresentationAttributeAction
+                {
+                    ShowAction = (viewType, attribute, request) =>
+                    {
+                        var viewController = (NSViewController)this.CreateViewControllerFor(request);
+                        ShowWindowViewController(viewController, (MvxWindowPresentationAttribute)attribute, request);
+                    },
+                CloseAction = (viewModel, attribute) => {
+                    Close(viewModel);
+                    return true;
+                    }
+                });
 
-            _attributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxContentPresentationAttribute),
-                (vc, attribute, request) => ShowContentViewController(vc, (MvxContentPresentationAttribute)attribute, request));
+                new MvxPresentationAttributeAction
+                {
+                    ShowAction = (viewType, attribute, request) =>
+                    {
+                        var viewController = (NSViewController)this.CreateViewControllerFor(request);
+                        ShowContentViewController(viewController, (MvxContentPresentationAttribute)attribute, request);
+                    },
+                    CloseAction = (viewModel, attribute) => {
+                        Close(viewModel);
+                        return true;
+                    }
+                });
 
-            _attributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxModalPresentationAttribute),
-                (vc, attribute, request) => ShowModalViewController(vc, (MvxModalPresentationAttribute)attribute, request));
+                new MvxPresentationAttributeAction
+                {
+                    ShowAction = (viewType, attribute, request) =>
+                    {
+                        var viewController = (NSViewController)this.CreateViewControllerFor(request);
+                        ShowModalViewController(viewController, (MvxModalPresentationAttribute)attribute, request);
+                    },
+                    CloseAction = (viewModel, attribute) => {
+                        Close(viewModel);
+                        return true;
+                    }
+                });
 
-            _attributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxSheetPresentationAttribute),
-                (vc, attribute, request) => ShowSheetViewController(vc, (MvxSheetPresentationAttribute)attribute, request));
+                new MvxPresentationAttributeAction
+                {
+                    ShowAction = (viewType, attribute, request) =>
+                    {
+                        var viewController = (NSViewController)this.CreateViewControllerFor(request);
+                        ShowSheetViewController(viewController, (MvxSheetPresentationAttribute)attribute, request);
+                    },
+                    CloseAction = (viewModel, attribute) => {
+                        Close(viewModel);
+                        return true;
+                    }
+                });
 
-            _attributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxTabPresentationAttribute),
-                (vc, attribute, request) => ShowTabViewController(vc, (MvxTabPresentationAttribute)attribute, request));                
+                new MvxPresentationAttributeAction
+                {
+                    ShowAction = (viewType, attribute, request) =>
+                    {
+                        var viewController = (NSViewController)this.CreateViewControllerFor(request);
+                        ShowTabViewController(viewController, (MvxTabPresentationAttribute)attribute, request);
+                    },
+                    CloseAction = (viewModel, attribute) => {
+                        Close(viewModel);
+                        return true;
+                    }
+                });
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if (hint is MvxClosePresentationHint)
+            if (HandlePresentationChange(hint)) return;
+
+            if (hint is MvxClosePresentationHint presentationHint)
             {
-                Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                Close(presentationHint.ViewModelToClose);
                 return;
             }
 
-            base.ChangePresentation(hint);
+            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
 
         public override void Show(MvxViewModelRequest request)
         {
-            var view = this.CreateViewControllerFor(request);
+            var attribute = GetPresentationAttribute(request.ViewModelType);
+            attribute.ViewModelType = request.ViewModelType;
+            var attributeType = attribute.GetType();
 
-            Show(view, request);
-        }
+            if (AttributeTypesToActionsDictionary.TryGetValue(
+                attributeType,
+                out MvxPresentationAttributeAction attributeAction))
+            {
+                if (attributeAction.ShowAction == null)
+                    throw new NullReferenceException($"attributeAction.ShowAction is null for attribute: {attributeType.Name}");
 
-        protected virtual void Show(IMvxMacView view, MvxViewModelRequest request)
-        {
-            var viewController = view as NSViewController;
+                attributeAction.ShowAction.Invoke(attribute.ViewType, attribute, request);
+                return;
+            }
 
-            var attribute = GetPresentationAttributes(viewController);
-
-            Action<NSViewController, MvxBasePresentationAttribute, MvxViewModelRequest> showAction;
-            if (!AttributeTypesToShowMethodDictionary.TryGetValue(attribute.GetType(), out showAction))
-                throw new KeyNotFoundException($"The type {attribute.GetType().Name} is not configured in the presenter dictionary");
-
-            showAction.Invoke(viewController, attribute, request);
+            throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
         }
 
         protected virtual void ShowWindowViewController(
@@ -138,11 +286,11 @@ namespace MvvmCross.Mac.Views.Presenters
 
             if (!string.IsNullOrEmpty(viewController.Title))
                 window.Title = viewController.Title;
-                    
+
             Windows.Add(window);
             window.ContentView = viewController.View;
             window.ContentViewController = viewController;
-            windowController.ShowWindow(null);  
+            windowController.ShowWindow(null);
 
             _windowsToWindowControllers.Add(window, windowController);
         }
@@ -248,7 +396,7 @@ namespace MvvmCross.Mac.Views.Presenters
             tabViewController.ShowTabView(viewController, attribute.TabTitle);
         }
 
-        public override void Close(IMvxViewModel toClose)
+        public override void Close(IMvxViewModel viewModel)
         {
             for (int i = Windows.Count - 1; i >= 0; i--)
             {
@@ -259,7 +407,7 @@ namespace MvvmCross.Mac.Views.Presenters
                 {
                     var modal = window.ContentViewController.PresentedViewControllers
                                       .Select(v => v as MvxViewController)
-                                      .FirstOrDefault(v => v.ViewModel == toClose);
+                                      .FirstOrDefault(v => v.ViewModel == viewModel);
 
                     if (modal != null)
                     {
@@ -269,14 +417,14 @@ namespace MvvmCross.Mac.Views.Presenters
                 }
                 // if toClose is a tab
                 var tabViewController = window.ContentViewController as IMvxTabViewController;
-                if (tabViewController != null && tabViewController.CloseTabView(toClose))
+                if (tabViewController != null && tabViewController.CloseTabView(viewModel))
                 {
                     return;
                 }
 
                 // toClose is a content
                 var controller = window.ContentViewController as MvxViewController;
-                if (controller != null && controller.ViewModel == toClose)
+                if (controller != null && controller.ViewModel == viewModel)
                 {
                     window.Close();
                     Windows.Remove(window);
@@ -288,26 +436,6 @@ namespace MvvmCross.Mac.Views.Presenters
         protected virtual MvxWindowController CreateWindowController(NSWindow window)
         {
             return new MvxWindowController(window);
-        }
-
-        protected MvxBasePresentationAttribute GetPresentationAttributes(NSViewController viewController)
-        {
-            if (viewController is IMvxOverridePresentationAttribute vc)
-            {
-                var presentationAttribute = vc.PresentationAttribute();
-
-                if (presentationAttribute != null)
-                    return presentationAttribute;
-            }
-
-            var attributes = viewController.GetType().GetCustomAttribute<MvxBasePresentationAttribute>();
-            if (attributes != null)
-            {
-                return attributes;
-            }
-
-            MvxTrace.Trace($"PresentationAttribute not found for {viewController.GetType().Name}. Assuming new window presentation");
-            return new MvxWindowPresentationAttribute();
         }
     }
 }
