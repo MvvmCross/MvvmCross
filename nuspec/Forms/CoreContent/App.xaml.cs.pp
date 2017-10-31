@@ -1,5 +1,5 @@
 ﻿using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform;
 using MvvmCross.Platform;
 using Xamarin.Forms;
 

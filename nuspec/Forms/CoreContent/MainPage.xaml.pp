@@ -5,7 +5,7 @@
     xmlns:local="clr-namespace:$rootnamespace$.Core.Pages"
     x:Class="$rootnamespace$.Core.Pages.MainPage"
     xmlns:viewModels="clr-namespace:$rootnamespace$.Core.ViewModels;assembly=$rootnamespace$.Core"
-    xmlns:d="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Core">
+    xmlns:d="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms">
 	<ContentPage.Content>
         <StackLayout>
         <Button Text="Show text" Command="{Binding ShowTextCommand}" />

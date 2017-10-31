@@ -2,8 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 using MvvmCross.Droid.Views;
-using MvvmCross.Forms.Droid;
-using MvvmCross.Forms.Presenters;
+using MvvmCross.Forms.Droid.Views;
 using MvvmCross.Platform;
 
 namespace $rootnamespace$
