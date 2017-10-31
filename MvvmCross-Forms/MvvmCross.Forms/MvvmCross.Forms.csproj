@@ -72,8 +72,8 @@
     <Compile Include="Views\MvxContentView.cs" />
     <Compile Include="Views\IMvxElement.cs" />
     <Compile Include="Views\MvxBoxView.cs" />
-    <Compile Include="Bindings\MvxBind.cs" />
-    <Compile Include="Bindings\MvxLang.cs" />
+    <Compile Include="Bindings\MvxBindExtension.cs" />
+    <Compile Include="Bindings\MvxLangExtension.cs" />
     <Compile Include="Views\MvxPage.cs" />
     <Compile Include="Views\IMvxFormsPagePresenter.cs" />
     <Compile Include="Views\MvxViewCell.cs" />
@@ -82,6 +82,7 @@
     <Compile Include="Views\MvxImageCell.cs" />
     <Compile Include="Views\MvxEntryCell.cs" />
     <Compile Include="Bindings\MvxDesignTimeChecker.cs" />
+    <Compile Include="Bindings\MvxBaseBindExtension.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
