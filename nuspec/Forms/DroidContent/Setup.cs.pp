@@ -3,8 +3,8 @@ using MvvmCross.Droid.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Droid.Views;
-using MvvmCross.Forms.Core;
-using MvvmCross.Forms.Droid.Presenters;
+using MvvmCross.Forms.Platform;
+using MvvmCross.Forms.Droid.Platform;
 using MvvmCross.Forms.Droid;
 
 namespace $rootnamespace$
