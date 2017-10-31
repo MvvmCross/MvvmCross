@@ -19,7 +19,7 @@ namespace MvvmCross.Uwp.Views
     public class MvxWindowsViewPresenter
         : MvxViewPresenter, IMvxWindowsViewPresenter
     {
-        private readonly IMvxWindowsFrame _rootFrame;
+        protected readonly IMvxWindowsFrame _rootFrame;
 
         public MvxWindowsViewPresenter(IMvxWindowsFrame rootFrame)
         {
@@ -28,8 +28,41 @@ namespace MvvmCross.Uwp.Views
             SystemNavigationManager.GetForCurrentView().BackRequested += BackButtonOnBackRequested;
         }
 
-        protected virtual void BackButtonOnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
+        private IMvxViewModelTypeFinder _viewModelTypeFinder;
+        public IMvxViewModelTypeFinder ViewModelTypeFinder
         {
+            get
+            {
+                if (_viewModelTypeFinder == null)
+                    _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
+                return _viewModelTypeFinder;
+            }
+            set
+            {
+                _viewModelTypeFinder = value;
+            }
+        }
+
+        private IMvxViewsContainer _viewsContainer;
+        public IMvxViewsContainer ViewsContainer
+        {
+            get
+            {
+                if (_viewsContainer == null)
+                    _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
+                return _viewsContainer;
+            }
+            set
+            {
+                _viewsContainer = value;
+            }
+        }
+
+        protected virtual async void BackButtonOnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
+        {
+            if (backRequestedEventArgs.Handled)
+                return;
+
             var currentView = _rootFrame.Content as IMvxView;
             if (currentView == null)
             {
@@ -38,7 +71,7 @@ namespace MvvmCross.Uwp.Views
             }
 
             var navigationService = Mvx.Resolve<IMvxNavigationService>();
-            navigationService.Close(currentView.ViewModel);
+            backRequestedEventArgs.Handled = await navigationService.Close(currentView.ViewModel);
         }
 
         public override void Show(MvxViewModelRequest request)

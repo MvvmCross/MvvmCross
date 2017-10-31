@@ -2,6 +2,8 @@ using System;
 using System.Windows.Input;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace Playground.Core.ViewModels
 {
@@ -11,13 +13,15 @@ namespace Playground.Core.ViewModels
 
         private int _counter = 2;
 
-        public RootViewModel(IMvxNavigationService navigationService)
+        public RootViewModel(IMvxNavigationService navigationService, IMvxLogProvider logProvider)
         {
             _navigationService = navigationService;
 
-            ShowChildCommand = new MvxAsyncCommand(async () => ShowViewModel<ChildViewModel>());
+            logProvider.GetLogFor<RootViewModel>().Warn(() => "Testing log");
 
-            ShowModalCommand = new MvxAsyncCommand(async () => ShowViewModel<ModalViewModel>());
+            ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel>());
+
+            ShowModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalViewModel>());
 
             ShowModalNavCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalNavViewModel>());
 
@@ -30,6 +34,8 @@ namespace Playground.Core.ViewModels
             ShowSheetCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SheetViewModel>());
 
             ShowWindowCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<WindowViewModel>());
+
+            ShowMixedNavigationCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<MixedNavFirstViewModel>());
 
             _counter = 3;
         }
@@ -63,5 +69,13 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowSheetCommand { get; private set; }
 
         public IMvxAsyncCommand ShowWindowCommand { get; private set; }
+
+        public IMvxAsyncCommand ShowMixedNavigationCommand { get; private set; }
+
+        public IMvxAsyncCommand ShowListViewCommand => new MvxAsyncCommand(async () => await _navigationService.Navigate<ListViewModel>());
+
+        public IMvxAsyncCommand ShowBindingsViewCommand => new MvxAsyncCommand(async () => await _navigationService.Navigate<BindingsViewModel>());
+
+        public IMvxAsyncCommand ShowCodeBehindViewCommand => new MvxAsyncCommand(async () => await _navigationService.Navigate<CodeBehindViewModel>());
     }
 }

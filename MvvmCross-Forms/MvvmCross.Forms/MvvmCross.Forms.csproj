@@ -40,31 +40,49 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Bindings\La.n.g.cs" />
-    <Compile Include="Core\IMvxContentPage.cs" />
-    <Compile Include="Presenters\IMvxFormsPageLoader.cs" />
-    <Compile Include="ViewModels\IMvxMasterDetailViewModel.cs" />
-    <Compile Include="Core\MvxContentPage.cs" />
-    <Compile Include="Core\MvxFormsApplication.cs" />
-    <Compile Include="Presenters\MvxFormsMasterDetailPagePresenter.cs" />
-    <Compile Include="Presenters\MvxFormsPageLoader.cs" />
-    <Compile Include="Presenters\MvxFormsPagePresenter.cs" />
-    <Compile Include="ViewModels\MvxMasterDetailViewModel.cs" />
-    <Compile Include="Presenters\MvxPresenterHelpers.cs" />
     <Compile Include="Bindings\Bi.n.d.cs" />
     <Compile Include="Bindings\IMvxBindingCreator.cs" />
     <Compile Include="Bindings\MvxBindablePropertyExtensionMethods.cs" />
     <Compile Include="Bindings\MvxBindingCreator.cs" />
-    <Compile Include="Bindings\MvxFormsBindingBuilder.cs" />
     <Compile Include="Bindings\MvxFormsBindingCreator.cs" />
     <Compile Include="Bindings\MvxFormsTargetBindingFactoryRegistry.cs" />
     <Compile Include="Bindings\Target\MvxBindablePropertyTargetBinding.cs" />
     <Compile Include="Views\MvxImageView.cs" />
-    <Compile Include="Presenters\IMvxFormsPagePresenter.cs" />
     <Compile Include="Bindings\Target\MvxListViewItemClickPropertyTargetBinding.cs" />
     <Compile Include="Views\MvxListView.cs" />
-    <Compile Include="Core\MvxFormsSetupHelper.cs" />
-    <Compile Include="Core\MvxFormsPropertyBinding.cs" />
-    <Compile Include="Core\MvxFormsPropertyBindingExtensions.cs" />
+    <Compile Include="Views\IMvxFormsViewPresenter.cs" />
+    <Compile Include="Views\Attributes\MvxNavigationPagePresentationAttribute.cs" />
+    <Compile Include="Views\IMvxPage.cs" />
+    <Compile Include="Views\MvxContentPage.cs" />
+    <Compile Include="Platform\MvxFormsApplication.cs" />
+    <Compile Include="Bindings\MvxFormsPropertyBinding.cs" />
+    <Compile Include="Bindings\MvxFormsPropertyBindingExtensions.cs" />
+    <Compile Include="Platform\MvxFormsSetupHelper.cs" />
+    <Compile Include="Views\Attributes\MvxModalPresentationAttribute.cs" />
+    <Compile Include="Views\MvxNavigationPage.cs" />
+    <Compile Include="Views\MvxTabbedPage.cs" />
+    <Compile Include="Views\MvxCarouselPage.cs" />
+    <Compile Include="Views\MvxMasterDetailPage.cs" />
+    <Compile Include="Views\Attributes\MvxTabbedPagePresentationAttribute.cs" />
+    <Compile Include="Views\Attributes\MvxMasterDetailPagePresentationAttribute.cs" />
+    <Compile Include="Views\Attributes\MvxContentPagePresentationAttribute.cs" />
+    <Compile Include="Views\Attributes\MvxCarouselPagePresentationAttribute.cs" />
+    <Compile Include="Views\Attributes\MvxPagePresentationAttribute.cs" />
+    <Compile Include="Views\MvxFormsPagePresenter.cs" />
+    <Compile Include="Views\MvxContentView.cs" />
+    <Compile Include="Views\IMvxElement.cs" />
+    <Compile Include="Views\MvxBoxView.cs" />
+    <Compile Include="Bindings\MvxBindExtension.cs" />
+    <Compile Include="Bindings\MvxLangExtension.cs" />
+    <Compile Include="Views\MvxPage.cs" />
+    <Compile Include="Views\IMvxFormsPagePresenter.cs" />
+    <Compile Include="Views\MvxViewCell.cs" />
+    <Compile Include="Views\MvxSwitchCell.cs" />
+    <Compile Include="Views\MvxTextCell.cs" />
+    <Compile Include="Views\MvxImageCell.cs" />
+    <Compile Include="Views\MvxEntryCell.cs" />
+    <Compile Include="Bindings\MvxDesignTimeChecker.cs" />
+    <Compile Include="Bindings\MvxBaseBindExtension.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -98,23 +116,23 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
+      <HintPath>..\..\packages\Xamarin.Forms.2.4.0.282\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Platform.dll</HintPath>
+      <HintPath>..\..\packages\Xamarin.Forms.2.4.0.282\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Xaml.dll</HintPath>
+      <HintPath>..\..\packages\Xamarin.Forms.2.4.0.282\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <Import Project="..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+  <Import Project="..\..\packages\Xamarin.Forms.2.4.0.282\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.4.0.282\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Xamarin.Forms.2.4.0.282\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Forms.2.4.0.282\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets'))" />
   </Target>
 </Project>

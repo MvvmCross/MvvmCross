@@ -25,7 +25,7 @@ namespace MvvmCross.Mac.Views
             : base(eventSource)
         {
             if (!(eventSource is IMvxMacView))
-                throw new ArgumentException("eventSource", "eventSource should be a IMvxMacView");
+                throw new ArgumentException(nameof(eventSource), $"{nameof(eventSource)} should be a {nameof(IMvxMacView)}");
 
             MacView.BindingContext = new MvxBindingContext();
         }
@@ -34,8 +34,7 @@ namespace MvvmCross.Mac.Views
         {
             if (MacView == null)
             {
-                MvxTrace.Warning("MacView is null for clearup of bindings in type {0}",
-                               this.MacView.GetType().Name);
+                MvxTrace.Warning($"{nameof(MacView)} is null for clearup of bindings");
                 return;
             }
             MacView.ClearAllBindings();

@@ -49,13 +49,19 @@ namespace MvvmCross.Droid.Views.Fragments
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
-            set { DataContext = value; }
+            get
+            {
+                return DataContext as IMvxViewModel;
+            }
+            set
+            {
+                DataContext = value;
+                OnViewModelSet();
+            }
         }
 
-        protected void EnsureBindingContextSet(Bundle b0)
+        public virtual void OnViewModelSet()
         {
-            this.EnsureBindingContextIsSet(b0);
         }
 
         public string UniqueImmutableCacheTag => Tag;
@@ -66,10 +72,10 @@ namespace MvvmCross.Droid.Views.Fragments
             ViewModel?.ViewCreated();
         }
 
-        public override void OnDestroy ()
+        public override void OnDestroy()
         {
-            base.OnDestroy ();
-            ViewModel?.ViewDestroy ();
+            base.OnDestroy();
+            ViewModel?.ViewDestroy();
         }
 
         public override void OnStart()
@@ -100,6 +106,14 @@ namespace MvvmCross.Droid.Views.Fragments
     public abstract class MvxDialogFragment<TViewModel>
         : MvxDialogFragment, IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
     {
+        protected MvxDialogFragment()
+        {
+        }
+
+        protected MvxDialogFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
+    
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }

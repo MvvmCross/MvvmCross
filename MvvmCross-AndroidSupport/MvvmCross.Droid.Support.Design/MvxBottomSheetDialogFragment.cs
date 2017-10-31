@@ -50,13 +50,19 @@ namespace MvvmCross.Droid.Support.Design
 
         public virtual IMvxViewModel ViewModel
         {
-            get { return DataContext as IMvxViewModel; }
-            set { DataContext = value; }
+            get
+            {
+                return DataContext as IMvxViewModel;
+            }
+            set
+            {
+                DataContext = value;
+                OnViewModelSet();
+            }
         }
 
-        protected void EnsureBindingContextSet(Bundle b0)
+        public virtual void OnViewModelSet()
         {
-            this.EnsureBindingContextIsSet(b0);
         }
 
         public virtual string UniqueImmutableCacheTag => Tag;

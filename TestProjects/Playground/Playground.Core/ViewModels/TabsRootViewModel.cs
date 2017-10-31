@@ -15,10 +15,14 @@ namespace Playground.Core.ViewModels
         public TabsRootViewModel(IMvxNavigationService navigationService)
         {
             _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
+
             ShowInitialViewModelsCommand = new MvxAsyncCommand(ShowInitialViewModels);
+            ShowTabsRootBCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<TabsRootBViewModel>());
         }
 
         public IMvxAsyncCommand ShowInitialViewModelsCommand { get; private set; }
+
+        public IMvxAsyncCommand ShowTabsRootBCommand { get; private set; }
 
         private async Task ShowInitialViewModels()
         {
@@ -31,7 +35,8 @@ namespace Playground.Core.ViewModels
 
         private int _itemIndex;
 
-        public int ItemIndex {
+        public int ItemIndex
+        {
             get { return _itemIndex; }
             set
             {

@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -132,6 +132,12 @@ namespace MvvmCross.Core.Navigation
                 try
                 {
                     var facadeRequest = await facade.BuildViewModelRequest(path, paramDict).ConfigureAwait(false);
+                    if (facadeRequest == null)
+                    {
+                        Mvx.TaggedWarning(nameof(MvxNavigationService), $"Facade did not return a valid {nameof(MvxViewModelRequest)}.");
+                        return null;
+                    }
+
                     request.ViewModelType = facadeRequest.ViewModelType;
 
                     if (facadeRequest.ParameterValues != null)
@@ -140,16 +146,10 @@ namespace MvvmCross.Core.Navigation
                     }
 
                     request.ViewModelInstance = ViewModelLoader.LoadViewModel(request, null);
-
-                    if (facadeRequest == null)
-                    {
-                        Mvx.TaggedWarning("MvxNavigationService", "Facade did not return a valid MvxViewModelRequest.");
-                        return null;
-                    }
                 }
                 catch (Exception ex)
                 {
-                    Mvx.TaggedError("MvxNavigationService",
+                    Mvx.TaggedError(nameof(MvxNavigationService),
                         "Exception thrown while processing URL: {0} with RoutingFacade: {1}, {2}",
                                     path, viewModelType, ex);
                     return null;
@@ -187,6 +187,7 @@ namespace MvvmCross.Core.Navigation
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
+            viewModel.Prepare();
             viewModel.Prepare(param);
             ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize().ConfigureAwait(false);
@@ -242,11 +243,11 @@ namespace MvvmCross.Core.Navigation
             viewModel.CloseCompletionSource = tcs;
             _tcsResults.Add(viewModel, tcs);
 
+            viewModel.Prepare();
             viewModel.Prepare(param);
             ViewDispatcher.ShowViewModel(request);
             await viewModel.Initialize().ConfigureAwait(false);
-
-
+            
             OnAfterNavigate(this, args);
 
             try

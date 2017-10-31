@@ -21,7 +21,7 @@ namespace MvvmCross.tvOS.Views
             : base(eventSource)
         {
             if (!(eventSource is IMvxTvosView))
-                throw new ArgumentException("eventSource", "eventSource should be a IMvxTvosView");
+                throw new ArgumentException(nameof(eventSource), $"{nameof(eventSource)} should be a {nameof(IMvxTvosView)}");
 
             TvosView.BindingContext = Mvx.Resolve<IMvxBindingContext>();
         }
@@ -30,8 +30,7 @@ namespace MvvmCross.tvOS.Views
         {
             if (TvosView == null)
             {
-                MvxTrace.Warning("iosView is null for clearup of bindings in type {0}",
-                               TvosView?.GetType().Name);
+                MvxTrace.Warning($"{nameof(TvosView)} is null for clearup of bindings");
                 return;
             }
             TvosView.ClearAllBindings();

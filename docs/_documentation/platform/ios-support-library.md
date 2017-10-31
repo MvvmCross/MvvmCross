@@ -20,7 +20,7 @@ A view controller class can be decorated with the MvxSidebarPresentationAttribut
 ```c#
 public MvxSidebarPresentationAttribute(
     MvxPanelEnum panel, MvxPanelHintType hintType, bool showPanel,
-    MvxSplitViewBehaviour behaviour = MvxSplitViewBehaviour.None)
+    MvxSplitViewBehaviour behaviour = MvxSplitViewBehaviour.None, bool animated = true)
 {
 }
 ```

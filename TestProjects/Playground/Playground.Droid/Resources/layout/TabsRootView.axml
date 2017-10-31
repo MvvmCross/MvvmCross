@@ -14,7 +14,14 @@
 			android:layout_height="?attr/actionBarSize"
 			android:background="?attr/colorPrimary"
 			local:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-			local:layout_scrollFlags="scroll|enterAlways" />
+			local:layout_scrollFlags="scroll|enterAlways">
+			<Button android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:layout_alignParentRight="true"
+				android:text="Show TabsRootB"
+				local:MvxBind="Click ShowTabsRootBCommand;" />
+		</android.support.v7.widget.Toolbar>
 		<android.support.design.widget.TabLayout android:id="@+id/tabs"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
@@ -24,6 +31,6 @@
 	</android.support.design.widget.AppBarLayout>
 	<android.support.v4.view.ViewPager android:id="@+id/viewpager"
 		android:layout_width="match_parent"
-		android:layout_height="fill_parent"
+		android:layout_height="match_parent"
 		local:layout_behavior="@string/appbar_scrolling_view_behavior" />
 </android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!-- Application theme -->
+    <style name="AppTheme"
+        parent="AppTheme.Base">
+    </style>
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppTheme.Base"
+        parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowActionModeOverlay">false</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:textCursorDrawable">@null</item>
+    </style>
+    <style name="AppTheme.Login"
+        parent="AppTheme.Base">
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/med_gray</item>
+        <item name="android:statusBarColor">@color/dark_gray</item>
+    </style>
+    <style name="AppTheme.Menu"
+        parent="AppTheme.Base">
+        <item name="colorPrimary">@color/black</item>
+    </style>
+    <style name="AppTheme.Splash"
+        parent="AppTheme.Base">
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+</resources>

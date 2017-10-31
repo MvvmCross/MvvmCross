@@ -1,4 +1,5 @@
-﻿using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
 using MvvmCross.iOS.Support.XamarinSidebar.Extensions;
 using MvvmCross.iOS.Support.XamarinSidebar.Views;
 using MvvmCross.iOS.Views;
@@ -11,20 +12,28 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 {
     public class MvxSidebarPresenter : MvxIosViewPresenter
     {
-        protected virtual IMvxSidebarViewController SideBarViewController { get; set; }
+        protected virtual MvxSidebarViewController SideBarViewController { get; set; }
 
         public MvxSidebarPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
                     : base(applicationDelegate, window)
         {
         }
 
-        protected override void RegisterAttributeTypes()
+        public override void RegisterAttributeTypes()
         {
             base.RegisterAttributeTypes();
 
-            AttributeTypesToShowMethodDictionary.Add(
+            AttributeTypesToActionsDictionary.Add(
                 typeof(MvxSidebarPresentationAttribute),
-                (vc, attribute, request) => ShowSidebarViewController(vc, (MvxSidebarPresentationAttribute)attribute, request));
+                new MvxPresentationAttributeAction
+                {
+                    ShowAction = (viewType, attribute, request) =>
+                    {
+                        var viewController = (UIViewController)this.CreateViewControllerFor(request);
+                        ShowSidebarViewController(viewController, (MvxSidebarPresentationAttribute)attribute, request);
+                    },
+                    CloseAction = (viewModel, attribute) => CloseSidebarViewController(viewModel, (MvxSidebarPresentationAttribute)attribute)
+                });
         }
 
         protected virtual void ShowSidebarViewController(
@@ -38,16 +47,16 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             switch (attribute.HintType)
             {
                 case MvxPanelHintType.PopToRoot:
-                    ShowPanelAndPopToRoot(attribute.Panel, viewController);
+                    ShowPanelAndPopToRoot(attribute, viewController);
                     break;
 
                 case MvxPanelHintType.ResetRoot:
-                    ShowPanelAndResetToRoot(attribute.Panel, viewController);
+                    ShowPanelAndResetToRoot(attribute, viewController);
                     break;
 
                 case MvxPanelHintType.PushPanel:
                 default:
-                    ShowPanel(attribute.Panel, viewController);
+                    ShowPanel(attribute, viewController);
                     break;
             }
 
@@ -58,7 +67,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             }
         }
 
-        protected virtual bool ShowPanelAndPopToRoot(MvxPanelEnum panel, UIViewController viewController)
+        protected virtual bool ShowPanelAndPopToRoot(MvxSidebarPresentationAttribute attribute, UIViewController viewController)
         {
             var navigationController = (SideBarViewController as MvxSidebarViewController).NavigationController;
 
@@ -71,7 +80,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             return true;
         }
 
-        protected virtual bool ShowPanelAndResetToRoot(MvxPanelEnum panel, UIViewController viewController)
+        protected virtual bool ShowPanelAndResetToRoot(MvxSidebarPresentationAttribute attribute, UIViewController viewController)
         {
             var navigationController = (SideBarViewController as MvxSidebarViewController).NavigationController;
 
@@ -80,49 +89,49 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
             navigationController.ViewControllers = new[] { viewController };
 
-            switch (panel)
+            switch (attribute.Panel)
             {
                 case MvxPanelEnum.Left:
                 case MvxPanelEnum.Right:
                     break;
                 case MvxPanelEnum.Center:
                 default:
-                    viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController);
+                    viewController.ShowMenuButton(SideBarViewController);
                     break;
                 case MvxPanelEnum.CenterWithLeft:
-                    viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController, showLeft: true, showRight: false);
+                    viewController.ShowMenuButton(SideBarViewController, showLeft: true, showRight: false);
                     break;
                 case MvxPanelEnum.CenterWithRight:
-                    viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController, showLeft: false, showRight: true);
+                    viewController.ShowMenuButton(SideBarViewController, showLeft: false, showRight: true);
                     break;
             }
 
             return true;
         }
 
-        protected virtual bool ShowPanel(MvxPanelEnum panel, UIViewController viewController)
+        protected virtual bool ShowPanel(MvxSidebarPresentationAttribute attribute, UIViewController viewController)
         {
-            var navigationController = (SideBarViewController as MvxSidebarViewController).NavigationController;
+            var navigationController = SideBarViewController.NavigationController;
 
             if (navigationController == null)
                 return false;
 
-            switch (panel)
+            switch (attribute.Panel)
             {
                 case MvxPanelEnum.Left:
                 case MvxPanelEnum.Right:
                     break;
                 case MvxPanelEnum.Center:
                 default:
-                    navigationController.PushViewController(viewController, true);
+                    navigationController.PushViewController(viewController, attribute.Animated);
                     break;
                 case MvxPanelEnum.CenterWithLeft:
-                    navigationController.PushViewController(viewController, true);
-                    viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController, showLeft: true, showRight: false);
+                    navigationController.PushViewController(viewController, attribute.Animated);
+                    viewController.ShowMenuButton(SideBarViewController, showLeft: true, showRight: false);
                     break;
                 case MvxPanelEnum.CenterWithRight:
-                    navigationController.PushViewController(viewController, true);
-                    viewController.ShowMenuButton(SideBarViewController as MvxSidebarViewController, showLeft: false, showRight: true);
+                    navigationController.PushViewController(viewController, attribute.Animated);
+                    viewController.ShowMenuButton(SideBarViewController, showLeft: false, showRight: true);
                     break;
             }
 
@@ -132,11 +141,11 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
         protected override void ShowRootViewController(UIViewController viewController, MvxRootPresentationAttribute attribute, MvxViewModelRequest request)
         {
             // check if viewController is a MvxSidebarPanelController
-            if (viewController is IMvxSidebarViewController)
+            if (viewController is MvxSidebarViewController sidebarView)
             {
                 MasterNavigationController = new MvxNavigationController();
 
-                SideBarViewController = viewController as IMvxSidebarViewController;
+                SideBarViewController = sidebarView;
                 SideBarViewController.SetNavigationController(MasterNavigationController);
 
                 SetWindowRootViewController(viewController);
@@ -154,18 +163,17 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
             {
                 SideBarViewController = null;
                 MasterNavigationController = null;
+            
+                base.ShowRootViewController(viewController, attribute, request);
             }
-
-            base.ShowRootViewController(viewController, attribute, request);
         }
 
-        public override void Close(IMvxViewModel toClose)
+        protected virtual bool CloseSidebarViewController(IMvxViewModel viewModel, MvxSidebarPresentationAttribute attribute)
         {
-            // if the current root is a SideBarViewController, delegate close responsibility to it
-            if (SideBarViewController != null && SideBarViewController.CloseChildViewModel(toClose))
-                return;
+            if (SideBarViewController != null && SideBarViewController.CloseChildViewModel(viewModel))
+                return true;
 
-            base.Close(toClose);
+            return false;
         }
     }
 }

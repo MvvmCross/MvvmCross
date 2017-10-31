@@ -118,7 +118,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         protected override void OnStop()
         {
             base.OnStop();
-            ViewModel.ViewDisappeared();
+            ViewModel?.ViewDisappeared();
         }
 
         public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)

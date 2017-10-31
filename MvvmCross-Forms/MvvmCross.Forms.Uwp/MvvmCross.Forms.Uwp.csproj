@@ -11,8 +11,8 @@
     <AssemblyName>MvvmCross.Forms.Uwp</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -45,14 +45,17 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Presenters\MvxFormsUwpMasterDetailPagePresenter.cs" />
-    <Compile Include="Presenters\MvxFormsUwpPagePresenter.cs" />
-    <Compile Include="MvxPageRenderer.cs" />
     <EmbeddedResource Include="Properties\MvvmCross.Forms.Uwp.rd.xml" />
-    <None Include="TODO.txt" />
-    <Compile Include="MvxFormsWindowsSetup.cs" />
+    <Compile Include="Views\MvxFormsUwpViewPresenter.cs" />
+    <Compile Include="Platform\MvxFormsWindowsSetup.cs" />
+    <Compile Include="Views\MvxPageRenderer.cs" />
+    <Compile Include="Bindings\MvxFormsWindowsBindingBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MvvmCross\Binding\UWP\MvvmCross.Binding.Uwp.csproj">
+      <Project>{637533ee-756b-4817-94b2-7c1e56132208}</Project>
+      <Name>MvvmCross.Binding.Uwp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
       <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
       <Name>MvvmCross.Binding</Name>
@@ -65,6 +68,10 @@
       <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
       <Name>MvvmCross.Platform</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MvvmCross\Platform\UWP\MvvmCross.Platform.Uwp.csproj">
+      <Project>{ce025c02-196a-4bd7-9097-e4646f4033b7}</Project>
+      <Name>MvvmCross.Platform.Uwp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross\Windows\Uwp\MvvmCross.Uwp.csproj">
       <Project>{c7e12cdd-6370-426a-8907-0ed6af353f79}</Project>
       <Name>MvvmCross.Uwp</Name>
@@ -74,6 +81,7 @@
       <Name>MvvmCross.Forms</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

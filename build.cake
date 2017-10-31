@@ -2,8 +2,8 @@
 #tool nuget:?package=gitlink&version=2.4.0
 #tool nuget:?package=vswhere
 #tool nuget:?package=NUnit.ConsoleRunner
-#addin nuget:?package=Cake.Incubator
-#addin nuget:?package=Cake.Git
+#addin nuget:?package=Cake.Incubator&version=1.5.0
+#addin nuget:?package=Cake.Git&version=0.16.0
 
 var sln = new FilePath("MvvmCross_All.sln");
 var outputDir = new DirectoryPath("artifacts");
@@ -53,7 +53,6 @@ Task("Restore")
 	.IsDependentOn("ResolveBuildTools")
 	.Does(() => {
 	NuGetRestore(sln, new NuGetRestoreSettings {
-		ToolPath = "tools/nuget.exe",
 		Verbosity = NuGetVerbosity.Quiet
 	});
 	// MSBuild(sln, settings => settings.WithTarget("Restore"));
@@ -118,20 +117,12 @@ Task("GitLink")
 	.Does(() => 
 {
 	var projectsToIgnore = new string[] {
-		"MasterDetailExample.Core",
-		"MasterDetailExample.Droid",
-		"MasterDetailExample.iOS",
-		"MasterDetailExample.UWP",
 		"PageRendererExample.Core",
 		"PageRendererExample.Droid",
 		"PageRendererExample.iOS",
 		"PageRendererExample.WindowsUWP",
 		"MvvmCross.iOS.Support.ExpandableTableView.Core",
 		"MvvmCross.iOS.Support.ExpandableTableView.iOS",
-		"MvvmCross.iOS.Support.JASidePanelsSample.Core",
-		"MvvmCross.iOS.Support.JASidePanelsSample.iOS",
-		"MvvmCross.iOS.Support.Tabs.Core",
-		"MvvmCross.iOS.Support.Tabs.iOS",
 		"MvvmCross.iOS.Support.XamarinSidebarSample.Core",
 		"MvvmCross.iOS.Support.XamarinSidebarSample.iOS",
 		"mvvmcross.codeanalysis.vsix",
@@ -160,10 +151,11 @@ Task("GitLink")
 		"playground.wpf",
         "Playground.Droid",
         "Playground.Uwp",
-		"MvxBindingsExample",
-		"MvxBindingsExample.Android",
-		"MvxBindingsExample.iOS",
-		"MvxBindingsExample.UWP"
+        "Playground.Forms.Droid",
+        "Playground.Forms.iOS",
+		"Playground.Forms.Mac",
+		"Playground.Forms.Uwp",
+		"Playground.Forms.Wpf"
 	};
 
 	GitLink("./", 
