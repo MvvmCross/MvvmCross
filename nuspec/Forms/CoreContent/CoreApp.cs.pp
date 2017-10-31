@@ -12,7 +12,7 @@ namespace $rootnamespace$.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart<ViewModels.MainViewModel>();
+            RegisterNavigationServiceAppStart<ViewModels.MainViewModel>();
         }
     }
 }
