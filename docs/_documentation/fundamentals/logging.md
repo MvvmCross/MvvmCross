@@ -2,7 +2,6 @@
 layout: documentation
 title: Diagnostic & Logging
 category: Fundamentals
-order: 10
 ---
 
 # Diagnostic & logging
@@ -19,11 +18,11 @@ public class MyViewModel : MvxViewModel
     {
         _log = log;
     }
-	
-	private void SomeMethod()
-	{
-		_log.Trace("Some message");
-	}
+
+    private void SomeMethod()
+    {
+            _log.Trace("Some message");
+    }
 }
 ```
 
@@ -32,18 +31,20 @@ More advanced would be:
 ```c#
 public class MyViewModel : MvxViewModel
 {
-    private readonly IMvxLogProvider _logProvider;
+    private readonly IMvxLog _log;
     public MyViewModel(IMvxLogProvider logProvider)
     {
-        _logProvider = log;
+        _log = logProvider.GetLogFor<MyViewModel>();
     }
 	
 	private void SomeMethod()
 	{
-		_logProvider.GetLogFor<MyViewModel>().ErrorException("Some message", new Exception())
+		_log.ErrorException("Some message", new Exception());
 	}
 }
 ```
+
+This makes the log context aware.
 
 # Default logging with MvxLog
 
