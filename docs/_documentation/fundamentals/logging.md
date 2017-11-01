@@ -2,7 +2,6 @@
 layout: documentation
 title: Diagnostic & Logging
 category: Fundamentals
-order: 10
 ---
 
 # Diagnostic & logging
@@ -35,7 +34,7 @@ public class MyViewModel : MvxViewModel
     private readonly IMvxLogProvider _logProvider;
     public MyViewModel(IMvxLogProvider logProvider)
     {
-        _logProvider = log;
+        _logProvider = logProvider;
     }
 	
 	private void SomeMethod()
@@ -44,6 +43,8 @@ public class MyViewModel : MvxViewModel
 	}
 }
 ```
+
+This makes the log context aware.
 
 # Default logging with MvxLog
 
