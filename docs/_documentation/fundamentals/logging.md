@@ -31,15 +31,15 @@ More advanced would be:
 ```c#
 public class MyViewModel : MvxViewModel
 {
-    private readonly IMvxLogProvider _logProvider;
+    private readonly IMvxLog _log;
     public MyViewModel(IMvxLogProvider logProvider)
     {
-        _logProvider = logProvider;
+        _log = logProvider.GetLogFor<MyViewModel>();
     }
 	
 	private void SomeMethod()
 	{
-		_logProvider.GetLogFor<MyViewModel>().ErrorException("Some message", new Exception())
+		_log.ErrorException("Some message", new Exception());
 	}
 }
 ```
