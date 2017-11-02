@@ -25,43 +25,39 @@ Let's take a look now at the methods of that interface:
 - `Close(IMvxViewModel toClose)`: As you can imagine, this method is used to handle the close request of a ViewModel. It takes the ViewModel instance to be closed as parameter.
 
 ## View Presenters on each platform
-Each mobile platform has its own View Presenter:
-- Android: [MvxAndroidViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Droid/Views/MvxAndroidViewPresenter.cs)
-- iOS: [MvxIosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/iOS/iOS/Views/Presenters/MvxIosViewPresenter.cs)
-- Windows: [MvxWindowsViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Windows/Uwp/Views/MvxWindowsViewPresenter.cs)
+Each platform has its own View Presenter:
+- Android: [MvxAndroidViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Droid/Views/MvxAndroidViewPresenter.cs) | [Documentation](https://www.mvvmcross.com/documentation/presenters/android-view-presenter)
+- Android (support packages): [MvxAppCompatViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross-AndroidSupport/MvvmCross.Droid.Support.V7.AppCompat/MvxAppCompatViewPresenter.cs) | [Documentation](https://www.mvvmcross.com/documentation/presenters/android-view-presenter)
+- iOS: [MvxIosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/iOS/iOS/Views/Presenters/MvxIosViewPresenter.cs) | [Documentation](https://www.mvvmcross.com/documentation/presenters/ios-view-presenter)
+- UWP: [MvxWindowsViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Windows/Uwp/Views/MvxWindowsViewPresenter.cs)
+- WPF: [MvxWpfViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Windows/Wpf/Views/Presenters/MvxWpfViewPresenter.cs) | [Documentation](https://www.mvvmcross.com/documentation/presenters/wpf-view-presenter)
+- macOS: [MvxMacViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Mac/Mac/Views/Presenters/MvxMacViewPresenter.cs) | [Documentation](https://www.mvvmcross.com/documentation/presenters/mac-view-presenter)
+- tvOS: [MvxTvosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/tvOS/tvOS/Views/Presenters/MvxTvosViewPresenter.cs)
 
 When you navigate to selected ViewModel, platform specific View Presenter handles displaying View properly.
 
  ![View Presenter schema](../../assets/img/ViewPresenterSchema.png)
 
-***Android*** platform has two important types of View Presenters:
-- [MvxAndroidViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Droid/Views/MvxAndroidViewPresenter.cs) - to switch between Activities
-- [MvxFragmentsPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Shared/Presenter/MvxFragmentsPresenter.cs) - to provide support for Android fragments
+MvvmCross ViewPresenters will provide you with a set of attributes on each platform. For example on iOS, [these](https://github.com/MvvmCross/MvvmCross/tree/develop/MvvmCross/iOS/iOS/Views/Presenters/Attributes) are the existing ones: 
 
-***iOS*** navigation is handled by [MvxIosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/iOS/iOS/Views/Presenters/MvxIosViewPresenter.cs) which provide support for the following navigation patterns:
-- Tabs
-- SplitView
-- Modal
-- Stack
-
-Key functionality here is set of attributes ([Presenter Attributes](https://github.com/MvvmCross/MvvmCross/tree/develop/MvvmCross/iOS/iOS/Views/Presenters/Attributes)) which we can use to define how selected view will be displayed:
 - MvxTabPresentationAttribute – for tabs
-- MvxRootPresentationAttribute – to set ViewController as root
-- MvxModalPresentationAttribute – to display ViewController modally
+- MvxRootPresentationAttribute – to set a ViewController as root
+- MvxModalPresentationAttribute – to display a ViewController modally
 - MvxMasterSplitViewPresentationAttribute – for SplitView master controller
 - MvxDetailSplitViewPresentationAttribute – for SplitView details controller
 
-Here is example how you can use them:
+This is how you would use these attributes:
 
  ```c#
     [MvxModalPresentation]
     public class DetailsViewController : ApplicationBaseMvxViewController<DetailsViewModel>
+    {
+        // your code 
+    }
 ```
 
-***Windows (UWP)*** is responsible for proper navigation between Pages. When navigating between ViewModels, Windows View Presenter controls Frame stack and displays specific Pages.
-
 ## Showing ViewModels
-The key and most important method of a ViewPresenter is `Show`. It is in charge of transforming a request coming from the _Core_ project into a View the user can interact with.
+The most important method of a ViewPresenter is `Show`. It is in charge of transforming a request coming from the _Core_ project into a View the user can interact with.
 There are several techniques to implement this method, but the preferred way by the MvvmCross default presenters is to use custom class attributes. These let the presenter know how a View wants to be presented on the UI. For instance, on iOS you would typically declare a ViewController like this:
 
 ```c#
