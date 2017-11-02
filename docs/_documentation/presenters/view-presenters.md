@@ -38,7 +38,7 @@ When you navigate to selected ViewModel, platform specific View Presenter handle
 - [MvxAndroidViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Droid/Views/MvxAndroidViewPresenter.cs) - to switch between Activities
 - [MvxFragmentsPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Shared/Presenter/MvxFragmentsPresenter.cs) - to provide support for Android fragments
 
-***iOS*** navigation is handled by [MvxIosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/iOS/iOS/Views/Presenters/MvxIosViewPresenter.cs) which provide sopport for the following navigation patterns:
+***iOS*** navigation is handled by [MvxIosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/iOS/iOS/Views/Presenters/MvxIosViewPresenter.cs) which provide support for the following navigation patterns:
 - Tabs
 - SplitView
 - Modal
