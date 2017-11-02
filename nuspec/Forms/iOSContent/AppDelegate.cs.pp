@@ -20,7 +20,6 @@ namespace $rootnamespace$
             startup.Start();
 
             LoadApplication(setup.FormsApplication);
-			setup.FormsApplication.SendStart();
 			
             Window.MakeKeyAndVisible();
 

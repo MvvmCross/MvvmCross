@@ -20,7 +20,6 @@ namespace Playground.Forms.iOS
             startup.Start();
 
             LoadApplication(setup.FormsApplication);
-            setup.FormsApplication.SendStart();
 
             Window.MakeKeyAndVisible();
 

@@ -9,7 +9,9 @@
 using System;
 using Foundation;
 using MvvmCross.Core.Platform;
+using MvvmCross.Forms.Views;
 using MvvmCross.iOS.Platform;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using UIKit;
 using Xamarin.Forms;
@@ -36,6 +38,7 @@ namespace MvvmCross.Forms.iOS
 
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
+            Mvx.Resolve<IMvxFormsViewPresenter>().FormsApplication.SendStart();
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
             return true;
         }
