@@ -280,6 +280,10 @@ namespace MvvmCross.iOS.Views.Presenters
             MvxModalPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
+            // check if viewController is a TabBarController
+            if (viewController is IMvxTabBarViewController tabBarController)
+                TabBarViewController = tabBarController;
+
             // setup modal based on attribute
             if (attribute.WrapInNavigationController)
             {
