@@ -9,8 +9,6 @@ namespace Playground.Forms.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : MvxFormsApplicationDelegate
     {
-        public override UIWindow Window { get; set; }
-
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
@@ -22,10 +20,11 @@ namespace Playground.Forms.iOS
             startup.Start();
 
             LoadApplication(setup.FormsApplication);
+            setup.FormsApplication.SendStart();
 
             Window.MakeKeyAndVisible();
 
-            return true;
+            return base.FinishedLaunching(app, options);
         }
     }
 }

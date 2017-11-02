@@ -10,17 +10,34 @@ using System;
 using Foundation;
 using MvvmCross.Core.Platform;
 using MvvmCross.iOS.Platform;
+using MvvmCross.Platform.Exceptions;
 using UIKit;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 namespace MvvmCross.Forms.iOS
 {
     public class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate, IMvxLifetime
     {
+        private UIWindow _window;
+        public override UIWindow Window
+        {
+            get
+            {
+                return _window;
+            }
+            set
+            {
+                var fieldInfo = typeof(FormsApplicationDelegate).GetField("_window", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                fieldInfo.SetValue(this, value);
+                _window = value;
+            }
+        }
+
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
-            return base.FinishedLaunching(uiApplication, launchOptions);
+            return true;
         }
 
         public override void WillEnterForeground(UIApplication uiApplication)
