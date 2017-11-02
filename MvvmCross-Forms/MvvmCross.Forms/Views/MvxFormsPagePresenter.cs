@@ -591,17 +591,19 @@ namespace MvvmCross.Forms.Views
 
         public virtual void ReplaceRoot(Page page)
         {
-            if(FormsApplication.MainPage == null)
-                FormsApplication.MainPage = page;
-            else if(FormsApplication.MainPage is MvxNavigationPage navigationPage)
+            try
             {
-                navigationPage.Navigation.InsertPageBefore(page, navigationPage.CurrentPage);
-                navigationPage.Navigation.PopToRootAsync();
+                FormsApplication.MainPage = page;
             }
-            else
+            catch (Exception ex)
             {
-                //This may fail
-                FormsApplication.MainPage = page;
+                if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
+                {
+                    navigationPage.Navigation.InsertPageBefore(page, navigationPage.CurrentPage);
+                    navigationPage.Navigation.PopToRootAsync();
+                }
+                else
+                    throw new MvxException("Cannot replace MainPage root", ex);
             }
         }
     }

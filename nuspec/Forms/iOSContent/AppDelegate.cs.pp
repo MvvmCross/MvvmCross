@@ -9,8 +9,6 @@ namespace $rootnamespace$
     [Register("AppDelegate")]
     public partial class AppDelegate : MvxFormsApplicationDelegate
     {
-        public override UIWindow Window { get; set; }
-
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
@@ -22,10 +20,10 @@ namespace $rootnamespace$
             startup.Start();
 
             LoadApplication(setup.FormsApplication);
-
+			
             Window.MakeKeyAndVisible();
 
-            return true;
+            return base.FinishedLaunching(app, options);
         }
     }
 }
