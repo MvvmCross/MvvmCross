@@ -48,6 +48,7 @@ namespace MvvmCross.Core.Platform
                 throw new MvxException("Cannot start primary - as state already {0}", State);
             }
             State = MvxSetupState.InitializingPrimary;
+            MvxTrace.Trace("Setup: Primary start");
             InitializeIoC();
             State = MvxSetupState.InitializedPrimary;
             if (State != MvxSetupState.InitializedPrimary)
@@ -56,56 +57,56 @@ namespace MvvmCross.Core.Platform
             }
             State = MvxSetupState.InitializingSecondary;
             InitializeLoggingServices();
-            Log.Trace("Setup: FirstChance start");
+            MvxTrace.Trace("Setup: FirstChance start");
             InitializeFirstChance();
-            Log.Trace("Setup: DebugServices start");
+            MvxTrace.Trace("Setup: DebugServices start");
             InitializeDebugServices();
-            Log.Trace("Setup: PlatformServices start");
+            MvxTrace.Trace("Setup: PlatformServices start");
             InitializePlatformServices();
-            Log.Trace("Setup: MvvmCross settings start");
+            MvxTrace.Trace("Setup: MvvmCross settings start");
             InitializeSettings();
-            Log.Trace("Setup: Singleton Cache start");
+            MvxTrace.Trace("Setup: Singleton Cache start");
             InitializeSingletonCache();
         }
 
         public virtual void InitializeSecondary()
         {
-            Log.Trace("Setup: Bootstrap actions");
+            MvxTrace.Trace("Setup: Bootstrap actions");
             PerformBootstrapActions();
-            Log.Trace("Setup: StringToTypeParser start");
+            MvxTrace.Trace("Setup: StringToTypeParser start");
             InitializeStringToTypeParser();
-            Log.Trace("Setup: CommandHelper start");
+            MvxTrace.Trace("Setup: CommandHelper start");
             InitializeCommandHelper();
-            Log.Trace("Setup: PluginManagerFramework start");
+            MvxTrace.Trace("Setup: PluginManagerFramework start");
             var pluginManager = InitializePluginFramework();
-            Log.Trace("Setup: Create App");
+            MvxTrace.Trace("Setup: Create App");
             var app = CreateApp();
             Mvx.RegisterSingleton(app);
-            Log.Trace("Setup: NavigationService");
+            MvxTrace.Trace("Setup: NavigationService");
             InitializeNavigationService(app);
-            Log.Trace("Setup: Load navigation routes");
+            MvxTrace.Trace("Setup: Load navigation routes");
             LoadNavigationServiceRoutes();
-            Log.Trace("Setup: App start");
+            MvxTrace.Trace("Setup: App start");
             InitializeApp(pluginManager, app);
-            Log.Trace("Setup: ViewModelTypeFinder start");
+            MvxTrace.Trace("Setup: ViewModelTypeFinder start");
             InitializeViewModelTypeFinder();
-            Log.Trace("Setup: ViewsContainer start");
+            MvxTrace.Trace("Setup: ViewsContainer start");
             InitializeViewsContainer();
-            Log.Trace("Setup: ViewDispatcher start");
+            MvxTrace.Trace("Setup: ViewDispatcher start");
             InitializeViewDispatcher();
-            Log.Trace("Setup: Views start");
+            MvxTrace.Trace("Setup: Views start");
             InitializeViewLookup();
-            Log.Trace("Setup: CommandCollectionBuilder start");
+            MvxTrace.Trace("Setup: CommandCollectionBuilder start");
             InitializeCommandCollectionBuilder();
-            Log.Trace("Setup: NavigationSerializer start");
+            MvxTrace.Trace("Setup: NavigationSerializer start");
             InitializeNavigationSerializer();
-            Log.Trace("Setup: InpcInterception start");
+            MvxTrace.Trace("Setup: InpcInterception start");
             InitializeInpcInterception();
-            Log.Trace("Setup: InpcInterception start");
+            MvxTrace.Trace("Setup: InpcInterception start");
             InitializeViewModelCache();
-            Log.Trace("Setup: LastChance start");
+            MvxTrace.Trace("Setup: LastChance start");
             InitializeLastChance();
-            Log.Trace("Setup: Secondary end");
+            MvxTrace.Trace("Setup: Secondary end");
             State = MvxSetupState.Initialized;
         }
 
