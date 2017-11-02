@@ -246,7 +246,7 @@ namespace MvvmCross.Core.Platform
             }
         }
 
-        [Obsolete]
+        [Obsolete("IMvxTrace is replaced by IMvxLogProvider and IMvxLog")]
         protected virtual void InitializeDebugServices()
         {
             var debugTrace = CreateDebugTrace();
