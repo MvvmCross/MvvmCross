@@ -1,6 +1,5 @@
 using System;
 using MvvmCross.Platform.Logging;
- 
 
 namespace Playground.Uwp
 {
