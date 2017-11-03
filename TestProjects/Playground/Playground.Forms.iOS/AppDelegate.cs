@@ -10,6 +10,8 @@ namespace Playground.Forms.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : MvxFormsApplicationDelegate
     {
+        public override UIWindow Window { get; set; }
+
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
@@ -24,7 +26,11 @@ namespace Playground.Forms.iOS
 
             Window.MakeKeyAndVisible();
 
-            return base.FinishedLaunching(app, options);
+            var trick = typeof(System.Console);
+            var color = System.Console.ForegroundColor;
+            System.Console.ForegroundColor = ConsoleColor.Blue;
+            System.Console.ForegroundColor = color;
+            return true;
         }
     }
 }
