@@ -33,7 +33,7 @@ namespace MvvmCross.Core.Platform
 
         protected abstract IMvxViewDispatcher CreateViewDispatcher();
 
-        protected IMvxLog Log { get; private set; }
+        protected IMvxLog SetupLog { get; private set; }
 
         public virtual void Initialize()
         {
