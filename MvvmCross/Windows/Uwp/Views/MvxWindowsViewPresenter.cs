@@ -205,6 +205,12 @@ namespace MvvmCross.Uwp.Views
             var viewType = ViewsContainer.GetViewType(viewModelType);
             var attributes = viewType.GetCustomAttributes(typeof(MvxBasePresentationAttribute), true).ToList();
             var attribute = attributes.OfType<MvxBasePresentationAttribute>().FirstOrDefault();
+
+            if (attribute != null)
+            {
+                attribute.ViewType = viewType;
+            }
+
             return attribute;
         }
 
