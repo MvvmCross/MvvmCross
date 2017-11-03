@@ -5,7 +5,7 @@
 	<key>CFBundleName</key>
 	<string>Playground.Forms.iOS</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.futura4retail.Playground-Forms-iOS</string>
+	<string>com.companyname.Playground-Forms-iOS</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -13,7 +13,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>9.3</string>
+	<string>10.3</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
