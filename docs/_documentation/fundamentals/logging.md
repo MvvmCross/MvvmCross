@@ -4,8 +4,6 @@ title: Diagnostic & Logging
 category: Fundamentals
 ---
 
-# Diagnostic & logging
-
 A great option to log messages, info and errors to the console or other outputs is MvxLog! It is very extendeble and easy to use.
 
 In your ViewModel this could look like:
