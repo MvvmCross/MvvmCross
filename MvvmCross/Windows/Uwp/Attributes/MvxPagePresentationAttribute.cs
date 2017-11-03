@@ -7,7 +7,7 @@ using MvvmCross.Core.Views;
 
 namespace MvvmCross.Uwp.Attributes
 {
-    public class ContentPagePresentationAttribute : MvxBasePresentationAttribute
+    public class MvxPagePresentationAttribute : MvxBasePresentationAttribute
     {
     }
 }

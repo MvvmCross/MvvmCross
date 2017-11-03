@@ -1,0 +1,41 @@
+using System;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Navigation;
+using MvvmCross.Uwp.Attributes;
+using MvvmCross.Uwp.Views;
+using Playground.Core.ViewModels;
+
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+
+namespace Playground.Uwp.Views
+{
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    [MvxPagePresentation]
+    public sealed partial class SplitRootView : MvxWindowsPage
+    {
+        public SplitRootView()
+        {
+            this.InitializeComponent();
+            this.DataContextChanged += OnDataContextChanged;
+        }
+
+        private void OnDataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
+        {
+            if (DataContext is SplitRootViewModel viewModel)
+            {
+                viewModel.ShowInitialMenuCommand.Execute();
+                viewModel.ShowDetailCommand.Execute();
+            }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            
+            base.OnNavigatedTo(e);
+        }
+
+        
+    }
+}

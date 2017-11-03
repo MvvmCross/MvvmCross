@@ -6,7 +6,7 @@ using Playground.Core.ViewModels;
 namespace Playground.Uwp.Views
 {
     [MvxViewFor(typeof(RootViewModel))]
-    [ContentPagePresentation]
+    [MvxPagePresentation]
     public sealed partial class RootView : MvxWindowsPage
     {
         public RootView()

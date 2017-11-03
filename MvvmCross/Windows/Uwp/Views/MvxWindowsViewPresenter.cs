@@ -9,6 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Core;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
@@ -82,9 +85,75 @@ namespace MvvmCross.Uwp.Views
                     ShowAction = (view, attribute, request) => ShowPage(view, (MvxPagePresentationAttribute)attribute, request),
                     CloseAction = (viewModel, attribute) => ClosePage(viewModel, (MvxPagePresentationAttribute)attribute)
                 });
+
+            AttributeTypesToActionsDictionary.Add(
+                typeof(MvxSplitViewPresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                    ShowAction = (view, attribute, request) => ShowSplitView(view, (MvxSplitViewPresentationAttribute)attribute, request),
+                    CloseAction = (viewModel, attribute) => CloseSplitView(viewModel, (MvxSplitViewPresentationAttribute)attribute)
+                });
         }
 
-        private bool ClosePage(IMvxViewModel viewModel, MvxPagePresentationAttribute attribute)
+       
+
+        private void ShowSplitView(Type view, MvxSplitViewPresentationAttribute attribute, MvxViewModelRequest request)
+        {
+            var viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
+            var viewType = viewsContainer.GetViewType(request.ViewModelType);
+
+            if (_rootFrame.Content is MvxWindowsPage currentPage)
+            {
+                var splitView = FindControl<SplitView>(currentPage.Content, typeof(SplitView));
+                if (splitView == null)
+                {
+                    splitView = new SplitView() {DisplayMode = SplitViewDisplayMode.Inline, IsPaneOpen = true};
+                    currentPage.Content = splitView;
+                }
+
+                if (attribute.Position == SplitPanePosition.Content)
+                {
+                    splitView.Content = (UIElement)Activator.CreateInstance(viewType);
+                }
+                else if (attribute.Position == SplitPanePosition.Pane)
+                {
+                    splitView.Pane = (UIElement) Activator.CreateInstance(viewType);
+                }
+
+            }
+        }
+
+        private T FindControl<T>(UIElement parent, Type targetType) where T : FrameworkElement
+        {
+
+            if (parent == null) return null;
+
+            if (parent.GetType() == targetType)
+            {
+                return (T)parent;
+            }
+
+            T result = null;
+            int count = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < count; i++)
+            {
+                UIElement child = (UIElement)VisualTreeHelper.GetChild(parent, i);
+
+                if (FindControl<T>(child, targetType) != null)
+                {
+                    result = FindControl<T>(child, targetType);
+                    break;
+                }
+            }
+            return result;
+        }
+
+        private bool CloseSplitView(IMvxViewModel viewModel, MvxSplitViewPresentationAttribute attribute)
+        {
+            return ClosePage(viewModel, attribute);
+        }
+
+        private bool ClosePage(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute)
         {
             var currentView = _rootFrame.Content as IMvxView;
             if (currentView == null)
@@ -134,8 +203,8 @@ namespace MvvmCross.Uwp.Views
         public MvxBasePresentationAttribute GetPresentationAttribute(Type viewModelType)
         {
             var viewType = ViewsContainer.GetViewType(viewModelType);
-            var attributes = viewType.GetCustomAttributes(typeof(MvxPagePresentationAttribute), true).ToList();
-            var attribute = attributes.OfType<MvxPagePresentationAttribute>().FirstOrDefault();
+            var attributes = viewType.GetCustomAttributes(typeof(MvxBasePresentationAttribute), true).ToList();
+            var attribute = attributes.OfType<MvxBasePresentationAttribute>().FirstOrDefault();
             return attribute;
         }
 

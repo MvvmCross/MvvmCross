@@ -105,6 +105,15 @@
     <Compile Include="Views\RootView.xaml.cs">
       <DependentUpon>RootView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SplitDetailView.xaml.cs">
+      <DependentUpon>SplitDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitMasterView.xaml.cs">
+      <DependentUpon>SplitMasterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitRootView.xaml.cs">
+      <DependentUpon>SplitRootView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -180,6 +189,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RootView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SplitDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SplitMasterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SplitRootView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
