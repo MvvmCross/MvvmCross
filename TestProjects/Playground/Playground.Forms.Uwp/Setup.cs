@@ -7,6 +7,7 @@ using Windows.ApplicationModel.Activation;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
+using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Uwp;
 using MvvmCross.Forms.Uwp.Presenters;
 using MvvmCross.Platform;
@@ -32,17 +33,14 @@ namespace Playground.Forms.Uwp
             return new Core.App();
         }
 
-        protected override IMvxLogProvider CreateLogProvider()
+        protected override MvxFormsApplication CreateFormsApplication()
         {
-            return new EmptyVoidLogProvider();
+            return new Core.FormsApp();
         }
 
         protected override IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
         {
-
-            Xamarin.Forms.Forms.Init(_launchActivatedEventArgs);
-            var xamarinFormsApp = CreateFormsApplication();
-            var presenter = new MvxFormsUwpViewPresenter(rootFrame, xamarinFormsApp);
+            var presenter = new MvxFormsUwpViewPresenter(rootFrame, FormsApplication);
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
 
             return presenter;
