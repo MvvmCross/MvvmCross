@@ -43,7 +43,8 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\ContentPagePresentationAttribute.cs" />
+    <Compile Include="Attributes\MvxPagePresentationAttribute.cs" />
+    <Compile Include="Attributes\MvxSplitViewPresentationAttribute.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Platform\MvxWindowsSetup.cs" />
     <Compile Include="..\..\..\AssemblyInfo.cs">
