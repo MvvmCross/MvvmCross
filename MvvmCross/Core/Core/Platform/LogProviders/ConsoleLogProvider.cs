@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq.Expressions;
@@ -179,6 +179,9 @@ namespace MvvmCross.Core.Platform.LogProviders
             static ConsoleColorValues()
             {
                 Type = Type.GetType("System.ConsoleColor");
+                if (Type == null)
+                    Type = Type.GetType("System.ConsoleColor, System.Console");
+
                 if (Type == null) return;
                 Red = (int)Enum.Parse(Type, "Red", false);
                 Yellow = (int)Enum.Parse(Type, "Yellow", false);
