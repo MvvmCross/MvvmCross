@@ -53,6 +53,15 @@ namespace Playground.Uwp
             {
                 if (rootFrame.Content == null)
                 {
+                    var color = System.ConsoleColor.Blue;
+                    var colorType = color.GetType();
+                    var temp = System.Console.ForegroundColor;
+                    System.Console.ForegroundColor = color;
+                    System.Console.ForegroundColor = temp;
+
+                    var test = Type.GetType("System.ConsoleColor, System.Console");
+                    var test2 = Type.GetType("System.ConsoleColor");
+
                     var setup = new Setup(rootFrame);
                     setup.Initialize();
 

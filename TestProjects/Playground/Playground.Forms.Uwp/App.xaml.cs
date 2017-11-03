@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -49,6 +49,18 @@ namespace Playground.Forms.Uwp
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
+
+                var color = System.ConsoleColor.Blue;
+                var colorType = color.GetType();
+                var temp = System.Console.ForegroundColor;
+                System.Console.ForegroundColor = color;
+                System.Console.ForegroundColor = temp;
+
+                var test = Type.GetType("System.ConsoleColor, System.Console");
+                var test2 = Type.GetType("System.ConsoleColor");
+
+                var setup = new Setup(rootFrame, e);
+                setup.Initialize();
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

@@ -1,4 +1,4 @@
-﻿// MvxStoreViewPresenter.cs
+// MvxStoreViewPresenter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,6 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Windows.UI.Core;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
@@ -13,11 +15,12 @@ using MvvmCross.Core.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Uwp.Attributes;
 
 namespace MvvmCross.Uwp.Views
 {
     public class MvxWindowsViewPresenter
-        : MvxViewPresenter, IMvxWindowsViewPresenter
+        : MvxViewPresenter, IMvxWindowsViewPresenter, IMvxAttributeViewPresenter
     {
         protected readonly IMvxWindowsFrame _rootFrame;
 
@@ -58,23 +61,58 @@ namespace MvvmCross.Uwp.Views
             }
         }
 
-        protected virtual async void BackButtonOnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
-        {
-            if (backRequestedEventArgs.Handled)
-                return;
+        private Dictionary<Type, MvxPresentationAttributeAction> _attributeTypesActionsDictionary;
+        public Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary {
+            get {
+                if (_attributeTypesActionsDictionary == null)
+                {
+                    _attributeTypesActionsDictionary = new Dictionary<Type, MvxPresentationAttributeAction>();
+                    RegisterAttributeTypes();
+                }
+                return _attributeTypesActionsDictionary;
+            }
+        }
 
+        public void RegisterAttributeTypes()
+        {
+            AttributeTypesToActionsDictionary.Add(
+                typeof(MvxPagePresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                    ShowAction = (view, attribute, request) => ShowPage(view, (MvxPagePresentationAttribute)attribute, request),
+                    CloseAction = (viewModel, attribute) => ClosePage(viewModel, (MvxPagePresentationAttribute)attribute)
+                });
+        }
+
+        private bool ClosePage(IMvxViewModel viewModel, MvxPagePresentationAttribute attribute)
+        {
             var currentView = _rootFrame.Content as IMvxView;
             if (currentView == null)
             {
                 Mvx.Warning("Ignoring close for viewmodel - rootframe has no current page");
-                return;
+                return false;
             }
 
-            var navigationService = Mvx.Resolve<IMvxNavigationService>();
-            backRequestedEventArgs.Handled = await navigationService.Close(currentView.ViewModel);
+            if (currentView.ViewModel != viewModel)
+            {
+                Mvx.Warning("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
+                return false;
+            }
+
+            if (!_rootFrame.CanGoBack)
+            {
+                Mvx.Warning("Ignoring close for viewmodel - rootframe refuses to go back");
+                return false;
+            }
+
+            _rootFrame.GoBack();
+
+            HandleBackButtonVisibility();
+
+            return true;
         }
 
-        public override void Show(MvxViewModelRequest request)
+        private void ShowPage(Type view, MvxPagePresentationAttribute attribute, MvxViewModelRequest request)
         {
             try
             {
@@ -89,8 +127,64 @@ namespace MvvmCross.Uwp.Views
             catch (Exception exception)
             {
                 MvxTrace.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
-                               exception.ToLongString());
+                    exception.ToLongString());
             }
+        }
+
+        public MvxBasePresentationAttribute GetPresentationAttribute(Type viewModelType)
+        {
+            var viewType = ViewsContainer.GetViewType(viewModelType);
+            var attributes = viewType.GetCustomAttributes(typeof(MvxPagePresentationAttribute), true).ToList();
+            var attribute = attributes.OfType<MvxPagePresentationAttribute>().FirstOrDefault();
+            return attribute;
+        }
+
+        public MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
+        {
+            return null;
+        }
+
+        public MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, Type viewType)
+        {
+            return null;
+        }
+
+        protected virtual async void BackButtonOnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
+        {
+            if (backRequestedEventArgs.Handled)
+                return;
+
+            var currentView = _rootFrame.Content as IMvxView;
+            if (currentView == null)
+            {
+                Mvx.Warning("Ignoring close for viewmodel - rootframe has no current page");
+                return;
+            }
+
+            var navigationService = Mvx.Resolve<IMvxNavigationService>();
+
+            backRequestedEventArgs.Handled = await navigationService.Close(currentView.ViewModel);
+        }
+
+        public override void Show(MvxViewModelRequest request)
+        {
+            var attribute = GetPresentationAttribute(request.ViewModelType);
+            attribute.ViewModelType = request.ViewModelType;
+            var viewType = attribute.ViewType;
+            var attributeType = attribute.GetType();
+
+            if (AttributeTypesToActionsDictionary.TryGetValue(
+                attributeType,
+                out MvxPresentationAttributeAction attributeAction))
+            {
+                if (attributeAction.ShowAction == null)
+                    throw new NullReferenceException($"attributeAction.ShowAction is null for attribute: {attributeType.Name}");
+
+                attributeAction.ShowAction.Invoke(viewType, attribute, request);
+                return;
+            }
+
+            throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
         }
 
         protected virtual string GetRequestText(MvxViewModelRequest request)
@@ -124,28 +218,21 @@ namespace MvvmCross.Uwp.Views
 
         public override void Close(IMvxViewModel viewModel)
         {
-            var currentView = _rootFrame.Content as IMvxView;
-            if (currentView == null)
+            var attribute = GetPresentationAttribute(viewModel.GetType());
+            var attributeType = attribute.GetType();
+
+            if (AttributeTypesToActionsDictionary.TryGetValue(
+                attributeType,
+                out MvxPresentationAttributeAction attributeAction))
             {
-                Mvx.Warning("Ignoring close for viewmodel - rootframe has no current page");
+                if (attributeAction.CloseAction == null)
+                    throw new NullReferenceException($"attributeAction.CloseAction is null for attribute: {attributeType.Name}");
+
+                attributeAction.CloseAction.Invoke(viewModel, attribute);
                 return;
             }
 
-            if (currentView.ViewModel != viewModel)
-            {
-                Mvx.Warning("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
-                return;
-            }
-
-            if (!_rootFrame.CanGoBack)
-            {
-                Mvx.Warning("Ignoring close for viewmodel - rootframe refuses to go back");
-                return;
-            }
-
-            _rootFrame.GoBack();
-
-            HandleBackButtonVisibility();
+            throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
         }
 
         protected virtual void HandleBackButtonVisibility()
