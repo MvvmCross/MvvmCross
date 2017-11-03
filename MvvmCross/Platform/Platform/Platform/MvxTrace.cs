@@ -11,7 +11,7 @@ using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Platform.Platform
 {
-    [Obsolete]
+    [Obsolete("IMvxTrace is replaced by IMvxLogProvider and IMvxLog")]
     public class MvxTrace
         : MvxSingleton<IMvxTrace>, IMvxTrace
     {
