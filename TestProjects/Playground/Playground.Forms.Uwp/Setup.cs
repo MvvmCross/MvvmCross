@@ -37,13 +37,6 @@ namespace Playground.Forms.Uwp
             return new EmptyVoidLogProvider();
         }
 
-        protected override void InitializeLastChance()
-        {
-            base.InitializeLastChance();
-            var a = Mvx.Resolve<IMvxNavigationService>();
-            var b = Mvx.Resolve<IMvxLogProvider>();
-        }
-
         protected override IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
         {
 

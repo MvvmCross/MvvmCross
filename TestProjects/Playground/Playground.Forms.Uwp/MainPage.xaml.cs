@@ -16,16 +16,11 @@ namespace Playground.Forms.Uwp
         public MainPage()
         {
             this.InitializeComponent();
-            var bla = typeof(MvvmCross.Plugins.JsonLocalization.PluginLoader);
            
             InitializeComponent();
-            
 
             var start = Mvx.Resolve<IMvxAppStart>();
             start.Start();
-
-            
-            
 
             var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsUwpViewPresenter;
             LoadApplication(presenter.FormsApplication);
