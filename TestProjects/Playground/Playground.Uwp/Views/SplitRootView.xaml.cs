@@ -1,6 +1,4 @@
-using System;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Navigation;
 using MvvmCross.Uwp.Attributes;
 using MvvmCross.Uwp.Views;
 using Playground.Core.ViewModels;
@@ -29,13 +27,5 @@ namespace Playground.Uwp.Views
                 viewModel.ShowDetailCommand.Execute();
             }
         }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            
-            base.OnNavigatedTo(e);
-        }
-
-        
     }
 }

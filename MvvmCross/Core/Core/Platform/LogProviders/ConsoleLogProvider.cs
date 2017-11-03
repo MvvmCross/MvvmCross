@@ -178,9 +178,7 @@ namespace MvvmCross.Core.Platform.LogProviders
 
             static ConsoleColorValues()
             {
-                Type = Type.GetType("System.ConsoleColor");
-                if (Type == null)
-                    Type = Type.GetType("System.ConsoleColor, System.Console");
+                Type = Type.GetType("System.ConsoleColor") ?? Type.GetType("System.ConsoleColor, System.Console");
 
                 if (Type == null) return;
                 Red = (int)Enum.Parse(Type, "Red", false);

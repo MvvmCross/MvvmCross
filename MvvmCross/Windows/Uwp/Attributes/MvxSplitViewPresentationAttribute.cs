@@ -4,7 +4,13 @@ namespace MvvmCross.Uwp.Attributes
 {
     public class MvxSplitViewPresentationAttribute : MvxBasePresentationAttribute
     {
-        public MvxSplitViewPresentationAttribute(SplitPanePosition position = SplitPanePosition.Content)
+
+        public MvxSplitViewPresentationAttribute() : this(SplitPanePosition.Content)
+        {
+            
+        }
+
+        public MvxSplitViewPresentationAttribute(SplitPanePosition position)
         {
             Position = position;
         }
