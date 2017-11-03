@@ -35,31 +35,25 @@ namespace MvvmCross.Uwp.Views
         }
 
         private IMvxViewModelTypeFinder _viewModelTypeFinder;
-        public IMvxViewModelTypeFinder ViewModelTypeFinder
-        {
-            get
-            {
+        public IMvxViewModelTypeFinder ViewModelTypeFinder {
+            get {
                 if (_viewModelTypeFinder == null)
                     _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
                 return _viewModelTypeFinder;
             }
-            set
-            {
+            set {
                 _viewModelTypeFinder = value;
             }
         }
 
         private IMvxViewsContainer _viewsContainer;
-        public IMvxViewsContainer ViewsContainer
-        {
-            get
-            {
+        public IMvxViewsContainer ViewsContainer {
+            get {
                 if (_viewsContainer == null)
                     _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
                 return _viewsContainer;
             }
-            set
-            {
+            set {
                 _viewsContainer = value;
             }
         }
@@ -83,7 +77,7 @@ namespace MvvmCross.Uwp.Views
                 new MvxPresentationAttributeAction
                 {
                     ShowAction = (view, attribute, request) => ShowPage(view, (MvxPagePresentationAttribute)attribute, request),
-                    CloseAction = (viewModel, attribute) => ClosePage(viewModel, (MvxPagePresentationAttribute)attribute)
+                    CloseAction = (viewModel, attribute) => ClosePage(viewModel)
                 });
 
             AttributeTypesToActionsDictionary.Add(
@@ -95,7 +89,7 @@ namespace MvvmCross.Uwp.Views
                 });
         }
 
-       
+
 
         private void ShowSplitView(Type view, MvxSplitViewPresentationAttribute attribute, MvxViewModelRequest request)
         {
@@ -107,7 +101,7 @@ namespace MvvmCross.Uwp.Views
                 var splitView = FindControl<SplitView>(currentPage.Content, typeof(SplitView));
                 if (splitView == null)
                 {
-                    splitView = new SplitView() {DisplayMode = SplitViewDisplayMode.Inline, IsPaneOpen = true};
+                    splitView = new SplitView { DisplayMode = SplitViewDisplayMode.Inline, IsPaneOpen = true };
                     currentPage.Content = splitView;
                 }
 
@@ -117,16 +111,18 @@ namespace MvvmCross.Uwp.Views
                 }
                 else if (attribute.Position == SplitPanePosition.Pane)
                 {
-                    splitView.Pane = (UIElement) Activator.CreateInstance(viewType);
+                    splitView.Pane = (UIElement)Activator.CreateInstance(viewType);
                 }
-
             }
         }
 
         private T FindControl<T>(UIElement parent, Type targetType) where T : FrameworkElement
         {
 
-            if (parent == null) return null;
+            if (parent == null)
+            {
+                return null;
+            }
 
             if (parent.GetType() == targetType)
             {
@@ -150,10 +146,10 @@ namespace MvvmCross.Uwp.Views
 
         private bool CloseSplitView(IMvxViewModel viewModel, MvxSplitViewPresentationAttribute attribute)
         {
-            return ClosePage(viewModel, attribute);
+            return ClosePage(viewModel);
         }
 
-        private bool ClosePage(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute)
+        private bool ClosePage(IMvxViewModel viewModel)
         {
             var currentView = _rootFrame.Content as IMvxView;
             if (currentView == null)
@@ -253,7 +249,9 @@ namespace MvvmCross.Uwp.Views
                 out MvxPresentationAttributeAction attributeAction))
             {
                 if (attributeAction.ShowAction == null)
+                {
                     throw new NullReferenceException($"attributeAction.ShowAction is null for attribute: {attributeType.Name}");
+                }
 
                 attributeAction.ShowAction.Invoke(viewType, attribute, request);
                 return;
@@ -300,8 +298,9 @@ namespace MvvmCross.Uwp.Views
                 attributeType,
                 out MvxPresentationAttributeAction attributeAction))
             {
-                if (attributeAction.CloseAction == null)
+                if (attributeAction.CloseAction == null) { 
                     throw new NullReferenceException($"attributeAction.CloseAction is null for attribute: {attributeType.Name}");
+                }
 
                 attributeAction.CloseAction.Invoke(viewModel, attribute);
                 return;
