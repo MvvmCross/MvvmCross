@@ -25,10 +25,5 @@ namespace Playground.Uwp
         {
             return new Core.App();
         }
-
-        protected override IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
-        {
-            return base.CreateViewPresenter(rootFrame);
-        }
     }
 }

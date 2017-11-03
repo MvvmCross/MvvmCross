@@ -1,13 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MvvmCross.Platform.Logging;
 
 namespace Playground.Forms.Uwp
 {
-
     public class EmptyVoidLog : IMvxLog
     {
         public bool Log(MvxLogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters)
