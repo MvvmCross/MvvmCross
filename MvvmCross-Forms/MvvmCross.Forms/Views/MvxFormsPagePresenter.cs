@@ -172,8 +172,9 @@ namespace MvvmCross.Forms.Views
                     if (attribute.WrapInNavigationPage && FormsApplication.MainPage is MvxNavigationPage currentPage)
                     {
                         if (attribute.NoHistory)
-                            currentPage.PopToRootAsync(attribute.Animated);
-                        currentPage.PushAsync(page, attribute.Animated);
+                            ReplaceNavigationRoot(currentPage, page, attribute);
+                        else
+                            currentPage.PushAsync(page, attribute.Animated);
                     }
                     else if (attribute.WrapInNavigationPage)
                         ReplaceRoot(new MvxNavigationPage(page));
@@ -244,8 +245,9 @@ namespace MvvmCross.Forms.Views
             if (attribute.WrapInNavigationPage && FormsApplication.MainPage is MvxNavigationPage navigationPage)
             {
                 if (attribute.NoHistory)
-                    navigationPage.PopToRootAsync(attribute.Animated);
-                navigationPage.PushAsync(page, attribute.Animated);
+                    ReplaceNavigationRoot(navigationPage, page, attribute);
+                else
+                    navigationPage.PushAsync(page, attribute.Animated);
             }
             else if (attribute.WrapInNavigationPage)
             {
@@ -295,8 +297,9 @@ namespace MvvmCross.Forms.Views
                     if (attribute.WrapInNavigationPage && FormsApplication.MainPage is MvxNavigationPage currentNavigationPage)
                     {
                         if (attribute.NoHistory)
-                            currentNavigationPage.PopToRootAsync(attribute.Animated);
-                        currentNavigationPage.PushAsync(page, attribute.Animated);
+                            ReplaceNavigationRoot(currentNavigationPage, page, attribute);
+                        else
+                            currentNavigationPage.PushAsync(page, attribute.Animated);
                     }
                     else if (attribute.WrapInNavigationPage)
                         ReplaceRoot(new MvxNavigationPage(page));
@@ -318,8 +321,9 @@ namespace MvvmCross.Forms.Views
                         masterDetailHost.Master = new MvxContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : "MvvmCross" };
                         masterDetailHost.Detail = new MvxContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : "MvvmCross" };
                         if (attribute.NoHistory)
-                            navigationPage.PopToRootAsync(attribute.Animated);
-                        navigationPage.PushAsync(masterDetailHost, attribute.Animated);
+                            ReplaceNavigationRoot(navigationPage, masterDetailHost, attribute);
+                        else
+                            navigationPage.PushAsync(masterDetailHost, attribute.Animated);
                     }
                 }
                 else if (masterDetailHost == null)
@@ -335,8 +339,9 @@ namespace MvvmCross.Forms.Views
                     if (attribute.WrapInNavigationPage && masterDetailHost.Master is MvxNavigationPage navigationMasterPage)
                     {
                         if (attribute.NoHistory)
-                            navigationMasterPage.PopToRootAsync(attribute.Animated);
-                        navigationMasterPage.PushAsync(page, attribute.Animated);
+                            ReplaceNavigationRoot(navigationMasterPage, page, attribute);
+                        else
+                            navigationMasterPage.PushAsync(navigationMasterPage, attribute.Animated);
                     }
                     else if (attribute.WrapInNavigationPage)
                         masterDetailHost.Master = new MvxNavigationPage(page) { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : "MvvmCross" };
@@ -348,8 +353,9 @@ namespace MvvmCross.Forms.Views
                     if (attribute.WrapInNavigationPage && masterDetailHost.Detail is MvxNavigationPage navigationDetailPage)
                     {
                         if (attribute.NoHistory)
-                            navigationDetailPage.PopToRootAsync(attribute.Animated);
-                        navigationDetailPage.PushAsync(page, attribute.Animated);
+                            ReplaceNavigationRoot(navigationDetailPage, page, attribute);
+                        else
+                            navigationDetailPage.PushAsync(page, attribute.Animated);
                     }
                     else if (attribute.WrapInNavigationPage)
                         masterDetailHost.Detail = new MvxNavigationPage(page);
@@ -401,8 +407,9 @@ namespace MvvmCross.Forms.Views
                 if (attribute.WrapInNavigationPage && navigationPage?.Navigation?.ModalStack?.LastOrDefault() is MvxNavigationPage modalNavigationPage)
                 {
                     if (attribute.NoHistory)
-                        modalNavigationPage.PopToRootAsync(attribute.Animated);
-                    modalNavigationPage.PushAsync(page, attribute.Animated);
+                        ReplaceNavigationRoot(modalNavigationPage, page, attribute);
+                    else
+                        modalNavigationPage.PushAsync(page, attribute.Animated);
                 }
                 else if (attribute.WrapInNavigationPage)
                     navigationPage.Navigation.PushModalAsync(new MvxNavigationPage(page), attribute.Animated);
@@ -500,8 +507,9 @@ namespace MvvmCross.Forms.Views
                     if (attribute.WrapInNavigationPage && FormsApplication.MainPage is MvxNavigationPage currentPage)
                     {
                         if (attribute.NoHistory)
-                            currentPage.PopToRootAsync(attribute.Animated);
-                        currentPage.PushAsync(page, attribute.Animated);
+                            ReplaceNavigationRoot(currentPage, page, attribute);
+                        else
+                            currentPage.PushAsync(page, attribute.Animated);
                     }
                     else if (attribute.WrapInNavigationPage)
                         ReplaceRoot(new MvxNavigationPage(page));
@@ -589,6 +597,27 @@ namespace MvvmCross.Forms.Views
             }
         }
 
+        public virtual void ReplaceNavigationRoot(Page rootPage, Page page, MvxPagePresentationAttribute attribute)
+        {
+            if(rootPage is MvxNavigationPage navigationRootPage && navigationRootPage.CurrentPage is MvxNavigationPage navigationNestedPage)
+            {
+                navigationNestedPage.Navigation.InsertPageBefore(page, navigationNestedPage.CurrentPage);
+                navigationNestedPage.Navigation.PopToRootAsync(attribute.Animated);
+            }
+            else if(rootPage is MvxNavigationPage navigationPage)
+            {
+                navigationPage.Navigation.InsertPageBefore(page, navigationPage.CurrentPage);
+                navigationPage.Navigation.PopToRootAsync(attribute.Animated);
+            }
+            else if(rootPage?.Navigation != null)
+            {
+                rootPage.Navigation.InsertPageBefore(page, rootPage);
+                rootPage.Navigation.PopToRootAsync(attribute.Animated);
+            }
+            else
+                FormsApplication.MainPage = page;
+        }
+
         public virtual void ReplaceRoot(Page page)
         {
             try
@@ -597,13 +626,7 @@ namespace MvvmCross.Forms.Views
             }
             catch (Exception ex)
             {
-                if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
-                {
-                    navigationPage.Navigation.InsertPageBefore(page, navigationPage.CurrentPage);
-                    navigationPage.Navigation.PopToRootAsync();
-                }
-                else
-                    throw new MvxException("Cannot replace MainPage root", ex);
+                throw new MvxException("Cannot replace MainPage root", ex);
             }
         }
     }
