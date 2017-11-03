@@ -216,7 +216,7 @@ namespace MvvmCross.Core.Platform
             if (logProvider != null)
             {
                 Mvx.RegisterSingleton(logProvider);
-                Log = logProvider.GetLogFor<MvxSetup>();
+                SetupLog = logProvider.GetLogFor<MvxSetup>();
                 var globalLog = logProvider.GetLogFor<MvxLog>();
                 Mvx.RegisterSingleton(globalLog);
             }
