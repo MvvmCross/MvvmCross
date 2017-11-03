@@ -33,11 +33,13 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
     <file src="Forms\DroidContent\splash.png" target="content\MonoAndroid\Resources\drawable\splash.png" />
     <file src="Forms\DroidContent\SplashScreen.axml" target="content\MonoAndroid\Resources\layout\SplashScreen.axml" />
     <file src="Forms\DroidContent\SplashStyle.xml" target="content\MonoAndroid\Resources\values\SplashStyle.xml" />
+    <file src="DroidContent\LinkerPleaseInclude.cs.pp" target="content\MonoAndroid\LinkerPleaseInclude.cs.pp" />
 
     <!-- iOS - Content -->
     <file src="Forms\iOSContent\AppDelegate.cs.pp" target="content\Xamarin.iOS10\AppDelegate.cs.pp" />
     <file src="Forms\iOSContent\DebugTrace.cs.pp" target="content\Xamarin.iOS10\DebugTrace.cs.pp" />
     <file src="Forms\iOSContent\Setup.cs.pp" target="content\Xamarin.iOS10\Setup.cs.pp" />
+    <file src="iOSContent\LinkerPleaseInclude.cs.pp" target="content\Xamarin.iOS10\LinkerPleaseInclude.cs.pp" />
 
 	</files>
 </package>
