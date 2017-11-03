@@ -19,10 +19,13 @@ using MvvmCross.Uwp.Views;
 
 namespace Playground.Uwp.Views
 {
-    [MvxPagePresentation]
-    public sealed partial class ChildView : MvxWindowsPage
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    [MvxSplitViewPresentation(Position = SplitPanePosition.Pane)]
+    public sealed partial class SplitMasterView : MvxWindowsPage
     {
-        public ChildView()
+        public SplitMasterView()
         {
             this.InitializeComponent();
         }
