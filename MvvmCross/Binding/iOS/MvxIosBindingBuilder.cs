@@ -136,6 +136,11 @@ namespace MvvmCross.Binding.iOS
                 typeof(MvxUIDatePickerDateTargetBinding),
                 typeof(UIDatePicker),
                 MvxIosPropertyBinding.UIDatePicker_Date);
+                
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxUIDatePickerCountDownDurationTargetBinding),
+                typeof(UIDatePicker),
+                MvxIosPropertyBinding.UIDatePicker_CountDownDuration);
 
             registry.RegisterCustomBindingFactory<UITextField>(
                 MvxIosPropertyBinding.UITextField_ShouldReturn,
