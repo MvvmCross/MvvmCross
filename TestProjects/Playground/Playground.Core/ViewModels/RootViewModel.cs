@@ -40,6 +40,16 @@ namespace Playground.Core.ViewModels
             _counter = 3;
         }
 
+        public override void Prepare()
+        {
+            base.Prepare();
+        }
+
+        public override System.Threading.Tasks.Task Initialize()
+        {
+            return base.Initialize();
+        }
+
         protected override void SaveStateToBundle(IMvxBundle bundle)
         {
             base.SaveStateToBundle(bundle);
