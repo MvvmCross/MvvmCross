@@ -1,12 +1,16 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using Playground.Core.Models;
 
 namespace Playground.Core.ViewModels
 {
-    public class ChildViewModel : MvxViewModel
+    public class ChildViewModel : MvxViewModel<SampleModel>
     {
         private readonly IMvxNavigationService _navigationService;
+
+        private SampleModel _parameter;
 
         public ChildViewModel(IMvxNavigationService navigationService)
         {
@@ -24,9 +28,16 @@ namespace Playground.Core.ViewModels
             base.Prepare();
         }
 
-        public override System.Threading.Tasks.Task Initialize()
+        public override void Prepare(SampleModel parameter)
         {
-            return base.Initialize();
+            _parameter = parameter;
+        }
+
+        public async override System.Threading.Tasks.Task Initialize()
+        {
+            await base.Initialize();
+
+            await Task.Delay(8500);
         }
 
         public void Init()

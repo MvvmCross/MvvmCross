@@ -4,6 +4,7 @@ using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Logging;
+using Playground.Core.Models;
 
 namespace Playground.Core.ViewModels
 {
@@ -19,7 +20,7 @@ namespace Playground.Core.ViewModels
 
             logProvider.GetLogFor<RootViewModel>().Warn(() => "Testing log");
 
-            ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel>());
+            ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel, SampleModel>(new SampleModel { Message = "Hey", Value = 1.23m }));
 
             ShowModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalViewModel>());
 
