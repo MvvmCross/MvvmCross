@@ -19,6 +19,18 @@ namespace MvvmCross.Forms.Views
                 throw new ArgumentException("eventSource - eventSource should be an Element");
 
             _eventSource = eventSource;
+            _eventSource.BindingContextChangedCalled += HandleBindingContextChangedCalled;
+            _eventSource.ParentSetCalled += HandleParentSetCalled;
+        }
+
+        public virtual void HandleBindingContextChangedCalled(object sender, EventArgs e)
+        {
+
+        }
+
+        public virtual void HandleParentSetCalled(object sender, EventArgs e)
+        {
+
         }
     }
 }

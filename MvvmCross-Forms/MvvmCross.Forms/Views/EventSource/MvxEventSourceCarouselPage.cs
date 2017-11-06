@@ -19,7 +19,21 @@ namespace MvvmCross.Forms.Views.EventSource
             DisappearingCalled.Raise(this);
         }
 
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+            BindingContextChangedCalled.Raise(this);
+        }
+
+        protected override void OnParentSet()
+        {
+            base.OnParentSet();
+            ParentSetCalled.Raise(this);
+        }
+
         public event EventHandler AppearingCalled;
         public event EventHandler DisappearingCalled;
+        public event EventHandler BindingContextChangedCalled;
+        public event EventHandler ParentSetCalled;
     }
 }

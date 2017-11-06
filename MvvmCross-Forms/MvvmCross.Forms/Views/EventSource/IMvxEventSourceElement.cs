@@ -6,5 +6,8 @@ namespace MvvmCross.Forms.Views.EventSource
 {
     public interface IMvxEventSourceElement
     {
+        event EventHandler BindingContextChangedCalled;
+
+        event EventHandler ParentSetCalled;
     }
 }

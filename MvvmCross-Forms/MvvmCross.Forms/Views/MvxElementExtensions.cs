@@ -12,13 +12,9 @@ namespace MvvmCross.Forms.Views
 {
     public static class MvxElementExtensions
     {
-        public static void AdaptForBinding(this IMvxEventSourceElement element, IMvxBindingContextOwner contextOwner)
+        public static void AdaptForBinding(this IMvxEventSourceElement element)
         {
-            if (element is IMvxElement view)
-            {
-                contextOwner.BindingContext = new MvxBindingContext();
-                contextOwner.BindingContext.DataContext = view.ViewModel;
-            }
+            var adapter = new MvxElementAdapter(element);
         }
 
         public static void AdaptForBinding(this IMvxEventSourcePage page)
@@ -31,12 +27,12 @@ namespace MvvmCross.Forms.Views
             var adapter = new MvxCellAdapter(cell);
         }
 
-        public static void OnViewAppearing(this IMvxElement page)
+        public static void OnViewAppearing(this IMvxElement element)
         {
             var cache = Mvx.Resolve<IMvxChildViewModelCache>();
-            var cached = cache.Get(page.FindAssociatedViewModelTypeOrNull());
+            var cached = cache.Get(element.FindAssociatedViewModelTypeOrNull());
 
-            page.OnViewCreate(() => cached ?? page.LoadViewModel());
+            element.OnViewCreate(() => cached ?? element.LoadViewModel());
         }
 
         private static IMvxViewModel LoadViewModel(this IMvxElement element)
@@ -50,6 +46,7 @@ namespace MvvmCross.Forms.Views
             {
                 MvxTrace.Trace("No ViewModel class specified for {0} in LoadViewModel",
                                element.GetType().Name);
+                return null;
             }
 
             var loader = Mvx.Resolve<IMvxViewModelLoader>();

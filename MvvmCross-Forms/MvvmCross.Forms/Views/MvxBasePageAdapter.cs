@@ -21,6 +21,8 @@ namespace MvvmCross.Forms.Views
             _eventSource = eventSource;
             _eventSource.AppearingCalled += HandleAppearingCalled;
             _eventSource.DisappearingCalled += HandleDisappearingCalled;
+            _eventSource.BindingContextChangedCalled += HandleBindingContextChangedCalled;
+            _eventSource.ParentSetCalled += HandleParentSetCalled;
         }
 
         public virtual void HandleAppearingCalled(object sender, EventArgs e)
@@ -29,6 +31,16 @@ namespace MvvmCross.Forms.Views
         }
 
         public virtual void HandleDisappearingCalled(object sender, EventArgs e)
+        {
+
+        }
+
+        public virtual void HandleBindingContextChangedCalled(object sender, EventArgs e)
+        {
+
+        }
+
+        public virtual void HandleParentSetCalled(object sender, EventArgs e)
         {
 
         }

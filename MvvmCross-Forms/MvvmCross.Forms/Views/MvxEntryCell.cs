@@ -1,11 +1,12 @@
 ﻿using System;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Forms.Views.EventSource;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views
 {
-    public class MvxEntryCell : EntryCell, IMvxElement
+    public class MvxEntryCell : MvxEventSourceEntryCell, IMvxElement
     {
         public MvxEntryCell()
         {

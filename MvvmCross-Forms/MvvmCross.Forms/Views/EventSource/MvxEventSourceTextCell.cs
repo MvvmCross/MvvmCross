@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views.EventSource
 {
-    public class MvxEventSourceTabbedPage : TabbedPage, IMvxEventSourcePage
+    public class MvxEventSourceTextCell : TextCell, IMvxEventSourceCell
     {
         protected override void OnAppearing()
         {
@@ -16,6 +16,12 @@ namespace MvvmCross.Forms.Views.EventSource
         {
             base.OnDisappearing();
             DisappearingCalled.Raise(this);
+        }
+
+        protected override void OnTapped()
+        {
+            base.OnTapped();
+            TappedCalled.Raise(this);
         }
 
         protected override void OnBindingContextChanged()
@@ -32,6 +38,7 @@ namespace MvvmCross.Forms.Views.EventSource
 
         public event EventHandler AppearingCalled;
         public event EventHandler DisappearingCalled;
+        public event EventHandler TappedCalled;
         public event EventHandler BindingContextChangedCalled;
         public event EventHandler ParentSetCalled;
     }
