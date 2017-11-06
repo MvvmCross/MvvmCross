@@ -1,18 +1,21 @@
 ﻿using System;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Forms.Views.EventSource;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views
 {
-    public class MvxNavigationPage : NavigationPage, IMvxPage
+    public class MvxNavigationPage : MvxEventSourceNavigationPage, IMvxPage
     {
-        public MvxNavigationPage(Page root) : base (root)
-        {
-        }
-
         public MvxNavigationPage() : base()
         {
+            this.AdaptForBinding();
+        }
+
+        public MvxNavigationPage(Page root) : base(root)
+        {
+            this.AdaptForBinding();
         }
 
         public object DataContext
