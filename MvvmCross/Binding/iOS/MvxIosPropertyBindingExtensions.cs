@@ -73,6 +73,9 @@ namespace MvvmCross.Binding.iOS
 
         public static string BindDate(this UIDatePicker uiDatePicker)
             => MvxIosPropertyBinding.UIDatePicker_Date;
+        
+        public static string BindCountDownDuration(this UIDatePicker uiDatePicker)
+            => MvxIosPropertyBinding.UIDatePicker_CountDownDuration;
 
         public static string BindShouldReturn(this UITextField uiTextField)
             => MvxIosPropertyBinding.UITextField_ShouldReturn;
