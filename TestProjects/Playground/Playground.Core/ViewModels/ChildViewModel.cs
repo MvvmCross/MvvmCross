@@ -19,6 +19,11 @@ namespace Playground.Core.ViewModels
             ShowRootCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<RootViewModel>());
         }
 
+        public override void Prepare()
+        {
+            base.Prepare();
+        }
+
         public override System.Threading.Tasks.Task Initialize()
         {
             return base.Initialize();
