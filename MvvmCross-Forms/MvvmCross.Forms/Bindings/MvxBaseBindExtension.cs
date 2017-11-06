@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using MvvmCross.Binding;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,6 +16,7 @@ namespace MvvmCross.Forms.Bindings
         public IProvideValueTarget Target { get; private set; }
         public BindableObject BindableObj { get; private set; }
         public BindableProperty BindableProp { get; private set; }
+        public string PropertyName { get; private set;  }
 
         public abstract object ProvideValue(IServiceProvider serviceProvider);
 
@@ -23,6 +25,14 @@ namespace MvvmCross.Forms.Bindings
             Target = (IProvideValueTarget)serviceProvider.GetService(typeof(IProvideValueTarget));
             BindableObj = Target.TargetObject as BindableObject;
             BindableProp = Target.TargetProperty as BindableProperty;
+
+            if (Target.TargetProperty is BindableProperty bp)
+            {
+                BindableProp = bp;
+                PropertyName = bp.PropertyName;
+            }
+            else if (Target.TargetProperty is PropertyInfo pi)
+                PropertyName = pi.Name;
 
             return ProvideValue(serviceProvider);
         }

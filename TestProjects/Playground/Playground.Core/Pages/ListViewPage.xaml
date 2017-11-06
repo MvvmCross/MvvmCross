@@ -6,7 +6,7 @@
                      xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
                      xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
                      x:Class="Playground.Core.Pages.ListViewPage">
-         <views:MvxListView mvx:Bi.nd="ItemsSource TestItems; ItemClick ItemClickedCommand">
+         <views:MvxListView ItemsSource="{mvx:MvxBind TestItems}" ItemClick="{mvx:MvxBind ItemClickedCommand}">
             <ListView.ItemTemplate>
                  <DataTemplate>
                      <ViewCell>
