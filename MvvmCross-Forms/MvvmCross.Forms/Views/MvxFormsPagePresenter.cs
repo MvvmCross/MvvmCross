@@ -325,15 +325,11 @@ namespace MvvmCross.Forms.Views
             else
             {
                 if (attribute.WrapInNavigationPage && FormsApplication.MainPage?.Navigation?.ModalStack?.LastOrDefault() is MvxNavigationPage modalNavigationPage)
-                    modalNavigationPage.PushAsync(page, attribute.Animated);
+                    PushOrReplacePage(modalNavigationPage, page, attribute);
                 else if (attribute.WrapInNavigationPage && FormsApplication.MainPage?.Navigation != null)
                     FormsApplication.MainPage.Navigation.PushModalAsync(new MvxNavigationPage(page), attribute.Animated);
                 else
-                {
-                    if (FormsApplication.MainPage?.Navigation == null)
-                        FormsApplication.MainPage = new MvxNavigationPage(new MvxPage());
-                    FormsApplication.MainPage.Navigation.PushModalAsync(page, attribute.Animated);
-                }
+                    FormsApplication?.MainPage?.Navigation?.PushModalAsync(page, attribute.Animated);
             }
         }
 
@@ -368,16 +364,8 @@ namespace MvvmCross.Forms.Views
 
             if(attribute.NoHistory)
                 FormsApplication.MainPage = page;
-            else if (attribute.WrapInNavigationPage && FormsApplication.MainPage is MvxNavigationPage navigationPage)
-            {
-                if (navigationPage.CurrentPage is MvxNavigationPage currentNavigationPage)
-                {
-                    currentNavigationPage.PushAsync(page, attribute.Animated);
-                }
-                else
-                    navigationPage.PushAsync(page, attribute.Animated);
-                    
-            }
+            else 
+                PushOrReplacePage(FormsApplication.MainPage, page, attribute);
         }
 
         public virtual bool CloseNavigationPage(IMvxViewModel viewModel, MvxNavigationPagePresentationAttribute attribute)
