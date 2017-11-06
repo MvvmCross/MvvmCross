@@ -25,12 +25,10 @@ namespace MvvmCross.Forms.Views
 
         public virtual void HandleBindingContextChangedCalled(object sender, EventArgs e)
         {
-
         }
 
         public virtual void HandleParentSetCalled(object sender, EventArgs e)
         {
-
         }
     }
 }
