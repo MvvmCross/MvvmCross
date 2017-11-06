@@ -23,21 +23,51 @@ namespace MvvmCross.Core.ViewModels
             return viewModel;
         }
 
+        public virtual IMvxViewModel<TParameter> Reload<TParameter>(IMvxViewModel<TParameter> viewModel,
+                                                        TParameter param,
+                                                        IMvxBundle parameterValues,
+                                                        IMvxBundle savedState)
+        {
+            RunViewModelLifecycle(viewModel, param, parameterValues, savedState);
+
+            return viewModel;
+        }
+
         public virtual IMvxViewModel Load(Type viewModelType,
-                                    IMvxBundle parameterValues,
-                                    IMvxBundle savedState)
+                                          IMvxBundle parameterValues,
+                                          IMvxBundle savedState)
         {
             IMvxViewModel viewModel;
             try
             {
                 viewModel = (IMvxViewModel)Mvx.IocConstruct(viewModelType);
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 throw exception.MvxWrap("Problem creating viewModel of type {0}", viewModelType.Name);
             }
 
             RunViewModelLifecycle(viewModel, parameterValues, savedState);
+
+            return viewModel;
+        }
+
+        public virtual IMvxViewModel<TParameter> Load<TParameter>(Type viewModelType,
+                                                      TParameter param,
+                                                      IMvxBundle parameterValues,
+                                                      IMvxBundle savedState)
+        {
+            IMvxViewModel<TParameter> viewModel;
+            try
+            {
+                viewModel = (IMvxViewModel<TParameter>)Mvx.IocConstruct(viewModelType);
+            }
+            catch(Exception exception)
+            {
+                throw exception.MvxWrap("Problem creating viewModel of type {0}", viewModelType.Name);
+            }
+
+            RunViewModelLifecycle(viewModel, param, parameterValues, savedState);
 
             return viewModel;
         }
@@ -57,13 +87,39 @@ namespace MvvmCross.Core.ViewModels
             try
             {
                 CallCustomInitMethods(viewModel, parameterValues);
-                if (savedState != null)
+                if(savedState != null)
                 {
                     CallReloadStateMethods(viewModel, savedState);
                 }
                 viewModel.Start();
+
+                viewModel.Prepare();
+
+                viewModel.InitializeTask = NotifyTask.Create(() => viewModel.Initialize());
             }
-            catch (Exception exception)
+            catch(Exception exception)
+            {
+                throw exception.MvxWrap("Problem running viewModel lifecycle of type {0}", viewModel.GetType().Name);
+            }
+        }
+
+        protected void RunViewModelLifecycle<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle parameterValues, IMvxBundle savedState)
+        {
+            try
+            {
+                CallCustomInitMethods(viewModel, parameterValues);
+                if(savedState != null)
+                {
+                    CallReloadStateMethods(viewModel, savedState);
+                }
+                viewModel.Start();
+
+                viewModel.Prepare();
+                viewModel.Prepare(param);
+
+                viewModel.InitializeTask = NotifyTask.Create(() => viewModel.Initialize());
+            }
+            catch(Exception exception)
             {
                 throw exception.MvxWrap("Problem running viewModel lifecycle of type {0}", viewModel.GetType().Name);
             }

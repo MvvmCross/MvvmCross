@@ -13,6 +13,10 @@ namespace MvvmCross.Core.ViewModels
     {
         IMvxViewModel Load(Type viewModelType, IMvxBundle parameterValues, IMvxBundle savedState);
 
+        IMvxViewModel<TParameter> Load<TParameter>(Type viewModelType, TParameter param, IMvxBundle parameterValues, IMvxBundle savedState);
+
         IMvxViewModel Reload(IMvxViewModel viewModel, IMvxBundle parameterValues, IMvxBundle savedState);
+
+        IMvxViewModel<TParameter> Reload<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle parameterValues, IMvxBundle savedState);
     }
 }
