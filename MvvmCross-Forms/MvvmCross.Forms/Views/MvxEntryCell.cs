@@ -7,6 +7,11 @@ namespace MvvmCross.Forms.Views
 {
     public class MvxEntryCell : EntryCell, IMvxElement
     {
+        public MvxEntryCell()
+        {
+            this.AdaptForBinding();
+        }
+
         public object DataContext
         {
             get

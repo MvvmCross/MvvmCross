@@ -18,9 +18,9 @@ namespace MvvmCross.Forms.Views
         public MvxFormsPagePresenter(MvxFormsApplication formsApplication, IMvxViewsContainer viewsContainer = null, IMvxViewModelTypeFinder viewModelTypeFinder = null, IMvxViewModelLoader viewModelLoader = null)
         {
             FormsApplication = formsApplication;
-            ViewModelLoader = viewModelLoader;
             ViewsContainer = viewsContainer;
             ViewModelTypeFinder = viewModelTypeFinder;
+            ViewModelLoader = viewModelLoader;
         }
 
         private MvxFormsApplication _formsApplication;
@@ -81,17 +81,8 @@ namespace MvvmCross.Forms.Views
         {
             var page = Activator.CreateInstance(viewType) as Page;
 
-            if (page is IMvxPage contentPage)
-            {
-                if (request is MvxViewModelInstanceRequest instanceRequest)
-                {
-                    contentPage.ViewModel = instanceRequest.ViewModelInstance;
-                }
-                else
-                {
-                    contentPage.ViewModel = ViewModelLoader.LoadViewModel(request, null);
-                }
-            }
+            if (page is IMvxPage contentPage && request is MvxViewModelInstanceRequest instanceRequest)
+                contentPage.ViewModel = instanceRequest.ViewModelInstance;
 
             if(attribute is MvxPagePresentationAttribute pageAttribute)
             {
