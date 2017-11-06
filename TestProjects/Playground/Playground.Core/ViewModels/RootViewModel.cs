@@ -11,12 +11,14 @@ namespace Playground.Core.ViewModels
     public class RootViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
+        private readonly IMvxViewModelLoader _mvxViewModelLoader;
 
         private int _counter = 2;
 
-        public RootViewModel(IMvxNavigationService navigationService, IMvxLogProvider logProvider)
+        public RootViewModel(IMvxNavigationService navigationService, IMvxLogProvider logProvider, IMvxViewModelLoader mvxViewModelLoader)
         {
             _navigationService = navigationService;
+            _mvxViewModelLoader = mvxViewModelLoader;
 
             logProvider.GetLogFor<RootViewModel>().Warn(() => "Testing log");
 
@@ -46,9 +48,13 @@ namespace Playground.Core.ViewModels
             base.Prepare();
         }
 
-        public override System.Threading.Tasks.Task Initialize()
+        public override async System.Threading.Tasks.Task Initialize()
         {
-            return base.Initialize();
+            await base.Initialize();
+
+            _mvxViewModelLoader.LoadViewModel<SampleModel>(MvxViewModelRequest.GetDefaultRequest(typeof(ChildViewModel)),
+                                                           new SampleModel { Message = "From locator", Value = 2 },
+                                                           null);
         }
 
         protected override void SaveStateToBundle(IMvxBundle bundle)

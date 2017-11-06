@@ -15,8 +15,8 @@ namespace MvvmCross.Core.ViewModels
         : IMvxViewModelLocator
     {
         public virtual IMvxViewModel Reload(IMvxViewModel viewModel,
-                                   IMvxBundle parameterValues,
-                                   IMvxBundle savedState)
+                                            IMvxBundle parameterValues,
+                                            IMvxBundle savedState)
         {
             RunViewModelLifecycle(viewModel, parameterValues, savedState);
 
@@ -24,9 +24,9 @@ namespace MvvmCross.Core.ViewModels
         }
 
         public virtual IMvxViewModel<TParameter> Reload<TParameter>(IMvxViewModel<TParameter> viewModel,
-                                                        TParameter param,
-                                                        IMvxBundle parameterValues,
-                                                        IMvxBundle savedState)
+                                                                    TParameter param,
+                                                                    IMvxBundle parameterValues,
+                                                                    IMvxBundle savedState)
         {
             RunViewModelLifecycle(viewModel, param, parameterValues, savedState);
 
@@ -53,9 +53,9 @@ namespace MvvmCross.Core.ViewModels
         }
 
         public virtual IMvxViewModel<TParameter> Load<TParameter>(Type viewModelType,
-                                                      TParameter param,
-                                                      IMvxBundle parameterValues,
-                                                      IMvxBundle savedState)
+                                                                  TParameter param,
+                                                                  IMvxBundle parameterValues,
+                                                                  IMvxBundle savedState)
         {
             IMvxViewModel<TParameter> viewModel;
             try
