@@ -17,9 +17,9 @@ namespace MvvmCross.Forms.Bindings
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            if (BindableObj != null && BindableProp != null)
+            if (BindableObj != null && !string.IsNullOrEmpty(PropertyName))
             {
-                StringBuilder bindingBuilder = new StringBuilder($"{BindableProp.PropertyName} {Source}");
+                StringBuilder bindingBuilder = new StringBuilder($"{PropertyName} {Source}");
 
                 if (!string.IsNullOrEmpty(Converter))
                 {
