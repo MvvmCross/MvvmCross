@@ -12,5 +12,11 @@ namespace MvvmCross.Forms.Views
             if (!(eventSource is IMvxElement))
                 throw new ArgumentException("eventSource", "eventSource should be a IMvxElement");
         }
+
+        public override void HandleBindingContextChangedCalled(object sender, EventArgs e)
+        {
+            FormsView.OnBindingContextChanged();
+            base.HandleBindingContextChangedCalled(sender, e);
+        }
     }
 }

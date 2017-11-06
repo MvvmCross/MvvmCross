@@ -27,6 +27,14 @@ namespace MvvmCross.Forms.Views
             var adapter = new MvxCellAdapter(cell);
         }
 
+        public static void OnBindingContextChanged(this IMvxElement element)
+        {
+            var cache = Mvx.Resolve<IMvxChildViewModelCache>();
+            var cached = cache.Get(element.FindAssociatedViewModelTypeOrNull());
+
+            element.OnViewCreate(() => cached ?? element.LoadViewModel());
+        }
+
         public static void OnViewAppearing(this IMvxElement element)
         {
             var cache = Mvx.Resolve<IMvxChildViewModelCache>();
