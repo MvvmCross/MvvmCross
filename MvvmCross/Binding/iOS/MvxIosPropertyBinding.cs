@@ -31,6 +31,7 @@ namespace MvvmCross.Binding.iOS
         public const string UIPageControl_CurrentPage = "CurrentPage";
         public const string UISegmentedControl_SelectedSegment = "SelectedSegment";
         public const string UIDatePicker_Date = "Date";
+        public const string UIDatePicker_CountDownDuration = "CountDownDuration";
         public const string UITextField_ShouldReturn = "ShouldReturn";
         public const string UIDatePicker_Time = "Time";
         public const string UILabel_Text = "Text";

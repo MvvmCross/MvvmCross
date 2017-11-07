@@ -83,6 +83,29 @@
     <Compile Include="Views\MvxEntryCell.cs" />
     <Compile Include="Bindings\MvxDesignTimeChecker.cs" />
     <Compile Include="Bindings\MvxBaseBindExtension.cs" />
+    <Compile Include="Views\EventSource\IMvxEventSourcePage.cs" />
+    <Compile Include="Views\EventSource\IMvxEventSourceElement.cs" />
+    <Compile Include="Views\EventSource\IMvxEventSourceCell.cs" />
+    <Compile Include="Views\MvxElementExtensions.cs" />
+    <Compile Include="Views\EventSource\MvxEventSourceContentPage.cs" />
+    <Compile Include="Views\MvxBaseElementAdapter.cs" />
+    <Compile Include="Views\IMvxCell.cs" />
+    <Compile Include="Views\MvxPageAdapter.cs" />
+    <Compile Include="Views\MvxBasePageAdapter.cs" />
+    <Compile Include="Views\MvxCellAdapter.cs" />
+    <Compile Include="Views\MvxBaseCellAdapter.cs" />
+    <Compile Include="Views\EventSource\MvxEventSourceCarouselPage.cs" />
+    <Compile Include="Views\EventSource\MvxEventSourceNavigationPage.cs" />
+    <Compile Include="Views\EventSource\MvxEventSourceMasterDetailPage.cs" />
+    <Compile Include="Views\EventSource\MvxEventSourceTabbedPage.cs" />
+    <Compile Include="Views\EventSource\MvxEventSourcePage.cs" />
+    <Compile Include="Views\EventSource\MvxEventSourceViewCell.cs" />
+    <Compile Include="Views\EventSource\MvxEventSourceTextCell.cs" />
+    <Compile Include="Views\EventSource\MvxEventSourceSwitchCell.cs" />
+    <Compile Include="Views\EventSource\MvxEventSourceImageCell.cs" />
+    <Compile Include="Views\EventSource\MvxEventSourceEntryCell.cs" />
+    <Compile Include="Views\EventSource\MvxEventSourceContentView.cs" />
+    <Compile Include="Views\MvxElementAdapter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -127,6 +150,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\EventSource\" />
   </ItemGroup>
   <Import Project="..\..\packages\Xamarin.Forms.2.4.0.282\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.4.0.282\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

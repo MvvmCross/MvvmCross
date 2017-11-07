@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Text;
 using MvvmCross.Binding;
 using MvvmCross.Platform;
@@ -19,9 +20,9 @@ namespace MvvmCross.Forms.Bindings
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            if (BindableObj != null && BindableProp != null)
+            if (BindableObj != null && !string.IsNullOrEmpty(PropertyName))
             {
-                StringBuilder bindingBuilder = new StringBuilder($"{BindableProp.PropertyName} {Path}, Mode={Mode}");
+                StringBuilder bindingBuilder = new StringBuilder($"{PropertyName} {Path}, Mode={Mode}");
 
                 if (!string.IsNullOrEmpty(Converter))
                 {
