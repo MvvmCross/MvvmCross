@@ -7,6 +7,7 @@ using MvvmCross.Forms.Uwp.Presenters;
 using MvvmCross.Platform;
 using MvvmCross.Uwp.Views;
 using XamlControls = Windows.UI.Xaml.Controls;
+using MvvmCross.Platform.Logging;
 
 namespace Playground.Forms.Uwp
 {
@@ -16,6 +17,9 @@ namespace Playground.Forms.Uwp
         public Setup(XamlControls.Frame rootFrame, LaunchActivatedEventArgs e) : base(rootFrame, e)
         {
         }
+
+        protected override MvxLogProviderType GetDefaultLogProviderType()
+            => MvxLogProviderType.None;
 
         protected override IMvxApplication CreateApp()
         {
