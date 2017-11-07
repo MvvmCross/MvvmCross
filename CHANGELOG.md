@@ -1,8 +1,8 @@
 # Change Log
 
-## [Unreleased](https://github.com/MvvmCross/MvvmCross/tree/HEAD)
+## [5.4.1](https://github.com/MvvmCross/MvvmCross/tree/5.4.1)
 
-[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.4.0...HEAD)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.4.0...5.4.1)
 
 **Fixed bugs:**
 
