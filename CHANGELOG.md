@@ -1,6 +1,6 @@
 # Change Log
 
-## [5.4.1](https://github.com/MvvmCross/MvvmCross/tree/5.4.1)
+## [5.4.1](https://github.com/MvvmCross/MvvmCross/tree/5.4.1) (2017-11-7)
 
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.4.0...5.4.1)
 
