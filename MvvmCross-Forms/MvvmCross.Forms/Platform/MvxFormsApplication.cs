@@ -16,7 +16,6 @@ namespace MvvmCross.Forms.Platform
     {
         public MvxFormsApplication()
         {
-            MainPage = new MvxNavigationPage();
         }
 
         public event EventHandler Start;

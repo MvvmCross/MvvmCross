@@ -1,32 +1,48 @@
 # Change Log
 
-## [Unreleased](https://github.com/MvvmCross/MvvmCross/tree/HEAD)
-
-[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.4.0...HEAD)
+## [5.4.2](https://github.com/MvvmCross/MvvmCross/tree/5.4.2) (2017-11-07)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.4.1...5.4.2)
 
 **Fixed bugs:**
 
+- Setting Detail in MvxMasterDetailView added to stack and not replacing Detail [\#2347](https://github.com/MvvmCross/MvvmCross/issues/2347)
+- Unable to use MvxTabbedPage in MvvmCross 5.4.0 [\#2345](https://github.com/MvvmCross/MvvmCross/issues/2345)
+- Default root page will not load, if the MasterDetailPage is the app startup page [\#2309](https://github.com/MvvmCross/MvvmCross/issues/2309)
+- Strange behaviour of the navigation stack with MVX [\#2308](https://github.com/MvvmCross/MvvmCross/issues/2308)
+- Toolbar color can not be changed [\#2301](https://github.com/MvvmCross/MvvmCross/issues/2301)
+- Add support for nested root pages of any type [\#2361](https://github.com/MvvmCross/MvvmCross/pull/2361) ([martijn00](https://github.com/martijn00))
+
+**Closed issues:**
+
+- MvxTabLayoutPresentation not working in Fragment [\#2335](https://github.com/MvvmCross/MvvmCross/issues/2335)
+- IMvxNavigationService Stack Issue in Xamarin Forms [\#2202](https://github.com/MvvmCross/MvvmCross/issues/2202)
+
+## [5.4.1](https://github.com/MvvmCross/MvvmCross/tree/5.4.1) (2017-11-07)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/5.4.0...5.4.1)
+
+**Fixed bugs:**
+
+- Xamarin.Forms / Setting NoHistory member has no effect [\#2320](https://github.com/MvvmCross/MvvmCross/issues/2320)
+- mvx:MvxBind binding structure inconsistant [\#2299](https://github.com/MvvmCross/MvvmCross/issues/2299)
+- Rotation crashes device [\#2274](https://github.com/MvvmCross/MvvmCross/issues/2274)
 - iOS application crashes when start running on real device [\#2351](https://github.com/MvvmCross/MvvmCross/issues/2351)
 - Null reference exception in type initializer for ConsoleLogProvider on iOS 11 device [\#2342](https://github.com/MvvmCross/MvvmCross/issues/2342)
 - 'System.TypeInitializationException' In 'MvvmCross.Core.Platform.LogProviders.ConsoleLogProvider' On UWP Projects [\#2333](https://github.com/MvvmCross/MvvmCross/issues/2333)
 - App fails to launch when initial page has WrapInNavigationPage = false [\#2329](https://github.com/MvvmCross/MvvmCross/issues/2329)
-- Xamarin.Forms / Setting NoHistory member has no effect [\#2320](https://github.com/MvvmCross/MvvmCross/issues/2320)
-- mvx:MvxBind binding structure inconsistant [\#2299](https://github.com/MvvmCross/MvvmCross/issues/2299)
-- Rotation crashes device [\#2274](https://github.com/MvvmCross/MvvmCross/issues/2274)
 
 **Closed issues:**
 
-- mvx:MvxBind not setting selected item in MvxListView [\#2355](https://github.com/MvvmCross/MvvmCross/issues/2355)
-- UIDatePikcer CountdownDuration Binding [\#2352](https://github.com/MvvmCross/MvvmCross/issues/2352)
 - MvxLayoutInflater Disposed exception [\#1924](https://github.com/MvvmCross/MvvmCross/issues/1924)
 - Win10 Uap + MvxSuspensionManager + .Net Native  [\#1148](https://github.com/MvvmCross/MvvmCross/issues/1148)
+- mvx:MvxBind not setting selected item in MvxListView [\#2355](https://github.com/MvvmCross/MvvmCross/issues/2355)
+- UIDatePikcer CountdownDuration Binding [\#2352](https://github.com/MvvmCross/MvvmCross/issues/2352)
 
 **Merged pull requests:**
 
+- Adds CountDownDuration target binding for UIDatePicker [\#2353](https://github.com/MvvmCross/MvvmCross/pull/2353) ([sfmskywalker](https://github.com/sfmskywalker))
 - Add event source for Forms views [\#2357](https://github.com/MvvmCross/MvvmCross/pull/2357) ([martijn00](https://github.com/martijn00))
 - Fix bindings without forms base type [\#2356](https://github.com/MvvmCross/MvvmCross/pull/2356) ([martijn00](https://github.com/martijn00))
 - Improve issue template [\#2354](https://github.com/MvvmCross/MvvmCross/pull/2354) ([willsb](https://github.com/willsb))
-- Adds CountDownDuration target binding for UIDatePicker [\#2353](https://github.com/MvvmCross/MvvmCross/pull/2353) ([sfmskywalker](https://github.com/sfmskywalker))
 - Make no history work with nested stacks [\#2350](https://github.com/MvvmCross/MvvmCross/pull/2350) ([martijn00](https://github.com/martijn00))
 - Remove duplicate heading [\#2349](https://github.com/MvvmCross/MvvmCross/pull/2349) ([Cheesebaron](https://github.com/Cheesebaron))
 - Update ViewPresenter files and add links for docs [\#2346](https://github.com/MvvmCross/MvvmCross/pull/2346) ([nmilcoff](https://github.com/nmilcoff))

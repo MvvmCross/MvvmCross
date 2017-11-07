@@ -164,6 +164,8 @@
     <AndroidResource Include="Resources\layout\Tab3View.axml" />
     <AndroidResource Include="Resources\layout\TabsRootView.axml" />
     <AndroidResource Include="Resources\menu\navigation_drawer.axml" />
+    <AndroidResource Include="Resources\layout\Toolbar.axml" />
+    <AndroidResource Include="Resources\layout\Tabbar.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-hdpi\hamburger.png" />
