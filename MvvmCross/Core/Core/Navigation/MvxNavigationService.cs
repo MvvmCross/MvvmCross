@@ -12,6 +12,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Core.Navigation
@@ -110,7 +111,10 @@ namespace MvvmCross.Core.Navigation
         {
             KeyValuePair<Regex, Type> entry;
 
-            if(!TryGetRoute(path, out entry)) return null;
+            if(!TryGetRoute(path, out entry))
+            {
+                throw new MvxException($"Navigation route request could not be obtained for path: {path}");
+            }
 
             var regex = entry.Key;
             var match = regex.Match(path);
@@ -134,8 +138,7 @@ namespace MvvmCross.Core.Navigation
                     var facadeRequest = await facade.BuildViewModelRequest(path, paramDict).ConfigureAwait(false);
                     if(facadeRequest == null)
                     {
-                        Mvx.TaggedWarning(nameof(MvxNavigationService), $"Facade did not return a valid {nameof(MvxViewModelRequest)}.");
-                        return null;
+                        throw new MvxException($"{nameof(MvxNavigationService)}: Facade did not return a valid {nameof(MvxViewModelRequest)}.");
                     }
 
                     request.ViewModelType = facadeRequest.ViewModelType;
@@ -149,10 +152,7 @@ namespace MvvmCross.Core.Navigation
                 }
                 catch(Exception ex)
                 {
-                    Mvx.TaggedError(nameof(MvxNavigationService),
-                        "Exception thrown while processing URL: {0} with RoutingFacade: {1}, {2}",
-                                    path, viewModelType, ex);
-                    return null;
+                    ex.MvxWrap($"{nameof(MvxNavigationService)}: Exception thrown while processing URL: {path} with RoutingFacade: {viewModelType}");
                 }
             }
             else
@@ -167,7 +167,10 @@ namespace MvvmCross.Core.Navigation
         {
             KeyValuePair<Regex, Type> entry;
 
-            if(!TryGetRoute(path, out entry)) return null;
+            if(!TryGetRoute(path, out entry))
+            {
+                throw new MvxException($"Navigation route request could not be obtained for path: {path}");
+            }
 
             var regex = entry.Key;
             var match = regex.Match(path);
@@ -191,8 +194,7 @@ namespace MvvmCross.Core.Navigation
                     var facadeRequest = await facade.BuildViewModelRequest(path, paramDict).ConfigureAwait(false);
                     if(facadeRequest == null)
                     {
-                        Mvx.TaggedWarning(nameof(MvxNavigationService), $"Facade did not return a valid {nameof(MvxViewModelRequest)}.");
-                        return null;
+                        throw new MvxException($"{nameof(MvxNavigationService)}: Facade did not return a valid {nameof(MvxViewModelRequest)}.");
                     }
 
                     request.ViewModelType = facadeRequest.ViewModelType;
@@ -206,15 +208,12 @@ namespace MvvmCross.Core.Navigation
                 }
                 catch(Exception ex)
                 {
-                    Mvx.TaggedError(nameof(MvxNavigationService),
-                        "Exception thrown while processing URL: {0} with RoutingFacade: {1}, {2}",
-                                    path, viewModelType, ex);
-                    return null;
+                    ex.MvxWrap($"{nameof(MvxNavigationService)}: Exception thrown while processing URL: {path} with RoutingFacade: {viewModelType}");
                 }
             }
             else
             {
-                request.ViewModelInstance = ViewModelLoader.LoadViewModel(request, null);
+                request.ViewModelInstance = ViewModelLoader.LoadViewModel(request, param, null);
             }
 
             return request;
