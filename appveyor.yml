@@ -7,7 +7,7 @@
   environment:
     NUGET_SOURCE: https://www.nuget.org/api/v2/package
     NUGET_APIKEY:
-      secure: I7T89cNuXIoOooGTaZm/nKrJ5JwZpt3F82D6Y7bJoxO5yQ6hpDnz0xQhef/KKr0G
+      secure: odCUzBq+YWTrwvRhhuQZP1uldezh8PJRn79miIgZnZrDbruYkP9aoJAlTcat5AGh
   build_script:
   - ps: .\build.ps1 -verbosity Diagnostic
   test: off

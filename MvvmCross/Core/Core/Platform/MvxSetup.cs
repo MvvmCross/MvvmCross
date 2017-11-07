@@ -33,6 +33,8 @@ namespace MvvmCross.Core.Platform
 
         protected abstract IMvxViewDispatcher CreateViewDispatcher();
 
+        protected IMvxLog SetupLog { get; private set; }
+
         public virtual void Initialize()
         {
             InitializePrimary();
@@ -54,6 +56,7 @@ namespace MvvmCross.Core.Platform
                 throw new MvxException("Cannot start seconday - as state is currently {0}", State);
             }
             State = MvxSetupState.InitializingSecondary;
+            InitializeLoggingServices();
             MvxTrace.Trace("Setup: FirstChance start");
             InitializeFirstChance();
             MvxTrace.Trace("Setup: DebugServices start");
@@ -207,20 +210,15 @@ namespace MvvmCross.Core.Platform
             // do nothing by default
         }
 
-        protected virtual void InitializeDebugServices()
+        protected virtual void InitializeLoggingServices()
         {
-            //Deprecated
-            var debugTrace = CreateDebugTrace();
-            Mvx.RegisterSingleton(debugTrace);
-            MvxTrace.Initialize();
-
-            //New logging
             var logProvider = CreateLogProvider();
             if (logProvider != null)
             {
                 Mvx.RegisterSingleton(logProvider);
-                var log = logProvider.GetLogFor("MvxLog");
-                Mvx.RegisterSingleton(log);
+                SetupLog = logProvider.GetLogFor<MvxSetup>();
+                var globalLog = logProvider.GetLogFor<MvxLog>();
+                Mvx.RegisterSingleton(globalLog);
             }
         }
 
@@ -246,6 +244,14 @@ namespace MvvmCross.Core.Platform
                 default:
                     return null;
             }
+        }
+
+        [Obsolete("IMvxTrace is replaced by IMvxLogProvider and IMvxLog")]
+        protected virtual void InitializeDebugServices()
+        {
+            var debugTrace = CreateDebugTrace();
+            Mvx.RegisterSingleton(debugTrace);
+            MvxTrace.Initialize();
         }
 
         protected virtual IMvxViewModelLoader CreateViewModelLoader(IMvxViewModelLocatorCollection collection)

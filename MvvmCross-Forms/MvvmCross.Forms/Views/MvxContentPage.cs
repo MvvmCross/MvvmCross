@@ -1,11 +1,17 @@
 ﻿using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Forms.Views.EventSource;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views
 {
-    public class MvxContentPage : ContentPage, IMvxPage
+    public class MvxContentPage : MvxEventSourceContentPage, IMvxPage
     {
+        public MvxContentPage()
+        {
+            this.AdaptForBinding();
+        }
+
         public object DataContext
         {
             get

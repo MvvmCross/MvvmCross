@@ -15,7 +15,6 @@ namespace MvvmCross.Core.Platform.LogProviders
         private static readonly Action<string> ConsoleWriteLine;
         private static readonly Func<int> GetConsoleForeground;
         private static readonly Action<int> SetConsoleForeground;
-        private static bool _providerIsAvailableOverride = true;
         private static readonly IDictionary<MvxLogLevel, int> Colors;
 
         static ConsoleLogProvider()
@@ -44,9 +43,7 @@ namespace MvvmCross.Core.Platform.LogProviders
         }
 
         internal static bool IsLoggerAvailable()
-        {
-            return ProviderIsAvailableOverride && ConsoleType != null && ConsoleColorType != null;
-        }
+            => ConsoleType != null && ConsoleColorType != null;
 
         protected override Logger GetLogger(string name)
             => new ColouredConsoleLogger(name, ConsoleWriteLine, GetConsoleForeground, SetConsoleForeground).Log;
@@ -58,12 +55,6 @@ namespace MvvmCross.Core.Platform.LogProviders
             Exception e);
 
         internal static MessageFormatterDelegate MessageFormatter { get; set; }
-
-        public static bool ProviderIsAvailableOverride
-        {
-            get { return _providerIsAvailableOverride; }
-            set { _providerIsAvailableOverride = value; }
-        }
 
         private static string DefaultMessageFormatter(string loggerName, MvxLogLevel level, object message, Exception e)
         {
