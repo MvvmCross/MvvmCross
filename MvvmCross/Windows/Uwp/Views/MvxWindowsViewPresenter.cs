@@ -258,7 +258,7 @@ namespace MvvmCross.Uwp.Views
 
             if (_rootFrame.Content is MvxWindowsPage currentPage)
             {
-                var splitView = currentPage.Content.FindControl<SplitView>(typeof(SplitView));
+                var splitView = currentPage.Content.FindControl<SplitView>();
                 if (splitView == null)
                 {
                     throw new MvxException($"Failed to find a SplitView in the visual tree of {viewType.Name}");

@@ -58,36 +58,37 @@ namespace MvvmCross.Uwp.Views
             return ((MvxRegionAttribute)attributes.First()).Name;
         }
 
-        public static T FindControl<T>(this UIElement parent, Type targetType) where T : FrameworkElement
+        public static T FindControl<T>(this UIElement parent) where T : FrameworkElement
         {
             if (parent == null)
             {
                 return null;
             }
 
-            if (parent.GetType() == targetType)
+            if (parent is T typedParent)
             {
-                return (T)parent;
+                return typedParent;
             }
 
             T result = null;
             int count = VisualTreeHelper.GetChildrenCount(parent);
             for (int i = 0; i < count; i++)
             {
-                UIElement child = (UIElement)VisualTreeHelper.GetChild(parent, i);
+                var child = VisualTreeHelper.GetChild(parent, i) as UIElement;
 
-                if (FindControl<T>(child, targetType) != null)
+                if (FindControl<T>(child) != null)
                 {
-                    result = FindControl<T>(child, targetType);
+                    result = FindControl<T>(child);
                     break;
                 }
             }
+
             return result;
         }
 
         private static IMvxViewModel LoadViewModel(this IMvxWindowsView storeView,
-                                                                                           string requestText,
-                                                   IMvxBundle bundle)
+                                                    string requestText,
+                                                    IMvxBundle bundle)
         {
 #warning ClearingBackStack disabled for now
 

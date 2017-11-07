@@ -19,7 +19,7 @@ using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Views
 {
-    public class MvxAndroidViewPresenter : MvxViewPresenter, IMvxAndroidViewPresenter, IMvxAttributeViewPresenter
+    public class MvxAndroidViewPresenter : MvxAttributeViewPresenter, IMvxAndroidViewPresenter
     {
         protected IEnumerable<Assembly> AndroidViewAssemblies { get; set; }
         public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
@@ -48,21 +48,6 @@ namespace MvvmCross.Droid.Views
                 if (_activityLifetimeListener == null)
                     _activityLifetimeListener = Mvx.Resolve<IMvxAndroidActivityLifetimeListener>();
                 return _activityLifetimeListener;
-            }
-        }
-
-        private IMvxViewModelTypeFinder _viewModelTypeFinder;
-        public IMvxViewModelTypeFinder ViewModelTypeFinder
-        {
-            get
-            {
-                if (_viewModelTypeFinder == null)
-                    _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
-                return _viewModelTypeFinder;
-            }
-            set
-            {
-                _viewModelTypeFinder = value;
             }
         }
 
