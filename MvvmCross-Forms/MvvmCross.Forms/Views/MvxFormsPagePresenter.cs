@@ -284,6 +284,9 @@ namespace MvvmCross.Forms.Views
 
             var page = CreatePage(view, request, attribute);
 
+            if (FormsApplication.MainPage == null)
+                FormsApplication.MainPage = new MvxNavigationPage(new MvxContentPage(){ Title = nameof(MvxContentPage)});
+
             if (FormsApplication.MainPage is MvxNavigationPage navigationPage)
             {
                 if (attribute.WrapInNavigationPage && navigationPage?.Navigation?.ModalStack?.LastOrDefault() is MvxNavigationPage modalNavigationPage)
@@ -300,7 +303,7 @@ namespace MvvmCross.Forms.Views
                 if (attribute.WrapInNavigationPage && FormsApplication.MainPage?.Navigation?.ModalStack?.LastOrDefault() is MvxNavigationPage modalNavigationPage)
                     PushOrReplacePage(modalNavigationPage, page, attribute);
                 else if (attribute.WrapInNavigationPage && FormsApplication.MainPage?.Navigation != null)
-                    FormsApplication.MainPage.Navigation.PushModalAsync(new MvxNavigationPage(page), attribute.Animated);
+                    FormsApplication?.MainPage?.Navigation?.PushModalAsync(new MvxNavigationPage(page), attribute.Animated);
                 else
                     FormsApplication?.MainPage?.Navigation?.PushModalAsync(page, attribute.Animated);
             }
@@ -408,7 +411,7 @@ namespace MvvmCross.Forms.Views
             {
                 CloseModalStack(navigationPage.Navigation.ModalStack);
             }
-            else if (rootPage.Navigation?.ModalStack?.Count > 0)
+            else if (rootPage?.Navigation?.ModalStack?.Count > 0)
             {
                 CloseModalStack(FormsApplication.MainPage.Navigation.ModalStack);
             }
@@ -514,10 +517,32 @@ namespace MvvmCross.Forms.Views
             }
             else if(rootPage is MvxMasterDetailPage masterDetailRoot)
             {
-                return GetHostPageOfType<TPage>(masterDetailRoot.Detail);
+                var detailHost = GetHostPageOfType<TPage>(masterDetailRoot.Detail);
+                if (detailHost is TPage)
+                    return detailHost;
+                else
+                    return GetHostPageOfType<TPage>(masterDetailRoot.Master);
             }
-            else if(rootPage.Navigation.NavigationStack.OfType<TPage>().Any())
-                return rootPage.Navigation.NavigationStack.OfType<TPage>().FirstOrDefault();
+            else if(rootPage is MvxCarouselPage carouselPage)
+            {
+                foreach (var item in carouselPage.Children)
+                {
+                    var nestedPage = GetHostPageOfType<TPage>(item);
+                    if (nestedPage is TPage)
+                        return nestedPage;
+                }
+                return rootPage as TPage;
+            }
+            else if (rootPage is MvxTabbedPage tabbedPage)
+            {
+                foreach (var item in tabbedPage.Children)
+                {
+                    var nestedPage = GetHostPageOfType<TPage>(item);
+                    if (nestedPage is TPage)
+                        return nestedPage;
+                }
+                return rootPage as TPage;
+            }
             else
                 return rootPage as TPage;
         }
