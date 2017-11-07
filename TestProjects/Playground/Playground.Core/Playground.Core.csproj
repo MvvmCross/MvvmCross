@@ -202,6 +202,38 @@
     <Compile Include="ViewModels\BindingsViewModel.cs" />
     <EmbeddedResource Include="Resources\Text.json" />
     <Compile Include="Services\TextProviderBuilder.cs" />
+    <Compile Include="ViewModels\MasterDetailRootViewModel.cs" />
+    <Compile Include="ViewModels\MasterDetailMasterViewModel.cs" />
+    <Compile Include="ViewModels\MasterDetailDetail1ViewModel.cs" />
+    <Compile Include="ViewModels\MasterDetailDetail2ViewModel.cs" />
+    <EmbeddedResource Include="Pages\MasterDetailRootPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <Compile Include="Pages\MasterDetailRootPage.xaml.cs">
+      <DependentUpon>MasterDetailRootPage.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Pages\MasterDetailMasterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <Compile Include="Pages\MasterDetailMasterPage.xaml.cs">
+      <DependentUpon>MasterDetailMasterPage.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Pages\MasterDetailDetail1Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <Compile Include="Pages\MasterDetailDetail1Page.xaml.cs">
+      <DependentUpon>MasterDetailDetail1Page.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Pages\MasterDetailDetail2Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <Compile Include="Pages\MasterDetailDetail2Page.xaml.cs">
+      <DependentUpon>MasterDetailDetail2Page.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross-Forms\MvvmCross.Forms\MvvmCross.Forms.csproj">

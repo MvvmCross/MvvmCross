@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<views:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Playground.Core.Pages.MasterDetailMasterPage"
+    x:TypeArguments="viewModels:MasterDetailMasterViewModel"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
+    xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+    Title="Master">
+    <views:MvxContentPage.Content>
+        <StackLayout>
+            <Button Text="Detail 1" Command="{mvx:MvxBind Detail1Command}" />
+            <Button Text="Detail 2" Command="{mvx:MvxBind Detail2Command}" />
+        </StackLayout>
+    </views:MvxContentPage.Content>
+</views:MvxContentPage>
