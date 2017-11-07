@@ -1,14 +1,16 @@
-﻿// MvxStoreExtensionMethods.cs
+// MvxStoreExtensionMethods.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
-// 
+//
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
-using System.Linq;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
+using System;
+using System.Linq;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 
 namespace MvvmCross.Uwp.Views
 {
@@ -17,20 +19,6 @@ namespace MvvmCross.Uwp.Views
         public static void OnViewCreate(this IMvxWindowsView storeView, string requestText, Func<IMvxBundle> bundleLoader)
         {
             storeView.OnViewCreate(() => { return storeView.LoadViewModel(requestText, bundleLoader()); });
-        }
-
-        private static IMvxViewModel LoadViewModel(this IMvxWindowsView storeView,
-                                                   string requestText,
-                                                   IMvxBundle bundle)
-        {
-#warning ClearingBackStack disabled for now
-            //            if (viewModelRequest.ClearTop)
-            //            {
-            //#warning TODO - BackStack not cleared for WinRT
-            //phoneView.ClearBackStack();
-            //            }
-            var viewModelLoader = Mvx.Resolve<IMvxWindowsViewModelLoader>();
-            return viewModelLoader.Load(requestText, bundle);
         }
 
         public static void OnViewCreate(this IMvxWindowsView storeView, Func<IMvxViewModel> viewModelLoader)
@@ -68,6 +56,48 @@ namespace MvvmCross.Uwp.Views
                 throw new InvalidOperationException("The IMvxWindowsView has no region attribute.");
 
             return ((MvxRegionAttribute)attributes.First()).Name;
+        }
+
+        public static T FindControl<T>(this UIElement parent, Type targetType) where T : FrameworkElement
+        {
+            if (parent == null)
+            {
+                return null;
+            }
+
+            if (parent.GetType() == targetType)
+            {
+                return (T)parent;
+            }
+
+            T result = null;
+            int count = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < count; i++)
+            {
+                UIElement child = (UIElement)VisualTreeHelper.GetChild(parent, i);
+
+                if (FindControl<T>(child, targetType) != null)
+                {
+                    result = FindControl<T>(child, targetType);
+                    break;
+                }
+            }
+            return result;
+        }
+
+        private static IMvxViewModel LoadViewModel(this IMvxWindowsView storeView,
+                                                                                           string requestText,
+                                                   IMvxBundle bundle)
+        {
+#warning ClearingBackStack disabled for now
+
+            //            if (viewModelRequest.ClearTop)
+            //            {
+            //#warning TODO - BackStack not cleared for WinRT
+            //phoneView.ClearBackStack();
+            //            }
+            var viewModelLoader = Mvx.Resolve<IMvxWindowsViewModelLoader>();
+            return viewModelLoader.Load(requestText, bundle);
         }
     }
 }
