@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace Playground.Core.Pages
 {
-    [MvxContentPagePresentation(WrapInNavigationPage = true)]
+    //[MvxContentPagePresentation(WrapInNavigationPage = false)]
     public partial class RootPage : MvxContentPage<RootViewModel>
     {
         public RootPage()
