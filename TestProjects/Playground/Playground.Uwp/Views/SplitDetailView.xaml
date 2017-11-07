@@ -1,5 +1,5 @@
-<views:MvxWindowsPage
-    x:Class="Playground.Uwp.Views.RootView"
+﻿<views:MvxWindowsPage
+    x:Class="Playground.Uwp.Views.SplitDetailView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Playground.Uwp.Views"
@@ -8,9 +8,7 @@
     xmlns:views="using:MvvmCross.Uwp.Views"
     mc:Ignorable="d">
 
-    <StackPanel>
-        <Button Content="Show Child (Stack Navigation)" Command="{Binding ShowChildCommand}" Margin="5" Padding="5" />
-        <Button Content="Show SplitView" Command="{Binding ShowSplitCommand}" Margin="5" Padding="5" />
-    </StackPanel>
+    <TextBlock Text="Content" />
+    
 </views:MvxWindowsPage>
 
