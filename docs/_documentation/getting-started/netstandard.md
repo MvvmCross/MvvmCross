@@ -11,7 +11,7 @@ This document will asume that you are using the new `csproj` files and not using
 
 ## .NET Standard 1.0 - 1.6
 
-In order to consume PCL projects in any .NET Standard project you need to add a package target fallback for the PCL profile you want to consume. So let us assume you want to add `MvvmCross.Bindings` to your project. This library uses the PCL profile which has a signature that looks like `portable-net45+win+wpa81+wp80`. To add this as a target fallback you simply edit your `csproj` file and add the following line to it.
+In order to consume PCL projects in a .NET Standard project tageting versions 1.0 through to 1.6, you need to add a package target fallback for the PCL profile you want to consume. So let us assume you want to add `MvvmCross.Bindings` to your project. This library uses the PCL profile which has a signature that looks like `portable-net45+win+wpa81+wp80`. To add this as a target fallback you simply edit your `csproj` file and add the following line to it.
 
 ```xml
 <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
