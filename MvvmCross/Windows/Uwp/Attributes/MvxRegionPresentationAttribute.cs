@@ -5,15 +5,13 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
+using MvvmCross.Core.Views;
 
-namespace MvvmCross.Uwp.Views
+namespace MvvmCross.Uwp.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    public sealed class MvxRegionAttribute
-        : Attribute
+    public sealed class MvxRegionPresentationAttribute : MvxBasePresentationAttribute
     {
-        public MvxRegionAttribute(string regionName)
+        public MvxRegionPresentationAttribute(string regionName = null)
         {
             Name = regionName;
         }

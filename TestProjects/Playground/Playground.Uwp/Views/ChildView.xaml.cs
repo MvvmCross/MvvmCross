@@ -1,17 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using MvvmCross.Uwp.Attributes;
 using MvvmCross.Uwp.Views;
 
@@ -20,7 +6,7 @@ using MvvmCross.Uwp.Views;
 namespace Playground.Uwp.Views
 {
     [MvxPagePresentation]
-    public sealed partial class ChildView : MvxWindowsPage
+    public sealed partial class ChildView
     {
         public ChildView()
         {
