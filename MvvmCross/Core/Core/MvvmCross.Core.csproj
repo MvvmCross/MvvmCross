@@ -95,6 +95,7 @@
     <Compile Include="ViewModels\MvxBundle.cs" />
     <Compile Include="Platform\MvxSimplePropertyDictionaryExtensionMethods.cs" />
     <Compile Include="ViewModels\MvxViewModelExtensions.cs" />
+    <Compile Include="Views\MvxAttributeViewPresenter.cs" />
     <Compile Include="Views\MvxChildViewModelCache.cs" />
     <Compile Include="Views\MvxViewExtensionMethods.cs" />
     <Compile Include="ViewModels\IMvxApplication.cs" />
@@ -167,8 +168,5 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="Annotations\" />
-    <Folder Include="Platform\LogProviders\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
