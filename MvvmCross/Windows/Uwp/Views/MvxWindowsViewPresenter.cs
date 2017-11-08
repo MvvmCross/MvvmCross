@@ -26,12 +26,6 @@ namespace MvvmCross.Uwp.Views
     {
         protected readonly IMvxWindowsFrame _rootFrame;
 
-        private IMvxViewModelTypeFinder _viewModelTypeFinder;
-
-        private IMvxViewsContainer _viewsContainer;
-
-        private Dictionary<Type, MvxPresentationAttributeAction> _attributeTypesActionsDictionary;
-
         public MvxWindowsViewPresenter(IMvxWindowsFrame rootFrame)
         {
             _rootFrame = rootFrame;
