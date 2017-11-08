@@ -58,28 +58,28 @@ namespace MvvmCross.Uwp.Views
             return ((MvxRegionAttribute)attributes.First()).Name;
         }
 
-        public static T FindControl<T>(this UIElement parent) where T : FrameworkElement
+        public static T FindControl<T>(this UIElement parent, string name = null) where T : FrameworkElement
         {
             if (parent == null)
             {
                 return null;
             }
 
-            if (parent is T typedParent)
+            if (parent is T typedParent && (string.IsNullOrWhiteSpace(name) || parent.GetValue(FrameworkElement.NameProperty).Equals(name))
             {
                 return typedParent;
             }
 
             T result = null;
-            int count = VisualTreeHelper.GetChildrenCount(parent);
-            for (int i = 0; i < count; i++)
+            var count = VisualTreeHelper.GetChildrenCount(parent);
+            for (var i = 0; i < count; i++)
             {
                 var child = VisualTreeHelper.GetChild(parent, i) as UIElement;
 
-                if (FindControl<T>(child) != null)
+                result = FindControl<T>(child);
+                if (result != null)
                 {
-                    result = FindControl<T>(child);
-                    break;
+                    return result;
                 }
             }
 
