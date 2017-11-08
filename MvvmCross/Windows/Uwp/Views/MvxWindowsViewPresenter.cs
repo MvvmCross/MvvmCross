@@ -22,7 +22,7 @@ using Windows.UI.Xaml.Controls;
 namespace MvvmCross.Uwp.Views
 {
     public class MvxWindowsViewPresenter
-        : MvxViewPresenter, IMvxWindowsViewPresenter, IMvxAttributeViewPresenter
+        : MvxAttributeViewPresenter, IMvxWindowsViewPresenter
     {
         protected readonly IMvxWindowsFrame _rootFrame;
 
@@ -39,54 +39,13 @@ namespace MvvmCross.Uwp.Views
             SystemNavigationManager.GetForCurrentView().BackRequested += BackButtonOnBackRequested;
         }
 
-        public IMvxViewModelTypeFinder ViewModelTypeFinder
-        {
-            get
-            {
-                if (_viewModelTypeFinder == null)
-                    _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
-                return _viewModelTypeFinder;
-            }
-            set
-            {
-                _viewModelTypeFinder = value;
-            }
-        }
-
-        public IMvxViewsContainer ViewsContainer
-        {
-            get
-            {
-                if (_viewsContainer == null)
-                    _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
-                return _viewsContainer;
-            }
-            set
-            {
-                _viewsContainer = value;
-            }
-        }
-
-        public Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
-        {
-            get
-            {
-                if (_attributeTypesActionsDictionary == null)
-                {
-                    _attributeTypesActionsDictionary = new Dictionary<Type, MvxPresentationAttributeAction>();
-                    RegisterAttributeTypes();
-                }
-                return _attributeTypesActionsDictionary;
-            }
-        }
-
-        public void RegisterAttributeTypes()
+        public override void RegisterAttributeTypes()
         {
             AttributeTypesToActionsDictionary.Add(
                 typeof(MvxPagePresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
-                    ShowAction = (view, attribute, request) => ShowPage(view, (MvxPagePresentationAttribute)attribute, request),
+                    ShowAction = (view, attribute, request) => ShowPage(request),
                     CloseAction = (viewModel, attribute) => ClosePage(viewModel)
                 });
 
@@ -99,38 +58,13 @@ namespace MvvmCross.Uwp.Views
                 });
         }
 
-        public virtual MvxBasePresentationAttribute GetPresentationAttribute(Type viewModelType)
-        {
-            var viewType = ViewsContainer.GetViewType(viewModelType);
-
-            var overrideAttribute = GetOverridePresentationAttribute(viewModelType, viewType);
-            if (overrideAttribute != null)
-                return overrideAttribute;
-
-            var attribute = viewType
-                .GetCustomAttributes(typeof(MvxBasePresentationAttribute), true)
-                .FirstOrDefault() as MvxBasePresentationAttribute;
-            if (attribute != null)
-            {
-                if (attribute.ViewType == null)
-                    attribute.ViewType = viewType;
-
-                if (attribute.ViewModelType == null)
-                    attribute.ViewModelType = viewModelType;
-
-                return attribute;
-            }
-
-            return CreatePresentationAttribute(viewModelType, viewType);
-        }
-
-        public virtual MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
+        public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
             MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new page presentation");
             return new MvxPagePresentationAttribute();
         }
 
-        public virtual MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, Type viewType)
+        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, Type viewType)
         {
             if (viewType != null && viewType.GetInterfaces().Contains(typeof(IMvxOverridePresentationAttribute)))
             {
@@ -308,7 +242,7 @@ namespace MvvmCross.Uwp.Views
             return true;
         }
 
-        private void ShowPage(Type view, MvxPagePresentationAttribute attribute, MvxViewModelRequest request)
+        private void ShowPage(MvxViewModelRequest request)
         {
             try
             {
