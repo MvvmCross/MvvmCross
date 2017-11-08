@@ -39,16 +39,16 @@ namespace MvvmCross.Uwp.Views
                 typeof(MvxPagePresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
-                    ShowAction = (view, attribute, request) => ShowPage(request),
-                    CloseAction = (viewModel, attribute) => ClosePage(viewModel)
+                    ShowAction = (view, attribute, request) => ShowPage(view, attribute, request),
+                    CloseAction = (viewModel, attribute) => ClosePage(viewModel, attribute)
                 });
 
             AttributeTypesToActionsDictionary.Add(
                 typeof(MvxSplitViewPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
-                    ShowAction = (view, attribute, request) => ShowSplitView((MvxSplitViewPresentationAttribute)attribute, request),
-                    CloseAction = (viewModel, attribute) => CloseSplitView(viewModel)
+                    ShowAction = (view, attribute, request) => ShowSplitView(view, (MvxSplitViewPresentationAttribute)attribute, request),
+                    CloseAction = (viewModel, attribute) => CloseSplitView(viewModel, (MvxSplitViewPresentationAttribute)attribute)
                 });
         }
 
@@ -179,10 +179,9 @@ namespace MvvmCross.Uwp.Views
                 _rootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
 
-        private void ShowSplitView(MvxSplitViewPresentationAttribute attribute, MvxViewModelRequest request)
+        protected virtual void ShowSplitView(Type viewType, MvxSplitViewPresentationAttribute attribute, MvxViewModelRequest request)
         {
             var viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
-            var viewType = viewsContainer.GetViewType(request.ViewModelType);
 
             if (_rootFrame.Content is MvxWindowsPage currentPage)
             {
@@ -203,12 +202,12 @@ namespace MvvmCross.Uwp.Views
             }
         }
 
-        private bool CloseSplitView(IMvxViewModel viewModel)
+        protected virtual bool CloseSplitView(IMvxViewModel viewModel, MvxSplitViewPresentationAttribute attribute)
         {
-            return ClosePage(viewModel);
+            return ClosePage(viewModel, attribute);
         }
 
-        private bool ClosePage(IMvxViewModel viewModel)
+        protected virtual bool ClosePage(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute)
         {
             var currentView = _rootFrame.Content as IMvxView;
             if (currentView == null)
@@ -236,13 +235,12 @@ namespace MvvmCross.Uwp.Views
             return true;
         }
 
-        private void ShowPage(MvxViewModelRequest request)
+        protected virtual void ShowPage(Type viewType, MvxBasePresentationAttribute attribute, MvxViewModelRequest request)
         {
             try
             {
                 var requestText = GetRequestText(request);
                 var viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
-                var viewType = viewsContainer.GetViewType(request.ViewModelType);
 
                 _rootFrame.Navigate(viewType, requestText); //Frame won't allow serialization of it's nav-state if it gets a non-simple type as a nav param
 
