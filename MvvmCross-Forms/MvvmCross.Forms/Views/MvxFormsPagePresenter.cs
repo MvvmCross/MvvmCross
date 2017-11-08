@@ -9,6 +9,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
+using System.Reflection;
 
 namespace MvvmCross.Forms.Views
 {
@@ -199,6 +200,42 @@ namespace MvvmCross.Forms.Views
                     return false;
                 return true;
             }
+        }
+
+        public virtual MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
+        {
+            if (viewType.GetTypeInfo().IsSubclassOf(typeof(ContentPage)))
+            {
+                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                               $"Assuming ContentPage presentation");
+                return new MvxContentPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
+            }
+            if (viewType.GetTypeInfo().IsSubclassOf(typeof(CarouselPage)))
+            {
+                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                               $"Assuming CarouselPage presentation");
+                return new MvxCarouselPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
+            }
+            if (viewType.GetTypeInfo().IsSubclassOf(typeof(TabbedPage)))
+            {
+                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                               $"Assuming TabbedPage presentation");
+                return new MvxTabbedPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
+            }
+            if (viewType.GetTypeInfo().IsSubclassOf(typeof(MasterDetailPage)))
+            {
+                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                               $"Assuming MasterDetailPage presentation");
+                return new MvxMasterDetailPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
+            }
+            if (viewType.GetTypeInfo().IsSubclassOf(typeof(NavigationPage)))
+            {
+                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                               $"Assuming NavigationPage presentation");
+                return new MvxNavigationPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
+            }
+
+            return null;
         }
 
         public virtual void ShowContentPage(
