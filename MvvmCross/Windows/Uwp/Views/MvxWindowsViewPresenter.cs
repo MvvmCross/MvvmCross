@@ -50,6 +50,14 @@ namespace MvvmCross.Uwp.Views
                     ShowAction = (view, attribute, request) => ShowSplitView(view, (MvxSplitViewPresentationAttribute)attribute, request),
                     CloseAction = (viewModel, attribute) => CloseSplitView(viewModel, (MvxSplitViewPresentationAttribute)attribute)
                 });
+
+            AttributeTypesToActionsDictionary.Add(
+               typeof(MvxRegionPresentationAttribute),
+               new MvxPresentationAttributeAction
+               {
+                   ShowAction = (view, attribute, request) => ShowRegionView(view, (MvxRegionPresentationAttribute)attribute, request),
+                   CloseAction = (viewModel, attribute) => CloseRegionView(viewModel, (MvxRegionPresentationAttribute)attribute)
+               });
         }
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
@@ -204,6 +212,43 @@ namespace MvvmCross.Uwp.Views
 
         protected virtual bool CloseSplitView(IMvxViewModel viewModel, MvxSplitViewPresentationAttribute attribute)
         {
+            return ClosePage(viewModel, attribute);
+        }
+
+        protected virtual void ShowRegionView(Type viewType, MvxRegionPresentationAttribute attribute, MvxViewModelRequest request)
+        {
+            if (viewType.HasRegionAttribute())
+            {
+                var requestText = GetRequestText(request);
+
+                var containerView = _rootFrame.UnderlyingControl.FindControl<Frame>(viewType.GetRegionName());
+
+                if (containerView != null)
+                {
+                    containerView.Navigate(viewType, requestText);
+                    return;
+                }
+            }
+        }
+
+        protected virtual bool CloseRegionView(IMvxViewModel viewModel, MvxRegionPresentationAttribute attribute)
+        {
+            var viewFinder = Mvx.Resolve<IMvxViewsContainer>();
+            var viewType = viewFinder.GetViewType(viewModel.GetType());
+            if (viewType.HasRegionAttribute())
+            {
+                var containerView = _rootFrame.UnderlyingControl?.FindControl<Frame>( viewType.GetRegionName());
+
+                if (containerView == null)
+                    throw new MvxException($"Region '{viewType.GetRegionName()}' not found in view '{viewType}'");
+
+                if (containerView.CanGoBack)
+                {
+                    containerView.GoBack();
+                    return true;
+                }
+            }
+
             return ClosePage(viewModel, attribute);
         }
 
