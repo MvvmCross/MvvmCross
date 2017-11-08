@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Containers>
+  <Container Key="-61832997">
+    <Items>
+      <Item Id="{4554c3a5-0721-42c3-a8e1-caf63f27125c}">
+        <Filename>MvxWindowsExtensionMethods.cs</Filename>
+        <FilePath>c:\btrgithub\mvvmcross\mvvmcross\windows\uwp\views\mvxwindowsextensionmethods.cs</FilePath>
+        <Folders>
+          <Item>Views</Item>
+        </Folders>
+        <ProjectFileName>C:\BTRGitHub\MvvmCross\MvvmCross\Windows\Uwp\MvvmCross.Uwp.csproj</ProjectFileName>
+        <ProjectName>MvvmCross.Uwp</ProjectName>
+      </Item>
+      <Item Id="{ac3dc65e-2ba4-4de3-87e3-e4f018486a3e}">
+        <Filename>MvxWpfViewPresenter.cs</Filename>
+        <FilePath>c:\btrgithub\mvvmcross\mvvmcross\windows\wpf\views\presenters\mvxwpfviewpresenter.cs</FilePath>
+        <Folders>
+          <Item>Views</Item>
+          <Item>Presenters</Item>
+        </Folders>
+        <ProjectFileName>C:\BTRGitHub\MvvmCross\MvvmCross\Windows\Wpf\MvvmCross.Wpf.csproj</ProjectFileName>
+        <ProjectName>MvvmCross.Wpf</ProjectName>
+      </Item>
+      <Item Id="{a3dc6dfd-3378-43e0-9ed4-2a6565a43430}">
+        <Filename>MvxMacViewPresenter.cs</Filename>
+        <FilePath>c:\btrgithub\mvvmcross\mvvmcross\mac\mac\views\presenters\mvxmacviewpresenter.cs</FilePath>
+        <Folders>
+          <Item>Views</Item>
+          <Item>Presenters</Item>
+        </Folders>
+        <ProjectFileName>C:\BTRGitHub\MvvmCross\MvvmCross\Mac\Mac\MvvmCross.Mac.csproj</ProjectFileName>
+        <ProjectName>MvvmCross.Mac</ProjectName>
+      </Item>
+      <Item Id="{dd07f34f-6ae5-4070-935d-5e612d540f05}">
+        <Filename>MvxWindowsMultiRegionViewPresenter.cs</Filename>
+        <FilePath>c:\btrgithub\mvvmcross\mvvmcross\windows\uwp\views\mvxwindowsmultiregionviewpresenter.cs</FilePath>
+        <Folders>
+          <Item>Views</Item>
+        </Folders>
+        <ProjectFileName>C:\BTRGitHub\MvvmCross\MvvmCross\Windows\Uwp\MvvmCross.Uwp.csproj</ProjectFileName>
+        <ProjectName>MvvmCross.Uwp</ProjectName>
+      </Item>
+      <Item Id="{6fb565be-99b2-4769-89b3-771c4d7dbe4b}">
+        <Filename>MvxAndroidViewPresenter.cs</Filename>
+        <FilePath>c:\btrgithub\mvvmcross\mvvmcross\droid\droid\views\mvxandroidviewpresenter.cs</FilePath>
+        <Folders>
+          <Item>Views</Item>
+        </Folders>
+        <ProjectFileName>C:\BTRGitHub\MvvmCross\MvvmCross\Droid\Droid\MvvmCross.Droid.csproj</ProjectFileName>
+        <ProjectName>MvvmCross.Droid</ProjectName>
+      </Item>
+      <Item Id="{ab14585b-84d3-4060-bccb-e89e4ad617ec}">
+        <Filename>MvxIosViewPresenter.cs</Filename>
+        <FilePath>c:\btrgithub\mvvmcross\mvvmcross\ios\ios\views\presenters\mvxiosviewpresenter.cs</FilePath>
+        <Folders>
+          <Item>Views</Item>
+          <Item>Presenters</Item>
+        </Folders>
+        <ProjectFileName>C:\BTRGitHub\MvvmCross\MvvmCross\iOS\iOS\MvvmCross.iOS.csproj</ProjectFileName>
+        <ProjectName>MvvmCross.iOS</ProjectName>
+      </Item>
+      <Item Id="{5145531a-84dd-47c9-9df2-3b5b2c74c7a1}">
+        <Filename>MvxWindowsViewPresenter.cs</Filename>
+        <FilePath>c:\btrgithub\mvvmcross\mvvmcross\windows\uwp\views\mvxwindowsviewpresenter.cs</FilePath>
+        <Folders>
+          <Item>Views</Item>
+        </Folders>
+        <ProjectFileName>C:\BTRGitHub\MvvmCross\MvvmCross\Windows\Uwp\MvvmCross.Uwp.csproj</ProjectFileName>
+        <ProjectName>MvvmCross.Uwp</ProjectName>
+      </Item>
+      <Item Id="{2e2d52a2-8b6a-45ec-befa-dd76d17887f8}">
+        <Filename>MvxWindowsExtensionMethods.cs</Filename>
+        <FilePath>c:\btrgithub\mvvmcross\mvvmcross\windows\uwp\views\mvxwindowsextensionmethods.cs</FilePath>
+        <Folders>
+          <Item>Views</Item>
+        </Folders>
+        <ProjectFileName>C:\BTRGitHub\MvvmCross\MvvmCross\Windows\Uwp\MvvmCross.Uwp.csproj</ProjectFileName>
+        <ProjectName>MvvmCross.Uwp</ProjectName>
+      </Item>
+      <Item Id="{4acf72f5-5711-4831-961b-e4ff27362fe0}">
+        <Filename>MvxAttributeViewPresenter.cs</Filename>
+        <FilePath>c:\btrgithub\mvvmcross\mvvmcross\core\core\views\mvxattributeviewpresenter.cs</FilePath>
+        <Folders>
+          <Item>Views</Item>
+        </Folders>
+        <ProjectFileName>C:\BTRGitHub\MvvmCross\MvvmCross\Core\Core\MvvmCross.Core.csproj</ProjectFileName>
+        <ProjectName>MvvmCross.Core</ProjectName>
+      </Item>
+      <Item Id="{baa898be-9a92-413e-aa56-16a39359abf3}">
+        <Filename>MvxIosViewPresenter.cs</Filename>
+        <FilePath>c:\btrgithub\mvvmcross\mvvmcross\ios\ios\views\presenters\mvxiosviewpresenter.cs</FilePath>
+        <Folders>
+          <Item>Views</Item>
+          <Item>Presenters</Item>
+        </Folders>
+        <ProjectFileName>C:\BTRGitHub\MvvmCross\MvvmCross\iOS\iOS\MvvmCross.iOS.csproj</ProjectFileName>
+        <ProjectName>MvvmCross.iOS</ProjectName>
+      </Item>
+    </Items>
+  </Container>
+</Containers>

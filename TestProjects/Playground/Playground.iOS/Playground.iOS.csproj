@@ -84,9 +84,11 @@
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
+      <Visible>false</Visible>
       <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\Contents.json">
+      <Visible>false</Visible>
       <InProject>false</InProject>
     </ImageAsset>
   </ItemGroup>
