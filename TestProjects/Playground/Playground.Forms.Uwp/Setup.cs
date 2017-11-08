@@ -6,14 +6,13 @@ using MvvmCross.Forms.Uwp;
 using MvvmCross.Forms.Uwp.Presenters;
 using MvvmCross.Platform;
 using MvvmCross.Uwp.Views;
-using XamlControls = Windows.UI.Xaml.Controls;
 using MvvmCross.Platform.Logging;
+using XamlControls = Windows.UI.Xaml.Controls;
 
 namespace Playground.Forms.Uwp
 {
     public class Setup : MvxFormsWindowsSetup
     {
-
         public Setup(XamlControls.Frame rootFrame, LaunchActivatedEventArgs e) : base(rootFrame, e)
         {
         }
