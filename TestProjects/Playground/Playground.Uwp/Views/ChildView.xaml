@@ -5,6 +5,11 @@
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:views="using:MvvmCross.Uwp.Views"
                       mc:Ignorable="d">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
     <StackPanel>
         <TextBlock Text="Child View"
                    Margin="5" />
@@ -12,5 +17,12 @@
                 Command="{Binding CloseCommand}"
                 Margin="5"
                 Padding="5" />
-    </StackPanel>
+            <Button Content="Second Child"
+                    Command="{Binding ShowSecondChildCommand}"
+                    Margin="5"
+                    Padding="5" />
+            
+        </StackPanel>
+        <Frame x:Name="NestedFrame"  Grid.Row="1"/>
+    </Grid>
 </views:MvxWindowsPage>
