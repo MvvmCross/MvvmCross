@@ -57,8 +57,12 @@ namespace MvvmCross.Forms.Uwp.Presenters
             }
         }
 
-        //TODO: Refactor to new presenter code
-        public const string ModalPresentationParameter = "modal";
+        public override void RegisterAttributeTypes()
+        {
+            base.RegisterAttributeTypes();
+
+            FormsPagePresenter.RegisterAttributeTypes(AttributeTypesToActionsDictionary);
+        }
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
@@ -79,53 +83,15 @@ namespace MvvmCross.Forms.Uwp.Presenters
             }
         }
 
-        public override void Show(MvxViewModelRequest request)
+        public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
-            if (TryShowPage(request))
-                return;
-
-            Mvx.Error("Skipping request for {0}", request.ViewModelType.Name);
+            var presentationAttribute = FormsPagePresenter.CreatePresentationAttribute(viewModelType, viewType);
+            return presentationAttribute ?? base.CreatePresentationAttribute(viewModelType, viewType);
         }
+
 
         protected virtual void CustomPlatformInitialization(NavigationPage mainPage)
         {
-        }
-
-        private bool TryShowPage(MvxViewModelRequest request)
-        {
-            var viewType = ViewsContainer.GetViewType(request.ViewModelType);
-            var page = FormsPagePresenter.CreatePage(viewType, request, null);
-            if (page == null)
-                return false;
-
-            var mainPage = _formsApplication.MainPage as NavigationPage;
-
-            if (mainPage == null)
-            {
-                _formsApplication.MainPage = new NavigationPage(page);
-                mainPage = FormsApplication.MainPage as NavigationPage;
-                CustomPlatformInitialization(mainPage);
-            }
-            else
-            {
-                try
-                {
-                    // check for modal presentation parameter
-                    string modalParameter;
-                    if (request.PresentationValues != null && request.PresentationValues.TryGetValue(ModalPresentationParameter, out modalParameter) && bool.Parse(modalParameter))
-                        mainPage.Navigation.PushModalAsync(page);
-                    else
-                        // calling this sync blocks UI and never navigates hence code continues regardless here
-                        mainPage.PushAsync(page);
-                }
-                catch (Exception e)
-                {
-                    Mvx.Error("Exception pushing {0}: {1}\n{2}", page.GetType(), e.Message, e.StackTrace);
-                    return false;
-                }
-            }
-
-            return true;
         }
 
         public override void Close(IMvxViewModel toClose)
