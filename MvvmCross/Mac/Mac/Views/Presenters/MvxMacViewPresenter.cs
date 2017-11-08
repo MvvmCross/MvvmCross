@@ -21,88 +21,19 @@ using MvvmCross.Platform.Platform;
 namespace MvvmCross.Mac.Views.Presenters
 {
     public class MvxMacViewPresenter
-        : MvxViewPresenter, IMvxMacViewPresenter, IMvxAttributeViewPresenter
+        : MvxAttributeViewPresenter, IMvxMacViewPresenter, IMvxAttributeViewPresenter
     {
         private readonly INSApplicationDelegate _applicationDelegate;
         private List<NSWindow> _windows;
         private ConditionalWeakTable<NSWindow, NSWindowController> _windowsToWindowControllers = new ConditionalWeakTable<NSWindow, NSWindowController>();
 
-        private IMvxViewModelTypeFinder _viewModelTypeFinder;
-        public IMvxViewModelTypeFinder ViewModelTypeFinder
-        {
-            get
-            {
-                if (_viewModelTypeFinder == null)
-                    _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
-                return _viewModelTypeFinder;
-            }
-            set
-            {
-                _viewModelTypeFinder = value;
-            }
-        }
-
-        private IMvxViewsContainer _viewsContainer;
-        public IMvxViewsContainer ViewsContainer
-        {
-            get
-            {
-                if (_viewsContainer == null)
-                    _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
-                return _viewsContainer;
-            }
-            set
-            {
-                _viewsContainer = value;
-            }
-        }
-
-        private Dictionary<Type, MvxPresentationAttributeAction> _attributeTypesActionsDictionary;
-        public Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
-        {
-            get
-            {
-                if (_attributeTypesActionsDictionary == null)
-                {
-                    _attributeTypesActionsDictionary = new Dictionary<Type, MvxPresentationAttributeAction>();
-                    RegisterAttributeTypes();
-                }
-                return _attributeTypesActionsDictionary;
-            }
-        }
-
-        public virtual MvxBasePresentationAttribute GetPresentationAttribute(Type viewModelType)
-        {
-            var viewType = ViewsContainer.GetViewType(viewModelType);
-
-            var overrideAttribute = GetOverridePresentationAttribute(viewModelType, viewType);
-            if (overrideAttribute != null)
-                return overrideAttribute;
-
-            var attribute = viewType
-                .GetCustomAttributes(typeof(MvxBasePresentationAttribute), true)
-                .FirstOrDefault() as MvxBasePresentationAttribute;
-            if (attribute != null)
-            {
-                if (attribute.ViewType == null)
-                    attribute.ViewType = viewType;
-
-                if (attribute.ViewModelType == null)
-                    attribute.ViewModelType = viewModelType;
-
-                return attribute;
-            }
-
-            return CreatePresentationAttribute(viewModelType, viewType);
-        }
-
-        public virtual MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
+        public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
             MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new window presentation");
             return new MvxWindowPresentationAttribute();
         }
 
-        public virtual MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, Type viewType)
+        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, Type viewType)
         {
             if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
             {
@@ -141,7 +72,7 @@ namespace MvvmCross.Mac.Views.Presenters
             _windows = new List<NSWindow>();
         }
 
-        public virtual void RegisterAttributeTypes()
+        public override void RegisterAttributeTypes()
         {
             AttributeTypesToActionsDictionary.Add(
                 typeof(MvxWindowPresentationAttribute),
