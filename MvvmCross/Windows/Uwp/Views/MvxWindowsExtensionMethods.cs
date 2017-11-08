@@ -7,6 +7,7 @@
 
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
+using MvvmCross.Uwp.Attributes;
 using System;
 using System.Linq;
 using Windows.UI.Xaml;
@@ -42,7 +43,7 @@ namespace MvvmCross.Uwp.Views
         public static bool HasRegionAttribute(this Type view)
         {
             var attributes = view
-                .GetCustomAttributes(typeof(MvxRegionAttribute), true);
+                .GetCustomAttributes(typeof(MvxRegionPresentationAttribute), true);
 
             return attributes.Any();
         }
@@ -50,12 +51,12 @@ namespace MvvmCross.Uwp.Views
         public static string GetRegionName(this Type view)
         {
             var attributes = view
-                .GetCustomAttributes(typeof(MvxRegionAttribute), true);
+                .GetCustomAttributes(typeof(MvxRegionPresentationAttribute), true);
 
             if (!attributes.Any())
                 throw new InvalidOperationException("The IMvxWindowsView has no region attribute.");
 
-            return ((MvxRegionAttribute)attributes.First()).Name;
+            return ((MvxRegionPresentationAttribute)attributes.First()).Name;
         }
 
         public static T FindControl<T>(this UIElement parent, string name = null) where T : FrameworkElement
@@ -65,7 +66,8 @@ namespace MvvmCross.Uwp.Views
                 return null;
             }
 
-            if (parent is T typedParent && (string.IsNullOrWhiteSpace(name) || parent.GetValue(FrameworkElement.NameProperty).Equals(name))
+            if (parent is T typedParent &&
+                (string.IsNullOrWhiteSpace(name) || parent.GetValue(FrameworkElement.NameProperty).Equals(name)))
             {
                 return typedParent;
             }
