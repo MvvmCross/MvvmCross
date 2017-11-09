@@ -232,7 +232,9 @@ namespace MvvmCross.Core.Navigation
             OnBeforeNavigate(this, args);
 
             ViewDispatcher.ShowViewModel(request);
-            await viewModel.InitializeTask.Task.ConfigureAwait(false);
+
+            if(viewModel.InitializeTask.Task != null)
+                await viewModel.InitializeTask.Task.ConfigureAwait(false);
 
             OnAfterNavigate(this, args);
         }
@@ -255,7 +257,9 @@ namespace MvvmCross.Core.Navigation
             _tcsResults.Add(viewModel, tcs);
 
             ViewDispatcher.ShowViewModel(request);
-            await viewModel.InitializeTask.Task.ConfigureAwait(false);
+
+            if(viewModel.InitializeTask.Task != null)
+                await viewModel.InitializeTask.Task.ConfigureAwait(false);
 
             OnAfterNavigate(this, args);
 
@@ -287,7 +291,9 @@ namespace MvvmCross.Core.Navigation
             _tcsResults.Add(viewModel, tcs);
 
             ViewDispatcher.ShowViewModel(request);
-            await viewModel.InitializeTask.Task.ConfigureAwait(false);
+
+            if(viewModel.InitializeTask.Task != null)
+                await viewModel.InitializeTask.Task.ConfigureAwait(false);
 
             OnAfterNavigate(this, args);
 

@@ -85,8 +85,8 @@ namespace MvvmCross.Core.ViewModels
             return Task.FromResult(true);
         }
 
-        private NotifyTask _initializeTask;
-        public NotifyTask InitializeTask
+        private MvxNotifyTask _initializeTask;
+        public MvxNotifyTask InitializeTask
         {
             get => _initializeTask;
             set => SetProperty(ref _initializeTask, value);

@@ -9,13 +9,13 @@ namespace MvvmCross.Core.ViewModels
     /// <summary>
     /// Watches a task and raises property-changed notifications when the task completes.
     /// </summary>
-    public sealed class NotifyTask : INotifyPropertyChanged
+    public sealed class MvxNotifyTask : INotifyPropertyChanged
     {
         /// <summary>
         /// Initializes a task notifier watching the specified task.
         /// </summary>
         /// <param name="task">The task to watch.</param>
-        private NotifyTask(Task task)
+        private MvxNotifyTask(Task task)
         {
             Task = task;
             TaskCompleted = MonitorTaskAsync(task);
@@ -128,9 +128,9 @@ namespace MvvmCross.Core.ViewModels
         /// Creates a new task notifier watching the specified task.
         /// </summary>
         /// <param name="task">The task to watch.</param>
-        public static NotifyTask Create(Task task)
+        public static MvxNotifyTask Create(Task task)
         {
-            return new NotifyTask(task);
+            return new MvxNotifyTask(task);
         }
 
         /// <summary>
@@ -139,16 +139,16 @@ namespace MvvmCross.Core.ViewModels
         /// <typeparam name="TResult">The type of the task result.</typeparam>
         /// <param name="task">The task to watch.</param>
         /// <param name="defaultResult">The default "result" value for the task while it is not yet complete.</param>
-        public static NotifyTask<TResult> Create<TResult>(Task<TResult> task, TResult defaultResult = default(TResult))
+        public static MvxNotifyTask<TResult> Create<TResult>(Task<TResult> task, TResult defaultResult = default(TResult))
         {
-            return new NotifyTask<TResult>(task, defaultResult);
+            return new MvxNotifyTask<TResult>(task, defaultResult);
         }
 
         /// <summary>
         /// Executes the specified asynchronous code and creates a new task notifier watching the returned task.
         /// </summary>
         /// <param name="asyncAction">The asynchronous code to execute.</param>
-        public static NotifyTask Create(Func<Task> asyncAction)
+        public static MvxNotifyTask Create(Func<Task> asyncAction)
         {
             return Create(asyncAction());
         }
@@ -158,7 +158,7 @@ namespace MvvmCross.Core.ViewModels
         /// </summary>
         /// <param name="asyncAction">The asynchronous code to execute.</param>
         /// <param name="defaultResult">The default "result" value for the task while it is not yet complete.</param>
-        public static NotifyTask<TResult> Create<TResult>(Func<Task<TResult>> asyncAction, TResult defaultResult = default(TResult))
+        public static MvxNotifyTask<TResult> Create<TResult>(Func<Task<TResult>> asyncAction, TResult defaultResult = default(TResult))
         {
             return Create(asyncAction(), defaultResult);
         }
@@ -168,7 +168,7 @@ namespace MvvmCross.Core.ViewModels
     /// Watches a task and raises property-changed notifications when the task completes.
     /// </summary>
     /// <typeparam name="TResult">The type of the task result.</typeparam>
-    public sealed class NotifyTask<TResult> : INotifyPropertyChanged
+    public sealed class MvxNotifyTask<TResult> : INotifyPropertyChanged
     {
         /// <summary>
         /// The "result" of the task when it has not yet completed.
@@ -180,7 +180,7 @@ namespace MvvmCross.Core.ViewModels
         /// </summary>
         /// <param name="task">The task to watch.</param>
         /// <param name="defaultResult">The value to return from <see cref="Result"/> while the task is not yet complete.</param>
-        internal NotifyTask(Task<TResult> task, TResult defaultResult)
+        internal MvxNotifyTask(Task<TResult> task, TResult defaultResult)
         {
             _defaultResult = defaultResult;
             Task = task;
