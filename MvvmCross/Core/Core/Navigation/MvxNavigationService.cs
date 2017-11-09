@@ -233,7 +233,7 @@ namespace MvvmCross.Core.Navigation
 
             ViewDispatcher.ShowViewModel(request);
 
-            if(viewModel.InitializeTask.Task != null)
+            if(viewModel.InitializeTask?.Task != null)
                 await viewModel.InitializeTask.Task.ConfigureAwait(false);
 
             OnAfterNavigate(this, args);
@@ -258,7 +258,7 @@ namespace MvvmCross.Core.Navigation
 
             ViewDispatcher.ShowViewModel(request);
 
-            if(viewModel.InitializeTask.Task != null)
+            if(viewModel.InitializeTask?.Task != null)
                 await viewModel.InitializeTask.Task.ConfigureAwait(false);
 
             OnAfterNavigate(this, args);
@@ -292,7 +292,7 @@ namespace MvvmCross.Core.Navigation
 
             ViewDispatcher.ShowViewModel(request);
 
-            if(viewModel.InitializeTask.Task != null)
+            if(viewModel.InitializeTask?.Task != null)
                 await viewModel.InitializeTask.Task.ConfigureAwait(false);
 
             OnAfterNavigate(this, args);
