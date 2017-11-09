@@ -95,7 +95,7 @@ namespace MvvmCross.Core.ViewModels
 
                 viewModel.Prepare();
 
-                viewModel.InitializeTask = NotifyTask.Create(() => viewModel.Initialize());
+                viewModel.InitializeTask = MvxNotifyTask.Create(() => viewModel.Initialize());
             }
             catch(Exception exception)
             {
@@ -117,7 +117,7 @@ namespace MvvmCross.Core.ViewModels
                 viewModel.Prepare();
                 viewModel.Prepare(param);
 
-                viewModel.InitializeTask = NotifyTask.Create(() => viewModel.Initialize());
+                viewModel.InitializeTask = MvxNotifyTask.Create(() => viewModel.Initialize());
             }
             catch(Exception exception)
             {

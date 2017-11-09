@@ -35,7 +35,7 @@ namespace MvvmCross.Test.Navigation
                                {
                                    var vm = new SimpleTestViewModel();
                                    vm.Prepare();
-                                   vm.InitializeTask = NotifyTask.Create(() => vm.Initialize());
+                                   vm.InitializeTask = MvxNotifyTask.Create(() => vm.Initialize());
                                    return vm;
                                });
             mockLocator.Setup(
@@ -44,7 +44,7 @@ namespace MvvmCross.Test.Navigation
                       {
                           var vm = new SimpleTestViewModel();
                           vm.Prepare();
-                          vm.InitializeTask = NotifyTask.Create(() => vm.Initialize());
+                          vm.InitializeTask = MvxNotifyTask.Create(() => vm.Initialize());
                           return vm;
                       });
 
