@@ -69,7 +69,10 @@ This attribute is only useful (and should only be used) when the current _Root_ 
 By using it over a view class, the presenter will show the view as _Master_ of the split.
 
 There is an attribute member that can be used to customize the presentation:
-- WrapInNavigationController: If set to `true`, the view will be displayed wrapped in a `MvxNavigationController`, which will allow you to set a title, which is the most common scenario of SplitView. The default value is therefore `true`.
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| WrapInNavigationController | `bool` | If set to `true`, the view will be displayed wrapped in a `MvxNavigationController`, which will allow you to set a title, which is the most common scenario of SplitView. The default value is therefore `true`. |
 
 
 ### MvxDetailSplitViewPresentationAttribute
@@ -77,7 +80,10 @@ This attribute is only useful (and should only be used) when the current _Root_ 
 By using it over a view class, the presenter will show the view as _Detail_ of the split.
 
 There is an attribute member that can be used to customize the presentation:
-- WrapInNavigationController: If set to `true`, the view will be displayed wrapped in a `MvxNavigationController`,  which will allow the view to have its own navigation stack.
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| WrapInNavigationController | `bool` |WrapInNavigationController: If set to `true`, the view will be displayed wrapped in a `MvxNavigationController`,  which will allow the view to have its own navigation stack. |
 
 
 ## Views without attributes: Default values
