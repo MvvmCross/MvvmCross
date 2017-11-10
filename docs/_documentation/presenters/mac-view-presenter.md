@@ -28,13 +28,15 @@ Used to initiate a new _Window_. The first view of your app should use this attr
 
 You can customize how the window will look through the following properties:
 
-- Identifier: Window identifier, used to identify the window for other attributes. If an identifier is not provided by the developer, it will be set to the name of the view class.
-- WindowStyle: Used to set the NSWindowStyle. Default value is `NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled`.
-- BufferingType: Used to set the NSBackingStore. Default value is `NSBackingStore.Buffered`.
-- PositionX: float, default value is 200.
-- PositionY: float, default value is 200.
-- Width: float, default value is 600.
-- Height: float, default value is 400.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| Identifier | `string` | Window identifier, used to identify the window for other attributes. If an identifier is not provided by the developer, it will be set to the name of the view class. |
+| WindowStyle | `NSWindowStyle?` | Used to set the NSWindowStyle. Default value is `NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled`. |
+| BufferingType | `NSBackingStore?` | Used to set the NSBackingStore. Default value is `NSBackingStore.Buffered`. |
+| PositionX | `float` | Default value is 200. |
+| PositionY | `float` | Default value is 200. |
+| Width | `float` | Default value is 600. |
+| Height | `float` | Default value is 400. "
 
 To use a window generated in Storyboard, click on the storyboard and create a new Window Controller in Interface Builder. You may delete the generated View Controller. Back in Visual Studio for Mac, change the resulting _NSWindowController_ to a _MvxWindowController_. Add two parameters to the _MvxWindowPresentationAttribute_, the WindowControllerName followed by the StoryboardName, e.g.,
 ```c#
@@ -67,8 +69,10 @@ By using it over a view class, the presenter will show the view as a _Tab_ insid
 
 The presentation can be customized through this properties:
 
-- TabTitle: Defines the title of the tab that will be displayed in the segmented control for tabs.
-- WindowIdentifier: identifier for the window where the view should be displayed.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| TabTitle | `string` | Defines the title of the tab that will be displayed in the segmented control for tabs. |
+| WindowIdentifier | `string` | identifier for the window where the view should be displayed. |
 
 ## Views without attributes: Default values
 
