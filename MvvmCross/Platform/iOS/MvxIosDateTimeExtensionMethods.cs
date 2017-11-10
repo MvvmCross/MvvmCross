@@ -23,5 +23,10 @@ namespace MvvmCross.Platform.iOS
         {
             return NSDate.FromTimeIntervalSinceReferenceDate((date - ReferenceNSDateTime).TotalSeconds);
         }
+
+        public static DateTime WithKind(this DateTime date, DateTimeKind kind)
+        {
+            return new DateTime(date.Ticks, kind);
+        }
     }
 }
