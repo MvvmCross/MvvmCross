@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -96,6 +96,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EmptyVoidLogProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Views\ChildView.xaml.cs">
@@ -103,6 +104,15 @@
     </Compile>
     <Compile Include="Views\RootView.xaml.cs">
       <DependentUpon>RootView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitDetailView.xaml.cs">
+      <DependentUpon>SplitDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitMasterView.xaml.cs">
+      <DependentUpon>SplitMasterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitRootView.xaml.cs">
+      <DependentUpon>SplitRootView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +145,14 @@
     <ProjectReference Include="..\..\..\MvvmCross-Forms\MvvmCross.Forms\MvvmCross.Forms.csproj">
       <Project>{0797d39c-c59b-4fe2-bb16-ab6fa0119c69}</Project>
       <Name>MvvmCross.Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross-Plugins\JsonLocalization\MvvmCross.Plugins.JsonLocalization\MvvmCross.Plugins.JsonLocalization.csproj">
+      <Project>{71d719fa-95b0-4a05-b064-ab8d0b7085df}</Project>
+      <Name>MvvmCross.Plugins.JsonLocalization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross-Plugins\ResourceLoader\MvvmCross.Plugins.ResourceLoader\MvvmCross.Plugins.ResourceLoader.csproj">
+      <Project>{75ca1824-c7f3-4827-93ed-e75b2c01cb2c}</Project>
+      <Name>MvvmCross.Plugins.ResourceLoader</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross\Binding\UWP\MvvmCross.Binding.Uwp.csproj">
       <Project>{637533ee-756b-4817-94b2-7c1e56132208}</Project>
@@ -171,6 +189,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RootView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SplitDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SplitMasterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SplitRootView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
