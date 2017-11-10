@@ -48,51 +48,51 @@ namespace MvvmCross.Binding.iOS
                 MvxIosPropertyBinding.UIControl_TouchDown,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_TouchDown));
 
-			registry.RegisterCustomBindingFactory<UIControl>(
+            registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_TouchDownRepeat,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_TouchDownRepeat));
             
-			registry.RegisterCustomBindingFactory<UIControl>(
+            registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_TouchDragInside,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_TouchDragInside));
 
-			registry.RegisterCustomBindingFactory<UIControl>(
+            registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_TouchUpInside,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_TouchUpInside));
 
-			registry.RegisterCustomBindingFactory<UIControl>(
+            registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_ValueChanged,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_ValueChanged));
 
-			registry.RegisterCustomBindingFactory<UIControl>(
+            registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_PrimaryActionTriggered,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_PrimaryActionTriggered));
 
-			registry.RegisterCustomBindingFactory<UIControl>(
+            registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_EditingDidBegin,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_EditingDidBegin));
 
-			registry.RegisterCustomBindingFactory<UIControl>(
+            registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_EditingChanged,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_EditingChanged));
 
-			registry.RegisterCustomBindingFactory<UIControl>(
+            registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_EditingDidEnd,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_EditingDidEnd));
 
-			registry.RegisterCustomBindingFactory<UIControl>(
+            registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_EditingDidEndOnExit,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_EditingDidEndOnExit));
 
-			registry.RegisterCustomBindingFactory<UIControl>(
+            registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_AllTouchEvents,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_AllTouchEvents));
 
-			registry.RegisterCustomBindingFactory<UIControl>(
+            registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_AllEditingEvents,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_AllEditingEvents));
             
-			registry.RegisterCustomBindingFactory<UIControl>(
+            registry.RegisterCustomBindingFactory<UIControl>(
                 MvxIosPropertyBinding.UIControl_AllEvents,
                 view => new MvxUIControlTargetBinding(view, MvxIosPropertyBinding.UIControl_AllEvents));
 
@@ -136,7 +136,21 @@ namespace MvvmCross.Binding.iOS
                 typeof(MvxUIDatePickerDateTargetBinding),
                 typeof(UIDatePicker),
                 MvxIosPropertyBinding.UIDatePicker_Date);
-                
+
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxUIDatePickerMinMaxTargetBinding),
+                typeof(UIDatePicker),
+                MvxIosPropertyBinding.UIDatePicker_MinimumDate);
+
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxUIDatePickerMinMaxTargetBinding),
+                typeof(UIDatePicker),
+                MvxIosPropertyBinding.UIDatePicker_MaximumDate);
+
+            registry.RegisterCustomBindingFactory<UIDatePicker>(
+                MvxIosPropertyBinding.UIDatePicker_Time,
+                view => new MvxUIDatePickerTimeTargetBinding(view, typeof(UIDatePicker).GetProperty(MvxIosPropertyBinding.UIDatePicker_Date)));
+
             registry.RegisterPropertyInfoBindingFactory(
                 typeof(MvxUIDatePickerCountDownDurationTargetBinding),
                 typeof(UIDatePicker),
@@ -145,10 +159,6 @@ namespace MvvmCross.Binding.iOS
             registry.RegisterCustomBindingFactory<UITextField>(
                 MvxIosPropertyBinding.UITextField_ShouldReturn,
                 textField => new MvxUITextFieldShouldReturnTargetBinding(textField));
-
-            registry.RegisterCustomBindingFactory<UIDatePicker>(
-                MvxIosPropertyBinding.UIDatePicker_Time,
-                view => new MvxUIDatePickerTimeTargetBinding(view, typeof(UIDatePicker).GetProperty(nameof(UIDatePicker.Date))));
 
             registry.RegisterCustomBindingFactory<UILabel>(
                 MvxIosPropertyBinding.UILabel_Text,
