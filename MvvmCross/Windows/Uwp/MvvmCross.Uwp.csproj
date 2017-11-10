@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -43,6 +43,8 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\MvxPagePresentationAttribute.cs" />
+    <Compile Include="Attributes\MvxSplitViewPresentationAttribute.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
     <Compile Include="Platform\MvxWindowsSetup.cs" />
     <Compile Include="..\..\..\AssemblyInfo.cs">
@@ -54,11 +56,10 @@
     <Compile Include="Views\IMvxWindowsViewModelLoader.cs" />
     <Compile Include="Views\IMvxWindowsViewModelRequestTranslator.cs" />
     <Compile Include="Views\IMvxWindowsViewPresenter.cs" />
-    <Compile Include="Views\MvxRegionAttribute.cs" />
+    <Compile Include="Attributes\MvxRegionPresentationAttribute.cs" />
     <Compile Include="Views\MvxWindowsExtensionMethods.cs" />
     <Compile Include="Views\MvxWindowsMainThreadDispatcher.cs" />
     <Compile Include="Views\MvxWindowsPage.cs" />
-    <Compile Include="Views\MvxWindowsMultiRegionViewPresenter.cs" />
     <Compile Include="Views\MvxWindowsViewDispatcher.cs" />
     <Compile Include="Views\MvxWindowsViewPresenter.cs" />
     <Compile Include="Views\MvxWindowsViewsContainer.cs" />
@@ -86,6 +87,7 @@
       <Name>MvvmCross.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
