@@ -1,4 +1,4 @@
-﻿// MvxBaseUIDatePickerTargetBinding.cs
+// MvxBaseUIDatePickerTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,7 +7,9 @@
 
 using System;
 using System.Reflection;
+using Foundation;
 using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.iOS;
 using MvvmCross.Platform.Platform;
 using UIKit;
 
@@ -21,14 +23,17 @@ namespace MvvmCross.Binding.iOS.Target
             var datePicker = View;
             if (datePicker == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - UIDatePicker is null in MvxBaseUIDatePickerTargetBinding");
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UIDatePicker is null in MvxBaseUIDatePickerTargetBinding");
             }
-            else
+            else if (targetPropertyInfo.Name == nameof(UIDatePicker.Date)) // Only listen for changes if we are binding against the Date property.
             {
                 datePicker.ValueChanged += DatePickerOnValueChanged;
             }
+
+            _systemTimeZone = NSTimeZone.SystemTimeZone;
         }
+
+        private readonly NSTimeZone _systemTimeZone;
 
         private void DatePickerOnValueChanged(object sender, EventArgs eventArgs)
         {
@@ -53,6 +58,26 @@ namespace MvvmCross.Binding.iOS.Target
                     datePicker.ValueChanged -= DatePickerOnValueChanged;
                 }
             }
+        }
+
+        protected DateTime ToLocalTime(DateTime utc)
+        {
+            if (utc.Kind == DateTimeKind.Local)
+                return utc;
+
+            var local = utc.AddSeconds(_systemTimeZone.SecondsFromGMT(utc.ToNSDate())).WithKind(DateTimeKind.Local);
+
+            return local;
+        }
+
+        protected DateTime ToUtcTime(DateTime local)
+        {
+            if (local.Kind == DateTimeKind.Utc)
+                return local;
+
+            var utc = local.AddSeconds(-_systemTimeZone.SecondsFromGMT(local.ToNSDate())).WithKind(DateTimeKind.Utc);
+
+            return utc;
         }
     }
 }

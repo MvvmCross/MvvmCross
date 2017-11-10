@@ -51,8 +51,9 @@
     <Compile Include="Target\MvxBaseUIDatePickerTargetBinding.cs" />
     <Compile Include="Target\MvxBaseUIViewVisibleTargetBinding.cs" />
     <Compile Include="Target\MvxUIActivityIndicatorViewHiddenTargetBinding.cs" />
-    <Compile Include="Target\MvxUIDatePickerCountdownDurationTargetBinding.cs" />
+    <Compile Include="Target\MvxUIDatePickerMinMaxTargetBinding.cs" />
     <Compile Include="Target\MvxUIDatePickerDateTargetBinding.cs" />
+    <Compile Include="Target\MvxUIDatePickerCountdownDurationTargetBinding.cs" />
     <Compile Include="Target\MvxUIDatePickerTimeTargetBinding.cs" />
     <Compile Include="Target\MvxUILabelTextTargetBinding.cs" />
     <Compile Include="Target\MvxUISearchBarTextTargetBinding.cs" />
