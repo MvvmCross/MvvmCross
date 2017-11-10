@@ -53,6 +53,14 @@ Please add any images for the documentation in the `assets/docs` folder. Then yo
 ![My helpful screenshot]({{ site.url }}/assets/docs/screenshot.jpg)
 ```
 
+## Setting up the MvvmCross GitHub Pages site locally with Jekyll
+
+In some cases it might be more comfortable to work locally on updating the documentation pages instead of using the online GitHub editor. This is especially the case when working on bigger changes you'd most likely do on a separate branch and maybe spend multiple days working on. In those cases it might be usefull to be able to generate the site locally, so you can see what your changes look like when rendered in the browser. This means you will have to install `Jekyll`, detailed instructions on how to do so can be found here:
+
+```
+[Setting up your GitHub Pages site locally with Jekyll](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/)
+```
+
 ## Summary
 
 This style guide is intended to help contributors quickly create new articles for mvvmcross.com. It includes the most common syntax elements that are used, as well as overall document organization guidance. If you discover mistakes or gaps in this guide, please submit an issue.
