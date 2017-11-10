@@ -42,11 +42,13 @@ If your app uses a TabBarController as a child ViewController of a "master" Navi
 Used to display a view as _Modal_. You should use this attribute over a view class to present the view as a modal.
 There are several attribute members that the view class can customize:
 
-- WrapInNavigationController: If set to `true`, a modal navigation stack will be initiated (following child presentations will be displayed inside the modal stack). The default value is `false`.
-- ModalPresentationStyle: Corresponds to the `ModalPresentationStyle` property of UIViewController. The default value is `UIModalPresentationStyle.FullScreen`.
-- ModalTransitionStyle: Corresponds to the `ModalTransitionStyle` property of UIViewController. The default value is `UIModalTransitionStyle.CoverVertical`.
-- PreferredContentSize : Corresponds to the `PreferredContentSize` property of UIViewController. The property works for iPad only.
-- Animated: If set to true, the presentation will be animated. The default value is `true`.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| WrapInNavigationController | `bool` | If set to `true`, a modal navigation stack will be initiated (following child presentations will be displayed inside the modal stack). The default value is `false`. |
+| ModalPresentationStyle | `UIModalPresentationStyle` | Corresponds to the `ModalPresentationStyle` property of UIViewController. The default value is `UIModalPresentationStyle.FullScreen`. |
+| ModalTransitionStyle | `UIModalTransitionStyle` | Corresponds to the `ModalTransitionStyle` property of UIViewController. The default value is `UIModalTransitionStyle.CoverVertical`. |
+| PreferredContentSize | `CGSize` | Corresponds to the `PreferredContentSize` property of UIViewController. The property works for iPad only. |
+| Animated | `bool` | If set to true, the presentation will be animated. The default value is `true`. |
 
 
 ### MvxTabPresentationAttribute
