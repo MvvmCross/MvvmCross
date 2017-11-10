@@ -81,8 +81,13 @@ namespace MvvmCross.Forms.Views
         {
             var page = Activator.CreateInstance(viewType) as Page;
 
-            if (page is IMvxPage contentPage && request is MvxViewModelInstanceRequest instanceRequest)
-                contentPage.ViewModel = instanceRequest.ViewModelInstance;
+            if (page is IMvxPage contentPage)
+            {
+                if(request is MvxViewModelInstanceRequest instanceRequest)
+                    contentPage.ViewModel = instanceRequest.ViewModelInstance;
+                else
+                    contentPage.ViewModel = ViewModelLoader.LoadViewModel(request, null);
+            }
 
             if(attribute is MvxPagePresentationAttribute pageAttribute)
             {
