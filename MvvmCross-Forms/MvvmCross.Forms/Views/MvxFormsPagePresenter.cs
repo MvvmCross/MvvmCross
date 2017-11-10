@@ -297,7 +297,9 @@ namespace MvvmCross.Forms.Views
                     else
                         masterDetailHost.Detail = new MvxNavigationPage(new MvxContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) });
 
-                    PushOrReplacePage(FormsApplication.MainPage, masterDetailHost, attribute);
+                    var masterDetailRootAttribute = new MvxMasterDetailPagePresentationAttribute {Position =  MasterDetailPosition.Root, WrapInNavigationPage = attribute.WrapInNavigationPage, NoHistory = attribute.NoHistory};
+
+                    PushOrReplacePage(FormsApplication.MainPage, masterDetailHost, masterDetailRootAttribute);
                 }
                 else if (attribute.Position == MasterDetailPosition.Master)
                     PushOrReplacePage(masterDetailHost.Master, page, attribute);
@@ -486,20 +488,32 @@ namespace MvvmCross.Forms.Views
                 {
                     PushOrReplacePage(navigationNestedPage, page, attribute);
                 }
+                else if (attribute is MvxMasterDetailPagePresentationAttribute masterDetailAttribute && masterDetailAttribute.Position != MasterDetailPosition.Root)
+                {
+                    if (attribute.WrapInNavigationPage)
+                    {
+                        page = new MvxNavigationPage(page);
+                    }
+
+                    ReplaceMasterDetailRoot(rootPage, page, masterDetailAttribute);
+                }
                 else if (attribute.WrapInNavigationPage && rootPage is MvxNavigationPage navigationPage)
                 {
                     navigationPage.Navigation.InsertPageBefore(page, navigationPage.RootPage);
                     navigationPage.Navigation.PopToRootAsync(attribute.Animated);
                 }
                 else
+                {
                     ReplaceRoot(page);
+                }
             }
             else
             {
                 if (rootPage is MvxNavigationPage navigationRootPage && navigationRootPage.CurrentPage is MvxNavigationPage navigationNestedPage)
                     PushOrReplacePage(navigationNestedPage, page, attribute);
-                else if (attribute is MvxMasterDetailPagePresentationAttribute masterDetailAttribute && masterDetailAttribute.Position!=MasterDetailPosition.Root)
+                else if (attribute is MvxMasterDetailPagePresentationAttribute masterDetailAttribute && masterDetailAttribute.Position!=MasterDetailPosition.Root )
                 {
+                    // TODO: Need to adjust this to handle WrapInNavigationPage set to true
                     ReplaceMasterDetailRoot(rootPage, page, masterDetailAttribute);
                 }
                 else if (attribute.WrapInNavigationPage && rootPage is MvxNavigationPage navigationPage)
