@@ -42,11 +42,13 @@ If your app uses a TabBarController as a child ViewController of a "master" Navi
 Used to display a view as _Modal_. You should use this attribute over a view class to present the view as a modal.
 There are several attribute members that the view class can customize:
 
-- WrapInNavigationController: If set to `true`, a modal navigation stack will be initiated (following child presentations will be displayed inside the modal stack). The default value is `false`.
-- ModalPresentationStyle: Corresponds to the `ModalPresentationStyle` property of UIViewController. The default value is `UIModalPresentationStyle.FullScreen`.
-- ModalTransitionStyle: Corresponds to the `ModalTransitionStyle` property of UIViewController. The default value is `UIModalTransitionStyle.CoverVertical`.
-- PreferredContentSize : Corresponds to the `PreferredContentSize` property of UIViewController. The property works for iPad only.
-- Animated: If set to true, the presentation will be animated. The default value is `true`.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| WrapInNavigationController | `bool` | If set to `true`, a modal navigation stack will be initiated (following child presentations will be displayed inside the modal stack). The default value is `false`. |
+| ModalPresentationStyle | `UIModalPresentationStyle` | Corresponds to the `ModalPresentationStyle` property of UIViewController. The default value is `UIModalPresentationStyle.FullScreen`. |
+| ModalTransitionStyle | `UIModalTransitionStyle` | Corresponds to the `ModalTransitionStyle` property of UIViewController. The default value is `UIModalTransitionStyle.CoverVertical`. |
+| PreferredContentSize | `CGSize` | Corresponds to the `PreferredContentSize` property of UIViewController. The property works for iPad only. |
+| Animated | `bool` | If set to true, the presentation will be animated. The default value is `true`. |
 
 
 ### MvxTabPresentationAttribute
@@ -54,18 +56,23 @@ This attribute is only useful (and should only be used) when the current _Root_ 
 By using it over a view class, the presenter will show the view as a _Tab_ inside the TabBarController.
 The presentation can be highly customized through this attribute members:
 
-- TabName: Defines the title of the tab that will be displayed below the tab icon. It has to be a magic string, but it can be for example a key to a localized string that you can grab overriding the method `SetTitleAndTabBarItem` in your TabBarController.
-- TabIconName: Defines the name of the resource that will be used as icon for the tab. It also has to be a magic string, but same as before, your app can take control of what happens by overriding the method `SetTitleAndTabBarItem` in your TabBarController.
-- TabSelectedIconName: Defines the name of the resource that will be used as icon for the tab when it becomes selected. It also has to be a magic string, your app can take control of what happens by overriding the method `SetTitleAndTabBarItem` in your TabBarController.
-- WrapInNavigationController: If set to `true`, the view will be wrapped in a `MvxNavigationController`, which will allow the tab to have its own navigation stack. **Important note**: When the current _Root_ is a TabBarController and there is no current modal navigation stack, child presentations will be tried to be displayed in the current selected _Tab_.
-- TabAccessibilityIdentifier: Corresponds to the UIViewController.View `AccessibilityIdentifier` property.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| TabName | `string` | Defines the title of the tab that will be displayed below the tab icon. It has to be a magic string, but it can be for example a key to a localized string that you can grab overriding the method `SetTitleAndTabBarItem` in your TabBarController. |
+| TabIconName | `string` | Defines the name of the resource that will be used as icon for the tab. It also has to be a magic string, but same as before, your app can take control of what happens by overriding the method `SetTitleAndTabBarItem` in your TabBarController. |
+| TabSelectedIconName | `string` | Defines the name of the resource that will be used as icon for the tab when it becomes selected. It also has to be a magic string, your app can take control of what happens by overriding the method `SetTitleAndTabBarItem` in your TabBarController. |
+| WrapInNavigationController | `bool` | If set to `true`, the view will be wrapped in a `MvxNavigationController`, which will allow the tab to have its own navigation stack. **Important note**: When the current _Root_ is a TabBarController and there is no current modal navigation stack, child presentations will be tried to be displayed in the current selected _Tab_. |
+| TabAccessibilityIdentifier | `string` |Corresponds to the UIViewController.View `AccessibilityIdentifier` property. |
 
 ### MvxMasterSplitViewPresentationAttribute
 This attribute is only useful (and should only be used) when the current _Root_ view is a `IMvxSplitViewController`.
 By using it over a view class, the presenter will show the view as _Master_ of the split.
 
 There is an attribute member that can be used to customize the presentation:
-- WrapInNavigationController: If set to `true`, the view will be displayed wrapped in a `MvxNavigationController`, which will allow you to set a title, which is the most common scenario of SplitView. The default value is therefore `true`.
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| WrapInNavigationController | `bool` | If set to `true`, the view will be displayed wrapped in a `MvxNavigationController`, which will allow you to set a title, which is the most common scenario of SplitView. The default value is therefore `true`. |
 
 
 ### MvxDetailSplitViewPresentationAttribute
@@ -73,7 +80,10 @@ This attribute is only useful (and should only be used) when the current _Root_ 
 By using it over a view class, the presenter will show the view as _Detail_ of the split.
 
 There is an attribute member that can be used to customize the presentation:
-- WrapInNavigationController: If set to `true`, the view will be displayed wrapped in a `MvxNavigationController`,  which will allow the view to have its own navigation stack.
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| WrapInNavigationController | `bool` |WrapInNavigationController: If set to `true`, the view will be displayed wrapped in a `MvxNavigationController`,  which will allow the view to have its own navigation stack. |
 
 
 ## Views without attributes: Default values
