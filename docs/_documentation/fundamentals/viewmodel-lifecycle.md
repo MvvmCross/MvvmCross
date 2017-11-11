@@ -7,13 +7,164 @@ order: 5
 
 # MvvmCross 5.x ViewModels lifecycle
 
-Alongside [a new Navigation Service](https://www.mvvmcross.com/documentation/fundamentals/navigation), MvvmCross provides a new lifecycle for ViewModels with many enhancements such as async initialization. The current lifecycle includes:
+Alongside the new [MvxNavigationService](https://www.mvvmcross.com/documentation/fundamentals/navigation), MvvmCross provides a new lifecycle for ViewModels with many enhancements such as async initialization. The standard lifecycle is:
 
 1. Construction: Called when the object is instantiated. You can use Dependency Injection here to introduce all dependencies!
-2. Prepare: Called before the navigation is done. You can use this method to receive and store all parameters (it is your responsibility to handle them).
-3. Initialize: Called right after the navigation is done. This method returns a Task, which means you can mark it as async and use the await safely. If this method fails, the `Navigate` call that you are probably awaiting will fail, so you might want to catch that exception.
+2. Prepare: The initial point for your ViewModel. You can use this method to receive and store all parameters (it is your responsibility to handle them).
+3. Initialize: All heavy work should be run here. This method returns a Task, which means you can mark it as async and use await safely. If this method fails, the `Navigate` call that you are probably awaiting will fail, so you might want to catch that exception.
 
-Also note that starting from MvvmCross 5.0, ViewModels will be coupled to the lifecycle of the view. This means that the ViewModel has the following methods available:
+### Construction
+
+When you want to navigate to a certain ViewModel, you will typically do it through the MvxNavigationService:
+
+```c#
+private async Task MyMethodAsync()
+{
+    await _navigationService.Navigate<MyViewModel>();
+}
+```
+
+Inside that call, MvvmCross will instantiate `MyViewModel` using the IoC container and use the Dependency Injection engine to inject all its dependencies. This is how `MyViewModel` could look like:
+
+```c#
+public class MyViewModel : MvxViewModel
+{
+    private readonly IMyService _myService;
+
+    public MyViewModel(IMyService myService)
+    {
+        _myService = myService;
+    }
+
+    // ...
+}
+```
+
+### Prepare
+
+If you need to send some parameters to a ViewModel, you will want to use this method. MvxViewModel can have two Prepare methods:
+
+- Parameterless `Prepare`: Called in every scenario.
+- `Prepare(TParameter parameter)`: Called when you are navigating to a ViewModel with initial parameters. You shouldn't perform any logics on this method more than saving the parameters.
+
+This is how a typical ViewModel with initial parameters look like:
+
+```c#
+public class MyViewModel : MvxViewModel<MyParameterModel>
+{
+    private readonly IMyService _myService;
+
+    public MyViewModel(IMyService myService)
+    {
+        _myService = myService;
+    }
+
+    public void Prepare(MyParameterModel parameter)
+    {
+
+    }
+
+    // ...
+}
+```
+
+And this is how you would navigate to this ViewModel using the MvxNavigationService:
+
+```c#
+private async Task MyMethodAsync()
+{
+    await _navigationService.Navigate<MyViewModel, MyParameterModel>(new MyParameterModel());
+}
+```
+
+### Initialize
+
+This method is called right after Prepare, and since it returns a Task, you can mark it as async and await operations inside of it. All heavy loading operations should be made inside this method.
+
+When Initialize is fired from MvxViewModelLoader, there is a MvxNotifyTask called InitializeTask that will watch its state and fire property changed events (you can even bind View properties to InitializeTask properties!).
+
+## Tombstoning: Saving and restoring the ViewModel's state
+
+Each platform MvvmCross supports has a different way of handing low memory situations and as you may imagine, each platform has its own View lifecycle (the most problematic here might be Android).
+
+In order to cope with that, the framework provides you with a way to save your ViewModel's state and a way to restore it later, regardless what might occur with the Views.
+
+### Save State
+
+When your app is going through a tombstoning process, MvvmCross will call a specific method from MvxViewModel: SaveStateToBundle, which is protected and receives a `IMvxBundle` as parameter.
+You can override SaveStateToBundle and store any string you want on it, writing to its `Data` property. A good advise is to use [JSON serialization](https://www.mvvmcross.com/documentation/plugins/json) for that.
+
+After SaveStateToBundle is returned to the caller, the IMvxBundle will be stored by MvvmCross.
+
+### Restore State
+
+Same as before, MvxViewModel has a protected method named ReloadFromBundle, which will be called when your app is coming back to life. ReloadFromBundle has a parameter of type `IMvxBundle`, and you can override this method and ready any string from the bundle (again, you might want to use [JSON serialization](https://www.mvvmcross.com/documentation/plugins/json) for this).
+
+The bundle you receive in ReloadFromBundle will contain all the information you have stored before.
+
+### Reloading state process
+
+When your app is being restored, this is what the lifecycle of your ViewModel looks like: 
+
+1. `ReloadFromBundle`: Time to get your saved data (more probably the initial parameters) back.
+2. `Prepare`: Only the parameterless version of `Prepare` will be called. It is __your__ responsibility to save the used parameters and restore them (using SaveStateToBundle / ReloadFromBundle).
+3. `Initialize`: Initialize will be called as normal. `InitializeTask` will watch the task and fire property changes.
+
+This is what a typical ViewModel that handles tombstoning looks like:
+
+```c#
+public class MyViewModel : MvxViewModel<MyParameterModel>
+{
+    private readonly IMyService _myService;
+    private readonly IMvxJsonSerializer _jsonSerializer;
+
+    private MyParameterModel _initialParameter;
+
+    public MyViewModel(IMyService myService, IMvxJsonSerializer jsonSerializer)
+    {
+        _myService = myService;
+        _jsonSerializer = jsonSerializer;
+    }
+
+    protected override void SaveStateToBundle(IMvxBundle bundle)
+    {
+        base.SaveStateToBundle(bundle);
+
+        bundle.Data["MyParameter"] = _jsonSerializer.Serialize(_initialParameter);
+    }
+
+    protected override void ReloadFromBundle(IMvxBundle state)
+    {
+        base.ReloadFromBundle(state);
+
+        var serializedParameter = state.Data["MyParameter"];
+        _initialParameter = _jsonSerializer.Deserialize<MyParameterModel>(serializedParameter);
+    }
+
+    public void Prepare()
+    {
+    }
+
+    public void Prepare(MyParameterModel parameter)
+    {
+        _initialParameter = parameter;
+    }
+
+    public async Task Initialize()
+    {
+        await base.Initialize();
+
+        // do something with _initialParameter
+    }
+
+    // ...
+}
+```
+
+
+## View callbacks
+
+Starting with MvvmCross 5.0, ViewModels will be coupled to the lifecycle of the view. This means that the ViewModel has the following methods available:
 
 ```c#
 void ViewCreated();
@@ -33,7 +184,7 @@ The MvxViewController, MvxFragment(s), MvxActivity and the UWP views will call t
 
 However, it should be noted that it is not 100% reliable, due to the natural complex process of any View in different contexts. It _will_ work for most of the apps and most of the cases. But we aware that we don't know what you plan to do in the lifecycle of your app!
 
-## Mapping view event to ViewModel events
+### Mapping view event to ViewModel events
 
 There has been a thread going on on the [Xamarin forums](https://forums.xamarin.com/discussion/comment/240043/) where the implementation is discussed of this functionality. MvvmCross has based its lifecycle support on this thread and those events. 
 
@@ -44,6 +195,10 @@ There has been a thread going on on the [Xamarin forums](https://forums.xamarin.
 
 
 For more information on the implementation of this functionality please see [Github](https://github.com/MvvmCross/MvvmCross/pull/1601)
+
+
+
+
 
 # MvvmCross 4.x and 3.x ViewModels lifecycle
 

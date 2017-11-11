@@ -33,6 +33,16 @@ namespace Playground.Core.ViewModels
             _parameter = parameter;
         }
 
+        protected override void SaveStateToBundle(IMvxBundle bundle)
+        {
+            base.SaveStateToBundle(bundle);
+        }
+
+        protected override void ReloadFromBundle(IMvxBundle state)
+        {
+            base.ReloadFromBundle(state);
+        }
+
         public async override System.Threading.Tasks.Task Initialize()
         {
             await base.Initialize();
