@@ -1,9 +1,10 @@
 ---
 layout: documentation
 title: Portable Class Library (PCL)
-category: Fundamentals
-order: 9
+category: Getting-started
+order: 5
 ---
+
 **Why PCL and not Shared Project?**
 
 With C# Views it is possible to write the MvvM either as a PCL or as a shared project. It is not possible to do that with XAML, you must use a PCL. You might think that this would be a disadvantage because in C# shared projects you can use "#ifdef" statements to conditionally compile code dependent on target platform. Thus you might reason that this would make maintaining and understanding the coding more productive.

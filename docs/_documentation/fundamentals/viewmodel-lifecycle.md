@@ -2,7 +2,7 @@
 layout: documentation
 title: ViewModel Lifecycle
 category: Fundamentals
-order: 5
+order: 7
 ---
 
 # MvvmCross 5.x ViewModels lifecycle
