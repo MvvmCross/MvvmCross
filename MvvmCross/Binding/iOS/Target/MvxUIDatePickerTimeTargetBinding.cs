@@ -1,4 +1,4 @@
-﻿// MvxUIDatePickerTimeTargetBinding.cs
+// MvxUIDatePickerTimeTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,7 +7,7 @@
 
 using System;
 using System.Reflection;
-using Foundation;
+using MvvmCross.Platform.iOS;
 using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
@@ -21,21 +21,25 @@ namespace MvvmCross.Binding.iOS.Target
 
         protected override object GetValueFrom(UIDatePicker view)
         {
-            var components = NSCalendar.CurrentCalendar.Components(
-                NSCalendarUnit.Hour | NSCalendarUnit.Minute | NSCalendarUnit.Second,
-                view.Date);
-            return new TimeSpan((int)components.Hour, (int)components.Minute, (int)components.Second);
+            // Convert from universal NSDate back to a local DateTime based on system timezone, and return its time of day.
+            var valueUtc = view.Date.ToDateTimeUtc();
+            var valueLocal = ToLocalTime(valueUtc);
+            return valueLocal.TimeOfDay;
         }
 
-        public override Type TargetType => typeof(TimeSpan);
+        //public override Type TargetType => typeof(TimeSpan);
 
         protected override object MakeSafeValue(object value)
         {
             if (value == null)
                 value = TimeSpan.FromSeconds(0);
+
             var time = (TimeSpan)value;
             var now = DateTime.Now;
-            var date = new DateTime(
+
+            // Convert from local DateTime with the TimeSpan as its time of day to universal NSDate based on system timezone.
+
+            var dateLocal = new DateTime(
                 now.Year,
                 now.Month,
                 now.Day,
@@ -44,7 +48,9 @@ namespace MvvmCross.Binding.iOS.Target
                 time.Seconds,
                 DateTimeKind.Local);
 
-            NSDate nsDate = (NSDate)date;
+            var dateUtc = ToUtcTime(dateLocal);
+            var nsDate = dateUtc.ToNSDate();
+
             return nsDate;
         }
     }
