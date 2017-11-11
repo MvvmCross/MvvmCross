@@ -32,8 +32,10 @@ If the view class isn't `Window`, wrap in a window by the presenter.
 
 You can customize how the window will look through the following properties:
 
-- `Identifier`: Window identifier, used to identify the window for other attributes. If an identifier is not provided by the developer, it will be set to the name of the view class.
-- `Modal`: How to show window, if true the window will show by `ShowDialog` method. If false the window will show by `Show` method.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| Identifier | `string` | Window identifier, used to identify the window for other attributes. If an identifier is not provided by the developer, it will be set to the name of the view class. |
+| Modal | `bool` | How to show window, if true the window will show by `ShowDialog` method. If false the window will show by `Show` method. |
 
 This view with this attribute like this:
 ```c#
@@ -54,8 +56,10 @@ The view can be one of the following types:
 
 You can customize how the content will look through the following properties:
 
-- `WindowIdentifier`: You can choose in which window should this view be displayed by using this property.If the identifier is not provided, the view will be displayed in the last opened window.
-- `StackNavigation`: The view class can decide if wants to be displayed with stack navigation or non-stack navigation. The default is true.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| WindowIdentifier | `string` | You can choose in which window should this view be displayed by using this property.If the identifier is not provided, the view will be displayed in the last opened window. |
+| StackNavigation | `bool` | The view class can decide if wants to be displayed with stack navigation or non-stack navigation. The default is true. |
 
 
 The view with this attribute like this:
