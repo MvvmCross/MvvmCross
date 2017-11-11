@@ -87,6 +87,8 @@
     <Compile Include="Mocks\TestViewModels\MvxDummyViewModels.cs" />
     <Compile Include="Stubs\SimpleRoutingFacade.cs" />
     <Compile Include="Mocks\ViewModels\SimpleTestViewModel.cs" />
+    <Compile Include="Mocks\ViewModels\SimpleParameterTestViewModel.cs" />
+    <Compile Include="Mocks\ViewModels\SimpleResultTestViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">

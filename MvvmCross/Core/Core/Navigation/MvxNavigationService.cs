@@ -378,7 +378,7 @@ namespace MvvmCross.Core.Navigation
 
         public virtual Task Navigate<TViewModel, TParameter>(TParameter param, IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel<TParameter>
         {
-            return Navigate(typeof(TViewModel), presentationBundle);
+            return Navigate(typeof(TViewModel), param, presentationBundle);
         }
 
         public virtual Task<TResult> Navigate<TViewModel, TResult>(IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModelResult<TResult>
