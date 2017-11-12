@@ -1,8 +1,5 @@
-using System;
-using System.Windows.Input;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
 using MvvmCross.Platform.Logging;
 
 namespace Playground.Core.ViewModels

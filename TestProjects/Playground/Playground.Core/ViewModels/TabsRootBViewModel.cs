@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Platform;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Playground.Core.ViewModels
 {
