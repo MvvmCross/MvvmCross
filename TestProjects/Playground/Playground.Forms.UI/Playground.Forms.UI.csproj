@@ -1,0 +1,104 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+    <RootNamespace>Playground.Forms</RootNamespace>
+  </PropertyGroup>
+
+ 
+
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>2.4.0.74863</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\MvvmCross-Forms\MvvmCross.Forms\MvvmCross.Forms.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj" />
+    <ProjectReference Include="..\Playground.Core\Playground.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="FormsApp.xaml.cs">
+      <DependentUpon>FormsApp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\BindingsPage.xaml.cs">
+      <DependentUpon>BindingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\ChildPage.xaml.cs">
+      <DependentUpon>ChildPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\ListViewPage.xaml.cs">
+      <DependentUpon>ListViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\MixedNavFirstPage.xaml.cs">
+      <DependentUpon>MixedNavFirstPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\MixedNavMasterDetailPage.xaml.cs">
+      <DependentUpon>MixedNavMasterDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\MixedNavMasterRootContentPage.xaml.cs">
+      <DependentUpon>MixedNavMasterRootContentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\MixedNavTab1Page.xaml.cs">
+      <DependentUpon>MixedNavTab1Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\MixedNavTab2Page.xaml.cs">
+      <DependentUpon>MixedNavTab2Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\MixedNavTabsPage.xaml.cs">
+      <DependentUpon>MixedNavTabsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\ModalNavPage.xaml.cs">
+      <DependentUpon>ModalNavPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\ModalPage.xaml.cs">
+      <DependentUpon>ModalPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\NestedChildPage.xaml.cs">
+      <DependentUpon>NestedChildPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\NestedModalPage.xaml.cs">
+      <DependentUpon>NestedModalPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\RootPage.xaml.cs">
+      <DependentUpon>RootPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\SecondChildPage.xaml.cs">
+      <DependentUpon>SecondChildPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\SplitDetailNavPage.xaml.cs">
+      <DependentUpon>SplitDetailNavPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\SplitDetailPage.xaml.cs">
+      <DependentUpon>SplitDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\SplitMasterPage.xaml.cs">
+      <DependentUpon>SplitMasterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\SplitRootPage.xaml.cs">
+      <DependentUpon>SplitRootPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Tab1Page.xaml.cs">
+      <DependentUpon>Tab1Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Tab2Page.xaml.cs">
+      <DependentUpon>Tab2Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Tab3Page.xaml.cs">
+      <DependentUpon>Tab3Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\TabsRootPage.xaml.cs">
+      <DependentUpon>TabsRootPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\BaseTheme.xaml.cs">
+      <DependentUpon>BaseTheme.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\MainStyles.xaml.cs">
+      <DependentUpon>MainStyles.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

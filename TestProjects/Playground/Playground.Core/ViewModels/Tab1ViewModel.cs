@@ -1,8 +1,6 @@
-﻿using System.Windows.Input;
 using MvvmCross.Core.Navigation;
-using System;
-using System.Threading.Tasks;
 using MvvmCross.Core.ViewModels;
+using System.Threading.Tasks;
 
 namespace Playground.Core.ViewModels
 {
