@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using MvvmCross.Platform.IoC;
 using MvvmCross.Plugins.JsonLocalization;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Playground.Core.Services
 {

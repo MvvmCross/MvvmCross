@@ -1,10 +1,9 @@
-﻿using System.Threading.Tasks;
-using System;
-using System.Windows.Input;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
-using System.Collections.Generic;
 using MvvmCross.Platform.Platform;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Playground.Core.ViewModels
 {

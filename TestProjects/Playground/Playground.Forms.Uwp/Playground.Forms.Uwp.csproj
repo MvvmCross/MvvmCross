@@ -183,9 +183,16 @@
       <Name>MvvmCross.Uwp</Name>
     </ProjectReference>
     <ProjectReference Include="..\Playground.Core\Playground.Core.csproj">
-      <Project>{56cd2748-857d-442a-9268-95d99f552840}</Project>
+      <Project>{fea3804a-3bc6-42bd-b40a-1a80d82a9579}</Project>
       <Name>Playground.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Playground.Forms.UI\Playground.Forms.UI.csproj">
+      <Project>{545c1972-05dc-4aec-87cb-70ccd3296f8d}</Project>
+      <Name>Playground.Forms.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
