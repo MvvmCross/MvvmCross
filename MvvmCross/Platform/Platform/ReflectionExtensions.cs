@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -44,7 +44,7 @@ namespace MvvmCross.Platform
 
         public static bool IsInstanceOfType(this Type type, object obj)
         {
-            return type.IsAssignableFrom(obj.GetType()) || obj.IsMarshalByRefObject();
+            return obj != null && type.IsAssignableFrom(obj.GetType()) || obj.IsMarshalByRefObject();
         }
 
         private static bool IsMarshalByRefObject(this object obj)
@@ -64,7 +64,7 @@ namespace MvvmCross.Platform
 
         public static MethodInfo GetRemoveMethod(this EventInfo eventInfo, bool nonPublic = false)
         {
-            if (eventInfo.RemoveMethod == null ||( !nonPublic && !eventInfo.RemoveMethod.IsPublic))
+            if (eventInfo.RemoveMethod == null || (!nonPublic && !eventInfo.RemoveMethod.IsPublic))
             {
                 return null;
             }
@@ -129,13 +129,13 @@ namespace MvvmCross.Platform
                 var setMethod = property.SetMethod;
                 if (getMethod == null && setMethod == null) continue;
 
-                var publicTest = (flags & BindingFlags.Public) != BindingFlags.Public || 
+                var publicTest = (flags & BindingFlags.Public) != BindingFlags.Public ||
                     getMethod.NullSafeIsPublic() || setMethod.NullSafeIsPublic();
 
                 var instanceTest = (flags & BindingFlags.Instance) != BindingFlags.Instance ||
                     !getMethod.NullSafeIsStatic() || !setMethod.NullSafeIsStatic();
 
-                var staticTest = (flags & BindingFlags.Static) != BindingFlags.Static || 
+                var staticTest = (flags & BindingFlags.Static) != BindingFlags.Static ||
                     getMethod.NullSafeIsStatic() || setMethod.NullSafeIsStatic();
 
                 if (publicTest && instanceTest && staticTest)

@@ -4,6 +4,7 @@ using MvvmCross.Core.Views;
 using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters.Attributes;
 using Playground.Core.ViewModels;
+
 using UIKit;
 
 namespace Playground.iOS.Forms.Views

@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Setup.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -94,6 +95,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\MvvmCross-Forms\MvvmCross.Forms.Wpf\MvvmCross.Forms.Wpf.csproj">
+      <Project>{fbff67ad-7dda-4e3b-8229-1de29de8ece3}</Project>
+      <Name>MvvmCross.Forms.Wpf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross-Forms\MvvmCross.Forms\MvvmCross.Forms.csproj">
       <Project>{0797d39c-c59b-4fe2-bb16-ab6fa0119c69}</Project>
       <Name>MvvmCross.Forms</Name>
@@ -122,9 +127,9 @@
       <Project>{3786ea13-a491-4917-9b49-fbe76ba87fab}</Project>
       <Name>MvvmCross.Wpf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Playground.Core\Playground.Core.csproj">
-      <Project>{56cd2748-857d-442a-9268-95d99f552840}</Project>
-      <Name>Playground.Core</Name>
+    <ProjectReference Include="..\Playground.Forms.UI\Playground.Forms.UI.csproj">
+      <Project>{545c1972-05dc-4aec-87cb-70ccd3296f8d}</Project>
+      <Name>Playground.Forms.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

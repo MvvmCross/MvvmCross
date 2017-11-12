@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.props" Condition="Exists('..\..\..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.props')" />
   <PropertyGroup>
@@ -16,7 +16,7 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
+    <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -150,9 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
-    <Folder Include="Views\" />
-    <Folder Include="Resources\values-v21\" />
-    <Folder Include="Resources\menu\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
@@ -187,13 +184,13 @@
       <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
       <Name>MvvmCross.Platform</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Playground.Core\Playground.Core.csproj">
-      <Project>{56CD2748-857D-442A-9268-95D99F552840}</Project>
-      <Name>Playground.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross-AndroidSupport\MvvmCross.Droid.Support.Design\MvvmCross.Droid.Support.Design.csproj">
       <Project>{AC97FC60-7A13-47F9-B3AC-2B2C25147EB8}</Project>
       <Name>MvvmCross.Droid.Support.Design</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Playground.Core\Playground.Core.csproj">
+      <Project>{fea3804a-3bc6-42bd-b40a-1a80d82a9579}</Project>
+      <Name>Playground.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
