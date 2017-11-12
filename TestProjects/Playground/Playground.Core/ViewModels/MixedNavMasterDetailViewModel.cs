@@ -17,7 +17,6 @@ namespace Playground.Core.ViewModels
 
             public string Description { get; set; }
             public Type ViewModelType { get; set; }
-
         }
 
         public MixedNavMasterDetailViewModel(IMvxNavigationService navigationService)
