@@ -50,7 +50,7 @@ namespace MvvmCross.Plugins.ResxLocalization
                 if (!string.IsNullOrEmpty(text))
                     return text;
             }
-            return string.Empty;
+            return null;
         }
 
         public string GetText(string namespaceKey, string typeKey, string name, params object[] formatArgs)
@@ -68,7 +68,7 @@ namespace MvvmCross.Plugins.ResxLocalization
         public virtual bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name)
         {
             textValue = GetText(namespaceKey, typeKey, name);
-            return string.IsNullOrEmpty(textValue);
+            return textValue != null;
         }
 
         public bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name, params object[] formatArgs)
