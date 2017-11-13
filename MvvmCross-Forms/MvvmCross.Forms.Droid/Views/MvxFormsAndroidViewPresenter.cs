@@ -64,7 +64,7 @@ namespace MvvmCross.Forms.Droid.Views
 
         public override void Show(MvxViewModelRequest request)
         {
-            var action = GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute); 
+            var action = GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute);
 
             if (FormsApplication.MainPage == null && attribute is MvxPagePresentationAttribute && CurrentActivity is MvxFormsAppCompatActivity activity)
                 activity.InitializeForms(null);
