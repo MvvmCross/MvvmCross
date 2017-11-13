@@ -8,6 +8,9 @@ using MvvmCross.Forms.Droid.Platform;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Platform.Logging;
 using Serilog;
+using System.Linq;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace Playground.Forms.Droid
 {
@@ -31,7 +34,7 @@ namespace Playground.Forms.Droid
 
         protected override MvxFormsApplication CreateFormsApplication()
         {
-            return new Core.FormsApp();
+            return new FormsApp();
         }
 
         protected override IMvxApplication CreateApp()
@@ -42,6 +45,10 @@ namespace Playground.Forms.Droid
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();
+        }
+        protected override IEnumerable<Assembly> GetViewAssemblies()
+        {
+            return base.GetViewAssemblies().Union(new[] { typeof(FormsApp).GetTypeInfo().Assembly });
         }
     }
 }
