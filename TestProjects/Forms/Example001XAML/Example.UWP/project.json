@@ -4,10 +4,10 @@
     "Microsoft.ApplicationInsights.PersistenceChannel": "1.2.3",
     "Microsoft.ApplicationInsights.WindowsApps": "1.1.1",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
-    "Xamarin.Forms": "2.4.0.282"
+    "Xamarin.Forms": "2.4.0.74863"
   },
   "frameworks": {
-    "uap10.0.10586": {}
+    "uap10.0.10240": {}
   },
   "runtimes": {
     "win10-arm": {},

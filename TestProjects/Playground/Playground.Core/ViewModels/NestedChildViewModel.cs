@@ -1,4 +1,3 @@
-﻿using System;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 
