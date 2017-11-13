@@ -165,7 +165,7 @@ namespace MvvmCross.Mac.Views.Presenters
 
         public override void Show(MvxViewModelRequest request)
         {
-            GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
+            GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
 
         protected virtual void ShowWindowViewController(
