@@ -1,13 +1,14 @@
 <Project>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <DefineConstants>$(DefineConstants);PORTABLE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net452'">
-    <DefineConstants>$(DefineConstants);NET_452;XAML</DefineConstants>
+    <DefineConstants>$(DefineConstants);NET_461;XAML</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'uap10.0'">
     <DefineConstants>$(DefineConstants);NETFX_CORE;XAML;WINDOWS_UWP</DefineConstants>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'Xamarin.iOS10'">
     <DefineConstants>$(DefineConstants);MONO;UIKIT;COCOA</DefineConstants>
@@ -15,8 +16,10 @@
    <PropertyGroup Condition="'$(TargetFramework)' == 'Xamarin.Mac20'">
     <DefineConstants>$(DefineConstants);MONO;COCOA</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'MonoAndroid70'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'MonoAndroid80'">
     <DefineConstants>$(DefineConstants);MONO;ANDROID</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0' ">
