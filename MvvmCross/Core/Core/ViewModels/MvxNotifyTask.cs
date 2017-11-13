@@ -1,4 +1,10 @@
-﻿// Honours to Stephen Cleary for this file's code
+// Copyright (c) 2015 Stephen Cleary
+// Licensed under the MIT License
+// Original source can be found at 
+// https://github.com/StephenCleary/Mvvm.Async/blob/master/src/Nito.Mvvm.Async/NotifyTask.cs
+
+// Notice
+// NotifyTask has been renamed to MvxNotifyTask
 
 using System;
 using System.ComponentModel;
