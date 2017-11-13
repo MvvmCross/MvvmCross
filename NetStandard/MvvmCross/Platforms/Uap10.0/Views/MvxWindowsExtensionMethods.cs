@@ -1,4 +1,4 @@
-// MvxStoreExtensionMethods.cs
+﻿// MvxStoreExtensionMethods.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,6 +10,7 @@ using MvvmCross.Platform;
 using MvvmCross.Uwp.Attributes;
 using System;
 using System.Linq;
+using System.Reflection;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 

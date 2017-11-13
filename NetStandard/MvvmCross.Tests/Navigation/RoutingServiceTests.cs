@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -40,10 +40,10 @@ namespace MvvmCross.Test.Navigation
             // ReSharper disable once AssignNullToNotNullAttribute
             Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-            Debug.Listeners.Clear();
-            Debug.Listeners.Add(new ConsoleTraceListener());
-            Trace.Listeners.Clear();
-            Trace.Listeners.Add(new ConsoleTraceListener());
+            //Debug.Listeners.Clear();
+            //Debug.Listeners.Add(new ConsoleTraceListener());
+            //Trace.Listeners.Clear();
+            //Trace.Listeners.Add(new ConsoleTraceListener());
 
             Setup();
         }

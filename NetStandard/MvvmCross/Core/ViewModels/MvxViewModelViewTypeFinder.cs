@@ -1,4 +1,4 @@
-// MvxViewModelViewTypeFinder.cs
+﻿// MvxViewModelViewTypeFinder.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,7 +9,6 @@ using System;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
 using MvvmCross.Platform.Platform;
 

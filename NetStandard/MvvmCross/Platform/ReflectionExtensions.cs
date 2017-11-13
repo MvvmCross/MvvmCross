@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -30,7 +30,7 @@ namespace MvvmCross.Platform
 
         public static Attribute[] GetCustomAttributes(this Type type, Type attributeType, bool inherit)
         {
-            return type.GetTypeInfo().GetCustomAttributes(attributeType, inherit).ToArray();
+            return type.GetTypeInfo().GetCustomAttributes(attributeType, inherit).OfType<Attribute>().ToArray();
         }
 
         public static IEnumerable<ConstructorInfo> GetConstructors(this Type type)

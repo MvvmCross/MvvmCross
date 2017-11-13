@@ -1,4 +1,4 @@
-// MvxPluginManager.cs
+﻿// MvxPluginManager.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 
