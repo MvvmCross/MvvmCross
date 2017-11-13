@@ -45,6 +45,16 @@
   <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
     <Compile Include="Platforms\Android\**\*.cs" />
     <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>2.4.0.74863</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MvvmCross\MvvmCross.csproj" />
   </ItemGroup>  
 
   <ItemGroup>

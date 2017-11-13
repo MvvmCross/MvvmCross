@@ -1,4 +1,4 @@
-// MvxPropertySourceBindingFactoryExtension.cs
+﻿// MvxPropertySourceBindingFactoryExtension.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,6 +13,7 @@ using MvvmCross.Binding.Bindings.Source.Leaf;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
+using BindingFlags = MvvmCross.Platform.BindingFlags;
 
 namespace MvvmCross.Binding.Bindings.Source.Construction
 {
