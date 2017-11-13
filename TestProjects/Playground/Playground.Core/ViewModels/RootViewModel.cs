@@ -4,22 +4,25 @@ using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Logging;
+using Playground.Core.Models;
 
 namespace Playground.Core.ViewModels
 {
     public class RootViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
+        private readonly IMvxViewModelLoader _mvxViewModelLoader;
 
         private int _counter = 2;
 
-        public RootViewModel(IMvxNavigationService navigationService, IMvxLogProvider logProvider)
+        public RootViewModel(IMvxNavigationService navigationService, IMvxLogProvider logProvider, IMvxViewModelLoader mvxViewModelLoader)
         {
             _navigationService = navigationService;
+            _mvxViewModelLoader = mvxViewModelLoader;
 
             logProvider.GetLogFor<RootViewModel>().Warn(() => "Testing log");
 
-            ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel>());
+            ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel, SampleModel>(new SampleModel { Message = "Hey", Value = 1.23m }));
 
             ShowModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalViewModel>());
 
@@ -38,6 +41,20 @@ namespace Playground.Core.ViewModels
             ShowMixedNavigationCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<MixedNavFirstViewModel>());
 
             _counter = 3;
+        }
+
+        public override void Prepare()
+        {
+            base.Prepare();
+        }
+
+        public override async System.Threading.Tasks.Task Initialize()
+        {
+            await base.Initialize();
+
+            _mvxViewModelLoader.LoadViewModel<SampleModel>(MvxViewModelRequest.GetDefaultRequest(typeof(ChildViewModel)),
+                                                           new SampleModel { Message = "From locator", Value = 2 },
+                                                           null);
         }
 
         protected override void SaveStateToBundle(IMvxBundle bundle)
