@@ -92,9 +92,9 @@ There are situations where you have an interface with a generic type parameter `
     Mvx.RegisterType<IFoo<Bar4>, Foo<Bar4>>();
 
 but this creates boilerplate code and in case you need another instance with a different T type, you have to register it as well. To solve this you can register this interface as *open-generic*, i.e. you don't specify the generic type parameter in neither the interface nor the implementation:
-    
-    Mvx.RegisterType<IFoo<>, Foo<>>();
-    
+
+    Mvx.RegisterType(typeof(IFoo<>), typeof(Foo<>));
+
 Then at the moment of resolving the interface the implementation takes the same generic type parameter that the interface, e.g. if you resolve `var foo = Mvx.Resolve<IFoo<Bar1>>();` then `foo` will be of type `Foo<Bar1>`.
 As you can see this give us more flexibility and scalability because we can effortlessly change the generic type parameters at the moment of resolving the interface and we don't need to add anything to register the interface with a new generic type parameter.
 
