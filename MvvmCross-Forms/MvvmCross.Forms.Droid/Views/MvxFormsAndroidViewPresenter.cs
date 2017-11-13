@@ -62,6 +62,16 @@ namespace MvvmCross.Forms.Droid.Views
             }
         }
 
+        public override void Show(MvxViewModelRequest request)
+        {
+            var action = GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute); 
+
+            if (FormsApplication.MainPage == null && attribute is MvxPagePresentationAttribute && CurrentActivity is MvxFormsAppCompatActivity activity)
+                activity.InitializeForms(null);
+
+            action.ShowAction.Invoke(attribute.ViewType, attribute, request);
+        }
+
         public override void RegisterAttributeTypes()
         {
             base.RegisterAttributeTypes();

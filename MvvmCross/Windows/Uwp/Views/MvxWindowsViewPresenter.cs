@@ -93,25 +93,7 @@ namespace MvvmCross.Uwp.Views
 
         public override void Show(MvxViewModelRequest request)
         {
-            var attribute = GetPresentationAttribute(request.ViewModelType);
-            attribute.ViewModelType = request.ViewModelType;
-            var viewType = attribute.ViewType;
-            var attributeType = attribute.GetType();
-
-            if (AttributeTypesToActionsDictionary.TryGetValue(
-                attributeType,
-                out MvxPresentationAttributeAction attributeAction))
-            {
-                if (attributeAction.ShowAction == null)
-                {
-                    throw new NullReferenceException($"attributeAction.ShowAction is null for attribute: {attributeType.Name}");
-                }
-
-                attributeAction.ShowAction.Invoke(viewType, attribute, request);
-                return;
-            }
-
-            throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
+            GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
