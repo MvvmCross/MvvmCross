@@ -5,6 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Collections.Generic;
 using System.Globalization;
 using System.Resources;
 using MvvmCross.Localization;
@@ -15,12 +16,16 @@ namespace MvvmCross.Plugins.ResxLocalization
 	public class MvxResxTextProvider :
         IMvxTextProvider
     {
-        private readonly ResourceManager _resourceManager;
+        protected readonly IList<ResourceManager> _resourceManagers;
 
-        public MvxResxTextProvider(ResourceManager resourceManager)
+        public MvxResxTextProvider(IList<ResourceManager> resourceManagers)
         {
-            _resourceManager = resourceManager;
+            _resourceManagers = resourceManagers;
             CurrentLanguage = CultureInfo.CurrentUICulture;
+        }
+
+        public MvxResxTextProvider(ResourceManager resourceManager) : this (new List<ResourceManager>(){ resourceManager })
+        {
         }
 
         public CultureInfo CurrentLanguage { get; set; }
@@ -39,7 +44,13 @@ namespace MvvmCross.Plugins.ResxLocalization
                 resolvedKey = $"{namespaceKey}.{resolvedKey}";
             }
 
-            return _resourceManager.GetString(resolvedKey, CurrentLanguage);
+            foreach (var resourceManager in _resourceManagers)
+            {
+                var text = resourceManager.GetString(resolvedKey, CurrentLanguage);
+                if (!string.IsNullOrEmpty(text))
+                    return text;
+            }
+            return string.Empty;
         }
 
         public string GetText(string namespaceKey, string typeKey, string name, params object[] formatArgs)
@@ -56,20 +67,8 @@ namespace MvvmCross.Plugins.ResxLocalization
 
         public virtual bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name)
         {
-            var resolvedKey = name;
-
-            if (!string.IsNullOrEmpty(typeKey))
-            {
-                resolvedKey = $"{typeKey}.{resolvedKey}";
-            }
-
-            if (!string.IsNullOrEmpty(namespaceKey))
-            {
-                resolvedKey = $"{namespaceKey}.{resolvedKey}";
-            }
-
-            textValue = _resourceManager.GetString(resolvedKey, CurrentLanguage);
-            return textValue != null;
+            textValue = GetText(namespaceKey, typeKey, name);
+            return string.IsNullOrEmpty(textValue);
         }
 
         public bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name, params object[] formatArgs)
