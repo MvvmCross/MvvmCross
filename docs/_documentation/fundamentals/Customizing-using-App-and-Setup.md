@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Customizing using App and Setup
+title: Customizing App and Setup
 category: Fundamentals
 order: 10
 ---

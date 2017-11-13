@@ -202,6 +202,7 @@
     <Compile Include="ViewModels\BindingsViewModel.cs" />
     <EmbeddedResource Include="Resources\Text.json" />
     <Compile Include="Services\TextProviderBuilder.cs" />
+    <Compile Include="Models\SampleModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross-Forms\MvvmCross.Forms\MvvmCross.Forms.csproj">

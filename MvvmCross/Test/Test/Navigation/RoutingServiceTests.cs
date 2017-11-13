@@ -10,6 +10,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.Dispatchers;
 using MvvmCross.Test.Mocks.TestViewModels;
+using MvvmCross.Test.Mocks.ViewModels;
 using MvvmCross.Test.Stubs;
 using NUnit.Framework;
 
@@ -42,7 +43,7 @@ namespace MvvmCross.Test.Navigation
             Debug.Listeners.Clear();
             Debug.Listeners.Add(new ConsoleTraceListener());
             Trace.Listeners.Clear();
-            Trace.Listeners.Add(new ConsoleTraceListener()); 
+            Trace.Listeners.Add(new ConsoleTraceListener());
 
             Setup();
         }
@@ -53,9 +54,9 @@ namespace MvvmCross.Test.Navigation
 
             var mockLocator = new Mock<IMvxViewModelLocator>();
             mockLocator.Setup(
-                m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>())).Returns(() => new NavigationServiceTests.SimpleTestViewModel());
+                m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>())).Returns(() => new SimpleTestViewModel());
             mockLocator.Setup(
-                m => m.Reload(It.IsAny<IMvxViewModel>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>())).Returns(() => new NavigationServiceTests.SimpleTestViewModel());
+                m => m.Reload(It.IsAny<IMvxViewModel>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>())).Returns(() => new SimpleTestViewModel());
 
             var mockCollection = new Mock<IMvxViewModelLocatorCollection>();
             mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))

@@ -1,12 +1,16 @@
-﻿using System.Windows.Input;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using Playground.Core.Models;
 
 namespace Playground.Core.ViewModels
 {
-    public class ChildViewModel : MvxViewModel
+    public class ChildViewModel : MvxViewModel<SampleModel>
     {
         private readonly IMvxNavigationService _navigationService;
+
+        private SampleModel _parameter;
 
         public ChildViewModel(IMvxNavigationService navigationService)
         {
@@ -19,9 +23,31 @@ namespace Playground.Core.ViewModels
             ShowRootCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<RootViewModel>());
         }
 
-        public override System.Threading.Tasks.Task Initialize()
+        public override void Prepare()
         {
-            return base.Initialize();
+            base.Prepare();
+        }
+
+        public override void Prepare(SampleModel parameter)
+        {
+            _parameter = parameter;
+        }
+
+        protected override void SaveStateToBundle(IMvxBundle bundle)
+        {
+            base.SaveStateToBundle(bundle);
+        }
+
+        protected override void ReloadFromBundle(IMvxBundle state)
+        {
+            base.ReloadFromBundle(state);
+        }
+
+        public async override System.Threading.Tasks.Task Initialize()
+        {
+            await base.Initialize();
+
+            await Task.Delay(8500);
         }
 
         public void Init()

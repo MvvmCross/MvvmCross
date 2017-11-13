@@ -2,6 +2,7 @@
 layout: documentation
 title: Custom Data Binding
 category: Fundamentals
+order: 3
 ---
 
 This article descibes how to add your own definitions for binding custom views or views, which MvvmCross does not support out of the box in `TwoWay` mode. Or for views that require extra parameters when needing to set them, or if you want to add bindings for views that expose no properties etc.

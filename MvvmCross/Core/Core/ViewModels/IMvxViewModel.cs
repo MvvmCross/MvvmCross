@@ -35,6 +35,8 @@ namespace MvvmCross.Core.ViewModels
         void Prepare();
 
         Task Initialize();
+
+        MvxNotifyTask InitializeTask { get; set; }
     }
 
     public interface IMvxViewModel<TParameter> : IMvxViewModel

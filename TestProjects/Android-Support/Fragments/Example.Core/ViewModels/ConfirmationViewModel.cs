@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Example.Core.Model;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 
 namespace Example.Core.ViewModels
 {
@@ -13,11 +14,13 @@ namespace Example.Core.ViewModels
         public ConfirmationViewModel(IMvxNavigationService mvxNavigationService)
         {
             _mvxNavigationService = mvxNavigationService;
+
+            PropertyChanged += ConfirmationViewModel_PropertyChanged;
         }
 
         public override void Prepare(ConfirmationConfiguration parameter)
         {
-            if (parameter == null)
+            if(parameter == null)
             {
                 throw new ArgumentNullException(nameof(parameter));
             }
@@ -26,6 +29,13 @@ namespace Example.Core.ViewModels
             Body = parameter.Body;
             PositiveCommandText = parameter.PositiveCommandText;
             NegativeCommandText = parameter.NegativeCommandText;
+        }
+
+        public override async Task Initialize()
+        {
+            await base.Initialize();
+
+            await Task.Delay(3000);
         }
 
         private string _title;
@@ -70,6 +80,20 @@ namespace Example.Core.ViewModels
         private Task OnNegativeCommandAsync()
         {
             return _mvxNavigationService.Close(this, false);
+        }
+
+        private void ConfirmationViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == nameof(InitializeTask) && InitializeTask != null)
+            {
+                InitializeTask.PropertyChanged += InitializeTask_PropertyChanged;
+            }
+        }
+
+        private void InitializeTask_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == nameof(InitializeTask.IsSuccessfullyCompleted))
+                Mvx.Trace($"ConfirmationViewModel: Initialize task has finished successfully: {InitializeTask.IsSuccessfullyCompleted}!");
         }
     }
 }
