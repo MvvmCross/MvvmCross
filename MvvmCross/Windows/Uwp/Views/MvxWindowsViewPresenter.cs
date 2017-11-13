@@ -93,7 +93,7 @@ namespace MvvmCross.Uwp.Views
 
         public override void Show(MvxViewModelRequest request)
         {
-            GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
+            GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
@@ -111,23 +111,7 @@ namespace MvvmCross.Uwp.Views
 
         public override void Close(IMvxViewModel viewModel)
         {
-            var attribute = GetPresentationAttribute(viewModel.GetType());
-            var attributeType = attribute.GetType();
-
-            if (AttributeTypesToActionsDictionary.TryGetValue(
-                attributeType,
-                out MvxPresentationAttributeAction attributeAction))
-            {
-                if (attributeAction.CloseAction == null)
-                {
-                    throw new NullReferenceException($"attributeAction.CloseAction is null for attribute: {attributeType.Name}");
-                }
-
-                attributeAction.CloseAction.Invoke(viewModel, attribute);
-                return;
-            }
-
-            throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
+            GetPresentationAttributeAction(viewModel.GetType(), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);
         }
 
         protected virtual async void BackButtonOnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)

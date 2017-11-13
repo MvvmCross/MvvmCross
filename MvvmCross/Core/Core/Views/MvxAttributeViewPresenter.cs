@@ -94,10 +94,10 @@ namespace MvvmCross.Core.Views
             return CreatePresentationAttribute(viewModelType, viewType);
         }
 
-        public virtual MvxPresentationAttributeAction GetPresentationAttributeAction(MvxViewModelRequest request, out MvxBasePresentationAttribute attribute)
+        public virtual MvxPresentationAttributeAction GetPresentationAttributeAction(Type viewModelType, out MvxBasePresentationAttribute attribute)
         {
-            attribute = GetPresentationAttribute(request.ViewModelType);
-            attribute.ViewModelType = request.ViewModelType;
+            attribute = GetPresentationAttribute(viewModelType);
+            attribute.ViewModelType = viewModelType;
             var viewType = attribute.ViewType;
             var attributeType = attribute.GetType();
 
@@ -108,7 +108,8 @@ namespace MvvmCross.Core.Views
                 if (attributeAction.ShowAction == null)
                     throw new NullReferenceException($"attributeAction.ShowAction is null for attribute: {attributeType.Name}");
 
-                //attributeAction.ShowAction.Invoke(viewType, attribute, request);
+                if (attributeAction.CloseAction == null)
+                    throw new NullReferenceException($"attributeAction.CloseAction is null for attribute: {attributeType.Name}");
 
                 return attributeAction;
             }
