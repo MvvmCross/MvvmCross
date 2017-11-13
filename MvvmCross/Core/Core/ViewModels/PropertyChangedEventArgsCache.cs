@@ -1,4 +1,7 @@
-﻿// Honours to Stephen Cleary for this file's code
+// Copyright (c) 2015 Stephen Cleary
+// Licensed under the MIT License
+// Original source can be found at 
+// https://github.com/StephenCleary/Mvvm.Core/blob/master/src/Nito.Mvvm.Core/PropertyChangedEventArgsCache.cs
 
 using System;
 using System.Collections.Generic;
