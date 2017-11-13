@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.3;net452;uap10.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid70</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net461;uap10.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid80;netcoreapp2.0</TargetFrameworks>
     <AssemblyName>MvvmCross</AssemblyName>
     <RootNamespace>MvvmCross</RootNamespace>
     <Description></Description>
@@ -12,44 +12,44 @@
     <None Include="Platforms\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
-    <Compile Include="Platforms\netstandard1.3\**\*.cs" />
-    <PackageReference Include="System.ComponentModel" Version="4.3.0" />
-    <PackageReference Include="System.Diagnostics.Contracts" Version="4.3.0" />
-    <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
-    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <Compile Include="Platforms\Netstandard2.0\**\*.cs" />
   </ItemGroup>
   
-  <ItemGroup Condition="'$(TargetFramework)' == 'net452'">
-    <Compile Include="Platforms\net452\**\*.cs" />
+  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
+    <Compile Include="Platforms\Net461\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'!='netstandard1.1'">
-    <Compile Include="Platforms\shared\**\*.cs" />    
+  <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">
+    <Compile Include="Platforms\Shared\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0' ">
-    <Compile Include="Platforms\windows-common\**\*.cs" />
-    <Compile Include="Platforms\uap10.0\**\*.cs" />
+    <Compile Include="Platforms\Windows-common\**\*.cs" />
+    <Compile Include="Platforms\Uap10.0\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
-    <Compile Include="Platforms\apple-common\**\*.cs" />
-    <Compile Include="Platforms\ios\**\*.cs" />
-    <Compile Include="Platforms\xamarin-common\**\*.cs" />
+    <Compile Include="Platforms\Apple-common\**\*.cs" />
+    <Compile Include="Platforms\Ios\**\*.cs" />
+    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.Mac20' ">
-    <Compile Include="Platforms\apple-common\**\*.cs" />
-    <Compile Include="Platforms\mac\**\*.cs" />
-    <Compile Include="Platforms\xamarin-common\**\*.cs" />
+    <Compile Include="Platforms\Apple-common\**\*.cs" />
+    <Compile Include="Platforms\Mac\**\*.cs" />
+    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
     <Reference Include="System.Runtime.Serialization" />    
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid70' ">
-    <Compile Include="Platforms\android\**\*.cs" />
-    <Compile Include="Platforms\xamarin-common\**\*.cs" />
-  </ItemGroup>  
+  <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
+    <Compile Include="Platforms\Android\**\*.cs" />
+    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
+    <Compile Include="Platforms\netcoreapp2.0\**\*.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />

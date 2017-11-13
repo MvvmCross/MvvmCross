@@ -9,7 +9,7 @@
     <PackageTags>mvvm;mvvmcross;xamarin;android;ios;mac;forms;monodroid;monotouch;xamarin.android;xamarin.ios;xamarin.forms;xamarin.mac;wpf;net;net45;uwp;tizen</PackageTags>
     <PackageReleaseNotes>https://mvvmcross.com/blog/</PackageReleaseNotes>
 
-    <NoWarn>$(NoWarn);1591</NoWarn>
+    <NoWarn>$(NoWarn);1591;1701;1702;1705</NoWarn>
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
 
     <Platform>AnyCPU</Platform>
@@ -18,10 +18,10 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="MSBuild.Sdk.Extras" Version="1.0.1" PrivateAssets="All" />
+    <PackageReference Include="MSBuild.Sdk.Extras" Version="1.1.0" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(IsTestProject)' != 'true' and '$(SourceLinkEnabled)' != 'false'">
-    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.1.1" PrivateAssets="All" /> 
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.5.0" PrivateAssets="All" /> 
   </ItemGroup>
 </Project>
