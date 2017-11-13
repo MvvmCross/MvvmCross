@@ -1,5 +1,3 @@
-using System;
-using System.Windows.Input;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Localization;

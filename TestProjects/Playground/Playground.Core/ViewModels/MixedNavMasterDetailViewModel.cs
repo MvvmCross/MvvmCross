@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Views;
-using Xamarin.Forms;
+using System;
+using System.Collections.Generic;
 
 namespace Playground.Core.ViewModels
 {
@@ -22,7 +17,6 @@ namespace Playground.Core.ViewModels
 
             public string Description { get; set; }
             public Type ViewModelType { get; set; }
-
         }
 
         public MixedNavMasterDetailViewModel(IMvxNavigationService navigationService)
@@ -63,14 +57,15 @@ namespace Playground.Core.ViewModels
                         return;
 
                     var vmType = item.ViewModelType;
-                    if(Xamarin.Forms.Application.Current.MainPage is MasterDetailPage masterDetailPage)
-                    {
-                        masterDetailPage.IsPresented = false;
-                    }
-                    else if(Xamarin.Forms.Application.Current.MainPage is NavigationPage navigationPage && navigationPage.CurrentPage is MasterDetailPage nestedMasterDetail)
-                    {
-                        nestedMasterDetail.IsPresented = false;
-                    }
+                    // TODO: This logic doesn't belong here
+                    //if(Xamarin.Forms.Application.Current.MainPage is MasterDetailPage masterDetailPage)
+                    //{
+                    //    masterDetailPage.IsPresented = false;
+                    //}
+                    //else if(Xamarin.Forms.Application.Current.MainPage is NavigationPage navigationPage && navigationPage.CurrentPage is MasterDetailPage nestedMasterDetail)
+                    //{
+                    //    nestedMasterDetail.IsPresented = false;
+                    //}
                     await _navigationService.Navigate(vmType);
                 }));
             }
