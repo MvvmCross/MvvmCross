@@ -10,6 +10,15 @@ namespace MvvmCross.Forms.Views.Attributes
         {
         }
 
+        /// <summary>
+        /// ViewModel Type to show as host before showing the actual view. Optional when not using switching between Forms views and native views.
+        /// </summary>
+        public Type HostViewModelType { get; set; }
+
+        /// <summary>
+        /// Wraps the Page in a MvxNavigationPage if set to true. If the current stack already is a MvxNavigationPage it will push the Page onto that.
+        /// </summary>
+        /// <value><c>true</c> if wrap in navigation page; otherwise, <c>false</c>.</value>
         public virtual bool WrapInNavigationPage { get; set; } = true;
 
         /// <summary>

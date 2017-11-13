@@ -75,6 +75,7 @@ namespace MvvmCross.Forms.Views
             }
         }
 
+        public virtual Func<Type ,bool> ShowPlatformHost { get; set; }
         public virtual Func<bool> ClosePlatformViews { get; set; }
 
         public virtual Page CreatePage(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute)
@@ -158,6 +159,7 @@ namespace MvvmCross.Forms.Views
         {
             CloseAllModals();
             ClosePlatformViews?.Invoke();
+            ShowPlatformHost?.Invoke(attribute.HostViewModelType);
 
             var page = CreatePage(view, request, attribute);
 
@@ -206,6 +208,7 @@ namespace MvvmCross.Forms.Views
         {
             CloseAllModals();
             ClosePlatformViews?.Invoke();
+            ShowPlatformHost?.Invoke(attribute.HostViewModelType);
 
             var page = CreatePage(view, request, attribute);
             PushOrReplacePage(FormsApplication.MainPage, page, attribute);
@@ -223,6 +226,7 @@ namespace MvvmCross.Forms.Views
         {
             CloseAllModals();
             ClosePlatformViews?.Invoke();
+            ShowPlatformHost?.Invoke(attribute.HostViewModelType);
 
             var page = CreatePage(view, request, attribute);
 
@@ -286,6 +290,7 @@ namespace MvvmCross.Forms.Views
             MvxViewModelRequest request)
         {
             ClosePlatformViews?.Invoke();
+            ShowPlatformHost?.Invoke(attribute.HostViewModelType);
 
             var page = CreatePage(view, request, attribute);
 
@@ -340,6 +345,7 @@ namespace MvvmCross.Forms.Views
         {
             CloseAllModals();
             ClosePlatformViews?.Invoke();
+            ShowPlatformHost?.Invoke(attribute.HostViewModelType);
 
             var page = CreatePage(view, request, attribute);
 
@@ -361,6 +367,7 @@ namespace MvvmCross.Forms.Views
         {
             CloseAllModals();
             ClosePlatformViews?.Invoke();
+            ShowPlatformHost?.Invoke(attribute.HostViewModelType);
 
             var page = CreatePage(view, request, attribute);
 
