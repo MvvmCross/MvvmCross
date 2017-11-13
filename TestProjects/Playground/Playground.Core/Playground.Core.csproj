@@ -30,28 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormsApp.xaml" />
     <Compile Include="App.cs" />
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
-    </Compile>
-    <Compile Include="Pages\MixedNavFirstPage.xaml.cs">
-      <DependentUpon>MixedNavFirstPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MixedNavMasterDetailPage.xaml.cs">
-      <DependentUpon>MixedNavMasterDetailPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MixedNavMasterRootContentPage.xaml.cs">
-      <DependentUpon>MixedNavMasterRootContentPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MixedNavTab2Page.xaml.cs">
-      <DependentUpon>MixedNavTab2Page.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MixedNavTab1Page.xaml.cs">
-      <DependentUpon>MixedNavTab1Page.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MixedNavTabsPage.xaml.cs">
-      <DependentUpon>MixedNavTabsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\MixedNavFirstViewModel.cs" />
     <Compile Include="ViewModels\MixedNavMasterDetailViewModel.cs" />
@@ -80,125 +61,9 @@
     <Compile Include="ViewModels\NestedChildViewModel.cs" />
     <Compile Include="Models\Modes.cs" />
     <Compile Include="ViewModels\TabsRootBViewModel.cs" />
-    <Compile Include="Resources\BaseTheme.xaml.cs">
-      <DependentUpon>BaseTheme.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\MainStyles.xaml.cs">
-      <DependentUpon>MainStyles.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="FormsApp.xaml.cs">
-      <DependentUpon>FormsApp.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Resources\BaseTheme.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\MainStyles.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <Compile Include="Pages\RootPage.xaml.cs">
-      <DependentUpon>RootPage.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Pages\ModalPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <Compile Include="Pages\ModalPage.xaml.cs">
-      <DependentUpon>ModalPage.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Pages\ModalNavPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <Compile Include="Pages\ModalNavPage.xaml.cs">
-      <DependentUpon>ModalNavPage.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Pages\ChildPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <Compile Include="Pages\ChildPage.xaml.cs">
-      <DependentUpon>ChildPage.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Pages\NestedChildPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <Compile Include="Pages\NestedChildPage.xaml.cs">
-      <DependentUpon>NestedChildPage.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Pages\NestedModalPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <Compile Include="Pages\NestedModalPage.xaml.cs">
-      <DependentUpon>NestedModalPage.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Pages\SplitMasterPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <Compile Include="Pages\SplitMasterPage.xaml.cs">
-      <DependentUpon>SplitMasterPage.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Pages\SplitRootPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <Compile Include="Pages\SplitRootPage.xaml.cs">
-      <DependentUpon>SplitRootPage.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Pages\SplitDetailPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <Compile Include="Pages\SplitDetailPage.xaml.cs">
-      <DependentUpon>SplitDetailPage.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Pages\SplitDetailNavPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <Compile Include="Pages\SplitDetailNavPage.xaml.cs">
-      <DependentUpon>SplitDetailNavPage.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Pages\TabsRootPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <Compile Include="Pages\TabsRootPage.xaml.cs">
-      <DependentUpon>TabsRootPage.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Pages\Tab1Page.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <Compile Include="Pages\Tab1Page.xaml.cs">
-      <DependentUpon>Tab1Page.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Pages\Tab2Page.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <Compile Include="Pages\Tab2Page.xaml.cs">
-      <DependentUpon>Tab2Page.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Pages\Tab3Page.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <Compile Include="Pages\Tab3Page.xaml.cs">
-      <DependentUpon>Tab3Page.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Pages\SecondChildPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <Compile Include="Pages\SecondChildPage.xaml.cs">
-      <DependentUpon>SecondChildPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\CodeBehindViewModel.cs" />
-    <Compile Include="Pages\CodeBehindPage.cs" />
-    <EmbeddedResource Include="Pages\ListViewPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <Compile Include="Pages\ListViewPage.xaml.cs">
-      <DependentUpon>ListViewPage.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Pages\BindingsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <Compile Include="Pages\BindingsPage.xaml.cs">
-      <DependentUpon>BindingsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\BindingsViewModel.cs" />
     <EmbeddedResource Include="Resources\Text.json" />
     <Compile Include="Services\TextProviderBuilder.cs" />
@@ -239,9 +104,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Pages\RootPage.xaml" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Xamarin.Forms.2.4.0.282\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
@@ -251,45 +113,6 @@
     <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Xamarin.Forms.2.4.0.282\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\MixedNavFirstPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\MixedNavMasterDetailPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\MixedNavMasterRootContentPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\MixedNavTabsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\MixedNavTab1Page.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\MixedNavTab2Page.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

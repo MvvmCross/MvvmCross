@@ -9,8 +9,7 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms">
-      <Version>2.4.0.74863</Version>
+    <PackageReference Include="Xamarin.Forms" Version="2.4.0.74863">
     </PackageReference>
   </ItemGroup>
 
@@ -18,6 +17,8 @@
     <ProjectReference Include="..\..\..\MvvmCross-Forms\MvvmCross.Forms\MvvmCross.Forms.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj" />
     <ProjectReference Include="..\Playground.Core\Playground.Core.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj" />
   </ItemGroup>
 
   <ItemGroup>
