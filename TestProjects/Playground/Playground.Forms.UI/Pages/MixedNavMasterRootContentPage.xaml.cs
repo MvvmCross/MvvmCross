@@ -6,7 +6,7 @@ using Xamarin.Forms.Xaml;
 namespace Playground.Forms.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-    [MvxMasterDetailPagePresentation(Position = MasterDetailPosition.Detail, WrapInNavigationPage = true, NoHistory = true)]
+    [MvxMasterDetailPagePresentation(Position = MasterDetailPosition.Detail, WrapInNavigationPage = true)]
     public partial class MixedNavMasterRootContentPage : MvxContentPage<MixedNavMasterRootContentViewModel>
 	{
 		public MixedNavMasterRootContentPage ()

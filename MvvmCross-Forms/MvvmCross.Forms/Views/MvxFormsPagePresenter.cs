@@ -288,20 +288,27 @@ namespace MvvmCross.Forms.Views
                 {
                     //Assume we have to create the host
                     masterDetailHost = new MvxMasterDetailPage();
-                    if (attribute.Position == MasterDetailPosition.Master)
-                        masterDetailHost.Master = page;
-                    else
+                    //if (attribute.Position == MasterDetailPosition.Master)
+                    //    masterDetailHost.Master = page;
+                    //else
+                    //    masterDetailHost.Master = new MvxContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) };
+                    //if (attribute.Position == MasterDetailPosition.Detail)
+                    //    masterDetailHost.Detail = page;
+                    //else
+                    //    masterDetailHost.Detail = new MvxNavigationPage(new MvxContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) });
+
+                    //if (attribute.Position == MasterDetailPosition.Master)
                         masterDetailHost.Master = new MvxContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) };
-                    if (attribute.Position == MasterDetailPosition.Detail)
-                        masterDetailHost.Detail = page;
-                    else
+                    //if (attribute.Position == MasterDetailPosition.Detail)
                         masterDetailHost.Detail = new MvxNavigationPage(new MvxContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) });
+
 
                     var masterDetailRootAttribute = new MvxMasterDetailPagePresentationAttribute {Position =  MasterDetailPosition.Root, WrapInNavigationPage = attribute.WrapInNavigationPage, NoHistory = attribute.NoHistory};
 
                     PushOrReplacePage(FormsApplication.MainPage, masterDetailHost, masterDetailRootAttribute);
                 }
-                else if (attribute.Position == MasterDetailPosition.Master)
+
+                if (attribute.Position == MasterDetailPosition.Master)
                     PushOrReplacePage(masterDetailHost.Master, page, attribute);
                 else
                     PushOrReplacePage(masterDetailHost.Detail, page, attribute);
@@ -624,13 +631,43 @@ namespace MvvmCross.Forms.Views
                     return;
                 }
 
+
+
                 if (masterDetailAttribute.Position == MasterDetailPosition.Master)
                 {
-                    rootMasterDetail.Master = newRootPage;
+                    if (masterDetailAttribute.WrapInNavigationPage)
+                    {
+                        if (rootMasterDetail.Master is NavigationPage navPage)
+                        {
+                            navPage.PushAsync(newRootPage);
+                        }
+                        else
+                        {
+                            rootMasterDetail.Master = new NavigationPage(newRootPage);
+                        }
+                    }
+                    else
+                    {
+                        rootMasterDetail.Master = newRootPage;
+                    }
                 }
                 else if (masterDetailAttribute.Position == MasterDetailPosition.Detail)
                 {
-                    rootMasterDetail.Detail = newRootPage;
+                    if (masterDetailAttribute.WrapInNavigationPage)
+                    {
+                        if (rootMasterDetail.Detail is NavigationPage navPage)
+                        {
+                            navPage.PushAsync(newRootPage);
+                        }
+                        else
+                        {
+                            rootMasterDetail.Detail = new NavigationPage(newRootPage);
+                        }
+                    }
+                    else
+                    {
+                        rootMasterDetail.Detail = newRootPage;
+                    }
                 }
             }
             catch (Exception ex)

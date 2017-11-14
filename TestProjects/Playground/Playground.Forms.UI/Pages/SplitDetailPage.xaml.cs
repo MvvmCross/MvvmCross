@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace Playground.Forms.Pages
 {
-    [MvxMasterDetailPagePresentation]
+    [MvxMasterDetailPagePresentation()]
     public partial class SplitDetailPage : MvxContentPage<SplitDetailViewModel>
     {
         public SplitDetailPage()
