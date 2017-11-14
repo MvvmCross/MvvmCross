@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Playground.Forms.Droid</RootNamespace>
     <AssemblyName>Playground.Forms.Droid</AssemblyName>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
