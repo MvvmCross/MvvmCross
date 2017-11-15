@@ -197,36 +197,7 @@ namespace MvvmCross.Droid.Views
             }
             return null;
         }
-
-        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, Type viewType)
-        {
-            if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
-            {
-                var viewInstance = Activator.CreateInstance(viewType) as Java.Lang.Object;
-                using (viewInstance)
-                {
-                    var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute();
-
-                    if (presentationAttribute == null)
-                    {
-                        MvxTrace.Warning("Override PresentationAttribute null. Falling back to existing attribute.");
-                    }
-                    else
-                    {
-                        if (presentationAttribute.ViewType == null)
-                            presentationAttribute.ViewType = viewType;
-
-                        if (presentationAttribute.ViewModelType == null)
-                            presentationAttribute.ViewModelType = viewModelType;
-
-                        return presentationAttribute;
-                    }
-                }
-            }
-
-            return null;
-        }
-
+        
         protected Type GetCurrentActivityViewModelType()
         {
             Type currentActivityType = CurrentActivity.GetType();
@@ -465,20 +436,6 @@ namespace MvvmCross.Droid.Views
             dialog.Show(ft, fragmentName);
         }
         #endregion
-
-        public override void ChangePresentation(MvxPresentationHint hint)
-        {
-            if (HandlePresentationChange(hint)) return;
-
-            var presentationHint = hint as MvxClosePresentationHint;
-            if (presentationHint != null)
-            {
-                Close(presentationHint.ViewModelToClose);
-                return;
-            }
-
-            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
-        }
 
         public override void Close(IMvxViewModel viewModel)
         {

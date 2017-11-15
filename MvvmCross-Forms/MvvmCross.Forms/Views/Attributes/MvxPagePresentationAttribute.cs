@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MvvmCross.Core.Views;
 
 namespace MvvmCross.Forms.Views.Attributes
@@ -20,6 +20,15 @@ namespace MvvmCross.Forms.Views.Attributes
         /// </summary>
         /// <value><c>true</c> if wrap in navigation page; otherwise, <c>false</c>.</value>
         public virtual bool WrapInNavigationPage { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets an identifier that is used to 
+        /// locate the correct navigation page to load the
+        /// page into. In the case of tabs or carousel, this
+        /// would identify which tab or carousel item the
+        /// page will target
+        /// </summary>
+        public string NavigationId { get; set; }
 
         /// <summary>
         /// Clears the backstack of the current NavigationPage when set to true
