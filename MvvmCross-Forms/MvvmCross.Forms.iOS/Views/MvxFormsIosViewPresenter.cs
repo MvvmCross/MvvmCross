@@ -27,11 +27,7 @@ namespace MvvmCross.Forms.iOS.Presenters
         : MvxIosViewPresenter
         , IMvxFormsViewPresenter
     {
-        public MvxFormsIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window) : base(applicationDelegate, window)
-        {
-        }
-
-        public MvxFormsIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window, MvxFormsApplication formsApplication) : this(applicationDelegate, window)
+        public MvxFormsIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window, MvxFormsApplication formsApplication) : base (applicationDelegate, window)
         {
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
         }
@@ -43,16 +39,16 @@ namespace MvvmCross.Forms.iOS.Presenters
             set { _formsApplication = value; }
         }
 
-        private MvxFormsPagePresenter _formsPagePresenter;
-        public virtual MvxFormsPagePresenter FormsPagePresenter
+        private IMvxFormsPagePresenter _formsPagePresenter;
+        public virtual IMvxFormsPagePresenter FormsPagePresenter
         {
             get
             {
                 if (_formsPagePresenter == null)
                 {
-                    _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder);
+                    _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder, attributeTypesToActionsDictionary: AttributeTypesToActionsDictionary);
                     _formsPagePresenter.ClosePlatformViews = ClosePlatformViews;
-                    Mvx.RegisterSingleton<IMvxFormsPagePresenter>(_formsPagePresenter);
+                    Mvx.RegisterSingleton(_formsPagePresenter);
                 }
                 return _formsPagePresenter;
             }
@@ -74,7 +70,7 @@ namespace MvvmCross.Forms.iOS.Presenters
         {
             base.RegisterAttributeTypes();
 
-            FormsPagePresenter.RegisterAttributeTypes(AttributeTypesToActionsDictionary);
+            FormsPagePresenter.RegisterAttributeTypes();
         }
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)

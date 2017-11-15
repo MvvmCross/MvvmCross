@@ -38,16 +38,16 @@ namespace MvvmCross.Forms.Uwp.Presenters
             set { _formsApplication = value; }
         }
 
-        private MvxFormsPagePresenter _formsPagePresenter;
-        public virtual MvxFormsPagePresenter FormsPagePresenter
+        private IMvxFormsPagePresenter _formsPagePresenter;
+        public virtual IMvxFormsPagePresenter FormsPagePresenter
         {
             get
             {
                 if (_formsPagePresenter == null)
                 {
-                    _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder);
+                    _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder, attributeTypesToActionsDictionary: AttributeTypesToActionsDictionary);
                     _formsPagePresenter.ClosePlatformViews = ClosePlatformViews;
-                    Mvx.RegisterSingleton<IMvxFormsPagePresenter>(_formsPagePresenter);
+                    Mvx.RegisterSingleton(_formsPagePresenter);
                 }
                 return _formsPagePresenter;
             }
@@ -61,7 +61,7 @@ namespace MvvmCross.Forms.Uwp.Presenters
         {
             base.RegisterAttributeTypes();
 
-            FormsPagePresenter.RegisterAttributeTypes(AttributeTypesToActionsDictionary);
+            FormsPagePresenter.RegisterAttributeTypes();
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)

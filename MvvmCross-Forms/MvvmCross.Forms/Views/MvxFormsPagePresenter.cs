@@ -14,14 +14,21 @@ using System.Reflection;
 namespace MvvmCross.Forms.Views
 {
     //Handles common Forms Presenter code
-    public class MvxFormsPagePresenter : IMvxFormsPagePresenter
+    public class MvxFormsPagePresenter :
+        MvxAttributeViewPresenter, IMvxFormsPagePresenter
     {
-        public MvxFormsPagePresenter(MvxFormsApplication formsApplication, IMvxViewsContainer viewsContainer = null, IMvxViewModelTypeFinder viewModelTypeFinder = null, IMvxViewModelLoader viewModelLoader = null)
+        public MvxFormsPagePresenter(
+            MvxFormsApplication formsApplication,
+            IMvxViewsContainer viewsContainer = null,
+            IMvxViewModelTypeFinder viewModelTypeFinder = null,
+            IMvxViewModelLoader viewModelLoader = null,
+            Dictionary<Type, MvxPresentationAttributeAction> attributeTypesToActionsDictionary=null)
         {
             FormsApplication = formsApplication;
             ViewsContainer = viewsContainer;
             ViewModelTypeFinder = viewModelTypeFinder;
             ViewModelLoader = viewModelLoader;
+            AttributeTypesToActionsDictionary = attributeTypesToActionsDictionary;
         }
 
         private MvxFormsApplication _formsApplication;
@@ -43,36 +50,6 @@ namespace MvvmCross.Forms.Views
             set
             {
                 _viewModelLoader = value;
-            }
-        }
-
-        private IMvxViewsContainer _viewsContainer;
-        public IMvxViewsContainer ViewsContainer
-        {
-            get
-            {
-                if (_viewsContainer == null)
-                    _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
-                return _viewsContainer;
-            }
-            set
-            {
-                _viewsContainer = value;
-            }
-        }
-
-        private IMvxViewModelTypeFinder _viewModelTypeFinder;
-        public IMvxViewModelTypeFinder ViewModelTypeFinder
-        {
-            get
-            {
-                if (_viewModelTypeFinder == null)
-                    _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
-                return _viewModelTypeFinder;
-            }
-            set
-            {
-                _viewModelTypeFinder = value;
             }
         }
 
@@ -102,7 +79,7 @@ namespace MvvmCross.Forms.Views
             return page;
         }
 
-        public virtual void RegisterAttributeTypes(Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary)
+        public override void RegisterAttributeTypes()
         {
             AttributeTypesToActionsDictionary.Add(
                 typeof(MvxCarouselPagePresentationAttribute),
@@ -151,6 +128,19 @@ namespace MvvmCross.Forms.Views
                     ShowAction = (view, attribute, request) => ShowTabbedPage(view, (MvxTabbedPagePresentationAttribute)attribute, request),
                     CloseAction = (viewModel, attribute) => CloseTabbedPage(viewModel, (MvxTabbedPagePresentationAttribute)attribute)
                 });
+        }
+        
+        public override void ChangePresentation(MvxPresentationHint hint)
+        {
+            if (HandlePresentationChange(hint)) return;
+
+            if (hint is MvxClosePresentationHint)
+            {
+                Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                return;
+            }
+
+            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
 
         public virtual void ShowCarouselPage(
@@ -202,7 +192,7 @@ namespace MvvmCross.Forms.Views
             }
         }
 
-        public virtual MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
+        public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
             if (viewType.GetTypeInfo().IsSubclassOf(typeof(ContentPage)))
             {
@@ -237,7 +227,7 @@ namespace MvvmCross.Forms.Views
 
             return null;
         }
-
+        
         public virtual void ShowContentPage(
             Type view,
             MvxContentPagePresentationAttribute attribute,
