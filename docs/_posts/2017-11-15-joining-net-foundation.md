@@ -12,7 +12,7 @@ As part of the [.NET Summer Hackfest][hackfest] we announced that we were workin
 ## What does this mean for MvvmCross?
 The .NET Foundation was founded as an independent organization to foster open source development and collaboration. The MvvmCross teams is all for that and we want to participate in not only making MvvmCross better, but strengthening the .NET ecosystem.
 
-Joining the .NET Foundation gives us a lot of benefits raning from legal help, project guidance and monitoring, marketing, monetary support and a bunch of greate technical support services that we would otherwise have to spend a lot of money on.
+Joining the .NET Foundation gives us a lot of benefits ranging from legal help, project guidance and monitoring, marketing, monetary support and a bunch of great technical support services that we would otherwise have to spend a lot of money on.
 
 MvvmCross will mostly continue the same way as it has always been. We will continue developing MvvmCross on GitHub, we will continue pushing new releases to NuGet.
 
