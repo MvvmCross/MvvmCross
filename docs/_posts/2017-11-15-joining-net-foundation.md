@@ -9,6 +9,11 @@ categories:
 
 As part of the [.NET Summer Hackfest][hackfest] we announced that we were working on joining the [.NET Foundation][netfoundation]. We have just received confirmation that we were accepted! So we are very happy to announce that we are joining the .NET Foundation, which governs a lot of great open source projects which impact you daily.
 
+## What is MvvmCross?
+For newcomers, MvvmCross is a opinionated MVVM Framework, which you can use to write native Apps without compromising on performance or look and feel. We support a very large number of platforms, among them Xamarin.Android, Xamarin.iOS, Xamarin.Forms, Windows UWP and WPF and more.
+
+We are currently looking into migrating all our projects to the new SDK project styles and moving away from using Portable Class Libraries and instead use .NET Standard 2.0. One of the recent bigger additions to MvvmCross was to get proper Xamarin.Forms support, with the ability to navigate between Forms pages and native ViewControllers and Activities.
+
 ## What does this mean for MvvmCross?
 The .NET Foundation was founded as an independent organization to foster open source development and collaboration. The MvvmCross teams is all for that and we want to participate in not only making MvvmCross better, but strengthening the .NET ecosystem.
 
