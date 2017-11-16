@@ -12,7 +12,8 @@ using Xamarin.Forms.Xaml;
 namespace Playground.Forms.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    [MvxTabbedPagePresentation(WrapInNavigationPage = false, Title = "Tab1")]
+    [MvxTabbedPagePresentation(WrapInNavigationPage = false, Title = "Tab1", RegionId ="tab1")]
+
     public partial class MixedNavTab1Page : MvxContentPage<MixedNavTab1ViewModel>
     {
         public MixedNavTab1Page()

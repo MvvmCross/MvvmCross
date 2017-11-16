@@ -28,7 +28,13 @@ namespace MvvmCross.Forms.Views.Attributes
         /// would identify which tab or carousel item the
         /// page will target
         /// </summary>
-        public string NavigationId { get; set; }
+        public string RegionId { get; set; }
+
+        /// <summary>
+        /// Controls whether the navigation bar should be shown when
+        /// page is wrapped in a navigation page
+        /// </summary>
+        public bool ShowNavigationBar { get; set; } = true;
 
         /// <summary>
         /// Clears the backstack of the current NavigationPage when set to true

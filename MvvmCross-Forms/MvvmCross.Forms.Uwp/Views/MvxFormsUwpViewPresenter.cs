@@ -68,18 +68,20 @@ namespace MvvmCross.Forms.Uwp.Presenters
         {
             if (HandlePresentationChange(hint)) return;
 
-            if (hint is MvxClosePresentationHint)
+            if (hint is MvxClosePresentationHint closeHint)
             {
-                var mainPage = FormsApplication.MainPage as NavigationPage;
+                FormsPagePresenter.Close(closeHint.ViewModelToClose);
 
-                if (mainPage == null)
-                {
-                    Mvx.TaggedTrace("MvxFormsPresenter:ChangePresentation()", "Oops! Don't know what to do");
-                }
-                else
-                {
-                    mainPage.PopAsync();
-                }
+                //var mainPage = FormsApplication.MainPage as NavigationPage;
+
+                //if (mainPage == null)
+                //{
+                //    Mvx.TaggedTrace("MvxFormsPresenter:ChangePresentation()", "Oops! Don't know what to do");
+                //}
+                //else
+                //{
+                //    mainPage.PopAsync();
+                //}
             }
         }
 
