@@ -51,6 +51,7 @@ namespace MvvmCross.Forms.Droid.Views
                 {
                     _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder);
                     _formsPagePresenter.ClosePlatformViews = ClosePlatformViews;
+                    _formsPagePresenter.ShowPlatformHost = ShowPlatformHost;
                     Mvx.RegisterSingleton<IMvxFormsPagePresenter>(_formsPagePresenter);
                 }
                 return _formsPagePresenter;
@@ -59,6 +60,16 @@ namespace MvvmCross.Forms.Droid.Views
             {
                 _formsPagePresenter = value;
             }
+        }
+
+        public override void Show(MvxViewModelRequest request)
+        {
+            var action = GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute);
+
+            if (FormsApplication.MainPage == null && attribute is MvxPagePresentationAttribute && CurrentActivity is MvxFormsAppCompatActivity activity)
+                activity.InitializeForms(null);
+
+            action.ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
 
         public override void RegisterAttributeTypes()
@@ -110,6 +121,21 @@ namespace MvvmCross.Forms.Droid.Views
             if (!(CurrentActivity is MvxFormsAppCompatActivity || CurrentActivity is MvxFormsApplicationActivity) && 
                 !(CurrentActivity is MvxSplashScreenActivity || CurrentActivity is MvxSplashScreenAppCompatActivity))
                 CurrentActivity.Finish();
+            return true;
+        }
+
+        public virtual bool ShowPlatformHost(Type hostViewModel = null)
+        {
+            // if there is no Actitivty host associated, assume is the current activity
+            if (hostViewModel == null)
+                hostViewModel = GetCurrentActivityViewModelType();
+
+            var currentHostViewModelType = GetCurrentActivityViewModelType();
+            if (hostViewModel != currentHostViewModelType)
+            {
+                var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(hostViewModel);
+                Show(hostViewModelRequest);
+            }
             return true;
         }
     }
