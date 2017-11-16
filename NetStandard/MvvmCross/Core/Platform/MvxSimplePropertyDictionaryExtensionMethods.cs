@@ -14,7 +14,6 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 using System.Globalization;
 using System.Reflection;
-using BindingFlags = MvvmCross.Platform.BindingFlags;
 
 namespace MvvmCross.Core.Platform
 {
