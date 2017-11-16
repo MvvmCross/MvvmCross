@@ -1,4 +1,4 @@
-// MvxViewModelRequestCustomTextSerializer.cs
+﻿// MvxViewModelRequestCustomTextSerializer.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
