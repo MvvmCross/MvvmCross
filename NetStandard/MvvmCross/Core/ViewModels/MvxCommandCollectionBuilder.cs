@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Platform;
-using BindingFlags = MvvmCross.Platform.BindingFlags;
 
 namespace MvvmCross.Core.ViewModels
 {

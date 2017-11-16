@@ -8,7 +8,6 @@
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Platform;
-using BindingFlags = MvvmCross.Platform.BindingFlags;
 
 namespace MvvmCross.Core.ViewModels
 {
@@ -36,7 +35,7 @@ namespace MvvmCross.Core.ViewModels
             //Make sure we have a bundle that matches function parameters
             if (bundle == null && parameters.Count() > 0)
                 return;
-            
+
             if (parameters.Count() == 1
                 && parameters[0].ParameterType == typeof(IMvxBundle))
             {
