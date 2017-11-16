@@ -12,6 +12,10 @@
     <None Include="Platforms\**\*.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
+  </ItemGroup>
+
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <Compile Include="Platforms\Netstandard2.0\**\*.cs" />
   </ItemGroup>
