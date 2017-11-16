@@ -17,7 +17,7 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
+    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -220,7 +220,7 @@
       <Name>MvvmCross.Droid.Support.V7.RecyclerView</Name>
     </ProjectReference>
     <ProjectReference Include="..\Playground.Core\Playground.Core.csproj">
-      <Project>{fea3804a-3bc6-42bd-b40a-1a80d82a9579}</Project>
+      <Project>{56CD2748-857D-442A-9268-95D99F552840}</Project>
       <Name>Playground.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Playground.Forms.UI\Playground.Forms.UI.csproj">

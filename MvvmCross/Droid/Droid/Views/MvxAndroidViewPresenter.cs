@@ -237,23 +237,7 @@ namespace MvvmCross.Droid.Views
 
         public override void Show(MvxViewModelRequest request)
         {
-            var attribute = GetPresentationAttribute(request.ViewModelType);
-            attribute.ViewModelType = request.ViewModelType;
-            var viewType = attribute.ViewType;
-            var attributeType = attribute.GetType();
-
-            if (AttributeTypesToActionsDictionary.TryGetValue(
-                attributeType,
-                out MvxPresentationAttributeAction attributeAction))
-            {
-                if (attributeAction.ShowAction == null)
-                    throw new NullReferenceException($"attributeAction.ShowAction is null for attribute: {attributeType.Name}");
-
-                attributeAction.ShowAction.Invoke(viewType, attribute, request);
-                return;
-            }
-
-            throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
+            GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
 
         #region Show implementations
@@ -498,21 +482,7 @@ namespace MvvmCross.Droid.Views
 
         public override void Close(IMvxViewModel viewModel)
         {
-            var attribute = GetPresentationAttribute(viewModel.GetType());
-            var attributeType = attribute.GetType();
-
-            if (AttributeTypesToActionsDictionary.TryGetValue(
-                attributeType,
-                out MvxPresentationAttributeAction attributeAction))
-            {
-                if (attributeAction.CloseAction == null)
-                    throw new NullReferenceException($"attributeAction.CloseAction is null for attribute: {attributeType.Name}");
-
-                attributeAction.CloseAction.Invoke(viewModel, attribute);
-                return;
-            }
-
-            throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
+            GetPresentationAttributeAction(viewModel.GetType(), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);
         }
 
         #region Close implementations

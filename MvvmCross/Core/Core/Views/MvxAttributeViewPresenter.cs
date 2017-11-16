@@ -93,5 +93,28 @@ namespace MvvmCross.Core.Views
 
             return CreatePresentationAttribute(viewModelType, viewType);
         }
+
+        public virtual MvxPresentationAttributeAction GetPresentationAttributeAction(Type viewModelType, out MvxBasePresentationAttribute attribute)
+        {
+            attribute = GetPresentationAttribute(viewModelType);
+            attribute.ViewModelType = viewModelType;
+            var viewType = attribute.ViewType;
+            var attributeType = attribute.GetType();
+
+            if (AttributeTypesToActionsDictionary.TryGetValue(
+                attributeType,
+                out MvxPresentationAttributeAction attributeAction))
+            {
+                if (attributeAction.ShowAction == null)
+                    throw new NullReferenceException($"attributeAction.ShowAction is null for attribute: {attributeType.Name}");
+
+                if (attributeAction.CloseAction == null)
+                    throw new NullReferenceException($"attributeAction.CloseAction is null for attribute: {attributeType.Name}");
+
+                return attributeAction;
+            }
+
+            throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
+        }
     }
 }
