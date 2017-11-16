@@ -84,11 +84,13 @@ namespace MvvmCross.Core.Navigation
                     matches.Count - 1,
                     string.Join(", ", matches.Select(t => t.Key.ToString())));
                 // there is more than one match
+                entry = default(KeyValuePair<Regex, Type>);
                 return false;
             }
             catch(Exception ex)
             {
                 Mvx.TaggedError("MvxNavigationService", "Unable to determine routability: {0}", ex);
+                entry = default(KeyValuePair<Regex, Type>);
                 return false;
             }
         }
