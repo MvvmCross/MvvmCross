@@ -9,7 +9,17 @@
 
     <ScrollView>
         <StackLayout Margin="5">
-            <Label Text="Default (OneWay) Binding" />
+            <Picker SelectedIndex="1" HorizontalOptions="FillAndExpand">
+                    <Picker.ItemsSource>
+                       <x:Array Type="{x:Type x:String}">
+                            <mvx:MvxLang Source="ThisIsLocalizedToo" />
+                            <mvx:MvxLang Source="ThisIsLocalized" />
+                            <mvx:MvxLang Source="ThisIsLocalizedToo" />
+                            <mvx:MvxLang Source="ThisIsLocalized" />
+                       </x:Array>
+                   </Picker.ItemsSource>
+            </Picker>
+           <!-- <Label Text="Default (OneWay) Binding" />
 	        <Label mvx:Bi.nd="Text BindableText" />
             <BoxView Margin="5"
                      HeightRequest="4"
@@ -32,7 +42,7 @@
             <Label Text="Lang Binding" />
             <Label mvx:La.ng="Text ThisIsLocalized" />
             <Label Text="{mvx:MvxLang ThisIsLocalizedToo}" />
-            <Label Text="{mvx:MvxBind TextSource, Mode=OneTime, Converter=Language, ConverterParameter=ThisIsLocalizedThroughMvxBind}" />
+            <Label Text="{mvx:MvxBind TextSource, Mode=OneTime, Converter=Language, ConverterParameter=ThisIsLocalizedThroughMvxBind}" />-->
         </StackLayout>
     </ScrollView>
 </core:MvxContentPage>

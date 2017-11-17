@@ -20,7 +20,7 @@ namespace MvvmCross.Forms.Bindings
                                    object newValue,
                                    Func<string, IEnumerable<MvxBindingDescription>> parseBindingDescriptions)
         {
-            var attachedObject = sender as Element;
+            var attachedObject = sender as BindableObject;
 
             if (attachedObject == null)
             {
@@ -39,7 +39,7 @@ namespace MvvmCross.Forms.Bindings
             ApplyBindings(attachedObject, bindingDescriptions);
         }
 
-        protected abstract void ApplyBindings(Element attachedObject,
+        protected abstract void ApplyBindings(BindableObject attachedObject,
                                               IEnumerable<MvxBindingDescription> bindingDescriptions);
     }
 }

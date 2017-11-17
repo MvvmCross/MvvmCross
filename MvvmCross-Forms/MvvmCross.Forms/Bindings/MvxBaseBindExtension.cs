@@ -14,23 +14,20 @@ namespace MvvmCross.Forms.Bindings
         public string FallbackValue { get; set; }
 
         public IProvideValueTarget Target { get; private set; }
-        public BindableObject BindableObj { get; private set; }
-        public BindableProperty BindableProp { get; private set; }
-        public string PropertyName { get; private set;  }
+        public object BindableObj { get; private set; }
+        public object BindableProp { get; private set; }
+        public string PropertyName { get; private set; } = string.Empty;
 
         public abstract object ProvideValue(IServiceProvider serviceProvider);
 
         object IMarkupExtension.ProvideValue(IServiceProvider serviceProvider)
         {
             Target = (IProvideValueTarget)serviceProvider.GetService(typeof(IProvideValueTarget));
-            BindableObj = Target.TargetObject as BindableObject;
-            BindableProp = Target.TargetProperty as BindableProperty;
+            BindableObj = Target.TargetObject;
+            BindableProp = Target.TargetProperty;
 
             if (Target.TargetProperty is BindableProperty bp)
-            {
-                BindableProp = bp;
                 PropertyName = bp.PropertyName;
-            }
             else if (Target.TargetProperty is PropertyInfo pi)
                 PropertyName = pi.Name;
 
