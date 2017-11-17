@@ -79,6 +79,26 @@ namespace MvvmCross.Forms.Views
             return page;
         }
 
+        private Page CloseAndCreatePage(Type view,
+            MvxViewModelRequest request,
+            MvxPagePresentationAttribute attribute,
+            bool closeModal =true,
+            bool closePlatformViews = true)
+        {
+            if (closeModal)
+            {
+                CloseAllModals();
+            }
+
+            if (closePlatformViews)
+            {
+                ClosePlatformViews?.Invoke();
+            }
+
+            var page = CreatePage(view, request, attribute);
+            return page;
+        }
+
         public override void RegisterAttributeTypes()
         {
             AttributeTypesToActionsDictionary.Add(
@@ -161,9 +181,7 @@ namespace MvvmCross.Forms.Views
                     throw new MvxException($"A root page should be of type {nameof(MvxCarouselPage)}");
                 }
 
-                var rootPage = GetTaggedPageById(attribute);
-
-                PushOrReplacePage(rootPage, page, attribute);
+                PushOrReplacePage(FormsApplication.MainPage, page, attribute);
             }
             else
             {
@@ -235,11 +253,9 @@ namespace MvvmCross.Forms.Views
             MvxContentPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            CloseAllModals();
             ClosePlatformViews?.Invoke();
             ShowPlatformHost?.Invoke(attribute.HostViewModelType);
 
-            var page = CreatePage(view, request, attribute);
             PushOrReplacePage(FormsApplication.MainPage, page, attribute);
         }
 
@@ -381,7 +397,6 @@ namespace MvvmCross.Forms.Views
             MvxNavigationPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            CloseAllModals();
             ClosePlatformViews?.Invoke();
             ShowPlatformHost?.Invoke(attribute.HostViewModelType);
 
@@ -637,28 +652,6 @@ namespace MvvmCross.Forms.Views
             return true;
         }
 
-        protected IDictionary<string, Page> RegionPages { get; } = new Dictionary<string, Page>();
-
-        /// <summary>
-        /// Look up to see if there is a navigation page that has been tagged.
-        /// If not, assume navigation will be at the root of the application
-        /// </summary>
-        /// <param name="attribute"></param>
-        /// <param name="rootPage"></param>
-        /// <returns></returns>
-        protected Page GetTaggedPageById(MvxPagePresentationAttribute attribute)
-        {
-            if (!string.IsNullOrWhiteSpace(attribute.RegionId))
-            {
-                if (RegionPages.TryGetValue(attribute.RegionId, out var existingNavPage))
-                {
-                    return existingNavPage;
-                }
-            }
-
-            return null;
-        }
-
         protected TPage GetHostPageOfType<TPage>(Page rootPage = null) where TPage : Page
         {
             if (rootPage == null)
@@ -766,16 +759,16 @@ namespace MvvmCross.Forms.Views
             {
                 // If the existing page is the current main page of the forms
                 // app, then simply replace it
-                if(existingPage == FormsApplication.MainPage)
+                if (existingPage == FormsApplication.MainPage)
                 {
                     FormsApplication.MainPage = page;
                     return;
                 }
 
                 var parent = existingPage.Parent;
-                if(parent is MasterDetailPage rootMasterDetail)
+                if (parent is MasterDetailPage rootMasterDetail)
                 {
-                    if(attribute is MvxMasterDetailPagePresentationAttribute masterDetailAttribute)
+                    if (attribute is MvxMasterDetailPagePresentationAttribute masterDetailAttribute)
                     {
                         if (masterDetailAttribute.Position == MasterDetailPosition.Master)
                         {
@@ -789,7 +782,7 @@ namespace MvvmCross.Forms.Views
                 }
 
                 // Handle updating pages within either carousel or tabbed pages
-                if(parent is MultiPage<ContentPage> carousel)
+                if (parent is MultiPage<ContentPage> carousel)
                 {
                     var cp = page as ContentPage;
                     var idx = carousel.Children.IndexOf(cp);
