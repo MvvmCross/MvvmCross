@@ -531,10 +531,6 @@ namespace MvvmCross.Forms.Views
                 if (navigationRootPage == null)
                 {
                     page = new NavigationPage(page);
-                    // TODO: Need to make sure this is done on all navigation pages when we
-                    // navigate just the ones we create
-                    NavigationPage.SetHasNavigationBar(page, attribute.ShowNavigationBar);
-
                     ReplacePageRoot(rootPage, page, attribute);
                 }
                 else

@@ -31,12 +31,6 @@ namespace MvvmCross.Forms.Views.Attributes
         public string RegionId { get; set; }
 
         /// <summary>
-        /// Controls whether the navigation bar should be shown when
-        /// page is wrapped in a navigation page
-        /// </summary>
-        public bool ShowNavigationBar { get; set; } = true;
-
-        /// <summary>
         /// Clears the backstack of the current NavigationPage when set to true
         /// </summary>
         /// <value><c>true</c> if no history; otherwise, <c>false</c>.</value>
