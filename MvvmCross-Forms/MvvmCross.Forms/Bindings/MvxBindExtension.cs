@@ -20,7 +20,7 @@ namespace MvvmCross.Forms.Bindings
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            if (BindableObj != null && !string.IsNullOrEmpty(PropertyName))
+            if (BindableObj is BindableObject obj && !string.IsNullOrEmpty(PropertyName))
             {
                 StringBuilder bindingBuilder = new StringBuilder($"{PropertyName} {Path}, Mode={Mode}");
 
@@ -44,7 +44,11 @@ namespace MvvmCross.Forms.Bindings
                     bindingBuilder.Append($", CommandParameter={CommandParameter}");
                 }
 
-                BindableObj.SetValue(Bi.ndProperty, bindingBuilder.ToString());
+                obj.SetValue(Bi.ndProperty, bindingBuilder.ToString());
+            }
+            else if (BindableObj is IMarkupExtension ext)
+            {
+                return ext.ProvideValue(serviceProvider);
             }
             else
             {

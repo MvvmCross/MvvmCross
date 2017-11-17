@@ -17,7 +17,7 @@ namespace MvvmCross.Forms.Bindings
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            if (BindableObj != null && !string.IsNullOrEmpty(PropertyName))
+            if (BindableObj is BindableObject obj && !string.IsNullOrEmpty(PropertyName))
             {
                 StringBuilder bindingBuilder = new StringBuilder($"{PropertyName} {Source}");
 
@@ -41,7 +41,14 @@ namespace MvvmCross.Forms.Bindings
                     bindingBuilder.Append($", FallbackValue={FallbackValue}");
                 }
 
-                BindableObj.SetValue(La.ngProperty, bindingBuilder.ToString());
+                obj.SetValue(La.ngProperty, bindingBuilder.ToString());
+            }
+            else if(BindableObj is IMarkupExtension ext)
+            {
+                var test = ext.ProvideValue(serviceProvider);
+
+                //TODO: return real value here
+                return "";
             }
             else
             {
