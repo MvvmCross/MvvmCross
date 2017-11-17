@@ -136,6 +136,9 @@
     <PackageReference Include="NETStandard.Library">
       <Version>2.0.1</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>2.5.0.91635</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross-Forms\MvvmCross.Forms.Uwp\MvvmCross.Forms.Uwp.csproj">

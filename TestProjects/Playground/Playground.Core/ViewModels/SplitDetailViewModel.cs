@@ -1,4 +1,4 @@
-﻿using MvvmCross.Core.Navigation;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 
 namespace Playground.Core.ViewModels
@@ -15,5 +15,10 @@ namespace Playground.Core.ViewModels
         }
 
         public IMvxAsyncCommand ShowChildCommand { get; private set; }
+
+        public override void ViewAppeared()
+        {
+            base.ViewAppeared();
+        }
     }
 }

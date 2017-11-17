@@ -14,5 +14,10 @@ namespace Playground.Forms.Pages
         {
             InitializeComponent();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
     }
 }
