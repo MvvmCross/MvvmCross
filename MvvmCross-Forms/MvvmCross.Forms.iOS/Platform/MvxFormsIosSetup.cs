@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-using System.Reflection;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Bindings;
 using MvvmCross.Forms.iOS.Bindings;
 using MvvmCross.Forms.iOS.Presenters;
 using MvvmCross.Forms.Platform;
@@ -13,14 +10,17 @@ using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Localization;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
+using System.Collections.Generic;
+using System.Reflection;
 using UIKit;
 
 namespace MvvmCross.Forms.iOS
 {
-    public abstract class MvxFormsIosSetup : MvxIosSetup
+    public abstract class MvxFormsIosSetup<TForms> : MvxIosSetup
+        where TForms : MvxFormsApplication, new()
     {
         private List<Assembly> _viewAssemblies;
-        private MvxFormsApplication _formsApplication;
+        private TForms _formsApplication;
 
         protected MvxFormsIosSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
@@ -35,7 +35,10 @@ namespace MvvmCross.Forms.iOS
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
             if (_viewAssemblies == null)
+            {
                 _viewAssemblies = new List<Assembly>(base.GetViewAssemblies());
+                _viewAssemblies.Add(typeof(TForms).GetTypeInfo().Assembly);
+            }
 
             return _viewAssemblies;
         }
@@ -46,19 +49,22 @@ namespace MvvmCross.Forms.iOS
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public MvxFormsApplication FormsApplication
+       
+        public TForms FormsApplication
         {
             get
             {
                 if (!Xamarin.Forms.Forms.IsInitialized)
                     Xamarin.Forms.Forms.Init();
                 if (_formsApplication == null)
-                    _formsApplication = CreateFormsApplication();
+                {
+                    _formsApplication = _formsApplication ?? CreateFormsApplication();
+                }
                 return _formsApplication;
             }
         }
 
-        protected virtual MvxFormsApplication CreateFormsApplication() => new MvxFormsApplication();
+        protected virtual TForms CreateFormsApplication() => new TForms();
 
         protected override IMvxIosViewPresenter CreatePresenter()
         {
