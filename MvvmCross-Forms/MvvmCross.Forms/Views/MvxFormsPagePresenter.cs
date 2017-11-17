@@ -82,7 +82,7 @@ namespace MvvmCross.Forms.Views
         private Page CloseAndCreatePage(Type view,
             MvxViewModelRequest request,
             MvxPagePresentationAttribute attribute,
-            bool closeModal =true,
+            bool closeModal = false,
             bool closePlatformViews = true)
         {
             if (closeModal)
@@ -351,44 +351,71 @@ namespace MvvmCross.Forms.Views
             if (FormsApplication.MainPage == null)
                 FormsApplication.MainPage = new NavigationPage(new ContentPage() { Title = nameof(ContentPage) });
 
-            if (FormsApplication.MainPage is NavigationPage navigationPage)
+            if (attribute.WrapInNavigationPage)
             {
-                if (attribute.WrapInNavigationPage && navigationPage?.Navigation?.ModalStack?.LastOrDefault() is NavigationPage modalNavigationPage)
-                {
-                    PushOrReplacePage(modalNavigationPage, page, attribute);
-                }
-                else if (attribute.WrapInNavigationPage)
-                    navigationPage.Navigation.PushModalAsync(new NavigationPage(page), attribute.Animated);
-                else
-                    navigationPage.Navigation.PushModalAsync(page, attribute.Animated);
+                page = new NavigationPage(page);
             }
-            else
-            {
-                if (attribute.WrapInNavigationPage && FormsApplication.MainPage?.Navigation?.ModalStack?.LastOrDefault() is NavigationPage modalNavigationPage)
-                    PushOrReplacePage(modalNavigationPage, page, attribute);
-                else if (attribute.WrapInNavigationPage && FormsApplication.MainPage?.Navigation != null)
-                    FormsApplication?.MainPage?.Navigation?.PushModalAsync(new NavigationPage(page), attribute.Animated);
-                else
-                    FormsApplication?.MainPage?.Navigation?.PushModalAsync(page, attribute.Animated);
-            }
+
+            FormsApplication.MainPage.Navigation.PushModalAsync(page, attribute.Animated);
         }
 
         public virtual bool CloseModal(IMvxViewModel viewModel, MvxModalPresentationAttribute attribute)
         {
-            if (FormsApplication.MainPage is NavigationPage navigationPage)
+            return PopModal(attribute);
+        }
+
+        private NavigationPage TopNavigationPage(Page rootPage = null)
+        {
+            if (rootPage == null)
             {
-                if (attribute.WrapInNavigationPage && navigationPage?.Navigation?.ModalStack?.LastOrDefault() is NavigationPage modalNavigationPage && modalNavigationPage?.Navigation?.NavigationStack?.Count > 1)
-                    modalNavigationPage.PopAsync(attribute.Animated);
-                else
-                    navigationPage.Navigation.PopModalAsync(attribute.Animated);
+                return TopNavigationPage(FormsApplication.MainPage);
             }
-            else
+
+            if (rootPage is NavigationPage navigationPage)
             {
-                if (attribute.WrapInNavigationPage && FormsApplication.MainPage?.Navigation?.ModalStack?.LastOrDefault() is NavigationPage modalNavigationPage)
-                    modalNavigationPage.PopAsync(attribute.Animated);
-                else
-                    FormsApplication.MainPage?.Navigation?.PopModalAsync(attribute.Animated);
+                if (navigationPage.CurrentPage != null)
+                {
+                    // Check if there's a nested navigation
+                    var navPage = TopNavigationPage(navigationPage.CurrentPage);
+                    if (navPage != null) return navPage;
+                }
+
+                // Check for modals
+                var topMostModal = navigationPage?.Navigation?.ModalStack?.LastOrDefault();
+                if (topMostModal !=null && topMostModal!=navigationPage)
+                {
+                    var currentModalNav = TopNavigationPage(topMostModal);
+                    if (currentModalNav != null) return currentModalNav;
+                }
+
+                return navigationPage;
             }
+
+            // The page isn't a navigation page, so check
+            // to see if it's a master detail, and if so, check
+            // the Detail and Master pages for a navigation page
+            if (rootPage is MasterDetailPage masterDetailsPage)
+            {
+                if (masterDetailsPage.Detail != null)
+                {
+                    var navDetailPage = TopNavigationPage(masterDetailsPage.Detail);
+                    if (navDetailPage != null) return navDetailPage;
+                }
+
+                if (masterDetailsPage.Master != null)
+                {
+                    var navMasterPage = TopNavigationPage(masterDetailsPage.Master);
+                    if (navMasterPage != null) return navMasterPage;
+                }
+            }
+
+            // Nothing, all out of luck!
+            return null;
+        }
+
+        private bool PopModal(MvxPagePresentationAttribute attribute)
+        {
+            FormsApplication.MainPage.Navigation.PopModalAsync(attribute.Animated);
             return true;
         }
 
@@ -520,6 +547,12 @@ namespace MvvmCross.Forms.Views
                 rootPage = FormsApplication.MainPage;
             }
 
+            var modal = rootPage?.Navigation?.ModalStack?.LastOrDefault();
+            if (modal != null)
+            {
+                rootPage = modal;
+            }
+
             var navigationRootPage = rootPage as NavigationPage;
 
             // Step down through any nested navigation pages to make sure we're pushing to the
@@ -611,43 +644,53 @@ namespace MvvmCross.Forms.Views
 
         public virtual bool ClosePage(Page rootPage, Page page, MvxPagePresentationAttribute attribute)
         {
+            //var modal = rootPage?.Navigation?.ModalStack?.LastOrDefault();
+            //if (modal.)
+
+            var root = TopNavigationPage();
+
+
             if (page != null)
             {
-                if (rootPage is NavigationPage navigationRootPage)
-                {
-                    if (navigationRootPage.CurrentPage is NavigationPage navigationNestedPage)
-                        ClosePage(navigationNestedPage, page, attribute);
-                    else
-                        navigationRootPage.Navigation.RemovePage(page);
-                }
-                else if (rootPage.Navigation != null)
-                {
-                    rootPage.Navigation.RemovePage(page);
-                }
-                else
-                {
-                    MvxTrace.Trace($"Cannot remove page: {page.Title}");
-                    return false;
-                }
+                root?.Navigation?.RemovePage(page);
+
+                //if (rootPage is NavigationPage navigationRootPage)
+                //{
+                //    if (navigationRootPage.CurrentPage is NavigationPage navigationNestedPage)
+                //        ClosePage(navigationNestedPage, page, attribute);
+                //    else
+                //        navigationRootPage.Navigation.RemovePage(page);
+                //}
+                //else if (rootPage.Navigation != null)
+                //{
+                //    rootPage.Navigation.RemovePage(page);
+                //}
+                //else
+                //{
+                //    MvxTrace.Trace($"Cannot remove page: {page.Title}");
+                //    return false;
+                //}
             }
             else
             {
-                if (rootPage is NavigationPage navigationRootPage)
-                {
-                    if (navigationRootPage.CurrentPage is NavigationPage navigationNestedPage)
-                        ClosePage(navigationNestedPage, page, attribute);
-                    else
-                        navigationRootPage.PopAsync(attribute.Animated);
-                }
-                else if (rootPage.Navigation != null)
-                {
-                    rootPage.Navigation.PopAsync(attribute.Animated);
-                }
-                else
-                {
-                    MvxTrace.Trace($"Cannot pop page: {page.Title}");
-                    return false;
-                }
+                root?.Navigation?.PopAsync(attribute.Animated);
+
+                //if (rootPage is NavigationPage navigationRootPage)
+                //{
+                //    if (navigationRootPage.CurrentPage is NavigationPage navigationNestedPage)
+                //        ClosePage(navigationNestedPage, page, attribute);
+                //    else
+                //        navigationRootPage.PopAsync(attribute.Animated);
+                //}
+                //else if (rootPage.Navigation != null)
+                //{
+                //    rootPage.Navigation.PopAsync(attribute.Animated);
+                //}
+                //else
+                //{
+                //    MvxTrace.Trace($"Cannot pop page: {page.Title}");
+                //    return false;
+                //}
             }
             return true;
         }
