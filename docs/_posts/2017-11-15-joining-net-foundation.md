@@ -22,7 +22,7 @@ Joining the .NET Foundation gives us a lot of benefits ranging from legal help, 
 MvvmCross will mostly continue the same way as it has always been. We will continue developing MvvmCross on GitHub, we will continue pushing new releases to NuGet.
 
 ## What is in it for me?
-For you as a contributor there will be some minor changes. In the near future we will set up a GitHub bot to ask you to sign a Contributor License Agreement and check whehenver you submit a Pull Request that it is signed.
+For you as a contributor there will be some minor changes. In the near future we will set up a GitHub bot to ask you to sign a Contributor License Agreement and check whenever you submit a Pull Request that it is signed.
 
 For you as a user of MvvmCross, joining the .NET Foundation means that MvvmCross will remain a open source project. It will ensure that MvvmCross is guided and mentored into a welcoming community where we can share knowledge and best practices.
 
