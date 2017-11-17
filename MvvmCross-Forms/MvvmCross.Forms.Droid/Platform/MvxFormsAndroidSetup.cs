@@ -1,28 +1,28 @@
-using System.Collections.Generic;
-using System.Reflection;
 using Android.Content;
 using MvvmCross.Binding;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Views;
-using MvvmCross.Forms.Bindings;
-using MvvmCross.Forms.Platform;
+using MvvmCross.Forms.Droid.Bindings;
 using MvvmCross.Forms.Droid.Views;
+using MvvmCross.Forms.Platform;
+using MvvmCross.Forms.Views;
 using MvvmCross.Localization;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
-using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Plugins;
-using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Forms.Bindings.Target;
-using MvvmCross.Forms.Views;
-using MvvmCross.Forms.Droid.Bindings;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace MvvmCross.Forms.Droid.Platform
 {
-    public abstract class MvxFormsAndroidSetup : MvxAndroidSetup
+    public abstract class MvxFormsAndroidSetup<TForms> : MvxAndroidSetup
+        where TForms : MvxFormsApplication, new()
     {
         private List<Assembly> _viewAssemblies;
-        private MvxFormsApplication _formsApplication;
+        private TForms _formsApplication;
 
         public MvxFormsAndroidSetup(Context applicationContext) : base(applicationContext)
         {
@@ -31,7 +31,9 @@ namespace MvvmCross.Forms.Droid.Platform
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
             if (_viewAssemblies == null)
-                _viewAssemblies = new List<Assembly>(base.GetViewAssemblies());
+            {
+                _viewAssemblies = new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(TForms).GetTypeInfo().Assembly }));
+            }
 
             return _viewAssemblies;
         }
@@ -42,7 +44,7 @@ namespace MvvmCross.Forms.Droid.Platform
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public MvxFormsApplication FormsApplication
+        public TForms FormsApplication
         {
             get
             {
@@ -51,13 +53,16 @@ namespace MvvmCross.Forms.Droid.Platform
                     var activity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity ?? ApplicationContext;
                     Xamarin.Forms.Forms.Init(activity, null);
                 }
+
                 if (_formsApplication == null)
-                    _formsApplication = CreateFormsApplication();
+                {
+                    _formsApplication = _formsApplication ?? CreateFormsApplication();
+                }
                 return _formsApplication;
             }
         }
 
-        protected virtual MvxFormsApplication CreateFormsApplication() => new MvxFormsApplication();
+        protected virtual TForms CreateFormsApplication() => new TForms();
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {

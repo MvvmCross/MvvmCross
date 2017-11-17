@@ -1,25 +1,28 @@
-using System.Collections.Generic;
-using System.Reflection;
-using Windows.ApplicationModel.Activation;
 using MvvmCross.Binding;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Platform;
+using MvvmCross.Forms.Uwp.Bindings;
 using MvvmCross.Forms.Uwp.Presenters;
+using MvvmCross.Forms.Views;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Plugins;
 using MvvmCross.Uwp.Platform;
 using MvvmCross.Uwp.Views;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Plugins;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Windows.ApplicationModel.Activation;
 using XamlControls = Windows.UI.Xaml.Controls;
-using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Forms.Views;
-using MvvmCross.Forms.Uwp.Bindings;
 
 namespace MvvmCross.Forms.Uwp
 {
-    public abstract class MvxFormsWindowsSetup : MvxWindowsSetup
+    public abstract class MvxFormsWindowsSetup<TForms> : MvxWindowsSetup
+        where TForms : MvxFormsApplication, new()
     {
         private readonly LaunchActivatedEventArgs _launchActivatedEventArgs;
         private List<Assembly> _viewAssemblies;
+        private TForms _formsApplication;
 
         public MvxFormsWindowsSetup(XamlControls.Frame rootFrame, LaunchActivatedEventArgs e)
             : base(rootFrame)
@@ -30,7 +33,9 @@ namespace MvvmCross.Forms.Uwp
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
             if (_viewAssemblies == null)
-                _viewAssemblies = new List<Assembly>(base.GetViewAssemblies());
+            {
+                _viewAssemblies = new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(TForms).GetTypeInfo().Assembly }));
+            }
 
             return _viewAssemblies;
         }
@@ -41,8 +46,7 @@ namespace MvvmCross.Forms.Uwp
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        private MvxFormsApplication _formsApplication;
-        public MvxFormsApplication FormsApplication
+        public TForms FormsApplication
         {
             get
             {
@@ -55,7 +59,7 @@ namespace MvvmCross.Forms.Uwp
             }
         }
 
-        protected virtual MvxFormsApplication CreateFormsApplication() => new MvxFormsApplication();
+        protected virtual TForms CreateFormsApplication() => new TForms();
 
         protected override IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
         {
