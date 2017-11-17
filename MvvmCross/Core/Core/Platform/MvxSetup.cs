@@ -224,10 +224,10 @@ namespace MvvmCross.Core.Platform
 
         protected virtual MvxLogProviderType GetDefaultLogProviderType()
             => MvxLogProviderType.Console;
-       
+
         protected virtual IMvxLogProvider CreateLogProvider()
         {
-            switch(GetDefaultLogProviderType())
+            switch (GetDefaultLogProviderType())
             {
                 case MvxLogProviderType.Console:
                     return new ConsoleLogProvider();
@@ -241,6 +241,8 @@ namespace MvvmCross.Core.Platform
                     return new NLogLogProvider();
                 case MvxLogProviderType.Serilog:
                     return new SerilogLogProvider();
+                case MvxLogProviderType.None:
+                    return new NullLogProvider();
                 default:
                     return null;
             }
@@ -262,14 +264,14 @@ namespace MvvmCross.Core.Platform
         protected virtual IMvxPluginManager InitializePluginFramework()
         {
             var pluginManager = CreatePluginManager();
-            AddPluginsLoaders (pluginManager.Registry);
+            AddPluginsLoaders(pluginManager.Registry);
             pluginManager.ConfigurationSource = GetPluginConfiguration;
             Mvx.RegisterSingleton(pluginManager);
             LoadPlugins(pluginManager);
             return pluginManager;
         }
 
-        protected virtual void AddPluginsLoaders (MvxLoaderPluginRegistry registry)
+        protected virtual void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
         {
         }
 
