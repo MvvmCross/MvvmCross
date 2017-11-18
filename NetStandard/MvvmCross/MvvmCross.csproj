@@ -10,8 +10,8 @@
   <ItemGroup>
     <Compile Remove="Platforms\**\*.cs" />
     <None Include="Platforms\**\*.cs" />
-    <None Include="Resources\Resource.Designer.cs" />
-    <Compile Remove="Resources\Resource.Designer.cs" />
+    <None Include="Resources\*.cs" />
+    <Compile Remove="Resources\*.cs" />
   </ItemGroup>
 
   <ItemGroup>
