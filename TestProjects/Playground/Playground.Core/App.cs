@@ -16,8 +16,7 @@ namespace Playground.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            var test = new TextProviderBuilder();
-            Mvx.RegisterSingleton<IMvxTextProvider>(test.TextProvider);
+            Mvx.RegisterSingleton<IMvxTextProvider>(new TextProviderBuilder().TextProvider);
 
             RegisterNavigationServiceAppStart<RootViewModel>();
         }
