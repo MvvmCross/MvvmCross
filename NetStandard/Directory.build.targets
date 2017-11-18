@@ -18,6 +18,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'MonoAndroid80'">
     <DefineConstants>$(DefineConstants);MONO;ANDROID</DefineConstants>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
   </PropertyGroup>
