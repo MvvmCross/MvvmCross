@@ -10,6 +10,8 @@
   <ItemGroup>
     <Compile Remove="Platforms\**\*.cs" />
     <None Include="Platforms\**\*.cs" />
+    <None Include="Resources\Resource.Designer.cs" />
+    <Compile Remove="Resources\Resource.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,12 +51,15 @@
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
     <Compile Include="Platforms\Android\**\*.cs" />
-    <AndroidResource Include="Platforms\Android\Resources\**\*.xml" />
     <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+    <AndroidResource Include="Resources\**\*.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidResource>
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
-    <Compile Include="Platforms\netcoreapp2.0\**\*.cs" />
+    <Compile Include="Platforms\Netcoreapp2.0\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup>
