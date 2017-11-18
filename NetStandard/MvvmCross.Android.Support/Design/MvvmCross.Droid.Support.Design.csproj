@@ -20,6 +20,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
+    <ProjectReference Include="..\Fragment\MvvmCross.Droid.Support.Fragment.csproj" />
   </ItemGroup>
 
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
