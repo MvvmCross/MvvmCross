@@ -6,7 +6,7 @@ using Xamarin.Forms.Xaml;
 
 namespace MvvmCross.Forms.Bindings
 {
-    public abstract class MvxBaseBindExtension : BindableObject, IMarkupExtension
+    public abstract class MvxBaseBindExtension : IMarkupExtension
     {
         public MvxBindingMode Mode { get; set; } = MvxBindingMode.Default;
         public string Converter { get; set; }
