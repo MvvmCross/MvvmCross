@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-using MvvmCross.Forms.Bindings;
 using MvvmCross.Localization;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;

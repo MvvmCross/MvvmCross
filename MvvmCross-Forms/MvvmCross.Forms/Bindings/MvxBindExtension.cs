@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Reflection;
 using System.Text;
-using MvvmCross.Binding;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;

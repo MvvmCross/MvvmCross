@@ -6,10 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
-using System.Linq;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
-using MvvmCross.Localization;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using Xamarin.Forms;
