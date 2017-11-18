@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -15,6 +15,7 @@ using MvvmCross.Droid.Views;
 using MvvmCross.Droid.Views.Attributes;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
