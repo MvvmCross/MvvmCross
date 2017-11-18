@@ -103,11 +103,6 @@ protected override void OnCreate(Bundle bundle)
     ToolbarResource = Resource.Layout.Toolbar;
  
     base.OnCreate(bundle);
- 
-    global::Xamarin.Forms.Forms.Init(this, bundle);
- 
-    var formsPresenter = (MvxFormsPagePresenter)Mvx.Resolve<IMvxAndroidViewPresenter>();
-    LoadApplication(formsPresenter.FormsApplication);
 }
 ```
 
