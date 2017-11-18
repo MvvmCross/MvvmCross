@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using MvvmCross.Forms.Bindings;
+using MvvmCross.Localization;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
@@ -12,6 +13,12 @@ namespace MvvmCross.Forms.Bindings
     public class MvxLangExtension : MvxBaseBindExtension
     {
         public string Source { get; set; }
+
+        public string NameSpaceKey { get; set; } = "";
+
+        public string TypeKey { get; set; } = "";
+
+        public object[] Arguments { get; set; }
 
         public string Key { get; set; }
 
@@ -43,16 +50,20 @@ namespace MvvmCross.Forms.Bindings
 
                 obj.SetValue(La.ngProperty, bindingBuilder.ToString());
             }
+            else if(Mvx.CanResolve<IMvxTextProvider>())
+            {
+                if(Arguments == null)
+                    return new MvxLanguageBinder(NameSpaceKey, TypeKey).GetText(Source);
+                else
+                    return new MvxLanguageBinder(NameSpaceKey, TypeKey).GetText(Source, Arguments);
+            }
             else if(BindableObj is IMarkupExtension ext)
             {
-                var test = ext.ProvideValue(serviceProvider);
-
-                //TODO: return real value here
-                return "";
+                return ext.ProvideValue(serviceProvider);
             }
             else
             {
-                Mvx.Trace(MvxTraceLevel.Diagnostic, "Cannot only use MvxLang on a bindable property");
+                Mvx.Trace(MvxTraceLevel.Diagnostic, "Can only use MvxLang on a bindable property");
             }
 
             return null;

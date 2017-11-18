@@ -36,16 +36,9 @@ namespace MvvmCross.Forms.Bindings
                                             null,
                                             CallBackWhenngIsChanged);
 
-        public static string Getng(object obj)
+        public static string Getng(BindableObject obj)
         {
-            if (obj is BindableObject bindable)
-                return bindable.GetValue(ngProperty) as string;
-            else if (obj is string text)
-            {
-                return Mvx.Resolve<IMvxTextProvider>().GetText("", "", text);
-            }
-            else
-                return null;
+            return obj.GetValue(ngProperty) as string;
         }
 
         public static void Setng(BindableObject obj,
