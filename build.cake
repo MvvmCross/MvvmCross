@@ -3,13 +3,34 @@
 #tool nuget:?package=NUnit.ConsoleRunner
 #addin nuget:?package=Cake.Incubator&version=1.5.0
 #addin nuget:?package=Cake.Git&version=0.16.0
+#addin nuget:?package=Cake.Figlet
 
 var sln = new FilePath("./NetStandard/MvvmCross.sln");
 var outputDir = new DirectoryPath("artifacts");
 var nuspecDir = new DirectoryPath("nuspec");
 var target = Argument("target", "Default");
+var configuration = Argument("configuration", "Release");
+GitVersion versionInfo = null;
 
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
+
+Setup(context => 
+{
+    Information(Figlet("MvvmCross"));
+
+    versionInfo = GitVersion(new GitVersionSettings {
+        UpdateAssemblyInfo = true,
+        OutputType = GitVersionOutput.Json
+    });
+
+    var cakeVersion = typeof(ICakeContext).Assembly.GetName().Version.ToString();
+
+    Information("Building version {0}, ({1}, {2}) using version {3} of Cake.",
+        versionInfo.SemVer,
+        configuration,
+        target,
+        cakeVersion);
+});
 
 Task("Clean").Does(() =>
 {
@@ -20,18 +41,7 @@ Task("Clean").Does(() =>
     EnsureDirectoryExists(outputDir);
 });
 
-GitVersion versionInfo = null;
-Task("Version").Does(() => {
-    versionInfo = GitVersion(new GitVersionSettings {
-        UpdateAssemblyInfo = true,
-        OutputType = GitVersionOutput.Json
-    });
-
-    Information("GitVersion -> {0}", versionInfo.Dump());
-});
-
 Task("UpdateAppVeyorBuildNumber")
-    .IsDependentOn("Version")
     .WithCriteria(() => isRunningOnAppVeyor)
     .Does(() =>
 {
@@ -51,9 +61,6 @@ Task("ResolveBuildTools")
 Task("Restore")
     .IsDependentOn("ResolveBuildTools")
     .Does(() => {
-    // NuGetRestore(sln, new NuGetRestoreSettings {
-    //     Verbosity = NuGetVerbosity.Quiet
-    // });
     MSBuild(sln, settings => settings.WithTarget("Restore")
         .SetVerbosity(Verbosity.Diagnostic));
 });
@@ -67,7 +74,7 @@ Task("Build")
 
     var settings = new MSBuildSettings 
     {
-        Configuration = "Release",
+        Configuration = configuration,
         ToolPath = msBuildPath,
         Verbosity = Verbosity.Diagnostic,
         ArgumentCustomization = args => args.Append("/m")
@@ -81,7 +88,7 @@ Task("UnitTest")
     .Does(() =>
 {
     var testPaths = new List<string> {
-        new FilePath("./NetStandard/MvvmCross.Tests/bin/Release/netcoreapp2.0/MvvmCross.Tests.dll").FullPath,
+        new FilePath("./NetStandard/MvvmCross.Tests/bin/" + configuration + "/netcoreapp2.0/MvvmCross.Tests.dll").FullPath,
     };
 
     var testResultsPath = new FilePath(outputDir + "/NUnitTestResult.xml");
