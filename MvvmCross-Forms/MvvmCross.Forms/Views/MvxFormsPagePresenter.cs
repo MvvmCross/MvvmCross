@@ -256,6 +256,8 @@ namespace MvvmCross.Forms.Views
             ClosePlatformViews?.Invoke();
             ShowPlatformHost?.Invoke(attribute.HostViewModelType);
 
+            var page = CreatePage(view, request, attribute);
+
             PushOrReplacePage(FormsApplication.MainPage, page, attribute);
         }
 
@@ -308,7 +310,7 @@ namespace MvvmCross.Forms.Views
                     //if (attribute.Position == MasterDetailPosition.Master)
                     masterDetailHost.Master = new ContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) };
                     //if (attribute.Position == MasterDetailPosition.Detail)
-                    masterDetailHost.Detail = new NavigationPage(new ContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) });
+                    masterDetailHost.Detail = new NavigationPage();//new ContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) });
 
 
                     var masterDetailRootAttribute = new MvxMasterDetailPagePresentationAttribute { Position = MasterDetailPosition.Root, WrapInNavigationPage = attribute.WrapInNavigationPage, NoHistory = attribute.NoHistory };
