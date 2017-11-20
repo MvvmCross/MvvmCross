@@ -1,11 +1,10 @@
 #tool nuget:?package=GitVersion.CommandLine
-#tool nuget:?package=gitlink&version=2.4.0
 #tool nuget:?package=vswhere
 #tool nuget:?package=NUnit.ConsoleRunner
 #addin nuget:?package=Cake.Incubator&version=1.5.0
 #addin nuget:?package=Cake.Git&version=0.16.0
 
-var sln = new FilePath("MvvmCross_All.sln");
+var sln = new FilePath("./NetStandard/MvvmCross.sln");
 var outputDir = new DirectoryPath("artifacts");
 var nuspecDir = new DirectoryPath("nuspec");
 var target = Argument("target", "Default");
@@ -73,9 +72,6 @@ Task("Build")
         ArgumentCustomization = args => args.Append("/m")
     };
 
-    settings.Properties.Add("DebugSymbols", new List<string> { "True" });
-    settings.Properties.Add("DebugType", new List<string> { "Full" });
-
     MSBuild(sln, settings);
 });
 
@@ -84,14 +80,7 @@ Task("UnitTest")
     .Does(() =>
 {
     var testPaths = new List<string> {
-        new FilePath("./MvvmCross/Test/Test/bin/Release/MvvmCross.Test.dll").FullPath,
-        new FilePath("./MvvmCross/Binding/Test/bin/Release/MvvmCross.Binding.Test.dll").FullPath,
-        new FilePath("./MvvmCross/Platform/Test/bin/Release/MvvmCross.Platform.Test.dll").FullPath,
-        new FilePath("./MvvmCross-Plugins/Color/MvvmCross.Plugins.Color.Test/bin/Release/MvvmCross.Plugins.Color.Test.dll").FullPath,
-        new FilePath("./MvvmCross-Plugins/Messenger/MvvmCross.Plugins.Messenger.Test/bin/Release/MvvmCross.Plugins.Messenger.Test.dll").FullPath,
-        new FilePath("./MvvmCross-Plugins/Network/MvvmCross.Plugins.Network.Test/bin/Release/MvvmCross.Plugins.Network.Test.dll").FullPath,
-        new FilePath("./MvvmCross-Plugins/JsonLocalization/MvvmCross.Plugins.JsonLocalization.Tests/bin/Release/MvvmCross.Plugins.JsonLocalization.Tests.dll").FullPath,
-        new FilePath("./MvvmCross-Plugins/ResxLocalization/MvvmCross.Plugins.ResxLocalization.Tests/bin/Release/MvvmCross.Plugins.ResxLocalization.Tests.dll").FullPath
+        new FilePath("./NetStandard/MvvmCross.Tests/bin/Release/netcoreapp2.0/MvvmCross.Tests.dll").FullPath,
     };
 
     var testResultsPath = new FilePath(outputDir + "/NUnitTestResult.xml");
@@ -105,140 +94,6 @@ Task("UnitTest")
     if (isRunningOnAppVeyor)
     {
         AppVeyor.UploadTestResults(testResultsPath, AppVeyorTestResultsType.NUnit3);
-    }
-});
-
-Task("GitLink")
-    .IsDependentOn("UnitTest")
-    //pdbstr.exe and costura are not xplat currently
-    .WithCriteria(() => IsRunningOnWindows())
-    .WithCriteria(() => 
-        StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "develop") || 
-        IsMasterOrReleases())
-    .Does(() => 
-{
-    var projectsToIgnore = new string[] {
-        "PageRendererExample.Core",
-        "PageRendererExample.Droid",
-        "PageRendererExample.iOS",
-        "PageRendererExample.WindowsUWP",
-        "MvvmCross.iOS.Support.ExpandableTableView.Core",
-        "MvvmCross.iOS.Support.ExpandableTableView.iOS",
-        "MvvmCross.iOS.Support.XamarinSidebarSample.Core",
-        "MvvmCross.iOS.Support.XamarinSidebarSample.iOS",
-        "mvvmcross.codeanalysis.vsix",
-        "example",
-        "example.android",
-        "example.ios",
-        "example.windowsphone",
-        "example.core",
-        "example.droid",
-        "Example.W81",
-        "Eventhooks.Core",
-        "Eventhooks.Droid",
-        "Eventhooks.iOS",
-        "Eventhooks.Uwp",
-        "Eventhooks.Wpf",
-        "RoutingExample.Core",
-        "RoutingExample.iOS",
-        "RoutingExample.Droid",
-        "MvvmCross.TestProjects.CustomBinding.Core",
-        "MvvmCross.TestProjects.CustomBinding.iOS",
-        "MvvmCross.TestProjects.CustomBinding.Droid",
-        "playground",
-        "playground.core",
-        "playground.ios",
-        "playground.mac",
-        "playground.wpf",
-        "Playground.Droid",
-        "Playground.Uwp",
-        "Playground.Forms.Droid",
-        "Playground.Forms.iOS",
-        "Playground.Forms.Mac",
-        "Playground.Forms.Uwp",
-        "Playground.Forms.Wpf"
-    };
-
-    GitLink("./", 
-        new GitLinkSettings {
-            RepositoryUrl = "https://github.com/mvvmcross/mvvmcross",
-            Configuration = "Release",
-            SolutionFileName = "MvvmCross_All.sln",
-            ArgumentCustomization = args => args.Append("-ignore " + string.Join(",", projectsToIgnore))
-        });
-});
-
-Task("Package")
-    .IsDependentOn("GitLink")
-    .WithCriteria(() => 
-        StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "develop") || 
-        IsMasterOrReleases())
-    .Does(() => 
-{
-    var nugetSettings = new NuGetPackSettings {
-        Authors = new [] { "MvvmCross contributors" },
-        Owners = new [] { "MvvmCross" },
-        IconUrl = new Uri("http://i.imgur.com/Baucn8c.png"),
-        ProjectUrl = new Uri("https://github.com/MvvmCross/MvvmCross"),
-        LicenseUrl = new Uri("https://raw.githubusercontent.com/MvvmCross/MvvmCross/develop/LICENSE"),
-        Copyright = "Copyright (c) MvvmCross",
-        RequireLicenseAcceptance = false,
-        Version = versionInfo.NuGetVersion,
-        Symbols = false,
-        NoPackageAnalysis = true,
-        OutputDirectory = outputDir,
-        Verbosity = NuGetVerbosity.Detailed,
-        BasePath = "./nuspec"
-    };
-
-    var nuspecs = new List<string> {
-        "MvvmCross.nuspec",
-        "MvvmCross.Binding.nuspec",
-        "MvvmCross.CodeAnalysis.nuspec",
-        "MvvmCross.Console.Platform.nuspec",
-        "MvvmCross.Core.nuspec",
-        "MvvmCross.Droid.Support.Core.UI.nuspec",
-        "MvvmCross.Droid.Support.Core.Utils.nuspec",
-        "MvvmCross.Droid.Support.Design.nuspec",
-        "MvvmCross.Droid.Support.Fragment.nuspec",
-        "MvvmCross.Droid.Support.V7.AppCompat.nuspec",
-        "MvvmCross.Droid.Support.V7.Preference.nuspec",
-        "MvvmCross.Droid.Support.V7.RecyclerView.nuspec",
-        "MvvmCross.Droid.Support.V14.Preference.nuspec",
-        "MvvmCross.Droid.Support.V17.Leanback.nuspec",
-        "MvvmCross.Forms.nuspec",
-        "MvvmCross.iOS.Support.nuspec",
-        "MvvmCross.iOS.Support.XamarinSidebar.nuspec",
-        "MvvmCross.Platform.nuspec",
-        "MvvmCross.Plugin.Accelerometer.nuspec",
-        "MvvmCross.Plugin.All.nuspec",
-        "MvvmCross.Plugin.Color.nuspec",
-        "MvvmCross.Plugin.DownloadCache.nuspec",
-        "MvvmCross.Plugin.Email.nuspec",
-        "MvvmCross.Plugin.FieldBinding.nuspec",
-        "MvvmCross.Plugin.File.nuspec",
-        "MvvmCross.Plugin.Json.nuspec",
-        "MvvmCross.Plugin.JsonLocalization.nuspec",
-        "MvvmCross.Plugin.Location.nuspec",
-        "MvvmCross.Plugin.Location.Fused.nuspec",
-        "MvvmCross.Plugin.Messenger.nuspec",
-        "MvvmCross.Plugin.MethodBinding.nuspec",
-        "MvvmCross.Plugin.Network.nuspec",
-        "MvvmCross.Plugin.PhoneCall.nuspec",
-        "MvvmCross.Plugin.PictureChooser.nuspec",
-        "MvvmCross.Plugin.ResourceLoader.nuspec",
-        "MvvmCross.Plugin.ResxLocalization.nuspec",
-        "MvvmCross.Plugin.Share.nuspec",
-        "MvvmCross.Plugin.Visibility.nuspec",
-        "MvvmCross.Plugin.WebBrowser.nuspec",
-        "MvvmCross.StarterPack.nuspec",
-        "MvvmCross.Forms.StarterPack.nuspec",
-        "MvvmCross.Tests.nuspec"
-    };
-
-    foreach(var nuspec in nuspecs)
-    {
-        NuGetPack(nuspecDir + "/" + nuspec, nugetSettings);
     }
 });
 
