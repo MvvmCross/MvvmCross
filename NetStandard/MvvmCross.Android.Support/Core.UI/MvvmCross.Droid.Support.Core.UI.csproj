@@ -6,11 +6,13 @@
     <RootNamespace>MvvmCross.Droid.Support.Core.UI</RootNamespace>
     <Description>MvvmCross packages for Android Support Core.UI</Description>
     <PackageId>MvvmCross.Droid.Support.Core.UI</PackageId>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Resources\*.cs" />
-    <Compile Remove="Resources\*.cs" />
+    <AndroidResource Include="Resources\**\*.xml" Generator="MSBuild:UpdateAndroidResources" />
   </ItemGroup>  
   
   <ItemGroup>

@@ -29,7 +29,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
                 new MvxAdapter(context)
                 {
                     ItemTemplateId = Android.Resource.Layout.SimpleSpinnerItem,
-                    DropDownItemTemplateId = Resource.Layout.support_simple_spinner_dropdown_item
+                    DropDownItemTemplateId = MvvmCross.Droid.Support.V7.AppCompat.Resource.Layout.support_simple_spinner_dropdown_item
                 })
         {
         }
