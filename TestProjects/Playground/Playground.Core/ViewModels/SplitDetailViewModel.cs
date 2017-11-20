@@ -11,7 +11,7 @@ namespace Playground.Core.ViewModels
         {
             _navigationService = navigationService;
 
-            ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel>());
+            ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SplitDetailNavViewModel>());
         }
 
         public IMvxAsyncCommand ShowChildCommand { get; private set; }

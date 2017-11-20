@@ -15,5 +15,7 @@ namespace MvvmCross.Forms.Views
         Page CreatePage(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute);
 
         Func<bool> ClosePlatformViews { get; set; }
+
+        Func<Type, bool> ShowPlatformHost { get; set; }
     }
 }

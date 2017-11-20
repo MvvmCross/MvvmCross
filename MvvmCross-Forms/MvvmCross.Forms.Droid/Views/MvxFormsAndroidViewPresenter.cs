@@ -9,11 +9,13 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Views;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
+using MvvmCross.Forms.Views.Attributes;
 using MvvmCross.Platform;
 
 
