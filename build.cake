@@ -55,10 +55,10 @@ Task("ResolveBuildTools")
 Task("Restore")
     .IsDependentOn("ResolveBuildTools")
     .Does(() => {
-    NuGetRestore(sln, new NuGetRestoreSettings {
-        Verbosity = NuGetVerbosity.Quiet
-    });
-    // MSBuild(sln, settings => settings.WithTarget("Restore"));
+    // NuGetRestore(sln, new NuGetRestoreSettings {
+    //     Verbosity = NuGetVerbosity.Quiet
+    // });
+    MSBuild(sln, settings => settings.WithTarget("Restore"));
 });
 
 Task("Build")
