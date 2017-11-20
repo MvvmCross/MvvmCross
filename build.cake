@@ -58,7 +58,8 @@ Task("Restore")
     // NuGetRestore(sln, new NuGetRestoreSettings {
     //     Verbosity = NuGetVerbosity.Quiet
     // });
-    MSBuild(sln, settings => settings.WithTarget("Restore"));
+    MSBuild(sln, settings => settings.WithTarget("Restore")
+        .SetVerbosity(Verbosity.Diagnostic));
 });
 
 Task("Build")
@@ -72,7 +73,7 @@ Task("Build")
     {
         Configuration = "Release",
         ToolPath = msBuildPath,
-        Verbosity = Verbosity.Minimal,
+        Verbosity = Verbosity.Diagnostic,
         ArgumentCustomization = args => args.Append("/m")
     };
 
