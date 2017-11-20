@@ -98,7 +98,6 @@ Task("UnitTest")
 });
 
 Task("PublishPackages")
-    .IsDependentOn("Package")
     .WithCriteria(() => !BuildSystem.IsLocalBuild)
     .WithCriteria(() => IsRepository("mvvmcross/mvvmcross"))
     .WithCriteria(() => 
@@ -129,7 +128,6 @@ Task("PublishPackages")
 });
 
 Task("UploadAppVeyorArtifact")
-    .IsDependentOn("Package")
     .WithCriteria(() => !AppVeyor.Environment.PullRequest.IsPullRequest)
     .WithCriteria(() => isRunningOnAppVeyor)
     .Does(() => {
@@ -143,6 +141,11 @@ Task("UploadAppVeyorArtifact")
 });
 
 Task("Default")
+    .IsDependentOn("Clean")
+    .IsDependentOn("Version")
+    .IsDependentOn("Restore")
+    .IsDependentOn("Build")
+    .IsDependentOn("UnitTest")
     .IsDependentOn("PublishPackages")
     .IsDependentOn("UploadAppVeyorArtifact")
     .Does(() => 
