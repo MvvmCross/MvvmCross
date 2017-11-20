@@ -53,10 +53,7 @@
   <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
     <Compile Include="Platforms\Android\**\*.cs" />
     <Compile Include="Platforms\Xamarin-common\**\*.cs" />
-    <AndroidResource Include="Resources\**\*.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </AndroidResource>
+    <AndroidResource Include="Resources\**\*.xml" SubType="Designer" Generator="MSBuild:UpdateAndroidResources" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
