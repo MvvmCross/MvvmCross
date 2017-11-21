@@ -17,7 +17,7 @@ namespace MvvmCross.Forms.Bindings
 {
     public class MvxFormsBindingCreator : MvxBindingCreator
     {
-        protected override void ApplyBindings(Element attachedObject,
+        protected override void ApplyBindings(BindableObject attachedObject,
                                               IEnumerable<MvxBindingDescription> bindingDescriptions)
         {
             var binder = MvxBindingSingletonCache.Instance.Binder;
@@ -27,7 +27,7 @@ namespace MvvmCross.Forms.Bindings
             RegisterBindingsForUpdates(attachedObject, bindings);
         }
 
-        private void RegisterBindingsForUpdates(Element attachedObject,
+        private void RegisterBindingsForUpdates(BindableObject attachedObject,
                                                 IEnumerable<IMvxUpdateableBinding> bindings)
         {
             if (bindings == null)
@@ -40,7 +40,7 @@ namespace MvvmCross.Forms.Bindings
             }
         }
 
-        private IList<IMvxUpdateableBinding> GetOrCreateBindingsList(Element attachedObject)
+        private IList<IMvxUpdateableBinding> GetOrCreateBindingsList(BindableObject attachedObject)
         {
             var existing = attachedObject.GetValue(BindingsListProperty) as IList<IMvxUpdateableBinding>;
 
@@ -73,9 +73,9 @@ namespace MvvmCross.Forms.Bindings
             attachAction();
             var subscription = attachedObject.WeakSubscribe((s, a) =>
                                                             {
-                                                                if (a.PropertyName == nameof(Element.Parent))
+                                                                if (attachedObject is Element element && a.PropertyName == nameof(Element.Parent))
                                                                 {
-                                                                    if (attachedObject.Parent != null)
+                                                                    if (element.Parent != null)
                                                                     {
                                                                         attachAction();
                                                                     }

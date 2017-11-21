@@ -11,6 +11,7 @@ using Serilog;
 using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
+using MvvmCross.Plugins.Json;
 
 namespace Playground.Forms.Droid
 {
@@ -46,9 +47,17 @@ namespace Playground.Forms.Droid
         {
             return new DebugTrace();
         }
+
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
             return base.GetViewAssemblies().Union(new[] { typeof(FormsApp).GetTypeInfo().Assembly });
+        }
+
+        protected override void PerformBootstrapActions()
+        {
+            base.PerformBootstrapActions();
+
+            PluginLoader.Instance.EnsureLoaded();
         }
     }
 }
