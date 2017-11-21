@@ -64,6 +64,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\Json\MvvmCross.Plugin.Json.csproj" />
+    <ProjectReference Include="..\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj" />
   </ItemGroup>
 
   <ItemGroup>
