@@ -53,7 +53,7 @@ namespace MvvmCross.Forms.Views
             }
         }
 
-        public virtual Func<Type ,bool> ShowPlatformHost { get; set; }
+        public virtual Func<Type, bool> ShowPlatformHost { get; set; }
         public virtual Func<bool> ClosePlatformViews { get; set; }
 
         public virtual Page CreatePage(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute)
@@ -366,7 +366,12 @@ namespace MvvmCross.Forms.Views
             return PopModal(attribute);
         }
 
-        private NavigationPage TopNavigationPage(Page rootPage = null)
+        private NavigationPage TopNavigationPage()
+        {
+            return TopNavigationPage(FormsApplication.MainPage);
+        }
+
+        private NavigationPage TopNavigationPage(Page rootPage)
         {
             if (rootPage == null)
             {
@@ -384,7 +389,7 @@ namespace MvvmCross.Forms.Views
 
                 // Check for modals
                 var topMostModal = navigationPage?.Navigation?.ModalStack?.LastOrDefault();
-                if (topMostModal !=null && topMostModal!=navigationPage)
+                if (topMostModal != null && topMostModal != navigationPage)
                 {
                     var currentModalNav = TopNavigationPage(topMostModal);
                     if (currentModalNav != null) return currentModalNav;
