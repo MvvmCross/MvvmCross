@@ -4,7 +4,7 @@
     <AssemblyName>MvvmCross.Forms</AssemblyName>
     <RootNamespace>MvvmCross.Forms</RootNamespace>
     <Description></Description>
-    <PackageId>MvvmCross</PackageId>
+    <PackageId>MvvmCross.Forms</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
