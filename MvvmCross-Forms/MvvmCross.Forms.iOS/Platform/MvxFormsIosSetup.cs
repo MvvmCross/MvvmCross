@@ -49,7 +49,6 @@ namespace MvvmCross.Forms.iOS
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-       
         public TForms FormsApplication
         {
             get
