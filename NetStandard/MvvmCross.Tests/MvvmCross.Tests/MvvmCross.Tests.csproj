@@ -14,7 +14,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MvvmCross\MvvmCross.csproj" />
+    <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
   </ItemGroup>
 
   <ItemGroup>
