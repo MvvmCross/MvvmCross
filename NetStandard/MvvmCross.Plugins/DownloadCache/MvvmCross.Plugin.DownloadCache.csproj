@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net461;uap10.0;Xamarin.iOS10;MonoAndroid80;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net461;uap10.0;Xamarin.iOS10;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid80;netcoreapp2.0</TargetFrameworks>
     <AssemblyName>MvvmCross.Plugin.DownloadCache</AssemblyName>
     <RootNamespace>MvvmCross.Plugin.DownloadCache</RootNamespace>
     <Description></Description>
     <PackageId>MvvmCross.Plugin.DownloadCache</PackageId>
-    <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -49,6 +48,18 @@
   <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.Mac20' ">
     <Compile Include="Platforms\Apple-common\**\*.cs" />
     <Compile Include="Platforms\Mac\**\*.cs" />
+    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.TVOS10' ">
+    <Compile Include="Platforms\Apple-common\**\*.cs" />
+    <Compile Include="Platforms\Tvos\**\*.cs" />
+    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.WatchOS10' ">
+    <Compile Include="Platforms\Apple-common\**\*.cs" />
+    <Compile Include="Platforms\Watchos\**\*.cs" />
     <Compile Include="Platforms\Xamarin-common\**\*.cs" />
   </ItemGroup>
 
