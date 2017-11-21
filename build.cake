@@ -1,8 +1,7 @@
 #tool nuget:?package=GitVersion.CommandLine
 #tool nuget:?package=vswhere
 #tool nuget:?package=NUnit.ConsoleRunner
-#addin nuget:?package=Cake.Incubator&version=1.5.0
-#addin nuget:?package=Cake.Git&version=0.16.0
+#addin nuget:?package=Cake.Git
 #addin nuget:?package=Cake.Figlet
 
 var sln = new FilePath("./NetStandard/MvvmCross.sln");
@@ -91,17 +90,17 @@ Task("UnitTest")
         new FilePath("./NetStandard/MvvmCross.Tests/bin/" + configuration + "/netcoreapp2.0/MvvmCross.Tests.dll").FullPath,
     };
 
-    var testResultsPath = new FilePath(outputDir + "/NUnitTestResult.xml");
-
     NUnit3(testPaths, new NUnit3Settings {
         Timeout = 30000,
         OutputFile = new FilePath(outputDir + "/NUnitOutput.txt"),
-        Results = testResultsPath
+        WorkingDirectory = outputDir
     });
 
     if (isRunningOnAppVeyor)
     {
-        AppVeyor.UploadTestResults(testResultsPath, AppVeyorTestResultsType.NUnit3);
+        var testResultFiles = GetFiles("artifacts/*.xml");
+        foreach(var testResultFile in testResultFiles)
+            AppVeyor.UploadTestResults(testResultFile, AppVeyorTestResultsType.NUnit3);
     }
 });
 
@@ -150,13 +149,12 @@ Task("UploadAppVeyorArtifact")
 
 Task("Default")
     .IsDependentOn("Clean")
-    .IsDependentOn("Version")
     .IsDependentOn("Restore")
     .IsDependentOn("Build")
     .IsDependentOn("UnitTest")
     .IsDependentOn("PublishPackages")
     .IsDependentOn("UploadAppVeyorArtifact")
-    .Does(() => 
+    .Does(() =>
 {
 });
 
