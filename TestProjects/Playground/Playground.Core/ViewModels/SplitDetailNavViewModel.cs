@@ -5,7 +5,6 @@ namespace Playground.Core.ViewModels
 {
     public class SplitDetailNavViewModel : MvxViewModel
     {
-
         private readonly IMvxNavigationService _navigationService;
 
         public SplitDetailNavViewModel(IMvxNavigationService navigationService)
