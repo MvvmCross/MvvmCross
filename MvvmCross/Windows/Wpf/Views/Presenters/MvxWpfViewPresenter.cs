@@ -19,52 +19,8 @@ using System.Windows.Controls;
 namespace MvvmCross.Wpf.Views.Presenters
 {
     public class MvxWpfViewPresenter
-        : MvxBaseWpfViewPresenter, IMvxAttributeViewPresenter
+        : MvxAttributeViewPresenter, IMvxWpfViewPresenter
     {
-        private IMvxViewModelTypeFinder _viewModelTypeFinder;
-        public IMvxViewModelTypeFinder ViewModelTypeFinder
-        {
-            get
-            {
-                if (_viewModelTypeFinder == null)
-                    _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
-                return _viewModelTypeFinder;
-            }
-            set
-            {
-                _viewModelTypeFinder = value;
-            }
-        }
-
-        private IMvxViewsContainer _viewsContainer;
-        public IMvxViewsContainer ViewsContainer
-        {
-            get
-            {
-                if (_viewsContainer == null)
-                    _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
-                return _viewsContainer;
-            }
-            set
-            {
-                _viewsContainer = value;
-            }
-        }
-
-        private Dictionary<Type, MvxPresentationAttributeAction> _attributeTypesActionsDictionary;
-        public Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
-        {
-            get
-            {
-                if (_attributeTypesActionsDictionary == null)
-                {
-                    _attributeTypesActionsDictionary = new Dictionary<Type, MvxPresentationAttributeAction>();
-                    RegisterAttributeTypes();
-                }
-                return _attributeTypesActionsDictionary;
-            }
-        }
-
         private IMvxWpfViewLoader _wpfViewLoader;
         protected IMvxWpfViewLoader WpfViewLoader
         {
@@ -78,6 +34,10 @@ namespace MvvmCross.Wpf.Views.Presenters
 
         private readonly Dictionary<ContentControl, Stack<FrameworkElement>> _frameworkElementsDictionary = new Dictionary<ContentControl, Stack<FrameworkElement>>();
 
+        protected MvxWpfViewPresenter()
+        {
+        }
+
         public MvxWpfViewPresenter(ContentControl contentControl) // Accept ContentControl only for the first host view 
         {
             if (contentControl is Window window)
@@ -86,7 +46,7 @@ namespace MvvmCross.Wpf.Views.Presenters
             _frameworkElementsDictionary.Add(contentControl, new Stack<FrameworkElement>());
         }
 
-        public virtual void RegisterAttributeTypes()
+        public override void RegisterAttributeTypes()
         {
             AttributeTypesToActionsDictionary.Add(
                 typeof(MvxWindowPresentationAttribute),
@@ -113,32 +73,7 @@ namespace MvvmCross.Wpf.Views.Presenters
                 });
         }
 
-        public virtual MvxBasePresentationAttribute GetPresentationAttribute(Type viewModelType)
-        {
-            var viewType = ViewsContainer.GetViewType(viewModelType);
-
-            var overrideAttribute = GetOverridePresentationAttribute(viewModelType, viewType);
-            if (overrideAttribute != null)
-                return overrideAttribute;
-
-            var attribute = viewType
-                .GetCustomAttributes(typeof(MvxBasePresentationAttribute), true)
-                .FirstOrDefault() as MvxBasePresentationAttribute;
-            if (attribute != null)
-            {
-                if (attribute.ViewType == null)
-                    attribute.ViewType = viewType;
-
-                if (attribute.ViewModelType == null)
-                    attribute.ViewModelType = viewModelType;
-
-                return attribute;
-            }
-
-            return CreatePresentationAttribute(viewModelType, viewType);            
-        }
-
-        public virtual MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
+        public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
             if (viewType.IsSubclassOf(typeof(Window)))
             {
@@ -152,7 +87,7 @@ namespace MvvmCross.Wpf.Views.Presenters
             return new MvxContentPresentationAttribute();
         }
 
-        public virtual MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, Type viewType)
+        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, Type viewType)
         {
             if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
             {
@@ -181,36 +116,6 @@ namespace MvvmCross.Wpf.Views.Presenters
             }
 
             return null;
-        }
-
-        public override void ChangePresentation(MvxPresentationHint hint)
-        {
-            base.ChangePresentation(hint);
-
-            if (hint is MvxClosePresentationHint)
-            {
-                Close((hint as MvxClosePresentationHint).ViewModelToClose);
-            }
-        }
-
-        public override void Show(MvxViewModelRequest request)
-        {
-            var attribute = GetPresentationAttribute(request.ViewModelType);
-            attribute.ViewModelType = request.ViewModelType;
-            var attributeType = attribute.GetType();
-
-            if (AttributeTypesToActionsDictionary.TryGetValue(
-                attributeType,
-                out MvxPresentationAttributeAction attributeAction))
-            {
-                if (attributeAction.ShowAction == null)
-                    throw new NullReferenceException($"attributeAction.ShowAction is null for attribute: {attributeType.Name}");
-
-                attributeAction.ShowAction.Invoke(attribute.ViewType, attribute, request);
-                return;
-            }
-
-            throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
         }
 
         protected virtual void ShowWindow(FrameworkElement element, MvxWindowPresentationAttribute attribute, MvxViewModelRequest request)
@@ -320,10 +225,6 @@ namespace MvvmCross.Wpf.Views.Presenters
             }
 
             return false;
-        }
-
-        public override void Present(FrameworkElement frameworkElement)
-        {
         }
     }
 }
