@@ -310,7 +310,7 @@ namespace MvvmCross.Forms.Views
                     //if (attribute.Position == MasterDetailPosition.Master)
                     masterDetailHost.Master = new ContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) };
                     //if (attribute.Position == MasterDetailPosition.Detail)
-                    masterDetailHost.Detail = new NavigationPage();//new ContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) });
+                    masterDetailHost.Detail = new ContentPage();//new ContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) });
 
 
                     var masterDetailRootAttribute = new MvxMasterDetailPagePresentationAttribute { Position = MasterDetailPosition.Root, WrapInNavigationPage = attribute.WrapInNavigationPage, NoHistory = attribute.NoHistory };
@@ -580,8 +580,13 @@ namespace MvvmCross.Forms.Views
                 // in a navigation wrapper.
                 if (navigationRootPage == null)
                 {
-                    page = new NavigationPage(page);
-                    ReplacePageRoot(rootPage, page, attribute);
+                    // NR: This is a really hacky solution to a bug where if "NavigationPage.HasNavigationBar="False"
+                    // is set in the page XAML, the navigation bar is still shown. Looks like after first navigation
+                    // this is resolved
+                    var navpage = new NavigationPage(new ContentPage());
+                    ReplacePageRoot(rootPage, navpage, attribute);
+                    navpage.Navigation.InsertPageBefore(page, navpage.RootPage);
+                    navpage.Navigation.PopToRootAsync(attribute.Animated);
                 }
                 else
                 {
