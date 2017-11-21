@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Reflection;
 using System.Text;
-using MvvmCross.Binding;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
@@ -20,7 +18,7 @@ namespace MvvmCross.Forms.Bindings
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            if (BindableObj != null && !string.IsNullOrEmpty(PropertyName))
+            if (BindableObj is BindableObject obj && !string.IsNullOrEmpty(PropertyName))
             {
                 StringBuilder bindingBuilder = new StringBuilder($"{PropertyName} {Path}, Mode={Mode}");
 
@@ -44,11 +42,15 @@ namespace MvvmCross.Forms.Bindings
                     bindingBuilder.Append($", CommandParameter={CommandParameter}");
                 }
 
-                BindableObj.SetValue(Bi.ndProperty, bindingBuilder.ToString());
+                obj.SetValue(Bi.ndProperty, bindingBuilder.ToString());
+            }
+            else if (BindableObj is IMarkupExtension ext)
+            {
+                return ext.ProvideValue(serviceProvider);
             }
             else
             {
-                Mvx.Trace(MvxTraceLevel.Diagnostic, "Cannot only use MvxBind on a bindable property");
+                Mvx.Trace(MvxTraceLevel.Diagnostic, "Can only use MvxBind on a bindable property");
             }
 
             return null;

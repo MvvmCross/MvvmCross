@@ -9,7 +9,15 @@
 
     <ScrollView>
         <StackLayout Margin="5">
-            <Label Text="Default (OneWay) Binding" />
+            <Picker SelectedIndex="1" HorizontalOptions="FillAndExpand">
+                    <Picker.ItemsSource>
+                       <x:Array Type="{x:Type x:String}">
+                            <mvx:MvxLang Source="ThisIsLocalizedToo" NameSpaceKey="Playground.Core" TypeKey="Text" />
+                            <mvx:MvxLang Source="ThisIsLocalized" NameSpaceKey="Playground.Core" TypeKey="Text" />
+                       </x:Array>
+                   </Picker.ItemsSource>
+            </Picker>
+           <Label Text="Default (OneWay) Binding" />
 	        <Label mvx:Bi.nd="Text BindableText" />
             <BoxView Margin="5"
                      HeightRequest="4"

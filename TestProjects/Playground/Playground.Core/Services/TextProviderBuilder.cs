@@ -8,7 +8,7 @@ namespace Playground.Core.Services
 {
     public class TextProviderBuilder : MvxTextProviderBuilder
     {
-        public TextProviderBuilder() : base("MvxBindingsExample", "Resources", new MvxEmbeddedJsonDictionaryTextProvider(false))
+        public TextProviderBuilder() : base("Playground.Core", "Resources", new MvxEmbeddedJsonDictionaryTextProvider(false))
         {
         }
 
