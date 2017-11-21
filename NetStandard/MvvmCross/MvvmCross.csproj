@@ -5,7 +5,6 @@
     <RootNamespace>MvvmCross</RootNamespace>
     <Description></Description>
     <PackageId>MvvmCross</PackageId>
-    <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
