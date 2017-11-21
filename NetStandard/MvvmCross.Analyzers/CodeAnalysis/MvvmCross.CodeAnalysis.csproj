@@ -1,18 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.3</TargetFramework>
-    <PackageTargetFallback>portable-net45+win+wpa81+wp80</PackageTargetFallback>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>MvvmCross.CodeAnalysis</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis" Version="2.3.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="2.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj" />
-    <ProjectReference Include="..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj" />
+    <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
   </ItemGroup>
 
   <ItemGroup>
