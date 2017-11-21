@@ -9,6 +9,8 @@ var outputDir = new DirectoryPath("artifacts");
 var nuspecDir = new DirectoryPath("nuspec");
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
+var verbosity = (Verbosity)Enum.Parse(typeof(Verbosity),
+    Argument("verbosity", "Minimal"));
 GitVersion versionInfo = null;
 
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
@@ -59,9 +61,12 @@ Task("ResolveBuildTools")
 
 Task("Restore")
     .IsDependentOn("ResolveBuildTools")
-    .Does(() => {
-    MSBuild(sln, settings => settings.WithTarget("Restore")
-        .SetVerbosity(Verbosity.Diagnostic));
+    .Does(() => 
+{
+    var settings = GetDefaultMSBuildSettings()
+        .WithTarget("Restore");
+
+    MSBuild(sln, settings);
 });
 
 Task("Build")
@@ -71,16 +76,22 @@ Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>  {
 
+    var settings = GetDefaultMSBuildSettings();
+    MSBuild(sln, settings);
+});
+
+MSBuildSettings GetDefaultMSBuildSettings()
+{
     var settings = new MSBuildSettings 
     {
         Configuration = configuration,
         ToolPath = msBuildPath,
-        Verbosity = Verbosity.Diagnostic,
+        Verbosity = verbosity,
         ArgumentCustomization = args => args.Append("/m")
     };
 
-    MSBuild(sln, settings);
-});
+    return settings;
+}
 
 Task("UnitTest")
     .IsDependentOn("Build")
