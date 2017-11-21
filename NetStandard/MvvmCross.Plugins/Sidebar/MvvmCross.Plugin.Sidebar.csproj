@@ -5,7 +5,6 @@
     <RootNamespace>MvvmCross.Plugin.Sidebar</RootNamespace>
     <Description></Description>
     <PackageId>MvvmCross.Plugin.Sidebar</PackageId>
-    <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

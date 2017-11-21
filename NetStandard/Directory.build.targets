@@ -16,6 +16,12 @@
    <PropertyGroup Condition="'$(TargetFramework)' == 'Xamarin.Mac20'">
     <DefineConstants>$(DefineConstants);MONO;COCOA</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'Xamarin.TVOS10'">
+    <DefineConstants>$(DefineConstants);MONO;COCOA</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'Xamarin.WatchOS10'">
+    <DefineConstants>$(DefineConstants);MONO;COCOA</DefineConstants>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'MonoAndroid80'">
     <DefineConstants>$(DefineConstants);MONO;ANDROID</DefineConstants>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
@@ -24,7 +30,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
   </PropertyGroup>
-
+  
   <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0' ">
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform " Version="6.0.1" />
   </ItemGroup>
