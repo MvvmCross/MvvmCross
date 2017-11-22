@@ -7,7 +7,7 @@ namespace MvvmCross.Platform.Logging
     {
         internal const string FailedToGenerateLogMessage = "Failed to generate log message";
 
-        internal static IMvxLog InternalLogInstance { get; set; }
+        internal static IMvxLog Instance { get; set; }
 
         private readonly Logger _logger;
 

@@ -21,7 +21,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
 
         public override void SetValue(object value)
         {
-            MvxLog.InternalLogInstance.Warn("ToSource binding is not available for direct pathed source bindings");
+            MvxLog.Instance.Warn("ToSource binding is not available for direct pathed source bindings");
         }
 
         public override object GetValue()

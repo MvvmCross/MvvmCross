@@ -1,4 +1,4 @@
-// MvxBindingBuilder.cs
+﻿// MvxBindingBuilder.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -64,7 +64,7 @@ namespace MvvmCross.Binding
                 Mvx.RegisterSingleton<IMvxSourceBindingFactoryExtensionHost>(extensionHost);
             }
             else
-                MvxLog.InternalLogInstance.Trace("source binding factory extension host not provided - so no source extensions will be used");
+                MvxLog.Instance.Trace("source binding factory extension host not provided - so no source extensions will be used");
         }
 
         protected virtual void RegisterSourceBindingFactoryExtensions(IMvxSourceBindingFactoryExtensionHost extensionHost)

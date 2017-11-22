@@ -170,10 +170,10 @@ namespace MvvmCross.Binding
         {
             if (Mvx.CanResolve<IMvxBindingParser>())
             {
-                MvxLog.InternalLogInstance.Trace("Binding Parser already registered - so skipping Default parser");
+                MvxLog.Instance.Trace("Binding Parser already registered - so skipping Default parser");
                 return;
             }
-            MvxLog.InternalLogInstance.Trace("Registering Default Binding Parser");
+            MvxLog.Instance.Trace("Registering Default Binding Parser");
             Mvx.RegisterSingleton(CreateBindingParser());
         }
 
@@ -186,10 +186,10 @@ namespace MvvmCross.Binding
         {
             if (Mvx.CanResolve<IMvxLanguageBindingParser>())
             {
-                MvxLog.InternalLogInstance.Trace("Binding Parser already registered - so skipping Language parser");
+                MvxLog.Instance.Trace("Binding Parser already registered - so skipping Language parser");
                 return;
             }
-            MvxLog.InternalLogInstance.Trace("Registering Language Binding Parser");
+            MvxLog.Instance.Trace("Registering Language Binding Parser");
             Mvx.RegisterSingleton(CreateLanguageBindingParser());
         }
 

@@ -21,7 +21,7 @@ namespace MvvmCross.Binding.Combiners
 
             if (list.Count < 1)
             {
-                MvxLog.InternalLogInstance.Warn("Format called with no parameters - will fail");
+                MvxLog.Instance.Warn("Format called with no parameters - will fail");
                 value = MvxBindingConstant.DoNothing;
                 return true;
             }

@@ -1,4 +1,4 @@
-// MvxSetup.cs
+﻿// MvxSetup.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -215,7 +215,7 @@ namespace MvvmCross.Core.Platform
                 Mvx.RegisterSingleton(logProvider);
                 SetupLog = logProvider.GetLogFor<MvxSetup>();
                 var globalLog = logProvider.GetLogFor<MvxLog>();
-                MvxLog.InternalLogInstance = globalLog;
+                MvxLog.Instance = globalLog;
                 Mvx.RegisterSingleton(globalLog);
             }
         }

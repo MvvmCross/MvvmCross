@@ -48,7 +48,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
                 }
                 catch (Exception exception)
                 {
-                    MvxLog.InternalLogInstance.Error(
+                    MvxLog.Instance.Error(
                         "Problem creating target binding for {0} - exception {1}", _targetType.Name,
                         exception.ToString());
                 }

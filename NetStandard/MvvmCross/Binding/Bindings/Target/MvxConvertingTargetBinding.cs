@@ -28,11 +28,11 @@ namespace MvvmCross.Binding.Bindings.Target
 
         public override void SetValue(object value)
         {
-            MvxLog.InternalLogInstance.Trace("Receiving SetValue to " + (value ?? ""));
+            MvxLog.Instance.Trace("Receiving SetValue to " + (value ?? ""));
             var target = Target;
             if (target == null)
             {
-                MvxLog.InternalLogInstance.Warn("Weak Target is null in {0} - skipping set", GetType().Name);
+                MvxLog.Instance.Warn("Weak Target is null in {0} - skipping set", GetType().Name);
                 return;
             }
 
@@ -92,7 +92,7 @@ namespace MvvmCross.Binding.Bindings.Target
             if (_isUpdatingTarget || _isUpdatingSource)
                 return;
 
-            MvxLog.InternalLogInstance.Trace("Firing changed to " + (newValue ?? ""));
+            MvxLog.Instance.Trace("Firing changed to " + (newValue ?? ""));
             try
             {
                 _isUpdatingSource = true;
@@ -129,7 +129,7 @@ namespace MvvmCross.Binding.Bindings.Target
             var target = Target;
             if (target == null)
             {
-                MvxLog.InternalLogInstance.Warn("Weak Target is null in {0} - skipping set", GetType().Name);
+                MvxLog.Instance.Warn("Weak Target is null in {0} - skipping set", GetType().Name);
                 return;
             }
 
@@ -183,7 +183,7 @@ namespace MvvmCross.Binding.Bindings.Target
             if (_isUpdatingTarget || _isUpdatingSource)
                 return;
 
-            MvxLog.InternalLogInstance.Trace("Firing changed to " + newValue);
+            MvxLog.Instance.Trace("Firing changed to " + newValue);
             try
             {
                 _isUpdatingSource = true;
