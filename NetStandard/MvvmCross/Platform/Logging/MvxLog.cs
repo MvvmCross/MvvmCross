@@ -1,6 +1,7 @@
 ﻿using System;
+using MvvmCross.Platform.Logging.LogProviders;
 
-namespace MvvmCross.Platform.Logging.LogProviders
+namespace MvvmCross.Platform.Logging
 {
     internal class MvxLog : IMvxLog
     {
