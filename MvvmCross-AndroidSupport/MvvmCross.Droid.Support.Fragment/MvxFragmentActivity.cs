@@ -84,35 +84,37 @@ namespace MvvmCross.Droid.Support.V4
             ViewModel?.ViewCreated();
         }
 
-		protected override void OnDestroy()
-		{
-			base.OnDestroy();
-			ViewModel?.ViewDestroy();
-		}
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
 
-		protected override void OnStart()
-		{
-			base.OnStart();
-			ViewModel?.ViewAppearing();
-		}
+            if (IsFinishing)
+                ViewModel?.ViewDestroy();
+        }
 
-		protected override void OnResume()
-		{
-			base.OnResume();
-			ViewModel?.ViewAppeared();
-		}
+        protected override void OnStart()
+        {
+            base.OnStart();
+            ViewModel?.ViewAppearing();
+        }
 
-		protected override void OnPause()
-		{
-			base.OnPause();
-			ViewModel?.ViewDisappearing();
-		}
+        protected override void OnResume()
+        {
+            base.OnResume();
+            ViewModel?.ViewAppeared();
+        }
 
-		protected override void OnStop()
-		{
-			base.OnStop();
-			ViewModel?.ViewDisappeared();
-		}
+        protected override void OnPause()
+        {
+            base.OnPause();
+            ViewModel?.ViewDisappearing();
+        }
+
+        protected override void OnStop()
+        {
+            base.OnStop();
+            ViewModel?.ViewDisappeared();
+        }
     }
 
     public abstract class MvxFragmentActivity<TViewModel>
