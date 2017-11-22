@@ -202,7 +202,7 @@ namespace MvvmCross.Plugins.Network.Rest
             }
             catch (Exception exception)
             {
-                Mvx.Warning("Error masked during Rest call - cookie creation - {0}", exception.ToLongString());
+                MvxLog.Instance.Warning("Error masked during Rest call - cookie creation - {0}", exception.ToLongString());
             }
         }
 

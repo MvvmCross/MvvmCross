@@ -1,4 +1,4 @@
-// IMvxValueConverterRegistry.cs
+﻿// IMvxValueConverterRegistry.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt

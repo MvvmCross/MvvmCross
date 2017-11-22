@@ -8,7 +8,7 @@
 using System;
 using System.Reflection;
 using Android.Widget;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
@@ -30,7 +30,7 @@ namespace MvvmCross.Binding.Droid.Target
             var compoundButton = View;
             if (compoundButton == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxLog.Instance.Error(
                                       "Error - compoundButton is null in MvxCompoundButtonCheckedTargetBinding");
                 return;
             }

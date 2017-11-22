@@ -72,31 +72,31 @@ namespace MvvmCross.Forms.Droid.Views
         {
             if (viewType.IsSubclassOf(typeof(ContentPage)))
             {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                MvxLog.Instance.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
                                $"Assuming ContentPage presentation");
                 return new MvxContentPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
             if (viewType.IsSubclassOf(typeof(CarouselPage)))
             {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                MvxLog.Instance.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
                                $"Assuming CarouselPage presentation");
                 return new MvxCarouselPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
             if (viewType.IsSubclassOf(typeof(TabbedPage)))
             {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                MvxLog.Instance.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
                                $"Assuming TabbedPage presentation");
                 return new MvxTabbedPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
             if (viewType.IsSubclassOf(typeof(MasterDetailPage)))
             {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                MvxLog.Instance.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
                                $"Assuming MasterDetailPage presentation");
                 return new MvxMasterDetailPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
             if (viewType.IsSubclassOf(typeof(NavigationPage)))
             {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                MvxLog.Instance.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
                                $"Assuming NavigationPage presentation");
                 return new MvxNavigationPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }

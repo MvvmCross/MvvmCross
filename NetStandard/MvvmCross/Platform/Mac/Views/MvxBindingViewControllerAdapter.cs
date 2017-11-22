@@ -8,7 +8,7 @@
 using System;
 
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 using MvvmCross.Platform.Mac.Views;
 
@@ -34,7 +34,7 @@ namespace MvvmCross.Mac.Views
         {
             if (MacView == null)
             {
-                MvxTrace.Warning($"{nameof(MacView)} is null for clearup of bindings");
+                MvxLog.Instance.Warn($"{nameof(MacView)} is null for clearup of bindings");
                 return;
             }
             MacView.ClearAllBindings();

@@ -4,7 +4,7 @@ using MvvmCross.Core.Views;
 using MvvmCross.Droid.Views.Attributes;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Droid.Views
 {
@@ -41,7 +41,7 @@ namespace MvvmCross.Droid.Views
             if (viewModelType == null
                 || viewModelType == typeof(IMvxViewModel))
             {
-                MvxTrace.Trace("No ViewModel class specified for {0} in LoadViewModel",
+                MvxLog.Instance.Trace("No ViewModel class specified for {0} in LoadViewModel",
                     fragmentView.GetType().Name);
             }
 

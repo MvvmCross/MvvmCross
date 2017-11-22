@@ -10,7 +10,7 @@ using System.Reflection;
 using Foundation;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.iOS;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
@@ -23,7 +23,7 @@ namespace MvvmCross.Binding.iOS.Target
             var datePicker = View;
             if (datePicker == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UIDatePicker is null in MvxBaseUIDatePickerTargetBinding");
+                MvxLog.Instance.Error("Error - UIDatePicker is null in MvxBaseUIDatePickerTargetBinding");
             }
             else if (targetPropertyInfo.Name == nameof(UIDatePicker.Date)) // Only listen for changes if we are binding against the Date property.
             {

@@ -52,7 +52,7 @@ namespace MvvmCross.Forms.Views
             if (viewModelType == null
                 || viewModelType == typeof(IMvxViewModel))
             {
-                MvxTrace.Trace("No ViewModel class specified for {0} in LoadViewModel",
+                MvxLog.Instance.Trace("No ViewModel class specified for {0} in LoadViewModel",
                                element.GetType().Name);
                 return null;
             }

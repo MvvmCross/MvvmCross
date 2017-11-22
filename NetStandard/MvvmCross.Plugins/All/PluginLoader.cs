@@ -49,7 +49,7 @@ namespace MvvmCross.Plugins.All
 
             _loaded = true;
 
-            MvxTrace.Trace("Loading all plugins");
+            MvxLog.Instance.Trace("Loading all plugins");
 
             var loaded = new List<Type>();
             var failed = new List<Type>();
@@ -67,8 +67,8 @@ namespace MvvmCross.Plugins.All
                 }
             }
 
-            MvxTrace.Trace("Plugins loaded: {0}", string.Join("\n", loaded.Select(x => x.FullName)));
-            MvxTrace.Trace("Plugins failed: {0}", string.Join("\n", failed.Select(x => x.FullName)));
+            MvxLog.Instance.Trace("Plugins loaded: {0}", string.Join("\n", loaded.Select(x => x.FullName)));
+            MvxLog.Instance.Trace("Plugins failed: {0}", string.Join("\n", failed.Select(x => x.FullName)));
         }
 
         private bool OptionalLoadPlatformAdaption(IMvxPluginManager manager, Type type)
@@ -80,7 +80,7 @@ namespace MvvmCross.Plugins.All
             }
             catch (Exception exception /*Pokemon - catch them all*/)
             {
-                MvxTrace.Trace("Exception loading {0} was {1}", type.FullName, exception.ToLongString());
+                MvxLog.Instance.Trace("Exception loading {0} was {1}", type.FullName, exception.ToLongString());
                 return false;
             }
         }

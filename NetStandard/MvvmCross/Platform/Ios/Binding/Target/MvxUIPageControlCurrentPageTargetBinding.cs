@@ -6,7 +6,7 @@
 using System;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
@@ -44,7 +44,7 @@ namespace MvvmCross.Binding.iOS.Target
             var pageControl = View;
             if (pageControl == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "UIPageControl is null in MvxUIPageControlCurrentPageTargetBinding");
+                MvxLog.Instance.Error("UIPageControl is null in MvxUIPageControlCurrentPageTargetBinding");
                 return;
             }
 

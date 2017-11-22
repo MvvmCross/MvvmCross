@@ -48,7 +48,7 @@ namespace MvvmCross.Plugins.Location.iOS
                 _locationManager.DesiredAccuracy = options.Accuracy == MvxLocationAccuracy.Fine ? CLLocation.AccuracyBest : CLLocation.AccuracyKilometer;
                 if (options.TimeBetweenUpdates > TimeSpan.Zero)
                 {
-                    Mvx.Warning("TimeBetweenUpdates specified for MvxLocationOptions - but this is not supported in iOS");
+                    MvxLog.Instance.Warning("TimeBetweenUpdates specified for MvxLocationOptions - but this is not supported in iOS");
                 }
 
                 if (options.TrackingMode == MvxLocationTrackingMode.Background)
@@ -59,7 +59,7 @@ namespace MvvmCross.Plugins.Location.iOS
                     }
                     else
                     {
-                        Mvx.Warning("MvxLocationTrackingMode.Background is not supported for iOS before 8");
+                        MvxLog.Instance.Warning("MvxLocationTrackingMode.Background is not supported for iOS before 8");
                     }
                 }
                 else

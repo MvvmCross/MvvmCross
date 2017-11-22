@@ -7,7 +7,7 @@
 
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
@@ -20,7 +20,7 @@ namespace MvvmCross.Binding.iOS.Target
             var searchBar = View;
             if (searchBar == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxLog.Instance.Error(
                                       "Error - UISearchBar is null in MvxUISearchBarTextTargetBinding");
             }
             else

@@ -15,6 +15,7 @@ using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Droid.Views
 {
@@ -45,7 +46,7 @@ namespace MvvmCross.Binding.Droid.Views
                 {
                     if (Content == null && _templateId != 0)
                     {
-                        Mvx.Trace("DataContext is {0}", DataContext?.ToString() ?? "Null");
+                        MvxLog.Instance.Trace("DataContext is {0}", DataContext?.ToString() ?? "Null");
                         Content = _bindingContext.BindingInflate(_templateId, this);
                     }
                 });

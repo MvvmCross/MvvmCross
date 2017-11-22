@@ -22,7 +22,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.iOS.Platform;
 using MvvmCross.Platform.iOS.Views;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Plugins;
 using UIKit;
 

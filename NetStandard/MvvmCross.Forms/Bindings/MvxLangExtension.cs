@@ -45,7 +45,7 @@ namespace MvvmCross.Forms.Bindings
             }
             else
             {
-                Mvx.Trace(MvxTraceLevel.Diagnostic, "Cannot only use MvxLang on a bindable property");
+                MvxLog.Instance.Trace(MvxTraceLevel.Diagnostic, "Cannot only use MvxLang on a bindable property");
             }
 
             return null;

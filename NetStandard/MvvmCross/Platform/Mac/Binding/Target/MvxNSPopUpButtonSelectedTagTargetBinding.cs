@@ -2,7 +2,7 @@
 using System.Reflection;
 using AppKit;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Mac.Target
 {
@@ -33,7 +33,7 @@ namespace MvvmCross.Binding.Mac.Target
             var popupButton = View;
             if (popupButton == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - NSPopUpButton is null in MvxNSPopUpButtonSelectedTagTargetBinding");
+                MvxLog.Instance.Error("Error - NSPopUpButton is null in MvxNSPopUpButtonSelectedTagTargetBinding");
                 return;
             }
 

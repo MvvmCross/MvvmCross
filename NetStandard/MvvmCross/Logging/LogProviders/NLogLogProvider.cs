@@ -215,7 +215,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
                 {
                     if (currentType == checkType) return true;
 
-                    currentType = currentType.BaseType;
+                    currentType = currentType.GetTypeInfo().BaseType;
                 }
 
                 return false;

@@ -44,7 +44,7 @@ namespace MvvmCross.Droid.Support.V4
                 _curTransaction = _fragmentManager.BeginTransaction();
 
 #if DEBUG
-            Mvx.Trace("Removing item #" + position + ": f=" + objectValue + " v=" + ((Fragment) objectValue).View +
+            MvxLog.Instance.Trace("Removing item #" + position + ": f=" + objectValue + " v=" + ((Fragment) objectValue).View +
                       " t=" + fragment.Tag);
 #endif
 
@@ -102,7 +102,7 @@ namespace MvvmCross.Droid.Support.V4
                 fragment.SetInitialSavedState(fss);
 
 #if DEBUG
-            Mvx.Trace("Adding item #{0}: f={1} t={2}", position, fragment, fragmentTag);
+            MvxLog.Instance.Trace("Adding item #{0}: f={1} t={2}", position, fragment, fragmentTag);
 #endif
 
             while (_fragments.Count <= position)

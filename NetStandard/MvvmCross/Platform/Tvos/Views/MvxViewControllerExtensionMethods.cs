@@ -9,7 +9,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.tvOS.Views
 {
@@ -25,7 +25,7 @@ namespace MvvmCross.tvOS.Views
         {
             if (iosView.Request == null)
             {
-                MvxTrace.Trace(
+                MvxLog.Instance.Trace(
                     "Request is null - assuming this is a TabBar type situation where ViewDidLoad is called during construction... patching the request now - but watch out for problems with virtual calls during construction");
                 iosView.Request = Mvx.Resolve<IMvxCurrentRequest>().CurrentRequest;
             }

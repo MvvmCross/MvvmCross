@@ -2,7 +2,7 @@
 using System.Linq;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Core.Views;
 
 namespace MvvmCross.Droid.Views.Attributes
@@ -14,7 +14,7 @@ namespace MvvmCross.Droid.Views.Attributes
             if (Mvx.TryResolve(out IMvxViewModelTypeFinder associatedTypeFinder))
                 return associatedTypeFinder.FindTypeOrNull(activityType);
 
-            MvxTrace.Trace("No view model type finder available - assuming we are looking for a splash screen - returning null");
+            MvxLog.Instance.Trace("No view model type finder available - assuming we are looking for a splash screen - returning null");
             return typeof(MvxNullViewModel);
         }
 

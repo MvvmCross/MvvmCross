@@ -27,7 +27,7 @@ using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.IoC;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Droid.Platform

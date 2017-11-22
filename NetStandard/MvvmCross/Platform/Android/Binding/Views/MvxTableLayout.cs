@@ -14,6 +14,7 @@ using Android.Util;
 using Android.Widget;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Droid.Views
 {
@@ -88,7 +89,7 @@ namespace MvvmCross.Binding.Droid.Views
                 }
                 else
                 {
-                    MvxBindingTrace.Warning(
+                    MvxLog.Instance.Warn(
                         "Setting Adapter to null is not recommended - you may lose ItemsSource binding when doing this");
                 }
 

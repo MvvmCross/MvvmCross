@@ -11,7 +11,7 @@ using Android.OS;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Droid.Views
 {
@@ -33,7 +33,7 @@ namespace MvvmCross.Droid.Views
             }
             catch (Exception)
             {
-                MvxTrace.Error("Problem getting the saved state - will return null - from {0}",
+                MvxLog.Instance.Error("Problem getting the saved state - will return null - from {0}",
                                extras);
                 return null;
             }

@@ -7,7 +7,7 @@
 
 using System;
 using AppKit;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Mac.Target
 {
@@ -23,7 +23,7 @@ namespace MvvmCross.Binding.Mac.Target
         {
             if (button == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - NSButton is null in MvxNSButtonTitleTargetBinding");
+                MvxLog.Instance.Error("Error - NSButton is null in MvxNSButtonTitleTargetBinding");
             }
         }
 

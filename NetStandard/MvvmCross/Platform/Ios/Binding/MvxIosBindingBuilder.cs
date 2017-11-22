@@ -13,6 +13,7 @@ using MvvmCross.Binding.iOS.Target;
 using MvvmCross.Binding.iOS.ValueConverters;
 using MvvmCross.Binding.iOS.Views;
 using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using UIKit;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using Android.Widget;
 using MvvmCross.Binding.Droid.Views;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
@@ -40,7 +40,7 @@ namespace MvvmCross.Binding.Droid.Target
             var positions = ((MvxExpandableListAdapter)listView.ExpandableListAdapter).GetPositions(value);
             if (positions == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Value not found for spinner {0}", value.ToString());
+                MvxLog.Instance.Warn("Value not found for spinner {0}", value.ToString());
                 return;
             }
 

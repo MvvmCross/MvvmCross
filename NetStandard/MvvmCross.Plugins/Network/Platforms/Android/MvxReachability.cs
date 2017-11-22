@@ -44,7 +44,7 @@ namespace MvvmCross.Plugins.Network.Droid
                 }
                 catch (Exception e)
                 {
-                    Mvx.Warning("Unable to get connected state - do you have ACCESS_NETWORK_STATE permission - error: {0}", e.ToLongString());
+                    MvxLog.Instance.Warning("Unable to get connected state - do you have ACCESS_NETWORK_STATE permission - error: {0}", e.ToLongString());
                     return false;
                 }
             }

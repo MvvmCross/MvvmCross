@@ -8,7 +8,7 @@
 using System;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
@@ -47,7 +47,7 @@ namespace MvvmCross.Binding.iOS.Target
             var slider = View;
             if (slider == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UISlider is null in MvxUISliderValueTargetBinding");
+                MvxLog.Instance.Error("Error - UISlider is null in MvxUISliderValueTargetBinding");
                 return;
             }
 

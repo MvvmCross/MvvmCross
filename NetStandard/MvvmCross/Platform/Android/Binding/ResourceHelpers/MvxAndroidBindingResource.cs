@@ -9,7 +9,7 @@ using System;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Droid.ResourceHelpers
 { 
@@ -89,7 +89,7 @@ namespace MvvmCross.Binding.Droid.ResourceHelpers
             var field = styleable.GetField(fieldName);
             if (field == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Missing stylable field {0}", fieldName);
+                MvxLog.Instance.Error("Missing stylable field {0}", fieldName);
                 return defaultValue;
             }
 

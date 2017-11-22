@@ -29,7 +29,7 @@ namespace MvvmCross.Binding.Wpf
             var attachedObject = sender as FrameworkElement;
             if (attachedObject == null)
             {
-                Mvx.Warning("Null attached FrameworkElement seen in Bi.nd binding");
+                MvxLog.Instance.Warn("Null attached FrameworkElement seen in Bi.nd binding");
                 return;
             }
 

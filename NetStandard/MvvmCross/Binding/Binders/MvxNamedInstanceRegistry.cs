@@ -27,7 +27,7 @@ namespace MvvmCross.Binding.Binders
             if (!_converters.TryGetValue(converterName, out toReturn))
             {
                 // no trace here - this is expected to fail sometimes - e.g. in the case where we look for first combiner, then converter
-                // MvxBindingTrace.Trace("Could not find named {0} for {1}", converterName,
+                // MvxLog.Instance.Trace("Could not find named {0} for {1}", converterName,
                 //                      typeof(T).Name);
             }
             return toReturn;

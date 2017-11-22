@@ -1,4 +1,4 @@
-// MvxListViewSelectedItemTargetBinding.cs
+﻿// MvxListViewSelectedItemTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,7 +8,7 @@
 using System;
 using Android.Widget;
 using MvvmCross.Binding.Droid.Views;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
@@ -53,7 +53,7 @@ namespace MvvmCross.Binding.Droid.Target
             var index = listView.Adapter.GetPosition(value);
             if (index < 0)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Value not found for spinner {0}", value.ToString());
+                MvxLog.Instance.Warn("Value not found for spinner {0}", value.ToString());
                 return;
             }
             _currentValue = value;

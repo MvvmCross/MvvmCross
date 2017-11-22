@@ -8,7 +8,7 @@
 using System;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
@@ -22,7 +22,7 @@ namespace MvvmCross.Binding.iOS.Target
             var view = View;
             if (view == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - Switch is null in MvxUISwitchOnTargetBinding");
+                MvxLog.Instance.Error("Error - Switch is null in MvxUISwitchOnTargetBinding");
             }
             else
             {

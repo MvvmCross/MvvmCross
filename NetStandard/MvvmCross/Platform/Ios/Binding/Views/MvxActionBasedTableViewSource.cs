@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using Foundation;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.Binding.iOS.Views
@@ -25,7 +26,7 @@ namespace MvvmCross.Binding.iOS.Views
         public MvxActionBasedTableViewSource(IntPtr handle)
             : base(handle)
         {
-            Mvx.Warning("MvxActionBasedTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
+            MvxLog.Instance.Warn("MvxActionBasedTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
             Initialize();
         }
 

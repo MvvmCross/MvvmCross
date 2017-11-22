@@ -10,7 +10,7 @@ using MvvmCross.Core;
 using MvvmCross.Core.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.IoC;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Test.Core
 {
@@ -40,7 +40,6 @@ namespace MvvmCross.Test.Core
             //_ioc.RegisterSingleton<IMvxTrace>(new TestTrace());
             InitializeSingletonCache();
             InitializeMvxSettings();
-            MvxTrace.Initialize();
             AdditionalSetup();
         }
 

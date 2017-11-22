@@ -7,7 +7,7 @@
 
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.tvOS.Views.Presenters
@@ -23,7 +23,7 @@ namespace MvvmCross.tvOS.Views.Presenters
         {
             if (HandlePresentationChange(hint)) return;
 
-            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
+            MvxLog.Instance.Warn("Hint ignored {0}", hint.GetType().Name);
         }
 
         public virtual bool PresentModalViewController(UIViewController viewController, bool animated)

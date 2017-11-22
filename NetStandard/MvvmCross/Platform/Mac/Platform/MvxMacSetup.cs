@@ -12,7 +12,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Plugins;
 using MvvmCross.Binding.Mac;
 using MvvmCross.Mac.Views;

@@ -4,7 +4,7 @@ using AppKit;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.Mac.Views;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Mac.Target
 {
@@ -36,7 +36,7 @@ namespace MvvmCross.Binding.Mac.Target
             var view = View;
             if (view == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - NSTabViewController is null in MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding");
+                MvxLog.Instance.Error("Error - NSTabViewController is null in MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding");
                 return;
             }
 
@@ -51,7 +51,7 @@ namespace MvvmCross.Binding.Mac.Target
                 }
                 catch (Exception ex)
                 {
-                    MvxBindingTrace.Error(ex.Message);
+                    MvxLog.Instance.Error(ex.Message);
                 }
             }
         }
@@ -85,7 +85,7 @@ namespace MvvmCross.Binding.Mac.Target
                         }
                         catch (Exception ex)
                         {
-                            MvxBindingTrace.Error(ex.Message);
+                            MvxLog.Instance.Error(ex.Message);
                         }
                     }
                     _subscribed = false;

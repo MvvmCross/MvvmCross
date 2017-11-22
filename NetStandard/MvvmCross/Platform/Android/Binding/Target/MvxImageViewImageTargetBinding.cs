@@ -8,7 +8,7 @@
 using System;
 using System.IO;
 using Android.Widget;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Droid.Target
 {
@@ -26,14 +26,14 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (value == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Null value passed to ImageView binding");
+                MvxLog.Instance.Warn("Null value passed to ImageView binding");
                 return null;
             }
 
             var stringValue = value as string;
             if (string.IsNullOrWhiteSpace(stringValue))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Empty value passed to ImageView binding");
+                MvxLog.Instance.Warn("Empty value passed to ImageView binding");
                 return null;
             }
 

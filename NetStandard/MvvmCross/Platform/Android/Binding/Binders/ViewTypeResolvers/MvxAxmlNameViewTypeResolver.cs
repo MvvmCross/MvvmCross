@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Text;
 using Android.Views;
 using MvvmCross.Platform.IoC;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
 {
@@ -47,7 +47,7 @@ namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
                     }
                     else
                     {
-                        MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Abbreviation not found {0}", abbreviate);
+                        MvxLog.Instance.Trace("Abbreviation not found {0}", abbreviate);
                     }
                 }
             }

@@ -11,7 +11,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Wpf.Views.Presenters
 {
@@ -28,7 +28,7 @@ namespace MvvmCross.Wpf.Views.Presenters
             }
             catch (Exception exception)
             {
-                MvxTrace.Error("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
+                MvxLog.Instance.Error("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
                                exception.ToLongString());
             }
         }
@@ -39,7 +39,7 @@ namespace MvvmCross.Wpf.Views.Presenters
         {
             if (HandlePresentationChange(hint)) return;
 
-            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
+            MvxLog.Instance.Warn("Hint ignored {0}", hint.GetType().Name);
         }
     }
 }

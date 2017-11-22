@@ -8,7 +8,7 @@
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.tvOS.Views.Presenters
@@ -51,7 +51,7 @@ namespace MvvmCross.tvOS.Views.Presenters
         {
             if (_currentModalViewController != null)
             {
-                MvxTrace.Error("How did a modal disappear when we didn't have one showing?");
+                MvxLog.Instance.Error("How did a modal disappear when we didn't have one showing?");
                 return;
             }
 
@@ -82,7 +82,7 @@ namespace MvvmCross.tvOS.Views.Presenters
                 var touchView = _currentModalViewController as IMvxTvosView;
                 if (touchView == null)
                 {
-                    MvxTrace.Error(
+                    MvxLog.Instance.Error(
                                    "Unable to close view - modal is showing but not an IMvxTvosView");
                     return;
                 }
@@ -90,7 +90,7 @@ namespace MvvmCross.tvOS.Views.Presenters
                 var viewModel = touchView.ReflectionGetViewModel();
                 if (viewModel != toClose)
                 {
-                    MvxTrace.Error(
+                    MvxLog.Instance.Error(
                                    "Unable to close view - modal is showing but is not the requested viewmodel");
                     return;
                 }

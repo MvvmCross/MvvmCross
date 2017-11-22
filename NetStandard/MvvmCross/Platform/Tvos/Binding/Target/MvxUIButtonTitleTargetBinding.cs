@@ -7,7 +7,7 @@
 
 using System;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.Binding.tvOS.Target
@@ -24,7 +24,7 @@ namespace MvvmCross.Binding.tvOS.Target
             _state = state;
             if (button == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UIButton is null in MvxUIButtonTitleTargetBinding");
+                MvxLog.Instance.Error("Error - UIButton is null in MvxUIButtonTitleTargetBinding");
             }
         }
 

@@ -9,7 +9,7 @@ using System.Reflection;
 using AppKit;
 using Foundation;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using ObjCRuntime;
 
 namespace MvvmCross.Binding.Mac.Target
@@ -24,7 +24,7 @@ namespace MvvmCross.Binding.Mac.Target
             var searchField = View;
             if (searchField == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxLog.Instance.Error(
                                       "Error - NSSearchField is null in MvxNSSearchFieldTextTargetBinding");
             }
             else

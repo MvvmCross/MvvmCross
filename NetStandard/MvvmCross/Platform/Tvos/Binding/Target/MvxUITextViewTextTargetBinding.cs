@@ -7,7 +7,7 @@
 
 using System;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.Binding.tvOS.Target
@@ -39,7 +39,7 @@ namespace MvvmCross.Binding.tvOS.Target
             var target = View;
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxLog.Instance.Error(
                                       "Error - UITextView is null in MvxUITextViewTextTargetBinding");
                 return;
             }

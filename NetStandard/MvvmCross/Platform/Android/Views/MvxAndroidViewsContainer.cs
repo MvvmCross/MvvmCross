@@ -11,7 +11,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Droid.Views
 {
@@ -40,35 +40,35 @@ namespace MvvmCross.Droid.Views
         {
             if (intent == null)
             {
-                MvxTrace.Error("Null Intent seen when creating ViewModel");
+                MvxLog.Instance.Error("Null Intent seen when creating ViewModel");
                 return null;
             }
 
             if (intent.Action == Intent.ActionMain)
             {
-                MvxTrace.Trace("Creating ViewModel for ActionMain");
+                MvxLog.Instance.Trace("Creating ViewModel for ActionMain");
                 return DirectLoad(savedState, viewModelTypeHint);
             }
 
             if (intent.Extras == null)
             {
-                MvxTrace.Trace("Null Extras seen on Intent when creating ViewModel - have you tried to navigate to an MvvmCross View directly? Will try direct load");
+                MvxLog.Instance.Trace("Null Extras seen on Intent when creating ViewModel - have you tried to navigate to an MvvmCross View directly? Will try direct load");
                 return DirectLoad(savedState, viewModelTypeHint);
             }
 
             IMvxViewModel mvxViewModel;
             if (TryGetEmbeddedViewModel(intent, out mvxViewModel))
             {
-                MvxTrace.Trace("Embedded ViewModel used");
+                MvxLog.Instance.Trace("Embedded ViewModel used");
                 return mvxViewModel;
             }
 
-            MvxTrace.Trace("Attempting to load new ViewModel from Intent with Extras");
+            MvxLog.Instance.Trace("Attempting to load new ViewModel from Intent with Extras");
             var toReturn = CreateViewModelFromIntent(intent, savedState);
             if (toReturn != null)
                 return toReturn;
 
-            MvxTrace.Trace("ViewModel not loaded from Extras - will try DirectLoad");
+            MvxLog.Instance.Trace("ViewModel not loaded from Extras - will try DirectLoad");
             return DirectLoad(savedState, viewModelTypeHint);
         }
 
@@ -76,7 +76,7 @@ namespace MvvmCross.Droid.Views
         {
             if (viewModelTypeHint == null)
             {
-                Mvx.Error("Unable to load viewmodel - no type hint provided");
+                MvxLog.Instance.Error("Unable to load viewmodel - no type hint provided");
                 return null;
             }
 

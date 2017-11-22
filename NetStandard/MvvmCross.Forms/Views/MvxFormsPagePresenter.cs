@@ -175,7 +175,7 @@ namespace MvvmCross.Forms.Views
                 var carouselHost = GetHostPageOfType<MvxCarouselPage>();
                 if (carouselHost == null)
                 {
-                    MvxTrace.Trace($"Current root is not a CarouselPage show your own first to use custom Host. Assuming we need to create one.");
+                    MvxLog.Instance.Trace($"Current root is not a CarouselPage show your own first to use custom Host. Assuming we need to create one.");
                     carouselHost = new MvxCarouselPage();
                     PushOrReplacePage(FormsApplication.MainPage, carouselHost, attribute);
                 }
@@ -378,7 +378,7 @@ namespace MvvmCross.Forms.Views
                 var tabHost = GetHostPageOfType<MvxTabbedPage>();
                 if (tabHost == null)
                 {
-                    MvxTrace.Trace($"Current root is not a TabbedPage show your own first to use custom Host. Assuming we need to create one.");
+                    MvxLog.Instance.Trace($"Current root is not a TabbedPage show your own first to use custom Host. Assuming we need to create one.");
                     tabHost = new MvxTabbedPage();
                     PushOrReplacePage(FormsApplication.MainPage, tabHost, attribute);
                 }
@@ -480,7 +480,7 @@ namespace MvvmCross.Forms.Views
                 }
                 else
                 {
-                    MvxTrace.Trace($"Cannot remove page: {page.Title}");
+                    MvxLog.Instance.Trace($"Cannot remove page: {page.Title}");
                     return false;
                 }
             }
@@ -499,7 +499,7 @@ namespace MvvmCross.Forms.Views
                 }
                 else
                 {
-                    MvxTrace.Trace($"Cannot pop page: {page.Title}");
+                    MvxLog.Instance.Trace($"Cannot pop page: {page.Title}");
                     return false;
                 }
             }

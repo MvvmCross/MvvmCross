@@ -17,7 +17,7 @@ using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Droid.ResourceHelpers;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Droid.Binders
 {
@@ -72,7 +72,7 @@ namespace MvvmCross.Binding.Droid.Binders
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}",
+                MvxLog.Instance.Error("Exception thrown during the view binding {0}",
                                       exception.ToLongString());
             }
         }
@@ -95,7 +95,7 @@ namespace MvvmCross.Binding.Droid.Binders
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view language binding {0}",
+                MvxLog.Instance.Error("Exception thrown during the view language binding {0}",
                                       exception.ToLongString());
                 throw;
             }

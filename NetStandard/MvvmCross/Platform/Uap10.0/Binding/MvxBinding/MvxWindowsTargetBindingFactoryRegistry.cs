@@ -8,7 +8,7 @@
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Uwp.MvxBinding.Target;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Uwp.MvxBinding
 {
@@ -36,8 +36,7 @@ namespace MvvmCross.Binding.Uwp.MvxBinding
 
             if (string.IsNullOrEmpty(targetName))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Empty binding target passed to MvxWindowsTargetBindingFactoryRegistry");
+                MvxLog.Instance.Error("Empty binding target passed to MvxWindowsTargetBindingFactoryRegistry");
                 binding = null;
                 return false;
             }

@@ -8,7 +8,7 @@
 using System;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.tvOS.Views;
 
 namespace MvvmCross.tvOS.Views
@@ -30,7 +30,7 @@ namespace MvvmCross.tvOS.Views
         {
             if (TvosView == null)
             {
-                MvxTrace.Warning($"{nameof(TvosView)} is null for clearup of bindings");
+                MvxLog.Instance.Warn($"{nameof(TvosView)} is null for clearup of bindings");
                 return;
             }
             TvosView.ClearAllBindings();

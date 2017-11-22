@@ -134,7 +134,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
             }
             catch (Exception exception)
             {
-                Mvx.Warning("Exception masked during Adapter NotifyChanged {0}", exception.ToLongString());
+                MvxLog.Instance.Warning("Exception masked during Adapter NotifyChanged {0}", exception.ToLongString());
             }
         }
 

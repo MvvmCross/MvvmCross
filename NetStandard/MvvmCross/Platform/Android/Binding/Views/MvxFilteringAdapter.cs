@@ -14,7 +14,7 @@ using Android.Widget;
 using Java.Lang;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Platform.Droid;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using Object = Java.Lang.Object;
 using String = Java.Lang.String;
 
@@ -73,11 +73,11 @@ namespace MvvmCross.Binding.Droid.Views
                 return Count;
             }
             
-            MvxTrace.Trace("Wait starting for {0}", newConstraint);
+            MvxLog.Instance.Trace("Wait starting for {0}", newConstraint);
             _dataChangedEvent.Reset();
             PartialText = newConstraint;
             _dataChangedEvent.WaitOne();
-            MvxTrace.Trace("Wait finished with {1} items for {0}", newConstraint, Count);
+            MvxLog.Instance.Trace("Wait finished with {1} items for {0}", newConstraint, Count);
             return Count;
         }
 

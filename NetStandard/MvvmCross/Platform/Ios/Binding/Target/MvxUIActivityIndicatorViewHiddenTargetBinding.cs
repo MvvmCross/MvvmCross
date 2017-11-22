@@ -7,7 +7,7 @@
 
 using System;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
@@ -23,8 +23,7 @@ namespace MvvmCross.Binding.iOS.Target
         {
             if (target == null)
             {
-                MvxBindingTrace.Trace(
-                                    MvxTraceLevel.Error,
+                MvxLog.Instance.Error(
                                     "Error - UIActivityIndicatorView is null in MvxUIActivityIndicatorViewHiddenTargetBinding");
             }
         }

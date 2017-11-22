@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
@@ -69,20 +69,20 @@ namespace MvvmCross.Platform.Logging.LogProviders
 
                 if (Colors.TryGetValue(logLevel, out var color))
                 {
-                    var originalColor = Console.ForegroundColor;
+                    var originalColor = System.Console.ForegroundColor;
                     try
                     {
-                        Console.ForegroundColor = color;
-                        Console.WriteLine(formattedMessage);
+                        System.Console.ForegroundColor = color;
+                        System.Console.WriteLine(formattedMessage);
                     }
                     finally
                     {
-                        Console.ForegroundColor = originalColor;
+                        System.Console.ForegroundColor = originalColor;
                     }
                 }
                 else
                 {
-                    Console.WriteLine(formattedMessage);
+                    System.Console.WriteLine(formattedMessage);
                 }
             }
         }

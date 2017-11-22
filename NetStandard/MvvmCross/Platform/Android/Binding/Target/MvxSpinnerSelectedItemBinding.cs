@@ -8,7 +8,7 @@
 using System;
 using Android.Widget;
 using MvvmCross.Binding.Droid.Views;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
@@ -59,7 +59,7 @@ namespace MvvmCross.Binding.Droid.Target
 
             if (value == null)
             {
-                MvxBindingTrace.Warning("Null values not permitted in spinner SelectedItem binding currently");
+                MvxLog.Instance.Warn("Null values not permitted in spinner SelectedItem binding currently");
                 return;
             }
 
@@ -68,7 +68,7 @@ namespace MvvmCross.Binding.Droid.Target
                 var index = spinner.Adapter.GetPosition(value);
                 if (index < 0)
                 {
-                    MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Value not found for spinner {0}", value.ToString());
+                    MvxLog.Instance.Warn("Value not found for spinner {0}", value.ToString());
                     return;
                 }
                 _currentValue = value;

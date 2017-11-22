@@ -8,7 +8,7 @@
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.tvOS.Views.Presenters
@@ -79,14 +79,14 @@ namespace MvvmCross.tvOS.Views.Presenters
 
             if (topViewController == null)
             {
-                MvxTrace.Warning("Don't know how to close this viewmodel - no topmost");
+                MvxLog.Instance.Warn("Don't know how to close this viewmodel - no topmost");
                 return;
             }
 
             var topView = topViewController as IMvxTvosView;
             if (topView == null)
             {
-                MvxTrace.Warning(
+                MvxLog.Instance.Warn(
                                "Don't know how to close this viewmodel - topmost is not a touchview");
                 return;
             }
@@ -94,7 +94,7 @@ namespace MvvmCross.tvOS.Views.Presenters
             var viewModel = topView.ReflectionGetViewModel();
             if (viewModel != toClose)
             {
-                MvxTrace.Warning(
+                MvxLog.Instance.Warn(
                                "Don't know how to close this viewmodel - topmost view does not present this viewmodel");
                 return;
             }

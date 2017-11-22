@@ -147,14 +147,14 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
         private void SetCurrentlyActive()
         {
             if (_currentlyActive)
-                Mvx.Warning("MvxImagePickerTask called when task already active");
+                MvxLog.Instance.Warning("MvxImagePickerTask called when task already active");
             _currentlyActive = true;
         }
 
         private void ClearCurrentlyActive()
         {
             if (!_currentlyActive)
-                Mvx.Warning("Tried to clear currently active - but already cleared");
+                MvxLog.Instance.Warning("Tried to clear currently active - but already cleared");
             _currentlyActive = false;
         }
     }

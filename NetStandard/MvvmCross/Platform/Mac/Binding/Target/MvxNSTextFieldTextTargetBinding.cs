@@ -9,7 +9,7 @@ using System;
 using System.Reflection;
 using AppKit;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Mac.Target
 {
@@ -21,8 +21,7 @@ namespace MvvmCross.Binding.Mac.Target
             var editText = View;
             if (editText == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - NSTextField is null in MvxNSTextFieldTextTargetBinding");
+                MvxLog.Instance.Error("Error - NSTextField is null in MvxNSTextFieldTextTargetBinding");
             }
             else
             {

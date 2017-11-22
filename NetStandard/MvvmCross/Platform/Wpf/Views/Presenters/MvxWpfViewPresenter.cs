@@ -8,7 +8,7 @@
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Wpf.Views.Presenters.Attributes;
 using System;
 using System.Collections.Generic;
@@ -142,12 +142,12 @@ namespace MvvmCross.Wpf.Views.Presenters
         {
             if (viewType.IsSubclassOf(typeof(Window)))
             {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. " +
+                MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. " +
                     $"Assuming window presentation");
                 return new MvxWindowPresentationAttribute();
             }
 
-            MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. " +
+            MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. " +
                     $"Assuming content presentation");
             return new MvxContentPresentationAttribute();
         }
@@ -165,7 +165,7 @@ namespace MvvmCross.Wpf.Views.Presenters
 
                     if (presentationAttribute == null)
                     {
-                        MvxTrace.Warning("Override PresentationAttribute null. Falling back to existing attribute.");
+                        MvxLog.Instance.Warn("Override PresentationAttribute null. Falling back to existing attribute.");
                     }
                     else
                     {
@@ -279,7 +279,7 @@ namespace MvvmCross.Wpf.Views.Presenters
             if (_frameworkElementsDictionary.Any(i => i.Value.Any() && (i.Value.Peek() as IMvxWpfView)?.ViewModel == toClose) && CloseContentView(toClose))
                 return;
 
-            MvxTrace.Warning($"Could not close ViewModel type {toClose.GetType().Name}");
+            MvxLog.Instance.Warn($"Could not close ViewModel type {toClose.GetType().Name}");
         }
 
         protected virtual bool CloseWindow(IMvxViewModel toClose)

@@ -9,7 +9,7 @@ using System;
 using Android.Text;
 using Android.Widget;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
@@ -27,7 +27,7 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - TextView is null in MvxTextViewTextFormattedTargetBinding");
+                MvxLog.Instance.Error("Error - TextView is null in MvxTextViewTextFormattedTargetBinding");
                 return;
             }
 

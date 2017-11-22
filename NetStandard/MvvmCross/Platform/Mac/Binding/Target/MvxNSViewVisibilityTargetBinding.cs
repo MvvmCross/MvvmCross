@@ -7,7 +7,7 @@
 
 using System;
 using AppKit;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Binding.Mac.Target
@@ -52,7 +52,7 @@ namespace MvvmCross.Binding.Mac.Target
                     break;
 
                 default:
-                    MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Visibility out of range {0}", value);
+                    MvxLog.Instance.Warn("Visibility out of range {0}", value);
                     break;
             }
         }

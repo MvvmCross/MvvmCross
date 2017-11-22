@@ -10,7 +10,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Uwp.Attributes;
 using System;
 using System.Collections.Generic;
@@ -63,7 +63,7 @@ namespace MvvmCross.Uwp.Views
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
-            MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new page presentation");
+            MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new page presentation");
             return new MvxPagePresentationAttribute();
         }
 
@@ -75,7 +75,7 @@ namespace MvvmCross.Uwp.Views
                 var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute();
                 if (presentationAttribute == null)
                 {
-                    MvxTrace.Warning("Override PresentationAttribute null. Falling back to existing attribute.");
+                    MvxLog.Instance.Warn("Override PresentationAttribute null. Falling back to existing attribute.");
                 }
                 else
                 {
@@ -125,7 +125,7 @@ namespace MvvmCross.Uwp.Views
                 return;
             }
 
-            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
+            MvxLog.Instance.Warn("Hint ignored {0}", hint.GetType().Name);
         }
 
         public override void Close(IMvxViewModel viewModel)
@@ -157,7 +157,7 @@ namespace MvvmCross.Uwp.Views
             var currentView = _rootFrame.Content as IMvxView;
             if (currentView == null)
             {
-                Mvx.Warning("Ignoring close for viewmodel - rootframe has no current page");
+                MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe has no current page");
                 return;
             }
 
@@ -258,19 +258,19 @@ namespace MvvmCross.Uwp.Views
             var currentView = _rootFrame.Content as IMvxView;
             if (currentView == null)
             {
-                Mvx.Warning("Ignoring close for viewmodel - rootframe has no current page");
+                MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe has no current page");
                 return false;
             }
 
             if (currentView.ViewModel != viewModel)
             {
-                Mvx.Warning("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
+                MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
                 return false;
             }
 
             if (!_rootFrame.CanGoBack)
             {
-                Mvx.Warning("Ignoring close for viewmodel - rootframe refuses to go back");
+                MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe refuses to go back");
                 return false;
             }
 
@@ -294,7 +294,7 @@ namespace MvvmCross.Uwp.Views
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
+                MvxLog.Instance.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
                     exception.ToLongString());
             }
         }

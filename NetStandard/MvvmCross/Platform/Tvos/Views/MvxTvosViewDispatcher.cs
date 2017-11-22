@@ -8,7 +8,7 @@
 using System;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.tvOS.Views.Presenters;
 
 namespace MvvmCross.tvOS.Views
@@ -27,7 +27,7 @@ namespace MvvmCross.tvOS.Views
         {
             Action action = () =>
                 {
-                    MvxTrace.TaggedTrace("tvOSNavigation", "Navigate requested");
+                    MvxLog.Instance.Trace("tvOSNavigation", "Navigate requested");
                     _presenter.Show(request);
                 };
             return RequestMainThreadAction(action);

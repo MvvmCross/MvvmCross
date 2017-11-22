@@ -36,7 +36,7 @@ namespace MvvmCross.Plugins.JsonLocalization
             if (_entries.TryGetValue(key, out value))
                 return value;
 
-            MvxTrace.Trace("Text value missing for " + key);
+            MvxLog.Instance.Trace("Text value missing for " + key);
             if (_maskErrors)
                 return key;
 
@@ -50,7 +50,7 @@ namespace MvvmCross.Plugins.JsonLocalization
             if (_entries.TryGetValue(key, out textValue))
                 return true;
 
-            MvxTrace.Trace("Text value missing for " + key);
+            MvxLog.Instance.Trace("Text value missing for " + key);
 
             textValue = key;
             return false;

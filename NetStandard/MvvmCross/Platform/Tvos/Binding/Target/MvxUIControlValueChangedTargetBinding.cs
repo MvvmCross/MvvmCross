@@ -6,7 +6,7 @@
 using System;
 using System.Windows.Input;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.WeakSubscription;
 using UIKit;
 
@@ -26,7 +26,7 @@ namespace MvvmCross.Binding.tvOS.Target
         {
             if (control == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxLog.Instance.Error(
                     "Error - UIControl is null in MvxUIControlValueChangedTargetBinding");
             }
             else

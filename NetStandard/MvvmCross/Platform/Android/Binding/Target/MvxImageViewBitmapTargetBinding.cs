@@ -1,4 +1,4 @@
-// MvxImageViewBitmapTargetBinding.cs
+﻿// MvxImageViewBitmapTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,7 +8,7 @@
 using System;
 using Android.Graphics;
 using Android.Widget;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Droid.Target
 {
@@ -26,8 +26,7 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (!(value is Bitmap))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "Value was not a valid Bitmap");
+                MvxLog.Instance.Warn("Value was not a valid Bitmap");
                 bitmap = null;
                 return false;
             }

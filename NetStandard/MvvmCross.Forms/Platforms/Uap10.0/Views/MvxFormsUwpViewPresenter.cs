@@ -70,7 +70,7 @@ namespace MvvmCross.Forms.Uwp.Presenters
 
                 if (mainPage == null)
                 {
-                    Mvx.TaggedTrace("MvxFormsPresenter:ChangePresentation()", "Oops! Don't know what to do");
+                    MvxLog.Instance.Trace("MvxFormsPresenter:ChangePresentation()", "Oops! Don't know what to do");
                 }
                 else
                 {
@@ -84,7 +84,7 @@ namespace MvvmCross.Forms.Uwp.Presenters
             if (TryShowPage(request))
                 return;
 
-            Mvx.Error("Skipping request for {0}", request.ViewModelType.Name);
+            MvxLog.Instance.Error("Skipping request for {0}", request.ViewModelType.Name);
         }
 
         protected virtual void CustomPlatformInitialization(NavigationPage mainPage)
@@ -120,7 +120,7 @@ namespace MvvmCross.Forms.Uwp.Presenters
                 }
                 catch (Exception e)
                 {
-                    Mvx.Error("Exception pushing {0}: {1}\n{2}", page.GetType(), e.Message, e.StackTrace);
+                    MvxLog.Instance.Error("Exception pushing {0}: {1}\n{2}", page.GetType(), e.Message, e.StackTrace);
                     return false;
                 }
             }
@@ -134,7 +134,7 @@ namespace MvvmCross.Forms.Uwp.Presenters
 
         public virtual bool ClosePlatformViews()
         {
-            MvxTrace.Trace($"Closing of native Views in Forms is not supported on UWP.");
+            MvxLog.Instance.Trace($"Closing of native Views in Forms is not supported on UWP.");
             return false;
         }
     }

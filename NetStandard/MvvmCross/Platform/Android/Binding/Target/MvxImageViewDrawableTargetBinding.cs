@@ -9,7 +9,7 @@ using System;
 using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Widget;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Droid.Target
 {
@@ -33,7 +33,7 @@ namespace MvvmCross.Binding.Droid.Target
 
 			if (!(value is int))
 			{
-				MvxBindingTrace.Trace(MvxTraceLevel.Warning,
+				MvxLog.Instance.Warn(
 					"Value was not a valid Drawable");
 				imageView.SetImageDrawable(null);
 				return;

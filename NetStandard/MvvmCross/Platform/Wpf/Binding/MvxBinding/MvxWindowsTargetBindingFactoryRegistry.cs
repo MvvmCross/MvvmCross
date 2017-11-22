@@ -8,7 +8,7 @@
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Wpf.MvxBinding.Target;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 #if WINDOWS_COMMON
 using MvvmCross.BindingEx.WindowsCommon.MvxBinding.Target;
@@ -45,7 +45,7 @@ namespace MvvmCross.Binding.Wpf.MvxBinding
 
             if (string.IsNullOrEmpty(targetName))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxLog.Instance.Error(
                                       "Empty binding target passed to MvxWindowsTargetBindingFactoryRegistry");
                 binding = null;
                 return false;

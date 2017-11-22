@@ -1,4 +1,4 @@
-// MvxTvosBindingBuilder.cs
+﻿// MvxTvosBindingBuilder.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,6 +13,7 @@ using MvvmCross.Binding.tvOS.Target;
 using MvvmCross.Binding.tvOS.ValueConverters;
 using MvvmCross.Binding.tvOS.Views;
 using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using UIKit;
 

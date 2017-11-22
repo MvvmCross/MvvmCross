@@ -224,16 +224,16 @@ namespace MvvmCross.Plugins.Messenger
             lock (this)
             {
                 /*
-				MvxTrace.Trace("Found {0} subscriptions of all types", _subscriptions.Count);
+				MvxLog.Instance.Trace("Found {0} subscriptions of all types", _subscriptions.Count);
 				foreach (var t in _subscriptions.Keys)
 				{
-					MvxTrace.Trace("Found  subscriptions for {0}", t.Name);
+					MvxLog.Instance.Trace("Found  subscriptions for {0}", t.Name);
 				}
 				*/
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
                 if (_subscriptions.TryGetValue(messageType, out messageSubscriptions))
                 {
-                    //MvxTrace.Trace("Found {0} messages of type {1}", messageSubscriptions.Values.Count, typeof(TMessage).Name);
+                    //MvxLog.Instance.Trace("Found {0} messages of type {1}", messageSubscriptions.Values.Count, typeof(TMessage).Name);
                     toNotify = messageSubscriptions.Values.ToList();
                 }
             }

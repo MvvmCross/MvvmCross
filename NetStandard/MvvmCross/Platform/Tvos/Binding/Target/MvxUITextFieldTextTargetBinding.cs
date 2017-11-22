@@ -8,7 +8,7 @@
 using System;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.Binding.tvOS.Target
@@ -41,7 +41,7 @@ namespace MvvmCross.Binding.tvOS.Target
             var target = View;
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxLog.Instance.Error(
                                       "Error - UITextField is null in MvxUITextFieldTextTargetBinding");
                 return;
             }

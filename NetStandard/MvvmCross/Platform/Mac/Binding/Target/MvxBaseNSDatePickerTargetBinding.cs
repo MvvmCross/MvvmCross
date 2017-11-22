@@ -7,7 +7,7 @@
 
 using System;
 using AppKit;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Mac.Target
 {
@@ -31,7 +31,7 @@ namespace MvvmCross.Binding.Mac.Target
 
             if (datePicker == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxLog.Instance.Error(
                                       "Error - NSDatePicker is null in MvxBaseNSDatePickerTargetBinding");
                 return;
             }

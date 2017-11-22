@@ -9,7 +9,7 @@ using System;
 using Android.Graphics;
 using Android.Widget;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Droid.Target
 {
@@ -38,7 +38,7 @@ namespace MvvmCross.Binding.Droid.Target
             }
             catch (Exception ex)
             {
-                MvxTrace.Error(ex.ToLongString());
+                MvxLog.Instance.Error(ex.ToLongString());
                 throw;
             }
         }

@@ -24,7 +24,7 @@ namespace MvvmCross.Forms.Bindings
 
             if (attachedObject == null)
             {
-                Mvx.Warning("Null attached Element seen in Bi.nd binding");
+                MvxLog.Instance.Warning("Null attached Element seen in Bi.nd binding");
                 return;
             }
 

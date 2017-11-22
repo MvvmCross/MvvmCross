@@ -8,7 +8,7 @@
 using System;
 using System.Reflection;
 using MvvmCross.Binding.Droid.Views;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Droid.Target
@@ -24,7 +24,7 @@ namespace MvvmCross.Binding.Droid.Target
             var autoComplete = View;
             if (autoComplete == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxLog.Instance.Error(
                                       "Error - autoComplete is null in MvxAutoCompleteTextViewPartialTextTargetBinding");
             }
         }

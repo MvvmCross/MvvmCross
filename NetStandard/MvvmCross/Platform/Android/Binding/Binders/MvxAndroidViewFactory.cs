@@ -13,7 +13,7 @@ using Android.Views;
 using MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Droid.Binders
 {
@@ -31,7 +31,7 @@ namespace MvvmCross.Binding.Droid.Binders
 
             if (viewType == null)
             {
-                //MvxBindingTrace.Trace(MvxTraceLevel.Error, "View type not found - {0}", name);
+                //MvxLog.Instance.Error("View type not found - {0}", name);
                 return null;
             }
 
@@ -40,7 +40,7 @@ namespace MvvmCross.Binding.Droid.Binders
                 var view = Activator.CreateInstance(viewType, context, attrs) as View;
                 if (view == null)
                 {
-                    MvxBindingTrace.Trace(MvxTraceLevel.Error, "Unable to load view {0} from type {1}", name,
+                    MvxLog.Instance.Error("Unable to load view {0} from type {1}", name,
                                           viewType.FullName);
                 }
                 return view;
@@ -51,8 +51,7 @@ namespace MvvmCross.Binding.Droid.Binders
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Exception during creation of {0} from type {1} - exception {2}", name,
+                MvxLog.Instance.Error("Exception during creation of {0} from type {1} - exception {2}", name,
                                       viewType.FullName, exception.ToLongString());
                 return null;
             }

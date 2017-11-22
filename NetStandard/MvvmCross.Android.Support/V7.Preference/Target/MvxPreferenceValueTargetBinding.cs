@@ -47,7 +47,7 @@ namespace MvvmCross.Droid.Support.V7.Preference.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            Mvx.Warning("SetValueImpl called on generic Preference target");
+            MvxLog.Instance.Warning("SetValueImpl called on generic Preference target");
         }
     }
 }

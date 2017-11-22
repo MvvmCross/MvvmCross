@@ -9,7 +9,7 @@ using System;
 using System.Reflection;
 using AppKit;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Mac.Target
 {
@@ -21,7 +21,7 @@ namespace MvvmCross.Binding.Mac.Target
             var checkBox = View;
             if (checkBox == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - NSButton is null in MvxNSSwitchOnTargetBinding");
+                MvxLog.Instance.Error("Error - NSButton is null in MvxNSSwitchOnTargetBinding");
             }
             else
             {

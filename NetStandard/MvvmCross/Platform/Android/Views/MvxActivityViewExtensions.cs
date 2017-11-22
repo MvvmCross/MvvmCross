@@ -1,4 +1,4 @@
-// MvxActivityViewExtensions.cs
+﻿// MvxActivityViewExtensions.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -15,7 +15,7 @@ using MvvmCross.Droid.Platform;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Views;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Droid.Views
 {
@@ -58,7 +58,7 @@ namespace MvvmCross.Droid.Views
             IMvxSavedStateConverter converter;
             if (!Mvx.TryResolve<IMvxSavedStateConverter>(out converter))
             {
-                MvxTrace.Trace("No saved state converter available - this is OK if seen during start");
+                MvxLog.Instance.Trace("No saved state converter available - this is OK if seen during start");
                 return null;
             }
             var savedState = converter.Read(bundle);
@@ -67,7 +67,7 @@ namespace MvvmCross.Droid.Views
 
         public static void OnViewNewIntent(this IMvxAndroidView androidView)
         {
-            Mvx.Warning("OnViewNewIntent called - but this is not fully handled within MvvmCross currently. Check https://github.com/slodge/MvvmCross/pull/294 for more info");
+            MvxLog.Instance.Warn("OnViewNewIntent called - but this is not fully handled within MvvmCross currently. Check https://github.com/slodge/MvvmCross/pull/294 for more info");
             //throw new MvxException("Sorry - we don't currently support OnNewIntent in MvvmCross-Android");
         }
 
@@ -129,7 +129,7 @@ namespace MvvmCross.Droid.Views
             if (viewModelType == null
                 || viewModelType == typeof(IMvxViewModel))
             {
-                MvxTrace.Trace("No ViewModel class specified for {0} in LoadViewModel",
+                MvxLog.Instance.Trace("No ViewModel class specified for {0} in LoadViewModel",
                                androidView.GetType().Name);
             }
 

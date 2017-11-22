@@ -15,6 +15,7 @@ using Android.Widget;
 using MvvmCross.Binding.Droid.ResourceHelpers;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Droid.Views
@@ -73,7 +74,7 @@ namespace MvvmCross.Binding.Droid.Views
                 {
                     if (!Mvx.TryResolve(out _imageHelper))
                     {
-                        MvxTrace.Error(
+                        MvxLog.Instance.Error(
                             "No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
                     }
                     else

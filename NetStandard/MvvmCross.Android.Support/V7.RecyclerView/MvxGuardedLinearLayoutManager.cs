@@ -27,7 +27,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             }
             catch (IndexOutOfBoundsException e)
             {
-                Mvx.Warning(
+                MvxLog.Instance.Warning(
                     "Workaround of issue - https://code.google.com/p/android/issues/detail?id=77846#c1 - IndexOutOfBoundsException " +
                     e.Message);
             }
