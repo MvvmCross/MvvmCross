@@ -1,4 +1,4 @@
-﻿﻿// MvxActivity.cs
+﻿// MvxActivity.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -105,7 +105,7 @@ namespace MvvmCross.Droid.Views
                     {
                         if (f.IsVisible)
                             fragments.Add(f);
-                    }   
+                    }
                 }
 
                 return fragments;
@@ -121,7 +121,9 @@ namespace MvvmCross.Droid.Views
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            ViewModel?.ViewDestroy();
+
+            if (IsFinishing)
+                ViewModel?.ViewDestroy();
         }
 
         protected override void OnStart()
