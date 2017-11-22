@@ -5,8 +5,9 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Bindings
 {
@@ -24,8 +25,7 @@ namespace MvvmCross.Binding.Bindings
             switch (bindingMode)
             {
                 case MvxBindingMode.Default:
-                    MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                          "Mode of default seen for binding - assuming TwoWay");
+                    MvxSingleton<IMvxLog>.Instance.Warn("Mode of default seen for binding - assuming TwoWay");
                     return true;
 
                 case MvxBindingMode.OneWay:
@@ -46,8 +46,7 @@ namespace MvvmCross.Binding.Bindings
             switch (bindingMode)
             {
                 case MvxBindingMode.Default:
-                    MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                          "Mode of default seen for binding - assuming TwoWay");
+                    MvxSingleton<IMvxLog>.Instance.Warn("Mode of default seen for binding - assuming TwoWay");
                     return true;
 
                 case MvxBindingMode.OneWay:
@@ -68,8 +67,7 @@ namespace MvvmCross.Binding.Bindings
             switch (bindingMode)
             {
                 case MvxBindingMode.Default:
-                    MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                          "Mode of default seen for binding - assuming TwoWay");
+                    MvxSingleton<IMvxLog>.Instance.Warn("Mode of default seen for binding - assuming TwoWay");
                     return true;
 
                 case MvxBindingMode.OneWay:

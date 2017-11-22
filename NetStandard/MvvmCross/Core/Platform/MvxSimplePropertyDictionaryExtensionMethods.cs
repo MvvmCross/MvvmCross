@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
 using System.Globalization;
 using System.Reflection;
 using MvvmCross.Platform.Logging;
@@ -96,7 +95,7 @@ namespace MvvmCross.Core.Platform
                     return Type.Missing;
                 }
 
-                MvxTrace.Trace(
+                MvxSingleton<IMvxLog>.Instance.Trace(
                     "Missing parameter for call to {0} - missing parameter {1} - asssuming null - this may fail for value types!",
                     debugText,
                     requiredParameter.Name);

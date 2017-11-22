@@ -9,9 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.IoC;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Platform.Plugins
 {
@@ -51,7 +52,7 @@ namespace MvvmCross.Platform.Plugins
             foreach (var platformDllPostfix in _platformDllPostfixes)
             {
                 var assemblyName = GetPluginAssemblyNameFrom(toLoad, platformDllPostfix);
-                MvxTrace.Trace("Loading plugin assembly: {0}", assemblyName);
+                MvxSingleton<IMvxLog>.Instance.Trace("Loading plugin assembly: {0}", assemblyName);
 
                 try
                 {

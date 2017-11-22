@@ -8,7 +8,7 @@
 using System;
 using System.Reflection;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Platform.Core
 {
@@ -22,12 +22,12 @@ namespace MvvmCross.Platform.Core
             }
             catch (TargetInvocationException exception)
             {
-                MvxTrace.Trace("TargetInvocateException masked " + exception.InnerException.ToLongString());
+                MvxSingleton<IMvxLog>.Instance.Trace("TargetInvocateException masked " + exception.InnerException.ToLongString());
             }
             catch (Exception exception)
             {
                 // note - all exceptions masked!
-                MvxTrace.Warning("Exception masked " + exception.ToLongString());
+                MvxSingleton<IMvxLog>.Instance.Warn("Exception masked " + exception.ToLongString());
             }
         }
     }

@@ -8,7 +8,9 @@
 using System;
 using System.Globalization;
 using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Bindings.SourceSteps
@@ -105,8 +107,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
             {
                 // pokemon exception - force the use of Fallback in this case
                 // we expect this exception to occur sometimes - so only "Diagnostic" level logging here
-                MvxBindingTrace.Trace(
-                    MvxTraceLevel.Diagnostic,
+                MvxSingleton<IMvxLog>.Instance.Trace(
                     "Problem seen during binding execution for {0} - problem {1}",
                     _description.ToString(),
                     exception.ToLongString());

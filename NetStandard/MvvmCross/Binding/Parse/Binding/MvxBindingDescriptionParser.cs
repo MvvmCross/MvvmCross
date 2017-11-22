@@ -15,7 +15,8 @@ using MvvmCross.Binding.Parse.Binding.Lang;
 using MvvmCross.Binding.Parse.Binding.Tibet;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Parse.Binding
 {
@@ -61,7 +62,7 @@ namespace MvvmCross.Binding.Parse.Binding
 
             var toReturn = ValueConverterLookup.Find(converterName);
             if (toReturn == null)
-                MvxBindingTrace.Trace("Could not find named converter for {0}", converterName);
+                MvxSingleton<IMvxLog>.Instance.Trace("Could not find named converter for {0}", converterName);
 
             return toReturn;
         }
@@ -88,8 +89,7 @@ namespace MvvmCross.Binding.Parse.Binding
             MvxSerializableBindingSpecification specification;
             if (!parser.TryParseBindingSpecification(text, out specification))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Failed to parse binding specification starting with {0}",
+                MvxSingleton<IMvxLog>.Instance.Error("Failed to parse binding specification starting with {0}",
                                       text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
                 return null;
             }
@@ -107,8 +107,7 @@ namespace MvvmCross.Binding.Parse.Binding
             var parser = BindingParser;
             if (!parser.TryParseBindingDescription(text, out description))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Failed to parse binding description starting with {0}",
+                MvxSingleton<IMvxLog>.Instance.Error("Failed to parse binding description starting with {0}",
                                       text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
                 return null;
             }
@@ -181,12 +180,12 @@ namespace MvvmCross.Binding.Parse.Binding
                     var converter = FindConverter(description.Function);
                     if (converter == null)
                     {
-                        MvxBindingTrace.Error("Failed to find combiner or converter for {0}", description.Function);
+                        MvxSingleton<IMvxLog>.Instance.Error("Failed to find combiner or converter for {0}", description.Function);
                     }
 
                     if (description.Sources == null || description.Sources.Count == 0)
                     {
-                        MvxBindingTrace.Error("Value Converter {0} supplied with no source", description.Function);
+                        MvxSingleton<IMvxLog>.Instance.Error("Value Converter {0} supplied with no source", description.Function);
                         return new MvxLiteralSourceStepDescription()
                         {
                             Literal = null,
@@ -194,7 +193,7 @@ namespace MvvmCross.Binding.Parse.Binding
                     }
                     else if (description.Sources.Count > 2)
                     {
-                        MvxBindingTrace.Error("Value Converter {0} supplied with too many parameters - {1}", description.Function, description.Sources.Count);
+                        MvxSingleton<IMvxLog>.Instance.Error("Value Converter {0} supplied with too many parameters - {1}", description.Function, description.Sources.Count);
                         return new MvxLiteralSourceStepDescription()
                         {
                             Literal = null,

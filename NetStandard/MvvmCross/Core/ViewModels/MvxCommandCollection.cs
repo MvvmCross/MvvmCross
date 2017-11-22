@@ -8,7 +8,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Core.ViewModels
 {
@@ -67,7 +68,7 @@ namespace MvvmCross.Core.ViewModels
             {
                 if (!_commandLookup.Any())
                 {
-                    MvxTrace.Trace("MvxCommandCollection is empty - did you forget to add your commands?");
+                    MvxSingleton<IMvxLog>.Instance.Trace("MvxCommandCollection is empty - did you forget to add your commands?");
                     return null;
                 }
 
@@ -90,7 +91,7 @@ namespace MvvmCross.Core.ViewModels
 
             if (lookup.ContainsKey(name))
             {
-                MvxTrace.Warning("Ignoring Commmand - it would overwrite the existing Command, name {0}", name);
+                MvxSingleton<IMvxLog>.Instance.Warn("Ignoring Commmand - it would overwrite the existing Command, name {0}", name);
                 return;
             }
             lookup[name] = command;

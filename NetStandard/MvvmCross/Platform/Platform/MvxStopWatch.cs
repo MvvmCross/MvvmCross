@@ -6,6 +6,8 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Platform.Platform
 {
@@ -25,7 +27,7 @@ namespace MvvmCross.Platform.Platform
 
         public void Dispose()
         {
-            MvxTrace.TaggedTrace(_tag, "{0} - {1}", Environment.TickCount - _startTickCount, _message);
+            MvxSingleton<IMvxLog>.Instance.Trace(_tag, "{0} - {1}", Environment.TickCount - _startTickCount, _message);
             GC.SuppressFinalize(this);
         }
 
