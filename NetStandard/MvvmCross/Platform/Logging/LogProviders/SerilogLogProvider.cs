@@ -38,11 +38,12 @@ namespace MvvmCross.Platform.Logging.LogProviders
             Type ndcContextType = Type.GetType("Serilog.Context.LogContext, Serilog") ??
                                   Type.GetType("Serilog.Context.LogContext, Serilog.FullNetFx");
 
-            MethodInfo pushPropertyMethod = ndcContextType.GetMethodPortable(
-                "PushProperty",
+            MethodInfo pushPropertyMethod = ndcContextType.GetMethod("PushProperty", new []
+            {
                 typeof(string),
                 typeof(object),
-                typeof(bool));
+                typeof(bool)
+            });
 
             ParameterExpression nameParam = Expression.Parameter(typeof(string), "name");
             ParameterExpression valueParam = Expression.Parameter(typeof(object), "value");
@@ -66,7 +67,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
         private static Func<string, object> GetForContextMethodCall()
         {
             Type logManagerType = GetLogManagerType();
-            MethodInfo method = logManagerType.GetMethodPortable("ForContext", typeof(string), typeof(object), typeof(bool));
+            MethodInfo method = logManagerType.GetMethod("ForContext", new[] { typeof(string), typeof(object), typeof(bool) });
             ParameterExpression propertyNameParam = Expression.Parameter(typeof(string), "propertyName");
             ParameterExpression valueParam = Expression.Parameter(typeof(object), "value");
             ParameterExpression destructureObjectsParam = Expression.Parameter(typeof(bool), "destructureObjects");
@@ -123,7 +124,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
                 {
                     throw new InvalidOperationException("Type Serilog.ILogger was not found.");
                 }
-                MethodInfo isEnabledMethodInfo = loggerType.GetMethodPortable("IsEnabled", logEventLevelType);
+                    MethodInfo isEnabledMethodInfo = loggerType.GetMethod("IsEnabled", new[] { logEventLevelType });
                 ParameterExpression instanceParam = Expression.Parameter(typeof(object));
                 UnaryExpression instanceCast = Expression.Convert(instanceParam, loggerType);
                 ParameterExpression levelParam = Expression.Parameter(typeof(object));
@@ -133,7 +134,12 @@ namespace MvvmCross.Platform.Logging.LogProviders
 
                 // Action<object, object, string> Write =
                 // (logger, level, message, params) => { ((SeriLog.ILoggerILogger)logger).Write(level, message, params); }
-                MethodInfo writeMethodInfo = loggerType.GetMethodPortable("Write", logEventLevelType, typeof(string), typeof(object[]));
+                MethodInfo writeMethodInfo = loggerType.GetMethod("Write", new[] 
+                { 
+                    logEventLevelType, 
+                    typeof(string), 
+                    typeof(object[])
+                });
                 ParameterExpression messageParam = Expression.Parameter(typeof(string));
                 ParameterExpression propertyValuesParam = Expression.Parameter(typeof(object[]));
                 MethodCallExpression writeMethodExp = Expression.Call(
@@ -152,11 +158,12 @@ namespace MvvmCross.Platform.Logging.LogProviders
 
                 // Action<object, object, string, Exception> WriteException =
                 // (logger, level, exception, message) => { ((ILogger)logger).Write(level, exception, message, new object[]); }
-                MethodInfo writeExceptionMethodInfo = loggerType.GetMethodPortable("Write",
+                MethodInfo writeExceptionMethodInfo = loggerType.GetMethod("Write", new[] {
                     logEventLevelType,
                     typeof(Exception),
                     typeof(string),
-                    typeof(object[]));
+                    typeof(object[])
+                });
                 ParameterExpression exceptionParam = Expression.Parameter(typeof(Exception));
                 writeMethodExp = Expression.Call(
                     instanceCast,

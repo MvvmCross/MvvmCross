@@ -28,7 +28,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
         protected override OpenNdc GetOpenNdcMethod()
         {
             Type ndcContextType = Type.GetType("NLog.NestedDiagnosticsContext, NLog");
-            MethodInfo pushMethod = ndcContextType.GetMethodPortable("Push", typeof(string));
+            MethodInfo pushMethod = ndcContextType.GetMethod("Push", new [] { typeof(string) });
             ParameterExpression messageParam = Expression.Parameter(typeof(string), "message");
             MethodCallExpression pushMethodCall = Expression.Call(null, pushMethod, messageParam);
             return Expression.Lambda<OpenNdc>(pushMethodCall, messageParam).Compile();
@@ -38,8 +38,8 @@ namespace MvvmCross.Platform.Logging.LogProviders
         {
             Type mdcContextType = Type.GetType("NLog.MappedDiagnosticsContext, NLog");
 
-            MethodInfo setMethod = mdcContextType.GetMethodPortable("Set", typeof(string), typeof(string));
-            MethodInfo removeMethod = mdcContextType.GetMethodPortable("Remove", typeof(string));
+            MethodInfo setMethod = mdcContextType.GetMethod("Set", new[] { typeof(string), typeof(string) });
+            MethodInfo removeMethod = mdcContextType.GetMethod("Remove", new [] { typeof(string) });
             ParameterExpression keyParam = Expression.Parameter(typeof(string), "key");
             ParameterExpression valueParam = Expression.Parameter(typeof(string), "value");
 
@@ -66,7 +66,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
         private static Func<string, object> GetGetLoggerMethodCall()
         {
             Type logManagerType = GetLogManagerType();
-            MethodInfo method = logManagerType.GetMethodPortable("GetLogger", typeof(string));
+            MethodInfo method = logManagerType.GetMethod("GetLogger", new [] { typeof(string) });
             ParameterExpression nameParam = Expression.Parameter(typeof(string), "name");
             MethodCallExpression methodCall = Expression.Call(null, method, nameParam);
             return Expression.Lambda<Func<string, object>>(methodCall, nameParam).Compile();
@@ -95,7 +95,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
                         throw new InvalidOperationException("Type NLog.LogLevel was not found.");
                     }
 
-                    var levelFields = logEventLevelType.GetFieldsPortable().ToList();
+                    var levelFields = logEventLevelType.GetFields().ToList();
                     _levelTrace = levelFields.First(x => x.Name == "Trace").GetValue(null);
                     _levelDebug = levelFields.First(x => x.Name == "Debug").GetValue(null);
                     _levelInfo = levelFields.First(x => x.Name == "Info").GetValue(null);
@@ -108,8 +108,15 @@ namespace MvvmCross.Platform.Logging.LogProviders
                     {
                         throw new InvalidOperationException("Type NLog.LogEventInfo was not found.");
                     }
-                    MethodInfo createLogEventInfoMethodInfo = logEventInfoType.GetMethodPortable("Create",
-                        logEventLevelType, typeof(string), typeof(Exception), typeof(IFormatProvider), typeof(string), typeof(object[]));
+                    MethodInfo createLogEventInfoMethodInfo = logEventInfoType.GetMethod("Create", new[]
+                    {
+                        logEventLevelType,
+                        typeof(string),
+                        typeof(Exception),
+                        typeof(IFormatProvider),
+                        typeof(string),
+                        typeof(object[])
+                    });
                     ParameterExpression loggerNameParam = Expression.Parameter(typeof(string));
                     ParameterExpression levelParam = Expression.Parameter(typeof(object));
                     ParameterExpression messageParam = Expression.Parameter(typeof(string));
@@ -206,12 +213,11 @@ namespace MvvmCross.Platform.Logging.LogProviders
             {
                 while (currentType != null && currentType != typeof(object))
                 {
-                    if (currentType == checkType)
-                    {
-                        return true;
-                    }
-                    currentType = currentType.GetBaseTypePortable();
+                    if (currentType == checkType) return true;
+
+                    currentType = currentType.BaseType;
                 }
+
                 return false;
             }
 

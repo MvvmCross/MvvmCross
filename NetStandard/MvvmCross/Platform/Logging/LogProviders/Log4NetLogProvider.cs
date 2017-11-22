@@ -23,18 +23,18 @@ namespace MvvmCross.Platform.Logging.LogProviders
 
         protected override Logger GetLogger(string name)
             => new Log4NetLogger(_getLoggerByNameDelegate(name)).Log;
-       
+
         internal static bool IsLoggerAvailable()
             => GetLogManagerType() != null;
 
         protected override OpenNdc GetOpenNdcMethod()
         {
             Type logicalThreadContextType = Type.GetType("log4net.LogicalThreadContext, log4net");
-            PropertyInfo stacksProperty = logicalThreadContextType.GetPropertyPortable("Stacks");
+            PropertyInfo stacksProperty = logicalThreadContextType.GetProperty("Stacks");
             Type logicalThreadContextStacksType = stacksProperty.PropertyType;
-            PropertyInfo stacksIndexerProperty = logicalThreadContextStacksType.GetPropertyPortable("Item");
+            PropertyInfo stacksIndexerProperty = logicalThreadContextStacksType.GetProperty("Item");
             Type stackType = stacksIndexerProperty.PropertyType;
-            MethodInfo pushMethod = stackType.GetMethodPortable("Push");
+            MethodInfo pushMethod = stackType.GetMethod("Push");
 
             ParameterExpression messageParameter =
                 Expression.Parameter(typeof(string), "message");
@@ -58,11 +58,11 @@ namespace MvvmCross.Platform.Logging.LogProviders
         protected override OpenMdc GetOpenMdcMethod()
         {
             Type logicalThreadContextType = Type.GetType("log4net.LogicalThreadContext, log4net");
-            PropertyInfo propertiesProperty = logicalThreadContextType.GetPropertyPortable("Properties");
+            PropertyInfo propertiesProperty = logicalThreadContextType.GetProperty("Properties");
             Type logicalThreadContextPropertiesType = propertiesProperty.PropertyType;
-            PropertyInfo propertiesIndexerProperty = logicalThreadContextPropertiesType.GetPropertyPortable("Item");
+            PropertyInfo propertiesIndexerProperty = logicalThreadContextPropertiesType.GetProperty("Item");
 
-            MethodInfo removeMethod = logicalThreadContextPropertiesType.GetMethodPortable("Remove");
+            MethodInfo removeMethod = logicalThreadContextPropertiesType.GetMethod("Remove");
 
             ParameterExpression keyParam = Expression.Parameter(typeof(string), "key");
             ParameterExpression valueParam = Expression.Parameter(typeof(string), "value");
@@ -96,7 +96,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
         private static Func<string, object> GetGetLoggerMethodCall()
         {
             Type logManagerType = GetLogManagerType();
-            MethodInfo method = logManagerType.GetMethodPortable("GetLogger", typeof(string));
+            MethodInfo method = logManagerType.GetMethod("GetLogger", new [] { typeof(string) });
             ParameterExpression nameParam = Expression.Parameter(typeof(string), "name");
             MethodCallExpression methodCall = Expression.Call(null, method, nameParam);
             return Expression.Lambda<Func<string, object>>(methodCall, nameParam).Compile();
@@ -126,7 +126,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
                     throw new InvalidOperationException("Type log4net.Core.Level was not found.");
                 }
 
-                var levelFields = logEventLevelType.GetFieldsPortable().ToList();
+                var levelFields = logEventLevelType.GetFields().ToList();
                 _levelDebug = levelFields.First(x => x.Name == "Debug").GetValue(null);
                 _levelInfo = levelFields.First(x => x.Name == "Info").GetValue(null);
                 _levelWarn = levelFields.First(x => x.Name == "Warn").GetValue(null);
@@ -165,8 +165,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
             {
                 //Action<object, object, string, Exception> Log =
                 //(logger, callerStackBoundaryDeclaringType, level, message, exception) => { ((ILogger)logger).Log(new LoggingEvent(callerStackBoundaryDeclaringType, logger.Repository, logger.Name, level, message, exception)); }
-                MethodInfo writeExceptionMethodInfo = loggerType.GetMethodPortable("Log",
-                                                                                   loggingEventType);
+                MethodInfo writeExceptionMethodInfo = loggerType.GetMethod("Log", new [] { loggingEventType });
 
                 ParameterExpression loggingEventParameter =
                     Expression.Parameter(typeof(object), "loggingEvent");
@@ -193,11 +192,18 @@ namespace MvvmCross.Platform.Logging.LogProviders
                 ParameterExpression messageParam = Expression.Parameter(typeof(string));
                 ParameterExpression exceptionParam = Expression.Parameter(typeof(Exception));
 
-                PropertyInfo repositoryProperty = loggingEventType.GetPropertyPortable("Repository");
-                PropertyInfo levelProperty = loggingEventType.GetPropertyPortable("Level");
+                PropertyInfo repositoryProperty = loggingEventType.GetProperty("Repository");
+                PropertyInfo levelProperty = loggingEventType.GetProperty("Level");
 
                 ConstructorInfo loggingEventConstructor =
-                    loggingEventType.GetConstructorPortable(typeof(Type), repositoryProperty.PropertyType, typeof(string), levelProperty.PropertyType, typeof(object), typeof(Exception));
+                    loggingEventType.GetConstructor(new Type[] {
+                    typeof(Type),
+                    repositoryProperty.PropertyType,
+                    typeof(string),
+                    levelProperty.PropertyType,
+                    typeof(object),
+                    typeof(Exception)
+                });
 
                 //Func<object, object, string, Exception, object> Log =
                 //(logger, callerStackBoundaryDeclaringType, level, message, exception) => new LoggingEvent(callerStackBoundaryDeclaringType, ((ILogger)logger).Repository, ((ILogger)logger).Name, (Level)level, message, exception); }
@@ -229,7 +235,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
                                                                       ParameterExpression instanceParam,
                                                                       ParameterExpression levelParam)
             {
-                MethodInfo isEnabledMethodInfo = loggerType.GetMethodPortable("IsEnabledFor", logEventLevelType);
+                MethodInfo isEnabledMethodInfo = loggerType.GetMethod("IsEnabledFor", new [] { logEventLevelType });
                 MethodCallExpression isEnabledMethodCall = Expression.Call(instanceCast, isEnabledMethodInfo, levelCast);
 
                 Func<object, object, bool> result =
@@ -245,8 +251,8 @@ namespace MvvmCross.Platform.Logging.LogProviders
                 ParameterExpression keyParameter = Expression.Parameter(typeof(string), "key");
                 ParameterExpression valueParameter = Expression.Parameter(typeof(object), "value");
 
-                PropertyInfo propertiesProperty = loggingEventType.GetPropertyPortable("Properties");
-                PropertyInfo item = propertiesProperty.PropertyType.GetPropertyPortable("Item");
+                PropertyInfo propertiesProperty = loggingEventType.GetProperty("Properties");
+                PropertyInfo item = propertiesProperty.PropertyType.GetProperty("Item");
 
                 // ((LoggingEvent)loggingEvent).Properties[key] = value;
                 var body =
@@ -319,11 +325,9 @@ namespace MvvmCross.Platform.Logging.LogProviders
             {
                 while (currentType != null && currentType != typeof(object))
                 {
-                    if (currentType == checkType)
-                    {
-                        return true;
-                    }
-                    currentType = currentType.GetBaseTypePortable();
+                    if (currentType == checkType) return true;
+
+                    currentType = currentType.BaseType;
                 }
                 return false;
             }
