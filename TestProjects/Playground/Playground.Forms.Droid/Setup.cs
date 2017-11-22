@@ -11,7 +11,7 @@ using MvvmCross.Plugins.Json;
 
 namespace Playground.Forms.Droid
 {
-    public class Setup : MvxFormsAndroidSetup<FormsApp>
+    public class Setup : MvxTypedFormsAndroidSetup<FormsApp, Core.App>
     {
         public Setup(Context applicationContext) : base(applicationContext)
         {
@@ -27,11 +27,6 @@ namespace Playground.Forms.Droid
                 .WriteTo.AndroidLog()
                 .CreateLogger();
             return base.CreateLogProvider();
-        }
-
-        protected override IMvxApplication CreateApp()
-        {
-            return new Core.App();
         }
 
         protected override IMvxTrace CreateDebugTrace()

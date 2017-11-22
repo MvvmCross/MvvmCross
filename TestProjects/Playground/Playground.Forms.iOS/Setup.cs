@@ -6,18 +6,13 @@ using UIKit;
 
 namespace Playground.Forms.iOS
 {
-    public class Setup : MvxFormsIosSetup<FormsApp>
+    public class Setup : MvxTypedFormsIosSetup<FormsApp, Core.App>
     {
         public Setup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
         {
         }
-
-        protected override IMvxApplication CreateApp()
-        {
-            return new Core.App();
-        }
-
+        
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();
