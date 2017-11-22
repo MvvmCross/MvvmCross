@@ -8,7 +8,8 @@
 using System;
 using System.Reflection;
 using System.Windows.Input;
-using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.ValueConverters
@@ -45,7 +46,7 @@ namespace MvvmCross.Binding.ValueConverters
                 return false;
 
             if (parameter != null)
-                Mvx.Warning("Non-null parameter will be ignored in MvxWrappingCommand.CanExecute");
+                MvxSingleton<IMvxLog>.Instance.Warn("Non-null parameter will be ignored in MvxWrappingCommand.CanExecute");
 
             return _wrapped.CanExecute(_commandParameterOverride);
         }
@@ -56,7 +57,7 @@ namespace MvvmCross.Binding.ValueConverters
                 return;
 
             if (parameter != null)
-                Mvx.Warning("Non-null parameter overridden in MvxWrappingCommand");
+                MvxSingleton<IMvxLog>.Instance.Warn("Non-null parameter overridden in MvxWrappingCommand");
             _wrapped.Execute(_commandParameterOverride);
         }
 

@@ -9,7 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Platform.IoC
 {
@@ -23,7 +25,7 @@ namespace MvvmCross.Platform.IoC
             }
             catch (ReflectionTypeLoadException e)
             {
-                Mvx.Warning("ReflectionTypeLoadException masked during loading of {0} - error {1}",
+                MvxSingleton<IMvxLog>.Instance.Warn("ReflectionTypeLoadException masked during loading of {0} - error {1}",
                     assembly.FullName, e.ToLongString());
                 return new Type[0];
             }

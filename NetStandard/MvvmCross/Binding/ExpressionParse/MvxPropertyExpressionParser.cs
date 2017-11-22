@@ -8,7 +8,8 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.ExpressionParse
 {
@@ -117,7 +118,7 @@ namespace MvvmCross.Binding.ExpressionParse
             }
             catch
             {
-                Mvx.Trace("Failed to evaluate member expression.");
+                MvxSingleton<IMvxLog>.Instance.Trace("Failed to evaluate member expression.");
             }
 
             return argument;

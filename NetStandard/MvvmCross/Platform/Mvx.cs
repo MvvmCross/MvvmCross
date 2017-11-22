@@ -9,7 +9,6 @@ using System;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.IoC;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Platform
 {
@@ -190,54 +189,6 @@ namespace MvvmCross.Platform
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
             ioc.CallbackWhenRegistered(type, action);
-        }
-
-        [Obsolete("IMvxTrace is replaced by IMvxLogProvider and IMvxLog")]
-        public static void TaggedTrace(MvxTraceLevel level, string tag, string message, params object[] args)
-        {
-            MvxTrace.TaggedTrace(level, tag, message, args);
-        }
-
-        [Obsolete("IMvxTrace is replaced by IMvxLogProvider and IMvxLog")]
-        public static void Trace(MvxTraceLevel level, string message, params object[] args)
-        {
-            MvxTrace.Trace(level, message, args);
-        }
-
-        [Obsolete("IMvxTrace is replaced by IMvxLogProvider and IMvxLog")]
-        public static void TaggedTrace(string tag, string message, params object[] args)
-        {
-            TaggedTrace(MvxTraceLevel.Diagnostic, tag, message, args);
-        }
-
-        [Obsolete("IMvxTrace is replaced by IMvxLogProvider and IMvxLog")]
-        public static void TaggedWarning(string tag, string message, params object[] args)
-        {
-            TaggedTrace(MvxTraceLevel.Warning, tag, message, args);
-        }
-
-        [Obsolete("IMvxTrace is replaced by IMvxLogProvider and IMvxLog")]
-        public static void TaggedError(string tag, string message, params object[] args)
-        {
-            TaggedTrace(MvxTraceLevel.Error, tag, message, args);
-        }
-
-        [Obsolete("IMvxTrace is replaced by IMvxLogProvider and IMvxLog")]
-        public static void Trace(string message, params object[] args)
-        {
-            Trace(MvxTraceLevel.Diagnostic, message, args);
-        }
-
-        [Obsolete("IMvxTrace is replaced by IMvxLogProvider and IMvxLog")]
-        public static void Warning(string message, params object[] args)
-        {
-            Trace(MvxTraceLevel.Warning, message, args);
-        }
-
-        [Obsolete("IMvxTrace is replaced by IMvxLogProvider and IMvxLog")]
-        public static void Error(string message, params object[] args)
-        {
-            Trace(MvxTraceLevel.Error, message, args);
         }
 
         [Obsolete("IMvxTrace is replaced by IMvxLogProvider and IMvxLog")]
