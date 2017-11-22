@@ -10,8 +10,9 @@ using System.Linq;
 using MvvmCross.Binding.Parse.PropertyPath;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Bindings.Source.Construction
 {
@@ -63,8 +64,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
 
             if (source != null)
             {
-                MvxBindingTrace.Trace(
-                    MvxTraceLevel.Warning,
+                MvxSingleton<IMvxLog>.Instance.Warn(
                     "Unable to bind: source property source not found {0} on {1}"
                     , currentToken
                     , source.GetType().Name);

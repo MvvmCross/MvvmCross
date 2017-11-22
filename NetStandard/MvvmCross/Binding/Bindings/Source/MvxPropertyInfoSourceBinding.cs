@@ -9,7 +9,8 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Bindings.Source
@@ -28,9 +29,8 @@ namespace MvvmCross.Binding.Bindings.Source
 
             if (Source == null)
             {
-                MvxBindingTrace.Trace(
-                    // this is not a Warning - as actually using a NULL source is a fairly common occurrence!
-                    MvxTraceLevel.Diagnostic,
+                // this is not a Warning - as actually using a NULL source is a fairly common occurrence!
+                MvxSingleton<IMvxLog>.Instance.Trace(
                     "Unable to bind to source as it's null"
                     , _propertyName);
                 return;

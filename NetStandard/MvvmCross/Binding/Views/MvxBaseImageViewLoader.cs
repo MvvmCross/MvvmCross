@@ -6,9 +6,9 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Reflection;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.WeakSubscription;
 
@@ -27,7 +27,7 @@ namespace MvvmCross.Binding.Views
             _imageSetAction = imageSetAction;
             if (!Mvx.TryResolve(out _imageHelper))
             {
-                MvxBindingTrace.Error(
+                MvxSingleton<IMvxLog>.Instance.Error(
                     "Unable to resolve the image helper - have you referenced and called EnsureLoaded on the DownloadCache plugin?");
                 return;
             }

@@ -8,8 +8,9 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
 using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Binders
@@ -87,7 +88,7 @@ namespace MvvmCross.Binding.Binders
                 try
                 {
                     var converter = Activator.CreateInstance(pair.Type) as T;
-                    MvxBindingTrace.Trace("Registering value converter {0}:{1}", pair.Name, pair.Type.Name);
+                    MvxSingleton<IMvxLog>.Instance.Trace("Registering value converter {0}:{1}", pair.Name, pair.Type.Name);
                     registry.AddOrOverwrite(pair.Name, converter);
                 }
                 catch (Exception)

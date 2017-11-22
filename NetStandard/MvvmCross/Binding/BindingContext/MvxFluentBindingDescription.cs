@@ -14,6 +14,8 @@ using MvvmCross.Binding.Combiners;
 using MvvmCross.Binding.ValueConverters;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.BindingContext
 {
@@ -166,7 +168,7 @@ namespace MvvmCross.Binding.BindingContext
 
             if (newBindingDescription.Count > 1)
             {
-                MvxBindingTrace.Warning("More than one description found - only first will be used in {0}", bindingDescription);
+                MvxSingleton<IMvxLog>.Instance.Warn("More than one description found - only first will be used in {0}", bindingDescription);
             }
 
             return FullyDescribed(newBindingDescription.FirstOrDefault());
@@ -316,7 +318,7 @@ namespace MvvmCross.Binding.BindingContext
 
             if (newBindingDescription.Count > 1)
             {
-                MvxBindingTrace.Warning("More than one description found - only first will be used in {0}", bindingDescription);
+                MvxSingleton<IMvxLog>.Instance.Warn("More than one description found - only first will be used in {0}", bindingDescription);
             }
 
             return FullyDescribed(newBindingDescription.FirstOrDefault());

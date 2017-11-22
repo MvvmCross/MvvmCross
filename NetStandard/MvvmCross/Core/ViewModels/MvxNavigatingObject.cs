@@ -10,7 +10,9 @@ using System.Collections.Generic;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Core.ViewModels
@@ -27,7 +29,7 @@ namespace MvvmCross.Core.ViewModels
 
         protected bool ChangePresentation(MvxPresentationHint hint)
         {
-            MvxTrace.Trace("Requesting presentation change");
+            MvxSingleton<IMvxLog>.Instance.Trace("Requesting presentation change");
             var viewDispatcher = ViewDispatcher;
             if (viewDispatcher != null)
                 return viewDispatcher.ChangePresentation(hint);
@@ -111,7 +113,7 @@ namespace MvvmCross.Core.ViewModels
 
         private bool ShowViewModelImpl(Type viewModelType, IMvxBundle parameterBundle, IMvxBundle presentationBundle)
         {
-            MvxTrace.Trace("Showing ViewModel {0}", viewModelType.Name);
+            MvxSingleton<IMvxLog>.Instance.Trace("Showing ViewModel {0}", viewModelType.Name);
             var viewDispatcher = ViewDispatcher;
             if (viewDispatcher != null)
                 return viewDispatcher.ShowViewModel(new MvxViewModelRequest(

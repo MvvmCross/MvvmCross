@@ -8,8 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Bindings.Target.Construction
 {
@@ -48,8 +48,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
                 }
                 catch (Exception exception)
                 {
-                    MvxBindingTrace.Trace(
-                        MvxTraceLevel.Error,
+                    MvxSingleton<IMvxLog>.Instance.Error(
                         "Problem creating target binding for {0} - exception {1}", _targetType.Name,
                         exception.ToString());
                 }

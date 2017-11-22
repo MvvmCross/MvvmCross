@@ -14,7 +14,6 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Core.Navigation
 {
@@ -424,7 +423,7 @@ namespace MvvmCross.Core.Navigation
 
         public bool ChangePresentation(MvxPresentationHint hint)
         {
-            MvxTrace.Trace("Requesting presentation change");
+            MvxSingleton<IMvxLog>.Instance.Trace("Requesting presentation change");
             return ViewDispatcher.ChangePresentation(hint);
         }
 

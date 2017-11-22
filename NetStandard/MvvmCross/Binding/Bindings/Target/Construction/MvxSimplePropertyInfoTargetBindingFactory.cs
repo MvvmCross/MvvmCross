@@ -8,7 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Bindings.Target.Construction
 {
@@ -41,8 +42,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             var targetBinding = targetBindingCandidate as IMvxTargetBinding;
             if (targetBinding == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "The TargetBinding created did not support IMvxTargetBinding");
+                MvxSingleton<IMvxLog>.Instance.Warn("The TargetBinding created did not support IMvxTargetBinding");
                 var disposable = targetBindingCandidate as IDisposable;
                 disposable?.Dispose();
             }

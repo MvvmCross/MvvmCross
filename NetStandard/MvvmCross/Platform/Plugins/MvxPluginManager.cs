@@ -11,7 +11,6 @@ using System.Reflection;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Platform.Plugins
 {
@@ -42,21 +41,21 @@ namespace MvvmCross.Platform.Plugins
             var field = type.GetField("Instance", BindingFlags.Static | BindingFlags.Public);
             if (field == null)
             {
-                MvxTrace.Trace("Plugin Instance not found - will not autoload {0}", type.FullName);
+                MvxSingleton<IMvxLog>.Instance.Trace("Plugin Instance not found - will not autoload {0}", type.FullName);
                 return;
             }
 
             var instance = field.GetValue(null);
             if (instance == null)
             {
-                MvxTrace.Trace("Plugin Instance was empty - will not autoload {0}", type.FullName);
+                MvxSingleton<IMvxLog>.Instance.Trace("Plugin Instance was empty - will not autoload {0}", type.FullName);
                 return;
             }
 
             var pluginLoader = instance as IMvxPluginLoader;
             if (pluginLoader == null)
             {
-                MvxTrace.Trace("Plugin Instance was not a loader - will not autoload {0}", type.FullName);
+                MvxSingleton<IMvxLog>.Instance.Trace("Plugin Instance was not a loader - will not autoload {0}", type.FullName);
                 return;
             }
 
@@ -65,15 +64,14 @@ namespace MvvmCross.Platform.Plugins
 
         protected virtual void EnsurePluginLoaded(IMvxPluginLoader pluginLoader)
         {
-            var configurable = pluginLoader as IMvxConfigurablePluginLoader;
-            if (configurable != null)
+            if (pluginLoader is IMvxConfigurablePluginLoader configurable)
             {
-                MvxTrace.Trace("Configuring Plugin Loader for {0}", pluginLoader.GetType().FullName);
+                MvxSingleton<IMvxLog>.Instance.Trace("Configuring Plugin Loader for {0}", pluginLoader.GetType().FullName);
                 var configuration = ConfigurationFor(pluginLoader.GetType());
                 configurable.Configure(configuration);
             }
 
-            MvxTrace.Trace("Ensuring Plugin is loaded for {0}", pluginLoader.GetType().FullName);
+            MvxSingleton<IMvxLog>.Instance.Trace("Ensuring Plugin is loaded for {0}", pluginLoader.GetType().FullName);
             pluginLoader.EnsureLoaded();
         }
 
@@ -122,8 +120,7 @@ namespace MvvmCross.Platform.Plugins
             try
             {
                 var plugin = LoadPlugin(toLoad);
-                var configurablePlugin = plugin as IMvxConfigurablePlugin;
-                if (configurablePlugin != null)
+                if (plugin is IMvxConfigurablePlugin configurablePlugin)
                 {
                     var configuration = ConfigurationSource(configurablePlugin.GetType());
                     configurablePlugin.Configure(configuration);
