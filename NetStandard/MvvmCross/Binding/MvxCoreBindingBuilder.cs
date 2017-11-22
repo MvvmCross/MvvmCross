@@ -1,4 +1,4 @@
-// MvxCoreBindingBuilder.cs
+﻿// MvxCoreBindingBuilder.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -17,7 +17,6 @@ using MvvmCross.Binding.ValueConverters;
 using MvvmCross.Localization;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
@@ -171,10 +170,10 @@ namespace MvvmCross.Binding
         {
             if (Mvx.CanResolve<IMvxBindingParser>())
             {
-                MvxSingleton<IMvxLog>.Instance.Trace("Binding Parser already registered - so skipping Default parser");
+                MvxLog.InternalLogInstance.Trace("Binding Parser already registered - so skipping Default parser");
                 return;
             }
-            MvxSingleton<IMvxLog>.Instance.Trace("Registering Default Binding Parser");
+            MvxLog.InternalLogInstance.Trace("Registering Default Binding Parser");
             Mvx.RegisterSingleton(CreateBindingParser());
         }
 
@@ -187,10 +186,10 @@ namespace MvvmCross.Binding
         {
             if (Mvx.CanResolve<IMvxLanguageBindingParser>())
             {
-                MvxSingleton<IMvxLog>.Instance.Trace("Binding Parser already registered - so skipping Language parser");
+                MvxLog.InternalLogInstance.Trace("Binding Parser already registered - so skipping Language parser");
                 return;
             }
-            MvxSingleton<IMvxLog>.Instance.Trace("Registering Language Binding Parser");
+            MvxLog.InternalLogInstance.Trace("Registering Language Binding Parser");
             Mvx.RegisterSingleton(CreateLanguageBindingParser());
         }
 

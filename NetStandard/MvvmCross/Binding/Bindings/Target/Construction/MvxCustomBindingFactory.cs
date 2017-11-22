@@ -1,4 +1,4 @@
-// MvxCustomBindingFactory.cs
+﻿// MvxCustomBindingFactory.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Bindings.Target.Construction
@@ -38,7 +37,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             var castTarget = target as TTarget;
             if (castTarget == null)
             {
-                MvxSingleton<IMvxLog>.Instance.Error("Passed an invalid target for MvxCustomBindingFactory");
+                MvxLog.InternalLogInstance.Error("Passed an invalid target for MvxCustomBindingFactory");
                 return null;
             }
 

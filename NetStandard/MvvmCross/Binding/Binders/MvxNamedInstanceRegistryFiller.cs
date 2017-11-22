@@ -1,4 +1,4 @@
-// MvxNamedInstanceRegistryFiller.cs
+﻿// MvxNamedInstanceRegistryFiller.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,7 +8,6 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.IoC;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
@@ -88,7 +87,7 @@ namespace MvvmCross.Binding.Binders
                 try
                 {
                     var converter = Activator.CreateInstance(pair.Type) as T;
-                    MvxSingleton<IMvxLog>.Instance.Trace("Registering value converter {0}:{1}", pair.Name, pair.Type.Name);
+                    MvxLog.InternalLogInstance.Trace("Registering value converter {0}:{1}", pair.Name, pair.Type.Name);
                     registry.AddOrOverwrite(pair.Name, converter);
                 }
                 catch (Exception)

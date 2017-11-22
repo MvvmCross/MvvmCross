@@ -1,4 +1,4 @@
-// MvxLeafPropertyInfoSourceBinding.cs
+﻿// MvxLeafPropertyInfoSourceBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,7 +9,6 @@ using System;
 using System.Reflection;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 
@@ -38,7 +37,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
 
             if (!PropertyInfo.CanRead)
             {
-                MvxSingleton<IMvxLog>.Instance.Error("GetValue ignored in binding - target property is writeonly");
+                MvxLog.InternalLogInstance.Error("GetValue ignored in binding - target property is writeonly");
                 return MvxBindingConstant.UnsetValue;
             }
 
@@ -60,13 +59,13 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
         {
             if (PropertyInfo == null)
             {
-                MvxSingleton<IMvxLog>.Instance.Warn("SetValue ignored in binding - source property {0} is missing", PropertyName);
+                MvxLog.InternalLogInstance.Warn("SetValue ignored in binding - source property {0} is missing", PropertyName);
                 return;
             }
 
             if (!PropertyInfo.CanWrite)
             {
-                MvxSingleton<IMvxLog>.Instance.Warn("SetValue ignored in binding - target property is readonly");
+                MvxLog.InternalLogInstance.Warn("SetValue ignored in binding - target property is readonly");
                 return;
             }
 
@@ -83,7 +82,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
             }
             catch (Exception exception)
             {
-                MvxSingleton<IMvxLog>.Instance.Error("SetValue failed with exception - " + exception.ToLongString());
+                MvxLog.InternalLogInstance.Error("SetValue failed with exception - " + exception.ToLongString());
             }
         }
     }

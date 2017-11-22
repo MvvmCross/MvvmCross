@@ -1,4 +1,4 @@
-// MvxSourceBindingFactory.cs
+﻿// MvxSourceBindingFactory.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,7 +10,6 @@ using System.Linq;
 using MvvmCross.Binding.Parse.PropertyPath;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 
@@ -64,7 +63,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
 
             if (source != null)
             {
-                MvxSingleton<IMvxLog>.Instance.Warn(
+                MvxLog.InternalLogInstance.Warn(
                     "Unable to bind: source property source not found {0} on {1}"
                     , currentToken
                     , source.GetType().Name);

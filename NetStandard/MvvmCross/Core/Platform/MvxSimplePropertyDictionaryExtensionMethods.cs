@@ -13,7 +13,6 @@ using MvvmCross.Platform.Exceptions;
 using System.Globalization;
 using System.Reflection;
 using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Core.Platform
 {
@@ -95,7 +94,7 @@ namespace MvvmCross.Core.Platform
                     return Type.Missing;
                 }
 
-                MvxSingleton<IMvxLog>.Instance.Trace(
+                MvxLog.InternalLogInstance.Trace(
                     "Missing parameter for call to {0} - missing parameter {1} - asssuming null - this may fail for value types!",
                     debugText,
                     requiredParameter.Name);
@@ -135,7 +134,7 @@ namespace MvvmCross.Core.Platform
                 }
                 else
                 {
-                    MvxSingleton<IMvxLog>.Instance.Trace(
+                    MvxLog.InternalLogInstance.Trace(
                         "Skipping serialization of property {0} - don't know how to serialize type {1} - some answers on http://stackoverflow.com/questions/16524236/custom-types-in-navigation-parameters-in-v3",
                         propertyInfo.Property.Name,
                         propertyInfo.Property.PropertyType.Name);

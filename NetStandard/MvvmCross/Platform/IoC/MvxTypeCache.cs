@@ -1,4 +1,4 @@
-// MvxTypeCache.cs
+﻿// MvxTypeCache.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 
@@ -50,7 +49,7 @@ namespace MvvmCross.Platform.IoC
             }
             catch (ReflectionTypeLoadException e)
             {
-                MvxSingleton<IMvxLog>.Instance.Warn("ReflectionTypeLoadException masked during loading of {0} - error {1}",
+                MvxLog.InternalLogInstance.Warn("ReflectionTypeLoadException masked during loading of {0} - error {1}",
                     assembly.FullName, e.ToLongString());
             }
         }

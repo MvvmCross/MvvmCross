@@ -1,4 +1,4 @@
-// MvxTargetBindingFactoryRegistry.cs
+﻿// MvxTargetBindingFactoryRegistry.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Bindings.Target.Construction
@@ -35,7 +34,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         {
             if (string.IsNullOrEmpty(targetName))
             {
-                MvxSingleton<IMvxLog>.Instance.Trace("Empty binding target passed to MvxTargetBindingFactoryRegistry");
+                MvxLog.InternalLogInstance.Trace("Empty binding target passed to MvxTargetBindingFactoryRegistry");
                 binding = null;
                 return false;
             }

@@ -1,4 +1,4 @@
-// MvxPropertyInjector.cs
+﻿// MvxPropertyInjector.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 
@@ -54,7 +53,7 @@ namespace MvvmCross.Platform.IoC
                 if (options.ThrowIfPropertyInjectionFails)
                     throw new MvxIoCResolveException("IoC property injection failed for {0} on {1}", injectableProperty.Name, toReturn.GetType().Name);
                 else
-                    MvxSingleton<IMvxLog>.Instance.Warn("IoC property injection skipped for {0} on {1}", injectableProperty.Name, toReturn.GetType().Name);
+                    MvxLog.InternalLogInstance.Warn("IoC property injection skipped for {0} on {1}", injectableProperty.Name, toReturn.GetType().Name);
             }
         }
 
@@ -77,7 +76,7 @@ namespace MvvmCross.Platform.IoC
                     break;
 
                 case MvxPropertyInjection.None:
-                    MvxSingleton<IMvxLog>.Instance.Error("Internal error - should not call FindInjectableProperties with MvxPropertyInjection.None");
+                    MvxLog.InternalLogInstance.Error("Internal error - should not call FindInjectableProperties with MvxPropertyInjection.None");
                     injectableProperties = new PropertyInfo[0];
                     break;
 

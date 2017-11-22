@@ -1,4 +1,4 @@
-// MvxPropertyExpressionParser.cs
+﻿// MvxPropertyExpressionParser.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,7 +8,6 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.ExpressionParse
@@ -118,7 +117,7 @@ namespace MvvmCross.Binding.ExpressionParse
             }
             catch
             {
-                MvxSingleton<IMvxLog>.Instance.Trace("Failed to evaluate member expression.");
+                MvxLog.InternalLogInstance.Trace("Failed to evaluate member expression.");
             }
 
             return argument;

@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Parse;
@@ -31,7 +30,7 @@ namespace MvvmCross.Binding.Parse.Binding
             }
             catch (Exception exception)
             {
-                MvxSingleton<IMvxLog>.Instance.Error("Problem parsing binding {0}", exception.ToLongString());
+                MvxLog.InternalLogInstance.Error("Problem parsing binding {0}", exception.ToLongString());
                 requestedDescription = null;
                 return false;
             }
@@ -57,7 +56,7 @@ namespace MvvmCross.Binding.Parse.Binding
             }
             catch (Exception exception)
             {
-                MvxSingleton<IMvxLog>.Instance.Error("Problem parsing binding {0}", exception.ToLongString());
+                MvxLog.InternalLogInstance.Error("Problem parsing binding {0}", exception.ToLongString());
                 requestedBindings = null;
                 return false;
             }

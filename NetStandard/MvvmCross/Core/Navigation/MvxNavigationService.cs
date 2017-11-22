@@ -64,7 +64,7 @@ namespace MvvmCross.Core.Navigation
                 {
                     case 0:
                         entry = default(KeyValuePair<Regex, Type>);
-                        MvxSingleton<IMvxLog>.Instance.Trace("MvxNavigationService", "Unable to find routing for {0}", url);
+                        MvxLog.InternalLogInstance.Trace("MvxNavigationService", "Unable to find routing for {0}", url);
                         return false;
                     case 1:
                         entry = matches[0];
@@ -79,7 +79,7 @@ namespace MvvmCross.Core.Navigation
                     return true;
                 }
 
-                MvxSingleton<IMvxLog>.Instance.Warn("MvxNavigationService",
+                MvxLog.InternalLogInstance.Warn("MvxNavigationService",
                     "The following regular expressions match the provided url ({0}), each RegEx must be unique (otherwise try using IMvxRoutingFacade): {1}",
                     matches.Count - 1,
                     string.Join(", ", matches.Select(t => t.Key.ToString())));
@@ -89,7 +89,7 @@ namespace MvvmCross.Core.Navigation
             }
             catch (Exception ex)
             {
-                MvxSingleton<IMvxLog>.Instance.Error("MvxNavigationService", "Unable to determine routability: {0}", ex);
+                MvxLog.InternalLogInstance.Error("MvxNavigationService", "Unable to determine routability: {0}", ex);
                 entry = default(KeyValuePair<Regex, Type>);
                 return false;
             }
@@ -423,7 +423,7 @@ namespace MvvmCross.Core.Navigation
 
         public bool ChangePresentation(MvxPresentationHint hint)
         {
-            MvxSingleton<IMvxLog>.Instance.Trace("Requesting presentation change");
+            MvxLog.InternalLogInstance.Trace("Requesting presentation change");
             return ViewDispatcher.ChangePresentation(hint);
         }
 

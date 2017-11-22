@@ -1,4 +1,4 @@
-// MvxApplicable.cs
+﻿// MvxApplicable.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -17,7 +17,7 @@ namespace MvvmCross.Platform.Core
 
         ~MvxApplicable()
         {
-            MvxSingleton<IMvxLog>.Instance.Trace("Finaliser called on {0} - suggests that  Apply() was never called", GetType().Name);
+            MvxLog.InternalLogInstance.Trace("Finaliser called on {0} - suggests that  Apply() was never called", GetType().Name);
         }
 
         protected void SuppressFinalizer()

@@ -1,4 +1,4 @@
-// MvxBindingContextStackRegistration.cs
+﻿// MvxBindingContextStackRegistration.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,7 +7,6 @@
 
 using System;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.BindingContext
@@ -24,7 +23,7 @@ namespace MvvmCross.Binding.BindingContext
 
         ~MvxBindingContextStackRegistration()
         {
-            MvxSingleton<IMvxLog>.Instance.Error("You should always Dispose of MvxBindingContextStackRegistration");
+            MvxLog.InternalLogInstance.Error("You should always Dispose of MvxBindingContextStackRegistration");
             Dispose(false);
         }
 

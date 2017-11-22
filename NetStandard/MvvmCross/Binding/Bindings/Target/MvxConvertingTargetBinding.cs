@@ -1,4 +1,4 @@
-// MvxConvertingTargetBinding.cs
+﻿// MvxConvertingTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Bindings.Target
@@ -29,11 +28,11 @@ namespace MvvmCross.Binding.Bindings.Target
 
         public override void SetValue(object value)
         {
-            MvxSingleton<IMvxLog>.Instance.Trace("Receiving SetValue to " + (value ?? ""));
+            MvxLog.InternalLogInstance.Trace("Receiving SetValue to " + (value ?? ""));
             var target = Target;
             if (target == null)
             {
-                MvxSingleton<IMvxLog>.Instance.Warn("Weak Target is null in {0} - skipping set", GetType().Name);
+                MvxLog.InternalLogInstance.Warn("Weak Target is null in {0} - skipping set", GetType().Name);
                 return;
             }
 
@@ -93,7 +92,7 @@ namespace MvvmCross.Binding.Bindings.Target
             if (_isUpdatingTarget || _isUpdatingSource)
                 return;
 
-            MvxSingleton<IMvxLog>.Instance.Trace("Firing changed to " + (newValue ?? ""));
+            MvxLog.InternalLogInstance.Trace("Firing changed to " + (newValue ?? ""));
             try
             {
                 _isUpdatingSource = true;
@@ -130,7 +129,7 @@ namespace MvvmCross.Binding.Bindings.Target
             var target = Target;
             if (target == null)
             {
-                MvxSingleton<IMvxLog>.Instance.Warn("Weak Target is null in {0} - skipping set", GetType().Name);
+                MvxLog.InternalLogInstance.Warn("Weak Target is null in {0} - skipping set", GetType().Name);
                 return;
             }
 
@@ -184,7 +183,7 @@ namespace MvvmCross.Binding.Bindings.Target
             if (_isUpdatingTarget || _isUpdatingSource)
                 return;
 
-            MvxSingleton<IMvxLog>.Instance.Trace("Firing changed to " + newValue);
+            MvxLog.InternalLogInstance.Trace("Firing changed to " + newValue);
             try
             {
                 _isUpdatingSource = true;

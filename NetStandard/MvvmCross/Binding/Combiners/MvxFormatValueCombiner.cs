@@ -1,4 +1,4 @@
-// MvxFormatValueCombiner.cs
+﻿// MvxFormatValueCombiner.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Combiners
@@ -22,7 +21,7 @@ namespace MvvmCross.Binding.Combiners
 
             if (list.Count < 1)
             {
-                MvxSingleton<IMvxLog>.Instance.Warn("Format called with no parameters - will fail");
+                MvxLog.InternalLogInstance.Warn("Format called with no parameters - will fail");
                 value = MvxBindingConstant.DoNothing;
                 return true;
             }

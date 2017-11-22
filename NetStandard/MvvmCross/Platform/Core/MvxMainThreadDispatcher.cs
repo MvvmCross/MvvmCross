@@ -22,12 +22,12 @@ namespace MvvmCross.Platform.Core
             }
             catch (TargetInvocationException exception)
             {
-                MvxSingleton<IMvxLog>.Instance.Trace("TargetInvocateException masked " + exception.InnerException.ToLongString());
+                MvxLog.InternalLogInstance.Trace("TargetInvocateException masked " + exception.InnerException.ToLongString());
             }
             catch (Exception exception)
             {
                 // note - all exceptions masked!
-                MvxSingleton<IMvxLog>.Instance.Warn("Exception masked " + exception.ToLongString());
+                MvxLog.InternalLogInstance.Warn("Exception masked " + exception.ToLongString());
             }
         }
     }

@@ -1,11 +1,10 @@
-// MvxBindingModeExtensionMethods.cs
+﻿// MvxBindingModeExtensionMethods.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 
@@ -25,7 +24,7 @@ namespace MvvmCross.Binding.Bindings
             switch (bindingMode)
             {
                 case MvxBindingMode.Default:
-                    MvxSingleton<IMvxLog>.Instance.Warn("Mode of default seen for binding - assuming TwoWay");
+                    MvxLog.InternalLogInstance.Warn("Mode of default seen for binding - assuming TwoWay");
                     return true;
 
                 case MvxBindingMode.OneWay:
@@ -46,7 +45,7 @@ namespace MvvmCross.Binding.Bindings
             switch (bindingMode)
             {
                 case MvxBindingMode.Default:
-                    MvxSingleton<IMvxLog>.Instance.Warn("Mode of default seen for binding - assuming TwoWay");
+                    MvxLog.InternalLogInstance.Warn("Mode of default seen for binding - assuming TwoWay");
                     return true;
 
                 case MvxBindingMode.OneWay:
@@ -67,7 +66,7 @@ namespace MvvmCross.Binding.Bindings
             switch (bindingMode)
             {
                 case MvxBindingMode.Default:
-                    MvxSingleton<IMvxLog>.Instance.Warn("Mode of default seen for binding - assuming TwoWay");
+                    MvxLog.InternalLogInstance.Warn("Mode of default seen for binding - assuming TwoWay");
                     return true;
 
                 case MvxBindingMode.OneWay:
