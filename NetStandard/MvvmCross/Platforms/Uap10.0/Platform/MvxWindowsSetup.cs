@@ -44,11 +44,6 @@ namespace MvvmCross.Uwp.Platform
             _rootFrame = rootFrame;
         }
 
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new MvxDebugTrace();
-        }
-
         protected override void InitializePlatformServices()
         {
             InitializeSuspensionManager();

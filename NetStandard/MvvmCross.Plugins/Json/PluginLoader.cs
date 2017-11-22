@@ -7,6 +7,7 @@
 
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
 
@@ -40,7 +41,8 @@ namespace MvvmCross.Plugins.Json
         {
             if (_loaded)
             {
-                MvxTrace.Error("Error - Configure called for Json Plugin after the plugin is already loaded");
+                var log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<PluginLoader>();
+                log.Error("Error - Configure called for Json Plugin after the plugin is already loaded");
                 return;
             }
 

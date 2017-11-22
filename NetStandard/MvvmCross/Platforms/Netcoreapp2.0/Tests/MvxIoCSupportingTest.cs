@@ -36,7 +36,8 @@ namespace MvvmCross.Test.Core
             MvxSingleton.ClearAllSingletons();
             _ioc = MvxSimpleIoCContainer.Initialize(CreateIocOptions());
             _ioc.RegisterSingleton(_ioc);
-            _ioc.RegisterSingleton<IMvxTrace>(new TestTrace());
+            //TODO Register IMvxLog here instead
+            //_ioc.RegisterSingleton<IMvxTrace>(new TestTrace());
             InitializeSingletonCache();
             InitializeMvxSettings();
             MvxTrace.Initialize();

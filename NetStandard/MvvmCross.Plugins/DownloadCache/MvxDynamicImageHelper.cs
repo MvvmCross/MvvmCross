@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.DownloadCache
@@ -20,6 +21,8 @@ namespace MvvmCross.Plugins.DownloadCache
         : IMvxImageHelper<T>
         where T : class
     {
+        public static IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<IMvxImageHelper<T>>();
+
         #region ImageState enum
 
         public enum ImageState
@@ -156,7 +159,7 @@ namespace MvvmCross.Plugins.DownloadCache
                 }
                 catch (Exception ex)
                 {
-                    Mvx.Trace("failed to download image {0} : {1}", imageSource, ex.ToLongString());
+                    Log.Trace("failed to download image {0} : {1}", imageSource, ex.ToLongString());
                     error = true;
                 }
 
@@ -180,7 +183,7 @@ namespace MvvmCross.Plugins.DownloadCache
                 }
                 catch (Exception ex)
                 {
-                    Mvx.Error(ex.Message);
+                    Log.Error(ex.Message);
                 }
             }
         }
@@ -221,13 +224,13 @@ namespace MvvmCross.Plugins.DownloadCache
                 {
                     var localImage = await ImageFromLocalFileAsync(filePath).ConfigureAwait(false);
                     if (localImage == null)
-                        MvxTrace.Warning("Failed to load local image for filePath {0}", filePath);
+                        Log.Warn("Failed to load local image for filePath {0}", filePath);
 
                     FireImageChanged(localImage);
                 }
                 catch (Exception ex)
                 {
-                    Mvx.Error(ex.Message);
+                    Log.Error(ex.Message);
                 }
             }
         }

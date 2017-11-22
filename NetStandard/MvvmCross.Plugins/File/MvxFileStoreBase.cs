@@ -14,12 +14,16 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Plugins.File
 {
     public abstract class MvxFileStoreBase
         : IMvxFileStore, IMvxFileStoreAsync
     {
+        public static IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<IMvxFileStore>();
+
         private const int BufferSize = 1024;
 
         #region IMvxFileStore Members

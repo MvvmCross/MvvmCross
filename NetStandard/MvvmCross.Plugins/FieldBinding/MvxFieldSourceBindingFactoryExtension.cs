@@ -8,12 +8,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using MvvmCross.FieldBinding;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Plugins.FieldBinding
 {
@@ -21,6 +21,8 @@ namespace MvvmCross.Plugins.FieldBinding
 	public class MvxFieldSourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension
     {
+        public static IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<IMvxSourceBindingFactoryExtension>();
+
         public bool TryCreateBinding(object source, MvxPropertyToken currentToken,
                                      List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)
         {
@@ -74,7 +76,7 @@ namespace MvvmCross.Plugins.FieldBinding
             var fieldValue = fieldInfo.GetValue(source) as INotifyChange;
             if (fieldValue == null)
             {
-                MvxBindingTrace.Warning("INotifyChange is null for {0}", propertyNameToken.PropertyName);
+                Log.Warn("INotifyChange is null for {0}", propertyNameToken.PropertyName);
                 result = null;
                 return false;
             }

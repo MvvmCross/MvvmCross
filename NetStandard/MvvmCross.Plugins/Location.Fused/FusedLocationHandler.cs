@@ -6,7 +6,6 @@ using Android.Gms.Location;
 using Android.OS;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.Location.Fused.Droid
 {
@@ -73,13 +72,13 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
             if (location != null)
                 _owner.OnLocationUpdated(location);
 
-            Mvx.TaggedTrace(MvxTraceLevel.Diagnostic, "Plugin.Location.Fused", "OnConnected");
+            Log.Trace(MvxTraceLevel.Diagnostic, "Plugin.Location.Fused", "OnConnected");
         }
 
 		public void OnConnectionSuspended(int cause)
 		{
             // disconnected
-            Mvx.TaggedTrace(MvxTraceLevel.Diagnostic, "Plugin.Location.Fused", "OnConnectionSuspended: {0}", cause);
+            Log.Trace(MvxTraceLevel.Diagnostic, "Plugin.Location.Fused", "OnConnectionSuspended: {0}", cause);
 		}
 
 		public void OnConnectionFailed(ConnectionResult result)

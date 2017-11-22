@@ -50,17 +50,6 @@ namespace MvvmCross.Mac.Platform
             get { return _applicationDelegate; }
         }
 
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new MvxDebugTrace();
-        }
-
-        protected override void InitializeDebugServices()
-        {
-            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
-            base.InitializeDebugServices();
-        }
-
         protected override IMvxPluginManager CreatePluginManager()
         {
             return new MvxPluginManager();

@@ -12,8 +12,9 @@ using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using MvvmCross.FieldBinding;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Plugins.FieldBinding
 {
@@ -21,6 +22,8 @@ namespace MvvmCross.Plugins.FieldBinding
 	public class MvxChainedNotifyChangeFieldSourceBinding
         : MvxNotifyChangeFieldSourceBinding
     {
+        internal static IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<MvxChainedNotifyChangeFieldSourceBinding>();
+
         public static bool DisableWarnIndexedValueBindingWarning = false;
 
         private readonly List<MvxPropertyToken> _childTokens;
@@ -49,7 +52,7 @@ namespace MvvmCross.Plugins.FieldBinding
             if (secondAsIndexed == null)
                 return;
 
-            MvxBindingTrace.Warning("Suspicious indexed binding seen to Value[] within INC binding - this may be OK, but is often a result of FluentBinding used on INC<T> - consider using INCList<TValue> or INCDictionary<TKey,TValue> instead - see https://github.com/slodge/MvvmCross/issues/353. This message can be disabled using DisableWarnIndexedValueBindingWarning");
+            Log.Warn("Suspicious indexed binding seen to Value[] within INC binding - this may be OK, but is often a result of FluentBinding used on INC<T> - consider using INCList<TValue> or INCDictionary<TKey,TValue> instead - see https://github.com/slodge/MvvmCross/issues/353. This message can be disabled using DisableWarnIndexedValueBindingWarning");
         }
 
         protected override void NotifyChangeOnChanged(object sender, EventArgs eventArgs)
@@ -117,8 +120,7 @@ namespace MvvmCross.Plugins.FieldBinding
         {
             if (_currentChildBinding == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "SetValue ignored in binding - target property path missing");
+                Log.Warn("SetValue ignored in binding - target property path missing");
                 return;
             }
 
