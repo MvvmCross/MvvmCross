@@ -1,7 +1,6 @@
 ﻿using System;
-using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Core.Platform.LogProviders
+namespace MvvmCross.Platform.Logging.LogProviders
 {
     internal delegate bool Logger(MvxLogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters);
 

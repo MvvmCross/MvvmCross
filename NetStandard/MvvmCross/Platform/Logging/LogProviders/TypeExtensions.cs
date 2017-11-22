@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace MvvmCross.Core.Platform.LogProviders
+namespace MvvmCross.Platform.Logging.LogProviders
 {
     internal static class TypeExtensions
     {
