@@ -49,10 +49,10 @@ namespace MvvmCross.Platform.Logging.LogProviders
             Type logMessageSeverityType = Type.GetType("Gibraltar.Agent.LogMessageSeverity, Gibraltar.Agent");
             Type logWriteModeType = Type.GetType("Gibraltar.Agent.LogWriteMode, Gibraltar.Agent");
 
-            MethodInfo method = logManagerType.GetMethodPortable(
-                "Write",
+            MethodInfo method = logManagerType.GetMethod(
+                "Write", new [] { 
                 logMessageSeverityType, typeof(string), typeof(int), typeof(Exception), typeof(bool),
-                logWriteModeType, typeof(string), typeof(string), typeof(string), typeof(string), typeof(object[]));
+                logWriteModeType, typeof(string), typeof(string), typeof(string), typeof(string), typeof(object[]) });
 
             var callDelegate = (WriteDelegate)method.CreateDelegate(typeof(WriteDelegate));
             return callDelegate;

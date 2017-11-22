@@ -55,7 +55,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
                 logNameParameter);
 
             //Logger.Write(new LogEntry(....));
-            MethodInfo writeLogEntryMethod = LoggerType.GetMethodPortable("Write", LogEntryType);
+            MethodInfo writeLogEntryMethod = LoggerType.GetMethod("Write", new [] { LogEntryType });
             var writeLogEntryExpression = Expression.Call(writeLogEntryMethod, memberInit);
 
             return Expression.Lambda<Action<string, string, int>>(
@@ -77,7 +77,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
                 logNameParameter);
 
             //Logger.Write(new LogEntry(....));
-            MethodInfo writeLogEntryMethod = LoggerType.GetMethodPortable("ShouldLog", LogEntryType);
+            MethodInfo writeLogEntryMethod = LoggerType.GetMethod("ShouldLog", new [] { LogEntryType });
             var writeLogEntryExpression = Expression.Call(writeLogEntryMethod, memberInit);
 
             return Expression.Lambda<Func<string, int, bool>>(
@@ -91,16 +91,16 @@ namespace MvvmCross.Platform.Logging.LogProviders
         {
             var entryType = LogEntryType;
             MemberInitExpression memberInit = Expression.MemberInit(Expression.New(entryType),
-                Expression.Bind(entryType.GetPropertyPortable("Message"), message),
-                Expression.Bind(entryType.GetPropertyPortable("Severity"), severityParameter),
+                Expression.Bind(entryType.GetProperty("Message"), message),
+                Expression.Bind(entryType.GetProperty("Severity"), severityParameter),
                 Expression.Bind(
-                    entryType.GetPropertyPortable("TimeStamp"),
-                    Expression.Property(null, typeof(DateTime).GetPropertyPortable("UtcNow"))),
+                    entryType.GetProperty("TimeStamp"),
+                    Expression.Property(null, typeof(DateTime).GetProperty("UtcNow"))),
                 Expression.Bind(
-                    entryType.GetPropertyPortable("Categories"),
+                    entryType.GetProperty("Categories"),
                     Expression.ListInit(
                         Expression.New(typeof(List<string>)),
-                        typeof(List<string>).GetMethodPortable("Add", typeof(string)),
+                        typeof(List<string>).GetMethod("Add", new [] { typeof(string) }),
                         logNameParameter)));
             return memberInit;
         }
@@ -121,17 +121,11 @@ namespace MvvmCross.Platform.Logging.LogProviders
             public bool Log(MvxLogLevel logLevel, Func<string> messageFunc, Exception exception, params object[] formatParameters)
             {
                 var severity = MapSeverity(logLevel);
-                if (messageFunc == null)
-                {
-                    return _shouldLog(_loggerName, severity);
-                }
-
+                if (messageFunc == null) return _shouldLog(_loggerName, severity);
 
                 messageFunc = LogMessageFormatter.SimulateStructuredLogging(messageFunc, formatParameters);
-                if (exception != null)
-                {
-                    return LogException(logLevel, messageFunc, exception);
-                }
+                if (exception != null) return LogException(logLevel, messageFunc, exception);
+
                 _writeLog(_loggerName, messageFunc(), severity);
                 return true;
             }
