@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Core.Navigation;
-using MvvmCross.Core.Platform.LogProviders;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
@@ -18,6 +17,7 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.IoC;
 using MvvmCross.Platform.Logging;
+using MvvmCross.Platform.Logging.LogProviders;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
 
