@@ -36,11 +36,6 @@ namespace MvvmCross.Wpf.Platform
             _presenter = CreateViewPresenter(root);
         }
 
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new MvxTraceTrace();
-        }
-
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
             var toReturn = CreateWpfViewsContainer();

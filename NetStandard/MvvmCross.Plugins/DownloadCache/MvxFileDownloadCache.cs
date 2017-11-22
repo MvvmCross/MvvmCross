@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.DownloadCache
@@ -21,6 +22,8 @@ namespace MvvmCross.Plugins.DownloadCache
 	public class MvxFileDownloadCache
         : MvxLockableObject, IMvxFileDownloadCache
     {
+        public static IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<IMvxFileDownloadCache>();
+
         private const string CacheIndexFileName = "_CacheIndex.txt";
         private static readonly TimeSpan PeriodSaveInterval = TimeSpan.FromSeconds(1.0);
 
@@ -39,7 +42,7 @@ namespace MvvmCross.Plugins.DownloadCache
 
                 _textConvertTried = true;
                 if (!Mvx.TryResolve<IMvxTextSerializer>(out _textConvert))
-                    Mvx.Warning("Persistent download cache will not be available - no text serializer available");
+                    Log.Warn("Persistent download cache will not be available - no text serializer available");
 
                 return _textConvert;
             }
@@ -171,7 +174,7 @@ namespace MvvmCross.Plugins.DownloadCache
             }
             catch (Exception exception)
             {
-                MvxTrace.Warning("Failed to read cache index {0} - reason {1}", _cacheFolder,
+                Log.Warn("Failed to read cache index {0} - reason {1}", _cacheFolder,
                                exception.ToLongString());
             }
 
@@ -228,7 +231,7 @@ namespace MvvmCross.Plugins.DownloadCache
             }
             catch (Exception exception)
             {
-                MvxTrace.Warning("Problem seen deleting file {0} problem {1}", nextFileToDelete,
+                Log.Warn("Problem seen deleting file {0} problem {1}", nextFileToDelete,
                                exception.ToLongString());
             }
         }
@@ -255,7 +258,7 @@ namespace MvvmCross.Plugins.DownloadCache
                 }
                 catch (Exception exception)
                 {
-                    MvxTrace.Warning("Failed to save cache index {0} - reason {1}", _cacheFolder,
+                    Log.Warn("Failed to save cache index {0} - reason {1}", _cacheFolder,
                                    exception.ToLongString());
                 }
             });

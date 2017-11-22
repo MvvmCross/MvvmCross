@@ -191,19 +191,16 @@ namespace MvvmCross.Platform
             ioc.CallbackWhenRegistered(type, action);
         }
 
-        [Obsolete("IMvxTrace is replaced by IMvxLogProvider and IMvxLog")]
         public static MvxException Exception(string message)
         {
             return new MvxException(message);
         }
 
-        [Obsolete("IMvxTrace is replaced by IMvxLogProvider and IMvxLog")]
         public static MvxException Exception(string message, params object[] args)
         {
             return new MvxException(message, args);
         }
 
-        [Obsolete("IMvxTrace is replaced by IMvxLogProvider and IMvxLog")]
         public static MvxException Exception(Exception innerException, string message, params object[] args)
         {
             return new MvxException(innerException, message, args);

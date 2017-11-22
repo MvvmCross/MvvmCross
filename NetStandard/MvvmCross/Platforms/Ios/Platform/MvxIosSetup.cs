@@ -52,11 +52,6 @@ namespace MvvmCross.iOS.Platform
 
         protected IMvxApplicationDelegate ApplicationDelegate => _applicationDelegate;
 
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new MvxDebugTrace();
-        }
-
         protected override IMvxPluginManager CreatePluginManager()
         {
             return new MvxPluginManager();
