@@ -2,7 +2,6 @@
 {
     public enum MvxLogProviderType
     {
-        None,
         Console,
         EntLib,
         Log4Net,
