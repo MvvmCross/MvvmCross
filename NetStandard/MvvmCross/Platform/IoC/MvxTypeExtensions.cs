@@ -24,7 +24,7 @@ namespace MvvmCross.Platform.IoC
             }
             catch (ReflectionTypeLoadException e)
             {
-                MvxLog.InternalLogInstance.Warn("ReflectionTypeLoadException masked during loading of {0} - error {1}",
+                MvxLog.Instance.Warn("ReflectionTypeLoadException masked during loading of {0} - error {1}",
                     assembly.FullName, e.ToLongString());
                 return new Type[0];
             }

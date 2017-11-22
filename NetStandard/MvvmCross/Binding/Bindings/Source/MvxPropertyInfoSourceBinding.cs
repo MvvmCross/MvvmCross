@@ -29,7 +29,7 @@ namespace MvvmCross.Binding.Bindings.Source
             if (Source == null)
             {
                 // this is not a Warning - as actually using a NULL source is a fairly common occurrence!
-                MvxLog.InternalLogInstance.Trace(
+                MvxLog.Instance.Trace(
                     "Unable to bind to source as it's null"
                     , _propertyName);
                 return;

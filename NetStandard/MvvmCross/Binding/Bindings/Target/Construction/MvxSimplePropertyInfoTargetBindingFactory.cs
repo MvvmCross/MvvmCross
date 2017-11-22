@@ -41,7 +41,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             var targetBinding = targetBindingCandidate as IMvxTargetBinding;
             if (targetBinding == null)
             {
-                MvxLog.InternalLogInstance.Warn("The TargetBinding created did not support IMvxTargetBinding");
+                MvxLog.Instance.Warn("The TargetBinding created did not support IMvxTargetBinding");
                 var disposable = targetBindingCandidate as IDisposable;
                 disposable?.Dispose();
             }

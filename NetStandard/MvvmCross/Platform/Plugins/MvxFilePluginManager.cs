@@ -51,7 +51,7 @@ namespace MvvmCross.Platform.Plugins
             foreach (var platformDllPostfix in _platformDllPostfixes)
             {
                 var assemblyName = GetPluginAssemblyNameFrom(toLoad, platformDllPostfix);
-                MvxLog.InternalLogInstance.Trace("Loading plugin assembly: {0}", assemblyName);
+                MvxLog.Instance.Trace("Loading plugin assembly: {0}", assemblyName);
 
                 try
                 {

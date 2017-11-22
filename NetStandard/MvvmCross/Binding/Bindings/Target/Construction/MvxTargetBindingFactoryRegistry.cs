@@ -34,7 +34,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         {
             if (string.IsNullOrEmpty(targetName))
             {
-                MvxLog.InternalLogInstance.Trace("Empty binding target passed to MvxTargetBindingFactoryRegistry");
+                MvxLog.Instance.Trace("Empty binding target passed to MvxTargetBindingFactoryRegistry");
                 binding = null;
                 return false;
             }

@@ -30,7 +30,7 @@ namespace MvvmCross.Binding.Parse.Binding
             }
             catch (Exception exception)
             {
-                MvxLog.InternalLogInstance.Error("Problem parsing binding {0}", exception.ToLongString());
+                MvxLog.Instance.Error("Problem parsing binding {0}", exception.ToLongString());
                 requestedDescription = null;
                 return false;
             }
@@ -56,7 +56,7 @@ namespace MvvmCross.Binding.Parse.Binding
             }
             catch (Exception exception)
             {
-                MvxLog.InternalLogInstance.Error("Problem parsing binding {0}", exception.ToLongString());
+                MvxLog.Instance.Error("Problem parsing binding {0}", exception.ToLongString());
                 requestedBindings = null;
                 return false;
             }

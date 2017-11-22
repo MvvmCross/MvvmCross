@@ -53,7 +53,7 @@ namespace MvvmCross.Platform.IoC
                 if (options.ThrowIfPropertyInjectionFails)
                     throw new MvxIoCResolveException("IoC property injection failed for {0} on {1}", injectableProperty.Name, toReturn.GetType().Name);
                 else
-                    MvxLog.InternalLogInstance.Warn("IoC property injection skipped for {0} on {1}", injectableProperty.Name, toReturn.GetType().Name);
+                    MvxLog.Instance.Warn("IoC property injection skipped for {0} on {1}", injectableProperty.Name, toReturn.GetType().Name);
             }
         }
 
@@ -76,7 +76,7 @@ namespace MvvmCross.Platform.IoC
                     break;
 
                 case MvxPropertyInjection.None:
-                    MvxLog.InternalLogInstance.Error("Internal error - should not call FindInjectableProperties with MvxPropertyInjection.None");
+                    MvxLog.Instance.Error("Internal error - should not call FindInjectableProperties with MvxPropertyInjection.None");
                     injectableProperties = new PropertyInfo[0];
                     break;
 

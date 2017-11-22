@@ -17,7 +17,7 @@ namespace MvvmCross.Platform.Core
 
         ~MvxApplicable()
         {
-            MvxLog.InternalLogInstance.Trace("Finaliser called on {0} - suggests that  Apply() was never called", GetType().Name);
+            MvxLog.Instance.Trace("Finaliser called on {0} - suggests that  Apply() was never called", GetType().Name);
         }
 
         protected void SuppressFinalizer()

@@ -29,7 +29,7 @@ namespace MvvmCross.Binding.Combiners
                     return TryEvaluateif (list[0], list[1], list[2], out value);
 
                 default:
-                    MvxLog.InternalLogInstance.Warn("Unexpected substep count of {0} in 'If' ValueCombiner", list.Count);
+                    MvxLog.Instance.Warn("Unexpected substep count of {0} in 'If' ValueCombiner", list.Count);
                     return base.TryGetValue(list, out value);
             }
         }

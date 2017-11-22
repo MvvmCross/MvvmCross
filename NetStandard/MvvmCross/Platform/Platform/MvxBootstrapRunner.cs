@@ -34,7 +34,7 @@ namespace MvvmCross.Platform.Platform
                 var bootstrapAction = toRun as IMvxBootstrapAction;
                 if (bootstrapAction == null)
                 {
-                    MvxLog.InternalLogInstance.Warn("Could not run startup task {0} - it's not a startup task", type.Name);
+                    MvxLog.Instance.Warn("Could not run startup task {0} - it's not a startup task", type.Name);
                     return;
                 }
 
@@ -43,7 +43,7 @@ namespace MvvmCross.Platform.Platform
             catch (Exception exception)
             {
                 // pokemon handling
-                MvxLog.InternalLogInstance.Warn("Error running startup task {0} - error {1}", type.Name, exception.ToLongString());
+                MvxLog.Instance.Warn("Error running startup task {0} - error {1}", type.Name, exception.ToLongString());
             }
         }
     }

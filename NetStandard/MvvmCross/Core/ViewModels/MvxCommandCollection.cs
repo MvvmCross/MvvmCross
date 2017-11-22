@@ -67,7 +67,7 @@ namespace MvvmCross.Core.ViewModels
             {
                 if (!_commandLookup.Any())
                 {
-                    MvxLog.InternalLogInstance.Trace("MvxCommandCollection is empty - did you forget to add your commands?");
+                    MvxLog.Instance.Trace("MvxCommandCollection is empty - did you forget to add your commands?");
                     return null;
                 }
 
@@ -90,7 +90,7 @@ namespace MvvmCross.Core.ViewModels
 
             if (lookup.ContainsKey(name))
             {
-                MvxLog.InternalLogInstance.Warn("Ignoring Commmand - it would overwrite the existing Command, name {0}", name);
+                MvxLog.Instance.Warn("Ignoring Commmand - it would overwrite the existing Command, name {0}", name);
                 return;
             }
             lookup[name] = command;

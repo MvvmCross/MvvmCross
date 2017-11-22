@@ -28,7 +28,7 @@ namespace MvvmCross.Core.ViewModels
 
         protected bool ChangePresentation(MvxPresentationHint hint)
         {
-            MvxLog.InternalLogInstance.Trace("Requesting presentation change");
+            MvxLog.Instance.Trace("Requesting presentation change");
             var viewDispatcher = ViewDispatcher;
             if (viewDispatcher != null)
                 return viewDispatcher.ChangePresentation(hint);
@@ -112,7 +112,7 @@ namespace MvvmCross.Core.ViewModels
 
         private bool ShowViewModelImpl(Type viewModelType, IMvxBundle parameterBundle, IMvxBundle presentationBundle)
         {
-            MvxLog.InternalLogInstance.Trace("Showing ViewModel {0}", viewModelType.Name);
+            MvxLog.Instance.Trace("Showing ViewModel {0}", viewModelType.Name);
             var viewDispatcher = ViewDispatcher;
             if (viewDispatcher != null)
                 return viewDispatcher.ShowViewModel(new MvxViewModelRequest(

@@ -26,7 +26,7 @@ namespace MvvmCross.Platform.Platform
 
         public void Dispose()
         {
-            MvxLog.InternalLogInstance.Trace(_tag, "{0} - {1}", Environment.TickCount - _startTickCount, _message);
+            MvxLog.Instance.Trace(_tag, "{0} - {1}", Environment.TickCount - _startTickCount, _message);
             GC.SuppressFinalize(this);
         }
 
