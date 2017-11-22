@@ -112,6 +112,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Platform\MvxTypedFormsAndroidSetup.cs" />
     <Compile Include="Views\MvxFormsAndroidViewPresenter.cs" />
     <Compile Include="Platform\MvxFormsAndroidSetup.cs" />
     <Compile Include="Views\MvxFormsAppCompatActivity.cs" />

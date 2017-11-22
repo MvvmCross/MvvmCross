@@ -39,6 +39,7 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Platform\MvxTypedFormsIosSetup.cs" />
     <Compile Include="Views\MvxPageRenderer.cs" />
     <Compile Include="Views\MvxImageViewRenderer.cs" />
     <Compile Include="Platform\MvxFormsIosSetup.cs" />

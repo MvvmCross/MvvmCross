@@ -16,11 +16,10 @@ using UIKit;
 
 namespace MvvmCross.Forms.iOS
 {
-    public abstract class MvxFormsIosSetup<TForms> : MvxIosSetup
-        where TForms : MvxFormsApplication, new()
+    public abstract class MvxFormsIosSetup : MvxIosSetup
     {
         private List<Assembly> _viewAssemblies;
-        private TForms _formsApplication;
+        private MvxFormsApplication _formsApplication;
 
         protected MvxFormsIosSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
@@ -37,7 +36,6 @@ namespace MvvmCross.Forms.iOS
             if (_viewAssemblies == null)
             {
                 _viewAssemblies = new List<Assembly>(base.GetViewAssemblies());
-                _viewAssemblies.Add(typeof(TForms).GetTypeInfo().Assembly);
             }
 
             return _viewAssemblies;
@@ -49,7 +47,7 @@ namespace MvvmCross.Forms.iOS
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public TForms FormsApplication
+        public MvxFormsApplication FormsApplication
         {
             get
             {
@@ -63,7 +61,7 @@ namespace MvvmCross.Forms.iOS
             }
         }
 
-        protected virtual TForms CreateFormsApplication() => new TForms();
+        protected abstract MvxFormsApplication CreateFormsApplication();
 
         protected override IMvxIosViewPresenter CreatePresenter()
         {

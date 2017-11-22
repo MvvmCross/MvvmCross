@@ -13,18 +13,16 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Plugins;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace MvvmCross.Forms.Droid.Platform
 {
-    public abstract class MvxFormsAndroidSetup<TForms> : MvxAndroidSetup
-        where TForms : MvxFormsApplication, new()
+    public abstract class MvxFormsAndroidSetup : MvxAndroidSetup
     {
         private List<Assembly> _viewAssemblies;
-        private TForms _formsApplication;
+        private MvxFormsApplication _formsApplication;
 
-        public MvxFormsAndroidSetup(Context applicationContext) : base(applicationContext)
+        protected MvxFormsAndroidSetup(Context applicationContext) : base(applicationContext)
         {
         }
 
@@ -32,7 +30,7 @@ namespace MvvmCross.Forms.Droid.Platform
         {
             if (_viewAssemblies == null)
             {
-                _viewAssemblies = new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(TForms).GetTypeInfo().Assembly }));
+                _viewAssemblies = new List<Assembly>(base.GetViewAssemblies());
             }
 
             return _viewAssemblies;
@@ -44,7 +42,7 @@ namespace MvvmCross.Forms.Droid.Platform
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public TForms FormsApplication
+        public MvxFormsApplication FormsApplication
         {
             get
             {
@@ -62,7 +60,7 @@ namespace MvvmCross.Forms.Droid.Platform
             }
         }
 
-        protected virtual TForms CreateFormsApplication() => new TForms();
+        protected abstract MvxFormsApplication CreateFormsApplication();
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
@@ -109,5 +107,5 @@ namespace MvvmCross.Forms.Droid.Platform
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "Activity", "Fragment", "Page");
         }
-    }
+    }    
 }
