@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace MvvmCross.Core.Platform.LogProviders
+namespace MvvmCross.Platform.Logging.LogProviders
 {
     internal static class LogMessageFormatter
     {
@@ -30,8 +30,7 @@ namespace MvvmCross.Core.Platform.LogProviders
             return () =>
             {
                 string targetMessage = messageBuilder();
-                IEnumerable<string> patternMatches;
-                return FormatStructuredMessage(targetMessage, formatParameters, out patternMatches);
+                return FormatStructuredMessage(targetMessage, formatParameters, out var patternMatches);
             };
         }
 
@@ -60,8 +59,7 @@ namespace MvvmCross.Core.Platform.LogProviders
             {
                 var arg = match.Groups["arg"].Value;
 
-                int notUsed;
-                if (!int.TryParse(arg, out notUsed))
+                if (!int.TryParse(arg, out var notUsed))
                 {
                     int argumentIndex = processedArguments.IndexOf(arg);
                     if (argumentIndex == -1)
