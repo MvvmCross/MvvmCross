@@ -8,7 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Platform.Plugins
@@ -109,7 +111,7 @@ namespace MvvmCross.Platform.Plugins
                 // pokemon 'catch them all' exception handling allowed here in this Try method
                 catch (Exception exception)
                 {
-                    Mvx.Warning("Failed to load plugin adaption {0} with exception {1}", typeof(T).FullName, exception.ToLongString());
+                    MvxSingleton<IMvxLog>.Instance.Warn("Failed to load plugin adaption {0} with exception {1}", typeof(T).FullName, exception.ToLongString());
                     return false;
                 }
             }

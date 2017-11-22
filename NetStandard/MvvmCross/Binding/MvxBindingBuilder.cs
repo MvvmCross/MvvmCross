@@ -9,6 +9,8 @@ using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding
 {
@@ -63,7 +65,7 @@ namespace MvvmCross.Binding
                 Mvx.RegisterSingleton<IMvxSourceBindingFactoryExtensionHost>(extensionHost);
             }
             else
-                Mvx.Trace("source binding factory extension host not provided - so no source extensions will be used");
+                MvxSingleton<IMvxLog>.Instance.Trace("source binding factory extension host not provided - so no source extensions will be used");
         }
 
         protected virtual void RegisterSourceBindingFactoryExtensions(IMvxSourceBindingFactoryExtensionHost extensionHost)

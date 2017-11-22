@@ -9,8 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Binding.Bindings.SourceSteps;
-using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Combiners
 {
@@ -19,7 +20,7 @@ namespace MvvmCross.Binding.Combiners
     {
         public override void SetValue(IEnumerable<IMvxSourceStep> steps, object value)
         {
-            Mvx.Trace("The Add Combiner does not support SetValue");
+            MvxSingleton<IMvxLog>.Instance.Trace("The Add Combiner does not support SetValue");
         }
 
         public override Type SourceType(IEnumerable<IMvxSourceStep> steps)
@@ -177,7 +178,7 @@ namespace MvvmCross.Binding.Combiners
                 CombinerFunc<object, object> combinerFunc;
                 if (!_combinerActions.TryGetValue(new TypeTuple(firstType, secondType), out combinerFunc))
                 {
-                    Mvx.Error("Unknown type pair in Pairwise combiner {0}, {1}", firstType, secondType);
+                    MvxSingleton<IMvxLog>.Instance.Error("Unknown type pair in Pairwise combiner {0}, {1}", firstType, secondType);
                     value = MvxBindingConstant.UnsetValue;
                     return true;
                 }

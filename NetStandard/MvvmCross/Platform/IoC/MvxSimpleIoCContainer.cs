@@ -11,6 +11,7 @@ using System.Linq;
 using System.Reflection;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Platform.IoC
 {
@@ -513,7 +514,7 @@ namespace MvvmCross.Platform.IoC
                     // the item already exists in the lookup table
                     // - this is "game over" for the IoC lookup
                     // - see https://github.com/MvvmCross/MvvmCross/issues/553
-                    Mvx.Error("IoC circular reference detected - cannot currently resolve {0}", type.Name);
+                    MvxSingleton<IMvxLog>.Instance.Error("IoC circular reference detected - cannot currently resolve {0}", type.Name);
                     resolved = type.CreateDefault();
                     return false;
                 }

@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Platform.Core
 {
@@ -16,7 +17,7 @@ namespace MvvmCross.Platform.Core
 
         ~MvxApplicable()
         {
-            Mvx.Trace("Finaliser called on {0} - suggests that  Apply() was never called", GetType().Name);
+            MvxSingleton<IMvxLog>.Instance.Trace("Finaliser called on {0} - suggests that  Apply() was never called", GetType().Name);
         }
 
         protected void SuppressFinalizer()

@@ -9,11 +9,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 using System.Globalization;
 using System.Reflection;
+using MvvmCross.Platform.Logging;
+using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Core.Platform
 {
@@ -135,7 +136,7 @@ namespace MvvmCross.Core.Platform
                 }
                 else
                 {
-                    Mvx.Trace(
+                    MvxSingleton<IMvxLog>.Instance.Trace(
                         "Skipping serialization of property {0} - don't know how to serialize type {1} - some answers on http://stackoverflow.com/questions/16524236/custom-types-in-navigation-parameters-in-v3",
                         propertyInfo.Property.Name,
                         propertyInfo.Property.PropertyType.Name);
