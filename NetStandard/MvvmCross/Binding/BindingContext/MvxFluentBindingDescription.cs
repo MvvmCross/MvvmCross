@@ -1,4 +1,4 @@
-// MvxFluentBindingDescription.cs
+﻿// MvxFluentBindingDescription.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,7 +14,6 @@ using MvvmCross.Binding.Combiners;
 using MvvmCross.Binding.ValueConverters;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.BindingContext
@@ -168,7 +167,7 @@ namespace MvvmCross.Binding.BindingContext
 
             if (newBindingDescription.Count > 1)
             {
-                MvxSingleton<IMvxLog>.Instance.Warn("More than one description found - only first will be used in {0}", bindingDescription);
+                MvxLog.InternalLogInstance.Warn("More than one description found - only first will be used in {0}", bindingDescription);
             }
 
             return FullyDescribed(newBindingDescription.FirstOrDefault());
@@ -318,7 +317,7 @@ namespace MvvmCross.Binding.BindingContext
 
             if (newBindingDescription.Count > 1)
             {
-                MvxSingleton<IMvxLog>.Instance.Warn("More than one description found - only first will be used in {0}", bindingDescription);
+                MvxLog.InternalLogInstance.Warn("More than one description found - only first will be used in {0}", bindingDescription);
             }
 
             return FullyDescribed(newBindingDescription.FirstOrDefault());

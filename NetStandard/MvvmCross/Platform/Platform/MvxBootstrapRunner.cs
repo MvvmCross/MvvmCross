@@ -1,4 +1,4 @@
-// MvxBootstrapRunner.cs
+﻿// MvxBootstrapRunner.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,7 +7,6 @@
 
 using System;
 using System.Reflection;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.IoC;
 using MvvmCross.Platform.Logging;
@@ -35,7 +34,7 @@ namespace MvvmCross.Platform.Platform
                 var bootstrapAction = toRun as IMvxBootstrapAction;
                 if (bootstrapAction == null)
                 {
-                    MvxSingleton<IMvxLog>.Instance.Warn("Could not run startup task {0} - it's not a startup task", type.Name);
+                    MvxLog.InternalLogInstance.Warn("Could not run startup task {0} - it's not a startup task", type.Name);
                     return;
                 }
 
@@ -44,7 +43,7 @@ namespace MvvmCross.Platform.Platform
             catch (Exception exception)
             {
                 // pokemon handling
-                MvxSingleton<IMvxLog>.Instance.Warn("Error running startup task {0} - error {1}", type.Name, exception.ToLongString());
+                MvxLog.InternalLogInstance.Warn("Error running startup task {0} - error {1}", type.Name, exception.ToLongString());
             }
         }
     }

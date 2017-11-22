@@ -1,4 +1,4 @@
-// MvxPairwiseValueCombiner.cs
+﻿// MvxPairwiseValueCombiner.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Combiners
@@ -20,7 +19,7 @@ namespace MvvmCross.Binding.Combiners
     {
         public override void SetValue(IEnumerable<IMvxSourceStep> steps, object value)
         {
-            MvxSingleton<IMvxLog>.Instance.Trace("The Add Combiner does not support SetValue");
+            MvxLog.InternalLogInstance.Trace("The Add Combiner does not support SetValue");
         }
 
         public override Type SourceType(IEnumerable<IMvxSourceStep> steps)
@@ -178,7 +177,7 @@ namespace MvvmCross.Binding.Combiners
                 CombinerFunc<object, object> combinerFunc;
                 if (!_combinerActions.TryGetValue(new TypeTuple(firstType, secondType), out combinerFunc))
                 {
-                    MvxSingleton<IMvxLog>.Instance.Error("Unknown type pair in Pairwise combiner {0}, {1}", firstType, secondType);
+                    MvxLog.InternalLogInstance.Error("Unknown type pair in Pairwise combiner {0}, {1}", firstType, secondType);
                     value = MvxBindingConstant.UnsetValue;
                     return true;
                 }

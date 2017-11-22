@@ -7,7 +7,6 @@
 
 using System;
 using System.Globalization;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Platform.Converters
@@ -37,7 +36,7 @@ namespace MvvmCross.Platform.Converters
             }
             catch (Exception e)
             {
-                MvxSingleton<IMvxLog>.Instance.Error("MvxValueConverter",
+                MvxLog.InternalLogInstance.Error("MvxValueConverter",
                     $"Failed to Convert from {typeof(TFrom)} to {typeof(TTo)} with Exception: {e}");
                 return MvxBindingConstant.UnsetValue;
             }
@@ -56,7 +55,7 @@ namespace MvvmCross.Platform.Converters
             }
             catch (Exception e)
             {
-                MvxSingleton<IMvxLog>.Instance.Error("MvxValueConverter",
+                MvxLog.InternalLogInstance.Error("MvxValueConverter",
                     $"Failed to ConvertBack from {typeof(TTo)} to {typeof(TFrom)} with Exception: {e}");
                 return MvxBindingConstant.UnsetValue;
             }
@@ -79,7 +78,7 @@ namespace MvvmCross.Platform.Converters
             }
             catch (Exception e)
             {
-                MvxSingleton<IMvxLog>.Instance.Error("MvxValueConverter",
+                MvxLog.InternalLogInstance.Error("MvxValueConverter",
                     $"Failed to Convert from {typeof(TFrom)} with Exception: {e}");
                 return MvxBindingConstant.UnsetValue;
             }
@@ -98,7 +97,7 @@ namespace MvvmCross.Platform.Converters
             }
             catch (Exception e)
             {
-                MvxSingleton<IMvxLog>.Instance.Error("MvxValueConverter",
+                MvxLog.InternalLogInstance.Error("MvxValueConverter",
                     $"Failed to ConvertBack to {typeof(TFrom)} with Exception: {e}");
                 return MvxBindingConstant.UnsetValue;
             }

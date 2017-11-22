@@ -9,7 +9,6 @@ using System;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.IoC;
 using MvvmCross.Platform.Logging;
 
@@ -47,7 +46,7 @@ namespace MvvmCross.Core.ViewModels
             if (typeByName != null)
                 return typeByName;
 
-            MvxSingleton<IMvxLog>.Instance.Trace("No view model association found for candidate view {0}", candidateType.Name);
+            MvxLog.InternalLogInstance.Trace("No view model association found for candidate view {0}", candidateType.Name);
             return null;
         }
 

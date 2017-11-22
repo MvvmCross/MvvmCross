@@ -1,4 +1,4 @@
-// MvxPropertyInfoSourceBinding.cs
+﻿// MvxPropertyInfoSourceBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,7 +9,6 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.WeakSubscription;
 
@@ -30,7 +29,7 @@ namespace MvvmCross.Binding.Bindings.Source
             if (Source == null)
             {
                 // this is not a Warning - as actually using a NULL source is a fairly common occurrence!
-                MvxSingleton<IMvxLog>.Instance.Trace(
+                MvxLog.InternalLogInstance.Trace(
                     "Unable to bind to source as it's null"
                     , _propertyName);
                 return;

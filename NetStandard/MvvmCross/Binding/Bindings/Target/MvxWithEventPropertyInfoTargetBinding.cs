@@ -8,7 +8,6 @@
 using System;
 using System.ComponentModel;
 using System.Reflection;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.WeakSubscription;
 
@@ -24,7 +23,7 @@ namespace MvvmCross.Binding.Bindings.Target
         {
             if (target == null)
             {
-                MvxSingleton<IMvxLog>.Instance.Error("Error - target is null in MvxWithEventPropertyInfoTargetBinding");
+                MvxLog.InternalLogInstance.Error("Error - target is null in MvxWithEventPropertyInfoTargetBinding");
                 return;
             }
         }
@@ -35,7 +34,7 @@ namespace MvvmCross.Binding.Bindings.Target
             var target = Target;
             if (target == null)
             {
-                MvxSingleton<IMvxLog>.Instance.Trace("Null weak reference target seen during OnValueChanged - unusual as usually Target is the sender of the value changed. Ignoring the value changed");
+                MvxLog.InternalLogInstance.Trace("Null weak reference target seen during OnValueChanged - unusual as usually Target is the sender of the value changed. Ignoring the value changed");
                 return;
             }
 
@@ -49,7 +48,7 @@ namespace MvvmCross.Binding.Bindings.Target
             var target = Target;
             if (target == null)
             {
-                MvxSingleton<IMvxLog>.Instance.Trace("Null weak reference target seen during OnPropertyChanged - unusual as usually Target is the sender of the value changed. Ignoring the value changed");
+                MvxLog.InternalLogInstance.Trace("Null weak reference target seen during OnPropertyChanged - unusual as usually Target is the sender of the value changed. Ignoring the value changed");
                 return;
             }
 
@@ -95,7 +94,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
             if (eventInfo.EventHandlerType != typeof(EventHandler))
             {
-                MvxSingleton<IMvxLog>.Instance.Trace(
+                MvxLog.InternalLogInstance.Trace(
                                       "Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
                                       viewType,
                                       eventName,
@@ -117,7 +116,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
             if (eventInfo.EventHandlerType != typeof(PropertyChangedEventHandler))
             {
-                MvxSingleton<IMvxLog>.Instance.Trace(
+                MvxLog.InternalLogInstance.Trace(
                                       "Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
                                       viewType,
                                       eventName,

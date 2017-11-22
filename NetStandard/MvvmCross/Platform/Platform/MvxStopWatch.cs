@@ -1,4 +1,4 @@
-// MvxStopWatch.cs
+﻿// MvxStopWatch.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Platform.Platform
@@ -27,7 +26,7 @@ namespace MvvmCross.Platform.Platform
 
         public void Dispose()
         {
-            MvxSingleton<IMvxLog>.Instance.Trace(_tag, "{0} - {1}", Environment.TickCount - _startTickCount, _message);
+            MvxLog.InternalLogInstance.Trace(_tag, "{0} - {1}", Environment.TickCount - _startTickCount, _message);
             GC.SuppressFinalize(this);
         }
 

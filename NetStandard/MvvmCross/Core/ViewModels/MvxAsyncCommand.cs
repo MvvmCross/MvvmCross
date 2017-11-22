@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.ExtensionMethods;
 using MvvmCross.Platform.Logging;
 
@@ -34,7 +33,7 @@ namespace MvvmCross.Core.ViewModels
             {
                 if (_cts == null)
                 {
-                    MvxSingleton<IMvxLog>.Instance.Warn("MvxAsyncCommand : Attempt to cancel a task that is not running");
+                    MvxLog.InternalLogInstance.Warn("MvxAsyncCommand : Attempt to cancel a task that is not running");
                 }
                 else
                 {
@@ -64,7 +63,7 @@ namespace MvvmCross.Core.ViewModels
             }
             catch (Exception e)
             {
-                MvxSingleton<IMvxLog>.Instance.Error("MvxAsyncCommand : exception executing task : ", e);
+                MvxLog.InternalLogInstance.Error("MvxAsyncCommand : exception executing task : ", e);
                 throw;
             }
         }
@@ -95,7 +94,7 @@ namespace MvvmCross.Core.ViewModels
                     }
                     else if (!_allowConcurrentExecutions)
                     {
-                        MvxSingleton<IMvxLog>.Instance.Trace("MvxAsyncCommand : execute ignored, already running.");
+                        MvxLog.InternalLogInstance.Trace("MvxAsyncCommand : execute ignored, already running.");
                         return;
                     }
                     _concurrentExecutions++;
@@ -115,7 +114,7 @@ namespace MvvmCross.Core.ViewModels
                     }
                     catch (OperationCanceledException e)
                     {
-                        MvxSingleton<IMvxLog>.Instance.Trace("MvxAsyncCommand : OperationCanceledException");
+                        MvxLog.InternalLogInstance.Trace("MvxAsyncCommand : OperationCanceledException");
                         //Rethrow if the exception does not comes from the current cancellation token
                         if (!hideCanceledException || e.CancellationToken != CancelToken)
                         {
@@ -148,7 +147,7 @@ namespace MvvmCross.Core.ViewModels
         {
             if (_cts == null)
             {
-                MvxSingleton<IMvxLog>.Instance.Error("MvxAsyncCommand : Unexpected ClearCancellationTokenSource, no token available!");
+                MvxLog.InternalLogInstance.Error("MvxAsyncCommand : Unexpected ClearCancellationTokenSource, no token available!");
             }
             else
             {
@@ -161,7 +160,7 @@ namespace MvvmCross.Core.ViewModels
         {
             if (_cts != null)
             {
-                MvxSingleton<IMvxLog>.Instance.Error("MvxAsyncCommand : Unexpected InitCancellationTokenSource, a token is already available!");
+                MvxLog.InternalLogInstance.Error("MvxAsyncCommand : Unexpected InitCancellationTokenSource, a token is already available!");
             }
             _cts = new CancellationTokenSource();
         }

@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 
@@ -41,21 +40,21 @@ namespace MvvmCross.Platform.Plugins
             var field = type.GetField("Instance", BindingFlags.Static | BindingFlags.Public);
             if (field == null)
             {
-                MvxSingleton<IMvxLog>.Instance.Trace("Plugin Instance not found - will not autoload {0}", type.FullName);
+                MvxLog.InternalLogInstance.Trace("Plugin Instance not found - will not autoload {0}", type.FullName);
                 return;
             }
 
             var instance = field.GetValue(null);
             if (instance == null)
             {
-                MvxSingleton<IMvxLog>.Instance.Trace("Plugin Instance was empty - will not autoload {0}", type.FullName);
+                MvxLog.InternalLogInstance.Trace("Plugin Instance was empty - will not autoload {0}", type.FullName);
                 return;
             }
 
             var pluginLoader = instance as IMvxPluginLoader;
             if (pluginLoader == null)
             {
-                MvxSingleton<IMvxLog>.Instance.Trace("Plugin Instance was not a loader - will not autoload {0}", type.FullName);
+                MvxLog.InternalLogInstance.Trace("Plugin Instance was not a loader - will not autoload {0}", type.FullName);
                 return;
             }
 
@@ -66,12 +65,12 @@ namespace MvvmCross.Platform.Plugins
         {
             if (pluginLoader is IMvxConfigurablePluginLoader configurable)
             {
-                MvxSingleton<IMvxLog>.Instance.Trace("Configuring Plugin Loader for {0}", pluginLoader.GetType().FullName);
+                MvxLog.InternalLogInstance.Trace("Configuring Plugin Loader for {0}", pluginLoader.GetType().FullName);
                 var configuration = ConfigurationFor(pluginLoader.GetType());
                 configurable.Configure(configuration);
             }
 
-            MvxSingleton<IMvxLog>.Instance.Trace("Ensuring Plugin is loaded for {0}", pluginLoader.GetType().FullName);
+            MvxLog.InternalLogInstance.Trace("Ensuring Plugin is loaded for {0}", pluginLoader.GetType().FullName);
             pluginLoader.EnsureLoaded();
         }
 
@@ -109,7 +108,7 @@ namespace MvvmCross.Platform.Plugins
                 // pokemon 'catch them all' exception handling allowed here in this Try method
                 catch (Exception exception)
                 {
-                    MvxSingleton<IMvxLog>.Instance.Warn("Failed to load plugin adaption {0} with exception {1}", typeof(T).FullName, exception.ToLongString());
+                    MvxLog.InternalLogInstance.Warn("Failed to load plugin adaption {0} with exception {1}", typeof(T).FullName, exception.ToLongString());
                     return false;
                 }
             }

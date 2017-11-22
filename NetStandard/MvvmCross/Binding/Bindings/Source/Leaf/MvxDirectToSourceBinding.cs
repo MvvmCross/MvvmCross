@@ -1,4 +1,4 @@
-// MvxDirectToSourceBinding.cs
+﻿// MvxDirectToSourceBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Bindings.Source.Leaf
@@ -22,7 +21,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
 
         public override void SetValue(object value)
         {
-            MvxSingleton<IMvxLog>.Instance.Warn("ToSource binding is not available for direct pathed source bindings");
+            MvxLog.InternalLogInstance.Warn("ToSource binding is not available for direct pathed source bindings");
         }
 
         public override object GetValue()

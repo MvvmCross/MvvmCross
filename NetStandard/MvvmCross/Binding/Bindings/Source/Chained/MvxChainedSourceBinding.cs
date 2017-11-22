@@ -1,4 +1,4 @@
-// MvxChainedSourceBinding.cs
+﻿// MvxChainedSourceBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,9 +11,7 @@ using System.Reflection;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Bindings.Source.Chained
 {
@@ -114,7 +112,7 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
         {
             if (_currentChildBinding == null)
             {
-                MvxSingleton<IMvxLog>.Instance.Warn("SetValue ignored in binding - target property path missing");
+                MvxLog.InternalLogInstance.Warn("SetValue ignored in binding - target property path missing");
                 return;
             }
 

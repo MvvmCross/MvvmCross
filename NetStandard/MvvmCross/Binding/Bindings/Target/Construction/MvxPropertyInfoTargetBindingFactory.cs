@@ -1,4 +1,4 @@
-// MvxPropertyInfoTargetBindingFactory.cs
+﻿// MvxPropertyInfoTargetBindingFactory.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -48,7 +48,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
                 }
                 catch (Exception exception)
                 {
-                    MvxSingleton<IMvxLog>.Instance.Error(
+                    MvxLog.InternalLogInstance.Error(
                         "Problem creating target binding for {0} - exception {1}", _targetType.Name,
                         exception.ToString());
                 }

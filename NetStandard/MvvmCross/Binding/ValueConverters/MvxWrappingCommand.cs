@@ -1,4 +1,4 @@
-// MvxWrappingCommand.cs
+﻿// MvxWrappingCommand.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,7 +8,6 @@
 using System;
 using System.Reflection;
 using System.Windows.Input;
-using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.WeakSubscription;
 
@@ -46,7 +45,7 @@ namespace MvvmCross.Binding.ValueConverters
                 return false;
 
             if (parameter != null)
-                MvxSingleton<IMvxLog>.Instance.Warn("Non-null parameter will be ignored in MvxWrappingCommand.CanExecute");
+                MvxLog.InternalLogInstance.Warn("Non-null parameter will be ignored in MvxWrappingCommand.CanExecute");
 
             return _wrapped.CanExecute(_commandParameterOverride);
         }
@@ -57,7 +56,7 @@ namespace MvvmCross.Binding.ValueConverters
                 return;
 
             if (parameter != null)
-                MvxSingleton<IMvxLog>.Instance.Warn("Non-null parameter overridden in MvxWrappingCommand");
+                MvxLog.InternalLogInstance.Warn("Non-null parameter overridden in MvxWrappingCommand");
             _wrapped.Execute(_commandParameterOverride);
         }
 

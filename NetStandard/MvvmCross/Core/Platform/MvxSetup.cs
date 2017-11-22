@@ -215,6 +215,7 @@ namespace MvvmCross.Core.Platform
                 Mvx.RegisterSingleton(logProvider);
                 SetupLog = logProvider.GetLogFor<MvxSetup>();
                 var globalLog = logProvider.GetLogFor<MvxLog>();
+                MvxLog.InternalLogInstance = globalLog;
                 Mvx.RegisterSingleton(globalLog);
             }
         }
