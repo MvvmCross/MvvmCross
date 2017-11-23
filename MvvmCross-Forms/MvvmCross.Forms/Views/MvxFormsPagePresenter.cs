@@ -298,30 +298,28 @@ namespace MvvmCross.Forms.Views
                 {
                     //Assume we have to create the host
                     masterDetailHost = new MvxMasterDetailPage();
-                    //if (attribute.Position == MasterDetailPosition.Master)
-                    //    masterDetailHost.Master = page;
-                    //else
-                    //    masterDetailHost.Master = new ContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) };
-                    //if (attribute.Position == MasterDetailPosition.Detail)
-                    //    masterDetailHost.Detail = page;
-                    //else
-                    //    masterDetailHost.Detail = new NavigationPage(new ContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) });
 
-                    //if (attribute.Position == MasterDetailPosition.Master)
-                    masterDetailHost.Master = new ContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) };
-                    //if (attribute.Position == MasterDetailPosition.Detail)
-                    masterDetailHost.Detail = new ContentPage();//new ContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) });
+                    if (!string.IsNullOrWhiteSpace(attribute.Icon))
+                    {
+                        masterDetailHost.Icon = attribute.Icon;
+                    }
 
-
+                    masterDetailHost.Master = new ContentPage() { Title = !string.IsNullOrWhiteSpace(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) };
+                    masterDetailHost.Detail = new ContentPage();
+                    
                     var masterDetailRootAttribute = new MvxMasterDetailPagePresentationAttribute { Position = MasterDetailPosition.Root, WrapInNavigationPage = attribute.WrapInNavigationPage, NoHistory = attribute.NoHistory };
 
                     PushOrReplacePage(FormsApplication.MainPage, masterDetailHost, masterDetailRootAttribute);
                 }
 
                 if (attribute.Position == MasterDetailPosition.Master)
+                {
                     PushOrReplacePage(masterDetailHost.Master, page, attribute);
+                }
                 else
+                {
                     PushOrReplacePage(masterDetailHost.Detail, page, attribute);
+                }
             }
         }
 

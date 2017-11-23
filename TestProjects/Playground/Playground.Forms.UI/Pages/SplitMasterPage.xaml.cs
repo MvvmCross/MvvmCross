@@ -14,5 +14,14 @@ namespace Playground.Forms.Pages
         {
             InitializeComponent();
         }
+
+        public void ToggleClicked(object sender, EventArgs e)
+        {
+            if(Parent is MasterDetailPage md)
+            {
+                md.MasterBehavior = MasterBehavior.Popover;
+                md.IsPresented = !md.IsPresented;
+            }
+        }
     }
 }

@@ -95,8 +95,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EmptyVoidLog.cs" />
-    <Compile Include="EmptyVoidLogProvider.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -110,6 +108,7 @@
     <None Include="Playground.Forms.Uwp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="hamburger.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
