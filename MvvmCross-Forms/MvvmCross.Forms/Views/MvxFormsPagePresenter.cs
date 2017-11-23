@@ -82,8 +82,9 @@ namespace MvvmCross.Forms.Views
         private Page CloseAndCreatePage(Type view,
             MvxViewModelRequest request,
             MvxPagePresentationAttribute attribute,
-            bool closeModal = false,
-            bool closePlatformViews = true)
+            bool closeModal = true,
+            bool closePlatformViews = true,
+            bool showPlatformViews = true)
         {
             if (closeModal)
             {
@@ -93,6 +94,11 @@ namespace MvvmCross.Forms.Views
             if (closePlatformViews)
             {
                 ClosePlatformViews?.Invoke();
+            }
+
+            if (showPlatformViews)
+            {
+                ShowPlatformHost?.Invoke(attribute.HostViewModelType);
             }
 
             var page = CreatePage(view, request, attribute);
@@ -168,11 +174,7 @@ namespace MvvmCross.Forms.Views
             MvxCarouselPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            CloseAllModals();
-            ClosePlatformViews?.Invoke();
-            ShowPlatformHost?.Invoke(attribute.HostViewModelType);
-
-            var page = CreatePage(view, request, attribute);
+            var page = CloseAndCreatePage(view, request, attribute);
 
             if (attribute.Position == CarouselPosition.Root)
             {
@@ -253,10 +255,7 @@ namespace MvvmCross.Forms.Views
             MvxContentPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            ClosePlatformViews?.Invoke();
-            ShowPlatformHost?.Invoke(attribute.HostViewModelType);
-
-            var page = CreatePage(view, request, attribute);
+            var page = CloseAndCreatePage(view, request, attribute);
 
             PushOrReplacePage(FormsApplication.MainPage, page, attribute);
         }
@@ -271,11 +270,7 @@ namespace MvvmCross.Forms.Views
             MvxMasterDetailPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            CloseAllModals();
-            ClosePlatformViews?.Invoke();
-            ShowPlatformHost?.Invoke(attribute.HostViewModelType);
-
-            var page = CreatePage(view, request, attribute);
+            var page = CloseAndCreatePage(view, request, attribute);
 
             if (attribute.Position == MasterDetailPosition.Root)
             {
@@ -306,7 +301,7 @@ namespace MvvmCross.Forms.Views
 
                     masterDetailHost.Master = new ContentPage() { Title = !string.IsNullOrWhiteSpace(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) };
                     masterDetailHost.Detail = new ContentPage();
-                    
+
                     var masterDetailRootAttribute = new MvxMasterDetailPagePresentationAttribute { Position = MasterDetailPosition.Root, WrapInNavigationPage = attribute.WrapInNavigationPage, NoHistory = attribute.NoHistory };
 
                     PushOrReplacePage(FormsApplication.MainPage, masterDetailHost, masterDetailRootAttribute);
@@ -343,20 +338,33 @@ namespace MvvmCross.Forms.Views
             MvxModalPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            ClosePlatformViews?.Invoke();
-            ShowPlatformHost?.Invoke(attribute.HostViewModelType);
-
-            var page = CreatePage(view, request, attribute);
+            var page = CloseAndCreatePage(view, request, attribute, closeModal: false);
 
             if (FormsApplication.MainPage == null)
                 FormsApplication.MainPage = new NavigationPage(new ContentPage() { Title = nameof(ContentPage) });
 
+            var last = FormsApplication.MainPage.Navigation.ModalStack.LastOrDefault();
+
             if (attribute.WrapInNavigationPage)
             {
-                page = new NavigationPage(page);
+                if (last is NavigationPage navPage)
+                {
+                    // There's already a navigation page, so use existing logic
+                    // to work out whether the nav stack should be cleared (eg No History)
+                    PushOrReplacePage(navPage, page, attribute);
+                }
+                else
+                {
+                    // Either last isn't a nav page, or there is no last page
+                    // So, wrap the current page in a nav page and push onto stack
+                    FormsApplication.MainPage.Navigation.PushModalAsync(new NavigationPage(page));
+                }
             }
-
-            FormsApplication.MainPage.Navigation.PushModalAsync(page, attribute.Animated);
+            else
+            {
+                // No navigation page required, so just push onto modal stack
+                FormsApplication.MainPage.Navigation.PushModalAsync(page, attribute.Animated);
+            }
         }
 
         public virtual bool CloseModal(IMvxViewModel viewModel, MvxModalPresentationAttribute attribute)
@@ -420,7 +428,16 @@ namespace MvvmCross.Forms.Views
 
         private bool PopModal(MvxPagePresentationAttribute attribute)
         {
-            FormsApplication.MainPage.Navigation.PopModalAsync(attribute.Animated);
+            var last = FormsApplication.MainPage.Navigation.ModalStack.LastOrDefault();
+            if (last is NavigationPage navPage && navPage.Navigation.NavigationStack.Count > 1)
+            {
+                navPage.Navigation.PopAsync();
+            }
+            else
+            {
+                FormsApplication.MainPage.Navigation.PopModalAsync(attribute.Animated);
+            }
+
             return true;
         }
 
@@ -429,10 +446,7 @@ namespace MvvmCross.Forms.Views
             MvxNavigationPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            ClosePlatformViews?.Invoke();
-            ShowPlatformHost?.Invoke(attribute.HostViewModelType);
-
-            var page = CreatePage(view, request, attribute);
+            var page = CloseAndCreatePage(view, request, attribute);
 
             if (attribute.NoHistory)
                 FormsApplication.MainPage = page;
@@ -450,11 +464,7 @@ namespace MvvmCross.Forms.Views
             MvxTabbedPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            CloseAllModals();
-            ClosePlatformViews?.Invoke();
-            ShowPlatformHost?.Invoke(attribute.HostViewModelType);
-
-            var page = CreatePage(view, request, attribute);
+            var page = CloseAndCreatePage(view, request, attribute);
 
             if (attribute.Position == TabbedPosition.Root)
             {
@@ -526,36 +536,12 @@ namespace MvvmCross.Forms.Views
             }
         }
 
-        ///// <summary>
-        ///// If the attribute defines a navigation id, then use it to locate an existing
-        ///// navigation page registered with that id. Push the new page to that navigation
-        ///// </summary>
-        //public virtual void PushOrReplaceNavigationPage(Page rootPage, Page page, MvxPagePresentationAttribute attribute)
-        //{
-        //    if (attribute.WrapInNavigationPage && !string.IsNullOrWhiteSpace(attribute.NavigationId))
-        //    {
-        //        if (NavigationPages.TryGetValue(attribute.NavigationId, out var existingNavPage))
-        //        {
-        //            PushOrReplacePage(existingNavPage, page, attribute);
-        //            return;
-        //        }
-        //    }
-
-        //    PushOrReplacePage(rootPage, page, attribute);
-        //}
-
         public virtual void PushOrReplacePage(Page rootPage, Page page, MvxPagePresentationAttribute attribute)
         {
             // Make sure we always have a rootPage
             if (rootPage == null)
             {
                 rootPage = FormsApplication.MainPage;
-            }
-
-            var modal = rootPage?.Navigation?.ModalStack?.LastOrDefault();
-            if (modal != null)
-            {
-                rootPage = modal;
             }
 
             var navigationRootPage = rootPage as NavigationPage;
