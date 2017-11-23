@@ -60,8 +60,13 @@ namespace MvvmCross.Forms.Droid.Views
         {
             var action = GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute);
 
-            if (FormsApplication.MainPage == null && attribute is MvxPagePresentationAttribute && CurrentActivity is MvxFormsAppCompatActivity activity)
-                activity.InitializeForms(null);
+            if (FormsApplication.MainPage == null && attribute is MvxPagePresentationAttribute)
+            {
+                if(CurrentActivity is MvxFormsAppCompatActivity appCompatActivity)
+                    appCompatActivity.InitializeForms(null);
+                else if(CurrentActivity is MvxFormsApplicationActivity activity)
+                    activity.InitializeForms(null);
+            }
 
             action.ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
