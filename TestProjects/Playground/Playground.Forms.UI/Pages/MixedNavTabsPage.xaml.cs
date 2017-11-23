@@ -6,7 +6,7 @@ using Xamarin.Forms.Xaml;
 namespace Playground.Forms.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-    [MvxMasterDetailPagePresentation(Position = MasterDetailPosition.Detail)]
+    [MvxMasterDetailPagePresentation(Position = MasterDetailPosition.Detail, NoHistory = true)]
     public partial class MixedNavTabsPage : MvxTabbedPage<MixedNavTabsViewModel>
 	{
 		public MixedNavTabsPage ()
