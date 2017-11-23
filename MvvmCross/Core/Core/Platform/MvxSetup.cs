@@ -241,8 +241,6 @@ namespace MvvmCross.Core.Platform
                     return new NLogLogProvider();
                 case MvxLogProviderType.Serilog:
                     return new SerilogLogProvider();
-                case MvxLogProviderType.None:
-                    return new NullLogProvider();
                 default:
                     return null;
             }
