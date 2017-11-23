@@ -1,5 +1,6 @@
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using Playground.Core.Models;
 
 namespace Playground.Core.ViewModels
 {
@@ -11,9 +12,11 @@ namespace Playground.Core.ViewModels
         {
             _navigationService = navigationService;
 
-            ShowModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalViewModel>());
+            ShowModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalNavViewModel>());
+            ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel, SampleModel>(new SampleModel { Message = "Hey", Value = 1.23m }));
         }
 
-        public IMvxAsyncCommand ShowModalCommand { get; private set; } 
+        public IMvxAsyncCommand ShowModalCommand { get; private set; }
+        public IMvxAsyncCommand ShowChildCommand { get; private set; }
     }
 }

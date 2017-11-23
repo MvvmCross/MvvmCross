@@ -1,17 +1,14 @@
 using Android.Content;
-using MvvmCross.Droid.Platform;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Droid.Views;
-using MvvmCross.Forms.Droid;
 using MvvmCross.Forms.Droid.Platform;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Platform.Logging;
-using Serilog;
-using System.Linq;
-using System.Collections.Generic;
-using System.Reflection;
+using MvvmCross.Platform.Platform;
 using MvvmCross.Plugins.Json;
+using Serilog;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Playground.Forms.Droid
 {
@@ -33,16 +30,6 @@ namespace Playground.Forms.Droid
             return base.CreateLogProvider();
         }
 
-        protected override MvxFormsApplication CreateFormsApplication()
-        {
-            return new FormsApp();
-        }
-
-        protected override IMvxApplication CreateApp()
-        {
-            return new Core.App();
-        }
-
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();
@@ -50,10 +37,12 @@ namespace Playground.Forms.Droid
 
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
-            return base.GetViewAssemblies().Union(new[] { typeof(FormsApp).GetTypeInfo().Assembly });
+            return new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(FormsApp).GetTypeInfo().Assembly }));
         }
 
-        protected override void PerformBootstrapActions()
+        protected override MvxFormsApplication CreateFormsApplication() => new FormsApp();
+
+        protected override IMvxApplication CreateApp() => new Core.App(); protected override void PerformBootstrapActions()
         {
             base.PerformBootstrapActions();
 

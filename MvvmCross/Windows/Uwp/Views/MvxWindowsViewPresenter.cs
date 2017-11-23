@@ -66,49 +66,12 @@ namespace MvvmCross.Uwp.Views
             return new MvxPagePresentationAttribute();
         }
 
-        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, Type viewType)
-        {
-            if (viewType != null && viewType.GetInterfaces().Contains(typeof(IMvxOverridePresentationAttribute)))
-            {
-                var viewInstance = Activator.CreateInstance(viewType) as IMvxOverridePresentationAttribute;
-                var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute();
-                if (presentationAttribute == null)
-                {
-                    MvxTrace.Warning("Override PresentationAttribute null. Falling back to existing attribute.");
-                }
-                else
-                {
-                    if (presentationAttribute.ViewType == null)
-                        presentationAttribute.ViewType = viewType;
-
-                    if (presentationAttribute.ViewModelType == null)
-                        presentationAttribute.ViewModelType = viewModelType;
-
-                    return presentationAttribute;
-                }
-            }
-
-            return null;
-        }
-
+        
         public override void Show(MvxViewModelRequest request)
         {
             GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
-
-        public override void ChangePresentation(MvxPresentationHint hint)
-        {
-            if (HandlePresentationChange(hint)) return;
-
-            if (hint is MvxClosePresentationHint)
-            {
-                Close((hint as MvxClosePresentationHint).ViewModelToClose);
-                return;
-            }
-
-            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
-        }
-
+        
         public override void Close(IMvxViewModel viewModel)
         {
             GetPresentationAttributeAction(viewModel.GetType(), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);

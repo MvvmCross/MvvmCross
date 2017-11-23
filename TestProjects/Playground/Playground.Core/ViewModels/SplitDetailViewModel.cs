@@ -1,4 +1,4 @@
-﻿using MvvmCross.Core.Navigation;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 
 namespace Playground.Core.ViewModels
@@ -11,9 +11,14 @@ namespace Playground.Core.ViewModels
         {
             _navigationService = navigationService;
 
-            ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel>());
+            ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SplitDetailNavViewModel>());
         }
 
         public IMvxAsyncCommand ShowChildCommand { get; private set; }
+
+        public override void ViewAppeared()
+        {
+            base.ViewAppeared();
+        }
     }
 }

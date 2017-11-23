@@ -4,7 +4,7 @@
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Tomasz Cielecki, @cheesebaron, mvxplugins@ostebaronen.dk
-// Contributor - Marcos CobeÒa Mori·n, @CobenaMarcos, marcoscm@me.com
+// Contributor - Marcos Cobe√±a Mori√°n, @CobenaMarcos, marcoscm@me.com
 
 using System;
 using System.Collections.Generic;
@@ -27,11 +27,7 @@ namespace MvvmCross.Forms.iOS.Presenters
         : MvxIosViewPresenter
         , IMvxFormsViewPresenter
     {
-        public MvxFormsIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window) : base(applicationDelegate, window)
-        {
-        }
-
-        public MvxFormsIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window, MvxFormsApplication formsApplication) : this(applicationDelegate, window)
+        public MvxFormsIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window, MvxFormsApplication formsApplication) : base (applicationDelegate, window)
         {
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
         }
@@ -43,16 +39,16 @@ namespace MvvmCross.Forms.iOS.Presenters
             set { _formsApplication = value; }
         }
 
-        private MvxFormsPagePresenter _formsPagePresenter;
-        public virtual MvxFormsPagePresenter FormsPagePresenter
+        private IMvxFormsPagePresenter _formsPagePresenter;
+        public virtual IMvxFormsPagePresenter FormsPagePresenter
         {
             get
             {
                 if (_formsPagePresenter == null)
                 {
-                    _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder);
+                    _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder, attributeTypesToActionsDictionary: AttributeTypesToActionsDictionary);
                     _formsPagePresenter.ClosePlatformViews = ClosePlatformViews;
-                    Mvx.RegisterSingleton<IMvxFormsPagePresenter>(_formsPagePresenter);
+                    Mvx.RegisterSingleton(_formsPagePresenter);
                 }
                 return _formsPagePresenter;
             }
@@ -74,43 +70,13 @@ namespace MvvmCross.Forms.iOS.Presenters
         {
             base.RegisterAttributeTypes();
 
-            FormsPagePresenter.RegisterAttributeTypes(AttributeTypesToActionsDictionary);
+            FormsPagePresenter.RegisterAttributeTypes();
         }
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
-            if (viewType.IsSubclassOf(typeof(ContentPage)))
-            {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-                               $"Assuming ContentPage presentation");
-                return new MvxContentPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
-            }
-            if (viewType.IsSubclassOf(typeof(CarouselPage)))
-            {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-                               $"Assuming CarouselPage presentation");
-                return new MvxCarouselPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
-            }
-            if (viewType.IsSubclassOf(typeof(TabbedPage)))
-            {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-                               $"Assuming TabbedPage presentation");
-                return new MvxTabbedPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
-            }
-            if (viewType.IsSubclassOf(typeof(MasterDetailPage)))
-            {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-                               $"Assuming MasterDetailPage presentation");
-                return new MvxMasterDetailPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
-            }
-            if (viewType.IsSubclassOf(typeof(NavigationPage)))
-            {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-                               $"Assuming NavigationPage presentation");
-                return new MvxNavigationPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
-            }
-
-            return base.CreatePresentationAttribute(viewModelType, viewType);
+            var presentationAttribute = FormsPagePresenter.CreatePresentationAttribute(viewModelType, viewType);
+            return presentationAttribute ?? base.CreatePresentationAttribute(viewModelType, viewType);
         }
 
         public virtual bool ClosePlatformViews()

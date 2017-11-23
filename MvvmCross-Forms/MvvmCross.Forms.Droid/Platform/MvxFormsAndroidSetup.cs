@@ -1,21 +1,19 @@
-using System.Collections.Generic;
-using System.Reflection;
 using Android.Content;
 using MvvmCross.Binding;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Views;
-using MvvmCross.Forms.Bindings;
-using MvvmCross.Forms.Platform;
+using MvvmCross.Forms.Droid.Bindings;
 using MvvmCross.Forms.Droid.Views;
+using MvvmCross.Forms.Platform;
+using MvvmCross.Forms.Views;
 using MvvmCross.Localization;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
-using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Plugins;
-using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Forms.Bindings.Target;
-using MvvmCross.Forms.Views;
-using MvvmCross.Forms.Droid.Bindings;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace MvvmCross.Forms.Droid.Platform
 {
@@ -24,14 +22,16 @@ namespace MvvmCross.Forms.Droid.Platform
         private List<Assembly> _viewAssemblies;
         private MvxFormsApplication _formsApplication;
 
-        public MvxFormsAndroidSetup(Context applicationContext) : base(applicationContext)
+        protected MvxFormsAndroidSetup(Context applicationContext) : base(applicationContext)
         {
         }
 
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
             if (_viewAssemblies == null)
+            {
                 _viewAssemblies = new List<Assembly>(base.GetViewAssemblies());
+            }
 
             return _viewAssemblies;
         }
@@ -49,15 +49,18 @@ namespace MvvmCross.Forms.Droid.Platform
                 if (!Xamarin.Forms.Forms.IsInitialized)
                 {
                     var activity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity ?? ApplicationContext;
-                    Xamarin.Forms.Forms.Init(activity, null);
+                    Xamarin.Forms.Forms.Init(activity, null, activity.GetType().Assembly);
                 }
+
                 if (_formsApplication == null)
-                    _formsApplication = CreateFormsApplication();
+                {
+                    _formsApplication = _formsApplication ?? CreateFormsApplication();
+                }
                 return _formsApplication;
             }
         }
 
-        protected virtual MvxFormsApplication CreateFormsApplication() => new MvxFormsApplication();
+        protected abstract MvxFormsApplication CreateFormsApplication();
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
@@ -104,5 +107,5 @@ namespace MvvmCross.Forms.Droid.Platform
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "Activity", "Fragment", "Page");
         }
-    }
+    }    
 }

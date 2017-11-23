@@ -110,6 +110,7 @@
     <None Include="Playground.Forms.Uwp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="hamburger.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -135,6 +136,9 @@
     </PackageReference>
     <PackageReference Include="NETStandard.Library">
       <Version>2.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>2.5.0.91635</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

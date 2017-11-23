@@ -106,8 +106,7 @@ namespace MvvmCross.Forms.Droid.Views
         {
             if (FormsApplication.MainPage != null)
             {
-                var resourceAssembly = GetResourceAssembly();
-                global::Xamarin.Forms.Forms.Init(this, bundle, resourceAssembly);
+                global::Xamarin.Forms.Forms.Init(this, bundle, GetResourceAssembly());
                 LoadApplication(FormsApplication);
             }
         }

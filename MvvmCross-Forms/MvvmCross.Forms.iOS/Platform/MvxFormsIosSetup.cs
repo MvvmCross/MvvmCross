@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-using System.Reflection;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Bindings;
 using MvvmCross.Forms.iOS.Bindings;
 using MvvmCross.Forms.iOS.Presenters;
 using MvvmCross.Forms.Platform;
@@ -13,6 +10,8 @@ using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Localization;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
+using System.Collections.Generic;
+using System.Reflection;
 using UIKit;
 
 namespace MvvmCross.Forms.iOS
@@ -35,7 +34,9 @@ namespace MvvmCross.Forms.iOS
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
             if (_viewAssemblies == null)
+            {
                 _viewAssemblies = new List<Assembly>(base.GetViewAssemblies());
+            }
 
             return _viewAssemblies;
         }
@@ -53,12 +54,14 @@ namespace MvvmCross.Forms.iOS
                 if (!Xamarin.Forms.Forms.IsInitialized)
                     Xamarin.Forms.Forms.Init();
                 if (_formsApplication == null)
-                    _formsApplication = CreateFormsApplication();
+                {
+                    _formsApplication = _formsApplication ?? CreateFormsApplication();
+                }
                 return _formsApplication;
             }
         }
 
-        protected virtual MvxFormsApplication CreateFormsApplication() => new MvxFormsApplication();
+        protected abstract MvxFormsApplication CreateFormsApplication();
 
         protected override IMvxIosViewPresenter CreatePresenter()
         {
