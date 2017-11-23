@@ -6,6 +6,5 @@
     xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
     xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
                            x:Class="Playground.Forms.Pages.SplitRootPage"
-                           Title="SplitRoot page"
                            Icon="hamburger.png">
 </views:MvxMasterDetailPage>
