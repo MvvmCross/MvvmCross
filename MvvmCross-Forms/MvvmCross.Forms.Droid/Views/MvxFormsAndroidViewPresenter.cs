@@ -4,11 +4,10 @@
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Tomasz Cielecki, @cheesebaron, mvxplugins@ostebaronen.dk
-// Contributor - Marcos CobeÒa Mori·n, @CobenaMarcos, marcoscm@me.com
+// Contributor - Marcos Cobe√±a Mori√°n, @CobenaMarcos, marcoscm@me.com
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
@@ -18,19 +17,14 @@ using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
 using MvvmCross.Forms.Views.Attributes;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
-using Xamarin.Forms;
+
 
 namespace MvvmCross.Forms.Droid.Views
 {
     public class MvxFormsAndroidViewPresenter
         : MvxAppCompatViewPresenter, IMvxFormsViewPresenter
     {
-		public MvxFormsAndroidViewPresenter(IEnumerable<Assembly> androidViewAssemblies) : base(androidViewAssemblies)
-		{
-		}
-
-        public MvxFormsAndroidViewPresenter(IEnumerable<Assembly> androidViewAssemblies, MvxFormsApplication formsApplication) : this(androidViewAssemblies)
+        public MvxFormsAndroidViewPresenter(IEnumerable<Assembly> androidViewAssemblies, MvxFormsApplication formsApplication) : base(androidViewAssemblies)
         {
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
         }
@@ -42,14 +36,14 @@ namespace MvvmCross.Forms.Droid.Views
             set { _formsApplication = value; }
         }
 
-        private MvxFormsPagePresenter _formsPagePresenter;
-        public virtual MvxFormsPagePresenter FormsPagePresenter
+        private IMvxFormsPagePresenter _formsPagePresenter;
+        public virtual IMvxFormsPagePresenter FormsPagePresenter
         {
             get
             {
                 if (_formsPagePresenter == null)
                 {
-                    _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder);
+                    _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder, attributeTypesToActionsDictionary: AttributeTypesToActionsDictionary);
                     _formsPagePresenter.ClosePlatformViews = ClosePlatformViews;
                     _formsPagePresenter.ShowPlatformHost = ShowPlatformHost;
                     Mvx.RegisterSingleton<IMvxFormsPagePresenter>(_formsPagePresenter);
@@ -66,8 +60,13 @@ namespace MvvmCross.Forms.Droid.Views
         {
             var action = GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute);
 
-            if (FormsApplication.MainPage == null && attribute is MvxPagePresentationAttribute && CurrentActivity is MvxFormsAppCompatActivity activity)
-                activity.InitializeForms(null);
+            if (FormsApplication.MainPage == null && attribute is MvxPagePresentationAttribute)
+            {
+                if(CurrentActivity is MvxFormsAppCompatActivity appCompatActivity)
+                    appCompatActivity.InitializeForms(null);
+                else if(CurrentActivity is MvxFormsApplicationActivity activity)
+                    activity.InitializeForms(null);
+            }
 
             action.ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
@@ -76,43 +75,13 @@ namespace MvvmCross.Forms.Droid.Views
         {
             base.RegisterAttributeTypes();
 
-            FormsPagePresenter.RegisterAttributeTypes(AttributeTypesToActionsDictionary);
+            FormsPagePresenter.RegisterAttributeTypes();
         }
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
-            if (viewType.IsSubclassOf(typeof(ContentPage)))
-            {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-                               $"Assuming ContentPage presentation");
-                return new MvxContentPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
-            }
-            if (viewType.IsSubclassOf(typeof(CarouselPage)))
-            {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-                               $"Assuming CarouselPage presentation");
-                return new MvxCarouselPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
-            }
-            if (viewType.IsSubclassOf(typeof(TabbedPage)))
-            {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-                               $"Assuming TabbedPage presentation");
-                return new MvxTabbedPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
-            }
-            if (viewType.IsSubclassOf(typeof(MasterDetailPage)))
-            {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-                               $"Assuming MasterDetailPage presentation");
-                return new MvxMasterDetailPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
-            }
-            if (viewType.IsSubclassOf(typeof(NavigationPage)))
-            {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
-                               $"Assuming NavigationPage presentation");
-                return new MvxNavigationPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
-            }
-
-            return base.CreatePresentationAttribute(viewModelType, viewType);
+            var presentationAttribute = FormsPagePresenter.CreatePresentationAttribute(viewModelType, viewType);
+            return presentationAttribute ?? base.CreatePresentationAttribute(viewModelType, viewType);
         }
 
         public virtual bool ClosePlatformViews()

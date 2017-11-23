@@ -1,6 +1,7 @@
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Uwp.Presenters;
+using MvvmCross.Forms.Views;
 using MvvmCross.Platform;
 using MvvmCross.Forms.Views;
 

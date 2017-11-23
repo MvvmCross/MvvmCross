@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MvvmCross.Core.Views;
 
 namespace MvvmCross.Forms.Views.Attributes

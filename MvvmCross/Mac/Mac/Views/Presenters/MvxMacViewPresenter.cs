@@ -150,19 +150,6 @@ namespace MvvmCross.Mac.Views.Presenters
                 });
         }
 
-        public override void ChangePresentation(MvxPresentationHint hint)
-        {
-            if (HandlePresentationChange(hint)) return;
-
-            if (hint is MvxClosePresentationHint presentationHint)
-            {
-                Close(presentationHint.ViewModelToClose);
-                return;
-            }
-
-            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
-        }
-
         public override void Show(MvxViewModelRequest request)
         {
             GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);

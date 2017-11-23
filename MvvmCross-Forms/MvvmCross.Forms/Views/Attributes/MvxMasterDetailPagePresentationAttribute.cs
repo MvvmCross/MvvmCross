@@ -1,5 +1,4 @@
 using System;
-using MvvmCross.Core.Views;
 
 namespace MvvmCross.Forms.Views.Attributes
 {
@@ -9,6 +8,14 @@ namespace MvvmCross.Forms.Views.Attributes
         public MvxMasterDetailPagePresentationAttribute(MasterDetailPosition position = MasterDetailPosition.Detail)
         {
             Position = position;
+
+            // If this page is to be the master, the default behaviour should be that the page is not wrapped
+            // in a navigation page. This is not the case for Root or Detail pages where default behaviour
+            // would be to support navigation
+            if (position == MasterDetailPosition.Master)
+            {
+                WrapInNavigationPage = false;
+            }
         }
 
         public MasterDetailPosition Position { get; set; } = MasterDetailPosition.Detail;

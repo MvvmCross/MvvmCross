@@ -23,5 +23,10 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand OpenDetailNavCommand { get; private set; }
 
         public IMvxAsyncCommand ShowRootViewModel { get; private set; }
+
+        public override void ViewAppeared()
+        {
+            base.ViewAppeared();
+        }
     }
 }

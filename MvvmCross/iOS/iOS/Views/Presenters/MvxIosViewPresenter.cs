@@ -45,7 +45,6 @@ namespace MvvmCross.iOS.Views.Presenters
         {
             if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
             {
-
                 var viewInstance = this.CreateViewControllerFor(viewType, null) as UIViewController;
                 using (viewInstance)
                 {
@@ -151,19 +150,6 @@ namespace MvvmCross.iOS.Views.Presenters
                     },
                     CloseAction = (viewModel, attribute) => CloseDetailSplitViewController(viewModel, (MvxDetailSplitViewPresentationAttribute)attribute)
                 });
-        }
-
-        public override void ChangePresentation(MvxPresentationHint hint)
-        {
-            if (HandlePresentationChange(hint)) return;
-
-            if (hint is MvxClosePresentationHint presentationHint)
-            {
-                Close(presentationHint.ViewModelToClose);
-                return;
-            }
-
-            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
         }
 
         public override void Show(MvxViewModelRequest request)

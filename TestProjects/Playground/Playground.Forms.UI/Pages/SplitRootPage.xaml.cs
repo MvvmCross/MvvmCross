@@ -7,12 +7,17 @@ using Xamarin.Forms;
 
 namespace Playground.Forms.Pages
 {
-    [MvxMasterDetailPagePresentation(MasterDetailPosition.Root)]
+    [MvxMasterDetailPagePresentation(MasterDetailPosition.Root, WrapInNavigationPage =false)]
     public partial class SplitRootPage : MvxMasterDetailPage<SplitRootViewModel>
     {
         public SplitRootPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
         }
     }
 }

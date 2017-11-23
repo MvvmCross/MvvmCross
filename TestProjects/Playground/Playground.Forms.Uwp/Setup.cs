@@ -16,26 +16,17 @@ namespace Playground.Forms.Uwp
         {
         }
 
-        protected override MvxLogProviderType GetDefaultLogProviderType()
-            => MvxLogProviderType.None;
+        protected override MvxLogProviderType GetDefaultLogProviderType() => MvxLogProviderType.None;
 
-        protected override IMvxApplication CreateApp()
-        {
-            return new Core.App();
-        }
+        protected override IMvxLogProvider CreateLogProvider() => new EmptyVoidLogProvider();
 
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
-            return base.GetViewAssemblies().Union(new[] { typeof(FormsApp).GetTypeInfo().Assembly });
+            return new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(FormsApp).GetTypeInfo().Assembly }));
         }
 
-        protected override MvxFormsApplication CreateFormsApplication()
-        {
-            return new FormsApp();
-        }
-        protected override IMvxLogProvider CreateLogProvider()
-        {
-            return new EmptyVoidLogProvider();
-        }
+        protected override MvxFormsApplication CreateFormsApplication() => new FormsApp();
+
+        protected override IMvxApplication CreateApp() => new Core.App();
     }
 }

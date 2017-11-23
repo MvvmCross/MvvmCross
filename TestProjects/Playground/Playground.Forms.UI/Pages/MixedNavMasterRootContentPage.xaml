@@ -9,6 +9,7 @@
     <StackLayout>
         <Label Text="Root content page" />
         <Button Text="Show Modal" mvx:Bi.nd="Command ShowModalCommand"/>
+        <Button Text="Show Child" mvx:Bi.nd="Command ShowChildCommand"/>
     </StackLayout>
 
 </views:MvxContentPage>

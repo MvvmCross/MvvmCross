@@ -1,6 +1,7 @@
+using System.Threading.Tasks;
+using System.Windows.Input;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
-using System.Threading.Tasks;
 
 namespace Playground.Core.ViewModels
 {
@@ -12,7 +13,7 @@ namespace Playground.Core.ViewModels
         {
             _navigationService = navigationService;
 
-            ShowInitialMenuCommand = new MvxAsyncCommand(ShowInitialViewModels);
+            ShowInitialMenuCommand = new MvxAsyncCommand(ShowInitialViewModel);
             ShowDetailCommand = new MvxAsyncCommand(ShowDetailViewModel);
         }
 
@@ -20,7 +21,14 @@ namespace Playground.Core.ViewModels
 
         public IMvxAsyncCommand ShowDetailCommand { get; private set; }
 
-        private async Task ShowInitialViewModels()
+        public override async void ViewAppeared()
+        {
+            base.ViewAppeared();
+            await ShowInitialViewModel();
+            await ShowDetailViewModel();
+        }
+
+        private async Task ShowInitialViewModel()
         {
             await _navigationService.Navigate<SplitMasterViewModel>();
         }
