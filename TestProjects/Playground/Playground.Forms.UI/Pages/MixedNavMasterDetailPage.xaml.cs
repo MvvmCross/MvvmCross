@@ -13,6 +13,11 @@ namespace Playground.Forms.Pages
         public MixedNavMasterDetailPage()
         {
             InitializeComponent();
+
+#if __IOS__
+            if(Parent is MasterDetailPage master)
+                master.IsGestureEnabled = false;
+#endif
         }
 
         protected override void OnViewModelSet()

@@ -21,9 +21,8 @@ namespace Playground.Core.ViewModels
 
         public IMvxAsyncCommand ShowDetailCommand { get; private set; }
 
-        public override async void ViewAppeared()
+        public override async Task Initialize()
         {
-            base.ViewAppeared();
             await ShowInitialViewModel();
             await ShowDetailViewModel();
         }

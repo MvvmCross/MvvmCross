@@ -6,7 +6,8 @@
     xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
     xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
                       x:Class="Playground.Forms.Pages.SplitMasterPage"
-                      Title="SplitMaster page">
+                      Title="SplitMaster page"
+                        Icon="hamburger.png">
     <ContentPage.Content>
       <StackLayout Margin="10">
             <Label Text="I'm a master navigation page" />

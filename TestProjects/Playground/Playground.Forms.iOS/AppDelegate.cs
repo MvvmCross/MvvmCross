@@ -14,6 +14,7 @@ namespace Playground.Forms.iOS
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
             UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(65, 105, 225);
+            UINavigationBar.Appearance.TintColor = UIColor.FromRGB(255, 255, 255);
 
             var setup = new Setup(this, Window);
             setup.Initialize();
