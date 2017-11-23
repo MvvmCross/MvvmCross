@@ -11,7 +11,8 @@ namespace Playground.Forms.Droid
         Label = "Playground.Forms", 
         Icon = "@mipmap/icon",
         Theme = "@style/AppTheme",
-        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, 
+        LaunchMode = LaunchMode.SingleTask)]
     public class MainActivity : MvxFormsAppCompatActivity<MainViewModel>
     {
         protected override void OnCreate(Bundle bundle)
@@ -19,6 +20,11 @@ namespace Playground.Forms.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
             base.OnCreate(bundle);
+        }
+
+        public override void OnBackPressed()
+        {
+            MoveTaskToBack(false);
         }
     }
 }
