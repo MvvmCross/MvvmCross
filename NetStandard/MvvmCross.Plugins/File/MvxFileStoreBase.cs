@@ -22,7 +22,7 @@ namespace MvvmCross.Plugins.File
     public abstract class MvxFileStoreBase
         : IMvxFileStore, IMvxFileStoreAsync
     {
-        public static IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<IMvxFileStore>();
+        protected IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<IMvxFileStore>();
 
         private const int BufferSize = 1024;
 

@@ -1,4 +1,4 @@
-// MvxAttributeViewPresenter.cs
+﻿// MvxAttributeViewPresenter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,11 +11,14 @@ using System;
 using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Core.Views
 {
     public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttributeViewPresenter
     {
+        protected IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<MvxAttributeViewPresenter>();
+
         private IMvxViewModelTypeFinder _viewModelTypeFinder;
         public IMvxViewModelTypeFinder ViewModelTypeFinder
         {

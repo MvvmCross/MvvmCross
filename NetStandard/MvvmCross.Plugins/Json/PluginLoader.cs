@@ -17,6 +17,7 @@ namespace MvvmCross.Plugins.Json
     public class PluginLoader
         : IMvxConfigurablePluginLoader
     {
+        protected IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<PluginLoader>();
         public static readonly PluginLoader Instance = new PluginLoader();
 
         private bool _loaded;
@@ -41,8 +42,7 @@ namespace MvvmCross.Plugins.Json
         {
             if (_loaded)
             {
-                var log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<PluginLoader>();
-                log.Error("Error - Configure called for Json Plugin after the plugin is already loaded");
+                Log.Error("Error - Configure called for Json Plugin after the plugin is already loaded");
                 return;
             }
 

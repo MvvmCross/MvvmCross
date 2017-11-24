@@ -15,7 +15,7 @@ namespace MvvmCross.Plugins.Messenger.ThreadRunners
     public class MvxMainThreadActionRunner
         : IMvxActionRunner
     {
-        public static IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<IMvxActionRunner>();
+        protected IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<IMvxActionRunner>();
 
         public void Run(Action action)
         {

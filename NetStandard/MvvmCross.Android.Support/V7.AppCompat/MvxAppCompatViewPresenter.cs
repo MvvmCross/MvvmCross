@@ -14,6 +14,7 @@ using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Views;
 using MvvmCross.Droid.Views.Attributes;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using Fragment = Android.Support.V4.App.Fragment;
 
@@ -136,12 +137,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             if (viewType.IsSubclassOf(typeof(DialogFragment)))
             {
-                MvxLog.Instance.Trace("PresentationAttribute not found for {0}. Assuming DialogFragment presentation", viewType.Name);
+                Log.Trace("PresentationAttribute not found for {0}. Assuming DialogFragment presentation", viewType.Name);
                 return new MvxDialogFragmentPresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
             if (viewType.IsSubclassOf(typeof(Fragment)))
             {
-                MvxLog.Instance.Trace("PresentationAttribute not found for {0}. Assuming Fragment presentation", viewType.Name);
+                Log.Trace("PresentationAttribute not found for {0}. Assuming Fragment presentation", viewType.Name);
                 return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), Android.Resource.Id.Content) { ViewType = viewType, ViewModelType = viewModelType };
             }
 
@@ -160,7 +161,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             var activity = CurrentActivity;
             if (activity == null)
             {
-                MvxTrace.Warning("Cannot Resolve current top activity");
+                Log.Warn("Cannot Resolve current top activity");
                 return;
             }
 
@@ -218,7 +219,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             var currentHostViewModelType = GetCurrentActivityViewModelType();
             if (attribute.ActivityHostViewModelType != currentHostViewModelType)
             {
-                MvxLog.Instance.Trace("Activity host with ViewModelType {0} is not CurrentTopActivity. Showing Activity before showing Fragment for {1}",
+                Log.Trace("Activity host with ViewModelType {0} is not CurrentTopActivity. Showing Activity before showing Fragment for {1}",
                     attribute.ActivityHostViewModelType, attribute.ViewModelType);
                 _pendingRequest = request;
                 ShowHostActivity(attribute);
@@ -496,7 +497,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
             catch (Exception ex)
             {
-                MvxLog.Instance.Trace("Cannot close any fragments", ex);
+                Log.Trace("Cannot close any fragments", ex);
             }
             return true;
         }

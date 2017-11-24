@@ -10,7 +10,9 @@ using Android.Graphics;
 using Android.Support.V7.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Droid.Target;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
@@ -18,6 +20,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
     public abstract class MvxAppCompatBaseImageViewTargetBinding
         : MvxAndroidTargetBinding
     {
+        protected IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<MvxAppCompatBaseImageViewTargetBinding>();
         protected AppCompatImageView ImageView => (AppCompatImageView)Target;
 
         protected MvxAppCompatBaseImageViewTargetBinding(AppCompatImageView imageView)
@@ -40,7 +43,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             }
             catch (Exception ex)
             {
-                MvxTrace.Error(ex.ToLongString());
+                Log.Error(ex.ToLongString());
                 throw;
             }
         }

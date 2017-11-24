@@ -21,7 +21,7 @@ namespace MvvmCross.Plugins.FieldBinding
 	public class MvxFieldSourceBindingFactoryExtension
         : IMvxSourceBindingFactoryExtension
     {
-        public static IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<IMvxSourceBindingFactoryExtension>();
+        protected IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<IMvxSourceBindingFactoryExtension>();
 
         public bool TryCreateBinding(object source, MvxPropertyToken currentToken,
                                      List<MvxPropertyToken> remainingTokens, out IMvxSourceBinding result)

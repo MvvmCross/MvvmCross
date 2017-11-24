@@ -8,6 +8,7 @@ using Android.Support.V4.View;
 using Android.Views;
 using Java.Lang;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.Support.V4
@@ -17,6 +18,8 @@ namespace MvvmCross.Droid.Support.V4
     [Register("mvvmcross.droid.support.v4.MvxCachingFragmentPagerAdapter")]
     public abstract class MvxCachingFragmentPagerAdapter : PagerAdapter
     {
+        protected IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<MvxCachingFragmentPagerAdapter>();
+
         private Fragment _currentPrimaryItem;
         private FragmentTransaction _curTransaction;
         private readonly FragmentManager _fragmentManager;
@@ -44,7 +47,7 @@ namespace MvvmCross.Droid.Support.V4
                 _curTransaction = _fragmentManager.BeginTransaction();
 
 #if DEBUG
-            MvxLog.Instance.Trace("Removing item #" + position + ": f=" + objectValue + " v=" + ((Fragment) objectValue).View +
+            Log.Trace("Removing item #" + position + ": f=" + objectValue + " v=" + ((Fragment) objectValue).View +
                       " t=" + fragment.Tag);
 #endif
 
@@ -102,7 +105,7 @@ namespace MvvmCross.Droid.Support.V4
                 fragment.SetInitialSavedState(fss);
 
 #if DEBUG
-            MvxLog.Instance.Trace("Adding item #{0}: f={1} t={2}", position, fragment, fragmentTag);
+            Log.Trace("Adding item #{0}: f={1} t={2}", position, fragment, fragmentTag);
 #endif
 
             while (_fragments.Count <= position)

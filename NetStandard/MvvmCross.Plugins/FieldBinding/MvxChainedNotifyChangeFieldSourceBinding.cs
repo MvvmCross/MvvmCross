@@ -22,7 +22,7 @@ namespace MvvmCross.Plugins.FieldBinding
 	public class MvxChainedNotifyChangeFieldSourceBinding
         : MvxNotifyChangeFieldSourceBinding
     {
-        internal static IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<MvxChainedNotifyChangeFieldSourceBinding>();
+        protected IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<MvxChainedNotifyChangeFieldSourceBinding>();
 
         public static bool DisableWarnIndexedValueBindingWarning = false;
 

@@ -22,7 +22,7 @@ namespace MvvmCross.Plugins.DownloadCache
 	public class MvxFileDownloadCache
         : MvxLockableObject, IMvxFileDownloadCache
     {
-        public static IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<IMvxFileDownloadCache>();
+        protected IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<IMvxFileDownloadCache>();
 
         private const string CacheIndexFileName = "_CacheIndex.txt";
         private static readonly TimeSpan PeriodSaveInterval = TimeSpan.FromSeconds(1.0);

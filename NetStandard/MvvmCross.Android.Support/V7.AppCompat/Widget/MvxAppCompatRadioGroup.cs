@@ -18,12 +18,16 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 {
     [Register("mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatRadioGroup")]
     public class MvxAppCompatRadioGroup : RadioGroup, IMvxWithChangeAdapter
     {
+        protected IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<MvxAppCompatRadioGroup>();
+
         public MvxAppCompatRadioGroup(Context context, IAttributeSet attrs)
             : this(context, attrs, new MvxAdapterWithChangedEvent(context))
         {
@@ -105,7 +109,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
                 }
                 else
                 {
-                    MvxBindingTrace.Warning(
+                    Log.Warn(
                         "Setting Adapter to null is not recommended - you may lose ItemsSource binding when doing this");
                 }
 

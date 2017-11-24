@@ -10,7 +10,9 @@ using Android.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Droid.Target;
 using MvvmCross.Droid.Support.V7.AppCompat.Widget;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.WeakSubscription;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
@@ -18,6 +20,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
     public class MvxAppCompatSpinnerSelectedItemBinding
         : MvxAndroidTargetBinding
     {
+        protected IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<MvxAppCompatSpinnerSelectedItemBinding>();
+
         protected MvxAppCompatSpinner Spinner => (MvxAppCompatSpinner)Target;
 
         private IDisposable _subscription;
@@ -61,7 +65,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 
             if (value == null)
             {
-                MvxBindingTrace.Warning("Null values not permitted in spinner SelectedItem binding currently");
+                Log.Warn("Null values not permitted in spinner SelectedItem binding currently");
                 return;
             }
 
@@ -70,7 +74,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
                 var index = spinner.Adapter.GetPosition(value);
                 if (index < 0)
                 {
-                    MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Value not found for spinner {0}", value.ToString());
+                    Log.Trace("Value not found for spinner {0}", value.ToString());
                     return;
                 }
                 _currentValue = value;

@@ -22,7 +22,7 @@ namespace MvvmCross.Plugins.Messenger
     [Preserve(AllMembers = true)]
 	public class MvxMessengerHub : IMvxMessenger
     {
-        public static IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<IMvxMessenger>();
+        protected IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<IMvxMessenger>();
         
         private readonly Dictionary<Type, Dictionary<Guid, BaseSubscription>> _subscriptions =
             new Dictionary<Type, Dictionary<Guid, BaseSubscription>>();

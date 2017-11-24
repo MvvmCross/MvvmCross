@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Core.ViewModels;
@@ -9,6 +9,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Forms.Views
 {
@@ -175,7 +176,7 @@ namespace MvvmCross.Forms.Views
                 var carouselHost = GetHostPageOfType<MvxCarouselPage>();
                 if (carouselHost == null)
                 {
-                    MvxLog.Instance.Trace($"Current root is not a CarouselPage show your own first to use custom Host. Assuming we need to create one.");
+                    Log.Trace($"Current root is not a CarouselPage show your own first to use custom Host. Assuming we need to create one.");
                     carouselHost = new MvxCarouselPage();
                     PushOrReplacePage(FormsApplication.MainPage, carouselHost, attribute);
                 }
@@ -378,7 +379,7 @@ namespace MvvmCross.Forms.Views
                 var tabHost = GetHostPageOfType<MvxTabbedPage>();
                 if (tabHost == null)
                 {
-                    MvxLog.Instance.Trace($"Current root is not a TabbedPage show your own first to use custom Host. Assuming we need to create one.");
+                    Log.Trace($"Current root is not a TabbedPage show your own first to use custom Host. Assuming we need to create one.");
                     tabHost = new MvxTabbedPage();
                     PushOrReplacePage(FormsApplication.MainPage, tabHost, attribute);
                 }
@@ -480,7 +481,7 @@ namespace MvvmCross.Forms.Views
                 }
                 else
                 {
-                    MvxLog.Instance.Trace($"Cannot remove page: {page.Title}");
+                    Log.Trace($"Cannot remove page: {page.Title}");
                     return false;
                 }
             }
@@ -499,7 +500,7 @@ namespace MvvmCross.Forms.Views
                 }
                 else
                 {
-                    MvxLog.Instance.Trace($"Cannot pop page: {page.Title}");
+                    Log.Trace($"Cannot pop page: {page.Title}");
                     return false;
                 }
             }

@@ -10,7 +10,9 @@ using System.Reflection;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Droid.Target;
 using MvvmCross.Droid.Support.V7.AppCompat.Widget;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.WeakSubscription;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
@@ -18,6 +20,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
     public class MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding
        : MvxAndroidPropertyInfoTargetBinding<MvxAppCompatAutoCompleteTextView>
     {
+        protected IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding>();
         private IDisposable _subscription;
 
         public MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
@@ -26,8 +29,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             var autoComplete = View;
             if (autoComplete == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - autoComplete is null in MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding");
+                Log.Trace("Error - autoComplete is null in MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding");
             }
         }
 

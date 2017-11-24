@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Reflection;
 using MvvmCross.Binding;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,6 +10,8 @@ namespace MvvmCross.Forms.Bindings
 {
     public abstract class MvxBaseBindExtension : IMarkupExtension
     {
+        protected IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<MvxBaseBindExtension>();
+
         public MvxBindingMode Mode { get; set; } = MvxBindingMode.Default;
         public string Converter { get; set; }
         public string ConverterParameter { get; set; }

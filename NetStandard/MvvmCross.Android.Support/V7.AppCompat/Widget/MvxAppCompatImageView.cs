@@ -15,6 +15,7 @@ using Android.Util;
 using MvvmCross.Binding.Droid.ResourceHelpers;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
@@ -22,6 +23,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
     [Register("mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatImageView")]
     public class MvxAppCompatImageView : AppCompatImageView
     {
+        protected IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<AppCompatImageView>();
         private IMvxImageHelper<Bitmap> _imageHelper;
 
         public MvxAppCompatImageView(Context context, IAttributeSet attrs)
@@ -84,7 +86,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
                 {
                     if (!Mvx.TryResolve(out _imageHelper))
                     {
-                        MvxTrace.Error("No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
+                        Log.Error("No IMvxImageHelper registered - you must provide an image helper before you can use a MvxImageView");
                     }
                     else
                     {
