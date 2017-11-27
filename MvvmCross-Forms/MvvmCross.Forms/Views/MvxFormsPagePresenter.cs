@@ -492,10 +492,6 @@ namespace MvvmCross.Forms.Views
                 rootPage = FormsApplication.MainPage;
             }
 
-            //By default push to the detail page
-            if(GetHostPageOfType<MasterDetailPage>(rootPage) is MasterDetailPage masterRoot)
-                rootPage = masterRoot.Detail;
-
             var navigationRootPage = GetHostPageOfType<NavigationPage>(rootPage);
 
             // Step down through any nested navigation pages to make sure we're pushing to the
