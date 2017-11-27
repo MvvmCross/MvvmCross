@@ -10,6 +10,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 using System.Reflection;
+using MvvmCross.Forms.Views.Hints;
 
 namespace MvvmCross.Forms.Views
 {
@@ -151,15 +152,23 @@ namespace MvvmCross.Forms.Views
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if (HandlePresentationChange(hint)) return;
-
-            if (hint is MvxClosePresentationHint)
+            if (hint is MvxPopToRootPresentationHint popToRootHint)
             {
-                Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                GetHostPageOfType<NavigationPage>().Navigation.PopToRootAsync(popToRootHint.Animated);
                 return;
             }
-
-            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
+            if (hint is MvxPopPresentationHint popHint)
+            {
+                foreach (var page in GetHostPageOfType<NavigationPage>().Navigation.NavigationStack)
+                {
+                    if (page.GetType() != popHint.ViewToPopTo)
+                        page.Navigation.PopAsync(popHint.Animated);
+                    else
+                        break;
+                }
+                return;
+            }
+            base.ChangePresentation(hint);
         }
 
         public virtual void ShowCarouselPage(

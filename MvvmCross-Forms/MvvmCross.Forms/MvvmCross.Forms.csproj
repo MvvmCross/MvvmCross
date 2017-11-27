@@ -106,6 +106,8 @@
     <Compile Include="Views\EventSource\MvxEventSourceEntryCell.cs" />
     <Compile Include="Views\EventSource\MvxEventSourceContentView.cs" />
     <Compile Include="Views\MvxElementAdapter.cs" />
+    <Compile Include="Views\Hints\MvxPopPresentationHint.cs" />
+    <Compile Include="Views\Hints\MvxPopToRootPresentationHint.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -154,6 +156,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Hints\" />
   </ItemGroup>
   <Import Project="..\..\packages\Xamarin.Forms.2.5.0.91635\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.5.0.91635\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -107,5 +107,10 @@ namespace MvvmCross.Forms.Droid.Views
             }
             return true;
         }
+
+        public override void ChangePresentation(MvxPresentationHint hint)
+        {
+            FormsPagePresenter.ChangePresentation(hint);
+        }
     }
 }
