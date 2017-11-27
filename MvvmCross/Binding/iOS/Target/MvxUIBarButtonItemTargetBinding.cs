@@ -16,7 +16,6 @@ namespace MvvmCross.Binding.iOS.Target
 
         protected UIBarButtonItem Control => Target as UIBarButtonItem;
 
-
         public MvxUIBarButtonItemTargetBinding(UIBarButtonItem control)
             : base(control)
         {
