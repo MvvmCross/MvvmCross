@@ -47,6 +47,7 @@
   <ItemGroup>
     <Folder Include="Interfaces\" />
     <Folder Include="Resources\" />
+    <Folder Include="Views\Presenters\Attributes\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\AssemblyInfo.cs">
@@ -85,7 +86,17 @@
     <Compile Include="Views\Presenters\IMvxTvosViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxBaseTvosViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxTvosViewPresenter.cs" />
-    <Compile Include="Views\Presenters\MvxModalNavSupportTvosViewPresenter.cs" />
+    <Compile Include="Views\IMvxTabBarViewController.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxTabPresentationAttribute.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxChildPresentationAttribute.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxRootPresentationAttribute.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxModelPresentationAttribute.cs" />
+    <Compile Include="Views\UIViewControllerExtensionMethods.cs" />
+    <Compile Include="Views\IMvxTabBarItemViewController.cs" />
+    <Compile Include="Views\MvxNavigationController.cs" />
+    <Compile Include="Views\MvxBaseTabBarViewController.cs" />
+    <Compile Include="Views\MvxSegueExtensionMethods.cs" />
+    <Compile Include="Views\IMvxTvosViewSegue.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Binding\MvvmCross.Binding.csproj">

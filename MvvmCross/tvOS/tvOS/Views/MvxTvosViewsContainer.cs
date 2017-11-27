@@ -39,7 +39,7 @@ namespace MvvmCross.tvOS.Views
             }
         }
 
-        protected virtual IMvxTvosView CreateViewOfType(Type viewType, MvxViewModelRequest request)
+        public virtual IMvxTvosView CreateViewOfType(Type viewType, MvxViewModelRequest request)
         {
             var storyboardAttribute = viewType.GetCustomAttribute<MvxFromStoryboardAttribute>();
             if (storyboardAttribute != null)
@@ -69,5 +69,7 @@ namespace MvvmCross.tvOS.Views
             var view = CreateView(request);
             return view;
         }
+
+       
     }
 }
