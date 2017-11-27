@@ -63,7 +63,7 @@ namespace MvvmCross.Uwp.Views
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
             MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new page presentation");
-            return new MvxPagePresentationAttribute();
+            return new MvxPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
         }
 
         
