@@ -22,6 +22,13 @@ namespace Playground.TvOS
         {
             base.ViewDidLoad();
 
+            var set = this.CreateBindingSet<RootView, RootViewModel>();
+            set.Bind(btnChild).To(vm => vm.ShowChildCommand);
+            set.Bind(btnTabs).To(vm => vm.ShowTabsCommand);
+            set.Bind(btnModalNav).To(vm => vm.ShowModalNavCommand);
+            set.Bind(btnModal).To(vm => vm.ShowModalCommand);
+            set.Bind(btnModalAttribute).To(vm => vm.ShowOverrideAttributeCommand);
+            set.Apply();
         }
 	}
 }

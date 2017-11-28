@@ -12,9 +12,23 @@ namespace Playground.TvOS
 	[Register ("ChildView")]
 	partial class ChildView
 	{
+		[Outlet]
+		UIKit.UIButton btnClose { get; set; }
+
+		[Outlet]
+		UIKit.UIButton btnShowChild { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (btnShowChild != null) {
+				btnShowChild.Dispose ();
+				btnShowChild = null;
+			}
+
+			if (btnClose != null) {
+				btnClose.Dispose ();
+				btnClose = null;
+			}
 		}
 	}
 }

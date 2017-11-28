@@ -145,7 +145,8 @@ namespace MvvmCross.tvOS.Views
             foreach (var vc in ViewControllers.Where(v => v is UINavigationController))
             {
                 var root = ((UINavigationController)vc).ViewControllers.FirstOrDefault();
-                if (root != null && root.GetIMvxTvosView().ViewModel == viewModel)
+                var vcFromRoot = root.GetIMvxTvosView();
+                if (root != null && vcFromRoot.ViewModel == viewModel)
                 {
                     toClose = root;
                     break;

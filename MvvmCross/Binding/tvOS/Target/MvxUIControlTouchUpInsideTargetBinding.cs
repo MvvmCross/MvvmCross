@@ -31,7 +31,7 @@ namespace MvvmCross.Binding.tvOS.Target
             }
             else
             {
-                control.TouchUpInside += ControlOnTouchUpInside;
+                control.PrimaryActionTriggered += ControlOnTouchUpInside;
             }
 
             _canExecuteEventHandler = new EventHandler<EventArgs>(OnCanExecuteChanged);
@@ -93,7 +93,7 @@ namespace MvvmCross.Binding.tvOS.Target
                 var view = Control;
                 if (view != null)
                 {
-                    view.TouchUpInside -= ControlOnTouchUpInside;
+                    view.PrimaryActionTriggered -= ControlOnTouchUpInside;
                 }
                 if (_canExecuteSubscription != null)
                 {
