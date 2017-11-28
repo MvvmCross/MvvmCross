@@ -3,18 +3,20 @@ using System;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.tvOS.Views;
 using MvvmCross.tvOS.Views.Presenters.Attributes;
+
 using Playground.Core.ViewModels;
 
-using Foundation;
 using UIKit;
+using Foundation;
+
 
 namespace Playground.TvOS
 {
     [MvxFromStoryboard("Main")]
-    [MvxChildPresentation]
-    public partial class ChildView : MvxViewController<ChildViewModel>
+    [MvxTabPresentation]
+    public partial class Tab2View : MvxViewController<Tab2ViewModel>
 	{
-		public ChildView (IntPtr handle) : base (handle)
+		public Tab2View (IntPtr handle) : base (handle)
 		{
 		}
 
@@ -22,9 +24,11 @@ namespace Playground.TvOS
         {
             base.ViewDidLoad();
 
-            var set = this.CreateBindingSet<ChildView, ChildViewModel>();
-            set.Bind(btnClose).To(vm => vm.CloseCommand);
-            set.Bind(btnShowChild).To(vm => vm.ShowSecondChildCommand);
+            var set = this.CreateBindingSet<Tab2View, Tab2ViewModel>();
+
+            set.Bind(btnStackNav).To(vm => vm.ShowRootViewModelCommand);
+            set.Bind(btnClose).To(vm => vm.CloseViewModelCommand);
+
             set.Apply();
         }
 	}

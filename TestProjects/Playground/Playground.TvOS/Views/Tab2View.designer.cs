@@ -9,20 +9,20 @@ using System.CodeDom.Compiler;
 
 namespace Playground.TvOS
 {
-	[Register ("SecondChildView")]
-	partial class SecondChildView
+	[Register ("Tab2View")]
+	partial class Tab2View
 	{
 		[Outlet]
 		UIKit.UIButton btnClose { get; set; }
 
 		[Outlet]
-		UIKit.UIButton btnCloseStack { get; set; }
+		UIKit.UIButton btnStackNav { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (btnCloseStack != null) {
-				btnCloseStack.Dispose ();
-				btnCloseStack = null;
+			if (btnStackNav != null) {
+				btnStackNav.Dispose ();
+				btnStackNav = null;
 			}
 
 			if (btnClose != null) {

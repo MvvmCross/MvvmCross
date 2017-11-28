@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
 
 using MvvmCross.Core.ViewModels;
@@ -17,6 +18,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.tvOS.Views.Presenters.Attributes;
 
 using CoreGraphics;
+using Foundation;
 using UIKit;
 
 namespace MvvmCross.tvOS.Views.Presenters
@@ -292,20 +294,23 @@ namespace MvvmCross.tvOS.Views.Presenters
                                            MvxRootPresentationAttribute attribute,
                                            MvxViewModelRequest request)
         {
-            if (viewController is IMvxTabBarViewController tabBarController)
-            {
-                TabBarViewController = tabBarController;
+           if (viewController is IMvxTabBarViewController)
+           {
+                //NOTE clean up must be done first incase we are enbedding into a navigation controller
+                //before setting the tab view controller, otherwise this will reset the view stack and your tab
+                //controller will be null. 
                 SetupWindowRootNavigation(viewController, attribute);
+                this.TabBarViewController = (IMvxTabBarViewController)viewController;
 
                 CleanupModalViewControllers();
 
                 return;
-            }
+           }
 
-            SetupWindowRootNavigation(viewController, attribute);
+           SetupWindowRootNavigation(viewController, attribute);
 
-            CleanupModalViewControllers();
-            CloseTabBarViewController();
+           CleanupModalViewControllers();
+           CloseTabBarViewController();
         }
 
         protected virtual void ShowChildViewController(UIViewController viewController,

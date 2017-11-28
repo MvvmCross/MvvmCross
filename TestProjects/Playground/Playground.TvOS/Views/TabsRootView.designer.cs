@@ -9,26 +9,12 @@ using System.CodeDom.Compiler;
 
 namespace Playground.TvOS
 {
-	[Register ("SecondChildView")]
-	partial class SecondChildView
+	[Register ("TabsRootView")]
+	partial class TabsRootView
 	{
-		[Outlet]
-		UIKit.UIButton btnClose { get; set; }
-
-		[Outlet]
-		UIKit.UIButton btnCloseStack { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (btnCloseStack != null) {
-				btnCloseStack.Dispose ();
-				btnCloseStack = null;
-			}
-
-			if (btnClose != null) {
-				btnClose.Dispose ();
-				btnClose = null;
-			}
 		}
 	}
 }

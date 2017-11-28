@@ -9,8 +9,8 @@ using System.CodeDom.Compiler;
 
 namespace Playground.TvOS
 {
-	[Register ("RootView")]
-	partial class RootView
+	[Register ("Tab1View")]
+	partial class Tab1View
 	{
 		[Outlet]
 		UIKit.UIButton btnChild { get; set; }
@@ -19,26 +19,10 @@ namespace Playground.TvOS
 		UIKit.UIButton btnModal { get; set; }
 
 		[Outlet]
-		UIKit.UIButton btnModalAttribute { get; set; }
-
-		[Outlet]
 		UIKit.UIButton btnModalNav { get; set; }
-
-		[Outlet]
-		UIKit.UIButton btnTabs { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (btnChild != null) {
-				btnChild.Dispose ();
-				btnChild = null;
-			}
-
-			if (btnTabs != null) {
-				btnTabs.Dispose ();
-				btnTabs = null;
-			}
-
 			if (btnModalNav != null) {
 				btnModalNav.Dispose ();
 				btnModalNav = null;
@@ -49,9 +33,9 @@ namespace Playground.TvOS
 				btnModal = null;
 			}
 
-			if (btnModalAttribute != null) {
-				btnModalAttribute.Dispose ();
-				btnModalAttribute = null;
+			if (btnChild != null) {
+				btnChild.Dispose ();
+				btnChild = null;
 			}
 		}
 	}

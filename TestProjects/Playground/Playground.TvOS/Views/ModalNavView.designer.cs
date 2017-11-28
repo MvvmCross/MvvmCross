@@ -9,25 +9,33 @@ using System.CodeDom.Compiler;
 
 namespace Playground.TvOS
 {
-	[Register ("SecondChildView")]
-	partial class SecondChildView
+	[Register ("ModalNavView")]
+	partial class ModalNavView
 	{
 		[Outlet]
 		UIKit.UIButton btnClose { get; set; }
 
 		[Outlet]
-		UIKit.UIButton btnCloseStack { get; set; }
+		UIKit.UIButton btnNestedModal { get; set; }
+
+		[Outlet]
+		UIKit.UIButton btnShowChild { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (btnCloseStack != null) {
-				btnCloseStack.Dispose ();
-				btnCloseStack = null;
+			if (btnShowChild != null) {
+				btnShowChild.Dispose ();
+				btnShowChild = null;
 			}
 
 			if (btnClose != null) {
 				btnClose.Dispose ();
 				btnClose = null;
+			}
+
+			if (btnNestedModal != null) {
+				btnNestedModal.Dispose ();
+				btnNestedModal = null;
 			}
 		}
 	}
