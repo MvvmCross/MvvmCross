@@ -517,7 +517,7 @@ namespace MvvmCross.Forms.Views
                 // in a navigation wrapper.
                 if (navigationRootPage == null)
                 {
-                    var navpage = new NavigationPage(page);// new MvxContentPage()) { Icon = attribute.Icon };
+                    var navpage = new NavigationPage(page);
                     ReplacePageRoot(rootPage, navpage, attribute);
                 }
                 else
