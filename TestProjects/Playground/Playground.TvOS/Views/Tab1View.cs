@@ -19,7 +19,6 @@ namespace Playground.TvOS
 		{
 		}
 
-
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -31,7 +30,6 @@ namespace Playground.TvOS
             set.Bind(btnChild).To(vm => vm.OpenChildCommand);
 
             set.Apply();
-
         }
 	}
 }

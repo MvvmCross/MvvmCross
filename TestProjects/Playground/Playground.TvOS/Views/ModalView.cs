@@ -10,7 +10,6 @@ using Playground.Core.ViewModels;
 using UIKit;
 using CoreGraphics;
 
-
 namespace Playground.TvOS
 {
     [MvxFromStoryboard("Main")]
@@ -37,7 +36,6 @@ namespace Playground.TvOS
             set.Bind(btnNestedModal).To(vm => vm.ShowNestedModalCommand);
 
             set.Apply();
-
         }
 	}
 
