@@ -1,7 +1,6 @@
 ﻿using System;
-using MvvmCross.Core.ViewModels;
 
-namespace MvvmCross.Forms.Views.Hints
+namespace MvvmCross.Core.ViewModels.Hints
 {
     public class MvxPopToRootPresentationHint
         : MvxPresentationHint

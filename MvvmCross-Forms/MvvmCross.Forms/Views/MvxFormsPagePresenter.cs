@@ -10,7 +10,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 using System.Reflection;
-using MvvmCross.Forms.Views.Hints;
+using MvvmCross.Core.ViewModels.Hints;
 
 namespace MvvmCross.Forms.Views
 {
@@ -161,13 +161,24 @@ namespace MvvmCross.Forms.Views
             {
                 foreach (var page in GetHostPageOfType<NavigationPage>().Navigation.NavigationStack)
                 {
-                    if (page.GetType() != popHint.ViewToPopTo)
+                    if (page is IMvxPage mvxPage && mvxPage.ViewModel.GetType() == popHint.ViewModelToPopTo)
+                    {
                         page.Navigation.PopAsync(popHint.Animated);
-                    else
                         break;
+                    }
+                    else
+                        page.Navigation.PopAsync(popHint.Animated);
                 }
                 return;
             }
+            if (hint is MvxRemovePresentationHint removeHint)
+            {
+                var host = GetHostPageOfType<NavigationPage>();
+                var page = host.Navigation.NavigationStack.OfType<IMvxPage>().FirstOrDefault(x => x.ViewModel.GetType() == removeHint.ViewModelToRemove) as Page;
+                host.Navigation.RemovePage(page);
+                return;
+            }
+
             base.ChangePresentation(hint);
         }
 
