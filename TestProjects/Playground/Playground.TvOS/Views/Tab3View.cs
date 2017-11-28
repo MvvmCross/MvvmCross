@@ -9,7 +9,6 @@ using Playground.Core.ViewModels;
 using UIKit;
 using Foundation;
 
-
 namespace Playground.TvOS
 {
     [MvxFromStoryboard("Main")]
@@ -36,6 +35,5 @@ namespace Playground.TvOS
 
             set.Apply();
         }
-
 	}
 }

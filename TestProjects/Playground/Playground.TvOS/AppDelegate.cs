@@ -13,7 +13,6 @@ namespace Playground.TvOS
     public class AppDelegate : MvxApplicationDelegate
     {
         // class-level declarations
-
         public override UIWindow Window
         {
             get;
@@ -35,4 +34,3 @@ namespace Playground.TvOS
         }
     }
 }
-

@@ -12,7 +12,6 @@ using Playground.Core.ViewModels;
 using Foundation;
 using UIKit;
 
-
 namespace Playground.TvOS
 {
     [MvxFromStoryboard("Main")]
