@@ -87,15 +87,16 @@ namespace MvvmCross.Core.ViewModels
                 throw new ArgumentNullException(nameof(items));
             }
 
+            var itemsList = items.ToList();
             using (SuppressEvents())
             {
-                foreach (var item in items)
+                foreach (var item in itemsList)
                 {
                     Add(item);
                 }
             }
 
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, items));
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, itemsList));
         }
 
         /// <summary>
