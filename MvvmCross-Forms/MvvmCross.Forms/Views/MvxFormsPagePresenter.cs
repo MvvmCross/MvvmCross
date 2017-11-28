@@ -517,13 +517,8 @@ namespace MvvmCross.Forms.Views
                 // in a navigation wrapper.
                 if (navigationRootPage == null)
                 {
-                    // NR: This is a really hacky solution to a bug where if "NavigationPage.HasNavigationBar="False"
-                    // is set in the page XAML, the navigation bar is still shown. Looks like after first navigation
-                    // this is resolved
-                    var navpage = new NavigationPage(new MvxContentPage());
+                    var navpage = new NavigationPage(page);// new MvxContentPage()) { Icon = attribute.Icon };
                     ReplacePageRoot(rootPage, navpage, attribute);
-                    navpage.Navigation.InsertPageBefore(page, navpage.RootPage);
-                    navpage.Navigation.PopToRootAsync(attribute.Animated);
                 }
                 else
                 {
