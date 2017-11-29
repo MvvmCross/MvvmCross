@@ -131,7 +131,7 @@ namespace MvvmCross.Droid.Views
                 return overrideAttribute;
 
             IList<MvxBasePresentationAttribute> attributes = viewType.GetCustomAttributes<MvxBasePresentationAttribute>(true).ToList();
-            if(attributes != null && attributes.Count > 0)
+            if (attributes != null && attributes.Count > 0)
             {
                 MvxBasePresentationAttribute attribute = null;
 
@@ -197,7 +197,7 @@ namespace MvvmCross.Droid.Views
             }
             return null;
         }
-        
+
         protected Type GetCurrentActivityViewModelType()
         {
             Type currentActivityType = CurrentActivity.GetType();
@@ -324,29 +324,27 @@ namespace MvvmCross.Droid.Views
 
             var fragmentView = fragment.ToFragment();
 
-            // MvxNavigationService provides an already instantiated ViewModel here,
-            // therefore just assign it
+            // MvxNavigationService provides an already instantiated ViewModel here
             if (request is MvxViewModelInstanceRequest instanceRequest)
             {
                 fragment.ViewModel = instanceRequest.ViewModelInstance;
             }
-            else
-            {
-                var bundle = new Bundle();
-                var serializedRequest = NavigationSerializer.Serializer.SerializeObject(request);
-                bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
 
-                if (fragmentView != null)
+            // save MvxViewModelRequest in the Fragment's Arguments
+            var bundle = new Bundle();
+            var serializedRequest = NavigationSerializer.Serializer.SerializeObject(request);
+            bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
+
+            if (fragmentView != null)
+            {
+                if (fragmentView.Arguments == null)
                 {
-                    if (fragmentView.Arguments == null)
-                    {
-                        fragmentView.Arguments = bundle;
-                    }
-                    else
-                    {
-                        fragmentView.Arguments.Clear();
-                        fragmentView.Arguments.PutAll(bundle);
-                    }
+                    fragmentView.Arguments = bundle;
+                }
+                else
+                {
+                    fragmentView.Arguments.Clear();
+                    fragmentView.Arguments.PutAll(bundle);
                 }
             }
 

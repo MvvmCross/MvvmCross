@@ -172,18 +172,19 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 activity.StartActivity(intent);
         }
 
-        protected virtual ActivityOptionsCompat CreateActivityTransitionOptions(Android.Content.Intent intent,MvxActivityPresentationAttribute attribute){
+        protected virtual ActivityOptionsCompat CreateActivityTransitionOptions(Android.Content.Intent intent, MvxActivityPresentationAttribute attribute)
+        {
             ActivityOptionsCompat options = null;
             if (attribute.SharedElements != null)
-			{
-				IList<Pair> sharedElements = new List<Pair>();
-				foreach (var item in attribute.SharedElements)
-				{
-					intent.PutExtra(item.Key, ViewCompat.GetTransitionName(item.Value));
-					sharedElements.Add(Pair.Create(item.Value, item.Key));
-				}
-				options = ActivityOptionsCompat.MakeSceneTransitionAnimation(CurrentActivity, sharedElements.ToArray());
-			}
+            {
+                IList<Pair> sharedElements = new List<Pair>();
+                foreach (var item in attribute.SharedElements)
+                {
+                    intent.PutExtra(item.Key, ViewCompat.GetTransitionName(item.Value));
+                    sharedElements.Add(Pair.Create(item.Value, item.Key));
+                }
+                options = ActivityOptionsCompat.MakeSceneTransitionAnimation(CurrentActivity, sharedElements.ToArray());
+            }
 
             return options;
         }
@@ -261,30 +262,27 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             var fragmentView = fragment.ToFragment();
 
-            // MvxNavigationService provides an already instantiated ViewModel here,
-            // therefore just assign it
+            // MvxNavigationService provides an already instantiated ViewModel here
             if (request is MvxViewModelInstanceRequest instanceRequest)
             {
                 fragment.ViewModel = instanceRequest.ViewModelInstance;
             }
-            else
+
+            // save MvxViewModelRequest in the Fragment's Arguments
+            var bundle = new Bundle();
+            var serializedRequest = NavigationSerializer.Serializer.SerializeObject(request);
+            bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
+
+            if (fragmentView != null)
             {
-                var bundle = new Bundle();
-                var serializedRequest = NavigationSerializer.Serializer.SerializeObject(request);
-                bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
-
-
-                if (fragmentView != null)
+                if (fragmentView.Arguments == null)
                 {
-                    if (fragmentView.Arguments == null)
-                    {
-                        fragmentView.Arguments = bundle;
-                    }
-                    else
-                    {
-                        fragmentView.Arguments.Clear();
-                        fragmentView.Arguments.PutAll(bundle);
-                    }
+                    fragmentView.Arguments = bundle;
+                }
+                else
+                {
+                    fragmentView.Arguments.Clear();
+                    fragmentView.Arguments.PutAll(bundle);
                 }
             }
 
@@ -303,41 +301,43 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             OnFragmentChanged(ft, fragmentView, attribute);
         }
 
-        protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute){
-			if (attribute.SharedElements != null)
-			{
-				foreach (var item in attribute.SharedElements)
-				{
-					string name = item.Key;
-					if (string.IsNullOrEmpty(name))
-						name = ViewCompat.GetTransitionName(item.Value);
-					ft.AddSharedElement(item.Value, name);
-				}
-			}
-			if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
-			{
-				if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
-					ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation, attribute.PopEnterAnimation, attribute.PopExitAnimation);
-				else
-					ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
-			}
-			if (attribute.TransitionStyle != int.MinValue)
-				ft.SetTransitionStyle(attribute.TransitionStyle);
+        protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        {
+            if (attribute.SharedElements != null)
+            {
+                foreach (var item in attribute.SharedElements)
+                {
+                    string name = item.Key;
+                    if (string.IsNullOrEmpty(name))
+                        name = ViewCompat.GetTransitionName(item.Value);
+                    ft.AddSharedElement(item.Value, name);
+                }
+            }
+            if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
+            {
+                if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
+                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation, attribute.PopEnterAnimation, attribute.PopExitAnimation);
+                else
+                    ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
+            }
+            if (attribute.TransitionStyle != int.MinValue)
+                ft.SetTransitionStyle(attribute.TransitionStyle);
         }
 
-        protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute){
-            
+        protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        {
+
         }
 
-		protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
-		{
+        protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        {
 
-		}
+        }
 
         protected virtual void OnFragmentPopped(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
-		{
+        {
 
-		}
+        }
 
         protected override void ShowDialogFragment(Type view,
            MvxDialogFragmentPresentationAttribute attribute,
@@ -366,8 +366,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             OnBeforeFragmentChanging(ft, dialog, attribute);
 
-			if (attribute.AddToBackStack == true)
-				ft.AddToBackStack(fragmentName);
+            if (attribute.AddToBackStack == true)
+                ft.AddToBackStack(fragmentName);
 
             OnFragmentChanging(ft, dialog, attribute);
 
@@ -532,7 +532,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 var fragmentName = FragmentJavaName(fragmentAttribute.ViewType);
                 fragmentManager.PopBackStackImmediate(fragmentName, 1);
 
-                OnFragmentPopped(null,null,fragmentAttribute);
+                OnFragmentPopped(null, null, fragmentAttribute);
 
                 return true;
             }
@@ -554,7 +554,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 ft.Remove(fragment);
                 ft.CommitAllowingStateLoss();
 
-                OnFragmentPopped(ft, fragment ,fragmentAttribute);
+                OnFragmentPopped(ft, fragment, fragmentAttribute);
 
                 return true;
             }
