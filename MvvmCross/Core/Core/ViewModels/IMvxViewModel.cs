@@ -22,7 +22,7 @@ namespace MvvmCross.Core.ViewModels
 
         void ViewDisappeared();
 
-        void ViewDestroy();
+        void ViewDestroy(bool viewFinishing = true);
 
         void Init(IMvxBundle parameters);
 
