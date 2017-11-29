@@ -63,15 +63,15 @@ namespace MvvmCross.Uwp.Views
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
             MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new page presentation");
-            return new MvxPagePresentationAttribute();
+            return new MvxPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
         }
 
-        
+
         public override void Show(MvxViewModelRequest request)
         {
             GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
-        
+
         public override void Close(IMvxViewModel viewModel)
         {
             GetPresentationAttributeAction(viewModel.GetType(), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);
@@ -125,7 +125,7 @@ namespace MvvmCross.Uwp.Views
                 var splitView = currentPage.Content.FindControl<SplitView>();
                 if (splitView == null)
                 {
-                    throw new MvxException($"Failed to find a SplitView in the visual tree of {viewType.Name}");
+                    return;
                 }
 
                 if (attribute.Position == SplitPanePosition.Content)

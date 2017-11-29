@@ -10,6 +10,9 @@
       <StackLayout Margin="10">
             <Label Text="I'm a nested page" />
             <Button Text="Close" mvx:Bi.nd="Command CloseCommand"/>
+            <Button Text="Pop to child" mvx:Bi.nd="Command PopToChildCommand"/>
+            <Button Text="Pop to root" mvx:Bi.nd="Command PopToRootCommand"/>
+            <Button Text="Remove second child" mvx:Bi.nd="Command RemoveCommand"/>
         </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>
