@@ -66,38 +66,13 @@ namespace MvvmCross.Forms.Uwp.Presenters
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if (HandlePresentationChange(hint)) return;
-
-            if (hint is MvxClosePresentationHint closeHint)
-            {
-                FormsPagePresenter.Close(closeHint.ViewModelToClose);
-
-                //var mainPage = FormsApplication.MainPage as NavigationPage;
-
-                //if (mainPage == null)
-                //{
-                //    Mvx.TaggedTrace("MvxFormsPresenter:ChangePresentation()", "Oops! Don't know what to do");
-                //}
-                //else
-                //{
-                //    mainPage.PopAsync();
-                //}
-            }
+            FormsPagePresenter.ChangePresentation(hint);
         }
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
             var presentationAttribute = FormsPagePresenter.CreatePresentationAttribute(viewModelType, viewType);
             return presentationAttribute ?? base.CreatePresentationAttribute(viewModelType, viewType);
-        }
-
-
-        protected virtual void CustomPlatformInitialization(NavigationPage mainPage)
-        {
-        }
-
-        public override void Close(IMvxViewModel toClose)
-        {
         }
 
         public virtual bool ClosePlatformViews()
