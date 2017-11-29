@@ -119,7 +119,7 @@ namespace MvvmCross.Forms.Droid.Views
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            ViewModel?.ViewDestroy();
+            ViewModel?.ViewDestroy(IsFinishing);
         }
 
         protected override void OnStart()
