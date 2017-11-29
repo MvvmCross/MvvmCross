@@ -10,6 +10,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 using System.Reflection;
+using MvvmCross.Core.ViewModels.Hints;
 
 namespace MvvmCross.Forms.Views
 {
@@ -151,15 +152,33 @@ namespace MvvmCross.Forms.Views
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if (HandlePresentationChange(hint)) return;
-
-            if (hint is MvxClosePresentationHint)
+            var navigation = GetHostPageOfType<NavigationPage>().Navigation;
+            if (hint is MvxPopToRootPresentationHint popToRootHint)
             {
-                Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                navigation.PopToRootAsync(popToRootHint.Animated);
+                return;
+            }
+            if (hint is MvxPopPresentationHint popHint)
+            {
+                foreach (var page in navigation.NavigationStack)
+                {
+                    page.Navigation.PopAsync(popHint.Animated);
+                    if (page is IMvxPage mvxPage && mvxPage.ViewModel.GetType() == popHint.ViewModelToPopTo)
+                        return;
+                }
+                return;
+            }
+            if (hint is MvxRemovePresentationHint removeHint)
+            {
+                var page = navigation.NavigationStack
+                                     .OfType<IMvxPage>()
+                                     .FirstOrDefault(view => view.ViewModel.GetType() == removeHint.ViewModelToRemove) as Page;
+                if(page != null)
+                    navigation.RemovePage(page);
                 return;
             }
 
-            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
+            base.ChangePresentation(hint);
         }
 
         public virtual void ShowCarouselPage(
