@@ -78,7 +78,7 @@ namespace MvvmCross.Uwp.Views
             {
                 var child = VisualTreeHelper.GetChild(parent, i) as UIElement;
 
-                result = FindControl<T>(child);
+                result = FindControl<T>(child, name);
                 if (result != null)
                 {
                     return result;
