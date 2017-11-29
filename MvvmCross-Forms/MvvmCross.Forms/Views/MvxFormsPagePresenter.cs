@@ -152,30 +152,29 @@ namespace MvvmCross.Forms.Views
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
+            var navigation = GetHostPageOfType<NavigationPage>().Navigation;
             if (hint is MvxPopToRootPresentationHint popToRootHint)
             {
-                GetHostPageOfType<NavigationPage>().Navigation.PopToRootAsync(popToRootHint.Animated);
+                navigation.PopToRootAsync(popToRootHint.Animated);
                 return;
             }
             if (hint is MvxPopPresentationHint popHint)
             {
-                foreach (var page in GetHostPageOfType<NavigationPage>().Navigation.NavigationStack)
+                foreach (var page in navigation.NavigationStack)
                 {
+                    page.Navigation.PopAsync(popHint.Animated);
                     if (page is IMvxPage mvxPage && mvxPage.ViewModel.GetType() == popHint.ViewModelToPopTo)
-                    {
-                        page.Navigation.PopAsync(popHint.Animated);
-                        break;
-                    }
-                    else
-                        page.Navigation.PopAsync(popHint.Animated);
+                        return;
                 }
                 return;
             }
             if (hint is MvxRemovePresentationHint removeHint)
             {
-                var host = GetHostPageOfType<NavigationPage>();
-                var page = host.Navigation.NavigationStack.OfType<IMvxPage>().FirstOrDefault(x => x.ViewModel.GetType() == removeHint.ViewModelToRemove) as Page;
-                host.Navigation.RemovePage(page);
+                var page = navigation.NavigationStack
+                                     .OfType<IMvxPage>()
+                                     .FirstOrDefault(view => view.ViewModel.GetType() == removeHint.ViewModelToRemove) as Page;
+                if(page != null)
+                    navigation.RemovePage(page);
                 return;
             }
 
