@@ -88,8 +88,6 @@ namespace MvvmCross.tvOS.Platform
         protected override void InitializePlatformServices()
         {
             RegisterPlatformProperties();
-            // for now we continue to register the old style platform properties
-            RegisterOldStylePlatformProperties();
             RegisterPresenter();
             RegisterLifetime();
         }
@@ -102,12 +100,6 @@ namespace MvvmCross.tvOS.Platform
         protected virtual MvxTvosSystem CreateTvosSystemProperties()
         {
             return new MvxTvosSystem();
-        }
-
-        [Obsolete("In the future I expect to see something implemented in the core project for this functionality - including something that can be called statically during startup")]
-        protected virtual void RegisterOldStylePlatformProperties()
-        {
-            Mvx.RegisterSingleton<IMvxTvosPlatformProperties>(new MvxTvosPlatformProperties());
         }
 
         protected virtual void RegisterLifetime()
