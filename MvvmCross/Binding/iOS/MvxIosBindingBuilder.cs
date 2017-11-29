@@ -1,4 +1,4 @@
-﻿// MvxIosBindingBuilder.cs
+// MvxIosBindingBuilder.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -217,6 +217,10 @@ namespace MvvmCross.Binding.iOS
             registry.RegisterCustomBindingFactory<UITextField>(
                 MvxIosPropertyBinding.UITextField_TextFocus,
                 textField => new MvxUITextFieldTextFocusTargetBinding(textField));
+
+            registry.RegisterCustomBindingFactory<UIBarButtonItem>(
+                MvxIosPropertyBinding.UIBarButtonItem_Clicked,
+                view => new MvxUIBarButtonItemTargetBinding(view));
 
             /*
             registry.RegisterCustomBindingFactory<UIView>("TwoFingerDoubleTap",

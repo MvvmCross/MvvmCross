@@ -5,7 +5,6 @@ using MvvmCross.Uwp.Views;
 
 namespace Playground.Uwp.Views
 {
-    [MvxPagePresentation]
     public sealed partial class ChildView
     {
         public ChildView()

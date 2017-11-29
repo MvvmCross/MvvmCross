@@ -25,7 +25,8 @@ namespace MvvmCross.Binding.iOS.Target
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UIDatePicker is null in MvxBaseUIDatePickerTargetBinding");
             }
-            else if (targetPropertyInfo.Name == nameof(UIDatePicker.Date)) // Only listen for changes if we are binding against the Date property.
+            // Only listen for value changes if we are binding against one of the value-derived properties.
+            else if (targetPropertyInfo.Name == nameof(UIDatePicker.Date) || targetPropertyInfo.Name == nameof(UIDatePicker.CountDownDuration))
             {
                 datePicker.ValueChanged += DatePickerOnValueChanged;
             }

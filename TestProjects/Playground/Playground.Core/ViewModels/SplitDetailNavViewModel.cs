@@ -11,9 +11,12 @@ namespace Playground.Core.ViewModels
         {
             _navigationService = navigationService;
 
+            MainMenuCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<MixedNavFirstViewModel>());
             CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
         }
 
+        public IMvxAsyncCommand MainMenuCommand { get; private set; }
         public IMvxAsyncCommand CloseCommand { get; private set; }
+
     }
 }

@@ -87,5 +87,10 @@ namespace MvvmCross.Forms.iOS.Presenters
             CloseSplitViewController();
             return true;
         }
+
+        public override void ChangePresentation(MvxPresentationHint hint)
+        {
+            FormsPagePresenter.ChangePresentation(hint);
+        }
     }
 }

@@ -10,6 +10,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 using System.Reflection;
+using MvvmCross.Core.ViewModels.Hints;
 
 namespace MvvmCross.Forms.Views
 {
@@ -151,15 +152,33 @@ namespace MvvmCross.Forms.Views
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            if (HandlePresentationChange(hint)) return;
-
-            if (hint is MvxClosePresentationHint)
+            var navigation = GetHostPageOfType<NavigationPage>().Navigation;
+            if (hint is MvxPopToRootPresentationHint popToRootHint)
             {
-                Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                navigation.PopToRootAsync(popToRootHint.Animated);
+                return;
+            }
+            if (hint is MvxPopPresentationHint popHint)
+            {
+                foreach (var page in navigation.NavigationStack)
+                {
+                    page.Navigation.PopAsync(popHint.Animated);
+                    if (page is IMvxPage mvxPage && mvxPage.ViewModel.GetType() == popHint.ViewModelToPopTo)
+                        return;
+                }
+                return;
+            }
+            if (hint is MvxRemovePresentationHint removeHint)
+            {
+                var page = navigation.NavigationStack
+                                     .OfType<IMvxPage>()
+                                     .FirstOrDefault(view => view.ViewModel.GetType() == removeHint.ViewModelToRemove) as Page;
+                if(page != null)
+                    navigation.RemovePage(page);
                 return;
             }
 
-            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
+            base.ChangePresentation(hint);
         }
 
         public virtual void ShowCarouselPage(
@@ -492,10 +511,6 @@ namespace MvvmCross.Forms.Views
                 rootPage = FormsApplication.MainPage;
             }
 
-            //By default push to the detail page
-            if(GetHostPageOfType<MasterDetailPage>(rootPage) is MasterDetailPage masterRoot)
-                rootPage = masterRoot.Detail;
-
             var navigationRootPage = GetHostPageOfType<NavigationPage>(rootPage);
 
             // Step down through any nested navigation pages to make sure we're pushing to the
@@ -521,13 +536,8 @@ namespace MvvmCross.Forms.Views
                 // in a navigation wrapper.
                 if (navigationRootPage == null)
                 {
-                    // NR: This is a really hacky solution to a bug where if "NavigationPage.HasNavigationBar="False"
-                    // is set in the page XAML, the navigation bar is still shown. Looks like after first navigation
-                    // this is resolved
-                    var navpage = new MvxNavigationPage(new MvxContentPage());
+                    var navpage = new NavigationPage(page);
                     ReplacePageRoot(rootPage, navpage, attribute);
-                    navpage.Navigation.InsertPageBefore(page, navpage.RootPage);
-                    navpage.Navigation.PopToRootAsync(attribute.Animated);
                 }
                 else
                 {

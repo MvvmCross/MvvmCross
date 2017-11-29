@@ -153,6 +153,9 @@
     <Compile Include="Platform\LogProviders\ConsoleLogProvider.cs" />
     <Compile Include="ViewModels\MvxNotifyTask.cs" />
     <Compile Include="ViewModels\PropertyChangedEventArgsCache.cs" />
+    <Compile Include="ViewModels\Hints\MvxPopPresentationHint.cs" />
+    <Compile Include="ViewModels\Hints\MvxPopToRootPresentationHint.cs" />
+    <Compile Include="ViewModels\Hints\MvxRemovePresentationHint.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -171,4 +174,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModels\Hints\" />
+  </ItemGroup>
 </Project>
