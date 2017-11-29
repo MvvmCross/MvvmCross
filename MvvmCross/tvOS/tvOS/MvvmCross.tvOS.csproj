@@ -54,16 +54,11 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Platform\IMvxApplicationDelegate.cs" />
-    <Compile Include="Platform\IMvxTvosPlatformProperties.cs" />
     <Compile Include="Platform\MvxApplicationDelegate.cs" />
     <Compile Include="Platform\MvxDebugTrace.cs" />
-    <Compile Include="Platform\MvxTvosDisplayDensity.cs" />
-    <Compile Include="Platform\MvxTvosFormFactor.cs" />
-    <Compile Include="Platform\MvxTvosPlatformProperties.cs" />
     <Compile Include="Platform\MvxTvosSetup.cs" />
     <Compile Include="Views\IMvxCanCreateTvosView.cs" />
     <Compile Include="Views\IMvxCurrentRequest.cs" />
-    <Compile Include="Views\IMvxTvosNavigator.cs" />
     <Compile Include="Views\IMvxTvosView.cs" />
     <Compile Include="Views\IMvxTvosViewCreator.cs" />
     <Compile Include="Views\IMvxTvosViewsContainer.cs" />
@@ -71,7 +66,6 @@
     <Compile Include="Views\MvxBindingViewControllerAdapter.cs" />
     <Compile Include="Views\MvxCanCreateTvosViewExtensionMethods.cs" />
     <Compile Include="Views\MvxCollectionViewController.cs" />
-    <Compile Include="Views\MvxFormFactorSpecificAttribute.cs" />
     <Compile Include="Views\MvxFromStoryboardAttribute.cs" />
     <Compile Include="Views\MvxTvosUIThreadDispatcher.cs" />
     <Compile Include="Views\MvxTvosViewDispatcher.cs" />
@@ -84,7 +78,6 @@
     <Compile Include="Views\MvxViewControllerAdaptingExtensions.cs" />
     <Compile Include="Views\MvxViewControllerExtensionMethods.cs" />
     <Compile Include="Views\Presenters\IMvxTvosViewPresenter.cs" />
-    <Compile Include="Views\Presenters\MvxBaseTvosViewPresenter.cs" />
     <Compile Include="Views\Presenters\MvxTvosViewPresenter.cs" />
     <Compile Include="Views\IMvxTabBarViewController.cs" />
     <Compile Include="Views\Presenters\Attributes\MvxTabPresentationAttribute.cs" />
