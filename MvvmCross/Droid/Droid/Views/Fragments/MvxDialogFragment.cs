@@ -75,7 +75,7 @@ namespace MvvmCross.Droid.Views.Fragments
         public override void OnDestroy()
         {
             base.OnDestroy();
-            ViewModel?.ViewDestroy();
+            ViewModel?.ViewDestroy(viewFinishing: IsRemoving || Activity == null || Activity.IsFinishing);
         }
 
         public override void OnStart()
@@ -113,7 +113,7 @@ namespace MvvmCross.Droid.Views.Fragments
         protected MvxDialogFragment(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
-    
+
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }

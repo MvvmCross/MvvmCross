@@ -34,7 +34,7 @@ namespace MvvmCross.Droid.Views.Fragments
             set
             {
                 _dataContext = value;
-                if (BindingContext != null)
+                if(BindingContext != null)
                     BindingContext.DataContext = value;
             }
         }
@@ -64,10 +64,10 @@ namespace MvvmCross.Droid.Views.Fragments
             ViewModel?.ViewCreated();
         }
 
-        public override void OnDestroy ()
+        public override void OnDestroy()
         {
-            base.OnDestroy ();
-            ViewModel?.ViewDestroy ();
+            base.OnDestroy();
+            ViewModel?.ViewDestroy(viewFinishing: IsRemoving || Activity == null || Activity.IsFinishing);
         }
 
         public override void OnStart()

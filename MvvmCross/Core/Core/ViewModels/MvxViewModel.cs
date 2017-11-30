@@ -41,7 +41,7 @@ namespace MvvmCross.Core.ViewModels
         {
         }
 
-        public virtual void ViewDestroy()
+        public virtual void ViewDestroy(bool viewFinishing = true)
         {
         }
 
@@ -97,10 +97,10 @@ namespace MvvmCross.Core.ViewModels
     {
         public async Task Init(string parameter)
         {
-            if(!string.IsNullOrEmpty(parameter))
+            if (!string.IsNullOrEmpty(parameter))
             {
                 IMvxJsonConverter serializer;
-                if(!Mvx.TryResolve(out serializer))
+                if (!Mvx.TryResolve(out serializer))
                 {
                     throw new MvxIoCResolveException("There is no implementation of IMvxJsonConverter registered. You need to use the MvvmCross Json plugin or create your own implementation of IMvxJsonConverter.");
                 }
@@ -119,11 +119,12 @@ namespace MvvmCross.Core.ViewModels
     {
         public TaskCompletionSource<object> CloseCompletionSource { get; set; }
 
-        public override void ViewDestroy()
+        public override void ViewDestroy(bool viewFinishing = true)
         {
-            if(CloseCompletionSource != null && !CloseCompletionSource.Task.IsCompleted && !CloseCompletionSource.Task.IsFaulted)
+            if (viewFinishing && CloseCompletionSource != null && !CloseCompletionSource.Task.IsCompleted && !CloseCompletionSource.Task.IsFaulted)
                 CloseCompletionSource?.TrySetCanceled();
-            base.ViewDestroy();
+
+            base.ViewDestroy(viewFinishing);
         }
     }
 

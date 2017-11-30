@@ -94,9 +94,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         protected override void OnDestroy()
         {
             base.OnDestroy();
-
-            if (IsFinishing)
-                ViewModel?.ViewDestroy();
+            ViewModel?.ViewDestroy(IsFinishing);
         }
 
         protected override void OnStart()

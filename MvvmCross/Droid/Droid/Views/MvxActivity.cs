@@ -121,9 +121,7 @@ namespace MvvmCross.Droid.Views
         protected override void OnDestroy()
         {
             base.OnDestroy();
-
-            if (IsFinishing)
-                ViewModel?.ViewDestroy();
+            ViewModel?.ViewDestroy(IsFinishing);
         }
 
         protected override void OnStart()

@@ -76,7 +76,7 @@ namespace MvvmCross.Droid.Support.V4
         public override void OnDestroy()
         {
             base.OnDestroy();
-            ViewModel?.ViewDestroy();
+            ViewModel?.ViewDestroy(viewFinishing: IsRemoving || Activity == null || Activity.IsFinishing);
         }
 
         public override void OnStart()

@@ -83,35 +83,35 @@ namespace MvvmCross.Droid.Views
             base.OnCreate(bundle);
             ViewModel?.ViewCreated();
         }
-		protected override void OnDestroy()
-		{
-			base.OnDestroy();
-			ViewModel?.ViewDestroy();
-		}
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            ViewModel?.ViewDestroy(IsFinishing);
+        }
 
-		protected override void OnStart()
-		{
-			base.OnStart();
-			ViewModel?.ViewAppearing();
-		}
+        protected override void OnStart()
+        {
+            base.OnStart();
+            ViewModel?.ViewAppearing();
+        }
 
-		protected override void OnResume()
-		{
-			base.OnResume();
-			ViewModel?.ViewAppeared();
-		}
+        protected override void OnResume()
+        {
+            base.OnResume();
+            ViewModel?.ViewAppeared();
+        }
 
-		protected override void OnPause()
-		{
-			base.OnPause();
-			ViewModel?.ViewDisappearing();
-		}
+        protected override void OnPause()
+        {
+            base.OnPause();
+            ViewModel?.ViewDisappearing();
+        }
 
-		protected override void OnStop()
-		{
-			base.OnStop();
-			ViewModel?.ViewDisappeared();
-		}
+        protected override void OnStop()
+        {
+            base.OnStop();
+            ViewModel?.ViewDisappeared();
+        }
     }
 
     [Obsolete("TabActivity is obsolete. Use ViewPager + Indicator or any other Activity with Toolbar support.")]
