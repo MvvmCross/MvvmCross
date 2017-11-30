@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="13529" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Root View-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="RootView" id="BYZ-38-t0r" customClass="RootView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjQ-fY-eex">
+                                <rect key="frame" x="702" y="181" width="517" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Initiate Tabs navigation"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OLi-5F-jV2">
+                                <rect key="frame" x="702" y="343" width="517" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Initiate Modal navigation"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFh-fF-n1k">
+                                <rect key="frame" x="702" y="500" width="517" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Show Child"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DGo-Ta-phT">
+                                <rect key="frame" x="702" y="660" width="517" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Show modal"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kp0-IM-Hs2">
+                                <rect key="frame" x="517" y="813" width="887" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Show modal (override presentation attribute)"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnChild" destination="jFh-fF-n1k" id="LxL-tu-1m9"/>
+                        <outlet property="btnModal" destination="DGo-Ta-phT" id="0gy-Z5-ATt"/>
+                        <outlet property="btnModalAttribute" destination="Kp0-IM-Hs2" id="fFA-sw-iOU"/>
+                        <outlet property="btnModalNav" destination="OLi-5F-jV2" id="6qT-30-DDm"/>
+                        <outlet property="btnTabs" destination="gjQ-fY-eex" id="kap-nD-YAh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--Tabs Root View-->
+        <scene sceneID="GFf-Au-LG3">
+            <objects>
+                <viewController storyboardIdentifier="TabsRootView" id="DTv-5t-4ic" customClass="TabsRootView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="e45-kt-YS5"/>
+                        <viewControllerLayoutGuide type="bottom" id="3vR-vy-TLu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="C32-x6-OL1">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LM6-V4-FyA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1400" y="1588"/>
+        </scene>
+        <!--Child View-->
+        <scene sceneID="Wgj-Ra-rQk">
+            <objects>
+                <viewController storyboardIdentifier="ChildView" id="9jz-1h-A3g" customClass="ChildView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mEn-pH-8u8"/>
+                        <viewControllerLayoutGuide type="bottom" id="c3J-uC-FFQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lVb-Nr-8fG">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6QQ-xI-bOy">
+                                <rect key="frame" x="754" y="425" width="412" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Show Second Child"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVo-Yc-DfD">
+                                <rect key="frame" x="872" y="569" width="177" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Close"/>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="sVo-Yc-DfD" id="ub1-gr-EfW"/>
+                        <outlet property="btnShowChild" destination="6QQ-xI-bOy" id="96I-7v-KUN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uOd-va-1LN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2581" y="65"/>
+        </scene>
+        <!--Tab2 View-->
+        <scene sceneID="NXM-Pe-zjO">
+            <objects>
+                <viewController storyboardIdentifier="Tab2View" id="xoD-Wa-PSy" customClass="Tab2View" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sJS-OO-yGH"/>
+                        <viewControllerLayoutGuide type="bottom" id="L1S-Bb-qI0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LBp-KW-jAz">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I am a plain ViewController! Look at TabsView to see how my title and icon are set" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5F-cp-QQB">
+                                <rect key="frame" x="110" y="189" width="1700" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y53-Vd-oL8">
+                                <rect key="frame" x="717" y="389" width="488" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Initiate Stack navigation"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVO-Xr-A9h">
+                                <rect key="frame" x="872" y="531" width="177" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Close"/>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="PVO-Xr-A9h" id="ANg-DF-Rat"/>
+                        <outlet property="btnStackNav" destination="y53-Vd-oL8" id="a1G-jJ-615"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mtm-Pc-rsW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3791" y="1635"/>
+        </scene>
+        <!--Modal Nav View-->
+        <scene sceneID="rER-rU-s9p">
+            <objects>
+                <viewController storyboardIdentifier="ModalNavView" id="G6Q-Wj-Wm2" customClass="ModalNavView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qnE-9J-056"/>
+                        <viewControllerLayoutGuide type="bottom" id="HBj-9R-z7z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wJh-oE-vfy">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ki2-zF-YTr">
+                                <rect key="frame" x="872" y="486" width="177" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Close"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZ7-TC-Flc">
+                                <rect key="frame" x="749" y="716" width="423" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Show Nested Modal"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DJV-QX-1lo">
+                                <rect key="frame" x="824" y="248" width="273" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Show Child"/>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="ki2-zF-YTr" id="KKd-an-reJ"/>
+                        <outlet property="btnNestedModal" destination="ZZ7-TC-Flc" id="jsj-WV-jav"/>
+                        <outlet property="btnShowChild" destination="DJV-QX-1lo" id="pc1-cC-5MN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q3L-Pb-x6j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2035" y="3166"/>
+        </scene>
+        <!--Tab1 View-->
+        <scene sceneID="SiO-fI-IDj">
+            <objects>
+                <viewController storyboardIdentifier="Tab1View" id="0BC-Cn-XTJ" customClass="Tab1View" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Iju-be-klE"/>
+                        <viewControllerLayoutGuide type="bottom" id="inz-QQ-GZ9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Fw6-ho-7OX">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dm8-LE-Dtk">
+                                <rect key="frame" x="712" y="327" width="496" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Initiate Modal navigation"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0uR-AP-d8h">
+                                <rect key="frame" x="814" y="503" width="290" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Show Modal"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sCI-37-nug">
+                                <rect key="frame" x="824" y="667" width="273" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Show Child"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This tab is wrapped in a NavigationController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yrC-rm-qDO">
+                                <rect key="frame" x="46" y="171" width="1826" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="btnChild" destination="sCI-37-nug" id="ctd-4O-EIm"/>
+                        <outlet property="btnModal" destination="0uR-AP-d8h" id="0qu-Uu-aB2"/>
+                        <outlet property="btnModalNav" destination="dm8-LE-Dtk" id="JDw-hZ-894"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LOI-DC-a6i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1324" y="1608"/>
+        </scene>
+        <!--Second Child View-->
+        <scene sceneID="lag-F9-cfg">
+            <objects>
+                <viewController storyboardIdentifier="SecondChildView" id="b8r-Ww-K8A" customClass="SecondChildView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tRT-GL-ua4"/>
+                        <viewControllerLayoutGuide type="bottom" id="1la-m2-GD9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ORt-sn-Ko7">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Dh-dY-R6f">
+                                <rect key="frame" x="724" y="419" width="473" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Close Stack From View"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DiL-UO-xa2">
+                                <rect key="frame" x="872" y="576" width="177" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Close"/>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="DiL-UO-xa2" id="JHI-5D-pgc"/>
+                        <outlet property="btnCloseStack" destination="0Dh-dY-R6f" id="MpE-Y4-udJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y5P-p9-qhA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5079" y="83"/>
+        </scene>
+        <!--Modal View-->
+        <scene sceneID="gYG-xK-dzt">
+            <objects>
+                <viewController storyboardIdentifier="ModalView" id="G9J-kp-Or8" customClass="ModalView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IxB-1w-wpk"/>
+                        <viewControllerLayoutGuide type="bottom" id="7oB-kV-4Rj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0DU-xL-Rco">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVA-TI-YGb">
+                                <rect key="frame" x="724" y="284" width="472" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Initiate Tabs navigation"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V6n-2U-BnN">
+                                <rect key="frame" x="871" y="503" width="177" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Close"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wrv-X0-z3u">
+                                <rect key="frame" x="748" y="728" width="423" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Show Nested Modal"/>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="V6n-2U-BnN" id="A8l-5q-hEz"/>
+                        <outlet property="btnNestedModal" destination="wrv-X0-z3u" id="wKI-4w-7oR"/>
+                        <outlet property="btnTabNav" destination="oVA-TI-YGb" id="mke-6H-vii"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pAv-yj-lfX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-535" y="3166"/>
+        </scene>
+        <!--Tab3 View-->
+        <scene sceneID="WqR-Ze-mUp">
+            <objects>
+                <viewController storyboardIdentifier="Tab3View" id="qpD-r5-Fyq" customClass="Tab3View" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pcz-pp-7R5"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ijj-Cq-ykD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2g8-2B-WEf">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9t-vz-FRd">
+                                <rect key="frame" x="717" y="389" width="488" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Initiate Stack navigation"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I am a plain ViewController! My title and icon are set by implementing the IMvxTabBarItemViewController interface" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GuR-P6-sh1">
+                                <rect key="frame" x="111" y="68" width="1700" height="132"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Sy-gX-DEl">
+                                <rect key="frame" x="873" y="539" width="177" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Close"/>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="2Sy-gX-DEl" id="ZOR-sJ-66B"/>
+                        <outlet property="btnStackNav" destination="B9t-vz-FRd" id="CVl-Io-nLG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t1N-hy-Py2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6105" y="1635"/>
+        </scene>
+        <!--Nested Modal View-->
+        <scene sceneID="fI7-JK-XNE">
+            <objects>
+                <viewController storyboardIdentifier="NestedModalView" id="gtW-b7-803" customClass="NestedModalView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4z8-Fd-QeQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="4gW-dx-e2b"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="81c-Ud-L2D">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7v-ed-BbE">
+                                <rect key="frame" x="828" y="288" width="266" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Show Tabs"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="534-UM-uld">
+                                <rect key="frame" x="872" y="497" width="177" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Close"/>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="534-UM-uld" id="5Ff-5G-Own"/>
+                        <outlet property="btnTabs" destination="m7v-ed-BbE" id="6y6-EH-IsH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tIf-lW-Hvp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7207" y="3166"/>
+        </scene>
+        <!--Override Attribute View-->
+        <scene sceneID="Vxy-z0-yvH">
+            <objects>
+                <viewController storyboardIdentifier="OverrideAttributeView" id="fbF-Ve-lWP" customClass="OverrideAttributeView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1Pb-jp-U9G"/>
+                        <viewControllerLayoutGuide type="bottom" id="8gz-Q1-TS5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gG1-OQ-WYc">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPS-XL-146">
+                                <rect key="frame" x="726" y="366" width="469" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Initate Tabs Navigation"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="An2-6g-ssH">
+                                <rect key="frame" x="872" y="565" width="177" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Close"/>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="An2-6g-ssH" id="Ihp-j0-9cl"/>
+                        <outlet property="btnTabNav" destination="OPS-XL-146" id="Ag4-c7-Fz0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mas-oz-wv6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4889" y="3166"/>
+        </scene>
+    </scenes>
+</document>

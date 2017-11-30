@@ -5,6 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System;
 using MvvmCross.Core.ViewModels;
 
 namespace MvvmCross.tvOS.Views
@@ -14,5 +15,7 @@ namespace MvvmCross.tvOS.Views
         IMvxTvosView CreateView(MvxViewModelRequest request);
 
         IMvxTvosView CreateView(IMvxViewModel viewModel);
+
+        IMvxTvosView CreateViewOfType(Type viewType, MvxViewModelRequest request);
     }
 }
