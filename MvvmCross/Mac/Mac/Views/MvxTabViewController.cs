@@ -76,6 +76,42 @@ namespace MvvmCross.Mac.Views
         public MvxViewModelRequest Request { get; set; }
 
         public IMvxBindingContext BindingContext { get; set; }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            ViewModel?.ViewCreated();
+        }
+
+        public override void ViewWillAppear()
+        {
+            base.ViewWillAppear();
+            ViewModel?.ViewAppearing();
+        }
+
+        public override void ViewDidAppear()
+        {
+            base.ViewDidAppear();
+            ViewModel?.ViewAppeared();
+        }
+
+        public override void ViewWillDisappear()
+        {
+            base.ViewWillDisappear();
+            ViewModel?.ViewDisappearing();
+        }
+
+        public override void ViewDidDisappear()
+        {
+            base.ViewDidDisappear();
+            ViewModel?.ViewDisappeared();
+        }
+
+        public override void PrepareForSegue(NSStoryboardSegue segue, NSObject sender)
+        {
+            base.PrepareForSegue(segue, sender);
+            this.ViewModelRequestForSegue(segue, sender);
+        }
     }
 
     public class MvxTabViewController<TViewModel>
