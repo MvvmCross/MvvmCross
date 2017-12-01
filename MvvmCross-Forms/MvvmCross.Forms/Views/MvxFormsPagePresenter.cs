@@ -534,22 +534,14 @@ namespace MvvmCross.Forms.Views
 
                 // If the root isn't a navigation page, we need to wrap the new page
                 // in a navigation wrapper.
-                if (navigationRootPage == null)
+                if (navigationRootPage == null || attribute.NoHistory)
                 {
                     var navpage = new NavigationPage(page);
                     ReplacePageRoot(rootPage, navpage, attribute);
                 }
                 else
                 {
-                    if (attribute.NoHistory)
-                    {
-                        navigationRootPage.Navigation.InsertPageBefore(page, navigationRootPage.RootPage);
-                        navigationRootPage.Navigation.PopToRootAsync(attribute.Animated);
-                    }
-                    else
-                    {
-                        navigationRootPage.PushAsync(page, attribute.Animated);
-                    }
+                    navigationRootPage.PushAsync(page, attribute.Animated);
                 }
             }
             else
