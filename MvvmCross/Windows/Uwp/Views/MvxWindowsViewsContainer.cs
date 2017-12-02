@@ -1,4 +1,4 @@
-﻿// MvxStoreViewsContainer.cs
+// MvxStoreViewsContainer.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -32,6 +32,8 @@ namespace MvvmCross.Uwp.Views
             {
                 var key = int.Parse(viewModelKey);
                 var viewModel = Mvx.Resolve<IMvxChildViewModelCache>().Get(key);
+                if (savedState != null)
+                    viewModel.ReloadState(savedState);
                 return viewModel;
             }
 

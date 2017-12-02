@@ -1,3 +1,5 @@
+using MvvmCross.Platform;
+using MvvmCross.Uwp.Views.Suspension;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -20,7 +22,9 @@ namespace Playground.Uwp
         {
             InitializeComponent();
             Suspending += OnSuspending;
+            Resuming += OnResuming;
         }
+
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
@@ -53,11 +57,14 @@ namespace Playground.Uwp
             {
                 if (rootFrame.Content == null)
                 {
-                    var setup = new Setup(rootFrame);
+                    var setup = new Setup(rootFrame,"Suspension");
                     setup.Initialize();
 
                     var start = MvvmCross.Platform.Mvx.Resolve<MvvmCross.Core.ViewModels.IMvxAppStart>();
                     start.Start();
+
+                   
+
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
@@ -81,11 +88,23 @@ namespace Playground.Uwp
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
+
+            var suspension = Mvx.GetSingleton<IMvxSuspensionManager>() as MvxSuspensionManager;
+
+            await suspension.SaveAsync();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+
+        private async void OnResuming(object sender, object e)
+        {
+            var suspension = Mvx.GetSingleton<IMvxSuspensionManager>() as MvxSuspensionManager;
+
+            await suspension.RestoreAsync();
+        }
+
     }
 }
