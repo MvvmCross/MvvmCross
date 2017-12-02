@@ -1,4 +1,4 @@
-﻿// MvxWinRTPage.cs
+// MvxWinRTPage.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -113,14 +113,17 @@ namespace MvvmCross.Uwp.Views
             else
             {
                 var backstack = Frame.BackStack;
-                var currentEntry = backstack[backstack.Count - 1];
-                var key = translator.RequestTextGetKey(currentEntry.Parameter.ToString());
-                if (key == 0)
+                if (backstack.Count > 0)
                 {
-                    var newParamter = translator.GetRequestTextWithKeyFor(ViewModel);
-                    var entry = new PageStackEntry(currentEntry.SourcePageType, newParamter, currentEntry.NavigationTransitionInfo);
-                    backstack.Remove(currentEntry);
-                    backstack.Add(entry);
+                    var currentEntry = backstack[backstack.Count - 1];
+                    var key = translator.RequestTextGetKey(currentEntry.Parameter.ToString());
+                    if (key == 0)
+                    {
+                        var newParamter = translator.GetRequestTextWithKeyFor(ViewModel);
+                        var entry = new PageStackEntry(currentEntry.SourcePageType, newParamter, currentEntry.NavigationTransitionInfo);
+                        backstack.Remove(currentEntry);
+                        backstack.Add(entry);
+                    }
                 }
             }
         }
