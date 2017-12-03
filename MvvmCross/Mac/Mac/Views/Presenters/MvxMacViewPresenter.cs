@@ -24,8 +24,6 @@ namespace MvvmCross.Mac.Views.Presenters
         : MvxAttributeViewPresenter, IMvxMacViewPresenter, IMvxAttributeViewPresenter
     {
         private readonly INSApplicationDelegate _applicationDelegate;
-        private List<NSWindow> _windows;
-        private ConditionalWeakTable<NSWindow, NSWindowController> _windowsToWindowControllers = new ConditionalWeakTable<NSWindow, NSWindowController>();
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
@@ -64,12 +62,11 @@ namespace MvvmCross.Mac.Views.Presenters
 
         protected virtual INSApplicationDelegate ApplicationDelegate => _applicationDelegate;
 
-        protected virtual List<NSWindow> Windows => _windows;
+        protected virtual List<NSWindow> Windows => NSApplication.SharedApplication.Windows.ToList();
 
         public MvxMacViewPresenter(NSApplicationDelegate applicationDelegate)
         {
             _applicationDelegate = applicationDelegate;
-            _windows = new List<NSWindow>();
         }
 
         public override void RegisterAttributeTypes()
@@ -83,9 +80,10 @@ namespace MvvmCross.Mac.Views.Presenters
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
                         ShowWindowViewController(viewController, (MvxWindowPresentationAttribute)attribute, request);
                     },
-                CloseAction = (viewModel, attribute) => {
-                    Close(viewModel);
-                    return true;
+                    CloseAction = (viewModel, attribute) =>
+                    {
+                        Close(viewModel);
+                        return true;
                     }
                 });
 
@@ -98,7 +96,8 @@ namespace MvvmCross.Mac.Views.Presenters
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
                         ShowContentViewController(viewController, (MvxContentPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => {
+                    CloseAction = (viewModel, attribute) =>
+                    {
                         Close(viewModel);
                         return true;
                     }
@@ -113,7 +112,8 @@ namespace MvvmCross.Mac.Views.Presenters
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
                         ShowModalViewController(viewController, (MvxModalPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => {
+                    CloseAction = (viewModel, attribute) =>
+                    {
                         Close(viewModel);
                         return true;
                     }
@@ -128,7 +128,8 @@ namespace MvvmCross.Mac.Views.Presenters
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
                         ShowSheetViewController(viewController, (MvxSheetPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => {
+                    CloseAction = (viewModel, attribute) =>
+                    {
                         Close(viewModel);
                         return true;
                     }
@@ -143,7 +144,8 @@ namespace MvvmCross.Mac.Views.Presenters
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
                         ShowTabViewController(viewController, (MvxTabPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => {
+                    CloseAction = (viewModel, attribute) =>
+                    {
                         Close(viewModel);
                         return true;
                     }
@@ -190,12 +192,9 @@ namespace MvvmCross.Mac.Views.Presenters
             if (!string.IsNullOrEmpty(viewController.Title))
                 window.Title = viewController.Title;
 
-            Windows.Add(window);
             window.ContentView = viewController.View;
             window.ContentViewController = viewController;
             windowController.ShowWindow(null);
-
-            _windowsToWindowControllers.Add(window, windowController);
         }
 
         protected virtual void UpdateWindow(MvxWindowPresentationAttribute attribute, NSWindow window)
@@ -301,9 +300,10 @@ namespace MvvmCross.Mac.Views.Presenters
 
         public override void Close(IMvxViewModel viewModel)
         {
-            for (int i = Windows.Count - 1; i >= 0; i--)
+            var currentWindows = Windows;
+            for (int i = currentWindows.Count - 1; i >= 0; i--)
             {
-                var window = Windows[i];
+                var window = currentWindows[i];
 
                 // if toClose is a sheet or modal
                 if (window.ContentViewController.PresentedViewControllers.Any())
@@ -330,7 +330,6 @@ namespace MvvmCross.Mac.Views.Presenters
                 if (controller != null && controller.ViewModel == viewModel)
                 {
                     window.Close();
-                    Windows.Remove(window);
                     return;
                 }
             }

@@ -42,6 +42,11 @@ namespace Playground.Mac
             set.Apply();
         }
 
+        public override void ViewDidDisappear()
+        {
+            base.ViewDidDisappear();
+        }
+
         public MvxBasePresentationAttribute PresentationAttribute()
         {
             if (!NSApplication.SharedApplication.Windows.Any())
