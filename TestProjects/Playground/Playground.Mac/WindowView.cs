@@ -20,7 +20,8 @@ namespace Playground.Mac
             Title = "Window view";
         }
 
-        public ToolbarWindow WindowController {
+        public ToolbarWindow WindowController
+        {
             get { return View.Window != null ? (ToolbarWindow)View.Window.WindowController : null; }
         }
 
