@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
