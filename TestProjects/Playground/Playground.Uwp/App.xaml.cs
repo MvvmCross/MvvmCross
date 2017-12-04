@@ -57,15 +57,13 @@ namespace Playground.Uwp
             {
                 if (rootFrame.Content == null)
                 {
-                    var setup = new Setup(rootFrame,"Suspension");
+                    var setup = new Setup(rootFrame, "Suspension");
                     setup.Initialize();
 
                     var start = MvvmCross.Platform.Mvx.Resolve<MvvmCross.Core.ViewModels.IMvxAppStart>();
                     start.Start();
-
-                   
-
                 }
+
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
@@ -102,9 +100,7 @@ namespace Playground.Uwp
         private async void OnResuming(object sender, object e)
         {
             var suspension = Mvx.GetSingleton<IMvxSuspensionManager>() as MvxSuspensionManager;
-
             await suspension.RestoreAsync();
         }
-
     }
 }
