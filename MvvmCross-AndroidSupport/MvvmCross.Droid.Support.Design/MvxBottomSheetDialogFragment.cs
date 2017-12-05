@@ -1,4 +1,4 @@
-﻿// MvxBottomSheetDialogFragment.cs
+// MvxBottomSheetDialogFragment.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
@@ -33,7 +34,6 @@ namespace MvvmCross.Droid.Support.Design
         public IMvxBindingContext BindingContext { get; set; }
 
         private object _dataContext;
-
         public object DataContext
         {
             get
@@ -66,6 +66,60 @@ namespace MvvmCross.Droid.Support.Design
         }
 
         public virtual string UniqueImmutableCacheTag => Tag;
+
+        public override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            ViewModel?.ViewCreated();
+        }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            ViewModel?.ViewDestroy();
+        }
+
+        public override void OnStart()
+        {
+            base.OnStart();
+            ViewModel?.ViewAppearing();
+        }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+            ViewModel?.ViewAppeared();
+        }
+
+        public override void OnPause()
+        {
+            base.OnPause();
+            ViewModel?.ViewDisappearing();
+        }
+
+        public override void OnStop()
+        {
+            base.OnStop();
+            ViewModel?.ViewDisappeared();
+        }
+
+        public override void OnCancel(IDialogInterface dialog)
+        {
+            base.OnCancel(dialog);
+            ViewModel?.ViewDestroy();
+        }
+
+        public override void DismissAllowingStateLoss()
+        {
+            base.DismissAllowingStateLoss();
+            ViewModel?.ViewDestroy();
+        }
+
+        public override void Dismiss()
+        {
+            base.Dismiss();
+            ViewModel?.ViewDestroy();
+        }
     }
 
     public abstract class MvxBottomSheetDialogFragment<TViewModel>
