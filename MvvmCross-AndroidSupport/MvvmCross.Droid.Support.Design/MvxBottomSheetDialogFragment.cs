@@ -34,7 +34,6 @@ namespace MvvmCross.Droid.Support.Design
         public IMvxBindingContext BindingContext { get; set; }
 
         private object _dataContext;
-
         public object DataContext
         {
             get
