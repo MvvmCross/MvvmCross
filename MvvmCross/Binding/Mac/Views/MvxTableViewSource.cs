@@ -28,12 +28,12 @@ namespace MvvmCross.Binding.Mac.Views
 
         public MvxTableViewSource(NSTableView tableView) : base()
         {
-            this._tableView = tableView;
+            _tableView = tableView;
         }
 
         public override nint GetRowCount(NSTableView tableView)
         {
-            return this.ItemsSource.Count();
+            return ItemsSource.Count();
         }
 
         [MvxSetToNullAfterBinding]
@@ -41,35 +41,34 @@ namespace MvvmCross.Binding.Mac.Views
         {
             get
             {
-                return this._itemsSource;
+                return _itemsSource;
             }
             set
             {
-                if (ReferenceEquals(this._itemsSource, value)
-                    && !this.ReloadOnAllItemsSourceSets)
+                if (ReferenceEquals(_itemsSource, value)
+                    && !ReloadOnAllItemsSourceSets)
                     return;
 
-                if (this._subscription != null)
+                if (_subscription != null)
                 {
-                    this._subscription.Dispose();
-                    this._subscription = null;
+                    _subscription.Dispose();
+                    _subscription = null;
                 }
 
-                this._itemsSource = value;
+                _itemsSource = value;
 
-                var collectionChanged = this._itemsSource as INotifyCollectionChanged;
-                if (collectionChanged != null)
+                if (_itemsSource is INotifyCollectionChanged collectionChanged)
                 {
-                    this._subscription = collectionChanged.WeakSubscribe(this.CollectionChangedOnCollectionChanged);
+                    _subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
                 }
 
-                this.ReloadTableData();
+                ReloadTableData();
             }
         }
 
         private void ReloadTableData()
         {
-            this._tableView.ReloadData();
+            _tableView.ReloadData();
         }
 
         private NSView GetOrCreateViewFor(NSTableView tableView, NSTableColumn tableColumn)
@@ -91,14 +90,13 @@ namespace MvvmCross.Binding.Mac.Views
 
         public override NSView GetViewForItem(NSTableView tableView, NSTableColumn tableColumn, nint row)
         {
-            if (this.ItemsSource == null)
+            if (ItemsSource == null)
                 return null;
 
-            var item = this.ItemsSource.ElementAt((int)row);
-            var view = this.GetOrCreateViewFor(tableView, tableColumn);
+            var item = ItemsSource.ElementAt((int)row);
+            var view = GetOrCreateViewFor(tableView, tableColumn);
 
-            var bindable = view as IMvxDataConsumer;
-            if (bindable != null)
+            if (view is IMvxDataConsumer bindable)
                 bindable.DataContext = item;
 
             return view;
@@ -143,15 +141,15 @@ namespace MvvmCross.Binding.Mac.Views
 
         public override void SelectionDidChange(NSNotification notification)
         {
-            var command = this.SelectionChangedCommand;
+            var command = SelectionChangedCommand;
             if (command == null)
                 return;
 
-            var row = this._tableView.SelectedRow;
+            var row = _tableView.SelectedRow;
             if (row < 0)
                 return;
 
-            var item = this.ItemsSource.ElementAt((int)row);
+            var item = ItemsSource.ElementAt((int)row);
 
             if (!command.CanExecute(item))
                 return;
@@ -166,25 +164,25 @@ namespace MvvmCross.Binding.Mac.Views
                 case NotifyCollectionChangedAction.Add:
                     {
                         var newIndexSet = CreateNSIndexSet(args.NewStartingIndex, args.NewItems.Count);
-                        this._tableView.InsertRows(newIndexSet, NSTableViewAnimation.Fade);
+                        _tableView.InsertRows(newIndexSet, NSTableViewAnimation.Fade);
                         return true;
                     }
                 case NotifyCollectionChangedAction.Remove:
                     {
                         var newIndexSet = CreateNSIndexSet(args.OldStartingIndex, args.OldItems.Count);
-                        this._tableView.RemoveRows(newIndexSet, NSTableViewAnimation.Fade);
+                        _tableView.RemoveRows(newIndexSet, NSTableViewAnimation.Fade);
                         return true;
                     }
                 case NotifyCollectionChangedAction.Move:
                     {
                         if (args.NewItems.Count != 1 && args.OldItems.Count != 1)
                             return false;
-                        this._tableView.MoveRow(args.OldStartingIndex, args.NewStartingIndex);
+                        _tableView.MoveRow(args.OldStartingIndex, args.NewStartingIndex);
                         return true;
                     }
                 case NotifyCollectionChangedAction.Replace:
                     {
-                        this._tableView.ReloadData();
+                        _tableView.ReloadData();
                         return true;
                     }
                 default:
