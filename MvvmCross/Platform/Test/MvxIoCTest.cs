@@ -25,6 +25,7 @@ namespace MvvmCross.Platform.Test
 
         public interface IB
         {
+            IC C { get; }
         }
 
         public interface IC
@@ -58,7 +59,10 @@ namespace MvvmCross.Platform.Test
         {
             public B(IC c)
             {
+                C = c;
             }
+
+            public IC C { get; set; }
         }
 
         public class C : IC
@@ -423,6 +427,31 @@ namespace MvvmCross.Platform.Test
             Assert.IsTrue(toResolve.GetType() == typeof(HasOGParameter));
             Assert.IsTrue(toResolve.OpenGeneric.GetType().GetTypeInfo().ImplementedInterfaces.Any(i => i == typeof(IOG<C>)));
             Assert.IsTrue(toResolve.OpenGeneric.GetType() == typeof(OG<C>));
+        }
+
+        #endregion
+
+        #region Child Container
+
+        [Test]
+        public static void Resolves_successfully_when_using_childcontainer()
+        {
+            var container = MvxSimpleIoCContainer.Initialize();
+            ((MvxSimpleIoCContainer)container).CleanAllResolvers();
+
+            container.RegisterType<IC, C2>();
+            var childContainer = container.CreateChildContainer();
+            childContainer.RegisterType<IB, B>();
+
+            var b = childContainer.Create<IB>();
+
+            Assert.IsTrue(container.CanResolve<IC>());
+            Assert.IsFalse(container.CanResolve<IB>());
+            Assert.IsTrue(childContainer.CanResolve<IC>());
+            Assert.IsTrue(childContainer.CanResolve<IB>());
+
+            Assert.IsNotNull(b);
+            Assert.IsNotNull(b.C);
         }
 
         #endregion
