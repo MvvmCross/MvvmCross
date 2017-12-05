@@ -31,7 +31,7 @@ namespace MvvmCross.Binding.Mac.Views
             this._tableView = tableView;
         }
 
-		public override nint GetRowCount (NSTableView tableView)
+        public override nint GetRowCount(NSTableView tableView)
         {
             return this.ItemsSource.Count();
         }
@@ -89,7 +89,7 @@ namespace MvvmCross.Binding.Mac.Views
             return view;
         }
 
-		public override NSView GetViewForItem(NSTableView tableView, NSTableColumn tableColumn, nint row)
+        public override NSView GetViewForItem(NSTableView tableView, NSTableColumn tableColumn, nint row)
         {
             if (this.ItemsSource == null)
                 return null;
@@ -106,7 +106,25 @@ namespace MvvmCross.Binding.Mac.Views
 
         protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
-            this.TryDoAnimatedChange(args);
+            Action action = () =>
+            {
+                if (!UseAnimations)
+                {
+                    ReloadTableData();
+                }
+                else
+                {
+                    if (TryDoAnimatedChange(args))
+                        return;
+
+                    ReloadTableData();
+                }
+            };
+
+            if (NSThread.IsMain)
+                action();
+            else
+                InvokeOnMainThread(action);
         }
 
         protected static NSIndexSet CreateNSIndexSet(int startingPosition, int count)
@@ -121,6 +139,7 @@ namespace MvvmCross.Binding.Mac.Views
         }
 
         public bool ReloadOnAllItemsSourceSets { get; set; }
+        public bool UseAnimations { get; set; }
 
         public override void SelectionDidChange(NSNotification notification)
         {
