@@ -12,6 +12,5 @@ namespace MvvmCross.Droid.Views
     public interface IMvxAndroidViewPresenter
         : IMvxViewPresenter
     {
-        //TODO: Add methods for dialog and fragment
     }
 }
