@@ -164,5 +164,10 @@ namespace MvvmCross.Platform.IoC
         {
             _provider.CleanAllResolvers();
         }
+
+        public IMvxIoCProvider CreateChildContainer()
+        {
+            return _provider.CreateChildContainer();
+        }
     }
 }
