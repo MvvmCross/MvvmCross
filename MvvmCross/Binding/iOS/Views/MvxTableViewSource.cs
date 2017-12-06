@@ -92,18 +92,25 @@ namespace MvvmCross.Binding.iOS.Views
         protected virtual void CollectionChangedOnCollectionChanged(object sender,
                                                                     NotifyCollectionChangedEventArgs args)
         {
-            if (!UseAnimations)
+            Action action = () =>
             {
-                ReloadTableData();
-                return;
-            }
+                if (!UseAnimations)
+                {
+                    ReloadTableData();
+                }
+                else
+                {
+                    if (TryDoAnimatedChange(args))
+                        return;
 
-            if (TryDoAnimatedChange(args))
-            {
-                return;
-            }
+                    ReloadTableData();
+                }
+            };
 
-            ReloadTableData();
+            if (NSThread.IsMain)
+                action();
+            else
+                InvokeOnMainThread(action);
         }
 
         protected bool TryDoAnimatedChange(NotifyCollectionChangedEventArgs args)
