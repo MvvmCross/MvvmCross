@@ -443,6 +443,8 @@ namespace MvvmCross.Platform.IoC
             Unknown
         }
 
+        public virtual IMvxIoCProvider CreateChildContainer() => new MvxIoCContainer(this);
+
         private static readonly ResolverType? ResolverTypeNoneSpecified = null;
 
         private bool Supports(IResolver resolver, ResolverType? requiredResolverType)
