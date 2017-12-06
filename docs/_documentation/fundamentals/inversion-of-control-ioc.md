@@ -501,7 +501,7 @@ However, if you feel the MvvmCross detection is wrong - if your app has some beh
                 TryToDetectDynamicCircularReferences = false
                 TryToDetectSingletonCircularReferences = false
             };
-            var instance = MvxSimpleIoCContainer.Initialize(options);
+            var instance = MvxIoCProvider.Initialize(options);
 
 **Note:** in the event of recursion causing a stack overflow, some mobile runtimes will **not** throw a `StackOverlowException` - but will instead simply exit without warning - this situation can be hard to debug.
 

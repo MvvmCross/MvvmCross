@@ -105,7 +105,7 @@
     <Compile Include="ReflectionExtensions.cs" />
     <Compile Include="UI\IMvxNativeVisibility.cs" />
     <Compile Include="Platform\MvxDebugOnlyTrace.cs" />
-    <Compile Include="IoC\MvxSimpleIoCContainer.cs" />
+    <Compile Include="IoC\MvxIoCProvider.cs" />
     <Compile Include="UI\MvxColors.cs" />
     <Compile Include="UI\MvxVisibility.cs" />
     <Compile Include="Platform\MvxStopWatch.cs" />

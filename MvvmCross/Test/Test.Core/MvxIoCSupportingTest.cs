@@ -34,7 +34,7 @@ namespace MvvmCross.Test.Core
         {
             // fake set up of the IoC
             MvxSingleton.ClearAllSingletons();
-            _ioc = MvxSimpleIoCContainer.Initialize(CreateIocOptions());
+            _ioc = MvxIoCProvider.Initialize(CreateIocOptions());
             _ioc.RegisterSingleton(_ioc);
             _ioc.RegisterSingleton<IMvxTrace>(new TestTrace());
             InitializeSingletonCache();
