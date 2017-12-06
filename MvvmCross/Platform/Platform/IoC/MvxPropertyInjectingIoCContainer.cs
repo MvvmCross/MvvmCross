@@ -9,9 +9,9 @@ using System;
 
 namespace MvvmCross.Platform.IoC
 {
-    [Obsolete("This functionality is now moved into MvxSimpleIoCContainer and can be enabled using MvxIocOptions")]
+    [Obsolete("This functionality is now moved into MvxIoCContainer and can be enabled using MvxIocOptions")]
     public class MvxPropertyInjectingIoCContainer
-        : MvxSimpleIoCContainer
+        : MvxIoCProvider
     {
         public static new IMvxIoCProvider Initialize(IMvxIocOptions options)
         {

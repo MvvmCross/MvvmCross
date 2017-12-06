@@ -120,7 +120,7 @@ namespace MvvmCross.Platform.Test
             {
                 TryToDetectDynamicCircularReferences = false
             };
-            var instance = MvxSimpleIoCContainer.Initialize(options);
+            var instance = MvxIoCProvider.Initialize(options);
 
             Mvx.RegisterType<IA, A>();
             Mvx.RegisterType<IB, B>();
@@ -137,7 +137,7 @@ namespace MvvmCross.Platform.Test
         {
             COdd.FirstTime = true;
             MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
+            var instance = MvxIoCProvider.Initialize();
 
             Mvx.RegisterType<IA, A>();
             Mvx.RegisterType<IB, B>();
@@ -153,7 +153,7 @@ namespace MvvmCross.Platform.Test
         public void TryResolve_CircularLazyRegistration_ReturnsFalse()
         {
             MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
+            var instance = MvxIoCProvider.Initialize();
 
             Mvx.LazyConstructAndRegisterSingleton<IA, A>();
             Mvx.LazyConstructAndRegisterSingleton<IB, B>();
@@ -169,7 +169,7 @@ namespace MvvmCross.Platform.Test
         public void TryResolve_NonCircularRegistration_ReturnsTrue()
         {
             MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
+            var instance = MvxIoCProvider.Initialize();
 
             Mvx.LazyConstructAndRegisterSingleton<IA, A>();
             Mvx.LazyConstructAndRegisterSingleton<IB, B>();
@@ -185,7 +185,7 @@ namespace MvvmCross.Platform.Test
         public void TryResolve_LazySingleton_ReturnsSameSingletonEachTime()
         {
             MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
+            var instance = MvxIoCProvider.Initialize();
 
             Mvx.LazyConstructAndRegisterSingleton<IA, A>();
             Mvx.LazyConstructAndRegisterSingleton<IB, B>();
@@ -209,7 +209,7 @@ namespace MvvmCross.Platform.Test
         public void TryResolve_NonLazySingleton_ReturnsSameSingletonEachTime()
         {
             MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
+            var instance = MvxIoCProvider.Initialize();
 
             Mvx.LazyConstructAndRegisterSingleton<IB, B>();
             Mvx.LazyConstructAndRegisterSingleton<IC, C2>();
@@ -233,7 +233,7 @@ namespace MvvmCross.Platform.Test
         public void TryResolve_Dynamic_ReturnsDifferentInstanceEachTime()
         {
             MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
+            var instance = MvxIoCProvider.Initialize();
 
             Mvx.LazyConstructAndRegisterSingleton<IB, B>();
             Mvx.LazyConstructAndRegisterSingleton<IC, C2>();
@@ -256,7 +256,7 @@ namespace MvvmCross.Platform.Test
         public void TryResolve_ParameterConstructors_CreatesParametersUsingIocResolution()
         {
             MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
+            var instance = MvxIoCProvider.Initialize();
 
             Mvx.RegisterType<IB, B>();
             Mvx.LazyConstructAndRegisterSingleton<IC, C2>();
@@ -274,7 +274,7 @@ namespace MvvmCross.Platform.Test
         public void RegisterType_with_constructor_creates_different_objects()
         {
             MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
+            var instance = MvxIoCProvider.Initialize();
 
             instance.RegisterType<IC>(() => new C2());
 
@@ -291,7 +291,7 @@ namespace MvvmCross.Platform.Test
         public void Non_generic_RegisterType_with_constructor_creates_different_objects()
         {
             MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
+            var instance = MvxIoCProvider.Initialize();
 
             instance.RegisterType(typeof(IC), () => new C2());
 
@@ -308,7 +308,7 @@ namespace MvvmCross.Platform.Test
         public void Non_generic_RegisterType_with_constructor_throws_if_constructor_returns_incompatible_reference()
         {
             MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
+            var instance = MvxIoCProvider.Initialize();
 
             instance.RegisterType(typeof(IC), () => "Fail");
 
@@ -321,7 +321,7 @@ namespace MvvmCross.Platform.Test
         public void Non_generic_RegisterType_with_constructor_throws_if_constructor_returns_incompatible_value()
         {
             MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
+            var instance = MvxIoCProvider.Initialize();
 
             instance.RegisterType(typeof(IC), () => 36);
 
@@ -335,8 +335,8 @@ namespace MvvmCross.Platform.Test
         [Test]
         public static void Resolves_successfully_when_registered_open_generic_with_one_generic_type_parameter()
         {
-            var instance = MvxSimpleIoCContainer.Initialize();
-            ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
+            var instance = MvxIoCProvider.Initialize();
+            ((MvxIoCProvider)instance).CleanAllResolvers();
 
             instance.RegisterType(typeof(IOG<>), typeof(OG<>));
 
@@ -351,8 +351,8 @@ namespace MvvmCross.Platform.Test
         [Test]
         public static void Resolves_successfully_when_registered_closed_generic_with_one_generic_type_parameter()
         {
-            var instance = MvxSimpleIoCContainer.Initialize();
-            ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
+            var instance = MvxIoCProvider.Initialize();
+            ((MvxIoCProvider)instance).CleanAllResolvers();
 
             instance.RegisterType(typeof(IOG<C2>), typeof(OG<C2>));
             
@@ -367,8 +367,8 @@ namespace MvvmCross.Platform.Test
         [Test]
         public static void Resolves_successfully_when_registered_open_generic_with_two_generic_type_parameter()
         {
-            var instance = MvxSimpleIoCContainer.Initialize();
-            ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
+            var instance = MvxIoCProvider.Initialize();
+            ((MvxIoCProvider)instance).CleanAllResolvers();
 
             instance.RegisterType(typeof(IOG2<,>), typeof(OG2<,>));
 
@@ -383,8 +383,8 @@ namespace MvvmCross.Platform.Test
         [Test]
         public static void Resolves_successfully_when_registered_closed_generic_with_two_generic_type_parameter()
         {
-            var instance = MvxSimpleIoCContainer.Initialize();
-            ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
+            var instance = MvxIoCProvider.Initialize();
+            ((MvxIoCProvider)instance).CleanAllResolvers();
 
             instance.RegisterType(typeof(IOG2<C2,C>), typeof(OG2<C2,C>));
 
@@ -399,8 +399,8 @@ namespace MvvmCross.Platform.Test
         [Test]
         public static void Resolves_unsuccessfully_when_registered_open_generic_with_one_generic_parameter_that_was_not_registered()
         {
-            var instance = MvxSimpleIoCContainer.Initialize();
-            ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
+            var instance = MvxIoCProvider.Initialize();
+            ((MvxIoCProvider)instance).CleanAllResolvers();
 
             IOG<C2> toResolve = null;
 
@@ -413,8 +413,8 @@ namespace MvvmCross.Platform.Test
         [Test]
         public static void Resolves_successfully_when_resolving_entity_that_has_injected_an_open_generic_parameter()
         {
-            var instance = MvxSimpleIoCContainer.Initialize();
-            ((MvxSimpleIoCContainer)instance).CleanAllResolvers();
+            var instance = MvxIoCProvider.Initialize();
+            ((MvxIoCProvider)instance).CleanAllResolvers();
 
             instance.RegisterType<IHasOGParameter, HasOGParameter>();
             instance.RegisterType(typeof(IOG<>), typeof(OG<>));
@@ -436,8 +436,8 @@ namespace MvvmCross.Platform.Test
         [Test]
         public static void Resolves_successfully_when_using_childcontainer()
         {
-            var container = MvxSimpleIoCContainer.Initialize();
-            ((MvxSimpleIoCContainer)container).CleanAllResolvers();
+            var container = MvxIoCProvider.Initialize();
+            ((MvxIoCProvider)container).CleanAllResolvers();
 
             container.RegisterType<IC, C2>();
             var childContainer = container.CreateChildContainer();

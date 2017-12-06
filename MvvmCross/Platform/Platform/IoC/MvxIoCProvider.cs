@@ -1,4 +1,4 @@
-﻿// MvxSimpleIoCContainer.cs
+﻿// MvxIoCProvider.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,11 +11,11 @@ using MvvmCross.Platform.Core;
 namespace MvvmCross.Platform.IoC
 {
     /// <summary>
-    /// Singleton IoCContainer.
+    /// Singleton IoC Provider.
     /// 
     /// Delegates to the <see cref="MvxIoCContainer"/> implementation
     /// </summary>
-    public class MvxSimpleIoCContainer
+    public class MvxIoCProvider
         : MvxSingleton<IMvxIoCProvider>, IMvxIoCProvider
     {
         public static IMvxIoCProvider Initialize(IMvxIocOptions options = null)
@@ -27,14 +27,14 @@ namespace MvvmCross.Platform.IoC
 
             // create a new ioc container - it will register itself as the singleton
             // ReSharper disable ObjectCreationAsStatement
-            new MvxSimpleIoCContainer(options);
+            new MvxIoCProvider(options);
             // ReSharper restore ObjectCreationAsStatement
             return Instance;
         }
 
         private readonly MvxIoCContainer _provider;
 
-        protected MvxSimpleIoCContainer(IMvxIocOptions options)
+        protected MvxIoCProvider(IMvxIocOptions options)
         {
             _provider = new MvxIoCContainer(options);
         }
