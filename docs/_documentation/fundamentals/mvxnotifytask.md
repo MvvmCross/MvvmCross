@@ -70,9 +70,10 @@ public Exception InnerException { get { return (Exception == null) ? null : Exce
 /// Gets the error message for the original faulting exception for the task. Returns <c>null</c> if the task is not faulted. This property raises a notification only if the task faults (i.e., if the value changes to non-<c>null</c>).
 /// </summary>
 public string ErrorMessage { get { return (InnerException == null) ? null : InnerException.Message; } }
+
 ```
 
-### Usage
+### Usage
 
 The way you would typically use MvxNotifyTask is by defining a public property in your ViewModel, that is assigned when a Command operation needs to be triggered, and then binding any properties at View level (just keep in mind this is an example, you can use it in many other ways!).
 
