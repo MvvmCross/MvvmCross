@@ -94,6 +94,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="Views\DictionaryBindingView.cs" />
     <Compile Include="Views\RootView.cs" />
     <Compile Include="Views\TabsRootView.cs" />
     <Compile Include="Views\Tab1View.cs" />
@@ -118,6 +119,7 @@
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="packages.config" />
+    <AndroidResource Include="Resources\layout\dictionary_view.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\RootView.axml" />
