@@ -14,6 +14,7 @@ using MvvmCross.Binding.Combiners;
 using MvvmCross.Binding.ValueConverters;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
+using System.Collections.Generic;
 
 namespace MvvmCross.Binding.BindingContext
 {
@@ -122,6 +123,11 @@ namespace MvvmCross.Binding.BindingContext
             var converterName = filler.FindName(typeof(TValueConverter));
 
             return WithConversion(converterName, converterParameter);
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> WithDictionaryConversion<TFrom, TTo>(Dictionary<TFrom, TTo> converterParameter)
+        {
+            return WithConversion(new MvxDictionaryValueConverter<TFrom, TTo>(converterParameter));
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithFallback(object fallback)
