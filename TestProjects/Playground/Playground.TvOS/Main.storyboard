@@ -434,6 +434,11 @@
                             <constraint firstItem="bRB-s5-cmw" firstAttribute="centerX" secondItem="ycQ-RP-m8j" secondAttribute="centerX" id="y70-KJ-5lk"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnDetail" destination="bRB-s5-cmw" id="ADI-yS-eap"/>
+                        <outlet property="btnDetailNav" destination="KDA-Ya-fmP" id="0KP-Ga-ssv"/>
+                        <outlet property="btnStackNav" destination="fQb-iF-tWg" id="cdS-Y2-JRN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m50-oT-kPF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
