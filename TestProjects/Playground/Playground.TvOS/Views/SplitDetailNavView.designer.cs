@@ -1,20 +1,26 @@
 // WARNING
 //
-// This file has been generated automatically by Visual Studio from the outlets and
-// actions declared in your storyboard file.
-// Manual changes to this file will not be maintained.
+// This file has been generated automatically by Visual Studio to store outlets and
+// actions made in the UI designer. If it is removed, they will be lost.
+// Manual changes to this file may not be handled correctly.
 //
 using Foundation;
-using System;
 using System.CodeDom.Compiler;
 
 namespace Playground.TvOS
 {
-    [Register ("SplitDetailNavView")]
-    partial class SplitDetailNavView
-    {
-        void ReleaseDesignerOutlets ()
-        {
-        }
-    }
+	[Register ("SplitDetailNavView")]
+	partial class SplitDetailNavView
+	{
+		[Outlet]
+		UIKit.UIButton btnClose { get; set; }
+		
+		void ReleaseDesignerOutlets ()
+		{
+			if (btnClose != null) {
+				btnClose.Dispose ();
+				btnClose = null;
+			}
+		}
+	}
 }
