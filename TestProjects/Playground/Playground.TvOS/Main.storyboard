@@ -254,6 +254,9 @@
                             <constraint firstItem="yyy-hI-FCv" firstAttribute="top" secondItem="sbu-Yk-G8F" secondAttribute="bottom" constant="144" id="uz6-kb-slz"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnClose" destination="H32-Fr-t8z" id="HC3-G7-gbT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BeG-P6-OPY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -605,6 +608,9 @@
                             <constraint firstItem="fXj-Pe-z2M" firstAttribute="centerX" secondItem="Brc-NH-gUB" secondAttribute="centerX" id="r8J-pW-yiN"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnClose" destination="0bm-cu-oed" id="ZfF-di-DrX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sow-Zk-x4c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

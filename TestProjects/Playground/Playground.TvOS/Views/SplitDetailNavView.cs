@@ -15,5 +15,15 @@ namespace Playground.TvOS
 		public SplitDetailNavView (IntPtr handle) : base (handle)
 		{
 		}
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            btnClose.AllEvents += (sender, e) =>
+            {
+                DismissViewController(true, null);
+            };
+        }
 	}
 }

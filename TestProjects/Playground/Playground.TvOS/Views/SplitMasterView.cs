@@ -20,6 +20,9 @@ namespace Playground.TvOS
         {
             base.ViewDidLoad();
 
+            var bindingSet = this.CreateBindingSet<SplitMasterView, SplitMasterViewModel>();
+
+            bindingSet.Apply();
         }
 	}
 }
