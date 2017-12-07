@@ -939,7 +939,7 @@ Add something about the Generic implementation of IMvxTargetBinding [#1610](http
 
 ### Dictionary Conversion
 
-Dictionary conversion allows for mapped conversions to be set up within the view's binding code, useful for quickly binding thiings like icons to state properties.
+Dictionary conversion allows for mapped conversions to be set up within the view's binding code, useful for quickly binding things like icons or color to state properties.
 
 ```c#
 set.Bind(button).To(vm => vm.readonly).WithDictionaryConversion(
