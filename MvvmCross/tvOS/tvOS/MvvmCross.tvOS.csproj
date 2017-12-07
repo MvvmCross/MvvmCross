@@ -93,6 +93,8 @@
     <Compile Include="Views\IMvxSplitViewController.cs" />
     <Compile Include="Views\MvxSplitViewController.cs" />
     <Compile Include="Views\MvxEventSourceSplitViewController.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxMasterSplitViewPresentationAttribute.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxDetailSplitViewPresentationAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Binding\MvvmCross.Binding.csproj">
