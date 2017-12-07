@@ -28,6 +28,7 @@ namespace Playground.TvOS
             set.Bind(btnModalNav).To(vm => vm.ShowModalNavCommand);
             set.Bind(btnModal).To(vm => vm.ShowModalCommand);
             set.Bind(btnModalAttribute).To(vm => vm.ShowOverrideAttributeCommand);
+            set.Bind(btnSplitNav).To(vm => vm.ShowSplitCommand);
             set.Apply();
         }
 	}

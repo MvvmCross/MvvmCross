@@ -1,42 +1,45 @@
 // WARNING
 //
-// This file has been generated automatically by Visual Studio to store outlets and
-// actions made in the UI designer. If it is removed, they will be lost.
-// Manual changes to this file may not be handled correctly.
+// This file has been generated automatically by Visual Studio from the outlets and
+// actions declared in your storyboard file.
+// Manual changes to this file will not be maintained.
 //
 using Foundation;
+using System;
 using System.CodeDom.Compiler;
 
 namespace Playground.TvOS
 {
-	[Register ("ModalNavView")]
-	partial class ModalNavView
-	{
-		[Outlet]
-		UIKit.UIButton btnClose { get; set; }
+    [Register ("ModalNavView")]
+    partial class ModalNavView
+    {
+        [Outlet]
+        UIKit.UIButton btnClose { get; set; }
 
-		[Outlet]
-		UIKit.UIButton btnNestedModal { get; set; }
 
-		[Outlet]
-		UIKit.UIButton btnShowChild { get; set; }
-		
-		void ReleaseDesignerOutlets ()
-		{
-			if (btnShowChild != null) {
-				btnShowChild.Dispose ();
-				btnShowChild = null;
-			}
+        [Outlet]
+        UIKit.UIButton btnNestedModal { get; set; }
 
-			if (btnClose != null) {
-				btnClose.Dispose ();
-				btnClose = null;
-			}
 
-			if (btnNestedModal != null) {
-				btnNestedModal.Dispose ();
-				btnNestedModal = null;
-			}
-		}
-	}
+        [Outlet]
+        UIKit.UIButton btnShowChild { get; set; }
+
+        void ReleaseDesignerOutlets ()
+        {
+            if (btnClose != null) {
+                btnClose.Dispose ();
+                btnClose = null;
+            }
+
+            if (btnNestedModal != null) {
+                btnNestedModal.Dispose ();
+                btnNestedModal = null;
+            }
+
+            if (btnShowChild != null) {
+                btnShowChild.Dispose ();
+                btnShowChild = null;
+            }
+        }
+    }
 }

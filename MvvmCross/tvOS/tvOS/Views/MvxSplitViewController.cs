@@ -9,8 +9,10 @@ using MvvmCross.Core.ViewModels;
 
 namespace MvvmCross.tvOS.Views
 {
-    public class MvxSplitViewController: 
-        MvxEventSourceSplitViewController, IMvxTvosView
+    public class MvxSplitViewController 
+        : MvxEventSourceSplitViewController
+        ,IMvxTvosView
+        ,IMvxSplitViewController
     {
 
         public object DataContext
@@ -52,6 +54,7 @@ namespace MvvmCross.tvOS.Views
             ViewModel?.ViewCreated();
 
             PreferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible;
+            PreferredPrimaryColumnWidthFraction = .3f;
         }
 
         public override void ViewWillAppear(bool animated)
@@ -136,7 +139,7 @@ namespace MvvmCross.tvOS.Views
         }
     }
 
-    public class MvxSplitViewController<TViewModel> : MvxViewController, IMvxTvosView<TViewModel>
+    public class MvxSplitViewController<TViewModel> : MvxSplitViewController, IMvxTvosView<TViewModel>
        where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel

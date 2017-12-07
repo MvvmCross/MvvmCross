@@ -10,8 +10,8 @@ using System.CodeDom.Compiler;
 
 namespace Playground.TvOS
 {
-    [Register ("TabsRootView")]
-    partial class TabsRootView
+    [Register ("SplitDetailNavView")]
+    partial class SplitDetailNavView
     {
         void ReleaseDesignerOutlets ()
         {
