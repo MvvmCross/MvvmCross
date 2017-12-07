@@ -13,7 +13,7 @@ namespace MvvmCross.Platform.Converters
                 TValue x = dict[value];
                 return x;
             }
-            throw new ArgumentException($"Could not cast {parameter.GetType().ToString()} to {nameof(Dictionary<TKey, TValue>)}");
+            throw new ArgumentException($"Could not cast {parameter.GetType().Name} to {typeof(Dictionary<TKey, TValue>).Name}");
         }
     }
 }
