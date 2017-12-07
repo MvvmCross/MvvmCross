@@ -21,7 +21,9 @@ namespace Playground.TvOS
             base.ViewDidLoad();
 
             var bindingSet = this.CreateBindingSet<SplitMasterView, SplitMasterViewModel>();
-
+            bindingSet.Bind(btnDetail).To(vm => vm.OpenDetailCommand);
+            bindingSet.Bind(btnDetailNav).To(vm => vm.OpenDetailNavCommand);
+            bindingSet.Bind(btnStackNav).To(vm => vm.ShowRootViewModel);
             bindingSet.Apply();
         }
 	}
