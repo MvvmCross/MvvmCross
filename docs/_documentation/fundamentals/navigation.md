@@ -20,6 +20,8 @@ public interface IMvxNavigationService
     event AfterNavigateEventHandler AfterNavigate;
     event BeforeCloseEventHandler BeforeClose;
     event AfterCloseEventHandler AfterClose;
+    event BeforeChangePresentationEventHandler BeforeChangePresentation;
+    event AfterChangePresentationEventHandler AfterChangePresentation;
 
     Task Navigate(IMvxViewModel viewModel, IMvxBundle presentationBundle = null);
     Task Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle presentationBundle = null);
@@ -35,6 +37,11 @@ public interface IMvxNavigationService
     Task Navigate<TParameter>(string path, TParameter param, IMvxBundle presentationBundle = null);
     Task<TResult> Navigate<TResult>(string path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
     Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+
+    Task Navigate<TViewModel>(IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel;
+    Task Navigate<TViewModel, TParameter>(TParameter param, IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel<TParameter>;
+    Task<TResult> Navigate<TViewModel, TResult>(IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModelResult<TResult>;
+    Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModel<TParameter, TResult>;
 
     Task<bool> CanNavigate(string path);
 
@@ -56,11 +63,6 @@ public static class MvxNavigationExtensions
     public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null)
     public static Task Navigate<TResult>(this IMvxNavigationService navigationService, Uri path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
     public static Task Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
-
-    public static Task Navigate<TViewModel>(this IMvxNavigationService navigationService, IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel
-    public static Task Navigate<TViewModel, TParameter>(this IMvxNavigationService navigationService, TParameter param, IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel<TParameter>
-    public static Task<TResult> Navigate<TViewModel, TResult>(this IMvxNavigationService navigationService, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModelResult<TResult>
-    public static Task<TResult> Navigate<TViewModel, TParameter, TResult>(this IMvxNavigationService navigationService, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModel<TParameter, TResult>
 }
 ```
 
@@ -70,6 +72,7 @@ In your ViewModel this could look like:
 public class MyViewModel : MvxViewModel
 {
     private readonly IMvxNavigationService _navigationService;
+
     public MyViewModel(IMvxNavigationService navigationService)
     {
         _navigationService = navigationService;
@@ -77,7 +80,14 @@ public class MyViewModel : MvxViewModel
     
     public override void Prepare()
     {
-        //Do anything before navigating to the view
+        // first callback. Initialize parameter-agnostic stuff here
+    }
+
+    public async Task Initialize()
+    {
+        await base.Initialize();
+
+        // do the heavy work here
     }
 
     public async Task SomeMethod()
@@ -88,15 +98,24 @@ public class MyViewModel : MvxViewModel
 
 public class NextViewModel : MvxViewModel<MyObject>
 {
+    private MyObject _myObject;
+
+    public override void Prepare()
+    {
+        // first callback. Initialize parameter-agnostic stuff here
+    }
+
     public override void Prepare(MyObject parameter)
     {
-        //Do anything before navigating to the view
-        //Save the parameter to a property if you want to use it later
+        // receive and store the parameter here
+        _myObject = parameter;
     }
     
     public override async Task Initialize()
     {
-        //Do heavy work and data loading here
+        await base.Initialize();
+
+        // do the heavy work here
     }
 }
 ```
@@ -112,9 +131,16 @@ public class MyViewModel : MvxViewModel
         _navigationService = navigationService;
     }
     
+    public override void Prepare()
+    {
+        // first callback. Initialize parameter-agnostic stuff here
+    }
+
     public override async Task Initialize()
     {
-        //Do heavy work and data loading here
+        await base.Initialize();
+        
+        // do the heavy work here
     }
 
     public async Task SomeMethod()
@@ -127,15 +153,23 @@ public class MyViewModel : MvxViewModel
 public class NextViewModel : MvxViewModel<MyObject, MyReturnObject>
 {
     private readonly IMvxNavigationService _navigationService;
+
+    private MyObject _myObject;
+
     public MyViewModel(IMvxNavigationService navigation)
     {
         _navigationService = navigationService;
     }
+
+    public override void Prepare()
+    {
+        // first callback. Initialize parameter-agnostic stuff here
+    }
     
     public override void Prepare(MyObject parameter)
     {
-        //Do anything before navigating to the view
-        //Save the parameter to a property if you want to use it later
+        // receive and store the parameter here
+        _myObject = parameter;
     }
     
     public override async Task Initialize()
@@ -161,11 +195,12 @@ To implement returning your own result add the following to your (Base)ViewModel
 ```c#
 public override TaskCompletionSource<object> CloseCompletionSource { get; set; }
 
-public override void ViewDestroy()
+public override void ViewDestroy(bool viewFinishing = true)
 {
-    if (CloseCompletionSource != null && !CloseCompletionSource.Task.IsCompleted && !CloseCompletionSource.Task.IsFaulted)
+    if (viewFinishing && CloseCompletionSource != null && !CloseCompletionSource.Task.IsCompleted && !CloseCompletionSource.Task.IsFaulted)
         CloseCompletionSource?.TrySetCanceled();
-    base.ViewDestroy();
+
+    base.ViewDestroy(viewFinishing);
 }
 ```
 
@@ -181,7 +216,8 @@ if (Mvx.Resolve<IMvxNavigationService>().CanNavigate<NextViewModel>())
 If you want to intercept ViewModel navigation changes you can hook into the events of the NavigationService.
 
 ```c#
-Mvx.Resolve<IMvxNavigationService>().AfterClose += (object sender, NavigateEventArgs e) => {
+Mvx.Resolve<IMvxNavigationService>().AfterClose += (object sender, NavigateEventArgs e) =>
+ {
     //Do something with e.ViewModel
 };
 ```
@@ -191,8 +227,10 @@ The events available are:
 * AfterNavigate
 * BeforeClose
 * AfterClose
+* BeforeChangePresentation
+* AfterChangePresentation
 
-You might be using `Init()` or `Start()` methods in your ViewModels when updating from MvvmCross 4.x. This is now deprecated because it was done using reflection and therefore not very safe. When MvxNavigationService is used, a typed method called `Task Initialize()` will be available for you to perform any async heavy operations.
+You might be using `Init()` or `Start()` methods in your ViewModels when updating from MvvmCross 4.x. These are now deprecated because it was done using reflection and therefore not very safe. When MvxNavigationService is used, a typed method called `Task Initialize()` will be available for you to perform any async heavy operations.
 
 ### Uri navigation
 
