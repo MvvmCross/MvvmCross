@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moq;
 using MvvmCross.Core.Navigation;
@@ -240,6 +241,64 @@ namespace MvvmCross.Test.Navigation
 
             Assert.IsTrue(MockDispatcher.Object.Requests.Count > 0);
             Assert.IsTrue(result);
+        }
+
+        [Test]
+        public async Task Test_NavigateCallbacks()
+        {
+            var navigationService = Ioc.Resolve<IMvxNavigationService>();
+
+            int beforeNavigate = 0;
+            int afterNavigate = 0;
+            navigationService.BeforeNavigate += (sender, e) => beforeNavigate++;
+            navigationService.AfterNavigate += (sender, e) => afterNavigate++;
+
+            var tasks = new List<Task>();
+            tasks.Add(navigationService.Navigate<SimpleTestViewModel>());
+            tasks.Add(navigationService.Navigate<SimpleTestViewModel>(new MvxBundle()));
+            tasks.Add(navigationService.Navigate<SimpleResultTestViewModel, bool>());
+            tasks.Add(navigationService.Navigate<SimpleResultTestViewModel, bool>(new MvxBundle()));
+            tasks.Add(navigationService.Navigate<SimpleParameterTestViewModel, string>("hello"));
+            tasks.Add(navigationService.Navigate<SimpleParameterTestViewModel, string>("hello", new MvxBundle()));
+            await Task.WhenAll(tasks);
+
+            Assert.IsTrue(beforeNavigate == 6);
+            Assert.IsTrue(afterNavigate == 6);
+        }
+
+        [Test]
+        public async Task Test_CloseCallbacks()
+        {
+            var navigationService = Ioc.Resolve<IMvxNavigationService>();
+
+            int beforeClose = 0;
+            int afterClose = 0;
+            navigationService.BeforeClose += (sender, e) => beforeClose++;
+            navigationService.AfterClose += (sender, e) => afterClose++;
+
+            var tasks = new List<Task>();
+            tasks.Add(navigationService.Close(new SimpleTestViewModel()));
+            tasks.Add(navigationService.Close<bool>(new SimpleResultTestViewModel(), false));
+            await Task.WhenAll(tasks);
+
+            Assert.IsTrue(beforeClose == 2);
+            Assert.IsTrue(afterClose == 2);
+        }
+
+        [Test]
+        public void Test_ChangePresentationCallbacks()
+        {
+            var navigationService = Ioc.Resolve<IMvxNavigationService>();
+
+            int beforeChangePresentation = 0;
+            int afterChangePresentation = 0;
+            navigationService.BeforeChangePresentation += (sender, e) => beforeChangePresentation++;
+            navigationService.AfterChangePresentation += (sender, e) => afterChangePresentation++;
+
+            navigationService.ChangePresentation(new MvxClosePresentationHint(new SimpleTestViewModel()));
+
+            Assert.IsTrue(beforeChangePresentation == 1);
+            Assert.IsTrue(afterChangePresentation == 1);
         }
     }
 }
