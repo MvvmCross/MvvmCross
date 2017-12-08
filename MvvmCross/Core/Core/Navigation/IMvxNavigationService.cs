@@ -10,6 +10,8 @@ namespace MvvmCross.Core.Navigation
     public delegate void AfterNavigateEventHandler(object sender, NavigateEventArgs e);
     public delegate void BeforeCloseEventHandler(object sender, NavigateEventArgs e);
     public delegate void AfterCloseEventHandler(object sender, NavigateEventArgs e);
+    public delegate void BeforeChangePresentationEventHandler(object sender, ChangePresentationEventArgs e);
+    public delegate void AfterChangePresentationEventHandler(object sender, ChangePresentationEventArgs e);
 
     /// <summary>
     /// Allows for Task and URI based navigation in MvvmCross
@@ -20,6 +22,8 @@ namespace MvvmCross.Core.Navigation
         event AfterNavigateEventHandler AfterNavigate;
         event BeforeCloseEventHandler BeforeClose;
         event AfterCloseEventHandler AfterClose;
+        event BeforeChangePresentationEventHandler BeforeChangePresentation;
+        event AfterChangePresentationEventHandler AfterChangePresentation;
 
         /// <summary>
         /// Navigates to an instance of a ViewModel
@@ -141,7 +145,7 @@ namespace MvvmCross.Core.Navigation
         /// <returns></returns>
         Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
 
-        Task Navigate<TViewModel>(IMvxBundle presentationBundle = null) 
+        Task Navigate<TViewModel>(IMvxBundle presentationBundle = null)
             where TViewModel : IMvxViewModel;
 
         Task Navigate<TViewModel, TParameter>(TParameter param, IMvxBundle presentationBundle = null)

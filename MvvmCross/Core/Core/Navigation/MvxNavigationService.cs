@@ -35,6 +35,8 @@ namespace MvvmCross.Core.Navigation
         public event AfterNavigateEventHandler AfterNavigate;
         public event BeforeCloseEventHandler BeforeClose;
         public event AfterCloseEventHandler AfterClose;
+        public event BeforeChangePresentationEventHandler BeforeChangePresentation;
+        public event AfterChangePresentationEventHandler AfterChangePresentation;
 
         public MvxNavigationService(IMvxNavigationCache navigationCache, IMvxViewModelLoader viewModelLoader)
         {
@@ -422,7 +424,15 @@ namespace MvvmCross.Core.Navigation
         public bool ChangePresentation(MvxPresentationHint hint)
         {
             MvxTrace.Trace("Requesting presentation change");
-            return ViewDispatcher.ChangePresentation(hint);
+            var args = new ChangePresentationEventArgs(hint);
+            OnBeforeChangePresentation(this, args);
+
+            var result = ViewDispatcher.ChangePresentation(hint);
+
+            args.Result = result;
+            OnAfterChangePresentation(this, args);
+
+            return result;
         }
 
         public virtual Task<bool> Close(IMvxViewModel viewModel)
@@ -479,6 +489,16 @@ namespace MvvmCross.Core.Navigation
         protected virtual void OnAfterClose(object sender, NavigateEventArgs e)
         {
             AfterClose?.Invoke(sender, e);
+        }
+
+        protected virtual void OnBeforeChangePresentation(object sender, ChangePresentationEventArgs e)
+        {
+            BeforeChangePresentation?.Invoke(sender, e);
+        }
+
+        protected virtual void OnAfterChangePresentation(object sender, ChangePresentationEventArgs e)
+        {
+            AfterChangePresentation?.Invoke(sender, e);
         }
     }
 }
