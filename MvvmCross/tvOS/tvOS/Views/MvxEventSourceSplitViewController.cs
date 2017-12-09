@@ -81,6 +81,5 @@ namespace MvvmCross.tvOS.Views
         public event EventHandler<MvxValueEventArgs<bool>> ViewWillDisappearCalled;
 
         public event EventHandler DisposeCalled;
-
     }
 }
