@@ -550,7 +550,7 @@ namespace MvvmCross.Forms.Views
             }
         }
 
-        protected virtual NavigationPage TopNavigationPage(Page rootPage = null)
+        public virtual NavigationPage TopNavigationPage(Page rootPage = null)
         {
             if (rootPage == null)
                 rootPage = FormsApplication.MainPage;
@@ -597,10 +597,20 @@ namespace MvvmCross.Forms.Views
             return null;
         }
 
-        protected virtual TPage GetHostPageOfType<TPage>(Page rootPage = null) where TPage : Page
+        public virtual TPage GetHostPageOfType<TPage>(Page rootPage = null) where TPage : Page
         {
             if (rootPage == null)
                 rootPage = FormsApplication.MainPage;
+
+            if(rootPage.Navigation?.ModalStack?.Count > 0)
+            {
+                foreach (var item in rootPage.Navigation.ModalStack)
+                {
+                    var modalPage = GetHostPageOfType<TPage>(item);
+                    if (modalPage is TPage)
+                        return modalPage;
+                }
+            }
 
             if (rootPage is TPage)
                 return rootPage as TPage;
