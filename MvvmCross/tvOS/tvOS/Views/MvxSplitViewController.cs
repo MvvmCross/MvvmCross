@@ -81,28 +81,7 @@ namespace MvvmCross.tvOS.Views
             ViewModel?.ViewDisappeared();
         }
 
-        public virtual void ShowDetailView(UIViewController viewController, bool wrapInNavigationController)
-        {
-            viewController = wrapInNavigationController ? 
-                new MvxNavigationController(viewController) : viewController;
-
-            ShowDetailViewController(viewController, this);
-        }
-
-        public virtual void ShowMasterView(UIViewController viewController, bool wrapInNavigationController)
-        {
-            var stack = ViewControllers.ToList();
-
-            viewController = wrapInNavigationController 
-                ? new MvxNavigationController(viewController) : viewController;
-
-            if (stack.Any())
-                stack.RemoveAt(0);
-
-            stack.Insert(0, viewController);
-
-            ViewControllers = stack.ToArray();
-        }
+     
 
         public override void DidMoveToParentViewController(UIViewController parent)
         {
@@ -117,25 +96,6 @@ namespace MvvmCross.tvOS.Views
         {
             base.PrepareForSegue(segue, sender);
             this.ViewModelRequestForSegue(segue, sender);
-        }
-
-        public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
-        {
-            if (!ViewControllers.Any())
-                return false;
-
-            var toClose = ViewControllers.ToList()
-                                         .Select(v => v.GetIMvxTvosView())
-                                         .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
-            if (toClose != null)
-            {
-                var newStack = ViewControllers.Where(v => v.GetIMvxTvosView() != toClose);
-                ViewControllers = newStack.ToArray();
-
-                return true;
-            }
-
-            return false;
         }
     }
 
