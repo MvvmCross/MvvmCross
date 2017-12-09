@@ -38,7 +38,7 @@ namespace MvvmCross.tvOS.Views.Presenters
 
         public IMvxTabBarViewController TabBarViewController { get; protected set; }
 
-        public IMvxSplitViewController SplitViewController { get; protected set; }
+        public MvxSplitViewController SplitViewController { get; protected set; }
 
         public MvxTvosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
         {
@@ -183,6 +183,7 @@ namespace MvvmCross.tvOS.Views.Presenters
         }
 
 
+
         protected virtual bool CloseRootViewController(IMvxViewModel viewModel,
                                      MvxRootPresentationAttribute attribute)
         {
@@ -306,16 +307,35 @@ namespace MvvmCross.tvOS.Views.Presenters
 
         protected virtual bool CloseMasterSplitViewController(IMvxViewModel viewModel, MvxMasterSplitViewPresentationAttribute attribute)
         {
-            if (SplitViewController != null && SplitViewController.CloseChildViewModel(viewModel))
+            if (SplitViewController != null && CloseChildViewModel(viewModel))
                 return true;
             return true;
         }
 
         protected virtual bool CloseDetailSplitViewController(IMvxViewModel viewModel, MvxDetailSplitViewPresentationAttribute attribute)
         {
-            if (SplitViewController != null && SplitViewController.CloseChildViewModel(viewModel))
+            if (SplitViewController != null && CloseChildViewModel(viewModel))
                 return true;
             return true;
+        }
+
+        public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
+        {
+            if (!SplitViewController.ViewControllers.Any())
+                return false;
+
+            var toClose = SplitViewController.ViewControllers.ToList()
+                                         .Select(v => v.GetIMvxTvosView())
+                                         .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
+            if (toClose != null)
+            {
+                var newStack = SplitViewController.ViewControllers.Where(v => v.GetIMvxTvosView() != toClose);
+                SplitViewController.ViewControllers = newStack.ToArray();
+
+                return true;
+            }
+
+            return false;
         }
 
         protected void CloseSplitViewController()
@@ -361,7 +381,7 @@ namespace MvvmCross.tvOS.Views.Presenters
                 return;
            }
 
-            if (viewController is IMvxSplitViewController sc)
+            if (viewController is MvxSplitViewController sc)
             {
                 SplitViewController = sc; 
 
@@ -471,7 +491,7 @@ namespace MvvmCross.tvOS.Views.Presenters
         {
             if (SplitViewController != null)
             {
-                SplitViewController.ShowMasterView(viewController, attribute.WrapInNavigationController);
+                ShowMasterView(viewController, attribute.WrapInNavigationController);
             }
             else 
             {
@@ -486,7 +506,7 @@ namespace MvvmCross.tvOS.Views.Presenters
         {
             if (SplitViewController != null)
             {
-                SplitViewController.ShowDetailView(viewController, attribute.WrapInNavigationController);
+                ShowDetailView(viewController, attribute.WrapInNavigationController);
             }
             else
             {
@@ -494,6 +514,28 @@ namespace MvvmCross.tvOS.Views.Presenters
             }
         }
 
+        public virtual void ShowDetailView(UIViewController viewController, bool wrapInNavigationController)
+        {
+            viewController = wrapInNavigationController ?
+                new MvxNavigationController(viewController) : viewController;
+
+            SplitViewController.ShowDetailViewController(viewController, SplitViewController);
+        }
+
+        public virtual void ShowMasterView(UIViewController viewController, bool wrapInNavigationController)
+        {
+            var stack = SplitViewController.ViewControllers.ToList();
+
+            viewController = wrapInNavigationController
+                ? new MvxNavigationController(viewController) : viewController;
+
+            if (stack.Any())
+                stack.RemoveAt(0);
+
+            stack.Insert(0, viewController);
+
+            SplitViewController.ViewControllers = stack.ToArray();
+        }
         public bool PresentModalViewController(UIViewController viewController, bool animated)
         {
             ShowModalViewController(viewController, new MvxModalPresentationAttribute { Animated = animated }, null);
