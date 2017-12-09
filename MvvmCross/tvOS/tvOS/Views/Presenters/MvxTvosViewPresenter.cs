@@ -182,8 +182,6 @@ namespace MvvmCross.tvOS.Views.Presenters
                 });
         }
 
-
-
         protected virtual bool CloseRootViewController(IMvxViewModel viewModel,
                                      MvxRootPresentationAttribute attribute)
         {
@@ -405,7 +403,6 @@ namespace MvvmCross.tvOS.Views.Presenters
                                                         MvxChildPresentationAttribute attribute,
                                                         MvxViewModelRequest request)
         {
-
             if (viewController is IMvxSplitViewController)
                 throw new MvxException("A SplitViewController can't be present in a child.  Consider using a Root instead.");
 
@@ -554,7 +551,6 @@ namespace MvvmCross.tvOS.Views.Presenters
             if (viewController is IMvxTabBarViewController tabBarController)
                 TabBarViewController = tabBarController;
         }
-
 
         protected void SetupWindowRootNavigation(UIViewController viewController, 
                                                  MvxRootPresentationAttribute attribute)
