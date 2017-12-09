@@ -181,6 +181,7 @@
     <Compile Include="Views\SplitRootView.designer.cs">
       <DependentUpon>SplitRootView.cs</DependentUpon>
     </Compile>
+    <Compile Include="LinkerPleaseInclude.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
