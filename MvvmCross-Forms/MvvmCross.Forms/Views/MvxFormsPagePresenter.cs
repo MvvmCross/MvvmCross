@@ -177,6 +177,18 @@ namespace MvvmCross.Forms.Views
                     navigation.RemovePage(page);
                 return;
             }
+            if(hint is MvxPagePresentationHint pageHint)
+            {
+                var pageType = ViewsContainer.GetViewType(pageHint.ViewModel);
+                if (GetType().GetMethod("GetHostPageOfType").MakeGenericMethod(pageType).Invoke(this, new object[] { FormsApplication.MainPage }) is Page page)
+                {
+                    if (page.Parent is TabbedPage tabbedPage)
+                        tabbedPage.CurrentPage = page;
+                    else if (page.Parent is CarouselPage carouselPage && page is ContentPage contentPage)
+                        carouselPage.CurrentPage = contentPage;
+                }
+                return;
+            }
 
             base.ChangePresentation(hint);
         }
@@ -602,7 +614,7 @@ namespace MvvmCross.Forms.Views
             if (rootPage == null)
                 rootPage = FormsApplication.MainPage;
 
-            if(rootPage.Navigation?.ModalStack?.Count > 0)
+            if(rootPage?.Navigation?.ModalStack?.Count > 0)
             {
                 foreach (var item in rootPage.Navigation.ModalStack)
                 {

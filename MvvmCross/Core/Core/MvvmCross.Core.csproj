@@ -157,6 +157,7 @@
     <Compile Include="ViewModels\Hints\MvxPopToRootPresentationHint.cs" />
     <Compile Include="ViewModels\Hints\MvxRemovePresentationHint.cs" />
     <Compile Include="Navigation\EventArguments\ChangePresentationEventArgs.cs" />
+    <Compile Include="ViewModels\Hints\MvxPagePresentationHint.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
