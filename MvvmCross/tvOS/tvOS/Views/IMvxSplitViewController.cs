@@ -3,7 +3,5 @@ using MvvmCross.Core.ViewModels;
 
 namespace MvvmCross.tvOS.Views
 {
-    public interface IMvxSplitViewController
-    {
-    }
+    public interface IMvxSplitViewController { }
 }

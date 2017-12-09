@@ -14,7 +14,6 @@ namespace MvvmCross.tvOS.Views
         ,IMvxTvosView
         ,IMvxSplitViewController
     {
-
         public object DataContext
         {
             get { return BindingContext.DataContext; }
@@ -80,8 +79,6 @@ namespace MvvmCross.tvOS.Views
             base.ViewDidDisappear(animated);
             ViewModel?.ViewDisappeared();
         }
-
-     
 
         public override void DidMoveToParentViewController(UIViewController parent)
         {
