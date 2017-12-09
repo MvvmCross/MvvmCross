@@ -165,6 +165,23 @@
     <Compile Include="Views\OverrideAttributeView.designer.cs">
       <DependentUpon>OverrideAttributeView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\SplitDetailNavView.cs" />
+    <Compile Include="Views\SplitDetailNavView.designer.cs">
+      <DependentUpon>SplitDetailNavView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitDetailView.cs" />
+    <Compile Include="Views\SplitDetailView.designer.cs">
+      <DependentUpon>SplitDetailView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitMasterView.cs" />
+    <Compile Include="Views\SplitMasterView.designer.cs">
+      <DependentUpon>SplitMasterView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitRootView.cs" />
+    <Compile Include="Views\SplitRootView.designer.cs">
+      <DependentUpon>SplitRootView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LinkerPleaseInclude.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />

@@ -90,6 +90,9 @@
     <Compile Include="Views\MvxBaseTabBarViewController.cs" />
     <Compile Include="Views\MvxSegueExtensionMethods.cs" />
     <Compile Include="Views\IMvxTvosViewSegue.cs" />
+    <Compile Include="Views\MvxSplitViewController.cs" />
+    <Compile Include="Views\MvxEventSourceSplitViewController.cs" />
+    <Compile Include="Views\Presenters\Attributes\MvxMasterDetailPresentationAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Binding\MvvmCross.Binding.csproj">

@@ -1,32 +1,28 @@
-﻿using UIKit;
-using Foundation;
-
 using MvvmCross.Core.ViewModels;
 using MvvmCross.tvOS.Platform;
 using MvvmCross.tvOS.Views.Presenters;
 using MvvmCross.Platform.Platform;
+using UIKit;
 
-using Playground.Core;
-
-namespace Playground.TvOS
+namespace $rootnamespace$
 {
     public class Setup : MvxTvosSetup
     {
-        public Setup(IMvxApplicationDelegate applicationDelegate, UIWindow window) 
+        public Setup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
         {
         }
-
-        public Setup(IMvxApplicationDelegate applicationDelegate, IMvxTvosViewPresenter presenter) 
+        
+        public Setup(IMvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter)
             : base(applicationDelegate, presenter)
         {
         }
 
         protected override IMvxApplication CreateApp()
         {
-            return new App();
+            return new Core.App();
         }
-
+        
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();

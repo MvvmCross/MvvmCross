@@ -21,44 +21,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjQ-fY-eex">
-                                <rect key="frame" x="702" y="181" width="517" height="86"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                <state key="normal" title="Initiate Tabs navigation"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OLi-5F-jV2">
-                                <rect key="frame" x="702" y="343" width="517" height="86"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                <state key="normal" title="Initiate Modal navigation"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFh-fF-n1k">
-                                <rect key="frame" x="702" y="500" width="517" height="86"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                <state key="normal" title="Show Child"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DGo-Ta-phT">
-                                <rect key="frame" x="702" y="660" width="517" height="86"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                <state key="normal" title="Show modal"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kp0-IM-Hs2">
-                                <rect key="frame" x="517" y="813" width="887" height="86"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                <state key="normal" title="Show modal (override presentation attribute)"/>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="EYh-gH-n20">
+                                <rect key="frame" x="10" y="70" width="1900" height="940"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjQ-fY-eex">
+                                        <rect key="frame" x="714" y="0.0" width="472" height="107"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="Initiate Tabs navigation"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHr-Nq-3Ny">
+                                        <rect key="frame" x="763" y="167" width="374" height="106"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="Initiate Split View"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OLi-5F-jV2">
+                                        <rect key="frame" x="702" y="333" width="496" height="107"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="Initiate Modal navigation"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFh-fF-n1k">
+                                        <rect key="frame" x="814" y="500" width="273" height="107"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="Show Child"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DGo-Ta-phT">
+                                        <rect key="frame" x="805" y="667" width="290" height="106"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="Show modal"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kp0-IM-Hs2">
+                                        <rect key="frame" x="526" y="833" width="848" height="107"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="Show modal (override presentation attribute)"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="EYh-gH-n20" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="L8a-Pn-PbI"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="EYh-gH-n20" secondAttribute="bottom" constant="10" id="LSg-fp-Gre"/>
+                            <constraint firstItem="EYh-gH-n20" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="WaR-HR-dvP"/>
+                            <constraint firstAttribute="trailing" secondItem="EYh-gH-n20" secondAttribute="trailing" constant="10" id="cEm-HU-9Nw"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="btnChild" destination="jFh-fF-n1k" id="LxL-tu-1m9"/>
                         <outlet property="btnModal" destination="DGo-Ta-phT" id="0gy-Z5-ATt"/>
                         <outlet property="btnModalAttribute" destination="Kp0-IM-Hs2" id="fFA-sw-iOU"/>
                         <outlet property="btnModalNav" destination="OLi-5F-jV2" id="6qT-30-DDm"/>
+                        <outlet property="btnSplitNav" destination="eHr-Nq-3Ny" id="15r-o8-IcS"/>
                         <outlet property="btnTabs" destination="gjQ-fY-eex" id="kap-nD-YAh"/>
                     </connections>
                 </viewController>
@@ -201,6 +213,55 @@
             </objects>
             <point key="canvasLocation" x="2035" y="3166"/>
         </scene>
+        <!--Split Detail View-->
+        <scene sceneID="ff6-xo-9H3">
+            <objects>
+                <viewController storyboardIdentifier="SplitDetailView" id="FnY-1E-9Yj" customClass="SplitDetailView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sbu-Yk-G8F"/>
+                        <viewControllerLayoutGuide type="bottom" id="Cxx-X7-TIV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ofj-3n-vVx">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail View" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyy-hI-FCv">
+                                <rect key="frame" x="110" y="204" width="1700" height="91"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Close only works when Master is not wrapped in a NavigationController" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cpa-NL-sK5">
+                                <rect key="frame" x="20" y="450" width="1880" height="58"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H32-Fr-t8z">
+                                <rect key="frame" x="872" y="658" width="177" height="86"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Close"/>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="yyy-hI-FCv" firstAttribute="leading" secondItem="Ofj-3n-vVx" secondAttribute="leading" constant="110" id="5dR-5N-Ume"/>
+                            <constraint firstItem="H32-Fr-t8z" firstAttribute="centerX" secondItem="Ofj-3n-vVx" secondAttribute="centerX" id="QvA-eZ-sgd"/>
+                            <constraint firstItem="Cpa-NL-sK5" firstAttribute="top" secondItem="yyy-hI-FCv" secondAttribute="bottom" constant="155" id="XE7-eB-Qv3"/>
+                            <constraint firstAttribute="trailing" secondItem="yyy-hI-FCv" secondAttribute="trailing" constant="110" id="YNA-Km-CZZ"/>
+                            <constraint firstAttribute="trailing" secondItem="Cpa-NL-sK5" secondAttribute="trailing" constant="20" id="Ye3-G2-DaD"/>
+                            <constraint firstItem="Cpa-NL-sK5" firstAttribute="leading" secondItem="Ofj-3n-vVx" secondAttribute="leading" constant="20" id="bDt-cN-u9e"/>
+                            <constraint firstItem="H32-Fr-t8z" firstAttribute="top" secondItem="Cpa-NL-sK5" secondAttribute="bottom" constant="150" id="mBP-dR-NB0"/>
+                            <constraint firstItem="yyy-hI-FCv" firstAttribute="top" secondItem="sbu-Yk-G8F" secondAttribute="bottom" constant="144" id="uz6-kb-slz"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="H32-Fr-t8z" id="HC3-G7-gbT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BeG-P6-OPY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1496" y="4816"/>
+        </scene>
         <!--Tab1 View-->
         <scene sceneID="SiO-fI-IDj">
             <objects>
@@ -327,6 +388,79 @@
             </objects>
             <point key="canvasLocation" x="-535" y="3166"/>
         </scene>
+        <!--Split Master View-->
+        <scene sceneID="Kqm-lz-lsd">
+            <objects>
+                <viewController storyboardIdentifier="SplitMasterView" id="tod-sm-1nX" customClass="SplitMasterView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Yl2-JJ-EtP"/>
+                        <viewControllerLayoutGuide type="bottom" id="fZs-IF-hLu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ycQ-RP-m8j">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="Master View" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c7e-9f-Yp5">
+                                <rect key="frame" x="764" y="80" width="392" height="91"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRB-s5-cmw">
+                                <rect key="frame" x="818" y="271" width="283" height="86"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Show Detail"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KDA-Ya-fmP">
+                                <rect key="frame" x="780" y="457" width="359" height="86"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Show Detail Nav"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQb-iF-tWg">
+                                <rect key="frame" x="716" y="643" width="488" height="86"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Initiate Stack navigation"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="fQb-iF-tWg" firstAttribute="top" secondItem="KDA-Ya-fmP" secondAttribute="bottom" constant="100" id="1r2-UH-0ew"/>
+                            <constraint firstItem="c7e-9f-Yp5" firstAttribute="centerX" secondItem="ycQ-RP-m8j" secondAttribute="centerX" id="HC4-Dq-QXd"/>
+                            <constraint firstItem="KDA-Ya-fmP" firstAttribute="top" secondItem="bRB-s5-cmw" secondAttribute="bottom" constant="100" id="Wqc-7M-wBb"/>
+                            <constraint firstItem="bRB-s5-cmw" firstAttribute="top" secondItem="c7e-9f-Yp5" secondAttribute="bottom" constant="100" id="c0L-d4-d5s"/>
+                            <constraint firstItem="KDA-Ya-fmP" firstAttribute="centerX" secondItem="ycQ-RP-m8j" secondAttribute="centerX" id="gAj-Gr-RHj"/>
+                            <constraint firstItem="fQb-iF-tWg" firstAttribute="centerX" secondItem="ycQ-RP-m8j" secondAttribute="centerX" id="hCi-aK-LyH"/>
+                            <constraint firstItem="c7e-9f-Yp5" firstAttribute="top" secondItem="Yl2-JJ-EtP" secondAttribute="bottom" constant="20" id="whw-kH-42u"/>
+                            <constraint firstItem="bRB-s5-cmw" firstAttribute="centerX" secondItem="ycQ-RP-m8j" secondAttribute="centerX" id="y70-KJ-5lk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnDetail" destination="bRB-s5-cmw" id="ADI-yS-eap"/>
+                        <outlet property="btnDetailNav" destination="KDA-Ya-fmP" id="0KP-Ga-ssv"/>
+                        <outlet property="btnStackNav" destination="fQb-iF-tWg" id="cdS-Y2-JRN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m50-oT-kPF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-926" y="4802"/>
+        </scene>
+        <!--Split Root View-->
+        <scene sceneID="2Gt-ge-NsL">
+            <objects>
+                <viewController storyboardIdentifier="SplitRootView" id="3eG-Hj-Pz5" customClass="SplitRootView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xCF-Hp-VVa"/>
+                        <viewControllerLayoutGuide type="bottom" id="tCC-sH-s57"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EOl-pn-Tvf">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kKm-GO-Rx7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3421" y="4802"/>
+        </scene>
         <!--Tab3 View-->
         <scene sceneID="WqR-Ze-mUp">
             <objects>
@@ -438,6 +572,54 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mas-oz-wv6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4889" y="3166"/>
+        </scene>
+        <!--Split Detail Nav View-->
+        <scene sceneID="xad-ih-DZZ">
+            <objects>
+                <viewController storyboardIdentifier="SplitDetailNavView" id="psA-E4-1XO" customClass="SplitDetailNavView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EuO-VD-QOj"/>
+                        <viewControllerLayoutGuide type="bottom" id="tXT-72-5UR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Brc-NH-gUB">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail View 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXj-Pe-z2M">
+                                <rect key="frame" x="754" y="171" width="413" height="91"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Close only works when Master is not wrapped in a NavigationController" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xkb-xK-JbE">
+                                <rect key="frame" x="110" y="421" width="1700" height="58"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bm-cu-oed">
+                                <rect key="frame" x="872" y="637" width="177" height="86"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Close"/>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="xkb-xK-JbE" secondAttribute="trailing" constant="110" id="4Qh-3D-GdH"/>
+                            <constraint firstItem="0bm-cu-oed" firstAttribute="centerX" secondItem="Brc-NH-gUB" secondAttribute="centerX" id="68P-DB-huk"/>
+                            <constraint firstItem="0bm-cu-oed" firstAttribute="top" secondItem="xkb-xK-JbE" secondAttribute="bottom" constant="158" id="EQf-qh-1fz"/>
+                            <constraint firstItem="fXj-Pe-z2M" firstAttribute="top" secondItem="EuO-VD-QOj" secondAttribute="bottom" constant="111" id="KT6-Qf-nxs"/>
+                            <constraint firstItem="xkb-xK-JbE" firstAttribute="leading" secondItem="Brc-NH-gUB" secondAttribute="leading" constant="110" id="b5n-Da-V0C"/>
+                            <constraint firstItem="xkb-xK-JbE" firstAttribute="top" secondItem="fXj-Pe-z2M" secondAttribute="bottom" constant="159" id="nVo-Jx-RM6"/>
+                            <constraint firstItem="fXj-Pe-z2M" firstAttribute="centerX" secondItem="Brc-NH-gUB" secondAttribute="centerX" id="r8J-pW-yiN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="0bm-cu-oed" id="ZfF-di-DrX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sow-Zk-x4c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3769" y="4816"/>
         </scene>
     </scenes>
 </document>
