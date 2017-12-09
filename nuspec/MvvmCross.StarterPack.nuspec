@@ -49,16 +49,6 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
 		<file src="iOSContent\MainView.xib" target="content\Xamarin.iOS10\Views\MainView.xib" />
 		<file src="iOSContent\LinkerPleaseInclude.cs.pp" target="content\Xamarin.iOS10\LinkerPleaseInclude.cs.pp" />
 
-		<!-- tvOS - Content -->
-		<file src="tvOSContent\_tvOSUI.txt" target="content\Xamarin.tvOS\ToDo-MvvmCross\_tvOSUI.txt" />
-		<file src="tvOSContent\Setup.cs.pp" target="content\Xamarin.tvOS\Setup.cs.pp" />
-		<file src="tvOSContent\AppDelegate.cs.txt.pp" target="content\Xamarin.tvOS\AppDelegate.cs.txt.pp" />
-		<file src="tvOSContent\DebugTrace.cs.pp" target="content\Xamarin.tvOS\DebugTrace.cs.pp" />
-		<file src="tvOSContent\MainView.cs.pp" target="content\Xamarin.tvOS\Views\MainView.cs.pp" />
-		<file src="tvOSContent\MainView.designer.cs.pp" target="content\Xamarin.tvOS\Views\MainView.designer.cs.pp" />
-		<file src="tvOSContent\Main.storyboard" target="content\Xamarin.tvOS\Main.storyboard" />
-		<file src="tvOSContent\LinkerPleaseInclude.cs.pp" target="content\Xamarin.tvOS\LinkerPleaseInclude.cs.pp" />
-
 		<!-- mac - Content -->
 		<file src="MacContent\_ Mac UI.txt" target="content\Xamarin.Mac20\ToDo-MvvmCross\_ Mac UI.txt" />		
 		<file src="MacContent\Setup.cs.pp" target="content\Xamarin.Mac20\Setup.cs.pp" />
