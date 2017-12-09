@@ -38,6 +38,8 @@ namespace MvvmCross.tvOS.Views.Presenters
 
         public IMvxTabBarViewController TabBarViewController { get; protected set; }
 
+        public MvxSplitViewController SplitViewController { get; protected set; }
+
         public MvxTvosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
         {
             _applicationDelegate = applicationDelegate;
@@ -154,8 +156,19 @@ namespace MvvmCross.tvOS.Views.Presenters
                   },
                   CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel, (MvxModalPresentationAttribute)attribute)
               });
-        }
 
+            AttributeTypesToActionsDictionary.Add(
+                typeof(MvxMasterDetailPresentationAttribute),
+              new MvxPresentationAttributeAction
+              {
+                  ShowAction = (viewType, attribute, request) =>
+                  {
+                      var viewController = (UIViewController)this.CreateViewControllerFor(request);
+                      ShowMasterDetailSplitViewController(viewController, (MvxMasterDetailPresentationAttribute)attribute, request);
+                  },
+                  CloseAction = (viewModel, attribute) => CloseMasterSplitViewController(viewModel, (MvxMasterDetailPresentationAttribute)attribute) 
+                  });
+        }
 
         protected virtual bool CloseRootViewController(IMvxViewModel viewModel,
                                      MvxRootPresentationAttribute attribute)
@@ -278,6 +291,57 @@ namespace MvvmCross.tvOS.Views.Presenters
             MasterNavigationController = null;
         }
 
+        protected virtual bool CloseMasterSplitViewController(IMvxViewModel viewModel, MvxMasterDetailPresentationAttribute attribute)
+        {
+            if (SplitViewController != null &&
+                attribute.Position != MasterDetailPosition.Root &&
+                CloseChildViewModel(viewModel))
+                return true;
+            else if (attribute.Position == MasterDetailPosition.Root)
+                return false;
+            return true;
+        }
+
+        protected virtual bool CloseDetailSplitViewController(IMvxViewModel viewModel, MvxMasterDetailPresentationAttribute attribute)
+        {
+            if (SplitViewController != null && CloseChildViewModel(viewModel))
+                return true;
+            return true;
+        }
+
+        public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
+        {
+            if (!SplitViewController.ViewControllers.Any())
+                return false;
+
+            var toClose = SplitViewController.ViewControllers.ToList()
+                                         .Select(v => v.GetIMvxTvosView())
+                                         .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
+            if (toClose != null)
+            {
+                var newStack = SplitViewController.ViewControllers.Where(v => v.GetIMvxTvosView() != toClose);
+                SplitViewController.ViewControllers = newStack.ToArray();
+
+                return true;
+            }
+
+            return false;
+        }
+
+        protected void CloseSplitViewController()
+        {
+            if (SplitViewController == null)
+                return;
+
+            if (SplitViewController is UISplitViewController splitController
+               && splitController.ViewControllers != null)
+            {
+                foreach (var item in splitController.ViewControllers)
+                    item.DidMoveToParentViewController(null);
+            }
+            SplitViewController = null;
+        }
+
         public override void Close(IMvxViewModel viewModel )
         {
             GetPresentationAttributeAction(viewModel.GetType(), out MvxBasePresentationAttribute attribute)
@@ -311,12 +375,16 @@ namespace MvvmCross.tvOS.Views.Presenters
 
            CleanupModalViewControllers();
            CloseTabBarViewController();
+           CloseSplitViewController();
         }
 
         protected virtual void ShowChildViewController(UIViewController viewController,
                                                         MvxChildPresentationAttribute attribute,
                                                         MvxViewModelRequest request)
         {
+            if (viewController is MvxSplitViewController)
+                throw new MvxException("A SplitViewController can't be present in a child.  Consider using a Root instead.");
+
             if (ModalViewControllers.Any())
             {
                 if (ModalViewControllers.LastOrDefault() is UINavigationController navigationController)
@@ -392,6 +460,58 @@ namespace MvvmCross.tvOS.Views.Presenters
                 attribute);
         }
 
+        protected virtual void ShowMasterDetailSplitViewController(
+          UIViewController viewController,
+            MvxMasterDetailPresentationAttribute attribute,
+          MvxViewModelRequest request)
+        {
+            if (SplitViewController != null && attribute.Position == MasterDetailPosition.Master)
+            {
+                ShowMasterView(viewController, attribute.WrapInNavigationController);
+            }
+            else if (SplitViewController != null && attribute.Position == MasterDetailPosition.Detail)
+            {
+                ShowDetailView(viewController, attribute.WrapInNavigationController);   
+            }
+            else if (viewController is MvxSplitViewController && attribute.Position == MasterDetailPosition.Root)
+            {
+                SplitViewController = (MvxSplitViewController)viewController;
+
+                // set root
+                SetupSplitViewWindowRootNavigation(viewController, attribute);
+
+                CleanupModalViewControllers();
+                CloseTabBarViewController();
+                return;
+            }
+            else 
+            {
+                throw new MvxException("Trying to show a master page without a SplitViewController, this is not possible!");
+            }
+        }
+
+        public virtual void ShowDetailView(UIViewController viewController, bool wrapInNavigationController)
+        {
+            viewController = wrapInNavigationController ?
+                new MvxNavigationController(viewController) : viewController;
+
+            SplitViewController.ShowDetailViewController(viewController, SplitViewController);
+        }
+
+        public virtual void ShowMasterView(UIViewController viewController, bool wrapInNavigationController)
+        {
+            var stack = SplitViewController.ViewControllers.ToList();
+
+            viewController = wrapInNavigationController
+                ? new MvxNavigationController(viewController) : viewController;
+
+            if (stack.Any())
+                stack.RemoveAt(0);
+
+            stack.Insert(0, viewController);
+
+            SplitViewController.ViewControllers = stack.ToArray();
+        }
         public bool PresentModalViewController(UIViewController viewController, bool animated)
         {
             ShowModalViewController(viewController, new MvxModalPresentationAttribute { Animated = animated }, null);
@@ -411,7 +531,6 @@ namespace MvvmCross.tvOS.Views.Presenters
                 TabBarViewController = tabBarController;
         }
 
-
         protected void SetupWindowRootNavigation(UIViewController viewController, 
                                                  MvxRootPresentationAttribute attribute)
         {
@@ -426,6 +545,22 @@ namespace MvvmCross.tvOS.Views.Presenters
                 CloseMasterNavigationController();
             }
                 
+        }
+
+        protected void SetupSplitViewWindowRootNavigation(UIViewController viewController,
+                                               MvxMasterDetailPresentationAttribute attribute)
+        {
+            if (attribute.WrapInNavigationController)
+            {
+                MasterNavigationController = CreateNavigationController(viewController);
+                SetWindowRootViewController(MasterNavigationController);
+            }
+            else
+            {
+                SetWindowRootViewController(viewController);
+                CloseMasterNavigationController();
+            }
+
         }
 
         protected virtual void SetWindowRootViewController(UIViewController controller)
