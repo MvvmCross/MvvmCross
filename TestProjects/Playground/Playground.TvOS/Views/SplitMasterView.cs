@@ -9,7 +9,7 @@ using Playground.Core.ViewModels;
 namespace Playground.TvOS
 {
     [MvxFromStoryboard("Main")]
-    [MvxMasterSplitViewPresentation]
+    [MvxMasterDetailPresentation (Position = MasterDetailPosition.Master)]
 	public partial class SplitMasterView : MvxViewController<SplitMasterViewModel> 
 	{
 		public SplitMasterView (IntPtr handle) : base (handle)

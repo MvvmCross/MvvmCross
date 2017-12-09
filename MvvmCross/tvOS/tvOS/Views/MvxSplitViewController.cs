@@ -12,7 +12,6 @@ namespace MvvmCross.tvOS.Views
     public class MvxSplitViewController 
         : MvxEventSourceSplitViewController
         ,IMvxTvosView
-        ,IMvxSplitViewController
     {
         public object DataContext
         {

@@ -158,28 +158,16 @@ namespace MvvmCross.tvOS.Views.Presenters
               });
 
             AttributeTypesToActionsDictionary.Add(
-              typeof(MvxMasterSplitViewPresentationAttribute),
+                typeof(MvxMasterDetailPresentationAttribute),
               new MvxPresentationAttributeAction
               {
                   ShowAction = (viewType, attribute, request) =>
                   {
                       var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                      ShowMasterSplitViewController(viewController, (MvxMasterSplitViewPresentationAttribute)attribute, request);
+                      ShowMasterDetailSplitViewController(viewController, (MvxMasterDetailPresentationAttribute)attribute, request);
                   },
-                  CloseAction = (viewModel, attribute) => CloseMasterSplitViewController(viewModel, (MvxMasterSplitViewPresentationAttribute)attribute)
-              });
-
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxDetailSplitViewPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
-                    {
-                        var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        ShowDetailSplitViewController(viewController, (MvxDetailSplitViewPresentationAttribute)attribute, request);
-                    },
-                    CloseAction = (viewModel, attribute) => CloseDetailSplitViewController(viewModel, (MvxDetailSplitViewPresentationAttribute)attribute)
-                });
+                  CloseAction = (viewModel, attribute) => CloseMasterSplitViewController(viewModel, (MvxMasterDetailPresentationAttribute)attribute) 
+                  });
         }
 
         protected virtual bool CloseRootViewController(IMvxViewModel viewModel,
@@ -303,14 +291,18 @@ namespace MvvmCross.tvOS.Views.Presenters
             MasterNavigationController = null;
         }
 
-        protected virtual bool CloseMasterSplitViewController(IMvxViewModel viewModel, MvxMasterSplitViewPresentationAttribute attribute)
+        protected virtual bool CloseMasterSplitViewController(IMvxViewModel viewModel, MvxMasterDetailPresentationAttribute attribute)
         {
-            if (SplitViewController != null && CloseChildViewModel(viewModel))
+            if (SplitViewController != null &&
+                attribute.Position != MasterDetailPosition.Root &&
+                CloseChildViewModel(viewModel))
                 return true;
+            else if (attribute.Position == MasterDetailPosition.Root)
+                return false;
             return true;
         }
 
-        protected virtual bool CloseDetailSplitViewController(IMvxViewModel viewModel, MvxDetailSplitViewPresentationAttribute attribute)
+        protected virtual bool CloseDetailSplitViewController(IMvxViewModel viewModel, MvxMasterDetailPresentationAttribute attribute)
         {
             if (SplitViewController != null && CloseChildViewModel(viewModel))
                 return true;
@@ -379,19 +371,6 @@ namespace MvvmCross.tvOS.Views.Presenters
                 return;
            }
 
-            if (viewController is MvxSplitViewController sc)
-            {
-                SplitViewController = sc; 
-
-                // set root
-                SetupWindowRootNavigation(viewController, attribute);
-
-                CleanupModalViewControllers();
-                CloseTabBarViewController();
-
-                return;         
-            }
-
            SetupWindowRootNavigation(viewController, attribute);
 
            CleanupModalViewControllers();
@@ -403,7 +382,7 @@ namespace MvvmCross.tvOS.Views.Presenters
                                                         MvxChildPresentationAttribute attribute,
                                                         MvxViewModelRequest request)
         {
-            if (viewController is IMvxSplitViewController)
+            if (viewController is MvxSplitViewController)
                 throw new MvxException("A SplitViewController can't be present in a child.  Consider using a Root instead.");
 
             if (ModalViewControllers.Any())
@@ -481,33 +460,33 @@ namespace MvvmCross.tvOS.Views.Presenters
                 attribute);
         }
 
-        protected virtual void ShowMasterSplitViewController(
+        protected virtual void ShowMasterDetailSplitViewController(
           UIViewController viewController,
-          MvxMasterSplitViewPresentationAttribute attribute,
+            MvxMasterDetailPresentationAttribute attribute,
           MvxViewModelRequest request)
         {
-            if (SplitViewController != null)
+            if (SplitViewController != null && attribute.Position == MasterDetailPosition.Master)
             {
                 ShowMasterView(viewController, attribute.WrapInNavigationController);
+            }
+            else if (SplitViewController != null && attribute.Position == MasterDetailPosition.Detail)
+            {
+                ShowDetailView(viewController, attribute.WrapInNavigationController);   
+            }
+            else if (viewController is MvxSplitViewController && attribute.Position == MasterDetailPosition.Root)
+            {
+                SplitViewController = (MvxSplitViewController)viewController;
+
+                // set root
+                SetupSplitViewWindowRootNavigation(viewController, attribute);
+
+                CleanupModalViewControllers();
+                CloseTabBarViewController();
+                return;
             }
             else 
             {
                 throw new MvxException("Trying to show a master page without a SplitViewController, this is not possible!");
-            }
-        }
-
-        protected virtual void ShowDetailSplitViewController(
-           UIViewController viewController,
-           MvxDetailSplitViewPresentationAttribute attribute,
-           MvxViewModelRequest request)
-        {
-            if (SplitViewController != null)
-            {
-                ShowDetailView(viewController, attribute.WrapInNavigationController);
-            }
-            else
-            {
-                throw new MvxException("Trying to show a detail page without a SplitViewController, this is not possible!");
             }
         }
 
@@ -566,6 +545,22 @@ namespace MvvmCross.tvOS.Views.Presenters
                 CloseMasterNavigationController();
             }
                 
+        }
+
+        protected void SetupSplitViewWindowRootNavigation(UIViewController viewController,
+                                               MvxMasterDetailPresentationAttribute attribute)
+        {
+            if (attribute.WrapInNavigationController)
+            {
+                MasterNavigationController = CreateNavigationController(viewController);
+                SetWindowRootViewController(MasterNavigationController);
+            }
+            else
+            {
+                SetWindowRootViewController(viewController);
+                CloseMasterNavigationController();
+            }
+
         }
 
         protected virtual void SetWindowRootViewController(UIViewController controller)
