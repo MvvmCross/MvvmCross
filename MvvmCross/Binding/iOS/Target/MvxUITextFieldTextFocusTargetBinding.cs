@@ -7,13 +7,14 @@
 
 using System;
 using MvvmCross.Binding.Bindings.Target;
+using MvvmCross.Platform.WeakSubscription;
 using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
 {
     public class MvxUITextFieldTextFocusTargetBinding : MvxTargetBinding
     {
-        private bool _subscribed;
+        private IDisposable _subscription;
 
         protected UITextField TextField => Target as UITextField;
 
@@ -36,17 +37,18 @@ namespace MvvmCross.Binding.iOS.Target
 
         public override void SubscribeToEvents()
         {
+            var textField = TextField;
             if (TextField == null) return;
 
-            TextField.EditingDidEnd += HandleLostFocus;
-            _subscribed = true;
+            _subscription = textField.WeakSubscribe(nameof(textField.EditingDidEnd), HandleLostFocus);
         }
 
         private void HandleLostFocus(object sender, EventArgs e)
         {
-            if (TextField == null) return;
+            var textField = TextField;
+            if (textField == null) return;
 
-            FireValueChanged(TextField.Text);
+            FireValueChanged(textField.Text);
         }
 
         protected override void Dispose(bool isDisposing)
@@ -54,11 +56,8 @@ namespace MvvmCross.Binding.iOS.Target
             base.Dispose(isDisposing);
             if (!isDisposing) return;
 
-            if (TextField != null && _subscribed)
-            {
-                TextField.EditingDidEnd -= HandleLostFocus;
-                _subscribed = false;
-            }
+            _subscription?.Dispose();
+            _subscription = null;
         }
     }
 }

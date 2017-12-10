@@ -11,36 +11,27 @@ using Foundation;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.iOS;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
 using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
 {
     public abstract class MvxBaseUIDatePickerTargetBinding : MvxPropertyInfoTargetBinding<UIDatePicker>
     {
+        private readonly NSTimeZone _systemTimeZone;
+        private MvxWeakEventSubscription<UIDatePicker, EventArgs> _subscription;
+
         protected MvxBaseUIDatePickerTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-            var datePicker = View;
-            if (datePicker == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UIDatePicker is null in MvxBaseUIDatePickerTargetBinding");
-            }
-            // Only listen for value changes if we are binding against one of the value-derived properties.
-            else if (targetPropertyInfo.Name == nameof(UIDatePicker.Date) || targetPropertyInfo.Name == nameof(UIDatePicker.CountDownDuration))
-            {
-                datePicker.ValueChanged += DatePickerOnValueChanged;
-            }
-
             _systemTimeZone = NSTimeZone.SystemTimeZone;
         }
-
-        private readonly NSTimeZone _systemTimeZone;
 
         private void DatePickerOnValueChanged(object sender, EventArgs eventArgs)
         {
             var view = View;
-            if (view == null)
-                return;
+            if (view == null) return;
+
             FireValueChanged(GetValueFrom(view));
         }
 
@@ -48,17 +39,29 @@ namespace MvvmCross.Binding.iOS.Target
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
+        public override void SubscribeToEvents()
+        {
+            var datePicker = View;
+            if (datePicker == null)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UIDatePicker is null in MvxBaseUIDatePickerTargetBinding");
+            }
+            // Only listen for value changes if we are binding against one of the value-derived properties.
+            else if (TargetPropertyInfo.Name == nameof(UIDatePicker.Date) || TargetPropertyInfo.Name == nameof(UIDatePicker.CountDownDuration))
+            {
+                _subscription = datePicker.WeakSubscribe<UIDatePicker, EventArgs>(
+                    nameof(datePicker.ValueChanged),
+                    DatePickerOnValueChanged);
+            }
+        }
+
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);
-            if (isDisposing)
-            {
-                var datePicker = View;
-                if (datePicker != null)
-                {
-                    datePicker.ValueChanged -= DatePickerOnValueChanged;
-                }
-            }
+
+            if (!isDisposing) return;
+
+            _subscription?.Dispose();
         }
 
         protected DateTime ToLocalTime(DateTime utc)

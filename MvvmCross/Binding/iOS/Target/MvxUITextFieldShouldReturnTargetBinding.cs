@@ -12,8 +12,7 @@ using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
 {
-    public class MvxUITextFieldShouldReturnTargetBinding
-        : MvxTargetBinding
+    public class MvxUITextFieldShouldReturnTargetBinding : MvxTargetBinding
     {
         private ICommand _command;
 
@@ -52,14 +51,12 @@ namespace MvvmCross.Binding.iOS.Target
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);
-            if (isDisposing)
-            {
-                var editText = View;
-                if (editText != null)
-                {
-                    editText.ShouldReturn = null;
-                }
-            }
+            if (!isDisposing) return;
+
+            var editText = View;
+            if (editText == null) return;
+
+            editText.ShouldReturn = null;
         }
     }
 }

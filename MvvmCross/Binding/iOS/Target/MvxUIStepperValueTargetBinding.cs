@@ -7,14 +7,14 @@ using System;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
 using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
 {
-    public class MvxUIStepperValueTargetBinding 
-        : MvxPropertyInfoTargetBinding<UIStepper>
+    public class MvxUIStepperValueTargetBinding : MvxPropertyInfoTargetBinding<UIStepper>
     {
-        private bool _subscribed;
+        private IDisposable _subscription;
 
         public MvxUIStepperValueTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
@@ -24,8 +24,7 @@ namespace MvvmCross.Binding.iOS.Target
         protected override void SetValueImpl(object target, object value)
         {
             var view = target as UIStepper;
-            if (view == null)
-                return;
+            if (view == null) return;
 
             view.Value = (double)value;
         }
@@ -34,6 +33,7 @@ namespace MvvmCross.Binding.iOS.Target
         {
             var view = View;
             if (view == null) return;
+
             FireValueChanged(view.Value);
         }
 
@@ -48,19 +48,16 @@ namespace MvvmCross.Binding.iOS.Target
                 return;
             }
 
-            _subscribed = true;
-            stepper.ValueChanged += HandleValueChanged;
+            _subscription = stepper.WeakSubscribe(nameof(stepper.ValueChanged), HandleValueChanged);
         }
 
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);
             if (!isDisposing) return;
-            var stepper = View;
-            if (stepper == null || !_subscribed) return;
 
-            stepper.ValueChanged -= HandleValueChanged;
-            _subscribed = false;
+            _subscription?.Dispose();
+            _subscription = null;
         }
     }
 }

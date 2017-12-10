@@ -9,14 +9,14 @@ using System;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
 using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
 {
-    public class MvxUISliderValueTargetBinding
-        : MvxPropertyInfoTargetBinding<UISlider>
+    public class MvxUISliderValueTargetBinding : MvxPropertyInfoTargetBinding<UISlider>
     {
-        private bool _subscribed;
+        private IDisposable _subscription;
 
         public MvxUISliderValueTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
@@ -26,8 +26,7 @@ namespace MvvmCross.Binding.iOS.Target
         protected override void SetValueImpl(object target, object value)
         {
             var view = target as UISlider;
-            if (view == null)
-                return;
+            if (view == null) return;
 
             view.Value = (float)value;
         }
@@ -35,8 +34,8 @@ namespace MvvmCross.Binding.iOS.Target
         private void HandleSliderValueChanged(object sender, EventArgs e)
         {
             var view = View;
-            if (view == null)
-                return;
+            if (view == null) return;
+
             FireValueChanged(view.Value);
         }
 
@@ -51,22 +50,16 @@ namespace MvvmCross.Binding.iOS.Target
                 return;
             }
 
-            _subscribed = true;
-            slider.ValueChanged += HandleSliderValueChanged;
+            _subscription = slider.WeakSubscribe(nameof(slider.ValueChanged), HandleSliderValueChanged);
         }
 
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);
-            if (isDisposing)
-            {
-                var slider = View;
-                if (slider != null && _subscribed)
-                {
-                    slider.ValueChanged -= HandleSliderValueChanged;
-                    _subscribed = false;
-                }
-            }
+            if (!isDisposing)
+
+            _subscription?.Dispose();
+            _subscription = null;
         }
     }
 }
