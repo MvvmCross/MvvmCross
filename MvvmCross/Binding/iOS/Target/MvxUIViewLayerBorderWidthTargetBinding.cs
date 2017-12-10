@@ -11,8 +11,7 @@ using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
 {
-    public class MvxUIViewLayerBorderWidthTargetBinding
-        : MvxConvertingTargetBinding
+    public class MvxUIViewLayerBorderWidthTargetBinding : MvxConvertingTargetBinding
     {
         public MvxUIViewLayerBorderWidthTargetBinding(object target)
             : base(target)
@@ -23,13 +22,8 @@ namespace MvvmCross.Binding.iOS.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            var view = (UIView)target;
-
-            if (view == null || value == null)
-                return;
-
-            if (view.Layer == null)
-                return;
+            var view = target as UIView;
+            if (view?.Layer == null || value == null) return;
 
             view.Layer.BorderWidth = (float)value;
         }

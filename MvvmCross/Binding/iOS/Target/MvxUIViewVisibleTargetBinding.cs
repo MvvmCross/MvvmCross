@@ -20,8 +20,7 @@ namespace MvvmCross.Binding.iOS.Target
         protected override void SetValueImpl(object target, object value)
         {
             var view = View;
-            if (view == null)
-                return;
+            if (view == null) return;
 
             var visible = value.ConvertToBoolean();
             view.Hidden = !visible;
