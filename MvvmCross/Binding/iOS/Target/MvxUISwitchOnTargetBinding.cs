@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Reflection;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.WeakSubscription;
@@ -14,25 +13,23 @@ using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
 {
-    public class MvxUISwitchOnTargetBinding : MvxPropertyInfoTargetBinding<UISwitch>
+    public class MvxUISwitchOnTargetBinding : MvxTargetBinding<UISwitch, bool>
     {
         private IDisposable _subscription;
 
-        public MvxUISwitchOnTargetBinding(object target, PropertyInfo targetPropertyInfo) : base(target, targetPropertyInfo)
+        public MvxUISwitchOnTargetBinding(UISwitch target)
+            : base(target)
         {
         }
 
-        private void HandleValueChanged(object sender, EventArgs e)
+        protected override void SetValue(bool value)
         {
-            var view = View;
-            if (view == null) return;
-
-            FireValueChanged(view.On);
+            Target.SetState(value, true);
         }
 
         public override void SubscribeToEvents()
         {
-            var uiSwitch = View;
+            var uiSwitch = Target;
             if (uiSwitch == null)
             {
                 MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - Switch is null in MvxUISwitchOnTargetBinding");
@@ -51,6 +48,11 @@ namespace MvvmCross.Binding.iOS.Target
 
             _subscription?.Dispose();
             _subscription = null;
+        }
+
+        private void HandleValueChanged(object sender, EventArgs e)
+        {
+            FireValueChanged(Target.On);
         }
     }
 }
