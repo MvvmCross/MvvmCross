@@ -206,11 +206,11 @@ namespace MvvmCross.iOS.Views.Presenters
             {
                 MasterNavigationController = CreateNavigationController(viewController);
 
-                SetWindowRootViewController(MasterNavigationController);
+                SetWindowRootViewController(MasterNavigationController, attribute);
             }
             else
             {
-                SetWindowRootViewController(viewController);
+                SetWindowRootViewController(viewController, attribute);
 
                 CloseMasterNavigationController();
             }
@@ -542,12 +542,26 @@ namespace MvvmCross.iOS.Views.Presenters
             SplitViewController = null;
         }
 
-        protected virtual void SetWindowRootViewController(UIViewController controller)
+        protected void RemoveWindowSubviews()
         {
             foreach (var v in _window.Subviews)
                 v.RemoveFromSuperview();
+        }
 
-            _window.RootViewController = controller;
+        protected virtual void SetWindowRootViewController(UIViewController controller, MvxRootPresentationAttribute attribute)
+        {
+            RemoveWindowSubviews();
+
+            if (attribute.AnimationOptions == UIViewAnimationOptions.TransitionNone)
+            {
+                _window.RootViewController = controller;
+                return;
+            }
+
+            UIView.Transition(
+                _window, attribute.AnimationDuration, attribute.AnimationOptions,
+                () => _window.RootViewController = controller, null
+            );
         }
     }
 }
