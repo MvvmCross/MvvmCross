@@ -9,17 +9,16 @@ using System;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
 using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
 {
-    public class MvxUITextFieldTextTargetBinding
-        : MvxConvertingTargetBinding
-        , IMvxEditableTextView
+    public class MvxUITextFieldTextTargetBinding : MvxConvertingTargetBinding, IMvxEditableTextView
     {
         protected UITextField View => Target as UITextField;
 
-        private bool _subscribed;
+        private IDisposable _subscription;
 
         public MvxUITextFieldTextTargetBinding(UITextField target)
             : base(target)
@@ -29,8 +28,8 @@ namespace MvvmCross.Binding.iOS.Target
         private void HandleEditTextValueChanged(object sender, EventArgs e)
         {
             var view = View;
-            if (view == null)
-                return;
+            if (view == null) return;
+
             FireValueChanged(view.Text);
         }
 
@@ -46,22 +45,18 @@ namespace MvvmCross.Binding.iOS.Target
                 return;
             }
 
-            target.EditingChanged += HandleEditTextValueChanged;
-            _subscribed = true;
+            _subscription = target.WeakSubscribe(nameof(target.EditingChanged), HandleEditTextValueChanged);
         }
 
         public override Type TargetType => typeof(string);
 
         protected override bool ShouldSkipSetValueForViewSpecificReasons(object target, object value)
-        {
-            return this.ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(target, value);
-        }
+            => this.ShouldSkipSetValueAsHaveNearlyIdenticalNumericText(target, value);
 
         protected override void SetValueImpl(object target, object value)
         {
             var view = (UITextField)target;
-            if (view == null)
-                return;
+            if (view == null) return;
 
             view.Text = (string)value;
         }
@@ -69,15 +64,10 @@ namespace MvvmCross.Binding.iOS.Target
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);
-            if (isDisposing)
-            {
-                var editText = View;
-                if (editText != null && _subscribed)
-                {
-                    editText.EditingChanged -= HandleEditTextValueChanged;
-                    _subscribed = false;
-                }
-            }
+            if (!isDisposing) return;
+
+            _subscription?.Dispose();
+            _subscription = null;
         }
 
         public string CurrentText

@@ -7,10 +7,10 @@ using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
 {
-    public class MvxUIBarButtonItemTargetBinding
-        : MvxConvertingTargetBinding
+    public class MvxUIBarButtonItemTargetBinding : MvxConvertingTargetBinding
     {
         private ICommand _command;
+        private IDisposable _clickSubscription;
         private IDisposable _canExecuteSubscription;
         private readonly EventHandler<EventArgs> _canExecuteEventHandler;
 
@@ -19,30 +19,11 @@ namespace MvvmCross.Binding.iOS.Target
         public MvxUIBarButtonItemTargetBinding(UIBarButtonItem control)
             : base(control)
         {
-            if (control == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UIControl is null in MvxUIBarButtonItemTargetBinding");
-            }
-            else
-            {
-                control.Clicked += OnClicked;
-            }
-
             _canExecuteEventHandler = OnCanExecuteChanged;
         }
 
-        private void OnClicked(object sender, EventArgs e)
-        {
-            if (_command == null)
-                return;
-
-            if (!_command.CanExecute(null))
-                return;
-
-            _command.Execute(null);
-        }
-
         public override Type TargetType => typeof(ICommand);
+
         protected override void SetValueImpl(object target, object value)
         {
             if (_canExecuteSubscription != null)
@@ -56,6 +37,43 @@ namespace MvvmCross.Binding.iOS.Target
                 _canExecuteSubscription = _command.WeakSubscribe(_canExecuteEventHandler);
             }
             RefreshEnabledState();
+        }
+
+        public override void SubscribeToEvents()
+        {
+            var control = Control;
+            if (control == null)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UIControl is null in MvxUIBarButtonItemTargetBinding");
+            }
+            else
+            {
+                _clickSubscription = control.WeakSubscribe(nameof(control.Clicked), OnClicked);
+            }
+        }
+
+        protected override void Dispose(bool isDisposing)
+        {
+            if (isDisposing)
+            {
+                _clickSubscription?.Dispose();
+                _canExecuteSubscription?.Dispose();
+                _canExecuteSubscription = null;
+                _clickSubscription = null;
+            }
+
+            base.Dispose(isDisposing);
+        }
+
+        private void OnClicked(object sender, EventArgs e)
+        {
+            if (_command == null)
+                return;
+
+            if (!_command.CanExecute(null))
+                return;
+
+            _command.Execute(null);
         }
 
         private void OnCanExecuteChanged(object sender, EventArgs e)
@@ -75,21 +93,6 @@ namespace MvvmCross.Binding.iOS.Target
                 shouldBeEnabled = _command.CanExecute(null);
             }
             view.Enabled = shouldBeEnabled;
-        }
-
-        protected override void Dispose(bool isDisposing)
-        {
-            if (isDisposing)
-            {
-                var view = Control;
-                if (view != null)
-                    view.Clicked -= OnClicked;
-               
-                _canExecuteSubscription?.Dispose();
-                _canExecuteSubscription = null;
-            }
-
-            base.Dispose(isDisposing);
         }
     }
 }

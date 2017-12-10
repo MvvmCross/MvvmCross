@@ -8,16 +8,17 @@
 using System;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
 using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
 {
-    public class MvxUITextViewTextTargetBinding
-        : MvxConvertingTargetBinding
+    public class MvxUITextViewTextTargetBinding : MvxConvertingTargetBinding
     {
+        private IDisposable _subscription;
+
         protected UITextView View => Target as UITextView;
 
-        private bool _subscribed;
 
         public MvxUITextViewTextTargetBinding(UITextView target)
             : base(target)
@@ -27,8 +28,8 @@ namespace MvvmCross.Binding.iOS.Target
         private void EditTextOnChanged(object sender, EventArgs eventArgs)
         {
             var view = View;
-            if (view == null)
-                return;
+            if (view == null) return;
+
             FireValueChanged(view.Text);
         }
 
@@ -45,7 +46,6 @@ namespace MvvmCross.Binding.iOS.Target
             }
 
 			var textStorage = target.LayoutManager?.TextStorage;
-
 			if (textStorage == null)
 			{ 
 			    MvxBindingTrace.Trace(MvxTraceLevel.Error,
@@ -53,8 +53,7 @@ namespace MvvmCross.Binding.iOS.Target
 				return;
 			}
 
-            textStorage.DidProcessEditing += EditTextOnChanged;
-            _subscribed = true;
+            _subscription = textStorage.WeakSubscribe(nameof(textStorage.DidProcessEditing), EditTextOnChanged);
         }
 
         public override Type TargetType => typeof(string);
@@ -62,8 +61,7 @@ namespace MvvmCross.Binding.iOS.Target
         protected override void SetValueImpl(object target, object value)
         {
             var view = (UITextView)target;
-            if (view == null)
-                return;
+            if (view == null) return;
 
             view.Text = (string)value;
         }
@@ -71,15 +69,10 @@ namespace MvvmCross.Binding.iOS.Target
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);
-            if (isDisposing)
-            {
-                var editText = View;
-                if (editText != null && _subscribed)
-                {
-                    editText.Changed -= EditTextOnChanged;
-                    _subscribed = false;
-                }
-            }
+            if (!isDisposing) return;
+
+            _subscription?.Dispose();
+            _subscription = null;
         }
     }
 }

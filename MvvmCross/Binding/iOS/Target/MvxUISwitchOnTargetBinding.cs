@@ -6,36 +6,37 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Reflection;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
 using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
 {
-    public class MvxUISwitchOnTargetBinding
-        : MvxPropertyInfoTargetBinding<UISwitch>
+    public class MvxUISwitchOnTargetBinding : MvxTargetBinding<UISwitch, bool>
     {
-        public MvxUISwitchOnTargetBinding(object target, PropertyInfo targetPropertyInfo)
-            : base(target, targetPropertyInfo)
+        private IDisposable _subscription;
+
+        public MvxUISwitchOnTargetBinding(UISwitch target)
+            : base(target)
         {
-            var view = View;
-            if (view == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - Switch is null in MvxUISwitchOnTargetBinding");
-            }
-            else
-            {
-                view.ValueChanged += HandleValueChanged;
-            }
         }
 
-        private void HandleValueChanged(object sender, EventArgs e)
+        protected override void SetValue(bool value)
         {
-            var view = View;
-            if (view == null)
+            Target.SetState(value, true);
+        }
+
+        public override void SubscribeToEvents()
+        {
+            var uiSwitch = Target;
+            if (uiSwitch == null)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - Switch is null in MvxUISwitchOnTargetBinding");
                 return;
-            FireValueChanged(view.On);
+            }
+
+            _subscription = uiSwitch.WeakSubscribe(nameof(uiSwitch.ValueChanged), HandleValueChanged);
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
@@ -43,14 +44,15 @@ namespace MvvmCross.Binding.iOS.Target
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);
-            if (isDisposing)
-            {
-                var view = View;
-                if (view != null)
-                {
-                    view.ValueChanged -= HandleValueChanged;
-                }
-            }
+            if (!isDisposing) return;
+
+            _subscription?.Dispose();
+            _subscription = null;
+        }
+
+        private void HandleValueChanged(object sender, EventArgs e)
+        {
+            FireValueChanged(Target.On);
         }
     }
 }
