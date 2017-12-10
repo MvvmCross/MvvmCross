@@ -152,7 +152,7 @@ namespace MvvmCross.Forms.Views
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
-            var navigation = GetHostPageOfType<NavigationPage>().Navigation;
+            var navigation = GetPageOfType<NavigationPage>().Navigation;
             if (hint is MvxPopToRootPresentationHint popToRootHint)
             {
                 navigation.PopToRootAsync(popToRootHint.Animated);
@@ -177,6 +177,18 @@ namespace MvvmCross.Forms.Views
                     navigation.RemovePage(page);
                 return;
             }
+            if(hint is MvxPagePresentationHint pageHint)
+            {
+                var pageType = ViewsContainer.GetViewType(pageHint.ViewModel);
+                if (GetPageOfTypeByType(pageType) is Page page)
+                {
+                    if (page.Parent is TabbedPage tabbedPage)
+                        tabbedPage.CurrentPage = page;
+                    else if (page.Parent is CarouselPage carouselPage && page is ContentPage contentPage)
+                        carouselPage.CurrentPage = contentPage;
+                }
+                return;
+            }
 
             base.ChangePresentation(hint);
         }
@@ -199,7 +211,7 @@ namespace MvvmCross.Forms.Views
             }
             else
             {
-                var carouselHost = GetHostPageOfType<MvxCarouselPage>();
+                var carouselHost = GetPageOfType<MvxCarouselPage>();
                 if (carouselHost == null)
                 {
                     MvxTrace.Trace($"Current root is not a CarouselPage show your own first to use custom Host. Assuming we need to create one.");
@@ -216,7 +228,7 @@ namespace MvvmCross.Forms.Views
                 return ClosePage(FormsApplication.MainPage, null, attribute);
             else
             {
-                var carouselHost = GetHostPageOfType<MvxCarouselPage>();
+                var carouselHost = GetPageOfType<MvxCarouselPage>();
                 var page = carouselHost.Children.OfType<IMvxPage>().FirstOrDefault(x => x.ViewModel == viewModel);
                 if (page is ContentPage carouselPage)
                     carouselHost.Children.Remove(carouselPage);
@@ -299,7 +311,7 @@ namespace MvvmCross.Forms.Views
             }
             else
             {
-                var masterDetailHost = GetHostPageOfType<MvxMasterDetailPage>();
+                var masterDetailHost = GetPageOfType<MvxMasterDetailPage>();
                 if (masterDetailHost == null)
                 {
                     //Assume we have to create the host
@@ -331,7 +343,7 @@ namespace MvvmCross.Forms.Views
 
         public virtual bool CloseMasterDetailPage(IMvxViewModel viewModel, MvxMasterDetailPagePresentationAttribute attribute)
         {
-            var masterDetailHost = GetHostPageOfType<MvxMasterDetailPage>();
+            var masterDetailHost = GetPageOfType<MvxMasterDetailPage>();
             switch (attribute.Position)
             {
                 case MasterDetailPosition.Root:
@@ -429,7 +441,7 @@ namespace MvvmCross.Forms.Views
             }
             else
             {
-                var tabHost = GetHostPageOfType<MvxTabbedPage>();
+                var tabHost = GetPageOfType<MvxTabbedPage>();
                 if (tabHost == null)
                 {
                     MvxTrace.Trace($"Current root is not a TabbedPage show your own first to use custom Host. Assuming we need to create one.");
@@ -447,7 +459,7 @@ namespace MvvmCross.Forms.Views
                 return ClosePage(FormsApplication.MainPage, null, attribute);
             else
             {
-                var tabHost = GetHostPageOfType<MvxTabbedPage>();
+                var tabHost = GetPageOfType<MvxTabbedPage>();
                 var page = tabHost.Children.OfType<IMvxPage>().FirstOrDefault(x => x.ViewModel == viewModel);
                 if (page is Page tabPage)
                     tabHost.Children.Remove(tabPage);
@@ -511,7 +523,7 @@ namespace MvvmCross.Forms.Views
                 rootPage = FormsApplication.MainPage;
             }
 
-            var navigationRootPage = GetHostPageOfType<NavigationPage>(rootPage);
+            var navigationRootPage = GetPageOfType<NavigationPage>(rootPage);
 
             // Step down through any nested navigation pages to make sure we're pushing to the
             // most nested navigation page
@@ -550,7 +562,7 @@ namespace MvvmCross.Forms.Views
             }
         }
 
-        protected virtual NavigationPage TopNavigationPage(Page rootPage = null)
+        public virtual NavigationPage TopNavigationPage(Page rootPage = null)
         {
             if (rootPage == null)
                 rootPage = FormsApplication.MainPage;
@@ -597,33 +609,52 @@ namespace MvvmCross.Forms.Views
             return null;
         }
 
-        protected virtual TPage GetHostPageOfType<TPage>(Page rootPage = null) where TPage : Page
+        //Needs to have a different method name
+        public virtual Page GetPageOfTypeByType(Type viewType, Page rootPage = null)
         {
             if (rootPage == null)
                 rootPage = FormsApplication.MainPage;
+            
+            return GetType().GetMethod(nameof(GetPageOfType)).MakeGenericMethod(viewType).Invoke(this, new object[] { rootPage }) as Page;
+        }
+
+        public virtual TPage GetPageOfType<TPage>(Page rootPage = null) where TPage : Page
+        {
+            if (rootPage == null)
+                rootPage = FormsApplication.MainPage;
+
+            if(rootPage?.Navigation?.ModalStack?.Count > 0)
+            {
+                foreach (var item in rootPage.Navigation.ModalStack)
+                {
+                    var modalPage = GetPageOfType<TPage>(item);
+                    if (modalPage is TPage)
+                        return modalPage;
+                }
+            }
 
             if (rootPage is TPage)
                 return rootPage as TPage;
             else if (rootPage is NavigationPage navigationRootPage)
             {
                 if (navigationRootPage.CurrentPage is NavigationPage navigationNestedPage)
-                    return GetHostPageOfType<TPage>(navigationNestedPage);
+                    return GetPageOfType<TPage>(navigationNestedPage);
                 else
-                    return GetHostPageOfType<TPage>(navigationRootPage.CurrentPage);
+                    return GetPageOfType<TPage>(navigationRootPage.CurrentPage);
             }
             else if (rootPage is MasterDetailPage masterDetailRoot)
             {
-                var detailHost = GetHostPageOfType<TPage>(masterDetailRoot.Detail);
+                var detailHost = GetPageOfType<TPage>(masterDetailRoot.Detail);
                 if (detailHost is TPage)
                     return detailHost;
                 else
-                    return GetHostPageOfType<TPage>(masterDetailRoot.Master);
+                    return GetPageOfType<TPage>(masterDetailRoot.Master);
             }
             else if (rootPage is CarouselPage carouselPage)
             {
                 foreach (var item in carouselPage.Children)
                 {
-                    var nestedPage = GetHostPageOfType<TPage>(item);
+                    var nestedPage = GetPageOfType<TPage>(item);
                     if (nestedPage is TPage)
                         return nestedPage;
                 }
@@ -633,7 +664,7 @@ namespace MvvmCross.Forms.Views
             {
                 foreach (var item in tabbedPage.Children)
                 {
-                    var nestedPage = GetHostPageOfType<TPage>(item);
+                    var nestedPage = GetPageOfType<TPage>(item);
                     if (nestedPage is TPage)
                         return nestedPage;
                 }

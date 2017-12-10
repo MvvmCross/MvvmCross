@@ -11,6 +11,7 @@
             <Label Text="I'm a tab page" />
             <Button Text="Show root" mvx:Bi.nd="Command ShowRootViewModelCommand"/>
             <Button Text="Close tab" mvx:Bi.nd="Command CloseViewModelCommand"/>
+            <Button Text="Go to page 1" mvx:Bi.nd="Command ShowPageOneCommand"/>
         </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>
