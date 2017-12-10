@@ -7,14 +7,14 @@ using System;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.WeakSubscription;
 using UIKit;
 
 namespace MvvmCross.Binding.iOS.Target
 {
-    public class MvxUIPageControlCurrentPageTargetBinding
-        : MvxPropertyInfoTargetBinding<UIPageControl>
+    public class MvxUIPageControlCurrentPageTargetBinding : MvxPropertyInfoTargetBinding<UIPageControl>
     {
-        private bool _subscribed;
+        private IDisposable _subscription;
 
         public MvxUIPageControlCurrentPageTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
@@ -24,8 +24,7 @@ namespace MvvmCross.Binding.iOS.Target
         protected override void SetValueImpl(object target, object value)
         {
             var view = target as UIPageControl;
-            if (view == null)
-                return;
+            if (view == null) return;
 
             view.CurrentPage = (nint)value;
         }
@@ -34,6 +33,7 @@ namespace MvvmCross.Binding.iOS.Target
         {
             var view = View;
             if (view == null) return;
+
             FireValueChanged(view.CurrentPage);
         }
 
@@ -48,19 +48,16 @@ namespace MvvmCross.Binding.iOS.Target
                 return;
             }
 
-            _subscribed = true;
-            pageControl.ValueChanged += HandleValueChanged;
+            _subscription = pageControl.WeakSubscribe(nameof(pageControl.ValueChanged), HandleValueChanged);
         }
 
         protected override void Dispose(bool isDisposing)
         {
             base.Dispose(isDisposing);
             if (!isDisposing) return;
-            var pageControl = View;
-            if (pageControl == null || !_subscribed) return;
 
-            pageControl.ValueChanged -= HandleValueChanged;
-            _subscribed = false;
+            _subscription?.Dispose();
+            _subscription = null;
         }
     }
 }

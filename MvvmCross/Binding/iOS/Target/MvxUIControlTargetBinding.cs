@@ -18,14 +18,17 @@ namespace MvvmCross.Binding.iOS.Target
     {
         private ICommand _command;
         private IDisposable _canExecuteSubscription;
+        private IDisposable _controlEventSubscription;
+
+        private readonly string _controlEvent;
         private readonly EventHandler<EventArgs> _canExecuteEventHandler;
-		private readonly string _controlEvent;
+        
         protected UIControl Control => Target as UIControl;
 
-		public MvxUIControlTargetBinding(UIControl control, string controlEvent)
+        public MvxUIControlTargetBinding(UIControl control, string controlEvent)
             : base(control)
         {
-			_controlEvent = controlEvent;
+            _controlEvent = controlEvent;
 
             if (control == null)
             {
@@ -33,7 +36,7 @@ namespace MvvmCross.Binding.iOS.Target
             }
             else
             {
-				AddHandler(control);	
+                AddHandler(control);    
             }
 
             _canExecuteEventHandler = new EventHandler<EventArgs>(OnCanExecuteChanged);
@@ -41,11 +44,9 @@ namespace MvvmCross.Binding.iOS.Target
 
         private void ControlEvent(object sender, EventArgs eventArgs)
         {
-            if (_command == null)
-                return;
+            if (_command == null) return;
 
-            if (!_command.CanExecute(null))
-                return;
+            if (!_command.CanExecute(null)) return;
 
             _command.Execute(null);
         }
@@ -56,31 +57,34 @@ namespace MvvmCross.Binding.iOS.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            if (_canExecuteSubscription != null)
-            {
-                _canExecuteSubscription.Dispose();
-                _canExecuteSubscription = null;
-            }
+            _canExecuteSubscription?.Dispose();
+            _canExecuteSubscription = null;
+
             _command = value as ICommand;
             if (_command != null)
             {
                 _canExecuteSubscription = _command.WeakSubscribe(_canExecuteEventHandler);
             }
+
             RefreshEnabledState();
+        }
+
+        protected override void Dispose(bool isDisposing)
+        {
+            base.Dispose(isDisposing);
+            if (!isDisposing) return;
+
+            RemoveHandler();
+            _canExecuteSubscription?.Dispose();
+            _canExecuteSubscription = null;
         }
 
         private void RefreshEnabledState()
         {
             var view = Control;
-            if (view == null)
-                return;
+            if (view == null) return;
 
-            var shouldBeEnabled = false;
-            if (_command != null)
-            {
-                shouldBeEnabled = _command.CanExecute(null);
-            }
-            view.Enabled = shouldBeEnabled;
+            view.Enabled = _command?.CanExecute(null) ?? false;;
         }
 
         private void OnCanExecuteChanged(object sender, EventArgs e)
@@ -88,120 +92,78 @@ namespace MvvmCross.Binding.iOS.Target
             RefreshEnabledState();
         }
 
-        protected override void Dispose(bool isDisposing)
+        private void AddHandler(UIControl control)
         {
-            if (isDisposing)
-            {
-                var view = Control;
-                if (view != null)
-                {
-					RemoveHandler(view);
-                }
-                if (_canExecuteSubscription != null)
-                {
-                    _canExecuteSubscription.Dispose();
-                    _canExecuteSubscription = null;
-                }
-            }
-            base.Dispose(isDisposing);
-        }
-
-		private void AddHandler(UIControl control)
-		{
             switch (_controlEvent)
             {
                 case MvxIosPropertyBinding.UIControl_TouchDown:
-                    control.TouchDown += ControlEvent;
+                    _controlEventSubscription = control.WeakSubscribe(nameof(control.TouchDown), ControlEvent);
                     break;
                 case MvxIosPropertyBinding.UIControl_TouchDownRepeat:
-                    control.TouchDownRepeat += ControlEvent;
+                    _controlEventSubscription = control.WeakSubscribe(nameof(control.TouchDownRepeat), ControlEvent);
                     break;
                 case MvxIosPropertyBinding.UIControl_TouchDragInside:
-                    control.TouchDragInside += ControlEvent;
+                    _controlEventSubscription = control.WeakSubscribe(nameof(control.TouchDragInside), ControlEvent);
                     break;
                 case MvxIosPropertyBinding.UIControl_TouchUpInside:
-                    control.TouchUpInside += ControlEvent;
+                    _controlEventSubscription = control.WeakSubscribe(nameof(control.TouchUpInside), ControlEvent);
                     break;
                 case MvxIosPropertyBinding.UIControl_ValueChanged:
-                    control.ValueChanged += ControlEvent;
+                    _controlEventSubscription = control.WeakSubscribe(nameof(control.ValueChanged), ControlEvent);
                     break;
                 case MvxIosPropertyBinding.UIControl_PrimaryActionTriggered:
-                    control.PrimaryActionTriggered += ControlEvent;
+                    _controlEventSubscription = control.WeakSubscribe(nameof(control.PrimaryActionTriggered), ControlEvent);
                     break;
                 case MvxIosPropertyBinding.UIControl_EditingDidBegin:
-                    control.EditingDidBegin += ControlEvent;
+                    _controlEventSubscription = control.WeakSubscribe(nameof(control.EditingDidBegin), ControlEvent);
                     break;
                 case MvxIosPropertyBinding.UIControl_EditingChanged:
-                    control.EditingChanged += ControlEvent;
+                    _controlEventSubscription = control.WeakSubscribe(nameof(control.EditingChanged), ControlEvent);
                     break;
                 case MvxIosPropertyBinding.UIControl_EditingDidEnd:
-                    control.EditingDidEnd += ControlEvent;
+                    _controlEventSubscription = control.WeakSubscribe(nameof(control.EditingDidEnd), ControlEvent);
                     break;
                 case MvxIosPropertyBinding.UIControl_EditingDidEndOnExit:
-                    control.EditingDidEndOnExit += ControlEvent;
-				    break;
+                    _controlEventSubscription = control.WeakSubscribe(nameof(control.EditingDidEndOnExit), ControlEvent);
+                    break;
                 case MvxIosPropertyBinding.UIControl_AllTouchEvents:
-                    control.AllTouchEvents += ControlEvent;
+                    _controlEventSubscription = control.WeakSubscribe(nameof(control.AllTouchEvents), ControlEvent);
                     break;
                 case MvxIosPropertyBinding.UIControl_AllEditingEvents:
-                    control.AllEditingEvents += ControlEvent;
+                    _controlEventSubscription = control.WeakSubscribe(nameof(control.AllEditingEvents), ControlEvent);
                     break;
                 case MvxIosPropertyBinding.UIControl_AllEvents:
-                    control.AllEvents += ControlEvent;
+                    _controlEventSubscription = control.WeakSubscribe(nameof(control.AllEvents), ControlEvent);
                     break;
                 default:
                     MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - Invalid controlEvent in MvxUIControlTargetBinding");
                     break;
             }
-		}
+        }
 
-		private void RemoveHandler(UIControl control)
-		{
-			switch (_controlEvent)
-			{
-				case MvxIosPropertyBinding.UIControl_TouchDown:
-					control.TouchDown -= ControlEvent;
-					break;
-				case MvxIosPropertyBinding.UIControl_TouchDownRepeat:
-					control.TouchDownRepeat -= ControlEvent;
-					break;
-				case MvxIosPropertyBinding.UIControl_TouchDragInside:
-					control.TouchDragInside -= ControlEvent;
-					break;
-				case MvxIosPropertyBinding.UIControl_TouchUpInside:
-					control.TouchUpInside -= ControlEvent;
-					break;
-				case MvxIosPropertyBinding.UIControl_ValueChanged:
-					control.ValueChanged -= ControlEvent;
-					break;
-				case MvxIosPropertyBinding.UIControl_PrimaryActionTriggered:
-					control.PrimaryActionTriggered -= ControlEvent;
-					break;
-				case MvxIosPropertyBinding.UIControl_EditingDidBegin:
-					control.EditingDidBegin -= ControlEvent;
-					break;
-				case MvxIosPropertyBinding.UIControl_EditingChanged:
-					control.EditingChanged -= ControlEvent;
-					break;
-				case MvxIosPropertyBinding.UIControl_EditingDidEnd:
-					control.EditingDidEnd -= ControlEvent;
-					break;
-				case MvxIosPropertyBinding.UIControl_EditingDidEndOnExit:
-					control.EditingDidEndOnExit -= ControlEvent;
-					break;
-				case MvxIosPropertyBinding.UIControl_AllTouchEvents:
-					control.AllTouchEvents -= ControlEvent;
-					break;
-				case MvxIosPropertyBinding.UIControl_AllEditingEvents:
-					control.AllEditingEvents -= ControlEvent;
-					break;
-				case MvxIosPropertyBinding.UIControl_AllEvents:
-					control.AllEvents -= ControlEvent;
-					break;
-				default:
-					MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - Invalid controlEvent in MvxUIControlTargetBinding");
-					break;
-			}
+        private void RemoveHandler()
+        {
+            switch (_controlEvent)
+            {
+                case MvxIosPropertyBinding.UIControl_TouchDown:
+                case MvxIosPropertyBinding.UIControl_TouchDownRepeat:
+                case MvxIosPropertyBinding.UIControl_TouchDragInside:
+                case MvxIosPropertyBinding.UIControl_TouchUpInside:
+                case MvxIosPropertyBinding.UIControl_ValueChanged:
+                case MvxIosPropertyBinding.UIControl_PrimaryActionTriggered:
+                case MvxIosPropertyBinding.UIControl_EditingDidBegin:
+                case MvxIosPropertyBinding.UIControl_EditingChanged:
+                case MvxIosPropertyBinding.UIControl_EditingDidEnd:
+                case MvxIosPropertyBinding.UIControl_EditingDidEndOnExit:
+                case MvxIosPropertyBinding.UIControl_AllTouchEvents:
+                case MvxIosPropertyBinding.UIControl_AllEditingEvents:
+                case MvxIosPropertyBinding.UIControl_AllEvents:
+                    _controlEventSubscription?.Dispose();
+                    break;
+                default:
+                    MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - Invalid controlEvent in MvxUIControlTargetBinding");
+                    break;
+            }
         }
     }
 }
