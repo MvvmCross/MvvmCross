@@ -96,7 +96,7 @@ namespace MvvmCross.Core.ViewModels
                 }
             }
 
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, itemsList));
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, itemsList,this.Items.Count));
         }
 
         /// <summary>
