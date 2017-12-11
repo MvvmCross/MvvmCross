@@ -20,13 +20,11 @@ namespace MvvmCross.Forms.Droid.Views
     public class MvxFormsAppCompatActivity : MvxEventSourceFormsAppCompatActivity, IMvxAndroidView
     {
         private View _view;
-        private readonly Assembly _resourceAssembly;
 
         protected MvxFormsAppCompatActivity()
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
-            _resourceAssembly = Assembly.GetCallingAssembly();
         }
 
         public object DataContext
@@ -113,7 +111,7 @@ namespace MvvmCross.Forms.Droid.Views
 
         protected virtual Assembly GetResourceAssembly()
         {
-            return _resourceAssembly;
+            return this.GetType().Assembly;
         }
 
         protected override void OnDestroy()
