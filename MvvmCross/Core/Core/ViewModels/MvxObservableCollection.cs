@@ -53,12 +53,12 @@ namespace MvvmCross.Core.ViewModels
         {
         }
 
-        protected SuppressEventsDisposable SuppressEvents()
+        protected virtual SuppressEventsDisposable SuppressEvents()
         {
             return new SuppressEventsDisposable(this);
         }
 
-        public bool EventsAreSuppressed
+        public virtual bool EventsAreSuppressed
         {
             get { return _suppressEvents > 0; }
         }
@@ -80,7 +80,7 @@ namespace MvvmCross.Core.ViewModels
         /// </summary>
         /// <param name="items">The collection from which the items are copied.</param>
         /// <exception cref="ArgumentNullException">The items list is null.</exception>
-        public void AddRange(IEnumerable<T> items)
+        public virtual void AddRange(IEnumerable<T> items)
         {
             if (items == null)
             {
@@ -104,7 +104,7 @@ namespace MvvmCross.Core.ViewModels
         /// </summary>
         /// <param name="items">The collection from which the items are copied.</param>
         /// <exception cref="ArgumentNullException">The items list is null.</exception>
-        public void ReplaceWith(IEnumerable<T> items)
+        public virtual void ReplaceWith(IEnumerable<T> items)
         {
             if (items == null)
             {
@@ -120,7 +120,7 @@ namespace MvvmCross.Core.ViewModels
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
-        public void ReplaceRange(IEnumerable<T> items, int firstIndex, int oldSize)
+        public virtual void ReplaceRange(IEnumerable<T> items, int firstIndex, int oldSize)
         {
             if (items == null)
             {
@@ -157,7 +157,7 @@ namespace MvvmCross.Core.ViewModels
         /// </summary>
         /// <param name="items">The collection from which the items are copied.</param>
         /// <exception cref="ArgumentNullException">The items list is null.</exception>
-        public void SwitchTo(IEnumerable<T> items)
+        public virtual void SwitchTo(IEnumerable<T> items)
         {
             if (items == null)
             {
@@ -192,7 +192,7 @@ namespace MvvmCross.Core.ViewModels
         /// </summary>
         /// <param name="items">The collection which items will be removed.</param>
         /// <exception cref="ArgumentNullException">The items list is null.</exception>
-        public void RemoveItems(IEnumerable<T> items)
+        public virtual void RemoveItems(IEnumerable<T> items)
         {
             if (items == null)
             {
@@ -215,7 +215,7 @@ namespace MvvmCross.Core.ViewModels
         /// <param name="start">The start index.</param>
         /// <param name="count">The count of items to remove.</param>
         /// <exception cref="ArgumentOutOfRangeException">Start index or count incorrect</exception>
-        public void RemoveRange(int start, int count)
+        public virtual void RemoveRange(int start, int count)
         {
             if (start < 0)
             {
@@ -247,7 +247,7 @@ namespace MvvmCross.Core.ViewModels
                 new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedItems, start));
         }
 
-        protected void InvokeOnMainThread(Action action)
+        protected virtual void InvokeOnMainThread(Action action)
         {
             var dispatcher = MvxSingleton<IMvxMainThreadDispatcher>.Instance;
             dispatcher?.RequestMainThreadAction(action);

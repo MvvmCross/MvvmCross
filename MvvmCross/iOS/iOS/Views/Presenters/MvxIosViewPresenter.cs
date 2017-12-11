@@ -24,7 +24,7 @@ namespace MvvmCross.iOS.Views.Presenters
         public IMvxTabBarViewController TabBarViewController { get; protected set; }
 
         public IMvxSplitViewController SplitViewController { get; protected set; }
-        
+
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
             if (MasterNavigationController == null &&
@@ -548,11 +548,11 @@ namespace MvvmCross.iOS.Views.Presenters
                 v.RemoveFromSuperview();
         }
 
-        protected virtual void SetWindowRootViewController(UIViewController controller, MvxRootPresentationAttribute attribute)
+        protected virtual void SetWindowRootViewController(UIViewController controller, MvxRootPresentationAttribute attribute = null)
         {
             RemoveWindowSubviews();
 
-            if (attribute.AnimationOptions == UIViewAnimationOptions.TransitionNone)
+            if (attribute.AnimationOptions == UIViewAnimationOptions.TransitionNone || attribute == null)
             {
                 _window.RootViewController = controller;
                 return;
