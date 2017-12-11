@@ -1,6 +1,8 @@
-﻿using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.Binders;
 using MvvmCross.Localization;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Converters;
+using System.Collections.Generic;
 
 namespace MvvmCross.Binding.BindingContext
 {
@@ -15,5 +17,10 @@ namespace MvvmCross.Binding.BindingContext
                 .OneTime()
                 .WithConversion(valueConverter, localizationId);
         }
+
+        public static MvxFluentBindingDescription<TTarget, TSource> WithDictionaryConversion<TTarget, TSource, TFrom, TTo>(
+            this MvxFluentBindingDescription<TTarget, TSource> bindingDescription, IDictionary<TFrom, TTo> converterParameter)
+            where TTarget : class
+            => bindingDescription.WithConversion(new MvxDictionaryValueConverter<TFrom, TTo>(), converterParameter).OneWay();
     }
 }

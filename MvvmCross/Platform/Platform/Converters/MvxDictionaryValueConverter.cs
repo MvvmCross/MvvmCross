@@ -8,7 +8,7 @@ namespace MvvmCross.Platform.Converters
     {
         protected override TValue Convert(TKey value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (parameter is Dictionary<TKey, TValue> dict)
+            if (parameter is IDictionary<TKey, TValue> dict)
             {
                 if (dict.ContainsKey(value))
                 {
