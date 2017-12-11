@@ -19,6 +19,14 @@ namespace MvvmCross.Binding.iOS.Target
         public MvxUIBarButtonItemTargetBinding(UIBarButtonItem control)
             : base(control)
         {
+            if (control == null)
+            {
+                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UIControl is null in MvxUIBarButtonItemTargetBinding");
+            }
+            else
+            {
+                _clickSubscription = control.WeakSubscribe(nameof(control.Clicked), OnClicked);
+            }
             _canExecuteEventHandler = OnCanExecuteChanged;
         }
 
@@ -37,19 +45,6 @@ namespace MvvmCross.Binding.iOS.Target
                 _canExecuteSubscription = _command.WeakSubscribe(_canExecuteEventHandler);
             }
             RefreshEnabledState();
-        }
-
-        public override void SubscribeToEvents()
-        {
-            var control = Control;
-            if (control == null)
-            {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UIControl is null in MvxUIBarButtonItemTargetBinding");
-            }
-            else
-            {
-                _clickSubscription = control.WeakSubscribe(nameof(control.Clicked), OnClicked);
-            }
         }
 
         protected override void Dispose(bool isDisposing)
