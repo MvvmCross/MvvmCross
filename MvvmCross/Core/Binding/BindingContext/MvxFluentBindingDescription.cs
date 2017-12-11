@@ -125,11 +125,6 @@ namespace MvvmCross.Binding.BindingContext
             return WithConversion(converterName, converterParameter);
         }
 
-        public MvxFluentBindingDescription<TTarget, TSource> WithDictionaryConversion<TFrom, TTo>(Dictionary<TFrom, TTo> converterParameter)
-        {
-            return WithConversion(new MvxDictionaryValueConverter<TFrom, TTo>(), converterParameter);
-        }
-
         public MvxFluentBindingDescription<TTarget, TSource> WithFallback(object fallback)
         {
             SourceStepDescription.FallbackValue = fallback;
