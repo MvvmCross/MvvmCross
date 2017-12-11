@@ -364,17 +364,15 @@ namespace MvvmCross.Forms.Views
             var page = CloseAndCreatePage(view, request, attribute, closeModal: false);
 
             if (FormsApplication.MainPage == null)
-                FormsApplication.MainPage = new MvxNavigationPage(new MvxContentPage() { Title = nameof(ContentPage) });
-
-            var last = FormsApplication.MainPage.Navigation.ModalStack.LastOrDefault();
-
+                FormsApplication.MainPage = new NavigationPage(new ContentPage() { Title = nameof(ContentPage) });
+            
             if (attribute.WrapInNavigationPage)
             {
-                if (last is NavigationPage navPage)
+                if (GetModalPageOfType<NavigationPage>() is NavigationPage modalNavigation)
                 {
                     // There's already a navigation page, so use existing logic
                     // to work out whether the nav stack should be cleared (eg No History)
-                    PushOrReplacePage(navPage, page, attribute);
+                    PushOrReplacePage(modalNavigation, page, attribute);
                 }
                 else
                 {
@@ -609,6 +607,23 @@ namespace MvvmCross.Forms.Views
             return null;
         }
 
+        public virtual TPage GetModalPageOfType<TPage>(Page rootPage = null) where TPage : Page
+        {
+            if (rootPage == null)
+                rootPage = FormsApplication.MainPage;
+
+            if (rootPage?.Navigation?.ModalStack?.Count > 0)
+            {
+                foreach (var item in rootPage.Navigation.ModalStack)
+                {
+                    var modalPage = GetPageOfType<TPage>(item);
+                    if (modalPage is TPage)
+                        return modalPage;
+                }
+            }
+            return null;
+        }
+
         //Needs to have a different method name
         public virtual Page GetPageOfTypeByType(Type viewType, Page rootPage = null)
         {
@@ -622,16 +637,6 @@ namespace MvvmCross.Forms.Views
         {
             if (rootPage == null)
                 rootPage = FormsApplication.MainPage;
-
-            if(rootPage?.Navigation?.ModalStack?.Count > 0)
-            {
-                foreach (var item in rootPage.Navigation.ModalStack)
-                {
-                    var modalPage = GetPageOfType<TPage>(item);
-                    if (modalPage is TPage)
-                        return modalPage;
-                }
-            }
 
             if (rootPage is TPage)
                 return rootPage as TPage;

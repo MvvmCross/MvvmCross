@@ -89,7 +89,7 @@ namespace MvvmCross.Forms.Droid.Views
             CloseFragments();
             if (!(CurrentActivity is MvxFormsAppCompatActivity || CurrentActivity is MvxFormsApplicationActivity) && 
                 !(CurrentActivity is MvxSplashScreenActivity || CurrentActivity is MvxSplashScreenAppCompatActivity))
-                CurrentActivity.Finish();
+                CurrentActivity?.Finish();
             return true;
         }
 
