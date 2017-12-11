@@ -1,4 +1,4 @@
-﻿// MvxAppStart.cs
+// MvxAppStart.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Threading.Tasks;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Core.ViewModels
@@ -15,7 +16,7 @@ namespace MvvmCross.Core.ViewModels
         : MvxNavigatingObject, IMvxAppStart
         where TViewModel : IMvxViewModel
     {
-        public void Start(object hint = null)
+        public async Task Start(object hint = null)
         {
             if (hint != null)
             {

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.Content;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
@@ -43,6 +44,10 @@ namespace MvvmCross.Droid.Platform
                 {
                     IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
                     _setup.Initialize();
+
+                    var start = Mvx.Resolve<IMvxAppStart>();
+                    start.Start().Wait();
+
                     _initialized = true;
 
                     if (_currentSplashScreen != null)

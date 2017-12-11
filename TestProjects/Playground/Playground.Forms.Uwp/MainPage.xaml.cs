@@ -21,7 +21,7 @@ namespace Playground.Forms.Uwp
             InitializeComponent();
 
             var start = Mvx.Resolve<IMvxAppStart>();
-            start.Start();
+            start.Start().Wait();
 
             var presenter = Mvx.Resolve<IMvxFormsViewPresenter>() as MvxFormsUwpViewPresenter;
             LoadApplication(presenter.FormsApplication);
