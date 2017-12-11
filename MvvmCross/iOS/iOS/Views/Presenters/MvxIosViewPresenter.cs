@@ -552,7 +552,7 @@ namespace MvvmCross.iOS.Views.Presenters
         {
             RemoveWindowSubviews();
 
-            if (attribute.AnimationOptions == UIViewAnimationOptions.TransitionNone || attribute == null)
+            if (attribute == null || attribute.AnimationOptions == UIViewAnimationOptions.TransitionNone)
             {
                 _window.RootViewController = controller;
                 return;
