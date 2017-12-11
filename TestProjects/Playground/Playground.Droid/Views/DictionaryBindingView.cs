@@ -25,9 +25,6 @@ namespace Playground.Droid.Views
                          Resource.Animation.abc_fade_out,
                          Resource.Animation.abc_fade_in,
                          Resource.Animation.abc_fade_out)]
-    [MvxFragmentPresentation(typeof(SplitRootViewModel), Resource.Id.split_content_frame)]
-    [MvxFragmentPresentation(typeof(TabsRootViewModel), Resource.Id.content_frame)]
-    [MvxFragmentPresentation(fragmentHostViewType: typeof(ModalNavView), fragmentContentId: Resource.Id.dialog_content_frame)]
     [Register(nameof(DictionaryBindingView))]
     public class DictionaryBindingView : MvxFragment<DictionaryBindingViewModel>
     {
@@ -48,11 +45,6 @@ namespace Playground.Droid.Views
                 }).Apply();
 
             return view;
-        }
-
-        public override void OnDestroy()
-        {
-            base.OnDestroy();
         }
     }
 }

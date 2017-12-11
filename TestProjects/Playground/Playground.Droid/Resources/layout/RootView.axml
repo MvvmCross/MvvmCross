@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Show Dictionary Sheet"
-        local:MvxBind="Click ShowDictionarySheetCommand" />
+        local:MvxBind="Click ShowDictionaryBindingCommand" />
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
