@@ -42,6 +42,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BindingFlags.cs" />
+    <Compile Include="Converters\MvxDictionaryValueConverter.cs" />
     <Compile Include="ExtensionMethods\MvxCrossCoreExtensions.cs" />
     <Compile Include="Converters\MvxBindingConstant.cs" />
     <Compile Include="Core\MvxDelegateExtensionMethods.cs" />
@@ -142,7 +143,5 @@
   </Target>
   -->
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="Logging\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

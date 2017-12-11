@@ -14,6 +14,7 @@ using MvvmCross.Binding.Combiners;
 using MvvmCross.Binding.ValueConverters;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
+using System.Collections.Generic;
 
 namespace MvvmCross.Binding.BindingContext
 {
