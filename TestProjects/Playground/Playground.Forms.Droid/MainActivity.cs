@@ -1,17 +1,17 @@
-﻿using Android.App;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using MvvmCross.Forms.Droid.Views;
-using MvvmCross.Platform;
 using Playground.Core.ViewModels;
 
 namespace Playground.Forms.Droid
 {
     [Activity(
-        Label = "Playground.Forms", 
+        Label = "Playground.Forms",
         Icon = "@mipmap/icon",
         Theme = "@style/AppTheme",
-        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, 
+        MainLauncher = true,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
         LaunchMode = LaunchMode.SingleTask)]
     public class MainActivity : MvxFormsAppCompatActivity<MainViewModel>
     {

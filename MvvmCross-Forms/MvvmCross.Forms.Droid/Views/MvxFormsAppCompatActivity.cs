@@ -26,7 +26,7 @@ namespace MvvmCross.Forms.Droid.Views
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
-            _resourceAssembly = Assembly.GetCallingAssembly();
+            _resourceAssembly = this.GetType().Assembly;
         }
 
         public object DataContext

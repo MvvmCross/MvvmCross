@@ -1,14 +1,14 @@
-﻿// MvxAppStart.cs
+// MvxAppStart.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Platform;
 using MvvmCross.Core.Navigation;
-using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Core.ViewModels
 {
@@ -23,7 +23,7 @@ namespace MvvmCross.Core.ViewModels
             NavigationService = navigationService;
         }
 
-        public void Start(object hint = null)
+        public async Task Start(object hint = null)
         {
             if (hint != null)
             {
@@ -31,7 +31,7 @@ namespace MvvmCross.Core.ViewModels
             }
             try
             {
-                NavigationService.Navigate<TViewModel>();
+                await NavigationService.Navigate<TViewModel>();
             }
             catch (System.Exception exception)
             {
