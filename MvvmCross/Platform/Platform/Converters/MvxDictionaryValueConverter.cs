@@ -10,8 +10,14 @@ namespace MvvmCross.Platform.Converters
         {
             if (parameter is Dictionary<TKey, TValue> dict)
             {
-                TValue x = dict[value];
-                return x;
+                if (dict.ContainsKey(value))
+                {
+                    return dict[value];
+                }
+                else
+                {
+                    throw new KeyNotFoundException($"Could not find key {value.ToString()} for {typeof(MvxDictionaryValueConverter<TKey, TValue>).Name}.");
+                }
             }
             throw new ArgumentException($"Could not cast {parameter.GetType().Name} to {typeof(Dictionary<TKey, TValue>).Name}");
         }

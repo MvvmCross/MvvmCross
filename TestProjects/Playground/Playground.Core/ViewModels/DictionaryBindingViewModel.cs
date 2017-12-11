@@ -22,18 +22,18 @@ namespace Playground.Core.ViewModels
             _closeCommand ?? (_closeCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this)));
 
 
-        IMvxCommand _incrimentCommand;
+        IMvxCommand _incrementCommand;
         private IMvxNavigationService _navigationService;
 
-        public IMvxCommand IncrimentCommand =>
-            _incrimentCommand ?? (_incrimentCommand = new MvxCommand(Incriment));
+        public IMvxCommand IncrementCommand =>
+            _incrementCommand ?? (_incrementCommand = new MvxCommand(Increment));
 
         public DictionaryBindingViewModel(IMvxNavigationService navigationService)
         {
             _navigationService = navigationService;
         }
 
-            private void Incriment()
+        private void Increment()
         {
             if(Value < 3)
             {
