@@ -148,7 +148,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
                 SideBarViewController = sidebarView;
                 SideBarViewController.SetNavigationController(MasterNavigationController);
 
-                SetWindowRootViewController(viewController);
+                SetWindowRootViewController(viewController, attribute);
 
                 Mvx.RegisterSingleton<IMvxSidebarViewController>(SideBarViewController);
 
