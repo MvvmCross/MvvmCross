@@ -25,7 +25,7 @@ namespace MvvmCross.Binding.iOS.Target
         {
         }
 
-        private void EditTextOnChanged(object sender, EventArgs eventArgs)
+        private void EditTextOnChanged(object sender, NSTextStorageEventArgs eventArgs)
         {
             var view = View;
             if (view == null) return;
@@ -53,7 +53,7 @@ namespace MvvmCross.Binding.iOS.Target
 				return;
 			}
 
-            _subscription = textStorage.WeakSubscribe(nameof(textStorage.DidProcessEditing), EditTextOnChanged);
+            _subscription = textStorage.WeakSubscribe<NSTextStorage, NSTextStorageEventArgs>(nameof(textStorage.DidProcessEditing), EditTextOnChanged);
         }
 
         public override Type TargetType => typeof(string);
