@@ -200,7 +200,7 @@ namespace MvvmCross.Droid.Views
 
         protected Type GetCurrentActivityViewModelType()
         {
-            Type currentActivityType = CurrentActivity.GetType();
+            Type currentActivityType = CurrentActivity?.GetType();
 
             var activityViewModelType = ViewModelTypeFinder.FindTypeOrNull(currentActivityType);
             return activityViewModelType;
