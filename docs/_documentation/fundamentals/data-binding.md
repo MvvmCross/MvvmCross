@@ -937,6 +937,19 @@ set.Bind(textField).To(vm => vm.Counter).WithConversion<SomeValueConverter>();
 
 Add something about the Generic implementation of IMvxTargetBinding [#1610](https://github.com/MvvmCross/MvvmCross/pull/1610)
 
+### Dictionary Conversion
+
+Dictionary conversion allows for mapped conversions to be set up within the view's binding code, useful for quickly binding things like icons or color to state properties.
+
+```c#
+set.Bind(button).To(vm => vm.readonly).WithDictionaryConversion(
+	new Dictionary<bool, Icon>
+	{
+		{true, GreyIcon},
+		{false, BlueIcon}
+	});
+```
+*Note* : This feature is only available in fluent binding.
 
 ### Default view properties
 
