@@ -171,6 +171,12 @@
     <AndroidResource Include="Resources\menu\navigation_drawer.axml" />
     <AndroidResource Include="Resources\layout\Toolbar.axml" />
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
+    <AndroidResource Include="Resources\drawable-hdpi\MvvmCross.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\MvvmCross.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\MvvmCross.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\MvvmCross.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\MvvmCross.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\MvvmCross.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-hdpi\hamburger.png" />
