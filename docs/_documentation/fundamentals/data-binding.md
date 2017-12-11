@@ -949,7 +949,7 @@ set.Bind(button).To(vm => vm.readonly).WithDictionaryConversion(
 		{false, BlueIcon}
 	});
 ```
-Note : This feature is only available in fluent binding.
+*Note* : This feature is only available in fluent binding.
 
 ### Default view properties
 
