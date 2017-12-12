@@ -17,7 +17,7 @@ using MvvmCross.Platform;
 
 namespace MvvmCross.Forms.Droid.Views
 {
-    public class MvxFormsAppCompatActivity : MvxEventSourceFormsAppCompatActivity, IMvxAndroidView
+    public abstract class MvxFormsAppCompatActivity : MvxEventSourceFormsAppCompatActivity, IMvxAndroidView
     {
         private View _view;
 
