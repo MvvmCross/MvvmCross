@@ -290,9 +290,17 @@ Task("UploadAppVeyorArtifact")
 
     Information("Artifacts Dir: {0}", outputDir.FullPath);
 
+    var uploadSettings = new AppVeyorUploadArtifactsSettings();
+
     foreach(var file in GetFiles(outputDir.FullPath + "/*")) {
         Information("Uploading {0}", file.FullPath);
-        AppVeyor.UploadArtifact(file.FullPath);
+
+        if (file.GetExtension() == "nupkg")
+            uploadSettings.ArtifactType = AppVeyorUploadArtifactType.NuGetPackage;
+        else
+            uploadSettings.ArtifactType = AppVeyorUploadArtifactType.Auto;
+
+        AppVeyor.UploadArtifact(file.FullPath, uploadSettings);
     }
 });
 
