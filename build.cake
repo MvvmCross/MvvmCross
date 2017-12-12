@@ -4,6 +4,9 @@
 #tool nuget:?package=NUnit.ConsoleRunner
 #addin nuget:?package=Cake.Incubator&version=1.5.0
 #addin nuget:?package=Cake.Git&version=0.16.0
+#addin nuget:?package=Polly
+
+using Polly;
 
 var sln = new FilePath("MvvmCross_All.sln");
 var outputDir = new DirectoryPath("artifacts");
@@ -264,12 +267,18 @@ Task("PublishPackages")
 
     var nugetFiles = GetFiles(outputDir + "/*.nupkg");
 
+    var policy = Policy
+  		.Handle<Exception>()
+  		.WaitAndRetry(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(1.5, retryAttempt)));
+
     foreach(var nugetFile in nugetFiles)
     {
-        NuGetPush(nugetFile, new NuGetPushSettings {
-            Source = source,
-            ApiKey = apiKey
-        });
+        policy.Execute(() =>
+            NuGetPush(nugetFile, new NuGetPushSettings {
+                Source = source,
+                ApiKey = apiKey
+            })
+        );
     }
 });
 
