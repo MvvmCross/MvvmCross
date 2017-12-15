@@ -176,10 +176,10 @@ namespace MvvmCross.Binding.iOS
                 MvxIosPropertyBinding.UIView_LayerBorderWidth,
                 view => new MvxUIViewLayerBorderWidthTargetBinding(view));
 
-            registry.RegisterPropertyInfoBindingFactory(
-                typeof(MvxUISwitchOnTargetBinding),
-                typeof(UISwitch),
-                MvxIosPropertyBinding.UISwitch_On);
+            registry.RegisterCustomBindingFactory<UISwitch>(
+                MvxIosPropertyBinding.UISwitch_On,
+                uiSwitch => new MvxUISwitchOnTargetBinding(uiSwitch)
+            );
 
             registry.RegisterPropertyInfoBindingFactory(
                 typeof(MvxUISearchBarTextTargetBinding),
