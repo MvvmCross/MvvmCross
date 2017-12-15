@@ -223,8 +223,7 @@ namespace MvvmCross.iOS.Views.Presenters
         {
             if (viewController is IMvxSplitViewController)
                 throw new MvxException("A SplitViewController cannot be presented as a child. Consider using Root instead");
-
-            // Special case where we've presented a TabBarViewController modally without wrapping it inside a NavigationController.
+            
             if (ModalViewControllers.Any())
             {
                 var modalViewController = ModalViewControllers.LastOrDefault();
@@ -233,10 +232,7 @@ namespace MvvmCross.iOS.Views.Presenters
                     TabBarViewController.ShowChildView(viewController);
                     return;
                 }
-            }
 
-            if (ModalViewControllers.Any())
-            {
                 if (ModalViewControllers.LastOrDefault() is UINavigationController modalNavController)
                 {
                     PushViewControllerIntoStack(modalNavController, viewController, attribute.Animated);
