@@ -224,6 +224,17 @@ namespace MvvmCross.iOS.Views.Presenters
             if (viewController is IMvxSplitViewController)
                 throw new MvxException("A SplitViewController cannot be presented as a child. Consider using Root instead");
 
+            // Special case where we've presented a TabBarViewController modally without wrapping it inside a NavigationController.
+            if (ModalViewControllers.Any())
+            {
+                var modalViewController = ModalViewControllers.LastOrDefault();
+                if (modalViewController == TabBarViewController && TabBarViewController != null)
+                {
+                    TabBarViewController.ShowChildView(viewController);
+                    return;
+                }
+            }
+
             if (ModalViewControllers.Any())
             {
                 if (ModalViewControllers.LastOrDefault() is UINavigationController modalNavController)
@@ -280,9 +291,9 @@ namespace MvvmCross.iOS.Views.Presenters
             MvxModalPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            // check if viewController is a TabBarController
-            if (viewController is IMvxTabBarViewController tabBarController)
-                TabBarViewController = tabBarController;
+            // Check if we're presenting a TabBarViewController, store it.
+            if (viewController is IMvxTabBarViewController)
+                TabBarViewController = (IMvxTabBarViewController)viewController;
 
             // setup modal based on attribute
             if (attribute.WrapInNavigationController)
@@ -500,10 +511,20 @@ namespace MvvmCross.iOS.Views.Presenters
             if (modalController == null)
                 return;
 
+            // If we have a TabBarViewController, check if the modalController is the TabBarViewController
+            if (TabBarViewController != null && modalController == TabBarViewController)
+                CloseTabBarViewController();
+
             if (modalController is UINavigationController modalNavController)
             {
                 foreach (var item in modalNavController.ViewControllers)
-                    item.DidMoveToParentViewController(null);
+                {
+                    // If one of the view controllers is our TabBarViewController.
+                    if (TabBarViewController != null && item == TabBarViewController)
+                        CloseTabBarViewController();
+                    else
+                        item.DidMoveToParentViewController(null);
+                }
             }
 
             modalController.DismissViewController(true, null);
