@@ -211,11 +211,11 @@ namespace MvvmCross.Forms.Views
             }
             else
             {
-                var carouselHost = GetPageOfType<MvxCarouselPage>();
+                var carouselHost = GetPageOfType<CarouselPage>();
                 if (carouselHost == null)
                 {
                     MvxTrace.Trace($"Current root is not a CarouselPage show your own first to use custom Host. Assuming we need to create one.");
-                    carouselHost = new MvxCarouselPage();
+                    carouselHost = new CarouselPage();
                     PushOrReplacePage(FormsApplication.MainPage, carouselHost, attribute);
                 }
                 carouselHost.Children.Add(page as ContentPage);
@@ -300,9 +300,9 @@ namespace MvvmCross.Forms.Views
                 if (page is MasterDetailPage masterDetailRoot)
                 {
                     if (masterDetailRoot.Master == null)
-                        masterDetailRoot.Master = new MvxContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) };
+                        masterDetailRoot.Master = new ContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) };
                     if (masterDetailRoot.Detail == null)
-                        masterDetailRoot.Detail = new MvxContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) };
+                        masterDetailRoot.Detail = new ContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) };
 
                     PushOrReplacePage(FormsApplication.MainPage, page, attribute);
                 }
@@ -311,19 +311,19 @@ namespace MvvmCross.Forms.Views
             }
             else
             {
-                var masterDetailHost = GetPageOfType<MvxMasterDetailPage>();
+                var masterDetailHost = GetPageOfType<MasterDetailPage>();
                 if (masterDetailHost == null)
                 {
                     //Assume we have to create the host
-                    masterDetailHost = new MvxMasterDetailPage();
+                    masterDetailHost = new MasterDetailPage();
 
                     if (!string.IsNullOrWhiteSpace(attribute.Icon))
                     {
                         masterDetailHost.Icon = attribute.Icon;
                     }
 
-                    masterDetailHost.Master = new MvxContentPage() { Title = !string.IsNullOrWhiteSpace(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) };
-                    masterDetailHost.Detail = new MvxContentPage();
+                    masterDetailHost.Master = new ContentPage() { Title = !string.IsNullOrWhiteSpace(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) };
+                    masterDetailHost.Detail = new ContentPage();
 
                     var masterDetailRootAttribute = new MvxMasterDetailPagePresentationAttribute { Position = MasterDetailPosition.Root, WrapInNavigationPage = attribute.WrapInNavigationPage, NoHistory = attribute.NoHistory };
 
@@ -378,7 +378,7 @@ namespace MvvmCross.Forms.Views
                 {
                     // Either last isn't a nav page, or there is no last page
                     // So, wrap the current page in a nav page and push onto stack
-                    FormsApplication.MainPage.Navigation.PushModalAsync(new MvxNavigationPage(page));
+                    FormsApplication.MainPage.Navigation.PushModalAsync(new NavigationPage(page));
                 }
             }
             else
@@ -439,11 +439,11 @@ namespace MvvmCross.Forms.Views
             }
             else
             {
-                var tabHost = GetPageOfType<MvxTabbedPage>();
+                var tabHost = GetPageOfType<TabbedPage>();
                 if (tabHost == null)
                 {
                     MvxTrace.Trace($"Current root is not a TabbedPage show your own first to use custom Host. Assuming we need to create one.");
-                    tabHost = new MvxTabbedPage();
+                    tabHost = new TabbedPage();
                     PushOrReplacePage(FormsApplication.MainPage, tabHost, attribute);
                 }
 
