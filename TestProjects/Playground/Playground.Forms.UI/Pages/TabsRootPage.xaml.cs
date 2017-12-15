@@ -4,7 +4,7 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Forms.Pages
 {
-    [MvxTabbedPagePresentation(TabbedPosition.Root)]
+    [MvxTabbedPagePresentation(TabbedPosition.Root, NoHistory = true)]
     public partial class TabsRootPage : MvxTabbedPage<TabsRootViewModel>
     {
         public TabsRootPage()
