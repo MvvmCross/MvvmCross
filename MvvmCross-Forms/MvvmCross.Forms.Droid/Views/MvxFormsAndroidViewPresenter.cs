@@ -58,17 +58,18 @@ namespace MvvmCross.Forms.Droid.Views
 
         public override void Show(MvxViewModelRequest request)
         {
-            var action = GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute);
+            FormsPagePresenter.Show(request);
+            //var action = GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute);
 
-            if (FormsApplication.MainPage == null && attribute is MvxPagePresentationAttribute)
-            {
-                if(CurrentActivity is MvxFormsAppCompatActivity appCompatActivity)
-                    appCompatActivity.InitializeForms(null);
-                else if(CurrentActivity is MvxFormsApplicationActivity activity)
-                    activity.InitializeForms(null);
-            }
+            //if (FormsApplication.MainPage == null && attribute is MvxPagePresentationAttribute)
+            //{
+            //    if(CurrentActivity is MvxFormsAppCompatActivity appCompatActivity)
+            //        appCompatActivity.InitializeForms(null);
+            //    else if(CurrentActivity is MvxFormsApplicationActivity activity)
+            //        activity.InitializeForms(null);
+            //}
 
-            action.ShowAction.Invoke(attribute.ViewType, attribute, request);
+            //action.ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
 
         public override void RegisterAttributeTypes()
@@ -111,6 +112,11 @@ namespace MvvmCross.Forms.Droid.Views
         public override void ChangePresentation(MvxPresentationHint hint)
         {
             FormsPagePresenter.ChangePresentation(hint);
+        }
+
+        public override void Close(IMvxViewModel viewModel)
+        {
+            FormsPagePresenter.Close(viewModel);
         }
     }
 }

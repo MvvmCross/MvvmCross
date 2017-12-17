@@ -14,7 +14,6 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Uwp.Views;
 using System;
-using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Uwp.Presenters
 {
@@ -79,6 +78,16 @@ namespace MvvmCross.Forms.Uwp.Presenters
         {
             MvxTrace.Trace($"Closing of native Views in Forms is not supported on UWP.");
             return false;
+        }
+
+        public override void Show(MvxViewModelRequest request)
+        {
+            FormsPagePresenter.Show(request);
+        }
+
+        public override void Close(IMvxViewModel viewModel)
+        {
+            FormsPagePresenter.Close(viewModel);
         }
     }
 }
