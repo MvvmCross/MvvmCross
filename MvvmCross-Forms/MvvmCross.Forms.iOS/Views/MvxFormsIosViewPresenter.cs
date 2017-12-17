@@ -60,7 +60,7 @@ namespace MvvmCross.Forms.iOS.Presenters
 
         public override void Show(MvxViewModelRequest request)
         {
-            base.Show(request);
+            FormsPagePresenter.Show(request);
 
             if (_window.RootViewController == null)
                 SetWindowRootViewController(FormsApplication.MainPage.CreateViewController());
@@ -91,6 +91,11 @@ namespace MvvmCross.Forms.iOS.Presenters
         public override void ChangePresentation(MvxPresentationHint hint)
         {
             FormsPagePresenter.ChangePresentation(hint);
+        }
+
+        public override void Close(IMvxViewModel viewModel)
+        {
+            FormsPagePresenter.Close(viewModel);
         }
     }
 }
