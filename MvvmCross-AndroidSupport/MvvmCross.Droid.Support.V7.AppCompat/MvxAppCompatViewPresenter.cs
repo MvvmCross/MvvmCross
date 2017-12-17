@@ -33,7 +33,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             {
                 if (CurrentActivity is FragmentActivity activity)
                     return activity.SupportFragmentManager;
-                throw new InvalidCastException("Cannot use Android Support Fragment within non AppCompat Activity");
+                MvxTrace.Trace("Cannot use Android Support Fragment within non AppCompat Activity");
+                return null;
+                //throw new InvalidCastException("Cannot use Android Support Fragment within non AppCompat Activity");
             }
         }
 
@@ -491,7 +493,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             try
             {
-                CurrentFragmentManager.PopBackStackImmediate();
+                CurrentFragmentManager?.PopBackStackImmediate();
             }
             catch (Exception ex)
             {
@@ -579,7 +581,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         protected virtual new Fragment GetFragmentByViewType(Type type)
         {
             var fragmentName = FragmentJavaName(type);
-            return CurrentFragmentManager.FindFragmentByTag(fragmentName);
+            return CurrentFragmentManager?.FindFragmentByTag(fragmentName);
         }
     }
 }
