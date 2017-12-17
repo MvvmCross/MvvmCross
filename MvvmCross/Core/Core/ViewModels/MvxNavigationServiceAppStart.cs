@@ -23,7 +23,7 @@ namespace MvvmCross.Core.ViewModels
             NavigationService = navigationService;
         }
 
-        public void Start(object hint = null)
+        public async void Start(object hint = null)
         {
             if (hint != null)
             {
@@ -31,7 +31,7 @@ namespace MvvmCross.Core.ViewModels
             }
             try
             {
-                NavigationService.Navigate<TViewModel>();
+                await NavigationService.Navigate<TViewModel>();
             }
             catch (System.Exception exception)
             {
