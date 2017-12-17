@@ -11,6 +11,7 @@ using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 using System.Reflection;
 using MvvmCross.Core.ViewModels.Hints;
+using System.Text;
 
 namespace MvvmCross.Forms.Views
 {
@@ -150,34 +151,79 @@ namespace MvvmCross.Forms.Views
                 });
         }
 
-        public override void ChangePresentation(MvxPresentationHint hint)
+        public async override void ChangePresentation(MvxPresentationHint hint)
         {
             var navigation = GetPageOfType<NavigationPage>().Navigation;
             if (hint is MvxPopToRootPresentationHint popToRootHint)
             {
-                navigation.PopToRootAsync(popToRootHint.Animated);
+                // Make sure the modals are all closed
+                while (navigation.ModalStack.Any())
+                {
+                    await navigation.PopModalAsync();
+                }
+
+                await navigation.PopToRootAsync(popToRootHint.Animated);
                 return;
             }
             if (hint is MvxPopPresentationHint popHint)
             {
-                foreach (var page in navigation.NavigationStack)
+                // Need to check the modal stack first
+                while (navigation.ModalStack.Any())
                 {
-                    page.Navigation.PopAsync(popHint.Animated);
-                    if (page is IMvxPage mvxPage && mvxPage.ViewModel.GetType() == popHint.ViewModelToPopTo)
+                    var modalPage = navigation.ModalStack.Last();
+                    if ((modalPage as IMvxPage)?.ViewModel.GetType() == popHint.ViewModelToPopTo)
                         return;
+
+                    var modalNavPage = GetPageOfType<NavigationPage>(modalPage);
+                    if (modalNavPage != null)
+                    {
+                        while (modalNavPage.Navigation.NavigationStack.Any())
+                        {
+                            var childPage = modalNavPage.Navigation.NavigationStack.Last();
+                            if ((childPage as IMvxPage)?.ViewModel.GetType() == popHint.ViewModelToPopTo)
+                                return;
+                            if (modalNavPage.Navigation.NavigationStack.Count > 1)
+                            {
+                                await modalNavPage.Navigation.PopAsync(popHint.Animated);
+                            }
+                            else
+                            {
+                                // Don't try to pop the last page - this shouldn't be done! Instead
+                                // break out of the while, and the whole modal will be popped.
+                                break;
+                            }
+                        }
+                    }
+                    await navigation.PopModalAsync();
+                }
+
+                while (navigation.NavigationStack.Any())
+                {
+                    var page = navigation.NavigationStack.Last();
+                    if ((page as IMvxPage)?.ViewModel.GetType() == popHint.ViewModelToPopTo)
+                        return;
+                    if (navigation.NavigationStack.Count > 1)
+                    {
+                        await page.Navigation.PopAsync(popHint.Animated);
+                    }
                 }
                 return;
             }
             if (hint is MvxRemovePresentationHint removeHint)
             {
+                if (navigation.ModalStack.Any())
+                {
+                    MvxTrace.Trace("Unable to remove page whilst modal is visible");
+                    return;
+                }
                 var page = navigation.NavigationStack
-                                     .OfType<IMvxPage>()
-                                     .FirstOrDefault(view => view.ViewModel.GetType() == removeHint.ViewModelToRemove) as Page;
-                if(page != null)
+                                 .OfType<IMvxPage>()
+                                 .FirstOrDefault(view => view.ViewModel.GetType() == removeHint.ViewModelToRemove) as Page;
+                if (page != null)
                     navigation.RemovePage(page);
                 return;
             }
-            if(hint is MvxPagePresentationHint pageHint)
+            if (hint is MvxPagePresentationHint pageHint)
             {
                 var pageType = ViewsContainer.GetViewType(pageHint.ViewModel);
                 if (GetPageOfTypeByType(pageType) is Page page)
@@ -191,6 +237,14 @@ namespace MvvmCross.Forms.Views
             }
 
             base.ChangePresentation(hint);
+
+            MvxTrace.Trace(FormsApplication.Hierarchy());
+        }
+
+        public override void Show(MvxViewModelRequest request)
+        {
+            base.Show(request);
+            MvxTrace.Trace(FormsApplication.Hierarchy());
         }
 
         public virtual void ShowCarouselPage(
@@ -365,7 +419,7 @@ namespace MvvmCross.Forms.Views
 
             if (FormsApplication.MainPage == null)
                 FormsApplication.MainPage = new NavigationPage(new ContentPage() { Title = nameof(ContentPage) });
-            
+
             if (attribute.WrapInNavigationPage)
             {
                 if (GetModalPageOfType<NavigationPage>() is NavigationPage modalNavigation)
@@ -629,7 +683,7 @@ namespace MvvmCross.Forms.Views
         {
             if (rootPage == null)
                 rootPage = FormsApplication.MainPage;
-            
+
             return GetType().GetMethod(nameof(GetPageOfType)).MakeGenericMethod(viewType).Invoke(this, new object[] { rootPage }) as Page;
         }
 
@@ -719,6 +773,75 @@ namespace MvvmCross.Forms.Views
             {
                 throw new MvxException("Cannot replace MainPage root", ex);
             }
+        }
+    }
+
+    public static class NavigationHierarchyHelper
+    {
+
+        public static string Hierarchy(this Application application)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("Application Root");
+            application.MainPage.PrintHierarchy(sb, null);
+            return sb.ToString();
+        }
+
+        private static void PrintHierarchy(this Page page, StringBuilder sb, string prefix)
+        {
+            var isMainPage = prefix == null;
+            if (page == null)
+            {
+                sb.AppendLine(prefix + " (null) ");
+                return;
+            }
+
+            sb.AppendLine($"{prefix} {page.GetType().Name}({page.NavigationPageType()})");
+            prefix = new string(' ', (prefix + page.GetType().Name).Length);
+
+            if (page is MasterDetailPage masterDetail)
+            {
+                masterDetail.Master.PrintHierarchy(sb, prefix + "Master:");
+                masterDetail.Detail.PrintHierarchy(sb, prefix + "Detail:");
+            }
+
+            if (page is MultiPage<Page> multiPage)
+            {
+                for (int i = 0; i < multiPage.Children.Count; i++)
+                {
+                    var child = multiPage.Children[i];
+                    child.PrintHierarchy(sb, prefix + $"[{i}]:");
+                }
+            }
+
+            if (page is NavigationPage navPage)
+            {
+                for (int i = 0; i < navPage.Pages.Count(); i++)
+                {
+                    var child = navPage.Pages.Skip(i).FirstOrDefault();
+                    child.PrintHierarchy(sb, prefix + $"[{i}]:");
+                }
+            }
+
+            if (isMainPage)
+            {
+                sb.AppendLine("Modals");
+                prefix = new string(' ', ("Modals").Length);
+                for (int i = 0; i < page.Navigation.ModalStack.Count(); i++)
+                {
+                    var modal = page.Navigation.ModalStack[i];
+                    modal.PrintHierarchy(sb, prefix + $"[{i}]:");
+                }
+            }
+        }
+
+        private static string NavigationPageType(this Page page)
+        {
+            if (page is MasterDetailPage) return "Master-Detail";
+            if (page is TabbedPage) return "Tabbed";
+            if (page is CarouselPage) return "Carousel";
+            if (page is NavigationPage) return "Navigation";
+            return "Content";
         }
     }
 }
