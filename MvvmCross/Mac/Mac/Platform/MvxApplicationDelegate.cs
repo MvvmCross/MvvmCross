@@ -4,7 +4,7 @@ using MvvmCross.Core.Platform;
 
 namespace MvvmCross.Mac.Platform
 {
-    public class MvxApplicationDelegate : NSApplicationDelegate, IMvxLifetime
+    public class MvxApplicationDelegate : NSApplicationDelegate, IMvxApplicationDelegate
     {
         public override void WillBecomeActive(Foundation.NSNotification notification)
         {
