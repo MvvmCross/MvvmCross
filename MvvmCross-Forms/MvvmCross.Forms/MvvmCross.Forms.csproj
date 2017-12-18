@@ -106,6 +106,7 @@
     <Compile Include="Views\EventSource\MvxEventSourceEntryCell.cs" />
     <Compile Include="Views\EventSource\MvxEventSourceContentView.cs" />
     <Compile Include="Views\MvxElementAdapter.cs" />
+    <Compile Include="Views\NavigationHierarchyHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
