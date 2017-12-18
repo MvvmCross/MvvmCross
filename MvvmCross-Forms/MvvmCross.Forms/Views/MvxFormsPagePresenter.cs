@@ -11,7 +11,7 @@ using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 using System.Reflection;
 using MvvmCross.Core.ViewModels.Hints;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Forms.Views
 {
@@ -156,12 +156,15 @@ namespace MvvmCross.Forms.Views
             var navigation = GetPageOfType<NavigationPage>().Navigation;
             if (hint is MvxPopToRootPresentationHint popToRootHint)
             {
-                // Make sure the modals are all closed
-                while (navigation.ModalStack.Any())
-                {
-                    await navigation.PopModalAsync();
-                }
+                // Make sure all modals are closed
+                CloseAllModals(popToRootHint.Animated);
 
+                // Double check we have a navigation page, otherwise
+                // we can just return as we must be already at the root page
+                if (navigation == null)
+                    return;
+
+                // Close all pages back to the root
                 await navigation.PopToRootAsync(popToRootHint.Animated);
                 return;
             }
@@ -171,42 +174,21 @@ namespace MvvmCross.Forms.Views
                 while (navigation.ModalStack.Any())
                 {
                     var modalPage = navigation.ModalStack.Last();
-                    if ((modalPage as IMvxPage)?.ViewModel.GetType() == popHint.ViewModelToPopTo)
+                    if (modalPage.PageMatchesViewModel(popHint.ViewModelToPopTo))
                         return;
 
                     var modalNavPage = GetPageOfType<NavigationPage>(modalPage);
                     if (modalNavPage != null)
                     {
-                        while (modalNavPage.Navigation.NavigationStack.Any())
-                        {
-                            var childPage = modalNavPage.Navigation.NavigationStack.Last();
-                            if ((childPage as IMvxPage)?.ViewModel.GetType() == popHint.ViewModelToPopTo)
-                                return;
-                            if (modalNavPage.Navigation.NavigationStack.Count > 1)
-                            {
-                                await modalNavPage.Navigation.PopAsync(popHint.Animated);
-                            }
-                            else
-                            {
-                                // Don't try to pop the last page - this shouldn't be done! Instead
-                                // break out of the while, and the whole modal will be popped.
-                                break;
-                            }
-                        }
+                        var matched = await PopToMatchingViewModel(modalNavPage.Navigation, popHint.ViewModelToPopTo, popHint.Animated);
+                        if (matched)
+                            return;
                     }
+
                     await navigation.PopModalAsync();
                 }
 
-                while (navigation.NavigationStack.Any())
-                {
-                    var page = navigation.NavigationStack.Last();
-                    if ((page as IMvxPage)?.ViewModel.GetType() == popHint.ViewModelToPopTo)
-                        return;
-                    if (navigation.NavigationStack.Count > 1)
-                    {
-                        await page.Navigation.PopAsync(popHint.Animated);
-                    }
-                }
+                await PopToMatchingViewModel(navigation, popHint.ViewModelToPopTo, popHint.Animated);
                 return;
             }
             if (hint is MvxRemovePresentationHint removeHint)
@@ -238,13 +220,40 @@ namespace MvvmCross.Forms.Views
 
             base.ChangePresentation(hint);
 
+#if DEBUG // Only showing this when debugging MVX
             MvxTrace.Trace(FormsApplication.Hierarchy());
+#endif
+        }
+
+        private async Task<bool> PopToMatchingViewModel(INavigation navigation, Type viewModelType, bool animate = false)
+        {
+            while (navigation.NavigationStack.Any())
+            {
+                var page = navigation.NavigationStack.Last();
+                if ((page as IMvxPage)?.ViewModel.GetType() == viewModelType)
+                    return true;
+
+                if (navigation.NavigationStack.Count > 1)
+                {
+                    await navigation.PopAsync(animate);
+                }
+                else
+                {
+                    // Don't try to pop the last page - this shouldn't be done! Instead
+                    // break out of the while, and the whole modal will be popped.
+                    break;
+                }
+            }
+
+            return false;
         }
 
         public override void Show(MvxViewModelRequest request)
         {
             base.Show(request);
+#if DEBUG // Only showing this when debugging MVX
             MvxTrace.Trace(FormsApplication.Hierarchy());
+#endif
         }
 
         public virtual void ShowCarouselPage(
@@ -521,34 +530,12 @@ namespace MvvmCross.Forms.Views
             }
         }
 
-        public virtual void CloseAllModals(Page rootPage = null)
+        public virtual void CloseAllModals(bool animate = false)
         {
-            if (rootPage == null)
-                rootPage = FormsApplication.MainPage;
-
-            if (rootPage is NavigationPage rootNavigationPage && rootNavigationPage.CurrentPage is NavigationPage nestedNavigationPage)
+            var navigation = FormsApplication.MainPage?.Navigation;
+            while (navigation?.ModalStack.Any() ?? false)
             {
-                CloseAllModals(nestedNavigationPage);
-            }
-            else if (rootPage is NavigationPage navigationPage)
-            {
-                CloseModalStack(navigationPage.Navigation.ModalStack);
-            }
-            else if (rootPage?.Navigation?.ModalStack?.Count > 0)
-            {
-                CloseModalStack(FormsApplication.MainPage.Navigation.ModalStack);
-            }
-        }
-
-        protected virtual void CloseModalStack(IReadOnlyList<Page> modals)
-        {
-            var modalList = modals.ToList();
-            if (modalList != null && modalList.Count > 0)
-            {
-                foreach (var modal in modalList)
-                {
-                    modal.Navigation.PopModalAsync();
-                }
+                navigation.PopModalAsync(animate);
             }
         }
 
@@ -773,75 +760,6 @@ namespace MvvmCross.Forms.Views
             {
                 throw new MvxException("Cannot replace MainPage root", ex);
             }
-        }
-    }
-
-    public static class NavigationHierarchyHelper
-    {
-
-        public static string Hierarchy(this Application application)
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine("Application Root");
-            application.MainPage.PrintHierarchy(sb, null);
-            return sb.ToString();
-        }
-
-        private static void PrintHierarchy(this Page page, StringBuilder sb, string prefix)
-        {
-            var isMainPage = prefix == null;
-            if (page == null)
-            {
-                sb.AppendLine(prefix + " (null) ");
-                return;
-            }
-
-            sb.AppendLine($"{prefix} {page.GetType().Name}({page.NavigationPageType()})");
-            prefix = new string(' ', (prefix + page.GetType().Name).Length);
-
-            if (page is MasterDetailPage masterDetail)
-            {
-                masterDetail.Master.PrintHierarchy(sb, prefix + "Master:");
-                masterDetail.Detail.PrintHierarchy(sb, prefix + "Detail:");
-            }
-
-            if (page is MultiPage<Page> multiPage)
-            {
-                for (int i = 0; i < multiPage.Children.Count; i++)
-                {
-                    var child = multiPage.Children[i];
-                    child.PrintHierarchy(sb, prefix + $"[{i}]:");
-                }
-            }
-
-            if (page is NavigationPage navPage)
-            {
-                for (int i = 0; i < navPage.Pages.Count(); i++)
-                {
-                    var child = navPage.Pages.Skip(i).FirstOrDefault();
-                    child.PrintHierarchy(sb, prefix + $"[{i}]:");
-                }
-            }
-
-            if (isMainPage)
-            {
-                sb.AppendLine("Modals");
-                prefix = new string(' ', ("Modals").Length);
-                for (int i = 0; i < page.Navigation.ModalStack.Count(); i++)
-                {
-                    var modal = page.Navigation.ModalStack[i];
-                    modal.PrintHierarchy(sb, prefix + $"[{i}]:");
-                }
-            }
-        }
-
-        private static string NavigationPageType(this Page page)
-        {
-            if (page is MasterDetailPage) return "Master-Detail";
-            if (page is TabbedPage) return "Tabbed";
-            if (page is CarouselPage) return "Carousel";
-            if (page is NavigationPage) return "Navigation";
-            return "Content";
         }
     }
 }
