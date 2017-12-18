@@ -1,7 +1,7 @@
 ---
 layout: post
 title: MvvmCross 5.6
-date:   2017-11-23 14:00:00 +0100
+date:   2017-12-11 14:00:00 +0100
 categories: mvvmcross
 ---
 
