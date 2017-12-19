@@ -88,27 +88,26 @@ Task("UnitTest")
     .Does(() =>
 {
     var testPaths = new List<string> {
-        new FilePath("./MvvmCross/Test/Test/bin/Release/MvvmCross.Test.dll").FullPath,
-        new FilePath("./MvvmCross/Binding/Test/bin/Release/MvvmCross.Binding.Test.dll").FullPath,
-        new FilePath("./MvvmCross/Platform/Test/bin/Release/MvvmCross.Platform.Test.dll").FullPath,
-        new FilePath("./MvvmCross-Plugins/Color/MvvmCross.Plugins.Color.Test/bin/Release/MvvmCross.Plugins.Color.Test.dll").FullPath,
-        new FilePath("./MvvmCross-Plugins/Messenger/MvvmCross.Plugins.Messenger.Test/bin/Release/MvvmCross.Plugins.Messenger.Test.dll").FullPath,
-        new FilePath("./MvvmCross-Plugins/Network/MvvmCross.Plugins.Network.Test/bin/Release/MvvmCross.Plugins.Network.Test.dll").FullPath,
-        new FilePath("./MvvmCross-Plugins/JsonLocalization/MvvmCross.Plugins.JsonLocalization.Tests/bin/Release/MvvmCross.Plugins.JsonLocalization.Tests.dll").FullPath,
-        new FilePath("./MvvmCross-Plugins/ResxLocalization/MvvmCross.Plugins.ResxLocalization.Tests/bin/Release/MvvmCross.Plugins.ResxLocalization.Tests.dll").FullPath
+        new FilePath("./NetStandard/MvvmCross.Tests/MvvmCross.Tests/bin/Release/netcoreapp2.0/MvvmCross.Tests.dll").FullPath,
+        new FilePath("./NetStandard/Plugins.Color.Test/bin/Release/netcoreapp2.0/MvvmCross.Plugins.Color.Tests.dll").FullPath,
+        new FilePath("./NetStandard/Plugins.JsonLocalization.Tests/bin/Release/netcoreapp2.0/MvvmCross.Plugins.JsonLocalization.Tests.dll").FullPath,
+        new FilePath("./NetStandard/Plugins.Messenger.Test/bin/Release/netcoreapp2.0/MvvmCross.Plugins.Messenger.Tests.dll").FullPath,
+        new FilePath("./NetStandard/Plugins.Network.Test/bin/Release/netcoreapp2.0/MvvmCross.Plugins.Network.Tests.dll").FullPath,
+        new FilePath("./NetStandard/Plugins.ResourceLoader.Test/bin/Release/netcoreapp2.0/MvvmCross.Plugins.ResourceLoader.Tests.dll").FullPath,
+        new FilePath("./NetStandard/Plugins.ResxLocalization.Tests/bin/Release/netcoreapp2.0/MvvmCross.Plugins.ResxLocalization.Tests.dll").FullPath,
     };
-
-    var testResultsPath = new FilePath(outputDir + "/NUnitTestResult.xml");
 
     NUnit3(testPaths, new NUnit3Settings {
         Timeout = 30000,
         OutputFile = new FilePath(outputDir + "/NUnitOutput.txt"),
-        Results = testResultsPath
+        Work = outputDir
     });
 
     if (isRunningOnAppVeyor)
     {
-        AppVeyor.UploadTestResults(testResultsPath, AppVeyorTestResultsType.NUnit3);
+        var testResults = GetFiles(outputDir.ToString() + "/*.xml");
+        foreach(var testResult in testResults)
+            AppVeyor.UploadTestResults(testResult, AppVeyorTestResultsType.NUnit3);
     }
 });
 
