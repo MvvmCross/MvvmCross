@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>MonoAndroid80</TargetFrameworks>
+    <AssemblyName>MvvmCross.Droid.Support.Core.Utils</AssemblyName>
+    <RootNamespace>MvvmCross.Droid.Support.Core.Utils</RootNamespace>
+    <Description>MvvmCross packages for Android Support Core.Utils</Description>
+    <PackageId>MvvmCross.Droid.Support.Core.Utils</PackageId>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AndroidResource Include="Resources\**\*.xml" Generator="MSBuild:UpdateAndroidResources" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="26.1.0.1" />
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
+  </ItemGroup>
+
+  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+
+</Project>

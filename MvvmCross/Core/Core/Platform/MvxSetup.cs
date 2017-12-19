@@ -196,7 +196,7 @@ namespace MvvmCross.Core.Platform
 
         protected virtual IMvxIoCProvider CreateIocProvider()
         {
-            return MvxSimpleIoCContainer.Initialize(CreateIocOptions());
+            return MvxIoCProvider.Initialize(CreateIocOptions());
         }
 
         protected virtual void InitializeFirstChance()

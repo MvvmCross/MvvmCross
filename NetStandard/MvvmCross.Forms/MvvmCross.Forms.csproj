@@ -1,0 +1,86 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net461;uap10.0;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid80;netcoreapp2.0</TargetFrameworks>
+    <AssemblyName>MvvmCross.Forms</AssemblyName>
+    <RootNamespace>MvvmCross.Forms</RootNamespace>
+    <Description></Description>
+    <PackageId>MvvmCross.Forms</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Platforms\**\*.cs" />
+    <None Include="Platforms\**\*.cs" />
+    <None Include="Resources\*.cs" />
+    <Compile Remove="Resources\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <Compile Include="Platforms\Netstandard2.0\**\*.cs" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
+    <Compile Include="Platforms\Net461\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">
+    <Compile Include="Platforms\Shared\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0' ">
+    <Compile Include="Platforms\Windows-common\**\*.cs" />
+    <Compile Include="Platforms\Uap10.0\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
+    <Compile Include="Platforms\Apple-common\**\*.cs" />
+    <Compile Include="Platforms\Ios\**\*.cs" />
+    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.Mac20' ">
+    <Compile Include="Platforms\Apple-common\**\*.cs" />
+    <Compile Include="Platforms\Mac\**\*.cs" />
+    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+    <Reference Include="System.Runtime.Serialization" />    
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.TVOS10' ">
+    <Compile Include="Platforms\Apple-common\**\*.cs" />
+    <Compile Include="Platforms\Tvos\**\*.cs" />
+    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.WatchOS10' ">
+    <Compile Include="Platforms\Apple-common\**\*.cs" />
+    <Compile Include="Platforms\Watchos\**\*.cs" />
+    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
+    <Compile Include="Platforms\Android\**\*.cs" />
+    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+    <AndroidResource Include="Resources\**\*.xml" SubType="Designer" Generator="MSBuild:UpdateAndroidResources" />
+    <ProjectReference Include="..\MvvmCross.Android.Support\V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj" />
+    <PackageReference Include="Xamarin.Android.Support.Design" Version="26.1.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.v4" Version="26.1.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="26.1.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="26.1.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="26.1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>2.5.0.91635</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MvvmCross\MvvmCross.csproj" />
+  </ItemGroup>  
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+  
+  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+</Project>

@@ -55,7 +55,7 @@ namespace MvvmCross.Platform.Test
         public void TryResolve_WithNoInjection_NothingGetsInjected()
         {
             MvxSingleton.ClearAllSingletons();
-            var instance = MvxSimpleIoCContainer.Initialize();
+            var instance = MvxIoCProvider.Initialize();
 
             Mvx.RegisterType<IA, A>();
             Mvx.RegisterType<IB, B>();
@@ -84,7 +84,7 @@ namespace MvvmCross.Platform.Test
                     InjectIntoProperties = MvxPropertyInjection.MvxInjectInterfaceProperties
                 }
             };
-            var instance = MvxSimpleIoCContainer.Initialize(options);
+            var instance = MvxIoCProvider.Initialize(options);
 
             Mvx.RegisterType<IA, A>();
             Mvx.RegisterType<IB, B>();
@@ -114,7 +114,7 @@ namespace MvvmCross.Platform.Test
                     InjectIntoProperties = MvxPropertyInjection.AllInterfaceProperties
                 }
             };
-            var instance = MvxSimpleIoCContainer.Initialize(options);
+            var instance = MvxIoCProvider.Initialize(options);
 
             Mvx.RegisterType<IA, A>();
             Mvx.RegisterType<IB, B>();
