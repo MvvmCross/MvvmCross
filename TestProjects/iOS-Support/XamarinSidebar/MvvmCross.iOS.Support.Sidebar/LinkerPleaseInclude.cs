@@ -42,6 +42,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebarSample.iOS
         public void Include(UITextView textView)
         {
             textView.Text = textView.Text + "";
+            textView.TextStorage.DidProcessEditing += (sender, e) => textView.Text = "";
             textView.Changed += (sender, args) => { textView.Text = ""; };
         }
 
