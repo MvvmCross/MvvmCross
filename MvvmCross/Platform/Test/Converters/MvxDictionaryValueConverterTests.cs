@@ -11,14 +11,12 @@ namespace MvvmCross.Platform.Test.Converters
     {
         private Dictionary<TestStates, string> _testStatedictionary;
 
-        private const string StateUnknown = "State Unknown";
         private const string StateRunning = "State Running";
         private const string StateCompleted = "State Completed";
         private const string Fallback = "State fallback";
 
         public enum TestStates
         {
-            Unknown,
             Running,
             Completed,
             Failed
@@ -29,30 +27,50 @@ namespace MvvmCross.Platform.Test.Converters
         {
             _testStatedictionary = new Dictionary<TestStates, string>
             {
-                [TestStates.Unknown] = StateUnknown,
                 [TestStates.Running] = StateRunning,
                 [TestStates.Completed] = StateCompleted
             };
         }
 
-        [TestCase(TestStates.Unknown, ExpectedResult = StateUnknown)]
         [TestCase(TestStates.Running, ExpectedResult = StateRunning)]
         [TestCase(TestStates.Completed, ExpectedResult = StateCompleted)]
-        public string Convert_MatchingKey_ReturnsDictionaryValue(TestStates state)
+        public string Convert_MatchingKeyIncludeFallback_ReturnsDictionaryValue(TestStates state)
         {
-            return Convert(state, null, new Tuple<IDictionary<TestStates, string>, string>(_testStatedictionary, Fallback), CultureInfo.CurrentUICulture);
+            return Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, Fallback, true), CultureInfo.CurrentUICulture);
         }
 
-        [TestCase(TestStates.Failed, ExpectedResult = Fallback)]
-        public string Convert_NoMatchingDictionaryKey_ReturnsFallback(TestStates state)
+        [TestCase(TestStates.Running, ExpectedResult = StateRunning)]
+        [TestCase(TestStates.Completed, ExpectedResult = StateCompleted)]
+        public string Convert_MatchingKeyExcludeFallback_ReturnsDictionaryValue(TestStates state)
         {
-            return Convert(state, null, new Tuple<IDictionary<TestStates, string>, string>(_testStatedictionary, Fallback), CultureInfo.CurrentUICulture);
+            return Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, default(string), false), CultureInfo.CurrentUICulture);
+        }
+
+        [Test]
+        public void Convert_NoMatchingDictionaryKeyIncludeFallback_ReturnsFallback()
+        {
+            var state = TestStates.Failed;
+
+            var result = Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, Fallback, true), CultureInfo.CurrentUICulture);
+
+            Assert.AreEqual(result, Fallback);
+        }
+
+        [Test]
+        public void Convert_NoMatchingDictionaryKeyExcludeFallback_ThrowKeyNotFoundException()
+        {
+            var state = TestStates.Failed;
+
+            Assert.Throws<KeyNotFoundException>(() =>
+                Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, default(string), false), CultureInfo.CurrentUICulture));
         }
 
         [Test]
         public void Convert_InvalidParamterType_ThrowArgumentException()
         {
-            Assert.Throws<ArgumentException>(() => Convert(TestStates.Unknown, null, _testStatedictionary, CultureInfo.CurrentUICulture));
+            var state = TestStates.Running;
+
+            Assert.Throws<ArgumentException>(() => Convert(state, null, _testStatedictionary, CultureInfo.CurrentUICulture));
         }
     }
 }
