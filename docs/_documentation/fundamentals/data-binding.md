@@ -950,7 +950,7 @@ set.Bind(button).To(vm => vm.readonly)
     });
 ```
 
-Additionally, a fallback can be supplied for use in the case where a key cannot be found against the supplied Dictionary.
+Additionally, a fallback can be supplied for when a key cannot be found against the supplied Dictionary.
 
 ```c#
 set.Bind(button).To(vm => vm.readonly)
