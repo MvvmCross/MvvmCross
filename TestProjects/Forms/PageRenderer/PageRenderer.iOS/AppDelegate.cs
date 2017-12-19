@@ -25,7 +25,7 @@ namespace PageRendererExample.UI.iOS
 
             Window.MakeKeyAndVisible();
 
-            return true;
+            return base.FinishedLaunching(app, options);
         }
     }
 }
