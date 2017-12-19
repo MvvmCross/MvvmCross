@@ -8,18 +8,21 @@ namespace MvvmCross.Platform.Converters
     {
         protected override TValue Convert(TKey value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (parameter is IDictionary<TKey, TValue> dict)
+            try
             {
-                if (dict.ContainsKey(value))
+                var typedParameters = (Tuple<IDictionary<TKey, TValue>, TValue>)parameter;
+
+                if (typedParameters.Item1.ContainsKey(value))
                 {
-                    return dict[value];
+                    return typedParameters.Item1[value];
                 }
-                else
-                {
-                    throw new KeyNotFoundException($"Could not find key {value.ToString()} for {typeof(MvxDictionaryValueConverter<TKey, TValue>).Name}.");
-                }
+
+                return typedParameters.Item2;
             }
-            throw new ArgumentException($"Could not cast {parameter.GetType().Name} to {typeof(Dictionary<TKey, TValue>).Name}");
+            catch (InvalidCastException ex)
+            {
+                throw new ArgumentException($"Dictionary Converter expected a parameter of type \"{typeof(Tuple<IDictionary<TKey, TValue>, TValue>)}\" but received type \"{parameter.GetType()}\"", nameof(parameter), ex);
+            }
         }
     }
 }
