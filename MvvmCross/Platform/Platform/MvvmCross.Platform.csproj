@@ -77,7 +77,6 @@
     <Compile Include="Core\IMvxDisposeSource.cs" />
     <Compile Include="IoC\IMvxTypeCache.cs" />
     <Compile Include="IoC\MvxLazySingletonCreator.cs" />
-    <Compile Include="IoC\MvxPropertyInjectingIoCContainer.cs" />
     <Compile Include="IoC\MvxTypeCache.cs" />
     <Compile Include="IoC\MvxTypeExtensions.cs" />
     <Compile Include="Mvx.cs" />
@@ -106,7 +105,7 @@
     <Compile Include="ReflectionExtensions.cs" />
     <Compile Include="UI\IMvxNativeVisibility.cs" />
     <Compile Include="Platform\MvxDebugOnlyTrace.cs" />
-    <Compile Include="IoC\MvxSimpleIoCContainer.cs" />
+    <Compile Include="IoC\MvxIoCProvider.cs" />
     <Compile Include="UI\MvxColors.cs" />
     <Compile Include="UI\MvxVisibility.cs" />
     <Compile Include="Platform\MvxStopWatch.cs" />
@@ -133,6 +132,7 @@
     <Compile Include="Logging\MvxLogExtensions.cs" />
     <Compile Include="Logging\IMvxLogProvider.cs" />
     <Compile Include="Logging\MvxLogProviderType.cs" />
+    <Compile Include="IoC\MvxIoCContainer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

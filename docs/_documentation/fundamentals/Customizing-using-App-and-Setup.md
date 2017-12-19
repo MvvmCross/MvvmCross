@@ -217,7 +217,7 @@ To override MvvmCross' IoC, you can:
 
 * first find your alternative IoC implementation - e.g. something like AutoFac, Funq or TinyIoC
 * then create an Adapter which maps the implementation behind an IMvxIoCProvider interface and which inherits from MvxSingleton<IMvxIoCProvider> in order to provide a Singleton
-  * the majority of the adaption should be relatively straight-forwards - see MvxSimpleIoCContainer for how the default IoC container is provided.
+  * the majority of the adaption should be relatively straight-forwards - see MvxIoCContainer for how the default IoC container is provided.
   * The only unusual methods in the MvvmCross IoC interface are the CallbackWhenRegistered hooks - these provide callbacks when new object types are registered and may require a little custom code in the RegisterXXX methods within your adapter.
 * finally, you can override IMvxIoCProvider CreateIocProvider() in your Setup class to return your IoC provider
 
