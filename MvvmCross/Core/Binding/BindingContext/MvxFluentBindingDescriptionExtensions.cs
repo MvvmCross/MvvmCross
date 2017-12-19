@@ -23,10 +23,17 @@ namespace MvvmCross.Binding.BindingContext
 
         public static MvxFluentBindingDescription<TTarget, TSource> WithDictionaryConversion<TTarget, TSource, TFrom, TTo>(
             this MvxFluentBindingDescription<TTarget, TSource> bindingDescription,
-            IDictionary<TFrom, TTo> converterParameter,
-            TTo fallback = default(TTo))
+            IDictionary<TFrom, TTo> converterParameter)
             where TTarget : class
-            => bindingDescription.WithConversion(new MvxDictionaryValueConverter<TFrom, TTo>(), new Tuple<IDictionary<TFrom, TTo>, TTo>(converterParameter, fallback))
+            => bindingDescription.WithConversion(new MvxDictionaryValueConverter<TFrom, TTo>(), new Tuple<IDictionary<TFrom, TTo>, TTo, bool>(converterParameter, default(TTo), false))
+            .OneWay();
+
+        public static MvxFluentBindingDescription<TTarget, TSource> WithDictionaryConversion<TTarget, TSource, TFrom, TTo>(
+            this MvxFluentBindingDescription<TTarget, TSource> bindingDescription,
+            IDictionary<TFrom, TTo> converterParameter,
+            TTo fallback)
+            where TTarget : class
+            => bindingDescription.WithConversion(new MvxDictionaryValueConverter<TFrom, TTo>(), new Tuple<IDictionary<TFrom, TTo>, TTo, bool>(converterParameter, fallback, true))
             .OneWay();
     }
 }
