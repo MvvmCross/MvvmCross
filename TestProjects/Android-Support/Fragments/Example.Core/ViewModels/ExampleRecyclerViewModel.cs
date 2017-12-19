@@ -13,19 +13,28 @@ namespace Example.Core.ViewModels
 
         public ExampleRecyclerViewModel()
         {
-            Items = new ObservableCollection<ListItem> {
-                new ListItem { Title = "title one" },
-                new ListItem { Title = "title two" },
-                new ListItem { Title = "title three" },
-                new ListItem { Title = "title four" },
-                new ListItem { Title = "title five" }
-            };
+            Items = new ObservableCollection<ListItem>();
+        }
+
+        public override void ViewAppeared()
+        {
+            base.ViewAppeared();
+
+            Task.Run(() =>
+            {
+                Items.Add(new ListItem { Title = "title one" });
+                Items.Add(new ListItem { Title = "title two" });
+                Items.Add(new ListItem { Title = "title three" });
+                Items.Add(new ListItem { Title = "title four" });
+                Items.Add(new ListItem { Title = "title five" });
+            });
         }
 
         private ObservableCollection<ListItem> _items;
         public ObservableCollection<ListItem> Items
         {
-            get {
+            get
+            {
                 return _items;
             }
             set

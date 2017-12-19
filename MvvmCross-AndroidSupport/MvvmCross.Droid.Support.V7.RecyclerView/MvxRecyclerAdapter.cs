@@ -9,6 +9,8 @@ using System;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Windows.Input;
+using Android.App;
+using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding;
@@ -26,7 +28,7 @@ using Object = Java.Lang.Object;
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerAdapter")]
-    public class MvxRecyclerAdapter 
+    public class MvxRecyclerAdapter
         : Android.Support.V7.Widget.RecyclerView.Adapter, IMvxRecyclerAdapter, IMvxRecyclerAdapterBindableHolder
     {
         private readonly IMvxAndroidBindingContext _bindingContext;
@@ -104,7 +106,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             get { return _itemsSource; }
             set { SetItemsSource(value); }
         }
-        
+
         public virtual IMvxTemplateSelector ItemTemplateSelector
         {
             get
@@ -151,7 +153,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         public override Android.Support.V7.Widget.RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             var itemBindingContext = new MvxAndroidBindingContext(parent.Context, BindingContext.LayoutInflaterHolder);
-            
+
             var vh = new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewType, itemBindingContext), itemBindingContext)
             {
                 Click = ItemClick,
@@ -241,7 +243,15 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            NotifyDataSetChanged(e);
+            if (Looper.MainLooper == Looper.MyLooper())
+            {
+                NotifyDataSetChanged(e);
+            }
+            else
+            {
+                var h = new Handler(Looper.MainLooper);
+                h.Post(() => NotifyDataSetChanged(e));
+            }
         }
 
         public virtual void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)
