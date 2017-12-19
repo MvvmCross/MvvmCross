@@ -2,7 +2,7 @@
 #tool nuget:?package=gitlink&version=2.4.0
 #tool nuget:?package=vswhere
 #tool nuget:?package=NUnit.ConsoleRunner
-#addin nuget:?package=Cake.Incubator&version=1.5.0
+#addin nuget:?package=Cake.Incubator&version=1.6.0
 #addin nuget:?package=Cake.Git&version=0.16.0
 #addin nuget:?package=Polly
 
