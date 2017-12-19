@@ -4,6 +4,7 @@ using MvvmCross.Droid.Views;
 
 namespace Playground.Forms.Droid
 {
+    // No Splash Screen: To remove splash screen, remove this class and uncomment lines in MainActivity
     [Activity(
         Label = "Playground.Forms"
         , MainLauncher = true
