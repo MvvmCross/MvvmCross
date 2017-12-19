@@ -36,6 +36,11 @@ This package contains MvvmCross to use with Xamarin.Forms</description>
 		<!-- touch -->
 		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.*" target="lib\Xamarin.iOS10" />
 		<file src="..\bin\Release\Mvx\iOS\MvvmCross.Forms.iOS.*" target="lib\Xamarin.iOS10" />
+        
+        <!-- mac -->
+		<file src="..\bin\Release\Mvx\Mac\MvvmCross.Forms.Mac.*" target="lib\Xamarin.Mac20" />
+		<file src="..\bin\Release\Mvx\Portable\MvvmCross.Forms.*" target="lib\Xamarin.Mac20" />
+
 	</files>
 </package>
 

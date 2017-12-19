@@ -23,21 +23,24 @@ namespace MvvmCross.Mac.Platform
     public abstract class MvxMacSetup
         : MvxSetup
     {
-        private readonly MvxApplicationDelegate _applicationDelegate;
+        private readonly IMvxApplicationDelegate _applicationDelegate;
         private readonly NSWindow _window;
 
         private IMvxMacViewPresenter _presenter;
 
-        protected MvxMacSetup(MvxApplicationDelegate applicationDelegate, NSWindow window)
+        protected MvxMacSetup(IMvxApplicationDelegate applicationDelegate)
         {
-            _window = window;
             _applicationDelegate = applicationDelegate;
         }
 
-        protected MvxMacSetup(MvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter)
+        protected MvxMacSetup(IMvxApplicationDelegate applicationDelegate, NSWindow window) : this (applicationDelegate)
+        {
+            _window = window;
+        }
+
+        protected MvxMacSetup(IMvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter) : this(applicationDelegate)
         {
             _presenter = presenter;
-            _applicationDelegate = applicationDelegate;
         }
 
         protected NSWindow Window
@@ -45,7 +48,7 @@ namespace MvvmCross.Mac.Platform
             get { return _window; }
         }
 
-        protected MvxApplicationDelegate ApplicationDelegate
+        protected IMvxApplicationDelegate ApplicationDelegate
         {
             get { return _applicationDelegate; }
         }
