@@ -11,15 +11,9 @@ namespace Playground.Mac
     [Register("AppDelegate")]
     public class AppDelegate : MvxApplicationDelegate
     {
-        public AppDelegate()
-        {
-        }
-
         public override void DidFinishLaunching(NSNotification notification)
         {
-            var presenter = new MvxMacViewPresenter(this);
-
-            var setup = new Setup(this, presenter);
+            var setup = new Setup(this);
             setup.Initialize();
 
             var startup = Mvx.Resolve<IMvxAppStart>();
