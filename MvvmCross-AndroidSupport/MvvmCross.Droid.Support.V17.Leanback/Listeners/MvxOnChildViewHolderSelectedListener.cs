@@ -18,7 +18,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Listeners
 		{
 			base.OnChildViewHolderSelected(parent, child, position, subposition);
 
-			var adapter = parent.GetAdapter() as MvxRecyclerAdapter;
+			var adapter = parent.GetAdapter() as IMvxRecyclerAdapter;
 			var item = adapter?.GetItem(position);
 
 			if (item == null)
