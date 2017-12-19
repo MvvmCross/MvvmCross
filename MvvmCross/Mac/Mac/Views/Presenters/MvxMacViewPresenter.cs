@@ -64,7 +64,7 @@ namespace MvvmCross.Mac.Views.Presenters
 
         protected virtual List<NSWindow> Windows => NSApplication.SharedApplication.Windows.ToList();
 
-        public MvxMacViewPresenter(NSApplicationDelegate applicationDelegate)
+        public MvxMacViewPresenter(INSApplicationDelegate applicationDelegate)
         {
             _applicationDelegate = applicationDelegate;
         }

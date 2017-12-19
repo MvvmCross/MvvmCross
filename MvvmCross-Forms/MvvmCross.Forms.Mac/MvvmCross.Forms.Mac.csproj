@@ -75,6 +75,10 @@
     <Compile Include="..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Bindings\MvxFormsMacBindingBuilder.cs" />
+    <Compile Include="Platform\MvxFormsMacSetup.cs" />
+    <Compile Include="Views\MvxFormsMacViewPresenter.cs" />
+    <Compile Include="Platform\MvxFormsApplicationDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\Mac\Mac\MvvmCross.Mac.csproj">
@@ -105,9 +109,18 @@
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>MvvmCross.Binding</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\MvvmCross\Core\Localization\MvvmCross.Localization.csproj">
+      <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
+      <Name>MvvmCross.Localization</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Bindings\" />
+    <Folder Include="Platform\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

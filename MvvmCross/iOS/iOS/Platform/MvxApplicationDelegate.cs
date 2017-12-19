@@ -41,10 +41,6 @@ namespace MvvmCross.iOS.Platform
             handler?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 
-        #region IMvxLifetime implementation
-
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
-
-        #endregion IMvxLifetime implementation
     }
 }
