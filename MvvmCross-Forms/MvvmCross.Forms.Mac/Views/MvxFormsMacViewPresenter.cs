@@ -78,7 +78,7 @@ namespace MvvmCross.Forms.Mac.Presenters
 
         public virtual bool ClosePlatformViews()
         {
-            return true;
+            return false;
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
