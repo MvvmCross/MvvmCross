@@ -6,17 +6,16 @@
 // Project Lead - Tomasz Cielecki, @cheesebaron, mvxplugins@ostebaronen.dk
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 
-using System;
-using System.Collections.Generic;
-using System.Reflection;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Views;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
-using MvvmCross.Forms.Views.Attributes;
 using MvvmCross.Platform;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 
 namespace MvvmCross.Forms.Droid.Views
@@ -46,7 +45,7 @@ namespace MvvmCross.Forms.Droid.Views
                     _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder, attributeTypesToActionsDictionary: AttributeTypesToActionsDictionary);
                     _formsPagePresenter.ClosePlatformViews = ClosePlatformViews;
                     _formsPagePresenter.ShowPlatformHost = ShowPlatformHost;
-                    Mvx.RegisterSingleton<IMvxFormsPagePresenter>(_formsPagePresenter);
+                    Mvx.RegisterSingleton(_formsPagePresenter);
                 }
                 return _formsPagePresenter;
             }
@@ -59,17 +58,6 @@ namespace MvvmCross.Forms.Droid.Views
         public override void Show(MvxViewModelRequest request)
         {
             FormsPagePresenter.Show(request);
-            //var action = GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute);
-
-            //if (FormsApplication.MainPage == null && attribute is MvxPagePresentationAttribute)
-            //{
-            //    if(CurrentActivity is MvxFormsAppCompatActivity appCompatActivity)
-            //        appCompatActivity.InitializeForms(null);
-            //    else if(CurrentActivity is MvxFormsApplicationActivity activity)
-            //        activity.InitializeForms(null);
-            //}
-
-            //action.ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
 
         public override void RegisterAttributeTypes()
