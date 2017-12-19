@@ -9,16 +9,14 @@ namespace Playground.Mac
 {
     public class Setup : MvxMacSetup
     {
-        public Setup(MvxApplicationDelegate appDelegate, IMvxMacViewPresenter presenter)
-            : base(appDelegate, presenter)
+        public Setup(IMvxApplicationDelegate applicationDelegate) : base(applicationDelegate)
         {
+            MvxWindowPresentationAttribute.DefaultWidth = 250;
+            MvxWindowPresentationAttribute.DefaultHeight = 250;
         }
 
         protected override IMvxApplication CreateApp()
         {
-            MvxWindowPresentationAttribute.DefaultWidth = 250;
-            MvxWindowPresentationAttribute.DefaultHeight = 250;
-
             return new App();
         }
     }

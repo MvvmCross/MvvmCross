@@ -19,7 +19,7 @@ using Xamarin.Forms.Platform.iOS;
 
 namespace MvvmCross.Forms.iOS
 {
-    public class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate, IMvxLifetime
+    public class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {
         private UIWindow _window;
         public override UIWindow Window

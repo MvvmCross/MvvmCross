@@ -78,6 +78,7 @@
     <Compile Include="Bindings\MvxFormsMacBindingBuilder.cs" />
     <Compile Include="Platform\MvxFormsMacSetup.cs" />
     <Compile Include="Views\MvxFormsMacViewPresenter.cs" />
+    <Compile Include="Platform\MvxFormsApplicationDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\Mac\Mac\MvvmCross.Mac.csproj">

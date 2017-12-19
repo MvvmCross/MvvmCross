@@ -28,16 +28,19 @@ namespace MvvmCross.Mac.Platform
 
         private IMvxMacViewPresenter _presenter;
 
-        protected MvxMacSetup(IMvxApplicationDelegate applicationDelegate, NSWindow window)
+        protected MvxMacSetup(IMvxApplicationDelegate applicationDelegate)
         {
-            _window = window;
             _applicationDelegate = applicationDelegate;
         }
 
-        protected MvxMacSetup(IMvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter)
+        protected MvxMacSetup(IMvxApplicationDelegate applicationDelegate, NSWindow window) : this (applicationDelegate)
+        {
+            _window = window;
+        }
+
+        protected MvxMacSetup(IMvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter) : this(applicationDelegate)
         {
             _presenter = presenter;
-            _applicationDelegate = applicationDelegate;
         }
 
         protected NSWindow Window
