@@ -122,11 +122,11 @@ namespace MvvmCross.Droid.Views
                 });
         }
 
-        public override MvxBasePresentationAttribute GetPresentationAttribute(Type viewModelType)
+        public override MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request)
         {
-            var viewType = ViewsContainer.GetViewType(viewModelType);
+            var viewType = ViewsContainer.GetViewType(request.ViewModelType);
 
-            var overrideAttribute = GetOverridePresentationAttribute(viewModelType, viewType);
+            var overrideAttribute = GetOverridePresentationAttribute(request, viewType);
             if (overrideAttribute != null)
                 return overrideAttribute;
 
@@ -175,7 +175,7 @@ namespace MvvmCross.Droid.Views
                 return attribute;
             }
 
-            return CreatePresentationAttribute(viewModelType, viewType);
+            return CreatePresentationAttribute(request.ViewModelType, viewType);
         }
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
@@ -208,7 +208,7 @@ namespace MvvmCross.Droid.Views
 
         public override void Show(MvxViewModelRequest request)
         {
-            GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
+            GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
 
         #region Show implementations
@@ -437,7 +437,7 @@ namespace MvvmCross.Droid.Views
 
         public override void Close(IMvxViewModel viewModel)
         {
-            GetPresentationAttributeAction(viewModel.GetType(), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);
+            GetPresentationAttributeAction(new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);
         }
 
         #region Close implementations
