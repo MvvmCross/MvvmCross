@@ -10,6 +10,7 @@ using Playground.Core.ViewModels;
 using MvvmCross.Binding.BindingContext;
 using System.Linq;
 using MvvmCross.Core.Views;
+using MvvmCross.Core.ViewModels;
 
 namespace Playground.Mac
 {
@@ -47,7 +48,7 @@ namespace Playground.Mac
             base.ViewDidDisappear();
         }
 
-        public MvxBasePresentationAttribute PresentationAttribute()
+        public MvxBasePresentationAttribute PresentationAttribute(MvxViewModelRequest request)
         {
             if (!NSApplication.SharedApplication.Windows.Any())
                 return null;
