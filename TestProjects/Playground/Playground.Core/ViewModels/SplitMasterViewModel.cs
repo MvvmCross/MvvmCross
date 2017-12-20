@@ -18,6 +18,8 @@ namespace Playground.Core.ViewModels
             ShowRootViewModel = new MvxAsyncCommand(async () => await _navigationService.Navigate<RootViewModel>());
         }
 
+        public string PaneText => "Text for the Master Pane";
+
         public IMvxAsyncCommand OpenDetailCommand { get; private set; }
 
         public IMvxAsyncCommand OpenDetailNavCommand { get; private set; }
