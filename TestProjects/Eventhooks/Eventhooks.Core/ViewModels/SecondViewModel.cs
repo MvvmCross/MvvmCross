@@ -10,7 +10,7 @@ namespace Eventhooks.Core.ViewModels
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "2nd View is created");
         }
 
-        public override void ViewDestroy()
+        public override void ViewDestroy(bool viewFinishing = true)
         {
             MvxTrace.Trace(MvxTraceLevel.Diagnostic, "2nd View is destroyed");
         }
