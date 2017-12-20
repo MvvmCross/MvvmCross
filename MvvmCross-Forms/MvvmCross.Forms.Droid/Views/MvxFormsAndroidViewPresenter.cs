@@ -76,7 +76,7 @@ namespace MvvmCross.Forms.Droid.Views
         public virtual bool ClosePlatformViews()
         {
             CloseFragments();
-            if (!(CurrentActivity is MvxFormsAppCompatActivity || CurrentActivity is MvxFormsApplicationActivity) && 
+            if (!(CurrentActivity is MvxFormsAppCompatActivity || CurrentActivity is MvxFormsApplicationActivity) &&
                 !(CurrentActivity is MvxSplashScreenActivity || CurrentActivity is MvxSplashScreenAppCompatActivity))
                 CurrentActivity?.Finish();
             return true;
