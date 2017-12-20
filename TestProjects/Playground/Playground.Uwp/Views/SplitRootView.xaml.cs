@@ -16,16 +16,6 @@ namespace Playground.Uwp.Views
         public SplitRootView()
         {
             this.InitializeComponent();
-            this.DataContextChanged += OnDataContextChanged;
-        }
-
-        private void OnDataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
-        {
-            if (DataContext is SplitRootViewModel viewModel)
-            {
-                viewModel.ShowInitialMenuCommand.Execute();
-                viewModel.ShowDetailCommand.Execute();
-            }
         }
     }
 }

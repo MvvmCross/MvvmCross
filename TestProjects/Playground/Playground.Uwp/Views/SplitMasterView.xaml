@@ -5,5 +5,8 @@
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:views="using:MvvmCross.Uwp.Views"
                       mc:Ignorable="d">
-    <TextBlock Text="Pane" />
+    <StackPanel>
+        <TextBlock Text="Pane" />
+        <TextBlock Text="{Binding PaneText}" />
+    </StackPanel>
 </views:MvxWindowsPage>
