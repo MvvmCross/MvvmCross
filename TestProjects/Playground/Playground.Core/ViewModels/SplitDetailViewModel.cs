@@ -16,6 +16,8 @@ namespace Playground.Core.ViewModels
 
         public IMvxAsyncCommand ShowChildCommand { get; private set; }
 
+        public string ContentText => "Text for the Content Area";
+
         public override void ViewAppeared()
         {
             base.ViewAppeared();

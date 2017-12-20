@@ -130,11 +130,25 @@ namespace MvvmCross.Uwp.Views
 
                 if (attribute.Position == SplitPanePosition.Content)
                 {
-                    splitView.Content = (UIElement)Activator.CreateInstance(viewType);
+                    var nestedFrame = splitView.Content as Frame;
+                    if (nestedFrame == null)
+                    {
+                        nestedFrame = new Frame();
+                        splitView.Content = nestedFrame;
+                    }
+                    var requestText = GetRequestText(request);
+                    nestedFrame.Navigate(viewType, requestText);
                 }
                 else if (attribute.Position == SplitPanePosition.Pane)
                 {
-                    splitView.Pane = (UIElement)Activator.CreateInstance(viewType);
+                    var nestedFrame = splitView.Pane as Frame;
+                    if (nestedFrame == null)
+                    {
+                        nestedFrame = new Frame();
+                        splitView.Pane = nestedFrame;
+                    }
+                    var requestText = GetRequestText(request);
+                    nestedFrame.Navigate(viewType, requestText);
                 }
             }
         }
