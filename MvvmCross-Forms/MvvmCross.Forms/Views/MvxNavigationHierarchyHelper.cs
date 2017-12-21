@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Xamarin.Forms;
 using System.Text;
@@ -7,11 +6,6 @@ namespace MvvmCross.Forms.Views
 {
     public static class MvxNavigationHierarchyHelper
     {
-        public static bool PageMatchesViewModel(this Page page, Type viewModelType)
-        {
-            return (page as IMvxPage)?.ViewModel.GetType() == viewModelType;
-        }
-
         public static string Hierarchy(this Application application)
         {
             var sb = new StringBuilder();
