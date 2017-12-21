@@ -35,7 +35,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     return activity.SupportFragmentManager;
                 MvxTrace.Trace("Cannot use Android Support Fragment within non AppCompat Activity");
                 return null;
-                //throw new InvalidCastException("Cannot use Android Support Fragment within non AppCompat Activity");
             }
         }
 
