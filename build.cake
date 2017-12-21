@@ -130,6 +130,8 @@ Task("GitLink")
         "MvvmCross.iOS.Support.XamarinSidebarSample.Core",
         "MvvmCross.iOS.Support.XamarinSidebarSample.iOS",
         "mvvmcross.codeanalysis.vsix",
+        "Example.Core",
+        "Example.Droid",
         "Eventhooks.Core",
         "Eventhooks.Droid",
         "Eventhooks.iOS",
