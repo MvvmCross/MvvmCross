@@ -104,6 +104,12 @@
       <HintPath>..\..\..\packages\Xamarin.Forms.2.5.0.91635\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.iOS" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.10.0.3\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -175,6 +181,18 @@
     <ProjectReference Include="..\Playground.Forms.UI\Playground.Forms.UI.csproj">
       <Project>{545c1972-05dc-4aec-87cb-70ccd3296f8d}</Project>
       <Name>Playground.Forms.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross\Core\Localization\MvvmCross.Localization.csproj">
+      <Project>{D89351C1-D48F-4AD0-A0B9-353A93425AB7}</Project>
+      <Name>MvvmCross.Localization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross-Plugins\Json\MvvmCross.Plugins.Json\MvvmCross.Plugins.Json.csproj">
+      <Project>{D518E8E6-3CE6-4706-A286-E8BC6A2F64DC}</Project>
+      <Name>MvvmCross.Plugins.Json</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross-Plugins\JsonLocalization\MvvmCross.Plugins.JsonLocalization\MvvmCross.Plugins.JsonLocalization.csproj">
+      <Project>{71D719FA-95B0-4A05-B064-AB8D0B7085DF}</Project>
+      <Name>MvvmCross.Plugins.JsonLocalization</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

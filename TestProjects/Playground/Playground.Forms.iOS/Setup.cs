@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UIKit;
+using MvvmCross.Plugins.Json;
 
 namespace Playground.Forms.iOS
 {
@@ -30,5 +31,12 @@ namespace Playground.Forms.iOS
         protected override MvxFormsApplication CreateFormsApplication() => new FormsApp();
 
         protected override IMvxApplication CreateApp() => new Core.App();
+
+        protected override void PerformBootstrapActions()
+        {
+            base.PerformBootstrapActions();
+
+            PluginLoader.Instance.EnsureLoaded();
+        }
     }
 }

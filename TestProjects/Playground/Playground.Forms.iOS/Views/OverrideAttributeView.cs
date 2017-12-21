@@ -12,6 +12,10 @@ namespace Playground.iOS.Forms.Views
     [MvxFromStoryboard("Main")]
     public partial class OverrideAttributeView : MvxViewController<OverrideAttributeViewModel>, IMvxOverridePresentationAttribute
     {
+        public OverrideAttributeView()
+        {
+        }
+
         public OverrideAttributeView(IntPtr handle) : base(handle)
         {
         }
