@@ -209,7 +209,7 @@ namespace MvvmCross.Forms.Views
 #endif
         }
 
-        private bool RemoveByViewModel(INavigation navigation, Type viewModelToRemove)
+        protected virtual bool RemoveByViewModel(INavigation navigation, Type viewModelToRemove)
         {
             var page = navigation.NavigationStack
                              .OfType<IMvxPage>()
@@ -223,7 +223,7 @@ namespace MvvmCross.Forms.Views
             return false;
         }
 
-        private async Task<bool> PopModalToViewModel(INavigation navigation, MvxPopPresentationHint popHint)
+        protected virtual async Task<bool> PopModalToViewModel(INavigation navigation, MvxPopPresentationHint popHint)
         {
             // Need to check the modal stack first
             while (navigation.ModalStack.Any())
@@ -246,7 +246,7 @@ namespace MvvmCross.Forms.Views
             return false;
         }
 
-        private async Task<bool> PopToViewModel(INavigation navigation, Type viewModelType, bool animate = false)
+        protected virtual async Task<bool> PopToViewModel(INavigation navigation, Type viewModelType, bool animate = false)
         {
             while (navigation.NavigationStack.Any())
             {
