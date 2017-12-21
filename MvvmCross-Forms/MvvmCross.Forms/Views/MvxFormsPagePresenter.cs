@@ -170,23 +170,9 @@ namespace MvvmCross.Forms.Views
             }
             if (hint is MvxPopPresentationHint popHint)
             {
-                // Need to check the modal stack first
-                while (navigation.ModalStack.Any())
-                {
-                    var modalPage = navigation.ModalStack.Last();
-                    if (modalPage.PageMatchesViewModel(popHint.ViewModelToPopTo))
-                        return;
+                var matched = await PopModalToMatchingViewModel(navigation,popHint);
+                if (matched) return;
 
-                    var modalNavPage = GetPageOfType<NavigationPage>(modalPage);
-                    if (modalNavPage != null)
-                    {
-                        var matched = await PopToMatchingViewModel(modalNavPage.Navigation, popHint.ViewModelToPopTo, popHint.Animated);
-                        if (matched)
-                            return;
-                    }
-
-                    await navigation.PopModalAsync();
-                }
 
                 await PopToMatchingViewModel(navigation, popHint.ViewModelToPopTo, popHint.Animated);
                 return;
@@ -223,6 +209,29 @@ namespace MvvmCross.Forms.Views
 #if DEBUG // Only showing this when debugging MVX
             MvxTrace.Trace(FormsApplication.Hierarchy());
 #endif
+        }
+
+        private async Task<bool> PopModalToMatchingViewModel(INavigation navigation, MvxPopPresentationHint popHint)
+        {
+            // Need to check the modal stack first
+            while (navigation.ModalStack.Any())
+            {
+                var modalPage = navigation.ModalStack.Last();
+                if (modalPage.PageMatchesViewModel(popHint.ViewModelToPopTo))
+                    return true;
+
+                var modalNavPage = GetPageOfType<NavigationPage>(modalPage);
+                if (modalNavPage != null)
+                {
+                    var matched = await PopToMatchingViewModel(modalNavPage.Navigation, popHint.ViewModelToPopTo, popHint.Animated);
+                    if (matched)
+                        return true;
+                }
+
+                await navigation.PopModalAsync();
+            }
+
+            return false;
         }
 
         private async Task<bool> PopToMatchingViewModel(INavigation navigation, Type viewModelType, bool animate = false)
