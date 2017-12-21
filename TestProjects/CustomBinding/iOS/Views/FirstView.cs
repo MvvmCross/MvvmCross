@@ -14,10 +14,15 @@ namespace MvvmCross.TestProjects.CustomBinding.iOS.Views
     [MvxRootPresentation]
     public class FirstView : MvxViewController
     {
+        private UIDatePicker _datePicker;
+
         public override void ViewDidLoad()
         {
             View = new UIView() { BackgroundColor = UIColor.White };
             base.ViewDidLoad();
+
+            _datePicker = new UIDatePicker();
+            View.AddSubview(_datePicker);
 
             // ios7 layout
             if (RespondsToSelector(new Selector("edgesForExtendedLayout")))
@@ -31,6 +36,7 @@ namespace MvvmCross.TestProjects.CustomBinding.iOS.Views
             var set = this.CreateBindingSet<FirstView, FirstViewModel>();
             set.Bind(binaryEdit).For("MyCount").To(vm => vm.Counter);
             set.Bind(textField).To(vm => vm.Counter);
+            set.Bind(_datePicker).For(v => v.Date).To(vm => vm.Date);
             set.Apply();
 
             var tap = new UITapGestureRecognizer(() => textField.ResignFirstResponder());
