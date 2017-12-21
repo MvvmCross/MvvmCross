@@ -170,11 +170,11 @@ namespace MvvmCross.Forms.Views
             }
             if (hint is MvxPopPresentationHint popHint)
             {
-                var matched = await PopModalToMatchingViewModel(navigation,popHint);
+                var matched = await PopModalToViewModel(navigation,popHint);
                 if (matched) return;
 
 
-                await PopToMatchingViewModel(navigation, popHint.ViewModelToPopTo, popHint.Animated);
+                await PopToViewModel(navigation, popHint.ViewModelToPopTo, popHint.Animated);
                 return;
             }
             if (hint is MvxRemovePresentationHint removeHint)
@@ -211,7 +211,7 @@ namespace MvvmCross.Forms.Views
 #endif
         }
 
-        private async Task<bool> PopModalToMatchingViewModel(INavigation navigation, MvxPopPresentationHint popHint)
+        private async Task<bool> PopModalToViewModel(INavigation navigation, MvxPopPresentationHint popHint)
         {
             // Need to check the modal stack first
             while (navigation.ModalStack.Any())
@@ -223,7 +223,7 @@ namespace MvvmCross.Forms.Views
                 var modalNavPage = GetPageOfType<NavigationPage>(modalPage);
                 if (modalNavPage != null)
                 {
-                    var matched = await PopToMatchingViewModel(modalNavPage.Navigation, popHint.ViewModelToPopTo, popHint.Animated);
+                    var matched = await PopToViewModel(modalNavPage.Navigation, popHint.ViewModelToPopTo, popHint.Animated);
                     if (matched)
                         return true;
                 }
@@ -234,7 +234,7 @@ namespace MvvmCross.Forms.Views
             return false;
         }
 
-        private async Task<bool> PopToMatchingViewModel(INavigation navigation, Type viewModelType, bool animate = false)
+        private async Task<bool> PopToViewModel(INavigation navigation, Type viewModelType, bool animate = false)
         {
             while (navigation.NavigationStack.Any())
             {
