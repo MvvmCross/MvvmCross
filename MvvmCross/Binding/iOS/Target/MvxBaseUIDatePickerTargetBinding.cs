@@ -19,7 +19,7 @@ namespace MvvmCross.Binding.iOS.Target
     public abstract class MvxBaseUIDatePickerTargetBinding : MvxPropertyInfoTargetBinding<UIDatePicker>
     {
         private readonly NSTimeZone _systemTimeZone;
-        private MvxWeakEventSubscription<UIDatePicker, EventArgs> _subscription;
+        private MvxWeakEventSubscription<UIDatePicker> _subscription;
 
         protected MvxBaseUIDatePickerTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
@@ -27,7 +27,7 @@ namespace MvvmCross.Binding.iOS.Target
             _systemTimeZone = NSTimeZone.SystemTimeZone;
         }
 
-        private void DatePickerOnValueChanged(object sender, EventArgs eventArgs)
+        private void DatePickerOnValueChanged(object sender, EventArgs args)
         {
             var view = View;
             if (view == null) return;
@@ -49,9 +49,7 @@ namespace MvvmCross.Binding.iOS.Target
             // Only listen for value changes if we are binding against one of the value-derived properties.
             else if (TargetPropertyInfo.Name == nameof(UIDatePicker.Date) || TargetPropertyInfo.Name == nameof(UIDatePicker.CountDownDuration))
             {
-                _subscription = datePicker.WeakSubscribe<UIDatePicker, EventArgs>(
-                    nameof(datePicker.ValueChanged),
-                    DatePickerOnValueChanged);
+                _subscription = datePicker.WeakSubscribe(nameof(datePicker.ValueChanged), DatePickerOnValueChanged);
             }
         }
 
