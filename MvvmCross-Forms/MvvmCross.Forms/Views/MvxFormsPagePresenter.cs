@@ -229,7 +229,7 @@ namespace MvvmCross.Forms.Views
             while (navigation.ModalStack.Any())
             {
                 var modalPage = navigation.ModalStack.Last();
-                if (modalPage.PageMatchesViewModel(popHint.ViewModelToPopTo))
+                if (modalPage.IsViewModelTypeOf(popHint.ViewModelToPopTo))
                     return true;
 
                 var modalNavPage = GetPageOfType<NavigationPage>(modalPage);
