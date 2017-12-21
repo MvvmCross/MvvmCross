@@ -60,7 +60,7 @@ namespace MvvmCross.Forms.Mac.Presenters
 
         public override void Show(MvxViewModelRequest request)
         {
-            base.Show(request);
+            FormsPagePresenter.Show(request);
         }
 
         public override void RegisterAttributeTypes()
@@ -84,6 +84,11 @@ namespace MvvmCross.Forms.Mac.Presenters
         public override void ChangePresentation(MvxPresentationHint hint)
         {
             FormsPagePresenter.ChangePresentation(hint);
+        }
+
+        public override void Close(IMvxViewModel viewModel)
+        {
+            FormsPagePresenter.Close(viewModel);
         }
     }
 }
