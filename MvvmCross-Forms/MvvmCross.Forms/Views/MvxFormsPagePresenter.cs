@@ -179,16 +179,14 @@ namespace MvvmCross.Forms.Views
             }
             if (hint is MvxRemovePresentationHint removeHint)
             {
-                if (navigation.ModalStack.Any())
+                foreach (var modal in navigation.ModalStack)
                 {
-                    MvxTrace.Trace("Unable to remove page whilst modal is visible");
-                    return;
+                    var removed = RemoveByViewModel(modal.Navigation, removeHint.ViewModelToRemove);
+                    if (removed)
+                        return;
                 }
-                var page = navigation.NavigationStack
-                                 .OfType<IMvxPage>()
-                                 .FirstOrDefault(view => view.ViewModel.GetType() == removeHint.ViewModelToRemove) as Page;
-                if (page != null)
-                    navigation.RemovePage(page);
+
+                RemoveByViewModel(navigation, removeHint.ViewModelToRemove);
                 return;
             }
             if (hint is MvxPagePresentationHint pageHint)
@@ -209,6 +207,20 @@ namespace MvvmCross.Forms.Views
 #if DEBUG // Only showing this when debugging MVX
             MvxTrace.Trace(FormsApplication.Hierarchy());
 #endif
+        }
+
+        private bool RemoveByViewModel(INavigation navigation, Type viewModelToRemove)
+        {
+            var page = navigation.NavigationStack
+                             .OfType<IMvxPage>()
+                             .FirstOrDefault(view => view.ViewModel.GetType() == viewModelToRemove) as Page;
+            if (page != null)
+            {
+                navigation.RemovePage(page);
+                return true;
+            }
+
+            return false;
         }
 
         private async Task<bool> PopModalToViewModel(INavigation navigation, MvxPopPresentationHint popHint)
