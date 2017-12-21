@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace Playground.Forms.Pages
 {
-    [MvxContentPagePresentation(WrapInNavigationPage = true, NoHistory = true)]
+    [MvxContentPagePresentation(WrapInNavigationPage = true, NoHistory = false)]
     public partial class ChildPage : MvxContentPage<ChildViewModel>
     {
         public ChildPage()
