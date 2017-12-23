@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace MvvmCross.Binding.Bindings.Target
 {
-    public class MvxEventNameTargetBinding : MvxTargetBinding
+    public class MvxEventNameTargetBinding<TEventArgs> : MvxTargetBinding
     {
         private readonly EventInfo _targetEventInfo;
         private readonly bool _useEventArgsAsCommandParameter;
@@ -20,7 +20,7 @@ namespace MvvmCross.Binding.Bindings.Target
             // "Attempting to JIT compile method '(wrapper delegate-invoke) <Module>:invoke_void__this___UIControl_EventHandler (UIKit.UIControl,System.EventHandler)' while running with --aot-only."
             // see https://bugzilla.xamarin.com/show_bug.cgi?id=3682
             var addMethod = _targetEventInfo.AddMethod;
-            addMethod.Invoke(target, new object[] { new EventHandler(HandleEvent) });
+            addMethod.Invoke(target, new object[] { new EventHandler<TEventArgs>(HandleEvent) });
         }
 
         public override Type TargetType { get; } = typeof(ICommand);
@@ -35,14 +35,14 @@ namespace MvvmCross.Binding.Bindings.Target
                 if (target != null)
                 {
                     var removeMethod = _targetEventInfo.RemoveMethod;
-                    removeMethod.Invoke(target, new object[] { new EventHandler(HandleEvent) });
+                    removeMethod.Invoke(target, new object[] { new EventHandler<TEventArgs>(HandleEvent) });
                 }
             }
 
             base.Dispose(isDisposing);
         }
 
-        private void HandleEvent(object sender, EventArgs parameter)
+        private void HandleEvent(object sender, TEventArgs parameter)
         {
             var commandParameter = _useEventArgsAsCommandParameter ? (object)parameter : null;
 
