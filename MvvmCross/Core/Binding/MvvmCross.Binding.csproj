@@ -193,6 +193,7 @@
     <Compile Include="Combiners\MvxLessThanValueCombiner.cs" />
     <Compile Include="Combiners\MvxNotEqualToPairwiseValueCombiner.cs" />
     <Compile Include="Bindings\Target\MvxEventNameTargetBinding.cs" />
+    <Compile Include="Bindings\Target\MvxEventNameTargetBindingOfTEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
