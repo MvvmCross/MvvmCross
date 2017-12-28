@@ -3,6 +3,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Uwp;
 using MvvmCross.Platform;
 using XamlControls = Windows.UI.Xaml.Controls;
+using MvvmCross.Forms.Platform;
 
 namespace PageRendererExample.WindowsUWP
 {
@@ -18,6 +19,11 @@ namespace PageRendererExample.WindowsUWP
         {
             Mvx.LazyConstructAndRegisterSingleton<IImageHolder, ImageHolder>();
             return new CoreApp();
+        }
+
+        protected override MvxFormsApplication CreateFormsApplication()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

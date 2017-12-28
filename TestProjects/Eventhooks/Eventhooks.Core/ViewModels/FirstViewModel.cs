@@ -1,4 +1,4 @@
-﻿using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Platform;
 
 namespace Eventhooks.Core.ViewModels
@@ -11,8 +11,8 @@ namespace Eventhooks.Core.ViewModels
 	        MvxTrace.Trace(MvxTraceLevel.Diagnostic, "View is created");
 	    }
 
-	    public override void ViewDestroy()
-	    {
+	    public override void ViewDestroy(bool viewFinishing = true)
+        {
 	        MvxTrace.Trace(MvxTraceLevel.Diagnostic, "View is destroyed");
 	    }
 
