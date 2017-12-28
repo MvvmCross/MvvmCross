@@ -1,26 +1,20 @@
 ﻿using System;
-using System.Reflection;
 using System.Windows.Input;
+using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Bindings.Target
 {
     public class MvxEventNameTargetBinding<TEventArgs> : MvxTargetBinding
     {
-        private readonly EventInfo _targetEventInfo;
         private readonly bool _useEventArgsAsCommandParameter;
+        private readonly IDisposable _eventSubscription;
 
         private ICommand _currentCommand;
 
         public MvxEventNameTargetBinding(object target, string targetEventName, bool useEventArgsAsCommandParameter = true) : base(target)
         {
-            _targetEventInfo = target.GetType().GetTypeInfo().GetDeclaredEvent(targetEventName);
             _useEventArgsAsCommandParameter = useEventArgsAsCommandParameter;
-
-            //  addMethod is used because of error:
-            // "Attempting to JIT compile method '(wrapper delegate-invoke) <Module>:invoke_void__this___UIControl_EventHandler (UIKit.UIControl,System.EventHandler)' while running with --aot-only."
-            // see https://bugzilla.xamarin.com/show_bug.cgi?id=3682
-            var addMethod = _targetEventInfo.AddMethod;
-            addMethod.Invoke(target, new object[] { new EventHandler<TEventArgs>(HandleEvent) });
+            _eventSubscription = target.WeakSubscribe<object, TEventArgs>(targetEventName, HandleEvent);
         }
 
         public override Type TargetType { get; } = typeof(ICommand);
@@ -31,12 +25,7 @@ namespace MvvmCross.Binding.Bindings.Target
         {
             if (isDisposing)
             {
-                var target = Target;
-                if (target != null)
-                {
-                    var removeMethod = _targetEventInfo.RemoveMethod;
-                    removeMethod.Invoke(target, new object[] { new EventHandler<TEventArgs>(HandleEvent) });
-                }
+                _eventSubscription.Dispose();
             }
 
             base.Dispose(isDisposing);

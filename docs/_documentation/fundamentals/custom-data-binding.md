@@ -129,6 +129,10 @@ This class is a subclass of [`MvxConvertingTargetBinding`](#mvxconvertingtargetb
 
 This class is a subclass of [`MvxPropertyInfoTargetBinding`](#mvxpropertyinfotargetbinding), which is a shortcut to adding `TwoWay` bindings based on a specific event. Similarly to `MvxPropertyInfoTargetBinding` it uses the `PropertyInfo` to implement the `SetValue()` method. Additionally it implements the `SubscribeToEvents()` method, based on the assumption that there is an event which is called the same as the name of the property, postfixed with `Changed`. So if your property is called `MyProperty` it assumes that the corresponding event is called `MyPropertChanged`.
 
+#### MvxEventNameTargetBinding
+
+This class is a subclass of [`MvxTargetBinding`](#mvxtargetbinding), which is a shortcut to adding `OneWay` binding to a command based on a specific event. Acceptable event delegates are `EventHandler` and `EventHandler<TEventArgs>` where `TEventArgs` can be any class or structure (with `TEventArgs` you have to use the generic version of this binding). All you have to pass for this binding is the target object and the name of the target event. By default it also passes event handler's `EventArgs` (or `TEventArgs`) as a command parameter, but you can disable it in the constructor.
+
 #### MvxAndroidTargetBinding
 
 This class is a subclass of [`MvxConvertingTargetBinding`](#mvxconvertingtargetbinding), which provides the current `IMvxAndroidGlobals`, to be able to get the current `ApplicationContext` for stuff like getting resources from the Android Resources and other operations which require the `ApplicationContext`.
