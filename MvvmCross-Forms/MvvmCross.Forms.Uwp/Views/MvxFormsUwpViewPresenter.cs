@@ -14,6 +14,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Uwp.Views;
 using System;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Uwp.Presenters
 {
@@ -25,17 +26,11 @@ namespace MvvmCross.Forms.Uwp.Presenters
         {
         }
 
-        public MvxFormsUwpViewPresenter(IMvxWindowsFrame rootFrame, MvxFormsApplication formsApplication) : this(rootFrame)
+        public MvxFormsUwpViewPresenter(IMvxWindowsFrame rootFrame, Application formsApplication) : this(rootFrame)
         {
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
         }
-
-        private MvxFormsApplication _formsApplication;
-        public MvxFormsApplication FormsApplication
-        {
-            get { return _formsApplication; }
-            set { _formsApplication = value; }
-        }
+        public Application FormsApplication { get; set; }
 
         private IMvxFormsPagePresenter _formsPagePresenter;
         public virtual IMvxFormsPagePresenter FormsPagePresenter

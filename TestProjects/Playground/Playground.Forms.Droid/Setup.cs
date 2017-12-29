@@ -9,6 +9,7 @@ using Serilog;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Xamarin.Forms;
 
 namespace Playground.Forms.Droid
 {
@@ -40,7 +41,7 @@ namespace Playground.Forms.Droid
             return new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(FormsApp).GetTypeInfo().Assembly }));
         }
 
-        protected override MvxFormsApplication CreateFormsApplication() => new FormsApp();
+        protected override Application CreateFormsApplication() => new FormsApp();
 
         protected override IMvxApplication CreateApp() => new Core.App(); 
 

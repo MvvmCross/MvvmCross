@@ -1,8 +1,6 @@
-using MvvmCross.Forms.Platform;
-
 namespace Playground.Forms
 {
-    public partial class FormsApp : MvxFormsApplication
+    public partial class FormsApp
     {
         public FormsApp()
         {
