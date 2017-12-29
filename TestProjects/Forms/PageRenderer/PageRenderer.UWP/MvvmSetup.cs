@@ -20,10 +20,5 @@ namespace PageRendererExample.WindowsUWP
             Mvx.LazyConstructAndRegisterSingleton<IImageHolder, ImageHolder>();
             return new CoreApp();
         }
-
-        protected override MvxFormsApplication CreateFormsApplication()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
