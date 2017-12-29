@@ -6,19 +6,13 @@
 // Project Lead - Tomasz Cielecki, @cheesebaron, mvxplugins@ostebaronen.dk
 // Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using AppKit;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
-using MvvmCross.Forms.Views.Attributes;
-using MvvmCross.Mac.Views;
 using MvvmCross.Mac.Views.Presenters;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
+using System;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Mac.Presenters
@@ -27,17 +21,11 @@ namespace MvvmCross.Forms.Mac.Presenters
         : MvxMacViewPresenter
         , IMvxFormsViewPresenter
     {
-        public MvxFormsMacViewPresenter(INSApplicationDelegate applicationDelegate, MvxFormsApplication formsApplication) : base(applicationDelegate)
+        public MvxFormsMacViewPresenter(INSApplicationDelegate applicationDelegate, Application formsApplication) : base(applicationDelegate)
         {
-            FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
+            FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "Application cannot be null");
         }
-
-        private MvxFormsApplication _formsApplication;
-        public MvxFormsApplication FormsApplication
-        {
-            get { return _formsApplication; }
-            set { _formsApplication = value; }
-        }
+        public Application FormsApplication { get; set; }
 
         private IMvxFormsPagePresenter _formsPagePresenter;
         public virtual IMvxFormsPagePresenter FormsPagePresenter

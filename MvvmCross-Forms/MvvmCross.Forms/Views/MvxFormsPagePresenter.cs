@@ -20,7 +20,7 @@ namespace MvvmCross.Forms.Views
         MvxAttributeViewPresenter, IMvxFormsPagePresenter
     {
         public MvxFormsPagePresenter(
-            MvxFormsApplication formsApplication,
+            Application formsApplication,
             IMvxViewsContainer viewsContainer = null,
             IMvxViewModelTypeFinder viewModelTypeFinder = null,
             IMvxViewModelLoader viewModelLoader = null,
@@ -32,13 +32,7 @@ namespace MvvmCross.Forms.Views
             ViewModelLoader = viewModelLoader;
             AttributeTypesToActionsDictionary = attributeTypesToActionsDictionary;
         }
-
-        private MvxFormsApplication _formsApplication;
-        public MvxFormsApplication FormsApplication
-        {
-            get { return _formsApplication; }
-            set { _formsApplication = value; }
-        }
+        public Application FormsApplication { get; set; }
 
         private IMvxViewModelLoader _viewModelLoader;
         public IMvxViewModelLoader ViewModelLoader
