@@ -45,6 +45,7 @@ namespace MvvmCross.Forms.Droid.Views
                     _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder, attributeTypesToActionsDictionary: AttributeTypesToActionsDictionary);
                     _formsPagePresenter.ClosePlatformViews = ClosePlatformViews;
                     _formsPagePresenter.ShowPlatformHost = ShowPlatformHost;
+                    _formsPagePresenter.PlatformCreatePresentationAttribute = CreatePresentationAttribute;
                     Mvx.RegisterSingleton(_formsPagePresenter);
                 }
                 return _formsPagePresenter;
@@ -65,12 +66,6 @@ namespace MvvmCross.Forms.Droid.Views
             base.RegisterAttributeTypes();
 
             FormsPagePresenter.RegisterAttributeTypes();
-        }
-
-        public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
-        {
-            var presentationAttribute = FormsPagePresenter.CreatePresentationAttribute(viewModelType, viewType);
-            return presentationAttribute ?? base.CreatePresentationAttribute(viewModelType, viewType);
         }
 
         public virtual bool ClosePlatformViews()

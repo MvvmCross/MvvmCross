@@ -16,7 +16,9 @@ namespace Playground.Forms.Uwp
     {
         public MainPage()
         {
-            this.InitializeComponent();
+            // This is required so that navigating to a native page and back again doesn't
+            // reload XF
+            NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Required;
 
             InitializeComponent();
 
