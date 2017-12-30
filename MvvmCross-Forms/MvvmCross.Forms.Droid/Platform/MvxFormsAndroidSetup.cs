@@ -7,6 +7,7 @@ using MvvmCross.Droid.Views;
 using MvvmCross.Forms.Droid.Bindings;
 using MvvmCross.Forms.Droid.Views;
 using MvvmCross.Forms.Platform;
+using MvvmCross.Forms.ViewModels;
 using MvvmCross.Forms.Views;
 using MvvmCross.Localization;
 using MvvmCross.Platform;
@@ -106,6 +107,11 @@ namespace MvvmCross.Forms.Droid.Platform
         protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "Activity", "Fragment", "Page");
+        }
+
+        protected override void RegisterViewTypeFinder()
+        {
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewModelTypeFinder, MvxFormsViewModelViewTypeFinder>();
         }
     }    
 }
