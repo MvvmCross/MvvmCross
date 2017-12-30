@@ -24,9 +24,7 @@ namespace MvvmCross.Binding.Bindings.Target
         protected override void Dispose(bool isDisposing)
         {
             if (isDisposing)
-            {
                 _eventSubscription.Dispose();
-            }
 
             base.Dispose(isDisposing);
         }
