@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using AppKit;
 using Xamarin.Forms;
+using MvvmCross.Forms.ViewModels;
 
 namespace MvvmCross.Forms.iOS
 {
@@ -100,6 +101,11 @@ namespace MvvmCross.Forms.iOS
         protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "ViewController", "Page");
+        }
+
+        protected override void RegisterViewTypeFinder()
+        {
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewModelTypeFinder, MvxFormsViewModelViewTypeFinder>();
         }
     }
 }

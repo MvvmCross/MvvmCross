@@ -56,13 +56,7 @@ namespace MvvmCross.Forms.Views
         {
             var page = Activator.CreateInstance(viewType) as Page;
 
-            if (page is IMvxPage contentPage)
-            {
-                if (request is MvxViewModelInstanceRequest instanceRequest)
-                    contentPage.ViewModel = instanceRequest.ViewModelInstance;
-                else
-                    contentPage.ViewModel = ViewModelLoader.LoadViewModel(request, null);
-            }
+            ApplyPageViewModel(page, request);
 
             if (attribute is MvxPagePresentationAttribute pageAttribute)
             {
@@ -73,6 +67,24 @@ namespace MvvmCross.Forms.Views
             }
 
             return page;
+        }
+
+        protected virtual void ApplyPageViewModel(Page page, MvxViewModelRequest request)
+        {
+            IMvxViewModel viewModel;
+            if (request is MvxViewModelInstanceRequest instanceRequest)
+                viewModel = instanceRequest.ViewModelInstance;
+            else
+                viewModel = ViewModelLoader.LoadViewModel(request, null);
+
+            if (page is IMvxView mvxPage)
+            {
+                mvxPage.ViewModel = viewModel;
+            }
+            else
+            {
+                page.BindingContext = viewModel;
+            }
         }
 
         protected virtual Page CloseAndCreatePage(Type view,

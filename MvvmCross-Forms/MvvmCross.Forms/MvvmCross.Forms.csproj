@@ -47,6 +47,7 @@
     <Compile Include="Bindings\MvxFormsBindingCreator.cs" />
     <Compile Include="Bindings\MvxFormsTargetBindingFactoryRegistry.cs" />
     <Compile Include="Bindings\Target\MvxBindablePropertyTargetBinding.cs" />
+    <Compile Include="ViewModels\MvxFormsViewModelViewTypeFinder.cs" />
     <Compile Include="Views\MvxFormsExtensions.cs" />
     <Compile Include="Views\MvxImageView.cs" />
     <Compile Include="Bindings\Target\MvxListViewItemClickPropertyTargetBinding.cs" />
