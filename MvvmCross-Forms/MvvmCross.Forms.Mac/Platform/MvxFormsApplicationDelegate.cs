@@ -31,13 +31,11 @@ namespace MvvmCross.Forms.Mac
         public override void WillBecomeActive(Foundation.NSNotification notification)
         {
             FireLifetimeChanged(MvxLifetimeEvent.ActivatedFromMemory);
-            base.WillBecomeActive(notification);
         }
 
         public override void DidResignActive(Foundation.NSNotification notification)
         {
             FireLifetimeChanged(MvxLifetimeEvent.Deactivated);
-            base.DidResignActive(notification);
         }
 
         public override void WillTerminate(Foundation.NSNotification notification)
