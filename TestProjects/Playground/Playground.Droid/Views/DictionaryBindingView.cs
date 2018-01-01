@@ -1,22 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
+using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Playground.Core.ViewModels;
-using MvvmCross.Droid.Views.Attributes;
-using MvvmCross.Droid.Support.V4;
-using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.BindingContext;
-using Android.Graphics.Drawables;
-using Android.Graphics;
+using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Droid.Support.V4;
+using MvvmCross.Droid.Views.Attributes;
+using Playground.Core.ViewModels;
+using System.Collections.Generic;
 
 namespace Playground.Droid.Views
 {
@@ -34,15 +27,25 @@ namespace Playground.Droid.Views
 
             var view = this.BindingInflate(Resource.Layout.dictionary_view, null);
             var background = view.FindViewById<LinearLayout>(Resource.Id.container);
+            var descriptionLabel = view.FindViewById<TextView>(Resource.Id.txt_description);
 
-            this.CreateBindingSet<DictionaryBindingView, DictionaryBindingViewModel>().Bind(background).For(v => v.Background).To(vm => vm.Value)
+            var bindingSet = this.CreateBindingSet<DictionaryBindingView, DictionaryBindingViewModel>();
+            bindingSet.Bind(background).For(v => v.Background).To(vm => vm.Value)
                 .WithDictionaryConversion(new Dictionary<int, Drawable>
                 {
-                    {0, new ColorDrawable(Color.Blue) },
-                    {1, new ColorDrawable(Color.Red) },
-                    {2, new ColorDrawable(Color.Yellow) },
-                    {3, new ColorDrawable(Color.Violet) }
-                }).Apply();
+                    [0] = new ColorDrawable(Color.Blue),
+                    [1] = new ColorDrawable(Color.Red),
+                    [2] = new ColorDrawable(Color.Yellow),
+                    [3] = new ColorDrawable(Color.Violet)
+                });
+            bindingSet.Bind(descriptionLabel).To(vm => vm.Value)
+                .WithDictionaryConversion(new Dictionary<int, string>
+                {
+                    [0] = "Description for blue",
+                    [1] = "Description for Red",
+                }, "Fallback description");
+
+            bindingSet.Apply();
 
             return view;
         }

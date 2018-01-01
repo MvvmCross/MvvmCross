@@ -42,6 +42,7 @@
     <Compile Include="..\..\..\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Converters\MvxDictionaryValueConverterTests.cs" />
     <Compile Include="Mocks\MockBootstrapAction.cs" />
     <Compile Include="MvxBootstrapTest.cs" />
     <Compile Include="MvxIoCPropertyInjectionTest.cs" />
