@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Eventhooks.Droid</RootNamespace>
     <AssemblyName>Eventhooks.Core.Droid</AssemblyName>
-    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
