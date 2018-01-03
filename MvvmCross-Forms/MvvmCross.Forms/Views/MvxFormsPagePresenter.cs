@@ -779,7 +779,7 @@ namespace MvvmCross.Forms.Views
             }
             catch (Exception ex)
             {
-                throw new MvxException("Cannot replace MainPage root", ex);
+                throw new MvxException(ex, "Cannot replace MainPage root");
             }
         }
     }
