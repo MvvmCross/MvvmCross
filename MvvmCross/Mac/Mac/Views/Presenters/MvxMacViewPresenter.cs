@@ -31,14 +31,14 @@ namespace MvvmCross.Mac.Views.Presenters
             return new MvxWindowPresentationAttribute();
         }
 
-        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, Type viewType)
+        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
         {
             if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
             {
                 var viewInstance = this.CreateViewControllerFor(viewType, null) as NSViewController;
                 using (viewInstance)
                 {
-                    var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute();
+                    var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute(request);
 
                     if (presentationAttribute == null)
                     {
@@ -50,7 +50,7 @@ namespace MvvmCross.Mac.Views.Presenters
                             presentationAttribute.ViewType = viewType;
 
                         if (presentationAttribute.ViewModelType == null)
-                            presentationAttribute.ViewModelType = viewModelType;
+                            presentationAttribute.ViewModelType = request.ViewModelType;
 
                         return presentationAttribute;
                     }
@@ -154,7 +154,7 @@ namespace MvvmCross.Mac.Views.Presenters
 
         public override void Show(MvxViewModelRequest request)
         {
-            GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
+            GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
 
         protected virtual void ShowWindowViewController(

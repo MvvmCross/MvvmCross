@@ -97,7 +97,7 @@ There is an attribute member that can be used to customize the presentation:
 To override a presentation attribute at runtime you can implement the `IMvxOverridePresentationAttribute` in your view controller and determine the presentation attribute in the `PresentationAttribute` method like this:
 
 ```c#
-public MvxBasePresentationAttribute PresentationAttribute()
+public MvxBasePresentationAttribute PresentationAttribute(MvxViewModelRequest request)
 {
     return new MvxModalPresentationAttribute
     {
@@ -107,9 +107,11 @@ public MvxBasePresentationAttribute PresentationAttribute()
 }
 ```
 
-If you return `null` from the `PresentationAttribute` the iOS View Presenter will fallback to the attribute used to decorate the view controller. If the view controller is not decorated with a presentation attribute it will use the default presentation attribute (a _animated_ child presentation).
+As you can see in the code snippet, you will be able to make your choice using a `MvxViewModelRequest`. This object will contain the `PresentationValues` dictionary alongside other properties. 
 
-__Note:__ Be aware that your ViewModel will be null during `PresentationAttribute`, so the logic you can perform there is limited here. Reason to this limitation is MvvmCross Presenters are stateless, you can't connect an already instantiated ViewModel with a new View.
+If you return `null` from the `PresentationAttribute` method, the ViewPresenter will fallback to the attribute used to decorate the view. If the view is not decorated with any presentation attribute, then it will use the default attribute instead.
+
+__Hint:__ Be aware that `this.ViewModel` property will be null during `PresentationAttribute`. If you want to have the ViewModel instance available, you need to use the `MvxNavigationService` and cast the `request` parameter to `MvxViewModelInstanceRequest`.
 
 ## Extensibility
 The presenter is completely extensible! You can override any attribute and customize attribute members.
