@@ -167,6 +167,10 @@
     <Compile Include="Views\NestedModalView.designer.cs">
       <DependentUpon>NestedModalView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\TabsRootBView.cs" />
+    <Compile Include="Views\TabsRootBView.designer.cs">
+      <DependentUpon>TabsRootBView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">

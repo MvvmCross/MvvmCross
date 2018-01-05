@@ -27,6 +27,7 @@ namespace Playground.iOS.Views
 
             set.Bind(btnShowStack).To(vm => vm.ShowRootViewModelCommand);
             set.Bind(btnClose).To(vm => vm.CloseViewModelCommand);
+            set.Bind(btnShowTabsB).To(vm => vm.ShowTabsRootBCommand);
 
             set.Apply();
         }
