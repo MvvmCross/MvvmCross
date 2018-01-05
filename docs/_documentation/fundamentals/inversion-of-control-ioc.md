@@ -98,6 +98,17 @@ but this creates boilerplate code and in case you need another instance with a d
 Then at the moment of resolving the interface the implementation takes the same generic type parameter that the interface, e.g. if you resolve `var foo = Mvx.Resolve<IFoo<Bar1>>();` then `foo` will be of type `Foo<Bar1>`.
 As you can see this give us more flexibility and scalability because we can effortlessly change the generic type parameters at the moment of resolving the interface and we don't need to add anything to register the interface with a new generic type parameter.
 
+### Child Containers
+
+Sometimes you'd like to add some instances or types to an IoC Container for a specific purpose and not to the app-wide container. You can use Child Containers for that:
+
+    var container = Mvx.Resolve<IMvxIoCProvider>();
+    var childContainer = container.CreateChildContainer():
+    childContainer.RegisterType<IFoo, Foo>(); // Is only registered in Child Container scope
+    childContainer.Create<IFoo>();
+
+You can create as many and as deeply nested Child Containers as you want - each container inherits all dependencies registered on it's parent container.
+
 ### Last-registered wins
 
 If you create several implementations of an interface and register them all:
@@ -490,7 +501,7 @@ However, if you feel the MvvmCross detection is wrong - if your app has some beh
                 TryToDetectDynamicCircularReferences = false
                 TryToDetectSingletonCircularReferences = false
             };
-            var instance = MvxSimpleIoCContainer.Initialize(options);
+            var instance = MvxIoCProvider.Initialize(options);
 
 **Note:** in the event of recursion causing a stack overflow, some mobile runtimes will **not** throw a `StackOverlowException` - but will instead simply exit without warning - this situation can be hard to debug.
 

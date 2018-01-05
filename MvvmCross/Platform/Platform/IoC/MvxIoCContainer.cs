@@ -1,4 +1,4 @@
-﻿// MvxSimpleIoCContainer.cs
+﻿// MvxIoCContainer.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,34 +14,21 @@ using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Platform.IoC
 {
-    public class MvxSimpleIoCContainer
-        : MvxSingleton<IMvxIoCProvider>, IMvxIoCProvider
+    public class MvxIoCContainer
+        : IMvxIoCProvider
     {
-        public static IMvxIoCProvider Initialize(IMvxIocOptions options = null)
-        {
-            if (Instance != null)
-            {
-                return Instance;
-            }
-
-            // create a new ioc container - it will register itself as the singleton
-            // ReSharper disable ObjectCreationAsStatement
-            new MvxSimpleIoCContainer(options);
-            // ReSharper restore ObjectCreationAsStatement
-            return Instance;
-        }
-
         private readonly Dictionary<Type, IResolver> _resolvers = new Dictionary<Type, IResolver>();
         private readonly Dictionary<Type, List<Action>> _waiters = new Dictionary<Type, List<Action>>();
         private readonly Dictionary<Type, bool> _circularTypeDetection = new Dictionary<Type, bool>();
         private readonly object _lockObject = new object();
         private readonly IMvxIocOptions _options;
         private readonly IMvxPropertyInjector _propertyInjector;
+        private readonly IMvxIoCProvider _parentProvider;
 
         protected object LockObject => _lockObject;
         protected IMvxIocOptions Options => _options;
 
-        protected MvxSimpleIoCContainer(IMvxIocOptions options)
+        public MvxIoCContainer(IMvxIocOptions options, IMvxIoCProvider parentProvider = null)
         {
             _options = options ?? new MvxIocOptions();
             if (_options.PropertyInjectorType != null)
@@ -51,6 +38,19 @@ namespace MvvmCross.Platform.IoC
             if (_propertyInjector != null)
             {
                 RegisterSingleton(typeof(IMvxPropertyInjector), _propertyInjector);
+            }
+            if (parentProvider != null)
+            {
+                _parentProvider = parentProvider;
+            }
+        }
+
+        public MvxIoCContainer(IMvxIoCProvider parentProvider)
+            : this(null, parentProvider)
+        {
+            if (parentProvider == null)
+            {
+                throw new ArgumentNullException(nameof(parentProvider), "Provide a parent ioc provider to this constructor");
             }
         }
 
@@ -66,9 +66,9 @@ namespace MvvmCross.Platform.IoC
         public class ConstructingResolver : IResolver
         {
             private readonly Type _type;
-            private readonly MvxSimpleIoCContainer _parent;
+            private readonly IMvxIoCProvider _parent;
 
-            public ConstructingResolver(Type type, MvxSimpleIoCContainer parent)
+            public ConstructingResolver(Type type, IMvxIoCProvider parent)
             {
                 _type = type;
                 _parent = parent;
@@ -167,11 +167,11 @@ namespace MvvmCross.Platform.IoC
         public class ConstructingOpenGenericResolver : IResolver
         {
             private readonly Type _genericTypeDefinition;
-            private readonly MvxSimpleIoCContainer _parent;
+            private readonly IMvxIoCProvider _parent;
 
             private Type[] _genericTypeParameters;
 
-            public ConstructingOpenGenericResolver(Type genericTypeDefinition, MvxSimpleIoCContainer parent)
+            public ConstructingOpenGenericResolver(Type genericTypeDefinition, IMvxIoCProvider parent)
             {
                 _genericTypeDefinition = genericTypeDefinition;
                 _parent = parent;
@@ -200,7 +200,15 @@ namespace MvvmCross.Platform.IoC
         {
             lock (_lockObject)
             {
-                return _resolvers.ContainsKey(t);
+                if (_resolvers.ContainsKey(t))
+                {
+                    return true;
+                }
+                if (_parentProvider != null && _parentProvider.CanResolve(t))
+                {
+                    return true;
+                }
+                return false;
             }
         }
 
@@ -435,6 +443,8 @@ namespace MvvmCross.Platform.IoC
             Unknown
         }
 
+        public virtual IMvxIoCProvider CreateChildContainer() => new MvxIoCContainer(this);
+
         private static readonly ResolverType? ResolverTypeNoneSpecified = null;
 
         private bool Supports(IResolver resolver, ResolverType? requiredResolverType)
@@ -454,6 +464,11 @@ namespace MvvmCross.Platform.IoC
             IResolver resolver;
             if (!TryGetResolver(type, out resolver))
             {
+                if (_parentProvider != null && _parentProvider.TryResolve(type, out resolved))
+                {
+                    return true;
+                }
+
                 resolved = type.CreateDefault();
                 return false;
             }
@@ -521,7 +536,7 @@ namespace MvvmCross.Platform.IoC
 
             try
             {
-                if(resolver is ConstructingOpenGenericResolver)
+                if (resolver is ConstructingOpenGenericResolver)
                 {
                     resolver.SetGenericTypeParameters(type.GetTypeInfo().GenericTypeArguments);
                 }
