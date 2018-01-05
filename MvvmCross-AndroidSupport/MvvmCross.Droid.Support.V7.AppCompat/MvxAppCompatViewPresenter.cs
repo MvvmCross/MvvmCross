@@ -346,7 +346,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
             IMvxFragmentView mvxFragmentView = CreateFragment(attribute, fragmentName);
-            var dialog = (DialogFragment)mvxFragmentView;
+            var dialog = mvxFragmentView as DialogFragment;
+            if(dialog == null)
+            {
+                throw new MvxException("Fragment {0} does not extend {1}", fragmentName, typeof(DialogFragment).FullName);
+            }
 
             // MvxNavigationService provides an already instantiated ViewModel here,
             // therefore just assign it
