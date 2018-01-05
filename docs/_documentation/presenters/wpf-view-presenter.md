@@ -82,22 +82,20 @@ If a `Window` class has no attribute over it, the presenter will assume _Window_
 To override a presentation attribute at runtime you can implement the `IMvxOverridePresentationAttribute` in your view and determine the presentation attribute in the `PresentationAttribute` method like this:
 
 ```c#
-public partial class WindowView :
-    MvxWindow<WindowViewModel>,
-    IMvxOverridePresentationAttribute
+public MvxBasePresentationAttribute PresentationAttribute(MvxViewModelRequest request)
 {
-    public WindowView() => InitializeComponent();
-
-    // Override a presentation attribute at runtime
-    public MvxBasePresentationAttribute PresentationAttribute() =>
-        new MvxWindowPresentationAttribute
-        {
-            Identifier = $"{nameof(WindowView)}.{ViewModel.Count}"
-        };
+    return new MvxWindowPresentationAttribute
+    {
+        Identifier = $"{nameof(WindowView)}.{ViewModel.Count}"
+    };
 }
 ```
 
-If you return `null` from the `PresentationAttribute`, the presenter will assume presentation the same way as views without attributes.
+As you can see in the code snippet, you will be able to make your choice using a `MvxViewModelRequest`. This object will contain the `PresentationValues` dictionary alongside other properties. 
+
+If you return `null` from the `PresentationAttribute` method, the ViewPresenter will fallback to the attribute used to decorate the view. If the view is not decorated with any presentation attribute, then it will use the default attribute instead.
+
+__Hint:__ Be aware that `this.ViewModel` property will be null during `PresentationAttribute`. If you want to have the ViewModel instance available, you need to use the `MvxNavigationService` and cast the `request` parameter to `MvxViewModelInstanceRequest`.
 
 
 ## Extensibility
