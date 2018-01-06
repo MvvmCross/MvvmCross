@@ -9,11 +9,11 @@
          <views:MvxListView ItemsSource="{mvx:MvxBind TestItems}" ItemClick="{mvx:MvxBind ItemClickedCommand}" SelectedItem="{mvx:MvxBind ItemClickedCommand}">
             <ListView.ItemTemplate>
                  <DataTemplate>
-                     <ViewCell>
+                     <views:MvxViewCell>
                          <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
                              <Label mvx:Bi.nd="Text Title" />
                          </StackLayout>
-                     </ViewCell>
+                     </views:MvxViewCell>
                  </DataTemplate>
              </ListView.ItemTemplate>
          </views:MvxListView>

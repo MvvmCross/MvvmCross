@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Views.EventSource;
@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views
 {
-    public class MvxSwitchCell : MvxEventSourceSwitchCell, IMvxElement
+    public class MvxSwitchCell : MvxEventSourceSwitchCell, IMvxCell
     {
         public MvxSwitchCell()
         {
