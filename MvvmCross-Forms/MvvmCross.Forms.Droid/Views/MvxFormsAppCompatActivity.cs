@@ -46,8 +46,8 @@ namespace MvvmCross.Forms.Droid.Views
             }
         }
 
-        private Xamarin.Forms.Application _formsApplication;
-        protected Xamarin.Forms.Application FormsApplication
+        private MvxFormsApplication _formsApplication;
+        protected MvxFormsApplication FormsApplication
         {
             get
             {

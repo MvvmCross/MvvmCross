@@ -13,15 +13,13 @@ using MvvmCross.Platform.Plugins;
 using System.Collections.Generic;
 using System.Reflection;
 using AppKit;
-using Xamarin.Forms;
-using MvvmCross.Forms.ViewModels;
 
 namespace MvvmCross.Forms.iOS
 {
     public abstract class MvxFormsMacSetup : MvxMacSetup
     {
         private List<Assembly> _viewAssemblies;
-        private Application _formsApplication;
+        private MvxFormsApplication _formsApplication;
 
         protected MvxFormsMacSetup(IMvxApplicationDelegate applicationDelegate, NSWindow window)
             : base(applicationDelegate, window)
@@ -49,7 +47,7 @@ namespace MvvmCross.Forms.iOS
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public Application FormsApplication
+        public MvxFormsApplication FormsApplication
         {
             get
             {
@@ -101,11 +99,6 @@ namespace MvvmCross.Forms.iOS
         protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "ViewController", "Page");
-        }
-
-        protected override void RegisterViewTypeFinder()
-        {
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewModelTypeFinder, MvxFormsViewModelViewTypeFinder>();
         }
     }
 }

@@ -14,14 +14,13 @@ using MvvmCross.Platform.Plugins;
 using System.Collections.Generic;
 using System.Reflection;
 using UIKit;
-using Xamarin.Forms;
 
 namespace MvvmCross.Forms.iOS
 {
     public abstract class MvxFormsIosSetup : MvxIosSetup
     {
         private List<Assembly> _viewAssemblies;
-        private Application _formsApplication;
+        private MvxFormsApplication _formsApplication;
 
         protected MvxFormsIosSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
@@ -49,7 +48,7 @@ namespace MvvmCross.Forms.iOS
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public Application FormsApplication
+        public MvxFormsApplication FormsApplication
         {
             get
             {
@@ -63,7 +62,7 @@ namespace MvvmCross.Forms.iOS
             }
         }
 
-        protected abstract Application CreateFormsApplication();
+        protected abstract MvxFormsApplication CreateFormsApplication();
 
         protected override IMvxIosViewPresenter CreatePresenter()
         {

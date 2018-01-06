@@ -25,7 +25,7 @@ namespace Playground.Forms.Uwp
             return new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(FormsApp).GetTypeInfo().Assembly }));
         }
 
-        protected override Xamarin.Forms.Application CreateFormsApplication() => new FormsApp();
+        protected override MvxFormsApplication CreateFormsApplication() => new FormsApp();
 
         protected override IMvxApplication CreateApp() => new Core.App();
     }
