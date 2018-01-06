@@ -4,7 +4,6 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Uwp.Bindings;
 using MvvmCross.Forms.Uwp.Presenters;
-using MvvmCross.Forms.ViewModels;
 using MvvmCross.Forms.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
@@ -80,10 +79,5 @@ namespace MvvmCross.Forms.Uwp
         }
 
         protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsWindowsBindingBuilder();
-
-        protected override void RegisterViewTypeFinder()
-        {
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewModelTypeFinder, MvxFormsViewModelViewTypeFinder>();
-        }
     }
 }
