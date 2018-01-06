@@ -66,6 +66,7 @@ namespace MvvmCross.Droid.Views
 
         public virtual void OnViewNewIntent(Activity activity)
         {
+            FireActivityChange(activity, MvxActivityState.OnNewIntent);
         }
 
         public virtual void OnSaveInstanceState(Activity activity, Bundle eventArgs)
