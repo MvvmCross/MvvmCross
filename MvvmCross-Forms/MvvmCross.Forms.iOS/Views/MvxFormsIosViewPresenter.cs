@@ -27,11 +27,17 @@ namespace MvvmCross.Forms.iOS.Presenters
         : MvxIosViewPresenter
         , IMvxFormsViewPresenter
     {
-        public MvxFormsIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window, Application formsApplication) : base (applicationDelegate, window)
+        public MvxFormsIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window, MvxFormsApplication formsApplication) : base (applicationDelegate, window)
         {
-            FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "Application cannot be null");
+            FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
         }
-        public Xamarin.Forms.Application FormsApplication { get; set; }
+
+        private MvxFormsApplication _formsApplication;
+        public MvxFormsApplication FormsApplication
+        {
+            get { return _formsApplication; }
+            set { _formsApplication = value; }
+        }
 
         private IMvxFormsPagePresenter _formsPagePresenter;
         public virtual IMvxFormsPagePresenter FormsPagePresenter

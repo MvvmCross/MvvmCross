@@ -13,7 +13,6 @@ using MvvmCross.Uwp.Views;
 using System.Collections.Generic;
 using System.Reflection;
 using Windows.ApplicationModel.Activation;
-using Xamarin.Forms;
 using XamlControls = Windows.UI.Xaml.Controls;
 
 namespace MvvmCross.Forms.Uwp
@@ -22,7 +21,7 @@ namespace MvvmCross.Forms.Uwp
     {
         private readonly LaunchActivatedEventArgs _launchActivatedEventArgs;
         private List<Assembly> _viewAssemblies;
-        private Application _formsApplication;
+        private MvxFormsApplication _formsApplication;
 
         protected MvxFormsWindowsSetup(XamlControls.Frame rootFrame, LaunchActivatedEventArgs e)
             : base(rootFrame)
@@ -46,7 +45,7 @@ namespace MvvmCross.Forms.Uwp
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public Application FormsApplication
+        public MvxFormsApplication FormsApplication
         {
             get
             {
@@ -59,7 +58,7 @@ namespace MvvmCross.Forms.Uwp
             }
         }
 
-        protected abstract Application CreateFormsApplication();
+        protected abstract MvxFormsApplication CreateFormsApplication();
 
         protected override IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
         {

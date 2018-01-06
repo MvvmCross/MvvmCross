@@ -21,7 +21,7 @@ namespace MvvmCross.Forms.Droid.Platform
     public abstract class MvxFormsAndroidSetup : MvxAndroidSetup
     {
         private List<Assembly> _viewAssemblies;
-        private Xamarin.Forms.Application _formsApplication;
+        private MvxFormsApplication _formsApplication;
 
         protected MvxFormsAndroidSetup(Context applicationContext) : base(applicationContext)
         {
@@ -43,7 +43,7 @@ namespace MvvmCross.Forms.Droid.Platform
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public Xamarin.Forms.Application FormsApplication
+        public MvxFormsApplication FormsApplication
         {
             get
             {
@@ -61,7 +61,7 @@ namespace MvvmCross.Forms.Droid.Platform
             }
         }
 
-        protected abstract Xamarin.Forms.Application CreateFormsApplication();
+        protected abstract MvxFormsApplication CreateFormsApplication();
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
