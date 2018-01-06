@@ -1,5 +1,6 @@
 using System;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters.Attributes;
@@ -15,7 +16,7 @@ namespace Playground.iOS.Views
         {
         }
 
-        public MvxBasePresentationAttribute PresentationAttribute()
+        public MvxBasePresentationAttribute PresentationAttribute(MvxViewModelRequest request)
         {
             return new MvxModalPresentationAttribute
             {

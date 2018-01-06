@@ -1,25 +1,23 @@
 using System;
-
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.tvOS.Views;
 using MvvmCross.tvOS.Views.Presenters.Attributes;
-
 using Playground.Core.ViewModels;
-
 using UIKit;
 
 namespace Playground.TvOS
 {
     [MvxFromStoryboard("Main")]
-    public partial class OverrideAttributeView 
+    public partial class OverrideAttributeView
         : MvxViewController<OverrideAttributeViewModel>, IMvxOverridePresentationAttribute
-	{
-		public OverrideAttributeView (IntPtr handle) : base (handle)
-		{
-		}
+    {
+        public OverrideAttributeView(IntPtr handle) : base(handle)
+        {
+        }
 
-        public MvxBasePresentationAttribute PresentationAttribute()
+        public MvxBasePresentationAttribute PresentationAttribute(MvxViewModelRequest request)
         {
             return new MvxModalPresentationAttribute
             {
@@ -41,5 +39,5 @@ namespace Playground.TvOS
             set.Apply();
         }
 
-	}
+    }
 }

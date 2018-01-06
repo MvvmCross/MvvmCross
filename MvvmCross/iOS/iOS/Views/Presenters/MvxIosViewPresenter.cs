@@ -41,14 +41,14 @@ namespace MvvmCross.iOS.Views.Presenters
             return new MvxChildPresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
         }
 
-        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, Type viewType)
+        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
         {
             if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
             {
                 var viewInstance = this.CreateViewControllerFor(viewType, null) as UIViewController;
                 using (viewInstance)
                 {
-                    var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute();
+                    var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute(request);
 
                     if (presentationAttribute == null)
                     {
@@ -60,7 +60,7 @@ namespace MvvmCross.iOS.Views.Presenters
                             presentationAttribute.ViewType = viewType;
 
                         if (presentationAttribute.ViewModelType == null)
-                            presentationAttribute.ViewModelType = viewModelType;
+                            presentationAttribute.ViewModelType = request.ViewModelType;
 
                         return presentationAttribute;
                     }
@@ -154,7 +154,7 @@ namespace MvvmCross.iOS.Views.Presenters
 
         public override void Show(MvxViewModelRequest request)
         {
-            GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
+            GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
 
         #region Show implementations
@@ -334,7 +334,7 @@ namespace MvvmCross.iOS.Views.Presenters
 
         public override void Close(IMvxViewModel viewModel)
         {
-            GetPresentationAttributeAction(viewModel.GetType(), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);
+            GetPresentationAttributeAction(new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);
         }
 
         #region Close implementations

@@ -12,8 +12,8 @@ namespace MvvmCross.Core.Views
         void RegisterAttributeTypes();
 
         //TODO: Maybe move those to helper class
-        MvxBasePresentationAttribute GetPresentationAttribute(Type viewModelType);
+        MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request);
         MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType);
-        MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, Type viewType);
+        MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType);
     }
 }

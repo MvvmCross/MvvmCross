@@ -87,7 +87,7 @@ namespace MvvmCross.Wpf.Views.Presenters
             return new MvxContentPresentationAttribute();
         }
 
-        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, Type viewType)
+        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
         {
             if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
             {
@@ -96,7 +96,7 @@ namespace MvvmCross.Wpf.Views.Presenters
                 {
                     MvxBasePresentationAttribute presentationAttribute = null;
                     if (viewInstance is IMvxOverridePresentationAttribute overrideInstance)
-                        presentationAttribute = overrideInstance.PresentationAttribute();
+                        presentationAttribute = overrideInstance.PresentationAttribute(request);
 
                     if (presentationAttribute == null)
                     {
@@ -108,7 +108,7 @@ namespace MvvmCross.Wpf.Views.Presenters
                             presentationAttribute.ViewType = viewType;
 
                         if (presentationAttribute.ViewModelType == null)
-                            presentationAttribute.ViewModelType = viewModelType;
+                            presentationAttribute.ViewModelType = request.ViewModelType;
 
                         return presentationAttribute;
                     }

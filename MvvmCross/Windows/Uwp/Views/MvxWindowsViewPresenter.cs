@@ -69,12 +69,12 @@ namespace MvvmCross.Uwp.Views
 
         public override void Show(MvxViewModelRequest request)
         {
-            GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
+            GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
 
         public override void Close(IMvxViewModel viewModel)
         {
-            GetPresentationAttributeAction(viewModel.GetType(), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);
+            GetPresentationAttributeAction(new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);
         }
 
         protected virtual async void BackButtonOnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
@@ -180,7 +180,7 @@ namespace MvvmCross.Uwp.Views
             var viewType = viewFinder.GetViewType(viewModel.GetType());
             if (viewType.HasRegionAttribute())
             {
-                var containerView = _rootFrame.UnderlyingControl?.FindControl<Frame>( viewType.GetRegionName());
+                var containerView = _rootFrame.UnderlyingControl?.FindControl<Frame>(viewType.GetRegionName());
 
                 if (containerView == null)
                     throw new MvxException($"Region '{viewType.GetRegionName()}' not found in view '{viewType}'");
