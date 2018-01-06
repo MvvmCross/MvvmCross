@@ -4,7 +4,6 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.iOS.Bindings;
 using MvvmCross.Forms.iOS.Presenters;
 using MvvmCross.Forms.Platform;
-using MvvmCross.Forms.ViewModels;
 using MvvmCross.Forms.Views;
 using MvvmCross.iOS.Platform;
 using MvvmCross.iOS.Views.Presenters;
@@ -100,11 +99,6 @@ namespace MvvmCross.Forms.iOS
         protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "ViewController", "Page");
-        }
-
-        protected override void RegisterViewTypeFinder()
-        {
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewModelTypeFinder, MvxFormsViewModelViewTypeFinder>();
         }
     }
 }
