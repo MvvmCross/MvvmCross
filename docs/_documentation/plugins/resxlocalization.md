@@ -12,7 +12,7 @@ The `ResxLocalization` plugin is a single PCL Assembly and isn't really a typica
 To start using it register your Resx file in the App.cs file:
 `Mvx.RegisterSingleton(new MvxResxTextProvider(Strings.ResourceManager));`
 
-For more advice on using the Localization library, see the [blog post](https://mobileprogrammerblog.wordpress.com/2017/12/30/mvvm-cross-with-xamarin-platform-resx-localization/?utm_campaign=Weekly%2BXamarin&utm_medium=email&utm_source=Weekly_Xamarin_137) by [@DKrzyczkowski](https://twitter.com/@DKrzyczkowski/).
+For more advice on using the Localization library, see the [blog post](https://mobileprogrammerblog.wordpress.com/2017/12/30/mvvm-cross-with-xamarin-platform-resx-localization) by [@DKrzyczkowski](https://twitter.com/@DKrzyczkowski/).
 
 There is also this [blog post](http://opendix.blogspot.ch/2013/05/using-resx-files-for-localization-in.html) by [@stefanschoeb](https://twitter.com/stefanschoeb). The `ResxTextProvider` he describes is now contained in the `ResxLocalization` plugin as `MvxResxTextProvider`. The language value converter he describes can also be used using the extension method `ToLocalizationId()` in fluent data binding, e.g.:
 
