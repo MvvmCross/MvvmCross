@@ -3,6 +3,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Views.Attributes;
@@ -24,7 +25,7 @@ namespace Playground.Droid.Views
             return view;
         }
 
-        public MvxBasePresentationAttribute PresentationAttribute()
+        public MvxBasePresentationAttribute PresentationAttribute(MvxViewModelRequest request)
         {
             return new MvxFragmentPresentationAttribute(
                 typeof(RootViewModel),

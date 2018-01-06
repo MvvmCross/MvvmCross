@@ -42,7 +42,7 @@ namespace MvvmCross.Binding.Wpf
 
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)
             {
-                var iocProvider = MvxSimpleIoCContainer.Initialize();
+                var iocProvider = MvxIoCProvider.Initialize();
                 Mvx.RegisterSingleton(iocProvider);
             }
 

@@ -65,5 +65,7 @@ namespace MvvmCross.Platform.IoC
         void CallbackWhenRegistered<T>(Action action);
 
         void CallbackWhenRegistered(Type type, Action action);
+
+        IMvxIoCProvider CreateChildContainer();
     }
 }
