@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Android.App;
 using Android.Content;
 using Android.Views;
 using MvvmCross.Binding;
@@ -64,6 +65,7 @@ namespace MvvmCross.Droid.Platform
 
         protected override void InitializePlatformServices()
         {
+            InitializeAndroidCurrentTopActivity();
             InitializeLifetimeMonitor();
 
             Mvx.RegisterSingleton<IMvxAndroidGlobals>(this);
@@ -79,11 +81,32 @@ namespace MvvmCross.Droid.Platform
             Mvx.RegisterSingleton<IMvxMultipleViewModelCache>(viewModelMultiTemporaryCache);
         }
 
+        protected virtual void InitializeAndroidCurrentTopActivity()
+        {
+            var currentTopActivity = CreateAndroidCurrentTopActivity();
+            Mvx.RegisterSingleton<IMvxAndroidCurrentTopActivity>(currentTopActivity);
+        }
+
+        protected virtual IMvxAndroidCurrentTopActivity CreateAndroidCurrentTopActivity()
+        {
+            var mvxApplication = MvxAndroidApplication.Instance;
+            if (mvxApplication != null)
+            {
+                var activityLifecycleCallbacksManager = new MvxLifecycleCallbacksBasedAndroidCurrentTopActivity();
+                mvxApplication.RegisterActivityLifecycleCallbacks(activityLifecycleCallbacksManager);
+                return activityLifecycleCallbacksManager;
+            }
+            else
+            {
+                return new MvxMonitorBasedAndroidCurrentTopActivity();
+            }
+        }
+
         protected virtual void InitializeLifetimeMonitor()
         {
             var lifetimeMonitor = CreateLifetimeMonitor();
+
             Mvx.RegisterSingleton<IMvxAndroidActivityLifetimeListener>(lifetimeMonitor);
-            Mvx.RegisterSingleton<IMvxAndroidCurrentTopActivity>(lifetimeMonitor);
             Mvx.RegisterSingleton<IMvxLifetime>(lifetimeMonitor);
         }
 
