@@ -113,6 +113,7 @@
     <Compile Include="Views\SplitDetailNavView.cs" />
     <Compile Include="Views\NestedChildView.cs" />
     <Compile Include="Views\TabsRootBView.cs" />
+    <Compile Include="MainApplication.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
