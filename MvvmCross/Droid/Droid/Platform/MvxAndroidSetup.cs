@@ -98,7 +98,7 @@ namespace MvvmCross.Droid.Platform
             }
             else
             {
-                return new MvxMonitorBasedAndroidCurrentTopActivity();
+                return new MvxMonitorBasedAndroidCurrentTopActivity(Mvx.GetSingleton<IMvxAndroidActivityLifetimeListener>());
             }
         }
 
