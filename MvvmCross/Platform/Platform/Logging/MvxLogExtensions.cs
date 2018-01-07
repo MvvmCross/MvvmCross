@@ -7,37 +7,37 @@ namespace MvvmCross.Platform.Logging
         public static bool IsDebugEnabled(this IMvxLog logger)
         {
             GuardAgainstNullLogger(logger);
-            return logger.Log(MvxLogLevel.Debug, null);
+            return logger.IsLogLevelEnabled(MvxLogLevel.Debug);
         }
 
         public static bool IsErrorEnabled(this IMvxLog logger)
         {
             GuardAgainstNullLogger(logger);
-            return logger.Log(MvxLogLevel.Error, null);
+            return logger.IsLogLevelEnabled(MvxLogLevel.Error);
         }
 
         public static bool IsFatalEnabled(this IMvxLog logger)
         {
             GuardAgainstNullLogger(logger);
-            return logger.Log(MvxLogLevel.Fatal, null);
+            return logger.IsLogLevelEnabled(MvxLogLevel.Fatal);
         }
 
         public static bool IsInfoEnabled(this IMvxLog logger)
         {
             GuardAgainstNullLogger(logger);
-            return logger.Log(MvxLogLevel.Info, null);
+            return logger.IsLogLevelEnabled(MvxLogLevel.Info);
         }
 
         public static bool IsTraceEnabled(this IMvxLog logger)
         {
             GuardAgainstNullLogger(logger);
-            return logger.Log(MvxLogLevel.Trace, null);
+            return logger.IsLogLevelEnabled(MvxLogLevel.Trace);
         }
 
         public static bool IsWarnEnabled(this IMvxLog logger)
         {
             GuardAgainstNullLogger(logger);
-            return logger.Log(MvxLogLevel.Warn, null);
+            return logger.IsLogLevelEnabled(MvxLogLevel.Warn);
         }
 
         public static void Debug(this IMvxLog logger, Func<string> messageFunc)
@@ -292,7 +292,7 @@ namespace MvvmCross.Platform.Logging
         {
             if (logger == null)
             {
-                throw new ArgumentNullException("logger");
+                throw new ArgumentNullException(nameof(logger));
             }
         }
 
