@@ -65,8 +65,8 @@ namespace MvvmCross.Droid.Platform
 
         protected override void InitializePlatformServices()
         {
-            InitializeAndroidCurrentTopActivity();
             InitializeLifetimeMonitor();
+            InitializeAndroidCurrentTopActivity();
 
             Mvx.RegisterSingleton<IMvxAndroidGlobals>(this);
 
