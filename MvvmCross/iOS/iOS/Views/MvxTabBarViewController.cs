@@ -142,7 +142,7 @@ namespace MvvmCross.iOS.Views
                 var root = ((UINavigationController)vc).ViewControllers.FirstOrDefault();
                 if (root != null && root.GetIMvxIosView().ViewModel == viewModel)
                 {
-                    toClose = root;
+                    toClose = vc;
                     break;
                 }
             }

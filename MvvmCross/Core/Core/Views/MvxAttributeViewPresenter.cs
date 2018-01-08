@@ -69,14 +69,14 @@ namespace MvvmCross.Core.Views
 
         public abstract MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType);
 
-        public virtual MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, Type viewType)
+        public virtual MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
         {
-            if (viewType?.GetInterfaces().Contains(typeof(IMvxOverridePresentationAttribute))??false)
+            if (viewType?.GetInterfaces().Contains(typeof(IMvxOverridePresentationAttribute)) ?? false)
             {
                 var viewInstance = Activator.CreateInstance(viewType) as IMvxOverridePresentationAttribute;
                 try
                 {
-                    var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute();
+                    var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute(request);
                     if (presentationAttribute == null)
                     {
                         MvxTrace.Warning("Override PresentationAttribute null. Falling back to existing attribute.");
@@ -90,7 +90,7 @@ namespace MvvmCross.Core.Views
 
                         if (presentationAttribute.ViewModelType == null)
                         {
-                            presentationAttribute.ViewModelType = viewModelType;
+                            presentationAttribute.ViewModelType = request.ViewModelType;
                         }
 
                         return presentationAttribute;
@@ -105,11 +105,11 @@ namespace MvvmCross.Core.Views
             return null;
         }
 
-        public virtual MvxBasePresentationAttribute GetPresentationAttribute(Type viewModelType)
+        public virtual MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request)
         {
-            var viewType = ViewsContainer.GetViewType(viewModelType);
+            var viewType = ViewsContainer.GetViewType(request.ViewModelType);
 
-            var overrideAttribute = GetOverridePresentationAttribute(viewModelType, viewType);
+            var overrideAttribute = GetOverridePresentationAttribute(request, viewType);
             if (overrideAttribute != null)
                 return overrideAttribute;
 
@@ -122,18 +122,18 @@ namespace MvvmCross.Core.Views
                     attribute.ViewType = viewType;
 
                 if (attribute.ViewModelType == null)
-                    attribute.ViewModelType = viewModelType;
+                    attribute.ViewModelType = request.ViewModelType;
 
                 return attribute;
             }
 
-            return CreatePresentationAttribute(viewModelType, viewType);
+            return CreatePresentationAttribute(request.ViewModelType, viewType);
         }
 
-        public virtual MvxPresentationAttributeAction GetPresentationAttributeAction(Type viewModelType, out MvxBasePresentationAttribute attribute)
+        public virtual MvxPresentationAttributeAction GetPresentationAttributeAction(MvxViewModelRequest request, out MvxBasePresentationAttribute attribute)
         {
-            attribute = GetPresentationAttribute(viewModelType);
-            attribute.ViewModelType = viewModelType;
+            attribute = GetPresentationAttribute(request);
+            attribute.ViewModelType = request.ViewModelType;
             var viewType = attribute.ViewType;
             var attributeType = attribute.GetType();
 
@@ -168,7 +168,7 @@ namespace MvvmCross.Core.Views
 
         public override void Close(IMvxViewModel viewModel)
         {
-            var attribute = GetPresentationAttribute(viewModel.GetType());
+            var attribute = GetPresentationAttribute(new MvxViewModelInstanceRequest(viewModel));
             var attributeType = attribute.GetType();
 
             if (AttributeTypesToActionsDictionary.TryGetValue(
@@ -189,7 +189,7 @@ namespace MvvmCross.Core.Views
 
         public override void Show(MvxViewModelRequest request)
         {
-            var attribute = GetPresentationAttribute(request.ViewModelType);
+            var attribute = GetPresentationAttribute(request);
             attribute.ViewModelType = request.ViewModelType;
             var attributeType = attribute.GetType();
 

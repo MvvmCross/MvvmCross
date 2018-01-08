@@ -114,11 +114,9 @@
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
-      <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\Contents.json">
       <Visible>false</Visible>
-      <InProject>false</InProject>
     </ImageAsset>
   </ItemGroup>
   <ItemGroup />
@@ -197,6 +195,9 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\hamburger.png" />
+    <BundleResource Include="Resources\MvvmCross.png" />
+    <BundleResource Include="Resources\MvvmCross%402x.png" />
+    <BundleResource Include="Resources\MvvmCross%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

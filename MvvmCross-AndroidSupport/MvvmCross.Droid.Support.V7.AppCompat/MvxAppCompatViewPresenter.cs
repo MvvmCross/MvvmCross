@@ -59,11 +59,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 });
         }
 
-        public override MvxBasePresentationAttribute GetPresentationAttribute(Type viewModelType)
+        public override MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request)
         {
-            var viewType = ViewsContainer.GetViewType(viewModelType);
+            var viewType = ViewsContainer.GetViewType(request.ViewModelType);
 
-            var overrideAttribute = GetOverridePresentationAttribute(viewModelType, viewType);
+            var overrideAttribute = GetOverridePresentationAttribute(request, viewType);
             if (overrideAttribute != null)
                 return overrideAttribute;
 
@@ -129,7 +129,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 return attribute;
             }
 
-            return CreatePresentationAttribute(viewModelType, viewType);
+            return CreatePresentationAttribute(request.ViewModelType, viewType);
         }
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
@@ -346,7 +346,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             var fragmentName = FragmentJavaName(attribute.ViewType);
             IMvxFragmentView mvxFragmentView = CreateFragment(attribute, fragmentName);
-            var dialog = (DialogFragment)mvxFragmentView;
+            var dialog = mvxFragmentView as DialogFragment;
+            if(dialog == null)
+            {
+                throw new MvxException("Fragment {0} does not extend {1}", fragmentName, typeof(DialogFragment).FullName);
+            }
 
             // MvxNavigationService provides an already instantiated ViewModel here,
             // therefore just assign it

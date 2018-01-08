@@ -24,7 +24,7 @@ using UIKit;
 namespace MvvmCross.tvOS.Views.Presenters
 {
     public class MvxTvosViewPresenter
-        :  MvxAttributeViewPresenter, IMvxTvosViewPresenter
+        : MvxAttributeViewPresenter, IMvxTvosViewPresenter
     {
         private readonly IUIApplicationDelegate _applicationDelegate;
         protected IUIApplicationDelegate ApplicationDelegate => _applicationDelegate;
@@ -48,27 +48,30 @@ namespace MvvmCross.tvOS.Views.Presenters
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
-            if (MasterNavigationController == null && 
+            if (MasterNavigationController == null &&
                TabBarViewController == null ||
                !TabBarViewController.CanShowChildView())
             {
                 MvxTrace.Trace($"PresentationAttribute nor MasterNavigationController found for {viewType.Name}. " +
                     $"Assuming Root presentation");
-                return new MvxRootPresentationAttribute() { 
-                    WrapInNavigationController = true, 
-                    ViewType = viewType, 
-                    ViewModelType = viewModelType };
+                return new MvxRootPresentationAttribute()
+                {
+                    WrapInNavigationController = true,
+                    ViewType = viewType,
+                    ViewModelType = viewModelType
+                };
             }
             MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. " +
                 $"Assuming animated Child presentation");
-            return new MvxChildPresentationAttribute() { 
-                ViewType = viewType, 
-                ViewModelType = viewModelType };
+            return new MvxChildPresentationAttribute()
+            {
+                ViewType = viewType,
+                ViewModelType = viewModelType
+            };
 
         }
 
-        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(Type viewModelType, 
-                                                                                      Type viewType)
+        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
         {
             if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
             {
@@ -76,7 +79,7 @@ namespace MvvmCross.tvOS.Views.Presenters
 
                 using (viewInstance)
                 {
-                    var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute();
+                    var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute(request);
 
                     if (presentationAttribute == null)
                     {
@@ -88,10 +91,10 @@ namespace MvvmCross.tvOS.Views.Presenters
                             presentationAttribute.ViewType = viewType;
 
                         if (presentationAttribute.ViewModelType == null)
-                            presentationAttribute.ViewModelType = viewModelType;
+                            presentationAttribute.ViewModelType = request.ViewModelType;
 
                         return presentationAttribute;
-                    }    
+                    }
                 }
             }
             return null;
@@ -106,11 +109,11 @@ namespace MvvmCross.tvOS.Views.Presenters
                     ShowAction = (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        ShowRootViewController(viewController, 
-                                               (MvxRootPresentationAttribute)attribute, 
+                        ShowRootViewController(viewController,
+                                               (MvxRootPresentationAttribute)attribute,
                                                request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseRootViewController(viewModel, 
+                    CloseAction = (viewModel, attribute) => CloseRootViewController(viewModel,
                                                                                     (MvxRootPresentationAttribute)attribute)
                 });
 
@@ -121,11 +124,11 @@ namespace MvvmCross.tvOS.Views.Presenters
                   ShowAction = (viewType, attribute, request) =>
                   {
                       var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                      ShowChildViewController(viewController, 
-                                              (MvxChildPresentationAttribute)attribute, 
+                      ShowChildViewController(viewController,
+                                              (MvxChildPresentationAttribute)attribute,
                                               request);
                   },
-                  CloseAction = (viewModel, attribute) => CloseChildViewController(viewModel, 
+                  CloseAction = (viewModel, attribute) => CloseChildViewController(viewModel,
                                                                                    (MvxChildPresentationAttribute)attribute)
               });
 
@@ -137,11 +140,11 @@ namespace MvvmCross.tvOS.Views.Presenters
                     ShowAction = (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        ShowTabViewController(viewController, 
-                                              (MvxTabPresentationAttribute)attribute, 
+                        ShowTabViewController(viewController,
+                                              (MvxTabPresentationAttribute)attribute,
                                               request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseTabViewController(viewModel, 
+                    CloseAction = (viewModel, attribute) => CloseTabViewController(viewModel,
                                                                                    (MvxTabPresentationAttribute)attribute)
                 });
 
@@ -166,8 +169,8 @@ namespace MvvmCross.tvOS.Views.Presenters
                       var viewController = (UIViewController)this.CreateViewControllerFor(request);
                       ShowMasterDetailSplitViewController(viewController, (MvxMasterDetailPresentationAttribute)attribute, request);
                   },
-                  CloseAction = (viewModel, attribute) => CloseMasterSplitViewController(viewModel, (MvxMasterDetailPresentationAttribute)attribute) 
-                  });
+                  CloseAction = (viewModel, attribute) => CloseMasterSplitViewController(viewModel, (MvxMasterDetailPresentationAttribute)attribute)
+              });
         }
 
         protected virtual bool CloseRootViewController(IMvxViewModel viewModel,
@@ -179,13 +182,13 @@ namespace MvvmCross.tvOS.Views.Presenters
 
         protected virtual bool CloseChildViewController(IMvxViewModel viewModel, MvxChildPresentationAttribute attribute)
         {
-            if(ModalViewControllers.Any())
+            if (ModalViewControllers.Any())
             {
                 foreach (var navController in ModalViewControllers.Where(v => v is UINavigationController))
                 {
                     if (TryCloseViewControllerInsideStack((UINavigationController)navController, viewModel))
                         return true;
-                }     
+                }
             }
 
             if (TabBarViewController != null && TabBarViewController.CloseChildViewModel(viewModel))
@@ -202,7 +205,7 @@ namespace MvvmCross.tvOS.Views.Presenters
             if (TabBarViewController == null)
                 return;
 
-            if (TabBarViewController is UITabBarController tabController 
+            if (TabBarViewController is UITabBarController tabController
                && tabController.ViewControllers != null)
             {
                 foreach (var viewController in tabController.ViewControllers)
@@ -221,10 +224,10 @@ namespace MvvmCross.tvOS.Views.Presenters
             return false;
         }
 
-        protected virtual bool CloseModalViewController(IMvxViewModel viewModel, 
+        protected virtual bool CloseModalViewController(IMvxViewModel viewModel,
                                                         MvxModalPresentationAttribute attribute)
         {
-            return CloseModalViewController(viewModel);   
+            return CloseModalViewController(viewModel);
         }
 
         protected virtual bool CloseModalViewController(IMvxViewModel viewModel)
@@ -342,15 +345,15 @@ namespace MvvmCross.tvOS.Views.Presenters
             SplitViewController = null;
         }
 
-        public override void Close(IMvxViewModel viewModel )
+        public override void Close(IMvxViewModel viewModel)
         {
-            GetPresentationAttributeAction(viewModel.GetType(), out MvxBasePresentationAttribute attribute)
+            GetPresentationAttributeAction(new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute)
                 .CloseAction.Invoke(viewModel, attribute);
         }
 
         public override void Show(MvxViewModelRequest request)
         {
-            GetPresentationAttributeAction(request.ViewModelType, out MvxBasePresentationAttribute attribute)
+            GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute)
                 .ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
 
@@ -358,8 +361,8 @@ namespace MvvmCross.tvOS.Views.Presenters
                                            MvxRootPresentationAttribute attribute,
                                            MvxViewModelRequest request)
         {
-           if (viewController is IMvxTabBarViewController)
-           {
+            if (viewController is IMvxTabBarViewController)
+            {
                 //NOTE clean up must be done first incase we are enbedding into a navigation controller
                 //before setting the tab view controller, otherwise this will reset the view stack and your tab
                 //controller will be null. 
@@ -369,13 +372,13 @@ namespace MvvmCross.tvOS.Views.Presenters
                 CleanupModalViewControllers();
 
                 return;
-           }
+            }
 
-           SetupWindowRootNavigation(viewController, attribute);
+            SetupWindowRootNavigation(viewController, attribute);
 
-           CleanupModalViewControllers();
-           CloseTabBarViewController();
-           CloseSplitViewController();
+            CleanupModalViewControllers();
+            CloseTabBarViewController();
+            CloseSplitViewController();
         }
 
         protected virtual void ShowChildViewController(UIViewController viewController,
@@ -412,8 +415,8 @@ namespace MvvmCross.tvOS.Views.Presenters
             throw new MvxException($"Trying to show View type: {viewController.GetType().Name} as child, but there is no current stack!");
         }
 
-        protected virtual void ShowModalViewController(UIViewController viewController, 
-                                                       MvxModalPresentationAttribute attribute, 
+        protected virtual void ShowModalViewController(UIViewController viewController,
+                                                       MvxModalPresentationAttribute attribute,
                                                        MvxViewModelRequest request)
         {
             // setup modal based on attribute
@@ -471,7 +474,7 @@ namespace MvvmCross.tvOS.Views.Presenters
             }
             else if (SplitViewController != null && attribute.Position == MasterDetailPosition.Detail)
             {
-                ShowDetailView(viewController, attribute.WrapInNavigationController);   
+                ShowDetailView(viewController, attribute.WrapInNavigationController);
             }
             else if (viewController is MvxSplitViewController && attribute.Position == MasterDetailPosition.Root)
             {
@@ -484,7 +487,7 @@ namespace MvvmCross.tvOS.Views.Presenters
                 CloseTabBarViewController();
                 return;
             }
-            else 
+            else
             {
                 throw new MvxException("Trying to show a master page without a SplitViewController, this is not possible!");
             }
@@ -531,20 +534,20 @@ namespace MvvmCross.tvOS.Views.Presenters
                 TabBarViewController = tabBarController;
         }
 
-        protected void SetupWindowRootNavigation(UIViewController viewController, 
+        protected void SetupWindowRootNavigation(UIViewController viewController,
                                                  MvxRootPresentationAttribute attribute)
         {
             if (attribute.WrapInNavigationController)
             {
-                MasterNavigationController = CreateNavigationController(viewController);     
+                MasterNavigationController = CreateNavigationController(viewController);
                 SetWindowRootViewController(MasterNavigationController);
             }
-            else 
+            else
             {
-                SetWindowRootViewController(viewController);     
+                SetWindowRootViewController(viewController);
                 CloseMasterNavigationController();
             }
-                
+
         }
 
         protected void SetupSplitViewWindowRootNavigation(UIViewController viewController,
@@ -567,7 +570,7 @@ namespace MvvmCross.tvOS.Views.Presenters
         {
             foreach (var v in _window.Subviews)
                 v.RemoveFromSuperview();
-            
+
             _window.AddSubview(controller.View);
             _window.RootViewController = controller;
         }
@@ -602,10 +605,10 @@ namespace MvvmCross.tvOS.Views.Presenters
 
         protected void CleanupModalViewControllers()
         {
-            while(ModalViewControllers.Any())
+            while (ModalViewControllers.Any())
             {
-                CloseModalViewController(ModalViewControllers.LastOrDefault());     
-            }  
+                CloseModalViewController(ModalViewControllers.LastOrDefault());
+            }
         }
 
     }
