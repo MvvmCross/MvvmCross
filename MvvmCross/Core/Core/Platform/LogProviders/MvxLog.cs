@@ -14,6 +14,8 @@ namespace MvvmCross.Core.Platform.LogProviders
             _logger = logger;
         }
 
+        public bool IsLogLevelEnabled(MvxLogLevel logLevel) => _logger(logLevel, null);
+
         public bool Log(MvxLogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters)
         {
             if (messageFunc == null)
