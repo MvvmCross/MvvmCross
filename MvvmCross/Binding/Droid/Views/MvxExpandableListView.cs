@@ -151,7 +151,8 @@ namespace MvvmCross.Binding.Droid.Views
 
         private void GroupOnClick(object sender, GroupClickEventArgs e)
         {
-           ExecuteCommandOnGroup(GroupClick, e.GroupPosition);
+            ExecuteCommandOnGroup(GroupClick, e.GroupPosition);
+            e.Handled = false;
         }
 
         private void EnsureItemLongClickOverloaded()
