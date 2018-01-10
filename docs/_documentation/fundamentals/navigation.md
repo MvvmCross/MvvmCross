@@ -4,7 +4,7 @@ title: Navigation
 category: Fundamentals
 order: 4
 ---
-MvvmCross uses `ViewModel first navigation`. Meaning the we navigate from ViewModel to ViewModel and not from View to View. In MvvmCross the ViewModel will lookup its corresponding View. By doing so we don't have to write platform specific navigation and we can manage everything from within our core.
+MvvmCross uses `ViewModel first navigation`. Meaning that we navigate from ViewModel to ViewModel and not from View to View. In MvvmCross the ViewModel will lookup its corresponding View. By doing so we don't have to write platform specific navigation and we can manage everything from within our core.
 
 # MvvmCross 5.x and higher navigation
 
