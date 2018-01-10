@@ -41,6 +41,7 @@
     <Compile Include="ViewModels\MixedNavTab2ViewModel.cs" />
     <Compile Include="ViewModels\MixedNavTab1ViewModel.cs" />
     <Compile Include="ViewModels\MixedNavTabsViewModel.cs" />
+    <Compile Include="ViewModels\NativeViewModel.cs" />
     <Compile Include="ViewModels\WindowChildViewModel.cs" />
     <Compile Include="ViewModels\RootViewModel.cs" />
     <Compile Include="ViewModels\ChildViewModel.cs" />
