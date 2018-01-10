@@ -92,13 +92,13 @@ namespace MvvmCross.Droid.Platform
             var mvxApplication = MvxAndroidApplication.Instance;
             if (mvxApplication != null)
             {
-                var activityLifecycleCallbacksManager = new MvxLifecycleCallbacksBasedAndroidCurrentTopActivity();
+                var activityLifecycleCallbacksManager = new MvxApplicationCallbacksCurrentTopActivity();
                 mvxApplication.RegisterActivityLifecycleCallbacks(activityLifecycleCallbacksManager);
                 return activityLifecycleCallbacksManager;
             }
             else
             {
-                return new MvxMonitorBasedAndroidCurrentTopActivity(Mvx.GetSingleton<IMvxAndroidActivityLifetimeListener>());
+                return new MvxLifecycleMonitorCurrentTopActivity(Mvx.GetSingleton<IMvxAndroidActivityLifetimeListener>());
             }
         }
 
