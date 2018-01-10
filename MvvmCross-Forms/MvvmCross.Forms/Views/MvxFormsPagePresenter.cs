@@ -19,19 +19,20 @@ namespace MvvmCross.Forms.Views
     public class MvxFormsPagePresenter :
         MvxAttributeViewPresenter, IMvxFormsPagePresenter
     {
-        public MvxFormsPagePresenter(
-            MvxFormsApplication formsApplication,
-            IMvxViewsContainer viewsContainer = null,
-            IMvxViewModelTypeFinder viewModelTypeFinder = null,
-            IMvxViewModelLoader viewModelLoader = null,
-            Dictionary<Type, MvxPresentationAttributeAction> attributeTypesToActionsDictionary = null)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:MvvmCross.Forms.Views.MvxFormsPagePresenter"/> class.
+        /// </summary>
+        /// <param name="platformPresenter">The native platform presenter from where the MvxFormsPagePresenter is created</param>
+        public MvxFormsPagePresenter(IMvxFormsViewPresenter platformPresenter)
         {
-            FormsApplication = formsApplication;
-            ViewsContainer = viewsContainer;
-            ViewModelTypeFinder = viewModelTypeFinder;
-            ViewModelLoader = viewModelLoader;
-            AttributeTypesToActionsDictionary = attributeTypesToActionsDictionary;
+            PlatformPresenter = platformPresenter;
+            FormsApplication = platformPresenter.FormsApplication;
+            ViewsContainer = platformPresenter.ViewsContainer;
+            ViewModelTypeFinder = platformPresenter.ViewModelTypeFinder;
+            AttributeTypesToActionsDictionary = platformPresenter.AttributeTypesToActionsDictionary;
         }
+
+        protected IMvxFormsViewPresenter PlatformPresenter { get; }
 
         private MvxFormsApplication _formsApplication;
         public MvxFormsApplication FormsApplication
@@ -54,9 +55,6 @@ namespace MvvmCross.Forms.Views
                 _viewModelLoader = value;
             }
         }
-
-        public virtual Func<Type, bool> ShowPlatformHost { get; set; }
-        public virtual Func<bool> ClosePlatformViews { get; set; }
 
         public virtual Page CreatePage(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute)
         {
@@ -92,10 +90,10 @@ namespace MvvmCross.Forms.Views
                 CloseAllModals();
 
             if (closePlatformViews)
-                ClosePlatformViews?.Invoke();
+                PlatformPresenter.ClosePlatformViews();
 
             if (showPlatformViews)
-                ShowPlatformHost?.Invoke(attribute.HostViewModelType);
+                PlatformPresenter.ShowPlatformHost(attribute.HostViewModelType);
 
             return CreatePage(view, request, attribute);
         }
@@ -355,7 +353,7 @@ namespace MvvmCross.Forms.Views
                 return new MvxNavigationPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
 
-            return null;
+            return PlatformPresenter.CreatePresentationAttribute(viewModelType, viewType);
         }
 
         public virtual void ShowContentPage(
