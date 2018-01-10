@@ -584,7 +584,36 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         protected virtual new Fragment GetFragmentByViewType(Type type)
         {
             var fragmentName = FragmentJavaName(type);
-            return CurrentFragmentManager?.FindFragmentByTag(fragmentName);
+            var fragment = CurrentFragmentManager?.FindFragmentByTag(fragmentName);
+
+            if (fragment != null)
+            {
+                return fragment;
+            }
+
+            return FindFragmentInChildren(fragmentName, CurrentFragmentManager);
+        }
+
+        protected virtual Fragment FindFragmentInChildren(string fragmentName, FragmentManager fragManager)
+        {
+            if (fragManager?.Fragments != null && !fragManager.Fragments.Any()) return null;
+
+            foreach (var fragment in fragManager.Fragments)
+            {
+                //let's try again finding it
+                var frag = fragment?.ChildFragmentManager?.FindFragmentByTag(fragmentName);
+
+                //if we found the frag lets return it!
+                if (frag != null)
+                {
+                    return frag;
+                }
+
+                //reloop for other fragments
+                FindFragmentInChildren(fragmentName, fragment?.ChildFragmentManager);
+            }
+
+            return null;
         }
     }
 }

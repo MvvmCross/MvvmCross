@@ -101,6 +101,12 @@ namespace MvvmCross.Droid.Support.V4
             if (fss != null)
                 fragment.SetInitialSavedState(fss);
 
+            //if fragment tag is null let's set it to something meaning full;
+            if (string.IsNullOrEmpty(fragmentTag))
+            {
+                fragmentTag = FragmentJavaName(fragment.GetType());
+            }
+
 #if DEBUG
             Mvx.Trace("Adding item #{0}: f={1} t={2}", position, fragment, fragmentTag);
 #endif
@@ -114,6 +120,11 @@ namespace MvvmCross.Droid.Support.V4
             _curTransaction.Add(container.Id, fragment, fragmentTag);
 
             return fragment;
+        }
+
+        protected string FragmentJavaName(Type fragmentType)
+        {
+            return Class.FromType(fragmentType).Name;
         }
 
         public override bool IsViewFromObject(View view, Object objectValue)
