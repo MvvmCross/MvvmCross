@@ -6,16 +6,12 @@ using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views
 {
-    public interface IMvxFormsPagePresenter: IMvxAttributeViewPresenter
+    public interface IMvxFormsPagePresenter : IMvxAttributeViewPresenter
     {
         MvxFormsApplication FormsApplication { get; set; }
 
         IMvxViewModelLoader ViewModelLoader { get; set; }
 
         Page CreatePage(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute);
-
-        Func<bool> ClosePlatformViews { get; set; }
-
-        Func<Type, bool> ShowPlatformHost { get; set; }
     }
 }
