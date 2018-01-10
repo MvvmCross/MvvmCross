@@ -29,6 +29,8 @@ namespace Playground.Core.ViewModels
 
             ShowSplitCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SplitRootViewModel>());
 
+            ShowNativeCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<NativeViewModel>());
+
             ShowOverrideAttributeCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<OverrideAttributeViewModel>());
 
             ShowSheetCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SheetViewModel>());
@@ -81,6 +83,8 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowSplitCommand { get; private set; }
 
         public IMvxAsyncCommand ShowOverrideAttributeCommand { get; private set; }
+
+        public IMvxAsyncCommand ShowNativeCommand { get; private set; }
 
         public IMvxAsyncCommand ShowSheetCommand { get; private set; }
 
