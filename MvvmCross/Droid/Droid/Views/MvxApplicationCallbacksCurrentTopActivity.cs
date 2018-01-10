@@ -6,7 +6,7 @@ using MvvmCross.Platform.Droid.Platform;
 
 namespace MvvmCross.Droid.Views
 {
-    public class MvxLifecycleCallbacksBasedAndroidCurrentTopActivity : Java.Lang.Object, Application.IActivityLifecycleCallbacks, IMvxAndroidCurrentTopActivity
+    public class MvxApplicationCallbacksCurrentTopActivity : Java.Lang.Object, Application.IActivityLifecycleCallbacks, IMvxAndroidCurrentTopActivity
     {
         private ConcurrentDictionary<string, ActivityInfo> _Activities = new ConcurrentDictionary<string, ActivityInfo>();
 

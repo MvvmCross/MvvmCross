@@ -8,9 +8,9 @@ namespace MvvmCross.Droid.Views
     // Note that we set Activity = activity in multiple places
     // basically we just want to intercept the activity as early as possible
     // regardless of whether the activity has come from an app switch or a new start or...
-    public class MvxMonitorBasedAndroidCurrentTopActivity : IMvxAndroidCurrentTopActivity
+    public class MvxLifecycleMonitorCurrentTopActivity : IMvxAndroidCurrentTopActivity
     {
-        public MvxMonitorBasedAndroidCurrentTopActivity(IMvxAndroidActivityLifetimeListener listener)
+        public MvxLifecycleMonitorCurrentTopActivity(IMvxAndroidActivityLifetimeListener listener)
         {
             listener.ActivityChanged += Listener_ActivityChanged;
         }
