@@ -46,6 +46,7 @@ namespace MvvmCross.Forms.Uwp.Presenters
                 {
                     _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder, attributeTypesToActionsDictionary: AttributeTypesToActionsDictionary);
                     _formsPagePresenter.ClosePlatformViews = ClosePlatformViews;
+                    _formsPagePresenter.PlatformCreatePresentationAttribute = CreatePresentationAttribute;
                     Mvx.RegisterSingleton(_formsPagePresenter);
                 }
                 return _formsPagePresenter;
@@ -66,12 +67,6 @@ namespace MvvmCross.Forms.Uwp.Presenters
         public override void ChangePresentation(MvxPresentationHint hint)
         {
             FormsPagePresenter.ChangePresentation(hint);
-        }
-
-        public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
-        {
-            var presentationAttribute = FormsPagePresenter.CreatePresentationAttribute(viewModelType, viewType);
-            return presentationAttribute ?? base.CreatePresentationAttribute(viewModelType, viewType);
         }
 
         public virtual bool ClosePlatformViews()

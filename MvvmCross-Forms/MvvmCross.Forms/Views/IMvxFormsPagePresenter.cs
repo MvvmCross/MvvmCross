@@ -16,6 +16,9 @@ namespace MvvmCross.Forms.Views
 
         Func<bool> ClosePlatformViews { get; set; }
 
+        // This method allows each platform to create attributes for native views
+        Func<Type,Type, MvxBasePresentationAttribute> PlatformCreatePresentationAttribute { get; set; }
+
         Func<Type, bool> ShowPlatformHost { get; set; }
     }
 }

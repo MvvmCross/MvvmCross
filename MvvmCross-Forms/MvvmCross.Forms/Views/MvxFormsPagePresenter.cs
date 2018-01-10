@@ -55,6 +55,8 @@ namespace MvvmCross.Forms.Views
             }
         }
 
+        public Func<Type, Type, MvxBasePresentationAttribute> PlatformCreatePresentationAttribute { get; set; }
+
         public virtual Func<Type, bool> ShowPlatformHost { get; set; }
         public virtual Func<bool> ClosePlatformViews { get; set; }
 
@@ -153,7 +155,7 @@ namespace MvvmCross.Forms.Views
 
         public async override void ChangePresentation(MvxPresentationHint hint)
         {
-            var navigation = GetPageOfType<NavigationPage>().Navigation;
+            var navigation = GetPageOfType<NavigationPage>()?.Navigation;
             if (hint is MvxPopToRootPresentationHint popToRootHint)
             {
                 // Make sure all modals are closed
@@ -355,7 +357,7 @@ namespace MvvmCross.Forms.Views
                 return new MvxNavigationPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
 
-            return null;
+            return PlatformCreatePresentationAttribute?.Invoke(viewModelType,viewType);
         }
 
         public virtual void ShowContentPage(

@@ -1,25 +1,11 @@
-// MvxFormsIosPagePresenter.cs
-// 2015 (c) Copyright Cheesebaron. http://ostebaronen.dk
-// MvvmCross.Forms is licensed using Microsoft Public License (Ms-PL)
-// Contributions and inspirations noted in readme.md and license.txt
-//
-// Project Lead - Tomasz Cielecki, @cheesebaron, mvxplugins@ostebaronen.dk
-// Contributor - Marcos Cobeña Morián, @CobenaMarcos, marcoscm@me.com
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using AppKit;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
-using MvvmCross.Forms.Views.Attributes;
-using MvvmCross.Mac.Views;
 using MvvmCross.Mac.Views.Presenters;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
-using Xamarin.Forms;
+using System;
 
 namespace MvvmCross.Forms.Mac.Presenters
 {
@@ -48,6 +34,7 @@ namespace MvvmCross.Forms.Mac.Presenters
                 {
                     _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder, attributeTypesToActionsDictionary: AttributeTypesToActionsDictionary);
                     _formsPagePresenter.ClosePlatformViews = ClosePlatformViews;
+                    _formsPagePresenter.PlatformCreatePresentationAttribute = CreatePresentationAttribute;
                     Mvx.RegisterSingleton(_formsPagePresenter);
                 }
                 return _formsPagePresenter;
@@ -68,12 +55,6 @@ namespace MvvmCross.Forms.Mac.Presenters
             base.RegisterAttributeTypes();
 
             FormsPagePresenter.RegisterAttributeTypes();
-        }
-
-        public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
-        {
-            var presentationAttribute = FormsPagePresenter.CreatePresentationAttribute(viewModelType, viewType);
-            return presentationAttribute ?? base.CreatePresentationAttribute(viewModelType, viewType);
         }
 
         public virtual bool ClosePlatformViews()
