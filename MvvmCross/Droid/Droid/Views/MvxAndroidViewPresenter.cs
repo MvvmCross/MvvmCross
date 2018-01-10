@@ -570,7 +570,39 @@ namespace MvvmCross.Droid.Views
         protected virtual Fragment GetFragmentByViewType(Type type)
         {
             var fragmentName = FragmentJavaName(type);
-            return CurrentFragmentManager.FindFragmentByTag(fragmentName);
+            var fragment = CurrentFragmentManager?.FindFragmentByTag(fragmentName);
+
+            if (fragment != null)
+            {
+                return fragment;
+            }
+
+            return FindFragmentInChildren(fragmentName, CurrentFragmentManager);
+        }
+
+        protected virtual Fragment FindFragmentInChildren(string fragmentName, FragmentManager fragManager)
+        {
+            if(fragManager.BackStackEntryCount == 0)
+                return null;
+
+            for (int i = 0; i < fragManager.BackStackEntryCount; i++)
+            {
+                var parentFrag = fragManager.FindFragmentById(fragManager.GetBackStackEntryAt(i).Id);
+
+                //let's try again finding it
+                var frag = parentFrag?.ChildFragmentManager?.FindFragmentByTag(fragmentName);
+
+                //if we found the frag lets return it!
+                if (frag != null)
+                {
+                    return frag;
+                }
+
+                //reloop for other fragments
+                FindFragmentInChildren(fragmentName, parentFrag?.ChildFragmentManager);
+            }
+
+            return null;
         }
     }
 }

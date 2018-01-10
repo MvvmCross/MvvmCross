@@ -594,7 +594,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return FindFragmentInChildren(fragmentName, CurrentFragmentManager);
         }
 
-        private Fragment FindFragmentInChildren(string fragmentName, FragmentManager fragManager)
+        protected virtual Fragment FindFragmentInChildren(string fragmentName, FragmentManager fragManager)
         {
             if (fragManager?.Fragments != null && !fragManager.Fragments.Any()) return null;
 

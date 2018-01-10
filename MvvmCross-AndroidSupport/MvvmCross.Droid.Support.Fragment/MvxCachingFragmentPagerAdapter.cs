@@ -122,7 +122,7 @@ namespace MvvmCross.Droid.Support.V4
             return fragment;
         }
 
-        private static string FragmentJavaName(Type fragmentType)
+        protected string FragmentJavaName(Type fragmentType)
         {
             return Class.FromType(fragmentType).Name;
         }
