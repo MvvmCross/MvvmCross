@@ -1,4 +1,5 @@
 using System;
+using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Wpf.Views;
 using MvvmCross.Wpf.Views.Presenters.Attributes;
@@ -16,7 +17,7 @@ namespace Playground.Wpf.Views
             InitializeComponent();
         }
 
-        public MvxBasePresentationAttribute PresentationAttribute()
+        public MvxBasePresentationAttribute PresentationAttribute(MvxViewModelRequest request)
         {
             return new MvxWindowPresentationAttribute
             {

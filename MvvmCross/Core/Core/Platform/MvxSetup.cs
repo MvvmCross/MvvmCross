@@ -342,22 +342,40 @@ namespace MvvmCross.Core.Platform
 
         protected abstract IMvxNameMapping CreateViewToViewModelNaming();
 
+        private MvxViewModelByNameLookup _viewModelNameLookup;
+        private MvxViewModelByNameLookup ViewModelNameLookup => _viewModelNameLookup ?? (_viewModelNameLookup = new MvxViewModelByNameLookup());
+        protected virtual IMvxViewModelByNameLookup CreateViewModelByNameLookup()
+        {
+            return ViewModelNameLookup;
+        }
+        protected virtual IMvxViewModelByNameRegistry CreateViewModelByNameRegistry()
+        {
+            return ViewModelNameLookup;
+        }
+
+        protected virtual void RegisterViewTypeFinder()
+        {
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewModelTypeFinder, MvxViewModelViewTypeFinder>();
+        }
+
         protected virtual void InitializeViewModelTypeFinder()
         {
-            var viewModelByNameLookup = new MvxViewModelByNameLookup();
+            var viewModelByNameLookup = CreateViewModelByNameLookup();
+            Mvx.RegisterSingleton(viewModelByNameLookup);
+
+            var viewModelByNameRegistry = CreateViewModelByNameRegistry();
+            Mvx.RegisterSingleton(viewModelByNameRegistry);
 
             var viewModelAssemblies = GetViewModelAssemblies();
             foreach (var assembly in viewModelAssemblies)
             {
-                viewModelByNameLookup.AddAll(assembly);
+                viewModelByNameRegistry.AddAll(assembly);
             }
 
-            Mvx.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelByNameLookup);
-            Mvx.RegisterSingleton<IMvxViewModelByNameRegistry>(viewModelByNameLookup);
-
             var nameMappingStrategy = CreateViewToViewModelNaming();
-            var finder = new MvxViewModelViewTypeFinder(viewModelByNameLookup, nameMappingStrategy);
-            Mvx.RegisterSingleton<IMvxViewModelTypeFinder>(finder);
+            Mvx.RegisterSingleton(nameMappingStrategy);
+
+            RegisterViewTypeFinder();
         }
 
         protected virtual void InitializeViewLookup()
