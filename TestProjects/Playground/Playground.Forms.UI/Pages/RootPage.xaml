@@ -18,6 +18,7 @@
                 <Button Text="Show Master/Detail" mvx:Bi.nd="Command ShowSplitCommand"/>
                 <Button Text="Show Mixed Navigation" mvx:Bi.nd="Command ShowMixedNavigationCommand"/>
                 <Label Text="Native views" />
+                <Button Text="Show Native Page" mvx:Bi.nd="Command ShowNativeCommand"/>
                 <Button Text="Show Override" mvx:Bi.nd="Command ShowOverrideAttributeCommand"/>
                 <Button Text="Show BottomSheet" mvx:Bi.nd="Command ShowSheetCommand"/>
                 <Label Text="Test views" />
