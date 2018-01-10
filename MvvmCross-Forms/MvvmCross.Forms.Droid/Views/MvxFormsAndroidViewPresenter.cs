@@ -42,9 +42,7 @@ namespace MvvmCross.Forms.Droid.Views
             {
                 if (_formsPagePresenter == null)
                 {
-                    _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder, attributeTypesToActionsDictionary: AttributeTypesToActionsDictionary);
-                    _formsPagePresenter.ClosePlatformViews = ClosePlatformViews;
-                    _formsPagePresenter.ShowPlatformHost = ShowPlatformHost;
+                    _formsPagePresenter = new MvxFormsPagePresenter(this);
                     Mvx.RegisterSingleton(_formsPagePresenter);
                 }
                 return _formsPagePresenter;
@@ -63,23 +61,17 @@ namespace MvvmCross.Forms.Droid.Views
         public override void RegisterAttributeTypes()
         {
             base.RegisterAttributeTypes();
-
             FormsPagePresenter.RegisterAttributeTypes();
         }
 
-        public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
+        public override void ChangePresentation(MvxPresentationHint hint)
         {
-            var presentationAttribute = FormsPagePresenter.CreatePresentationAttribute(viewModelType, viewType);
-            return presentationAttribute ?? base.CreatePresentationAttribute(viewModelType, viewType);
+            FormsPagePresenter.ChangePresentation(hint);
         }
 
-        public virtual bool ClosePlatformViews()
+        public override void Close(IMvxViewModel viewModel)
         {
-            CloseFragments();
-            if (!(CurrentActivity is MvxFormsAppCompatActivity || CurrentActivity is MvxFormsApplicationActivity) &&
-                !(CurrentActivity is MvxSplashScreenActivity || CurrentActivity is MvxSplashScreenAppCompatActivity))
-                CurrentActivity?.Finish();
-            return true;
+            FormsPagePresenter.Close(viewModel);
         }
 
         public virtual bool ShowPlatformHost(Type hostViewModel = null)
@@ -97,14 +89,13 @@ namespace MvvmCross.Forms.Droid.Views
             return true;
         }
 
-        public override void ChangePresentation(MvxPresentationHint hint)
+        public virtual bool ClosePlatformViews()
         {
-            FormsPagePresenter.ChangePresentation(hint);
-        }
-
-        public override void Close(IMvxViewModel viewModel)
-        {
-            FormsPagePresenter.Close(viewModel);
+            CloseFragments();
+            if (!(CurrentActivity is MvxFormsAppCompatActivity || CurrentActivity is MvxFormsApplicationActivity) &&
+                !(CurrentActivity is MvxSplashScreenActivity || CurrentActivity is MvxSplashScreenAppCompatActivity))
+                CurrentActivity?.Finish();
+            return true;
         }
     }
 }

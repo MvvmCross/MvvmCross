@@ -44,8 +44,7 @@ namespace MvvmCross.Forms.Uwp.Presenters
             {
                 if (_formsPagePresenter == null)
                 {
-                    _formsPagePresenter = new MvxFormsPagePresenter(FormsApplication, ViewsContainer, ViewModelTypeFinder, attributeTypesToActionsDictionary: AttributeTypesToActionsDictionary);
-                    _formsPagePresenter.ClosePlatformViews = ClosePlatformViews;
+                    _formsPagePresenter = new MvxFormsPagePresenter(this);
                     Mvx.RegisterSingleton(_formsPagePresenter);
                 }
                 return _formsPagePresenter;
@@ -59,25 +58,12 @@ namespace MvvmCross.Forms.Uwp.Presenters
         public override void RegisterAttributeTypes()
         {
             base.RegisterAttributeTypes();
-
             FormsPagePresenter.RegisterAttributeTypes();
         }
 
         public override void ChangePresentation(MvxPresentationHint hint)
         {
             FormsPagePresenter.ChangePresentation(hint);
-        }
-
-        public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
-        {
-            var presentationAttribute = FormsPagePresenter.CreatePresentationAttribute(viewModelType, viewType);
-            return presentationAttribute ?? base.CreatePresentationAttribute(viewModelType, viewType);
-        }
-
-        public virtual bool ClosePlatformViews()
-        {
-            MvxTrace.Trace($"Closing of native Views in Forms is not supported on UWP.");
-            return false;
         }
 
         public override void Show(MvxViewModelRequest request)
@@ -88,6 +74,18 @@ namespace MvvmCross.Forms.Uwp.Presenters
         public override void Close(IMvxViewModel viewModel)
         {
             FormsPagePresenter.Close(viewModel);
+        }
+
+        public virtual bool ShowPlatformHost(Type hostViewModel = null)
+        {
+            MvxTrace.Trace($"Showing of native host View in Forms is not supported.");
+            return false;
+        }
+
+        public virtual bool ClosePlatformViews()
+        {
+            MvxTrace.Trace($"Closing of native Views in Forms is not supported.");
+            return false;
         }
     }
 }
