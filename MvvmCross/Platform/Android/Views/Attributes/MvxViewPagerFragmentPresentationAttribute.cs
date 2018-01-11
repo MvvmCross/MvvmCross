@@ -32,7 +32,7 @@ namespace MvvmCross.Droid.Views.Attributes
             Title = title;
             ViewPagerResourceId = !string.IsNullOrEmpty(viewPagerResourceName)
                 ? context.Resources.GetIdentifier(viewPagerResourceName, "id", context.PackageName)
-                : Resource.Id.Content;
+                : Android.Resource.Id.Content;
         }
 
         /// <summary>
