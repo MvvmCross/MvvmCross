@@ -111,6 +111,8 @@
     <Compile Include="Views\Fragments\MvxFragmentExtensions.cs" />
     <Compile Include="Views\Fragments\MvxFragmentViewExtensionMethods.cs" />
     <Compile Include="Views\Fragments\MvxPreferenceFragment.cs" />
+    <Compile Include="Views\MvxLifecycleMonitorCurrentTopActivity.cs" />
+    <Compile Include="Views\MvxApplicationCallbacksCurrentTopActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Droid\MvvmCross.Platform.Droid.csproj">
