@@ -114,7 +114,7 @@ namespace MvvmCross.Droid.Support.V4
 
         private void InitializeTabHost(Bundle args)
         {
-            _tabHost = (TabHost)FindViewById(Resource.Id.TabHost);
+            _tabHost = (TabHost)FindViewById(Android.Resource.Id.TabHost);
             _tabHost.Setup();
 
             AddTabs(args);

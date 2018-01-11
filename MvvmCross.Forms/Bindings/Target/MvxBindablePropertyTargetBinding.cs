@@ -21,7 +21,7 @@ namespace MvvmCross.Forms.Bindings.Target
     {
         private readonly BindableProperty _targetBindableProperty;
         private readonly Type _actualPropertyType;
-        private readonly TypeConverter _typeConverter;
+        private readonly Xamarin.Forms.TypeConverter _typeConverter;
         private MvxNotifyPropertyChangedEventSubscription _propertyChangedSubscription;
 
         public MvxBindablePropertyTargetBinding(object target, BindableProperty targetBindableProperty, Type actualPropertyType)
