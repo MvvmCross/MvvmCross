@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net461;uap10.0;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid80;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net461;uap10.0.16299;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid80;netcoreapp2.0</TargetFrameworks>
     <AssemblyName>MvvmCross.Plugin.PictureChooser</AssemblyName>
     <RootNamespace>MvvmCross.Plugin.PictureChooser</RootNamespace>
     <Description></Description>
@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Platforms\**\*.cs" />
-    <None Include="Platforms\**\*.cs" />
+    <Compile Remove="Platform\**\*.cs" />
+    <None Include="Platform\**\*.cs" />
     <None Include="Resources\*.cs" />
     <Compile Remove="Resources\*.cs" />
     <Compile Include="..\All\Preserve.cs" />
@@ -20,57 +20,57 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <Compile Include="Platforms\Netstandard2.0\**\*.cs" />
+    <Compile Include="Platform\Netstandard2.0\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
-    <Compile Include="Platforms\Net461\**\*.cs" />
+    <Compile Include="Platform\Net461\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">
-    <Compile Include="Platforms\Shared\**\*.cs" />
+    <Compile Include="Platform\Shared\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0' ">
-    <Compile Include="Platforms\Windows-common\**\*.cs" />
-    <Compile Include="Platforms\Uap10.0\**\*.cs" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.16299' ">
+    <Compile Include="Platform\Windows-common\**\*.cs" />
+    <Compile Include="Platform\Uap\**\*.cs" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.4.0" />
     <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
-    <Compile Include="Platforms\Apple-common\**\*.cs" />
-    <Compile Include="Platforms\Ios\**\*.cs" />
-    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+    <Compile Include="Platform\Apple-common\**\*.cs" />
+    <Compile Include="Platform\Ios\**\*.cs" />
+    <Compile Include="Platform\Xamarin-common\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.Mac20' ">
-    <Compile Include="Platforms\Apple-common\**\*.cs" />
-    <Compile Include="Platforms\Mac\**\*.cs" />
-    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+    <Compile Include="Platform\Apple-common\**\*.cs" />
+    <Compile Include="Platform\Mac\**\*.cs" />
+    <Compile Include="Platform\Xamarin-common\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.TVOS10' ">
-    <Compile Include="Platforms\Apple-common\**\*.cs" />
-    <Compile Include="Platforms\Tvos\**\*.cs" />
-    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+    <Compile Include="Platform\Apple-common\**\*.cs" />
+    <Compile Include="Platform\Tvos\**\*.cs" />
+    <Compile Include="Platform\Xamarin-common\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.WatchOS10' ">
-    <Compile Include="Platforms\Apple-common\**\*.cs" />
-    <Compile Include="Platforms\Watchos\**\*.cs" />
-    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+    <Compile Include="Platform\Apple-common\**\*.cs" />
+    <Compile Include="Platform\Watchos\**\*.cs" />
+    <Compile Include="Platform\Xamarin-common\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
-    <Compile Include="Platforms\Android\**\*.cs" />
-    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+    <Compile Include="Platform\Android\**\*.cs" />
+    <Compile Include="Platform\Xamarin-common\**\*.cs" />
     <AndroidResource Include="Resources\**\*.xml" SubType="Designer" Generator="MSBuild:UpdateAndroidResources" />
     <PackageReference Include="Xamarin.Android.Support.Exif" Version="26.1.0.1" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
-    <Compile Include="Platforms\Netcoreapp2.0\**\*.cs" />
+    <Compile Include="Platform\Netcoreapp2.0\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup>
