@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Reflection;
 using NUnit.Framework;
 
 namespace MvvmCross.Platform.Test
