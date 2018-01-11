@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net461;uap10.0;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid80;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net461;uap10.0.16299;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid80;netcoreapp2.0</TargetFrameworks>
     <AssemblyName>MvvmCross.Forms</AssemblyName>
     <RootNamespace>MvvmCross.Forms</RootNamespace>
     <Description></Description>
@@ -26,9 +26,9 @@
     <Compile Include="Platforms\Shared\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.16299' ">
     <Compile Include="Platforms\Windows-common\**\*.cs" />
-    <Compile Include="Platforms\Uap10.0\**\*.cs" />
+    <Compile Include="Platforms\Uap\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">

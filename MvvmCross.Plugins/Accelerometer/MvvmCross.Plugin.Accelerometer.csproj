@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net461;uap10.0.16299.16299;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid80;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net461;uap10.0.16299;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid80;netcoreapp2.0</TargetFrameworks>
     <AssemblyName>MvvmCross.Plugin.Accelerometer</AssemblyName>
     <RootNamespace>MvvmCross.Plugin.Accelerometer</RootNamespace>
     <Description></Description>
@@ -31,7 +31,7 @@
     <Compile Include="Platform\Shared\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.16299.16299' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.16299' ">
     <Compile Include="Platform\Windows-common\**\*.cs" />
     <Compile Include="Platform\Uap\**\*.cs" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.4.0" />
