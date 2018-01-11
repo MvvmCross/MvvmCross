@@ -29,7 +29,7 @@ namespace MvvmCross.Droid.Views.Attributes
 
             TabLayoutResourceId = !string.IsNullOrEmpty(tabLayoutResourceName)
                 ? context.Resources.GetIdentifier(tabLayoutResourceName, "id", context.PackageName)
-                : Resource.Id.Content;
+                : Android.Resource.Id.Content;
         }
 
         /// <summary>
