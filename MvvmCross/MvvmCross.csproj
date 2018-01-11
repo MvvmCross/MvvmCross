@@ -33,7 +33,8 @@
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.16299' ">
     <Compile Include="Platform\Windows-common\**\*.cs" />
-    <Compile Include="Platform\Uap10.0\**\*.cs" />
+    <Compile Include="Platform\Uap\**\*.cs" />
+    <Compile Include="Platform\uap10.0.16299\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
