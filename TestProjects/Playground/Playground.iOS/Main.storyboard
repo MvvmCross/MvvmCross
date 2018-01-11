@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -595,15 +596,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="451">
-                                <rect key="frame" x="280" y="301" width="39" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="453">
+                                <rect key="frame" x="106" y="254" width="163" height="30"/>
+                                <state key="normal" title="Initiate Stack navigation">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="451">
+                                <rect key="frame" x="168" y="317.5" width="39" height="30"/>
                                 <state key="normal" title="Close">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="453">
-                                <rect key="frame" x="106" y="254.5" width="163" height="30"/>
-                                <state key="normal" title="Initiate Stack navigation">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3j-un-iNQ">
+                                <rect key="frame" x="143.5" y="385" width="88" height="30"/>
+                                <state key="normal" title="Show Tabs B">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -617,11 +624,14 @@
                             <constraint firstItem="453" firstAttribute="centerX" secondItem="454" secondAttribute="centerX" id="461"/>
                             <constraint firstItem="451" firstAttribute="top" secondItem="453" secondAttribute="bottom" constant="33" id="462"/>
                             <constraint firstItem="451" firstAttribute="centerX" secondItem="454" secondAttribute="centerX" id="463"/>
+                            <constraint firstItem="Y3j-un-iNQ" firstAttribute="top" secondItem="451" secondAttribute="bottom" constant="37.5" id="1DI-UF-EWi"/>
+                            <constraint firstItem="Y3j-un-iNQ" firstAttribute="centerX" secondItem="454" secondAttribute="centerX" id="olN-Fj-L3b"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="btnClose" destination="451" id="450"/>
                         <outlet property="btnShowStack" destination="453" id="452"/>
+                        <outlet property="btnShowTabsB" destination="Y3j-un-iNQ" id="XKP-Oj-0L1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="465" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -711,6 +721,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="521" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3284" y="667"/>
+        </scene>
+        <!--Tabs RootB View-->
+        <scene sceneID="rMb-1E-ssD">
+            <objects>
+                <tabBarController storyboardIdentifier="TabsRootBView" id="Iyl-4b-oh5" customClass="TabsRootBView" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EOY-ad-9As">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uKD-Ec-EeJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3966" y="669"/>
         </scene>
     </scenes>
 </document>

@@ -17,6 +17,8 @@ namespace Playground.Core.ViewModels
             CloseViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
 
             ShowPageOneCommand = new MvxCommand(() => _navigationService.ChangePresentation(new MvxPagePresentationHint(typeof(Tab1ViewModel))));
+
+            ShowTabsRootBCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<TabsRootBViewModel>());
         }
 
         public IMvxAsyncCommand ShowRootViewModelCommand { get; private set; }
@@ -24,5 +26,7 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand CloseViewModelCommand { get; private set; }
 
         public IMvxCommand ShowPageOneCommand { get; private set; }
+
+        public IMvxAsyncCommand ShowTabsRootBCommand { get; private set; }
     }
 }
