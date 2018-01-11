@@ -55,11 +55,5 @@
     <Compile Include="Views\IMvxEventSourceViewController.cs" />
     <Compile Include="Views\MvxEventSourcePageViewController.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Platform\MvvmCross.Platform.csproj">
-      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
-      <Name>MvvmCross.Platform</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

@@ -78,10 +78,6 @@
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
       <Name>MvvmCross.Binding</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
-      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
-      <Name>MvvmCross.Platform</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Core\Core\MvvmCross.Core.csproj">
       <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
       <Name>MvvmCross.Core</Name>

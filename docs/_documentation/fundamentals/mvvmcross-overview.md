@@ -29,7 +29,7 @@ There are a few key objects within an MvvmCross application:
 
 - in each "ui", there are:
  - the native `Application` object - responsible for native lifecycle events - on each platform this object is a platform-specific class
- - an MvvmCross `Setup` class - responsible for 'bootstraping' MvvmCross, your 'core' and your 'ui'
+ - an MvvmCross `Setup` class - responsible for 'bootstrapping' MvvmCross, your 'core' and your 'ui'
  - one or more `Views` - each one responsible for presenting one of your `ViewModels`
  - a `Presenter` - responsible for deciding how `Views` are shown
  - custom UI code - for controls, gestures, events, etc

@@ -112,10 +112,6 @@
       <Project>{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}</Project>
       <Name>MvvmCross.Droid.Support.Fragment</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
-      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
-      <Name>MvvmCross.Platform</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\MvvmCross\Droid\Droid\MvvmCross.Droid.csproj">
       <Project>{7A6BE137-D0F1-46A1-AE5C-81FAEEDDDF02}</Project>
       <Name>MvvmCross.Droid</Name>

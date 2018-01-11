@@ -51,10 +51,6 @@
     <Compile Include="TestClasses\GoogleBooks\VolumeInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
-      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
-      <Name>MvvmCross.Platform</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross\Test\Test.Core\MvvmCross.Test.Core.csproj">
       <Project>{0E0242BC-0141-4D1E-9976-8363A670917C}</Project>
       <Name>MvvmCross.Test.Core</Name>

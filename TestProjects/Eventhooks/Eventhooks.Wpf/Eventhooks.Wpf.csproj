@@ -107,10 +107,6 @@
       <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
       <Name>MvvmCross.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
-      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
-      <Name>MvvmCross.Platform</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross\Platform\Wpf\MvvmCross.Platform.Wpf.csproj">
       <Project>{3688d6fc-e7f4-485f-8b27-96c0a8c7eaed}</Project>
       <Name>MvvmCross.Platform.Wpf</Name>

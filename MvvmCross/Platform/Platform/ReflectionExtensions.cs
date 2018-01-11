@@ -30,7 +30,7 @@ namespace MvvmCross.Platform
 
         public static Attribute[] GetCustomAttributes(this Type type, Type attributeType, bool inherit)
         {
-            return type.GetTypeInfo().GetCustomAttributes(attributeType, inherit).ToArray();
+            return CustomAttributeExtensions.GetCustomAttributes(type, attributeType, inherit).ToArray();
         }
 
         public static IEnumerable<ConstructorInfo> GetConstructors(this Type type)

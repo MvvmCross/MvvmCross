@@ -11,13 +11,13 @@ This document will asume that you are using the new `csproj` files and not using
 
 ## .NET Standard 1.0 - 1.6
 
-In order to consume PCL projects in a .NET Standard project tageting versions 1.0 through to 1.6, you need to add a package target fallback for the PCL profile you want to consume. So let us assume you want to add `MvvmCross.Bindings` to your project. This library uses the PCL profile which has a signature that looks like `portable-net45+win+wpa81+wp80`. To add this as a target fallback you simply edit your `csproj` file and add the following line to it.
+In order to consume PCL projects in a .NET Standard project targeting versions 1.0 through to 1.6, you need to add a package target fallback for the PCL profile you want to consume. So let us assume you want to add `MvvmCross.Bindings` to your project. This library uses the PCL profile which has a signature that looks like `portable-net45+win+wpa81+wp80`. To add this as a target fallback you simply edit your `csproj` file and add the following line to it.
 
 ```xml
 <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
 ```
 
-This line would normaly belong in the `PropertyGroup` which contains the `TargetFramework`, so it would look like. You can have multiple `;`-separated fallbacks here, which helps you consume different profiles.
+This line would normally belong in the `PropertyGroup` which contains the `TargetFramework`, as shown below. You can have multiple `;`-separated fallbacks here, which helps you consume different profiles.
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
@@ -34,7 +34,7 @@ From here you should be able to add MvvmCross and other PCL based NuGet packages
 
 ## .NET Standard 2
 
-When using .NET Standard 2 you do not need to specify a package target fallback. In .NET Standard 2 `PackageTargetFallback` flag has been depricated and instead defaults to net461 (.NET Framework 4.6.1) or higher. If however, this does not suit your use case you can override this behaviour with the `AssetTargetFallback`.
+When using .NET Standard 2 you do not need to specify a package target fallback. In .NET Standard 2 the `PackageTargetFallback` flag has been deprecated and instead defaults to net461 (.NET Framework 4.6.1) or higher. If however, this does not suit your use case you can override this behaviour with the `AssetTargetFallback`.
 
 ```xml
 <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>

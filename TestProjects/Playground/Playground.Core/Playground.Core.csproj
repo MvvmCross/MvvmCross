@@ -41,6 +41,7 @@
     <Compile Include="ViewModels\MixedNavTab2ViewModel.cs" />
     <Compile Include="ViewModels\MixedNavTab1ViewModel.cs" />
     <Compile Include="ViewModels\MixedNavTabsViewModel.cs" />
+    <Compile Include="ViewModels\NativeViewModel.cs" />
     <Compile Include="ViewModels\WindowChildViewModel.cs" />
     <Compile Include="ViewModels\RootViewModel.cs" />
     <Compile Include="ViewModels\ChildViewModel.cs" />
@@ -75,10 +76,6 @@
     <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>MvvmCross.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
-      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
-      <Name>MvvmCross.Platform</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
       <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>

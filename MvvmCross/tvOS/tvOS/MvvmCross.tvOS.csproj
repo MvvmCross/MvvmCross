@@ -47,7 +47,6 @@
   <ItemGroup>
     <Folder Include="Interfaces\" />
     <Folder Include="Resources\" />
-    <Folder Include="Views\Presenters\Attributes\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\AssemblyInfo.cs">
@@ -102,10 +101,6 @@
     <ProjectReference Include="..\..\Core\Core\MvvmCross.Core.csproj">
       <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
       <Name>MvvmCross.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
-      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
-      <Name>MvvmCross.Platform</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Binding\tvOS\MvvmCross.Binding.tvOS.csproj">
       <Project>{116A5BEF-70D6-4D45-BBD5-6C26C2C39C06}</Project>

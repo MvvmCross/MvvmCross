@@ -122,10 +122,6 @@
       <Project>{caf8935f-56fe-4485-9d34-4a38fe79f6c9}</Project>
       <Name>MvvmCross.Platform.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
-      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
-      <Name>MvvmCross.Platform</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PageRenderer.Core\PageRendererExample.Core.csproj">
       <Project>{8A421AF2-EA6F-456B-8EA2-3A3FF8AC8B57}</Project>
       <Name>PageRendererExample.Core</Name>

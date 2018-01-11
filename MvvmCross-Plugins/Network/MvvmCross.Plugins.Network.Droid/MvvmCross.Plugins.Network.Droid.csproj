@@ -66,10 +66,6 @@
       <Project>{caf8935f-56fe-4485-9d34-4a38fe79f6c9}</Project>
       <Name>MvvmCross.Platform.Droid</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
-      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
-      <Name>MvvmCross.Platform</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MvvmCross.Plugins.Network\MvvmCross.Plugins.Network.csproj">
       <Project>{8507CAFE-6A92-4267-8EBF-6FC8365FB48D}</Project>
       <Name>MvvmCross.Plugins.Network</Name>

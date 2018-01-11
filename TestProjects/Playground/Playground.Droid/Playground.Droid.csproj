@@ -113,6 +113,7 @@
     <Compile Include="Views\SplitDetailNavView.cs" />
     <Compile Include="Views\NestedChildView.cs" />
     <Compile Include="Views\TabsRootBView.cs" />
+    <Compile Include="MainApplication.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -181,10 +182,6 @@
     <ProjectReference Include="..\..\..\MvvmCross\Platform\Droid\MvvmCross.Platform.Droid.csproj">
       <Project>{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}</Project>
       <Name>MvvmCross.Platform.Droid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
-      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
-      <Name>MvvmCross.Platform</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross-AndroidSupport\MvvmCross.Droid.Support.Design\MvvmCross.Droid.Support.Design.csproj">
       <Project>{AC97FC60-7A13-47F9-B3AC-2B2C25147EB8}</Project>

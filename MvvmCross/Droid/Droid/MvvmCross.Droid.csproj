@@ -111,15 +111,13 @@
     <Compile Include="Views\Fragments\MvxFragmentExtensions.cs" />
     <Compile Include="Views\Fragments\MvxFragmentViewExtensionMethods.cs" />
     <Compile Include="Views\Fragments\MvxPreferenceFragment.cs" />
+    <Compile Include="Views\MvxLifecycleMonitorCurrentTopActivity.cs" />
+    <Compile Include="Views\MvxApplicationCallbacksCurrentTopActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Droid\MvvmCross.Platform.Droid.csproj">
       <Project>{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}</Project>
       <Name>MvvmCross.Platform.Droid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Platform\Platform\MvvmCross.Platform.csproj">
-      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
-      <Name>MvvmCross.Platform</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Binding\Droid\MvvmCross.Binding.Droid.csproj">
       <Project>{47FD89C3-19DC-4BD2-9B6D-FB8363BE7EB9}</Project>
@@ -145,9 +143,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="Views\Attributes\" />
-    <Folder Include="Views\Fragments\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

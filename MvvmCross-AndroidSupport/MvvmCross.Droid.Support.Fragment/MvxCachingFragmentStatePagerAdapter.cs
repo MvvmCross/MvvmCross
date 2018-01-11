@@ -38,7 +38,7 @@ namespace MvvmCross.Droid.Support.V4
 
         public List<MvxViewPagerFragmentInfo> FragmentsInfo { get; }
 
-        protected static string FragmentJavaName(Type fragmentType)
+        protected string FragmentJavaName(Type fragmentType)
         {
             return Class.FromType(fragmentType).Name;
         }
