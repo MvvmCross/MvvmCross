@@ -8,6 +8,7 @@ using MvvmCross.Core.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Mac.Views;
 using MvvmCross.Core.Platform;
+using System.Reflection;
 
 namespace MvvmCross.Mac.Views
 {
