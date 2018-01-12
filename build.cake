@@ -68,7 +68,7 @@ Task("Build")
     {
         Configuration = "Release",
         ToolPath = msBuildPath,
-        Verbosity = Verbosity.Minimal,
+        Verbosity = Verbosity.Verbose,
         ArgumentCustomization = args => args.Append("/m")
     };
 

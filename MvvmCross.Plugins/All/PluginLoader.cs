@@ -15,7 +15,9 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.All
 {
+#pragma warning disable CS0436 // Type conflicts with imported type
     [Preserve(AllMembers = true)]
+#pragma warning restore CS0436 // Type conflicts with imported type
     public class PluginLoader
         : IMvxPluginLoader
     {
