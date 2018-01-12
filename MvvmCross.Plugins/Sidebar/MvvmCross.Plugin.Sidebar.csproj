@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
     <PackageReference Include="SidebarNavigation" Version="1.9.4" />
   </ItemGroup>
   
