@@ -182,7 +182,7 @@ namespace MvvmCross.Core.ViewModels
 
     public class MvxCommand<T>
         : MvxCommandBase
-        , IMvxCommand, IMvxCommand<T>
+        , IMvxCommand<T>
     {
         private readonly Func<T, bool> _canExecute;
         private readonly Action<T> _execute;

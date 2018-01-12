@@ -27,6 +27,8 @@ namespace MvvmCross.Core.ViewModels
         [Obsolete("Use the strongly typed version of CanExecute instead", true)]
         new bool CanExecute(object parameter);
 
+        void RaiseCanExecuteChanged();
+
         void Execute(T parameter);
 
         bool CanExecute(T parameter);
