@@ -17,7 +17,6 @@
   
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Fragment" Version="26.1.0.1" />
-    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
   </ItemGroup>
   
   <ItemGroup>

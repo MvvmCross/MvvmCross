@@ -34,8 +34,6 @@
   <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.16299' ">
     <Compile Include="Platform\Windows-common\**\*.cs" />
     <Compile Include="Platform\Uap\**\*.cs" />
-    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.4.0" />
-    <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
