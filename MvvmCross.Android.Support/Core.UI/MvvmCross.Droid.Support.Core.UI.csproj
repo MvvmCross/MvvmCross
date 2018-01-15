@@ -9,8 +9,10 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <None Include="Resources\*.cs" />
+    <Compile Remove="Resources\*.cs" />
     <AndroidResource Include="Resources\**\*.xml" Generator="MSBuild:UpdateAndroidResources" />
-  </ItemGroup>  
+  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Core.UI" Version="26.1.0.1" />

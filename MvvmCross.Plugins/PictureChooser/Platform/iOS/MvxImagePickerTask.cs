@@ -18,7 +18,7 @@ using UIKit;
 
 namespace MvvmCross.Plugins.PictureChooser.iOS
 {
-    [Preserve(AllMembers = true)]
+    [MvvmCross.Platform.Preserve(AllMembers = true)]
 	public class MvxImagePickerTask
         : MvxIosTask, IMvxPictureChooserTask
     {
