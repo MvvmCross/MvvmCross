@@ -11,6 +11,7 @@ var sln = new FilePath("MvvmCross.sln");
 var outputDir = new DirectoryPath("artifacts");
 var nuspecDir = new DirectoryPath("nuspec");
 var target = Argument("target", "Default");
+var configuration = Argument("configuration", "Release");
 
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 
@@ -66,7 +67,7 @@ Task("Build")
 
     var settings = new MSBuildSettings 
     {
-        Configuration = "Release",
+        Configuration = configuration,
         ToolPath = msBuildPath,
         Verbosity = Verbosity.Minimal,
         ArgumentCustomization = args => args.Append("/m")
@@ -127,11 +128,12 @@ Task("PublishPackages")
     var apiKey = nugetKeySource.Item1;
     var source = nugetKeySource.Item2;
 
-    var nugetFiles = GetFiles("MvvmCross*/**/bin/Release/*.nupkg");
+    var nugetFiles = GetFiles("MvvmCross*/**/bin/" + configuration + "/*.nupkg");
 
     var policy = Policy
   		.Handle<Exception>()
-  		.WaitAndRetry(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(1.5, retryAttempt)));
+        .WaitAndRetry(5, retryAttempt => 
+            TimeSpan.FromSeconds(Math.Pow(1.5, retryAttempt)));
 
     foreach(var nugetFile in nugetFiles)
     {
