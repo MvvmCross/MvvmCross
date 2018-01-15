@@ -73,8 +73,10 @@ Task("Build")
         ArgumentCustomization = args => args.Append("/m")
     };
 
-    settings.Properties.Add("DebugSymbols", new List<string> { "True" });
-    settings.Properties.Add("DebugType", new List<string> { "Full" });
+    settings = settings
+        .WithProperty("DebugSymbols", "True")
+        .WithProperty("DebugType", "Embedded")
+        .WithProperty("Version", versionInfo.SemVer);
 
     MSBuild(sln, settings);
 });
