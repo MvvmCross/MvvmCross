@@ -83,13 +83,13 @@ Task("UnitTest")
     .Does(() =>
 {
     var testPaths = new List<FilePath> {
-        new FilePath("./MvvmCross.Tests/MvvmCross.Tests/bin/Release/MvvmCross.Tests.dll"),
-        new FilePath("./MvvmCross.Tests/Plugins.Color.Test/bin/Release/MvvmCross.Plugins.Color.Tests.dll"),
-        new FilePath("./MvvmCross.Tests/Plugins.JsonLocalization.Tests/bin/Release/MvvmCross.Plugins.JsonLocalization.Tests.dll"),
-        new FilePath("./MvvmCross.Tests/Plugins.Messenger.Test/bin/Release/MvvmCross.Plugins.Messenger.Tests.dll"),
-        new FilePath("./MvvmCross.Tests/Plugins.Network.Test/bin/Release/MvvmCross.Plugins.Network.Tests.dll"),
-        new FilePath("./MvvmCross.Tests/Plugins.ResourceLoader.Test/bin/Release/MvvmCross.Plugins.ResourceLoader.Tests.dll"),
-        new FilePath("./MvvmCross.Tests/Plugins.ResxLocalization.Tests/bin/Release/MvvmCross.Plugins.ResxLocalization.Tests.dll")
+        new FilePath("./MvvmCross.Tests/MvvmCross.Tests/bin/Release/netcoreapp2.0/MvvmCross.Tests.dll"),
+        new FilePath("./MvvmCross.Tests/Plugins.Color.Test/bin/Release/netcoreapp2.0/MvvmCross.Plugins.Color.Tests.dll"),
+        new FilePath("./MvvmCross.Tests/Plugins.JsonLocalization.Tests/bin/Release/netcoreapp2.0/MvvmCross.Plugins.JsonLocalization.Tests.dll"),
+        new FilePath("./MvvmCross.Tests/Plugins.Messenger.Test/bin/Release/netcoreapp2.0/MvvmCross.Plugins.Messenger.Tests.dll"),
+        new FilePath("./MvvmCross.Tests/Plugins.Network.Test/bin/Release/netcoreapp2.0/MvvmCross.Plugins.Network.Tests.dll"),
+        new FilePath("./MvvmCross.Tests/Plugins.ResourceLoader.Test/bin/Release/netcoreapp2.0/MvvmCross.Plugins.ResourceLoader.Tests.dll"),
+        new FilePath("./MvvmCross.Tests/Plugins.ResxLocalization.Tests/bin/Release/netcoreapp2.0/MvvmCross.Plugins.ResxLocalization.Tests.dll")
     };
 
     var testResultsPath = new DirectoryPath(outputDir + "/Tests/");
