@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\All\Preserve.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="SidebarNavigation" Version="1.9.4" />
   </ItemGroup>
   

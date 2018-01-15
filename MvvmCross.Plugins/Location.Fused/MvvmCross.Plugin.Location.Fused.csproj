@@ -12,7 +12,6 @@
     <None Include="Platforms\**\*.cs" />
     <None Include="Resources\*.cs" />
     <Compile Remove="Resources\*.cs" />
-    <Compile Include="..\All\Preserve.cs" />
   </ItemGroup>
   
   <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
