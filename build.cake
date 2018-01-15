@@ -130,7 +130,7 @@ Task("PublishPackages")
     var apiKey = nugetKeySource.Item1;
     var source = nugetKeySource.Item2;
 
-    var nugetFiles = GetFiles("MvvmCross*/**/bin/" + configuration + "/*.nupkg");
+    var nugetFiles = GetFiles("MvvmCross*/**/bin/" + configuration + "/**/*.nupkg");
 
     var policy = Policy
   		.Handle<Exception>()
@@ -149,7 +149,6 @@ Task("PublishPackages")
 });
 
 Task("UploadAppVeyorArtifact")
-    .WithCriteria(() => !AppVeyor.Environment.PullRequest.IsPullRequest)
     .WithCriteria(() => isRunningOnAppVeyor)
     .Does(() => {
 
@@ -157,7 +156,10 @@ Task("UploadAppVeyorArtifact")
 
     var uploadSettings = new AppVeyorUploadArtifactsSettings();
 
-    foreach(var file in GetFiles(outputDir.FullPath + "/*")) {
+    var artifacts = GetFiles("MvvmCross*/**/bin/" + configuration + "/**/*.nupkg")
+        + GetFiles(outputDir.FullPath + "/**/*");
+
+    foreach(var file in artifacts) {
         Information("Uploading {0}", file.FullPath);
 
         if (file.GetExtension() == "nupkg")
