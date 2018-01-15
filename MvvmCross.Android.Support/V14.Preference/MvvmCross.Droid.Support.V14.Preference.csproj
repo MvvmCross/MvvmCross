@@ -6,9 +6,6 @@
     <RootNamespace>MvvmCross.Droid.Support.V14.Preference</RootNamespace>
     <Description>MvvmCross packages for Android Support V14.Preference</Description>
     <PackageId>MvvmCross.Droid.Support.V14.Preference</PackageId>
-    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
-    <AndroidResgenClass>Resource</AndroidResgenClass>
-    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
   </PropertyGroup>
 
   <ItemGroup>

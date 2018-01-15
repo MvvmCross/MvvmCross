@@ -6,11 +6,8 @@
     <RootNamespace>MvvmCross.Droid.Support.V17.Leanback</RootNamespace>
     <Description>MvvmCross packages for Android Support V17.Leanback</Description>
     <PackageId>MvvmCross.Droid.Support.V17.Leanback</PackageId>
-    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
-    <AndroidResgenClass>Resource</AndroidResgenClass>
-    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <AndroidResource Include="Resources\**\*.xml" Generator="MSBuild:UpdateAndroidResources" />
   </ItemGroup>

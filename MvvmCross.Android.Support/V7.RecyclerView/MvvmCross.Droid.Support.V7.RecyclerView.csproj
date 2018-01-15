@@ -6,11 +6,8 @@
     <RootNamespace>MvvmCross.Droid.Support.V7.RecyclerView</RootNamespace>
     <Description>MvvmCross packages for Android Support V7.RecyclerView</Description>
     <PackageId>MvvmCross.Droid.Support.V7.RecyclerView</PackageId>
-    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
-    <AndroidResgenClass>Resource</AndroidResgenClass>
-    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <AndroidResource Include="Resources\**\*.xml" Generator="MSBuild:UpdateAndroidResources" />
   </ItemGroup>
