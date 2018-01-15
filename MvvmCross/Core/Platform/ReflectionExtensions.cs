@@ -9,7 +9,7 @@ namespace MvvmCross.Platform
     {
         public static Attribute[] GetCustomAttributes(this Type type, Type attributeType, bool inherit)
         {
-            return type.GetTypeInfo().GetCustomAttributes(attributeType, inherit).OfType<Attribute>().ToArray();
+            return CustomAttributeExtensions.GetCustomAttributes(type, attributeType, inherit).ToArray();
         }
 
         public static bool IsInstanceOfType(this Type type, object obj)
