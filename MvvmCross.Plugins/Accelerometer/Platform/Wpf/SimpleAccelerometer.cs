@@ -8,6 +8,7 @@
 // Project Lead - Stuart Lodge, Cirrious. http://www.cirrious.com - Hire me - I'm worth it!
 
 using System;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 

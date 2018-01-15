@@ -13,7 +13,7 @@ using Twitter;
 
 namespace MvvmCross.Plugins.Share.iOS
 {
-    [Preserve(AllMembers = true)]
+    [MvvmCross.Platform.Preserve(AllMembers = true)]
 	public class MvxShareTask
         : MvxIosTask, IMvxShareTask
     {

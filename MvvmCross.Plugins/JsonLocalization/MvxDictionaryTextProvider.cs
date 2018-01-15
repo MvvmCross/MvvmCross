@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.JsonLocalization

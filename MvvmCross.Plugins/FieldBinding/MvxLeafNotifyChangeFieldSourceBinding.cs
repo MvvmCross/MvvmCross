@@ -8,6 +8,7 @@
 using System;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.FieldBinding;
+using MvvmCross.Platform;
 
 namespace MvvmCross.Plugins.FieldBinding
 {

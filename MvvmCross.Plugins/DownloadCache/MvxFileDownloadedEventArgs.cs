@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using MvvmCross.Platform;
 
 namespace MvvmCross.Plugins.DownloadCache
 {

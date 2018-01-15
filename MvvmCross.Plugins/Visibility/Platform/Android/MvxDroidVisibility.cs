@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Views;
+using MvvmCross.Platform;
 using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugins.Visibility.Droid

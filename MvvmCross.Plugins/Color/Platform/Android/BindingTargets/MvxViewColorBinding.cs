@@ -9,6 +9,7 @@ using System;
 using Android.Views;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Droid.Target;
+using MvvmCross.Platform;
 
 namespace MvvmCross.Plugins.Color.Droid.BindingTargets
 {

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Resources;
 using MvvmCross.Localization;
+using MvvmCross.Platform;
 
 namespace MvvmCross.Plugins.ResxLocalization
 {

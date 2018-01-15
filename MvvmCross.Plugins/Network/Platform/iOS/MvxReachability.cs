@@ -9,6 +9,7 @@ using System;
 using System.Net;
 using SystemConfiguration;
 using CoreFoundation;
+using MvvmCross.Platform;
 using MvvmCross.Plugins.Network.Reachability;
 
 namespace MvvmCross.Plugins.Network.iOS

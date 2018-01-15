@@ -15,6 +15,7 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
+using MvvmCross.Platform;
 
 namespace MvvmCross.Plugins.PictureChooser.Uwp
 {

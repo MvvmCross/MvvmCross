@@ -9,7 +9,7 @@ using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.Location.iOS
 {
-    [Preserve(AllMembers = true)]
+    [MvvmCross.Platform.Preserve(AllMembers = true)]
 	public sealed class MvxIosLocationWatcher
         : MvxLocationWatcher
     {

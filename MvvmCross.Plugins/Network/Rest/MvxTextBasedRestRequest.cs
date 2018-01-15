@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Text;
+using MvvmCross.Platform;
 
 namespace MvvmCross.Plugins.Network.Rest
 {

@@ -5,6 +5,8 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform;
+
 namespace MvvmCross.Plugins.DownloadCache
 {
     [Preserve(AllMembers = true)]

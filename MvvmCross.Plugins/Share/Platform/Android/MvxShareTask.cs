@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Android.Content;
+using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 
 namespace MvvmCross.Plugins.Share.Droid

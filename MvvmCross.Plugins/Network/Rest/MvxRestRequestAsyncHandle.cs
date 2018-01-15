@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using MvvmCross.Platform;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
