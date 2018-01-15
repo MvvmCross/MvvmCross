@@ -44,6 +44,7 @@ Task("UpdateAppVeyorBuildNumber")
 
 FilePath msBuildPath;
 Task("ResolveBuildTools")
+    .WithCriteria(() => IsRunningOnWindows())
     .Does(() => 
 {
     var vsLatest = VSWhereLatest();
