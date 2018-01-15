@@ -249,14 +249,8 @@ repositories.config
 
 #Build
 project.lock.json
-tools/Cake/
-tools/Addins/
-tools/build/
-tools/gitlink/
-tools/GitVersion.CommandLine/
-tools/vswhere/
-tools/nuget.exe
-tools/packages.config.md5sum
+tools/*
+!tools/packages.config
 artifacts/
 *.nupkg
 

@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>MonoAndroid80</TargetFrameworks>
+    <AssemblyName>MvvmCross.Droid.Support.V17.Leanback</AssemblyName>
+    <RootNamespace>MvvmCross.Droid.Support.V17.Leanback</RootNamespace>
+    <Description>MvvmCross packages for Android Support V17.Leanback</Description>
+    <PackageId>MvvmCross.Droid.Support.V17.Leanback</PackageId>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Include="Resources\*.cs" />
+    <Compile Remove="Resources\*.cs" />
+    <AndroidResource Include="Resources\**\*.xml" Generator="MSBuild:UpdateAndroidResources" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Android.Support.V17.Leanback" Version="26.1.0.1" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
+    <ProjectReference Include="..\Fragment\MvvmCross.Droid.Support.Fragment.csproj" />
+    <ProjectReference Include="..\V7.RecyclerView\MvvmCross.Droid.Support.V7.RecyclerView.csproj" />
+  </ItemGroup>
+
+  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+
+</Project>

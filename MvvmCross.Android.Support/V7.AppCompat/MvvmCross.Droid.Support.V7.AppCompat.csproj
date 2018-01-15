@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>MonoAndroid80</TargetFrameworks>
+    <AssemblyName>MvvmCross.Droid.Support.V7.AppCompat</AssemblyName>
+    <RootNamespace>MvvmCross.Droid.Support.V7.AppCompat</RootNamespace>
+    <Description>MvvmCross packages for Android Support V7.AppCompat</Description>
+    <PackageId>MvvmCross.Droid.Support.V7.AppCompat</PackageId>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Include="Resources\*.cs" />
+    <Compile Remove="Resources\*.cs" />
+    <AndroidResource Include="Resources\**\*.xml" Generator="MSBuild:UpdateAndroidResources" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Android.Support.Design" Version="26.1.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.V7.AppCompat" Version="26.1.0.1" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
+    <ProjectReference Include="..\Core.UI\MvvmCross.Droid.Support.Core.UI.csproj" />
+    <ProjectReference Include="..\Design\MvvmCross.Droid.Support.Design.csproj" />
+    <ProjectReference Include="..\Fragment\MvvmCross.Droid.Support.Fragment.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Resources\layouts\" />
+  </ItemGroup>
+
+  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+
+</Project>

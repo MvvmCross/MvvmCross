@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>MonoAndroid80</TargetFrameworks>
+    <AssemblyName>MvvmCross.Droid.Support.V14.Preference</AssemblyName>
+    <RootNamespace>MvvmCross.Droid.Support.V14.Preference</RootNamespace>
+    <Description>MvvmCross packages for Android Support V14.Preference</Description>
+    <PackageId>MvvmCross.Droid.Support.V14.Preference</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Resources\*.cs" />
+    <Compile Remove="Resources\*.cs" />
+    <AndroidResource Include="Resources\**\*.xml" Generator="MSBuild:UpdateAndroidResources" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Android.Support.V14.Preference" Version="26.1.0.1" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
+    <ProjectReference Include="..\Fragment\MvvmCross.Droid.Support.Fragment.csproj" />
+  </ItemGroup>
+
+  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+
+</Project>
