@@ -15,7 +15,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static TraceEventTypeValues()
         {
-            var assembly = typeof(Uri).GetAssemblyPortable(); // This is to get to the System.dll assembly in a PCL compatible way.
+            var assembly = typeof(Uri).Assembly;
             if (assembly == null) return;
 
             Type = assembly.GetType("System.Diagnostics.TraceEventType");
