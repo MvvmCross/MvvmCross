@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: Xamarin.Forms Startup Customization
-category: Platform specifics
+category: Platforms
 ---
 
 # Android Resources

@@ -2,6 +2,7 @@
 layout: documentation
 title: Acknowledgements
 category: Contributing
+order: 6
 ---
 
 ## Owners

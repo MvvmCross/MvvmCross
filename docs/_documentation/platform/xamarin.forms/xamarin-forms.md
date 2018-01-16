@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: Xamarin.Forms Tutorial
-category: Platform specifics
+category: Platforms
 ---
 
 With the introduction of MvvmCross 5.0 we have full support for Xamarin Forms!

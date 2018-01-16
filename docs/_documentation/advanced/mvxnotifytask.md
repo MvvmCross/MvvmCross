@@ -1,8 +1,8 @@
 ---
 layout: documentation
 title: Async operations with MvxNotifyTask
-category: Fundamentals
-order: 14
+category: Advanced
+order: 5
 ---
 
 MvvmCross provides a super useful helper when it comes to async/await: [MvxNotifyTask](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Core/Core/ViewModels/MvxNotifyTask.cs). 

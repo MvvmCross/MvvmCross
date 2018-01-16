@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: Android View Presenter
-category: Presenters
+category: Platforms
 ---
 
 ## View Presenter Overview

@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: The Tip Calc tutorial
-category: TipCalc Tutorial
+category: Tutorials
 order: 1
 ---
 In this first Model-View-ViewModel project, we'll create a simple single screen cross-platform application for calculating the tip at a restaurant.

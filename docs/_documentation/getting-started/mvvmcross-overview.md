@@ -1,8 +1,8 @@
 ---
 layout: documentation
 title: MvvmCross Overview
-category: Fundamentals
-order: 1
+category: Getting-started
+order: 2
 ---
 Deployed MvvmCross applications consist of two parts:
 

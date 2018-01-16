@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: Custom Data Binding
-category: Fundamentals
+category: Advanced
 order: 3
 ---
 

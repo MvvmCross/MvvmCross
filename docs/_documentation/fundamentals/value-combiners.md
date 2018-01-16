@@ -2,7 +2,7 @@
 layout: documentation
 title: Value combiners
 category: Fundamentals
-order: 6
+order: 8
 ---
 
 ### ValueCombiners

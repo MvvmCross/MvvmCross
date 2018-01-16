@@ -1,8 +1,8 @@
 ---
 layout: documentation
 title: ViewModel to View Interaction
-category: Fundamentals
-order: 12
+category: Advanced
+order: 6
 ---
 
 Sometimes when interacting between a View and ViewModel, you want to offload some responsibility to the View. In other words, you want
