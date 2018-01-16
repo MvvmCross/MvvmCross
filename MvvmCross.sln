@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27110.0
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BD9762CF-E104-481C-96A6-26E624B86283}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,89 +15,97 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Android.Support", "Android.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzers", "Analyzers", "{8B503F48-F6C2-4D5E-9F39-83059EC92470}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Core.UI", "MvvmCross.Android.Support\Core.UI\MvvmCross.Droid.Support.Core.UI.csproj", "{61A45F4D-7D56-4A5D-8D07-004E8C913FA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.Core.UI", "MvvmCross.Android.Support\Core.UI\MvvmCross.Droid.Support.Core.UI.csproj", "{61A45F4D-7D56-4A5D-8D07-004E8C913FA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Core.Utils", "MvvmCross.Android.Support\Core.Utils\MvvmCross.Droid.Support.Core.Utils.csproj", "{17859AEE-9771-4C67-98FD-3DD875208C07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.Core.Utils", "MvvmCross.Android.Support\Core.Utils\MvvmCross.Droid.Support.Core.Utils.csproj", "{17859AEE-9771-4C67-98FD-3DD875208C07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Design", "MvvmCross.Android.Support\Design\MvvmCross.Droid.Support.Design.csproj", "{45F63A4A-9A37-4929-9C80-48A91F346E0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.Design", "MvvmCross.Android.Support\Design\MvvmCross.Droid.Support.Design.csproj", "{45F63A4A-9A37-4929-9C80-48A91F346E0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.Fragment", "MvvmCross.Android.Support\Fragment\MvvmCross.Droid.Support.Fragment.csproj", "{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.Fragment", "MvvmCross.Android.Support\Fragment\MvvmCross.Droid.Support.Fragment.csproj", "{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V7.AppCompat", "MvvmCross.Android.Support\V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj", "{FD67CBBC-4BAC-40D6-9F4C-28AAE6C8533E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.V7.AppCompat", "MvvmCross.Android.Support\V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj", "{FD67CBBC-4BAC-40D6-9F4C-28AAE6C8533E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V7.Preference", "MvvmCross.Android.Support\V7.Preference\MvvmCross.Droid.Support.V7.Preference.csproj", "{91CDD4C3-DB1A-46EE-97FC-91749A48395F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.V7.Preference", "MvvmCross.Android.Support\V7.Preference\MvvmCross.Droid.Support.V7.Preference.csproj", "{91CDD4C3-DB1A-46EE-97FC-91749A48395F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V7.RecyclerView", "MvvmCross.Android.Support\V7.RecyclerView\MvvmCross.Droid.Support.V7.RecyclerView.csproj", "{6F49CFE7-3FCB-463D-85DC-1798E2BE771E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.V7.RecyclerView", "MvvmCross.Android.Support\V7.RecyclerView\MvvmCross.Droid.Support.V7.RecyclerView.csproj", "{6F49CFE7-3FCB-463D-85DC-1798E2BE771E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V14.Preference", "MvvmCross.Android.Support\V14.Preference\MvvmCross.Droid.Support.V14.Preference.csproj", "{8B87A9A7-6D30-4894-BE53-915E522F7736}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.V14.Preference", "MvvmCross.Android.Support\V14.Preference\MvvmCross.Droid.Support.V14.Preference.csproj", "{8B87A9A7-6D30-4894-BE53-915E522F7736}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Droid.Support.V17.Leanback", "MvvmCross.Android.Support\V17.Leanback\MvvmCross.Droid.Support.V17.Leanback.csproj", "{88623C54-21BE-473E-95D3-DF9E6D869FC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.V17.Leanback", "MvvmCross.Android.Support\V17.Leanback\MvvmCross.Droid.Support.V17.Leanback.csproj", "{88623C54-21BE-473E-95D3-DF9E6D869FC4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9EA04A6A-1367-4316-A6E9-A5173A060475}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross", "MvvmCross\MvvmCross.csproj", "{49F965F5-5824-4BBE-94EA-0178F848ABDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross", "MvvmCross\MvvmCross.csproj", "{49F965F5-5824-4BBE-94EA-0178F848ABDB}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Forms", "MvvmCross.Forms\MvvmCross.Forms.csproj", "{013BB2B2-8204-43BD-AA7B-E494007F0B94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Forms", "MvvmCross.Forms\MvvmCross.Forms.csproj", "{013BB2B2-8204-43BD-AA7B-E494007F0B94}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.Accelerometer", "MvvmCross.Plugins\Accelerometer\MvvmCross.Plugin.Accelerometer.csproj", "{E038C845-9ECD-42BC-89B3-627E374F7550}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.Accelerometer", "MvvmCross.Plugins\Accelerometer\MvvmCross.Plugin.Accelerometer.csproj", "{E038C845-9ECD-42BC-89B3-627E374F7550}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.All", "MvvmCross.Plugins\All\MvvmCross.Plugin.All.csproj", "{EFCE8BA2-5540-489B-8062-274F0DB0C198}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.All", "MvvmCross.Plugins\All\MvvmCross.Plugin.All.csproj", "{EFCE8BA2-5540-489B-8062-274F0DB0C198}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.Color", "MvvmCross.Plugins\Color\MvvmCross.Plugin.Color.csproj", "{6FCBE659-3B43-4A42-932D-D9A2A7F439D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.Color", "MvvmCross.Plugins\Color\MvvmCross.Plugin.Color.csproj", "{6FCBE659-3B43-4A42-932D-D9A2A7F439D3}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.DownloadCache", "MvvmCross.Plugins\DownloadCache\MvvmCross.Plugin.DownloadCache.csproj", "{7A961BD2-2316-44E1-B66D-4A02A8CB67D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.DownloadCache", "MvvmCross.Plugins\DownloadCache\MvvmCross.Plugin.DownloadCache.csproj", "{7A961BD2-2316-44E1-B66D-4A02A8CB67D5}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.Email", "MvvmCross.Plugins\Email\MvvmCross.Plugin.Email.csproj", "{827EE53C-6D68-4535-A816-B1ED21DA82B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.Email", "MvvmCross.Plugins\Email\MvvmCross.Plugin.Email.csproj", "{827EE53C-6D68-4535-A816-B1ED21DA82B0}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.FieldBinding", "MvvmCross.Plugins\FieldBinding\MvvmCross.Plugin.FieldBinding.csproj", "{A05337A9-0ED6-4B9F-A21E-7F1AFFC8B2F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.FieldBinding", "MvvmCross.Plugins\FieldBinding\MvvmCross.Plugin.FieldBinding.csproj", "{A05337A9-0ED6-4B9F-A21E-7F1AFFC8B2F7}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.File", "MvvmCross.Plugins\File\MvvmCross.Plugin.File.csproj", "{C8ECCFF2-5313-46D8-AA92-B69956BAE067}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.File", "MvvmCross.Plugins\File\MvvmCross.Plugin.File.csproj", "{C8ECCFF2-5313-46D8-AA92-B69956BAE067}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.Json", "MvvmCross.Plugins\Json\MvvmCross.Plugin.Json.csproj", "{9A82F120-FBE8-4205-94A3-575630DBCBB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.Json", "MvvmCross.Plugins\Json\MvvmCross.Plugin.Json.csproj", "{9A82F120-FBE8-4205-94A3-575630DBCBB9}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.JsonLocalization", "MvvmCross.Plugins\JsonLocalization\MvvmCross.Plugin.JsonLocalization.csproj", "{C783EF46-1822-4BAF-8ECA-E820FFF26633}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.JsonLocalization", "MvvmCross.Plugins\JsonLocalization\MvvmCross.Plugin.JsonLocalization.csproj", "{C783EF46-1822-4BAF-8ECA-E820FFF26633}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.Location", "MvvmCross.Plugins\Location\MvvmCross.Plugin.Location.csproj", "{15882D30-C46C-4AD6-B689-39EE264EC0B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.Location", "MvvmCross.Plugins\Location\MvvmCross.Plugin.Location.csproj", "{15882D30-C46C-4AD6-B689-39EE264EC0B5}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.Messenger", "MvvmCross.Plugins\Messenger\MvvmCross.Plugin.Messenger.csproj", "{2D99F487-5A83-49A3-811A-6C4A7FFFABEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.Messenger", "MvvmCross.Plugins\Messenger\MvvmCross.Plugin.Messenger.csproj", "{2D99F487-5A83-49A3-811A-6C4A7FFFABEA}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.MethodBinding", "MvvmCross.Plugins\MethodBinding\MvvmCross.Plugin.MethodBinding.csproj", "{FB339CD9-0BCB-4537-954F-AFBA57575BD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.MethodBinding", "MvvmCross.Plugins\MethodBinding\MvvmCross.Plugin.MethodBinding.csproj", "{FB339CD9-0BCB-4537-954F-AFBA57575BD4}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.Network", "MvvmCross.Plugins\Network\MvvmCross.Plugin.Network.csproj", "{380D2DAB-D4B0-437D-A61B-E44FFB87374B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.Network", "MvvmCross.Plugins\Network\MvvmCross.Plugin.Network.csproj", "{380D2DAB-D4B0-437D-A61B-E44FFB87374B}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.PhoneCall", "MvvmCross.Plugins\PhoneCall\MvvmCross.Plugin.PhoneCall.csproj", "{C5256E59-CC61-4DBF-BC78-90E356493E18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.PhoneCall", "MvvmCross.Plugins\PhoneCall\MvvmCross.Plugin.PhoneCall.csproj", "{C5256E59-CC61-4DBF-BC78-90E356493E18}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.PictureChooser", "MvvmCross.Plugins\PictureChooser\MvvmCross.Plugin.PictureChooser.csproj", "{C99BE532-B305-452C-8B11-39B5A1048B58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.PictureChooser", "MvvmCross.Plugins\PictureChooser\MvvmCross.Plugin.PictureChooser.csproj", "{C99BE532-B305-452C-8B11-39B5A1048B58}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.ResourceLoader", "MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj", "{4D47736F-D8DC-42F1-8F75-8FC3EFF28894}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.ResourceLoader", "MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj", "{4D47736F-D8DC-42F1-8F75-8FC3EFF28894}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.ResxLocalization", "MvvmCross.Plugins\ResxLocalization\MvvmCross.Plugin.ResxLocalization.csproj", "{9FD468DB-A03B-4DD5-A757-6A3BABDEFE71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.ResxLocalization", "MvvmCross.Plugins\ResxLocalization\MvvmCross.Plugin.ResxLocalization.csproj", "{9FD468DB-A03B-4DD5-A757-6A3BABDEFE71}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.Share", "MvvmCross.Plugins\Share\MvvmCross.Plugin.Share.csproj", "{83207EAE-815D-4058-A5DD-94399876DFA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.Share", "MvvmCross.Plugins\Share\MvvmCross.Plugin.Share.csproj", "{83207EAE-815D-4058-A5DD-94399876DFA5}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.Visibility", "MvvmCross.Plugins\Visibility\MvvmCross.Plugin.Visibility.csproj", "{162F1A19-EF40-4A7D-80B6-C7026C47D4C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.Visibility", "MvvmCross.Plugins\Visibility\MvvmCross.Plugin.Visibility.csproj", "{162F1A19-EF40-4A7D-80B6-C7026C47D4C8}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.WebBrowser", "MvvmCross.Plugins\WebBrowser\MvvmCross.Plugin.WebBrowser.csproj", "{D2A45E0C-56D8-4753-97FD-E1A8F7CFE863}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.WebBrowser", "MvvmCross.Plugins\WebBrowser\MvvmCross.Plugin.WebBrowser.csproj", "{D2A45E0C-56D8-4753-97FD-E1A8F7CFE863}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.Sidebar", "MvvmCross.Plugins\Sidebar\MvvmCross.Plugin.Sidebar.csproj", "{452178B9-336D-4778-AA8E-A0C9D37E6F7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.Sidebar", "MvvmCross.Plugins\Sidebar\MvvmCross.Plugin.Sidebar.csproj", "{452178B9-336D-4778-AA8E-A0C9D37E6F7E}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugin.Location.Fused", "MvvmCross.Plugins\Location.Fused\MvvmCross.Plugin.Location.Fused.csproj", "{DFFD6E95-ED3B-47B6-AA09-7A261367C262}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.Location.Fused", "MvvmCross.Plugins\Location.Fused\MvvmCross.Plugin.Location.Fused.csproj", "{DFFD6E95-ED3B-47B6-AA09-7A261367C262}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.CodeAnalysis", "MvvmCross.Analyzers\CodeAnalysis\MvvmCross.CodeAnalysis.csproj", "{03CD64F4-9439-4C8F-AB5E-F3825174719E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.CodeAnalysis", "MvvmCross.Analyzers\CodeAnalysis\MvvmCross.CodeAnalysis.csproj", "{03CD64F4-9439-4C8F-AB5E-F3825174719E}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Tests", "MvvmCross.Tests\MvvmCross.Tests\MvvmCross.Tests.csproj", "{9692F2F6-6552-4B58-8B8D-E9C80BD04152}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Tests", "MvvmCross.Tests\MvvmCross.Tests\MvvmCross.Tests.csproj", "{9692F2F6-6552-4B58-8B8D-E9C80BD04152}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugins.Color.Test", "MvvmCross.Tests\Plugins.Color.Test\MvvmCross.Plugins.Color.Test.csproj", "{0107AF3A-CF1A-4AB2-A205-F4041169C382}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Color.Test", "MvvmCross.Tests\Plugins.Color.Test\MvvmCross.Plugins.Color.Test.csproj", "{0107AF3A-CF1A-4AB2-A205-F4041169C382}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugins.JsonLocalization.Tests", "MvvmCross.Tests\Plugins.JsonLocalization.Tests\MvvmCross.Plugins.JsonLocalization.Tests.csproj", "{3BC123A2-63C8-4E78-B446-10F6DCBDE841}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.JsonLocalization.Tests", "MvvmCross.Tests\Plugins.JsonLocalization.Tests\MvvmCross.Plugins.JsonLocalization.Tests.csproj", "{3BC123A2-63C8-4E78-B446-10F6DCBDE841}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugins.Messenger.Test", "MvvmCross.Tests\Plugins.Messenger.Test\MvvmCross.Plugins.Messenger.Test.csproj", "{FFAAA231-7C22-471C-8FBA-5D4605E2B8DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Messenger.Test", "MvvmCross.Tests\Plugins.Messenger.Test\MvvmCross.Plugins.Messenger.Test.csproj", "{FFAAA231-7C22-471C-8FBA-5D4605E2B8DB}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugins.Network.Test", "MvvmCross.Tests\Plugins.Network.Test\MvvmCross.Plugins.Network.Test.csproj", "{7432CDFC-39CD-46E0-BD5E-065C36037B32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Network.Test", "MvvmCross.Tests\Plugins.Network.Test\MvvmCross.Plugins.Network.Test.csproj", "{7432CDFC-39CD-46E0-BD5E-065C36037B32}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugins.ResourceLoader.Test", "MvvmCross.Tests\Plugins.ResourceLoader.Test\MvvmCross.Plugins.ResourceLoader.Test.csproj", "{E32637E0-63E2-47D1-945C-A605CD881295}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.ResourceLoader.Test", "MvvmCross.Tests\Plugins.ResourceLoader.Test\MvvmCross.Plugins.ResourceLoader.Test.csproj", "{E32637E0-63E2-47D1-945C-A605CD881295}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "MvvmCross.Plugins.ResxLocalization.Tests", "MvvmCross.Tests\Plugins.ResxLocalization.Tests\MvvmCross.Plugins.ResxLocalization.Tests.csproj", "{F523AA9D-D574-4475-912A-E85BA779BE8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.ResxLocalization.Tests", "MvvmCross.Tests\Plugins.ResxLocalization.Tests\MvvmCross.Plugins.ResxLocalization.Tests.csproj", "{F523AA9D-D574-4475-912A-E85BA779BE8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projects", "Projects", "{3856C497-5206-4965-A701-0D90247829F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Playground", "Playground", "{5339E878-07CE-4A32-9BE3-C3C86388D6DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Core", "Projects\Playground\Playground.Core\Playground.Core.csproj", "{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Forms.UI", "Projects\Playground\Playground.Forms.UI\Playground.Forms.UI.csproj", "{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -2407,6 +2415,118 @@ Global
 		{F523AA9D-D574-4475-912A-E85BA779BE8A}.Release|x64.Build.0 = Release|Any CPU
 		{F523AA9D-D574-4475-912A-E85BA779BE8A}.Release|x86.ActiveCfg = Release|Any CPU
 		{F523AA9D-D574-4475-912A-E85BA779BE8A}.Release|x86.Build.0 = Release|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Ad-Hoc|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Ad-Hoc|Any CPU.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Ad-Hoc|ARM.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Ad-Hoc|ARM.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Ad-Hoc|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Ad-Hoc|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Ad-Hoc|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Ad-Hoc|x64.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Ad-Hoc|x64.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Ad-Hoc|x86.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Ad-Hoc|x86.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.AppStore|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.AppStore|Any CPU.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.AppStore|ARM.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.AppStore|ARM.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.AppStore|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.AppStore|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.AppStore|x64.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.AppStore|x64.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.AppStore|x86.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.AppStore|x86.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Debug|ARM.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Debug|x64.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Debug|x86.Build.0 = Debug|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Release|ARM.Build.0 = Release|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Release|iPhone.Build.0 = Release|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Release|x64.ActiveCfg = Release|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Release|x64.Build.0 = Release|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Release|x86.ActiveCfg = Release|Any CPU
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3}.Release|x86.Build.0 = Release|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Ad-Hoc|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Ad-Hoc|Any CPU.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Ad-Hoc|ARM.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Ad-Hoc|ARM.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Ad-Hoc|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Ad-Hoc|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Ad-Hoc|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Ad-Hoc|x64.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Ad-Hoc|x64.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Ad-Hoc|x86.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Ad-Hoc|x86.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.AppStore|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.AppStore|Any CPU.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.AppStore|ARM.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.AppStore|ARM.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.AppStore|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.AppStore|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.AppStore|x64.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.AppStore|x64.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.AppStore|x86.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.AppStore|x86.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Debug|ARM.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Debug|x64.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Debug|x86.Build.0 = Debug|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Release|ARM.ActiveCfg = Release|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Release|ARM.Build.0 = Release|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Release|iPhone.Build.0 = Release|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Release|x64.ActiveCfg = Release|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Release|x64.Build.0 = Release|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Release|x86.ActiveCfg = Release|Any CPU
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2451,6 +2571,9 @@ Global
 		{7432CDFC-39CD-46E0-BD5E-065C36037B32} = {9EA04A6A-1367-4316-A6E9-A5173A060475}
 		{E32637E0-63E2-47D1-945C-A605CD881295} = {9EA04A6A-1367-4316-A6E9-A5173A060475}
 		{F523AA9D-D574-4475-912A-E85BA779BE8A} = {9EA04A6A-1367-4316-A6E9-A5173A060475}
+		{5339E878-07CE-4A32-9BE3-C3C86388D6DE} = {3856C497-5206-4965-A701-0D90247829F7}
+		{FE374D1A-1A19-49BC-8E93-D52399A9C3F3} = {5339E878-07CE-4A32-9BE3-C3C86388D6DE}
+		{9A317670-F2D9-4155-9EA7-F8CFD3CFE79F} = {5339E878-07CE-4A32-9BE3-C3C86388D6DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {56FC36CA-7AC1-4C41-A846-C6C8D7FE0403}
