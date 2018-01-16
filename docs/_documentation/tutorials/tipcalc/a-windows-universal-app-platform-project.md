@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: A Windows Universal App Platform Project
-category: TipCalc Tutorial
+category: Tutorials
 order: 6
 ---
 We started with the goal of creating an app to help calculate what tip to leave in a restaurant

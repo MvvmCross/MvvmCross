@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: Approaches for tvOS UIs
-category: Platform specifics
+category: Platforms
 ---
 
 Flexibility is important to us. That is why MvvmCross allows you to create your iOS user interfaces using any of the following approaches:

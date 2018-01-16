@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: Android support library
-category: Platform specifics
+category: Platforms
 ---
 
 To get bindings working when using the support libraries (for example if you want to use `MvxAutoCompleteTextView`) you will need to do the following.

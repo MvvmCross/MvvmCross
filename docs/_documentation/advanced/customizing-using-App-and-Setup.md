@@ -1,8 +1,8 @@
 ---
 layout: documentation
 title: Customizing App and Setup
-category: Fundamentals
-order: 10
+category: Advanced
+order: 1
 ---
 
 In each deployed MvvmCross application there are two key classes which control how your app starts:

@@ -2,6 +2,7 @@
 layout: documentation
 title: New contributions
 category: Contributing
+order: 1
 ---
 Some of the best ways to contribute are to try things out, file bugs, and join conversations.
 

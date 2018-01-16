@@ -2,7 +2,7 @@
 layout: documentation
 title: Diagnostic & Logging
 category: Fundamentals
-order: 13
+order: 6
 ---
 
 A great option to log messages, info and errors to the console or other outputs is MvxLog! It is very extendeble and easy to use.

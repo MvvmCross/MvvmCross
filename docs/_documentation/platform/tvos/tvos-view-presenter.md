@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: tvOS View Presenter
-category: Presenters
+category: Platforms
 ---
 
 ## View Presenter Overview

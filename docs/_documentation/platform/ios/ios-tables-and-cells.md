@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: iOS Tables and Cells
-category: Platform specifics
+category: Platforms
 ---
 
 ## Available table source classes in MvvmCross

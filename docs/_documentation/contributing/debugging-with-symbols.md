@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: Debugging with Symbols
-category: Getting-started
+category: Contributing
 order: 3
 ---
 
