@@ -19,7 +19,7 @@
   </ItemGroup>
   
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <Compile Include="Platform\Netstandard2.0\**\*.cs" />
+    <Compile Include="Platform\Netstandard\**\*.cs" />
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
@@ -34,7 +34,6 @@
   <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.16299' ">
     <Compile Include="Platform\Windows-common\**\*.cs" />
     <Compile Include="Platform\Uap\**\*.cs" />
-    <Compile Include="Platform\uap10.0.16299\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
@@ -68,7 +67,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
-    <Compile Include="Platform\Netcoreapp2.0\**\*.cs" />
+    <Compile Include="Platform\Netcoreapp\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup>
