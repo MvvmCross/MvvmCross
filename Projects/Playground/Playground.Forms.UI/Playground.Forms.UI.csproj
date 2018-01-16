@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\MvvmCross.Forms\MvvmCross.Forms.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj" />
+    <ProjectReference Include="..\Playground.Core\Playground.Core.csproj" />
+  </ItemGroup>
+
+</Project>
