@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Text;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Core.Platform.LogProviders
+namespace MvvmCross.Platform.Logging.LogProviders
 {
     internal sealed class ConsoleLogProvider : MvxBaseLogProvider
     {
