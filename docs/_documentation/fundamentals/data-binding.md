@@ -2,7 +2,7 @@
 layout: documentation
 title: Data binding
 category: Fundamentals
-order: 2
+order: 1
 ---
 Data binding is the key technology that MVVM relies on, to link Views with their View-Models.
 
