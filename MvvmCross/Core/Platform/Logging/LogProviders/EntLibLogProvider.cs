@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -11,19 +12,15 @@ namespace MvvmCross.Platform.Logging.LogProviders
         private const string TypeTemplate = "Microsoft.Practices.EnterpriseLibrary.Logging.{0}, Microsoft.Practices.EnterpriseLibrary.Logging";
         private static readonly Type LogEntryType;
         private static readonly Type LoggerType;
-        private static readonly Type TraceEventTypeType;
-        private static readonly Action<string, string, int> WriteLogEntry;
-        private static readonly Func<string, int, bool> ShouldLogEntry;
+        private static readonly Action<string, string, TraceEventType> WriteLogEntry;
+        private static readonly Func<string, TraceEventType, bool> ShouldLogEntry;
 
         static EntLibLogProvider()
         {
             LogEntryType = Type.GetType(string.Format(CultureInfo.InvariantCulture, TypeTemplate, "LogEntry"));
             LoggerType = Type.GetType(string.Format(CultureInfo.InvariantCulture, TypeTemplate, "Logger"));
-            TraceEventTypeType = TraceEventTypeValues.Type;
-            if (LogEntryType == null || 
-                TraceEventTypeType == null || 
-                LoggerType == null) return;
-            
+            if (LogEntryType == null || LoggerType == null) return;
+
             WriteLogEntry = GetWriteLogEntry();
             ShouldLogEntry = GetShouldLogEntry();
         }
@@ -38,49 +35,48 @@ namespace MvvmCross.Platform.Logging.LogProviders
 
         protected override Logger GetLogger(string name)
             => new EntLibLogger(name, WriteLogEntry, ShouldLogEntry).Log;
-       
-        internal static bool IsLoggerAvailable()
-            => TraceEventTypeType != null && LogEntryType != null;
 
-        private static Action<string, string, int> GetWriteLogEntry()
+        internal static bool IsLoggerAvailable() => LogEntryType != null;
+
+        private static Action<string, string, TraceEventType> GetWriteLogEntry()
         {
             // new LogEntry(...)
             var logNameParameter = Expression.Parameter(typeof(string), "logName");
             var messageParameter = Expression.Parameter(typeof(string), "message");
-            var severityParameter = Expression.Parameter(typeof(int), "severity");
+            var severityParameter = Expression.Parameter(typeof(TraceEventType), "severity");
 
             MemberInitExpression memberInit = GetWriteLogExpression(
                 messageParameter,
-                Expression.Convert(severityParameter, TraceEventTypeType),
+                severityParameter,
                 logNameParameter);
 
             //Logger.Write(new LogEntry(....));
-            MethodInfo writeLogEntryMethod = LoggerType.GetMethod("Write", new [] { LogEntryType });
+            MethodInfo writeLogEntryMethod = LoggerType.GetMethod("Write", new[] { LogEntryType });
             var writeLogEntryExpression = Expression.Call(writeLogEntryMethod, memberInit);
 
-            return Expression.Lambda<Action<string, string, int>>(
+            return Expression.Lambda<Action<string, string, TraceEventType>>(
                 writeLogEntryExpression,
                 logNameParameter,
                 messageParameter,
                 severityParameter).Compile();
         }
 
-        private static Func<string, int, bool> GetShouldLogEntry()
+        private static Func<string, TraceEventType, bool> GetShouldLogEntry()
         {
             // new LogEntry(...)
             var logNameParameter = Expression.Parameter(typeof(string), "logName");
-            var severityParameter = Expression.Parameter(typeof(int), "severity");
+            var severityParameter = Expression.Parameter(typeof(TraceEventType), "severity");
 
             MemberInitExpression memberInit = GetWriteLogExpression(
                 Expression.Constant("***dummy***"),
-                Expression.Convert(severityParameter, TraceEventTypeType),
+                severityParameter,
                 logNameParameter);
 
             //Logger.Write(new LogEntry(....));
-            MethodInfo writeLogEntryMethod = LoggerType.GetMethod("ShouldLog", new [] { LogEntryType });
+            MethodInfo writeLogEntryMethod = LoggerType.GetMethod("ShouldLog", new[] { LogEntryType });
             var writeLogEntryExpression = Expression.Call(writeLogEntryMethod, memberInit);
 
-            return Expression.Lambda<Func<string, int, bool>>(
+            return Expression.Lambda<Func<string, TraceEventType, bool>>(
                 writeLogEntryExpression,
                 logNameParameter,
                 severityParameter).Compile();
@@ -100,7 +96,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
                     entryType.GetProperty("Categories"),
                     Expression.ListInit(
                         Expression.New(typeof(List<string>)),
-                        typeof(List<string>).GetMethod("Add", new [] { typeof(string) }),
+                        typeof(List<string>).GetMethod("Add", new[] { typeof(string) }),
                         logNameParameter)));
             return memberInit;
         }
@@ -108,10 +104,10 @@ namespace MvvmCross.Platform.Logging.LogProviders
         internal class EntLibLogger
         {
             private readonly string _loggerName;
-            private readonly Action<string, string, int> _writeLog;
-            private readonly Func<string, int, bool> _shouldLog;
+            private readonly Action<string, string, TraceEventType> _writeLog;
+            private readonly Func<string, TraceEventType, bool> _shouldLog;
 
-            internal EntLibLogger(string loggerName, Action<string, string, int> writeLog, Func<string, int, bool> shouldLog)
+            internal EntLibLogger(string loggerName, Action<string, string, TraceEventType> writeLog, Func<string, TraceEventType, bool> shouldLog)
             {
                 _loggerName = loggerName;
                 _writeLog = writeLog;
@@ -138,20 +134,20 @@ namespace MvvmCross.Platform.Logging.LogProviders
                 return true;
             }
 
-            private static int MapSeverity(MvxLogLevel logLevel)
+            private static TraceEventType MapSeverity(MvxLogLevel logLevel)
             {
                 switch (logLevel)
                 {
                     case MvxLogLevel.Fatal:
-                        return TraceEventTypeValues.Critical;
+                        return TraceEventType.Critical;
                     case MvxLogLevel.Error:
-                        return TraceEventTypeValues.Error;
+                        return TraceEventType.Error;
                     case MvxLogLevel.Warn:
-                        return TraceEventTypeValues.Warning;
+                        return TraceEventType.Warning;
                     case MvxLogLevel.Info:
-                        return TraceEventTypeValues.Information;
+                        return TraceEventType.Information;
                     default:
-                        return TraceEventTypeValues.Verbose;
+                        return TraceEventType.Verbose;
                 }
             }
         }

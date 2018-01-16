@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace MvvmCross.Platform.Logging.LogProviders
@@ -87,30 +88,30 @@ namespace MvvmCross.Platform.Logging.LogProviders
 
                 messageFunc = LogMessageFormatter.SimulateStructuredLogging(messageFunc, formatParameters);
 
-                _logWriteDelegate(ToLogMessageSeverity(logLevel), LogSystem, _skipLevel, exception, true, 0, null,
+                _logWriteDelegate((int)ToLogMessageSeverity(logLevel), LogSystem, _skipLevel, exception, true, 0, null,
                     _category, null, messageFunc.Invoke());
 
                 return true;
             }
 
-            private static int ToLogMessageSeverity(MvxLogLevel logLevel)
+            private static TraceEventType ToLogMessageSeverity(MvxLogLevel logLevel)
             {
                 switch (logLevel)
                 {
                     case MvxLogLevel.Trace:
-                        return TraceEventTypeValues.Verbose;
+                        return TraceEventType.Verbose;
                     case MvxLogLevel.Debug:
-                        return TraceEventTypeValues.Verbose;
+                        return TraceEventType.Verbose;
                     case MvxLogLevel.Info:
-                        return TraceEventTypeValues.Information;
+                        return TraceEventType.Information;
                     case MvxLogLevel.Warn:
-                        return TraceEventTypeValues.Warning;
+                        return TraceEventType.Warning;
                     case MvxLogLevel.Error:
-                        return TraceEventTypeValues.Error;
+                        return TraceEventType.Error;
                     case MvxLogLevel.Fatal:
-                        return TraceEventTypeValues.Critical;
+                        return TraceEventType.Critical;
                     default:
-                        throw new ArgumentOutOfRangeException("logLevel");
+                        throw new ArgumentOutOfRangeException(nameof(logLevel));
                 }
             }
         }
