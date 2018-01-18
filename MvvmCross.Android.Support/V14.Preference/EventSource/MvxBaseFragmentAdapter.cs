@@ -9,11 +9,10 @@ using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
-//using Android.Support.V4.App;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Droid.Support.V4.EventSource
+namespace MvvmCross.Droid.Support.V14.EventSource
 {
     public class MvxBaseFragmentAdapter
     {

@@ -2,7 +2,7 @@
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Support.V4;
+using MvvmCross.Droid.Support.V14;
 using MvvmCross.Droid.Views;
 
 namespace MvvmCross.Droid.Support.V14.Preference
