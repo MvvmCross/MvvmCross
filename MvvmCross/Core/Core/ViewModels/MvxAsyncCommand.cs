@@ -116,7 +116,7 @@ namespace MvvmCross.Core.ViewModels
                     catch (OperationCanceledException e)
                     {
                         Mvx.Trace(MvxTraceLevel.Diagnostic, "MvxAsyncCommand : OperationCanceledException");
-                        //Rethrow if the exception does not comes from the current cancellation token
+                        //Rethrow if the exception does not come from the current cancellation token
                         if (!hideCanceledException || e.CancellationToken != CancelToken)
                         {
                             throw;
@@ -219,7 +219,7 @@ namespace MvvmCross.Core.ViewModels
 
     public class MvxAsyncCommand<T>
         : MvxAsyncCommandBase
-        , IMvxAsyncCommand<T>
+        , IMvxCommand, IMvxAsyncCommand<T>
     {
         private readonly Func<T, CancellationToken, Task> _execute;
         private readonly Func<T, bool> _canExecute;
