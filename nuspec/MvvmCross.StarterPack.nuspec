@@ -27,6 +27,13 @@ This package contains the 'Getting Started' libraries for MvvmCross and installs
 		<file src="WpfContent\MainView.xaml.pp" target="content\net45\Views\MainView.xaml.pp" />
 		<file src="WpfContent\MainView.xaml.cs.pp" target="content\net45\Views\MainView.xaml.cs.pp" />
 
+		<!-- UWP - Content -->
+		<file src="UwpContent\_ UWP UI.txt" target="content\uap10.0\ToDo-MvvmCross\_ UWP UI.txt">		
+		<file src="UwpContent\Setup.cs.pp" target="content\uap10.0\Setup.cs.pp">
+		<file src="UwpContent\DebugTrace.cs.pp" target="content\uap10.0\DebugTrace.cs.pp">
+		<file src="UwpContent\MainView.xaml.pp" target="content\uap10.0\Views\MainView.xaml.pp">
+		<file src="UwpContent\MainView.xaml.cs.pp" target="content\uap10.0\Views\MainView.xaml.cs.pp">		
+
 		<!-- droid - Content -->
 		<file src="DroidContent\_ Droid UI.txt" target="content\MonoAndroid\ToDo-MvvmCross\_ Droid UI.txt" />
 		<file src="DroidContent\MainView.axml" target="content\MonoAndroid\Resources\layout\MainView.axml" />
