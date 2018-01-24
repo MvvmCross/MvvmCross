@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Platform.IoC
 {
@@ -52,7 +53,7 @@ namespace MvvmCross.Platform.IoC
                 if (options.ThrowIfPropertyInjectionFails)
                     throw new MvxIoCResolveException("IoC property injection failed for {0} on {1}", injectableProperty.Name, toReturn.GetType().Name);
                 else
-                    Mvx.Warning("IoC property injection skipped for {0} on {1}", injectableProperty.Name, toReturn.GetType().Name);
+                    MvxLog.Instance.Warn("IoC property injection skipped for {0} on {1}", injectableProperty.Name, toReturn.GetType().Name);
             }
         }
 
@@ -75,7 +76,7 @@ namespace MvvmCross.Platform.IoC
                     break;
 
                 case MvxPropertyInjection.None:
-                    Mvx.Error("Internal error - should not call FindInjectableProperties with MvxPropertyInjection.None");
+                    MvxLog.Instance.Error("Internal error - should not call FindInjectableProperties with MvxPropertyInjection.None");
                     injectableProperties = new PropertyInfo[0];
                     break;
 

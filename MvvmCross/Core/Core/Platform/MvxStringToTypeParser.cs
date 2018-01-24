@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Core.Platform
 {
@@ -45,7 +45,7 @@ namespace MvvmCross.Core.Platform
                 }
                 catch (Exception)
                 {
-                    MvxTrace.Error("Failed to parse enum parameter {0} from string {1}",
+                    MvxLog.Instance.Error("Failed to parse enum parameter {0} from string {1}",
                                    fieldOrParameterName,
                                    input);
                 }
@@ -58,7 +58,7 @@ namespace MvvmCross.Core.Platform
                     }
                     catch (Exception)
                     {
-                        MvxTrace.Error("Failed to create default enum value for {0} - will return null",
+                        MvxLog.Instance.Error("Failed to create default enum value for {0} - will return null",
                                        fieldOrParameterName);
                     }
                 }
@@ -83,7 +83,7 @@ namespace MvvmCross.Core.Platform
                 object result;
                 if (!TryParse(input, out result))
                 {
-                    MvxTrace.Error("Failed to parse {0} parameter {1} from string {2}",
+                    MvxLog.Instance.Error("Failed to parse {0} parameter {1} from string {2}",
                                    GetType().Name, fieldOrParameterName, input);
                 }
                 return result;
@@ -226,7 +226,7 @@ namespace MvvmCross.Core.Platform
                 return extra.ReadValue(targetType, rawValue, fieldOrParameterName);
             }
 
-            MvxTrace.Error("Parameter {0} is invalid targetType {1}", fieldOrParameterName,
+            MvxLog.Instance.Error("Parameter {0} is invalid targetType {1}", fieldOrParameterName,
                            targetType.Name);
             return null;
         }

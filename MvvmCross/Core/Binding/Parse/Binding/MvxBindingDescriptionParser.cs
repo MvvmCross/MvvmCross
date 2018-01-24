@@ -15,7 +15,6 @@ using MvvmCross.Binding.Parse.Binding.Lang;
 using MvvmCross.Binding.Parse.Binding.Tibet;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Parse.Binding
 {
@@ -88,7 +87,7 @@ namespace MvvmCross.Binding.Parse.Binding
             MvxSerializableBindingSpecification specification;
             if (!parser.TryParseBindingSpecification(text, out specification))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxBindingTrace.Error(
                                       "Failed to parse binding specification starting with {0}",
                                       text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
                 return null;
@@ -107,7 +106,7 @@ namespace MvvmCross.Binding.Parse.Binding
             var parser = BindingParser;
             if (!parser.TryParseBindingDescription(text, out description))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxBindingTrace.Error(
                                       "Failed to parse binding description starting with {0}",
                                       text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
                 return null;

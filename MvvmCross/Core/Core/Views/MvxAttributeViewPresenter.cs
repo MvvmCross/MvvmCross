@@ -8,10 +8,9 @@
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using System;
-using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Core.Views
 {
@@ -79,7 +78,7 @@ namespace MvvmCross.Core.Views
                     var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute(request);
                     if (presentationAttribute == null)
                     {
-                        MvxTrace.Warning("Override PresentationAttribute null. Falling back to existing attribute.");
+                        MvxLog.Instance.Warn("Override PresentationAttribute null. Falling back to existing attribute.");
                     }
                     else
                     {
@@ -163,7 +162,7 @@ namespace MvvmCross.Core.Views
                 return;
             }
 
-            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
+            MvxLog.Instance.Warn("Hint ignored {0}", hint.GetType().Name);
         }
 
         public override void Close(IMvxViewModel viewModel)

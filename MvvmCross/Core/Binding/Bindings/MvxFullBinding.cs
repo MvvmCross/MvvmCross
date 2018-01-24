@@ -14,7 +14,6 @@ using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.IoC;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Bindings
 {
@@ -151,7 +150,7 @@ namespace MvvmCross.Binding.Bindings
 
             if (_targetBinding == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Failed to create target binding for {0}", _bindingDescription.ToString());
+                MvxBindingTrace.Warning("Failed to create target binding for {0}", _bindingDescription.ToString());
                 _targetBinding = new MvxNullTargetBinding();
             }
 
@@ -187,8 +186,7 @@ namespace MvvmCross.Binding.Bindings
                 }
                 catch (Exception exception)
                 {
-                    MvxBindingTrace.Trace(
-                        MvxTraceLevel.Error,
+                    MvxBindingTrace.Error(
                         "Problem seen during binding execution for {0} - problem {1}",
                         _bindingDescription.ToString(),
                         exception.ToLongString());
@@ -210,8 +208,7 @@ namespace MvvmCross.Binding.Bindings
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Trace(
-                    MvxTraceLevel.Error,
+                MvxBindingTrace.Error(
                     "Problem seen during binding execution for {0} - problem {1}",
                     _bindingDescription.ToString(),
                     exception.ToLongString());

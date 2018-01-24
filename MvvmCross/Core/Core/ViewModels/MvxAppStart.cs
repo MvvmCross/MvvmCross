@@ -6,7 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Core.ViewModels
 {
@@ -19,7 +19,7 @@ namespace MvvmCross.Core.ViewModels
         {
             if (hint != null)
             {
-                MvxTrace.Trace("Hint ignored in default MvxAppStart");
+                MvxLog.Instance.Trace("Hint ignored in default MvxAppStart");
             }
             ShowViewModel<TViewModel>();
         }

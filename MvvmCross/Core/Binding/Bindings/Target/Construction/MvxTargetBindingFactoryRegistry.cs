@@ -8,8 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Bindings.Target.Construction
 {
@@ -35,8 +33,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
         {
             if (string.IsNullOrEmpty(targetName))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Empty binding target passed to MvxTargetBindingFactoryRegistry");
+                MvxBindingTrace.Error("Empty binding target passed to MvxTargetBindingFactoryRegistry");
                 binding = null;
                 return false;
             }

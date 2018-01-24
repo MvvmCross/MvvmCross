@@ -1,10 +1,12 @@
 ﻿using System;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Platform.Logging.LogProviders;
 
-namespace MvvmCross.Platform.Logging.LogProviders
+namespace MvvmCross.Platform.Logging
 {
     internal class MvxLog : IMvxLog
     {
+        internal static IMvxLog Instance { get; set; }
+
         internal const string FailedToGenerateLogMessage = "Failed to generate log message";
 
         private readonly Logger _logger;

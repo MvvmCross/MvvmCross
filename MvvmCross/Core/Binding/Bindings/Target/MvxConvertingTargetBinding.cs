@@ -7,7 +7,6 @@
 
 using System.Collections.Generic;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Bindings.Target
 {
@@ -28,11 +27,11 @@ namespace MvvmCross.Binding.Bindings.Target
 
         public override void SetValue(object value)
         {
-            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving SetValue to " + (value ?? ""));
+            MvxBindingTrace.Trace("Receiving SetValue to " + (value ?? ""));
             var target = Target;
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
+                MvxBindingTrace.Warning("Weak Target is null in {0} - skipping set", GetType().Name);
                 return;
             }
 
@@ -92,7 +91,7 @@ namespace MvvmCross.Binding.Bindings.Target
             if (_isUpdatingTarget || _isUpdatingSource)
                 return;
 
-            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Firing changed to " + (newValue ?? ""));
+            MvxBindingTrace.Trace("Firing changed to " + (newValue ?? ""));
             try
             {
                 _isUpdatingSource = true;
@@ -129,7 +128,7 @@ namespace MvvmCross.Binding.Bindings.Target
             var target = Target;
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
+                MvxBindingTrace.Warning("Weak Target is null in {0} - skipping set", GetType().Name);
                 return;
             }
 
@@ -183,7 +182,7 @@ namespace MvvmCross.Binding.Bindings.Target
             if (_isUpdatingTarget || _isUpdatingSource)
                 return;
 
-            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Firing changed to " + newValue);
+            MvxBindingTrace.Trace("Firing changed to " + newValue);
             try
             {
                 _isUpdatingSource = true;

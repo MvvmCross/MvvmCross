@@ -8,8 +8,6 @@
 using System;
 using System.ComponentModel;
 using System.Reflection;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Binding.Bindings.Target
@@ -24,8 +22,7 @@ namespace MvvmCross.Binding.Bindings.Target
         {
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Error - target is null in MvxWithEventPropertyInfoTargetBinding");
+                MvxBindingTrace.Error("Error - target is null in MvxWithEventPropertyInfoTargetBinding");
                 return;
             }
         }
@@ -96,8 +93,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
             if (eventInfo.EventHandlerType != typeof(EventHandler))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic,
-                                      "Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
+                MvxBindingTrace.Trace("Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
                                       viewType,
                                       eventName,
                                       viewType.Name,
@@ -118,8 +114,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
             if (eventInfo.EventHandlerType != typeof(PropertyChangedEventHandler))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic,
-                                      "Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
+                MvxBindingTrace.Trace("Diagnostic - cannot two-way bind to {0}/{1} on type {2} because eventHandler is type {3}",
                                       viewType,
                                       eventName,
                                       viewType.Name,

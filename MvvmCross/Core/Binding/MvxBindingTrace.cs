@@ -5,37 +5,37 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding
 {
     public static class MvxBindingTrace
     {
-        public static MvxTraceLevel TraceBindingLevel = MvxTraceLevel.Warning;
+        public static IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor("MvxBind");
 
-        public const string Tag = "MvxBind";
+        public static MvxLogLevel TraceBindingLevel = MvxLogLevel.Warn;
 
-        public static void Trace(MvxTraceLevel level, string message, params object[] args)
+        private static void Trace(MvxLogLevel level, string message, params object[] args)
         {
-            if (level < TraceBindingLevel)
-                return;
+            if (level < TraceBindingLevel) return;
 
-            MvxTrace.TaggedTrace(level, Tag, message, args);
+            Log.Log(level, () => string.Format(message, args));
         }
 
         public static void Trace(string message, params object[] args)
         {
-            Trace(MvxTraceLevel.Diagnostic, message, args);
+            Trace(MvxLogLevel.Trace, message, args);
         }
 
         public static void Warning(string message, params object[] args)
         {
-            Trace(MvxTraceLevel.Warning, message, args);
+            Trace(MvxLogLevel.Warn, message, args);
         }
 
         public static void Error(string message, params object[] args)
         {
-            Trace(MvxTraceLevel.Error, message, args);
+            Trace(MvxLogLevel.Error, message, args);
         }
     }
 }
