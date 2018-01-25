@@ -22,6 +22,7 @@ namespace MvvmCross.Wpf.Platform
         : MvxSetup
     {
         private readonly Dispatcher _uiThreadDispatcher;
+        private readonly ContentControl _root;
         private IMvxWpfViewPresenter _presenter;
 
         protected MvxWpfSetup(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter)
@@ -33,7 +34,13 @@ namespace MvvmCross.Wpf.Platform
         protected MvxWpfSetup(Dispatcher uiThreadDispatcher, ContentControl root)
         {
             _uiThreadDispatcher = uiThreadDispatcher;
-            _presenter = CreateViewPresenter(root);
+            _root = root;
+        }
+
+        protected override void InitializePlatformServices()
+        {
+            RegisterPresenter();
+            base.InitializePlatformServices();
         }
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
@@ -48,6 +55,15 @@ namespace MvvmCross.Wpf.Platform
             return new MvxWpfViewsContainer();
         }
 
+        protected IMvxWpfViewPresenter Presenter
+        {
+            get
+            {
+                _presenter = _presenter ?? CreateViewPresenter(_root);
+                return _presenter;
+            }
+        }
+
         protected virtual IMvxWpfViewPresenter CreateViewPresenter(ContentControl root)
         {
             return new MvxWpfViewPresenter(root);
@@ -55,7 +71,14 @@ namespace MvvmCross.Wpf.Platform
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return new MvxWpfViewDispatcher(_uiThreadDispatcher, _presenter);
+            return new MvxWpfViewDispatcher(_uiThreadDispatcher, Presenter);
+        }
+
+        protected virtual void RegisterPresenter()
+        {
+            var presenter = Presenter;
+            Mvx.RegisterSingleton(presenter);
+            Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
         protected override IMvxPluginManager CreatePluginManager()

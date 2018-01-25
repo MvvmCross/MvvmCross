@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using CoreGraphics;
 using Foundation;
 using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.iOS.Views.Presenters.Attributes;
 using MvvmCross.Platform;
 using MvvmCross.Platform.iOS.Platform;
 using MvvmCross.Platform.iOS.Views;
@@ -92,7 +93,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
             _pictureAvailable = pictureAvailable;
             _assumeCancelled = assumeCancelled;
 
-            _viewPresenter.ShowModalViewController(_picker, new MvvmCross.iOS.Views.Presenters.Attributes.MvxModalPresentationAttribute() { Animated = true }, null);
+            _viewPresenter.ShowModalViewController(_picker, new MvxModalPresentationAttribute() { Animated = true }, null);
         }
 
         private void HandleImagePick(UIImage image, string name)
