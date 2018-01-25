@@ -1,4 +1,4 @@
-// MvxViewExtensionMethods.cs
+﻿// MvxViewExtensionMethods.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Reflection;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
@@ -65,7 +66,7 @@ namespace MvvmCross.Core.Views
 
         public static IMvxViewModel ReflectionGetViewModel(this IMvxView view)
         {
-            var propertyInfo = view?.GetType().GetProperty("ViewModel");
+            var propertyInfo = view?.GetType().GetRuntimeProperty("ViewModel");
 
             return (IMvxViewModel) propertyInfo?.GetGetMethod().Invoke(view, new object[] { });
         }

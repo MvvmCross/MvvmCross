@@ -1,4 +1,4 @@
-// MvxPropertySourceBindingFactoryExtension.cs
+﻿// MvxPropertySourceBindingFactoryExtension.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -105,13 +105,13 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
             
             //Try top level properties first
             //This extension method "GetProperty" always uses the DeclaredOnly flag
-            pi = sourceType.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public);
+            pi = sourceType.GetTypeInfo().GetDeclaredProperty(propertyName);
 
             if (pi == null)
             {
                 //Try base properties. 
                 //This extension method "GetProperty" uses runtime properties instead of simple non declared properties (ie: in hierarchy)
-                pi = sourceType.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
+                pi = sourceType.GetRuntimeProperty(propertyName);
             }
 
             PropertyInfoCache.TryAdd(key, pi);

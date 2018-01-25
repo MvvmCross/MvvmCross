@@ -1,4 +1,4 @@
-// MvxPropertyInfoTargetBinding.cs
+﻿// MvxPropertyInfoTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -44,7 +44,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            var setMethod = TargetPropertyInfo.GetSetMethod();
+            var setMethod = TargetPropertyInfo.SetMethod;
             setMethod.Invoke(target, new object[] { value });
         }
     }

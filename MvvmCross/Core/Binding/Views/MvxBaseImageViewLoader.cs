@@ -1,4 +1,4 @@
-// MvxBaseImageViewLoader.cs
+﻿// MvxBaseImageViewLoader.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Reflection;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Platform;
@@ -30,7 +31,7 @@ namespace MvvmCross.Binding.Views
                     "Unable to resolve the image helper - have you referenced and called EnsureLoaded on the DownloadCache plugin?");
                 return;
             }
-            var eventInfo = _imageHelper.GetType().GetEvent("ImageChanged");
+            var eventInfo = _imageHelper.GetType().GetRuntimeEvent("ImageChanged");
             _subscription = eventInfo.WeakSubscribe<TImage>(_imageHelper, ImageHelperOnImageChanged);
         }
 

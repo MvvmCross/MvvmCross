@@ -1,4 +1,4 @@
-// MvxViewModelExtensions.cs
+﻿// MvxViewModelExtensions.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -17,7 +17,7 @@ namespace MvvmCross.Core.ViewModels
         {
             var methods = viewModel
                 .GetType()
-                .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
+                .GetRuntimeMethods()
                 .Where(m => m.Name == methodName)
                 .Where(m => !m.IsAbstract)
                 .ToList();
@@ -63,7 +63,7 @@ namespace MvvmCross.Core.ViewModels
         {
             var toReturn = new MvxBundle();
             var methods = viewModel.GetType()
-                                   .GetMethods()
+                                   .GetRuntimeMethods()
                                    .Where(m => m.Name == "SaveState")
                                    .Where(m => m.ReturnType != typeof(void))
                                    .Where(m => !m.GetParameters().Any());

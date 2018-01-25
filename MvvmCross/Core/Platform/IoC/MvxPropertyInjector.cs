@@ -1,4 +1,4 @@
-// MvxPropertyInjector.cs
+﻿// MvxPropertyInjector.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -60,7 +60,7 @@ namespace MvvmCross.Platform.IoC
         protected virtual IEnumerable<PropertyInfo> FindInjectableProperties(Type type, IMvxPropertyInjectorOptions options)
         {
             var injectableProperties = type
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
+                .GetRuntimeProperties()
                 .Where(p => p.PropertyType.GetTypeInfo().IsInterface)
                 .Where(p => p.IsConventional())
                 .Where(p => p.CanWrite);

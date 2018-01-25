@@ -20,7 +20,7 @@ namespace MvvmCross.Platform.IoC
         {
             try
             {
-                return assembly.GetTypes();
+                return assembly.ExportedTypes;
             }
             catch (ReflectionTypeLoadException e)
             {
@@ -73,7 +73,7 @@ namespace MvvmCross.Platform.IoC
 
         public static IEnumerable<Type> Inherits(this IEnumerable<Type> types, Type baseType)
         {
-            return types.Where(x => baseType.IsAssignableFrom(x));
+            return types.Where(x => baseType.GetTypeInfo().IsAssignableFrom(x.GetTypeInfo()));
         }
 
         public static IEnumerable<Type> Inherits<TBase>(this IEnumerable<Type> types)
@@ -83,7 +83,7 @@ namespace MvvmCross.Platform.IoC
 
         public static IEnumerable<Type> DoesNotInherit(this IEnumerable<Type> types, Type baseType)
         {
-            return types.Where(x => !baseType.IsAssignableFrom(x));
+            return types.Where(x => !baseType.GetTypeInfo().IsAssignableFrom(x.GetTypeInfo()));
         }
 
         public static IEnumerable<Type> DoesNotInherit<TBase>(this IEnumerable<Type> types)
@@ -128,7 +128,7 @@ namespace MvvmCross.Platform.IoC
             return types.Select(t => new ServiceTypeAndImplementationTypePair(new List<Type>() { t }, t));
         }
 
-        public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types) => types.Select(t => new ServiceTypeAndImplementationTypePair(t.GetInterfaces().ToList(), t));
+        public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types) => types.Select(t => new ServiceTypeAndImplementationTypePair(t.GetTypeInfo().ImplementedInterfaces.ToList(), t));
 
         public static IEnumerable<ServiceTypeAndImplementationTypePair> AsInterfaces(this IEnumerable<Type> types, params Type[] interfaces)
         {
@@ -140,7 +140,7 @@ namespace MvvmCross.Platform.IoC
                     types.Select(
                         t =>
                         new ServiceTypeAndImplementationTypePair(
-                            t.GetInterfaces().Where(iface => lookup.ContainsKey(iface)).ToList(), t));
+                            t.GetTypeInfo().ImplementedInterfaces.Where(iface => lookup.ContainsKey(iface)).ToList(), t));
             }
             else
             {
@@ -148,7 +148,7 @@ namespace MvvmCross.Platform.IoC
                     types.Select(
                         t =>
                         new ServiceTypeAndImplementationTypePair(
-                            t.GetInterfaces().Where(iface => interfaces.Contains(iface)).ToList(), t));
+                            t.GetTypeInfo().ImplementedInterfaces.Where(iface => interfaces.Contains(iface)).ToList(), t));
             }
         }
 

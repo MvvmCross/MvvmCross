@@ -1,4 +1,4 @@
-// MvxTargetBindingFactoryRegistry.cs
+﻿// MvxTargetBindingFactoryRegistry.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -45,7 +45,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
                 return false;
             }
 
-            var targetPropertyInfo = target.GetType().GetProperty(targetName);
+            var targetPropertyInfo = target.GetType().GetRuntimeProperty(targetName);
             if (targetPropertyInfo != null
                 && targetPropertyInfo.CanWrite)
             {
@@ -53,7 +53,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
                 return true;
             }
 
-            var targetEventInfo = target.GetType().GetEvent(targetName);
+            var targetEventInfo = target.GetType().GetRuntimeEvent(targetName);
             if (targetEventInfo != null)
             {
                 // we only handle EventHandler's here

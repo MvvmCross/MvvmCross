@@ -1,4 +1,4 @@
-// MvxCanExecuteChangedEventSubscription.cs
+﻿// MvxCanExecuteChangedEventSubscription.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,7 +14,7 @@ namespace MvvmCross.Platform.WeakSubscription
     public class MvxCanExecuteChangedEventSubscription
         : MvxWeakEventSubscription<ICommand, EventArgs>
     {
-        private static readonly EventInfo CanExecuteChangedEventInfo = typeof(ICommand).GetEvent("CanExecuteChanged");
+        private static readonly EventInfo CanExecuteChangedEventInfo = typeof(ICommand).GetRuntimeEvent("CanExecuteChanged");
 
         public MvxCanExecuteChangedEventSubscription(ICommand source,
                                                     EventHandler<EventArgs> eventHandler)

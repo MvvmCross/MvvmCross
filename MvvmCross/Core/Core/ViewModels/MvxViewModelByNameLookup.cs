@@ -1,4 +1,4 @@
-// MvxViewModelByNameLookup.cs
+﻿// MvxViewModelByNameLookup.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -51,7 +51,7 @@ namespace MvvmCross.Core.ViewModels
             var viewModelTypes = from type in assembly.ExceptionSafeGetTypes()
                                  where !type.GetTypeInfo().IsAbstract
                                  where !type.GetTypeInfo().IsInterface
-                                 where typeof(IMvxViewModel).IsAssignableFrom(type)
+                                 where typeof(IMvxViewModel).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo())
                                  select type;
 
             foreach (var viewModelType in viewModelTypes)

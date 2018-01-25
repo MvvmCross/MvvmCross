@@ -1,4 +1,4 @@
-// MvxNamedInstanceRegistryFiller.cs
+﻿// MvxNamedInstanceRegistryFiller.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -33,10 +33,10 @@ namespace MvvmCross.Binding.Binders
         {
             var instance = Activator.CreateInstance(type);
 
-            var pairs = from field in type.GetFields()
+            var pairs = from field in type.GetRuntimeFields()
                         where !field.IsStatic
                         where field.IsPublic
-                        where typeof(T).IsAssignableFrom(field.FieldType)
+                        where typeof(T).GetTypeInfo().IsAssignableFrom(field.FieldType.GetTypeInfo())
                         let converter = field.GetValue(instance) as T
                         where converter != null
                         select new
@@ -53,10 +53,10 @@ namespace MvvmCross.Binding.Binders
 
         protected virtual void FillFromStatic(IMvxNamedInstanceRegistry<T> registry, Type type)
         {
-            var pairs = from field in type.GetFields()
+            var pairs = from field in type.GetRuntimeFields()
                         where field.IsStatic
                         where field.IsPublic
-                        where typeof(T).IsAssignableFrom(field.FieldType)
+                        where typeof(T).GetTypeInfo().IsAssignableFrom(field.FieldType.GetTypeInfo())
                         let converter = field.GetValue(null) as T
                         where converter != null
                         select new
@@ -76,7 +76,7 @@ namespace MvvmCross.Binding.Binders
             var pairs = from type in assembly.ExceptionSafeGetTypes()
                         where type.GetTypeInfo().IsPublic
                         where !type.GetTypeInfo().IsAbstract
-                        where typeof(T).IsAssignableFrom(type)
+                        where typeof(T).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo())
                         let name = FindName(type)
                         where !string.IsNullOrEmpty(name)
                         where type.IsConventional()

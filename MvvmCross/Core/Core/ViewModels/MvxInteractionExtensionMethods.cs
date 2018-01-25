@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Reflection;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.WeakSubscription;
@@ -16,13 +17,13 @@ namespace MvvmCross.Core.ViewModels
     {
         public static IDisposable WeakSubscribe(this IMvxInteraction interaction, EventHandler<EventArgs> action)
         {
-            var eventInfo = interaction.GetType().GetEvent("Requested");
+            var eventInfo = interaction.GetType().GetRuntimeEvent("Requested");
             return eventInfo.WeakSubscribe(interaction, action);
         }
 
         public static MvxValueEventSubscription<T> WeakSubscribe<T>(this IMvxInteraction<T> interaction, EventHandler<MvxValueEventArgs<T>> action)
         {
-            var eventInfo = interaction.GetType().GetEvent("Requested");
+            var eventInfo = interaction.GetType().GetRuntimeEvent("Requested");
             return eventInfo.WeakSubscribe<T>(interaction, action);
         }
 

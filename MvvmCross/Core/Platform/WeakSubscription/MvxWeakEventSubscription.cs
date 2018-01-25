@@ -1,4 +1,4 @@
-// MvxWeakEventSubscription.cs
+﻿// MvxWeakEventSubscription.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -31,7 +31,7 @@ namespace MvvmCross.Platform.WeakSubscription
             TSource source,
             string sourceEventName,
             EventHandler<TEventArgs> targetEventHandler)
-            : this(source, typeof(TSource).GetEvent(sourceEventName), targetEventHandler)
+            : this(source, typeof(TSource).GetRuntimeEvent(sourceEventName), targetEventHandler)
         {
         }
 
@@ -143,7 +143,7 @@ namespace MvvmCross.Platform.WeakSubscription
             TSource source,
             string sourceEventName,
             EventHandler targetEventHandler)
-            : this(source, typeof(TSource).GetEvent(sourceEventName), targetEventHandler)
+            : this(source, typeof(TSource).GetRuntimeEvent(sourceEventName), targetEventHandler)
         {
         }
 

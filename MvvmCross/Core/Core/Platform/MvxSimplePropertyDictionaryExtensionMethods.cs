@@ -1,4 +1,4 @@
-// MvxSimplePropertyDictionaryExtensionMethods.cs
+﻿// MvxSimplePropertyDictionaryExtensionMethods.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -54,7 +54,7 @@ namespace MvvmCross.Core.Platform
         {
             var t = Activator.CreateInstance(type);
             var propertyList =
-                type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(p => p.CanWrite);
+                type.GetRuntimeProperties().Where(p => p.CanWrite);
 
             foreach (var propertyInfo in propertyList)
             {
@@ -115,8 +115,7 @@ namespace MvvmCross.Core.Platform
                 return (IDictionary<string, string>)input;
 
             var propertyInfos = from property in input.GetType()
-                                                      .GetProperties(BindingFlags.Instance | BindingFlags.Public |
-                                                                     BindingFlags.FlattenHierarchy)
+                                                    .GetRuntimeProperties()
                                 where property.CanRead
                                 select new
                                 {

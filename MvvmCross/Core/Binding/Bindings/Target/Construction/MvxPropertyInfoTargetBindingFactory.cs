@@ -1,4 +1,4 @@
-// MvxPropertyInfoTargetBindingFactory.cs
+﻿// MvxPropertyInfoTargetBindingFactory.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -39,7 +39,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 
         public IMvxTargetBinding CreateBinding(object target, string targetName)
         {
-            var targetPropertyInfo = target.GetType().GetProperty(targetName);
+            var targetPropertyInfo = target.GetType().GetRuntimeProperty(targetName);
             if (targetPropertyInfo != null)
             {
                 try

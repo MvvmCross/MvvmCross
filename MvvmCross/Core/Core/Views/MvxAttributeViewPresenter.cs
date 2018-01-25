@@ -1,4 +1,4 @@
-// MvxAttributeViewPresenter.cs
+﻿// MvxAttributeViewPresenter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -70,7 +70,7 @@ namespace MvvmCross.Core.Views
 
         public virtual MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
         {
-            if (viewType?.GetInterfaces().Contains(typeof(IMvxOverridePresentationAttribute)) ?? false)
+            if (viewType?.GetTypeInfo().ImplementedInterfaces.Contains(typeof(IMvxOverridePresentationAttribute)) ?? false)
             {
                 var viewInstance = Activator.CreateInstance(viewType) as IMvxOverridePresentationAttribute;
                 try

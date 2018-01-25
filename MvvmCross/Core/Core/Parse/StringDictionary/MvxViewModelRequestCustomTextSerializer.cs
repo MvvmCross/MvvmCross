@@ -1,4 +1,4 @@
-// MvxViewModelRequestCustomTextSerializer.cs
+﻿// MvxViewModelRequestCustomTextSerializer.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -6,6 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
+using System.Reflection;
 using System.Collections.Generic;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
@@ -49,7 +50,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
             if (type == typeof(MvxViewModelRequest))
                 return DeserializeViewModelRequest(inputText);
 
-            if (typeof(IDictionary<string, string>).IsAssignableFrom(type))
+            if (typeof(IDictionary<string, string>).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
                 return DeserializeStringDictionary(inputText);
 
             throw new MvxException("This serializer only knows about MvxViewModelRequest and IDictionary<string,string>");
