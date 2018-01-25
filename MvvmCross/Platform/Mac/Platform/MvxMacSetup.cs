@@ -90,6 +90,7 @@ namespace MvvmCross.Mac.Platform
         {
             RegisterPresenter();
             RegisterLifetime();
+            base.InitializePlatformServices();
         }
 
         protected virtual void RegisterLifetime()
@@ -101,12 +102,12 @@ namespace MvvmCross.Mac.Platform
         {
             get
             {
-                _presenter = _presenter ?? CreatePresenter();
+                _presenter = _presenter ?? CreateViewPresenter();
                 return _presenter;
             }
         }
 
-        protected virtual IMvxMacViewPresenter CreatePresenter()
+        protected virtual IMvxMacViewPresenter CreateViewPresenter()
         {
             return new MvxMacViewPresenter(_applicationDelegate);
         }
@@ -115,6 +116,7 @@ namespace MvvmCross.Mac.Platform
         {
             var presenter = this.Presenter;
             Mvx.RegisterSingleton(presenter);
+            Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
         protected override void InitializeLastChance()

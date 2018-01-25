@@ -85,6 +85,7 @@ namespace MvvmCross.tvOS.Platform
             RegisterPlatformProperties();
             RegisterPresenter();
             RegisterLifetime();
+            base.InitializePlatformServices();
         }
 
         protected virtual void RegisterPlatformProperties()
@@ -106,12 +107,12 @@ namespace MvvmCross.tvOS.Platform
         {
             get
             {
-                _presenter = _presenter ?? CreatePresenter();
+                _presenter = _presenter ?? CreateViewPresenter();
                 return _presenter;
             }
         }
 
-        protected virtual IMvxTvosViewPresenter CreatePresenter()
+        protected virtual IMvxTvosViewPresenter CreateViewPresenter()
         {
             return new MvxTvosViewPresenter(_applicationDelegate, _window);
         }
@@ -120,7 +121,7 @@ namespace MvvmCross.tvOS.Platform
         {
             var presenter = Presenter;
             Mvx.RegisterSingleton(presenter);
-            Mvx.RegisterSingleton<IMvxTvosModalHost>(presenter);
+            Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
         protected override void InitializeLastChance()
