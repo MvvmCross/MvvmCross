@@ -22,7 +22,7 @@ namespace MvvmCross.Binding.iOS.Target
         {
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxBindingTrace.Error(
                                       "Error - UILabel is null in MvxUILabelTextTargetBinding");
             }
         }

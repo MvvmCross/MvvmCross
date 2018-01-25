@@ -40,7 +40,7 @@ namespace MvvmCross.Binding.Droid.Target
             var positions = ((MvxExpandableListAdapter)listView.ExpandableListAdapter).GetPositions(value);
             if (positions == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Value not found for spinner {0}", value.ToString());
+                MvxBindingTrace.Warning("Value not found for spinner {0}", value.ToString());
                 return;
             }
 

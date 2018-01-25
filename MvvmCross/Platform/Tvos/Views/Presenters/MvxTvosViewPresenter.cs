@@ -1,4 +1,4 @@
-// MvxTvosViewPresenter.cs
+﻿// MvxTvosViewPresenter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -20,6 +20,7 @@ using MvvmCross.tvOS.Views.Presenters.Attributes;
 using CoreGraphics;
 using Foundation;
 using UIKit;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.tvOS.Views.Presenters
 {
@@ -52,7 +53,7 @@ namespace MvvmCross.tvOS.Views.Presenters
                TabBarViewController == null ||
                !TabBarViewController.CanShowChildView())
             {
-                MvxTrace.Trace($"PresentationAttribute nor MasterNavigationController found for {viewType.Name}. " +
+                MvxLog.Instance.Trace($"PresentationAttribute nor MasterNavigationController found for {viewType.Name}. " +
                     $"Assuming Root presentation");
                 return new MvxRootPresentationAttribute()
                 {
@@ -61,7 +62,7 @@ namespace MvvmCross.tvOS.Views.Presenters
                     ViewModelType = viewModelType
                 };
             }
-            MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. " +
+            MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. " +
                 $"Assuming animated Child presentation");
             return new MvxChildPresentationAttribute()
             {
@@ -83,7 +84,7 @@ namespace MvvmCross.tvOS.Views.Presenters
 
                     if (presentationAttribute == null)
                     {
-                        MvxTrace.Warning("Override PresentationAttribute null. Falling back to existing attribute.");
+                        MvxLog.Instance.Warn("Override PresentationAttribute null. Falling back to existing attribute.");
                     }
                     else
                     {
@@ -176,7 +177,7 @@ namespace MvvmCross.tvOS.Views.Presenters
         protected virtual bool CloseRootViewController(IMvxViewModel viewModel,
                                      MvxRootPresentationAttribute attribute)
         {
-            Mvx.Warning($"Ignored attempt to close the window root (ViewModel type: {viewModel.GetType().Name}");
+            MvxLog.Instance.Warn($"Ignored attempt to close the window root (ViewModel type: {viewModel.GetType().Name}");
             return false;
         }
 

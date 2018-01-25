@@ -45,7 +45,7 @@ namespace MvvmCross.Binding.Wpf.MvxBinding
 
             if (string.IsNullOrEmpty(targetName))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxBindingTrace.Error(
                                       "Empty binding target passed to MvxWindowsTargetBindingFactoryRegistry");
                 binding = null;
                 return false;

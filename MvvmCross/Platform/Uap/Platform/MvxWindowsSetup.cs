@@ -1,4 +1,4 @@
-// MvxStoreSetup.cs
+﻿// MvxStoreSetup.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -42,11 +42,6 @@ namespace MvvmCross.Uwp.Platform
         protected MvxWindowsSetup(IMvxWindowsFrame rootFrame)
         {
             _rootFrame = rootFrame;
-        }
-
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new MvxDebugTrace();
         }
 
         protected override void InitializePlatformServices()

@@ -24,7 +24,7 @@ namespace MvvmCross.Binding.Mac.Target
             var searchField = View;
             if (searchField == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxBindingTrace.Error(
                                       "Error - NSSearchField is null in MvxNSSearchFieldTextTargetBinding");
             }
             else

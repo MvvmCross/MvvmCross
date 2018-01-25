@@ -47,7 +47,7 @@ namespace MvvmCross.Console.Views
         {
             if (HandlePresentationChange(hint)) return;
 
-            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
+            MvxLog.Instance.Warn("Hint ignored {0}", hint.GetType().Name);
         }
 
         public abstract void Close(IMvxViewModel toClose);

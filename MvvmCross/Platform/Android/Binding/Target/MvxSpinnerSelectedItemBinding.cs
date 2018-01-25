@@ -68,7 +68,7 @@ namespace MvvmCross.Binding.Droid.Target
                 var index = spinner.Adapter.GetPosition(value);
                 if (index < 0)
                 {
-                    MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Value not found for spinner {0}", value.ToString());
+                    MvxBindingTrace.Warning("Value not found for spinner {0}", value.ToString());
                     return;
                 }
                 _currentValue = value;

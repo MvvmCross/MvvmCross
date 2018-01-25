@@ -1,4 +1,4 @@
-// MvxImageViewImageTargetBinding.cs
+﻿// MvxImageViewImageTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -26,14 +26,14 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (value == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Null value passed to ImageView binding");
+                MvxBindingTrace.Warning("Null value passed to ImageView binding");
                 return null;
             }
 
             var stringValue = value as string;
             if (string.IsNullOrWhiteSpace(stringValue))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Empty value passed to ImageView binding");
+                MvxBindingTrace.Warning("Empty value passed to ImageView binding");
                 return null;
             }
 

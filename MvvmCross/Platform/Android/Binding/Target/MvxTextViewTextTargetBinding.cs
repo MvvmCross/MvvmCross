@@ -29,7 +29,7 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - TextView is null in MvxTextViewTextTargetBinding");
+                MvxBindingTrace.Error( "Error - TextView is null in MvxTextViewTextTargetBinding");
                 return;
             }
 

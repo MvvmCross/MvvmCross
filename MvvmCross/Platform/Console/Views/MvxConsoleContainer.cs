@@ -48,7 +48,7 @@ namespace MvvmCross.Console.Views
                 return;
             }
 
-            MvxTrace.Warning("Hint ignored {0}", hint.GetType().Name);
+            MvxLog.Instance.Warn("Hint ignored {0}", hint.GetType().Name);
         }
 
         public override void Close(IMvxViewModel viewModel)
@@ -57,13 +57,13 @@ namespace MvvmCross.Console.Views
 
             if (currentView == null)
             {
-                Mvx.Warning("Ignoring close for viewmodel - rootframe has no current page");
+                MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe has no current page");
                 return;
             }
 
             if (currentView.ViewModel != viewModel)
             {
-                Mvx.Warning("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
+                MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
                 return;
             }
 

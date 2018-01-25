@@ -41,7 +41,7 @@ namespace MvvmCross.Binding.iOS.Target
                     break;
 
                 default:
-                    MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Visibility out of range {0}", value);
+                    MvxBindingTrace.Warning("Visibility out of range {0}", value);
                     break;
             }
         }

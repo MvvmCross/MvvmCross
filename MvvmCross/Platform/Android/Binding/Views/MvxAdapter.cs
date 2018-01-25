@@ -19,6 +19,7 @@ using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.WeakSubscription;
 using Object = Java.Lang.Object;
@@ -112,7 +113,7 @@ namespace MvvmCross.Binding.Droid.Views
             _itemsSource = value;
 
             if (_itemsSource != null && !(_itemsSource is IList))
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
+                MvxBindingTrace.Warning(
                   "You are currently binding to IEnumerable - " +
                   "this can be inefficient, especially for large collections. " +
                   "Binding to IList is more efficient.");
@@ -146,7 +147,7 @@ namespace MvvmCross.Binding.Droid.Views
             }
             catch (Exception exception)
             {
-                Mvx.Warning(
+                MvxLog.Instance.Warn(
                     "Exception masked during Adapter RealNotifyDataSetChanged " +
                     "{0}. Are you trying to update your collection from a " +
                     "background task? See http://goo.gl/0nW0L6",
@@ -187,7 +188,7 @@ namespace MvvmCross.Binding.Droid.Views
         {
             if (ItemsSource == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "GetView called when ItemsSource is null");
+                MvxBindingTrace.Error( "GetView called when ItemsSource is null");
                 return null;
             }
 

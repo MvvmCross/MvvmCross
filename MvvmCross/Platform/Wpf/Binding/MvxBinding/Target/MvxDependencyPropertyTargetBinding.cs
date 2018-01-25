@@ -96,11 +96,11 @@ namespace MvvmCross.Binding.Wpf.MvxBinding.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving setValue to " + (value ?? ""));
+            MvxBindingTrace.Trace("Receiving setValue to " + (value ?? ""));
             var frameworkElement = target as FrameworkElement;
             if (frameworkElement == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
+                MvxBindingTrace.Warning("Weak Target is null in {0} - skipping set", GetType().Name);
                 return;
             }
 

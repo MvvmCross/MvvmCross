@@ -10,6 +10,7 @@ using Java.Lang.Reflect;
 using MvvmCross.Binding.Droid.Binders;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 using Boolean = Java.Lang.Boolean;
 using Exception = Java.Lang.Exception;
 using Object = Java.Lang.Object;
@@ -154,7 +155,7 @@ namespace MvvmCross.Binding.Droid.Views
         protected override View OnCreateView(View parent, string name, IAttributeSet attrs)
         {
             if (Debug)
-                Mvx.TaggedTrace(Tag, "... OnCreateView 3 ... {0}", name);
+                MvxLog.Instance.Trace(Tag, "... OnCreateView 3 ... {0}", name);
 
             return _bindingVisitor.OnViewCreated(
                 base.OnCreateView(parent, name, attrs),
@@ -165,7 +166,7 @@ namespace MvvmCross.Binding.Droid.Views
         protected override View OnCreateView(string name, IAttributeSet attrs)
         {
             if (Debug)
-                Mvx.TaggedTrace(Tag, "... OnCreateView 2 ... {0}", name);
+                MvxLog.Instance.Trace(Tag, "... OnCreateView 2 ... {0}", name);
 
             View view = AndroidViewFactory.CreateView(null, name, Context, attrs) ??
                         PhoneLayoutInflaterOnCreateView(name, attrs) ??
@@ -178,7 +179,7 @@ namespace MvvmCross.Binding.Droid.Views
         private View PhoneLayoutInflaterOnCreateView(string name, IAttributeSet attrs)
         {
             if (Debug)
-                Mvx.TaggedTrace(Tag, "... PhoneLayoutInflaterOnCreateView ... {0}", name);
+                MvxLog.Instance.Trace(Tag, "... PhoneLayoutInflaterOnCreateView ... {0}", name);
 
             foreach (var prefix in ClassPrefixList)
             {
@@ -273,7 +274,7 @@ namespace MvvmCross.Binding.Droid.Views
                 }
                 catch (Exception ex)
                 {
-                    Mvx.Warning("Cannot invoke LayoutInflater.setPrivateFactory :\n{0}", ex.StackTrace);
+                    MvxLog.Instance.Warn("Cannot invoke LayoutInflater.setPrivateFactory :\n{0}", ex.StackTrace);
                 }
             }
 
@@ -284,7 +285,7 @@ namespace MvvmCross.Binding.Droid.Views
             IAttributeSet attrs)
         {
             if (Debug)
-                Mvx.TaggedTrace(Tag, "... CreateCustomViewInternal ... {0}", name);
+                MvxLog.Instance.Trace(Tag, "... CreateCustomViewInternal ... {0}", name);
 
             if (view == null && name.IndexOf('.') > -1)
             {
@@ -350,7 +351,7 @@ namespace MvvmCross.Binding.Droid.Views
             public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
-                    Mvx.TaggedTrace(Tag, "... OnCreateView ... {0}", name);
+                    MvxLog.Instance.Trace(Tag, "... OnCreateView ... {0}", name);
 
                 return _factoryPlaceholder.OnViewCreated(
                     _factory.OnCreateView(parent, name, context, attrs),
@@ -374,7 +375,7 @@ namespace MvvmCross.Binding.Droid.Views
             public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
-                    Mvx.TaggedTrace(Tag, "... OnCreateView ... {0}", name);
+                    MvxLog.Instance.Trace(Tag, "... OnCreateView ... {0}", name);
 
                 return _factoryPlaceholder.OnViewCreated(
                     _factory.OnCreateView(name, context, attrs),
@@ -406,7 +407,7 @@ namespace MvvmCross.Binding.Droid.Views
             public View OnCreateView(string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
-                    Mvx.TaggedTrace(Tag, "... OnCreateView 2 ... {0}", name);
+                    MvxLog.Instance.Trace(Tag, "... OnCreateView 2 ... {0}", name);
 
                 return _bindingVisitor.OnViewCreated(
                     // The activity's OnCreateView
@@ -417,7 +418,7 @@ namespace MvvmCross.Binding.Droid.Views
             public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
-                    Mvx.TaggedTrace(Tag, "... OnCreateView 3 ... {0}", name);
+                    MvxLog.Instance.Trace(Tag, "... OnCreateView 3 ... {0}", name);
 
                 return _bindingVisitor.OnViewCreated(
                     _inflater.CreateCustomViewInternal(

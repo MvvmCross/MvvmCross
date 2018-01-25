@@ -46,7 +46,7 @@ namespace MvvmCross.Wpf.Views.Presenters
             if (_frameworkElements.Any() && CloseFrameworkElement(toClose))
                 return;
 
-            MvxTrace.Warning($"Could not close ViewModel type {toClose.GetType().Name}");
+            MvxLog.Instance.Warn($"Could not close ViewModel type {toClose.GetType().Name}");
         }
 
         protected virtual bool CloseFrameworkElement(IMvxViewModel toClose)

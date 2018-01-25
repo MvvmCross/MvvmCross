@@ -33,7 +33,7 @@ namespace MvvmCross.Binding.Mac.Target
             var popupButton = View;
             if (popupButton == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - NSPopUpButton is null in MvxNSPopUpButtonSelectedTagTargetBinding");
+                MvxBindingTrace.Error( "Error - NSPopUpButton is null in MvxNSPopUpButtonSelectedTagTargetBinding");
                 return;
             }
 

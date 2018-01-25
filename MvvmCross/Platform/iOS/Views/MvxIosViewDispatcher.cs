@@ -9,6 +9,7 @@ using System;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.iOS.Views
@@ -27,7 +28,7 @@ namespace MvvmCross.iOS.Views
         {
             Action action = () =>
                 {
-                    MvxTrace.TaggedTrace("iOSNavigation", "Navigate requested");
+                    MvxLog.Instance.Trace("iOSNavigation", "Navigate requested");
                     _presenter.Show(request);
                 };
             return RequestMainThreadAction(action);

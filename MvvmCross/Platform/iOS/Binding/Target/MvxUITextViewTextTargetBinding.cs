@@ -40,7 +40,7 @@ namespace MvvmCross.Binding.iOS.Target
             var target = View;
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxBindingTrace.Error(
                                       "Error - UITextView is null in MvxUITextViewTextTargetBinding");
                 return;
             }
@@ -48,7 +48,7 @@ namespace MvvmCross.Binding.iOS.Target
 			var textStorage = target.LayoutManager?.TextStorage;
 			if (textStorage == null)
 			{ 
-			    MvxBindingTrace.Trace(MvxTraceLevel.Error,
+			    MvxBindingTrace.Error(
 						  "Error - NSTextStorage of UITextView is null in MvxUITextViewTextTargetBinding");
 				return;
 			}

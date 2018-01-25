@@ -1,4 +1,4 @@
-// MvxAndroidSetupSingleton.cs
+﻿// MvxAndroidSetupSingleton.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -15,6 +15,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.IoC;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Droid.Platform
 {
@@ -36,7 +37,7 @@ namespace MvvmCross.Droid.Platform
 
                 if (IsInitialisedTaskCompletionSource != null)
                 {
-                    Mvx.Trace("EnsureInitialized has already been called so now waiting for completion");
+                    MvxLog.Instance.Trace("EnsureInitialized has already been called so now waiting for completion");
                     IsInitialisedTaskCompletionSource.Task.Wait();
                 }
                 else
@@ -47,7 +48,7 @@ namespace MvvmCross.Droid.Platform
 
                     if (_currentSplashScreen != null)
                     {
-                        Mvx.Warning("Current splash screen not null during direct initialization - not sure this should ever happen!");
+                        MvxLog.Instance.Warn("Current splash screen not null during direct initialization - not sure this should ever happen!");
                         var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
                         dispatcher.RequestMainThreadAction(() =>
                         {

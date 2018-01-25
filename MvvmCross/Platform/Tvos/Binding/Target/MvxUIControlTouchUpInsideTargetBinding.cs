@@ -27,7 +27,7 @@ namespace MvvmCross.Binding.tvOS.Target
         {
             if (control == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UIControl is null in MvxUIControlTouchUpInsideTargetBinding");
+                MvxBindingTrace.Error( "Error - UIControl is null in MvxUIControlTouchUpInsideTargetBinding");
             }
             else
             {

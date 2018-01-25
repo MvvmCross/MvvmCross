@@ -1,4 +1,4 @@
-// MvxSavedStateConverter.cs
+﻿// MvxSavedStateConverter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,6 +11,7 @@ using Android.OS;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Views
@@ -33,7 +34,7 @@ namespace MvvmCross.Droid.Views
             }
             catch (Exception)
             {
-                MvxTrace.Error("Problem getting the saved state - will return null - from {0}",
+                MvxLog.Instance.Error("Problem getting the saved state - will return null - from {0}",
                                extras);
                 return null;
             }

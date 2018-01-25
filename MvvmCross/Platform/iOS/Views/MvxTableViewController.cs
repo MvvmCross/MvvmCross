@@ -46,26 +46,26 @@ namespace MvvmCross.iOS.Views
             get
             {
                 /*
-				Mvx.Trace ("I am in .ViewModel!");
+				MvxLog.Instance.Trace ("I am in .ViewModel!");
 				if (BindingContext == null)
-					Mvx.Trace ("BindingContext is null!");
-				Mvx.Trace ("I am in .ViewModel 2!");
+					MvxLog.Instance.Trace ("BindingContext is null!");
+				MvxLog.Instance.Trace ("I am in .ViewModel 2!");
 				if (DataContext == null)
-					Mvx.Trace ("DataContext is null!");
-				Mvx.Trace ("I am in .ViewModel 3!");
+					MvxLog.Instance.Trace ("DataContext is null!");
+				MvxLog.Instance.Trace ("I am in .ViewModel 3!");
 
 				var c = DataContext;
-				Mvx.Trace ("I am in .ViewModel 4!");
+				MvxLog.Instance.Trace ("I am in .ViewModel 4!");
 				var d = c as IMvxViewModel;
-				Mvx.Trace ("I am in .ViewModel 5!");
+				MvxLog.Instance.Trace ("I am in .ViewModel 5!");
 
 				var e = (IMvxViewModel)d;
-				Mvx.Trace ("I am in .ViewModel 6!");
+				MvxLog.Instance.Trace ("I am in .ViewModel 6!");
 				if (d == null)
-					Mvx.Trace ("d was null!");
+					MvxLog.Instance.Trace ("d was null!");
 
 				if (e == null)
-					Mvx.Trace ("e was null!");
+					MvxLog.Instance.Trace ("e was null!");
 				*/
                 return DataContext as IMvxViewModel;
             }

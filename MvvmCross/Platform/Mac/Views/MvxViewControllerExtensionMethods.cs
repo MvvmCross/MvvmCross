@@ -1,4 +1,4 @@
-// MvxViewControllerExtensionMethods.cs
+﻿// MvxViewControllerExtensionMethods.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,6 +13,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Mac.Views
@@ -29,7 +30,7 @@ namespace MvvmCross.Mac.Views
         {
             if (macView.Request == null)
             {
-                MvxTrace.Trace(
+                MvxLog.Instance.Trace(
                     "Request is null - assuming this is a TabBar type situation where ViewDidLoad is called during construction... patching the request now - but watch out for problems with virtual calls during construction");
                 macView.Request = Mvx.Resolve<IMvxCurrentRequest>().CurrentRequest;
             }

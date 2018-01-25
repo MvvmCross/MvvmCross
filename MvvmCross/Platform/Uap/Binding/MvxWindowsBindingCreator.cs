@@ -15,6 +15,7 @@ using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Uwp.Converters;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Uwp
 {
@@ -26,20 +27,20 @@ namespace MvvmCross.Binding.Uwp
             DependencyProperty dependencyProperty = actualType.FindDependencyProperty(bindingDescription.TargetName);
             if (dependencyProperty == null)
             {
-                Mvx.Warning("Dependency property not found for {0}", bindingDescription.TargetName);
+                MvxLog.Instance.Warn("Dependency property not found for {0}", bindingDescription.TargetName);
                 return;
             }
 
             var property = actualType.FindActualProperty(bindingDescription.TargetName);
             if (property == null)
             {
-                Mvx.Warning("Property not returned {0} - may cause issues", bindingDescription.TargetName);
+                MvxLog.Instance.Warn("Property not returned {0} - may cause issues", bindingDescription.TargetName);
             }
 
             var sourceStep = bindingDescription.Source as MvxPathSourceStepDescription;
             if (sourceStep == null)
             {
-                Mvx.Warning("Binding description for {0} is not a simple path - Windows Binding cannot cope with this", bindingDescription.TargetName);
+                MvxLog.Instance.Warn("Binding description for {0} is not a simple path - Windows Binding cannot cope with this", bindingDescription.TargetName);
                 return;
             }
 
@@ -98,7 +99,7 @@ namespace MvvmCross.Binding.Uwp
                     return BindingMode.OneTime;
 
                 case MvxBindingMode.OneWayToSource:
-                    Mvx.Warning("WinPhone doesn't support OneWayToSource");
+                    MvxLog.Instance.Warn("WinPhone doesn't support OneWayToSource");
                     return BindingMode.TwoWay;
 
                 default:

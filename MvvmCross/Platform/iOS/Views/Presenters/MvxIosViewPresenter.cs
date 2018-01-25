@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using CoreGraphics;
@@ -9,6 +9,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Core.Views;
 using UIKit;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.iOS.Views.Presenters
 {
@@ -31,12 +32,12 @@ namespace MvvmCross.iOS.Views.Presenters
                (TabBarViewController == null ||
                !TabBarViewController.CanShowChildView()))
             {
-                MvxTrace.Trace($"PresentationAttribute nor MasterNavigationController found for {viewType.Name}. " +
+                MvxLog.Instance.Trace($"PresentationAttribute nor MasterNavigationController found for {viewType.Name}. " +
                     $"Assuming Root presentation");
                 return new MvxRootPresentationAttribute() { WrapInNavigationController = true, ViewType = viewType, ViewModelType = viewModelType };
             }
 
-            MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. " +
+            MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. " +
                 $"Assuming animated Child presentation");
             return new MvxChildPresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
         }
@@ -52,7 +53,7 @@ namespace MvvmCross.iOS.Views.Presenters
 
                     if (presentationAttribute == null)
                     {
-                        MvxTrace.Warning("Override PresentationAttribute null. Falling back to existing attribute.");
+                        MvxLog.Instance.Warn("Override PresentationAttribute null. Falling back to existing attribute.");
                     }
                     else
                     {
@@ -341,7 +342,7 @@ namespace MvvmCross.iOS.Views.Presenters
 
         protected virtual bool CloseRootViewController(IMvxViewModel viewModel, MvxRootPresentationAttribute attribute)
         {
-            Mvx.Warning($"Ignored attempt to close the window root (ViewModel type: {viewModel.GetType().Name}");
+            MvxLog.Instance.Warn($"Ignored attempt to close the window root (ViewModel type: {viewModel.GetType().Name}");
 
             return false;
         }

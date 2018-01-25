@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -51,17 +51,6 @@ namespace MvvmCross.Mac.Platform
         protected IMvxApplicationDelegate ApplicationDelegate
         {
             get { return _applicationDelegate; }
-        }
-
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new MvxDebugTrace();
-        }
-
-        protected override void InitializeDebugServices()
-        {
-            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
-            base.InitializeDebugServices();
         }
 
         protected override IMvxPluginManager CreatePluginManager()

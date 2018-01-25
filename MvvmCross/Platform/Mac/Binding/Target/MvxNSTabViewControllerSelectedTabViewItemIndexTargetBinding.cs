@@ -36,7 +36,7 @@ namespace MvvmCross.Binding.Mac.Target
             var view = View;
             if (view == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - NSTabViewController is null in MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding");
+                MvxBindingTrace.Error( "Error - NSTabViewController is null in MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding");
                 return;
             }
 

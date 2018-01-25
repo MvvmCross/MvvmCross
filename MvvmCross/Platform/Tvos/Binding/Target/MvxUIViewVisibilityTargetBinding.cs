@@ -1,4 +1,4 @@
-// MvxUIViewVisibilityTargetBinding.cs
+﻿// MvxUIViewVisibilityTargetBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -41,7 +41,7 @@ namespace MvvmCross.Binding.tvOS.Target
                     break;
 
                 default:
-                    MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Visibility out of range {0}", value);
+                    MvxBindingTrace.Warning("Visibility out of range {0}", value);
                     break;
             }
         }

@@ -39,7 +39,7 @@ namespace MvvmCross.Binding.tvOS.Target
             var target = View;
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxBindingTrace.Error(
                                       "Error - UITextView is null in MvxUITextViewTextTargetBinding");
                 return;
             }

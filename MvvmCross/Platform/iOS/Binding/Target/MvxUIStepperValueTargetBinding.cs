@@ -44,7 +44,7 @@ namespace MvvmCross.Binding.iOS.Target
             var stepper = View;
             if (stepper == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "UIStepper is null in MvxUIStepperValueTargetBinding");
+                MvxBindingTrace.Error( "UIStepper is null in MvxUIStepperValueTargetBinding");
                 return;
             }
 
