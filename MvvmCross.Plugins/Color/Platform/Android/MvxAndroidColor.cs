@@ -15,10 +15,10 @@ namespace MvvmCross.Plugins.Color.Droid
     {
         public object ToNative(MvxColor mvxColor)
         {
-            return ToAndroidColor(mvxColor);
+            return ToNativeColor(mvxColor);
         }
 
-        public Android.Graphics.Color ToAndroidColor(MvxColor mvxColor)
+        public Android.Graphics.Color ToNativeColor(MvxColor mvxColor)
         {
             return new Android.Graphics.Color(mvxColor.R, mvxColor.G, mvxColor.B, mvxColor.A);
         }
