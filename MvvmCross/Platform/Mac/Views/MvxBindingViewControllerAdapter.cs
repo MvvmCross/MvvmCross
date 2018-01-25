@@ -1,4 +1,4 @@
-// MvxBindingViewControllerAdapter.cs
+﻿// MvxBindingViewControllerAdapter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,6 +11,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platform.Platform;
 
 using MvvmCross.Platform.Mac.Views;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Mac.Views
 {
@@ -34,7 +35,7 @@ namespace MvvmCross.Mac.Views
         {
             if (MacView == null)
             {
-                MvxTrace.Warning($"{nameof(MacView)} is null for clearup of bindings");
+                MvxLog.Instance.Warn($"{nameof(MacView)} is null for clearup of bindings");
                 return;
             }
             MacView.ClearAllBindings();

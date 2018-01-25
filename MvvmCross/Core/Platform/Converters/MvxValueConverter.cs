@@ -7,6 +7,7 @@
 
 using System;
 using System.Globalization;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Platform.Converters
 {
@@ -27,6 +28,9 @@ namespace MvvmCross.Platform.Converters
     public abstract class MvxValueConverter<TFrom, TTo>
         : IMvxValueConverter
     {
+        protected static IMvxLog Log 
+            => Mvx.Resolve<IMvxLogProvider>().GetLogFor<MvxValueConverter>();
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
@@ -35,8 +39,7 @@ namespace MvvmCross.Platform.Converters
             }
             catch (Exception e)
             {
-                Mvx.TaggedError("MvxValueConverter",
-                    $"Failed to Convert from {typeof(TFrom)} to {typeof(TTo)} with Exception: {e}");
+                Log.Error($"Failed to Convert from {typeof(TFrom)} to {typeof(TTo)} with Exception: {e}");
                 return MvxBindingConstant.UnsetValue;
             }
         }
@@ -54,8 +57,7 @@ namespace MvvmCross.Platform.Converters
             }
             catch (Exception e)
             {
-                Mvx.TaggedError("MvxValueConverter",
-                    $"Failed to ConvertBack from {typeof(TTo)} to {typeof(TFrom)} with Exception: {e}");
+                Log.Error($"Failed to ConvertBack from {typeof(TTo)} to {typeof(TFrom)} with Exception: {e}");
                 return MvxBindingConstant.UnsetValue;
             }
         }
@@ -69,6 +71,9 @@ namespace MvvmCross.Platform.Converters
     public abstract class MvxValueConverter<TFrom>
         : IMvxValueConverter
     {
+        protected static IMvxLog Log
+            => Mvx.Resolve<IMvxLogProvider>().GetLogFor<MvxValueConverter>();
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
@@ -77,8 +82,7 @@ namespace MvvmCross.Platform.Converters
             }
             catch (Exception e)
             {
-                Mvx.TaggedError("MvxValueConverter",
-                    $"Failed to Convert from {typeof(TFrom)} with Exception: {e}");
+                Log.Error($"Failed to Convert from {typeof(TFrom)} with Exception: {e}");
                 return MvxBindingConstant.UnsetValue;
             }
         }
@@ -96,8 +100,7 @@ namespace MvvmCross.Platform.Converters
             }
             catch (Exception e)
             {
-                Mvx.TaggedError("MvxValueConverter",
-                    $"Failed to ConvertBack to {typeof(TFrom)} with Exception: {e}");
+                Log.Error($"Failed to ConvertBack to {typeof(TFrom)} with Exception: {e}");
                 return MvxBindingConstant.UnsetValue;
             }
         }

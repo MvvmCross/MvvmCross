@@ -2,6 +2,7 @@
 using MvvmCross.Binding;
 using MvvmCross.Binding.Droid.Target;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Droid.Support.V7.Preference.Target
 {
@@ -47,7 +48,7 @@ namespace MvvmCross.Droid.Support.V7.Preference.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            Mvx.Warning("SetValueImpl called on generic Preference target");
+            MvxAndroidLog.Instance.Warn("SetValueImpl called on generic Preference target");
         }
     }
 }

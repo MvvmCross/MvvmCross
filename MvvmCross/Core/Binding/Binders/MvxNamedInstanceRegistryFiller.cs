@@ -87,7 +87,7 @@ namespace MvvmCross.Binding.Binders
                 try
                 {
                     var converter = Activator.CreateInstance(pair.Type) as T;
-                    MvxBindingTrace.Trace("Registering value converter {0}:{1}", pair.Name, pair.Type.Name);
+                    MvxBindingLog.Trace("Registering value converter {0}:{1}", pair.Name, pair.Type.Name);
                     registry.AddOrOverwrite(pair.Name, converter);
                 }
                 catch (Exception)

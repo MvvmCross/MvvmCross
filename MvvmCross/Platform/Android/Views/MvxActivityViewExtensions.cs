@@ -1,4 +1,4 @@
-// MvxActivityViewExtensions.cs
+﻿// MvxActivityViewExtensions.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -15,6 +15,7 @@ using MvvmCross.Droid.Platform;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Views;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Views
@@ -58,7 +59,7 @@ namespace MvvmCross.Droid.Views
             IMvxSavedStateConverter converter;
             if (!Mvx.TryResolve<IMvxSavedStateConverter>(out converter))
             {
-                MvxTrace.Trace("No saved state converter available - this is OK if seen during start");
+                MvxLog.Instance.Trace("No saved state converter available - this is OK if seen during start");
                 return null;
             }
             var savedState = converter.Read(bundle);
@@ -67,7 +68,7 @@ namespace MvvmCross.Droid.Views
 
         public static void OnViewNewIntent(this IMvxAndroidView androidView)
         {
-            Mvx.Trace("OnViewNewIntent called - MvvmCross lifecycle won't run automatically in this case.");
+            MvxLog.Instance.Trace("OnViewNewIntent called - MvvmCross lifecycle won't run automatically in this case.");
         }
 
         public static void OnViewDestroy(this IMvxAndroidView androidView)
@@ -128,7 +129,7 @@ namespace MvvmCross.Droid.Views
             if (viewModelType == null
                 || viewModelType == typeof(IMvxViewModel))
             {
-                MvxTrace.Trace("No ViewModel class specified for {0} in LoadViewModel",
+                MvxLog.Instance.Trace("No ViewModel class specified for {0} in LoadViewModel",
                                androidView.GetType().Name);
             }
 

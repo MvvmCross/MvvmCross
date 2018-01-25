@@ -36,7 +36,7 @@ namespace MvvmCross.Binding.Uwp.MvxBinding
 
             if (string.IsNullOrEmpty(targetName))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxBindingLog.Error(
                                       "Empty binding target passed to MvxWindowsTargetBindingFactoryRegistry");
                 binding = null;
                 return false;

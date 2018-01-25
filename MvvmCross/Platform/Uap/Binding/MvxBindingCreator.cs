@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using Windows.UI.Xaml;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Uwp
 {
@@ -21,7 +22,7 @@ namespace MvvmCross.Binding.Uwp
             var attachedObject = sender as FrameworkElement;
             if (attachedObject == null)
             {
-                Mvx.Warning("Null attached FrameworkElement seen in Bi.nd binding");
+                MvxLog.Instance.Warn("Null attached FrameworkElement seen in Bi.nd binding");
                 return;
             }
 

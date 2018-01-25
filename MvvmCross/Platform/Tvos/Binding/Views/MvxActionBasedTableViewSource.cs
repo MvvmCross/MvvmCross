@@ -1,4 +1,4 @@
-// MvxActionBasedTableViewSource.cs
+﻿// MvxActionBasedTableViewSource.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using Foundation;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.Binding.tvOS.Views
@@ -25,7 +26,7 @@ namespace MvvmCross.Binding.tvOS.Views
         public MvxActionBasedTableViewSource(IntPtr handle)
             : base(handle)
         {
-            Mvx.Warning("MvxActionBasedTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
+            MvxLog.Instance.Warn("MvxActionBasedTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
             Initialize();
         }
 

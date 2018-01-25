@@ -167,7 +167,7 @@ namespace MvvmCross.Binding.BindingContext
 
             if (newBindingDescription.Count > 1)
             {
-                MvxBindingTrace.Warning("More than one description found - only first will be used in {0}", bindingDescription);
+                MvxBindingLog.Warning("More than one description found - only first will be used in {0}", bindingDescription);
             }
 
             return FullyDescribed(newBindingDescription.FirstOrDefault());
@@ -317,7 +317,7 @@ namespace MvvmCross.Binding.BindingContext
 
             if (newBindingDescription.Count > 1)
             {
-                MvxBindingTrace.Warning("More than one description found - only first will be used in {0}", bindingDescription);
+                MvxBindingLog.Warning("More than one description found - only first will be used in {0}", bindingDescription);
             }
 
             return FullyDescribed(newBindingDescription.FirstOrDefault());

@@ -6,7 +6,6 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Bindings.Source.Leaf
 {
@@ -21,8 +20,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
 
         public override void SetValue(object value)
         {
-            MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                  "ToSource binding is not available for direct pathed source bindings");
+            MvxBindingLog.Warning("ToSource binding is not available for direct pathed source bindings");
         }
 
         public override object GetValue()

@@ -89,7 +89,7 @@ namespace MvvmCross.Binding.Droid.ResourceHelpers
             var field = styleable.GetField(fieldName);
             if (field == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Missing stylable field {0}", fieldName);
+                MvxBindingLog.Error( "Missing stylable field {0}", fieldName);
                 return defaultValue;
             }
 

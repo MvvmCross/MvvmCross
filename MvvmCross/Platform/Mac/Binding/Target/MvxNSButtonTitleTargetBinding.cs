@@ -23,7 +23,7 @@ namespace MvvmCross.Binding.Mac.Target
         {
             if (button == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - NSButton is null in MvxNSButtonTitleTargetBinding");
+                MvxBindingLog.Error( "Error - NSButton is null in MvxNSButtonTitleTargetBinding");
             }
         }
 

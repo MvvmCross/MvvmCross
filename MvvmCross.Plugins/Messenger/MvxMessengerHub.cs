@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Plugins.Messenger.Subscriptions;
 using MvvmCross.Plugins.Messenger.ThreadRunners;
@@ -76,7 +77,7 @@ namespace MvvmCross.Plugins.Messenger
                     messageSubscriptions = new Dictionary<Guid, BaseSubscription>();
                     _subscriptions[typeof(TMessage)] = messageSubscriptions;
                 }
-                MvxTrace.Trace("Adding subscription {0} for {1}", subscription.Id, typeof(TMessage).Name);
+                MvxPluginLog.Instance.Trace("Adding subscription {0} for {1}", subscription.Id, typeof(TMessage).Name);
                 messageSubscriptions[subscription.Id] = subscription;
 
                 PublishSubscriberChangeMessage<TMessage>(messageSubscriptions);
@@ -103,7 +104,7 @@ namespace MvvmCross.Plugins.Messenger
                 {
                     if (messageSubscriptions.ContainsKey(subscriptionGuid))
                     {
-                        MvxTrace.Trace("Removing subscription {0}", subscriptionGuid);
+                        MvxPluginLog.Instance.Trace("Removing subscription {0}", subscriptionGuid);
                         messageSubscriptions.Remove(subscriptionGuid);
                         // Note - we could also remove messageSubscriptions if empty here
                         //      - but this isn't needed in our typical apps
@@ -199,7 +200,7 @@ namespace MvvmCross.Plugins.Messenger
         {
             if (typeof(TMessage) == typeof(MvxMessage))
             {
-                MvxTrace.Warning(
+                MvxPluginLog.Instance.Warn(
                                "MvxMessage publishing not allowed - this normally suggests non-specific generic used in calling code - switching to message.GetType()");
                 Publish(message, message.GetType());
                 return;
@@ -223,23 +224,23 @@ namespace MvvmCross.Plugins.Messenger
             lock (this)
             {
                 /*
-				MvxTrace.Trace("Found {0} subscriptions of all types", _subscriptions.Count);
+				MvxPluginLog.Instance.Trace("Found {0} subscriptions of all types", _subscriptions.Count);
 				foreach (var t in _subscriptions.Keys)
 				{
-					MvxTrace.Trace("Found  subscriptions for {0}", t.Name);
+					MvxPluginLog.Instance.Trace("Found  subscriptions for {0}", t.Name);
 				}
 				*/
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
                 if (_subscriptions.TryGetValue(messageType, out messageSubscriptions))
                 {
-                    //MvxTrace.Trace("Found {0} messages of type {1}", messageSubscriptions.Values.Count, typeof(TMessage).Name);
+                    //MvxPluginLog.Instance.Trace("Found {0} messages of type {1}", messageSubscriptions.Values.Count, typeof(TMessage).Name);
                     toNotify = messageSubscriptions.Values.ToList();
                 }
             }
 
             if (toNotify == null || toNotify.Count == 0)
             {
-                MvxTrace.Trace("Nothing registered for messages of type {0}", messageType.Name);
+                MvxPluginLog.Instance.Trace("Nothing registered for messages of type {0}", messageType.Name);
                 return;
             }
 
@@ -251,7 +252,7 @@ namespace MvvmCross.Plugins.Messenger
 
             if (!allSucceeded)
             {
-                MvxTrace.Trace("One or more listeners failed - purge scheduled");
+                MvxPluginLog.Instance.Trace("One or more listeners failed - purge scheduled");
                 SchedulePurge(messageType);
             }
         }
@@ -320,7 +321,7 @@ namespace MvvmCross.Plugins.Messenger
                     }
                 }
 
-                MvxTrace.Trace("Purging {0} subscriptions", deadSubscriptionIds.Count);
+                MvxPluginLog.Instance.Trace("Purging {0} subscriptions", deadSubscriptionIds.Count);
                 foreach (var id in deadSubscriptionIds)
                 {
                     messageSubscriptions.Remove(id);

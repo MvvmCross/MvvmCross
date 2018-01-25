@@ -4,6 +4,7 @@ using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.iOS.Views;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using UIKit;
 
@@ -70,7 +71,7 @@ namespace MvvmCross.iOS.Views
                 DataContext = value;
                 //Verify ViewModel is IMvxPageViewModel
                 if (DataContext != null && !(DataContext is IMvxPageViewModel))
-                    MvxTrace.Error("Error - MvxPageViewController must be given an instance of IMvxPageViewModel");
+                    MvxLog.Instance.Error("Error - MvxPageViewController must be given an instance of IMvxPageViewModel");
             }
         }
 

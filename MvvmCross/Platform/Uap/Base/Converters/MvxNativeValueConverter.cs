@@ -1,4 +1,4 @@
-// MvxNativeValueConverter.cs
+﻿// MvxNativeValueConverter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,6 +10,7 @@ using System.Globalization;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Platform.Uwp.Converters
 {
@@ -43,7 +44,7 @@ namespace MvvmCross.Platform.Uwp.Converters
         {
             if (toReturn == MvxBindingConstant.DoNothing)
             {
-                Mvx.Trace("DoNothing does not have an equivalent in WinRT - returning UnsetValue instead");
+                MvxLog.Instance.Trace("DoNothing does not have an equivalent in WinRT - returning UnsetValue instead");
                 return DependencyProperty.UnsetValue;
             }
 

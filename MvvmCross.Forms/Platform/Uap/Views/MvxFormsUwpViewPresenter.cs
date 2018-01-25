@@ -1,4 +1,4 @@
-// MvxFormsWindowsPhonePagePresenter.cs
+﻿// MvxFormsWindowsPhonePagePresenter.cs
 // 2015 (c) Copyright Cheesebaron. http://ostebaronen.dk
 // MvvmCross.Forms is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,6 +11,7 @@ using MvvmCross.Core.Views;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Uwp.Views;
 using System;
@@ -78,13 +79,13 @@ namespace MvvmCross.Forms.Uwp.Presenters
 
         public virtual bool ShowPlatformHost(Type hostViewModel = null)
         {
-            MvxTrace.Trace($"Showing of native host View in Forms is not supported.");
+            MvxFormsLog.Instance.Trace($"Showing of native host View in Forms is not supported.");
             return false;
         }
 
         public virtual bool ClosePlatformViews()
         {
-            MvxTrace.Trace($"Closing of native Views in Forms is not supported.");
+            MvxFormsLog.Instance.Trace($"Closing of native Views in Forms is not supported.");
             return false;
         }
     }

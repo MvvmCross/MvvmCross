@@ -7,6 +7,7 @@ using Android.Views;
 using Java.Lang;
 using Java.Lang.Reflect;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Binding.Droid.Binders
@@ -97,7 +98,7 @@ namespace MvvmCross.Binding.Droid.Binders
                 }
                 catch (NoSuchFieldException)
                 {
-                    Mvx.Error(
+                    MvxLog.Instance.Error(
                         "ForceSetFactory2 Could not find field 'mFactory2' on class {0}; inflation may have unexpected results.",
                         Class.FromType(typeof(LayoutInflater)).Name);
                 }
@@ -112,7 +113,7 @@ namespace MvvmCross.Binding.Droid.Binders
                 }
                 catch (IllegalAccessException)
                 {
-                    Mvx.Error("ForceSetFactory2 could not set the Factory2 on LayoutInflater {0} ; inflation may have unexpected results.", inflater);
+                    MvxLog.Instance.Error("ForceSetFactory2 could not set the Factory2 on LayoutInflater {0} ; inflation may have unexpected results.", inflater);
                 }
             }
         }

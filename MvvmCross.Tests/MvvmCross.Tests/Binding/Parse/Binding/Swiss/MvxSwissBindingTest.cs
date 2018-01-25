@@ -7,6 +7,7 @@
 
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Swiss;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using NUnit.Framework;
 
@@ -38,7 +39,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 }
             };
-            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
 
@@ -65,7 +66,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 }
             };
-            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
 
@@ -92,7 +93,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 }
             };
-            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
 
@@ -119,7 +120,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 }
             };
-            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
 
@@ -146,7 +147,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 }
             };
-            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
 
@@ -173,7 +174,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                     }
                 }
             };
-            MvxTrace.Trace(MvxTraceLevel.Diagnostic, "Testing: {0}", text);
+            MvxTestLog.Instance.Trace("Testing: {0}", text);
             PerformTest(text, expected);
         }
     }

@@ -9,6 +9,7 @@ using Android.Support.V4.App;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Droid.Support.V4
 {
@@ -20,7 +21,7 @@ namespace MvvmCross.Droid.Support.V4
             var fragment = activity.SupportFragmentManager.FindFragmentById(resourceId);
             if (fragment == null)
             {
-                Mvx.Warning("Failed to find fragment id {0} in {1}", resourceId, activity.GetType().Name);
+                MvxAndroidLog.Instance.Warn("Failed to find fragment id {0} in {1}", resourceId, activity.GetType().Name);
                 return default(TFragment);
             }
 
@@ -33,7 +34,7 @@ namespace MvvmCross.Droid.Support.V4
             var fragment = activity.SupportFragmentManager.FindFragmentByTag(tag);
             if (fragment == null)
             {
-                Mvx.Warning("Failed to find fragment tag {0} in {1}", tag, activity.GetType().Name);
+                MvxAndroidLog.Instance.Warn("Failed to find fragment tag {0} in {1}", tag, activity.GetType().Name);
                 return default(TFragment);
             }
 
@@ -44,7 +45,7 @@ namespace MvvmCross.Droid.Support.V4
         {
             if (!(fragment is TFragment))
             {
-                Mvx.Warning("Fragment type mismatch got {0} but expected {1}", fragment.GetType().FullName,
+                MvxAndroidLog.Instance.Warn("Fragment type mismatch got {0} but expected {1}", fragment.GetType().FullName,
                             typeof(TFragment).FullName);
                 return default(TFragment);
             }
@@ -58,7 +59,7 @@ namespace MvvmCross.Droid.Support.V4
             var viewModel = loader.LoadViewModel(request, savedState);
             if (viewModel == null)
             {
-                Mvx.Warning("ViewModel not loaded for {0}", request.ViewModelType.FullName);
+                MvxAndroidLog.Instance.Warn("ViewModel not loaded for {0}", request.ViewModelType.FullName);
                 return;
             }
 

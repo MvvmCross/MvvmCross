@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Foundation;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.Binding.tvOS.Views
@@ -65,9 +66,9 @@ namespace MvvmCross.Binding.tvOS.Views
 
         private async Task CollectionChangedOnCollectionChangedAsync(NotifyCollectionChangedEventArgs args, Task existingTask, IEnumerable itemsSource)
         {
-            Mvx.Trace($"CollectionChanged received action:{args.Action} newItems:{args.NewItems?.Count} oldItems:{args.OldItems?.Count} itemsSourceCount:{itemsSource.Count()}");
+            MvxLog.Instance.Trace($"CollectionChanged received action:{args.Action} newItems:{args.NewItems?.Count} oldItems:{args.OldItems?.Count} itemsSourceCount:{itemsSource.Count()}");
             await existingTask;
-            Mvx.Trace($"CollectionChanged starting action:{args.Action}");
+            MvxLog.Instance.Trace($"CollectionChanged starting action:{args.Action}");
             itemsSourceBeforeAnimation = itemsSource;
 
             if (args.NewItems?.Count > MaxAnimatedItems || args.OldItems?.Count > MaxAnimatedItems)
@@ -123,7 +124,7 @@ namespace MvvmCross.Binding.tvOS.Views
             }
 
             itemsSourceBeforeAnimation = null;
-            Mvx.Trace($"CollectionChanged done action:{args.Action} newItems:{args.NewItems?.Count} oldItems:{args.OldItems?.Count}");
+            MvxLog.Instance.Trace($"CollectionChanged done action:{args.Action} newItems:{args.NewItems?.Count} oldItems:{args.OldItems?.Count}");
         }
     }
 }

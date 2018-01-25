@@ -24,7 +24,7 @@ namespace MvvmCross.Binding.tvOS.Target
             _state = state;
             if (button == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UIButton is null in MvxUIButtonTitleTargetBinding");
+                MvxBindingLog.Error( "Error - UIButton is null in MvxUIButtonTitleTargetBinding");
             }
         }
 

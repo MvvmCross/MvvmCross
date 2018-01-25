@@ -74,7 +74,7 @@ namespace MvvmCross.Plugins.FieldBinding
             var fieldValue = fieldInfo.GetValue(source) as INotifyChange;
             if (fieldValue == null)
             {
-                MvxBindingTrace.Warning("INotifyChange is null for {0}", propertyNameToken.PropertyName);
+                MvxBindingLog.Warning("INotifyChange is null for {0}", propertyNameToken.PropertyName);
                 result = null;
                 return false;
             }

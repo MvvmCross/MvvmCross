@@ -46,7 +46,7 @@ namespace MvvmCross.Binding.iOS.Target
             var slider = View;
             if (slider == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UISlider is null in MvxUISliderValueTargetBinding");
+                MvxBindingLog.Error( "Error - UISlider is null in MvxUISliderValueTargetBinding");
                 return;
             }
 

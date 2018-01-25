@@ -16,6 +16,7 @@ using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Droid.Support.V17.Leanback.Listeners;
 using MvvmCross.Droid.Support.V7.RecyclerView;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
@@ -114,7 +115,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
 
 		public new void SetOnChildViewHolderSelectedListener(OnChildViewHolderSelectedListener listener)
 		{
-			MvxTrace.Warning("Overwriting OnChildViewHolderSelectedListener will possibly break ItemSelection command.");
+            MvxAndroidLog.Instance.Warn("Overwriting OnChildViewHolderSelectedListener will possibly break ItemSelection command.");
 			base.SetOnChildViewHolderSelectedListener(listener);
 		}
 
@@ -122,7 +123,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
 		{
 			if (FocusFirstChildOnLaidOut && !(listener is MvxFocusFirstChildOnChildLaidOutListener))
 			{
-				MvxTrace.Warning("Overwriting OnChildLaidOutListener will possibly break focusing of first child!");
+                MvxAndroidLog.Instance.Warn("Overwriting OnChildLaidOutListener will possibly break focusing of first child!");
 			}
 			base.SetOnChildLaidOutListener(listener);
 		}

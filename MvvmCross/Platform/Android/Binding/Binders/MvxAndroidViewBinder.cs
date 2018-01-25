@@ -72,7 +72,7 @@ namespace MvvmCross.Binding.Droid.Binders
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view binding {0}",
+                MvxBindingLog.Error( "Exception thrown during the view binding {0}",
                                       exception.ToLongString());
             }
         }
@@ -95,7 +95,7 @@ namespace MvvmCross.Binding.Droid.Binders
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Exception thrown during the view language binding {0}",
+                MvxBindingLog.Error( "Exception thrown during the view language binding {0}",
                                       exception.ToLongString());
                 throw;
             }

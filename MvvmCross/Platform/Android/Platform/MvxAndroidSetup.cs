@@ -58,11 +58,6 @@ namespace MvvmCross.Droid.Platform
             return new MvxFilePluginManager(".Droid", ".dll");
         }
 
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new MvxDebugTrace();
-        }
-
         protected override void InitializePlatformServices()
         {
             InitializeLifetimeMonitor();

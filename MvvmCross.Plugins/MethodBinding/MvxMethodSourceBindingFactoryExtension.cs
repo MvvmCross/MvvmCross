@@ -52,7 +52,7 @@ namespace MvvmCross.Plugins.MethodBinding
             var parameters = methodInfo.GetParameters();
             if (parameters.Count(p => !p.IsOptional) > 1)
             {
-                MvxBindingTrace.Warning("Problem binding to Method {0} - too many non-optional parameters");
+                MvxBindingLog.Warning("Problem binding to Method {0} - too many non-optional parameters");
             }
 
             result = new MvxMethodSourceBinding(source, methodInfo);

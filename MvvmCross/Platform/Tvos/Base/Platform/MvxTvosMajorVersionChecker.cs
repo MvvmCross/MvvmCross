@@ -1,9 +1,11 @@
-// MvxTvosMajorVersionChecker.cs
+﻿// MvxTvosMajorVersionChecker.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Platform.tvOS.Platform
 {
@@ -22,7 +24,7 @@ namespace MvvmCross.Platform.tvOS.Platform
             Mvx.TryResolve<IMvxTvosSystem>(out touchSystem);
             if (touchSystem == null)
             {
-                Mvx.Warning("IMvxTvosSystem not found - so assuming we {1} on tvOS {0} or later", target, defaultValue ? "are" : "are not");
+                MvxLog.Instance.Warn("IMvxTvosSystem not found - so assuming we {1} on tvOS {0} or later", target, defaultValue ? "are" : "are not");
                 return defaultValue;
             }
 

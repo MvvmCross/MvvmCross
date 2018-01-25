@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.DownloadCache
@@ -39,7 +40,7 @@ namespace MvvmCross.Plugins.DownloadCache
 
                 _textConvertTried = true;
                 if (!Mvx.TryResolve<IMvxTextSerializer>(out _textConvert))
-                    Mvx.Warning("Persistent download cache will not be available - no text serializer available");
+                    MvxPluginLog.Instance.Warn("Persistent download cache will not be available - no text serializer available");
 
                 return _textConvert;
             }
@@ -171,7 +172,7 @@ namespace MvvmCross.Plugins.DownloadCache
             }
             catch (Exception exception)
             {
-                MvxTrace.Warning("Failed to read cache index {0} - reason {1}", _cacheFolder,
+                MvxPluginLog.Instance.Warn("Failed to read cache index {0} - reason {1}", _cacheFolder,
                                exception.ToLongString());
             }
 
@@ -228,7 +229,7 @@ namespace MvvmCross.Plugins.DownloadCache
             }
             catch (Exception exception)
             {
-                MvxTrace.Warning("Problem seen deleting file {0} problem {1}", nextFileToDelete,
+                MvxPluginLog.Instance.Warn("Problem seen deleting file {0} problem {1}", nextFileToDelete,
                                exception.ToLongString());
             }
         }
@@ -255,7 +256,7 @@ namespace MvvmCross.Plugins.DownloadCache
                 }
                 catch (Exception exception)
                 {
-                    MvxTrace.Warning("Failed to save cache index {0} - reason {1}", _cacheFolder,
+                    MvxPluginLog.Instance.Warn("Failed to save cache index {0} - reason {1}", _cacheFolder,
                                    exception.ToLongString());
                 }
             });

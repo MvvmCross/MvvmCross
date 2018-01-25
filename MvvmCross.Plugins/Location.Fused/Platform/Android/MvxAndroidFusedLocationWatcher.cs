@@ -5,6 +5,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.Location.Fused.Droid
@@ -46,14 +47,14 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 		{
 			if (androidLocation == null)
 			{
-				MvxTrace.Trace("Android: Null location seen");
+				MvxPluginLog.Instance.Trace("Android: Null location seen");
 				return;
 			}
 
 			if (androidLocation.Latitude == double.MaxValue || 
                 androidLocation.Longitude == double.MaxValue)
 			{
-				MvxTrace.Trace("Android: Invalid location seen");
+				MvxPluginLog.Instance.Trace("Android: Invalid location seen");
 				return;
 			}
 
@@ -68,7 +69,7 @@ namespace MvvmCross.Plugins.Location.Fused.Droid
 			}
 			catch (Exception exception)
 			{
-				MvxTrace.Trace("Android: Exception seen in converting location " + exception.ToLongString());
+				MvxPluginLog.Instance.Trace("Android: Exception seen in converting location " + exception.ToLongString());
 				return;
 			}
 

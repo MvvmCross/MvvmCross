@@ -13,12 +13,14 @@ using MvvmCross.Core.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Core.Navigation
 {
     public class MvxNavigationService : IMvxNavigationService
     {
+        protected readonly IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<MvxNavigationService>();
+
         private IMvxViewDispatcher _viewDispatcher;
         public IMvxViewDispatcher ViewDispatcher
         {
@@ -66,7 +68,7 @@ namespace MvvmCross.Core.Navigation
                 {
                     case 0:
                         entry = default(KeyValuePair<Regex, Type>);
-                        Mvx.TaggedTrace("MvxNavigationService", "Unable to find routing for {0}", url);
+                        Log.Trace("Unable to find routing for {0}", url);
                         return false;
                     case 1:
                         entry = matches[0];
@@ -81,8 +83,7 @@ namespace MvvmCross.Core.Navigation
                     return true;
                 }
 
-                Mvx.TaggedWarning("MvxNavigationService",
-                    "The following regular expressions match the provided url ({0}), each RegEx must be unique (otherwise try using IMvxRoutingFacade): {1}",
+                Log.Warn("The following regular expressions match the provided url ({0}), each RegEx must be unique (otherwise try using IMvxRoutingFacade): {1}",
                     matches.Count - 1,
                     string.Join(", ", matches.Select(t => t.Key.ToString())));
                 // there is more than one match
@@ -91,7 +92,7 @@ namespace MvvmCross.Core.Navigation
             }
             catch(Exception ex)
             {
-                Mvx.TaggedError("MvxNavigationService", "Unable to determine routability: {0}", ex);
+                Log.Error("MvxNavigationService", "Unable to determine routability: {0}", ex);
                 entry = default(KeyValuePair<Regex, Type>);
                 return false;
             }
@@ -425,7 +426,7 @@ namespace MvvmCross.Core.Navigation
 
         public bool ChangePresentation(MvxPresentationHint hint)
         {
-            MvxTrace.Trace("Requesting presentation change");
+            MvxLog.Instance.Trace("Requesting presentation change");
             var args = new ChangePresentationEventArgs(hint);
             OnBeforeChangePresentation(this, args);
 

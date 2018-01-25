@@ -14,6 +14,7 @@ using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Support.V4.EventSource
@@ -40,7 +41,7 @@ namespace MvvmCross.Droid.Support.V4.EventSource
             var hostMvxView = Fragment.Activity as IMvxAndroidView;
             if (hostMvxView == null)
             {
-                MvxTrace.Warning($"Fragment host for fragment type {Fragment.GetType()} is not of type IMvxAndroidView");
+                MvxAndroidLog.Instance.Warn($"Fragment host for fragment type {Fragment.GetType()} is not of type IMvxAndroidView");
                 return;
             }
 
@@ -51,7 +52,7 @@ namespace MvvmCross.Droid.Support.V4.EventSource
 
             if (viewModelType == null)
             {
-                MvxTrace.Warning($"ViewModel type for Activity {Fragment.Activity.GetType()} not found when trying to show fragment: {Fragment.GetType()}");
+                MvxAndroidLog.Instance.Warn($"ViewModel type for Activity {Fragment.Activity.GetType()} not found when trying to show fragment: {Fragment.GetType()}");
                 return;
             }
 
@@ -74,7 +75,7 @@ namespace MvvmCross.Droid.Support.V4.EventSource
                         IMvxNavigationSerializer serializer;
                         if (!Mvx.TryResolve(out serializer))
                         {
-                            MvxTrace.Warning(
+                            MvxAndroidLog.Instance.Warn(
                                 "Navigation Serializer not available, deserializing ViewModel Request will be hard");
                         }
                         else
@@ -88,7 +89,7 @@ namespace MvvmCross.Droid.Support.V4.EventSource
             IMvxSavedStateConverter converter;
             if (!Mvx.TryResolve(out converter))
             {
-                MvxTrace.Warning("Saved state converter not available - saving state will be hard");
+                MvxAndroidLog.Instance.Warn("Saved state converter not available - saving state will be hard");
             }
             else
             {
@@ -117,7 +118,7 @@ namespace MvvmCross.Droid.Support.V4.EventSource
                 IMvxSavedStateConverter converter;
                 if (!Mvx.TryResolve(out converter))
                 {
-                    MvxTrace.Warning("Saved state converter not available - saving state will be hard");
+                    MvxAndroidLog.Instance.Warn("Saved state converter not available - saving state will be hard");
                 }
                 else
                 {
