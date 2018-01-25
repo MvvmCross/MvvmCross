@@ -7,6 +7,7 @@
 
 using System;
 using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.Messenger.ThreadRunners
@@ -19,7 +20,7 @@ namespace MvvmCross.Plugins.Messenger.ThreadRunners
             var dispatcher = MvxMainThreadDispatcher.Instance;
             if (dispatcher == null)
             {
-                MvxTrace.Warning("Not able to deliver message - no ui thread dispatcher available");
+                MvxPluginLog.Instance.Warn("Not able to deliver message - no ui thread dispatcher available");
                 return;
             }
             dispatcher.RequestMainThreadAction(action);

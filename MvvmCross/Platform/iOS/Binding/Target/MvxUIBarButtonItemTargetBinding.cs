@@ -21,7 +21,7 @@ namespace MvvmCross.Binding.iOS.Target
         {
             if (control == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UIControl is null in MvxUIBarButtonItemTargetBinding");
+                MvxBindingLog.Error( "Error - UIControl is null in MvxUIBarButtonItemTargetBinding");
             }
             else
             {

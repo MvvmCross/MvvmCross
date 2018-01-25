@@ -32,7 +32,7 @@ namespace MvvmCross.Forms.Bindings.Target
             var myView = View;
             if (myView == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, $"Error - MyView is null in {nameof(MvxListViewItemClickPropertyTargetBinding)}");
+                MvxBindingLog.Error($"Error - MyView is null in {nameof(MvxListViewItemClickPropertyTargetBinding)}");
                 return;
             }
 

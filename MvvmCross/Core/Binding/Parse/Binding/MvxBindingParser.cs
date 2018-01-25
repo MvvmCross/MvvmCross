@@ -11,7 +11,6 @@ using System.Linq;
 using System.Text;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Parse;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Parse.Binding
 {
@@ -30,8 +29,7 @@ namespace MvvmCross.Binding.Parse.Binding
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Problem parsing binding {0}", exception.ToLongString());
+                MvxBindingLog.Error("Problem parsing binding {0}", exception.ToLongString());
                 requestedDescription = null;
                 return false;
             }
@@ -57,8 +55,7 @@ namespace MvvmCross.Binding.Parse.Binding
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
-                                      "Problem parsing binding {0}", exception.ToLongString());
+                MvxBindingLog.Error("Problem parsing binding {0}", exception.ToLongString());
                 requestedBindings = null;
                 return false;
             }

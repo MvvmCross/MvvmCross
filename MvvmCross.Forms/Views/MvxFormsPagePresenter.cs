@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Core.ViewModels;
@@ -12,6 +12,7 @@ using Xamarin.Forms;
 using System.Reflection;
 using MvvmCross.Core.ViewModels.Hints;
 using System.Threading.Tasks;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Forms.Views
 {
@@ -203,7 +204,7 @@ namespace MvvmCross.Forms.Views
             base.ChangePresentation(hint);
 
 #if DEBUG // Only showing this when debugging MVX
-            MvxTrace.Trace(FormsApplication.Hierarchy());
+            MvxFormsLog.Instance.Trace(FormsApplication.Hierarchy());
 #endif
         }
 
@@ -271,7 +272,7 @@ namespace MvvmCross.Forms.Views
         {
             base.Show(request);
 #if DEBUG // Only showing this when debugging MVX
-            MvxTrace.Trace(FormsApplication.Hierarchy());
+            MvxFormsLog.Instance.Trace(FormsApplication.Hierarchy());
 #endif
         }
 
@@ -296,7 +297,7 @@ namespace MvvmCross.Forms.Views
                 var carouselHost = GetPageOfType<CarouselPage>();
                 if (carouselHost == null)
                 {
-                    MvxTrace.Trace($"Current root is not a CarouselPage show your own first to use custom Host. Assuming we need to create one.");
+                    MvxFormsLog.Instance.Trace($"Current root is not a CarouselPage show your own first to use custom Host. Assuming we need to create one.");
                     carouselHost = new CarouselPage();
                     PushOrReplacePage(FormsApplication.MainPage, carouselHost, attribute);
                 }
@@ -324,31 +325,31 @@ namespace MvvmCross.Forms.Views
         {
             if (viewType.GetTypeInfo().IsSubclassOf(typeof(ContentPage)))
             {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                MvxFormsLog.Instance.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
                                $"Assuming ContentPage presentation");
                 return new MvxContentPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
             if (viewType.GetTypeInfo().IsSubclassOf(typeof(CarouselPage)))
             {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                MvxFormsLog.Instance.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
                                $"Assuming CarouselPage presentation");
                 return new MvxCarouselPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
             if (viewType.GetTypeInfo().IsSubclassOf(typeof(TabbedPage)))
             {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                MvxFormsLog.Instance.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
                                $"Assuming TabbedPage presentation");
                 return new MvxTabbedPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
             if (viewType.GetTypeInfo().IsSubclassOf(typeof(MasterDetailPage)))
             {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                MvxFormsLog.Instance.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
                                $"Assuming MasterDetailPage presentation");
                 return new MvxMasterDetailPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
             if (viewType.GetTypeInfo().IsSubclassOf(typeof(NavigationPage)))
             {
-                MvxTrace.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
+                MvxFormsLog.Instance.Trace($"PresentationAttribute not found for {viewModelType.Name}. " +
                                $"Assuming NavigationPage presentation");
                 return new MvxNavigationPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
@@ -524,7 +525,7 @@ namespace MvvmCross.Forms.Views
                 var tabHost = GetPageOfType<TabbedPage>();
                 if (tabHost == null)
                 {
-                    MvxTrace.Trace($"Current root is not a TabbedPage show your own first to use custom Host. Assuming we need to create one.");
+                    MvxFormsLog.Instance.Trace($"Current root is not a TabbedPage show your own first to use custom Host. Assuming we need to create one.");
                     tabHost = new TabbedPage();
                     PushOrReplacePage(FormsApplication.MainPage, tabHost, attribute);
                 }

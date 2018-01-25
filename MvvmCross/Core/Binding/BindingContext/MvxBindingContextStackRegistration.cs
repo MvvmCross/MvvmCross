@@ -7,7 +7,7 @@
 
 using System;
 using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.BindingContext
 {
@@ -23,7 +23,7 @@ namespace MvvmCross.Binding.BindingContext
 
         ~MvxBindingContextStackRegistration()
         {
-            MvxTrace.Error("You should always Dispose of MvxBindingContextStackRegistration");
+            MvxLog.Instance.Error("You should always Dispose of MvxBindingContextStackRegistration");
             Dispose(false);
         }
 

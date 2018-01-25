@@ -50,7 +50,7 @@ namespace MvvmCross.Plugins.FieldBinding
             if (secondAsIndexed == null)
                 return;
 
-            MvxBindingTrace.Warning("Suspicious indexed binding seen to Value[] within INC binding - this may be OK, but is often a result of FluentBinding used on INC<T> - consider using INCList<TValue> or INCDictionary<TKey,TValue> instead - see https://github.com/slodge/MvvmCross/issues/353. This message can be disabled using DisableWarnIndexedValueBindingWarning");
+            MvxBindingLog.Warning("Suspicious indexed binding seen to Value[] within INC binding - this may be OK, but is often a result of FluentBinding used on INC<T> - consider using INCList<TValue> or INCDictionary<TKey,TValue> instead - see https://github.com/slodge/MvvmCross/issues/353. This message can be disabled using DisableWarnIndexedValueBindingWarning");
         }
 
         protected override void NotifyChangeOnChanged(object sender, EventArgs eventArgs)
@@ -118,8 +118,7 @@ namespace MvvmCross.Plugins.FieldBinding
         {
             if (_currentChildBinding == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                                      "SetValue ignored in binding - target property path missing");
+                MvxBindingLog.Warning("SetValue ignored in binding - target property path missing");
                 return;
             }
 

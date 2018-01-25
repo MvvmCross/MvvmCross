@@ -1,4 +1,4 @@
-// MvxTvosSetup.cs
+﻿// MvxTvosSetup.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -51,11 +51,6 @@ namespace MvvmCross.tvOS.Platform
         protected UIWindow Window => _window;
 
         protected IMvxApplicationDelegate ApplicationDelegate => _applicationDelegate;
-
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new MvxDebugTrace();
-        }
 
         protected override IMvxPluginManager CreatePluginManager()
         {

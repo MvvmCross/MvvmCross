@@ -30,7 +30,7 @@ namespace MvvmCross.Binding.Droid.Target
             var compoundButton = View;
             if (compoundButton == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxBindingLog.Error(
                                       "Error - compoundButton is null in MvxCompoundButtonCheckedTargetBinding");
                 return;
             }

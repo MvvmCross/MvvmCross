@@ -1,9 +1,11 @@
-// MvxIosMajorVersionChecker.cs
+﻿// MvxIosMajorVersionChecker.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
+
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Platform.iOS.Platform
 {
@@ -22,7 +24,7 @@ namespace MvvmCross.Platform.iOS.Platform
             Mvx.TryResolve<IMvxIosSystem>(out touchSystem);
             if (touchSystem == null)
             {
-                Mvx.Warning("IMvxIosSystem not found - so assuming we {1} on iOS {0} or later", target, defaultValue ? "are" : "are not");
+                MvxLog.Instance.Warn("IMvxIosSystem not found - so assuming we {1} on iOS {0} or later", target, defaultValue ? "are" : "are not");
                 return defaultValue;
             }
 

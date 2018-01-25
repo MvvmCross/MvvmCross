@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Bindings.Target.Construction
 {
@@ -37,7 +36,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             var castTarget = target as TTarget;
             if (castTarget == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Passed an invalid target for MvxCustomBindingFactory");
+                MvxBindingLog.Error("Passed an invalid target for MvxCustomBindingFactory");
                 return null;
             }
 

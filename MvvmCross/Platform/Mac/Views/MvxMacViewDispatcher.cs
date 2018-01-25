@@ -1,10 +1,11 @@
-using System;
+﻿using System;
 
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform.Platform;
 
 using MvvmCross.Mac.Views.Presenters;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Mac.Views
 {
@@ -23,7 +24,7 @@ namespace MvvmCross.Mac.Views
         {
             Action action = () =>
             {
-                MvxTrace.TaggedTrace("MacNavigation", "Navigate requested");
+                MvxLog.Instance.Trace("MacNavigation", "Navigate requested");
                 _presenter.Show(request);
             };
             return RequestMainThreadAction(action);
@@ -33,7 +34,7 @@ namespace MvvmCross.Mac.Views
         {
             Action action = () =>
                                 {
-                                    MvxTrace.TaggedTrace("MacNavigation", "Change presentation requested");
+                                    MvxLog.Instance.Trace("MacNavigation", "Change presentation requested");
                                     _presenter.ChangePresentation(hint);
                                 };
             return RequestMainThreadAction(action);

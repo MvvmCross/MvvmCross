@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -50,7 +51,7 @@ namespace MvvmCross.Forms.Bindings
             }
             else
             {
-                Mvx.Trace(MvxTraceLevel.Diagnostic, "Can only use MvxBind on a bindable property");
+                MvxFormsLog.Instance.Trace("Can only use MvxBind on a bindable property");
             }
 
             return null;

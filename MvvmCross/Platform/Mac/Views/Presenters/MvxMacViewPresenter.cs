@@ -1,4 +1,4 @@
-// MvxMacViewPresenter.cs
+﻿// MvxMacViewPresenter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -16,6 +16,7 @@ using MvvmCross.Core.Views;
 using MvvmCross.Mac.Views.Presenters.Attributes;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Mac.Views.Presenters
@@ -27,7 +28,7 @@ namespace MvvmCross.Mac.Views.Presenters
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
-            MvxTrace.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new window presentation");
+            MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new window presentation");
             return new MvxWindowPresentationAttribute();
         }
 
@@ -42,7 +43,7 @@ namespace MvvmCross.Mac.Views.Presenters
 
                     if (presentationAttribute == null)
                     {
-                        MvxTrace.Warning("Override PresentationAttribute null. Falling back to existing attribute.");
+                        MvxLog.Instance.Warn("Override PresentationAttribute null. Falling back to existing attribute.");
                     }
                     else
                     {

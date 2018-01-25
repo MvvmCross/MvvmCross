@@ -22,7 +22,7 @@ namespace MvvmCross.Binding.tvOS.Target
         {
             if (target == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxBindingLog.Error(
                                       "Error - UILabel is null in MvxUILabelTextTargetBinding");
             }
         }

@@ -88,7 +88,7 @@ namespace MvvmCross.Binding.Droid.Views
                 }
                 else
                 {
-                    MvxBindingTrace.Warning(
+                    MvxBindingLog.Warning(
                         "Setting Adapter to null is not recommended - you may lose ItemsSource binding when doing this");
                 }
 

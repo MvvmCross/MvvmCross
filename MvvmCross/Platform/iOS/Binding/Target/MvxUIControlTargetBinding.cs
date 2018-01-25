@@ -32,7 +32,7 @@ namespace MvvmCross.Binding.iOS.Target
 
             if (control == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - UIControl is null in MvxUIControlTargetBinding");
+                MvxBindingLog.Error( "Error - UIControl is null in MvxUIControlTargetBinding");
             }
             else
             {
@@ -136,7 +136,7 @@ namespace MvvmCross.Binding.iOS.Target
                     _controlEventSubscription = control.WeakSubscribe(nameof(control.AllEvents), ControlEvent);
                     break;
                 default:
-                    MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - Invalid controlEvent in MvxUIControlTargetBinding");
+                    MvxBindingLog.Error( "Error - Invalid controlEvent in MvxUIControlTargetBinding");
                     break;
             }
         }
@@ -161,7 +161,7 @@ namespace MvvmCross.Binding.iOS.Target
                     _controlEventSubscription?.Dispose();
                     break;
                 default:
-                    MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - Invalid controlEvent in MvxUIControlTargetBinding");
+                    MvxBindingLog.Error( "Error - Invalid controlEvent in MvxUIControlTargetBinding");
                     break;
             }
         }

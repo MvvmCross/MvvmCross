@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -15,6 +15,7 @@ using MvvmCross.Droid.Views.Fragments;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Views
@@ -182,17 +183,17 @@ namespace MvvmCross.Droid.Views
         {
             if (viewType.IsSubclassOf(typeof(DialogFragment)))
             {
-                MvxTrace.Trace("PresentationAttribute not found for {0}. Assuming DialogFragment presentation", viewType.Name);
+                MvxLog.Instance.Trace("PresentationAttribute not found for {0}. Assuming DialogFragment presentation", viewType.Name);
                 return new MvxDialogFragmentPresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
             else if (viewType.IsSubclassOf(typeof(Fragment)))
             {
-                MvxTrace.Trace("PresentationAttribute not found for {0}. Assuming Fragment presentation", viewType.Name);
+                MvxLog.Instance.Trace("PresentationAttribute not found for {0}. Assuming Fragment presentation", viewType.Name);
                 return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), Android.Resource.Id.Content) { ViewType = viewType, ViewModelType = viewModelType };
             }
             else if (viewType.IsSubclassOf(typeof(Activity)))
             {
-                MvxTrace.Trace("PresentationAttribute not found for {0}. Assuming Activity presentation", viewType.Name);
+                MvxLog.Instance.Trace("PresentationAttribute not found for {0}. Assuming Activity presentation", viewType.Name);
                 return new MvxActivityPresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
             return null;
@@ -240,7 +241,7 @@ namespace MvvmCross.Droid.Views
             var activity = CurrentActivity;
             if (activity == null)
             {
-                MvxTrace.Warning("Cannot Resolve current top activity");
+                MvxLog.Instance.Warn("Cannot Resolve current top activity");
                 return;
             }
             activity.StartActivity(intent);
@@ -277,7 +278,7 @@ namespace MvvmCross.Droid.Views
             var currentHostViewModelType = GetCurrentActivityViewModelType();
             if (attribute.ActivityHostViewModelType != currentHostViewModelType)
             {
-                MvxTrace.Trace("Activity host with ViewModelType {0} is not CurrentTopActivity. Showing Activity before showing Fragment for {1}",
+                MvxLog.Instance.Trace("Activity host with ViewModelType {0} is not CurrentTopActivity. Showing Activity before showing Fragment for {1}",
                     attribute.ActivityHostViewModelType, attribute.ViewModelType);
                 _pendingRequest = request;
                 ShowHostActivity(attribute);
@@ -447,13 +448,13 @@ namespace MvvmCross.Droid.Views
 
             if (currentView == null)
             {
-                Mvx.Warning("Ignoring close for viewmodel - rootframe has no current page");
+                MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe has no current page");
                 return false;
             }
 
             if (currentView.ViewModel != viewModel)
             {
-                Mvx.Warning("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
+                MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
                 return false;
             }
 
@@ -483,7 +484,7 @@ namespace MvvmCross.Droid.Views
             }
             catch (System.Exception ex)
             {
-                MvxTrace.Trace("Cannot close any fragments", ex);
+                MvxLog.Instance.Trace("Cannot close any fragments", ex);
             }
             return true;
         }

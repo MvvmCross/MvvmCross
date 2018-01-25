@@ -1,4 +1,5 @@
-﻿using MvvmCross.Platform.Platform;
+﻿using MvvmCross.Platform.Logging;
+using MvvmCross.Platform.Platform;
 using UIKit;
 
 namespace MvvmCross.iOS.Views
@@ -10,7 +11,7 @@ namespace MvvmCross.iOS.Views
             var mvxView = viewController as IMvxIosView;
             if (mvxView == null)
             {
-                MvxTrace.Warning($"Could not get IMvxIosView from ViewController {viewController.GetType().Name}");
+                MvxLog.Instance.Warn($"Could not get IMvxIosView from ViewController {viewController.GetType().Name}");
             }
             return mvxView;
         }

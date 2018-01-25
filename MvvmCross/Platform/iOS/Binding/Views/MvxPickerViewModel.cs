@@ -12,6 +12,7 @@ using System.Windows.Input;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.WeakSubscription;
 using UIKit;
 
@@ -80,7 +81,7 @@ namespace MvvmCross.Binding.iOS.Views
 
         protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            Mvx.Trace(
+            MvxLog.Instance.Trace(
                 "CollectionChanged called inside MvxPickerViewModel - beware that this isn't fully tested - picker might not fully support changes while the picker is visible");
             Reload();
         }

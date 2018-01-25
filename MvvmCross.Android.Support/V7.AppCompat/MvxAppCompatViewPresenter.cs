@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -14,6 +14,7 @@ using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Views;
 using MvvmCross.Droid.Views.Attributes;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
@@ -33,7 +34,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             {
                 if (CurrentActivity is FragmentActivity activity)
                     return activity.SupportFragmentManager;
-                MvxTrace.Trace("Cannot use Android Support Fragment within non AppCompat Activity");
+                MvxAndroidLog.Instance.Trace("Cannot use Android Support Fragment within non AppCompat Activity");
                 return null;
             }
         }
@@ -136,12 +137,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             if (viewType.IsSubclassOf(typeof(DialogFragment)))
             {
-                MvxTrace.Trace("PresentationAttribute not found for {0}. Assuming DialogFragment presentation", viewType.Name);
+                MvxAndroidLog.Instance.Trace("PresentationAttribute not found for {0}. Assuming DialogFragment presentation", viewType.Name);
                 return new MvxDialogFragmentPresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
             if (viewType.IsSubclassOf(typeof(Fragment)))
             {
-                MvxTrace.Trace("PresentationAttribute not found for {0}. Assuming Fragment presentation", viewType.Name);
+                MvxAndroidLog.Instance.Trace("PresentationAttribute not found for {0}. Assuming Fragment presentation", viewType.Name);
                 return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), Android.Resource.Id.Content) { ViewType = viewType, ViewModelType = viewModelType };
             }
 
@@ -160,7 +161,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             var activity = CurrentActivity;
             if (activity == null)
             {
-                MvxTrace.Warning("Cannot Resolve current top activity");
+                MvxAndroidLog.Instance.Warn("Cannot Resolve current top activity");
                 return;
             }
 
@@ -219,7 +220,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             var currentHostViewModelType = GetCurrentActivityViewModelType();
             if (attribute.ActivityHostViewModelType != currentHostViewModelType)
             {
-                MvxTrace.Trace("Activity host with ViewModelType {0} is not CurrentTopActivity. Showing Activity before showing Fragment for {1}",
+                MvxAndroidLog.Instance.Trace("Activity host with ViewModelType {0} is not CurrentTopActivity. Showing Activity before showing Fragment for {1}",
                     attribute.ActivityHostViewModelType, attribute.ViewModelType);
                 _pendingRequest = request;
                 ShowHostActivity(attribute);
@@ -500,7 +501,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
             catch (Exception ex)
             {
-                MvxTrace.Trace("Cannot close any fragments", ex);
+                MvxAndroidLog.Instance.Trace("Cannot close any fragments", ex);
             }
             return true;
         }

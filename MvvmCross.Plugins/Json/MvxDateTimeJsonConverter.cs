@@ -24,7 +24,7 @@ namespace MvvmCross.Plugins.Json
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             var text = ((DateTime)value).ToString(DateTimeFormat, CultureInfo.InvariantCulture);
-            //MvxTrace.Trace("About to write {0}", text);
+            //MvxPluginLog.Instance.Trace("About to write {0}", text);
             writer.WriteValue(text);
         }
 
@@ -32,7 +32,7 @@ namespace MvvmCross.Plugins.Json
                                         JsonSerializer serializer)
         {
             var text = reader.Value.ToString();
-            //MvxTrace.Trace("About to parse {0}", text);
+            //MvxPluginLog.Instance.Trace("About to parse {0}", text);
             return DateTime.ParseExact(text, DateTimeFormat, CultureInfo.InvariantCulture);
         }
     }

@@ -14,6 +14,7 @@ using Windows.Storage;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Uwp.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Plugins.File.Uwp
 {
@@ -30,7 +31,7 @@ namespace MvvmCross.Plugins.File.Uwp
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace("Error during file load {0} : {1}", path, exception.ToLongString());
+                MvxPluginLog.Instance.Trace("Error during file load {0} : {1}", path, exception.ToLongString());
                 return null;
             }
         }
@@ -48,7 +49,7 @@ namespace MvvmCross.Plugins.File.Uwp
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace("Error during file save {0} : {1}", path, exception.ToLongString());
+                MvxPluginLog.Instance.Trace("Error during file save {0} : {1}", path, exception.ToLongString());
                 throw;
             }
         }
@@ -76,7 +77,7 @@ namespace MvvmCross.Plugins.File.Uwp
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace("Exception during file move from {0} to {1} - {2}", from, to, exception.ToLongString());
+                MvxPluginLog.Instance.Trace("Exception during file move from {0} to {1} - {2}", from, to, exception.ToLongString());
                 return false;
             }
         }
@@ -105,7 +106,7 @@ namespace MvvmCross.Plugins.File.Uwp
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace("Exception during file copy from {0} to {1} - {2}", from, to, exception.ToLongString());
+                MvxPluginLog.Instance.Trace("Exception during file copy from {0} to {1} - {2}", from, to, exception.ToLongString());
                 return false;
             }
         }
@@ -131,7 +132,7 @@ namespace MvvmCross.Plugins.File.Uwp
             }
             catch (Exception ex)
             {
-                MvxTrace.Trace("Exception seen in Exists - seen for path: {0} - {1}", path, ex.ToLongString());
+                MvxPluginLog.Instance.Trace("Exception seen in Exists - seen for path: {0} - {1}", path, ex.ToLongString());
                 throw;
             }
         }
@@ -158,7 +159,7 @@ namespace MvvmCross.Plugins.File.Uwp
             }
             catch (Exception ex)
             {
-                MvxTrace.Trace("Exception in FolderExists - folderPath: {0} - {1}", folderPath, ex.ToLongString());
+                MvxPluginLog.Instance.Trace("Exception in FolderExists - folderPath: {0} - {1}", folderPath, ex.ToLongString());
                 throw;
             }
         }
@@ -222,7 +223,7 @@ namespace MvvmCross.Plugins.File.Uwp
             }
             catch (Exception ex)
             {
-                MvxTrace.Trace("Exception in DeleteFolder - folderPath: {0} - {1}", folderPath, ex.ToLongString());
+                MvxPluginLog.Instance.Trace("Exception in DeleteFolder - folderPath: {0} - {1}", folderPath, ex.ToLongString());
                 throw ex;
             }
         }
@@ -246,7 +247,7 @@ namespace MvvmCross.Plugins.File.Uwp
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace("Error during file save {0} : {1}", path, exception.ToLongString());
+                MvxPluginLog.Instance.Trace("Error during file save {0} : {1}", path, exception.ToLongString());
                 throw;
             }
         }
@@ -271,7 +272,7 @@ namespace MvvmCross.Plugins.File.Uwp
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace("Error during file save {0} : {1}", path, exception.ToLongString());
+                MvxPluginLog.Instance.Trace("Error during file save {0} : {1}", path, exception.ToLongString());
                 throw;
             }
         }
@@ -291,7 +292,7 @@ namespace MvvmCross.Plugins.File.Uwp
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace("Error during file load {0} : {1}", path, exception.ToLongString());
+                MvxPluginLog.Instance.Trace("Error during file load {0} : {1}", path, exception.ToLongString());
                 return false;
             }
         }
@@ -311,7 +312,7 @@ namespace MvvmCross.Plugins.File.Uwp
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace("Error during file load {0} : {1}", path, exception.ToLongString());
+                MvxPluginLog.Instance.Trace("Error during file load {0} : {1}", path, exception.ToLongString());
                 return false;
             }
         }

@@ -32,7 +32,7 @@ namespace MvvmCross.Binding.iOS.Target
             var uiSwitch = Target;
             if (uiSwitch == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error, "Error - Switch is null in MvxUISwitchOnTargetBinding");
+                MvxBindingLog.Error( "Error - Switch is null in MvxUISwitchOnTargetBinding");
                 return;
             }
 

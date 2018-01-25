@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Plugins.Network.Rest
 {
@@ -202,7 +203,7 @@ namespace MvvmCross.Plugins.Network.Rest
             }
             catch (Exception exception)
             {
-                Mvx.Warning("Error masked during Rest call - cookie creation - {0}", exception.ToLongString());
+                MvxPluginLog.Instance.Warn("Error masked during Rest call - cookie creation - {0}", exception.ToLongString());
             }
         }
 

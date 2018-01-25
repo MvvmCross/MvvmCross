@@ -26,7 +26,7 @@ namespace MvvmCross.Binding.Views
             _imageSetAction = imageSetAction;
             if (!Mvx.TryResolve(out _imageHelper))
             {
-                MvxBindingTrace.Error(
+                MvxBindingLog.Error(
                     "Unable to resolve the image helper - have you referenced and called EnsureLoaded on the DownloadCache plugin?");
                 return;
             }

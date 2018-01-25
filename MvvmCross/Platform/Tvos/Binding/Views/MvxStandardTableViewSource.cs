@@ -1,4 +1,4 @@
-// MvxStandardTableViewSource.cs
+﻿// MvxStandardTableViewSource.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,6 +12,7 @@ using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.Binding.tvOS.Views
@@ -57,7 +58,7 @@ namespace MvvmCross.Binding.tvOS.Views
         public MvxStandardTableViewSource(IntPtr handle)
             : base(handle)
         {
-            Mvx.Warning("MvxStandardTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
+            MvxLog.Instance.Warn("MvxStandardTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
         public MvxStandardTableViewSource(

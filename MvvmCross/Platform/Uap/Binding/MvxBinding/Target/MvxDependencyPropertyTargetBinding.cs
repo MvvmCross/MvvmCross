@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Media;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Uwp.MvxBinding.Target
 {
@@ -67,7 +68,7 @@ namespace MvvmCross.Binding.Uwp.MvxBinding.Target
             var target = Target as FrameworkElement;
             if (target == null)
             {
-                MvxBindingTrace.Warning("Weak Target is null in {0} - skipping Get", GetType().Name);
+                MvxBindingLog.Warning("Weak Target is null in {0} - skipping Get", GetType().Name);
                 return null;
             }
 
@@ -76,11 +77,11 @@ namespace MvvmCross.Binding.Uwp.MvxBinding.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            MvxBindingTrace.Trace(MvxTraceLevel.Diagnostic, "Receiving setValue to " + (value ?? ""));
+            MvxBindingLog.Trace("Receiving setValue to " + (value ?? ""));
             var frameworkElement = target as FrameworkElement;
             if (frameworkElement == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning, "Weak Target is null in {0} - skipping set", GetType().Name);
+                MvxBindingLog.Trace("Weak Target is null in {0} - skipping set", GetType().Name);
                 return;
             }
 

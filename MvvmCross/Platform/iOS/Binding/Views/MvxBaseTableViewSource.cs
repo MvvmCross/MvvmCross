@@ -11,6 +11,7 @@ using Foundation;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.Binding.iOS.Views
@@ -27,7 +28,7 @@ namespace MvvmCross.Binding.iOS.Views
         protected MvxBaseTableViewSource(IntPtr handle)
             : base(handle)
         {
-            Mvx.Warning("MvxBaseTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
+            MvxLog.Instance.Warn("MvxBaseTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
         protected UITableView TableView => _tableView;
@@ -57,7 +58,7 @@ namespace MvvmCross.Binding.iOS.Views
             }
             catch (Exception exception)
             {
-                Mvx.Warning("Exception masked during TableView ReloadData {0}", exception.ToLongString());
+                MvxLog.Instance.Warn("Exception masked during TableView ReloadData {0}", exception.ToLongString());
             }
         }
 

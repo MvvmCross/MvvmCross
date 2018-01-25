@@ -1,4 +1,4 @@
-// MvxTextProviderBuilder.cs
+﻿// MvxTextProviderBuilder.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using MvvmCross.Localization;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.JsonLocalization
@@ -55,7 +56,7 @@ namespace MvvmCross.Plugins.JsonLocalization
                 }
                 catch (Exception exception)
                 {
-                    MvxTrace.Warning("Language file could not be loaded for {0}.{1} - {2}",
+                    MvxPluginLog.Instance.Warn("Language file could not be loaded for {0}.{1} - {2}",
                                    whichLocalizationFolder, kvp.Key, exception.ToLongString());
                 }
             }

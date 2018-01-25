@@ -1,4 +1,4 @@
-// MvxWpfSetup.cs
+﻿// MvxWpfSetup.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -34,11 +34,6 @@ namespace MvvmCross.Wpf.Platform
         {
             _uiThreadDispatcher = uiThreadDispatcher;
             _presenter = CreateViewPresenter(root);
-        }
-
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new MvxTraceTrace();
         }
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()

@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Core.Navigation;
-using MvvmCross.Core.Platform.LogProviders;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
@@ -18,6 +17,7 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.IoC;
 using MvvmCross.Platform.Logging;
+using MvvmCross.Platform.Logging.LogProviders;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
 
@@ -25,8 +25,6 @@ namespace MvvmCross.Core.Platform
 {
     public abstract class MvxSetup
     {
-        protected abstract IMvxTrace CreateDebugTrace();
-
         protected abstract IMvxApplication CreateApp();
 
         protected abstract IMvxViewsContainer CreateViewsContainer();
@@ -48,7 +46,8 @@ namespace MvvmCross.Core.Platform
                 throw new MvxException("Cannot start primary - as state already {0}", State);
             }
             State = MvxSetupState.InitializingPrimary;
-            MvxTrace.Trace("Setup: Primary start");
+            InitializeLoggingServices();
+            SetupLog.Trace("Setup: Primary start");
             InitializeIoC();
             State = MvxSetupState.InitializedPrimary;
             if (State != MvxSetupState.InitializedPrimary)
@@ -56,57 +55,54 @@ namespace MvvmCross.Core.Platform
                 throw new MvxException("Cannot start seconday - as state is currently {0}", State);
             }
             State = MvxSetupState.InitializingSecondary;
-            InitializeLoggingServices();
-            MvxTrace.Trace("Setup: FirstChance start");
+            SetupLog.Trace("Setup: FirstChance start");
             InitializeFirstChance();
-            MvxTrace.Trace("Setup: DebugServices start");
-            InitializeDebugServices();
-            MvxTrace.Trace("Setup: PlatformServices start");
+            SetupLog.Trace("Setup: PlatformServices start");
             InitializePlatformServices();
-            MvxTrace.Trace("Setup: MvvmCross settings start");
+            SetupLog.Trace("Setup: MvvmCross settings start");
             InitializeSettings();
-            MvxTrace.Trace("Setup: Singleton Cache start");
+            SetupLog.Trace("Setup: Singleton Cache start");
             InitializeSingletonCache();
         }
 
         public virtual void InitializeSecondary()
         {
-            MvxTrace.Trace("Setup: Bootstrap actions");
+            SetupLog.Trace("Setup: Bootstrap actions");
             PerformBootstrapActions();
-            MvxTrace.Trace("Setup: StringToTypeParser start");
+            SetupLog.Trace("Setup: StringToTypeParser start");
             InitializeStringToTypeParser();
-            MvxTrace.Trace("Setup: CommandHelper start");
+            SetupLog.Trace("Setup: CommandHelper start");
             InitializeCommandHelper();
-            MvxTrace.Trace("Setup: PluginManagerFramework start");
+            SetupLog.Trace("Setup: PluginManagerFramework start");
             var pluginManager = InitializePluginFramework();
-            MvxTrace.Trace("Setup: Create App");
+            SetupLog.Trace("Setup: Create App");
             var app = CreateApp();
             Mvx.RegisterSingleton(app);
-            MvxTrace.Trace("Setup: NavigationService");
+            SetupLog.Trace("Setup: NavigationService");
             InitializeNavigationService(app);
-            MvxTrace.Trace("Setup: Load navigation routes");
+            SetupLog.Trace("Setup: Load navigation routes");
             LoadNavigationServiceRoutes();
-            MvxTrace.Trace("Setup: App start");
+            SetupLog.Trace("Setup: App start");
             InitializeApp(pluginManager, app);
-            MvxTrace.Trace("Setup: ViewModelTypeFinder start");
+            SetupLog.Trace("Setup: ViewModelTypeFinder start");
             InitializeViewModelTypeFinder();
-            MvxTrace.Trace("Setup: ViewsContainer start");
+            SetupLog.Trace("Setup: ViewsContainer start");
             InitializeViewsContainer();
-            MvxTrace.Trace("Setup: ViewDispatcher start");
+            SetupLog.Trace("Setup: ViewDispatcher start");
             InitializeViewDispatcher();
-            MvxTrace.Trace("Setup: Views start");
+            SetupLog.Trace("Setup: Views start");
             InitializeViewLookup();
-            MvxTrace.Trace("Setup: CommandCollectionBuilder start");
+            SetupLog.Trace("Setup: CommandCollectionBuilder start");
             InitializeCommandCollectionBuilder();
-            MvxTrace.Trace("Setup: NavigationSerializer start");
+            SetupLog.Trace("Setup: NavigationSerializer start");
             InitializeNavigationSerializer();
-            MvxTrace.Trace("Setup: InpcInterception start");
+            SetupLog.Trace("Setup: InpcInterception start");
             InitializeInpcInterception();
-            MvxTrace.Trace("Setup: InpcInterception start");
+            SetupLog.Trace("Setup: InpcInterception start");
             InitializeViewModelCache();
-            MvxTrace.Trace("Setup: LastChance start");
+            SetupLog.Trace("Setup: LastChance start");
             InitializeLastChance();
-            MvxTrace.Trace("Setup: Secondary end");
+            SetupLog.Trace("Setup: Secondary end");
             State = MvxSetupState.Initialized;
         }
 
@@ -218,6 +214,7 @@ namespace MvvmCross.Core.Platform
                 Mvx.RegisterSingleton(logProvider);
                 SetupLog = logProvider.GetLogFor<MvxSetup>();
                 var globalLog = logProvider.GetLogFor<MvxLog>();
+                MvxLog.Instance = globalLog;
                 Mvx.RegisterSingleton(globalLog);
             }
         }
@@ -244,14 +241,6 @@ namespace MvvmCross.Core.Platform
                 default:
                     return null;
             }
-        }
-
-        [Obsolete("IMvxTrace is replaced by IMvxLogProvider and IMvxLog")]
-        protected virtual void InitializeDebugServices()
-        {
-            var debugTrace = CreateDebugTrace();
-            Mvx.RegisterSingleton(debugTrace);
-            MvxTrace.Initialize();
         }
 
         protected virtual IMvxViewModelLoader CreateViewModelLoader(IMvxViewModelLocatorCollection collection)

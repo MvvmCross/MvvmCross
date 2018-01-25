@@ -1,4 +1,4 @@
-// MvxBaseCollectionViewSource.cs
+﻿// MvxBaseCollectionViewSource.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,6 +11,7 @@ using Foundation;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.Binding.tvOS.Views
@@ -48,7 +49,7 @@ namespace MvvmCross.Binding.tvOS.Views
             }
             catch (Exception exception)
             {
-                Mvx.Warning("Exception masked during CollectionView ReloadData {0}", exception.ToLongString());
+                MvxLog.Instance.Warn("Exception masked during CollectionView ReloadData {0}", exception.ToLongString());
             }
         }
 

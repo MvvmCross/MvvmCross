@@ -5,7 +5,7 @@ using MvvmCross.Core.Views;
 using MvvmCross.Forms.Views.EventSource;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views
@@ -52,7 +52,7 @@ namespace MvvmCross.Forms.Views
             if (viewModelType == null
                 || viewModelType == typeof(IMvxViewModel))
             {
-                MvxTrace.Trace("No ViewModel class specified for {0} in LoadViewModel",
+                MvxFormsLog.Instance.Trace("No ViewModel class specified for {0} in LoadViewModel",
                                element.GetType().Name);
                 return null;
             }

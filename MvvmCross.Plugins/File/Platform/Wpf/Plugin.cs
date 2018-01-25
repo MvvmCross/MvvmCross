@@ -42,7 +42,7 @@ namespace MvvmCross.Plugins.File.Wpf
             if (!Directory.Exists(fileConfiguration.BasePath))
             {
                 var message = "File plugin configuration error : root folder '" + fileConfiguration.BasePath + "' does not exists.";
-                MvxTrace.Error(message);
+                MvxPluginLog.Instance.Error(message);
                 throw new DirectoryNotFoundException(message);
             }
 

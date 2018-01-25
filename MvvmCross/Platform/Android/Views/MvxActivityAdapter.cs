@@ -1,4 +1,4 @@
-// MvxActivityAdapter.cs
+﻿// MvxActivityAdapter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -14,6 +14,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Droid.Views;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Views
@@ -44,7 +45,7 @@ namespace MvvmCross.Droid.Views
             switch (requestCode)
             {
                 case (int)MvxIntentRequestCode.PickFromFile:
-                    MvxTrace.Warning("Warning - activity request code may clash with Mvx code for {0}",
+                    MvxLog.Instance.Warn("Warning - activity request code may clash with Mvx code for {0}",
                                    (MvxIntentRequestCode)requestCode);
                     break;
             }
@@ -88,7 +89,7 @@ namespace MvvmCross.Droid.Views
                 IMvxSavedStateConverter converter;
                 if (!Mvx.TryResolve<IMvxSavedStateConverter>(out converter))
                 {
-                    MvxTrace.Warning("Saved state converter not available - saving state will be hard");
+                    MvxLog.Instance.Warn("Saved state converter not available - saving state will be hard");
                 }
                 else
                 {

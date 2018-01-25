@@ -21,7 +21,7 @@ namespace MvvmCross.Binding.Mac.Target
             var editText = View;
             if (editText == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxBindingLog.Error(
                                       "Error - NSTextField is null in MvxNSTextFieldTextTargetBinding");
             }
             else
