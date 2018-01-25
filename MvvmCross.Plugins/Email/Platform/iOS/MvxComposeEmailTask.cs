@@ -11,6 +11,7 @@ using System.Linq;
 using Foundation;
 using MessageUI;
 using MvvmCross.iOS.Views.Presenters;
+using MvvmCross.iOS.Views.Presenters.Attributes;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.iOS.Platform;
@@ -70,7 +71,7 @@ namespace MvvmCross.Plugins.Email.iOS
             }
             _mail.Finished += HandleMailFinished;
 
-            _viewPresenter.ShowModalViewController(_mail, new MvvmCross.iOS.Views.Presenters.Attributes.MvxModalPresentationAttribute() { Animated = true }, null);
+            _viewPresenter.ShowModalViewController(_mail, new MvxModalPresentationAttribute() { Animated = true }, null);
         }
 
         public bool CanSendEmail => MFMailComposeViewController.CanSendMail;
