@@ -6,6 +6,7 @@ using Android.Support.V17.Leanback.Widget;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.WeakSubscription;
 
@@ -47,7 +48,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
                 {
                     if (!(value is ICollection))
                     {
-                        MvxTrace.Warning("Using a enumerable is not recommended due to performance issues. Consider using an ICollection (e.g. List) as ItemsSource.");
+                        MvxAndroidLog.Instance.Warn("Using a enumerable is not recommended due to performance issues. Consider using an ICollection (e.g. List) as ItemsSource.");
                     }
                 }
 
@@ -134,7 +135,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
             }
             catch (Exception exception)
             {
-                Mvx.Warning("Exception masked during Adapter NotifyChanged {0}", exception.ToLongString());
+                MvxAndroidLog.Instance.Warn("Exception masked during Adapter NotifyChanged {0}", exception.ToLongString());
             }
         }
 

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Bindings
@@ -24,7 +25,7 @@ namespace MvvmCross.Forms.Bindings
 
             if (attachedObject == null)
             {
-                Mvx.Warning("Null attached Element seen in Bi.nd binding");
+                MvxFormsLog.Instance.Warn("Null attached Element seen in Bi.nd binding");
                 return;
             }
 

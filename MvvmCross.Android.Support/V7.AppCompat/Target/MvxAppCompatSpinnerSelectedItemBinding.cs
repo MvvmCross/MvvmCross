@@ -70,7 +70,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
                 var index = spinner.Adapter.GetPosition(value);
                 if (index < 0)
                 {
-                    MvxBindingLog.Trace(MvxTraceLevel.Warning, "Value not found for spinner {0}", value.ToString());
+                    MvxBindingLog.Warning("Value not found for spinner {0}", value.ToString());
                     return;
                 }
                 _currentValue = value;

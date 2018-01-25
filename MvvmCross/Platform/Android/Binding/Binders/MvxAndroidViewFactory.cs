@@ -31,7 +31,7 @@ namespace MvvmCross.Binding.Droid.Binders
 
             if (viewType == null)
             {
-                //MvxBindingTrace.Error( "View type not found - {0}", name);
+                //MvxBindingLog.Error( "View type not found - {0}", name);
                 return null;
             }
 

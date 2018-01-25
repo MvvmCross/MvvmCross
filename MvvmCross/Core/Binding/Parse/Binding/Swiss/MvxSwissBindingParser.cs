@@ -75,7 +75,7 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
             ParseEquals(block);
             //if (description.Mode != MvxBindingMode.Default)
             //{
-            //    MvxBindingTrace.Warning("Mode specified multiple times in binding in {0} - for readability either use <,>,<1,<> or use (Mode=...) - not both", FullText);
+            //    MvxBindingLog.Warning("Mode specified multiple times in binding in {0} - for readability either use <,>,<1,<> or use (Mode=...) - not both", FullText);
             //}
             description.Mode = ReadBindingMode();
         }

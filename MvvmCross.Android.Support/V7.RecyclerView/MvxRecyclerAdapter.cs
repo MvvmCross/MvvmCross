@@ -21,6 +21,7 @@ using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 using MvvmCross.Droid.Support.V7.RecyclerView.Model;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.WeakSubscription;
 using Object = Java.Lang.Object;
@@ -71,7 +72,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
                 if (_itemClick != null)
                 {
-                    MvxTrace.Warning("Changing ItemClick may cause inconsistencies where some items still call the old command.");
+                    MvxAndroidLog.Instance.Warn("Changing ItemClick may cause inconsistencies where some items still call the old command.");
                 }
 
                 _itemClick = value;
@@ -93,7 +94,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
                 if (_itemLongClick != null)
                 {
-                    MvxTrace.Warning("Changing ItemLongClick may cause inconsistencies where some items still call the old command.");
+                    MvxAndroidLog.Instance.Warn("Changing ItemLongClick may cause inconsistencies where some items still call the old command.");
                 }
 
                 _itemLongClick = value;
@@ -228,8 +229,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
             if (_itemsSource != null && !(_itemsSource is IList))
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
-                    "Binding to IEnumerable rather than IList - this can be inefficient, especially for large lists");
+                MvxBindingLog.Warning("Binding to IEnumerable rather than IList - this can be inefficient, especially for large lists");
             }
 
             var newObservable = _itemsSource as INotifyCollectionChanged;
@@ -285,7 +285,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             }
             catch (Exception exception)
             {
-                Mvx.Warning(
+                MvxAndroidLog.Instance.Warn(
                     "Exception masked during Adapter RealNotifyDataSetChanged {0}. Are you trying to update your collection from a background task? See http://goo.gl/0nW0L6",
                     exception.ToLongString());
             }

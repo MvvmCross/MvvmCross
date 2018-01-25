@@ -69,7 +69,7 @@ namespace MvvmCross.Plugins.DownloadCache.Droid
             var id = resources.GetIdentifier(resourcePath, "drawable", AndroidGlobals.ApplicationContext.PackageName);
             if (id == 0)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Warning,
+                MvxBindingLog.Trace(MvxTraceLevel.Warning,
                                       "Value '{0}' was not a known drawable name", resourcePath);
                 return null;
             }

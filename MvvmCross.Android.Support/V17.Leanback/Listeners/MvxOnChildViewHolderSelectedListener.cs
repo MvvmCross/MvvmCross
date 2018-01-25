@@ -2,6 +2,7 @@
 using Android.Support.V17.Leanback.Widget;
 using Android.Support.V7.Widget;
 using MvvmCross.Droid.Support.V7.RecyclerView;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Listeners
@@ -23,7 +24,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Listeners
 
 			if (item == null)
 			{
-				MvxTrace.Error("Could not retrieve item from adapter. Can't pass currently selected item through!");
+				MvxAndroidLog.Instance.Error("Could not retrieve item from adapter. Can't pass currently selected item through!");
 				return;
 			}
 

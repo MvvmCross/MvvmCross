@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Android.Widget;
 using MvvmCross.Forms.Droid.Views;
 using MvvmCross.Forms.Views;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -39,7 +40,7 @@ namespace MvvmCross.Forms.Droid.Views
             
             if (Element.Source != null)
             {
-                MvxTrace.Warning("Source property ignored on MvxImageView");
+                MvxFormsLog.Instance.Warn("Source property ignored on MvxImageView");
             }
 
             base.OnElementChanged(args);
@@ -67,7 +68,7 @@ namespace MvvmCross.Forms.Droid.Views
         {
             if (args.PropertyName == nameof(MvxImageView.Source))
             {
-                MvxTrace.Warning("Source property ignored on MvxImageView");
+                MvxFormsLog.Instance.Warn("Source property ignored on MvxImageView");
             }
             else
             {

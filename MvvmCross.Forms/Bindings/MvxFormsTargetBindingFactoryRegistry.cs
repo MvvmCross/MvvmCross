@@ -37,7 +37,7 @@ namespace MvvmCross.Forms.Bindings
 
             if (string.IsNullOrEmpty(targetName))
             {
-                MvxBindingLog.Trace(MvxTraceLevel.Error,
+                MvxBindingLog.Error(
                                       "Empty binding target passed to MvxFormsTargetBindingFactoryRegistry");
                 binding = null;
                 return false;

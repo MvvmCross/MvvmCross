@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using MvvmCross.Forms.iOS.Views.Renderers;
 using MvvmCross.Forms.Views;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using UIKit;
 using Xamarin.Forms;
@@ -54,7 +55,7 @@ namespace MvvmCross.Forms.iOS.Views.Renderers
 
             if (Element.Source != null)
             {
-                MvxTrace.Warning("Source property ignored on MvxImageView");
+                MvxFormsLog.Instance.Warn("Source property ignored on MvxImageView");
             }
 
             base.OnElementChanged(args);
@@ -87,7 +88,7 @@ namespace MvvmCross.Forms.iOS.Views.Renderers
         {
             if (args.PropertyName == nameof(MvxImageView.Source))
             {
-                MvxTrace.Warning("Source property ignored on MvxImageView");
+                MvxFormsLog.Instance.Warn("Source property ignored on MvxImageView");
             }
             else
             {
@@ -97,7 +98,7 @@ namespace MvvmCross.Forms.iOS.Views.Renderers
                 {
                     if (args.PropertyName == nameof(MvxImageView.Source))
                     {
-                        MvxTrace.Warning("Source property ignored on MvxImageView");
+                        MvxFormsLog.Instance.Warn("Source property ignored on MvxImageView");
                     }
                     if (args.PropertyName == nameof(MvxImageView.DefaultImagePath))
                     {

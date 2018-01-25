@@ -1,4 +1,4 @@
-﻿// MvxBindingTrace.cs
+﻿// MvxBindingLog.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,7 +12,7 @@ namespace MvvmCross.Binding
 {
     public static class MvxBindingLog
     {
-        public static IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor("MvxBind");
+        public static IMvxLog Instance { get; } = Mvx.Resolve<IMvxLogProvider>().GetLogFor("MvxBind");
 
         public static MvxLogLevel TraceBindingLevel = MvxLogLevel.Warn;
 
@@ -20,7 +20,7 @@ namespace MvvmCross.Binding
         {
             if (level < TraceBindingLevel) return;
 
-            Log.Log(level, () => string.Format(message, args));
+            Instance.Log(level, () => string.Format(message, args));
         }
 
         public static void Trace(string message, params object[] args)
