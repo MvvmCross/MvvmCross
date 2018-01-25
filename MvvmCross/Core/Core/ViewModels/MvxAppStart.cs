@@ -5,23 +5,33 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using System;
+using MvvmCross.Core.Navigation;
+using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Core.ViewModels
 {
-    [Obsolete("Please use MvxNavigationServiceAppStart instead")]
     public class MvxAppStart<TViewModel>
-        : MvxNavigatingObject, IMvxAppStart
+        : IMvxAppStart
         where TViewModel : IMvxViewModel
     {
-        public void Start(object hint = null)
+        protected readonly IMvxNavigationService NavigationService;
+
+        public MvxAppStart(IMvxNavigationService navigationService)
         {
-            if (hint != null)
-            {
+            NavigationService = navigationService;
+        }
+
+        public async void Start(object hint = null)
+        {
+            if (hint != null) {
                 MvxLog.Instance.Trace("Hint ignored in default MvxAppStart");
             }
-            ShowViewModel<TViewModel>();
+            try {
+                await NavigationService.Navigate<TViewModel>();
+            } catch (System.Exception exception) {
+                throw exception.MvxWrap("Problem navigating to ViewModel {0}", typeof(TViewModel).Name);
+            }
         }
     }
 }
