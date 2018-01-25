@@ -14,6 +14,7 @@ using Foundation;
 using MvvmCross.Platform;
 using MvvmCross.Platform.iOS.Platform;
 using MvvmCross.Platform.iOS.Views;
+using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.Plugins.PictureChooser.iOS

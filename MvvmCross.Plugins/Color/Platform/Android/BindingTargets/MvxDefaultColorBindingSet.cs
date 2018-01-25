@@ -1,4 +1,4 @@
-// MvxDefaultColorBindingSet.cs
+﻿// MvxDefaultColorBindingSet.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,6 +10,7 @@ using Android.Widget;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Plugins.Color.Droid.Binding;
 
 namespace MvvmCross.Plugins.Color.Droid.BindingTargets
