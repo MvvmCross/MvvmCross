@@ -1,4 +1,4 @@
-using MvvmCross.Core.ViewModels;
+﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.iOS.Support.XamarinSidebar.Extensions;
 using MvvmCross.iOS.Support.XamarinSidebar.Views;
@@ -152,7 +152,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar
 
                 Mvx.RegisterSingleton<IMvxSidebarViewController>(SideBarViewController);
 
-                CleanupModalViewControllers();
+                CloseModalViewControllers();
                 CloseTabBarViewController();
                 CloseSplitViewController();
                 CloseMasterNavigationController();

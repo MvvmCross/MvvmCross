@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using CoreGraphics;
 using Foundation;
+using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Platform;
 using MvvmCross.Platform.iOS.Platform;
 using MvvmCross.Platform.iOS.Views;
@@ -24,7 +25,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
         : MvxIosTask, IMvxPictureChooserTask
     {
         private readonly UIImagePickerController _picker;
-        private readonly IMvxIosModalHost _modalHost;
+        private readonly MvxIosViewPresenter _viewPresenter;
         private bool _currentlyActive;
         private int _maxPixelDimension;
         private int _percentQuality;
@@ -33,7 +34,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
 
         public MvxImagePickerTask()
         {
-            _modalHost = Mvx.Resolve<IMvxIosModalHost>();
+            _viewPresenter = Mvx.Resolve<IMvxIosViewPresenter>() as MvxIosViewPresenter;
             _picker = new UIImagePickerController
             {
                 //CameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Photo,
@@ -91,7 +92,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
             _pictureAvailable = pictureAvailable;
             _assumeCancelled = assumeCancelled;
 
-            _modalHost.PresentModalViewController(_picker, true);
+            _viewPresenter.ShowModalViewController(_picker, new MvvmCross.iOS.Views.Presenters.Attributes.MvxModalPresentationAttribute() { Animated = true }, null);
         }
 
         private void HandleImagePick(UIImage image, string name)
@@ -120,7 +121,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
             }
 
             _picker.DismissViewController(true, () => { });
-            _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
+            _viewPresenter.CloseModalViewControllers();
         }
 
         private void Picker_FinishedPickingMedia(object sender, UIImagePickerMediaPickedEventArgs e)
@@ -142,7 +143,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
             ClearCurrentlyActive();
             _assumeCancelled?.Invoke();
             _picker.DismissViewController(true, () => { });
-            _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
+            _viewPresenter.CloseModalViewControllers();
         }
 
         private void SetCurrentlyActive()

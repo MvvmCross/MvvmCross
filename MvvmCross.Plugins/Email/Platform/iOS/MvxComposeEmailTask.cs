@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Foundation;
 using MessageUI;
+using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.iOS.Platform;
@@ -23,12 +24,12 @@ namespace MvvmCross.Plugins.Email.iOS
         : MvxIosTask
         , IMvxComposeEmailTaskEx
     {
-        private readonly IMvxIosModalHost _modalHost;
+        private readonly MvxIosViewPresenter _viewPresenter;
         private MFMailComposeViewController _mail;
 
         public MvxComposeEmailTask()
         {
-            _modalHost = Mvx.Resolve<IMvxIosModalHost>();
+            _viewPresenter = Mvx.Resolve<IMvxIosViewPresenter>() as MvxIosViewPresenter;
         }
 
         public void ComposeEmail(string to, string cc = null, string subject = null, string body = null,
@@ -69,7 +70,7 @@ namespace MvvmCross.Plugins.Email.iOS
             }
             _mail.Finished += HandleMailFinished;
 
-            _modalHost.PresentModalViewController(_mail, true);
+            _viewPresenter.ShowModalViewController(_mail, new MvvmCross.iOS.Views.Presenters.Attributes.MvxModalPresentationAttribute() { Animated = true }, null);
         }
 
         public bool CanSendEmail => MFMailComposeViewController.CanSendMail;
@@ -85,7 +86,7 @@ namespace MvvmCross.Plugins.Email.iOS
             }
 
             uiViewController.DismissViewController(true, () => { });
-            _modalHost.NativeModalViewControllerDisappearedOnItsOwn();
+            _viewPresenter.CloseModalViewControllers();
         }
     }
 }

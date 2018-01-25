@@ -85,6 +85,7 @@ namespace MvvmCross.iOS.Platform
             RegisterPlatformProperties();
             RegisterPresenter();
             RegisterLifetime();
+            base.InitializePlatformServices();
         }
 
         protected virtual void RegisterPlatformProperties()
@@ -106,12 +107,12 @@ namespace MvvmCross.iOS.Platform
         {
             get
             {
-                _presenter = _presenter ?? CreatePresenter();
+                _presenter = _presenter ?? CreateViewPresenter();
                 return _presenter;
             }
         }
 
-        protected virtual IMvxIosViewPresenter CreatePresenter()
+        protected virtual IMvxIosViewPresenter CreateViewPresenter()
         {
             return new MvxIosViewPresenter(_applicationDelegate, _window);
         }
@@ -120,7 +121,7 @@ namespace MvvmCross.iOS.Platform
         {
             var presenter = Presenter;
             Mvx.RegisterSingleton(presenter);
-            Mvx.RegisterSingleton<IMvxIosModalHost>(presenter);
+            Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
         protected override void InitializeLastChance()
