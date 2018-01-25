@@ -20,6 +20,10 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
     <Compile Include="Platform\Net461\**\*.cs" />
+    <Compile Include="Platform\Wpf\**\*.cs" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Device" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">

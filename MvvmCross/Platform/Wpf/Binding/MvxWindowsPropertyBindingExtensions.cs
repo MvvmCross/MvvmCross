@@ -7,13 +7,7 @@
 
 using System.Windows;
 
-#if WINDOWS_COMMON
-namespace MvvmCross.BindingEx.WindowsCommon
-#endif
-
-#if WINDOWS_WPF
 namespace MvvmCross.Binding.Wpf
-#endif
 {
     public static class MvxWindowsPropertyBindingExtensions
     {

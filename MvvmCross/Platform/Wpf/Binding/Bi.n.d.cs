@@ -5,13 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#if WINDOWS_COMMON
-using Windows.UI.Xaml;
-
-namespace MvvmCross.BindingEx.WindowsCommon
-#endif
-
-#if WINDOWS_WPF
 using System.Collections.Generic;
 using System.Windows;
 using MvvmCross.Binding.Bindings;
@@ -20,7 +13,6 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Binding.Wpf
-#endif
 {
     // ReSharper disable InconsistentNaming
     public static class Bi

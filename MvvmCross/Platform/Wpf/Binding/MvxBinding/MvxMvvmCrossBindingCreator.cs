@@ -5,14 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#if WINDOWS_COMMON
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Data;
-
-namespace MvvmCross.BindingEx.WindowsCommon.MvxBinding
-#endif
-
-#if WINDOWS_WPF
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +13,6 @@ using System.Windows.Data;
 using MvvmCross.Binding.Bindings;
 
 namespace MvvmCross.Binding.Wpf.MvxBinding
-#endif
 {
 
 
@@ -60,12 +51,7 @@ namespace MvvmCross.Binding.Wpf.MvxBinding
             attachedObject.SetValue(BindingsListProperty, newList);
 
             // create a binding watcher for the list
-#if WINDOWS_WPF
             var binding = new System.Windows.Data.Binding();
-#endif
-#if WINDOWS_COMMON
-            var binding = new Windows.UI.Xaml.Data.Binding();
-#endif
             bool attached = false;
             Action attachAction = () =>
             {
@@ -79,11 +65,8 @@ namespace MvvmCross.Binding.Wpf.MvxBinding
             {
                 if (!attached)
                     return;
-#if WINDOWS_COMMON
-                attachedObject.ClearValue(DataContextWatcherProperty);
-#else
+
                 BindingOperations.ClearBinding(attachedObject, DataContextWatcherProperty);
-#endif
                 attached = false;
             };
             attachAction();

@@ -5,14 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#if WINDOWS_COMMON
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media;
-
-namespace MvvmCross.BindingEx.WindowsCommon.MvxBinding.Target
-#endif
-
-#if WINDOWS_WPF
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -22,16 +14,13 @@ using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Wpf.MvxBinding.Target
-#endif
 {
     public class MvxDependencyPropertyTargetBinding : MvxConvertingTargetBinding
     {
         private readonly string _targetName;
         private readonly DependencyProperty _targetDependencyProperty;
         private readonly Type _actualPropertyType;
-#if WINDOWS_WPF
         private readonly TypeConverter _typeConverter;
-#endif
 
         public MvxDependencyPropertyTargetBinding(object target, string targetName, DependencyProperty targetDependencyProperty, Type actualPropertyType)
             : base(target)
@@ -39,9 +28,8 @@ namespace MvvmCross.Binding.Wpf.MvxBinding.Target
             _targetDependencyProperty = targetDependencyProperty;
             _actualPropertyType = actualPropertyType;
             _targetName = targetName;
-#if WINDOWS_WPF
             _typeConverter = _actualPropertyType.TypeConverter();
-#endif
+
             // if we return TwoWay for ImageSource then we end up in
             // problems with WP7 not doing the auto-conversion
             // see some of my angst in http://stackoverflow.com/questions/16752242/how-does-xaml-create-the-string-to-bitmapimage-value-conversion-when-binding-to/16753488#16753488
@@ -57,18 +45,9 @@ namespace MvvmCross.Binding.Wpf.MvxBinding.Target
             var frameworkElement = Target as FrameworkElement;
             if (frameworkElement == null)
                 return;
-
-#if WINDOWS_WPF
             var listenerBinding = new System.Windows.Data.Binding(_targetName)
             { Source = frameworkElement };
-#endif
-#if WINDOWS_COMMON
-            var listenerBinding = new Windows.UI.Xaml.Data.Binding()
-            {
-                Path = new PropertyPath(_targetName),
-                Source = frameworkElement
-            };
-#endif
+
             var attachedProperty = DependencyProperty.RegisterAttached(
                 "ListenAttached" + _targetName + Guid.NewGuid().ToString("N")
                 , typeof(object)
@@ -109,7 +88,6 @@ namespace MvvmCross.Binding.Wpf.MvxBinding.Target
 
         protected override object MakeSafeValue(object value)
         {
-#if WINDOWS_WPF
             if (_actualPropertyType.IsInstanceOfType(value))
                 return value;
 
@@ -122,10 +100,6 @@ namespace MvvmCross.Binding.Wpf.MvxBinding.Target
                 return null; // TODO - is this correct? Do we need to do more here? See #297
 
             return _typeConverter.ConvertFrom(value);
-#endif
-#if WINDOWS_COMMON
-            return _actualPropertyType.MakeSafeValue(value);
-#endif
         }
     }
 }
