@@ -40,7 +40,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             var targetBinding = targetBindingCandidate as IMvxTargetBinding;
             if (targetBinding == null)
             {
-                MvxBindingTrace.Warning("The TargetBinding created did not support IMvxTargetBinding");
+                MvxBindingLog.Warning("The TargetBinding created did not support IMvxTargetBinding");
                 var disposable = targetBindingCandidate as IDisposable;
                 disposable?.Dispose();
             }

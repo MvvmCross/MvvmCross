@@ -33,7 +33,7 @@ namespace MvvmCross.Binding.Droid.Target
 
 			if (!(value is int))
 			{
-				MvxBindingTrace.Warning(
+				MvxBindingLog.Warning(
 					"Value was not a valid Drawable");
 				imageView.SetImageDrawable(null);
 				return;

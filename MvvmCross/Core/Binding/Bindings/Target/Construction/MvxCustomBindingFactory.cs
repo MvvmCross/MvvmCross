@@ -36,7 +36,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             var castTarget = target as TTarget;
             if (castTarget == null)
             {
-                MvxBindingTrace.Error("Passed an invalid target for MvxCustomBindingFactory");
+                MvxBindingLog.Error("Passed an invalid target for MvxCustomBindingFactory");
                 return null;
             }
 

@@ -63,7 +63,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
 
             if (source != null)
             {
-                MvxBindingTrace.Warning(
+                MvxBindingLog.Warning(
                     "Unable to bind: source property source not found {0} on {1}"
                     , currentToken
                     , source.GetType().Name);

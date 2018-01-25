@@ -53,7 +53,7 @@ namespace MvvmCross.Binding.Droid.Target
             var seekBar = View;
             if (seekBar == null)
             {
-                MvxBindingTrace.Error( "Error - SeekBar is null in MvxSeekBarProgressTargetBinding");
+                MvxBindingLog.Error( "Error - SeekBar is null in MvxSeekBarProgressTargetBinding");
                 return;
             }
 

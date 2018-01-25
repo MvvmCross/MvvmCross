@@ -29,7 +29,7 @@ namespace MvvmCross.Binding.Droid.Target
 
             if (!(value is string))
             {
-                MvxBindingTrace.Warning(
+                MvxBindingLog.Warning(
                     "Value '{0}' could not be parsed as a valid string identifier", value);
                 imageView.SetImageDrawable(null);
                 return;
@@ -39,7 +39,7 @@ namespace MvvmCross.Binding.Droid.Target
             var id = resources.GetIdentifier((string)value, "drawable", AndroidGlobals.ApplicationContext.PackageName);
             if (id == 0)
             {
-                MvxBindingTrace.Warning(
+                MvxBindingLog.Warning(
                     "Value '{0}' was not a known drawable name", value);
                 imageView.SetImageDrawable(null);
                 return;

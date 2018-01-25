@@ -24,7 +24,7 @@ namespace MvvmCross.Binding.iOS.Target
             _state = state;
             if (button == null)
             {
-                MvxBindingTrace.Error( "Error - UIButton is null in MvxUIButtonTitleTargetBinding");
+                MvxBindingLog.Error( "Error - UIButton is null in MvxUIButtonTitleTargetBinding");
             }
         }
 

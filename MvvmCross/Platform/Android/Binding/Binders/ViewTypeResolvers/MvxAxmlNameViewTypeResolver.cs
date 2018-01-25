@@ -47,7 +47,7 @@ namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
                     }
                     else
                     {
-                        MvxBindingTrace.Trace("Abbreviation not found {0}", abbreviate);
+                        MvxBindingLog.Trace("Abbreviation not found {0}", abbreviate);
                     }
                 }
             }

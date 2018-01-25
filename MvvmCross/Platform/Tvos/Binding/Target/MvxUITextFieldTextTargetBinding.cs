@@ -41,7 +41,7 @@ namespace MvvmCross.Binding.tvOS.Target
             var target = View;
             if (target == null)
             {
-                MvxBindingTrace.Error(
+                MvxBindingLog.Error(
                                       "Error - UITextField is null in MvxUITextFieldTextTargetBinding");
                 return;
             }

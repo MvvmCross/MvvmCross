@@ -37,7 +37,7 @@ namespace MvvmCross.Binding.Droid.Target
             var javaTarget = target as IJavaObject;
             if (javaTarget != null && javaTarget.Handle == IntPtr.Zero)
             {
-                MvxBindingTrace.Warning("Weak Target has been GCed by Android {0}", javaTarget.GetType().Name);
+                MvxBindingLog.Warning("Weak Target has been GCed by Android {0}", javaTarget.GetType().Name);
                 return true;
             }
             return false;
@@ -68,7 +68,7 @@ namespace MvvmCross.Binding.Droid.Target
             var javaTarget = target as IJavaObject;
             if (javaTarget != null && javaTarget.Handle == IntPtr.Zero)
             {
-                MvxBindingTrace.Warning("Weak Target has been GCed by Android {0}", javaTarget.GetType().Name);
+                MvxBindingLog.Warning("Weak Target has been GCed by Android {0}", javaTarget.GetType().Name);
                 return true;
             }
             return false;

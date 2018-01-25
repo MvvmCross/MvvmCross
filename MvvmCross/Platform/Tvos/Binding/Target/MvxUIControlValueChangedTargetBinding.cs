@@ -26,7 +26,7 @@ namespace MvvmCross.Binding.tvOS.Target
         {
             if (control == null)
             {
-                MvxBindingTrace.Error(
+                MvxBindingLog.Error(
                     "Error - UIControl is null in MvxUIControlValueChangedTargetBinding");
             }
             else

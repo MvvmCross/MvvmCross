@@ -1,4 +1,4 @@
-// MvxBindingTrace.cs
+﻿// MvxBindingTrace.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -10,7 +10,7 @@ using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding
 {
-    public static class MvxBindingTrace
+    public static class MvxBindingLog
     {
         public static IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor("MvxBind");
 

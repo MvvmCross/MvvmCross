@@ -36,7 +36,7 @@ namespace MvvmCross.Binding.Mac.Target
             var view = View;
             if (view == null)
             {
-                MvxBindingTrace.Error( "Error - NSTabViewController is null in MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding");
+                MvxBindingLog.Error( "Error - NSTabViewController is null in MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding");
                 return;
             }
 
@@ -51,7 +51,7 @@ namespace MvvmCross.Binding.Mac.Target
                 }
                 catch (Exception ex)
                 {
-                    MvxBindingTrace.Error(ex.Message);
+                    MvxBindingLog.Error(ex.Message);
                 }
             }
         }
@@ -85,7 +85,7 @@ namespace MvvmCross.Binding.Mac.Target
                         }
                         catch (Exception ex)
                         {
-                            MvxBindingTrace.Error(ex.Message);
+                            MvxBindingLog.Error(ex.Message);
                         }
                     }
                     _subscribed = false;

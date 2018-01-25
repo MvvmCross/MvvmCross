@@ -23,7 +23,7 @@ namespace MvvmCross.Binding.Bindings
             switch (bindingMode)
             {
                 case MvxBindingMode.Default:
-                    MvxBindingTrace.Warning("Mode of default seen for binding - assuming TwoWay");
+                    MvxBindingLog.Warning("Mode of default seen for binding - assuming TwoWay");
                     return true;
 
                 case MvxBindingMode.OneWay:
@@ -44,7 +44,7 @@ namespace MvvmCross.Binding.Bindings
             switch (bindingMode)
             {
                 case MvxBindingMode.Default:
-                    MvxBindingTrace.Warning("Mode of default seen for binding - assuming TwoWay");
+                    MvxBindingLog.Warning("Mode of default seen for binding - assuming TwoWay");
                     return true;
 
                 case MvxBindingMode.OneWay:
@@ -65,7 +65,7 @@ namespace MvvmCross.Binding.Bindings
             switch (bindingMode)
             {
                 case MvxBindingMode.Default:
-                    MvxBindingTrace.Warning("Mode of default seen for binding - assuming TwoWay");
+                    MvxBindingLog.Warning("Mode of default seen for binding - assuming TwoWay");
                     return true;
 
                 case MvxBindingMode.OneWay:

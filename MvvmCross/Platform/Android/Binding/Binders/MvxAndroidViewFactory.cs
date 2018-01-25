@@ -40,7 +40,7 @@ namespace MvvmCross.Binding.Droid.Binders
                 var view = Activator.CreateInstance(viewType, context, attrs) as View;
                 if (view == null)
                 {
-                    MvxBindingTrace.Error( "Unable to load view {0} from type {1}", name,
+                    MvxBindingLog.Error( "Unable to load view {0} from type {1}", name,
                                           viewType.FullName);
                 }
                 return view;
@@ -51,7 +51,7 @@ namespace MvvmCross.Binding.Droid.Binders
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Error(
+                MvxBindingLog.Error(
                                       "Exception during creation of {0} from type {1} - exception {2}", name,
                                       viewType.FullName, exception.ToLongString());
                 return null;

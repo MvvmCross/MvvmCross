@@ -27,7 +27,7 @@ namespace MvvmCross.Binding.Bindings.Source
 
             if (Source == null)
             {
-                MvxBindingTrace.Trace(
+                MvxBindingLog.Trace(
                     "Unable to bind to source as it's null"
                     , _propertyName);
                 return;

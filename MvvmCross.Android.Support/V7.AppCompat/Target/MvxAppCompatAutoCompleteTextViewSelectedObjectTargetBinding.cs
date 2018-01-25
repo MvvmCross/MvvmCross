@@ -26,7 +26,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             var autoComplete = this.View;
             if (autoComplete == null)
             {
-                MvxBindingTrace.Trace(MvxTraceLevel.Error,
+                MvxBindingLog.Trace(MvxTraceLevel.Error,
                     "Error - autoComplete is null in MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding");
             }
         }

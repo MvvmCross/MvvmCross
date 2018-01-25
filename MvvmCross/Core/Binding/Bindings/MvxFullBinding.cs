@@ -121,7 +121,7 @@ namespace MvvmCross.Binding.Bindings
                 }
                 catch (Exception exception)
                 {
-                    MvxBindingTrace.Trace("Exception masked in UpdateTargetOnBind {0}", exception.ToLongString());
+                    MvxBindingLog.Trace("Exception masked in UpdateTargetOnBind {0}", exception.ToLongString());
                 }
             }
         }
@@ -150,7 +150,7 @@ namespace MvvmCross.Binding.Bindings
 
             if (_targetBinding == null)
             {
-                MvxBindingTrace.Warning("Failed to create target binding for {0}", _bindingDescription.ToString());
+                MvxBindingLog.Warning("Failed to create target binding for {0}", _bindingDescription.ToString());
                 _targetBinding = new MvxNullTargetBinding();
             }
 
@@ -186,7 +186,7 @@ namespace MvvmCross.Binding.Bindings
                 }
                 catch (Exception exception)
                 {
-                    MvxBindingTrace.Error(
+                    MvxBindingLog.Error(
                         "Problem seen during binding execution for {0} - problem {1}",
                         _bindingDescription.ToString(),
                         exception.ToLongString());
@@ -208,7 +208,7 @@ namespace MvvmCross.Binding.Bindings
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Error(
+                MvxBindingLog.Error(
                     "Problem seen during binding execution for {0} - problem {1}",
                     _bindingDescription.ToString(),
                     exception.ToLongString());

@@ -113,7 +113,7 @@ namespace MvvmCross.Binding.Droid.Views
             _itemsSource = value;
 
             if (_itemsSource != null && !(_itemsSource is IList))
-                MvxBindingTrace.Warning(
+                MvxBindingLog.Warning(
                   "You are currently binding to IEnumerable - " +
                   "this can be inefficient, especially for large collections. " +
                   "Binding to IList is more efficient.");
@@ -188,7 +188,7 @@ namespace MvvmCross.Binding.Droid.Views
         {
             if (ItemsSource == null)
             {
-                MvxBindingTrace.Error( "GetView called when ItemsSource is null");
+                MvxBindingLog.Error( "GetView called when ItemsSource is null");
                 return null;
             }
 

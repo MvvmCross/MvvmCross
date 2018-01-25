@@ -36,7 +36,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
 
             if (!PropertyInfo.CanRead)
             {
-                MvxBindingTrace.Error("GetValue ignored in binding - target property is writeonly");
+                MvxBindingLog.Error("GetValue ignored in binding - target property is writeonly");
                 return MvxBindingConstant.UnsetValue;
             }
 
@@ -58,13 +58,13 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
         {
             if (PropertyInfo == null)
             {
-                MvxBindingTrace.Warning("SetValue ignored in binding - source property {0} is missing", PropertyName);
+                MvxBindingLog.Warning("SetValue ignored in binding - source property {0} is missing", PropertyName);
                 return;
             }
 
             if (!PropertyInfo.CanWrite)
             {
-                MvxBindingTrace.Warning("SetValue ignored in binding - target property is readonly");
+                MvxBindingLog.Warning("SetValue ignored in binding - target property is readonly");
                 return;
             }
 
@@ -81,7 +81,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
             }
             catch (Exception exception)
             {
-                MvxBindingTrace.Error("SetValue failed with exception - " + exception.ToLongString());
+                MvxBindingLog.Error("SetValue failed with exception - " + exception.ToLongString());
             }
         }
     }

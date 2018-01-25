@@ -23,7 +23,7 @@ namespace MvvmCross.Binding.iOS.Target
         {
             if (target == null)
             {
-                MvxBindingTrace.Error(
+                MvxBindingLog.Error(
                                     "Error - UIActivityIndicatorView is null in MvxUIActivityIndicatorViewHiddenTargetBinding");
             }
         }

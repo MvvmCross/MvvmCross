@@ -31,7 +31,7 @@ namespace MvvmCross.Binding.Mac.Target
 
             if (datePicker == null)
             {
-                MvxBindingTrace.Error(
+                MvxBindingLog.Error(
                                       "Error - NSDatePicker is null in MvxBaseNSDatePickerTargetBinding");
                 return;
             }

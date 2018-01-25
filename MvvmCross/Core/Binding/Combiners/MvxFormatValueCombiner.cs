@@ -20,7 +20,7 @@ namespace MvvmCross.Binding.Combiners
 
             if (list.Count < 1)
             {
-                MvxBindingTrace.Warning("Format called with no parameters - will fail");
+                MvxBindingLog.Warning("Format called with no parameters - will fail");
                 value = MvxBindingConstant.DoNothing;
                 return true;
             }

@@ -24,7 +24,7 @@ namespace MvvmCross.Binding.Droid.Target
             var autoComplete = View;
             if (autoComplete == null)
             {
-                MvxBindingTrace.Error(
+                MvxBindingLog.Error(
                                       "Error - autoComplete is null in MvxAutoCompleteTextViewPartialTextTargetBinding");
             }
         }

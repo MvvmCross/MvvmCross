@@ -26,14 +26,14 @@ namespace MvvmCross.Binding.Droid.Target
         {
             if (value == null)
             {
-                MvxBindingTrace.Warning("Null value passed to ImageView binding");
+                MvxBindingLog.Warning("Null value passed to ImageView binding");
                 return null;
             }
 
             var stringValue = value as string;
             if (string.IsNullOrWhiteSpace(stringValue))
             {
-                MvxBindingTrace.Warning("Empty value passed to ImageView binding");
+                MvxBindingLog.Warning("Empty value passed to ImageView binding");
                 return null;
             }
 

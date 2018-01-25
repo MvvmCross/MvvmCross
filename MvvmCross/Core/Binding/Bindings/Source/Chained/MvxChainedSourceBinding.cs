@@ -1,4 +1,4 @@
-// MvxChainedSourceBinding.cs
+﻿// MvxChainedSourceBinding.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -111,7 +111,7 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
         {
             if (_currentChildBinding == null)
             {
-                MvxBindingTrace.Warning("SetValue ignored in binding - target property path missing");
+                MvxBindingLog.Warning("SetValue ignored in binding - target property path missing");
                 return;
             }
 
