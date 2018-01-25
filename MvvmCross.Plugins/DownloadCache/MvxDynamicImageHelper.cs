@@ -1,4 +1,4 @@
-// MvxDynamicImageHelper.cs
+﻿// MvxDynamicImageHelper.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.DownloadCache
@@ -156,7 +157,7 @@ namespace MvvmCross.Plugins.DownloadCache
                 }
                 catch (Exception ex)
                 {
-                    Mvx.Trace("failed to download image {0} : {1}", imageSource, ex.ToLongString());
+                    MvxPluginLog.Instance.Trace("failed to download image {0} : {1}", imageSource, ex.ToLongString());
                     error = true;
                 }
 
@@ -180,7 +181,7 @@ namespace MvvmCross.Plugins.DownloadCache
                 }
                 catch (Exception ex)
                 {
-                    Mvx.Error(ex.Message);
+                    MvxPluginLog.Instance.Error(ex.Message);
                 }
             }
         }
@@ -221,13 +222,13 @@ namespace MvvmCross.Plugins.DownloadCache
                 {
                     var localImage = await ImageFromLocalFileAsync(filePath).ConfigureAwait(false);
                     if (localImage == null)
-                        MvxTrace.Warning("Failed to load local image for filePath {0}", filePath);
+                        MvxPluginLog.Instance.Warn("Failed to load local image for filePath {0}", filePath);
 
                     FireImageChanged(localImage);
                 }
                 catch (Exception ex)
                 {
-                    Mvx.Error(ex.Message);
+                    MvxPluginLog.Instance.Error(ex.Message);
                 }
             }
         }

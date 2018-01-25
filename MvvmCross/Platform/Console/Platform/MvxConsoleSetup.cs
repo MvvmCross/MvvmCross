@@ -1,4 +1,4 @@
-// MvxConsoleSetup.cs
+﻿// MvxConsoleSetup.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -18,11 +18,6 @@ namespace MvvmCross.Console.Platform
     public abstract class MvxConsoleSetup
         : MvxSetup
     {
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new MvxDebugTrace();
-        }
-
         protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View");

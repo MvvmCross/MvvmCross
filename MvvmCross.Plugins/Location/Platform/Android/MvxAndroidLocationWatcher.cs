@@ -14,6 +14,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.Location.Droid
@@ -43,7 +44,7 @@ namespace MvvmCross.Plugins.Location.Droid
             _locationManager = (LocationManager)Context.GetSystemService(Context.LocationService);
             if (_locationManager == null)
             {
-                MvxTrace.Warning("Location Service Manager unavailable - returned null");
+                MvxPluginLog.Instance.Warn("Location Service Manager unavailable - returned null");
                 SendError(MvxLocationErrorCode.ServiceUnavailable);
                 return;
             }
@@ -54,7 +55,7 @@ namespace MvvmCross.Plugins.Location.Droid
             _bestProvider = _locationManager.GetBestProvider(criteria, true);
             if (_bestProvider == null)
             {
-                MvxTrace.Warning("Location Service Provider unavailable - returned null");
+                MvxPluginLog.Instance.Warn("Location Service Provider unavailable - returned null");
                 SendError(MvxLocationErrorCode.ServiceUnavailable);
                 return;
             }
@@ -129,14 +130,14 @@ namespace MvvmCross.Plugins.Location.Droid
         {
             if (androidLocation == null)
             {
-                MvxTrace.Trace("Android: Null location seen");
+                MvxPluginLog.Instance.Trace("Android: Null location seen");
                 return;
             }
 
             if (androidLocation.Latitude == double.MaxValue
                 || androidLocation.Longitude == double.MaxValue)
             {
-                MvxTrace.Trace("Android: Invalid location seen");
+                MvxPluginLog.Instance.Trace("Android: Invalid location seen");
                 return;
             }
 
@@ -151,7 +152,7 @@ namespace MvvmCross.Plugins.Location.Droid
             }
             catch (Exception exception)
             {
-                MvxTrace.Trace("Android: Exception seen in converting location " + exception.ToLongString());
+                MvxPluginLog.Instance.Trace("Android: Exception seen in converting location " + exception.ToLongString());
                 return;
             }
 

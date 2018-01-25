@@ -1,5 +1,6 @@
-using MvvmCross.Core.Navigation;
+﻿using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,11 @@ namespace Playground.Core.ViewModels
     public class TabsRootViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
+        private readonly IMvxLog _log;
 
-        public TabsRootViewModel(IMvxNavigationService navigationService)
+        public TabsRootViewModel(IMvxNavigationService navigationService, IMvxLogProvider logProvider)
         {
+            _log = logProvider.GetLogFor(nameof(TabsRootViewModel));
             _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
 
             ShowInitialViewModelsCommand = new MvxAsyncCommand(ShowInitialViewModels);
@@ -41,7 +44,7 @@ namespace Playground.Core.ViewModels
             {
                 if (_itemIndex == value) return;
                 _itemIndex = value;
-                MvxTrace.Trace("Tab item changed to {0}", _itemIndex.ToString());
+                _log.Trace("Tab item changed to {0}", _itemIndex.ToString());
                 RaisePropertyChanged(() => ItemIndex);
             }
         }

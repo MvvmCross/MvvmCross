@@ -118,8 +118,7 @@ namespace MvvmCross.Plugins.FieldBinding
         {
             if (_currentChildBinding == null)
             {
-                MvxBindingLog.Trace(MvxTraceLevel.Warning,
-                                      "SetValue ignored in binding - target property path missing");
+                MvxBindingLog.Warning("SetValue ignored in binding - target property path missing");
                 return;
             }
 

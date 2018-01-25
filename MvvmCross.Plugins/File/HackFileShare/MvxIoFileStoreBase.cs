@@ -1,4 +1,4 @@
-// MvxBaseFileStore.cs
+﻿// MvxBaseFileStore.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugins.File
@@ -102,7 +103,7 @@ namespace MvvmCross.Plugins.File
 
                 if (!System.IO.File.Exists(fullFrom))
                 {
-                    MvxTrace.Error("Error during file move {0} : {1}. File does not exist!", from, to);
+                    MvxPluginLog.Instance.Error("Error during file move {0} : {1}. File does not exist!", from, to);
                     return false;
                 }
 
@@ -123,7 +124,7 @@ namespace MvvmCross.Plugins.File
             }
             catch (Exception exception)
             {
-                MvxTrace.Error("Error during file move {0} : {1} : {2}", from, to, exception.ToLongString());
+                MvxPluginLog.Instance.Error("Error during file move {0} : {1} : {2}", from, to, exception.ToLongString());
                 return false;
             }
         }
@@ -137,7 +138,7 @@ namespace MvvmCross.Plugins.File
 
                 if (!System.IO.File.Exists(fullFrom))
                 {
-                    MvxTrace.Error("Error during file copy {0} : {1}. File does not exist!", from, to);
+                    MvxPluginLog.Instance.Error("Error during file copy {0} : {1}. File does not exist!", from, to);
                     return false;
                 }
 
@@ -146,7 +147,7 @@ namespace MvvmCross.Plugins.File
             }
             catch (Exception exception)
             {
-                MvxTrace.Error("Error during file copy {0} : {1} : {2}", from, to, exception.ToLongString());
+                MvxPluginLog.Instance.Error("Error during file copy {0} : {1} : {2}", from, to, exception.ToLongString());
                 return false;
             }
         }

@@ -6,6 +6,7 @@ using MvvmCross.iOS.Support.XamarinSidebar.Extensions;
 using MvvmCross.iOS.Views;
 using MvvmCross.iOS.Views.Presenters;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using SidebarNavigation;
 using UIKit;
@@ -71,7 +72,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
 
             if (leftSideMenu == null && rightSideMenu == null)
             {
-                Mvx.Trace(MvxTraceLevel.Warning, $"No sidemenu found. To use a sidemenu decorate the viewcontroller class with the 'MvxPanelPresentationAttribute' class and set the panel to 'Left' or 'Right'.");
+                MvxPluginLog.Instance.Warn($"No sidemenu found. To use a sidemenu decorate the viewcontroller class with the 'MvxPanelPresentationAttribute' class and set the panel to 'Left' or 'Right'.");
                 AttachNavigationController();
                 return;
             }
@@ -120,7 +121,7 @@ namespace MvvmCross.iOS.Support.XamarinSidebar.Views
 
             if (types != null && types.Length > 1)
             {
-                Mvx.Trace(MvxTraceLevel.Warning, $"Found more then one {location.ToString()} panel, using the first one in the array ({types[0].ToString()}).");
+                MvxPluginLog.Instance.Warn($"Found more then one {location.ToString()} panel, using the first one in the array ({types[0].ToString()}).");
             }
 
             return CreateInstance(types[0]) as UIViewController;

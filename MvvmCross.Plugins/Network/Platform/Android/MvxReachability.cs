@@ -12,6 +12,7 @@ using Java.Net;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Plugins.Network.Reachability;
 
 namespace MvvmCross.Plugins.Network.Droid
@@ -44,7 +45,7 @@ namespace MvvmCross.Plugins.Network.Droid
                 }
                 catch (Exception e)
                 {
-                    Mvx.Warning("Unable to get connected state - do you have ACCESS_NETWORK_STATE permission - error: {0}", e.ToLongString());
+                    MvxPluginLog.Instance.Warn("Unable to get connected state - do you have ACCESS_NETWORK_STATE permission - error: {0}", e.ToLongString());
                     return false;
                 }
             }
