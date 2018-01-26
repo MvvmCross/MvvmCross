@@ -5,21 +5,14 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#if WINDOWS_COMMON
-using Windows.UI.Xaml;
-
-namespace MvvmCross.BindingEx.WindowsCommon
-#endif
-
-#if WINDOWS_WPF
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Wpf
-#endif
 {
     public abstract class MvxBindingCreator : IMvxBindingCreator
     {

@@ -5,11 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com\
 
-#if WINDOWS_COMMON
-namespace MvvmCross.BindingEx.WindowsCommon
-#endif
-
-#if WINDOWS_WPF
 using System.ComponentModel;
 using System.Windows;
 using MvvmCross.Binding.Parse.Binding;
@@ -18,7 +13,6 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.IoC;
 
 namespace MvvmCross.Binding.Wpf
-#endif
 {
     public static class MvxDesignTimeChecker
     {
@@ -31,14 +25,8 @@ namespace MvvmCross.Binding.Wpf
 
             _checked = true;
 
-#if WINDOWS_WPF
             if (!(bool)DesignerProperties.IsInDesignModeProperty.GetMetadata(typeof(DependencyObject)).DefaultValue)
                 return;
-#endif
-#if WINDOWS_COMMON
-            if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
-                return;
-#endif
 
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)
             {

@@ -8,13 +8,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-#if WINDOWS_COMMON
-namespace MvvmCross.BindingEx.WindowsCommon
-#endif
-
-#if WINDOWS_WPF
 namespace MvvmCross.Binding.Wpf
-#endif
 {
     public interface IMvxWindowsAssemblyCache
     {

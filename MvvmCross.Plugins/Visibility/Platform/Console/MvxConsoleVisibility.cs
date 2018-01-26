@@ -5,6 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using MvvmCross.Platform;
 using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugins.Visibility.Console
