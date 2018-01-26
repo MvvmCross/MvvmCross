@@ -66,7 +66,7 @@ namespace MvvmCross.Core.Views
 
         public static IMvxViewModel ReflectionGetViewModel(this IMvxView view)
         {
-            var propertyInfo = view?.GetType().GetRuntimeProperty("ViewModel");
+            var propertyInfo = view?.GetType().GetFlattenedProperty("ViewModel");
 
             return (IMvxViewModel) propertyInfo?.GetGetMethod().Invoke(view, new object[] { });
         }

@@ -39,7 +39,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
 
         public IMvxTargetBinding CreateBinding(object target, string targetName)
         {
-            var targetPropertyInfo = target.GetType().GetRuntimeProperty(targetName);
+            var targetPropertyInfo = target.GetType().GetDeclaredProperty(targetName);
             if (targetPropertyInfo != null)
             {
                 try

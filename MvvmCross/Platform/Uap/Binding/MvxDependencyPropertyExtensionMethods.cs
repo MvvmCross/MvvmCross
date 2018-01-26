@@ -18,7 +18,7 @@ namespace MvvmCross.Binding.Uwp
             if (string.IsNullOrEmpty(name))
                 return null;
 
-            var property = type.GetRuntimeProperty(name);
+            var property = type.GetFlattenedProperty(name);
             return property;
         }
 

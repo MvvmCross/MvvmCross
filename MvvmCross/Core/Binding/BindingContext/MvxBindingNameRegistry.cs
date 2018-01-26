@@ -48,7 +48,7 @@ namespace MvvmCross.Binding.BindingContext
 
             if (includeInterfaces)
             {
-                var interfaces = type.GetTypeInfo().ImplementedInterfaces;
+                var interfaces = type.GetInterfaces();
                 foreach (var iface in interfaces)
                 {
                     if (TryDefaultFor(iface, out toReturn, false))

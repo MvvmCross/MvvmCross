@@ -44,7 +44,7 @@ namespace MvvmCross.Binding.Bindings.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            var setMethod = TargetPropertyInfo.SetMethod;
+            var setMethod = TargetPropertyInfo.GetSetMethod();
             setMethod.Invoke(target, new object[] { value });
         }
     }

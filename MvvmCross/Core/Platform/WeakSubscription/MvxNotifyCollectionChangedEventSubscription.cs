@@ -14,7 +14,7 @@ namespace MvvmCross.Platform.WeakSubscription
     public class MvxNotifyCollectionChangedEventSubscription
         : MvxWeakEventSubscription<INotifyCollectionChanged, NotifyCollectionChangedEventArgs>
     {
-        private static readonly EventInfo EventInfo = typeof(INotifyCollectionChanged).GetRuntimeEvent("CollectionChanged");
+        private static readonly EventInfo EventInfo = typeof(INotifyCollectionChanged).GetEvent("CollectionChanged");
 
         // This code ensures the CollectionChanged event is not stripped by Xamarin linker
         // see https://github.com/MvvmCross/MvvmCross/pull/453

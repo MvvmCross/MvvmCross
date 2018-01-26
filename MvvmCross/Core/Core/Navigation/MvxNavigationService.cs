@@ -134,7 +134,7 @@ namespace MvvmCross.Core.Navigation
                 ParameterValues = parameterValues?.SafeGetData()
             };
 
-            if(viewModelType.GetTypeInfo().ImplementedInterfaces.Contains(typeof(IMvxNavigationFacade)))
+            if(viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
             {
                 var facade = (IMvxNavigationFacade)Mvx.IocConstruct(viewModelType);
 
@@ -190,7 +190,7 @@ namespace MvvmCross.Core.Navigation
                 ParameterValues = parameterValues?.SafeGetData()
             };
 
-            if(viewModelType.GetTypeInfo().ImplementedInterfaces.Contains(typeof(IMvxNavigationFacade)))
+            if(viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
             {
                 var facade = (IMvxNavigationFacade)Mvx.IocConstruct(viewModelType);
 

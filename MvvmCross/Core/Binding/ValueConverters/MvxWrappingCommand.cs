@@ -16,7 +16,7 @@ namespace MvvmCross.Binding.ValueConverters
     public class MvxWrappingCommand
         : ICommand
     {
-        private static readonly EventInfo CanExecuteChangedEventInfo = typeof(ICommand).GetRuntimeEvent("CanExecuteChanged");
+        private static readonly EventInfo CanExecuteChangedEventInfo = typeof(ICommand).GetEvent("CanExecuteChanged");
 
         private readonly ICommand _wrapped;
         private readonly object _commandParameterOverride;

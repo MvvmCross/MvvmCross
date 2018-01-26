@@ -70,7 +70,7 @@ namespace MvvmCross.Core.Views
 
         public virtual MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
         {
-            if (viewType?.GetTypeInfo().ImplementedInterfaces.Contains(typeof(IMvxOverridePresentationAttribute)) ?? false)
+            if (viewType?.GetInterfaces().Contains(typeof(IMvxOverridePresentationAttribute)) ?? false)
             {
                 var viewInstance = Activator.CreateInstance(viewType) as IMvxOverridePresentationAttribute;
                 try

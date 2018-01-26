@@ -369,7 +369,7 @@ namespace MvvmCross.Platform.IoC
 
         public virtual object IoCConstruct(Type type)
         {
-            var constructors = type.GetTypeInfo().DeclaredConstructors;
+            var constructors = type.GetDeclaredConstructors();
             var firstConstructor = constructors.FirstOrDefault();
 
             if (firstConstructor == null)

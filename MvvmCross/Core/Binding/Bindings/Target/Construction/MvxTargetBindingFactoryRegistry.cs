@@ -45,7 +45,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
                 return false;
             }
 
-            var targetPropertyInfo = target.GetType().GetRuntimeProperty(targetName);
+            var targetPropertyInfo = target.GetType().GetDeclaredProperty(targetName);
             if (targetPropertyInfo != null
                 && targetPropertyInfo.CanWrite)
             {
@@ -53,7 +53,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
                 return true;
             }
 
-            var targetEventInfo = target.GetType().GetRuntimeEvent(targetName);
+            var targetEventInfo = target.GetType().GetEvent(targetName);
             if (targetEventInfo != null)
             {
                 // we only handle EventHandler's here
@@ -116,7 +116,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             if (baseType != null)
                 factory = FindSpecificFactory(baseType, name);
             if (factory != null) return factory;
-            var implementedInterfaces = type.GetTypeInfo().ImplementedInterfaces;
+            var implementedInterfaces = type.GetInterfaces();
             foreach (var implementedInterface in implementedInterfaces)
             {
                 factory = FindSpecificFactory(implementedInterface, name);

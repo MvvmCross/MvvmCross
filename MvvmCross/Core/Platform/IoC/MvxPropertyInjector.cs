@@ -60,7 +60,7 @@ namespace MvvmCross.Platform.IoC
         protected virtual IEnumerable<PropertyInfo> FindInjectableProperties(Type type, IMvxPropertyInjectorOptions options)
         {
             var injectableProperties = type
-                .GetRuntimeProperties()
+                .GetFlattenedProperties()
                 .Where(p => p.PropertyType.GetTypeInfo().IsInterface)
                 .Where(p => p.IsConventional())
                 .Where(p => p.CanWrite);

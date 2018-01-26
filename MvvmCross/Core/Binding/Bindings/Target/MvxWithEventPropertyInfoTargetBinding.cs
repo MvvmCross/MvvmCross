@@ -86,7 +86,7 @@ namespace MvvmCross.Binding.Bindings.Target
         private EventInfo GetNamedPropertyChangedEvent(Type viewType, string propertyName)
         {
             var eventName = propertyName + "Changed";
-            var eventInfo = viewType.GetRuntimeEvent(eventName);
+            var eventInfo = viewType.GetEvent(eventName);
 
             if (eventInfo == null)
                 return null;
@@ -107,7 +107,7 @@ namespace MvvmCross.Binding.Bindings.Target
         private EventInfo GetPropertyChangedEvent(Type viewType)
         {
             var eventName = "PropertyChanged";
-            var eventInfo = viewType.GetRuntimeEvent(eventName);
+            var eventInfo = viewType.GetEvent(eventName);
 
             if (eventInfo == null)
                 return null;

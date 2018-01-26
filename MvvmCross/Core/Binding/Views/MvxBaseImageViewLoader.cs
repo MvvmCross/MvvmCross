@@ -31,7 +31,7 @@ namespace MvvmCross.Binding.Views
                     "Unable to resolve the image helper - have you referenced and called EnsureLoaded on the DownloadCache plugin?");
                 return;
             }
-            var eventInfo = _imageHelper.GetType().GetRuntimeEvent("ImageChanged");
+            var eventInfo = _imageHelper.GetType().GetEvent("ImageChanged");
             _subscription = eventInfo.WeakSubscribe<TImage>(_imageHelper, ImageHelperOnImageChanged);
         }
 

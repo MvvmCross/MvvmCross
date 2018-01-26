@@ -19,6 +19,11 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.1'">
+    <Compile Include="Platform\Netstandard1.1\**\*.cs" />
+  </ItemGroup>
+  
+  <ItemGroup Condition=" '$(TargetFramework)' != 'netstandard1.1'">
+    <Compile Include="Platform\ReflectionExtensions.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">

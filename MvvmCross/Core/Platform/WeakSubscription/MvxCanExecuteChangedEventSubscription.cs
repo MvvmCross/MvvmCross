@@ -14,7 +14,7 @@ namespace MvvmCross.Platform.WeakSubscription
     public class MvxCanExecuteChangedEventSubscription
         : MvxWeakEventSubscription<ICommand, EventArgs>
     {
-        private static readonly EventInfo CanExecuteChangedEventInfo = typeof(ICommand).GetRuntimeEvent("CanExecuteChanged");
+        private static readonly EventInfo CanExecuteChangedEventInfo = typeof(ICommand).GetEvent("CanExecuteChanged");
 
         public MvxCanExecuteChangedEventSubscription(ICommand source,
                                                     EventHandler<EventArgs> eventHandler)

@@ -42,7 +42,7 @@ namespace MvvmCross.Core.ViewModels
             var commandMethods =
                 from method in
                     owner.GetType()
-                        .GetRuntimeMethods()
+                        .GetFlattenedMethods()
                 let parameterCount = method.GetParameters().Count()
                 where parameterCount <= 1
                 let commandName = GetCommandNameOrNull(method)
@@ -74,7 +74,7 @@ namespace MvvmCross.Core.ViewModels
             var canExecuteName = CanExecuteProperyName(commandMethod);
             if (string.IsNullOrEmpty(canExecuteName))
                 return null;
-            var canExecute = type.GetRuntimeProperty(canExecuteName);
+            var canExecute = type.GetFlattenedProperty(canExecuteName);
             if (canExecute == null)
                 return null;
             if (canExecute.PropertyType != typeof(bool))

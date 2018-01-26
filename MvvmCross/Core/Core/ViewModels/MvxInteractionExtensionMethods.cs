@@ -17,13 +17,13 @@ namespace MvvmCross.Core.ViewModels
     {
         public static IDisposable WeakSubscribe(this IMvxInteraction interaction, EventHandler<EventArgs> action)
         {
-            var eventInfo = interaction.GetType().GetRuntimeEvent("Requested");
+            var eventInfo = interaction.GetType().GetEvent("Requested");
             return eventInfo.WeakSubscribe(interaction, action);
         }
 
         public static MvxValueEventSubscription<T> WeakSubscribe<T>(this IMvxInteraction<T> interaction, EventHandler<MvxValueEventArgs<T>> action)
         {
-            var eventInfo = interaction.GetType().GetRuntimeEvent("Requested");
+            var eventInfo = interaction.GetType().GetEvent("Requested");
             return eventInfo.WeakSubscribe<T>(interaction, action);
         }
 

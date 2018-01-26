@@ -17,7 +17,7 @@ namespace MvvmCross.Core.ViewModels
         {
             var methods = viewModel
                 .GetType()
-                .GetRuntimeMethods()
+                .GetFlattenedMethods()
                 .Where(m => m.Name == methodName)
                 .Where(m => !m.IsAbstract)
                 .ToList();
@@ -63,7 +63,7 @@ namespace MvvmCross.Core.ViewModels
         {
             var toReturn = new MvxBundle();
             var methods = viewModel.GetType()
-                                   .GetRuntimeMethods()
+                                   .GetFlattenedMethods()
                                    .Where(m => m.Name == "SaveState")
                                    .Where(m => m.ReturnType != typeof(void))
                                    .Where(m => !m.GetParameters().Any());

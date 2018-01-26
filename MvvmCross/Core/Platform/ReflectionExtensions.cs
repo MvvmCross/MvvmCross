@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace MvvmCross.Platform
 {
-    public static class ReflectionExtensions
+    public static partial class ReflectionExtensions
     {
         public static Attribute[] GetCustomAttributes(this Type type, Type attributeType, bool inherit)
         {
@@ -14,7 +14,7 @@ namespace MvvmCross.Platform
 
         public static bool IsInstanceOfType(this Type type, object obj)
         {
-            return obj != null && (type.GetTypeInfo().IsAssignableFrom(obj.GetType().GetTypeInfo()) || obj.IsMarshalByRefObject());
+            return obj != null && (type.IsAssignableFrom(obj.GetType()) || obj.IsMarshalByRefObject());
         }
 
         private static bool IsMarshalByRefObject(this object obj)

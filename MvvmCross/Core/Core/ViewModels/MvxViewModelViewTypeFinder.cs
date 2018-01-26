@@ -72,7 +72,7 @@ namespace MvvmCross.Core.ViewModels
         protected virtual Type LookupAssociatedConcreteViewModelType(Type candidateType)
         {
             var viewModelPropertyInfo = candidateType
-                .GetRuntimeProperties()
+                .GetFlattenedProperties()
                 .FirstOrDefault(x => x.Name == "ViewModel"
                                      && !x.PropertyType.GetTypeInfo().IsInterface
                                      && !x.PropertyType.GetTypeInfo().IsAbstract);
@@ -88,7 +88,7 @@ namespace MvvmCross.Core.ViewModels
             if (candidateType.GetTypeInfo().IsAbstract)
                 return false;
 
-            if (!typeof(IMvxView).GetTypeInfo().IsAssignableFrom(candidateType.GetTypeInfo()))
+            if (!typeof(IMvxView).IsAssignableFrom(candidateType))
                 return false;
 
             return true;

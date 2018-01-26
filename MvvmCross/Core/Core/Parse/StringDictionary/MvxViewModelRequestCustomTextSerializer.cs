@@ -50,7 +50,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
             if (type == typeof(MvxViewModelRequest))
                 return DeserializeViewModelRequest(inputText);
 
-            if (typeof(IDictionary<string, string>).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
+            if (typeof(IDictionary<string, string>).IsAssignableFrom(type))
                 return DeserializeStringDictionary(inputText);
 
             throw new MvxException("This serializer only knows about MvxViewModelRequest and IDictionary<string,string>");

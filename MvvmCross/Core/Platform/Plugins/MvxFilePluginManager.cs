@@ -36,7 +36,7 @@ namespace MvvmCross.Platform.Plugins
         protected override IMvxPlugin FindPlugin(Type toLoad)
         {
             var assembly = LoadAssembly(toLoad);
-            var pluginType = assembly.ExceptionSafeGetTypes().FirstOrDefault(x => typeof(IMvxPlugin).GetTypeInfo().IsAssignableFrom(x.GetTypeInfo()));
+            var pluginType = assembly.ExceptionSafeGetTypes().FirstOrDefault(x => typeof(IMvxPlugin).IsAssignableFrom(x));
             if (pluginType == null)
             {
                 throw new MvxException("Could not find plugin type in assembly");

@@ -36,7 +36,7 @@ namespace MvvmCross.Binding.Binders
             var pairs = from field in type.GetRuntimeFields()
                         where !field.IsStatic
                         where field.IsPublic
-                        where typeof(T).GetTypeInfo().IsAssignableFrom(field.FieldType.GetTypeInfo())
+                        where typeof(T).IsAssignableFrom(field.FieldType)
                         let converter = field.GetValue(instance) as T
                         where converter != null
                         select new
@@ -56,7 +56,7 @@ namespace MvvmCross.Binding.Binders
             var pairs = from field in type.GetRuntimeFields()
                         where field.IsStatic
                         where field.IsPublic
-                        where typeof(T).GetTypeInfo().IsAssignableFrom(field.FieldType.GetTypeInfo())
+                        where typeof(T).IsAssignableFrom(field.FieldType)
                         let converter = field.GetValue(null) as T
                         where converter != null
                         select new
@@ -76,7 +76,7 @@ namespace MvvmCross.Binding.Binders
             var pairs = from type in assembly.ExceptionSafeGetTypes()
                         where type.GetTypeInfo().IsPublic
                         where !type.GetTypeInfo().IsAbstract
-                        where typeof(T).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo())
+                        where typeof(T).IsAssignableFrom(type)
                         let name = FindName(type)
                         where !string.IsNullOrEmpty(name)
                         where type.IsConventional()

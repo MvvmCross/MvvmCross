@@ -105,13 +105,13 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
             
             //Try top level properties first
             //This extension method "GetProperty" always uses the DeclaredOnly flag
-            pi = sourceType.GetTypeInfo().GetDeclaredProperty(propertyName);
+            pi = sourceType.GetDeclaredProperty(propertyName);
 
             if (pi == null)
             {
                 //Try base properties. 
                 //This extension method "GetProperty" uses runtime properties instead of simple non declared properties (ie: in hierarchy)
-                pi = sourceType.GetRuntimeProperty(propertyName);
+                pi = sourceType.GetFlattenedProperty(propertyName);
             }
 
             PropertyInfoCache.TryAdd(key, pi);

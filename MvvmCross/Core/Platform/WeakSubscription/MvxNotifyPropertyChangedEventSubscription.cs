@@ -14,7 +14,7 @@ namespace MvvmCross.Platform.WeakSubscription
     public class MvxNotifyPropertyChangedEventSubscription
         : MvxWeakEventSubscription<INotifyPropertyChanged, PropertyChangedEventArgs>
     {
-        private static readonly EventInfo PropertyChangedEventInfo = typeof(INotifyPropertyChanged).GetRuntimeEvent("PropertyChanged");
+        private static readonly EventInfo PropertyChangedEventInfo = typeof(INotifyPropertyChanged).GetEvent("PropertyChanged");
 
         // This code ensures the PropertyChanged event is not stripped by Xamarin linker
         // see https://github.com/MvvmCross/MvvmCross/pull/453

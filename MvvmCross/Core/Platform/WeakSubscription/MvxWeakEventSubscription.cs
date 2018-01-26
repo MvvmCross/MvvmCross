@@ -31,7 +31,7 @@ namespace MvvmCross.Platform.WeakSubscription
             TSource source,
             string sourceEventName,
             EventHandler<TEventArgs> targetEventHandler)
-            : this(source, typeof(TSource).GetRuntimeEvent(sourceEventName), targetEventHandler)
+            : this(source, typeof(TSource).GetEvent(sourceEventName), targetEventHandler)
         {
         }
 
@@ -143,7 +143,7 @@ namespace MvvmCross.Platform.WeakSubscription
             TSource source,
             string sourceEventName,
             EventHandler targetEventHandler)
-            : this(source, typeof(TSource).GetRuntimeEvent(sourceEventName), targetEventHandler)
+            : this(source, typeof(TSource).GetEvent(sourceEventName), targetEventHandler)
         {
         }
 
