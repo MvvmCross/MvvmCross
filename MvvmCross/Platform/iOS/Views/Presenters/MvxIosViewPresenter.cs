@@ -276,7 +276,7 @@ namespace MvvmCross.iOS.Views.Presenters
                 attribute);
         }
 
-        public virtual void ShowModalViewController(
+        protected virtual void ShowModalViewController(
             UIViewController viewController,
             MvxModalPresentationAttribute attribute,
             MvxViewModelRequest request)
@@ -468,7 +468,7 @@ namespace MvvmCross.iOS.Views.Presenters
                 TabBarViewController = tabBarController;
         }
 
-        public void CloseMasterNavigationController()
+        protected virtual void CloseMasterNavigationController()
         {
             if (MasterNavigationController == null)
                 return;
@@ -496,7 +496,7 @@ namespace MvvmCross.iOS.Views.Presenters
             ModalViewControllers.Remove(modalController);
         }
 
-        public void CloseModalViewControllers()
+        public virtual void CloseModalViewControllers()
         {
             while (ModalViewControllers.Any())
             {
@@ -504,7 +504,7 @@ namespace MvvmCross.iOS.Views.Presenters
             }
         }
 
-        public void CloseTabBarViewController()
+        public virtual void CloseTabBarViewController()
         {
             if (TabBarViewController == null)
                 return;
@@ -518,7 +518,7 @@ namespace MvvmCross.iOS.Views.Presenters
             TabBarViewController = null;
         }
 
-        public void CloseSplitViewController()
+        protected virtual void CloseSplitViewController()
         {
             if (SplitViewController == null)
                 return;
@@ -536,6 +536,11 @@ namespace MvvmCross.iOS.Views.Presenters
         {
             foreach (var v in _window.Subviews)
                 v.RemoveFromSuperview();
+        }
+
+        public virtual void ShowModalViewController(UIViewController viewController, bool animated)
+        {
+            ShowModalViewController(viewController, new MvxModalPresentationAttribute { Animated = animated }, null);
         }
 
         protected virtual void SetWindowRootViewController(UIViewController controller, MvxRootPresentationAttribute attribute = null)

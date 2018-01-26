@@ -25,12 +25,12 @@ namespace MvvmCross.Plugins.Email.iOS
         : MvxIosTask
         , IMvxComposeEmailTaskEx
     {
-        private readonly MvxIosViewPresenter _viewPresenter;
+        private readonly IMvxIosViewPresenter _viewPresenter;
         private MFMailComposeViewController _mail;
 
         public MvxComposeEmailTask()
         {
-            _viewPresenter = Mvx.Resolve<IMvxIosViewPresenter>() as MvxIosViewPresenter;
+            _viewPresenter = Mvx.Resolve<IMvxIosViewPresenter>();
         }
 
         public void ComposeEmail(string to, string cc = null, string subject = null, string body = null,
@@ -71,7 +71,7 @@ namespace MvvmCross.Plugins.Email.iOS
             }
             _mail.Finished += HandleMailFinished;
 
-            _viewPresenter.ShowModalViewController(_mail, new MvxModalPresentationAttribute() { Animated = true }, null);
+            _viewPresenter.ShowModalViewController(_mail, true);
         }
 
         public bool CanSendEmail => MFMailComposeViewController.CanSendMail;

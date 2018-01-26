@@ -26,7 +26,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
         : MvxIosTask, IMvxPictureChooserTask
     {
         private readonly UIImagePickerController _picker;
-        private readonly MvxIosViewPresenter _viewPresenter;
+        private readonly IMvxIosViewPresenter _viewPresenter;
         private bool _currentlyActive;
         private int _maxPixelDimension;
         private int _percentQuality;
@@ -35,7 +35,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
 
         public MvxImagePickerTask()
         {
-            _viewPresenter = Mvx.Resolve<IMvxIosViewPresenter>() as MvxIosViewPresenter;
+            _viewPresenter = Mvx.Resolve<IMvxIosViewPresenter>();
             _picker = new UIImagePickerController
             {
                 //CameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Photo,
@@ -93,7 +93,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
             _pictureAvailable = pictureAvailable;
             _assumeCancelled = assumeCancelled;
 
-            _viewPresenter.ShowModalViewController(_picker, new MvxModalPresentationAttribute() { Animated = true }, null);
+            _viewPresenter.ShowModalViewController(_picker, true);
         }
 
         private void HandleImagePick(UIImage image, string name)
