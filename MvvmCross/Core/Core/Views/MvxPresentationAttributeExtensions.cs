@@ -10,7 +10,7 @@ namespace MvvmCross.Core.Views
         public static bool HasBasePresentationAttribute(this Type candidateType)
         {
             var attributes = candidateType.GetCustomAttributes(typeof(MvxBasePresentationAttribute), true);
-            return attributes.Length > 0;
+            return attributes.Any();
         }
 
         public static IEnumerable<MvxBasePresentationAttribute> GetBasePresentationAttributes(this Type fromViewType)
