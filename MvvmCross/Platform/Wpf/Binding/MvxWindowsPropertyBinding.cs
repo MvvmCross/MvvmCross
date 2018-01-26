@@ -5,13 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#if WINDOWS_COMMON
-namespace MvvmCross.BindingEx.WindowsCommon
-#endif
-
-#if WINDOWS_WPF
 namespace MvvmCross.Binding.Wpf
-#endif
 {
     internal static class MvxWindowsPropertyBinding
     {

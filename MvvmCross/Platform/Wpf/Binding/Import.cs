@@ -12,13 +12,7 @@ using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.IoC;
 
-#if WINDOWS_COMMON
-namespace MvvmCross.BindingEx.WindowsCommon
-#endif
-
-#if WINDOWS_WPF
 namespace MvvmCross.Binding.Wpf
-#endif
 {
     public class Import
     {
@@ -40,11 +34,7 @@ namespace MvvmCross.Binding.Wpf
                 _from = value;
                 if (_from != null)
                 {
-#if WINDOWS_COMMON
-                    RegisterAssembly(_from.GetType().GetTypeInfo().Assembly);
-#else
                     RegisterAssembly(_from.GetType().Assembly);
-#endif
                 }
             }
         }

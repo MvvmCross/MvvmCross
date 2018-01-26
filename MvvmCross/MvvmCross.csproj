@@ -24,7 +24,10 @@
   
   <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
     <Compile Include="Platform\Net461\**\*.cs" />
+    <Compile Include="Platform\Wpf\**\*.cs" />
+    <Compile Include="Platform\Console\**\*.cs" />
     <PackageReference Include="System.Console" Version="4.3.0" />
+    <PackageReference Include="Expression.Blend.Sdk.WPF" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">

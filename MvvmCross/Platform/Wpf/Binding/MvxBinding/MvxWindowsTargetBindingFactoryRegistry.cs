@@ -10,16 +10,7 @@ using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Wpf.MvxBinding.Target;
 using MvvmCross.Platform.Platform;
 
-#if WINDOWS_COMMON
-using MvvmCross.BindingEx.WindowsCommon.MvxBinding.Target;
-
-namespace MvvmCross.BindingEx.WindowsCommon.MvxBinding
-#endif
-
-#if WINDOWS_WPF
-
 namespace MvvmCross.Binding.Wpf.MvxBinding
-#endif
 {
     public class MvxWindowsTargetBindingFactoryRegistry : MvxTargetBindingFactoryRegistry
     {

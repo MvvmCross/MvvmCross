@@ -5,13 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#if WINDOWS_COMMON
-using Windows.UI.Xaml;
-
-namespace MvvmCross.BindingEx.WindowsCommon
-#endif
-
-#if WINDOWS_WPF
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -19,12 +12,9 @@ using System.Reflection;
 using System.Windows;
 
 namespace MvvmCross.Binding.Wpf
-#endif
 {
     public static class MvxDependencyPropertyExtensionMethods
     {
-#if WINDOWS_WPF
-
         public static TypeConverter TypeConverter(this Type type)
         {
             var typeConverter =
@@ -70,49 +60,6 @@ namespace MvvmCross.Binding.Wpf
 
             return null;
         }
-
-#endif
-
-#if WINDOWS_COMMON
-
-        public static PropertyInfo FindActualProperty(this Type type, string name)
-        {
-            if (string.IsNullOrEmpty(name))
-                return null;
-
-            var property = type.GetRuntimeProperty(name);
-            return property;
-        }
-
-        private static PropertyInfo FindDependencyPropertyInfo(Type type, string dependencyPropertyName)
-        {
-            if (string.IsNullOrEmpty(dependencyPropertyName))
-                return null;
-
-            if (!EnsureIsDependencyPropertyName(ref dependencyPropertyName))
-                return null;
-
-            var typeInfo = type.GetTypeInfo();
-            while (typeInfo != null)
-            {
-                var propertyInfo = typeInfo.GetDeclaredProperty(dependencyPropertyName);
-                if (propertyInfo != null)
-                {
-                    return propertyInfo;
-                }
-
-                if (typeInfo.BaseType == null)
-                {
-                    return null;
-                }
-
-                typeInfo = typeInfo.BaseType.GetTypeInfo();
-            }
-
-            return null;
-        }
-
-#endif
 
         public static DependencyProperty FindDependencyProperty(this Type type, string name)
         {

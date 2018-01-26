@@ -1,4 +1,4 @@
-// MvxWpfViewPresenter.cs
+﻿// MvxWpfViewPresenter.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -8,6 +8,7 @@
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Wpf.Views.Presenters.Attributes;
 using System;

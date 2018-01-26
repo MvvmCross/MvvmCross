@@ -5,17 +5,6 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-#if WINDOWS_COMMON
-using MvvmCross.Platform.WindowsCommon.Converters;
-
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media;
-
-namespace MvvmCross.BindingEx.WindowsCommon.WindowsBinding
-#endif
-
-#if WINDOWS_WPF
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -25,10 +14,10 @@ using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Wpf.Converters;
 
 namespace MvvmCross.Binding.Wpf.WindowsBinding
-#endif
 {
     public class MvxWindowsBindingCreator : MvxBindingCreator
     {
@@ -55,20 +44,12 @@ namespace MvvmCross.Binding.Wpf.WindowsBinding
                 return;
             }
 
-#if WINDOWS_WPF
             var newBinding = new System.Windows.Data.Binding
-#endif
-#if WINDOWS_COMMON
-            var newBinding = new Windows.UI.Xaml.Data.Binding
-#endif
             {
                 Path = new PropertyPath(sourceStep.SourcePropertyPath),
                 Mode = ConvertMode(bindingDescription.Mode, property?.PropertyType ?? typeof(object)),
                 Converter = GetConverter(sourceStep.Converter),
                 ConverterParameter = sourceStep.ConverterParameter,
-#if WINDOWS_COMMON
-                FallbackValue = sourceStep.FallbackValue
-#endif
             };
 
             BindingOperations.SetBinding(attachedObject, dependencyProperty, newBinding);
