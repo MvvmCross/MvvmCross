@@ -208,9 +208,6 @@ namespace MvvmCross.Binding.Droid
             registry.AddOrOverwrite(typeof(MvxListView), nameof(MvxListView.ItemsSource));
             registry.AddOrOverwrite(typeof(MvxLinearLayout), nameof(MvxLinearLayout.ItemsSource));
             registry.AddOrOverwrite(typeof(MvxGridView), nameof(MvxGridView.ItemsSource));
-            registry.AddOrOverwrite(typeof(MvxRelativeLayout), nameof(MvxRelativeLayout.ItemsSource));
-            registry.AddOrOverwrite(typeof(MvxFrameLayout), nameof(MvxFrameLayout.ItemsSource));
-            registry.AddOrOverwrite(typeof(MvxTableLayout), nameof(MvxTableLayout.ItemsSource));
             registry.AddOrOverwrite(typeof(MvxFrameControl), nameof(MvxFrameControl.DataContext));
             registry.AddOrOverwrite(typeof(MvxImageView), nameof(MvxImageView.ImageUrl));
             registry.AddOrOverwrite(typeof(MvxDatePicker), nameof(MvxDatePicker.Value));
