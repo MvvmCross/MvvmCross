@@ -18,7 +18,7 @@ namespace Playground.Core
 
             Mvx.RegisterSingleton<IMvxTextProvider>(new TextProviderBuilder().TextProvider);
 
-            RegisterNavigationServiceAppStart<RootViewModel>();
+            RegisterAppStart<RootViewModel>();
         }
     }
 }
