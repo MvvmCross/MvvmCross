@@ -481,19 +481,19 @@ namespace MvvmCross.iOS.Views.Presenters
             MasterNavigationController = null;
         }
 
-        public virtual void CloseModalViewController(UIViewController modalController)
+        public virtual void CloseModalViewController(UIViewController viewController)
         {
-            if (modalController == null)
+            if (viewController == null)
                 return;
 
-            if (modalController is UINavigationController modalNavController)
+            if (viewController is UINavigationController modalNavController)
             {
                 foreach (var item in modalNavController.ViewControllers)
                     item.DidMoveToParentViewController(null);
             }
 
-            modalController.DismissViewController(true, null);
-            ModalViewControllers.Remove(modalController);
+            viewController.DismissViewController(true, null);
+            ModalViewControllers.Remove(viewController);
         }
 
         public virtual void CloseModalViewControllers()
@@ -530,6 +530,18 @@ namespace MvvmCross.iOS.Views.Presenters
                     item.DidMoveToParentViewController(null);
             }
             SplitViewController = null;
+        }
+
+        public virtual UIViewController GetTopViewController()
+        {
+            var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
+            do {
+                if (vc.PresentedViewController != null)
+                    vc = vc.PresentedViewController;
+
+            } while (vc.PresentedViewController != null);
+
+            return vc;
         }
 
         protected void RemoveWindowSubviews()
