@@ -87,7 +87,7 @@ namespace MvvmCross.Plugins.Email.iOS
             }
 
             uiViewController.DismissViewController(true, () => { });
-            _viewPresenter.CloseModalViewControllers();
+            _viewPresenter.CloseModalViewController(_viewPresenter.GetTopViewController());
         }
     }
 }

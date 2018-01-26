@@ -14,6 +14,10 @@ namespace MvvmCross.iOS.Views.Presenters
     {
         void ShowModalViewController(UIViewController viewController, bool animated);
 
+        void CloseModalViewController(UIViewController viewController);
+
         void CloseModalViewControllers();
+
+        UIViewController GetTopViewController();
     }
 }

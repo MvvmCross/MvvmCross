@@ -122,7 +122,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
             }
 
             _picker.DismissViewController(true, () => { });
-            _viewPresenter.CloseModalViewControllers();
+            _viewPresenter.CloseModalViewController(_viewPresenter.GetTopViewController());
         }
 
         private void Picker_FinishedPickingMedia(object sender, UIImagePickerMediaPickedEventArgs e)
@@ -144,7 +144,7 @@ namespace MvvmCross.Plugins.PictureChooser.iOS
             ClearCurrentlyActive();
             _assumeCancelled?.Invoke();
             _picker.DismissViewController(true, () => { });
-            _viewPresenter.CloseModalViewControllers();
+            _viewPresenter.CloseModalViewController(_viewPresenter.GetTopViewController());
         }
 
         private void SetCurrentlyActive()

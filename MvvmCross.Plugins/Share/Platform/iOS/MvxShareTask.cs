@@ -52,7 +52,7 @@ namespace MvvmCross.Plugins.Share.iOS
 
         private void TWTweetComposeHandler(TWTweetComposeViewControllerResult result)
         {
-            _viewPresenter.CloseModalViewControllers();
+            _viewPresenter.CloseModalViewController(_viewPresenter.GetTopViewController());
             _tweet = null;
         }
     }
