@@ -18,24 +18,26 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.4.1" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.1'">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
+    <Compile Include="Platform\Netstandard\**\*.cs" />
     <Compile Include="Platform\Netstandard1.1\**\*.cs" />
   </ItemGroup>
   
-  <ItemGroup Condition=" '$(TargetFramework)' != 'netstandard1.1'">
-    <Compile Include="Platform\ReflectionExtensions.cs" />
+  <ItemGroup Condition=" '$(TargetFramework)' != 'netstandard1.1' ">
+    <Compile Include="Platform\Shared2.0\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <Compile Include="Platform\Netstandard\**\*.cs" />
+    <Compile Include="Platform\Netstandard2.0\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net461' ">
     <Compile Include="Platform\Net461\**\*.cs" />
     <PackageReference Include="System.Console" Version="4.3.0" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">
+  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0' and '$(TargetFramework)' != 'netstandard1.1' ">
     <Compile Include="Platform\Shared\**\*.cs" />
   </ItemGroup>
 
