@@ -6,11 +6,14 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using MvvmCross.Core.Views;
-using MvvmCross.Platform.iOS.Views;
+using UIKit;
 
 namespace MvvmCross.iOS.Views.Presenters
 {
     public interface IMvxIosViewPresenter : IMvxViewPresenter, IMvxCanCreateIosView
     {
+        void ShowModalViewController(UIViewController viewController, bool animated);
+
+        void CloseModalViewControllers();
     }
 }

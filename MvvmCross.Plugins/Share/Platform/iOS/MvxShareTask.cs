@@ -19,12 +19,12 @@ namespace MvvmCross.Plugins.Share.iOS
 	public class MvxShareTask
         : MvxIosTask, IMvxShareTask
     {
-        private readonly MvxIosViewPresenter _viewPresenter;
+        private readonly IMvxIosViewPresenter _viewPresenter;
         private TWTweetComposeViewController _tweet;
 
         public MvxShareTask()
         {
-            _viewPresenter = Mvx.Resolve<IMvxIosViewPresenter>() as MvxIosViewPresenter;
+            _viewPresenter = Mvx.Resolve<IMvxIosViewPresenter>();
         }
 
         public void ShareShort(string message)
@@ -35,7 +35,7 @@ namespace MvvmCross.Plugins.Share.iOS
             _tweet = new TWTweetComposeViewController();
             _tweet.SetInitialText(message);
             _tweet.CompletionHandler = TWTweetComposeHandler;
-            _viewPresenter.ShowModalViewController(_tweet, new MvxModalPresentationAttribute() { Animated = true }, null);
+            _viewPresenter.ShowModalViewController(_tweet, true);
         }
 
         public void ShareLink(string title, string message, string link)
@@ -47,7 +47,7 @@ namespace MvvmCross.Plugins.Share.iOS
             _tweet.SetInitialText(title + " " + message);
             _tweet.AddUrl(new NSUrl(link));
             _tweet.CompletionHandler = TWTweetComposeHandler;
-            _viewPresenter.ShowModalViewController(_tweet, new MvxModalPresentationAttribute() { Animated = true }, null);
+            _viewPresenter.ShowModalViewController(_tweet, true);
         }
 
         private void TWTweetComposeHandler(TWTweetComposeViewControllerResult result)
