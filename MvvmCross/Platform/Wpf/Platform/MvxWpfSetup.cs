@@ -22,7 +22,7 @@ namespace MvvmCross.Wpf.Platform
         : MvxSetup
     {
         private readonly Dispatcher _uiThreadDispatcher;
-        private readonly IMvxWpfViewPresenter _presenter;
+        private IMvxWpfViewPresenter _presenter;
 
         protected MvxWpfSetup(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter)
         {
