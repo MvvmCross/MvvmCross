@@ -1,0 +1,16 @@
+<Project>
+  <PropertyGroup>
+    <Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
+    <Authors>.NET Foundation and Contributors</Authors>
+    <Owners>MvvmCross;slodge;cheesebaron;martijn00</Owners>
+    <Product>$(AssemblyName) ($(TargetFramework))</Product>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Version>6.0.0</Version>
+
+    <LangVersion>latest</LangVersion>
+    <NoWarn>$(NoWarn);1591;1701;1702;1705</NoWarn>
+
+    <Platform>AnyCPU</Platform>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+</Project>
