@@ -16,7 +16,7 @@
     <Version>6.0.0</Version>
 
     <LangVersion>latest</LangVersion>
-    <NoWarn>$(NoWarn);1591;1701;1702;1705</NoWarn>
+    <NoWarn>$(NoWarn);1591;1701;1702;1705;VSX1000</NoWarn>
     <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
     <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' and '$(IsTestProject)' != 'true'">true</GeneratePackageOnBuild>
     <IncludeSymbols>True</IncludeSymbols>

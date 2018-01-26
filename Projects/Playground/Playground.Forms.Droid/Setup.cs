@@ -1,4 +1,4 @@
-using Android.Content;
+﻿using Android.Content;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Droid.Platform;
 using MvvmCross.Forms.Platform;
@@ -28,11 +28,6 @@ namespace Playground.Forms.Droid
                 .WriteTo.AndroidLog()
                 .CreateLogger();
             return base.CreateLogProvider();
-        }
-
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new DebugTrace();
         }
 
         protected override IEnumerable<Assembly> GetViewAssemblies()
