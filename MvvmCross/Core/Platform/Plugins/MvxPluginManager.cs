@@ -37,7 +37,7 @@ namespace MvvmCross.Platform.Plugins
 
         public virtual void EnsurePluginLoaded(Type type)
         {
-            var field = type.GetField("Instance", BindingFlags.Static | BindingFlags.Public);
+            var field = type.GetStaticField("Instance");
             if (field == null)
             {
                 MvxLog.Instance.Trace("Plugin Instance not found - will not autoload {0}", type.FullName);

@@ -1,4 +1,4 @@
-// MvxViewModelViewTypeFinder.cs
+﻿// MvxViewModelViewTypeFinder.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -72,7 +72,7 @@ namespace MvvmCross.Core.ViewModels
         protected virtual Type LookupAssociatedConcreteViewModelType(Type candidateType)
         {
             var viewModelPropertyInfo = candidateType
-                .GetProperties()
+                .GetFlattenedProperties()
                 .FirstOrDefault(x => x.Name == "ViewModel"
                                      && !x.PropertyType.GetTypeInfo().IsInterface
                                      && !x.PropertyType.GetTypeInfo().IsAbstract);

@@ -1,4 +1,4 @@
-// MvxNamedInstanceRegistryFiller.cs
+﻿// MvxNamedInstanceRegistryFiller.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -33,7 +33,7 @@ namespace MvvmCross.Binding.Binders
         {
             var instance = Activator.CreateInstance(type);
 
-            var pairs = from field in type.GetFields()
+            var pairs = from field in type.GetRuntimeFields()
                         where !field.IsStatic
                         where field.IsPublic
                         where typeof(T).IsAssignableFrom(field.FieldType)
@@ -53,7 +53,7 @@ namespace MvvmCross.Binding.Binders
 
         protected virtual void FillFromStatic(IMvxNamedInstanceRegistry<T> registry, Type type)
         {
-            var pairs = from field in type.GetFields()
+            var pairs = from field in type.GetRuntimeFields()
                         where field.IsStatic
                         where field.IsPublic
                         where typeof(T).IsAssignableFrom(field.FieldType)

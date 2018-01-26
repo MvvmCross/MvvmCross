@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace MvvmCross.Platform
 {
-    public static class ReflectionExtensions
+    public static partial class ReflectionExtensions
     {
         public static Attribute[] GetCustomAttributes(this Type type, Type attributeType, bool inherit)
         {

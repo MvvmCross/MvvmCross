@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net461;uap10.0.16299;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid80;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard1.1;netstandard2.0;net461;uap10.0.16299;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid80;netcoreapp2.0</TargetFrameworks>
     <AssemblyName>MvvmCross</AssemblyName>
     <RootNamespace>MvvmCross</RootNamespace>
     <Description></Description>
@@ -13,16 +13,26 @@
     <None Include="Resources\*.cs" />
     <Compile Remove="Resources\*.cs" />
   </ItemGroup>
-  
+
   <ItemGroup>
-       <PackageReference Include="Microsoft.CSharp" Version="4.4.1" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.4.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
+    <Compile Include="Platform\Netstandard\**\*.cs" />
+    <Compile Include="Platform\Netstandard1.1\**\*.cs" />
   </ItemGroup>
   
+  <ItemGroup Condition=" '$(TargetFramework)' != 'netstandard1.1' ">
+    <Compile Include="Platform\Shared2.0\**\*.cs" />
+  </ItemGroup>
+
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <Compile Include="Platform\Netstandard\**\*.cs" />
+    <Compile Include="Platform\Netstandard2.0\**\*.cs" />
   </ItemGroup>
-  
-  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net461' ">
     <Compile Include="Platform\Net461\**\*.cs" />
     <Compile Include="Platform\Wpf\**\*.cs" />
     <Compile Include="Platform\Console\**\*.cs" />
@@ -30,7 +40,7 @@
     <PackageReference Include="Expression.Blend.Sdk.WPF" Version="1.0.1" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">
+  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0' and '$(TargetFramework)' != 'netstandard1.1' ">
     <Compile Include="Platform\Shared\**\*.cs" />
   </ItemGroup>
 
@@ -77,8 +87,5 @@
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
   
-  <ItemGroup>
-    <Folder Include="Core\Platform\Logging\LogProviders\" />
-  </ItemGroup>
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
 </Project>

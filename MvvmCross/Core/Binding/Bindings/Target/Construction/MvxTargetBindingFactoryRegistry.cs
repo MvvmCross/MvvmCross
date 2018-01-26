@@ -1,4 +1,4 @@
-// MvxTargetBindingFactoryRegistry.cs
+﻿// MvxTargetBindingFactoryRegistry.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -45,7 +45,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
                 return false;
             }
 
-            var targetPropertyInfo = target.GetType().GetProperty(targetName);
+            var targetPropertyInfo = target.GetType().GetDeclaredProperty(targetName);
             if (targetPropertyInfo != null
                 && targetPropertyInfo.CanWrite)
             {
@@ -116,7 +116,7 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             if (baseType != null)
                 factory = FindSpecificFactory(baseType, name);
             if (factory != null) return factory;
-            var implementedInterfaces = type.GetTypeInfo().ImplementedInterfaces;
+            var implementedInterfaces = type.GetInterfaces();
             foreach (var implementedInterface in implementedInterfaces)
             {
                 factory = FindSpecificFactory(implementedInterface, name);
