@@ -31,7 +31,7 @@
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
   </PropertyGroup>
   
-  <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.16299' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.16299' and '$(IsLibraryProject)' == 'true' ">
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.0.6" />
   </ItemGroup>
 </Project>
