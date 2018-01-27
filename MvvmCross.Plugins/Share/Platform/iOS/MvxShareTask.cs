@@ -6,11 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using Foundation;
-using MvvmCross.iOS.Views.Presenters;
-using MvvmCross.iOS.Views.Presenters.Attributes;
 using MvvmCross.Platform;
 using MvvmCross.Platform.iOS.Platform;
 using MvvmCross.Platform.iOS.Views;
+using MvvmCross.iOS.Support.Views;
 using Twitter;
 
 namespace MvvmCross.Plugins.Share.iOS
@@ -19,12 +18,10 @@ namespace MvvmCross.Plugins.Share.iOS
 	public class MvxShareTask
         : MvxIosTask, IMvxShareTask
     {
-        private readonly IMvxIosViewPresenter _viewPresenter;
         private TWTweetComposeViewController _tweet;
 
         public MvxShareTask()
         {
-            _viewPresenter = Mvx.Resolve<IMvxIosViewPresenter>();
         }
 
         public void ShareShort(string message)
@@ -35,7 +32,8 @@ namespace MvvmCross.Plugins.Share.iOS
             _tweet = new TWTweetComposeViewController();
             _tweet.SetInitialText(message);
             _tweet.CompletionHandler = TWTweetComposeHandler;
-            _viewPresenter.ShowModalViewController(_tweet, true);
+
+            UIApplication.SharedApplication.KeyWindow.GetTopModalHostViewController().PresentViewController(_tweet, true, null);                        
         }
 
         public void ShareLink(string title, string message, string link)
@@ -47,12 +45,13 @@ namespace MvvmCross.Plugins.Share.iOS
             _tweet.SetInitialText(title + " " + message);
             _tweet.AddUrl(new NSUrl(link));
             _tweet.CompletionHandler = TWTweetComposeHandler;
-            _viewPresenter.ShowModalViewController(_tweet, true);
+            
+            UIApplication.SharedApplication.KeyWindow.GetTopModalHostViewController().PresentViewController(_tweet, true, null);                        
         }
 
         private void TWTweetComposeHandler(TWTweetComposeViewControllerResult result)
         {
-            _viewPresenter.CloseModalViewController(_viewPresenter.GetTopViewController());
+            _tweet.DismissViewController(true, () => { });
             _tweet = null;
         }
     }
