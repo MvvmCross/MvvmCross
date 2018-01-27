@@ -87,7 +87,7 @@ namespace MvvmCross.iOS.Views
         }
     }
 
-    public class MvxBaseSplitViewController<TViewModel> : MvxViewController, IMvxIosView<TViewModel>
+    public class MvxBaseSplitViewController<TViewModel> : MvxBaseSplitViewController, IMvxIosView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public MvxBaseSplitViewController()
