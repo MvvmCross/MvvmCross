@@ -11,6 +11,7 @@ using MvvmCross.Platform.iOS.Platform;
 using MvvmCross.Platform.iOS.Views;
 using MvvmCross.iOS.Support.Views;
 using Twitter;
+using UIKit;
 
 namespace MvvmCross.Plugins.Share.iOS
 {
