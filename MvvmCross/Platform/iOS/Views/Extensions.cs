@@ -176,5 +176,17 @@ namespace MvvmCross.iOS.Support.Views
 
 			return descendantViews;
 		}
+
+        public virtual UIViewController GetTopModalHostViewController(this UIWindow window)
+        {
+            var vc = window.RootViewController;
+            do {
+                if (vc.PresentedViewController != null)
+                    vc = vc.PresentedViewController;
+
+            } while (vc.PresentedViewController != null);
+
+            return vc;
+        }
     }
 }
