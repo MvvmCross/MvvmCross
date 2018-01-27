@@ -11,13 +11,6 @@ using UIKit;
 namespace MvvmCross.iOS.Views.Presenters
 {
     public interface IMvxIosViewPresenter : IMvxViewPresenter, IMvxCanCreateIosView
-    {
-        void ShowModalViewController(UIViewController viewController, bool animated);
-
-        void CloseModalViewController(UIViewController viewController);
-
-        void CloseModalViewControllers();
-
-        UIViewController GetTopViewController();
+    {    
     }
 }

@@ -532,18 +532,6 @@ namespace MvvmCross.iOS.Views.Presenters
             SplitViewController = null;
         }
 
-        public virtual UIViewController GetTopViewController()
-        {
-            var vc = UIApplication.SharedApplication.KeyWindow.RootViewController;
-            do {
-                if (vc.PresentedViewController != null)
-                    vc = vc.PresentedViewController;
-
-            } while (vc.PresentedViewController != null);
-
-            return vc;
-        }
-
         protected void RemoveWindowSubviews()
         {
             foreach (var v in _window.Subviews)
