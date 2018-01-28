@@ -1,4 +1,4 @@
-// MvxSetup.cs
+﻿// MvxSetup.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -46,9 +46,9 @@ namespace MvvmCross.Core.Platform
                 throw new MvxException("Cannot start primary - as state already {0}", State);
             }
             State = MvxSetupState.InitializingPrimary;
+            InitializeIoC();
             InitializeLoggingServices();
             SetupLog.Trace("Setup: Primary start");
-            InitializeIoC();
             State = MvxSetupState.InitializedPrimary;
             if (State != MvxSetupState.InitializedPrimary)
             {
