@@ -173,7 +173,7 @@ namespace MvvmCross.iOS.Views.Presenters
                 // set root
                 SetupWindowRootNavigation(viewController, attribute);
 
-                CleanupModalViewControllers();
+                CloseModalViewControllers();
                 CloseSplitViewController();
 
                 return;
@@ -187,7 +187,7 @@ namespace MvvmCross.iOS.Views.Presenters
                 // set root
                 SetupWindowRootNavigation(viewController, attribute);
 
-                CleanupModalViewControllers();
+                CloseModalViewControllers();
                 CloseTabBarViewController();
 
                 return;
@@ -196,7 +196,7 @@ namespace MvvmCross.iOS.Views.Presenters
             // set root initiating stack navigation or just a plain controller
             SetupWindowRootNavigation(viewController, attribute);
 
-            CleanupModalViewControllers();
+            CloseModalViewControllers();
             CloseTabBarViewController();
             CloseSplitViewController();
         }
@@ -323,12 +323,6 @@ namespace MvvmCross.iOS.Views.Presenters
                 throw new MvxException("Trying to show a detail page without a SplitViewController, this is not possible!");
 
             SplitViewController.ShowDetailView(viewController, attribute.WrapInNavigationController);
-        }
-
-        public virtual bool PresentModalViewController(UIViewController viewController, bool animated)
-        {
-            ShowModalViewController(viewController, new MvxModalPresentationAttribute { Animated = animated }, null);
-            return true;
         }
 
         #endregion
@@ -474,12 +468,7 @@ namespace MvvmCross.iOS.Views.Presenters
                 TabBarViewController = tabBarController;
         }
 
-        public virtual void NativeModalViewControllerDisappearedOnItsOwn()
-        {
-            CloseModalViewController(ModalViewControllers.Last());
-        }
-
-        protected void CloseMasterNavigationController()
+        protected virtual void CloseMasterNavigationController()
         {
             if (MasterNavigationController == null)
                 return;
@@ -492,22 +481,22 @@ namespace MvvmCross.iOS.Views.Presenters
             MasterNavigationController = null;
         }
 
-        protected virtual void CloseModalViewController(UIViewController modalController)
+        public virtual void CloseModalViewController(UIViewController viewController)
         {
-            if (modalController == null)
+            if (viewController == null)
                 return;
 
-            if (modalController is UINavigationController modalNavController)
+            if (viewController is UINavigationController modalNavController)
             {
                 foreach (var item in modalNavController.ViewControllers)
                     item.DidMoveToParentViewController(null);
             }
 
-            modalController.DismissViewController(true, null);
-            ModalViewControllers.Remove(modalController);
+            viewController.DismissViewController(true, null);
+            ModalViewControllers.Remove(viewController);
         }
 
-        protected void CleanupModalViewControllers()
+        public virtual void CloseModalViewControllers()
         {
             while (ModalViewControllers.Any())
             {
@@ -515,7 +504,7 @@ namespace MvvmCross.iOS.Views.Presenters
             }
         }
 
-        public void CloseTabBarViewController()
+        public virtual void CloseTabBarViewController()
         {
             if (TabBarViewController == null)
                 return;
@@ -529,7 +518,7 @@ namespace MvvmCross.iOS.Views.Presenters
             TabBarViewController = null;
         }
 
-        protected void CloseSplitViewController()
+        protected virtual void CloseSplitViewController()
         {
             if (SplitViewController == null)
                 return;
@@ -547,6 +536,11 @@ namespace MvvmCross.iOS.Views.Presenters
         {
             foreach (var v in _window.Subviews)
                 v.RemoveFromSuperview();
+        }
+
+        public virtual void ShowModalViewController(UIViewController viewController, bool animated)
+        {
+            ShowModalViewController(viewController, new MvxModalPresentationAttribute { Animated = animated }, null);
         }
 
         protected virtual void SetWindowRootViewController(UIViewController controller, MvxRootPresentationAttribute attribute = null)

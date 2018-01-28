@@ -32,6 +32,7 @@ namespace MvvmCross.Uwp.Platform
     {
         private readonly IMvxWindowsFrame _rootFrame;
         private readonly string _suspensionManagerSessionStateKey;
+        private IMvxWindowsViewPresenter _presenter;
 
         protected MvxWindowsSetup(Frame rootFrame, string suspensionManagerSessionStateKey = null)
             : this(new MvxWrappedFrame(rootFrame))
@@ -47,6 +48,7 @@ namespace MvvmCross.Uwp.Platform
         protected override void InitializePlatformServices()
         {
             InitializeSuspensionManager();
+            RegisterPresenter();
             base.InitializePlatformServices();
         }
 
@@ -89,6 +91,15 @@ namespace MvvmCross.Uwp.Platform
         {
             return CreateViewDispatcher(_rootFrame);
         }
+        
+        protected IMvxWindowsViewPresenter Presenter
+        {
+            get
+            {
+                _presenter = _presenter ?? CreateViewPresenter(_rootFrame);
+                return _presenter;
+            }
+        }
 
         protected virtual IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
         {
@@ -97,8 +108,14 @@ namespace MvvmCross.Uwp.Platform
 
         protected virtual MvxWindowsViewDispatcher CreateViewDispatcher(IMvxWindowsFrame rootFrame)
         {
-            var presenter = CreateViewPresenter(_rootFrame);
-            return new MvxWindowsViewDispatcher(presenter, rootFrame);
+            return new MvxWindowsViewDispatcher(Presenter, rootFrame);
+        }
+
+        protected virtual void RegisterPresenter()
+        {
+            var presenter = Presenter;
+            Mvx.RegisterSingleton(presenter);
+            Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
         protected override void InitializeLastChance()

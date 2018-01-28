@@ -63,7 +63,7 @@ namespace MvvmCross.Forms.iOS
 
         protected abstract MvxFormsApplication CreateFormsApplication();
 
-        protected override IMvxIosViewPresenter CreatePresenter()
+        protected override IMvxIosViewPresenter CreateViewPresenter()
         {
             var presenter = new MvxFormsIosViewPresenter(ApplicationDelegate, Window, FormsApplication);
             Mvx.RegisterSingleton<IMvxFormsViewPresenter>(presenter);

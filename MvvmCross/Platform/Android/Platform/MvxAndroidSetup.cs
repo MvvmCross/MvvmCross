@@ -37,6 +37,7 @@ namespace MvvmCross.Droid.Platform
         : MvxSetup, IMvxAndroidGlobals
     {
         private readonly Context _applicationContext;
+        private IMvxAndroidViewPresenter _presenter;
 
         protected MvxAndroidSetup(Context applicationContext)
         {
@@ -62,6 +63,7 @@ namespace MvvmCross.Droid.Platform
         {
             InitializeLifetimeMonitor();
             InitializeAndroidCurrentTopActivity();
+            RegisterPresenter();
 
             Mvx.RegisterSingleton<IMvxAndroidGlobals>(this);
 
@@ -74,6 +76,7 @@ namespace MvvmCross.Droid.Platform
 
             var viewModelMultiTemporaryCache = new MvxMultipleViewModelCache();
             Mvx.RegisterSingleton<IMvxMultipleViewModelCache>(viewModelMultiTemporaryCache);
+            base.InitializePlatformServices();
         }
 
         protected virtual void InitializeAndroidCurrentTopActivity()
@@ -132,6 +135,15 @@ namespace MvvmCross.Droid.Platform
             return viewsContainer;
         }
 
+        protected IMvxAndroidViewPresenter Presenter
+        {
+            get
+            {
+                _presenter = _presenter ?? CreateViewPresenter();
+                return _presenter;
+            }
+        }
+
         protected virtual IMvxAndroidViewPresenter CreateViewPresenter()
         {
             return new MvxAndroidViewPresenter(AndroidViewAssemblies);
@@ -139,9 +151,14 @@ namespace MvvmCross.Droid.Platform
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            var presenter = CreateViewPresenter();
+            return new MvxAndroidViewDispatcher(Presenter);
+        }
+
+        protected virtual void RegisterPresenter()
+        {
+            var presenter = Presenter;
             Mvx.RegisterSingleton(presenter);
-            return new MvxAndroidViewDispatcher(presenter);
+            Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
         protected override void InitializeLastChance()

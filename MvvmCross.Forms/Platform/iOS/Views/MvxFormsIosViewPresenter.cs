@@ -91,7 +91,7 @@ namespace MvvmCross.Forms.iOS.Presenters
         public virtual bool ClosePlatformViews()
         {
             CloseMasterNavigationController();
-            CleanupModalViewControllers();
+            CloseModalViewControllers();
             CloseTabBarViewController();
             CloseSplitViewController();
             return true;
