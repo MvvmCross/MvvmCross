@@ -12,9 +12,7 @@ namespace MvvmCross.Test
 {
     public class MvxIoCSupportingTest
     {
-        private IMvxIoCProvider _ioc;
-
-        protected IMvxIoCProvider Ioc => _ioc;
+        public IMvxIoCProvider Ioc { get; private set; }
 
         public void Setup()
         {
@@ -35,8 +33,8 @@ namespace MvvmCross.Test
         {
             // fake set up of the IoC
             Reset();
-            _ioc = MvxIoCProvider.Initialize(CreateIocOptions());
-            _ioc.RegisterSingleton(_ioc);
+            Ioc = MvxIoCProvider.Initialize(CreateIocOptions());
+            Ioc.RegisterSingleton(Ioc);
             InitializeSingletonCache();
             InitializeMvxSettings();
             AdditionalSetup();
@@ -49,7 +47,7 @@ namespace MvvmCross.Test
 
         protected virtual void InitializeMvxSettings()
         {
-            _ioc.RegisterSingleton<IMvxSettings>(new MvxSettings());
+            Ioc.RegisterSingleton<IMvxSettings>(new MvxSettings());
         }
 
         protected virtual void AdditionalSetup()
