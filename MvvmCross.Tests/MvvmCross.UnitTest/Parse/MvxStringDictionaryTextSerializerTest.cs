@@ -8,15 +8,15 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.TestViewModels;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Test.Parse
 {
-    [TestFixture]
+    
     public class MvxStringDictionaryTextSerializerTest
         : MvxIoCSupportingTest
     {
-        [Test]
+        [Fact]
         public void Test_Round_Trip_Works_For_Normal_ViewModel_Requests()
         {
             ClearAll();
@@ -36,16 +36,16 @@ namespace MvvmCross.Test.Parse
             var deserializer = new MvxViewModelRequestCustomTextSerializer();
             var deserialized = deserializer.DeserializeObject<MvxViewModelRequest>(output);
 
-            Assert.AreEqual(typeof(Test1ViewModel), deserialized.ViewModelType);
-            Assert.AreEqual(2, deserialized.PresentationValues.Count);
-            Assert.AreEqual(2, deserialized.ParameterValues.Count);
-            Assert.AreEqual("1'\\", deserialized.ParameterValues["On'e"]);
-            Assert.AreEqual("2", deserialized.ParameterValues["Two"]);
-            Assert.AreEqual("3\"\'\\", deserialized.PresentationValues["Thre\"\'\\e"]);
-            Assert.AreEqual(null, deserialized.PresentationValues["Four"]);
+            Assert.Equal(typeof(Test1ViewModel), deserialized.ViewModelType);
+            Assert.Equal(2, deserialized.PresentationValues.Count);
+            Assert.Equal(2, deserialized.ParameterValues.Count);
+            Assert.Equal("1'\\", deserialized.ParameterValues["On'e"]);
+            Assert.Equal("2", deserialized.ParameterValues["Two"]);
+            Assert.Equal("3\"\'\\", deserialized.PresentationValues["Thre\"\'\\e"]);
+            Assert.Equal(null, deserialized.PresentationValues["Four"]);
         }
 
-        [Test]
+        [Fact]
         public void Test_Round_Trip_Works_For_Part_Empty_ViewModel_Requests()
         {
             var parameterBundle = new MvxBundle();
@@ -58,9 +58,9 @@ namespace MvvmCross.Test.Parse
             var deserializer = new MvxViewModelRequestCustomTextSerializer();
             var deserialized = deserializer.DeserializeObject<MvxViewModelRequest>(output);
 
-            Assert.AreEqual(typeof(Test1ViewModel), deserialized.ViewModelType);
-            Assert.AreEqual(0, deserialized.PresentationValues.Count);
-            Assert.AreEqual(0, deserialized.ParameterValues.Count);
+            Assert.Equal(typeof(Test1ViewModel), deserialized.ViewModelType);
+            Assert.Equal(0, deserialized.PresentationValues.Count);
+            Assert.Equal(0, deserialized.ParameterValues.Count);
         }
     }
 }

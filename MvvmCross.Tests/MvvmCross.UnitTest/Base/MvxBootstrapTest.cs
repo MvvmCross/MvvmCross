@@ -4,20 +4,20 @@
 
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Test.Mocks;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Platform.Test
 {
-    [TestFixture]
+    
     public class MvxBootstrapTest
     {
-        [Test]
+        [Fact]
         public void Test_Bootstrap_Calls_Our_Mock()
         {
             MockBootstrapAction.CallCount = 0;
             var runner = new MvxBootstrapRunner();
             runner.Run(GetType().Assembly);
-            Assert.AreEqual(1, MockBootstrapAction.CallCount);
+            Assert.Equal(1, MockBootstrapAction.CallCount);
         }
     }
 }

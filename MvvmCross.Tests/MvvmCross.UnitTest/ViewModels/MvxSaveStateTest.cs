@@ -8,14 +8,14 @@ using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.TestViewModels;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Test.ViewModels
 {
-    [TestFixture]
+    
     public class MvxSaveStateTest : MvxIoCSupportingTest
     {
-        [Test]
+        [Fact]
         public void Test_SaveState()
         {
             ClearAll();
@@ -45,12 +45,12 @@ namespace MvvmCross.Test.ViewModels
             var bundle = viewModel.SaveStateBundle();
 
             var extracted = bundle.Read<BundleObject>();
-            Assert.AreEqual(viewModel.SaveStateBundleObject, extracted);
-            Assert.AreEqual("John", bundle.Data["Life1"]);
-            Assert.AreEqual("Jane", bundle.Data["Life2"]);
+            Assert.Equal(viewModel.SaveStateBundleObject, extracted);
+            Assert.Equal("John", bundle.Data["Life1"]);
+            Assert.Equal("Jane", bundle.Data["Life2"]);
         }
 
-        [Test]
+        [Fact]
         public void Test_NullSaveState()
         {
             ClearAll();
@@ -58,7 +58,7 @@ namespace MvvmCross.Test.ViewModels
             var viewModel = new Test3ViewModel();
 
             var bundle = viewModel.SaveStateBundle();
-            Assert.AreEqual(0, bundle.Data.Count);
+            Assert.Equal(0, bundle.Data.Count);
         }
     }
 }

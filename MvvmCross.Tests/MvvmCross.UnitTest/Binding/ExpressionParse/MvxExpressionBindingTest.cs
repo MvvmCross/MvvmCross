@@ -14,11 +14,11 @@ using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.ExpressionParse;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Test.Core;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Binding.Test.ExpressionParse
 {
-    [TestFixture]
+    
     public class MvxExpressionBindingTest : MvxIoCSupportingTest
     {
         public class Child
@@ -85,7 +85,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
             public IMvxBindingContext BindingContext { get; set; }
         }
 
-        [Test]
+        [Fact]
         public void TestLongExpression()
         {
             var expectedDesc = new MvxBindingDescription
@@ -106,7 +106,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
             DoTest(test, expectedDesc);
         }
 
-        [Test]
+        [Fact]
         public void TestLongExpressionWithUnderscores()
         {
             var expectedDesc = new MvxBindingDescription
@@ -127,7 +127,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
             DoTest(test, expectedDesc);
         }
 
-        [Test]
+        [Fact]
         public void TestExtraParameters()
         {
             var expectedDesc = new MvxBindingDescription
@@ -156,7 +156,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
             DoTest(test, expectedDesc);
         }
 
-        [Test]
+        [Fact]
         public void TestExtraParametersNamedConverter()
         {
             var expectedDesc = new MvxBindingDescription
@@ -185,7 +185,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
             DoTest(test, expectedDesc);
         }
 
-        [Test]
+        [Fact]
         public void TestExtraParametersUnknownConverter()
         {
             var expectedDesc = new MvxBindingDescription
@@ -214,7 +214,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
             DoTest(test, expectedDesc);
         }
 
-        [Test]
+        [Fact]
         public void TestExtraParametersStringConverter()
         {
             var expectedDesc = new MvxBindingDescription
@@ -243,7 +243,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
             DoTest(test, expectedDesc);
         }
 
-        [Test]
+        [Fact]
         public void TestNumberIndexedExpression()
         {
             var expectedDesc = new MvxBindingDescription
@@ -264,7 +264,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
             DoTest(test, expectedDesc);
         }
 
-        [Test]
+        [Fact]
         public void TestStringIndexedExpression()
         {
             var expectedDesc = new MvxBindingDescription
@@ -285,7 +285,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
             DoTest(test, expectedDesc);
         }
 
-        [Test]
+        [Fact]
         public void TestNumberVariableIndexedExpression()
         {
             var expectedDesc = new MvxBindingDescription
@@ -309,7 +309,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
 
         private static readonly int Zero = 0;
 
-        [Test]
+        [Fact]
         public void TestNumberStaticVariableIndexedExpression()
         {
             var expectedDesc = new MvxBindingDescription
@@ -330,7 +330,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
             DoTest(test, expectedDesc);
         }
 
-        [Test]
+        [Fact]
         public void TestNumberPropertyIndexedExpression()
         {
             var expectedDesc = new MvxBindingDescription
@@ -352,7 +352,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
             DoTest(test, expectedDesc);
         }
 
-        [Test]
+        [Fact]
         public void TestStringVariableIndexedExpression()
         {
             var expectedDesc = new MvxBindingDescription
@@ -374,7 +374,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
             DoTest(test, expectedDesc);
         }
 
-        [Test]
+        [Fact]
         public void TestDirectToObjectExpression()
         {
             var expectedDesc = new MvxBindingDescription
@@ -449,26 +449,26 @@ namespace MvvmCross.Binding.Test.ExpressionParse
 
             action(testTarget);
 
-            Assert.AreEqual(1, callbacksSeen.Count);
+            Assert.Equal(1, callbacksSeen.Count);
             var callback = callbacksSeen[0];
             var expectedTarget = findTargetObjectFunc(testTarget);
-            Assert.AreEqual(expectedTarget, callback.Target);
-            Assert.AreEqual(dataContext, callback.Source);
+            Assert.Equal(expectedTarget, callback.Target);
+            Assert.Equal(dataContext, callback.Source);
 
             var desc = callback.BindingDescription;
             Assert.IsTrue(expectedDescription.Source is MvxPathSourceStepDescription);
             var path = desc.Source as MvxPathSourceStepDescription;
             Assert.IsTrue(desc.Source is MvxPathSourceStepDescription);
             var expectedPath = expectedDescription.Source as MvxPathSourceStepDescription;
-            Assert.AreEqual(expectedPath.ConverterParameter, path.ConverterParameter);
-            Assert.AreEqual(expectedPath.FallbackValue, path.FallbackValue);
-            Assert.AreEqual(expectedPath.SourcePropertyPath, path.SourcePropertyPath);
-            Assert.AreEqual(expectedDescription.Mode, desc.Mode);
-            Assert.AreEqual(expectedDescription.TargetName, desc.TargetName);
+            Assert.Equal(expectedPath.ConverterParameter, path.ConverterParameter);
+            Assert.Equal(expectedPath.FallbackValue, path.FallbackValue);
+            Assert.Equal(expectedPath.SourcePropertyPath, path.SourcePropertyPath);
+            Assert.Equal(expectedDescription.Mode, desc.Mode);
+            Assert.Equal(expectedDescription.TargetName, desc.TargetName);
             if (expectedPath.Converter == null)
                 Assert.IsNull(path.Converter);
             else
-                Assert.AreEqual(expectedPath.Converter.GetType(), path.Converter.GetType());
+                Assert.Equal(expectedPath.Converter.GetType(), path.Converter.GetType());
         }
     }
 }

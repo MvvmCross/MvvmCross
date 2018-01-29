@@ -6,14 +6,14 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.TestViewModels;
 using MvvmCross.Test.Mocks.TestViews;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Test.Platform
 {
-    [TestFixture]
+    
     public class MvxViewModelViewTypeFinderTest : MvxIoCSupportingTest
     {
-        [Test]
+        [Fact]
         public void Test_MvxViewModelViewTypeFinder()
         {
             ClearAll();
@@ -26,13 +26,13 @@ namespace MvvmCross.Test.Platform
 
             // test for positives
             var result = test.FindTypeOrNull(typeof(Test1View));
-            Assert.AreEqual(typeof(Test1ViewModel), result);
+            Assert.Equal(typeof(Test1ViewModel), result);
             result = test.FindTypeOrNull(typeof(NotTest2View));
-            Assert.AreEqual(typeof(Test2ViewModel), result);
+            Assert.Equal(typeof(Test2ViewModel), result);
             result = test.FindTypeOrNull(typeof(NotTest3View));
-            Assert.AreEqual(typeof(Test3ViewModel), result);
+            Assert.Equal(typeof(Test3ViewModel), result);
             result = test.FindTypeOrNull(typeof(OddNameOddness));
-            Assert.AreEqual(typeof(OddNameViewModel), result);
+            Assert.Equal(typeof(OddNameViewModel), result);
 
             // test for negatives
             result = test.FindTypeOrNull(typeof(AbstractTest1View));

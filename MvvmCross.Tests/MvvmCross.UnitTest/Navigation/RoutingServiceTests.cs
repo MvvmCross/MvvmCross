@@ -16,7 +16,7 @@ using MvvmCross.Test.Mocks.Dispatchers;
 using MvvmCross.Test.Mocks.TestViewModels;
 using MvvmCross.Test.Mocks.ViewModels;
 using MvvmCross.Test.Stubs;
-using NUnit.Framework;
+using Xunit;
 
 [assembly: MvxNavigation(typeof(ViewModelA), @"https?://mvvmcross.com/blog")]
 [assembly: MvxNavigation(typeof(ViewModelB), @"mvx://test/\?id=00000000000000000000000000000000$")]
@@ -25,7 +25,7 @@ using NUnit.Framework;
 
 namespace MvvmCross.Test.Navigation
 {
-    [TestFixture]
+    
     public class RoutingServiceTests
         : MvxIoCSupportingTest
     {
@@ -38,7 +38,7 @@ namespace MvvmCross.Test.Navigation
             MvxNavigationService.LoadRoutes(new[] { typeof(RoutingServiceTests).Assembly });
         }
 
-        [SetUp]
+        
         public void SetupTest()
         {
             // ReSharper disable once AssignNullToNotNullAttribute
@@ -78,7 +78,7 @@ namespace MvvmCross.Test.Navigation
             Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
         }
 
-        [Test]
+        [Fact]
         public async Task TestFailAsync()
         {
             var url = "mvx://fail/?id=" + Guid.NewGuid();
@@ -94,7 +94,7 @@ namespace MvvmCross.Test.Navigation
             MockDispatcher.Verify(x => x.ShowViewModel(It.IsAny<MvxViewModelRequest>()), Times.Never);
         }
 
-        [Test]
+        [Fact]
         public async Task TestDirectMatchRegexAsync()
         {
             await RoutingService.Navigate("mvx://test/?id=" + Guid.Empty.ToString("N"));
@@ -104,7 +104,7 @@ namespace MvvmCross.Test.Navigation
                 Times.Once);
         }
 
-        [Test]
+        [Fact]
         public async Task TestRegexWithParametersAsync()
         {
             await RoutingService.Navigate("mvx://test/?id=" + Guid.NewGuid().ToString("N"));
@@ -114,7 +114,7 @@ namespace MvvmCross.Test.Navigation
                 Times.Once);
         }
 
-        [Test]
+        [Fact]
         public async Task TestFacadeAsync()
         {
             await RoutingService.Navigate("mvx://facade/?id=a");

@@ -8,11 +8,11 @@ using System.Globalization;
 using System.Linq;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Parse;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Platform.Test
 {
-    [TestFixture]
+    
     public class MvxParserTest
     {
         public class BaseToken
@@ -102,25 +102,25 @@ namespace MvvmCross.Platform.Test
             }
         }
 
-        [Test]
+        [Fact]
         public void Test_Reset_Clears_And_Sets_All_Properties()
         {
             var tokeniser = new Parser();
             Assert.IsNull(tokeniser.GetFullText());
-            Assert.AreEqual(0, tokeniser.GetCurrentIndex());
+            Assert.Equal(0, tokeniser.GetCurrentIndex());
             var testString1 = @"1 test";
             tokeniser.CallReset(testString1);
-            Assert.AreEqual(testString1, tokeniser.GetFullText());
-            Assert.AreEqual(0, tokeniser.GetCurrentIndex());
-            Assert.AreEqual(testString1[0], tokeniser.GetCurrentChar());
+            Assert.Equal(testString1, tokeniser.GetFullText());
+            Assert.Equal(0, tokeniser.GetCurrentIndex());
+            Assert.Equal(testString1[0], tokeniser.GetCurrentChar());
             var testString2 = @"2 test";
             tokeniser.CallReset(testString2);
-            Assert.AreEqual(testString2, tokeniser.GetFullText());
-            Assert.AreEqual(0, tokeniser.GetCurrentIndex());
-            Assert.AreEqual(testString2[0], tokeniser.GetCurrentChar());
+            Assert.Equal(testString2, tokeniser.GetFullText());
+            Assert.Equal(0, tokeniser.GetCurrentIndex());
+            Assert.Equal(testString2[0], tokeniser.GetCurrentChar());
         }
 
-        [Test]
+        [Fact]
         public void Test_CallReadQuotedString_Reads_Strings()
         {
             var testStrings = new Dictionary<string, string>
@@ -140,12 +140,12 @@ namespace MvvmCross.Platform.Test
                 var tokeniser = new Parser();
                 tokeniser.CallReset(testString.Key);
                 var result = tokeniser.CallReadQuotedString();
-                Assert.AreEqual(testString.Value, result);
+                Assert.Equal(testString.Value, result);
                 Assert.IsTrue(tokeniser.GetIsComplete());
             }
         }
 
-        [Test]
+        [Fact]
         public void Test_CallReadUnsignedInteger_Reads_Numbers()
         {
             var testStrings = new Dictionary<string, uint>
@@ -161,12 +161,12 @@ namespace MvvmCross.Platform.Test
                 var tokeniser = new Parser();
                 tokeniser.CallReset(testString.Key);
                 var result = tokeniser.CallReadUnsignedInteger();
-                Assert.AreEqual(testString.Value, result);
+                Assert.Equal(testString.Value, result);
                 Assert.IsTrue(tokeniser.GetIsComplete());
             }
         }
 
-        [Test]
+        [Fact]
         public void Test_ReadValue_Reads_Quoted_Strings()
         {
             var tests = new Dictionary<string, object>
@@ -190,11 +190,11 @@ namespace MvvmCross.Platform.Test
             var parser = new Parser();
             parser.CallReset(input);
             var output = parser.CallReadValue();
-            Assert.AreEqual(expectedOutput, output);
+            Assert.Equal(expectedOutput, output);
             Assert.IsTrue(parser.GetIsComplete());
         }
 
-        [Test]
+        [Fact]
         public void Test_ReadValue_Reads_Booleans()
         {
             var tests = new Dictionary<string, object>
@@ -209,7 +209,7 @@ namespace MvvmCross.Platform.Test
             DoReadValueTests(tests);
         }
 
-        [Test]
+        [Fact]
         public void Test_ReadTextUntilWhitespaceOr_ReadsText()
         {
             var tests = new string[] { "fred;", "fred life;", "fred@test;", "fred", "fred\tlife;", "fred\n" };
@@ -218,11 +218,11 @@ namespace MvvmCross.Platform.Test
                 var parser = new Parser();
                 parser.CallReset(test);
                 var output = parser.CallReadTextUntilWhitespaceOr('@', ';', ')');
-                Assert.AreEqual("fred", output);
+                Assert.Equal("fred", output);
             }
         }
 
-        [Test]
+        [Fact]
         public void Test_ReadValue_Reads_Integers()
         {
             var tests = new[] { 0, 1, 2, 3, -123, -1, long.MinValue, long.MaxValue };
@@ -231,7 +231,7 @@ namespace MvvmCross.Platform.Test
             DoReadValueTests(dict);
         }
 
-        [Test]
+        [Fact]
         public void Test_ReadValue_Reads_Doubles()
         {
             // note - we don't run any tests on things like double.MinValue - those would fail due to rounding errors.
@@ -253,11 +253,11 @@ namespace MvvmCross.Platform.Test
             var parser = new Parser();
             parser.CallReset(input);
             var output = parser.CallReadEnumerationValue(enumerationType, true /* ignoreCase */);
-            Assert.AreEqual(expectedOutput, output);
+            Assert.Equal(expectedOutput, output);
             Assert.IsTrue(parser.GetIsComplete());
         }
 
-        [Test]
+        [Fact]
         public void Test_ReadEnumeration_Reads_Enumerations()
         {
             foreach (var value in Enum.GetValues(typeof(MyEnum)))
@@ -268,7 +268,7 @@ namespace MvvmCross.Platform.Test
             }
         }
 
-        [Test]
+        [Fact]
         public void Test_ReadValidCSharpName_Succeeds()
         {
             var names = new[]
@@ -290,18 +290,18 @@ namespace MvvmCross.Platform.Test
                 var parser = new Parser();
                 parser.CallReset(name);
                 var result = parser.CallReadValidCSharpName();
-                Assert.AreEqual(name, result);
+                Assert.Equal(name, result);
                 Assert.IsTrue(parser.GetIsComplete());
 
                 var parser2 = new Parser();
                 parser2.CallReset("\t " + name + " \r \t");
                 var result2 = parser2.CallReadValidCSharpName();
-                Assert.AreEqual(name, result2);
+                Assert.Equal(name, result2);
                 Assert.IsFalse(parser2.GetIsComplete());
             }
         }
 
-        [Test]
+        [Fact]
         public void Test_ReadValidCSharpName_Fails()
         {
             var names = new[]

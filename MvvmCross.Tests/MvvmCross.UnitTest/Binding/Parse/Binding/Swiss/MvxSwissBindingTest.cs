@@ -6,15 +6,15 @@ using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Swiss;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
 {
-    [TestFixture]
+    
     public class MvxSwissBindingTest
         : MvxBaseSwissBindingTest<MvxSwissBindingParser>
     {
-        [Test]
+        [Fact]
         public void TestFunctionalValueConverterBinding()
         {
             var text = "Target ConvertThis(Foo)";
@@ -40,7 +40,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
             PerformTest(text, expected);
         }
 
-        [Test]
+        [Fact]
         public void TestFunctionalValueConverterWithParameterBinding()
         {
             var text = "Target ConvertThis(Foo, 12)";
@@ -67,7 +67,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
             PerformTest(text, expected);
         }
 
-        [Test]
+        [Fact]
         public void TestFunctionalValueConverterWithParameterBinding2()
         {
             var text = "Target ConvertThis(Foo, 12.45)";
@@ -94,7 +94,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
             PerformTest(text, expected);
         }
 
-        [Test]
+        [Fact]
         public void TestFunctionalValueConverterWithParameterBinding3()
         {
             var text = "Target ConvertThis(Foo, true)";
@@ -121,7 +121,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
             PerformTest(text, expected);
         }
 
-        [Test]
+        [Fact]
         public void TestFunctionalValueConverterWithParameterBinding4()
         {
             var text = "Target ConvertThis(Foo, 'Hello World')";
@@ -148,7 +148,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
             PerformTest(text, expected);
         }
 
-        [Test]
+        [Fact]
         public void TestFunctionalValueConverterWithNullInTheName()
         {
             var text = "Target NullThis(Foo, 'Hello World')";

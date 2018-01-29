@@ -8,14 +8,14 @@ using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.TestViewModels;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Test.ViewModels
 {
-    [TestFixture]
+    
     public class MvxBundleTest : MvxIoCSupportingTest
     {
-        [Test]
+        [Fact]
         public void Test_RoundTrip()
         {
             ClearAll();
@@ -38,7 +38,7 @@ namespace MvvmCross.Test.ViewModels
 
             var output = bundle.Read<BundleObject>();
 
-            Assert.AreEqual(testObject, output);
+            Assert.Equal(testObject, output);
         }
 
         public BundleObject TestFunction(string TheString1, string missing, int TheInt2, bool TheBool2, Guid TheGuid2)
@@ -53,7 +53,7 @@ namespace MvvmCross.Test.ViewModels
             };
         }
 
-        [Test]
+        [Fact]
         public void Test_FillArguments()
         {
             ClearAll();
@@ -89,7 +89,7 @@ namespace MvvmCross.Test.ViewModels
                 TheString1 = "Hello World",
                 TheString2 = null
             };
-            Assert.AreEqual(expected, output);
+            Assert.Equal(expected, output);
         }
     }
 }

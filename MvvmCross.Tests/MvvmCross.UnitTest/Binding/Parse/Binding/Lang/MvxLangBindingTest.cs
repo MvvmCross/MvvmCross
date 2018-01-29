@@ -6,15 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Lang;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Binding.Test.Parse.Binding.Lang
 {
-    [TestFixture]
+    
     public class MvxLangBindingTest
         : MvxBindingTest
     {
-        [Test]
+        [Fact]
         public void TestAll()
         {
             foreach (var testPair in _toTest)
@@ -29,7 +29,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
             MvxSerializableBindingSpecification result;
             var parsed = language.TryParseBindingSpecification(testPair.Key, out result);
             Assert.IsTrue(parsed, "Failed to parse " + testPair.Key);
-            Assert.AreEqual(1, result.Count);
+            Assert.Equal(1, result.Count);
             var keyAndDescription = testPair.Value.First();
             var resultKeyAndDescription = result.First();
             var expectedDescription = new MvxSerializableBindingDescription()
@@ -41,7 +41,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                 Mode = MvxBindingMode.OneTime
             };
 
-            Assert.AreEqual(keyAndDescription.Key, resultKeyAndDescription.Key);
+            Assert.Equal(keyAndDescription.Key, resultKeyAndDescription.Key);
             AssertAreEquivalent(expectedDescription, resultKeyAndDescription.Value);
         }
 

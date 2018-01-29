@@ -5,11 +5,11 @@
 using System;
 using System.Linq;
 using System.Threading;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Plugins.Messenger.Test
 {
-    [TestFixture]
+    
     public class MessengerHubTest
     {
         #region TestClasses
@@ -32,12 +32,12 @@ namespace MvvmCross.Plugins.Messenger.Test
 
         #endregion TestClasses
 
-        [SetUp]
+        
         public void SetUp()
         {
         }
 
-        [Test]
+        [Fact]
         public void SubscribeAndPublishAllowsMessageToBeReceived()
         {
             var messenger = new MvxMessengerHub();
@@ -56,7 +56,7 @@ namespace MvvmCross.Plugins.Messenger.Test
             Assert.IsTrue(messageReceived);
         }
 
-        [Test]
+        [Fact]
         public void MultipleSubscribeAndPublishAllowsMessageToBeReceived()
         {
             var messenger = new MvxMessengerHub();
@@ -80,27 +80,27 @@ namespace MvvmCross.Plugins.Messenger.Test
                 });
 
             messenger.Publish(otherMessage);
-            Assert.AreEqual(0, messageReceived);
-            Assert.AreEqual(1, otherMessageReceived);
+            Assert.Equal(0, messageReceived);
+            Assert.Equal(1, otherMessageReceived);
 
             messenger.Publish(message);
-            Assert.AreEqual(1, messageReceived);
-            Assert.AreEqual(1, otherMessageReceived);
+            Assert.Equal(1, messageReceived);
+            Assert.Equal(1, otherMessageReceived);
 
             messenger.Publish(message);
-            Assert.AreEqual(2, messageReceived);
-            Assert.AreEqual(1, otherMessageReceived);
+            Assert.Equal(2, messageReceived);
+            Assert.Equal(1, otherMessageReceived);
 
             messenger.Publish(message);
-            Assert.AreEqual(3, messageReceived);
-            Assert.AreEqual(1, otherMessageReceived);
+            Assert.Equal(3, messageReceived);
+            Assert.Equal(1, otherMessageReceived);
 
             messenger.Publish(otherMessage);
-            Assert.AreEqual(3, messageReceived);
-            Assert.AreEqual(2, otherMessageReceived);
+            Assert.Equal(3, messageReceived);
+            Assert.Equal(2, otherMessageReceived);
         }
 
-        [Test]
+        [Fact]
         public void UnsubscribePreventsMessagesBeingReceived()
         {
             var messenger = new MvxMessengerHub();
@@ -111,7 +111,7 @@ namespace MvvmCross.Plugins.Messenger.Test
             messenger.Publish(new TestMessage(this));
         }
 
-        [Test]
+        [Fact]
         public void DisposeTokenPreventsMessagesBeingReceived()
         {
             var messenger = new MvxMessengerHub();
@@ -122,7 +122,7 @@ namespace MvvmCross.Plugins.Messenger.Test
             messenger.Publish(new TestMessage(this));
         }
 
-        [Test]
+        [Fact]
         public void NullSenderCausesException()
         {
             Assert.Throws<ArgumentNullException>(() => {
@@ -130,7 +130,7 @@ namespace MvvmCross.Plugins.Messenger.Test
             });
         }
 
-        [Test]
+        [Fact]
         public void NullSubscribeCausesException()
         {
             var messenger = new MvxMessengerHub();
@@ -139,7 +139,7 @@ namespace MvvmCross.Plugins.Messenger.Test
             });
         }
 
-        [Test]
+        [Fact]
         public void UnknownUnsubscribeDoesNotCauseException()
         {
             var messenger = new MvxMessengerHub();
@@ -152,7 +152,7 @@ namespace MvvmCross.Plugins.Messenger.Test
             messenger.Unsubscribe<TestMessage>(new MvxSubscriptionToken(Guid.Empty, () => { }, new object()));
         }
 
-        [Test]
+        [Fact]
         public void NullPublishCausesException()
         {
             var messenger = new MvxMessengerHub();
@@ -161,155 +161,155 @@ namespace MvvmCross.Plugins.Messenger.Test
             });
         }
 
-        [Test]
+        [Fact]
         public void HasSubscriptionsForIsCorrect()
         {
             var messenger = new MvxMessengerHub();
-            Assert.AreEqual(false, messenger.HasSubscriptionsFor<MvxSubscriberChangeMessage>());
-            Assert.AreEqual(false, messenger.HasSubscriptionsFor<TestMessage>());
+            Assert.Equal(false, messenger.HasSubscriptionsFor<MvxSubscriberChangeMessage>());
+            Assert.Equal(false, messenger.HasSubscriptionsFor<TestMessage>());
             var changeToken = messenger.Subscribe<MvxSubscriberChangeMessage>(message => { });
-            Assert.AreEqual(true, messenger.HasSubscriptionsFor<MvxSubscriberChangeMessage>());
-            Assert.AreEqual(false, messenger.HasSubscriptionsFor<TestMessage>());
+            Assert.Equal(true, messenger.HasSubscriptionsFor<MvxSubscriberChangeMessage>());
+            Assert.Equal(false, messenger.HasSubscriptionsFor<TestMessage>());
             var token = messenger.Subscribe<TestMessage>(m =>
             {
                 // stuff
             });
-            Assert.AreEqual(true, messenger.HasSubscriptionsFor<MvxSubscriberChangeMessage>());
-            Assert.AreEqual(true, messenger.HasSubscriptionsFor<TestMessage>());
+            Assert.Equal(true, messenger.HasSubscriptionsFor<MvxSubscriberChangeMessage>());
+            Assert.Equal(true, messenger.HasSubscriptionsFor<TestMessage>());
             messenger.Unsubscribe<TestMessage>(token);
-            Assert.AreEqual(true, messenger.HasSubscriptionsFor<MvxSubscriberChangeMessage>());
-            Assert.AreEqual(false, messenger.HasSubscriptionsFor<TestMessage>());
+            Assert.Equal(true, messenger.HasSubscriptionsFor<MvxSubscriberChangeMessage>());
+            Assert.Equal(false, messenger.HasSubscriptionsFor<TestMessage>());
         }
 
-        [Test]
+        [Fact]
         public void CountSubscriptionsForIsCorrect()
         {
             var messenger = new MvxMessengerHub();
-            Assert.AreEqual(false, messenger.HasSubscriptionsFor<MvxSubscriberChangeMessage>());
-            Assert.AreEqual(false, messenger.HasSubscriptionsFor<TestMessage>());
+            Assert.Equal(false, messenger.HasSubscriptionsFor<MvxSubscriberChangeMessage>());
+            Assert.Equal(false, messenger.HasSubscriptionsFor<TestMessage>());
             var changeToken = messenger.Subscribe<MvxSubscriberChangeMessage>(message => { });
-            Assert.AreEqual(1, messenger.CountSubscriptionsFor<MvxSubscriberChangeMessage>());
-            Assert.AreEqual(0, messenger.CountSubscriptionsFor<TestMessage>());
+            Assert.Equal(1, messenger.CountSubscriptionsFor<MvxSubscriberChangeMessage>());
+            Assert.Equal(0, messenger.CountSubscriptionsFor<TestMessage>());
             var token = messenger.Subscribe<TestMessage>(m =>
             {
                 // stuff
             });
-            Assert.AreEqual(1, messenger.CountSubscriptionsFor<MvxSubscriberChangeMessage>());
-            Assert.AreEqual(1, messenger.CountSubscriptionsFor<TestMessage>());
+            Assert.Equal(1, messenger.CountSubscriptionsFor<MvxSubscriberChangeMessage>());
+            Assert.Equal(1, messenger.CountSubscriptionsFor<TestMessage>());
             var token2 = messenger.Subscribe<TestMessage>(m =>
             {
                 // stuff
             });
-            Assert.AreEqual(1, messenger.CountSubscriptionsFor<MvxSubscriberChangeMessage>());
-            Assert.AreEqual(2, messenger.CountSubscriptionsFor<TestMessage>());
+            Assert.Equal(1, messenger.CountSubscriptionsFor<MvxSubscriberChangeMessage>());
+            Assert.Equal(2, messenger.CountSubscriptionsFor<TestMessage>());
             messenger.Unsubscribe<TestMessage>(token);
-            Assert.AreEqual(1, messenger.CountSubscriptionsFor<MvxSubscriberChangeMessage>());
-            Assert.AreEqual(1, messenger.CountSubscriptionsFor<TestMessage>());
+            Assert.Equal(1, messenger.CountSubscriptionsFor<MvxSubscriberChangeMessage>());
+            Assert.Equal(1, messenger.CountSubscriptionsFor<TestMessage>());
             messenger.Unsubscribe<TestMessage>(token2);
-            Assert.AreEqual(1, messenger.CountSubscriptionsFor<MvxSubscriberChangeMessage>());
-            Assert.AreEqual(0, messenger.CountSubscriptionsFor<TestMessage>());
+            Assert.Equal(1, messenger.CountSubscriptionsFor<MvxSubscriberChangeMessage>());
+            Assert.Equal(0, messenger.CountSubscriptionsFor<TestMessage>());
         }
 
-        [Test]
+        [Fact]
         public void HasSubscriptionsForTagIsCorrect()
         {
             var testTag = "TestTag";
             var notExistingTag = "NotExistingTag";
             var messenger = new MvxMessengerHub();
-            Assert.AreEqual(false, messenger.HasSubscriptionsFor<MvxSubscriberChangeMessage>());
-            Assert.AreEqual(false, messenger.HasSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag));
-            Assert.AreEqual(false, messenger.HasSubscriptionsFor<TestMessage>());
-            Assert.AreEqual(false, messenger.HasSubscriptionsForTag<TestMessage>(null));
-            Assert.AreEqual(false, messenger.HasSubscriptionsForTag<TestMessage>(notExistingTag));
+            Assert.Equal(false, messenger.HasSubscriptionsFor<MvxSubscriberChangeMessage>());
+            Assert.Equal(false, messenger.HasSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag));
+            Assert.Equal(false, messenger.HasSubscriptionsFor<TestMessage>());
+            Assert.Equal(false, messenger.HasSubscriptionsForTag<TestMessage>(null));
+            Assert.Equal(false, messenger.HasSubscriptionsForTag<TestMessage>(notExistingTag));
             var changeToken = messenger.Subscribe<MvxSubscriberChangeMessage>(message => { });
-            Assert.AreEqual(true, messenger.HasSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
-            Assert.AreEqual(false, messenger.HasSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag));
-            Assert.AreEqual(false, messenger.HasSubscriptionsForTag<TestMessage>(testTag));
-            Assert.AreEqual(false, messenger.HasSubscriptionsForTag<TestMessage>(null));
-            Assert.AreEqual(false, messenger.HasSubscriptionsForTag<TestMessage>(notExistingTag));
+            Assert.Equal(true, messenger.HasSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
+            Assert.Equal(false, messenger.HasSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag));
+            Assert.Equal(false, messenger.HasSubscriptionsForTag<TestMessage>(testTag));
+            Assert.Equal(false, messenger.HasSubscriptionsForTag<TestMessage>(null));
+            Assert.Equal(false, messenger.HasSubscriptionsForTag<TestMessage>(notExistingTag));
             var token = messenger.Subscribe<TestMessage>(m =>
             {
                 // stuff
             }, tag: testTag);
-            Assert.AreEqual(true, messenger.HasSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
-            Assert.AreEqual(false, messenger.HasSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag));
-            Assert.AreEqual(true, messenger.HasSubscriptionsForTag<TestMessage>(testTag));
-            Assert.AreEqual(false, messenger.HasSubscriptionsForTag<TestMessage>(null));
-            Assert.AreEqual(false, messenger.HasSubscriptionsForTag<TestMessage>(notExistingTag));
+            Assert.Equal(true, messenger.HasSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
+            Assert.Equal(false, messenger.HasSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag));
+            Assert.Equal(true, messenger.HasSubscriptionsForTag<TestMessage>(testTag));
+            Assert.Equal(false, messenger.HasSubscriptionsForTag<TestMessage>(null));
+            Assert.Equal(false, messenger.HasSubscriptionsForTag<TestMessage>(notExistingTag));
             messenger.Unsubscribe<TestMessage>(token);
-            Assert.AreEqual(true, messenger.HasSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
-            Assert.AreEqual(false, messenger.HasSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag));
-            Assert.AreEqual(false, messenger.HasSubscriptionsForTag<TestMessage>(testTag));
-            Assert.AreEqual(false, messenger.HasSubscriptionsForTag<TestMessage>(null));
-            Assert.AreEqual(false, messenger.HasSubscriptionsForTag<TestMessage>(notExistingTag));
+            Assert.Equal(true, messenger.HasSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
+            Assert.Equal(false, messenger.HasSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag));
+            Assert.Equal(false, messenger.HasSubscriptionsForTag<TestMessage>(testTag));
+            Assert.Equal(false, messenger.HasSubscriptionsForTag<TestMessage>(null));
+            Assert.Equal(false, messenger.HasSubscriptionsForTag<TestMessage>(notExistingTag));
         }
 
-        [Test]
+        [Fact]
         public void CountSubscriptionsForTagIsCorrect()
         {
             var testTag1 = "TestTag1";
             var testTag2 = "TestTag2";
             var notExistingTag = "NotExistingTag";
             var messenger = new MvxMessengerHub();
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag2));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<TestMessage>(notExistingTag));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag2));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<TestMessage>(notExistingTag));
             var changeToken = messenger.Subscribe<MvxSubscriberChangeMessage>(message => { });
-            Assert.AreEqual(1, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag2));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<TestMessage>(notExistingTag));
+            Assert.Equal(1, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag2));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<TestMessage>(notExistingTag));
             var token = messenger.Subscribe<TestMessage>(m =>
             {
                 // stuff
             }, tag: testTag1);
-            Assert.AreEqual(1, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
-            Assert.AreEqual(1, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag2));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<TestMessage>(notExistingTag));
+            Assert.Equal(1, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
+            Assert.Equal(1, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag2));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<TestMessage>(notExistingTag));
             var token2 = messenger.Subscribe<TestMessage>(m =>
             {
                 // stuff
             }, tag: testTag1);
-            Assert.AreEqual(1, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
-            Assert.AreEqual(2, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag2));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<TestMessage>(notExistingTag));
+            Assert.Equal(1, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
+            Assert.Equal(2, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag2));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<TestMessage>(notExistingTag));
             var token3 = messenger.Subscribe<TestMessage>(m =>
             {
                 // stuff
             }, tag: testTag2);
-            Assert.AreEqual(1, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
-            Assert.AreEqual(2, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));
-            Assert.AreEqual(1, messenger.CountSubscriptionsForTag<TestMessage>(testTag2));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<TestMessage>(notExistingTag));
+            Assert.Equal(1, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
+            Assert.Equal(2, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));
+            Assert.Equal(1, messenger.CountSubscriptionsForTag<TestMessage>(testTag2));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<TestMessage>(notExistingTag));
             messenger.Unsubscribe<TestMessage>(token);
-            Assert.AreEqual(1, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
-            Assert.AreEqual(1, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));
-            Assert.AreEqual(1, messenger.CountSubscriptionsForTag<TestMessage>(testTag2));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<TestMessage>(notExistingTag));
+            Assert.Equal(1, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
+            Assert.Equal(1, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));
+            Assert.Equal(1, messenger.CountSubscriptionsForTag<TestMessage>(testTag2));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<TestMessage>(notExistingTag));
             messenger.Unsubscribe<TestMessage>(token2);
-            Assert.AreEqual(1, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));
-            Assert.AreEqual(1, messenger.CountSubscriptionsForTag<TestMessage>(testTag2));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<TestMessage>(notExistingTag));
+            Assert.Equal(1, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));
+            Assert.Equal(1, messenger.CountSubscriptionsForTag<TestMessage>(testTag2));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<TestMessage>(notExistingTag));
             messenger.Unsubscribe<TestMessage>(token3);
-            Assert.AreEqual(1, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag2));
-            Assert.AreEqual(0, messenger.CountSubscriptionsForTag<TestMessage>(notExistingTag));
+            Assert.Equal(1, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(null));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<MvxSubscriberChangeMessage>(testTag1));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag1));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<TestMessage>(testTag2));
+            Assert.Equal(0, messenger.CountSubscriptionsForTag<TestMessage>(notExistingTag));
         }
 
-        [Test]
+        [Fact]
         public void GetSubscriptionTagsIsCorrect()
         {
             var testTag1 = "TestTag1";
@@ -318,54 +318,54 @@ namespace MvvmCross.Plugins.Messenger.Test
             Assert.IsEmpty(messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>());
             Assert.IsEmpty(messenger.GetSubscriptionTagsFor<TestMessage>());
             var changeToken = messenger.Subscribe<MvxSubscriberChangeMessage>(message => { });
-            Assert.AreEqual(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
-            Assert.AreEqual(null, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
+            Assert.Equal(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
+            Assert.Equal(null, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
             Assert.IsEmpty(messenger.GetSubscriptionTagsFor<TestMessage>());
             var token = messenger.Subscribe<TestMessage>(m =>
             {
                 // stuff
             }, tag: testTag1);
-            Assert.AreEqual(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
-            Assert.AreEqual(null, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
-            Assert.AreEqual(1, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
-            Assert.AreEqual(testTag1, messenger.GetSubscriptionTagsFor<TestMessage>()[0]);
+            Assert.Equal(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
+            Assert.Equal(null, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
+            Assert.Equal(1, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
+            Assert.Equal(testTag1, messenger.GetSubscriptionTagsFor<TestMessage>()[0]);
             var token2 = messenger.Subscribe<TestMessage>(m =>
             {
                 // stuff
             }, tag: testTag1);
-            Assert.AreEqual(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
-            Assert.AreEqual(null, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
-            Assert.AreEqual(2, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
-            Assert.AreEqual(testTag1, messenger.GetSubscriptionTagsFor<TestMessage>()[0]);
-            Assert.AreEqual(testTag1, messenger.GetSubscriptionTagsFor<TestMessage>()[1]);
+            Assert.Equal(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
+            Assert.Equal(null, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
+            Assert.Equal(2, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
+            Assert.Equal(testTag1, messenger.GetSubscriptionTagsFor<TestMessage>()[0]);
+            Assert.Equal(testTag1, messenger.GetSubscriptionTagsFor<TestMessage>()[1]);
             var token3 = messenger.Subscribe<TestMessage>(m =>
             {
                 // stuff
             }, tag: testTag2);
-            Assert.AreEqual(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
-            Assert.AreEqual(null, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
-            Assert.AreEqual(3, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
-            Assert.AreEqual(2, messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag1).Count());
-            Assert.AreEqual(1, messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag2).Count());
+            Assert.Equal(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
+            Assert.Equal(null, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
+            Assert.Equal(3, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
+            Assert.Equal(2, messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag1).Count());
+            Assert.Equal(1, messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag2).Count());
             messenger.Unsubscribe<TestMessage>(token);
-            Assert.AreEqual(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
-            Assert.AreEqual(null, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
-            Assert.AreEqual(2, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
-            Assert.AreEqual(1, messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag1).Count());
-            Assert.AreEqual(1, messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag2).Count());
+            Assert.Equal(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
+            Assert.Equal(null, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
+            Assert.Equal(2, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
+            Assert.Equal(1, messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag1).Count());
+            Assert.Equal(1, messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag2).Count());
             messenger.Unsubscribe<TestMessage>(token2);
-            Assert.AreEqual(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
-            Assert.AreEqual(null, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
-            Assert.AreEqual(1, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
-            Assert.AreEqual(0, messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag1).Count());
-            Assert.AreEqual(1, messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag2).Count());
+            Assert.Equal(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
+            Assert.Equal(null, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
+            Assert.Equal(1, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
+            Assert.Equal(0, messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag1).Count());
+            Assert.Equal(1, messenger.GetSubscriptionTagsFor<TestMessage>().Where(x => x == testTag2).Count());
             messenger.Unsubscribe<TestMessage>(token3);
-            Assert.AreEqual(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
-            Assert.AreEqual(null, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
-            Assert.AreEqual(0, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
+            Assert.Equal(1, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>().Count);
+            Assert.Equal(null, messenger.GetSubscriptionTagsFor<MvxSubscriberChangeMessage>()[0]);
+            Assert.Equal(0, messenger.GetSubscriptionTagsFor<TestMessage>().Count);
         }
 
-        [Test]
+        [Fact]
         public void SubscribeAndUnsubscribeCauseChangeMessages()
         {
             var messenger = new MvxMessengerHub();
@@ -376,16 +376,16 @@ namespace MvvmCross.Plugins.Messenger.Test
                 // stuff
             });
             Assert.NotNull(subscriberChangeMessage);
-            Assert.AreEqual(1, subscriberChangeMessage.SubscriberCount);
-            Assert.AreEqual(typeof(TestMessage), subscriberChangeMessage.MessageType);
+            Assert.Equal(1, subscriberChangeMessage.SubscriberCount);
+            Assert.Equal(typeof(TestMessage), subscriberChangeMessage.MessageType);
             subscriberChangeMessage = null;
             messenger.Unsubscribe<TestMessage>(token);
             Assert.NotNull(subscriberChangeMessage);
-            Assert.AreEqual(0, subscriberChangeMessage.SubscriberCount);
-            Assert.AreEqual(typeof(TestMessage), subscriberChangeMessage.MessageType);
+            Assert.Equal(0, subscriberChangeMessage.SubscriberCount);
+            Assert.Equal(typeof(TestMessage), subscriberChangeMessage.MessageType);
         }
 
-        [Test]
+        [Fact]
         public void PurgeCausesChangeMessage()
         {
             var messenger = new MvxMessengerHub();
@@ -393,8 +393,8 @@ namespace MvvmCross.Plugins.Messenger.Test
             var changeToken = messenger.Subscribe<MvxSubscriberChangeMessage>(message => subscriberChangeMessage = message);
             CreateShortLivedSubscription(messenger);
             Assert.NotNull(subscriberChangeMessage);
-            Assert.AreEqual(1, subscriberChangeMessage.SubscriberCount);
-            Assert.AreEqual(typeof(TestMessage), subscriberChangeMessage.MessageType);
+            Assert.Equal(1, subscriberChangeMessage.SubscriberCount);
+            Assert.Equal(typeof(TestMessage), subscriberChangeMessage.MessageType);
             subscriberChangeMessage = null;
             Thread.Sleep(100);
             GC.Collect();
@@ -403,8 +403,8 @@ namespace MvvmCross.Plugins.Messenger.Test
             Thread.Sleep(100);
             // TODO - figure out why this test fails in NUnit console runner, but not through VS Test Execution
             //Assert.NotNull(subscriberChangeMessage);
-            //Assert.AreEqual(0, subscriberChangeMessage.SubscriberCount);
-            //Assert.AreEqual(typeof(TestMessage), subscriberChangeMessage.MessageType);
+            //Assert.Equal(0, subscriberChangeMessage.SubscriberCount);
+            //Assert.Equal(typeof(TestMessage), subscriberChangeMessage.MessageType);
         }
 
         private void CreateShortLivedSubscription(MvxMessengerHub messenger)
