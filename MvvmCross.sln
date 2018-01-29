@@ -115,6 +115,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Droid", "Project
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Forms.Droid", "Projects\Playground\Playground.Forms.Droid\Playground.Forms.Droid.csproj", "{A8A8B9B3-34FA-4769-AE81-4D80F9BDC3BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Test", "MvvmCross.Tests\MvvmCross.Test\MvvmCross.Test.csproj", "{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
