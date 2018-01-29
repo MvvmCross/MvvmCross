@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsPackable>false</IsPackable>
-    <AssemblyName>MvvmCross.Plugins.ResxLocalization.Tests</AssemblyName>
-    <RootNamespace>MvvmCross.Plugins.ResxLocalization.Tests</RootNamespace>
+    <AssemblyName>MvvmCross.Plugins.Network.UnitTest</AssemblyName>
+    <RootNamespace>MvvmCross.Plugins.Network.UnitTest</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
@@ -12,7 +12,8 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MvvmCross.Plugins\ResxLocalization\MvvmCross.Plugin.ResxLocalization.csproj" />
+    <ProjectReference Include="..\..\MvvmCross.Plugins\Json\MvvmCross.Plugin.Json.csproj" />
+    <ProjectReference Include="..\..\MvvmCross.Plugins\Network\MvvmCross.Plugin.Network.csproj" />
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
   </ItemGroup>
 

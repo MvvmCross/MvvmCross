@@ -2,16 +2,17 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsPackable>false</IsPackable>
-    <AssemblyName>MvvmCross.Plugins.Messenger.Tests</AssemblyName>
-    <RootNamespace>MvvmCross.Plugins.Messenger.Tests</RootNamespace>
+    <AssemblyName>MvvmCross.Plugins.Color.UnitTest</AssemblyName>
+    <RootNamespace>MvvmCross.Plugins.Color.UnitTest</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="Moq" Version="4.8.1" />
     <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MvvmCross.Plugins\Messenger\MvvmCross.Plugin.Messenger.csproj" />
+    <ProjectReference Include="..\..\MvvmCross.Plugins\Color\MvvmCross.Plugin.Color.csproj" />
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
   </ItemGroup>
 

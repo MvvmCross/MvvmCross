@@ -2,22 +2,27 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsPackable>false</IsPackable>
-    <AssemblyName>MvvmCross.Plugins.Color.Tests</AssemblyName>
-    <RootNamespace>MvvmCross.Plugins.Color.Tests</RootNamespace>
+    <AssemblyName>MvvmCross.Plugins.JsonLocalization.UnitTest</AssemblyName>
+    <RootNamespace>MvvmCross.Plugins.JsonLocalization.UnitTest</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="Moq" Version="4.8.1" />
     <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MvvmCross.Plugins\Color\MvvmCross.Plugin.Color.csproj" />
+    <ProjectReference Include="..\..\MvvmCross.Plugins\JsonLocalization\MvvmCross.Plugin.JsonLocalization.csproj" />
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
