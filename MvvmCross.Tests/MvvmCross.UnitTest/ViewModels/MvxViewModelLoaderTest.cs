@@ -9,14 +9,14 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.TestViewModels;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Test.ViewModels
 {
-    [TestFixture]
+    
     public class MvxViewModelLoaderTest : MvxIoCSupportingTest
     {
-        [Test]
+        [Fact]
         public void Test_LoaderForNull()
         {
             ClearAll();
@@ -29,7 +29,7 @@ namespace MvvmCross.Test.ViewModels
             Assert.IsInstanceOf<MvxNullViewModel>(viewModel);
         }
 
-        [Test]
+        [Fact]
         public void Test_NormalViewModel()
         {
             ClearAll();
@@ -54,7 +54,7 @@ namespace MvvmCross.Test.ViewModels
             Assert.AreSame(outViewModel, viewModel);
         }
 
-        [Test]
+        [Fact]
         public void Test_FailedViewModel()
         {
             ClearAll();
@@ -77,7 +77,7 @@ namespace MvvmCross.Test.ViewModels
             });
         }
 
-        [Test]
+        [Fact]
         public void Test_FailedViewModelLocatorCollection()
         {
             ClearAll();

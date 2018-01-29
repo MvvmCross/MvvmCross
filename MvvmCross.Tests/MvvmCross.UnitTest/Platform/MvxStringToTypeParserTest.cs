@@ -5,11 +5,11 @@
 using System;
 using MvvmCross.Core.Platform;
 using MvvmCross.Test.Core;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Test.Platform
 {
-    [TestFixture]
+    
     public class MvxStringToTypeParserTest : MvxIoCSupportingTest
     {
         [OneTimeSetUp]
@@ -18,7 +18,7 @@ namespace MvvmCross.Test.Platform
             SetInvariantCulture();
         }
 
-        [Test]
+        [Fact]
         public void Test_AllTypesAreSupported()
         {
             var parser = new MvxStringToTypeParser();
@@ -36,120 +36,120 @@ namespace MvvmCross.Test.Platform
             Assert.IsTrue(parser.TypeSupported(typeof(StringSplitOptions)));
         }
 
-        [Test]
-        [TestCase("Hello, World")]
-        [TestCase("Foo Bar Baz")]
-        [TestCase("Z͚̭͖͟A͖̘̪L̻̯̥̬ͅG̞̰̭͍͖ͅͅO̘!̜")]
-        [TestCase("")]
-        [TestCase(null)]
+        [Fact]
+        [InlineData("Hello, World")]
+        [InlineData("Foo Bar Baz")]
+        [InlineData("Z͚̭͖͟A͖̘̪L̻̯̥̬ͅG̞̰̭͍͖ͅͅO̘!̜")]
+        [InlineData("")]
+        [InlineData(null)]
         public void Test_StringCanBeRead(string testData)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.AreEqual(testData, parser.ReadValue(testData, typeof(string), "ignored"));
+            Assert.Equal(testData, parser.ReadValue(testData, typeof(string), "ignored"));
         }
 
-        [Test]
-        [TestCase("-123", -123.0)]
-        [TestCase("1.23", 1.23)]
-        [TestCase("1,23", 123.0)]
-        [TestCase("1,230.00", 1230.0)]
-        [TestCase("1.230,0", 0)]
-        [TestCase("garbage", 0)]
-        [TestCase("", 0)]
-        [TestCase(null, 0)]
+        [Fact]
+        [InlineData("-123", -123.0)]
+        [InlineData("1.23", 1.23)]
+        [InlineData("1,23", 123.0)]
+        [InlineData("1,230.00", 1230.0)]
+        [InlineData("1.230,0", 0)]
+        [InlineData("garbage", 0)]
+        [InlineData("", 0)]
+        [InlineData(null, 0)]
         public void Test_DoubleCanBeRead(string testData, double expected)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.AreEqual(expected, parser.ReadValue(testData, typeof(double), "ignored"));
+            Assert.Equal(expected, parser.ReadValue(testData, typeof(double), "ignored"));
         }
 
-        [Test]
-        [TestCase("-123", -123.0f)]
-        [TestCase("1.23", 1.23f)]
-        [TestCase("1,23", 123.0f)]
-        [TestCase("1,230.00", 1230.0f)]
-        [TestCase("1.230,0", 0f)]
-        [TestCase("garbage", 0f)]
-        [TestCase("", 0f)]
-        [TestCase(null, 0f)]
+        [Fact]
+        [InlineData("-123", -123.0f)]
+        [InlineData("1.23", 1.23f)]
+        [InlineData("1,23", 123.0f)]
+        [InlineData("1,230.00", 1230.0f)]
+        [InlineData("1.230,0", 0f)]
+        [InlineData("garbage", 0f)]
+        [InlineData("", 0f)]
+        [InlineData(null, 0f)]
         public void Test_FloatCanBeRead(string testData, float expected)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.AreEqual(expected, parser.ReadValue(testData, typeof(float), "ignored"));
+            Assert.Equal(expected, parser.ReadValue(testData, typeof(float), "ignored"));
         }
 
-        [Test]
-        [TestCase("-123", -123)]
-        [TestCase("123", 123)]
-        [TestCase("1.23", 0)]
-        [TestCase("garbage", 0)]
-        [TestCase("", 0)]
-        [TestCase(null, 0)]
+        [Fact]
+        [InlineData("-123", -123)]
+        [InlineData("123", 123)]
+        [InlineData("1.23", 0)]
+        [InlineData("garbage", 0)]
+        [InlineData("", 0)]
+        [InlineData(null, 0)]
         public void Test_IntCanBeRead(string testData, int expected)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.AreEqual(expected, parser.ReadValue(testData, typeof(int), "ignored"));
+            Assert.Equal(expected, parser.ReadValue(testData, typeof(int), "ignored"));
         }
 
-        [Test]
-        [TestCase("-123", -123L)]
-        [TestCase("123", 123L)]
-        [TestCase("1.23", 0L)]
-        [TestCase("garbage", 0L)]
-        [TestCase("", 0L)]
-        [TestCase(null, 0L)]
+        [Fact]
+        [InlineData("-123", -123L)]
+        [InlineData("123", 123L)]
+        [InlineData("1.23", 0L)]
+        [InlineData("garbage", 0L)]
+        [InlineData("", 0L)]
+        [InlineData(null, 0L)]
         public void Test_LongCanBeRead(string testData, long expected)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.AreEqual(expected, parser.ReadValue(testData, typeof(long), "ignored"));
+            Assert.Equal(expected, parser.ReadValue(testData, typeof(long), "ignored"));
         }
 
-        [Test]
-        [TestCase("123", 123ul)]
-        [TestCase("1.23", 0ul)]
-        [TestCase("garbage", 0ul)]
-        [TestCase("", 0ul)]
-        [TestCase(null, 0ul)]
+        [Fact]
+        [InlineData("123", 123ul)]
+        [InlineData("1.23", 0ul)]
+        [InlineData("garbage", 0ul)]
+        [InlineData("", 0ul)]
+        [InlineData(null, 0ul)]
         public void Test_ULongCanBeRead(string testData, ulong expected)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.AreEqual(expected, parser.ReadValue(testData, typeof(ulong), "ignored"));
+            Assert.Equal(expected, parser.ReadValue(testData, typeof(ulong), "ignored"));
         }
 
-        [Test]
-        [TestCase("123", (ushort)123)]
-        [TestCase("1.23", (ushort)0)]
-        [TestCase("garbage", (ushort)0)]
-        [TestCase("", (ushort)0)]
-        [TestCase(null, (ushort)0)]
+        [Fact]
+        [InlineData("123", (ushort)123)]
+        [InlineData("1.23", (ushort)0)]
+        [InlineData("garbage", (ushort)0)]
+        [InlineData("", (ushort)0)]
+        [InlineData(null, (ushort)0)]
         public void Test_UShortCanBeRead(string testData, ushort expected)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.AreEqual(expected, parser.ReadValue(testData, typeof(ushort), "ignored"));
+            Assert.Equal(expected, parser.ReadValue(testData, typeof(ushort), "ignored"));
         }
 
-        [Test]
-        [TestCase("true", true)]
-        [TestCase("True", true)]
-        [TestCase("tRue", true)]
-        [TestCase("trUe", true)]
-        [TestCase("truE", true)]
-        [TestCase("TRUE", true)]
-        [TestCase("false", false)]
-        [TestCase("False", false)]
-        [TestCase("fAlse", false)]
-        [TestCase("faLse", false)]
-        [TestCase("falSe", false)]
-        [TestCase("falsE", false)]
-        [TestCase("FALSE", false)]
-        [TestCase("1.23", false)]
-        [TestCase("garbage", false)]
-        [TestCase("", false)]
-        [TestCase(null, false)]
+        [Fact]
+        [InlineData("true", true)]
+        [InlineData("True", true)]
+        [InlineData("tRue", true)]
+        [InlineData("trUe", true)]
+        [InlineData("truE", true)]
+        [InlineData("TRUE", true)]
+        [InlineData("false", false)]
+        [InlineData("False", false)]
+        [InlineData("fAlse", false)]
+        [InlineData("faLse", false)]
+        [InlineData("falSe", false)]
+        [InlineData("falsE", false)]
+        [InlineData("FALSE", false)]
+        [InlineData("1.23", false)]
+        [InlineData("garbage", false)]
+        [InlineData("", false)]
+        [InlineData(null, false)]
         public void Test_BoolCanBeRead(string testData, bool expected)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.AreEqual(expected, parser.ReadValue(testData, typeof(bool), "ignored"));
+            Assert.Equal(expected, parser.ReadValue(testData, typeof(bool), "ignored"));
         }
 
         private static object[] _guidCases =
@@ -167,20 +167,20 @@ namespace MvvmCross.Test.Platform
         public void Test_GuidCanBeRead(string testData, Guid expected)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.AreEqual(expected, parser.ReadValue(testData, typeof(Guid), "ignored"));
+            Assert.Equal(expected, parser.ReadValue(testData, typeof(Guid), "ignored"));
         }
 
-        [Test]
-        [TestCase("RemoveEmptyEntries", StringSplitOptions.RemoveEmptyEntries)]
-        [TestCase("None", StringSplitOptions.None)]
-        [TestCase("none", StringSplitOptions.None)]
-        [TestCase("garbage", StringSplitOptions.None)]
-        [TestCase("", StringSplitOptions.None)]
-        [TestCase(null, StringSplitOptions.None)]
+        [Fact]
+        [InlineData("RemoveEmptyEntries", StringSplitOptions.RemoveEmptyEntries)]
+        [InlineData("None", StringSplitOptions.None)]
+        [InlineData("none", StringSplitOptions.None)]
+        [InlineData("garbage", StringSplitOptions.None)]
+        [InlineData("", StringSplitOptions.None)]
+        [InlineData(null, StringSplitOptions.None)]
         public void Test_EnumTypeCanBeRead(string testData, StringSplitOptions expected)
         {
             var parser = new MvxStringToTypeParser();
-            Assert.AreEqual(expected, parser.ReadValue(testData, typeof(StringSplitOptions), "ignored"));
+            Assert.Equal(expected, parser.ReadValue(testData, typeof(StringSplitOptions), "ignored"));
         }
     }
 }

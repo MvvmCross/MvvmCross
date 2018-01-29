@@ -2,17 +2,17 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Plugins.ResxLocalization.Tests.Mocks;
-using NUnit.Framework;
+﻿using MvvmCross.Plugins.ResxLocalization.Tests.Mocks;
+using Xunit;
 
 namespace MvvmCross.Plugins.ResxLocalization.Tests
 {
-    [TestFixture]
+    
     public class MvxResxTextProviderTests
     {
         private MockResourceManager _resourceManager;
 
-        [SetUp]
+        
         public void SetUp()
         {
             _resourceManager = new MockResourceManager();
@@ -25,47 +25,47 @@ namespace MvvmCross.Plugins.ResxLocalization.Tests
 
         #region Tests covering the 'GetText' method
 
-        [Test]
+        [Fact]
         public void GetTextForExistingValueSupplyingNameOnlyReturnsDummyName()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
             var expected = MockResourceManager.DummyName;
 
             var actual = textProvider.GetText(null, null, MockResourceManager.DummyName);
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
         }
 
-        [Test]
+        [Fact]
         public void GetTextSupplyingNamespaceAndNameReturnsValueMatchingNamespaceAndName()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
             var expected = $"{MockResourceManager.LocalizationNamespace}.{MockResourceManager.DummyName}";
 
             var actual = textProvider.GetText(MockResourceManager.LocalizationNamespace, null, MockResourceManager.DummyName);
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
         }
 
-        [Test]
+        [Fact]
         public void GetTextSupplyingTypeKeyAndNameReturnsValueMatchingTypeKeyAndName()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
             var expected = $"{MockResourceManager.TypeKey}.{MockResourceManager.DummyName}";
 
             var actual = textProvider.GetText(null, MockResourceManager.TypeKey, MockResourceManager.DummyName);
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
         }
 
-        [Test]
+        [Fact]
         public void GetTextSupplyingNamespaceAndTypeKeyAndNameReturnsValueMatchingNamespaceAndTypeKeyAndName()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
             var expected = $"{MockResourceManager.LocalizationNamespace}.{MockResourceManager.TypeKey}.{MockResourceManager.DummyName}";
 
             var actual = textProvider.GetText(MockResourceManager.LocalizationNamespace, MockResourceManager.TypeKey, MockResourceManager.DummyName);
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
         }
 
-        [Test]
+        [Fact]
         public void GetTextForNonExistingValueReturnsNull()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
@@ -78,7 +78,7 @@ namespace MvvmCross.Plugins.ResxLocalization.Tests
 
         #region Tests covering the 'TryGetText' method
 
-        [Test]
+        [Fact]
         public void TryGetTextForExistingValueSupplyingNameOnlyReturnsTrue()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
@@ -86,10 +86,10 @@ namespace MvvmCross.Plugins.ResxLocalization.Tests
 
             string actual;
             Assert.IsTrue(textProvider.TryGetText(out actual, null, null, MockResourceManager.DummyName));
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
         }
 
-        [Test]
+        [Fact]
         public void TryGetTextSupplyingNamespaceAndNameOutputsValueMatchingNamespaceAndName()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
@@ -97,10 +97,10 @@ namespace MvvmCross.Plugins.ResxLocalization.Tests
 
             string actual;
             Assert.IsTrue(textProvider.TryGetText(out actual, MockResourceManager.LocalizationNamespace, null, MockResourceManager.DummyName));
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
         }
 
-        [Test]
+        [Fact]
         public void TryGetTextSupplyingTypeKeyAndNameOutputsValueMatchingTypeKeyAndName()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
@@ -108,10 +108,10 @@ namespace MvvmCross.Plugins.ResxLocalization.Tests
 
             string actual;
             Assert.IsTrue(textProvider.TryGetText(out actual, null, MockResourceManager.TypeKey, MockResourceManager.DummyName));
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
         }
 
-        [Test]
+        [Fact]
         public void TryGetTextSupplyingNamespaceAndTypeKeyAndNameOutputsValueMatchingNamespaceAndTypeKeyAndName()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);
@@ -119,10 +119,10 @@ namespace MvvmCross.Plugins.ResxLocalization.Tests
 
             string actual;
             Assert.IsTrue(textProvider.TryGetText(out actual, MockResourceManager.LocalizationNamespace, MockResourceManager.TypeKey, MockResourceManager.DummyName));
-            Assert.AreEqual(expected, actual);
+            Assert.Equal(expected, actual);
         }
 
-        [Test]
+        [Fact]
         public void TryGetTextForNonExistingValueReturnsFalse()
         {
             var textProvider = new MvxResxTextProvider(_resourceManager);

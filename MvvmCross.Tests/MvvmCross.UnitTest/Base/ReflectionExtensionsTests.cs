@@ -4,11 +4,11 @@
 
 using System.Linq;
 using System.Reflection;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Platform.Test
 {
-    [TestFixture]
+    
     public class ReflectionExtensionsTests
     {
         private class TestClass
@@ -50,47 +50,47 @@ namespace MvvmCross.Platform.Test
 
         #region Fields
 
-        [Test]
+        [Fact]
         public void TestGetStaticFields()
         {
             // Act
             var fields = typeof(TestClass).GetFields(BindingFlags.Static);
 
             // Assert
-            Assert.AreEqual(1, fields.Count());
+            Assert.Equal(1, fields.Count());
         }
 
-        [Test]
+        [Fact]
         public void TestGetPublicInstanceFields()
         {
             // Act
             var fields = typeof(TestClass).GetFields(BindingFlags.Public | BindingFlags.Instance);
 
             // Assert
-            Assert.AreEqual(2, fields.Count());
+            Assert.Equal(2, fields.Count());
         }
 
-        [Test]
+        [Fact]
         public void TestGetAllInstanceFields()
         {
             // Act
             var fields = typeof(TestClass).GetFields(BindingFlags.Instance);
 
             // Assert
-            Assert.AreEqual(3, fields.Count());
+            Assert.Equal(3, fields.Count());
         }
 
-        [Test]
+        [Fact]
         public void TestGetAllFields()
         {
             // Act
             var fields = typeof(TestClass).GetFields();
 
             // Assert
-            Assert.AreEqual(3, fields.Count());
+            Assert.Equal(3, fields.Count());
         }
 
-        [Test]
+        [Fact]
         public void TestGetInstanceFieldByNameStaticFieldSpecified()
         {
             // Act
@@ -100,7 +100,7 @@ namespace MvvmCross.Platform.Test
             Assert.IsNotNull(field);
         }
 
-        [Test]
+        [Fact]
         public void TestGetInstanceFieldByNameReturnsNullIfStaticFieldSpecified()
         {
             // Act
@@ -110,7 +110,7 @@ namespace MvvmCross.Platform.Test
             Assert.IsNull(field);
         }
 
-        [Test]
+        [Fact]
         public void TestGetInstanceFieldByNameInstanceFieldSpecified()
         {
             // Act
@@ -120,7 +120,7 @@ namespace MvvmCross.Platform.Test
             Assert.IsNotNull(field);
         }
 
-        [Test]
+        [Fact]
         public void TestGetStaticFieldByNameReturnsNullIfInstanceFieldSpecified()
         {
             // Act
@@ -130,46 +130,46 @@ namespace MvvmCross.Platform.Test
             Assert.IsNull(field);
         }
 
-        [Test]
+        [Fact]
         public void TestFlattenHierarchyGetsAllFields()
         {
             // Act
             var fields = typeof(TestSubClass).GetFields(BindingFlags.Public | BindingFlags.FlattenHierarchy);
 
             // Assert
-            Assert.AreEqual(3, fields.Count());
+            Assert.Equal(3, fields.Count());
         }
 
-        [Test]
+        [Fact]
         public void TestFlattenHierarchyGetsOnlyDeclaredFields()
         {
             // Act
             var fields = typeof(TestSubClass).GetFields(BindingFlags.Public);
 
             // Assert
-            Assert.AreEqual(1, fields.Count());
+            Assert.Equal(1, fields.Count());
         }
 
         #endregion Fields
 
-        [Test]
+        [Fact]
         public void TestGetConstructors()
         {
             // Act
             var ctors = typeof(TestClass).GetConstructors();
 
             // Assert
-            Assert.AreEqual(2, ctors.Count());
+            Assert.Equal(2, ctors.Count());
         }
 
-        [Test]
+        [Fact]
         public void TestGetBaseConstructor()
         {
             // Act
             var ctors = typeof(TestSubClass).GetConstructors();
 
             // Assert
-            Assert.AreEqual(1, ctors.Count());
+            Assert.Equal(1, ctors.Count());
         }
     }
 }

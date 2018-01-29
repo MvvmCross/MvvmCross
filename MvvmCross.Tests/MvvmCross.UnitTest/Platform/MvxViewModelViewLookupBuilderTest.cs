@@ -6,14 +6,14 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.TestViewModels;
 using MvvmCross.Test.Mocks.TestViews;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Test.Platform
 {
-    [TestFixture]
+    
     public class MvxViewModelViewLookupBuilderTest : MvxIoCSupportingTest
     {
-        [Test]
+        [Fact]
         public void Test_Builder()
         {
             ClearAll();
@@ -28,11 +28,11 @@ namespace MvvmCross.Test.Platform
             var builder = new MvxViewModelViewLookupBuilder();
             var result = builder.Build(new[] { assembly });
 
-            Assert.AreEqual(4, result.Count);
-            Assert.AreEqual(typeof(Test1View), result[typeof(Test1ViewModel)]);
-            Assert.AreEqual(typeof(NotTest2View), result[typeof(Test2ViewModel)]);
-            Assert.AreEqual(typeof(NotTest3View), result[typeof(Test3ViewModel)]);
-            Assert.AreEqual(typeof(OddNameOddness), result[typeof(OddNameViewModel)]);
+            Assert.Equal(4, result.Count);
+            Assert.Equal(typeof(Test1View), result[typeof(Test1ViewModel)]);
+            Assert.Equal(typeof(NotTest2View), result[typeof(Test2ViewModel)]);
+            Assert.Equal(typeof(NotTest3View), result[typeof(Test3ViewModel)]);
+            Assert.Equal(typeof(OddNameOddness), result[typeof(OddNameViewModel)]);
         }
     }
 }

@@ -2,15 +2,15 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Platform.Converters;
-using NUnit.Framework;
+﻿using MvvmCross.Platform.Converters;
+using Xunit;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 
 namespace MvvmCross.Platform.Test.Converters
 {
-    [TestFixture]
+    
     public class MvxDictionaryValueConverterTests : MvxDictionaryValueConverter<MvxDictionaryValueConverterTests.TestStates, string>
     {
         private Dictionary<TestStates, string> _testStatedictionary;
@@ -26,7 +26,7 @@ namespace MvvmCross.Platform.Test.Converters
             Failed
         }
 
-        [SetUp]
+        
         public void Init()
         {
             _testStatedictionary = new Dictionary<TestStates, string>
@@ -36,31 +36,31 @@ namespace MvvmCross.Platform.Test.Converters
             };
         }
 
-        [TestCase(TestStates.Running, ExpectedResult = StateRunning)]
-        [TestCase(TestStates.Completed, ExpectedResult = StateCompleted)]
+        [InlineData(TestStates.Running, StateRunning)]
+        [InlineData(TestStates.Completed, StateCompleted)]
         public string Convert_MatchingKeyIncludeFallback_ReturnsDictionaryValue(TestStates state)
         {
             return Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, Fallback, true), CultureInfo.CurrentUICulture);
         }
 
-        [TestCase(TestStates.Running, ExpectedResult = StateRunning)]
-        [TestCase(TestStates.Completed, ExpectedResult = StateCompleted)]
+        [InlineData(TestStates.Running, StateRunning)]
+        [InlineData(TestStates.Completed, StateCompleted)]
         public string Convert_MatchingKeyExcludeFallback_ReturnsDictionaryValue(TestStates state)
         {
             return Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, default(string), false), CultureInfo.CurrentUICulture);
         }
 
-        [Test]
+        [Fact]
         public void Convert_NoMatchingDictionaryKeyIncludeFallback_ReturnsFallback()
         {
             var state = TestStates.Failed;
 
             var result = Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, Fallback, true), CultureInfo.CurrentUICulture);
 
-            Assert.AreEqual(result, Fallback);
+            Assert.Equal(result, Fallback);
         }
 
-        [Test]
+        [Fact]
         public void Convert_NoMatchingDictionaryKeyExcludeFallback_ThrowKeyNotFoundException()
         {
             var state = TestStates.Failed;
@@ -69,7 +69,7 @@ namespace MvvmCross.Platform.Test.Converters
                 Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, default(string), false), CultureInfo.CurrentUICulture));
         }
 
-        [Test]
+        [Fact]
         public void Convert_InvalidParamterType_ThrowArgumentException()
         {
             var state = TestStates.Running;

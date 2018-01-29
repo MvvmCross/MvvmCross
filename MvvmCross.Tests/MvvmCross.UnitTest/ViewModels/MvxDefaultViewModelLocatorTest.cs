@@ -8,14 +8,14 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.TestViewModels;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Test.ViewModels
 {
-    [TestFixture]
+    
     public class MvxDefaultViewModelLocatorTest : MvxIoCSupportingTest
     {
-        [Test]
+        [Fact]
         public void Test_NoReloadState()
         {
             ClearAll();
@@ -48,18 +48,18 @@ namespace MvvmCross.Test.ViewModels
             Assert.AreSame(bundle, typedViewModel.BundleInit);
             Assert.IsNull(typedViewModel.BundleState);
             Assert.AreSame(testThing, typedViewModel.Thing);
-            Assert.AreEqual(testObject, typedViewModel.TheInitBundleSet);
+            Assert.Equal(testObject, typedViewModel.TheInitBundleSet);
             Assert.IsNull(typedViewModel.TheReloadBundleSet);
-            Assert.AreEqual(testObject.TheGuid1, typedViewModel.TheInitGuid1Set);
-            Assert.AreEqual(testObject.TheGuid2, typedViewModel.TheInitGuid2Set);
-            Assert.AreEqual(testObject.TheString1, typedViewModel.TheInitString1Set);
-            Assert.AreEqual(Guid.Empty, typedViewModel.TheReloadGuid1Set);
-            Assert.AreEqual(Guid.Empty, typedViewModel.TheReloadGuid2Set);
-            Assert.AreEqual(null, typedViewModel.TheReloadString1Set);
+            Assert.Equal(testObject.TheGuid1, typedViewModel.TheInitGuid1Set);
+            Assert.Equal(testObject.TheGuid2, typedViewModel.TheInitGuid2Set);
+            Assert.Equal(testObject.TheString1, typedViewModel.TheInitString1Set);
+            Assert.Equal(Guid.Empty, typedViewModel.TheReloadGuid1Set);
+            Assert.Equal(Guid.Empty, typedViewModel.TheReloadGuid2Set);
+            Assert.Equal(null, typedViewModel.TheReloadString1Set);
             Assert.IsTrue(typedViewModel.StartCalled);
         }
 
-        [Test]
+        [Fact]
         public void Test_WithReloadState()
         {
             ClearAll();
@@ -105,18 +105,18 @@ namespace MvvmCross.Test.ViewModels
             Assert.AreSame(initBundle, typedViewModel.BundleInit);
             Assert.AreSame(reloadBundle, typedViewModel.BundleState);
             Assert.AreSame(testThing, typedViewModel.Thing);
-            Assert.AreEqual(initBundleObject, typedViewModel.TheInitBundleSet);
-            Assert.AreEqual(reloadBundleObject, typedViewModel.TheReloadBundleSet);
-            Assert.AreEqual(initBundleObject.TheGuid1, typedViewModel.TheInitGuid1Set);
-            Assert.AreEqual(initBundleObject.TheGuid2, typedViewModel.TheInitGuid2Set);
-            Assert.AreEqual(initBundleObject.TheString1, typedViewModel.TheInitString1Set);
-            Assert.AreEqual(reloadBundleObject.TheGuid1, typedViewModel.TheReloadGuid1Set);
-            Assert.AreEqual(reloadBundleObject.TheGuid2, typedViewModel.TheReloadGuid2Set);
-            Assert.AreEqual(reloadBundleObject.TheString1, typedViewModel.TheReloadString1Set);
+            Assert.Equal(initBundleObject, typedViewModel.TheInitBundleSet);
+            Assert.Equal(reloadBundleObject, typedViewModel.TheReloadBundleSet);
+            Assert.Equal(initBundleObject.TheGuid1, typedViewModel.TheInitGuid1Set);
+            Assert.Equal(initBundleObject.TheGuid2, typedViewModel.TheInitGuid2Set);
+            Assert.Equal(initBundleObject.TheString1, typedViewModel.TheInitString1Set);
+            Assert.Equal(reloadBundleObject.TheGuid1, typedViewModel.TheReloadGuid1Set);
+            Assert.Equal(reloadBundleObject.TheGuid2, typedViewModel.TheReloadGuid2Set);
+            Assert.Equal(reloadBundleObject.TheString1, typedViewModel.TheReloadString1Set);
             Assert.IsTrue(typedViewModel.StartCalled);
         }
 
-        [Test]
+        [Fact]
         public void Test_MissingDependency()
         {
             ClearAll();
@@ -132,7 +132,7 @@ namespace MvvmCross.Test.ViewModels
                 Throws.TypeOf<MvxException>().With.Message.StartWith("Problem creating viewModel"));
         }
 
-        [Test]
+        [Fact]
         public void Test_FailingDependency()
         {
             ClearAll();
@@ -150,7 +150,7 @@ namespace MvvmCross.Test.ViewModels
                 Throws.TypeOf<MvxException>().With.Message.StartWith("Problem creating viewModel"));
         }
 
-        [Test]
+        [Fact]
         public void Test_FailingInitialisation()
         {
             ClearAll();

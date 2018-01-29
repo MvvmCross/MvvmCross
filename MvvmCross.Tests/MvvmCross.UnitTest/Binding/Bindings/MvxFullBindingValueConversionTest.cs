@@ -16,14 +16,14 @@ using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Core;
 using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.Dispatchers;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Binding.Test.Bindings
 {
-    [TestFixture]
+    
     public class MvxFullBindingValueConversionTest : MvxIoCSupportingTest
     {
- [Test]
+ [Fact]
         public void TestConverterIsUsedForConvert()
         {
             MockSourceBinding mockSource;
@@ -35,13 +35,13 @@ namespace MvvmCross.Binding.Test.Bindings
             var parameter = new { Ignored = 12 };
             var binding = TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
 
-            Assert.AreEqual(1, mockTarget.Values.Count);
-            Assert.AreEqual("Test ConversionResult", mockTarget.Values[0]);
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual("TryGetValueValue", mockValueConverter.ConversionsRequested[0]);
+            Assert.Equal(1, mockTarget.Values.Count);
+            Assert.Equal("Test ConversionResult", mockTarget.Values[0]);
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal("TryGetValueValue", mockValueConverter.ConversionsRequested[0]);
         }
 
-        [Test]
+        [Fact]
         public void TestConverterParameterIsUsedForConvert()
         {
             MockSourceBinding mockSource;
@@ -53,13 +53,13 @@ namespace MvvmCross.Binding.Test.Bindings
             var parameter = new { Ignored = 12 };
             var binding = TestSetupCommon(mockValueConverter, parameter, typeof(object), out mockSource, out mockTarget);
 
-            Assert.AreEqual(1, mockTarget.Values.Count);
-            Assert.AreEqual("Test ConversionResult", mockTarget.Values[0]);
-            Assert.AreEqual(1, mockValueConverter.ConversionParameters.Count);
-            Assert.AreEqual(parameter, mockValueConverter.ConversionParameters[0]);
+            Assert.Equal(1, mockTarget.Values.Count);
+            Assert.Equal("Test ConversionResult", mockTarget.Values[0]);
+            Assert.Equal(1, mockValueConverter.ConversionParameters.Count);
+            Assert.Equal(parameter, mockValueConverter.ConversionParameters[0]);
         }
 
-        [Test]
+        [Fact]
         public void TestConverterIsUsedForConvertBack()
         {
             MockSourceBinding mockSource;
@@ -74,13 +74,13 @@ namespace MvvmCross.Binding.Test.Bindings
             var valueChanged = new { Hello = 34 };
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs(valueChanged));
 
-            Assert.AreEqual(1, mockSource.ValuesSet.Count);
-            Assert.AreEqual("Test ConversionBackResult", mockSource.ValuesSet[0]);
-            Assert.AreEqual(1, mockValueConverter.ConversionsBackRequested.Count);
-            Assert.AreEqual(valueChanged, mockValueConverter.ConversionsBackRequested[0]);
+            Assert.Equal(1, mockSource.ValuesSet.Count);
+            Assert.Equal("Test ConversionBackResult", mockSource.ValuesSet[0]);
+            Assert.Equal(1, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(valueChanged, mockValueConverter.ConversionsBackRequested[0]);
         }
 
-        [Test]
+        [Fact]
         public void TestConverterParameterIsUsedForConvertBack()
         {
             MockSourceBinding mockSource;
@@ -95,13 +95,13 @@ namespace MvvmCross.Binding.Test.Bindings
             var valueChanged = new { Hello = 34 };
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs(valueChanged));
 
-            Assert.AreEqual(1, mockSource.ValuesSet.Count);
-            Assert.AreEqual("Test ConversionBackResult", mockSource.ValuesSet[0]);
-            Assert.AreEqual(1, mockValueConverter.ConversionBackParameters.Count);
-            Assert.AreEqual(parameter, mockValueConverter.ConversionBackParameters[0]);
+            Assert.Equal(1, mockSource.ValuesSet.Count);
+            Assert.Equal("Test ConversionBackResult", mockSource.ValuesSet[0]);
+            Assert.Equal(1, mockValueConverter.ConversionBackParameters.Count);
+            Assert.Equal(parameter, mockValueConverter.ConversionBackParameters[0]);
         }
 
-        [Test]
+        [Fact]
         public void TestTargetTypeIsUsedForConvert()
         {
             MockSourceBinding mockSource;
@@ -116,12 +116,12 @@ namespace MvvmCross.Binding.Test.Bindings
             mockSource.TryGetValueValue = "new value";
             mockSource.FireSourceChanged();
 
-            Assert.AreEqual(2, mockValueConverter.ConversionTypes.Count);
-            Assert.AreEqual(targetType, mockValueConverter.ConversionTypes[0]);
-            Assert.AreEqual(targetType, mockValueConverter.ConversionTypes[1]);
+            Assert.Equal(2, mockValueConverter.ConversionTypes.Count);
+            Assert.Equal(targetType, mockValueConverter.ConversionTypes[0]);
+            Assert.Equal(targetType, mockValueConverter.ConversionTypes[1]);
         }
 
-        [Test]
+        [Fact]
         public void TestSourceTypeIsUsedForConvertBack()
         {
             MockSourceBinding mockSource;
@@ -136,11 +136,11 @@ namespace MvvmCross.Binding.Test.Bindings
             mockSource.SourceType = aType.GetType();
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("Ignored"));
 
-            Assert.AreEqual(1, mockValueConverter.ConversionBackTypes.Count);
-            Assert.AreEqual(aType.GetType(), mockValueConverter.ConversionBackTypes[0]);
+            Assert.Equal(1, mockValueConverter.ConversionBackTypes.Count);
+            Assert.Equal(aType.GetType(), mockValueConverter.ConversionBackTypes[0]);
         }
 
-        [Test]
+        [Fact]
         public void TestFallbackValueIsUsedIfConversionFails()
         {
             MockSourceBinding mockSource;
@@ -153,14 +153,14 @@ namespace MvvmCross.Binding.Test.Bindings
             var fallback = new { Fred = "Not Barney" };
             var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
 
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(1, mockTarget.Values.Count);
-            Assert.AreEqual(fallback, mockTarget.Values[0]);
+            Assert.Equal(1, mockTarget.Values.Count);
+            Assert.Equal(fallback, mockTarget.Values[0]);
         }
 
-        [Test]
+        [Fact]
         public void TestFallbackValueIsUsedIfSourceResolutionFails()
         {
             MockSourceBinding mockSource;
@@ -173,23 +173,23 @@ namespace MvvmCross.Binding.Test.Bindings
             var fallback = new { Fred = "Not Barney" };
             var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
 
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(1, mockTarget.Values.Count);
-            Assert.AreEqual("A test value", mockTarget.Values[0]);
+            Assert.Equal(1, mockTarget.Values.Count);
+            Assert.Equal("A test value", mockTarget.Values[0]);
 
             mockSource.TryGetValueResult = false;
             mockSource.FireSourceChanged();
 
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(2, mockTarget.Values.Count);
-            Assert.AreEqual(fallback, mockTarget.Values[1]);
+            Assert.Equal(2, mockTarget.Values.Count);
+            Assert.Equal(fallback, mockTarget.Values[1]);
         }
 
-        [Test]
+        [Fact]
         public void TestDefaultValueIsUsedIfConversionFails_Object()
         {
             MockSourceBinding mockSource;
@@ -202,32 +202,32 @@ namespace MvvmCross.Binding.Test.Bindings
             object fallback = null;
             var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
 
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(1, mockTarget.Values.Count);
-            Assert.AreEqual(null, mockTarget.Values[0]);
+            Assert.Equal(1, mockTarget.Values.Count);
+            Assert.Equal(null, mockTarget.Values[0]);
 
             mockSource.TryGetValueValue = "Fred";
             mockSource.FireSourceChanged();
 
-            Assert.AreEqual(2, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(2, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(2, mockTarget.Values.Count);
-            Assert.AreEqual(null, mockTarget.Values[1]);
+            Assert.Equal(2, mockTarget.Values.Count);
+            Assert.Equal(null, mockTarget.Values[1]);
 
             mockSource.TryGetValueValue = "Betty";
             mockSource.FireSourceChanged();
 
-            Assert.AreEqual(3, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(3, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(3, mockTarget.Values.Count);
-            Assert.AreEqual(null, mockTarget.Values[2]);
+            Assert.Equal(3, mockTarget.Values.Count);
+            Assert.Equal(null, mockTarget.Values[2]);
         }
 
-        [Test]
+        [Fact]
         public void TestDefaultValueIsUsedIfConversionFails_Int()
         {
             MockSourceBinding mockSource;
@@ -240,32 +240,32 @@ namespace MvvmCross.Binding.Test.Bindings
             object fallback = null;
             var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int), out mockSource, out mockTarget);
 
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(1, mockTarget.Values.Count);
-            Assert.AreEqual(0, mockTarget.Values[0]);
+            Assert.Equal(1, mockTarget.Values.Count);
+            Assert.Equal(0, mockTarget.Values[0]);
 
             mockSource.TryGetValueValue = "Fred";
             mockSource.FireSourceChanged();
 
-            Assert.AreEqual(2, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(2, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(2, mockTarget.Values.Count);
-            Assert.AreEqual(0, mockTarget.Values[1]);
+            Assert.Equal(2, mockTarget.Values.Count);
+            Assert.Equal(0, mockTarget.Values[1]);
 
             mockSource.TryGetValueValue = "Betty";
             mockSource.FireSourceChanged();
 
-            Assert.AreEqual(3, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(3, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(3, mockTarget.Values.Count);
-            Assert.AreEqual(0, mockTarget.Values[2]);
+            Assert.Equal(3, mockTarget.Values.Count);
+            Assert.Equal(0, mockTarget.Values[2]);
         }
 
-        [Test]
+        [Fact]
         public void TestDefaultValueIsUsedIfConversionFails_NullableInt()
         {
             MockSourceBinding mockSource;
@@ -278,32 +278,32 @@ namespace MvvmCross.Binding.Test.Bindings
             object fallback = null;
             var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int?), out mockSource, out mockTarget);
 
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(1, mockTarget.Values.Count);
-            Assert.AreEqual(null, mockTarget.Values[0]);
+            Assert.Equal(1, mockTarget.Values.Count);
+            Assert.Equal(null, mockTarget.Values[0]);
 
             mockSource.TryGetValueValue = "Fred";
             mockSource.FireSourceChanged();
 
-            Assert.AreEqual(2, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(2, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(2, mockTarget.Values.Count);
-            Assert.AreEqual(null, mockTarget.Values[1]);
+            Assert.Equal(2, mockTarget.Values.Count);
+            Assert.Equal(null, mockTarget.Values[1]);
 
             mockSource.TryGetValueValue = "Betty";
             mockSource.FireSourceChanged();
 
-            Assert.AreEqual(3, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(3, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(3, mockTarget.Values.Count);
-            Assert.AreEqual(null, mockTarget.Values[2]);
+            Assert.Equal(3, mockTarget.Values.Count);
+            Assert.Equal(null, mockTarget.Values[2]);
         }
 
-        [Test]
+        [Fact]
         public void TestDefaultValueIsUsedIfSourceResolutionFails_Object()
         {
             MockSourceBinding mockSource;
@@ -316,42 +316,42 @@ namespace MvvmCross.Binding.Test.Bindings
             object fallback = null;
             var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(object), out mockSource, out mockTarget);
 
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(1, mockTarget.Values.Count);
-            Assert.AreEqual("A test value", mockTarget.Values[0]);
-
-            mockSource.TryGetValueResult = false;
-            mockSource.FireSourceChanged();
-
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
-
-            Assert.AreEqual(2, mockTarget.Values.Count);
-            Assert.AreEqual(null, mockTarget.Values[1]);
+            Assert.Equal(1, mockTarget.Values.Count);
+            Assert.Equal("A test value", mockTarget.Values[0]);
 
             mockSource.TryGetValueResult = false;
             mockSource.FireSourceChanged();
 
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(3, mockTarget.Values.Count);
-            Assert.AreEqual(null, mockTarget.Values[2]);
+            Assert.Equal(2, mockTarget.Values.Count);
+            Assert.Equal(null, mockTarget.Values[1]);
+
+            mockSource.TryGetValueResult = false;
+            mockSource.FireSourceChanged();
+
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
+
+            Assert.Equal(3, mockTarget.Values.Count);
+            Assert.Equal(null, mockTarget.Values[2]);
 
             mockSource.TryGetValueValue = "Fred";
             mockSource.TryGetValueResult = true;
             mockSource.FireSourceChanged();
 
-            Assert.AreEqual(2, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(2, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(4, mockTarget.Values.Count);
-            Assert.AreEqual("A test value", mockTarget.Values[3]);
+            Assert.Equal(4, mockTarget.Values.Count);
+            Assert.Equal("A test value", mockTarget.Values[3]);
         }
 
-        [Test]
+        [Fact]
         public void TestDefaultValueIsUsedIfSourceResolutionFails_Int()
         {
             MockSourceBinding mockSource;
@@ -364,41 +364,41 @@ namespace MvvmCross.Binding.Test.Bindings
             object fallback = null;
             var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int), out mockSource, out mockTarget);
 
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(1, mockTarget.Values.Count);
-            Assert.AreEqual("A test value", mockTarget.Values[0]);
-
-            mockSource.TryGetValueResult = false;
-            mockSource.FireSourceChanged();
-
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
-
-            Assert.AreEqual(2, mockTarget.Values.Count);
-            Assert.AreEqual(0, mockTarget.Values[1]);
+            Assert.Equal(1, mockTarget.Values.Count);
+            Assert.Equal("A test value", mockTarget.Values[0]);
 
             mockSource.TryGetValueResult = false;
             mockSource.FireSourceChanged();
 
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(3, mockTarget.Values.Count);
-            Assert.AreEqual(0, mockTarget.Values[2]);
+            Assert.Equal(2, mockTarget.Values.Count);
+            Assert.Equal(0, mockTarget.Values[1]);
 
             mockSource.TryGetValueResult = false;
             mockSource.FireSourceChanged();
 
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(4, mockTarget.Values.Count);
-            Assert.AreEqual(0, mockTarget.Values[3]);
+            Assert.Equal(3, mockTarget.Values.Count);
+            Assert.Equal(0, mockTarget.Values[2]);
+
+            mockSource.TryGetValueResult = false;
+            mockSource.FireSourceChanged();
+
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
+
+            Assert.Equal(4, mockTarget.Values.Count);
+            Assert.Equal(0, mockTarget.Values[3]);
         }
 
-        [Test]
+        [Fact]
         public void TestDefaultValueIsUsedIfSourceResolutionFails_NullableInt()
         {
             MockSourceBinding mockSource;
@@ -411,38 +411,38 @@ namespace MvvmCross.Binding.Test.Bindings
             object fallback = null;
             var binding = TestSetupCommon(mockValueConverter, parameter, fallback, typeof(int?), out mockSource, out mockTarget);
 
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(1, mockTarget.Values.Count);
-            Assert.AreEqual("A test value", mockTarget.Values[0]);
-
-            mockSource.TryGetValueResult = false;
-            mockSource.FireSourceChanged();
-
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
-
-            Assert.AreEqual(2, mockTarget.Values.Count);
-            Assert.AreEqual(null, mockTarget.Values[1]);
+            Assert.Equal(1, mockTarget.Values.Count);
+            Assert.Equal("A test value", mockTarget.Values[0]);
 
             mockSource.TryGetValueResult = false;
             mockSource.FireSourceChanged();
 
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(3, mockTarget.Values.Count);
-            Assert.AreEqual(null, mockTarget.Values[2]);
+            Assert.Equal(2, mockTarget.Values.Count);
+            Assert.Equal(null, mockTarget.Values[1]);
 
             mockSource.TryGetValueResult = false;
             mockSource.FireSourceChanged();
 
-            Assert.AreEqual(1, mockValueConverter.ConversionsRequested.Count);
-            Assert.AreEqual(0, mockValueConverter.ConversionsBackRequested.Count);
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
 
-            Assert.AreEqual(4, mockTarget.Values.Count);
-            Assert.AreEqual(null, mockTarget.Values[3]);
+            Assert.Equal(3, mockTarget.Values.Count);
+            Assert.Equal(null, mockTarget.Values[2]);
+
+            mockSource.TryGetValueResult = false;
+            mockSource.FireSourceChanged();
+
+            Assert.Equal(1, mockValueConverter.ConversionsRequested.Count);
+            Assert.Equal(0, mockValueConverter.ConversionsBackRequested.Count);
+
+            Assert.Equal(4, mockTarget.Values.Count);
+            Assert.Equal(null, mockTarget.Values[3]);
         }
 
         private MvxFullBinding TestSetupCommon(IMvxValueConverter valueConverter, object converterParameter,

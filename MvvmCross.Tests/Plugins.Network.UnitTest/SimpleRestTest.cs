@@ -9,20 +9,20 @@ using MvvmCross.Plugins.Json;
 using MvvmCross.Plugins.Network.Rest;
 using MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks;
 using MvvmCross.Test.Core;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Plugins.Network.Test
 {
-    [TestFixture]
+    
     public class SimpleRestTest
         : MvxIoCSupportingTest
     {
-        [SetUp]
+        
         public void SetUp()
         {
         }
 
-        [Test]
+        [Fact]
         public async Task GetDataFromGoogleBooks()
         {
             ClearAll();
@@ -43,7 +43,7 @@ namespace MvvmCross.Plugins.Network.Test
             Assert.IsNotNull(theResponse);
             Assert.IsNull(exception);
             Assert.IsNotNull(theResponse.Result);
-            Assert.AreEqual(HttpStatusCode.OK, theResponse.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, theResponse.StatusCode);
             Assert.IsTrue(theResponse.Result.items.Count == 10);
             Assert.IsTrue(theResponse.Result.items[0].ToString().Contains("MonoTouch"));
         }

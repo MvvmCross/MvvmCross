@@ -4,7 +4,7 @@
 
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Test.Core;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Binding.Test.Parse.Binding
 {
@@ -14,7 +14,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding
         protected void AssertAreEquivalent(MvxSerializableBindingSpecification expected,
                                          MvxSerializableBindingSpecification actual)
         {
-            Assert.AreEqual(expected.Count, actual.Count);
+            Assert.Equal(expected.Count, actual.Count);
             foreach (var kvp in expected)
             {
                 Assert.IsTrue(actual.ContainsKey(kvp.Key));
@@ -25,18 +25,18 @@ namespace MvvmCross.Binding.Test.Parse.Binding
         protected void AssertAreEquivalent(MvxSerializableBindingDescription expected,
                                          MvxSerializableBindingDescription actual)
         {
-            Assert.AreEqual(expected.Converter, actual.Converter);
-            Assert.AreEqual(expected.ConverterParameter, actual.ConverterParameter);
-            Assert.AreEqual(expected.FallbackValue, actual.FallbackValue);
-            Assert.AreEqual(expected.Mode, actual.Mode);
-            Assert.AreEqual(expected.Path, actual.Path);
-            Assert.AreEqual(expected.Function, actual.Function);
-            Assert.AreEqual(expected.Literal, actual.Literal);
+            Assert.Equal(expected.Converter, actual.Converter);
+            Assert.Equal(expected.ConverterParameter, actual.ConverterParameter);
+            Assert.Equal(expected.FallbackValue, actual.FallbackValue);
+            Assert.Equal(expected.Mode, actual.Mode);
+            Assert.Equal(expected.Path, actual.Path);
+            Assert.Equal(expected.Function, actual.Function);
+            Assert.Equal(expected.Literal, actual.Literal);
             if (expected.Sources == null)
                 Assert.IsNull(actual.Sources);
             else
             {
-                Assert.AreEqual(expected.Sources.Count, actual.Sources.Count);
+                Assert.Equal(expected.Sources.Count, actual.Sources.Count);
                 for (var i = 0; i < expected.Sources.Count; i++)
                     AssertAreEquivalent(expected.Sources[i], actual.Sources[i]);
             }

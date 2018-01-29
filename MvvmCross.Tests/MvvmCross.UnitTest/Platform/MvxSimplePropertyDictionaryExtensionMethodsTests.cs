@@ -5,21 +5,21 @@
 using System.Collections.Generic;
 using MvvmCross.Core.Platform;
 using MvvmCross.Test.Core;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Test.Platform
 {
-    [TestFixture]
+    
     public class MvxSimplePropertyDictionaryExtensionMethodsTests : MvxIoCSupportingTest
     {
-        [SetUp]
+        
         public void SetUp()
         {
             ClearAll();
             Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
         }
 
-        [Test]
+        [Fact]
         public void Read_ObjectHasValidPropertiesInBaseClass_BaseClassPropertiesAreDeserialized()
         {
             const string value = "42";
@@ -32,9 +32,9 @@ namespace MvvmCross.Test.Platform
 
             var deserialized = dictionary.Read<ObjectWithValidPropertiesInBaseClass>();
 
-            Assert.AreEqual(value, deserialized.ChildProperty);
-            Assert.AreEqual(value, deserialized.BasePropertyInternalSet);
-            Assert.AreEqual(value, deserialized.BasePropertyPublicSet);
+            Assert.Equal(value, deserialized.ChildProperty);
+            Assert.Equal(value, deserialized.BasePropertyInternalSet);
+            Assert.Equal(value, deserialized.BasePropertyPublicSet);
         }
 
         private class ObjectWithValidPropertiesInBaseClass : ObjectWithValidPropertiesInBaseClassBase

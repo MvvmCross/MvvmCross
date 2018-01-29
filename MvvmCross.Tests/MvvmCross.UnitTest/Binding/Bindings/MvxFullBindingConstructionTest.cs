@@ -14,11 +14,11 @@ using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Core;
 using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.Dispatchers;
-using NUnit.Framework;
+using Xunit;
 
 namespace MvvmCross.Binding.Test.Bindings
 {
-    [TestFixture]
+    
     public class MvxFullBindingConstructionTest : MvxIoCSupportingTest
     {
         public class MyBinding : MvxFullBinding
@@ -63,7 +63,7 @@ namespace MvvmCross.Binding.Test.Bindings
             }
         }
 
-        [Test]
+        [Fact]
         public void Test_Creating_A_Binding_Calls_The_Source_And_Target_Factories()
         {
             TestCommon(MvxBindingMode.TwoWay, true, true);

@@ -2,42 +2,42 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Core.Navigation;
-using NUnit.Framework;
+﻿using MvvmCross.Core.Navigation;
+using Xunit;
 
 namespace MvvmCross.Test.Navigation
 {
-    [TestFixture]
+    
     public class NavigationCacheTests
     {
-        [Test]
-        [TestCase("a", 1, 1)]
-        [TestCase("a", -1, -1)]
-        [TestCase("a", int.MaxValue, int.MaxValue)]
-        [TestCase("a", int.MinValue, int.MinValue)]
-        [TestCase("a", default(int), default(int))]
-        [TestCase("a", 1337, 1337)]
+        [Fact]
+        [InlineData("a", 1, 1)]
+        [InlineData("a", -1, -1)]
+        [InlineData("a", int.MaxValue, int.MaxValue)]
+        [InlineData("a", int.MinValue, int.MinValue)]
+        [InlineData("a", default(int), default(int))]
+        [InlineData("a", 1337, 1337)]
         public void Test_IntsCanBeCached(string key, int value, int expected)
         {
             SimpleTest(new MvxNavigationCache(), key, value, expected);
         }
 
-        [Test]
-        [TestCase("a", 1.0, 1.0)]
-        [TestCase("a", -1.0, -1.0)]
-        [TestCase("a", double.MaxValue, double.MaxValue)]
-        [TestCase("a", double.MinValue, double.MinValue)]
-        [TestCase("a", default(double), default(double))]
-        [TestCase("a", 1337.0, 1337.0)]
+        [Fact]
+        [InlineData("a", 1.0, 1.0)]
+        [InlineData("a", -1.0, -1.0)]
+        [InlineData("a", double.MaxValue, double.MaxValue)]
+        [InlineData("a", double.MinValue, double.MinValue)]
+        [InlineData("a", default(double), default(double))]
+        [InlineData("a", 1337.0, 1337.0)]
         public void Test_DoublesCanBeCached(string key, double value, double expected)
         {
             SimpleTest(new MvxNavigationCache(), key, value, expected);
         }
 
-        [Test]
-        [TestCase("a", "a", "a")]
-        [TestCase("a", "", "")]
-        [TestCase("a", null, null)]
+        [Fact]
+        [InlineData("a", "a", "a")]
+        [InlineData("a", "", "")]
+        [InlineData("a", null, null)]
         public void Test_StringsCanBeCached(string key, string value, string expected)
         {
             SimpleTest(new MvxNavigationCache(), key, value, expected);
@@ -47,10 +47,10 @@ namespace MvvmCross.Test.Navigation
         {
             Assert.IsTrue(cache.AddValue(key, value));
             var addedValue = cache.GetValueOrDefault<T>(key);
-            Assert.AreEqual(expected, addedValue);
+            Assert.Equal(expected, addedValue);
         }
 
-        [Test]
+        [Fact]
         public void Test_MixedTypesCanBeCached()
         {
             var cache = new MvxNavigationCache();
@@ -63,7 +63,7 @@ namespace MvvmCross.Test.Navigation
             SimpleTest(cache, "e", obj, obj);
         }
 
-        [Test]
+        [Fact]
         public void Test_CacheCanClear()
         {
             var cache = new MvxNavigationCache();
@@ -85,7 +85,7 @@ namespace MvvmCross.Test.Navigation
             Assert.IsFalse(cache.Contains("d"));
         }
 
-        [Test]
+        [Fact]
         public void Test_CacheCanRemoveItem()
         {
             var cache = new MvxNavigationCache();
