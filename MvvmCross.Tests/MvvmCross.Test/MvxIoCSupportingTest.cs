@@ -7,10 +7,8 @@ using MvvmCross.Core;
 using MvvmCross.Core.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.IoC;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Test.Core
+namespace MvvmCross.Test
 {
     public class MvxIoCSupportingTest
     {
@@ -23,6 +21,11 @@ namespace MvvmCross.Test.Core
             ClearAll();
         }
 
+        public void Reset()
+        {
+            MvxSingleton.ClearAllSingletons();
+        }
+
         protected virtual IMvxIocOptions CreateIocOptions()
         {
             return null;
@@ -31,7 +34,7 @@ namespace MvvmCross.Test.Core
         protected virtual void ClearAll()
         {
             // fake set up of the IoC
-            MvxSingleton.ClearAllSingletons();
+            Reset();
             _ioc = MvxIoCProvider.Initialize(CreateIocOptions());
             _ioc.RegisterSingleton(_ioc);
             InitializeSingletonCache();
