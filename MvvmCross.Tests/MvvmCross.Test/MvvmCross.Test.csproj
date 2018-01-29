@@ -5,14 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="MvxIoCSupportingTest.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="MvxIoCSupportingTest.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
   </ItemGroup>
 
