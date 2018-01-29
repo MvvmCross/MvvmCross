@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross.Plugins\Color\MvvmCross.Plugin.Color.csproj" />
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
+    <ProjectReference Include="..\MvvmCross.Test\MvvmCross.Test.csproj" />
   </ItemGroup>
 
   <ItemGroup>
