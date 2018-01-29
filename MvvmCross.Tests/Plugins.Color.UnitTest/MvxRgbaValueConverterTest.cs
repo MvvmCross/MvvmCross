@@ -3,114 +3,112 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Globalization;
-using NUnit.Framework;
+using MvvmCross.Test;
+using Xunit;
 
 namespace MvvmCross.Plugins.Color.Test
 {
-    [TestFixture]
+    [Collection("Color")]
     public class MvxRgbaValueConverterTest : MvxColorValueConverterTest
     {
-        [Test]
-        public void Test3DigitStrings()
+        public MvxRgbaValueConverterTest(MvxTestFixture fixture) : base(fixture)
         {
-            ClearAll();
-
-            var tests = new string[]
-                {
-                    "fff",
-                    "FFF",
-                    "000",
-                    "123",
-                    "A23",
-                    "02A"
-                };
-            var results = new uint[]
-                {
-                    0xFFffffff,
-                    0xFFffffff,
-                    0xFF000000,
-                    0xFF112233,
-                    0xFFAA2233,
-                    0xFF0022AA
-                };
-
-            RunTests(tests, results);
         }
 
-        private static void RunTests(string[] tests, uint[] results)
+        [Theory]
+        [InlineData("fff", 0xFFffffff)]
+        [InlineData("FFF", 0xFFffffff)]
+        [InlineData("000", 0xFF000000)]
+        [InlineData("123", 0xFF112233)]
+        [InlineData("A23", 0xFFAA2233)]
+        [InlineData("02A", 0xFF0022AA)]
+        public void Test3DigitString_OK(string rgba, uint expected)
         {
-            for (var i = 0; i < tests.Length; i++)
-            {
-                var converter = new MvxRGBAValueConverter();
-                var actual = converter.Convert(tests[i], typeof(object), null, CultureInfo.CurrentUICulture);
-                var wrapped = actual as WrappedColor;
-                Assert.IsNotNull(wrapped);
-                Assert.AreEqual(results[i], (uint)wrapped.Color.ARGB);
-            }
-
-            for (var i = 0; i < tests.Length; i++)
-            {
-                var converter = new MvxRGBAValueConverter();
-                var actual = converter.Convert("#" + tests[i], typeof(object), null, CultureInfo.CurrentUICulture);
-                var wrapped = actual as WrappedColor;
-                Assert.IsNotNull(wrapped);
-                Assert.AreEqual(results[i], (uint)wrapped.Color.ARGB);
-            }
+            var converter = new MvxRGBAValueConverter();
+            var actual = converter.Convert(rgba, typeof(object), null, CultureInfo.CurrentUICulture);
+            var wrapped = actual as WrappedColor;
+            Assert.NotNull(wrapped);
+            Assert.Equal(expected, (uint)wrapped.Color.ARGB);
         }
 
-        [Test]
-        public void Test6DigitStrings()
+        [Theory]
+        [InlineData("#fff", 0xFFffffff)]
+        [InlineData("#FFF", 0xFFffffff)]
+        [InlineData("#000", 0xFF000000)]
+        [InlineData("#123", 0xFF112233)]
+        [InlineData("#A23", 0xFFAA2233)]
+        [InlineData("#02A", 0xFF0022AA)]
+        public void Test3DigitHashString_OK(string rgba, uint expected)
         {
-            ClearAll();
-
-            var tests = new string[]
-                {
-                    "ffffff",
-                    "FFFFFF",
-                    "000000",
-                    "123456",
-                    "A23BCD",
-                    "02A040"
-                };
-            var results = new uint[]
-                {
-                    0xFFffffff,
-                    0xFFffffff,
-                    0xFF000000,
-                    0xFF123456,
-                    0xFFA23BCD,
-                    0xFF02A040
-                };
-
-            RunTests(tests, results);
+            var converter = new MvxRGBAValueConverter();
+            var actual = converter.Convert(rgba, typeof(object), null, CultureInfo.CurrentUICulture);
+            var wrapped = actual as WrappedColor;
+            Assert.NotNull(wrapped);
+            Assert.Equal(expected, (uint)wrapped.Color.ARGB);
         }
 
-        [Test]
-        public void Test8DigitStrings()
+        [Theory]
+        [InlineData("ffffff", 0xFFffffff)]
+        [InlineData("FFFFFF", 0xFFffffff)]
+        [InlineData("000000", 0xFF000000)]
+        [InlineData("123456", 0xFF123456)]
+        [InlineData("A23BCD", 0xFFA23BCD)]
+        [InlineData("02A040", 0xFF02A040)]
+        public void Tes6DigitString_OK(string rgba, uint expected)
         {
-            ClearAll();
+            var converter = new MvxRGBAValueConverter();
+            var actual = converter.Convert(rgba, typeof(object), null, CultureInfo.CurrentUICulture);
+            var wrapped = actual as WrappedColor;
+            Assert.NotNull(wrapped);
+            Assert.Equal(expected, (uint)wrapped.Color.ARGB);
+        }
 
-            // NOTE - MvxColor stores ARGB, but these strings are RGBA
-            var tests = new string[]
-                {
-                    "ffffffff",
-                    "FFFFFFFF",
-                    "00000000",
-                    "12345678",
-                    "A23BCDA9",
-                    "02A04012"
-                };
-            var results = new uint[]
-                {
-                    0xFFffffff,
-                    0xFFffffff,
-                    0x00000000,
-                    0x78123456,
-                    0xA9A23BCD,
-                    0x1202A040
-                };
+        [Theory]
+        [InlineData("#ffffff", 0xFFffffff)]
+        [InlineData("#FFFFFF", 0xFFffffff)]
+        [InlineData("#000000", 0xFF000000)]
+        [InlineData("#123456", 0xFF123456)]
+        [InlineData("#A23BCD", 0xFFA23BCD)]
+        [InlineData("#02A040", 0xFF02A040)]
+        public void Tes6DigitHashString_OK(string rgba, uint expected)
+        {
+            var converter = new MvxRGBAValueConverter();
+            var actual = converter.Convert(rgba, typeof(object), null, CultureInfo.CurrentUICulture);
+            var wrapped = actual as WrappedColor;
+            Assert.NotNull(wrapped);
+            Assert.Equal(expected, (uint)wrapped.Color.ARGB);
+        }
 
-            RunTests(tests, results);
+        [Theory]
+        [InlineData("ffffffff", 0xFFffffff)]
+        [InlineData("FFFFFFFF", 0xFFffffff)]
+        [InlineData("00000000", 0xFF000000)]
+        [InlineData("12345678", 0x78123456)]
+        [InlineData("A23BCDA9", 0xA9A23BCD)]
+        [InlineData("02A04012", 0x1202A040)]
+        public void Tes8DigitString_OK(string rgba, uint expected)
+        {
+            var converter = new MvxRGBAValueConverter();
+            var actual = converter.Convert(rgba, typeof(object), null, CultureInfo.CurrentUICulture);
+            var wrapped = actual as WrappedColor;
+            Assert.NotNull(wrapped);
+            Assert.Equal(expected, (uint)wrapped.Color.ARGB);
+        }
+
+        [Theory]
+        [InlineData("#ffffffff", 0xFFffffff)]
+        [InlineData("#FFFFFFFF", 0xFFffffff)]
+        [InlineData("#00000000", 0xFF000000)]
+        [InlineData("#12345678", 0x78123456)]
+        [InlineData("#A23BCDA9", 0xA9A23BCD)]
+        [InlineData("#02A04012", 0x1202A040)]
+        public void Tes8DigitHashString_OK(string rgba, uint expected)
+        {
+            var converter = new MvxRGBAValueConverter();
+            var actual = converter.Convert(rgba, typeof(object), null, CultureInfo.CurrentUICulture);
+            var wrapped = actual as WrappedColor;
+            Assert.NotNull(wrapped);
+            Assert.Equal(expected, (uint)wrapped.Color.ARGB);
         }
     }
 }

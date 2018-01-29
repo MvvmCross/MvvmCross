@@ -3,50 +3,32 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Globalization;
-using NUnit.Framework;
+using MvvmCross.Test;
+using Xunit;
 
 namespace MvvmCross.Plugins.Color.Test
 {
-    [TestFixture]
+    [Collection("Color")]
     public class MvxRgbIntValueConverterTest : MvxColorValueConverterTest
     {
-        private static void RunTests(int[] tests, uint[] results)
+        public MvxRgbIntValueConverterTest(MvxTestFixture fixture) : base(fixture)
         {
-            for (var i = 0; i < tests.Length; i++)
-            {
-                var converter = new MvxRGBIntColorValueConverter();
-                var actual = converter.Convert(tests[i], typeof(object), null, CultureInfo.CurrentUICulture);
-                var wrapped = actual as WrappedColor;
-                Assert.IsNotNull(wrapped);
-                Assert.AreEqual(results[i], (uint)wrapped.Color.ARGB);
-            }
         }
 
-        [Test]
-        public void TestInputs()
+        [Theory]
+        [InlineData(0xffffff, 0xFFffffff)]
+        [InlineData(0x000000, 0xFF000000)]
+        [InlineData(0x123456, 0xFF123456)]
+        [InlineData(0xA23BCD, 0xFFA23BCD)]
+        [InlineData(0x02A040, 0xFF02A040)]
+        [InlineData(0x7B02A040, 0xFF02A040)]
+        public void ConvertRGBIntToColor(int rgb, uint argb)
         {
-            ClearAll();
-
-            var tests = new int[]
-                {
-                    0xffffff,
-                    0x000000,
-                    0x123456,
-                    0xA23BCD,
-                    0x02A040,
-                    (int)0x7B02A040
-                };
-            var results = new uint[]
-                {
-                    0xFFffffff,
-                    0xFF000000,
-                    0xFF123456,
-                    0xFFA23BCD,
-                    0xFF02A040,
-                    0xFF02A040
-                };
-
-            RunTests(tests, results);
+            var converter = new MvxRGBIntColorValueConverter();
+            var actual = converter.Convert(rgb, typeof(object), null, CultureInfo.CurrentUICulture);
+            var wrapped = actual as WrappedColor;
+            Assert.NotNull(wrapped);
+            Assert.Equal(argb, (uint)wrapped.Color.ARGB);
         }
     }
 }
