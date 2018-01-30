@@ -6,15 +6,19 @@ using System.Collections.Generic;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Tibet;
 using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Test;
 using Xunit;
 
 namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
 {
-    
+    [Collection("MvxTest")]
     public class MvxTibetBindingTest
         : MvxBaseSwissBindingTest<MvxTibetBindingParser>
     {
+        public MvxTibetBindingTest(MvxTestFixture fixture) : base(fixture)
+        {
+        }
+
         [Fact]
         public void TestFunctionalValueConverterBinding()
         {

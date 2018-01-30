@@ -8,7 +8,6 @@ using Xunit;
 
 namespace MvvmCross.Binding.Test.Parse.Binding
 {
-    [Collection("MvxTest")]
     public abstract class MvxBindingTest : IClassFixture<MvxTestFixture>
     {
         public MvxBindingTest(MvxTestFixture fixture)
