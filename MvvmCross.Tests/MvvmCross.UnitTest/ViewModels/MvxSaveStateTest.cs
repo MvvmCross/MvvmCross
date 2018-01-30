@@ -6,21 +6,27 @@ using System;
 using System.Collections.Generic;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.TestViewModels;
 using Xunit;
 
 namespace MvvmCross.Test.ViewModels
 {
-    
-    public class MvxSaveStateTest : MvxIoCSupportingTest
+    [Collection("MvxTest")]
+    public class MvxSaveStateTest : IClassFixture<MvxTestFixture>
     {
+        private readonly MvxTestFixture _fixture;
+
+        public MvxSaveStateTest(MvxTestFixture fixture)
+        {
+            _fixture = fixture;
+        }
+
         [Fact]
         public void Test_SaveState()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
-            Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
+            _fixture.Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
 
             var viewModel = new Test3ViewModel
             {
@@ -53,7 +59,7 @@ namespace MvvmCross.Test.ViewModels
         [Fact]
         public void Test_NullSaveState()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             var viewModel = new Test3ViewModel();
 

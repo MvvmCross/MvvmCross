@@ -4,50 +4,56 @@
 
 using System;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.TestViewModels;
 using Xunit;
 
 namespace MvvmCross.Test.Platform
 {
-    
-    public class MvxViewModelByNameLookupTest : MvxIoCSupportingTest
+    [Collection("MvxTest")]
+    public class MvxViewModelByNameLookupTest : IClassFixture<MvxTestFixture>
     {
+        private readonly MvxTestFixture _fixture;
+
+        public MvxViewModelByNameLookupTest(MvxTestFixture fixture)
+        {
+            _fixture = fixture;
+        }
+
         [Fact]
         public void Test_ViewModelByName_Finds_Expected_ViewModel()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             var assembly = GetType().Assembly;
             var finder = new MvxViewModelByNameLookup();
             finder.AddAll(assembly);
             Type result;
-            Assert.IsTrue(finder.TryLookupByName("Test1ViewModel", out result));
+            Assert.True(finder.TryLookupByName("Test1ViewModel", out result));
             Assert.Equal(typeof(Test1ViewModel), result);
-            Assert.IsTrue(finder.TryLookupByName("Test2ViewModel", out result));
+            Assert.True(finder.TryLookupByName("Test2ViewModel", out result));
             Assert.Equal(typeof(Test2ViewModel), result);
-            Assert.IsTrue(finder.TryLookupByName("Test3ViewModel", out result));
+            Assert.True(finder.TryLookupByName("Test3ViewModel", out result));
             Assert.Equal(typeof(Test3ViewModel), result);
-            Assert.IsFalse(finder.TryLookupByName("AbstractTest1ViewModel", out result));
-            Assert.IsNull(result);
-            Assert.IsFalse(finder.TryLookupByName("NoWayTestViewModel", out result));
-            Assert.IsNull(result);
-            Assert.IsTrue(finder.TryLookupByFullName("MvvmCross.Test.Mocks.TestViewModels.Test1ViewModel",
+            Assert.False(finder.TryLookupByName("AbstractTest1ViewModel", out result));
+            Assert.Null(result);
+            Assert.False(finder.TryLookupByName("NoWayTestViewModel", out result));
+            Assert.Null(result);
+            Assert.True(finder.TryLookupByFullName("MvvmCross.Test.Mocks.TestViewModels.Test1ViewModel",
                                                      out result));
             Assert.Equal(typeof(Test1ViewModel), result);
-            Assert.IsTrue(finder.TryLookupByFullName("MvvmCross.Test.Mocks.TestViewModels.Test2ViewModel",
+            Assert.True(finder.TryLookupByFullName("MvvmCross.Test.Mocks.TestViewModels.Test2ViewModel",
                                                      out result));
             Assert.Equal(typeof(Test2ViewModel), result);
-            Assert.IsTrue(finder.TryLookupByFullName("MvvmCross.Test.Mocks.TestViewModels.Test3ViewModel",
+            Assert.True(finder.TryLookupByFullName("MvvmCross.Test.Mocks.TestViewModels.Test3ViewModel",
                                                      out result));
             Assert.Equal(typeof(Test3ViewModel), result);
-            Assert.IsFalse(
+            Assert.False(
                 finder.TryLookupByFullName("MvvmCross.Test.Mocks.TestViewModels.AbstractTest1ViewModel",
                                            out result));
-            Assert.IsNull(result);
-            Assert.IsFalse(finder.TryLookupByFullName(
+            Assert.Null(result);
+            Assert.False(finder.TryLookupByFullName(
                 "MvvmCross.Test.Mocks.TestViewModels.NoWayTestViewModel", out result));
-            Assert.IsNull(result);
+            Assert.Null(result);
         }
     }
 }

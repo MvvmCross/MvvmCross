@@ -97,7 +97,7 @@ namespace MvvmCross.Platform.Test
             var field = typeof(TestClass).GetField("PublicStaticField", BindingFlags.Public | BindingFlags.Static);
 
             // Assert
-            Assert.IsNotNull(field);
+            Assert.NotNull(field);
         }
 
         [Fact]
@@ -107,7 +107,7 @@ namespace MvvmCross.Platform.Test
             var field = typeof(TestClass).GetField("PublicStaticField", BindingFlags.Public | BindingFlags.Instance);
 
             // Assert
-            Assert.IsNull(field);
+            Assert.Null(field);
         }
 
         [Fact]
@@ -117,7 +117,7 @@ namespace MvvmCross.Platform.Test
             var field = typeof(TestClass).GetField("PublicInstanceField1", BindingFlags.Public | BindingFlags.Instance);
 
             // Assert
-            Assert.IsNotNull(field);
+            Assert.NotNull(field);
         }
 
         [Fact]
@@ -127,7 +127,7 @@ namespace MvvmCross.Platform.Test
             var field = typeof(TestClass).GetField("PublicInstanceField1", BindingFlags.Public | BindingFlags.Static);
 
             // Assert
-            Assert.IsNull(field);
+            Assert.Null(field);
         }
 
         [Fact]

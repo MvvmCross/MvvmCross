@@ -14,14 +14,21 @@ using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Binding.Parse.PropertyPath;
 using MvvmCross.Platform.Converters;
-using MvvmCross.Test.Core;
+using MvvmCross.Test;
 using Xunit;
 
 namespace MvvmCross.Binding.Test.Binders
 {
-    
-    public class MvxSourceStepTests : MvxIoCSupportingTest
+    [Collection("MvxTest")]
+    public class MvxSourceStepTests : IClassFixture<MvxTestFixture>
     {
+        private readonly MvxTestFixture _fixture;
+
+        public MvxSourceStepTests(MvxTestFixture fixture)
+        {
+            _fixture = fixture;
+        }
+
         public class BaseSource : INotifyPropertyChanged
         {
             public int SubscriptionCount { get; private set; }
@@ -186,12 +193,6 @@ namespace MvvmCross.Binding.Test.Binders
             }
         }
 
-        [OneTimeSetUp]
-        public void FixtureSetUp()
-        {
-            SetInvariantCulture();
-        }
-
         private IMvxSourceStep SetupSimpleBindingTest(BaseSource source, string sourceProperty)
         {
             var realSourceStepFactory = SetupSourceStepFactory();
@@ -208,17 +209,17 @@ namespace MvvmCross.Binding.Test.Binders
 
         private MvxSourceStepFactory SetupSourceStepFactory()
         {
-            ClearAll();
-            MvxBindingSingletonCache.Initialize();
+            _fixture.Reset();
+            _fixture.InitializeSingletonCache();
 
             var autoValueConverters = new MvxAutoValueConverters();
-            Ioc.RegisterSingleton<IMvxAutoValueConverters>(autoValueConverters);
+            _fixture.Ioc.RegisterSingleton<IMvxAutoValueConverters>(autoValueConverters);
 
             var sourcePropertyParser = new MvxSourcePropertyPathParser();
-            Ioc.RegisterSingleton<IMvxSourcePropertyPathParser>(sourcePropertyParser);
+            _fixture.Ioc.RegisterSingleton<IMvxSourcePropertyPathParser>(sourcePropertyParser);
 
             var realSourceBindingFactory = new MvxSourceBindingFactory();
-            Ioc.RegisterSingleton<IMvxSourceBindingFactory>(realSourceBindingFactory);
+            _fixture.Ioc.RegisterSingleton<IMvxSourceBindingFactory>(realSourceBindingFactory);
 
             var sourceStepFactory = new MvxSourceStepFactory();
             sourceStepFactory.AddOrOverwrite(typeof(MvxPathSourceStepDescription), new MvxPathSourceStepFactory());
@@ -226,7 +227,7 @@ namespace MvvmCross.Binding.Test.Binders
                 new MvxLiteralSourceStepFactory());
             sourceStepFactory.AddOrOverwrite(typeof(MvxCombinerSourceStepDescription),
                 new MvxCombinerSourceStepFactory());
-            Ioc.RegisterSingleton<IMvxSourceStepFactory>(sourceStepFactory);
+            _fixture.Ioc.RegisterSingleton<IMvxSourceStepFactory>(sourceStepFactory);
 
             var propertySource = new MvxPropertySourceBindingFactoryExtension();
             realSourceBindingFactory.Extensions.Add(propertySource);
@@ -559,7 +560,7 @@ namespace MvvmCross.Binding.Test.Binders
             sourceStep.DataContext = new MySource();
 
             value = sourceStep.GetValue();
-            Assert.Equal(null, value);
+            Assert.Null(value);
 
             source.Property1 = "Changed again 19";
 

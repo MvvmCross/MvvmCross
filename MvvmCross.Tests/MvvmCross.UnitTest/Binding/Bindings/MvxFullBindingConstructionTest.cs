@@ -12,15 +12,22 @@ using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Core;
-using MvvmCross.Test.Core;
+using MvvmCross.Test;
 using MvvmCross.Test.Mocks.Dispatchers;
 using Xunit;
 
 namespace MvvmCross.Binding.Test.Bindings
 {
-    
-    public class MvxFullBindingConstructionTest : MvxIoCSupportingTest
+    [Collection("MvxTest")]
+    public class MvxFullBindingConstructionTest : IClassFixture<MvxTestFixture>
     {
+        private readonly MvxTestFixture _fixture;
+
+        public MvxFullBindingConstructionTest(MvxTestFixture fixture)
+        {
+            _fixture = fixture;
+        }
+
         public class MyBinding : MvxFullBinding
         {
             public MyBinding(MvxBindingRequest bindingRequest)
@@ -73,19 +80,19 @@ namespace MvvmCross.Binding.Test.Bindings
 
         private void TestCommon(MvxBindingMode bindingMode, bool expectSourceBinding, bool expectTargetBinding)
         {
-            ClearAll();
-            MvxBindingSingletonCache.Initialize();
-            Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(new InlineMockMainThreadDispatcher());
+            _fixture.InitializeSingletonCache();
+            _fixture.Reset();
+            _fixture.Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(new InlineMockMainThreadDispatcher());
 
             var mockSourceBindingFactory = new Mock<IMvxSourceBindingFactory>();
-            Ioc.RegisterSingleton(mockSourceBindingFactory.Object);
+            _fixture.Ioc.RegisterSingleton(mockSourceBindingFactory.Object);
 
             var mockTargetBindingFactory = new Mock<IMvxTargetBindingFactory>();
-            Ioc.RegisterSingleton(mockTargetBindingFactory.Object);
+            _fixture.Ioc.RegisterSingleton(mockTargetBindingFactory.Object);
 
             var realSourceStepFactory = new MvxSourceStepFactory();
             realSourceStepFactory.AddOrOverwrite(typeof(MvxPathSourceStepDescription), new MvxPathSourceStepFactory());
-            Ioc.RegisterSingleton<IMvxSourceStepFactory>(realSourceStepFactory);
+            _fixture.Ioc.RegisterSingleton<IMvxSourceStepFactory>(realSourceStepFactory);
 
             var sourceText = "sourceText";
             var targetName = "targetName";

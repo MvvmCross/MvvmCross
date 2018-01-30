@@ -5,12 +5,15 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using System.Runtime.CompilerServices;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Logging;
 
+[assembly: InternalsVisibleTo("MvvmCross.UnitTest")]
+
 namespace MvvmCross
 {
-    public static class MvxTestLog
+    internal static class MvxTestLog
     {
         internal static IMvxLog Instance { get; } = Mvx.Resolve<IMvxLogProvider>().GetLogFor("MvxTest");
     }

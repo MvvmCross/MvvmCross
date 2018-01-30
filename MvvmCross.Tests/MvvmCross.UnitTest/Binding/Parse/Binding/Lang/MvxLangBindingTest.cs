@@ -28,7 +28,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
             var language = new MvxLanguageBindingParser();
             MvxSerializableBindingSpecification result;
             var parsed = language.TryParseBindingSpecification(testPair.Key, out result);
-            Assert.IsTrue(parsed, "Failed to parse " + testPair.Key);
+            Assert.True(parsed, "Failed to parse " + testPair.Key);
             Assert.Equal(1, result.Count);
             var keyAndDescription = testPair.Value.First();
             var resultKeyAndDescription = result.First();

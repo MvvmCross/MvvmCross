@@ -6,15 +6,21 @@ using System.ComponentModel;
 using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Core;
-using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.Dispatchers;
 using Xunit;
 
 namespace MvvmCross.Test.ViewModels
 {
-    
-    public class MvxCommandCollectionTest : MvxIoCSupportingTest
+    [Collection("MvxTest")]
+    public class MvxCommandCollectionTest : IClassFixture<MvxTestFixture>
     {
+        private MvxTestFixture _fixture;
+
+        public MvxCommandCollectionTest(MvxTestFixture fixture)
+        {
+            _fixture = fixture;
+        }
+
         public class CommandTestClass : INotifyPropertyChanged
         {
             public int CountMyCommandCalled { get; set; }
@@ -145,14 +151,14 @@ namespace MvvmCross.Test.ViewModels
         [Fact]
         public void Test_Conventional_Command()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["My"];
-            Assert.IsNotNull(myCommand);
+            Assert.NotNull(myCommand);
             CheckCounts(testObject);
             myCommand.Execute();
             CheckCounts(testObject, 1, 1);
@@ -165,14 +171,14 @@ namespace MvvmCross.Test.ViewModels
         [Fact]
         public void Test_Conventional_Command_CanExecute()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["My"];
-            Assert.IsNotNull(myCommand);
+            Assert.NotNull(myCommand);
             CheckCounts(testObject);
             var result = myCommand.CanExecute();
             CheckCounts(testObject, countCanExecuteMyCalled: 1);
@@ -185,14 +191,14 @@ namespace MvvmCross.Test.ViewModels
         [Fact]
         public void Test_Conventional_Parameter_Command()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["MyEx"];
-            Assert.IsNotNull(myCommand);
+            Assert.NotNull(myCommand);
             CheckCounts(testObject);
             myCommand.Execute();
             CheckCounts(testObject, countMyExCalled: 1, countCanExecuteMyExCalled: 1);
@@ -205,14 +211,14 @@ namespace MvvmCross.Test.ViewModels
         [Fact]
         public void Test_Conventional_Parameter_Command_CanExecute()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["MyEx"];
-            Assert.IsNotNull(myCommand);
+            Assert.NotNull(myCommand);
             CheckCounts(testObject);
             var result = myCommand.CanExecute();
             CheckCounts(testObject, countCanExecuteMyExCalled: 1);
@@ -225,14 +231,14 @@ namespace MvvmCross.Test.ViewModels
         [Fact]
         public void Test_IntReturning_Command()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["AnIntReturning"];
-            Assert.IsNotNull(myCommand);
+            Assert.NotNull(myCommand);
             CheckCounts(testObject);
             myCommand.Execute();
             CheckCounts(testObject, countIntReturningCalled: 1);
@@ -245,14 +251,14 @@ namespace MvvmCross.Test.ViewModels
         [Fact]
         public void Test_Attribute1_Command()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["CalledByAttr"];
-            Assert.IsNotNull(myCommand);
+            Assert.NotNull(myCommand);
             CheckCounts(testObject);
             myCommand.Execute();
             CheckCounts(testObject, countAttributedCalled: 1);
@@ -265,14 +271,14 @@ namespace MvvmCross.Test.ViewModels
         [Fact]
         public void Test_Attribute2_Command()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["CalledByAttr2"];
-            Assert.IsNotNull(myCommand);
+            Assert.NotNull(myCommand);
             CheckCounts(testObject);
             myCommand.Execute();
             CheckCounts(testObject, countAttributed2Called: 1, countCanExecuteAttributed2Called: 1);
@@ -285,14 +291,14 @@ namespace MvvmCross.Test.ViewModels
         [Fact]
         public void Test_Attribute2_Command_CanExecute()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["CalledByAttr2"];
-            Assert.IsNotNull(myCommand);
+            Assert.NotNull(myCommand);
             CheckCounts(testObject);
             var result = myCommand.CanExecute();
             CheckCounts(testObject, countCanExecuteAttributed2Called: 1);
@@ -305,32 +311,32 @@ namespace MvvmCross.Test.ViewModels
         [Fact]
         public void Test_PropertyChanged_Raises_CanExecuteChange()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             var dispatcher = new InlineMockMainThreadDispatcher();
-            Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
+            _fixture.Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
 
             var testObject = new CommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
 
             var myCommand = collection["My"];
-            Assert.IsNotNull(myCommand);
+            Assert.NotNull(myCommand);
             var countMy = 0;
             myCommand.CanExecuteChanged += (sender, args) => countMy++;
 
             var myExCommand = collection["MyEx"];
-            Assert.IsNotNull(myExCommand);
+            Assert.NotNull(myExCommand);
             var countMyEx = 0;
             myExCommand.CanExecuteChanged += (sender, args) => countMyEx++;
 
             var calledByAttrCommand = collection["CalledByAttr"];
-            Assert.IsNotNull(calledByAttrCommand);
+            Assert.NotNull(calledByAttrCommand);
             var countAttr = 0;
             calledByAttrCommand.CanExecuteChanged += (sender, args) => countAttr++;
 
             var calledByAttr2Command = collection["CalledByAttr2"];
-            Assert.IsNotNull(calledByAttr2Command);
+            Assert.NotNull(calledByAttr2Command);
             var countAttr2 = 0;
             calledByAttr2Command.CanExecuteChanged += (sender, args) => countAttr2++;
 
@@ -379,22 +385,22 @@ namespace MvvmCross.Test.ViewModels
         [Fact]
         public void Test_PropertyChanged_Raises_Multiple_CanExecuteChange()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             var dispatcher = new InlineMockMainThreadDispatcher();
-            Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
+            _fixture.Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
 
             var testObject = new SharedCommandTestClass();
             var collection = new MvxCommandCollectionBuilder()
                 .BuildCollectionFor(testObject);
 
             var calledByAttrCommand = collection["CalledByAttr"];
-            Assert.IsNotNull(calledByAttrCommand);
+            Assert.NotNull(calledByAttrCommand);
             var countAttr = 0;
             calledByAttrCommand.CanExecuteChanged += (sender, args) => countAttr++;
 
             var calledByAttr2Command = collection["CalledByAttr2"];
-            Assert.IsNotNull(calledByAttr2Command);
+            Assert.NotNull(calledByAttr2Command);
             var countAttr2 = 0;
             calledByAttr2Command.CanExecuteChanged += (sender, args) => countAttr2++;
 

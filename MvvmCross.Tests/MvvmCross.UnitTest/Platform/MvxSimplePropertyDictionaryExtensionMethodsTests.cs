@@ -4,19 +4,19 @@
 
 using System.Collections.Generic;
 using MvvmCross.Core.Platform;
-using MvvmCross.Test.Core;
 using Xunit;
 
 namespace MvvmCross.Test.Platform
 {
-    
-    public class MvxSimplePropertyDictionaryExtensionMethodsTests : MvxIoCSupportingTest
+    [Collection("MvxTest")]
+    public class MvxSimplePropertyDictionaryExtensionMethodsTests : IClassFixture<MvxTestFixture>
     {
-        
-        public void SetUp()
+        private readonly MvxTestFixture _fixture;
+
+        public MvxSimplePropertyDictionaryExtensionMethodsTests(MvxTestFixture fixture)
         {
-            ClearAll();
-            Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
+            _fixture = fixture;
+            fixture.Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
         }
 
         [Fact]

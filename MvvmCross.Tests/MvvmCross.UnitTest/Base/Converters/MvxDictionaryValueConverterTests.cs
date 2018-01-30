@@ -10,7 +10,6 @@ using System.Globalization;
 
 namespace MvvmCross.Platform.Test.Converters
 {
-    
     public class MvxDictionaryValueConverterTests : MvxDictionaryValueConverter<MvxDictionaryValueConverterTests.TestStates, string>
     {
         private Dictionary<TestStates, string> _testStatedictionary;
@@ -26,8 +25,7 @@ namespace MvvmCross.Platform.Test.Converters
             Failed
         }
 
-        
-        public void Init()
+        public MvxDictionaryValueConverterTests()
         {
             _testStatedictionary = new Dictionary<TestStates, string>
             {
@@ -36,18 +34,22 @@ namespace MvvmCross.Platform.Test.Converters
             };
         }
 
+        [Theory]
         [InlineData(TestStates.Running, StateRunning)]
         [InlineData(TestStates.Completed, StateCompleted)]
-        public string Convert_MatchingKeyIncludeFallback_ReturnsDictionaryValue(TestStates state)
+        public void Convert_MatchingKeyIncludeFallback_ReturnsDictionaryValue(TestStates state, string expected)
         {
-            return Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, Fallback, true), CultureInfo.CurrentUICulture);
+            var converted = Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, Fallback, true), CultureInfo.CurrentUICulture);
+            Assert.Equal(expected, converted);
         }
 
+        [Theory]
         [InlineData(TestStates.Running, StateRunning)]
         [InlineData(TestStates.Completed, StateCompleted)]
-        public string Convert_MatchingKeyExcludeFallback_ReturnsDictionaryValue(TestStates state)
+        public void Convert_MatchingKeyExcludeFallback_ReturnsDictionaryValue(TestStates state, string expected)
         {
-            return Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, default(string), false), CultureInfo.CurrentUICulture);
+            var converted = Convert(state, null, new Tuple<IDictionary<TestStates, string>, string, bool>(_testStatedictionary, default(string), false), CultureInfo.CurrentUICulture);
+            Assert.Equal(expected, converted);
         }
 
         [Fact]

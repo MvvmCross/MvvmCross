@@ -405,7 +405,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
             var result = theParser.TryParseBindingSpecification(text, out specification);
             if (!result)
                 Debug.WriteLine("Failed on: " + text);
-            Assert.IsTrue(result);
+            Assert.True(result);
             AssertAreEquivalent(expectedLookup, specification);
         }
     }

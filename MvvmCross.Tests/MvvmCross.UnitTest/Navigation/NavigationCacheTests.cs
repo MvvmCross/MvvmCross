@@ -7,10 +7,9 @@ using Xunit;
 
 namespace MvvmCross.Test.Navigation
 {
-    
     public class NavigationCacheTests
     {
-        [Fact]
+        [Theory]
         [InlineData("a", 1, 1)]
         [InlineData("a", -1, -1)]
         [InlineData("a", int.MaxValue, int.MaxValue)]
@@ -22,7 +21,7 @@ namespace MvvmCross.Test.Navigation
             SimpleTest(new MvxNavigationCache(), key, value, expected);
         }
 
-        [Fact]
+        [Theory]
         [InlineData("a", 1.0, 1.0)]
         [InlineData("a", -1.0, -1.0)]
         [InlineData("a", double.MaxValue, double.MaxValue)]
@@ -34,7 +33,7 @@ namespace MvvmCross.Test.Navigation
             SimpleTest(new MvxNavigationCache(), key, value, expected);
         }
 
-        [Fact]
+        [Theory]
         [InlineData("a", "a", "a")]
         [InlineData("a", "", "")]
         [InlineData("a", null, null)]
@@ -45,7 +44,7 @@ namespace MvvmCross.Test.Navigation
 
         private static void SimpleTest<T>(IMvxNavigationCache cache, string key, T value, T expected)
         {
-            Assert.IsTrue(cache.AddValue(key, value));
+            Assert.True(cache.AddValue(key, value));
             var addedValue = cache.GetValueOrDefault<T>(key);
             Assert.Equal(expected, addedValue);
         }
@@ -72,17 +71,17 @@ namespace MvvmCross.Test.Navigation
             cache.AddValue("c", 0);
             cache.AddValue("d", 0);
 
-            Assert.IsTrue(cache.Contains("a"));
-            Assert.IsTrue(cache.Contains("b"));
-            Assert.IsTrue(cache.Contains("c"));
-            Assert.IsTrue(cache.Contains("d"));
+            Assert.True(cache.Contains("a"));
+            Assert.True(cache.Contains("b"));
+            Assert.True(cache.Contains("c"));
+            Assert.True(cache.Contains("d"));
 
             cache.Clear();
 
-            Assert.IsFalse(cache.Contains("a"));
-            Assert.IsFalse(cache.Contains("b"));
-            Assert.IsFalse(cache.Contains("c"));
-            Assert.IsFalse(cache.Contains("d"));
+            Assert.False(cache.Contains("a"));
+            Assert.False(cache.Contains("b"));
+            Assert.False(cache.Contains("c"));
+            Assert.False(cache.Contains("d"));
         }
 
         [Fact]
@@ -94,17 +93,17 @@ namespace MvvmCross.Test.Navigation
             cache.AddValue("g", 0);
             cache.AddValue("h", 0);
 
-            Assert.IsTrue(cache.Contains("e"));
-            Assert.IsTrue(cache.Contains("f"));
-            Assert.IsTrue(cache.Contains("g"));
-            Assert.IsTrue(cache.Contains("h"));
+            Assert.True(cache.Contains("e"));
+            Assert.True(cache.Contains("f"));
+            Assert.True(cache.Contains("g"));
+            Assert.True(cache.Contains("h"));
 
             cache.Remove("g");
 
-            Assert.IsFalse(cache.Contains("g"));
-            Assert.IsTrue(cache.Contains("e"));
-            Assert.IsTrue(cache.Contains("f"));
-            Assert.IsTrue(cache.Contains("h"));
+            Assert.False(cache.Contains("g"));
+            Assert.True(cache.Contains("e"));
+            Assert.True(cache.Contains("f"));
+            Assert.True(cache.Contains("h"));
         }
 
         public class TestObject

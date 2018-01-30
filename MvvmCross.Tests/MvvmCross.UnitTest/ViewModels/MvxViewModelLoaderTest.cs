@@ -7,32 +7,39 @@ using System.Collections.Generic;
 using Moq;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Exceptions;
-using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.TestViewModels;
 using Xunit;
 
 namespace MvvmCross.Test.ViewModels
 {
-    
-    public class MvxViewModelLoaderTest : MvxIoCSupportingTest
+    [Collection("MvxTest")]
+    public class MvxViewModelLoaderTest : IClassFixture<MvxTestFixture>
     {
+        private readonly MvxTestFixture _fixture;
+
+        public MvxViewModelLoaderTest(MvxTestFixture fixture)
+        {
+            _fixture = fixture;
+        }
+
+
         [Fact]
         public void Test_LoaderForNull()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             var request = new MvxViewModelRequest<MvxNullViewModel>(null, null);
             var state = new MvxBundle();
             var loader = new MvxViewModelLoader(null);
             var viewModel = loader.LoadViewModel(request, state);
 
-            Assert.IsInstanceOf<MvxNullViewModel>(viewModel);
+            Assert.IsType<MvxNullViewModel>(viewModel);
         }
 
         [Fact]
         public void Test_NormalViewModel()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             IMvxViewModel outViewModel = new Test2ViewModel();
 
@@ -51,13 +58,13 @@ namespace MvvmCross.Test.ViewModels
             var loader = new MvxViewModelLoader(mockCollection.Object);
             var viewModel = loader.LoadViewModel(request, state);
 
-            Assert.AreSame(outViewModel, viewModel);
+            Assert.Equal(outViewModel, viewModel);
         }
 
         [Fact]
         public void Test_FailedViewModel()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             var mockLocator = new Mock<IMvxViewModelLocator>();
             mockLocator.Setup(
@@ -80,7 +87,7 @@ namespace MvvmCross.Test.ViewModels
         [Fact]
         public void Test_FailedViewModelLocatorCollection()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             var mockCollection = new Mock<IMvxViewModelLocatorCollection>();
             mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))

@@ -5,25 +5,12 @@
 using System.Collections.Generic;
 using MvvmCross.Plugins.JsonLocalization.Tests.Mocks;
 using Xunit;
-using NUnit.Framework.Internal;
 
 namespace MvvmCross.Plugins.JsonLocalization.Tests
 {
     
     public class MvxDictionaryTextProviderTest
     {
-        
-        public void Setup()
-        {
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-        }
-
-        #region Tests covertin the 'GetText' method
-
         [Fact]
         public void GetTextWithExistingValueReturnsTheValueWhenMaskingErrors()
         {
@@ -77,17 +64,13 @@ namespace MvvmCross.Plugins.JsonLocalization.Tests
                 "NonExistingKey"));
         }
 
-        #endregion
-
-        #region Tests covering the 'TryGetText' method
-
         [Fact]
         public void TryGetTextForExistingValueReturnsTrueWhenMaskingErrors()
         {
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(true);
 
             string value;
-            Assert.IsTrue(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "DummyKey"));
+            Assert.True(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "DummyKey"));
         }
 
         [Fact]
@@ -96,7 +79,7 @@ namespace MvvmCross.Plugins.JsonLocalization.Tests
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
 
             string value;
-            Assert.IsTrue(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "DummyKey"));
+            Assert.True(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "DummyKey"));
         }
 
         [Fact]
@@ -105,7 +88,7 @@ namespace MvvmCross.Plugins.JsonLocalization.Tests
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(true);
 
             string value;
-            Assert.IsFalse(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "NonExistingKey"));
+            Assert.False(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "NonExistingKey"));
         }
 
         [Fact]
@@ -114,7 +97,7 @@ namespace MvvmCross.Plugins.JsonLocalization.Tests
             var textProvider = TestDictionaryTextProvider.CreateAndInitializeWithDummyData(false);
 
             string value;
-            Assert.IsFalse(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "NonExistingKey"));
+            Assert.False(textProvider.TryGetText(out value, TestDictionaryTextProvider.LocalizationNamespace, TestDictionaryTextProvider.TypeKey, "NonExistingKey"));
         }
 
         [Fact]
@@ -144,7 +127,5 @@ namespace MvvmCross.Plugins.JsonLocalization.Tests
 
             Assert.Equal(expected, actual);
         }
-
-        #endregion
     }
 }
