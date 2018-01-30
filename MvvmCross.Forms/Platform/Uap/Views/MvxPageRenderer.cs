@@ -1,4 +1,4 @@
-using MvvmCross.Binding.BindingContext;
+﻿using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Views;
 using Xamarin.Forms;
@@ -8,7 +8,7 @@ namespace MvvmCross.Forms.Uwp
 {
     public class MvxPageRenderer : PageRenderer, IMvxBindingContextOwner
     {
-        public object DataContext
+        public new object DataContext
         {
             get
             {

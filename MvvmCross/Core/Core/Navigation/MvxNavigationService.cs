@@ -272,7 +272,7 @@ namespace MvvmCross.Core.Navigation
             {
                 return (TResult)await tcs.Task;
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 return default(TResult);
             }
@@ -306,7 +306,7 @@ namespace MvvmCross.Core.Navigation
             {
                 return (TResult)await tcs.Task;
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 return default(TResult);
             }
