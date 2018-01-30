@@ -1,6 +1,6 @@
 #tool nuget:?package=GitVersion.CommandLine
 #tool nuget:?package=vswhere
-#tool nuget:?package=NUnit.ConsoleRunner
+#tool nuget:?package=xunit.runner.console
 #addin nuget:?package=Cake.Incubator&version=1.6.0
 #addin nuget:?package=Cake.Git&version=0.16.0
 #addin nuget:?package=Polly
@@ -87,29 +87,22 @@ Task("UnitTest")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    var testPaths = new List<FilePath> {
-        new FilePath("./MvvmCross.Tests/MvvmCross.Tests/bin/Release/netcoreapp2.0/MvvmCross.Tests.dll"),
-        new FilePath("./MvvmCross.Tests/Plugins.Color.Test/bin/Release/netcoreapp2.0/MvvmCross.Plugins.Color.Tests.dll"),
-        new FilePath("./MvvmCross.Tests/Plugins.JsonLocalization.Tests/bin/Release/netcoreapp2.0/MvvmCross.Plugins.JsonLocalization.Tests.dll"),
-        new FilePath("./MvvmCross.Tests/Plugins.Messenger.Test/bin/Release/netcoreapp2.0/MvvmCross.Plugins.Messenger.Tests.dll"),
-        new FilePath("./MvvmCross.Tests/Plugins.Network.Test/bin/Release/netcoreapp2.0/MvvmCross.Plugins.Network.Tests.dll"),
-        //new FilePath("./MvvmCross.Tests/Plugins.ResourceLoader.Test/bin/Release/netcoreapp2.0/MvvmCross.Plugins.ResourceLoader.Tests.dll"),
-        new FilePath("./MvvmCross.Tests/Plugins.ResxLocalization.Tests/bin/Release/netcoreapp2.0/MvvmCross.Plugins.ResxLocalization.Tests.dll")
-    };
+    var testPaths = GetFiles("./MvvmCross.Tests/*.UnitTest/bin/Release/netcoreapp2.0/*.UnitTest.dll");
 
     var testResultsPath = new DirectoryPath(outputDir + "/Tests/");
-    var outputPath = new FilePath(outputDir + "/NUnitOutput.txt");
+    
+    var testSettings = new XUnit2Settings
+    {
+        XmlReport = true,
+        OutputDirectory = testResultsPath
+    };
 
-    NUnit3(testPaths, new NUnit3Settings {
-        Timeout = 30000,
-        OutputFile = outputPath,
-        Work = testResultsPath
-    });
+    XUnit2(testPaths, testSettings);
 
     if (isRunningOnAppVeyor)
     {
         foreach(var testResult in GetFiles(outputDir + "/Tests/*.xml"))
-            AppVeyor.UploadTestResults(testResult, AppVeyorTestResultsType.NUnit3);
+            AppVeyor.UploadTestResults(testResult, AppVeyorTestResultsType.XUnit);
     }
 });
 
@@ -175,7 +168,7 @@ Task("UploadAppVeyorArtifact")
 
 Task("Default")
     .IsDependentOn("Build")
-    //.IsDependentOn("UnitTest")
+    .IsDependentOn("UnitTest")
     .IsDependentOn("PublishPackages")
     .IsDependentOn("UploadAppVeyorArtifact")
     .Does(() => 
