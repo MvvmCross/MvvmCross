@@ -11,6 +11,7 @@ namespace MvvmCross.Core.Navigation
         /// <summary>
         /// Verifies if the provided Uri can be routed to a ViewModel request.
         /// </summary>
+        /// <param name="navigationService"></param>
         /// <param name="path">URI to route</param>
         /// <returns>True if the uri can be routed or false if it cannot.</returns>
         public static Task<bool> CanNavigate(this IMvxNavigationService navigationService, Uri path)
@@ -21,7 +22,9 @@ namespace MvvmCross.Core.Navigation
         /// <summary>
         /// Translates the provided Uri to a ViewModel request and dispatches it.
         /// </summary>
+        /// <param name="navigationService"></param>
         /// <param name="path">URI to route</param>
+        /// <param name="presentationBundle"></param>
         /// <returns>A task to await upon</returns>
         public static Task Navigate(this IMvxNavigationService navigationService, Uri path, IMvxBundle presentationBundle = null)
         {

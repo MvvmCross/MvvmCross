@@ -84,7 +84,10 @@ namespace MvvmCross.Forms.Bindings.Target
             if (!_typeConverter.CanConvertFrom(value.GetType()))
                 return null; // TODO - is this correct? Do we need to do more here? See #297
 
-            return _typeConverter.ConvertFrom(value);
+            if (value is string stringValue)
+                return _typeConverter.ConvertFromInvariantString(stringValue);
+            else
+                return null;
         }
 
         private void OnElementPropertyChanged(object sender, PropertyChangedEventArgs args)
