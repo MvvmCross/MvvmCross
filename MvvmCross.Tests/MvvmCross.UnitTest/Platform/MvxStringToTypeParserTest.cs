@@ -3,40 +3,42 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using MvvmCross.Core.Platform;
-using MvvmCross.Test.Core;
 using Xunit;
 
 namespace MvvmCross.Test.Platform
 {
-    
-    public class MvxStringToTypeParserTest : MvxIoCSupportingTest
+    [Collection("MvxTest")]
+    public class MvxStringToTypeParserTest : IClassFixture<MvxTestFixture>
     {
-        [OneTimeSetUp]
-        public void FixtureSetUp()
+        private readonly MvxTestFixture _fixture;
+
+        public MvxStringToTypeParserTest(MvxTestFixture fixture)
         {
-            SetInvariantCulture();
+            _fixture = fixture;
+            _fixture.SetInvariantCulture();
         }
 
         [Fact]
         public void Test_AllTypesAreSupported()
         {
             var parser = new MvxStringToTypeParser();
-            Assert.IsTrue(parser.TypeSupported(typeof(string)));
-            Assert.IsTrue(parser.TypeSupported(typeof(int)));
-            Assert.IsTrue(parser.TypeSupported(typeof(long)));
-            Assert.IsTrue(parser.TypeSupported(typeof(short)));
-            Assert.IsTrue(parser.TypeSupported(typeof(float)));
-            Assert.IsTrue(parser.TypeSupported(typeof(uint)));
-            Assert.IsTrue(parser.TypeSupported(typeof(ulong)));
-            Assert.IsTrue(parser.TypeSupported(typeof(ushort)));
-            Assert.IsTrue(parser.TypeSupported(typeof(double)));
-            Assert.IsTrue(parser.TypeSupported(typeof(bool)));
-            Assert.IsTrue(parser.TypeSupported(typeof(Guid)));
-            Assert.IsTrue(parser.TypeSupported(typeof(StringSplitOptions)));
+            Assert.True(parser.TypeSupported(typeof(string)));
+            Assert.True(parser.TypeSupported(typeof(int)));
+            Assert.True(parser.TypeSupported(typeof(long)));
+            Assert.True(parser.TypeSupported(typeof(short)));
+            Assert.True(parser.TypeSupported(typeof(float)));
+            Assert.True(parser.TypeSupported(typeof(uint)));
+            Assert.True(parser.TypeSupported(typeof(ulong)));
+            Assert.True(parser.TypeSupported(typeof(ushort)));
+            Assert.True(parser.TypeSupported(typeof(double)));
+            Assert.True(parser.TypeSupported(typeof(bool)));
+            Assert.True(parser.TypeSupported(typeof(Guid)));
+            Assert.True(parser.TypeSupported(typeof(StringSplitOptions)));
         }
 
-        [Fact]
+        [Theory]
         [InlineData("Hello, World")]
         [InlineData("Foo Bar Baz")]
         [InlineData("Z͚̭͖͟A͖̘̪L̻̯̥̬ͅG̞̰̭͍͖ͅͅO̘!̜")]
@@ -48,7 +50,7 @@ namespace MvvmCross.Test.Platform
             Assert.Equal(testData, parser.ReadValue(testData, typeof(string), "ignored"));
         }
 
-        [Fact]
+        [Theory]
         [InlineData("-123", -123.0)]
         [InlineData("1.23", 1.23)]
         [InlineData("1,23", 123.0)]
@@ -63,7 +65,7 @@ namespace MvvmCross.Test.Platform
             Assert.Equal(expected, parser.ReadValue(testData, typeof(double), "ignored"));
         }
 
-        [Fact]
+        [Theory]
         [InlineData("-123", -123.0f)]
         [InlineData("1.23", 1.23f)]
         [InlineData("1,23", 123.0f)]
@@ -78,7 +80,7 @@ namespace MvvmCross.Test.Platform
             Assert.Equal(expected, parser.ReadValue(testData, typeof(float), "ignored"));
         }
 
-        [Fact]
+        [Theory]
         [InlineData("-123", -123)]
         [InlineData("123", 123)]
         [InlineData("1.23", 0)]
@@ -91,7 +93,7 @@ namespace MvvmCross.Test.Platform
             Assert.Equal(expected, parser.ReadValue(testData, typeof(int), "ignored"));
         }
 
-        [Fact]
+        [Theory]
         [InlineData("-123", -123L)]
         [InlineData("123", 123L)]
         [InlineData("1.23", 0L)]
@@ -104,7 +106,7 @@ namespace MvvmCross.Test.Platform
             Assert.Equal(expected, parser.ReadValue(testData, typeof(long), "ignored"));
         }
 
-        [Fact]
+        [Theory]
         [InlineData("123", 123ul)]
         [InlineData("1.23", 0ul)]
         [InlineData("garbage", 0ul)]
@@ -116,7 +118,7 @@ namespace MvvmCross.Test.Platform
             Assert.Equal(expected, parser.ReadValue(testData, typeof(ulong), "ignored"));
         }
 
-        [Fact]
+        [Theory]
         [InlineData("123", (ushort)123)]
         [InlineData("1.23", (ushort)0)]
         [InlineData("garbage", (ushort)0)]
@@ -128,7 +130,7 @@ namespace MvvmCross.Test.Platform
             Assert.Equal(expected, parser.ReadValue(testData, typeof(ushort), "ignored"));
         }
 
-        [Fact]
+        [Theory]
         [InlineData("true", true)]
         [InlineData("True", true)]
         [InlineData("tRue", true)]
@@ -152,25 +154,27 @@ namespace MvvmCross.Test.Platform
             Assert.Equal(expected, parser.ReadValue(testData, typeof(bool), "ignored"));
         }
 
-        private static object[] _guidCases =
+        public static IEnumerable<object[]> GuidCases()
         {
-            new object[] { "{C3CF9078-0122-41BD-9E2D-D3199E937285}", Guid.Parse("{C3CF9078-0122-41BD-9E2D-D3199E937285}") },
-            new object[] { "{C3CF9078-0122-41BD-9E2D-D3199E937285}".ToLowerInvariant(), Guid.Parse("{C3CF9078-0122-41BD-9E2D-D3199E937285}") },
-            new object[] { "{8-0122-41BD-9E2D-D3199E937285}", Guid.Empty }, // invalid
-            new object[] { Guid.Empty.ToString(), Guid.Empty },
-            new object[] { "", Guid.Empty },
-            new object[] { "garbage", Guid.Empty },
-            new object[] { null, Guid.Empty }
-        };
+            yield return new object[] { "{C3CF9078-0122-41BD-9E2D-D3199E937285}", Guid.Parse("{C3CF9078-0122-41BD-9E2D-D3199E937285}") };
+            yield return new object[] { "{C3CF9078-0122-41BD-9E2D-D3199E937285}".ToLowerInvariant(), Guid.Parse("{C3CF9078-0122-41BD-9E2D-D3199E937285}") };
+            yield return new object[] { "{8-0122-41BD-9E2D-D3199E937285}", Guid.Empty }; // invalid
+            yield return new object[] { Guid.Empty.ToString(), Guid.Empty };
+            yield return new object[] { "", Guid.Empty };
+            yield return new object[] { "garbage", Guid.Empty };
+            yield return new object[] { null, Guid.Empty };
+        }
+        
 
-        [Test, TestCaseSource(nameof(_guidCases))]
+        [Theory]
+        [MemberData(nameof(GuidCases))]
         public void Test_GuidCanBeRead(string testData, Guid expected)
         {
             var parser = new MvxStringToTypeParser();
             Assert.Equal(expected, parser.ReadValue(testData, typeof(Guid), "ignored"));
         }
 
-        [Fact]
+        [Theory]
         [InlineData("RemoveEmptyEntries", StringSplitOptions.RemoveEmptyEntries)]
         [InlineData("None", StringSplitOptions.None)]
         [InlineData("none", StringSplitOptions.None)]

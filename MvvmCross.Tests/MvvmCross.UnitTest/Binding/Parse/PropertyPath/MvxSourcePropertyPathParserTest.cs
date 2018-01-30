@@ -19,7 +19,7 @@ namespace MvvmCross.Binding.Test.Parse.PropertyPath
             {
                 var result = Tokenise(test);
                 Assert.Equal(1, result.Count);
-                Assert.IsInstanceOf<MvxEmptyPropertyToken>(result[0]);
+                Assert.IsType<MvxEmptyPropertyToken>(result[0]);
             }
         }
 
@@ -28,7 +28,7 @@ namespace MvvmCross.Binding.Test.Parse.PropertyPath
         {
             var result = Tokenise(" \t\r \n ");
             Assert.Equal(1, result.Count);
-            Assert.IsInstanceOf<MvxEmptyPropertyToken>(result[0]);
+            Assert.IsType<MvxEmptyPropertyToken>(result[0]);
         }
 
         [Fact]
@@ -175,14 +175,14 @@ namespace MvvmCross.Binding.Test.Parse.PropertyPath
 
         private static void AssertIsSimplePropertyToken(MvxPropertyToken token, string text)
         {
-            Assert.IsInstanceOf<MvxPropertyNamePropertyToken>(token);
+            Assert.IsType<MvxPropertyNamePropertyToken>(token);
             Assert.Equal(text, ((MvxPropertyNamePropertyToken)token).PropertyName);
         }
 
         private static void AssertIsIndexerPropertyToken<T, TSpecific>(MvxPropertyToken token, T value)
         {
-            Assert.IsInstanceOf<MvxIndexerPropertyToken<T>>(token);
-            Assert.IsInstanceOf<TSpecific>(token);
+            Assert.IsType<MvxIndexerPropertyToken<T>>(token);
+            Assert.IsType<TSpecific>(token);
             Assert.Equal(value, ((MvxIndexerPropertyToken<T>)token).Key);
         }
 

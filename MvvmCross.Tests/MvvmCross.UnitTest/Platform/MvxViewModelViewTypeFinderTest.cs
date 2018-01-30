@@ -3,20 +3,26 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.TestViewModels;
 using MvvmCross.Test.Mocks.TestViews;
 using Xunit;
 
 namespace MvvmCross.Test.Platform
 {
-    
-    public class MvxViewModelViewTypeFinderTest : MvxIoCSupportingTest
+    [Collection("MvxTest")]
+    public class MvxViewModelViewTypeFinderTest : IClassFixture<MvxTestFixture>
     {
+        private readonly MvxTestFixture _fixture;
+
+        public MvxViewModelViewTypeFinderTest(MvxTestFixture fixture)
+        {
+            _fixture = fixture;
+        }
+
         [Fact]
         public void Test_MvxViewModelViewTypeFinder()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             var assembly = GetType().Assembly;
             var viewModelNameLookup = new MvxViewModelByNameLookup();
@@ -36,9 +42,9 @@ namespace MvvmCross.Test.Platform
 
             // test for negatives
             result = test.FindTypeOrNull(typeof(AbstractTest1View));
-            Assert.IsNull(result);
+            Assert.Null(result);
             result = test.FindTypeOrNull(typeof(NotReallyAView));
-            Assert.IsNull(result);
+            Assert.Null(result);
         }
     }
 }

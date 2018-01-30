@@ -2,22 +2,26 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Binding.Parse.Binding;
-using MvvmCross.Test.Core;
+﻿using MvvmCross.Binding.Parse.Binding;
+using MvvmCross.Test;
 using Xunit;
 
 namespace MvvmCross.Binding.Test.Parse.Binding
 {
-    public abstract class MvxBindingTest
-        : MvxIoCSupportingTest
+    [Collection("MvxTest")]
+    public abstract class MvxBindingTest : IClassFixture<MvxTestFixture>
     {
+        public MvxBindingTest(MvxTestFixture fixture)
+        {
+        }
+
         protected void AssertAreEquivalent(MvxSerializableBindingSpecification expected,
                                          MvxSerializableBindingSpecification actual)
         {
             Assert.Equal(expected.Count, actual.Count);
             foreach (var kvp in expected)
             {
-                Assert.IsTrue(actual.ContainsKey(kvp.Key));
+                Assert.True(actual.ContainsKey(kvp.Key));
                 AssertAreEquivalent(kvp.Value, actual[kvp.Key]);
             }
         }
@@ -33,7 +37,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding
             Assert.Equal(expected.Function, actual.Function);
             Assert.Equal(expected.Literal, actual.Literal);
             if (expected.Sources == null)
-                Assert.IsNull(actual.Sources);
+                Assert.Null(actual.Sources);
             else
             {
                 Assert.Equal(expected.Sources.Count, actual.Sources.Count);

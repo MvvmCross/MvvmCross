@@ -8,25 +8,17 @@ using System.Threading.Tasks;
 using MvvmCross.Plugins.Json;
 using MvvmCross.Plugins.Network.Rest;
 using MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks;
-using MvvmCross.Test.Core;
 using Xunit;
 
 namespace MvvmCross.Plugins.Network.Test
 {
-    
-    public class SimpleRestTest
-        : MvxIoCSupportingTest
-    {
-        
-        public void SetUp()
-        {
-        }
 
+    [Collection("Rest")]
+    public class SimpleRestTest
+    {
         [Fact]
         public async Task GetDataFromGoogleBooks()
         {
-            ClearAll();
-
             // not a real test yet....
             var url = BooksService.GetSearchUrl("MonoTouch");
 
@@ -40,12 +32,12 @@ namespace MvvmCross.Plugins.Network.Test
             Exception exception = null;
             theResponse = await client.MakeRequestForAsync<BookSearchResult>(request);
 
-            Assert.IsNotNull(theResponse);
-            Assert.IsNull(exception);
-            Assert.IsNotNull(theResponse.Result);
+            Assert.NotNull(theResponse);
+            Assert.Null(exception);
+            Assert.NotNull(theResponse.Result);
             Assert.Equal(HttpStatusCode.OK, theResponse.StatusCode);
-            Assert.IsTrue(theResponse.Result.items.Count == 10);
-            Assert.IsTrue(theResponse.Result.items[0].ToString().Contains("MonoTouch"));
+            Assert.True(theResponse.Result.items.Count == 10);
+            Assert.True(theResponse.Result.items[0].ToString().Contains("MonoTouch"));
         }
     }
 }

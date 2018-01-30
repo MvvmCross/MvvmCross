@@ -27,10 +27,10 @@ namespace MvvmCross.Platform.Test.UI
             for (var i = 0; i < tests.GetUpperBound(0); i++)
             {
                 var c = new MvxColor((int)tests[i, 0]);
-                Assert.Equal(tests[i, 1], c.A);
-                Assert.Equal(tests[i, 2], c.R);
-                Assert.Equal(tests[i, 3], c.G);
-                Assert.Equal(tests[i, 4], c.B);
+                Assert.Equal(tests[i, 1], (uint)c.A);
+                Assert.Equal(tests[i, 2], (uint)c.R);
+                Assert.Equal(tests[i, 3], (uint)c.G);
+                Assert.Equal(tests[i, 4], (uint)c.B);
                 Assert.Equal(tests[i, 0], (uint)c.ARGB);
             }
         }
@@ -54,10 +54,10 @@ namespace MvvmCross.Platform.Test.UI
                 for (uint alpha = 0; alpha < 256; alpha++)
                 {
                     var c = new MvxColor((int)tests[i, 0], (int)alpha);
-                    Assert.Equal(alpha, c.A);
-                    Assert.Equal(tests[i, 1], c.R);
-                    Assert.Equal(tests[i, 2], c.G);
-                    Assert.Equal(tests[i, 3], c.B);
+                    Assert.Equal(alpha, (uint)c.A);
+                    Assert.Equal(tests[i, 1], (uint)c.R);
+                    Assert.Equal(tests[i, 2], (uint)c.G);
+                    Assert.Equal(tests[i, 3], (uint)c.B);
                     var argb = (tests[i, 0] & 0x00FFFFFF) | ((alpha & 0xFF) << 24);
                     Assert.Equal(argb, (uint)c.ARGB);
                 }
@@ -81,10 +81,10 @@ namespace MvvmCross.Platform.Test.UI
             for (var i = 0; i < tests.GetUpperBound(0); i++)
             {
                 var c = new MvxColor((int)tests[i, 1], (int)tests[i, 2], (int)tests[i, 3], (int)tests[i, 0]);
-                Assert.Equal(tests[i, 0], c.A);
-                Assert.Equal(tests[i, 1], c.R);
-                Assert.Equal(tests[i, 2], c.G);
-                Assert.Equal(tests[i, 3], c.B);
+                Assert.Equal(tests[i, 0], (uint)c.A);
+                Assert.Equal(tests[i, 1], (uint)c.R);
+                Assert.Equal(tests[i, 2], (uint)c.G);
+                Assert.Equal(tests[i, 3], (uint)c.B);
                 var argb = tests[i, 0] & 0xFF;
                 argb <<= 8;
                 argb |= tests[i, 1] & 0xFF;
@@ -118,9 +118,9 @@ namespace MvvmCross.Platform.Test.UI
                     c.A = j;
 
                     Assert.Equal(j, c.A);
-                    Assert.Equal(tests[i, 1], c.R);
-                    Assert.Equal(tests[i, 2], c.G);
-                    Assert.Equal(tests[i, 3], c.B);
+                    Assert.Equal(tests[i, 1], (uint)c.R);
+                    Assert.Equal(tests[i, 2], (uint)c.G);
+                    Assert.Equal(tests[i, 3], (uint)c.B);
                     var argb = (uint)j & 0xFF;
                     argb <<= 8;
                     argb |= tests[i, 1] & 0xFF;
@@ -154,10 +154,10 @@ namespace MvvmCross.Platform.Test.UI
                 {
                     c.R = j;
 
-                    Assert.Equal(tests[i, 0], c.A);
+                    Assert.Equal(tests[i, 0], (uint)c.A);
                     Assert.Equal(j, c.R);
-                    Assert.Equal(tests[i, 2], c.G);
-                    Assert.Equal(tests[i, 3], c.B);
+                    Assert.Equal(tests[i, 2], (uint)c.G);
+                    Assert.Equal(tests[i, 3], (uint)c.B);
                     var argb = tests[i, 0] & 0xFF;
                     argb <<= 8;
                     argb |= (uint)j & 0xFF;
@@ -191,10 +191,10 @@ namespace MvvmCross.Platform.Test.UI
                 {
                     c.G = j;
 
-                    Assert.Equal(tests[i, 0], c.A);
-                    Assert.Equal(tests[i, 1], c.R);
+                    Assert.Equal(tests[i, 0], (uint)c.A);
+                    Assert.Equal(tests[i, 1], (uint)c.R);
                     Assert.Equal(j, c.G);
-                    Assert.Equal(tests[i, 3], c.B);
+                    Assert.Equal(tests[i, 3], (uint)c.B);
                     var argb = tests[i, 0] & 0xFF;
                     argb <<= 8;
                     argb |= tests[i, 1] & 0xFF;
@@ -228,9 +228,9 @@ namespace MvvmCross.Platform.Test.UI
                 {
                     c.B = j;
 
-                    Assert.Equal(tests[i, 0], c.A);
-                    Assert.Equal(tests[i, 1], c.R);
-                    Assert.Equal(tests[i, 2], c.G);
+                    Assert.Equal(tests[i, 0], (uint)c.A);
+                    Assert.Equal(tests[i, 1], (uint)c.R);
+                    Assert.Equal(tests[i, 2], (uint)c.G);
                     Assert.Equal(j, c.B);
                     var argb = tests[i, 0] & 0xFF;
                     argb <<= 8;

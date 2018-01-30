@@ -60,14 +60,14 @@ namespace MvvmCross.Platform.Test
 
             IA a;
             var result = Mvx.TryResolve(out a);
-            Assert.IsTrue(result);
-            Assert.IsNotNull(a);
-            Assert.IsInstanceOf<A>(a);
+            Assert.True(result);
+            Assert.NotNull(a);
+            Assert.IsType<A>(a);
             var castA = (A)a;
-            Assert.IsNull(castA.B);
-            Assert.IsNull(castA.C);
-            Assert.IsNull(castA.BNever);
-            Assert.IsNull(castA.CNever);
+            Assert.Null(castA.B);
+            Assert.Null(castA.C);
+            Assert.Null(castA.BNever);
+            Assert.Null(castA.CNever);
         }
 
         [Fact]
@@ -89,15 +89,15 @@ namespace MvvmCross.Platform.Test
 
             IA a;
             var result = Mvx.TryResolve(out a);
-            Assert.IsTrue(result);
-            Assert.IsNotNull(a);
-            Assert.IsInstanceOf<A>(a);
+            Assert.True(result);
+            Assert.NotNull(a);
+            Assert.IsType<A>(a);
             var castA = (A)a;
-            Assert.IsNotNull(castA.B);
-            Assert.IsInstanceOf<B>(castA.B);
-            Assert.IsNull(castA.C);
-            Assert.IsNull(castA.BNever);
-            Assert.IsNull(castA.CNever);
+            Assert.NotNull(castA.B);
+            Assert.IsType<B>(castA.B);
+            Assert.Null(castA.C);
+            Assert.Null(castA.BNever);
+            Assert.Null(castA.CNever);
         }
 
         [Fact]
@@ -119,16 +119,16 @@ namespace MvvmCross.Platform.Test
 
             IA a;
             var result = Mvx.TryResolve(out a);
-            Assert.IsTrue(result);
-            Assert.IsNotNull(a);
-            Assert.IsInstanceOf<A>(a);
+            Assert.True(result);
+            Assert.NotNull(a);
+            Assert.IsType<A>(a);
             var castA = (A)a;
-            Assert.IsNotNull(castA.B);
-            Assert.IsInstanceOf<B>(castA.B);
-            Assert.IsNotNull(castA.C);
-            Assert.IsInstanceOf<C>(castA.C);
-            Assert.IsNull(castA.BNever);
-            Assert.IsNull(castA.CNever);
+            Assert.NotNull(castA.B);
+            Assert.IsType<B>(castA.B);
+            Assert.NotNull(castA.C);
+            Assert.IsType<C>(castA.C);
+            Assert.Null(castA.BNever);
+            Assert.Null(castA.CNever);
         }
     }
 }

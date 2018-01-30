@@ -13,14 +13,21 @@ using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.ExpressionParse;
 using MvvmCross.Platform.Converters;
-using MvvmCross.Test.Core;
+using MvvmCross.Test;
 using Xunit;
 
 namespace MvvmCross.Binding.Test.ExpressionParse
 {
-    
-    public class MvxExpressionBindingTest : MvxIoCSupportingTest
+    [Collection("MvxTest")]
+    public class MvxExpressionBindingTest : IClassFixture<MvxTestFixture>
     {
+        private readonly MvxTestFixture _fixture;
+
+        public MvxExpressionBindingTest(MvxTestFixture fixture)
+        {
+            _fixture = fixture;
+        }
+
         public class Child
         {
             public string Value { get; set; }
@@ -407,8 +414,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
             Func<MockBindingContext, object> findTargetObjectFunc,
             MvxBindingDescription expectedDescription)
         {
-            ClearAll();
-            MvxBindingSingletonCache.Initialize();
+            _fixture.ClearAll();
 
             var dataContext = new TestDataContext();
 
@@ -433,13 +439,13 @@ namespace MvvmCross.Binding.Test.ExpressionParse
                               BindingDescription = descriptions.First()
                           });
                       });
-            Ioc.RegisterSingleton(binder.Object);
+            _fixture.Ioc.RegisterSingleton(binder.Object);
 
-            Ioc.RegisterSingleton<IMvxPropertyExpressionParser>(new MvxPropertyExpressionParser());
+            _fixture.Ioc.RegisterSingleton<IMvxPropertyExpressionParser>(new MvxPropertyExpressionParser());
 
             var converterLookup = new MvxValueConverterRegistry();
             converterLookup.AddOrOverwrite("SampleConv", new SampleValueConverter());
-            Ioc.RegisterSingleton<IMvxValueConverterLookup>(converterLookup);
+            _fixture.Ioc.RegisterSingleton<IMvxValueConverterLookup>(converterLookup);
 
             var testTarget = new MockBindingContext
             {
@@ -456,9 +462,9 @@ namespace MvvmCross.Binding.Test.ExpressionParse
             Assert.Equal(dataContext, callback.Source);
 
             var desc = callback.BindingDescription;
-            Assert.IsTrue(expectedDescription.Source is MvxPathSourceStepDescription);
+            Assert.True(expectedDescription.Source is MvxPathSourceStepDescription);
             var path = desc.Source as MvxPathSourceStepDescription;
-            Assert.IsTrue(desc.Source is MvxPathSourceStepDescription);
+            Assert.True(desc.Source is MvxPathSourceStepDescription);
             var expectedPath = expectedDescription.Source as MvxPathSourceStepDescription;
             Assert.Equal(expectedPath.ConverterParameter, path.ConverterParameter);
             Assert.Equal(expectedPath.FallbackValue, path.FallbackValue);
@@ -466,7 +472,7 @@ namespace MvvmCross.Binding.Test.ExpressionParse
             Assert.Equal(expectedDescription.Mode, desc.Mode);
             Assert.Equal(expectedDescription.TargetName, desc.TargetName);
             if (expectedPath.Converter == null)
-                Assert.IsNull(path.Converter);
+                Assert.Null(path.Converter);
             else
                 Assert.Equal(expectedPath.Converter.GetType(), path.Converter.GetType());
         }

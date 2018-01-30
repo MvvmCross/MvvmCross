@@ -6,20 +6,26 @@ using System.Collections.Generic;
 using MvvmCross.Core.Parse.StringDictionary;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
-using MvvmCross.Test.Core;
 using MvvmCross.Test.Mocks.TestViewModels;
 using Xunit;
 
 namespace MvvmCross.Test.Parse
 {
-    
+    [Collection("MvxTest")]
     public class MvxStringDictionaryTextSerializerTest
-        : MvxIoCSupportingTest
+        : IClassFixture<MvxTestFixture>
     {
+        private readonly MvxTestFixture _fixture;
+
+        public MvxStringDictionaryTextSerializerTest(MvxTestFixture fixture)
+        {
+            _fixture = fixture;
+        }
+
         [Fact]
         public void Test_Round_Trip_Works_For_Normal_ViewModel_Requests()
         {
-            ClearAll();
+            _fixture.ClearAll();
 
             var viewModelNameLookup = new MvxViewModelByNameLookup();
             viewModelNameLookup.AddAll(GetType().Assembly);
@@ -42,7 +48,7 @@ namespace MvvmCross.Test.Parse
             Assert.Equal("1'\\", deserialized.ParameterValues["On'e"]);
             Assert.Equal("2", deserialized.ParameterValues["Two"]);
             Assert.Equal("3\"\'\\", deserialized.PresentationValues["Thre\"\'\\e"]);
-            Assert.Equal(null, deserialized.PresentationValues["Four"]);
+            Assert.Null(deserialized.PresentationValues["Four"]);
         }
 
         [Fact]
