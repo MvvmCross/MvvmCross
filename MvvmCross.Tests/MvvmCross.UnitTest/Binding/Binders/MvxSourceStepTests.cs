@@ -209,8 +209,7 @@ namespace MvvmCross.Binding.Test.Binders
 
         private MvxSourceStepFactory SetupSourceStepFactory()
         {
-            _fixture.Reset();
-            _fixture.InitializeSingletonCache();
+            _fixture.ClearAll();
 
             var autoValueConverters = new MvxAutoValueConverters();
             _fixture.Ioc.RegisterSingleton<IMvxAutoValueConverters>(autoValueConverters);

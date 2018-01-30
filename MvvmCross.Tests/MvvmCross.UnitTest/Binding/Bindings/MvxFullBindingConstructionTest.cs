@@ -80,8 +80,7 @@ namespace MvvmCross.Binding.Test.Bindings
 
         private void TestCommon(MvxBindingMode bindingMode, bool expectSourceBinding, bool expectTargetBinding)
         {
-            _fixture.InitializeSingletonCache();
-            _fixture.Reset();
+            _fixture.ClearAll();
             _fixture.Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(new InlineMockMainThreadDispatcher());
 
             var mockSourceBindingFactory = new Mock<IMvxSourceBindingFactory>();

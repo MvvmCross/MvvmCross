@@ -5,15 +5,19 @@
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Swiss;
 using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Test;
 using Xunit;
 
 namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
 {
-    
+    [Collection("MvxTest")]
     public class MvxSwissBindingTest
         : MvxBaseSwissBindingTest<MvxSwissBindingParser>
     {
+        public MvxSwissBindingTest(MvxTestFixture fixture) : base(fixture)
+        {
+        }
+
         [Fact]
         public void TestFunctionalValueConverterBinding()
         {

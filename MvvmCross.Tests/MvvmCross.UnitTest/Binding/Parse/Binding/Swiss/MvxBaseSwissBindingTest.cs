@@ -9,15 +9,20 @@ using System.Text;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Swiss;
 using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Test;
 using Xunit;
 
 namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
 {
-    public class MvxBaseSwissBindingTest<TParser>
+    public abstract class MvxBaseSwissBindingTest<TParser>
         : MvxBindingTest
         where TParser : MvxSwissBindingParser, new()
     {
+        public MvxBaseSwissBindingTest(MvxTestFixture fixture) : base(fixture)
+        {
+
+        }
+
         [Fact]
         public void TestPathBinding()
         {
