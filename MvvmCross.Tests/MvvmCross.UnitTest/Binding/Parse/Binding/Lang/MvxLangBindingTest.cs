@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Lang;
+using MvvmCross.Test;
 using Xunit;
 
 namespace MvvmCross.Binding.Test.Parse.Binding.Lang
 {
-    
+    [Collection("MvxTest")]
     public class MvxLangBindingTest
         : MvxBindingTest
     {
@@ -184,5 +185,9 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Lang
                     }
                 },
             };
+
+        public MvxLangBindingTest(MvxTestFixture fixture) : base(fixture)
+        {
+        }
     }
 }
