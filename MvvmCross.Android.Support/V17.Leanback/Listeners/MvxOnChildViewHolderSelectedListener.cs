@@ -1,4 +1,8 @@
-﻿using System.Windows.Input;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MS-PL license.
+// See the LICENSE file in the project root for more information.
+
+using System.Windows.Input;
 using Android.Support.V17.Leanback.Widget;
 using Android.Support.V7.Widget;
 using MvvmCross.Droid.Support.V7.RecyclerView;
