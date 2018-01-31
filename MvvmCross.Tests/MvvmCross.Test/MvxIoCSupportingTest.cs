@@ -2,14 +2,12 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Globalization;
 using MvvmCross.Core;
 using MvvmCross.Core.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.IoC;
 using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Logging.LogProviders;
 
 namespace MvvmCross.Test
 {
@@ -41,7 +39,6 @@ namespace MvvmCross.Test
             InitializeSingletonCache();
             InitializeMvxSettings();
             AdditionalSetup();
-            Ioc.RegisterSingleton<IMvxLogProvider>(new ConsoleLogProvider());
         }
 
         public void InitializeSingletonCache()
@@ -56,7 +53,7 @@ namespace MvvmCross.Test
 
         protected virtual void AdditionalSetup()
         {
-            // nothing here..
+            Ioc.RegisterSingleton<IMvxLogProvider>(new TestLogProvider());
         }
 
         public void SetInvariantCulture()
