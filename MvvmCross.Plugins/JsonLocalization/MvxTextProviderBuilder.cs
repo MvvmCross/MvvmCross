@@ -14,10 +14,10 @@ namespace MvvmCross.Plugins.JsonLocalization
     public abstract class MvxTextProviderBuilder
         : IMvxTextProviderBuilder
     {
-        private readonly string _generalNamespaceKey;
-        private readonly string _rootFolderForResources;
-        private readonly IMvxJsonDictionaryTextLoader _textLoader;
-        private readonly IMvxTextProvider _textProvider;
+        protected readonly string _generalNamespaceKey;
+        protected readonly string _rootFolderForResources;
+        protected readonly IMvxJsonDictionaryTextLoader _textLoader;
+        protected readonly IMvxTextProvider _textProvider;
 
         protected MvxTextProviderBuilder(string generalNamespaceKey, string rootFolderForResources)
             : this(generalNamespaceKey, rootFolderForResources, new MvxContentJsonDictionaryTextProvider())
@@ -42,7 +42,7 @@ namespace MvvmCross.Plugins.JsonLocalization
 
         public IMvxTextProvider TextProvider => _textProvider;
 
-        public void LoadResources(string whichLocalizationFolder)
+        public virtual void LoadResources(string whichLocalizationFolder)
         {
             foreach (var kvp in ResourceFiles)
             {
