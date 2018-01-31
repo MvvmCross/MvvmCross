@@ -11,7 +11,6 @@ namespace MvvmCross.Binding.Mac.Target
     public class MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding : MvxPropertyInfoTargetBinding<NSTabViewController>
     {
         private bool _subscribed;
-        private NSTabViewController target;
 
         public MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)

@@ -17,7 +17,6 @@
   <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
     <Compile Include="Platforms\Android\**\*.cs" />
     <Compile Include="Platforms\Xamarin-common\**\*.cs" />
-    <AndroidResource Include="Resources\**\*.xml" SubType="Designer" Generator="MSBuild:UpdateAndroidResources" />
     <PackageReference Include="Xamarin.GooglePlayServices.Location" Version="60.1142.0" />
   </ItemGroup>
 
