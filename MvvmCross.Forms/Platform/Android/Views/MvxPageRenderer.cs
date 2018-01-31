@@ -6,6 +6,7 @@
 // Project Lead - Tomasz Cielecki, @cheesebaron, mvxplugins@ostebaronen.dk
 // Contributor - Martin Nygren, @zzcgumn, zzcgumn@me.com
 
+using Android.Content;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Views;
@@ -16,6 +17,10 @@ namespace MvvmCross.Forms.Droid.Views
 {
     public class MvxPageRenderer : PageRenderer, IMvxBindingContextOwner
     {
+        public MvxPageRenderer(Context context) : base(context)
+        {
+        }
+
         public object DataContext
         {
             get
@@ -29,6 +34,7 @@ namespace MvvmCross.Forms.Droid.Views
         }
 
         private IMvxBindingContext _bindingContext;
+
         public IMvxBindingContext BindingContext
         {
             get
@@ -64,6 +70,11 @@ namespace MvvmCross.Forms.Droid.Views
     public class MvxPageRenderer<TViewModel>
         : MvxPageRenderer where TViewModel : class, IMvxViewModel
     {
+        public MvxPageRenderer(Context context)
+            : base(context)
+        {
+        }
+
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
