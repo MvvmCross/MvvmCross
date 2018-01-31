@@ -1,10 +1,6 @@
-﻿// MvxFormsIosPagePresenter.cs
-// 2015 (c) Copyright Cheesebaron. http://ostebaronen.dk
-// MvvmCross.Forms is licensed using Microsoft Public License (Ms-PL)
-// Contributions and inspirations noted in readme.md and license.txt
-//
-// Project Lead - Tomasz Cielecki, @cheesebaron, mvxplugins@ostebaronen.dk
-// Contributor - Martin Nygren, @zzcgumn, zzcgumn@me.com
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MS-PL license.
+// See the LICENSE file in the project root for more information.
 
 using Android.Content;
 using MvvmCross.Binding.BindingContext;
