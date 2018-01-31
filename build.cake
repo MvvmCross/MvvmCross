@@ -1,15 +1,14 @@
 #tool nuget:?package=GitVersion.CommandLine
 #tool nuget:?package=vswhere
-#tool nuget:?package=xunit.runner.console
-#addin nuget:?package=Cake.Incubator&version=1.6.0
+#addin nuget:?package=Cake.Incubator&version=1.7.1
 #addin nuget:?package=Cake.Git&version=0.16.0
 #addin nuget:?package=Polly
 
 using Polly;
 
-var sln = new FilePath("MvvmCross.sln");
-var outputDir = new DirectoryPath("artifacts");
-var nuspecDir = new DirectoryPath("nuspec");
+var sln = new FilePath("./MvvmCross.sln");
+var outputDir = new DirectoryPath("./artifacts");
+var nuspecDir = new DirectoryPath("./nuspec");
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
@@ -87,17 +86,24 @@ Task("UnitTest")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    var testPaths = GetFiles("./MvvmCross.Tests/*.UnitTest/bin/Release/netcoreapp2.0/*.UnitTest.dll");
+    EnsureDirectoryExists(outputDir + "/Tests/");
 
-    var testResultsPath = new DirectoryPath(outputDir + "/Tests/");
-    
-    var testSettings = new XUnit2Settings
+    var testPaths = GetFiles("./MvvmCross.Tests/*.UnitTest/*.UnitTest.csproj");
+    foreach(var project in testPaths)
     {
-        XmlReport = true,
-        OutputDirectory = testResultsPath
-    };
-
-    XUnit2(testPaths, testSettings);
+        var projectName = project.GetFilenameWithoutExtension();
+        var testXml = new FilePath(outputDir + "/Tests/" + projectName + ".xml").MakeAbsolute(Context.Environment);
+        try 
+        {
+            DotNetCoreTool(project,
+                "xunit",  "-fxversion 2.0.0 --no-build -parallel none -configuration " + 
+                configuration + " -xml \"" + testXml.FullPath + "\"");
+        }
+        catch
+        {
+            Warning("Some unit test failed");
+        }
+    }
 
     if (isRunningOnAppVeyor)
     {
