@@ -89,6 +89,7 @@ Task("UnitTest")
     EnsureDirectoryExists(outputDir + "/Tests/");
 
     var testPaths = GetFiles("./MvvmCross.Tests/*.UnitTest/*.UnitTest.csproj");
+    var testsFailed = false;
     foreach(var project in testPaths)
     {
         var projectName = project.GetFilenameWithoutExtension();
@@ -101,7 +102,7 @@ Task("UnitTest")
         }
         catch
         {
-            Warning("Some unit test failed");
+            testsFailed = true;
         }
     }
 
@@ -110,6 +111,9 @@ Task("UnitTest")
         foreach(var testResult in GetFiles(outputDir + "/Tests/*.xml"))
             AppVeyor.UploadTestResults(testResult, AppVeyorTestResultsType.XUnit);
     }
+
+    if (testsFailed)
+        throw new Exception("Tests failed :(");
 });
 
 Task("PublishPackages")
