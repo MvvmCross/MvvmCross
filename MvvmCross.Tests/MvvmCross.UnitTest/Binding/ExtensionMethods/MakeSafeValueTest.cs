@@ -127,8 +127,7 @@ namespace MvvmCross.Binding.Test.ExtensionMethods
         [Fact]
         public void TestBoolValues()
         {
-            _fixture.Reset();
-            _fixture.InitializeSingletonCache();
+            _fixture.ClearAll();
             Mvx.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
             Assert.False((bool)typeof(bool).MakeSafeValue(0));
