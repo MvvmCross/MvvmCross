@@ -1,7 +1,6 @@
-// Copyright (c) 2015 Stephen Cleary
-// Licensed under the MIT License
-// Original source can be found at 
-// https://github.com/StephenCleary/Mvvm.Core/blob/master/src/Nito.Mvvm.Core/PropertyChangedEventArgsCache.cs
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MS-PL license.
+// See the LICENSE file in the project root for more information.
 
 using System;
 using System.Collections.Generic;

@@ -1,9 +1,7 @@
-﻿// IMvxCurrentRequest.cs
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MS-PL license.
+// See the LICENSE file in the project root for more information.
 
-// MvvmCross is licensed using Microsoft Public License (Ms-PL)
-// Contributions and inspirations noted in readme.md and license.txt
-//
-// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 using MvvmCross.Core.ViewModels;
 
 namespace MvvmCross.Mac.Views
