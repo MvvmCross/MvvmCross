@@ -13,7 +13,6 @@ namespace MvvmCross.Platform.Logging.LogProviders
 
     internal abstract class MvxBaseLogProvider : IMvxLogProvider
     {
-
         protected delegate IDisposable OpenNdc(string message);
         protected delegate IDisposable OpenMdc(string key, string value);
 
