@@ -1,27 +1,24 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MS-PL license.
-// See the LICENSE file in the project root for more information.
+﻿// MvxBindingLog.cs
+
+// MvvmCross is licensed using Microsoft Public License (Ms-PL)
+// Contributions and inspirations noted in readme.md and license.txt
+//
+// Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Text;
+using MvvmCross.Platform.Logging;
+using MvvmCross.Platform.Logging.LogProviders;
 
-namespace MvvmCross.Platform.Logging.LogProviders
+[assembly: InternalsVisibleTo("MvvmCross.UnitTest")]
+
+namespace MvvmCross
 {
-    internal sealed class ConsoleLogProvider : MvxBaseLogProvider
+    internal sealed class TestLogProvider : MvxBaseLogProvider
     {
-        private static readonly IDictionary<MvxLogLevel, ConsoleColor> Colors = new Dictionary<MvxLogLevel, ConsoleColor>
-        {
-            { MvxLogLevel.Fatal, ConsoleColor.Red },
-            { MvxLogLevel.Error, ConsoleColor.Yellow },
-            { MvxLogLevel.Warn, ConsoleColor.Magenta },
-            { MvxLogLevel.Info, ConsoleColor.White },
-            { MvxLogLevel.Debug, ConsoleColor.Gray },
-            { MvxLogLevel.Trace, ConsoleColor.DarkGray }
-        };
-
-        protected override Logger GetLogger(string name) => new ColouredConsoleLogger(name).Log;
+        protected override Logger GetLogger(string name) => new TestLogger(name).Log;
 
         private static string MessageFormatter(string loggerName, MvxLogLevel level, object message, Exception e)
         {
@@ -37,8 +34,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
             stringBuilder.Append(message);
 
             // Append stack trace if there is an exception
-            if (e != null)
-            {
+            if (e != null) {
                 stringBuilder.Append(Environment.NewLine).Append(e.GetType());
                 stringBuilder.Append(Environment.NewLine).Append(e.Message);
                 stringBuilder.Append(Environment.NewLine).Append(e.StackTrace);
@@ -47,11 +43,11 @@ namespace MvvmCross.Platform.Logging.LogProviders
             return stringBuilder.ToString();
         }
 
-        public class ColouredConsoleLogger
+        public class TestLogger
         {
             private readonly string _name;
 
-            public ColouredConsoleLogger(string name)
+            public TestLogger(string name)
             {
                 _name = name;
             }
@@ -71,23 +67,7 @@ namespace MvvmCross.Platform.Logging.LogProviders
             {
                 var formattedMessage = MessageFormatter(_name, logLevel, message, e);
 
-                if (Colors.TryGetValue(logLevel, out var color))
-                {
-                    var originalColor = System.Console.ForegroundColor;
-                    try
-                    {
-                        System.Console.ForegroundColor = color;
-                        System.Console.WriteLine(formattedMessage);
-                    }
-                    finally
-                    {
-                        System.Console.ForegroundColor = originalColor;
-                    }
-                }
-                else
-                {
-                    System.Console.WriteLine(formattedMessage);
-                }
+                //Console.WriteLine(formattedMessage);
             }
         }
     }
