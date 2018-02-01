@@ -48,7 +48,7 @@ private MvxInteraction<YesNoQuestion> _interaction =
     new MvxInteraction<YesNoQuestion>();
     
 // need to expose it as a public property for binding (only IMvxInteraction is needed in the view)
-public IMvxInteraction<YesNoCancel> Interaction => _interaction;
+public IMvxInteraction<YesNoQuestion> Interaction => _interaction;
 ```
 
 Now lets imagine we have a `MvxCommand` the user triggers to finish creating their profile. Here we want this interaction to happen,
