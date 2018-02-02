@@ -51,7 +51,7 @@ namespace MvvmCross.Plugins.ResxLocalization
             return null;
         }
 
-        public string GetText(string namespaceKey, string typeKey, string name, params object[] formatArgs)
+        public virtual string GetText(string namespaceKey, string typeKey, string name, params object[] formatArgs)
         {
             var baseText = GetText(namespaceKey, typeKey, name);
 
@@ -69,7 +69,7 @@ namespace MvvmCross.Plugins.ResxLocalization
             return textValue != null;
         }
 
-        public bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name, params object[] formatArgs)
+        public virtual bool TryGetText(out string textValue, string namespaceKey, string typeKey, string name, params object[] formatArgs)
         {
             if(!TryGetText(out textValue, namespaceKey, typeKey, name))
                 return false;
