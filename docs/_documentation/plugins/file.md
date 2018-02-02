@@ -45,3 +45,16 @@ WPF          | `Environment.SpecialFolder.ApplicationData`
 
 Note: while it works, the use of a synchronous API for File IO on WindowsStore applications is slightly 'naughty'. It's likely that an asynchronous version of the IMvxFileStore interface will be provided in the near future.
 
+For using this plugin you need to:
+1. Add the nuget MvvmCross.Plugin.File to your core and UI project in your solution.
+2. Register in your UI project (Setup.cs) the default implementation (MvxIoFileStoreBase) or your own subclass of MvxFileStoreBase
+```c#
+//iOS
+protected override void InitializeFirstChance()
+{
+    //second parameter specifies the base path, were files should be stored
+    //first parameter specifies if the base path is appended in front of any path you will recieve from the wplugin.
+    Mvx.RegisterSingleton<IMvxFileStore>(new MvxIoFileStoreBase(false, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)));
+    base.InitializeFirstChance();
+}
+```
