@@ -25,9 +25,7 @@ namespace MvvmCross.Plugins.JsonLocalization
             var key = MakeLookupKey(namespaceKey, typeKey, name);
             _entries[key] = value;
         }
-
-        #region Implementation of IMvxTextProvider
-
+        
         public override string GetText(string namespaceKey, string typeKey, string name)
         {
             var key = MakeLookupKey(namespaceKey, typeKey, name);
@@ -54,7 +52,5 @@ namespace MvvmCross.Plugins.JsonLocalization
             textValue = key;
             return false;
         }
-
-        #endregion Implementation of IMvxTextProvider
     }
 }

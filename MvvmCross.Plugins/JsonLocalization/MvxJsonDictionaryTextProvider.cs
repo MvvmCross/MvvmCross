@@ -16,14 +16,20 @@ namespace MvvmCross.Plugins.JsonLocalization
             : base(maskErrors)
         {
         }
-
-        private IMvxJsonConverter JsonConvert => Mvx.Resolve<IMvxJsonConverter>();
-
-        #region IMvxJsonDictionaryTextLoader Members
-
+        
+        private IMvxJsonConverter _jsonConvert;
+        protected IMvxJsonConverter JsonConvert
+        {
+            get
+            {
+                _jsonConvert = _jsonConvert ?? Mvx.Resolve<IMvxJsonConverter>();
+                return _jsonConvert;
+            }
+        }
+        
         public abstract void LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath);
 
-        public void LoadJsonFromText(string namespaceKey, string typeKey, string rawJson)
+        public virtual void LoadJsonFromText(string namespaceKey, string typeKey, string rawJson)
         {
             var entries = JsonConvert.DeserializeObject<Dictionary<string, string>>(rawJson);
             foreach (var kvp in entries)
@@ -31,7 +37,5 @@ namespace MvvmCross.Plugins.JsonLocalization
                 AddOrReplace(namespaceKey, typeKey, kvp.Key, kvp.Value);
             }
         }
-
-        #endregion IMvxJsonDictionaryTextLoader Members
     }
 }
