@@ -12,8 +12,8 @@ using Xunit;
 
 namespace MvvmCross.Test.ViewModels
 {
-    
-    public class MvxNotifyPropertyChangedTest : IClassFixture<MvxTestFixture>
+    [Collection("MvxTest")]
+    public class MvxNotifyPropertyChangedTest
     {
         private readonly MvxTestFixture _fixture;
 

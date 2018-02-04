@@ -9,12 +9,21 @@ using MvvmCross.Platform.IoC;
 using Xunit;
 using System.Reflection;
 using System.Linq;
+using MvvmCross.Test;
 
 namespace MvvmCross.Platform.Test
 {
-    
+    [Collection("MvxTest")]   
     public class MvxIocTest
     {
+        private readonly MvxTestFixture _fixture;
+
+        public MvxIocTest(MvxTestFixture fixture)
+        {
+            _fixture = fixture;
+            _fixture.ClearAll();
+        }
+
         public interface IA 
         { 
             IB B { get; } 
@@ -112,19 +121,16 @@ namespace MvvmCross.Platform.Test
         public void TryResolve_CircularButSafeDynamicWithOptionOff_ReturnsTrue()
         {
             COdd.FirstTime = true;
-            MvxSingleton.ClearAllSingletons();
-            var options = new MvxIocOptions()
+            _fixture.ClearAll(new MvxIocOptions()
             {
                 TryToDetectDynamicCircularReferences = false
-            };
-            var instance = MvxIoCProvider.Initialize(options);
+            });
 
-            Mvx.RegisterType<IA, A>();
-            Mvx.RegisterType<IB, B>();
-            Mvx.RegisterType<IC, COdd>();
+            _fixture.Ioc.RegisterType<IA, A>();
+            _fixture.Ioc.RegisterType<IB, B>();
+            _fixture.Ioc.RegisterType<IC, COdd>();
 
-            IA a;
-            var result = Mvx.TryResolve(out a);
+            var result = _fixture.Ioc.TryResolve(out IA a);
             Assert.True(result);
             Assert.NotNull(a);
         }
@@ -133,15 +139,13 @@ namespace MvvmCross.Platform.Test
         public void TryResolve_CircularButSafeDynamicWithOptionOn_ReturnsFalse()
         {
             COdd.FirstTime = true;
-            MvxSingleton.ClearAllSingletons();
-            var instance = MvxIoCProvider.Initialize();
+            _fixture.ClearAll();
 
-            Mvx.RegisterType<IA, A>();
-            Mvx.RegisterType<IB, B>();
-            Mvx.RegisterType<IC, COdd>();
+            _fixture.Ioc.RegisterType<IA, A>();
+            _fixture.Ioc.RegisterType<IB, B>();
+            _fixture.Ioc.RegisterType<IC, COdd>();
 
-            IA a;
-            var result = Mvx.TryResolve(out a);
+            var result = _fixture.Ioc.TryResolve(out IA a);
             Assert.False(result);
             Assert.Null(a);
         }

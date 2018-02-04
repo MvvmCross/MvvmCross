@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -9,7 +9,7 @@ using Xunit;
 namespace MvvmCross.Test.Platform
 {
     [Collection("MvxTest")]
-    public class MvxSimplePropertyDictionaryExtensionMethodsTests : IClassFixture<MvxTestFixture>
+    public class MvxSimplePropertyDictionaryExtensionMethodsTests
     {
         private readonly MvxTestFixture _fixture;
 

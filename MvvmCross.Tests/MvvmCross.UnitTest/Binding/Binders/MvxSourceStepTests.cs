@@ -20,7 +20,7 @@ using Xunit;
 namespace MvvmCross.Binding.Test.Binders
 {
     [Collection("MvxTest")]
-    public class MvxSourceStepTests : IClassFixture<MvxTestFixture>
+    public class MvxSourceStepTests
     {
         private readonly MvxTestFixture _fixture;
 

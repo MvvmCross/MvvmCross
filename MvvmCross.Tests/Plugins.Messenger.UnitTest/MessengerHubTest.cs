@@ -5,13 +5,20 @@
 using System;
 using System.Linq;
 using System.Threading;
+using MvvmCross.Test;
 using Xunit;
 
 namespace MvvmCross.Plugins.Messenger.Test
 {
-    
-    public class MessengerHubTest
+    public class MessengerHubTest : IClassFixture<MvxTestFixture>
     {
+        private readonly MvxTestFixture _fixture;
+
+        public MessengerHubTest(MvxTestFixture fixture)
+        {
+            _fixture = fixture;
+        }
+
         #region TestClasses
 
         private class TestMessage : MvxMessage
@@ -32,10 +39,6 @@ namespace MvvmCross.Plugins.Messenger.Test
 
         #endregion TestClasses
 
-        
-        public void SetUp()
-        {
-        }
 
         [Fact]
         public void SubscribeAndPublishAllowsMessageToBeReceived()

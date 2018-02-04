@@ -10,7 +10,7 @@ using Xunit;
 namespace MvvmCross.Test.Platform
 {
     [Collection("MvxTest")]
-    public class MvxViewModelByNameLookupTest : IClassFixture<MvxTestFixture>
+    public class MvxViewModelByNameLookupTest
     {
         private readonly MvxTestFixture _fixture;
 

@@ -12,7 +12,7 @@ using Xunit;
 namespace MvvmCross.Test.ViewModels
 {
     [Collection("MvxTest")]
-    public class MvxBundleTest : IClassFixture<MvxTestFixture>
+    public class MvxBundleTest
     {
         private readonly MvxTestFixture _fixture;
 

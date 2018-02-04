@@ -4,13 +4,20 @@
 
 using System.Collections.Generic;
 using MvvmCross.Plugins.JsonLocalization.Tests.Mocks;
+using MvvmCross.Test;
 using Xunit;
 
 namespace MvvmCross.Plugins.JsonLocalization.Tests
 {
-    
-    public class MvxDictionaryTextProviderTest
+    public class MvxDictionaryTextProviderTest : IClassFixture<MvxTestFixture>
     {
+        private readonly MvxTestFixture _fixture;
+
+        public MvxDictionaryTextProviderTest(MvxTestFixture fixture)
+        {
+            _fixture = fixture;
+        }
+
         [Fact]
         public void GetTextWithExistingValueReturnsTheValueWhenMaskingErrors()
         {
