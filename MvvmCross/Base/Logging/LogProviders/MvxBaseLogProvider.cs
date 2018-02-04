@@ -2,8 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using MvvmCross.Platform.Logging;
+﻿using System;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("MvvmCross.Test")]
 
 namespace MvvmCross.Platform.Logging.LogProviders
 {
@@ -11,7 +13,6 @@ namespace MvvmCross.Platform.Logging.LogProviders
 
     internal abstract class MvxBaseLogProvider : IMvxLogProvider
     {
-
         protected delegate IDisposable OpenNdc(string message);
         protected delegate IDisposable OpenMdc(string key, string value);
 
