@@ -1,7 +1,7 @@
 #tool nuget:?package=GitVersion.CommandLine
 #tool nuget:?package=vswhere
 #addin nuget:?package=Cake.Incubator&version=1.7.1
-#addin nuget:?package=Cake.Git&version=0.16.0
+#addin nuget:?package=Cake.Git&version=0.16.1
 #addin nuget:?package=Polly
 
 using Polly;
@@ -76,7 +76,9 @@ Task("Build")
     settings = settings
         .WithProperty("DebugSymbols", "True")
         .WithProperty("DebugType", "Embedded")
+        .WithProperty("Version", versionInfo.SemVer)
         .WithProperty("PackageVersion", versionInfo.SemVer)
+        .WithProperty("InformationalVersion", versionInfo.InformationalVersion)
         .WithProperty("NoPackageAnalysis", "True");
 
     MSBuild(sln, settings);
