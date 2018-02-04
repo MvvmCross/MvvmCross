@@ -63,7 +63,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                                             Path = "Foo",
                                         },
                                 },
-                            ConverterParameter = 12
+                            ConverterParameter = 12L
                     }
                 }
             };

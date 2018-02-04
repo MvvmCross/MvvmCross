@@ -21,7 +21,7 @@ using Xunit;
 namespace MvvmCross.Binding.Test.Bindings
 {
     [Collection("MvxTest")]
-    public class MvxFullBindingValueConversionTest : IClassFixture<MvxTestFixture>
+    public class MvxFullBindingValueConversionTest
     {
         private readonly MvxTestFixture _fixture;
 

@@ -175,14 +175,14 @@ namespace MvvmCross.Binding.Test.Parse.PropertyPath
 
         private static void AssertIsSimplePropertyToken(MvxPropertyToken token, string text)
         {
-            Assert.IsType<MvxPropertyNamePropertyToken>(token);
+            Assert.IsAssignableFrom<MvxPropertyNamePropertyToken>(token);
             Assert.Equal(text, ((MvxPropertyNamePropertyToken)token).PropertyName);
         }
 
         private static void AssertIsIndexerPropertyToken<T, TSpecific>(MvxPropertyToken token, T value)
         {
-            Assert.IsType<MvxIndexerPropertyToken<T>>(token);
-            Assert.IsType<TSpecific>(token);
+            Assert.IsAssignableFrom<MvxIndexerPropertyToken<T>>(token);
+            Assert.IsAssignableFrom<TSpecific>(token);
             Assert.Equal(value, ((MvxIndexerPropertyToken<T>)token).Key);
         }
 

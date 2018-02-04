@@ -63,7 +63,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                                             },
                                         new MvxSerializableBindingDescription()
                                             {
-                                                Literal = 12,
+                                                Literal = 12L,
                                             },
                                     },
                             }
@@ -226,7 +226,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                                                             {
                                                                 Path = "Foo2",
                                                                 Converter = "Second",
-                                                                FallbackValue = 23,
+                                                                FallbackValue = 23L,
                                                             }
                                                     },
                                             },
@@ -236,7 +236,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                                             },
                                         new MvxSerializableBindingDescription()
                                             {
-                                                Literal = 23,
+                                                Literal = 23L,
                                             },
                                     }
                             }
@@ -288,7 +288,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                                                                             {
                                                                                 Path = "Foo2",
                                                                                 Converter = "Second",
-                                                                                FallbackValue = 23,
+                                                                                FallbackValue = 23L,
                                                                             }
                                                                     }
                                                             },
@@ -348,7 +348,7 @@ namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
                                                                             {
                                                                                 Path = "Foo2",
                                                                                 Converter = "Second",
-                                                                                FallbackValue = 23,
+                                                                                FallbackValue = 23L,
                                                                             }
                                                                     }
                                                             },

@@ -10,13 +10,14 @@ using Xunit;
 namespace MvvmCross.Test.Platform
 {
     [Collection("MvxTest")]
-    public class MvxStringToTypeParserTest : IClassFixture<MvxTestFixture>
+    public class MvxStringToTypeParserTest
     {
         private readonly MvxTestFixture _fixture;
 
         public MvxStringToTypeParserTest(MvxTestFixture fixture)
         {
             _fixture = fixture;
+            _fixture.ClearAll();
             _fixture.SetInvariantCulture();
         }
 

@@ -12,8 +12,8 @@ using Xunit;
 
 namespace MvvmCross.Binding.Test.ExtensionMethods
 {
-    
-    public class MakeSafeValueTest : IClassFixture<MvxTestFixture>
+    [Collection("MvxTest")]
+    public class MakeSafeValueTest
     {
         private readonly MvxTestFixture _fixture;
 
@@ -39,7 +39,7 @@ namespace MvvmCross.Binding.Test.ExtensionMethods
         public void TestIntValues()
         {
             _fixture.ClearAll();
-            Mvx.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
+            _fixture.Ioc.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
             Assert.Equal(0, typeof(int).MakeSafeValue(0));
             Assert.Equal(0, typeof(int).MakeSafeValue(null));
@@ -55,7 +55,7 @@ namespace MvvmCross.Binding.Test.ExtensionMethods
         public void TestDoubleValues()
         {
             _fixture.ClearAll();
-            Mvx.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
+            _fixture.Ioc.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
             Assert.Equal(0.0, typeof(double).MakeSafeValue(0.0));
             Assert.Equal(0.0, typeof(double).MakeSafeValue(null));
@@ -71,16 +71,16 @@ namespace MvvmCross.Binding.Test.ExtensionMethods
         public void TestFloatValues()
         {
             _fixture.ClearAll();
-            Mvx.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
+            _fixture.Ioc.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
-            Assert.Equal(0.0f, typeof(double).MakeSafeValue(0.0f));
-            Assert.Equal(0.0f, typeof(double).MakeSafeValue(null));
-            Assert.Equal(1.0f, typeof(double).MakeSafeValue(1.0f));
-            Assert.Equal(0.0f, typeof(double?).MakeSafeValue(0.0f));
+            Assert.Equal(0.0f, typeof(float).MakeSafeValue(0.0f));
+            Assert.Equal(0.0f, typeof(float).MakeSafeValue(null));
+            Assert.Equal(1.0f, typeof(float).MakeSafeValue(1.0f));
+            Assert.Equal(0.0f, typeof(float?).MakeSafeValue(0.0f));
             Assert.Null(typeof(double?).MakeSafeValue(null));
-            Assert.Equal(1.0f, typeof(double?).MakeSafeValue(1.0f));
-            Assert.Equal(1.0f, typeof(double).MakeSafeValue(1f));
-            Assert.Equal(0.0f, typeof(double?).MakeSafeValue(0f));
+            Assert.Equal(1.0f, typeof(float?).MakeSafeValue(1.0f));
+            Assert.Equal(1.0f, typeof(float).MakeSafeValue(1f));
+            Assert.Equal(0.0f, typeof(float?).MakeSafeValue(0f));
         }
 
         public class MyTest
@@ -95,7 +95,7 @@ namespace MvvmCross.Binding.Test.ExtensionMethods
         public void TestStringValues()
         {
             _fixture.ClearAll();
-            Mvx.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
+            _fixture.Ioc.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
             Assert.Equal("0", typeof(string).MakeSafeValue(0.0));
             Assert.Null(typeof(string).MakeSafeValue(null));
@@ -115,7 +115,7 @@ namespace MvvmCross.Binding.Test.ExtensionMethods
         public void TestEnumValues()
         {
             _fixture.ClearAll();
-            Mvx.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
+            _fixture.Ioc.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
             Assert.Equal(SampleEnum.Defaulto, typeof(SampleEnum).MakeSafeValue(0));
             Assert.Equal(SampleEnum.Defaulto, typeof(SampleEnum).MakeSafeValue(null));
@@ -128,7 +128,7 @@ namespace MvvmCross.Binding.Test.ExtensionMethods
         public void TestBoolValues()
         {
             _fixture.ClearAll();
-            Mvx.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
+            _fixture.Ioc.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
             Assert.False((bool)typeof(bool).MakeSafeValue(0));
             Assert.False((bool)typeof(bool).MakeSafeValue(null));
@@ -159,7 +159,7 @@ namespace MvvmCross.Binding.Test.ExtensionMethods
         public void TestObjectValues()
         {
             _fixture.ClearAll();
-            Mvx.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
+            _fixture.Ioc.RegisterSingleton<IMvxAutoValueConverters>(new MockAutoValueConverters());
 
             var foo = new Foo();
             Assert.Equal(foo, typeof(FooBase).MakeSafeValue(foo));

@@ -9,11 +9,12 @@ using System.Linq;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Test.Mocks.Dispatchers
 {
     public class NavigationMockDispatcher 
-        : MvxMainThreadDispatcher, IMvxViewDispatcher
+        : IMvxMainThreadDispatcher, IMvxViewDispatcher
     {
         public readonly List<MvxViewModelRequest> Requests = new List<MvxViewModelRequest>();
         public readonly List<MvxPresentationHint> Hints = new List<MvxPresentationHint>();
@@ -32,7 +33,7 @@ namespace MvvmCross.Test.Mocks.Dispatchers
                 debugString += $"with parameters: {string.Join(",", request.ParameterValues.Select(pair => $"{{ {pair.Key}={pair.Value} }}"))}";
             else
                 debugString += "without parameters";
-            Debug.WriteLine(debugString);
+            MvxTestLog.Instance.Log(MvxLogLevel.Debug, () => debugString);
 
             Requests.Add(request);
             return true;

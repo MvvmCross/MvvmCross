@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -16,13 +16,13 @@ namespace MvvmCross.Test.Navigation
 {
     [Collection("MvxTest")]
     public class NavigationServiceTests
-        : IClassFixture<MvxTestFixture>
     {
         private readonly MvxTestFixture _fixture;
 
         public NavigationServiceTests(MvxTestFixture fixture)
         {
             _fixture = fixture;
+            _fixture.ClearAll();
             AdditionalSetup(fixture);
         }
 

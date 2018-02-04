@@ -13,7 +13,6 @@ namespace MvvmCross.Test.Parse
 {
     [Collection("MvxTest")]
     public class MvxStringDictionaryTextSerializerTest
-        : IClassFixture<MvxTestFixture>
     {
         private readonly MvxTestFixture _fixture;
 

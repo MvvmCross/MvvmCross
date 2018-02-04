@@ -19,7 +19,7 @@ using Xunit;
 namespace MvvmCross.Binding.Test.ExpressionParse
 {
     [Collection("MvxTest")]
-    public class MvxExpressionBindingTest : IClassFixture<MvxTestFixture>
+    public class MvxExpressionBindingTest
     {
         private readonly MvxTestFixture _fixture;
 

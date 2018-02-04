@@ -26,7 +26,6 @@ namespace MvvmCross.Test.Navigation
 {
     [Collection("MvxTest")]
     public class RoutingServiceTests
-        : IClassFixture<MvxTestFixture>
     {
         protected Mock<NavigationMockDispatcher> MockDispatcher;
         protected IMvxNavigationService RoutingService;
@@ -35,6 +34,7 @@ namespace MvvmCross.Test.Navigation
         public RoutingServiceTests(MvxTestFixture fixture)
         {
             _fixture = fixture;
+            _fixture.ClearAll();
 
             MvxNavigationService.LoadRoutes(new[] { typeof(RoutingServiceTests).Assembly });
             // ReSharper disable once AssignNullToNotNullAttribute

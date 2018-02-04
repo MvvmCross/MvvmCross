@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Globalization;
+using MvvmCross.Binding;
 using MvvmCross.Core;
 using MvvmCross.Core.Platform;
 using MvvmCross.Platform.Core;
@@ -30,12 +31,13 @@ namespace MvvmCross.Test
             return null;
         }
 
-        public virtual void ClearAll()
+        public virtual void ClearAll(IMvxIocOptions options = null)
         {
             // fake set up of the IoC
             Reset();
-            Ioc = MvxIoCProvider.Initialize(CreateIocOptions());
+            Ioc = MvxIoCProvider.Initialize(options ?? CreateIocOptions());
             Ioc.RegisterSingleton(Ioc);
+            CreateLog();
             InitializeSingletonCache();
             InitializeMvxSettings();
             AdditionalSetup();
@@ -43,7 +45,11 @@ namespace MvvmCross.Test
 
         public void InitializeSingletonCache()
         {
-            MvxSingletonCache.Initialize();
+            if (MvxSingletonCache.Instance == null)
+                MvxSingletonCache.Initialize();
+
+            if (MvxBindingSingletonCache.Instance == null)
+                MvxBindingSingletonCache.Initialize();
         }
 
         protected virtual void InitializeMvxSettings()
@@ -53,7 +59,18 @@ namespace MvvmCross.Test
 
         protected virtual void AdditionalSetup()
         {
-            Ioc.RegisterSingleton<IMvxLogProvider>(new TestLogProvider());
+        }
+
+        protected virtual void CreateLog()
+        {
+            var logProvider = new TestLogProvider();
+            Ioc.RegisterSingleton<IMvxLogProvider>(logProvider);
+
+            var globalLog = logProvider.GetLogFor<MvxLog>();
+            MvxLog.Instance = globalLog;
+            Ioc.RegisterSingleton(globalLog);
+
+            var pluginLog = logProvider.GetLogFor("MvxPlugin");
         }
 
         public void SetInvariantCulture()
