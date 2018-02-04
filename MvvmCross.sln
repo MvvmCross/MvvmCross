@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BD9762CF-E104-481C-96A6-26E624B86283}"
 	ProjectSection(SolutionItems) = preProject
@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.V14
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.V17.Leanback", "MvvmCross.Android.Support\V17.Leanback\MvvmCross.Droid.Support.V17.Leanback.csproj", "{88623C54-21BE-473E-95D3-DF9E6D869FC4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9EA04A6A-1367-4316-A6E9-A5173A060475}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{9EA04A6A-1367-4316-A6E9-A5173A060475}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross", "MvvmCross\MvvmCross.csproj", "{49F965F5-5824-4BBE-94EA-0178F848ABDB}"
 EndProject
@@ -85,19 +85,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.Location.F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.CodeAnalysis", "MvvmCross.Analyzers\CodeAnalysis\MvvmCross.CodeAnalysis.csproj", "{03CD64F4-9439-4C8F-AB5E-F3825174719E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Tests", "MvvmCross.Tests\MvvmCross.Tests\MvvmCross.Tests.csproj", "{9692F2F6-6552-4B58-8B8D-E9C80BD04152}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.UnitTest", "MvvmCross.Tests\MvvmCross.UnitTest\MvvmCross.UnitTest.csproj", "{9692F2F6-6552-4B58-8B8D-E9C80BD04152}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Color.Test", "MvvmCross.Tests\Plugins.Color.Test\MvvmCross.Plugins.Color.Test.csproj", "{0107AF3A-CF1A-4AB2-A205-F4041169C382}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Color.UnitTest", "MvvmCross.Tests\Plugins.Color.UnitTest\MvvmCross.Plugins.Color.UnitTest.csproj", "{0107AF3A-CF1A-4AB2-A205-F4041169C382}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.JsonLocalization.Tests", "MvvmCross.Tests\Plugins.JsonLocalization.Tests\MvvmCross.Plugins.JsonLocalization.Tests.csproj", "{3BC123A2-63C8-4E78-B446-10F6DCBDE841}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.JsonLocalization.UnitTest", "MvvmCross.Tests\Plugins.JsonLocalization.UnitTest\MvvmCross.Plugins.JsonLocalization.UnitTest.csproj", "{3BC123A2-63C8-4E78-B446-10F6DCBDE841}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Messenger.Test", "MvvmCross.Tests\Plugins.Messenger.Test\MvvmCross.Plugins.Messenger.Test.csproj", "{FFAAA231-7C22-471C-8FBA-5D4605E2B8DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Messenger.UnitTest", "MvvmCross.Tests\Plugins.Messenger.UnitTest\MvvmCross.Plugins.Messenger.UnitTest.csproj", "{FFAAA231-7C22-471C-8FBA-5D4605E2B8DB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Network.Test", "MvvmCross.Tests\Plugins.Network.Test\MvvmCross.Plugins.Network.Test.csproj", "{7432CDFC-39CD-46E0-BD5E-065C36037B32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Network.UnitTest", "MvvmCross.Tests\Plugins.Network.UnitTest\MvvmCross.Plugins.Network.UnitTest.csproj", "{7432CDFC-39CD-46E0-BD5E-065C36037B32}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.ResourceLoader.Test", "MvvmCross.Tests\Plugins.ResourceLoader.Test\MvvmCross.Plugins.ResourceLoader.Test.csproj", "{E32637E0-63E2-47D1-945C-A605CD881295}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.ResourceLoader.UnitTest", "MvvmCross.Tests\Plugins.ResourceLoader.UnitTest\MvvmCross.Plugins.ResourceLoader.UnitTest.csproj", "{E32637E0-63E2-47D1-945C-A605CD881295}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.ResxLocalization.Tests", "MvvmCross.Tests\Plugins.ResxLocalization.Tests\MvvmCross.Plugins.ResxLocalization.Tests.csproj", "{F523AA9D-D574-4475-912A-E85BA779BE8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.ResxLocalization.UnitTest", "MvvmCross.Tests\Plugins.ResxLocalization.UnitTest\MvvmCross.Plugins.ResxLocalization.UnitTest.csproj", "{F523AA9D-D574-4475-912A-E85BA779BE8A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projects", "Projects", "{3856C497-5206-4965-A701-0D90247829F7}"
 	ProjectSection(SolutionItems) = preProject
@@ -114,6 +114,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Droid", "Projects\Playground\Playground.Droid\Playground.Droid.csproj", "{6F75D6E2-F188-4C8C-8EB1-518039299E66}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Forms.Droid", "Projects\Playground\Playground.Forms.Droid\Playground.Forms.Droid.csproj", "{A8A8B9B3-34FA-4769-AE81-4D80F9BDC3BB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Test", "MvvmCross.Tests\MvvmCross.Test\MvvmCross.Test.csproj", "{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -2691,6 +2693,62 @@ Global
 		{A8A8B9B3-34FA-4769-AE81-4D80F9BDC3BB}.Release|x86.ActiveCfg = Release|Any CPU
 		{A8A8B9B3-34FA-4769-AE81-4D80F9BDC3BB}.Release|x86.Build.0 = Release|Any CPU
 		{A8A8B9B3-34FA-4769-AE81-4D80F9BDC3BB}.Release|x86.Deploy.0 = Release|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Ad-Hoc|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Ad-Hoc|Any CPU.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Ad-Hoc|ARM.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Ad-Hoc|ARM.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Ad-Hoc|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Ad-Hoc|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Ad-Hoc|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Ad-Hoc|x64.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Ad-Hoc|x64.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Ad-Hoc|x86.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Ad-Hoc|x86.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.AppStore|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.AppStore|Any CPU.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.AppStore|ARM.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.AppStore|ARM.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.AppStore|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.AppStore|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.AppStore|x64.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.AppStore|x64.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.AppStore|x86.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.AppStore|x86.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Debug|ARM.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Debug|x64.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Debug|x86.Build.0 = Debug|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Release|ARM.ActiveCfg = Release|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Release|ARM.Build.0 = Release|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Release|iPhone.Build.0 = Release|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Release|x64.ActiveCfg = Release|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Release|x64.Build.0 = Release|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Release|x86.ActiveCfg = Release|Any CPU
+		{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

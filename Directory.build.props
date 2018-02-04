@@ -22,7 +22,7 @@
 
     <Platform>AnyCPU</Platform>
     <DebugType>full</DebugType>
-    <IsTestProject>$(MSBuildProjectName.Contains('Tests'))</IsTestProject>
+    <IsTestProject>$(MSBuildProjectName.Contains('UnitTest'))</IsTestProject>
     <IsLibraryProject>$(MSBuildProjectName.Contains('MvvmCross'))</IsLibraryProject>
   </PropertyGroup>
   

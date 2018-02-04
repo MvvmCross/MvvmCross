@@ -1,15 +1,14 @@
 #tool nuget:?package=GitVersion.CommandLine
 #tool nuget:?package=vswhere
-#tool nuget:?package=NUnit.ConsoleRunner
-#addin nuget:?package=Cake.Incubator&version=1.6.0
+#addin nuget:?package=Cake.Incubator&version=1.7.1
 #addin nuget:?package=Cake.Git&version=0.16.0
 #addin nuget:?package=Polly
 
 using Polly;
 
-var sln = new FilePath("MvvmCross.sln");
-var outputDir = new DirectoryPath("artifacts");
-var nuspecDir = new DirectoryPath("nuspec");
+var sln = new FilePath("./MvvmCross.sln");
+var outputDir = new DirectoryPath("./artifacts");
+var nuspecDir = new DirectoryPath("./nuspec");
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
@@ -87,30 +86,34 @@ Task("UnitTest")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    var testPaths = new List<FilePath> {
-        new FilePath("./MvvmCross.Tests/MvvmCross.Tests/bin/Release/netcoreapp2.0/MvvmCross.Tests.dll"),
-        new FilePath("./MvvmCross.Tests/Plugins.Color.Test/bin/Release/netcoreapp2.0/MvvmCross.Plugins.Color.Tests.dll"),
-        new FilePath("./MvvmCross.Tests/Plugins.JsonLocalization.Tests/bin/Release/netcoreapp2.0/MvvmCross.Plugins.JsonLocalization.Tests.dll"),
-        new FilePath("./MvvmCross.Tests/Plugins.Messenger.Test/bin/Release/netcoreapp2.0/MvvmCross.Plugins.Messenger.Tests.dll"),
-        new FilePath("./MvvmCross.Tests/Plugins.Network.Test/bin/Release/netcoreapp2.0/MvvmCross.Plugins.Network.Tests.dll"),
-        //new FilePath("./MvvmCross.Tests/Plugins.ResourceLoader.Test/bin/Release/netcoreapp2.0/MvvmCross.Plugins.ResourceLoader.Tests.dll"),
-        new FilePath("./MvvmCross.Tests/Plugins.ResxLocalization.Tests/bin/Release/netcoreapp2.0/MvvmCross.Plugins.ResxLocalization.Tests.dll")
-    };
+    EnsureDirectoryExists(outputDir + "/Tests/");
 
-    var testResultsPath = new DirectoryPath(outputDir + "/Tests/");
-    var outputPath = new FilePath(outputDir + "/NUnitOutput.txt");
-
-    NUnit3(testPaths, new NUnit3Settings {
-        Timeout = 30000,
-        OutputFile = outputPath,
-        Work = testResultsPath
-    });
+    var testPaths = GetFiles("./MvvmCross.Tests/*.UnitTest/*.UnitTest.csproj");
+    var testsFailed = false;
+    foreach(var project in testPaths)
+    {
+        var projectName = project.GetFilenameWithoutExtension();
+        var testXml = new FilePath(outputDir + "/Tests/" + projectName + ".xml").MakeAbsolute(Context.Environment);
+        try 
+        {
+            DotNetCoreTool(project,
+                "xunit",  "-fxversion 2.0.0 --no-build -parallel none -configuration " + 
+                configuration + " -xml \"" + testXml.FullPath + "\"");
+        }
+        catch
+        {
+            testsFailed = true;
+        }
+    }
 
     if (isRunningOnAppVeyor)
     {
         foreach(var testResult in GetFiles(outputDir + "/Tests/*.xml"))
-            AppVeyor.UploadTestResults(testResult, AppVeyorTestResultsType.NUnit3);
+            AppVeyor.UploadTestResults(testResult, AppVeyorTestResultsType.XUnit);
     }
+
+    if (testsFailed)
+        throw new Exception("Tests failed :(");
 });
 
 Task("PublishPackages")
@@ -175,7 +178,7 @@ Task("UploadAppVeyorArtifact")
 
 Task("Default")
     .IsDependentOn("Build")
-    //.IsDependentOn("UnitTest")
+    .IsDependentOn("UnitTest")
     .IsDependentOn("PublishPackages")
     .IsDependentOn("UploadAppVeyorArtifact")
     .Does(() => 
