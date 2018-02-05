@@ -76,8 +76,8 @@ Task("Build")
     settings = settings
         .WithProperty("DebugSymbols", "True")
         .WithProperty("DebugType", "Embedded")
-        .WithProperty("Version", versionInfo.SemVer)
-        .WithProperty("PackageVersion", versionInfo.SemVer)
+        .WithProperty("Version", versionInfo.LegacySemVer)
+        .WithProperty("PackageVersion", versionInfo.LegacySemVer)
         .WithProperty("InformationalVersion", versionInfo.InformationalVersion)
         .WithProperty("NoPackageAnalysis", "True");
 
