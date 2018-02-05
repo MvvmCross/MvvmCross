@@ -95,42 +95,27 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\MvvmCross-Forms\MvvmCross.Forms.Wpf\MvvmCross.Forms.Wpf.csproj">
-      <Project>{fbff67ad-7dda-4e3b-8229-1de29de8ece3}</Project>
-      <Name>MvvmCross.Forms.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross-Forms\MvvmCross.Forms\MvvmCross.Forms.csproj">
-      <Project>{0797d39c-c59b-4fe2-bb16-ab6fa0119c69}</Project>
+    <ProjectReference Include="..\..\..\MvvmCross.Forms\MvvmCross.Forms.csproj">
+      <Project>{013bb2b2-8204-43bd-aa7b-e494007f0b94}</Project>
       <Name>MvvmCross.Forms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Binding\Wpf\MvvmCross.Binding.Wpf.csproj">
-      <Project>{11674474-0123-4d7d-9f01-ebaa8bd039bd}</Project>
-      <Name>MvvmCross.Binding.Wpf</Name>
+    <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj">
+      <Project>{49f965f5-5824-4bbe-94ea-0178f848abdb}</Project>
+      <Name>MvvmCross</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
-      <Project>{64dcd397-9019-41e8-a928-e5f5c5df185b}</Project>
-      <Name>MvvmCross.Binding</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
-      <Project>{b6e27475-e7d0-448c-a5cc-5097dca1e2dd}</Project>
-      <Name>MvvmCross.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
-      <Project>{cff6f25a-3c3b-44ee-a54c-2ed4aaff3adb}</Project>
-      <Name>MvvmCross.Platform</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Platform\Wpf\MvvmCross.Platform.Wpf.csproj">
-      <Project>{3688d6fc-e7f4-485f-8b27-96c0a8c7eaed}</Project>
-      <Name>MvvmCross.Platform.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Windows\Wpf\MvvmCross.Wpf.csproj">
-      <Project>{3786ea13-a491-4917-9b49-fbe76ba87fab}</Project>
-      <Name>MvvmCross.Wpf</Name>
+    <ProjectReference Include="..\Playground.Core\Playground.Core.csproj">
+      <Project>{fe374d1a-1a19-49bc-8e93-d52399a9c3f3}</Project>
+      <Name>Playground.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Playground.Forms.UI\Playground.Forms.UI.csproj">
-      <Project>{545c1972-05dc-4aec-87cb-70ccd3296f8d}</Project>
+      <Project>{9a317670-f2d9-4155-9ea7-f8cfd3cfe79f}</Project>
       <Name>Playground.Forms.UI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>2.5.0.122203</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

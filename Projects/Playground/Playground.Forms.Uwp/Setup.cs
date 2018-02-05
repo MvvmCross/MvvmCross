@@ -1,4 +1,4 @@
-using MvvmCross.Core.ViewModels;
+﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Uwp;
 using MvvmCross.Platform.Logging;
@@ -15,10 +15,6 @@ namespace Playground.Forms.Uwp
         public Setup(Frame rootFrame, LaunchActivatedEventArgs e) : base(rootFrame, e)
         {
         }
-
-        protected override MvxLogProviderType GetDefaultLogProviderType() => MvxLogProviderType.None;
-
-        protected override IMvxLogProvider CreateLogProvider() => new EmptyVoidLogProvider();
 
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {

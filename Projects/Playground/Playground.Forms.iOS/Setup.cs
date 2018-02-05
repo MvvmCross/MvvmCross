@@ -1,4 +1,4 @@
-using MvvmCross.Core.ViewModels;
+﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.iOS;
 using MvvmCross.Forms.Platform;
 using MvvmCross.iOS.Platform;
@@ -16,11 +16,6 @@ namespace Playground.Forms.iOS
         public Setup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
         {
-        }
-
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new DebugTrace();
         }
 
         protected override IEnumerable<Assembly> GetViewAssemblies()
