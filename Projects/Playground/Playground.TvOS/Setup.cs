@@ -27,12 +27,7 @@ namespace Playground.TvOS
             return new App();
         }
 
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new DebugTrace();
-        }
-
-        protected override IMvxTvosViewPresenter CreatePresenter()
+        protected override IMvxTvosViewPresenter CreateViewPresenter()
         {
             return new MvxTvosViewPresenter(ApplicationDelegate, Window);
         }
