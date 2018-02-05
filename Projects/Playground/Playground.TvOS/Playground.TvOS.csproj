@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -154,7 +154,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -163,7 +162,6 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="DebugTrace.cs" />
     <Compile Include="Setup.cs" />
     <Compile Include="Views\RootView.cs" />
     <Compile Include="Views\RootView.designer.cs">
@@ -231,32 +229,12 @@
     <InterfaceDefinition Include="Main.storyboard" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\MvvmCross\Core\Core\MvvmCross.Core.csproj">
-      <Project>{B6E27475-E7D0-448C-A5CC-5097DCA1E2DD}</Project>
-      <Name>MvvmCross.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Core\Binding\MvvmCross.Binding.csproj">
-      <Project>{64DCD397-9019-41E8-A928-E5F5C5DF185B}</Project>
-      <Name>MvvmCross.Binding</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Binding\tvOS\MvvmCross.Binding.tvOS.csproj">
-      <Project>{116A5BEF-70D6-4D45-BBD5-6C26C2C39C06}</Project>
-      <Name>MvvmCross.Binding.tvOS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Platform\Platform\MvvmCross.Platform.csproj">
-      <Project>{CFF6F25A-3C3B-44EE-A54C-2ED4AAFF3ADB}</Project>
-      <Name>MvvmCross.Platform</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\Platform\tvOS\MvvmCross.Platform.tvOS.csproj">
-      <Project>{64F42798-41EE-491E-926D-2F75AB666723}</Project>
-      <Name>MvvmCross.Platform.tvOS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\tvOS\tvOS\MvvmCross.tvOS.csproj">
-      <Project>{8B22DBF4-818E-4C3B-A5A0-A45654F4C385}</Project>
-      <Name>MvvmCross.tvOS</Name>
+    <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj">
+      <Project>{49f965f5-5824-4bbe-94ea-0178f848abdb}</Project>
+      <Name>MvvmCross</Name>
     </ProjectReference>
     <ProjectReference Include="..\Playground.Core\Playground.Core.csproj">
-      <Project>{56CD2748-857D-442A-9268-95D99F552840}</Project>
+      <Project>{fe374d1a-1a19-49bc-8e93-d52399a9c3f3}</Project>
       <Name>Playground.Core</Name>
     </ProjectReference>
   </ItemGroup>

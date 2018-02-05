@@ -46,12 +46,12 @@ namespace Playground.iOS.Views
         private void BtnCloseStack_TouchUpInside(object sender, EventArgs e)
         {
             var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
-            var presenter = Mvx.GetSingleton<IMvxIosModalHost>() as MvxIosViewPresenter;
+            var presenter = Mvx.GetSingleton<IMvxIosViewPresenter>() as MvxIosViewPresenter;
 
             if (appDelegate.Window.RootViewController.PresentedViewController != null)
             {
                 appDelegate.Window.RootViewController.DismissViewController(true, null);
-                presenter.NativeModalViewControllerDisappearedOnItsOwn();
+                presenter.CloseModalViewControllers();
             }
             else
             {

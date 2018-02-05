@@ -24,12 +24,7 @@ namespace Playground.iOS
             return new App();
         }
 
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new DebugTrace();
-        }
-
-        protected override IMvxIosViewPresenter CreatePresenter()
+        protected override IMvxIosViewPresenter CreateViewPresenter()
         {
             return new MvxIosViewPresenter(ApplicationDelegate, Window);
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.tvOS.Views;
@@ -46,12 +46,12 @@ namespace Playground.TvOS
         private void BtnCloseStack_OnPrimaryATcionTriggered(object sender, EventArgs e)
         {
             var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
-            var presenter = Mvx.GetSingleton<IMvxTvosModalHost>() as MvxTvosViewPresenter;
+            var presenter = Mvx.GetSingleton<IMvxTvosViewPresenter>() as MvxTvosViewPresenter;
 
             if (appDelegate.Window.RootViewController.PresentedViewController != null)
             {
                 appDelegate.Window.RootViewController.DismissViewController(true, null);
-                presenter.NativeModalViewControllerDisappearedOnItsOwn();
+                presenter.CloseTopModalViewController();
             }
             else
             {
