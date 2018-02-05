@@ -367,14 +367,14 @@ namespace MvvmCross.tvOS.Views.Presenters
                 SetupWindowRootNavigation(viewController, attribute);
                 this.TabBarViewController = (IMvxTabBarViewController)viewController;
 
-                CleanupModalViewControllers();
+                CloseModalViewControllers();
 
                 return;
             }
 
             SetupWindowRootNavigation(viewController, attribute);
 
-            CleanupModalViewControllers();
+            CloseModalViewControllers();
             CloseTabBarViewController();
             CloseSplitViewController();
         }
@@ -481,7 +481,7 @@ namespace MvvmCross.tvOS.Views.Presenters
                 // set root
                 SetupSplitViewWindowRootNavigation(viewController, attribute);
 
-                CleanupModalViewControllers();
+                CloseModalViewControllers();
                 CloseTabBarViewController();
                 return;
             }
@@ -519,7 +519,7 @@ namespace MvvmCross.tvOS.Views.Presenters
             return true;
         }
 
-        public virtual void NativeModalViewControllerDisappearedOnItsOwn()
+        public virtual void CloseTopModalViewController()
         {
             CloseModalViewController(ModalViewControllers?.Last());
         }
@@ -601,7 +601,7 @@ namespace MvvmCross.tvOS.Views.Presenters
             return new MvxNavigationController(viewController);
         }
 
-        protected void CleanupModalViewControllers()
+        protected void CloseModalViewControllers()
         {
             while (ModalViewControllers.Any())
             {
