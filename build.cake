@@ -38,7 +38,9 @@ Task("UpdateAppVeyorBuildNumber")
     .WithCriteria(() => isRunningOnAppVeyor)
     .Does(() =>
 {
-    AppVeyor.UpdateBuildVersion(versionInfo.InformationalVersion);
+    var buildNumber = AppVeyor.Environment.Build.Number;
+    AppVeyor.UpdateBuildVersion(versionInfo.InformationalVersion
+        + "-" + buildNumber);
 });
 
 FilePath msBuildPath;
@@ -58,10 +60,20 @@ Task("Restore")
     MSBuild(sln, settings => settings.WithTarget("Restore"));
 });
 
+Task("PatchBuildProps")
+    .IsDependentOn("Version")
+    .Does(() => 
+{
+    var buildProp = new FilePath("./Directory.build.props");
+    XmlPoke(buildProp, "//Project/PropertyGroup/Version", versionInfo.SemVer);
+});
+
 Task("Build")
     .IsDependentOn("ResolveBuildTools")
     .IsDependentOn("Clean")
+    .IsDependentOn("Version")
     .IsDependentOn("UpdateAppVeyorBuildNumber")
+    .IsDependentOn("PatchBuildProps")
     .IsDependentOn("Restore")
     .Does(() =>  {
 
@@ -76,8 +88,8 @@ Task("Build")
     settings = settings
         .WithProperty("DebugSymbols", "True")
         .WithProperty("DebugType", "Embedded")
-        .WithProperty("Version", versionInfo.LegacySemVer)
-        .WithProperty("PackageVersion", versionInfo.LegacySemVer)
+        .WithProperty("Version", versionInfo.SemVer)
+        .WithProperty("PackageVersion", versionInfo.SemVer)
         .WithProperty("InformationalVersion", versionInfo.InformationalVersion)
         .WithProperty("NoPackageAnalysis", "True");
 
