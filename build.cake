@@ -102,7 +102,7 @@ Task("UnitTest")
 {
     EnsureDirectoryExists(outputDir + "/Tests/");
 
-    var testPaths = GetFiles("./MvvmCross.Tests/*.UnitTest/*.UnitTest.csproj");
+    var testPaths = GetFiles("./UnitTests/*.UnitTest/*.UnitTest.csproj");
     var testsFailed = false;
     foreach(var project in testPaths)
     {

@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsPackable>false</IsPackable>
-    <AssemblyName>MvvmCross.Plugins.Messenger.UnitTest</AssemblyName>
-    <RootNamespace>MvvmCross.Plugins.Messenger.UnitTest</RootNamespace>
+    <AssemblyName>MvvmCross.Plugins.Network.UnitTest</AssemblyName>
+    <RootNamespace>MvvmCross.Plugins.Network.UnitTest</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
@@ -13,9 +13,10 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MvvmCross.Plugins\Messenger\MvvmCross.Plugin.Messenger.csproj" />
+    <ProjectReference Include="..\..\MvvmCross.Plugins\Json\MvvmCross.Plugin.Json.csproj" />
+    <ProjectReference Include="..\..\MvvmCross.Plugins\Network\MvvmCross.Plugin.Network.csproj" />
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
-    <ProjectReference Include="..\MvvmCross.Test\MvvmCross.Test.csproj" />
+    <ProjectReference Include="..\..\MvvmCross.Test\MvvmCross.Test.csproj" />
   </ItemGroup>
 
   <ItemGroup>

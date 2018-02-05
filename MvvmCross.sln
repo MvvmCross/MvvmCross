@@ -85,19 +85,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.Location.F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.CodeAnalysis", "MvvmCross.Analyzers\CodeAnalysis\MvvmCross.CodeAnalysis.csproj", "{03CD64F4-9439-4C8F-AB5E-F3825174719E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.UnitTest", "MvvmCross.Tests\MvvmCross.UnitTest\MvvmCross.UnitTest.csproj", "{9692F2F6-6552-4B58-8B8D-E9C80BD04152}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.UnitTest", "UnitTests\MvvmCross.UnitTest\MvvmCross.UnitTest.csproj", "{9692F2F6-6552-4B58-8B8D-E9C80BD04152}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Color.UnitTest", "MvvmCross.Tests\Plugins.Color.UnitTest\MvvmCross.Plugins.Color.UnitTest.csproj", "{0107AF3A-CF1A-4AB2-A205-F4041169C382}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Color.UnitTest", "UnitTests\Plugins.Color.UnitTest\MvvmCross.Plugins.Color.UnitTest.csproj", "{0107AF3A-CF1A-4AB2-A205-F4041169C382}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.JsonLocalization.UnitTest", "MvvmCross.Tests\Plugins.JsonLocalization.UnitTest\MvvmCross.Plugins.JsonLocalization.UnitTest.csproj", "{3BC123A2-63C8-4E78-B446-10F6DCBDE841}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.JsonLocalization.UnitTest", "UnitTests\Plugins.JsonLocalization.UnitTest\MvvmCross.Plugins.JsonLocalization.UnitTest.csproj", "{3BC123A2-63C8-4E78-B446-10F6DCBDE841}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Messenger.UnitTest", "MvvmCross.Tests\Plugins.Messenger.UnitTest\MvvmCross.Plugins.Messenger.UnitTest.csproj", "{FFAAA231-7C22-471C-8FBA-5D4605E2B8DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Messenger.UnitTest", "UnitTests\Plugins.Messenger.UnitTest\MvvmCross.Plugins.Messenger.UnitTest.csproj", "{FFAAA231-7C22-471C-8FBA-5D4605E2B8DB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Network.UnitTest", "MvvmCross.Tests\Plugins.Network.UnitTest\MvvmCross.Plugins.Network.UnitTest.csproj", "{7432CDFC-39CD-46E0-BD5E-065C36037B32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Network.UnitTest", "UnitTests\Plugins.Network.UnitTest\MvvmCross.Plugins.Network.UnitTest.csproj", "{7432CDFC-39CD-46E0-BD5E-065C36037B32}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.ResourceLoader.UnitTest", "MvvmCross.Tests\Plugins.ResourceLoader.UnitTest\MvvmCross.Plugins.ResourceLoader.UnitTest.csproj", "{E32637E0-63E2-47D1-945C-A605CD881295}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.ResourceLoader.UnitTest", "UnitTests\Plugins.ResourceLoader.UnitTest\MvvmCross.Plugins.ResourceLoader.UnitTest.csproj", "{E32637E0-63E2-47D1-945C-A605CD881295}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.ResxLocalization.UnitTest", "MvvmCross.Tests\Plugins.ResxLocalization.UnitTest\MvvmCross.Plugins.ResxLocalization.UnitTest.csproj", "{F523AA9D-D574-4475-912A-E85BA779BE8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.ResxLocalization.UnitTest", "UnitTests\Plugins.ResxLocalization.UnitTest\MvvmCross.Plugins.ResxLocalization.UnitTest.csproj", "{F523AA9D-D574-4475-912A-E85BA779BE8A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projects", "Projects", "{3856C497-5206-4965-A701-0D90247829F7}"
 	ProjectSection(SolutionItems) = preProject
@@ -115,7 +115,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Droid", "Project
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Forms.Droid", "Projects\Playground\Playground.Forms.Droid\Playground.Forms.Droid.csproj", "{A8A8B9B3-34FA-4769-AE81-4D80F9BDC3BB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Test", "MvvmCross.Tests\MvvmCross.Test\MvvmCross.Test.csproj", "{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Test", "MvvmCross.Test\MvvmCross.Test.csproj", "{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
