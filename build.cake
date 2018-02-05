@@ -58,10 +58,20 @@ Task("Restore")
     MSBuild(sln, settings => settings.WithTarget("Restore"));
 });
 
+Task("PatchBuildProps")
+    .IsDependentOn("Version")
+    .Does(() => 
+{
+    var buildProp = new FilePath("./Directory.build.props");
+    XmlPoke(buildProp, "//Project/PropertyGroup/Version", versionInfo.SemVer);
+});
+
 Task("Build")
     .IsDependentOn("ResolveBuildTools")
     .IsDependentOn("Clean")
+    .IsDependentOn("Version")
     .IsDependentOn("UpdateAppVeyorBuildNumber")
+    .IsDependentOn("PatchBuildProps")
     .IsDependentOn("Restore")
     .Does(() =>  {
 
