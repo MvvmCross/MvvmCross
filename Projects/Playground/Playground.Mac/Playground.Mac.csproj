@@ -123,6 +123,18 @@
     <InterfaceDefinition Include="Main.storyboard" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\JsonLocalization\MvvmCross.Plugin.JsonLocalization.csproj">
+      <Project>{c783ef46-1822-4baf-8eca-e820fff26633}</Project>
+      <Name>MvvmCross.Plugin.JsonLocalization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Json\MvvmCross.Plugin.Json.csproj">
+      <Project>{9a82f120-fbe8-4205-94a3-575630dbcbb9}</Project>
+      <Name>MvvmCross.Plugin.Json</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj">
+      <Project>{4d47736f-d8dc-42f1-8f75-8fc3eff28894}</Project>
+      <Name>MvvmCross.Plugin.ResourceLoader</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj">
       <Project>{49f965f5-5824-4bbe-94ea-0178f848abdb}</Project>
       <Name>MvvmCross</Name>

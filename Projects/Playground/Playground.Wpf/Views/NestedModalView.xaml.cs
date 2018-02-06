@@ -1,14 +1,9 @@
-﻿using MvvmCross.Wpf.Views;
-using MvvmCross.Wpf.Views.Presenters.Attributes;
-using Playground.Core.ViewModels;
+﻿using MvvmCross.Wpf.Views.Presenters.Attributes;
 
 namespace Playground.Wpf.Views
 {
-    /// <summary>
-    /// Interaction logic for NestedModalView.xaml
-    /// </summary>
     [MvxContentPresentation(WindowIdentifier = nameof(ModalView))]
-    public partial class NestedModalView : MvxWpfView<NestedModalViewModel>
+    public partial class NestedModalView 
     {
         public NestedModalView()
         {
