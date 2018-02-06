@@ -1,14 +1,9 @@
-﻿using MvvmCross.Wpf.Views;
-using MvvmCross.Wpf.Views.Presenters.Attributes;
-using Playground.Core.ViewModels;
+﻿using MvvmCross.Wpf.Views.Presenters.Attributes;
 
 namespace Playground.Wpf.Views
 {
-    /// <summary>
-    /// Interaction logic for ModalView.xaml
-    /// </summary>
     [MvxWindowPresentation(Identifier = nameof(ModalView), Modal = true)]
-    public partial class ModalView : MvxWpfView<ModalViewModel>
+    public partial class ModalView 
     {
         public ModalView()
         {
