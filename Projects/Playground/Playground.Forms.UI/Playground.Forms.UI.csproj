@@ -10,6 +10,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross.Forms\MvvmCross.Forms.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\JsonLocalization\MvvmCross.Plugin.JsonLocalization.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Json\MvvmCross.Plugin.Json.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\Playground.Core\Playground.Core.csproj" />
   </ItemGroup>
