@@ -16,7 +16,7 @@ using MvvmCross.Platform.Converters;
 using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Binding.Test.ExpressionParse
+namespace MvvmCross.UnitTest.Binding.ExpressionParse
 {
     [Collection("MvxTest")]
     public class MvxExpressionBindingTest

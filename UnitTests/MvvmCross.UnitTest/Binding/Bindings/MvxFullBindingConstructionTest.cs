@@ -16,7 +16,7 @@ using MvvmCross.Test;
 using MvvmCross.Test.Mocks.Dispatchers;
 using Xunit;
 
-namespace MvvmCross.Binding.Test.Bindings
+namespace MvvmCross.UnitTest.Binding.Bindings
 {
     [Collection("MvxTest")]
     public class MvxFullBindingConstructionTest

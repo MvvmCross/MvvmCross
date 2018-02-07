@@ -14,7 +14,7 @@ using MvvmCross.Platform.Logging.LogProviders;
 
 [assembly: InternalsVisibleTo("MvvmCross.UnitTest")]
 
-namespace MvvmCross
+namespace MvvmCross.Test
 {
     internal sealed class TestLogProvider : MvxBaseLogProvider
     {

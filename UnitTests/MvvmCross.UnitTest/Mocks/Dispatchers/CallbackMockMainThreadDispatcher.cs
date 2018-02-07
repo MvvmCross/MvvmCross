@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Test.Mocks.Dispatchers
+namespace MvvmCross.UnitTest.Mocks.Dispatchers
 {
     public class CallbackMockMainThreadDispatcher
         : MvxMainThreadDispatcher, IMvxMainThreadDispatcher

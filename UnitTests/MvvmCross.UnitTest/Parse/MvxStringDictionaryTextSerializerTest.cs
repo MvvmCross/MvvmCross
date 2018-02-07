@@ -9,7 +9,7 @@ using MvvmCross.Platform;
 using MvvmCross.Test.Mocks.TestViewModels;
 using Xunit;
 
-namespace MvvmCross.Test.Parse
+namespace MvvmCross.UnitTest.Parse
 {
     [Collection("MvxTest")]
     public class MvxStringDictionaryTextSerializerTest

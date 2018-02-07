@@ -12,7 +12,7 @@ using MvvmCross.Test.Mocks.Dispatchers;
 using MvvmCross.Test.Mocks.ViewModels;
 using Xunit;
 
-namespace MvvmCross.Test.Navigation
+namespace MvvmCross.UnitTest.Navigation
 {
     [Collection("MvxTest")]
     public class NavigationServiceTests

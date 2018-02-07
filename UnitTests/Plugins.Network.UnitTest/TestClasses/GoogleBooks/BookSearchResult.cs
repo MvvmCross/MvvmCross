@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 
-namespace MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks
+namespace MvvmCross.Plugins.Network.UnitTest.TestClasses.GoogleBooks
 {
     public class BookSearchResult
     {

@@ -8,7 +8,7 @@ using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Test.Mocks.TestViewModels;
 
-namespace MvvmCross.Test.Stubs
+namespace MvvmCross.UnitTest.Stubs
 {
     public class SimpleRoutingFacade
         : IMvxNavigationFacade

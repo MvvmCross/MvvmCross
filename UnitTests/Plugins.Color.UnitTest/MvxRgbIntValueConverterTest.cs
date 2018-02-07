@@ -6,7 +6,7 @@ using System.Globalization;
 using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Plugins.Color.Test
+namespace MvvmCross.Plugins.Color.UnitTest
 {
     [Collection("Color")]
     public class MvxRgbIntValueConverterTest : MvxColorValueConverterTest

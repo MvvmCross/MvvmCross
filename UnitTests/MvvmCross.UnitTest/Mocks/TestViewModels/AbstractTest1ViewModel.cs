@@ -4,7 +4,7 @@
 
 using MvvmCross.Core.ViewModels;
 
-namespace MvvmCross.Test.Mocks.TestViewModels
+namespace MvvmCross.UnitTest.Mocks.TestViewModels
 {
     public abstract class AbstractTest1ViewModel : MvxViewModel
     {

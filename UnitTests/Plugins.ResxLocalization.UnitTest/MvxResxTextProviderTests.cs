@@ -5,7 +5,7 @@
 ﻿using MvvmCross.Plugins.ResxLocalization.Tests.Mocks;
 using Xunit;
 
-namespace MvvmCross.Plugins.ResxLocalization.Tests
+namespace MvvmCross.Plugins.ResxLocalization.UnitTest
 {
     
     public class MvxResxTextProviderTests

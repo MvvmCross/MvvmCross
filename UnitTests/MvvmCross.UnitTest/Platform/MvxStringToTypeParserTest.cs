@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using MvvmCross.Core.Platform;
 using Xunit;
 
-namespace MvvmCross.Test.Platform
+namespace MvvmCross.UnitTest.Platform
 {
     [Collection("MvxTest")]
     public class MvxStringToTypeParserTest

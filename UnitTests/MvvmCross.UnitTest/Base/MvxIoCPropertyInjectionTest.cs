@@ -6,7 +6,7 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.IoC;
 using Xunit;
 
-namespace MvvmCross.Platform.Test
+namespace MvvmCross.UnitTest.Base
 {
     
     public class MvxIocPropertyInjectionTest

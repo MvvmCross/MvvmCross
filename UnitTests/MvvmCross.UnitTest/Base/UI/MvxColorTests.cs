@@ -5,7 +5,7 @@
 using MvvmCross.Platform.UI;
 using Xunit;
 
-namespace MvvmCross.Platform.Test.UI
+namespace MvvmCross.UnitTest.Base.UI
 {
     
     public class MvxColorTests

@@ -5,7 +5,7 @@
 using MvvmCross.Platform.Core;
 using Xunit;
 
-namespace MvvmCross.Platform.Test
+namespace MvvmCross.UnitTest.Base
 {
     
     public class MvxPropertyNameFromExpressionTests

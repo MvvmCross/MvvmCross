@@ -11,7 +11,7 @@ using MvvmCross.Platform.Logging;
 
 [assembly: InternalsVisibleTo("MvvmCross.UnitTest")]
 
-namespace MvvmCross
+namespace MvvmCross.Test
 {
     internal static class MvxTestLog
     {

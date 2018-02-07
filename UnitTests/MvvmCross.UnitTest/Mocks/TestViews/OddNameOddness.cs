@@ -5,7 +5,7 @@
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 
-namespace MvvmCross.Test.Mocks.TestViews
+namespace MvvmCross.UnitTest.Mocks.TestViews
 {
     public class OddNameOddness : IMvxView
     {

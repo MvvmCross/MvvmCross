@@ -7,7 +7,7 @@ using MvvmCross.Plugins.JsonLocalization.Tests.Mocks;
 using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Plugins.JsonLocalization.Tests
+namespace MvvmCross.Plugins.JsonLocalization.UnitTest
 {
     public class MvxDictionaryTextProviderTest : IClassFixture<MvxTestFixture>
     {

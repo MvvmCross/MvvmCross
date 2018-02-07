@@ -11,7 +11,7 @@ using MvvmCross.Core.Views;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Test.Mocks.Dispatchers
+namespace MvvmCross.UnitTest.Mocks.Dispatchers
 {
     public class NavigationMockDispatcher 
         : IMvxMainThreadDispatcher, IMvxViewDispatcher

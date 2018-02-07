@@ -4,7 +4,7 @@
 
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Platform.Test.Mocks
+namespace MvvmCross.UnitTest.Base.Mocks
 {
     public class MockBootstrapAction : IMvxBootstrapAction
     {

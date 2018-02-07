@@ -10,7 +10,7 @@ using MvvmCross.Platform.Converters;
 using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Binding.Test.ExtensionMethods
+namespace MvvmCross.UnitTest.Binding.ExtensionMethods
 {
     [Collection("MvxTest")]
     public class MakeSafeValueTest
