@@ -3,10 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Forms.Views;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Base
+namespace MvvmCross.Forms.Core
 {
     public class MvxFormsApplication : Application
     {
