@@ -1,4 +1,4 @@
-using MvvmCross.Core.ViewModels;
+﻿using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Uwp.Presenters;
 using MvvmCross.Forms.Views;
@@ -20,12 +20,17 @@ namespace Playground.Forms.Uwp
             // reload XF
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Required;
 
-            this.InitializeComponent();
-
             InitializeComponent();
 
+            Loaded += MainPage_Loaded;
+        }
+
+        private async void MainPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Loaded -= MainPage_Loaded;
+
             var start = Mvx.Resolve<IMvxAppStart>();
-            start.Start();
+            await start.StartAsync();
 
             var presenter = Mvx.Resolve<IMvxFormsViewPresenter>() as MvxFormsUwpViewPresenter;
             LoadApplication(presenter.FormsApplication);
