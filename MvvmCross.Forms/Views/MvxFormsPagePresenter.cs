@@ -205,7 +205,7 @@ namespace MvvmCross.Forms.Views
                 return;
             }
 
-            base.ChangePresentation(hint);
+            PlatformPresenter.ChangePresentation(hint);
 
 #if DEBUG // Only showing this when debugging MVX
             MvxFormsLog.Instance.Trace(FormsApplication.Hierarchy());
