@@ -6,7 +6,7 @@ using Android.Content;
 using Android.Util;
 using MvvmCross.Binding.Droid.ResourceHelpers;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     public static class MvxAttributeHelpers
     {

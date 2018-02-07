@@ -5,7 +5,7 @@
 using MvvmCross.Binding.ExtensionMethods;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Target
+namespace MvvmCross.Platform.Ios.Binding.Target
 {
     public class MvxUIViewVisibleTargetBinding : MvxBaseUIViewVisibleTargetBinding
     {

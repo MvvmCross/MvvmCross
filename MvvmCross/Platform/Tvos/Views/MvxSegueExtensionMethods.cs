@@ -15,7 +15,7 @@ using MvvmCross.Platform.tvOS.Views;
 using UIKit;
 using Foundation;
 
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     internal static class MvxSegueExtensionMethods
     {

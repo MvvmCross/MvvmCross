@@ -5,7 +5,7 @@
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Binding.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Binding.Views
 {
     public interface IMvxBindable
         : IMvxBindingContextOwner, IMvxDataConsumer

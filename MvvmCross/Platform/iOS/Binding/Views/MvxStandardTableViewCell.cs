@@ -9,7 +9,7 @@ using Foundation;
 using MvvmCross.Binding.Bindings;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Views
+namespace MvvmCross.Platform.Ios.Binding.Views
 {
     public class MvxStandardTableViewCell
         : MvxTableViewCell

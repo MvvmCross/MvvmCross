@@ -8,7 +8,7 @@ using Android.Widget;
 using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Platform.WeakSubscription;
 
-namespace MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Platform.Android.Binding.Target
 {
     public class MvxRadioGroupSelectedItemBinding 
         : MvxAndroidTargetBinding

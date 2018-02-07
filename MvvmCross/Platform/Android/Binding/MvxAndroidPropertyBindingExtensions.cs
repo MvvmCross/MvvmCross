@@ -7,7 +7,7 @@ using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding.Droid.Views;
 
-namespace MvvmCross.Binding.Droid
+namespace MvvmCross.Platform.Android.Binding
 {
     public static class MvxAndroidPropertyBindingExtensions
     {

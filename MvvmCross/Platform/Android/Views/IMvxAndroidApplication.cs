@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Platform.Android.Views
 {
     public interface IMvxAndroidApplication
     {

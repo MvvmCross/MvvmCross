@@ -4,7 +4,7 @@
 
 using UIKit;
 
-namespace MvvmCross.Binding.iOS
+namespace MvvmCross.Platform.Ios.Binding
 {
     public static class MvxIosPropertyBindingExtensions
     {

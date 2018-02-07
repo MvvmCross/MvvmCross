@@ -14,7 +14,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.IoC;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Droid.Platform
+namespace MvvmCross.Platform.Android.Core
 {
     public class MvxAndroidSetupSingleton
         : MvxSingleton<MvxAndroidSetupSingleton>

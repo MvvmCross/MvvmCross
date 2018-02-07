@@ -6,7 +6,7 @@ using System;
 using AppKit;
 using MvvmCross.Core.Views;
 
-namespace MvvmCross.Mac.Views.Presenters.Attributes
+namespace MvvmCross.Platform.Mac.Views.Presenters.Attributes
 {
     public class MvxWindowPresentationAttribute : MvxBasePresentationAttribute
     {

@@ -7,7 +7,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace MvvmCross.Wpf.Views
+namespace MvvmCross.Platform.Wpf.Views
 {
     public class MvxWpfView : UserControl, IMvxWpfView, IDisposable
     {

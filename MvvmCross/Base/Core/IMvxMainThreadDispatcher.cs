@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Platform.Core
+namespace MvvmCross.Base.Core
 {
     public interface IMvxMainThreadDispatcher
     {

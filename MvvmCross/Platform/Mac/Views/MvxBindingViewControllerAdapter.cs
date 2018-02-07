@@ -10,7 +10,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Mac.Views;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Mac.Views
+namespace MvvmCross.Platform.Mac.Views
 {
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {

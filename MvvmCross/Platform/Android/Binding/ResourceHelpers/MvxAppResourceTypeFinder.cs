@@ -7,7 +7,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Exceptions;
 
-namespace MvvmCross.Binding.Droid.ResourceHelpers
+namespace MvvmCross.Platform.Android.Binding.ResourceHelpers
 {
     public class MvxAppResourceTypeFinder : IMvxAppResourceTypeFinder
     {

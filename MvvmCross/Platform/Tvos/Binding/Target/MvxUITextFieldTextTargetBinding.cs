@@ -8,7 +8,7 @@ using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform.Platform;
 using UIKit;
 
-namespace MvvmCross.Binding.tvOS.Target
+namespace MvvmCross.Platform.Tvos.Binding.Target
 {
     public class MvxUITextFieldTextTargetBinding
         : MvxConvertingTargetBinding

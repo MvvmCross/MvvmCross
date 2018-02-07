@@ -23,7 +23,7 @@ using MvvmCross.tvOS.Views;
 using MvvmCross.tvOS.Views.Presenters;
 using UIKit;
 
-namespace MvvmCross.tvOS.Platform
+namespace MvvmCross.Platform.Tvos.Core
 {
     public abstract class MvxTvosSetup
         : MvxSetup

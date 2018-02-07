@@ -6,7 +6,7 @@ using System;
 using System.Globalization;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Platform.Converters
+namespace MvvmCross.Base.Converters
 {
     public abstract class MvxValueConverter
         : IMvxValueConverter

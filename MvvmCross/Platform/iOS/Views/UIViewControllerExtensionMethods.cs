@@ -6,7 +6,7 @@ using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using UIKit;
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     public static class UIViewControllerExtensionMethods
     {

@@ -8,7 +8,7 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Binding.Droid.ResourceHelpers
+namespace MvvmCross.Platform.Android.Binding.ResourceHelpers
 { 
     public class MvxAndroidBindingResource
         : MvxSingleton<IMvxAndroidBindingResource>

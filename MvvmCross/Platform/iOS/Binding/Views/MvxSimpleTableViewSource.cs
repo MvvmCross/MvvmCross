@@ -9,7 +9,7 @@ using MvvmCross.Platform.iOS.Platform;
 using MvvmCross.Platform.Logging;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Views
+namespace MvvmCross.Platform.Ios.Binding.Views
 {
     public class MvxSimpleTableViewSource : MvxTableViewSource
     {

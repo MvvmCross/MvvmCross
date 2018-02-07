@@ -21,7 +21,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.WeakSubscription;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
 	public class MvxAdapter
         : BaseAdapter

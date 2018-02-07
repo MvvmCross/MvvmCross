@@ -14,7 +14,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace MvvmCross.Wpf.Views.Presenters
+namespace MvvmCross.Platform.Wpf.Views.Presenters
 {
     public class MvxWpfViewPresenter
         : MvxAttributeViewPresenter, IMvxWpfViewPresenter

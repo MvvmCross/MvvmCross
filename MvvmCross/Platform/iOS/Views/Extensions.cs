@@ -9,7 +9,7 @@ using CoreGraphics;
 using Foundation;
 using UIKit;
 
-namespace MvvmCross.iOS.Support.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     public static class ViewExtensions
     {

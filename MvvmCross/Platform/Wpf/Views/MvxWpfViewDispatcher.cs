@@ -7,7 +7,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Wpf.Views.Presenters;
 
-namespace MvvmCross.Wpf.Views
+namespace MvvmCross.Platform.Wpf.Views
 {
     public class MvxWpfViewDispatcher
         : MvxWpfUIThreadDispatcher, IMvxViewDispatcher

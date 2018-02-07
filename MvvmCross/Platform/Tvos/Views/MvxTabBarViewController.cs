@@ -15,7 +15,7 @@ using MvvmCross.tvOS.Views.Presenters.Attributes;
 using UIKit;
 using Foundation;
 
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     public class MvxTabBarViewController
         : MvxBaseTabBarViewController, IMvxTabBarViewController

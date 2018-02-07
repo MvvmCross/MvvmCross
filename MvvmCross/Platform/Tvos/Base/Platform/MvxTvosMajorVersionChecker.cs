@@ -4,7 +4,7 @@
 
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Platform.tvOS.Platform
+namespace MvvmCross.Platform.Tvos.Base.Platform
 {
     public class MvxTvosMajorVersionChecker
     {

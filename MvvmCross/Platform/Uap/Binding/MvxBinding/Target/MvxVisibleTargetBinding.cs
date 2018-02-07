@@ -5,7 +5,7 @@
 using System;
 using Windows.UI.Xaml;
 
-namespace MvvmCross.Binding.Uwp.MvxBinding.Target
+namespace MvvmCross.Platform.Uap.Binding.MvxBinding.Target
 {
     public class MvxVisibleTargetBinding : MvxDependencyPropertyTargetBinding
     {

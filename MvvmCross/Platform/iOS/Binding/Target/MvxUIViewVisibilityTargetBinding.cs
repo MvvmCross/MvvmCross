@@ -8,7 +8,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.UI;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Target
+namespace MvvmCross.Platform.Ios.Binding.Target
 {
     public class MvxUIViewVisibilityTargetBinding : MvxConvertingTargetBinding
     {

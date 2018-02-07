@@ -5,7 +5,7 @@
 using MvvmCross.Binding.ExtensionMethods;
 using UIKit;
 
-namespace MvvmCross.Binding.tvOS.Target
+namespace MvvmCross.Platform.Tvos.Binding.Target
 {
     public class MvxUIViewHiddenTargetBinding : MvxBaseUIViewVisibleTargetBinding
     {

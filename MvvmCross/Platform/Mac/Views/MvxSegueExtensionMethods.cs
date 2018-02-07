@@ -14,7 +14,7 @@ using MvvmCross.Platform.Mac.Views;
 using MvvmCross.Core.Platform;
 using System.Reflection;
 
-namespace MvvmCross.Mac.Views
+namespace MvvmCross.Platform.Mac.Views
 {
     internal static class MvxSegueExtensionMethods
     {

@@ -11,7 +11,7 @@ using UIKit;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     public class MvxSplitViewController 
         : MvxEventSourceSplitViewController

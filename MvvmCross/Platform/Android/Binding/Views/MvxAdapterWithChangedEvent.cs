@@ -7,7 +7,7 @@ using System.Collections.Specialized;
 using Android.Content;
 using Android.Runtime;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     public class MvxAdapterWithChangedEvent
         : MvxAdapter

@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Platform.Mac.Views
+namespace MvvmCross.Platform.Mac.Base.Views
 {
     public interface IMvxEventSourceViewController : IMvxDisposeSource
     {

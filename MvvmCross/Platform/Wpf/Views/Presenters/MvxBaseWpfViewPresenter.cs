@@ -11,7 +11,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Wpf.Views.Presenters
+namespace MvvmCross.Platform.Wpf.Views.Presenters
 {
     public abstract class MvxBaseWpfViewPresenter
         : MvxWpfViewPresenter, IMvxWpfViewPresenter

@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Core.Views;
 
-namespace MvvmCross.Mac.Views
+namespace MvvmCross.Platform.Mac.Views
 {
     public interface IMvxMacViewsContainer
          : IMvxViewsContainer

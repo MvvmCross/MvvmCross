@@ -7,7 +7,7 @@ using Foundation;
 using MvvmCross.Core.Platform;
 using UIKit;
 
-namespace MvvmCross.iOS.Platform
+namespace MvvmCross.Platform.Ios.Core
 {
     public class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplicationDelegate
     {

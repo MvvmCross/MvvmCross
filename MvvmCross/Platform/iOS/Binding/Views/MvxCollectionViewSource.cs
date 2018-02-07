@@ -12,7 +12,7 @@ using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform.WeakSubscription;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Views
+namespace MvvmCross.Platform.Ios.Binding.Views
 {
     public class MvxCollectionViewSource : MvxBaseCollectionViewSource
     {

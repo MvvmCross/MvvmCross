@@ -10,7 +10,7 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Platform.IoC
+namespace MvvmCross.Base.IoC
 {
     public class MvxIoCContainer
         : IMvxIoCProvider

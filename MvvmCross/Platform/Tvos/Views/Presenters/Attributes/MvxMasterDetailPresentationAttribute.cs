@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Core.Views;
-namespace MvvmCross.tvOS.Views.Presenters.Attributes
+namespace MvvmCross.Platform.Tvos.Views.Presenters.Attributes
 {
     public class MvxMasterDetailPresentationAttribute : MvxBasePresentationAttribute
     {

@@ -10,7 +10,7 @@ using MvvmCross.Platform.Droid.Views;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Platform.Droid.Platform
+namespace MvvmCross.Platform.Android.Base.Platform
 {
     public class MvxAndroidTask
         : MvxMainThreadDispatchingObject

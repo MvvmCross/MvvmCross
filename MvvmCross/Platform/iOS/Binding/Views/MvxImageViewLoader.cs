@@ -7,7 +7,7 @@ using Foundation;
 using MvvmCross.Binding.Views;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Views
+namespace MvvmCross.Platform.Ios.Binding.Views
 {
     public class MvxImageViewLoader
         : MvxBaseImageViewLoader<UIImage>

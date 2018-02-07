@@ -13,7 +13,7 @@ using MvvmCross.Wpf.Views;
 using MvvmCross.Wpf.Views.Presenters;
 using System.Windows.Controls;
 
-namespace MvvmCross.Wpf.Platform
+namespace MvvmCross.Platform.Wpf.Core
 {
     public abstract class MvxWpfSetup
         : MvxSetup

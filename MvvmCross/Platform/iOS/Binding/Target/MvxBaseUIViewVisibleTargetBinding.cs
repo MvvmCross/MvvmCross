@@ -6,7 +6,7 @@ using System;
 using MvvmCross.Binding.Bindings.Target;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Target
+namespace MvvmCross.Platform.Ios.Binding.Target
 {
     public abstract class MvxBaseUIViewVisibleTargetBinding : MvxConvertingTargetBinding
     {

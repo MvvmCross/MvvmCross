@@ -4,7 +4,7 @@
 
 using MvvmCross.Core.Views;
 
-namespace MvvmCross.Wpf.Views.Presenters
+namespace MvvmCross.Platform.Wpf.Views.Presenters
 {
     public interface IMvxWpfViewPresenter
         : IMvxViewPresenter

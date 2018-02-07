@@ -9,7 +9,7 @@ using MvvmCross.Binding.Bindings;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Binding.Wpf
+namespace MvvmCross.Platform.Wpf.Binding
 {
     public abstract class MvxBindingCreator : IMvxBindingCreator
     {

@@ -12,7 +12,7 @@ using MvvmCross.Binding.Bindings;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Binding.Wpf
+namespace MvvmCross.Platform.Wpf.Binding
 {
     // ReSharper disable InconsistentNaming
     public static class La

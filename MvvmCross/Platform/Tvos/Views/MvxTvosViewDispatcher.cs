@@ -9,7 +9,7 @@ using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using MvvmCross.tvOS.Views.Presenters;
 
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     public class MvxTvosViewDispatcher
         : MvxTvosUIThreadDispatcher, IMvxViewDispatcher

@@ -15,7 +15,7 @@ using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.WeakSubscription;
 
-namespace MvvmCross.Binding.Mac.Views
+namespace MvvmCross.Platform.Mac.Binding.Views
 {
     public class MvxTableViewSource : NSTableViewSource
     {

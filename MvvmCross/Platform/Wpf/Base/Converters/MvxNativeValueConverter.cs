@@ -9,7 +9,7 @@ using System.Windows.Data;
 using System.Windows.Markup;
 using MvvmCross.Platform.Converters;
 
-namespace MvvmCross.Platform.Wpf.Converters
+namespace MvvmCross.Platform.Wpf.Base.Converters
 {
     public class MvxNativeValueConverter
         : MarkupExtension, IValueConverter

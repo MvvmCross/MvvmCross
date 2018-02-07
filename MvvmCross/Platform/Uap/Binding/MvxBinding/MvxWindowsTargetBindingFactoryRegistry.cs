@@ -7,7 +7,7 @@ using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Uwp.MvxBinding.Target;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Binding.Uwp.MvxBinding
+namespace MvvmCross.Platform.Uap.Binding.MvxBinding
 {
     public class MvxWindowsTargetBindingFactoryRegistry : MvxTargetBindingFactoryRegistry
     {

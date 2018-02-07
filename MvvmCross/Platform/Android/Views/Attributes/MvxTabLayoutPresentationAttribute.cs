@@ -7,7 +7,7 @@ using Android;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid;
 
-namespace MvvmCross.Droid.Views.Attributes
+namespace MvvmCross.Platform.Android.Views.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class MvxTabLayoutPresentationAttribute : MvxViewPagerFragmentPresentationAttribute

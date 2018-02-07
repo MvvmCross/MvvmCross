@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using MvvmCross.Platform.Exceptions;
 
-namespace MvvmCross.Platform.Plugins
+namespace MvvmCross.Base.Plugins
 {
     public class MvxLoaderPluginRegistry
     {

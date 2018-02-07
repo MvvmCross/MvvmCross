@@ -4,7 +4,7 @@
 
 using Android.Widget;
 
-namespace MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Platform.Android.Binding.Target
 {
 	public class MvxImageViewResourceNameTargetBinding : MvxImageViewDrawableNameTargetBinding
 	{

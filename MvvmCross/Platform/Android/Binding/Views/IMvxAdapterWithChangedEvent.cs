@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Specialized;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     public interface IMvxAdapterWithChangedEvent
         : IMvxAdapter

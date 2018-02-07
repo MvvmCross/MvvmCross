@@ -4,7 +4,7 @@
 
 using Android.Views;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     public interface IMvxLayoutInflaterHolder
     {

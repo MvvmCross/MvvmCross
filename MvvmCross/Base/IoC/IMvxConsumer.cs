@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Platform.IoC
+namespace MvvmCross.Base.IoC
 {
     // just a marker interface
     [Obsolete("Prefer to use Mvx.Resolve<T> static methods now")]

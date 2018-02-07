@@ -7,7 +7,7 @@ using AppKit;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.UI;
 
-namespace MvvmCross.Binding.Mac.Target
+namespace MvvmCross.Platform.Mac.Binding.Target
 {
     public class MvxNSViewVisibilityTargetBinding : MvxMacTargetBinding
     {

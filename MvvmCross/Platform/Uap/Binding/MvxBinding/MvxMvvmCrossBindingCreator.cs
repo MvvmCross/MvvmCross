@@ -9,7 +9,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using MvvmCross.Binding.Bindings;
 
-namespace MvvmCross.Binding.Uwp.MvxBinding
+namespace MvvmCross.Platform.Uap.Binding.MvxBinding
 {
     public class MvxMvvmCrossBindingCreator : MvxBindingCreator
     {

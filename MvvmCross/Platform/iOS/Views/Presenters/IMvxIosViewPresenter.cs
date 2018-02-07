@@ -5,7 +5,7 @@
 using MvvmCross.Core.Views;
 using UIKit;
 
-namespace MvvmCross.iOS.Views.Presenters
+namespace MvvmCross.Platform.Ios.Views.Presenters
 {
     public interface IMvxIosViewPresenter : IMvxViewPresenter, IMvxCanCreateIosView
     {    

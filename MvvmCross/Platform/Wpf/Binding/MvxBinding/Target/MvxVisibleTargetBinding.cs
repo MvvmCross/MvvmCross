@@ -5,7 +5,7 @@
 using System;
 using System.Windows;
 
-namespace MvvmCross.Binding.Wpf.MvxBinding.Target
+namespace MvvmCross.Platform.Wpf.Binding.MvxBinding.Target
 {
     public class MvxVisibleTargetBinding : MvxDependencyPropertyTargetBinding
     {

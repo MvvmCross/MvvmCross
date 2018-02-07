@@ -15,7 +15,7 @@ using UIKit;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.iOS.Views.Presenters
+namespace MvvmCross.Platform.Ios.Views.Presenters
 {
     public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresenter
     {

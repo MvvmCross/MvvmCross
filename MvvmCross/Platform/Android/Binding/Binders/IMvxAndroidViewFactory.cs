@@ -6,7 +6,7 @@ using Android.Content;
 using Android.Util;
 using Android.Views;
 
-namespace MvvmCross.Binding.Droid.Binders
+namespace MvvmCross.Platform.Android.Binding.Binders
 {
     public interface IMvxAndroidViewFactory
     {

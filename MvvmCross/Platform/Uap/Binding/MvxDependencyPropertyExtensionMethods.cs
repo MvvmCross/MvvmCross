@@ -6,7 +6,7 @@ using System;
 using System.Reflection;
 using Windows.UI.Xaml;
 
-namespace MvvmCross.Binding.Uwp
+namespace MvvmCross.Platform.Uap.Binding
 {
     public static class MvxDependencyPropertyExtensionMethods
     {

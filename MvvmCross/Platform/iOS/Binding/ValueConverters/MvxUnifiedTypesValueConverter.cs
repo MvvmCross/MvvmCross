@@ -9,7 +9,7 @@ using System.Globalization;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.IoC;
 
-namespace MvvmCross.Binding.iOS.ValueConverters
+namespace MvvmCross.Platform.Ios.Binding.ValueConverters
 {
     internal class MvxUnifiedTypesValueConverter
         : MvxValueConverter

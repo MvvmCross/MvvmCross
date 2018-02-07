@@ -13,7 +13,7 @@ using MvvmCross.Core.Views;
 using MvvmCross.Platform.iOS.Views;
 using UIKit;
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     internal static class MvxSegueExtensionMethods 
     {

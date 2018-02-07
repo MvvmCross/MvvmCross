@@ -9,7 +9,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.tvOS.Views;
 using UIKit;
 
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     public class MvxViewController
         : MvxEventSourceViewController, IMvxTvosView

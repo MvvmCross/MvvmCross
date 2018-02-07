@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-namespace MvvmCross.Platform.UI
+namespace MvvmCross.Base.UI
 {
     // note that this is an exact match for System.Windows.Visibility
     public enum MvxVisibility : byte

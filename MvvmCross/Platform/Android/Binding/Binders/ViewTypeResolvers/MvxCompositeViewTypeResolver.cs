@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
+namespace MvvmCross.Platform.Android.Binding.Binders.ViewTypeResolvers
 {
     public class MvxCompositeViewTypeResolver : IMvxViewTypeResolver
     {

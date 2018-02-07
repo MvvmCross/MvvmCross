@@ -10,7 +10,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Console.Platform
+namespace MvvmCross.Platform.Console.Core
 {
     public abstract class MvxConsoleSetup
         : MvxSetup

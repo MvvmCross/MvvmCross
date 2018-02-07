@@ -5,7 +5,7 @@
 using Android.Views;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     public interface IMvxListItemView
         : IMvxDataConsumer

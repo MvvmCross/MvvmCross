@@ -6,7 +6,7 @@ using System;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.IoC;
 
-namespace MvvmCross.Platform
+namespace MvvmCross.Base
 {
     public static class Mvx
     {

@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interactivity;
 
-namespace MvvmCross.Wpf.Commands
+namespace MvvmCross.Platform.Wpf.Commands
 {
     // This file is based on the EventToCommand mechanism from MVVMLight - used under MIT license -see http://mvvmlight.codeplex.com
     public class MvxEventToCommand : TriggerAction<DependencyObject>

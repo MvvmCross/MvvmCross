@@ -9,7 +9,7 @@ using System.Globalization;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.IoC;
 
-namespace MvvmCross.Binding.tvOS.ValueConverters
+namespace MvvmCross.Platform.Tvos.Binding.ValueConverters
 {
     internal class MvxUnifiedTypesValueConverter
         : MvxValueConverter

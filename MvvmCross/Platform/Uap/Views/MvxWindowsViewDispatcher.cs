@@ -5,7 +5,7 @@
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 
-namespace MvvmCross.Uwp.Views
+namespace MvvmCross.Platform.Uap.Views
 {
     public class MvxWindowsViewDispatcher
         : MvxWindowsMainThreadDispatcher, IMvxViewDispatcher

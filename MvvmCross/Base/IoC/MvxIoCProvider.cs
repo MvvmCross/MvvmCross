@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Platform.IoC
+namespace MvvmCross.Base.IoC
 {
     /// <summary>
     /// Singleton IoC Provider.

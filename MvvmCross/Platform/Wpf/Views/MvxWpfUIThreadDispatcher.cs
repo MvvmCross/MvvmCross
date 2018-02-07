@@ -6,7 +6,7 @@ using System;
 using System.Windows.Threading;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Wpf.Views
+namespace MvvmCross.Platform.Wpf.Views
 {
     public class MvxWpfUIThreadDispatcher
         : MvxMainThreadDispatcher

@@ -8,7 +8,7 @@ using MvvmCross.Droid.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Droid.Views.Fragments
+namespace MvvmCross.Platform.Android.Views.Fragments
 {
     public static class MvxFragmentExtensionMethods
     {

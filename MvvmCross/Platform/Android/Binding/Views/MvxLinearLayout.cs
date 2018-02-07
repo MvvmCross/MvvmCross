@@ -12,7 +12,7 @@ using Android.Widget;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     [Register("mvvmcross.binding.droid.views.MvxLinearLayout")]
     public class MvxLinearLayout

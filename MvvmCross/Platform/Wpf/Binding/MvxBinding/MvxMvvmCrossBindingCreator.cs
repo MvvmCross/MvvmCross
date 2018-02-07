@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Data;
 using MvvmCross.Binding.Bindings;
 
-namespace MvvmCross.Binding.Wpf.MvxBinding
+namespace MvvmCross.Platform.Wpf.Binding.MvxBinding
 {
 
 

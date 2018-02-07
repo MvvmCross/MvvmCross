@@ -14,7 +14,7 @@ using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Wpf.Converters;
 
-namespace MvvmCross.Binding.Wpf.WindowsBinding
+namespace MvvmCross.Platform.Wpf.Binding.WindowsBinding
 {
     public class MvxWindowsBindingCreator : MvxBindingCreator
     {

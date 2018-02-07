@@ -8,7 +8,7 @@ using AppKit;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
 
-namespace MvvmCross.Binding.Mac.Views
+namespace MvvmCross.Platform.Mac.Binding.Views
 {
     public class MvxView
         : NSView

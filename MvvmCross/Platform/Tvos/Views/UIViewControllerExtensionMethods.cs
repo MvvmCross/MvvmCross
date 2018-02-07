@@ -8,7 +8,7 @@ using MvvmCross.Platform.Platform;
 
 using UIKit;
 
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     public static class UIViewControllerExtensionMethods
     {

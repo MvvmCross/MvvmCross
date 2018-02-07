@@ -22,7 +22,7 @@ using MvvmCross.Binding.Binders;
 using System;
 using System.Reflection;
 
-namespace MvvmCross.Uwp.Platform
+namespace MvvmCross.Platform.Uap.Core
 {
     public abstract class MvxWindowsSetup
         : MvxSetup

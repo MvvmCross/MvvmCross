@@ -9,7 +9,7 @@ using MvvmCross.Core.Views;
 using MvvmCross.Platform.Exceptions;
 using UIKit;
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     public class MvxIosViewsContainer
         : MvxViewsContainer

@@ -9,7 +9,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.WeakSubscription;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Target
+namespace MvvmCross.Platform.Ios.Binding.Target
 {
     public class MvxUISearchBarTextTargetBinding : MvxPropertyInfoTargetBinding<UISearchBar>
     {

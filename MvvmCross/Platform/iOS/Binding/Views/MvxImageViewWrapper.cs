@@ -8,7 +8,7 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Platform;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Views
+namespace MvvmCross.Platform.Ios.Binding.Views
 {
     public class MvxImageViewWrapper
         : IDisposable

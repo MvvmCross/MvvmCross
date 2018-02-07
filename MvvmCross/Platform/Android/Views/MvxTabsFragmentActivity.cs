@@ -17,7 +17,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Core;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Platform.Android.Views
 {
     [Register("mvvmcross.droid.views.MvxTabsFragmentActivity")]
     public abstract class MvxTabsFragmentActivity
