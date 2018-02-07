@@ -29,19 +29,23 @@ TBA
 ### ViewPresenters
 
 TBA
+General alignment: https://github.com/MvvmCross/MvvmCross/pull/2558
+OverrideAttribute: https://github.com/MvvmCross/MvvmCross/pull/2483
 
 ### Navigation
 
 TBA
+Removed ShowViewModel: https://github.com/MvvmCross/MvvmCross/pull/2559
 
 ### IoC
 
 TBA
+IoC Child containers: https://github.com/MvvmCross/MvvmCross/pull/2438
 
 ### Xamarin.Forms
 
 TBA
-
+ 
 ### iOS
 
 TBA
@@ -49,15 +53,24 @@ TBA
 ### Android
 
 TBA
+No more NewTask: https://github.com/MvvmCross/MvvmCross/pull/2516
+Nested fragments: https://github.com/MvvmCross/MvvmCross/pull/2482
+Color plugin: https://github.com/MvvmCross/MvvmCross/pull/2557
+New way for Top Activity: https://github.com/MvvmCross/MvvmCross/pull/2513
+Removed some layouts: https://github.com/MvvmCross/MvvmCross/pull/2561
 
 ### macOS
 
 TBA
+WebBrowser plugin: https://github.com/MvvmCross/MvvmCross/pull/2464
 
 ### Others
 
 TBA
-
+Bindings: https://github.com/MvvmCross/MvvmCross/pull/2490
+Dictionary Conversion: https://github.com/MvvmCross/MvvmCross/pull/2480
+Improved setup (IMvxViewModelTypeFinder): https://github.com/MvvmCross/MvvmCross/pull/2498
+Improved localization customization: https://github.com/MvvmCross/MvvmCross/pull/2579
 
 
 
