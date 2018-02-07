@@ -19,7 +19,6 @@ namespace MvvmCross.Core.ViewModels
             NavigationService = navigationService;
         }
 
-        [Obsolete("Use StartAsync")]
         public async void Start(object hint = null)
         {
             try
