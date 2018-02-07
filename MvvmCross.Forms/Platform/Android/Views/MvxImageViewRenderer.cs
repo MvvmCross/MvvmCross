@@ -15,7 +15,7 @@ using Xamarin.Forms.Platform.Android;
 using MvxDroidImageView = MvvmCross.Binding.Droid.Views.MvxImageView;
 
 [assembly: ExportRenderer(typeof(MvxImageView), typeof(MvxImageViewRenderer))]
-namespace MvvmCross.Forms.Droid.Views
+namespace MvvmCross.Forms.Platform.Android.Views
 {
     using Android.Content;
 

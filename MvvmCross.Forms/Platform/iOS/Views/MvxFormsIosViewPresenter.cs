@@ -18,7 +18,7 @@ using MvvmCross.Platform.Platform;
 using UIKit;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.iOS.Presenters
+namespace MvvmCross.Forms.Platform.iOS.Views
 {
     public class MvxFormsIosViewPresenter
         : MvxIosViewPresenter

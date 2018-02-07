@@ -12,7 +12,7 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Droid.Views;
 using Xamarin.Forms.Platform.Android;
 
-namespace MvvmCross.Forms.Droid.Views.EventSource
+namespace MvvmCross.Forms.Platform.Android.Views.EventSource
 {
     public abstract class MvxEventSourceFormsAppCompatActivity
         : FormsAppCompatActivity, IMvxEventSourceActivity

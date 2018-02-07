@@ -6,7 +6,7 @@ using System;
 using MvvmCross.Forms.Views;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Platform
+namespace MvvmCross.Forms.Base
 {
     public class MvxFormsApplication : Application
     {
