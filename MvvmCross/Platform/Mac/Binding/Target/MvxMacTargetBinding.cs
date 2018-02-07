@@ -4,7 +4,7 @@
 
 using MvvmCross.Binding.Bindings.Target;
 
-namespace MvvmCross.Binding.Mac.Target
+namespace MvvmCross.Platform.Mac.Binding.Target
 {
     public abstract class MvxMacTargetBinding : MvxConvertingTargetBinding
     {

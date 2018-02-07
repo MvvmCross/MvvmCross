@@ -5,7 +5,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace MvvmCross.Binding.Uwp
+namespace MvvmCross.Platform.Uap.Binding
 {
     public interface IMvxWindowsAssemblyCache
     {

@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Reflection;
 using MvvmCross.Platform.IoC;
 
-namespace MvvmCross.Platform.ExtensionMethods
+namespace MvvmCross.Base.ExtensionMethods
 {
     public static class MvxCrossCoreExtensions
     {

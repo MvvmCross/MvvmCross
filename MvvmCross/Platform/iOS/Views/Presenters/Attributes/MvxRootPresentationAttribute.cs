@@ -5,7 +5,7 @@
 using MvvmCross.Core.Views;
 using UIKit;
 
-namespace MvvmCross.iOS.Views.Presenters.Attributes
+namespace MvvmCross.Platform.Ios.Views.Presenters.Attributes
 {
     public class MvxRootPresentationAttribute : MvxBasePresentationAttribute
     {

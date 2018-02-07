@@ -5,7 +5,7 @@
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Platform.Android.Views
 {
     public class MvxAndroidViewDispatcher
         : MvxAndroidMainThreadDispatcher

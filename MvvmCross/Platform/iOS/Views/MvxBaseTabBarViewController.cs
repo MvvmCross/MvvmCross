@@ -9,7 +9,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.iOS.Views;
 using UIKit;
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     public class MvxBaseTabBarViewController : MvxEventSourceTabBarController, IMvxIosView
     {

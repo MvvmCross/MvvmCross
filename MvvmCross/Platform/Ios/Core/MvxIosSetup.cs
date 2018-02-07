@@ -23,7 +23,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
 using UIKit;
 
-namespace MvvmCross.iOS.Platform
+namespace MvvmCross.Platform.Ios.Core
 {
     public abstract class MvxIosSetup
         : MvxSetup

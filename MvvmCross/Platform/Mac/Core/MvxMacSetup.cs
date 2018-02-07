@@ -22,7 +22,7 @@ using MvvmCross.Binding.Mac;
 using MvvmCross.Mac.Views;
 using MvvmCross.Mac.Views.Presenters;
 
-namespace MvvmCross.Mac.Platform
+namespace MvvmCross.Platform.Mac.Core
 {
     public abstract class MvxMacSetup
         : MvxSetup

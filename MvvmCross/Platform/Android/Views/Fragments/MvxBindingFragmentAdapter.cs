@@ -14,7 +14,7 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Droid.Views.Fragments
+namespace MvvmCross.Platform.Android.Views.Fragments
 {
     public class MvxBindingFragmentAdapter
         : MvxBaseFragmentAdapter

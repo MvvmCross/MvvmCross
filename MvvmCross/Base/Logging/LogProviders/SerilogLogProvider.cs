@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace MvvmCross.Platform.Logging.LogProviders
+namespace MvvmCross.Base.Logging.LogProviders
 {
     internal class SerilogLogProvider : MvxBaseLogProvider
     {

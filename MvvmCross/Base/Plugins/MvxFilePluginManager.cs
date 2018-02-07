@@ -10,7 +10,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.IoC;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Platform.Plugins
+namespace MvvmCross.Base.Plugins
 {
     public class MvxFilePluginManager
         : MvxPluginManager

@@ -11,7 +11,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Mac.Views.Presenters;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Mac.Views
+namespace MvvmCross.Platform.Mac.Views
 {
     public class MvxMacViewDispatcher
         : MvxMacUIThreadDispatcher

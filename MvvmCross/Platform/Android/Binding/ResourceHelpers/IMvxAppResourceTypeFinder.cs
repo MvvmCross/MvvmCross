@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Binding.Droid.ResourceHelpers
+namespace MvvmCross.Platform.Android.Binding.ResourceHelpers
 {
     public interface IMvxAppResourceTypeFinder
     {

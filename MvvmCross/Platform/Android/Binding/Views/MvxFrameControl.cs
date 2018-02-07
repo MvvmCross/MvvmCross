@@ -15,7 +15,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     [Register("mvvmcross.binding.droid.views.MvxFrameControl")]
     public class MvxFrameControl

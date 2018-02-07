@@ -10,7 +10,7 @@ using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Binding.Wpf.MvxBinding.Target
+namespace MvvmCross.Platform.Wpf.Binding.MvxBinding.Target
 {
     public class MvxDependencyPropertyTargetBinding : MvxConvertingTargetBinding
     {

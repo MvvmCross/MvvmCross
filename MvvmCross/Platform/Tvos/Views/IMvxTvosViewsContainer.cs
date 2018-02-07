@@ -4,7 +4,7 @@
 
 using MvvmCross.Core.Views;
 
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     public interface IMvxTvosViewsContainer
         : IMvxViewsContainer, IMvxTvosViewCreator { }

@@ -16,7 +16,7 @@ using MvvmCross.Platform.Platform;
 using Object = Java.Lang.Object;
 using String = Java.Lang.String;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     public class MvxFilteringAdapter
         : MvxAdapter, IFilterable

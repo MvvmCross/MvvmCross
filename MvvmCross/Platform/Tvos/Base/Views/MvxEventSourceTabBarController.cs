@@ -6,7 +6,7 @@ using System;
 using MvvmCross.Platform.Core;
 using UIKit;
 
-namespace MvvmCross.Platform.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Base.Views
 {
     public class MvxEventSourceTabBarController
         : UITabBarController, IMvxEventSourceViewController

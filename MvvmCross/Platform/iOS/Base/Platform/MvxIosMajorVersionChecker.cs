@@ -4,7 +4,7 @@
 
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Platform.iOS.Platform
+namespace MvvmCross.Platform.Ios.Base.Platform
 {
     public class MvxIosMajorVersionChecker
     {

@@ -8,7 +8,7 @@ using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.Platform;
 using UIKit;
 
-namespace MvvmCross.Binding.tvOS.Target
+namespace MvvmCross.Platform.Tvos.Binding.Target
 {
     public class MvxUISegmentedControlSelectedSegmentTargetBinding : MvxPropertyInfoTargetBinding<UISegmentedControl>
     {

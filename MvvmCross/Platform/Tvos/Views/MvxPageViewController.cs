@@ -12,7 +12,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.tvOS.Views;
 using UIKit;
 
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     public class MvxPageViewController : MvxEventSourcePageViewController, IMvxTvosView
     {

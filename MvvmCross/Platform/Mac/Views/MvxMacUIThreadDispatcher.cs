@@ -9,7 +9,7 @@ using AppKit;
 
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Mac.Views
+namespace MvvmCross.Platform.Mac.Views
 {
     public abstract class MvxMacUIThreadDispatcher
         : MvxMainThreadDispatcher

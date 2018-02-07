@@ -7,7 +7,7 @@ using System.Reflection;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 
-namespace MvvmCross.Binding.Wpf
+namespace MvvmCross.Platform.Wpf.Binding
 {
     public class MvxWindowsAssemblyCache
         : MvxSingleton<IMvxWindowsAssemblyCache>

@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Platform.Logging
+namespace MvvmCross.Base.Logging
 {
     public static class MvxLogExtensions
     {

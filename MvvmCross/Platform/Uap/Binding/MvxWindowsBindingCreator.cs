@@ -14,7 +14,7 @@ using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Uwp.Converters;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Binding.Uwp
+namespace MvvmCross.Platform.Uap.Binding
 {
     public class MvxWindowsBindingCreator : MvxBindingCreator
     {

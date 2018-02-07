@@ -10,7 +10,7 @@ using UIKit;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.tvOS.Views;
 
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     public class MvxEventSourceSplitViewController : UISplitViewController, IMvxEventSourceViewController
     {

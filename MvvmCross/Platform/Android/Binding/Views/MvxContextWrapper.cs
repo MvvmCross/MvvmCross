@@ -8,7 +8,7 @@ using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     public class MvxContextWrapper : ContextWrapper
     {

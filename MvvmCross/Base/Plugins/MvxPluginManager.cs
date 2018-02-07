@@ -8,7 +8,7 @@ using System.Reflection;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Platform.Plugins
+namespace MvvmCross.Base.Plugins
 {
     public class MvxPluginManager
         : IMvxPluginManager

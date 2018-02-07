@@ -12,7 +12,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using Windows.UI.Xaml;
 
-namespace MvvmCross.Binding.Uwp
+namespace MvvmCross.Platform.Uap.Binding
 {
     // ReSharper disable InconsistentNaming
     public static class La

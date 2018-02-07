@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Platform
+namespace MvvmCross.Base
 {
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Event | AttributeTargets.Interface | AttributeTargets.Delegate)]
     public sealed class PreserveAttribute : Attribute

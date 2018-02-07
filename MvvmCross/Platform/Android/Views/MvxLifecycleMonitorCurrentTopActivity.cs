@@ -7,7 +7,7 @@ using Android.App;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Platform.Droid.Platform;
 
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Platform.Android.Views
 {
     // Note that we set Activity = activity in multiple places
     // basically we just want to intercept the activity as early as possible

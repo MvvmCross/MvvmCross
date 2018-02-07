@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Android.Views;
 using MvvmCross.Platform.IoC;
 
-namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
+namespace MvvmCross.Platform.Android.Binding.Binders.ViewTypeResolvers
 {
     public class MvxNamespaceListViewTypeResolver : MvxLongLowerCaseViewTypeResolver, IMvxNamespaceListViewTypeResolver
     {

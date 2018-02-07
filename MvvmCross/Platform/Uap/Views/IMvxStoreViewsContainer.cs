@@ -4,7 +4,7 @@
 
 using MvvmCross.Core.Views;
 
-namespace MvvmCross.Uwp.Views
+namespace MvvmCross.Platform.Uap.Views
 {
     public interface IMvxStoreViewsContainer
         : IMvxViewsContainer

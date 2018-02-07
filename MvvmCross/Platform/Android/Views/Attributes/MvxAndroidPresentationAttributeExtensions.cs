@@ -10,7 +10,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Core.Views;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Droid.Views.Attributes
+namespace MvvmCross.Platform.Android.Views.Attributes
 {
     public static class MvxAndroidPresentationAttributeExtensions
     {

@@ -8,7 +8,7 @@ using Android.OS;
 using MvvmCross.Core.Platform;
 using MvvmCross.Droid.Platform;
 
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Platform.Android.Views
 {
     // For lifetime explained, see http://developer.android.com/guide/topics/fundamentals/activities.html
     public class MvxAndroidLifetimeMonitor

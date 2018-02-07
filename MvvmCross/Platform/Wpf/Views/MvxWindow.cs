@@ -6,7 +6,7 @@ using MvvmCross.Core.ViewModels;
 using System;
 using System.Windows;
 
-namespace MvvmCross.Wpf.Views
+namespace MvvmCross.Platform.Wpf.Views
 {
     public class MvxWindow : Window, IMvxWindow, IMvxWpfView, IDisposable
     {

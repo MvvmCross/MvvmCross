@@ -15,7 +15,7 @@ using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Droid.Views;
 
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Platform.Android.Views
 {
     [Register("mvvmcross.droid.views.MvxActivity")]
     public abstract class MvxActivity

@@ -8,7 +8,7 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.iOS.Views;
 using UIKit;
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     public class MvxEventSourceSplitViewController : UISplitViewController, IMvxEventSourceViewController
     {

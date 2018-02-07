@@ -17,7 +17,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace MvvmCross.Uwp.Views
+namespace MvvmCross.Platform.Uap.Views
 {
     public class MvxWindowsViewPresenter
         : MvxAttributeViewPresenter, IMvxWindowsViewPresenter

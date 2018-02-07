@@ -9,7 +9,7 @@ using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.tvOS.Views;
 
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {

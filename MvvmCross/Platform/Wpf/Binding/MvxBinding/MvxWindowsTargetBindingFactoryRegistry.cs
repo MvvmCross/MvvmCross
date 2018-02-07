@@ -7,7 +7,7 @@ using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Wpf.MvxBinding.Target;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Binding.Wpf.MvxBinding
+namespace MvvmCross.Platform.Wpf.Binding.MvxBinding
 {
     public class MvxWindowsTargetBindingFactoryRegistry : MvxTargetBindingFactoryRegistry
     {

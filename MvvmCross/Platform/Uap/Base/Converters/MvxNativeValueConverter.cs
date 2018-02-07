@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Data;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Platform.Uwp.Converters
+namespace MvvmCross.Platform.Uap.Base.Converters
 {
     public class MvxNativeValueConverter
         : IValueConverter

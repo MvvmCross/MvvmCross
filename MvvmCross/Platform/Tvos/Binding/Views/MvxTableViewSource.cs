@@ -13,7 +13,7 @@ using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.WeakSubscription;
 using UIKit;
 
-namespace MvvmCross.Binding.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Binding.Views
 {
     public abstract class MvxTableViewSource : MvxBaseTableViewSource
     {

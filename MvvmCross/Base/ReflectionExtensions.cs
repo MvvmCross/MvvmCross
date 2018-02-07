@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace MvvmCross.Platform
+namespace MvvmCross.Base
 {
     public static class ReflectionExtensions
     {

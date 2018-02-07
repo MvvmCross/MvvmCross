@@ -9,7 +9,7 @@ using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.IoC;
 
-namespace MvvmCross.Binding.Uwp
+namespace MvvmCross.Platform.Uap.Binding
 {
     public class Import
     {

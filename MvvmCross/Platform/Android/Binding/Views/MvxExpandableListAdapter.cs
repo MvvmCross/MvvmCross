@@ -12,7 +12,7 @@ using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.ExtensionMethods;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     public class MvxExpandableListAdapter : MvxAdapter, IExpandableListAdapter
     {

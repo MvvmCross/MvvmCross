@@ -8,7 +8,7 @@ using MvvmCross.Core.Views;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Console.Views
+namespace MvvmCross.Platform.Console.Views
 {
     public class MvxConsoleViewDispatcher
         : MvxMainThreadDispatcher

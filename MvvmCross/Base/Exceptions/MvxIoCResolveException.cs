@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Platform.Exceptions
+namespace MvvmCross.Base.Exceptions
 {
     // Officially exception should support serialisation, but we don't add it here - mainly because of
     // serialization limits in PCLs

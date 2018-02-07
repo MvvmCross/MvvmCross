@@ -9,7 +9,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Platform.Android.Binding.Target
 {
     public abstract class MvxBaseImageViewTargetBinding
         : MvxAndroidTargetBinding

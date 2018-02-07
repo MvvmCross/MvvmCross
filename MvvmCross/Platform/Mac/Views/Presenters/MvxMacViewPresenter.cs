@@ -17,7 +17,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Mac.Views.Presenters
+namespace MvvmCross.Platform.Mac.Views.Presenters
 {
     public class MvxMacViewPresenter
         : MvxAttributeViewPresenter, IMvxMacViewPresenter, IMvxAttributeViewPresenter

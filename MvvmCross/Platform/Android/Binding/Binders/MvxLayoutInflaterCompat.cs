@@ -14,7 +14,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Logging;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Binding.Droid.Binders
+namespace MvvmCross.Platform.Android.Binding.Binders
 {
     public static class MvxLayoutInflaterCompat
     {

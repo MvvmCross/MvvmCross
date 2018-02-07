@@ -5,7 +5,7 @@
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 
-namespace MvvmCross.Wpf.Views
+namespace MvvmCross.Platform.Wpf.Views
 {
     public interface IMvxWindow
     {

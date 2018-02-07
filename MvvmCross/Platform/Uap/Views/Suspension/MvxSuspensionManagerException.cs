@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Platform.Exceptions;
 
-namespace MvvmCross.Uwp.Views.Suspension
+namespace MvvmCross.Platform.Uap.Views.Suspension
 {
     public class MvxSuspensionManagerException : MvxException
     {

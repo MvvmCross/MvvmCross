@@ -6,7 +6,7 @@ using System;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 
-namespace MvvmCross.Console.Views
+namespace MvvmCross.Platform.Console.Views
 {
     public class MvxConsoleView<T>
         : IMvxConsoleView

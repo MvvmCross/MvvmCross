@@ -7,7 +7,7 @@ using System.Threading;
 using MvvmCross.Platform.Core;
 using UIKit;
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     public abstract class MvxIosUIThreadDispatcher
         : MvxMainThreadDispatcher

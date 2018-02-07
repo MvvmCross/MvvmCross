@@ -8,7 +8,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using UIKit;
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     public class MvxBaseSplitViewController : MvxEventSourceSplitViewController, IMvxIosView
     {

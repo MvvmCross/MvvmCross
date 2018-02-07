@@ -9,7 +9,7 @@ using System.Reflection;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Platform.IoC
+namespace MvvmCross.Base.IoC
 {
     public static class MvxTypeExtensions
     {

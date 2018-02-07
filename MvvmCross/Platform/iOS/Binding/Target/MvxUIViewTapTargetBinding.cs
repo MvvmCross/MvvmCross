@@ -8,7 +8,7 @@ using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.iOS.Views.Gestures;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Target
+namespace MvvmCross.Platform.Ios.Binding.Target
 {
     public class MvxUIViewTapTargetBinding : MvxConvertingTargetBinding
     {

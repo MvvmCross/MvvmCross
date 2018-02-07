@@ -14,7 +14,7 @@ using MvvmCross.Platform.Droid.Views;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Platform.Android.Views
 {
     public class MvxActivityAdapter : MvxBaseActivityAdapter
     {

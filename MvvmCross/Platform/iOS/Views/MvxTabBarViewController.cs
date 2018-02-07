@@ -11,7 +11,7 @@ using MvvmCross.iOS.Views.Presenters.Attributes;
 using MvvmCross.Platform;
 using UIKit;
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     public class MvxTabBarViewController : MvxBaseTabBarViewController, IMvxTabBarViewController
     {

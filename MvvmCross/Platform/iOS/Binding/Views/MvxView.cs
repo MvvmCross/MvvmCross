@@ -9,7 +9,7 @@ using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Views
+namespace MvvmCross.Platform.Ios.Binding.Views
 {
     public class MvxView
         : UIView

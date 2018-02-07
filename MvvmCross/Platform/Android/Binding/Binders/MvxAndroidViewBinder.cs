@@ -16,7 +16,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Binding.Droid.Binders
+namespace MvvmCross.Platform.Android.Binding.Binders
 {
     public class MvxAndroidViewBinder : IMvxAndroidViewBinder
     {

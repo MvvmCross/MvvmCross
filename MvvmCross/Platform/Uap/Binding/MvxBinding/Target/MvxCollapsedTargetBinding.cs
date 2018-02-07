@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-namespace MvvmCross.Binding.Uwp.MvxBinding.Target
+namespace MvvmCross.Platform.Uap.Binding.MvxBinding.Target
 {
     public class MvxCollapsedTargetBinding : MvxVisibleTargetBinding
     {

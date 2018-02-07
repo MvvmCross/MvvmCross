@@ -19,7 +19,7 @@ using Boolean = Java.Lang.Boolean;
 using Exception = Java.Lang.Exception;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     /// <summary>
     /// Custom LayoutInflater responsible for inflating views and hooking up bindings

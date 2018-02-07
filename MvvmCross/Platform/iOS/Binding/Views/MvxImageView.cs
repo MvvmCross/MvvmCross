@@ -7,7 +7,7 @@ using CoreGraphics;
 using Foundation;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Views
+namespace MvvmCross.Platform.Ios.Binding.Views
 {
     [Register("MvxImageView")]
     public class MvxImageView

@@ -10,7 +10,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Views
+namespace MvvmCross.Platform.Ios.Binding.Views
 {
     public class MvxTableViewCell
         : UITableViewCell, IMvxBindable

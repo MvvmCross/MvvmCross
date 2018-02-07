@@ -4,7 +4,7 @@
 
 using MvvmCross.Core.ViewModels;
 
-namespace MvvmCross.Mac.Views
+namespace MvvmCross.Platform.Mac.Views
 {
     public interface IMvxCurrentRequest
     {

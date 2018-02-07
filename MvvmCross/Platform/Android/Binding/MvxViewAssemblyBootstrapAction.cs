@@ -8,7 +8,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Binding.Droid
+namespace MvvmCross.Platform.Android.Binding
 {
     public class MvxViewAssemblyBootstrapAction<TView>
         : IMvxBootstrapAction

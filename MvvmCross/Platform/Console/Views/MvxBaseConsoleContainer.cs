@@ -9,7 +9,7 @@ using MvvmCross.Core.Views;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Console.Views
+namespace MvvmCross.Platform.Console.Views
 {
     public abstract class MvxBaseConsoleContainer
         : MvxViewsContainer, IMvxConsoleNavigation

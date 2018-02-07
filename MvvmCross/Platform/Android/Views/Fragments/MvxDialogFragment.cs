@@ -10,7 +10,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Views.Fragments.EventSource;
 using MvvmCross.Droid.Views;
 
-namespace MvvmCross.Droid.Views.Fragments
+namespace MvvmCross.Platform.Android.Views.Fragments
 {
     [Register("mvvmcross.droid.fragments.MvxDialogFragment")]
     public abstract class MvxDialogFragment

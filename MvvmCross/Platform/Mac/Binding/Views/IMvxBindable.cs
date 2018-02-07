@@ -5,7 +5,7 @@
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Binding.Mac.Views
+namespace MvvmCross.Platform.Mac.Binding.Views
 {
     public interface IMvxBindable
         : IMvxBindingContextOwner, IMvxDataConsumer

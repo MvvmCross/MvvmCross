@@ -7,7 +7,7 @@ using System.Threading;
 using Android.App;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Platform.Android.Views
 {
     public class MvxAndroidMainThreadDispatcher : MvxMainThreadDispatcher
     {

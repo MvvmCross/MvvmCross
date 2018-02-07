@@ -5,7 +5,7 @@
 using System;
 using Windows.Foundation;
 
-namespace MvvmCross.Platform.Uwp.Platform
+namespace MvvmCross.Platform.Uap.Base.Platform
 {
     public static class MvxPseudoAsyncExtensionMethods
     {

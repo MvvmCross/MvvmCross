@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-namespace MvvmCross.Mac.Views
+namespace MvvmCross.Platform.Mac.Views
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxFromStoryboardAttribute : Attribute

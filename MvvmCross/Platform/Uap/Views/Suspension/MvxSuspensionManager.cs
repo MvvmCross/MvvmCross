@@ -11,7 +11,7 @@ using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace MvvmCross.Uwp.Views.Suspension
+namespace MvvmCross.Platform.Uap.Views.Suspension
 {
     /// <summary>
     /// MvxSuspensionManager captures global session state to simplify process lifetime management

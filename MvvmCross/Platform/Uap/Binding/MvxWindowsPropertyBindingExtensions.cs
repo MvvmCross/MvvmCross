@@ -4,7 +4,7 @@
 
 using Windows.UI.Xaml;
 
-namespace MvvmCross.Binding.Uwp
+namespace MvvmCross.Platform.Uap.Binding
 {
     public static class MvxWindowsPropertyBindingExtensions
     {

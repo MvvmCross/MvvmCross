@@ -9,7 +9,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Platform;
 
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Platform.Android.Views
 {
     [Register("mvvmcross.droid.views.MvxSplashScreenActivity")]
     public abstract class MvxSplashScreenActivity

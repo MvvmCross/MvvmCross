@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -7,7 +7,7 @@ using System.Reflection;
 using Android.Runtime;
 using MvvmCross.Platform.WeakSubscription;
 
-namespace MvvmCross.Platform.Droid.WeakSubscription
+namespace MvvmCross.Platform.Android.Base.WeakSubscription
 {
     /// <summary>
     /// Weak subscription to an event where the target may be an IJavaObject

@@ -9,7 +9,7 @@ using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.IoC;
 
-namespace MvvmCross.Binding.Wpf
+namespace MvvmCross.Platform.Wpf.Binding
 {
     public class Import
     {

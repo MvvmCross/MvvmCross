@@ -7,7 +7,7 @@ using Foundation;
 using MvvmCross.Platform.Core;
 using UIKit;
 
-namespace MvvmCross.Platform.iOS.Views
+namespace MvvmCross.Platform.Ios.Base.Views
 {
     public class MvxEventSourceCollectionViewController
         : UICollectionViewController, IMvxEventSourceViewController

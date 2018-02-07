@@ -6,7 +6,7 @@ using System;
 using MvvmCross.Binding.Bindings.Target;
 using UIKit;
 
-namespace MvvmCross.Binding.tvOS.Target
+namespace MvvmCross.Platform.Tvos.Binding.Target
 {
     public abstract class MvxBaseUIViewVisibleTargetBinding : MvxConvertingTargetBinding
     {

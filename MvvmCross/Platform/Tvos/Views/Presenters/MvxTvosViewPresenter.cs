@@ -19,7 +19,7 @@ using Foundation;
 using UIKit;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.tvOS.Views.Presenters
+namespace MvvmCross.Platform.Tvos.Views.Presenters
 {
     public class MvxTvosViewPresenter
         : MvxAttributeViewPresenter, IMvxTvosViewPresenter

@@ -28,7 +28,7 @@ using MvvmCross.Platform.IoC;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Droid.Platform
+namespace MvvmCross.Platform.Android.Core
 {
     public abstract class MvxAndroidSetup
         : MvxSetup, IMvxAndroidGlobals

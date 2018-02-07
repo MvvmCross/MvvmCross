@@ -7,7 +7,7 @@ using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.WeakSubscription;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Target
+namespace MvvmCross.Platform.Ios.Binding.Target
 {
     public class MvxUITextFieldTextFocusTargetBinding : MvxTargetBinding
     {

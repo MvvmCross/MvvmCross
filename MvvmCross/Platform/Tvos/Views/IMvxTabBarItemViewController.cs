@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     public interface IMvxTabBarItemViewController
     {

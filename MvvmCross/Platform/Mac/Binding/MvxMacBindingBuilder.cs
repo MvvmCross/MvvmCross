@@ -9,7 +9,7 @@ using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Mac.Target;
 using MvvmCross.Platform.Converters;
 
-namespace MvvmCross.Binding.Mac
+namespace MvvmCross.Platform.Mac.Binding
 {
     public class MvxMacBindingBuilder
         : MvxBindingBuilder

@@ -6,7 +6,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.tvOS.Views.Presenters.Attributes;
 using UIKit;
 
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     public interface IMvxTabBarViewController
     {

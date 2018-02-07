@@ -7,7 +7,7 @@ using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Platform.Platform;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Target
+namespace MvvmCross.Platform.Ios.Binding.Target
 {
     /// <summary>
     /// Custom binding for UIActivityIndicator hidden.

@@ -9,7 +9,7 @@ using Android.Views;
 using MvvmCross.Platform.IoC;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
+namespace MvvmCross.Platform.Android.Binding.Binders.ViewTypeResolvers
 {
     public class MvxAxmlNameViewTypeResolver : MvxLongLowerCaseViewTypeResolver, IMvxAxmlNameViewTypeResolver
     {
