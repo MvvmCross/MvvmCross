@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using Android.App;
 using Android.OS;
 using MvvmCross.Binding.BindingContext;
@@ -35,9 +36,9 @@ namespace MvvmCross.Droid.Views
             }
         }
 
-        public static void OnViewCreate(this IMvxAndroidView androidView, Bundle bundle)
+        public async static void OnViewCreate(this IMvxAndroidView androidView, Bundle bundle)
         {
-            androidView.EnsureSetupInitialized();
+            await androidView.EnsureSetupInitialized();
             androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity, bundle));
 
             var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
@@ -136,7 +137,7 @@ namespace MvvmCross.Droid.Views
             return viewModel;
         }
 
-        private static void EnsureSetupInitialized(this IMvxAndroidView androidView)
+        private async static Task EnsureSetupInitialized(this IMvxAndroidView androidView)
         {
             if (androidView is IMvxAndroidSplashScreenActivity)
             {
@@ -145,8 +146,8 @@ namespace MvvmCross.Droid.Views
             }
 
             var activity = androidView.ToActivity();
-            var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(activity.ApplicationContext);
-            setupSingleton.EnsureInitialized();
+            var setupSingleton = await MvxAndroidSetupSingleton.EnsureSingletonAvailable(activity.ApplicationContext);
+            await setupSingleton.EnsureInitialized();
         }
     }
 }
