@@ -12,7 +12,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Uwp.Views;
 using System;
 
-namespace MvvmCross.Forms.Uwp.Presenters
+namespace MvvmCross.Forms.Platform.Uap.Views
 {
     public class MvxFormsUwpViewPresenter
         : MvxWindowsViewPresenter

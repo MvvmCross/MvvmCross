@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Forms
+namespace MvvmCross.Forms.Base
 {
     internal static class MvxFormsLog
     {

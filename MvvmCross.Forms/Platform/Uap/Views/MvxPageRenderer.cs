@@ -8,7 +8,7 @@ using MvvmCross.Forms.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;
 
-namespace MvvmCross.Forms.Uwp
+namespace MvvmCross.Forms.Platform.Uap.Views
 {
     public class MvxPageRenderer : PageRenderer, IMvxBindingContextOwner
     {

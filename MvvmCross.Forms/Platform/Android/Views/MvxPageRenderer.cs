@@ -9,7 +9,7 @@ using MvvmCross.Forms.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-namespace MvvmCross.Forms.Droid.Views
+namespace MvvmCross.Forms.Platform.Android.Views
 {
     public class MvxPageRenderer : PageRenderer, IMvxBindingContextOwner
     {

@@ -18,7 +18,7 @@ using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Mac.Presenters
+namespace MvvmCross.Forms.Platform.Mac.Views
 {
     public class MvxFormsMacViewPresenter
         : MvxMacViewPresenter

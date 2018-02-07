@@ -15,7 +15,7 @@ using Xamarin.Forms.Platform.iOS;
 using MvxIosImageView = MvvmCross.Binding.iOS.Views.MvxImageView;
 
 [assembly: ExportRenderer(typeof(MvxImageView), typeof(MvxImageViewRenderer))]
-namespace MvvmCross.Forms.iOS.Views.Renderers
+namespace MvvmCross.Forms.Platform.iOS.Views
 {
     internal class MvxImageViewRenderer : ImageRenderer
     {
