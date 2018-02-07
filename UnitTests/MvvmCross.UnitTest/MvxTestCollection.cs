@@ -1,7 +1,7 @@
 ﻿using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Plugins.Color.Test
+namespace MvvmCross.UnitTest
 {
     [CollectionDefinition("MvxTest")]
     public class MvxTestCollection : ICollectionFixture<MvxTestFixture>

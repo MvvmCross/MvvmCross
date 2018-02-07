@@ -5,7 +5,7 @@
 ﻿using MvvmCross.Core.Navigation;
 using Xunit;
 
-namespace MvvmCross.Test.Navigation
+namespace MvvmCross.UnitTest.Navigation
 {
     public class NavigationCacheTests
     {

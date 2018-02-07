@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Core.ViewModels;
 
-namespace MvvmCross.Test.Mocks.ViewModels
+namespace MvvmCross.UnitTest.Mocks.ViewModels
 {
     public class SimpleParameterTestViewModel : MvxViewModel<string>
     {

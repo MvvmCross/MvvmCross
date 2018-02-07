@@ -17,7 +17,7 @@ using MvvmCross.Platform.Converters;
 using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Binding.Test.Binders
+namespace MvvmCross.UnitTest.Binding.Binders
 {
     [Collection("MvxTest")]
     public class MvxSourceStepTests

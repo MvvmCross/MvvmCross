@@ -7,7 +7,7 @@ using MvvmCross.Test.Mocks.TestViewModels;
 using MvvmCross.Test.Mocks.TestViews;
 using Xunit;
 
-namespace MvvmCross.Test.Platform
+namespace MvvmCross.UnitTest.Platform
 {
     [Collection("MvxTest")]
     public class MvxViewModelViewLookupBuilderTest

@@ -9,7 +9,7 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Test.Mocks.Dispatchers;
 using Xunit;
 
-namespace MvvmCross.Test.ViewModels
+namespace MvvmCross.UnitTest.ViewModels
 {
     [Collection("MvxTest")]
     public class MvxCommandCollectionTest

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Platform.Converters;
 
-namespace MvvmCross.Binding.Test.Mocks
+namespace MvvmCross.UnitTest.Binding.Mocks
 {
     public class MockSourceBinding : IMvxSourceBinding
     {

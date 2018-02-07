@@ -10,7 +10,7 @@ using MvvmCross.Plugins.Network.Rest;
 using MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks;
 using Xunit;
 
-namespace MvvmCross.Plugins.Network.Test
+namespace MvvmCross.Plugins.Network.UnitTest
 {
 
     [Collection("Rest")]

@@ -6,7 +6,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Test.Mocks;
 using Xunit;
 
-namespace MvvmCross.Platform.Test
+namespace MvvmCross.UnitTest.Base
 {
     
     public class MvxBootstrapTest

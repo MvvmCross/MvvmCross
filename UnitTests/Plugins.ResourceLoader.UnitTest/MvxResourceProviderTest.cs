@@ -4,7 +4,7 @@
 
 using Xunit;
 
-namespace MvvmCross.Plugins.ResourceLoader.Test
+namespace MvvmCross.Plugins.ResourceLoader.UnitTest
 {
     public class MvxResourceProviderTest
     {

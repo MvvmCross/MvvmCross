@@ -11,7 +11,7 @@ using System.Reflection;
 using System.Linq;
 using MvvmCross.Test;
 
-namespace MvvmCross.Platform.Test
+namespace MvvmCross.UnitTest.Base
 {
     [Collection("MvxTest")]   
     public class MvxIocTest

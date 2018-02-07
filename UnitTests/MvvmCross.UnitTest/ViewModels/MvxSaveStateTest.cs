@@ -9,7 +9,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Test.Mocks.TestViewModels;
 using Xunit;
 
-namespace MvvmCross.Test.ViewModels
+namespace MvvmCross.UnitTest.ViewModels
 {
     [Collection("MvxTest")]
     public class MvxSaveStateTest

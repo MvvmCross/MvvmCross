@@ -10,7 +10,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Parse;
 using Xunit;
 
-namespace MvvmCross.Platform.Test
+namespace MvvmCross.UnitTest.Base
 {
     
     public class MvxParserTest

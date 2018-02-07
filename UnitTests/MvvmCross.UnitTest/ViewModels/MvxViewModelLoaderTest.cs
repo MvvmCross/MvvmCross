@@ -10,7 +10,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Test.Mocks.TestViewModels;
 using Xunit;
 
-namespace MvvmCross.Test.ViewModels
+namespace MvvmCross.UnitTest.ViewModels
 {
     [Collection("MvxTest")]
     public class MvxViewModelLoaderTest

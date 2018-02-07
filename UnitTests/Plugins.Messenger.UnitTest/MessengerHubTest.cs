@@ -8,7 +8,7 @@ using System.Threading;
 using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Plugins.Messenger.Test
+namespace MvvmCross.Plugins.Messenger.UnitTest
 {
     public class MessengerHubTest : IClassFixture<MvxTestFixture>
     {

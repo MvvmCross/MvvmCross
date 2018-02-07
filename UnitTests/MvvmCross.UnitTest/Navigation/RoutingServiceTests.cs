@@ -22,7 +22,7 @@ using Xunit;
 [assembly: MvxNavigation(typeof(ViewModelC), @"mvx://test/\?id=(?<id>[A-Z0-9]{32})$")]
 [assembly: MvxNavigation(typeof(SimpleRoutingFacade), @"mvx://facade/\?id=(?<vm>a|b)")]
 
-namespace MvvmCross.Test.Navigation
+namespace MvvmCross.UnitTest.Navigation
 {
     [Collection("MvxTest")]
     public class RoutingServiceTests

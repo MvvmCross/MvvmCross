@@ -5,7 +5,7 @@
 using System.Collections.Generic;
 using MvvmCross.Core.ViewModels;
 
-namespace MvvmCross.Test.Mocks.TestViewModels
+namespace MvvmCross.UnitTest.Mocks.TestViewModels
 {
     public class Test3ViewModel : MvxViewModel
     {

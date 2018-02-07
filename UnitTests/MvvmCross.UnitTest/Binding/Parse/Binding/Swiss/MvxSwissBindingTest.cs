@@ -8,7 +8,7 @@ using MvvmCross.Platform.Logging;
 using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
+namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
 {
     [Collection("MvxTest")]
     public class MvxSwissBindingTest
