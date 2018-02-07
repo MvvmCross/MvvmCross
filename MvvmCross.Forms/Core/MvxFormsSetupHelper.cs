@@ -8,7 +8,7 @@ using MvvmCross.Forms.Bindings;
 using MvvmCross.Forms.Bindings.Target;
 using MvvmCross.Forms.Views;
 
-namespace MvvmCross.Forms.Base
+namespace MvvmCross.Forms.Core
 {
     public static class MvxFormsSetupHelper
     {
