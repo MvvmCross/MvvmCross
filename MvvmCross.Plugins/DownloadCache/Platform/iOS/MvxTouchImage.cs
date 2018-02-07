@@ -5,7 +5,7 @@
 using UIKit;
 using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.DownloadCache.iOS
+namespace MvvmCross.Plugin.DownloadCache.Platform.iOS
 {
     [Preserve(AllMembers = true)]
 	public class MvxIosImage

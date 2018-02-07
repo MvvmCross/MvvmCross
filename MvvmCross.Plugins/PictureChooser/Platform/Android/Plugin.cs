@@ -6,7 +6,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.PictureChooser.Droid
+namespace MvvmCross.Plugin.PictureChooser.Platform.Android
 {
     [Preserve(AllMembers = true)]
     public class Plugin

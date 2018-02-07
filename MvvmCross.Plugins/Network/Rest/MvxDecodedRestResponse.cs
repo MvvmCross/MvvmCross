@@ -4,7 +4,7 @@
 
 using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.Network.Rest
+namespace MvvmCross.Plugin.Network.Rest
 {
     [Preserve(AllMembers = true)]
 	public class MvxDecodedRestResponse<T>

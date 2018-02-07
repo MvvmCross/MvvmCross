@@ -5,7 +5,7 @@
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Plugins.Messenger.ThreadRunners;
 
-namespace MvvmCross.Plugins.Messenger.Subscriptions
+namespace MvvmCross.Plugin.Messenger.Subscriptions
 {
     public abstract class TypedSubscription<TMessage> : BaseSubscription
         where TMessage : MvxMessage

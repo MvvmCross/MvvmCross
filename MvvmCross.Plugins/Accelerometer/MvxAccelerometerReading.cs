@@ -4,7 +4,7 @@
 
 using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.Accelerometer
+namespace MvvmCross.Plugin.Accelerometer
 {
     [Preserve(AllMembers = true)]
     public class MvxAccelerometerReading

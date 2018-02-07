@@ -7,7 +7,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 
-namespace MvvmCross.Plugins.Accelerometer.Wpf
+namespace MvvmCross.Plugin.Accelerometer.Platform.Wpf
 {
     public class MvxAccelerometer : IMvxAccelerometer
     {

@@ -6,7 +6,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Plugins.File;
 
-namespace MvvmCross.Plugins.DownloadCache
+namespace MvvmCross.Plugin.DownloadCache
 {
     [Preserve(AllMembers = true)]
 	public static class MvxFileStoreHelper

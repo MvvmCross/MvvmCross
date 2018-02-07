@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.PhoneCall.iOS
+namespace MvvmCross.Plugin.PhoneCall.Platform.iOS
 {
     [Preserve(AllMembers = true)]
     public class Plugin

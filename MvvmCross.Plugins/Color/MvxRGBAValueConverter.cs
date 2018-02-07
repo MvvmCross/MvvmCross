@@ -4,7 +4,7 @@
 
 using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.Color
+namespace MvvmCross.Plugin.Color
 {
     [Preserve(AllMembers = true)]
 	public class MvxRGBAValueConverter : MvxRGBValueConverter

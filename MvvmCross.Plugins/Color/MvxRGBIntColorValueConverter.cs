@@ -6,7 +6,7 @@ using System.Globalization;
 using MvvmCross.Platform;
 using MvvmCross.Platform.UI;
 
-namespace MvvmCross.Plugins.Color
+namespace MvvmCross.Plugin.Color
 {
     [Preserve(AllMembers = true)]
 	public class MvxRGBIntColorValueConverter : MvxColorValueConverter<int>

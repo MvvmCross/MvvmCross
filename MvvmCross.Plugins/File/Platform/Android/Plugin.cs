@@ -7,7 +7,7 @@ using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.File.Droid
+namespace MvvmCross.Plugin.File.Platform.Android
 {
     [Preserve(AllMembers = true)]
     public class Plugin

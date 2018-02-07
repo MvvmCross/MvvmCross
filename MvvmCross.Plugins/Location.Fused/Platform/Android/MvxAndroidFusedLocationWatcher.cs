@@ -12,7 +12,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Plugins.Location.Fused.Droid
+namespace MvvmCross.Plugin.Location.Fused.Platform.Android
 {
     [Preserve(AllMembers = true)]
 	public class MvxAndroidFusedLocationWatcher

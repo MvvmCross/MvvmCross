@@ -6,7 +6,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.ResourceLoader.Droid
+namespace MvvmCross.Plugin.ResourceLoader.Platform.Android
 {
     [Preserve(AllMembers = true)]
     public class Plugin

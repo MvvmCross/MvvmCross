@@ -8,7 +8,7 @@ using System.Resources;
 using MvvmCross.Localization;
 using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.ResxLocalization
+namespace MvvmCross.Plugin.ResxLocalization
 {
     [Preserve(AllMembers = true)]
 	public class MvxResxTextProvider :

@@ -8,7 +8,7 @@ using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.Json
+namespace MvvmCross.Plugin.Json
 {
     [Preserve(AllMembers = true)]
     public class PluginLoader

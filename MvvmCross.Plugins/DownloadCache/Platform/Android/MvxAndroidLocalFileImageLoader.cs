@@ -13,7 +13,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Plugins.File;
 using Uri = Android.Net.Uri;
 
-namespace MvvmCross.Plugins.DownloadCache.Droid
+namespace MvvmCross.Plugin.DownloadCache.Platform.Android
 {
     [Preserve(AllMembers = true)]
 	public class MvxAndroidLocalFileImageLoader

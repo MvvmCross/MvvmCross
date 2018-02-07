@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.JsonLocalization
+namespace MvvmCross.Plugin.JsonLocalization
 {
     [Preserve(AllMembers = true)]
     public class PluginLoader

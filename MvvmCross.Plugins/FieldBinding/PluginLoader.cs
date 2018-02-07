@@ -6,7 +6,7 @@ using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.FieldBinding
+namespace MvvmCross.Plugin.FieldBinding
 {
     [Preserve(AllMembers = true)]
     public class PluginLoader

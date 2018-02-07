@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.Location
+namespace MvvmCross.Plugin.Location
 {
     [Preserve(AllMembers = true)]
     public class PluginLoader

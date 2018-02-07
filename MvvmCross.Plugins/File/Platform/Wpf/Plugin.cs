@@ -9,7 +9,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.File.Wpf
+namespace MvvmCross.Plugin.File.Platform.Wpf
 {
     public class Plugin
         : IMvxConfigurablePlugin

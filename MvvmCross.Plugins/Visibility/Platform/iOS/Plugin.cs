@@ -6,7 +6,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 using MvvmCross.Platform.UI;
 
-namespace MvvmCross.Plugins.Visibility.iOS
+namespace MvvmCross.Plugin.Visibility.Platform.iOS
 {
     [Preserve(AllMembers = true)]
     public class Plugin

@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MvvmCross.Plugins.Messenger
+namespace MvvmCross.Plugin.Messenger
 {
     public interface IMvxMessenger
     {

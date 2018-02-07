@@ -7,7 +7,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Plugins.JsonLocalization
+namespace MvvmCross.Plugin.JsonLocalization
 {
     [Preserve(AllMembers = true)]
 	public class MvxDictionaryTextProvider : MvxTextProvider

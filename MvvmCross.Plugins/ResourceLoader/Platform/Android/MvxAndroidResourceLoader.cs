@@ -8,7 +8,7 @@ using Android.Content.Res;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid;
 
-namespace MvvmCross.Plugins.ResourceLoader.Droid
+namespace MvvmCross.Plugin.ResourceLoader.Platform.Android
 {
     [Preserve(AllMembers = true)]
 	public class MvxAndroidResourceLoader

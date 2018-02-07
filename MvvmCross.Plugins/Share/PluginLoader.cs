@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.Share
+namespace MvvmCross.Plugin.Share
 {
     [Preserve(AllMembers = true)]
     public class PluginLoader

@@ -6,7 +6,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.PictureChooser.iOS
+namespace MvvmCross.Plugin.PictureChooser.Platform.iOS
 {
     [Preserve(AllMembers = true)]
     public class Plugin

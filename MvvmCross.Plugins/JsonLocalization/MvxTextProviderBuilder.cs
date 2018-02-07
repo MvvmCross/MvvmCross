@@ -9,7 +9,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Plugins.JsonLocalization
+namespace MvvmCross.Plugin.JsonLocalization
 {
     public abstract class MvxTextProviderBuilder
         : IMvxTextProviderBuilder

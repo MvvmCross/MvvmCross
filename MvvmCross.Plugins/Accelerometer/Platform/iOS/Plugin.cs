@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.Accelerometer.iOS
+namespace MvvmCross.Plugin.Accelerometer.Platform.Ios
 {
     [Preserve(AllMembers = true)]
     public class Plugin

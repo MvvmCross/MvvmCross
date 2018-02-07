@@ -5,7 +5,7 @@
 using Android.Widget;
 using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.Color.Droid.BindingTargets
+namespace MvvmCross.Plugin.Color.Platform.Android.BindingTargets
 {
     [Preserve(AllMembers = true)]
     public class MvxTextViewTextColorBinding

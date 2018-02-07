@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.WebBrowser.Wpf
+namespace MvvmCross.Plugin.WebBrowser.Platform.Wpf
 {
     public class Plugin
         : IMvxPlugin

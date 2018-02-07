@@ -5,7 +5,7 @@
 using System.Net.NetworkInformation;
 using MvvmCross.Plugins.Network.Reachability;
 
-namespace MvvmCross.Plugins.Network.Wpf.Reachability
+namespace MvvmCross.Plugin.Network.Platform.Wpf.Reachability
 {
     public class MvxWpfReachability : IMvxReachability
     {

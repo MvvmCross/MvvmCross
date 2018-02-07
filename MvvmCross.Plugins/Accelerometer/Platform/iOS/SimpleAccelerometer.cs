@@ -8,7 +8,7 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Exceptions;
 using UIKit;
 
-namespace MvvmCross.Plugins.Accelerometer.iOS
+namespace MvvmCross.Plugin.Accelerometer.Platform.Ios
 {
     [Preserve(AllMembers = true)]
     public class MvxAccelerometer

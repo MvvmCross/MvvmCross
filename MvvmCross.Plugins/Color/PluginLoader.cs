@@ -6,7 +6,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.Color
+namespace MvvmCross.Plugin.Color
 {
     [Preserve(AllMembers = true)]
     public class PluginLoader

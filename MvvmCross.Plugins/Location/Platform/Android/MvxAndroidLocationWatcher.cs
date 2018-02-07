@@ -14,7 +14,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Plugins.Location.Droid
+namespace MvvmCross.Plugin.Location.Platform.Android
 {
     [Preserve(AllMembers = true)]
 	public sealed class MvxAndroidLocationWatcher

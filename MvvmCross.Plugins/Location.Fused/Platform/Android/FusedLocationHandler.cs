@@ -13,7 +13,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Plugins.Location.Fused.Droid
+namespace MvvmCross.Plugin.Location.Fused.Platform.Android
 {
     [Preserve(AllMembers = true)]
 	public class FusedLocationHandler

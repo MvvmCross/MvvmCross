@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.Email
+namespace MvvmCross.Plugin.Email
 {
     [Preserve(AllMembers = true)]
     public class PluginLoader

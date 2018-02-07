@@ -11,7 +11,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Plugins.Network.Rest
+namespace MvvmCross.Plugin.Network.Rest
 {
     [Preserve(AllMembers = true)]
 	public class MvxRestClient : IMvxRestClient

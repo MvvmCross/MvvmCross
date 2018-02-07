@@ -13,7 +13,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Plugins.FieldBinding
+namespace MvvmCross.Plugin.FieldBinding
 {
     [Preserve(AllMembers = true)]
 	public class MvxChainedNotifyChangeFieldSourceBinding

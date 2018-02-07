@@ -7,7 +7,7 @@ using Android.OS;
 using Java.Lang;
 using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.Location.Droid
+namespace MvvmCross.Plugin.Location.Platform.Android
 {
     [Preserve(AllMembers = true)]
 	public class MvxLocationListener

@@ -7,7 +7,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.Visibility
+namespace MvvmCross.Plugin.Visibility
 {
     [Preserve(AllMembers = true)]
     public class PluginLoader

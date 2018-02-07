@@ -5,7 +5,7 @@
 using Foundation;
 using MvvmCross.Platform.Mac.Platform;
 
-namespace MvvmCross.Plugins.WebBrowser.Mac
+namespace MvvmCross.Plugin.WebBrowser.Platform.Mac
 {
     [Preserve(AllMembers = true)]
 	public class MvxWebBrowserTask : MvxMacTask, IMvxWebBrowserTask

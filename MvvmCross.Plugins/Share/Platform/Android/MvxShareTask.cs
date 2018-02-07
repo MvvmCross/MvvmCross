@@ -6,7 +6,7 @@ using Android.Content;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 
-namespace MvvmCross.Plugins.Share.Droid
+namespace MvvmCross.Plugin.Share.Platform.Android
 {
     [Preserve(AllMembers = true)]
 	public class MvxShareTask

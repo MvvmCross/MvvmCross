@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Plugins.Messenger.ThreadRunners;
 
-namespace MvvmCross.Plugins.Messenger.Subscriptions
+namespace MvvmCross.Plugin.Messenger.Subscriptions
 {
     public class StrongSubscription<TMessage> : TypedSubscription<TMessage>
         where TMessage : MvxMessage

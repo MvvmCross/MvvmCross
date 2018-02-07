@@ -7,7 +7,7 @@ using MvvmCross.Platform.Plugins;
 using MvvmCross.Plugins.Network.Reachability;
 using MvvmCross.Plugins.Network.Rest;
 
-namespace MvvmCross.Plugins.Network.iOS
+namespace MvvmCross.Plugin.Network.Platform.iOS
 {
     [Preserve(AllMembers = true)]
     public class Plugin

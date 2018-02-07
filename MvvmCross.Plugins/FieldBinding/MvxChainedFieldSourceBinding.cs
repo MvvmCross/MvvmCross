@@ -12,7 +12,7 @@ using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Converters;
 
-namespace MvvmCross.Plugins.FieldBinding
+namespace MvvmCross.Plugin.FieldBinding
 {
     [Preserve(AllMembers = true)]
 	public class MvxChainedFieldSourceBinding

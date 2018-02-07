@@ -12,7 +12,7 @@ using MvvmCross.iOS.Views.Presenters.Attributes;
 using MvvmCross.Platform;
 using UIKit;
 
-namespace MvvmCross.iOS.Support.XamarinSidebar
+namespace MvvmCross.Plugin.Sidebar
 {
     public class MvxSidebarPresenter : MvxIosViewPresenter
     {

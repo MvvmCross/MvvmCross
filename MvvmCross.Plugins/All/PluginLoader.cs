@@ -11,7 +11,7 @@ using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.All
+namespace MvvmCross.Plugin.All
 {
 #pragma warning disable CS0436 // Type conflicts with imported type
     [Preserve(AllMembers = true)]

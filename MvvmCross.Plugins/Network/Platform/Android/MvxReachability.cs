@@ -12,7 +12,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Plugins.Network.Reachability;
 
-namespace MvvmCross.Plugins.Network.Droid
+namespace MvvmCross.Plugin.Network.Platform.Android
 {
     [Preserve(AllMembers = true)]
 	public class MvxReachability : IMvxReachability

@@ -6,7 +6,7 @@ using System;
 using System.Device.Location;
 using MvvmCross.Platform.Exceptions;
 
-namespace MvvmCross.Plugins.Location.Wpf
+namespace MvvmCross.Plugin.Location.Platform.Wpf
 {
     /// <summary>
     /// Location Watcher Plugin for WPF developers.

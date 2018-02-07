@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.DownloadCache
+namespace MvvmCross.Plugin.DownloadCache
 {
     [Preserve(AllMembers = true)]
 	public class MvxFileDownloadedEventArgs

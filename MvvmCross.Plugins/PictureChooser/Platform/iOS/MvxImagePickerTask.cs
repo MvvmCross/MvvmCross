@@ -15,7 +15,7 @@ using MvvmCross.Platform.iOS.Views;
 using MvvmCross.Platform.Logging;
 using UIKit;
 
-namespace MvvmCross.Plugins.PictureChooser.iOS
+namespace MvvmCross.Plugin.PictureChooser.Platform.iOS
 {
     [MvvmCross.Platform.Preserve(AllMembers = true)]
 	public class MvxImagePickerTask

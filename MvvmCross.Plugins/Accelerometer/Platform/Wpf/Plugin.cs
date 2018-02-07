@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.Accelerometer.Wpf
+namespace MvvmCross.Plugin.Accelerometer.Platform.Wpf
 {
     public class Plugin
         : IMvxPlugin

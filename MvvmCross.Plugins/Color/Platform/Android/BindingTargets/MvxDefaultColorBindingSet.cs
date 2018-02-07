@@ -10,7 +10,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Plugins.Color.Droid.Binding;
 
-namespace MvvmCross.Plugins.Color.Droid.BindingTargets
+namespace MvvmCross.Plugin.Color.Platform.Android.BindingTargets
 {
     [Preserve(AllMembers = true)]
     public class MvxDefaultColorBindingSet

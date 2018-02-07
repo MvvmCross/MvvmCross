@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.FieldBinding
+namespace MvvmCross.Plugin.FieldBinding
 {
     public class NotifyChange
         : MvxMainThreadDispatchingObject, INotifyChange

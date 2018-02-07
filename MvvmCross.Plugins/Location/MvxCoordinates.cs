@@ -4,7 +4,7 @@
 
 using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.Location
+namespace MvvmCross.Plugin.Location
 {
     [Preserve(AllMembers = true)]
 	public class MvxCoordinates
