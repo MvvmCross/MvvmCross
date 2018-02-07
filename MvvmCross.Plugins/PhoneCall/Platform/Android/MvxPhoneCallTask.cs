@@ -10,7 +10,7 @@ using Java.Util;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Droid.Platform;
 
-namespace MvvmCross.Plugins.PhoneCall.Droid
+namespace MvvmCross.Plugin.PhoneCall.Platform.Android
 {
     [Preserve(AllMembers = true)]
 	public class MvxPhoneCallTask

@@ -8,7 +8,7 @@ using Foundation;
 using MvvmCross.Platform.Converters;
 using UIKit;
 
-namespace MvvmCross.Plugins.PictureChooser.iOS
+namespace MvvmCross.Plugin.PictureChooser.Platform.iOS
 {
     [Preserve(AllMembers = true)]
 	public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], UIImage>

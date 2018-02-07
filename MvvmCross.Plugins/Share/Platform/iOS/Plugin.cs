@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.Share.iOS
+namespace MvvmCross.Plugin.Share.Platform.iOS
 {
     [Preserve(AllMembers = true)]
     public class Plugin

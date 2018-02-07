@@ -10,7 +10,7 @@ using MvvmCross.iOS.Support.Views;
 using Twitter;
 using UIKit;
 
-namespace MvvmCross.Plugins.Share.iOS
+namespace MvvmCross.Plugin.Share.Platform.iOS
 {
     [MvvmCross.Platform.Preserve(AllMembers = true)]
 	public class MvxShareTask

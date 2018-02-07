@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross
+namespace MvvmCross.Plugin.MethodBinding
 {
     internal static class MvxPluginLog
     {

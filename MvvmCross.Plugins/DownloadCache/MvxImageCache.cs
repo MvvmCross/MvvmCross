@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Plugins.DownloadCache
+namespace MvvmCross.Plugin.DownloadCache
 {
     [Preserve(AllMembers = true)]
 	public class MvxImageCache<T>

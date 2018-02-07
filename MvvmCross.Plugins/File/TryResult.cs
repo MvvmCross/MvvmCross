@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-namespace MvvmCross.Plugins.File
+namespace MvvmCross.Plugin.File
 {
     public static class TryResult
     {

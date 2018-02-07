@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Plugins.Accelerometer
+namespace MvvmCross.Plugin.Accelerometer
 {
     public interface IMvxAccelerometer
     {

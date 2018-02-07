@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using Color = System.Windows.Media.Color;
 
-namespace MvvmCross.Plugins.PictureChooser.Wpf
+namespace MvvmCross.Plugin.PictureChooser.Platform.Wpf
 {
     public class MvxPictureChooserTask : IMvxPictureChooserTask
     {

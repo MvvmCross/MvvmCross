@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.WebBrowser.Droid
+namespace MvvmCross.Plugin.WebBrowser.Platform.Android
 {
     [Preserve(AllMembers = true)]
     public class Plugin

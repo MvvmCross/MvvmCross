@@ -7,7 +7,7 @@
 
 using System.Diagnostics;
 
-namespace MvvmCross.Plugins.Email.Wpf
+namespace MvvmCross.Plugin.Email.Platform.Wpf
 {
     public class MvxComposeEmailTask : IMvxComposeEmailTask
     {

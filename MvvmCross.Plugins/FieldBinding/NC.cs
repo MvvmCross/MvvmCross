@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MvvmCross.FieldBinding
+namespace MvvmCross.Plugin.FieldBinding
 {
     public class NC<T> : NotifyChange<T>, INC<T>
     {

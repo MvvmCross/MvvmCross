@@ -15,7 +15,7 @@ using MvvmCross.Platform.Platform;
 using SidebarNavigation;
 using UIKit;
 
-namespace MvvmCross.iOS.Support.XamarinSidebar.Views
+namespace MvvmCross.Plugin.Sidebar.Views
 {
     public class MvxSidebarViewController : UIViewController, IMvxSidebarViewController
     {

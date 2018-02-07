@@ -6,7 +6,7 @@ using MvvmCross.iOS.Support.XamarinSidebar.Views;
 using SidebarNavigation;
 using UIKit;
 
-namespace MvvmCross.iOS.Support.XamarinSidebar.Extensions
+namespace MvvmCross.Plugin.Sidebar.Extensions
 {
     public static class ViewControllerExtensions
     {

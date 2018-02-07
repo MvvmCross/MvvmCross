@@ -6,7 +6,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.ResourceLoader.iOS
+namespace MvvmCross.Plugin.ResourceLoader.Platform.iOS
 {
     [Preserve(AllMembers = true)]
     public class Plugin

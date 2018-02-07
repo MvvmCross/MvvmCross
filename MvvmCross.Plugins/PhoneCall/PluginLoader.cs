@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.PhoneCall
+namespace MvvmCross.Plugin.PhoneCall
 {
     [Preserve(AllMembers = true)]
     public class PluginLoader

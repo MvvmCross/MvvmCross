@@ -10,7 +10,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Plugins.File;
 
-namespace MvvmCross.Plugins.Network.Rest
+namespace MvvmCross.Plugin.Network.Rest
 {
     [Preserve(AllMembers = true)]
 	public class MvxMultiPartFormRestRequest

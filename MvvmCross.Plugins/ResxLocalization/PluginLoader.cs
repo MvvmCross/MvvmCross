@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.ResxLocalization
+namespace MvvmCross.Plugin.ResxLocalization
 {
     [Preserve(AllMembers = true)]
     public class PluginLoader

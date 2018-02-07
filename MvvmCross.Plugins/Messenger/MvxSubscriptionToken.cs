@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.Messenger
+namespace MvvmCross.Plugin.Messenger
 {
     [Preserve(AllMembers = true)]
 	public sealed class MvxSubscriptionToken

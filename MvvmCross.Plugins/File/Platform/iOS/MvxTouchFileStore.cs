@@ -4,7 +4,7 @@
 
 using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.File.iOS
+namespace MvvmCross.Plugin.File.Platform.iOS
 {
     [Preserve(AllMembers = true)]
     public class MvxIosFileStore : MvxIoFileStoreBase

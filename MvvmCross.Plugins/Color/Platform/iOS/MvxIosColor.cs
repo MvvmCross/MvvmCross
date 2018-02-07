@@ -6,7 +6,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.UI;
 using UIKit;
 
-namespace MvvmCross.Plugins.Color.iOS
+namespace MvvmCross.Plugin.Color.Platform.iOS
 {
     [Preserve(AllMembers = true)]
     public class MvxIosColor : IMvxNativeColor

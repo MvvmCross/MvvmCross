@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Plugins.Network.Rest
+namespace MvvmCross.Plugin.Network.Rest
 {
     [Preserve(AllMembers = true)]
 	public class MvxJsonRestClient

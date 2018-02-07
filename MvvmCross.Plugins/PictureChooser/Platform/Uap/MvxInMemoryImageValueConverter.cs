@@ -10,7 +10,7 @@ using System.IO;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace MvvmCross.Plugins.PictureChooser.Uwp
+namespace MvvmCross.Plugin.PictureChooser.Platform.Uap
 {
     [Preserve(AllMembers = true)]
     public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], BitmapImage>

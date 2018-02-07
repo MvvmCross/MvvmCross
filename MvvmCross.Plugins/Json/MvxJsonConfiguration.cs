@@ -4,7 +4,7 @@
 
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.Json
+namespace MvvmCross.Plugin.Json
 {
     [Preserve(AllMembers = true)]
 	public class MvxJsonConfiguration

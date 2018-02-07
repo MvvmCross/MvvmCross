@@ -8,7 +8,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.DownloadCache.Droid
+namespace MvvmCross.Plugin.DownloadCache.Platform.Android
 {
     [Preserve(AllMembers = true)]
     public class Plugin

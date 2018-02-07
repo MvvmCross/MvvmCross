@@ -5,7 +5,7 @@
 using Android.Locations;
 using Android.OS;
 
-namespace MvvmCross.Plugins.Location.Droid
+namespace MvvmCross.Plugin.Location.Platform.Android
 {
     public interface IMvxLocationReceiver
     {

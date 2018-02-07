@@ -6,7 +6,7 @@ using Android.Graphics;
 using Android.Support.V4.Graphics;
 using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.DownloadCache.Droid
+namespace MvvmCross.Plugin.DownloadCache.Platform.Android
 {
     [Preserve(AllMembers = true)]
 	public class MvxAndroidImage

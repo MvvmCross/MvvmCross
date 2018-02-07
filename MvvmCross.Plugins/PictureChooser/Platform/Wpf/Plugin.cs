@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.PictureChooser.Wpf
+namespace MvvmCross.Plugin.PictureChooser.Platform.Wpf
 {
     public class Plugin : IMvxPlugin
     {

@@ -22,7 +22,7 @@ using Uri = Android.Net.Uri;
 using ExifInterface = Android.Support.Media.ExifInterface;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Plugins.PictureChooser.Droid
+namespace MvvmCross.Plugin.PictureChooser.Platform.Android
 {
     [MvvmCross.Platform.Preserve(AllMembers = true)]
     public class MvxPictureChooserTask

@@ -6,7 +6,7 @@ using System;
 using Windows.Devices.Geolocation;
 using MvvmCross.Platform.Exceptions;
 
-namespace MvvmCross.Plugins.Location.Uwp
+namespace MvvmCross.Plugin.Location.Platform.Uap
 {
     public sealed class MvxWCommonLocationWatcher : MvxLocationWatcher
     {

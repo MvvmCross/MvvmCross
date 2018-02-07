@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.UI;
 
-namespace MvvmCross.Plugins.Color.Droid
+namespace MvvmCross.Plugin.Color.Platform.Android
 {
     [Preserve(AllMembers = true)]
     public class MvxAndroidColor : IMvxNativeColor

@@ -16,7 +16,7 @@ using MvvmCross.Platform.Droid.Platform;
 using MvvmCross.Platform.Droid.Views;
 using File = Java.IO.File;
 
-namespace MvvmCross.Plugins.Email.Droid
+namespace MvvmCross.Plugin.Email.Platform.Android
 {
     [Preserve(AllMembers = true)]
     public class MvxComposeEmailTask

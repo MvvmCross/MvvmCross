@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.Email.iOS
+namespace MvvmCross.Plugin.Email.Platform.iOS
 {
     [Preserve(AllMembers = true)]
     public class Plugin

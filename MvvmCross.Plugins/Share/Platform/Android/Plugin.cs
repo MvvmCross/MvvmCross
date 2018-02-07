@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.Share.Droid
+namespace MvvmCross.Plugin.Share.Platform.Android
 {
     [Preserve(AllMembers = true)]
     public class Plugin

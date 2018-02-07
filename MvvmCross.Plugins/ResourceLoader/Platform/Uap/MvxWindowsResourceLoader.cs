@@ -7,7 +7,7 @@ using System.IO;
 using Windows.ApplicationModel;
 using MvvmCross.Platform.Uwp.Platform;
 
-namespace MvvmCross.Plugins.ResourceLoader.Uwp
+namespace MvvmCross.Plugin.ResourceLoader.Platform.Uap
 {
     public class MvxStoreResourceLoader : MvxResourceLoader
     {

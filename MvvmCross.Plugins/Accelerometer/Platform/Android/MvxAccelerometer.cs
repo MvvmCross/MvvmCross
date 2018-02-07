@@ -11,7 +11,7 @@ using MvvmCross.Platform.Droid;
 using MvvmCross.Platform.Exceptions;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Plugins.Accelerometer.Droid
+namespace MvvmCross.Plugin.Accelerometer.Platform.Android
 {
     [Preserve(AllMembers = true)]
     public class MvxAccelerometer

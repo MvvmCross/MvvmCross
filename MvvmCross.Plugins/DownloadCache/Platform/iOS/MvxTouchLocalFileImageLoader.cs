@@ -8,7 +8,7 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Plugins.File;
 using UIKit;
 
-namespace MvvmCross.Plugins.DownloadCache.iOS
+namespace MvvmCross.Plugin.DownloadCache.Platform.iOS
 {
     [Preserve(AllMembers = true)]
 	public class MvxIosLocalFileImageLoader

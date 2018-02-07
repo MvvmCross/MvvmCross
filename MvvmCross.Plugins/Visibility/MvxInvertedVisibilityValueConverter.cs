@@ -7,7 +7,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.ExtensionMethods;
 using MvvmCross.Platform.UI;
 
-namespace MvvmCross.Plugins.Visibility
+namespace MvvmCross.Plugin.Visibility
 {
     [Preserve(AllMembers = true)]
     public class MvxInvertedVisibilityValueConverter : MvxVisibilityValueConverter

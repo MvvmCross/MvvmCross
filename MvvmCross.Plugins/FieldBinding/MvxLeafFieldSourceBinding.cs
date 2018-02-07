@@ -7,7 +7,7 @@ using System.Reflection;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.FieldBinding
+namespace MvvmCross.Plugin.FieldBinding
 {
     [Preserve(AllMembers = true)]
 	public class MvxLeafFieldSourceBinding

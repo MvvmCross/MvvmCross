@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.WebBrowser.iOS
+namespace MvvmCross.Plugin.WebBrowser.Platform.iOS
 {
     [Preserve(AllMembers = true)]
     public class Plugin

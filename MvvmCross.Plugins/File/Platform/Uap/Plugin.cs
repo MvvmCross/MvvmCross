@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.File.Uwp
+namespace MvvmCross.Plugin.File.Platform.Uap
 {
     public class Plugin
         : IMvxPlugin

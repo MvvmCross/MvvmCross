@@ -6,7 +6,7 @@ using System;
 using System.IO;
 using System.Windows;
 
-namespace MvvmCross.Plugins.ResourceLoader.Wpf
+namespace MvvmCross.Plugin.ResourceLoader.Platform.Wpf
 {
     public class MvxWpfResourceLoader : MvxResourceLoader
     {

@@ -7,7 +7,7 @@ using MvvmCross.Platform.Core;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Plugins.Messenger.ThreadRunners
+namespace MvvmCross.Plugin.Messenger.ThreadRunners
 {
     public class MvxMainThreadActionRunner
         : IMvxActionRunner

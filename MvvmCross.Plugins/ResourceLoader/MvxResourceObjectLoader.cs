@@ -7,7 +7,7 @@ using System.IO;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Plugins.ResourceLoader
+namespace MvvmCross.Plugin.ResourceLoader
 {
     public abstract class MvxResourceObjectLoader<TResource>
         : MvxResourceProvider, IMvxResourceObjectLoaderConfiguration<TResource>, IMvxResourceObjectLoader<TResource>

@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.Accelerometer.Droid
+namespace MvvmCross.Plugin.Accelerometer.Platform.Android
 {
     [Preserve(AllMembers = true)]
     public class Plugin

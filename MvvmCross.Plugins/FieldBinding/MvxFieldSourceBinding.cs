@@ -6,7 +6,7 @@ using System;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Source;
 
-namespace MvvmCross.Plugins.FieldBinding
+namespace MvvmCross.Plugin.FieldBinding
 {
     public abstract class MvxFieldSourceBinding
         : MvxSourceBinding

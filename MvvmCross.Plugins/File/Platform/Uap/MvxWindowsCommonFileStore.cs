@@ -13,7 +13,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Platform.Uwp.Platform;
 using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Plugins.File.Uwp
+namespace MvvmCross.Plugin.File.Platform.Uap
 {
     // note that we use the full WindowsStore name here deliberately to avoid 'Store' naming confusion
     public class MvxWindowsCommonFileStore : MvxFileStoreBase

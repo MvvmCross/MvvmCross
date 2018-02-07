@@ -8,7 +8,7 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Droid.Target;
 using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.Color.Droid.BindingTargets
+namespace MvvmCross.Plugin.Color.Platform.Android.BindingTargets
 {
     [Preserve(AllMembers = true)]
 	public abstract class MvxViewColorBinding

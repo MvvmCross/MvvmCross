@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Plugins.Messenger
+namespace MvvmCross.Plugin.Messenger
 {
     /// <summary>
     /// Base class for messages that provides weak refrence storage of the sender

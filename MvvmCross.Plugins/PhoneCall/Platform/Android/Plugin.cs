@@ -5,7 +5,7 @@
 using MvvmCross.Platform;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.PhoneCall.Droid
+namespace MvvmCross.Plugin.PhoneCall.Platform.Android
 {
     [Preserve(AllMembers = true)]
     public class Plugin

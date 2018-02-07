@@ -10,7 +10,7 @@ using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Plugins.File
+namespace MvvmCross.Plugin.File.HackFileShare
 {
     public class MvxIoFileStoreBase
         : MvxFileStoreBase

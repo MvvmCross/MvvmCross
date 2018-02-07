@@ -5,7 +5,7 @@
 using System.IO;
 using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.Email
+namespace MvvmCross.Plugin.Email
 {
     [Preserve(AllMembers = true)]
 	public class EmailAttachment

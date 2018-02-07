@@ -7,7 +7,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.Exceptions;
 using MvvmCross.Platform.Plugins;
 
-namespace MvvmCross.Plugins.File.iOS
+namespace MvvmCross.Plugin.File.Platform.iOS
 {
     [Preserve(AllMembers = true)]
     public class Plugin
