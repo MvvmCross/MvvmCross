@@ -1,9 +1,8 @@
+﻿using System;
+using System.Threading.Tasks;
+using System.Windows;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
-using MvvmCross.Wpf.Views.Presenters;
-using System;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace Playground.Wpf
 {
@@ -14,7 +13,7 @@ namespace Playground.Wpf
     {
         bool _setupComplete = false;
 
-        void DoSetup()
+        private async Task DoSetup()
         {
             // Hint: You can also set a ContentControl of the Window.
             // var setup = new Setup(Dispatcher, MainWindow.FindName("FooContentControl") as ContentControl);
@@ -22,15 +21,15 @@ namespace Playground.Wpf
             setup.Initialize();
 
             var start = Mvx.Resolve<IMvxAppStart>();
-            start.Start();
+            await start.StartAsync();
 
             _setupComplete = true;
         }
 
-        protected override void OnActivated(EventArgs e)
+        protected async override void OnActivated(EventArgs e)
         {
             if (!_setupComplete)
-                DoSetup();
+                await DoSetup();
 
             base.OnActivated(e);
         }
