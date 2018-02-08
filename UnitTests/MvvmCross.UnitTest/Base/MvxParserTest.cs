@@ -100,6 +100,13 @@ namespace MvvmCross.UnitTest.Base
             {
                 return ReadTextUntilWhitespaceOr(items);
             }
+
+            public bool CallIsValidFirstCharacterOfCSharpName(char character)
+            {
+                return IsValidFirstCharacterOfCSharpName(character);
+            }
+
+
         }
 
         [Fact]
@@ -327,6 +334,61 @@ namespace MvvmCross.UnitTest.Base
                 }
                 Assert.True(exceptionThrown);
             }
+        }
+
+        [Fact]
+        public void Reset_Resets_FullText_And_Index()
+        {
+            var parser = new Parser();
+            parser.CallReset("derp")
+
+            Assert.Equal(0, parser.GetCurrentIndex());
+            Assert.Equal("derp", parser.GetFullText());
+        }
+
+        [Theory]
+        [InlineData('a')]
+        [InlineData('b')]
+        [InlineData('c')]
+        [InlineData('d')]
+        [InlineData('e')]
+        [InlineData('f')]
+        [InlineData('g')]
+        [InlineData('_')]
+        [InlineData('Z')]
+        [InlineData('Æ')]
+        [InlineData('ø')]
+        [InlineData('ä')]
+        [InlineData('µ')]
+        public void TestIsValidFirstCharacterOfCSharpName_OK(char character)
+        {
+            var parser = new Parser();
+            var result = parser.CallIsValidFirstCharacterOfCSharpName(character);
+            Assert.True(result);
+        }
+
+        [Theory]
+        [InlineData('1')]
+        [InlineData(' ')]
+        [InlineData('-')]
+        [InlineData('\\')]
+        [InlineData('^')]
+        [InlineData('%')]
+        [InlineData('$')]
+        [InlineData('#')]
+        [InlineData('@')]
+        [InlineData('!')]
+        [InlineData('&')]
+        [InlineData('*')]
+        [InlineData('(')]
+        [InlineData(')')]
+        [InlineData('+')]
+        [InlineData('=')]
+        public void TestIsValidFirstCharacterOfCSharpName_Fail(char character)
+        {
+            var parser = new Parser();
+            var result = parser.CallIsValidFirstCharacterOfCSharpName(character);
+            Assert.False(result);
         }
     }
 }
