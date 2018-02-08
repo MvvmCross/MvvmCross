@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using MvvmCross.Base;
 using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
 using MvvmCross.Base.Plugins;
 using MvvmCross.Plugin.File.HackFileShare;
 
