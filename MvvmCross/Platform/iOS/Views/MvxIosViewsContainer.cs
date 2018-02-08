@@ -4,9 +4,9 @@
 
 using System;
 using System.Reflection;
+using MvvmCross.Base.Exceptions;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform.Exceptions;
 using UIKit;
 
 namespace MvvmCross.Platform.Ios.Views

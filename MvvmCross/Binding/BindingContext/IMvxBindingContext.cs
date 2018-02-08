@@ -4,8 +4,8 @@
 
 using System;
 using System.Collections.Generic;
+using MvvmCross.Base.Core;
 using MvvmCross.Binding.Bindings;
-using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Binding.BindingContext
 {

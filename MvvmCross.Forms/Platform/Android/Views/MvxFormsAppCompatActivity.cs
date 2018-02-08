@@ -8,16 +8,9 @@ using Android.OS;
 using Android.Util;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Droid.Views;
-using MvvmCross.Forms.Droid.Views.EventSource;
-using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
-using MvvmCross.Platform;
 
 namespace MvvmCross.Forms.Platform.Android.Views
 {

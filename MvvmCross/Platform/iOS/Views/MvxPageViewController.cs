@@ -5,11 +5,10 @@
 using System;
 using System.Collections.Generic;
 using Foundation;
+using MvvmCross.Base.Logging;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.iOS.Views;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Ios.Base.Views;
 using UIKit;
 
 namespace MvvmCross.Platform.Ios.Views

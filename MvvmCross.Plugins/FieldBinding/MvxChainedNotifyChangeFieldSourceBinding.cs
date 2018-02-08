@@ -4,14 +4,12 @@
 
 using System;
 using System.Collections.Generic;
+using MvvmCross.Base;
+using MvvmCross.Base.Converters;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using MvvmCross.FieldBinding;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Plugin.FieldBinding
 {

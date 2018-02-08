@@ -5,9 +5,9 @@
 using System;
 using System.Collections.Generic;
 using Android.Views;
+using MvvmCross.Base;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid;
+using MvvmCross.Platform.Android.Base;
 
 namespace MvvmCross.Platform.Android.Views.Attributes
 {
@@ -20,7 +20,7 @@ namespace MvvmCross.Platform.Android.Views.Attributes
 
         public MvxFragmentPresentationAttribute(
             Type activityHostViewModelType = null,
-            int fragmentContentId = Android.Resource.Id.Content,
+            int fragmentContentId = global::Android.Resource.Id.Content,
             bool addToBackStack = false,
             int enterAnimation = int.MinValue,
             int exitAnimation = int.MinValue,
@@ -59,7 +59,7 @@ namespace MvvmCross.Platform.Android.Views.Attributes
             var context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext;
 
             ActivityHostViewModelType = activityHostViewModelType;
-            FragmentContentId = !string.IsNullOrEmpty(fragmentContentResourceName) ? context.Resources.GetIdentifier(fragmentContentResourceName, "id", context.PackageName) : Android.Resource.Id.Content;
+            FragmentContentId = !string.IsNullOrEmpty(fragmentContentResourceName) ? context.Resources.GetIdentifier(fragmentContentResourceName, "id", context.PackageName) : global::Android.Resource.Id.Content;
             AddToBackStack = addToBackStack;
             EnterAnimation = !string.IsNullOrEmpty(enterAnimation) ? context.Resources.GetIdentifier(enterAnimation, "animation", context.PackageName) : int.MinValue;
             ExitAnimation = !string.IsNullOrEmpty(exitAnimation) ? context.Resources.GetIdentifier(exitAnimation, "animation", context.PackageName) : int.MinValue;
@@ -83,7 +83,7 @@ namespace MvvmCross.Platform.Android.Views.Attributes
         /// <summary>
         /// Content id - place where to show fragment.
         /// </summary>
-        public int FragmentContentId { get; set; } = Android.Resource.Id.Content;
+        public int FragmentContentId { get; set; } = global::Android.Resource.Id.Content;
 
         public static bool DefaultAddToBackStack = false;
         /// <summary>

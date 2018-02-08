@@ -3,11 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
+using MvvmCross.Base;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.Exceptions;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Bindings

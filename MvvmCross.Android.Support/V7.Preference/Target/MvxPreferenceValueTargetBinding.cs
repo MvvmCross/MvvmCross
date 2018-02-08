@@ -4,9 +4,6 @@
 
 using System;
 using MvvmCross.Binding;
-using MvvmCross.Binding.Droid.Target;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Droid.Support.V7.Preference.Target
 {

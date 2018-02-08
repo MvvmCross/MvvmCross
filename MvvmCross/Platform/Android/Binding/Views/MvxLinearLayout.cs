@@ -8,7 +8,9 @@ using System.Collections.Specialized;
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
+using Android.Views;
 using Android.Widget;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
 
@@ -45,7 +47,7 @@ namespace MvvmCross.Platform.Android.Binding.Views
             this.UpdateDataSetFromChange(sender, eventArgs);
         }
 
-        private void OnChildViewRemoved(object sender, ChildViewRemovedEventArgs childViewRemovedEventArgs)
+        private void OnChildViewRemoved(object sender, ViewGroup.ChildViewRemovedEventArgs childViewRemovedEventArgs)
         {
             var boundChild = childViewRemovedEventArgs.Child as IMvxBindingContextOwner;
             boundChild?.ClearAllBindings();

@@ -5,9 +5,9 @@
 using System;
 using System.Collections.Generic;
 using MvvmCross.Localization;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
+using MvvmCross.Base.Platform;
 
 namespace MvvmCross.Plugin.JsonLocalization
 {

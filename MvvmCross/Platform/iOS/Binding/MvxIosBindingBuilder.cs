@@ -3,14 +3,15 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using MvvmCross.Base.Converters;
+using MvvmCross.Base.Platform;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Binding.iOS.Target;
-using MvvmCross.Binding.iOS.ValueConverters;
-using MvvmCross.Binding.iOS.Views;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Ios.Binding.Target;
+using MvvmCross.Platform.Ios.Binding.ValueConverters;
+using MvvmCross.Platform.Ios.Binding.Views;
 using UIKit;
 
 namespace MvvmCross.Platform.Ios.Binding

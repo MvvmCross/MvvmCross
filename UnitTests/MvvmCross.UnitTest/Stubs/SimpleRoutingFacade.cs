@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Test.Mocks.TestViewModels;
+using MvvmCross.UnitTest.Mocks.TestViewModels;
 
 namespace MvvmCross.UnitTest.Stubs
 {

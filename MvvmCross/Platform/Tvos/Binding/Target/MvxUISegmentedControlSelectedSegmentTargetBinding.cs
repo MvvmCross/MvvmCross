@@ -4,8 +4,8 @@
 
 using System;
 using System.Reflection;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
 using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Binding.Target

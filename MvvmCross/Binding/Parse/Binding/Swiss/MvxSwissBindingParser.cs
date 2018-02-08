@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Base.Exceptions;
 
 namespace MvvmCross.Binding.Parse.Binding.Swiss
 {

@@ -3,8 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using Windows.ApplicationModel;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.IoC;
+using MvvmCross.Base;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.IoC;
 
 namespace MvvmCross.Platform.Uap.Base.Platform
 {

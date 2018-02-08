@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base;
+using MvvmCross.Base.Logging;
 
 namespace MvvmCross.Binding.BindingContext
 {

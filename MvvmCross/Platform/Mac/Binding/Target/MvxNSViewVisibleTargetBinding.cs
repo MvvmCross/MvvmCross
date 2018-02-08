@@ -4,6 +4,7 @@
 
 using System;
 using AppKit;
+using MvvmCross.Binding;
 
 namespace MvvmCross.Platform.Mac.Binding.Target
 {

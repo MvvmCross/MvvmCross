@@ -7,7 +7,7 @@ using System.Windows.Input;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Platform.Android.Binding.BindingContext;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {

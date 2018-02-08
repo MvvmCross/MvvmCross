@@ -6,14 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CoreGraphics;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.iOS.Views.Presenters.Attributes;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
 using MvvmCross.Core.Views;
+using MvvmCross.Platform.Ios.Views.Presenters.Attributes;
 using UIKit;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Platform.Ios.Views.Presenters
 {

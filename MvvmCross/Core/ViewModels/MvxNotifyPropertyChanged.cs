@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
-using MvvmCross.Platform.Core;
-using JetBrains.Annotations;
+using MvvmCross.Base.Core;
+using MvvmCross.Core.Annotations;
 
 namespace MvvmCross.Core.ViewModels
 {

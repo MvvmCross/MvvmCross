@@ -3,9 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.Exceptions;
 using UIKit;
 
 namespace MvvmCross.Plugin.Accelerometer.Platform.Ios

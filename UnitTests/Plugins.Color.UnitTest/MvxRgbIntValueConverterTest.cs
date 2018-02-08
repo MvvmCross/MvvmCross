@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Globalization;
+using MvvmCross.Plugin.Color;
 using MvvmCross.Test;
 using Xunit;
 

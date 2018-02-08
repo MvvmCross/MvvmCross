@@ -4,6 +4,7 @@
 
 using System;
 using System.Windows;
+using MvvmCross.Binding;
 
 namespace MvvmCross.Platform.Wpf.Binding.MvxBinding.Target
 {

@@ -4,13 +4,11 @@
 
 using System;
 using Foundation;
+using MvvmCross.Base;
 using MvvmCross.Core.Platform;
 using MvvmCross.Forms.Views;
-using MvvmCross.iOS.Platform;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Ios.Core;
 using UIKit;
-using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 namespace MvvmCross.Forms.Platform.iOS.Core

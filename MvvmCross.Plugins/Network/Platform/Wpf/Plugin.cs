@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.Plugins;
-using MvvmCross.Plugins.Network.Reachability;
-using MvvmCross.Plugins.Network.Rest;
-using MvvmCross.Plugins.Network.Wpf.Reachability;
+using MvvmCross.Base;
+using MvvmCross.Base.Plugins;
+using MvvmCross.Plugin.Network.Platform.Wpf.Reachability;
+using MvvmCross.Plugin.Network.Reachability;
+using MvvmCross.Plugin.Network.Rest;
 
 namespace MvvmCross.Plugin.Network.Platform.Wpf
 {

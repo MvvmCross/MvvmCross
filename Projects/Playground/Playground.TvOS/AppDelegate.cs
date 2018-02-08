@@ -1,9 +1,9 @@
 ﻿using Foundation;
+using MvvmCross.Base;
 using UIKit;
 
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
-using MvvmCross.tvOS.Platform;
+using MvvmCross.Platform.Tvos.Core;
 
 namespace Playground.TvOS
 {

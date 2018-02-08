@@ -4,7 +4,7 @@
 
 using System;
 using System.IO;
-using MvvmCross.Platform;
+using MvvmCross.Base;
 
 namespace MvvmCross.Plugin.Network.Rest
 {

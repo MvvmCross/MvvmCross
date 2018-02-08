@@ -6,11 +6,10 @@ using System;
 using System.Collections;
 using System.Collections.Specialized;
 using Foundation;
+using MvvmCross.Base.Logging;
+using MvvmCross.Base.WeakSubscription;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.WeakSubscription;
 using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Binding.Views

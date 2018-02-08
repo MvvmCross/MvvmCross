@@ -9,9 +9,9 @@ using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Support.V4;
-using MvvmCross.Droid.Views;
+using MvvmCross.Platform.Android.Core;
+using MvvmCross.Platform.Android.Views;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {

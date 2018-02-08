@@ -8,9 +8,10 @@ using Moq;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Test.Mocks.Dispatchers;
-using MvvmCross.Test.Mocks.ViewModels;
-using Xunit;
+ using MvvmCross.Test;
+ using MvvmCross.UnitTest.Mocks.Dispatchers;
+ using MvvmCross.UnitTest.Mocks.ViewModels;
+ using Xunit;
 
 namespace MvvmCross.UnitTest.Navigation
 {

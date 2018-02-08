@@ -4,15 +4,14 @@
 
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Wpf.Views.Presenters.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using MvvmCross.Base;
+using MvvmCross.Base.Logging;
+using MvvmCross.Platform.Wpf.Views.Presenters.Attributes;
 
 namespace MvvmCross.Platform.Wpf.Views.Presenters
 {

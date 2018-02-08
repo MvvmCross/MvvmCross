@@ -4,7 +4,7 @@
 
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Test.Mocks.TestViewModels;
+using MvvmCross.UnitTest.Mocks.TestViewModels;
 
 namespace MvvmCross.UnitTest.Mocks.TestViews
 {

@@ -4,7 +4,7 @@
 
 using Android.Content;
 using Android.Util;
-using MvvmCross.Binding.Droid.ResourceHelpers;
+using MvvmCross.Platform.Android.Binding.ResourceHelpers;
 
 namespace MvvmCross.Platform.Android.Binding.Views
 {

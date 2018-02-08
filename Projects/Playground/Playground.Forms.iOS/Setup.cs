@@ -1,13 +1,11 @@
 ﻿using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.iOS;
-using MvvmCross.Forms.Platform;
-using MvvmCross.iOS.Platform;
-using MvvmCross.Platform.Platform;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform.iOS.Core;
+using MvvmCross.Platform.Ios.Core;
 using UIKit;
-using MvvmCross.Plugins.Json;
 
 namespace Playground.Forms.iOS
 {

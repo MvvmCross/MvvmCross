@@ -8,12 +8,12 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using MvvmCross.Base.Converters;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Binding.Parse.PropertyPath;
-using MvvmCross.Platform.Converters;
 using MvvmCross.Test;
 using Xunit;
 

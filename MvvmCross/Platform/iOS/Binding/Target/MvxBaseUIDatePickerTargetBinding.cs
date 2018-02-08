@@ -5,10 +5,10 @@
 using System;
 using System.Reflection;
 using Foundation;
+using MvvmCross.Base.WeakSubscription;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.iOS;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Platform.Ios.Base;
 using UIKit;
 
 namespace MvvmCross.Platform.Ios.Binding.Target

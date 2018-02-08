@@ -5,11 +5,10 @@
 using System;
 using System.Collections.Generic;
 using Android.OS;
+using MvvmCross.Base;
+using MvvmCross.Base.Logging;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Android.Core;
 
 namespace MvvmCross.Platform.Android.Views
 {

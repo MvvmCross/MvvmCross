@@ -5,9 +5,9 @@
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using MvvmCross.Base;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Platform;
+using MvvmCross.Platform.Android.Core;
 
 namespace MvvmCross.Platform.Android.Views
 {

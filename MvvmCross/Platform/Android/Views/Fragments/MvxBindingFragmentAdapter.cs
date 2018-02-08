@@ -5,14 +5,13 @@
 using System;
 using Android.App;
 using Android.OS;
+using MvvmCross.Base;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.Logging;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Droid.Views.Fragments.EventSource;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Platform.Android.Core;
+using MvvmCross.Platform.Android.Views.Fragments.EventSource;
 
 namespace MvvmCross.Platform.Android.Views.Fragments
 {

@@ -5,12 +5,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MvvmCross.Base;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using MvvmCross.FieldBinding;
-using MvvmCross.Platform;
 
 namespace MvvmCross.Plugin.FieldBinding
 {

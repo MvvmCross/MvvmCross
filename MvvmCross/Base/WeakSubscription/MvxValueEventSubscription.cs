@@ -4,7 +4,7 @@
 
 using System;
 using System.Reflection;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base.Core;
 
 namespace MvvmCross.Base.WeakSubscription
 {

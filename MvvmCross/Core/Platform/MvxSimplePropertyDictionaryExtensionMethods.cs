@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Exceptions;
 using System.Globalization;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
 
 namespace MvvmCross.Core.Platform
 {

@@ -4,11 +4,10 @@
 
 using System;
 using System.Linq;
+using MvvmCross.Base;
+using MvvmCross.Base.Logging;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Platform.Android.Views.Attributes
 {

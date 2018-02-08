@@ -6,8 +6,8 @@ using System;
 using System.Globalization;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base.Converters;
+using MvvmCross.Base.Logging;
 
 namespace MvvmCross.Platform.Uap.Base.Converters
 {

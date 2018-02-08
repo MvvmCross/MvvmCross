@@ -4,7 +4,7 @@
 
 using System;
 using System.Net;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base.Core;
 
 namespace MvvmCross.Plugin.DownloadCache
 {

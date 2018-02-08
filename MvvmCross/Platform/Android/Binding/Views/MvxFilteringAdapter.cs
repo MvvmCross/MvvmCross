@@ -9,10 +9,9 @@ using Android.Content;
 using Android.Runtime;
 using Android.Widget;
 using Java.Lang;
-using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Platform.Droid;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base.Logging;
+using MvvmCross.Platform.Android.Base;
+using MvvmCross.Platform.Android.Binding.BindingContext;
 using Object = Java.Lang.Object;
 using String = Java.Lang.String;
 

@@ -4,9 +4,9 @@
 
 using System;
 using System.Reflection;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.IoC;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.IoC;
+using MvvmCross.Base.Logging;
 
 namespace MvvmCross.Base.Platform
 {

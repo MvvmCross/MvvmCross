@@ -7,14 +7,15 @@ using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using Moq;
+using MvvmCross.Base.Exceptions;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Test.Mocks.Dispatchers;
-using MvvmCross.Test.Mocks.TestViewModels;
-using MvvmCross.Test.Mocks.ViewModels;
-using MvvmCross.Test.Stubs;
+using MvvmCross.Test;
+using MvvmCross.UnitTest.Mocks.Dispatchers;
+using MvvmCross.UnitTest.Mocks.TestViewModels;
+using MvvmCross.UnitTest.Mocks.ViewModels;
+using MvvmCross.UnitTest.Stubs;
 using Xunit;
 
 [assembly: MvxNavigation(typeof(ViewModelA), @"https?://mvvmcross.com/blog")]

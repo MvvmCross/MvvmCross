@@ -7,13 +7,11 @@ using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
+using MvvmCross.Base.Platform;
+using MvvmCross.Plugin.Network.Rest;
 
-namespace MvvmCross.Plugin.Network.Rest
-{
-    [Preserve(AllMembers = true)]
-	public class MvxJsonRestClient
+public class MvxJsonRestClient
         : MvxRestClient, IMvxJsonRestClient
     {
         public Func<IMvxJsonConverter> JsonConverterProvider { get; set; }

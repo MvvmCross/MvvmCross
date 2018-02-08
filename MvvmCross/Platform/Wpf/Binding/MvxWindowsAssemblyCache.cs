@@ -4,8 +4,8 @@
 
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.Exceptions;
 
 namespace MvvmCross.Platform.Wpf.Binding
 {

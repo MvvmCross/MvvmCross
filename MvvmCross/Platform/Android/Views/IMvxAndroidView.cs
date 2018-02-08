@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform.Droid.Views;
+using MvvmCross.Platform.Android.Base.Views;
+using MvvmCross.Platform.Android.Binding.Views;
 
 namespace MvvmCross.Platform.Android.Views
 {

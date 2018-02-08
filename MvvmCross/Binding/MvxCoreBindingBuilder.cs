@@ -2,6 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using MvvmCross.Base;
+using MvvmCross.Base.Converters;
+using MvvmCross.Base.Platform;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Combiners;
@@ -12,9 +15,6 @@ using MvvmCross.Binding.Parse.Binding.Tibet;
 using MvvmCross.Binding.Parse.PropertyPath;
 using MvvmCross.Binding.ValueConverters;
 using MvvmCross.Localization;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding
 {

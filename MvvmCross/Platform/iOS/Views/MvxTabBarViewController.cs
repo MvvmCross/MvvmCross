@@ -5,10 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MvvmCross.Base;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.iOS.Views.Presenters;
-using MvvmCross.iOS.Views.Presenters.Attributes;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Ios.Views.Presenters;
+using MvvmCross.Platform.Ios.Views.Presenters.Attributes;
 using UIKit;
 
 namespace MvvmCross.Platform.Ios.Views

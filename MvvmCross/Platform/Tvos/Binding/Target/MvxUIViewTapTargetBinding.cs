@@ -4,8 +4,9 @@
 
 using System;
 using System.Windows.Input;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Binding.tvOS.Views.Gestures;
+using MvvmCross.Platform.Tvos.Binding.Views.Gestures;
 using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Binding.Target

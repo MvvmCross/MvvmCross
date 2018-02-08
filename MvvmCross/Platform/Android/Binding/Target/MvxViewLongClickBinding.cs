@@ -5,7 +5,8 @@
 using System;
 using System.Windows.Input;
 using Android.Views;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Binding;
+using MvvmCross.Platform.Android.Base.WeakSubscription;
 
 namespace MvvmCross.Platform.Android.Binding.Target
 {

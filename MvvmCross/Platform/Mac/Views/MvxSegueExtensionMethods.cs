@@ -9,10 +9,9 @@ using AppKit;
 using Foundation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Mac.Views;
 using MvvmCross.Core.Platform;
 using System.Reflection;
+using MvvmCross.Platform.Mac.Base.Views;
 
 namespace MvvmCross.Platform.Mac.Views
 {

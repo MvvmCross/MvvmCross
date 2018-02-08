@@ -4,9 +4,9 @@
 
 using System;
 using Android.Preferences;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Base.Logging;
+using MvvmCross.Binding;
+using MvvmCross.Platform.Android.Base.WeakSubscription;
 
 namespace MvvmCross.Platform.Android.Binding.Target
 {

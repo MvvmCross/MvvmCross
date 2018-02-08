@@ -5,11 +5,11 @@
 using System;
 using System.Collections.Generic;
 using Foundation;
+using MvvmCross.Base;
+using MvvmCross.Base.Logging;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
 using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Binding.Views

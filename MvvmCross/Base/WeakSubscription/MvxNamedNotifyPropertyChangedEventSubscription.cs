@@ -5,7 +5,7 @@
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base.Core;
 
 namespace MvvmCross.Base.WeakSubscription
 {

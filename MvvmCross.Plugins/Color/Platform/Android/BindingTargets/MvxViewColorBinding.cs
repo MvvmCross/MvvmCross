@@ -4,9 +4,8 @@
 
 using System;
 using Android.Views;
+using Java.Lang.Annotation;
 using MvvmCross.Binding;
-using MvvmCross.Binding.Droid.Target;
-using MvvmCross.Platform;
 
 namespace MvvmCross.Plugin.Color.Platform.Android.BindingTargets
 {

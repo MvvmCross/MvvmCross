@@ -5,7 +5,7 @@
 using System;
 using Android.Content;
 using Android.OS;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base.Core;
 
 namespace MvvmCross.Platform.Android.Views
 {

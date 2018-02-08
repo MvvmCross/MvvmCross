@@ -4,6 +4,7 @@
 
 using System;
 using Windows.UI.Xaml;
+using MvvmCross.Binding;
 
 namespace MvvmCross.Platform.Uap.Binding.MvxBinding.Target
 {

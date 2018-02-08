@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using Android.Content;
 using Android.Util;
 using Android.Views;
+using MvvmCross.Base;
 using MvvmCross.Binding.Bindings;
-using MvvmCross.Platform;
 
 namespace MvvmCross.Platform.Android.Binding.Binders
 {

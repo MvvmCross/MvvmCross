@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.IO;
-using MvvmCross.Platform;
+using MvvmCross.Base;
 
 namespace MvvmCross.Plugin.Network.Rest
 {

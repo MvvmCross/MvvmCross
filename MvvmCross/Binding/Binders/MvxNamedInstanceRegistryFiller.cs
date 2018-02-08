@@ -5,9 +5,8 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Platform;
-using MvvmCross.Platform.IoC;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base.IoC;
+using MvvmCross.Base.Platform;
 
 namespace MvvmCross.Binding.Binders
 {

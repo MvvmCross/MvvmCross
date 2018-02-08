@@ -3,12 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.IoC;
-using Xunit;
 using System.Reflection;
-using System.Linq;
+using MvvmCross.Base;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.IoC;
+using Xunit;
 using MvvmCross.Test;
 
 namespace MvvmCross.UnitTest.Base

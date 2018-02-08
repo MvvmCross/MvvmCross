@@ -5,8 +5,8 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using MvvmCross.Platform.ExtensionMethods;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base.ExtensionMethods;
+using MvvmCross.Base.Logging;
 
 namespace MvvmCross.Core.ViewModels
 {

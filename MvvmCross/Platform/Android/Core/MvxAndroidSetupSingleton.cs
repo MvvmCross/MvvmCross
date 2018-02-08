@@ -7,12 +7,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.Content;
-using MvvmCross.Droid.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.IoC;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.IoC;
+using MvvmCross.Base.Logging;
+using MvvmCross.Platform.Android.Views;
 
 namespace MvvmCross.Platform.Android.Core
 {

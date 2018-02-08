@@ -5,10 +5,10 @@
 using System;
 using Android.Content;
 using Android.Hardware;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Droid;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Base;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Platform.Android.Base;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Plugin.Accelerometer.Platform.Android

@@ -5,8 +5,8 @@
 using System;
 using System.IO;
 using System.Reflection;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Base;
+using MvvmCross.Base.Exceptions;
 
 namespace MvvmCross.Plugin.JsonLocalization
 {

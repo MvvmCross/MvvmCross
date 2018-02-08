@@ -4,7 +4,7 @@
 
 using System;
 using MvvmCross.Core.Views;
-using MvvmCross.Forms.Platform;
+using MvvmCross.Forms.Core;
 
 namespace MvvmCross.Forms.Views
 {

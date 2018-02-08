@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using UIKit;
 

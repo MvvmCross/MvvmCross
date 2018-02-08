@@ -3,10 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
+using MvvmCross.Base;
 using MvvmCross.Core.Parse.StringDictionary;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
-using MvvmCross.Test.Mocks.TestViewModels;
+using MvvmCross.Test;
+using MvvmCross.UnitTest.Mocks.TestViewModels;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Parse

@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using Android.Widget;
-using MvvmCross.Platform;
 
 namespace MvvmCross.Plugin.Color.Platform.Android.BindingTargets
 {

@@ -11,14 +11,13 @@ using Android.Content;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
+using MvvmCross.Base.WeakSubscription;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
-using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Platform.Android.Binding.BindingContext;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Platform.Android.Binding.Views
@@ -29,12 +28,12 @@ namespace MvvmCross.Platform.Android.Binding.Views
 	{
 	    private static int[] SimpleItemTemplateIds { get; } =
 	    {
-	        Android.Resource.Layout.SimpleListItem1,
-	        Android.Resource.Layout.SimpleSpinnerItem
+            global::Android.Resource.Layout.SimpleListItem1,
+	        global::Android.Resource.Layout.SimpleSpinnerItem
 	    };
 
-	    private int _itemTemplateId = Android.Resource.Layout.SimpleListItem1;
-        private int _dropDownItemTemplateId = Android.Resource.Layout.SimpleSpinnerDropDownItem;
+	    private int _itemTemplateId = global::Android.Resource.Layout.SimpleListItem1;
+        private int _dropDownItemTemplateId = global::Android.Resource.Layout.SimpleSpinnerDropDownItem;
         private IEnumerable _itemsSource;
         private IDisposable _subscription;
 
@@ -224,7 +223,7 @@ namespace MvvmCross.Platform.Android.Binding.Views
             object dataContext, ViewGroup parent, int templateId)
         {
             if (SimpleItemTemplateIds.Contains(templateId) ||
-                Android.Resource.Layout.SimpleSpinnerDropDownItem == templateId)
+                global::Android.Resource.Layout.SimpleSpinnerDropDownItem == templateId)
             {
                 return new MvxSimpleListItemView(Context, BindingContext.LayoutInflaterHolder,
                     dataContext, parent, templateId);

@@ -3,9 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.Logging;
 
 namespace MvvmCross.Plugin.Messenger.ThreadRunners
 {

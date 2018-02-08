@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using MvvmCross.Base.Converters;
 using MvvmCross.Binding.Bindings.SourceSteps;
-using MvvmCross.Platform.Converters;
 
 namespace MvvmCross.Binding.Bindings
 {

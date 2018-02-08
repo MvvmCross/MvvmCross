@@ -4,7 +4,6 @@
 
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Swiss;
-using MvvmCross.Platform.Logging;
 using MvvmCross.Test;
 using Xunit;
 

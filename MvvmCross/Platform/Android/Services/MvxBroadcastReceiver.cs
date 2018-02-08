@@ -5,7 +5,7 @@
 using System;
 using Android.Content;
 using Android.Runtime;
-using MvvmCross.Droid.Platform;
+using MvvmCross.Platform.Android.Core;
 
 namespace MvvmCross.Platform.Android.Services
 {

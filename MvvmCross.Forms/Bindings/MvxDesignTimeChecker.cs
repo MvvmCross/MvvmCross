@@ -2,12 +2,11 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
+using MvvmCross.Base;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.IoC;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Parse.Binding;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.IoC;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Bindings

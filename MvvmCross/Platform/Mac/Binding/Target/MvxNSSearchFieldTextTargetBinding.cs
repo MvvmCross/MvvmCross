@@ -5,8 +5,8 @@
 using System.Reflection;
 using AppKit;
 using Foundation;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
 using ObjCRuntime;
 
 namespace MvvmCross.Platform.Mac.Binding.Target

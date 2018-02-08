@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
 
 namespace MvvmCross.Base.IoC
 {

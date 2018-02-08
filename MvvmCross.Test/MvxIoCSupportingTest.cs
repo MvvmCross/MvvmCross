@@ -3,12 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Globalization;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.IoC;
+using MvvmCross.Base.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Core;
 using MvvmCross.Core.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.IoC;
-using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Test
 {

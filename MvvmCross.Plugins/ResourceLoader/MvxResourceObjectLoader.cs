@@ -4,8 +4,8 @@
 
 using System.Collections.Generic;
 using System.IO;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
+using MvvmCross.Base.Platform;
 
 namespace MvvmCross.Plugin.ResourceLoader
 {

@@ -8,10 +8,10 @@ using System.Collections.Specialized;
 using System.Linq;
 using CoreGraphics;
 using Foundation;
-using MvvmCross.Binding.iOS.Views;
-using MvvmCross.iOS.Support.Views.Expandable;
-using MvvmCross.iOS.Support.Views.Expandable.Controllers;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base.Core;
+using MvvmCross.Platform.Ios.Binding.Views;
+using MvvmCross.Platform.Ios.Views.Expandable;
+using MvvmCross.Platform.Ios.Views.Expandable.Controllers;
 using UIKit;
 
 namespace MvvmCross.Platform.Ios.Views

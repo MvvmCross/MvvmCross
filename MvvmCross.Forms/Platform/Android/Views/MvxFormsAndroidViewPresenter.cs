@@ -3,15 +3,14 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Droid.Views;
-using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
-using MvvmCross.Platform;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using MvvmCross.Base;
+using MvvmCross.Forms.Core;
+using MvvmCross.Platform.Android.Views;
 
 
 namespace MvvmCross.Forms.Platform.Android.Views

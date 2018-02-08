@@ -6,16 +6,8 @@ using Android.Content;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Views;
-using MvvmCross.Forms.Droid.Bindings;
-using MvvmCross.Forms.Droid.Views;
-using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
 using MvvmCross.Localization;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid.Platform;
-using MvvmCross.Platform.Plugins;
 using System.Collections.Generic;
 using System.Reflection;
 

@@ -11,8 +11,7 @@ using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Android.Views;
 using Java.Lang;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base.Logging;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.Support.V4

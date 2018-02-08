@@ -3,9 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
+using MvvmCross.Base.Logging;
 
 namespace MvvmCross.Plugin.JsonLocalization
 {

@@ -8,11 +8,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using CoreGraphics;
 using Foundation;
-using MvvmCross.iOS.Support.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.iOS.Platform;
-using MvvmCross.Platform.iOS.Views;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Platform.Ios.Base.Platform;
 using UIKit;
 
 namespace MvvmCross.Plugin.PictureChooser.Platform.iOS

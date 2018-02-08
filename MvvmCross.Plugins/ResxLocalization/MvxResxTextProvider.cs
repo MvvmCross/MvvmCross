@@ -5,12 +5,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Resources;
+using MvvmCross.Base;
 using MvvmCross.Localization;
-using MvvmCross.Platform;
-
-namespace MvvmCross.Plugin.ResxLocalization
-{
-    [Preserve(AllMembers = true)]
+[Preserve(AllMembers = true)]
 	public class MvxResxTextProvider :
         IMvxTextProvider
     {

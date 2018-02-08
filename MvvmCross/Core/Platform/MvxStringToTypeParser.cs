@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base.Logging;
 
 namespace MvvmCross.Core.Platform
 {

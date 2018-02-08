@@ -5,7 +5,7 @@
 using System;
 using System.Reflection;
 using Android.Runtime;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Base.WeakSubscription;
 
 namespace MvvmCross.Platform.Android.Base.WeakSubscription
 {

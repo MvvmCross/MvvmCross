@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Core.ViewModels;
-using MvvmCross.tvOS.Views.Presenters.Attributes;
+using MvvmCross.Platform.Tvos.Views.Presenters.Attributes;
 using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Views

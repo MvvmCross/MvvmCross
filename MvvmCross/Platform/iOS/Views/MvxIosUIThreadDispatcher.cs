@@ -4,7 +4,7 @@
 
 using System;
 using System.Threading;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base.Core;
 using UIKit;
 
 namespace MvvmCross.Platform.Ios.Views

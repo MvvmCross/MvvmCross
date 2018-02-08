@@ -5,9 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Platform;
-using MvvmCross.Platform.IoC;
-using MvvmCross.Platform.Plugins;
+using MvvmCross.Base;
+using MvvmCross.Base.IoC;
+using MvvmCross.Base.Plugins;
 
 namespace MvvmCross.Core.ViewModels
 {

@@ -4,7 +4,7 @@
 
 using System;
 using Windows.Devices.Geolocation;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Base.Exceptions;
 
 namespace MvvmCross.Plugin.Location.Platform.Uap
 {

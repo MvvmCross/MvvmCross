@@ -4,12 +4,10 @@
 
 using System;
 using System.Windows;
+using MvvmCross.Base;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Platform.Wpf.Views.Presenters
 {

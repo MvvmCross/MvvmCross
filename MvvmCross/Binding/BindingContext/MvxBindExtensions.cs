@@ -5,8 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using MvvmCross.Base.Converters;
 using MvvmCross.Binding.Bindings;
-using MvvmCross.Platform.Converters;
 
 namespace MvvmCross.Binding.BindingContext
 {

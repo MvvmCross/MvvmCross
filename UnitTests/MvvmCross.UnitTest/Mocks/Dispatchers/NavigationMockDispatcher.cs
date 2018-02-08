@@ -4,12 +4,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.Logging;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Test;
 
 namespace MvvmCross.UnitTest.Mocks.Dispatchers
 {

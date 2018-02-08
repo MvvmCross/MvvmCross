@@ -6,12 +6,11 @@ using System.Windows.Threading;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.Plugins;
-using MvvmCross.Wpf.Views;
-using MvvmCross.Wpf.Views.Presenters;
 using System.Windows.Controls;
+using MvvmCross.Base;
+using MvvmCross.Base.Plugins;
+using MvvmCross.Platform.Wpf.Views;
+using MvvmCross.Platform.Wpf.Views.Presenters;
 
 namespace MvvmCross.Platform.Wpf.Core
 {

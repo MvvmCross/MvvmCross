@@ -5,6 +5,7 @@
 using System;
 using Android.Graphics.Drawables;
 using Android.Widget;
+using MvvmCross.Binding;
 
 namespace MvvmCross.Platform.Android.Binding.Target
 {

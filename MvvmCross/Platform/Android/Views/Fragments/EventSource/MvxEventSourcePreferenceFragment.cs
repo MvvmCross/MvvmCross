@@ -9,8 +9,7 @@ using Android.OS;
 using Android.Preferences;
 using Android.Runtime;
 using Android.Views;
-using MvvmCross.Droid.Views;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base.Core;
 
 namespace MvvmCross.Platform.Android.Views.Fragments.EventSource
 {

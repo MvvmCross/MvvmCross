@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.IoC;
+using MvvmCross.Base;
+using MvvmCross.Base.IoC;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Base

@@ -5,11 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.Plugins;
+using MvvmCross.Base;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
+using MvvmCross.Base.Plugins;
 
 namespace MvvmCross.Plugin.All
 {

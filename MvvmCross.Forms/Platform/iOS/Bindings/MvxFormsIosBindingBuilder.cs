@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Binding;
+using MvvmCross.Base;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Binding.iOS;
-using MvvmCross.Platform;
 using MvvmCross.Forms.Bindings;
+using MvvmCross.Platform.Ios.Binding;
 
 namespace MvvmCross.Forms.Platform.iOS.Bindings
 {

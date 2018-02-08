@@ -5,7 +5,7 @@
 using System.Windows.Threading;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Wpf.Views.Presenters;
+using MvvmCross.Platform.Wpf.Views.Presenters;
 
 namespace MvvmCross.Platform.Wpf.Views
 {

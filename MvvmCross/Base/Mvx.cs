@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.IoC;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.IoC;
 
 namespace MvvmCross.Base
 {

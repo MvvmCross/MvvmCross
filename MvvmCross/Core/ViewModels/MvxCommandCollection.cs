@@ -5,7 +5,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base.Logging;
 
 namespace MvvmCross.Core.ViewModels
 {

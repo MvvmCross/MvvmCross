@@ -5,8 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MvvmCross.Base.Exceptions;
 using MvvmCross.Binding.Parse.Binding.Swiss;
-using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Binding.Parse.Binding.Tibet
 {
