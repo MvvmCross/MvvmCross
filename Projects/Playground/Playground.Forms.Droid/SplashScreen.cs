@@ -12,7 +12,7 @@ namespace Playground.Forms.Droid
     // No Splash Screen: To remove splash screen, remove this class and uncomment lines in MainActivity
     [Activity(
         Label = "Playground.Forms"
-        //, MainLauncher = true
+        , MainLauncher = true
         , Icon = "@mipmap/icon"
         , Theme = "@style/AppTheme.Splash"
         , NoHistory = true

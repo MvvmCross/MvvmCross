@@ -347,7 +347,7 @@ namespace MvvmCross.Core.Navigation
                 PresentationValues = presentationBundle?.SafeGetData()
             };
             request.ViewModelInstance = ViewModelLoader.LoadViewModel(request, null);
-            await Navigate(request, request.ViewModelInstance, presentationBundle);//.ConfigureAwait(false);
+            await Navigate(request, request.ViewModelInstance, presentationBundle).ConfigureAwait(false);
         }
 
         public virtual async Task Navigate<TParameter>(Type viewModelType, TParameter param, IMvxBundle presentationBundle = null)
