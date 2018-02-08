@@ -14,6 +14,8 @@ using MvvmCross.Base;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Android.Base.Platform;
+using MvvmCross.Platform.Android.Views;
+using MvvmCross.Platform.Android.Views.Attributes;
 using String = Java.Lang.String;
 
 namespace MvvmCross.Droid.Support.V4

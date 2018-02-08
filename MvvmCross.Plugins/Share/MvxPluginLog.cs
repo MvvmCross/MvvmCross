@@ -4,7 +4,10 @@
 
 using MvvmCross.Base;
 using MvvmCross.Base.Logging;
-static class MvxPluginLog
+
+namespace MvvmCross.Plugin.Share
+{
+    static class MvxPluginLog
     {
         internal static IMvxLog Instance { get; } = Mvx.Resolve<IMvxLogProvider>().GetLogFor("MvxPlugin");
     }

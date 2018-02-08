@@ -10,6 +10,7 @@ using MvvmCross.Base.Exceptions;
 using MvvmCross.Base.IoC;
 using Xunit;
 using MvvmCross.Test;
+using System.Linq;
 
 namespace MvvmCross.UnitTest.Base
 {

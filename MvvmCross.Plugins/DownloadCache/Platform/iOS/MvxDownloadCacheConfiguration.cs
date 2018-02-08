@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using MvvmCross.Base;
 using MvvmCross.Base.Plugins;
 
 namespace MvvmCross.Plugin.DownloadCache.Platform.iOS

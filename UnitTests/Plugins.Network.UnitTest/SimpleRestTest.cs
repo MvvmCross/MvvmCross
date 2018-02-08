@@ -5,6 +5,7 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using MvvmCross.Plugin.Json;
 using MvvmCross.Plugin.Network.Rest;
 using MvvmCross.Plugins.Network.UnitTest.TestClasses.GoogleBooks;
 using Xunit;

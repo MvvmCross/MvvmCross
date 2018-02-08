@@ -8,6 +8,7 @@ using Android.Net;
 using Java.Net;
 using MvvmCross.Base;
 using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
 using MvvmCross.Platform.Android.Base;
 using MvvmCross.Plugin.Network.Reachability;
 

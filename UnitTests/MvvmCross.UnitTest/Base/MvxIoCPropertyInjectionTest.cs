@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Base;
+using MvvmCross.Base.Core;
 using MvvmCross.Base.IoC;
 using Xunit;
 

@@ -19,10 +19,11 @@ using Path = System.IO.Path;
 using Stream = System.IO.Stream;
 using Uri = Android.Net.Uri;
 using ExifInterface = Android.Support.Media.ExifInterface;
+using MvvmCross.Base.Logging;
 
 namespace MvvmCross.Plugin.PictureChooser.Platform.Android
 {
-    [MvvmCross.Platform.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class MvxPictureChooserTask
         : MvxAndroidTask, IMvxPictureChooserTask
     {

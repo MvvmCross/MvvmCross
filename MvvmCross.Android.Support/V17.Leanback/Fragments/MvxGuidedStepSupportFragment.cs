@@ -8,6 +8,7 @@ using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource;
+using MvvmCross.Droid.Support.V4;
 using MvvmCross.Platform.Android.Views;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments

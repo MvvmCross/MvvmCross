@@ -5,6 +5,7 @@
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Base;
+using MvvmCross.Base.Logging;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Plugin.Color.Platform.Android.Binding;
 

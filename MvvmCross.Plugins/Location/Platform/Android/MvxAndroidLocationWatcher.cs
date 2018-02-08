@@ -9,7 +9,9 @@ using Android.Locations;
 using Android.OS;
 using MvvmCross.Base;
 using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
 using MvvmCross.Platform.Android.Base;
+using MvvmCross.Platform.Android.Base.Platform;
 
 namespace MvvmCross.Plugin.Location.Platform.Android
 {
@@ -80,7 +82,7 @@ namespace MvvmCross.Plugin.Location.Platform.Android
             }
         }
 
-        private static MvxGeoLocation CreateLocation(Android.Locations.Location androidLocation)
+        private static MvxGeoLocation CreateLocation(global::Android.Locations.Location androidLocation)
         {
             var position = new MvxGeoLocation { Timestamp = androidLocation.Time.FromMillisecondsUnixTimeToUtc() };
             var coords = position.Coordinates;
@@ -120,7 +122,7 @@ namespace MvvmCross.Plugin.Location.Platform.Android
 
         #region Implementation of ILocationListener
 
-        public void OnLocationChanged(Android.Locations.Location androidLocation)
+        public void OnLocationChanged(global::Android.Locations.Location androidLocation)
         {
             if (androidLocation == null)
             {

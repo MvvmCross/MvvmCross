@@ -7,7 +7,9 @@ using System.Threading;
 using Android.Content;
 using MvvmCross.Base;
 using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
 using MvvmCross.Platform.Android.Base;
+using MvvmCross.Platform.Android.Base.Platform;
 
 namespace MvvmCross.Plugin.Location.Fused.Platform.Android
 {
@@ -44,7 +46,7 @@ namespace MvvmCross.Plugin.Location.Fused.Platform.Android
 			}
 		}
 
-		internal void OnLocationUpdated(Android.Locations.Location androidLocation)
+		internal void OnLocationUpdated(global::Android.Locations.Location androidLocation)
 		{
 			if (androidLocation == null)
 			{
@@ -84,7 +86,7 @@ namespace MvvmCross.Plugin.Location.Fused.Platform.Android
                 MvxLocationPermission.Granted :
                 MvxLocationPermission.Denied;
 
-        private static MvxGeoLocation CreateLocation(Android.Locations.Location androidLocation)
+        private static MvxGeoLocation CreateLocation(global::Android.Locations.Location androidLocation)
 		{
 			var position = new MvxGeoLocation { Timestamp = androidLocation.Time.FromMillisecondsUnixTimeToUtc() };
 			var coords = position.Coordinates;
