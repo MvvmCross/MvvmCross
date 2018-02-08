@@ -37,12 +37,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             RequestWindowFeature(WindowFeatures.NoTitle);
         }
 
-        protected override void OnCreate(Bundle bundle)
+        protected async override void OnCreate(Bundle bundle)
         {
             RequestWindowFeatures();
 
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.InitializeFromSplashScreen(this);
+            var setup = await MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            await setup.InitializeFromSplashScreen(this);
 
             base.OnCreate(bundle);
 
@@ -57,19 +57,19 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         private bool _isResumed;
 
-        protected override void OnResume()
+        protected async override void OnResume()
         {
             base.OnResume();
             _isResumed = true;
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.InitializeFromSplashScreen(this);
+            var setup = await MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            await setup.InitializeFromSplashScreen(this);
         }
 
-        protected override void OnPause()
+        protected async override void OnPause()
         {
             _isResumed = false;
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.RemoveSplashScreen(this);
+            var setup = await MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            await setup.RemoveSplashScreen(this);
             base.OnPause();
         }
 
