@@ -12,14 +12,14 @@ using MvvmCross.Forms.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.Android;
-using MvxDroidImageView = MvvmCross.Binding.Droid.Views.MvxImageView;
+using MvxDroidImageView = MvvmCross.Platform.Android.Binding.Views.MvxImageView;
 
 [assembly: ExportRenderer(typeof(MvxImageView), typeof(MvxImageViewRenderer))]
 namespace MvvmCross.Forms.Platform.Android.Views
 {
     internal class MvxImageViewRenderer : ImageRenderer
     {
-        public MvxImageViewRenderer(Context context) : base(context)
+        public MvxImageViewRenderer(global::Android.Content.Context context) : base(context)
         {
         }
 

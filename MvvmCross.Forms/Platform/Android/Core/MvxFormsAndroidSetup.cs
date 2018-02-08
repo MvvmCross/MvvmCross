@@ -10,6 +10,14 @@ using MvvmCross.Forms.Views;
 using MvvmCross.Localization;
 using System.Collections.Generic;
 using System.Reflection;
+using MvvmCross.Base;
+using MvvmCross.Base.Plugins;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform.Android.Bindings;
+using MvvmCross.Forms.Platform.Android.Views;
+using MvvmCross.Platform.Android.Base.Platform;
+using MvvmCross.Platform.Android.Core;
+using MvvmCross.Platform.Android.Views;
 
 namespace MvvmCross.Forms.Platform.Android.Core
 {
