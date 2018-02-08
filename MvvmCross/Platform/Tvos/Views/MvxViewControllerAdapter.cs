@@ -4,7 +4,7 @@
 
 using System;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform.tvOS.Views;
+using MvvmCross.Platform.Tvos.Base.Views;
 
 namespace MvvmCross.Platform.Tvos.Views
 {

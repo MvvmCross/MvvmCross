@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using MvvmCross.Base.WeakSubscription;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.WeakSubscription;
 using UIKit;
 
 namespace MvvmCross.Platform.Ios.Binding.Target

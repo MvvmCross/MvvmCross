@@ -3,11 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base;
+using MvvmCross.Base.Logging;
 
 namespace MvvmCross.Core.Views
 {

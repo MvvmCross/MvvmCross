@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Base;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.Platform;
+using MvvmCross.Base.WeakSubscription;
 
 namespace MvvmCross.Binding.Views
 {

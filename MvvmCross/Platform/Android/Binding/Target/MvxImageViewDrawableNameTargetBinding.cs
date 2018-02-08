@@ -4,7 +4,7 @@
 
 using System;
 using Android.Widget;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Binding;
 
 namespace MvvmCross.Platform.Android.Binding.Target
 {

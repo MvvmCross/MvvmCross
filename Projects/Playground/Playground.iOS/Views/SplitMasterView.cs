@@ -1,7 +1,7 @@
 using System;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.iOS.Views;
-using MvvmCross.iOS.Views.Presenters.Attributes;
+using MvvmCross.Platform.Ios.Views;
+using MvvmCross.Platform.Ios.Views.Presenters.Attributes;
 using Playground.Core.ViewModels;
 
 namespace Playground.iOS.Views

@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using MvvmCross.Base.Converters;
+using MvvmCross.Base.IoC;
 using MvvmCross.Binding.Bindings.SourceSteps;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.IoC;
 
 namespace MvvmCross.Binding.Combiners
 {

@@ -8,10 +8,7 @@ using Android.Gms.Common;
 using Android.Gms.Common.Apis;
 using Android.Gms.Location;
 using Android.OS;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base.Exceptions;
 
 namespace MvvmCross.Plugin.Location.Fused.Platform.Android
 {

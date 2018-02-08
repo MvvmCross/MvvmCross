@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using MvvmCross.Base;
+using MvvmCross.Base.Core;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
 
 namespace MvvmCross.Platform.Console.Views
 {

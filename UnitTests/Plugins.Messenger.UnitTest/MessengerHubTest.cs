@@ -5,6 +5,7 @@
 using System;
 using System.Linq;
 using System.Threading;
+using MvvmCross.Plugin.Messenger;
 using MvvmCross.Test;
 using Xunit;
 

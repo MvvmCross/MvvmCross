@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Plugins.Messenger.ThreadRunners;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Plugin.Messenger.ThreadRunners;
 
 namespace MvvmCross.Plugin.Messenger.Subscriptions
 {

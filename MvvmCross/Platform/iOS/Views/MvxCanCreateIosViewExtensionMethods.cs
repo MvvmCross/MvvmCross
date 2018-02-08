@@ -4,9 +4,9 @@
 
 using System;
 using System.Collections.Generic;
+using MvvmCross.Base;
 using MvvmCross.Core.Platform;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
 
 namespace MvvmCross.Platform.Ios.Views
 {

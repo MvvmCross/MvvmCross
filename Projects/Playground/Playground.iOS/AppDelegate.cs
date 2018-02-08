@@ -1,7 +1,7 @@
 ﻿using Foundation;
+using MvvmCross.Base;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.iOS.Platform;
-using MvvmCross.Platform;
+using MvvmCross.Platform.Ios.Core;
 using UIKit;
 
 namespace Playground.iOS

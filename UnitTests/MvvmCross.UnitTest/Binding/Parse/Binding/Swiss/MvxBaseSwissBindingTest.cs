@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Swiss;
-using MvvmCross.Platform.Logging;
 using MvvmCross.Test;
 using Xunit;
 

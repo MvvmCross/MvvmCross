@@ -5,17 +5,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using AppKit;
 using CoreGraphics;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Mac.Views.Presenters.Attributes;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Mac.Views.Presenters.Attributes;
 
 namespace MvvmCross.Platform.Mac.Views.Presenters
 {

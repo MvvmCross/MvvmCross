@@ -4,11 +4,10 @@
 
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MvvmCross.Base.Logging;
 
 namespace Playground.Core.ViewModels
 {

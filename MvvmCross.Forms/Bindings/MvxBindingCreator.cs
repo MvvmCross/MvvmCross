@@ -4,9 +4,9 @@
 
 using System;
 using System.Collections.Generic;
+using MvvmCross.Base.Logging;
 using MvvmCross.Binding.Bindings;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Forms.Base;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Bindings

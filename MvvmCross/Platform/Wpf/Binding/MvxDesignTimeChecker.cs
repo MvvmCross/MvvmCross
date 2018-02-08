@@ -4,10 +4,10 @@
 
 using System.ComponentModel;
 using System.Windows;
+using MvvmCross.Base;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.IoC;
 using MvvmCross.Binding.Parse.Binding;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.IoC;
 
 namespace MvvmCross.Platform.Wpf.Binding
 {

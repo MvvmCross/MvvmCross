@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Forms.Platform;
+using MvvmCross.Forms.Core;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views

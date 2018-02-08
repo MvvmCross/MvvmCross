@@ -4,10 +4,10 @@
 
 using System;
 using Android.OS;
+using MvvmCross.Base.Core;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Droid.Views;
+using MvvmCross.Platform.Android.Base.Views;
+using MvvmCross.Platform.Android.Binding.BindingContext;
 
 namespace MvvmCross.Platform.Android.Views
 {

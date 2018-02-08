@@ -4,13 +4,9 @@
 
 using System;
 using System.Globalization;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.UI;
-
-namespace MvvmCross.Plugin.Visibility
-{
-    public abstract class MvxBaseVisibilityValueConverter<T>
+using MvvmCross.Base;
+using MvvmCross.Base.UI;
+public abstract class MvxBaseVisibilityValueConverter<T>
         : MvxBaseVisibilityValueConverter
     {
         protected sealed override MvxVisibility Convert(object value, object parameter, CultureInfo culture)

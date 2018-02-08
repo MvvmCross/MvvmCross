@@ -5,7 +5,7 @@
 using System;
 using System.Globalization;
 using System.Reflection;
-using MvvmCross.Platform.IoC;
+using MvvmCross.Base.IoC;
 
 namespace MvvmCross.Base.ExtensionMethods
 {

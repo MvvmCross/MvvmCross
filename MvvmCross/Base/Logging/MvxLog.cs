@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform.Logging.LogProviders;
+using MvvmCross.Base.Logging.LogProviders;
 
 namespace MvvmCross.Base.Logging
 {

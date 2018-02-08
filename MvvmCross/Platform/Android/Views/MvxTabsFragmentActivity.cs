@@ -12,9 +12,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Java.Lang;
-using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Base.Core;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Android.Binding.BindingContext;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Platform.Android.Views
@@ -105,7 +105,7 @@ namespace MvvmCross.Platform.Android.Views
 
         private void InitializeTabHost(Bundle args)
         {
-            _tabHost = (TabHost)FindViewById(Android.Resource.Id.TabHost);
+            _tabHost = (TabHost)FindViewById(global::Android.Resource.Id.TabHost);
             _tabHost.Setup();
 
             AddTabs(args);

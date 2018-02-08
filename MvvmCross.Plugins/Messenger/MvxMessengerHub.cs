@@ -6,11 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Plugins.Messenger.Subscriptions;
-using MvvmCross.Plugins.Messenger.ThreadRunners;
+using MvvmCross.Base;
+using MvvmCross.Base.Logging;
+using MvvmCross.Base.Platform;
+using MvvmCross.Plugin.Messenger.Subscriptions;
+using MvvmCross.Plugin.Messenger.ThreadRunners;
 
 namespace MvvmCross.Plugin.Messenger
 {

@@ -5,8 +5,8 @@
 using System;
 using System.Reflection;
 using AppKit;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Platform.Mac.Binding.Target
 {

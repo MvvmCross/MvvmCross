@@ -5,7 +5,7 @@
 using System;
 using System.ComponentModel;
 using System.Reflection;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Base.WeakSubscription;
 
 namespace MvvmCross.Binding.Bindings.Target
 {

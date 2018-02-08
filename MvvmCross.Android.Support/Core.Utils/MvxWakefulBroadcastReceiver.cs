@@ -6,7 +6,7 @@ using System;
 using Android.Content;
 using Android.Runtime;
 using Android.Support.V4.Content;
-using MvvmCross.Droid.Platform;
+using MvvmCross.Platform.Android.Core;
 
 namespace MvvmCross.Droid.Support.V4
 {

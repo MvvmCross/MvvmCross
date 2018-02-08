@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.WeakSubscription;
 
 namespace MvvmCross.Core.ViewModels
 {

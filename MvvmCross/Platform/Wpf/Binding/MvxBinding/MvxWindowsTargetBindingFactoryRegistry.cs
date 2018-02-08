@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Binding.Wpf.MvxBinding.Target;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Wpf.Binding.MvxBinding.Target;
 
 namespace MvvmCross.Platform.Wpf.Binding.MvxBinding
 {

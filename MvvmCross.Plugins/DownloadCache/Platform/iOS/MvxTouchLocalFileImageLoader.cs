@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Plugins.File;
+using MvvmCross.Base;
+using MvvmCross.Base.Core;
+using MvvmCross.Plugin.File;
 using UIKit;
 
 namespace MvvmCross.Plugin.DownloadCache.Platform.iOS

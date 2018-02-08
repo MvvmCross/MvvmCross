@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
 
 namespace MvvmCross.Platform.Wpf.Binding.MvxBinding

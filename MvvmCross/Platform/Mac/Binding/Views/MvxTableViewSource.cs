@@ -9,11 +9,11 @@ using System.Linq;
 using System.Windows.Input;
 using AppKit;
 using Foundation;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.WeakSubscription;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.WeakSubscription;
 
 namespace MvvmCross.Platform.Mac.Binding.Views
 {

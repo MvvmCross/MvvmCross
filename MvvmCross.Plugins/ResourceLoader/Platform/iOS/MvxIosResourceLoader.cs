@@ -4,7 +4,7 @@
 
 using System;
 using System.IO;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Base.Exceptions;
 
 namespace MvvmCross.Plugin.ResourceLoader.Platform.iOS
 {

@@ -7,12 +7,9 @@ using System.Threading;
 using Android.Content;
 using Android.Locations;
 using Android.OS;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid;
-using MvvmCross.Platform.Droid.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Platform.Android.Base;
 
 namespace MvvmCross.Plugin.Location.Platform.Android
 {

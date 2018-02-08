@@ -5,9 +5,10 @@
 using System;
 using System.Collections.Generic;
 using Moq;
+using MvvmCross.Base.Exceptions;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Test.Mocks.TestViewModels;
+using MvvmCross.Test;
+using MvvmCross.UnitTest.Mocks.TestViewModels;
 using Xunit;
 
 namespace MvvmCross.UnitTest.ViewModels

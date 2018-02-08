@@ -3,14 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Uwp.Views;
 using System;
+using MvvmCross.Base;
+using MvvmCross.Base.Logging;
+using MvvmCross.Forms.Base;
+using MvvmCross.Forms.Core;
+using MvvmCross.Platform.Uap.Views;
 
 namespace MvvmCross.Forms.Platform.Uap.Views
 {

@@ -4,7 +4,6 @@
 
 using Android.Graphics;
 using Android.Support.V4.Graphics;
-using MvvmCross.Platform;
 
 namespace MvvmCross.Plugin.DownloadCache.Platform.Android
 {

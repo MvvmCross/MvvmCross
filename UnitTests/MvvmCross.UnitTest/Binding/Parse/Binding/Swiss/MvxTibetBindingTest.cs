@@ -5,7 +5,6 @@
 using System.Collections.Generic;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Tibet;
-using MvvmCross.Platform.Logging;
 using MvvmCross.Test;
 using Xunit;
 

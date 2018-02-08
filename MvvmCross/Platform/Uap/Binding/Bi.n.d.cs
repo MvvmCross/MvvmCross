@@ -4,10 +4,11 @@
 
 using System.Collections.Generic;
 using Windows.UI.Xaml;
+using MvvmCross.Base;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
 
 namespace MvvmCross.Platform.Uap.Binding
 {

@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform.Converters;
+using MvvmCross.Base.Converters;
 
 namespace MvvmCross.Binding.Binders
 {

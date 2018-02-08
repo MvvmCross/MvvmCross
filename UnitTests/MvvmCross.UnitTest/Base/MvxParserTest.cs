@@ -6,8 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Parse;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Parse;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Base

@@ -4,9 +4,9 @@
 
 using System;
 using System.Globalization;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.UI;
+using MvvmCross.Base;
+using MvvmCross.Base.Converters;
+using MvvmCross.Base.UI;
 
 namespace MvvmCross.Plugin.Color
 {

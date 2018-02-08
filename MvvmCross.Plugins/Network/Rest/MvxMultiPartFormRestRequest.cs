@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Plugins.File;
+using MvvmCross.Base;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Plugin.File;
 
 namespace MvvmCross.Plugin.Network.Rest
 {

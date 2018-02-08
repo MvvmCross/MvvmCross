@@ -6,7 +6,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
 
 namespace MvvmCross.Core.Navigation
 {

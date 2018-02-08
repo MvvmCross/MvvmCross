@@ -11,9 +11,8 @@ using Android.OS;
 using Android.Text;
 using Java.IO;
 using Java.Lang;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid.Platform;
-using MvvmCross.Platform.Droid.Views;
+using MvvmCross.Platform.Android.Base.Platform;
+using MvvmCross.Platform.Android.Base.Views;
 using File = Java.IO.File;
 
 namespace MvvmCross.Plugin.Email.Platform.Android

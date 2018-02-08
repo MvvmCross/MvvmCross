@@ -10,17 +10,15 @@ using Android.Content;
 using Android.Graphics;
 using Android.Media;
 using Android.Provider;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid;
-using MvvmCross.Platform.Droid.Platform;
-using MvvmCross.Platform.Droid.Views;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Platform.Android.Base;
+using MvvmCross.Platform.Android.Base.Platform;
+using MvvmCross.Platform.Android.Base.Views;
 using Path = System.IO.Path;
 using Stream = System.IO.Stream;
 using Uri = Android.Net.Uri;
 using ExifInterface = Android.Support.Media.ExifInterface;
-using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Plugin.PictureChooser.Platform.Android
 {

@@ -7,10 +7,10 @@ using System.Threading;
 using Android.Content;
 using Android.Util;
 using Android.Views;
-using MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Binding;
+using MvvmCross.Platform.Android.Binding.Binders.ViewTypeResolvers;
 
 namespace MvvmCross.Platform.Android.Binding.Binders
 {

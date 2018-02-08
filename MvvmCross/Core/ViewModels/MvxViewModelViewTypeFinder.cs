@@ -5,9 +5,9 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using MvvmCross.Base.IoC;
+using MvvmCross.Base.Logging;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform.IoC;
-using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Core.ViewModels
 {

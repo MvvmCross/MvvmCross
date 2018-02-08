@@ -4,10 +4,10 @@
 
 using MvvmCross.Binding.Binders;
 using MvvmCross.Localization;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
 using System;
 using System.Collections.Generic;
+using MvvmCross.Base;
+using MvvmCross.Base.Converters;
 
 namespace MvvmCross.Binding.BindingContext
 {

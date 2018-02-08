@@ -5,10 +5,10 @@
 using System;
 using Android.App;
 using Android.Content;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Droid.Views;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.Logging;
+using MvvmCross.Platform.Android.Base.Views;
 
 namespace MvvmCross.Platform.Android.Base.Platform
 {

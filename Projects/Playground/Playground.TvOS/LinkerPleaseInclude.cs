@@ -6,7 +6,6 @@ using Foundation;
 using UIKit;
 
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.tvOS.Views;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 

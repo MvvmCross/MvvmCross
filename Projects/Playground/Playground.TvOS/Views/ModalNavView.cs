@@ -1,13 +1,10 @@
 using System;
-
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.tvOS.Views;
-using MvvmCross.tvOS.Views.Presenters.Attributes;
-
+using MvvmCross.Platform.Tvos.Views;
+using MvvmCross.Platform.Tvos.Views.Presenters.Attributes;
 using Playground.Core.ViewModels;
 
 using UIKit;
-using Foundation;
 
 namespace Playground.TvOS
 {

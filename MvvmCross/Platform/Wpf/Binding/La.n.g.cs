@@ -9,8 +9,9 @@ using System;
 using System.Windows;
 using System.Collections.Generic;
 using MvvmCross.Binding.Bindings;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base;
+using MvvmCross.Binding;
+using MvvmCross.Base.Core;
 
 namespace MvvmCross.Platform.Wpf.Binding
 {

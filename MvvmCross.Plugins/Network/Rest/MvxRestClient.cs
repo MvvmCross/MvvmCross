@@ -7,9 +7,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base;
+using MvvmCross.Base.Exceptions;
 
 namespace MvvmCross.Plugin.Network.Rest
 {

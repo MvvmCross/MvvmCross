@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Collections.Concurrent;
 using Android.App;
 using Android.OS;
-using MvvmCross.Platform.Droid.Platform;
+using MvvmCross.Platform.Android.Base.Platform;
 
 namespace MvvmCross.Platform.Android.Views
 {

@@ -6,11 +6,10 @@ using System;
 using Android.Content;
 using Android.Net;
 using Java.Net;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Plugins.Network.Reachability;
+using MvvmCross.Base;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Platform.Android.Base;
+using MvvmCross.Plugin.Network.Reachability;
 
 namespace MvvmCross.Plugin.Network.Platform.Android
 {

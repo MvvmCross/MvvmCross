@@ -7,11 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Foundation;
 using MessageUI;
-using MvvmCross.iOS.Support.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.iOS.Platform;
-using MvvmCross.Platform.iOS.Views;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Platform.Ios.Base.Platform;
 using UIKit;
 
 namespace MvvmCross.Plugin.Email.Platform.iOS

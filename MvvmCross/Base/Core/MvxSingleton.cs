@@ -4,7 +4,7 @@
 
 using System;
 using System.Collections.Generic;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Base.Exceptions;
 
 namespace MvvmCross.Base.Core
 {

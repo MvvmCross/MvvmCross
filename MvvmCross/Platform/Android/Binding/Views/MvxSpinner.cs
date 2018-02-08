@@ -21,8 +21,8 @@ namespace MvvmCross.Platform.Android.Binding.Views
                 context, attrs,
                 new MvxAdapter(context)
                 {
-                    ItemTemplateId = Android.Resource.Layout.SimpleSpinnerItem,
-                    DropDownItemTemplateId = Android.Resource.Layout.SimpleSpinnerDropDownItem
+                    ItemTemplateId = global::Android.Resource.Layout.SimpleSpinnerItem,
+                    DropDownItemTemplateId = global::Android.Resource.Layout.SimpleSpinnerDropDownItem
                 })
         {
         }

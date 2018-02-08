@@ -4,7 +4,7 @@
 
 using System;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform.iOS.Views;
+using MvvmCross.Platform.Ios.Base.Views;
 
 namespace MvvmCross.Platform.Ios.Views
 {

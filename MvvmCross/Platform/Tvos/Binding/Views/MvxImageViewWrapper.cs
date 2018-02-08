@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.Platform;
 using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Binding.Views

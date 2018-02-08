@@ -4,20 +4,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Linq;
 
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
-using MvvmCross.tvOS.Views.Presenters.Attributes;
 
 using CoreGraphics;
-using Foundation;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
+using MvvmCross.Platform.Tvos.Views.Presenters.Attributes;
 using UIKit;
-using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Platform.Tvos.Views.Presenters
 {

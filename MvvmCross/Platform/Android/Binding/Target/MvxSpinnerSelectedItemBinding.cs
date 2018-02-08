@@ -4,9 +4,9 @@
 
 using System;
 using Android.Widget;
-using MvvmCross.Binding.Droid.Views;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Binding;
+using MvvmCross.Platform.Android.Base.WeakSubscription;
+using MvvmCross.Platform.Android.Binding.Views;
 
 namespace MvvmCross.Platform.Android.Binding.Target
 {

@@ -5,10 +5,9 @@
 using System;
 using System.Windows.Input;
 using Foundation;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
 using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Binding.Views

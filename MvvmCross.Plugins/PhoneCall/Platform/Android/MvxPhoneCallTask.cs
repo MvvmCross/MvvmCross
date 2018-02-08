@@ -7,8 +7,7 @@ using Android.Net;
 using Android.OS;
 using Android.Telephony;
 using Java.Util;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid.Platform;
+using MvvmCross.Platform.Android.Base.Platform;
 
 namespace MvvmCross.Plugin.PhoneCall.Platform.Android
 {

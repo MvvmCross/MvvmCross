@@ -7,12 +7,12 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using MvvmCross.Base.Converters;
+using MvvmCross.Base.Logging;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Wpf.Converters;
+using MvvmCross.Platform.Wpf.Base.Converters;
 
 namespace MvvmCross.Platform.Wpf.Binding.WindowsBinding
 {

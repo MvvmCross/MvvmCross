@@ -6,7 +6,6 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Forms.Bindings.Target;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Forms.Bindings
 {

@@ -4,7 +4,7 @@
 
 using Android.App;
 using Android.Content.PM;
-using MvvmCross.Droid.Views;
+using MvvmCross.Platform.Android.Views;
 
 namespace Playground.Forms.Droid
 {

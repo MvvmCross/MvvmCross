@@ -4,9 +4,8 @@
 
 using System;
 using Foundation;
-using MvvmCross.Platform;
-using MvvmCross.Platform.iOS.Platform;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base.Logging;
+using MvvmCross.Platform.Ios.Base.Platform;
 using UIKit;
 
 namespace MvvmCross.Platform.Ios.Binding.Views

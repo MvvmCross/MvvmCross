@@ -6,16 +6,16 @@ using System.Reflection;
 using Android.Content;
 using Android.OS;
 using Android.Views;
+using MvvmCross.Base;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Binding.Droid.Views;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Views;
-using MvvmCross.Forms.Droid.Views.EventSource;
-using MvvmCross.Forms.Platform;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform.Android.Views.EventSource;
 using MvvmCross.Forms.Views;
-using MvvmCross.Platform;
+using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.Platform.Android.Binding.Views;
+using MvvmCross.Platform.Android.Core;
+using MvvmCross.Platform.Android.Views;
 
 namespace MvvmCross.Forms.Platform.Android.Views
 {

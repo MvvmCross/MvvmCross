@@ -3,8 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Test.Mocks.TestViewModels;
-using MvvmCross.Test.Mocks.TestViews;
+using MvvmCross.Test;
+using MvvmCross.UnitTest.Mocks.TestViewModels;
+using MvvmCross.UnitTest.Mocks.TestViews;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Platform

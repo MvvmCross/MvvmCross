@@ -2,17 +2,14 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using Android.App;
-using Android.OS;
 using Android.Views;
-using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Base;
+using MvvmCross.Base.Exceptions;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.Platform.Android.Core;
 
 namespace MvvmCross.Platform.Android.Views.Fragments
 {
@@ -32,7 +29,7 @@ namespace MvvmCross.Platform.Android.Views.Fragments
             {
                 //TODO call MvxViewModelLoader.Reload when it's added in MvvmCross, tracked by #1165
                 //until then, we're going to re-run the viewmodel lifecycle here.
-                Droid.Views.MvxFragmentExtensions.RunViewModelLifecycle(fragmentView.ViewModel, bundle, request);
+                Android.Views.MvxFragmentExtensions.RunViewModelLifecycle(fragmentView.ViewModel, bundle, request);
 
                 return;
             }

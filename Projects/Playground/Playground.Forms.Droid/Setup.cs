@@ -4,15 +4,13 @@
 
 using Android.Content;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Droid.Platform;
-using MvvmCross.Forms.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Plugins.Json;
 using Serilog;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MvvmCross.Base.Logging;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform.Android.Core;
 
 namespace Playground.Forms.Droid
 {

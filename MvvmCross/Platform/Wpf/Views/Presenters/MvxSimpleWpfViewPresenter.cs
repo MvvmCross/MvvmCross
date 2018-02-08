@@ -5,10 +5,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Platform;
 using System.Collections.Generic;
 using System.Linq;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base.Logging;
 
 namespace MvvmCross.Platform.Wpf.Views.Presenters
 {

@@ -4,8 +4,7 @@
 
 using Android.Content;
 using Android.Net;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid.Platform;
+using MvvmCross.Platform.Android.Base.Platform;
 
 namespace MvvmCross.Plugin.WebBrowser.Platform.Android
 {

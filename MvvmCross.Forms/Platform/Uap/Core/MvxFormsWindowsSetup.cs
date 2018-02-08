@@ -5,17 +5,17 @@
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Platform;
-using MvvmCross.Forms.Uwp.Bindings;
-using MvvmCross.Forms.Uwp.Presenters;
 using MvvmCross.Forms.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Plugins;
-using MvvmCross.Uwp.Platform;
-using MvvmCross.Uwp.Views;
 using System.Collections.Generic;
 using System.Reflection;
 using Windows.ApplicationModel.Activation;
+using MvvmCross.Base;
+using MvvmCross.Base.Plugins;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform.Uap.Bindings;
+using MvvmCross.Forms.Platform.Uap.Views;
+using MvvmCross.Platform.Uap.Core;
+using MvvmCross.Platform.Uap.Views;
 using XamlControls = Windows.UI.Xaml.Controls;
 
 namespace MvvmCross.Forms.Platform.Uap.Core

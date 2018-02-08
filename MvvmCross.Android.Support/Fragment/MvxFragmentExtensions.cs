@@ -2,18 +2,16 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using Android.OS;
 using Android.Support.V4.App;
 using Android.Views;
-using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Base;
+using MvvmCross.Base.Exceptions;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Support.V4.EventSource;
-using MvvmCross.Droid.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.Platform.Android.Core;
+using MvvmCross.Platform.Android.Views;
 
 namespace MvvmCross.Droid.Support.V4
 {

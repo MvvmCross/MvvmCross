@@ -6,9 +6,9 @@ using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Platform.Wpf.Binding.MvxBinding.Target
 {

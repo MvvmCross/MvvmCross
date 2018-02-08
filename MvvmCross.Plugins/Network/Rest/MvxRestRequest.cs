@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using MvvmCross.Platform;
+using MvvmCross.Base;
 
 namespace MvvmCross.Plugin.Network.Rest
 {

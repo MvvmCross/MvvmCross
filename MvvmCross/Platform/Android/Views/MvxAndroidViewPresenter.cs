@@ -11,16 +11,15 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Java.Lang;
+using MvvmCross.Base;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Views.Attributes;
-using MvvmCross.Droid.Views.Fragments;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Android.Base.Platform;
+using MvvmCross.Platform.Android.Core;
+using MvvmCross.Platform.Android.Views.Attributes;
+using MvvmCross.Platform.Android.Views.Fragments;
 
 namespace MvvmCross.Platform.Android.Views
 {
@@ -193,7 +192,7 @@ namespace MvvmCross.Platform.Android.Views
             else if (viewType.IsSubclassOf(typeof(Fragment)))
             {
                 MvxLog.Instance.Trace("PresentationAttribute not found for {0}. Assuming Fragment presentation", viewType.Name);
-                return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), Android.Resource.Id.Content) { ViewType = viewType, ViewModelType = viewModelType };
+                return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), global::Android.Resource.Id.Content) { ViewType = viewType, ViewModelType = viewModelType };
             }
             else if (viewType.IsSubclassOf(typeof(Activity)))
             {

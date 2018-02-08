@@ -2,7 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Platform.Platform;
+
+using MvvmCross.Base.Platform;
 
 namespace MvvmCross.Binding.Combiners
 {

@@ -6,17 +6,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MvvmCross.Base;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.IoC;
+using MvvmCross.Base.Logging;
+using MvvmCross.Base.Logging.LogProviders;
+using MvvmCross.Base.Platform;
+using MvvmCross.Base.Plugins;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.IoC;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Logging.LogProviders;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Core.Platform
 {

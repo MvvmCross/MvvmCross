@@ -8,8 +8,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Views;
-using MvvmCross.Droid.Views;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base.Core;
+using MvvmCross.Platform.Android.Views;
 
 namespace MvvmCross.Droid.Support.Design.EventSource
 {

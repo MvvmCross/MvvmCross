@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform.Droid.Views;
+using MvvmCross.Platform.Android.Base.Views;
 
 namespace MvvmCross.Platform.Android.Base.Platform
 {

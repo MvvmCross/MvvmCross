@@ -5,7 +5,6 @@
 using System;
 using System.IO;
 using Windows.ApplicationModel;
-using MvvmCross.Platform.Uwp.Platform;
 
 namespace MvvmCross.Plugin.ResourceLoader.Platform.Uap
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
+using MvvmCross.Base;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
 
 namespace Playground.Wpf
 {

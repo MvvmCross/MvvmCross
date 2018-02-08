@@ -5,13 +5,12 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using MvvmCross.Base;
+using MvvmCross.Base.Converters;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Binding.ValueConverters;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-using System.Collections.Generic;
 
 namespace MvvmCross.Binding.BindingContext
 {

@@ -4,13 +4,13 @@
 
 using System;
 using System.Threading;
+using MvvmCross.Base.Converters;
+using MvvmCross.Base.Core;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.IoC;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.IoC;
 
 namespace MvvmCross.Binding.Bindings
 {

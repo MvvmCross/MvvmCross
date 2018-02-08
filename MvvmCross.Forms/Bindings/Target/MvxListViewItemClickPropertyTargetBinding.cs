@@ -8,7 +8,6 @@ using System.Windows.Input;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Forms.Views;
-using MvvmCross.Platform.Platform;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Bindings.Target

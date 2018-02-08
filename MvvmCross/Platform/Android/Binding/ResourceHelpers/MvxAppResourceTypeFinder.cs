@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Base;
+using MvvmCross.Base.Exceptions;
+using MvvmCross.Platform.Android.Base;
 
 namespace MvvmCross.Platform.Android.Binding.ResourceHelpers
 {

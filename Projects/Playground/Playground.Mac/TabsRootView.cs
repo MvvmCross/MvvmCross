@@ -1,7 +1,7 @@
 using System;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Mac.Views;
-using MvvmCross.Mac.Views.Presenters.Attributes;
+using MvvmCross.Platform.Mac.Views;
+using MvvmCross.Platform.Mac.Views.Presenters.Attributes;
 using Playground.Core.ViewModels;
 
 namespace Playground.Mac

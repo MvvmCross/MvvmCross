@@ -5,9 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MvvmCross.Base.Converters;
+using MvvmCross.Base.Logging;
 using MvvmCross.Binding.Bindings.SourceSteps;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Binding.Combiners
 {

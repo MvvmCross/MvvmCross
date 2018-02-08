@@ -7,12 +7,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Moq;
+using MvvmCross.Base.Converters;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.ExpressionParse;
-using MvvmCross.Platform.Converters;
 using MvvmCross.Test;
 using Xunit;
 

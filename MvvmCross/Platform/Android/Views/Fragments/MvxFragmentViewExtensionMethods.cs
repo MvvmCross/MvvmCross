@@ -3,10 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using Android.App;
+using MvvmCross.Base;
+using MvvmCross.Base.Logging;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
 
 namespace MvvmCross.Platform.Android.Views.Fragments
 {
@@ -50,7 +49,7 @@ namespace MvvmCross.Platform.Android.Views.Fragments
             return (TFragment)fragment;
         }
 
-        public static void LoadViewModelFrom(this Droid.Views.IMvxFragmentView view, MvxViewModelRequest request, IMvxBundle savedState = null)
+        public static void LoadViewModelFrom(this Android.Views.IMvxFragmentView view, MvxViewModelRequest request, IMvxBundle savedState = null)
         {
             var loader = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(request, savedState);

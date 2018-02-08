@@ -6,8 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.IoC;
+using MvvmCross.Base.Converters;
+using MvvmCross.Base.IoC;
 
 namespace MvvmCross.Platform.Tvos.Binding.ValueConverters
 {

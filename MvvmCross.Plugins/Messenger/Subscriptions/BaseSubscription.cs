@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Plugins.Messenger.ThreadRunners;
+using MvvmCross.Plugin.Messenger.ThreadRunners;
 
 namespace MvvmCross.Plugin.Messenger.Subscriptions
 {

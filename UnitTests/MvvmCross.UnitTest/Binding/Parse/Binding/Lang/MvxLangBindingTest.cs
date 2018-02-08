@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Lang;
 using MvvmCross.Test;

@@ -4,11 +4,10 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using MvvmCross.Base;
+using MvvmCross.Base.Exceptions;
 using MvvmCross.Binding.Parse.PropertyPath;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
 
 namespace MvvmCross.Binding.Bindings.Source.Construction
 {

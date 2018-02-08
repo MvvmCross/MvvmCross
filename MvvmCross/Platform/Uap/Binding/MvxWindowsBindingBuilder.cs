@@ -4,14 +4,15 @@
 
 using System;
 using Windows.UI.Xaml;
+using MvvmCross.Base;
+using MvvmCross.Base.Converters;
+using MvvmCross.Base.Core;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
-using MvvmCross.Binding.Uwp.MvxBinding;
-using MvvmCross.Binding.Uwp.MvxBinding.Target;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Uap.Binding.MvxBinding;
+using MvvmCross.Platform.Uap.Binding.MvxBinding.Target;
 
 namespace MvvmCross.Platform.Uap.Binding
 {

@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
-using MvvmCross.Plugins.JsonLocalization.Tests.Mocks;
+using MvvmCross.Plugins.JsonLocalization.UnitTest.TestClasses;
 using MvvmCross.Test;
 using Xunit;
 

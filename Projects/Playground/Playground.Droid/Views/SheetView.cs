@@ -6,10 +6,9 @@ using System;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Support.Design;
-using MvvmCross.Droid.Support.V4;
-using MvvmCross.Droid.Views.Attributes;
+using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.Platform.Android.Views.Attributes;
 using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Views

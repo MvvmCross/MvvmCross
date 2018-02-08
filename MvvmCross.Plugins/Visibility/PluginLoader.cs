@@ -3,14 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Reflection;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Plugins;
-
-namespace MvvmCross.Plugin.Visibility
-{
-    [Preserve(AllMembers = true)]
-    public class PluginLoader
+using MvvmCross.Base;
+using MvvmCross.Base.Converters;
+using MvvmCross.Base.Plugins;
+class PluginLoader
         : IMvxPluginLoader
     {
         public static readonly PluginLoader Instance = new PluginLoader();

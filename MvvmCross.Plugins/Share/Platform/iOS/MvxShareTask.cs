@@ -3,10 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using Foundation;
-using MvvmCross.Platform;
-using MvvmCross.Platform.iOS.Platform;
-using MvvmCross.Platform.iOS.Views;
-using MvvmCross.iOS.Support.Views;
+using MvvmCross.Platform.Ios.Base.Platform;
 using Twitter;
 using UIKit;
 
