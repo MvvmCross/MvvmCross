@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content.PM;
 using MvvmCross.Droid.Views;
@@ -23,10 +24,10 @@ namespace Playground.Forms.Droid
         {
         }
 
-        protected override void TriggerFirstNavigate()
+        protected override Task TriggerFirstNavigate()
         {
             StartActivity(typeof(MainActivity));
-            base.TriggerFirstNavigate();
+            return base.TriggerFirstNavigate();
         }
     }
 }

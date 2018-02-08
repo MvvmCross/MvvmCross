@@ -122,6 +122,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\hamburger.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp">
+      <Version>4.4.1</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>10.0.3</Version>
     </PackageReference>
