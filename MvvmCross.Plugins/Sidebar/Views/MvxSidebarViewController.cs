@@ -8,6 +8,8 @@ using System.Reflection;
 using MvvmCross.Base;
 using MvvmCross.Base.Logging;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Ios.Views;
+using MvvmCross.Platform.Ios.Views.Presenters;
 using SidebarNavigation;
 using UIKit;
 

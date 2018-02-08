@@ -6,7 +6,10 @@ using System.Reflection;
 using MvvmCross.Base;
 using MvvmCross.Base.Converters;
 using MvvmCross.Base.Plugins;
-class PluginLoader
+
+namespace MvvmCross.Plugin.Visibility
+{
+    public class PluginLoader
         : IMvxPluginLoader
     {
         public static readonly PluginLoader Instance = new PluginLoader();

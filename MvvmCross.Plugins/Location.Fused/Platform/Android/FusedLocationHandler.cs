@@ -8,7 +8,9 @@ using Android.Gms.Common;
 using Android.Gms.Common.Apis;
 using Android.Gms.Location;
 using Android.OS;
+using MvvmCross.Base;
 using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
 
 namespace MvvmCross.Plugin.Location.Fused.Platform.Android
 {
@@ -60,7 +62,7 @@ namespace MvvmCross.Plugin.Location.Fused.Platform.Android
             }
 		}
 
-		public Android.Locations.Location GetLastKnownLocation()
+		public global::Android.Locations.Location GetLastKnownLocation()
 		{
 			if (_client.IsConnected)
 				return LocationServices.FusedLocationApi.GetLastLocation(_client);

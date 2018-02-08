@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using Android.Widget;
+using MvvmCross.Base;
 
 namespace MvvmCross.Plugin.Color.Platform.Android.BindingTargets
 {
@@ -18,7 +19,7 @@ namespace MvvmCross.Plugin.Color.Platform.Android.BindingTargets
         protected override void SetValueImpl(object target, object value)
         {
             var textView = (TextView)target;
-            textView?.SetTextColor((Android.Graphics.Color) value);
+            textView?.SetTextColor((global::Android.Graphics.Color) value);
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Collections.Specialized;
 using Android.Runtime;
 using Android.Support.V17.Leanback.Widget;
 using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
 using MvvmCross.Base.WeakSubscription;
 using MvvmCross.Platform.Android.Binding.BindingContext;
 

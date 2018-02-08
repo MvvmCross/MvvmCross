@@ -9,11 +9,12 @@ using Foundation;
 using MessageUI;
 using MvvmCross.Base.Exceptions;
 using MvvmCross.Platform.Ios.Base.Platform;
+using MvvmCross.Platform.Ios.Views;
 using UIKit;
 
 namespace MvvmCross.Plugin.Email.Platform.iOS
 {
-    [MvvmCross.Platform.Preserve(AllMembers = true)]
+    [MvvmCross.Base.Preserve(AllMembers = true)]
 	public class MvxComposeEmailTask
         : MvxIosTask
         , IMvxComposeEmailTaskEx

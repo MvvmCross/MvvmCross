@@ -4,12 +4,13 @@
 
 using Foundation;
 using MvvmCross.Platform.Ios.Base.Platform;
+using MvvmCross.Platform.Ios.Views;
 using Twitter;
 using UIKit;
 
 namespace MvvmCross.Plugin.Share.Platform.iOS
 {
-    [MvvmCross.Platform.Preserve(AllMembers = true)]
+    [MvvmCross.Base.Preserve(AllMembers = true)]
 	public class MvxShareTask
         : MvxIosTask, IMvxShareTask
     {

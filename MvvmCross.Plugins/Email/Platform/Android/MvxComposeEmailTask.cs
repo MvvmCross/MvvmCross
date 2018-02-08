@@ -11,6 +11,7 @@ using Android.OS;
 using Android.Text;
 using Java.IO;
 using Java.Lang;
+using MvvmCross.Base;
 using MvvmCross.Platform.Android.Base.Platform;
 using MvvmCross.Platform.Android.Base.Views;
 using File = Java.IO.File;

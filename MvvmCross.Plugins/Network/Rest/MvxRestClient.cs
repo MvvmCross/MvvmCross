@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MvvmCross.Base;
 using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
 
 namespace MvvmCross.Plugin.Network.Rest
 {

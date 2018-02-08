@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using Android.Views;
+using MvvmCross.Base;
 using MvvmCross.Base.UI;
 
 namespace MvvmCross.Plugin.Visibility.Platform.Android

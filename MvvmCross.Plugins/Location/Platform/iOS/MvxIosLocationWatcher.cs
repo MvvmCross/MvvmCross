@@ -6,11 +6,13 @@ using System;
 using CoreLocation;
 using Foundation;
 using MvvmCross.Base.Exceptions;
+using MvvmCross.Base.Logging;
+using MvvmCross.Platform.Ios.Base;
 using MvvmCross.Platform.Ios.Base.Platform;
 
 namespace MvvmCross.Plugin.Location.Platform.iOS
 {
-    [MvvmCross.Platform.Preserve(AllMembers = true)]
+    [MvvmCross.Base.Preserve(AllMembers = true)]
 	public sealed class MvxIosLocationWatcher
         : MvxLocationWatcher
     {

@@ -23,7 +23,7 @@ namespace MvvmCross.Plugin.Location.Platform.Android
 
         #region Implementation of ILocationListener
 
-        public void OnLocationChanged(Android.Locations.Location location)
+        public void OnLocationChanged(global::Android.Locations.Location location)
         {
             _owner.OnLocationChanged(location);
         }

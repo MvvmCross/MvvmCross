@@ -10,6 +10,7 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Swiss;
 using MvvmCross.Test;
+using MvvmCross.Base.Logging;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss

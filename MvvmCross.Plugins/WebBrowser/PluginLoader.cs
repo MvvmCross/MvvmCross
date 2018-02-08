@@ -4,7 +4,10 @@
 
 using MvvmCross.Base;
 using MvvmCross.Base.Plugins;
-public class PluginLoader
+
+namespace MvvmCross.Plugin.WebBrowser
+{
+    public class PluginLoader
         : IMvxPluginLoader
     {
         public static readonly PluginLoader Instance = new PluginLoader();

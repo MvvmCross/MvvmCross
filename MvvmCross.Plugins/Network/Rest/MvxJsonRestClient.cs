@@ -9,19 +9,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using MvvmCross.Base;
 using MvvmCross.Base.Platform;
-using MvvmCross.Plugin.Network.Rest;
 
-public class MvxJsonRestClient
+namespace MvvmCross.Plugin.Network.Rest
+{
+    [Preserve(AllMembers = true)]
+    public class MvxJsonRestClient
         : MvxRestClient, IMvxJsonRestClient
     {
         public Func<IMvxJsonConverter> JsonConverterProvider { get; set; }
 
         public IMvxAbortable MakeRequestFor<T>(MvxRestRequest restRequest, Action<MvxDecodedRestResponse<T>> successAction, Action<Exception> errorAction)
         {
-            return MakeRequest(restRequest, (MvxStreamRestResponse streamResponse) =>
-            {
-                using (var textReader = new StreamReader(streamResponse.Stream))
-                {
+            return MakeRequest(restRequest, (MvxStreamRestResponse streamResponse) => {
+                using (var textReader = new StreamReader(streamResponse.Stream)) {
                     var text = textReader.ReadToEnd();
                     var result = JsonConverterProvider().DeserializeObject<T>(text);
                     var decodedResponse = new MvxDecodedRestResponse<T>
@@ -40,18 +40,13 @@ public class MvxJsonRestClient
         {
             var decodedResponse = new MvxDecodedRestResponse<T>();
 
-            try
-            {
+            try {
                 var streamResponse = await MakeStreamRequestAsync(restRequest, cancellationToken).ConfigureAwait(false);
 
-                if (streamResponse.StatusCode == HttpStatusCode.BadRequest)
-                {
+                if (streamResponse.StatusCode == HttpStatusCode.BadRequest) {
                     decodedResponse.StatusCode = HttpStatusCode.BadRequest;
-                }
-                else
-                {
-                    using (var textReader = new StreamReader(streamResponse.Stream))
-                    {
+                } else {
+                    using (var textReader = new StreamReader(streamResponse.Stream)) {
                         var text = textReader.ReadToEnd();
                         var result = JsonConverterProvider().DeserializeObject<T>(text);
 
@@ -61,9 +56,7 @@ public class MvxJsonRestClient
                         decodedResponse.Tag = streamResponse.Tag;
                     }
                 }
-            }
-            catch
-            {
+            } catch {
                 decodedResponse.StatusCode = HttpStatusCode.BadRequest;
             }
 
