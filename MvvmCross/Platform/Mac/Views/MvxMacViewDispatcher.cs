@@ -4,7 +4,7 @@
 
 using System;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Mac.Views.Presenters;
+using MvvmCross.Platform.Mac.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 

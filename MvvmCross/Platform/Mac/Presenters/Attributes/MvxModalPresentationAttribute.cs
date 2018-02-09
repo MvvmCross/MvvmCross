@@ -4,7 +4,7 @@
 
 using MvvmCross.Views;
 
-namespace MvvmCross.Platform.Mac.Views.Presenters.Attributes
+namespace MvvmCross.Platform.Mac.Presenters.Attributes
 {
     public class MvxModalPresentationAttribute : MvxBasePresentationAttribute
     {

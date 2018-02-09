@@ -11,7 +11,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Platform.Android.Core;
-using MvvmCross.Platform.Android.Views;
+using MvvmCross.Platform.Android.Presenters;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {

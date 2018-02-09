@@ -15,8 +15,9 @@ using Android.Support.V4.View;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
+using MvvmCross.Platform.Android.Presenters;
+using MvvmCross.Platform.Android.Presenters.Attributes;
 using MvvmCross.Platform.Android.Views;
-using MvvmCross.Platform.Android.Views.Attributes;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 

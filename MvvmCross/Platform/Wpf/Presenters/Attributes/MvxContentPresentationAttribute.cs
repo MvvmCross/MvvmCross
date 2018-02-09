@@ -4,7 +4,7 @@
 
 using MvvmCross.Views;
 
-namespace MvvmCross.Platform.Wpf.Views.Presenters.Attributes
+namespace MvvmCross.Platform.Wpf.Presenters.Attributes
 {
     public class MvxContentPresentationAttribute : MvxBasePresentationAttribute
     {

@@ -6,8 +6,8 @@ using System.Windows.Threading;
 using System.Windows.Controls;
 using MvvmCross.Plugins;
 using MvvmCross.Core;
+using MvvmCross.Platform.Wpf.Presenters;
 using MvvmCross.Platform.Wpf.Views;
-using MvvmCross.Platform.Wpf.Views.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 

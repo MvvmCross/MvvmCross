@@ -4,7 +4,7 @@
 
 using MvvmCross.Views;
 
-namespace MvvmCross.Platform.Tvos.Views.Presenters.Attributes
+namespace MvvmCross.Platform.Tvos.Presenters.Attributes
 {
     public class MvxMasterDetailPresentationAttribute : MvxBasePresentationAttribute
     {

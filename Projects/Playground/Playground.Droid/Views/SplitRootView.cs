@@ -7,7 +7,7 @@ using Android.Content.PM;
 using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Platform.Android.Views.Attributes;
+using MvvmCross.Platform.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Views

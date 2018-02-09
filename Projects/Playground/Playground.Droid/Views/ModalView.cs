@@ -10,7 +10,7 @@ using MvvmCross;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Platform.Android.Base.Platform;
 using MvvmCross.Platform.Android.Binding.BindingContext;
-using MvvmCross.Platform.Android.Views.Attributes;
+using MvvmCross.Platform.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Views

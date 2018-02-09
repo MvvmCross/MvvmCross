@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Platform.Android.Views.Attributes
+namespace MvvmCross.Platform.Android.Presenters.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class MvxDialogFragmentPresentationAttribute : MvxFragmentPresentationAttribute

@@ -14,6 +14,7 @@ using MvvmCross.Forms.Platform.Android.Bindings;
 using MvvmCross.Forms.Platform.Android.Views;
 using MvvmCross.Platform.Android.Base.Platform;
 using MvvmCross.Platform.Android.Core;
+using MvvmCross.Platform.Android.Presenters;
 using MvvmCross.Platform.Android.Views;
 using MvvmCross.Plugins;
 using MvvmCross.ViewModels;

@@ -8,7 +8,7 @@ using MvvmCross.Logging;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
-namespace MvvmCross.Platform.Android.Views.Attributes
+namespace MvvmCross.Platform.Android.Presenters.Attributes
 {
     public static class MvxAndroidPresentationAttributeExtensions
     {

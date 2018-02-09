@@ -15,8 +15,8 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core;
 using MvvmCross.Platform.Mac.Binding;
+using MvvmCross.Platform.Mac.Presenters;
 using MvvmCross.Platform.Mac.Views;
-using MvvmCross.Platform.Mac.Views.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 

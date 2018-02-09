@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Platform.Android.Base;
 
-namespace MvvmCross.Platform.Android.Views.Attributes
+namespace MvvmCross.Platform.Android.Presenters.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class MvxViewPagerFragmentPresentationAttribute : MvxFragmentPresentationAttribute

@@ -6,9 +6,10 @@ using System;
 using System.Windows;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
+using MvvmCross.Platform.Wpf.Views;
 using MvvmCross.ViewModels;
 
-namespace MvvmCross.Platform.Wpf.Views.Presenters
+namespace MvvmCross.Platform.Wpf.Presenters
 {
     public abstract class MvxBaseWpfViewPresenter
         : MvxWpfViewPresenter, IMvxWpfViewPresenter

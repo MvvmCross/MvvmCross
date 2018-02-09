@@ -15,6 +15,7 @@ using MvvmCross.Exceptions;
 using MvvmCross.Plugins;
 using MvvmCross.Core;
 using MvvmCross.Platform.Uap.Binding;
+using MvvmCross.Platform.Uap.Presenters;
 using MvvmCross.Platform.Uap.Views;
 using MvvmCross.Platform.Uap.Views.Suspension;
 using MvvmCross.ViewModels;

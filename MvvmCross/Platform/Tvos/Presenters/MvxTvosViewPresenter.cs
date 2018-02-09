@@ -8,12 +8,13 @@ using System.Linq;
 using CoreGraphics;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Tvos.Views.Presenters.Attributes;
+using MvvmCross.Platform.Tvos.Presenters.Attributes;
+using MvvmCross.Platform.Tvos.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using UIKit;
 
-namespace MvvmCross.Platform.Tvos.Views.Presenters
+namespace MvvmCross.Platform.Tvos.Presenters
 {
     public class MvxTvosViewPresenter
         : MvxAttributeViewPresenter, IMvxTvosViewPresenter

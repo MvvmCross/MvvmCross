@@ -4,7 +4,7 @@
 
 using MvvmCross.Views;
 
-namespace MvvmCross.Platform.Ios.Views.Presenters.Attributes
+namespace MvvmCross.Platform.Ios.Presenters.Attributes
 {
     public class MvxDetailSplitViewPresentationAttribute : MvxBasePresentationAttribute
     {

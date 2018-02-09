@@ -3,11 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Forms.Base;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Views;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Ios.Views.Presenters;
+using MvvmCross.Platform.Ios.Presenters;
 using MvvmCross.ViewModels;
 using UIKit;
 using Xamarin.Forms;

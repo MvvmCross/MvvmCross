@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Windows.Threading;
-using MvvmCross.Platform.Wpf.Views.Presenters;
+using MvvmCross.Platform.Wpf.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
