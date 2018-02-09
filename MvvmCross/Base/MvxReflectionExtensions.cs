@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace MvvmCross.Base
 {
-    public static class ReflectionExtensions
+    public static class MvxReflectionExtensions
     {
         public static Attribute[] GetCustomAttributes(this Type type, Type attributeType, bool inherit)
         {
