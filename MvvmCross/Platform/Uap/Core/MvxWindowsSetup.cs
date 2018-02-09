@@ -26,7 +26,7 @@ namespace MvvmCross.Platform.Uap.Core
         protected MvxWindowsSetup(Frame rootFrame, IActivatedEventArgs activatedEventArgs,
             string suspensionManagerSessionStateKey = null) : this(rootFrame, suspensionManagerSessionStateKey)
         {
-            ActivatedEventArgs = activatedEventArgs;
+            ActivationArguments = activatedEventArgs;
         }
 
         protected MvxWindowsSetup(Frame rootFrame, string suspensionManagerSessionStateKey = null)
@@ -149,7 +149,7 @@ namespace MvvmCross.Platform.Uap.Core
             // this base class does nothing
         }
 
-        protected IActivatedEventArgs ActivatedEventArgs { get; }
+        protected IActivatedEventArgs ActivationArguments { get; }
 
         protected virtual List<Type> ValueConverterHolders => new List<Type>();        
 
