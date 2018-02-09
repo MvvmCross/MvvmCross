@@ -9,7 +9,7 @@ namespace MvvmCross.Forms.Core
 {
     public class MvxFormsApplication : Application
     {
-        public MvxFormsApplication()
+        protected MvxFormsApplication()
         {
         }
 

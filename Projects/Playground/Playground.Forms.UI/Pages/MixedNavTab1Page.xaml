@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
              xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-             x:Class="Playground.Forms.Pages.MixedNavTab1Page">
+             x:Class="Playground.Forms.UI.Pages.MixedNavTab1Page">
     
         <StackLayout>
             <Label Text="This is Tab 1" />

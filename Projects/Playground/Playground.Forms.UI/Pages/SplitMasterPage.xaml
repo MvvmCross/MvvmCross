@@ -5,7 +5,7 @@
     xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
     xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
     xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
-                      x:Class="Playground.Forms.Pages.SplitMasterPage"
+                      x:Class="Playground.Forms.UI.Pages.SplitMasterPage"
                       Title="SplitMaster page"
                         Icon="hamburger.png">
     <ContentPage.Content>

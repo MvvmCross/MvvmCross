@@ -5,7 +5,9 @@ using System.Reflection;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platform.iOS.Core;
 using MvvmCross.Platform.Ios.Core;
+using MvvmCross.Plugin.Json;
 using UIKit;
+using Playground.Forms.UI;
 
 namespace Playground.Forms.iOS
 {

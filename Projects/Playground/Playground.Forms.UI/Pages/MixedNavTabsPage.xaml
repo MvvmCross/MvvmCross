@@ -3,6 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
              xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-             x:Class="Playground.Forms.Pages.MixedNavTabsPage">
+             x:Class="Playground.Forms.UI.Pages.MixedNavTabsPage">
     
 </views:MvxTabbedPage>

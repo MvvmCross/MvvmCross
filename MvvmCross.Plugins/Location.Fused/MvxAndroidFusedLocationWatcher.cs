@@ -11,7 +11,7 @@ using MvvmCross.Base.Logging;
 using MvvmCross.Platform.Android.Base;
 using MvvmCross.Platform.Android.Base.Platform;
 
-namespace MvvmCross.Plugin.Location.Fused.Platform.Android
+namespace MvvmCross.Plugin.Location.Fused
 {
     [Preserve(AllMembers = true)]
 	public class MvxAndroidFusedLocationWatcher
