@@ -6,7 +6,6 @@ using UIKit;
 using CoreGraphics;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platform.Tvos.Views;
-using MvvmCross.Platform.Tvos.Views.Presenters.Attributes;
 
 namespace Playground.TvOS
 {

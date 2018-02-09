@@ -5,8 +5,8 @@ using AppKit;
 using Playground.Core.ViewModels;
 using System.Linq;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Platform.Mac.Presenters.Attributes;
 using MvvmCross.Platform.Mac.Views;
-using MvvmCross.Platform.Mac.Views.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 

@@ -13,7 +13,7 @@ using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platform.Mac.Bindings;
 using MvvmCross.Forms.Platform.Mac.Views;
 using MvvmCross.Platform.Mac.Core;
-using MvvmCross.Platform.Mac.Views.Presenters;
+using MvvmCross.Platform.Mac.Presenters;
 using MvvmCross.Plugins;
 using MvvmCross.ViewModels;
 

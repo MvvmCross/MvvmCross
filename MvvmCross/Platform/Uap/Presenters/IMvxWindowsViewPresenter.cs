@@ -4,7 +4,7 @@
 
 using MvvmCross.Views;
 
-namespace MvvmCross.Platform.Uap.Views
+namespace MvvmCross.Platform.Uap.Presenters
 {
     public interface IMvxWindowsViewPresenter
         : IMvxViewPresenter

@@ -4,7 +4,7 @@
 
 using MvvmCross.Views;
 
-namespace MvvmCross.Platform.Uap.Attributes
+namespace MvvmCross.Platform.Uap.Presenters.Attributes
 {
     public class MvxPagePresentationAttribute : MvxBasePresentationAttribute
     {

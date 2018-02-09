@@ -4,7 +4,7 @@
 
 using System;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Ios.Views.Presenters;
+using MvvmCross.Platform.Ios.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 

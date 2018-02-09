@@ -8,7 +8,7 @@ using Android.Views;
 using MvvmCross.Platform.Android.Base;
 using MvvmCross.Views;
 
-namespace MvvmCross.Platform.Android.Views.Attributes
+namespace MvvmCross.Platform.Android.Presenters.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class MvxFragmentPresentationAttribute : MvxBasePresentationAttribute

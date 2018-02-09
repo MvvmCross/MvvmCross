@@ -16,6 +16,7 @@ using MvvmCross.Platform.Uap.Views;
 using MvvmCross.Plugins;
 using MvvmCross.ViewModels;
 using XamlControls = Windows.UI.Xaml.Controls;
+using MvvmCross.Platform.Uap.Presenters;
 
 namespace MvvmCross.Forms.Platform.Uap.Core
 {

@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
-using MvvmCross.Platform.Uap.Attributes;
+using MvvmCross.Platform.Uap.Presenters.Attributes;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platform.Uap.Views

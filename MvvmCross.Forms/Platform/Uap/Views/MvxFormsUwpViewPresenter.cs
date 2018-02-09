@@ -6,6 +6,7 @@ using MvvmCross.Forms.Views;
 using System;
 using MvvmCross.Forms.Core;
 using MvvmCross.Logging;
+using MvvmCross.Platform.Uap.Presenters;
 using MvvmCross.Platform.Uap.Views;
 using MvvmCross.ViewModels;
 

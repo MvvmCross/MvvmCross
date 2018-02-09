@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Platform.Tvos.Views.Presenters.Attributes;
+using MvvmCross.Platform.Tvos.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using UIKit;
 

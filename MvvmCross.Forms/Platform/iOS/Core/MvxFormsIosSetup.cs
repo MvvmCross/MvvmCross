@@ -12,7 +12,7 @@ using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platform.iOS.Bindings;
 using MvvmCross.Forms.Platform.iOS.Views;
 using MvvmCross.Platform.Ios.Core;
-using MvvmCross.Platform.Ios.Views.Presenters;
+using MvvmCross.Platform.Ios.Presenters;
 using MvvmCross.Plugins;
 using MvvmCross.ViewModels;
 using UIKit;

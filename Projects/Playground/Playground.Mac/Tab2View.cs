@@ -1,7 +1,7 @@
 ﻿using AppKit;
 using CoreGraphics;
+using MvvmCross.Platform.Mac.Presenters.Attributes;
 using MvvmCross.Platform.Mac.Views;
-using MvvmCross.Platform.Mac.Views.Presenters.Attributes;
 using Playground.Core.ViewModels;
 
 namespace Playground.Mac

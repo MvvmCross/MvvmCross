@@ -8,8 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
+using MvvmCross.Platform.Wpf.Views;
 
-namespace MvvmCross.Platform.Wpf.Views.Presenters
+namespace MvvmCross.Platform.Wpf.Presenters
 {
     public class MvxSimpleWpfViewPresenter
         : MvxBaseWpfViewPresenter

@@ -5,7 +5,7 @@
 using Android.Content;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Android.Views;
+using MvvmCross.Platform.Android.Presenters;
 using MvvmCross.ViewModels;
 using Playground.Core;
 using Serilog;

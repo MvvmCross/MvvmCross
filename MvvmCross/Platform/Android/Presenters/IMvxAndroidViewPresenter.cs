@@ -4,7 +4,7 @@
 
 using MvvmCross.Views;
 
-namespace MvvmCross.Platform.Android.Views
+namespace MvvmCross.Platform.Android.Presenters
 {
     public interface IMvxAndroidViewPresenter
         : IMvxViewPresenter

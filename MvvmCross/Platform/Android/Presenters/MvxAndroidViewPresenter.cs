@@ -15,12 +15,13 @@ using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platform.Android.Base.Platform;
 using MvvmCross.Platform.Android.Core;
-using MvvmCross.Platform.Android.Views.Attributes;
+using MvvmCross.Platform.Android.Presenters.Attributes;
+using MvvmCross.Platform.Android.Views;
 using MvvmCross.Platform.Android.Views.Fragments;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
-namespace MvvmCross.Platform.Android.Views
+namespace MvvmCross.Platform.Android.Presenters
 {
     public class MvxAndroidViewPresenter : MvxAttributeViewPresenter, IMvxAndroidViewPresenter
     {

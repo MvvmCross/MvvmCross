@@ -6,7 +6,7 @@ using CoreGraphics;
 using MvvmCross.Views;
 using UIKit;
 
-namespace MvvmCross.Platform.Tvos.Views.Presenters.Attributes
+namespace MvvmCross.Platform.Tvos.Presenters.Attributes
 {
     public class MvxModalPresentationAttribute : MvxBasePresentationAttribute
     {

@@ -21,6 +21,7 @@ using MvvmCross.Platform.Android.Base.Platform;
 using MvvmCross.Platform.Android.Binding;
 using MvvmCross.Platform.Android.Binding.Binders.ViewTypeResolvers;
 using MvvmCross.Platform.Android.Binding.Views;
+using MvvmCross.Platform.Android.Presenters;
 using MvvmCross.Platform.Android.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;

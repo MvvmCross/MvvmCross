@@ -5,8 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MvvmCross.Platform.Tvos.Views.Presenters;
-using MvvmCross.Platform.Tvos.Views.Presenters.Attributes;
+using MvvmCross.Platform.Tvos.Presenters;
+using MvvmCross.Platform.Tvos.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using UIKit;
 

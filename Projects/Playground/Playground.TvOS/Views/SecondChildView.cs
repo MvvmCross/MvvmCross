@@ -2,8 +2,6 @@
 using MvvmCross;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platform.Tvos.Views;
-using MvvmCross.Platform.Tvos.Views.Presenters;
-using MvvmCross.Platform.Tvos.Views.Presenters.Attributes;
 using Playground.Core.ViewModels;
 using UIKit;
 

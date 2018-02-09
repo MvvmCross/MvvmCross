@@ -9,11 +9,12 @@ using AppKit;
 using CoreGraphics;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Mac.Views.Presenters.Attributes;
+using MvvmCross.Platform.Mac.Presenters.Attributes;
+using MvvmCross.Platform.Mac.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
-namespace MvvmCross.Platform.Mac.Views.Presenters
+namespace MvvmCross.Platform.Mac.Presenters
 {
     public class MvxMacViewPresenter
         : MvxAttributeViewPresenter, IMvxMacViewPresenter, IMvxAttributeViewPresenter

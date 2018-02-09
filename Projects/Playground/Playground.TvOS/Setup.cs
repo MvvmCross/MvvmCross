@@ -1,6 +1,5 @@
 ﻿using UIKit;
 using MvvmCross.Platform.Tvos.Core;
-using MvvmCross.Platform.Tvos.Views.Presenters;
 using MvvmCross.ViewModels;
 using Playground.Core;
 
