@@ -6,11 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Base;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.IoC;
+using MvvmCross.Exceptions;
+using MvvmCross.IoC;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public class MvxViewModelViewLookupBuilder
         : IMvxTypeToTypeLookupBuilder

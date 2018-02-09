@@ -4,10 +4,10 @@
 
 using System;
 using System.Linq;
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.Core;
 using MvvmCross.Test;
 using MvvmCross.UnitTest.Mocks.TestViewModels;
+using MvvmCross.ViewModels;
 using Xunit;
 
 namespace MvvmCross.UnitTest.ViewModels

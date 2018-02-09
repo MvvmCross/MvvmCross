@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Base.Converters;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;
+using MvvmCross.Converters;
 
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {

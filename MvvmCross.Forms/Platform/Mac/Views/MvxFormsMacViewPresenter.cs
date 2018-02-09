@@ -4,13 +4,12 @@
 
 using System;
 using AppKit;
-using MvvmCross.Base;
-using MvvmCross.Base.Logging;
-using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Base;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Views;
+using MvvmCross.Logging;
 using MvvmCross.Platform.Mac.Views.Presenters;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Forms.Platform.Mac.Views
 {

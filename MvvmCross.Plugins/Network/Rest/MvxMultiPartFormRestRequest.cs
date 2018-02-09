@@ -6,8 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using MvvmCross.Base;
-using MvvmCross.Base.Exceptions;
+using MvvmCross.Exceptions;
 using MvvmCross.Plugin.File;
 
 namespace MvvmCross.Plugin.Network.Rest

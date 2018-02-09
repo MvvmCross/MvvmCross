@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public interface IMvxNotifyPropertyChanged : INotifyPropertyChanged
     {

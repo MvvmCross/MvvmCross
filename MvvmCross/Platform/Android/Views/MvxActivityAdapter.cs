@@ -6,12 +6,11 @@ using System;
 using Android.Content;
 using Android.OS;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.Logging;
-using MvvmCross.Core.Views;
+using MvvmCross.Logging;
 using MvvmCross.Platform.Android.Base.Platform;
 using MvvmCross.Platform.Android.Base.Views;
 using MvvmCross.Platform.Android.Core;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Android.Views
 {

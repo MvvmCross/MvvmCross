@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Base.Core;
+using MvvmCross.Base;
 
-namespace MvvmCross.Base.IoC
+namespace MvvmCross.IoC
 {
     /// <summary>
     /// Singleton IoC Provider.

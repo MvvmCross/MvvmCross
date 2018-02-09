@@ -4,7 +4,7 @@
 
 using System.Globalization;
 
-namespace MvvmCross.Base.UI
+namespace MvvmCross.UI
 {
     public class MvxColor
     {

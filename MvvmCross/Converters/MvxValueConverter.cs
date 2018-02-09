@@ -4,9 +4,9 @@
 
 using System;
 using System.Globalization;
-using MvvmCross.Base.Logging;
+using MvvmCross.Logging;
 
-namespace MvvmCross.Base.Converters
+namespace MvvmCross.Converters
 {
     public abstract class MvxValueConverter
         : IMvxValueConverter

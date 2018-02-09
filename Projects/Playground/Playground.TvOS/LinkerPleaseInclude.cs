@@ -6,8 +6,8 @@ using Foundation;
 using UIKit;
 
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core.Navigation;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.Navigation;
+using MvvmCross.ViewModels;
 
 namespace Playground.TvOS
 {

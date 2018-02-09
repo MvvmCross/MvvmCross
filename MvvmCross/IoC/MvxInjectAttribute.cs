@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Base.IoC
+namespace MvvmCross.IoC
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public class MvxInjectAttribute : Attribute

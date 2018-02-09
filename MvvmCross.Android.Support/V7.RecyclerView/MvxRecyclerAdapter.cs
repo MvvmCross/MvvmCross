@@ -9,15 +9,15 @@ using System.Windows.Input;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
-using MvvmCross.Base.WeakSubscription;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 using MvvmCross.Droid.Support.V7.RecyclerView.Model;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.WeakSubscription;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView

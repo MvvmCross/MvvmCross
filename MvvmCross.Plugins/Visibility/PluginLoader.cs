@@ -3,9 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Reflection;
-using MvvmCross.Base;
-using MvvmCross.Base.Converters;
-using MvvmCross.Base.Plugins;
+using MvvmCross.Converters;
+using MvvmCross.Plugins;
 
 namespace MvvmCross.Plugin.Visibility
 {

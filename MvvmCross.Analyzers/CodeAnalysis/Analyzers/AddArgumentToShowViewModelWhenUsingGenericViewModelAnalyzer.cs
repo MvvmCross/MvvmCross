@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using MvvmCross.CodeAnalysis.Core;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.CodeAnalysis.Analyzers
 {

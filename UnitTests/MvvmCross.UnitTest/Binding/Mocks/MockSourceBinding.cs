@@ -4,8 +4,8 @@
 
 using System;
 using System.Collections.Generic;
-using MvvmCross.Base.Converters;
 using MvvmCross.Binding.Bindings.Source;
+using MvvmCross.Converters;
 
 namespace MvvmCross.UnitTest.Binding.Mocks
 {

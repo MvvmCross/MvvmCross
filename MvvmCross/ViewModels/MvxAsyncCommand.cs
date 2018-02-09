@@ -5,10 +5,10 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using MvvmCross.Base.ExtensionMethods;
-using MvvmCross.Base.Logging;
+using MvvmCross.Base;
+using MvvmCross.Logging;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public abstract class MvxAsyncCommandBase
         : MvxCommandBase

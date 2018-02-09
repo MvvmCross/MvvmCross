@@ -5,7 +5,7 @@
 using System;
 using AppKit;
 using Foundation;
-using MvvmCross.Base.Core;
+using MvvmCross.Base;
 
 namespace MvvmCross.Platform.Mac.Base.Views
 {

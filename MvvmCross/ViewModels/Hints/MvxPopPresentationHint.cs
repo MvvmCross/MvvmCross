@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Core.ViewModels.Hints
+namespace MvvmCross.ViewModels.Hints
 {
     public class MvxPopPresentationHint
         : MvxPresentationHint

@@ -8,10 +8,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Android.Content;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.IoC;
-using MvvmCross.Base.Logging;
+using MvvmCross.Exceptions;
+using MvvmCross.IoC;
+using MvvmCross.Logging;
 using MvvmCross.Platform.Android.Views;
 
 namespace MvvmCross.Platform.Android.Core

@@ -5,9 +5,9 @@
 using System;
 using System.Reflection;
 using AppKit;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
+using MvvmCross.Exceptions;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Mac.Views
 {

@@ -4,8 +4,8 @@
 
 using System;
 using Windows.Devices.Sensors;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.Exceptions;
+using MvvmCross.Base;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.Plugin.Accelerometer.Platform.Uap
 {

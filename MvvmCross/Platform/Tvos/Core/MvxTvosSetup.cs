@@ -5,20 +5,19 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Base;
-using MvvmCross.Base.Converters;
-using MvvmCross.Base.Plugins;
+using MvvmCross.Converters;
+using MvvmCross.Plugins;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
+using MvvmCross.Core;
 using MvvmCross.Platform.Tvos.Base.Platform;
 using MvvmCross.Platform.Tvos.Binding;
 using MvvmCross.Platform.Tvos.Views;
 using MvvmCross.Platform.Tvos.Views.Presenters;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Core

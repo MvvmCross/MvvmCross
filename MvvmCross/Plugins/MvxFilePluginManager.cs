@@ -6,11 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.IoC;
-using MvvmCross.Base.Logging;
+using MvvmCross.Exceptions;
+using MvvmCross.IoC;
+using MvvmCross.Logging;
 
-namespace MvvmCross.Base.Plugins
+namespace MvvmCross.Plugins
 {
     public class MvxFilePluginManager
         : MvxPluginManager

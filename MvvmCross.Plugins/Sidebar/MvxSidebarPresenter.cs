@@ -2,14 +2,13 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Base;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
 using MvvmCross.Platform.Ios.Views;
 using MvvmCross.Platform.Ios.Views.Presenters;
 using MvvmCross.Platform.Ios.Views.Presenters.Attributes;
 using MvvmCross.Plugin.Sidebar.Extensions;
 using MvvmCross.Plugin.Sidebar.Views;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 using UIKit;
 
 namespace MvvmCross.Plugin.Sidebar

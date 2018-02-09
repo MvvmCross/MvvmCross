@@ -5,7 +5,6 @@
 using Android.Locations;
 using Android.OS;
 using Java.Lang;
-using MvvmCross.Base;
 
 namespace MvvmCross.Plugin.Location.Platform.Android
 {

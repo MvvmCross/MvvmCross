@@ -6,7 +6,7 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace MvvmCross.Base.Core
+namespace MvvmCross.Base
 {
     public static class MvxPropertyNameExtensionMethods
     {

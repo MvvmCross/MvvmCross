@@ -4,7 +4,7 @@
 
 using System;
 using Android.Support.V4.App;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V4
 {

@@ -5,14 +5,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-
 using CoreGraphics;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 using MvvmCross.Platform.Tvos.Views.Presenters.Attributes;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Views.Presenters

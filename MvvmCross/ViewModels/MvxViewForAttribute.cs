@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class MvxViewForAttribute : Attribute

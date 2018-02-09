@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Base;
 using MvvmCross.Binding;
-using MvvmCross.Base.Core;
+using MvvmCross.Core;
 
 namespace MvvmCross.Platform.Wpf.Binding
 {

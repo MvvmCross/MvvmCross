@@ -4,8 +4,7 @@
 
 using Windows.ApplicationModel;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.IoC;
+using MvvmCross.IoC;
 
 namespace MvvmCross.Platform.Uap.Base.Platform
 {

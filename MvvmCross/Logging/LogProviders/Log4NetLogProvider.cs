@@ -9,7 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace MvvmCross.Base.Logging.LogProviders
+namespace MvvmCross.Logging.LogProviders
 {
     internal class Log4NetLogProvider : MvxBaseLogProvider
     {

@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Core.Navigation;
-using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MvvmCross.Base.Logging;
+using MvvmCross.Logging;
+using MvvmCross.Navigation;
+using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {

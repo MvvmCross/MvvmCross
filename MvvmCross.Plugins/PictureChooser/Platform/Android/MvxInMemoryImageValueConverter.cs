@@ -5,8 +5,7 @@
 using System;
 using System.Globalization;
 using Android.Graphics;
-using MvvmCross.Base;
-using MvvmCross.Base.Converters;
+using MvvmCross.Converters;
 
 namespace MvvmCross.Plugin.PictureChooser.Platform.Android
 {

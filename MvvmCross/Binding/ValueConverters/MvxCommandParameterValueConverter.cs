@@ -5,7 +5,7 @@
 using System;
 using System.Globalization;
 using System.Windows.Input;
-using MvvmCross.Base.Converters;
+using MvvmCross.Converters;
 
 namespace MvvmCross.Binding.ValueConverters
 {

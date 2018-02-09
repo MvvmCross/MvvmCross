@@ -5,7 +5,6 @@
 using System;
 using System.IO;
 using Android.Content.Res;
-using MvvmCross.Base;
 using MvvmCross.Platform.Android.Base;
 
 namespace MvvmCross.Plugin.ResourceLoader.Platform.Android

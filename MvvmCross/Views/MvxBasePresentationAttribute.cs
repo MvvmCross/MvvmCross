@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Core.Views
+namespace MvvmCross.Views
 {
     [AttributeUsage(AttributeTargets.Class)]
     public abstract class MvxBasePresentationAttribute : Attribute

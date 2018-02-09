@@ -6,12 +6,11 @@ using System;
 using Android.App;
 using Android.OS;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.Logging;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
+using MvvmCross.Logging;
 using MvvmCross.Platform.Android.Core;
 using MvvmCross.Platform.Android.Views.Fragments.EventSource;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Android.Views.Fragments
 {

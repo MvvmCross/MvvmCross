@@ -4,8 +4,9 @@
 
 using System.Linq;
 using System.Reflection;
+using MvvmCross.Base;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public static class MvxViewModelExtensions
     {

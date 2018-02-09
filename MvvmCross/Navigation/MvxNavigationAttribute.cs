@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Core.Navigation
+namespace MvvmCross.Navigation
 {
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
     public sealed class MvxNavigationAttribute : Attribute

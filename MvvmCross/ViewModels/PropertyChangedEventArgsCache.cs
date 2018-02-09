@@ -5,7 +5,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     /// <summary>
     /// Provides a cache for <see cref="PropertyChangedEventArgs"/> instances.

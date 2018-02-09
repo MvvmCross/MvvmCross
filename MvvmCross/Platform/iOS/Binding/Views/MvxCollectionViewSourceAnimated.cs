@@ -9,7 +9,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 using Foundation;
-using MvvmCross.Base.Logging;
+using MvvmCross.Logging;
 using MvvmCross.Binding.ExtensionMethods;
 using UIKit;
 

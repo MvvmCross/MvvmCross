@@ -2,13 +2,11 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.Core;
+using MvvmCross.Exceptions;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Core
+namespace MvvmCross.Base
 {
     public class MvxSingletonCache
         : MvxSingleton<IMvxSingletonCache>, IMvxSingletonCache

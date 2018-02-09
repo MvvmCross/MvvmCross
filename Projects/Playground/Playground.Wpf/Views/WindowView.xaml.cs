@@ -1,6 +1,6 @@
-﻿using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Platform.Wpf.Views.Presenters.Attributes;
+﻿using MvvmCross.Platform.Wpf.Views.Presenters.Attributes;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace Playground.Wpf.Views
 {

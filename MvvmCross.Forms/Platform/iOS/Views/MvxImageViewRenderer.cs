@@ -4,10 +4,10 @@
 
 using System;
 using System.ComponentModel;
-using MvvmCross.Base.Logging;
 using MvvmCross.Forms.Base;
 using MvvmCross.Forms.Platform.iOS.Views;
 using MvvmCross.Forms.Views;
+using MvvmCross.Logging;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;

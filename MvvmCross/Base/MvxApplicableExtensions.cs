@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 
-namespace MvvmCross.Base.Core
+namespace MvvmCross.Base
 {
     public static class MvxApplicableExtensions
     {

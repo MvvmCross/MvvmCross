@@ -5,9 +5,8 @@
 using System;
 using System.Collections.Generic;
 using MvvmCross.Base;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Platform;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.Exceptions;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Core.Parse.StringDictionary
 {

@@ -11,15 +11,14 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
-using MvvmCross.Core.Navigation.EventArguments;
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
+using MvvmCross.Core;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
+using MvvmCross.Navigation.EventArguments;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
-namespace MvvmCross.Core.Navigation
+namespace MvvmCross.Navigation
 {
     public class MvxNavigationService : IMvxNavigationService
     {

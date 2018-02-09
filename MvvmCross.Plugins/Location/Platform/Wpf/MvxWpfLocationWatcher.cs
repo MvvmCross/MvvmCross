@@ -4,7 +4,7 @@
 
 using System;
 using System.Device.Location;
-using MvvmCross.Base.Exceptions;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.Plugin.Location.Platform.Wpf
 {

@@ -6,8 +6,7 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Runtime.CompilerServices;
-using MvvmCross.Base;
-using MvvmCross.Base.Logging;
+using MvvmCross.Logging;
 
 [assembly: InternalsVisibleTo("MvvmCross.UnitTest")]
 

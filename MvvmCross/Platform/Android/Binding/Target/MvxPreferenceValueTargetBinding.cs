@@ -4,7 +4,7 @@
 
 using System;
 using Android.Preferences;
-using MvvmCross.Base.Logging;
+using MvvmCross.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Platform.Android.Base.WeakSubscription;
 

@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 using Foundation;
-using MvvmCross.Base.Logging;
+using MvvmCross.Logging;
 using MvvmCross.Binding.Bindings;
 using UIKit;
 

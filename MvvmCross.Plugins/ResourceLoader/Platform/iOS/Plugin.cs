@@ -3,8 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Base;
-using MvvmCross.Base.Platform;
-using MvvmCross.Base.Plugins;
+using MvvmCross.Plugins;
 
 namespace MvvmCross.Plugin.ResourceLoader.Platform.iOS
 {

@@ -7,9 +7,8 @@ using System.Threading;
 using Android.Content;
 using Android.Locations;
 using Android.OS;
-using MvvmCross.Base;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 using MvvmCross.Platform.Android.Base;
 using MvvmCross.Platform.Android.Base.Platform;
 

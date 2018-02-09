@@ -4,9 +4,9 @@
 
 using System;
 using System.Reflection;
-using MvvmCross.Base.Exceptions;
+using MvvmCross.Exceptions;
 
-namespace MvvmCross.Base.WeakSubscription
+namespace MvvmCross.WeakSubscription
 {
     public class MvxWeakEventSubscription<TSource, TEventArgs> : IDisposable
         where TSource : class

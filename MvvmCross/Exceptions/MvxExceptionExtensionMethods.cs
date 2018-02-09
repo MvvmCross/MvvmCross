@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Base.Exceptions
+namespace MvvmCross.Exceptions
 {
     public static class MvxExceptionExtensionMethods
     {

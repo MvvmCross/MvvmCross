@@ -4,7 +4,6 @@
 
 using System.Threading.Tasks;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
 using MvvmCross.Plugin.File;
 using UIKit;
 

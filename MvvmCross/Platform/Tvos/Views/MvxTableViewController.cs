@@ -5,8 +5,8 @@
 using System;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Tvos.Base.Views;
+using MvvmCross.ViewModels;
 using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Views

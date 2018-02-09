@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Core.Views
+namespace MvvmCross.Views
 {
     public interface IMvxChildViewModelCache
     {

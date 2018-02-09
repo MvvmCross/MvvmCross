@@ -10,7 +10,7 @@ using Android.Util;
 using Android.Views;
 using Java.Lang;
 using Java.Lang.Reflect;
-using MvvmCross.Base.Logging;
+using MvvmCross.Logging;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Platform.Android.Binding.Binders

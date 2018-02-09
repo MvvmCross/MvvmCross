@@ -4,7 +4,7 @@
 
 using Android.Content;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.ViewModels;
 using Xamarin.Forms.Platform.Android;
 
 namespace MvvmCross.Forms.Platform.Android.Views

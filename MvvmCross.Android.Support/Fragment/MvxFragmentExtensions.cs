@@ -4,14 +4,13 @@
 
 using Android.Support.V4.App;
 using Android.Views;
-using MvvmCross.Base;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
 using MvvmCross.Droid.Support.V4.EventSource;
+using MvvmCross.Exceptions;
 using MvvmCross.Platform.Android.Binding.BindingContext;
 using MvvmCross.Platform.Android.Core;
 using MvvmCross.Platform.Android.Views;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Droid.Support.V4
 {

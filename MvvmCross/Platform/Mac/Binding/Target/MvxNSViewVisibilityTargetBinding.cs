@@ -4,7 +4,7 @@
 
 using System;
 using AppKit;
-using MvvmCross.Base.UI;
+using MvvmCross.UI;
 using MvvmCross.Binding;
 
 namespace MvvmCross.Platform.Mac.Binding.Target

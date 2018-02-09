@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using MvvmCross.Base;
 using MvvmCross.Binding.Bindings;
 
 namespace MvvmCross.Binding.BindingContext

@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-﻿using System;
+using System;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("MvvmCross.Test")]
 
-namespace MvvmCross.Base.Logging.LogProviders
+namespace MvvmCross.Logging.LogProviders
 {
     internal delegate bool Logger(MvxLogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters);
 

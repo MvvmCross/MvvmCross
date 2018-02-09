@@ -4,7 +4,7 @@
 
 using System;
 using AppKit;
-using MvvmCross.Base.Converters;
+using MvvmCross.Converters;
 using MvvmCross.Binding;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;

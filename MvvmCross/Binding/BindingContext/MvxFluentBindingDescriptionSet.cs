@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
-using MvvmCross.Base.Core;
+using MvvmCross.Base;
 using MvvmCross.Binding.Bindings;
 
 namespace MvvmCross.Binding.BindingContext

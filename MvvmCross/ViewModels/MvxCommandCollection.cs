@@ -5,9 +5,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using MvvmCross.Base.Logging;
+using MvvmCross.Logging;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public class MvxCommandCollection
         : IMvxCommandCollection

@@ -11,15 +11,14 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Java.Lang;
-using MvvmCross.Base;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 using MvvmCross.Platform.Android.Base.Platform;
 using MvvmCross.Platform.Android.Core;
 using MvvmCross.Platform.Android.Views.Attributes;
 using MvvmCross.Platform.Android.Views.Fragments;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Android.Views
 {

@@ -4,7 +4,7 @@
 
 using System;
 using Android.OS;
-using MvvmCross.Base.Core;
+using MvvmCross.Base;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platform.Android.Base.Views;
 using MvvmCross.Platform.Android.Binding.BindingContext;

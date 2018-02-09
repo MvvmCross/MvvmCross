@@ -5,8 +5,8 @@
 using System;
 using System.Windows.Input;
 using Foundation;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 using MvvmCross.Binding.BindingContext;
 using UIKit;
 

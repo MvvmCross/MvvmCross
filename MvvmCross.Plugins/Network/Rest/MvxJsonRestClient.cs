@@ -8,7 +8,6 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using MvvmCross.Base;
-using MvvmCross.Base.Platform;
 
 namespace MvvmCross.Plugin.Network.Rest
 {

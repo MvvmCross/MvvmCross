@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace MvvmCross.Base.IoC
+namespace MvvmCross.IoC
 {
     public interface IMvxTypeCache<TType>
     {

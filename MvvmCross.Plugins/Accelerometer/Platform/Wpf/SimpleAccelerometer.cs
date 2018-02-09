@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.Exceptions;
+using MvvmCross.Base;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.Plugin.Accelerometer.Platform.Wpf
 {

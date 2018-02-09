@@ -4,9 +4,9 @@
 
 using System;
 using System.Reflection;
-using MvvmCross.Base.Converters;
-using MvvmCross.Base.Exceptions;
 using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Converters;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding.Bindings.Source.Leaf
 {

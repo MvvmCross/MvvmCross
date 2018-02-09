@@ -3,9 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-
-using MvvmCross.Core.Views;
 using MvvmCross.Platform.Mac.Base.Views;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Mac.Views
 {

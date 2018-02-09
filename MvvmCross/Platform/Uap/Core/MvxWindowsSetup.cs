@@ -4,22 +4,21 @@
 
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using System;
 using System.Reflection;
-using MvvmCross.Base;
-using MvvmCross.Base.Converters;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Plugins;
+using MvvmCross.Converters;
+using MvvmCross.Exceptions;
+using MvvmCross.Plugins;
+using MvvmCross.Core;
 using MvvmCross.Platform.Uap.Binding;
 using MvvmCross.Platform.Uap.Views;
 using MvvmCross.Platform.Uap.Views.Suspension;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Uap.Core
 {

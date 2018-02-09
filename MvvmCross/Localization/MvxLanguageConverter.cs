@@ -4,7 +4,7 @@
 
 using System;
 using System.Globalization;
-using MvvmCross.Base.Converters;
+using MvvmCross.Converters;
 
 namespace MvvmCross.Localization
 {

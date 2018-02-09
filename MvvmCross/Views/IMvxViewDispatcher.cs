@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Base.Core;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.Base;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Core.Views
+namespace MvvmCross.Views
 {
     public interface IMvxViewDispatcher : IMvxMainThreadDispatcher
     {

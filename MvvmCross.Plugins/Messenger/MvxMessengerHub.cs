@@ -6,9 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MvvmCross.Base;
-using MvvmCross.Base.Logging;
-using MvvmCross.Base.Platform;
+using MvvmCross.Logging;
 using MvvmCross.Plugin.Messenger.Subscriptions;
 using MvvmCross.Plugin.Messenger.ThreadRunners;
 

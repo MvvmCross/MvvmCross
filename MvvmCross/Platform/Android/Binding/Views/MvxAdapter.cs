@@ -11,13 +11,13 @@ using Android.Content;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
-using MvvmCross.Base.WeakSubscription;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.ExtensionMethods;
 using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.WeakSubscription;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Platform.Android.Binding.Views

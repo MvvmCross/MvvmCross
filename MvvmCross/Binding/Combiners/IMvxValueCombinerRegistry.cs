@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 
-using MvvmCross.Base.Platform;
+using MvvmCross.Base;
 
 namespace MvvmCross.Binding.Combiners
 {

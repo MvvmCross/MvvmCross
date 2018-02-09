@@ -5,11 +5,11 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Base.IoC;
-using MvvmCross.Base.Logging;
-using MvvmCross.Core.Views;
+using MvvmCross.IoC;
+using MvvmCross.Logging;
+using MvvmCross.Views;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public class MvxViewModelViewTypeFinder
         : IMvxViewModelTypeFinder

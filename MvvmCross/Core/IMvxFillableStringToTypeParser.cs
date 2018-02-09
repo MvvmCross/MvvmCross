@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MvvmCross.Core.Platform
+namespace MvvmCross.Core
 {
     public interface IMvxFillableStringToTypeParser
     {

@@ -12,9 +12,9 @@ using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
 using Java.Lang;
-using MvvmCross.Base.Core;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.Base;
 using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.ViewModels;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.Support.V4

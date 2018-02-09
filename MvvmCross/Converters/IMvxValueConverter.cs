@@ -5,7 +5,7 @@
 using System;
 using System.Globalization;
 
-namespace MvvmCross.Base.Converters
+namespace MvvmCross.Converters
 {
     public interface IMvxValueConverter
     {

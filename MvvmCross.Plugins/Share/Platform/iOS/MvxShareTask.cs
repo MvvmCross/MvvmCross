@@ -10,7 +10,7 @@ using UIKit;
 
 namespace MvvmCross.Plugin.Share.Platform.iOS
 {
-    [MvvmCross.Base.Preserve(AllMembers = true)]
+    [MvvmCross.Preserve(AllMembers = true)]
 	public class MvxShareTask
         : MvxIosTask, IMvxShareTask
     {

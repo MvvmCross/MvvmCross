@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Android.Graphics;
-using MvvmCross.Base;
 using MvvmCross.Binding;
 using MvvmCross.Platform.Android.Base;
 using MvvmCross.Plugin.File;

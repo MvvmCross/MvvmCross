@@ -4,8 +4,8 @@
 
 using System;
 using System.IO;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Platform;
+using MvvmCross.Base;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.Plugin.ResourceLoader
 {

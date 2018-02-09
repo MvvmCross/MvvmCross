@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using Android.Content;
 using Android.Util;
 using Android.Views;
-using MvvmCross.Base;
 using MvvmCross.Binding.Bindings;
 
 namespace MvvmCross.Platform.Android.Binding.Binders

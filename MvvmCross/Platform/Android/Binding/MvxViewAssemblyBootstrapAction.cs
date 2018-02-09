@@ -4,8 +4,7 @@
 
 using Android.Views;
 using MvvmCross.Base;
-using MvvmCross.Base.IoC;
-using MvvmCross.Base.Platform;
+using MvvmCross.IoC;
 using MvvmCross.Platform.Android.Binding.Binders.ViewTypeResolvers;
 
 namespace MvvmCross.Platform.Android.Binding

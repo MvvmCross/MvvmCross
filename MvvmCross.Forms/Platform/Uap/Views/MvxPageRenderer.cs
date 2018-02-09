@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.ViewModels;
 using Xamarin.Forms.Platform.UWP;
 
 namespace MvvmCross.Forms.Platform.Uap.Views

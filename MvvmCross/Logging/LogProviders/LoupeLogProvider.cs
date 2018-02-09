@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Reflection;
 
-namespace MvvmCross.Base.Logging.LogProviders
+namespace MvvmCross.Logging.LogProviders
 {
     internal class LoupeLogProvider : MvxBaseLogProvider
     {

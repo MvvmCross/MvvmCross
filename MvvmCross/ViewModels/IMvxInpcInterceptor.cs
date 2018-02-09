@@ -4,7 +4,7 @@
 
 using System.ComponentModel;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public interface IMvxInpcInterceptor
     {

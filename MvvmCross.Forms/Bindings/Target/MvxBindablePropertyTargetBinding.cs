@@ -4,10 +4,10 @@
 
 using System;
 using System.ComponentModel;
-using MvvmCross.Base.WeakSubscription;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.WeakSubscription;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Bindings.Target

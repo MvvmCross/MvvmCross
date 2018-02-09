@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace MvvmCross.Base.IoC
+namespace MvvmCross.IoC
 {
     public static class MvxConventionAttributeExtensionMethods
     {

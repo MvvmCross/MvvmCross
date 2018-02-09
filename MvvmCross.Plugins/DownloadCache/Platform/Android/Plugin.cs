@@ -4,9 +4,8 @@
 
 using Android.Graphics;
 using MvvmCross.Base;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Platform;
-using MvvmCross.Base.Plugins;
+using MvvmCross.Exceptions;
+using MvvmCross.Plugins;
 
 namespace MvvmCross.Plugin.DownloadCache.Platform.Android
 {

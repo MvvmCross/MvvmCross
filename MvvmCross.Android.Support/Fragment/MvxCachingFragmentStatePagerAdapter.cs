@@ -10,12 +10,11 @@ using Android.Runtime;
 using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Java.Lang;
-using MvvmCross.Base;
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.Core;
 using MvvmCross.Platform.Android.Base.Platform;
 using MvvmCross.Platform.Android.Views;
 using MvvmCross.Platform.Android.Views.Attributes;
+using MvvmCross.ViewModels;
 using String = Java.Lang.String;
 
 namespace MvvmCross.Droid.Support.V4

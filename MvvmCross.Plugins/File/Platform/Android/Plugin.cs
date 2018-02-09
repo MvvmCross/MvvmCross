@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Base;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Plugins;
+using MvvmCross.Exceptions;
 using MvvmCross.Platform.Android.Base;
 using MvvmCross.Plugin.File.HackFileShare;
+using MvvmCross.Plugins;
 
 namespace MvvmCross.Plugin.File.Platform.Android
 {

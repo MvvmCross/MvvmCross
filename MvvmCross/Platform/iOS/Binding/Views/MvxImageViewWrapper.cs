@@ -4,8 +4,6 @@
 
 using System;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.Platform;
 using UIKit;
 
 namespace MvvmCross.Platform.Ios.Binding.Views

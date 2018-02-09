@@ -5,7 +5,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Resources;
-using MvvmCross.Base;
 using MvvmCross.Localization;
 
 namespace MvvmCross.Plugin.ResxLocalization

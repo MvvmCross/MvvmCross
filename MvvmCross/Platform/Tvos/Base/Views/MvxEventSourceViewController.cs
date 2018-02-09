@@ -4,7 +4,7 @@
 
 using System;
 using Foundation;
-using MvvmCross.Base.Core;
+using MvvmCross.Base;
 using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Base.Views

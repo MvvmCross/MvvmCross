@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using Android.Content;
-using MvvmCross.Base.Logging;
-using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.Logging;
 using MvvmCross.Platform.Android.Views;
+using MvvmCross.ViewModels;
 using Playground.Core;
 using Serilog;
 

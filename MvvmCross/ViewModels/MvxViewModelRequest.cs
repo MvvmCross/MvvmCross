@@ -4,9 +4,9 @@
 
 using System;
 using System.Collections.Generic;
-using MvvmCross.Core.Platform;
+using MvvmCross.Core;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public class MvxViewModelRequest
     {

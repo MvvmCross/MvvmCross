@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace MvvmCross.Base.Logging.LogProviders
+namespace MvvmCross.Logging.LogProviders
 {
     internal sealed class ConsoleLogProvider : MvxBaseLogProvider
     {

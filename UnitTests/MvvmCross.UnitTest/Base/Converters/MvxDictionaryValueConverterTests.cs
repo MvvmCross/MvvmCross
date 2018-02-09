@@ -6,7 +6,7 @@ using Xunit;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using MvvmCross.Base.Converters;
+using MvvmCross.Converters;
 
 namespace MvvmCross.UnitTest.Base.Converters
 {

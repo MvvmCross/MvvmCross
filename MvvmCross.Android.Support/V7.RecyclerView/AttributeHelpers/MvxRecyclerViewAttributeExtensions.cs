@@ -6,9 +6,8 @@ using System;
 using Android.Content;
 using Android.Content.Res;
 using Android.Util;
-using MvvmCross.Base;
-using MvvmCross.Base.Logging;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
+using MvvmCross.Logging;
 using MvvmCross.Platform.Android.Binding.ResourceHelpers;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers

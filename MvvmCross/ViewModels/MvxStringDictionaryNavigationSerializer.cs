@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Base.Platform;
+using MvvmCross.Base;
 using MvvmCross.Core.Parse.StringDictionary;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public class MvxStringDictionaryNavigationSerializer
         : IMvxNavigationSerializer

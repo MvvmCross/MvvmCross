@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Base.Logging;
+using MvvmCross.Logging;
 
-namespace MvvmCross.Base.Core
+namespace MvvmCross.Base
 {
     public abstract class MvxApplicable
         : IMvxApplicable

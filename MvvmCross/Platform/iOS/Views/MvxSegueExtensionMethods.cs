@@ -7,10 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Foundation;
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
+using MvvmCross.Core;
 using MvvmCross.Platform.Ios.Base.Views;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 using UIKit;
 
 namespace MvvmCross.Platform.Ios.Views

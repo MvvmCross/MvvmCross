@@ -5,11 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.Logging;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
+using MvvmCross.Base;
+using MvvmCross.Logging;
 using MvvmCross.Test;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.UnitTest.Mocks.Dispatchers
 {

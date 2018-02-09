@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 
-using MvvmCross.Base.Exceptions;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding.Parse.Binding.Lang
 {

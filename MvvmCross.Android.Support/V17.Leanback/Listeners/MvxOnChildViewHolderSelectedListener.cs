@@ -5,8 +5,8 @@
 using System.Windows.Input;
 using Android.Support.V17.Leanback.Widget;
 using Android.Support.V7.Widget;
-using MvvmCross.Base.Logging;
 using MvvmCross.Droid.Support.V7.RecyclerView;
+using MvvmCross.Logging;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Listeners
 {

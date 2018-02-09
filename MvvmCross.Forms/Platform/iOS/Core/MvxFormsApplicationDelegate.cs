@@ -4,8 +4,7 @@
 
 using System;
 using Foundation;
-using MvvmCross.Base;
-using MvvmCross.Core.Platform;
+using MvvmCross.Core;
 using MvvmCross.Forms.Views;
 using MvvmCross.Platform.Ios.Core;
 using UIKit;

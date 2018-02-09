@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
-using MvvmCross.Base.Logging;
+using MvvmCross.Logging;
 using MvvmCross.Binding.Bindings;
 
 namespace MvvmCross.Platform.Uap.Binding

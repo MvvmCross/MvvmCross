@@ -5,8 +5,8 @@
 using System;
 using System.Reflection;
 using System.Windows.Input;
-using MvvmCross.Base.Logging;
-using MvvmCross.Base.WeakSubscription;
+using MvvmCross.Logging;
+using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Binding.ValueConverters
 {

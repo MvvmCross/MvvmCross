@@ -3,9 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Base.Core;
 
-namespace MvvmCross.Base.Platform
+namespace MvvmCross.Base
 {
     public interface IMvxImageHelper<T>
         : IDisposable

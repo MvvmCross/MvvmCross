@@ -4,8 +4,7 @@
 
 using System;
 using Moq;
-using MvvmCross.Base.Converters;
-using MvvmCross.Base.Core;
+using MvvmCross.Base;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.Source;
@@ -13,6 +12,7 @@ using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Converters;
 using MvvmCross.Test;
 using MvvmCross.UnitTest.Mocks.Dispatchers;
 using Xunit;

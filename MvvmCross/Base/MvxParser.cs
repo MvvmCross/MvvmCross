@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using MvvmCross.Base.Exceptions;
+using MvvmCross.Exceptions;
 
-namespace MvvmCross.Base.Parse
+namespace MvvmCross.Base
 {
     public abstract class MvxParser
     {

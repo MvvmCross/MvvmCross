@@ -5,8 +5,8 @@
 using System;
 using Android.Graphics;
 using Android.Widget;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 using MvvmCross.Binding;
 
 namespace MvvmCross.Platform.Android.Binding.Target

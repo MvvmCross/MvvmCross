@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Base.Logging;
+using MvvmCross.Logging;
 
-namespace MvvmCross.Base.Platform
+namespace MvvmCross.Base
 {
     public class MvxStopWatch
         : IDisposable

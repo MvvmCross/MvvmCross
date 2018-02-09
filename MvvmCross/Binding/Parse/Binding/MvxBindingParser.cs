@@ -6,8 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Parse;
+using MvvmCross.Base;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding.Parse.Binding
 {

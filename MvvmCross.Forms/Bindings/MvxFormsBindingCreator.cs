@@ -5,9 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MvvmCross.Base.WeakSubscription;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
+using MvvmCross.WeakSubscription;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Bindings

@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public class MvxViewModelInstanceRequest : MvxViewModelRequest
     {

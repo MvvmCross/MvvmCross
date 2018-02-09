@@ -6,15 +6,14 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using MvvmCross.Base;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.ViewModels.Hints;
-using MvvmCross.Core.Views;
+using MvvmCross.Exceptions;
 using MvvmCross.Forms.Base;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Views.Attributes;
+using MvvmCross.Logging;
+using MvvmCross.ViewModels;
+using MvvmCross.ViewModels.Hints;
+using MvvmCross.Views;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views

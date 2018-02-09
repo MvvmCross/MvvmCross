@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Base;
-using MvvmCross.Base.Platform;
 
 namespace MvvmCross.Binding.Binders
 {

@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Base.Platform
+namespace MvvmCross.Base
 {
     public interface IMvxTextSerializer
     {

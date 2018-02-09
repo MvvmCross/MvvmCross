@@ -7,8 +7,7 @@ using System.Globalization;
 using System.IO;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
-using MvvmCross.Base;
-using MvvmCross.Base.Converters;
+using MvvmCross.Converters;
 
 namespace MvvmCross.Plugin.PictureChooser.Platform.Uap
 {

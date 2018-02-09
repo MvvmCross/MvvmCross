@@ -4,9 +4,8 @@
 
 using System;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Console.Views
 {

@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using AppKit;
-using MvvmCross.Core.Views;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Mac.Views.Presenters.Attributes
 {

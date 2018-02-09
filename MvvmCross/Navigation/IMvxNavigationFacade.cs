@@ -4,9 +4,9 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Core.Navigation
+namespace MvvmCross.Navigation
 {
     public interface IMvxNavigationFacade
     {

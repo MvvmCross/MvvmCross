@@ -6,11 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
+using MvvmCross.Base;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 
-namespace MvvmCross.Base.IoC
+namespace MvvmCross.IoC
 {
     public class MvxIoCContainer
         : IMvxIoCProvider

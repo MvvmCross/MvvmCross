@@ -4,7 +4,7 @@
 
 using System.Threading.Tasks;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public interface IMvxViewModel
     {

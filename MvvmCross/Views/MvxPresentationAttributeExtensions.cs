@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MvvmCross.Core.Views
+namespace MvvmCross.Views
 {
     public static class MvxPresentationAttributeExtensions
     {

@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.WeakSubscription;
+using MvvmCross.Base;
+using MvvmCross.WeakSubscription;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public static class MvxInteractionExtensionMethods
     {

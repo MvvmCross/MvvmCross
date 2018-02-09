@@ -4,7 +4,7 @@
 
 using System;
 using System.Windows.Threading;
-using MvvmCross.Base.Core;
+using MvvmCross.Base;
 
 namespace MvvmCross.Platform.Wpf.Views
 {

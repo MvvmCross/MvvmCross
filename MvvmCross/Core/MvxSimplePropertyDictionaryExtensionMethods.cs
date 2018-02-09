@@ -4,14 +4,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Core.ViewModels;
-using System.Globalization;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
+using MvvmCross.Base;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Core.Platform
+namespace MvvmCross.Core
 {
     public static class MvxSimplePropertyDictionaryExtensionMethods
     {
