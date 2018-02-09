@@ -4,7 +4,6 @@
 
 using System;
 using System.ComponentModel;
-using MvvmCross.Forms.Base;
 using MvvmCross.Forms.Platform.iOS.Views;
 using MvvmCross.Forms.Views;
 using MvvmCross.Logging;

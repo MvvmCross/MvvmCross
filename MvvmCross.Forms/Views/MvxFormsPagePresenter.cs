@@ -7,7 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using MvvmCross.Exceptions;
-using MvvmCross.Forms.Base;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Views.Attributes;
 using MvvmCross.Logging;
