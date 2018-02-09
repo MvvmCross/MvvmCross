@@ -4,7 +4,6 @@
 
 using System;
 using System.Text;
-using MvvmCross.Forms.Base;
 using MvvmCross.Logging;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

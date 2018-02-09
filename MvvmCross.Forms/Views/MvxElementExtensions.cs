@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Exceptions;
-using MvvmCross.Forms.Base;
 using MvvmCross.Forms.Views.EventSource;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;

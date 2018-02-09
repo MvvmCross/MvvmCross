@@ -5,7 +5,6 @@
 using System;
 using System.ComponentModel;
 using Android.Widget;
-using MvvmCross.Forms.Base;
 using MvvmCross.Forms.Platform.Android.Views;
 using MvvmCross.Forms.Views;
 using MvvmCross.Logging;
