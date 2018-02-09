@@ -2,14 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Collections.Generic;
-using Windows.UI.Xaml.Controls;
-using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding;
-using MvvmCross.Binding.Binders;
-using System;
-using System.Reflection;
 using MvvmCross.Converters;
 using MvvmCross.Exceptions;
 using MvvmCross.Plugins;
@@ -20,6 +12,7 @@ using MvvmCross.Platform.Uap.Views;
 using MvvmCross.Platform.Uap.Views.Suspension;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
+using Windows.ApplicationModel.Activation;
 
 namespace MvvmCross.Platform.Uap.Core
 {
@@ -29,6 +22,12 @@ namespace MvvmCross.Platform.Uap.Core
         private readonly IMvxWindowsFrame _rootFrame;
         private readonly string _suspensionManagerSessionStateKey;
         private IMvxWindowsViewPresenter _presenter;
+
+        protected MvxWindowsSetup(Frame rootFrame, IActivatedEventArgs activatedEventArgs,
+            string suspensionManagerSessionStateKey = null) : this(rootFrame, suspensionManagerSessionStateKey)
+        {
+            ActivatedEventArgs = activatedEventArgs;
+        }
 
         protected MvxWindowsSetup(Frame rootFrame, string suspensionManagerSessionStateKey = null)
             : this(new MvxWrappedFrame(rootFrame))
@@ -150,7 +149,9 @@ namespace MvvmCross.Platform.Uap.Core
             // this base class does nothing
         }
 
-        protected virtual List<Type> ValueConverterHolders => new List<Type>();
+        protected IActivatedEventArgs ActivatedEventArgs { get; }
+
+        protected virtual List<Type> ValueConverterHolders => new List<Type>();        
 
         protected virtual IEnumerable<Assembly> ValueConverterAssemblies
         {
@@ -161,7 +162,7 @@ namespace MvvmCross.Platform.Uap.Core
                 toReturn.AddRange(GetViewAssemblies());
                 return toReturn;
             }
-        }
+        }       
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
         {
