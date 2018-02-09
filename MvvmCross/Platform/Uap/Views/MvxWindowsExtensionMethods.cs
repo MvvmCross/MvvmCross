@@ -2,13 +2,12 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Core.ViewModels;
 using System;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
-using MvvmCross.Base;
 using MvvmCross.Platform.Uap.Attributes;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platform.Uap.Views
 {

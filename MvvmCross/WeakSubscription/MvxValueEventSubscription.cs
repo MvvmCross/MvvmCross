@@ -4,9 +4,9 @@
 
 using System;
 using System.Reflection;
-using MvvmCross.Base.Core;
+using MvvmCross.Base;
 
-namespace MvvmCross.Base.WeakSubscription
+namespace MvvmCross.WeakSubscription
 {
     public class MvxValueEventSubscription<T>
         : MvxWeakEventSubscription<object, MvxValueEventArgs<T>>

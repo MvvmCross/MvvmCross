@@ -2,16 +2,15 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Core.Navigation;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
 using System;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
-using MvvmCross.Base;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
+using MvvmCross.Navigation;
 using MvvmCross.Platform.Uap.Attributes;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Uap.Views
 {

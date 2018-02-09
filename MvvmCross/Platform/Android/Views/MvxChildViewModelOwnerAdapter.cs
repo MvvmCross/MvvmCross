@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Base.Exceptions;
+using MvvmCross.Exceptions;
 using MvvmCross.Platform.Android.Base.Views;
 
 namespace MvvmCross.Platform.Android.Views

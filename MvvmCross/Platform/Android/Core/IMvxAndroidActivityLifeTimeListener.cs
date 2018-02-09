@@ -5,7 +5,7 @@
 using System;
 using Android.App;
 using Android.OS;
-using MvvmCross.Core.Platform;
+using MvvmCross.Core;
 using MvvmCross.Platform.Android.Views;
 
 namespace MvvmCross.Platform.Android.Core

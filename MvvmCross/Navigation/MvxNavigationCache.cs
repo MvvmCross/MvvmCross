@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 
-namespace MvvmCross.Core.Navigation
+namespace MvvmCross.Navigation
 {
     public class MvxNavigationCache : IMvxNavigationCache
     {

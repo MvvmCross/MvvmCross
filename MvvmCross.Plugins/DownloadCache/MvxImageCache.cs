@@ -8,7 +8,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
 
 namespace MvvmCross.Plugin.DownloadCache
 {

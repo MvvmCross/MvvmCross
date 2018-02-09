@@ -4,10 +4,9 @@
 
 using System.Collections.Generic;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.Exceptions;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
+using MvvmCross.Exceptions;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Bindings

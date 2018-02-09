@@ -5,8 +5,7 @@
 using System;
 using Windows.UI.Xaml;
 using MvvmCross.Base;
-using MvvmCross.Base.Converters;
-using MvvmCross.Base.Core;
+using MvvmCross.Converters;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings.Target.Construction;

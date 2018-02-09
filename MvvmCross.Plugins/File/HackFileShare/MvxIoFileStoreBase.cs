@@ -6,8 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 
 namespace MvvmCross.Plugin.File.HackFileShare
 {

@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Base.Logging;
 using MvvmCross.Binding;
+using MvvmCross.Logging;
 using MvvmCross.Platform.Android.Binding.Target;
 
 namespace MvvmCross.Droid.Support.V7.Preference.Target

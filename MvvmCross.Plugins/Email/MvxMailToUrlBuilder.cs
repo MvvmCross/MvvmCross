@@ -4,7 +4,6 @@
 
 using System;
 using System.Text;
-using MvvmCross.Base;
 
 namespace MvvmCross.Plugin.Email
 {

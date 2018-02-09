@@ -5,11 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Base;
-using MvvmCross.Base.IoC;
-using MvvmCross.Base.Plugins;
+using MvvmCross.IoC;
+using MvvmCross.Plugins;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public abstract class MvxApplication
         : IMvxApplication

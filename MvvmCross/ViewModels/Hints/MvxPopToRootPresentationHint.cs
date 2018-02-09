@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 
-namespace MvvmCross.Core.ViewModels.Hints
+namespace MvvmCross.ViewModels.Hints
 {
     public class MvxPopToRootPresentationHint
         : MvxPresentationHint

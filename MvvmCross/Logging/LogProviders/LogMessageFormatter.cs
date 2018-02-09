@@ -8,7 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace MvvmCross.Base.Logging.LogProviders
+namespace MvvmCross.Logging.LogProviders
 {
     internal static class LogMessageFormatter
     {

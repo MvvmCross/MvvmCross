@@ -4,8 +4,7 @@
 
 using System.Globalization;
 using MvvmCross.Base;
-using MvvmCross.Base.ExtensionMethods;
-using MvvmCross.Base.UI;
+using MvvmCross.UI;
 
 namespace MvvmCross.Plugin.Visibility
 {

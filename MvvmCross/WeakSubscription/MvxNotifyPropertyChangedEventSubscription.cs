@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Reflection;
 
-namespace MvvmCross.Base.WeakSubscription
+namespace MvvmCross.WeakSubscription
 {
     public class MvxNotifyPropertyChangedEventSubscription
         : MvxWeakEventSubscription<INotifyPropertyChanged, PropertyChangedEventArgs>

@@ -5,7 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using MvvmCross.Base.Platform;
+using MvvmCross.Base;
 using Newtonsoft.Json;
 
 namespace MvvmCross.Plugin.Json

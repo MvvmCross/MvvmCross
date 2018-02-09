@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public static class MvxNotifyPropertyChangedExtensions
     {

@@ -4,8 +4,6 @@
 
 using System;
 using Android.Views;
-using Java.Lang.Annotation;
-using MvvmCross.Base;
 using MvvmCross.Binding;
 using MvvmCross.Platform.Android.Binding.Target;
 

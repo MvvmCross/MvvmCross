@@ -7,10 +7,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.WeakSubscription;
+using MvvmCross.Base;
+using MvvmCross.WeakSubscription;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public class MvxPropertyChangedListener
         : IDisposable

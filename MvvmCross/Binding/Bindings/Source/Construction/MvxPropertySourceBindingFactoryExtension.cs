@@ -5,10 +5,10 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Base.Exceptions;
 using MvvmCross.Binding.Bindings.Source.Chained;
 using MvvmCross.Binding.Bindings.Source.Leaf;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding.Bindings.Source.Construction
 {

@@ -3,8 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Base;
-using MvvmCross.Base.Logging;
+using MvvmCross.Logging;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platform.Tvos.Base.Views;
 

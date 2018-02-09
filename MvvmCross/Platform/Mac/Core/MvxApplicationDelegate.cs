@@ -4,7 +4,7 @@
 
 using System;
 using AppKit;
-using MvvmCross.Core.Platform;
+using MvvmCross.Core;
 
 namespace MvvmCross.Platform.Mac.Core
 {

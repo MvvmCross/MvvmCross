@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Base.Core
+namespace MvvmCross.Base
 {
     public static class MvxDelegateExtensionMethods
     {

@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using AppKit;
-using MvvmCross.Core.Platform;
+using MvvmCross.Core;
 
 namespace MvvmCross.Platform.Mac.Core
 {

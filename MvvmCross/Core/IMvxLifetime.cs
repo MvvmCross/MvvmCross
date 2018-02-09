@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Core.Platform
+namespace MvvmCross.Core
 {
     public interface IMvxLifetime
     {

@@ -5,7 +5,7 @@
 using System;
 using System.Reflection;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public interface IMvxViewModelByNameRegistry
     {

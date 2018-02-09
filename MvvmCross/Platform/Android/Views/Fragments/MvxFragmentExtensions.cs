@@ -4,12 +4,11 @@
 
 using Android.App;
 using Android.Views;
-using MvvmCross.Base;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
+using MvvmCross.Exceptions;
 using MvvmCross.Platform.Android.Binding.BindingContext;
 using MvvmCross.Platform.Android.Core;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Android.Views.Fragments
 {

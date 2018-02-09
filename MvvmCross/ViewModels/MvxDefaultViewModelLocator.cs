@@ -3,10 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Base;
-using MvvmCross.Base.Exceptions;
+using MvvmCross.Exceptions;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public class MvxDefaultViewModelLocator
         : IMvxViewModelLocator

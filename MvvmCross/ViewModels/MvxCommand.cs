@@ -5,10 +5,8 @@
 using System;
 using System.Collections.Generic;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.ExtensionMethods;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public interface IMvxCommandHelper
     {

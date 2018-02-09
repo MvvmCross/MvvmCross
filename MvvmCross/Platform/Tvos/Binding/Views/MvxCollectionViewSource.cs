@@ -7,9 +7,9 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
 using Foundation;
-using MvvmCross.Base.WeakSubscription;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.WeakSubscription;
 using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Binding.Views

@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Base.IoC
+namespace MvvmCross.IoC
 {
     [Obsolete("We prefer to use IoC directly using Mvx.Resolve<T>() now")]
     public static class MvxIoCExtensions

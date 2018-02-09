@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Core.Views;
 using MvvmCross.Forms.Core;
+using MvvmCross.Views;
 
 namespace MvvmCross.Forms.Views
 {

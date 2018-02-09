@@ -7,11 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using AppKit;
 using Foundation;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Core.Platform;
 using System.Reflection;
+using MvvmCross.Core;
 using MvvmCross.Platform.Mac.Base.Views;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Mac.Views
 {

@@ -3,8 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Globalization;
-using MvvmCross.Base;
-using MvvmCross.Base.UI;
+using MvvmCross.UI;
 
 namespace MvvmCross.Plugin.Color
 {

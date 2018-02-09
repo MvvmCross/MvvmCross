@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using Moq;
-using MvvmCross.Base.Core;
+using MvvmCross.Base;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.Source.Construction;

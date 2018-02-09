@@ -4,7 +4,7 @@
 
 using System;
 using Foundation;
-using MvvmCross.Core.Platform;
+using MvvmCross.Core;
 using UIKit;
 
 namespace MvvmCross.Platform.Ios.Core

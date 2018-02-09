@@ -1,7 +1,7 @@
 ﻿using Foundation;
-using MvvmCross.Base;
-using MvvmCross.Core.ViewModels;
+using MvvmCross;
 using MvvmCross.Platform.Mac.Core;
+using MvvmCross.ViewModels;
 
 namespace Playground.Mac
 {

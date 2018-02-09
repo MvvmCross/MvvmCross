@@ -7,10 +7,9 @@ using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using MvvmCross.Base;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
 using MvvmCross.Platform.Uap.Views.Suspension;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Uap.Views
 {

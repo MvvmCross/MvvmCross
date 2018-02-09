@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 
-using MvvmCross.Base.Platform;
+using MvvmCross.Base;
 
-namespace MvvmCross.Base.Converters
+namespace MvvmCross.Converters
 {
     public interface IMvxValueConverterRegistry : IMvxNamedInstanceRegistry<IMvxValueConverter>
     {

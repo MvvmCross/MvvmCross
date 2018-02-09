@@ -1,5 +1,5 @@
 ﻿using System;
-using MvvmCross.Base;
+using MvvmCross;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platform.Tvos.Views;
 using MvvmCross.Platform.Tvos.Views.Presenters;

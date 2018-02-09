@@ -4,10 +4,10 @@
 
 using System.ComponentModel;
 using System.Windows.Input;
-using MvvmCross.Base.Core;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.Base;
 using MvvmCross.Test;
 using MvvmCross.UnitTest.Mocks.Dispatchers;
+using MvvmCross.ViewModels;
 using Xunit;
 
 namespace MvvmCross.UnitTest.ViewModels

@@ -1,5 +1,5 @@
 ﻿using Windows.UI.Xaml.Controls;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.ViewModels;
 
 namespace Playground.Uwp
 {

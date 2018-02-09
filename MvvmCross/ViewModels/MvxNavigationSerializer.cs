@@ -4,9 +4,8 @@
 
 
 using MvvmCross.Base;
-using MvvmCross.Base.Platform;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public class MvxNavigationSerializer
         : IMvxNavigationSerializer

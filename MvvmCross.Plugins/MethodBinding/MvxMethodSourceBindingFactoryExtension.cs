@@ -5,7 +5,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Base;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;

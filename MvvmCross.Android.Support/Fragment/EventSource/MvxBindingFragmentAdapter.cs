@@ -6,12 +6,11 @@ using System;
 using Android.OS;
 using Android.Support.V4.App;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.Logging;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
+using MvvmCross.Logging;
 using MvvmCross.Platform.Android.Core;
 using MvvmCross.Platform.Android.Views;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Droid.Support.V4.EventSource
 {

@@ -2,16 +2,15 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using MvvmCross.Base;
-using MvvmCross.Base.Logging;
+using MvvmCross.Logging;
 using MvvmCross.Platform.Wpf.Views.Presenters.Attributes;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Wpf.Views.Presenters
 {

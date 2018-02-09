@@ -5,8 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using MvvmCross.Base.Converters;
-using MvvmCross.Base.Exceptions;
+using MvvmCross.Converters;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.UnitTest.Binding.Mocks
 {

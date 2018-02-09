@@ -3,8 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Base;
-using MvvmCross.Core.Platform;
+using MvvmCross.Core;
 using MvvmCross.Forms.Views;
 using MvvmCross.Platform.Mac.Core;
 using Xamarin.Forms.Platform.MacOS;

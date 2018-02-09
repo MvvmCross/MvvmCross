@@ -6,9 +6,8 @@ using System;
 using System.Reflection;
 using Android.Widget;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Base.Platform;
-using MvvmCross.Base.WeakSubscription;
 using MvvmCross.Binding;
+using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Platform.Android.Binding.Target
 {

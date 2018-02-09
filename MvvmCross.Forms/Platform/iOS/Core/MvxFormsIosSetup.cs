@@ -4,18 +4,17 @@
 
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Views;
 using MvvmCross.Localization;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Base;
-using MvvmCross.Base.Plugins;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platform.iOS.Bindings;
 using MvvmCross.Forms.Platform.iOS.Views;
 using MvvmCross.Platform.Ios.Core;
 using MvvmCross.Platform.Ios.Views.Presenters;
+using MvvmCross.Plugins;
+using MvvmCross.ViewModels;
 using UIKit;
 
 namespace MvvmCross.Forms.Platform.iOS.Core

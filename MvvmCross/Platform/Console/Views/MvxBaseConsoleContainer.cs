@@ -4,9 +4,9 @@
 
 using System;
 using System.Collections.Generic;
-using MvvmCross.Base.Logging;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
+using MvvmCross.Logging;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Console.Views
 {

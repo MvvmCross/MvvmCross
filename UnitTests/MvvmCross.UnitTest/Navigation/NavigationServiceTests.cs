@@ -5,12 +5,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moq;
-using MvvmCross.Core.Navigation;
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
+ using MvvmCross.Core;
+ using MvvmCross.Navigation;
  using MvvmCross.Test;
  using MvvmCross.UnitTest.Mocks.Dispatchers;
  using MvvmCross.UnitTest.Mocks.ViewModels;
+ using MvvmCross.ViewModels;
  using Xunit;
 
 namespace MvvmCross.UnitTest.Navigation

@@ -7,18 +7,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.IoC;
-using MvvmCross.Base.Logging;
-using MvvmCross.Base.Logging.LogProviders;
-using MvvmCross.Base.Platform;
-using MvvmCross.Base.Plugins;
-using MvvmCross.Core.Navigation;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
+using MvvmCross.Exceptions;
+using MvvmCross.IoC;
+using MvvmCross.Logging;
+using MvvmCross.Logging.LogProviders;
+using MvvmCross.Navigation;
+using MvvmCross.Plugins;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
-namespace MvvmCross.Core.Platform
+namespace MvvmCross.Core
 {
     public abstract class MvxSetup
     {

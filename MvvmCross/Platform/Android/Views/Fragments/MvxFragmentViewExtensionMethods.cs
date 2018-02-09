@@ -3,9 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using Android.App;
-using MvvmCross.Base;
-using MvvmCross.Base.Logging;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.Logging;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platform.Android.Views.Fragments
 {

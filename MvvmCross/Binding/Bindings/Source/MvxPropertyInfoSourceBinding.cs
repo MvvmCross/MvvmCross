@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Base.WeakSubscription;
+using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Binding.Bindings.Source
 {

@@ -5,7 +5,7 @@
 using System;
 using System.IO;
 
-namespace MvvmCross.Base.Platform
+namespace MvvmCross.Base
 {
     public interface IMvxResourceLoader
     {

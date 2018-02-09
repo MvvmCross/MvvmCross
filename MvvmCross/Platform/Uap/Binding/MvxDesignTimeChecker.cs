@@ -4,8 +4,7 @@
 
 using Windows.ApplicationModel;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.IoC;
+using MvvmCross.IoC;
 using MvvmCross.Binding.Parse.Binding;
 
 namespace MvvmCross.Platform.Uap.Binding

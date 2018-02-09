@@ -6,7 +6,7 @@ using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using MvvmCross.Base.Core;
+using MvvmCross.Base;
 
 namespace MvvmCross.Platform.Android.Views.Fragments.EventSource
 {

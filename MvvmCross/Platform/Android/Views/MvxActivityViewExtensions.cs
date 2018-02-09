@@ -5,14 +5,13 @@
 using System;
 using Android.App;
 using Android.OS;
-using MvvmCross.Base;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
 using MvvmCross.Platform.Android.Base.Views;
 using MvvmCross.Platform.Android.Core;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Android.Views
 {

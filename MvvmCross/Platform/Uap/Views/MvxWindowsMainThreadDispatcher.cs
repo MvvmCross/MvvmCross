@@ -4,7 +4,7 @@
 
 using System;
 using Windows.UI.Core;
-using MvvmCross.Base.Core;
+using MvvmCross.Base;
 
 namespace MvvmCross.Platform.Uap.Views
 {

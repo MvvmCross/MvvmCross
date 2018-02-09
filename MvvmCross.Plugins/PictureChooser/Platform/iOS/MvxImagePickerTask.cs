@@ -8,14 +8,14 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using CoreGraphics;
 using Foundation;
-using MvvmCross.Base.Logging;
+using MvvmCross.Logging;
 using MvvmCross.Platform.Ios.Base.Platform;
 using MvvmCross.Platform.Ios.Views;
 using UIKit;
 
 namespace MvvmCross.Plugin.PictureChooser.Platform.iOS
 {
-    [MvvmCross.Base.Preserve(AllMembers = true)]
+    [MvvmCross.Preserve(AllMembers = true)]
 	public class MvxImagePickerTask
         : MvxIosTask, IMvxPictureChooserTask
     {

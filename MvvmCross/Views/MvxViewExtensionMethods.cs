@@ -3,12 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Base;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Core.Views
+namespace MvvmCross.Views
 {
     public static class MvxViewExtensionMethods
     {

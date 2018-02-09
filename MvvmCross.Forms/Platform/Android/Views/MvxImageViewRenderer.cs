@@ -5,10 +5,10 @@
 using System;
 using System.ComponentModel;
 using Android.Widget;
-using MvvmCross.Base.Logging;
 using MvvmCross.Forms.Base;
 using MvvmCross.Forms.Platform.Android.Views;
 using MvvmCross.Forms.Views;
+using MvvmCross.Logging;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.Android;

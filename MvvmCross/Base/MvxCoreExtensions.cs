@@ -5,9 +5,9 @@
 using System;
 using System.Globalization;
 using System.Reflection;
-using MvvmCross.Base.IoC;
+using MvvmCross.IoC;
 
-namespace MvvmCross.Base.ExtensionMethods
+namespace MvvmCross.Base
 {
     public static class MvxCoreExtensions
     {

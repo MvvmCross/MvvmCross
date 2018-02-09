@@ -5,8 +5,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.Exceptions;
+using MvvmCross.Exceptions;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
 

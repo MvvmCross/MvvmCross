@@ -4,8 +4,8 @@
 
 using System;
 using System.Reflection;
-using MvvmCross.Base.WeakSubscription;
 using MvvmCross.Binding.Bindings.Source;
+using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Plugin.FieldBinding
 {

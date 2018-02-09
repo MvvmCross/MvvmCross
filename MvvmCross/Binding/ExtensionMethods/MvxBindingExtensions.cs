@@ -4,8 +4,8 @@
 
 using System;
 using System.Globalization;
-using MvvmCross.Base.ExtensionMethods;
-using MvvmCross.Base.IoC;
+using MvvmCross.Base;
+using MvvmCross.IoC;
 
 namespace MvvmCross.Binding.ExtensionMethods
 {

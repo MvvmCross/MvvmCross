@@ -5,10 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 
-namespace MvvmCross.Base.Plugins
+namespace MvvmCross.Plugins
 {
     public class MvxPluginManager
         : IMvxPluginManager

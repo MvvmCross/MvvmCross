@@ -3,8 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.Exceptions;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Source.Construction;
@@ -13,6 +11,7 @@ using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Binding.ExpressionParse;
 using MvvmCross.Binding.Parse.Binding.Lang;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding
 {

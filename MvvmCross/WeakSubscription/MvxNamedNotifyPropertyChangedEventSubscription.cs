@@ -5,9 +5,9 @@
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using MvvmCross.Base.Core;
+using MvvmCross.Base;
 
-namespace MvvmCross.Base.WeakSubscription
+namespace MvvmCross.WeakSubscription
 {
     public class MvxNamedNotifyPropertyChangedEventSubscription<T>
         : MvxNotifyPropertyChangedEventSubscription

@@ -1,9 +1,9 @@
-﻿using MvvmCross.Core.ViewModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Controls;
 using MvvmCross.Forms.Core;
+using MvvmCross.ViewModels;
 
 namespace Playground.Forms.Uwp
 {

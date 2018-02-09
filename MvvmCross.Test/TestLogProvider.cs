@@ -9,8 +9,8 @@ using System;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
-using MvvmCross.Base.Logging;
-using MvvmCross.Base.Logging.LogProviders;
+using MvvmCross.Logging;
+using MvvmCross.Logging.LogProviders;
 
 [assembly: InternalsVisibleTo("MvvmCross.UnitTest")]
 

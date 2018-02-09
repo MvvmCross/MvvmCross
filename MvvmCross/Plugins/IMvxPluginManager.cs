@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Base.Plugins
+namespace MvvmCross.Plugins
 {
     public interface IMvxPluginManager
     {

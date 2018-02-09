@@ -5,9 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Base.Converters;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
+using MvvmCross.Converters;
 
 namespace MvvmCross.Binding.Bindings.Source.Chained
 {

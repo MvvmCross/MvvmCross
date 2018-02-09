@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using Windows.UI.Xaml.Media;
-using MvvmCross.Base.UI;
+using MvvmCross.UI;
 
 namespace MvvmCross.Plugin.Color.Platform.Uap
 {

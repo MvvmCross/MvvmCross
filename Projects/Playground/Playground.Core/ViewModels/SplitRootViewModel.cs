@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
-using MvvmCross.Core.Navigation;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.Navigation;
+using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {

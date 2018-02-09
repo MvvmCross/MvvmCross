@@ -4,10 +4,10 @@
 
 using System;
 using System.Reflection;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 
-namespace MvvmCross.Base.Core
+namespace MvvmCross.Base
 {
     public abstract class MvxMainThreadDispatcher : MvxSingleton<IMvxMainThreadDispatcher>
     {

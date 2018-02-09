@@ -4,10 +4,10 @@
 
 using System.Windows;
 using System.Windows.Controls;
-using MvvmCross.Core.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
-using MvvmCross.Base.Logging;
+using MvvmCross.Logging;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platform.Wpf.Views.Presenters
 {

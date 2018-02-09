@@ -8,9 +8,9 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using MvvmCross.Base.Core;
+using MvvmCross.Base;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public class MvxObservableCollection<T>
         : ObservableCollection<T>

@@ -4,7 +4,7 @@
 
 using System.Reflection;
 
-namespace MvvmCross.Base.Platform
+namespace MvvmCross.Base
 {
     public interface IMvxNamedInstanceRegistry<in T>
     {

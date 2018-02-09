@@ -4,9 +4,9 @@
 
 using System;
 using System.Collections.Generic;
-using MvvmCross.Base.Exceptions;
+using MvvmCross.Exceptions;
 
-namespace MvvmCross.Base.Core
+namespace MvvmCross.Base
 {
     public abstract class MvxSingleton
         : IDisposable

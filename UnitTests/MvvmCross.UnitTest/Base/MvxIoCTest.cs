@@ -5,12 +5,11 @@
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.IoC;
 using Xunit;
 using MvvmCross.Test;
 using System.Linq;
+using MvvmCross.Exceptions;
+using MvvmCross.IoC;
 
 namespace MvvmCross.UnitTest.Base
 {

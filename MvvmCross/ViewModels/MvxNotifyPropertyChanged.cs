@@ -7,10 +7,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
-using MvvmCross.Base.Core;
-using MvvmCross.Core.Annotations;
+using MvvmCross.Annotations;
+using MvvmCross.Base;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public abstract class MvxNotifyPropertyChanged
         : MvxMainThreadDispatchingObject

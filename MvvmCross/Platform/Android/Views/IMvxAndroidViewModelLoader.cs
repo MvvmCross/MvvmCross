@@ -4,7 +4,7 @@
 
 using System;
 using Android.Content;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platform.Android.Views
 {

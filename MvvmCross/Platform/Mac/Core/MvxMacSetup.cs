@@ -7,19 +7,18 @@ using System.Collections.Generic;
 using System.Reflection;
 
 using AppKit;
-using MvvmCross.Base;
-using MvvmCross.Base.Converters;
-using MvvmCross.Base.Plugins;
+using MvvmCross.Converters;
+using MvvmCross.Plugins;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
+using MvvmCross.Core;
 using MvvmCross.Platform.Mac.Binding;
 using MvvmCross.Platform.Mac.Views;
 using MvvmCross.Platform.Mac.Views.Presenters;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Mac.Core
 {

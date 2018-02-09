@@ -4,7 +4,7 @@
 
 using System;
 using System.Collections.Generic;
-using MvvmCross.Base.Exceptions;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {

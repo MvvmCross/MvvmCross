@@ -2,15 +2,14 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Forms.Views;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Base;
 using MvvmCross.Forms.Core;
 using MvvmCross.Platform.Android.Views;
+using MvvmCross.ViewModels;
 
 
 namespace MvvmCross.Forms.Platform.Android.Views

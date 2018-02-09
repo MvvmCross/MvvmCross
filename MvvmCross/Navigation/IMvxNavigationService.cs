@@ -5,10 +5,10 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using MvvmCross.Core.Navigation.EventArguments;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.Navigation.EventArguments;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Core.Navigation
+namespace MvvmCross.Navigation
 {
     public delegate void BeforeNavigateEventHandler(object sender, NavigateEventArgs e);
     public delegate void AfterNavigateEventHandler(object sender, NavigateEventArgs e);

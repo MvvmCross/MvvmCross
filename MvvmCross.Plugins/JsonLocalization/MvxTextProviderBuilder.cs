@@ -4,10 +4,9 @@
 
 using System;
 using System.Collections.Generic;
+using MvvmCross.Exceptions;
 using MvvmCross.Localization;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
-using MvvmCross.Base.Platform;
+using MvvmCross.Logging;
 
 namespace MvvmCross.Plugin.JsonLocalization
 {

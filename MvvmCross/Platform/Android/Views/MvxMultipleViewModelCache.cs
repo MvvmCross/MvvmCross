@@ -4,7 +4,7 @@
 
 using System;
 using System.Collections.Concurrent;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platform.Android.Views
 {

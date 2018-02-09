@@ -6,7 +6,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MvvmCross.Base.Core
+namespace MvvmCross.Base
 {
     public static class MvxLockableObjectHelpers
     {

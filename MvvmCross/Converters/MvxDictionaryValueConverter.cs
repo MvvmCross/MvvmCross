@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace MvvmCross.Base.Converters
+namespace MvvmCross.Converters
 {
     public class MvxDictionaryValueConverter<TKey, TValue> : MvxValueConverter<TKey, TValue>
     {

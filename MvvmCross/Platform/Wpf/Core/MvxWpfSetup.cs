@@ -3,14 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Windows.Threading;
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
 using System.Windows.Controls;
-using MvvmCross.Base;
-using MvvmCross.Base.Plugins;
+using MvvmCross.Plugins;
+using MvvmCross.Core;
 using MvvmCross.Platform.Wpf.Views;
 using MvvmCross.Platform.Wpf.Views.Presenters;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Wpf.Core
 {

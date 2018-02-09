@@ -8,7 +8,7 @@ using Foundation;
 using UIKit;
 
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platform.Tvos.Views
 {

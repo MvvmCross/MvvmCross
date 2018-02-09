@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
+using MvvmCross.Core;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
 using Windows.UI.Xaml;

@@ -4,18 +4,17 @@
 
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Core.ViewModels;
 using MvvmCross.Forms.Views;
 using System.Collections.Generic;
 using System.Reflection;
 using Windows.ApplicationModel.Activation;
-using MvvmCross.Base;
-using MvvmCross.Base.Plugins;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platform.Uap.Bindings;
 using MvvmCross.Forms.Platform.Uap.Views;
 using MvvmCross.Platform.Uap.Core;
 using MvvmCross.Platform.Uap.Views;
+using MvvmCross.Plugins;
+using MvvmCross.ViewModels;
 using XamlControls = Windows.UI.Xaml.Controls;
 
 namespace MvvmCross.Forms.Platform.Uap.Core

@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Base.IoC
+namespace MvvmCross.IoC
 {
     public class MvxIocOptions : IMvxIocOptions
     {

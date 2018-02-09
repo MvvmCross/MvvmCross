@@ -4,10 +4,9 @@
 
 using System;
 using System.Windows;
-using MvvmCross.Base;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
+using MvvmCross.Exceptions;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Wpf.Views
 {

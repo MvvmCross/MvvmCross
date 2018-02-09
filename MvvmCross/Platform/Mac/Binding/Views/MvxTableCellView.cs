@@ -6,7 +6,7 @@ using System;
 using AppKit;
 using CoreGraphics;
 using Foundation;
-using MvvmCross.Base.Core;
+using MvvmCross.Base;
 using MvvmCross.Binding.BindingContext;
 
 namespace MvvmCross.Platform.Mac.Binding.Views

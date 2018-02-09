@@ -4,7 +4,6 @@
 
 using System;
 using System.Reflection;
-using MvvmCross.Base;
 using MvvmCross.Binding.ExtensionMethods;
 
 namespace MvvmCross.Plugin.FieldBinding

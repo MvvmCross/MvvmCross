@@ -8,8 +8,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Logging;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 using MvvmCross.Platform.Uap.Base.Platform;
 
 namespace MvvmCross.Plugin.File.Platform.Uap

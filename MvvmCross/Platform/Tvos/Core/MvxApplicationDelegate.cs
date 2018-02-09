@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Core.Platform;
+using MvvmCross.Core;
 using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Core

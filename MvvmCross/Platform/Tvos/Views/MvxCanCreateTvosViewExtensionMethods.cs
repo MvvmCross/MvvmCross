@@ -4,9 +4,8 @@
 
 using System;
 using System.Collections.Generic;
-using MvvmCross.Base;
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.Core;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platform.Tvos.Views
 {

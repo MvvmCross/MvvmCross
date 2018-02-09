@@ -5,8 +5,7 @@
 using System.ComponentModel;
 using System.Windows;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.IoC;
+using MvvmCross.IoC;
 
 namespace MvvmCross.Platform.Wpf.Base.Platform
 {

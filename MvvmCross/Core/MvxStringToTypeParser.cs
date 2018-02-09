@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Base.Logging;
+using MvvmCross.Logging;
 
-namespace MvvmCross.Core.Platform
+namespace MvvmCross.Core
 {
     public class MvxStringToTypeParser
         : IMvxStringToTypeParser, IMvxFillableStringToTypeParser

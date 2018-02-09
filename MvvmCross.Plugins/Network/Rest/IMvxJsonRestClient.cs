@@ -5,7 +5,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using MvvmCross.Base.Platform;
+using MvvmCross.Base;
 
 namespace MvvmCross.Plugin.Network.Rest
 {

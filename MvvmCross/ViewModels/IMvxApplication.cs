@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 
-using MvvmCross.Base.Plugins;
+using MvvmCross.Plugins;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public interface IMvxApplication : IMvxViewModelLocatorCollection
     {

@@ -10,9 +10,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Widget;
 using MvvmCross.Base;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.Logging;
-using MvvmCross.Base.Platform;
+using MvvmCross.Logging;
 using MvvmCross.Platform.Android.Binding.ResourceHelpers;
 
 namespace MvvmCross.Platform.Android.Binding.Views

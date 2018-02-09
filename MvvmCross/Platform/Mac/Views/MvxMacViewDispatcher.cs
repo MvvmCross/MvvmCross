@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Base.Logging;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
+using MvvmCross.Logging;
 using MvvmCross.Platform.Mac.Views.Presenters;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Mac.Views
 {

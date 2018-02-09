@@ -8,9 +8,9 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Windows.Input;
-using MvvmCross.Base.Core;
+using MvvmCross.Base;
 
-namespace MvvmCross.Base.WeakSubscription
+namespace MvvmCross.WeakSubscription
 {
     public static class MvxWeakSubscriptionExtensionMethods
     {

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using Android.OS;
 using Android.Views;
-using MvvmCross.Core.Views;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Android.Views.Attributes
 {

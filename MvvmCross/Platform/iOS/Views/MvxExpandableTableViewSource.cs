@@ -8,7 +8,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using CoreGraphics;
 using Foundation;
-using MvvmCross.Base.Core;
+using MvvmCross.Base;
 using MvvmCross.Platform.Ios.Binding.Views;
 using MvvmCross.Platform.Ios.Views.Expandable;
 using MvvmCross.Platform.Ios.Views.Expandable.Controllers;

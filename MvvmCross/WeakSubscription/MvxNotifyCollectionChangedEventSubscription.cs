@@ -6,7 +6,7 @@ using System;
 using System.Collections.Specialized;
 using System.Reflection;
 
-namespace MvvmCross.Base.WeakSubscription
+namespace MvvmCross.WeakSubscription
 {
     public class MvxNotifyCollectionChangedEventSubscription
         : MvxWeakEventSubscription<INotifyCollectionChanged, NotifyCollectionChangedEventArgs>

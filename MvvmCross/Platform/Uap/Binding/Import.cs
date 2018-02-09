@@ -4,9 +4,8 @@
 
 using System.Reflection;
 using MvvmCross.Base;
-using MvvmCross.Base.Converters;
-using MvvmCross.Base.Core;
-using MvvmCross.Base.IoC;
+using MvvmCross.Converters;
+using MvvmCross.IoC;
 using MvvmCross.Binding.Combiners;
 
 namespace MvvmCross.Platform.Uap.Binding

@@ -6,7 +6,7 @@ using System;
 using System.Reflection;
 using System.Windows.Input;
 
-namespace MvvmCross.Base.WeakSubscription
+namespace MvvmCross.WeakSubscription
 {
     public class MvxCanExecuteChangedEventSubscription
         : MvxWeakEventSubscription<ICommand, EventArgs>

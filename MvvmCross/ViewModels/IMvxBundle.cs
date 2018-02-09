@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace MvvmCross.Core.ViewModels
+namespace MvvmCross.ViewModels
 {
     public interface IMvxBundle
     {

@@ -7,9 +7,9 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V4.EventSource;
 using MvvmCross.Platform.Android.Views;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V4
 {

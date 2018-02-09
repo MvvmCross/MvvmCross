@@ -3,9 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Base;
-using MvvmCross.Base.Exceptions;
-using MvvmCross.Base.Platform;
-using MvvmCross.Base.Plugins;
+using MvvmCross.Exceptions;
+using MvvmCross.Plugins;
 using UIKit;
 
 namespace MvvmCross.Plugin.DownloadCache.Platform.iOS

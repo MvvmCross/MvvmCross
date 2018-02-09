@@ -6,7 +6,6 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Input;
-using MvvmCross.Base;
 using MvvmCross.Binding.Bindings.Source;
 
 namespace MvvmCross.Plugin.MethodBinding

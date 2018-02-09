@@ -4,7 +4,6 @@
 
 using System.Collections.Generic;
 using MvvmCross.Base;
-using MvvmCross.Base.Platform;
 
 namespace MvvmCross.Plugin.JsonLocalization
 {
