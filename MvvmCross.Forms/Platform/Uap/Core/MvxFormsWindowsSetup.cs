@@ -28,7 +28,6 @@ namespace MvvmCross.Forms.Platform.Uap.Core
         protected MvxFormsWindowsSetup(XamlControls.Frame rootFrame, IActivatedEventArgs e)
             : base(rootFrame, e)
         {
-
         }
 
         protected override IEnumerable<Assembly> GetViewAssemblies()
