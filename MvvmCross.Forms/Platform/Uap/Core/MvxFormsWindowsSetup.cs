@@ -48,7 +48,7 @@ namespace MvvmCross.Forms.Platform.Uap.Core
             {
                 if (_formsApplication == null)
                 {
-                    Xamarin.Forms.Forms.Init(ActivatedEventArgs);
+                    Xamarin.Forms.Forms.Init(ActivationArguments);
                     _formsApplication = _formsApplication ?? CreateFormsApplication();
                 }
                 return _formsApplication;
