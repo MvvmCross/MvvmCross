@@ -9,7 +9,7 @@ using MvvmCross.Base.IoC;
 
 namespace MvvmCross.Base.ExtensionMethods
 {
-    public static class MvxCrossCoreExtensions
+    public static class MvxCoreExtensions
     {
         // core implementation of ConvertToBoolean
         public static bool ConvertToBooleanCore(this object result)
