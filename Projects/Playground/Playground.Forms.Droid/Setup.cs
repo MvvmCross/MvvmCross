@@ -11,6 +11,8 @@ using System.Reflection;
 using MvvmCross.Base.Logging;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platform.Android.Core;
+using MvvmCross.Plugin.Json;
+using Playground.Forms.UI;
 
 namespace Playground.Forms.Droid
 {

@@ -5,7 +5,7 @@
     xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
     xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
     xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
-    x:Class="Playground.Forms.Pages.RootPage" Title="Root page">
+    x:Class="Playground.Forms.UI.Pages.RootPage" Title="Root page">
 	<ContentPage.Content>
         <ScrollView>
             <StackLayout Margin="10">

@@ -5,7 +5,7 @@
 using MvvmCross.Base;
 using MvvmCross.Base.Plugins;
 
-namespace MvvmCross.Plugin.Location.Fused.Platform.Android
+namespace MvvmCross.Plugin.Location.Fused
 {
     [Preserve(AllMembers = true)]
 	public class Plugin

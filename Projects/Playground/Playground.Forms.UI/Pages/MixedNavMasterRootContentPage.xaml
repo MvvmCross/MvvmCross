@@ -4,7 +4,7 @@
     xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
     xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
     xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
-    x:Class="Playground.Forms.Pages.MixedNavMasterRootContentPage" Title="Root">
+    x:Class="Playground.Forms.UI.Pages.MixedNavMasterRootContentPage" Title="Root">
 
     <StackLayout>
         <Label Text="Root content page" />
