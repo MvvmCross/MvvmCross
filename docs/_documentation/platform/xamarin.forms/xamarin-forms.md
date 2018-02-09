@@ -190,7 +190,7 @@ public MainPage()
     InitializeComponent();
     SupportedOrientations = SupportedPageOrientation.PortraitOrLandscape;
 
-    var presenter = Mvx.Resolve<IMvxViewPresenter>() as MvxFormsWindowsUWPPagePresenter;
+    var presenter = Mvx.Resolve<IMvxFormsViewPresenter>() as MvxFormsWindowsUWPPagePresenter;
     LoadApplication(FormsApplication);
 }
 ```
