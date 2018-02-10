@@ -7,7 +7,7 @@ using MvvmCross.Binding.Parse.PropertyPath;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
 using Xunit;
 
-namespace MvvmCross.Binding.Test.Parse.PropertyPath
+namespace MvvmCross.UnitTest.Binding.Parse.PropertyPath
 {
     
     public class MvxSourcePropertyPathParserTest

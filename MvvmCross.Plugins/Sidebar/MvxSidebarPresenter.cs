@@ -2,17 +2,16 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.iOS.Support.XamarinSidebar.Extensions;
-using MvvmCross.iOS.Support.XamarinSidebar.Views;
-using MvvmCross.iOS.Views;
-using MvvmCross.iOS.Views.Presenters;
-using MvvmCross.iOS.Views.Presenters.Attributes;
-using MvvmCross.Platform;
+using MvvmCross.Platform.Ios.Presenters;
+using MvvmCross.Platform.Ios.Presenters.Attributes;
+using MvvmCross.Platform.Ios.Views;
+using MvvmCross.Plugin.Sidebar.Extensions;
+using MvvmCross.Plugin.Sidebar.Views;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 using UIKit;
 
-namespace MvvmCross.iOS.Support.XamarinSidebar
+namespace MvvmCross.Plugin.Sidebar
 {
     public class MvxSidebarPresenter : MvxIosViewPresenter
     {

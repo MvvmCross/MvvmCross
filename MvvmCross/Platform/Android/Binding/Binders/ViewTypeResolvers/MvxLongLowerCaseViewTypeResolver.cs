@@ -4,9 +4,9 @@
 
 using System;
 using Android.Views;
-using MvvmCross.Platform.IoC;
+using MvvmCross.IoC;
 
-namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
+namespace MvvmCross.Platform.Android.Binding.Binders.ViewTypeResolvers
 {
     public abstract class MvxLongLowerCaseViewTypeResolver : MvxReflectionViewTypeResolver
     {

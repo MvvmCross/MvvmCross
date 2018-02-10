@@ -1,6 +1,4 @@
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Uwp.Attributes;
-using MvvmCross.Uwp.Views;
+using MvvmCross.ViewModels;
 using Playground.Core.ViewModels;
 
 namespace Playground.Uwp.Views

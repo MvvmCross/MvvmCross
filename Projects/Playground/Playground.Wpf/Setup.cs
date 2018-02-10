@@ -1,7 +1,7 @@
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Wpf.Platform;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using MvvmCross.Platform.Wpf.Core;
+using MvvmCross.ViewModels;
 
 namespace Playground.Wpf
 {

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace MvvmCross.Plugins.File
+namespace MvvmCross.Plugin.File
 {
     public interface IMvxFileStore
     {

@@ -3,12 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using Windows.ApplicationModel;
+using MvvmCross.Base;
+using MvvmCross.IoC;
 using MvvmCross.Binding.Parse.Binding;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.IoC;
 
-namespace MvvmCross.Binding.Uwp
+namespace MvvmCross.Platform.Uap.Binding
 {
     public static class MvxDesignTimeChecker
     {

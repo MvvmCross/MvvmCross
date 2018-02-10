@@ -4,9 +4,9 @@
 
 using System;
 using Windows.UI.Core;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base;
 
-namespace MvvmCross.Uwp.Views
+namespace MvvmCross.Platform.Uap.Views
 {
     public class MvxWindowsMainThreadDispatcher : MvxMainThreadDispatcher
     {

@@ -5,12 +5,11 @@
 using System;
 
 using Foundation;
+using MvvmCross.Base;
+using MvvmCross.Platform.Tvos.Base.Views;
 using UIKit;
 
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.tvOS.Views;
-
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     public class MvxEventSourceSplitViewController : UISplitViewController, IMvxEventSourceViewController
     {

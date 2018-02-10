@@ -7,9 +7,9 @@ using Android.Content;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
-using MvvmCross.Platform.Droid.Platform;
+using MvvmCross.Platform.Android.Base.Platform;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     [Register("mvvmcross.binding.droid.views.MvxDatePicker")]
     public class MvxDatePicker

@@ -4,11 +4,11 @@
 
 using System;
 using Android.Widget;
-using MvvmCross.Binding.Droid.Views;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Binding;
+using MvvmCross.Platform.Android.Base.WeakSubscription;
+using MvvmCross.Platform.Android.Binding.Views;
 
-namespace MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Platform.Android.Binding.Target
 {
     // This isn't a "pure" target binder like MvxListViewSelectedItemTargetBinding.
     // It differs in two ways:

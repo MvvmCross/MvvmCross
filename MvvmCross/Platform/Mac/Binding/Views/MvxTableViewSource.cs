@@ -9,13 +9,13 @@ using System.Linq;
 using System.Windows.Input;
 using AppKit;
 using Foundation;
+using MvvmCross.Base;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.WeakSubscription;
 
-namespace MvvmCross.Binding.Mac.Views
+namespace MvvmCross.Platform.Mac.Binding.Views
 {
     public class MvxTableViewSource : NSTableViewSource
     {

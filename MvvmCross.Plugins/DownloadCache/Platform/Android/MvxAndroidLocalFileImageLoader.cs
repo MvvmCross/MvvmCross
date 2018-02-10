@@ -7,13 +7,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Android.Graphics;
 using MvvmCross.Binding;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Plugins.File;
+using MvvmCross.Platform.Android.Base;
+using MvvmCross.Plugin.File;
 using Uri = Android.Net.Uri;
 
-namespace MvvmCross.Plugins.DownloadCache.Droid
+namespace MvvmCross.Plugin.DownloadCache.Platform.Android
 {
     [Preserve(AllMembers = true)]
 	public class MvxAndroidLocalFileImageLoader

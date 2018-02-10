@@ -2,15 +2,14 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
 using System;
 using System.Globalization;
 using System.IO;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
+using MvvmCross.Converters;
 
-namespace MvvmCross.Plugins.PictureChooser.Uwp
+namespace MvvmCross.Plugin.PictureChooser.Platform.Uap
 {
     [Preserve(AllMembers = true)]
     public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], BitmapImage>

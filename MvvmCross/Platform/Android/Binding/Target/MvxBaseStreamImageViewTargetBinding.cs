@@ -8,7 +8,7 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Widget;
 
-namespace MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Platform.Android.Binding.Target
 {
     public abstract class MvxBaseStreamImageViewTargetBinding
         : MvxBaseImageViewTargetBinding

@@ -4,12 +4,13 @@
 
 using System;
 using AppKit;
+using MvvmCross.Converters;
+using MvvmCross.Binding;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Binding.Mac.Target;
-using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Mac.Binding.Target;
 
-namespace MvvmCross.Binding.Mac
+namespace MvvmCross.Platform.Mac.Binding
 {
     public class MvxMacBindingBuilder
         : MvxBindingBuilder

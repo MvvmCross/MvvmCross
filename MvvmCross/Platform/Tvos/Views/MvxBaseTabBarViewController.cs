@@ -5,13 +5,12 @@
 using System;
 
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.tvOS.Views;
-
 using Foundation;
+using MvvmCross.Platform.Tvos.Base.Views;
+using MvvmCross.ViewModels;
 using UIKit;
 
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     public class MvxBaseTabBarViewController
         : MvxEventSourceTabBarController, IMvxTvosView 

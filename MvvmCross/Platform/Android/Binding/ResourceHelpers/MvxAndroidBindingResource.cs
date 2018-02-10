@@ -3,12 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
+using MvvmCross.Exceptions;
+using MvvmCross.Binding;
 
-namespace MvvmCross.Binding.Droid.ResourceHelpers
+namespace MvvmCross.Platform.Android.Binding.ResourceHelpers
 { 
     public class MvxAndroidBindingResource
         : MvxSingleton<IMvxAndroidBindingResource>

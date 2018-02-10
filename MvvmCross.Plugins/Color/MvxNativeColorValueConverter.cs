@@ -3,10 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Globalization;
-using MvvmCross.Platform;
-using MvvmCross.Platform.UI;
+using MvvmCross.UI;
 
-namespace MvvmCross.Plugins.Color
+namespace MvvmCross.Plugin.Color
 {
     [Preserve(AllMembers = true)]
 	public class MvxNativeColorValueConverter : MvxColorValueConverter<MvxColor>

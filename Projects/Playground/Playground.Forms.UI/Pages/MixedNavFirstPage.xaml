@@ -4,7 +4,7 @@
              xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
              xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
 
-             x:Class="Playground.Forms.Pages.MixedNavFirstPage">
+             x:Class="Playground.Forms.UI.Pages.MixedNavFirstPage">
 
     <Grid RowSpacing="0">
         <Grid.RowDefinitions>

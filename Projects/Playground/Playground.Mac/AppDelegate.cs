@@ -1,10 +1,7 @@
-﻿using AppKit;
-using CoreGraphics;
-using Foundation;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Mac.Platform;
-using MvvmCross.Mac.Views.Presenters;
-using MvvmCross.Platform;
+﻿using Foundation;
+using MvvmCross;
+using MvvmCross.Platform.Mac.Core;
+using MvvmCross.ViewModels;
 
 namespace Playground.Mac
 {

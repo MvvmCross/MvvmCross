@@ -5,10 +5,10 @@
 using System;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.ViewModels;
 using UIKit;
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     public class MvxBaseSplitViewController : MvxEventSourceSplitViewController, IMvxIosView
     {

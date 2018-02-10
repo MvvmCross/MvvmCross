@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Platform.UI;
+using MvvmCross.UI;
 using Xunit;
 
-namespace MvvmCross.Platform.Test.UI
+namespace MvvmCross.UnitTest.Base.UI
 {
     
     public class MvxColorTests

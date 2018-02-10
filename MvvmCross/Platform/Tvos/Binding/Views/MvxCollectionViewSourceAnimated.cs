@@ -9,12 +9,11 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 using Foundation;
+using MvvmCross.Logging;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
 using UIKit;
 
-namespace MvvmCross.Binding.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Binding.Views
 {
     public class MvxCollectionViewSourceAnimated : MvxCollectionViewSource
     {

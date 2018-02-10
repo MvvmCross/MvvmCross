@@ -4,11 +4,12 @@
 
 using System;
 using System.Windows.Input;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Binding.iOS.Views.Gestures;
+using MvvmCross.Platform.Ios.Binding.Views.Gestures;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Target
+namespace MvvmCross.Platform.Ios.Binding.Target
 {
     public class MvxUIViewTapTargetBinding : MvxConvertingTargetBinding
     {

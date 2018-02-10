@@ -4,8 +4,9 @@
 
 using System;
 using System.Windows;
+using MvvmCross.Binding;
 
-namespace MvvmCross.Binding.Wpf.MvxBinding.Target
+namespace MvvmCross.Platform.Wpf.Binding.MvxBinding.Target
 {
     public class MvxVisibleTargetBinding : MvxDependencyPropertyTargetBinding
     {

@@ -5,13 +5,12 @@
 using System;
 using System.Windows.Input;
 using Foundation;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Views
+namespace MvvmCross.Platform.Ios.Binding.Views
 {
     public abstract class MvxBaseCollectionViewSource : UICollectionViewSource
     {

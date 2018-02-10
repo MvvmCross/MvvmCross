@@ -5,12 +5,13 @@
 using System;
 using System.Collections.Generic;
 using Moq;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Test.Mocks.TestViewModels;
+using MvvmCross.Exceptions;
+using MvvmCross.Test;
+using MvvmCross.UnitTest.Mocks.TestViewModels;
+using MvvmCross.ViewModels;
 using Xunit;
 
-namespace MvvmCross.Test.ViewModels
+namespace MvvmCross.UnitTest.ViewModels
 {
     [Collection("MvxTest")]
     public class MvxViewModelLoaderTest

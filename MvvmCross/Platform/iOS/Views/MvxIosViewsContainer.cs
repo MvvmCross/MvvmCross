@@ -4,12 +4,12 @@
 
 using System;
 using System.Reflection;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Exceptions;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 using UIKit;
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     public class MvxIosViewsContainer
         : MvxViewsContainer

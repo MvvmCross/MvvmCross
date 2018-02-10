@@ -6,13 +6,11 @@ using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Support.V7.App;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Droid.Views;
+using MvvmCross.Base;
+using MvvmCross.Platform.Android.Base.Views;
 using Xamarin.Forms.Platform.Android;
 
-namespace MvvmCross.Forms.Droid.Views.EventSource
+namespace MvvmCross.Forms.Platform.Android.Views.EventSource
 {
     public abstract class MvxEventSourceFormsApplicationActivity
         : FormsApplicationActivity, IMvxEventSourceActivity

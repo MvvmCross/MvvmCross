@@ -4,12 +4,13 @@
 
 using System;
 using System.Collections.Generic;
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Test.Mocks.TestViewModels;
+using MvvmCross.Core;
+using MvvmCross.Test;
+using MvvmCross.UnitTest.Mocks.TestViewModels;
+using MvvmCross.ViewModels;
 using Xunit;
 
-namespace MvvmCross.Test.ViewModels
+namespace MvvmCross.UnitTest.ViewModels
 {
     [Collection("MvxTest")]
     public class MvxSaveStateTest

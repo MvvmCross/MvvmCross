@@ -1,11 +1,6 @@
 ﻿using UIKit;
-using Foundation;
-
-using MvvmCross.Core.ViewModels;
-using MvvmCross.tvOS.Platform;
-using MvvmCross.tvOS.Views.Presenters;
-using MvvmCross.Platform.Platform;
-
+using MvvmCross.Platform.Tvos.Core;
+using MvvmCross.ViewModels;
 using Playground.Core;
 
 namespace Playground.TvOS

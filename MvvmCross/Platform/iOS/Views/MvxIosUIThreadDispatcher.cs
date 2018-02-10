@@ -4,10 +4,10 @@
 
 using System;
 using System.Threading;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base;
 using UIKit;
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     public abstract class MvxIosUIThreadDispatcher
         : MvxMainThreadDispatcher

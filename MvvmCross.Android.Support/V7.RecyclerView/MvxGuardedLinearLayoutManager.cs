@@ -7,8 +7,7 @@ using Android.Content;
 using Android.Runtime;
 using Android.Support.V7.Widget;
 using Java.Lang;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Logging;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {

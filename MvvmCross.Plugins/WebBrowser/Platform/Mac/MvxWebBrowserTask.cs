@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using Foundation;
-using MvvmCross.Platform.Mac.Platform;
+using MvvmCross.Platform.Mac.Base.Platform;
 
-namespace MvvmCross.Plugins.WebBrowser.Mac
+namespace MvvmCross.Plugin.WebBrowser.Platform.Mac
 {
     [Preserve(AllMembers = true)]
 	public class MvxWebBrowserTask : MvxMacTask, IMvxWebBrowserTask

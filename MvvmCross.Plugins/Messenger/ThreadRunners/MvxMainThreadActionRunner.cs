@@ -3,11 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
+using MvvmCross.Logging;
 
-namespace MvvmCross.Plugins.Messenger.ThreadRunners
+namespace MvvmCross.Plugin.Messenger.ThreadRunners
 {
     public class MvxMainThreadActionRunner
         : IMvxActionRunner

@@ -3,11 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Windows.Threading;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Wpf.Views.Presenters;
+using MvvmCross.Platform.Wpf.Presenters;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
-namespace MvvmCross.Wpf.Views
+namespace MvvmCross.Platform.Wpf.Views
 {
     public class MvxWpfViewDispatcher
         : MvxWpfUIThreadDispatcher, IMvxViewDispatcher

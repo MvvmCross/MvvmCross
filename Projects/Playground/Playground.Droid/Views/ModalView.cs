@@ -6,11 +6,11 @@ using System;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross;
 using MvvmCross.Droid.Support.V4;
-using MvvmCross.Droid.Views.Attributes;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid.Platform;
+using MvvmCross.Platform.Android.Base.Platform;
+using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.Platform.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Views

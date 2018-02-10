@@ -4,7 +4,7 @@
 
 using System.Windows;
 
-namespace MvvmCross.Binding.Wpf
+namespace MvvmCross.Platform.Wpf.Binding
 {
     public static class MvxWindowsPropertyBindingExtensions
     {

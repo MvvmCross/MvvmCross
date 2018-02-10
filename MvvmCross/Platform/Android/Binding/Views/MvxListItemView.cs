@@ -7,10 +7,10 @@ using Android.Content;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.Droid.BindingContext;
+using MvvmCross.Platform.Android.Binding.BindingContext;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     [Register("mvvmcross.binding.droid.views.MvxListItemView")]
     public class MvxListItemView : Object, IMvxListItemView, 

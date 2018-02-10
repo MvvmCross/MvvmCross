@@ -1,5 +1,3 @@
-using MvvmCross.Uwp.Attributes;
-
 namespace Playground.Uwp.Views
 {
     [MvxRegionPresentation("NestedFrame")]

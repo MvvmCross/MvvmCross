@@ -5,12 +5,11 @@
 using System;
 using Android.App;
 using Android.Content;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Droid.Views;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Android.Base.Views;
 
-namespace MvvmCross.Platform.Droid.Platform
+namespace MvvmCross.Platform.Android.Base.Platform
 {
     public class MvxAndroidTask
         : MvxMainThreadDispatchingObject

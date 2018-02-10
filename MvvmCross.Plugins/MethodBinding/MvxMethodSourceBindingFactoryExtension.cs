@@ -9,9 +9,8 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.MethodBinding
+namespace MvvmCross.Plugin.MethodBinding
 {
     [Preserve(AllMembers = true)]
 	public class MvxMethodSourceBindingFactoryExtension

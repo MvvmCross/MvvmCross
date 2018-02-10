@@ -3,10 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using Android.Support.V4.App;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Android.Views;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V4
 {

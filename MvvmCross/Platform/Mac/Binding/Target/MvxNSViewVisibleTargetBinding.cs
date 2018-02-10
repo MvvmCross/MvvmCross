@@ -4,8 +4,9 @@
 
 using System;
 using AppKit;
+using MvvmCross.Binding;
 
-namespace MvvmCross.Binding.Mac.Target
+namespace MvvmCross.Platform.Mac.Binding.Target
 {
     public class MvxNSViewVisibleTargetBinding : MvxMacTargetBinding
     {

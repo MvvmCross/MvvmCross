@@ -10,12 +10,12 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Binding.Droid.Views;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Droid.Views;
+using MvvmCross.Platform.Android.Base.Views;
+using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.Platform.Android.Binding.Views;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Platform.Android.Views
 {
     [Register("mvvmcross.droid.views.MvxActivity")]
     public abstract class MvxActivity

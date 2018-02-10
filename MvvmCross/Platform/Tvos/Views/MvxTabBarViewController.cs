@@ -5,17 +5,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
-using MvvmCross.Platform.tvOS.Views;
-using MvvmCross.tvOS.Views.Presenters;
-using MvvmCross.tvOS.Views.Presenters.Attributes;
-
+using MvvmCross.Platform.Tvos.Presenters;
+using MvvmCross.Platform.Tvos.Presenters.Attributes;
+using MvvmCross.ViewModels;
 using UIKit;
-using Foundation;
 
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     public class MvxTabBarViewController
         : MvxBaseTabBarViewController, IMvxTabBarViewController

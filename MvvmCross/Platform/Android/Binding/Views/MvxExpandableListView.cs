@@ -11,7 +11,7 @@ using Android.Util;
 using Android.Widget;
 using MvvmCross.Binding.Attributes;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     [Register("mvvmcross.binding.droid.views.MvxExpandableListView")]
     public class MvxExpandableListView : ExpandableListView

@@ -6,8 +6,8 @@ using System;
 using Android.Content;
 using Android.OS;
 using Android.Support.V4.App;
-using MvvmCross.Droid.Views;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base;
+using MvvmCross.Platform.Android.Views;
 
 namespace MvvmCross.Droid.Support.V4.EventSource
 {

@@ -4,10 +4,10 @@
 
 using System;
 using Foundation;
-using MvvmCross.Core.Platform;
+using MvvmCross.Core;
 using UIKit;
 
-namespace MvvmCross.iOS.Platform
+namespace MvvmCross.Platform.Ios.Core
 {
     public class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplicationDelegate
     {

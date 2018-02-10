@@ -2,9 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using MvvmCross.Plugin.ResourceLoader;
 using Xunit;
 
-namespace MvvmCross.Plugins.ResourceLoader.Test
+namespace MvvmCross.Plugins.ResourceLoader.UnitTest
 {
     public class MvxResourceProviderTest
     {

@@ -7,9 +7,9 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base;
 
-namespace MvvmCross.Platform.Droid.Views
+namespace MvvmCross.Platform.Android.Base.Views
 {
     [Obsolete("TabActivity is obsolete. Use ViewPager + Indicator or any other Activity with Toolbar support.")]
     [Register("mvvmcross.platform.droid.views.MvxEventSourceTabActivity")]

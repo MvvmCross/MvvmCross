@@ -5,11 +5,10 @@
 using System;
 using CoreGraphics;
 using Foundation;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.iOS.Views;
+using MvvmCross.ViewModels;
 using UIKit;
 
-namespace MvvmCross.iOS.Support.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     /// <summary>
 	/// Mvx base view controller that provides a few extra bits of implementation over the standard View Controllers.

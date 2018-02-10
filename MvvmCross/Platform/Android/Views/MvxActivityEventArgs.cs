@@ -5,7 +5,7 @@
 using System;
 using Android.App;
 
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Platform.Android.Views
 {
     public class MvxActivityEventArgs : EventArgs
     {

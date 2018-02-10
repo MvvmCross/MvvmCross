@@ -6,9 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Binding.Parse.PropertyPath;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding.Bindings.Source.Construction
 {

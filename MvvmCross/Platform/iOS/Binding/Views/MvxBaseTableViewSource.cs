@@ -5,13 +5,12 @@
 using System;
 using System.Windows.Input;
 using Foundation;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Views
+namespace MvvmCross.Platform.Ios.Binding.Views
 {
     public abstract class MvxBaseTableViewSource : UITableViewSource
     {

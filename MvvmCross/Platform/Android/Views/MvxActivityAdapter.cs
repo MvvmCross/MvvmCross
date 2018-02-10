@@ -5,16 +5,14 @@
 using System;
 using Android.Content;
 using Android.OS;
-using MvvmCross.Core.Views;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Droid.Platform;
-using MvvmCross.Platform.Droid.Views;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Android.Base.Platform;
+using MvvmCross.Platform.Android.Base.Views;
+using MvvmCross.Platform.Android.Core;
+using MvvmCross.Views;
 
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Platform.Android.Views
 {
     public class MvxActivityAdapter : MvxBaseActivityAdapter
     {

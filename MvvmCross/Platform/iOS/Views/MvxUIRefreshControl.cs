@@ -7,7 +7,7 @@ using System.Windows.Input;
 using Foundation;
 using UIKit;
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.Platform.Ios.Views
 {
 	/// <summary>
 	/// Mvx user interface refresh control.

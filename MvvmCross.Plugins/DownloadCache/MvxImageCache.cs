@@ -7,10 +7,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base;
 
-namespace MvvmCross.Plugins.DownloadCache
+namespace MvvmCross.Plugin.DownloadCache
 {
     [Preserve(AllMembers = true)]
 	public class MvxImageCache<T>

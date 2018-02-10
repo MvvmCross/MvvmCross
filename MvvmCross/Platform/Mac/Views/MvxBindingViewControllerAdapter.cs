@@ -3,14 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-
+using MvvmCross.Logging;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Mac.Base.Views;
 
-using MvvmCross.Platform.Mac.Views;
-using MvvmCross.Platform.Logging;
-
-namespace MvvmCross.Mac.Views
+namespace MvvmCross.Platform.Mac.Views
 {
     public class MvxBindingViewControllerAdapter : MvxBaseViewControllerAdapter
     {

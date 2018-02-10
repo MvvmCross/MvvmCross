@@ -6,10 +6,10 @@ using System;
 using System.Reflection;
 using AppKit;
 using Foundation;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
 
-namespace MvvmCross.Binding.Mac.Target
+namespace MvvmCross.Platform.Mac.Binding.Target
 {
     public class MvxNSSliderValueTargetBinding : MvxPropertyInfoTargetBinding<NSSlider>
     {

@@ -6,14 +6,13 @@ using System;
 using System.Collections;
 using System.Collections.Specialized;
 using Foundation;
+using MvvmCross.Logging;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.WeakSubscription;
 using UIKit;
 
-namespace MvvmCross.Binding.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Binding.Views
 {
     public abstract class MvxTableViewSource : MvxBaseTableViewSource
     {

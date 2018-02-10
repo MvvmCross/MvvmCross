@@ -4,12 +4,12 @@
 
 using System.Collections.Generic;
 using System.Windows;
+using MvvmCross.Base;
+using MvvmCross.Exceptions;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
 
-namespace MvvmCross.Binding.Wpf
+namespace MvvmCross.Platform.Wpf.Binding
 {
     // ReSharper disable InconsistentNaming
     public static class Bi

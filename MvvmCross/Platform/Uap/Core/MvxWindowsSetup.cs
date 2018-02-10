@@ -4,25 +4,24 @@
 
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.Plugins;
-using MvvmCross.Uwp.Views;
-using MvvmCross.Uwp.Views.Suspension;
-using MvvmCross.Platform.Converters;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding;
-using MvvmCross.Binding.Uwp;
 using MvvmCross.Binding.Binders;
 using System;
 using System.Reflection;
+using MvvmCross.Converters;
+using MvvmCross.Exceptions;
+using MvvmCross.Plugins;
+using MvvmCross.Core;
+using MvvmCross.Platform.Uap.Binding;
+using MvvmCross.Platform.Uap.Presenters;
+using MvvmCross.Platform.Uap.Views;
+using MvvmCross.Platform.Uap.Views.Suspension;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
-namespace MvvmCross.Uwp.Platform
+namespace MvvmCross.Platform.Uap.Core
 {
     public abstract class MvxWindowsSetup
         : MvxSetup

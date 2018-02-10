@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 #endregion using
 
-namespace MvvmCross.Plugins.WebBrowser.Wpf
+namespace MvvmCross.Plugin.WebBrowser.Platform.Wpf
 {
     public class MvxWebBrowserTask : IMvxWebBrowserTask
     {

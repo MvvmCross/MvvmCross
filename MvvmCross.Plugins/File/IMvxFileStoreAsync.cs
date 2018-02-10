@@ -8,7 +8,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MvvmCross.Plugins.File
+namespace MvvmCross.Plugin.File
 {
     /// <summary>
     ///     Warning: this interface not implemented on all platforms currently

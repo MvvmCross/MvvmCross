@@ -3,11 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Logging;
 
-namespace MvvmCross.Plugins.JsonLocalization
+namespace MvvmCross.Plugin.JsonLocalization
 {
     [Preserve(AllMembers = true)]
 	public class MvxDictionaryTextProvider : MvxTextProvider

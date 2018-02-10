@@ -1,15 +1,15 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using Android.OS;
+using MvvmCross.Base;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Droid.Views;
+using MvvmCross.Platform.Android.Base.Views;
+using MvvmCross.Platform.Android.Binding.BindingContext;
 
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Platform.Android.Views
 {
     public class MvxBindingActivityAdapter
         : MvxBaseActivityAdapter

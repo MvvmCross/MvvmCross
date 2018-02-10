@@ -6,10 +6,10 @@ using System;
 using AppKit;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Mac.Views;
+using MvvmCross.Platform.Mac.Base.Views;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Mac.Views
+namespace MvvmCross.Platform.Mac.Views
 {
     public class MvxViewController
         : MvxEventSourceViewController

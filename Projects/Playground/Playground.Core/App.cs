@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Core.ViewModels;
+using MvvmCross;
+using MvvmCross.IoC;
 using MvvmCross.Localization;
-using MvvmCross.Platform;
-using MvvmCross.Platform.IoC;
+using MvvmCross.ViewModels;
 using Playground.Core.Services;
 using Playground.Core.ViewModels;
 

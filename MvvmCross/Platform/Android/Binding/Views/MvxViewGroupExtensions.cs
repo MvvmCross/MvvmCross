@@ -7,7 +7,7 @@ using System.Collections.Specialized;
 using Android.Views;
 using Android.Widget;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     public static class MvxViewGroupExtensions
     {

@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Exceptions;
 
-namespace MvvmCross.Uwp.Views.Suspension
+namespace MvvmCross.Platform.Uap.Views.Suspension
 {
     public class MvxSuspensionManagerException : MvxException
     {

@@ -4,14 +4,12 @@
 
 using System;
 using Android.Content;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Platform.Android.Views
 {
     public class MvxAndroidViewsContainer
         : MvxViewsContainer

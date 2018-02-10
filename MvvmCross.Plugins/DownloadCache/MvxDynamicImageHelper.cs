@@ -5,13 +5,11 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
 
-namespace MvvmCross.Plugins.DownloadCache
+namespace MvvmCross.Plugin.DownloadCache
 {
     [Preserve(AllMembers = true)]
 	public class MvxDynamicImageHelper<T>

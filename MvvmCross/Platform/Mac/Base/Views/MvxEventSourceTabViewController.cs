@@ -5,9 +5,9 @@
 using System;
 using AppKit;
 using Foundation;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base;
 
-namespace MvvmCross.Platform.Mac.Views
+namespace MvvmCross.Platform.Mac.Base.Views
 {
     public class MvxEventSourceTabViewController
     : NSTabViewController, IMvxEventSourceViewController

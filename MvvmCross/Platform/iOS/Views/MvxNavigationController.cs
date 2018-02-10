@@ -6,7 +6,7 @@ using System;
 using Foundation;
 using UIKit;
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     public class MvxNavigationController : UINavigationController
     {

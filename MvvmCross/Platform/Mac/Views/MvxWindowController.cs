@@ -6,7 +6,7 @@ using System;
 using AppKit;
 using Foundation;
 
-namespace MvvmCross.Mac.Views
+namespace MvvmCross.Platform.Mac.Views
 {
     public class MvxWindowController
         : NSWindowController

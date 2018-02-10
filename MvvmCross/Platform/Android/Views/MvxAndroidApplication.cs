@@ -6,7 +6,7 @@ using System;
 using Android.App;
 using Android.Runtime;
 
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Platform.Android.Views
 {
     public class MvxAndroidApplication : Application, IMvxAndroidApplication
     {

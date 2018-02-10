@@ -4,7 +4,7 @@
 
 using System;
 using System.Windows.Input;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Binding.Bindings.Target
 {

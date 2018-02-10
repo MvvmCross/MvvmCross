@@ -4,12 +4,11 @@
 
 using System;
 using System.Collections.Generic;
+using MvvmCross.Exceptions;
 using MvvmCross.Localization;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Logging;
 
-namespace MvvmCross.Plugins.JsonLocalization
+namespace MvvmCross.Plugin.JsonLocalization
 {
     public abstract class MvxTextProviderBuilder
         : IMvxTextProviderBuilder

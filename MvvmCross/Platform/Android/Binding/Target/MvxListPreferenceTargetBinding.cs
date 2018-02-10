@@ -4,7 +4,7 @@
 
 using Android.Preferences;
 
-namespace MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Platform.Android.Binding.Target
 {
     public class MvxListPreferenceTargetBinding : MvxPreferenceValueTargetBinding
     {

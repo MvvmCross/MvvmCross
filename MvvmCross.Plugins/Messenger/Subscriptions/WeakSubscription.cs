@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Plugins.Messenger.ThreadRunners;
+using MvvmCross.Plugin.Messenger.ThreadRunners;
 
-namespace MvvmCross.Plugins.Messenger.Subscriptions
+namespace MvvmCross.Plugin.Messenger.Subscriptions
 {
     public class WeakSubscription<TMessage> : TypedSubscription<TMessage>
         where TMessage : MvxMessage

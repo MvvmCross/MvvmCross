@@ -4,9 +4,9 @@
 
 using System.Collections.Generic;
 using System.Text;
+using MvvmCross.Base;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Parse;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding.Parse.PropertyPath
 {

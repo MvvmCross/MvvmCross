@@ -5,14 +5,13 @@
 using System;
 using System.Collections.Generic;
 using Foundation;
+using MvvmCross.Logging;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.iOS.Views;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Ios.Base.Views;
+using MvvmCross.ViewModels;
 using UIKit;
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     public class MvxPageViewController : MvxEventSourcePageViewController, IMvxIosView
     {

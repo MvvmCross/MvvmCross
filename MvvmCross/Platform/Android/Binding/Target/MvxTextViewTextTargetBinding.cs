@@ -5,11 +5,11 @@
 using System;
 using Android.Text;
 using Android.Widget;
+using MvvmCross.Binding;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Platform.Android.Base.WeakSubscription;
 
-namespace MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Platform.Android.Binding.Target
 {
     public class MvxTextViewTextTargetBinding
         : MvxAndroidTargetBinding

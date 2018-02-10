@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -8,18 +8,17 @@ using Android.OS;
 using Android.Util;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Binding.Droid.Views;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Droid.Views;
-using MvvmCross.Forms.Droid.Views.EventSource;
-using MvvmCross.Forms.Platform;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform.Android.Views.EventSource;
 using MvvmCross.Forms.Views;
-using MvvmCross.Platform;
+using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.Platform.Android.Binding.Views;
+using MvvmCross.Platform.Android.Core;
+using MvvmCross.Platform.Android.Views;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Forms.Droid.Views
+namespace MvvmCross.Forms.Platform.Android.Views
 {
     public abstract class MvxFormsAppCompatActivity : MvxEventSourceFormsAppCompatActivity, IMvxAndroidView
     {

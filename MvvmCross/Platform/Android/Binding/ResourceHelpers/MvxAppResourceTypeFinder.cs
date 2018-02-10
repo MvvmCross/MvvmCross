@@ -3,11 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Exceptions;
+using MvvmCross.Platform.Android.Base;
 
-namespace MvvmCross.Binding.Droid.ResourceHelpers
+namespace MvvmCross.Platform.Android.Binding.ResourceHelpers
 {
     public class MvxAppResourceTypeFinder : IMvxAppResourceTypeFinder
     {

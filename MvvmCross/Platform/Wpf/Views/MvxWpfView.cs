@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Core.ViewModels;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Wpf.Views
+namespace MvvmCross.Platform.Wpf.Views
 {
     public class MvxWpfView : UserControl, IMvxWpfView, IDisposable
     {

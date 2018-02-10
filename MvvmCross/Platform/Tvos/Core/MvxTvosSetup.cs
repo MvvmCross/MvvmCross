@@ -5,25 +5,22 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using MvvmCross.Converters;
+using MvvmCross.Plugins;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Binding.tvOS;
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.Plugins;
-using MvvmCross.Platform.tvOS.Platform;
-using MvvmCross.Platform.tvOS.Views;
-using MvvmCross.tvOS.Views;
-using MvvmCross.tvOS.Views.Presenters;
+using MvvmCross.Core;
+using MvvmCross.Platform.Tvos.Base.Platform;
+using MvvmCross.Platform.Tvos.Binding;
+using MvvmCross.Platform.Tvos.Presenters;
+using MvvmCross.Platform.Tvos.Views;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 using UIKit;
 
-namespace MvvmCross.tvOS.Platform
+namespace MvvmCross.Platform.Tvos.Core
 {
     public abstract class MvxTvosSetup
         : MvxSetup

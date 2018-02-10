@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-namespace MvvmCross.Binding.Droid
+namespace MvvmCross.Platform.Android.Binding
 {
     internal static class MvxAndroidPropertyBinding
     {

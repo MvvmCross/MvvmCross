@@ -13,11 +13,11 @@ using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Binding.Parse.PropertyPath;
-using MvvmCross.Platform.Converters;
+using MvvmCross.Converters;
 using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Binding.Test.Binders
+namespace MvvmCross.UnitTest.Binding.Binders
 {
     [Collection("MvxTest")]
     public class MvxSourceStepTests

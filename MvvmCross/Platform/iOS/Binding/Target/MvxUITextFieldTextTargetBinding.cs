@@ -3,13 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.WeakSubscription;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Target
+namespace MvvmCross.Platform.Ios.Binding.Target
 {
     public class MvxUITextFieldTextTargetBinding : MvxConvertingTargetBinding, IMvxEditableTextView
     {

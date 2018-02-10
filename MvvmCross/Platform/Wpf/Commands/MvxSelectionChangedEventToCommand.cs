@@ -4,7 +4,7 @@
 
 using System.Windows.Controls;
 
-namespace MvvmCross.Wpf.Commands
+namespace MvvmCross.Platform.Wpf.Commands
 {
     public class MvxSelectionChangedEventToCommand : MvxWithArgsEventToCommand
     {

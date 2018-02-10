@@ -5,17 +5,14 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.iOS.Support.XamarinSidebar.Extensions;
-using MvvmCross.iOS.Views;
-using MvvmCross.iOS.Views.Presenters;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Ios.Presenters;
+using MvvmCross.Platform.Ios.Views;
+using MvvmCross.ViewModels;
 using SidebarNavigation;
 using UIKit;
 
-namespace MvvmCross.iOS.Support.XamarinSidebar.Views
+namespace MvvmCross.Plugin.Sidebar.Views
 {
     public class MvxSidebarViewController : UIViewController, IMvxSidebarViewController
     {

@@ -3,13 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Reflection;
+using MvvmCross.Base;
+using MvvmCross.Converters;
+using MvvmCross.IoC;
 using MvvmCross.Binding.Combiners;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.IoC;
 
-namespace MvvmCross.Binding.Uwp
+namespace MvvmCross.Platform.Uap.Binding
 {
     public class Import
     {

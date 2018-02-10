@@ -6,10 +6,10 @@ using System;
 using AppKit;
 using CoreGraphics;
 using Foundation;
+using MvvmCross.Base;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Core;
 
-namespace MvvmCross.Binding.Mac.Views
+namespace MvvmCross.Platform.Mac.Binding.Views
 {
     [Register("MvxTableCellView")]
     public class MvxTableCellView : NSTableCellView, IMvxBindingContextOwner, IMvxDataConsumer

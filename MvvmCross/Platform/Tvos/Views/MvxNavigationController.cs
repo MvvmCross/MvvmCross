@@ -7,7 +7,7 @@ using System;
 using Foundation;
 using UIKit;
 
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     public class MvxNavigationController : UINavigationController
     {

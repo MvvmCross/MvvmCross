@@ -4,12 +4,13 @@
 
 using System.ComponentModel;
 using System.Windows.Input;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Core;
-using MvvmCross.Test.Mocks.Dispatchers;
+using MvvmCross.Base;
+using MvvmCross.Test;
+using MvvmCross.UnitTest.Mocks.Dispatchers;
+using MvvmCross.ViewModels;
 using Xunit;
 
-namespace MvvmCross.Test.ViewModels
+namespace MvvmCross.UnitTest.ViewModels
 {
     [Collection("MvxTest")]
     public class MvxCommandCollectionTest

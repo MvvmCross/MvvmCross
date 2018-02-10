@@ -5,11 +5,9 @@
 using System;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Source;
-using MvvmCross.FieldBinding;
-using MvvmCross.Platform;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.WeakSubscription;
 
-namespace MvvmCross.Plugins.FieldBinding
+namespace MvvmCross.Plugin.FieldBinding
 {
     public abstract class MvxNotifyChangeFieldSourceBinding
         : MvxSourceBinding

@@ -4,9 +4,8 @@
 
 using System;
 using System.Text;
-using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.Email
+namespace MvvmCross.Plugin.Email
 {
     [Preserve(AllMembers = true)]
 	public class MvxMailToUrlBuilder

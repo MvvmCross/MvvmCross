@@ -6,7 +6,7 @@ using System;
 using PixelFormat = System.Drawing.Imaging.PixelFormat;
 using PixelFormats = System.Windows.Media.PixelFormats;
 
-namespace MvvmCross.Plugins.PictureChooser.Wpf
+namespace MvvmCross.Plugin.PictureChooser.Platform.Wpf
 {
     /// <summary>
     /// Convertion class for PixelFormat between two namespaces

@@ -6,12 +6,11 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Runtime.CompilerServices;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Logging;
 
 [assembly: InternalsVisibleTo("MvvmCross.UnitTest")]
 
-namespace MvvmCross
+namespace MvvmCross.Test
 {
     internal static class MvxTestLog
     {

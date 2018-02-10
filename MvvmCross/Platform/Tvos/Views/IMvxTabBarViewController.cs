@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Core.ViewModels;
-using MvvmCross.tvOS.Views.Presenters.Attributes;
+using MvvmCross.Platform.Tvos.Presenters.Attributes;
+using MvvmCross.ViewModels;
 using UIKit;
 
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     public interface IMvxTabBarViewController
     {

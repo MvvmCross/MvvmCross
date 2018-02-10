@@ -4,10 +4,9 @@
 
 using Android.Content;
 using Android.Net;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid.Platform;
+using MvvmCross.Platform.Android.Base.Platform;
 
-namespace MvvmCross.Plugins.WebBrowser.Droid
+namespace MvvmCross.Plugin.WebBrowser.Platform.Android
 {
     [Preserve(AllMembers = true)]
 	public class MvxWebBrowserTask : MvxAndroidTask, IMvxWebBrowserTask

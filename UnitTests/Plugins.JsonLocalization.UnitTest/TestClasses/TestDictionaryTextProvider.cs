@@ -2,7 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-namespace MvvmCross.Plugins.JsonLocalization.Tests.Mocks
+using MvvmCross.Plugin.JsonLocalization;
+
+namespace MvvmCross.Plugins.JsonLocalization.UnitTest.TestClasses
 {
     internal class TestDictionaryTextProvider : MvxDictionaryTextProvider
     {

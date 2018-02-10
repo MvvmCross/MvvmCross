@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Windows.UI.Xaml;
 using MvvmCross.Binding.Bindings;
 
-namespace MvvmCross.Binding.Uwp
+namespace MvvmCross.Platform.Uap.Binding
 {
     public interface IMvxBindingCreator
     {

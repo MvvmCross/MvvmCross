@@ -6,7 +6,7 @@ using System;
 using System.Reflection;
 using Newtonsoft.Json;
 
-namespace MvvmCross.Plugins.Json
+namespace MvvmCross.Plugin.Json
 {
     [Preserve(AllMembers = true)]
 	public class MvxEnumJsonConverter : JsonConverter

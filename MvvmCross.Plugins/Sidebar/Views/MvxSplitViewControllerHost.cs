@@ -4,7 +4,7 @@
 
 using UIKit;
 
-namespace MvvmCross.iOS.Support.XamarinSidebar.Views
+namespace MvvmCross.Plugin.Sidebar.Views
 {
     /// <summary>
     /// A wrapper UIViewController to present a UISplitViewController view nested

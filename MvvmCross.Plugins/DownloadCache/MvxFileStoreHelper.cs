@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Plugins.File;
+using MvvmCross.Exceptions;
+using MvvmCross.Plugin.File;
 
-namespace MvvmCross.Plugins.DownloadCache
+namespace MvvmCross.Plugin.DownloadCache
 {
     [Preserve(AllMembers = true)]
 	public static class MvxFileStoreHelper

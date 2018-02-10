@@ -12,14 +12,14 @@ using Android.Support.Design.Widget;
 using Android.Support.V4.App;
 using Android.Support.V4.Util;
 using Android.Support.V4.View;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
 using MvvmCross.Droid.Support.V4;
-using MvvmCross.Droid.Views;
-using MvvmCross.Droid.Views.Attributes;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Android.Presenters;
+using MvvmCross.Platform.Android.Presenters.Attributes;
+using MvvmCross.Platform.Android.Views;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {

@@ -5,10 +5,9 @@
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Views;
-using MvvmCross.Platform;
+using MvvmCross.Platform.Android.Core;
+using MvvmCross.Platform.Android.Views;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {

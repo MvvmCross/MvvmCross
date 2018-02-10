@@ -5,16 +5,14 @@
 using System;
 using CoreLocation;
 using Foundation;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.iOS;
-using MvvmCross.Platform.iOS.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Ios.Base;
+using MvvmCross.Platform.Ios.Base.Platform;
 
-namespace MvvmCross.Plugins.Location.iOS
+namespace MvvmCross.Plugin.Location.Platform.iOS
 {
-    [MvvmCross.Platform.Preserve(AllMembers = true)]
+    [MvvmCross.Preserve(AllMembers = true)]
 	public sealed class MvxIosLocationWatcher
         : MvxLocationWatcher
     {

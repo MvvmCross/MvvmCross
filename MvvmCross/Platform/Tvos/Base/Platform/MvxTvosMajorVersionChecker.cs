@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Platform.Logging;
+using MvvmCross.Logging;
 
-namespace MvvmCross.Platform.tvOS.Platform
+namespace MvvmCross.Platform.Tvos.Base.Platform
 {
     public class MvxTvosMajorVersionChecker
     {

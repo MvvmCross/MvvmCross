@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.iOS.Views;
-using MvvmCross.iOS.Views.Presenters.Attributes;
+using MvvmCross.Platform.Ios.Views;
 using Playground.Core.ViewModels;
 using UIKit;
 

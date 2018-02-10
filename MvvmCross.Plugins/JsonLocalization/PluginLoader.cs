@@ -2,10 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.Plugins;
+using MvvmCross.Plugins;
 
-namespace MvvmCross.Plugins.JsonLocalization
+namespace MvvmCross.Plugin.JsonLocalization
 {
     [Preserve(AllMembers = true)]
     public class PluginLoader

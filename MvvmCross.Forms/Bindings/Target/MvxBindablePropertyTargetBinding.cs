@@ -7,9 +7,7 @@ using System.ComponentModel;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.WeakSubscription;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Bindings.Target

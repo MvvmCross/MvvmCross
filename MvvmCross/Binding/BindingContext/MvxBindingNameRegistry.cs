@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using MvvmCross.Platform;
 
 namespace MvvmCross.Binding.BindingContext
 {

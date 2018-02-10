@@ -1,9 +1,5 @@
 using System;
-
-using UIKit;
-using MvvmCross.tvOS.Views;
-using MvvmCross.tvOS.Views.Presenters.Attributes;
-
+using MvvmCross.Platform.Tvos.Views;
 using Playground.Core.ViewModels;
 
 namespace Playground.TvOS

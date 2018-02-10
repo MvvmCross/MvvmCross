@@ -5,10 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
 using Newtonsoft.Json;
 
-namespace MvvmCross.Plugins.Json
+namespace MvvmCross.Plugin.Json
 {
     [Preserve(AllMembers = true)]
 	public class MvxJsonConverter 

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
 
-namespace MvvmCross.Uwp.Views.Suspension
+namespace MvvmCross.Platform.Uap.Views.Suspension
 {
     public interface IMvxSuspensionManager
     {

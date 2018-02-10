@@ -5,10 +5,9 @@
 using System;
 using System.Reflection;
 using MvvmCross.Binding;
-using MvvmCross.Binding.Droid.Target;
 using MvvmCross.Droid.Support.V7.AppCompat.Widget;
-using MvvmCross.Platform.Droid.WeakSubscription;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Android.Base.WeakSubscription;
+using MvvmCross.Platform.Android.Binding.Target;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {

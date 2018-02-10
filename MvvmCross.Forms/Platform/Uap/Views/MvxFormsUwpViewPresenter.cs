@@ -2,17 +2,15 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Uwp.Views;
 using System;
+using MvvmCross.Forms.Core;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Uap.Presenters;
+using MvvmCross.Platform.Uap.Views;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Forms.Uwp.Presenters
+namespace MvvmCross.Forms.Platform.Uap.Views
 {
     public class MvxFormsUwpViewPresenter
         : MvxWindowsViewPresenter

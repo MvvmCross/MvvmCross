@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Forms.Platform;
+using MvvmCross.Forms.Core;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views

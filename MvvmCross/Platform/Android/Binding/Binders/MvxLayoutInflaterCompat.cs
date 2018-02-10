@@ -10,11 +10,10 @@ using Android.Util;
 using Android.Views;
 using Java.Lang;
 using Java.Lang.Reflect;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Logging;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Binding.Droid.Binders
+namespace MvvmCross.Platform.Android.Binding.Binders
 {
     public static class MvxLayoutInflaterCompat
     {

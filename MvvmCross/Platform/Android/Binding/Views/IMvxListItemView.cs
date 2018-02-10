@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using Android.Views;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     public interface IMvxListItemView
         : IMvxDataConsumer

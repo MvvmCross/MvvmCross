@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Binding.Droid.Binders.ViewTypeResolvers
+namespace MvvmCross.Platform.Android.Binding.Binders.ViewTypeResolvers
 {
     public interface IMvxViewTypeResolver
     {

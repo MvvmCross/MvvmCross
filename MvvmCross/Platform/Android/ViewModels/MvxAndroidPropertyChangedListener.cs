@@ -1,13 +1,13 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.ComponentModel;
 using Android.Runtime;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Droid.ViewModels
+namespace MvvmCross.Platform.Android.ViewModels
 {
     /// <summary>
     ///     Just like <see cref="MvxPropertyChangedListener"/> but

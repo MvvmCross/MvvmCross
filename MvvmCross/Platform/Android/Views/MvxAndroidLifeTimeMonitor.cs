@@ -5,10 +5,10 @@
 using System;
 using Android.App;
 using Android.OS;
-using MvvmCross.Core.Platform;
-using MvvmCross.Droid.Platform;
+using MvvmCross.Core;
+using MvvmCross.Platform.Android.Core;
 
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Platform.Android.Views
 {
     // For lifetime explained, see http://developer.android.com/guide/topics/fundamentals/activities.html
     public class MvxAndroidLifetimeMonitor

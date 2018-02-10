@@ -4,12 +4,12 @@
 
 using System.Collections.Generic;
 using MvvmCross.Core.Parse.StringDictionary;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
-using MvvmCross.Test.Mocks.TestViewModels;
+using MvvmCross.Test;
+using MvvmCross.UnitTest.Mocks.TestViewModels;
+using MvvmCross.ViewModels;
 using Xunit;
 
-namespace MvvmCross.Test.Parse
+namespace MvvmCross.UnitTest.Parse
 {
     [Collection("MvxTest")]
     public class MvxStringDictionaryTextSerializerTest

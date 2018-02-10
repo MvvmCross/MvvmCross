@@ -8,7 +8,7 @@
 using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Plugins.Network.Test
+namespace MvvmCross.Plugins.Network.UnitTest
 {
     [CollectionDefinition("Rest")]
     public class RestCollection : ICollectionFixture<MvxTestFixture>

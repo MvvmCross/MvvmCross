@@ -5,9 +5,9 @@
 using System;
 using System.IO;
 using Android.Widget;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Binding;
 
-namespace MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Platform.Android.Binding.Target
 {
     public class MvxImageViewImageTargetBinding
         : MvxBaseStreamImageViewTargetBinding

@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Test.Mocks.TestViewModels
+namespace MvvmCross.UnitTest.Mocks.TestViewModels
 {
     public class BundleObject
     {

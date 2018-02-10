@@ -3,11 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Plugins;
+using MvvmCross.Exceptions;
+using MvvmCross.Plugins;
 
-namespace MvvmCross.Plugins.File.iOS
+namespace MvvmCross.Plugin.File.Platform.iOS
 {
     [Preserve(AllMembers = true)]
     public class Plugin

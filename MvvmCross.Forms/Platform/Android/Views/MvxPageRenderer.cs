@@ -4,12 +4,10 @@
 
 using Android.Content;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Views;
-using Xamarin.Forms;
+using MvvmCross.ViewModels;
 using Xamarin.Forms.Platform.Android;
 
-namespace MvvmCross.Forms.Droid.Views
+namespace MvvmCross.Forms.Platform.Android.Views
 {
     public class MvxPageRenderer : PageRenderer, IMvxBindingContextOwner
     {

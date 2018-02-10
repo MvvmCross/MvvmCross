@@ -1,12 +1,12 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Core.Platform;
+using MvvmCross.Core;
 using UIKit;
 
-namespace MvvmCross.tvOS.Platform
+namespace MvvmCross.Platform.Tvos.Core
 {
     public class MvxApplicationDelegate : UIApplicationDelegate
                                           , IMvxApplicationDelegate

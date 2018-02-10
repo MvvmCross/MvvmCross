@@ -6,7 +6,7 @@
 using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Binding.Test.Parse.Binding
+namespace MvvmCross.UnitTest.Binding.Parse.Binding
 {
     public abstract class MvxBindingTest : IClassFixture<MvxTestFixture>
     {

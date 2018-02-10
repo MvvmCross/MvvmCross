@@ -5,10 +5,9 @@
 using System;
 using Android.Views;
 using MvvmCross.Binding;
-using MvvmCross.Binding.Droid.Target;
-using MvvmCross.Platform;
+using MvvmCross.Platform.Android.Binding.Target;
 
-namespace MvvmCross.Plugins.Color.Droid.BindingTargets
+namespace MvvmCross.Plugin.Color.Platform.Android.BindingTargets
 {
     [Preserve(AllMembers = true)]
 	public abstract class MvxViewColorBinding
@@ -23,6 +22,6 @@ namespace MvvmCross.Plugins.Color.Droid.BindingTargets
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWay;
 
-        public override Type TargetType => typeof(Android.Graphics.Color);
+        public override Type TargetType => typeof(global::Android.Graphics.Color);
     }
 }

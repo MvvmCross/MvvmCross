@@ -4,9 +4,9 @@
 
 using System;
 using System.IO;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Exceptions;
 
-namespace MvvmCross.Plugins.ResourceLoader.iOS
+namespace MvvmCross.Plugin.ResourceLoader.Platform.iOS
 {
     public class MvxIosResourceLoader
         : MvxResourceLoader

@@ -4,10 +4,9 @@
 
 using System;
 using System.IO;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
 
-namespace MvvmCross.Plugins.Network.Rest
+namespace MvvmCross.Plugin.Network.Rest
 {
     [Preserve(AllMembers = true)]
 	public class MvxJsonRestRequest<T>

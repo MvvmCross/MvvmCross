@@ -3,16 +3,16 @@
 // See the LICENSE file in the project root for more information.
 
 using Android.Content;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Droid.Platform;
-using MvvmCross.Forms.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Plugins.Json;
 using Serilog;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform.Android.Core;
+using MvvmCross.Logging;
+using MvvmCross.Plugin.Json;
+using MvvmCross.ViewModels;
+using Playground.Forms.UI;
 
 namespace Playground.Forms.Droid
 {

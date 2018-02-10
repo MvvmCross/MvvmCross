@@ -7,14 +7,14 @@ using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
+using MvvmCross.Converters;
+using MvvmCross.Logging;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Uwp.Converters;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Platform.Uap.Base.Converters;
 
-namespace MvvmCross.Binding.Uwp
+namespace MvvmCross.Platform.Uap.Binding
 {
     public class MvxWindowsBindingCreator : MvxBindingCreator
     {
