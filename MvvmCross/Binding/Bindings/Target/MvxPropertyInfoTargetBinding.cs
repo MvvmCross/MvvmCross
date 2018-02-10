@@ -5,7 +5,6 @@
 using System;
 using System.Reflection;
 using MvvmCross.Binding.Attributes;
-using MvvmCross.Platform;
 
 namespace MvvmCross.Binding.Bindings.Target
 {

@@ -3,17 +3,15 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Windows.Threading;
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.Plugins;
-using MvvmCross.Wpf.Views;
-using MvvmCross.Wpf.Views.Presenters;
 using System.Windows.Controls;
+using MvvmCross.Plugins;
+using MvvmCross.Core;
+using MvvmCross.Platform.Wpf.Presenters;
+using MvvmCross.Platform.Wpf.Views;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
-namespace MvvmCross.Wpf.Platform
+namespace MvvmCross.Platform.Wpf.Core
 {
     public abstract class MvxWpfSetup
         : MvxSetup

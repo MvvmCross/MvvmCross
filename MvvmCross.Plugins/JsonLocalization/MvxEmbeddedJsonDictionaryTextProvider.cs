@@ -5,10 +5,9 @@
 using System;
 using System.IO;
 using System.Reflection;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Exceptions;
 
-namespace MvvmCross.Plugins.JsonLocalization
+namespace MvvmCross.Plugin.JsonLocalization
 {
     [Preserve(AllMembers = true)]
 	public class MvxEmbeddedJsonDictionaryTextProvider

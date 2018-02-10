@@ -4,7 +4,7 @@
 
 using System;
 using System.Collections.Generic;
-using MvvmCross.Platform.Converters;
+using MvvmCross.Converters;
 
 namespace MvvmCross.Binding.Binders
 {

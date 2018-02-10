@@ -4,12 +4,13 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Lang;
 using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Binding.Test.Parse.Binding.Lang
+namespace MvvmCross.UnitTest.Binding.Parse.Binding.Lang
 {
     [Collection("MvxTest")]
     public class MvxLangBindingTest

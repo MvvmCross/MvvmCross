@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -8,13 +8,13 @@ using System.Collections.Specialized;
 using System.Linq;
 using CoreGraphics;
 using Foundation;
-using MvvmCross.Binding.iOS.Views;
-using MvvmCross.iOS.Support.Views.Expandable;
-using MvvmCross.iOS.Support.Views.Expandable.Controllers;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base;
+using MvvmCross.Platform.Ios.Binding.Views;
+using MvvmCross.Platform.Ios.Views.Expandable;
+using MvvmCross.Platform.Ios.Views.Expandable.Controllers;
 using UIKit;
 
-namespace MvvmCross.iOS.Support.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     public abstract class MvxExpandableTableViewSource : MvxExpandableTableViewSource<IEnumerable<object>, object>
     {

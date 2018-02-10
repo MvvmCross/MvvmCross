@@ -8,16 +8,14 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using CoreGraphics;
 using Foundation;
-using MvvmCross.iOS.Support.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.iOS.Platform;
-using MvvmCross.Platform.iOS.Views;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Ios.Base.Platform;
+using MvvmCross.Platform.Ios.Views;
 using UIKit;
 
-namespace MvvmCross.Plugins.PictureChooser.iOS
+namespace MvvmCross.Plugin.PictureChooser.Platform.iOS
 {
-    [MvvmCross.Platform.Preserve(AllMembers = true)]
+    [MvvmCross.Preserve(AllMembers = true)]
 	public class MvxImagePickerTask
         : MvxIosTask, IMvxPictureChooserTask
     {

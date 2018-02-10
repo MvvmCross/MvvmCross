@@ -4,17 +4,17 @@
 
 using System;
 using System.Windows;
+using MvvmCross.Base;
+using MvvmCross.Converters;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
-using MvvmCross.Binding.Wpf.MvxBinding;
-using MvvmCross.Binding.Wpf.MvxBinding.Target;
-using MvvmCross.Binding.Wpf.WindowsBinding;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Core;
+using MvvmCross.Platform.Wpf.Binding.MvxBinding;
+using MvvmCross.Platform.Wpf.Binding.MvxBinding.Target;
+using MvvmCross.Platform.Wpf.Binding.WindowsBinding;
 
-namespace MvvmCross.Binding.Wpf
+namespace MvvmCross.Platform.Wpf.Binding
 {
     public class MvxWindowsBindingBuilder : MvxBindingBuilder
     {

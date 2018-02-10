@@ -9,13 +9,11 @@ using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
-using MvvmCross.Binding.Droid.ResourceHelpers;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Android.Binding.ResourceHelpers;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     [Register("mvvmcross.binding.droid.views.MvxImageView")]
     public class MvxImageView

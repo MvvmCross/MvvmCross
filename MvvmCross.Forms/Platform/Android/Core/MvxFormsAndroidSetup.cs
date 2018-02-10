@@ -1,25 +1,25 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using Android.Content;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Views;
-using MvvmCross.Forms.Droid.Bindings;
-using MvvmCross.Forms.Droid.Views;
-using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
 using MvvmCross.Localization;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Droid.Platform;
-using MvvmCross.Platform.Plugins;
 using System.Collections.Generic;
 using System.Reflection;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform.Android.Bindings;
+using MvvmCross.Forms.Platform.Android.Views;
+using MvvmCross.Platform.Android.Base.Platform;
+using MvvmCross.Platform.Android.Core;
+using MvvmCross.Platform.Android.Presenters;
+using MvvmCross.Platform.Android.Views;
+using MvvmCross.Plugins;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Forms.Droid.Platform
+namespace MvvmCross.Forms.Platform.Android.Core
 {
     public abstract class MvxFormsAndroidSetup : MvxAndroidSetup
     {

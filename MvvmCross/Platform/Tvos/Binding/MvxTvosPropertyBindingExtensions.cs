@@ -4,7 +4,7 @@
 
 using UIKit;
 
-namespace MvvmCross.Binding.tvOS
+namespace MvvmCross.Platform.Tvos.Binding
 {
     public static class MvxTvosPropertyBindingExtensions
     {

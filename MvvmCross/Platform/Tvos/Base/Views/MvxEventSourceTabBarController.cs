@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base;
 using UIKit;
 
-namespace MvvmCross.Platform.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Base.Views
 {
     public class MvxEventSourceTabBarController
         : UITabBarController, IMvxEventSourceViewController

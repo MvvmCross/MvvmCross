@@ -5,13 +5,11 @@
 using System;
 using System.Collections.Generic;
 using Android.OS;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Android.Core;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Droid.Views
+namespace MvvmCross.Platform.Android.Views
 {
     public class MvxSavedStateConverter : IMvxSavedStateConverter
     {

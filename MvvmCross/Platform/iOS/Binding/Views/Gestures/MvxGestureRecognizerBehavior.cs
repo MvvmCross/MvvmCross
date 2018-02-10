@@ -5,7 +5,7 @@
 using System.Windows.Input;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Views.Gestures
+namespace MvvmCross.Platform.Ios.Binding.Views.Gestures
 {
     public abstract class MvxGestureRecognizerBehavior
     {

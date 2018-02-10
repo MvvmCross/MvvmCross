@@ -5,11 +5,11 @@
 using System;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.iOS.Views;
+using MvvmCross.Platform.Ios.Base.Views;
+using MvvmCross.ViewModels;
 using UIKit;
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     public class MvxTableViewController
         : MvxEventSourceTableViewController, IMvxIosView

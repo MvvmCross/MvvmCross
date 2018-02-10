@@ -3,15 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Mac.Presenters;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Platform.Platform;
-
-using MvvmCross.Mac.Views.Presenters;
-using MvvmCross.Platform.Logging;
-
-namespace MvvmCross.Mac.Views
+namespace MvvmCross.Platform.Mac.Views
 {
     public class MvxMacViewDispatcher
         : MvxMacUIThreadDispatcher

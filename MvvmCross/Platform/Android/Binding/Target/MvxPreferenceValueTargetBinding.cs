@@ -4,11 +4,11 @@
 
 using System;
 using Android.Preferences;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Logging;
+using MvvmCross.Binding;
+using MvvmCross.Platform.Android.Base.WeakSubscription;
 
-namespace MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Platform.Android.Binding.Target
 {
     public class MvxPreferenceValueTargetBinding 
         : MvxAndroidTargetBinding

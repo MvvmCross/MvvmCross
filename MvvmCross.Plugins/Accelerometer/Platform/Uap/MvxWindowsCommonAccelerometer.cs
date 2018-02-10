@@ -4,10 +4,10 @@
 
 using System;
 using Windows.Devices.Sensors;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Base;
+using MvvmCross.Exceptions;
 
-namespace MvvmCross.Plugins.Accelerometer.Uwp
+namespace MvvmCross.Plugin.Accelerometer.Platform.Uap
 {
     public class MvxWindowsCommonAccelerometer : IMvxAccelerometer
     {

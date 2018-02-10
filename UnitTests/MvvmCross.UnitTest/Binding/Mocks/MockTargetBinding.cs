@@ -4,9 +4,10 @@
 
 using System;
 using System.Collections.Generic;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 
-namespace MvvmCross.Binding.Test.Mocks
+namespace MvvmCross.UnitTest.Binding.Mocks
 {
     public class MockTargetBinding : IMvxTargetBinding
     {

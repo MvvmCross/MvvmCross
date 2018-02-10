@@ -3,11 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Test.Mocks.TestViewModels;
+using MvvmCross.Test;
+using MvvmCross.UnitTest.Mocks.TestViewModels;
+using MvvmCross.ViewModels;
 using Xunit;
 
-namespace MvvmCross.Test.Platform
+namespace MvvmCross.UnitTest.Platform
 {
     [Collection("MvxTest")]
     public class MvxViewModelByNameLookupTest
@@ -38,21 +39,21 @@ namespace MvvmCross.Test.Platform
             Assert.Null(result);
             Assert.False(finder.TryLookupByName("NoWayTestViewModel", out result));
             Assert.Null(result);
-            Assert.True(finder.TryLookupByFullName("MvvmCross.Test.Mocks.TestViewModels.Test1ViewModel",
+            Assert.True(finder.TryLookupByFullName("MvvmCross.UnitTest.Mocks.TestViewModels.Test1ViewModel",
                                                      out result));
             Assert.Equal(typeof(Test1ViewModel), result);
-            Assert.True(finder.TryLookupByFullName("MvvmCross.Test.Mocks.TestViewModels.Test2ViewModel",
+            Assert.True(finder.TryLookupByFullName("MvvmCross.UnitTest.Mocks.TestViewModels.Test2ViewModel",
                                                      out result));
             Assert.Equal(typeof(Test2ViewModel), result);
-            Assert.True(finder.TryLookupByFullName("MvvmCross.Test.Mocks.TestViewModels.Test3ViewModel",
+            Assert.True(finder.TryLookupByFullName("MvvmCross.UnitTest.Mocks.TestViewModels.Test3ViewModel",
                                                      out result));
             Assert.Equal(typeof(Test3ViewModel), result);
             Assert.False(
-                finder.TryLookupByFullName("MvvmCross.Test.Mocks.TestViewModels.AbstractTest1ViewModel",
+                finder.TryLookupByFullName("MvvmCross.UnitTest.Mocks.TestViewModels.AbstractTest1ViewModel",
                                            out result));
             Assert.Null(result);
             Assert.False(finder.TryLookupByFullName(
-                "MvvmCross.Test.Mocks.TestViewModels.NoWayTestViewModel", out result));
+                "MvvmCross.UnitTest.Mocks.TestViewModels.NoWayTestViewModel", out result));
             Assert.Null(result);
         }
     }

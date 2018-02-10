@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Localization;
-using MvvmCross.Plugins.ResourceLoader;
+using MvvmCross.Plugin.ResourceLoader;
 
-namespace MvvmCross.Plugins.JsonLocalization
+namespace MvvmCross.Plugin.JsonLocalization
 {
     public abstract class MvxTextProvider :
         MvxResourceProvider, IMvxTextProvider

@@ -7,16 +7,17 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Moq;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.ExpressionParse;
-using MvvmCross.Platform.Converters;
+using MvvmCross.Converters;
 using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Binding.Test.ExpressionParse
+namespace MvvmCross.UnitTest.Binding.ExpressionParse
 {
     [Collection("MvxTest")]
     public class MvxExpressionBindingTest

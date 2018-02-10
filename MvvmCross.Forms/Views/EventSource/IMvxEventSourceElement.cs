@@ -3,8 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform.Core;
-using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views.EventSource
 {

@@ -4,8 +4,8 @@
 
 using System;
 using System.Reflection;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
+using MvvmCross.Converters;
 
 namespace MvvmCross.Binding.Binders
 {

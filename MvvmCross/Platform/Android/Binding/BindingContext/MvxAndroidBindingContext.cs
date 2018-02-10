@@ -5,9 +5,9 @@
 using Android.Content;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.Droid.Views;
+using MvvmCross.Platform.Android.Binding.Views;
 
-namespace MvvmCross.Binding.Droid.BindingContext
+namespace MvvmCross.Platform.Android.Binding.BindingContext
 {
     public class MvxAndroidBindingContext
         : MvxBindingContext, IMvxAndroidBindingContext

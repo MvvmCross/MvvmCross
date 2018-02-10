@@ -6,10 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.IoC;
+using MvvmCross.Converters;
+using MvvmCross.IoC;
 
-namespace MvvmCross.Binding.iOS.ValueConverters
+namespace MvvmCross.Platform.Ios.Binding.ValueConverters
 {
     internal class MvxUnifiedTypesValueConverter
         : MvxValueConverter

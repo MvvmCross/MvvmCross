@@ -3,11 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Globalization;
-using MvvmCross.Platform;
-using MvvmCross.Platform.ExtensionMethods;
-using MvvmCross.Platform.UI;
+using MvvmCross.Base;
+using MvvmCross.UI;
 
-namespace MvvmCross.Plugins.Visibility
+namespace MvvmCross.Plugin.Visibility
 {
     [Preserve(AllMembers = true)]
     public class MvxVisibilityValueConverter : MvxBaseVisibilityValueConverter

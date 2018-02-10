@@ -4,12 +4,11 @@
 
 using System.ComponentModel;
 using System.Windows;
+using MvvmCross.Base;
+using MvvmCross.IoC;
 using MvvmCross.Binding.Parse.Binding;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.IoC;
 
-namespace MvvmCross.Binding.Wpf
+namespace MvvmCross.Platform.Wpf.Binding
 {
     public static class MvxDesignTimeChecker
     {

@@ -8,8 +8,7 @@ using System.Reflection;
 using MvvmCross.Binding.Bindings.Source.Chained;
 using MvvmCross.Binding.Bindings.Source.Leaf;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding.Bindings.Source.Construction
 {

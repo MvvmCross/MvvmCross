@@ -5,12 +5,11 @@
 using System;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
+using MvvmCross.Converters;
 using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Binding.Test.ExtensionMethods
+namespace MvvmCross.UnitTest.Binding.ExtensionMethods
 {
     [Collection("MvxTest")]
     public class MakeSafeValueTest

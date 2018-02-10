@@ -6,7 +6,7 @@ using System;
 using AppKit;
 using Foundation;
 
-namespace MvvmCross.Binding.Mac.Views
+namespace MvvmCross.Platform.Mac.Binding.Views
 {
     [Register("MvxTableColumn")]
     public class MvxTableColumn : NSTableColumn

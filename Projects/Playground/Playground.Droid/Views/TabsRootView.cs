@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using Android.App;
 using Android.OS;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Droid.Views.Attributes;
+using MvvmCross.Platform.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Views

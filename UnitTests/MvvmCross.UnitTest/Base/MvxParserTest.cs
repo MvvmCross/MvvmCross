@@ -6,11 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Parse;
+using MvvmCross.Base;
+using MvvmCross.Exceptions;
 using Xunit;
 
-namespace MvvmCross.Platform.Test
+namespace MvvmCross.UnitTest.Base
 {
     
     public class MvxParserTest

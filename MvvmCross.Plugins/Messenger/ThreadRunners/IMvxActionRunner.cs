@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Plugins.Messenger.ThreadRunners
+namespace MvvmCross.Plugin.Messenger.ThreadRunners
 {
     public interface IMvxActionRunner
     {

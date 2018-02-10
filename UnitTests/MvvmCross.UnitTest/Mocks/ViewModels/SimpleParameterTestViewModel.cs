@@ -2,10 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Test.Mocks.ViewModels
+namespace MvvmCross.UnitTest.Mocks.ViewModels
 {
     public class SimpleParameterTestViewModel : MvxViewModel<string>
     {

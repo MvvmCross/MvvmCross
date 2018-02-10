@@ -2,12 +2,11 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using Android.Content;
-using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Droid.Views;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Android.Presenters;
+using MvvmCross.ViewModels;
 using Playground.Core;
 using Serilog;
 

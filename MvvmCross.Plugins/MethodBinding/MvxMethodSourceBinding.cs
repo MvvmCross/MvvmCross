@@ -7,9 +7,8 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Input;
 using MvvmCross.Binding.Bindings.Source;
-using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.MethodBinding
+namespace MvvmCross.Plugin.MethodBinding
 {
     [Preserve(AllMembers = true)]
 	public class MvxMethodSourceBinding

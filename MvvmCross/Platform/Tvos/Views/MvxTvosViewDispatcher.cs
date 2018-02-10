@@ -3,13 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
-using MvvmCross.tvOS.Views.Presenters;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Tvos.Presenters;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     public class MvxTvosViewDispatcher
         : MvxTvosUIThreadDispatcher, IMvxViewDispatcher

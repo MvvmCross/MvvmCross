@@ -9,7 +9,7 @@ using Windows.System;
 
 #endregion using
 
-namespace MvvmCross.Plugins.WebBrowser.Uwp
+namespace MvvmCross.Plugin.WebBrowser.Platform.Uap
 {
     public class MvxWebBrowserTask : IMvxWebBrowserTask
     {

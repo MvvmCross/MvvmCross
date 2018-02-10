@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Swiss;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Logging;
 using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
+namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
 {
     public abstract class MvxBaseSwissBindingTest<TParser>
         : MvxBindingTest

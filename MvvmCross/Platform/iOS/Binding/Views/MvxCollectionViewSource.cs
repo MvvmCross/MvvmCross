@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 using Foundation;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.WeakSubscription;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Views
+namespace MvvmCross.Platform.Ios.Binding.Views
 {
     public class MvxCollectionViewSource : MvxBaseCollectionViewSource
     {

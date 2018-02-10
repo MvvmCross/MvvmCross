@@ -1,8 +1,6 @@
-﻿using System;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Mac.Platform;
-using MvvmCross.Mac.Views.Presenters;
-using MvvmCross.Mac.Views.Presenters.Attributes;
+﻿using MvvmCross.Platform.Mac.Core;
+using MvvmCross.Platform.Mac.Presenters.Attributes;
+using MvvmCross.ViewModels;
 using Playground.Core;
 
 namespace Playground.Mac

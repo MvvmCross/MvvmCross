@@ -4,9 +4,9 @@
 
 using System;
 using Foundation;
-using MvvmCross.Platform.iOS.Platform;
+using MvvmCross.Platform.Ios.Base.Platform;
 
-namespace MvvmCross.Plugins.PhoneCall.iOS
+namespace MvvmCross.Plugin.PhoneCall.Platform.iOS
 {
     [Preserve(AllMembers = true)]
 	public class MvxPhoneCallTask : MvxIosTask, IMvxPhoneCallTask

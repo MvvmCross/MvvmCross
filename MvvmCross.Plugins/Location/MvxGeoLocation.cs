@@ -3,9 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.Location
+namespace MvvmCross.Plugin.Location
 {
     [Preserve(AllMembers = true)]
 	public class MvxGeoLocation

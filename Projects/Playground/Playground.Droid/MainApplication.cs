@@ -5,7 +5,7 @@
 using System;
 using Android.App;
 using Android.Runtime;
-using MvvmCross.Droid.Views;
+using MvvmCross.Platform.Android.Views;
 
 namespace Playground.Droid
 {

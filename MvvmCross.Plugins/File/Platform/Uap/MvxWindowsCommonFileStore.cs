@@ -8,12 +8,11 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.Uwp.Platform;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Uap.Base.Platform;
 
-namespace MvvmCross.Plugins.File.Uwp
+namespace MvvmCross.Plugin.File.Platform.Uap
 {
     // note that we use the full WindowsStore name here deliberately to avoid 'Store' naming confusion
     public class MvxWindowsCommonFileStore : MvxFileStoreBase

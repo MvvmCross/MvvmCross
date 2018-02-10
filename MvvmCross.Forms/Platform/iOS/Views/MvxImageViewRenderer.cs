@@ -4,18 +4,17 @@
 
 using System;
 using System.ComponentModel;
-using MvvmCross.Forms.iOS.Views.Renderers;
+using MvvmCross.Forms.Platform.iOS.Views;
 using MvvmCross.Forms.Views;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Logging;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.iOS;
-using MvxIosImageView = MvvmCross.Binding.iOS.Views.MvxImageView;
+using MvxIosImageView = MvvmCross.Platform.Ios.Binding.Views.MvxImageView;
 
 [assembly: ExportRenderer(typeof(MvxImageView), typeof(MvxImageViewRenderer))]
-namespace MvvmCross.Forms.iOS.Views.Renderers
+namespace MvvmCross.Forms.Platform.iOS.Views
 {
     internal class MvxImageViewRenderer : ImageRenderer
     {

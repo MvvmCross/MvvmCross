@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Binding.Bindings.Source;
 using MvvmCross.Binding.Bindings.Source.Construction;
-using MvvmCross.Platform.Converters;
+using MvvmCross.Converters;
 
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {

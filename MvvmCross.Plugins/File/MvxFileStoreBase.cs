@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MvvmCross.Plugins.File
+namespace MvvmCross.Plugin.File
 {
     public abstract class MvxFileStoreBase
         : IMvxFileStore, IMvxFileStoreAsync

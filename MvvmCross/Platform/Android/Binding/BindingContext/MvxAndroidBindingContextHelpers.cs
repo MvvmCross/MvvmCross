@@ -3,9 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform;
 
-namespace MvvmCross.Binding.Droid.BindingContext
+namespace MvvmCross.Platform.Android.Binding.BindingContext
 {
     public static class MvxAndroidBindingContextHelpers
     {

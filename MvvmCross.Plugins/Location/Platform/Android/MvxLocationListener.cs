@@ -5,9 +5,8 @@
 using Android.Locations;
 using Android.OS;
 using Java.Lang;
-using MvvmCross.Platform;
 
-namespace MvvmCross.Plugins.Location.Droid
+namespace MvvmCross.Plugin.Location.Platform.Android
 {
     [Preserve(AllMembers = true)]
 	public class MvxLocationListener
@@ -23,7 +22,7 @@ namespace MvvmCross.Plugins.Location.Droid
 
         #region Implementation of ILocationListener
 
-        public void OnLocationChanged(Android.Locations.Location location)
+        public void OnLocationChanged(global::Android.Locations.Location location)
         {
             _owner.OnLocationChanged(location);
         }

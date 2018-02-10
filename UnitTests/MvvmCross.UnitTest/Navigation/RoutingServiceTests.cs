@@ -7,14 +7,15 @@ using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using Moq;
-using MvvmCross.Core.Navigation;
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Test.Mocks.Dispatchers;
-using MvvmCross.Test.Mocks.TestViewModels;
-using MvvmCross.Test.Mocks.ViewModels;
-using MvvmCross.Test.Stubs;
+using MvvmCross.Core;
+using MvvmCross.Exceptions;
+using MvvmCross.Navigation;
+using MvvmCross.Test;
+using MvvmCross.UnitTest.Mocks.Dispatchers;
+using MvvmCross.UnitTest.Mocks.TestViewModels;
+using MvvmCross.UnitTest.Mocks.ViewModels;
+using MvvmCross.UnitTest.Stubs;
+using MvvmCross.ViewModels;
 using Xunit;
 
 [assembly: MvxNavigation(typeof(ViewModelA), @"https?://mvvmcross.com/blog")]
@@ -22,7 +23,7 @@ using Xunit;
 [assembly: MvxNavigation(typeof(ViewModelC), @"mvx://test/\?id=(?<id>[A-Z0-9]{32})$")]
 [assembly: MvxNavigation(typeof(SimpleRoutingFacade), @"mvx://facade/\?id=(?<vm>a|b)")]
 
-namespace MvvmCross.Test.Navigation
+namespace MvvmCross.UnitTest.Navigation
 {
     [Collection("MvxTest")]
     public class RoutingServiceTests

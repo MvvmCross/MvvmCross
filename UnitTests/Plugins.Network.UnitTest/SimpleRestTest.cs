@@ -5,12 +5,12 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
-using MvvmCross.Plugins.Json;
-using MvvmCross.Plugins.Network.Rest;
-using MvvmCross.Plugins.Network.Test.TestClasses.GoogleBooks;
+using MvvmCross.Plugin.Json;
+using MvvmCross.Plugin.Network.Rest;
+using MvvmCross.Plugins.Network.UnitTest.TestClasses.GoogleBooks;
 using Xunit;
 
-namespace MvvmCross.Plugins.Network.Test
+namespace MvvmCross.Plugins.Network.UnitTest
 {
 
     [Collection("Rest")]

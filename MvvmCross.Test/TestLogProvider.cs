@@ -9,12 +9,12 @@ using System;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Logging.LogProviders;
+using MvvmCross.Logging;
+using MvvmCross.Logging.LogProviders;
 
 [assembly: InternalsVisibleTo("MvvmCross.UnitTest")]
 
-namespace MvvmCross
+namespace MvvmCross.Test
 {
     internal sealed class TestLogProvider : MvxBaseLogProvider
     {

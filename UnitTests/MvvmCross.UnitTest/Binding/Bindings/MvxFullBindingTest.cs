@@ -3,18 +3,19 @@
 // See the LICENSE file in the project root for more information.
 
 using Moq;
+using MvvmCross.Base;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Binding.Test.Mocks;
-using MvvmCross.Platform.Core;
 using MvvmCross.Test;
-using MvvmCross.Test.Mocks.Dispatchers;
+using MvvmCross.UnitTest.Binding.Mocks;
+using MvvmCross.UnitTest.Mocks.Dispatchers;
 using Xunit;
 
-namespace MvvmCross.Binding.Test.Bindings
+namespace MvvmCross.UnitTest.Binding.Bindings
 {
     [Collection("MvxTest")]
     public class MvxFullBindingTest

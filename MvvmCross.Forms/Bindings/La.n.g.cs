@@ -8,8 +8,7 @@
 using System.Collections.Generic;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Bindings

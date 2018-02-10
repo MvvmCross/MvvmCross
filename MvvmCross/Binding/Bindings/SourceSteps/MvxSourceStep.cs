@@ -4,8 +4,8 @@
 
 using System;
 using System.Globalization;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Converters;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding.Bindings.SourceSteps
 {

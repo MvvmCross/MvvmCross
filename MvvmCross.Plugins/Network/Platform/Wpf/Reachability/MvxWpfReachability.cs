@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Net.NetworkInformation;
-using MvvmCross.Plugins.Network.Reachability;
+using MvvmCross.Plugin.Network.Reachability;
 
-namespace MvvmCross.Plugins.Network.Wpf.Reachability
+namespace MvvmCross.Plugin.Network.Platform.Wpf.Reachability
 {
     public class MvxWpfReachability : IMvxReachability
     {

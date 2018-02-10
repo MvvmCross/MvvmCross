@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base;
 
-namespace MvvmCross.Platform.Mac.Views
+namespace MvvmCross.Platform.Mac.Base.Views
 {
     public interface IMvxEventSourceViewController : IMvxDisposeSource
     {

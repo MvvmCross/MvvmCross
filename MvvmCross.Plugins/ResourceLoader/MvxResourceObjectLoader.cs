@@ -4,10 +4,9 @@
 
 using System.Collections.Generic;
 using System.IO;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
 
-namespace MvvmCross.Plugins.ResourceLoader
+namespace MvvmCross.Plugin.ResourceLoader
 {
     public abstract class MvxResourceObjectLoader<TResource>
         : MvxResourceProvider, IMvxResourceObjectLoaderConfiguration<TResource>, IMvxResourceObjectLoader<TResource>

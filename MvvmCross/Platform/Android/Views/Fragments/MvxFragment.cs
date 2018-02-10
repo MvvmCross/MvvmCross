@@ -6,11 +6,10 @@ using System;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Views.Fragments.EventSource;
-using MvvmCross.Droid.Views;
+using MvvmCross.Platform.Android.Views.Fragments.EventSource;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Droid.Views.Fragments
+namespace MvvmCross.Platform.Android.Views.Fragments
 {
     [Register("mvvmcross.droid.fragments.MvxFragment")]
     public class MvxFragment

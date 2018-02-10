@@ -5,7 +5,7 @@
 using System;
 using System.Collections;
 
-namespace MvvmCross.Wpf.Commands
+namespace MvvmCross.Platform.Wpf.Commands
 {
     public class MvxSimpleSelectionChangedEventArgs : EventArgs
     {

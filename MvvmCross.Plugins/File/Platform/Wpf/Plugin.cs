@@ -4,12 +4,12 @@
 
 using System;
 using System.IO;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Plugins;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
+using MvvmCross.Plugin.File.HackFileShare;
+using MvvmCross.Plugins;
 
-namespace MvvmCross.Plugins.File.Wpf
+namespace MvvmCross.Plugin.File.Platform.Wpf
 {
     public class Plugin
         : IMvxConfigurablePlugin

@@ -7,9 +7,8 @@ using Android.Content;
 using Android.Util;
 using Android.Views;
 using MvvmCross.Binding.Bindings;
-using MvvmCross.Platform;
 
-namespace MvvmCross.Binding.Droid.Binders
+namespace MvvmCross.Platform.Android.Binding.Binders
 {
     public class MvxBindingLayoutInflaterFactory
         : IMvxLayoutInflaterHolderFactory

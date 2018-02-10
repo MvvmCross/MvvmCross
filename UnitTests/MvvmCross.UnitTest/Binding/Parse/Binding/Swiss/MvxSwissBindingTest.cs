@@ -4,11 +4,11 @@
 
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Swiss;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Logging;
 using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Binding.Test.Parse.Binding.Swiss
+namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
 {
     [Collection("MvxTest")]
     public class MvxSwissBindingTest

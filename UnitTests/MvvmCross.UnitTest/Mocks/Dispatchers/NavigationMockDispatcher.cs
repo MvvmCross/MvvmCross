@@ -4,14 +4,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Base;
+using MvvmCross.Logging;
+using MvvmCross.Test;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
-namespace MvvmCross.Test.Mocks.Dispatchers
+namespace MvvmCross.UnitTest.Mocks.Dispatchers
 {
     public class NavigationMockDispatcher 
         : IMvxMainThreadDispatcher, IMvxViewDispatcher

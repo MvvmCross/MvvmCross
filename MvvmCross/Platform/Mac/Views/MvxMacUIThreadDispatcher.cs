@@ -6,10 +6,9 @@ using System;
 using System.Threading;
 
 using AppKit;
+using MvvmCross.Base;
 
-using MvvmCross.Platform.Core;
-
-namespace MvvmCross.Mac.Views
+namespace MvvmCross.Platform.Mac.Views
 {
     public abstract class MvxMacUIThreadDispatcher
         : MvxMainThreadDispatcher

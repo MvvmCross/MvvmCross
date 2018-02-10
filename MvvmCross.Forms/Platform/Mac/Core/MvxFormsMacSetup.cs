@@ -1,24 +1,23 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Mac.Bindings;
-using MvvmCross.Forms.Mac.Presenters;
-using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Views;
-using MvvmCross.Mac.Platform;
-using MvvmCross.Mac.Views.Presenters;
 using MvvmCross.Localization;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Plugins;
 using System.Collections.Generic;
 using System.Reflection;
 using AppKit;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform.Mac.Bindings;
+using MvvmCross.Forms.Platform.Mac.Views;
+using MvvmCross.Platform.Mac.Core;
+using MvvmCross.Platform.Mac.Presenters;
+using MvvmCross.Plugins;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Forms.iOS
+namespace MvvmCross.Forms.Platform.Mac.Core
 {
     public abstract class MvxFormsMacSetup : MvxMacSetup
     {

@@ -3,20 +3,17 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Forms.Platform;
-using MvvmCross.Forms.Views.Attributes;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
-using Xamarin.Forms;
 using System.Reflection;
-using MvvmCross.Core.ViewModels.Hints;
 using System.Threading.Tasks;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Exceptions;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Views.Attributes;
+using MvvmCross.Logging;
+using MvvmCross.ViewModels;
+using MvvmCross.ViewModels.Hints;
+using MvvmCross.Views;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views
 {

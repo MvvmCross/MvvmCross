@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Platform;
-using MvvmCross.Platform.UI;
 
-namespace MvvmCross.Plugins.Color.Droid
+using MvvmCross.UI;
+
+namespace MvvmCross.Plugin.Color.Platform.Android
 {
     [Preserve(AllMembers = true)]
     public class MvxAndroidColor : IMvxNativeColor
@@ -15,9 +15,9 @@ namespace MvvmCross.Plugins.Color.Droid
             return ToNativeColor(mvxColor);
         }
 
-        public Android.Graphics.Color ToNativeColor(MvxColor mvxColor)
+        public global::Android.Graphics.Color ToNativeColor(MvxColor mvxColor)
         {
-            return new Android.Graphics.Color(mvxColor.R, mvxColor.G, mvxColor.B, mvxColor.A);
+            return new global::Android.Graphics.Color(mvxColor.R, mvxColor.G, mvxColor.B, mvxColor.A);
         }
     }
 }

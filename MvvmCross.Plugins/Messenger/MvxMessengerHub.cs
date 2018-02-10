@@ -6,13 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Plugins.Messenger.Subscriptions;
-using MvvmCross.Plugins.Messenger.ThreadRunners;
+using MvvmCross.Logging;
+using MvvmCross.Plugin.Messenger.Subscriptions;
+using MvvmCross.Plugin.Messenger.ThreadRunners;
 
-namespace MvvmCross.Plugins.Messenger
+namespace MvvmCross.Plugin.Messenger
 {
 	// Note - the original inspiration for this code was XPlatUtils from JonathonPeppers
 	// - https://github.com/jonathanpeppers/XPlatUtils

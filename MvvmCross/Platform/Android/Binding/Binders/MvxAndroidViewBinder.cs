@@ -9,14 +9,13 @@ using Android.Content;
 using Android.Content.Res;
 using Android.Util;
 using Android.Views;
+using MvvmCross.Exceptions;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
-using MvvmCross.Binding.Droid.ResourceHelpers;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Android.Binding.ResourceHelpers;
 
-namespace MvvmCross.Binding.Droid.Binders
+namespace MvvmCross.Platform.Android.Binding.Binders
 {
     public class MvxAndroidViewBinder : IMvxAndroidViewBinder
     {

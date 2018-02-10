@@ -4,9 +4,9 @@
 
 using System;
 using Android.Widget;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Binding;
 
-namespace MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Platform.Android.Binding.Target
 {
     public class MvxImageViewDrawableNameTargetBinding
         : MvxImageViewDrawableTargetBinding

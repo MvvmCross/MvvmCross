@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform.Core;
+using MvvmCross.Base;
 
-namespace MvvmCross.Test.Mocks.Dispatchers
+namespace MvvmCross.UnitTest.Mocks.Dispatchers
 {
     public class CountingMockMainThreadDispatcher
         : MvxMainThreadDispatcher, IMvxMainThreadDispatcher

@@ -4,11 +4,11 @@
 
 using System;
 using Foundation;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.iOS.Views;
+using MvvmCross.Base;
+using MvvmCross.Platform.Ios.Base.Views;
 using UIKit;
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     public class MvxEventSourceSplitViewController : UISplitViewController, IMvxEventSourceViewController
     {

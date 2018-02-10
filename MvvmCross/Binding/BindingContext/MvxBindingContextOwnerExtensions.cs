@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using MvvmCross.Binding.Bindings;
-using MvvmCross.Platform;
 
 namespace MvvmCross.Binding.BindingContext
 {

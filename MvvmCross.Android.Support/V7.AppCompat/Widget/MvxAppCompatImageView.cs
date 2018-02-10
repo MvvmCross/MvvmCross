@@ -9,11 +9,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.Widget;
 using Android.Util;
-using MvvmCross.Binding.Droid.ResourceHelpers;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Android.Binding.ResourceHelpers;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 {

@@ -3,22 +3,15 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Forms.Platform;
+using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Views;
-using MvvmCross.Forms.Views.Attributes;
-using MvvmCross.iOS.Views;
-using MvvmCross.iOS.Views.Presenters;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Ios.Presenters;
+using MvvmCross.ViewModels;
 using UIKit;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.iOS.Presenters
+namespace MvvmCross.Forms.Platform.iOS.Views
 {
     public class MvxFormsIosViewPresenter
         : MvxIosViewPresenter

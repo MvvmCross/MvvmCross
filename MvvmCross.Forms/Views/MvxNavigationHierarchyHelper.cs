@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Linq;
-using Xamarin.Forms;
 using System.Text;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views
 {

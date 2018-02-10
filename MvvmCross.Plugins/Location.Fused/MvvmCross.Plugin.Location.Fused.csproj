@@ -7,20 +7,10 @@
     <PackageId>MvvmCross.Plugin.Location.Fused</PackageId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Platforms\**\*.cs" />
-    <None Include="Platforms\**\*.cs" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
+    <PackageReference Include="Xamarin.GooglePlayServices.Location" Version="60.1142.0" />
     <None Include="Resources\*.cs" />
     <Compile Remove="Resources\*.cs" />
-  </ItemGroup>
-  
-  <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
-    <Compile Include="Platforms\Android\**\*.cs" />
-    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
-    <PackageReference Include="Xamarin.GooglePlayServices.Location" Version="60.1142.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\Location\MvvmCross.Plugin.Location.csproj" />
   </ItemGroup>
@@ -30,4 +20,5 @@
   </ItemGroup>
 
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+
 </Project>

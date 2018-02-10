@@ -5,10 +5,9 @@
 using System;
 using System.Globalization;
 using Android.Graphics;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
+using MvvmCross.Converters;
 
-namespace MvvmCross.Plugins.PictureChooser.Droid
+namespace MvvmCross.Plugin.PictureChooser.Platform.Android
 {
     [Preserve(AllMembers = true)]
 	public class MvxInMemoryImageValueConverter : MvxValueConverter<byte[], Bitmap>

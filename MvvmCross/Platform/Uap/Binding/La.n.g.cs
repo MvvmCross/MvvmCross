@@ -6,13 +6,13 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System.Collections.Generic;
+using MvvmCross.Base;
+using MvvmCross.Core;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
 using Windows.UI.Xaml;
 
-namespace MvvmCross.Binding.Uwp
+namespace MvvmCross.Platform.Uap.Binding
 {
     // ReSharper disable InconsistentNaming
     public static class La

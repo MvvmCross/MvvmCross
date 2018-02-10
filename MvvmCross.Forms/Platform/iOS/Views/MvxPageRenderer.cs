@@ -3,11 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Views;
+using MvvmCross.ViewModels;
 using Xamarin.Forms.Platform.iOS;
 
-namespace MvvmCross.Forms.iOS
+namespace MvvmCross.Forms.Platform.iOS.Views
 {
     public class MvxPageRenderer : PageRenderer, IMvxBindingContextOwner
     {            

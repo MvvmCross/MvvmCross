@@ -6,16 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Platform.tvOS.Views;
-
 using UIKit;
 using Foundation;
+using MvvmCross.Core;
+using MvvmCross.Platform.Tvos.Base.Views;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
-namespace MvvmCross.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Views
 {
     internal static class MvxSegueExtensionMethods
     {

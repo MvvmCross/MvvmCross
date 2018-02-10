@@ -5,12 +5,11 @@
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using MvvmCross.Binding.ExtensionMethods;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.Logging;
 
-namespace MvvmCross.Binding.Uwp.MvxBinding.Target
+namespace MvvmCross.Platform.Uap.Binding.MvxBinding.Target
 {
     public class MvxDependencyPropertyTargetBinding : MvxConvertingTargetBinding
     {

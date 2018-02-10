@@ -1,4 +1,4 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using MvvmCross.ViewModels;
 using Playground.Core.ViewModels;
 
 namespace Playground.Wpf.Views

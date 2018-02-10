@@ -6,7 +6,7 @@ using System.Collections;
 using Android.Widget;
 using MvvmCross.Binding.Attributes;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     public interface IMvxAdapter
         : ISpinnerAdapter

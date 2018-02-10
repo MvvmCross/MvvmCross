@@ -4,11 +4,11 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MvvmCross.Core.Navigation;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Test.Mocks.TestViewModels;
+using MvvmCross.Navigation;
+using MvvmCross.UnitTest.Mocks.TestViewModels;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.Test.Stubs
+namespace MvvmCross.UnitTest.Stubs
 {
     public class SimpleRoutingFacade
         : IMvxNavigationFacade

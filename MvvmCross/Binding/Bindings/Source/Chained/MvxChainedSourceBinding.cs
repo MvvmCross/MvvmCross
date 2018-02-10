@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Source.Construction;
 using MvvmCross.Binding.Parse.PropertyPath.PropertyTokens;
-using MvvmCross.Platform.Converters;
+using MvvmCross.Converters;
 
 namespace MvvmCross.Binding.Bindings.Source.Chained
 {

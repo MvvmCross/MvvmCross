@@ -6,14 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using MvvmCross.Base;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using MvvmCross.Binding.Combiners;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Converters;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.Binding.BindingContext
 {

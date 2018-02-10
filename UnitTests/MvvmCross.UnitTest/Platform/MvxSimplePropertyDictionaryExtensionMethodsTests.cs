@@ -3,10 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
-using MvvmCross.Core.Platform;
+using MvvmCross.Core;
+using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Test.Platform
+namespace MvvmCross.UnitTest.Platform
 {
     [Collection("MvxTest")]
     public class MvxSimplePropertyDictionaryExtensionMethodsTests

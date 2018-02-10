@@ -4,16 +4,13 @@
 
 using System;
 using System.Collections.Generic;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
+using MvvmCross.Core;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
-using MvvmCross.Core.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
-
-namespace MvvmCross.Mac.Views
+namespace MvvmCross.Platform.Mac.Views
 {
     public static class MvxViewControllerExtensionMethods
     {

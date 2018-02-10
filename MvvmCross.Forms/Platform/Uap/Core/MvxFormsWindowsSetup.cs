@@ -1,24 +1,24 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Platform;
-using MvvmCross.Forms.Uwp.Bindings;
-using MvvmCross.Forms.Uwp.Presenters;
 using MvvmCross.Forms.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Plugins;
-using MvvmCross.Uwp.Platform;
-using MvvmCross.Uwp.Views;
 using System.Collections.Generic;
 using System.Reflection;
 using Windows.ApplicationModel.Activation;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform.Uap.Bindings;
+using MvvmCross.Forms.Platform.Uap.Views;
+using MvvmCross.Platform.Uap.Core;
+using MvvmCross.Platform.Uap.Views;
+using MvvmCross.Plugins;
+using MvvmCross.ViewModels;
 using XamlControls = Windows.UI.Xaml.Controls;
+using MvvmCross.Platform.Uap.Presenters;
 
-namespace MvvmCross.Forms.Uwp
+namespace MvvmCross.Forms.Platform.Uap.Core
 {
     public abstract class MvxFormsWindowsSetup : MvxWindowsSetup
     {

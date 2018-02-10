@@ -4,10 +4,11 @@
 
 using System;
 using System.Windows.Input;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 using UIKit;
 
-namespace MvvmCross.Binding.tvOS.Target
+namespace MvvmCross.Platform.Tvos.Binding.Target
 {
     public class MvxUITextFieldShouldReturnTargetBinding
         : MvxTargetBinding

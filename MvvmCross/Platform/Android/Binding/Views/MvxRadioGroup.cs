@@ -9,11 +9,13 @@ using System.Threading;
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
+using Android.Views;
 using Android.Widget;
+using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     [Register("mvvmcross.binding.droid.views.MvxRadioGroup")]
     public class MvxRadioGroup : RadioGroup, IMvxWithChangeAdapter
@@ -47,7 +49,7 @@ namespace MvvmCross.Binding.Droid.Views
             this.UpdateDataSetFromChange(sender, eventArgs);
         }
 
-        private void OnChildViewAdded(object sender, ChildViewAddedEventArgs args)
+        private void OnChildViewAdded(object sender, ViewGroup.ChildViewAddedEventArgs args)
         {
             //var li = (args.Child as MvxListItemView);
             var radioButton = args.Child as RadioButton;

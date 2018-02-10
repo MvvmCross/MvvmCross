@@ -4,12 +4,11 @@
 
 using System;
 using Foundation;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.tvOS.Platform;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Tvos.Base.Platform;
 using UIKit;
 
-namespace MvvmCross.Binding.tvOS.Views
+namespace MvvmCross.Platform.Tvos.Binding.Views
 {
     public class MvxSimpleTableViewSource : MvxTableViewSource
     {

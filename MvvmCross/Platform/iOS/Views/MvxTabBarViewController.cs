@@ -5,13 +5,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.iOS.Views.Presenters;
-using MvvmCross.iOS.Views.Presenters.Attributes;
-using MvvmCross.Platform;
+using MvvmCross.Platform.Ios.Presenters;
+using MvvmCross.Platform.Ios.Presenters.Attributes;
+using MvvmCross.ViewModels;
 using UIKit;
 
-namespace MvvmCross.iOS.Views
+namespace MvvmCross.Platform.Ios.Views
 {
     public class MvxTabBarViewController : MvxBaseTabBarViewController, IMvxTabBarViewController
     {

@@ -5,10 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Converters;
+using MvvmCross.Exceptions;
 
-namespace MvvmCross.Binding.Test.Mocks
+namespace MvvmCross.UnitTest.Binding.Mocks
 {
     public class MockValueConverter : IMvxValueConverter
     {

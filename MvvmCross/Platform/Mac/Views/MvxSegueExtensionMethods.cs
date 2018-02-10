@@ -7,14 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using AppKit;
 using Foundation;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Mac.Views;
-using MvvmCross.Core.Platform;
 using System.Reflection;
+using MvvmCross.Core;
+using MvvmCross.Platform.Mac.Base.Views;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
-namespace MvvmCross.Mac.Views
+namespace MvvmCross.Platform.Mac.Views
 {
     internal static class MvxSegueExtensionMethods
     {

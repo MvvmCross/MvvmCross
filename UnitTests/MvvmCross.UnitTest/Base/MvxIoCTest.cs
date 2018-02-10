@@ -3,15 +3,15 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.IoC;
-using Xunit;
 using System.Reflection;
-using System.Linq;
+using MvvmCross.Base;
+using Xunit;
 using MvvmCross.Test;
+using System.Linq;
+using MvvmCross.Exceptions;
+using MvvmCross.IoC;
 
-namespace MvvmCross.Platform.Test
+namespace MvvmCross.UnitTest.Base
 {
     [Collection("MvxTest")]   
     public class MvxIocTest

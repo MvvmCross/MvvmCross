@@ -5,11 +5,11 @@
 using System;
 using Android.Graphics;
 using Android.Widget;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
+using MvvmCross.Binding;
 
-namespace MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Platform.Android.Binding.Target
 {
     public abstract class MvxBaseImageViewTargetBinding
         : MvxAndroidTargetBinding

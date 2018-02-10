@@ -5,14 +5,12 @@
 using System;
 using Android.OS;
 using Android.Support.V4.App;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Core;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Base;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Android.Core;
+using MvvmCross.Platform.Android.Views;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Droid.Support.V4.EventSource
 {

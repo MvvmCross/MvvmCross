@@ -5,10 +5,10 @@
 using System;
 using System.Reflection;
 using Android.Widget;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Binding;
+using MvvmCross.Platform.Android.Base.WeakSubscription;
 
-namespace MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Platform.Android.Binding.Target
 {
     public class MvxCompoundButtonCheckedTargetBinding
         : MvxAndroidPropertyInfoTargetBinding<CompoundButton>

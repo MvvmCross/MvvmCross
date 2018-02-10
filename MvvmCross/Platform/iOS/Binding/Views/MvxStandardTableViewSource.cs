@@ -5,14 +5,13 @@
 using System;
 using System.Collections.Generic;
 using Foundation;
+using MvvmCross.Logging;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
 using UIKit;
 
-namespace MvvmCross.Binding.iOS.Views
+namespace MvvmCross.Platform.Ios.Binding.Views
 {
     public class MvxStandardTableViewSource : MvxTableViewSource
     {

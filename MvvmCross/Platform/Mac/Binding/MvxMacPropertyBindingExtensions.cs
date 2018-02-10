@@ -4,7 +4,7 @@
 
 using AppKit;
 
-namespace MvvmCross.Binding.Mac
+namespace MvvmCross.Platform.Mac.Binding
 {
     public static class MvxMacPropertyBindingExtensions
     {

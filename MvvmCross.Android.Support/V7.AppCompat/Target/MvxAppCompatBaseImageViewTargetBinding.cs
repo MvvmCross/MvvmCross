@@ -6,10 +6,9 @@ using System;
 using Android.Graphics;
 using Android.Support.V7.Widget;
 using MvvmCross.Binding;
-using MvvmCross.Binding.Droid.Target;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Android.Binding.Target;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {

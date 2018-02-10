@@ -11,15 +11,14 @@ using Android.Views;
 using Java.Interop;
 using Java.Lang;
 using Java.Lang.Reflect;
-using MvvmCross.Binding.Droid.Binders;
-using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Android.Binding.Binders;
+using MvvmCross.Platform.Android.Binding.BindingContext;
 using Boolean = Java.Lang.Boolean;
 using Exception = Java.Lang.Exception;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Binding.Droid.Views
+namespace MvvmCross.Platform.Android.Binding.Views
 {
     /// <summary>
     /// Custom LayoutInflater responsible for inflating views and hooking up bindings

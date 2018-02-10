@@ -6,19 +6,19 @@ using Android.Graphics;
 using Android.Preferences;
 using Android.Views;
 using Android.Widget;
+using MvvmCross.Base;
+using MvvmCross.IoC;
+using MvvmCross.Binding;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Binding.Droid.Binders;
-using MvvmCross.Binding.Droid.Binders.ViewTypeResolvers;
-using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Binding.Droid.ResourceHelpers;
-using MvvmCross.Binding.Droid.Target;
-using MvvmCross.Binding.Droid.Views;
-using MvvmCross.Platform;
-using MvvmCross.Platform.IoC;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Android.Binding.Binders;
+using MvvmCross.Platform.Android.Binding.Binders.ViewTypeResolvers;
+using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.Platform.Android.Binding.ResourceHelpers;
+using MvvmCross.Platform.Android.Binding.Target;
+using MvvmCross.Platform.Android.Binding.Views;
 
-namespace MvvmCross.Binding.Droid
+namespace MvvmCross.Platform.Android.Binding
 {
     public class MvxAndroidBindingBuilder
         : MvxBindingBuilder

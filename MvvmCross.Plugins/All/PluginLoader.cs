@@ -5,13 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.Plugins;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
+using MvvmCross.Plugins;
 
-namespace MvvmCross.Plugins.All
+namespace MvvmCross.Plugin.All
 {
 #pragma warning disable CS0436 // Type conflicts with imported type
     [Preserve(AllMembers = true)]

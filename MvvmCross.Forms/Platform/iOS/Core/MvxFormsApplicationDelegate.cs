@@ -1,19 +1,16 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using Foundation;
-using MvvmCross.Core.Platform;
+using MvvmCross.Core;
 using MvvmCross.Forms.Views;
-using MvvmCross.iOS.Platform;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Ios.Core;
 using UIKit;
-using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-namespace MvvmCross.Forms.iOS
+namespace MvvmCross.Forms.Platform.iOS.Core
 {
     public class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {

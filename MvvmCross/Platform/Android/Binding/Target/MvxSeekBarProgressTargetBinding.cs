@@ -6,10 +6,10 @@ using System;
 using System.Reflection;
 using Android.Widget;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Binding;
+using MvvmCross.WeakSubscription;
 
-namespace MvvmCross.Binding.Droid.Target
+namespace MvvmCross.Platform.Android.Binding.Target
 {
     public class MvxSeekBarProgressTargetBinding
         : MvxPropertyInfoTargetBinding<SeekBar>

@@ -6,8 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Binding.Bindings.SourceSteps;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Converters;
+using MvvmCross.Logging;
 
 namespace MvvmCross.Binding.Combiners
 {

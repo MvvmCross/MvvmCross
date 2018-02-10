@@ -7,10 +7,9 @@ using System.Reflection;
 using AppKit;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Mac.Views;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platform.Mac.Base.Views;
 
-namespace MvvmCross.Binding.Mac.Target
+namespace MvvmCross.Platform.Mac.Binding.Target
 {
     public class MvxNSTabViewControllerSelectedTabViewItemIndexTargetBinding : MvxPropertyInfoTargetBinding<NSTabViewController>
     {

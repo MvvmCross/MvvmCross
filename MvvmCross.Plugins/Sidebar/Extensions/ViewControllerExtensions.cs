@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.iOS.Support.XamarinSidebar.Views;
+using MvvmCross.Plugin.Sidebar.Views;
 using SidebarNavigation;
 using UIKit;
 
-namespace MvvmCross.iOS.Support.XamarinSidebar.Extensions
+namespace MvvmCross.Plugin.Sidebar.Extensions
 {
     public static class ViewControllerExtensions
     {

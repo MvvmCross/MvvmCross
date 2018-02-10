@@ -3,16 +3,14 @@
 // See the LICENSE file in the project root for more information.
 
 using Foundation;
-using MvvmCross.Platform;
-using MvvmCross.Platform.iOS.Platform;
-using MvvmCross.Platform.iOS.Views;
-using MvvmCross.iOS.Support.Views;
+using MvvmCross.Platform.Ios.Base.Platform;
+using MvvmCross.Platform.Ios.Views;
 using Twitter;
 using UIKit;
 
-namespace MvvmCross.Plugins.Share.iOS
+namespace MvvmCross.Plugin.Share.Platform.iOS
 {
-    [MvvmCross.Platform.Preserve(AllMembers = true)]
+    [MvvmCross.Preserve(AllMembers = true)]
 	public class MvxShareTask
         : MvxIosTask, IMvxShareTask
     {

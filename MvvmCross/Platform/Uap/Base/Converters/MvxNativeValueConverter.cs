@@ -6,10 +6,10 @@ using System;
 using System.Globalization;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
-using MvvmCross.Platform.Converters;
-using MvvmCross.Platform.Logging;
+using MvvmCross.Converters;
+using MvvmCross.Logging;
 
-namespace MvvmCross.Platform.Uwp.Converters
+namespace MvvmCross.Platform.Uap.Base.Converters
 {
     public class MvxNativeValueConverter
         : IValueConverter

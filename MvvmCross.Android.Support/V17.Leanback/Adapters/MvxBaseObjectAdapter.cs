@@ -7,12 +7,10 @@ using System.Collections;
 using System.Collections.Specialized;
 using Android.Runtime;
 using Android.Support.V17.Leanback.Widget;
-using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Platform;
-using MvvmCross.Platform.Exceptions;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Platform.WeakSubscription;
+using MvvmCross.Exceptions;
+using MvvmCross.Logging;
+using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
 {
