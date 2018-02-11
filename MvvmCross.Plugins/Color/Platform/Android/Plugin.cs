@@ -9,9 +9,9 @@ using MvvmCross.UI;
 
 namespace MvvmCross.Plugin.Color.Platform.Android
 {
+    [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public class Plugin
-        : IMvxPlugin          
+    public sealed class Plugin : IMvxPlugin
     {
         public void Load()
         {

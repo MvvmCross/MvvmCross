@@ -3,13 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 
-using MvvmCross.Plugins;
-
 namespace MvvmCross.Plugin.Accelerometer.Platform.Ios
 {
+    [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public class Plugin
-        : IMvxPlugin
+    public class Plugin : IMvxPlugin
     {
         public void Load()
         {

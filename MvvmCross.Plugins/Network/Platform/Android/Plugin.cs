@@ -4,13 +4,12 @@
 
 using MvvmCross.Plugin.Network.Reachability;
 using MvvmCross.Plugin.Network.Rest;
-using MvvmCross.Plugins;
 
 namespace MvvmCross.Plugin.Network.Platform.Android
 {
+    [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public class Plugin
-        : IMvxPlugin
+    public class Plugin : IMvxPlugin
     {
         public void Load()
         {

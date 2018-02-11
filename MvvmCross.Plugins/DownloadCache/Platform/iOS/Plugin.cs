@@ -4,16 +4,14 @@
 
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
-using MvvmCross.Plugins;
 using UIKit;
 
 namespace MvvmCross.Plugin.DownloadCache.Platform.iOS
 {
 #warning One day I would like to decouple this plugin from the FileStore plugin
-
+    [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public class Plugin
-        : IMvxConfigurablePlugin
+    public class Plugin : IMvxConfigurablePlugin
     {
         private MvxDownloadCacheConfiguration _configuration;
 

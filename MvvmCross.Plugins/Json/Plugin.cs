@@ -5,20 +5,17 @@
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Plugins;
 
 namespace MvvmCross.Plugin.Json
 {
+    [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public class PluginLoader
-        : IMvxConfigurablePluginLoader
+    public class Plugin : IMvxConfigurablePlugin
     {
-        public static readonly PluginLoader Instance = new PluginLoader();
-
         private bool _loaded;
         private MvxJsonConfiguration _configuration;
 
-        public void EnsureLoaded()
+        public void Load()
         {
             if (_loaded)
                 return;
