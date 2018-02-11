@@ -19,6 +19,7 @@ using MvvmCross.Platform.Mac.Presenters;
 using MvvmCross.Platform.Mac.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
+using MvvmCross.Presenters;
 
 namespace MvvmCross.Platform.Mac.Core
 {

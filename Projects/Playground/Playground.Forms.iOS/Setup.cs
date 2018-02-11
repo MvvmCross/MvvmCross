@@ -6,6 +6,7 @@ using MvvmCross.Forms.Platform.iOS.Core;
 using MvvmCross.Platform.Ios.Core;
 using MvvmCross.Plugin.Json;
 using MvvmCross.ViewModels;
+using Playground.Forms.UI;
 using UIKit;
 
 namespace Playground.Forms.iOS

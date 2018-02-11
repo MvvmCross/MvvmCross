@@ -1,5 +1,7 @@
 ﻿using Windows.UI.Xaml.Controls;
 using MvvmCross.ViewModels;
+using MvvmCross.Platform.Uap.Core;
+using MvvmCross.Platform.Uap.Views;
 
 namespace Playground.Uwp
 {

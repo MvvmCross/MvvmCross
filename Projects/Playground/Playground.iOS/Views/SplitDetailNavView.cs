@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using MvvmCross.Platform.Ios.Presenters.Attributes;
 using MvvmCross.Platform.Ios.Views;
 using Playground.Core.ViewModels;
 

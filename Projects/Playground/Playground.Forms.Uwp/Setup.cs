@@ -4,6 +4,9 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Controls;
 using MvvmCross.Forms.Core;
 using MvvmCross.ViewModels;
+using MvvmCross.Forms.Platform.Uap.Core;
+using Playground.Forms.UI;
+using System.Linq;
 
 namespace Playground.Forms.Uwp
 {

@@ -21,6 +21,7 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Binders;
+using MvvmCross.Presenters;
 
 namespace MvvmCross.Platform.Uap.Core
 {

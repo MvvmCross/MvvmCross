@@ -2,6 +2,7 @@
 using MvvmCross.Platform.Tvos.Core;
 using MvvmCross.ViewModels;
 using Playground.Core;
+using MvvmCross.Platform.Tvos.Presenters;
 
 namespace Playground.TvOS
 {

@@ -25,6 +25,7 @@ using MvvmCross.Platform.Android.Presenters;
 using MvvmCross.Platform.Android.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
+using MvvmCross.Presenters;
 
 namespace MvvmCross.Platform.Android.Core
 {

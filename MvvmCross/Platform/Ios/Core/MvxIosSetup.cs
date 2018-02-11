@@ -19,6 +19,7 @@ using MvvmCross.Platform.Ios.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using UIKit;
+using MvvmCross.Presenters;
 
 namespace MvvmCross.Platform.Ios.Core
 {

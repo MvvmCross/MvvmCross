@@ -13,6 +13,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using MvvmCross.CodeAnalysis.Core;
 using MvvmCross.CodeAnalysis.Extensions;
+using MvvmCross.Commands;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.CodeAnalysis.Analyzers
