@@ -340,7 +340,7 @@ namespace MvvmCross.UnitTest.Base
         public void Reset_Resets_FullText_And_Index()
         {
             var parser = new Parser();
-            parser.CallReset("derp")
+            parser.CallReset("derp");
 
             Assert.Equal(0, parser.GetCurrentIndex());
             Assert.Equal("derp", parser.GetFullText());
