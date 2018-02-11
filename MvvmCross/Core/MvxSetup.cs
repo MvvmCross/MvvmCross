@@ -246,18 +246,13 @@ namespace MvvmCross.Core
         protected virtual IMvxPluginManager InitializePluginFramework()
         {
             var pluginManager = CreatePluginManager();
-            AddPluginsLoaders(pluginManager.Registry);
-            pluginManager.ConfigurationSource = GetPluginConfiguration;
             Mvx.RegisterSingleton(pluginManager);
             LoadPlugins(pluginManager);
             return pluginManager;
         }
 
-        protected virtual void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
-        {
-        }
-
-        protected abstract IMvxPluginManager CreatePluginManager();
+        protected virtual IMvxPluginManager CreatePluginManager()
+            => new MvxPluginManager(GetPluginConfiguration);
 
         protected virtual IMvxPluginConfiguration GetPluginConfiguration(Type plugin)
         {
@@ -266,6 +261,22 @@ namespace MvvmCross.Core
 
         public virtual void LoadPlugins(IMvxPluginManager pluginManager)
         {
+            var pluginAttribute = typeof(MvxPluginAttribute);
+            var mvvmCrossAssemblyName = pluginAttribute.Assembly.GetName().Name;
+
+            AppDomain.CurrentDomain
+                .GetAssemblies()
+                .AsParallel()
+                .Where(AssemblyReferencesMvvmCross)
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(TypeContainsPluginAttribute)
+                .ForAll(pluginManager.EnsurePluginLoaded);
+
+            bool AssemblyReferencesMvvmCross(Assembly assembly)
+                => assembly.GetReferencedAssemblies().All(a => a.Name == mvvmCrossAssemblyName);
+
+            bool TypeContainsPluginAttribute(Type type)
+                => (type.GetCustomAttributes(pluginAttribute, false)?.Length ?? 0) > 0;
         }
 
         protected virtual void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
