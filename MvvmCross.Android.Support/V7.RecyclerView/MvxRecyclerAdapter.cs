@@ -11,7 +11,7 @@ using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
-using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Binding.Extensions;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 using MvvmCross.Droid.Support.V7.RecyclerView.Model;
 using MvvmCross.Exceptions;

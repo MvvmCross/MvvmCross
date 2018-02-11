@@ -8,7 +8,7 @@ using System.Collections.Specialized;
 using Foundation;
 using MvvmCross.Logging;
 using MvvmCross.Binding.Attributes;
-using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Binding.Extensions;
 using MvvmCross.WeakSubscription;
 using UIKit;
 
