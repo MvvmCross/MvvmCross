@@ -2,6 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 using MvvmCross.Converters;
 using MvvmCross.Exceptions;
 using MvvmCross.Plugins;
@@ -13,6 +16,11 @@ using MvvmCross.Platform.Uap.Views.Suspension;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using Windows.ApplicationModel.Activation;
+using Windows.UI.Xaml.Controls;
+using MvvmCross.Binding;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Binders;
 
 namespace MvvmCross.Platform.Uap.Core
 {
