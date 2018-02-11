@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using MvvmCross.Base;
 using MvvmCross.Logging;
 
-namespace MvvmCross.ViewModels
+namespace MvvmCross.Commands
 {
     public abstract class MvxAsyncCommandBase
         : MvxCommandBase

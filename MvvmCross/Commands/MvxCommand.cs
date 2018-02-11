@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using MvvmCross.Base;
 
-namespace MvvmCross.ViewModels
+namespace MvvmCross.Commands
 {
     public interface IMvxCommandHelper
     {

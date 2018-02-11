@@ -2,12 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.ViewModels;
-
-namespace MvvmCross.Views
+namespace MvvmCross.Commands
 {
-    public interface IMvxOverridePresentationAttribute
+    public interface IMvxCommandCollectionBuilder
     {
-        MvxBasePresentationAttribute PresentationAttribute(MvxViewModelRequest request);
+        IMvxCommandCollection BuildCollectionFor(object owner);
     }
 }

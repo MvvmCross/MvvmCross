@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using MvvmCross.ViewModels;
 
-namespace MvvmCross.Views
+namespace MvvmCross.Presenters
 {
     public abstract class MvxViewPresenter : IMvxViewPresenter
     {

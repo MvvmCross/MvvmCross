@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.ViewModels
+namespace MvvmCross.Commands
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class MvxCommandAttribute : Attribute

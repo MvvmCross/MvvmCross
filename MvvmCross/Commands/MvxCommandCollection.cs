@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using MvvmCross.Logging;
 
-namespace MvvmCross.ViewModels
+namespace MvvmCross.Commands
 {
     public class MvxCommandCollection
         : IMvxCommandCollection

@@ -4,7 +4,7 @@
 
 using System.Threading.Tasks;
 
-namespace MvvmCross.ViewModels
+namespace MvvmCross.Commands
 {
     public interface IMvxAsyncCommand : IMvxCommand
     {

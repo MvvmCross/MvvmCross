@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.ViewModels;
 
-namespace MvvmCross.Views
+namespace MvvmCross.ViewModels
 {
     public class MvxChildViewModelCache : IMvxChildViewModelCache
     {
