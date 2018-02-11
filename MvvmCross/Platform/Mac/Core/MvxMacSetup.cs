@@ -55,11 +55,6 @@ namespace MvvmCross.Platform.Mac.Core
             get { return _applicationDelegate; }
         }
 
-        protected override IMvxPluginManager CreatePluginManager()
-        {
-            return new MvxPluginManager();
-        }
-
         protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "ViewController");

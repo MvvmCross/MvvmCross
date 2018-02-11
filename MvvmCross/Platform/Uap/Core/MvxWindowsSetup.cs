@@ -69,11 +69,6 @@ namespace MvvmCross.Platform.Uap.Core
             return new MvxSuspensionManager();
         }
 
-        protected override IMvxPluginManager CreatePluginManager()
-        {
-            return new MvxFilePluginManager(new List<string>() { ".Uwp", ".WindowsCommon" });
-        }
-
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
             var container = CreateStoreViewsContainer();

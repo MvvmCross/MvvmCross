@@ -46,11 +46,5 @@ namespace MvvmCross.Platform.Console.Core
         {
             InitializeMessagePump();
         }
-
-        protected override IMvxPluginManager CreatePluginManager()
-        {
-            // Console is 'full .net' - so uses the same plugins as Wpf
-            return new MvxFilePluginManager(".Wpf", string.Empty);
-        }
     }
 }
