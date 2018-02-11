@@ -76,11 +76,6 @@ namespace MvvmCross.Platform.Wpf.Core
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
-        protected override IMvxPluginManager CreatePluginManager()
-        {
-            return new MvxFilePluginManager(".Wpf", string.Empty);
-        }
-
         protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "Control");

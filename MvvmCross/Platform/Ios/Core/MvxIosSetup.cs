@@ -46,11 +46,6 @@ namespace MvvmCross.Platform.Ios.Core
 
         protected IMvxApplicationDelegate ApplicationDelegate => _applicationDelegate;
 
-        protected override IMvxPluginManager CreatePluginManager()
-        {
-            return new MvxPluginManager();
-        }
-
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
             var container = CreateIosViewsContainer();
