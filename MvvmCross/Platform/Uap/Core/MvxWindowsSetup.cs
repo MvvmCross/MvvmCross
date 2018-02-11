@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Converters;
 using MvvmCross.Exceptions;
-using MvvmCross.Plugins;
+using MvvmCross.Plugin;
 using MvvmCross.Core;
 using MvvmCross.Platform.Uap.Binding;
 using MvvmCross.Platform.Uap.Presenters;

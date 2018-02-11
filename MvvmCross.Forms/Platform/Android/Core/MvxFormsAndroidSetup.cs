@@ -16,7 +16,7 @@ using MvvmCross.Platform.Android.Base.Platform;
 using MvvmCross.Platform.Android.Core;
 using MvvmCross.Platform.Android.Presenters;
 using MvvmCross.Platform.Android.Views;
-using MvvmCross.Plugins;
+using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Forms.Platform.Android.Core
