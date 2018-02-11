@@ -9,7 +9,7 @@ using MvvmCross.Exceptions;
 
 namespace MvvmCross.Plugin.Accelerometer.Platform.Uap
 {
-    public class MvxWindowsCommonAccelerometer : IMvxAccelerometer
+    public class MvxWindowsAccelerometer : IMvxAccelerometer
     {
         private bool _started;
         private Windows.Devices.Sensors.Accelerometer _accelerometer;

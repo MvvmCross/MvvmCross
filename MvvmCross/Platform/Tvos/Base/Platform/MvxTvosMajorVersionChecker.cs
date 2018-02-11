@@ -17,15 +17,15 @@ namespace MvvmCross.Platform.Tvos.Base.Platform
 
         private static bool ReadIsTvosVersionOrHigher(int target, bool defaultValue)
         {
-            IMvxTvosSystem touchSystem;
-            Mvx.TryResolve<IMvxTvosSystem>(out touchSystem);
-            if (touchSystem == null)
+            IMvxTvosSystem tvosSystem;
+            Mvx.TryResolve<IMvxTvosSystem>(out tvosSystem);
+            if (tvosSystem == null)
             {
                 MvxLog.Instance.Warn("IMvxTvosSystem not found - so assuming we {1} on tvOS {0} or later", target, defaultValue ? "are" : "are not");
                 return defaultValue;
             }
 
-            return touchSystem.Version.Major >= target;
+            return tvosSystem.Version.Major >= target;
         }
     }
 }
