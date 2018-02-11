@@ -537,19 +537,19 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             FragmentManager fragmentManager,
             MvxFragmentPresentationAttribute fragmentAttribute)
         {
+            var fragmentName = FragmentJavaName(fragmentAttribute.ViewType);
+
             if (fragmentManager.BackStackEntryCount > 0)
             {
-                var fragmentName = FragmentJavaName(fragmentAttribute.ViewType);
                 fragmentManager.PopBackStackImmediate(fragmentName, 1);
-
                 OnFragmentPopped(null, null, fragmentAttribute);
 
                 return true;
             }
-            else if (fragmentManager.Fragments.Count > 0 && fragmentManager.FindFragmentByTag(fragmentAttribute.ViewType.Name) != null)
+            else if (fragmentManager.Fragments.Count > 0 && fragmentManager.FindFragmentByTag(fragmentName) != null)
             {
                 var ft = fragmentManager.BeginTransaction();
-                var fragment = fragmentManager.FindFragmentByTag(fragmentAttribute.ViewType.Name);
+                var fragment = fragmentManager.FindFragmentByTag(fragmentName);
 
                 if (!fragmentAttribute.EnterAnimation.Equals(int.MinValue) && !fragmentAttribute.ExitAnimation.Equals(int.MinValue))
                 {
