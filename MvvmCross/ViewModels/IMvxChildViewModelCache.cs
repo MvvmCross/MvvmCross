@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.ViewModels;
 
-namespace MvvmCross.Views
+namespace MvvmCross.ViewModels
 {
     public interface IMvxChildViewModelCache
     {

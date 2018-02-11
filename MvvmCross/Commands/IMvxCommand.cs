@@ -5,7 +5,7 @@
 using System;
 using System.Windows.Input;
 
-namespace MvvmCross.ViewModels
+namespace MvvmCross.Commands
 {
     public interface IMvxCommand : ICommand
     {

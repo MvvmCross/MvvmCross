@@ -5,8 +5,9 @@
 using System;
 using System.Collections.Generic;
 using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
-namespace MvvmCross.Views
+namespace MvvmCross.Presenters
 {
     public interface IMvxAttributeViewPresenter : IMvxViewPresenter
     {
