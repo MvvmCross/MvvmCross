@@ -7,8 +7,8 @@ using MvvmCross.Plugins;
 
 namespace MvvmCross.Plugin.ResourceLoader.Platform.Wpf
 {
-    public class Plugin
-        : IMvxPlugin
+    [MvxPlugin]
+    public class Plugin : IMvxPlugin
     {
         public void Load()
         {

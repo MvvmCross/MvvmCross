@@ -3,24 +3,18 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Binding.Bindings.Source.Construction;
-using MvvmCross.Plugins;
 
 namespace MvvmCross.Plugin.MethodBinding
 {
+    [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public class PluginLoader
-        : IMvxPluginLoader
+    public class Plugin : IMvxPlugin
     {
-        public static readonly PluginLoader Instance = new PluginLoader();
-
         private bool _loaded;
 
-        public void EnsureLoaded()
+        public void Load()
         {
-            if (_loaded)
-            {
-                return;
-            }
+            if (_loaded) return;
 
             Mvx.CallbackWhenRegistered<IMvxSourceBindingFactoryExtensionHost>(OnHostRegistered);
             _loaded = true;

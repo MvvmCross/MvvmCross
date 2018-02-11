@@ -3,21 +3,15 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Converters;
-using MvvmCross.Plugins;
 
 namespace MvvmCross.Plugin.Color
 {
+    [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public class PluginLoader
-        : IMvxPluginLoader
+    public sealed class PluginLoader : IMvxPlugin
     {
-        public static readonly PluginLoader Instance = new PluginLoader();
-
-        public void EnsureLoaded()
+        public void Load()
         {
-            var manager = Mvx.Resolve<IMvxPluginManager>();
-            manager.EnsurePlatformAdaptionLoaded<PluginLoader>();
-
             Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
         }
 

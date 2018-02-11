@@ -4,20 +4,13 @@
 
 using System.Reflection;
 using MvvmCross.Converters;
-using MvvmCross.Plugins;
 
 namespace MvvmCross.Plugin.Visibility
 {
-    public class PluginLoader
-        : IMvxPluginLoader
+    public class PluginLoader : IMvxPlugin
     {
-        public static readonly PluginLoader Instance = new PluginLoader();
-
-        public void EnsureLoaded()
+        public void Load()
         {
-            var manager = Mvx.Resolve<IMvxPluginManager>();
-            manager.EnsurePlatformAdaptionLoaded<PluginLoader>();
-
             Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
         }
 
