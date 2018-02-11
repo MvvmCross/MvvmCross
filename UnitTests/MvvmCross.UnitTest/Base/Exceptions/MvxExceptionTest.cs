@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MvvmCross.Platform.Exceptions;
+using MvvmCross.Exceptions;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Base.Exceptions
