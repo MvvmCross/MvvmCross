@@ -11,7 +11,7 @@ using MvvmCross.Logging;
 using MvvmCross.Platform.Wpf.Presenters.Attributes;
 using MvvmCross.Platform.Wpf.Views;
 using MvvmCross.ViewModels;
-using MvvmCross.Views;
+using MvvmCross.Presenters;
 
 namespace MvvmCross.Platform.Wpf.Presenters
 {

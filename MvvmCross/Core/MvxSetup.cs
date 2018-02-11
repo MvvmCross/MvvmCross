@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Base;
+using MvvmCross.Commands;
 using MvvmCross.Exceptions;
 using MvvmCross.IoC;
 using MvvmCross.Logging;

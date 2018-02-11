@@ -11,7 +11,8 @@ using Moq;
  using MvvmCross.UnitTest.Mocks.Dispatchers;
  using MvvmCross.UnitTest.Mocks.ViewModels;
  using MvvmCross.ViewModels;
- using Xunit;
+using MvvmCross.ViewModels.Hints;
+using Xunit;
 
 namespace MvvmCross.UnitTest.Navigation
 {

@@ -1,4 +1,4 @@
-<views:MvxWindowsPage xmlns:views="using:MvvmCross.Uwp.Views"
+<views:MvxWindowsPage xmlns:views="using:MvvmCross.Platform.Uap.Views"
                       x:Class="Playground.Uwp.Views.SecondChildView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
