@@ -1,4 +1,5 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+﻿
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -519,18 +520,19 @@ namespace MvvmCross.Platform.Android.Presenters
             FragmentManager fragmentManager,
             MvxFragmentPresentationAttribute fragmentAttribute)
         {
+            var fragmentName = FragmentJavaName(fragmentAttribute.ViewType);
+
             if (fragmentManager.BackStackEntryCount > 0)
             {
-                var fragmentName = FragmentJavaName(fragmentAttribute.ViewType);
                 fragmentManager.PopBackStackImmediate(fragmentName, PopBackStackFlags.Inclusive);
 
                 OnFragmentPopped(null, null, fragmentAttribute);
                 return true;
             }
-            else if (CurrentFragmentManager.FindFragmentByTag(fragmentAttribute.ViewType.Name) != null)
+            else if (CurrentFragmentManager.FindFragmentByTag(fragmentName) != null)
             {
                 var ft = fragmentManager.BeginTransaction();
-                var fragment = fragmentManager.FindFragmentByTag(fragmentAttribute.ViewType.Name);
+                var fragment = fragmentManager.FindFragmentByTag(fragmentName);
 
                 if (!fragmentAttribute.EnterAnimation.Equals(int.MinValue) && !fragmentAttribute.ExitAnimation.Equals(int.MinValue))
                 {
