@@ -6,12 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.IoC;
-using MvvmCross.Plugins;
+using MvvmCross.Plugin;
 
 namespace MvvmCross.ViewModels
 {
-    public abstract class MvxApplication
-        : IMvxApplication
+    public abstract class MvxApplication : IMvxApplication
     {
         private IMvxViewModelLocator _defaultLocator;
 

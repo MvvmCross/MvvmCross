@@ -12,7 +12,7 @@ using MvvmCross.IoC;
 using MvvmCross.Logging;
 using MvvmCross.Logging.LogProviders;
 using MvvmCross.Navigation;
-using MvvmCross.Plugins;
+using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 

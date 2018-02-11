@@ -8,7 +8,7 @@ using System.Reflection;
 
 using AppKit;
 using MvvmCross.Converters;
-using MvvmCross.Plugins;
+using MvvmCross.Plugin;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;

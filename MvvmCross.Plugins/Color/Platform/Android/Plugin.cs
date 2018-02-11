@@ -4,7 +4,7 @@
 
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Plugin.Color.Platform.Android.BindingTargets;
-using MvvmCross.Plugins;
+using MvvmCross.Plugin;
 using MvvmCross.UI;
 
 namespace MvvmCross.Plugin.Color.Platform.Android

@@ -10,7 +10,6 @@ using Android.Views;
 using MvvmCross.Converters;
 using MvvmCross.Exceptions;
 using MvvmCross.IoC;
-using MvvmCross.Plugins;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
@@ -48,11 +47,6 @@ namespace MvvmCross.Platform.Android.Core
         public Context ApplicationContext => _applicationContext;
 
         #endregion IMvxAndroidGlobals Members
-
-        protected override IMvxPluginManager CreatePluginManager()
-        {
-            return new MvxFilePluginManager(".Droid", ".dll");
-        }
 
         protected override void InitializePlatformServices()
         {
