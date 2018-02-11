@@ -187,7 +187,6 @@ namespace MvvmCross.Platform.Ios.Views
             do {
                 if (vc.PresentedViewController != null)
                     vc = vc.PresentedViewController;
-
             } while (vc.PresentedViewController != null);
 
             return vc;
