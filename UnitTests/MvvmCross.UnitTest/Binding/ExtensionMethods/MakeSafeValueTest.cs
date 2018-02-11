@@ -4,7 +4,7 @@
 
 using System;
 using MvvmCross.Binding.Binders;
-using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Binding.Extensions;
 using MvvmCross.Converters;
 using MvvmCross.Test;
 using Xunit;

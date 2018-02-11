@@ -5,7 +5,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Binding.Bindings.SourceSteps;
-using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Binding.Extensions;
 using MvvmCross.Converters;
 
 namespace MvvmCross.Binding.Combiners
