@@ -7,7 +7,7 @@ using MvvmCross.UI;
 
 namespace MvvmCross.Plugin.Color.Platform.Uap
 {
-    public class MvxWindowsCommonColor : IMvxNativeColor
+    public class MvxWindowsColor : IMvxNativeColor
     {
         public object ToNative(MvxColor mvxColor)
         {
