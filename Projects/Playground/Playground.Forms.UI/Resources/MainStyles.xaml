@@ -2,7 +2,7 @@
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="Playground.Forms.UI.Resources.MainStyles"
-                    xmlns:local="clr-namespace:Playground.Forms.Resources"
+                    xmlns:local="clr-namespace:Playground.Forms.UI.Resources"
                     MergedWith="local:BaseTheme">
 
     <Color x:Key="PrimaryColor">#333333</Color>
