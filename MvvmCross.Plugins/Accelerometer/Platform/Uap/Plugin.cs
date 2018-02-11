@@ -12,7 +12,7 @@ namespace MvvmCross.Plugin.Accelerometer.Platform.Uap
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxAccelerometer>(new MvxWindowsCommonAccelerometer());
+            Mvx.RegisterSingleton<IMvxAccelerometer>(new MvxWindowsAccelerometer());
         }
     }
 }

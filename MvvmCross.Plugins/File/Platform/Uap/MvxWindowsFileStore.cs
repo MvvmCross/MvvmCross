@@ -15,7 +15,7 @@ using MvvmCross.Platform.Uap.Base.Platform;
 namespace MvvmCross.Plugin.File.Platform.Uap
 {
     // note that we use the full WindowsStore name here deliberately to avoid 'Store' naming confusion
-    public class MvxWindowsCommonFileStore : MvxFileStoreBase
+    public class MvxWindowsFileStore : MvxFileStoreBase
     {
         public override Stream OpenRead(string path)
         {
