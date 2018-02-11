@@ -21,25 +21,18 @@ using MvvmCross.Platform.Uap.Presenters;
 namespace MvvmCross.Forms.Platform.Uap.Core
 {
     public abstract class MvxFormsWindowsSetup : MvxWindowsSetup
-    {
-        private readonly LaunchActivatedEventArgs _launchActivatedEventArgs;
+    {        
         private List<Assembly> _viewAssemblies;
         private MvxFormsApplication _formsApplication;
 
-        protected MvxFormsWindowsSetup(XamlControls.Frame rootFrame, LaunchActivatedEventArgs e)
-            : base(rootFrame)
+        protected MvxFormsWindowsSetup(XamlControls.Frame rootFrame, IActivatedEventArgs e)
+            : base(rootFrame, e)
         {
-            _launchActivatedEventArgs = e;
         }
 
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
-            if (_viewAssemblies == null)
-            {
-                _viewAssemblies = new List<Assembly>(base.GetViewAssemblies());
-            }
-
-            return _viewAssemblies;
+            return _viewAssemblies ?? (_viewAssemblies = new List<Assembly>(base.GetViewAssemblies()));
         }
 
         protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
@@ -54,7 +47,7 @@ namespace MvvmCross.Forms.Platform.Uap.Core
             {
                 if (_formsApplication == null)
                 {
-                    Xamarin.Forms.Forms.Init(_launchActivatedEventArgs);
+                    Xamarin.Forms.Forms.Init(ActivationArguments);
                     _formsApplication = _formsApplication ?? CreateFormsApplication();
                 }
                 return _formsApplication;
