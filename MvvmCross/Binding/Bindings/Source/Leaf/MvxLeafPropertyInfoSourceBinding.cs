@@ -4,7 +4,7 @@
 
 using System;
 using System.Reflection;
-using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Binding.Extensions;
 using MvvmCross.Converters;
 using MvvmCross.Exceptions;
 

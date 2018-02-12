@@ -12,7 +12,7 @@ using MvvmCross.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
-using MvvmCross.Platform.Uap.Base.Converters;
+using MvvmCross.Platform.Uap.Converters;
 
 namespace MvvmCross.Platform.Uap.Binding
 {

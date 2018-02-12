@@ -1,4 +1,5 @@
-using MvvmCross;
+﻿using MvvmCross;
+using MvvmCross.Forms.Platform.Uap.Views;
 using MvvmCross.Forms.Views;
 using MvvmCross.ViewModels;
 

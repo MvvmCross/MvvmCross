@@ -12,7 +12,7 @@ using Foundation;
 using MvvmCross.Base;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Binding.Extensions;
 using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Platform.Mac.Binding.Views

@@ -7,7 +7,7 @@ using Android.Content;
 using Android.Hardware;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
-using MvvmCross.Platform.Android.Base;
+using MvvmCross.Platform.Android;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Plugin.Accelerometer.Platform.Android

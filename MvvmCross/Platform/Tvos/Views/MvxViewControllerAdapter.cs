@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform.Tvos.Base.Views;
+using MvvmCross.Platform.Tvos.Views.Base;
 using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Tvos.Views

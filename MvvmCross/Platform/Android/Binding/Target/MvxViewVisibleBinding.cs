@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using Android.Views;
-using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Binding.Extensions;
 
 namespace MvvmCross.Platform.Android.Binding.Target
 {

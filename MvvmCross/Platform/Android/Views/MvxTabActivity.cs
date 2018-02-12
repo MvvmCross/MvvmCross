@@ -9,7 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Android.Base.Views;
+using MvvmCross.Platform.Android.Views.Base;
 using MvvmCross.Platform.Android.Binding.BindingContext;
 using MvvmCross.Platform.Android.Binding.Views;
 using MvvmCross.ViewModels;

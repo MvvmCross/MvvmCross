@@ -8,7 +8,7 @@ using System.Linq;
 using Foundation;
 using MessageUI;
 using MvvmCross.Exceptions;
-using MvvmCross.Platform.Ios.Base.Platform;
+using MvvmCross.Platform.Ios;
 using MvvmCross.Platform.Ios.Views;
 using UIKit;
 

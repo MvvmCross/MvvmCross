@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Foundation;
 using MvvmCross.Logging;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Ios.Base.Views;
+using MvvmCross.Platform.Ios.Views.Base;
 using MvvmCross.ViewModels;
 using UIKit;
 

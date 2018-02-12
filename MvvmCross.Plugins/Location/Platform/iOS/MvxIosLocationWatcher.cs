@@ -7,8 +7,7 @@ using CoreLocation;
 using Foundation;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Ios.Base;
-using MvvmCross.Platform.Ios.Base.Platform;
+using MvvmCross.Platform.Ios;
 
 namespace MvvmCross.Plugin.Location.Platform.iOS
 {

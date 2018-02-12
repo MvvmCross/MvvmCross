@@ -6,7 +6,7 @@ using System;
 using Android.Preferences;
 using MvvmCross.Logging;
 using MvvmCross.Binding;
-using MvvmCross.Platform.Android.Base.WeakSubscription;
+using MvvmCross.Platform.Android.WeakSubscription;
 
 namespace MvvmCross.Platform.Android.Binding.Target
 {

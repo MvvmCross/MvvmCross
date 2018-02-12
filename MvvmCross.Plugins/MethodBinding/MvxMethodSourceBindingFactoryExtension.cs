@@ -57,8 +57,7 @@ namespace MvvmCross.Plugin.MethodBinding
 
         protected MethodInfo FindMethodInfo(object source, string name)
         {
-            var methodInfo = source.GetType()
-                                         .GetMethod(name);
+            var methodInfo = source.GetType().GetMethod(name);
             return methodInfo;
         }
     }

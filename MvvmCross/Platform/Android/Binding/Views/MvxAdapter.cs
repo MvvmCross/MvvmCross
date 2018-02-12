@@ -15,7 +15,7 @@ using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
-using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Binding.Extensions;
 using MvvmCross.Platform.Android.Binding.BindingContext;
 using MvvmCross.WeakSubscription;
 using Object = Java.Lang.Object;

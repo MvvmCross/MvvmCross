@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Binding.Extensions;
 
 namespace MvvmCross.Plugin.FieldBinding
 {

@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using Foundation;
-using MvvmCross.Platform.Mac.Base.Platform;
+using MvvmCross.Platform.Mac;
 
 namespace MvvmCross.Plugin.WebBrowser.Platform.Mac
 {

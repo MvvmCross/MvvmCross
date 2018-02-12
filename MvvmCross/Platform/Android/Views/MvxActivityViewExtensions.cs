@@ -8,7 +8,7 @@ using Android.OS;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Android.Base.Views;
+using MvvmCross.Platform.Android.Views.Base;
 using MvvmCross.Platform.Android.Core;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
