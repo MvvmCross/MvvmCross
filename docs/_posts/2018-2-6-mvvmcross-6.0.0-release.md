@@ -34,6 +34,12 @@ NuGet packages are now versioned using SemVer 2.0, meaning you need to use Visua
 
 The MvvmCross.* namespace has been reserved on NuGet, meaning that plugin authors should move their plugins away from this package namespace. We are also planning on signing future releases.
 
+### Plugins
+
+No more bootstrap file! Yes, you read it correctly. [@willsb](https://github.com/willsb) has worked hard on an easier way to register your MvvmCross plugins, by simply adding the `[MvxPlugin]` attribute to your plugin and inherit from `IMvxPlugin` as usual.
+
+Read more about [how to get started with plugins in our documentation](https://www.mvvmcross.com/documentation/plugins/getting-started-with-plugin-development).
+
 ### .NET Standard
 
 TBA
