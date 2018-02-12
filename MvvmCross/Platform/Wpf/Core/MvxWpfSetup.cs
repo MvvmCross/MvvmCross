@@ -10,6 +10,7 @@ using MvvmCross.Platform.Wpf.Presenters;
 using MvvmCross.Platform.Wpf.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
+using MvvmCross.Presenters;
 
 namespace MvvmCross.Platform.Wpf.Core
 {

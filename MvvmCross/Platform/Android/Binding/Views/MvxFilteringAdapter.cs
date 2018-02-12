@@ -10,7 +10,6 @@ using Android.Runtime;
 using Android.Widget;
 using Java.Lang;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Android.Base;
 using MvvmCross.Platform.Android.Binding.BindingContext;
 using Object = Java.Lang.Object;
 using String = Java.Lang.String;

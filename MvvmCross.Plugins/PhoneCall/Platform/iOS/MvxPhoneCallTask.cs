@@ -4,7 +4,7 @@
 
 using System;
 using Foundation;
-using MvvmCross.Platform.Ios.Base.Platform;
+using MvvmCross.Platform.Ios;
 
 namespace MvvmCross.Plugin.PhoneCall.Platform.iOS
 {

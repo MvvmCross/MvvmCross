@@ -10,9 +10,9 @@ using MvvmCross.Exceptions;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Views.Attributes;
 using MvvmCross.Logging;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.ViewModels.Hints;
-using MvvmCross.Views;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views

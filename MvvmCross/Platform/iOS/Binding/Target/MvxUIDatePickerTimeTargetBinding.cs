@@ -4,7 +4,7 @@
 
 using System;
 using System.Reflection;
-using MvvmCross.Platform.Ios.Base;
+using MvvmCross.Platform.Ios;
 using UIKit;
 
 namespace MvvmCross.Platform.Ios.Binding.Target

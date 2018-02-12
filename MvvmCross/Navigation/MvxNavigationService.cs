@@ -16,6 +16,7 @@ using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Navigation.EventArguments;
 using MvvmCross.ViewModels;
+using MvvmCross.ViewModels.Hints;
 using MvvmCross.Views;
 
 namespace MvvmCross.Navigation

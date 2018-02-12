@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Android.Graphics;
 using MvvmCross.Binding;
-using MvvmCross.Platform.Android.Base;
+using MvvmCross.Platform.Android;
 using MvvmCross.Plugin.File;
 using Uri = Android.Net.Uri;
 

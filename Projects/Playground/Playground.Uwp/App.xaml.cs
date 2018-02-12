@@ -1,10 +1,12 @@
-using System;
+﻿using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using MvvmCross;
+using MvvmCross.ViewModels;
+using MvvmCross.Platform.Uap.Views.Suspension;
 
 namespace Playground.Uwp
 {
@@ -59,7 +61,7 @@ namespace Playground.Uwp
                     var setup = new Setup(rootFrame, "Suspension");
                     setup.Initialize();
 
-                    var start = MvvmCross.Platform.Mvx.Resolve<MvvmCross.Core.ViewModels.IMvxAppStart>();
+                    var start = Mvx.Resolve<IMvxAppStart>();
                     start.Start();
                 }
 

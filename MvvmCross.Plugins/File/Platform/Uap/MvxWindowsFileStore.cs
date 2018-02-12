@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Uap.Base.Platform;
+using MvvmCross.Platform.Uap;
 
 namespace MvvmCross.Plugin.File.Platform.Uap
 {
