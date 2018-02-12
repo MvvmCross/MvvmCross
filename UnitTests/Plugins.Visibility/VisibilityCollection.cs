@@ -5,10 +5,10 @@
 using MvvmCross.Test;
 using Xunit;
 
-namespace MvvmCross.Plugins.Color.UnitTest
+namespace MvvmCross.Plugins.Visibility.UnitTest
 {
-    [CollectionDefinition("Color")]
-    public class ColorCollection : ICollectionFixture<MvxTestFixture>
+    [CollectionDefinition("Visibility")]
+    public class VisibilityCollection : ICollectionFixture<MvxTestFixture>
     {
         // This class has no code, and is never created. Its purpose is simply
         // to be the place to apply [CollectionDefinition] and all the
