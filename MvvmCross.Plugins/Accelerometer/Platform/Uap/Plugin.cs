@@ -4,6 +4,7 @@
 
 namespace MvvmCross.Plugin.Accelerometer.Platform.Uap
 {
+    [MvxPlugin]
     public class Plugin : IMvxPlugin
     {
         public void Load()

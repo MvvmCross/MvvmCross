@@ -10,6 +10,7 @@ using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugin.Color.Platform.Wpf
 {
+    [MvxPlugin]
     public class Plugin : IMvxPlugin
     {
         public void Load()

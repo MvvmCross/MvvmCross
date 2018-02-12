@@ -6,6 +6,7 @@ using MvvmCross.UI;
 
 namespace MvvmCross.Plugin.Color.Platform.Uap
 {
+    [MvxPlugin]
     public class Plugin : IMvxPlugin
     {
         public void Load()
