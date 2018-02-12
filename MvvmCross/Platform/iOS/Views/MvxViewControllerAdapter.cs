@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Platform.Ios.Base.Views;
+using MvvmCross.Platform.Ios.Views.Base;
 using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Ios.Views

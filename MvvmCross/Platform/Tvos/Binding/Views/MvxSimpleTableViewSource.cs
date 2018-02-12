@@ -5,7 +5,7 @@
 using System;
 using Foundation;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Tvos.Base.Platform;
+using MvvmCross.Platform.Tvos;
 using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Binding.Views

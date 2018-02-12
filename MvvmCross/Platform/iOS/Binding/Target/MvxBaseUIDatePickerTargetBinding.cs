@@ -7,7 +7,7 @@ using System.Reflection;
 using Foundation;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Ios.Base;
+using MvvmCross.Platform.Ios;
 using MvvmCross.WeakSubscription;
 using UIKit;
 

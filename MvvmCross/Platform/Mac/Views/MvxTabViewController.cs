@@ -7,7 +7,7 @@ using System.Linq;
 using AppKit;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Mac.Base.Views;
+using MvvmCross.Platform.Mac.Views.Base;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platform.Mac.Views

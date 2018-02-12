@@ -9,7 +9,7 @@ using System.Reflection;
 using UIKit;
 using Foundation;
 using MvvmCross.Core;
-using MvvmCross.Platform.Tvos.Base.Views;
+using MvvmCross.Platform.Tvos.Views.Base;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 

@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Logging;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Ios.Base.Views;
+using MvvmCross.Platform.Ios.Views.Base;
 
 namespace MvvmCross.Platform.Ios.Views
 {

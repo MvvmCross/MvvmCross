@@ -4,7 +4,6 @@
 
 using System;
 using MvvmCross.Exceptions;
-using MvvmCross.Platform.Android.Base;
 
 namespace MvvmCross.Platform.Android.Binding.ResourceHelpers
 {
