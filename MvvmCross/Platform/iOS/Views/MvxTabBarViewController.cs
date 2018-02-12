@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Platform.Ios.Presenters;
 using MvvmCross.Platform.Ios.Presenters.Attributes;
+using MvvmCross.iOS.Views;
 using MvvmCross.ViewModels;
 using UIKit;
 
@@ -77,6 +78,12 @@ namespace MvvmCross.Platform.Ios.Views
 
         public virtual bool ShowChildView(UIViewController viewController)
         {
+            if (MoreNavigationController?.ViewControllers?.Any() ?? false) 
+            {
+                MoreNavigationController.PushViewController(viewController, true);
+                return true;
+            }
+
             var navigationController = SelectedViewController as UINavigationController;
 
             // if the current selected ViewController is not a NavigationController, then a child cannot be shown
@@ -97,6 +104,17 @@ namespace MvvmCross.Platform.Ios.Views
 
         public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
         {
+            if (MoreNavigationController?.ViewControllers?.Any() ?? false)
+            {
+                var lastViewController = (MoreNavigationController.ViewControllers.Last()).GetIMvxIosView();
+
+                if (lastViewController != null && lastViewController.ViewModel == viewModel)
+                {
+                    MoreNavigationController.PopViewController(true);
+                    return true;
+                }
+            }
+
             if (SelectedViewController is UINavigationController navController
                 && navController.ViewControllers != null
                 && navController.ViewControllers.Any())
