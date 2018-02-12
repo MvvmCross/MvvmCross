@@ -8,7 +8,7 @@ namespace MvvmCross.Plugin.Color
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public sealed class PluginLoader : IMvxPlugin
+    public sealed class Plugin : IMvxPlugin
     {
         public void Load()
         {

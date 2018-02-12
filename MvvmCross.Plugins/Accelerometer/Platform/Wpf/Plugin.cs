@@ -4,6 +4,7 @@
 
 namespace MvvmCross.Plugin.Accelerometer.Platform.Wpf
 {
+    [MvxPlugin]
     public class Plugin : IMvxPlugin
     {
         public void Load()
