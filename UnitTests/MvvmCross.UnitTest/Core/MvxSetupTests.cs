@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Moq;
@@ -28,9 +27,16 @@ namespace MvvmCross.UnitTest.Core
             [Fact]
             public void ReturnsAListOfAllAssembliesThatReferenceMvvmCross()
             {
-                var assemblies = SetupUnderTest.Object.GetPluginAssemblies();
+                var assemblies =
+                    SetupUnderTest.Object.GetPluginAssemblies()
+                        .Where(AssemblyIsNotProxy);
+                
+                //2 == MvvmCross.UnitTest && MvvmCross.Test
+                Assert.Equal(assemblies.Count(), 2);
 
-                Assert.Equal(assemblies.Count(), 1);
+                //Remove assemblies added by Moq
+                bool AssemblyIsNotProxy(Assembly assembly)
+                    => assembly.GetName().Name != "DynamicProxyGenAssembly2";
             }
         }
 
@@ -42,7 +48,7 @@ namespace MvvmCross.UnitTest.Core
                 SetupUnderTest.Object.LoadPlugins(PluginManager.Object);
 
                 PluginManager
-                    .Verify(manager => manager.EnsurePluginLoaded(It.IsAny<Type>()), Times.Exactly(3));
+                    .Verify(manager => manager.EnsurePluginLoaded(It.IsAny<Type>()), Times.Exactly(6));
             }
         }
     }
