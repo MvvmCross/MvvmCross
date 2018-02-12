@@ -2,6 +2,7 @@
   branches:
       only:
         - master
+        - /release\/.*/
   version: 1.0.{build}
   image: Visual Studio 2017
   environment:
@@ -11,6 +12,8 @@
   build_script:
   - ps: .\build.ps1 -verbosity Diagnostic
   test: off
+  cache:
+  - packages -> **\packages.config
 -
   branches:
       only:
@@ -24,3 +27,5 @@
   build_script:
   - ps: .\build.ps1 -verbosity Diagnostic
   test: off
+  cache:
+  - packages -> **\packages.config
