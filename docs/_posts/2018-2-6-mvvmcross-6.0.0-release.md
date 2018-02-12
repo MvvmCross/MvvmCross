@@ -22,6 +22,18 @@ Yes, you read it correctly! MvvmCross 6 has finally arrived and it is available 
 
 MvvmCross 6 comes with quite a lot of improvements, but this also means some things will break. We have prepared a migration guide that will help you do the transition real quick!
 
+### NuGet packages
+
+With MvvmCross 6 there are some changes to the NuGet packages. The following packages are obsolete and included in the main `MvvmCross` package:
+
+- MvvmCross.Core
+- MvvmCross.Platform
+- MvvmCross.Binding
+
+NuGet packages are now versioned using SemVer 2.0, meaning you need to use Visual Studio 2017 (15.3) and above or NuGet 4.3.0 and above.
+
+The MvvmCross.* namespace has been reserved on NuGet, meaning that plugin authors should move their plugins away from this package namespace. We are also planning on signing future releases.
+
 ### .NET Standard
 
 TBA
