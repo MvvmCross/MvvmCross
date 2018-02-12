@@ -4,20 +4,17 @@
 
 
 using MvvmCross.UI;
+using UapVisibility = Windows.UI.Xaml.Visibility;
 
 namespace MvvmCross.Plugin.Visibility.Platform.Uap
 {
     public class MvxWinRTVisibility : IMvxNativeVisibility
     {
-        #region Implementation of IMvxNativeVisibility
-
         public object ToNative(MvxVisibility visibility)
         {
             return visibility == MvxVisibility.Visible
-                       ? Windows.UI.Xaml.Visibility.Visible
-                       : Windows.UI.Xaml.Visibility.Collapsed;
+                       ? UapVisibility.Visible
+                       : UapVisibility.Collapsed;
         }
-
-        #endregion Implementation of IMvxNativeVisibility
     }
 }

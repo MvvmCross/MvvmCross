@@ -4,18 +4,18 @@
 
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Forms.Views;
 using MvvmCross.Localization;
 using System.Collections.Generic;
 using System.Reflection;
 using AppKit;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platform.Mac.Bindings;
-using MvvmCross.Forms.Platform.Mac.Views;
 using MvvmCross.Platform.Mac.Core;
 using MvvmCross.Platform.Mac.Presenters;
 using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
+using MvvmCross.Forms.Platform.Mac.Presenters;
+using MvvmCross.Forms.Presenters;
 
 namespace MvvmCross.Forms.Platform.Mac.Core
 {

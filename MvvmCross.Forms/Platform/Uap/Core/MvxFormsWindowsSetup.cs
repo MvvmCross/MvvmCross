@@ -4,13 +4,13 @@
 
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Forms.Views;
+using MvvmCross.Forms.Presenters;
 using System.Collections.Generic;
 using System.Reflection;
 using Windows.ApplicationModel.Activation;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platform.Uap.Bindings;
-using MvvmCross.Forms.Platform.Uap.Views;
+using MvvmCross.Forms.Platform.Uap.Presenters;
 using MvvmCross.Platform.Uap.Core;
 using MvvmCross.Platform.Uap.Views;
 using MvvmCross.Plugin;
