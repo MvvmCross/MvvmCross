@@ -41,11 +41,6 @@ namespace MvvmCross.Droid.Support.V4
 
         public List<MvxViewPagerFragmentInfo> FragmentsInfo { get; }
 
-        protected string FragmentJavaName(Type fragmentType)
-        {
-            return Class.FromType(fragmentType).Name;
-        }
-
         public override Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null)
         {
             var fragInfo = FragmentsInfo.ElementAt(position);
