@@ -77,7 +77,7 @@ namespace MvvmCross.Platform.Tvos.Views
 
         public virtual bool ShowChildView(UIViewController viewController)
         {
-            if (MoreNavigationController?.ViewControllers?.Any() ?? false) 
+            if (SelectedIndex > 5) // when more menu item is currently visible, selected index has value higher than 5
             {
                 MoreNavigationController.PushViewController(viewController, true);
                 return true;
@@ -97,7 +97,7 @@ namespace MvvmCross.Platform.Tvos.Views
 
         public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
         {
-            if (MoreNavigationController?.ViewControllers?.Any() ?? false)
+            if (SelectedIndex > 5 && MoreNavigationController?.ViewControllers?.Any() ?? false)
             {
                 var lastViewController = (MoreNavigationController.ViewControllers.Last()).GetIMvxTvosView();
 
