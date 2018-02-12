@@ -12,7 +12,6 @@ using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core;
-using MvvmCross.Platform.Tvos.Base.Platform;
 using MvvmCross.Platform.Tvos.Binding;
 using MvvmCross.Platform.Tvos.Presenters;
 using MvvmCross.Platform.Tvos.Views;

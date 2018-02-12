@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using Android.Content;
-using MvvmCross.Platform.Android.Base.Platform;
+using MvvmCross.Platform.Android;
 
 namespace MvvmCross.Plugin.Share.Platform.Android
 {

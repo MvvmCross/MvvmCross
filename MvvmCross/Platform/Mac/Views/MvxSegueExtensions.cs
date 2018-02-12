@@ -9,7 +9,7 @@ using AppKit;
 using Foundation;
 using System.Reflection;
 using MvvmCross.Core;
-using MvvmCross.Platform.Mac.Base.Views;
+using MvvmCross.Platform.Mac.Views.Base;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 

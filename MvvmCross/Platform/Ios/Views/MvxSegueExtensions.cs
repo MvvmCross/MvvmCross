@@ -8,7 +8,7 @@ using System.Linq;
 using System.Reflection;
 using Foundation;
 using MvvmCross.Core;
-using MvvmCross.Platform.Ios.Base.Views;
+using MvvmCross.Platform.Ios.Views.Base;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using UIKit;

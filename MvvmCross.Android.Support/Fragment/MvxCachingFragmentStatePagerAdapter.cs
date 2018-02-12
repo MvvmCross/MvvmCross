@@ -11,7 +11,7 @@ using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Java.Lang;
 using MvvmCross.Core;
-using MvvmCross.Platform.Android.Base.Platform;
+using MvvmCross.Platform.Android;
 using MvvmCross.Platform.Android.Presenters.Attributes;
 using MvvmCross.Platform.Android.Views;
 using MvvmCross.ViewModels;

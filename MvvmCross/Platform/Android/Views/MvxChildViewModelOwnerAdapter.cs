@@ -4,7 +4,7 @@
 
 using System;
 using MvvmCross.Exceptions;
-using MvvmCross.Platform.Android.Base.Views;
+using MvvmCross.Platform.Android.Views.Base;
 
 namespace MvvmCross.Platform.Android.Views
 {

@@ -16,8 +16,6 @@ using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core;
-using MvvmCross.Platform.Android.Base;
-using MvvmCross.Platform.Android.Base.Platform;
 using MvvmCross.Platform.Android.Binding;
 using MvvmCross.Platform.Android.Binding.Binders.ViewTypeResolvers;
 using MvvmCross.Platform.Android.Binding.Views;

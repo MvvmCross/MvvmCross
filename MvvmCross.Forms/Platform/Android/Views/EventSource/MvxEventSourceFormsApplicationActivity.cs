@@ -7,7 +7,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using MvvmCross.Base;
-using MvvmCross.Platform.Android.Base.Views;
+using MvvmCross.Platform.Android.Views.Base;
 using Xamarin.Forms.Platform.Android;
 
 namespace MvvmCross.Forms.Platform.Android.Views.EventSource
