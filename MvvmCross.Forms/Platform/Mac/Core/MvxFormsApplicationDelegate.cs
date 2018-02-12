@@ -4,7 +4,7 @@
 
 using System;
 using MvvmCross.Core;
-using MvvmCross.Forms.Views;
+using MvvmCross.Forms.Presenters;
 using MvvmCross.Platform.Mac.Core;
 using Xamarin.Forms.Platform.MacOS;
 
