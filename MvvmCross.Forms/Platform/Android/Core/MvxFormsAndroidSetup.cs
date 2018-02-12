@@ -5,18 +5,18 @@
 using Android.Content;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Forms.Views;
 using MvvmCross.Localization;
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platform.Android.Bindings;
-using MvvmCross.Forms.Platform.Android.Views;
 using MvvmCross.Platform.Android.Core;
 using MvvmCross.Platform.Android.Presenters;
 using MvvmCross.Plugins;
 using MvvmCross.ViewModels;
 using MvvmCross.Platform.Android;
+using MvvmCross.Forms.Presenters;
+using MvvmCross.Forms.Platform.Android.Presenters;
 
 namespace MvvmCross.Forms.Platform.Android.Core
 {
