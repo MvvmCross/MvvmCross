@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Logging;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Mac.Base.Views;
+using MvvmCross.Platform.Mac.Views.Base;
 
 namespace MvvmCross.Platform.Mac.Views
 {

@@ -16,6 +16,7 @@ using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Navigation.EventArguments;
 using MvvmCross.ViewModels;
+using MvvmCross.ViewModels.Hints;
 using MvvmCross.Views;
 
 namespace MvvmCross.Navigation
@@ -61,7 +62,7 @@ namespace MvvmCross.Navigation
             }
         }
 
-        protected bool TryGetRoute(string url, out KeyValuePair<Regex, Type> entry)
+        protected virtual bool TryGetRoute(string url, out KeyValuePair<Regex, Type> entry)
         {
             try
             {
@@ -101,7 +102,7 @@ namespace MvvmCross.Navigation
             }
         }
 
-        protected IDictionary<string, string> BuildParamDictionary(Regex regex, Match match)
+        protected virtual IDictionary<string, string> BuildParamDictionary(Regex regex, Match match)
         {
             var paramDict = new Dictionary<string, string>();
 
@@ -427,7 +428,7 @@ namespace MvvmCross.Navigation
             return await Navigate<TParameter, TResult>(request, viewModel, param, presentationBundle, cancellationToken).ConfigureAwait(false);
         }
 
-        public bool ChangePresentation(MvxPresentationHint hint)
+        public virtual Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
             MvxLog.Instance.Trace("Requesting presentation change");
             var args = new ChangePresentationEventArgs(hint);
@@ -438,7 +439,7 @@ namespace MvvmCross.Navigation
             args.Result = result;
             OnAfterChangePresentation(this, args);
 
-            return result;
+            return Task.FromResult(result);
         }
 
         public virtual Task<bool> Close(IMvxViewModel viewModel)

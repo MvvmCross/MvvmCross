@@ -8,7 +8,7 @@ using Android.Content;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Binding.Extensions;
 using MvvmCross.Platform.Android.Binding.BindingContext;
 using Object = Java.Lang.Object;
 

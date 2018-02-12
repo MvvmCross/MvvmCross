@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Foundation;
 using MvvmCross.Logging;
-using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Binding.Extensions;
 using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Binding.Views

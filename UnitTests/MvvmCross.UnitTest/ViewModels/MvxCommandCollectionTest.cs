@@ -5,6 +5,7 @@
 using System.ComponentModel;
 using System.Windows.Input;
 using MvvmCross.Base;
+using MvvmCross.Commands;
 using MvvmCross.Test;
 using MvvmCross.UnitTest.Mocks.Dispatchers;
 using MvvmCross.ViewModels;

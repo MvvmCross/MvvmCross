@@ -6,6 +6,7 @@ using System;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platform.Android.Presenters.Attributes;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 

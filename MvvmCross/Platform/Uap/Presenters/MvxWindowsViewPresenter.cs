@@ -11,6 +11,7 @@ using MvvmCross.Navigation;
 using MvvmCross.Platform.Uap.Presenters.Attributes;
 using MvvmCross.Platform.Uap.Views;
 using MvvmCross.ViewModels;
+using MvvmCross.Presenters;
 using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Uap.Presenters

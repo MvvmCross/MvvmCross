@@ -7,7 +7,6 @@ using Android.Content;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
-using MvvmCross.Platform.Android.Base.Platform;
 
 namespace MvvmCross.Platform.Android.Binding.Views
 {

@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Logging;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Tvos.Base.Views;
+using MvvmCross.Platform.Tvos.Views.Base;
 
 namespace MvvmCross.Platform.Tvos.Views
 {

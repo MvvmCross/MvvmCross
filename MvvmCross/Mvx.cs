@@ -174,7 +174,7 @@ namespace MvvmCross
                 };
             CallbackWhenRegistered<T>(simpleAction);
         }
-
+        
         public static void CallbackWhenRegistered<T>(Action action)
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;

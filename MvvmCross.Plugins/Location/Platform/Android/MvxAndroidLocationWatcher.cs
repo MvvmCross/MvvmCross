@@ -9,8 +9,7 @@ using Android.Locations;
 using Android.OS;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Android.Base;
-using MvvmCross.Platform.Android.Base.Platform;
+using MvvmCross.Platform.Android;
 
 namespace MvvmCross.Plugin.Location.Platform.Android
 {

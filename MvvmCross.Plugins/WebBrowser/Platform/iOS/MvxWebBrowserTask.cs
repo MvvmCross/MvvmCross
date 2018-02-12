@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using Foundation;
-using MvvmCross.Platform.Ios.Base.Platform;
+using MvvmCross.Platform.Ios;
 
 namespace MvvmCross.Plugin.WebBrowser.Platform.iOS
 {

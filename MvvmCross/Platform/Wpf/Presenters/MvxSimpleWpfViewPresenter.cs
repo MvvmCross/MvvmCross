@@ -9,6 +9,7 @@ using System.Linq;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
 using MvvmCross.Platform.Wpf.Views;
+using MvvmCross.ViewModels.Hints;
 
 namespace MvvmCross.Platform.Wpf.Presenters
 {

@@ -12,7 +12,7 @@ using MvvmCross.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
-using MvvmCross.Platform.Wpf.Base.Converters;
+using MvvmCross.Platform.Wpf.Converters;
 
 namespace MvvmCross.Platform.Wpf.Binding.WindowsBinding
 {

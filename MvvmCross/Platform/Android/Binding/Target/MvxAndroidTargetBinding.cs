@@ -6,7 +6,6 @@ using System;
 using Android.Runtime;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Platform.Android.Base;
 
 namespace MvvmCross.Platform.Android.Binding.Target
 {

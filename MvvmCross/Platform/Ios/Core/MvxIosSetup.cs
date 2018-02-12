@@ -12,13 +12,14 @@ using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core;
-using MvvmCross.Platform.Ios.Base.Platform;
+using MvvmCross.Platform.Ios;
 using MvvmCross.Platform.Ios.Binding;
 using MvvmCross.Platform.Ios.Presenters;
 using MvvmCross.Platform.Ios.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using UIKit;
+using MvvmCross.Presenters;
 
 namespace MvvmCross.Platform.Ios.Core
 {

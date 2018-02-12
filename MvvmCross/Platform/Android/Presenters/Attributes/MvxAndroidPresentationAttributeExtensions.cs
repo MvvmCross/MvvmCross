@@ -5,6 +5,7 @@
 using System;
 using System.Linq;
 using MvvmCross.Logging;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
