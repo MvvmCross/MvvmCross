@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Forms.Views;
-using MvvmCross.Forms.Views.Attributes;
+using MvvmCross.Forms.Presenters.Attributes;
 using Playground.Core.ViewModels;
 
 namespace Playground.Forms.UI.Pages

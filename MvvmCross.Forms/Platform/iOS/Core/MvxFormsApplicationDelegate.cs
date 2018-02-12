@@ -5,7 +5,7 @@
 using System;
 using Foundation;
 using MvvmCross.Core;
-using MvvmCross.Forms.Views;
+using MvvmCross.Forms.Presenters;
 using MvvmCross.Platform.Ios.Core;
 using UIKit;
 using Xamarin.Forms.Platform.iOS;
