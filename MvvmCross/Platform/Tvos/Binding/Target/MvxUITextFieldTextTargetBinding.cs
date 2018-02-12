@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
-using MvvmCross.Binding.ExtensionMethods;
+using MvvmCross.Binding.Extensions;
 using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Binding.Target

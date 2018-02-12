@@ -11,7 +11,7 @@ using MvvmCross.Logging;
 using MvvmCross.Platform.Tvos.Presenters.Attributes;
 using MvvmCross.Platform.Tvos.Views;
 using MvvmCross.ViewModels;
-using MvvmCross.Views;
+using MvvmCross.Presenters;
 using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Presenters

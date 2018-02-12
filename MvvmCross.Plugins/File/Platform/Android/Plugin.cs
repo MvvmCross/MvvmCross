@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Exceptions;
-using MvvmCross.Platform.Android.Base;
+using MvvmCross.Platform.Android;
 using MvvmCross.Plugin.File;
 
 namespace MvvmCross.Plugin.File.Platform.Android

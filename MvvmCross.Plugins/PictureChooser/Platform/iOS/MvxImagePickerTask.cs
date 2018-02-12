@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using CoreGraphics;
 using Foundation;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Ios.Base.Platform;
+using MvvmCross.Platform.Ios;
 using MvvmCross.Platform.Ios.Views;
 using UIKit;
 

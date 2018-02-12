@@ -7,6 +7,7 @@ using MvvmCross.Platform.Ios.Presenters.Attributes;
 using MvvmCross.Platform.Ios.Views;
 using MvvmCross.Plugin.Sidebar.Extensions;
 using MvvmCross.Plugin.Sidebar.Views;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using UIKit;

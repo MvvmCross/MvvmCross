@@ -5,7 +5,6 @@
 using System.Collections.Concurrent;
 using Android.App;
 using Android.OS;
-using MvvmCross.Platform.Android.Base.Platform;
 
 namespace MvvmCross.Platform.Android.Views
 {

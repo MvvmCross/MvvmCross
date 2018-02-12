@@ -6,7 +6,7 @@ using System;
 using Android.OS;
 using MvvmCross.Base;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Android.Base.Views;
+using MvvmCross.Platform.Android.Views.Base;
 using MvvmCross.Platform.Android.Binding.BindingContext;
 
 namespace MvvmCross.Platform.Android.Views

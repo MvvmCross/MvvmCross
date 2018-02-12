@@ -5,7 +5,7 @@
 using System;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Ios.Base.Views;
+using MvvmCross.Platform.Ios.Views.Base;
 using MvvmCross.ViewModels;
 using UIKit;
 

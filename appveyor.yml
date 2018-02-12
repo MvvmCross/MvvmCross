@@ -2,6 +2,7 @@
   branches:
       only:
         - master
+        - /release\/.*/
   version: 1.0.{build}
   image: Visual Studio 2017
   environment:
@@ -9,8 +10,10 @@
     NUGET_APIKEY:
       secure: odCUzBq+YWTrwvRhhuQZP1uldezh8PJRn79miIgZnZrDbruYkP9aoJAlTcat5AGh
   build_script:
-  - ps: .\build.ps1 -verbosity Diagnostic
+  - ps: .\build.ps1
   test: off
+  cache:
+  - packages -> **\packages.config
 -
   branches:
       only:
@@ -22,5 +25,7 @@
     NUGET_APIKEY:
       secure: m3uewWCh6Y5jqTZIfwMDfs8GWdbwTZjfiEl13AWY7T3u3bPspGA/lgwe8jdxjBm9
   build_script:
-  - ps: .\build.ps1 -verbosity Diagnostic
+  - ps: .\build.ps1
   test: off
+  cache:
+  - packages -> **\packages.config
