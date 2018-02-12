@@ -13,7 +13,7 @@ using MvvmCross.Forms.Platform.Uap.Bindings;
 using MvvmCross.Forms.Platform.Uap.Presenters;
 using MvvmCross.Platform.Uap.Core;
 using MvvmCross.Platform.Uap.Views;
-using MvvmCross.Plugins;
+using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
 using XamlControls = Windows.UI.Xaml.Controls;
 using MvvmCross.Platform.Uap.Presenters;

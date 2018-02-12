@@ -4,13 +4,12 @@
 
 using System;
 using MvvmCross.Exceptions;
-using MvvmCross.Plugins;
 
 namespace MvvmCross.Plugin.File.Platform.iOS
 {
+    [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public class Plugin
-        : IMvxConfigurablePlugin
+    public class Plugin : IMvxConfigurablePlugin
     {
         private MvxFileConfiguration _configuration;
         private MvxFileConfiguration Configuration => _configuration ?? new MvxFileConfiguration(

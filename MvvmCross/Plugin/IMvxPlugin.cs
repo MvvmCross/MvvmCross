@@ -2,12 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Logging;
-
-namespace MvvmCross.Plugin.Accelerometer
+namespace MvvmCross.Plugin
 {
-    internal static class MvxAndroidLog
+    public interface IMvxPlugin
     {
-        internal static IMvxLog Instance { get; } = Mvx.Resolve<IMvxLogProvider>().GetLogFor("MvxAndroid");
+        void Load();
     }
 }

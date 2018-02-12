@@ -2,15 +2,13 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-
-using MvvmCross.Plugins;
 using MvvmCross.UI;
 
 namespace MvvmCross.Plugin.Visibility.Platform.iOS
 {
+    [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public class Plugin
-        : IMvxPlugin
+    public class Plugin : IMvxPlugin
     {
         public void Load()
         {

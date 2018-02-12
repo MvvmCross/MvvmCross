@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Converters;
 using MvvmCross.Exceptions;
-using MvvmCross.Plugins;
+using MvvmCross.Plugin;
 using MvvmCross.Core;
 using MvvmCross.Platform.Uap.Binding;
 using MvvmCross.Platform.Uap.Presenters;
@@ -68,11 +68,6 @@ namespace MvvmCross.Platform.Uap.Core
         protected virtual IMvxSuspensionManager CreateSuspensionManager()
         {
             return new MvxSuspensionManager();
-        }
-
-        protected override IMvxPluginManager CreatePluginManager()
-        {
-            return new MvxFilePluginManager(new List<string>() { ".Uwp", ".WindowsCommon" });
         }
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()

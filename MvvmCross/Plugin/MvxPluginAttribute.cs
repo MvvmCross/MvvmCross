@@ -2,10 +2,12 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-namespace MvvmCross.Plugins
+using System;
+
+namespace MvvmCross.Plugin
 {
-    public interface IMvxPlugin
+    [AttributeUsage(AttributeTargets.Class)]
+    public sealed class MvxPluginAttribute : Attribute
     {
-        void Load();
     }
 }

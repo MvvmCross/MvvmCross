@@ -6,12 +6,11 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using MvvmCross.Platform;
-using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugin.Email.Platform.Wpf
 {
-    public class Plugin
-        : IMvxPlugin
+    [MvxPlugin]
+    public class Plugin : IMvxPlugin
     {
         public void Load()
         {

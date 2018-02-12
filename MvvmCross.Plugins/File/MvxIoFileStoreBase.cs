@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 
-namespace MvvmCross.Plugin.File.HackFileShare
+namespace MvvmCross.Plugin.File
 {
-    public class MvxIoFileStoreBase
-        : MvxFileStoreBase
+    public class MvxIoFileStoreBase : MvxFileStoreBase
     {
         #region IMvxFileStore Members
 

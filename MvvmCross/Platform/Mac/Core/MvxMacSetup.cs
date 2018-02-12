@@ -8,7 +8,7 @@ using System.Reflection;
 
 using AppKit;
 using MvvmCross.Converters;
-using MvvmCross.Plugins;
+using MvvmCross.Plugin;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
@@ -54,11 +54,6 @@ namespace MvvmCross.Platform.Mac.Core
         protected IMvxApplicationDelegate ApplicationDelegate
         {
             get { return _applicationDelegate; }
-        }
-
-        protected override IMvxPluginManager CreatePluginManager()
-        {
-            return new MvxPluginManager();
         }
 
         protected override IMvxNameMapping CreateViewToViewModelNaming()
