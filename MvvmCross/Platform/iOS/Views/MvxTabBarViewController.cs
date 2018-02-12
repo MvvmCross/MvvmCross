@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Platform.Ios.Presenters;
 using MvvmCross.Platform.Ios.Presenters.Attributes;
-using MvvmCross.iOS.Views;
 using MvvmCross.ViewModels;
 using UIKit;
 
