@@ -3,12 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Base;
-using MvvmCross.Plugins;
+using MvvmCross.Plugin;
 
 namespace MvvmCross.Plugin.ResourceLoader.Platform.Wpf
 {
-    public class Plugin
-        : IMvxPlugin
+    [MvxPlugin]
+    public class Plugin : IMvxPlugin
     {
         public void Load()
         {

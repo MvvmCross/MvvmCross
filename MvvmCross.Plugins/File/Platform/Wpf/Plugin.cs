@@ -6,13 +6,12 @@ using System;
 using System.IO;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Plugin.File.HackFileShare;
-using MvvmCross.Plugins;
+using MvvmCross.Plugin.File;
 
 namespace MvvmCross.Plugin.File.Platform.Wpf
 {
-    public class Plugin
-        : IMvxConfigurablePlugin
+    [MvxPlugin]
+    public class Plugin : IMvxConfigurablePlugin
     {
         private MvxFileConfiguration _configuration;
         private MvxFileConfiguration Configuration => _configuration ?? new MvxFileConfiguration(

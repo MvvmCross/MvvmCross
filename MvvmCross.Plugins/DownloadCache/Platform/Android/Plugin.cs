@@ -5,13 +5,12 @@
 using Android.Graphics;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
-using MvvmCross.Plugins;
 
 namespace MvvmCross.Plugin.DownloadCache.Platform.Android
 {
+    [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public class Plugin
-        : IMvxConfigurablePlugin
+    public class Plugin : IMvxConfigurablePlugin
     {
         private MvxDownloadCacheConfiguration _configuration;
 

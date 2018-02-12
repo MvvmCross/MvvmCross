@@ -13,7 +13,7 @@ using MvvmCross.IoC;
 using MvvmCross.Logging;
 using MvvmCross.Logging.LogProviders;
 using MvvmCross.Navigation;
-using MvvmCross.Plugins;
+using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
@@ -247,26 +247,51 @@ namespace MvvmCross.Core
         protected virtual IMvxPluginManager InitializePluginFramework()
         {
             var pluginManager = CreatePluginManager();
-            AddPluginsLoaders(pluginManager.Registry);
-            pluginManager.ConfigurationSource = GetPluginConfiguration;
             Mvx.RegisterSingleton(pluginManager);
             LoadPlugins(pluginManager);
             return pluginManager;
         }
 
-        protected virtual void AddPluginsLoaders(MvxLoaderPluginRegistry registry)
-        {
-        }
-
-        protected abstract IMvxPluginManager CreatePluginManager();
+        protected virtual IMvxPluginManager CreatePluginManager()
+            => new MvxPluginManager(GetPluginConfiguration);
 
         protected virtual IMvxPluginConfiguration GetPluginConfiguration(Type plugin)
         {
             return null;
         }
 
+        public virtual IEnumerable<Assembly> GetPluginAssemblies()
+        {
+            var mvvmCrossAssemblyName = typeof(MvxPluginAttribute).Assembly.GetName().Name;
+
+            var pluginAssemblies =
+                AppDomain.CurrentDomain
+                    .GetAssemblies()
+                    .AsParallel()
+                    .Where(AssemblyReferencesMvvmCross);
+
+            return pluginAssemblies;
+
+            bool AssemblyReferencesMvvmCross(Assembly assembly)
+                => assembly.GetReferencedAssemblies().Any(a => a.Name == mvvmCrossAssemblyName);
+        }
+
         public virtual void LoadPlugins(IMvxPluginManager pluginManager)
         {
+            var pluginAttribute = typeof(MvxPluginAttribute);
+
+            var pluginTypes =
+                GetPluginAssemblies()
+                    .SelectMany(assembly => assembly.GetTypes())
+                    .Where(TypeContainsPluginAttribute);
+
+            foreach (var pluginType in pluginTypes)
+            {
+                pluginManager.EnsurePluginLoaded(pluginType);
+            }
+
+            bool TypeContainsPluginAttribute(Type type)
+                => (type.GetCustomAttributes(pluginAttribute, false)?.Length ?? 0) > 0;
         }
 
         protected virtual void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
