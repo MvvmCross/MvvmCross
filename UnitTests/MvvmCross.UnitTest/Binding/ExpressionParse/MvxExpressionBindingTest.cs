@@ -456,7 +456,7 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
 
             action(testTarget);
 
-            Assert.Equal(1, callbacksSeen.Count);
+            Assert.Single(callbacksSeen);
             var callback = callbacksSeen[0];
             var expectedTarget = findTargetObjectFunc(testTarget);
             Assert.Equal(expectedTarget, callback.Target);

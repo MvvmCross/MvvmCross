@@ -345,7 +345,7 @@ namespace MvvmCross.UnitTest.Base
             Mvx.TryResolve<IOG<C2>>(out toResolve);
 
             Assert.NotNull(toResolve);
-            Assert.True(toResolve.GetType().GetTypeInfo().ImplementedInterfaces.Any(i => i == typeof(IOG<C2>)));
+            Assert.Contains(toResolve.GetType().GetTypeInfo().ImplementedInterfaces, i => i == typeof(IOG<C2>));
             Assert.True(toResolve.GetType() == typeof(OG<C2>));
         }
 
@@ -361,7 +361,7 @@ namespace MvvmCross.UnitTest.Base
             Mvx.TryResolve<IOG<C2>>(out toResolve);
 
             Assert.NotNull(toResolve);
-            Assert.True(toResolve.GetType().GetTypeInfo().ImplementedInterfaces.Any(i => i == typeof(IOG<C2>)));
+            Assert.Contains(toResolve.GetType().GetTypeInfo().ImplementedInterfaces, i => i == typeof(IOG<C2>));
             Assert.True(toResolve.GetType() == typeof(OG<C2>));
         }
 
@@ -377,7 +377,7 @@ namespace MvvmCross.UnitTest.Base
             Mvx.TryResolve<IOG2<C2,C>>(out toResolve);
 
             Assert.NotNull(toResolve);
-            Assert.True(toResolve.GetType().GetTypeInfo().ImplementedInterfaces.Any(i => i == typeof(IOG2<C2, C>)));
+            Assert.Contains(toResolve.GetType().GetTypeInfo().ImplementedInterfaces, i => i == typeof(IOG2<C2, C>));
             Assert.True(toResolve.GetType() == typeof(OG2<C2, C>));
         }
 
@@ -393,7 +393,7 @@ namespace MvvmCross.UnitTest.Base
             Mvx.TryResolve<IOG2<C2, C>>(out toResolve);
 
             Assert.NotNull(toResolve);
-            Assert.True(toResolve.GetType().GetTypeInfo().ImplementedInterfaces.Any(i => i == typeof(IOG2<C2, C>)));
+            Assert.Contains(toResolve.GetType().GetTypeInfo().ImplementedInterfaces, i => i == typeof(IOG2<C2, C>));
             Assert.True(toResolve.GetType() == typeof(OG2<C2, C>));
         }
 
@@ -424,9 +424,9 @@ namespace MvvmCross.UnitTest.Base
             Mvx.TryResolve<IHasOGParameter>(out toResolve);
 
             Assert.NotNull(toResolve);
-            Assert.True(toResolve.GetType().GetTypeInfo().ImplementedInterfaces.Any(i => i == typeof(IHasOGParameter)));
+            Assert.Contains(toResolve.GetType().GetTypeInfo().ImplementedInterfaces, i => i == typeof(IHasOGParameter));
             Assert.True(toResolve.GetType() == typeof(HasOGParameter));
-            Assert.True(toResolve.OpenGeneric.GetType().GetTypeInfo().ImplementedInterfaces.Any(i => i == typeof(IOG<C>)));
+            Assert.Contains(toResolve.OpenGeneric.GetType().GetTypeInfo().ImplementedInterfaces, i => i == typeof(IOG<C>));
             Assert.True(toResolve.OpenGeneric.GetType() == typeof(OG<C>));
         }
 

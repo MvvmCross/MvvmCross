@@ -476,30 +476,16 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
             PerformTest(text, expected);
         }
 
-        [Fact]
-        public void TestFunctionalValueConverterWithNullInTheName()
-        {
-            TestFunctionalValueConverterWithKEYWORDInTheName("Null");
-            TestFunctionalValueConverterWithKEYWORDInTheName("null");
-            TestFunctionalValueConverterWithKEYWORDInTheName("NULL");
-        }
-
-        [Fact]
-        public void TestFunctionalValueConverterWithTrueInTheName()
-        {
-            TestFunctionalValueConverterWithKEYWORDInTheName("True");
-            TestFunctionalValueConverterWithKEYWORDInTheName("true");
-            TestFunctionalValueConverterWithKEYWORDInTheName("TRUE");
-        }
-
-        [Fact]
-        public void TestFunctionalValueConverterWithFalseInTheName()
-        {
-            TestFunctionalValueConverterWithKEYWORDInTheName("False");
-            TestFunctionalValueConverterWithKEYWORDInTheName("false");
-            TestFunctionalValueConverterWithKEYWORDInTheName("FALSE");
-        }
-
+        [Theory]
+        [InlineData("Null")]
+        [InlineData("null")]
+        [InlineData("NULL")]
+        [InlineData("True")]
+        [InlineData("true")]
+        [InlineData("TRUE")]
+        [InlineData("False")]
+        [InlineData("false")]
+        [InlineData("FALSE")]
         public void TestFunctionalValueConverterWithKEYWORDInTheName(string keyword)
         {
             var text = "Target " + keyword + "This(Foo, 'Hello World')";

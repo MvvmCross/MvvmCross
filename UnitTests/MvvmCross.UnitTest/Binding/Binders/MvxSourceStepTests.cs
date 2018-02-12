@@ -277,7 +277,7 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             source.DoubleProperty1 = doubleProperty = 11.11;
 
-            Assert.Equal(1, changes.Count);
+            Assert.Single(changes);
             Assert.Equal($"{doubleProperty}It was missing", changes[0]);
 
             value = sourceStep.GetValue();
@@ -343,7 +343,7 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             source.DoubleProperty1 = doubleProperty = 11.11;
 
-            Assert.Equal(1, changes.Count);
+            Assert.Single(changes);
             Assert.Equal($"It was missing{doubleProperty}", changes[0]);
 
             value = sourceStep.GetValue();
@@ -407,7 +407,7 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             source.DoubleProperty1 = 11.11;
 
-            Assert.Equal(1, changes.Count);
+            Assert.Single(changes);
             Assert.Equal(34.56, changes[0]);
 
             value = sourceStep.GetValue();
@@ -449,7 +449,7 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             source.Collection[0] = "Changed to 17";
 
-            Assert.Equal(1, changes.Count);
+            Assert.Single(changes);
             Assert.Equal("Changed to 17", changes[0]);
 
             value = sourceStep.GetValue();
@@ -462,11 +462,11 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             source.Collection[0] = "Changed again 19";
 
-            Assert.Equal(1, changes.Count);
+            Assert.Single(changes);
 
             sourceStep.DataContext = source;
 
-            Assert.Equal(1, changes.Count);
+            Assert.Single(changes);
 
             value = sourceStep.GetValue();
             Assert.Equal("Changed again 19", value);
@@ -550,7 +550,7 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             source.Property1 = "Changed to 17";
 
-            Assert.Equal(1, changes.Count);
+            Assert.Single(changes);
             Assert.Equal("Changed to 17", changes[0]);
 
             value = sourceStep.GetValue();
@@ -563,11 +563,11 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             source.Property1 = "Changed again 19";
 
-            Assert.Equal(1, changes.Count);
+            Assert.Single(changes);
 
             sourceStep.DataContext = source;
 
-            Assert.Equal(1, changes.Count);
+            Assert.Single(changes);
 
             value = sourceStep.GetValue();
             Assert.Equal("Changed again 19", value);
@@ -750,7 +750,7 @@ namespace MvvmCross.UnitTest.Binding.Binders
 
             source.SubSource.SubProperty1 = "Changed to 17";
 
-            Assert.Equal(1, changes.Count);
+            Assert.Single(changes);
             Assert.Equal("Changed to 17", changes[0]);
 
             value = sourceStep.GetValue();

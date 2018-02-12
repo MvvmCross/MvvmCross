@@ -37,7 +37,7 @@ namespace MvvmCross.Plugins.Network.UnitTest
             Assert.NotNull(theResponse.Result);
             Assert.Equal(HttpStatusCode.OK, theResponse.StatusCode);
             Assert.True(theResponse.Result.items.Count == 10);
-            Assert.True(theResponse.Result.items[0].ToString().Contains("MonoTouch"));
+            Assert.Contains("MonoTouch", theResponse.Result.items[0].ToString());
         }
     }
 }
