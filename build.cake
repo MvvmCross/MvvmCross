@@ -203,10 +203,13 @@ RunTarget(target);
 
 bool IsMasterOrReleases()
 {
-    if (StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "master"))
+    var branchName = versionInfo.BranchName;
+    
+    if (StringComparer.OrdinalIgnoreCase.Equals(branchName, "master"))
         return true;
 
-    if (versionInfo.BranchName.Contains("releases/"))
+    if (branchName.StartsWith("release/", StringComparison.OrdinalIgnoreCase) ||
+        branchName.StartsWith("releases/", StringComparison.OrdinalIgnoreCase))
         return true;
 
     return false;
