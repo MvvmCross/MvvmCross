@@ -19,7 +19,6 @@ namespace Playground.Droid.Views
     [Register(nameof(SplitMasterView))]
     public class SplitMasterView : MvxFragment<SplitMasterViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {
-        private NavigationView navigationView;
         private IMenuItem previousMenuItem;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
