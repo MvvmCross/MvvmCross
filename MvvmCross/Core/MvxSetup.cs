@@ -259,21 +259,35 @@ namespace MvvmCross.Core
             return null;
         }
 
+        public virtual IEnumerable<Assembly> GetPluginAssemblies()
+        {
+            var mvvmCrossAssemblyName = typeof(MvxPluginAttribute).Assembly.GetName().Name;
+
+            var pluginAssemblies =
+                AppDomain.CurrentDomain
+                    .GetAssemblies()
+                    .AsParallel()
+                    .Where(AssemblyReferencesMvvmCross);
+
+            return pluginAssemblies;
+
+            bool AssemblyReferencesMvvmCross(Assembly assembly)
+                => assembly.GetReferencedAssemblies().Any(a => a.Name == mvvmCrossAssemblyName);
+        }
+
         public virtual void LoadPlugins(IMvxPluginManager pluginManager)
         {
             var pluginAttribute = typeof(MvxPluginAttribute);
-            var mvvmCrossAssemblyName = pluginAttribute.Assembly.GetName().Name;
 
-            AppDomain.CurrentDomain
-                .GetAssemblies()
-                .AsParallel()
-                .Where(AssemblyReferencesMvvmCross)
-                .SelectMany(assembly => assembly.GetTypes())
-                .Where(TypeContainsPluginAttribute)
-                .ForAll(pluginManager.EnsurePluginLoaded);
+            var pluginTypes =
+                GetPluginAssemblies()
+                    .SelectMany(assembly => assembly.GetTypes())
+                    .Where(TypeContainsPluginAttribute);
 
-            bool AssemblyReferencesMvvmCross(Assembly assembly)
-                => assembly.GetReferencedAssemblies().All(a => a.Name == mvvmCrossAssemblyName);
+            foreach (var pluginType in pluginTypes)
+            {
+                pluginManager.EnsurePluginLoaded(pluginType);
+            }
 
             bool TypeContainsPluginAttribute(Type type)
                 => (type.GetCustomAttributes(pluginAttribute, false)?.Length ?? 0) > 0;
