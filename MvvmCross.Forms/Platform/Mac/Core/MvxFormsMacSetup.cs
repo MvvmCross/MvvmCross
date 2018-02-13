@@ -16,13 +16,14 @@ using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
 using MvvmCross.Forms.Platform.Mac.Presenters;
 using MvvmCross.Forms.Presenters;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platform.Mac.Core
 {
     public abstract class MvxFormsMacSetup : MvxMacSetup
     {
         private List<Assembly> _viewAssemblies;
-        private MvxFormsApplication _formsApplication;
+        private Application _formsApplication;
 
         protected MvxFormsMacSetup(IMvxApplicationDelegate applicationDelegate, NSWindow window)
             : base(applicationDelegate, window)
@@ -50,7 +51,7 @@ namespace MvvmCross.Forms.Platform.Mac.Core
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public MvxFormsApplication FormsApplication
+        public Application FormsApplication
         {
             get
             {
@@ -64,7 +65,7 @@ namespace MvvmCross.Forms.Platform.Mac.Core
             }
         }
 
-        protected abstract MvxFormsApplication CreateFormsApplication();
+        protected abstract Application CreateFormsApplication();
 
         protected override IMvxMacViewPresenter CreateViewPresenter()
         {
