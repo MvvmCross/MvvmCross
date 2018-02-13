@@ -48,7 +48,7 @@ namespace MvvmCross.UnitTest.Core
                 SetupUnderTest.Object.LoadPlugins(PluginManager.Object);
 
                 PluginManager
-                    .Verify(manager => manager.EnsurePluginLoaded(It.IsAny<Type>()), Times.Exactly(6));
+                    .Verify(manager => manager.EnsurePluginLoaded(It.IsAny<Type>(), It.IsAny<bool>()), Times.Exactly(10));
             }
         }
     }

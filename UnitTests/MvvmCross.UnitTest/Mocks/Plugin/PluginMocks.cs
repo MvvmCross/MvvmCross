@@ -67,4 +67,48 @@ namespace MvvmCross.UnitTest.Mocks.Plugin
             LoadCount++;
         }
     }
+
+    [MvxPlugin]
+    public class PluginMock7 : IMvxPlugin
+    {
+        public static int LoadCount { get; private set; }
+
+        public void Load()
+        {
+            LoadCount++;
+        }
+    }
+
+    [MvxPlugin]
+    public class PluginMock8 : IMvxPlugin
+    {
+        public static int LoadCount { get; private set; }
+
+        public void Load()
+        {
+            LoadCount++;
+        }
+    }
+
+    [MvxPlugin]
+    public class PluginMock9 : IMvxPlugin
+    {
+        public static int LoadCount { get; private set; }
+
+        public void Load()
+        {
+            LoadCount++;
+        }
+    }
+
+    [MvxPlugin]
+    public class PluginMock10 : IMvxPlugin
+    {
+        public static int LoadCount { get; private set; }
+
+        public void Load()
+        {
+            LoadCount++;
+        }
+    }
 }

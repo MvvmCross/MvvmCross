@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using MvvmCross.Exceptions;
 using MvvmCross.Plugin;
 using MvvmCross.Test;
@@ -47,13 +48,24 @@ namespace MvvmCross.UnitTest.Plugin
             }
 
             [Fact]
+            public void CallsLoadTwiceIfYouPassTheForceLoadParameter()
+            {
+                var type = typeof(PluginMock7);
+
+                PluginManager.EnsurePluginLoaded(type);
+                PluginManager.EnsurePluginLoaded(type, true);
+
+                Assert.Equal(PluginMock7.LoadCount, 2);
+            }
+
+            [Fact]
             public void ThrowsIfTheTypeIsNotAValidIMvxPlugin()
             {
                 var type = typeof(Int32);
 
                 Action callingEnsurePluginLoadedWithInvalidType =
-                    () =>  PluginManager.EnsurePluginLoaded(type);
-                
+                    () => PluginManager.EnsurePluginLoaded(type);
+
                 Assert.Throws<MvxException>(callingEnsurePluginLoadedWithInvalidType);
             }
         }
@@ -105,6 +117,17 @@ namespace MvvmCross.UnitTest.Plugin
             }
 
             [Fact]
+            public void CallsLoadTwiceIfYouPassTheForceLoadParameter()
+            {
+                var type = typeof(PluginMock8);
+
+                PluginManager.TryEnsurePluginLoaded(type);
+                PluginManager.TryEnsurePluginLoaded(type, true);
+
+                Assert.Equal(PluginMock8.LoadCount, 2);
+            }
+
+            [Fact]
             public void DoesNotThrowsIfTheTypeIsNotAValidIMvxPlugin()
             {
                 var type = typeof(Int32);
@@ -112,6 +135,21 @@ namespace MvvmCross.UnitTest.Plugin
                 var isLoaded = PluginManager.TryEnsurePluginLoaded(type);
 
                 Assert.False(isLoaded);
+            }
+        }
+
+        public class TheLoadedPluginsProperty : MvxPluginManagerTest
+        {
+            [Fact]
+            public void ReturnsAListOfAllLoadedPlugins()
+            {
+                var typesToLoad = new[] { typeof(PluginMock9), typeof(PluginMock10) };
+                foreach (var type in typesToLoad)
+                {
+                    PluginManager.EnsurePluginLoaded(type);
+                }
+
+                Assert.Equal(PluginManager.LoadedPlugins.Count(), 2);
             }
         }
     }
