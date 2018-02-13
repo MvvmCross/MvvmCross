@@ -37,8 +37,8 @@ namespace MvvmCross.Forms.Presenters
 
         protected IMvxFormsViewPresenter PlatformPresenter { get; }
 
-        private MvxFormsApplication _formsApplication;
-        public MvxFormsApplication FormsApplication
+        private Application _formsApplication;
+        public Application FormsApplication
         {
             get { return _formsApplication; }
             set { _formsApplication = value; }
