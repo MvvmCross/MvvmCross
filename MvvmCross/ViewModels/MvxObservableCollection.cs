@@ -84,6 +84,7 @@ namespace MvvmCross.ViewModels
                 throw new ArgumentNullException(nameof(items));
             }
 
+            int startingIndex = this.Items.Count;
             var itemsList = items.ToList();
             using (SuppressEvents())
             {
@@ -93,7 +94,7 @@ namespace MvvmCross.ViewModels
                 }
             }
 
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, itemsList,this.Items.Count));
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, itemsList, startingIndex));
         }
 
         /// <summary>
