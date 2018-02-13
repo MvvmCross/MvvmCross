@@ -15,6 +15,7 @@ namespace MvvmCross.UnitTest.ViewModels
         public MvxObservableCollectionTest(MvxTestFixture fixture)
         {
             _fixture = fixture;
+            _fixture.ClearAll();
             _fixture.Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(new DummyDispatcher());
         }
 
@@ -96,6 +97,26 @@ namespace MvvmCross.UnitTest.ViewModels
         {
             var collection = new MvxObservableCollection<string>();
             Assert.Throws<ArgumentNullException>(() => collection.AddRange(null));
+        }
+
+        [Theory]
+        [InlineData(-1, 0, new [] { "foo" })]
+        [InlineData(0, 4, new[] { "foo", "bar", "baz" })]
+        [InlineData(0, 0, new[] { "foo" })]
+        [InlineData(0, -1, new[] { "foo" })]
+        public void RemoveRangeThrowsArgumentOutOfRangeTest(int start, int count, string[] items)
+        {
+            var collection = new MvxObservableCollection<string>(items);
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => collection.RemoveRange(start, count));
+        }
+
+        [Fact]
+        public void RemoveItemThrowsArgumentNullTest()
+        {
+            var collection = new MvxObservableCollection<string>(new[] { "foo" });
+
+            Assert.Throws<ArgumentNullException>(() => collection.RemoveItems(null));
         }
     }
 }
