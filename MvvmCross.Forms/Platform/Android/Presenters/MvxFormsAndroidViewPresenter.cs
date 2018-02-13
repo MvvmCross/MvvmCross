@@ -11,19 +11,20 @@ using MvvmCross.Forms.Core;
 using MvvmCross.Platform.Android.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Forms.Platform.Android.Views;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platform.Android.Presenters
 {
     public class MvxFormsAndroidViewPresenter
         : MvxAppCompatViewPresenter, IMvxFormsViewPresenter
     {
-        public MvxFormsAndroidViewPresenter(IEnumerable<Assembly> androidViewAssemblies, MvxFormsApplication formsApplication) : base(androidViewAssemblies)
+        public MvxFormsAndroidViewPresenter(IEnumerable<Assembly> androidViewAssemblies, Application formsApplication) : base(androidViewAssemblies)
         {
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
         }
 
-        private MvxFormsApplication _formsApplication;
-        public MvxFormsApplication FormsApplication
+        private Application _formsApplication;
+        public Application FormsApplication
         {
             get { return _formsApplication; }
             set { _formsApplication = value; }
