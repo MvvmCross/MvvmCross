@@ -1,8 +1,8 @@
-﻿<Application
-    x:Class="Playground.Uwp.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Playground.Uwp"
-    RequestedTheme="Light">
+﻿<mvx:MvxBaseApplication x:Class="Playground.Uwp.App"
+                        xmlns:mvx="clr-namespace:MvvmCross.Platform.Uap.Views;assembly=MvvmCross"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:local="using:Playground.Uwp"
+                        RequestedTheme="Light">
 
-</Application>
+</mvx:MvxBaseApplication>
