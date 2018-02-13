@@ -10,14 +10,9 @@ namespace MvvmCross.Plugin.MethodBinding
     [Preserve(AllMembers = true)]
     public class Plugin : IMvxPlugin
     {
-        private bool _loaded;
-
         public void Load()
         {
-            if (_loaded) return;
-
             Mvx.CallbackWhenRegistered<IMvxSourceBindingFactoryExtensionHost>(OnHostRegistered);
-            _loaded = true;
         }
 
         private void OnHostRegistered(IMvxSourceBindingFactoryExtensionHost host)

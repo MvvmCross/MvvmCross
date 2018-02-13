@@ -7,14 +7,9 @@ namespace MvvmCross.Plugin.Messenger
     [Preserve(AllMembers = true)]
     public class Plugin : IMvxPlugin
     {
-        private bool _loaded;
-
         public void Load()
         {
-            if (_loaded) return;
-
             Mvx.RegisterSingleton<IMvxMessenger>(new MvxMessengerHub());
-            _loaded = true;
         }
     }
 }
