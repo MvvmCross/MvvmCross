@@ -12,15 +12,10 @@ namespace MvvmCross.Plugin.Json
     [Preserve(AllMembers = true)]
     public class Plugin : IMvxConfigurablePlugin
     {
-        private bool _loaded;
         private MvxJsonConfiguration _configuration;
 
         public void Load()
         {
-            if (_loaded)
-                return;
-
-            _loaded = true;
             Mvx.RegisterType<IMvxJsonConverter, MvxJsonConverter>();
             var configuration = _configuration ?? MvxJsonConfiguration.Default;
 
@@ -32,12 +27,6 @@ namespace MvvmCross.Plugin.Json
 
         public void Configure(IMvxPluginConfiguration configuration)
         {
-            if (_loaded)
-            {
-                MvxPluginLog.Instance.Error("Error - Configure called for Json Plugin after the plugin is already loaded");
-                return;
-            }
-
             if (configuration != null && !(configuration is MvxJsonConfiguration))
             {
                 throw new MvxException("You must configure the Json plugin with MvxJsonConfiguration - but supplied {0}", configuration.GetType().Name);
