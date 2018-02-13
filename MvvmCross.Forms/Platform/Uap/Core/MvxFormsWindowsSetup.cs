@@ -18,13 +18,14 @@ using MvvmCross.ViewModels;
 using XamlControls = Windows.UI.Xaml.Controls;
 using MvvmCross.Platform.Uap.Presenters;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platform.Uap.Core
 {
     public abstract class MvxFormsWindowsSetup : MvxWindowsSetup
     {
         private List<Assembly> _viewAssemblies;
-        private MvxFormsApplication _formsApplication;
+        private Application _formsApplication;
 
         protected MvxFormsWindowsSetup(XamlControls.Frame rootFrame, IActivatedEventArgs activatedEventArgs, string suspensionManagerSessionStateKey = null)
             : base(rootFrame, activatedEventArgs, suspensionManagerSessionStateKey)
@@ -47,7 +48,7 @@ namespace MvvmCross.Forms.Platform.Uap.Core
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public MvxFormsApplication FormsApplication
+        public Application FormsApplication
         {
             get
             {
@@ -60,7 +61,7 @@ namespace MvvmCross.Forms.Platform.Uap.Core
             }
         }
 
-        protected abstract MvxFormsApplication CreateFormsApplication();
+        protected abstract Application CreateFormsApplication();
 
         protected override IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
         {

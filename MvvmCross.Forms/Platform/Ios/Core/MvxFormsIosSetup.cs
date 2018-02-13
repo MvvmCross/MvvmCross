@@ -16,13 +16,14 @@ using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
 using UIKit;
 using MvvmCross.Forms.Platform.Ios.Presenters;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platform.Ios.Core
 {
     public abstract class MvxFormsIosSetup : MvxIosSetup
     {
         private List<Assembly> _viewAssemblies;
-        private MvxFormsApplication _formsApplication;
+        private Application _formsApplication;
 
         protected MvxFormsIosSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
@@ -50,7 +51,7 @@ namespace MvvmCross.Forms.Platform.Ios.Core
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public MvxFormsApplication FormsApplication
+        public Application FormsApplication
         {
             get
             {
@@ -64,7 +65,7 @@ namespace MvvmCross.Forms.Platform.Ios.Core
             }
         }
 
-        protected abstract MvxFormsApplication CreateFormsApplication();
+        protected abstract Application CreateFormsApplication();
 
         protected override IMvxIosViewPresenter CreateViewPresenter()
         {
