@@ -11,11 +11,11 @@ using Windows.UI.Xaml.Navigation;
 
 namespace MvvmCross.Platform.Uap.Views
 {
-    public abstract class MvxBaseApplication: Application
+    public abstract class MvxApplication: Application
     {
-        protected MvxWindowsSetup InternalSetup { get; set; }
+        protected MvxWindowsSetup Setup { get; set; }
 
-        public MvxBaseApplication()
+        public MvxApplication()
         {
             Suspending += OnSuspending;
             Resuming += OnResuming;
@@ -33,7 +33,7 @@ namespace MvvmCross.Platform.Uap.Views
             var rootFrame = InitializeFrame(e);
 
             if (e.PrelaunchActivated == false) {
-                Setup(rootFrame);
+                StartSetup(rootFrame, e);
             }
 
             Window.Current.Activate();
@@ -45,20 +45,22 @@ namespace MvvmCross.Platform.Uap.Views
 
             var rootFrame = InitializeFrame(e);
 
-            Setup(rootFrame);
+            StartSetup(rootFrame, e);
 
             Window.Current.Activate();
         }
 
-        protected abstract MvxWindowsSetup CreateSetup(Frame rootFrame, string suspension);
+        protected abstract MvxWindowsSetup CreateSetup(Frame rootFrame, IActivatedEventArgs e, string suspension);
 
-        protected virtual void Setup(Frame rootFrame)
+        protected virtual void StartSetup(Frame rootFrame, IActivatedEventArgs e)
         {
             if (rootFrame.Content == null) {
-                InternalSetup = CreateSetup(rootFrame, nameof(Suspend));
-                InternalSetup.Initialize();
+                Setup = CreateSetup(rootFrame, e, nameof(Suspend));
+                Setup.Initialize();
 
                 Start();
+            } else {
+                Setup.UpdateActivationArguments(e);
             }
 
         }
