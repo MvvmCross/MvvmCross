@@ -103,7 +103,7 @@ namespace MvvmCross.Platform.Ios.Views
 
         public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
         {
-            if (SelectedIndex > 5 && MoreNavigationController?.ViewControllers?.Any() ?? false)
+            if (SelectedIndex > 5 && (MoreNavigationController?.ViewControllers?.Any() ?? false))
             {
                 var lastViewController = (MoreNavigationController.ViewControllers.Last()).GetIMvxIosView();
 
