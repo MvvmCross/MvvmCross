@@ -15,19 +15,21 @@ namespace MvvmCross.Plugin
 
         public Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; }
 
+        public IEnumerable<Type> LoadedPlugins => _loadedPlugins;
+
         public MvxPluginManager(Func<Type, IMvxPluginConfiguration> configurationSource)
         {
             ConfigurationSource = configurationSource;
         }
 
-        public void EnsurePluginLoaded<TPlugin>() where TPlugin : IMvxPlugin
+        public void EnsurePluginLoaded<TPlugin>(bool forceLoad = false) where TPlugin : IMvxPlugin
         {
-            EnsurePluginLoaded(typeof(TPlugin));
+            EnsurePluginLoaded(typeof(TPlugin), forceLoad);
         }
 
-        public virtual void EnsurePluginLoaded(Type type)
+        public virtual void EnsurePluginLoaded(Type type, bool forceLoad = false)
         {
-            if (IsPluginLoaded(type)) return;
+            if (forceLoad == false && IsPluginLoaded(type)) return;
             
             var plugin = Activator.CreateInstance(type) as IMvxPlugin;
             if (plugin == null)
@@ -57,14 +59,14 @@ namespace MvvmCross.Plugin
             }
         }
 
-        public bool TryEnsurePluginLoaded<TPlugin>() where TPlugin : IMvxPlugin 
-            => TryEnsurePluginLoaded(typeof(TPlugin));
+        public bool TryEnsurePluginLoaded<TPlugin>(bool forceLoad = false) where TPlugin : IMvxPlugin 
+            => TryEnsurePluginLoaded(typeof(TPlugin), forceLoad);
 
-        public bool TryEnsurePluginLoaded(Type type)
+        public bool TryEnsurePluginLoaded(Type type, bool forceLoad = false)
         {
             try
             {
-                EnsurePluginLoaded(type);
+                EnsurePluginLoaded(type, forceLoad);
                 return true;
             }
             catch (Exception ex)
