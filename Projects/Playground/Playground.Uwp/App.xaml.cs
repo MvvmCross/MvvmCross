@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Playground.Uwp
 {
-    sealed partial class App:MvxBaseApplication
+    public sealed partial class App : MvxBaseApplication
     {
         public App()
         {
@@ -13,7 +13,7 @@ namespace Playground.Uwp
 
         protected override MvxWindowsSetup CreateSetup(Frame rootFrame, string suspension)
         {
-            return new Setup(rootFrame, suspension);
+            return new MvxTypedWindowsSetup<Core.App>(rootFrame, suspension);
         }
     }
 }
