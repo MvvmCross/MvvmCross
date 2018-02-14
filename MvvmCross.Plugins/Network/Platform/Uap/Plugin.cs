@@ -3,12 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Plugin.Network.Rest;
-using MvvmCross.Plugins;
 
 namespace MvvmCross.Plugin.Network.Platform.Uap
 {
-    public class Plugin
-        : IMvxPlugin
+    [MvxPlugin]
+    public class Plugin : IMvxPlugin
     {
         public void Load()
         {

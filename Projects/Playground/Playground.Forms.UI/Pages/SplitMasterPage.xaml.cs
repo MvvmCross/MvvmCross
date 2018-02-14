@@ -4,7 +4,7 @@
 
 using System;
 using MvvmCross.Forms.Views;
-using MvvmCross.Forms.Views.Attributes;
+using MvvmCross.Forms.Presenters.Attributes;
 using Playground.Core.ViewModels;
 using Xamarin.Forms;
 

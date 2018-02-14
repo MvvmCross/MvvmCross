@@ -49,7 +49,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
         {
             Assert.Equal(1, mockTarget.SubscribeToEventsCalled);
 
-            Assert.Equal(1, mockTarget.Values.Count);
+            Assert.Single(mockTarget.Values);
             Assert.Equal("TryGetValueValue", mockTarget.Values[0]);
 
             mockSource.TryGetValueValue = "SecondValue";
@@ -62,9 +62,9 @@ namespace MvvmCross.UnitTest.Binding.Bindings
             Assert.Equal(3, mockTarget.Values.Count);
             Assert.Equal("ThirdValue", mockTarget.Values[2]);
 
-            Assert.Equal(0, mockSource.ValuesSet.Count);
+            Assert.Empty(mockSource.ValuesSet);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget1"));
-            Assert.Equal(1, mockSource.ValuesSet.Count);
+            Assert.Single(mockSource.ValuesSet);
             Assert.Equal("FromTarget1", mockSource.ValuesSet[0]);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget2"));
             Assert.Equal(2, mockSource.ValuesSet.Count);
@@ -127,7 +127,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
         {
             Assert.Equal(0, mockTarget.SubscribeToEventsCalled);
 
-            Assert.Equal(1, mockTarget.Values.Count);
+            Assert.Single(mockTarget.Values);
             Assert.Equal("TryGetValueValue", mockTarget.Values[0]);
 
             mockSource.TryGetValueValue = "SecondValue";
@@ -140,11 +140,11 @@ namespace MvvmCross.UnitTest.Binding.Bindings
             Assert.Equal(3, mockTarget.Values.Count);
             Assert.Equal("ThirdValue", mockTarget.Values[2]);
 
-            Assert.Equal(0, mockSource.ValuesSet.Count);
+            Assert.Empty(mockSource.ValuesSet);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget1"));
-            Assert.Equal(0, mockSource.ValuesSet.Count);
+            Assert.Empty(mockSource.ValuesSet);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget2"));
-            Assert.Equal(0, mockSource.ValuesSet.Count);
+            Assert.Empty(mockSource.ValuesSet);
 
             Assert.Equal(0, mockSource.DisposeCalled);
             Assert.Equal(0, mockTarget.DisposeCalled);
@@ -169,9 +169,9 @@ namespace MvvmCross.UnitTest.Binding.Bindings
             Assert.Equal("NewValue", mockTarget.Values[5]);
 
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget1"));
-            Assert.Equal(0, mockSource.ValuesSet.Count);
+            Assert.Empty(mockSource.ValuesSet);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget2"));
-            Assert.Equal(0, mockSource.ValuesSet.Count);
+            Assert.Empty(mockSource.ValuesSet);
 
             binding.Dispose();
             Assert.Equal(3, mockSource.DisposeCalled);
@@ -200,19 +200,19 @@ namespace MvvmCross.UnitTest.Binding.Bindings
         {
             Assert.Equal(1, mockTarget.SubscribeToEventsCalled);
 
-            Assert.Equal(0, mockTarget.Values.Count);
+            Assert.Empty(mockTarget.Values);
 
             mockSource.TryGetValueValue = "SecondValue";
             mockSource.FireSourceChanged();
-            Assert.Equal(0, mockTarget.Values.Count);
+            Assert.Empty(mockTarget.Values);
 
             mockSource.TryGetValueValue = "ThirdValue";
             mockSource.FireSourceChanged();
-            Assert.Equal(0, mockTarget.Values.Count);
+            Assert.Empty(mockTarget.Values);
 
-            Assert.Equal(0, mockSource.ValuesSet.Count);
+            Assert.Empty(mockSource.ValuesSet);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget1"));
-            Assert.Equal(1, mockSource.ValuesSet.Count);
+            Assert.Single(mockSource.ValuesSet);
             Assert.Equal("FromTarget1", mockSource.ValuesSet[0]);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget2"));
             Assert.Equal(2, mockSource.ValuesSet.Count);
@@ -225,17 +225,17 @@ namespace MvvmCross.UnitTest.Binding.Bindings
             Assert.Equal(1, mockSource.DisposeCalled);
             Assert.Equal(0, mockTarget.DisposeCalled);
 
-            Assert.Equal(0, mockTarget.Values.Count);
+            Assert.Empty(mockTarget.Values);
 
             binding.DataContext = new { ignored = 13 };
             Assert.Equal(2, mockSource.DisposeCalled);
             Assert.Equal(0, mockTarget.DisposeCalled);
 
-            Assert.Equal(0, mockTarget.Values.Count);
+            Assert.Empty(mockTarget.Values);
 
             mockSource.TryGetValueValue = "NewValue";
             mockSource.FireSourceChanged();
-            Assert.Equal(0, mockTarget.Values.Count);
+            Assert.Empty(mockTarget.Values);
 
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget1"));
             Assert.Equal(3, mockSource.ValuesSet.Count);
@@ -271,22 +271,22 @@ namespace MvvmCross.UnitTest.Binding.Bindings
         {
             Assert.Equal(0, mockTarget.SubscribeToEventsCalled);
 
-            Assert.Equal(1, mockTarget.Values.Count);
+            Assert.Single(mockTarget.Values);
             Assert.Equal("TryGetValueValue", mockTarget.Values[0]);
 
             mockSource.TryGetValueValue = "SecondValue";
             mockSource.FireSourceChanged();
-            Assert.Equal(1, mockTarget.Values.Count);
+            Assert.Single(mockTarget.Values);
 
             mockSource.TryGetValueValue = "ThirdValue";
             mockSource.FireSourceChanged();
-            Assert.Equal(1, mockTarget.Values.Count);
+            Assert.Single(mockTarget.Values);
 
-            Assert.Equal(0, mockSource.ValuesSet.Count);
+            Assert.Empty(mockSource.ValuesSet);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget1"));
-            Assert.Equal(0, mockSource.ValuesSet.Count);
+            Assert.Empty(mockSource.ValuesSet);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget2"));
-            Assert.Equal(0, mockSource.ValuesSet.Count);
+            Assert.Empty(mockSource.ValuesSet);
 
             Assert.Equal(0, mockSource.DisposeCalled);
             Assert.Equal(0, mockTarget.DisposeCalled);
@@ -310,9 +310,9 @@ namespace MvvmCross.UnitTest.Binding.Bindings
             Assert.Equal(3, mockTarget.Values.Count);
 
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget1"));
-            Assert.Equal(0, mockSource.ValuesSet.Count);
+            Assert.Empty(mockSource.ValuesSet);
             mockTarget.FireValueChanged(new MvxTargetChangedEventArgs("FromTarget2"));
-            Assert.Equal(0, mockSource.ValuesSet.Count);
+            Assert.Empty(mockSource.ValuesSet);
 
             binding.Dispose();
             Assert.Equal(3, mockSource.DisposeCalled);
