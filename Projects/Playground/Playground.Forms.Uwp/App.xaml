@@ -1,8 +1,7 @@
-﻿<Application
-    x:Class="Playground.Forms.Uwp.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Playground.Forms.Uwp"
-    RequestedTheme="Light">
+﻿<mvx:MvxWindowsApplication x:Class="Playground.Forms.Uwp.App"
+                           xmlns:mvx="using:MvvmCross.Forms.Platform.Uap.Views"
+                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           RequestedTheme="Light">
 
-</Application>
+</mvx:MvxWindowsApplication>

@@ -15,6 +15,8 @@ namespace MvvmCross.Platform.Uap.Views
     {
         protected MvxWindowsSetup Setup { get; set; }
 
+        protected Frame RootFrame { get; set; }
+
         public MvxApplication()
         {
             Suspending += OnSuspending;
@@ -25,53 +27,53 @@ namespace MvvmCross.Platform.Uap.Views
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
-        /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        /// <param name="activationArgs">Details about the launch request and process.</param>
+        protected override void OnLaunched(LaunchActivatedEventArgs activationArgs)
         {
-            base.OnLaunched(e);
+            base.OnLaunched(activationArgs);
 
-            var rootFrame = InitializeFrame(e);
+            var rootFrame = InitializeFrame(activationArgs);
 
-            if (e.PrelaunchActivated == false) {
-                StartSetup(rootFrame, e);
+            if (activationArgs.PrelaunchActivated == false) {
+                StartSetup(rootFrame, activationArgs);
             }
 
             Window.Current.Activate();
         }
         
-        protected override void OnActivated(IActivatedEventArgs e)
+        protected override void OnActivated(IActivatedEventArgs activationArgs)
         {
-            base.OnActivated(e);
+            base.OnActivated(activationArgs);
 
-            var rootFrame = InitializeFrame(e);
+            var rootFrame = InitializeFrame(activationArgs);
 
-            StartSetup(rootFrame, e);
+            StartSetup(rootFrame, activationArgs);
 
             Window.Current.Activate();
         }
 
-        protected abstract MvxWindowsSetup CreateSetup(Frame rootFrame, IActivatedEventArgs e, string suspension);
+        protected abstract MvxWindowsSetup CreateSetup(Frame rootFrame, IActivatedEventArgs activationArgs, string suspension);
 
-        protected virtual void StartSetup(Frame rootFrame, IActivatedEventArgs e)
+        protected virtual void StartSetup(Frame rootFrame, IActivatedEventArgs activationArgs)
         {
             if (rootFrame.Content == null) {
-                Setup = CreateSetup(rootFrame, e, nameof(Suspend));
+                Setup = CreateSetup(rootFrame, activationArgs, nameof(Suspend));
                 Setup.Initialize();
 
-                Start();
+                Start(activationArgs);
             } else {
-                Setup.UpdateActivationArguments(e);
+                Setup.UpdateActivationArguments(activationArgs);
             }
 
         }
 
-        protected virtual void Start()
+        protected virtual void Start(IActivatedEventArgs activationArgs)
         {
             var start = Mvx.Resolve<IMvxAppStart>();
             start.Start();
         }
 
-        protected virtual Frame InitializeFrame(IActivatedEventArgs e)
+        protected virtual Frame InitializeFrame(IActivatedEventArgs activationArgs)
         {
             var rootFrame = Window.Current.Content as Frame;
 
@@ -82,9 +84,11 @@ namespace MvvmCross.Platform.Uap.Views
                 Window.Current.Content = rootFrame;
             }
 
-            if (e.PreviousExecutionState == ApplicationExecutionState.Terminated) {
+            if (activationArgs.PreviousExecutionState == ApplicationExecutionState.Terminated) {
                 OnResumeFromTerminateState();
             }
+
+            RootFrame = rootFrame;
 
             return rootFrame;
         }
