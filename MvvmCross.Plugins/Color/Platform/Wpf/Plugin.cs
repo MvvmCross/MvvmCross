@@ -6,13 +6,12 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using MvvmCross.Platform;
-using MvvmCross.Platform.Plugins;
 using MvvmCross.Platform.UI;
 
 namespace MvvmCross.Plugin.Color.Platform.Wpf
 {
-    public class Plugin
-        : IMvxPlugin
+    [MvxPlugin]
+    public class Plugin : IMvxPlugin
     {
         public void Load()
         {

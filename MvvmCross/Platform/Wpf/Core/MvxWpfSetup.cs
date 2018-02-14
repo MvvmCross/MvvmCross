@@ -4,7 +4,7 @@
 
 using System.Windows.Threading;
 using System.Windows.Controls;
-using MvvmCross.Plugins;
+using MvvmCross.Plugin;
 using MvvmCross.Core;
 using MvvmCross.Platform.Wpf.Presenters;
 using MvvmCross.Platform.Wpf.Views;
@@ -75,11 +75,6 @@ namespace MvvmCross.Platform.Wpf.Core
             var presenter = Presenter;
             Mvx.RegisterSingleton(presenter);
             Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
-        }
-
-        protected override IMvxPluginManager CreatePluginManager()
-        {
-            return new MvxFilePluginManager(".Wpf", string.Empty);
         }
 
         protected override IMvxNameMapping CreateViewToViewModelNaming()

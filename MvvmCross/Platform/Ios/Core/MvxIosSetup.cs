@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Converters;
-using MvvmCross.Plugins;
+using MvvmCross.Plugin;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
@@ -46,11 +46,6 @@ namespace MvvmCross.Platform.Ios.Core
         protected UIWindow Window => _window;
 
         protected IMvxApplicationDelegate ApplicationDelegate => _applicationDelegate;
-
-        protected override IMvxPluginManager CreatePluginManager()
-        {
-            return new MvxPluginManager();
-        }
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {

@@ -5,12 +5,11 @@
 using MvvmCross.Plugin.Network.Platform.Wpf.Reachability;
 using MvvmCross.Plugin.Network.Reachability;
 using MvvmCross.Plugin.Network.Rest;
-using MvvmCross.Plugins;
 
 namespace MvvmCross.Plugin.Network.Platform.Wpf
 {
-    public class Plugin
-        : IMvxPlugin
+    [MvxPlugin]
+    public class Plugin : IMvxPlugin
     {
         public void Load()
         {

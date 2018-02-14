@@ -42,12 +42,5 @@ namespace Playground.Forms.Droid
         protected override MvxFormsApplication CreateFormsApplication() => new FormsApp();
 
         protected override IMvxApplication CreateApp() => new Core.App(); 
-
-        protected override void PerformBootstrapActions()
-        {
-            base.PerformBootstrapActions();
-
-            PluginLoader.Instance.EnsureLoaded();
-        }
     }
 }

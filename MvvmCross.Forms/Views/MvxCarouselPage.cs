@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Forms.Views.EventSource;
+using MvvmCross.Forms.Views.Base;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Forms.Views
