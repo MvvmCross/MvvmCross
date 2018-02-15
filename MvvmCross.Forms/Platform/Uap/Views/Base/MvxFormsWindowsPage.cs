@@ -1,4 +1,6 @@
-﻿using MvvmCross.Forms.Platform.Uap.Views;
+﻿using MvvmCross.Forms.Platform.Uap.Presenters;
+using MvvmCross.Forms.Platform.Uap.Views;
+using MvvmCross.Forms.Presenters;
 using MvvmCross.ViewModels;
 using Xamarin.Forms.Platform.UWP;
 
