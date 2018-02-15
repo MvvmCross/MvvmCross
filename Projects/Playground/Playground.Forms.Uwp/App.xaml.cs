@@ -4,6 +4,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Controls;
 using MvvmCross.Forms.Platform.Uap.Core;
 using MvvmCross.Forms.Views.Base;
+using System;
 
 namespace Playground.Forms.Uwp
 {
@@ -11,12 +12,17 @@ namespace Playground.Forms.Uwp
     {
         public App()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         protected override MvxWindowsSetup CreateSetup(Frame rootFrame, IActivatedEventArgs e, string suspension)
         {
             return new MvxFormsWindowsSetup<Core.App,FormsApp>(rootFrame, e, suspension);
+        }
+
+        protected override Type HostWindowsPageType()
+        {
+            return typeof(MainPage);
         }
     }
 }
