@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-namespace MvvmCross.Plugin.PhoneCall.Platform.iOS
+namespace MvvmCross.Plugin.PhoneCall.Platform.Ios
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]

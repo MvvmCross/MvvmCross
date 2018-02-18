@@ -4,9 +4,9 @@
 
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.ViewModels;
-using Xamarin.Forms.Platform.iOS;
+using Xamarin.Forms.Platform.Ios;
 
-namespace MvvmCross.Forms.Platform.iOS.Views
+namespace MvvmCross.Forms.Platform.Ios.Views
 {
     public class MvxPageRenderer : PageRenderer, IMvxBindingContextOwner
     {            

@@ -8,7 +8,7 @@ using SystemConfiguration;
 using CoreFoundation;
 using MvvmCross.Plugin.Network.Reachability;
 
-namespace MvvmCross.Plugin.Network.Platform.iOS
+namespace MvvmCross.Plugin.Network.Platform.Ios
 {
     [Preserve(AllMembers = true)]
 	public class MvxReachability

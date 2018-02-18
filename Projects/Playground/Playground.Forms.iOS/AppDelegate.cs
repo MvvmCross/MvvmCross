@@ -1,6 +1,6 @@
-using Foundation;
+﻿using Foundation;
 using MvvmCross;
-using MvvmCross.Forms.Platform.iOS.Core;
+using MvvmCross.Forms.Platform.Ios.Core;
 using MvvmCross.ViewModels;
 using UIKit;
 

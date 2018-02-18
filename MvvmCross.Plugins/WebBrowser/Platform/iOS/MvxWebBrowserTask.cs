@@ -5,7 +5,7 @@
 using Foundation;
 using MvvmCross.Platform.Ios;
 
-namespace MvvmCross.Plugin.WebBrowser.Platform.iOS
+namespace MvvmCross.Plugin.WebBrowser.Platform.Ios
 {
     [Preserve(AllMembers = true)]
 	public class MvxWebBrowserTask : MvxIosTask, IMvxWebBrowserTask

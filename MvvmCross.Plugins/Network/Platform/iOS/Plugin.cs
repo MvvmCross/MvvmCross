@@ -5,7 +5,7 @@
 using MvvmCross.Plugin.Network.Reachability;
 using MvvmCross.Plugin.Network.Rest;
 
-namespace MvvmCross.Plugin.Network.Platform.iOS
+namespace MvvmCross.Plugin.Network.Platform.Ios
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]
