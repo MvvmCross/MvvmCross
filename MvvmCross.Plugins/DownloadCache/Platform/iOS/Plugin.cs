@@ -6,7 +6,7 @@ using MvvmCross.Base;
 using MvvmCross.Exceptions;
 using UIKit;
 
-namespace MvvmCross.Plugin.DownloadCache.Platform.iOS
+namespace MvvmCross.Plugin.DownloadCache.Platform.Ios
 {
 #warning One day I would like to decouple this plugin from the FileStore plugin
     [MvxPlugin]

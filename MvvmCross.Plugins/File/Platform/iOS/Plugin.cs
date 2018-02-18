@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Exceptions;
 
-namespace MvvmCross.Plugin.File.Platform.iOS
+namespace MvvmCross.Plugin.File.Platform.Ios
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]

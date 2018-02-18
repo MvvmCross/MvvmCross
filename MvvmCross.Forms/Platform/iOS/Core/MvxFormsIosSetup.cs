@@ -9,15 +9,15 @@ using MvvmCross.Localization;
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Forms.Core;
-using MvvmCross.Forms.Platform.iOS.Bindings;
+using MvvmCross.Forms.Platform.Ios.Bindings;
 using MvvmCross.Platform.Ios.Core;
 using MvvmCross.Platform.Ios.Presenters;
 using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
 using UIKit;
-using MvvmCross.Forms.Platform.iOS.Presenters;
+using MvvmCross.Forms.Platform.Ios.Presenters;
 
-namespace MvvmCross.Forms.Platform.iOS.Core
+namespace MvvmCross.Forms.Platform.Ios.Core
 {
     public abstract class MvxFormsIosSetup : MvxIosSetup
     {
