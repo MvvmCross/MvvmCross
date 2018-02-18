@@ -18,7 +18,6 @@
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\Accelerometer\MvvmCross.Plugin.Accelerometer.csproj" />
     <ProjectReference Include="..\Color\MvvmCross.Plugin.Color.csproj" />
-    <ProjectReference Include="..\DownloadCache\MvvmCross.Plugin.DownloadCache.csproj" />
     <ProjectReference Include="..\Email\MvvmCross.Plugin.Email.csproj" />
     <ProjectReference Include="..\FieldBinding\MvvmCross.Plugin.FieldBinding.csproj" />
     <ProjectReference Include="..\File\MvvmCross.Plugin.File.csproj" />
