@@ -62,7 +62,7 @@ IoC Child containers: https://github.com/MvvmCross/MvvmCross/pull/2438
 
 ### Xamarin.Forms
 
-TBA
+`MvxViewCell` is now usable! We have [fixed](https://github.com/MvvmCross/MvvmCross/pull/2511) a bug and apps won't crash in runtime anymore. It is recommended that you use `MvxViewCell` in ListViews instead of the default `ViewCell`.
  
 ### iOS
 
