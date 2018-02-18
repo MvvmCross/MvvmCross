@@ -4,7 +4,7 @@
 
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.ViewModels;
-using Xamarin.Forms.Platform.Ios;
+using Xamarin.Forms.Platform.iOS;
 
 namespace MvvmCross.Forms.Platform.Ios.Views
 {

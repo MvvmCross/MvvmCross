@@ -10,7 +10,7 @@ using MvvmCross.Logging;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
-using Xamarin.Forms.Platform.Ios;
+using Xamarin.Forms.Platform.iOS;
 using MvxIosImageView = MvvmCross.Platform.Ios.Binding.Views.MvxImageView;
 
 [assembly: ExportRenderer(typeof(MvxImageView), typeof(MvxImageViewRenderer))]
