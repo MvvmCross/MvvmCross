@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Plugin;
 
-namespace MvvmCross.Plugin.DownloadCache.Platform.iOS
+namespace MvvmCross.Plugin.DownloadCache.Platform.Ios
 {
     [Preserve(AllMembers = true)]
 	public class MvxDownloadCacheConfiguration

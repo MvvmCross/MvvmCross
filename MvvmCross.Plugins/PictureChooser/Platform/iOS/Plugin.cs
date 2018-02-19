@@ -4,7 +4,7 @@
 
 using MvvmCross.Converters;
 
-namespace MvvmCross.Plugin.PictureChooser.Platform.iOS
+namespace MvvmCross.Plugin.PictureChooser.Platform.Ios
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]

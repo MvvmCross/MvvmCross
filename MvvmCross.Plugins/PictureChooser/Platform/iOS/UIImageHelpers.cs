@@ -6,7 +6,7 @@ using System;
 using CoreGraphics;
 using UIKit;
 
-namespace MvvmCross.Plugin.PictureChooser.Platform.iOS
+namespace MvvmCross.Plugin.PictureChooser.Platform.Ios
 {
     public static class UIImageHelpers
     {

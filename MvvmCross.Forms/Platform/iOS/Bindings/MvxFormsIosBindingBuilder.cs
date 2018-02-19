@@ -6,7 +6,7 @@ using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Forms.Bindings;
 using MvvmCross.Platform.Ios.Binding;
 
-namespace MvvmCross.Forms.Platform.iOS.Bindings
+namespace MvvmCross.Forms.Platform.Ios.Bindings
 {
     public class MvxFormsIosBindingBuilder : MvxIosBindingBuilder
     {

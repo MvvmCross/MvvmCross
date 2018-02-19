@@ -4,7 +4,7 @@
 
 using MvvmCross.UI;
 
-namespace MvvmCross.Plugin.Visibility.Platform.iOS
+namespace MvvmCross.Plugin.Visibility.Platform.Ios
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]

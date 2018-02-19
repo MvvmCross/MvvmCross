@@ -5,7 +5,7 @@
 using MvvmCross.UI;
 using UIKit;
 
-namespace MvvmCross.Plugin.Color.Platform.iOS
+namespace MvvmCross.Plugin.Color.Platform.Ios
 {
     public static class MvxColorExtensions
     {
