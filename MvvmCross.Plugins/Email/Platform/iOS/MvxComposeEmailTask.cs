@@ -12,7 +12,7 @@ using MvvmCross.Platform.Ios;
 using MvvmCross.Platform.Ios.Views;
 using UIKit;
 
-namespace MvvmCross.Plugin.Email.Platform.iOS
+namespace MvvmCross.Plugin.Email.Platform.Ios
 {
     [MvvmCross.Preserve(AllMembers = true)]
 	public class MvxComposeEmailTask

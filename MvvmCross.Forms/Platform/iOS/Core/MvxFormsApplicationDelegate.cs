@@ -10,7 +10,7 @@ using MvvmCross.Platform.Ios.Core;
 using UIKit;
 using Xamarin.Forms.Platform.iOS;
 
-namespace MvvmCross.Forms.Platform.iOS.Core
+namespace MvvmCross.Forms.Platform.Ios.Core
 {
     public class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {

@@ -6,7 +6,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.ViewModels;
 using Xamarin.Forms.Platform.iOS;
 
-namespace MvvmCross.Forms.Platform.iOS.Views
+namespace MvvmCross.Forms.Platform.Ios.Views
 {
     public class MvxPageRenderer : PageRenderer, IMvxBindingContextOwner
     {            

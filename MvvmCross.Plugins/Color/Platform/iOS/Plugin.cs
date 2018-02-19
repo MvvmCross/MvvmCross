@@ -6,7 +6,7 @@
 using MvvmCross.Plugin;
 using MvvmCross.UI;
 
-namespace MvvmCross.Plugin.Color.Platform.iOS
+namespace MvvmCross.Plugin.Color.Platform.Ios
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]
