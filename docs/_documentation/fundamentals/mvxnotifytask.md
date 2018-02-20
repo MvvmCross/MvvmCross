@@ -112,7 +112,12 @@ public class MyViewModel : MvxViewModel
     
     public IMvxCommand MyCommand { get; private set; }
 
-    public MvxNotifyTask MyTaskNotifier { get; private set; }
+    private MvxNotifyTask _myTaskNotifier;
+    public MvxNotifyTask MyTaskNotifier 
+    {
+        get => _myTaskNotifier;
+        private set => SetProperty(ref _myTaskNotifier, value);
+    }
 
     // ...
 
