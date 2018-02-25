@@ -195,6 +195,15 @@ public MainPage()
 }
 ```
 
+Since MvvmCross 6.0 you can provide secondary view renderer assemblies to the Xamarin.Forms initialization so that the framework is able to find them in Release mode with .NET Native compilation. Override the `GetRendererAssemblies` method of the `MvxFormsWindowsSetup` to do so:
+
+```c#
+public override IEnumerable<Assembly> GetRendererAssemblies()
+{
+    return new[] { typeof(SecondaryLibrary.Renderers.MyRenderer).GetTypeInfo().Assembly };
+}
+```
+
 # Bindings
 
 You can use the MvvmCross binding syntax just like you would do in a native Xamarin project. For more information see the [Bindings](https://www.mvvmcross.com/documentation/fundamentals/data-binding) documentation.
