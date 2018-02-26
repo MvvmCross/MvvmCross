@@ -195,14 +195,7 @@ public MainPage()
 }
 ```
 
-Since MvvmCross 6.0 you can provide secondary view renderer assemblies to the Xamarin.Forms initialization so that the framework is able to find them in Release mode with .NET Native compilation. Override the `GetRendererAssemblies` method of the `MvxFormsWindowsSetup` to do so:
-
-```c#
-public override IEnumerable<Assembly> GetRendererAssemblies()
-{
-    return new[] { typeof(SecondaryLibrary.Renderers.MyRenderer).GetTypeInfo().Assembly };
-}
-```
+If you use secondary assemblies for your custom control and renderers, since MvvmCross 6.0 you should also return them  from the `GetViewAssemblies` method override, as the view assemblies are passed in to the Xamarin.Forms initialization so that the framework is able to find them in Release mode with .NET Native compilation.
 
 # Bindings
 
