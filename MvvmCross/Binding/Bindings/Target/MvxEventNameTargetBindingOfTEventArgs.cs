@@ -8,17 +8,17 @@ using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.Binding.Bindings.Target
 {
-    public class MvxEventNameTargetBinding<TEventArgs> : MvxTargetBinding
+    public class MvxEventNameTargetBinding<TTarget, TEventArgs> : MvxTargetBinding where TTarget : class
     {
         private readonly bool _useEventArgsAsCommandParameter;
         private readonly IDisposable _eventSubscription;
 
         private ICommand _currentCommand;
 
-        public MvxEventNameTargetBinding(object target, string targetEventName, bool useEventArgsAsCommandParameter = true) : base(target)
+        public MvxEventNameTargetBinding(TTarget target, string targetEventName, bool useEventArgsAsCommandParameter = true) : base(target)
         {
             _useEventArgsAsCommandParameter = useEventArgsAsCommandParameter;
-            _eventSubscription = target.WeakSubscribe<object, TEventArgs>(targetEventName, HandleEvent);
+            _eventSubscription = target.WeakSubscribe<TTarget, TEventArgs>(targetEventName, HandleEvent);
         }
 
         public override Type TargetType { get; } = typeof(ICommand);
