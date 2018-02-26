@@ -30,6 +30,11 @@ namespace MvvmCross.Forms.Platform.Uap.Core
         {
         }
 
+        /// <summary>
+        /// Override to provide list of assemblies to search for views. 
+        /// Additionally for UWP .NET Native compilation include the assemblies containing custom controls and renderers to be passed to <see cref="Xamarin.Forms.Forms.Init" /> method. 
+        /// </summary>
+        /// <returns>Custom view and renderer assemblies</returns>
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
             return _viewAssemblies ?? (_viewAssemblies = new List<Assembly>(base.GetViewAssemblies()));
@@ -41,23 +46,13 @@ namespace MvvmCross.Forms.Platform.Uap.Core
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        /// <summary>
-        /// For UWP .NET Native compilation, you have to tell Xamarin.Forms which assemblies it should scan for custom controls and renderers.  
-        /// Override to provide the list of renderer assemblies that will be passed as the second argument of Xamarin.Forms.Forms.Init method.
-        /// </summary>
-        /// <returns>List of custom renderer assemblies</returns>
-        public virtual IEnumerable<Assembly> GetRendererAssemblies()
-        {
-            return null;
-        }
-
         public MvxFormsApplication FormsApplication
         {
             get
             {
                 if (_formsApplication == null)
                 {
-                    Xamarin.Forms.Forms.Init(ActivationArguments, GetRendererAssemblies());
+                    Xamarin.Forms.Forms.Init(ActivationArguments, GetViewAssemblies());
                     _formsApplication = _formsApplication ?? CreateFormsApplication();
                 }
                 return _formsApplication;
