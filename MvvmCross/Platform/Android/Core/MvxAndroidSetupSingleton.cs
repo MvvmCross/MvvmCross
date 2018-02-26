@@ -19,103 +19,102 @@ namespace MvvmCross.Droid.Platform
     public class MvxAndroidSetupSingleton
         : MvxSingleton<MvxAndroidSetupSingleton>
     {
-        private static readonly object LockObject = new object();
+        private static readonly SemaphoreSlim InitializationLock = new SemaphoreSlim(1);
         private static TaskCompletionSource<bool> IsInitialisedTaskCompletionSource;
         private MvxAndroidSetup _setup;
         private bool _initialized;
         private IMvxAndroidSplashScreenActivity _currentSplashScreen;
 
-        public virtual void EnsureInitialized()
+        public async virtual Task EnsureInitialized()
         {
-            lock (LockObject)
-            {
+            await InitializationLock.WaitAsync();
+            try {
                 if (_initialized)
                     return;
 
-                if (IsInitialisedTaskCompletionSource != null)
-                {
+                if (IsInitialisedTaskCompletionSource != null) {
                     MvxLog.Instance.Trace("EnsureInitialized has already been called so now waiting for completion");
                     IsInitialisedTaskCompletionSource.Task.Wait();
-                }
-                else
-                {
+                } else {
                     IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
                     _setup.Initialize();
                     _initialized = true;
 
-                    if (_currentSplashScreen != null)
-                    {
+                    if (_currentSplashScreen != null) {
                         MvxLog.Instance.Warn("Current splash screen not null during direct initialization - not sure this should ever happen!");
                         var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
-                        dispatcher.RequestMainThreadAction(() =>
-                        {
-                            _currentSplashScreen?.InitializationComplete();
+                        dispatcher.RequestMainThreadAction(async () => {
+                            await _currentSplashScreen?.InitializationComplete();
                         }, false);
                     }
 
                     IsInitialisedTaskCompletionSource.SetResult(true);
                 }
+            } finally {
+                InitializationLock.Release();
             }
         }
 
-        public virtual void RemoveSplashScreen(IMvxAndroidSplashScreenActivity splashScreen)
+        public async virtual Task RemoveSplashScreen(IMvxAndroidSplashScreenActivity splashScreen)
         {
-            lock (LockObject)
-            {
+            await InitializationLock.WaitAsync();
+            try {
                 _currentSplashScreen = null;
+            } finally {
+                InitializationLock.Release();
             }
         }
 
-        public virtual void InitializeFromSplashScreen(IMvxAndroidSplashScreenActivity splashScreen)
+        public async virtual Task InitializeFromSplashScreen(IMvxAndroidSplashScreenActivity splashScreen)
         {
-            lock (LockObject)
-            {
+            await InitializationLock.WaitAsync();
+            try {
                 _currentSplashScreen = splashScreen;
-                if (_initialized)
-                {
-                    _currentSplashScreen?.InitializationComplete();
+                if (_initialized) {
+                    await _currentSplashScreen?.InitializationComplete();
                     return;
                 }
 
-                if (IsInitialisedTaskCompletionSource != null)
-                {
+                if (IsInitialisedTaskCompletionSource != null) {
                     return;
-                }
-                else
-                {
+                } else {
                     IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
                     _setup.InitializePrimary();
-                    ThreadPool.QueueUserWorkItem(ignored =>
-                    {
+                    ThreadPool.QueueUserWorkItem(async ignored => {
                         _setup.InitializeSecondary();
-                        lock (LockObject)
-                        {
+                        await InitializationLock.WaitAsync();
+                        try {
                             IsInitialisedTaskCompletionSource.SetResult(true);
                             _initialized = true;
                             var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
-                            dispatcher.RequestMainThreadAction(() =>
-                            {
+                            dispatcher.RequestMainThreadAction(() => {
                                 _currentSplashScreen?.InitializationComplete();
                             });
+                        } finally {
+                            InitializationLock.Release();
                         }
                     });
                 }
+            } finally {
+                InitializationLock.Release();
             }
         }
 
-        public static MvxAndroidSetupSingleton EnsureSingletonAvailable(Context applicationContext)
+        public async static Task<MvxAndroidSetupSingleton> EnsureSingletonAvailable(Context applicationContext)
         {
             if (Instance != null)
                 return Instance;
 
-            lock (LockObject)
-            {
+            await InitializationLock.WaitAsync();
+            try {
                 if (Instance != null)
                     return Instance;
 
                 var instance = new MvxAndroidSetupSingleton();
                 instance.CreateSetup(applicationContext);
                 return Instance;
+            } finally {
+                InitializationLock.Release();
             }
         }
 
@@ -126,17 +125,13 @@ namespace MvvmCross.Droid.Platform
         protected virtual void CreateSetup(Context applicationContext)
         {
             var setupType = FindSetupType();
-            if (setupType == null)
-            {
+            if (setupType == null) {
                 throw new MvxException("Could not find a Setup class for application");
             }
 
-            try
-            {
+            try {
                 _setup = (MvxAndroidSetup)Activator.CreateInstance(setupType, applicationContext);
-            }
-            catch (Exception exception)
-            {
+            } catch (Exception exception) {
                 throw exception.MvxWrap("Failed to create instance of {0}", setupType.FullName);
             }
         }
@@ -152,13 +147,14 @@ namespace MvvmCross.Droid.Platform
             return query.FirstOrDefault();
         }
 
-        protected override void Dispose(bool isDisposing)
+        protected async override void Dispose(bool isDisposing)
         {
-            if (isDisposing)
-            {
-                lock (LockObject)
-                {
+            if (isDisposing) {
+                await InitializationLock.WaitAsync();
+                try {
                     _currentSplashScreen = null;
+                } finally {
+                    InitializationLock.Release();
                 }
             }
             base.Dispose(isDisposing);

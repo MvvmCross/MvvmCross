@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -18,11 +18,11 @@ namespace MvvmCross.Plugins.Email.Uwp
 
         public bool CanSendEmail => true;
 
-        public void ComposeEmail(string to, string cc = null, string subject = null, string body = null, bool isHtml = false, string dialogTitle = null)
+        public Task ComposeEmail(string to, string cc = null, string subject = null, string body = null, bool isHtml = false, string dialogTitle = null)
         {
             var tos = to == null ? null : new[] { to };
             var ccs = cc == null ? null : new[] { cc };
-            ComposeEmail(
+            return ComposeEmail(
                 tos,
                 ccs,
                 subject,
@@ -32,7 +32,7 @@ namespace MvvmCross.Plugins.Email.Uwp
                 dialogTitle);
         }
 
-        public async void ComposeEmail(IEnumerable<string> to, IEnumerable<string> cc = null, string subject = null, string body = null, bool isHtml = false, IEnumerable<EmailAttachment> attachments = null, string dialogTitle = null)
+        public async Task ComposeEmail(IEnumerable<string> to, IEnumerable<string> cc = null, string subject = null, string body = null, bool isHtml = false, IEnumerable<EmailAttachment> attachments = null, string dialogTitle = null)
         {
             //TODO: It is better to have this function as async Task so to avoid exception swallowing
             EmailMessage email = new EmailMessage();

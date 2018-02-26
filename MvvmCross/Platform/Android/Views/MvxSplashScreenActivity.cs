@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Threading.Tasks;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -35,12 +36,12 @@ namespace MvvmCross.Droid.Views
             RequestWindowFeature(WindowFeatures.NoTitle);
         }
 
-        protected override void OnCreate(Bundle bundle)
+        protected async override void OnCreate(Bundle bundle)
         {
             RequestWindowFeatures();
 
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.InitializeFromSplashScreen(this);
+            var setup = await MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            await setup.InitializeFromSplashScreen(this);
 
             base.OnCreate(bundle);
 
@@ -55,34 +56,34 @@ namespace MvvmCross.Droid.Views
 
         private bool _isResumed;
 
-        protected override void OnResume()
+        protected async override void OnResume()
         {
             base.OnResume();
             _isResumed = true;
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.InitializeFromSplashScreen(this);
+            var setup = await MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            await setup.InitializeFromSplashScreen(this);
         }
 
-        protected override void OnPause()
+        protected async override void OnPause()
         {
             _isResumed = false;
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.RemoveSplashScreen(this);
+            var setup = await MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            await setup.RemoveSplashScreen(this);
             base.OnPause();
         }
 
-        public virtual void InitializationComplete()
+        public async virtual Task InitializationComplete()
         {
             if (!_isResumed)
                 return;
 
-            TriggerFirstNavigate();
+            await TriggerFirstNavigate();
         }
 
-        protected virtual void TriggerFirstNavigate()
+        protected virtual Task TriggerFirstNavigate()
         {
             var starter = Mvx.Resolve<IMvxAppStart>();
-            starter.Start();
+            return starter.StartAsync();
         }
     }
 }

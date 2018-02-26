@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -91,11 +91,11 @@ namespace MvvmCross.Forms.Droid.Views
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
 
-        protected override void OnCreate(Bundle bundle)
+        protected async override void OnCreate(Bundle bundle)
         {
             // Required for proper Push notifications handling      
-            var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setupSingleton.EnsureInitialized();
+            var setupSingleton = await MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            await setupSingleton.EnsureInitialized();
 
             base.OnCreate(bundle);
             ViewModel?.ViewCreated();

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -21,7 +21,7 @@ namespace Playground.Forms.Droid
         LaunchMode = LaunchMode.SingleTask)]
     public class MainActivity : MvxFormsAppCompatActivity<MainViewModel>
     {
-        protected override void OnCreate(Bundle bundle)
+        protected async override void OnCreate(Bundle bundle)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
@@ -29,8 +29,9 @@ namespace Playground.Forms.Droid
 
             // No Splash Screen: Uncomment these lines if removing splash screen
             // var startup = Mvx.Resolve<IMvxAppStart>();
-            // startup.Start();
-            // InitializeForms(bundle);
+            // await startup.StartAsync();
+
+            InitializeForms(bundle);
         }
 
         public override void OnBackPressed()

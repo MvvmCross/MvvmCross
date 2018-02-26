@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -21,10 +21,10 @@ namespace MvvmCross.Droid.Services
         {
         }
 
-        protected override void OnHandleIntent(Intent intent)
+        protected async override void OnHandleIntent(Intent intent)
         {
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.EnsureInitialized();
+            var setup = await MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            await setup.EnsureInitialized();
         }
     }
 }

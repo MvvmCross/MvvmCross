@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Foundation;
 using MessageUI;
 using MvvmCross.iOS.Support.Views;
@@ -27,12 +28,12 @@ namespace MvvmCross.Plugins.Email.iOS
         {
         }
 
-        public void ComposeEmail(string to, string cc = null, string subject = null, string body = null,
+        public Task ComposeEmail(string to, string cc = null, string subject = null, string body = null,
             bool isHtml = false, string dialogTitle = null)
         {
             var toArray = to == null ? null : new[] { to };
             var ccArray = cc == null ? null : new[] { cc };
-            ComposeEmail(
+            return ComposeEmail(
                 toArray,
                 ccArray,
                 subject,
@@ -40,7 +41,7 @@ namespace MvvmCross.Plugins.Email.iOS
                 isHtml);
         }
 
-        public void ComposeEmail(
+        public Task ComposeEmail(
             IEnumerable<string> to, IEnumerable<string> cc = null, string subject = null,
             string body = null, bool isHtml = false,
             IEnumerable<EmailAttachment> attachments = null, string dialogTitle = null)
@@ -65,7 +66,8 @@ namespace MvvmCross.Plugins.Email.iOS
             }
             _mail.Finished += HandleMailFinished;
 
-            UIApplication.SharedApplication.KeyWindow.GetTopModalHostViewController().PresentViewController(_mail, true, null);            
+            UIApplication.SharedApplication.KeyWindow.GetTopModalHostViewController().PresentViewController(_mail, true, null);
+            return Task.CompletedTask;
         }
 
         public bool CanSendEmail => MFMailComposeViewController.CanSendMail;

@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Android.Content;
 using Android.Net;
 using Android.OS;
@@ -25,11 +26,11 @@ namespace MvvmCross.Plugins.Email.Droid
     {
         private List<File> filesToDelete;
 
-        public void ComposeEmail(string to, string cc = null, string subject = null, string body = null, bool isHtml = false, string dialogTitle = null)
+        public Task ComposeEmail(string to, string cc = null, string subject = null, string body = null, bool isHtml = false, string dialogTitle = null)
         {
             var toArray = to == null ? null : new[] { to };
             var ccArray = cc == null ? null : new[] { cc };
-            ComposeEmail(
+            return ComposeEmail(
                 toArray,
                 ccArray,
                 subject,
@@ -39,7 +40,7 @@ namespace MvvmCross.Plugins.Email.Droid
                 dialogTitle);
         }
 
-        public void ComposeEmail(
+        public Task ComposeEmail(
             IEnumerable<string> to, IEnumerable<string> cc = null, string subject = null,
             string body = null, bool isHtml = false,
             IEnumerable<EmailAttachment> attachments = null, string dialogTitle = null)
@@ -122,6 +123,8 @@ namespace MvvmCross.Plugins.Email.Droid
 
             // fix for GMail App 5.x (File not found / permission denied when using "StartActivity")
             StartActivityForResult(0, Intent.CreateChooser(emailIntent, dialogTitle ?? string.Empty));
+
+            return Task.CompletedTask;
         }
 
         public bool CanSendEmail => true;

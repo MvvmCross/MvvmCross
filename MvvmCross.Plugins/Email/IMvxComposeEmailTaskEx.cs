@@ -1,8 +1,9 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Plugins.Email
 {
@@ -22,7 +23,7 @@ namespace MvvmCross.Plugins.Email
         /// <param name="attachments"><see cref="IEnumerable{T}"/> of <see cref="EmailAttachment"/> containing
         ///     attachments</param>
         /// <param name="dialogTitle">Title of the dialog shown on Android</param>
-        void ComposeEmail(IEnumerable<string> to, IEnumerable<string> cc = null, string subject = null,
+        Task ComposeEmail(IEnumerable<string> to, IEnumerable<string> cc = null, string subject = null,
             string body = null, bool isHtml = false, IEnumerable<EmailAttachment> attachments = null,
             string dialogTitle = null);
 

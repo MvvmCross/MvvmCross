@@ -1,6 +1,6 @@
+﻿using System;
 using MvvmCross.Platform;
 using MvvmCross.Uwp.Views.Suspension;
-using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -31,7 +31,7 @@ namespace Playground.Uwp
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
             var rootFrame = Window.Current.Content as Frame;
 
@@ -60,8 +60,8 @@ namespace Playground.Uwp
                     var setup = new Setup(rootFrame, "Suspension");
                     setup.Initialize();
 
-                    var start = MvvmCross.Platform.Mvx.Resolve<MvvmCross.Core.ViewModels.IMvxAppStart>();
-                    start.Start();
+                    var start = Mvx.Resolve<MvvmCross.Core.ViewModels.IMvxAppStart>();
+                    await start.StartAsync();
                 }
 
                 // Ensure the current window is active

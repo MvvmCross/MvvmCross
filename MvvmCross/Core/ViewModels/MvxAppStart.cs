@@ -21,14 +21,9 @@ namespace MvvmCross.Core.ViewModels
 
         public async void Start(object hint = null)
         {
-            if (hint != null)
-            {
-                MvxLog.Instance.Trace("Hint ignored in default MvxAppStart");
-            }
-
             try
             {
-                await NavigationService.Navigate<TViewModel>();
+                await StartAsync(hint);
             }
             catch (Exception exception)
             {
@@ -36,7 +31,7 @@ namespace MvvmCross.Core.ViewModels
             }
         }
 
-        public Task StartAsync(object hint = null)
+        public virtual Task StartAsync(object hint = null)
         {
             if (hint != null)
             {
