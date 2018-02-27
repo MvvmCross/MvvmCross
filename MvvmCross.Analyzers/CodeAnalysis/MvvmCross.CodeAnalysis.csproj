@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis" Version="2.4.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="2.6.1" />
   </ItemGroup>
 
   <ItemGroup>

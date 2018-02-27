@@ -1,4 +1,4 @@
-﻿namespace Playground.Forms.Uwp
+namespace Playground.Forms.Uwp
 {
     public sealed partial class MainPage
     {

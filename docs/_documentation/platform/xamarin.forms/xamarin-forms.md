@@ -195,6 +195,8 @@ public MainPage()
 }
 ```
 
+If you use secondary assemblies for your custom control and renderers, since MvvmCross 6.0 you should also return them  from the `GetViewAssemblies` method override, as the view assemblies are passed in to the Xamarin.Forms initialization so that the framework is able to find them in Release mode with .NET Native compilation.
+
 # Bindings
 
 You can use the MvvmCross binding syntax just like you would do in a native Xamarin project. For more information see the [Bindings](https://www.mvvmcross.com/documentation/fundamentals/data-binding) documentation.
