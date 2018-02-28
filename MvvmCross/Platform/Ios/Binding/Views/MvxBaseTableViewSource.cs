@@ -103,14 +103,22 @@ namespace MvvmCross.Platform.Ios.Binding.Views
             var item = GetItemAt(indexPath);
             var cell = GetOrCreateCellFor(tableView, indexPath, item);
 
-            var bindable = cell as IMvxBindable;
-
-            if (bindable != null)
+            if (cell is IMvxBindable bindable)
             {
                 var bindingContext = bindable.BindingContext as MvxTaskBasedBindingContext;
-                if (bindingContext != null && _tableView.RowHeight == UITableView.AutomaticDimension)
+
+                var isTaskBasedBindingContextAndHasAutomaticDimension = bindingContext != null && TableView.RowHeight == UITableView.AutomaticDimension;
+
+                // RunSynchronously must be called before DataContext is set
+                if (isTaskBasedBindingContextAndHasAutomaticDimension)
                     bindingContext.RunSynchronously = true;
+
                 bindable.DataContext = item;
+
+                // If AutomaticDimension is used, xib based cells need to re-layout everything after bindings are applied
+                // otherwise the cell height will be wrong
+                if (isTaskBasedBindingContextAndHasAutomaticDimension)
+                    cell.LayoutIfNeeded();
             }
 
             return cell;
