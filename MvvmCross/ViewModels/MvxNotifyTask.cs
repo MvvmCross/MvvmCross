@@ -13,13 +13,17 @@ namespace MvvmCross.ViewModels
     /// </summary>
     public sealed class MvxNotifyTask : INotifyPropertyChanged
     {
+        private Action<Exception> _onException;
+
         /// <summary>
         /// Initializes a task notifier watching the specified task.
         /// </summary>
         /// <param name="task">The task to watch.</param>
-        private MvxNotifyTask(Task task)
+        /// <param name="onException">Callback to be run when an error happens</param>
+        private MvxNotifyTask(Task task, Action<Exception> onException)
         {
             Task = task;
+            _onException = onException;
             TaskCompleted = MonitorTaskAsync(task);
         }
 
@@ -27,10 +31,12 @@ namespace MvvmCross.ViewModels
         {
             try
             {
+                await Task.Yield();
                 await task;
             }
-            catch
+            catch(Exception e)
             {
+                _onException?.Invoke(e);
             }
             finally
             {
@@ -130,9 +136,10 @@ namespace MvvmCross.ViewModels
         /// Creates a new task notifier watching the specified task.
         /// </summary>
         /// <param name="task">The task to watch.</param>
-        public static MvxNotifyTask Create(Task task)
+        /// <param name="onException">Callback to be run when an error happens</param>
+        public static MvxNotifyTask Create(Task task, Action<Exception> onException = null)
         {
-            return new MvxNotifyTask(task);
+            return new MvxNotifyTask(task, onException);
         }
 
         /// <summary>
@@ -141,18 +148,20 @@ namespace MvvmCross.ViewModels
         /// <typeparam name="TResult">The type of the task result.</typeparam>
         /// <param name="task">The task to watch.</param>
         /// <param name="defaultResult">The default "result" value for the task while it is not yet complete.</param>
-        public static MvxNotifyTask<TResult> Create<TResult>(Task<TResult> task, TResult defaultResult = default(TResult))
+        /// <param name="onException">Callback to be run when an error happens</param>
+        public static MvxNotifyTask<TResult> Create<TResult>(Task<TResult> task, TResult defaultResult = default(TResult), Action<Exception> onException = null)
         {
-            return new MvxNotifyTask<TResult>(task, defaultResult);
+            return new MvxNotifyTask<TResult>(task, defaultResult, onException);
         }
 
         /// <summary>
         /// Executes the specified asynchronous code and creates a new task notifier watching the returned task.
         /// </summary>
         /// <param name="asyncAction">The asynchronous code to execute.</param>
-        public static MvxNotifyTask Create(Func<Task> asyncAction)
+        /// <param name="onException">Callback to be run when an error happens</param>
+        public static MvxNotifyTask Create(Func<Task> asyncAction, Action<Exception> onException = null)
         {
-            return Create(asyncAction());
+            return Create(asyncAction(), onException);
         }
 
         /// <summary>
@@ -160,9 +169,10 @@ namespace MvvmCross.ViewModels
         /// </summary>
         /// <param name="asyncAction">The asynchronous code to execute.</param>
         /// <param name="defaultResult">The default "result" value for the task while it is not yet complete.</param>
-        public static MvxNotifyTask<TResult> Create<TResult>(Func<Task<TResult>> asyncAction, TResult defaultResult = default(TResult))
+        /// <param name="onException">Callback to be run when an error happens</param>
+        public static MvxNotifyTask<TResult> Create<TResult>(Func<Task<TResult>> asyncAction, TResult defaultResult = default(TResult), Action<Exception> onException = null)
         {
-            return Create(asyncAction(), defaultResult);
+            return Create(asyncAction(), defaultResult, onException);
         }
     }
 
@@ -177,15 +187,19 @@ namespace MvvmCross.ViewModels
         /// </summary>
         private readonly TResult _defaultResult;
 
+        private Action<Exception> _onException;
+
         /// <summary>
         /// Initializes a task notifier watching the specified task.
         /// </summary>
         /// <param name="task">The task to watch.</param>
         /// <param name="defaultResult">The value to return from <see cref="Result"/> while the task is not yet complete.</param>
-        internal MvxNotifyTask(Task<TResult> task, TResult defaultResult)
+        /// <param name="onException">Callback to be run when an error happens</param>
+        internal MvxNotifyTask(Task<TResult> task, TResult defaultResult, Action<Exception> onException)
         {
             _defaultResult = defaultResult;
             Task = task;
+            _onException = onException;
             TaskCompleted = MonitorTaskAsync(task);
         }
 
@@ -193,10 +207,12 @@ namespace MvvmCross.ViewModels
         {
             try
             {
+                await System.Threading.Tasks.Task.Yield();
                 await task;
             }
-            catch
+            catch(Exception e)
             {
+                _onException?.Invoke(e);
             }
             finally
             {
