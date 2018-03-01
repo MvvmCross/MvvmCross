@@ -154,7 +154,7 @@ namespace MvvmCross.Core.Navigation
                 }
                 catch(Exception ex)
                 {
-                    ex.MvxWrap($"{nameof(MvxNavigationService)}: Exception thrown while processing URL: {path} with RoutingFacade: {viewModelType}");
+                    throw ex.MvxWrap( $"{nameof(MvxNavigationService)}: Exception thrown while processing URL: {path} with RoutingFacade: {viewModelType}");
                 }
             }
             else
