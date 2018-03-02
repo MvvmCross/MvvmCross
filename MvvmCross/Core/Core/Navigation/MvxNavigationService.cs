@@ -109,7 +109,7 @@ namespace MvvmCross.Core.Navigation
             return paramDict;
         }
 
-        protected virtual async Task<MvxViewModelInstanceRequest> NavigationRouteRequest(string path, IMvxBundle presentationBundle = null)
+        protected async Task<MvxViewModelInstanceRequest> NavigationRouteRequest(string path, IMvxBundle presentationBundle = null)
         {
             KeyValuePair<Regex, Type> entry;
 
@@ -154,7 +154,7 @@ namespace MvvmCross.Core.Navigation
                 }
                 catch(Exception ex)
                 {
-                    throw ex.MvxWrap( $"{nameof(MvxNavigationService)}: Exception thrown while processing URL: {path} with RoutingFacade: {viewModelType}");
+                    ex.MvxWrap($"{nameof(MvxNavigationService)}: Exception thrown while processing URL: {path} with RoutingFacade: {viewModelType}");
                 }
             }
             else
