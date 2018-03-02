@@ -12,7 +12,6 @@ This package contains all plugins for MvvmCross</description>
 			<dependency id="MvvmCross.Platform" version="[$version$]" />
 			<dependency id="MvvmCross.Plugin.Accelerometer" version="[$version$]" />
 			<dependency id="MvvmCross.Plugin.Color" version="[$version$]" />
-			<dependency id="MvvmCross.Plugin.DownloadCache" version="[$version$]" />
 			<dependency id="MvvmCross.Plugin.Email" version="[$version$]" />
 			<dependency id="MvvmCross.Plugin.File" version="[$version$]" />
 			<dependency id="MvvmCross.Plugin.Json" version="[$version$]" />

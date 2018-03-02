@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Threading.Tasks;
 using MvvmCross.Commands;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
@@ -26,7 +27,7 @@ namespace Playground.Core.ViewModels
 
             ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel, SampleModel>(new SampleModel { Message = "Hey", Value = 1.23m }));
 
-            ShowModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalViewModel>());
+            ShowModalCommand = new MvxAsyncCommand(Navigate);
 
             ShowModalNavCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalNavViewModel>());
 
@@ -63,6 +64,21 @@ namespace Playground.Core.ViewModels
                                                            null);
         }
 
+        public override void ViewAppearing()
+        {
+            base.ViewAppearing();
+
+            MyTask = MvxNotifyTask.Create(
+                async () => 
+                {
+                    await Task.Delay(300);
+
+                    throw new System.Exception("Boom!");
+                }, exception => 
+                {
+                });
+        }
+        
         protected override void SaveStateToBundle(IMvxBundle bundle)
         {
             base.SaveStateToBundle(bundle);
@@ -76,6 +92,8 @@ namespace Playground.Core.ViewModels
 
             _counter = int.Parse(state.Data["MyKey"]);
         }
+
+        public MvxNotifyTask MyTask { get; set; }
 
         public IMvxAsyncCommand ShowChildCommand { get; private set; }
 
@@ -104,5 +122,16 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowBindingsViewCommand => new MvxAsyncCommand(async () => await _navigationService.Navigate<BindingsViewModel>());
 
         public IMvxAsyncCommand ShowCodeBehindViewCommand => new MvxAsyncCommand(async () => await _navigationService.Navigate<CodeBehindViewModel>());
+
+        private async Task Navigate()
+        {
+            try 
+            {
+                await _navigationService.Navigate<ModalViewModel>();
+            }
+            catch (System.Exception) 
+            {
+            }
+        }
     }
 }

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;  
 using System.Reflection;
 using MvvmCross.Converters;
 using MvvmCross.Exceptions;
@@ -47,6 +48,11 @@ namespace MvvmCross.Platform.Uap.Core
         protected MvxWindowsSetup(IMvxWindowsFrame rootFrame)
         {
             _rootFrame = rootFrame;
+        }
+
+        public virtual void UpdateActivationArguments(IActivatedEventArgs e)
+        {
+            ActivationArguments = e;
         }
 
         protected override void InitializePlatformServices()
@@ -153,7 +159,7 @@ namespace MvvmCross.Platform.Uap.Core
             // this base class does nothing
         }
 
-        protected IActivatedEventArgs ActivationArguments { get; }
+        protected IActivatedEventArgs ActivationArguments { get; private set; }
 
         protected virtual List<Type> ValueConverterHolders => new List<Type>();        
 
@@ -176,6 +182,39 @@ namespace MvvmCross.Platform.Uap.Core
         protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "Page");
+        }
+    }
+
+    public class MvxWindowsSetup<TApplication> : MvxWindowsSetup
+         where TApplication : IMvxApplication, new()
+    {
+        protected readonly Assembly viewAssembly;
+
+
+        public MvxWindowsSetup(Frame rootFrame, IActivatedEventArgs activatedEventArgs,
+           string suspensionManagerSessionStateKey = null) : base(rootFrame, activatedEventArgs, suspensionManagerSessionStateKey)
+        {
+            viewAssembly = Assembly.GetCallingAssembly();
+        }
+
+        public MvxWindowsSetup(Frame rootFrame, string suspensionManagerSessionStateKey = null) : base(rootFrame, suspensionManagerSessionStateKey)
+        {
+            viewAssembly = Assembly.GetCallingAssembly();
+        }
+
+        public MvxWindowsSetup(IMvxWindowsFrame rootFrame) : base(rootFrame)
+        {
+            viewAssembly = Assembly.GetCallingAssembly();
+        }
+
+        protected override IEnumerable<Assembly> GetViewAssemblies()
+        {
+            return base.GetViewAssemblies().Union(new[] { viewAssembly });
+        }
+
+        protected override IMvxApplication CreateApp()
+        {
+            return new TApplication();
         }
     }
 }

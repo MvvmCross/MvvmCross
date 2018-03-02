@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Forms.Core;
-using MvvmCross.Forms.Platform.iOS.Core;
+using MvvmCross.Forms.Platform.Ios.Core;
 using MvvmCross.Platform.Ios.Core;
 using MvvmCross.Plugin.Json;
 using MvvmCross.ViewModels;
