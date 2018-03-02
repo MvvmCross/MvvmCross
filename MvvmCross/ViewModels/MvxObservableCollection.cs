@@ -220,9 +220,14 @@ namespace MvvmCross.ViewModels
                 throw new ArgumentOutOfRangeException(nameof(start));
             }
 
+            if (count < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(count));
+            }
+
             var end = start + count - 1;
 
-            if (end > Count)
+            if (end < 0 || end > Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(count));
             }
