@@ -7,7 +7,7 @@ using System.Linq;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Lang;
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.Parse.Binding.Lang

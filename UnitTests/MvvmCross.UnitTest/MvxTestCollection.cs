@@ -1,4 +1,4 @@
-﻿using MvvmCross.Test;
+﻿using MvvmCross.Tests;
 using Xunit;
 
 namespace MvvmCross.UnitTest
