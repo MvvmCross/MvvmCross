@@ -2,7 +2,7 @@
 layout: documentation
 title: View Presenters
 category: Fundamentals
-order: 3
+order: 4
 ---
 
 View Presenters are a key object in the MvvmCross architecture. It is a singleton that acts as a glue between your Views and your ViewModels. As the name implies, a view presenter takes a ViewModel presentation request (that is built once you call `ShowViewModel<MyViewModel>()`) and decides how it will be presented on the UI.
