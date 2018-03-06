@@ -12,6 +12,7 @@
     <None Include="Platform\**\*.cs" />
     <None Include="Resources\*.cs" />
     <Compile Remove="Resources\*.cs" />
+    <None Include="readme.txt" pack="true" PackagePath="." />
   </ItemGroup>
   
   <ItemGroup>
@@ -73,10 +74,6 @@
     <Compile Include="Platform\Tizen\**\*.cs" />
     <Compile Include="Platform\Xamarin-common\**\*.cs" />
     <PackageReference Include="Tizen.NET" Version="4.0.0" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <None Include="..\readme.txt" pack="true" PackagePath="." />
   </ItemGroup>
 
   <ItemGroup>
