@@ -38,9 +38,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross", "MvvmCross\MvvmCross.csproj", "{49F965F5-5824-4BBE-94EA-0178F848ABDB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Forms", "MvvmCross.Forms\MvvmCross.Forms.csproj", "{013BB2B2-8204-43BD-AA7B-E494007F0B94}"
-	ProjectSection(ProjectDependencies) = postProject
-		{FD67CBBC-4BAC-40D6-9F4C-28AAE6C8533E} = {FD67CBBC-4BAC-40D6-9F4C-28AAE6C8533E}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.Accelerometer", "MvvmCross.Plugins\Accelerometer\MvvmCross.Plugin.Accelerometer.csproj", "{E038C845-9ECD-42BC-89B3-627E374F7550}"
 EndProject
