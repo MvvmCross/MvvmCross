@@ -26,6 +26,9 @@ Files to include yourself:
 * App.xaml
 * App.xaml.cs
 
+Sample files are available at:
+https://github.com/MvvmCross/MvvmCross/blob/develop/ContentFiles/
+
 Changelog:
 https://github.com/MvvmCross/MvvmCross/blob/develop/CHANGELOG.md
 
