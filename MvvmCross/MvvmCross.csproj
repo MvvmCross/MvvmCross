@@ -74,6 +74,10 @@
     <Compile Include="Platform\Xamarin-common\**\*.cs" />
     <PackageReference Include="Tizen.NET" Version="4.0.0" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="..\readme.txt" pack="true" PackagePath="." />
+  </ItemGroup>
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
