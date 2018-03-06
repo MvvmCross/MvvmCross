@@ -14,8 +14,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross.Plugins\ResxLocalization\MvvmCross.Plugin.ResxLocalization.csproj" />
+    <ProjectReference Include="..\..\MvvmCross.Tests\MvvmCross.Tests.csproj" />
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
-    <ProjectReference Include="..\..\MvvmCross.Test\MvvmCross.Test.csproj" />
   </ItemGroup>
 
   <ItemGroup>

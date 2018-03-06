@@ -10,7 +10,7 @@ using MvvmCross.Logging;
 
 [assembly: InternalsVisibleTo("MvvmCross.UnitTest")]
 
-namespace MvvmCross.Test
+namespace MvvmCross.Tests
 {
     internal static class MvxTestLog
     {

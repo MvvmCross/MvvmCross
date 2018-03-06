@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Base;
 using MvvmCross.Logging;
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 

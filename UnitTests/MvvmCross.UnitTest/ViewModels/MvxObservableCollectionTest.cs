@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using MvvmCross.Base;
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using MvvmCross.ViewModels;
 using Xunit;
 
