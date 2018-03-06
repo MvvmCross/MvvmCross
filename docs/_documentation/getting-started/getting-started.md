@@ -50,6 +50,9 @@ MVXTemplates | Luke Pothier | [Visual Studio](https://marketplace.visualstudio.c
 
 You can choose to download and install an extension manually, or you can get it from the Extension Manager in Visual Studio / the Add-In Gallery in Xamarin Studio (Visual Studio for Mac).
 
+## Show me some code!
+
+Please check [this document](https://www.mvvmcross.com/documentation/fundamentals/mvvmcross-overview) to get an overview of how MvvmCross works.
 
 ## Help updating the docs!
 
