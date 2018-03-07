@@ -5,7 +5,7 @@
 //
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using Xunit;
 
 namespace MvvmCross.Plugins.Network.UnitTest

@@ -159,6 +159,10 @@
       <Project>{fc0b3e3c-8b00-48fa-af93-981a45b2be4b}</Project>
       <Name>MvvmCross.Droid.Support.Fragment</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross.Android.Support\V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj">
+      <Project>{fd67cbbc-4bac-40d6-9f4c-28aae6c8533e}</Project>
+      <Name>MvvmCross.Droid.Support.V7.AppCompat</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross.Forms\MvvmCross.Forms.csproj">
       <Project>{013bb2b2-8204-43bd-aa7b-e494007f0b94}</Project>
       <Name>MvvmCross.Forms</Name>

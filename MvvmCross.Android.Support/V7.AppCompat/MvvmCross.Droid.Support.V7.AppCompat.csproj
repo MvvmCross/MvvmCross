@@ -25,10 +25,6 @@
     <ProjectReference Include="..\Design\MvvmCross.Droid.Support.Design.csproj" />
     <ProjectReference Include="..\Fragment\MvvmCross.Droid.Support.Fragment.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Resources\layouts\" />
-  </ItemGroup>
 
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
 
