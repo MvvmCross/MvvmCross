@@ -9,7 +9,7 @@ using MvvmCross.Core;
 using MvvmCross.IoC;
 using MvvmCross.Logging;
 
-namespace MvvmCross.Test
+namespace MvvmCross.Tests
 {
     public class MvxIoCSupportingTest
     {

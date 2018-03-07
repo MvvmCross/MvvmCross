@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 using MvvmCross.Plugins.JsonLocalization.UnitTest.TestClasses;
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using Xunit;
 
 namespace MvvmCross.Plugins.JsonLocalization.UnitTest

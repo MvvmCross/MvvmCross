@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross.Plugins\Visibility\MvvmCross.Plugin.Visibility.csproj" />
-    <ProjectReference Include="..\..\MvvmCross.Test\MvvmCross.Test.csproj" />
+    <ProjectReference Include="..\..\MvvmCross.Tests\MvvmCross.Tests.csproj" />
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
   </ItemGroup>
 

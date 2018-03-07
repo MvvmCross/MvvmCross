@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Moq;
  using MvvmCross.Core;
  using MvvmCross.Navigation;
- using MvvmCross.Test;
+ using MvvmCross.Tests;
  using MvvmCross.UnitTest.Mocks.Dispatchers;
  using MvvmCross.UnitTest.Mocks.ViewModels;
  using MvvmCross.ViewModels;

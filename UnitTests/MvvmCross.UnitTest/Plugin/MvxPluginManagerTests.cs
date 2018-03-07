@@ -2,7 +2,7 @@
 using System.Linq;
 using MvvmCross.Exceptions;
 using MvvmCross.Plugin;
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using MvvmCross.UnitTest.Mocks.Plugin;
 using Xunit;
 

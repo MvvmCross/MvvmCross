@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 ﻿using MvvmCross.Binding.Parse.Binding;
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.Parse.Binding

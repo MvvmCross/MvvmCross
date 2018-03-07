@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MvvmCross.Test
+namespace MvvmCross.Tests
 {
     public class MvxTestFixture : MvxIoCSupportingTest, IDisposable
     {

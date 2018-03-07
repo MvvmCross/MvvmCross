@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Binding.Parse.Binding.Tibet;
 using MvvmCross.Logging;
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss

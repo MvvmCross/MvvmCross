@@ -113,7 +113,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Droid", "Project
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Forms.Droid", "Projects\Playground\Playground.Forms.Droid\Playground.Forms.Droid.csproj", "{A8A8B9B3-34FA-4769-AE81-4D80F9BDC3BB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Test", "MvvmCross.Test\MvvmCross.Test.csproj", "{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Tests", "MvvmCross.Tests\MvvmCross.Tests.csproj", "{8DFE6A59-AD7D-4916-ABF3-D2D1B0F55858}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Forms.iOS", "Projects\Playground\Playground.Forms.iOS\Playground.Forms.iOS.csproj", "{344370AA-AC33-4E7B-8C82-67CEA99F45ED}"
 EndProject
