@@ -259,12 +259,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                         break;
                     case NotifyCollectionChangedAction.Move:
                         for (int i = 0; i < e.NewItems.Count; i++)
-                        {
-                            var oldItem = e.OldItems[i];
-                            var newItem = e.NewItems[i];
-
-                            NotifyItemMoved(GetViewPosition(oldItem), GetViewPosition(newItem));
-                        }
+                            NotifyItemMoved(GetViewPosition(e.OldStartingIndex + i), GetViewPosition(e.NewStartingIndex + i));
                         break;
                     case NotifyCollectionChangedAction.Replace:
                         NotifyItemRangeChanged(GetViewPosition(e.NewStartingIndex), e.NewItems.Count);
