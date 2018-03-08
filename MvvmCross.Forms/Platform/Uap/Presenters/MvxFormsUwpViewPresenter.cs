@@ -9,6 +9,7 @@ using MvvmCross.Logging;
 using MvvmCross.Platform.Uap.Presenters;
 using MvvmCross.Platform.Uap.Views;
 using MvvmCross.ViewModels;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platform.Uap.Presenters
 {
@@ -20,13 +21,13 @@ namespace MvvmCross.Forms.Platform.Uap.Presenters
         {
         }
 
-        public MvxFormsUwpViewPresenter(IMvxWindowsFrame rootFrame, MvxFormsApplication formsApplication) : this(rootFrame)
+        public MvxFormsUwpViewPresenter(IMvxWindowsFrame rootFrame, Application formsApplication) : this(rootFrame)
         {
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
         }
 
-        private MvxFormsApplication _formsApplication;
-        public MvxFormsApplication FormsApplication
+        private Application _formsApplication;
+        public Application FormsApplication
         {
             get { return _formsApplication; }
             set { _formsApplication = value; }

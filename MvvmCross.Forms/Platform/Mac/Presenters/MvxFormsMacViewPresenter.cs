@@ -9,6 +9,7 @@ using MvvmCross.Forms.Presenters;
 using MvvmCross.Logging;
 using MvvmCross.Platform.Mac.Presenters;
 using MvvmCross.ViewModels;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platform.Mac.Presenters
 {
@@ -16,13 +17,13 @@ namespace MvvmCross.Forms.Platform.Mac.Presenters
         : MvxMacViewPresenter
         , IMvxFormsViewPresenter
     {
-        public MvxFormsMacViewPresenter(INSApplicationDelegate applicationDelegate, MvxFormsApplication formsApplication) : base(applicationDelegate)
+        public MvxFormsMacViewPresenter(INSApplicationDelegate applicationDelegate, Application formsApplication) : base(applicationDelegate)
         {
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
         }
 
-        private MvxFormsApplication _formsApplication;
-        public MvxFormsApplication FormsApplication
+        private Application _formsApplication;
+        public Application FormsApplication
         {
             get { return _formsApplication; }
             set { _formsApplication = value; }

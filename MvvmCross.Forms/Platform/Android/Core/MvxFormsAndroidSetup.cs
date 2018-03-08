@@ -18,13 +18,14 @@ using MvvmCross.ViewModels;
 using MvvmCross.Platform.Android;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.Forms.Platform.Android.Presenters;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platform.Android.Core
 {
     public abstract class MvxFormsAndroidSetup : MvxAndroidSetup
     {
         private List<Assembly> _viewAssemblies;
-        private MvxFormsApplication _formsApplication;
+        private Application _formsApplication;
 
         protected MvxFormsAndroidSetup(Context applicationContext) : base(applicationContext)
         {
@@ -46,7 +47,7 @@ namespace MvvmCross.Forms.Platform.Android.Core
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public MvxFormsApplication FormsApplication
+        public Application FormsApplication
         {
             get
             {
@@ -64,7 +65,7 @@ namespace MvvmCross.Forms.Platform.Android.Core
             }
         }
 
-        protected abstract MvxFormsApplication CreateFormsApplication();
+        protected abstract Application CreateFormsApplication();
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
