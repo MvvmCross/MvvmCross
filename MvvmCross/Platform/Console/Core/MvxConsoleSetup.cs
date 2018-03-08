@@ -7,6 +7,8 @@ using MvvmCross.Core;
 using MvvmCross.Platform.Console.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace MvvmCross.Platform.Console.Core
 {
@@ -45,6 +47,17 @@ namespace MvvmCross.Platform.Console.Core
         protected override void InitializeLastChance()
         {
             InitializeMessagePump();
+        }
+    }
+
+    public abstract class MvxConsoleSetup<TApplication> : MvxConsoleSetup
+        where TApplication : IMvxApplication, new()
+    {
+        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+
+        protected override IEnumerable<Assembly> GetViewModelAssemblies()
+        {
+            return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
     }
 }

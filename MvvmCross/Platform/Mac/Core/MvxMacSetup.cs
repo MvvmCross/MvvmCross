@@ -175,4 +175,27 @@ namespace MvvmCross.Platform.Mac.Core
             // this base class does nothing
         }
     }
+
+    public abstract class MvxMacSetup<TApplication> : MvxMacSetup
+        where TApplication : IMvxApplication, new()
+    {
+        protected MvxMacSetup(IMvxApplicationDelegate applicationDelegate) : base(applicationDelegate)
+        {
+        }
+
+        protected MvxMacSetup(IMvxApplicationDelegate applicationDelegate, NSWindow window) : base(applicationDelegate, window)
+        {
+        }
+
+        protected MvxMacSetup(IMvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter) : base(applicationDelegate, presenter)
+        {
+        }
+
+        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+
+        protected override IEnumerable<Assembly> GetViewModelAssemblies()
+        {
+            return new[] { typeof(TApplication).GetTypeInfo().Assembly };
+        }
+    }
 }
