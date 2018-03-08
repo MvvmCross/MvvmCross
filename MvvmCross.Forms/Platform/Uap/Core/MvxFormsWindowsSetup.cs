@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -86,7 +86,7 @@ namespace MvvmCross.Forms.Platform.Uap.Core
     }
 
     public class MvxFormsWindowsSetup<TApplication, TFormsApplication> : MvxFormsWindowsSetup
-        where TFormsApplication : MvxFormsApplication, new()
+        where TFormsApplication : Application, new()
         where TApplication : IMvxApplication, new()
     {
         public MvxFormsWindowsSetup(XamlControls.Frame rootFrame, IActivatedEventArgs activatedEventArgs, string suspensionManagerSessionStateKey = null) 
@@ -99,7 +99,7 @@ namespace MvvmCross.Forms.Platform.Uap.Core
             return new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(TFormsApplication).GetTypeInfo().Assembly }));
         }
 
-        protected override MvxFormsApplication CreateFormsApplication() => new TFormsApplication();
+        protected override Application CreateFormsApplication() => new TFormsApplication();
 
         protected override IMvxApplication CreateApp() => new TApplication();
     }
