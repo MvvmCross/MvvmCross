@@ -17,7 +17,7 @@ namespace Playground.Forms.Uwp
 
         protected override MvxWindowsSetup CreateSetup(Frame rootFrame, IActivatedEventArgs e, string suspension)
         {
-            return new MvxFormsWindowsSetup<Core.App,FormsApp>(rootFrame, e, suspension);
+            return new MvxFormsWindowsSetup<Core.App, FormsApp>(rootFrame, e, suspension);
         }
 
         protected override Type HostWindowsPageType()
