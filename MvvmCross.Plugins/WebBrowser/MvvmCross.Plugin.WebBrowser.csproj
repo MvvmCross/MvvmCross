@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net461;uap10.0.16299;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid80;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net461;uap10.0.16299;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid80;tizen40</TargetFrameworks>
     <AssemblyName>MvvmCross.Plugin.WebBrowser</AssemblyName>
     <RootNamespace>MvvmCross.Plugin.WebBrowser</RootNamespace>
     <Description></Description>
@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
-    <Compile Include="Platform\Net461\**\*.cs" />
+    <Compile Include="Platform\Net\**\*.cs" />
     <Compile Include="Platform\Wpf\**\*.cs" />
   </ItemGroup>
 
@@ -61,16 +61,14 @@
     <Compile Include="Platform\Xamarin-common\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
-    <Compile Include="Platform\Netcoreapp\**\*.cs" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'tizen40' ">
+    <Compile Include="Platform\Tizen\**\*.cs" />
+    <Compile Include="Platform\Xamarin-common\**\*.cs" />
+    <PackageReference Include="Tizen.NET" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
