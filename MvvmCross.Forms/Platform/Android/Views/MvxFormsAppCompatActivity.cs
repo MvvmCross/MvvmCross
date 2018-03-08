@@ -105,6 +105,11 @@ namespace MvvmCross.Forms.Platform.Android.Views
 
         public virtual void InitializeForms(Bundle bundle)
         {
+            if(null == global::Xamarin.Forms.Application.Current)
+            {
+                global::Xamarin.Forms.Application.Current = FormsApplication;
+            }
+
             if (FormsApplication.MainPage != null)
             {
                 global::Xamarin.Forms.Forms.Init(this, bundle, GetResourceAssembly());
