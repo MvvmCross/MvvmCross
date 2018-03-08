@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -18,13 +18,14 @@ using MvvmCross.ViewModels;
 using XamlControls = Windows.UI.Xaml.Controls;
 using MvvmCross.Platform.Uap.Presenters;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platform.Uap.Core
 {
     public abstract class MvxFormsWindowsSetup : MvxWindowsSetup
     {
         private List<Assembly> _viewAssemblies;
-        private MvxFormsApplication _formsApplication;
+        private Application _formsApplication;
 
         protected MvxFormsWindowsSetup(XamlControls.Frame rootFrame, IActivatedEventArgs activatedEventArgs, string suspensionManagerSessionStateKey = null)
             : base(rootFrame, activatedEventArgs, suspensionManagerSessionStateKey)
@@ -47,7 +48,7 @@ namespace MvvmCross.Forms.Platform.Uap.Core
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public MvxFormsApplication FormsApplication
+        public Application FormsApplication
         {
             get
             {
@@ -60,7 +61,7 @@ namespace MvvmCross.Forms.Platform.Uap.Core
             }
         }
 
-        protected abstract MvxFormsApplication CreateFormsApplication();
+        protected abstract Application CreateFormsApplication();
 
         protected override IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
         {
@@ -85,7 +86,7 @@ namespace MvvmCross.Forms.Platform.Uap.Core
     }
 
     public class MvxFormsWindowsSetup<TApplication, TFormsApplication> : MvxFormsWindowsSetup
-        where TFormsApplication : MvxFormsApplication, new()
+        where TFormsApplication : Application, new()
         where TApplication : IMvxApplication, new()
     {
         public MvxFormsWindowsSetup(XamlControls.Frame rootFrame, IActivatedEventArgs activatedEventArgs, string suspensionManagerSessionStateKey = null) 
@@ -98,7 +99,7 @@ namespace MvvmCross.Forms.Platform.Uap.Core
             return new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(TFormsApplication).GetTypeInfo().Assembly }));
         }
 
-        protected override MvxFormsApplication CreateFormsApplication() => new TFormsApplication();
+        protected override Application CreateFormsApplication() => new TFormsApplication();
 
         protected override IMvxApplication CreateApp() => new TApplication();
     }

@@ -17,6 +17,7 @@ using MvvmCross.Platform.Android.Binding.Views;
 using MvvmCross.Platform.Android.Core;
 using MvvmCross.Platform.Android.Views;
 using MvvmCross.ViewModels;
+using Application = Xamarin.Forms.Application;
 
 namespace MvvmCross.Forms.Platform.Android.Views
 {
@@ -49,8 +50,8 @@ namespace MvvmCross.Forms.Platform.Android.Views
             }
         }
 
-        private MvxFormsApplication _formsApplication;
-        protected MvxFormsApplication FormsApplication
+        private Application _formsApplication;
+        protected Application FormsApplication
         {
             get
             {
