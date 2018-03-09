@@ -7,6 +7,7 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Localization;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platform.Android.Bindings;
