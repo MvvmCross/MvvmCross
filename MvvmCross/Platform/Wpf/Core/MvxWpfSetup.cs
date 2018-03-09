@@ -11,6 +11,8 @@ using MvvmCross.Platform.Wpf.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using MvvmCross.Presenters;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace MvvmCross.Platform.Wpf.Core
 {
@@ -80,6 +82,25 @@ namespace MvvmCross.Platform.Wpf.Core
         protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "Control");
+        }
+    }
+
+    public abstract class MvxWpfSetup<TApplication> : MvxWpfSetup
+        where TApplication : IMvxApplication, new()
+    {
+        protected MvxWpfSetup(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter) : base(uiThreadDispatcher, presenter)
+        {
+        }
+
+        protected MvxWpfSetup(Dispatcher uiThreadDispatcher, ContentControl root) : base(uiThreadDispatcher, root)
+        {
+        }
+
+        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+
+        protected override IEnumerable<Assembly> GetViewModelAssemblies()
+        {
+            return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
     }
 }

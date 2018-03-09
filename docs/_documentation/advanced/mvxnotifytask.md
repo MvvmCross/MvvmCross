@@ -97,7 +97,7 @@ public class MyViewModel : MvxViewModel
     {
         _someService = someService;
 
-        MyCommand = new MvxCommand(() => MyTaskNotifier = MvxNotifyTask.Create(() => MyMethodAsync()));
+        MyCommand = new MvxCommand(() => MyTaskNotifier = MvxNotifyTask.Create(() => MyMethodAsync(), onException: ex => OnException(ex)));
     }
 
     public void Prepare()
@@ -112,7 +112,12 @@ public class MyViewModel : MvxViewModel
     
     public IMvxCommand MyCommand { get; private set; }
 
-    public MvxNotifyTask MyTaskNotifier { get; private set; }
+    private MvxNotifyTask _myTaskNotifier;
+    public MvxNotifyTask MyTaskNotifier 
+    {
+        get => _myTaskNotifier;
+        private set => SetProperty(ref _myTaskNotifier, value);
+    }
 
     // ...
 
@@ -122,10 +127,17 @@ public class MyViewModel : MvxViewModel
         
         // ...
     }
+
+    private void OnException(Exception exception)
+    {
+        // log the handled exception!
+    }
 }
 ```
 
-That's it! Everything that is left now is to assign the bindings on the Views that we want to display while the operation is running. 
+That's it! You can also use the optional parameter `onException` to get some code run in case any exception occurs.
+
+Everything that is left now is to assign the bindings on the Views that we want to display while the operation is running. 
 
 On Android:
 
@@ -145,5 +157,32 @@ set.Bind(_myControl).For("Visibility").To(vm => vm.MyTaskNotifier.IsCompleted);
 set.Apply();
 ```
 
+### Generalizing a way to catch 'em all!
+
+Although MvxNotifyTask provides a clean way to manage async code states at all levels, you can take it one step further and create a custom implementation that makes logging exceptions dead easy:
+
+```c#
+public static class CustomNotifyTask
+{
+    public static MvxNotifyTask Create(Func<Task> task)
+    {
+        return MvxNotifyTask.Create(
+            async () =>
+            {
+                try
+                {
+                    await task.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    HandleException(ex);
+                    throw ex;
+                }
+            });
+    }
+}
+```
+
+As long as you run your async operations using a NotifyTask object, your app won't crash anymore.
 
 Disclaimer note: MvxNotifyTask class and its dependencies are originally created by Stephen Cleary and its code is being modified and redistributed from his library Mvvm.Async.

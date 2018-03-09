@@ -190,7 +190,6 @@ namespace MvvmCross.Platform.Uap.Core
     {
         protected readonly Assembly viewAssembly;
 
-
         public MvxWindowsSetup(Frame rootFrame, IActivatedEventArgs activatedEventArgs,
            string suspensionManagerSessionStateKey = null) : base(rootFrame, activatedEventArgs, suspensionManagerSessionStateKey)
         {
@@ -212,9 +211,11 @@ namespace MvvmCross.Platform.Uap.Core
             return base.GetViewAssemblies().Union(new[] { viewAssembly });
         }
 
-        protected override IMvxApplication CreateApp()
+        protected override IEnumerable<Assembly> GetViewModelAssemblies()
         {
-            return new TApplication();
+            return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
+
+        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
     }
 }

@@ -263,4 +263,19 @@ namespace MvvmCross.Platform.Android.Core
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "Activity", "Fragment");
         }
     }
+
+    public abstract class MvxAndroidSetup<TApplication> : MvxAndroidSetup
+        where TApplication : IMvxApplication, new()
+    {
+        protected MvxAndroidSetup(Context applicationContext) : base(applicationContext)
+        {
+        }
+
+        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+
+        protected override IEnumerable<Assembly> GetViewModelAssemblies()
+        {
+            return new[] { typeof(TApplication).GetTypeInfo().Assembly };
+        }
+    }
 }

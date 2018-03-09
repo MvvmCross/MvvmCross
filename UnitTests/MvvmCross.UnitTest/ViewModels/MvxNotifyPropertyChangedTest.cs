@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using MvvmCross.Base;
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using MvvmCross.UnitTest.Mocks.Dispatchers;
 using MvvmCross.ViewModels;
 using Xunit;

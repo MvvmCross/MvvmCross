@@ -172,4 +172,23 @@ namespace MvvmCross.Platform.Tvos.Core
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "ViewController");
         }
     }
+
+    public abstract class MvxTvosSetup<TApplication> : MvxTvosSetup
+        where TApplication : IMvxApplication, new()
+    {
+        protected MvxTvosSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window) : base(applicationDelegate, window)
+        {
+        }
+
+        protected MvxTvosSetup(IMvxApplicationDelegate applicationDelegate, IMvxTvosViewPresenter presenter) : base(applicationDelegate, presenter)
+        {
+        }
+
+        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+
+        protected override IEnumerable<Assembly> GetViewModelAssemblies()
+        {
+            return new[] { typeof(TApplication).GetTypeInfo().Assembly };
+        }
+    }
 }

@@ -14,12 +14,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj" />
+    <ProjectReference Include="..\..\MvvmCross.Tests\MvvmCross.Tests.csproj" />
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
-    <ProjectReference Include="..\..\MvvmCross.Test\MvvmCross.Test.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
   
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />

@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>MonoAndroid80</TargetFrameworks>
     <AssemblyName>MvvmCross.Droid.Support.V14.Preference</AssemblyName>
@@ -24,5 +23,4 @@
   </ItemGroup>
 
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
-
 </Project>
