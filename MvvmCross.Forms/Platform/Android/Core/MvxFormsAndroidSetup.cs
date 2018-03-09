@@ -19,6 +19,7 @@ using MvvmCross.Platform.Android;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.Forms.Platform.Android.Presenters;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace MvvmCross.Forms.Platform.Android.Core
 {
@@ -112,5 +113,28 @@ namespace MvvmCross.Forms.Platform.Android.Core
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "Activity", "Fragment", "Page");
         }
-    }    
+    }
+
+    public class MvxFormsAndroidSetup<TApplication, TFormsApplication> : MvxFormsAndroidSetup
+        where TApplication : IMvxApplication, new()
+        where TFormsApplication : Application, new()
+    {
+        protected MvxFormsAndroidSetup(Context applicationContext) : base(applicationContext)
+        {
+        }
+
+        protected override IEnumerable<Assembly> GetViewAssemblies()
+        {
+            return new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(TFormsApplication).GetTypeInfo().Assembly }));
+        }
+
+        protected override IEnumerable<Assembly> GetViewModelAssemblies()
+        {
+            return new[] { typeof(TApplication).GetTypeInfo().Assembly };
+        }
+
+        protected override Application CreateFormsApplication() => new TFormsApplication();
+
+        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+    }
 }
