@@ -1,7 +1,74 @@
 # Change Log
 
-## [6.0.0-beta3](https://github.com/MvvmCross/MvvmCross/tree/6.0.0-beta3) 
-(2018-02-14)
+## [6.0.0-beta.5](https://github.com/MvvmCross/MvvmCross/tree/6.0.0-beta.5) (2018-03-09)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.0.0-beta4...6.0.0-beta.5)
+
+**Fixed bugs:**
+
+- OnStart is not called for a Xamarin Forms iOS application [\#2223](https://github.com/MvvmCross/MvvmCross/issues/2223)
+- Fix moving items in the MvxRecyclerAdapter [\#2664](https://github.com/MvvmCross/MvvmCross/pull/2664) ([kjeremy](https://github.com/kjeremy))
+
+**Closed issues:**
+
+- Support for netstandard1.4 in version 6.0 [\#2649](https://github.com/MvvmCross/MvvmCross/issues/2649)
+- ParameterValues doesn't set in NavigationService [\#2646](https://github.com/MvvmCross/MvvmCross/issues/2646)
+- get view api [\#2643](https://github.com/MvvmCross/MvvmCross/issues/2643)
+- MvvmCross.Plugins.Location.Fused.Droid.Plugin does not load [\#2637](https://github.com/MvvmCross/MvvmCross/issues/2637)
+- Cleanup "Sidebar" plugin [\#2626](https://github.com/MvvmCross/MvvmCross/issues/2626)
+- StarterPack does not generate files on vs17 [\#2595](https://github.com/MvvmCross/MvvmCross/issues/2595)
+- MvxFormsApplication Start, Sleep and Resume gets not called on iOS [\#2512](https://github.com/MvvmCross/MvvmCross/issues/2512)
+- View shown before ViewModel initialization complete [\#2478](https://github.com/MvvmCross/MvvmCross/issues/2478)
+
+**Merged pull requests:**
+
+- Added RaiseCanExecuteChanged interface definition to IMvxCommand\<T\> [\#2672](https://github.com/MvvmCross/MvvmCross/pull/2672) ([jnosek](https://github.com/jnosek))
+- Cleanup csproj files and add missing headers [\#2671](https://github.com/MvvmCross/MvvmCross/pull/2671) ([martijn00](https://github.com/martijn00))
+- Add check in navigation service to see if viewmodels are available [\#2670](https://github.com/MvvmCross/MvvmCross/pull/2670) ([martijn00](https://github.com/martijn00))
+- Add generic setup to all platforms [\#2668](https://github.com/MvvmCross/MvvmCross/pull/2668) ([martijn00](https://github.com/martijn00))
+- Update upgrade-to-mvvmcross-60.md [\#2667](https://github.com/MvvmCross/MvvmCross/pull/2667) ([asterixorobelix](https://github.com/asterixorobelix))
+- Fix some projects not building in specific configs [\#2663](https://github.com/MvvmCross/MvvmCross/pull/2663) ([martijn00](https://github.com/martijn00))
+- Delete empty IMvxModalIosView [\#2660](https://github.com/MvvmCross/MvvmCross/pull/2660) ([martijn00](https://github.com/martijn00))
+- Add readme.txt file to open on nuget install [\#2658](https://github.com/MvvmCross/MvvmCross/pull/2658) ([martijn00](https://github.com/martijn00))
+- Rename test to tests to align with old nuget package and current naming [\#2657](https://github.com/MvvmCross/MvvmCross/pull/2657) ([martijn00](https://github.com/martijn00))
+- Version bump for UWP and SDKExtras nuget packages [\#2656](https://github.com/MvvmCross/MvvmCross/pull/2656) ([nickrandolph](https://github.com/nickrandolph))
+- Documentation: MvxNotifyTask, ViewModel-Lifecycle location, Samples [\#2655](https://github.com/MvvmCross/MvvmCross/pull/2655) ([nmilcoff](https://github.com/nmilcoff))
+- Merge master back into develop to update docs [\#2654](https://github.com/MvvmCross/MvvmCross/pull/2654) ([nmilcoff](https://github.com/nmilcoff))
+- add throw for Exception in MvxNavigationService [\#2651](https://github.com/MvvmCross/MvvmCross/pull/2651) ([kvandake](https://github.com/kvandake))
+- Use the basic Forms application type instead of the Mvx one [\#2617](https://github.com/MvvmCross/MvvmCross/pull/2617) ([martijn00](https://github.com/martijn00))
+
+## [6.0.0-beta4](https://github.com/MvvmCross/MvvmCross/tree/6.0.0-beta4) (2018-03-02)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.0.0-beta3...6.0.0-beta4)
+
+**Fixed bugs:**
+
+- MvxBaseTableViewSource: Fix wrong height for xib based cells  [\#2644](https://github.com/MvvmCross/MvvmCross/pull/2644) ([nmilcoff](https://github.com/nmilcoff))
+- Apply default templates to MvxAppCompatSpinner [\#2640](https://github.com/MvvmCross/MvvmCross/pull/2640) ([kjeremy](https://github.com/kjeremy))
+
+**Closed issues:**
+
+- MvvmCross.Plugin.Location.Fused 5.6.3 not compatible with MvvmCross.Droid.Support.v7.AppCompat 5.6.3 [\#2633](https://github.com/MvvmCross/MvvmCross/issues/2633)
+- MvvmCross.Plugin.Location.Fused 5.6.3 is not compatible with netstandard2.0 [\#2607](https://github.com/MvvmCross/MvvmCross/issues/2607)
+
+**Merged pull requests:**
+
+- Revert "MvxNavigationService.cs. Add "throw" for an exception in the method NavigationRouteRequest." [\#2650](https://github.com/MvvmCross/MvvmCross/pull/2650) ([Cheesebaron](https://github.com/Cheesebaron))
+- Add docs for resharper annotations [\#2648](https://github.com/MvvmCross/MvvmCross/pull/2648) ([mterwoord](https://github.com/mterwoord))
+- MvxNavigationService.cs. Add "throw" for an exception in the method NavigationRouteRequest. [\#2647](https://github.com/MvvmCross/MvvmCross/pull/2647) ([kvandake](https://github.com/kvandake))
+- MvxNotifyTask improvements [\#2642](https://github.com/MvvmCross/MvvmCross/pull/2642) ([nmilcoff](https://github.com/nmilcoff))
+- Update nuget packages [\#2639](https://github.com/MvvmCross/MvvmCross/pull/2639) ([martijn00](https://github.com/martijn00))
+- Don't put a user dependency on Microsoft.CSharp [\#2638](https://github.com/MvvmCross/MvvmCross/pull/2638) ([martijn00](https://github.com/martijn00))
+- Adding support for custom renderer assemblies to MvxFormsWindowsSetup [\#2635](https://github.com/MvvmCross/MvvmCross/pull/2635) ([MartinZikmund](https://github.com/MartinZikmund))
+- Binding types fix [\#2632](https://github.com/MvvmCross/MvvmCross/pull/2632) ([Saratsin](https://github.com/Saratsin))
+- Rename folders from iOS to Ios [\#2630](https://github.com/MvvmCross/MvvmCross/pull/2630) ([nmilcoff](https://github.com/nmilcoff))
+- Fix the compiling error of Playground.Forms.Uwp [\#2628](https://github.com/MvvmCross/MvvmCross/pull/2628) ([flyingxu](https://github.com/flyingxu))
+- Align namespaces: Rename iOS namespaces to Ios [\#2627](https://github.com/MvvmCross/MvvmCross/pull/2627) ([nmilcoff](https://github.com/nmilcoff))
+- Remove DownloadCache plugin [\#2625](https://github.com/MvvmCross/MvvmCross/pull/2625) ([nmilcoff](https://github.com/nmilcoff))
+- Add observable collection tests [\#2618](https://github.com/MvvmCross/MvvmCross/pull/2618) ([Cheesebaron](https://github.com/Cheesebaron))
+- Reducing code to get started for UWP projects [\#2615](https://github.com/MvvmCross/MvvmCross/pull/2615) ([nickrandolph](https://github.com/nickrandolph))
+- Updating various startup logic [\#2593](https://github.com/MvvmCross/MvvmCross/pull/2593) ([nickrandolph](https://github.com/nickrandolph))
+- Blog post & Migration Guide for v6 [\#2590](https://github.com/MvvmCross/MvvmCross/pull/2590) ([nmilcoff](https://github.com/nmilcoff))
+
+## [6.0.0-beta3](https://github.com/MvvmCross/MvvmCross/tree/6.0.0-beta3) (2018-02-14)
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.0.0-beta2...6.0.0-beta3)
 
 **Fixed bugs:**
