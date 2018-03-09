@@ -32,6 +32,17 @@ namespace MvvmCross.Navigation
             set => _viewDispatcher = value;
         }
 
+        private IMvxViewsContainer _viewsContainer;
+        protected IMvxViewsContainer ViewsContainer
+        {
+            get {
+                if (_viewsContainer == null)
+                    _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
+                return _viewsContainer;
+            }
+            set => _viewsContainer = value;
+        }
+
         protected static readonly Dictionary<Regex, Type> Routes = new Dictionary<Regex, Type>();
         protected virtual IMvxNavigationCache NavigationCache { get; private set; }
         protected IMvxViewModelLoader ViewModelLoader { get; set; }
@@ -116,7 +127,7 @@ namespace MvvmCross.Navigation
             return paramDict;
         }
 
-        protected async Task<MvxViewModelInstanceRequest> NavigationRouteRequest(string path, IMvxBundle presentationBundle = null)
+        protected virtual async Task<MvxViewModelInstanceRequest> NavigationRouteRequest(string path, IMvxBundle presentationBundle = null)
         {
             KeyValuePair<Regex, Type> entry;
 
@@ -161,7 +172,7 @@ namespace MvvmCross.Navigation
                 }
                 catch(Exception ex)
                 {
-                    ex.MvxWrap($"{nameof(MvxNavigationService)}: Exception thrown while processing URL: {path} with RoutingFacade: {viewModelType}");
+                    throw ex.MvxWrap($"{nameof(MvxNavigationService)}: Exception thrown while processing URL: {path} with RoutingFacade: {viewModelType}");
                 }
             }
             else
@@ -230,9 +241,17 @@ namespace MvvmCross.Navigation
 
         public virtual Task<bool> CanNavigate(string path)
         {
-            KeyValuePair<Regex, Type> entry;
+            return Task.FromResult(TryGetRoute(path, out KeyValuePair<Regex, Type> entry));
+        }
 
-            return Task.FromResult(TryGetRoute(path, out entry));
+        public virtual Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel
+        {
+            return Task.FromResult(ViewsContainer.GetViewType(typeof(TViewModel)) != null);
+        }
+
+        public virtual Task<bool> CanNavigate(Type viewModelType)
+        {
+            return Task.FromResult(ViewsContainer.GetViewType(viewModelType) != null);
         }
 
         protected virtual async Task Navigate(MvxViewModelRequest request, IMvxViewModel viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))

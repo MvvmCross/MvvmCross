@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 using MvvmCross.Core;
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Platform

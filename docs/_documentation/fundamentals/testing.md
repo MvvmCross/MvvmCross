@@ -2,7 +2,7 @@
 layout: documentation
 title: Testing
 category: Fundamentals
-order: 9
+order: 10
 ---
 In order to test objects that make use of MvvmCross infrastructure, like ViewModels and the IoC container, there are some setup steps that are required. 
 

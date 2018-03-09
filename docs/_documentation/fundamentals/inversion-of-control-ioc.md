@@ -2,7 +2,7 @@
 layout: documentation
 title: Inversion of Control
 category: Fundamentals
-order: 4
+order: 5
 ---
 Two key ideas that are used in MvvmCross are:
 
@@ -329,7 +329,7 @@ For example, existing plugins include:
 - a ResourceLoader plugin which provides a way to access resource files packaged within the .apk, .app or .ipa for the application
 - a SQLite plugin which provides access to `SQLite-net` on all platforms.
 
-####Plugin Use
+#### Plugin Use
 
 If you want to see how these plugins can be used in your applications, then:
 
@@ -340,7 +340,7 @@ If you want to see how these plugins can be used in your applications, then:
   - N=12 -> N=17 - the Collect-A-Bull app http://slodge.blogspot.co.uk/2013/05/n12-collect-bull-full-app-part-1-n1.html
 - see the [Plugins](https://github.com/slodge/MvvmCross/wiki/MvvmCross-plugins) article
 
-####Plugin Authoring
+#### Plugin Authoring
 
 Writing plugins is easy to do, but can feel a bit daunting at first.
 

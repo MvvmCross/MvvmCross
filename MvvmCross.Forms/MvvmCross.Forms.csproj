@@ -12,14 +12,17 @@
     <None Include="Platform\**\*.cs" />
     <None Include="Resources\*.cs" />
     <Compile Remove="Resources\*.cs" />
+    <None Include="readme.txt" pack="true" PackagePath="." />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <Compile Include="Platform\Netstandard\**\*.cs" />
   </ItemGroup>
-  
+
   <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
-    <Compile Include="Platform\Net461\**\*.cs" />
+    <Compile Include="Platform\Net\**\*.cs" />
+    <Compile Include="Platform\Wpf\**\*.cs" />
+    <Compile Include="Platform\Console\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">
@@ -41,7 +44,6 @@
     <Compile Include="Platform\Apple-common\**\*.cs" />
     <Compile Include="Platform\Mac\**\*.cs" />
     <Compile Include="Platform\Xamarin-common\**\*.cs" />
-    <Reference Include="System.Runtime.Serialization" />    
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.TVOS10' ">
@@ -68,6 +70,12 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="26.1.0.1" />
   </ItemGroup>
 
+  <ItemGroup Condition=" '$(TargetFramework)' == 'tizen40' ">
+    <Compile Include="Platform\Tizen\**\*.cs" />
+    <Compile Include="Platform\Xamarin-common\**\*.cs" />
+    <PackageReference Include="Tizen.NET" Version="4.0.0" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms">
       <Version>2.5.0.280555</Version>
@@ -76,10 +84,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MvvmCross\MvvmCross.csproj" />
-  </ItemGroup>  
-
-  <ItemGroup>
-    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
   
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />

@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moq;
  using MvvmCross.Core;
  using MvvmCross.Navigation;
- using MvvmCross.Test;
+ using MvvmCross.Tests;
  using MvvmCross.UnitTest.Mocks.Dispatchers;
  using MvvmCross.UnitTest.Mocks.ViewModels;
  using MvvmCross.ViewModels;

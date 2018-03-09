@@ -4,7 +4,7 @@
 
 using System.Globalization;
 using MvvmCross.Plugin.Visibility;
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using MvvmCross.UI;
 using Xunit;
 

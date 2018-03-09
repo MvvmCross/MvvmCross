@@ -23,15 +23,8 @@ namespace Playground.Forms.iOS
             return new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(FormsApp).GetTypeInfo().Assembly }));
         }
 
-        protected override MvxFormsApplication CreateFormsApplication() => new FormsApp();
+        protected override Xamarin.Forms.Application CreateFormsApplication() => new FormsApp();
 
         protected override IMvxApplication CreateApp() => new Core.App();
-
-        protected override void PerformBootstrapActions()
-        {
-            base.PerformBootstrapActions();
-
-            PluginLoader.Instance.EnsureLoaded();
-        }
     }
 }

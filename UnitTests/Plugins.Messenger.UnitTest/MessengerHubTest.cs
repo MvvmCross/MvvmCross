@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using MvvmCross.Plugin.Messenger;
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using Xunit;
 
 namespace MvvmCross.Plugins.Messenger.UnitTest

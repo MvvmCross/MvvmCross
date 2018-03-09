@@ -13,9 +13,9 @@ TBA
 
 ## Names and namespaces changes
 
-As part of the netstandard migration we took the chance to align some names and namespaces. We have simplified the solution structure to make it easier to get started with, and also changed some names to improve consistency across all platforms.
+As part of the netstandard migration we took the chance to align some names and namespaces. We have simplified the solution structure to make it easier to get started with, and also changed some names in order to improve consistency across all platforms.
 
-We know this (sadly) means breaking changes, so here you have a small summary that should help in the process of upgrading:
+We know this (sadly) means breaking changes, so here you have a small summary which should help in the process of upgrading:
 
 ### Changed names
 MvxSimpleIoCContainer -> MvxIoCContainer.
@@ -31,14 +31,14 @@ In the past we had a mix for extension methods between `Extensions` and `Extensi
 Previously we had a mix between `iOS` and `Ios` namespaces. We have unified them all to `Ios`.
 
 #### Android note
-As we now don't have separate projects for each platform implementations, we got rid of the Xamarin limitation for naming android projects as "Android" (that's why the convention of `Droid` exists!). In summary, we have changed most namespaces that included `Droid` to `Android`.
+As we now don't have separate projects for each platform's implementations, we got rid of the Xamarin limitation for naming android projects as "Android" (that's why the convention of `Droid` exists!). In summary, we have changed most namespaces that included `Droid` to `Android`.
 
 #### UWP note
 Previously we had a mix between `Uwp` and `Uap` namespaces. We have unified them all to `Uap`.
 
 ### Core changes
 - `MvvmCross.Platform` is now just `MvvmCross`.
-- Most framework core clases are now under `MvvmCross.Base`.
+- Most framework core classes are now under `MvvmCross.Base`.
 - `MvvmCross.{Platform}.Views` is now `MvvmCross.Platform.{Platform}.Views`.
 - `MvvmCross.Platform.Converters` is now `MvvmCross.Converters`.
 - `MvvmCross.Core.Platform` is now `MvvmCross.Core`.
@@ -70,10 +70,14 @@ ViewPresenters are now under their own folder. Therefore we had to modify namesp
 - `MvvmCross.{Platform}.Views.Attributes` to `MvvmCross.Platform.{Platform}.Presenters.Attributes` 
 
 ### Plugins
-All plugin namespaces changed, but you shouldn't worry about it unless you are diving deep into their implementations. 
+All plugin namespaces have changed, but you shouldn't worry about it unless you are diving deep into their implementations. 
 - The `Plugins` keyword is now `Plugin`.
 - `MvvmCross.Plugins.{PluginName}.{Platform}` is now `MvvmCross.Plugin.{PluginName}.Platform.{Platform}`
+- If using Mvmm versions less than 6.0.0, the resolution of namespaces can be achieved by using a platform specific bootstrap class in the rootnamespace. See the [iOS specific implementation](https://github.com/MvvmCross/MvvmCross/blob/5.6.3/nuspec/iOSBootstrapContent/WebBrowserPluginBootstrap.cs.pp). Note that your bootstrap file must be a class and as such should have the .cs extension, not the .cs.pp extension.
 
+### Plugins removed
+
+`DownloadCache` was removed in v6.0. If you need an alternative, take a look at [FFImageLoading](https://github.com/luberda-molinet/FFImageLoading/wiki/MvvmCross)
 ## Breaking changes
 
 #### ViewPresenters 
@@ -84,10 +88,3 @@ If you're using a custom ViewPresenter that extends the default provided by Mvvm
 #### Logging
 
 `IMvxLog` has a new method: `bool IsLogLevelEnabled(MvxLogLevel logLevel)`.
-
-TBA
-
-## Plugins
-
-`DownloadCache` was removed in v6.0. If you need an alternative, take a look at [FFImageLoading](https://github.com/luberda-molinet/FFImageLoading/wiki/MvvmCross)
-

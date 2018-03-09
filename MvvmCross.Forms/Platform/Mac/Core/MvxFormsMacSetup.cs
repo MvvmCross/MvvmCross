@@ -16,13 +16,15 @@ using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
 using MvvmCross.Forms.Platform.Mac.Presenters;
 using MvvmCross.Forms.Presenters;
+using Xamarin.Forms;
+using System.Linq;
 
 namespace MvvmCross.Forms.Platform.Mac.Core
 {
     public abstract class MvxFormsMacSetup : MvxMacSetup
     {
         private List<Assembly> _viewAssemblies;
-        private MvxFormsApplication _formsApplication;
+        private Application _formsApplication;
 
         protected MvxFormsMacSetup(IMvxApplicationDelegate applicationDelegate, NSWindow window)
             : base(applicationDelegate, window)
@@ -50,7 +52,7 @@ namespace MvvmCross.Forms.Platform.Mac.Core
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public MvxFormsApplication FormsApplication
+        public Application FormsApplication
         {
             get
             {
@@ -64,7 +66,7 @@ namespace MvvmCross.Forms.Platform.Mac.Core
             }
         }
 
-        protected abstract MvxFormsApplication CreateFormsApplication();
+        protected abstract Application CreateFormsApplication();
 
         protected override IMvxMacViewPresenter CreateViewPresenter()
         {
@@ -103,5 +105,32 @@ namespace MvvmCross.Forms.Platform.Mac.Core
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "ViewController", "Page");
         }
+    }
+
+    public class MvxFormsMacSetup<TApplication, TFormsApplication> : MvxFormsMacSetup
+        where TApplication : IMvxApplication, new()
+        where TFormsApplication : Application, new()
+    {
+        protected MvxFormsMacSetup(IMvxApplicationDelegate applicationDelegate, NSWindow window) : base(applicationDelegate, window)
+        {
+        }
+
+        protected MvxFormsMacSetup(IMvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter) : base(applicationDelegate, presenter)
+        {
+        }
+
+        protected override IEnumerable<Assembly> GetViewAssemblies()
+        {
+            return new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(TFormsApplication).GetTypeInfo().Assembly }));
+        }
+
+        protected override IEnumerable<Assembly> GetViewModelAssemblies()
+        {
+            return new[] { typeof(TApplication).GetTypeInfo().Assembly };
+        }
+
+        protected override Application CreateFormsApplication() => new TFormsApplication();
+
+        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
     }
 }
