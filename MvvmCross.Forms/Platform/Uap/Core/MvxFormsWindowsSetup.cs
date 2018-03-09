@@ -86,8 +86,8 @@ namespace MvvmCross.Forms.Platform.Uap.Core
     }
 
     public class MvxFormsWindowsSetup<TApplication, TFormsApplication> : MvxFormsWindowsSetup
-        where TFormsApplication : Application, new()
         where TApplication : IMvxApplication, new()
+        where TFormsApplication : Application, new()        
     {
         public MvxFormsWindowsSetup(XamlControls.Frame rootFrame, IActivatedEventArgs activatedEventArgs, string suspensionManagerSessionStateKey = null) 
             : base(rootFrame, activatedEventArgs, suspensionManagerSessionStateKey)
@@ -99,8 +99,13 @@ namespace MvvmCross.Forms.Platform.Uap.Core
             return new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(TFormsApplication).GetTypeInfo().Assembly }));
         }
 
+        protected override IEnumerable<Assembly> GetViewModelAssemblies()
+        {
+            return new[] { typeof(TApplication).GetTypeInfo().Assembly };
+        }
+
         protected override Application CreateFormsApplication() => new TFormsApplication();
 
-        protected override IMvxApplication CreateApp() => new TApplication();
+        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
     }
 }

@@ -481,4 +481,15 @@ namespace MvvmCross.Core
 
         #endregion Setup state lifecycle
     }
+
+    public abstract class MvxSetup<TApplication> : MvxSetup
+        where TApplication : IMvxApplication, new()
+    {
+        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+
+        protected override IEnumerable<Assembly> GetViewModelAssemblies()
+        {
+            return new[] { typeof(TApplication).GetTypeInfo().Assembly };
+        }
+    }
 }
