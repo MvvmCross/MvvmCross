@@ -10,6 +10,6 @@ namespace MvvmCross.ViewModels
     {
         void Start(object hint = null);
 
-        async Task WaitForStart();
+        Task WaitForStart();
     }
 }

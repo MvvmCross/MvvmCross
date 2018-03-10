@@ -6,7 +6,7 @@ using Android.Content;
 using MvvmCross.Forms.Platform.Android.Core;
 using MvvmCross.Logging;
 using Playground.Forms.UI;
-using Xamarin.Forms;
+using Serilog;
 
 namespace Playground.Forms.Droid
 {
