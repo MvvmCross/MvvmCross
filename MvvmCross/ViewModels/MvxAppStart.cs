@@ -43,7 +43,7 @@ namespace MvvmCross.ViewModels
             }
         }
 
-        public bool IsStarted { get; private set; }
+        public bool IsStarted { get; protected set; }
 
         public async Task WaitForStart()
         {
