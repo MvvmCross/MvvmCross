@@ -52,10 +52,15 @@ namespace MvvmCross.Forms.Platform.Uap.Core
         {
             get
             {
+                if (!Xamarin.Forms.Forms.IsInitialized)
+                    Xamarin.Forms.Forms.Init(ActivationArguments, GetViewAssemblies());
+
                 if (_formsApplication == null)
                 {
-                    Xamarin.Forms.Forms.Init(ActivationArguments, GetViewAssemblies());
-                    _formsApplication = _formsApplication ?? CreateFormsApplication();
+                    _formsApplication = CreateFormsApplication();
+                }
+                if(Application.Current != _formsApplication) {
+                    Application.Current = _formsApplication;
                 }
                 return _formsApplication;
             }

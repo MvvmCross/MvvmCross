@@ -55,13 +55,12 @@ namespace MvvmCross.Forms.Platform.Android.Core
             {
                 if (!Xamarin.Forms.Forms.IsInitialized)
                 {
-                    var activity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity ?? ApplicationContext;
+                    var activity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>()?.Activity ?? ApplicationContext;
                     Xamarin.Forms.Forms.Init(activity, null, activity.GetType().Assembly);
                 }
-
-                if (_formsApplication == null)
+                if (_formsApplication == null || Application.Current!=_formsApplication)
                 {
-                    _formsApplication = _formsApplication ?? CreateFormsApplication();
+                    _formsApplication = CreateFormsApplication();
                 }
                 return _formsApplication;
             }

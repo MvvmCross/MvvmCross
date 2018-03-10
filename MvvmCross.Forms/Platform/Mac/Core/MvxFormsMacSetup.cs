@@ -60,7 +60,10 @@ namespace MvvmCross.Forms.Platform.Mac.Core
                     Xamarin.Forms.Forms.Init();
                 if (_formsApplication == null)
                 {
-                    _formsApplication = _formsApplication ?? CreateFormsApplication();
+                    _formsApplication = CreateFormsApplication();
+                }
+                if (Application.Current != _formsApplication) {
+                    Application.Current = _formsApplication;
                 }
                 return _formsApplication;
             }
