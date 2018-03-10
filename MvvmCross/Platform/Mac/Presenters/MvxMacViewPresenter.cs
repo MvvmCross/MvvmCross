@@ -13,6 +13,7 @@ using MvvmCross.Platform.Mac.Presenters.Attributes;
 using MvvmCross.Platform.Mac.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
+using MvvmCross.Presenters.Attributes;
 
 namespace MvvmCross.Platform.Mac.Presenters
 {

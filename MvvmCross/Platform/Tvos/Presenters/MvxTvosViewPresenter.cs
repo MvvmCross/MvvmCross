@@ -13,6 +13,7 @@ using MvvmCross.Platform.Tvos.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
 using UIKit;
+using MvvmCross.Presenters.Attributes;
 
 namespace MvvmCross.Platform.Tvos.Presenters
 {

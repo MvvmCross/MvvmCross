@@ -131,6 +131,9 @@
     <PackageReference Include="Serilog.Sinks.Xamarin">
       <Version>0.1.29</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.Compat">
+      <Version>26.1.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design">
       <Version>26.1.0.1</Version>
     </PackageReference>
@@ -144,6 +147,9 @@
       <Version>26.1.0.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v7.CardView">
+      <Version>26.1.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter">
       <Version>26.1.0.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
