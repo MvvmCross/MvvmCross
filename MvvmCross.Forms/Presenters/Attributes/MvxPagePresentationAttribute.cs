@@ -4,6 +4,7 @@
 
 using System;
 using MvvmCross.Presenters;
+using MvvmCross.Presenters.Attributes;
 
 namespace MvvmCross.Forms.Presenters.Attributes
 {

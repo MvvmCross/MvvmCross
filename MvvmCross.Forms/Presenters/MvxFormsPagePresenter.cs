@@ -12,8 +12,9 @@ using MvvmCross.Forms.Presenters.Attributes;
 using MvvmCross.Forms.Views;
 using MvvmCross.Logging;
 using MvvmCross.Presenters;
+using MvvmCross.Presenters.Attributes;
+using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
-using MvvmCross.ViewModels.Hints;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Presenters
@@ -199,6 +200,15 @@ namespace MvvmCross.Forms.Presenters
                         tabbedPage.CurrentPage = page;
                     else if (page.Parent is CarouselPage carouselPage && page is ContentPage contentPage)
                         carouselPage.CurrentPage = contentPage;
+                }
+                return;
+            }
+            if (hint is MvxPopRecursivePresentationHint popRecursiveHint) {
+                var levels = popRecursiveHint.LevelsDeep;
+                if (levels > navigation.NavigationStack.Count())
+                    levels = navigation.NavigationStack.Count();
+                for (int i = 0; i < levels; i++) {
+                    await navigation.PopAsync(popRecursiveHint.Animated);
                 }
                 return;
             }

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using Android.Views;
 using MvvmCross.Presenters;
+using MvvmCross.Presenters.Attributes;
 
 namespace MvvmCross.Platform.Android.Presenters.Attributes
 {
