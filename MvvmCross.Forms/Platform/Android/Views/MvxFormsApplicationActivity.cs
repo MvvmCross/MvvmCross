@@ -48,6 +48,8 @@ namespace MvvmCross.Forms.Platform.Android.Views
             }
         }
 
+        private MvxNotifyTask _startTaskNotifier;
+
         private Application _formsApplication;
         protected Application FormsApplication
         {
@@ -91,14 +93,22 @@ namespace MvvmCross.Forms.Platform.Android.Views
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
 
-        protected override void OnCreate(Bundle bundle)
+        protected override async void OnCreate(Bundle bundle)
         {
+            base.OnCreate(bundle);
+
             // Required for proper Push notifications handling      
             var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setupSingleton.EnsureInitialized();
 
-            base.OnCreate(bundle);
             ViewModel?.ViewCreated();
+
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            startup.Start();
+            if (startup is IMvxAppStartAsync waitAppStart) {
+                _startTaskNotifier = MvxNotifyTask.Create(async () => await waitAppStart.WaitForStart(), (ex) => throw ex);
+            }
+
             InitializeForms(bundle);
         }
 

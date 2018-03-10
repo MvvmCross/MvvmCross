@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.ViewModels
 {
-    public interface IMvxAppStart
+    public interface IMvxAppStartAsync : IMvxAppStart
     {
-        void Start(object hint = null);
-
-        bool IsStarted { get; }
+        Task WaitForStart();
     }
 }

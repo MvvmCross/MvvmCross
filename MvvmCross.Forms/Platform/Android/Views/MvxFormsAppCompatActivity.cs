@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Reflection;
 using Android.Content;
 using Android.OS;
@@ -50,6 +51,8 @@ namespace MvvmCross.Forms.Platform.Android.Views
             }
         }
 
+        private MvxNotifyTask _startTaskNotifier;
+
         private Application _formsApplication;
         protected Application FormsApplication
         {
@@ -93,7 +96,7 @@ namespace MvvmCross.Forms.Platform.Android.Views
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
 
-        protected async override void OnCreate(Bundle bundle)
+        protected override async void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
@@ -105,8 +108,9 @@ namespace MvvmCross.Forms.Platform.Android.Views
 
             var startup = Mvx.Resolve<IMvxAppStart>();
             startup.Start();
-
-            await startup.WaitForStart();
+            if (startup is IMvxAppStartAsync waitAppStart) {
+                _startTaskNotifier = MvxNotifyTask.Create(async () => await waitAppStart.WaitForStart(), (ex) => throw ex);
+            }
 
             InitializeForms(bundle);
         }
