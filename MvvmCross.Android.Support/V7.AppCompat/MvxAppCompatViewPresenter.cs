@@ -19,6 +19,7 @@ using MvvmCross.Platform.Android.Presenters;
 using MvvmCross.Platform.Android.Presenters.Attributes;
 using MvvmCross.Platform.Android.Views;
 using MvvmCross.Presenters;
+using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat

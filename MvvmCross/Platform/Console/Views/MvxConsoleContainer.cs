@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
-using MvvmCross.ViewModels.Hints;
 
 namespace MvvmCross.Platform.Console.Views
 {

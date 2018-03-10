@@ -3,8 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using MvvmCross.ViewModels;
 
-namespace MvvmCross.ViewModels.Hints
+namespace MvvmCross.Presenters.Hints
 {
     public class MvxPopPresentationHint
         : MvxPresentationHint
