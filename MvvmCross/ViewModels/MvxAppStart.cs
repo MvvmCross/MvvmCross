@@ -11,14 +11,12 @@ using MvvmCross.Navigation;
 namespace MvvmCross.ViewModels
 {
     public class MvxAppStart<TViewModel>
-        : IMvxAppStart
+        : IMvxAppStart, IMvxAppStartAsync
         where TViewModel : IMvxViewModel
     {
         protected readonly IMvxNavigationService NavigationService;
 
         private SemaphoreSlim StartWaiter { get; set; } = new SemaphoreSlim(1);
-
-        private bool StartHasBeenRun { get; set; }
 
         public MvxAppStart(IMvxNavigationService navigationService)
         {
@@ -27,8 +25,10 @@ namespace MvvmCross.ViewModels
 
         public async void Start(object hint = null)
         {
-            if (StartHasBeenRun) return;
-            StartHasBeenRun = true;
+            if (IsStarted)
+                return;
+
+            IsStarted = true;
 
             if (hint != null) {
                 MvxLog.Instance.Trace("Hint ignored in default MvxAppStart");
@@ -42,6 +42,8 @@ namespace MvvmCross.ViewModels
                 StartWaiter.Release();
             }
         }
+
+        public bool IsStarted { get; private set; }
 
         public async Task WaitForStart()
         {
