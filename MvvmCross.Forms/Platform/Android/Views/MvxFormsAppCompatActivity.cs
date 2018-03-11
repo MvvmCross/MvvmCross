@@ -60,6 +60,7 @@ namespace MvvmCross.Forms.Platform.Android.Views
                     var formsPresenter = Mvx.Resolve<IMvxFormsViewPresenter>();
                     _formsApplication = formsPresenter.FormsApplication;
                 }
+
                 return _formsApplication;
             }
         }
@@ -95,6 +96,10 @@ namespace MvvmCross.Forms.Platform.Android.Views
 
         protected override async void OnCreate(Bundle bundle)
         {
+            // Required for proper Push notifications handling      
+            var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            setupSingleton.EnsureInitialized();
+
             base.OnCreate(bundle);
 
             await InternalOnCreate(bundle);
@@ -102,10 +107,6 @@ namespace MvvmCross.Forms.Platform.Android.Views
 
         protected virtual async Task InternalOnCreate(Bundle bundle)
         {
-            // Required for proper Push notifications handling      
-            var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setupSingleton.EnsureInitialized();
-
             ViewModel?.ViewCreated();
 
             await StartSetup();
@@ -125,11 +126,9 @@ namespace MvvmCross.Forms.Platform.Android.Views
 
         public virtual void InitializeForms(Bundle bundle)
         {
-            if (FormsApplication.MainPage != null)
-            {
-                global::Xamarin.Forms.Forms.Init(this, bundle, GetResourceAssembly());
-                LoadApplication(FormsApplication);
-            }
+            global::Xamarin.Forms.Forms.Init(this, bundle, GetResourceAssembly());
+
+            LoadApplication(FormsApplication);
         }
 
         protected virtual Assembly GetResourceAssembly()
