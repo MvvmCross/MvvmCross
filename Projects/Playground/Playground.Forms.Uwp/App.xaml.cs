@@ -16,7 +16,6 @@ namespace Playground.Forms.Uwp
 
         protected override MvxWindowsSetup CreateSetup(Frame rootFrame, IActivatedEventArgs e, string suspension)
         {
-            base.CreateSetup
             return new MvxFormsWindowsSetup<Core.App, FormsApp>(rootFrame, e, suspension);
         }
 

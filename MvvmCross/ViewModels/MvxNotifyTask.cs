@@ -31,7 +31,6 @@ namespace MvvmCross.ViewModels
         {
             try
             {
-                await Task.Yield();
                 await task;
             }
             catch(Exception e)

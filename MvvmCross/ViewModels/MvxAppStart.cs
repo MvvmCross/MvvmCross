@@ -35,10 +35,7 @@ namespace MvvmCross.ViewModels
             }
             
             try {
-                _startTaskNotifier = MvxNotifyTask.Create(async ()=> {
-                    await NavigationService.Navigate<TViewModel>();
-                    await Task.Delay(10000);  // TODO: remove, this is for testing only 
-                });
+                _startTaskNotifier = MvxNotifyTask.Create(async ()=> await NavigationService.Navigate<TViewModel>());
             } catch (System.Exception exception) {
                 throw exception.MvxWrap("Problem navigating to ViewModel {0}", typeof(TViewModel).Name);
             } 
