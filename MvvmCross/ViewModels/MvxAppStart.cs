@@ -16,39 +16,45 @@ namespace MvvmCross.ViewModels
     {
         protected readonly IMvxNavigationService NavigationService;
 
-        private SemaphoreSlim StartWaiter { get; set; } = new SemaphoreSlim(1);
+        private int startHasCommenced;
 
         public MvxAppStart(IMvxNavigationService navigationService)
         {
             NavigationService = navigationService;
         }
 
-        public async void Start(object hint = null)
-        {
-            if (IsStarted)
-                return;
 
-            IsStarted = true;
+
+        public void Start(object hint = null)
+        {
+            // Check whether Start has commenced, and return if it has
+            if (Interlocked.CompareExchange(ref startHasCommenced, 1, 0) == 1) return;
 
             if (hint != null) {
                 MvxLog.Instance.Trace("Hint ignored in default MvxAppStart");
             }
-            StartWaiter.Wait();
+            
             try {
-                await NavigationService.Navigate<TViewModel>();
+                _startTaskNotifier = MvxNotifyTask.Create(async ()=> {
+                    await NavigationService.Navigate<TViewModel>();
+                    await Task.Delay(10000);  // TODO: remove, this is for testing only 
+                });
             } catch (System.Exception exception) {
                 throw exception.MvxWrap("Problem navigating to ViewModel {0}", typeof(TViewModel).Name);
-            } finally {
-                StartWaiter.Release();
-            }
+            } 
         }
 
-        public bool IsStarted { get; protected set; }
+        public bool IsStarted => startHasCommenced != 0;
 
-        public async Task WaitForStart()
+        private MvxNotifyTask _startTaskNotifier;
+
+        public async Task<bool> WaitForStart()
         {
-            await StartWaiter.WaitAsync();
-            StartWaiter.Release();
+            if (_startTaskNotifier != null) {
+                await _startTaskNotifier.Task;
+                return true;
+            }
+            return false;
         }
     }
 }

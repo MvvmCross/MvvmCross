@@ -8,6 +8,6 @@ namespace MvvmCross.ViewModels
 {
     public interface IMvxAppStartAsync : IMvxAppStart
     {
-        Task WaitForStart();
+        Task<bool> WaitForStart();
     }
 }
