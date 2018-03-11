@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Reflection;
+using System.Threading.Tasks;
 using Android.Content;
 using Android.OS;
 using Android.Views;
@@ -97,19 +98,30 @@ namespace MvvmCross.Forms.Platform.Android.Views
         {
             base.OnCreate(bundle);
 
+            await InternalOnCreate(bundle);
+        }
+
+        protected virtual async Task InternalOnCreate(Bundle bundle)
+        {
             // Required for proper Push notifications handling      
             var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setupSingleton.EnsureInitialized();
 
             ViewModel?.ViewCreated();
 
-            var startup = Mvx.Resolve<IMvxAppStart>();
-            startup.Start();
-            if (startup is IMvxAppStartAsync waitAppStart) {
-                _startTaskNotifier = MvxNotifyTask.Create(async () => await waitAppStart.WaitForStart(), (ex) => throw ex);
-            }
+            await StartSetup();
 
             InitializeForms(bundle);
+        }
+
+        protected virtual async Task StartSetup()
+        {
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            startup.Start();
+
+            if (startup is IMvxAppStartAsync waitAppStart) {
+                await waitAppStart.WaitForStart();
+            }
         }
 
         public virtual void InitializeForms(Bundle bundle)

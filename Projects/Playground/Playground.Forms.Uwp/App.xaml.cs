@@ -1,10 +1,9 @@
-﻿using MvvmCross.Platform.Uap.Core;
+﻿using System;
+using MvvmCross.Forms.Platform.Uap.Core;
+using MvvmCross.Platform.Uap.Core;
 using Playground.Forms.UI;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Controls;
-using MvvmCross.Forms.Platform.Uap.Core;
-using MvvmCross.Forms.Views.Base;
-using System;
 
 namespace Playground.Forms.Uwp
 {
@@ -17,6 +16,7 @@ namespace Playground.Forms.Uwp
 
         protected override MvxWindowsSetup CreateSetup(Frame rootFrame, IActivatedEventArgs e, string suspension)
         {
+            base.CreateSetup
             return new MvxFormsWindowsSetup<Core.App, FormsApp>(rootFrame, e, suspension);
         }
 

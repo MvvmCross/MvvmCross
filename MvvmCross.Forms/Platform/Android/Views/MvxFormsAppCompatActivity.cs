@@ -2,15 +2,14 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Reflection;
+using System.Threading.Tasks;
 using Android.Content;
 using Android.OS;
 using Android.Util;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platform.Android.Views.Base;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.Platform.Android.Binding.BindingContext;
@@ -50,8 +49,6 @@ namespace MvvmCross.Forms.Platform.Android.Views
                 OnViewModelSet();
             }
         }
-
-        private MvxNotifyTask _startTaskNotifier;
 
         private Application _formsApplication;
         protected Application FormsApplication
@@ -100,19 +97,30 @@ namespace MvvmCross.Forms.Platform.Android.Views
         {
             base.OnCreate(bundle);
 
+            await InternalOnCreate(bundle);
+        }
+
+        protected virtual async Task InternalOnCreate(Bundle bundle)
+        {
             // Required for proper Push notifications handling      
             var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setupSingleton.EnsureInitialized();
 
             ViewModel?.ViewCreated();
 
-            var startup = Mvx.Resolve<IMvxAppStart>();
-            startup.Start();
-            if (startup is IMvxAppStartAsync waitAppStart) {
-                _startTaskNotifier = MvxNotifyTask.Create(async () => await waitAppStart.WaitForStart(), (ex) => throw ex);
-            }
+            await StartSetup();
 
             InitializeForms(bundle);
+        }
+
+        protected virtual async Task StartSetup()
+        {
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            startup.Start();
+
+            if (startup is IMvxAppStartAsync waitAppStart) {
+                await waitAppStart.WaitForStart();
+            }
         }
 
         public virtual void InitializeForms(Bundle bundle)
