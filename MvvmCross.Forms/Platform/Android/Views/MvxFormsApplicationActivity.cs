@@ -49,8 +49,6 @@ namespace MvvmCross.Forms.Platform.Android.Views
             }
         }
 
-        private MvxNotifyTask _startTaskNotifier;
-
         private Application _formsApplication;
         protected Application FormsApplication
         {
@@ -109,12 +107,12 @@ namespace MvvmCross.Forms.Platform.Android.Views
 
             ViewModel?.ViewCreated();
 
-            await StartSetup();
+            await RunAppStart();
 
             InitializeForms(bundle);
         }
 
-        protected virtual async Task StartSetup()
+        protected virtual async Task RunAppStart()
         {
             var startup = Mvx.Resolve<IMvxAppStart>();
             startup.Start();

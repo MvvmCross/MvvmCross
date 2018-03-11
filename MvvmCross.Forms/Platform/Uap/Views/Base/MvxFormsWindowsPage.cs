@@ -33,13 +33,13 @@ namespace MvvmCross.Forms.Views.Base
 
         protected virtual async Task InternalPageLoaded()
         {
-            await StartSetup();
+            await RunAppStart();
 
             LoadFormsApplication();
         }
 
 
-        protected virtual async Task StartSetup()
+        protected virtual async Task RunAppStart()
         {
             var startup = Mvx.Resolve<IMvxAppStart>();
             startup.Start();

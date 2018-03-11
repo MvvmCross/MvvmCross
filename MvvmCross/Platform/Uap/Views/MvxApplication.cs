@@ -39,7 +39,7 @@ namespace MvvmCross.Platform.Uap.Views
             var rootFrame = InitializeFrame(activationArgs);
 
             if (activationArgs.PrelaunchActivated == false) {
-                StartSetup(rootFrame, activationArgs);
+                RunAppStart(rootFrame, activationArgs);
             }
 
             Window.Current.Activate();
@@ -51,14 +51,14 @@ namespace MvvmCross.Platform.Uap.Views
 
             var rootFrame = InitializeFrame(activationArgs);
 
-            StartSetup(rootFrame, activationArgs);
+            RunAppStart(rootFrame, activationArgs);
 
             Window.Current.Activate();
         }
 
         protected abstract MvxWindowsSetup CreateSetup(Frame rootFrame, IActivatedEventArgs activationArgs, string suspension);
 
-        protected virtual void StartSetup(Frame rootFrame, IActivatedEventArgs activationArgs)
+        protected virtual void RunAppStart(Frame rootFrame, IActivatedEventArgs activationArgs)
         {
             if (rootFrame.Content == null) {
                 Setup = CreateSetup(rootFrame, activationArgs, nameof(Suspend));
