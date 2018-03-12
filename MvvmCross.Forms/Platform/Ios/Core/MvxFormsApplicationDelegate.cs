@@ -20,7 +20,9 @@ namespace MvvmCross.Forms.Platform.Ios.Core
     public abstract class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {
         private MvxFormsIosSetup _setup;
-        protected MvxFormsIosSetup Setup { get
+        protected MvxFormsIosSetup Setup 
+        { 
+            get
             {
                 if (_setup == null)
                     _setup = CreateSetup(this, Window);
