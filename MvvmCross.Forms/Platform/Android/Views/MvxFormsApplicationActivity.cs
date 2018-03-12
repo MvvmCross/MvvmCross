@@ -97,23 +97,17 @@ namespace MvvmCross.Forms.Platform.Android.Views
             setupSingleton.EnsureInitialized();
 
             base.OnCreate(bundle);
-
-            InternalOnCreate(bundle);
-        }
-
-        protected virtual void InternalOnCreate(Bundle bundle)
-        {
             ViewModel?.ViewCreated();
-
-            RunAppStart();
-
-            InitializeForms(bundle);
+            RunAppStart(bundle);
         }
 
-        protected virtual void RunAppStart()
+        protected virtual void RunAppStart(Bundle bundle)
         {
             var startup = Mvx.Resolve<IMvxAppStart>();
-            startup.Start();
+            if (!startup.IsStarted)
+                startup.Start();
+
+            InitializeForms(bundle);
         }
 
         public virtual void InitializeForms(Bundle bundle)

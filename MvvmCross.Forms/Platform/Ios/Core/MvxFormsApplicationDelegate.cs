@@ -3,10 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Foundation;
 using MvvmCross.Core;
+using MvvmCross.Exceptions;
 using MvvmCross.Forms.Presenters;
+using MvvmCross.IoC;
 using MvvmCross.Platform.Ios.Core;
 using MvvmCross.ViewModels;
 using UIKit;
@@ -16,6 +19,8 @@ namespace MvvmCross.Forms.Platform.Ios.Core
 {
     public abstract class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {
+        protected MvxFormsIosSetup _setup;
+
         private UIWindow _window;
         public override UIWindow Window
         {
@@ -35,38 +40,33 @@ namespace MvvmCross.Forms.Platform.Ios.Core
         {
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            var setup = CreateSetup(this, Window);
-            setup.Initialize();
+            CreateSetup(this, Window);
+            _setup.Initialize();
 
-            CompleteFormsSetup();
+            RunAppStart();
 
             Mvx.Resolve<IMvxFormsViewPresenter>().FormsApplication.SendStart();
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
+
+            //TODO: we might need to call base here
             return true;
         }
 
-
-        protected virtual void CompleteFormsSetup()
+        protected virtual void RunAppStart()
         {
-            RunAppStart();
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            if (!startup.IsStarted)
+                startup.Start();
 
             LoadFormsApplication();
 
             Window.MakeKeyAndVisible();
         }
 
-        protected virtual void RunAppStart()
-        {
-            var startup = Mvx.Resolve<IMvxAppStart>();
-            startup.Start();
-        }
-
         protected virtual void LoadFormsApplication()
         {
-            var presenter = Mvx.Resolve<IMvxFormsViewPresenter>();
-            LoadApplication(presenter.FormsApplication);
+            LoadApplication(_setup.FormsApplication);
         }
-
 
         public override void WillEnterForeground(UIApplication uiApplication)
         {
@@ -86,18 +86,36 @@ namespace MvvmCross.Forms.Platform.Ios.Core
             base.WillTerminate(uiApplication);
         }
 
-        protected abstract MvxIosSetup CreateSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window);
-
-
         private void FireLifetimeChanged(MvxLifetimeEvent which)
         {
             LifetimeChanged?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 
-        #region IMvxLifetime implementation
-
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
 
-        #endregion IMvxLifetime implementation
+        protected virtual void CreateSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
+        {
+            var setupType = FindSetupType();
+            if (setupType == null) {
+                throw new MvxException("Could not find a Setup class for application");
+            }
+
+            try {
+                _setup = (MvxFormsIosSetup)Activator.CreateInstance(setupType, applicationDelegate, window);
+            } catch (Exception exception) {
+                throw exception.MvxWrap("Failed to create instance of {0}", setupType.FullName);
+            }
+        }
+
+        protected virtual Type FindSetupType()
+        {
+            var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                        from type in assembly.ExceptionSafeGetTypes()
+                        where type.Name == "Setup"
+                        where typeof(MvxFormsIosSetup).IsAssignableFrom(type)
+                        select type;
+
+            return query.FirstOrDefault();
+        }
     }
 }
