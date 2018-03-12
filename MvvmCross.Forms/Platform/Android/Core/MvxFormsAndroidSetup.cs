@@ -13,14 +13,12 @@ using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platform.Android.Bindings;
 using MvvmCross.Platform.Android.Core;
 using MvvmCross.Platform.Android.Presenters;
-using MvvmCross.Platform.Android.Views;
 using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
 using MvvmCross.Platform.Android;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.Forms.Platform.Android.Presenters;
 using Xamarin.Forms;
-using System.Linq;
 
 namespace MvvmCross.Forms.Platform.Android.Core
 {
