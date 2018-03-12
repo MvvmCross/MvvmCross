@@ -13,6 +13,7 @@ using MvvmCross.Platform.Uap.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
 using MvvmCross.Views;
+using MvvmCross.Presenters.Attributes;
 
 namespace MvvmCross.Platform.Uap.Presenters
 {

@@ -12,6 +12,7 @@ using MvvmCross.Platform.Wpf.Presenters.Attributes;
 using MvvmCross.Platform.Wpf.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
+using MvvmCross.Presenters.Attributes;
 
 namespace MvvmCross.Platform.Wpf.Presenters
 {
