@@ -92,6 +92,10 @@ namespace MvvmCross.Forms.Platform.Android.Views
 
         protected override void OnCreate(Bundle bundle)
         {
+            // Required for proper Push notifications handling      
+            var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            setupSingleton.EnsureInitialized();
+
             base.OnCreate(bundle);
 
             InternalOnCreate(bundle);
@@ -99,10 +103,6 @@ namespace MvvmCross.Forms.Platform.Android.Views
 
         protected virtual void InternalOnCreate(Bundle bundle)
         {
-            // Required for proper Push notifications handling      
-            var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setupSingleton.EnsureInitialized();
-
             ViewModel?.ViewCreated();
 
             RunAppStart();
@@ -120,6 +120,10 @@ namespace MvvmCross.Forms.Platform.Android.Views
         {
             if (!Xamarin.Forms.Forms.IsInitialized) {
                 global::Xamarin.Forms.Forms.Init(this, bundle, GetResourceAssembly());
+            }
+
+            if (Xamarin.Forms.Application.Current != FormsApplication) {
+                Xamarin.Forms.Application.Current = FormsApplication;
             }
 
             LoadApplication(FormsApplication);
