@@ -60,6 +60,7 @@ namespace MvvmCross.Forms.Platform.Uap.Presenters
         public override void ChangePresentation(MvxPresentationHint hint)
         {
             FormsPagePresenter.ChangePresentation(hint);
+            base.ChangePresentation(hint);
         }
 
         public override void Show(MvxViewModelRequest request)
