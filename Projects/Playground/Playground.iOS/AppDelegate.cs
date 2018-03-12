@@ -17,19 +17,9 @@ namespace Playground.iOS
             set;
         }
 
-        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        protected override MvxIosSetup CreateSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
         {
-            Window = new UIWindow(UIScreen.MainScreen.Bounds);
-
-            var setup = new Setup(this, Window);
-            setup.Initialize();
-
-            var startup = Mvx.Resolve<IMvxAppStart>();
-            startup.Start();
-
-            Window.MakeKeyAndVisible();
-
-            return true;
+            return new Setup(applicationDelegate, window);
         }
     }
 }
