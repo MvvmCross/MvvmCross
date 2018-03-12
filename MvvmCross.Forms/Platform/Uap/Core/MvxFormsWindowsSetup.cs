@@ -59,7 +59,8 @@ namespace MvvmCross.Forms.Platform.Uap.Core
                 {
                     _formsApplication = CreateFormsApplication();
                 }
-                if(Application.Current != _formsApplication) {
+                if(Application.Current != _formsApplication)
+                {
                     Application.Current = _formsApplication;
                 }
                 return _formsApplication;
