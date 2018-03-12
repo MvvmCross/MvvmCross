@@ -9,7 +9,7 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platform.Mac.Core
 {
-    public class MvxApplicationDelegate : NSApplicationDelegate, IMvxApplicationDelegate
+    public abstract class MvxApplicationDelegate : NSApplicationDelegate, IMvxApplicationDelegate
     {
         private MvxMacSetup _setup;
         protected MvxMacSetup Setup

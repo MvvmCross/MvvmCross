@@ -10,7 +10,7 @@ using UIKit;
 
 namespace MvvmCross.Platform.Tvos.Core
 {
-    public class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplicationDelegate
+    public abstract class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplicationDelegate
     {
         private MvxTvosSetup _setup;
         protected MvxTvosSetup Setup
