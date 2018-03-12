@@ -35,13 +35,9 @@ namespace MvvmCross.Forms.Platform.Ios.Core
         {
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(65, 105, 225);
-            UINavigationBar.Appearance.TintColor = UIColor.FromRGB(255, 255, 255);
-
             var setup = CreateSetup(this, Window);
             setup.Initialize();
 
-            // TODO: Do we need to force this to run synchronously?
             CompleteFormsSetup();
 
             Mvx.Resolve<IMvxFormsViewPresenter>().FormsApplication.SendStart();
