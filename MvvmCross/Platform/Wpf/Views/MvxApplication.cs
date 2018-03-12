@@ -10,7 +10,7 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platform.Wpf.Views
 {
-    public class MvxApplication : Application
+    public abstract class MvxApplication : Application
     {
         private MvxWpfSetup _setup;
         protected MvxWpfSetup Setup
