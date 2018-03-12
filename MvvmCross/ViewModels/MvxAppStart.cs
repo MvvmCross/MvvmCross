@@ -35,7 +35,7 @@ namespace MvvmCross.ViewModels
             }
             
             try {
-                NavigationService.Navigate<TViewModel>().Wait();
+                NavigationService.Navigate<TViewModel>().GetAwaiter().GetResult();
             } catch (System.Exception exception) {
                 throw exception.MvxWrap("Problem navigating to ViewModel {0}", typeof(TViewModel).Name);
             } 
