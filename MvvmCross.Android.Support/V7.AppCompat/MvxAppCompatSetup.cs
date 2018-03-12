@@ -12,6 +12,7 @@ using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Platform.Android.Core;
 using MvvmCross.Platform.Android.Presenters;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
@@ -48,6 +49,21 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             MvxAppCompatSetupHelper.FillDefaultBindingNames(registry);
             base.FillBindingNames(registry);
+        }
+    }
+
+    public abstract class MvxAppCompatSetup<TApplication> : MvxAppCompatSetup
+        where TApplication : IMvxApplication, new()
+    {
+        protected MvxAppCompatSetup(Context applicationContext) : base(applicationContext)
+        {
+        }
+
+        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+
+        protected override IEnumerable<Assembly> GetViewModelAssemblies()
+        {
+            return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
     }
 }
