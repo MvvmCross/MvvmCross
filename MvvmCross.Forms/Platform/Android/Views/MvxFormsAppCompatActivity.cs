@@ -55,7 +55,8 @@ namespace MvvmCross.Forms.Platform.Android.Views
         {
             get
             {
-                if (_formsApplication == null) {
+                if (_formsApplication == null)
+                {
                     var formsPresenter = Mvx.Resolve<IMvxFormsViewPresenter>();
                     _formsApplication = formsPresenter.FormsApplication;
                 }
@@ -84,7 +85,8 @@ namespace MvvmCross.Forms.Platform.Android.Views
 
         protected override void AttachBaseContext(Context @base)
         {
-            if (this is IMvxAndroidSplashScreenActivity) {
+            if (this is IMvxAndroidSplashScreenActivity)
+            {
                 // Do not attach our inflater to splash screens.
                 base.AttachBaseContext(@base);
                 return;
@@ -119,11 +121,13 @@ namespace MvvmCross.Forms.Platform.Android.Views
 
         public virtual void InitializeForms(Bundle bundle)
         {
-            if (!Xamarin.Forms.Forms.IsInitialized) {
+            if (!Xamarin.Forms.Forms.IsInitialized)
+            {
                 global::Xamarin.Forms.Forms.Init(this, bundle, GetResourceAssembly());
             }
 
-            if (Xamarin.Forms.Application.Current != FormsApplication) {
+            if (Xamarin.Forms.Application.Current != FormsApplication)
+            {
                 Xamarin.Forms.Application.Current = FormsApplication;
             }
 
