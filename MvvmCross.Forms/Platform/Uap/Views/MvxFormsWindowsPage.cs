@@ -4,14 +4,13 @@
 
 using System.Threading.Tasks;
 using MvvmCross.Forms.Platform.Uap.Presenters;
-using MvvmCross.Forms.Platform.Uap.Views;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.ViewModels;
 using Xamarin.Forms.Platform.UWP;
 
-namespace MvvmCross.Forms.Views.Base
+namespace MvvmCross.Forms.Views
 {
-    public class MvxFormsWindowsPage:WindowsPage
+    public class MvxFormsWindowsPage : WindowsPage
     {
         public MvxFormsWindowsPage()
         {
@@ -20,7 +19,7 @@ namespace MvvmCross.Forms.Views.Base
             Loaded += MvxWindowsPage_Loaded;
         }
 
-        private async void MvxWindowsPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void MvxWindowsPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Loaded -= MvxWindowsPage_Loaded;
 
@@ -28,21 +27,20 @@ namespace MvvmCross.Forms.Views.Base
             // reload XF
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Required;
 
-            InternalPageLoaded();
+            RunAppStart(e);
         }
 
-        protected virtual void InternalPageLoaded()
+        protected virtual void RunAppStart(object hint = null)
         {
-            RunAppStart();
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            startup.Start(GetAppStartHint(hint));
 
             LoadFormsApplication();
         }
 
-
-        protected virtual void RunAppStart()
+        protected virtual object GetAppStartHint(object hint = null)
         {
-            var startup = Mvx.Resolve<IMvxAppStart>();
-            startup.Start();
+            return null;
         }
 
         protected virtual void LoadFormsApplication()

@@ -3,20 +3,59 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Linq;
+using AppKit;
 using MvvmCross.Core;
+using MvvmCross.Exceptions;
 using MvvmCross.Forms.Presenters;
+using MvvmCross.IoC;
 using MvvmCross.Platform.Mac.Core;
+using MvvmCross.ViewModels;
 using Xamarin.Forms.Platform.MacOS;
 
 namespace MvvmCross.Forms.Platform.Mac.Core
 {
     public abstract class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {
+        private MvxFormsMacSetup _setup;
+        protected MvxFormsMacSetup Setup
+        {
+            get
+            {
+                if (_setup == null)
+                    _setup = CreateSetup(this, MainWindow);
+                return _setup;
+            }
+        }
+
         public override void DidFinishLaunching(Foundation.NSNotification notification)
         {
-            Mvx.Resolve<IMvxFormsViewPresenter>().FormsApplication.SendStart();
+            Setup.Initialize();
+
+            RunAppStart(notification);
+
+            Setup.FormsApplication.SendStart();
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
             base.DidFinishLaunching(notification);
+        }
+
+        protected virtual void RunAppStart(object hint = null)
+        {
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            if (!startup.IsStarted)
+                startup.Start(GetAppStartHint(hint));
+
+            LoadFormsApplication();
+        }
+
+        protected virtual object GetAppStartHint(object hint = null)
+        {
+            return null;
+        }
+
+        protected virtual void LoadFormsApplication()
+        {
+            LoadApplication(Setup.FormsApplication);
         }
 
         public override void WillBecomeActive(Foundation.NSNotification notification)
@@ -41,5 +80,10 @@ namespace MvvmCross.Forms.Platform.Mac.Core
         }
 
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
+
+        protected virtual MvxFormsMacSetup CreateSetup(IMvxApplicationDelegate applicationDelegate, NSWindow window)
+        {
+            return MvxSetupExtensions.CreateSetup<MvxFormsMacSetup>(this.GetType().Assembly, applicationDelegate, window);
+        }
     }
 }

@@ -4,6 +4,7 @@
 
 using System;
 using System.Threading.Tasks;
+using MvvmCross.Core;
 using MvvmCross.Platform.Uap.Core;
 using MvvmCross.Platform.Uap.Views.Suspension;
 using MvvmCross.ViewModels;
@@ -15,9 +16,20 @@ using Windows.UI.Xaml.Navigation;
 
 namespace MvvmCross.Platform.Uap.Views
 {
-    public abstract class MvxApplication: Application
+    public abstract class MvxApplication : Application
     {
-        protected MvxWindowsSetup Setup { get; set; }
+        protected IActivatedEventArgs ActivationArguments { get; private set; }
+
+        private MvxWindowsSetup _setup;
+        protected MvxWindowsSetup Setup
+        {
+            get
+            {
+                if (_setup == null)
+                    _setup = CreateSetup(RootFrame, ActivationArguments, nameof(Suspend));
+                return _setup;
+            }
+        }
 
         protected Frame RootFrame { get; set; }
 
@@ -35,11 +47,12 @@ namespace MvvmCross.Platform.Uap.Views
         protected override void OnLaunched(LaunchActivatedEventArgs activationArgs)
         {
             base.OnLaunched(activationArgs);
+            ActivationArguments = activationArgs;
 
             var rootFrame = InitializeFrame(activationArgs);
 
             if (activationArgs.PrelaunchActivated == false) {
-                RunAppStart(rootFrame, activationArgs);
+                RunAppStart(activationArgs);
             }
 
             Window.Current.Activate();
@@ -48,33 +61,30 @@ namespace MvvmCross.Platform.Uap.Views
         protected override void OnActivated(IActivatedEventArgs activationArgs)
         {
             base.OnActivated(activationArgs);
+            ActivationArguments = activationArgs;
 
             var rootFrame = InitializeFrame(activationArgs);
-
-            RunAppStart(rootFrame, activationArgs);
+            RunAppStart(activationArgs);
 
             Window.Current.Activate();
         }
 
-        protected abstract MvxWindowsSetup CreateSetup(Frame rootFrame, IActivatedEventArgs activationArgs, string suspension);
-
-        protected virtual void RunAppStart(Frame rootFrame, IActivatedEventArgs activationArgs)
+        protected virtual void RunAppStart(IActivatedEventArgs activationArgs)
         {
-            if (rootFrame.Content == null) {
-                Setup = CreateSetup(rootFrame, activationArgs, nameof(Suspend));
+            if (RootFrame.Content == null) {                
                 Setup.Initialize();
 
-                Start(activationArgs);
+                var startup = Mvx.Resolve<IMvxAppStart>();
+                if (!startup.IsStarted)
+                    startup.Start(GetAppStartHint(activationArgs));
             } else {
                 Setup.UpdateActivationArguments(activationArgs);
             }
-
         }
 
-        protected virtual void Start(IActivatedEventArgs activationArgs)
+        protected virtual object GetAppStartHint(object hint = null)
         {
-            var start = Mvx.Resolve<IMvxAppStart>();
-            start.Start();
+            return null;
         }
 
         protected virtual Frame InitializeFrame(IActivatedEventArgs activationArgs)
@@ -136,6 +146,11 @@ namespace MvvmCross.Platform.Uap.Views
         protected virtual Task Resume(IMvxSuspensionManager suspensionManager)
         {
             return Task.CompletedTask;
+        }
+
+        protected virtual MvxWindowsSetup CreateSetup(Frame rootFrame, IActivatedEventArgs activationArgs, string suspension)
+        {
+            return MvxSetupExtensions.CreateSetup<MvxWindowsSetup>(this.GetType().Assembly, rootFrame, activationArgs, suspension);
         }
     }
 }
