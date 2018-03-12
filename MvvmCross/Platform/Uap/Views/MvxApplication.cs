@@ -72,13 +72,16 @@ namespace MvvmCross.Platform.Uap.Views
 
         protected virtual void RunAppStart(IActivatedEventArgs activationArgs)
         {
-            if (RootFrame.Content == null) {                
+            if (RootFrame.Content == null)
+            {                
                 Setup.Initialize();
 
                 var startup = Mvx.Resolve<IMvxAppStart>();
                 if (!startup.IsStarted)
                     startup.Start(GetAppStartHint(activationArgs));
-            } else {
+            }
+            else
+            {
                 Setup.UpdateActivationArguments(activationArgs);
             }
         }
