@@ -56,9 +56,14 @@ namespace MvvmCross.Platform.Ios.Core
         {
             var startup = Mvx.Resolve<IMvxAppStart>();
             if(!startup.IsStarted)
-                startup.Start(hint);
+                startup.Start(GetAppStartHint(hint));
 
             Window.MakeKeyAndVisible();
+        }
+
+        protected virtual object GetAppStartHint(object hint = null)
+        {
+            return null;
         }
 
         private void FireLifetimeChanged(MvxLifetimeEvent which)

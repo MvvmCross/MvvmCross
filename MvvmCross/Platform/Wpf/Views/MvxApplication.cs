@@ -35,7 +35,12 @@ namespace MvvmCross.Platform.Wpf.Views
         {
             var startup = Mvx.Resolve<IMvxAppStart>();
             if (!startup.IsStarted)
-                startup.Start(hint);
+                startup.Start(GetAppStartHint(hint));
+        }
+
+        protected virtual object GetAppStartHint(object hint = null)
+        {
+            return null;
         }
 
         protected virtual MvxWpfSetup CreateSetup(Dispatcher uiThreadDispatcher, ContentControl root)

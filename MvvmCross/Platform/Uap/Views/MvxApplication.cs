@@ -47,11 +47,12 @@ namespace MvvmCross.Platform.Uap.Views
         protected override void OnLaunched(LaunchActivatedEventArgs activationArgs)
         {
             base.OnLaunched(activationArgs);
+            ActivationArguments = activationArgs;
 
             var rootFrame = InitializeFrame(activationArgs);
 
             if (activationArgs.PrelaunchActivated == false) {
-                RunAppStart(rootFrame, activationArgs);
+                RunAppStart(activationArgs);
             }
 
             Window.Current.Activate();
@@ -60,30 +61,30 @@ namespace MvvmCross.Platform.Uap.Views
         protected override void OnActivated(IActivatedEventArgs activationArgs)
         {
             base.OnActivated(activationArgs);
+            ActivationArguments = activationArgs;
 
             var rootFrame = InitializeFrame(activationArgs);
-
-            RunAppStart(rootFrame, activationArgs);
+            RunAppStart(activationArgs);
 
             Window.Current.Activate();
         }
 
-        protected virtual void RunAppStart(Frame rootFrame, IActivatedEventArgs activationArgs)
+        protected virtual void RunAppStart(IActivatedEventArgs activationArgs)
         {
-            if (rootFrame.Content == null) {
-                ActivationArguments = activationArgs;
+            if (RootFrame.Content == null) {                
                 Setup.Initialize();
 
-                Start(activationArgs);
+                var startup = Mvx.Resolve<IMvxAppStart>();
+                if (!startup.IsStarted)
+                    startup.Start(GetAppStartHint(activationArgs));
             } else {
                 Setup.UpdateActivationArguments(activationArgs);
             }
         }
 
-        protected virtual void Start(IActivatedEventArgs activationArgs)
+        protected virtual object GetAppStartHint(object hint = null)
         {
-            var start = Mvx.Resolve<IMvxAppStart>();
-            start.Start();
+            return null;
         }
 
         protected virtual Frame InitializeFrame(IActivatedEventArgs activationArgs)

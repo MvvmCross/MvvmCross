@@ -45,7 +45,12 @@ namespace MvvmCross.Platform.Mac.Core
         {
             var startup = Mvx.Resolve<IMvxAppStart>();
             if (!startup.IsStarted)
-                startup.Start(hint);
+                startup.Start(GetAppStartHint(hint));
+        }
+
+        protected virtual object GetAppStartHint(object hint = null)
+        {
+            return null;
         }
 
         public override void WillBecomeActive(Foundation.NSNotification notification)

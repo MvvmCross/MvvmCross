@@ -36,7 +36,12 @@ namespace MvvmCross.Platform.Tvos.Core
         {
             var startup = Mvx.Resolve<IMvxAppStart>();
             if (!startup.IsStarted)
-                startup.Start(hint);
+                startup.Start(GetAppStartHint(hint));
+        }
+
+        protected virtual object GetAppStartHint(object hint = null)
+        {
+            return null;
         }
 
         public override void WillEnterForeground(UIApplication application)
