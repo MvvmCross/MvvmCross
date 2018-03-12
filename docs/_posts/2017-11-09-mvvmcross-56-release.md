@@ -23,7 +23,7 @@ The new ViewPresenter supports the following presentation modes:
 
 If your app needs another kind of presentation mode, you can easily extend it!  
 
-Would you like to know more about this? You can start by reading the [official documentation](https://www.mvvmcross.com/documentation/presenters/tvos-view-presenter?scroll=704) and then please try checking out at the [Playground.TvOS](https://github.com/MvvmCross/MvvmCross/tree/develop/TestProjects/Playground/Playground.TvOS) sample to see it in action!
+Would you like to know more about this? You can start by reading the [official documentation](https://www.mvvmcross.com/documentation/presenters/tvos-view-presenter?scroll=704) and then please try checking out at the [Playground.TvOS](https://github.com/MvvmCross/MvvmCross/tree/5.6.0/TestProjects/Playground/Playground.TvOS) sample to see it in action!
 
 #### tvOS StarterPack Nuget Package
 
