@@ -61,7 +61,7 @@ namespace MvvmCross.Forms.Platform.Ios.Core
         {
             var startup = Mvx.Resolve<IMvxAppStart>();
             if (!startup.IsStarted)
-                startup.Start();
+                startup.Start(hint);
 
             LoadFormsApplication();
             Window.MakeKeyAndVisible();
