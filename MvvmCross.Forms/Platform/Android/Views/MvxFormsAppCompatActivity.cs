@@ -116,16 +116,16 @@ namespace MvvmCross.Forms.Platform.Android.Views
         {
             var startup = Mvx.Resolve<IMvxAppStart>();
             startup.Start();
-
-            //if (startup is IMvxAppStartAsync waitAppStart) {
-            //    await waitAppStart.WaitForStart();
-            //}
         }
 
         public virtual void InitializeForms(Bundle bundle)
         {
             if (!Xamarin.Forms.Forms.IsInitialized) {
                 global::Xamarin.Forms.Forms.Init(this, bundle, GetResourceAssembly());
+            }
+
+            if (Xamarin.Forms.Application.Current != FormsApplication) {
+                Xamarin.Forms.Application.Current = FormsApplication;
             }
 
             LoadApplication(FormsApplication);
