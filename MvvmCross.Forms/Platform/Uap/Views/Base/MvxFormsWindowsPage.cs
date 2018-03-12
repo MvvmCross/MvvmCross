@@ -28,25 +28,21 @@ namespace MvvmCross.Forms.Views.Base
             // reload XF
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Required;
 
-            await InternalPageLoaded();
+            InternalPageLoaded();
         }
 
-        protected virtual async Task InternalPageLoaded()
+        protected virtual void InternalPageLoaded()
         {
-            await RunAppStart();
+            RunAppStart();
 
             LoadFormsApplication();
         }
 
 
-        protected virtual async Task RunAppStart()
+        protected virtual void RunAppStart()
         {
             var startup = Mvx.Resolve<IMvxAppStart>();
             startup.Start();
-
-            if (startup is IMvxAppStartAsync waitAppStart) {
-                await waitAppStart.WaitForStart();
-            }
         }
 
         protected virtual void LoadFormsApplication()
