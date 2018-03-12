@@ -33,7 +33,8 @@ namespace MvvmCross.Forms.Views
         protected virtual void RunAppStart(object hint = null)
         {
             var startup = Mvx.Resolve<IMvxAppStart>();
-            startup.Start(GetAppStartHint(hint));
+            if(!startup.IsStarted)
+                startup.Start(GetAppStartHint(hint));
 
             LoadFormsApplication();
         }
