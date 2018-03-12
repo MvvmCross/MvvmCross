@@ -2,7 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-namespace MvvmCross.ViewModels.Hints
+using MvvmCross.ViewModels;
+
+namespace MvvmCross.Presenters.Hints
 {
     public class MvxPopToRootPresentationHint
         : MvxPresentationHint

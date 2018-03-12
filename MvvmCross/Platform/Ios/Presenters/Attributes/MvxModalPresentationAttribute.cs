@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using CoreGraphics;
-using MvvmCross.Presenters;
+using MvvmCross.Presenters.Attributes;
 using UIKit;
 
 namespace MvvmCross.Platform.Ios.Presenters.Attributes

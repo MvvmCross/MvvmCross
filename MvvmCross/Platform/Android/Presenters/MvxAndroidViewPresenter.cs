@@ -19,6 +19,7 @@ using MvvmCross.Platform.Android.Presenters.Attributes;
 using MvvmCross.Platform.Android.Views;
 using MvvmCross.Platform.Android.Views.Fragments;
 using MvvmCross.Presenters;
+using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 

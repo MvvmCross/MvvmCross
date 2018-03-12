@@ -1,5 +1,6 @@
 ﻿using MvvmCross.Platform.Wpf.Presenters.Attributes;
 using MvvmCross.Presenters;
+using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
 
 namespace Playground.Wpf.Views
