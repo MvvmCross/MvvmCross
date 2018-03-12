@@ -17,10 +17,5 @@ namespace Playground.Forms.iOS
 
             return base.FinishedLaunching(app, options);
         }
-
-        protected override MvxIosSetup CreateSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
-        {
-            return new Setup(applicationDelegate, window);
-        }
     }
 }

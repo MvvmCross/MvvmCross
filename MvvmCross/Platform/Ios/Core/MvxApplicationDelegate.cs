@@ -3,8 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Linq;
 using Foundation;
 using MvvmCross.Core;
+using MvvmCross.Exceptions;
+using MvvmCross.IoC;
 using MvvmCross.ViewModels;
 using UIKit;
 
@@ -12,6 +15,17 @@ namespace MvvmCross.Platform.Ios.Core
 {
     public abstract class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplicationDelegate
     {
+        private MvxIosSetup _setup;
+        protected MvxIosSetup Setup
+        {
+            get
+            {
+                if (_setup == null)
+                    _setup = CreateSetup(this, Window);
+                return _setup;
+            }
+        }
+
         public override void WillEnterForeground(UIApplication application)
         {
             FireLifetimeChanged(MvxLifetimeEvent.ActivatedFromMemory);
@@ -30,31 +44,27 @@ namespace MvvmCross.Platform.Ios.Core
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
+            Setup.Initialize();
 
-            var setup = CreateSetup(this, Window);
-            setup.Initialize();
-
-            CompleteSetup();
+            RunAppStart(launchOptions);
 
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
             return true;
         }
 
-        protected virtual void CompleteSetup()
+        protected virtual void RunAppStart(object hint = null)
         {
-            RunAppStart();
-
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            if(!startup.IsStarted)
+                startup.Start(GetAppStartHint(hint));
 
             Window.MakeKeyAndVisible();
         }
 
-        protected virtual void RunAppStart()
+        protected virtual object GetAppStartHint(object hint = null)
         {
-            var startup = Mvx.Resolve<IMvxAppStart>();
-            startup.Start();
+            return null;
         }
-        protected abstract MvxIosSetup CreateSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window);
-
 
         private void FireLifetimeChanged(MvxLifetimeEvent which)
         {
@@ -63,5 +73,10 @@ namespace MvvmCross.Platform.Ios.Core
         }
 
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
+
+        protected virtual MvxIosSetup CreateSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
+        {
+            return MvxSetupExtensions.CreateSetup<MvxIosSetup>(this.GetType().Assembly, applicationDelegate, window);
+        }
     }
 }
