@@ -11,15 +11,5 @@ namespace Playground.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : MvxApplicationDelegate
     {
-        public override UIWindow Window
-        {
-            get;
-            set;
-        }
-
-        protected override MvxIosSetup CreateSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
-        {
-            return new Setup(applicationDelegate, window);
-        }
     }
 }

@@ -15,7 +15,16 @@ namespace MvvmCross.Platform.Ios.Core
 {
     public abstract class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplicationDelegate
     {
-        protected MvxIosSetup _setup;
+        private MvxIosSetup _setup;
+        protected MvxIosSetup Setup
+        {
+            get
+            {
+                if (_setup == null)
+                    _setup = CreateSetup(this, Window);
+                return _setup;
+            }
+        }
 
         public override void WillEnterForeground(UIApplication application)
         {
@@ -35,24 +44,22 @@ namespace MvvmCross.Platform.Ios.Core
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
+            Setup.Initialize();
 
-            CreateSetup(this, Window);
-            _setup.Initialize();
-
-            RunAppStart();
+            RunAppStart(launchOptions);
 
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
             return true;
         }
 
-        protected virtual void RunAppStart()
+        protected virtual void RunAppStart(object hint = null)
         {
             var startup = Mvx.Resolve<IMvxAppStart>();
             if(!startup.IsStarted)
-                startup.Start();
+                startup.Start(hint);
 
             Window.MakeKeyAndVisible();
-        }        
+        }
 
         private void FireLifetimeChanged(MvxLifetimeEvent which)
         {
@@ -62,29 +69,9 @@ namespace MvvmCross.Platform.Ios.Core
 
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
 
-        protected virtual void CreateSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
+        protected virtual MvxIosSetup CreateSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
         {
-            var setupType = FindSetupType();
-            if (setupType == null) {
-                throw new MvxException("Could not find a Setup class for application");
-            }
-
-            try {
-                _setup = (MvxIosSetup)Activator.CreateInstance(setupType, applicationDelegate, window);
-            } catch (Exception exception) {
-                throw exception.MvxWrap("Failed to create instance of {0}", setupType.FullName);
-            }
-        }
-
-        protected virtual Type FindSetupType()
-        {
-            var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                        from type in assembly.ExceptionSafeGetTypes()
-                        where type.Name == "Setup"
-                        where typeof(MvxIosSetup).IsAssignableFrom(type)
-                        select type;
-
-            return query.FirstOrDefault();
+            return MvxSetupExtensions.CreateSetup<MvxIosSetup>(this.GetType().Assembly, applicationDelegate, window);
         }
     }
 }
