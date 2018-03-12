@@ -11,7 +11,7 @@ using MvvmCross.Navigation;
 namespace MvvmCross.ViewModels
 {
     public class MvxAppStart<TViewModel>
-        : IMvxAppStart, IMvxAppStartAsync
+        : IMvxAppStart
         where TViewModel : IMvxViewModel
     {
         protected readonly IMvxNavigationService NavigationService;
@@ -35,23 +35,12 @@ namespace MvvmCross.ViewModels
             }
             
             try {
-                _startTaskNotifier = MvxNotifyTask.Create(async ()=> await NavigationService.Navigate<TViewModel>());
+                NavigationService.Navigate<TViewModel>().Wait();
             } catch (System.Exception exception) {
                 throw exception.MvxWrap("Problem navigating to ViewModel {0}", typeof(TViewModel).Name);
             } 
         }
 
         public bool IsStarted => startHasCommenced != 0;
-
-        private MvxNotifyTask _startTaskNotifier;
-
-        public async Task<bool> WaitForStart()
-        {
-            if (_startTaskNotifier != null) {
-                await _startTaskNotifier.Task;
-                return true;
-            }
-            return false;
-        }
     }
 }

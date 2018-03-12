@@ -50,23 +50,19 @@ namespace MvvmCross.Forms.Platform.Ios.Core
         }
 
 
-        protected virtual async Task CompleteFormsSetup()
+        protected virtual void CompleteFormsSetup()
         {
-            await RunAppStart();
+            RunAppStart();
 
             LoadFormsApplication();
 
             Window.MakeKeyAndVisible();
         }
 
-        protected virtual async Task RunAppStart()
+        protected virtual void RunAppStart()
         {
             var startup = Mvx.Resolve<IMvxAppStart>();
             startup.Start();
-
-            if (startup is IMvxAppStartAsync waitAppStart) {
-                await waitAppStart.WaitForStart();
-            }
         }
 
         protected virtual void LoadFormsApplication()
