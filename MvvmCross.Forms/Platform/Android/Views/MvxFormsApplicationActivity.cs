@@ -54,8 +54,7 @@ namespace MvvmCross.Forms.Platform.Android.Views
         {
             get
             {
-                if (_formsApplication == null)
-                {
+                if (_formsApplication == null) {
                     var formsPresenter = Mvx.Resolve<IMvxFormsViewPresenter>();
                     _formsApplication = formsPresenter.FormsApplication;
                 }
@@ -83,8 +82,7 @@ namespace MvvmCross.Forms.Platform.Android.Views
 
         protected override void AttachBaseContext(Context @base)
         {
-            if (this is IMvxAndroidSplashScreenActivity)
-            {
+            if (this is IMvxAndroidSplashScreenActivity) {
                 // Do not attach our inflater to splash screens.
                 base.AttachBaseContext(@base);
                 return;
@@ -92,14 +90,14 @@ namespace MvvmCross.Forms.Platform.Android.Views
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
 
-        protected override async void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
-            await InternalOnCreate(bundle);
+            InternalOnCreate(bundle);
         }
 
-        protected virtual async Task InternalOnCreate(Bundle bundle)
+        protected virtual void InternalOnCreate(Bundle bundle)
         {
             // Required for proper Push notifications handling      
             var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
@@ -107,28 +105,24 @@ namespace MvvmCross.Forms.Platform.Android.Views
 
             ViewModel?.ViewCreated();
 
-            await RunAppStart();
+            RunAppStart();
 
             InitializeForms(bundle);
         }
 
-        protected virtual async Task RunAppStart()
+        protected virtual void RunAppStart()
         {
             var startup = Mvx.Resolve<IMvxAppStart>();
             startup.Start();
-
-            if (startup is IMvxAppStartAsync waitAppStart) {
-                await waitAppStart.WaitForStart();
-            }
         }
 
         public virtual void InitializeForms(Bundle bundle)
         {
-            if (FormsApplication.MainPage != null)
-            {
+            if (!Xamarin.Forms.Forms.IsInitialized) {
                 global::Xamarin.Forms.Forms.Init(this, bundle, GetResourceAssembly());
-                LoadApplication(FormsApplication);
             }
+
+            LoadApplication(FormsApplication);
         }
 
         protected virtual Assembly GetResourceAssembly()

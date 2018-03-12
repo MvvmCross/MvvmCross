@@ -14,7 +14,7 @@ namespace Playground.Forms.Droid
         Label = "Playground.Forms", 
         Icon = "@mipmap/icon",
         Theme = "@style/AppTheme",
-        // MainLauncher = true, // No Splash Screen: Uncomment this lines if removing splash screen
+        //MainLauncher = true, // No Splash Screen: Uncomment this lines if removing splash screen
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, 
         LaunchMode = LaunchMode.SingleTask)]
     public class MainActivity : MvxFormsAppCompatActivity<MainViewModel>
