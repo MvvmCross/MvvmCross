@@ -123,6 +123,8 @@ namespace Playground.Core.ViewModels
 
         public IMvxAsyncCommand ShowCodeBehindViewCommand => new MvxAsyncCommand(async () => await _navigationService.Navigate<CodeBehindViewModel>());
 
+        public IMvxAsyncCommand ShowContentViewCommand => new MvxAsyncCommand(async () => await _navigationService.Navigate<ParentContentViewModel>());
+
         private async Task Navigate()
         {
             try 

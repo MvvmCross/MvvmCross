@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views1:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:Playground.Forms.UI.Views;assembly=Playground.Forms.UI"
+             xmlns:views1="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+             xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
+             x:Class="Playground.Forms.UI.Pages.ParentContentPage" x:TypeArguments="viewModels:ParentContentViewModel">
+    <ContentPage.Content>
+        <StackLayout>
+            <views:ChildContentView />
+        </StackLayout>
+    </ContentPage.Content>
+</views1:MvxContentPage>
