@@ -15,7 +15,8 @@ namespace MvvmCross.Platform.Ios.Binding.Target
     {
         protected UITextField View => Target as UITextField;
 
-        private IDisposable _subscription;
+        private IDisposable _subscriptionChanged;
+        private IDisposable _subscriptionEndEditing;
 
         public MvxUITextFieldTextTargetBinding(UITextField target)
             : base(target)
@@ -42,7 +43,8 @@ namespace MvvmCross.Platform.Ios.Binding.Target
                 return;
             }
 
-            _subscription = target.WeakSubscribe(nameof(target.EditingChanged), HandleEditTextValueChanged);
+            _subscriptionChanged = target.WeakSubscribe(nameof(target.EditingChanged), HandleEditTextValueChanged);
+            _subscriptionEndEditing = target.WeakSubscribe(nameof(target.EditingDidEnd), HandleEditTextValueChanged);
         }
 
         public override Type TargetType => typeof(string);
@@ -63,8 +65,11 @@ namespace MvvmCross.Platform.Ios.Binding.Target
             base.Dispose(isDisposing);
             if (!isDisposing) return;
 
-            _subscription?.Dispose();
-            _subscription = null;
+            _subscriptionChanged?.Dispose();
+            _subscriptionChanged = null;
+
+            _subscriptionEndEditing?.Dispose();
+            _subscriptionEndEditing = null;
         }
 
         public string CurrentText
