@@ -20,14 +20,11 @@ namespace MvvmCross.Platform.Uap.Views
     {
         protected IActivatedEventArgs ActivationArguments { get; private set; }
 
-        private MvxWindowsSetup _setup;
         protected MvxWindowsSetup Setup
         {
             get
             {
-                if (_setup == null)
-                    _setup = CreateSetup(RootFrame, ActivationArguments, nameof(Suspend));
-                return _setup;
+                return MvxSetup.PlatformInstance<MvxWindowsSetup>();
             }
         }
 
@@ -51,14 +48,13 @@ namespace MvvmCross.Platform.Uap.Views
 
             var rootFrame = InitializeFrame(activationArgs);
 
-            if (activationArgs.PrelaunchActivated == false)
-            {
+            if (activationArgs.PrelaunchActivated == false) {
                 RunAppStart(activationArgs);
             }
 
             Window.Current.Activate();
         }
-        
+
         protected override void OnActivated(IActivatedEventArgs activationArgs)
         {
             base.OnActivated(activationArgs);
@@ -72,8 +68,8 @@ namespace MvvmCross.Platform.Uap.Views
 
         protected virtual void RunAppStart(IActivatedEventArgs activationArgs)
         {
-            if (RootFrame.Content == null)
-            {                
+            if (RootFrame.Content == null) {
+                Setup.PlatformInitialize(RootFrame, ActivationArguments, nameof(Suspend));
                 Setup.Initialize();
 
                 var startup = Mvx.Resolve<IMvxAppStart>();
@@ -95,16 +91,14 @@ namespace MvvmCross.Platform.Uap.Views
         {
             var rootFrame = Window.Current.Content as Frame;
 
-            if (rootFrame == null)
-            {
+            if (rootFrame == null) {
                 rootFrame = CreateFrame();
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 Window.Current.Content = rootFrame;
             }
 
-            if (activationArgs.PreviousExecutionState == ApplicationExecutionState.Terminated)
-            {
+            if (activationArgs.PreviousExecutionState == ApplicationExecutionState.Terminated) {
                 OnResumeFromTerminateState();
             }
 
@@ -153,10 +147,6 @@ namespace MvvmCross.Platform.Uap.Views
         {
             return Task.CompletedTask;
         }
-
-        protected virtual MvxWindowsSetup CreateSetup(Frame rootFrame, IActivatedEventArgs activationArgs, string suspension)
-        {
-            return MvxSetupExtensions.CreateSetup<MvxWindowsSetup>(this.GetType().Assembly, rootFrame, activationArgs, suspension);
-        }
     }
+
 }

@@ -26,26 +26,43 @@ using MvvmCross.Presenters;
 
 namespace MvvmCross.Platform.Uap.Core
 {
-    public abstract class MvxWindowsSetup
-        : MvxSetup
+    public interface IMvxWindowsSetup
     {
-        private readonly IMvxWindowsFrame _rootFrame;
-        private readonly string _suspensionManagerSessionStateKey;
+        void PlatformInitialize(Frame rootFrame, IActivatedEventArgs activatedEventArgs, string suspensionManagerSessionStateKey = null);
+        void PlatformInitialize(Frame rootFrame, string suspensionManagerSessionStateKey = null);
+        void PlatformInitialize(IMvxWindowsFrame rootFrame);
+    }
+
+    public abstract class MvxWindowsSetup
+        : MvxSetup, IMvxWindowsSetup
+    {
+        private IMvxWindowsFrame _rootFrame;
+        private string _suspensionManagerSessionStateKey;
         private IMvxWindowsViewPresenter _presenter;
 
-        protected MvxWindowsSetup(Frame rootFrame, IActivatedEventArgs activatedEventArgs,
-            string suspensionManagerSessionStateKey = null) : this(rootFrame, suspensionManagerSessionStateKey)
+        // Oww, this is nasty but can't think of a way around it.
+        protected static Assembly viewAssembly;
+
+        public static void RegisterSetupType<TMvxSetup>() where TMvxSetup : MvxWindowsSetup, new()
         {
+            viewAssembly = Assembly.GetCallingAssembly();
+            MvxSetup.RegisterSetupType<TMvxSetup>();
+        }
+
+        public virtual void PlatformInitialize(Frame rootFrame, IActivatedEventArgs activatedEventArgs,
+            string suspensionManagerSessionStateKey = null)
+        {
+            PlatformInitialize(rootFrame, suspensionManagerSessionStateKey);
             ActivationArguments = activatedEventArgs;
         }
 
-        protected MvxWindowsSetup(Frame rootFrame, string suspensionManagerSessionStateKey = null)
-            : this(new MvxWrappedFrame(rootFrame))
+        public virtual void PlatformInitialize(Frame rootFrame, string suspensionManagerSessionStateKey = null)
         {
+            PlatformInitialize(new MvxWrappedFrame(rootFrame));
             _suspensionManagerSessionStateKey = suspensionManagerSessionStateKey;
         }
 
-        protected MvxWindowsSetup(IMvxWindowsFrame rootFrame)
+        public virtual void PlatformInitialize(IMvxWindowsFrame rootFrame)
         {
             _rootFrame = rootFrame;
         }
@@ -183,34 +200,16 @@ namespace MvvmCross.Platform.Uap.Core
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "Page");
         }
-    }
-
-    public class MvxWindowsSetup<TApplication> : MvxWindowsSetup
-         where TApplication : IMvxApplication, new()
-    {
-        protected readonly Assembly viewAssembly;
-
-        public MvxWindowsSetup(Frame rootFrame, IActivatedEventArgs activatedEventArgs,
-           string suspensionManagerSessionStateKey = null) : base(rootFrame, activatedEventArgs, suspensionManagerSessionStateKey)
-        {
-            viewAssembly = Assembly.GetCallingAssembly();
-        }
-
-        public MvxWindowsSetup(Frame rootFrame, string suspensionManagerSessionStateKey = null) : base(rootFrame, suspensionManagerSessionStateKey)
-        {
-            viewAssembly = Assembly.GetCallingAssembly();
-        }
-
-        public MvxWindowsSetup(IMvxWindowsFrame rootFrame) : base(rootFrame)
-        {
-            viewAssembly = Assembly.GetCallingAssembly();
-        }
 
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
             return base.GetViewAssemblies().Union(new[] { viewAssembly });
         }
+    }
 
+    public class MvxWindowsSetup<TApplication> : MvxWindowsSetup
+         where TApplication : IMvxApplication, new()
+    {
         protected override IEnumerable<Assembly> GetViewModelAssemblies()
         {
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };

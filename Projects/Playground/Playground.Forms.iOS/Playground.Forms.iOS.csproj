@@ -144,7 +144,6 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Setup.cs" />
     <Compile Include="Views\OverrideAttributeView.cs" />
     <Compile Include="Views\OverrideAttributeView.designer.cs">
       <DependentUpon>OverrideAttributeView.cs</DependentUpon>

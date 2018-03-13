@@ -9,14 +9,14 @@ namespace Playground.Forms.Uwp
 {
     sealed partial class App 
     {
+        static App()
+        {
+            MvxWindowsSetup.RegisterSetupType< MvxFormsWindowsSetup < Core.App, FormsApp >> ();
+        }
+
         public App()
         {
             InitializeComponent();
-        }
-
-        protected override MvxWindowsSetup CreateSetup(Frame rootFrame, IActivatedEventArgs e, string suspension)
-        {
-            return new MvxFormsWindowsSetup<Core.App, FormsApp>(rootFrame, e, suspension);
         }
 
         protected override Type HostWindowsPageType()

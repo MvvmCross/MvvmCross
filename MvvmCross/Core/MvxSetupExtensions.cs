@@ -28,9 +28,34 @@ namespace MvvmCross.Core
             }
         }
 
+        public static TSetup CreateSetup<TSetup>() where TSetup : MvxSetup
+        {
+            var setupType = FindSetupType<TSetup>();
+            if (setupType == null) {
+                throw new MvxException("Could not find a Setup class for application");
+            }
+
+            try {
+                return (TSetup)Activator.CreateInstance(setupType);
+            } catch (Exception exception) {
+                throw exception.MvxWrap("Failed to create instance of {0}", setupType.FullName);
+            }
+        }
+
         public static Type FindSetupType<TSetup>(Assembly assembly)
         {
             var query = from type in assembly.ExceptionSafeGetTypes()
+                        where type.Name == "Setup"
+                        where typeof(TSetup).IsAssignableFrom(type)
+                        select type;
+
+            return query.FirstOrDefault();
+        }
+
+        public static Type FindSetupType<TSetup>()
+        {
+            var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                        from type in assembly.ExceptionSafeGetTypes()
                         where type.Name == "Setup"
                         where typeof(TSetup).IsAssignableFrom(type)
                         select type;
