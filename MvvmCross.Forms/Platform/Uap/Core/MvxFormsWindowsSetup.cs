@@ -27,11 +27,6 @@ namespace MvvmCross.Forms.Platform.Uap.Core
         private List<Assembly> _viewAssemblies;
         private Application _formsApplication;
 
-        protected MvxFormsWindowsSetup(XamlControls.Frame rootFrame, IActivatedEventArgs activatedEventArgs, string suspensionManagerSessionStateKey = null)
-            : base(rootFrame, activatedEventArgs, suspensionManagerSessionStateKey)
-        {
-        }
-
         /// <summary>
         /// Override to provide list of assemblies to search for views. 
         /// Additionally for UWP .NET Native compilation include the assemblies containing custom controls and renderers to be passed to <see cref="Xamarin.Forms.Forms.Init" /> method. 
@@ -95,11 +90,6 @@ namespace MvvmCross.Forms.Platform.Uap.Core
         where TApplication : IMvxApplication, new()
         where TFormsApplication : Application, new()        
     {
-        public MvxFormsWindowsSetup(XamlControls.Frame rootFrame, IActivatedEventArgs activatedEventArgs, string suspensionManagerSessionStateKey = null) 
-            : base(rootFrame, activatedEventArgs, suspensionManagerSessionStateKey)
-        {
-        }
-
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
             return new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(TFormsApplication).GetTypeInfo().Assembly }));

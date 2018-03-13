@@ -19,6 +19,7 @@ namespace MvvmCross.Forms.Platform.Uap.Views
         {
             if (RootFrame?.Content == null)
             {
+                Setup.PlatformInitialize(RootFrame, activationArgs, nameof(Suspend));
                 Setup.Initialize();
 
                 var startup = Mvx.Resolve<IMvxAppStart>();

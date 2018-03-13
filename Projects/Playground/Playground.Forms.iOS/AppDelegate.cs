@@ -1,14 +1,12 @@
 ﻿using Foundation;
-using MvvmCross;
 using MvvmCross.Forms.Platform.Ios.Core;
-using MvvmCross.Platform.Ios.Core;
-using MvvmCross.ViewModels;
+using Playground.Forms.UI;
 using UIKit;
 
 namespace Playground.Forms.iOS
 {
     [Register("AppDelegate")]
-    public partial class AppDelegate : MvxFormsApplicationDelegate
+    public partial class AppDelegate : MvxFormsApplicationDelegate<MvxFormsIosSetup<Core.App, FormsApp>, Core.App, FormsApp>
     {
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {

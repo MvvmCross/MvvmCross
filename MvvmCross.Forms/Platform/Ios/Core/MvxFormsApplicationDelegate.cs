@@ -3,30 +3,23 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Foundation;
 using MvvmCross.Core;
-using MvvmCross.Exceptions;
-using MvvmCross.Forms.Presenters;
-using MvvmCross.IoC;
 using MvvmCross.Platform.Ios.Core;
 using MvvmCross.ViewModels;
 using UIKit;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 namespace MvvmCross.Forms.Platform.Ios.Core
 {
     public abstract class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {
-        private MvxFormsIosSetup _setup;
-        protected MvxFormsIosSetup Setup 
-        { 
+        protected MvxFormsIosSetup Setup
+        {
             get
             {
-                if (_setup == null)
-                    _setup = CreateSetup(this, Window);
-                return _setup;
+                return MvxSetup.PlatformInstance<MvxFormsIosSetup>();
             }
         }
 
@@ -48,6 +41,7 @@ namespace MvvmCross.Forms.Platform.Ios.Core
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
+            Setup.PlatformInitialize(this, Window);
             Setup.Initialize();
 
             RunAppStart(launchOptions);
@@ -103,10 +97,16 @@ namespace MvvmCross.Forms.Platform.Ios.Core
         }
 
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
+    }
 
-        protected virtual MvxFormsIosSetup CreateSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
+    public abstract class MvxFormsApplicationDelegate<TMvxIosSetup, TApplication, TFormsApplication> : MvxFormsApplicationDelegate
+        where TMvxIosSetup : MvxFormsIosSetup<TApplication, TFormsApplication>, new()
+        where TApplication : IMvxApplication, new()
+        where TFormsApplication : Application, new()
+    {
+        static MvxFormsApplicationDelegate()
         {
-            return MvxSetupExtensions.CreateSetup<MvxFormsIosSetup>(this.GetType().Assembly, applicationDelegate, window);
+            MvxSetup.RegisterSetupType<TMvxIosSetup>();
         }
     }
 }

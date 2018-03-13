@@ -21,6 +21,32 @@ namespace MvvmCross.Core
 {
     public abstract class MvxSetup
     {
+        protected static Type RegisteredSetupType { get; set; }
+        public static void RegisterSetupType<TMvxSetup>() where TMvxSetup: MvxSetup,new()
+        {
+            RegisteredSetupType = typeof(TMvxSetup);
+        }
+
+        private static MvxSetup instance;
+        public static MvxSetup Instance
+        {
+            get
+            {
+                if (instance != null) return instance;
+                if (RegisteredSetupType != null) {
+                    instance = Activator.CreateInstance(RegisteredSetupType) as MvxSetup;
+                } else {
+                    instance = MvxSetupExtensions.CreateSetup<MvxSetup>();
+                }
+                return instance;
+            }
+        }
+
+        public static TMvxSetup PlatformInstance<TMvxSetup>() where TMvxSetup:MvxSetup
+        {
+            return Instance as TMvxSetup;
+        }
+
         protected abstract IMvxApplication CreateApp();
 
         protected abstract IMvxViewsContainer CreateViewsContainer();
@@ -37,8 +63,7 @@ namespace MvvmCross.Core
 
         public virtual void InitializePrimary()
         {
-            if (State != MvxSetupState.Uninitialized)
-            {
+            if (State != MvxSetupState.Uninitialized) {
                 throw new MvxException("Cannot start primary - as state already {0}", State);
             }
             State = MvxSetupState.InitializingPrimary;
@@ -46,8 +71,7 @@ namespace MvvmCross.Core
             InitializeLoggingServices();
             SetupLog.Trace("Setup: Primary start");
             State = MvxSetupState.InitializedPrimary;
-            if (State != MvxSetupState.InitializedPrimary)
-            {
+            if (State != MvxSetupState.InitializedPrimary) {
                 throw new MvxException("Cannot start seconday - as state is currently {0}", State);
             }
             State = MvxSetupState.InitializingSecondary;
@@ -147,8 +171,7 @@ namespace MvvmCross.Core
         protected virtual void PerformBootstrapActions()
         {
             var bootstrapRunner = new MvxBootstrapRunner();
-            foreach (var assembly in GetBootstrapOwningAssemblies())
-            {
+            foreach (var assembly in GetBootstrapOwningAssemblies()) {
                 bootstrapRunner.Run(assembly);
             }
         }
@@ -205,8 +228,7 @@ namespace MvvmCross.Core
         protected virtual void InitializeLoggingServices()
         {
             var logProvider = CreateLogProvider();
-            if (logProvider != null)
-            {
+            if (logProvider != null) {
                 Mvx.RegisterSingleton(logProvider);
                 SetupLog = logProvider.GetLogFor<MvxSetup>();
                 var globalLog = logProvider.GetLogFor<MvxLog>();
@@ -220,8 +242,7 @@ namespace MvvmCross.Core
 
         protected virtual IMvxLogProvider CreateLogProvider()
         {
-            switch (GetDefaultLogProviderType())
-            {
+            switch (GetDefaultLogProviderType()) {
                 case MvxLogProviderType.Console:
                     return new ConsoleLogProvider();
                 case MvxLogProviderType.EntLib:
@@ -285,8 +306,7 @@ namespace MvvmCross.Core
                     .SelectMany(assembly => assembly.GetTypes())
                     .Where(TypeContainsPluginAttribute);
 
-            foreach (var pluginType in pluginTypes)
-            {
+            foreach (var pluginType in pluginTypes) {
                 pluginManager.EnsurePluginLoaded(pluginType);
             }
 
@@ -377,8 +397,7 @@ namespace MvvmCross.Core
             Mvx.RegisterSingleton(viewModelByNameRegistry);
 
             var viewModelAssemblies = GetViewModelAssemblies();
-            foreach (var assembly in viewModelAssemblies)
-            {
+            foreach (var assembly in viewModelAssemblies) {
                 viewModelByNameRegistry.AddAll(assembly);
             }
 
@@ -461,8 +480,7 @@ namespace MvvmCross.Core
 
         public virtual void EnsureInitialized(Type requiredBy)
         {
-            switch (State)
-            {
+            switch (State) {
                 case MvxSetupState.Uninitialized:
                     Initialize();
                     break;
