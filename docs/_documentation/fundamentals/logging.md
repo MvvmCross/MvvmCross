@@ -5,9 +5,9 @@ category: Fundamentals
 order: 7
 ---
 
-A great option to log messages, info and errors to the console or other outputs is MvxLog! It is very extendable and easy to use.
+A great option to log messages, info and errors to the console or other outputs is the built in MvxLog! It is very extendable and easy to use.
 
-In your ViewModel this could look like:
+You just need to inject it in your ViewModel, something like:
 
 ```c#
 public class MyViewModel : MvxViewModel
@@ -25,7 +25,7 @@ public class MyViewModel : MvxViewModel
 }
 ```
 
-More advanced would be:
+A more advanced case would be:
 
 ```c#
 public class MyViewModel : MvxViewModel
@@ -67,7 +67,7 @@ public enum MvxLogLevel
 
 # Extend it with custom log providers
 
-There is built-in support for quite some popular logging frameworks. These are included:
+There is built-in support for quite some popular logging frameworks. These ones are included:
 
 - EntLib
 - Log4Net
@@ -75,17 +75,17 @@ There is built-in support for quite some popular logging frameworks. These are i
 - NLog
 - Serilog
 
-To enable them override the `GetDefaultLogProviderType` in your platform projects `Setup.cs`.
+To enable any of them override the `GetDefaultLogProviderType` in your platform projects `Setup.cs`.
 
 ```c#
 protected override MvxLogProviderType GetDefaultLogProviderType() => MvxLogProviderType.Serilog;
 ```
 
-If you have your own logging provider or want to implement one, you need to override `protected override IMvxLogProvider CreateLogProvider()` and return a custom.
+If you have your own logging provider or want to implement one, you need to override this method on Setup: `protected override IMvxLogProvider CreateLogProvider()` and return your own implementation for it.
 
 # Customize the log provider
 
-In the case of Serilog you could do:
+In the case of Serilog you could do the following:
 
 ```c#
 protected override IMvxLogProvider CreateLogProvider()
@@ -100,11 +100,12 @@ protected override IMvxLogProvider CreateLogProvider()
 ```
 
 This would install a sink for the Serilog Xamarin extension.
-Similair customilization can be done for other providers as well.
 
-# Overview of methods
+Similar customizations can be done for other providers as well.
 
-The base interface for all logging is:
+# Methods overview
+
+The base interface for all the logging system is:
 
 ```c#
 public interface IMvxLog
@@ -113,7 +114,7 @@ public interface IMvxLog
 }
 ```
 
-With the extension methods that are now available you can use all of these:
+But we have you covered with some extension methods which are ready to use:
 
 ```c#
 public static class MvxLogExtensions
@@ -204,7 +205,7 @@ public static class MvxLogExtensions
 }
 ```
 
-The log providers all implement `IMvxLogProvider`
+All log providers implement `IMvxLogProvider`:
 
 ```c#
 public interface IMvxLogProvider
