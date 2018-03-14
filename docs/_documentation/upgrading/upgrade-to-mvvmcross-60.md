@@ -53,7 +53,10 @@ Previously we had a mix between `Uwp` and `Uap` namespaces. We have unified them
 - All IoC related code was moved from `MvvmCross.Platform.IoC` to `MvvmCross.IoC`.
 
 ### Logging
+`MvxTrace` and everything related was removed in v6. Please take a look at the [official documentation](https://www.mvvmcross.com/documentation/fundamentals/logging) to learn about the new logging system.
+
 - `MvvmCross.Platform.Logging` is now `MvvmCross.Logging`.
+- `MvvmCross.Core.Platform.LogProviders` is now `MvvmCross.Platform.Logging.LogProviders`.
 
 ### Navigation
 - `MvvmCross.Core.Navigation` is now `MvvmCross.Navigation`.

@@ -60,6 +60,9 @@ Removed ShowViewModel: https://github.com/MvvmCross/MvvmCross/pull/2559
 TBA
 IoC Child containers: https://github.com/MvvmCross/MvvmCross/pull/2438
 
+### Logging
+`MvxTrace` and everything related was removed. The new (and much improved) logging system was already present since MvvmCross 5.4. If you haven't heard about it, please take a look at the [official documentation](https://www.mvvmcross.com/documentation/fundamentals/logging)
+
 ### Xamarin.Forms
 
 #### ViewCells

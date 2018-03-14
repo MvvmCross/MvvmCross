@@ -55,7 +55,7 @@ namespace MvvmCross.Platform.Android.Binding.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            MvxLog.Instance.Warn("SetValueImpl called on generic Preference target");
+            MvxBindingLog.Instance.Warn("SetValueImpl called on generic Preference target");
         }
     }
 }
