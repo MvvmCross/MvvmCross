@@ -23,11 +23,6 @@ using MvvmCross.Presenters;
 
 namespace MvvmCross.Platform.Ios.Core
 {
-    public interface IMvxIosSetup
-    {
-        void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, UIWindow window);
-        void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter);
-    }
     public abstract class MvxIosSetup
         : MvxSetup, IMvxIosSetup
     {

@@ -12,10 +12,6 @@ namespace Playground.Forms.Droid
 {
     public class Setup : MvxFormsAndroidSetup<Core.App, FormsApp>
     {
-        public Setup(Context applicationContext) : base(applicationContext)
-        {
-        }
-
         protected override MvxLogProviderType GetDefaultLogProviderType()
             => MvxLogProviderType.Serilog;
 

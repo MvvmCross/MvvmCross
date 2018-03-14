@@ -19,7 +19,7 @@ using MvvmCross.Views;
 
 namespace MvvmCross.Core
 {
-    public abstract class MvxSetup
+    public abstract class MvxSetup : IMvxSetup
     {
         protected static Type RegisteredSetupType { get; set; }
         public static void RegisterSetupType<TMvxSetup>() where TMvxSetup : MvxSetup, new()
@@ -27,8 +27,8 @@ namespace MvvmCross.Core
             RegisteredSetupType = typeof(TMvxSetup);
         }
 
-        private static MvxSetup instance;
-        public static MvxSetup Instance
+        private static IMvxSetup instance;
+        public static IMvxSetup Instance
         {
             get
             {
@@ -45,9 +45,17 @@ namespace MvvmCross.Core
             }
         }
 
-        public static TMvxSetup PlatformInstance<TMvxSetup>() where TMvxSetup : MvxSetup
+        public static TMvxSetup PlatformInstance<TMvxSetup>() where TMvxSetup : IMvxSetup
         {
-            return Instance as TMvxSetup;
+            try
+            {
+                return (TMvxSetup)Instance;
+            }
+            catch (Exception ex)
+            {
+                MvxLog.Instance.Error(ex, "Unable to cast setup to {0}", typeof(TMvxSetup));
+                throw ex;
+            }
         }
 
         protected abstract IMvxApplication CreateApp();

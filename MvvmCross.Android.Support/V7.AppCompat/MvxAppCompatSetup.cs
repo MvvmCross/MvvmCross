@@ -18,12 +18,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     public abstract class MvxAppCompatSetup : MvxAndroidSetup
     {
-        protected MvxAppCompatSetup(Context applicationContext)
-            : base(applicationContext)
-        {
-        }
-
-        protected override IEnumerable<Assembly> AndroidViewAssemblies => 
+        protected override IEnumerable<Assembly> AndroidViewAssemblies =>
             new List<Assembly>(base.AndroidViewAssemblies)
             {
                 typeof(Toolbar).Assembly,
@@ -55,10 +50,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     public abstract class MvxAppCompatSetup<TApplication> : MvxAppCompatSetup
         where TApplication : IMvxApplication, new()
     {
-        protected MvxAppCompatSetup(Context applicationContext) : base(applicationContext)
-        {
-        }
-
         protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
 
         protected override IEnumerable<Assembly> GetViewModelAssemblies()
@@ -66,4 +57,5 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
     }
+
 }
