@@ -2,16 +2,14 @@
 using MvvmCross.Forms.Platform.Uap.Core;
 using MvvmCross.Platform.Uap.Core;
 using Playground.Forms.UI;
-using Windows.ApplicationModel.Activation;
-using Windows.UI.Xaml.Controls;
 
 namespace Playground.Forms.Uwp
 {
-    sealed partial class App 
+    sealed partial class App
     {
         static App()
         {
-            MvxWindowsSetup.RegisterSetupType< MvxFormsWindowsSetup < Core.App, FormsApp >> ();
+            MvxWindowsSetup.RegisterWindowsSetupType<MvxFormsWindowsSetup<Core.App, FormsApp>>();
         }
 
         public App()

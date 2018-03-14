@@ -4,7 +4,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;  
+using System.Linq;
 using System.Reflection;
 using MvvmCross.Converters;
 using MvvmCross.Exceptions;
@@ -26,12 +26,6 @@ using MvvmCross.Presenters;
 
 namespace MvvmCross.Platform.Uap.Core
 {
-    public interface IMvxWindowsSetup
-    {
-        void PlatformInitialize(Frame rootFrame, IActivatedEventArgs activatedEventArgs, string suspensionManagerSessionStateKey = null);
-        void PlatformInitialize(Frame rootFrame, string suspensionManagerSessionStateKey = null);
-        void PlatformInitialize(IMvxWindowsFrame rootFrame);
-    }
 
     public abstract class MvxWindowsSetup
         : MvxSetup, IMvxWindowsSetup
@@ -43,10 +37,10 @@ namespace MvvmCross.Platform.Uap.Core
         // Oww, this is nasty but can't think of a way around it.
         protected static Assembly viewAssembly;
 
-        public static void RegisterSetupType<TMvxSetup>() where TMvxSetup : MvxWindowsSetup, new()
+        public static void RegisterWindowsSetupType<TMvxSetup>() where TMvxSetup : MvxWindowsSetup, new()
         {
             viewAssembly = Assembly.GetCallingAssembly();
-            MvxSetup.RegisterSetupType<TMvxSetup>();
+            RegisterSetupType<TMvxSetup>();
         }
 
         public virtual void PlatformInitialize(Frame rootFrame, IActivatedEventArgs activatedEventArgs,
@@ -113,7 +107,7 @@ namespace MvvmCross.Platform.Uap.Core
         {
             return CreateViewDispatcher(_rootFrame);
         }
-        
+
         protected IMvxWindowsViewPresenter Presenter
         {
             get
@@ -178,7 +172,7 @@ namespace MvvmCross.Platform.Uap.Core
 
         protected IActivatedEventArgs ActivationArguments { get; private set; }
 
-        protected virtual List<Type> ValueConverterHolders => new List<Type>();        
+        protected virtual List<Type> ValueConverterHolders => new List<Type>();
 
         protected virtual IEnumerable<Assembly> ValueConverterAssemblies
         {
@@ -189,7 +183,7 @@ namespace MvvmCross.Platform.Uap.Core
                 toReturn.AddRange(GetViewAssemblies());
                 return toReturn;
             }
-        }       
+        }
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
         {

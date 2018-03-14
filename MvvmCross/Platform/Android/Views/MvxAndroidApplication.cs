@@ -5,6 +5,9 @@
 using System;
 using Android.App;
 using Android.Runtime;
+using MvvmCross.Core;
+using MvvmCross.Platform.Android.Core;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platform.Android.Views
 {
@@ -20,6 +23,24 @@ namespace MvvmCross.Platform.Android.Views
         public MvxAndroidApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
             Instance = this;
+        }
+    }
+
+    public abstract class MvxAndroidApplication<TMvxAndroidSetup, TApplication> : MvxAndroidApplication
+      where TMvxAndroidSetup : MvxAndroidSetup<TApplication>, new()
+      where TApplication : IMvxApplication, new()
+    {
+        static MvxAndroidApplication()
+        {
+            MvxSetup.RegisterSetupType<TMvxAndroidSetup>();
+        }
+
+        public MvxAndroidApplication() : base()
+        {
+        }
+
+        public MvxAndroidApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
         }
     }
 }

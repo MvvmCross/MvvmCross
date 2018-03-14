@@ -12,11 +12,11 @@ namespace MvvmCross.Platform.Ios.Core
 {
     public abstract class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplicationDelegate
     {
-        protected MvxIosSetup Setup
+        protected IMvxIosSetup Setup
         {
             get
             {
-                return MvxSetup.PlatformInstance<MvxIosSetup>();
+                return MvxSetup.PlatformInstance<IMvxIosSetup>();
             }
         }
 

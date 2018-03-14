@@ -27,10 +27,6 @@ namespace MvvmCross.Forms.Platform.Android.Core
         private List<Assembly> _viewAssemblies;
         private Application _formsApplication;
 
-        protected MvxFormsAndroidSetup(Context applicationContext) : base(applicationContext)
-        {
-        }
-
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
             if (_viewAssemblies == null)
@@ -121,10 +117,6 @@ namespace MvvmCross.Forms.Platform.Android.Core
         where TApplication : IMvxApplication, new()
         where TFormsApplication : Application, new()
     {
-        protected MvxFormsAndroidSetup(Context applicationContext) : base(applicationContext)
-        {
-        }
-
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
             return new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(TFormsApplication).GetTypeInfo().Assembly }));
