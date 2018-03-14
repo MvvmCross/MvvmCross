@@ -12,6 +12,8 @@ var outputDir = new DirectoryPath("./artifacts");
 var nuspecDir = new DirectoryPath("./nuspec");
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
+var verbosityArg = Argument("verbosity", "Minimal");
+var verbosity = Verbosity.Minimal;
 
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 GitVersion versionInfo = null;
@@ -41,6 +43,8 @@ Setup(context => {
 
     Debug("Will push NuGet packages {0}", 
         ShouldPushNugetPackages(versionInfo.BranchName));
+
+    verbosity = (Verbosity) Enum.Parse(typeof(Verbosity), verbosityArg, true);
 });
 
 Task("Clean").Does(() =>
@@ -87,7 +91,7 @@ Task("Build")
     {
         Configuration = configuration,
         ToolPath = msBuildPath,
-        Verbosity = Verbosity.Minimal,
+        Verbosity = verbosity,
         ArgumentCustomization = args => args.Append("/m")
     };
 
