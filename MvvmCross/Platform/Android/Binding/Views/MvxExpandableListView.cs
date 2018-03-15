@@ -13,7 +13,7 @@ using MvvmCross.Binding.Attributes;
 
 namespace MvvmCross.Platform.Android.Binding.Views
 {
-    [Register("mvvmcross.binding.droid.views.MvxExpandableListView")]
+    [Register("mvvmcross.platform.android.binding.views.MvxExpandableListView")]
     public class MvxExpandableListView : ExpandableListView
     {
         private bool _groupClickOverloaded;

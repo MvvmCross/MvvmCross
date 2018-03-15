@@ -12,7 +12,7 @@ using MvvmCross.Base;
 
 namespace MvvmCross.Platform.Android.Views.Fragments.EventSource
 {
-    [Register("mvvmcross.droid.fragments.eventsource.MvxEventSourceListFragment")]
+    [Register("mvvmcross.platform.android.views.fragments.eventsource.MvxEventSourceListFragment")]
     public class MvxEventSourceListFragment
         : ListFragment
         , IMvxEventSourceFragment

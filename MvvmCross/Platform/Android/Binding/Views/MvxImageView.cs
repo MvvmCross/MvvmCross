@@ -15,7 +15,7 @@ using MvvmCross.Platform.Android.Binding.ResourceHelpers;
 
 namespace MvvmCross.Platform.Android.Binding.Views
 {
-    [Register("mvvmcross.binding.droid.views.MvxImageView")]
+    [Register("mvvmcross.platform.android.binding.views.MvxImageView")]
     public class MvxImageView
         : ImageView
     {

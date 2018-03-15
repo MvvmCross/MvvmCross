@@ -19,7 +19,7 @@ using Object = Java.Lang.Object;
 
 namespace MvvmCross.Platform.Android.Views
 {
-    [Register("mvvmcross.droid.views.MvxTabsFragmentActivity")]
+    [Register("mvvmcross.platform.android.views.MvxTabsFragmentActivity")]
     public abstract class MvxTabsFragmentActivity
         : MvxActivity, TabHost.IOnTabChangeListener
     {
