@@ -9,6 +9,7 @@ using System.Windows.Input;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using Android.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Extensions;
@@ -167,12 +168,24 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         protected virtual View InflateViewForHolder(ViewGroup parent, int viewType, IMvxAndroidBindingContext bindingContext)
         {
             var layoutId = ItemTemplateSelector.GetItemLayoutId(viewType);
-            return bindingContext.BindingInflate(layoutId, parent, false);
+            var view = bindingContext.BindingInflate(layoutId, parent, false);
+
+            if (layoutId == global::Android.Resource.Layout.SimpleListItem1) {
+                view.Tag = new SimpleItemTag();
+            }
+
+            return view;
+        }
+
+        public class SimpleItemTag : Object
+        {
         }
 
         public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
         {
             var dataContext = GetItem(position);
+            if (holder.ItemView.Tag is SimpleItemTag)
+                (holder.ItemView as TextView).Text = dataContext.ToString();
             ((IMvxRecyclerViewHolder)holder).DataContext = dataContext;
             OnMvxViewHolderBound(new MvxViewHolderBoundEventArgs(position, dataContext, holder));
         }
