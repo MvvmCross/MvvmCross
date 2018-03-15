@@ -13,7 +13,7 @@ namespace MvvmCross.Platform.Android.Binding.Views
     // Special thanks for this file to Emi - https://github.com/eMi-/mvvmcross_datepicker_timepicker
     // Code used under Creative Commons with attribution
     // See also http://stackoverflow.com/questions/14829521/bind-timepicker-datepicker-mvvmcross-mono-for-android
-    [Register("mvvmcross.binding.droid.views.MvxTimePicker")]
+    [Register("mvvmcross.platform.android.binding.views.MvxTimePicker")]
     public class MvxTimePicker
         : TimePicker
         , TimePicker.IOnTimeChangedListener

@@ -12,7 +12,7 @@ using MvvmCross.Binding.Attributes;
 
 namespace MvvmCross.Platform.Android.Binding.Views
 {
-    [Register("mvvmcross.binding.droid.views.MvxAutoCompleteTextView")]
+    [Register("mvvmcross.platform.android.binding.views.MvxAutoCompleteTextView")]
     public class MvxAutoCompleteTextView
         : AutoCompleteTextView
     {
