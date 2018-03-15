@@ -7,7 +7,6 @@ using Android.Graphics;
 using Android.Support.V7.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Exceptions;
-using MvvmCross.Logging;
 using MvvmCross.Platform.Android.Binding.Target;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
@@ -37,7 +36,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat.Target
             }
             catch (Exception ex)
             {
-                MvxAndroidLog.Instance.Error(ex.ToLongString());
+                MvxBindingLog.Error(ex.ToLongString());
                 throw;
             }
         }
