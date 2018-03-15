@@ -103,6 +103,9 @@ If you're using a custom ViewPresenter that extends the default provided by Mvvm
 - `IMvxTvosModalHost` and `IMvxIosModalHost` were deprecated and removed.
 - On iOS, the method `PresentModalViewController` was renamed to `ShowModalViewController`.
 
+#### Navigation
+`IMvxNavigationService.ChangePresentation` has been marked async (the method now returns a `Task<bool>`).
+
 #### Logging
 
 `IMvxLog` has a new method: `bool IsLogLevelEnabled(MvxLogLevel logLevel)`.

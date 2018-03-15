@@ -50,6 +50,9 @@ TBA
 
 ### ViewPresenters
 
+`IMvxOverridePresentationAttribute.PresentationAttribute` now takes a `MvxViewModelRequest` as parameter. As a result, when the method `PresentationAttribute` is called, you will be able to make your choice on which attribute to use taking advantage of the ViewModel request. But that's not everything! If you are using the MvxNavigationService, you can cast the arriving parameter of type `MvxViewModelRequest` to be a `MvxViewModelInstanceRequest`, which will allow you to see the ViewModel that is being presented. 
+This change was made by [@nmilcoff](https://github.com/nmilcoff).
+
 ViewPresenters registration was aligned and improved on many platforms. You can now obtain the current ViewPresenter from anywhere by resolving the interface `IMvxViewPresenter`. All thanks to the amazing [@martijn00](https://github.com/martijn00)!
 OverrideAttribute: https://github.com/MvvmCross/MvvmCross/pull/2483
 
@@ -117,6 +120,8 @@ Removed some layouts: https://github.com/MvvmCross/MvvmCross/pull/2561
 Our `WebBrowser` plugin now has support for macOS! All thanks to [@tofutim](https://github.com/tofutim).
 
 ### UWP
+We now cover scenarios where apps are launched from file associations, URIs and many more! At code level this means `MvxFormsWindowsSetup` now expects a parameter of type `IActivatedEventArgs` instead of `LaunchActivatedEventArgs`. Thanks for this [@MartinZikmund](https://github.com/MartinZikmund)!
+
 [kipters](https://github.com/kipters) made a great job adding StarterPack content for UWP! But unfortunately NuGet doesn't like nuspec content anymore. We are actively looking for a way to improve the installation experience.
 
 ### Tizen
@@ -134,13 +139,11 @@ MvvmCross has always been easy to extend and customize, but we never stop improv
 
 #### Framework Unit Testing
 
-[@Cheesebaron](https://github.com/Cheesebaron) took the chance and converted all our Unit Tests to XUnit, which works better for some platforms. 
+[@Cheesebaron](https://github.com/Cheesebaron) took the chance and converted all our Unit Tests to XUnit, which works better for some platforms. After that he didn't stop there and he added a bunch more of tests. Let's help him and improve our coverage for the next version!
 
 TBA
 Bindings: https://github.com/MvvmCross/MvvmCross/pull/2490
 Dictionary Conversion: https://github.com/MvvmCross/MvvmCross/pull/2480
-Improved localization customization: https://github.com/MvvmCross/MvvmCross/pull/2579
-
 
 
 # Change Log
