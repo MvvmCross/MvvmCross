@@ -40,20 +40,24 @@ No more bootstrap file! Yes, you read it correctly. [@willsb](https://github.com
 
 Read more about [how to get started with plugins in our documentation](https://www.mvvmcross.com/documentation/plugins/getting-started-with-plugin-development).
 
+#### Json and Resx plugins
+
+All methods in `MvxResxTextProvider`, `MvxJsonDictionaryTextProvider` and `MvxTextProvider` are now virtual. Customization is now much easier!
+
 ### .NET Standard
 
 TBA
 
 ### ViewPresenters
 
-TBA
-General alignment: https://github.com/MvvmCross/MvvmCross/pull/2558
+ViewPresenters registration was aligned and improved on many platforms. You can now obtain the current ViewPresenter from anywhere by resolving the interface `IMvxViewPresenter`. All thanks to the amazing [@martijn00](https://github.com/martijn00)!
 OverrideAttribute: https://github.com/MvvmCross/MvvmCross/pull/2483
 
 ### Navigation
 
-TBA
-Removed ShowViewModel: https://github.com/MvvmCross/MvvmCross/pull/2559
+The brand new MvxNavigationService that was introduced in MvvmCross 5 is now the default. This means `ShowViewModel` has been finally removed, as well as `MvxNavigatingObject`. If you aren't using it yet, it's time you take a look at the [official documentation](https://www.mvvmcross.com/documentation/fundamentals/navigation).
+
+The intermediary helper class `MvxNavigationServiceAppStart` has been removed as well, because the classic `MvxAppStart` now uses MvxNavigationService internally.
 
 ### IoC
 
@@ -102,6 +106,9 @@ Kudos to [@nmilcoff](https://github.com/nmilcoff) and [@dazinator](https://githu
 #### Nested fragments
 Both versions of our provided ViewPresenters (default and AppCompat) now support nested fragments! To be fair we did support this in the past, but we took it from 1 level indentation to N levels. Quite cool, right? Kudos to [@Qwin](https://github.com/Qwin).
 
+#### Removed layouts
+`MvxRelativeLayout`, `MvxFrameLayout` and `MvxTableLayout` were removed as they were memory inefficient (nothing we can do to improve that).
+
 Color plugin: https://github.com/MvvmCross/MvvmCross/pull/2557
 Removed some layouts: https://github.com/MvvmCross/MvvmCross/pull/2561
 
@@ -112,6 +119,10 @@ Our `WebBrowser` plugin now has support for macOS! All thanks to [@tofutim](http
 ### UWP
 [kipters](https://github.com/kipters) made a great job adding StarterPack content for UWP! But unfortunately NuGet doesn't like nuspec content anymore. We are actively looking for a way to improve the installation experience.
 
+### Tizen
+
+Although the status is not yet PRD Ready, initial support for the platform was already added. We look forward too see what developers will build with MvvmCross & Tizen!
+
 ### Others
 
 #### Improved Setup
@@ -120,6 +131,10 @@ MvvmCross has always been easy to extend and customize, but we never stop improv
 
 #### Commands
 `MvxAsyncCommand<T>` now implements `IMvxCommand`, same as others. Thanks to [@kipters](https://github.com/kipters), [@softlion](https://github.com/softlion) and [@nickrandolph](https://github.com/nickrandolph) for making our lives easier!
+
+#### Framework Unit Testing
+
+[@Cheesebaron](https://github.com/Cheesebaron) took the chance and converted all our Unit Tests to XUnit, which works better for some platforms. 
 
 TBA
 Bindings: https://github.com/MvvmCross/MvvmCross/pull/2490
