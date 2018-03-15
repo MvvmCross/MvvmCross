@@ -17,7 +17,7 @@ using MvvmCross.ViewModels;
 namespace MvvmCross.Platform.Android.Views
 {
     [Obsolete("TabActivity is obsolete. Use ViewPager + Indicator or any other Activity with Toolbar support.")]
-    [Register("mvvmcross.droid.views.MvxTabActivity")]
+    [Register("mvvmcross.platform.android.views.MvxTabActivity")]
     public abstract class MvxTabActivity
         : MvxEventSourceTabActivity, IMvxAndroidView, IMvxChildViewModelOwner
     {

@@ -17,7 +17,7 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platform.Android.Views
 {
-    [Register("mvvmcross.droid.views.MvxActivity")]
+    [Register("mvvmcross.platform.android.views.MvxActivity")]
     public abstract class MvxActivity
         : MvxEventSourceActivity
         , IMvxAndroidView
