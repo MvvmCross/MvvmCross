@@ -54,6 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="Views\CollectionView.cs" />
     <Compile Include="Views\DictionaryBindingView.cs" />
     <Compile Include="Views\RootView.cs" />
     <Compile Include="Views\TabsRootView.cs" />
@@ -77,12 +78,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
-    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Properties\AndroidManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\dictionary_view.axml" />
+    <AndroidResource Include="Resources\layout\CollectionView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\RootView.axml" />
+    <AndroidResource Include="Resources\layout\RootView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\mipmap-hdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-mdpi\Icon.png" />
@@ -125,6 +133,10 @@
     <ProjectReference Include="..\..\..\MvvmCross.Android.Support\V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj">
       <Project>{fd67cbbc-4bac-40d6-9f4c-28aae6c8533e}</Project>
       <Name>MvvmCross.Droid.Support.V7.AppCompat</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross.Android.Support\V7.RecyclerView\MvvmCross.Droid.Support.V7.RecyclerView.csproj">
+      <Project>{6f49cfe7-3fcb-463d-85dc-1798e2be771e}</Project>
+      <Name>MvvmCross.Droid.Support.V7.RecyclerView</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\JsonLocalization\MvvmCross.Plugin.JsonLocalization.csproj">
       <Project>{c783ef46-1822-4baf-8eca-e820fff26633}</Project>
