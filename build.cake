@@ -18,7 +18,6 @@ var verbosity = Verbosity.Minimal;
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 GitVersion versionInfo = null;
 
-
 Setup(context => {
     versionInfo = context.GitVersion(new GitVersionSettings {
         UpdateAssemblyInfo = true,
@@ -69,8 +68,11 @@ Task("ResolveBuildTools")
 
 Task("Restore")
     .IsDependentOn("ResolveBuildTools")
-    .Does(() => {
-    MSBuild(sln, settings => settings.WithTarget("Restore"));
+    .Does(() => 
+{
+    var settings = GetDefaultBuildSettings()
+        .WithTarget("Restore");
+    MSBuild(sln, settings);
 });
 
 Task("PatchBuildProps")
@@ -87,15 +89,7 @@ Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>  {
 
-    var settings = new MSBuildSettings 
-    {
-        Configuration = configuration,
-        ToolPath = msBuildPath,
-        Verbosity = verbosity,
-        ArgumentCustomization = args => args.Append("/m")
-    };
-
-    settings = settings
+    var settings = GetDefaultBuildSettings()
         .WithProperty("DebugSymbols", "True")
         .WithProperty("DebugType", "Embedded")
         .WithProperty("Version", versionInfo.SemVer)
@@ -171,7 +165,8 @@ Task("PublishPackages")
 
 Task("UploadAppVeyorArtifact")
     .WithCriteria(() => isRunningOnAppVeyor)
-    .Does(() => {
+    .Does(() => 
+{
 
     Information("Artifacts Dir: {0}", outputDir.FullPath);
 
@@ -202,6 +197,19 @@ Task("Default")
 });
 
 RunTarget(target);
+
+MSBuildSettings GetDefaultBuildSettings()
+{
+    var settings = new MSBuildSettings 
+    {
+        Configuration = configuration,
+        ToolPath = msBuildPath,
+        Verbosity = verbosity,
+        ArgumentCustomization = args => args.Append("/m")
+    };
+
+    return settings;
+}
 
 bool ShouldPushNugetPackages(string branchName)
 {
