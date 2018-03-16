@@ -170,7 +170,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             var layoutId = ItemTemplateSelector.GetItemLayoutId(viewType);
             var view = bindingContext.BindingInflate(layoutId, parent, false);
 
-            if (layoutId == global::Android.Resource.Layout.SimpleListItem1) {
+            if (layoutId == global::Android.Resource.Layout.SimpleListItem1) 
+            {
                 view.Tag = new SimpleItemTag();
             }
 
@@ -185,7 +186,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
             var dataContext = GetItem(position);
             if (holder.ItemView.Tag is SimpleItemTag)
-                (holder.ItemView as TextView).Text = dataContext.ToString();
+                (holder.ItemView as TextView).Text = dataContext?.ToString();
             ((IMvxRecyclerViewHolder)holder).DataContext = dataContext;
             OnMvxViewHolderBound(new MvxViewHolderBoundEventArgs(position, dataContext, holder));
         }
