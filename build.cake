@@ -178,7 +178,7 @@ Task("UploadAppVeyorArtifact")
     foreach(var file in artifacts) {
         Information("Uploading {0}", file.FullPath);
 
-        if (file.GetExtension() == "nupkg")
+        if (file.GetExtension().Contains("nupkg"))
             uploadSettings.ArtifactType = AppVeyorUploadArtifactType.NuGetPackage;
         else
             uploadSettings.ArtifactType = AppVeyorUploadArtifactType.Auto;
