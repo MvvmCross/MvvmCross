@@ -12,24 +12,25 @@ namespace MvvmCross.Platform.Tvos.Core
 {
     public abstract class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplicationDelegate
     {
-        private MvxTvosSetup _setup;
-        protected MvxTvosSetup Setup
+        protected IMvxTvosSetup Setup
         {
             get
             {
-                if (_setup == null)
-                    _setup = CreateSetup(this, Window);
-                return _setup;
+                return MvxSetup.PlatformInstance<IMvxTvosSetup>();
             }
         }
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
+
+            Window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+            Setup.PlatformInitialize(this, Window);
             Setup.Initialize();
             RunAppStart(launchOptions);
 
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
-            return base.FinishedLaunching(application, launchOptions);
+            return true;
         }
 
         protected virtual void RunAppStart(object hint = null)
@@ -37,6 +38,8 @@ namespace MvvmCross.Platform.Tvos.Core
             var startup = Mvx.Resolve<IMvxAppStart>();
             if (!startup.IsStarted)
                 startup.Start(GetAppStartHint(hint));
+
+            Window.MakeKeyAndVisible();
         }
 
         protected virtual object GetAppStartHint(object hint = null)
@@ -70,6 +73,16 @@ namespace MvvmCross.Platform.Tvos.Core
         protected virtual MvxTvosSetup CreateSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
         {
             return MvxSetupExtensions.CreateSetup<MvxTvosSetup>(this.GetType().Assembly, applicationDelegate, window);
+        }
+    }
+
+    public abstract class MvxApplicationDelegate<TMvxTvosSetup, TApplication> : MvxApplicationDelegate
+       where TMvxTvosSetup : MvxTvosSetup<TApplication>, new()
+       where TApplication : IMvxApplication, new()
+    {
+        static MvxApplicationDelegate()
+        {
+            MvxSetup.RegisterSetupType<TMvxTvosSetup>();
         }
     }
 }

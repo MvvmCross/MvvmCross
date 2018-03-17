@@ -22,21 +22,21 @@ using MvvmCross.Presenters;
 
 namespace MvvmCross.Platform.Tvos.Core
 {
-    public abstract class MvxTvosSetup
-        : MvxSetup
+    public abstract class MvxTvosSetup 
+        : MvxSetup, IMvxTvosSetup
     {
-        private readonly IMvxApplicationDelegate _applicationDelegate;
-        private readonly UIWindow _window;
+        private IMvxApplicationDelegate _applicationDelegate;
+        private UIWindow _window;
 
         private IMvxTvosViewPresenter _presenter;
 
-        protected MvxTvosSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
+        public virtual void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, UIWindow window)
         {
             _window = window;
             _applicationDelegate = applicationDelegate;
         }
 
-        protected MvxTvosSetup(IMvxApplicationDelegate applicationDelegate, IMvxTvosViewPresenter presenter)
+        public virtual void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, IMvxTvosViewPresenter presenter)
         {
             _presenter = presenter;
             _applicationDelegate = applicationDelegate;
@@ -173,17 +173,9 @@ namespace MvvmCross.Platform.Tvos.Core
         }
     }
 
-    public abstract class MvxTvosSetup<TApplication> : MvxTvosSetup
+    public class MvxTvosSetup<TApplication> : MvxTvosSetup
         where TApplication : IMvxApplication, new()
     {
-        protected MvxTvosSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window) : base(applicationDelegate, window)
-        {
-        }
-
-        protected MvxTvosSetup(IMvxApplicationDelegate applicationDelegate, IMvxTvosViewPresenter presenter) : base(applicationDelegate, presenter)
-        {
-        }
-
         protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
 
         protected override IEnumerable<Assembly> GetViewModelAssemblies()
