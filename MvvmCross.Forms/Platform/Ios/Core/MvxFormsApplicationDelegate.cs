@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Foundation;
 using MvvmCross.Core;
 using MvvmCross.Platform.Ios.Core;
@@ -13,6 +14,7 @@ using Xamarin.Forms.Platform.iOS;
 
 namespace MvvmCross.Forms.Platform.Ios.Core
 {
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleType", Justification = "Generic class with same name is permitted")]
     public abstract class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {
         protected MvxFormsIosSetup Setup

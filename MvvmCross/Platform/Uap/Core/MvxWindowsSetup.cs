@@ -26,7 +26,6 @@ using MvvmCross.Presenters;
 
 namespace MvvmCross.Platform.Uap.Core
 {
-
     public abstract class MvxWindowsSetup
         : MvxSetup, IMvxWindowsSetup
     {

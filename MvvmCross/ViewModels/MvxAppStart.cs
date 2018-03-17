@@ -22,9 +22,7 @@ namespace MvvmCross.ViewModels
         {
             NavigationService = navigationService;
         }
-
-
-
+        
         public void Start(object hint = null)
         {
             // Check whether Start has commenced, and return if it has

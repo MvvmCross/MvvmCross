@@ -152,5 +152,4 @@ namespace MvvmCross.Platform.Uap.Views
             return Task.CompletedTask;
         }
     }
-
 }

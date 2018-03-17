@@ -14,6 +14,5 @@ namespace Playground.Uwp
         {
             InitializeComponent();
         }
-
     }
 }
