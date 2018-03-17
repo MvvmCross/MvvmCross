@@ -64,7 +64,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Setup.cs" />
     <Compile Include="Views\WindowChildView.xaml.cs">
       <DependentUpon>WindowChildView.xaml</DependentUpon>
     </Compile>

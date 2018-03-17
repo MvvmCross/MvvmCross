@@ -7,7 +7,7 @@ namespace Playground.Uwp
     {
         static App()
         {
-            MvxWindowsSetup.RegisterSetupType<MvxWindowsSetup<Core.App>>();
+            MvxWindowsSetup.RegisterWindowsSetupType<MvxWindowsSetup<Core.App>>();
         }
 
         public App()

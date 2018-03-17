@@ -76,18 +76,12 @@ namespace MvvmCross.Core
         {
             if (State != MvxSetupState.Uninitialized)
             {
-                throw new MvxException("Cannot start primary - as state already {0}", State);
+                return;
             }
             State = MvxSetupState.InitializingPrimary;
             InitializeIoC();
             InitializeLoggingServices();
             SetupLog.Trace("Setup: Primary start");
-            State = MvxSetupState.InitializedPrimary;
-            if (State != MvxSetupState.InitializedPrimary)
-            {
-                throw new MvxException("Cannot start seconday - as state is currently {0}", State);
-            }
-            State = MvxSetupState.InitializingSecondary;
             SetupLog.Trace("Setup: FirstChance start");
             InitializeFirstChance();
             SetupLog.Trace("Setup: PlatformServices start");
@@ -96,10 +90,16 @@ namespace MvvmCross.Core
             InitializeSettings();
             SetupLog.Trace("Setup: Singleton Cache start");
             InitializeSingletonCache();
+            State = MvxSetupState.InitializedPrimary;
         }
 
         public virtual void InitializeSecondary()
         {
+            if (State != MvxSetupState.InitializedPrimary)
+            {
+                return;
+            }
+            State = MvxSetupState.InitializingSecondary;
             SetupLog.Trace("Setup: Bootstrap actions");
             PerformBootstrapActions();
             SetupLog.Trace("Setup: StringToTypeParser start");
