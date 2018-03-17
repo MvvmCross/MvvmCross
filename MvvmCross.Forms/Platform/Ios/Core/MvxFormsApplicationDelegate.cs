@@ -14,7 +14,6 @@ using Xamarin.Forms.Platform.iOS;
 
 namespace MvvmCross.Forms.Platform.Ios.Core
 {
-    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleType", Justification = "Generic class with same name is permitted")]
     public abstract class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {
         protected MvxFormsIosSetup Setup
