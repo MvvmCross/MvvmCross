@@ -1,30 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Threading;
 using MvvmCross.Core;
 using MvvmCross.Platform.Wpf.Core;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platform.Wpf.Views
 {
-    public abstract class MvxApplication : Application
+    public abstract class MvxApplication : Application 
     {
-        private MvxWpfSetup _setup;
-        protected MvxWpfSetup Setup
+        protected IMvxWpfSetup Setup
         {
             get
             {
-                if (_setup == null)
-                    _setup = CreateSetup(Dispatcher, MainWindow);
-                return _setup;
+                return MvxSetup.PlatformInstance<IMvxWpfSetup>();
             }
         }
 
         protected override void OnActivated(EventArgs e)
         {
+            Setup.PlatformInitialize(Dispatcher, MainWindow);
             Setup.Initialize();
 
             RunAppStart(e);
@@ -41,11 +35,6 @@ namespace MvvmCross.Platform.Wpf.Views
         protected virtual object GetAppStartHint(object hint = null)
         {
             return null;
-        }
-
-        protected virtual MvxWpfSetup CreateSetup(Dispatcher uiThreadDispatcher, ContentControl root)
-        {
-            return MvxSetupExtensions.CreateSetup<MvxWpfSetup>(this.GetType().Assembly, uiThreadDispatcher, root);
         }
     }
 }
