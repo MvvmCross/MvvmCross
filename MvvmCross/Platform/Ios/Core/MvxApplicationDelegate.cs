@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Foundation;
 using MvvmCross.Core;
 using MvvmCross.ViewModels;
@@ -10,6 +11,7 @@ using UIKit;
 
 namespace MvvmCross.Platform.Ios.Core
 {
+    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleType", Justification = "Generic class with same name is permitted")]
     public abstract class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplicationDelegate
     {
         protected IMvxIosSetup Setup
