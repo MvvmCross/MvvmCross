@@ -26,16 +26,6 @@ namespace MvvmCross.Forms.Platform.Mac.Core
         private List<Assembly> _viewAssemblies;
         private Application _formsApplication;
 
-        protected MvxFormsMacSetup(IMvxApplicationDelegate applicationDelegate, NSWindow window)
-            : base(applicationDelegate, window)
-        {
-        }
-
-        protected MvxFormsMacSetup(IMvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter)
-            : base(applicationDelegate, presenter)
-        {
-        }
-
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
             if (_viewAssemblies == null)
@@ -115,14 +105,6 @@ namespace MvvmCross.Forms.Platform.Mac.Core
         where TApplication : IMvxApplication, new()
         where TFormsApplication : Application, new()
     {
-        protected MvxFormsMacSetup(IMvxApplicationDelegate applicationDelegate, NSWindow window) : base(applicationDelegate, window)
-        {
-        }
-
-        protected MvxFormsMacSetup(IMvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter) : base(applicationDelegate, presenter)
-        {
-        }
-
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
             return new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(TFormsApplication).GetTypeInfo().Assembly }));
