@@ -11,25 +11,39 @@ using MvvmCross.Forms.Presenters;
 using MvvmCross.IoC;
 using MvvmCross.Platform.Mac.Core;
 using MvvmCross.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.MacOS;
 
 namespace MvvmCross.Forms.Platform.Mac.Core
-{
+{ 
     public abstract class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {
-        private MvxFormsMacSetup _setup;
         protected MvxFormsMacSetup Setup
         {
             get
             {
-                if (_setup == null)
-                    _setup = CreateSetup(this, MainWindow);
-                return _setup;
+                return MvxSetup.PlatformInstance<MvxFormsMacSetup>();
             }
+        }
+
+        NSWindow window;
+        public MvxFormsApplicationDelegate()
+        {
+            var style = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
+
+            var rect = new CoreGraphics.CGRect(200, 1000, 1024, 768);
+            window = new NSWindow(rect, style, NSBackingStore.Buffered, false);
+            window.TitleVisibility = NSWindowTitleVisibility.Hidden;
+        }
+
+        public override NSWindow MainWindow
+        {
+            get { return window; }
         }
 
         public override void DidFinishLaunching(Foundation.NSNotification notification)
         {
+            Setup.PlatformInitialize(this, MainWindow);
             Setup.Initialize();
 
             RunAppStart(notification);
@@ -80,10 +94,16 @@ namespace MvvmCross.Forms.Platform.Mac.Core
         }
 
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
+    }
 
-        protected virtual MvxFormsMacSetup CreateSetup(IMvxApplicationDelegate applicationDelegate, NSWindow window)
+    public abstract class MvxFormsApplicationDelegate<TMvxMacSetup, TApplication, TFormsApplication> : MvxFormsApplicationDelegate
+    where TMvxMacSetup : MvxFormsMacSetup<TApplication, TFormsApplication>, new()
+    where TApplication : IMvxApplication, new()
+    where TFormsApplication : Application, new()
+    {
+        static MvxFormsApplicationDelegate()
         {
-            return MvxSetupExtensions.CreateSetup<MvxFormsMacSetup>(this.GetType().Assembly, applicationDelegate, window);
+            MvxSetup.RegisterSetupType<TMvxMacSetup>();
         }
     }
 }
