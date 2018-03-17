@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Android.Content;
 using Android.Support.V4.Widget;
@@ -17,7 +16,6 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
-    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleType", Justification = "Generic class with same name is permitted")]
     public abstract class MvxAppCompatSetup : MvxAndroidSetup
     {
         protected override IEnumerable<Assembly> AndroidViewAssemblies =>
