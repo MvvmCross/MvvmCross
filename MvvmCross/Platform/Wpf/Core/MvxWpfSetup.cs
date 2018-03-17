@@ -16,9 +16,8 @@ using MvvmCross.Views;
 
 namespace MvvmCross.Platform.Wpf.Core
 {
-
     public abstract class MvxWpfSetup
-        : MvxSetup, IMvxWpfSetup
+    : MvxSetup, IMvxWpfSetup
     {
         private Dispatcher _uiThreadDispatcher;
         private ContentControl _root;
