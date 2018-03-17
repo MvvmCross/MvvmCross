@@ -11,14 +11,11 @@ namespace MvvmCross.Platform.Mac.Core
 {
     public abstract class MvxApplicationDelegate : NSApplicationDelegate, IMvxApplicationDelegate
     {
-        private MvxMacSetup _setup;
-        protected MvxMacSetup Setup
+        protected IMvxMacSetup Setup
         {
             get
             {
-                if (_setup == null)
-                    _setup = CreateSetup(this, MainWindow);
-                return _setup;
+                return MvxSetup.PlatformInstance<IMvxMacSetup>();
             }
         }
 
@@ -34,6 +31,7 @@ namespace MvvmCross.Platform.Mac.Core
 
         public override void DidFinishLaunching(Foundation.NSNotification notification)
         {
+            Setup.PlatformInitialize(this, MainWindow);
             Setup.Initialize();
             RunAppStart(notification);
 
@@ -75,10 +73,15 @@ namespace MvvmCross.Platform.Mac.Core
         }
 
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
+    }
 
-        protected virtual MvxMacSetup CreateSetup(IMvxApplicationDelegate applicationDelegate, NSWindow window)
+    public class MvxApplicationDelegate<TMvxMacSetup, TApplication> : MvxApplicationDelegate
+   where TMvxMacSetup : MvxMacSetup<TApplication>, new()
+   where TApplication : IMvxApplication, new()
+    {
+        static MvxApplicationDelegate()
         {
-            return MvxSetupExtensions.CreateSetup<MvxMacSetup>(this.GetType().Assembly, applicationDelegate, window);
+            MvxSetup.RegisterSetupType<TMvxMacSetup>();
         }
     }
 }

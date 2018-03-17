@@ -1,20 +1,19 @@
 ﻿using Foundation;
 using MvvmCross;
 using MvvmCross.Platform.Mac.Core;
+using MvvmCross.Platform.Mac.Presenters.Attributes;
 using MvvmCross.ViewModels;
+using Playground.Core;
 
 namespace Playground.Mac
 {
     [Register("AppDelegate")]
-    public class AppDelegate : MvxApplicationDelegate
+    public class AppDelegate : MvxApplicationDelegate<MvxMacSetup<App>, App>
     {
-        public override void DidFinishLaunching(NSNotification notification)
+        public AppDelegate()
         {
-            var setup = new Setup(this);
-            setup.Initialize();
-
-            var startup = Mvx.Resolve<IMvxAppStart>();
-            startup.Start();
+            MvxWindowPresentationAttribute.DefaultWidth = 250;
+            MvxWindowPresentationAttribute.DefaultHeight = 250;
         }
 
         public override void WillTerminate(NSNotification notification)
