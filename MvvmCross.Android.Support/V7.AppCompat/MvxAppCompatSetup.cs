@@ -57,5 +57,4 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
     }
-
 }

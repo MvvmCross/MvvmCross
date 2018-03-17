@@ -13,12 +13,12 @@ namespace MvvmCross.Core
         public static TSetup CreateSetup<TSetup>(Assembly assembly, params object[] parameters) where TSetup : MvxSetup
         {
             var setupType = FindSetupType<TSetup>(assembly);
-            if (setupType == null) 
+            if (setupType == null)
             {
                 throw new MvxException("Could not find a Setup class for application");
             }
 
-            try 
+            try
             {
                 return (TSetup)Activator.CreateInstance(setupType, parameters);
             }
@@ -31,13 +31,17 @@ namespace MvvmCross.Core
         public static TSetup CreateSetup<TSetup>() where TSetup : MvxSetup
         {
             var setupType = FindSetupType<TSetup>();
-            if (setupType == null) {
+            if (setupType == null)
+            {
                 throw new MvxException("Could not find a Setup class for application");
             }
 
-            try {
+            try
+            {
                 return (TSetup)Activator.CreateInstance(setupType);
-            } catch (Exception exception) {
+            }
+            catch (Exception exception)
+            {
                 throw exception.MvxWrap("Failed to create instance of {0}", setupType.FullName);
             }
         }

@@ -37,7 +37,6 @@ namespace MvvmCross.Platform.Android.Core
             _applicationContext = applicationContext;
         }
 
-
         #region IMvxAndroidGlobals Members
 
         public virtual string ExecutableNamespace => GetType().Namespace;
