@@ -27,6 +27,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             set { throw new NotImplementedException("BindingContext is readonly in the list item"); }
         }
 
+        public int Id { get; set; }
+
         public object DataContext
         {
             get
