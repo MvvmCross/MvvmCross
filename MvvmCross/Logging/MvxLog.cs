@@ -3,8 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Runtime.CompilerServices;
 using MvvmCross.Logging.LogProviders;
 
+[assembly: InternalsVisibleTo("MvvmCross.Wpf")]
+[assembly: InternalsVisibleTo("MvvmCross.Console")]
 namespace MvvmCross.Logging
 {
     internal class MvxLog : IMvxLog
