@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>MonoAndroid80</TargetFrameworks>
+    <TargetFrameworks>MonoAndroid81</TargetFrameworks>
     <AssemblyName>MvvmCross.Plugin.Location.Fused</AssemblyName>
     <RootNamespace>MvvmCross.Plugin.Location.Fused</RootNamespace>
     <Description></Description>
     <PackageId>MvvmCross.Plugin.Location.Fused</PackageId>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
     <PackageReference Include="Xamarin.GooglePlayServices.Location" Version="60.1142.0" />
     <None Include="Resources\*.cs" />
     <Compile Remove="Resources\*.cs" />

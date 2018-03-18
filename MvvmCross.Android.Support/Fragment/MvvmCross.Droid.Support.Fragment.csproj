@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>MonoAndroid80</TargetFrameworks>
+    <TargetFrameworks>MonoAndroid81</TargetFrameworks>
     <AssemblyName>MvvmCross.Droid.Support.Fragment</AssemblyName>
     <RootNamespace>MvvmCross.Droid.Support.Fragment</RootNamespace>
     <Description>MvvmCross packages for Android Support Fragment</Description>

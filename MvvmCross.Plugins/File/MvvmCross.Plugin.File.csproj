@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net461;uap10.0.16299;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid80;tizen40</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net461;uap10.0.16299;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid81;tizen40</TargetFrameworks>
     <AssemblyName>MvvmCross.Plugin.File</AssemblyName>
     <RootNamespace>MvvmCross.Plugin.File</RootNamespace>
     <Description></Description>
@@ -14,11 +14,11 @@
     <Compile Remove="Resources\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
     <Compile Include="Platform\Netstandard\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
     <Compile Include="Platform\Net\**\*.cs" />
     <Compile Include="Platform\Wpf\**\*.cs" />
   </ItemGroup>
@@ -27,41 +27,41 @@
     <Compile Include="Platform\Shared\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.16299' ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('uap')) ">
     <Compile Include="Platform\Windows-common\**\*.cs" />
     <Compile Include="Platform\Uap\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
     <Compile Include="Platform\Apple-common\**\*.cs" />
     <Compile Include="Platform\Ios\**\*.cs" />
     <Compile Include="Platform\Xamarin-common\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.Mac20' ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.Mac')) ">
     <Compile Include="Platform\Apple-common\**\*.cs" />
     <Compile Include="Platform\Mac\**\*.cs" />
     <Compile Include="Platform\Xamarin-common\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.TVOS10' ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.TVOS')) ">
     <Compile Include="Platform\Apple-common\**\*.cs" />
     <Compile Include="Platform\Tvos\**\*.cs" />
     <Compile Include="Platform\Xamarin-common\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.WatchOS10' ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.WatchOS')) ">
     <Compile Include="Platform\Apple-common\**\*.cs" />
     <Compile Include="Platform\Watchos\**\*.cs" />
     <Compile Include="Platform\Xamarin-common\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
     <Compile Include="Platform\Android\**\*.cs" />
     <Compile Include="Platform\Xamarin-common\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'tizen40' ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">
     <Compile Include="Platform\Tizen\**\*.cs" />
     <Compile Include="Platform\Xamarin-common\**\*.cs" />
     <PackageReference Include="Tizen.NET" Version="4.0.0" />
