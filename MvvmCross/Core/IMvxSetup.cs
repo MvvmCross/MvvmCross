@@ -2,14 +2,12 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Threading.Tasks;
-
-namespace MvvmCross.ViewModels
+namespace MvvmCross.Core
 {
-    public interface IMvxAppStart
+    public interface IMvxSetup
     {
-        void Start(object hint = null);
-
-        bool IsStarted { get; }
+        void Initialize();
+        void InitializePrimary();
+        void InitializeSecondary();
     }
 }

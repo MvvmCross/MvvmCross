@@ -6,21 +6,31 @@ using System;
 using System.Threading.Tasks;
 using MvvmCross.Forms.Views.Base;
 using MvvmCross.Platform.Uap.Views;
+using MvvmCross.ViewModels;
 using Windows.ApplicationModel.Activation;
 
 namespace MvvmCross.Forms.Platform.Uap.Views
 {
-    public abstract class MvxWindowsApplication : MvxApplication
+    public abstract class MvxWindowsApplication : MvvmCross.Platform.Uap.Views.MvxApplication
     {
         protected abstract Type HostWindowsPageType();
 
-        protected override void Start(IActivatedEventArgs activationArgs)
+        protected override void RunAppStart(IActivatedEventArgs activationArgs)
         {
-            if (RootFrame?.Content == null) {
-                var hostType = HostWindowsPageType();
+            if (RootFrame?.Content == null)
+            {
+                Setup.PlatformInitialize(RootFrame, activationArgs, nameof(Suspend));
+                Setup.Initialize();
 
+                var startup = Mvx.Resolve<IMvxAppStart>();
+                if (!startup.IsStarted)
+                    startup.Start(GetAppStartHint(activationArgs));
+
+                var hostType = HostWindowsPageType();
                 RootFrame.Navigate(hostType, (activationArgs as LaunchActivatedEventArgs)?.Arguments);
             }
+            else
+                base.RunAppStart(activationArgs);
         }
     }
 }

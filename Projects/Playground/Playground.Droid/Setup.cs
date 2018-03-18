@@ -12,17 +12,8 @@ using Serilog;
 
 namespace Playground.Droid
 {
-    public class Setup : MvxAppCompatSetup
+    public class Setup : MvxAppCompatSetup<App>
     {
-        public Setup(Context applicationContext) : base(applicationContext)
-        {
-        }
-
-        protected override IMvxApplication CreateApp()
-        {
-            return new App();
-        }
-
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
             return new MvxAppCompatViewPresenter(AndroidViewAssemblies);

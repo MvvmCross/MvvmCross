@@ -5,12 +5,21 @@
 using System;
 using Foundation;
 using MvvmCross.Core;
+using MvvmCross.ViewModels;
 using UIKit;
 
 namespace MvvmCross.Platform.Ios.Core
 {
-    public class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplicationDelegate
+    public abstract class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplicationDelegate
     {
+        protected IMvxIosSetup Setup
+        {
+            get
+            {
+                return MvxSetup.PlatformInstance<IMvxIosSetup>();
+            }
+        }
+
         public override void WillEnterForeground(UIApplication application)
         {
             FireLifetimeChanged(MvxLifetimeEvent.ActivatedFromMemory);
@@ -28,8 +37,30 @@ namespace MvvmCross.Platform.Ios.Core
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
+            Window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+            Setup.PlatformInitialize(this, Window);
+
+            Setup.Initialize();
+
+            RunAppStart(launchOptions);
+
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
             return true;
+        }
+
+        protected virtual void RunAppStart(object hint = null)
+        {
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            if (!startup.IsStarted)
+                startup.Start(GetAppStartHint(hint));
+
+            Window.MakeKeyAndVisible();
+        }
+
+        protected virtual object GetAppStartHint(object hint = null)
+        {
+            return null;
         }
 
         private void FireLifetimeChanged(MvxLifetimeEvent which)
@@ -39,5 +70,15 @@ namespace MvvmCross.Platform.Ios.Core
         }
 
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
+    }
+
+    public abstract class MvxApplicationDelegate<TMvxIosSetup, TApplication> : MvxApplicationDelegate
+       where TMvxIosSetup : MvxIosSetup<TApplication>, new()
+       where TApplication : IMvxApplication, new()
+    {
+        static MvxApplicationDelegate()
+        {
+            MvxSetup.RegisterSetupType<TMvxIosSetup>();
+        }
     }
 }

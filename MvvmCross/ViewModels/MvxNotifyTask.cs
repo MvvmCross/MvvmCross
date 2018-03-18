@@ -52,24 +52,24 @@ namespace MvvmCross.ViewModels
 
             if(task.IsCanceled)
             {
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("Status"));
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("IsCanceled"));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(Status)));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(IsCanceled)));
             }
             else if(task.IsFaulted)
             {
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("Exception"));
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("InnerException"));
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("ErrorMessage"));
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("Status"));
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("IsFaulted"));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(Exception)));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(InnerException)));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(ErrorMessage)));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(Status)));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(IsFaulted)));
             }
             else
             {
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("Status"));
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("IsSuccessfullyCompleted"));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(Status)));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(IsSuccessfullyCompleted)));
             }
-            propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("IsCompleted"));
-            propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("IsNotCompleted"));
+            propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(IsCompleted)));
+            propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(IsNotCompleted)));
         }
 
         /// <summary>
@@ -228,25 +228,25 @@ namespace MvvmCross.ViewModels
 
             if(task.IsCanceled)
             {
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("Status"));
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("IsCanceled"));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(Status)));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(IsCanceled)));
             }
             else if(task.IsFaulted)
             {
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("Exception"));
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("InnerException"));
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("ErrorMessage"));
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("Status"));
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("IsFaulted"));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(Exception)));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(InnerException)));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(ErrorMessage)));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(Status)));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(IsFaulted)));
             }
             else
             {
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("Result"));
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("Status"));
-                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("IsSuccessfullyCompleted"));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(Result)));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(Status)));
+                propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(IsSuccessfullyCompleted)));
             }
-            propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("IsCompleted"));
-            propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get("IsNotCompleted"));
+            propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(IsCompleted)));
+            propertyChanged(this, PropertyChangedEventArgsCache.Instance.Get(nameof(IsNotCompleted)));
         }
 
         /// <summary>

@@ -162,7 +162,6 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Setup.cs" />
     <Compile Include="Views\RootView.cs" />
     <Compile Include="Views\RootView.designer.cs">
       <DependentUpon>RootView.cs</DependentUpon>

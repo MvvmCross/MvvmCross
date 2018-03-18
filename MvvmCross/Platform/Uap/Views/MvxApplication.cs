@@ -4,6 +4,7 @@
 
 using System;
 using System.Threading.Tasks;
+using MvvmCross.Core;
 using MvvmCross.Platform.Uap.Core;
 using MvvmCross.Platform.Uap.Views.Suspension;
 using MvvmCross.ViewModels;
@@ -15,9 +16,17 @@ using Windows.UI.Xaml.Navigation;
 
 namespace MvvmCross.Platform.Uap.Views
 {
-    public abstract class MvxApplication: Application
+    public abstract class MvxApplication : Application
     {
-        protected MvxWindowsSetup Setup { get; set; }
+        protected IActivatedEventArgs ActivationArguments { get; private set; }
+
+        protected IMvxWindowsSetup Setup
+        {
+            get
+            {
+                return MvxSetup.PlatformInstance<IMvxWindowsSetup>();
+            }
+        }
 
         protected Frame RootFrame { get; set; }
 
@@ -35,60 +44,65 @@ namespace MvvmCross.Platform.Uap.Views
         protected override void OnLaunched(LaunchActivatedEventArgs activationArgs)
         {
             base.OnLaunched(activationArgs);
+            ActivationArguments = activationArgs;
 
             var rootFrame = InitializeFrame(activationArgs);
 
-            if (activationArgs.PrelaunchActivated == false) {
-                StartSetup(rootFrame, activationArgs);
+            if (activationArgs.PrelaunchActivated == false)
+            {
+                RunAppStart(activationArgs);
             }
 
             Window.Current.Activate();
         }
-        
+
         protected override void OnActivated(IActivatedEventArgs activationArgs)
         {
             base.OnActivated(activationArgs);
+            ActivationArguments = activationArgs;
 
             var rootFrame = InitializeFrame(activationArgs);
-
-            StartSetup(rootFrame, activationArgs);
+            RunAppStart(activationArgs);
 
             Window.Current.Activate();
         }
 
-        protected abstract MvxWindowsSetup CreateSetup(Frame rootFrame, IActivatedEventArgs activationArgs, string suspension);
-
-        protected virtual void StartSetup(Frame rootFrame, IActivatedEventArgs activationArgs)
+        protected virtual void RunAppStart(IActivatedEventArgs activationArgs)
         {
-            if (rootFrame.Content == null) {
-                Setup = CreateSetup(rootFrame, activationArgs, nameof(Suspend));
+            if (RootFrame.Content == null)
+            {
+                Setup.PlatformInitialize(RootFrame, ActivationArguments, nameof(Suspend));
                 Setup.Initialize();
 
-                Start(activationArgs);
-            } else {
+                var startup = Mvx.Resolve<IMvxAppStart>();
+                if (!startup.IsStarted)
+                    startup.Start(GetAppStartHint(activationArgs));
+            }
+            else
+            {
                 Setup.UpdateActivationArguments(activationArgs);
             }
-
         }
 
-        protected virtual void Start(IActivatedEventArgs activationArgs)
+        protected virtual object GetAppStartHint(object hint = null)
         {
-            var start = Mvx.Resolve<IMvxAppStart>();
-            start.Start();
+            return null;
         }
 
         protected virtual Frame InitializeFrame(IActivatedEventArgs activationArgs)
         {
             var rootFrame = Window.Current.Content as Frame;
 
-            if (rootFrame == null) {
+            if (rootFrame == null)
+            {
                 rootFrame = CreateFrame();
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 Window.Current.Content = rootFrame;
             }
 
-            if (activationArgs.PreviousExecutionState == ApplicationExecutionState.Terminated) {
+            if (activationArgs.PreviousExecutionState == ApplicationExecutionState.Terminated)
+            {
                 OnResumeFromTerminateState();
             }
 

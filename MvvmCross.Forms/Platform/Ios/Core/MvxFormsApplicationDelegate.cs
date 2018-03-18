@@ -3,17 +3,27 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Foundation;
 using MvvmCross.Core;
-using MvvmCross.Forms.Presenters;
 using MvvmCross.Platform.Ios.Core;
+using MvvmCross.ViewModels;
 using UIKit;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 namespace MvvmCross.Forms.Platform.Ios.Core
 {
-    public class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
+    public abstract class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {
+        protected MvxFormsIosSetup Setup
+        {
+            get
+            {
+                return MvxSetup.PlatformInstance<MvxFormsIosSetup>();
+            }
+        }
+
         private UIWindow _window;
         public override UIWindow Window
         {
@@ -31,9 +41,37 @@ namespace MvvmCross.Forms.Platform.Ios.Core
 
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
-            Mvx.Resolve<IMvxFormsViewPresenter>().FormsApplication.SendStart();
+            Window = new UIWindow(UIScreen.MainScreen.Bounds);
+            Setup.PlatformInitialize(this, Window);
+            Setup.Initialize();
+
+            RunAppStart(launchOptions);
+
+            Setup.FormsApplication.SendStart();
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
+
+            //TODO: we might need to call base here
             return true;
+        }
+
+        protected virtual void RunAppStart(object hint = null)
+        {
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            if (!startup.IsStarted)
+                startup.Start(GetAppStartHint(hint));
+
+            LoadFormsApplication();
+            Window.MakeKeyAndVisible();
+        }
+
+        protected virtual object GetAppStartHint(object hint = null)
+        {
+            return null;
+        }
+
+        protected virtual void LoadFormsApplication()
+        {
+            LoadApplication(Setup.FormsApplication);
         }
 
         public override void WillEnterForeground(UIApplication uiApplication)
@@ -59,10 +97,17 @@ namespace MvvmCross.Forms.Platform.Ios.Core
             LifetimeChanged?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 
-        #region IMvxLifetime implementation
-
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
+    }
 
-        #endregion IMvxLifetime implementation
+    public abstract class MvxFormsApplicationDelegate<TMvxIosSetup, TApplication, TFormsApplication> : MvxFormsApplicationDelegate
+        where TMvxIosSetup : MvxFormsIosSetup<TApplication, TFormsApplication>, new()
+        where TApplication : IMvxApplication, new()
+        where TFormsApplication : Application, new()
+    {
+        static MvxFormsApplicationDelegate()
+        {
+            MvxSetup.RegisterSetupType<TMvxIosSetup>();
+        }
     }
 }

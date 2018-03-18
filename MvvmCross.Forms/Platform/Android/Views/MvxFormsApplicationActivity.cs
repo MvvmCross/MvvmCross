@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Reflection;
+using System.Threading.Tasks;
 using Android.Content;
 using Android.OS;
 using Android.Views;
@@ -99,16 +100,36 @@ namespace MvvmCross.Forms.Platform.Android.Views
 
             base.OnCreate(bundle);
             ViewModel?.ViewCreated();
+            RunAppStart(bundle);
+        }
+
+        protected virtual void RunAppStart(Bundle bundle)
+        {
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            if (!startup.IsStarted)
+                startup.Start(GetAppStartHint(bundle));
+
             InitializeForms(bundle);
+        }
+
+        protected virtual object GetAppStartHint(object hint = null)
+        {
+            return null;
         }
 
         public virtual void InitializeForms(Bundle bundle)
         {
-            if (FormsApplication.MainPage != null)
+            if (!Xamarin.Forms.Forms.IsInitialized)
             {
                 global::Xamarin.Forms.Forms.Init(this, bundle, GetResourceAssembly());
-                LoadApplication(FormsApplication);
             }
+
+            if (Xamarin.Forms.Application.Current != FormsApplication)
+            {
+                Xamarin.Forms.Application.Current = FormsApplication;
+            }
+
+            LoadApplication(FormsApplication);
         }
 
         protected virtual Assembly GetResourceAssembly()

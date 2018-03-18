@@ -27,12 +27,12 @@ using MvvmCross.Presenters;
 namespace MvvmCross.Platform.Android.Core
 {
     public abstract class MvxAndroidSetup
-        : MvxSetup, IMvxAndroidGlobals
+        : MvxSetup, IMvxAndroidGlobals, IMvxAndroidSetup
     {
-        private readonly Context _applicationContext;
+        private Context _applicationContext;
         private IMvxAndroidViewPresenter _presenter;
 
-        protected MvxAndroidSetup(Context applicationContext)
+        public void PlatformInitialize(Context applicationContext)
         {
             _applicationContext = applicationContext;
         }
@@ -267,10 +267,6 @@ namespace MvvmCross.Platform.Android.Core
     public abstract class MvxAndroidSetup<TApplication> : MvxAndroidSetup
         where TApplication : IMvxApplication, new()
     {
-        protected MvxAndroidSetup(Context applicationContext) : base(applicationContext)
-        {
-        }
-
         protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
 
         protected override IEnumerable<Assembly> GetViewModelAssemblies()
