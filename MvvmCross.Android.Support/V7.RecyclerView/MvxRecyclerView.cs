@@ -55,6 +55,9 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             adapter.ItemTemplateSelector = itemTemplateSelector;
             Adapter = adapter;
 
+            if (itemTemplateId == 0)
+                itemTemplateId = global::Android.Resource.Layout.SimpleListItem1;
+
             if (itemTemplateSelector.GetType() == typeof(MvxDefaultTemplateSelector))
                 ItemTemplateId = itemTemplateId;
         }

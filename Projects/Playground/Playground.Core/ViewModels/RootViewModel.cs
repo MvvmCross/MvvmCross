@@ -47,6 +47,8 @@ namespace Playground.Core.ViewModels
 
             ShowDictionaryBindingCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<DictionaryBindingViewModel>());
 
+            ShowCollectionViewCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<CollectionViewModel>());
+
             _counter = 3;
         }
 
@@ -116,6 +118,8 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowMixedNavigationCommand { get; private set; }
 
         public IMvxAsyncCommand ShowDictionaryBindingCommand { get; private set; }
+
+        public IMvxAsyncCommand ShowCollectionViewCommand { get; private set; }
 
         public IMvxAsyncCommand ShowListViewCommand => new MvxAsyncCommand(async () => await _navigationService.Navigate<ListViewModel>());
 

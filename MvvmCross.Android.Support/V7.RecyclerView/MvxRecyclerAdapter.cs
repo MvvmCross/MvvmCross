@@ -9,6 +9,7 @@ using System.Windows.Input;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using Android.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Extensions;
@@ -152,7 +153,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             var vh = new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewType, itemBindingContext), itemBindingContext)
             {
                 Click = ItemClick,
-                LongClick = ItemLongClick
+                LongClick = ItemLongClick,
+                Id = ItemTemplateSelector.GetItemLayoutId(viewType)
             };
 
             return vh;
@@ -173,6 +175,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
         {
             var dataContext = GetItem(position);
+            if (((IMvxRecyclerViewHolder) holder).Id == global::Android.Resource.Layout.SimpleListItem1)
+                ((TextView) holder.ItemView).Text = dataContext?.ToString();
             ((IMvxRecyclerViewHolder)holder).DataContext = dataContext;
             OnMvxViewHolderBound(new MvxViewHolderBoundEventArgs(position, dataContext, holder));
         }
