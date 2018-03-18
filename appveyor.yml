@@ -4,7 +4,7 @@
         - master
         - /release\/.*/
   version: 1.0.{build}
-  image: Visual Studio 2017
+  image: Previous Visual Studio 2017
   environment:
     NUGET_SOURCE: https://www.nuget.org/api/v2/package
     NUGET_APIKEY:
@@ -19,7 +19,7 @@
       only:
         - develop
   version: 1.0.{build}
-  image: Visual Studio 2017
+  image: Previous Visual Studio 2017
   environment:
     NUGET_SOURCE: https://www.myget.org/F/mvvmcross/api/v2/package
     NUGET_APIKEY:
