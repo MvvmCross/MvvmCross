@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>MonoAndroid80</TargetFrameworks>
+    <TargetFrameworks>MonoAndroid81</TargetFrameworks>
     <AssemblyName>MvvmCross.Droid.Support.Core.Utils</AssemblyName>
     <RootNamespace>MvvmCross.Droid.Support.Core.Utils</RootNamespace>
     <Description>MvvmCross packages for Android Support Core.Utils</Description>

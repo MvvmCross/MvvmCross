@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>MonoAndroid80</TargetFrameworks>
+    <TargetFrameworks>MonoAndroid81</TargetFrameworks>
     <AssemblyName>MvvmCross.Droid.Support.V14.Preference</AssemblyName>
     <RootNamespace>MvvmCross.Droid.Support.V14.Preference</RootNamespace>
     <Description>MvvmCross packages for Android Support V14.Preference</Description>
