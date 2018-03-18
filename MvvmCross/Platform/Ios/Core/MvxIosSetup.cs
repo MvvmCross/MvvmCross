@@ -24,28 +24,24 @@ using MvvmCross.Presenters;
 namespace MvvmCross.Platform.Ios.Core
 {
     public abstract class MvxIosSetup
-        : MvxSetup
+        : MvxSetup, IMvxIosSetup
     {
-        private readonly IMvxApplicationDelegate _applicationDelegate;
-        private readonly UIWindow _window;
+        protected IMvxApplicationDelegate ApplicationDelegate { get; private set; }
+        protected UIWindow Window { get; private set; }
 
         private IMvxIosViewPresenter _presenter;
 
-        protected MvxIosSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
+        public virtual void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, UIWindow window)
         {
-            _window = window;
-            _applicationDelegate = applicationDelegate;
+            Window = window;
+            ApplicationDelegate = applicationDelegate;
         }
 
-        protected MvxIosSetup(IMvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter)
+        public virtual void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter)
         {
-            _applicationDelegate = applicationDelegate;
+            ApplicationDelegate = applicationDelegate;
             _presenter = presenter;
         }
-
-        protected UIWindow Window => _window;
-
-        protected IMvxApplicationDelegate ApplicationDelegate => _applicationDelegate;
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
@@ -90,7 +86,7 @@ namespace MvvmCross.Platform.Ios.Core
 
         protected virtual void RegisterLifetime()
         {
-            Mvx.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
+            Mvx.RegisterSingleton<IMvxLifetime>(ApplicationDelegate);
         }
 
         protected IMvxIosViewPresenter Presenter
@@ -104,7 +100,7 @@ namespace MvvmCross.Platform.Ios.Core
 
         protected virtual IMvxIosViewPresenter CreateViewPresenter()
         {
-            return new MvxIosViewPresenter(_applicationDelegate, _window);
+            return new MvxIosViewPresenter(ApplicationDelegate, Window);
         }
 
         protected virtual void RegisterPresenter()
@@ -174,17 +170,9 @@ namespace MvvmCross.Platform.Ios.Core
         }
     }
 
-    public abstract class MvxIosSetup<TApplication> : MvxIosSetup
+    public class MvxIosSetup<TApplication> : MvxIosSetup
         where TApplication : IMvxApplication, new()
     {
-        protected MvxIosSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window) : base(applicationDelegate, window)
-        {
-        }
-
-        protected MvxIosSetup(IMvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter) : base(applicationDelegate, presenter)
-        {
-        }
-
         protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
 
         protected override IEnumerable<Assembly> GetViewModelAssemblies()

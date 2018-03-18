@@ -2,34 +2,34 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Windows.Threading;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Windows.Controls;
-using MvvmCross.Plugin;
+using System.Windows.Threading;
 using MvvmCross.Core;
 using MvvmCross.Platform.Wpf.Presenters;
 using MvvmCross.Platform.Wpf.Views;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
-using MvvmCross.Presenters;
-using System.Collections.Generic;
-using System.Reflection;
 
 namespace MvvmCross.Platform.Wpf.Core
 {
     public abstract class MvxWpfSetup
-        : MvxSetup
+    : MvxSetup, IMvxWpfSetup
     {
-        private readonly Dispatcher _uiThreadDispatcher;
-        private readonly ContentControl _root;
+        private Dispatcher _uiThreadDispatcher;
+        private ContentControl _root;
         private IMvxWpfViewPresenter _presenter;
 
-        protected MvxWpfSetup(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter)
+        public void PlatformInitialize(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter)
         {
             _uiThreadDispatcher = uiThreadDispatcher;
             _presenter = presenter;
         }
 
-        protected MvxWpfSetup(Dispatcher uiThreadDispatcher, ContentControl root)
+        public void PlatformInitialize(Dispatcher uiThreadDispatcher, ContentControl root)
         {
             _uiThreadDispatcher = uiThreadDispatcher;
             _root = root;
@@ -39,6 +39,11 @@ namespace MvvmCross.Platform.Wpf.Core
         {
             RegisterPresenter();
             base.InitializePlatformServices();
+        }
+
+        protected override IEnumerable<Assembly> GetViewAssemblies()
+        {
+            return base.GetViewAssemblies().Union(new[] { Assembly.GetEntryAssembly() });
         }
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
@@ -85,17 +90,9 @@ namespace MvvmCross.Platform.Wpf.Core
         }
     }
 
-    public abstract class MvxWpfSetup<TApplication> : MvxWpfSetup
+    public class MvxWpfSetup<TApplication> : MvxWpfSetup
         where TApplication : IMvxApplication, new()
     {
-        protected MvxWpfSetup(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter) : base(uiThreadDispatcher, presenter)
-        {
-        }
-
-        protected MvxWpfSetup(Dispatcher uiThreadDispatcher, ContentControl root) : base(uiThreadDispatcher, root)
-        {
-        }
-
         protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
 
         protected override IEnumerable<Assembly> GetViewModelAssemblies()

@@ -7,19 +7,18 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Localization;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platform.Android.Bindings;
 using MvvmCross.Platform.Android.Core;
 using MvvmCross.Platform.Android.Presenters;
-using MvvmCross.Platform.Android.Views;
 using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
 using MvvmCross.Platform.Android;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.Forms.Platform.Android.Presenters;
 using Xamarin.Forms;
-using System.Linq;
 
 namespace MvvmCross.Forms.Platform.Android.Core
 {
@@ -27,10 +26,6 @@ namespace MvvmCross.Forms.Platform.Android.Core
     {
         private List<Assembly> _viewAssemblies;
         private Application _formsApplication;
-
-        protected MvxFormsAndroidSetup(Context applicationContext) : base(applicationContext)
-        {
-        }
 
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
@@ -54,13 +49,16 @@ namespace MvvmCross.Forms.Platform.Android.Core
             {
                 if (!Xamarin.Forms.Forms.IsInitialized)
                 {
-                    var activity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity ?? ApplicationContext;
+                    var activity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>()?.Activity ?? ApplicationContext;
                     Xamarin.Forms.Forms.Init(activity, null, activity.GetType().Assembly);
                 }
-
                 if (_formsApplication == null)
                 {
-                    _formsApplication = _formsApplication ?? CreateFormsApplication();
+                    _formsApplication = CreateFormsApplication();
+                }
+                if (Application.Current != _formsApplication)
+                {
+                    Application.Current = _formsApplication;
                 }
                 return _formsApplication;
             }
@@ -119,10 +117,6 @@ namespace MvvmCross.Forms.Platform.Android.Core
         where TApplication : IMvxApplication, new()
         where TFormsApplication : Application, new()
     {
-        protected MvxFormsAndroidSetup(Context applicationContext) : base(applicationContext)
-        {
-        }
-
         protected override IEnumerable<Assembly> GetViewAssemblies()
         {
             return new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(TFormsApplication).GetTypeInfo().Assembly }));

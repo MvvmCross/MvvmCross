@@ -2,15 +2,15 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Threading.Tasks;
 using MvvmCross.Forms.Platform.Uap.Presenters;
-using MvvmCross.Forms.Platform.Uap.Views;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.ViewModels;
 using Xamarin.Forms.Platform.UWP;
 
-namespace MvvmCross.Forms.Views.Base
+namespace MvvmCross.Forms.Views
 {
-    public class MvxFormsWindowsPage:WindowsPage
+    public class MvxFormsWindowsPage : WindowsPage
     {
         public MvxFormsWindowsPage()
         {
@@ -27,15 +27,21 @@ namespace MvvmCross.Forms.Views.Base
             // reload XF
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Required;
 
-            StartSetup();
+            RunAppStart(e);
+        }
+
+        protected virtual void RunAppStart(object hint = null)
+        {
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            if(!startup.IsStarted)
+                startup.Start(GetAppStartHint(hint));
 
             LoadFormsApplication();
         }
 
-        protected virtual void StartSetup()
+        protected virtual object GetAppStartHint(object hint = null)
         {
-            var start = Mvx.Resolve<IMvxAppStart>();
-            start.Start();
+            return null;
         }
 
         protected virtual void LoadFormsApplication()

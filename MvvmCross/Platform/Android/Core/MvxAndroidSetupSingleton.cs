@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Android.Content;
 using MvvmCross.Base;
+using MvvmCross.Core;
 using MvvmCross.Exceptions;
 using MvvmCross.IoC;
 using MvvmCross.Logging;
@@ -20,7 +21,7 @@ namespace MvvmCross.Platform.Android.Core
     {
         private static readonly object LockObject = new object();
         private static TaskCompletionSource<bool> IsInitialisedTaskCompletionSource;
-        private MvxAndroidSetup _setup;
+        private IMvxAndroidSetup _setup;
         private bool _initialized;
         private IMvxAndroidSplashScreenActivity _currentSplashScreen;
 
@@ -124,31 +125,15 @@ namespace MvvmCross.Platform.Android.Core
 
         protected virtual void CreateSetup(Context applicationContext)
         {
-            var setupType = FindSetupType();
-            if (setupType == null)
-            {
-                throw new MvxException("Could not find a Setup class for application");
-            }
-
             try
             {
-                _setup = (MvxAndroidSetup)Activator.CreateInstance(setupType, applicationContext);
+                _setup = MvxSetup.PlatformInstance<IMvxAndroidSetup>();
+                _setup.PlatformInitialize(applicationContext);
             }
             catch (Exception exception)
             {
-                throw exception.MvxWrap("Failed to create instance of {0}", setupType.FullName);
+                throw exception.MvxWrap("Failed to create setup instance");
             }
-        }
-
-        protected virtual Type FindSetupType()
-        {
-            var query = from assembly in AppDomain.CurrentDomain.GetAssemblies()
-                        from type in assembly.ExceptionSafeGetTypes()
-                        where type.Name == "Setup"
-                        where typeof(MvxAndroidSetup).IsAssignableFrom(type)
-                        select type;
-
-            return query.FirstOrDefault();
         }
 
         protected override void Dispose(bool isDisposing)

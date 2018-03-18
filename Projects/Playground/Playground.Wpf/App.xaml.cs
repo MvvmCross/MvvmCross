@@ -1,33 +1,14 @@
-﻿using System;
-using System.Windows;
-using MvvmCross;
-using MvvmCross.ViewModels;
+﻿using MvvmCross.Core;
+using MvvmCross.Platform.Wpf.Core;
+using MvvmCross.Platform.Wpf.Views;
 
 namespace Playground.Wpf
 {
-    public partial class App : Application
+    public partial class App : MvxApplication
     {
-        bool _setupComplete = false;
-
-        void DoSetup()
+        static App()
         {
-            // Hint: You can also set a ContentControl of the Window.
-            // var setup = new Setup(Dispatcher, MainWindow.FindName("FooContentControl") as ContentControl);
-            var setup = new Setup(Dispatcher, MainWindow);
-            setup.Initialize();
-
-            var start = Mvx.Resolve<IMvxAppStart>();
-            start.Start();
-
-            _setupComplete = true;
-        }
-
-        protected override void OnActivated(EventArgs e)
-        {
-            if (!_setupComplete)
-                DoSetup();
-
-            base.OnActivated(e);
+            MvxSetup.RegisterSetupType<MvxWpfSetup<Core.App>>();
         }
     }
 }

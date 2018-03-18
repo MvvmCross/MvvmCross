@@ -19,8 +19,45 @@ using MvvmCross.Views;
 
 namespace MvvmCross.Core
 {
-    public abstract class MvxSetup
+    public abstract class MvxSetup : IMvxSetup
     {
+        protected static Type RegisteredSetupType { get; set; }
+        public static void RegisterSetupType<TMvxSetup>() where TMvxSetup : MvxSetup, new()
+        {
+            RegisteredSetupType = typeof(TMvxSetup);
+        }
+
+        private static IMvxSetup instance;
+        public static IMvxSetup Instance
+        {
+            get
+            {
+                if (instance != null) return instance;
+                if (RegisteredSetupType != null)
+                {
+                    instance = Activator.CreateInstance(RegisteredSetupType) as MvxSetup;
+                }
+                else
+                {
+                    instance = MvxSetupExtensions.CreateSetup<MvxSetup>();
+                }
+                return instance;
+            }
+        }
+
+        public static TMvxSetup PlatformInstance<TMvxSetup>() where TMvxSetup : IMvxSetup
+        {
+            try
+            {
+                return (TMvxSetup)Instance;
+            }
+            catch (Exception ex)
+            {
+                MvxLog.Instance.Error(ex, "Unable to cast setup to {0}", typeof(TMvxSetup));
+                throw ex;
+            }
+        }
+
         protected abstract IMvxApplication CreateApp();
 
         protected abstract IMvxViewsContainer CreateViewsContainer();
@@ -39,18 +76,12 @@ namespace MvvmCross.Core
         {
             if (State != MvxSetupState.Uninitialized)
             {
-                throw new MvxException("Cannot start primary - as state already {0}", State);
+                return;
             }
             State = MvxSetupState.InitializingPrimary;
             InitializeIoC();
             InitializeLoggingServices();
             SetupLog.Trace("Setup: Primary start");
-            State = MvxSetupState.InitializedPrimary;
-            if (State != MvxSetupState.InitializedPrimary)
-            {
-                throw new MvxException("Cannot start seconday - as state is currently {0}", State);
-            }
-            State = MvxSetupState.InitializingSecondary;
             SetupLog.Trace("Setup: FirstChance start");
             InitializeFirstChance();
             SetupLog.Trace("Setup: PlatformServices start");
@@ -59,10 +90,16 @@ namespace MvvmCross.Core
             InitializeSettings();
             SetupLog.Trace("Setup: Singleton Cache start");
             InitializeSingletonCache();
+            State = MvxSetupState.InitializedPrimary;
         }
 
         public virtual void InitializeSecondary()
         {
+            if (State != MvxSetupState.InitializedPrimary)
+            {
+                return;
+            }
+            State = MvxSetupState.InitializingSecondary;
             SetupLog.Trace("Setup: Bootstrap actions");
             PerformBootstrapActions();
             SetupLog.Trace("Setup: StringToTypeParser start");

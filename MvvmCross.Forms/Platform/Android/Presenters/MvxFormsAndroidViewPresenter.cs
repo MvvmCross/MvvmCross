@@ -62,6 +62,7 @@ namespace MvvmCross.Forms.Platform.Android.Presenters
         public override void ChangePresentation(MvxPresentationHint hint)
         {
             FormsPagePresenter.ChangePresentation(hint);
+            base.ChangePresentation(hint);
         }
 
         public override void Close(IMvxViewModel viewModel)

@@ -80,8 +80,9 @@ namespace MvvmCross.Platform.Android.Views
 
         protected virtual void TriggerFirstNavigate()
         {
-            var starter = Mvx.Resolve<IMvxAppStart>();
-            starter.Start();
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            if(!startup.IsStarted)
+                startup.Start();
         }
     }
 }

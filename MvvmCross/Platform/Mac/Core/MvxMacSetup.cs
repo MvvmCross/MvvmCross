@@ -5,44 +5,44 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-
 using AppKit;
-using MvvmCross.Converters;
-using MvvmCross.Plugin;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Converters;
 using MvvmCross.Core;
 using MvvmCross.Platform.Mac.Binding;
 using MvvmCross.Platform.Mac.Presenters;
 using MvvmCross.Platform.Mac.Views;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
-using MvvmCross.Presenters;
 
 namespace MvvmCross.Platform.Mac.Core
 {
     public abstract class MvxMacSetup
-        : MvxSetup
+        : MvxSetup, IMvxMacSetup
     {
-        private readonly IMvxApplicationDelegate _applicationDelegate;
-        private readonly NSWindow _window;
+        private IMvxApplicationDelegate _applicationDelegate;
+        private NSWindow _window;
 
         private IMvxMacViewPresenter _presenter;
 
-        protected MvxMacSetup(IMvxApplicationDelegate applicationDelegate)
+        public void PlatformInitialize(IMvxApplicationDelegate applicationDelegate)
         {
             _applicationDelegate = applicationDelegate;
         }
 
-        protected MvxMacSetup(IMvxApplicationDelegate applicationDelegate, NSWindow window) : this (applicationDelegate)
+        public void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, NSWindow window)
         {
+            PlatformInitialize(applicationDelegate);
             _window = window;
         }
 
-        protected MvxMacSetup(IMvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter) : this(applicationDelegate)
+        public void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter)
         {
+            PlatformInitialize(applicationDelegate);
             _presenter = presenter;
         }
 
@@ -176,21 +176,9 @@ namespace MvvmCross.Platform.Mac.Core
         }
     }
 
-    public abstract class MvxMacSetup<TApplication> : MvxMacSetup
+    public class MvxMacSetup<TApplication> : MvxMacSetup
         where TApplication : IMvxApplication, new()
     {
-        protected MvxMacSetup(IMvxApplicationDelegate applicationDelegate) : base(applicationDelegate)
-        {
-        }
-
-        protected MvxMacSetup(IMvxApplicationDelegate applicationDelegate, NSWindow window) : base(applicationDelegate, window)
-        {
-        }
-
-        protected MvxMacSetup(IMvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter) : base(applicationDelegate, presenter)
-        {
-        }
-
         protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
 
         protected override IEnumerable<Assembly> GetViewModelAssemblies()

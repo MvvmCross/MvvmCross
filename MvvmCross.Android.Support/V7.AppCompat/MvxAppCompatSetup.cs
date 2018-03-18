@@ -12,17 +12,13 @@ using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Platform.Android.Core;
 using MvvmCross.Platform.Android.Presenters;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     public abstract class MvxAppCompatSetup : MvxAndroidSetup
     {
-        protected MvxAppCompatSetup(Context applicationContext)
-            : base(applicationContext)
-        {
-        }
-
-        protected override IEnumerable<Assembly> AndroidViewAssemblies => 
+        protected override IEnumerable<Assembly> AndroidViewAssemblies =>
             new List<Assembly>(base.AndroidViewAssemblies)
             {
                 typeof(Toolbar).Assembly,
@@ -48,6 +44,17 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             MvxAppCompatSetupHelper.FillDefaultBindingNames(registry);
             base.FillBindingNames(registry);
+        }
+    }
+
+    public abstract class MvxAppCompatSetup<TApplication> : MvxAppCompatSetup
+        where TApplication : IMvxApplication, new()
+    {
+        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+
+        protected override IEnumerable<Assembly> GetViewModelAssemblies()
+        {
+            return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
     }
 }
