@@ -33,4 +33,3 @@
   test: off
   cache:
   - packages -> **\packages.config
-  - build -> appveyor.yml
