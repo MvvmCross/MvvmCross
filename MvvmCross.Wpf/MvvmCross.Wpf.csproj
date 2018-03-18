@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net461</TargetFrameworks>
+    <AssemblyName>MvvmCross.Wpf</AssemblyName>
+    <RootNamespace>MvvmCross</RootNamespace>
+    <Description></Description>
+    <PackageId>MvvmCross.Wpf</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Platform\**\*.cs" />
+    <None Include="Platform\**\*.cs" />
+  </ItemGroup>
+  
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
+    <Compile Include="Platform\Netstandard\**\*.cs" />
+  </ItemGroup>
+  
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
+    <Compile Include="Platform\Net\**\*.cs" />
+    <Compile Include="Platform\Wpf\**\*.cs" />
+    <PackageReference Include="Expression.Blend.Sdk.WPF" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">
+    <Compile Include="Platform\Shared\**\*.cs" />
+  </ItemGroup>
+  
+  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+</Project>
