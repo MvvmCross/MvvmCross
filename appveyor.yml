@@ -6,7 +6,7 @@
   version: 1.0.{build}
   image: Previous Visual Studio 2017
   install:
-  - appveyor-retry powershell .\InstallAndroidSDK.ps1
+  - appveyor-retry powershell .\install-android-sdk.ps1
   environment:
     NUGET_SOURCE: https://www.nuget.org/api/v2/package
     NUGET_APIKEY:
@@ -23,7 +23,7 @@
   version: 1.0.{build}
   image: Previous Visual Studio 2017
   install:
-  - appveyor-retry powershell .\InstallAndroidSDK.ps1
+  - appveyor-retry powershell .\install-android-sdk.ps1
   environment:
     NUGET_SOURCE: https://www.myget.org/F/mvvmcross/api/v2/package
     NUGET_APIKEY:
