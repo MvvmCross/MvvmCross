@@ -59,7 +59,7 @@
   <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
     <Compile Include="Platform\Android\**\*.cs" />
     <Compile Include="Platform\Xamarin-common\**\*.cs" />
-    <PackageReference Include="Xamarin.Android.Support.Exif" Version="26.1.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.Exif" Version="27.0.2" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">

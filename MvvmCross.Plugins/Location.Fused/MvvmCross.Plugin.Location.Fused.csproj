@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
-    <PackageReference Include="Xamarin.GooglePlayServices.Location" Version="60.1142.0" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Location" Version="60.1142.1" />
     <None Include="Resources\*.cs" />
     <Compile Remove="Resources\*.cs" />
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
