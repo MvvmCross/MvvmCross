@@ -7,8 +7,8 @@ using Android.OS;
 using Android.Support.V4.App;
 using MvvmCross.Base;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Android.Core;
-using MvvmCross.Platform.Android.Views;
+using MvvmCross.Platforms.Android.Core;
+using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 

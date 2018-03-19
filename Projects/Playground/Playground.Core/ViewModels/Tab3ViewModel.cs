@@ -4,8 +4,8 @@
 
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
+using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
-using MvvmCross.ViewModels.Hints;
 
 namespace Playground.Core.ViewModels
 {

@@ -1,11 +1,11 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using MvvmCross.Forms.Platform.Android.Views;
+using MvvmCross.Forms.Platforms.Android.Views;
 using Playground.Core.ViewModels;
 
 namespace Playground.Forms.Droid
@@ -14,7 +14,7 @@ namespace Playground.Forms.Droid
         Label = "Playground.Forms", 
         Icon = "@mipmap/icon",
         Theme = "@style/AppTheme",
-        // MainLauncher = true, // No Splash Screen: Uncomment this lines if removing splash screen
+        //MainLauncher = true, // No Splash Screen: Uncomment this lines if removing splash screen
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, 
         LaunchMode = LaunchMode.SingleTask)]
     public class MainActivity : MvxFormsAppCompatActivity<MainViewModel>
@@ -24,11 +24,6 @@ namespace Playground.Forms.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
             base.OnCreate(bundle);
-
-            // No Splash Screen: Uncomment these lines if removing splash screen
-            // var startup = Mvx.Resolve<IMvxAppStart>();
-            // startup.Start();
-            // InitializeForms(bundle);
         }
 
         public override void OnBackPressed()

@@ -6,8 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Logging;
+using MvvmCross.Presenters.Attributes;
+using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
-using MvvmCross.ViewModels.Hints;
 using MvvmCross.Views;
 
 namespace MvvmCross.Presenters

@@ -37,16 +37,16 @@ namespace MvvmCross.Droid.Support.Design.Behaviors
         }
 
         public override bool OnStartNestedScroll(CoordinatorLayout coordinatorLayout, Object child,
-            View directTargetChild, View target, int nestedScrollAxes)
+            View directTargetChild, View target, int axes, int type)
         {
-            return nestedScrollAxes == ViewCompat.ScrollAxisVertical ||
-                   base.OnStartNestedScroll(coordinatorLayout, child, directTargetChild, target, nestedScrollAxes);
+            return axes == ViewCompat.ScrollAxisVertical ||
+                   base.OnStartNestedScroll(coordinatorLayout, child, directTargetChild, target, axes, type);
         }
 
         public override void OnNestedScroll(CoordinatorLayout coordinatorLayout, Object child, View target,
-            int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed)
+            int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type)
         {
-            base.OnNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
+            base.OnNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type);
 
             var viewChild = child.JavaCast<View>();
 

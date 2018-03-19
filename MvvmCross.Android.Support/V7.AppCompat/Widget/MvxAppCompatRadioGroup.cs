@@ -14,7 +14,7 @@ using Android.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Android.Binding.Views;
+using MvvmCross.Platforms.Android.Binding.Views;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 {

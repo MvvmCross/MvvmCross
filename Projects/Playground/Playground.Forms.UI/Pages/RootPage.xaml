@@ -17,6 +17,7 @@
                 <Button Text="Show Tabs" mvx:Bi.nd="Command ShowTabsCommand"/>
                 <Button Text="Show Master/Detail" mvx:Bi.nd="Command ShowSplitCommand"/>
                 <Button Text="Show Mixed Navigation" mvx:Bi.nd="Command ShowMixedNavigationCommand"/>
+                <Button Text="Show Content View" mvx:Bi.nd="Command ShowContentViewCommand"/>
                 <Label Text="Native views" />
                 <Button Text="Show Native Page" mvx:Bi.nd="Command ShowNativeCommand"/>
                 <Button Text="Show Override" mvx:Bi.nd="Command ShowOverrideAttributeCommand"/>

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 

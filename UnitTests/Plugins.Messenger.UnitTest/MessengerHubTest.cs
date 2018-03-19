@@ -9,7 +9,7 @@ using MvvmCross.Plugin.Messenger;
 using MvvmCross.Tests;
 using Xunit;
 
-namespace MvvmCross.Plugins.Messenger.UnitTest
+namespace MvvmCross.Plugin.Messenger.UnitTest
 {
     public class MessengerHubTest : IClassFixture<MvxTestFixture>
     {

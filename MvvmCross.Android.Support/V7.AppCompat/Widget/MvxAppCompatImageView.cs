@@ -11,7 +11,7 @@ using Android.Support.V7.Widget;
 using Android.Util;
 using MvvmCross.Base;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Android.Binding.ResourceHelpers;
+using MvvmCross.Platforms.Android.Binding.ResourceHelpers;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 {

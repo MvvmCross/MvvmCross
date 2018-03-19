@@ -8,6 +8,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
     public interface IMvxRecyclerViewHolder : IMvxBindingContextOwner
     {
+        int Id { get; set; }
         object DataContext { get; set; }
 
         void OnAttachedToWindow();
