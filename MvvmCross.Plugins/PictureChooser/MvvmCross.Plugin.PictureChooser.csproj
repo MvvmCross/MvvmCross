@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net461;uap10.0.16299;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid80;tizen40</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net461;uap10.0.16299;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid81;tizen40</TargetFrameworks>
     <AssemblyName>MvvmCross.Plugin.PictureChooser</AssemblyName>
     <RootNamespace>MvvmCross.Plugin.PictureChooser</RootNamespace>
     <Description></Description>
@@ -59,7 +59,7 @@
   <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
     <Compile Include="Platform\Android\**\*.cs" />
     <Compile Include="Platform\Xamarin-common\**\*.cs" />
-    <PackageReference Include="Xamarin.Android.Support.Exif" Version="26.1.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.Exif" Version="27.0.2" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">
