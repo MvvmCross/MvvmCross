@@ -173,7 +173,7 @@ namespace MvvmCross.Platforms.Tvos.Core
         }
     }
 
-    public abstract class MvxTvosSetup<TApplication> : MvxTvosSetup
+    public class MvxTvosSetup<TApplication> : MvxTvosSetup
         where TApplication : IMvxApplication, new()
     {
         protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();

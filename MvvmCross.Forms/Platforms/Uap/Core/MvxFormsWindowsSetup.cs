@@ -86,7 +86,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
         protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsWindowsBindingBuilder();
     }
 
-    public abstract class MvxFormsWindowsSetup<TApplication, TFormsApplication> : MvxFormsWindowsSetup
+    public class MvxFormsWindowsSetup<TApplication, TFormsApplication> : MvxFormsWindowsSetup
         where TApplication : IMvxApplication, new()
         where TFormsApplication : Application, new()        
     {

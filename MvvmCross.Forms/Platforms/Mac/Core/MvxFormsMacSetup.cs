@@ -101,7 +101,7 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
         }
     }
 
-    public abstract class MvxFormsMacSetup<TApplication, TFormsApplication> : MvxFormsMacSetup
+    public class MvxFormsMacSetup<TApplication, TFormsApplication> : MvxFormsMacSetup
         where TApplication : IMvxApplication, new()
         where TFormsApplication : Application, new()
     {
