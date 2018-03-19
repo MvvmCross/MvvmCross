@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Plugin.ResxLocalization;
-using MvvmCross.Plugins.ResxLocalization.UnitTest.Mocks;
+using MvvmCross.Plugin.ResxLocalization.UnitTest.Mocks;
 using Xunit;
 
-namespace MvvmCross.Plugins.ResxLocalization.UnitTest
+namespace MvvmCross.Plugin.ResxLocalization.UnitTest
 {
     
     public class MvxResxTextProviderTests

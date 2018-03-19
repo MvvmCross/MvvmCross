@@ -17,7 +17,7 @@ using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 using MvvmCross.Droid.Support.V7.RecyclerView.Model;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.WeakSubscription;
 using Object = Java.Lang.Object;
 

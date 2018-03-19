@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Resources;
 
-namespace MvvmCross.Plugins.ResxLocalization.UnitTest.Mocks
+namespace MvvmCross.Plugin.ResxLocalization.UnitTest.Mocks
 {
     internal class MockResourceManager : ResourceManager
     {

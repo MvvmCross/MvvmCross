@@ -5,7 +5,7 @@
 using MvvmCross.Tests;
 using Xunit;
 
-namespace MvvmCross.Plugins.Color.UnitTest
+namespace MvvmCross.Plugin.Color.UnitTest
 {
     [CollectionDefinition("Color")]
     public class ColorCollection : ICollectionFixture<MvxTestFixture>

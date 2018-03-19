@@ -8,7 +8,7 @@ using MvvmCross.Tests;
 using MvvmCross.UI;
 using Xunit;
 
-namespace MvvmCross.Plugins.Visibility.UnitTest
+namespace MvvmCross.Plugin.Visibility.UnitTest
 {
     [Collection("Visibility")]
     public class VisibilityValueConverterTest
