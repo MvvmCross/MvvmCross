@@ -40,7 +40,6 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
                 }
                 return window;
             }
-            set { window = value; }
         }
 
         public override void DidFinishLaunching(Foundation.NSNotification notification)
