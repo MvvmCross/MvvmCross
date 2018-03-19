@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -6,9 +6,9 @@ using System;
 using Android.App;
 using Android.OS;
 using MvvmCross.Core;
-using MvvmCross.Platform.Android.Core;
+using MvvmCross.Platforms.Android.Core;
 
-namespace MvvmCross.Platform.Android.Views
+namespace MvvmCross.Platforms.Android.Views
 {
     // For lifetime explained, see http://developer.android.com/guide/topics/fundamentals/activities.html
     public class MvxAndroidLifetimeMonitor

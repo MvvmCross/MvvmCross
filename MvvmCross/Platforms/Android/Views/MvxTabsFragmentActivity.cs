@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,13 +13,13 @@ using Android.Views;
 using Android.Widget;
 using Java.Lang;
 using MvvmCross.Base;
-using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.ViewModels;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Platform.Android.Views
+namespace MvvmCross.Platforms.Android.Views
 {
-    [Register("mvvmcross.platform.android.views.MvxTabsFragmentActivity")]
+    [Register("mvvmcross.platforms.android.views.MvxTabsFragmentActivity")]
     public abstract class MvxTabsFragmentActivity
         : MvxActivity, TabHost.IOnTabChangeListener
     {

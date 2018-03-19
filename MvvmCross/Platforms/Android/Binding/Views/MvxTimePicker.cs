@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -8,12 +8,12 @@ using Android.Runtime;
 using Android.Util;
 using Android.Widget;
 
-namespace MvvmCross.Platform.Android.Binding.Views
+namespace MvvmCross.Platforms.Android.Binding.Views
 {
     // Special thanks for this file to Emi - https://github.com/eMi-/mvvmcross_datepicker_timepicker
     // Code used under Creative Commons with attribution
     // See also http://stackoverflow.com/questions/14829521/bind-timepicker-datepicker-mvvmcross-mono-for-android
-    [Register("mvvmcross.platform.android.binding.views.MvxTimePicker")]
+    [Register("mvvmcross.platforms.android.binding.views.MvxTimePicker")]
     public class MvxTimePicker
         : TimePicker
         , TimePicker.IOnTimeChangedListener

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -7,12 +7,12 @@ using Android.Content;
 using Android.OS;
 using MvvmCross.Base;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Android;
-using MvvmCross.Platform.Android.Views.Base;
-using MvvmCross.Platform.Android.Core;
+using MvvmCross.Platforms.Android;
+using MvvmCross.Platforms.Android.Views.Base;
+using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Views;
 
-namespace MvvmCross.Platform.Android.Views
+namespace MvvmCross.Platforms.Android.Views
 {
     public class MvxActivityAdapter : MvxBaseActivityAdapter
     {

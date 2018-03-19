@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -9,17 +9,17 @@ using MvvmCross.Localization;
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Forms.Core;
-using MvvmCross.Forms.Platform.Ios.Bindings;
-using MvvmCross.Platform.Ios.Core;
-using MvvmCross.Platform.Ios.Presenters;
+using MvvmCross.Forms.Platforms.Ios.Bindings;
+using MvvmCross.Platforms.Ios.Core;
+using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
 using UIKit;
-using MvvmCross.Forms.Platform.Ios.Presenters;
+using MvvmCross.Forms.Platforms.Ios.Presenters;
 using Xamarin.Forms;
 using System.Linq;
 
-namespace MvvmCross.Forms.Platform.Ios.Core
+namespace MvvmCross.Forms.Platforms.Ios.Core
 {
     public abstract class MvxFormsIosSetup : MvxIosSetup
     {

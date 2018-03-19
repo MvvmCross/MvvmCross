@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -9,7 +9,7 @@ using MvvmCross.Exceptions;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
 
-namespace MvvmCross.Platform.Uap.Binding
+namespace MvvmCross.Platforms.Uap.Binding
 {
     // ReSharper disable InconsistentNaming
     public static class Bi

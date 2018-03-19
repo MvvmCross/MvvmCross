@@ -15,16 +15,16 @@ using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Core;
-using MvvmCross.Platform.Android.Binding;
-using MvvmCross.Platform.Android.Binding.Binders.ViewTypeResolvers;
-using MvvmCross.Platform.Android.Binding.Views;
-using MvvmCross.Platform.Android.Presenters;
-using MvvmCross.Platform.Android.Views;
+using MvvmCross.Platforms.Android.Binding;
+using MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers;
+using MvvmCross.Platforms.Android.Binding.Views;
+using MvvmCross.Platforms.Android.Presenters;
+using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using MvvmCross.Presenters;
 
-namespace MvvmCross.Platform.Android.Core
+namespace MvvmCross.Platforms.Android.Core
 {
     public abstract class MvxAndroidSetup
         : MvxSetup, IMvxAndroidGlobals, IMvxAndroidSetup

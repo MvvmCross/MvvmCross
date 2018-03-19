@@ -1,14 +1,14 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using Android.Widget;
 using MvvmCross.Binding;
-using MvvmCross.Platform.Android.WeakSubscription;
-using MvvmCross.Platform.Android.Binding.Views;
+using MvvmCross.Platforms.Android.WeakSubscription;
+using MvvmCross.Platforms.Android.Binding.Views;
 
-namespace MvvmCross.Platform.Android.Binding.Target
+namespace MvvmCross.Platforms.Android.Binding.Target
 {
     public class MvxSpinnerSelectedItemBinding
         : MvxAndroidTargetBinding

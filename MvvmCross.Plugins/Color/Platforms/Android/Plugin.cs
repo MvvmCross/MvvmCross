@@ -3,11 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Plugin.Color.Platform.Android.BindingTargets;
+using MvvmCross.Plugin.Color.Platforms.Android.BindingTargets;
 using MvvmCross.Plugin;
 using MvvmCross.UI;
 
-namespace MvvmCross.Plugin.Color.Platform.Android
+namespace MvvmCross.Plugin.Color.Platforms.Android
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]

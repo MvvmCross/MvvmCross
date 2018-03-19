@@ -11,7 +11,7 @@ using Android.Util;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
-using MvvmCross.Platform.Android.Binding.Views;
+using MvvmCross.Platforms.Android.Binding.Views;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {

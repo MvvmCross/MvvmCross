@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -9,13 +9,13 @@ using AppKit;
 using CoreGraphics;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Mac.Presenters.Attributes;
-using MvvmCross.Platform.Mac.Views;
+using MvvmCross.Platforms.Mac.Presenters.Attributes;
+using MvvmCross.Platforms.Mac.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
 
-namespace MvvmCross.Platform.Mac.Presenters
+namespace MvvmCross.Platforms.Mac.Presenters
 {
     public class MvxMacViewPresenter
         : MvxAttributeViewPresenter, IMvxMacViewPresenter, IMvxAttributeViewPresenter

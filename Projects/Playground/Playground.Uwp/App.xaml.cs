@@ -1,5 +1,5 @@
-﻿using MvvmCross.Platform.Uap.Core;
-using MvvmCross.Platform.Uap.Views;
+﻿using MvvmCross.Platforms.Uap.Core;
+using MvvmCross.Platforms.Uap.Views;
 
 namespace Playground.Uwp
 {

@@ -6,7 +6,7 @@ using MvvmCross.Tests;
 using MvvmCross.UI;
 using Xunit;
 
-namespace MvvmCross.Plugins.Color.UnitTest
+namespace MvvmCross.Plugin.Color.UnitTest
 {
     public class MvxColorValueConverterTest : IClassFixture<MvxTestFixture>
     {

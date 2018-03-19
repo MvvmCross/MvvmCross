@@ -5,7 +5,7 @@
 using MvvmCross.Base;
 using MvvmCross.Plugin;
 
-namespace MvvmCross.Plugin.ResourceLoader.Platform.Wpf
+namespace MvvmCross.Plugin.ResourceLoader.Platforms.Wpf
 {
     [MvxPlugin]
     public class Plugin : IMvxPlugin

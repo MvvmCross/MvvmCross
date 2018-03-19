@@ -5,7 +5,7 @@
 using MvvmCross.Tests;
 using Xunit;
 
-namespace MvvmCross.Plugins.Visibility.UnitTest
+namespace MvvmCross.Plugin.Visibility.UnitTest
 {
     [CollectionDefinition("Visibility")]
     public class VisibilityCollection : ICollectionFixture<MvxTestFixture>

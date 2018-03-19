@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -9,16 +9,16 @@ using Android.OS;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Forms.Core;
-using MvvmCross.Forms.Platform.Android.Views.Base;
+using MvvmCross.Forms.Platforms.Android.Views.Base;
 using MvvmCross.Forms.Presenters;
-using MvvmCross.Platform.Android.Binding.BindingContext;
-using MvvmCross.Platform.Android.Binding.Views;
-using MvvmCross.Platform.Android.Core;
-using MvvmCross.Platform.Android.Views;
+using MvvmCross.Platforms.Android.Binding.BindingContext;
+using MvvmCross.Platforms.Android.Binding.Views;
+using MvvmCross.Platforms.Android.Core;
+using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 using Application = Xamarin.Forms.Application;
 
-namespace MvvmCross.Forms.Platform.Android.Views
+namespace MvvmCross.Forms.Platforms.Android.Views
 {
     public abstract class MvxFormsApplicationActivity : MvxEventSourceFormsApplicationActivity, IMvxAndroidView
     {

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -10,11 +10,11 @@ using Android.Runtime;
 using Android.Widget;
 using Java.Lang;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.Platforms.Android.Binding.BindingContext;
 using Object = Java.Lang.Object;
 using String = Java.Lang.String;
 
-namespace MvvmCross.Platform.Android.Binding.Views
+namespace MvvmCross.Platforms.Android.Binding.Views
 {
     public class MvxFilteringAdapter
         : MvxAdapter, IFilterable

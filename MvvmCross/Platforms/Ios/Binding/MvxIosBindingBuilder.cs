@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -9,12 +9,12 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Platform.Ios.Binding.Target;
-using MvvmCross.Platform.Ios.Binding.ValueConverters;
-using MvvmCross.Platform.Ios.Binding.Views;
+using MvvmCross.Platforms.Ios.Binding.Target;
+using MvvmCross.Platforms.Ios.Binding.ValueConverters;
+using MvvmCross.Platforms.Ios.Binding.Views;
 using UIKit;
 
-namespace MvvmCross.Platform.Ios.Binding
+namespace MvvmCross.Platforms.Ios.Binding
 {
     public class MvxIosBindingBuilder
         : MvxBindingBuilder

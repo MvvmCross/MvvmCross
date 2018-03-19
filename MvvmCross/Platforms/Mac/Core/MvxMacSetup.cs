@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -12,14 +12,14 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Converters;
 using MvvmCross.Core;
-using MvvmCross.Platform.Mac.Binding;
-using MvvmCross.Platform.Mac.Presenters;
-using MvvmCross.Platform.Mac.Views;
+using MvvmCross.Platforms.Mac.Binding;
+using MvvmCross.Platforms.Mac.Presenters;
+using MvvmCross.Platforms.Mac.Views;
 using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
-namespace MvvmCross.Platform.Mac.Core
+namespace MvvmCross.Platforms.Mac.Core
 {
     public abstract class MvxMacSetup
         : MvxSetup, IMvxMacSetup

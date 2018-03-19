@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -6,12 +6,12 @@ using System;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Ios.Presenters;
+using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.ViewModels;
 using UIKit;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Platform.Ios.Presenters
+namespace MvvmCross.Forms.Platforms.Ios.Presenters
 {
     public class MvxFormsIosViewPresenter
         : MvxIosViewPresenter

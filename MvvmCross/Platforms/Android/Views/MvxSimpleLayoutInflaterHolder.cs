@@ -1,11 +1,11 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using Android.Views;
-using MvvmCross.Platform.Android.Binding.Views;
+using MvvmCross.Platforms.Android.Binding.Views;
 
-namespace MvvmCross.Platform.Android.Views
+namespace MvvmCross.Platforms.Android.Views
 {
     public class MvxSimpleLayoutInflaterHolder : IMvxLayoutInflaterHolder
     {

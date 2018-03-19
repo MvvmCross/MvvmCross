@@ -4,10 +4,10 @@
 
 using System;
 using System.IO;
-using MvvmCross.Platform.Uap;
+using MvvmCross.Platforms.Uap;
 using Windows.ApplicationModel;
 
-namespace MvvmCross.Plugin.ResourceLoader.Platform.Uap
+namespace MvvmCross.Plugin.ResourceLoader.Platforms.Uap
 {
     public class MvxStoreResourceLoader : MvxResourceLoader
     {

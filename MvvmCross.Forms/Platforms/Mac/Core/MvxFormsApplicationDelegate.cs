@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -9,12 +9,12 @@ using MvvmCross.Core;
 using MvvmCross.Exceptions;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.IoC;
-using MvvmCross.Platform.Mac.Core;
+using MvvmCross.Platforms.Mac.Core;
 using MvvmCross.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.MacOS;
 
-namespace MvvmCross.Forms.Platform.Mac.Core
+namespace MvvmCross.Forms.Platforms.Mac.Core
 { 
     public abstract class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {

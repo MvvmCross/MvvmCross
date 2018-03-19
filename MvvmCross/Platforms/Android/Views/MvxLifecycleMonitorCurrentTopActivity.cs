@@ -1,12 +1,12 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using Android.App;
-using MvvmCross.Platform.Android;
-using MvvmCross.Platform.Android.Core;
+using MvvmCross.Platforms.Android;
+using MvvmCross.Platforms.Android.Core;
 
-namespace MvvmCross.Platform.Android.Views
+namespace MvvmCross.Platforms.Android.Views
 {
     // Note that we set Activity = activity in multiple places
     // basically we just want to intercept the activity as early as possible

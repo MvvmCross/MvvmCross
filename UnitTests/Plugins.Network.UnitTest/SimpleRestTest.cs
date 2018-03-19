@@ -7,10 +7,10 @@ using System.Net;
 using System.Threading.Tasks;
 using MvvmCross.Plugin.Json;
 using MvvmCross.Plugin.Network.Rest;
-using MvvmCross.Plugins.Network.UnitTest.TestClasses.GoogleBooks;
+using MvvmCross.Plugin.Network.UnitTest.TestClasses.GoogleBooks;
 using Xunit;
 
-namespace MvvmCross.Plugins.Network.UnitTest
+namespace MvvmCross.Plugin.Network.UnitTest
 {
 
     [Collection("Rest")]

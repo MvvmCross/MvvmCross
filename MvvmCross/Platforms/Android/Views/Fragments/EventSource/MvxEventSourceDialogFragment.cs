@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -10,9 +10,9 @@ using Android.Runtime;
 using Android.Views;
 using MvvmCross.Base;
 
-namespace MvvmCross.Platform.Android.Views.Fragments.EventSource
+namespace MvvmCross.Platforms.Android.Views.Fragments.EventSource
 {
-    [Register("mvvmcross.platform.android.views.fragments.eventsource.MvxEventSourceDialogFragment")]
+    [Register("mvvmcross.platforms.android.views.fragments.eventsource.MvxEventSourceDialogFragment")]
     public class MvxEventSourceDialogFragment
         : DialogFragment
         , IMvxEventSourceFragment

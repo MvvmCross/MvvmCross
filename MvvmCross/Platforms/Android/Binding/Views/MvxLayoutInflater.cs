@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -12,13 +12,13 @@ using Java.Interop;
 using Java.Lang;
 using Java.Lang.Reflect;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Android.Binding.Binders;
-using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.Platforms.Android.Binding.Binders;
+using MvvmCross.Platforms.Android.Binding.BindingContext;
 using Boolean = Java.Lang.Boolean;
 using Exception = Java.Lang.Exception;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Platform.Android.Binding.Views
+namespace MvvmCross.Platforms.Android.Binding.Views
 {
     /// <summary>
     /// Custom LayoutInflater responsible for inflating views and hooking up bindings
@@ -38,7 +38,7 @@ namespace MvvmCross.Platform.Android.Binding.Views
     /// Heavily based on Calligraphy's CalligraphyLayoutInflater
     /// See: https://github.com/chrisjenx/Calligraphy/blob/master/calligraphy/src/main/java/uk/co/chrisjenx/calligraphy/CalligraphyLayoutInflater.java" />
     /// </summary>
-    [Register("mvvmcross.platform.android.binding.views.MvxLayoutInflater")]
+    [Register("mvvmcross.platforms.android.binding.views.MvxLayoutInflater")]
     public class MvxLayoutInflater : LayoutInflater
     {
         public class MvxBindingVisitor

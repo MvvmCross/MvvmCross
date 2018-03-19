@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,9 +11,9 @@ using Android.Util;
 using Android.Widget;
 using MvvmCross.Binding.Attributes;
 
-namespace MvvmCross.Platform.Android.Binding.Views
+namespace MvvmCross.Platforms.Android.Binding.Views
 {
-    [Register("mvvmcross.platform.android.binding.views.MvxSpinner")]
+    [Register("mvvmcross.platforms.android.binding.views.MvxSpinner")]
     public class MvxSpinner : Spinner
     {
         public MvxSpinner(Context context, IAttributeSet attrs)

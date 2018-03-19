@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows;
 using MvvmCross.Core;
-using MvvmCross.Platform.Wpf.Core;
+using MvvmCross.Platforms.Wpf.Core;
 using MvvmCross.ViewModels;
 
-namespace MvvmCross.Platform.Wpf.Views
+namespace MvvmCross.Platforms.Wpf.Views
 {
     public abstract class MvxApplication : Application 
     {

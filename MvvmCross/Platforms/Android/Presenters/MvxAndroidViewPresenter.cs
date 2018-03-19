@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,17 +13,17 @@ using Android.OS;
 using Java.Lang;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Android;
-using MvvmCross.Platform.Android.Core;
-using MvvmCross.Platform.Android.Presenters.Attributes;
-using MvvmCross.Platform.Android.Views;
-using MvvmCross.Platform.Android.Views.Fragments;
+using MvvmCross.Platforms.Android;
+using MvvmCross.Platforms.Android.Core;
+using MvvmCross.Platforms.Android.Presenters.Attributes;
+using MvvmCross.Platforms.Android.Views;
+using MvvmCross.Platforms.Android.Views.Fragments;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
-namespace MvvmCross.Platform.Android.Presenters
+namespace MvvmCross.Platforms.Android.Presenters
 {
     public class MvxAndroidViewPresenter : MvxAttributeViewPresenter, IMvxAndroidViewPresenter
     {

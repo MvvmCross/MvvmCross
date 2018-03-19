@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -9,15 +9,15 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Android.Views.Base;
-using MvvmCross.Platform.Android.Binding.BindingContext;
-using MvvmCross.Platform.Android.Binding.Views;
+using MvvmCross.Platforms.Android.Views.Base;
+using MvvmCross.Platforms.Android.Binding.BindingContext;
+using MvvmCross.Platforms.Android.Binding.Views;
 using MvvmCross.ViewModels;
 
-namespace MvvmCross.Platform.Android.Views
+namespace MvvmCross.Platforms.Android.Views
 {
     [Obsolete("TabActivity is obsolete. Use ViewPager + Indicator or any other Activity with Toolbar support.")]
-    [Register("mvvmcross.platform.android.views.MvxTabActivity")]
+    [Register("mvvmcross.platforms.android.views.MvxTabActivity")]
     public abstract class MvxTabActivity
         : MvxEventSourceTabActivity, IMvxAndroidView, IMvxChildViewModelOwner
     {

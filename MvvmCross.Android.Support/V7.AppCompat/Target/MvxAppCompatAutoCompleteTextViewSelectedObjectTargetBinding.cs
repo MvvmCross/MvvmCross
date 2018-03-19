@@ -6,8 +6,8 @@ using System;
 using System.Reflection;
 using MvvmCross.Binding;
 using MvvmCross.Droid.Support.V7.AppCompat.Widget;
-using MvvmCross.Platform.Android.WeakSubscription;
-using MvvmCross.Platform.Android.Binding.Target;
+using MvvmCross.Platforms.Android.WeakSubscription;
+using MvvmCross.Platforms.Android.Binding.Target;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {
