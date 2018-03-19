@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -41,7 +41,9 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
 
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
-            Window = new UIWindow(UIScreen.MainScreen.Bounds);
+            if (Window != null)
+                Window = new UIWindow(UIScreen.MainScreen.Bounds);
+
             Setup.PlatformInitialize(this, Window);
             Setup.Initialize();
 
