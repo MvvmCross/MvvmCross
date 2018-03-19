@@ -7,9 +7,9 @@ using Android.Views;
 using MvvmCross.Droid.Support.V4.EventSource;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Android.Binding.BindingContext;
-using MvvmCross.Platform.Android.Core;
-using MvvmCross.Platform.Android.Views;
+using MvvmCross.Platforms.Android.Binding.BindingContext;
+using MvvmCross.Platforms.Android.Core;
+using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
@@ -31,7 +31,7 @@ namespace MvvmCross.Droid.Support.V4
             {
                 //TODO call MvxViewModelLoader.Reload when it's added in MvvmCross, tracked by #1165
                 //until then, we're going to re-run the viewmodel lifecycle here.
-                Platform.Android.Views.MvxFragmentExtensions.RunViewModelLifecycle(fragmentView.ViewModel, bundle, request);
+                Platforms.Android.Views.MvxFragmentExtensions.RunViewModelLifecycle(fragmentView.ViewModel, bundle, request);
 
                 return;
             }

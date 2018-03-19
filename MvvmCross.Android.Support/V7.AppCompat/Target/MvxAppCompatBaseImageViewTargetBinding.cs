@@ -7,7 +7,7 @@ using Android.Graphics;
 using Android.Support.V7.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Exceptions;
-using MvvmCross.Platform.Android.Binding.Target;
+using MvvmCross.Platforms.Android.Binding.Target;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Target
 {

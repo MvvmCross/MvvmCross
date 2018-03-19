@@ -9,7 +9,7 @@ using Android.Runtime;
 using Android.Support.V17.Leanback.App;
 using Android.Views;
 using MvvmCross.Base;
-using MvvmCross.Platform.Android.Views;
+using MvvmCross.Platforms.Android.Views;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource
 {

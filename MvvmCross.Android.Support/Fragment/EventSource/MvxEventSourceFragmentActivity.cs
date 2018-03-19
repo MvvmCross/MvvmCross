@@ -9,7 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
 using MvvmCross.Base;
-using MvvmCross.Platform.Android.Views.Base;
+using MvvmCross.Platforms.Android.Views.Base;
 
 namespace MvvmCross.Droid.Support.V4.EventSource
 {

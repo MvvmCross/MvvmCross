@@ -1,7 +1,7 @@
 ﻿using Foundation;
 using MvvmCross;
 using UIKit;
-using MvvmCross.Platform.Tvos.Core;
+using MvvmCross.Platforms.Tvos.Core;
 using MvvmCross.ViewModels;
 using Playground.Core;
 

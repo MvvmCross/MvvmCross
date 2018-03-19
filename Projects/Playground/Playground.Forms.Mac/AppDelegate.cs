@@ -1,6 +1,6 @@
 ﻿using AppKit;
 using Foundation;
-using MvvmCross.Forms.Platform.Mac.Core;
+using MvvmCross.Forms.Platforms.Mac.Core;
 using Playground.Forms.UI;
 using Xamarin.Forms.Platform.MacOS;
 

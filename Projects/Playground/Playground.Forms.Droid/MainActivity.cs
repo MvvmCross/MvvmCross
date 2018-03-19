@@ -5,7 +5,7 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using MvvmCross.Forms.Platform.Android.Views;
+using MvvmCross.Forms.Platforms.Android.Views;
 using Playground.Core.ViewModels;
 
 namespace Playground.Forms.Droid

@@ -4,7 +4,7 @@
 
 using System;
 using MvvmCross.Binding;
-using MvvmCross.Platform.Android.Binding.Target;
+using MvvmCross.Platforms.Android.Binding.Target;
 
 namespace MvvmCross.Droid.Support.V7.Preference.Target
 {

@@ -1,6 +1,6 @@
 ﻿using System;
-using MvvmCross.Forms.Platform.Uap.Core;
-using MvvmCross.Platform.Uap.Core;
+using MvvmCross.Forms.Platforms.Uap.Core;
+using MvvmCross.Platforms.Uap.Core;
 using Playground.Forms.UI;
 
 namespace Playground.Forms.Uwp

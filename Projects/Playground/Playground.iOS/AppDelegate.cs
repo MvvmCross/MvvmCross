@@ -1,6 +1,6 @@
 ﻿using Foundation;
 using MvvmCross;
-using MvvmCross.Platform.Ios.Core;
+using MvvmCross.Platforms.Ios.Core;
 using MvvmCross.ViewModels;
 using Playground.Core;
 using UIKit;
