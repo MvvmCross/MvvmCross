@@ -26,9 +26,18 @@ namespace Playground.Forms.Droid
             base.OnCreate(bundle);
         }
 
+        //TODO: Maybe we need to move this to the base
         public override void OnBackPressed()
         {
-            MoveTaskToBack(false);
+            var page = Xamarin.Forms.Application.Current.MainPage;
+            if (page == null || (page.Navigation.NavigationStack.Count <= 1 && page.Navigation.ModalStack.Count == 0))
+            {
+                MoveTaskToBack(true);
+            }
+            else
+            {
+                base.OnBackPressed();
+            }
         }
     }
 }
