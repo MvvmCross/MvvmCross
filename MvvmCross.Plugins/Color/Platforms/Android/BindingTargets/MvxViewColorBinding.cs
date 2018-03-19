@@ -1,13 +1,13 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using Android.Views;
 using MvvmCross.Binding;
-using MvvmCross.Platform.Android.Binding.Target;
+using MvvmCross.Platforms.Android.Binding.Target;
 
-namespace MvvmCross.Plugin.Color.Platform.Android.BindingTargets
+namespace MvvmCross.Plugin.Color.Platforms.Android.BindingTargets
 {
     [Preserve(AllMembers = true)]
 	public abstract class MvxViewColorBinding

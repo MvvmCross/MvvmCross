@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -7,10 +7,10 @@ using Android.Content;
 using Android.Hardware;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
-using MvvmCross.Platform.Android;
+using MvvmCross.Platforms.Android;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Plugin.Accelerometer.Platform.Android
+namespace MvvmCross.Plugin.Accelerometer.Platforms.Android
 {
     [Preserve(AllMembers = true)]
     public class MvxAccelerometer

@@ -10,8 +10,8 @@ using Android.Support.V7.Widget;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Droid.Support.V4;
-using MvvmCross.Platform.Android.Core;
-using MvvmCross.Platform.Android.Presenters;
+using MvvmCross.Platforms.Android.Core;
+using MvvmCross.Platforms.Android.Presenters;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat

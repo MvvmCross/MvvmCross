@@ -6,7 +6,7 @@ using System;
 using System.IO;
 using MvvmCross.Exceptions;
 
-namespace MvvmCross.Plugin.ResourceLoader.Platform.Ios
+namespace MvvmCross.Plugin.ResourceLoader.Platforms.Ios
 {
     public class MvxIosResourceLoader
         : MvxResourceLoader

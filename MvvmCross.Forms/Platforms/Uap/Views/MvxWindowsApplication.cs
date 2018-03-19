@@ -5,13 +5,13 @@
 using System;
 using System.Threading.Tasks;
 using MvvmCross.Forms.Views.Base;
-using MvvmCross.Platform.Uap.Views;
+using MvvmCross.Platforms.Uap.Views;
 using MvvmCross.ViewModels;
 using Windows.ApplicationModel.Activation;
 
-namespace MvvmCross.Forms.Platform.Uap.Views
+namespace MvvmCross.Forms.Platforms.Uap.Views
 {
-    public abstract class MvxWindowsApplication : MvvmCross.Platform.Uap.Views.MvxApplication
+    public abstract class MvxWindowsApplication : MvvmCross.Platforms.Uap.Views.MvxApplication
     {
         protected abstract Type HostWindowsPageType();
 

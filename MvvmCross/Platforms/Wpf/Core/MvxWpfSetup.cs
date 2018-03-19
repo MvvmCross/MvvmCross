@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -8,13 +8,13 @@ using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using MvvmCross.Core;
-using MvvmCross.Platform.Wpf.Presenters;
-using MvvmCross.Platform.Wpf.Views;
+using MvvmCross.Platforms.Wpf.Presenters;
+using MvvmCross.Platforms.Wpf.Views;
 using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
-namespace MvvmCross.Platform.Wpf.Core
+namespace MvvmCross.Platforms.Wpf.Core
 {
     public abstract class MvxWpfSetup
     : MvxSetup, IMvxWpfSetup

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Data;
 using MvvmCross.Converters;
 using MvvmCross.Logging;
 
-namespace MvvmCross.Platform.Uap.Converters
+namespace MvvmCross.Platforms.Uap.Converters
 {
     public class MvxNativeValueConverter
         : IValueConverter

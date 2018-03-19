@@ -1,11 +1,11 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using Windows.System;
 
-namespace MvvmCross.Plugin.PhoneCall.Platform.Uap
+namespace MvvmCross.Plugin.PhoneCall.Platforms.Uap
 {
     public class MvxPhoneCallTask : IMvxPhoneCallTask
     {

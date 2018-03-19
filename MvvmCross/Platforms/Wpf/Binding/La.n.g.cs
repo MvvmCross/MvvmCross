@@ -1,4 +1,4 @@
-﻿// La.n.g.cs
+// La.n.g.cs
 
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -13,7 +13,7 @@ using MvvmCross.Base;
 using MvvmCross.Binding;
 using MvvmCross.Core;
 
-namespace MvvmCross.Platform.Wpf.Binding
+namespace MvvmCross.Platforms.Wpf.Binding
 {
     // ReSharper disable InconsistentNaming
     public static class La

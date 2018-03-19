@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -8,7 +8,7 @@ using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Plugin.File;
 
-namespace MvvmCross.Plugin.File.Platform.Wpf
+namespace MvvmCross.Plugin.File.Platforms.Wpf
 {
     [MvxPlugin]
     public class Plugin : IMvxConfigurablePlugin

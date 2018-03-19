@@ -1,12 +1,12 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using Android.Content;
 using Android.Util;
-using MvvmCross.Platform.Android.Binding.ResourceHelpers;
+using MvvmCross.Platforms.Android.Binding.ResourceHelpers;
 
-namespace MvvmCross.Platform.Android.Binding.Views
+namespace MvvmCross.Platforms.Android.Binding.Views
 {
     public static class MvxAttributeHelpers
     {

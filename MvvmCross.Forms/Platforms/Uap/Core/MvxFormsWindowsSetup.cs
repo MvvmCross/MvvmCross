@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -9,18 +9,18 @@ using System.Collections.Generic;
 using System.Reflection;
 using Windows.ApplicationModel.Activation;
 using MvvmCross.Forms.Core;
-using MvvmCross.Forms.Platform.Uap.Bindings;
-using MvvmCross.Forms.Platform.Uap.Presenters;
-using MvvmCross.Platform.Uap.Core;
-using MvvmCross.Platform.Uap.Views;
+using MvvmCross.Forms.Platforms.Uap.Bindings;
+using MvvmCross.Forms.Platforms.Uap.Presenters;
+using MvvmCross.Platforms.Uap.Core;
+using MvvmCross.Platforms.Uap.Views;
 using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
 using XamlControls = Windows.UI.Xaml.Controls;
-using MvvmCross.Platform.Uap.Presenters;
+using MvvmCross.Platforms.Uap.Presenters;
 using System.Linq;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Platform.Uap.Core
+namespace MvvmCross.Forms.Platforms.Uap.Core
 {
     public abstract class MvxFormsWindowsSetup : MvxWindowsSetup
     {

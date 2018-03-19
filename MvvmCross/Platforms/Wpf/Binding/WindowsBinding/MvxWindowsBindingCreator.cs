@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -12,9 +12,9 @@ using MvvmCross.Logging;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings;
 using MvvmCross.Binding.Bindings.SourceSteps;
-using MvvmCross.Platform.Wpf.Converters;
+using MvvmCross.Platforms.Wpf.Converters;
 
-namespace MvvmCross.Platform.Wpf.Binding.WindowsBinding
+namespace MvvmCross.Platforms.Wpf.Binding.WindowsBinding
 {
     public class MvxWindowsBindingCreator : MvxBindingCreator
     {

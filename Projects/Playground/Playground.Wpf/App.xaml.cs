@@ -1,6 +1,6 @@
 ﻿using MvvmCross.Core;
-using MvvmCross.Platform.Wpf.Core;
-using MvvmCross.Platform.Wpf.Views;
+using MvvmCross.Platforms.Wpf.Core;
+using MvvmCross.Platforms.Wpf.Views;
 
 namespace Playground.Wpf
 {

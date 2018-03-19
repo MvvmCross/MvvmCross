@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -8,14 +8,14 @@ using System.Linq;
 using CoreGraphics;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Tvos.Presenters.Attributes;
-using MvvmCross.Platform.Tvos.Views;
+using MvvmCross.Platforms.Tvos.Presenters.Attributes;
+using MvvmCross.Platforms.Tvos.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
 using UIKit;
 using MvvmCross.Presenters.Attributes;
 
-namespace MvvmCross.Platform.Tvos.Presenters
+namespace MvvmCross.Platforms.Tvos.Presenters
 {
     public class MvxTvosViewPresenter
         : MvxAttributeViewPresenter, IMvxTvosViewPresenter

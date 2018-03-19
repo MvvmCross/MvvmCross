@@ -1,5 +1,5 @@
 ﻿using Foundation;
-using MvvmCross.Forms.Platform.Ios.Core;
+using MvvmCross.Forms.Platforms.Ios.Core;
 using Playground.Forms.UI;
 using UIKit;
 

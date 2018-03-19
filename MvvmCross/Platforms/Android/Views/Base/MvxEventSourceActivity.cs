@@ -9,9 +9,9 @@ using Android.OS;
 using Android.Runtime;
 using MvvmCross.Base;
 
-namespace MvvmCross.Platform.Android.Views.Base
+namespace MvvmCross.Platforms.Android.Views.Base
 {
-    [Register("mvvmcross.platform.droid.views.MvxEventSourceActivity")]
+    [Register("mvvmcross.platforms.android.views.base.MvxEventSourceActivity")]
     public abstract class MvxEventSourceActivity
         : Activity, IMvxEventSourceActivity
     {

@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using Android.Content;
-using MvvmCross.Forms.Platform.Android.Core;
+using MvvmCross.Forms.Platforms.Android.Core;
 using MvvmCross.Logging;
 using Playground.Forms.UI;
 using Serilog;

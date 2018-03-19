@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -6,7 +6,7 @@ using System;
 using System.Device.Location;
 using MvvmCross.Exceptions;
 
-namespace MvvmCross.Plugin.Location.Platform.Wpf
+namespace MvvmCross.Plugin.Location.Platforms.Wpf
 {
     /// <summary>
     /// Location Watcher Plugin for WPF developers.

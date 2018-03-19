@@ -4,7 +4,7 @@
 
 using MvvmCross.Base;
 
-namespace MvvmCross.Plugin.ResourceLoader.Platform.Uap
+namespace MvvmCross.Plugin.ResourceLoader.Platforms.Uap
 {
     [MvxPlugin]
     public class Plugin : IMvxPlugin

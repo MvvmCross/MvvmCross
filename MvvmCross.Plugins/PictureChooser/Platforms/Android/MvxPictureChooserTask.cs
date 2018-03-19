@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,15 +11,15 @@ using Android.Graphics;
 using Android.Media;
 using Android.Provider;
 using MvvmCross.Exceptions;
-using MvvmCross.Platform.Android;
-using MvvmCross.Platform.Android.Views.Base;
+using MvvmCross.Platforms.Android;
+using MvvmCross.Platforms.Android.Views.Base;
 using Path = System.IO.Path;
 using Stream = System.IO.Stream;
 using Uri = Android.Net.Uri;
 using ExifInterface = Android.Support.Media.ExifInterface;
 using MvvmCross.Logging;
 
-namespace MvvmCross.Plugin.PictureChooser.Platform.Android
+namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
 {
     [Preserve(AllMembers = true)]
     public class MvxPictureChooserTask

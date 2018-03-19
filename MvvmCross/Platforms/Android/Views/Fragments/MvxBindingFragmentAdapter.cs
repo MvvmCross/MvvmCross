@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -7,12 +7,12 @@ using Android.App;
 using Android.OS;
 using MvvmCross.Base;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Android.Core;
-using MvvmCross.Platform.Android.Views.Fragments.EventSource;
+using MvvmCross.Platforms.Android.Core;
+using MvvmCross.Platforms.Android.Views.Fragments.EventSource;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
-namespace MvvmCross.Platform.Android.Views.Fragments
+namespace MvvmCross.Platforms.Android.Views.Fragments
 {
     public class MvxBindingFragmentAdapter
         : MvxBaseFragmentAdapter

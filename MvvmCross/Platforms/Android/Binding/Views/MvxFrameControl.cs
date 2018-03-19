@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -12,11 +12,11 @@ using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.Platforms.Android.Binding.BindingContext;
 
-namespace MvvmCross.Platform.Android.Binding.Views
+namespace MvvmCross.Platforms.Android.Binding.Views
 {
-    [Register("mvvmcross.platform.android.binding.views.MvxFrameControl")]
+    [Register("mvvmcross.platforms.android.binding.views.MvxFrameControl")]
     public class MvxFrameControl
         : FrameLayout, IMvxBindingContextOwner
     {

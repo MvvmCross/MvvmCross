@@ -5,9 +5,9 @@
 using System;
 using System.IO;
 using Android.Content.Res;
-using MvvmCross.Platform.Android;
+using MvvmCross.Platforms.Android;
 
-namespace MvvmCross.Plugin.ResourceLoader.Platform.Android
+namespace MvvmCross.Plugin.ResourceLoader.Platforms.Android
 {
     [Preserve(AllMembers = true)]
 	public class MvxAndroidResourceLoader

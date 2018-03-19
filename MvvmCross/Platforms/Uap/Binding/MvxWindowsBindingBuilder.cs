@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -10,10 +10,10 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
-using MvvmCross.Platform.Uap.Binding.MvxBinding;
-using MvvmCross.Platform.Uap.Binding.MvxBinding.Target;
+using MvvmCross.Platforms.Uap.Binding.MvxBinding;
+using MvvmCross.Platforms.Uap.Binding.MvxBinding.Target;
 
-namespace MvvmCross.Platform.Uap.Binding
+namespace MvvmCross.Platforms.Uap.Binding
 {
     public class MvxWindowsBindingBuilder : MvxBindingBuilder
     {

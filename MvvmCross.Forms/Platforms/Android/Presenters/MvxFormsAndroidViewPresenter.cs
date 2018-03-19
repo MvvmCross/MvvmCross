@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -8,12 +8,12 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Forms.Core;
-using MvvmCross.Platform.Android.Views;
+using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
-using MvvmCross.Forms.Platform.Android.Views;
+using MvvmCross.Forms.Platforms.Android.Views;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Platform.Android.Presenters
+namespace MvvmCross.Forms.Platforms.Android.Presenters
 {
     public class MvxFormsAndroidViewPresenter
         : MvxAppCompatViewPresenter, IMvxFormsViewPresenter

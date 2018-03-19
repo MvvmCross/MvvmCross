@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,11 +11,11 @@ using Android.OS;
 using Android.Text;
 using Java.IO;
 using Java.Lang;
-using MvvmCross.Platform.Android;
-using MvvmCross.Platform.Android.Views.Base;
+using MvvmCross.Platforms.Android;
+using MvvmCross.Platforms.Android.Views.Base;
 using File = Java.IO.File;
 
-namespace MvvmCross.Plugin.Email.Platform.Android
+namespace MvvmCross.Plugin.Email.Platforms.Android
 {
     [Preserve(AllMembers = true)]
     public class MvxComposeEmailTask

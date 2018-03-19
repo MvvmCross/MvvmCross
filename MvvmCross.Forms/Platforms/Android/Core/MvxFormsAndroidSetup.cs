@@ -10,17 +10,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Forms.Core;
-using MvvmCross.Forms.Platform.Android.Bindings;
-using MvvmCross.Platform.Android.Core;
-using MvvmCross.Platform.Android.Presenters;
+using MvvmCross.Forms.Platforms.Android.Bindings;
+using MvvmCross.Platforms.Android.Core;
+using MvvmCross.Platforms.Android.Presenters;
 using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
-using MvvmCross.Platform.Android;
+using MvvmCross.Platforms.Android;
 using MvvmCross.Forms.Presenters;
-using MvvmCross.Forms.Platform.Android.Presenters;
+using MvvmCross.Forms.Platforms.Android.Presenters;
 using Xamarin.Forms;
 
-namespace MvvmCross.Forms.Platform.Android.Core
+namespace MvvmCross.Forms.Platforms.Android.Core
 {
     public abstract class MvxFormsAndroidSetup : MvxAndroidSetup
     {

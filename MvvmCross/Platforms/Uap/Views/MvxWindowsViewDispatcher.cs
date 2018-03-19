@@ -1,12 +1,12 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Platform.Uap.Presenters;
+using MvvmCross.Platforms.Uap.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
-namespace MvvmCross.Platform.Uap.Views
+namespace MvvmCross.Platforms.Uap.Views
 {
     public class MvxWindowsViewDispatcher
         : MvxWindowsMainThreadDispatcher, IMvxViewDispatcher

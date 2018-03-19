@@ -10,9 +10,9 @@ using Android.Util;
 using Android.Widget;
 using MvvmCross.Binding.Attributes;
 
-namespace MvvmCross.Platform.Android.Binding.Views
+namespace MvvmCross.Platforms.Android.Binding.Views
 {
-    [Register("mvvmcross.platform.android.binding.views.MvxAutoCompleteTextView")]
+    [Register("mvvmcross.platforms.android.binding.views.MvxAutoCompleteTextView")]
     public class MvxAutoCompleteTextView
         : AutoCompleteTextView
     {

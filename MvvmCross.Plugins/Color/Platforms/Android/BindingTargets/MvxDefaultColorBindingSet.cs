@@ -6,9 +6,9 @@ using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Logging;
-using MvvmCross.Plugin.Color.Platform.Android.Binding;
+using MvvmCross.Plugin.Color.Platforms.Android.Binding;
 
-namespace MvvmCross.Plugin.Color.Platform.Android.BindingTargets
+namespace MvvmCross.Plugin.Color.Platforms.Android.BindingTargets
 {
     [Preserve(AllMembers = true)]
     public class MvxDefaultColorBindingSet

@@ -4,7 +4,7 @@
 
 using MvvmCross.Base;
 
-namespace MvvmCross.Plugin.ResourceLoader.Platform.Android
+namespace MvvmCross.Plugin.ResourceLoader.Platforms.Android
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]

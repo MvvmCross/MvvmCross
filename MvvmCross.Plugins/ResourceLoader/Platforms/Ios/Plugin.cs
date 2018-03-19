@@ -4,7 +4,7 @@
 
 using MvvmCross.Base;
 
-namespace MvvmCross.Plugin.ResourceLoader.Platform.Ios
+namespace MvvmCross.Plugin.ResourceLoader.Platforms.Ios
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]
