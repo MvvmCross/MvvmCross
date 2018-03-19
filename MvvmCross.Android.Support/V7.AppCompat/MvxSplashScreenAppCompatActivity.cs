@@ -81,8 +81,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected virtual void TriggerFirstNavigate()
         {
-            var starter = Mvx.Resolve<IMvxAppStart>();
-            starter.Start();
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            if (!startup.IsStarted)
+                startup.Start();
         }
     }
 }
