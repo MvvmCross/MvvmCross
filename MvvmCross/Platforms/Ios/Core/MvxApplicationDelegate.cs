@@ -37,7 +37,7 @@ namespace MvvmCross.Platforms.Ios.Core
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            if(Window != null)
+            if(Window == null)
                 Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
             Setup.PlatformInitialize(this, Window);
