@@ -90,7 +90,7 @@ namespace MvvmCross.Platforms.Wpf.Core
         }
     }
 
-    public abstract class MvxWpfSetup<TApplication> : MvxWpfSetup
+    public class MvxWpfSetup<TApplication> : MvxWpfSetup
         where TApplication : IMvxApplication, new()
     {
         protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();

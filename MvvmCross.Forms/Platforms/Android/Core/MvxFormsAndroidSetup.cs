@@ -22,7 +22,7 @@ using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platforms.Android.Core
 {
-    public abstract class MvxFormsAndroidSetup : MvxAndroidSetup
+    public abstract class MvxFormsAndroidSetup : MvxAppCompatSetup
     {
         private List<Assembly> _viewAssemblies;
         private Application _formsApplication;
@@ -113,7 +113,7 @@ namespace MvvmCross.Forms.Platforms.Android.Core
         }
     }
 
-    public abstract class MvxFormsAndroidSetup<TApplication, TFormsApplication> : MvxFormsAndroidSetup
+    public class MvxFormsAndroidSetup<TApplication, TFormsApplication> : MvxFormsAndroidSetup
         where TApplication : IMvxApplication, new()
         where TFormsApplication : Application, new()
     {

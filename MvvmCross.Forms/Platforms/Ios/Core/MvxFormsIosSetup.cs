@@ -101,7 +101,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
         }
     }
 
-    public abstract class MvxFormsIosSetup<TApplication, TFormsApplication> : MvxFormsIosSetup
+    public class MvxFormsIosSetup<TApplication, TFormsApplication> : MvxFormsIosSetup
         where TApplication : IMvxApplication, new()
         where TFormsApplication : Application, new()
     {

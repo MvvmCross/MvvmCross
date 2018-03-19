@@ -200,7 +200,7 @@ namespace MvvmCross.Platforms.Uap.Core
         }
     }
 
-    public abstract class MvxWindowsSetup<TApplication> : MvxWindowsSetup
+    public class MvxWindowsSetup<TApplication> : MvxWindowsSetup
          where TApplication : IMvxApplication, new()
     {
         protected override IEnumerable<Assembly> GetViewModelAssemblies()
