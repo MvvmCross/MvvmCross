@@ -42,7 +42,7 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public Application FormsApplication
+        public virtual Application FormsApplication
         {
             get
             {
