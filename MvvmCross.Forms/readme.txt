@@ -4,30 +4,29 @@ MvvmCross
 
 IMPORTANT: No nuget content files will be installed!
 
-Files to include yourself:
+Files to change yourself in every platform project:
 
 - Core
-* App.cs
+* Add App.cs
 
 - All app platforms
-* Setup.cs
-
-- Android
-* SplashScreen.cs
-* Styles.xml
-
-- iOS, MacOS, tvOS
-* AppDelegate.cs
+* Add Setup.cs
 
 - Android, iOS, tvOS, MacOS
-* LinkerPleaseInclude.cs
+* Add LinkerPleaseInclude.cs
+
+- Android
+* Extend MainActivity from MvxFormsAppCompatActivity. ( MainActivity : MvxFormsAppCompatActivity { } )
+* Add SplashScreen.cs if you want a splashscreen
+
+- iOS, MacOS, tvOS
+* Extend AppDelegate from MvxFormsAppDelegate. ( AppDelegate : MvxFormsAppDelegate { } )
 
 - UWP, WPF
-* App.xaml
-* App.xaml.cs
+* Extend App from MvxApplication. ( App : MvxApplication { } )
 
 Sample files are available at:
-https://github.com/MvvmCross/MvvmCross/blob/develop/ContentFiles/Forms/
+https://github.com/MvvmCross/MvvmCross/blob/develop/ContentFiles/
 
 Changelog:
 https://github.com/MvvmCross/MvvmCross/blob/develop/CHANGELOG.md
