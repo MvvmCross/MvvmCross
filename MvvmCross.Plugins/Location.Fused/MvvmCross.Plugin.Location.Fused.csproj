@@ -7,7 +7,7 @@
     <PackageId>MvvmCross.Plugin.Location.Fused</PackageId>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
     <PackageReference Include="Xamarin.GooglePlayServices.Location" Version="60.1142.0" />
     <None Include="Resources\*.cs" />
     <Compile Remove="Resources\*.cs" />
