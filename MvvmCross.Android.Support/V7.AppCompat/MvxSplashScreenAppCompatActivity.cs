@@ -5,8 +5,8 @@
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using MvvmCross.Platform.Android.Core;
-using MvvmCross.Platform.Android.Views;
+using MvvmCross.Platforms.Android.Core;
+using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
@@ -81,8 +81,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected virtual void TriggerFirstNavigate()
         {
-            var starter = Mvx.Resolve<IMvxAppStart>();
-            starter.Start();
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            if (!startup.IsStarted)
+                startup.Start();
         }
     }
 }

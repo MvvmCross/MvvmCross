@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using Moq;
  using MvvmCross.Core;
  using MvvmCross.Navigation;
- using MvvmCross.Tests;
+using MvvmCross.Presenters.Hints;
+using MvvmCross.Tests;
  using MvvmCross.UnitTest.Mocks.Dispatchers;
  using MvvmCross.UnitTest.Mocks.ViewModels;
  using MvvmCross.ViewModels;
-using MvvmCross.ViewModels.Hints;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Navigation

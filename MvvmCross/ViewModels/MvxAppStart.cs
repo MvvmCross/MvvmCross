@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Threading;
+using System.Threading.Tasks;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
@@ -14,21 +16,34 @@ namespace MvvmCross.ViewModels
     {
         protected readonly IMvxNavigationService NavigationService;
 
+        private int startHasCommenced;
+
         public MvxAppStart(IMvxNavigationService navigationService)
         {
             NavigationService = navigationService;
         }
-
-        public async void Start(object hint = null)
+        
+        public void Start(object hint = null)
         {
-            if (hint != null) {
+            // Check whether Start has commenced, and return if it has
+            if (Interlocked.CompareExchange(ref startHasCommenced, 1, 0) == 1)
+                return;
+
+            if (hint != null)
+            {
                 MvxLog.Instance.Trace("Hint ignored in default MvxAppStart");
             }
-            try {
-                await NavigationService.Navigate<TViewModel>();
-            } catch (System.Exception exception) {
+            
+            try 
+            {
+                NavigationService.Navigate<TViewModel>().GetAwaiter().GetResult();
+            } 
+            catch (System.Exception exception)
+            {
                 throw exception.MvxWrap("Problem navigating to ViewModel {0}", typeof(TViewModel).Name);
-            }
+            } 
         }
+
+        public bool IsStarted => startHasCommenced != 0;
     }
 }

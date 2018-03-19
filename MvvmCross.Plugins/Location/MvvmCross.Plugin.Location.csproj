@@ -8,65 +8,65 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Platform\**\*.cs" />
-    <None Include="Platform\**\*.cs" />
+    <Compile Remove="Platforms\**\*.cs" />
+    <None Include="Platforms\**\*.cs" />
     <None Include="Resources\*.cs" />
     <Compile Remove="Resources\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <Compile Include="Platform\Netstandard\**\*.cs" />
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
+    <Compile Include="Platforms\Netstandard\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
-    <Compile Include="Platform\Net\**\*.cs" />
-    <Compile Include="Platform\Wpf\**\*.cs" />
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
+    <Compile Include="Platforms\Net\**\*.cs" />
+    <Compile Include="Platforms\Wpf\**\*.cs" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Device" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">
-    <Compile Include="Platform\Shared\**\*.cs" />
+    <Compile Include="Platforms\Shared\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.16299' ">
-    <Compile Include="Platform\Windows-common\**\*.cs" />
-    <Compile Include="Platform\Uap\**\*.cs" />
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('uap')) ">
+    <Compile Include="Platforms\Windows-common\**\*.cs" />
+    <Compile Include="Platforms\Uap\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
-    <Compile Include="Platform\Apple-common\**\*.cs" />
-    <Compile Include="Platform\Ios\**\*.cs" />
-    <Compile Include="Platform\Xamarin-common\**\*.cs" />
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+    <Compile Include="Platforms\Apple-common\**\*.cs" />
+    <Compile Include="Platforms\Ios\**\*.cs" />
+    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.Mac20' ">
-    <Compile Include="Platform\Apple-common\**\*.cs" />
-    <Compile Include="Platform\Mac\**\*.cs" />
-    <Compile Include="Platform\Xamarin-common\**\*.cs" />
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.Mac')) ">
+    <Compile Include="Platforms\Apple-common\**\*.cs" />
+    <Compile Include="Platforms\Mac\**\*.cs" />
+    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.TVOS10' ">
-    <Compile Include="Platform\Apple-common\**\*.cs" />
-    <Compile Include="Platform\Tvos\**\*.cs" />
-    <Compile Include="Platform\Xamarin-common\**\*.cs" />
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.TVOS')) ">
+    <Compile Include="Platforms\Apple-common\**\*.cs" />
+    <Compile Include="Platforms\Tvos\**\*.cs" />
+    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'Xamarin.WatchOS10' ">
-    <Compile Include="Platform\Apple-common\**\*.cs" />
-    <Compile Include="Platform\Watchos\**\*.cs" />
-    <Compile Include="Platform\Xamarin-common\**\*.cs" />
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.WatchOS')) ">
+    <Compile Include="Platforms\Apple-common\**\*.cs" />
+    <Compile Include="Platforms\Watchos\**\*.cs" />
+    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid80' ">
-    <Compile Include="Platform\Android\**\*.cs" />
-    <Compile Include="Platform\Xamarin-common\**\*.cs" />
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+    <Compile Include="Platforms\Android\**\*.cs" />
+    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'tizen40' ">
-    <Compile Include="Platform\Tizen\**\*.cs" />
-    <Compile Include="Platform\Xamarin-common\**\*.cs" />
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">
+    <Compile Include="Platforms\Tizen\**\*.cs" />
+    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
     <PackageReference Include="Tizen.NET" Version="4.0.0" />
   </ItemGroup>
 

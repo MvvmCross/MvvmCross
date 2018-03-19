@@ -12,10 +12,11 @@ var outputDir = new DirectoryPath("./artifacts");
 var nuspecDir = new DirectoryPath("./nuspec");
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
+var verbosityArg = Argument("verbosity", "Minimal");
+var verbosity = Verbosity.Minimal;
 
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 GitVersion versionInfo = null;
-
 
 Setup(context => {
     versionInfo = context.GitVersion(new GitVersionSettings {
@@ -41,6 +42,8 @@ Setup(context => {
 
     Debug("Will push NuGet packages {0}", 
         ShouldPushNugetPackages(versionInfo.BranchName));
+
+    verbosity = (Verbosity) Enum.Parse(typeof(Verbosity), verbosityArg, true);
 });
 
 Task("Clean").Does(() =>
@@ -65,8 +68,11 @@ Task("ResolveBuildTools")
 
 Task("Restore")
     .IsDependentOn("ResolveBuildTools")
-    .Does(() => {
-    MSBuild(sln, settings => settings.WithTarget("Restore"));
+    .Does(() => 
+{
+    var settings = GetDefaultBuildSettings()
+        .WithTarget("Restore");
+    MSBuild(sln, settings);
 });
 
 Task("PatchBuildProps")
@@ -83,15 +89,7 @@ Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>  {
 
-    var settings = new MSBuildSettings 
-    {
-        Configuration = configuration,
-        ToolPath = msBuildPath,
-        Verbosity = Verbosity.Minimal,
-        ArgumentCustomization = args => args.Append("/m")
-    };
-
-    settings = settings
+    var settings = GetDefaultBuildSettings()
         .WithProperty("DebugSymbols", "True")
         .WithProperty("DebugType", "Embedded")
         .WithProperty("Version", versionInfo.SemVer)
@@ -167,7 +165,8 @@ Task("PublishPackages")
 
 Task("UploadAppVeyorArtifact")
     .WithCriteria(() => isRunningOnAppVeyor)
-    .Does(() => {
+    .Does(() => 
+{
 
     Information("Artifacts Dir: {0}", outputDir.FullPath);
 
@@ -179,7 +178,7 @@ Task("UploadAppVeyorArtifact")
     foreach(var file in artifacts) {
         Information("Uploading {0}", file.FullPath);
 
-        if (file.GetExtension() == "nupkg")
+        if (file.GetExtension().Contains("nupkg"))
             uploadSettings.ArtifactType = AppVeyorUploadArtifactType.NuGetPackage;
         else
             uploadSettings.ArtifactType = AppVeyorUploadArtifactType.Auto;
@@ -198,6 +197,19 @@ Task("Default")
 });
 
 RunTarget(target);
+
+MSBuildSettings GetDefaultBuildSettings()
+{
+    var settings = new MSBuildSettings 
+    {
+        Configuration = configuration,
+        ToolPath = msBuildPath,
+        Verbosity = verbosity,
+        ArgumentCustomization = args => args.Append("/m")
+    };
+
+    return settings;
+}
 
 bool ShouldPushNugetPackages(string branchName)
 {

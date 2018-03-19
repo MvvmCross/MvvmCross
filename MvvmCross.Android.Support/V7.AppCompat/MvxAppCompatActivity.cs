@@ -10,9 +10,9 @@ using Android.Util;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
-using MvvmCross.Platform.Android.Binding.BindingContext;
-using MvvmCross.Platform.Android.Binding.Views;
-using MvvmCross.Platform.Android.Views;
+using MvvmCross.Platforms.Android.Binding.BindingContext;
+using MvvmCross.Platforms.Android.Binding.Views;
+using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat

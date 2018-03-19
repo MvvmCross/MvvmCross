@@ -7,8 +7,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Droid.Support.Design;
-using MvvmCross.Platform.Android.Binding.BindingContext;
-using MvvmCross.Platform.Android.Presenters.Attributes;
+using MvvmCross.Platforms.Android.Binding.BindingContext;
+using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
 
 namespace Playground.Forms.Droid.Views

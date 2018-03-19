@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Support.V7.Widget;
 using Android.Util;
 using MvvmCross.Binding.Attributes;
-using MvvmCross.Platform.Android.Binding.Views;
+using MvvmCross.Platforms.Android.Binding.Views;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
 {

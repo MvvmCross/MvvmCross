@@ -11,7 +11,7 @@ using Android.Util;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
-using MvvmCross.Platform.Android.Binding.Views;
+using MvvmCross.Platforms.Android.Binding.Views;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
@@ -54,6 +54,9 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
             adapter.ItemTemplateSelector = itemTemplateSelector;
             Adapter = adapter;
+
+            if (itemTemplateId == 0)
+                itemTemplateId = global::Android.Resource.Layout.SimpleListItem1;
 
             if (itemTemplateSelector.GetType() == typeof(MvxDefaultTemplateSelector))
                 ItemTemplateId = itemTemplateId;

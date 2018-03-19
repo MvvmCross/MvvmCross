@@ -80,7 +80,7 @@ The specific jobs that your `App` should do during its `Initialize` are:
 A default `App` supplied via NuGet, looks like:
 
 ```c#
-using MvvmCross.Platform.Ioc;
+using MvvmCross.Ioc;
 
 namespace MyName.Core
 {
