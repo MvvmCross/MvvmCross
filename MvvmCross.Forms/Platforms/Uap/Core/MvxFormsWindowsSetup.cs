@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -86,7 +86,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
         protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsWindowsBindingBuilder();
     }
 
-    public class MvxFormsWindowsSetup<TApplication, TFormsApplication> : MvxFormsWindowsSetup
+    public abstract class MvxFormsWindowsSetup<TApplication, TFormsApplication> : MvxFormsWindowsSetup
         where TApplication : IMvxApplication, new()
         where TFormsApplication : Application, new()        
     {

@@ -113,7 +113,7 @@ namespace MvvmCross.Forms.Platforms.Android.Core
         }
     }
 
-    public class MvxFormsAndroidSetup<TApplication, TFormsApplication> : MvxFormsAndroidSetup
+    public abstract class MvxFormsAndroidSetup<TApplication, TFormsApplication> : MvxFormsAndroidSetup
         where TApplication : IMvxApplication, new()
         where TFormsApplication : Application, new()
     {

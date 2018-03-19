@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -26,19 +26,21 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
             }
         }
 
-        NSWindow window;
-        public MvxFormsApplicationDelegate()
-        {
-            var style = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
-
-            var rect = new CoreGraphics.CGRect(200, 1000, 1024, 768);
-            window = new NSWindow(rect, style, NSBackingStore.Buffered, false);
-            window.TitleVisibility = NSWindowTitleVisibility.Hidden;
-        }
-
+        private NSWindow window;
         public override NSWindow MainWindow
         {
-            get { return window; }
+            get {
+                if(window == null)
+                {
+                    var style = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
+
+                    var rect = new CoreGraphics.CGRect(200, 1000, 1024, 768);
+                    window = new NSWindow(rect, style, NSBackingStore.Buffered, false);
+                    window.TitleVisibility = NSWindowTitleVisibility.Hidden;
+                }
+                return window;
+            }
+            set { window = value; }
         }
 
         public override void DidFinishLaunching(Foundation.NSNotification notification)
