@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -19,14 +19,19 @@ namespace MvvmCross.Platforms.Mac.Core
             }
         }
 
-        //TODO: Maybe make abstract
+        private NSWindow window;
         public virtual NSWindow MainWindow
         {
             get {
-                var style = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
-                var rect = new CoreGraphics.CGRect(200, 1000, 1024, 768);
-                return new NSWindow(rect, style, NSBackingStore.Buffered, false);
+                if (window == null)
+                {
+                    var style = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
+                    var rect = new CoreGraphics.CGRect(200, 1000, 1024, 768);
+                    window = new NSWindow(rect, style, NSBackingStore.Buffered, false);
+                }
+                return window;
             }
+            set { window = value; }
         }
 
         public override void DidFinishLaunching(Foundation.NSNotification notification)
