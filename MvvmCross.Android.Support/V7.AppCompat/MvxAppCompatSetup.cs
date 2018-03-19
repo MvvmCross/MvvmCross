@@ -47,7 +47,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
     }
 
-    public abstract class MvxAppCompatSetup<TApplication> : MvxAppCompatSetup
+    public class MvxAppCompatSetup<TApplication> : MvxAppCompatSetup
         where TApplication : IMvxApplication, new()
     {
         protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();

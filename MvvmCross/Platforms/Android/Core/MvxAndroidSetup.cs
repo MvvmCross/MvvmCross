@@ -264,7 +264,7 @@ namespace MvvmCross.Platforms.Android.Core
         }
     }
 
-    public abstract class MvxAndroidSetup<TApplication> : MvxAndroidSetup
+    public class MvxAndroidSetup<TApplication> : MvxAndroidSetup
         where TApplication : IMvxApplication, new()
     {
         protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
