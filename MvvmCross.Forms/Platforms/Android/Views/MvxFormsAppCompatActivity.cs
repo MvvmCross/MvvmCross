@@ -169,6 +169,19 @@ namespace MvvmCross.Forms.Platforms.Android.Views
             ViewModel?.ViewDisappeared();
         }
 
+        public override void OnBackPressed()
+        {
+            var page = Xamarin.Forms.Application.Current.MainPage;
+            if (page == null || (page?.Navigation?.NavigationStack?.Count <= 1 && page?.Navigation?.ModalStack?.Count == 0))
+            {
+                MoveTaskToBack(true);
+            }
+            else
+            {
+                base.OnBackPressed();
+            }
+        }
+
         public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
         {
             var view = MvxAppCompatActivityHelper.OnCreateView(parent, name, context, attrs);
