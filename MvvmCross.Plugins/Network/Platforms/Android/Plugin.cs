@@ -8,7 +8,7 @@ namespace MvvmCross.Plugin.Network.Platforms.Android
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public class Plugin : BasePlugin, IMvxPlugin
+    public class Plugin : BasePlugin
     {
         public override void Load()
         {

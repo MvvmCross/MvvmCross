@@ -5,7 +5,7 @@
 namespace MvvmCross.Plugin.Network.Platforms.Uap
 {
     [MvxPlugin]
-    public class Plugin : BasePlugin, IMvxPlugin
+    public class Plugin : BasePlugin
     {
         public override void Load()
         {
