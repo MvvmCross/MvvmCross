@@ -6,11 +6,13 @@ using MvvmCross.UI;
 
 namespace MvvmCross.Plugin.Visibility.Platforms.Console
 {
+    [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public class Plugin : IMvxPlugin
+    public class Plugin : BasePlugin
     {
-        public void Load()
+        public override void Load()
         {
+            base.Load();
             Mvx.RegisterSingleton<IMvxNativeVisibility>(new MvxConsoleVisibility());
         }
     }

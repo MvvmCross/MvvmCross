@@ -6,11 +6,9 @@ using MvvmCross.Converters;
 
 namespace MvvmCross.Plugin.Color
 {
-    [MvxPlugin]
-    [Preserve(AllMembers = true)]
-    public sealed class Plugin : IMvxPlugin
+    public abstract class BasePlugin : IMvxPlugin
     {
-        public void Load()
+        public virtual void Load()
         {
             Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
         }
