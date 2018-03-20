@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Getting started with plugin development
+title: Plugins development
 category: Plugins
 ---
 
@@ -14,4 +14,4 @@ That's all! In your Plugin's `Load` method you should include all IoC registrati
 
 If your service has platform independent and platform specific services that need to be registered, you can have multiple classes annotated with the `MvxPluginAttribute`. There's no restriction on how many classes can have the attribute on a given assembly.
 
-Please note that the `Load` method should care *exclusively* about registering the appropriate classes and initializing the adequate services. It should not hold state nor try to be smart about initialization/caching; This is the job of the `IMvxPluginManager`. It's very important to follow this rule because, when testing code, one can reliably use the `IMvxPluginManager` methods to reload whatever plugins the tested class depends on (using `forceLoad = true`).
+Please note that the `Load` method should care *exclusively* about registering the appropriate classes and initializing the adequate services. It should not hold any state nor try to be smart about initialization/caching; This is the job of the `IMvxPluginManager`. It's very important to follow this rule because when testing code, one can reliably use the `IMvxPluginManager` methods to reload whatever plugins the tested class depends on (using `forceLoad = true`).
