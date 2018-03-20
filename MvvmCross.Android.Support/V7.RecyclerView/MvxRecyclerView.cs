@@ -50,7 +50,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 SetLayoutManager(new MvxGuardedLinearLayoutManager(context));
 
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
-            var itemTemplateSelector = MvxRecyclerViewAttributeExtensions.BuildItemTemplateSelector(context, attrs);
+            var itemTemplateSelector = MvxRecyclerViewAttributeExtensions.BuildItemTemplateSelector(context, attrs, itemTemplateId);
 
             adapter.ItemTemplateSelector = itemTemplateSelector;
             Adapter = adapter;
