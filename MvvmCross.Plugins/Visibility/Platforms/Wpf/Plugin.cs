@@ -7,7 +7,7 @@ using MvvmCross.UI;
 namespace MvvmCross.Plugin.Visibility.Platforms.Wpf
 {
     [MvxPlugin]
-    public class Plugin : BasePlugin, IMvxPlugin
+    public class Plugin : BasePlugin
     {
         public override void Load()
         {

@@ -10,7 +10,7 @@ namespace MvvmCross.Plugin.Color.Platforms.Android
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public sealed class Plugin : BasePlugin, IMvxPlugin
+    public sealed class Plugin : BasePlugin
     {
         public override void Load()
         {
