@@ -44,7 +44,7 @@ namespace MvvmCross.Forms.Platforms.Android.Core
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        public Application FormsApplication
+        public virtual Application FormsApplication
         {
             get
             {
