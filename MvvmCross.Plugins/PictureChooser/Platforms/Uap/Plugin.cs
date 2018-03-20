@@ -4,10 +4,9 @@
 
 using MvvmCross.Converters;
 
-namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
+namespace MvvmCross.Plugin.PictureChooser.Platforms.Uap
 {
     [MvxPlugin]
-    [Preserve(AllMembers = true)]
     public class Plugin : IMvxPlugin
     {
         public void Load()
