@@ -8,10 +8,11 @@ namespace MvvmCross.Plugin.Visibility.Platforms.Ios
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public class Plugin : IMvxPlugin
+    public class Plugin : BasePlugin
     {
-        public void Load()
+        public override void Load()
         {
+            base.Load();
             Mvx.RegisterSingleton<IMvxNativeVisibility>(new MvxIosVisibility());
         }
     }

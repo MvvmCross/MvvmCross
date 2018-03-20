@@ -4,7 +4,6 @@
 
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
-using MvvmCross.Logging;
 
 namespace MvvmCross.Plugin.Json
 {

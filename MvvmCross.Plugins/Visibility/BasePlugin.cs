@@ -7,9 +7,9 @@ using MvvmCross.Converters;
 
 namespace MvvmCross.Plugin.Visibility
 {
-    public class PluginLoader : IMvxPlugin
+    public abstract class BasePlugin : IMvxPlugin
     {
-        public void Load()
+        public virtual void Load()
         {
             Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
         }
