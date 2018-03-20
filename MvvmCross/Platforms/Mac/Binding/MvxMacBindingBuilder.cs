@@ -137,9 +137,6 @@ namespace MvvmCross.Platforms.Mac.Binding
 
             //registry.AddOrOverwrite(typeof(MvxCollectionViewSource), "ItemsSource");
             //registry.AddOrOverwrite(typeof(MvxTableViewSource), "ItemsSource");
-            //registry.AddOrOverwrite(typeof(MvxImageView), "ImageUrl");
-            //registry.AddOrOverwrite(typeof(IMvxImageHelper<UIImage>), "ImageUrl");
-            //registry.AddOrOverwrite(typeof(MvxImageViewLoader), "ImageUrl");
             _fillBindingNamesAction?.Invoke(registry);
         }
     }

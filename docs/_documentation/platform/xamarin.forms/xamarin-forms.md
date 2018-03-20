@@ -204,7 +204,3 @@ You can use the MvvmCross binding syntax just like you would do in a native Xama
 # MasterDetail support
 
 Use the MasterDetail presenters to add support for it to your app.
-
-# MvxImageView
-
-Use the `MvxImageViewRenderer` for MvvmCross.Forms to have a compatible ImageView Renderer.
