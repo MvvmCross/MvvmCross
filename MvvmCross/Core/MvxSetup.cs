@@ -21,10 +21,21 @@ namespace MvvmCross.Core
 {
     public abstract class MvxSetup : IMvxSetup
     {
-        protected static Type RegisteredSetupType { get; set; }
+        private class SetupFactory<TMvxSetup> where TMvxSetup : MvxSetup, new()
+        {
+            public IMvxSetup Create()
+            {
+                return new TMvxSetup();
+            }
+        }
+
+        protected static Func<IMvxSetup> SetupCreator { get; set; }
         public static void RegisterSetupType<TMvxSetup>() where TMvxSetup : MvxSetup, new()
         {
-            RegisteredSetupType = typeof(TMvxSetup);
+            // Avoid creating the instance of Setup right now, instead
+            // take a reference to the type in a way that we can avoid
+            // using reflection to create the instance.
+            SetupCreator = (new SetupFactory<TMvxSetup>()).Create;
         }
 
         private static IMvxSetup instance;
@@ -33,9 +44,9 @@ namespace MvvmCross.Core
             get
             {
                 if (instance != null) return instance;
-                if (RegisteredSetupType != null)
+                if (SetupCreator != null)
                 {
-                    instance = Activator.CreateInstance(RegisteredSetupType) as MvxSetup;
+                    instance = SetupCreator();
                 }
                 else
                 {
