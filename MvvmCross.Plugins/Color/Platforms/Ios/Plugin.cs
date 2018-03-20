@@ -1,18 +1,18 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Plugin;
 using MvvmCross.UI;
 
 namespace MvvmCross.Plugin.Color.Platforms.Ios
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public class Plugin : IMvxPlugin
+    public class Plugin : BasePlugin, IMvxPlugin
     {
-        public void Load()
+        public override void Load()
         {
+            base.Load();
             Mvx.RegisterSingleton<IMvxNativeColor>(new MvxIosColor());
         }
     }

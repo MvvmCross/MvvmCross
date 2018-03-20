@@ -7,10 +7,11 @@ using MvvmCross.UI;
 namespace MvvmCross.Plugin.Visibility.Platforms.Wpf
 {
     [MvxPlugin]
-    public class Plugin : IMvxPlugin
+    public class Plugin : BasePlugin, IMvxPlugin
     {
-        public void Load()
+        public override void Load()
         {
+            base.Load();
             Mvx.RegisterSingleton<IMvxNativeVisibility>(new MvxWpfVisibility());
         }
     }
