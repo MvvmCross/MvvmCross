@@ -89,9 +89,16 @@ All plugin namespaces have changed, but you shouldn't worry about it unless you 
 - The `Plugins` keyword is now `Plugin`.
 - `MvvmCross.Plugins.{PluginName}.{Platform}` is now `MvvmCross.Plugin.{PluginName}.Platform.{Platform}`
 - `MvvmCross.Platform.Plugins` namespace is now `MvvmCross.Plugin`.
-- Android color plugin implementation: `ToAndroidColor` was renamed to `ToNativeColor`.
 
 ## Breaking changes
+
+### Plugins
+
+#### Color
+- On Android, the method `ToAndroidColor` was renamed to `ToNativeColor` in order to match all other platforms.
+
+#### DownloadCache
+- `DownloadCache` was removed in v6.0. Reason being is that there were multiple ancient issues around it and its implementation wasn't as clean as we would have liked. There are also multiple more efficient alternatives, like [FFImageLoading](https://github.com/luberda-molinet/FFImageLoading/wiki/MvvmCross).
 
 #### ViewPresenters 
 - `IMvxOverridePresentationAttribute.PresentationAttribute` now takes a `MvxViewModelRequest` as parameter. 
@@ -104,16 +111,10 @@ If you're using a custom ViewPresenter that extends the default provided by Mvvm
 - On iOS, the method `PresentModalViewController` was renamed to `ShowModalViewController`.
 
 #### Navigation
-`IMvxNavigationService.ChangePresentation` has been marked async (the method now returns a `Task<bool>`).
+- `IMvxNavigationService.ChangePresentation` is now an async method (the method now returns a `Task<bool>`). It was the only "sync" method on IMvxNavigationService, which was odd.
 
 #### Logging
-
 `IMvxLog` has a new method: `bool IsLogLevelEnabled(MvxLogLevel logLevel)`.
 
-#### Plugins removed
-
-`DownloadCache` was removed in v6.0. If you need an alternative, take a look at [FFImageLoading](https://github.com/luberda-molinet/FFImageLoading/wiki/MvvmCross)
-
 #### Android
-
 - `MvxRelativeLayout`, `MvxFrameLayout` and `MvxTableLayout` were removed as they were memory inefficient (nothing we can do to improve that).
