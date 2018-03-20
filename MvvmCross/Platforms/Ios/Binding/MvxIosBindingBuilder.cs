@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -262,14 +262,11 @@ namespace MvvmCross.Platforms.Ios.Binding
             registry.AddOrOverwrite(typeof(UILabel), MvxIosPropertyBinding.UILabel_Text);
             registry.AddOrOverwrite(typeof(MvxCollectionViewSource), nameof(MvxCollectionViewSource.ItemsSource));
             registry.AddOrOverwrite(typeof(MvxTableViewSource), nameof(MvxTableViewSource.ItemsSource));
-            registry.AddOrOverwrite(typeof(MvxImageView), nameof(MvxImageView.ImageUrl));
             registry.AddOrOverwrite(typeof(UIImageView), nameof(UIImageView.Image));
             registry.AddOrOverwrite(typeof(UIDatePicker), MvxIosPropertyBinding.UIDatePicker_Date);
             registry.AddOrOverwrite(typeof(UISlider), MvxIosPropertyBinding.UISlider_Value);
             registry.AddOrOverwrite(typeof(UISwitch), MvxIosPropertyBinding.UISwitch_On);
             registry.AddOrOverwrite(typeof(UIProgressView), nameof(UIProgressView.Progress));
-            registry.AddOrOverwrite(typeof(IMvxImageHelper<UIImage>), nameof(IMvxImageHelper<UIImage>.ImageUrl));
-            registry.AddOrOverwrite(typeof(MvxImageViewLoader), nameof(MvxImageViewLoader.ImageUrl));
             registry.AddOrOverwrite(typeof(UISegmentedControl), MvxIosPropertyBinding.UISegmentedControl_SelectedSegment);
             registry.AddOrOverwrite(typeof(UIActivityIndicatorView), MvxIosPropertyBinding.UIActivityIndicatorView_Hidden);
 
