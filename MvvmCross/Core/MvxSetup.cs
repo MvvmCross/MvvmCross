@@ -21,21 +21,13 @@ namespace MvvmCross.Core
 {
     public abstract class MvxSetup : IMvxSetup
     {
-        private class SetupFactory<TMvxSetup> where TMvxSetup : MvxSetup, new()
-        {
-            public IMvxSetup Create()
-            {
-                return new TMvxSetup();
-            }
-        }
-
         protected static Func<IMvxSetup> SetupCreator { get; set; }
         public static void RegisterSetupType<TMvxSetup>() where TMvxSetup : MvxSetup, new()
         {
             // Avoid creating the instance of Setup right now, instead
             // take a reference to the type in a way that we can avoid
             // using reflection to create the instance.
-            SetupCreator = (new SetupFactory<TMvxSetup>()).Create;
+            SetupCreator = () => new TMvxSetup();
         }
 
         private static IMvxSetup instance;
