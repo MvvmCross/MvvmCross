@@ -4,18 +4,15 @@
 
 using MvvmCross.Plugin.Network.Platforms.Wpf.Reachability;
 using MvvmCross.Plugin.Network.Reachability;
-using MvvmCross.Plugin.Network.Rest;
 
 namespace MvvmCross.Plugin.Network.Platforms.Wpf
 {
     [MvxPlugin]
-    public class Plugin : IMvxPlugin
+    public class Plugin : BasePlugin, IMvxPlugin
     {
-        public void Load()
+        public override void Load()
         {
             Mvx.RegisterType<IMvxReachability, MvxWpfReachability>();
-            Mvx.RegisterType<IMvxRestClient, MvxJsonRestClient>();
-            Mvx.RegisterType<IMvxJsonRestClient, MvxJsonRestClient>();
         }
     }
 }
