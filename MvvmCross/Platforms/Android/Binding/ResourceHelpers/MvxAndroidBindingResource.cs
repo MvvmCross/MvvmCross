@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -43,13 +43,7 @@ namespace MvvmCross.Platforms.Android.Binding.ResourceHelpers
                     (int)SafeGetFieldValue(styleable, "MvxBinding_MvxBind");
                 BindingLangId =
                     (int)SafeGetFieldValue(styleable, "MvxBinding_MvxLang");
-
-                ImageViewStylableGroupId =
-                    (int[])SafeGetFieldValue(styleable, "MvxImageView", new int[0]);
-                SourceBindId =
-                    (int)
-                    SafeGetFieldValue(styleable, "MvxImageView_MvxSource");
-
+               
                 ListViewStylableGroupId =
                     (int[])SafeGetFieldValue(styleable, "MvxListView");
                 ListItemTemplateId =
@@ -100,10 +94,7 @@ namespace MvvmCross.Platforms.Android.Binding.ResourceHelpers
 
         public int[] ControlStylableGroupId { get; }
         public int TemplateId { get; }
-
-        public int[] ImageViewStylableGroupId { get; }
-        public int SourceBindId { get; }
-
+        
         public int[] ListViewStylableGroupId { get; }
         public int ListItemTemplateId { get; }
         public int DropDownListItemTemplateId { get; }
