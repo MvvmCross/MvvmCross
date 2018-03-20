@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -14,31 +14,25 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
     public class MvxStandardTableViewCell
         : MvxTableViewCell
     {
-        private MvxImageViewLoader _imageLoader;
-
         public MvxStandardTableViewCell(IntPtr handle)
             : this("TitleText" /* default binding is ToString() on the passed in item */, handle)
         {
-            InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(string bindingText, IntPtr handle)
             : base(bindingText, handle)
         {
-            InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions, IntPtr handle)
             : base(bindingDescriptions, handle)
         {
-            InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(string bindingText, UITableViewCellStyle cellStyle, NSString cellIdentifier,
                                         UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingText, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            InitializeImageLoader();
         }
 
         public MvxStandardTableViewCell(IEnumerable<MvxBindingDescription> bindingDescriptions,
@@ -46,16 +40,8 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
                                         UITableViewCellAccessory tableViewCellAccessory = UITableViewCellAccessory.None)
             : base(bindingDescriptions, cellStyle, cellIdentifier, tableViewCellAccessory)
         {
-            InitializeImageLoader();
         }
-
-        private void InitializeImageLoader()
-        {
-            _imageLoader = new MvxImageViewLoader(() => ImageView, SetNeedsLayout);
-        }
-
-        public MvxImageViewLoader ImageLoader => _imageLoader;
-
+        
         public string TitleText
         {
             get { return TextLabel.Text; }
@@ -67,13 +53,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             get { return DetailTextLabel.Text; }
             set { DetailTextLabel.Text = value; }
         }
-
-        public string ImageUrl
-        {
-            get { return _imageLoader.ImageUrl; }
-            set { _imageLoader.ImageUrl = value; }
-        }
-
+       
         public ICommand SelectedCommand { get; set; }
 
         private bool _isSelected;
@@ -90,15 +70,6 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             {
                 SelectedCommand?.Execute(null);
             }
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _imageLoader.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
