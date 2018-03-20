@@ -25,10 +25,5 @@ namespace Playground.Forms.Droid
             ToolbarResource = Resource.Layout.Toolbar;
             base.OnCreate(bundle);
         }
-
-        public override void OnBackPressed()
-        {
-            MoveTaskToBack(false);
-        }
     }
 }
