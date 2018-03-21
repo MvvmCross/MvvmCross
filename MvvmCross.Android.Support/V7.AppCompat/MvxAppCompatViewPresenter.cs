@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
@@ -28,11 +27,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     {
         public MvxAppCompatViewPresenter(IEnumerable<Assembly> androidViewAssemblies) : base(androidViewAssemblies)
         {
-
         }
-
-        protected new ConditionalWeakTable<IMvxViewModel, DialogFragment> Dialogs { get; } = new ConditionalWeakTable<IMvxViewModel, DialogFragment>();
-
+        
         protected new FragmentManager CurrentFragmentManager
         {
             get
@@ -370,9 +366,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
 
             dialog.Cancelable = attribute.Cancelable;
-
-            Dialogs.Add(mvxFragmentView.ViewModel, dialog);
-
+            
             var ft = CurrentFragmentManager.BeginTransaction();
 
             OnBeforeFragmentChanging(ft, dialog, attribute);
@@ -468,12 +462,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         #region Close implementations
         protected override bool CloseFragmentDialog(IMvxViewModel viewModel, MvxDialogFragmentPresentationAttribute attribute)
         {
-            if (Dialogs.TryGetValue(viewModel, out DialogFragment dialog))
+            string tag = FragmentJavaName(attribute.ViewType);
+            var toClose = CurrentFragmentManager.FindFragmentByTag(tag);
+            if(toClose != null && toClose is DialogFragment dialog)
             {
                 dialog.DismissAllowingStateLoss();
-                dialog.Dispose();
-                Dialogs.Remove(viewModel);
-
                 return true;
             }
             return false;
