@@ -1,9 +1,10 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using Android.App;
 using Android.Views;
+using MvvmCross.Core;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
@@ -100,15 +101,16 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             if (fragment == null)
                 throw new MvxException($"{nameof(EnsureSetupInitialized)} called on an {nameof(IMvxFragmentView)} which is not an Android Fragment: {fragmentView}");
 
-            var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(fragment.Activity.ApplicationContext);
-            setupSingleton.EnsureInitialized();
+            var setup = MvxSetupSingleton.EnsureSingletonAvailable<MvxAndroidSetupSingleton>();
+            setup.EnsureInitialized(fragment.Activity.ApplicationContext);
         }
 
         public static TFragment FindFragmentById<TFragment>(this MvxActivity activity, int resourceId)
             where TFragment : Fragment
         {
             var fragment = activity.FragmentManager.FindFragmentById(resourceId);
-            if (fragment == null) {
+            if (fragment == null)
+            {
                 MvxLog.Instance.Warn("Failed to find fragment id {0} in {1}", resourceId, activity.GetType().Name);
                 return default(TFragment);
             }
@@ -120,7 +122,8 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             where TFragment : Fragment
         {
             var fragment = activity.FragmentManager.FindFragmentByTag(tag);
-            if (fragment == null) {
+            if (fragment == null)
+            {
                 MvxLog.Instance.Warn("Failed to find fragment tag {0} in {1}", tag, activity.GetType().Name);
                 return default(TFragment);
             }
@@ -130,7 +133,8 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
 
         private static TFragment SafeCast<TFragment>(Fragment fragment) where TFragment : Fragment
         {
-            if (!(fragment is TFragment)) {
+            if (!(fragment is TFragment))
+            {
                 MvxLog.Instance.Warn("Fragment type mismatch got {0} but expected {1}", fragment.GetType().FullName,
                             typeof(TFragment).FullName);
                 return default(TFragment);
@@ -143,7 +147,8 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
         {
             var loader = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(request, savedState);
-            if (viewModel == null) {
+            if (viewModel == null)
+            {
                 MvxLog.Instance.Warn("ViewModel not loaded for {0}", request.ViewModelType.FullName);
                 return;
             }

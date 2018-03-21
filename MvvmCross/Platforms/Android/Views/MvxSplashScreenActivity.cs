@@ -1,10 +1,11 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using MvvmCross.Core;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.ViewModels;
 
@@ -12,7 +13,7 @@ namespace MvvmCross.Platforms.Android.Views
 {
     [Register("mvvmcross.platforms.android.views.MvxSplashScreenActivity")]
     public abstract class MvxSplashScreenActivity
-        : MvxActivity, IMvxAndroidSplashScreenActivity
+        : MvxActivity, IMvxSplashScreen
     {
         private const int NoContent = 0;
 
@@ -38,8 +39,8 @@ namespace MvvmCross.Platforms.Android.Views
         {
             RequestWindowFeatures();
 
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.InitializeFromSplashScreen(this);
+            var setup = MvxSetupSingleton.EnsureSingletonAvailable<MvxAndroidSetupSingleton>();
+            setup.InitializeFromSplashScreen(this, ApplicationContext);
 
             base.OnCreate(bundle);
 
@@ -58,14 +59,14 @@ namespace MvvmCross.Platforms.Android.Views
         {
             base.OnResume();
             _isResumed = true;
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.InitializeFromSplashScreen(this);
+            var setup = MvxSetupSingleton.EnsureSingletonAvailable<MvxAndroidSetupSingleton>();
+            setup.InitializeFromSplashScreen(this, ApplicationContext);
         }
 
         protected override void OnPause()
         {
             _isResumed = false;
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            var setup = MvxSetupSingleton.EnsureSingletonAvailable<MvxAndroidSetupSingleton>();
             setup.RemoveSplashScreen(this);
             base.OnPause();
         }
@@ -81,7 +82,7 @@ namespace MvvmCross.Platforms.Android.Views
         protected virtual void TriggerFirstNavigate()
         {
             var startup = Mvx.Resolve<IMvxAppStart>();
-            if(!startup.IsStarted)
+            if (!startup.IsStarted)
                 startup.Start();
         }
     }
