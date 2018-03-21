@@ -118,3 +118,26 @@ If you're using a custom ViewPresenter that extends the default provided by Mvvm
 
 #### Android
 - `MvxRelativeLayout`, `MvxFrameLayout` and `MvxTableLayout` were removed as they were memory inefficient (nothing we can do to improve that).
+
+### MvvmCross 5.x
+
+> If you are using a version of MvvmCross less than Mvx 6.0.0, you will need to add the bootstrap file yourself.
+The bootstrap file is available [here](https://github.com/MvvmCross/MvvmCross/blob/develop/nuspec/BootstrapContent/WebBrowserPluginBootstrap.cs.pp)
+
+An example bootstrap class would look like:
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Text;
+using MvvmCross.Platform.Plugins;
+
+namespace my.namespace.iOS.Bootstrap
+{
+    public class WebBrowserPluginBootstrap
+        : MvxPluginBootstrapAction<MvvmCross.Plugins.WebBrowser.PluginLoader>
+    {
+    }
+}
+```
+
