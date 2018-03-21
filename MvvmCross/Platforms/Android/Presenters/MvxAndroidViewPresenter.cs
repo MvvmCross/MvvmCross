@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,7 +13,6 @@ using Android.OS;
 using Java.Lang;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Platforms.Android;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Platforms.Android.Views;
@@ -32,9 +31,7 @@ namespace MvvmCross.Platforms.Android.Presenters
         protected MvxViewModelRequest _pendingRequest;
 
         protected virtual FragmentManager CurrentFragmentManager => CurrentActivity.FragmentManager;
-
-        protected virtual ConditionalWeakTable<IMvxViewModel, DialogFragment> Dialogs { get; } = new ConditionalWeakTable<IMvxViewModel, DialogFragment>();
-
+        
         private IMvxAndroidCurrentTopActivity _mvxAndroidCurrentTopActivity;
         protected virtual Activity CurrentActivity
         {
@@ -428,8 +425,6 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             dialog.Cancelable = attribute.Cancelable;
 
-            Dialogs.Add(mvxFragmentView.ViewModel, dialog);
-
             var ft = CurrentFragmentManager.BeginTransaction();
 
             OnBeforeFragmentChanging(ft, attribute);
@@ -470,12 +465,11 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual bool CloseFragmentDialog(IMvxViewModel viewModel, MvxDialogFragmentPresentationAttribute attribute)
         {
-            if (Dialogs.TryGetValue(viewModel, out DialogFragment dialog))
+            string tag = FragmentJavaName(attribute.ViewType);
+            var toClose = CurrentFragmentManager.FindFragmentByTag(tag);
+            if (toClose != null && toClose is DialogFragment dialog)
             {
                 dialog.DismissAllowingStateLoss();
-                dialog.Dispose();
-                Dialogs.Remove(viewModel);
-
                 return true;
             }
             return false;
