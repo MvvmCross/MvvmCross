@@ -144,9 +144,8 @@ namespace MvvmCross.Platforms.Android.Views
             }
 
             var activity = androidView.ToActivity();
-            var setup = MvxSetupSingleton.EnsureSingletonAvailable<MvxAndroidSetupSingleton>();
-            setup.EnsureInitialized(activity.ApplicationContext);
-
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(activity.ApplicationContext);
+            setup.EnsureInitialized();
         }
     }
 }

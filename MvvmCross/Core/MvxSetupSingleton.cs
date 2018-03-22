@@ -17,9 +17,30 @@ namespace MvvmCross.Core
         private static TaskCompletionSource<bool> IsInitialisedTaskCompletionSource;
         private IMvxSetup _setup;
         private bool _initialized;
-        private IMvxSetupMonitor _currentSplashScreen;
+        private IMvxSetupMonitor _currentMonitor;
 
-        public static TMvxSetupSingleton EnsureSingletonAvailable<TMvxSetupSingleton>()
+        protected virtual IMvxSetup Setup
+        {
+            get
+            {
+                return _setup;
+            }
+        }
+
+        protected virtual TMvxSetup PlatformSetup<TMvxSetup>() where TMvxSetup : IMvxSetup
+        {
+            try
+            {
+                return (TMvxSetup)Setup;
+            }
+            catch (Exception ex)
+            {
+                MvxLog.Instance.Error(ex, "Unable to cast setup to {0}", typeof(TMvxSetup));
+                throw ex;
+            }
+        }
+
+        protected static TMvxSetupSingleton EnsureSingletonAvailable<TMvxSetupSingleton>()
            where TMvxSetupSingleton : MvxSetupSingleton, new()
         {
             if (Instance != null)
@@ -56,14 +77,14 @@ namespace MvvmCross.Core
             IsInitialisedTaskCompletionSource.Task.GetAwaiter().GetResult();
         }
 
-        public virtual void InitializeFromSplashScreen(IMvxSetupMonitor splashScreen)
+        public virtual void InitializeAndMonitor(IMvxSetupMonitor setupMonitor)
         {
             lock (LockObject)
             {
-                _currentSplashScreen = splashScreen;
+                _currentMonitor = setupMonitor;
                 if (_initialized)
                 {
-                    _currentSplashScreen?.InitializationComplete();
+                    _currentMonitor?.InitializationComplete();
                     return;
                 }
 
@@ -76,11 +97,14 @@ namespace MvvmCross.Core
             }
         }
 
-        public virtual void RemoveSplashScreen(IMvxSetupMonitor splashScreen)
+        public virtual void CancelMonitor(IMvxSetupMonitor setupMonitor)
         {
             lock (LockObject)
             {
-                _currentSplashScreen = null;
+                if (setupMonitor == _currentMonitor)
+                {
+                    _currentMonitor = null;
+                }
             }
         }
 
@@ -106,7 +130,7 @@ namespace MvvmCross.Core
             {
                 lock (LockObject)
                 {
-                    _currentSplashScreen = null;
+                    _currentMonitor = null;
                 }
             }
             base.Dispose(isDisposing);
@@ -126,9 +150,9 @@ namespace MvvmCross.Core
                     var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
                     dispatcher.RequestMainThreadAction(() =>
                     {
-                        if (_currentSplashScreen != null)
+                        if (_currentMonitor != null)
                         {
-                            _currentSplashScreen?.InitializationComplete();
+                            _currentMonitor?.InitializationComplete();
                         }
                     });
                 }

@@ -40,8 +40,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             RequestWindowFeatures();
 
-            var setup = MvxSetupSingleton.EnsureSingletonAvailable<MvxAndroidSetupSingleton>();
-            setup.InitializeFromSplashScreen(this, ApplicationContext);
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            setup.InitializeAndMonitor(this);
 
             base.OnCreate(bundle);
 
@@ -60,15 +60,15 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             base.OnResume();
             _isResumed = true;
-            var setup = MvxSetupSingleton.EnsureSingletonAvailable<MvxAndroidSetupSingleton>();
-            setup.InitializeFromSplashScreen(this, ApplicationContext);
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            setup.InitializeAndMonitor(this);
         }
 
         protected override void OnPause()
         {
             _isResumed = false;
-            var setup = MvxSetupSingleton.EnsureSingletonAvailable<MvxAndroidSetupSingleton>();
-            setup.RemoveSplashScreen(this);
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            setup.CancelMonitor(this);
             base.OnPause();
         }
 
