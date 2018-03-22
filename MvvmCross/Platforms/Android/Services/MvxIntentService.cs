@@ -24,8 +24,8 @@ namespace MvvmCross.Platforms.Android.Services
 
         protected override void OnHandleIntent(Intent intent)
         {
-            var setup = MvxSetupSingleton.EnsureSingletonAvailable<MvxAndroidSetupSingleton>();
-            setup.EnsureInitialized(ApplicationContext);
-        }
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            setup.EnsureInitialized();
+       }
     }
 }

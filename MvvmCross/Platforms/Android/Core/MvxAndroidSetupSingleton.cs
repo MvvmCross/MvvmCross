@@ -10,15 +10,11 @@ namespace MvvmCross.Platforms.Android.Core
     public class MvxAndroidSetupSingleton
         : MvxSetupSingleton
     {
-        public virtual void EnsureInitialized(Context applicationContext)
+        public static MvxAndroidSetupSingleton EnsureSingletonAvailable(Context applicationContext)
         {
-            MvxSetup.PlatformInstance<MvxAndroidSetup>()?.PlatformInitialize(applicationContext);
-            base.EnsureInitialized();
-        }
-        public virtual void InitializeFromSplashScreen(IMvxSetupMonitor splashScreen, Context applicationContext)
-        {
-            MvxSetup.PlatformInstance<MvxAndroidSetup>()?.PlatformInitialize(applicationContext);
-            base.InitializeFromSplashScreen(splashScreen);
+            var instance = EnsureSingletonAvailable<MvxAndroidSetupSingleton>();
+            instance.PlatformSetup<MvxAndroidSetup>()?.PlatformInitialize(applicationContext);
+            return instance;
         }
     }
 }

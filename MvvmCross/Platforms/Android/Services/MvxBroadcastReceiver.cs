@@ -24,8 +24,8 @@ namespace MvvmCross.Platforms.Android.Services
 
         public override void OnReceive(Context context, Intent intent)
         {
-            var setup = MvxSetupSingleton.EnsureSingletonAvailable<MvxAndroidSetupSingleton>();
-            setup.EnsureInitialized(context);
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(context);
+            setup.EnsureInitialized();
         }
     }
 }
