@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -27,7 +27,8 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             int popExitAnimation = int.MinValue,
             int transitionStyle = int.MinValue,
             Type fragmentHostViewType = null,
-            bool isCacheableFragment = false
+            bool isCacheableFragment = false,
+            bool allowOnlyOneInstance = false
         )
         {
             ActivityHostViewModelType = activityHostViewModelType;
@@ -40,6 +41,7 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             TransitionStyle = transitionStyle;
             FragmentHostViewType = fragmentHostViewType;
             IsCacheableFragment = isCacheableFragment;
+            AllowOnlyOneInstance = allowOnlyOneInstance;
         }
 
         public MvxFragmentPresentationAttribute(
@@ -52,7 +54,8 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             string popExitAnimation = null,
             string transitionStyle = null,
             Type fragmentHostViewType = null,
-            bool isCacheableFragment = false
+            bool isCacheableFragment = false,
+            bool allowOnlyOneInstance = false
         )
         {
             var context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext;
@@ -67,6 +70,7 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             TransitionStyle = !string.IsNullOrEmpty(transitionStyle) ? context.Resources.GetIdentifier(transitionStyle, "style", context.PackageName) : int.MinValue;
             FragmentHostViewType = fragmentHostViewType;
             IsCacheableFragment = isCacheableFragment;
+            AllowOnlyOneInstance = allowOnlyOneInstance;
         }
 
         /// <summary>
@@ -89,6 +93,12 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
         /// Will add the Fragment to the FragmentManager backstack
         /// </summary>
         public bool AddToBackStack { get; set; } = DefaultAddToBackStack;
+
+        public static bool DefaultAllowOnlyOneInstance = false;
+        /// <summary>
+        /// Allow only one instance at a time. False by default.
+        /// </summary>
+        public bool AllowOnlyOneInstance { get; set; } = DefaultAllowOnlyOneInstance;
 
         public static int DefaultEnterAnimation = int.MinValue;
         /// <summary>
