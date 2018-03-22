@@ -17,14 +17,6 @@ namespace MvvmCross.Platforms.Ios.Core
         /// </summary>
         public new UIWindow Window { get ; set ; }
 
-        protected IMvxIosSetup Setup
-        {
-            get
-            {
-                return MvxSetup.PlatformInstance<IMvxIosSetup>();
-            }
-        }
-
         public override void WillEnterForeground(UIApplication application)
         {
             FireLifetimeChanged(MvxLifetimeEvent.ActivatedFromMemory);
@@ -45,9 +37,7 @@ namespace MvvmCross.Platforms.Ios.Core
             if(Window == null)
                 Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            Setup.PlatformInitialize(this, Window);
-
-            Setup.Initialize();
+            MvxIosSetupSingleton.EnsureSingletonAvailable(this, Window).EnsureInitialized();
 
             RunAppStart(launchOptions);
 

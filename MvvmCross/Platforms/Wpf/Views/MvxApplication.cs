@@ -8,18 +8,9 @@ namespace MvvmCross.Platforms.Wpf.Views
 {
     public abstract class MvxApplication : Application 
     {
-        protected IMvxWpfSetup Setup
-        {
-            get
-            {
-                return MvxSetup.PlatformInstance<IMvxWpfSetup>();
-            }
-        }
-
         protected override void OnActivated(EventArgs e)
         {
-            Setup.PlatformInitialize(Dispatcher, MainWindow);
-            Setup.Initialize();
+            MvxWpfSetupSingleton.EnsureSingletonAvailable(Dispatcher, MainWindow).EnsureInitialized();
 
             RunAppStart(e);
             base.OnActivated(e);

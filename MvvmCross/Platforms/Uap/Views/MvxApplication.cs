@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -19,14 +19,6 @@ namespace MvvmCross.Platforms.Uap.Views
     public abstract class MvxApplication : Application
     {
         protected IActivatedEventArgs ActivationArguments { get; private set; }
-
-        protected IMvxWindowsSetup Setup
-        {
-            get
-            {
-                return MvxSetup.PlatformInstance<IMvxWindowsSetup>();
-            }
-        }
 
         protected Frame RootFrame { get; set; }
 
@@ -69,10 +61,10 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected virtual void RunAppStart(IActivatedEventArgs activationArgs)
         {
+            var instance = MvxWindowsSetupSingleton.EnsureSingletonAvailable(RootFrame, ActivationArguments, nameof(Suspend));
             if (RootFrame.Content == null)
             {
-                Setup.PlatformInitialize(RootFrame, ActivationArguments, nameof(Suspend));
-                Setup.Initialize();
+                instance.EnsureInitialized();
 
                 var startup = Mvx.Resolve<IMvxAppStart>();
                 if (!startup.IsStarted)
@@ -80,7 +72,7 @@ namespace MvvmCross.Platforms.Uap.Views
             }
             else
             {
-                Setup.UpdateActivationArguments(activationArgs);
+                instance.PlatformSetup<MvxWindowsSetup>().UpdateActivationArguments(activationArgs);
             }
         }
 

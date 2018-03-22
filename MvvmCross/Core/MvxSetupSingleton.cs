@@ -27,7 +27,7 @@ namespace MvvmCross.Core
             }
         }
 
-        protected virtual TMvxSetup PlatformSetup<TMvxSetup>() where TMvxSetup : IMvxSetup
+        public virtual TMvxSetup PlatformSetup<TMvxSetup>() where TMvxSetup : IMvxSetup
         {
             try
             {
@@ -116,7 +116,7 @@ namespace MvvmCross.Core
         {
             try
             {
-                _setup = MvxSetup.Instance;
+                _setup = MvxSetup.Instance();
             }
             catch (Exception exception)
             {

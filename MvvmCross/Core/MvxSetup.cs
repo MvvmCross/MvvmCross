@@ -30,35 +30,14 @@ namespace MvvmCross.Core
             SetupCreator = () => new TMvxSetup();
         }
 
-        private static IMvxSetup instance;
-        public static IMvxSetup Instance
+        public static IMvxSetup Instance()
         {
-            get
+            var instance = SetupCreator?.Invoke();
+            if (instance == null)
             {
-                if (instance != null) return instance;
-                if (SetupCreator != null)
-                {
-                    instance = SetupCreator();
-                }
-                else
-                {
-                    instance = MvxSetupExtensions.CreateSetup<MvxSetup>();
-                }
-                return instance;
+                instance = MvxSetupExtensions.CreateSetup<MvxSetup>();
             }
-        }
-
-        public static TMvxSetup PlatformInstance<TMvxSetup>() where TMvxSetup : IMvxSetup
-        {
-            try
-            {
-                return (TMvxSetup)Instance;
-            }
-            catch (Exception ex)
-            {
-                MvxLog.Instance.Error(ex, "Unable to cast setup to {0}", typeof(TMvxSetup));
-                throw ex;
-            }
+            return instance;
         }
 
         protected abstract IMvxApplication CreateApp();

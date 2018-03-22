@@ -11,14 +11,6 @@ namespace MvvmCross.Platforms.Mac.Core
 {
     public abstract class MvxApplicationDelegate : NSApplicationDelegate, IMvxApplicationDelegate
     {
-        protected IMvxMacSetup Setup
-        {
-            get
-            {
-                return MvxSetup.PlatformInstance<IMvxMacSetup>();
-            }
-        }
-
         private NSWindow window;
         public virtual NSWindow MainWindow
         {
@@ -36,8 +28,7 @@ namespace MvvmCross.Platforms.Mac.Core
 
         public override void DidFinishLaunching(Foundation.NSNotification notification)
         {
-            Setup.PlatformInitialize(this, MainWindow);
-            Setup.Initialize();
+            MvxMacSetupSingleton.EnsureSingletonAvailable(this, MainWindow).EnsureInitialized();
             RunAppStart(notification);
 
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
