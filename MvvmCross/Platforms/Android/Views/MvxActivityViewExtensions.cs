@@ -137,7 +137,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         private static void EnsureSetupInitialized(this IMvxAndroidView androidView)
         {
-            if (androidView is IMvxSplashScreen)
+            if (androidView is IMvxSetupMonitor)
             {
                 // splash screen views manage their own setup initialization
                 return;

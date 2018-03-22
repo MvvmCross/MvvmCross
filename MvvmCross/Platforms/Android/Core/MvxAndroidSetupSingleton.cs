@@ -15,7 +15,7 @@ namespace MvvmCross.Platforms.Android.Core
             MvxSetup.PlatformInstance<MvxAndroidSetup>()?.PlatformInitialize(applicationContext);
             base.EnsureInitialized();
         }
-        public virtual void InitializeFromSplashScreen(IMvxSplashScreen splashScreen, Context applicationContext)
+        public virtual void InitializeFromSplashScreen(IMvxSetupMonitor splashScreen, Context applicationContext)
         {
             MvxSetup.PlatformInstance<MvxAndroidSetup>()?.PlatformInitialize(applicationContext);
             base.InitializeFromSplashScreen(splashScreen);
