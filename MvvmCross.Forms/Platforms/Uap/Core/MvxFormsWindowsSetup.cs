@@ -2,47 +2,26 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Forms.Presenters;
-using System.Collections.Generic;
-using System.Reflection;
-using Windows.ApplicationModel.Activation;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platforms.Uap.Bindings;
 using MvvmCross.Forms.Platforms.Uap.Presenters;
+using MvvmCross.Forms.Presenters;
 using MvvmCross.Platforms.Uap.Core;
-using MvvmCross.Platforms.Uap.Views;
-using MvvmCross.Plugin;
-using MvvmCross.ViewModels;
-using XamlControls = Windows.UI.Xaml.Controls;
 using MvvmCross.Platforms.Uap.Presenters;
-using System.Linq;
+using MvvmCross.Platforms.Uap.Views;
+using MvvmCross.ViewModels;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platforms.Uap.Core
 {
     public abstract class MvxFormsWindowsSetup : MvxWindowsSetup
     {
-        private List<Assembly> _viewAssemblies;
         private Application _formsApplication;
-
-        /// <summary>
-        /// Override to provide list of assemblies to search for views. 
-        /// Additionally for UWP .NET Native compilation include the assemblies containing custom controls and renderers to be passed to <see cref="Xamarin.Forms.Forms.Init" /> method. 
-        /// </summary>
-        /// <returns>Custom view and renderer assemblies</returns>
-        protected override IEnumerable<Assembly> GetViewAssemblies()
-        {
-            return _viewAssemblies ?? (_viewAssemblies = new List<Assembly>(base.GetViewAssemblies()));
-        }
-
-        protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
-        {
-            base.InitializeApp(pluginManager, app);
-            _viewAssemblies.AddRange(GetViewModelAssemblies());
-        }
-
         public virtual Application FormsApplication
         {
             get

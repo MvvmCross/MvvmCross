@@ -22,8 +22,12 @@ namespace MvvmCross.Core
     public abstract class MvxSetup : IMvxSetup
     {
         protected static Func<IMvxSetup> SetupCreator { get; set; }
-        public static void RegisterSetupType<TMvxSetup>() where TMvxSetup : MvxSetup, new()
+
+        protected static Assembly[] ViewAssemblies { get; set; }
+        public static void RegisterSetupType<TMvxSetup>(params Assembly[] assemblies) where TMvxSetup : MvxSetup, new()
         {
+            ViewAssemblies = assemblies ?? new[] { Assembly.GetEntryAssembly() };
+
             // Avoid creating the instance of Setup right now, instead
             // take a reference to the type in a way that we can avoid
             // using reflection to create the instance.
@@ -349,8 +353,8 @@ namespace MvvmCross.Core
 
         protected virtual IEnumerable<Assembly> GetViewAssemblies()
         {
-            var assembly = GetType().GetTypeInfo().Assembly;
-            return new[] { assembly };
+            var assemblies = ViewAssemblies ?? new[] { GetType().GetTypeInfo().Assembly };
+            return assemblies;
         }
 
         protected virtual IEnumerable<Assembly> GetViewModelAssemblies()

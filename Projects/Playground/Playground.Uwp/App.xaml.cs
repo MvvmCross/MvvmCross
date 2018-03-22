@@ -1,4 +1,5 @@
-﻿using MvvmCross.Platforms.Uap.Core;
+﻿using MvvmCross.Core;
+using MvvmCross.Platforms.Uap.Core;
 using MvvmCross.Platforms.Uap.Views;
 
 namespace Playground.Uwp
@@ -7,7 +8,7 @@ namespace Playground.Uwp
     {
         static App()
         {
-            MvxWindowsSetup.RegisterWindowsSetupType<MvxWindowsSetup<Core.App>>();
+            MvxSetup.RegisterSetupType<MvxWindowsSetup<Core.App>>();
         }
 
         public App()
