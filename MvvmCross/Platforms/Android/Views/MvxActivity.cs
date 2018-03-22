@@ -75,7 +75,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         protected override void AttachBaseContext(Context @base)
         {
-            if (this is IMvxSplashScreen)
+            if (this is IMvxSetupMonitor)
             {
                 // Do not attach our inflater to splash screens.
                 base.AttachBaseContext(@base);

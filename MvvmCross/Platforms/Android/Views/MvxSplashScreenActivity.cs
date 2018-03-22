@@ -13,7 +13,7 @@ namespace MvvmCross.Platforms.Android.Views
 {
     [Register("mvvmcross.platforms.android.views.MvxSplashScreenActivity")]
     public abstract class MvxSplashScreenActivity
-        : MvxActivity, IMvxSplashScreen
+        : MvxActivity, IMvxSetupMonitor
     {
         private const int NoContent = 0;
 

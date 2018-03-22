@@ -5,7 +5,7 @@
 
 namespace MvvmCross.Core
 {
-    public interface IMvxSplashScreen
+    public interface IMvxSetupMonitor
     {
         void InitializationComplete();
     }
