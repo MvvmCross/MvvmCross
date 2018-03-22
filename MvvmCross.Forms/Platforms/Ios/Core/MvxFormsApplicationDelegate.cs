@@ -16,14 +16,6 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
 {
     public abstract class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {
-        protected MvxFormsIosSetup Setup
-        {
-            get
-            {
-                return MvxSetup.PlatformInstance<MvxFormsIosSetup>();
-            }
-        }
-
         private UIWindow _window;
         public override UIWindow Window
         {
@@ -44,12 +36,12 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
             if (Window == null)
                 Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            Setup.PlatformInitialize(this, Window);
-            Setup.Initialize();
+            var instance = MvxIosSetupSingleton.EnsureSingletonAvailable(this, Window);
+            instance.EnsureInitialized();
 
             RunAppStart(launchOptions);
 
-            Setup.FormsApplication.SendStart();
+            instance.PlatformSetup<MvxFormsIosSetup>().FormsApplication.SendStart();
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
 
             //TODO: we might need to call base here
@@ -73,7 +65,9 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
 
         protected virtual void LoadFormsApplication()
         {
-            LoadApplication(Setup.FormsApplication);
+            var instance = MvxIosSetupSingleton.EnsureSingletonAvailable(this, Window);
+
+            LoadApplication(instance.PlatformSetup<MvxFormsIosSetup>().FormsApplication);
         }
 
         public override void WillEnterForeground(UIApplication uiApplication)

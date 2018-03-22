@@ -17,21 +17,12 @@ namespace MvvmCross.Platforms.Tvos.Core
         /// </summary>
         public new UIWindow Window { get; set; }
 
-        protected IMvxTvosSetup Setup
-        {
-            get
-            {
-                return MvxSetup.PlatformInstance<IMvxTvosSetup>();
-            }
-        }
-
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             if (Window == null)
                 Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            Setup.PlatformInitialize(this, Window);
-            Setup.Initialize();
+            MvxTvosSetupSingleton.EnsureSingletonAvailable(this, Window).EnsureInitialized();
             RunAppStart(launchOptions);
 
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
@@ -74,11 +65,6 @@ namespace MvvmCross.Platforms.Tvos.Core
         }
 
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
-
-        protected virtual MvxTvosSetup CreateSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
-        {
-            return MvxSetupExtensions.CreateSetup<MvxTvosSetup>(this.GetType().Assembly, applicationDelegate, window);
-        }
     }
 
     public abstract class MvxApplicationDelegate<TMvxTvosSetup, TApplication> : MvxApplicationDelegate
