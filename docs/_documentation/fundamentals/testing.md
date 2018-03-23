@@ -135,7 +135,7 @@ protected override void AdditionalSetup()
 
 ## Testing MvxCommand RaiseCanExecuteChanged
 
-It can be diffucult to test if a Mvx(Async)Command in a view model has raised the CanExecuteChanged property. MvxUnitTestCommandHelper can help testing this behaviour:
+It can be difficult to test if a Mvx(Async)Command in a view model has raised the CanExecuteChanged property. MvxUnitTestCommandHelper can help testing this behaviour:
 
 ```
 protected override void AdditionalSetup()
