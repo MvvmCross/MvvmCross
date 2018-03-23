@@ -148,8 +148,22 @@ protected override void AdditionalSetup()
 
 ```
 
-Example test:
+Property in ViewModel:
 
+```
+private SomeModel _someModel;
+public SomeModel SomeModel
+{
+	get => _someModel;
+	set 
+	{
+		SetProperty(ref _someModel, value);
+		SomeCommand.RaiseCanExecuteChanged();
+	}
+}
+```
+
+Example test:
 
 ```
 [Test]
