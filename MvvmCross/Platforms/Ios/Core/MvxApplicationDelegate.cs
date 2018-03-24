@@ -15,7 +15,7 @@ namespace MvvmCross.Platforms.Ios.Core
         /// <summary>
         /// UIApplicationDelegate.Window doesn't really exist / work. It was added by Xamarin.iOS templates 
         /// </summary>
-        public new UIWindow Window { get ; set ; }
+        public new UIWindow Window { get; set; }
 
         public override void WillEnterForeground(UIApplication application)
         {
@@ -34,7 +34,7 @@ namespace MvvmCross.Platforms.Ios.Core
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            if(Window == null)
+            if (Window == null)
                 Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
             MvxIosSetupSingleton.EnsureSingletonAvailable(this, Window).EnsureInitialized();
