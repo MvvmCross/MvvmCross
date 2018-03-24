@@ -172,8 +172,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     }
                     else
                     {
-                        // TODO [JF] :: need a reference to MvxLog in this assembly
-                        //MvxLog.Instance.Warn("A XML transitionName is required in order to transition a control when navigating.");
+                        MvxAndroidLog.Instance.Warn("A XML transitionName is required in order to transition a control when navigating.");
                     }
                 }
 
@@ -316,8 +315,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     }
                     else
                     {
-                        // TODO [JF] :: need a reference to MvxLog in this assembly
-                        //MvxLog.Instance.Warn("A XML transitionName is required in order to transition a control when navigating.");
+                        MvxAndroidLog.Instance.Warn("A XML transitionName is required in order to transition a control when navigating.");
                     }
                 }
 
