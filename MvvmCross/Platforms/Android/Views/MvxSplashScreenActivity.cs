@@ -85,5 +85,10 @@ namespace MvvmCross.Platforms.Android.Views
             if (!startup.IsStarted)
                 startup.Start();
         }
+
+        protected virtual void RegisterSetup<TMvxAndroidSetup>() where TMvxAndroidSetup : MvxSetup, new()
+        {
+            MvxSetup.RegisterSetupType<TMvxAndroidSetup>(GetType().Assembly);
+        }
     }
 }
