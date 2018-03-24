@@ -74,5 +74,18 @@ namespace MvvmCross.Platforms.Android.Views
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
                 view.TransitionName = transitionName;
         }
+
+        /// <summary>
+        /// Gets the <see cref="View.TransitionName"/> with platform support checks
+        /// </summary>
+        /// <param name="view">The <see cref="View"/> to use.</param>
+        /// <returns>The name for the transition.</returns>
+        public static string GetTransitionNameSupport(this View view)
+        {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+                return view.TransitionName;
+
+            return string.Empty;
+        }
     }
 }
