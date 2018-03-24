@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Util;
 using Android.Views;
 using Java.Lang;
 using MvvmCross.Exceptions;
@@ -225,6 +226,42 @@ namespace MvvmCross.Platforms.Android.Presenters
             var intent = CreateIntentForRequest(request);
             if (attribute.Extras != null)
                 intent.PutExtras(attribute.Extras);
+
+            if (CurrentActivity is IMvxAndroidSharedElements sharedElementsActivity)
+            {
+                var elements = new List<string>();
+                var transitionElementPairs = new List<Pair>();
+
+                foreach (KeyValuePair<string, View> item in sharedElementsActivity.FetchSharedElementsToAnimate(request))
+                {
+                    var transitionName = item.Value.GetTransitionNameSupport();
+                    if (string.IsNullOrEmpty(transitionName))
+                    {
+                        transitionElementPairs.Add(Pair.Create(item.Value, transitionName));
+                        elements.Add($"{item.Key}:{transitionName}");
+                    }
+                    else
+                    {
+                        MvxLog.Instance.Warn("A XML transitionName is required in order to transition a control when navigating.");
+                    }
+                }
+
+                if (elements.Count > 0)
+                {
+                    if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+                    {
+                        var activityOptions = ActivityOptions.MakeSceneTransitionAnimation(CurrentActivity, transitionElementPairs.ToArray());
+                        intent.PutExtra(SharedElementsBundleKey, string.Join("|", elements));
+                        CurrentActivity.StartActivity(intent, activityOptions.ToBundle());
+                        return;
+                    }
+                    else
+                    {
+                        MvxLog.Instance.Warn("Shared element transition requires Android v21+.");
+                    }
+                }
+            }
+
             ShowIntent(intent);
         }
 
