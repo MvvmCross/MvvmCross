@@ -153,18 +153,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
 
         #region Show implementations
-        protected override void ShowActivity(Type view,
-            MvxActivityPresentationAttribute attribute,
-            MvxViewModelRequest request)
-        {
-            var intent = CreateIntentForRequest(request);
-            if (attribute.Extras != null)
-                intent.PutExtras(attribute.Extras);
-
-            ShowIntent(intent, CreateActivityTransitionOptions(intent, request));
-        }
-
-        protected virtual Bundle CreateActivityTransitionOptions(Intent intent, MvxViewModelRequest request)
+        protected override Bundle CreateActivityTransitionOptions(Intent intent, MvxViewModelRequest request)
         {
             var bundle = Bundle.Empty;
 
