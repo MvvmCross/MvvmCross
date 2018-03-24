@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MvvmCross.Commands;
 
 namespace MvvmCross.Tests
@@ -17,29 +18,24 @@ namespace MvvmCross.Tests
 
         public bool HasCalledRaisePropertyChangedFor(object item)
         {
-            try
+            if(item != null && items.Any() && items.ContainsKey(item))
             {
                 return items[item] > 0;
             }
-            catch (Exception)
-            {
-                return false;
-            }
+
+            throw new Exception("This command is not registered for tracking RaiseCanExecuteChanged");
         }
 
-        public void RaiseCanExecuteChanged(object sender)
+        public void RaiseCanExecuteChanged(object item)
         {
-            try
+            if (items != null && items.Any() && items.ContainsKey(item))
             {
-                items[sender] += 1;
-            }
-            catch (Exception)
-            {
+                items[item] += 1;
             }
 
             if (CanExecuteChanged != null)
             {
-                CanExecuteChanged.Invoke(sender, new System.EventArgs());
+                CanExecuteChanged.Invoke(item, new System.EventArgs());
             }
         }
     }
