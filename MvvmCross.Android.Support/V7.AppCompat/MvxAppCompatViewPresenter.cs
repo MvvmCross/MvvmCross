@@ -6,11 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Android.Content;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
-using Android.Support.V4.Util;
 using Android.Support.V4.View;
 using Android.Views;
 using MvvmCross.Droid.Support.V4;
@@ -153,39 +151,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
 
         #region Show implementations
-        protected override Bundle CreateActivityTransitionOptions(Intent intent, MvxViewModelRequest request)
-        {
-            var bundle = Bundle.Empty;
-
-            if (CurrentActivity is IMvxAndroidSharedElements sharedElementsActivity)
-            {
-                var elements = new List<string>();
-                var transitionElementPairs = new List<Pair>();
-
-                foreach (KeyValuePair<string, View> item in sharedElementsActivity.FetchSharedElementsToAnimate(request))
-                {
-                    var transitionName = item.Value.GetTransitionNameSupport();
-                    if (string.IsNullOrEmpty(transitionName))
-                    {
-                        transitionElementPairs.Add(Pair.Create(item.Value, transitionName));
-                        elements.Add($"{item.Key}:{transitionName}");
-                    }
-                    else
-                    {
-                        MvxAndroidLog.Instance.Warn("A XML transitionName is required in order to transition a control when navigating.");
-                    }
-                }
-
-                if (elements.Count > 0)
-                {
-                    var activityOptions = ActivityOptionsCompat.MakeSceneTransitionAnimation(CurrentActivity, transitionElementPairs.ToArray());
-                    intent.PutExtra(SharedElementsBundleKey, string.Join("|", elements));
-                    bundle = activityOptions.ToBundle();
-                }
-            }
-
-            return bundle;
-        }
 
         protected override void ShowHostActivity(MvxFragmentPresentationAttribute attribute)
         {
