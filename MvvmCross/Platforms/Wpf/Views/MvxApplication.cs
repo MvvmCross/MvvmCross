@@ -6,14 +6,15 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Wpf.Views
 {
-    public abstract class MvxApplication : Application 
+    public abstract class MvxApplication : Application
     {
-        protected override void OnActivated(EventArgs e)
+        public virtual void ApplicationInitialized()
         {
+            if (MainWindow == null) return;
+
             MvxWpfSetupSingleton.EnsureSingletonAvailable(Dispatcher, MainWindow).EnsureInitialized();
 
-            RunAppStart(e);
-            base.OnActivated(e);
+            RunAppStart();
         }
 
         protected virtual void RunAppStart(object hint = null)
