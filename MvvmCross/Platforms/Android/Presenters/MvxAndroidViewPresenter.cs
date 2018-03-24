@@ -227,6 +227,13 @@ namespace MvvmCross.Platforms.Android.Presenters
             if (attribute.Extras != null)
                 intent.PutExtras(attribute.Extras);
 
+            ShowIntent(intent, CreateActivityTransitionOptions(intent, request));
+        }
+
+        protected virtual Bundle CreateActivityTransitionOptions(Intent intent, MvxViewModelRequest request)
+        {
+            var bundle = Bundle.Empty;
+
             if (CurrentActivity is IMvxAndroidSharedElements sharedElementsActivity)
             {
                 var elements = new List<string>();
@@ -242,27 +249,24 @@ namespace MvvmCross.Platforms.Android.Presenters
                     }
                     else
                     {
-                        MvxLog.Instance.Warn("A XML transitionName is required in order to transition a control when navigating.");
+                        // TODO [JF] :: need a reference to MvxLog in this assembly
+                        //MvxLog.Instance.Warn("A XML transitionName is required in order to transition a control when navigating.");
                     }
                 }
 
-                if (elements.Count > 0)
+                if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
                 {
-                    if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
-                    {
-                        var activityOptions = ActivityOptions.MakeSceneTransitionAnimation(CurrentActivity, transitionElementPairs.ToArray());
-                        intent.PutExtra(SharedElementsBundleKey, string.Join("|", elements));
-                        CurrentActivity.StartActivity(intent, activityOptions.ToBundle());
-                        return;
-                    }
-                    else
-                    {
-                        MvxLog.Instance.Warn("Shared element transition requires Android v21+.");
-                    }
+                    var activityOptions = ActivityOptions.MakeSceneTransitionAnimation(CurrentActivity, transitionElementPairs.ToArray());
+                    intent.PutExtra(SharedElementsBundleKey, string.Join("|", elements));
+                    bundle = activityOptions.ToBundle();
+                }
+                else
+                {
+                    MvxLog.Instance.Warn("Shared element transition requires Android v21+.");
                 }
             }
 
-            ShowIntent(intent);
+            return bundle;
         }
 
         protected virtual Intent CreateIntentForRequest(MvxViewModelRequest request)
@@ -277,7 +281,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             return requestTranslator.GetIntentFor(request);
         }
 
-        protected virtual void ShowIntent(Intent intent)
+        protected virtual void ShowIntent(Intent intent, Bundle bundle)
         {
             var activity = CurrentActivity;
             if (activity == null)
@@ -285,7 +289,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 MvxLog.Instance.Warn("Cannot Resolve current top activity");
                 return;
             }
-            activity.StartActivity(intent);
+            activity.StartActivity(intent, bundle);
         }
 
         protected virtual void ShowHostActivity(MvxFragmentPresentationAttribute attribute)
