@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Views;
 using Java.Lang;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
@@ -354,7 +355,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             var ft = fragmentManager.BeginTransaction();
 
-            OnBeforeFragmentChanging(ft, attribute);
+            OnBeforeFragmentChanging(ft, fragmentView, attribute, request);
 
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
@@ -367,14 +368,28 @@ namespace MvvmCross.Platforms.Android.Presenters
             OnFragmentChanged(ft, fragmentView, attribute);
         }
 
-        protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, MvxFragmentPresentationAttribute attribute)
+        protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
         {
-            if (attribute.SharedElements != null)
+            if (CurrentActivity is IMvxAndroidSharedElements sharedElementsActivity)
             {
-                foreach (var item in attribute.SharedElements)
+                var elements = new List<string>();
+
+                foreach (KeyValuePair<string, View> item in sharedElementsActivity.FetchSharedElementsToAnimate(request))
                 {
-                    ft.AddSharedElement(item.Value, item.Key);
+                    var transitionName = item.Value.GetTransitionNameSupport();
+                    if (!string.IsNullOrEmpty(transitionName))
+                    {
+                        ft.AddSharedElement(item.Value, transitionName);
+                        elements.Add($"{item.Key}:{transitionName}");
+                    }
+                    else
+                    {
+                        MvxLog.Instance.Warn("A XML transitionName is required in order to transition a control when navigating.");
+                    }
                 }
+
+                if (elements.Count > 0)
+                    fragment.Arguments.PutString(SharedElementsBundleKey, string.Join("|", elements));
             }
 
             if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
@@ -428,7 +443,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             var ft = CurrentFragmentManager.BeginTransaction();
 
-            OnBeforeFragmentChanging(ft, attribute);
+            OnBeforeFragmentChanging(ft, dialog, attribute, request);
 
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
