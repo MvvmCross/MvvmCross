@@ -249,8 +249,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                     }
                     else
                     {
-                        // TODO [JF] :: need a reference to MvxLog in this assembly
-                        //MvxLog.Instance.Warn("A XML transitionName is required in order to transition a control when navigating.");
+                        MvxLog.Instance.Warn("A XML transitionName is required in order to transition a control when navigating.");
                     }
                 }
 
