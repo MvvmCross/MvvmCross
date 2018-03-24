@@ -4,7 +4,6 @@
 
 using System.Collections.Generic;
 using System.Reflection;
-using Android.Content;
 using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
 using MvvmCross.Binding.BindingContext;
@@ -26,9 +25,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 typeof(MvxSwipeRefreshLayout).Assembly
             };
 
-        /// <summary>
-        /// This is very important to override. The default view presenter does not know how to show fragments!
-        /// </summary>
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
             return new MvxAppCompatViewPresenter(AndroidViewAssemblies);
