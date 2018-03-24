@@ -28,6 +28,7 @@ namespace MvvmCross.Platforms.Android.Presenters
     {
         protected IEnumerable<Assembly> AndroidViewAssemblies { get; set; }
         public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
+        public const string SharedElementsBundleKey = "__sharedElementsKey";
         protected MvxViewModelRequest _pendingRequest;
 
         protected virtual FragmentManager CurrentFragmentManager => CurrentActivity.FragmentManager;
