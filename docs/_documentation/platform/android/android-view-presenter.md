@@ -35,13 +35,12 @@ Use this attribute if you want to display an Activity in your application. An Ac
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | Extras | `Bundle` | Use this `Bundle` to add any extra parameters to the Activity Intent. |
-| SharedElements | `IDictionary<string, View>` | Consists of a `IDictionary<string, View>` that you can use to add shared view elements to the transition. When using the AppCompat version, the string keys are not relevant. |
 
 ### MvxFragmentPresentationAttribute
 
 A Fragment is hosted inside an Activity (or a fragment). By using this ViewPresenter, you can decide whether to make all of your screens Activities, or to use an Activity host and many Fragments inside of it. MvvmCross can handle both scenarios smoothly.
 
-The ViewPresenter supports also nested fragments in one level: This means you can show fragments inside of a Fragment without extending any code!
+The ViewPresenter also supports nested fragments in one level: This means you can show fragments inside of a Fragment without extending any code!
 
 Use this attribute over a Fragment view class and customize its presentation by using these properties:
 
@@ -56,7 +55,6 @@ Use this attribute over a Fragment view class and customize its presentation by 
 | PopEnterAnimation | `int` | Resource id for the animation that will be run when the fragment comes back to foreground. |
 | PopExitAnimation | `int` | Resource id for the animation that will be run when the fragment is retrieved from foreground. |
 | TransitionStyle | `int` | In case you want to use a Transition Style, use this property by setting its resource id. |
-| SharedElements | `IDictionary<string, View>` | Consists of a `IDictionary<string, View>` that you can use to add shared view elements to the transition. When using the AppCompat version, the string keys are not relevant.
 | IsCacheableFragment | `bool` | Default value is false. You should leave it that way unless you really want/need to reuse a fragment view (for example, in case you are displaying a WebView, you might want to cache the already loaded URL). If it is set to `true`, the ViewPresenter will try to find a Fragment instance already present in the FragmentManager object before instantiating a new one and will reuse that object. |
 
 When providing a value for EnterAnimation you need to provide one for ExitAnimation as well, otherwise the animation won't work (same applies in the other way around). 
@@ -120,6 +118,45 @@ If you return `null` from the `PresentationAttribute` method, the ViewPresenter 
 
 __Hint:__ Be aware that `this.ViewModel` property will be null during `PresentationAttribute`. If you want to have the ViewModel instance available, you need to use the `MvxNavigationService` and cast the `request` parameter to `MvxViewModelInstanceRequest`.
 
+## Shared Element transitions
+
+To add a Shared Element transition navigating to an Activity or Fragment implement the `IMvxAndroidSharedElements` in your hosting Activity. You can then use `FetchSharedElementsToAnimate` to assign the view elements you want to transition.
+
+```C#
+public IDictionary<string, View> FetchSharedElementsToAnimate(MvxBasePresentationAttribute attribute, MvxViewModelRequest request)
+{
+    IDictionary<string, View> sharedElements = new Dictionary<string, View>();
+
+    if (request.ViewModelType == typeof(SharedElementSecondChildViewModel))
+    {
+        var selectedLogo = FindViewById<ImageView>(Resource.Id.img_logo);
+        sharedElements.Add("identifier", selectedLogo);
+    }
+
+    return sharedElements;
+}
+```
+
+`FetchSharedElementsToAnimate` provides access to the `MvxViewModelRequest` used for the navigation as well as the attributed used by the view navigating to. The dictionary that is returned must contain an `identifier` as well as the view element to transition.
+
+__Hint:__ Be aware that you must have already specified the transition name on the view elements you add to the dictionary.
+
+The view you are navigating to will receive a `Bundle` that contains additional metadata. Being the identifier as well as the transition name. MvvmCross provides an extension method to assist with extracting this metadata, `GetSharedElementTransitionNames` , which can be used to get identifier and transition name pairs.
+
+```C#
+static IDictionary<string, string> GetSharedElementTransitionNames(this Bundle bundle)
+```
+
+Furthermore, if the identifier you passed through is the Android resource id name or Android resource tag. You can make use of the following extension method to find the corresponding view element and apply the transition name if required.
+
+```C#
+static void SetSharedElementsByTag(this Bundle bundle, View view)
+
+static void SetSharedElementsById(this Bundle bundle, View view)
+```
+
+You can also check out the Playground Shared Elements sample.
+
 ## Extensibility
 
 ### Attributes
@@ -144,10 +181,9 @@ _attributeTypesToShowMethodDictionary.Add(
 4. Implement a method that takes care of the presentation mode (in the example above, `ShowMyCustomModeView`) and a method that takes care of a ViewModel closing (in the example above, `CloseMyCustomModeView`).
 5. Use your attribute over a view class. Ready!
 
-
 ###  Fragment Lifecycle
 
-To get more control over your Fragment lifecycle (or activity) and transitions, you can override the folling methods. You can also modify your fragment transitions :
+To get more control over your Fragment lifecycle (or activity) and transitions, you can override the following methods. You can also modify your fragment transitions :
 
 __MvxAndroidViewPresenter__
 
@@ -172,13 +208,11 @@ void OnFragmentPopped(FragmentTransaction ft, Fragment fragment, MvxFragmentPres
 
 ### Activity Transitions
 
-In case you want to override the transition options between 2 activities you can override the folling method :
-
-__MvxAppCompatViewPresenter__
+In case you want to override the transition options bundle pasted between 2 activities you can override the following method :
 
 ```c#
 
-ActivityOptionsCompat CreateActivityTransitionOptions(Android.Content.Intent intent,MvxActivityPresentationAttribute attribute)
+Bundle CreateActivityTransitionOptions(Intent intent, MvxActivityPresentationAttribute attribute, MvxViewModelRequest request)
 ```
 
 ## Sample please!
