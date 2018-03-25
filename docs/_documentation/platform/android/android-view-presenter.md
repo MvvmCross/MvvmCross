@@ -188,6 +188,8 @@ To get more control over your Fragment lifecycle (or activity) and transitions, 
 __MvxAndroidViewPresenter__
 
 ```c#
+void OnBeforeFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
+
 void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
 
 void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
@@ -198,6 +200,8 @@ void OnFragmentPopped(FragmentTransaction ft, Fragment fragment, MvxFragmentPres
 __MvxAppCompatViewPresenter__
 
 ```c#
+void OnBeforeFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
+
 void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
         
 void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
