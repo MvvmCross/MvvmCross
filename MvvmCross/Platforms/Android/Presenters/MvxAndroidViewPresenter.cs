@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -400,12 +399,12 @@ namespace MvvmCross.Platforms.Android.Presenters
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
 
-            OnFragmentChanging(ft, fragmentView, attribute);
+            OnFragmentChanging(ft, fragmentView, attribute, request);
 
             ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
             ft.CommitAllowingStateLoss();
 
-            OnFragmentChanged(ft, fragmentView, attribute);
+            OnFragmentChanged(ft, fragmentView, attribute, request);
         }
 
         protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
@@ -444,12 +443,12 @@ namespace MvvmCross.Platforms.Android.Presenters
                 ft.SetTransitionStyle(attribute.TransitionStyle);
         }
 
-        protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
         {
 
         }
 
-        protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
         {
 
         }
