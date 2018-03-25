@@ -242,7 +242,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 foreach (KeyValuePair<string, View> item in sharedElementsActivity.FetchSharedElementsToAnimate(request))
                 {
                     var transitionName = item.Value.GetTransitionNameSupport();
-                    if (string.IsNullOrEmpty(transitionName))
+                    if (!string.IsNullOrEmpty(transitionName))
                     {
                         transitionElementPairs.Add(Pair.Create(item.Value, transitionName));
                         elements.Add($"{item.Key}:{transitionName}");
