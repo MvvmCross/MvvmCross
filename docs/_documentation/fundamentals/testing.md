@@ -133,6 +133,52 @@ protected override void AdditionalSetup()
 }
 ```
 
+## Testing MvxCommand RaiseCanExecuteChanged
+
+It can be difficult to test if a Mvx(Async)Command in a view model has raised the CanExecuteChanged property. MvxUnitTestCommandHelper can help testing this behaviour:
+
+```
+protected override void AdditionalSetup()
+{
+	MvvmCross.Core.MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread = false;
+	
+	var helper = new MvxUnitTestCommandHelper();
+	Ioc.RegisterSingleton<IMvxCommandHelper>(helper);
+}
+
+```
+
+Property in ViewModel:
+
+```
+private SomeModel _someModel;
+public SomeModel SomeModel
+{
+	get => _someModel;
+	set 
+	{
+		SetProperty(ref _someModel, value);
+		SomeCommand.RaiseCanExecuteChanged();
+	}
+}
+```
+
+Example test:
+
+```
+[Test]
+public void Valid_Model_Raises_CanExecute_Test()
+{
+	var vm = Ioc.IoCConstruct<InsertCategoryViewModel>();
+	vm.SomeCommand.ListenForRaiseCanExecuteChanged();
+	
+	vm.SomeModel = new SomeValidModel();
+	
+	Assert.AreEqual(vm.SomeCommand.RaisedCanExecuteChanged(), true);
+}
+
+```
+
 ## Links and other references
 
 
