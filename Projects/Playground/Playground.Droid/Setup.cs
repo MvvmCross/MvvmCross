@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.Content;
+using System.Collections.Generic;
+using System.Reflection;
 using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Logging;
-using MvvmCross.Platforms.Android.Presenters;
-using MvvmCross.ViewModels;
 using Playground.Core;
 using Serilog;
 
@@ -14,10 +14,11 @@ namespace Playground.Droid
 {
     public class Setup : MvxAppCompatSetup<App>
     {
-        protected override IMvxAndroidViewPresenter CreateViewPresenter()
-        {
-            return new MvxAppCompatViewPresenter(AndroidViewAssemblies);
-        }
+        protected override IEnumerable<Assembly> AndroidViewAssemblies =>
+            new List<Assembly>(base.AndroidViewAssemblies)
+            {
+                typeof(MvxRecyclerView).Assembly
+            };
 
         protected override MvxLogProviderType GetDefaultLogProviderType()
             => MvxLogProviderType.Serilog;

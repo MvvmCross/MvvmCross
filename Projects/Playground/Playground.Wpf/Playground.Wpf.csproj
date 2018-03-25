@@ -172,7 +172,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <SplashScreen Include="MvvmCross-logo.png" />
+    <SplashScreen Include="Assets\MvvmCross-logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

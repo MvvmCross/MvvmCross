@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -23,11 +23,5 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
         /// Add extras to the Intent that will be started for this Activity
         /// </summary>
         public Bundle Extras { get; set; } = DefaultExtras;
-
-        public static IDictionary<string, View> DefaultSharedElements = null;
-        /// <summary>
-        /// SharedElements that will be added to the transition. String may be left empty when using AppCompat
-        /// </summary>
-        public IDictionary<string, View> SharedElements { get; set; } = DefaultSharedElements;
     }
 }

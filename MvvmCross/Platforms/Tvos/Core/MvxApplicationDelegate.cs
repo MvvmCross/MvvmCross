@@ -12,12 +12,14 @@ namespace MvvmCross.Platforms.Tvos.Core
 {
     public abstract class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplicationDelegate
     {
-        protected IMvxTvosSetup Setup
+        /// <summary>
+        /// UIApplicationDelegate.Window doesn't really exist / work. It was added by Xamarin.iOS templates 
+        /// </summary>
+        public new UIWindow Window { get; set; }
+
+        public MvxApplicationDelegate() : base()
         {
-            get
-            {
-                return MvxSetup.PlatformInstance<IMvxTvosSetup>();
-            }
+            RegisterSetup();
         }
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
@@ -25,8 +27,7 @@ namespace MvvmCross.Platforms.Tvos.Core
             if (Window == null)
                 Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            Setup.PlatformInitialize(this, Window);
-            Setup.Initialize();
+            MvxTvosSetupSingleton.EnsureSingletonAvailable(this, Window).EnsureInitialized();
             RunAppStart(launchOptions);
 
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
@@ -68,19 +69,18 @@ namespace MvvmCross.Platforms.Tvos.Core
             handler?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 
-        public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
-
-        protected virtual MvxTvosSetup CreateSetup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
+        protected virtual void RegisterSetup()
         {
-            return MvxSetupExtensions.CreateSetup<MvxTvosSetup>(this.GetType().Assembly, applicationDelegate, window);
         }
+
+        public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
     }
 
     public abstract class MvxApplicationDelegate<TMvxTvosSetup, TApplication> : MvxApplicationDelegate
        where TMvxTvosSetup : MvxTvosSetup<TApplication>, new()
        where TApplication : IMvxApplication, new()
     {
-        static MvxApplicationDelegate()
+        protected override void RegisterSetup()
         {
             MvxSetup.RegisterSetupType<TMvxTvosSetup>();
         }

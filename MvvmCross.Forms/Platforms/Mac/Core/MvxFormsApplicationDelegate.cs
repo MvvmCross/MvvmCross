@@ -15,22 +15,15 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.MacOS;
 
 namespace MvvmCross.Forms.Platforms.Mac.Core
-{ 
+{
     public abstract class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {
-        protected MvxFormsMacSetup Setup
-        {
-            get
-            {
-                return MvxSetup.PlatformInstance<MvxFormsMacSetup>();
-            }
-        }
-
         private NSWindow window;
         public override NSWindow MainWindow
         {
-            get {
-                if(window == null)
+            get
+            {
+                if (window == null)
                 {
                     var style = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
 
@@ -42,14 +35,19 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
             }
         }
 
+        public MvxFormsApplicationDelegate() : base()
+        {
+            RegisterSetup();
+        }
+
         public override void DidFinishLaunching(Foundation.NSNotification notification)
         {
-            Setup.PlatformInitialize(this, MainWindow);
-            Setup.Initialize();
+            var instance = MvxMacSetupSingleton.EnsureSingletonAvailable(this, MainWindow);
+            instance.EnsureInitialized();
 
             RunAppStart(notification);
 
-            Setup.FormsApplication.SendStart();
+            instance.PlatformSetup<MvxFormsMacSetup>().FormsApplication.SendStart();
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
             base.DidFinishLaunching(notification);
         }
@@ -70,7 +68,8 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
 
         protected virtual void LoadFormsApplication()
         {
-            LoadApplication(Setup.FormsApplication);
+            var instance = MvxMacSetupSingleton.EnsureSingletonAvailable(this, MainWindow);
+            LoadApplication(instance.PlatformSetup<MvxFormsMacSetup>().FormsApplication);
         }
 
         public override void WillBecomeActive(Foundation.NSNotification notification)
@@ -94,6 +93,10 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
             LifetimeChanged?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 
+        protected virtual void RegisterSetup()
+        {
+        }
+
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
     }
 
@@ -102,7 +105,7 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
     where TApplication : IMvxApplication, new()
     where TFormsApplication : Application, new()
     {
-        static MvxFormsApplicationDelegate()
+        protected override void RegisterSetup()
         {
             MvxSetup.RegisterSetupType<TMvxMacSetup>();
         }

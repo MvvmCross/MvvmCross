@@ -31,4 +31,7 @@
     <dimen name="text_large">16sp</dimen>
     <dimen name="text_huge">17sp</dimen>
     <dimen name="text_very_huge">18sp</dimen>
+
+    <dimen name="list_icon_size">50dp</dimen>
+    <dimen name="detail_icon_size">100dp</dimen>
 </resources>

@@ -45,5 +45,10 @@ namespace MvvmCross.ViewModels
         }
 
         public bool IsStarted => startHasCommenced != 0;
+
+        public void ResetStart()
+        {
+            Interlocked.Exchange(ref startHasCommenced, 0);
+        }
     }
 }

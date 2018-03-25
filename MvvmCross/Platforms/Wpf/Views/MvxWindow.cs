@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -28,6 +28,15 @@ namespace MvvmCross.Platforms.Wpf.Views
         {
             Unloaded += MvxWindow_Unloaded;
             Loaded += MvxWindow_Loaded;
+            Initialized += MvxWindow_Initialized;
+        }
+
+        private void MvxWindow_Initialized(object sender, EventArgs e)
+        {
+            if (this == Application.Current.MainWindow)
+            {
+                (Application.Current as MvxApplication).ApplicationInitialized();
+            }
         }
 
         private void MvxWindow_Unloaded(object sender, RoutedEventArgs e)
