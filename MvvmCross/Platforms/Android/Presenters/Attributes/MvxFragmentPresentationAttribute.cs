@@ -1,11 +1,8 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
-using Android.Views;
-using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
 
 namespace MvvmCross.Platforms.Android.Presenters.Attributes
@@ -119,11 +116,5 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
         /// Indicates if the fragment can be cached. False by default.
         /// </summary>
         public bool IsCacheableFragment { get; set; } = DefaultIsCacheableFragment;
-
-        public static IDictionary<string, View> DefaultSharedElements = null;
-        /// <summary>
-        /// SharedElements that will be added to the transition. String may be left empty when using AppCompat
-        /// </summary>
-        public IDictionary<string, View> SharedElements { get; set; } = DefaultSharedElements;
     }
 }
