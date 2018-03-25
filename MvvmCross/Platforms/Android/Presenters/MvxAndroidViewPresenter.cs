@@ -487,7 +487,11 @@ namespace MvvmCross.Platforms.Android.Presenters
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
 
+            OnFragmentChanging(ft, dialog, attribute, request);
+
             dialog.Show(ft, fragmentName);
+
+            OnFragmentChanged(ft, dialog, attribute, request);
         }
         #endregion
 
