@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using MvvmCross.Core;
+﻿using System.Windows;
 using MvvmCross.Platforms.Wpf.Core;
 using MvvmCross.ViewModels;
 
@@ -8,6 +6,11 @@ namespace MvvmCross.Platforms.Wpf.Views
 {
     public abstract class MvxApplication : Application
     {
+        public MvxApplication() : base()
+        {
+            RegisterSetup();
+        }
+
         public virtual void ApplicationInitialized()
         {
             if (MainWindow == null) return;
@@ -28,5 +31,7 @@ namespace MvvmCross.Platforms.Wpf.Views
         {
             return null;
         }
+
+        protected abstract void RegisterSetup();
     }
 }

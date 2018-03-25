@@ -17,6 +17,11 @@ namespace MvvmCross.Platforms.Tvos.Core
         /// </summary>
         public new UIWindow Window { get; set; }
 
+        public MvxApplicationDelegate() : base()
+        {
+            RegisterSetup();
+        }
+
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             if (Window == null)
@@ -64,6 +69,10 @@ namespace MvvmCross.Platforms.Tvos.Core
             handler?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 
+        protected virtual void RegisterSetup()
+        {
+        }
+
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
     }
 
@@ -71,7 +80,7 @@ namespace MvvmCross.Platforms.Tvos.Core
        where TMvxTvosSetup : MvxTvosSetup<TApplication>, new()
        where TApplication : IMvxApplication, new()
     {
-        static MvxApplicationDelegate()
+        protected override void RegisterSetup()
         {
             MvxSetup.RegisterSetupType<TMvxTvosSetup>();
         }

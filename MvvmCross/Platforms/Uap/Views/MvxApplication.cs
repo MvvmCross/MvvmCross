@@ -24,6 +24,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         public MvxApplication()
         {
+            RegisterSetup();
             Suspending += OnSuspending;
             Resuming += OnResuming;
         }
@@ -143,5 +144,7 @@ namespace MvvmCross.Platforms.Uap.Views
         {
             return Task.CompletedTask;
         }
+
+        protected abstract void RegisterSetup();
     }
 }

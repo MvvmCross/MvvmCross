@@ -17,6 +17,11 @@ namespace MvvmCross.Platforms.Ios.Core
         /// </summary>
         public new UIWindow Window { get; set; }
 
+        public MvxApplicationDelegate(): base()
+        {
+            RegisterSetup();
+        }
+
         public override void WillEnterForeground(UIApplication application)
         {
             FireLifetimeChanged(MvxLifetimeEvent.ActivatedFromMemory);
@@ -59,6 +64,10 @@ namespace MvvmCross.Platforms.Ios.Core
             return null;
         }
 
+        protected virtual void RegisterSetup()
+        {
+        }
+
         private void FireLifetimeChanged(MvxLifetimeEvent which)
         {
             var handler = LifetimeChanged;
@@ -72,7 +81,7 @@ namespace MvvmCross.Platforms.Ios.Core
        where TMvxIosSetup : MvxIosSetup<TApplication>, new()
        where TApplication : IMvxApplication, new()
     {
-        static MvxApplicationDelegate()
+        protected override void RegisterSetup()
         {
             MvxSetup.RegisterSetupType<TMvxIosSetup>();
         }

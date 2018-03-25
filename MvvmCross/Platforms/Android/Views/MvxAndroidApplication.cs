@@ -11,18 +11,23 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Android.Views
 {
-    public class MvxAndroidApplication : Application, IMvxAndroidApplication
+    public abstract class MvxAndroidApplication : Application, IMvxAndroidApplication
     {
         public static MvxAndroidApplication Instance { get; private set; }
 
         public MvxAndroidApplication()
         {
             Instance = this;
+            RegisterSetup();
         }
 
         public MvxAndroidApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
             Instance = this;
+        }
+
+        protected virtual void RegisterSetup()
+        {
         }
     }
 
@@ -32,15 +37,13 @@ namespace MvvmCross.Platforms.Android.Views
     {
         public MvxAndroidApplication() : base()
         {
-            RegisterSetup();
         }
 
         public MvxAndroidApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            RegisterSetup();
         }
 
-        protected virtual void RegisterSetup()
+        protected override void RegisterSetup()
         {
             MvxSetup.RegisterSetupType<TMvxAndroidSetup>(GetType().Assembly);
         }

@@ -26,6 +26,11 @@ namespace MvvmCross.Platforms.Mac.Core
             set { window = value; }
         }
 
+        public MvxApplicationDelegate() : base()
+        {
+            RegisterSetup();
+        }
+
         public override void DidFinishLaunching(Foundation.NSNotification notification)
         {
             MvxMacSetupSingleton.EnsureSingletonAvailable(this, MainWindow).EnsureInitialized();
@@ -68,6 +73,10 @@ namespace MvvmCross.Platforms.Mac.Core
             LifetimeChanged?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 
+        protected virtual void RegisterSetup()
+        {
+        }
+
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
     }
 
@@ -75,7 +84,7 @@ namespace MvvmCross.Platforms.Mac.Core
    where TMvxMacSetup : MvxMacSetup<TApplication>, new()
    where TApplication : IMvxApplication, new()
     {
-        static MvxApplicationDelegate()
+        protected override void RegisterSetup()
         {
             MvxSetup.RegisterSetupType<TMvxMacSetup>();
         }

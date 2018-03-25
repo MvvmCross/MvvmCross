@@ -26,7 +26,11 @@ namespace MvvmCross.Core
         protected static Assembly[] ViewAssemblies { get; set; }
         public static void RegisterSetupType<TMvxSetup>(params Assembly[] assemblies) where TMvxSetup : MvxSetup, new()
         {
-            ViewAssemblies = assemblies ?? new[] { Assembly.GetEntryAssembly() };
+            ViewAssemblies = assemblies;
+            if (!(ViewAssemblies?.Any() ?? false))
+            {
+                ViewAssemblies = new[] { Assembly.GetEntryAssembly() ?? Assembly.GetCallingAssembly() };
+            }
 
             // Avoid creating the instance of Setup right now, instead
             // take a reference to the type in a way that we can avoid

@@ -15,14 +15,15 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.MacOS;
 
 namespace MvvmCross.Forms.Platforms.Mac.Core
-{ 
+{
     public abstract class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {
         private NSWindow window;
         public override NSWindow MainWindow
         {
-            get {
-                if(window == null)
+            get
+            {
+                if (window == null)
                 {
                     var style = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
 
@@ -32,6 +33,11 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
                 }
                 return window;
             }
+        }
+
+        public MvxFormsApplicationDelegate() : base()
+        {
+            RegisterSetup();
         }
 
         public override void DidFinishLaunching(Foundation.NSNotification notification)
@@ -87,6 +93,10 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
             LifetimeChanged?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 
+        protected virtual void RegisterSetup()
+        {
+        }
+
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
     }
 
@@ -95,7 +105,7 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
     where TApplication : IMvxApplication, new()
     where TFormsApplication : Application, new()
     {
-        static MvxFormsApplicationDelegate()
+        protected override void RegisterSetup()
         {
             MvxSetup.RegisterSetupType<TMvxMacSetup>();
         }

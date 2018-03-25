@@ -6,14 +6,14 @@ namespace Playground.Uwp
 {
     public sealed partial class App : MvxApplication
     {
-        static App()
-        {
-            MvxSetup.RegisterSetupType<MvxWindowsSetup<Core.App>>();
-        }
-
         public App()
         {
             InitializeComponent();
+        }
+
+        protected override void RegisterSetup()
+        {
+            MvxSetup.RegisterSetupType<MvxWindowsSetup<Core.App>>();
         }
     }
 }
