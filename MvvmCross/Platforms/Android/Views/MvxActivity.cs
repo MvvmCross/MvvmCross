@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -14,6 +14,7 @@ using MvvmCross.Platforms.Android.Views.Base;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.Views;
 using MvvmCross.ViewModels;
+using MvvmCross.Core;
 
 namespace MvvmCross.Platforms.Android.Views
 {
@@ -74,7 +75,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         protected override void AttachBaseContext(Context @base)
         {
-            if (this is IMvxAndroidSplashScreenActivity)
+            if (this is IMvxSetupMonitor)
             {
                 // Do not attach our inflater to splash screens.
                 base.AttachBaseContext(@base);
@@ -143,6 +144,10 @@ namespace MvvmCross.Platforms.Android.Views
         {
             base.OnStop();
             ViewModel?.ViewDisappeared();
+        }
+        protected virtual void RegisterSetup<TMvxAndroidSetup>() where TMvxAndroidSetup : MvxSetup, new()
+        {
+            MvxSetup.RegisterSetupType<TMvxAndroidSetup>(GetType().Assembly);
         }
     }
 

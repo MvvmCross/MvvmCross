@@ -8,6 +8,7 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Base;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Android.Views.Base
 {
@@ -35,6 +36,12 @@ namespace MvvmCross.Platforms.Android.Views.Base
         {
             DestroyCalled.Raise(this);
             base.OnDestroy();
+
+            if (IsTaskRoot)
+            {
+                var appStart = Mvx.Resolve<IMvxAppStart>();
+                appStart.ResetStart();
+            }
         }
 
         protected override void OnNewIntent(Intent intent)

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,18 +11,23 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Android.Views
 {
-    public class MvxAndroidApplication : Application, IMvxAndroidApplication
+    public abstract class MvxAndroidApplication : Application, IMvxAndroidApplication
     {
         public static MvxAndroidApplication Instance { get; private set; }
 
         public MvxAndroidApplication()
         {
             Instance = this;
+            RegisterSetup();
         }
 
         public MvxAndroidApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
             Instance = this;
+        }
+
+        protected virtual void RegisterSetup()
+        {
         }
     }
 
@@ -30,17 +35,17 @@ namespace MvvmCross.Platforms.Android.Views
       where TMvxAndroidSetup : MvxAndroidSetup<TApplication>, new()
       where TApplication : IMvxApplication, new()
     {
-        static MvxAndroidApplication()
-        {
-            MvxSetup.RegisterSetupType<TMvxAndroidSetup>();
-        }
-
         public MvxAndroidApplication() : base()
         {
         }
 
         public MvxAndroidApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
+        }
+
+        protected override void RegisterSetup()
+        {
+            MvxSetup.RegisterSetupType<TMvxAndroidSetup>(GetType().Assembly);
         }
     }
 }

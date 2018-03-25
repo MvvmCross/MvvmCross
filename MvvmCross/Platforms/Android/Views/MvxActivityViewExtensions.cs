@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -12,6 +12,7 @@ using MvvmCross.Platforms.Android.Views.Base;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
+using MvvmCross.Core;
 
 namespace MvvmCross.Platforms.Android.Views
 {
@@ -136,15 +137,15 @@ namespace MvvmCross.Platforms.Android.Views
 
         private static void EnsureSetupInitialized(this IMvxAndroidView androidView)
         {
-            if (androidView is IMvxAndroidSplashScreenActivity)
+            if (androidView is IMvxSetupMonitor)
             {
                 // splash screen views manage their own setup initialization
                 return;
             }
 
             var activity = androidView.ToActivity();
-            var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(activity.ApplicationContext);
-            setupSingleton.EnsureInitialized();
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(activity.ApplicationContext);
+            setup.EnsureInitialized();
         }
     }
 }
