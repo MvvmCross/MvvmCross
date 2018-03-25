@@ -270,7 +270,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             {
                 var elements = new List<string>();
 
-                foreach (KeyValuePair<string, View> item in sharedElementsActivity.FetchSharedElementsToAnimate(request))
+                foreach (KeyValuePair<string, View> item in sharedElementsActivity.FetchSharedElementsToAnimate(attribute, request))
                 {
                     var transitionName = ViewCompat.GetTransitionName(item.Value);
                     if (!string.IsNullOrEmpty(transitionName))

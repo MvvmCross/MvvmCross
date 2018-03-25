@@ -11,6 +11,7 @@ using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Platforms.Android.Views;
+using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using Playground.Core.ViewModels;
 
@@ -22,7 +23,7 @@ namespace Playground.Droid.Views
     {
         public int SelectedListItem { get; set; }
 
-        public IDictionary<string, View> FetchSharedElementsToAnimate(MvxViewModelRequest request)
+        public IDictionary<string, View> FetchSharedElementsToAnimate(MvxBasePresentationAttribute attribute, MvxViewModelRequest request)
         {
             IDictionary<string, View> sharedElements = new Dictionary<string, View>();
 
