@@ -9,8 +9,8 @@ using System.Reflection;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
-using Android.Support.V4.Util;
 using Android.Support.V4.View;
+using Android.Views;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
@@ -28,7 +28,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         public MvxAppCompatViewPresenter(IEnumerable<Assembly> androidViewAssemblies) : base(androidViewAssemblies)
         {
         }
-        
+
         protected new FragmentManager CurrentFragmentManager
         {
             get
@@ -151,46 +151,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
 
         #region Show implementations
-        protected override void ShowActivity(Type view,
-            MvxActivityPresentationAttribute attribute,
-            MvxViewModelRequest request)
-        {
-            var intent = CreateIntentForRequest(request);
-            if (attribute.Extras != null)
-                intent.PutExtras(attribute.Extras);
-
-            var activity = CurrentActivity;
-            if (activity == null)
-            {
-                MvxAndroidLog.Instance.Warn("Cannot Resolve current top activity");
-                return;
-            }
-
-            var activityOptions = CreateActivityTransitionOptions(intent, attribute);
-            if (activityOptions != null)
-            {
-                activity.StartActivity(intent, activityOptions.ToBundle());
-            }
-            else
-                activity.StartActivity(intent);
-        }
-
-        protected virtual ActivityOptionsCompat CreateActivityTransitionOptions(Android.Content.Intent intent, MvxActivityPresentationAttribute attribute)
-        {
-            ActivityOptionsCompat options = null;
-            if (attribute.SharedElements != null)
-            {
-                IList<Pair> sharedElements = new List<Pair>();
-                foreach (var item in attribute.SharedElements)
-                {
-                    intent.PutExtra(item.Key, ViewCompat.GetTransitionName(item.Value));
-                    sharedElements.Add(Pair.Create(item.Value, item.Key));
-                }
-                options = ActivityOptionsCompat.MakeSceneTransitionAnimation(CurrentActivity, sharedElements.ToArray());
-            }
-
-            return options;
-        }
 
         protected override void ShowHostActivity(MvxFragmentPresentationAttribute attribute)
         {
@@ -291,7 +251,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             var ft = fragmentManager.BeginTransaction();
 
-            OnBeforeFragmentChanging(ft, fragmentView, attribute);
+            OnBeforeFragmentChanging(ft, fragmentView, attribute, request);
 
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
@@ -304,18 +264,30 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             OnFragmentChanged(ft, fragmentView, attribute);
         }
 
-        protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
         {
-            if (attribute.SharedElements != null)
+            if (CurrentActivity is IMvxAndroidSharedElements sharedElementsActivity)
             {
-                foreach (var item in attribute.SharedElements)
+                var elements = new List<string>();
+
+                foreach (KeyValuePair<string, View> item in sharedElementsActivity.FetchSharedElementsToAnimate(attribute, request))
                 {
-                    string name = item.Key;
-                    if (string.IsNullOrEmpty(name))
-                        name = ViewCompat.GetTransitionName(item.Value);
-                    ft.AddSharedElement(item.Value, name);
+                    var transitionName = ViewCompat.GetTransitionName(item.Value);
+                    if (!string.IsNullOrEmpty(transitionName))
+                    {
+                        ft.AddSharedElement(item.Value, transitionName);
+                        elements.Add($"{item.Key}:{transitionName}");
+                    }
+                    else
+                    {
+                        MvxAndroidLog.Instance.Warn("A XML transitionName is required in order to transition a control when navigating.");
+                    }
                 }
+
+                if (elements.Count > 0)
+                    fragment.Arguments.PutString(SharedElementsBundleKey, string.Join("|", elements));
             }
+
             if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
             {
                 if (!attribute.PopEnterAnimation.Equals(int.MinValue) && !attribute.PopExitAnimation.Equals(int.MinValue))
@@ -323,6 +295,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 else
                     ft.SetCustomAnimations(attribute.EnterAnimation, attribute.ExitAnimation);
             }
+
             if (attribute.TransitionStyle != int.MinValue)
                 ft.SetTransitionStyle(attribute.TransitionStyle);
         }
@@ -349,7 +322,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             var fragmentName = FragmentJavaName(attribute.ViewType);
             IMvxFragmentView mvxFragmentView = CreateFragment(attribute, fragmentName);
             var dialog = mvxFragmentView as DialogFragment;
-            if(dialog == null)
+            if (dialog == null)
             {
                 throw new MvxException("Fragment {0} does not extend {1}", fragmentName, typeof(DialogFragment).FullName);
             }
@@ -366,10 +339,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
 
             dialog.Cancelable = attribute.Cancelable;
-            
+
             var ft = CurrentFragmentManager.BeginTransaction();
 
-            OnBeforeFragmentChanging(ft, dialog, attribute);
+            OnBeforeFragmentChanging(ft, dialog, attribute, request);
 
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
@@ -464,7 +437,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             string tag = FragmentJavaName(attribute.ViewType);
             var toClose = CurrentFragmentManager.FindFragmentByTag(tag);
-            if(toClose != null && toClose is DialogFragment dialog)
+            if (toClose != null && toClose is DialogFragment dialog)
             {
                 dialog.DismissAllowingStateLoss();
                 return true;
