@@ -256,12 +256,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
 
-            OnFragmentChanging(ft, fragmentView, attribute);
+            OnFragmentChanging(ft, fragmentView, attribute, request);
 
             ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
             ft.CommitAllowingStateLoss();
 
-            OnFragmentChanged(ft, fragmentView, attribute);
+            OnFragmentChanged(ft, fragmentView, attribute, request);
         }
 
         protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
@@ -300,12 +300,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 ft.SetTransitionStyle(attribute.TransitionStyle);
         }
 
-        protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
         {
 
         }
 
-        protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
         {
 
         }
@@ -347,11 +347,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
 
-            OnFragmentChanging(ft, dialog, attribute);
+            OnFragmentChanging(ft, dialog, attribute, request);
 
             dialog.Show(ft, fragmentName);
 
-            OnFragmentChanged(ft, dialog, attribute);
+            OnFragmentChanged(ft, dialog, attribute, request);
         }
 
         protected virtual void ShowViewPagerFragment(
