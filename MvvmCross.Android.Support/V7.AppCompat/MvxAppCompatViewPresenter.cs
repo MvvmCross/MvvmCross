@@ -156,7 +156,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             var viewType = ViewsContainer.GetViewType(attribute.ActivityHostViewModelType);
             if (!viewType.IsSubclassOf(typeof(FragmentActivity)))
-                throw new MvxException("The host activity doesnt inherit FragmentActivity");
+                throw new MvxException("The host activity doesn’t inherit FragmentActivity");
 
             var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(attribute.ActivityHostViewModelType);
             Show(hostViewModelRequest);
@@ -174,7 +174,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 return;
             }
 
-            // if there is no Actitivty host associated, assume is the current activity
+            // if there is no Activity host associated, assume is the current activity
             if (attribute.ActivityHostViewModelType == null)
                 attribute.ActivityHostViewModelType = GetCurrentActivityViewModelType();
 

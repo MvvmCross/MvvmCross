@@ -314,7 +314,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 return;
             }
 
-            // if there is no Actitivty host associated, assume is the current activity
+            // if there is no Activity host associated, assume is the current activity
             if (attribute.ActivityHostViewModelType == null)
                 attribute.ActivityHostViewModelType = GetCurrentActivityViewModelType();
 
