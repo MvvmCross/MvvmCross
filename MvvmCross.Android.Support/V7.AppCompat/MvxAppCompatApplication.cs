@@ -16,15 +16,13 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     {
         public MvxAppCompatApplication() : base()
         {
-            RegisterSetup();
         }
 
         public MvxAppCompatApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            RegisterSetup();
         }
 
-        protected virtual void RegisterSetup()
+        protected override void RegisterSetup()
         {
             MvxSetup.RegisterSetupType<TMvxAndroidSetup>(GetType().Assembly);
         }

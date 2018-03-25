@@ -31,6 +31,11 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
             }
         }
 
+        public MvxFormsApplicationDelegate() : base()
+        {
+            RegisterSetup();
+        }
+
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             if (Window == null)
@@ -93,6 +98,10 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
             LifetimeChanged?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 
+        protected virtual void RegisterSetup()
+        {
+        }
+
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
     }
 
@@ -101,7 +110,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
         where TApplication : IMvxApplication, new()
         where TFormsApplication : Application, new()
     {
-        static MvxFormsApplicationDelegate()
+        protected override void RegisterSetup()
         {
             MvxSetup.RegisterSetupType<TMvxIosSetup>();
         }

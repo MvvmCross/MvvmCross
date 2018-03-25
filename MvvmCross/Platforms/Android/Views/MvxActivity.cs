@@ -145,6 +145,10 @@ namespace MvvmCross.Platforms.Android.Views
             base.OnStop();
             ViewModel?.ViewDisappeared();
         }
+        protected virtual void RegisterSetup<TMvxAndroidSetup>() where TMvxAndroidSetup : MvxSetup, new()
+        {
+            MvxSetup.RegisterSetupType<TMvxAndroidSetup>(GetType().Assembly);
+        }
     }
 
     public abstract class MvxActivity<TViewModel>
