@@ -35,6 +35,12 @@ namespace MvvmCross.Droid.Support.V4.EventSource
         {
             DestroyCalled.Raise(this);
             base.OnDestroy();
+
+            if (IsTaskRoot)
+            {
+                var appStart = Mvx.Resolve<IMvxAppStart>();
+                appStart.ResetStart();
+            }
         }
 
         protected override void OnNewIntent(Intent intent)
