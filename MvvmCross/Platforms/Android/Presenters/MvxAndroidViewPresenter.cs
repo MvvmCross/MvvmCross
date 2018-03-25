@@ -227,10 +227,10 @@ namespace MvvmCross.Platforms.Android.Presenters
             if (attribute.Extras != null)
                 intent.PutExtras(attribute.Extras);
 
-            ShowIntent(intent, CreateActivityTransitionOptions(intent, request));
+            ShowIntent(intent, CreateActivityTransitionOptions(intent, attribute, request));
         }
 
-        protected virtual Bundle CreateActivityTransitionOptions(Intent intent, MvxViewModelRequest request)
+        protected virtual Bundle CreateActivityTransitionOptions(Intent intent, MvxActivityPresentationAttribute attribute, MvxViewModelRequest request)
         {
             var bundle = Bundle.Empty;
 
@@ -239,7 +239,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 var elements = new List<string>();
                 var transitionElementPairs = new List<Pair>();
 
-                foreach (KeyValuePair<string, View> item in sharedElementsActivity.FetchSharedElementsToAnimate(request))
+                foreach (KeyValuePair<string, View> item in sharedElementsActivity.FetchSharedElementsToAnimate(attribute, request))
                 {
                     var transitionName = item.Value.GetTransitionNameSupport();
                     if (!string.IsNullOrEmpty(transitionName))
@@ -414,7 +414,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             {
                 var elements = new List<string>();
 
-                foreach (KeyValuePair<string, View> item in sharedElementsActivity.FetchSharedElementsToAnimate(request))
+                foreach (KeyValuePair<string, View> item in sharedElementsActivity.FetchSharedElementsToAnimate(attribute, request))
                 {
                     var transitionName = item.Value.GetTransitionNameSupport();
                     if (!string.IsNullOrEmpty(transitionName))
