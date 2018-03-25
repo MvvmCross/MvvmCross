@@ -33,15 +33,6 @@ namespace MvvmCross.Platforms.Uap.Core
         private string _suspensionManagerSessionStateKey;
         private IMvxWindowsViewPresenter _presenter;
 
-        // Oww, this is nasty but can't think of a way around it.
-        protected static Assembly viewAssembly;
-
-        public static void RegisterWindowsSetupType<TMvxSetup>() where TMvxSetup : MvxWindowsSetup, new()
-        {
-            viewAssembly = Assembly.GetCallingAssembly();
-            RegisterSetupType<TMvxSetup>();
-        }
-
         public virtual void PlatformInitialize(Frame rootFrame, IActivatedEventArgs activatedEventArgs,
             string suspensionManagerSessionStateKey = null)
         {
@@ -192,11 +183,6 @@ namespace MvvmCross.Platforms.Uap.Core
         protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "Page");
-        }
-
-        protected override IEnumerable<Assembly> GetViewAssemblies()
-        {
-            return base.GetViewAssemblies().Union(new[] { viewAssembly });
         }
     }
 

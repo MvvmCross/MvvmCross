@@ -5,6 +5,7 @@
 using System;
 using System.Threading.Tasks;
 using MvvmCross.Forms.Views.Base;
+using MvvmCross.Platforms.Uap.Core;
 using MvvmCross.Platforms.Uap.Views;
 using MvvmCross.ViewModels;
 using Windows.ApplicationModel.Activation;
@@ -19,9 +20,8 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
         {
             if (RootFrame?.Content == null)
             {
-                Setup.PlatformInitialize(RootFrame, activationArgs, nameof(Suspend));
-                Setup.Initialize();
-
+                MvxWindowsSetupSingleton.EnsureSingletonAvailable(RootFrame, activationArgs, nameof(Suspend)).EnsureInitialized();
+                
                 var startup = Mvx.Resolve<IMvxAppStart>();
                 if (!startup.IsStarted)
                     startup.Start(GetAppStartHint(activationArgs));
