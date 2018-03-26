@@ -547,9 +547,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 var fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
                 return fragment;
             }
-            catch
+            catch (Exception ex)
             {
-                throw new MvxException($"Cannot create Fragment '{fragmentName}'. Are you use the wrong base class?");
+                throw new MvxException(ex, $"Cannot create Fragment '{fragmentName}'. Are you use the wrong base class?");
             }
         }
 
