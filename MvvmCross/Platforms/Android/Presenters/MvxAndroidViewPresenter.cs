@@ -621,9 +621,9 @@ namespace MvvmCross.Platforms.Android.Presenters
                 var fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
                 return fragment;
             }
-            catch
+            catch (System.Exception ex)
             {
-                throw new MvxException($"Cannot create Fragment '{fragmentName}'. Use the MvxAppCompatViewPresenter when using Android Support Fragments");
+                throw new MvxException(ex, $"Cannot create Fragment '{fragmentName}'. Use the MvxAppCompatViewPresenter when using Android Support Fragments");
             }
         }
 
