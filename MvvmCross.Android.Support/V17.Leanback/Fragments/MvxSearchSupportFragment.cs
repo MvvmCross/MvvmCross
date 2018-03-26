@@ -33,7 +33,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         protected MvxSearchSupportFragment()
         {
-            this.AddEventListeners();
+            V4.MvxFragmentExtensions.AddEventListeners(this);
         }
 
         protected MvxSearchSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)

@@ -20,7 +20,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     {
         protected MvxAppCompatDialogFragment()
         {
-            this.AddEventListeners();
+            V4.MvxFragmentExtensions.AddEventListeners(this);
         }
 
         protected MvxAppCompatDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)
