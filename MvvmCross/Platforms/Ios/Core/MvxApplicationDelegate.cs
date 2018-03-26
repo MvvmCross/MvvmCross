@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Ios.Core
         /// </summary>
         public new UIWindow Window { get; set; }
 
-        public MvxApplicationDelegate(): base()
+        public MvxApplicationDelegate() : base()
         {
             RegisterSetup();
         }

@@ -24,6 +24,7 @@ namespace MvvmCross.Core
         protected static Func<IMvxSetup> SetupCreator { get; set; }
 
         protected static Assembly[] ViewAssemblies { get; set; }
+
         public static void RegisterSetupType<TMvxSetup>(params Assembly[] assemblies) where TMvxSetup : MvxSetup, new()
         {
             ViewAssemblies = assemblies;
