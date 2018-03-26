@@ -15,6 +15,7 @@ using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Core;
+using MvvmCross.Platforms.Android.Core;
 
 namespace MvvmCross.Platforms.Android.Views
 {
@@ -145,7 +146,8 @@ namespace MvvmCross.Platforms.Android.Views
             base.OnStop();
             ViewModel?.ViewDisappeared();
         }
-        protected virtual void RegisterSetup<TMvxAndroidSetup>() where TMvxAndroidSetup : MvxSetup, new()
+
+        protected virtual void RegisterSetup<TMvxAndroidSetup>() where TMvxAndroidSetup : MvxAndroidSetup, new()
         {
             MvxSetup.RegisterSetupType<TMvxAndroidSetup>(GetType().Assembly);
         }
