@@ -27,7 +27,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         protected MvxAppCompatActivity()
         {
             BindingContext = new MvxAndroidBindingContext(this, this);
-            this.AddEventListeners();
+            V4.MvxFragmentExtensions.AddEventListeners(this);
         }
 
         protected MvxAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
