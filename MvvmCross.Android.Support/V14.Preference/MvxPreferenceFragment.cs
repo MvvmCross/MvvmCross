@@ -17,7 +17,7 @@ namespace MvvmCross.Droid.Support.V14.Preference
     {
         protected MvxPreferenceFragment()
         {
-            this.AddEventListeners();
+            V4.MvxFragmentExtensions.AddEventListeners(this);
         }
 
         protected MvxPreferenceFragment(IntPtr javaReference, JniHandleOwnership transfer)
