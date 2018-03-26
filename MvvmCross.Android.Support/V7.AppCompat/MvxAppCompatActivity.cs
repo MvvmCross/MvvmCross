@@ -124,6 +124,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             var view = MvxAppCompatActivityHelper.OnCreateView(parent, name, context, attrs);
             return view ?? base.OnCreateView(parent, name, context, attrs);
         }
+
+        protected virtual void RegisterSetup<TMvxAndroidSetup>() where TMvxAndroidSetup : MvxAppCompatSetup, new()
+        {
+            MvxSetup.RegisterSetupType<TMvxAndroidSetup>(GetType().Assembly);
+        }
     }
 
     public abstract class MvxAppCompatActivity<TViewModel>
