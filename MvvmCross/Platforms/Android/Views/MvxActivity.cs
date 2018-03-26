@@ -115,6 +115,8 @@ namespace MvvmCross.Platforms.Android.Views
         {
             base.OnCreate(bundle);
             ViewModel?.ViewCreated();
+
+            //TODO: Add setup init and startup here
         }
 
         protected override void OnDestroy()
