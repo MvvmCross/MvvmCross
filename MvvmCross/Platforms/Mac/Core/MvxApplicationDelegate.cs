@@ -86,7 +86,7 @@ namespace MvvmCross.Platforms.Mac.Core
     {
         protected override void RegisterSetup()
         {
-            MvxSetup.RegisterSetupType<TMvxMacSetup>();
+            this.RegisterSetupType<TMvxMacSetup>();
         }
     }
 }

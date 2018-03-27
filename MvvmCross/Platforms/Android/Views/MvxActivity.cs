@@ -151,7 +151,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         protected virtual void RegisterSetup<TMvxAndroidSetup>() where TMvxAndroidSetup : MvxAndroidSetup, new()
         {
-            MvxSetup.RegisterSetupType<TMvxAndroidSetup>(GetType().Assembly);
+            this.RegisterSetupType<TMvxAndroidSetup>();
         }
     }
 

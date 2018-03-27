@@ -129,7 +129,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected virtual void RegisterSetup<TMvxAndroidSetup>() where TMvxAndroidSetup : MvxAppCompatSetup, new()
         {
-            MvxSetup.RegisterSetupType<TMvxAndroidSetup>(GetType().Assembly);
+            this.RegisterSetupType<TMvxAndroidSetup>();
         }
     }
 

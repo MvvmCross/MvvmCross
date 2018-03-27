@@ -98,10 +98,8 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
             LifetimeChanged?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 
-        protected virtual void RegisterSetup()
-        {
-        }
-
+        protected abstract void RegisterSetup();
+ 
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
     }
 
@@ -112,7 +110,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
     {
         protected override void RegisterSetup()
         {
-            MvxSetup.RegisterSetupType<TMvxIosSetup>();
+            this.RegisterSetupType<TMvxIosSetup>();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Playground.Forms.Uwp
 
         protected override void RegisterSetup()
         {
-            MvxSetup.RegisterSetupType<MvxFormsWindowsSetup<Core.App, FormsApp>>();
+            this.RegisterSetupType<MvxFormsWindowsSetup<Core.App, FormsApp>>();
         }
     }
 }
