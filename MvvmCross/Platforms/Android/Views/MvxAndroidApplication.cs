@@ -45,7 +45,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         protected override void RegisterSetup()
         {
-            MvxSetup.RegisterSetupType<TMvxAndroidSetup>(GetType().Assembly);
+            this.RegisterSetupType<TMvxAndroidSetup>();
         }
     }
 }

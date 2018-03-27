@@ -10,6 +10,11 @@ namespace MvvmCross.Core
 {
     public static class MvxSetupExtensions
     {
+        public static void RegisterSetupType<TMvxSetup>(this object platformApplication,  params Assembly[] assemblies) where TMvxSetup : MvxSetup, new()
+        {
+            MvxSetup.RegisterSetupType<TMvxSetup>(new[] { platformApplication.GetType().Assembly }.Union(assemblies ?? new Assembly[] { }).ToArray());
+        }
+
         public static TSetup CreateSetup<TSetup>(Assembly assembly, params object[] parameters) where TSetup : MvxSetup
         {
             var setupType = FindSetupType<TSetup>(assembly);

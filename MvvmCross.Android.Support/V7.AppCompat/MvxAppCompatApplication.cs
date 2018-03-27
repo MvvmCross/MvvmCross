@@ -24,7 +24,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected override void RegisterSetup()
         {
-            MvxSetup.RegisterSetupType<TMvxAndroidSetup>(GetType().Assembly);
+            this.RegisterSetupType<TMvxAndroidSetup>();
         }
     }
 }

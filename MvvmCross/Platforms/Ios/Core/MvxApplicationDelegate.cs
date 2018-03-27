@@ -64,9 +64,7 @@ namespace MvvmCross.Platforms.Ios.Core
             return null;
         }
 
-        protected virtual void RegisterSetup()
-        {
-        }
+        protected abstract void RegisterSetup();
 
         private void FireLifetimeChanged(MvxLifetimeEvent which)
         {
@@ -83,7 +81,7 @@ namespace MvvmCross.Platforms.Ios.Core
     {
         protected override void RegisterSetup()
         {
-            MvxSetup.RegisterSetupType<TMvxIosSetup>();
+            this.RegisterSetupType<TMvxIosSetup>();
         }
     }
 }
