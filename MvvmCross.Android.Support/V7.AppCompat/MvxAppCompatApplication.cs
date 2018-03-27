@@ -10,7 +10,18 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
-    public abstract class MvxAppCompatApplication<TMvxAndroidSetup, TApplication> : MvxAndroidApplication
+    public abstract class MvxAppCompatApplication : MvxAndroidApplication
+    {
+        public MvxAppCompatApplication() : base()
+        {
+        }
+
+        public MvxAppCompatApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
+    }
+
+    public abstract class MvxAppCompatApplication<TMvxAndroidSetup, TApplication> : MvxAppCompatApplication
   where TMvxAndroidSetup : MvxAppCompatSetup<TApplication>, new()
   where TApplication : IMvxApplication, new()
     {
