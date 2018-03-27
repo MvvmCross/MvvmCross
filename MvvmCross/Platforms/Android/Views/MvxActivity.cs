@@ -115,8 +115,6 @@ namespace MvvmCross.Platforms.Android.Views
         {
             base.OnCreate(bundle);
             ViewModel?.ViewCreated();
-
-            //TODO: Add setup init and startup here
         }
 
         protected override void OnDestroy()
@@ -147,11 +145,6 @@ namespace MvvmCross.Platforms.Android.Views
         {
             base.OnStop();
             ViewModel?.ViewDisappeared();
-        }
-
-        protected virtual void RegisterSetup<TMvxAndroidSetup>() where TMvxAndroidSetup : MvxAndroidSetup, new()
-        {
-            this.RegisterSetupType<TMvxAndroidSetup>();
         }
     }
 

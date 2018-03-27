@@ -112,11 +112,6 @@ namespace MvvmCross.Droid.Support.V4
             base.OnStop();
             ViewModel?.ViewDisappeared();
         }
-
-        protected virtual void RegisterSetup<TMvxAndroidSetup>() where TMvxAndroidSetup : MvxAndroidSetup, new()
-        {
-            MvxSetup.RegisterSetupType<TMvxAndroidSetup>(GetType().Assembly);
-        }
     }
 
     public abstract class MvxFragmentActivity<TViewModel>

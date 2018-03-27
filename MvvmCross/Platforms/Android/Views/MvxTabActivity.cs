@@ -111,11 +111,6 @@ namespace MvvmCross.Platforms.Android.Views
             base.OnStop();
             ViewModel?.ViewDisappeared();
         }
-
-        protected virtual void RegisterSetup<TMvxAndroidSetup>() where TMvxAndroidSetup : MvxAndroidSetup, new()
-        {
-            MvxSetup.RegisterSetupType<TMvxAndroidSetup>(GetType().Assembly);
-        }
     }
 
     [Obsolete("TabActivity is obsolete. Use ViewPager + Indicator or any other Activity with Toolbar support.")]
