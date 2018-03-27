@@ -113,8 +113,24 @@ namespace MvvmCross.Platforms.Android.Views
 
         protected override void OnCreate(Bundle bundle)
         {
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            setup.EnsureInitialized();
+
             base.OnCreate(bundle);
             ViewModel?.ViewCreated();
+            RunAppStart(bundle);
+        }
+
+        protected virtual void RunAppStart(Bundle bundle)
+        {
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            if (!startup.IsStarted)
+                startup.Start(GetAppStartHint(bundle));
+        }
+
+        protected virtual object GetAppStartHint(object hint = null)
+        {
+            return null;
         }
 
         protected override void OnDestroy()
