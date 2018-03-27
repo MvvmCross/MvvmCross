@@ -97,7 +97,6 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
         protected override void OnCreate(Bundle bundle)
         {
-            // Required for proper Push notifications handling      
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setup.EnsureInitialized();
 
