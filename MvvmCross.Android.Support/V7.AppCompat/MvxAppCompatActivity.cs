@@ -87,8 +87,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             base.OnCreate(bundle);
             ViewModel?.ViewCreated();
-
-            //TODO: Add setup init and startup here
         }
 
         protected override void OnDestroy()
@@ -125,11 +123,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             var view = MvxAppCompatActivityHelper.OnCreateView(parent, name, context, attrs);
             return view ?? base.OnCreateView(parent, name, context, attrs);
-        }
-
-        protected virtual void RegisterSetup<TMvxAndroidSetup>() where TMvxAndroidSetup : MvxAppCompatSetup, new()
-        {
-            this.RegisterSetupType<TMvxAndroidSetup>();
         }
     }
 
