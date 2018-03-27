@@ -93,7 +93,9 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
             LifetimeChanged?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 
-        protected abstract void RegisterSetup();
+        protected virtual void RegisterSetup()
+        {
+        }
 
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
     }
