@@ -27,7 +27,9 @@ namespace MvvmCross.Platforms.Android.Views
             RegisterSetup();
         }
 
-        protected abstract void RegisterSetup();
+        protected virtual void RegisterSetup()
+        {
+        }
     }
 
     public abstract class MvxAndroidApplication<TMvxAndroidSetup, TApplication> : MvxAndroidApplication
