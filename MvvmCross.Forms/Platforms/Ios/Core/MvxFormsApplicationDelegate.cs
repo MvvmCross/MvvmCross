@@ -49,7 +49,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
             instance.PlatformSetup<MvxFormsIosSetup>().FormsApplication.SendStart();
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
 
-            //TODO: we might need to call base here
+            //TODO: we don't call base for now, but we might need to as soon as Forms opens up
             return true;
         }
 
@@ -71,7 +71,6 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
         protected virtual void LoadFormsApplication()
         {
             var instance = MvxIosSetupSingleton.EnsureSingletonAvailable(this, Window);
-
             LoadApplication(instance.PlatformSetup<MvxFormsIosSetup>().FormsApplication);
         }
 
