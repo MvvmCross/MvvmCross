@@ -24,11 +24,10 @@ namespace MvvmCross.Platforms.Android.Views
         public MvxAndroidApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
             Instance = this;
+            RegisterSetup();
         }
 
-        protected virtual void RegisterSetup()
-        {
-        }
+        protected abstract void RegisterSetup();
     }
 
     public abstract class MvxAndroidApplication<TMvxAndroidSetup, TApplication> : MvxAndroidApplication
