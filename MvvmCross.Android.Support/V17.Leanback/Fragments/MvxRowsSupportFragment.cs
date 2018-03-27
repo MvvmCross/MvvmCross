@@ -33,7 +33,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 
         protected MvxRowsSupportFragment()
         {
-            this.AddEventListeners();
+            V4.MvxFragmentExtensions.AddEventListeners(this);
         }
 
         protected MvxRowsSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)

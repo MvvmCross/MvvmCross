@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -315,7 +314,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 return;
             }
 
-            // if there is no Actitivty host associated, assume is the current activity
+            // if there is no Activity host associated, assume is the current activity
             if (attribute.ActivityHostViewModelType == null)
                 attribute.ActivityHostViewModelType = GetCurrentActivityViewModelType();
 
@@ -400,12 +399,12 @@ namespace MvvmCross.Platforms.Android.Presenters
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
 
-            OnFragmentChanging(ft, fragmentView, attribute);
+            OnFragmentChanging(ft, fragmentView, attribute, request);
 
             ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
             ft.CommitAllowingStateLoss();
 
-            OnFragmentChanged(ft, fragmentView, attribute);
+            OnFragmentChanged(ft, fragmentView, attribute, request);
         }
 
         protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
@@ -444,12 +443,12 @@ namespace MvvmCross.Platforms.Android.Presenters
                 ft.SetTransitionStyle(attribute.TransitionStyle);
         }
 
-        protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
         {
 
         }
 
-        protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
         {
 
         }
@@ -488,7 +487,11 @@ namespace MvvmCross.Platforms.Android.Presenters
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
 
+            OnFragmentChanging(ft, dialog, attribute, request);
+
             dialog.Show(ft, fragmentName);
+
+            OnFragmentChanged(ft, dialog, attribute, request);
         }
         #endregion
 
@@ -618,9 +621,9 @@ namespace MvvmCross.Platforms.Android.Presenters
                 var fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
                 return fragment;
             }
-            catch
+            catch (System.Exception ex)
             {
-                throw new MvxException($"Cannot create Fragment '{fragmentName}'. Use the MvxAppCompatViewPresenter when using Android Support Fragments");
+                throw new MvxException(ex, $"Cannot create Fragment '{fragmentName}'. Use the MvxAppCompatViewPresenter when using Android Support Fragments");
             }
         }
 

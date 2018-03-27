@@ -156,7 +156,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             var viewType = ViewsContainer.GetViewType(attribute.ActivityHostViewModelType);
             if (!viewType.IsSubclassOf(typeof(FragmentActivity)))
-                throw new MvxException("The host activity doesnt inherit FragmentActivity");
+                throw new MvxException("The host activity doesn’t inherit FragmentActivity");
 
             var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(attribute.ActivityHostViewModelType);
             Show(hostViewModelRequest);
@@ -174,7 +174,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 return;
             }
 
-            // if there is no Actitivty host associated, assume is the current activity
+            // if there is no Activity host associated, assume is the current activity
             if (attribute.ActivityHostViewModelType == null)
                 attribute.ActivityHostViewModelType = GetCurrentActivityViewModelType();
 
@@ -256,12 +256,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
 
-            OnFragmentChanging(ft, fragmentView, attribute);
+            OnFragmentChanging(ft, fragmentView, attribute, request);
 
             ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
             ft.CommitAllowingStateLoss();
 
-            OnFragmentChanged(ft, fragmentView, attribute);
+            OnFragmentChanged(ft, fragmentView, attribute, request);
         }
 
         protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
@@ -300,12 +300,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 ft.SetTransitionStyle(attribute.TransitionStyle);
         }
 
-        protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
         {
 
         }
 
-        protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
         {
 
         }
@@ -347,11 +347,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
 
-            OnFragmentChanging(ft, dialog, attribute);
+            OnFragmentChanging(ft, dialog, attribute, request);
 
             dialog.Show(ft, fragmentName);
 
-            OnFragmentChanged(ft, dialog, attribute);
+            OnFragmentChanged(ft, dialog, attribute, request);
         }
 
         protected virtual void ShowViewPagerFragment(
@@ -547,9 +547,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 var fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
                 return fragment;
             }
-            catch
+            catch (Exception ex)
             {
-                throw new MvxException($"Cannot create Fragment '{fragmentName}'. Are you use the wrong base class?");
+                throw new MvxException(ex, $"Cannot create Fragment '{fragmentName}'. Are you use the wrong base class?");
             }
         }
 

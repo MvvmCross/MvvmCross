@@ -106,11 +106,13 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
         protected virtual void RunAppStart(Bundle bundle)
         {
+            InitializeForms(bundle);
+
             var startup = Mvx.Resolve<IMvxAppStart>();
             if (!startup.IsStarted)
                 startup.Start(GetAppStartHint(bundle));
 
-            InitializeForms(bundle);
+            InitializeApplication();
         }
 
         protected virtual object GetAppStartHint(object hint = null)
@@ -129,7 +131,10 @@ namespace MvvmCross.Forms.Platforms.Android.Views
             {
                 Xamarin.Forms.Application.Current = FormsApplication;
             }
+        }
 
+        public virtual void InitializeApplication()
+        {
             LoadApplication(FormsApplication);
         }
 
