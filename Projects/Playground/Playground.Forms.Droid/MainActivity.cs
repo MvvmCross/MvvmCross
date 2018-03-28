@@ -5,20 +5,27 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using MvvmCross.Core;
 using MvvmCross.Forms.Platforms.Android.Views;
 using Playground.Core.ViewModels;
 
 namespace Playground.Forms.Droid
 {
     [Activity(
-        Label = "Playground.Forms", 
+        Label = "Playground.Forms",
         Icon = "@mipmap/icon",
         Theme = "@style/AppTheme",
         //MainLauncher = true, // No Splash Screen: Uncomment this lines if removing splash screen
-        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, 
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
         LaunchMode = LaunchMode.SingleTask)]
     public class MainActivity : MvxFormsAppCompatActivity<MainViewModel>
     {
+        // No Splash Screen: uncomment this constructor
+        // public MainActivity() : base()
+        // {
+        //     this.RegisterSetupType<Setup>();
+        // }
+
         protected override void OnCreate(Bundle bundle)
         {
             TabLayoutResource = Resource.Layout.Tabbar;

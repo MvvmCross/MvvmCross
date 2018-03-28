@@ -82,7 +82,7 @@ namespace MvvmCross.Platforms.Tvos.Core
     {
         protected override void RegisterSetup()
         {
-            MvxSetup.RegisterSetupType<TMvxTvosSetup>();
+            this.RegisterSetupType<TMvxTvosSetup>();
         }
     }
 }

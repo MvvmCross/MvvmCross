@@ -24,6 +24,7 @@ namespace MvvmCross.Core
         protected static Func<IMvxSetup> SetupCreator { get; set; }
 
         protected static Assembly[] ViewAssemblies { get; set; }
+
         public static void RegisterSetupType<TMvxSetup>(params Assembly[] assemblies) where TMvxSetup : MvxSetup, new()
         {
             ViewAssemblies = assemblies;
@@ -80,6 +81,8 @@ namespace MvvmCross.Core
             InitializeSettings();
             SetupLog.Trace("Setup: Singleton Cache start");
             InitializeSingletonCache();
+            SetupLog.Trace("Setup: ViewDispatcher start");
+            InitializeViewDispatcher();
             State = MvxSetupState.InitializedPrimary;
         }
 
@@ -111,8 +114,6 @@ namespace MvvmCross.Core
             InitializeViewModelTypeFinder();
             SetupLog.Trace("Setup: ViewsContainer start");
             InitializeViewsContainer();
-            SetupLog.Trace("Setup: ViewDispatcher start");
-            InitializeViewDispatcher();
             SetupLog.Trace("Setup: Views start");
             InitializeViewLookup();
             SetupLog.Trace("Setup: CommandCollectionBuilder start");

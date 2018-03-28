@@ -32,6 +32,8 @@ namespace MvvmCross.Platforms.Wpf.Views
             return null;
         }
 
-        protected abstract void RegisterSetup();
+        protected virtual void RegisterSetup()
+        {
+        }
     }
 }

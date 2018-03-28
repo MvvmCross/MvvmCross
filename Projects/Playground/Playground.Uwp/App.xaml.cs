@@ -13,7 +13,7 @@ namespace Playground.Uwp
 
         protected override void RegisterSetup()
         {
-            MvxSetup.RegisterSetupType<MvxWindowsSetup<Core.App>>();
+            this.RegisterSetupType<MvxWindowsSetup<Core.App>>();
         }
     }
 }

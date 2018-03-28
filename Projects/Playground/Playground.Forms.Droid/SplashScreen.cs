@@ -22,7 +22,7 @@ namespace Playground.Forms.Droid
         public SplashScreen()
             : base(Resource.Layout.SplashScreen)
         {
-            RegisterSetup<Setup>();
+            this.RegisterSetupType<Setup>();
         }
 
         protected override void TriggerFirstNavigate()

@@ -15,6 +15,7 @@ using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Core;
+using MvvmCross.Platforms.Android.Core;
 
 namespace MvvmCross.Platforms.Android.Views
 {
@@ -112,8 +113,24 @@ namespace MvvmCross.Platforms.Android.Views
 
         protected override void OnCreate(Bundle bundle)
         {
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            setup.EnsureInitialized();
+
             base.OnCreate(bundle);
             ViewModel?.ViewCreated();
+            RunAppStart(bundle);
+        }
+
+        protected virtual void RunAppStart(Bundle bundle)
+        {
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            if (!startup.IsStarted)
+                startup.Start(GetAppStartHint(bundle));
+        }
+
+        protected virtual object GetAppStartHint(object hint = null)
+        {
+            return null;
         }
 
         protected override void OnDestroy()
@@ -144,10 +161,6 @@ namespace MvvmCross.Platforms.Android.Views
         {
             base.OnStop();
             ViewModel?.ViewDisappeared();
-        }
-        protected virtual void RegisterSetup<TMvxAndroidSetup>() where TMvxAndroidSetup : MvxSetup, new()
-        {
-            MvxSetup.RegisterSetupType<TMvxAndroidSetup>(GetType().Assembly);
         }
     }
 

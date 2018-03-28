@@ -16,7 +16,7 @@ Yes, you read it correctly! MvvmCross 6 has finally arrived and it is available 
 - Supercharged `IMvxOverridePresentationAttribute` for ViewPresenters
 - Improved framework initialization
 - Support multiple levels of nested fragments on Android
-- Initial support for Tizen 
+- Initial support for Tizen
 - Tons of minor improvements and bug fixes!
 
 ## Migration guide
@@ -37,13 +37,26 @@ The MvvmCross.* namespace has been reserved on NuGet, meaning that plugin author
 
 ### .NET Standard
 
-TBA
+MvvmCross uses .NET Standard 2.0 as its base library now. This ensures compability on all platforms, and helps us develop MvvmCross faster!
+
+For a explanation about .NET Standard see: https://blogs.msdn.microsoft.com/dotnet/2016/09/26/introducing-net-standard/
+
 PRs:
 - https://github.com/MvvmCross/MvvmCross/pull/2530
 
 ### Setup & platforms initialization
 
-TBA
+We've changed the way platforms are loaded. Previously you had to create the `Setup` class in every platform yourself, except for Android where the Splashscreen would do that if you had one.
+On 6.0 the Setup is picked up automatically, and if you start with a new application you might not even need one! This also allows to run Android without Splashscreen.
+
+A few importatant notes on this are:
+
+* Remove any custom code from your AppDelegate on iOS, TVOS and MacOS and call `return base.FinishedLaunching(app, options);`
+* Remove custom App.cs code from your UWP and WPF projects
+* If not using a Splashscreen remove custom code from your Activities
+
+Since nuget won't install custom files like Setup, you need to create that yourself if you want to override functionality.
+
 PRs:
 - https://github.com/MvvmCross/MvvmCross/pull/2615/
 
@@ -74,7 +87,17 @@ The intermediary helper class `MvxNavigationServiceAppStart` has been removed as
 
 ### IoC
 
-TBA
+Sometimes you'd like to add some instances or types to an IoC Container for a specific purpose and not to the app-wide container. You can use Child Containers for that:
+
+```
+var container = Mvx.Resolve<IMvxIoCProvider>();
+var childContainer = container.CreateChildContainer():
+childContainer.RegisterType<IFoo, Foo>(); // Is only registered in Child Container scope
+childContainer.Create<IFoo>();
+```
+
+You can create as many and as deeply nested Child Containers as you want - each container inherits all dependencies registered on it's parent container.
+
 IoC Child containers: https://github.com/MvvmCross/MvvmCross/pull/2438
 
 ### Logging
@@ -82,6 +105,10 @@ IoC Child containers: https://github.com/MvvmCross/MvvmCross/pull/2438
 `MvxTrace` and everything related was removed. The new (and much improved) logging system was already present since MvvmCross 5.4. If you haven't heard about it, please take a look at the [official documentation](https://www.mvvmcross.com/documentation/fundamentals/logging)
 
 ### Xamarin.Forms
+
+#### General stability and bugs fixes
+
+We've put a lot of effort in to make sure Forms works as good as Native Xamarin apps on MvvmCross! As a result a lot of bugs have been fixed and we've added test cases in the playground to make sure we'll keep it this way.
 
 #### ViewCells
 
