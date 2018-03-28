@@ -23,13 +23,13 @@ namespace MvvmCross.Platforms.Mac.Views
                 throw new MvxException("SynchronizationContext must not be null - check to make sure Dispatcher is created on UI thread");
         }
 
-        public bool RequestMainThreadAction(Action action, 
+        public bool RequestMainThreadAction(Action action,
             bool maskExceptions = true)
         {
             if (_uiSynchronizationContext == SynchronizationContext.Current)
                 action();
             else
-                NSApplication.SharedApplication.BeginInvokeOnMainThread(() => 
+                NSApplication.SharedApplication.BeginInvokeOnMainThread(() =>
                 {
                     if (maskExceptions)
                         ExceptionMaskedAction(action);

@@ -27,7 +27,7 @@ namespace MvvmCross.Platforms.Tvos.Views
             if (_uiSynchronizationContext == SynchronizationContext.Current)
                 action();
             else
-                UIApplication.SharedApplication.BeginInvokeOnMainThread(() => 
+                UIApplication.SharedApplication.BeginInvokeOnMainThread(() =>
             {
                 if (maskException)
                     ExceptionMaskedAction(action);
