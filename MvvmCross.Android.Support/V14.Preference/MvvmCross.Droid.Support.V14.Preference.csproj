@@ -15,6 +15,7 @@
   
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.V14.Preference" Version="26.1.0.1" />
+    <PackageReference Include="Xamarin.Build.Download" Version="0.4.9" />
   </ItemGroup>
   
   <ItemGroup>
