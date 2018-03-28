@@ -194,6 +194,9 @@
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat">
       <Version>26.1.0.1</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Build.Download">
+      <Version>0.4.9</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\mvvmcross_logo.png" />
