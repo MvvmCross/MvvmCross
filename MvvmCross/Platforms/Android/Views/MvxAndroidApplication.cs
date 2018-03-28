@@ -24,6 +24,7 @@ namespace MvvmCross.Platforms.Android.Views
         public MvxAndroidApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
             Instance = this;
+            RegisterSetup();
         }
 
         protected virtual void RegisterSetup()
@@ -45,7 +46,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         protected override void RegisterSetup()
         {
-            MvxSetup.RegisterSetupType<TMvxAndroidSetup>(GetType().Assembly);
+            this.RegisterSetupType<TMvxAndroidSetup>();
         }
     }
 }

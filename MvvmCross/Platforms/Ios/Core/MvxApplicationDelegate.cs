@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Ios.Core
         /// </summary>
         public new UIWindow Window { get; set; }
 
-        public MvxApplicationDelegate(): base()
+        public MvxApplicationDelegate() : base()
         {
             RegisterSetup();
         }
@@ -83,7 +83,7 @@ namespace MvvmCross.Platforms.Ios.Core
     {
         protected override void RegisterSetup()
         {
-            MvxSetup.RegisterSetupType<TMvxIosSetup>();
+            this.RegisterSetupType<TMvxIosSetup>();
         }
     }
 }

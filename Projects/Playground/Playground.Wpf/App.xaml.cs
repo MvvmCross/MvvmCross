@@ -8,7 +8,7 @@ namespace Playground.Wpf
     {
         protected override void RegisterSetup()
         {
-            MvxSetup.RegisterSetupType<MvxWpfSetup<Core.App>>();
+            this.RegisterSetupType<MvxWpfSetup<Core.App>>();
         }
     }
 }

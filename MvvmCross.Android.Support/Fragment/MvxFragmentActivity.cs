@@ -8,9 +8,11 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core;
 using MvvmCross.Droid.Support.V4.EventSource;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.Views;
+using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
