@@ -4,11 +4,12 @@ title: Navigation
 category: Fundamentals
 order: 2
 ---
+
 MvvmCross uses `ViewModel first navigation`. Meaning that we navigate from ViewModel to ViewModel and not from View to View. In MvvmCross the ViewModel will lookup its corresponding View. By doing so we don't have to write platform specific navigation and we can manage everything from within our core.
 
-# MvvmCross 5.x and higher navigation
+# Introducing the MvxNavigationService
 
-MvvmCross 5 introduces a new NavigationService! The new navigation enables you to inject it into your ViewModels, which makes it more testable, and gives you the ability to implement your own navigation! Other main features are that it is fully async and type safe.
+The navigation enables you to inject it into your ViewModels, which makes it more testable, and gives you the ability to implement your own navigation! Other main features are that it is fully async and type safe.
 For more details see [#1634](https://github.com/MvvmCross/MvvmCross/issues/1634)
 
 The following Api is available to use:
@@ -48,7 +49,7 @@ public interface IMvxNavigationService
     Task<bool> Close(IMvxViewModel viewModel);
     Task<bool> Close<TResult>(IMvxViewModelResult<TResult> viewModel, TResult result);
 
-    bool ChangePresentation(MvxPresentationHint hint);
+    Task<bool> ChangePresentation(MvxPresentationHint hint);
 }
 ```
 
