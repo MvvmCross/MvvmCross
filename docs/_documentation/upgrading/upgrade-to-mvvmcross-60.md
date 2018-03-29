@@ -36,24 +36,24 @@ Previously we had a mix between `Uwp` and `Uap` namespaces. We have unified them
 
 #### Xamarin.Forms
 - `MvvmCross.Forms.Platform` is now `MvvmCross.Forms.Core`.
-- `MvvmCross.Forms.{Platform}` is now `MvvmCross.Forms.Platform.{Platform}`.
+- `MvvmCross.Forms.{Platform}` is now `MvvmCross.Forms.Platforms.{Platform}`.
 
 #### Core and all platforms
 - `MvvmCross.Platform` namespace is now `MvvmCross`.
 - Most framework core classes are now under the namespace `MvvmCross.Base`.
-- `MvvmCross.Platform.{Platform}.Platform` is now `MvvmCross.Platform.{Platform}.Base`.
-- `MvvmCross.Binding.{Platform}` namespace is now `MvvmCross.Platform.{Platform}.Binding`.
+- `MvvmCross.Platform.{Platform}.Platform` is now `MvvmCross.Platforms.{Platform}.Base`.
+- `MvvmCross.Binding.{Platform}` namespace is now `MvvmCross.Platforms.{Platform}.Binding`.
 - `MvvmCross.Core.Platform.Converters`namespace is now `MvvmCross.Converters`
 - `MvvmCross.Core.Platform` namespace is now `MvvmCross.Core`.
-- Platform initialization code (Setup classes, ..) was moved from `MvvmCross.{Platform}.Platform` to the namespace `MvvmCross.Platform.{Platform}.Core`.
-- `MvvmCross.Platform.{Platform}.Views` is now under the namespace namespace `MvvmCross.Platform.{Platform}.Views.Base`.
+- Platform initialization code (Setup classes, ..) was moved from `MvvmCross.{Platform}.Platform` to the namespace `MvvmCross.Platforms.{Platform}.Core`.
+- `MvvmCross.Platform.{Platform}.Views` is now under the namespace namespace `MvvmCross.Platforms.{Platform}.Views.Base`.
 - `MvvmCross.Platform.UI` namespace is now `MvvmCross.UI`.
 - `MvvmCross.Platform.Exceptions` namespace is now `MvvmCross.Exceptions`
 - All PresentationHints are now at `MvvmCross.Presenters.Hints`.
 - `MvvmCross.Core.ViewModels` namespace is now `MvvmCross.ViewModels`.
-- `MvvmCross.{Platform}.Platform` namespace is now `MvvmCross.Platform.{Platform}.Core`.
-- `MvvmCross.{Platform}.ViewModels` namespace is now `MvvmCross.Platform.{Platform}.ViewModels`.
-- `MvvmCross.{Platform}.Views` namespace is now `MvvmCross.Platform.{Platform}.Views`.
+- `MvvmCross.{Platform}.Platform` namespace is now `MvvmCross.Platforms.{Platform}.Core`.
+- `MvvmCross.{Platform}.ViewModels` namespace is now `MvvmCross.Platforms.{Platform}.ViewModels`.
+- `MvvmCross.{Platform}.Views` namespace is now `MvvmCross.Platforms.{Platform}.Views`.
 - `MvvmCross.Core.Views` namespace is now `MvvmCross.Views`.
 - `MvvmCross.Platform.ExtensionMethods.MvxCrossCoreExtensions` class is now `MvvmCross.Base.MvxCoreExtensions`.
 - `MvvmCross.Platform.WeakSubscription` namespace is now `MvvmCross.WeakSubscription`.
@@ -68,7 +68,7 @@ Previously we had a mix between `Uwp` and `Uap` namespaces. We have unified them
 `MvxTrace` and everything related was removed in v6. Please take a look at the [official documentation](https://www.mvvmcross.com/documentation/fundamentals/logging) to learn about the new logging system.
 
 - `MvvmCross.Platform.Logging` is now `MvvmCross.Logging`.
-- `MvvmCross.Core.Platform.LogProviders` namespace is now `MvvmCross.Platform.Logging.LogProviders`.
+- `MvvmCross.Core.Platform.LogProviders` namespace is now `MvvmCross.Platforms.Logging.LogProviders`.
 
 #### Navigation
 - `MvvmCross.Core.Navigation` is now `MvvmCross.Navigation`.
@@ -76,20 +76,20 @@ Previously we had a mix between `Uwp` and `Uap` namespaces. We have unified them
 - `MvxNavigationServiceAppStart` was removed and `MvxAppStart` uses the navigation service internally.
 
 #### Binding
-- `MvvmCross.Binding.{Platform}` is now available at `MvvmCross.Platform.{Platform}.Binding`.
+- `MvvmCross.Binding.{Platform}` is now available at `MvvmCross.Platforms.{Platform}.Binding`.
 
 #### Commands
 All Commands related code was moved from `MvvmCross.Core.ViewModels` to `MvvmCross.Commands`.
 
 #### ViewPresenters
 ViewPresenters are now under their own folder. Therefore we had to modify namespaces: 
-- Presenters code under `MvvmCross.{Platform}.Views` is now at `MvvmCross.Platform.{Platform}.Presenters`
-- `MvvmCross.{Platform}.Views.Attributes` to `MvvmCross.Platform.{Platform}.Presenters.Attributes` 
+- Presenters code under `MvvmCross.{Platform}.Views` is now at `MvvmCross.Platforms.{Platform}.Presenters`
+- `MvvmCross.{Platform}.Views.Attributes` to `MvvmCross.Platforms.{Platform}.Presenters.Attributes` 
 
 #### Plugins
 All plugin namespaces have changed, but you shouldn't worry about it unless you are diving deep into their implementations. 
 - The `Plugins` keyword is now `Plugin`.
-- `MvvmCross.Plugins.{PluginName}.{Platform}` is now `MvvmCross.Plugin.{PluginName}.Platform.{Platform}`
+- `MvvmCross.Plugins.{PluginName}.{Platform}` is now `MvvmCross.Plugin.{PluginName}.Platforms.{Platform}`
 - `MvvmCross.Platform.Plugins` namespace is now `MvvmCross.Plugin`.
 
 ## Breaking changes
@@ -98,13 +98,17 @@ All plugin namespaces have changed, but you shouldn't worry about it unless you 
 As part of the Setup improvements, we have removed all parameters from constructors and moved them to a new method: `PlatformInitialize`.
 The SetupSingleton that existed previously only on Android has been extended and it now exists for all platforms.
 
+### AppStart
+It is no longer necessary that you call AppStart by yourself. All visual initialization code can now be done by MvvmCross automatically. If you need to provide a hint to it (if you are for example using push notifications), then you just need to override the method `GetAppStartHint` on the class where you used to call the code to run the AppStart.
+In case you need further control over what happens, you can override `RunAppStart`.
+
 ### Plugins
 
 #### Color
 - On Android, the method `ToAndroidColor` was renamed to `ToNativeColor` in order to match all other platforms.
 
 #### DownloadCache
-- `DownloadCache` was removed in v6.0. Reason being is that there were multiple ancient issues around it and its implementation wasn't as clean as we would have liked. There are also multiple more efficient alternatives, like [FFImageLoading](https://github.com/luberda-molinet/FFImageLoading/wiki/MvvmCross).
+`DownloadCache` was removed in v6.0, as well as `MvxImageView` and all the related code. Reason being is that there were multiple ancient issues around it and its implementation wasn't as clean as we would have liked. There are also multiple more efficient alternatives, like [FFImageLoading](https://github.com/luberda-molinet/FFImageLoading/wiki/MvvmCross).
 
 ### ViewPresenters 
 - `IMvxOverridePresentationAttribute.PresentationAttribute` now takes a `MvxViewModelRequest` as parameter. 
@@ -130,6 +134,8 @@ If you're using a custom ViewPresenter that extends the default provided by Mvvm
 - `MvxRelativeLayout`, `MvxFrameLayout` and `MvxTableLayout` were removed as they were memory inefficient (nothing we can do to improve that).
 - If you were declaring any view on your .axml files which prefix is "Mvx..." using the entire namespace, then you might see your app breaking. This is because namespaces have changed for many views. Just remove the namespace and leave the widget name.
 - `IMvxRecyclerViewHolder` now has a new property: `int Id { get; set; }`, which contains the LayoutId being used.
+- `MvxWakefulBroadcastReceiver` was removed, as it was deprecated by the platform. 
+- The interface `IMvxTemplateSelector` has a new property: `int ItemTemplateId { get; set; }` which will be filled with the default LayoutId or the one you set by .axml using the item template attr.
 
 ### WPF
 - `MvxBaseWpfViewPresenter` and `MvxSimpleWpfViewPresenter` were removed. It is highly recommended that you migrate to `MvxWpfViewPresenter`.
