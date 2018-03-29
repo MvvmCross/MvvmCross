@@ -7,6 +7,8 @@ Order: 3
 
 This guide assumes you are using MvvmCross 5.6.x. If you are updating your app from a previous version, please look at the appropiate blog posts.
 
+The very first thing you will notice when upgrading / installing v6 nugets, is that a readme file will open automatically. Please read its instructions carefully, and don't hesitate to jump in and make a PR to improve it if you think anything is missing!
+
 ## .NET Standard
 
 TBA
@@ -47,7 +49,7 @@ Previously we had a mix between `Uwp` and `Uap` namespaces. We have unified them
 - `MvvmCross.Platform.{Platform}.Views` is now under the namespace namespace `MvvmCross.Platform.{Platform}.Views.Base`.
 - `MvvmCross.Platform.UI` namespace is now `MvvmCross.UI`.
 - `MvvmCross.Platform.Exceptions` namespace is now `MvvmCross.Exceptions`
-- All PresentationHints are now at `MvvmCross.ViewModels.Hints`.
+- All PresentationHints are now at `MvvmCross.Presenters.Hints`.
 - `MvvmCross.Core.ViewModels` namespace is now `MvvmCross.ViewModels`.
 - `MvvmCross.{Platform}.Platform` namespace is now `MvvmCross.Platform.{Platform}.Core`.
 - `MvvmCross.{Platform}.ViewModels` namespace is now `MvvmCross.Platform.{Platform}.ViewModels`.
@@ -55,7 +57,7 @@ Previously we had a mix between `Uwp` and `Uap` namespaces. We have unified them
 - `MvvmCross.Core.Views` namespace is now `MvvmCross.Views`.
 - `MvvmCross.Platform.ExtensionMethods.MvxCrossCoreExtensions` class is now `MvvmCross.Base.MvxCoreExtensions`.
 - `MvvmCross.Platform.WeakSubscription` namespace is now `MvvmCross.WeakSubscription`.
-- `MvvmCross.Test.Core` namespace is now `MvvmCross.Test`.
+- `MvvmCross.Test.Core` namespace is now `MvvmCross.Tests`.
 - `JetBrains.Annotations` namespace is now `MvvmCross.Annotations`.
 
 #### IoC
@@ -92,6 +94,10 @@ All plugin namespaces have changed, but you shouldn't worry about it unless you 
 
 ## Breaking changes
 
+### Setup
+As part of the Setup improvements, we have removed all parameters from constructors and moved them to a new method: `PlatformInitialize`.
+The SetupSingleton that existed previously only on Android has been extended and it now exists for all platforms.
+
 ### Plugins
 
 #### Color
@@ -100,7 +106,7 @@ All plugin namespaces have changed, but you shouldn't worry about it unless you 
 #### DownloadCache
 - `DownloadCache` was removed in v6.0. Reason being is that there were multiple ancient issues around it and its implementation wasn't as clean as we would have liked. There are also multiple more efficient alternatives, like [FFImageLoading](https://github.com/luberda-molinet/FFImageLoading/wiki/MvvmCross).
 
-#### ViewPresenters 
+### ViewPresenters 
 - `IMvxOverridePresentationAttribute.PresentationAttribute` now takes a `MvxViewModelRequest` as parameter. 
 If you're using a custom ViewPresenter that extends the default provided by MvvmCross, be aware that `GetPresentationAttribute` and `GetOverridePresentationAttribute` methods signatures have changed.
 - `MvxFormsPagePresenter` constructor now takes a single parameter. You will be affected by this change only if you are using Xamarin Forms and you are providing a custom pages presenter for a platform ViewPresenter.
@@ -110,34 +116,23 @@ If you're using a custom ViewPresenter that extends the default provided by Mvvm
 - `IMvxTvosModalHost` and `IMvxIosModalHost` were deprecated and removed.
 - On iOS, the method `PresentModalViewController` was renamed to `ShowModalViewController`.
 
-#### Navigation
+### Navigation
 - `IMvxNavigationService.ChangePresentation` is now an async method (the method now returns a `Task<bool>`). It was the only "sync" method on IMvxNavigationService, which was odd.
+- Two methods were added to the `IMvxNavigationService` interface: `Task<bool> CanNavigate<TViewModel>` and `Task<bool> CanNavigate(Type viewModelType)`.
 
-#### Logging
+### IMvxCommand
+- The method `RaiseCanExecuteChanged` was added to the `IMvxCommand` interface.
+
+### Logging
 `IMvxLog` has a new method: `bool IsLogLevelEnabled(MvxLogLevel logLevel)`.
 
-#### Android
+### Android
 - `MvxRelativeLayout`, `MvxFrameLayout` and `MvxTableLayout` were removed as they were memory inefficient (nothing we can do to improve that).
+- If you were declaring any view on your .axml files which prefix is "Mvx..." using the entire namespace, then you might see your app breaking. This is because namespaces have changed for many views. Just remove the namespace and leave the widget name.
+- `IMvxRecyclerViewHolder` now has a new property: `int Id { get; set; }`, which contains the LayoutId being used.
 
-### MvvmCross 5.x
+### WPF
+- `MvxBaseWpfViewPresenter` and `MvxSimpleWpfViewPresenter` were removed. It is highly recommended that you migrate to `MvxWpfViewPresenter`.
 
-> If you are using a version of MvvmCross less than Mvx 6.0.0, you will need to add the bootstrap file yourself.
-The bootstrap file is available [here](https://github.com/MvvmCross/MvvmCross/blob/develop/nuspec/BootstrapContent/WebBrowserPluginBootstrap.cs.pp)
-
-An example bootstrap class would look like:
-
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Text;
-using MvvmCross.Platform.Plugins;
-
-namespace my.namespace.iOS.Bootstrap
-{
-    public class WebBrowserPluginBootstrap
-        : MvxPluginBootstrapAction<MvvmCross.Plugins.WebBrowser.PluginLoader>
-    {
-    }
-}
-```
-
+### iOS Support package
+The package iOS-Support has been removed in v6. But this doesn't mean we have deleted it! Most reusable bits are now part of the main lib, and the sidebar support is now a plugin that you can install on your iOS project.
