@@ -46,19 +46,25 @@ PRs:
 
 ### Setup & platforms initialization
 
-We've changed the way platforms are loaded. Previously you had to create the `Setup` class in every platform yourself, except for Android where the Splashscreen would do that if you had one.
-On 6.0 the Setup is picked up automatically, and if you start with a new application you might not even need one! This also allows to run Android without Splashscreen.
+We've changed the way platforms are loaded. Previously you had to create the `Setup` class in every platform yourself (except for Android if you were using a Splashscreen).
+Starting with v6 the Setup class hs received a lot of improvements! Also if you are starting with a brand new application, you might not even need to write your own!
+
+In order to avoid having to create and initialize the Setup class yourself, you can now use generic versions of some classes:
+- On iOS, there's a version of `MvxApplicationDelegate` which takes a `IMvxIosSetup` and a `IMvxApplication` constraints
+- On Android, there's a version of `MvxAndroidApplication` which takes a `MvxAndroidSetup` and a `IMvxApplication` constraints
+- On Android (support packages), there's a version of `MvxAppCompatApplication` which takes a `MvxAppCompatSetup` and a `IMvxApplication` constraints
+- On UWP, there's a version of `MvxApplication` which takes a `MvxWindowsSetup` and a `IMvxApplication` constraints
+- On WPF, there's a version of `MvxApplication` which takes a `MvxWpfSetup` and a `IMvxApplication` constraints
+- On macOS, there's a version of `MvxApplicationDelegate` which takes a `MvxMacSetup` and a `IMvxApplication` constraints
+- On tvOS, there's a version of `MvxApplicationDelegate` which takes a `MvxTvosSetup` and a `IMvxApplication` constraints
 
 A few importatant notes on this are:
 
-* Remove any custom code from your AppDelegate on iOS, TVOS and MacOS and call `return base.FinishedLaunching(app, options);`
+* On iOS, tvOS and macOS please make sure you are calling `var result = base.FinishedLaunching(app, options);` and returning the result at the end of the method.
 * Remove custom App.cs code from your UWP and WPF projects
-* If not using a Splashscreen remove custom code from your Activities
-
-Since nuget won't install custom files like Setup, you need to create that yourself if you want to override functionality.
-
-PRs:
-- https://github.com/MvvmCross/MvvmCross/pull/2615/
+* On Android this initialization also works for apps without splash screens.
+* Of course you can keep your Setup class if you want (and it is still encouraged to initialize everything there)!
+* There is now also a singleton for Setup on all platforms, which you can use to ensure MvvmCross is running!
 
 ### Plugins
 
@@ -83,7 +89,9 @@ ViewPresenters registration was aligned and improved on many platforms. You can 
 
 The brand new MvxNavigationService that was introduced in MvvmCross 5 is now the default. This means `ShowViewModel` has been finally removed, as well as `MvxNavigatingObject`. If you aren't using it yet, it's time you take a look at the [official documentation](https://www.mvvmcross.com/documentation/fundamentals/navigation).
 
-The intermediary helper class `MvxNavigationServiceAppStart` has been removed as well, because the classic `MvxAppStart` now uses MvxNavigationService internally.
+On this release we have added support for checking whether it's possible or not to navigate to a specific ViewModel. The default implementation will return `true` if the View for that ViewModel is reachable from the platform ViewContainer.
+
+Also please note that the intermediary helper class `MvxNavigationServiceAppStart` has been removed as well, because the classic `MvxAppStart` now uses MvxNavigationService internally.
 
 ### IoC
 
@@ -98,8 +106,6 @@ childContainer.Create<IFoo>();
 
 You can create as many and as deeply nested Child Containers as you want - each container inherits all dependencies registered on it's parent container.
 
-IoC Child containers: https://github.com/MvvmCross/MvvmCross/pull/2438
-
 ### Logging
 
 `MvxTrace` and everything related was removed. The new (and much improved) logging system was already present since MvvmCross 5.4. If you haven't heard about it, please take a look at the [official documentation](https://www.mvvmcross.com/documentation/fundamentals/logging)
@@ -108,7 +114,10 @@ IoC Child containers: https://github.com/MvvmCross/MvvmCross/pull/2438
 
 #### General stability and bugs fixes
 
-We've put a lot of effort in to make sure Forms works as good as Native Xamarin apps on MvvmCross! As a result a lot of bugs have been fixed and we've added test cases in the playground to make sure we'll keep it this way.
+We've put a lot of effort in to make sure MvvmCross works with Forms as good as with traditional Xamarin apps! A whole bunch of bugs have been fixed (and we've added test scenarios in our playground project to make sure we keep it this way!). 
+
+#### MvxFormsApplication
+MvvmCross became much more flexible and it doesn't require your app to use our own `MvxFormsApplication` class anymore. 
 
 #### ViewCells
 
@@ -178,6 +187,10 @@ We now cover scenarios where apps are launched from file associations, URIs and 
 Although the status is not yet PRD Ready, initial support for the platform was already added. We look forward too see what developers will build with MvvmCross & Tizen!
 
 ### Others
+
+#### iOS Support
+
+iOS Support has been redesigned. Most pieces are now part of the main lib, while the sidebar support has become now a plugin that you can install on your iOS project.
 
 #### MvxNotifyTask
 
