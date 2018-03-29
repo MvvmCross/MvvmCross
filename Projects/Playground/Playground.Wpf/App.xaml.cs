@@ -4,11 +4,7 @@ using MvvmCross.Platforms.Wpf.Views;
 
 namespace Playground.Wpf
 {
-    public partial class App : MvxApplication
+    public partial class App : MvxApplication<MvxWpfSetup<Core.App>, Core.App>
     {
-        protected override void RegisterSetup()
-        {
-            this.RegisterSetupType<MvxWpfSetup<Core.App>>();
-        }
     }
 }
