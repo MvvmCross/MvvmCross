@@ -11,10 +11,10 @@ Yes, you read it correctly! MvvmCross 6 has finally arrived and it is available 
 
 ## What's new?!
 
-- Migration to .NET Standard
+- Migration to .NET Standard 2
 - Polished support for Xamarin.Forms
+- Brand new framework initialization
 - Supercharged `IMvxOverridePresentationAttribute` for ViewPresenters
-- Improved framework initialization
 - Support multiple levels of nested fragments on Android
 - Initial support for Tizen
 - Tons of minor improvements and bug fixes!
@@ -66,6 +66,11 @@ A few importatant notes on this are:
 * Of course you can keep your Setup class if you want (and it is still encouraged to initialize everything there)!
 * There is now also a singleton for Setup on all platforms, which you can use to ensure MvvmCross is running!
 
+### AppStart
+
+The way apps start with MvvmCross has now become much cleaner. MvxAppStart is now called automatically on all platforms. This means you can safely delete your initialization code on platforms like iOS (the framework now will also create the key window for you).
+If you are wondering now whether it's possible to add some customization to that, the answer is YES. In the same class where you used to run your own AppStart, there is now a virtual method called `RunAppStart` that you can override. And going further on that direction, if what you need is to make sure you provide a correct hint to your AppStart, then you only need to override the new method called `GetAppStartHint`. Sweet, ah? All thanks to the MvvmCross Core Team.
+
 ### Plugins
 
 No more bootstrap files! Yes, you read it correctly. [@willsb](https://github.com/willsb) has worked hard on plugins during some time and he came out with an easier way to register your MvvmCross plugins, by simply adding the `[MvxPlugin]` attribute to your plugin and inheriting from `IMvxPlugin` - as usual -. 
@@ -77,6 +82,9 @@ Read more about how to get started with plugins [in our documentation](https://w
 #### Json and Resx plugins
 
 All methods in `MvxResxTextProvider`, `MvxJsonDictionaryTextProvider` and `MvxTextProvider` are now virtual. Customization is now much easier!
+
+#### DownloadCache
+`DownloadCache` was removed in v6.0, as well as `MvxImageView` and all the related code.
 
 ### ViewPresenters
 
@@ -168,9 +176,6 @@ Both versions of our provided ViewPresenters (default and AppCompat) now support
 #### Removed layouts
 
 `MvxRelativeLayout`, `MvxFrameLayout` and `MvxTableLayout` were removed as they were memory inefficient (nothing we can do to improve that).
-
-Color plugin: https://github.com/MvvmCross/MvvmCross/pull/2557
-Removed some layouts: https://github.com/MvvmCross/MvvmCross/pull/2561
 
 ### macOS
 
