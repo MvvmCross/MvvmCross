@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -123,21 +123,6 @@ namespace MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget, TSource> WithFallback(object fallback)
         {
             SourceStepDescription.FallbackValue = fallback;
-            return this;
-        }
-
-        [Obsolete("Please use SourceDescribed or FullyDescribed instead")]
-        public MvxFluentBindingDescription<TTarget, TSource> Described(string bindingDescription)
-        {
-            var newBindingDescription =
-                MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
-            return Described(newBindingDescription);
-        }
-
-        [Obsolete("Please use SourceDescribed or FullyDescribed instead")]
-        public MvxFluentBindingDescription<TTarget, TSource> Described(MvxBindingDescription description)
-        {
-            Overwrite(description ?? new MvxBindingDescription());
             return this;
         }
 
@@ -273,21 +258,6 @@ namespace MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget> WithFallback(object fallback)
         {
             SourceStepDescription.FallbackValue = fallback;
-            return this;
-        }
-
-        [Obsolete("Please use SourceDescribed or FullyDescribed instead")]
-        public MvxFluentBindingDescription<TTarget> Described(string bindingDescription)
-        {
-            var newBindingDescription =
-                MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
-            return Described(newBindingDescription);
-        }
-
-        [Obsolete("Please use SourceDescribed or FullyDescribed instead")]
-        public MvxFluentBindingDescription<TTarget> Described(MvxBindingDescription description)
-        {
-            Overwrite(description ?? new MvxBindingDescription());
             return this;
         }
 
