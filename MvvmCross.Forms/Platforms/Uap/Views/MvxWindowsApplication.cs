@@ -4,11 +4,14 @@
 
 using System;
 using System.Threading.Tasks;
+using MvvmCross.Core;
+using MvvmCross.Forms.Platforms.Uap.Core;
 using MvvmCross.Forms.Views.Base;
 using MvvmCross.Platforms.Uap.Core;
 using MvvmCross.Platforms.Uap.Views;
 using MvvmCross.ViewModels;
 using Windows.ApplicationModel.Activation;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platforms.Uap.Views
 {
@@ -21,7 +24,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
             if (RootFrame?.Content == null)
             {
                 MvxWindowsSetupSingleton.EnsureSingletonAvailable(RootFrame, activationArgs, nameof(Suspend)).EnsureInitialized();
-                
+
                 var startup = Mvx.Resolve<IMvxAppStart>();
                 if (!startup.IsStarted)
                     startup.Start(GetAppStartHint(activationArgs));
@@ -31,6 +34,31 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
             }
             else
                 base.RunAppStart(activationArgs);
+        }
+    }
+
+    public abstract class MvxWindowsApplication<TMvxUapSetup, TApplication, TFormsApplication> : MvxWindowsApplication
+       where TMvxUapSetup : MvxFormsWindowsSetup<TApplication, TFormsApplication>, new()
+       where TApplication : IMvxApplication, new()
+        where TFormsApplication : Application, new()
+    {
+        protected abstract override Type HostWindowsPageType();
+
+        protected override void RegisterSetup()
+        {
+            this.RegisterSetupType<TMvxUapSetup>();
+        }
+    }
+
+    public class MvxWindowsApplication<TMvxUapSetup, TApplication, TFormsApplication, THostPageType> : MvxWindowsApplication<TMvxUapSetup, TApplication, TFormsApplication>
+       where TMvxUapSetup : MvxFormsWindowsSetup<TApplication, TFormsApplication>, new()
+       where TApplication : IMvxApplication, new()
+        where TFormsApplication : Application, new()
+        where THostPageType : MvxFormsWindowsPage
+    {
+        protected override Type HostWindowsPageType()
+        {
+            return typeof(THostPageType);
         }
     }
 }
