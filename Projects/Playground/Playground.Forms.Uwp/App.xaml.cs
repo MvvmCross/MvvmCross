@@ -1,6 +1,7 @@
 ﻿using System;
 using MvvmCross.Core;
 using MvvmCross.Forms.Platforms.Uap.Core;
+using MvvmCross.Forms.Platforms.Uap.Views;
 using MvvmCross.Platforms.Uap.Core;
 using Playground.Forms.UI;
 
@@ -12,15 +13,9 @@ namespace Playground.Forms.Uwp
         {
             InitializeComponent();
         }
+    }
 
-        protected override Type HostWindowsPageType()
-        {
-            return typeof(MainPage);
-        }
-
-        protected override void RegisterSetup()
-        {
-            this.RegisterSetupType<MvxFormsWindowsSetup<Core.App, FormsApp>>();
-        }
+    public abstract class PlaygroundApp : MvxWindowsApplication<MvxFormsWindowsSetup<Core.App, FormsApp>, Core.App, FormsApp, MainPage>
+    {
     }
 }

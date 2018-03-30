@@ -6,6 +6,7 @@
                       xmlns:views="using:MvvmCross.Platforms.Uap.Views"
                       mc:Ignorable="d">
     <StackPanel>
+        <TextBlock Text="{StaticResource WelcomeText}" />
         <Button Content="Show Child (Stack Navigation)"
                 Command="{Binding ShowChildCommand}"
                 Margin="5"
