@@ -99,8 +99,10 @@ As part of the Setup improvements, we have removed all parameters from construct
 The SetupSingleton that existed previously only on Android has been extended and it now exists for all platforms.
 
 ### AppStart
-It is no longer necessary that you call AppStart by yourself. All visual initialization code can now be done by MvvmCross automatically. If you need to provide a hint to it (if you are for example using push notifications), then you just need to override the method `GetAppStartHint` on the class where you used to call the code to run the AppStart.
+- It is no longer necessary that you call AppStart by yourself. All visual initialization code can now be done by MvvmCross automatically. If you need to provide a hint to it (if you are for example using push notifications), then you just need to override the method `GetAppStartHint` on the class where you used to call the code to run the AppStart.
 In case you need further control over what happens, you can override `RunAppStart`.
+- `IMvxAppStart` has a new method: `ResetStart()` and a new property: `bool IsStarted { get; }`. If you are using a custom AppStart, then it is recommended that you make it inherit from the brand new base class `MvxAppStart`, which implements everything by default.
+- The method `Start` is now reserved and managed by the framework. If you are using a custom AppStart you should use the protected method `Startup` from now on.
 
 ### Plugins
 
@@ -131,14 +133,30 @@ If you're using a custom ViewPresenter that extends the default provided by Mvvm
 `IMvxLog` has a new method: `bool IsLogLevelEnabled(MvxLogLevel logLevel)`.
 
 ### Android
+- `IMvxAndroidSplashScreenActivity` was removed. It was replaced by `IMvxSetupMonitor`, which is located on the `MvvmCross.Core` namespace.
 - `MvxRelativeLayout`, `MvxFrameLayout` and `MvxTableLayout` were removed as they were memory inefficient (nothing we can do to improve that).
 - If you were declaring any view on your .axml files which prefix is "Mvx..." using the entire namespace, then you might see your app breaking. This is because namespaces have changed for many views. Just remove the namespace and leave the widget name.
 - `IMvxRecyclerViewHolder` now has a new property: `int Id { get; set; }`, which contains the LayoutId being used.
 - `MvxWakefulBroadcastReceiver` was removed, as it was deprecated by the platform. 
 - The interface `IMvxTemplateSelector` has a new property: `int ItemTemplateId { get; set; }` which will be filled with the default LayoutId or the one you set by .axml using the item template attr.
+- On `MvxAndroidViewPresenter`, `ShowIntent` has a new parameter.
+- On `MvxAppCompatViewPresenter`, `CreateActivityTransitionOptions` changed its return type.
+- As part of the shared elements evolution, `MvxActivityPresentationAttribute` and `MvxFragmentPresentationAttribute` have lost some properties - they were deprecated.
+- On both presenters, callback methods like `OnBeforeFragmentChanging` and `OnFragmentChanged` now forward the `MvxViewVodelRequest` object as a parameter.
 
 ### WPF
 - `MvxBaseWpfViewPresenter` and `MvxSimpleWpfViewPresenter` were removed. It is highly recommended that you migrate to `MvxWpfViewPresenter`.
 
 ### iOS Support package
 The package iOS-Support has been removed in v6. But this doesn't mean we have deleted it! Most reusable bits are now part of the main lib, and the sidebar support is now a plugin that you can install on your iOS project.
+
+### Others
+Some methods and classes that were marked as [Obsolete] previously, have been finally removed on MvvmCross 6. This includes:
+- `MvxBaseFluentBindingDescription.Overwrite(...)`
+- `MvxFluentBindingDescription.Described(...)`
+- `IMvxConsumer` (IoC)
+- `IMvxProducer` (IoC)
+- `MvxIoCExtensions` (all methods)
+- `MvxEventSourceTabActivity` (Android)
+- `MvxTabActivity` (Android)
+- Some constructos for `MvxCollectionViewCell`

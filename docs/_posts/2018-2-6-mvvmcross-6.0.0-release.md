@@ -13,9 +13,9 @@ Yes, you read it correctly! MvvmCross 6 has finally arrived and it is available 
 
 - Migration to .NET Standard 2
 - Polished support for Xamarin.Forms
-- Brand new framework initialization
+- Brand new framework initialization (Setup & AppStart)
 - Supercharged `IMvxOverridePresentationAttribute` for ViewPresenters
-- Support multiple levels of nested fragments on Android
+- Support for multiple levels of nested fragments on Android
 - Initial support for Tizen
 - Tons of minor improvements and bug fixes!
 
@@ -66,10 +66,17 @@ A few importatant notes on this are:
 * Of course you can keep your Setup class if you want (and it is still encouraged to initialize everything there)!
 * There is now also a singleton for Setup on all platforms, which you can use to ensure MvvmCross is running!
 
+The main work on all this changes was done by [@nickrandolph](https://github.com/nickrandolph) and [@martijn00](https://github.com/martijn00). Well done guys!
+
 ### AppStart
 
-The way apps start with MvvmCross has now become much cleaner. MvxAppStart is now called automatically on all platforms. This means you can safely delete your initialization code on platforms like iOS (the framework now will also create the key window for you).
+The way apps start with MvvmCross has now become much cleaner. MvxAppStart is now called automatically by the framework uniformly. This means you can safely delete your initialization code on platforms like iOS (the framework now will also create the key window for you).
+
+In case you are using a custom AppStart, it is recommended that you make it inherit from the newly added `MvxAppStart` class.
+
 If you are wondering now whether it's possible to add some customization to that, the answer is YES. In the same class where you used to run your own AppStart, there is now a virtual method called `RunAppStart` that you can override. And going further on that direction, if what you need is to make sure you provide a correct hint to your AppStart, then you only need to override the new method called `GetAppStartHint`. Sweet, ah? All thanks to the MvvmCross Core Team.
+
+_Note:_ In case you have a custom AppStart, watch out! The method `Start` has been made protected and it's now called `Startup`.
 
 ### Plugins
 
@@ -169,6 +176,12 @@ Kudos to [@nmilcoff](https://github.com/nmilcoff) and [@dazinator](https://githu
 
 `MvxAndroidViewsContainer` will (finally!) no longer force every activity to run on a new task (`ActivityFlags.NewTask` won't be added anymore by default).
 
+#### Shared element transitions
+
+Because everyone loves animations, we are lucky that [@Plac3hold3r](https://github.com/Plac3hold3r) did a great job and improved our support for shared element transitions. As it is a very Android specific topic, you might need to read a bit about how it works before getting your hands into it. 
+
+Once you are ready to start implementing it, take a look at our [official documentation](https://www.mvvmcross.com/documentation/presenters/android-view-presenter) and the Playground sample if you want to see some code.
+
 #### Nested fragments
 
 Both versions of our provided ViewPresenters (default and AppCompat) now support nested fragments! To be fair we did support this in the past, but we took it from 1 level indentation to N levels. Quite cool, right? Kudos to [@Qwin](https://github.com/Qwin).
@@ -212,6 +225,8 @@ MvvmCross has always been easy to extend and customize, but we never stop improv
 #### Framework Unit Testing
 
 [@Cheesebaron](https://github.com/Cheesebaron) took the chance and converted all our Unit Tests to XUnit, which works better for some platforms. After that he didn't stop there and he added a bunch more of tests. Let's help him and improve our coverage for the next version!
+
+`RaiseCanExecuteChanged` is now much easier to test, since [@jacobduijzer](https://github.com/jacobduijzer) has added some helpers and extension methods to ensure whether `CanExecuteChanged` has been raised or not. You can read more about this on the [official documentation](https://www.mvvmcross.com/documentation/fundamentals/testing).
 
 #### Bindings
 
