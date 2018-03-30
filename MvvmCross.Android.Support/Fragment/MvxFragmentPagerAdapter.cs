@@ -20,6 +20,7 @@ namespace MvvmCross.Droid.Support.V4
     public class MvxFragmentPagerAdapter : FragmentPagerAdapter
     {
         private readonly Context _context;
+
         public IEnumerable<MvxViewPagerFragmentInfo> Fragments { get; private set; }
 
         public override int Count => Fragments.Count();
@@ -45,8 +46,10 @@ namespace MvvmCross.Droid.Support.V4
             {
                 fragInfo.CachedFragment = Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
 
-                var request = new MvxViewModelRequest(fragInfo.ViewModelType, null, null);
-                ((IMvxView)fragInfo.CachedFragment).ViewModel = Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(request, null);
+                var fragmentAsView = (IMvxView) fragInfo.CachedFragment;
+
+                fragmentAsView.ViewModel = fragInfo.ViewModel ?? Mvx.Resolve<IMvxViewModelLoader>()
+                    .LoadViewModel(new MvxViewModelRequest(fragInfo.ViewModelType, null, null), null);
             }
 
             return fragInfo.CachedFragment;

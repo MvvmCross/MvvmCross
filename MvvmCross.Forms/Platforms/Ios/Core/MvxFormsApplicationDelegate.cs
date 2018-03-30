@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -16,14 +16,6 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
 {
     public abstract class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {
-        protected MvxFormsIosSetup Setup
-        {
-            get
-            {
-                return MvxSetup.PlatformInstance<MvxFormsIosSetup>();
-            }
-        }
-
         private UIWindow _window;
         public override UIWindow Window
         {
@@ -39,18 +31,25 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
             }
         }
 
+        public MvxFormsApplicationDelegate() : base()
+        {
+            RegisterSetup();
+        }
+
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
-            Window = new UIWindow(UIScreen.MainScreen.Bounds);
-            Setup.PlatformInitialize(this, Window);
-            Setup.Initialize();
+            if (Window == null)
+                Window = new UIWindow(UIScreen.MainScreen.Bounds);
+
+            var instance = MvxIosSetupSingleton.EnsureSingletonAvailable(this, Window);
+            instance.EnsureInitialized();
 
             RunAppStart(launchOptions);
 
-            Setup.FormsApplication.SendStart();
+            instance.PlatformSetup<MvxFormsIosSetup>().FormsApplication.SendStart();
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
 
-            //TODO: we might need to call base here
+            //TODO: we don't call base for now, but we might need to as soon as Forms opens up
             return true;
         }
 
@@ -71,7 +70,8 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
 
         protected virtual void LoadFormsApplication()
         {
-            LoadApplication(Setup.FormsApplication);
+            var instance = MvxIosSetupSingleton.EnsureSingletonAvailable(this, Window);
+            LoadApplication(instance.PlatformSetup<MvxFormsIosSetup>().FormsApplication);
         }
 
         public override void WillEnterForeground(UIApplication uiApplication)
@@ -97,6 +97,10 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
             LifetimeChanged?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 
+        protected virtual void RegisterSetup()
+        {
+        }
+
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
     }
 
@@ -105,9 +109,9 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
         where TApplication : IMvxApplication, new()
         where TFormsApplication : Application, new()
     {
-        static MvxFormsApplicationDelegate()
+        protected override void RegisterSetup()
         {
-            MvxSetup.RegisterSetupType<TMvxIosSetup>();
+            this.RegisterSetupType<TMvxIosSetup>();
         }
     }
 }

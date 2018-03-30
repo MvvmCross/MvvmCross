@@ -21,41 +21,32 @@ namespace MvvmCross.Core
 {
     public abstract class MvxSetup : IMvxSetup
     {
-        protected static Type RegisteredSetupType { get; set; }
-        public static void RegisterSetupType<TMvxSetup>() where TMvxSetup : MvxSetup, new()
+        protected static Func<IMvxSetup> SetupCreator { get; set; }
+
+        protected static Assembly[] ViewAssemblies { get; set; }
+
+        public static void RegisterSetupType<TMvxSetup>(params Assembly[] assemblies) where TMvxSetup : MvxSetup, new()
         {
-            RegisteredSetupType = typeof(TMvxSetup);
+            ViewAssemblies = assemblies;
+            if (!(ViewAssemblies?.Any() ?? false))
+            {
+                ViewAssemblies = new[] { Assembly.GetEntryAssembly() ?? Assembly.GetCallingAssembly() };
+            }
+
+            // Avoid creating the instance of Setup right now, instead
+            // take a reference to the type in a way that we can avoid
+            // using reflection to create the instance.
+            SetupCreator = () => new TMvxSetup();
         }
 
-        private static IMvxSetup instance;
-        public static IMvxSetup Instance
+        public static IMvxSetup Instance()
         {
-            get
+            var instance = SetupCreator?.Invoke();
+            if (instance == null)
             {
-                if (instance != null) return instance;
-                if (RegisteredSetupType != null)
-                {
-                    instance = Activator.CreateInstance(RegisteredSetupType) as MvxSetup;
-                }
-                else
-                {
-                    instance = MvxSetupExtensions.CreateSetup<MvxSetup>();
-                }
-                return instance;
+                instance = MvxSetupExtensions.CreateSetup<MvxSetup>();
             }
-        }
-
-        public static TMvxSetup PlatformInstance<TMvxSetup>() where TMvxSetup : IMvxSetup
-        {
-            try
-            {
-                return (TMvxSetup)Instance;
-            }
-            catch (Exception ex)
-            {
-                MvxLog.Instance.Error(ex, "Unable to cast setup to {0}", typeof(TMvxSetup));
-                throw ex;
-            }
+            return instance;
         }
 
         protected abstract IMvxApplication CreateApp();
@@ -90,6 +81,8 @@ namespace MvvmCross.Core
             InitializeSettings();
             SetupLog.Trace("Setup: Singleton Cache start");
             InitializeSingletonCache();
+            SetupLog.Trace("Setup: ViewDispatcher start");
+            InitializeViewDispatcher();
             State = MvxSetupState.InitializedPrimary;
         }
 
@@ -121,8 +114,6 @@ namespace MvvmCross.Core
             InitializeViewModelTypeFinder();
             SetupLog.Trace("Setup: ViewsContainer start");
             InitializeViewsContainer();
-            SetupLog.Trace("Setup: ViewDispatcher start");
-            InitializeViewDispatcher();
             SetupLog.Trace("Setup: Views start");
             InitializeViewLookup();
             SetupLog.Trace("Setup: CommandCollectionBuilder start");
@@ -367,8 +358,8 @@ namespace MvvmCross.Core
 
         protected virtual IEnumerable<Assembly> GetViewAssemblies()
         {
-            var assembly = GetType().GetTypeInfo().Assembly;
-            return new[] { assembly };
+            var assemblies = ViewAssemblies ?? new[] { GetType().GetTypeInfo().Assembly };
+            return assemblies;
         }
 
         protected virtual IEnumerable<Assembly> GetViewModelAssemblies()

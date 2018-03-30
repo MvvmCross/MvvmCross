@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SidebarNavigation" Version="1.9.4" />
+    <PackageReference Include="SidebarNavigation" Version="2.0.0" />
   </ItemGroup>
   
   <ItemGroup>

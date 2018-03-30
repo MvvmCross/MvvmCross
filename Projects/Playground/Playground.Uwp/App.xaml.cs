@@ -3,16 +3,15 @@ using MvvmCross.Platforms.Uap.Views;
 
 namespace Playground.Uwp
 {
-    public sealed partial class App : MvxApplication
+    public sealed partial class App
     {
-        static App()
-        {
-            MvxWindowsSetup.RegisterWindowsSetupType<MvxWindowsSetup<Core.App>>();
-        }
-
         public App()
         {
             InitializeComponent();
         }
+    }
+
+    public abstract class PlaygroundApp : MvxApplication<MvxWindowsSetup<Core.App>, Core.App>
+    {
     }
 }

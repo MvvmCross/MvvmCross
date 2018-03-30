@@ -25,7 +25,7 @@ Concrete classes
 - [MvxStandardTableViewSource.cs](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Platforms/Ios/Binding/Views/MvxStandardTableViewSource.cs)
   - inherits from `MvxTableViewSource`
   - provides the 'standard iPhone cell types' via `UITableViewCellStyle` 
-  - within these you can bind `TitleText`, `DetailText`, `ImageUrl` and (with some teasing) Accessory
+  - within these you can bind `TitleText`, `DetailText`, and (with some teasing) Accessory
 - [MvxSimpleTableViewSource.cs](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Platforms/Ios/Binding/Views/MvxSimpleTableViewSource.cs)
   - inherits from `MvxTableViewSource`
   - provides a single cell type for all items in the collection - via `string nibName` in the `ctor`

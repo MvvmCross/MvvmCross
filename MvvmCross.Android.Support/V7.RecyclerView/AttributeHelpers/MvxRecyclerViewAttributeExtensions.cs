@@ -45,7 +45,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
             return className;
         }
             
-        public static IMvxTemplateSelector BuildItemTemplateSelector(Context context, IAttributeSet attrs)
+        public static IMvxTemplateSelector BuildItemTemplateSelector(Context context, IAttributeSet attrs, int itemTemplateId)
         {
             var templateSelectorClassName = ReadRecyclerViewItemTemplateSelectorClassName(context, attrs);
             var type = Type.GetType(templateSelectorClassName);
@@ -73,7 +73,12 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
                 throw new InvalidOperationException(message);
             }
 
-            return Activator.CreateInstance(type) as IMvxTemplateSelector;
+            var templateSelector = Activator.CreateInstance(type) as IMvxTemplateSelector;
+
+            if (itemTemplateId != 0 && templateSelector != null)
+                    templateSelector.ItemTemplateId = itemTemplateId;
+
+            return templateSelector;
         }
 
         private static bool areBindingResourcesInitialized = false;

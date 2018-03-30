@@ -15,4 +15,3 @@ private void MySampleCommand()
 ```
 
 This plugin is available on all of Android, iOS and Windows Uwp.
-

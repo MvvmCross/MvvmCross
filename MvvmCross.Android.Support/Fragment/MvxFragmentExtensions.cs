@@ -4,6 +4,7 @@
 
 using Android.Support.V4.App;
 using Android.Views;
+using MvvmCross.Core;
 using MvvmCross.Droid.Support.V4.EventSource;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
@@ -102,8 +103,8 @@ namespace MvvmCross.Droid.Support.V4
             if (fragment == null)
                 throw new MvxException($"{nameof(EnsureSetupInitialized)} called on an {nameof(IMvxFragmentView)} which is not an Android Fragment: {fragmentView}");
 
-            var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(fragment.Activity.ApplicationContext);
-            setupSingleton.EnsureInitialized();
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(fragment.Activity.ApplicationContext);
+            setup.EnsureInitialized();
         }
 
         public static TFragment FindFragmentById<TFragment>(this MvxFragmentActivity activity, int resourceId)

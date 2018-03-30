@@ -4,17 +4,17 @@
 
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Plugin.Color.Platforms.Android.BindingTargets;
-using MvvmCross.Plugin;
 using MvvmCross.UI;
 
 namespace MvvmCross.Plugin.Color.Platforms.Android
 {
     [MvxPlugin]
     [Preserve(AllMembers = true)]
-    public sealed class Plugin : IMvxPlugin
+    public sealed class Plugin : BasePlugin
     {
-        public void Load()
+        public override void Load()
         {
+            base.Load();
             Mvx.RegisterSingleton<IMvxNativeColor>(new MvxAndroidColor());
             Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(RegisterDefaultBindings);
         }

@@ -1,28 +1,24 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using MvvmCross.Core;
 using MvvmCross.Platforms.Wpf.Core;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Wpf.Views
 {
-    public abstract class MvxApplication : Application 
+    public abstract class MvxApplication : Application
     {
-        protected IMvxWpfSetup Setup
+        public MvxApplication() : base()
         {
-            get
-            {
-                return MvxSetup.PlatformInstance<IMvxWpfSetup>();
-            }
+            RegisterSetup();
         }
 
-        protected override void OnActivated(EventArgs e)
+        public virtual void ApplicationInitialized()
         {
-            Setup.PlatformInitialize(Dispatcher, MainWindow);
-            Setup.Initialize();
+            if (MainWindow == null) return;
 
-            RunAppStart(e);
-            base.OnActivated(e);
+            MvxWpfSetupSingleton.EnsureSingletonAvailable(Dispatcher, MainWindow).EnsureInitialized();
+
+            RunAppStart();
         }
 
         protected virtual void RunAppStart(object hint = null)
@@ -35,6 +31,20 @@ namespace MvvmCross.Platforms.Wpf.Views
         protected virtual object GetAppStartHint(object hint = null)
         {
             return null;
+        }
+
+        protected virtual void RegisterSetup()
+        {
+        }
+    }
+
+    public class MvxApplication<TMvxWpfSetup, TApplication> : MvxApplication
+       where TMvxWpfSetup : MvxWpfSetup<TApplication>, new()
+       where TApplication : IMvxApplication, new()
+    {
+        protected override void RegisterSetup()
+        {
+            this.RegisterSetupType<TMvxWpfSetup>();
         }
     }
 }

@@ -3,25 +3,15 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading;
-using System.Threading.Tasks;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
 
 namespace MvvmCross.ViewModels
 {
-    public class MvxAppStart<TViewModel>
-        : IMvxAppStart
-        where TViewModel : IMvxViewModel
+    public abstract class MvxAppStart : IMvxAppStart
     {
-        protected readonly IMvxNavigationService NavigationService;
-
         private int startHasCommenced;
-
-        public MvxAppStart(IMvxNavigationService navigationService)
-        {
-            NavigationService = navigationService;
-        }
         
         public void Start(object hint = null)
         {
@@ -29,6 +19,31 @@ namespace MvvmCross.ViewModels
             if (Interlocked.CompareExchange(ref startHasCommenced, 1, 0) == 1)
                 return;
 
+            Startup(hint);
+        }
+
+        protected abstract void Startup(object hint = null);
+
+        public virtual bool IsStarted => startHasCommenced != 0;
+
+        public virtual void ResetStart()
+        {
+            Interlocked.Exchange(ref startHasCommenced, 0);
+        }
+    }
+
+    public class MvxAppStart<TViewModel> : MvxAppStart
+        where TViewModel : IMvxViewModel
+    {
+        protected readonly IMvxNavigationService NavigationService;
+        
+        public MvxAppStart(IMvxNavigationService navigationService)
+        {
+            NavigationService = navigationService;
+        }
+
+        protected override void Startup(object hint = null)
+        {
             if (hint != null)
             {
                 MvxLog.Instance.Trace("Hint ignored in default MvxAppStart");
@@ -43,7 +58,5 @@ namespace MvvmCross.ViewModels
                 throw exception.MvxWrap("Problem navigating to ViewModel {0}", typeof(TViewModel).Name);
             } 
         }
-
-        public bool IsStarted => startHasCommenced != 0;
     }
 }

@@ -50,6 +50,9 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapter\SelectedItemRecyclerAdapter.cs" />
+    <Compile Include="Adapter\SelectedItemRecyclerAdapter.SelectedItemEventArgs.cs" />
+    <Compile Include="Adapter\SelectedItemRecyclerAdapter.ViewHolder.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashScreen.cs" />
@@ -57,6 +60,10 @@
     <Compile Include="Views\CollectionView.cs" />
     <Compile Include="Views\DictionaryBindingView.cs" />
     <Compile Include="Views\RootView.cs" />
+    <Compile Include="Views\SharedElements\SharedElementSecondChildView.cs" />
+    <Compile Include="Views\SharedElements\SharedElementSecondView.cs" />
+    <Compile Include="Views\SharedElements\SharedElementRootChildView.cs" />
+    <Compile Include="Views\SharedElements\SharedElementRootView.cs" />
     <Compile Include="Views\TabsRootView.cs" />
     <Compile Include="Views\Tab1View.cs" />
     <Compile Include="Views\Tab2View.cs" />
@@ -84,6 +91,21 @@
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\dictionary_view.axml" />
     <AndroidResource Include="Resources\layout\CollectionView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SharedElementRootView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SharedElementRootChildView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SharedElementSecondChildView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SharedElementSecondView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ItemListSharedElementsTemplate.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -172,6 +194,24 @@
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat">
       <Version>26.1.0.1</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Build.Download">
+      <Version>0.4.9</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\mvvmcross_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\mvvmcross_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\mvvmcross_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\mvvmcross_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\mvvmcross_logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

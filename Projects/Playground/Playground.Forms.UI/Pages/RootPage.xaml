@@ -10,7 +10,7 @@
         <ScrollView>
             <StackLayout Margin="10">
                 <Image Source="MvvmCross" HorizontalOptions="Center" />
-                <Label Text="Forms views" />
+                <Label Text="Forms views" TextColor="{StaticResource Red}" />
                 <Button Text="Show Child" mvx:Bi.nd="Command ShowChildCommand"/>
                 <Button Text="Show Modal" mvx:Bi.nd="Command ShowModalCommand"/>
                 <Button Text="Show Modal Navigation" mvx:Bi.nd="Command ShowModalNavCommand"/>
@@ -18,11 +18,11 @@
                 <Button Text="Show Master/Detail" mvx:Bi.nd="Command ShowSplitCommand"/>
                 <Button Text="Show Mixed Navigation" mvx:Bi.nd="Command ShowMixedNavigationCommand"/>
                 <Button Text="Show Content View" mvx:Bi.nd="Command ShowContentViewCommand"/>
-                <Label Text="Native views" />
+                <Label Text="Native views" TextColor="{StaticResource PrimaryColor}" />
                 <Button Text="Show Native Page" mvx:Bi.nd="Command ShowNativeCommand"/>
                 <Button Text="Show Override" mvx:Bi.nd="Command ShowOverrideAttributeCommand"/>
                 <Button Text="Show BottomSheet" mvx:Bi.nd="Command ShowSheetCommand"/>
-                <Label Text="Test views" />
+                <Label Text="Test views" TextColor="{StaticResource AdditionalColor}"/>
                 <Button Text="Show ListView" mvx:Bi.nd="Command ShowListViewCommand"/>
                 <Button Text="Show Bindings view" mvx:Bi.nd="Command ShowBindingsViewCommand"/>
                 <Button Text="Show CodeBehind view" mvx:Bi.nd="Command ShowCodeBehindViewCommand"/>

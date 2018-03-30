@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -6,14 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Util;
+using Android.Views;
 using Java.Lang;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Platforms.Android;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Platforms.Android.Views;
@@ -29,12 +29,11 @@ namespace MvvmCross.Platforms.Android.Presenters
     {
         protected IEnumerable<Assembly> AndroidViewAssemblies { get; set; }
         public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
+        public const string SharedElementsBundleKey = "__sharedElementsKey";
         protected MvxViewModelRequest _pendingRequest;
 
         protected virtual FragmentManager CurrentFragmentManager => CurrentActivity.FragmentManager;
-
-        protected virtual ConditionalWeakTable<IMvxViewModel, DialogFragment> Dialogs { get; } = new ConditionalWeakTable<IMvxViewModel, DialogFragment>();
-
+        
         private IMvxAndroidCurrentTopActivity _mvxAndroidCurrentTopActivity;
         protected virtual Activity CurrentActivity
         {
@@ -226,7 +225,46 @@ namespace MvvmCross.Platforms.Android.Presenters
             var intent = CreateIntentForRequest(request);
             if (attribute.Extras != null)
                 intent.PutExtras(attribute.Extras);
-            ShowIntent(intent);
+
+            ShowIntent(intent, CreateActivityTransitionOptions(intent, attribute, request));
+        }
+
+        protected virtual Bundle CreateActivityTransitionOptions(Intent intent, MvxActivityPresentationAttribute attribute, MvxViewModelRequest request)
+        {
+            var bundle = Bundle.Empty;
+
+            if (CurrentActivity is IMvxAndroidSharedElements sharedElementsActivity)
+            {
+                var elements = new List<string>();
+                var transitionElementPairs = new List<Pair>();
+
+                foreach (KeyValuePair<string, View> item in sharedElementsActivity.FetchSharedElementsToAnimate(attribute, request))
+                {
+                    var transitionName = item.Value.GetTransitionNameSupport();
+                    if (!string.IsNullOrEmpty(transitionName))
+                    {
+                        transitionElementPairs.Add(Pair.Create(item.Value, transitionName));
+                        elements.Add($"{item.Key}:{transitionName}");
+                    }
+                    else
+                    {
+                        MvxLog.Instance.Warn("A XML transitionName is required in order to transition a control when navigating.");
+                    }
+                }
+
+                if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+                {
+                    var activityOptions = ActivityOptions.MakeSceneTransitionAnimation(CurrentActivity, transitionElementPairs.ToArray());
+                    intent.PutExtra(SharedElementsBundleKey, string.Join("|", elements));
+                    bundle = activityOptions.ToBundle();
+                }
+                else
+                {
+                    MvxLog.Instance.Warn("Shared element transition requires Android v21+.");
+                }
+            }
+
+            return bundle;
         }
 
         protected virtual Intent CreateIntentForRequest(MvxViewModelRequest request)
@@ -241,7 +279,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             return requestTranslator.GetIntentFor(request);
         }
 
-        protected virtual void ShowIntent(Intent intent)
+        protected virtual void ShowIntent(Intent intent, Bundle bundle)
         {
             var activity = CurrentActivity;
             if (activity == null)
@@ -249,7 +287,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 MvxLog.Instance.Warn("Cannot Resolve current top activity");
                 return;
             }
-            activity.StartActivity(intent);
+            activity.StartActivity(intent, bundle);
         }
 
         protected virtual void ShowHostActivity(MvxFragmentPresentationAttribute attribute)
@@ -276,7 +314,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 return;
             }
 
-            // if there is no Actitivty host associated, assume is the current activity
+            // if there is no Activity host associated, assume is the current activity
             if (attribute.ActivityHostViewModelType == null)
                 attribute.ActivityHostViewModelType = GetCurrentActivityViewModelType();
 
@@ -356,27 +394,41 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             var ft = fragmentManager.BeginTransaction();
 
-            OnBeforeFragmentChanging(ft, attribute);
+            OnBeforeFragmentChanging(ft, fragmentView, attribute, request);
 
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
 
-            OnFragmentChanging(ft, fragmentView, attribute);
+            OnFragmentChanging(ft, fragmentView, attribute, request);
 
             ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
             ft.CommitAllowingStateLoss();
 
-            OnFragmentChanged(ft, fragmentView, attribute);
+            OnFragmentChanged(ft, fragmentView, attribute, request);
         }
 
-        protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, MvxFragmentPresentationAttribute attribute)
+        protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
         {
-            if (attribute.SharedElements != null)
+            if (CurrentActivity is IMvxAndroidSharedElements sharedElementsActivity)
             {
-                foreach (var item in attribute.SharedElements)
+                var elements = new List<string>();
+
+                foreach (KeyValuePair<string, View> item in sharedElementsActivity.FetchSharedElementsToAnimate(attribute, request))
                 {
-                    ft.AddSharedElement(item.Value, item.Key);
+                    var transitionName = item.Value.GetTransitionNameSupport();
+                    if (!string.IsNullOrEmpty(transitionName))
+                    {
+                        ft.AddSharedElement(item.Value, transitionName);
+                        elements.Add($"{item.Key}:{transitionName}");
+                    }
+                    else
+                    {
+                        MvxLog.Instance.Warn("A XML transitionName is required in order to transition a control when navigating.");
+                    }
                 }
+
+                if (elements.Count > 0)
+                    fragment.Arguments.PutString(SharedElementsBundleKey, string.Join("|", elements));
             }
 
             if (!attribute.EnterAnimation.Equals(int.MinValue) && !attribute.ExitAnimation.Equals(int.MinValue))
@@ -391,12 +443,12 @@ namespace MvvmCross.Platforms.Android.Presenters
                 ft.SetTransitionStyle(attribute.TransitionStyle);
         }
 
-        protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
         {
 
         }
 
-        protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
+        protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
         {
 
         }
@@ -428,16 +480,18 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             dialog.Cancelable = attribute.Cancelable;
 
-            Dialogs.Add(mvxFragmentView.ViewModel, dialog);
-
             var ft = CurrentFragmentManager.BeginTransaction();
 
-            OnBeforeFragmentChanging(ft, attribute);
+            OnBeforeFragmentChanging(ft, dialog, attribute, request);
 
             if (attribute.AddToBackStack == true)
                 ft.AddToBackStack(fragmentName);
 
+            OnFragmentChanging(ft, dialog, attribute, request);
+
             dialog.Show(ft, fragmentName);
+
+            OnFragmentChanged(ft, dialog, attribute, request);
         }
         #endregion
 
@@ -470,12 +524,11 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual bool CloseFragmentDialog(IMvxViewModel viewModel, MvxDialogFragmentPresentationAttribute attribute)
         {
-            if (Dialogs.TryGetValue(viewModel, out DialogFragment dialog))
+            string tag = FragmentJavaName(attribute.ViewType);
+            var toClose = CurrentFragmentManager.FindFragmentByTag(tag);
+            if (toClose != null && toClose is DialogFragment dialog)
             {
                 dialog.DismissAllowingStateLoss();
-                dialog.Dispose();
-                Dialogs.Remove(viewModel);
-
                 return true;
             }
             return false;
@@ -568,9 +621,9 @@ namespace MvvmCross.Platforms.Android.Presenters
                 var fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
                 return fragment;
             }
-            catch
+            catch (System.Exception ex)
             {
-                throw new MvxException($"Cannot create Fragment '{fragmentName}'. Use the MvxAppCompatViewPresenter when using Android Support Fragments");
+                throw new MvxException(ex, $"Cannot create Fragment '{fragmentName}'. Use the MvxAppCompatViewPresenter when using Android Support Fragments");
             }
         }
 
