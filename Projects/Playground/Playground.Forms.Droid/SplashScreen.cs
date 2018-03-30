@@ -19,14 +19,10 @@ namespace Playground.Forms.Droid
         , ScreenOrientation = ScreenOrientation.Portrait)]
     public class SplashScreen : MvxSplashScreenActivity
     {
-        static SplashScreen()
-        {
-            MvxSetup.RegisterSetupType<Setup>();
-        }
-
         public SplashScreen()
             : base(Resource.Layout.SplashScreen)
         {
+            this.RegisterSetupType<Setup>();
         }
 
         protected override void TriggerFirstNavigate()

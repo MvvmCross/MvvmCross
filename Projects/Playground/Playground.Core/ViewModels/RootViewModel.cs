@@ -49,6 +49,8 @@ namespace Playground.Core.ViewModels
 
             ShowCollectionViewCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<CollectionViewModel>());
 
+            ShowSharedElementsCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SharedElementRootChildViewModel>());
+
             _counter = 3;
         }
 
@@ -71,16 +73,16 @@ namespace Playground.Core.ViewModels
             base.ViewAppearing();
 
             MyTask = MvxNotifyTask.Create(
-                async () => 
+                async () =>
                 {
                     await Task.Delay(300);
 
                     throw new System.Exception("Boom!");
-                }, exception => 
+                }, exception =>
                 {
                 });
         }
-        
+
         protected override void SaveStateToBundle(IMvxBundle bundle)
         {
             base.SaveStateToBundle(bundle);
@@ -129,13 +131,15 @@ namespace Playground.Core.ViewModels
 
         public IMvxAsyncCommand ShowContentViewCommand => new MvxAsyncCommand(async () => await _navigationService.Navigate<ParentContentViewModel>());
 
+        public IMvxAsyncCommand ShowSharedElementsCommand { get; private set; }
+
         private async Task Navigate()
         {
-            try 
+            try
             {
                 await _navigationService.Navigate<ModalViewModel>();
             }
-            catch (System.Exception) 
+            catch (System.Exception)
             {
             }
         }

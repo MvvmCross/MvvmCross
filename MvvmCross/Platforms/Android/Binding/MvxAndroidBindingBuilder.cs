@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -206,12 +206,10 @@ namespace MvvmCross.Platforms.Android.Binding
             registry.AddOrOverwrite(typeof(MvxLinearLayout), nameof(MvxLinearLayout.ItemsSource));
             registry.AddOrOverwrite(typeof(MvxGridView), nameof(MvxGridView.ItemsSource));
             registry.AddOrOverwrite(typeof(MvxFrameControl), nameof(MvxFrameControl.DataContext));
-            registry.AddOrOverwrite(typeof(MvxImageView), nameof(MvxImageView.ImageUrl));
             registry.AddOrOverwrite(typeof(MvxDatePicker), nameof(MvxDatePicker.Value));
             registry.AddOrOverwrite(typeof(MvxTimePicker), nameof(MvxTimePicker.Value));
             registry.AddOrOverwrite(typeof(CompoundButton), MvxAndroidPropertyBinding.CompoundButton_Checked);
             registry.AddOrOverwrite(typeof(SeekBar), MvxAndroidPropertyBinding.SeekBar_Progress);
-            registry.AddOrOverwrite(typeof(IMvxImageHelper<Bitmap>), nameof(IMvxImageHelper<Bitmap>.ImageUrl));
             registry.AddOrOverwrite(typeof(SearchView), MvxAndroidPropertyBinding.SearchView_Query);
         }
 

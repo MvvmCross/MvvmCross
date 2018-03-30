@@ -14,17 +14,17 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
   where TMvxAndroidSetup : MvxAppCompatSetup<TApplication>, new()
   where TApplication : IMvxApplication, new()
     {
-        static MvxAppCompatApplication()
-        {
-            MvxSetup.RegisterSetupType<TMvxAndroidSetup>();
-        }
-
         public MvxAppCompatApplication() : base()
         {
         }
 
         public MvxAppCompatApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
+        }
+
+        protected override void RegisterSetup()
+        {
+            this.RegisterSetupType<TMvxAndroidSetup>();
         }
     }
 }

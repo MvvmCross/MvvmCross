@@ -20,7 +20,7 @@ namespace MvvmCross.Droid.Support.Design
     {
         protected MvxBottomSheetDialogFragment()
         {
-            this.AddEventListeners();
+            V4.MvxFragmentExtensions.AddEventListeners(this);
         }
 
         protected MvxBottomSheetDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)

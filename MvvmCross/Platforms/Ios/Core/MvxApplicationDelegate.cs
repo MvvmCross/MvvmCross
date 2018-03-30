@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -12,12 +12,14 @@ namespace MvvmCross.Platforms.Ios.Core
 {
     public abstract class MvxApplicationDelegate : UIApplicationDelegate, IMvxApplicationDelegate
     {
-        protected IMvxIosSetup Setup
+        /// <summary>
+        /// UIApplicationDelegate.Window doesn't really exist / work. It was added by Xamarin.iOS templates 
+        /// </summary>
+        public new UIWindow Window { get; set; }
+
+        public MvxApplicationDelegate() : base()
         {
-            get
-            {
-                return MvxSetup.PlatformInstance<IMvxIosSetup>();
-            }
+            RegisterSetup();
         }
 
         public override void WillEnterForeground(UIApplication application)
@@ -37,11 +39,10 @@ namespace MvvmCross.Platforms.Ios.Core
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            Window = new UIWindow(UIScreen.MainScreen.Bounds);
+            if (Window == null)
+                Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            Setup.PlatformInitialize(this, Window);
-
-            Setup.Initialize();
+            MvxIosSetupSingleton.EnsureSingletonAvailable(this, Window).EnsureInitialized();
 
             RunAppStart(launchOptions);
 
@@ -63,6 +64,10 @@ namespace MvvmCross.Platforms.Ios.Core
             return null;
         }
 
+        protected virtual void RegisterSetup()
+        {
+        }
+
         private void FireLifetimeChanged(MvxLifetimeEvent which)
         {
             var handler = LifetimeChanged;
@@ -76,9 +81,9 @@ namespace MvvmCross.Platforms.Ios.Core
        where TMvxIosSetup : MvxIosSetup<TApplication>, new()
        where TApplication : IMvxApplication, new()
     {
-        static MvxApplicationDelegate()
+        protected override void RegisterSetup()
         {
-            MvxSetup.RegisterSetupType<TMvxIosSetup>();
+            this.RegisterSetupType<TMvxIosSetup>();
         }
     }
 }

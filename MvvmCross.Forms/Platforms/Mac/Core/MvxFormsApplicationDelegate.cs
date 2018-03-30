@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -15,40 +15,39 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.MacOS;
 
 namespace MvvmCross.Forms.Platforms.Mac.Core
-{ 
+{
     public abstract class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {
-        protected MvxFormsMacSetup Setup
+        private NSWindow window;
+        public override NSWindow MainWindow
         {
             get
             {
-                return MvxSetup.PlatformInstance<MvxFormsMacSetup>();
+                if (window == null)
+                {
+                    var style = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
+
+                    var rect = new CoreGraphics.CGRect(200, 1000, 1024, 768);
+                    window = new NSWindow(rect, style, NSBackingStore.Buffered, false);
+                    window.TitleVisibility = NSWindowTitleVisibility.Hidden;
+                }
+                return window;
             }
         }
 
-        NSWindow window;
-        public MvxFormsApplicationDelegate()
+        public MvxFormsApplicationDelegate() : base()
         {
-            var style = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
-
-            var rect = new CoreGraphics.CGRect(200, 1000, 1024, 768);
-            window = new NSWindow(rect, style, NSBackingStore.Buffered, false);
-            window.TitleVisibility = NSWindowTitleVisibility.Hidden;
-        }
-
-        public override NSWindow MainWindow
-        {
-            get { return window; }
+            RegisterSetup();
         }
 
         public override void DidFinishLaunching(Foundation.NSNotification notification)
         {
-            Setup.PlatformInitialize(this, MainWindow);
-            Setup.Initialize();
+            var instance = MvxMacSetupSingleton.EnsureSingletonAvailable(this, MainWindow);
+            instance.EnsureInitialized();
 
             RunAppStart(notification);
 
-            Setup.FormsApplication.SendStart();
+            instance.PlatformSetup<MvxFormsMacSetup>().FormsApplication.SendStart();
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
             base.DidFinishLaunching(notification);
         }
@@ -69,7 +68,8 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
 
         protected virtual void LoadFormsApplication()
         {
-            LoadApplication(Setup.FormsApplication);
+            var instance = MvxMacSetupSingleton.EnsureSingletonAvailable(this, MainWindow);
+            LoadApplication(instance.PlatformSetup<MvxFormsMacSetup>().FormsApplication);
         }
 
         public override void WillBecomeActive(Foundation.NSNotification notification)
@@ -93,6 +93,10 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
             LifetimeChanged?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 
+        protected virtual void RegisterSetup()
+        {
+        }
+
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
     }
 
@@ -101,9 +105,9 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
     where TApplication : IMvxApplication, new()
     where TFormsApplication : Application, new()
     {
-        static MvxFormsApplicationDelegate()
+        protected override void RegisterSetup()
         {
-            MvxSetup.RegisterSetupType<TMvxMacSetup>();
+            this.RegisterSetupType<TMvxMacSetup>();
         }
     }
 }

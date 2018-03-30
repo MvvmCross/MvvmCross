@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -8,6 +8,7 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platforms.Android.Views.Base;
 using MvvmCross.Forms.Presenters;
@@ -83,7 +84,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
         protected override void AttachBaseContext(Context @base)
         {
-            if (this is IMvxAndroidSplashScreenActivity)
+            if (this is IMvxSetupMonitor)
             {
                 // Do not attach our inflater to splash screens.
                 base.AttachBaseContext(@base);
@@ -95,8 +96,8 @@ namespace MvvmCross.Forms.Platforms.Android.Views
         protected override void OnCreate(Bundle bundle)
         {
             // Required for proper Push notifications handling      
-            var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setupSingleton.EnsureInitialized();
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            setup.EnsureInitialized();
 
             base.OnCreate(bundle);
             ViewModel?.ViewCreated();
@@ -105,11 +106,13 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
         protected virtual void RunAppStart(Bundle bundle)
         {
+            InitializeForms(bundle);
+
             var startup = Mvx.Resolve<IMvxAppStart>();
             if (!startup.IsStarted)
                 startup.Start(GetAppStartHint(bundle));
 
-            InitializeForms(bundle);
+            InitializeApplication();
         }
 
         protected virtual object GetAppStartHint(object hint = null)
@@ -128,7 +131,10 @@ namespace MvvmCross.Forms.Platforms.Android.Views
             {
                 Xamarin.Forms.Application.Current = FormsApplication;
             }
+        }
 
+        public virtual void InitializeApplication()
+        {
             LoadApplication(FormsApplication);
         }
 
@@ -165,6 +171,19 @@ namespace MvvmCross.Forms.Platforms.Android.Views
         {
             base.OnStop();
             ViewModel?.ViewDisappeared();
+        }
+
+        public override void OnBackPressed()
+        {
+            var page = Xamarin.Forms.Application.Current.MainPage;
+            if (page == null || (page?.Navigation?.NavigationStack?.Count <= 1 && page?.Navigation?.ModalStack?.Count == 0))
+            {
+                MoveTaskToBack(true);
+            }
+            else
+            {
+                base.OnBackPressed();
+            }
         }
     }
 

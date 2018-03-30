@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -49,24 +49,6 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             : base(frame)
         {
             this.CreateBindingContext(bindingDescriptions);
-        }
-
-        [Obsolete("Please reverse the parameter order")]
-        public MvxCollectionViewCell(IntPtr handle, string bindingText)
-            : this(bindingText, handle)
-        {
-        }
-
-        [Obsolete("Please reverse the parameter order")]
-        public MvxCollectionViewCell(CGRect frame, string bindingText)
-            : this(bindingText, frame)
-        {
-        }
-
-        [Obsolete("Please reverse the parameter order")]
-        public MvxCollectionViewCell(CGRect frame, IEnumerable<MvxBindingDescription> bindingDescriptions)
-            : this(bindingDescriptions, frame)
-        {
         }
 
         /// <summary>

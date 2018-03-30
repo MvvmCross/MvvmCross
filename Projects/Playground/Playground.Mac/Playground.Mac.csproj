@@ -110,9 +110,7 @@
     </Compile>
     <Compile Include="Tab2View.cs" />
     <Compile Include="Tab3View.cs" />
-    <Compile Include="..\..\..\AssemblyInfo.cs">
-      <Link>Properties\AssemblyInfo.cs</Link>
-    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToolbarWindow.cs" />
     <Compile Include="ToolbarWindow.designer.cs">
       <DependentUpon>ToolbarWindow.cs</DependentUpon>

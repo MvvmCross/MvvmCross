@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,28 +11,29 @@ namespace MvvmCross.Platforms.Mac.Core
 {
     public abstract class MvxApplicationDelegate : NSApplicationDelegate, IMvxApplicationDelegate
     {
-        protected IMvxMacSetup Setup
-        {
-            get
-            {
-                return MvxSetup.PlatformInstance<IMvxMacSetup>();
-            }
-        }
-
-        //TODO: Maybe make abstract
+        private NSWindow window;
         public virtual NSWindow MainWindow
         {
             get {
-                var style = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
-                var rect = new CoreGraphics.CGRect(200, 1000, 1024, 768);
-                return new NSWindow(rect, style, NSBackingStore.Buffered, false);
+                if (window == null)
+                {
+                    var style = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
+                    var rect = new CoreGraphics.CGRect(200, 1000, 1024, 768);
+                    window = new NSWindow(rect, style, NSBackingStore.Buffered, false);
+                }
+                return window;
             }
+            set { window = value; }
+        }
+
+        public MvxApplicationDelegate() : base()
+        {
+            RegisterSetup();
         }
 
         public override void DidFinishLaunching(Foundation.NSNotification notification)
         {
-            Setup.PlatformInitialize(this, MainWindow);
-            Setup.Initialize();
+            MvxMacSetupSingleton.EnsureSingletonAvailable(this, MainWindow).EnsureInitialized();
             RunAppStart(notification);
 
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
@@ -72,6 +73,10 @@ namespace MvvmCross.Platforms.Mac.Core
             LifetimeChanged?.Invoke(this, new MvxLifetimeEventArgs(which));
         }
 
+        protected virtual void RegisterSetup()
+        {
+        }
+
         public event EventHandler<MvxLifetimeEventArgs> LifetimeChanged;
     }
 
@@ -79,9 +84,9 @@ namespace MvvmCross.Platforms.Mac.Core
    where TMvxMacSetup : MvxMacSetup<TApplication>, new()
    where TApplication : IMvxApplication, new()
     {
-        static MvxApplicationDelegate()
+        protected override void RegisterSetup()
         {
-            MvxSetup.RegisterSetupType<TMvxMacSetup>();
+            this.RegisterSetupType<TMvxMacSetup>();
         }
     }
 }

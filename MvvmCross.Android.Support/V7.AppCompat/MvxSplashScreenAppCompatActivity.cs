@@ -5,6 +5,7 @@
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using MvvmCross.Core;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
@@ -13,7 +14,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     [Register("mvvmcross.droid.support.v7.appcompat." + nameof(MvxSplashScreenAppCompatActivity))]
     public abstract class MvxSplashScreenAppCompatActivity
-        : MvxAppCompatActivity, IMvxAndroidSplashScreenActivity
+        : MvxAppCompatActivity, IMvxSetupMonitor
     {
         private const int NoContent = 0;
 
@@ -40,7 +41,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             RequestWindowFeatures();
 
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.InitializeFromSplashScreen(this);
+            setup.InitializeAndMonitor(this);
 
             base.OnCreate(bundle);
 
@@ -60,14 +61,14 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             base.OnResume();
             _isResumed = true;
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.InitializeFromSplashScreen(this);
+            setup.InitializeAndMonitor(this);
         }
 
         protected override void OnPause()
         {
             _isResumed = false;
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.RemoveSplashScreen(this);
+            setup.CancelMonitor(this);
             base.OnPause();
         }
 
