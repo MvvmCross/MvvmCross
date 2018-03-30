@@ -1,10 +1,9 @@
-﻿using MvvmCross.Core;
-using MvvmCross.Platforms.Uap.Core;
+﻿using MvvmCross.Platforms.Uap.Core;
 using MvvmCross.Platforms.Uap.Views;
 
 namespace Playground.Uwp
 {
-    public sealed partial class App : PlaygroundApp
+    public sealed partial class App
     {
         public App()
         {
@@ -12,8 +11,7 @@ namespace Playground.Uwp
         }
     }
 
-    public class PlaygroundApp : MvxApplication<MvxWindowsSetup<Core.App>, Core.App>
+    public abstract class PlaygroundApp : MvxApplication<MvxWindowsSetup<Core.App>, Core.App>
     {
-
     }
 }
