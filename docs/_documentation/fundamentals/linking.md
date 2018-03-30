@@ -93,3 +93,22 @@ You will need to add sections to this file as needed.
 > You can find some good defaults in our [ContentFiles in our GitHub repository](https://github.com/MvvmCross/MvvmCross/tree/develop/ContentFiles).
 
 LinkerPleaseInclude files need to be added per platform and need to be compiled. However, these are never invoked, so don't worry if you write code that does not make sense in them. The code is just there to hint the linker.
+
+### Skipping assemblies
+
+As a last resort you could instruct the Linker to skip certain assemblies. This can be done by adding semi-colon `;` delimited list of assemblies to the `AndroidLinkSkip` property in a Xamarin.Android project either by editing the `.csproj` file adding to the first `PropertyGroup` as follows.
+
+```xml
+<PropertyGroup>
+    <AndroidLinkSkip>MvvmCross;MvvmCross.Plugin.Messenger</AndroidLinkSkip>
+```
+
+Or on a Android project you can go to **Options > Android Build > Linker** and add to the *Ignore assemblies* field.
+
+To do something similar for an Xamarin.iOS app, you can go to **Options > iOS Build** and add some additional *mtouch* arguments for each of the assemblies you want to skip.
+
+```
+--linkskip=MvvmCross --linkskip=MvvmCross.Plugin.Messenger
+```
+
+> Please note, the *Ignore assemblies* field and the *mtouch arguments* are configuration specific, so make sure you do this for each configuration you want to skip assemblies.
