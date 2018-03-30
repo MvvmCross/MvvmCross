@@ -14,14 +14,14 @@ Yes, you read it correctly! MvvmCross 6 has finally arrived and it is available 
 - Migration to .NET Standard 2
 - Polished support for Xamarin.Forms
 - Brand new framework initialization (Setup & AppStart)
+- New register process for plugins
 - Supercharged `IMvxOverridePresentationAttribute` for ViewPresenters
-- Support for multiple levels of nested fragments on Android
 - Initial support for Tizen
-- Tons of minor improvements and bug fixes!
+- Tons of improvements and bug fixes!
 
 ## Migration guide
 
-MvvmCross 6 comes with quite a lot of improvements, but this also means some things will break. We have prepared a migration guide that will help you do the transition real quick!
+MvvmCross 6 comes with quite a lot of improvements, but this also means some things will break. We have prepared a migration guide that will help you do the transition real quick! You can find it [here](https://www.mvvmcross.com/documentation/upgrading/upgrade-to-mvvmcross-60).
 
 ### NuGet packages
 
@@ -40,9 +40,6 @@ The MvvmCross.* namespace has been reserved on NuGet, meaning that plugin author
 MvvmCross uses .NET Standard 2.0 as its base library now. This ensures compability on all platforms, and helps us develop MvvmCross faster!
 
 For a explanation about .NET Standard see: https://blogs.msdn.microsoft.com/dotnet/2016/09/26/introducing-net-standard/
-
-PRs:
-- https://github.com/MvvmCross/MvvmCross/pull/2530
 
 ### Setup & platforms initialization
 

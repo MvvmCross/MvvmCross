@@ -7,11 +7,12 @@ Order: 3
 
 This guide assumes you are using MvvmCross 5.6.x. If you are updating your app from a previous version, please look at the appropiate blog posts.
 
-The very first thing you will notice when upgrading / installing v6 nugets, is that a readme file will open automatically. Please read its instructions carefully, and don't hesitate to jump in and make a PR to improve it if you think anything is missing!
+The very first thing you will notice when upgrading / installing v6 nugets, is that a readme file will open automatically. 
+Please read the readme instructions carefully, and don't hesitate to jump in and make a PR to improve it if you think anything is missing!
 
 ## .NET Standard
 
-TBA
+MvvmCross 6 requires your app to use .NET Standard 2.0 as its base library now. Please make sure you make that upgrade before proceeding!
 
 ## Names and namespaces changes
 
@@ -159,4 +160,4 @@ Some methods and classes that were marked as [Obsolete] previously, have been fi
 - `MvxIoCExtensions` (all methods)
 - `MvxEventSourceTabActivity` (Android)
 - `MvxTabActivity` (Android)
-- Some constructos for `MvxCollectionViewCell`
+- Some constructos for `MvxCollectionViewCell` (iOS)
