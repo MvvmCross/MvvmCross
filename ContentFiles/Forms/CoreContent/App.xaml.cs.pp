@@ -1,6 +1,6 @@
-﻿using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Platform;
-using MvvmCross.Platform;
+﻿using MvvmCross;
+using MvvmCross.Forms.Core;
+using MvvmCross.ViewModels;
 using Xamarin.Forms;
 
 namespace $rootnamespace$.Core

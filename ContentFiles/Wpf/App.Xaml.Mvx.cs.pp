@@ -1,8 +1,8 @@
+using MvvmCross
+using MvvmCross.Platforms.Wpf.Views;
+using MvvmCross.ViewModels;
 using System;
 using System.Windows;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
-using MvvmCross.Wpf.Views;
 
 namespace $rootnamespace$
 {

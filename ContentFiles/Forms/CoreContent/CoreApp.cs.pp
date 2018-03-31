@@ -1,5 +1,5 @@
-using MvvmCross.Platform.IoC;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.IoC;
+using MvvmCross.ViewModels;
 
 namespace $rootnamespace$.Core
 {
