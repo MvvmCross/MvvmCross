@@ -1,9 +1,8 @@
 using AppKit;
 using Foundation;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Mac.Platform;
-using MvvmCross.Mac.Views.Presenters;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platforms.Mac.Core;
+using MvvmCross.Platforms.Mac.Presenters;
+using MvvmCross.ViewModels;
 
 namespace $rootnamespace$
 {
@@ -17,11 +16,6 @@ namespace $rootnamespace$
         protected override IMvxApplication CreateApp ()
         {
             return new Core.App();
-        }
-        
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new DebugTrace();
         }
     }
 }
