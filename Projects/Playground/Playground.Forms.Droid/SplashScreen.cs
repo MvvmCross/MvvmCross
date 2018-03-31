@@ -4,6 +4,7 @@
 
 using Android.App;
 using Android.Content.PM;
+using Android.OS;
 using MvvmCross.Core;
 using MvvmCross.Platforms.Android.Views;
 
@@ -25,10 +26,10 @@ namespace Playground.Forms.Droid
             this.RegisterSetupType<Setup>();
         }
 
-        protected override void TriggerFirstNavigate()
+        protected override void RunAppStart(Bundle bundle)
         {
             StartActivity(typeof(MainActivity));
-            base.TriggerFirstNavigate();
+            base.RunAppStart(bundle);
         }
     }
 }
