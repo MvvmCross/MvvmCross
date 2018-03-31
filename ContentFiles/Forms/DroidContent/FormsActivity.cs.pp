@@ -1,9 +1,9 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using MvvmCross.Droid.Views;
-using MvvmCross.Forms.Droid.Views;
-using MvvmCross.Platform;
+using MvvmCross;
+using MvvmCross.Forms.Platforms.Android.Views;
+using MvvmCross.Platforms.Android.Views;
 
 namespace $rootnamespace$
 {

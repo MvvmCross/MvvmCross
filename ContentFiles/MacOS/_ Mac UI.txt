@@ -2,7 +2,7 @@ NOTE
 - Use Xamarin Studio for this...
 
 0. Add a Xamarin.Mac Project
-1. Add a reference to your Core PCL project, e.g., <root>.Core
+1. Add a reference to your Core .NET Standard project, e.g., <root>.Core
 2. Right-click on the project and under Tools -> Edit File, then add <TargetFrameworkVersion>4.5</TargetFrameworkVersion> in the first PropertyGroup, this is needed to access PCLs using Profile 158
 3. Use nuget to add the MvvmCross.Mac package
 4. Verify the Setup.cs file (automatically created)
@@ -11,15 +11,15 @@ NOTE
 7. Create a Views folder and add a Cocao View and Controller, if the ViewModel is "FirstViewModel", recommended naming for the View is "FirstView"
 8. Edit FirstView.cs by adding the using statement below and changing the base type to MvxView
 
-        using MvvmCross.Binding.Mac.Views;
+        using MvvmCross.Platforms.Mac.Binding.Views;
 
         public partial class FirstView : MvxView
 
 9. Edit FirstViewController.cs by adding the using statements below, adding MvxViewFor and changing the base type to MvxViewController
 
-        using MvvmCross.Mac.Views;
+        using MvvmCross.Platforms.Mac.Views;
         using MvvmCross.Binding.BindingContext;
-        using MvvmCross.Core.ViewModels;
+        using MvvmCross.ViewModels;
         using <root>.Core.ViewModels;
 
         [MvxViewFor(typeof(FirstViewModel))]
@@ -46,4 +46,4 @@ Where this requires using's of:
 
     using <core>.Core.ViewModels;
     using MvvmCross.Binding.BindingContext;
-    using MvvmCross.Mac.Views;
+    using MvvmCross.Platforms.Mac.Views;

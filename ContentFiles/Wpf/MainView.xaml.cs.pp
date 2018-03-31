@@ -1,4 +1,4 @@
-using MvvmCross.Wpf.Views;
+using MvvmCross.Platforms.Wpf.Views;
 
 namespace $rootnamespace$.Views
 {

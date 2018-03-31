@@ -1,12 +1,12 @@
-using System;
 using AppKit;
 using CoreGraphics;
 using Foundation;
+using MvvmCross;
+using MvvmCross.Platforms.Mac.Core;
+using MvvmCross.Platforms.Mac.Presenters;
+using MvvmCross.ViewModels;
 using ObjCRuntime;
-using MvvmCross.Mac.Views.Presenters;
-using MvvmCross.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Mac.Platform;
+using System;
 
 namespace $rootnamespace$
 {
