@@ -31,10 +31,7 @@ namespace MvvmCross.Platforms.Mac.Views
             else
                 NSApplication.SharedApplication.BeginInvokeOnMainThread(() =>
                 {
-                    if (maskExceptions)
-                        ExceptionMaskedAction(action);
-                    else
-                        action();
+                    ExceptionMaskedAction(action, maskExceptions);
                 });
             return true;
         }

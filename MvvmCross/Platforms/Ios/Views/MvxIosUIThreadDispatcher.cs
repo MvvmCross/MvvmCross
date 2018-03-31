@@ -29,10 +29,7 @@ namespace MvvmCross.Platforms.Ios.Views
             else
                 UIApplication.SharedApplication.BeginInvokeOnMainThread(() =>
                 {
-                    if (maskExceptions)
-                        ExceptionMaskedAction(action);
-                    else
-                        action();
+                    ExceptionMaskedAction(action, maskExceptions);
                 });
             return true;
         }
