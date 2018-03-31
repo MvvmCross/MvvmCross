@@ -139,7 +139,7 @@ namespace MvvmCross.Platforms.Android.Views
         {
             if (androidView is IMvxSetupMonitor)
             {
-                // splash screen views manage their own setup initialization
+                // setup monitor views manage their own setup initialization
                 return;
             }
 
