@@ -15,7 +15,7 @@ namespace MvvmCross.Platforms.Tvos.Core
         /// <summary>
         /// UIApplicationDelegate.Window doesn't really exist / work. It was added by Xamarin.iOS templates 
         /// </summary>
-        public new UIWindow Window { get; set; }
+        public new virtual UIWindow Window { get; set; }
 
         public MvxApplicationDelegate() : base()
         {
