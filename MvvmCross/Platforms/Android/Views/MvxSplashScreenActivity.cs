@@ -19,6 +19,8 @@ namespace MvvmCross.Platforms.Android.Views
 
         private readonly int _resourceId;
 
+        private Bundle _bundle;
+
         public new MvxNullViewModel ViewModel
         {
             get { return base.ViewModel as MvxNullViewModel; }
@@ -38,6 +40,8 @@ namespace MvvmCross.Platforms.Android.Views
         protected override void OnCreate(Bundle bundle)
         {
             RequestWindowFeatures();
+
+            _bundle = bundle;
 
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setup.InitializeAndMonitor(this);
@@ -76,14 +80,7 @@ namespace MvvmCross.Platforms.Android.Views
             if (!_isResumed)
                 return;
 
-            TriggerFirstNavigate();
-        }
-
-        protected virtual void TriggerFirstNavigate()
-        {
-            var startup = Mvx.Resolve<IMvxAppStart>();
-            if (!startup.IsStarted)
-                startup.Start();
+            RunAppStart(_bundle);
         }
     }
 }
