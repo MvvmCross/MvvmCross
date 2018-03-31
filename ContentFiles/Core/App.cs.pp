@@ -1,8 +1,8 @@
-using MvvmCross.Platform.IoC;
+using MvvmCross.IoC;
 
 namespace $rootnamespace$
 {
-    public class App : MvvmCross.Core.ViewModels.MvxApplication
+    public class App : MvvmCross.ViewModels.MvxApplication
     {
         public override void Initialize()
         {

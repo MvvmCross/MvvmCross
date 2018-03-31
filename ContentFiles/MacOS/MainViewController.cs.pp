@@ -1,11 +1,11 @@
+using AppKit;
+using Foundation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AppKit;
-using Foundation;
-using MvvmCross.Mac.Views;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.Platforms.Mac.Views;
+using MvvmCross.ViewModels;
 
 namespace $rootnamespace$.Views
 {

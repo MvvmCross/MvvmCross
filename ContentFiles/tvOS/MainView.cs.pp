@@ -1,6 +1,6 @@
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.tvOS.Views;
-using MvvmCross.tvOS.Views.Presenters.Attributes;
+using MvvmCross.Platforms.Tvos.Presenters.Attributes;
+using MvvmCross.Platforms.Tvos.Views;
 
 namespace $rootnamespace$.Views
 {

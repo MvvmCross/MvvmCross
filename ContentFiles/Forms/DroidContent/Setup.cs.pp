@@ -1,11 +1,10 @@
 using Android.Content;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Droid.Views;
-using MvvmCross.Forms.Platform;
-using MvvmCross.Forms.Droid.Platform;
-using MvvmCross.Forms.Droid;
+using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platforms.Android;
+using MvvmCross.Forms.Platforms.Android.Core;
+using MvvmCross.Platforms.Android.Core;
+using MvvmCross.Platforms.Android.Views;
+using MvvmCross.ViewModels;
 
 namespace $rootnamespace$
 {
@@ -23,11 +22,6 @@ namespace $rootnamespace$
         protected override IMvxApplication CreateApp()
         {
             return new Core.CoreApp();
-        }
-
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new DebugTrace();
         }
     }
 }
