@@ -16,18 +16,12 @@ namespace MvvmCross.Core
         private static readonly object LockObject = new object();
         private static TaskCompletionSource<bool> IsInitialisedTaskCompletionSource;
         private IMvxSetup _setup;
-        private bool _initialized;
         private IMvxSetupMonitor _currentMonitor;
 
-        protected virtual IMvxSetup Setup
-        {
-            get
-            {
-                return _setup;
-            }
-        }
+        protected virtual IMvxSetup Setup => _setup;
 
-        public virtual TMvxSetup PlatformSetup<TMvxSetup>() where TMvxSetup : IMvxSetup
+        public virtual TMvxSetup PlatformSetup<TMvxSetup>()
+            where TMvxSetup : IMvxSetup
         {
             try
             {
@@ -61,19 +55,18 @@ namespace MvvmCross.Core
         {
             lock (LockObject)
             {
-                if (_initialized)
-                    return;
-
                 if (IsInitialisedTaskCompletionSource == null)
                 {
-                    IsInitialisedTaskCompletionSource = StartSetupInitialization();
+                    StartSetupInitialization();
                 }
                 else
                 {
+                    if (IsInitialisedTaskCompletionSource.Task.IsCompleted)
+                        return;
+
                     MvxLog.Instance.Trace("EnsureInitialized has already been called so now waiting for completion");
                 }
             }
-
             IsInitialisedTaskCompletionSource.Task.GetAwaiter().GetResult();
         }
 
@@ -82,18 +75,21 @@ namespace MvvmCross.Core
             lock (LockObject)
             {
                 _currentMonitor = setupMonitor;
-                if (_initialized)
-                {
-                    _currentMonitor?.InitializationComplete();
-                    return;
-                }
-
+                
+                // if the tcs is not null, it means the initialization is running
                 if (IsInitialisedTaskCompletionSource != null)
                 {
+                    // If the task is already completed at this point, let the monitor know it has finished. 
+                    // but don't do it otherwise because it's done elsewhere
+                    if(IsInitialisedTaskCompletionSource.Task.IsCompleted)
+                    {
+                        _currentMonitor?.InitializationComplete();
+                    }
+
                     return;
                 }
-
-                IsInitialisedTaskCompletionSource = StartSetupInitialization();
+                
+                StartSetupInitialization();
             }
         }
 
@@ -101,15 +97,12 @@ namespace MvvmCross.Core
         {
             lock (LockObject)
             {
-                if (setupMonitor == _currentMonitor)
+                if (setupMonitor != _currentMonitor)
                 {
-                    _currentMonitor = null;
+                    throw new MvxException("The specified IMvxSetupMonitor is not the one registered in MvxSetupSingleton");
                 }
+                _currentMonitor = null;
             }
-        }
-
-        protected MvxSetupSingleton()
-        {
         }
 
         protected virtual void CreateSetup()
@@ -136,17 +129,16 @@ namespace MvvmCross.Core
             base.Dispose(isDisposing);
         }
 
-        private TaskCompletionSource<bool> StartSetupInitialization()
+        private void StartSetupInitialization()
         {
-            var completionSource = new TaskCompletionSource<bool>();
+            IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
             _setup.InitializePrimary();
             Task.Run(() =>
             {
                 _setup.InitializeSecondary();
                 lock (LockObject)
                 {
-                    completionSource.SetResult(true);
-                    _initialized = true;
+                    IsInitialisedTaskCompletionSource.SetResult(true);
                     var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
                     dispatcher.RequestMainThreadAction(() =>
                     {
@@ -157,8 +149,6 @@ namespace MvvmCross.Core
                     });
                 }
             });
-
-            return completionSource;
         }
     }
 }
