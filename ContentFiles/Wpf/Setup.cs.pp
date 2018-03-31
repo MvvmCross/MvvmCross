@@ -1,9 +1,8 @@
+using MvvmCross.Platforms.Wpf.Core;
+using MvvmCross.Platforms.Wpf.Views;
+using MvvmCross.ViewModels;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Wpf.Platform;
-using MvvmCross.Wpf.Views;
 
 namespace $rootnamespace$
 {
@@ -18,11 +17,6 @@ namespace $rootnamespace$
         protected override IMvxApplication CreateApp()
         {
             return new Core.App();
-        }
-
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new DebugTrace();
         }
     }
 }
