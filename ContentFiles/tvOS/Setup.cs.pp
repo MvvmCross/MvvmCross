@@ -1,7 +1,6 @@
-using MvvmCross.Core.ViewModels;
-using MvvmCross.tvOS.Platform;
-using MvvmCross.tvOS.Views.Presenters;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platforms.Tvos.Core;
+using MvvmCross.Platforms.Tvos.Presenters;
+using MvvmCross.ViewModels;
 using UIKit;
 
 namespace $rootnamespace$
@@ -21,11 +20,6 @@ namespace $rootnamespace$
         protected override IMvxApplication CreateApp()
         {
             return new Core.App();
-        }
-        
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new DebugTrace();
         }
 
         protected override IMvxTvosViewPresenter CreatePresenter()
