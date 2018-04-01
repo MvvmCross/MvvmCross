@@ -3,11 +3,18 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Base
 {
     public interface IMvxMainThreadDispatcher
     {
         bool RequestMainThreadAction(Action action, bool maskExceptions = true);
+    }
+
+    public interface IMvxMainThreadAsyncDispatcher
+    {
+        Task<bool> ExecuteOnMainThreadAsync(Action action, bool maskExceptions = true);
+        Task<bool> ExecuteOnMainThreadAsync(Func<Task> action, bool maskExceptions = true);
     }
 }
