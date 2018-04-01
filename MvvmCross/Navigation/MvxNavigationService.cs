@@ -28,7 +28,7 @@ namespace MvvmCross.Navigation
         private IMvxViewDispatcher _viewDispatcher;
         public IMvxViewDispatcher ViewDispatcher
         {
-            get => _viewDispatcher ?? (IMvxViewDispatcher)MvxMainThreadDispatcher.Instance;
+            get => _viewDispatcher ?? (_viewDispatcher = Mvx.Resolve<IMvxViewDispatcher>());
             set => _viewDispatcher = value;
         }
 
@@ -447,28 +447,28 @@ namespace MvvmCross.Navigation
             return await Navigate<TParameter, TResult>(request, viewModel, param, presentationBundle, cancellationToken).ConfigureAwait(false);
         }
 
-        public virtual Task<bool> ChangePresentation(MvxPresentationHint hint)
+        public virtual async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
             MvxLog.Instance.Trace("Requesting presentation change");
             var args = new ChangePresentationEventArgs(hint);
             OnBeforeChangePresentation(this, args);
 
-            var result = ViewDispatcher.ChangePresentation(hint);
+            var result = await ViewDispatcher.ChangePresentation(hint);
 
             args.Result = result;
             OnAfterChangePresentation(this, args);
 
-            return Task.FromResult(result);
+            return result;
         }
 
-        public virtual Task<bool> Close(IMvxViewModel viewModel)
+        public virtual async Task<bool> Close(IMvxViewModel viewModel)
         {
             var args = new NavigateEventArgs(viewModel);
             OnBeforeClose(this, args);
-            var close = ViewDispatcher.ChangePresentation(new MvxClosePresentationHint(viewModel));
+            var close = await ViewDispatcher.ChangePresentation(new MvxClosePresentationHint(viewModel));
             OnAfterClose(this, args);
 
-            return Task.FromResult(close);
+            return close;
         }
 
         public virtual async Task<bool> Close<TResult>(IMvxViewModelResult<TResult> viewModel, TResult result)

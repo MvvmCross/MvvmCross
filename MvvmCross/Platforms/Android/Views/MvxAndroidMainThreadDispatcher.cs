@@ -10,9 +10,9 @@ using MvvmCross.Base;
 
 namespace MvvmCross.Platforms.Android.Views
 {
-    public class MvxAndroidMainThreadDispatcher : MvxMainThreadDispatcher
+    public class MvxAndroidMainThreadDispatcher : MvxMainThreadAsyncDispatcher
     {
-        public bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (Application.SynchronizationContext == SynchronizationContext.Current)
                 action();

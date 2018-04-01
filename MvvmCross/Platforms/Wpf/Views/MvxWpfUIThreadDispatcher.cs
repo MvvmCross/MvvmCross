@@ -9,7 +9,7 @@ using MvvmCross.Base;
 namespace MvvmCross.Platforms.Wpf.Views
 {
     public class MvxWpfUIThreadDispatcher
-        : MvxMainThreadDispatcher
+        : MvxMainThreadAsyncDispatcher
     {
         private readonly Dispatcher _dispatcher;
 
@@ -18,7 +18,7 @@ namespace MvvmCross.Platforms.Wpf.Views
             _dispatcher = dispatcher;
         }
 
-        public bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (_dispatcher.CheckAccess())
             {

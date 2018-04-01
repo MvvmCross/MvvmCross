@@ -4,12 +4,13 @@
 
 using System;
 using System.Reflection;
+using System.Threading.Tasks;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 
 namespace MvvmCross.Base
 {
-    public abstract class MvxMainThreadDispatcher : MvxSingleton<IMvxMainThreadDispatcher>
+    public abstract class MvxMainThreadDispatcher : MvxSingleton<IMvxMainThreadDispatcher>, IMvxMainThreadDispatcher
     {
         protected static void ExceptionMaskedAction(Action action, bool maskExceptions)
         {
@@ -34,5 +35,7 @@ namespace MvvmCross.Base
                     throw exception;
             }
         }
+
+        public abstract bool RequestMainThreadAction(Action action, bool maskExceptions = true);
     }
 }
