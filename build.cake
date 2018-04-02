@@ -7,7 +7,9 @@
 
 using Polly;
 
-var sln = new FilePath("./MvvmCross.sln");
+var solutionName = "MvvmCross";
+var repoName = "mvvmcross/mvvmcross";
+var sln = new FilePath("./" + solutionName + ".sln");
 var outputDir = new DirectoryPath("./artifacts");
 var nuspecDir = new DirectoryPath("./nuspec");
 var target = Argument("target", "Default");
@@ -33,7 +35,7 @@ Setup(context => {
 
     var cakeVersion = typeof(ICakeContext).Assembly.GetName().Version.ToString();
 
-    Information(Figlet("MvvmCross"));
+    Information(Figlet(solutionName));
     Information("Building version {0}, ({1}, {2}) using version {3} of Cake.",
         versionInfo.SemVer,
         configuration,
@@ -136,7 +138,7 @@ Task("UnitTest")
 
 Task("PublishPackages")
     .WithCriteria(() => !BuildSystem.IsLocalBuild)
-    .WithCriteria(() => IsRepository("mvvmcross/mvvmcross"))
+    .WithCriteria(() => IsRepository(repoName))
     .WithCriteria(() => ShouldPushNugetPackages(versionInfo.BranchName))
     .Does (() =>
 {
@@ -145,7 +147,7 @@ Task("PublishPackages")
     var apiKey = nugetKeySource.Item1;
     var source = nugetKeySource.Item2;
 
-    var nugetFiles = GetFiles("MvvmCross*/**/bin/" + configuration + "/**/*.nupkg");
+    var nugetFiles = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg");
 
     var policy = Policy
         .Handle<Exception>()
@@ -172,7 +174,7 @@ Task("UploadAppVeyorArtifact")
 
     var uploadSettings = new AppVeyorUploadArtifactsSettings();
 
-    var artifacts = GetFiles("MvvmCross*/**/bin/" + configuration + "/**/*.nupkg")
+    var artifacts = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg")
         + GetFiles(outputDir.FullPath + "/**/*");
 
     foreach(var file in artifacts) {
