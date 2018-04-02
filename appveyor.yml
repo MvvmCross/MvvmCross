@@ -1,5 +1,4 @@
 -
-  clone_depth: 200
   branches:
       only:
         - master
@@ -18,7 +17,6 @@
   cache:
   - packages -> **\packages.config
 -
-  clone_depth: 200
   branches:
       only:
         - develop
