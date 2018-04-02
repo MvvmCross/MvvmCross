@@ -164,6 +164,10 @@
       <Project>{fe374d1a-1a19-49bc-8e93-d52399a9c3f3}</Project>
       <Name>Playground.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Playground.Forms.UI\Playground.Forms.UI.csproj">
+      <Project>{9a317670-f2d9-4155-9ea7-f8cfd3cfe79f}</Project>
+      <Name>Playground.Forms.UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

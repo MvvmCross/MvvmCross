@@ -11,5 +11,10 @@
 
     <Platform>AnyCPU</Platform>
     <DebugType>full</DebugType>
+    <IsForms>$(MSBuildProjectName.Contains('.Forms'))</IsForms>
   </PropertyGroup>
+
+  <ItemGroup Condition="'$(IsForms)' == 'true'">
+    <PackageReference Include="Xamarin.Forms" Version="3.0.0.296286-pre2" />
+  </ItemGroup>
 </Project>
