@@ -13,7 +13,6 @@ using MvvmCross.Core;
 using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.Views;
-using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
@@ -85,15 +84,16 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
 
         protected override void OnCreate(Bundle bundle)
-        {  
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.EnsureInitialized();
-
+        {
             base.OnCreate(bundle);
             ViewModel?.ViewCreated();
-            RunAppStart(bundle);
-        }
 
+            if(!(this is IMvxSetupMonitor))
+            {
+                RunAppStart(bundle);
+            }
+        }
+        
         protected virtual void RunAppStart(Bundle bundle)
         {
             var startup = Mvx.Resolve<IMvxAppStart>();

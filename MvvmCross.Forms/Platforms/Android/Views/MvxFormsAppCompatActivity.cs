@@ -97,6 +97,8 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
         protected override void OnCreate(Bundle bundle)
         {
+            // ensuring mvvmcross is running here is required
+            // otherwise app will crash when inflating the view because of the Forms base class
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setup.EnsureInitialized();
 
