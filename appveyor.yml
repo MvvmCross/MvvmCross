@@ -5,6 +5,8 @@
         - /release\/.*/
   version: 1.0.{build}
   image: Previous Visual Studio 2017
+  before_build:
+  - cmd: dotnet --info
   environment:
     NUGET_SOURCE: https://www.nuget.org/api/v2/package
     NUGET_APIKEY:
@@ -14,12 +16,15 @@
   test: off
   cache:
   - packages -> **\packages.config
+  clone_depth: 5
 -
   branches:
       only:
         - develop
   version: 1.0.{build}
   image: Previous Visual Studio 2017
+  before_build:
+  - cmd: dotnet --info
   environment:
     NUGET_SOURCE: https://www.myget.org/F/mvvmcross/api/v2/package
     NUGET_APIKEY:
@@ -29,3 +34,4 @@
   test: off
   cache:
   - packages -> **\packages.config
+  clone_depth: 5
