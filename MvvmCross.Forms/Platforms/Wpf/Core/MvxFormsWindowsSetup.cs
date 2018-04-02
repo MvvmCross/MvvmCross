@@ -50,6 +50,7 @@ namespace MvvmCross.Forms.Platforms.Wpf.Core
             Mvx.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
             return presenter;
         }
+        protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsWindowsBindingBuilder();
     }
 
     public class MvxFormsWpfSetup<TApplication, TFormsApplication> : MvxFormsWpfSetup
