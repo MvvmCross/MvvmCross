@@ -157,6 +157,7 @@
     <PackageReference Include="Xamarin.Build.Download">
       <Version>0.4.9</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.280555" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross.Android.Support\Design\MvvmCross.Droid.Support.Design.csproj">

@@ -13,4 +13,8 @@
     <ProjectReference Include="..\Playground.Core\Playground.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.280555" />
+  </ItemGroup>
+
 </Project>
