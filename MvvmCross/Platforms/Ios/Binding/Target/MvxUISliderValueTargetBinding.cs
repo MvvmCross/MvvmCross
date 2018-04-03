@@ -54,6 +54,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Target
         {
             base.Dispose(isDisposing);
             if (!isDisposing)
+                return;
 
             _subscription?.Dispose();
             _subscription = null;

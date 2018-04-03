@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using MvvmCross.Core;
 using MvvmCross.Platforms.Wpf.Core;
 using MvvmCross.ViewModels;
 
@@ -32,6 +33,18 @@ namespace MvvmCross.Platforms.Wpf.Views
             return null;
         }
 
-        protected abstract void RegisterSetup();
+        protected virtual void RegisterSetup()
+        {
+        }
+    }
+
+    public class MvxApplication<TMvxWpfSetup, TApplication> : MvxApplication
+       where TMvxWpfSetup : MvxWpfSetup<TApplication>, new()
+       where TApplication : IMvxApplication, new()
+    {
+        protected override void RegisterSetup()
+        {
+            this.RegisterSetupType<TMvxWpfSetup>();
+        }
     }
 }

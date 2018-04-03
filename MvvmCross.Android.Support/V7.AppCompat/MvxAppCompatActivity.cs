@@ -87,6 +87,23 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             base.OnCreate(bundle);
             ViewModel?.ViewCreated();
+
+            if(!(this is IMvxSetupMonitor))
+            {
+                RunAppStart(bundle);
+            }
+        }
+        
+        protected virtual void RunAppStart(Bundle bundle)
+        {
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            if (!startup.IsStarted)
+                startup.Start(GetAppStartHint(bundle));
+        }
+
+        protected virtual object GetAppStartHint(object hint = null)
+        {
+            return null;
         }
 
         protected override void OnDestroy()

@@ -1,7 +1,6 @@
-using MvvmCross.Core.ViewModels;
-using MvvmCross.iOS.Platform;
-using MvvmCross.iOS.Views.Presenters;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platforms.Ios.Core;
+using MvvmCross.Platforms.Ios.Presenters;
+using MvvmCross.ViewModels;
 using UIKit;
 
 namespace $rootnamespace$
@@ -21,11 +20,6 @@ namespace $rootnamespace$
         protected override IMvxApplication CreateApp()
         {
             return new Core.App();
-        }
-        
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new DebugTrace();
         }
     }
 }

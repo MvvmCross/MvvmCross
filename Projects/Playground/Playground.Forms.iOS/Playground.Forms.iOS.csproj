@@ -142,6 +142,7 @@
     <None Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Views\OverrideAttributeView.cs" />
@@ -154,11 +155,6 @@
     <BundleResource Include="Resources\MvvmCross.png" />
     <BundleResource Include="Resources\MvvmCross%402x.png" />
     <BundleResource Include="Resources\MvvmCross%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Xamarin.Forms">
-      <Version>2.5.0.280555</Version>
-    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

@@ -1,19 +1,17 @@
-﻿using MvvmCross.Core;
-using MvvmCross.Platforms.Uap.Core;
+﻿using MvvmCross.Platforms.Uap.Core;
 using MvvmCross.Platforms.Uap.Views;
 
 namespace Playground.Uwp
 {
-    public sealed partial class App : MvxApplication
+    public sealed partial class App
     {
         public App()
         {
             InitializeComponent();
         }
+    }
 
-        protected override void RegisterSetup()
-        {
-            MvxSetup.RegisterSetupType<MvxWindowsSetup<Core.App>>();
-        }
+    public abstract class PlaygroundApp : MvxApplication<MvxWindowsSetup<Core.App>, Core.App>
+    {
     }
 }

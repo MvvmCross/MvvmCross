@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -130,7 +130,7 @@ namespace MvvmCross.Binding.BindingContext
                 var innerSteps = _useParser ?
                     _properties.Select(p => parser.ParseSingle(p).Source) :
                     _properties.Select(p => new MvxPathSourceStepDescription { SourcePropertyPath = p });
-                
+
                 return new MvxCombinerSourceStepDescription
                 {
                     Combiner = _combiner,
@@ -188,13 +188,7 @@ namespace MvvmCross.Binding.BindingContext
             if (_sourceSpec != null)
                 throw new MvxException("You cannot set the source path of a Fluent binding more than once");
 
-            _sourceSpec = new CombinerSourceSpec(combiner, properties, useParser); 
-        }
-
-        [Obsolete("Please use SourceOverwrite instead")]
-        protected void Overwrite(MvxBindingDescription bindingDescription)
-        {
-            SourceOverwrite(bindingDescription);
+            _sourceSpec = new CombinerSourceSpec(combiner, properties, useParser);
         }
 
         protected void SourceOverwrite(MvxBindingDescription bindingDescription)

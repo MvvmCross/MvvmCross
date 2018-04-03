@@ -1,7 +1,6 @@
 using Android.Content;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Platform;
+using MvvmCross.Platforms.Android.Core;
+using MvvmCross.ViewModels;
 
 namespace $rootnamespace$
 {
@@ -14,11 +13,6 @@ namespace $rootnamespace$
         protected override IMvxApplication CreateApp()
         {
             return new Core.App();
-        }
-
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new DebugTrace();
         }
     }
 }

@@ -11,17 +11,17 @@ Yes, you read it correctly! MvvmCross 6 has finally arrived and it is available 
 
 ## What's new?!
 
-- Migration to .NET Standard
+- Migration to .NET Standard 2
 - Polished support for Xamarin.Forms
+- Brand new framework initialization (Setup & AppStart)
+- New register process for plugins
 - Supercharged `IMvxOverridePresentationAttribute` for ViewPresenters
-- Improved framework initialization
-- Support multiple levels of nested fragments on Android
-- Initial support for Tizen 
-- Tons of minor improvements and bug fixes!
+- Initial support for Tizen
+- Tons of improvements and bug fixes!
 
 ## Migration guide
 
-MvvmCross 6 comes with quite a lot of improvements, but this also means some things will break. We have prepared a migration guide that will help you do the transition real quick!
+MvvmCross 6 comes with quite a lot of improvements, but this also means some things will break. We have prepared a migration guide that will help you do the transition real quick! You can find it [here](https://www.mvvmcross.com/documentation/upgrading/upgrade-to-mvvmcross-60).
 
 ### NuGet packages
 
@@ -37,15 +37,43 @@ The MvvmCross.* namespace has been reserved on NuGet, meaning that plugin author
 
 ### .NET Standard
 
-TBA
-PRs:
-- https://github.com/MvvmCross/MvvmCross/pull/2530
+MvvmCross uses .NET Standard 2.0 as its base library now. This ensures compability on all platforms, and helps us develop MvvmCross faster!
+
+For a explanation about .NET Standard see: https://blogs.msdn.microsoft.com/dotnet/2016/09/26/introducing-net-standard/
 
 ### Setup & platforms initialization
 
-TBA
-PRs:
-- https://github.com/MvvmCross/MvvmCross/pull/2615/
+We've changed the way platforms are loaded. Previously you had to create the `Setup` class in every platform yourself (except for Android if you were using a Splashscreen).
+Starting with v6 the Setup class hs received a lot of improvements! Also if you are starting with a brand new application, you might not even need to write your own!
+
+In order to avoid having to create and initialize the Setup class yourself, you can now use generic versions of some classes:
+- On iOS, there's a version of `MvxApplicationDelegate` which takes a `IMvxIosSetup` and a `IMvxApplication` constraints
+- On Android, there's a version of `MvxAndroidApplication` which takes a `MvxAndroidSetup` and a `IMvxApplication` constraints
+- On Android (support packages), there's a version of `MvxAppCompatApplication` which takes a `MvxAppCompatSetup` and a `IMvxApplication` constraints
+- On UWP, there's a version of `MvxApplication` which takes a `MvxWindowsSetup` and a `IMvxApplication` constraints
+- On WPF, there's a version of `MvxApplication` which takes a `MvxWpfSetup` and a `IMvxApplication` constraints
+- On macOS, there's a version of `MvxApplicationDelegate` which takes a `MvxMacSetup` and a `IMvxApplication` constraints
+- On tvOS, there's a version of `MvxApplicationDelegate` which takes a `MvxTvosSetup` and a `IMvxApplication` constraints
+
+A few importatant notes on this are:
+
+* On iOS, tvOS and macOS please make sure you are calling `var result = base.FinishedLaunching(app, options);` and returning the result at the end of the method.
+* Remove custom App.cs code from your UWP and WPF projects
+* On Android this initialization also works for apps without splash screens.
+* Of course you can keep your Setup class if you want (and it is still encouraged to initialize everything there)!
+* There is now also a singleton for Setup on all platforms, which you can use to ensure MvvmCross is running!
+
+The main work on all this changes was done by [@nickrandolph](https://github.com/nickrandolph) and [@martijn00](https://github.com/martijn00). Well done guys!
+
+### AppStart
+
+The way apps start with MvvmCross has now become much cleaner. MvxAppStart is now called automatically by the framework uniformly. This means you can safely delete your initialization code on platforms like iOS (the framework now will also create the key window for you).
+
+In case you are using a custom AppStart, it is recommended that you make it inherit from the newly added `MvxAppStart` class.
+
+If you are wondering now whether it's possible to add some customization to that, the answer is YES. In the same class where you used to run your own AppStart, there is now a virtual method called `RunAppStart` that you can override. And going further on that direction, if what you need is to make sure you provide a correct hint to your AppStart, then you only need to override the new method called `GetAppStartHint`. Sweet, ah? All thanks to the MvvmCross Core Team.
+
+_Note:_ In case you have a custom AppStart, watch out! The method `Start` has been made protected and it's now called `Startup`.
 
 ### Plugins
 
@@ -59,6 +87,9 @@ Read more about how to get started with plugins [in our documentation](https://w
 
 All methods in `MvxResxTextProvider`, `MvxJsonDictionaryTextProvider` and `MvxTextProvider` are now virtual. Customization is now much easier!
 
+#### DownloadCache
+`DownloadCache` was removed in v6.0, as well as `MvxImageView` and all the related code.
+
 ### ViewPresenters
 
 `IMvxOverridePresentationAttribute.PresentationAttribute` now takes a `MvxViewModelRequest` as parameter. As a result, when the method `PresentationAttribute` is called, you will be able to make your choice on which attribute to use taking advantage of the ViewModel request. But that's not everything! If you are using the MvxNavigationService, you can cast the arriving parameter of type `MvxViewModelRequest` to be a `MvxViewModelInstanceRequest`, which will allow you to see the ViewModel that is being presented. 
@@ -70,18 +101,35 @@ ViewPresenters registration was aligned and improved on many platforms. You can 
 
 The brand new MvxNavigationService that was introduced in MvvmCross 5 is now the default. This means `ShowViewModel` has been finally removed, as well as `MvxNavigatingObject`. If you aren't using it yet, it's time you take a look at the [official documentation](https://www.mvvmcross.com/documentation/fundamentals/navigation).
 
-The intermediary helper class `MvxNavigationServiceAppStart` has been removed as well, because the classic `MvxAppStart` now uses MvxNavigationService internally.
+On this release we have added support for checking whether it's possible or not to navigate to a specific ViewModel. The default implementation will return `true` if the View for that ViewModel is reachable from the platform ViewContainer.
+
+Also please note that the intermediary helper class `MvxNavigationServiceAppStart` has been removed as well, because the classic `MvxAppStart` now uses MvxNavigationService internally.
 
 ### IoC
 
-TBA
-IoC Child containers: https://github.com/MvvmCross/MvvmCross/pull/2438
+Sometimes you'd like to add some instances or types to an IoC Container for a specific purpose and not to the app-wide container. You can use Child Containers for that:
+
+```
+var container = Mvx.Resolve<IMvxIoCProvider>();
+var childContainer = container.CreateChildContainer():
+childContainer.RegisterType<IFoo, Foo>(); // Is only registered in Child Container scope
+childContainer.Create<IFoo>();
+```
+
+You can create as many and as deeply nested Child Containers as you want - each container inherits all dependencies registered on it's parent container.
 
 ### Logging
 
 `MvxTrace` and everything related was removed. The new (and much improved) logging system was already present since MvvmCross 5.4. If you haven't heard about it, please take a look at the [official documentation](https://www.mvvmcross.com/documentation/fundamentals/logging)
 
 ### Xamarin.Forms
+
+#### General stability and bugs fixes
+
+We've put a lot of effort in to make sure MvvmCross works with Forms as good as with traditional Xamarin apps! A whole bunch of bugs have been fixed (and we've added test scenarios in our playground project to make sure we keep it this way!). 
+
+#### MvxFormsApplication
+MvvmCross became much more flexible and it doesn't require your app to use our own `MvxFormsApplication` class anymore. 
 
 #### ViewCells
 
@@ -125,6 +173,12 @@ Kudos to [@nmilcoff](https://github.com/nmilcoff) and [@dazinator](https://githu
 
 `MvxAndroidViewsContainer` will (finally!) no longer force every activity to run on a new task (`ActivityFlags.NewTask` won't be added anymore by default).
 
+#### Shared element transitions
+
+Because everyone loves animations, we are lucky that [@Plac3hold3r](https://github.com/Plac3hold3r) did a great job and improved our support for shared element transitions. As it is a very Android specific topic, you might need to read a bit about how it works before getting your hands into it. 
+
+Once you are ready to start implementing it, take a look at our [official documentation](https://www.mvvmcross.com/documentation/presenters/android-view-presenter) and the Playground sample if you want to see some code.
+
 #### Nested fragments
 
 Both versions of our provided ViewPresenters (default and AppCompat) now support nested fragments! To be fair we did support this in the past, but we took it from 1 level indentation to N levels. Quite cool, right? Kudos to [@Qwin](https://github.com/Qwin).
@@ -132,9 +186,6 @@ Both versions of our provided ViewPresenters (default and AppCompat) now support
 #### Removed layouts
 
 `MvxRelativeLayout`, `MvxFrameLayout` and `MvxTableLayout` were removed as they were memory inefficient (nothing we can do to improve that).
-
-Color plugin: https://github.com/MvvmCross/MvvmCross/pull/2557
-Removed some layouts: https://github.com/MvvmCross/MvvmCross/pull/2561
 
 ### macOS
 
@@ -152,6 +203,10 @@ Although the status is not yet PRD Ready, initial support for the platform was a
 
 ### Others
 
+#### iOS Support
+
+iOS Support has been redesigned. Most pieces are now part of the main lib, while the sidebar support has become now a plugin that you can install on your iOS project.
+
 #### MvxNotifyTask
 
 `MvxNotifyTask` now has an optional callback to set an action to be run when an exception happens.
@@ -167,6 +222,8 @@ MvvmCross has always been easy to extend and customize, but we never stop improv
 #### Framework Unit Testing
 
 [@Cheesebaron](https://github.com/Cheesebaron) took the chance and converted all our Unit Tests to XUnit, which works better for some platforms. After that he didn't stop there and he added a bunch more of tests. Let's help him and improve our coverage for the next version!
+
+`RaiseCanExecuteChanged` is now much easier to test, since [@jacobduijzer](https://github.com/jacobduijzer) has added some helpers and extension methods to ensure whether `CanExecuteChanged` has been raised or not. You can read more about this on the [official documentation](https://www.mvvmcross.com/documentation/fundamentals/testing).
 
 #### Bindings
 

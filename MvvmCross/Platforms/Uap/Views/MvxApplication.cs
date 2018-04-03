@@ -145,6 +145,18 @@ namespace MvvmCross.Platforms.Uap.Views
             return Task.CompletedTask;
         }
 
-        protected abstract void RegisterSetup();
+        protected virtual void RegisterSetup()
+        {
+        }
+    }
+
+    public class MvxApplication<TMvxUapSetup, TApplication> : MvxApplication
+       where TMvxUapSetup : MvxWindowsSetup<TApplication>, new()
+       where TApplication : IMvxApplication, new()
+    {
+        protected override void RegisterSetup()
+        {
+            this.RegisterSetupType<TMvxUapSetup>();
+        }
     }
 }
