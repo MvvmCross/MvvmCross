@@ -11,7 +11,7 @@ using UIKit;
 namespace MvvmCross.Platforms.Tvos.Views
 {
     public abstract class MvxTvosUIThreadDispatcher
-        : MvxMainThreadDispatcher
+        : MvxMainThreadAsyncDispatcher
     {
         private readonly SynchronizationContext _uiSynchronizationContext;
 
@@ -22,7 +22,7 @@ namespace MvvmCross.Platforms.Tvos.Views
                 throw new MvxException("SynchronizationContext must not be null - check to make sure Dispatcher is created on UI thread");
         }
 
-        public bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (_uiSynchronizationContext == SynchronizationContext.Current)
                 action();

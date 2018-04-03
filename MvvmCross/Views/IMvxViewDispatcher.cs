@@ -7,7 +7,7 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Views
 {
-    public interface IMvxViewDispatcher : IMvxMainThreadDispatcher
+    public interface IMvxViewDispatcher : IMvxMainThreadDispatcher, IMvxMainThreadAsyncDispatcher
     {
         bool ShowViewModel(MvxViewModelRequest request);
 
