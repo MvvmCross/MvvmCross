@@ -13,4 +13,5 @@
     <ProjectReference Include="..\Playground.Core\Playground.Core.csproj" />
   </ItemGroup>
 
+  <Import Project="..\..\..\XamarinForms.targets" />
 </Project>
