@@ -156,8 +156,6 @@
     <BundleResource Include="Resources\MvvmCross%402x.png" />
     <BundleResource Include="Resources\MvvmCross%403x.png" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="2.5.0.280555" />
-  </ItemGroup>
+  <Import Project="..\..\..\XamarinForms.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
