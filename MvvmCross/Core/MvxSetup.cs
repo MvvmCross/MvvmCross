@@ -339,6 +339,7 @@ namespace MvvmCross.Core
         {
             var dispatcher = CreateViewDispatcher();
             Mvx.RegisterSingleton(dispatcher);
+            Mvx.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(dispatcher);
             Mvx.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
         }
 

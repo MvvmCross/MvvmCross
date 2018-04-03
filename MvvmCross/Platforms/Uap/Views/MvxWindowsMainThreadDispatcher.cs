@@ -8,7 +8,7 @@ using MvvmCross.Base;
 
 namespace MvvmCross.Platforms.Uap.Views
 {
-    public class MvxWindowsMainThreadDispatcher : MvxMainThreadDispatcher
+    public class MvxWindowsMainThreadDispatcher : MvxMainThreadAsyncDispatcher
     {
         private readonly CoreDispatcher _uiDispatcher;
 
@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Uap.Views
             _uiDispatcher = uiDispatcher;
         }
 
-        public bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (_uiDispatcher.HasThreadAccess)
             {

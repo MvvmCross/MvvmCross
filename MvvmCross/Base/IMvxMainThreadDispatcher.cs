@@ -9,12 +9,7 @@ namespace MvvmCross.Base
 {
     public interface IMvxMainThreadDispatcher
     {
+        [Obsolete("Use IMvxMainThreadAsyncDispatcher.ExecuteOnMainThreadAsync instead")]
         bool RequestMainThreadAction(Action action, bool maskExceptions = true);
-    }
-
-    public interface IMvxMainThreadAsyncDispatcher
-    {
-        Task<bool> ExecuteOnMainThreadAsync(Action action, bool maskExceptions = true);
-        Task<bool> ExecuteOnMainThreadAsync(Func<Task> action, bool maskExceptions = true);
     }
 }

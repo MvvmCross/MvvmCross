@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using MvvmCross.Base;
 using MvvmCross.Logging;
 using MvvmCross.Tests;
@@ -26,7 +27,7 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
             return true;
         }
 
-        public virtual bool ShowViewModel(MvxViewModelRequest request)
+        public virtual Task<bool> ShowViewModel(MvxViewModelRequest request)
         {
             var debugString = $"ShowViewModel: '{request.ViewModelType.Name}' ";
             if (request.ParameterValues != null)
@@ -36,13 +37,13 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
             MvxTestLog.Instance.Log(MvxLogLevel.Debug, () => debugString);
 
             Requests.Add(request);
-            return true;
+            return Task.FromResult(true);
         }
 
-        public virtual bool ChangePresentation(MvxPresentationHint hint)
+        public virtual Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
             Hints.Add(hint);
-            return true;
+            return Task.FromResult(true);
         }
 
     }
