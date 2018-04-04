@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.Base
 {
-    public interface IMvxMainThreadDispatcher
+    public interface IMvxMainThreadAsyncDispatcher
     {
-        bool RequestMainThreadAction(Action action, bool maskExceptions = true);
+        Task ExecuteOnMainThreadAsync(Action action, bool maskExceptions = true);
+        Task ExecuteOnMainThreadAsync(Func<Task> action, bool maskExceptions = true);
     }
 }

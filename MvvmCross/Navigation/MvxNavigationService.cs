@@ -28,14 +28,15 @@ namespace MvvmCross.Navigation
         private IMvxViewDispatcher _viewDispatcher;
         public IMvxViewDispatcher ViewDispatcher
         {
-            get => _viewDispatcher ?? (IMvxViewDispatcher)MvxMainThreadDispatcher.Instance;
+            get => _viewDispatcher ?? (_viewDispatcher = Mvx.Resolve<IMvxViewDispatcher>());
             set => _viewDispatcher = value;
         }
 
         private IMvxViewsContainer _viewsContainer;
         protected IMvxViewsContainer ViewsContainer
         {
-            get {
+            get
+            {
                 if (_viewsContainer == null)
                     _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
                 return _viewsContainer;
@@ -64,7 +65,7 @@ namespace MvvmCross.Navigation
         public static void LoadRoutes(IEnumerable<Assembly> assemblies)
         {
             Routes.Clear();
-            foreach(var routeAttr in
+            foreach (var routeAttr in
                 assemblies.SelectMany(a => a.GetCustomAttributes<MvxNavigationAttribute>()))
             {
                 Routes.Add(new Regex(routeAttr.UriRegex,
@@ -79,7 +80,7 @@ namespace MvvmCross.Navigation
             {
                 var matches = Routes.Where(t => t.Key.IsMatch(url)).ToList();
 
-                switch(matches.Count)
+                switch (matches.Count)
                 {
                     case 0:
                         entry = default(KeyValuePair<Regex, Type>);
@@ -92,7 +93,7 @@ namespace MvvmCross.Navigation
 
                 var directMatch = matches.Where(t => t.Key.Match(url).Groups.Count == 1).ToList();
 
-                if(directMatch.Count == 1)
+                if (directMatch.Count == 1)
                 {
                     entry = directMatch[0];
                     return true;
@@ -105,7 +106,7 @@ namespace MvvmCross.Navigation
                 entry = default(KeyValuePair<Regex, Type>);
                 return false;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.Error("MvxNavigationService", "Unable to determine routability: {0}", ex);
                 entry = default(KeyValuePair<Regex, Type>);
@@ -117,7 +118,7 @@ namespace MvvmCross.Navigation
         {
             var paramDict = new Dictionary<string, string>();
 
-            for(var i = 1 /* 0 == Match itself */; i < match.Groups.Count; i++)
+            for (var i = 1 /* 0 == Match itself */; i < match.Groups.Count; i++)
             {
                 var group = match.Groups[i];
                 var name = regex.GroupNameFromNumber(i);
@@ -131,7 +132,7 @@ namespace MvvmCross.Navigation
         {
             KeyValuePair<Regex, Type> entry;
 
-            if(!TryGetRoute(path, out entry))
+            if (!TryGetRoute(path, out entry))
             {
                 throw new MvxException($"Navigation route request could not be obtained for path: {path}");
             }
@@ -149,28 +150,28 @@ namespace MvvmCross.Navigation
                 ParameterValues = parameterValues?.SafeGetData()
             };
 
-            if(viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
+            if (viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
             {
                 var facade = (IMvxNavigationFacade)Mvx.IocConstruct(viewModelType);
 
                 try
                 {
                     var facadeRequest = await facade.BuildViewModelRequest(path, paramDict).ConfigureAwait(false);
-                    if(facadeRequest == null)
+                    if (facadeRequest == null)
                     {
                         throw new MvxException($"{nameof(MvxNavigationService)}: Facade did not return a valid {nameof(MvxViewModelRequest)}.");
                     }
 
                     request.ViewModelType = facadeRequest.ViewModelType;
 
-                    if(facadeRequest.ParameterValues != null)
+                    if (facadeRequest.ParameterValues != null)
                     {
                         request.ParameterValues = facadeRequest.ParameterValues;
                     }
 
                     request.ViewModelInstance = ViewModelLoader.LoadViewModel(request, null);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     throw ex.MvxWrap($"{nameof(MvxNavigationService)}: Exception thrown while processing URL: {path} with RoutingFacade: {viewModelType}");
                 }
@@ -187,7 +188,7 @@ namespace MvvmCross.Navigation
         {
             KeyValuePair<Regex, Type> entry;
 
-            if(!TryGetRoute(path, out entry))
+            if (!TryGetRoute(path, out entry))
             {
                 throw new MvxException($"Navigation route request could not be obtained for path: {path}");
             }
@@ -205,28 +206,28 @@ namespace MvvmCross.Navigation
                 ParameterValues = parameterValues?.SafeGetData()
             };
 
-            if(viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
+            if (viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
             {
                 var facade = (IMvxNavigationFacade)Mvx.IocConstruct(viewModelType);
 
                 try
                 {
                     var facadeRequest = await facade.BuildViewModelRequest(path, paramDict).ConfigureAwait(false);
-                    if(facadeRequest == null)
+                    if (facadeRequest == null)
                     {
                         throw new MvxException($"{nameof(MvxNavigationService)}: Facade did not return a valid {nameof(MvxViewModelRequest)}.");
                     }
 
                     request.ViewModelType = facadeRequest.ViewModelType;
 
-                    if(facadeRequest.ParameterValues != null)
+                    if (facadeRequest.ParameterValues != null)
                     {
                         request.ParameterValues = facadeRequest.ParameterValues;
                     }
 
                     request.ViewModelInstance = ViewModelLoader.LoadViewModel(request, param, null);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     ex.MvxWrap($"{nameof(MvxNavigationService)}: Exception thrown while processing URL: {path} with RoutingFacade: {viewModelType}");
                 }
@@ -259,9 +260,9 @@ namespace MvvmCross.Navigation
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
-            ViewDispatcher.ShowViewModel(request);
+            await ViewDispatcher.ShowViewModel(request);
 
-            if(viewModel.InitializeTask?.Task != null)
+            if (viewModel.InitializeTask?.Task != null)
                 await viewModel.InitializeTask.Task.ConfigureAwait(false);
 
             OnAfterNavigate(this, args);
@@ -272,7 +273,7 @@ namespace MvvmCross.Navigation
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
-            if(cancellationToken != default(CancellationToken))
+            if (cancellationToken != default(CancellationToken))
             {
                 cancellationToken.Register(async () =>
                 {
@@ -284,9 +285,9 @@ namespace MvvmCross.Navigation
             viewModel.CloseCompletionSource = tcs;
             _tcsResults.Add(viewModel, tcs);
 
-            ViewDispatcher.ShowViewModel(request);
+            await ViewDispatcher.ShowViewModel(request);
 
-            if(viewModel.InitializeTask?.Task != null)
+            if (viewModel.InitializeTask?.Task != null)
                 await viewModel.InitializeTask.Task.ConfigureAwait(false);
 
             OnAfterNavigate(this, args);
@@ -295,7 +296,7 @@ namespace MvvmCross.Navigation
             {
                 return (TResult)await tcs.Task;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return default(TResult);
             }
@@ -306,7 +307,7 @@ namespace MvvmCross.Navigation
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
-            if(cancellationToken != default(CancellationToken))
+            if (cancellationToken != default(CancellationToken))
             {
                 cancellationToken.Register(async () =>
                 {
@@ -318,9 +319,9 @@ namespace MvvmCross.Navigation
             viewModel.CloseCompletionSource = tcs;
             _tcsResults.Add(viewModel, tcs);
 
-            ViewDispatcher.ShowViewModel(request);
+            await ViewDispatcher.ShowViewModel(request);
 
-            if(viewModel.InitializeTask?.Task != null)
+            if (viewModel.InitializeTask?.Task != null)
                 await viewModel.InitializeTask.Task.ConfigureAwait(false);
 
             OnAfterNavigate(this, args);
@@ -329,7 +330,7 @@ namespace MvvmCross.Navigation
             {
                 return (TResult)await tcs.Task;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return default(TResult);
             }
@@ -447,28 +448,28 @@ namespace MvvmCross.Navigation
             return await Navigate<TParameter, TResult>(request, viewModel, param, presentationBundle, cancellationToken).ConfigureAwait(false);
         }
 
-        public virtual Task<bool> ChangePresentation(MvxPresentationHint hint)
+        public virtual async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
             MvxLog.Instance.Trace("Requesting presentation change");
             var args = new ChangePresentationEventArgs(hint);
             OnBeforeChangePresentation(this, args);
 
-            var result = ViewDispatcher.ChangePresentation(hint);
+            var result = await ViewDispatcher.ChangePresentation(hint);
 
             args.Result = result;
             OnAfterChangePresentation(this, args);
 
-            return Task.FromResult(result);
+            return result;
         }
 
-        public virtual Task<bool> Close(IMvxViewModel viewModel)
+        public virtual async Task<bool> Close(IMvxViewModel viewModel)
         {
             var args = new NavigateEventArgs(viewModel);
             OnBeforeClose(this, args);
-            var close = ViewDispatcher.ChangePresentation(new MvxClosePresentationHint(viewModel));
+            var close = await ViewDispatcher.ChangePresentation(new MvxClosePresentationHint(viewModel));
             OnAfterClose(this, args);
 
-            return Task.FromResult(close);
+            return close;
         }
 
         public virtual async Task<bool> Close<TResult>(IMvxViewModelResult<TResult> viewModel, TResult result)
@@ -481,7 +482,7 @@ namespace MvvmCross.Navigation
             try
             {
                 var closeResult = await Close(viewModel);
-                if(closeResult)
+                if (closeResult)
                 {
                     _tcs?.TrySetResult(result);
                     _tcsResults.Remove(viewModel);
@@ -490,7 +491,7 @@ namespace MvvmCross.Navigation
                     viewModel.CloseCompletionSource = _tcs;
                 return closeResult;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _tcs?.TrySetException(ex);
                 return false;
