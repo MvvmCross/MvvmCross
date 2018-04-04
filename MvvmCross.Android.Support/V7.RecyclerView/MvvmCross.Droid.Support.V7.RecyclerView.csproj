@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>MonoAndroid80</TargetFrameworks>
+    <TargetFrameworks>MonoAndroid81</TargetFrameworks>
     <AssemblyName>MvvmCross.Droid.Support.V7.RecyclerView</AssemblyName>
     <RootNamespace>MvvmCross.Droid.Support.V7.RecyclerView</RootNamespace>
     <Description>MvvmCross packages for Android Support V7.RecyclerView</Description>
@@ -14,7 +14,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.Android.Support.V7.RecyclerView" Version="26.1.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.V7.RecyclerView" Version="27.0.2" />
     <PackageReference Include="Xamarin.Build.Download" Version="0.4.9" />
   </ItemGroup>
   
