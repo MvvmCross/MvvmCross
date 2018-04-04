@@ -99,6 +99,12 @@ Task("Build")
         .WithProperty("InformationalVersion", versionInfo.InformationalVersion)
         .WithProperty("NoPackageAnalysis", "True");
 
+    settings.BinaryLogger = new MSBuildBinaryLogSettings 
+    {
+        Enabled = true,
+        FileName = "mvvmcross.binlog"
+    };
+
     MSBuild(sln, settings);
 });
 
@@ -207,7 +213,7 @@ MSBuildSettings GetDefaultBuildSettings()
         Configuration = configuration,
         ToolPath = msBuildPath,
         Verbosity = verbosity,
-        ArgumentCustomization = args => args.Append("/bl:mvvmcross.binlog /m")
+        ArgumentCustomization = args => args.Append("/m")
     };
 
     return settings;
