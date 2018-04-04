@@ -4,7 +4,7 @@
         - master
         - /release\/.*/
   version: 1.0.{build}
-  image: Visual Studio 2017 Preview
+  image: Visual Studio 2017
   install:
   - appveyor-retry powershell .\install-android-sdk.ps1
   before_build:
@@ -25,7 +25,7 @@
       only:
         - develop
   version: 1.0.{build}
-  image: Visual Studio 2017 Preview
+  image: Visual Studio 2017
   install:
   - appveyor-retry powershell .\install-android-sdk.ps1
   before_build:
