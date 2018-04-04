@@ -4,7 +4,9 @@
         - master
         - /release\/.*/
   version: 1.0.{build}
-  image: Previous Visual Studio 2017
+  image: Visual Studio 2017
+  install:
+  - appveyor-retry powershell .\install-android-sdk.ps1
   before_build:
   - cmd: dotnet --info
   environment:
@@ -21,7 +23,9 @@
       only:
         - develop
   version: 1.0.{build}
-  image: Previous Visual Studio 2017
+  image: Visual Studio 2017
+  install:
+  - appveyor-retry powershell .\install-android-sdk.ps1
   before_build:
   - cmd: dotnet --info
   environment:

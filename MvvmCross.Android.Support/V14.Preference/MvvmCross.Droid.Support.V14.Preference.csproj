@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>MonoAndroid80</TargetFrameworks>
+    <TargetFrameworks>MonoAndroid81</TargetFrameworks>
     <AssemblyName>MvvmCross.Droid.Support.V14.Preference</AssemblyName>
     <RootNamespace>MvvmCross.Droid.Support.V14.Preference</RootNamespace>
     <Description>MvvmCross packages for Android Support V14.Preference</Description>
@@ -14,7 +14,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.Android.Support.V14.Preference" Version="26.1.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.V14.Preference" Version="27.0.2" />
     <PackageReference Include="Xamarin.Build.Download" Version="0.4.9" />
   </ItemGroup>
   
