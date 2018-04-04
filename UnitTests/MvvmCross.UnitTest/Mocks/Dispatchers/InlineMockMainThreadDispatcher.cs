@@ -8,9 +8,9 @@ using MvvmCross.Base;
 namespace MvvmCross.UnitTest.Mocks.Dispatchers
 {
     public class InlineMockMainThreadDispatcher
-        : MvxMainThreadDispatcher, IMvxMainThreadDispatcher
+        : MvxMainThreadAsyncDispatcher
     {
-        public virtual bool RequestMainThreadAction(Action action, 
+        public override bool RequestMainThreadAction(Action action, 
             bool maskExceptions = true)
         {
             action();
