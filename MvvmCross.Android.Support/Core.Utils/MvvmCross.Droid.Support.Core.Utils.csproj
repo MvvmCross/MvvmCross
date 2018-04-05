@@ -3,7 +3,9 @@
     <TargetFrameworks>MonoAndroid81</TargetFrameworks>
     <AssemblyName>MvvmCross.Droid.Support.Core.Utils</AssemblyName>
     <RootNamespace>MvvmCross.Droid.Support.Core.Utils</RootNamespace>
-    <Description>MvvmCross packages for Android Support Core.Utils</Description>
+    <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains Support Core Util support for MvvmCross.</Description>
     <PackageId>MvvmCross.Droid.Support.Core.Utils</PackageId>
   </PropertyGroup>
   
