@@ -3,7 +3,9 @@
     <TargetFrameworks>MonoAndroid81</TargetFrameworks>
     <AssemblyName>MvvmCross.Droid.Support.V17.Leanback</AssemblyName>
     <RootNamespace>MvvmCross.Droid.Support.V17.Leanback</RootNamespace>
-    <Description>MvvmCross packages for Android Support V17.Leanback</Description>
+    <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains Support v17 Leanback support for MvvmCross.</Description>
     <PackageId>MvvmCross.Droid.Support.V17.Leanback</PackageId>
   </PropertyGroup>
   

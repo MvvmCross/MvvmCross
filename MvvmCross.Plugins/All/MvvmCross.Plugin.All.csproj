@@ -3,7 +3,9 @@
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>MvvmCross.Plugin.All</AssemblyName>
     <RootNamespace>MvvmCross.Plugin.All</RootNamespace>
-    <Description></Description>
+    <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains all plugins for MvvmCross</Description>
     <PackageId>MvvmCross.Plugin.All</PackageId>
   </PropertyGroup>
 
