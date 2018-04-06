@@ -11,7 +11,14 @@ namespace MvvmCross.ViewModels
 {
     public abstract class MvxAppStart : IMvxAppStart
     {
+        protected readonly IMvxApplication Application;
+
         private int startHasCommenced;
+
+        public MvxAppStart(IMvxApplication application)
+        {
+            Application = application;
+        }
 
         public void Start(object hint = null)
         {
@@ -22,7 +29,16 @@ namespace MvvmCross.ViewModels
             Startup(hint);
         }
 
-        protected abstract void Startup(object hint = null);
+        protected virtual void Startup(object hint = null)
+        {
+            ApplicationStartup(hint);
+        }
+
+        protected virtual void ApplicationStartup(object hint = null)
+        {
+            MvxLog.Instance.Trace("AppStart: Application Startup - On UI thread");
+            Application.Startup(hint);
+        }
 
         public virtual bool IsStarted => startHasCommenced != 0;
 
@@ -33,32 +49,26 @@ namespace MvvmCross.ViewModels
         }
 
         protected virtual void Reset()
-        { }
+        {
+            Application.Reset();
+        }
     }
 
     public class MvxAppStart<TViewModel> : MvxAppStart
         where TViewModel : IMvxViewModel
     {
         protected readonly IMvxNavigationService NavigationService;
-        protected readonly IMvxApplication Application;
 
-        public MvxAppStart(IMvxNavigationService navigationService, IMvxApplication application)
+        public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService) : base(application)
         {
             NavigationService = navigationService;
-            Application = application;
         }
 
         protected override void Startup(object hint = null)
         {
-            ApplicationStartup();
+            base.Startup(hint);
 
             NavigateToFirstViewModel(hint);
-        }
-
-        protected virtual void ApplicationStartup(object hint = null)
-        {
-            MvxLog.Instance.Trace("AppStart: Application Startup - On UI thread");
-            Application.Startup(hint);
         }
 
         protected virtual void NavigateToFirstViewModel(object hint)
@@ -76,12 +86,6 @@ namespace MvvmCross.ViewModels
             {
                 throw exception.MvxWrap("Problem navigating to ViewModel {0}", typeof(TViewModel).Name);
             }
-        }
-
-        protected override void Reset()
-        {
-            Application.Reset();
-            base.Reset();
         }
     }
 }
