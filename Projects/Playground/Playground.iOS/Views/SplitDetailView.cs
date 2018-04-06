@@ -6,7 +6,7 @@ using Playground.Core.ViewModels;
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
-    [MvxDetailSplitViewPresentation]
+    [MvxSplitViewPresentation]
     public partial class SplitDetailView : MvxViewController<SplitDetailViewModel>
     {
         public SplitDetailView(IntPtr handle) : base(handle)
