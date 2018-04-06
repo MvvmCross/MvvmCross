@@ -11,8 +11,15 @@ namespace MvvmCross.ViewModels
 {
     public abstract class MvxAppStart : IMvxAppStart
     {
+        protected readonly IMvxApplication Application;
+
         private int startHasCommenced;
-        
+
+        public MvxAppStart(IMvxApplication application)
+        {
+            Application = application;
+        }
+
         public void Start(object hint = null)
         {
             // Check whether Start has commenced, and return if it has
@@ -22,13 +29,28 @@ namespace MvvmCross.ViewModels
             Startup(hint);
         }
 
-        protected abstract void Startup(object hint = null);
+        protected virtual void Startup(object hint = null)
+        {
+            ApplicationStartup(hint);
+        }
+
+        protected virtual void ApplicationStartup(object hint = null)
+        {
+            MvxLog.Instance.Trace("AppStart: Application Startup - On UI thread");
+            Application.Startup(hint);
+        }
 
         public virtual bool IsStarted => startHasCommenced != 0;
 
         public virtual void ResetStart()
         {
+            Reset();
             Interlocked.Exchange(ref startHasCommenced, 0);
+        }
+
+        protected virtual void Reset()
+        {
+            Application.Reset();
         }
     }
 
@@ -36,27 +58,34 @@ namespace MvvmCross.ViewModels
         where TViewModel : IMvxViewModel
     {
         protected readonly IMvxNavigationService NavigationService;
-        
-        public MvxAppStart(IMvxNavigationService navigationService)
+
+        public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService) : base(application)
         {
             NavigationService = navigationService;
         }
 
         protected override void Startup(object hint = null)
         {
+            base.Startup(hint);
+
+            NavigateToFirstViewModel(hint);
+        }
+
+        protected virtual void NavigateToFirstViewModel(object hint)
+        {
             if (hint != null)
             {
                 MvxLog.Instance.Trace("Hint ignored in default MvxAppStart");
             }
-            
-            try 
+
+            try
             {
                 NavigationService.Navigate<TViewModel>().GetAwaiter().GetResult();
-            } 
+            }
             catch (System.Exception exception)
             {
                 throw exception.MvxWrap("Problem navigating to ViewModel {0}", typeof(TViewModel).Name);
-            } 
+            }
         }
     }
 }
