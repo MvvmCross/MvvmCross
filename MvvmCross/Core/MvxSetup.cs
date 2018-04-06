@@ -57,12 +57,6 @@ namespace MvvmCross.Core
 
         protected IMvxLog SetupLog { get; private set; }
 
-        public virtual void Initialize()
-        {
-            InitializePrimary();
-            InitializeSecondary();
-        }
-
         public virtual void InitializePrimary()
         {
             if (State != MvxSetupState.Uninitialized)
@@ -485,26 +479,6 @@ namespace MvvmCross.Core
         private void FireStateChange(MvxSetupState state)
         {
             StateChanged?.Invoke(this, new MvxSetupStateEventArgs(state));
-        }
-
-        public virtual void EnsureInitialized(Type requiredBy)
-        {
-            switch (State)
-            {
-                case MvxSetupState.Uninitialized:
-                    Initialize();
-                    break;
-
-                case MvxSetupState.InitializingPrimary:
-                case MvxSetupState.InitializedPrimary:
-                case MvxSetupState.InitializingSecondary:
-                    throw new MvxException("The default EnsureInitialized method does not handle partial initialization");
-                case MvxSetupState.Initialized:
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
         }
     }
 
