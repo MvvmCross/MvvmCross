@@ -20,7 +20,7 @@ namespace Playground.Droid
                 typeof(MvxRecyclerView).Assembly
             };
 
-        protected override MvxLogProviderType GetDefaultLogProviderType()
+        public override MvxLogProviderType GetDefaultLogProviderType()
             => MvxLogProviderType.Serilog;
 
         protected override IMvxLogProvider CreateLogProvider()

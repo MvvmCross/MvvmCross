@@ -207,6 +207,7 @@ namespace MvvmCross.Core
             // initialize the IoC registry, then add it to itself
             var iocProvider = CreateIocProvider();
             Mvx.RegisterSingleton(iocProvider);
+            Mvx.RegisterSingleton<IMvxSetup>(this);
         }
 
         protected virtual IMvxIocOptions CreateIocOptions()
@@ -243,7 +244,7 @@ namespace MvvmCross.Core
             }
         }
 
-        protected virtual MvxLogProviderType GetDefaultLogProviderType()
+        public virtual MvxLogProviderType GetDefaultLogProviderType()
             => MvxLogProviderType.Console;
 
         protected virtual IMvxLogProvider CreateLogProvider()
@@ -357,13 +358,13 @@ namespace MvvmCross.Core
             MvxNavigationService.LoadRoutes(GetViewModelAssemblies());
         }
 
-        protected virtual IEnumerable<Assembly> GetViewAssemblies()
+        public virtual IEnumerable<Assembly> GetViewAssemblies()
         {
             var assemblies = ViewAssemblies ?? new[] { GetType().GetTypeInfo().Assembly };
             return assemblies;
         }
 
-        protected virtual IEnumerable<Assembly> GetViewModelAssemblies()
+        public virtual IEnumerable<Assembly> GetViewModelAssemblies()
         {
             var app = Mvx.Resolve<IMvxApplication>();
             var assembly = app.GetType().GetTypeInfo().Assembly;
@@ -383,6 +384,7 @@ namespace MvvmCross.Core
 
         private MvxViewModelByNameLookup _viewModelNameLookup;
         private MvxViewModelByNameLookup ViewModelNameLookup => _viewModelNameLookup ?? (_viewModelNameLookup = new MvxViewModelByNameLookup());
+
         protected virtual IMvxViewModelByNameLookup CreateViewModelByNameLookup()
         {
             return ViewModelNameLookup;
@@ -435,17 +437,15 @@ namespace MvvmCross.Core
             // base class implementation is empty by default
         }
 
-        protected IEnumerable<Type> CreatableTypes()
+        public IEnumerable<Type> CreatableTypes()
         {
             return CreatableTypes(GetType().GetTypeInfo().Assembly);
         }
 
-        protected IEnumerable<Type> CreatableTypes(Assembly assembly)
+        public IEnumerable<Type> CreatableTypes(Assembly assembly)
         {
             return assembly.CreatableTypes();
         }
-
-        #region Setup state lifecycle
 
         public enum MvxSetupState
         {
@@ -469,7 +469,6 @@ namespace MvvmCross.Core
         public event EventHandler<MvxSetupStateEventArgs> StateChanged;
 
         private MvxSetupState _state;
-
         public MvxSetupState State
         {
             get
@@ -507,8 +506,6 @@ namespace MvvmCross.Core
                     throw new ArgumentOutOfRangeException();
             }
         }
-
-        #endregion Setup state lifecycle
     }
 
     public abstract class MvxSetup<TApplication> : MvxSetup
@@ -516,7 +513,7 @@ namespace MvvmCross.Core
     {
         protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
 
-        protected override IEnumerable<Assembly> GetViewModelAssemblies()
+        public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }

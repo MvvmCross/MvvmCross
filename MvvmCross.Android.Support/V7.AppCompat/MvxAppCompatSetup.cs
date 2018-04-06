@@ -48,7 +48,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     {
         protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
 
-        protected override IEnumerable<Assembly> GetViewModelAssemblies()
+        public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
