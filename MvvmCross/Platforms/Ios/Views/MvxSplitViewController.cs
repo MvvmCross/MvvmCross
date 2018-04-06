@@ -1,10 +1,12 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Linq;
 using Foundation;
+using MvvmCross.Platforms.Ios.Presenters.Attributes;
+using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using UIKit;
 
@@ -34,18 +36,18 @@ namespace MvvmCross.Platforms.Ios.Views
             PreferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible;
         }
 
-        public virtual void ShowDetailView(UIViewController viewController, bool wrapInNavigationController)
+        public virtual void ShowDetailView(UIViewController viewController, MvxSplitViewPresentationAttribute attribute)
         {
-            viewController = wrapInNavigationController ? new MvxNavigationController(viewController) : viewController;
+            viewController = attribute.WrapInNavigationController ? new MvxNavigationController(viewController) : viewController;
 
             ShowDetailViewController(viewController, this);
         }
 
-        public virtual void ShowMasterView(UIViewController viewController, bool wrapInNavigationController)
+        public virtual void ShowMasterView(UIViewController viewController, MvxSplitViewPresentationAttribute attribute)
         {
             var newStack = ViewControllers.ToList();
 
-            viewController = wrapInNavigationController ? new MvxNavigationController(viewController) : viewController;
+            viewController = attribute.WrapInNavigationController ? new MvxNavigationController(viewController) : viewController;
 
             if (newStack.Any())
                 newStack.RemoveAt(0);
@@ -55,7 +57,7 @@ namespace MvvmCross.Platforms.Ios.Views
             ViewControllers = newStack.ToArray();
         }
 
-        public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
+        public virtual bool CloseChildViewModel(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute)
         {
             if (!ViewControllers.Any())
                 return false;
