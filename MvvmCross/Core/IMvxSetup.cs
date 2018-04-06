@@ -13,7 +13,6 @@ namespace MvvmCross.Core
 {
     public interface IMvxSetup
     {
-        void Initialize();
         void InitializePrimary();
         void InitializeSecondary();
 
@@ -24,10 +23,11 @@ namespace MvvmCross.Core
         IEnumerable<Type> CreatableTypes();
         IEnumerable<Type> CreatableTypes(Assembly assembly);
 
-        void LoadPlugins(IMvxPluginManager pluginManager);        
-        void EnsureInitialized(Type requiredBy);
+        void LoadPlugins(IMvxPluginManager pluginManager);
 
         MvxLogProviderType GetDefaultLogProviderType();
-        event EventHandler<MvxSetupStateEventArgs> StateChanged;        
+
+        event EventHandler<MvxSetupStateEventArgs> StateChanged;
+        MvxSetupState State { get; }
     }
 }
