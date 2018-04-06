@@ -59,6 +59,12 @@ namespace Playground.Core.ViewModels
             base.Prepare();
         }
 
+        public void ShowMenu()
+        {
+          _navigationService.Navigate<Tab1ViewModel>();
+          _navigationService.Navigate<Tab2ViewModel>();
+        }
+
         public override async System.Threading.Tasks.Task Initialize()
         {
             await base.Initialize();

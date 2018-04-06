@@ -64,6 +64,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Tab1View.xaml.cs">
+      <DependentUpon>Tab1View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab2View.xaml.cs">
+      <DependentUpon>Tab2View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WindowChildView.xaml.cs">
       <DependentUpon>WindowChildView.xaml</DependentUpon>
     </Compile>
@@ -97,6 +103,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Tab1View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tab2View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\WindowChildView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

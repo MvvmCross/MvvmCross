@@ -1,0 +1,20 @@
+﻿<views:MvxWpfPage
+    x:Class="Playground.Wpf.Views.Tab1View"
+    xmlns:views="clr-namespace:MvvmCross.Platforms.Wpf.Presenters;assembly=MvvmCross"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Playground.Wpf.Views"
+    mc:Ignorable="d"
+    d:DesignHeight="450" d:DesignWidth="800"
+    Title="Tab1View">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Tab 1 View" Foreground="#FFFFFF" />
+            <CheckBox>Check this tab 1</CheckBox>
+        </StackPanel>
+    </Grid>
+
+</views:MvxWpfPage>
