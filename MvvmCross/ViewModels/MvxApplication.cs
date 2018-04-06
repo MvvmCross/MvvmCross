@@ -33,7 +33,29 @@ namespace MvvmCross.ViewModels
             // do nothing
         }
 
+        /// <summary>
+        /// Any initialization steps that can be done in the background
+        /// </summary>
         public virtual void Initialize()
+        {
+            // do nothing
+        }
+
+        /// <summary>
+        /// Any initialization steps that need to be done on the UI thread
+        /// </summary>
+        /// <param name="hint"></param>
+        public virtual void Startup(object hint)
+        {
+            // do nothing
+        }
+
+        /// <summary>
+        /// If the application is restarted (eg primary activity on Android 
+        /// can be restarted) this method will be called before Startup
+        /// is called again
+        /// </summary>
+        public virtual void Reset()
         {
             // do nothing
         }

@@ -325,6 +325,7 @@ namespace MvvmCross.Core
         protected virtual void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
         {
             app.LoadPlugins(pluginManager);
+            SetupLog.Trace("Setup: Application Initialize - On background thread");
             app.Initialize();
             Mvx.RegisterSingleton<IMvxViewModelLocatorCollection>(app);
         }
