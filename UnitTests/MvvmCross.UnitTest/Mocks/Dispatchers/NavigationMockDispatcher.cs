@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using MvvmCross.Base;
 using MvvmCross.Logging;
 using MvvmCross.Tests;
@@ -13,17 +14,27 @@ using MvvmCross.Views;
 
 namespace MvvmCross.UnitTest.Mocks.Dispatchers
 {
-    public class NavigationMockDispatcher 
+    public class NavigationMockDispatcher
         : IMvxMainThreadDispatcher, IMvxViewDispatcher
     {
         public readonly List<MvxViewModelRequest> Requests = new List<MvxViewModelRequest>();
         public readonly List<MvxPresentationHint> Hints = new List<MvxPresentationHint>();
 
-        public virtual bool RequestMainThreadAction(Action action, 
+        public virtual bool RequestMainThreadAction(Action action,
                                                     bool maskExceptions = true)
         {
-            action();
-            return true;
+            try
+            {
+                action();
+                return true;
+            }
+            catch (Exception)
+            {
+                if (!maskExceptions)
+                    throw;
+
+                return false;
+            }
         }
 
         public virtual bool ShowViewModel(MvxViewModelRequest request)
@@ -45,5 +56,33 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
             return true;
         }
 
+        public Task ExecuteOnMainThreadAsync(Action action, bool maskExceptions = true)
+        {
+            return Task.Run(() =>
+            {
+                try
+                {
+                    action();
+                }
+                catch (Exception)
+                {
+                    if (!maskExceptions)
+                        throw;
+                }
+            });
+        }
+
+        public async Task ExecuteOnMainThreadAsync(Func<Task> action, bool maskExceptions = true)
+        {
+            try
+            {
+                await action();
+            }
+            catch (Exception)
+            {
+                if (!maskExceptions)
+                    throw;
+            }
+        }
     }
 }
