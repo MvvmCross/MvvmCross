@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using MvvmCross.Base;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
@@ -19,16 +20,18 @@ namespace MvvmCross.Platforms.Console.Views
             return true;
         }
 
-        public bool ShowViewModel(MvxViewModelRequest request)
+        public async Task<bool> ShowViewModel(MvxViewModelRequest request)
         {
             var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
-            return RequestMainThreadAction(() => navigation.Show(request));
+            await ExecuteOnMainThreadAsync(() => navigation.Show(request));
+            return true;
         }
 
-        public bool ChangePresentation(MvxPresentationHint hint)
+        public async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
             var navigation = Mvx.Resolve<IMvxConsoleNavigation>();
-            return RequestMainThreadAction(() => navigation.ChangePresentation(hint));
+            await ExecuteOnMainThreadAsync(() => navigation.ChangePresentation(hint));
+            return true;
         }
     }
 }
