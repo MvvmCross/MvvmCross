@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content.PM;
 using Android.Support.V4.View;
@@ -34,8 +35,11 @@ namespace Playground.Droid.Views
 
             if (bundle == null)
             {
-                ViewModel.ShowInitialMenuCommand.Execute();
-                ViewModel.ShowDetailCommand.Execute();
+                Task.Run(() =>
+                {
+                    ViewModel.ShowInitialMenuCommand.Execute();
+                    ViewModel.ShowDetailCommand.Execute();
+                });
             }
         }
 
