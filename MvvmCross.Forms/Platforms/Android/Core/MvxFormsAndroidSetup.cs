@@ -20,6 +20,7 @@ using MvvmCross.Forms.Presenters;
 using MvvmCross.Forms.Platforms.Android.Presenters;
 using Xamarin.Forms;
 using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.Core;
 
 namespace MvvmCross.Forms.Platforms.Android.Core
 {
@@ -51,7 +52,8 @@ namespace MvvmCross.Forms.Platforms.Android.Core
                 if (!Xamarin.Forms.Forms.IsInitialized)
                 {
                     var activity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>()?.Activity ?? ApplicationContext;
-                    Xamarin.Forms.Forms.Init(activity, null, activity.GetType().Assembly);
+                    var asmb = activity.GetType().Assembly;
+                    Xamarin.Forms.Forms.Init(activity, null, ViewAssemblies.FirstOrDefault() ?? asmb);
                 }
                 if (_formsApplication == null)
                 {
