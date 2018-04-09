@@ -17,7 +17,9 @@
   - ps: .\build.ps1
   test: off
   cache:
-  - packages -> **\packages.config
+  - '%USERPROFILE%\.nuget\packages -> **\project.json'  # project.json cache
+  on_failure:
+  - ps: Get-ChildItem *.binlog -recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 -
   branches:
       only:
@@ -36,4 +38,6 @@
   - ps: .\build.ps1
   test: off
   cache:
-  - packages -> **\packages.config
+  - '%USERPROFILE%\.nuget\packages -> **\project.json'  # project.json cache
+  on_failure:
+  - ps: Get-ChildItem *.binlog -recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
