@@ -139,21 +139,32 @@ namespace MvvmCross.Platforms.Ios.Presenters
                     ShowAction = (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        ShowMasterSplitViewController(viewController, (MvxSplitViewPresentationAttribute)attribute, request);
-                    },
-                    CloseAction = (viewModel, attribute) => CloseMasterSplitViewController(viewModel, (MvxSplitViewPresentationAttribute)attribute)
-                });
+                        var splitAttribute = (MvxSplitViewPresentationAttribute)attribute;
+                        switch (splitAttribute.Position)
+                        {
+                            case MasterDetailPosition.Master:
+                                ShowMasterSplitViewController(viewController, splitAttribute, request);
+                                break;
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxSplitViewPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
-                    {
-                        var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        ShowDetailSplitViewController(viewController, (MvxSplitViewPresentationAttribute)attribute, request);
+                            case MasterDetailPosition.Detail:
+                                ShowDetailSplitViewController(viewController, splitAttribute, request);
+                                break;
+                        }
                     },
-                    CloseAction = (viewModel, attribute) => CloseDetailSplitViewController(viewModel, (MvxSplitViewPresentationAttribute)attribute)
+                    CloseAction = (viewModel, attribute) =>
+                    {
+                        var splitAttribute = (MvxSplitViewPresentationAttribute)attribute;
+                        switch (splitAttribute.Position)
+                        {
+                            case MasterDetailPosition.Master:
+                                return CloseMasterSplitViewController(viewModel, splitAttribute);
+
+                            case MasterDetailPosition.Detail:
+                            default:
+                                return CloseDetailSplitViewController(viewModel, splitAttribute);
+                        }
+                        
+                    }
                 });
         }
 
