@@ -1,9 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
-    <TargetFrameworks>MonoAndroid80</TargetFrameworks>
+    <TargetFrameworks>MonoAndroid81</TargetFrameworks>
     <AssemblyName>MvvmCross.Droid.Support.V14.Preference</AssemblyName>
     <RootNamespace>MvvmCross.Droid.Support.V14.Preference</RootNamespace>
-    <Description>MvvmCross packages for Android Support V14.Preference</Description>
+    <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains Support v7 Preference support for MvvmCross.</Description>
     <PackageId>MvvmCross.Droid.Support.V14.Preference</PackageId>
   </PropertyGroup>
 
@@ -14,7 +16,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.Android.Support.V14.Preference" Version="26.1.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.V14.Preference" Version="27.0.2" />
     <PackageReference Include="Xamarin.Build.Download" Version="0.4.9" />
   </ItemGroup>
   
@@ -22,6 +24,4 @@
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\Fragment\MvvmCross.Droid.Support.Fragment.csproj" />
   </ItemGroup>
-
-  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
 </Project>

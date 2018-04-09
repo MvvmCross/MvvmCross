@@ -57,12 +57,6 @@ namespace MvvmCross.Core
 
         protected IMvxLog SetupLog { get; private set; }
 
-        public virtual void Initialize()
-        {
-            InitializePrimary();
-            InitializeSecondary();
-        }
-
         public virtual void InitializePrimary()
         {
             if (State != MvxSetupState.Uninitialized)
@@ -207,6 +201,7 @@ namespace MvvmCross.Core
             // initialize the IoC registry, then add it to itself
             var iocProvider = CreateIocProvider();
             Mvx.RegisterSingleton(iocProvider);
+            Mvx.RegisterSingleton<IMvxSetup>(this);
         }
 
         protected virtual IMvxIocOptions CreateIocOptions()
@@ -243,7 +238,7 @@ namespace MvvmCross.Core
             }
         }
 
-        protected virtual MvxLogProviderType GetDefaultLogProviderType()
+        public virtual MvxLogProviderType GetDefaultLogProviderType()
             => MvxLogProviderType.Console;
 
         protected virtual IMvxLogProvider CreateLogProvider()
@@ -325,6 +320,7 @@ namespace MvvmCross.Core
         protected virtual void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
         {
             app.LoadPlugins(pluginManager);
+            SetupLog.Trace("Setup: Application Initialize - On background thread");
             app.Initialize();
             Mvx.RegisterSingleton<IMvxViewModelLocatorCollection>(app);
         }
@@ -339,6 +335,7 @@ namespace MvvmCross.Core
         {
             var dispatcher = CreateViewDispatcher();
             Mvx.RegisterSingleton(dispatcher);
+            Mvx.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(dispatcher);
             Mvx.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
         }
 
@@ -356,13 +353,13 @@ namespace MvvmCross.Core
             MvxNavigationService.LoadRoutes(GetViewModelAssemblies());
         }
 
-        protected virtual IEnumerable<Assembly> GetViewAssemblies()
+        public virtual IEnumerable<Assembly> GetViewAssemblies()
         {
             var assemblies = ViewAssemblies ?? new[] { GetType().GetTypeInfo().Assembly };
             return assemblies;
         }
 
-        protected virtual IEnumerable<Assembly> GetViewModelAssemblies()
+        public virtual IEnumerable<Assembly> GetViewModelAssemblies()
         {
             var app = Mvx.Resolve<IMvxApplication>();
             var assembly = app.GetType().GetTypeInfo().Assembly;
@@ -382,6 +379,7 @@ namespace MvvmCross.Core
 
         private MvxViewModelByNameLookup _viewModelNameLookup;
         private MvxViewModelByNameLookup ViewModelNameLookup => _viewModelNameLookup ?? (_viewModelNameLookup = new MvxViewModelByNameLookup());
+
         protected virtual IMvxViewModelByNameLookup CreateViewModelByNameLookup()
         {
             return ViewModelNameLookup;
@@ -434,17 +432,15 @@ namespace MvvmCross.Core
             // base class implementation is empty by default
         }
 
-        protected IEnumerable<Type> CreatableTypes()
+        public IEnumerable<Type> CreatableTypes()
         {
             return CreatableTypes(GetType().GetTypeInfo().Assembly);
         }
 
-        protected IEnumerable<Type> CreatableTypes(Assembly assembly)
+        public IEnumerable<Type> CreatableTypes(Assembly assembly)
         {
             return assembly.CreatableTypes();
         }
-
-        #region Setup state lifecycle
 
         public enum MvxSetupState
         {
@@ -468,7 +464,6 @@ namespace MvvmCross.Core
         public event EventHandler<MvxSetupStateEventArgs> StateChanged;
 
         private MvxSetupState _state;
-
         public MvxSetupState State
         {
             get
@@ -486,28 +481,6 @@ namespace MvvmCross.Core
         {
             StateChanged?.Invoke(this, new MvxSetupStateEventArgs(state));
         }
-
-        public virtual void EnsureInitialized(Type requiredBy)
-        {
-            switch (State)
-            {
-                case MvxSetupState.Uninitialized:
-                    Initialize();
-                    break;
-
-                case MvxSetupState.InitializingPrimary:
-                case MvxSetupState.InitializedPrimary:
-                case MvxSetupState.InitializingSecondary:
-                    throw new MvxException("The default EnsureInitialized method does not handle partial initialization");
-                case MvxSetupState.Initialized:
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        #endregion Setup state lifecycle
     }
 
     public abstract class MvxSetup<TApplication> : MvxSetup
@@ -515,7 +488,7 @@ namespace MvvmCross.Core
     {
         protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
 
-        protected override IEnumerable<Assembly> GetViewModelAssemblies()
+        public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }

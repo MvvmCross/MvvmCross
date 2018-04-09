@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		build.cake = build.cake
 		Directory.build.props = Directory.build.props
 		Directory.build.targets = Directory.build.targets
+		XamarinForms.targets = XamarinForms.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{77C7235F-1977-426F-86E8-77A29B5DF68F}"
@@ -40,6 +41,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross", "MvvmCross\MvvmCross.csproj", "{49F965F5-5824-4BBE-94EA-0178F848ABDB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Forms", "MvvmCross.Forms\MvvmCross.Forms.csproj", "{013BB2B2-8204-43BD-AA7B-E494007F0B94}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B} = {FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}
+		{45F63A4A-9A37-4929-9C80-48A91F346E0D} = {45F63A4A-9A37-4929-9C80-48A91F346E0D}
+		{61A45F4D-7D56-4A5D-8D07-004E8C913FA9} = {61A45F4D-7D56-4A5D-8D07-004E8C913FA9}
+		{FD67CBBC-4BAC-40D6-9F4C-28AAE6C8533E} = {FD67CBBC-4BAC-40D6-9F4C-28AAE6C8533E}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugin.Accelerometer", "MvvmCross.Plugins\Accelerometer\MvvmCross.Plugin.Accelerometer.csproj", "{E038C845-9ECD-42BC-89B3-627E374F7550}"
 EndProject

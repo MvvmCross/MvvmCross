@@ -7,7 +7,6 @@ using Android.Runtime;
 using Android.Views;
 using MvvmCross.Core;
 using MvvmCross.Platforms.Android.Core;
-using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
@@ -19,6 +18,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         private const int NoContent = 0;
 
         private readonly int _resourceId;
+
+        private Bundle _bundle;
 
         public new MvxNullViewModel ViewModel
         {
@@ -39,6 +40,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         protected override void OnCreate(Bundle bundle)
         {
             RequestWindowFeatures();
+
+            _bundle = bundle;
 
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             setup.InitializeAndMonitor(this);
@@ -77,14 +80,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             if (!_isResumed)
                 return;
 
-            TriggerFirstNavigate();
-        }
-
-        protected virtual void TriggerFirstNavigate()
-        {
-            var startup = Mvx.Resolve<IMvxAppStart>();
-            if (!startup.IsStarted)
-                startup.Start();
+            RunAppStart(_bundle);
         }
     }
 }

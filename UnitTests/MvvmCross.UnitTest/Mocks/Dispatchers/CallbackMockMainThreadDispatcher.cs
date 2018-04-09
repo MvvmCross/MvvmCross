@@ -8,7 +8,7 @@ using MvvmCross.Base;
 namespace MvvmCross.UnitTest.Mocks.Dispatchers
 {
     public class CallbackMockMainThreadDispatcher
-        : MvxMainThreadDispatcher, IMvxMainThreadDispatcher
+        : MvxMainThreadAsyncDispatcher
     {
         private readonly Func<Action, bool> _callback;
 
@@ -17,7 +17,7 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
             _callback = callback;
         }
 
-        public virtual bool RequestMainThreadAction(Action action, 
+        public override bool RequestMainThreadAction(Action action,
                                                     bool maskExceptions = true)
         {
             return _callback(action);

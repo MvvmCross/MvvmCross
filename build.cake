@@ -7,7 +7,9 @@
 
 using Polly;
 
-var sln = new FilePath("./MvvmCross.sln");
+var solutionName = "MvvmCross";
+var repoName = "mvvmcross/mvvmcross";
+var sln = new FilePath("./" + solutionName + ".sln");
 var outputDir = new DirectoryPath("./artifacts");
 var nuspecDir = new DirectoryPath("./nuspec");
 var target = Argument("target", "Default");
@@ -33,7 +35,7 @@ Setup(context => {
 
     var cakeVersion = typeof(ICakeContext).Assembly.GetName().Version.ToString();
 
-    Information(Figlet("MvvmCross"));
+    Information(Figlet(solutionName));
     Information("Building version {0}, ({1}, {2}) using version {3} of Cake.",
         versionInfo.SemVer,
         configuration,
@@ -64,6 +66,9 @@ Task("ResolveBuildTools")
     msBuildPath = (vsLatest == null)
         ? null
         : vsLatest.CombineWithFilePath("./MSBuild/15.0/Bin/MSBuild.exe");
+
+    if (msBuildPath != null)
+        Information("Found MSBuild at {0}", msBuildPath.ToString());
 });
 
 Task("Restore")
@@ -96,6 +101,12 @@ Task("Build")
         .WithProperty("PackageVersion", versionInfo.SemVer)
         .WithProperty("InformationalVersion", versionInfo.InformationalVersion)
         .WithProperty("NoPackageAnalysis", "True");
+
+    settings.BinaryLogger = new MSBuildBinaryLogSettings 
+    {
+        Enabled = true,
+        FileName = "mvvmcross.binlog"
+    };
 
     MSBuild(sln, settings);
 });
@@ -136,7 +147,7 @@ Task("UnitTest")
 
 Task("PublishPackages")
     .WithCriteria(() => !BuildSystem.IsLocalBuild)
-    .WithCriteria(() => IsRepository("mvvmcross/mvvmcross"))
+    .WithCriteria(() => IsRepository(repoName))
     .WithCriteria(() => ShouldPushNugetPackages(versionInfo.BranchName))
     .Does (() =>
 {
@@ -145,7 +156,7 @@ Task("PublishPackages")
     var apiKey = nugetKeySource.Item1;
     var source = nugetKeySource.Item2;
 
-    var nugetFiles = GetFiles("MvvmCross*/**/bin/" + configuration + "/**/*.nupkg");
+    var nugetFiles = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg");
 
     var policy = Policy
         .Handle<Exception>()
@@ -172,7 +183,7 @@ Task("UploadAppVeyorArtifact")
 
     var uploadSettings = new AppVeyorUploadArtifactsSettings();
 
-    var artifacts = GetFiles("MvvmCross*/**/bin/" + configuration + "/**/*.nupkg")
+    var artifacts = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg")
         + GetFiles(outputDir.FullPath + "/**/*");
 
     foreach(var file in artifacts) {
@@ -205,7 +216,8 @@ MSBuildSettings GetDefaultBuildSettings()
         Configuration = configuration,
         ToolPath = msBuildPath,
         Verbosity = verbosity,
-        ArgumentCustomization = args => args.Append("/m")
+        ArgumentCustomization = args => args.Append("/m"),
+        ToolVersion = MSBuildToolVersion.VS2017
     };
 
     return settings;

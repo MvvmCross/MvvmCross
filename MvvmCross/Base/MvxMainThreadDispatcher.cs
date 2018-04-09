@@ -4,14 +4,15 @@
 
 using System;
 using System.Reflection;
+using System.Threading.Tasks;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 
 namespace MvvmCross.Base
 {
-    public abstract class MvxMainThreadDispatcher : MvxSingleton<IMvxMainThreadDispatcher>
+    public abstract class MvxMainThreadDispatcher : MvxSingleton<IMvxMainThreadDispatcher>, IMvxMainThreadDispatcher
     {
-        protected static void ExceptionMaskedAction(Action action)
+        protected static void ExceptionMaskedAction(Action action, bool maskExceptions)
         {
             try
             {
@@ -19,13 +20,22 @@ namespace MvvmCross.Base
             }
             catch (TargetInvocationException exception)
             {
-                MvxLog.Instance.Trace("TargetInvocateException masked " + exception.InnerException.ToLongString());
+                MvxLog.Instance.TraceException("Exception throw when invoking action via dispatcher", exception);
+                if (maskExceptions)
+                    MvxLog.Instance.Trace("TargetInvocateException masked " + exception.InnerException.ToLongString());
+                else
+                    throw exception;
             }
             catch (Exception exception)
             {
-                // note - all exceptions masked!
-                MvxLog.Instance.Warn("Exception masked " + exception.ToLongString());
+                MvxLog.Instance.TraceException("Exception throw when invoking action via dispatcher", exception);
+                if (maskExceptions)
+                    MvxLog.Instance.Warn("Exception masked " + exception.ToLongString());
+                else
+                    throw exception;
             }
         }
+
+        public abstract bool RequestMainThreadAction(Action action, bool maskExceptions = true);
     }
 }

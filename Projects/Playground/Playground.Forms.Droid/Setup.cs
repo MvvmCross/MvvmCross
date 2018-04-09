@@ -12,7 +12,7 @@ namespace Playground.Forms.Droid
 {
     public class Setup : MvxFormsAndroidSetup<Core.App, FormsApp>
     {
-        protected override MvxLogProviderType GetDefaultLogProviderType()
+        public override MvxLogProviderType GetDefaultLogProviderType()
             => MvxLogProviderType.Serilog;
 
         protected override IMvxLogProvider CreateLogProvider()

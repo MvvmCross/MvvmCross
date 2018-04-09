@@ -118,11 +118,6 @@ You can also define new attributes to satisfy your needs. The steps to do so are
         {
         }
 
-        protected override IMvxApplication CreateApp()
-        {
-            return new Core.App();
-        }
-
         protected override IMvxWpfViewPresenter CreateViewPresenter(ContentControl root)
         {
             return new MyCustomViewPresenter(root);
@@ -136,10 +131,17 @@ You can also define new attributes to satisfy your needs. The steps to do so are
     {
         protected virtual void RegisterAttributeTypes()
         {
-            _attributeTypesToShowMethodDictionary.Add(
+			AttributeTypesToActionsDictionary.Add(
                 typeof(MyCustomModePresentationAttribute),
-                (element, attribute, request) =>
-                    ShowMyCustomModeView(element, (MyCustomPresentationAttribute)attribute, request));
+                new MyCustomModePresentationAttribute
+                {
+                    ShowAction = (viewType, attribute, request) =>
+                    {
+                        var view = WpfViewLoader.CreateView(request);
+                        ShowWindow(view, (MyCustomModePresentationAttribute)attribute, request);
+                    },
+                    CloseAction = (viewModel, attribute) => CloseWindow(viewModel)
+                });
         }
     }
     ```

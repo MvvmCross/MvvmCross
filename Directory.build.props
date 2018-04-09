@@ -24,10 +24,10 @@
     <DebugType>full</DebugType>
     <IsTestProject>$(MSBuildProjectName.Contains('UnitTest'))</IsTestProject>
     <IsLibraryProject>$(MSBuildProjectName.Contains('MvvmCross'))</IsLibraryProject>
+    <IsXamarinForms>$(MSBuildProjectName.Contains('.Forms'))</IsXamarinForms>
   </PropertyGroup>
   
   <ItemGroup Condition="'$(IsLibraryProject)' == 'true'">
-    <PackageReference Include="MSBuild.Sdk.Extras" Version="1.2.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.CSharp" Version="4.4.1" PrivateAssets="All" />
   </ItemGroup>
 

@@ -1,12 +1,8 @@
-using MvvmCross.Core.ViewModels;
-using MvvmCross.iOS.Platform;
-using MvvmCross.Platform;
 using Foundation;
+using MvvmCross;
+using MvvmCross.Platforms.Tvos.Core;
+using MvvmCross.ViewModels;
 using UIKit;
-
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
-using MvvmCross.tvOS.Platform;
 
 namespace $rootnamespace$
 {

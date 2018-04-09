@@ -6,7 +6,6 @@ using System;
 using Android.App;
 using Android.Runtime;
 using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Platforms.Android.Views;
 using Playground.Core;
 
 namespace Playground.Droid
