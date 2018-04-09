@@ -66,6 +66,9 @@ Task("ResolveBuildTools")
     msBuildPath = (vsLatest == null)
         ? null
         : vsLatest.CombineWithFilePath("./MSBuild/15.0/Bin/MSBuild.exe");
+
+    if (msBuildPath != null)
+        Information("Found MSBuild at {0}", msBuildPath.ToString());
 });
 
 Task("Restore")
@@ -98,6 +101,12 @@ Task("Build")
         .WithProperty("PackageVersion", versionInfo.SemVer)
         .WithProperty("InformationalVersion", versionInfo.InformationalVersion)
         .WithProperty("NoPackageAnalysis", "True");
+
+    settings.BinaryLogger = new MSBuildBinaryLogSettings 
+    {
+        Enabled = true,
+        FileName = "mvvmcross.binlog"
+    };
 
     MSBuild(sln, settings);
 });
@@ -207,7 +216,8 @@ MSBuildSettings GetDefaultBuildSettings()
         Configuration = configuration,
         ToolPath = msBuildPath,
         Verbosity = verbosity,
-        ArgumentCustomization = args => args.Append("/m")
+        ArgumentCustomization = args => args.Append("/m"),
+        ToolVersion = MSBuildToolVersion.VS2017
     };
 
     return settings;

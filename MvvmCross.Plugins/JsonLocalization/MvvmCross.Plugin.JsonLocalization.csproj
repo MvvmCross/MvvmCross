@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>MvvmCross.Plugin.JsonLocalization</AssemblyName>
@@ -14,6 +14,4 @@ This package contains the 'JsonLocalization' plugin for MvvmCross</Description>
     <ProjectReference Include="..\Json\MvvmCross.Plugin.Json.csproj" />
     <ProjectReference Include="..\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj" />
   </ItemGroup>
-  
-  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
 </Project>
