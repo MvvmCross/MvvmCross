@@ -41,7 +41,7 @@ namespace MvvmCross.Platforms.Wpf.Core
             base.InitializePlatformServices();
         }
 
-        protected override IEnumerable<Assembly> GetViewAssemblies()
+        public override IEnumerable<Assembly> GetViewAssemblies()
         {
             return base.GetViewAssemblies().Union(new[] { Assembly.GetEntryAssembly() });
         }
@@ -95,7 +95,7 @@ namespace MvvmCross.Platforms.Wpf.Core
     {
         protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
 
-        protected override IEnumerable<Assembly> GetViewModelAssemblies()
+        public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }

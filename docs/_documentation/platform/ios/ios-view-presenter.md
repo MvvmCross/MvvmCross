@@ -64,27 +64,16 @@ The presentation can be highly customized through this attribute members:
 | WrapInNavigationController | `bool` | If set to `true`, the view will be wrapped in a `MvxNavigationController`, which will allow the tab to have its own navigation stack. **Important note**: When the current _Root_ is a TabBarController and there is no current modal navigation stack, child presentations will be tried to be displayed in the current selected _Tab_. |
 | TabAccessibilityIdentifier | `string` |Corresponds to the UIViewController.View `AccessibilityIdentifier` property. |
 
-### MvxMasterSplitViewPresentationAttribute
+### MvxSplitViewPresentationAttribute
 This attribute is only useful (and should only be used) when the current _Root_ view is a `IMvxSplitViewController`.
-By using it over a view class, the presenter will show the view as _Master_ of the split.
+The attribute can be used to set the master and detail views of a SplitView.
 
 There is an attribute member that can be used to customize the presentation:
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| WrapInNavigationController | `bool` | If set to `true`, the view will be displayed wrapped in a `MvxNavigationController`, which will allow you to set a title, which is the most common scenario of SplitView. The default value is therefore `true`. |
-
-
-### MvxDetailSplitViewPresentationAttribute
-This attribute is only useful (and should only be used) when the current _Root_ view is a `IMvxSplitViewController`.
-By using it over a view class, the presenter will show the view as _Detail_ of the split.
-
-There is an attribute member that can be used to customize the presentation:
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| WrapInNavigationController | `bool` |WrapInNavigationController: If set to `true`, the view will be displayed wrapped in a `MvxNavigationController`,  which will allow the view to have its own navigation stack. |
-
+| WrapInNavigationController | `bool` | If set to `true`, the view will be displayed wrapped in a `MvxNavigationController`, which will allow you to set a title, which is the most common scenario of SplitView. The default value is therefore `true` on detail and `false` on master. |
+| Position | `MasterDetailPosition` | Can be set to `Master` to show as the root of the SplitView. The default value is `Detail` and this will push the viewcontroller onto the detail stack. |
 
 ## Views without attributes: Default values
 

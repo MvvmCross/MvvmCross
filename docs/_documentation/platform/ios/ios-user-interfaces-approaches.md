@@ -43,3 +43,55 @@ To use a view generated in a Storyboard, all you have to do is to add an `MvxFro
 
 **Note:** It is very important that you drag and drop the correct ViewController type (for example, if you want to add a TabBarController, you need to drag and drop a UITabBarViewController). Otherwise your app might not crash, but you might encounter some weird situations.
 
+
+## MvxBaseViewController
+
+In addition to the core MvvmCross view controller classes (MvxViewController) we have added a slightly expanded feature set to a new abstract base class called MvxBaseViewController.
+
+The idea behind this class is to gradually build up some "extended core" features that most developers will use without over-burdening  the class with too much extraneous stuff.
+
+At the moment this class is a generic view controller that has currently only one major feature over and above the core "basic" view controller - automatic keyboard handling.
+
+The feature requires there to be a UIScrollView in the view hierarchy in order to function.  It will detect a touch on a UIView that also expands the keyboard, it will then ensure that the view with focus is not obscured by the keyboard and is centered in the applications UI.  It can also optionally hide the keyboard when the user makes any further touches that moves focus away from the edit view.
+
+You can make use of this class using the following standard inheritance syntax:
+
+```c#
+[Register("KeyboardHandlingView")]
+public class KeyboardHandlingView
+    : MvxBaseViewController<KeyboardHandlingViewModel>
+{
+}
+```
+
+In order to enable the keyboard handing features you need to first call the initializing method during view initialization, such as:
+
+```c#
+public override void ViewDidLoad()
+{
+    base.ViewDidLoad();
+    // setup the keyboard handling
+    InitKeyboardHandling();
+
+    var scrollView = new UIScrollView();
+
+    Add(scrollView);
+    View.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
+    View.AddConstraints(
+        scrollView.AtTopOf(View),
+        scrollView.AtLeftOf(View),
+        scrollView.WithSameWidth(View),
+        scrollView.WithSameHeight(View)
+    );
+}
+```
+
+In addition to calling this initialization method you also need to override the following method and ensure that it returns true:
+
+```c#
+public override bool HandlesKeyboardNotifications()
+{
+    return true;
+}
+```
+

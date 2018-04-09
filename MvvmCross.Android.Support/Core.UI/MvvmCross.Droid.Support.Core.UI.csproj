@@ -1,9 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
-    <TargetFrameworks>MonoAndroid80</TargetFrameworks>
+    <TargetFrameworks>MonoAndroid81</TargetFrameworks>
     <AssemblyName>MvvmCross.Droid.Support.Core.UI</AssemblyName>
     <RootNamespace>MvvmCross.Droid.Support.Core.UI</RootNamespace>
-    <Description>MvvmCross packages for Android Support Core.UI</Description>
+    <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains Support Core UI support for MvvmCross.</Description>
     <PackageId>MvvmCross.Droid.Support.Core.UI</PackageId>
   </PropertyGroup>
   
@@ -14,13 +16,11 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.Android.Support.Core.UI" Version="26.1.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.Core.UI" Version="27.0.2" />
     <PackageReference Include="Xamarin.Build.Download" Version="0.4.9" />
   </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
   </ItemGroup>
-
-  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
 </Project>

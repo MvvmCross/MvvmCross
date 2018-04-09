@@ -135,6 +135,7 @@ If you're using a custom ViewPresenter that extends the default provided by Mvvm
 
 ### Android
 - `IMvxAndroidSplashScreenActivity` was removed. It was replaced by `IMvxSetupMonitor`, which is located on the `MvvmCross.Core` namespace.
+- On both SplashScreen activities (traditional and AppCompat), the method `TriggerFirstNavigate` was removed. `RunAppStart` is it's replacement. But in case you need to pass a hint to your custom AppStart, the method you should override is `GetAppStartHint`, which will receive the incoming `Bundle` as a parameter.
 - `MvxRelativeLayout`, `MvxFrameLayout` and `MvxTableLayout` were removed as they were memory inefficient (nothing we can do to improve that).
 - If you were declaring any view on your .axml files which prefix is "Mvx..." using the entire namespace, then you might see your app breaking. This is because namespaces have changed for many views. Just remove the namespace and leave the widget name.
 - `IMvxRecyclerViewHolder` now has a new property: `int Id { get; set; }`, which contains the LayoutId being used.

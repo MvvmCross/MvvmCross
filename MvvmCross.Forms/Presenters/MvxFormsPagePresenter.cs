@@ -436,7 +436,7 @@ namespace MvvmCross.Forms.Presenters
 
         public virtual bool CloseMasterDetailPage(IMvxViewModel viewModel, MvxMasterDetailPagePresentationAttribute attribute)
         {
-            var masterDetailHost = GetPageOfType<MvxMasterDetailPage>();
+            var masterDetailHost = GetPageOfType<MasterDetailPage>();
             switch (attribute.Position)
             {
                 case MasterDetailPosition.Root:

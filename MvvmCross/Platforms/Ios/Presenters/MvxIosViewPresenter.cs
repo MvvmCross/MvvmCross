@@ -133,27 +133,38 @@ namespace MvvmCross.Platforms.Ios.Presenters
                 });
 
             AttributeTypesToActionsDictionary.Add(
-                typeof(MvxMasterSplitViewPresentationAttribute),
+                typeof(MvxSplitViewPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
                     ShowAction = (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        ShowMasterSplitViewController(viewController, (MvxMasterSplitViewPresentationAttribute)attribute, request);
-                    },
-                    CloseAction = (viewModel, attribute) => CloseMasterSplitViewController(viewModel, (MvxMasterSplitViewPresentationAttribute)attribute)
-                });
+                        var splitAttribute = (MvxSplitViewPresentationAttribute)attribute;
+                        switch (splitAttribute.Position)
+                        {
+                            case MasterDetailPosition.Master:
+                                ShowMasterSplitViewController(viewController, splitAttribute, request);
+                                break;
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxDetailSplitViewPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
-                    {
-                        var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        ShowDetailSplitViewController(viewController, (MvxDetailSplitViewPresentationAttribute)attribute, request);
+                            case MasterDetailPosition.Detail:
+                                ShowDetailSplitViewController(viewController, splitAttribute, request);
+                                break;
+                        }
                     },
-                    CloseAction = (viewModel, attribute) => CloseDetailSplitViewController(viewModel, (MvxDetailSplitViewPresentationAttribute)attribute)
+                    CloseAction = (viewModel, attribute) =>
+                    {
+                        var splitAttribute = (MvxSplitViewPresentationAttribute)attribute;
+                        switch (splitAttribute.Position)
+                        {
+                            case MasterDetailPosition.Master:
+                                return CloseMasterSplitViewController(viewModel, splitAttribute);
+
+                            case MasterDetailPosition.Detail:
+                            default:
+                                return CloseDetailSplitViewController(viewModel, splitAttribute);
+                        }
+                        
+                    }
                 });
         }
 
@@ -226,7 +237,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             {
                 if (ModalViewControllers.LastOrDefault() is UINavigationController modalNavController)
                 {
-                    PushViewControllerIntoStack(modalNavController, viewController, attribute.Animated);
+                    PushViewControllerIntoStack(modalNavController, viewController, attribute);
 
                     return;
                 }
@@ -243,7 +254,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             if (MasterNavigationController != null)
             {
-                PushViewControllerIntoStack(MasterNavigationController, viewController, attribute.Animated);
+                PushViewControllerIntoStack(MasterNavigationController, viewController, attribute);
                 return;
             }
 
@@ -302,32 +313,25 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
         protected virtual void ShowMasterSplitViewController(
             UIViewController viewController,
-            MvxMasterSplitViewPresentationAttribute attribute,
+            MvxSplitViewPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
             if (SplitViewController == null)
                 throw new MvxException("Trying to show a master page without a SplitViewController, this is not possible!");
 
-            SplitViewController.ShowMasterView(viewController, attribute.WrapInNavigationController);
+            SplitViewController.ShowMasterView(viewController, attribute);
         }
 
         protected virtual void ShowDetailSplitViewController(
             UIViewController viewController,
-            MvxDetailSplitViewPresentationAttribute attribute,
+            MvxSplitViewPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
             if (SplitViewController == null)
                 throw new MvxException("Trying to show a detail page without a SplitViewController, this is not possible!");
 
-            SplitViewController.ShowDetailView(viewController, attribute.WrapInNavigationController);
+            SplitViewController.ShowDetailView(viewController, attribute);
         }
-
-        public override void Close(IMvxViewModel viewModel)
-        {
-            GetPresentationAttributeAction(new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);
-        }
-
-        #region Close implementations
 
         protected virtual bool CloseRootViewController(IMvxViewModel viewModel, MvxRootPresentationAttribute attribute)
         {
@@ -343,7 +347,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             {
                 foreach (var modalNav in ModalViewControllers.Where(v => v is UINavigationController))
                 {
-                    if (TryCloseViewControllerInsideStack((UINavigationController)modalNav, viewModel))
+                    if (TryCloseViewControllerInsideStack((UINavigationController)modalNav, viewModel, attribute))
                         return true;
                 }
             }
@@ -352,11 +356,11 @@ namespace MvvmCross.Platforms.Ios.Presenters
             if (TabBarViewController != null && TabBarViewController.CloseChildViewModel(viewModel))
                 return true;
 
-            if (SplitViewController != null && SplitViewController.CloseChildViewModel(viewModel))
+            if (SplitViewController != null && SplitViewController.CloseChildViewModel(viewModel, attribute))
                 return true;
 
             // if the current root is a NavigationController, close it in the stack
-            if (MasterNavigationController != null && TryCloseViewControllerInsideStack(MasterNavigationController, viewModel))
+            if (MasterNavigationController != null && TryCloseViewControllerInsideStack(MasterNavigationController, viewModel, attribute))
                 return true;
 
             return false;
@@ -370,28 +374,23 @@ namespace MvvmCross.Platforms.Ios.Presenters
             return false;
         }
 
-        protected virtual bool CloseModalViewController(IMvxViewModel viewModel, MvxModalPresentationAttribute attribute)
+        protected virtual bool CloseMasterSplitViewController(IMvxViewModel viewModel, MvxSplitViewPresentationAttribute attribute)
         {
-            return CloseModalViewController(viewModel);
-        }
-
-        protected virtual bool CloseMasterSplitViewController(IMvxViewModel viewModel, MvxMasterSplitViewPresentationAttribute attribute)
-        {
-            if (SplitViewController != null && SplitViewController.CloseChildViewModel(viewModel))
+            if (SplitViewController != null && SplitViewController.CloseChildViewModel(viewModel, attribute))
                 return true;
 
             return true;
         }
 
-        protected virtual bool CloseDetailSplitViewController(IMvxViewModel viewModel, MvxDetailSplitViewPresentationAttribute attribute)
+        protected virtual bool CloseDetailSplitViewController(IMvxViewModel viewModel, MvxSplitViewPresentationAttribute attribute)
         {
-            if (SplitViewController != null && SplitViewController.CloseChildViewModel(viewModel))
+            if (SplitViewController != null && SplitViewController.CloseChildViewModel(viewModel, attribute))
                 return true;
 
             return true;
         }
 
-        protected virtual bool CloseModalViewController(IMvxViewModel toClose)
+        protected virtual bool CloseModalViewController(IMvxViewModel toClose, MvxModalPresentationAttribute attribute)
         {
             if (ModalViewControllers == null || !ModalViewControllers.Any())
                 return false;
@@ -400,7 +399,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             var modalToClose = ModalViewControllers.FirstOrDefault(v => v is IMvxIosView && v.GetIMvxIosView().ViewModel == toClose);
             if (modalToClose != null)
             {
-                CloseModalViewController(modalToClose);
+                CloseModalViewController(modalToClose, attribute);
                 return true;
             }
 
@@ -417,20 +416,20 @@ namespace MvvmCross.Platforms.Ios.Presenters
             }
             if (controllerToClose != null)
             {
-                CloseModalViewController(controllerToClose);
+                CloseModalViewController(controllerToClose, attribute);
                 return true;
             }
 
             return false;
         }
 
-        protected virtual bool TryCloseViewControllerInsideStack(UINavigationController navController, IMvxViewModel toClose)
+        protected virtual bool TryCloseViewControllerInsideStack(UINavigationController navController, IMvxViewModel toClose, MvxChildPresentationAttribute attribute)
         {
             // check for top view controller
             var topView = navController.TopViewController.GetIMvxIosView();
             if (topView != null && topView.ViewModel == toClose)
             {
-                navController.PopViewController(true);
+                navController.PopViewController(attribute.Animated);
                 return true;
             }
 
@@ -448,16 +447,14 @@ namespace MvvmCross.Platforms.Ios.Presenters
             return false;
         }
 
-        #endregion
-
         protected virtual MvxNavigationController CreateNavigationController(UIViewController viewController)
         {
             return new MvxNavigationController(viewController);
         }
 
-        protected virtual void PushViewControllerIntoStack(UINavigationController navigationController, UIViewController viewController, bool animated)
+        protected virtual void PushViewControllerIntoStack(UINavigationController navigationController, UIViewController viewController, MvxChildPresentationAttribute attribute)
         {
-            navigationController.PushViewController(viewController, animated);
+            navigationController.PushViewController(viewController, attribute.Animated);
 
             if (viewController is IMvxTabBarViewController tabBarController)
                 TabBarViewController = tabBarController;
@@ -476,7 +473,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             MasterNavigationController = null;
         }
 
-        public virtual void CloseModalViewController(UIViewController viewController)
+        public virtual void CloseModalViewController(UIViewController viewController, MvxModalPresentationAttribute attribute)
         {
             if (viewController == null)
                 return;
@@ -487,7 +484,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
                     item.DidMoveToParentViewController(null);
             }
 
-            viewController.DismissViewController(true, null);
+            viewController.DismissViewController(attribute.Animated, null);
             ModalViewControllers.Remove(viewController);
         }
 
@@ -495,7 +492,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
         {
             while (ModalViewControllers.Any())
             {
-                CloseModalViewController(ModalViewControllers.LastOrDefault());
+                CloseModalViewController(ModalViewControllers.LastOrDefault(), new MvxModalPresentationAttribute());
             }
         }
 

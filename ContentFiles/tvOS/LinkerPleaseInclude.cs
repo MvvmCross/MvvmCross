@@ -1,14 +1,12 @@
+﻿using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Navigation;
+using MvvmCross.Platforms.Tvos.Views;
+using MvvmCross.ViewModels;
 using System;
 using System.Collections.Specialized;
 using System.Windows.Input;
-
-using Foundation;
 using UIKit;
-
-using MvvmCross.Binding.BindingContext;
-using MvvmCross.tvOS.Views;
-using MvvmCross.Core.Navigation;
-using MvvmCross.Core.ViewModels;
 
 namespace $rootnamespace$
 {

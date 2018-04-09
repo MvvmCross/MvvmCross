@@ -1,7 +1,5 @@
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform.Logging;
-using MvvmCross.Platform.Platform;
-using MvvmCross.Uwp.Platform;
+using MvvmCross.Platforms.Uap.Core;
+using MvvmCross.ViewModels;
 using Windows.UI.Xaml.Controls;
 
 namespace $rootnamespace$
@@ -15,16 +13,6 @@ namespace $rootnamespace$
         protected override IMvxApplication CreateApp()
         {
             return new Core.App();
-        }
-
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new DebugTrace();
-        }
-
-        protected override MvxLogProviderType GetDefaultLogProviderType()
-        {
-            return MvxLogProviderType.None;
         }
     }
 }

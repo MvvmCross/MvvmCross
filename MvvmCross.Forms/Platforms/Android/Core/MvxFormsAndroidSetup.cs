@@ -20,6 +20,7 @@ using MvvmCross.Forms.Presenters;
 using MvvmCross.Forms.Platforms.Android.Presenters;
 using Xamarin.Forms;
 using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.Core;
 
 namespace MvvmCross.Forms.Platforms.Android.Core
 {
@@ -28,7 +29,7 @@ namespace MvvmCross.Forms.Platforms.Android.Core
         private List<Assembly> _viewAssemblies;
         private Application _formsApplication;
 
-        protected override IEnumerable<Assembly> GetViewAssemblies()
+        public override IEnumerable<Assembly> GetViewAssemblies()
         {
             if (_viewAssemblies == null)
             {
@@ -51,7 +52,8 @@ namespace MvvmCross.Forms.Platforms.Android.Core
                 if (!Xamarin.Forms.Forms.IsInitialized)
                 {
                     var activity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>()?.Activity ?? ApplicationContext;
-                    Xamarin.Forms.Forms.Init(activity, null, activity.GetType().Assembly);
+                    var asmb = activity.GetType().Assembly;
+                    Xamarin.Forms.Forms.Init(activity, null, ViewAssemblies.FirstOrDefault() ?? asmb);
                 }
                 if (_formsApplication == null)
                 {
@@ -118,12 +120,12 @@ namespace MvvmCross.Forms.Platforms.Android.Core
         where TApplication : IMvxApplication, new()
         where TFormsApplication : Application, new()
     {
-        protected override IEnumerable<Assembly> GetViewAssemblies()
+        public override IEnumerable<Assembly> GetViewAssemblies()
         {
             return new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(TFormsApplication).GetTypeInfo().Assembly }));
         }
 
-        protected override IEnumerable<Assembly> GetViewModelAssemblies()
+        public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }

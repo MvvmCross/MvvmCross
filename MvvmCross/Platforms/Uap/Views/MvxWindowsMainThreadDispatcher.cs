@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -8,7 +8,7 @@ using MvvmCross.Base;
 
 namespace MvvmCross.Platforms.Uap.Views
 {
-    public class MvxWindowsMainThreadDispatcher : MvxMainThreadDispatcher
+    public class MvxWindowsMainThreadDispatcher : MvxMainThreadAsyncDispatcher
     {
         private readonly CoreDispatcher _uiDispatcher;
 
@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Uap.Views
             _uiDispatcher = uiDispatcher;
         }
 
-        public bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (_uiDispatcher.HasThreadAccess)
             {
@@ -27,10 +27,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
             _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => 
             {
-                if (maskExceptions)
-                    ExceptionMaskedAction(action);
-                else
-                    action();
+                ExceptionMaskedAction(action, maskExceptions);
             });
             return true;
         }
