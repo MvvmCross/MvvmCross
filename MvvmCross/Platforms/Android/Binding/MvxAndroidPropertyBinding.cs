@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -34,5 +34,13 @@ namespace MvvmCross.Platforms.Android.Binding
         public const string EditTextPreference_Text = "Text";
         public const string ListPreference_Value = "Value";
         public const string TwoStatePreference_Checked = "Checked";
+
+        public const string View_Margin = "Margin";
+        public const string View_MarginLeft = "MarginLeft";
+        public const string View_MarginRight = "MarginRight";
+        public const string View_MarginTop = "MarginTop";
+        public const string View_MarginBottom = "MarginBottom";
+        public const string View_MarginStart = "MarginStart";
+        public const string View_MarginEnd = "MarginEnd";
     }
 }
