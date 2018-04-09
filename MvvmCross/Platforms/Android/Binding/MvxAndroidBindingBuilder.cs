@@ -193,6 +193,23 @@ namespace MvvmCross.Platforms.Android.Binding
             registry.RegisterCustomBindingFactory<TwoStatePreference>(
                 MvxAndroidPropertyBinding.TwoStatePreference_Checked,
                 preference => new MvxTwoStatePreferenceCheckedTargetBinding(preference));
+
+            var allMargins = new[]
+            {
+                MvxAndroidPropertyBinding.View_Margin,
+                MvxAndroidPropertyBinding.View_MarginLeft,
+                MvxAndroidPropertyBinding.View_MarginRight,
+                MvxAndroidPropertyBinding.View_MarginTop,
+                MvxAndroidPropertyBinding.View_MarginBottom,
+                MvxAndroidPropertyBinding.View_MarginStart,
+                MvxAndroidPropertyBinding.View_MarginEnd
+            };
+
+            foreach(var margin in allMargins)
+            {
+                registry.RegisterCustomBindingFactory<View>(
+                    margin, view => new MvxViewMarginTargetBinding(view, margin));
+            }
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
