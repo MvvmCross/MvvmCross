@@ -13,9 +13,9 @@
   <PropertyGroup Condition="$(TargetFramework.StartsWith('Xamarin.iOS'))">
     <DefineConstants>$(DefineConstants);MONO;UIKIT;COCOA;IOS</DefineConstants>
   </PropertyGroup>
-   <PropertyGroup Condition="$(TargetFramework.StartsWith('Xamarin.Mac'))">
+   <!-- <PropertyGroup Condition="$(TargetFramework.StartsWith('Xamarin.Mac'))">
     <DefineConstants>$(DefineConstants);MONO;COCOA;MAC</DefineConstants>
-  </PropertyGroup>
+  </PropertyGroup> -->
   <PropertyGroup Condition="$(TargetFramework.StartsWith('Xamarin.TVOS'))">
     <DefineConstants>$(DefineConstants);MONO;COCOA;TVOS</DefineConstants>
   </PropertyGroup>
@@ -39,5 +39,5 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.0.8" />
   </ItemGroup>
 
-  <Import Project="XamarinForms.targets" Condition="'$(IsXamarinForms)' == 'true'"/>
+  <!-- <Import Project="XamarinForms.targets" Condition="'$(IsXamarinForms)' == 'true'"/> -->
 </Project>
