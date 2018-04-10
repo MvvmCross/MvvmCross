@@ -111,8 +111,12 @@ Task("Build")
 
     settings.BinaryLogger = new MSBuildBinaryLogSettings 
     {
-        Enabled = true
+        Enabled = true,
+        //FileName = "mvvmcross.binlog"
     };
+
+    // TODO change back to this when parallel builds are working with Xamarin.Android again
+    // MSBuild(sln, settings);
 
     var buildItems = new string[] 
     {
