@@ -106,7 +106,8 @@ Task("Build")
         .WithProperty("Version", versionInfo.SemVer)
         .WithProperty("PackageVersion", versionInfo.SemVer)
         .WithProperty("InformationalVersion", versionInfo.InformationalVersion)
-        .WithProperty("NoPackageAnalysis", "True");
+        .WithProperty("NoPackageAnalysis", "True")
+        .WithTarget("Build");
 
     settings.BinaryLogger = new MSBuildBinaryLogSettings 
     {
@@ -114,6 +115,25 @@ Task("Build")
         FileName = "mvvmcross.binlog"
     };
 
+    var buildItems = new string[] 
+    {
+        "./MvvmCross/MvvmCross.csproj",
+        "./MvvmCross.Android.Support/Fragment/MvvmCross.Droid.Support.Fragment.csproj",
+        "./MvvmCross.Android.Support/Design/MvvmCross.Droid.Support.Design.csproj",
+        "./MvvmCross.Android.Support/Core.Utils/MvvmCross.Droid.Support.Core.Utils.csproj",
+        "./MvvmCross.Android.Support/Core.UI/MvvmCross.Droid.Support.Core.UI.csproj",
+        "./MvvmCross.Android.Support/V7.AppCompat/MvvmCross.Droid.Support.V7.AppCompat.csproj",
+        "./MvvmCross.Android.Support/V7.Preference/MvvmCross.Droid.Support.V7.Preference.csproj",
+        "./MvvmCross.Android.Support/V7.RecyclerView/MvvmCross.Droid.Support.V7.RecyclerView.csproj",
+        "./MvvmCross.Android.Support/V14.Preference/MvvmCross.Droid.Support.V14.Preference.csproj",
+        "./MvvmCross.Android.Support/V17.Leanback/MvvmCross.Droid.Support.V17.Leanback.csproj",
+    };
+
+    // workaround for Xamarin.Android throwing AAPT error -2
+    foreach(var buildItem in buildItems)
+        MSBuild(new FilePath(buildItem), settings);
+
+    // build the rest
     MSBuild(sln, settings);
 });
 
