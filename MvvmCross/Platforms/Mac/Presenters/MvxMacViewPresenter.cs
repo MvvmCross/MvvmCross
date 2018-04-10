@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -14,6 +14,7 @@ using MvvmCross.Platforms.Mac.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Platforms.Mac.Presenters
 {
@@ -75,13 +76,9 @@ namespace MvvmCross.Platforms.Mac.Presenters
                     ShowAction = (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
-                        ShowWindowViewController(viewController, (MvxWindowPresentationAttribute)attribute, request);
+                        return ShowWindowViewController(viewController, (MvxWindowPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) =>
-                    {
-                        Close(viewModel);
-                        return true;
-                    }
+                    CloseAction = (viewModel, attribute) => Close(viewModel)
                 });
 
             AttributeTypesToActionsDictionary.Add(
@@ -91,13 +88,9 @@ namespace MvvmCross.Platforms.Mac.Presenters
                     ShowAction = (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
-                        ShowContentViewController(viewController, (MvxContentPresentationAttribute)attribute, request);
+                        return ShowContentViewController(viewController, (MvxContentPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) =>
-                    {
-                        Close(viewModel);
-                        return true;
-                    }
+                    CloseAction = (viewModel, attribute) => Close(viewModel)
                 });
 
             AttributeTypesToActionsDictionary.Add(
@@ -107,13 +100,9 @@ namespace MvvmCross.Platforms.Mac.Presenters
                     ShowAction = (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
-                        ShowModalViewController(viewController, (MvxModalPresentationAttribute)attribute, request);
+                        return ShowModalViewController(viewController, (MvxModalPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) =>
-                    {
-                        Close(viewModel);
-                        return true;
-                    }
+                    CloseAction = (viewModel, attribute) => Close(viewModel)
                 });
 
             AttributeTypesToActionsDictionary.Add(
@@ -123,13 +112,9 @@ namespace MvvmCross.Platforms.Mac.Presenters
                     ShowAction = (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
-                        ShowSheetViewController(viewController, (MvxSheetPresentationAttribute)attribute, request);
+                        return ShowSheetViewController(viewController, (MvxSheetPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) =>
-                    {
-                        Close(viewModel);
-                        return true;
-                    }
+                    CloseAction = (viewModel, attribute) => Close(viewModel)
                 });
 
             AttributeTypesToActionsDictionary.Add(
@@ -139,22 +124,18 @@ namespace MvvmCross.Platforms.Mac.Presenters
                     ShowAction = (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
-                        ShowTabViewController(viewController, (MvxTabPresentationAttribute)attribute, request);
+                        return ShowTabViewController(viewController, (MvxTabPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) =>
-                    {
-                        Close(viewModel);
-                        return true;
-                    }
+                    CloseAction = (viewModel, attribute) => Close(viewModel)
                 });
         }
 
-        public override void Show(MvxViewModelRequest request)
+        public override Task<bool> Show(MvxViewModelRequest request)
         {
-            GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
+            return GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
 
-        protected virtual void ShowWindowViewController(
+        protected virtual Task<bool> ShowWindowViewController(
             NSViewController viewController,
             MvxWindowPresentationAttribute attribute,
             MvxViewModelRequest request)
@@ -192,6 +173,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
             window.ContentView = viewController.View;
             window.ContentViewController = viewController;
             windowController.ShowWindow(null);
+            return Task.FromResult(true);
         }
 
         protected virtual void UpdateWindow(MvxWindowPresentationAttribute attribute, NSWindow window)
@@ -247,7 +229,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
             return windowController;
         }
 
-        protected virtual void ShowContentViewController(
+        protected virtual Task<bool> ShowContentViewController(
             NSViewController viewController,
             MvxContentPresentationAttribute attribute,
             MvxViewModelRequest request)
@@ -259,9 +241,10 @@ namespace MvvmCross.Platforms.Mac.Presenters
 
             window.ContentView = viewController.View;
             window.ContentViewController = viewController;
+            return Task.FromResult(true);
         }
 
-        protected virtual void ShowModalViewController(
+        protected virtual Task<bool> ShowModalViewController(
             NSViewController viewController,
             MvxModalPresentationAttribute attribute,
             MvxViewModelRequest request)
@@ -269,9 +252,10 @@ namespace MvvmCross.Platforms.Mac.Presenters
             var window = Windows.FirstOrDefault(w => w.Identifier == attribute.WindowIdentifier) ?? Windows.Last();
 
             window.ContentViewController.PresentViewControllerAsModalWindow(viewController);
+            return Task.FromResult(true);
         }
 
-        protected virtual void ShowSheetViewController(
+        protected virtual Task<bool> ShowSheetViewController(
             NSViewController viewController,
             MvxSheetPresentationAttribute attribute,
             MvxViewModelRequest request)
@@ -279,9 +263,10 @@ namespace MvvmCross.Platforms.Mac.Presenters
             var window = Windows.FirstOrDefault(w => w.Identifier == attribute.WindowIdentifier) ?? Windows.Last();
 
             window.ContentViewController.PresentViewControllerAsSheet(viewController);
+            return Task.FromResult(true);
         }
 
-        protected virtual void ShowTabViewController(
+        protected virtual Task<bool> ShowTabViewController(
             NSViewController viewController,
             MvxTabPresentationAttribute attribute,
             MvxViewModelRequest request)
@@ -293,9 +278,10 @@ namespace MvvmCross.Platforms.Mac.Presenters
                 throw new MvxException($"trying to display a tab but there is no TabViewController! View type: {viewController.GetType()}");
 
             tabViewController.ShowTabView(viewController, attribute.TabTitle);
+            return Task.FromResult(true);
         }
 
-        public override void Close(IMvxViewModel viewModel)
+        public override Task<bool> Close(IMvxViewModel viewModel)
         {
             var currentWindows = Windows;
             for (int i = currentWindows.Count - 1; i >= 0; i--)
@@ -312,14 +298,14 @@ namespace MvvmCross.Platforms.Mac.Presenters
                     if (modal != null)
                     {
                         window.ContentViewController.DismissViewController(modal);
-                        return;
+                        return Task.FromResult(true);
                     }
                 }
                 // if toClose is a tab
                 var tabViewController = window.ContentViewController as IMvxTabViewController;
                 if (tabViewController != null && tabViewController.CloseTabView(viewModel))
                 {
-                    return;
+                    return Task.FromResult(true);
                 }
 
                 // toClose is a content
@@ -327,9 +313,10 @@ namespace MvvmCross.Platforms.Mac.Presenters
                 if (controller != null && controller.ViewModel == viewModel)
                 {
                     window.Close();
-                    return;
+                    return Task.FromResult(true);
                 }
             }
+            return Task.FromResult(true);
         }
 
         protected virtual MvxWindowController CreateWindowController(NSWindow window)
