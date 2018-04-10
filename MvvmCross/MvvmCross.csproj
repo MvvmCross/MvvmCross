@@ -24,10 +24,8 @@ This package contains the 'Core' libraries for MvvmCross</Description>
   
   <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
     <Compile Include="Platforms\Net\**\*.cs" />
-    <Compile Include="Platforms\Wpf\**\*.cs" />
     <Compile Include="Platforms\Console\**\*.cs" />
     <PackageReference Include="System.Console" Version="4.3.0" />
-    <PackageReference Include="Expression.Blend.Sdk.WPF" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">
