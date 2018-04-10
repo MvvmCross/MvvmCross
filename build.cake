@@ -62,7 +62,13 @@ Task("ResolveBuildTools")
     .WithCriteria(() => IsRunningOnWindows())
     .Does(() => 
 {
-    var vsLatest = VSWhereLatest();
+    var vsWhereSettings = new VSWhereLatestSettings
+    {
+        IncludePrerelease = true,
+        Requires = "Component.Xamarin"
+    };
+    
+    var vsLatest = VSWhereLatest(vsWhereSettings);
     msBuildPath = (vsLatest == null)
         ? null
         : vsLatest.CombineWithFilePath("./MSBuild/15.0/Bin/MSBuild.exe");
