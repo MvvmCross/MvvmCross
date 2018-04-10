@@ -19,9 +19,8 @@ namespace MvvmCross.Platforms.Android.Binding.ResourceHelpers
 
             if (att != null)
             {
-                var resourceType = assembly.GetTypes().FirstOrDefault(
-                    t => t.FullName == (string)att.ConstructorArguments.First().Value);
-                return resourceType;
+                var typeName = (string)att.ConstructorArguments.First().Value;
+                return assembly.GetType(typeName);
             }
             return null;
         }
