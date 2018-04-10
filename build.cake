@@ -111,8 +111,7 @@ Task("Build")
 
     settings.BinaryLogger = new MSBuildBinaryLogSettings 
     {
-        Enabled = true,
-        FileName = "mvvmcross.binlog"
+        Enabled = true
     };
 
     var buildItems = new string[] 
@@ -127,12 +126,23 @@ Task("Build")
         "./MvvmCross.Android.Support/V7.RecyclerView/MvvmCross.Droid.Support.V7.RecyclerView.csproj",
         "./MvvmCross.Android.Support/V14.Preference/MvvmCross.Droid.Support.V14.Preference.csproj",
         "./MvvmCross.Android.Support/V17.Leanback/MvvmCross.Droid.Support.V17.Leanback.csproj",
+        "./MvvmCross.Plugins/Location/MvvmCross.Plugin.Location.csproj",
+        "./MvvmCross.Plugins/Location.Fused/MvvmCross.Plugin.Location.Fused.csproj",
+        "./MvvmCross.Forms/MvvmCross.Forms.csproj",
     };
 
     // workaround for Xamarin.Android throwing AAPT error -2
     foreach(var buildItem in buildItems)
-        MSBuild(new FilePath(buildItem), settings);
+    {   
+        var filePath = new FilePath(buildItem);
+        var name = filePath.GetFilenameWithoutExtension();
 
+        settings.BinaryLogger.FileName = name + ".binlog";
+
+        MSBuild(filePath, settings);
+    }
+        
+    settings.BinaryLogger.FileName = "mvvmcross2.binlog";
     // build the rest
     MSBuild(sln, settings);
 });
