@@ -4,35 +4,36 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters
 {
     public abstract class MvxViewPresenter : IMvxViewPresenter
     {
-        private readonly Dictionary<Type, Func<MvxPresentationHint, bool>> _presentationHintHandlers = new Dictionary<Type, Func<MvxPresentationHint, bool>>();
+        private readonly Dictionary<Type, Func<MvxPresentationHint, Task<bool>>> _presentationHintHandlers = new Dictionary<Type, Func<MvxPresentationHint, Task<bool>>>();
 
-        public void AddPresentationHintHandler<THint>(Func<THint, bool> action) where THint : MvxPresentationHint
+        public void AddPresentationHintHandler<THint>(Func<THint, Task<bool>> action) where THint : MvxPresentationHint
         {
             _presentationHintHandlers[typeof(THint)] = hint => action((THint)hint);
         }
 
-        protected bool HandlePresentationChange(MvxPresentationHint hint)
+        protected Task<bool> HandlePresentationChange(MvxPresentationHint hint)
         {
-            Func<MvxPresentationHint, bool> handler;
+            Func<MvxPresentationHint, Task<bool>> handler;
 
             if (_presentationHintHandlers.TryGetValue(hint.GetType(), out handler))
             {
-                if (handler(hint)) return true;
+                return handler(hint);
             }
 
-            return false;
+            return Task.FromResult(false);
         }
 
-        public abstract void Show(MvxViewModelRequest request);
+        public abstract Task<bool> Show(MvxViewModelRequest request);
 
-        public abstract void ChangePresentation(MvxPresentationHint hint);
+        public abstract Task<bool> ChangePresentation(MvxPresentationHint hint);
 
-        public abstract void Close(IMvxViewModel viewModel);
+        public abstract Task<bool> Close(IMvxViewModel viewModel);
     }
 }

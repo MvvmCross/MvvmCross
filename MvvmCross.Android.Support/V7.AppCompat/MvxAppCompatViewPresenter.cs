@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
@@ -162,7 +163,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             Show(hostViewModelRequest);
         }
 
-        protected override void ShowFragment(Type view,
+        protected override Task<bool> ShowFragment(Type view,
             MvxFragmentPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
@@ -171,7 +172,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             {
                 ShowNestedFragment(view, attribute, request);
 
-                return;
+                return Task.FromResult(true);
             }
 
             // if there is no Activity host associated, assume is the current activity
@@ -193,6 +194,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
                 PerformShowFragmentTransaction(CurrentFragmentManager, attribute, request);
             }
+            return Task.FromResult(true);
         }
 
         protected override void ShowNestedFragment(Type view, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
@@ -315,7 +317,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         }
 
-        protected override void ShowDialogFragment(Type view,
+        protected override Task<bool> ShowDialogFragment(Type view,
            MvxDialogFragmentPresentationAttribute attribute,
            MvxViewModelRequest request)
         {
@@ -352,9 +354,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             dialog.Show(ft, fragmentName);
 
             OnFragmentChanged(ft, dialog, attribute, request);
+            return Task.FromResult(true);
         }
 
-        protected virtual void ShowViewPagerFragment(
+        protected virtual Task<bool> ShowViewPagerFragment(
             Type view,
             MvxViewPagerFragmentPresentationAttribute attribute,
             MvxViewModelRequest request)
@@ -412,9 +415,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 else
                     throw new MvxException("ViewPager not found");
             }
+            return Task.FromResult(true);
         }
 
-        protected virtual void ShowTabLayout(
+        protected virtual Task<bool> ShowTabLayout(
             Type view,
             MvxTabLayoutPresentationAttribute attribute,
             MvxViewModelRequest request)
@@ -429,11 +433,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
             else
                 throw new MvxException("ViewPager or TabLayout not found");
+            return Task.FromResult(true);
         }
         #endregion
 
         #region Close implementations
-        protected override bool CloseFragmentDialog(IMvxViewModel viewModel, MvxDialogFragmentPresentationAttribute attribute)
+        protected override async Task<bool> CloseFragmentDialog(IMvxViewModel viewModel, MvxDialogFragmentPresentationAttribute attribute)
         {
             string tag = FragmentJavaName(attribute.ViewType);
             var toClose = CurrentFragmentManager.FindFragmentByTag(tag);
@@ -445,7 +450,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return false;
         }
 
-        protected virtual bool CloseViewPagerFragment(IMvxViewModel viewModel, MvxViewPagerFragmentPresentationAttribute attribute)
+        protected virtual async Task<bool> CloseViewPagerFragment(IMvxViewModel viewModel, MvxViewPagerFragmentPresentationAttribute attribute)
         {
             var viewPager = CurrentActivity.FindViewById<ViewPager>(attribute.ViewPagerResourceId);
             if (viewPager?.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
@@ -477,7 +482,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return true;
         }
 
-        protected override bool CloseFragment(IMvxViewModel viewModel, MvxFragmentPresentationAttribute attribute)
+        protected override async Task<bool> CloseFragment(IMvxViewModel viewModel, MvxFragmentPresentationAttribute attribute)
         {
             // try to close nested fragment first
             if (attribute.FragmentHostViewType != null)
