@@ -23,6 +23,7 @@ using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using MvvmCross.Presenters;
+using System.Linq;
 
 namespace MvvmCross.Platforms.Android.Core
 {
@@ -39,9 +40,7 @@ namespace MvvmCross.Platforms.Android.Core
 
         #region IMvxAndroidGlobals Members
 
-        public virtual string ExecutableNamespace => GetType().Namespace;
-
-        public virtual Assembly ExecutableAssembly => GetType().Assembly;
+        public virtual Assembly ExecutableAssembly => ViewAssemblies.FirstOrDefault() ?? GetType().Assembly;
 
         public Context ApplicationContext => _applicationContext;
 
