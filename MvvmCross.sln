@@ -142,7 +142,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Uwp", "Projects\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Wpf", "Projects\Playground\Playground.Wpf\Playground.Wpf.csproj", "{88FD9F4C-2A82-4919-91F4-AFB2999F6394}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Visibility.UnitTest", "UnitTests\Plugins.Visibility\MvvmCross.Plugins.Visibility.UnitTest.csproj", "{B5581657-2A45-4FE7-AFC9-96EA06188582}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Visibility.UnitTest", "UnitTests\Plugins.Visibility.UnitTest\MvvmCross.Plugins.Visibility.UnitTest.csproj", "{B5581657-2A45-4FE7-AFC9-96EA06188582}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
