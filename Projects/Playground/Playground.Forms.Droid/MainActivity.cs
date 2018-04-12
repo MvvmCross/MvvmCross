@@ -6,8 +6,10 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using MvvmCross.Core;
+using MvvmCross.Forms.Platforms.Android.Core;
 using MvvmCross.Forms.Platforms.Android.Views;
 using Playground.Core.ViewModels;
+using Playground.Forms.UI;
 
 namespace Playground.Forms.Droid
 {
@@ -15,17 +17,13 @@ namespace Playground.Forms.Droid
         Label = "Playground.Forms",
         Icon = "@mipmap/icon",
         Theme = "@style/AppTheme",
-        //MainLauncher = true, // No Splash Screen: Uncomment this lines if removing splash screen
+        // MainLauncher = true, // No Splash Screen: Uncomment this lines if removing splash screen
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
         LaunchMode = LaunchMode.SingleTask)]
-    public class MainActivity : MvxFormsAppCompatActivity<MainViewModel>
+    public class MainActivity : MvxFormsAppCompatActivity <MainViewModel>
+    // No Splash Screen: use this base instead
+    // MvxFormsAppCompatActivity<Setup, Core.App, FormsApp, MainViewModel>
     {
-        // No Splash Screen: uncomment this constructor
-        // public MainActivity() : base()
-        // {
-        //     this.RegisterSetupType<Setup>();
-        // }
-
         protected override void OnCreate(Bundle bundle)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
