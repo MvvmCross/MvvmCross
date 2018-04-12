@@ -15,7 +15,7 @@ namespace MvvmCross.Platforms.Android.Views
     public abstract class MvxSplashScreenActivity
         : MvxActivity, IMvxSetupMonitor
     {
-        private const int NoContent = 0;
+        protected const int NoContent = 0;
 
         private readonly int _resourceId;
 
@@ -29,6 +29,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         protected MvxSplashScreenActivity(int resourceId = NoContent)
         {
+            RegisterSetup();
             _resourceId = resourceId;
         }
 
@@ -81,6 +82,24 @@ namespace MvvmCross.Platforms.Android.Views
                 return;
 
             RunAppStart(_bundle);
+        }
+
+        protected virtual void RegisterSetup()
+        {
+        }
+    }
+
+    public abstract class MvxSplashScreenActivity<TMvxAndroidSetup, TApplication> : MvxSplashScreenActivity
+            where TMvxAndroidSetup : MvxAndroidSetup<TApplication>, new()
+            where TApplication : IMvxApplication, new()
+    {
+        protected MvxSplashScreenActivity(int resourceId = NoContent) : base(resourceId)
+        {
+        }
+
+        protected override void RegisterSetup()
+        {
+            this.RegisterSetupType<TMvxAndroidSetup>();
         }
     }
 }

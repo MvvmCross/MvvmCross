@@ -6,7 +6,9 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using MvvmCross.Core;
+using MvvmCross.Forms.Platforms.Android.Views;
 using MvvmCross.Platforms.Android.Views;
+using Playground.Forms.UI;
 
 namespace Playground.Forms.Droid
 {
@@ -18,14 +20,8 @@ namespace Playground.Forms.Droid
         , Theme = "@style/AppTheme.Splash"
         , NoHistory = true
         , ScreenOrientation = ScreenOrientation.Portrait)]
-    public class SplashScreen : MvxSplashScreenActivity
+    public class SplashScreen : MvxFormsSplashScreenActivity<Setup, Core.App, FormsApp>
     {
-        public SplashScreen()
-            : base(Resource.Layout.SplashScreen)
-        {
-            this.RegisterSetupType<Setup>();
-        }
-
         protected override void RunAppStart(Bundle bundle)
         {
             StartActivity(typeof(MainActivity));
