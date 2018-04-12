@@ -19,12 +19,6 @@ The `IMvxMessenger` API includes:
 
 The basic use of the `Messenger` is:
 
-- Add the following to `app.cs` in the `Initialize()` method, this will make the messenger accessible through injection.
-
-```
-Mvx.LazyConstructAndRegisterSingleton<IMvxMessenger, MvxMessengerHub>();
-```
-
 - define one or more Message classes for communication between components. These should inherit from `MvxMessage` - e.g.:
 
 ```c#
