@@ -34,7 +34,7 @@ This package contains the 'Core' libraries for MvvmCross</Description>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('uap')) ">
     <Compile Include="Platforms\Windows-common\**\*.cs" />
-    <Compile Include="Platforms\Uap\**\*.cs" />
+    <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="Platforms\Uap\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
