@@ -11,6 +11,7 @@ using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core;
 using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.Forms.Platforms.Android.Core;
 using MvvmCross.Forms.Platforms.Android.Views.Base;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
@@ -28,6 +29,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
         protected MvxFormsAppCompatActivity()
         {
+            RegisterSetup();
             BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
         }
@@ -112,7 +114,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
             InitializeForms(bundle);
 
             var startup = Mvx.Resolve<IMvxAppStart>();
-            if(!startup.IsStarted)
+            if (!startup.IsStarted)
                 startup.Start(GetAppStartHint(bundle));
 
             InitializeApplication();
@@ -194,6 +196,10 @@ namespace MvvmCross.Forms.Platforms.Android.Views
             var view = MvxAppCompatActivityHelper.OnCreateView(parent, name, context, attrs);
             return view ?? base.OnCreateView(parent, name, context, attrs);
         }
+
+        protected virtual void RegisterSetup()
+        {
+        }
     }
 
     public class MvxFormsAppCompatActivity<TViewModel>
@@ -204,6 +210,29 @@ namespace MvvmCross.Forms.Platforms.Android.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+    }
+
+    public abstract class MvxFormsAppCompatActivity<TMvxAndroidSetup, TApplication, TFormsApplication> : MvxFormsAppCompatActivity
+    where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
+    where TApplication : IMvxApplication, new()
+    where TFormsApplication : Application, new()
+    {
+        protected override void RegisterSetup()
+        {
+            this.RegisterSetupType<TMvxAndroidSetup>();
+        }
+    }
+
+    public abstract class MvxFormsAppCompatActivity<TMvxAndroidSetup, TApplication, TFormsApplication, TViewModel> : MvxFormsAppCompatActivity<TViewModel>
+    where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
+    where TApplication : IMvxApplication, new()
+    where TFormsApplication : Application, new()
+         where TViewModel : class, IMvxViewModel
+    {
+        protected override void RegisterSetup()
+        {
+            this.RegisterSetupType<TMvxAndroidSetup>();
         }
     }
 }
