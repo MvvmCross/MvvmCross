@@ -72,6 +72,13 @@ namespace MvvmCross.Platforms.Android.Views
             androidView.OnLifetimeEvent((listener, activity) => listener.OnDestroy(activity));
             var view = androidView as IMvxView;
             view.OnViewDestroy();
+
+            var currentActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>()?.Activity;
+            if (currentActivity == null && view is Activity destroyedActivity && destroyedActivity.IsFinishing)
+            {
+                var appStart = Mvx.Resolve<IMvxAppStart>();
+                appStart?.ResetStart();
+            }
         }
 
         public static void OnViewStart(this IMvxAndroidView androidView)

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,13 +11,11 @@ namespace MvvmCross.Platforms.Android.Views
     public class MvxApplicationCallbacksCurrentTopActivity : Java.Lang.Object, Application.IActivityLifecycleCallbacks, IMvxAndroidCurrentTopActivity
     {
         private ConcurrentDictionary<string, ActivityInfo> _Activities = new ConcurrentDictionary<string, ActivityInfo>();
-
         public Activity Activity => GetCurrentActivity();
 
         public void OnActivityCreated(Activity activity, Bundle savedInstanceState)
         {
-            var activityName = GetActivityName(activity);
-            _Activities.GetOrAdd(activityName, new ActivityInfo { Activity = activity, IsCurrent = true });
+            UpdateActivityListItem(activity, true);
         }
 
         public void OnActivityDestroyed(Activity activity)
@@ -28,26 +26,12 @@ namespace MvvmCross.Platforms.Android.Views
 
         public void OnActivityPaused(Activity activity)
         {
-            ActivityInfo toAdd = new ActivityInfo { Activity = activity, IsCurrent = false };
-            var activityName = GetActivityName(activity);
-            _Activities.AddOrUpdate(activityName, toAdd, (key, existing) =>
-            {
-                existing.Activity = activity;
-                existing.IsCurrent = false;
-                return existing;
-            });
+            UpdateActivityListItem(activity, false);
         }
 
         public void OnActivityResumed(Activity activity)
         {
-            ActivityInfo toAdd = new ActivityInfo { Activity = activity, IsCurrent = true };
-            var activityName = GetActivityName(activity);
-            _Activities.AddOrUpdate(activityName, toAdd, (key, existing) =>
-            {
-                existing.Activity = activity;
-                existing.IsCurrent = true;
-                return existing;
-            });
+            UpdateActivityListItem(activity, true);
         }
 
         public void OnActivitySaveInstanceState(Activity activity, Bundle outState)
@@ -56,24 +40,22 @@ namespace MvvmCross.Platforms.Android.Views
 
         public void OnActivityStarted(Activity activity)
         {
-            ActivityInfo toAdd = new ActivityInfo { Activity = activity, IsCurrent = true };
-            var activityName = GetActivityName(activity);
-            _Activities.AddOrUpdate(activityName, toAdd, (key, existing) =>
-            {
-                existing.Activity = activity;
-                existing.IsCurrent = true;
-                return existing;
-            });
+            UpdateActivityListItem(activity, true);
         }
 
         public void OnActivityStopped(Activity activity)
         {
-            ActivityInfo toAdd = new ActivityInfo { Activity = activity, IsCurrent = false };
+            UpdateActivityListItem(activity, false);
+        }
+
+        private void UpdateActivityListItem(Activity activity, bool isCurrent)
+        {
+            var toAdd = new ActivityInfo { Activity = activity, IsCurrent = isCurrent };
             var activityName = GetActivityName(activity);
             _Activities.AddOrUpdate(activityName, toAdd, (key, existing) =>
             {
                 existing.Activity = activity;
-                existing.IsCurrent = false;
+                existing.IsCurrent = isCurrent;
                 return existing;
             });
         }
