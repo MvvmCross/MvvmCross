@@ -74,7 +74,7 @@ namespace MvvmCross.Platforms.Android.Views
             view.OnViewDestroy();
 
             var currentActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>()?.Activity;
-            if (currentActivity==null)
+            if (currentActivity == null && view is Activity destroyedActivity && destroyedActivity.IsFinishing)
             {
                 var appStart = Mvx.Resolve<IMvxAppStart>();
                 appStart?.ResetStart();
