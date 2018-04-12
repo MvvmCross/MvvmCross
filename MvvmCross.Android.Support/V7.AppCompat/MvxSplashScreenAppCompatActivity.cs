@@ -15,7 +15,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     public abstract class MvxSplashScreenAppCompatActivity
         : MvxAppCompatActivity, IMvxSetupMonitor
     {
-        private const int NoContent = 0;
+        protected const int NoContent = 0;
 
         private readonly int _resourceId;
 
@@ -29,6 +29,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected MvxSplashScreenAppCompatActivity(int resourceId = NoContent)
         {
+            RegisterSetup();
             _resourceId = resourceId;
         }
 
@@ -81,6 +82,24 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 return;
 
             RunAppStart(_bundle);
+        }
+
+        protected virtual void RegisterSetup()
+        {
+        }
+    }
+
+    public abstract class MvxSplashScreenAppCompatActivity<TMvxAndroidSetup, TApplication> : MvxSplashScreenAppCompatActivity
+            where TMvxAndroidSetup : MvxAndroidSetup<TApplication>, new()
+            where TApplication : IMvxApplication, new()
+    {
+        protected MvxSplashScreenAppCompatActivity(int resourceId = NoContent) : base(resourceId)
+        {
+        }
+
+        protected override void RegisterSetup()
+        {
+            this.RegisterSetupType<TMvxAndroidSetup>();
         }
     }
 }
