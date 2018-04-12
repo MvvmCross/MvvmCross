@@ -5,7 +5,7 @@ category: Fundamentals
 order: 7
 ---
 
-A great option to log messages, info and errors to the console or other outputs is the built in MvxLog! It is very extendable and easy to use.
+A great option to log messages, info and errors to the console or other outputs is MvxLog! It is very extendable and easy to use.
 
 You just need to inject it in your ViewModel, something like:
 
