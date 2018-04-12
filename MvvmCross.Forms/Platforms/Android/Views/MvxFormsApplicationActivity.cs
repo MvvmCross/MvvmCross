@@ -3,13 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Reflection;
-using System.Threading.Tasks;
 using Android.Content;
 using Android.OS;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core;
-using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platforms.Android.Core;
 using MvvmCross.Forms.Platforms.Android.Views.Base;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
@@ -27,6 +26,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
         protected MvxFormsApplicationActivity()
         {
+            RegisterSetup();
             BindingContext = new MvxAndroidBindingContext(this, this);
             this.AddEventListeners();
         }
@@ -186,6 +186,10 @@ namespace MvvmCross.Forms.Platforms.Android.Views
                 base.OnBackPressed();
             }
         }
+
+        protected virtual void RegisterSetup()
+        {
+        }
     }
 
     public class MvxFormsApplicationActivity<TViewModel>
@@ -196,6 +200,29 @@ namespace MvvmCross.Forms.Platforms.Android.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+    }
+
+    public abstract class MvxFormsApplicationActivity<TMvxAndroidSetup, TApplication, TFormsApplication> : MvxFormsApplicationActivity
+    where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
+    where TApplication : IMvxApplication, new()
+    where TFormsApplication : Application, new()
+    {
+        protected override void RegisterSetup()
+        {
+            this.RegisterSetupType<TMvxAndroidSetup>();
+        }
+    }
+
+    public abstract class MvxFormsApplicationActivity<TMvxAndroidSetup, TApplication, TFormsApplication, TViewModel> : MvxFormsApplicationActivity<TViewModel>
+    where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
+    where TApplication : IMvxApplication, new()
+    where TFormsApplication : Application, new()
+         where TViewModel : class, IMvxViewModel
+    {
+        protected override void RegisterSetup()
+        {
+            this.RegisterSetupType<TMvxAndroidSetup>();
         }
     }
 }
