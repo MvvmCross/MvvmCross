@@ -23,10 +23,7 @@ namespace Playground.Droid.Views
 
             if (bundle == null)
             {
-                Task.Run(() =>
-                {
-                    ViewModel.ShowInitialViewModelsCommand.Execute();
-                });
+                ViewModel.ShowInitialViewModelsCommand.Execute();
             }
         }
     }
