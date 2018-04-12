@@ -5,6 +5,8 @@ category: Fundamentals
 order: 14
 ---
 
+[Available in version 6.0.0 beta1+] 
+
 MvvmCross provides a super useful helper when it comes to async/await: [MvxNotifyTask](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Core/Core/ViewModels/MvxNotifyTask.cs). 
 
 You might have missed this, but it is already being used in your application: The Initialize method is fired inside of a MvxNotifyTask, and if your ViewModels derive from `MvxViewModel`, you will find that there is a property called `InitializeTask`. You can use that property to spot any changes to the states of Initialize.
