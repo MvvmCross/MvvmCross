@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("MvvmCross.Tests")]
 [assembly: InternalsVisibleTo("MvvmCross.Forms")]
+[assembly: InternalsVisibleTo("MvvmCross.Platforms.Wpf")]
 
 namespace MvvmCross.Logging.LogProviders
 {
