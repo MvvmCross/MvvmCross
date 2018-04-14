@@ -253,6 +253,7 @@ tools/*
 !tools/packages.config
 artifacts/
 *.nupkg
+*.binlog
 
 #linting
 .sonarqube/
