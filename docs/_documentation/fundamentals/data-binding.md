@@ -2,7 +2,7 @@
 layout: documentation
 title: Data binding
 category: Fundamentals
-order: 2
+order: 1
 ---
 Data binding is the key technology that MVVM relies on, to link Views with their View-Models.
 
@@ -939,16 +939,28 @@ Add something about the Generic implementation of IMvxTargetBinding [#1610](http
 
 ### Dictionary Conversion
 
-Dictionary conversion allows for mapped conversions to be set up within the view's binding code, useful for quickly binding things like icons or color to state properties.
+Dictionary conversion allows for mapped conversions to be set up within the view's binding code, useful for quickly binding things like icons or colors to state properties.
 
 ```c#
-set.Bind(button).To(vm => vm.readonly).WithDictionaryConversion(
-	new Dictionary<bool, Icon>
-	{
-		{true, GreyIcon},
-		{false, BlueIcon}
-	});
+set.Bind(button).To(vm => vm.readonly)
+   .WithDictionaryConversion(new Dictionary<bool, Icon>
+    {
+        {true, GreyIcon},
+        {false, BlueIcon}
+    });
 ```
+
+Additionally, a fallback can be supplied for when a key cannot be found against the supplied Dictionary.
+
+```c#
+set.Bind(button).To(vm => vm.readonly)
+   .WithDictionaryConversion(new Dictionary<bool, Icon>
+    {
+        {true, GreyIcon},
+        {false, BlueIcon}
+    }, RedIcon);
+```
+
 *Note* : This feature is only available in fluent binding.
 
 ### Default view properties
@@ -972,7 +984,6 @@ MvvmCross.Binding.Droid.Views.MvxRelativeLayout | ItemsSource
 MvvmCross.Binding.Droid.Views.MvxFrameLayout | ItemsSource
 MvvmCross.Binding.Droid.Views.MvxTableLayout | ItemsSource
 MvvmCross.Binding.Droid.Views.MvxFrameControl | DataContext
-MvvmCross.Binding.Droid.Views.MvxImageView | ImageUrl
 MvvmCross.Binding.Droid.Views.MvxDatePicker | Value
 MvvmCross.Binding.Droid.Views.MvxTimePicker | Value
 
@@ -996,8 +1007,6 @@ UIKit.UIPageControl | CurrentPage
 UIKit.UIActivityIndicatorView | Hidden
 MvvmCross.Binding.iOS.Views.MvxCollectionViewSource | ItemsSource
 MvvmCross.Binding.iOS.Views.MvxTableViewSource | ItemsSource
-MvvmCross.Binding.iOS.Views.MvxImageView | ImageUrl
-MvvmCross.Binding.iOS.Views.MvxImageViewLoader | ImageUrl
 
 **Mac**
 
@@ -1030,8 +1039,6 @@ UIKit.UISegmentedControl | SelectedSegment
 UIKit.UIActivityIndicatorView | Hidden
 MvvmCross.Binding.tvOS.Views.MvxCollectionViewSource | ItemsSource
 MvvmCross.Binding.tvOS.Views.MvxTableViewSource | ItemsSource
-MvvmCross.Binding.tvOS.Views.MvxImageView | ImageUrl
-MvvmCross.Binding.tvOS.Views.MvxImageViewLoader | ImageUrl
 
 ### Built in bindings
 

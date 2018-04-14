@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Playground.Forms.UI.GlobalStyles">
+
+    <!-- Fonts -->
+    <OnPlatform x:Key="SecondaryFont" x:TypeArguments="x:String" iOS="HelveticaNeue" Android="" />
+    <OnPlatform x:Key="SecondaryFontBold" x:TypeArguments="x:String" iOS="HelveticaNeue-Bold" Android="" />
+
+    <!-- Colors -->
+    <Color x:Key="DarkGrey">#333</Color>
+    <Color x:Key="Magenta">#E20074</Color>
+    <Color x:Key="LightMagenta">#FFF499C8</Color>
+    <Color x:Key="DarkMagenta">#A10053</Color>
+    <Color x:Key="Black">#000000</Color>
+    <Color x:Key="Grey">#9B9B9B</Color>
+    <Color x:Key="LightishGrey">#EAEAEA</Color>
+    <Color x:Key="LightGrey">#E8E8E8</Color>
+    <Color x:Key="LighterGrey">#FAFAFA</Color>
+    <Color x:Key="White">#FFFFFF</Color>
+    <Color x:Key="Success">#29C971</Color>
+    <Color x:Key="Error">#BD1C37</Color>
+    <Color x:Key="Blue">#4A90E2</Color>
+    <Color x:Key="Red">#FF0000</Color>
+    <Color x:Key="Yellow">#F6A623</Color>
+    <Color x:Key="Green">#2FC96E</Color>
+    <Color x:Key="PageBackground">White</Color>
+    <Color x:Key="Transparent">Transparent</Color>
+
+</ResourceDictionary>

@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectGuid>{E5554BE9-91EA-42DF-8F2B-60667E51C51F}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Playground.iOS</RootNamespace>
+    <AssemblyName>Playground.iOS</AssemblyName>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchFastDev>true</MtouchFastDev>
+    <IOSDebuggerPort>15826</IOSDebuggerPort>
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>i386, x86_64</MtouchArch>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <MtouchTlsProvider>Default</MtouchTlsProvider>
+    <DeviceSpecificBuild>false</DeviceSpecificBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchFloat32>true</MtouchFloat32>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <MtouchTlsProvider>Default</MtouchTlsProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <MtouchTlsProvider>Default</MtouchTlsProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <DeviceSpecificBuild>true</DeviceSpecificBuild>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchFastDev>true</MtouchFastDev>
+    <MtouchFloat32>true</MtouchFloat32>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <MtouchTlsProvider>Default</MtouchTlsProvider>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\JsonLocalization\MvvmCross.Plugin.JsonLocalization.csproj">
+      <Project>{c783ef46-1822-4baf-8eca-e820fff26633}</Project>
+      <Name>MvvmCross.Plugin.JsonLocalization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Json\MvvmCross.Plugin.Json.csproj">
+      <Project>{9a82f120-fbe8-4205-94a3-575630dbcbb9}</Project>
+      <Name>MvvmCross.Plugin.Json</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj">
+      <Project>{4d47736f-d8dc-42f1-8f75-8fc3eff28894}</Project>
+      <Name>MvvmCross.Plugin.ResourceLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj">
+      <Project>{49f965f5-5824-4bbe-94ea-0178f848abdb}</Project>
+      <Name>MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Playground.Core\Playground.Core.csproj">
+      <Project>{fe374d1a-1a19-49bc-8e93-d52399a9c3f3}</Project>
+      <Name>Playground.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
+    <InterfaceDefinition Include="Main.storyboard" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Views\ChildView.cs" />
+    <Compile Include="Views\ChildView.designer.cs">
+      <DependentUpon>ChildView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModalNavView.cs" />
+    <Compile Include="Views\ModalNavView.designer.cs">
+      <DependentUpon>ModalNavView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModalView.cs" />
+    <Compile Include="Views\ModalView.designer.cs">
+      <DependentUpon>ModalView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RootView.cs" />
+    <Compile Include="Views\RootView.designer.cs">
+      <DependentUpon>RootView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SecondChildView.cs" />
+    <Compile Include="Views\SecondChildView.designer.cs">
+      <DependentUpon>SecondChildView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab1View.cs" />
+    <Compile Include="Views\Tab1View.designer.cs">
+      <DependentUpon>Tab1View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab2View.cs" />
+    <Compile Include="Views\Tab2View.designer.cs">
+      <DependentUpon>Tab2View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TabsRootView.cs" />
+    <Compile Include="Views\TabsRootView.designer.cs">
+      <DependentUpon>TabsRootView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitDetailView.cs" />
+    <Compile Include="Views\SplitDetailView.designer.cs">
+      <DependentUpon>SplitDetailView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitMasterView.cs" />
+    <Compile Include="Views\SplitMasterView.designer.cs">
+      <DependentUpon>SplitMasterView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitRootView.cs" />
+    <Compile Include="Views\SplitRootView.designer.cs">
+      <DependentUpon>SplitRootView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SplitDetailNavView.cs" />
+    <Compile Include="Views\SplitDetailNavView.designer.cs">
+      <DependentUpon>SplitDetailNavView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tab3View.cs" />
+    <Compile Include="Views\Tab3View.designer.cs">
+      <DependentUpon>Tab3View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OverrideAttributeView.cs" />
+    <Compile Include="Views\OverrideAttributeView.designer.cs">
+      <DependentUpon>OverrideAttributeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NestedModalView.cs" />
+    <Compile Include="Views\NestedModalView.designer.cs">
+      <DependentUpon>NestedModalView.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\home.png" />
+    <BundleResource Include="Resources\home%402x.png" />
+    <BundleResource Include="Resources\home%403x.png" />
+    <BundleResource Include="Resources\ic_tabbar_menu.png" />
+    <BundleResource Include="Resources\ic_tabbar_menu%402x.png" />
+    <BundleResource Include="Resources\ic_tabbar_menu%403x.png" />
+    <BundleResource Include="Resources\settings%402x.png" />
+    <BundleResource Include="Resources\settings%403x.png" />
+    <BundleResource Include="Resources\settings.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+</Project>

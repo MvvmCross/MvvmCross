@@ -1,0 +1,3 @@
+The only step to get this Wpf .Net 4.5 UI working is:
+
+1. Add a reference to your Core .NET Standard project

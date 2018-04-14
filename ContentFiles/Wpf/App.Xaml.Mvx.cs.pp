@@ -1,0 +1,49 @@
+using MvvmCross
+using MvvmCross.Platforms.Wpf.Views;
+using MvvmCross.ViewModels;
+using System;
+using System.Windows;
+
+namespace $rootnamespace$
+{
+    public partial class App : Application
+    {
+        private bool _setupComplete;
+
+        private void DoSetup()
+        {
+            LoadMvxAssemblyResources();
+            
+            var setup = new Setup(Dispatcher, MainWindow);
+            setup.Initialize();
+
+            var start = Mvx.Resolve<IMvxAppStart>();
+            start.Start();
+
+            _setupComplete = true;
+        }
+
+        protected override void OnActivated(EventArgs e)
+        {
+            if (!_setupComplete)
+            {
+                DoSetup();
+            }
+
+            base.OnActivated(e);
+        }
+
+        private void LoadMvxAssemblyResources()
+        {
+            for (var i = 0;; i++)
+            {
+                var key = "MvxAssemblyImport" + i;
+                var data = TryFindResource(key);
+                if (data == null)
+                {
+                    return;
+                }
+            }
+        }
+    }
+}
