@@ -21,5 +21,4 @@
 - [ ] All projects build
 - [ ] Follows style guide lines ([code style guide](https://github.com/MvvmCross/MvvmCross#code-style-guidelines))
 - [ ] Relevant documentation was updated ([docs style guide](https://www.mvvmcross.com/documentation/contribute/mvvmcross-docs-style-guide))
-- [ ] Nuspec files were updated (when applicable)
 - [ ] Rebased onto current develop

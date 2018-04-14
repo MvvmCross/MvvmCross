@@ -1,0 +1,27 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras">
+  <PropertyGroup>
+    <TargetFrameworks>MonoAndroid81</TargetFrameworks>
+    <AssemblyName>MvvmCross.Droid.Support.V7.Preference</AssemblyName>
+    <RootNamespace>MvvmCross.Droid.Support.V7.Preference</RootNamespace>
+    <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains Support v7 Preference support for MvvmCross.</Description>
+    <PackageId>MvvmCross.Droid.Support.V7.Preference</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Resources\*.cs" />
+    <Compile Remove="Resources\*.cs" />
+    <AndroidResource Include="Resources\**\*.xml" Generator="MSBuild:UpdateAndroidResources" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Android.Support.V7.Preference" Version="27.0.2" />
+    <PackageReference Include="Xamarin.Build.Download" Version="0.4.9" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
+    <ProjectReference Include="..\Fragment\MvvmCross.Droid.Support.Fragment.csproj" />
+  </ItemGroup>
+</Project>

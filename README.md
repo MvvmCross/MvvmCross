@@ -197,14 +197,6 @@ MvvmCross is licensed under the [MS-PL License](http://opensource.org/licenses/m
 * Thanks to [McCannLondon](http://blogs.mccannlondon.co.uk/) for sponsoring the initial part of this work
 * Thanks to [JetBrains](http://jetbrains.com) for a community Resharper license to use on this project
 
-### Laptop Stickers!
-
-Show your support for MvvmCross and get a sticker!
-
-
-[<img src="docs/assets/img/logo/MvvmCross-avatar.png" alt="MvvmCross Laptop Sticker" width="200" />](https://goo.gl/forms/zkNTcMLanxvX4Dxv1)
-
-
 [so]: http://stackoverflow.com/questions/tagged/mvvmcross "MvvmCross on StackOverflow"
 [xfmvx]: http://forums.xamarin.com/search?Search=mvvmcross "MvvmCross on Xamarin Forums"
 [xf]: http://forums.xamarin.com "Xamarin Forums"
