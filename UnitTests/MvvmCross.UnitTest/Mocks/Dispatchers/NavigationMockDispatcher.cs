@@ -21,6 +21,8 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
         public readonly List<MvxPresentationHint> Hints = new List<MvxPresentationHint>();
 
         public virtual bool RequestMainThreadAction(Action action,
+        public bool IsOnMainThread => true;
+
                                                     bool maskExceptions = true)
         {
             try

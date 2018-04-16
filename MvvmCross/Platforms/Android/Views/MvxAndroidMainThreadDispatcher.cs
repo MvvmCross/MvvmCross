@@ -12,7 +12,7 @@ namespace MvvmCross.Platforms.Android.Views
 {
     public class MvxAndroidMainThreadDispatcher : MvxMainThreadAsyncDispatcher
     {
-        public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override void RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (Application.SynchronizationContext == SynchronizationContext.Current)
                 action();
@@ -23,8 +23,6 @@ namespace MvvmCross.Platforms.Android.Views
                     ExceptionMaskedAction(action, maskExceptions);
                 }, null);
             }
-
-            return true;
         }
     }
 }
