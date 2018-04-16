@@ -17,10 +17,10 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
             _callback = callback;
         }
 
-        public override bool RequestMainThreadAction(Action action,
+        public override void RequestMainThreadAction(Action action,
                                                     bool maskExceptions = true)
         {
-            return _callback(action);
+            _callback(action);
         }
     }
 }
