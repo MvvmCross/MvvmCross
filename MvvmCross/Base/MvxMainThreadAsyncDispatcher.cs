@@ -16,6 +16,8 @@ namespace MvvmCross.Base
             this.managedThreadId = managedThreadId;
         }
 
+        public bool IsOnMainThread => Environment.CurrentManagedThreadId == managedThreadId;
+        
         public Task ExecuteOnMainThreadAsync(Action action, bool maskExceptions = true)
         {
             var asyncAction = new Func<Task>(() =>
