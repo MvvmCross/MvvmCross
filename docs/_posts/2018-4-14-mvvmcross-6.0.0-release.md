@@ -44,7 +44,7 @@ For a explanation about .NET Standard see: https://blogs.msdn.microsoft.com/dotn
 ### Setup & platforms initialization
 
 We've changed the way platforms are loaded. Previously you had to create the `Setup` class in every platform yourself (except for Android if you were using a Splashscreen).
-Starting with v6 the Setup class hs received a lot of improvements! Also if you are starting with a brand new application, you might not even need to write your own!
+Starting with v6 the Setup class has received a lot of improvements! Also if you are starting with a brand new application, you might not even need to write your own!
 
 In order to avoid having to create and initialize the Setup class yourself, you can now use generic versions of some classes:
 - On iOS, there's a version of `MvxApplicationDelegate` which takes a `IMvxIosSetup` and a `IMvxApplication` constraints
