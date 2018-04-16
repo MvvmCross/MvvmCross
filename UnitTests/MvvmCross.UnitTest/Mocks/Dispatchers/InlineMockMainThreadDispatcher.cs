@@ -10,6 +10,11 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
     public class InlineMockMainThreadDispatcher
         : MvxMainThreadAsyncDispatcher
     {
+        public InlineMockMainThreadDispatcher(int managedThreadId) : base(managedThreadId)
+        {
+
+        }
+
         public override void RequestMainThreadAction(Action action, 
             bool maskExceptions = true)
         {

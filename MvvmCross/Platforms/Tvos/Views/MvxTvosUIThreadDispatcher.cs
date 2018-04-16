@@ -15,7 +15,7 @@ namespace MvvmCross.Platforms.Tvos.Views
     {
         private readonly SynchronizationContext _uiSynchronizationContext;
 
-        protected MvxTvosUIThreadDispatcher()
+        protected MvxTvosUIThreadDispatcher(int managedThreadId) : base(managedThreadId)
         {
             _uiSynchronizationContext = SynchronizationContext.Current;
             if (_uiSynchronizationContext == null)

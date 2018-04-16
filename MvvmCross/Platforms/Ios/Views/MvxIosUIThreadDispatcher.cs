@@ -15,7 +15,7 @@ namespace MvvmCross.Platforms.Ios.Views
     {
         private readonly SynchronizationContext _uiSynchronizationContext;
 
-        protected MvxIosUIThreadDispatcher()
+        protected MvxIosUIThreadDispatcher(int managedThreadId) : base(managedThreadId)
         {
             _uiSynchronizationContext = SynchronizationContext.Current;
             if (_uiSynchronizationContext == null)

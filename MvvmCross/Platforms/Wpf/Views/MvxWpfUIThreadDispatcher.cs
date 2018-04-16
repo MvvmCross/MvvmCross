@@ -13,7 +13,7 @@ namespace MvvmCross.Platforms.Wpf.Views
     {
         private readonly Dispatcher _dispatcher;
 
-        public MvxWpfUIThreadDispatcher(Dispatcher dispatcher)
+        public MvxWpfUIThreadDispatcher(Dispatcher dispatcher, int manangedThreadId) : base(manangedThreadId)
         {
             _dispatcher = dispatcher;
         }

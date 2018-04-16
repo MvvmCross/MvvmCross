@@ -16,7 +16,7 @@ namespace MvvmCross.Platforms.Mac.Views
     {
         private readonly SynchronizationContext _uiSynchronizationContext;
 
-        protected MvxMacUIThreadDispatcher()
+        protected MvxMacUIThreadDispatcher(int managedThreadId) : base(managedThreadId)
         {
             _uiSynchronizationContext = SynchronizationContext.Current;
             if (_uiSynchronizationContext == null)

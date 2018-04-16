@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.Base
 {
-    public abstract class MvxMainThreadAsyncDispatcher : MvxMainThreadDispatcher, IMvxMainThreadAsyncDispatcher
+    public class MvxMainThreadAsyncDispatcher : MvxMainThreadDispatcher, IMvxMainThreadAsyncDispatcher
     {
+        private int managedThreadId;
+
+        public MvxMainThreadAsyncDispatcher(int managedThreadId)
+        {
+            this.managedThreadId = managedThreadId;
+        }
+
         public Task ExecuteOnMainThreadAsync(Action action, bool maskExceptions = true)
         {
             var asyncAction = new Func<Task>(() =>

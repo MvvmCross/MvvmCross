@@ -14,6 +14,11 @@ namespace MvvmCross.Platforms.Console.Views
         : MvxMainThreadAsyncDispatcher
         , IMvxViewDispatcher
     {
+        public MvxConsoleViewDispatcher(int managedThreadId) : base(managedThreadId)
+        {
+
+        }
+
         public override void RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             action();

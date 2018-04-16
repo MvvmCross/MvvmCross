@@ -11,8 +11,8 @@ namespace MvvmCross.Platforms.Uap.Views
     public class MvxWindowsMainThreadDispatcher : MvxMainThreadAsyncDispatcher
     {
         private readonly CoreDispatcher _uiDispatcher;
-
-        public MvxWindowsMainThreadDispatcher(CoreDispatcher uiDispatcher)
+        
+        public MvxWindowsMainThreadDispatcher(CoreDispatcher uiDispatcher, int managedThreadId) : base(managedThreadId)
         {
             _uiDispatcher = uiDispatcher;
         }
