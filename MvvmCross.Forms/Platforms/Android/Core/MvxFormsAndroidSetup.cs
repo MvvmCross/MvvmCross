@@ -24,7 +24,7 @@ using MvvmCross.Core;
 
 namespace MvvmCross.Forms.Platforms.Android.Core
 {
-    public abstract class MvxFormsAndroidSetup : MvxAppCompatSetup
+    public abstract class MvxFormsAndroidSetup : MvxAppCompatSetup, IMvxFormsSetup
     {
         private List<Assembly> _viewAssemblies;
         private Application _formsApplication;
@@ -37,6 +37,12 @@ namespace MvvmCross.Forms.Platforms.Android.Core
             }
 
             return _viewAssemblies;
+        }
+
+        protected override void InitializeIoC()
+        {
+            base.InitializeIoC();
+            Mvx.RegisterSingleton<IMvxFormsSetup>(this);
         }
 
         protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
@@ -69,10 +75,18 @@ namespace MvvmCross.Forms.Platforms.Android.Core
 
         protected abstract Application CreateFormsApplication();
 
+        protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
+        {
+            var formsPagePresenter = new MvxFormsPagePresenter(viewPresenter);
+            Mvx.RegisterSingleton(formsPagePresenter);
+            return formsPagePresenter;
+        }
+
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
             var presenter = new MvxFormsAndroidViewPresenter(GetViewAssemblies(), FormsApplication);
             Mvx.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
+            presenter.FormsPagePresenter = CreateFormsPagePresenter(presenter);
             return presenter;
         }
 
