@@ -15,6 +15,7 @@ using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
+using MvvmCross.Views;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Presenters
@@ -30,9 +31,6 @@ namespace MvvmCross.Forms.Presenters
         public MvxFormsPagePresenter(IMvxFormsViewPresenter platformPresenter)
         {
             PlatformPresenter = platformPresenter;
-            FormsApplication = platformPresenter.FormsApplication;
-            ViewsContainer = platformPresenter.ViewsContainer;
-            ViewModelTypeFinder = platformPresenter.ViewModelTypeFinder;
             AttributeTypesToActionsDictionary = platformPresenter.AttributeTypesToActionsDictionary;
         }
 
@@ -41,7 +39,11 @@ namespace MvvmCross.Forms.Presenters
         private Application _formsApplication;
         public Application FormsApplication
         {
-            get { return _formsApplication; }
+            get {
+                if(_formsApplication == null)
+                    _formsApplication = PlatformPresenter.FormsApplication;
+                return _formsApplication;
+            }
             set { _formsApplication = value; }
         }
 
@@ -58,6 +60,28 @@ namespace MvvmCross.Forms.Presenters
             {
                 _viewModelLoader = value;
             }
+        }
+
+        public override IMvxViewsContainer ViewsContainer
+        {
+            get
+            {
+                if (_viewsContainer == null)
+                    _viewsContainer = PlatformPresenter.ViewsContainer;
+                return base.ViewsContainer;
+            } 
+            set => base.ViewsContainer = value;
+        }
+
+        public override IMvxViewModelTypeFinder ViewModelTypeFinder
+        {
+            get
+            {
+                if (_viewModelTypeFinder == null)
+                    _viewModelTypeFinder = PlatformPresenter.ViewModelTypeFinder;
+                return base.ViewModelTypeFinder;
+            }
+            set => base.ViewModelTypeFinder = value;
         }
 
         public virtual Page CreatePage(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute)
