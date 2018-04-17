@@ -8,20 +8,17 @@ using Android.Views;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
+using MvvmCross.Presenters;
+using MvvmCross.Presenters.Attributes;
+using MvvmCross.ViewModels;
 using Playground.Core.ViewModels;
 
-namespace Playground.Droid.Views
+namespace Playground.Droid.Fragments
 {
-    [MvxFragmentPresentation(typeof(RootViewModel), Resource.Id.content_frame, true,
-                             Resource.Animation.abc_fade_in,
-                             Resource.Animation.abc_fade_out,
-                             Resource.Animation.abc_fade_in,
-                             Resource.Animation.abc_fade_out)]
+    [MvxFragmentPresentation(typeof(RootViewModel), Resource.Id.content_frame)]
     [MvxFragmentPresentation(typeof(SplitRootViewModel), Resource.Id.split_content_frame)]
-    [MvxFragmentPresentation(typeof(TabsRootViewModel), Resource.Id.content_frame)]
-    [MvxFragmentPresentation(fragmentHostViewType: typeof(ModalNavView), fragmentContentId: Resource.Id.dialog_content_frame)]
-    [Register(nameof(ChildView))]
-    public class ChildView : MvxFragment<ChildViewModel>
+    [Register(nameof(OverrideAttributeView))]
+    public class OverrideAttributeView : MvxFragment<OverrideAttributeViewModel>, IMvxOverridePresentationAttribute
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -32,9 +29,16 @@ namespace Playground.Droid.Views
             return view;
         }
 
-        public override void OnDestroy()
+        public MvxBasePresentationAttribute PresentationAttribute(MvxViewModelRequest request)
         {
-            base.OnDestroy();
+            return new MvxFragmentPresentationAttribute(
+                typeof(RootViewModel),
+                Resource.Id.content_frame,
+                false,
+                Resource.Animation.abc_fade_in,
+                Resource.Animation.abc_fade_out,
+                Resource.Animation.abc_fade_in,
+                Resource.Animation.abc_fade_out);
         }
     }
 }

@@ -11,9 +11,10 @@ using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
+using Playground.Droid.Activities;
 using Playground.Droid.Adapter;
 
-namespace Playground.Droid.Views
+namespace Playground.Droid.Fragments
 {
     [MvxFragmentPresentation(typeof(SharedElementRootViewModel), Resource.Id.shared_content_frame)]
     public class SharedElementRootChildView : MvxFragment<SharedElementRootChildViewModel>

@@ -6,23 +6,24 @@ using Android.App;
 using Android.OS;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
-using MvvmCross.Platforms.Android.Views;
 using Playground.Core.ViewModels;
 
-namespace Playground.Droid.Views
+namespace Playground.Droid.Activities
 {
     [MvxActivityPresentation]
     [Activity(Theme = "@style/AppTheme")]
-    public class SharedElementSecondView : MvxAppCompatActivity<SharedElementSecondViewModel>
+    public class TabsRootBView : MvxAppCompatActivity<TabsRootBViewModel>
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.Layout.SharedElementSecondView);
+            SetContentView(Resource.Layout.TabsRootBView);
 
-            Bundle extras = Intent.Extras;
-            extras.SetSharedElementsById(FindViewById(Android.Resource.Id.Content));
+            if (bundle == null)
+            {
+                ViewModel.ShowInitialViewModelsCommand.Execute();
+            }
         }
     }
 }

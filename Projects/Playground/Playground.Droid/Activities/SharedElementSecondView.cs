@@ -2,29 +2,27 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Threading.Tasks;
 using Android.App;
 using Android.OS;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
+using MvvmCross.Platforms.Android.Views;
 using Playground.Core.ViewModels;
 
-namespace Playground.Droid.Views
+namespace Playground.Droid.Activities
 {
     [MvxActivityPresentation]
-    [Activity(Theme = "@style/AppTheme", ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
-    public class TabsRootView : MvxAppCompatActivity<TabsRootViewModel>
+    [Activity(Theme = "@style/AppTheme")]
+    public class SharedElementSecondView : MvxAppCompatActivity<SharedElementSecondViewModel>
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.Layout.TabsRootView);
+            SetContentView(Resource.Layout.SharedElementSecondView);
 
-            if (bundle == null)
-            {
-                ViewModel.ShowInitialViewModelsCommand.Execute();
-            }
+            Bundle extras = Intent.Extras;
+            extras.SetSharedElementsById(FindViewById(Android.Resource.Id.Content));
         }
     }
 }

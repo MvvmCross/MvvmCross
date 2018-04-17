@@ -13,6 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{77C7235F-1977-426F-86E8-77A29B5DF68F}"
+	ProjectSection(SolutionItems) = preProject
+		Projects\Playground\Playground.Droid\Views\TabsRootBView.cs = Projects\Playground\Playground.Droid\Views\TabsRootBView.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Android.Support", "Android.Support", "{39679555-D062-48EB-8BED-FD52AA3046B6}"
 EndProject
@@ -110,6 +113,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projects", "Projects", "{38
 	ProjectSection(SolutionItems) = preProject
 		Projects\Directory.build.props = Projects\Directory.build.props
 		Projects\Directory.build.targets = Projects\Directory.build.targets
+		Projects\Playground\Playground.Droid\Views\SplitRootView.cs = Projects\Playground\Playground.Droid\Views\SplitRootView.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Playground", "Playground", "{5339E878-07CE-4A32-9BE3-C3C86388D6DE}"
@@ -144,7 +148,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Wpf", "Projects\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Visibility.UnitTest", "UnitTests\Plugins.Visibility.UnitTest\MvvmCross.Plugins.Visibility.UnitTest.csproj", "{B5581657-2A45-4FE7-AFC9-96EA06188582}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Platforms.Wpf", "MvvmCross\MvvmCross.Platforms.Wpf.csproj", "{FE6715F0-BB2D-4ED9-BF2B-30124ECB3AEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Platforms.Wpf", "MvvmCross\MvvmCross.Platforms.Wpf.csproj", "{FE6715F0-BB2D-4ED9-BF2B-30124ECB3AEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
