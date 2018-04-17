@@ -85,6 +85,20 @@ namespace MvvmCross.UnitTest.Base
             }
         }
 
+        public class D
+        {
+            public string Title { get; }
+            public string Subtitle { get; }
+            public string Description { get; }
+
+            public D(string title, string subtitle, string description)
+            {
+                Title = title;
+                Subtitle = subtitle;
+                Description = description;
+            }
+        }
+
         public class COdd : IC
         {
             public static bool FirstTime = true;
@@ -456,6 +470,71 @@ namespace MvvmCross.UnitTest.Base
         }
 
         #endregion
+
+        [Fact]
+        public void IocConstruct_WithDictionaryArguments_CreatesObject()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxIoCProvider.Initialize();
+
+            var c = new C2();
+            var arguments = new Dictionary<string, object>
+            {
+                ["c"] = c
+            };
+            instance.IoCConstruct<B>(arguments);
+        }
+
+        [Fact]
+        public void IocConstruct_WithAnonymousTypeArguments_CreatesObject()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxIoCProvider.Initialize();
+
+            var c = new C2();
+            instance.IoCConstruct<B>(new { c });
+        }
+
+        [Fact]
+        public void IocConstruct_WithMultipleDictionaryArguments_CreatesObject()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxIoCProvider.Initialize();
+
+            var title = "The title";
+            var subtitle = "The subtitle";
+            var description = "The description";
+
+            var arguments = new Dictionary<string, object>
+            {
+                ["title"] = title,
+                ["subtitle"] = subtitle,
+                ["description"] = description
+            };
+            var d = instance.IoCConstruct<D>(arguments);
+
+            Assert.Equal(title, d.Title);
+            Assert.Equal(subtitle, d.Subtitle);
+            Assert.Equal(description, d.Description);
+        }
+
+        [Fact]
+        public void IocConstruct_WithMultipleAnonymousArguments_CreatesObject()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxIoCProvider.Initialize();
+
+            var title = "The title";
+            var subtitle = "The subtitle";
+            var description = "The description";
+
+            var arguments = new { title, subtitle, description };
+            var d = instance.IoCConstruct<D>(arguments);
+
+            Assert.Equal(title, d.Title);
+            Assert.Equal(subtitle, d.Subtitle);
+            Assert.Equal(description, d.Description);
+        }
 
         // TODO - there are so many tests we could and should do here!
     }
