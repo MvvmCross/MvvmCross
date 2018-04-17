@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 
 namespace MvvmCross.IoC
 {
@@ -58,6 +59,16 @@ namespace MvvmCross.IoC
             where T : class;
 
         object IoCConstruct(Type type);
+
+        T IoCConstruct<T>(IDictionary<string, object> arguments)
+            where T : class;
+
+        T IoCConstruct<T>(object arguments)
+            where T : class;
+
+        object IoCConstruct(Type type, IDictionary<string, object> arguments);
+
+        object IoCConstruct(Type type, object arguments);
 
         void CallbackWhenRegistered<T>(Action action);
 
