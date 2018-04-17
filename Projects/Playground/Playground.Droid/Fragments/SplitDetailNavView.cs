@@ -7,12 +7,12 @@ using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
 using Playground.Droid.Views.Base;
 
-namespace Playground.Droid.Views
+namespace Playground.Droid.Fragments
 {
-    [MvxFragmentPresentation(typeof(SplitRootViewModel), Resource.Id.split_content_frame)]
-    [Register(nameof(SplitDetailView))]
-    public class SplitDetailView : BaseSplitDetailView<SplitDetailViewModel>
+    [MvxFragmentPresentation(typeof(SplitRootViewModel), Resource.Id.split_content_frame, AddToBackStack = true)]
+    [Register(nameof(SplitDetailNavView))]
+    public class SplitDetailNavView : BaseSplitDetailView<SplitDetailNavViewModel>
     {
-        protected override int FragmentLayoutId => Resource.Layout.SplitDetailView;
+        protected override int FragmentLayoutId => Resource.Layout.SplitDetailNavView;
     }
 }

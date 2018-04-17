@@ -10,7 +10,7 @@ using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
 
-namespace Playground.Droid.Views
+namespace Playground.Droid.Fragments
 {
     [MvxFragmentPresentation(fragmentHostViewType: typeof(SecondChildView), fragmentContentId: Resource.Id.nested_frame)]
     [Register(nameof(NestedChildView))]

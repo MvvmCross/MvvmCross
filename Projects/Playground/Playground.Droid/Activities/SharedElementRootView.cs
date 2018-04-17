@@ -15,7 +15,7 @@ using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using Playground.Core.ViewModels;
 
-namespace Playground.Droid.Views
+namespace Playground.Droid.Activities
 {
     [MvxActivityPresentation]
     [Activity(Theme = "@style/AppTheme")]

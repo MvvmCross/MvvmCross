@@ -6,43 +6,33 @@ using System;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using MvvmCross;
-using MvvmCross.Droid.Support.V4;
-using MvvmCross.Platforms.Android;
+using MvvmCross.Droid.Support.Design;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
 
-namespace Playground.Droid.Views
+namespace Playground.Droid.Fragments
 {
     [MvxDialogFragmentPresentation]
-    [Register(nameof(ModalView))]
-    public class ModalView : MvxDialogFragment<ModalViewModel>
+    [Register(nameof(SheetView))]
+    public class SheetView : MvxBottomSheetDialogFragment<SheetViewModel>
     {
-        public ModalView()
+        public SheetView()
         {
         }
 
-        protected ModalView(IntPtr javaReference, JniHandleOwnership transfer)
+        protected SheetView(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            var ignore = base.OnCreateView(inflater, container, savedInstanceState);
+            base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.ChildView, null);
+            var view = this.BindingInflate(Resource.Layout.SheetView, null);
 
             return view;
-        }
-
-        public override void OnPause()
-        {
-            var top = Mvx.Resolve<IMvxAndroidCurrentTopActivity>();
-            var activity = top.Activity;
-
-            base.OnPause();
         }
     }
 }

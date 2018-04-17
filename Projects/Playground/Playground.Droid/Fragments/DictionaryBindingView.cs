@@ -15,7 +15,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 
-namespace Playground.Droid.Views
+namespace Playground.Droid.Fragments
 {
     [MvxFragmentPresentation(typeof(RootViewModel), Resource.Id.content_frame, true,
                          Resource.Animation.abc_fade_in,

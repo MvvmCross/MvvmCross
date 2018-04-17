@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -11,26 +10,24 @@ using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
 
-namespace Playground.Droid.Views
+namespace Playground.Droid.Fragments
 {
-    [MvxDialogFragmentPresentation]
-    [Register(nameof(ModalNavView))]
-    public class ModalNavView : MvxDialogFragment<ModalNavViewModel>
+    [MvxTabLayoutPresentation(TabLayoutResourceId = Resource.Id.tabs, ViewPagerResourceId = Resource.Id.viewpager, Title = "Tab 3")]
+    [Register(nameof(Tab3View))]
+    public class Tab3View : MvxFragment<Tab3ViewModel>
     {
-        public ModalNavView()
+        public override void OnCreate(Bundle savedInstanceState)
         {
-        }
+            base.OnCreate(savedInstanceState);
 
-        protected ModalNavView(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer)
-        {
+            // Create your fragment here
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            var ignore = base.OnCreateView(inflater, container, savedInstanceState);
+            base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.ModalNavView, null);
+            var view = this.BindingInflate(Resource.Layout.Tab3View, null);
 
             return view;
         }

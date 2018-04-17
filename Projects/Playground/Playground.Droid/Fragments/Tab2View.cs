@@ -10,12 +10,12 @@ using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
 
-namespace Playground.Droid.Views
+namespace Playground.Droid.Fragments
 {
-    [MvxTabLayoutPresentation(TabLayoutResourceId = Resource.Id.tabs, ViewPagerResourceId = Resource.Id.viewpager, Title = "Tab 1", ActivityHostViewModelType = typeof(TabsRootViewModel))]
-    [MvxTabLayoutPresentation(TabLayoutResourceId = Resource.Id.tabs, ViewPagerResourceId = Resource.Id.viewpager, Title = "Tab 1", ActivityHostViewModelType = typeof(TabsRootBViewModel))]
-    [Register(nameof(Tab1View))]
-    public class Tab1View : MvxFragment<Tab1ViewModel>
+    [MvxTabLayoutPresentation(TabLayoutResourceId = Resource.Id.tabs, ViewPagerResourceId = Resource.Id.viewpager, Title = "Tab 2", ActivityHostViewModelType = typeof(TabsRootViewModel))]
+    [MvxTabLayoutPresentation(TabLayoutResourceId = Resource.Id.tabs, ViewPagerResourceId = Resource.Id.viewpager, Title = "Tab 2", ActivityHostViewModelType = typeof(TabsRootBViewModel))]
+    [Register(nameof(Tab2View))]
+    public class Tab2View : MvxFragment<Tab2ViewModel>
     {
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -28,7 +28,7 @@ namespace Playground.Droid.Views
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
-            var view = this.BindingInflate(Resource.Layout.Tab1View, null);
+            var view = this.BindingInflate(Resource.Layout.Tab2View, null);
 
             return view;
         }
