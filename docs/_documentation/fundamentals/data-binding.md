@@ -1046,7 +1046,7 @@ The following tables shows all the bindings built into MvvmCross.
 
 > When using extension method based bindings you will have to include the relevant using namespace to access the extension methods. Additionally, extension method based bindings are only supported starting with MvvmCross 5.
 
-**Android - `using MvvmCross.Binding.Droid`**
+**Android - `using MvvmCross.Platforms.Android.Binding`**
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -1086,7 +1086,7 @@ MvvmCross.Binding.Droid.Views.MvxListView | SelectedItem | BindSelectedItem()
 MvvmCross.Binding.Droid.Views.MvxExpandableListView | SelectedItem | BindSelectedItem()
 MvvmCross.Binding.Droid.Views.MvxRadioGroup | SelectedItem | BindSelectedItem()
 
-**Android - `using MvvmCross.Plugins.Color.Droid`**
+**Android - `using MvvmCross.Plugin.Color.Platforms.Android.Binding`**
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -1113,7 +1113,7 @@ Android.Support.V7.Preferences.ListPreference | Value | BindValue()
 Android.Support.V7.Preferences.EditTextPreference | Text | BindText()
 Android.Support.V7.Preferences.TwoStatePreference | Checked | BindChecked()
 
-**iOS - `using MvvmCross.Binding.iOS`**
+**iOS - `using MvvmCross.Platforms.Ios.Binding`**
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -1156,7 +1156,7 @@ UIKit.UIView | Visibility | BindVisibility()
 UIKit.UIView | TwoFingerTap | BindTwoFingerTap()
 UIKit.UIView | LayerBorderWidth | BindLayerBorderWidth()
 
-**Mac - `using MvvmCross.Binding.Mac`**
+**Mac - `using MvvmCross.Platforms.Mac.Binding`**
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -1174,7 +1174,7 @@ AppKit.NSMenuItem | State | BindState()
 AppKit.NSSearchField | Text | BindText()
 AppKit.NSTabViewController | SelectedTabViewItemIndex | BindSelectedTabViewItemIndex()
 
-**tvOS - `using MvvmCross.Binding.tvOS`**
+**tvOS - `using MvvmCross.Platforms.Tvos.Binding`**
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -1200,7 +1200,7 @@ UIKit.UIView | Visibility | BindVisibility()
 UIKit.UIView | TwoFingerTap | BindTwoFingerTap()
 UIKit.UIView | LayerBorderWidth | BindLayerBorderWidth()
 
-**UWP - `using MvvmCross.Binding.Uwp`**
+**UWP - `using MvvmCross.Platforms.Uap.Binding`**
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -1208,7 +1208,7 @@ Windows.UI.Xaml.FrameworkElement | Visible | BindVisible()
 Windows.UI.Xaml.FrameworkElement | Collapsed | BindCollapsed()
 Windows.UI.Xaml.FrameworkElement | Hidden | BindHidden()
 
-**WPF - `using MvvmCross.BindingEx.Wpf` / `using MvvmCross.BindingEx.WindowsCommon`**
+**WPF - `using MvvmCross.Platforms.Wpf.Binding`**
 
 Base Control | String | Extension method
 ---- | --------- | ---------
