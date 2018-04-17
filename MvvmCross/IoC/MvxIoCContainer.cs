@@ -361,10 +361,27 @@ namespace MvvmCross.IoC
         public T IoCConstruct<T>()
             where T : class
         {
-            return (T)IoCConstruct(typeof(T));
+            return (T)IoCConstruct(typeof(T), null);
         }
 
         public virtual object IoCConstruct(Type type)
+        {
+            return IoCConstruct(type, null);
+        }
+
+        public virtual T IoCConstruct<T>(IDictionary<string, object> arguments)
+            where T : class
+        {
+            return (T)IoCConstruct(typeof(T), arguments);
+        }
+
+        public virtual T IoCConstruct<T>(object arguments)
+            where T : class
+        {
+            return (T)IoCConstruct(typeof(T), arguments.ToPropertyDictionary());
+        }
+
+        public virtual object IoCConstruct(Type type, IDictionary<string, object> arguments)
         {
             var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
             var firstConstructor = constructors.FirstOrDefault();
@@ -372,7 +389,7 @@ namespace MvvmCross.IoC
             if (firstConstructor == null)
                 throw new MvxIoCResolveException("Failed to find constructor for type {0}", type.FullName);
 
-            var parameters = GetIoCParameterValues(type, firstConstructor);
+            var parameters = GetIoCParameterValues(type, firstConstructor, arguments);
             object toReturn;
             try
             {
@@ -396,6 +413,11 @@ namespace MvvmCross.IoC
                 throw;
             }
             return toReturn;
+        }
+
+        public virtual object IoCConstruct(Type type, object arguments)
+        {
+            return IoCConstruct(type, arguments.ToPropertyDictionary());
         }
 
         public void CallbackWhenRegistered<T>(Action action)
@@ -584,13 +606,17 @@ namespace MvvmCross.IoC
             _propertyInjector?.Inject(toReturn, _options.PropertyInjectorOptions);
         }
 
-        protected virtual List<object> GetIoCParameterValues(Type type, ConstructorInfo firstConstructor)
+        protected virtual List<object> GetIoCParameterValues(Type type, ConstructorInfo firstConstructor, IDictionary<string, object> arguments)
         {
             var parameters = new List<object>();
             foreach (var parameterInfo in firstConstructor.GetParameters())
             {
                 object parameterValue;
-                if (!TryResolve(parameterInfo.ParameterType, out parameterValue))
+                if (arguments != null && arguments.ContainsKey(parameterInfo.Name))
+                {
+                    parameterValue = arguments[parameterInfo.Name];
+                }
+                else if (!TryResolve(parameterInfo.ParameterType, out parameterValue))
                 {
                     if (parameterInfo.IsOptional)
                     {
@@ -599,7 +625,7 @@ namespace MvvmCross.IoC
                     else
                     {
                         throw new MvxIoCResolveException(
-                            "Failed to resolve parameter for parameter {0} of type {1} when creating {2}",
+                            "Failed to resolve parameter for parameter {0} of type {1} when creating {2}. You may pass it as an argument",
                             parameterInfo.Name,
                             parameterInfo.ParameterType.Name,
                             type.FullName);
