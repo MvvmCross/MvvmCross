@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
-namespace MvvmCross.Platform.ExtensionMethods
+namespace MvvmCross.Base
 {
-	public static class MvxObjectExtensions
-	{
+	public static class MvxDictionaryExtensions
+    {
 		public static IDictionary<string, object> ToPropertyDictionary(this object input)
 		{
 			if (input == null)
