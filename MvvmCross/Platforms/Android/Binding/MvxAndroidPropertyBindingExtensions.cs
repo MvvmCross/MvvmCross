@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -94,5 +94,26 @@ namespace MvvmCross.Platforms.Android.Binding
 
         public static string BindChecked(this TwoStatePreference twoStatePreference)
             => MvxAndroidPropertyBinding.TwoStatePreference_Checked;
+
+        public static string BindMargin(this View view)
+            => MvxAndroidPropertyBinding.View_Margin;
+
+        public static string BindMarginLeft(this View view)
+            => MvxAndroidPropertyBinding.View_MarginLeft;
+
+        public static string BindMarginRight(this View view)
+            => MvxAndroidPropertyBinding.View_MarginRight;
+
+        public static string BindMarginTop(this View view)
+            => MvxAndroidPropertyBinding.View_MarginTop;
+
+        public static string BindMarginBottom(this View view)
+            => MvxAndroidPropertyBinding.View_MarginBottom;
+
+        public static string BindMarginStart(this View view)
+            => MvxAndroidPropertyBinding.View_MarginStart;
+
+        public static string BindMarginEnd(this View view)
+            => MvxAndroidPropertyBinding.View_MarginEnd;
     }
 }
