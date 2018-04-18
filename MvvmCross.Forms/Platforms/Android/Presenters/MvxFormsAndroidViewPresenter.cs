@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -36,16 +36,10 @@ namespace MvvmCross.Forms.Platforms.Android.Presenters
             get
             {
                 if (_formsPagePresenter == null)
-                {
-                    _formsPagePresenter = new MvxFormsPagePresenter(this);
-                    Mvx.RegisterSingleton(_formsPagePresenter);
-                }
+                    throw new ArgumentNullException(nameof(FormsPagePresenter), "IMvxFormsPagePresenter cannot be null. Set the value in CreateViewPresenter in the setup.");
                 return _formsPagePresenter;
             }
-            set
-            {
-                _formsPagePresenter = value;
-            }
+            set { _formsPagePresenter = value; }
         }
 
         public override void Show(MvxViewModelRequest request)
