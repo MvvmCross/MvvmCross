@@ -14,12 +14,13 @@ using MvvmCross.Forms.Presenters;
 using MvvmCross.Platforms.Uap.Core;
 using MvvmCross.Platforms.Uap.Presenters;
 using MvvmCross.Platforms.Uap.Views;
+using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platforms.Uap.Core
 {
-    public abstract class MvxFormsWindowsSetup : MvxWindowsSetup
+    public abstract class MvxFormsWindowsSetup : MvxWindowsSetup, IMvxFormsSetup
     {
         private Application _formsApplication;
         public virtual Application FormsApplication
@@ -41,12 +42,43 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
             }
         }
 
+        private List<Assembly> _viewAssemblies;
+        public override IEnumerable<Assembly> GetViewAssemblies()
+        {
+            if (_viewAssemblies == null)
+            {
+                _viewAssemblies = new List<Assembly>(base.GetViewAssemblies());
+            }
+
+            return _viewAssemblies;
+        }
+
+        protected override void InitializeIoC()
+        {
+            base.InitializeIoC();
+            Mvx.RegisterSingleton<IMvxFormsSetup>(this);
+        }
+
+        protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
+        {
+            base.InitializeApp(pluginManager, app);
+            _viewAssemblies.AddRange(GetViewModelAssemblies());
+        }
+
         protected abstract Application CreateFormsApplication();
+
+        protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
+        {
+            var formsPagePresenter = new MvxFormsPagePresenter(viewPresenter);
+            Mvx.RegisterSingleton(formsPagePresenter);
+            return formsPagePresenter;
+        }
 
         protected override IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
         {
             var presenter = new MvxFormsUwpViewPresenter(rootFrame, FormsApplication);
             Mvx.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
+            presenter.FormsPagePresenter = CreateFormsPagePresenter(presenter);
             return presenter;
         }
 
