@@ -6,5 +6,9 @@ namespace Playground.Wpf
 {
     public partial class App : MvxApplication
     {
+        protected override void RegisterSetup()
+        {
+            this.RegisterSetupType<MvxWpfSetup<Core.App>>();
+        }
     }
 }
