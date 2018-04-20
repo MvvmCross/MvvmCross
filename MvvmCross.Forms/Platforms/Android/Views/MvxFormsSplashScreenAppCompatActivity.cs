@@ -12,7 +12,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 {
     public abstract class MvxFormsSplashScreenAppCompatActivity<TMvxAndroidSetup, TApplication, TFormsApplication> : MvxSplashScreenAppCompatActivity
             where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
-            where TApplication : IMvxApplication, new()
+            where TApplication : class, IMvxApplication, new()
             where TFormsApplication : Application, new()
     {
         protected MvxFormsSplashScreenAppCompatActivity(int resourceId = NoContent) : base(resourceId)

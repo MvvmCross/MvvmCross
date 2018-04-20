@@ -91,7 +91,7 @@ namespace MvvmCross.Platforms.Android.Views
 
     public abstract class MvxSplashScreenActivity<TMvxAndroidSetup, TApplication> : MvxSplashScreenActivity
             where TMvxAndroidSetup : MvxAndroidSetup<TApplication>, new()
-            where TApplication : IMvxApplication, new()
+            where TApplication : class, IMvxApplication, new()
     {
         protected MvxSplashScreenActivity(int resourceId = NoContent) : base(resourceId)
         {
