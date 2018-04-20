@@ -153,6 +153,11 @@ namespace MvvmCross.IoC
             return _provider.IoCConstruct<T>(arguments);
         }
 
+        public T IoCConstruct<T>(params object[] arguments) where T : class
+        {
+            return _provider.IoCConstruct<T>(arguments);
+        }
+
         public T IoCConstruct<T>(object arguments) where T : class
         {
             return _provider.IoCConstruct<T>(arguments);
@@ -164,6 +169,11 @@ namespace MvvmCross.IoC
         }
 
         public object IoCConstruct(Type type, object arguments)
+        {
+            return _provider.IoCConstruct(type, arguments);
+        }
+
+        public object IoCConstruct(Type type, params object[] arguments)
         {
             return _provider.IoCConstruct(type, arguments);
         }
