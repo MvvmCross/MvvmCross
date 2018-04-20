@@ -106,7 +106,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
 
     public abstract class MvxFormsApplicationDelegate<TMvxIosSetup, TApplication, TFormsApplication> : MvxFormsApplicationDelegate
         where TMvxIosSetup : MvxFormsIosSetup<TApplication, TFormsApplication>, new()
-        where TApplication : IMvxApplication, new()
+        where TApplication : class, IMvxApplication, new()
         where TFormsApplication : Application, new()
     {
         protected override void RegisterSetup()

@@ -78,7 +78,7 @@ namespace MvvmCross.Platforms.Tvos.Core
 
     public abstract class MvxApplicationDelegate<TMvxTvosSetup, TApplication> : MvxApplicationDelegate
        where TMvxTvosSetup : MvxTvosSetup<TApplication>, new()
-       where TApplication : IMvxApplication, new()
+       where TApplication : class, IMvxApplication, new()
     {
         protected override void RegisterSetup()
         {

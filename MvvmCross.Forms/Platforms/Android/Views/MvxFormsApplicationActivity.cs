@@ -205,7 +205,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
     public abstract class MvxFormsApplicationActivity<TMvxAndroidSetup, TApplication, TFormsApplication> : MvxFormsApplicationActivity
     where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
-    where TApplication : IMvxApplication, new()
+    where TApplication : class, IMvxApplication, new()
     where TFormsApplication : Application, new()
     {
         protected override void RegisterSetup()
@@ -216,7 +216,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
     public abstract class MvxFormsApplicationActivity<TMvxAndroidSetup, TApplication, TFormsApplication, TViewModel> : MvxFormsApplicationActivity<TViewModel>
     where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
-    where TApplication : IMvxApplication, new()
+    where TApplication : class, IMvxApplication, new()
     where TFormsApplication : Application, new()
          where TViewModel : class, IMvxViewModel
     {

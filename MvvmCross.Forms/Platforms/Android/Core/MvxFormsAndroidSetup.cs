@@ -131,7 +131,7 @@ namespace MvvmCross.Forms.Platforms.Android.Core
     }
 
     public class MvxFormsAndroidSetup<TApplication, TFormsApplication> : MvxFormsAndroidSetup
-        where TApplication : IMvxApplication, new()
+        where TApplication : class, IMvxApplication, new()
         where TFormsApplication : Application, new()
     {
         public override IEnumerable<Assembly> GetViewAssemblies()
@@ -146,6 +146,6 @@ namespace MvvmCross.Forms.Platforms.Android.Core
 
         protected override Application CreateFormsApplication() => new TFormsApplication();
 
-        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
     }
 }

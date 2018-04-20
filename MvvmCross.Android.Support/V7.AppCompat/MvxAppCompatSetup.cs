@@ -44,9 +44,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     }
 
     public class MvxAppCompatSetup<TApplication> : MvxAppCompatSetup
-        where TApplication : IMvxApplication, new()
+        where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
