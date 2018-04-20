@@ -398,7 +398,7 @@ namespace MvvmCross.IoC
             return IoCConstruct(type, selectedConstructor, arguments);
         }
 
-        public virtual object IoCConstruct(Type type, IDictionary<string, object> arguments= null)
+        public virtual object IoCConstruct(Type type, IDictionary<string, object> arguments = null)
         {
             var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
             var firstConstructor = constructors.FirstOrDefault();
@@ -407,7 +407,7 @@ namespace MvvmCross.IoC
                 throw new MvxIoCResolveException("Failed to find constructor for type {0}", type.FullName);
 
             var parameters = GetIoCParameterValues(type, firstConstructor, arguments);
-            return IoCConstruct(type, firstConstructor, arguments.ToArray());
+            return IoCConstruct(type, firstConstructor, parameters.ToArray());
         }
 
         protected virtual object IoCConstruct(Type type, ConstructorInfo constructor, object[] arguments)
