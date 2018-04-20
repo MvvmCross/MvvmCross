@@ -91,9 +91,9 @@ namespace MvvmCross.Platforms.Wpf.Core
     }
 
     public class MvxWpfSetup<TApplication> : MvxWpfSetup
-        where TApplication : IMvxApplication, new()
+        where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

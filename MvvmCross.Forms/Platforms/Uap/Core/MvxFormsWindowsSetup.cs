@@ -98,7 +98,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
     }
 
     public class MvxFormsWindowsSetup<TApplication, TFormsApplication> : MvxFormsWindowsSetup
-        where TApplication : IMvxApplication, new()
+        where TApplication : class, IMvxApplication, new()
         where TFormsApplication : Application, new()        
     {
         public override IEnumerable<Assembly> GetViewAssemblies()
@@ -113,6 +113,6 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
 
         protected override Application CreateFormsApplication() => new TFormsApplication();
 
-        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
     }
 }
