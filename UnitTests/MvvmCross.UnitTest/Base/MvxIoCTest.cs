@@ -90,12 +90,21 @@ namespace MvvmCross.UnitTest.Base
             public string Title { get; }
             public string Subtitle { get; }
             public string Description { get; }
+            public int Amount { get; }
+            public bool Enabled { get; }
 
             public D(string title, string subtitle, string description)
             {
                 Title = title;
                 Subtitle = subtitle;
                 Description = description;
+            }
+
+            public D(string title, int amount, bool enabled)
+            {
+                Title = title;
+                Amount = amount;
+                Enabled = enabled;
             }
         }
 
@@ -534,6 +543,23 @@ namespace MvvmCross.UnitTest.Base
             Assert.Equal(title, d.Title);
             Assert.Equal(subtitle, d.Subtitle);
             Assert.Equal(description, d.Description);
+        }
+
+        [Fact]
+        public void IocConstruct_WithMultipleTypedArguments_CreatesObject()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxIoCProvider.Initialize();
+
+            var title = "The title";
+            var amount = 5;
+            var enabled = true;
+
+            var d = instance.IoCConstruct<D>(title, amount, enabled);
+
+            Assert.Equal(title, d.Title);
+            Assert.Equal(amount, d.Amount);
+            Assert.Equal(enabled, d.Enabled);
         }
 
         // TODO - there are so many tests we could and should do here!

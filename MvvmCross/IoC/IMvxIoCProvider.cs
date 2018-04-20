@@ -58,17 +58,20 @@ namespace MvvmCross.IoC
         T IoCConstruct<T>()
             where T : class;
 
-        object IoCConstruct(Type type);
-
         T IoCConstruct<T>(IDictionary<string, object> arguments)
             where T : class;
 
         T IoCConstruct<T>(object arguments)
             where T : class;
 
-        object IoCConstruct(Type type, IDictionary<string, object> arguments);
+        T IoCConstruct<T>(params object[] arguments)
+            where T : class;
+
+        object IoCConstruct(Type type, IDictionary<string, object> arguments = null);
 
         object IoCConstruct(Type type, object arguments);
+
+        object IoCConstruct(Type type, params object[] arguments);
 
         void CallbackWhenRegistered<T>(Action action);
 
