@@ -19,6 +19,11 @@ namespace MvvmCross.IoC
 
         object Resolve(Type type);
 
+        bool TryResolve<T>(out T resolved)
+            where T : class;
+
+        bool TryResolve(Type type, out object resolved);
+
         T Create<T>()
             where T : class;
 
@@ -28,11 +33,6 @@ namespace MvvmCross.IoC
             where T : class;
 
         object GetSingleton(Type type);
-
-        bool TryResolve<T>(out T resolved)
-            where T : class;
-
-        bool TryResolve(Type type, out object resolved);
 
         void RegisterType<TFrom, TTo>()
             where TFrom : class
@@ -67,7 +67,9 @@ namespace MvvmCross.IoC
         T IoCConstruct<T>(params object[] arguments)
             where T : class;
 
-        object IoCConstruct(Type type, IDictionary<string, object> arguments = null);
+        object IoCConstruct(Type type);
+
+        object IoCConstruct(Type type, IDictionary<string, object> arguments);
 
         object IoCConstruct(Type type, object arguments);
 
