@@ -151,7 +151,7 @@ namespace MvvmCross.Navigation
 
             if(viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
             {
-                var facade = (IMvxNavigationFacade)Mvx.IocConstruct(viewModelType);
+                var facade = (IMvxNavigationFacade)Mvx.IoCConstruct(viewModelType);
 
                 try
                 {
@@ -207,7 +207,7 @@ namespace MvvmCross.Navigation
 
             if(viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
             {
-                var facade = (IMvxNavigationFacade)Mvx.IocConstruct(viewModelType);
+                var facade = (IMvxNavigationFacade)Mvx.IoCConstruct(viewModelType);
 
                 try
                 {

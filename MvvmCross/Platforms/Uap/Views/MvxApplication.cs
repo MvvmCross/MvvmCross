@@ -152,7 +152,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
     public class MvxApplication<TMvxUapSetup, TApplication> : MvxApplication
        where TMvxUapSetup : MvxWindowsSetup<TApplication>, new()
-       where TApplication : IMvxApplication, new()
+       where TApplication : class, IMvxApplication, new()
     {
         protected override void RegisterSetup()
         {
