@@ -163,7 +163,7 @@ namespace MvvmCross.IoC
             return _provider.IoCConstruct<T>(arguments);
         }
 
-        public object IoCConstruct(Type type, IDictionary<string, object> arguments)
+        public object IoCConstruct(Type type, IDictionary<string, object> arguments = null)
         {
             return _provider.IoCConstruct(type, arguments);
         }
