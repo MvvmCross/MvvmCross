@@ -349,8 +349,7 @@ namespace MvvmCross.IoC
         public void RegisterSingleton<TInterface>(Func<TInterface> theConstructor)
             where TInterface : class
         {
-#warning when the MonoTouch/Droid code fully supports CoVariance (Contra?) then we can change this)
-            RegisterSingleton(typeof(TInterface), () => (object)theConstructor());
+            RegisterSingleton(typeof(TInterface), theConstructor);
         }
 
         public void RegisterSingleton(Type interfaceType, Func<object> theConstructor)
