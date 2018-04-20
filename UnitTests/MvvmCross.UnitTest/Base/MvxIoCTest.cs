@@ -562,6 +562,21 @@ namespace MvvmCross.UnitTest.Base
             Assert.Equal(enabled, d.Enabled);
         }
 
+        [Fact]
+        public void IocConstruct_WithMultipleTypedArguments_ThrowsFailedToFindCtor()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxIoCProvider.Initialize();
+
+            var title = "The title";
+            var subtitle = "The subtitle";
+            var enabled = true;
+
+            Assert.Throws<MvxIoCResolveException>(() => {
+                var d = instance.IoCConstruct<D>(title, subtitle, enabled);
+            });
+        }
+
         // TODO - there are so many tests we could and should do here!
     }
 }
