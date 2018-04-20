@@ -66,7 +66,7 @@ namespace MvvmCross.ViewModels
         }
 
         protected void RegisterCustomAppStart<TMvxAppStart>()
-            where TMvxAppStart : IMvxAppStart
+            where TMvxAppStart : class, IMvxAppStart
         {
             Mvx.ConstructAndRegisterSingleton<IMvxAppStart, TMvxAppStart>();
         }

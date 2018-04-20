@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -36,7 +36,7 @@ namespace MvvmCross.ViewModels
             IMvxViewModel viewModel;
             try
             {
-                viewModel = (IMvxViewModel)Mvx.IocConstruct(viewModelType);
+                viewModel = (IMvxViewModel)Mvx.IoCConstruct(viewModelType);
             }
             catch(Exception exception)
             {
@@ -56,7 +56,7 @@ namespace MvvmCross.ViewModels
             IMvxViewModel<TParameter> viewModel;
             try
             {
-                viewModel = (IMvxViewModel<TParameter>)Mvx.IocConstruct(viewModelType);
+                viewModel = (IMvxViewModel<TParameter>)Mvx.IoCConstruct(viewModelType);
             }
             catch(Exception exception)
             {

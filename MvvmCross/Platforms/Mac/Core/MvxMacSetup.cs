@@ -177,9 +177,9 @@ namespace MvvmCross.Platforms.Mac.Core
     }
 
     public class MvxMacSetup<TApplication> : MvxMacSetup
-        where TApplication : IMvxApplication, new()
+        where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
