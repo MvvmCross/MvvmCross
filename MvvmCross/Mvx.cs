@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using MvvmCross.Base;
 using MvvmCross.IoC;
 
@@ -63,6 +64,12 @@ namespace MvvmCross
             return ioc.Create<T>();
         }
 
+        public static object Create(Type type)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.Create(type);
+        }
+
         public static T GetSingleton<T>()
             where T : class
         {
@@ -70,59 +77,10 @@ namespace MvvmCross
             return ioc.GetSingleton<T>();
         }
 
-        public static void RegisterSingleton<TInterface>(Func<TInterface> serviceConstructor)
-            where TInterface : class
+        public static object GetSingleton(Type type)
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            ioc.RegisterSingleton(serviceConstructor);
-        }
-
-        public static void RegisterSingleton(Type tInterface, Func<object> serviceConstructor)
-        {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            ioc.RegisterSingleton(tInterface, serviceConstructor);
-        }
-
-        public static void RegisterSingleton<TInterface>(TInterface service)
-            where TInterface : class
-        {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            ioc.RegisterSingleton(service);
-        }
-
-        public static void RegisterSingleton(Type tInterface, object service)
-        {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            ioc.RegisterSingleton(tInterface, service);
-        }
-
-        public static void ConstructAndRegisterSingleton<TInterface, TType>()
-            where TInterface : class
-            where TType : TInterface
-        {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            ioc.RegisterSingleton<TInterface>(IocConstruct<TType>());
-        }
-
-        public static void LazyConstructAndRegisterSingleton<TInterface, TType>()
-            where TInterface : class
-            where TType : TInterface
-        {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            ioc.RegisterSingleton<TInterface>(() => IocConstruct<TType>());
-        }
-
-        public static void LazyConstructAndRegisterSingleton<TInterface>(Func<TInterface> constructor)
-            where TInterface : class
-        {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            ioc.RegisterSingleton<TInterface>(constructor);
-        }
-
-        public static void LazyConstructAndRegisterSingleton(Type type, Func<object> constructor)
-        {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            ioc.RegisterSingleton(type, constructor);
+            return ioc.GetSingleton(type);
         }
 
         public static void RegisterType<TInterface, TType>()
@@ -152,29 +110,91 @@ namespace MvvmCross
             ioc.RegisterType(tInterface, tType);
         }
 
-        public static T IocConstruct<T>()
+        public static void RegisterSingleton<TInterface>(Func<TInterface> serviceConstructor)
+            where TInterface : class
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            return (T)ioc.IoCConstruct(typeof(T));
+            ioc.RegisterSingleton(serviceConstructor);
         }
 
-        public static object IocConstruct(Type t)
+        public static void RegisterSingleton(Type tInterface, Func<object> serviceConstructor)
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
-            return ioc.IoCConstruct(t);
+            ioc.RegisterSingleton(tInterface, serviceConstructor);
+        }
+
+        public static void RegisterSingleton<TInterface>(TInterface service)
+            where TInterface : class
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.RegisterSingleton(service);
+        }
+
+        public static void RegisterSingleton(Type tInterface, object service)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.RegisterSingleton(tInterface, service);
+        }
+
+        public static T IoCConstruct<T>()
+            where T : class
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.IoCConstruct<T>();
+        }
+
+        public static T IoCConstruct<T>(IDictionary<string, object> arguments)
+            where T : class
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.IoCConstruct<T>(arguments);
+        }
+
+        public static T IoCConstruct<T>(object arguments)
+            where T : class
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.IoCConstruct<T>(arguments);
+        }
+
+        public static T IoCConstruct<T>(params object[] arguments)
+            where T : class
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.IoCConstruct<T>(arguments);
+        }
+
+        public static object IoCConstruct(Type type)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.IoCConstruct(type);
+        }
+
+        public static object IoCConstruct(Type type, IDictionary<string, object> arguments)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.IoCConstruct(type, arguments);
+        }
+
+        public static object IoCConstruct(Type type, object arguments)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.IoCConstruct(type, arguments);
+        }
+
+        public static object IoCConstruct(Type type, params object[] arguments)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.IoCConstruct(type, arguments);
         }
 
         public static void CallbackWhenRegistered<T>(Action<T> action)
             where T : class
         {
-            Action simpleAction = () =>
-                {
-                    var t = Resolve<T>();
-                    action(t);
-                };
-            CallbackWhenRegistered<T>(simpleAction);
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.CallbackWhenRegistered<T>(action);
         }
-        
+
         public static void CallbackWhenRegistered<T>(Action action)
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
@@ -185,6 +205,41 @@ namespace MvvmCross
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
             ioc.CallbackWhenRegistered(type, action);
+        }
+
+        public static void ConstructAndRegisterSingleton<TInterface, TType>()
+            where TInterface : class
+            where TType : class, TInterface
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.ConstructAndRegisterSingleton<TInterface, TType>();
+        }
+
+        public static void LazyConstructAndRegisterSingleton<TInterface, TType>()
+            where TInterface : class
+            where TType : class, TInterface
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.LazyConstructAndRegisterSingleton<TInterface, TType>();
+        }
+
+        public static void LazyConstructAndRegisterSingleton<TInterface>(Func<TInterface> constructor)
+            where TInterface : class
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.LazyConstructAndRegisterSingleton<TInterface>(constructor);
+        }
+
+        public static void LazyConstructAndRegisterSingleton(Type type, Func<object> constructor)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.LazyConstructAndRegisterSingleton(type, constructor);
+        }
+
+        public static IMvxIoCProvider CreateChildContainer()
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            return ioc.CreateChildContainer();
         }
     }
 }

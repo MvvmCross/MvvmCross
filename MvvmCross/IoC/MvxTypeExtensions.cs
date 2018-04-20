@@ -170,7 +170,7 @@ namespace MvvmCross.IoC
                 if (!pair.ServiceTypes.Any())
                     continue;
 
-                var instance = Mvx.IocConstruct(pair.ImplementationType);
+                var instance = Mvx.IoCConstruct(pair.ImplementationType);
                 foreach (var serviceType in pair.ServiceTypes)
                 {
                     Mvx.RegisterSingleton(serviceType, instance);
