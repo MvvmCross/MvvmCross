@@ -358,6 +358,11 @@ namespace MvvmCross.IoC
             InternalSetResolver(interfaceType, new ConstructingSingletonResolver(theConstructor));
         }
 
+        public object IoCConstruct(Type type)
+        {
+            return IoCConstruct(type, default(IDictionary<string, object>));
+        }
+
         public T IoCConstruct<T>()
             where T : class
         {
@@ -398,7 +403,7 @@ namespace MvvmCross.IoC
             return IoCConstruct(type, selectedConstructor, arguments);
         }
 
-        public virtual object IoCConstruct(Type type, IDictionary<string, object> arguments = null)
+        public virtual object IoCConstruct(Type type, IDictionary<string, object> arguments)
         {
             var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
             var firstConstructor = constructors.FirstOrDefault();
