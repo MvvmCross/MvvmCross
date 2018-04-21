@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mvx:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Zero.Core.Pages.MainPage"
+             xmlns:res="clr-namespace:Zero.Core.Resources;assembly=Zero.Core"
+             xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+             Title="Main"
+             >
+  <Grid>
+    <Grid>
+      <BoxView BackgroundColor="Gray" Height="1"/>
+    <Grid VerticalOptions="EndAndExpand">
+       <Grid.ColumnDefinitions>
+         <ColumnDefinition Width="*"/>
+         <ColumnDefinition Width="*"/>
+       </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="1"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <StackLayout Grid.Column="0" Grid.Row="1" HorizontalOptions="Center" HeightRequest="80">
+        <Image Source="Home.png" HorizontalOptions="Center" Scale="0.5"/>
+        <Label Text="主页" HorizontalOptions="Center"/>
+    </StackLayout>
+    <StackLayout Grid.Column="1" Grid.Row="1" HorizontalOptions="Center" HeightRequest="80">
+      <Image Source="about.png" HorizontalOptions="Center" Scale="0.5"/>
+      <Label Text="关于" HorizontalOptions="Center"/>
+    </StackLayout>
+      </Grid>
+    </Grid>
+ </Grid>
+</mvx:MvxContentPage>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvx:MvxFormsApplication 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="Zero.Core.FormsApp"
+    xmlns:mvx="clr-namespace:MvvmCross.Forms.Platform;assembly=MvvmCross.Forms"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms">
+	<mvx:MvxFormsApplication.Resources>
+		<ResourceDictionary>
+            <Color x:Key="Primary">#2196F3</Color>
+            <Color x:Key="PrimaryDark">#1976D2</Color>
+            <Color x:Key="Accent">#96d1ff</Color>
+            <Color x:Key="LightBackgroundColor">#FAFAFA</Color>
+            <Color x:Key="DarkBackgroundColor">#C0C0C0</Color>
+            <Color x:Key="MediumGrayTextColor">#4d4d4d</Color>
+            <Color x:Key="LightTextColor">#ffffff</Color>
+            <Style TargetType="views:MvxNavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="BarTextColor" Value="White" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="TextColor" Value="{StaticResource LightTextColor}" />
+            </Style>
+		</ResourceDictionary>
+	</mvx:MvxFormsApplication.Resources>
+</mvx:MvxFormsApplication>
