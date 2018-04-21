@@ -83,6 +83,13 @@ namespace MvvmCross
             return ioc.GetSingleton(type);
         }
 
+        public static void RegisterType<TType>()
+            where TType : class
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.RegisterType<TType>();
+        }
+
         public static void RegisterType<TInterface, TType>()
             where TInterface : class
             where TType : class, TInterface
@@ -96,6 +103,12 @@ namespace MvvmCross
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
             ioc.RegisterType(constructor);
+        }
+
+        public static void RegisterType(Type tType)
+        {
+            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            ioc.RegisterType(tType);
         }
 
         public static void RegisterType(Type type, Func<object> constructor)
