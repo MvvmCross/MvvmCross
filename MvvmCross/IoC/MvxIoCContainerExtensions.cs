@@ -41,5 +41,16 @@ namespace MvvmCross.IoC
         {
             ioc.RegisterSingleton(type, constructor);
         }
+
+        public static void RegisterType<TType>(this IMvxIoCProvider ioc)
+            where TType : class
+        {
+            ioc.RegisterType<TType, TType>();
+        }
+
+        public static void RegisterType(this IMvxIoCProvider ioc, Type tType)
+        {
+            ioc.RegisterType(tType, tType);
+        }
     }
 }
