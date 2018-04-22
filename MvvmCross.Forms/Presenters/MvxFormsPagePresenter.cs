@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -31,7 +32,6 @@ namespace MvvmCross.Forms.Presenters
         public MvxFormsPagePresenter(IMvxFormsViewPresenter platformPresenter)
         {
             PlatformPresenter = platformPresenter;
-            AttributeTypesToActionsDictionary = platformPresenter.AttributeTypesToActionsDictionary;
         }
 
         protected IMvxFormsViewPresenter PlatformPresenter { get; }
@@ -39,8 +39,9 @@ namespace MvvmCross.Forms.Presenters
         private Application _formsApplication;
         public Application FormsApplication
         {
-            get {
-                if(_formsApplication == null)
+            get
+            {
+                if (_formsApplication == null)
                     _formsApplication = PlatformPresenter.FormsApplication;
                 return _formsApplication;
             }
@@ -69,7 +70,7 @@ namespace MvvmCross.Forms.Presenters
                 if (_viewsContainer == null)
                     _viewsContainer = PlatformPresenter.ViewsContainer;
                 return base.ViewsContainer;
-            } 
+            }
             set => base.ViewsContainer = value;
         }
 
@@ -82,6 +83,19 @@ namespace MvvmCross.Forms.Presenters
                 return base.ViewModelTypeFinder;
             }
             set => base.ViewModelTypeFinder = value;
+        }
+
+        public override Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
+        {
+            get
+            {
+                if (_attributeTypesActionsDictionary == null)
+                {
+                    _attributeTypesActionsDictionary = PlatformPresenter.AttributeTypesToActionsDictionary;
+                }
+                return _attributeTypesActionsDictionary;
+            }
+            set => base.AttributeTypesToActionsDictionary = value;
         }
 
         public virtual Page CreatePage(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute)
