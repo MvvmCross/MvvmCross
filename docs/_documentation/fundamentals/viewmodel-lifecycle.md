@@ -5,8 +5,6 @@ category: Fundamentals
 order: 3
 ---
 
-# MvvmCross 5.x ViewModels lifecycle
-
 Alongside the new [MvxNavigationService](https://www.mvvmcross.com/documentation/fundamentals/navigation), MvvmCross provides a new lifecycle for ViewModels with many enhancements such as async initialization. The standard lifecycle is:
 
 1. Construction: Called when the object is instantiated. You can use Dependency Injection here to introduce all dependencies!
@@ -160,7 +158,6 @@ public class MyViewModel : MvxViewModel<MyParameterModel>
     // ...
 }
 ```
-
 
 ## View callbacks
 
