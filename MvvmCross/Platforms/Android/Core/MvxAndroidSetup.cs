@@ -38,13 +38,9 @@ namespace MvvmCross.Platforms.Android.Core
             _applicationContext = applicationContext;
         }
 
-        #region IMvxAndroidGlobals Members
-
         public virtual Assembly ExecutableAssembly => ViewAssemblies.FirstOrDefault() ?? GetType().Assembly;
 
         public Context ApplicationContext => _applicationContext;
-
-        #endregion IMvxAndroidGlobals Members
 
         protected override void InitializePlatformServices()
         {
