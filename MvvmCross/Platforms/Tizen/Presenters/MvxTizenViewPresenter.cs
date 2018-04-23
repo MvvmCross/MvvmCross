@@ -5,19 +5,19 @@
 
 using System;
 using MvvmCross.Presenters;
+using MvvmCross.Presenters.Attributes;
 
-namespace MvvmCross.Platform.Tizen.Presenters
+namespace MvvmCross.Platforms.Tizen.Presenters
 {
     public class MvxTizenViewPresenter : MvxAttributeViewPresenter, IMvxTizenViewPresenter
     {
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public override void RegisterAttributeTypes()
         {
-            throw new NotImplementedException();
         }
     }
 }
