@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid81;uap10.0.16299</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid81</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid81;tizen40;uap10.0.16299</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid81;tizen40</TargetFrameworks>
     <AssemblyName>MvvmCross.Forms</AssemblyName>
     <RootNamespace>MvvmCross.Forms</RootNamespace>
     <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
@@ -81,7 +81,10 @@ This package contains MvvmCross to use with Xamarin.Forms</Description>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">
     <Compile Include="Platforms\Tizen\**\*.cs" />
     <Compile Include="Platforms\Xamarin-common\**\*.cs" />
-    <PackageReference Include="Tizen.NET" Version="4.0.0" />
+    <PackageReference Include="Tizen.NET" Version="4.0.0">
+      <ExcludeAssets>Runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms.Platform.Tizen" Version="2.5.1.444934" />
   </ItemGroup>
   
   <ItemGroup>
