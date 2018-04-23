@@ -696,6 +696,79 @@ namespace MvvmCross.Forms.Presenters
             }
         }
 
+        public virtual Page[] CurrentPageTree
+        {
+            get
+            {
+                var pages = new List<Page>();
+                var builder = BuildPageTree();
+                builder(pages);
+                return pages.ToArray();
+            }
+        }
+
+        protected virtual Action<List<Page>> BuildPageTree(Page rootPage = null)
+        {
+            if (rootPage == null)
+                rootPage = FormsApplication.MainPage;
+
+            Func<List<Page>, List<Page>> pageListBuilder = (list) =>
+            {
+                list.Add(rootPage);
+                return list;
+            };
+
+            if (rootPage is NavigationPage navigationPage)
+            {
+                // Check for modals
+                var topMostModal = navigationPage?.Navigation?.ModalStack?.LastOrDefault();
+                if (topMostModal != null && topMostModal != navigationPage)
+                {
+                    var currentModalNav = BuildPageTree(topMostModal);
+                    if (currentModalNav != null) return (List<Page> list) => currentModalNav(pageListBuilder(list));
+                }
+
+                if (navigationPage.CurrentPage != null)
+                {
+                    // Check if there's a nested navigation
+                    var navPage = BuildPageTree(navigationPage.CurrentPage);
+                    if (navPage != null) return (List<Page> list) => navPage(pageListBuilder(list));
+                }
+            }
+
+            // The page isn't a navigation page, so check
+            // to see if it's a master detail, and if so, check
+            // the Detail and Master pages for a navigation page
+            if (rootPage is MasterDetailPage masterDetailsPage)
+            {
+                if (masterDetailsPage.Detail != null)
+                {
+                    var navDetailPage = BuildPageTree(masterDetailsPage.Detail);
+                    if (navDetailPage != null) return (List<Page> list) => navDetailPage(pageListBuilder(list));
+                }
+
+                if (masterDetailsPage.Master != null)
+                {
+                    var navMasterPage = BuildPageTree(masterDetailsPage.Master);
+                    if (navMasterPage != null) return (List<Page> list) => navMasterPage(pageListBuilder(list));
+                }
+            }
+
+            if (rootPage is MultiPage<Page> multiPage)
+            {
+                var currentTab = multiPage.CurrentPage;
+                if (currentTab != null)
+                {
+                    var currentTabPage = BuildPageTree(currentTab);
+
+                    return (List<Page> list) => currentTabPage(pageListBuilder(list));
+                }
+            }
+
+            // Nothing, all out of luck!
+            return (List<Page> list) => pageListBuilder(list);
+        }
+
         public virtual NavigationPage TopNavigationPage(Page rootPage = null)
         {
             if (rootPage == null)
