@@ -18,5 +18,9 @@ namespace MvvmCross.Forms.Presenters
         IMvxViewModelLoader ViewModelLoader { get; set; }
 
         Page CreatePage(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute);
+
+        Page[] CurrentPageTree { get; }
+
+        NavigationPage TopNavigationPage(Page rootPage = null);
     }
 }
