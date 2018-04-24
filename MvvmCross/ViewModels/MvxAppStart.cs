@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading;
+using System.Threading.Tasks;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
@@ -28,10 +29,10 @@ namespace MvvmCross.ViewModels
             if (Interlocked.CompareExchange(ref startHasCommenced, 1, 0) == 1)
                 return;
 
-            Startup(hint);
+            Startup(hint).GetAwaiter().GetResult();
         }
 
-        protected virtual void Startup(object hint = null)
+        public async Task StartAsync(object hint = null)
         {
             var applicationHint = ApplicationStartup(hint);
             if (applicationHint != null)

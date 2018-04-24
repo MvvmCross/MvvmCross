@@ -139,6 +139,9 @@ namespace Playground.Core.ViewModels
 
             await base.Initialize();
 
+            // Uncomment this to demonstrate use of StartAsync for async first navigation
+            // await Task.Delay(5000);
+
             _mvxViewModelLoader.LoadViewModel(MvxViewModelRequest.GetDefaultRequest(typeof(ChildViewModel)),
                 new SampleModel
                 {
