@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 using MvvmCross.IoC;
 using MvvmCross.Logging;
 using MvvmCross.Plugin;
@@ -45,9 +46,10 @@ namespace MvvmCross.ViewModels
         /// <summary>
         /// Any initialization steps that need to be done on the UI thread
         /// </summary>
-        public virtual void Startup()
+        public virtual Task Startup()
         {
             MvxLog.Instance.Trace("AppStart: Application Startup - On UI thread");
+            return Task.CompletedTask;
         }
 
         /// <summary>
