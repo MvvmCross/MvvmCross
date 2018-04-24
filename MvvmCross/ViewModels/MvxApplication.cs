@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 using MvvmCross.IoC;
 using MvvmCross.Plugin;
 
@@ -45,9 +46,10 @@ namespace MvvmCross.ViewModels
         /// Any initialization steps that need to be done on the UI thread
         /// </summary>
         /// <param name="hint"></param>
-        public virtual void Startup(object hint)
+        public virtual Task Startup(object hint)
         {
             // do nothing
+            return Task.CompletedTask;
         }
 
         /// <summary>
