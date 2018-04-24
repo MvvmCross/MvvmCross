@@ -20,12 +20,15 @@ namespace Playground.Droid.Views
     public class SplitMasterView : MvxFragment<SplitMasterViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {
         private IMenuItem previousMenuItem;
+        private NavigationView _navigationView;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var ignore = base.OnCreateView(inflater, container, savedInstanceState);
 
             var view = this.BindingInflate(Resource.Layout.SplitMasterView, null);
+            _navigationView = view.FindViewById<NavigationView>(Resource.Id.navigation_view);
+            _navigationView.SetNavigationItemSelectedListener(this);
 
             return view;
         }
@@ -45,6 +48,7 @@ namespace Playground.Droid.Views
         private async Task Navigate(int itemId)
         {
             ((SplitRootView)Activity).DrawerLayout.CloseDrawers();
+            ((SplitRootView)Activity).ViewModel.ShowDetailCommand.Execute();
             await Task.Delay(TimeSpan.FromMilliseconds(250));
 
             //switch (itemId)

@@ -306,6 +306,16 @@ namespace MvvmCross.Platforms.Android.Presenters
             MvxFragmentPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
+            // if AllowOnlyOneInstance is true, then return if fragment already exists
+            if (attribute.AllowOnlyOneInstance)
+            {
+                var fragmentName = FragmentJavaName(attribute.ViewType);
+                var fragment = CurrentActivity.FragmentManager.FindFragmentByTag(fragmentName);
+                
+                if (fragment != null && fragment.IsAdded)
+                    return;
+            }
+
             // if attribute has a Fragment Host, then show it as nested and return
             if (attribute.FragmentHostViewType != null)
             {
