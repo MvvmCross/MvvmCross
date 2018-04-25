@@ -139,7 +139,7 @@ namespace MvvmCross.Platforms.Tizen.Core
     public class MvxTizenSetup<TApplication> : MvxTizenSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
