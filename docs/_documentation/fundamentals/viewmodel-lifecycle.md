@@ -190,7 +190,7 @@ There has been a thread going on on the [Xamarin forums](https://forums.xamarin.
 
 |           | Appearing             | Appeared       | Disappearing         | Disappeared | 
 | iOS       | ViewWillAppear        | ViewDidAppear  | ViewWillDisappear    | ViewDidDisappear | 
-| Android   | OnAttachedToWindow    | OnGlobalLayout | OnPause              | OnDetachedToWindow | 
+| Android   | OnAttachedToWindow    | OnGlobalLayout | OnPause              | OnDetachedFromWindow | 
 | UWP       | Loading               | OnLoaded       | Unloaded             | OnUnloaded |    
 
 
