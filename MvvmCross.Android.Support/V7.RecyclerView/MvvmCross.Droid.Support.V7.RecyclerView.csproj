@@ -17,10 +17,11 @@ This package contains Support v7 RecyclerView support for MvvmCross.</Descriptio
   
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.V7.RecyclerView" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Build.Download" Version="0.4.9" />
   </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
   </ItemGroup>
+
+  <Import Project="..\..\XamarinBuild.targets" />
 </Project>
