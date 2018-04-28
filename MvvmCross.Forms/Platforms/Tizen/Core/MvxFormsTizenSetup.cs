@@ -130,6 +130,6 @@ namespace MvvmCross.Forms.Platforms.Tizen.Core
 
         protected override Application CreateFormsApplication() => new TFormsApplication();
 
-        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
     }
 }
