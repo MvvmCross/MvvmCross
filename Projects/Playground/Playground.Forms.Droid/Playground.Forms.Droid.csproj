@@ -154,9 +154,6 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter">
       <Version>27.0.2</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Build.Download">
-      <Version>0.4.9</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross.Android.Support\Design\MvvmCross.Droid.Support.Design.csproj">

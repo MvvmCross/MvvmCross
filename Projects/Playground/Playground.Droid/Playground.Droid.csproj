@@ -199,9 +199,6 @@
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat">
       <Version>27.0.2</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Build.Download">
-      <Version>0.4.9</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\mvvmcross_logo.png" />
@@ -219,4 +216,6 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\mvvmcross_logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+
+  <Import Project="..\..\..\XamarinBuild.targets"/>
 </Project>
