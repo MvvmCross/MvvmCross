@@ -92,6 +92,22 @@ In our case, we want to use the default `Setup` class MvvmCross provides for iOS
 
 That's it! MvvmCross is up and running after this small addition.
 
+### Some more details about the Setup class
+
+Every MvvmCross UI project requires a `Setup` class, but if your app is fairly simple, like the TipCalc is, then you can safely use the default one, provided by the framework.
+
+The `Setup` class is responsible for performing the initialization of the MvvmCross framework, including:
+
+- The IoC Container and DI engine
+- The Data-Binding engine
+- The ViewModel / View lookups
+- The whole navigation system
+- Plugins
+
+Finally, the `Setup` class is also responsible for initializing your `App` class.
+
+Luckily for us, all this functionality is provided for you automatically, unless you want / need to use a custom `Setup` class (since it is an excellent place to register your own services / plugins, it is often the case).
+
 ## Add your View
 
 ### Create an initial UIViewController
