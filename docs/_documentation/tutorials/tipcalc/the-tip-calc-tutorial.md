@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: The Tip Calc tutorial
+title: The TipCalc tutorial
 category: Tutorials
 order: 1
 ---

@@ -1,9 +1,10 @@
 ---
 layout: documentation
-title: The TipCalc navigation
+title: TipCalc extra - Navigation
 category: Tutorials
-order: 3
+order: 10
 ---
+
 This article will cover some of the techniques available within MvvmCross for navigating between Page-level **ViewModels**.
 
 ### What do we mean by Page?

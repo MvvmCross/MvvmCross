@@ -1,8 +1,8 @@
 ---
 layout: documentation
-title: A Xamarin.Android UI Project
+title: TipCalc Android Project
 category: Tutorials
-order: 4
+order: 3
 ---
 We started with the goal of creating an app to help calculate what tip to leave in a restaurant.
 

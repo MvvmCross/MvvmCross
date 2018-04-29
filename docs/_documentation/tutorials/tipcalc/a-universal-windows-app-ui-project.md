@@ -2,7 +2,7 @@
 layout: documentation
 title: A Universal Windows App UI Project
 category: Tutorials
-order: 7
+order: 6
 ---
 We started with the goal of creating an app to help calculate what tip to leave in a restaurant
 

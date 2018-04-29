@@ -1,8 +1,8 @@
 ---
 layout: documentation
-title: A Xamarin.iOS UI Project
+title: TipCalc iOS Project
 category: Tutorials
-order: 5
+order: 4
 ---
 We started with the goal of creating an app to help calculate what tip to leave in a restaurant
 

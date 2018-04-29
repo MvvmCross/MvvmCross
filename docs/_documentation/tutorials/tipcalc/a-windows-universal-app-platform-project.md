@@ -2,7 +2,7 @@
 layout: documentation
 title: A Windows Universal App Platform Project
 category: Tutorials
-order: 6
+order: 5
 ---
 We started with the goal of creating an app to help calculate what tip to leave in a restaurant
 

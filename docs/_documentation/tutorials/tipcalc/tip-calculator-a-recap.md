@@ -2,7 +2,7 @@
 layout: documentation
 title: Tip Calculator - A recap
 category: Tutorials
-order: 9
+order: 8
 ---
 Over the course of these articles, we've covered the complete `Tip Calc` app on 5 platforms from one shared PCL code library using Mvvm.
 
