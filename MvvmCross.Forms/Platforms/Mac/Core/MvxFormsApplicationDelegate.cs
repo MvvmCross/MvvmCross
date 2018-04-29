@@ -49,6 +49,8 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
 
             instance.PlatformSetup<MvxFormsMacSetup>().FormsApplication.SendStart();
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
+
+            // Unlike most other overrides, this should be left here so that the base FormsApplicationDelegate override is called
             base.DidFinishLaunching(notification);
         }
 
@@ -85,7 +87,6 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
         public override void WillTerminate(Foundation.NSNotification notification)
         {
             FireLifetimeChanged(MvxLifetimeEvent.Closing);
-            base.WillTerminate(notification);
         }
 
         private void FireLifetimeChanged(MvxLifetimeEvent which)

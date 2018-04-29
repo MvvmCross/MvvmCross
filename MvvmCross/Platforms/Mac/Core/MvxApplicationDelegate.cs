@@ -37,7 +37,6 @@ namespace MvvmCross.Platforms.Mac.Core
             RunAppStart(notification);
 
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
-            base.DidFinishLaunching(notification);
         }
 
         protected virtual void RunAppStart(object hint = null)
@@ -65,7 +64,6 @@ namespace MvvmCross.Platforms.Mac.Core
         public override void WillTerminate(Foundation.NSNotification notification)
         {
             FireLifetimeChanged(MvxLifetimeEvent.Closing);
-            base.WillTerminate(notification);
         }
 
         private void FireLifetimeChanged(MvxLifetimeEvent which)

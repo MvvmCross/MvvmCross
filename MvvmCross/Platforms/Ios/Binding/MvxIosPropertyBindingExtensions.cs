@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -14,38 +14,38 @@ namespace MvvmCross.Platforms.Ios.Binding
         public static string BindValueChanged(this UIControl uiControl)
             => MvxIosPropertyBinding.UIControl_ValueChanged;
 
-		public static string BindTouchDown(this UIControl uiControl)
-			=> MvxIosPropertyBinding.UIControl_TouchDown;
+        public static string BindTouchDown(this UIControl uiControl)
+            => MvxIosPropertyBinding.UIControl_TouchDown;
 
-		public static string BindTouchDownRepeat(this UIControl uiControl)
-			=> MvxIosPropertyBinding.UIControl_TouchDownRepeat;
+        public static string BindTouchDownRepeat(this UIControl uiControl)
+            => MvxIosPropertyBinding.UIControl_TouchDownRepeat;
 
-		public static string BindTouchDragInside(this UIControl uiControl)
-			=> MvxIosPropertyBinding.UIControl_TouchDragInside;
+        public static string BindTouchDragInside(this UIControl uiControl)
+            => MvxIosPropertyBinding.UIControl_TouchDragInside;
 
-		public static string BindPrimaryActionTriggered(this UIControl uiControl)
-			=> MvxIosPropertyBinding.UIControl_PrimaryActionTriggered;
+        public static string BindPrimaryActionTriggered(this UIControl uiControl)
+            => MvxIosPropertyBinding.UIControl_PrimaryActionTriggered;
 
-		public static string BindEditingDidBegin(this UIControl uiControl)
-			=> MvxIosPropertyBinding.UIControl_EditingDidBegin;
+        public static string BindEditingDidBegin(this UIControl uiControl)
+            => MvxIosPropertyBinding.UIControl_EditingDidBegin;
 
-		public static string BindEditingChanged(this UIControl uiControl)
-			=> MvxIosPropertyBinding.UIControl_EditingChanged;
+        public static string BindEditingChanged(this UIControl uiControl)
+            => MvxIosPropertyBinding.UIControl_EditingChanged;
 
-		public static string BindEditingDidEnd(this UIControl uiControl)
-			=> MvxIosPropertyBinding.UIControl_EditingDidEnd;
+        public static string BindEditingDidEnd(this UIControl uiControl)
+            => MvxIosPropertyBinding.UIControl_EditingDidEnd;
 
-		public static string BindEditingDidEndOnExit(this UIControl uiControl)
-			=> MvxIosPropertyBinding.UIControl_EditingDidEndOnExit;
+        public static string BindEditingDidEndOnExit(this UIControl uiControl)
+            => MvxIosPropertyBinding.UIControl_EditingDidEndOnExit;
 
-		public static string BindAllTouchEvents(this UIControl uiControl)
-			=> MvxIosPropertyBinding.UIControl_AllTouchEvents;
+        public static string BindAllTouchEvents(this UIControl uiControl)
+            => MvxIosPropertyBinding.UIControl_AllTouchEvents;
 
-		public static string BindAllEditingEvents(this UIControl uiControl)
-			=> MvxIosPropertyBinding.UIControl_AllEditingEvents;
+        public static string BindAllEditingEvents(this UIControl uiControl)
+            => MvxIosPropertyBinding.UIControl_AllEditingEvents;
 
-		public static string BindAllEvents(this UIControl uiControl)
-			=> MvxIosPropertyBinding.UIControl_AllEvents;
+        public static string BindAllEvents(this UIControl uiControl)
+            => MvxIosPropertyBinding.UIControl_AllEvents;
 
         public static string BindVisibility(this UIView uiView)
             => MvxIosPropertyBinding.UIView_Visibility;

@@ -21,7 +21,7 @@ using System.Linq;
 
 namespace MvvmCross.Forms.Platforms.Mac.Core
 {
-    public abstract class MvxFormsMacSetup : MvxMacSetup
+    public abstract class MvxFormsMacSetup : MvxMacSetup, IMvxFormsSetup
     {
         private List<Assembly> _viewAssemblies;
         private Application _formsApplication;
@@ -34,6 +34,12 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
             }
 
             return _viewAssemblies;
+        }
+
+        protected override void InitializeIoC()
+        {
+            base.InitializeIoC();
+            Mvx.RegisterSingleton<IMvxFormsSetup>(this);
         }
 
         protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
@@ -62,10 +68,18 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
 
         protected abstract Application CreateFormsApplication();
 
+        protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
+        {
+            var formsPagePresenter = new MvxFormsPagePresenter(viewPresenter);
+            Mvx.RegisterSingleton(formsPagePresenter);
+            return formsPagePresenter;
+        }
+
         protected override IMvxMacViewPresenter CreateViewPresenter()
         {
             var presenter = new MvxFormsMacViewPresenter(ApplicationDelegate, FormsApplication);
             Mvx.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
+            presenter.FormsPagePresenter = CreateFormsPagePresenter(presenter);
             return presenter;
         }
 
