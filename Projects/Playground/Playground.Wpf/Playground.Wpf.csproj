@@ -160,6 +160,10 @@
       <Project>{49f965f5-5824-4bbe-94ea-0178f848abdb}</Project>
       <Name>MvvmCross</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.Platforms.Wpf.csproj">
+      <Project>{fe6715f0-bb2d-4ed9-bf2b-30124ecb3aec}</Project>
+      <Name>MvvmCross.Platforms.Wpf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Playground.Core\Playground.Core.csproj">
       <Project>{fe374d1a-1a19-49bc-8e93-d52399a9c3f3}</Project>
       <Name>Playground.Core</Name>

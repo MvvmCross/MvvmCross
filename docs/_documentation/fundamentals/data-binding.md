@@ -1046,14 +1046,28 @@ The following tables shows all the bindings built into MvvmCross.
 
 > When using extension method based bindings you will have to include the relevant using namespace to access the extension methods. Additionally, extension method based bindings are only supported starting with MvvmCross 5.
 
-**Android - `using MvvmCross.Binding.Droid`**
+**Android**
 
-Base Control | String | Extension method
----- | --------- | ---------
+```Text
+# MvvmCross 6.x.x 
+using MvvmCross.Platforms.Android.Binding
+# MvvmCross 5.x.x
+using MvvmCross.Binding.Droid
+```
+
+Base Control | String | Extension method | Mvx version introduced
+---- | --------- | --------- | ---------
 Android.Views.View | Visible | BindVisible()
 Android.Views.View | Hidden | BindHidden()
 Android.Views.View | Click | BindClick()
 Android.Views.View | LongClick | BindLongClick()
+Android.Views.View | Margin | BindMargin() | 6.0.0
+Android.Views.View | MarginLeft | BindMarginLeft() | 6.0.0
+Android.Views.View | MarginRight | BindMarginRight() | 6.0.0
+Android.Views.View | MarginTop | BindMarginTop() | 6.0.0
+Android.Views.View | MarginBottom | BindMarginBottom() | 6.0.0
+Android.Views.View | MarginStart | BindMarginStart() | 6.0.0
+Android.Views.View | MarginEnd | BindMarginEnd() | 6.0.0
 Android.Widget.TextView | Text | BindText()
 Android.Widget.TextView | TextFormatted | BindTextFormatted()
 Android.Widget.CompoundButton | Checked | BindChecked()
@@ -1079,7 +1093,14 @@ MvvmCross.Binding.Droid.Views.MvxListView | SelectedItem | BindSelectedItem()
 MvvmCross.Binding.Droid.Views.MvxExpandableListView | SelectedItem | BindSelectedItem()
 MvvmCross.Binding.Droid.Views.MvxRadioGroup | SelectedItem | BindSelectedItem()
 
-**Android - `using MvvmCross.Plugins.Color.Droid`**
+**Android**
+
+```Text
+# MvvmCross 6.x.x 
+using MvvmCross.Plugin.Color.Platforms.Android.Binding
+# MvvmCross 5.x.x
+using MvvmCross.Plugins.Color.Droid
+```
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -1106,7 +1127,14 @@ Android.Support.V7.Preferences.ListPreference | Value | BindValue()
 Android.Support.V7.Preferences.EditTextPreference | Text | BindText()
 Android.Support.V7.Preferences.TwoStatePreference | Checked | BindChecked()
 
-**iOS - `using MvvmCross.Binding.iOS`**
+**iOS**
+
+```Text
+# MvvmCross 6.x.x 
+using MvvmCross.Platforms.Ios.Binding
+# MvvmCross 5.x.x
+using MvvmCross.Binding.iOS
+```
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -1149,7 +1177,14 @@ UIKit.UIView | Visibility | BindVisibility()
 UIKit.UIView | TwoFingerTap | BindTwoFingerTap()
 UIKit.UIView | LayerBorderWidth | BindLayerBorderWidth()
 
-**Mac - `using MvvmCross.Binding.Mac`**
+**Mac**
+
+```Text
+# MvvmCross 6.x.x 
+using MvvmCross.Platforms.Mac.Binding
+# MvvmCross 5.x.x
+using MvvmCross.Binding.Mac
+```
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -1167,7 +1202,14 @@ AppKit.NSMenuItem | State | BindState()
 AppKit.NSSearchField | Text | BindText()
 AppKit.NSTabViewController | SelectedTabViewItemIndex | BindSelectedTabViewItemIndex()
 
-**tvOS - `using MvvmCross.Binding.tvOS`**
+**tvOS**
+
+```Text
+# MvvmCross 6.x.x 
+using MvvmCross.Platforms.Tvos.Binding
+# MvvmCross 5.x.x
+using MvvmCross.Binding.tvOS
+```
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -1193,7 +1235,14 @@ UIKit.UIView | Visibility | BindVisibility()
 UIKit.UIView | TwoFingerTap | BindTwoFingerTap()
 UIKit.UIView | LayerBorderWidth | BindLayerBorderWidth()
 
-**UWP - `using MvvmCross.Binding.Uwp`**
+**UWP**
+
+```Text
+# MvvmCross 6.x.x 
+using MvvmCross.Platforms.Uap.Binding
+# MvvmCross 5.x.x
+using MvvmCross.Binding.Uwp
+```
 
 Base Control | String | Extension method
 ---- | --------- | ---------
@@ -1201,7 +1250,14 @@ Windows.UI.Xaml.FrameworkElement | Visible | BindVisible()
 Windows.UI.Xaml.FrameworkElement | Collapsed | BindCollapsed()
 Windows.UI.Xaml.FrameworkElement | Hidden | BindHidden()
 
-**WPF - `using MvvmCross.BindingEx.Wpf` / `using MvvmCross.BindingEx.WindowsCommon`**
+**WPF**
+
+```Text
+# MvvmCross 6.x.x 
+using MvvmCross.Platforms.Wpf.Binding
+# MvvmCross 5.x.x
+using MvvmCross.BindingEx.Wpf / using MvvmCross.BindingEx.WindowsCommon
+```
 
 Base Control | String | Extension method
 ---- | --------- | ---------
