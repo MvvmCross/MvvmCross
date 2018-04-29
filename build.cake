@@ -121,6 +121,7 @@ Task("Build")
     var buildItems = new string[] 
     {
         "./MvvmCross/MvvmCross.csproj",
+        "./MvvmCross/MvvmCross.Platforms.Wpf.csproj",
         "./MvvmCross.Android.Support/Fragment/MvvmCross.Droid.Support.Fragment.csproj",
         "./MvvmCross.Android.Support/Design/MvvmCross.Droid.Support.Design.csproj",
         "./MvvmCross.Android.Support/Core.Utils/MvvmCross.Droid.Support.Core.Utils.csproj",
