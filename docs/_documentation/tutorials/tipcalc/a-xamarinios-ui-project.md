@@ -27,7 +27,7 @@ Same as we did with the _Core_ project, we will use a standard template to creat
 
 ## Create a new iOS Project
 
-Add a new project to your solution - a 'Blank App (iOS)' application with name `TipCalc.UI.iOS`.
+Add a new project to your solution - a 'Blank App (iOS)' application with name `TipCalc.iOS`.
 
 Within this, you'll find the normal iOS application constructs:
 
@@ -45,6 +45,12 @@ Open the Nuget Package Manager and search for the package `MvvmCross`.
 If you don't really enjoy the NuGet UI experience, then you can alternatively open the Package Manager Console, and type:
 
     Install-Package MvvmCross
+
+## Delete ViewController.cs and Main.storyboard
+
+Because we will add our own view.
+
+After you have deleted those, open the `Info.plist` file and under the 'Deployment Info' section, remove the text in the 'Main Interface' input (leave it blank).
 
 ## Add a reference to TipCalc.Core project
 
@@ -108,15 +114,13 @@ Just as we did with Android, we won't go into depth here about how to use the XI
 
 Drag/Drop from the 'Toolbox' to add:
 
-* A `Label` which text should be `SubTotal` and a `TextField` named `SubTotalTextField`, for editing the value
-* A `Label` which text should be `Generosity` and a `Slider` named `GenerositySlider`, for editing the "generosity"
-* a `Label` named `TipLabel,` for showing the `Tip` result
+- A `Label` which text should be `SubTotal` and a `TextField` named `SubTotalTextField`, for editing the value
+- A `Label` which text should be `Generosity` and a `Slider` named `GenerositySlider`, for editing the "generosity"
+- a `Label` named `TipLabel,` for showing the `Tip` result
 
 Set the Maximum Value of the `Slider` to '100'.
 
-Using drag and drop, you should be able to quite quickly generate a design similar to:
-
-![iOS design]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_Touch_Design.png)
+Using drag and drop, you should be able to quite quickly generate a design similar what we accomplished on Android.
 
 ### Edit TipView.cs
 

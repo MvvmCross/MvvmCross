@@ -25,7 +25,7 @@ Same as we did with the _Core_ project, we will use a standard template to creat
 
 ## Create a new Android project
 
-Add a new project to your solution - a 'Blank App (Android)' application with name `TipCalc.UI.Droid`
+Add a new project to your solution - a 'Blank App (Android)' application with name `TipCalc.Droid`
 
 Within this, you'll find the normal Android application constructs:
 
@@ -63,7 +63,7 @@ using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Views;
 using TipCalc.Core;
 
-namespace TipCalc.UI.Droid
+namespace TipCalc.Droid
 {
     [Application]
     public class MainApplication : MvxAndroidApplication<MvxAndroidSetup<App>, App>
@@ -254,7 +254,7 @@ With our .axml layout complete, we can now move back to C# and add an `Activity`
 
 This `Activity` will act as our MVVM `View`. Please follow these steps:
 
-- Create a `Views` folder within your TipCalc.UI.Droid project.
+- Create a `Views` folder within your TipCalc.Droid project.
 
 - Within this folder create a new C# class called `TipView`.
 
@@ -288,7 +288,7 @@ using Android.OS;
 using MvvmCross.Platforms.Android.Views;
 using TipCalc.Core.ViewModels;
 
-namespace TipCalc.UI.Droid.Views
+namespace TipCalc.Droid.Views
 {
     [Activity(Label = "Tip Calculator", MainLauncher = true)]
     public class TipView : MvxActivity<TipViewModel>
