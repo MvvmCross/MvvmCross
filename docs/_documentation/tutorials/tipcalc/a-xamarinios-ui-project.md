@@ -4,201 +4,123 @@ title: TipCalc iOS Project
 category: Tutorials
 order: 4
 ---
-We started with the goal of creating an app to help calculate what tip to leave in a restaurant
+
+We started with the goal of creating an app to help calculate what tip to leave in a restaurant.
 
 We had a plan to produce a UI based on this concept:
 
-![Sketch](../../assets/img/tutorials/tipcalc/TipCalc_Sketch.png)
+![Sketch]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_Sketch.png)
 
-To satisfy this we built a 'Core' Portable Class Library project which contained:
+To satisfy this we built a 'Core' .NET Standard project which contained:
 
-* our 'business logic' - `ICalculation`
-* our ViewModel - `TipViewModel`
-* our `App` which contains the application wiring, including the start instructions.
+- Our 'business logic' - `ICalculationService`
+- Our ViewModel - `TipViewModel`
+- Our `App` - which contains some bootstrapping code.
 
-We then added our first User Interface - for Xamarin.Android:
+We even added our first User Interface - for Xamarin.Android:
 
-![Android TipCalc Styled](../../assets/img/tutorials/tipcalc/TipCalc_Android_Styled.png)
+![Android TipCalc]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_Android.png)
 
-For our next project, let's shift to Xamarin.iOS.
+Now let's move forward to Xamarin.iOS.
 
-To create an iPhone MvvmCross UI, you can use the Visual Studio project template wizards, but here we'll instead build up a new project 'from empty', just as we did for the Core and Android projects.
+Same as we did with the _Core_ project, we will use a standard template to create the iOS project.
 
-Also, to work with iPhone, for now we will switch to working on the Mac with Xamarin Studio
+## Create a new iOS Project
 
-## Create a new iOS UI Project
-
-Add a new project to your solution - a 'iOS' -> 'Single View App' application with name `TipCalc.UI.iOS`
+Add a new project to your solution - a 'Blank App (iOS)' application with name `TipCalc.UI.iOS`.
 
 Within this, you'll find the normal iOS application constructs:
 
-* the Resources folder
-* the AppDelegate.cs class
-* the Entitlements.plist 'configuration' information
-* the Info.plist 'configuration' information
-* the Main.cs class
-* the Main.storyboard view
+- The `Resources` folder
+- The `AppDelegate.cs` class
+- The `Entitlements.plist`, which contains certain configurations - we won't touch it for now.
+- The `Info.plist` file, which is the equivalent for an Android ApplicationManifest.
+- The `Main.cs` class
+- The `Main.storyboard` view
 
 ## Install MvvmCross
 
-Click the `Add NuGet Packages...` item in the `Project` menu.  Install `MvvmCross.Binding`.
+Open the Nuget Package Manager and search for the package `MvvmCross`.
 
-## Add a reference to TipCalc.Core.csproj
+If you don't really enjoy the NuGet UI experience, then you can alternatively open the Package Manager Console, and type:
 
-Add a reference to your `TipCalc.Core` project - the project we created in the last step which included:
+    Install-Package MvvmCross
 
-* your `Calculation` service, 
-* your `TipViewModel` 
-* your `App` wiring.
+## Add a reference to TipCalc.Core project
 
-## Add a Setup class
+Add a reference to your `TipCalc.Core` project - the project we created in the first step.
 
-Just as we said during the Android construction *Every MvvmCross UI project requires a `Setup` class*
+## Edit the AppDelegate.cs file
 
-This class sits in the root namespace (folder) of our UI project and performs the initialization of the MvvmCross framework and your application, including:
+The `AppDelegate` class plays a very important role on iOS apps, as it provides a set of callback that the OS uses to inform you about events in your application's lifecycle.
 
-  * the Inversion of Control (IoC) system
-  * the MvvmCross data-binding
-  * your `App` and its collection of `ViewModel`s
-  * your UI project and its collection of `View`s
-
-Most of this functionality is provided for you automatically. Within your iOS UI project all you have to supply are:
-
-- your `App` - your link to the business logic and `ViewModel` content
-
-For `TipCalc` here's all that is needed in Setup.cs:
-
-```c#
-using MvvmCross.iOS.Platform;
-using MvvmCross.iOS.Views.Presenters;
-using MvvmCross.Core.ViewModels;
-using TipCalc.Core;
-
-namespace TipCalc.UI.iOS
-{
-public class Setup : MvxIosSetup
-{
-    public Setup(MvxApplicationDelegate appDelegate, IMvxIosViewPresenter presenter)
-    : base(appDelegate, presenter)
-    {
-    }
-
-    protected override IMvxApplication CreateApp ()
-    {
-        return new App();
-    }
-}
-}
-```
-
-## Modify the AppDelegate to use Setup
-
-Your `AppDelegate` provides a set of callback that iOS uses to inform you about events in your application's lifecycle.
-
-To use this `AppDelegate` within MvvmCross, we need to:
-
-* modify it so that it inherits from `MvxApplicationDelegate` instead of `UIApplicationDelegate`
-
-        public partial class AppDelegate : MvxApplicationDelegate
-
-* modify it so that the method that is called on startup (FinishedLaunching) does some UI application setup:
-
-   * create a new presenter - this is the class that will determine how Views are shown - for this sample, we choose a 'standard' one:
-
-```c#
-var presenter = new MvxIosViewPresenter(this, Window);
-```
-
-   * create and call Initialize on a `Setup`:
-
-```c#
-var setup = new Setup(this, presenter);
-setup.Initialize();
-```
-
-   * with `Setup` completed, use the `Mvx` Inversion of Control container in order to find and `Start` the `IMvxAppStart` object:
-
-```c#
-var startup = Mvx.Resolve<IMvxAppStart>();
-startup.Start();
-```
-
-Together, this looks like:
+It will also allow us to specify the MvvmCross framework some key classes to be used for initialization, the same way the Android MainApplication did. This is what your AppDelegate class should look like:
 
 ```c#
 using Foundation;
 using UIKit;
-using MvvmCross.iOS.Platform;
-using MvvmCross.iOS.Views.Presenters;
-using MvvmCross.Platform;
-using MvvmCross.Core.ViewModels;
+using TipCalc.Core;
+using MvvmCross.Platforms.Ios.Core;
 
-namespace TipCalc.UI.iOS
+namespace TipCalc.iOS
 {
-[Register("AppDelegate")]
-public class AppDelegate : MvxApplicationDelegate
-{
-    public override UIWindow Window {
-        get;
-        set;
-    }
-
-    public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+    [Register(nameof(AppDelegate))]
+    public class AppDelegate : MvxApplicationDelegate<MvxIosSetup<App>, App>
     {
-        Window = new UIWindow(UIScreen.MainScreen.Bounds);
+        public override UIWindow Window { get; set; }
 
-        var presenter = new MvxIosViewPresenter(this, Window);
+        // FinishedLaunching is the very first code to be executed in your app. Don't forget to call base!
+        public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+        {
+            var result = base.FinishedLaunching(application, launchOptions);
 
-        var setup = new Setup(this, presenter);
-        setup.Initialize();
-
-        var startup = Mvx.Resolve<IMvxAppStart>();
-        startup.Start();
-
-        Window.MakeKeyAndVisible();
-
-        return true;
+            return result;
+        }
     }
-}
 }
 ```
+
+In the code snippet above, we're extending the app's `AppDelegate` from `MvxApplicationDelegate`, and that class contains two generics: one for a setup class, and one for a core app class.
+
+In our case, we want to use the default `Setup` class MvvmCross provides for iOS applications. In your own app, you may want to use a custom one, which extends `MvxIosSetup<App>`, to add some customization.
+
+That's it! MvvmCross is up and running after this small addition.
 
 ## Add your View
 
 ### Create an initial UIViewController
 
-Create a Views folder
+Create a folder called `Views`.
 
-Within this, add a new 'View Controller' and call it `TipView`
+Within this, add a new 'View Controller' and call it `TipView`.
 
-This will generate:
+This will generate three classes:
 
-* TipView.cs
-* TipView.designer.cs
-* TipView.xib
+- TipView.cs
+- TipView.designer.cs
+- TipView.xib
 
 ### Edit the XIB layout
 
 Double click on the XIB file to edit it.
 
-Just as we did with Android, I won't go into depth here about how to use the XIB iOS editor - instead I'll just cover the bare basics, and I'll also try to provide some comparisons for those familiar with XAML.
+Just as we did with Android, we won't go into depth here about how to use the XIB iOS editor - instead we will just cover the bare basics.
 
-Drag/drop from the 'Toolbox' to add:
+Drag/Drop from the 'Toolbox' to add:
 
-* some `Label`s for showing static text - these are like `TextBlock`s
-* a `Text Field` named `SubTotalTextField` for editing the `SubTotal` - this is like a `TextBox`
-* a `Slider` named `GenerositySlider` for editing the `Generosity` - this is like a `ProgressBar`
-* a `Label` named `TipLabel` for showing the `Tip` result  - this is like a `TextBlock`
+* A `Label` which text should be `SubTotal` and a `TextField` named `SubTotalTextField`, for editing the value
+* A `Label` which text should be `Generosity` and a `Slider` named `GenerositySlider`, for editing the "generosity"
+* a `Label` named `TipLabel,` for showing the `Tip` result
 
 Set the Maximum Value of the `Slider` to '100'.
 
 Using drag and drop, you should be able to quite quickly generate a design similar to:
 
-![iOS design](../../assets/img/tutorials/tipcalc/TipCalc_Touch_Design.png)
+![iOS design]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_Touch_Design.png)
 
 ### Edit TipView.cs
 
-Because we want our `TipView` to be not only a `UIViewController` but also an Mvvm `View`, then change the inheritance of `TipView` so that it inherits from `MvxViewController`.
+Because we want our `TipView` to be not only a `UIViewController` but also an MVVM `View`, then change the inheritance of `TipView` so that it inherits from `MvxViewController`.
 
 ```c#
 public class TipView : MvxViewController<TipViewModel>
@@ -215,87 +137,89 @@ public override void ViewDidLoad()
 {
     base.ViewDidLoad();
 
-    this.CreateBinding(TipLabel).To((TipViewModel vm) => vm.Tip).Apply();
-    this.CreateBinding(SubTotalTextField).To((TipViewModel vm) => vm.SubTotal).Apply();
-    this.CreateBinding(GenerositySlider).To((TipViewModel vm) => vm.Generosity).Apply();
+    var set = this.CreateBindingSet<TipView, TipViewModel>();
+    set.Bind(TipLabel).To(vm => vm.Tip);
+    set.Bind(SubTotalTextField).To(vm => vm.SubTotal);
+    set.Bind(GenerositySlider).To(vm => vm.Generosity);
+    set.Apply();
 }
 ```
 
-What this code does is to generate 'in code' exactly the same type of data-binding information as we generated 'in XML' in Android.
+What this code does is to generate 'in code' exactly the same type of data-binding information as we generated 'in XML' in Android. This binding syntax is called _fluent_.
 
-**Note** that before the calls to `this.Bind` are made, then we first call `base.ViewDidLoad()`. This is important because `base.ViewDidLoad()` is where MvvmCross locates the `TipViewModel` that this `TipView` will bind to.
+**Note** You need to add all the bindings **after** `base.ViewDidLoad()` runs, because that's where MvvmCross locates the `TipViewModel`.
+
+**Also note** that after you specify all your bindings, you must call `set.Apply()` for them to be added.
 
 Altogether this looks like:
 
 ```c#
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.iOS.Views;
+using MvvmCross.Platforms.Ios.Views;
 using TipCalc.Core.ViewModels;
+using UIKit;
 
-namespace TipCalc.UI.iOS
+namespace TipCalc.iOS
 {
-public partial class TipView : MvxViewController<TipViewModel>
-{
-    public TipView() : base("TipView", null)
+    public partial class TipView : MvxViewController<TipViewModel>
     {
-    }
+        public TipView() : base(nameof(TipView), null)
+        {
+        }
 
-    public override void ViewDidLoad()
-    {
-        base.ViewDidLoad();
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
 
-        this.CreateBinding(TipLabel).To((TipViewModel vm) => vm.Tip).Apply();
-        this.CreateBinding(SubTotalTextField).To((TipViewModel vm) => vm.SubTotal).Apply();
-        this.CreateBinding(GenerositySlider).To((TipViewModel vm) => vm.Generosity).Apply();
+            var set = this.CreateBindingSet<TipView, TipViewModel>();
+            set.Bind(TipLabel).To(vm => vm.Tip);
+            set.Bind(SubTotalTextField).To(vm => vm.SubTotal);
+            set.Bind(GenerositySlider).To(vm => vm.Generosity);
+            set.Apply();
+
+            // this is optional. What this code does is to close the keyboard whenever you 
+            // tap on the screen, outside the bounds of the TextField
+            View.AddGestureRecognizer(new UITapGestureRecognizer(() =>
+            {
+                this.SubTotalTextField.ResignFirstResponder();
+            }));
+        }
     }
-}
 }
 ```
 
 ### Binding in Xamarin.iOS
 
-You will no doubt have noticed that data-binding in iOS looks very different to the way it looked in Android - and to what you may have expected from XAML.
+You may have noticed that data-binding in iOS looks very different to the way it looked in Android.
 
-This is because the XIB format used in iOS is a lot less human manipulable and extensible than the XML formats used in Android AXML and Windows XAML - so it makes more sense to use C# rather than the XIB to register our bindings.
+This is because the XIB format used in iOS is a lot less human manipulable and extensible than the XML formats used in Android AXML and or Xamarin.Forms / Windows XAML - so it makes more sense to use C# rather than the XIB to register our bindings.
 
 Within this section of the tutorial all of our iOS bindings look like:
 
 ```c#
-this.CreateBinding(TipLabel).To((TipViewModel vm) => vm.Tip).Apply();
+set.Bind(TipLabel).To(vm => vm.Tip);
 ```
 
 what this line means is:
 
-* bind the `TipLabel`'s default binding property - which happens to be a property called `Text`
-* to the `ViewModel`'s Tip property
-
-As with Android, this will be a `TwoWay` binding by default - which is different to what XAML developers may expect to see.
+- Bind the `TipLabel`'s default binding property - which happens to be the `Text` property (for labels)
+- To the `ViewModel`'s Tip property
 
 If you had wanted to specify the `TipLabel` property to use instead of relying on the default, then you could have done this with:
 
 ```c#
-this.CreateBinding(TipLabel).For(label => label.Text).To((TipViewModel vm) => vm.Tip).Apply();
+set.Bind(TipLabel).For(v => v.Text).To(vm => vm.Tip);
 ```
 
-In later topics we'll cover more on binding in iOS, including more on binding to non-default fields; other code-based binding code mechanisms; custom bindings; using `ValueConverter`s; and creating bound sub-views.
+Although this sample only shows simple bindings, the infrastructure built within MvvmCross is really powerful! Our data-binding engine supports ValueConverters, ValueCombiners, FallbackValues, different modes of bindings and a super straight forward mechanism to add your own custom bindings.
 
 ## The iOS UI is complete!
 
-At this point you should be able to run your application.
+At this point you should be able to run your application and see some magic.
 
 When it starts... you should see:
 
-![ios ui](../../assets/img/tutorials/tipcalc/TipCalc_Touch_Sim.png)
-
-This seems to work perfectly, although you may notice that if you tap on the `SubTotal` property and start entering text, then you cannot afterwards close the keyboard.
-
-This is a View concern - it is a UI problem. So we can fix it just in the iOS UI code - in this View. For example, to fix this here, you can add a gesture recognizer to the end of the `ViewDidLoad` method like:
-
-```c#
-View.AddGestureRecognizer(new UITapGestureRecognizer(() => {
-    this.SubTotalTextField.ResignFirstResponder();
-}));
-```
+![ios ui]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_Touch_Sim.png)
 
 ## Moving on...
 
@@ -303,3 +227,4 @@ There's more we could do to make this User Interface nicer and to make the app r
 
 Let's move on to Windows!
 
+[Next!](https://www.mvvmcross.com/documentation/tutorials/tipcalc/a-universal-windows-app-ui-project)

@@ -4,108 +4,111 @@ title: TipCalc Android Project
 category: Tutorials
 order: 3
 ---
+
 We started with the goal of creating an app to help calculate what tip to leave in a restaurant.
 
 We had a plan to produce a UI based on this concept:
 
-![Sketch](../../assets/img/tutorials/tipcalc/TipCalc_Sketch.png)
+![Sketch]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_Sketch.png)
 
-To satisfy this we built a 'Core' Portable Class Library project which contained:
+To satisfy this we built a 'Core' .NET Standard project which contained:
 
-- Our 'business logic' - `ICalculation`
+- Our 'business logic' - `ICalculationService`
 - Our ViewModel - `TipViewModel`
-- Our `App` which contains the application wiring, including the start instructions.
+- Our `App` - which contains some bootstrapping code.
 
-We're now ready to add out first User Interface.
+We're now ready to add out first User Interface!
 
 So... let's start with Android.
 
-To create an Android MvvmCross UI, you can use the Visual Studio project template wizards, but here we'll instead build up a new project 'from empty', just as we did for the Core project.
+Same as we did with the _Core_ project, we will use a standard template to create the Android project.
 
-## Create a new Android UI Project
+## Create a new Android project
 
 Add a new project to your solution - a 'Blank App (Android)' application with name `TipCalc.UI.Droid`
 
 Within this, you'll find the normal Android application constructs:
 
-- the Assets folder
-- the Resources folder
-- the MainActivity.cs
+- The Assets folder
+- The Resources folder
+- The MainActivity.cs
 
 ## Delete MainActivity.cs
 
-No-one really needs a `MainActivity` :)
+No-one really needs that `MainActivity` :)
 
-Also, delete `Main.axml` in the /resources/Layout folder.
+Also, make sure you delete `Main.axml` in the /resources/Layout folder.
 
 ## Install MvvmCross
 
-In the Package Manager Console, enter...
+Open the Nuget Package Manager and search for the package `MvvmCross`.
 
-    Install-Package MvvmCross.Binding
+If you don't really enjoy the NuGet UI experience, then you can alternatively open the Package Manager Console, and type:
 
-## Add a reference to TipCalc.Core.csproj
+    Install-Package MvvmCross
 
-Add a reference to your `TipCalc.Core` project - the project we created in the last step which included:
+## Add a reference to TipCalc.Core project
 
-- Your `Calculation` service,
-- Your `TipViewModel`
-- Your `App` wiring.
+Add a reference to your `TipCalc.Core` project - the project we created in the first step.
 
+## Add an Android Application class
 
-## Add a Setup class
-
-Every MvvmCross UI project requires a `Setup` class.
-
-This class sits in the root namespace (folder) of our UI project and performs the initialization of the MvvmCross framework and your application, including:
-
-- The Inversion of Control (IoC) system
-- The MvvmCross data-binding
-- Your `App` and its collection of `ViewModel`s
-- Your UI project and its collection of `View`s
-
-Most of this functionality is provided for you automatically. Within your Droid UI project all you have to supply are:
-
-- your `App` - your link to the business logic and `ViewModel` content
-
-For `TipCalc` here's all that is needed in Setup.cs:
+The Android Application class will allow us to specify the MvvmCross framework some key classes to be used for initialization:
 
 ```c#
-using Android.Content;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Platform;
+using System;
+using Android.App;
+using Android.Runtime;
+using MvvmCross.Platforms.Android.Core;
+using MvvmCross.Platforms.Android.Views;
 using TipCalc.Core;
 
 namespace TipCalc.UI.Droid
 {
-public class Setup : MvxAndroidSetup
-{
-    public Setup(Context applicationContext)
-    : base(applicationContext)
+    [Application]
+    public class MainApplication : MvxAndroidApplication<MvxAndroidSetup<App>, App>
     {
+        public MainApplication(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
     }
-
-    protected override IMvxApplication CreateApp()
-    {
-        return new App();
-    }
-}
 }
 ```
+
+We won't go deeper into what role does MainApplication have on the Android platform, but let's talk a bit about the MvvmCross bits:
+
+- `MvxAndroidApplication` provides some behavior for initializing the framework in runtime - although it isn't really the only way to configure the Android project.
+- `MvxAndroidSetup` is the default setup MvvmCross contains. But you can use your own customized setup - sometimes it's necessary and it's a good place to initialize some 3rd party libraries on it.
+- `App` here is a reference to our `TipCalc.Core.App` class.
+
+### Some more details about the Setup class
+
+Every MvvmCross UI project requires a `Setup` class, but if your app is fairly simple, like the TipCalc is, then you can safely use the default one, provided by the framework.
+
+The `Setup` class is responsible for performing the initialization of the MvvmCross framework, including:
+
+- The IoC Container and DI engine
+- The Data-Binding engine
+- The ViewModel / View lookups
+- The whole navigation system
+- Plugins
+
+Finally, the `Setup` class is also responsible for initializing your `App` class.
+
+Luckily for us, all this functionality is provided for you automatically, unless you want / need to use a custom `Setup` class (since it is an excellent place to register your own services / plugins, it is often the case).
 
 ## Add your View
 
 ### Add the Android Layout XML (AXML)
 
-This tutorial doesn't attempt to give an introduction to Android XML layout.
+This tutorial doesn't attempt to give an introduction to Android XML layout, but any knowledge is actually really necessary at this point. If you are very new to Android, you can read more about Android XML on the [official documentation](http://developer.android.com/guide/topics/ui/declaring-layout.html). 
 
-Instead all I'll say here is the bare minimum. If you are new to Android, then you can find out more about Android XML from lots of places including the official documentation at [this site](http://developer.android.com/guide/topics/ui/declaring-layout.html). If you are coming from a XAML background - you are a *XAMLite* - then I'll include some simple XAML-AXML comparisons to help you out.
+To achieve the basic layout that we need:
 
-To achieve the basic layout:
+- We will add a new .axml file - called `TipView.axml` into the `/Resources/Layout` folder.
 
-- We'll add a new AXML file - `View_Tip.axml` in the `/Resources/Layout` folder
-
-- We'll edit this using either the Xamarin Android designer or the Visual Studio XML editor - the designer gives us a visual display, while the VS editor **sometimes** gives us XML Intellisense.
+- We will edit this file using the XML editor - the designer gives us a visual display, while the VS editor **sometimes** gives us XML Intellisense. Open the file, go to the "Source" tab and replace the file content with the following code:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -115,7 +118,7 @@ To achieve the basic layout:
     android:layout_height="match_parent" />
 ```
 
-- We'll add a local app namespace - `http://schemas.android.com/apk/res-auto` - this is just like adding a namespace in XAML.
+- We will now add a local app namespace - `http://schemas.android.com/apk/res-auto` - which is just like adding a namespace in XAML:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -128,7 +131,7 @@ To achieve the basic layout:
 
 - Notice that the `LinearLayout` has by default a **horizontal** orientation - for XAMLites, this layout is just like a `StackPanel` except that it is **very important** to specify the **vertical** orientation
 
-- Within this layout we'll add some `TextView`s to provide some static text labels - for XAMLites, these are like `TextBlock`s
+- Within this layout we will add some `TextView`s to provide some static text labels:
 
 ```xml
 <TextView
@@ -145,7 +148,7 @@ To achieve the basic layout:
     android:text="Tip to leave" />
 ```
 
-- We'll also add a short, wide `View` with a yellow background to provide a small amount of chrome:
+- We will also add a short, wide `View` with a yellow background to provide a small amount of chrome after the last `TextView`:
 
 ```xml
 <View
@@ -154,9 +157,9 @@ To achieve the basic layout:
     android:background="#ffff00" />
 ```
 
-- We'll add some `View`s for data display and entry, and we'll **databind** these `View`s to properties in our `TipViewModel`
+- Now it's time to add some `View`s for data display and data entry, which we will also **databind** to properties in our `TipViewModel`:
 
-  - An `EditText` for text data entry of the `SubTotal` - for XAMLites, this is a `TextBox`
+  - Add an `EditText` for text data entry of the `SubTotal`:
 
 ```xml
 <EditText
@@ -165,7 +168,7 @@ To achieve the basic layout:
     local:MvxBind="Text SubTotal" />
 ```
 
-  - A `SeekBar` for touch/slide entry of the `Generosity` - for XAMLites, this is like a `ProgressBar`:
+  - Add a `SeekBar` for touch/slide entry of the `Generosity`:
 
 ```xml
 <SeekBar
@@ -175,7 +178,7 @@ To achieve the basic layout:
     local:MvxBind="Progress Generosity" />
 ```
 
-  - We'll add a `TextView` to display the `Tip` that results from the calculation:
+  - Now for a last step, add a `TextView` to display the final `Tip` result:
 
 ```xml
 <TextView
@@ -184,7 +187,7 @@ To achieve the basic layout:
     local:MvxBind="Text Tip" />
 ```
 
-Put together, this looks like:
+Putting everything together, your .axml file should look like this:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -227,57 +230,53 @@ Put together, this looks like:
 
 ### About the data-binding syntax
 
-Each of the data-binding blocks within our first sample looks similar:
+You may have noticed that each of the data-binding blocks within our first sample look very similar, for example:
 
-`local:MvxBind="Text SubTotal"`
+```xml
+local:MvxBind="Text SubTotal"
+```
 
 What this line means is:
 
-- Data-bind:
-  - The property `Text` on the `View`
-  - To the property `SubTotal` on the `DataContext` - which in this case will be a `TipViewModel`
-- So:
-  - Whenever the `TipViewModel` calls `RaisePropertyChanged` on `SubTotal` then the `View` should update
-  - And whenever the user enters text into the `View` then the `SubTotal` value should be `set` on the `TipViewModel`
+Data-Binding:
+- The property `Text` of the `TextView`
+- To the property `SubTotal` on the `DataContext` - which in this case will be a `TipViewModel`.
+
+This means:
+- Whenever the `TipViewModel` calls `RaisePropertyChanged` on `SubTotal` then the `View` should update its content
+- And whenever the user enters text into the `View`, the `SubTotal` value should be `set` on the `TipViewModel`
 
 Note that this `TwoWay` binding is **different** to XAML where generally the default `BindingMode` is only `OneWay`.
 
-In later topics, we'll return to show you more options for data-binding, including how to use `ValueConverter`s, but for now all our binding uses this simple `ViewProperty ViewModelProperty` syntax.
-
-
 ### Add the View class
 
-With our AXML layout complete, we can now add the C# `Activity` which is used to display this content. For developers coming from XAML backgrounds, these `Activity` classes are roughly equivalent to `Page` objects in WindowsPhone on WindowsStore applications - they own the 'whole screen' and have a lifecycle which means that only one of them is shown at any one time.
+With our .axml layout complete, we can now move back to C# and add an `Activity`, which is used to display the content. These `Activity` classes are very special objects on Android, which provide a `context` to your app and a placeholder to display widgets on the UI.
 
-To create our `Activity` - which will also be our MVVM `View`:
+This `Activity` will act as our MVVM `View`. Please follow these steps:
 
-- Create a Views folder within your TipCalc.UI.Droid project
+- Create a `Views` folder within your TipCalc.UI.Droid project.
 
-- Within this folder create a new C# class - `TipView`
+- Within this folder create a new C# class called `TipView`.
 
-Not that the name of this class **MUST** match the name of the viewmodel. As our viewmodel is called TipViewModel our class must be named TipView).
-
-- This class will:
-
-  - Inherit from `MvxActivity`:
-
+- This class should inherit from `MvxActivity<TipViewModel>`:
 
 ```c#
-public class TipCalcView : MvxActivity"
+public class TipView : MvxActivity<TipViewModel>"
 ```
 
-   - Be marked with the Xamarin.Android `Activity` attribute, marking it as the `MainLauncher` for the project:
+- Add an `Activity` attribute over the class and set the `MainLauncher` property to `true`. This attribute lets Xamarin.Android add it automatically to your AndroidManifest file:
 
 ```c#
-[Activity(Label = "Tip", MainLauncher=true)]
+[Activity(Label = "Tip Calculator", MainLauncher = true)]
 ```
 
-  - Use `OnViewModelSet` to inflate its `ContentView` from the AXML - this will use a resource identifier generated by the Android and Xamarin tools.
+- Override the method `OnCreate` and call `SetContentView()` right after the call to base:
 
 ```c#
-protected override void OnViewModelSet()
+protected override void OnCreate(Bundle bundle)
 {
-    SetContentView(Resource.Layout.View_Tip);
+    base.OnCreate(bundle);
+    SetContentView(Resource.Layout.TipView);
 }
 ```
 
@@ -285,47 +284,48 @@ As a result this completed class is very simple:
 
 ```c#
 using Android.App;
-using MvvmCross.Droid.Views;
+using Android.OS;
+using MvvmCross.Platforms.Android.Views;
+using TipCalc.Core.ViewModels;
 
 namespace TipCalc.UI.Droid.Views
 {
-[Activity(Label = "Tip", MainLauncher = true)]
-public class TipView : MvxActivity
-{
-    protected override void OnViewModelSet()
+    [Activity(Label = "Tip Calculator", MainLauncher = true)]
+    public class TipView : MvxActivity<TipViewModel>
     {
-        SetContentView(Resource.Layout.View_Tip);
+        protected override void OnCreate(Bundle bundle)
+        {
+            base.OnCreate(bundle);
+            SetContentView(Resource.Layout.TipView);
+        }
     }
-}
 }
 ```
 
-## The Android UI is complete!
+## The Android project is complete!
 
 At this point you should be able to run your application.
 
-When it starts... you should see:
+When it starts... you should see something like this:
 
-![Android TipCalc](../../assets/img/tutorials/tipcalc/TipCalc_Android.png)
+![Android TipCalc]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_Android.png)
 
-If you then want to make it 'more beautiful', then try adding a few attributes to some of your AXML - things like:
+If you then want to make it 'more beautiful', then try adding a few attributes to some of your .axml - things like:
 
-        android:background="#00007f"
-        android:textColor="#ffffff"
-        android:textSize="24dp"
-        android:layout_margin="30dp"
-        android:padding="20dp"
-        android:layout_marginTop="10dp"
-
-Within a very short time, you should hopefully be able to create something 'styled'...
-
-![Android TipCalc Styled](../../assets/img/tutorials/tipcalc/TipCalc_Android_Styled.png)
-
-... but actually making it look 'nice' might take some design skills!
+```xml
+android:background="#00007f"
+android:textColor="#ffffff"
+android:textSize="24dp"
+android:layout_margin="30dp"
+android:padding="20dp"
+android:layout_marginTop="10dp"
+```
 
 ## Moving on
 
 There's more we could do to make this User Interface nicer and to make the app richer... but for this first application, we will leave it here for now.
 
-Let's move on to Xamarin.iOS and to Windows!
+Let's move on to Xamarin.iOS!
+
+[Next!](https://www.mvvmcross.com/documentation/tutorials/tipcalc/a-xamarinios-ui-project)
 
