@@ -8,54 +8,53 @@ We started with the goal of creating an app to help calculate what tip to leave 
 
 We had a plan to produce a UI based on this concept:
 
-![TipCalc](../../assets/img/tutorials/tipcalc/TipCalc_Sketch.png)
+![TipCalc]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_Sketch.png)
 
-To satisfy this we built a 'Core' Portable Class Library project which contained:
+To satisfy this we built a 'Core' .NET Standard project which contained:
 
-* our 'business logic' - `ICalculation`
-* our ViewModel - `TipViewModel`
-* our `App` which contains the application wiring, including the start instructions.
+- Our 'business logic' - `ICalculationService`
+- Our ViewModel - `TipViewModel`
+- Our `App` - which contains some bootstrapping code.
 
-We then added User Interfaces for Xamarin.Android and Xamarin.iOS
+We even added User Interfaces for Xamarin.Android and Xamarin.iOS:
 
-![Android](../../assets/img/tutorials/tipcalc/TipCalc_Android_Styled.png) ![iOS](../../assets/img/tutorials/tipcalc/TipCalc_Touch_Sim.png)
+![Android]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_Android_Styled.png) 
+![iOS]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_Touch_Sim.png)
 
-For our next project, let's look at Windows, specifically Universal Windows Platform (UWP) Apps which run on Windows 10 and Windows 10 Mobile.
+For our next project, let's look at Windows! More specifically, let's build a Universal Windows Platform (UWP) App.
 
-To create a Windows UWP MvvmCross UI, you can use the Visual Studio project template wizards, but here we'll instead build up a new project 'from empty', just as we did for the Core and other UI projects.
+Same as we did with the _Core_ project, we will use a standard template to create the UWP project - although you can of course use a project template wizard.
 
 ## Create a new Windows UWP Project
 
-Add a new project to your solution - a 'Blank App (Universal Windows)' application with name `TipCalc.UI.UWP`
+Add a new project to your solution - a 'Blank App (Universal Windows)' application with name `TipCalc.UWP`.
 
 Within this, you'll find the normal WindowsStore application constructs:
 
-* the 'Properties' folder with just the 'AssemblyInfo' file
-* the 'Assets' folder
-* the 'Common' folder
-* the App.Xaml 'application' object
-* the MainPage.Xaml and MainPage.Xaml.cs files that define the default Page for this app
-* the 'Package.appxmanifest' configuration file
-* the 'project.json'
-* the debug private key for your development
+* The `Properties` folder with just the `AssemblyInfo` file
+* The `Assets` folder
+* The `Common` folder
+* The `App.xaml`, 'application' object
+* The `MainPage.xaml` and `MainPage.xaml.cs` files that define the default Page for this app
+* The `Package.appxmanifest` configuration file
+* The `project.json`
+* The debug private key for your development
 
 ## Delete MainPage.xaml
 
-No-one really needs a `MainPage` :)
+No-one really needs a default `MainPage` :)
 
 ## Install MvvmCross
 
-In the Package Manager Console, enter...
+Open the Nuget Package Manager and search for the package `MvvmCross`.
 
-    Install-Package MvvmCross.Core
+If you don't really enjoy the NuGet UI experience, then you can alternatively open the Package Manager Console, and type:
 
-## Add a reference to TipCalc.Core.csproj
+    Install-Package MvvmCross
 
-Add a reference to your `TipCalc.Core` project - the project we created in the last step which included:
+## Add a reference to TipCalc.Core project
 
-* your `Calculation` service, 
-* your `TipViewModel` 
-* your `App` wiring.
+Add a reference to your `TipCalc.Core` project - the project we created in the first step.
 
 ## Add a Setup class
 

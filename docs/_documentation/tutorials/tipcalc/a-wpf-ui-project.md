@@ -2,13 +2,13 @@
 layout: documentation
 title: A Wpf UI Project
 category: Tutorials
-order: 7
+order: 6
 ---
 We started with the goal of creating an app to help calculate what tip to leave in a restaurant
 
 We had a plan to produce a UI based on this concept:
 
-![Sketch](../../assets/img/tutorials/tipcalc/TipCalc_Sketch.png)
+![Sketch]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_Sketch.png)
 
 To satisfy this we built a 'Core' Portable Class Library project which contained:
 
