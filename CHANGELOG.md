@@ -1,48 +1,135 @@
 # Change Log
 
+## [6.0.1](https://github.com/MvvmCross/MvvmCross/tree/6.0.1) (2018-04-29)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.0.0...6.0.1)
+
+**Fixed bugs:**
+
+- SplashScreenAppCompat should use AppCompatSetup [\#2821](https://github.com/MvvmCross/MvvmCross/pull/2821) ([drungrin](https://github.com/drungrin))
+
+**Closed issues:**
+
+- Calling async method on ViewModel.Initialize never ends and InitializeTask properties never got updated [\#2829](https://github.com/MvvmCross/MvvmCross/issues/2829)
+- RunAppStart isn't called in Xamarin Form - Android project [\#2813](https://github.com/MvvmCross/MvvmCross/issues/2813)
+- Error when using the Initialize event in a view model since upgrade to Version 6.0 [\#2808](https://github.com/MvvmCross/MvvmCross/issues/2808)
+- MvvmCross.Platforms.Android namespace missing from MvvmCross 6.0.0 package [\#2807](https://github.com/MvvmCross/MvvmCross/issues/2807)
+- Documentation request [\#2806](https://github.com/MvvmCross/MvvmCross/issues/2806)
+- MvxFormsIosSetup.CreateViewPresenter called too soon? [\#2802](https://github.com/MvvmCross/MvvmCross/issues/2802)
+- Resource.Layout' does not contain a definition for '\[ViewName\]' [\#2801](https://github.com/MvvmCross/MvvmCross/issues/2801)
+
+**Merged pull requests:**
+
+- Small docs fix, renamed to correct method in the events mapping table. [\#2834](https://github.com/MvvmCross/MvvmCross/pull/2834) ([agoransson](https://github.com/agoransson))
+- Update Getting-Started and MvvmCross-Overview docs [\#2822](https://github.com/MvvmCross/MvvmCross/pull/2822) ([nmilcoff](https://github.com/nmilcoff))
+- Fixing crash when running Android Forms Playground [\#2820](https://github.com/MvvmCross/MvvmCross/pull/2820) ([nickrandolph](https://github.com/nickrandolph))
+- Removing calls to base methods to prevent error [\#2819](https://github.com/MvvmCross/MvvmCross/pull/2819) ([nickrandolph](https://github.com/nickrandolph))
+- Allow options to be supplied to IocConstruct [\#2814](https://github.com/MvvmCross/MvvmCross/pull/2814) ([martijn00](https://github.com/martijn00))
+- Bugfix/fix playground wpf setup [\#2811](https://github.com/MvvmCross/MvvmCross/pull/2811) ([Cheesebaron](https://github.com/Cheesebaron))
+- Android margin extensions method bind and binding docs updates [\#2809](https://github.com/MvvmCross/MvvmCross/pull/2809) ([Plac3hold3r](https://github.com/Plac3hold3r))
+- Update Acr.UserDialogs link [\#2805](https://github.com/MvvmCross/MvvmCross/pull/2805) ([vatsalyagoel](https://github.com/vatsalyagoel))
+- Make it easier to override the Forms Page presenter [\#2803](https://github.com/MvvmCross/MvvmCross/pull/2803) ([martijn00](https://github.com/martijn00))
+- Implement basic infrastructure for Tizen and Tizen.Forms [\#2669](https://github.com/MvvmCross/MvvmCross/pull/2669) ([martijn00](https://github.com/martijn00))
+
 ## [6.0.0](https://github.com/MvvmCross/MvvmCross/tree/6.0.0) (2018-04-14)
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.0.0-beta8...6.0.0)
 
 **Fixed bugs:**
 
-- Playground.Droid creates multiple instances of RootViewModel [\#2782](https://github.com/MvvmCross/MvvmCross/issues/2782)
 - MvvmCross doesn't work with F\# Android app resources [\#2772](https://github.com/MvvmCross/MvvmCross/issues/2772)
-- Xamarin Forms Images is not shown on Android when using mvvmcross [\#2770](https://github.com/MvvmCross/MvvmCross/issues/2770)
 - UWP Photo chooser distorts photo on windows phone [\#2588](https://github.com/MvvmCross/MvvmCross/issues/2588)
+- Playground.Droid creates multiple instances of RootViewModel [\#2782](https://github.com/MvvmCross/MvvmCross/issues/2782)
+- Xamarin Forms Images is not shown on Android when using mvvmcross [\#2770](https://github.com/MvvmCross/MvvmCross/issues/2770)
+- Crash when Close Viewmodel With Result using MasterDetail [\#2757](https://github.com/MvvmCross/MvvmCross/issues/2757)
+- Playground SheetView crashes Android application [\#2722](https://github.com/MvvmCross/MvvmCross/issues/2722)
+- Android app hangs on SplashScreen [\#2721](https://github.com/MvvmCross/MvvmCross/issues/2721)
+- MvxViewPagerAdapter and MvxStateViewPagerAdapter ignore the presence of view model instance inside MvxViewPagerFragmentInfo [\#2718](https://github.com/MvvmCross/MvvmCross/issues/2718)
+- RegisterAttribute doesn't always match the new MvvmCross 6 namespace [\#2688](https://github.com/MvvmCross/MvvmCross/issues/2688)
+- App didn't show the right view after add SplashScreen on WPF [\#2684](https://github.com/MvvmCross/MvvmCross/issues/2684)
+- \[iOS\] Text Replacement does not apply change through the binding [\#2681](https://github.com/MvvmCross/MvvmCross/issues/2681)
+- Language files are not loaded in iOS project [\#2678](https://github.com/MvvmCross/MvvmCross/issues/2678)
+- Lack of Initialization from MvxSplashScreenActivity causes App start from external Intent \(ie, Uri routing\) to fail in Forms app [\#2624](https://github.com/MvvmCross/MvvmCross/issues/2624)
+- Xamarin.Forms Android - First page cannot reference Application level StaticResources [\#2622](https://github.com/MvvmCross/MvvmCross/issues/2622)
+- PluginLoaders not found for platform specific plugins [\#2611](https://github.com/MvvmCross/MvvmCross/issues/2611)
+- Child View Presentation does not work when using More Tabs \(more than five tabs\) \[iOS\]  [\#2609](https://github.com/MvvmCross/MvvmCross/issues/2609)
+- Fragment close does not work if fragment presentation attribute has backstack set to false [\#2600](https://github.com/MvvmCross/MvvmCross/issues/2600)
+- Sometimes open the app and then it crashes [\#2599](https://github.com/MvvmCross/MvvmCross/issues/2599)
+- Platform.Mac startup exception Foundation.You\_Should\_Not\_Call\_base\_In\_This\_Method [\#2591](https://github.com/MvvmCross/MvvmCross/issues/2591)
+- Custom Presentation Hint Handler is ignored [\#2589](https://github.com/MvvmCross/MvvmCross/issues/2589)
+- MvxAppStart swallows exceptions [\#2586](https://github.com/MvvmCross/MvvmCross/issues/2586)
+- MvvmCross.Forms cannot replace app's MainPage [\#2577](https://github.com/MvvmCross/MvvmCross/issues/2577)
+- UITextview binding - missing source event info in MvxWeakEventSubscription Parameter name: sourceEventInfo [\#2543](https://github.com/MvvmCross/MvvmCross/issues/2543)
+- MvxBottomSheetDialogFragment OnDestroy does not consider finsished parameter [\#2525](https://github.com/MvvmCross/MvvmCross/issues/2525)
+- MvxObservableCollection reports wrong index when doing AddRange [\#2515](https://github.com/MvvmCross/MvvmCross/issues/2515)
+- UITextView target binding fails when subscribing to changes [\#2484](https://github.com/MvvmCross/MvvmCross/issues/2484)
+- MvxWindowsPage cannot navigate to MvxContentPage [\#2466](https://github.com/MvvmCross/MvvmCross/issues/2466)
+- Status Bar Style jumps back to default after navigation \(iOS\) [\#2463](https://github.com/MvvmCross/MvvmCross/issues/2463)
+- UISwitch binding doesn't work [\#2462](https://github.com/MvvmCross/MvvmCross/issues/2462)
+- RegisterNavigationServiceAppStart vs RegisterAppStart [\#2447](https://github.com/MvvmCross/MvvmCross/issues/2447)
+- MvxExpandableListView GroupClick binding replaces group expanding functionality [\#2408](https://github.com/MvvmCross/MvvmCross/issues/2408)
+- MvxAppCompatDialogFragment Attempt to invoke virtual method on a null object reference [\#2378](https://github.com/MvvmCross/MvvmCross/issues/2378)
+- 'System.TypeInitializationException' In 'MvvmCross.Core.Platform.LogProviders.ConsoleLogProvider' On UWP Projects [\#2333](https://github.com/MvvmCross/MvvmCross/issues/2333)
+- Inconsistent PCL profile for PictureChooser [\#2295](https://github.com/MvvmCross/MvvmCross/issues/2295)
+- Adjusting the resolution of the resource assembly [\#2777](https://github.com/MvvmCross/MvvmCross/pull/2777) ([nickrandolph](https://github.com/nickrandolph))
 - Fixing issue with CurrentActivity being null in Playground.Droid [\#2775](https://github.com/MvvmCross/MvvmCross/pull/2775) ([nickrandolph](https://github.com/nickrandolph))
 - Find resource type based on Android.Runtime.ResourceDesignerAttribute [\#2774](https://github.com/MvvmCross/MvvmCross/pull/2774) ([nosami](https://github.com/nosami))
+- Make show and close of iOS views respect Animated [\#2767](https://github.com/MvvmCross/MvvmCross/pull/2767) ([martijn00](https://github.com/martijn00))
+- MvxUISliderValueTargetBinding: Add missing return [\#2750](https://github.com/MvvmCross/MvvmCross/pull/2750) ([nmilcoff](https://github.com/nmilcoff))
+- Fixes \#2722 [\#2730](https://github.com/MvvmCross/MvvmCross/pull/2730) ([tbalcom](https://github.com/tbalcom))
+- Make sure Forms is loaded when not using a splashscreen [\#2729](https://github.com/MvvmCross/MvvmCross/pull/2729) ([martijn00](https://github.com/martijn00))
+- Android add MvxViewVodelRequest to fragment forward life cycle events [\#2728](https://github.com/MvvmCross/MvvmCross/pull/2728) ([Plac3hold3r](https://github.com/Plac3hold3r))
+- Android Dialogs: Fix close & do not keep references to instances [\#2711](https://github.com/MvvmCross/MvvmCross/pull/2711) ([nmilcoff](https://github.com/nmilcoff))
+- Improvements & register fix for Visibility / Messenger / PictureChooser plugins [\#2704](https://github.com/MvvmCross/MvvmCross/pull/2704) ([nmilcoff](https://github.com/nmilcoff))
+- Fix moving items in the MvxRecyclerAdapter [\#2664](https://github.com/MvvmCross/MvvmCross/pull/2664) ([kjeremy](https://github.com/kjeremy))
+- MvxBaseTableViewSource: Fix wrong height for xib based cells  [\#2644](https://github.com/MvvmCross/MvvmCross/pull/2644) ([nmilcoff](https://github.com/nmilcoff))
+- Apply default templates to MvxAppCompatSpinner [\#2640](https://github.com/MvvmCross/MvvmCross/pull/2640) ([kjeremy](https://github.com/kjeremy))
+- Binding types fix [\#2632](https://github.com/MvvmCross/MvvmCross/pull/2632) ([Saratsin](https://github.com/Saratsin))
+- Fixed issue \#2515 where MvxObservableCollection.AddRange\(\) reports wrong index [\#2614](https://github.com/MvvmCross/MvvmCross/pull/2614) ([Strifex](https://github.com/Strifex))
+-  \#2600 no backstack fragment close does not work hotfix [\#2601](https://github.com/MvvmCross/MvvmCross/pull/2601) ([thefex](https://github.com/thefex))
+- Fix that change presentation add handler is ignored in forms [\#2592](https://github.com/MvvmCross/MvvmCross/pull/2592) ([martijn00](https://github.com/martijn00))
+- Fix inheritance for MvxBaseSplitViewController class with constraint [\#2564](https://github.com/MvvmCross/MvvmCross/pull/2564) ([nmilcoff](https://github.com/nmilcoff))
+- Fixing Android attributes [\#2529](https://github.com/MvvmCross/MvvmCross/pull/2529) ([nickrandolph](https://github.com/nickrandolph))
+- MvxBottomSheetDialogFragment: Fix OnDestroy [\#2526](https://github.com/MvvmCross/MvvmCross/pull/2526) ([nmilcoff](https://github.com/nmilcoff))
+- Improve implementation of IMvxAndroidCurrentTopActivity [\#2513](https://github.com/MvvmCross/MvvmCross/pull/2513) ([nmilcoff](https://github.com/nmilcoff))
+-  Make Mvx...Cell inherit from IMvxCell instead of IMvxElement [\#2511](https://github.com/MvvmCross/MvvmCross/pull/2511) ([mubold](https://github.com/mubold))
+- Fix MvxTabBarViewController.CloseTab: Pick correct ViewController [\#2506](https://github.com/MvvmCross/MvvmCross/pull/2506) ([nmilcoff](https://github.com/nmilcoff))
+- Switch parameters in MvxException so that first exception is InnerException [\#2504](https://github.com/MvvmCross/MvvmCross/pull/2504) ([mubold](https://github.com/mubold))
+- MvxNavigationServiceAppStart: Don't swallow exceptions [\#2471](https://github.com/MvvmCross/MvvmCross/pull/2471) ([nmilcoff](https://github.com/nmilcoff))
 
 **Closed issues:**
 
 - Generic UWP views break compiled bindings [\#2653](https://github.com/MvvmCross/MvvmCross/issues/2653)
+- Attribute "MvxBind" has already been defined [\#2800](https://github.com/MvvmCross/MvvmCross/issues/2800)
+- WPF Support Missing From MvvmCross 6.0.0 [\#2796](https://github.com/MvvmCross/MvvmCross/issues/2796)
+- \[iOS\] Using VS AppCenter "AppCenter.Start" while MvxApplication.Initialize results in deadlock since MVX 6 beta7 [\#2745](https://github.com/MvvmCross/MvvmCross/issues/2745)
+- WPF Presenter documentation is out of date [\#2743](https://github.com/MvvmCross/MvvmCross/issues/2743)
+- NuGet package descriptions are missing from csproj files [\#2742](https://github.com/MvvmCross/MvvmCross/issues/2742)
+- Need an example of custom activity transitions [\#2659](https://github.com/MvvmCross/MvvmCross/issues/2659)
+- -	Skipping DigitalWorkReport.Droid.Resource.String.fab\_scroll\_shrink\_grow\_autohide\_behavior [\#2645](https://github.com/MvvmCross/MvvmCross/issues/2645)
+- MvvmCross.Plugins.Location.Fused.Droid.Plugin does not load [\#2637](https://github.com/MvvmCross/MvvmCross/issues/2637)
+- Cleanup "Sidebar" plugin [\#2626](https://github.com/MvvmCross/MvvmCross/issues/2626)
+- MvvmCross.Forms version out of sync with Xamarin.Forms Tutorial [\#2620](https://github.com/MvvmCross/MvvmCross/issues/2620)
+- Navigation service: ChangePresentation should be async [\#2602](https://github.com/MvvmCross/MvvmCross/issues/2602)
+- OnCreate is called after first ContentPage [\#2549](https://github.com/MvvmCross/MvvmCross/issues/2549)
+- \[Android\] Inconsistency with MvxRecyclerView vs. MvxListView & MvxSpinner [\#2544](https://github.com/MvvmCross/MvvmCross/issues/2544)
+- Remove usage of MvxTrace from code [\#2541](https://github.com/MvvmCross/MvvmCross/issues/2541)
+- Switch NUnit tests to XUnit [\#2540](https://github.com/MvvmCross/MvvmCross/issues/2540)
+- Inconsistency between MvxCommand\<T\> and MvxAsyncCommand\<T\> implementing IMvxCommand [\#2520](https://github.com/MvvmCross/MvvmCross/issues/2520)
+- MvxFormsApplication Start, Sleep and Resume gets not called on iOS [\#2512](https://github.com/MvvmCross/MvvmCross/issues/2512)
+- Reason why app crashed MvxSetup.InitializePrimary\(\) called from void? [\#2508](https://github.com/MvvmCross/MvvmCross/issues/2508)
+- Documentation missing for Xamarin.Forms ViewPresenter  [\#2497](https://github.com/MvvmCross/MvvmCross/issues/2497)
+- Feature request: Broader fragment usage [\#2495](https://github.com/MvvmCross/MvvmCross/issues/2495)
+- Remove IMvxIosModalHost [\#2475](https://github.com/MvvmCross/MvvmCross/issues/2475)
+- The new logger infrastructure should not send null messages to IMvxLog [\#2437](https://github.com/MvvmCross/MvvmCross/issues/2437)
+- \[Android\] \[MvxRecyclerView\] MvxTemplateSelector\<TItem\> missing ItemTemplateId issue [\#2422](https://github.com/MvvmCross/MvvmCross/issues/2422)
 
 **Merged pull requests:**
 
+- Update 2018-4-14-mvvmcross-6.0.0-release.md [\#2799](https://github.com/MvvmCross/MvvmCross/pull/2799) ([fedemkr](https://github.com/fedemkr))
 - Making it easier to override creation of injected pages [\#2793](https://github.com/MvvmCross/MvvmCross/pull/2793) ([nickrandolph](https://github.com/nickrandolph))
 - Improving Forms Android support for setup [\#2790](https://github.com/MvvmCross/MvvmCross/pull/2790) ([nickrandolph](https://github.com/nickrandolph))
 - Split out WPF [\#2789](https://github.com/MvvmCross/MvvmCross/pull/2789) ([martijn00](https://github.com/martijn00))
 - Update 3rd-party-plugins.md [\#2788](https://github.com/MvvmCross/MvvmCross/pull/2788) ([vurf](https://github.com/vurf))
 - Bugfix/aapt error workaround [\#2787](https://github.com/MvvmCross/MvvmCross/pull/2787) ([Cheesebaron](https://github.com/Cheesebaron))
-
-## [6.0.0-beta8](https://github.com/MvvmCross/MvvmCross/tree/6.0.0-beta8) (2018-04-10)
-[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.0.0-beta7...6.0.0-beta8)
-
-**Fixed bugs:**
-
-- Crash when Close Viewmodel With Result using MasterDetail [\#2757](https://github.com/MvvmCross/MvvmCross/issues/2757)
-- Adjusting the resolution of the resource assembly [\#2777](https://github.com/MvvmCross/MvvmCross/pull/2777) ([nickrandolph](https://github.com/nickrandolph))
-- Make show and close of iOS views respect Animated [\#2767](https://github.com/MvvmCross/MvvmCross/pull/2767) ([martijn00](https://github.com/martijn00))
-- MvxUISliderValueTargetBinding: Add missing return [\#2750](https://github.com/MvvmCross/MvvmCross/pull/2750) ([nmilcoff](https://github.com/nmilcoff))
-
-**Closed issues:**
-
-- ViewControllers animation can't be disabled for VM Navigate\(\) / Close\(\) [\#2762](https://github.com/MvvmCross/MvvmCross/issues/2762)
-- \[iOS\] Using VS AppCenter "AppCenter.Start" while MvxApplication.Initialize results in deadlock since MVX 6 beta7 [\#2745](https://github.com/MvvmCross/MvvmCross/issues/2745)
-- WPF Presenter documentation is out of date [\#2743](https://github.com/MvvmCross/MvvmCross/issues/2743)
-- NuGet package descriptions are missing from csproj files [\#2742](https://github.com/MvvmCross/MvvmCross/issues/2742)
-
-**Merged pull requests:**
-
 - Added Margin target binding for Android [\#2780](https://github.com/MvvmCross/MvvmCross/pull/2780) ([Cheesebaron](https://github.com/Cheesebaron))
 - Fix duplicated entry for SplitView attribute on iOS ViewPresenter [\#2779](https://github.com/MvvmCross/MvvmCross/pull/2779) ([nmilcoff](https://github.com/nmilcoff))
 - Update json.md [\#2778](https://github.com/MvvmCross/MvvmCross/pull/2778) ([dawidstefaniak](https://github.com/dawidstefaniak))
