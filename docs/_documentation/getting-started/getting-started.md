@@ -50,5 +50,5 @@ You can choose to download and install an extension manually, or you can get it 
 
 ## Show me some code please!
 
-Please check [this document](https://www.mvvmcross.com/documentation/fundamentals/mvvmcross-overview) to get an overview of how MvvmCross works.
+Please check [this document](https://www.mvvmcross.com/documentation/getting-started/mvvmcross-overview) to get an overview of how MvvmCross works.
 
