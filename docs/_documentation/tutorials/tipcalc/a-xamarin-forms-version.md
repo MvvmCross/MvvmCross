@@ -444,7 +444,7 @@ namespace TipCalc.Forms.iOS
 }
 ```
 
-At this point you should be able to set the `TipCalc.Forms.Droid` as the startup project and finally give the app a run! This is what you should see:
+At this point you should be able to set the `TipCalc.Forms.iOS` as the startup project and finally give the app a run! This is what you should see:
 
 ![TipCalc Android Forms]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_Forms_iOS.png)
 
