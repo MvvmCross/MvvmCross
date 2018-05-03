@@ -1,45 +1,18 @@
 ---
 layout: documentation
-title: A note about Views and ViewModels
+title: Extra - Views and ViewModels
 category: Tutorials
-order: 10
+order: 9
 ---
-This tutorial used MvvmCross's support for naming conventions to associate the View with the ViewModel.  With a view named `TipView`, MvvmCross can locate it's ViewModel as long as it's named `TipViewModel`.  The base classes we used for views (e.g. `MvxViewController`) have `MvxViewModel` properties named `ViewModel`.  
 
-We can however link Views with ViewModels that have different names and have the Views's `ViewModel` property and have the `ViewModel` property be typed with the actual ViewModel's type rather than the `MvxViewModel` base class.  There are actually two approaches to this...
+## View <-> ViewModel
 
+During this tutorial we have used generic parameters to link our Views / ViewModels. This is the recommended approach and it provides you with many advantages.
 
-## Generic base classes
+There is an alternative however. If you don't use generic parameters, then MvvmCross will make use of some built in "Convention over Configuration" to figure out how to link classes.
 
-Instead of using the normal view base classes, there are generic versions available for use.  For example, we could have used `MvxViewController<TipViewModel>` instead of `MvxViewController`.  Unfortunately on Windows you can't use generic types within XAML.  You therefore need an extra class such as this:
+MvvmCross can locate a ViewModel for a View as long as both members have the same root and suffixes `View` & `ViewModel`. In our case, MvvmCross will look for a `TipViewModel` for `TipView`. 
 
-```c#
-public class TipViewBase : MvxWindowsPage<TipViewModel>
-{
-}
-```
-The `TipView` class can then derive from this class and the following XAML can be used:
+More notes on this docs to be added! :)
 
-```xml
-<views:TipViewBase
-    xmlns:views="using:MvvmCross.WindowsUWP.Views"
-    ...
-</views:TipViewBase>
-```
-
-## Explicit ViewModel properties
-
-The `ViewModel` property of a View can be explicitly defined.  In the case of `TipView`, you would use the following code:
-
-```c#
-public new TipViewModel ViewModel
-{
-    get {
-        return (TipViewModel)base.ViewModel;
-    }
-    set {
-        base.ViewModel = value;
-    }
-}
-```
-
+[Next!](https://www.mvvmcross.com/documentation/tutorials/tipcalc/the-tip-calc-navigation)
