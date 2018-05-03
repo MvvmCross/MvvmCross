@@ -17,9 +17,7 @@ To satisfy this we built a 'Core' .NET Standard project which contained:
 - Our ViewModel - `TipViewModel`
 - Our `App` - which contains some bootstrapping code.
 
-We even added our first User Interface - for Xamarin.Android:
-
-![Android TipCalc]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_Android.png)
+We even added our first User Interface - for Xamarin.Android.
 
 Now let's move forward to Xamarin.iOS.
 
