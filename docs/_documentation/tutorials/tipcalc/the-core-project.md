@@ -81,8 +81,9 @@ Within MvvmCross, all ViewModels _should_ inherit from `MvxViewModel`.
 So now let's create a folder called `ViewModels`, and inside of it a new class named `TipViewModel`. This is what it should look like:
 
 ```c#
-using MvvmCross.Core.ViewModels;
+using MvvmCross.ViewModels;
 using TipCalc.Core.Services;
+using System.Threading.Tasks;
 
 namespace TipCalc.Core.ViewModels
 {
