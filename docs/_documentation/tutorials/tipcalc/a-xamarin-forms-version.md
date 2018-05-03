@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: A Xamarin.Forms version
+title: TipCalc Xamarin.Forms
 category: Tutorials
 order: 7
 ---

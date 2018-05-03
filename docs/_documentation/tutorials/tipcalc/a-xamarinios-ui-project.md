@@ -37,6 +37,7 @@ Within this, you'll find the normal iOS application constructs:
 - The `Info.plist` file, which is the equivalent for an Android ApplicationManifest.
 - The `Main.cs` class
 - The `Main.storyboard` view
+- A default `ViewController` xib and class  
 
 ## Install MvvmCross
 

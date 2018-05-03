@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: A Wpf UI Project
+title: TipCalc WPF Project
 category: Tutorials
 order: 6
 ---
