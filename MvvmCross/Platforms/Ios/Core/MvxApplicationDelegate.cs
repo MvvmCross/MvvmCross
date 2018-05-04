@@ -61,8 +61,7 @@ namespace MvvmCross.Platforms.Ios.Core
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            var app = Mvx.Resolve<IMvxApplication>();
-            return app.GetAppStartHint();
+            return null;
         }
 
         protected virtual void RegisterSetup()

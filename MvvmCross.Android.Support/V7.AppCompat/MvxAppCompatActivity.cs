@@ -103,8 +103,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            var app = Mvx.Resolve<IMvxApplication>();
-            return app.GetAppStartHint();
+            return null;
         }
 
         protected override void OnDestroy()

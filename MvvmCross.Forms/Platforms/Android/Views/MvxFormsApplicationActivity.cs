@@ -118,8 +118,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            var app = Mvx.Resolve<IMvxApplication>();
-            return app.GetAppStartHint();
+            return null;
         }
 
         public virtual void InitializeForms(Bundle bundle)
