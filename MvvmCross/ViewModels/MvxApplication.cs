@@ -60,14 +60,6 @@ namespace MvvmCross.ViewModels
             // do nothing
         }
 
-        /// <summary>
-        /// Return a custom app start hint object from the subclass
-        /// </summary>
-        public virtual object GetAppStartHint()
-        {
-            return null;
-        }
-
         public IMvxViewModelLocator FindViewModelLocator(MvxViewModelRequest request)
         {
             return DefaultLocator;
@@ -83,12 +75,6 @@ namespace MvvmCross.ViewModels
             where TViewModel : IMvxViewModel
         {
             Mvx.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel>>();
-        }
-
-        protected void RegisterAppStart<TViewModel, TParameter>()
-            where TViewModel : IMvxViewModel<TParameter>
-        {
-            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel, TParameter>>();
         }
 
         protected void RegisterAppStart(IMvxAppStart appStart)
@@ -113,14 +99,17 @@ namespace MvvmCross.ViewModels
         }
     }
 
-    public class MvxApplication<TStartupHint> : MvxApplication, IMvxApplication<TStartupHint>
+    public abstract class MvxApplication<TStartParameter> : IMvxApplication<TStartParameter>
     {
-        public virtual TStartupHint StartupWithHint(TStartupHint hint)
+        protected void RegisterAppStart<TViewModel, TParameter>()
+            where TViewModel : IMvxViewModel<TParameter>
         {
-            base.Startup();
-
-            // do nothing, so just return the original hint
-            return hint;
+            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel, TParameter>>();
         }
+
+        /// <summary>
+        /// Return a custom app start hint object from the subclass
+        /// </summary>
+        public abstract TStartParameter StartParameter { get; }
     }
 }
