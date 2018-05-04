@@ -15,6 +15,8 @@ namespace MvvmCross.ViewModels
         void Startup();
 
         void Reset();
+
+        object GetAppStartHint();
     }
 
     public interface IMvxApplication<TStartupHint> : IMvxApplication
