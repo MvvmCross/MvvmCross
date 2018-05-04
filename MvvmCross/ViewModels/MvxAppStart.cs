@@ -75,7 +75,7 @@ namespace MvvmCross.ViewModels
         {
             if (hint != null)
             {
-                MvxLog.Instance.Trace("Hint ignored in default MvxAppStart");
+                MvxLog.Instance.Trace("Native platform hint ignored in default MvxAppStart");
             }
 
             try
@@ -97,11 +97,15 @@ namespace MvvmCross.ViewModels
 
         protected override void NavigateToFirstViewModel(object hint)
         {
-            TParameter navParam = default;
-
-            if (hint is TParameter)
+            if (hint != null)
             {
-                navParam = (TParameter)hint;
+                MvxLog.Instance.Trace("Native platform hint ignored in default MvxAppStart");
+            }
+
+            TParameter navParam = default;
+            if (Application is IMvxApplication<TParameter> typedApplication)
+            {
+                navParam = typedApplication.StartParameter;
             }
 
             try
@@ -114,5 +118,4 @@ namespace MvvmCross.ViewModels
             }
         }
     }
-
 }
