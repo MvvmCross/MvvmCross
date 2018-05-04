@@ -2,27 +2,17 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.OS;
 using Android.Runtime;
-using Android.Views;
-using MvvmCross.Droid.Support.V4;
-using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
+using Playground.Droid.Views.Base;
 
 namespace Playground.Droid.Views
 {
-    [MvxFragmentPresentation(typeof(SplitRootViewModel), Resource.Id.split_content_frame)]
+    [MvxFragmentPresentation(typeof(SplitRootViewModel), Resource.Id.split_content_frame, AddToBackStack = true)]
     [Register(nameof(SplitDetailNavView))]
-    public class SplitDetailNavView : MvxFragment<SplitDetailNavViewModel>
+    public class SplitDetailNavView : BaseSplitDetailView<SplitDetailNavViewModel>
     {
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-        {
-            base.OnCreateView(inflater, container, savedInstanceState);
-
-            var view = this.BindingInflate(Resource.Layout.SplitDetailView, null);
-
-            return view;
-        }
+        protected override int FragmentLayoutId => Resource.Layout.SplitDetailNavView;
     }
 }
