@@ -145,4 +145,31 @@ namespace MvvmCross.ViewModels
             }
         }
     }
+
+    public class MvxAppStart<TViewModel, TParameter> : MvxAppStart<TViewModel> where TViewModel : IMvxViewModel<TParameter>
+    {
+        public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService) : base(application, navigationService)
+        {
+        }
+
+        protected override void NavigateToFirstViewModel(object hint)
+        {
+            TParameter navParam = default;
+
+            if (hint is TParameter)
+            {
+                navParam = (TParameter)hint;
+            }
+
+            try
+            {
+                NavigationService.Navigate<TViewModel, TParameter>(navParam).GetAwaiter().GetResult();
+            }
+            catch (System.Exception exception)
+            {
+                throw exception.MvxWrap("Problem navigating to ViewModel {0}", typeof(TViewModel).Name);
+            }
+        }
+    }
+
 }
