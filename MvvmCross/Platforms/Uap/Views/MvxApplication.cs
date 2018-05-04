@@ -79,7 +79,8 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            var app = Mvx.Resolve<IMvxApplication>();
+            return app.GetAppStartHint();
         }
 
         protected virtual Frame InitializeFrame(IActivatedEventArgs activationArgs)
