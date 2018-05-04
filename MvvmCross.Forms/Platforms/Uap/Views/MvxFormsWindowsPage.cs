@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -41,7 +41,8 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            var app = Mvx.Resolve<IMvxApplication>();
+            return app.GetAppStartHint();
         }
 
         protected virtual void LoadFormsApplication()
