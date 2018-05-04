@@ -35,5 +35,6 @@
 		parent="AppTheme.Base">
 		<item name="android:statusBarColor">@color/colorPrimaryDark</item>
 		<item name="android:windowNoTitle">true</item>
+    <item name="android:windowBackground">@color/colorAccent</item>
 	</style>
 </resources>
