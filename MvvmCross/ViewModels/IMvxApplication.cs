@@ -15,5 +15,7 @@ namespace MvvmCross.ViewModels
         void Startup(object hint);
 
         void Reset();
+
+        object GetAppStartHint();
     }
 }
