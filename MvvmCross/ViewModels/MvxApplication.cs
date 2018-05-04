@@ -93,7 +93,7 @@ namespace MvvmCross.ViewModels
         }
     }
 
-    public abstract class MvxApplication<TStartParameter> : IMvxApplication<TStartParameter>
+    public abstract class MvxApplication<TStartParameter> : MvxApplication, IMvxApplication<TStartParameter>
     {
         protected void RegisterAppStart<TViewModel, TParameter>()
             where TViewModel : IMvxViewModel<TParameter>
