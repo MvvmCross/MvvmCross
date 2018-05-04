@@ -45,7 +45,8 @@ namespace MvvmCross.Platforms.Tvos.Core
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            var app = Mvx.Resolve<IMvxApplication>();
+            return app.GetAppStartHint();
         }
 
         public override void WillEnterForeground(UIApplication application)
