@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="Views\Base\BaseSplitDetailView.cs" />
     <Compile Include="Views\CollectionView.cs" />
     <Compile Include="Views\DictionaryBindingView.cs" />
     <Compile Include="Views\RootView.cs" />
@@ -107,6 +108,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ItemListSharedElementsTemplate.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SplitDetailNavView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
