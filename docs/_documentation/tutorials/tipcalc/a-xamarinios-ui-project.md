@@ -246,4 +246,4 @@ There's more we could do to make this User Interface nicer and to make the app r
 
 Let's move on to Windows!
 
-[Next!](https://www.mvvmcross.com/documentation/tutorials/tipcalc/a-universal-windows-app-ui-project)
+[Next!](https://www.mvvmcross.com/documentation/tutorials/tipcalc/a-windows-universal-app-platform-project)
