@@ -107,6 +107,10 @@ namespace MvvmCross.ViewModels
             {
                 navParam = typedApplication.StartParameter;
             }
+            else if(hint is TParameter startHint)
+            {
+                navParam = startHint;
+            }
 
             try
             {
