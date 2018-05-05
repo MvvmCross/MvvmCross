@@ -81,7 +81,6 @@ namespace MvvmCross.Platforms.Uap.Views
             }
 
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-
         }
 
         private string _reqData = string.Empty;
