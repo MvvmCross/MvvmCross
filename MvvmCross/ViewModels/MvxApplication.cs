@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.IoC;
+using MvvmCross.Logging;
 using MvvmCross.Plugin;
 
 namespace MvvmCross.ViewModels
@@ -101,9 +102,12 @@ namespace MvvmCross.ViewModels
 
     public abstract class MvxApplication<TStartParameter> : MvxApplication, IMvxApplication<TStartParameter>
     {
-        protected void RegisterAppStart<TViewModel, TParameter>()
-            where TViewModel : IMvxViewModel<TParameter>
+        protected override void RegisterAppStart<TViewModel, TParameter>()
         {
+            if(!(typeof(TStartParameter).IsAssignableFrom(typeof(TParameter))))
+            {
+                MvxLog.Instance.Warn("Registering startup parameter type that doesn't match StartParameter type of MvxApplication. Use non-generic version of MvxApplication");
+            }
             Mvx.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel, TParameter>>();
         }
 
