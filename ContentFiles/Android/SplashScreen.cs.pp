@@ -1,5 +1,6 @@
 using Android.App;
 using Android.Content.PM;
+using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Views;
 
 namespace $rootnamespace$
@@ -7,14 +8,12 @@ namespace $rootnamespace$
     [Activity(
         Label = "$rootnamespace$"
         , MainLauncher = true
-        , Icon = "@mipmap/icon"
-        , Theme = "@style/Theme.Splash"
         , NoHistory = true
         , ScreenOrientation = ScreenOrientation.Portrait)]
-    public class SplashScreen : MvxSplashScreenActivity
+    public class SplashScreen : MvxSplashScreenActivity<MvxAndroidSetup<Core.App>, Core.App>
     {
         public SplashScreen()
-            : base(Resource.Layout.SplashScreen)
+             : base(Resource.Layout.SplashScreen)
         {
         }
     }
