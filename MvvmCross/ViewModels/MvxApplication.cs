@@ -61,6 +61,14 @@ namespace MvvmCross.ViewModels
             // do nothing
         }
 
+        /// <summary>
+        /// Return a custom app start hint object from the subclass
+        /// </summary>
+        public virtual object GetAppStartHint(object hint)
+        {
+            return hint;
+        }
+
         public IMvxViewModelLocator FindViewModelLocator(MvxViewModelRequest request)
         {
             return DefaultLocator;

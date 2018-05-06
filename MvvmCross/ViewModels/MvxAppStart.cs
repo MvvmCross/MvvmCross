@@ -102,12 +102,8 @@ namespace MvvmCross.ViewModels
                 MvxLog.Instance.Trace("Native platform hint ignored in default MvxAppStart");
             }
 
-            TParameter navParam = default;
-            if (Application is IMvxApplication<TParameter> typedApplication)
-            {
-                navParam = typedApplication.StartParameter;
-            }
-            else if(hint is TParameter startHint)
+            hint = Application.GetAppStartHint(hint);
+            if (hint is TParameter)
             {
                 navParam = startHint;
             }

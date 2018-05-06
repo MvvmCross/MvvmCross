@@ -49,5 +49,13 @@ namespace Playground.Core
         {
             base.Reset();
         }
+
+        /// <summary>
+        /// Return a custom app start hint object from the subclass
+        /// </summary>
+        public override object GetAppStartHint(object hint)
+        {
+            return base.GetAppStartHint(hint);
+        }
     }
 }
