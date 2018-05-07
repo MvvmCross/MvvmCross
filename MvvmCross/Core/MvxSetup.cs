@@ -291,12 +291,23 @@ namespace MvvmCross.Core
                 AppDomain.CurrentDomain
                     .GetAssemblies()
                     .AsParallel()
-                    .Where(AssemblyReferencesMvvmCross);
+                    .Where(asmb=> AssemblyReferencesMvvmCross(asmb, mvvmCrossAssemblyName));
 
             return pluginAssemblies;
 
-            bool AssemblyReferencesMvvmCross(Assembly assembly)
-                => assembly.GetReferencedAssemblies().Any(a => a.Name == mvvmCrossAssemblyName);
+
+        }
+
+        private bool AssemblyReferencesMvvmCross(Assembly assembly, string mvvmCrossAssemblyName)
+        {
+            try
+            {
+                return assembly.GetReferencedAssemblies().Any(a => a.Name == mvvmCrossAssemblyName);
+            }
+            catch(Exception ex)
+            {
+                return true;
+            }
         }
 
         public virtual void LoadPlugins(IMvxPluginManager pluginManager)
