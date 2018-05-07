@@ -1,9 +1,10 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using Android.Content;
+using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Widget;
@@ -39,7 +40,11 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
             get
             {
-                return new TimeSpan(Hour, Minute, 0);
+                if (Build.VERSION.SdkInt <= BuildVersionCodes.LollipopMr1)
+#pragma warning disable CS0618
+                    return new TimeSpan((int)CurrentHour, (int)CurrentMinute, 0);
+                else
+                    return new TimeSpan(Hour, Minute, 0);
             }
             set
             {
@@ -49,13 +54,28 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                     _initialized = true;
                 }
 
-                if (Hour != value.Hours)
+                if (Build.VERSION.SdkInt <= BuildVersionCodes.LollipopMr1)
                 {
-                    Hour = value.Hours;
+#pragma warning disable CS0618
+                    if ((int)CurrentHour != value.Hours)
+                    {
+                        CurrentHour = (Java.Lang.Integer)value.Hours;
+                    }
+                    if ((int)CurrentMinute != value.Minutes)
+                    {
+                        CurrentMinute = (Java.Lang.Integer)value.Minutes;
+                    }
                 }
-                if (Minute != value.Minutes)
+                else
                 {
-                    Minute = value.Minutes;
+                    if (Hour != value.Hours)
+                    {
+                        Hour = value.Hours;
+                    }
+                    if (Minute != value.Minutes)
+                    {
+                        Minute = value.Minutes;
+                    }
                 }
             }
         }
