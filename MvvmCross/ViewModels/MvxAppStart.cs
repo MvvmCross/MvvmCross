@@ -20,24 +20,24 @@ namespace MvvmCross.ViewModels
             Application = application;
         }
 
-        public void Start(object hint = null)
+        public object Start(object hint = null)
         {
             // Check whether Start has commenced, and return if it has
             if (Interlocked.CompareExchange(ref startHasCommenced, 1, 0) == 1)
-                return;
+                return hint;
 
-            Startup(hint);
+            return Startup(hint);
         }
 
-        protected virtual void Startup(object hint = null)
+        protected virtual object Startup(object hint = null)
         {
-            ApplicationStartup(hint);
+            return ApplicationStartup(hint);
         }
 
-        protected virtual void ApplicationStartup(object hint = null)
+        protected virtual object ApplicationStartup(object hint = null)
         {
             MvxLog.Instance.Trace("AppStart: Application Startup - On UI thread");
-            Application.Startup(hint);
+            return Application.Startup(hint);
         }
 
         public virtual bool IsStarted => startHasCommenced != 0;
@@ -64,11 +64,13 @@ namespace MvvmCross.ViewModels
             NavigationService = navigationService;
         }
 
-        protected override void Startup(object hint = null)
+        protected override object Startup(object hint = null)
         {
-            base.Startup(hint);
+            hint = base.Startup(hint);
 
             NavigateToFirstViewModel(hint);
+
+            return hint;
         }
 
         protected virtual void NavigateToFirstViewModel(object hint)
@@ -102,7 +104,6 @@ namespace MvvmCross.ViewModels
                 MvxLog.Instance.Trace("Native platform hint ignored in default MvxAppStart");
             }
 
-            hint = Application.GetAppStartHint(hint);
             if (hint is TParameter)
             {
                 navParam = startHint;

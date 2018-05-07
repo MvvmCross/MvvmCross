@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.IoC;
-using MvvmCross.Logging;
 using MvvmCross.Plugin;
 
 namespace MvvmCross.ViewModels
@@ -46,9 +45,10 @@ namespace MvvmCross.ViewModels
         /// Any initialization steps that need to be done on the UI thread
         /// </summary>
         /// <param name="hint"></param>
-        public virtual void Startup(object hint)
+        public virtual object Startup(object hint)
         {
             // do nothing
+            return hint;
         }
 
         /// <summary>
@@ -59,14 +59,6 @@ namespace MvvmCross.ViewModels
         public virtual void Reset()
         {
             // do nothing
-        }
-
-        /// <summary>
-        /// Return a custom app start hint object from the subclass
-        /// </summary>
-        public virtual object GetAppStartHint(object hint)
-        {
-            return hint;
         }
 
         public IMvxViewModelLocator FindViewModelLocator(MvxViewModelRequest request)

@@ -12,7 +12,7 @@ namespace MvvmCross.ViewModels
 
         void Initialize();
 
-        void Startup(object hint);
+        object Startup(object hint);
 
         void Reset();
     }
