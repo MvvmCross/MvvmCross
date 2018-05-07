@@ -68,18 +68,20 @@ namespace MvvmCross.Platforms.Uap.Views
             }
         }
 
-        public void ClearBackStack()
+        public virtual void ClearBackStack()
         {
             var backStack = base.Frame?.BackStack;
 
-            if (backStack != null)
+            while (backStack?.Any())
             {
-                while (backStack.Any())
-                {
-                    backStack.RemoveAt(0);
-                }
+                backStack.RemoveAt(0);
             }
 
+            UpdateBackButtonVisibility();
+        }
+        
+        protected virtual void UpdateBackButtonVisibility()
+        {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
