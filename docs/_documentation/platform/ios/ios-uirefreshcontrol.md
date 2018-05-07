@@ -4,7 +4,7 @@ title: iOS UIRefreshControl
 category: Platforms
 ---
 
-Available from iOS 6.
+Available from iOS 6, MvvmCross 5.0.0.
 
 MvvmCross has a extended version of UIRefreshControl on iOS which exposes `RefreshCommand`, `IsRefreshing`, and `Message`. This control is useful when you have a
 scrollable View such as a UITableView, UICollectionView or a UIScrollView, you want to refresh, when scrolling it to the top and pulling it down. It is also known as pull to refresh.
