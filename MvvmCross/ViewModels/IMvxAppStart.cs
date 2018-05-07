@@ -6,7 +6,7 @@ namespace MvvmCross.ViewModels
 {
     public interface IMvxAppStart
     {
-        object Start(object hint = null);
+        void Start(object hint = null);
 
         bool IsStarted { get; }
 

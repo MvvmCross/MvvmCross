@@ -20,13 +20,13 @@ namespace MvvmCross.ViewModels
             Application = application;
         }
 
-        public object Start(object hint = null)
+        public void Start(object hint = null)
         {
             // Check whether Start has commenced, and return if it has
             if (Interlocked.CompareExchange(ref startHasCommenced, 1, 0) == 1)
-                return hint;
+                return;
 
-            return Startup(hint);
+            Startup(hint);
         }
 
         protected virtual object Startup(object hint = null)
