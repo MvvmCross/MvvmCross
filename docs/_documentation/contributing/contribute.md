@@ -18,6 +18,10 @@ If you would like to help make MvvmCross even better, then please do:
 * please suggest editions for the documentation files - we're currently light on documentation!
 * if you use the framework, then please let us know - we love to see what people are doing with it
 
+# Help updating the docs!
+
+Everyone can contribute and help improving the docs! The docs are part of the source tree, so just go over to github and help us out!
+
 # Work with and debug MvvmCross
 
 The current state of Visual Studio for Mac doesn't allow us to build MvvmCross. This is because we use multi-target, but you can still compile from command line on Mac by running:
