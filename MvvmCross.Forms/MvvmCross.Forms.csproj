@@ -68,14 +68,6 @@ This package contains MvvmCross to use with Xamarin.Forms</Description>
     <ProjectReference Include="..\MvvmCross.Android.Support\Fragment\MvvmCross.Droid.Support.Fragment.csproj" />
     <ProjectReference Include="..\MvvmCross.Android.Support\Core.UI\MvvmCross.Droid.Support.Core.UI.csproj" />
     <ProjectReference Include="..\MvvmCross.Android.Support\Design\MvvmCross.Droid.Support.Design.csproj" />
-    <PackageReference Include="Xamarin.Build.Download" Version="0.4.9" />
-    <PackageReference Include="Xamarin.Android.Support.v4" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.Compat" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.Annotations" Version="27.0.2" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">
@@ -84,7 +76,6 @@ This package contains MvvmCross to use with Xamarin.Forms</Description>
     <PackageReference Include="Tizen.NET" Version="4.0.0">
       <ExcludeAssets>Runtime</ExcludeAssets>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms.Platform.Tizen" Version="2.5.0.280555" />
   </ItemGroup>
   
   <ItemGroup>
