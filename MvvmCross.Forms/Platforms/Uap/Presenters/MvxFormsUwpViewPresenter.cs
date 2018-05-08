@@ -10,6 +10,7 @@ using MvvmCross.Platforms.Uap.Presenters;
 using MvvmCross.Platforms.Uap.Views;
 using MvvmCross.ViewModels;
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Forms.Platforms.Uap.Presenters
 {
@@ -51,20 +52,20 @@ namespace MvvmCross.Forms.Platforms.Uap.Presenters
             FormsPagePresenter.RegisterAttributeTypes();
         }
 
-        public override void ChangePresentation(MvxPresentationHint hint)
+        public override async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            FormsPagePresenter.ChangePresentation(hint);
-            base.ChangePresentation(hint);
+            if (!await FormsPagePresenter.ChangePresentation(hint)) return false;
+            return await base.ChangePresentation(hint);
         }
 
-        public override void Show(MvxViewModelRequest request)
+        public override Task<bool> Show(MvxViewModelRequest request)
         {
-            FormsPagePresenter.Show(request);
+            return FormsPagePresenter.Show(request);
         }
 
-        public override void Close(IMvxViewModel viewModel)
+        public override Task<bool> Close(IMvxViewModel viewModel)
         {
-            FormsPagePresenter.Close(viewModel);
+            return FormsPagePresenter.Close(viewModel);
         }
 
         public virtual bool ShowPlatformHost(Type hostViewModel = null)
