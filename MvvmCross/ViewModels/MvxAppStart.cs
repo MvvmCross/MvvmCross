@@ -152,26 +152,36 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        protected override void NavigateToFirstViewModel(object hint)
+        protected override object ApplicationStartup(object hint = null)
         {
-            if (hint != null)
+            if (hint is TParameter typedHint &&
+                Application is IMvxApplication<TParameter> typedApplication)
             {
-                MvxLog.Instance.Trace("Native platform hint ignored in default MvxAppStart");
+                return typedApplication.StartupWithHint(typedHint);
             }
 
+            return base.ApplicationStartup(hint);
+        }
+
+        protected override void NavigateToFirstViewModel(object hint)
+        {
             TParameter navParam = default;
-            if (Application is IMvxApplication<TParameter> typedApplication)
+
+            if (hint is TParameter typedHint)
             {
-                navParam = typedApplication.StartParameter;
-            }
-            else if(hint is TParameter startHint)
-            {
-                navParam = startHint;
+                navParam = typedHint;
             }
 
             try
             {
-                NavigationService.Navigate<TViewModel, TParameter>(navParam).GetAwaiter().GetResult();
+                if (typeof(IMvxViewModel<TParameter>).IsAssignableFrom(typeof(TViewModel)))
+                {
+                    NavigationService.Navigate(typeof(TViewModel), navParam).GetAwaiter().GetResult();
+                }
+                else
+                {
+                    NavigationService.Navigate<TViewModel>().GetAwaiter().GetResult();
+                }
             }
             catch (System.Exception exception)
             {

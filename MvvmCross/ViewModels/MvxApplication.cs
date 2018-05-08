@@ -45,10 +45,9 @@ namespace MvvmCross.ViewModels
         /// Any initialization steps that need to be done on the UI thread
         /// </summary>
         /// <param name="hint"></param>
-        public virtual object Startup(object hint)
+        public virtual void Startup()
         {
             // do nothing
-            return hint;
         }
 
         /// <summary>
@@ -100,20 +99,14 @@ namespace MvvmCross.ViewModels
         }
     }
 
-    public abstract class MvxApplication<TStartParameter> : MvxApplication, IMvxApplication<TStartParameter>
+    public class MvxApplication<TStartupHint> : MvxApplication, IMvxApplication<TStartupHint>
     {
-        protected override void RegisterAppStart<TViewModel, TParameter>()
+        public virtual TStartupHint StartupWithHint(TStartupHint hint)
         {
-            if(!(typeof(TStartParameter).IsAssignableFrom(typeof(TParameter))))
-            {
-                MvxLog.Instance.Warn("Registering startup parameter type that doesn't match StartParameter type of MvxApplication. Use non-generic version of MvxApplication");
-            }
-            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel, TParameter>>();
-        }
+            base.Startup();
 
-        /// <summary>
-        /// Return a custom app start hint object from the subclass
-        /// </summary>
-        public abstract TStartParameter StartParameter { get; }
+            // do nothing, so just return the original hint
+            return hint;
+        }
     }
 }
