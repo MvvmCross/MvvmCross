@@ -35,7 +35,7 @@ namespace Playground.Core
         /// Do any UI bound startup actions here
         /// </summary>
         /// <param name="hint"></param>
-        public override object Startup(object hint)
+        public override string StartupWithHint(string hint)
         {
             return "Hello Playground!";
         }

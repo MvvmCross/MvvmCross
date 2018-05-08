@@ -37,7 +37,15 @@ namespace MvvmCross.ViewModels
         protected virtual object ApplicationStartup(object hint = null)
         {
             MvxLog.Instance.Trace("AppStart: Application Startup - On UI thread");
-            return Application.Startup(hint);
+
+            if (hint != null)
+            {
+                MvxLog.Instance.Trace("Use generic MvxAppStart so that hint can be passed to Application.StartupWithHint");
+            }
+
+            Application.Startup();
+
+            return hint;
         }
 
         public virtual bool IsStarted => startHasCommenced != 0;
@@ -91,10 +99,21 @@ namespace MvvmCross.ViewModels
         }
     }
 
-    public class MvxAppStart<TViewModel, TParameter> : MvxAppStart<TViewModel> where TViewModel : IMvxViewModel<TParameter>
+    public class MvxAppStart<TViewModel, TParameter> : MvxAppStart<TViewModel> where TViewModel : IMvxViewModel
     {
         public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService) : base(application, navigationService)
         {
+        }
+
+        protected override object ApplicationStartup(object hint = null)
+        {
+            if (hint is TParameter typedHint &&
+                Application is IMvxApplication<TParameter> typedApplication)
+            {
+                return typedApplication.StartupWithHint(typedHint);
+            }
+
+            return base.ApplicationStartup(hint);
         }
 
         protected override void NavigateToFirstViewModel(object hint)
@@ -104,14 +123,21 @@ namespace MvvmCross.ViewModels
                 MvxLog.Instance.Trace("Native platform hint ignored in default MvxAppStart");
             }
 
-            if (hint is TParameter)
+            if (hint is TParameter typedHint)
             {
-                navParam = startHint;
+                navParam = typedHint;
             }
 
             try
             {
-                NavigationService.Navigate<TViewModel, TParameter>(navParam).GetAwaiter().GetResult();
+                if (typeof(IMvxViewModel<TParameter>).IsAssignableFrom(typeof(TViewModel)))
+                {
+                    NavigationService.Navigate(typeof(TViewModel), navParam).GetAwaiter().GetResult();
+                }
+                else
+                {
+                    NavigationService.Navigate<TViewModel>().GetAwaiter().GetResult();
+                }
             }
             catch (System.Exception exception)
             {

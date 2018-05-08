@@ -12,14 +12,13 @@ namespace MvvmCross.ViewModels
 
         void Initialize();
 
-        object Startup(object hint);
+        void Startup();
 
         void Reset();
     }
 
-    public interface IMvxApplication<TStartParameter>
+    public interface IMvxApplication<TStartupHint> : IMvxApplication
     {
-        TStartParameter StartParameter { get; }
-        object GetAppStartHint(object hint);
+        TStartupHint StartupWithHint(TStartupHint hint);
     }
 }
