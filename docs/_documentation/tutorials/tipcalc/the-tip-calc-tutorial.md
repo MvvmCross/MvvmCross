@@ -1,20 +1,24 @@
 ---
 layout: documentation
-title: The Tip Calc tutorial
+title: The TipCalc tutorial
 category: Tutorials
 order: 1
 ---
-In this first Model-View-ViewModel project, we'll create a simple single screen cross-platform application for calculating the tip at a restaurant.
+
+Welcome to the TipCalc Tutorial! In the following guide we will create a simple Cross-Platform app to introduce some key concepts and showcase some MvvmCross features.
+
+The application consists on a single screen for calculating the tip at a restaurant.
 
 Here's a sketch of where we hope to end up:
 
-![Sketch](../../assets/img/tutorials/tipcalc/TipCalc_Sketch.png)
+![Sketch]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_Sketch.png)
 
 The goals of this first application are all about **introducing**:
 
-1. the general structure of MvvmCross applications
-2. some of the code elements required in all MvvmCross applications
-3. how data-binding support on Xamarin.Android and Xamarin.iOS (the products formerly known as Mono for Android and MonoTouch)
+1. The general structure of MvvmCross applications
+2. Some of the code elements required in all MvvmCross applications
+3. Data-Binding
 
-Within this guide, we won't attempt to provide any introduction to the Apple, Google, Microsoft, and Xamarin products and platforms - there are plenty of guides available already for all of those. Instead, we'll focus instead on pure, unadulterated MvvmCross Nirvana.
+Within this guide, we won't attempt to provide any introduction to the Apple, Google, Microsoft, or Xamarin products. We will focus on pure, unadulterated MvvmCross framework.
 
+[Next!](https://www.mvvmcross.com/documentation/tutorials/tipcalc/the-core-project)
