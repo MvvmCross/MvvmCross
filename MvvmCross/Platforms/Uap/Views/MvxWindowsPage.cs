@@ -72,7 +72,7 @@ namespace MvvmCross.Platforms.Uap.Views
         {
             var backStack = base.Frame?.BackStack;
 
-            while (backStack?.Any())
+            while (backStack != null && backStack.Any())
             {
                 backStack.RemoveAt(0);
             }
