@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -211,13 +212,13 @@ namespace MvvmCross.Platforms.Android.Presenters
             return activityViewModelType;
         }
 
-        public override void Show(MvxViewModelRequest request)
+        public override Task<bool> Show(MvxViewModelRequest request)
         {
-            GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
+            return GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
 
         #region Show implementations
-        protected virtual void ShowActivity(
+        protected virtual Task<bool> ShowActivity(
             Type view,
             MvxActivityPresentationAttribute attribute,
             MvxViewModelRequest request)
@@ -227,6 +228,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 intent.PutExtras(attribute.Extras);
 
             ShowIntent(intent, CreateActivityTransitionOptions(intent, attribute, request));
+            return Task.FromResult(true);
         }
 
         protected virtual Bundle CreateActivityTransitionOptions(Intent intent, MvxActivityPresentationAttribute attribute, MvxViewModelRequest request)
@@ -301,7 +303,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             Show(hostViewModelRequest);
         }
 
-        protected virtual void ShowFragment(
+        protected virtual Task<bool> ShowFragment(
             Type view,
             MvxFragmentPresentationAttribute attribute,
             MvxViewModelRequest request)
@@ -311,7 +313,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             {
                 ShowNestedFragment(view, attribute, request);
 
-                return;
+                return Task.FromResult(true);
             }
 
             // if there is no Activity host associated, assume is the current activity
@@ -333,6 +335,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
                 PerformShowFragmentTransaction(CurrentActivity.FragmentManager, attribute, request);
             }
+            return Task.FromResult(true);
         }
 
         protected virtual void ShowNestedFragment(
@@ -458,7 +461,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         }
 
-        protected virtual void ShowDialogFragment(
+        protected virtual Task<bool> ShowDialogFragment(
             Type view,
             MvxDialogFragmentPresentationAttribute attribute,
             MvxViewModelRequest request)
@@ -492,46 +495,47 @@ namespace MvvmCross.Platforms.Android.Presenters
             dialog.Show(ft, fragmentName);
 
             OnFragmentChanged(ft, dialog, attribute, request);
+            return Task.FromResult(true);
         }
         #endregion
 
-        public override void Close(IMvxViewModel viewModel)
+        public override Task<bool> Close(IMvxViewModel viewModel)
         {
-            GetPresentationAttributeAction(new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);
+            return GetPresentationAttributeAction(new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);
         }
 
         #region Close implementations
-        protected virtual bool CloseActivity(IMvxViewModel viewModel, MvxActivityPresentationAttribute attribute)
+        protected virtual Task<bool> CloseActivity(IMvxViewModel viewModel, MvxActivityPresentationAttribute attribute)
         {
             var currentView = CurrentActivity as IMvxView;
 
             if (currentView == null)
             {
                 MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe has no current page");
-                return false;
+                return Task.FromResult(false);
             }
 
             if (currentView.ViewModel != viewModel)
             {
                 MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
-                return false;
+                return Task.FromResult(false);
             }
 
             CurrentActivity.Finish();
 
-            return true;
+            return Task.FromResult(true);
         }
 
-        protected virtual bool CloseFragmentDialog(IMvxViewModel viewModel, MvxDialogFragmentPresentationAttribute attribute)
+        protected virtual Task<bool> CloseFragmentDialog(IMvxViewModel viewModel, MvxDialogFragmentPresentationAttribute attribute)
         {
             string tag = FragmentJavaName(attribute.ViewType);
             var toClose = CurrentFragmentManager.FindFragmentByTag(tag);
             if (toClose != null && toClose is DialogFragment dialog)
             {
                 dialog.DismissAllowingStateLoss();
-                return true;
+                return Task.FromResult(true);
             }
-            return false;
+            return Task.FromResult(false);
         }
 
         protected virtual bool CloseFragments()
@@ -547,7 +551,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             return true;
         }
 
-        protected virtual bool CloseFragment(IMvxViewModel viewModel, MvxFragmentPresentationAttribute attribute)
+        protected virtual Task<bool> CloseFragment(IMvxViewModel viewModel, MvxFragmentPresentationAttribute attribute)
         {
             // try to close nested fragment first
             if (attribute.FragmentHostViewType != null)
@@ -555,18 +559,18 @@ namespace MvvmCross.Platforms.Android.Presenters
                 var fragmentHost = GetFragmentByViewType(attribute.FragmentHostViewType);
                 if (fragmentHost != null
                     && TryPerformCloseFragmentTransaction(fragmentHost.ChildFragmentManager, attribute))
-                    return true;
+                    return Task.FromResult(true);
             }
 
             // Close fragment. If it isn't successful, then close the current Activity
             if (TryPerformCloseFragmentTransaction(CurrentFragmentManager, attribute))
             {
-                return true;
+                return Task.FromResult(true);
             }
             else
             {
                 CurrentActivity.Finish();
-                return true;
+                return Task.FromResult(true);
             }
         }
 

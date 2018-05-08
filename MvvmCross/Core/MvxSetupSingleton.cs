@@ -115,20 +115,20 @@ namespace MvvmCross.Core
             lock (LockObject)
             {
                 _currentMonitor = setupMonitor;
-                
+
                 // if the tcs is not null, it means the initialization is running
                 if (IsInitialisedTaskCompletionSource != null)
                 {
                     // If the task is already completed at this point, let the monitor know it has finished. 
                     // but don't do it otherwise because it's done elsewhere
-                    if(IsInitialisedTaskCompletionSource.Task.IsCompleted)
+                    if (IsInitialisedTaskCompletionSource.Task.IsCompleted)
                     {
                         _currentMonitor?.InitializationComplete();
                     }
 
                     return;
                 }
-                
+
                 StartSetupInitialization();
             }
         }
@@ -173,18 +173,24 @@ namespace MvvmCross.Core
         {
             IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
             _setup.InitializePrimary();
-            Task.Run(() =>
+            Task.Run(async () =>
             {
                 _setup.InitializeSecondary();
+                IMvxSetupMonitor monitor;
                 lock (LockObject)
                 {
                     IsInitialisedTaskCompletionSource.SetResult(true);
-                    var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
-                    dispatcher.RequestMainThreadAction(() =>
+                    monitor = _currentMonitor;
+                }
+
+                if (monitor != null)
+                {
+                    var dispatcher = Mvx.GetSingleton<IMvxMainThreadAsyncDispatcher>();
+                    await dispatcher.ExecuteOnMainThreadAsync(async () =>
                     {
-                        if (_currentMonitor != null)
+                        if (monitor != null)
                         {
-                            _currentMonitor?.InitializationComplete();
+                            await monitor.InitializationComplete();
                         }
                     });
                 }

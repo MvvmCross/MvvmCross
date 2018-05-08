@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading;
+using System.Threading.Tasks;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
@@ -26,18 +27,27 @@ namespace MvvmCross.ViewModels
             if (Interlocked.CompareExchange(ref startHasCommenced, 1, 0) == 1)
                 return;
 
-            Startup(hint);
+            Startup(hint).GetAwaiter().GetResult();
         }
 
-        protected virtual void Startup(object hint = null)
+        public async Task StartAsync(object hint = null)
         {
-            ApplicationStartup(hint);
+            // Check whether Start has commenced, and return if it has
+            if (Interlocked.CompareExchange(ref startHasCommenced, 1, 0) == 1)
+                return;
+
+            await Startup(hint);
         }
 
-        protected virtual void ApplicationStartup(object hint = null)
+        protected virtual async Task Startup(object hint = null)
+        {
+            await ApplicationStartup(hint);
+        }
+
+        protected virtual async Task ApplicationStartup(object hint = null)
         {
             MvxLog.Instance.Trace("AppStart: Application Startup - On UI thread");
-            Application.Startup(hint);
+            await Application.Startup(hint);
         }
 
         public virtual bool IsStarted => startHasCommenced != 0;
@@ -64,14 +74,14 @@ namespace MvvmCross.ViewModels
             NavigationService = navigationService;
         }
 
-        protected override void Startup(object hint = null)
+        protected override async Task Startup(object hint = null)
         {
-            base.Startup(hint);
+            await base.Startup(hint);
 
-            NavigateToFirstViewModel(hint);
+            await NavigateToFirstViewModel(hint);
         }
 
-        protected virtual void NavigateToFirstViewModel(object hint)
+        protected virtual async Task NavigateToFirstViewModel(object hint)
         {
             if (hint != null)
             {
@@ -80,7 +90,7 @@ namespace MvvmCross.ViewModels
 
             try
             {
-                NavigationService.Navigate<TViewModel>().GetAwaiter().GetResult();
+                await NavigationService.Navigate<TViewModel>();
             }
             catch (System.Exception exception)
             {
