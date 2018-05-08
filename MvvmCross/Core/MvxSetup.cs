@@ -302,7 +302,7 @@ namespace MvvmCross.Core
             return loadedAssemblies;
         }
 
-        private stat void LoadReferencedAssemblies(Assembly assembly, ISet<Assembly> loadedAssemblies)
+        private void LoadReferencedAssemblies(Assembly assembly, ISet<Assembly> loadedAssemblies)
         {
             foreach (var referencedAssembly in assembly.GetReferencedAssemblies())
             {
