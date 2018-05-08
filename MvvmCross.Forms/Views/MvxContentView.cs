@@ -2,9 +2,12 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
+using MvvmCross.Base;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Forms.Views.Base;
 using MvvmCross.ViewModels;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views
 {
@@ -13,6 +16,7 @@ namespace MvvmCross.Forms.Views
         public MvxContentView()
         {
             this.AdaptForBinding();
+            BindingContextChangedCalled += (sender, args) => ViewModelSetCalled?.Raise(this);
         }
 
         public object DataContext
@@ -58,17 +62,40 @@ namespace MvvmCross.Forms.Views
 
         protected virtual void OnViewModelSet()
         {
+            ViewModelSetCalled.Raise(this);
         }
+
+        public event EventHandler ViewModelSetCalled;
     }
 
     public class MvxContentView<TViewModel>
         : MvxContentView
     , IMvxElement<TViewModel> where TViewModel : class, IMvxViewModel
     {
+        public MvxContentView()
+        {
+            BindingContextChangedCalled += (sender, args) => ViewModel = base.ViewModel as TViewModel;
+        }
+
+        public static readonly BindableProperty ViewModelProperty = BindableProperty.Create(nameof(ViewModel),
+            typeof(TViewModel), typeof(MvxContentView<TViewModel>), null, BindingMode.Default, null, null, null, CoerceValue);
+
         public new TViewModel ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
+            get { return (TViewModel)GetValue(ViewModelProperty); }
+            set { SetValue(ViewModelProperty, value); }
         }
+
+        private static TViewModel CoerceValue(BindableObject bindable, object value)
+        {
+            (bindable as MvxContentView<TViewModel>)?.SetBaseViewModel(value as TViewModel);
+            return (bindable as MvxContentView<TViewModel>)?.DataContext as TViewModel;
+        }
+
+        private void SetBaseViewModel(TViewModel newValue)
+        {
+            base.ViewModel = newValue;
+        }
+
     }
 }
