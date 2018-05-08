@@ -293,8 +293,6 @@ namespace MvvmCross.Core
                     .Where(asmb=> AssemblyReferencesMvvmCross(asmb, mvvmCrossAssemblyName));
 
             return pluginAssemblies;
-
-
         }
 
         protected virtual IEnumerable<Assembly> LoadAllReferencedAssemblies(Assembly assembly)
@@ -304,7 +302,7 @@ namespace MvvmCross.Core
             return loadedAssemblies;
         }
 
-        private static void LoadReferencedAssemblies(Assembly assembly, ISet<Assembly> loadedAssemblies)
+        private stat void LoadReferencedAssemblies(Assembly assembly, ISet<Assembly> loadedAssemblies)
         {
             foreach (var referencedAssembly in assembly.GetReferencedAssemblies())
             {
