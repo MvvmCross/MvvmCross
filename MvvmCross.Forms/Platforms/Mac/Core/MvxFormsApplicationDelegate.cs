@@ -47,6 +47,7 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
 
             RunAppStart(notification);
 
+            //TODO: This is also called in the base, maybe we need to remove it
             instance.PlatformSetup<MvxFormsMacSetup>().FormsApplication.SendStart();
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
 
