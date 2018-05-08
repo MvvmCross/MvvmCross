@@ -25,8 +25,6 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
             }
             set
             {
-                var fieldInfo = typeof(FormsApplicationDelegate).GetField("_window", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                fieldInfo.SetValue(this, value);
                 _window = value;
             }
         }
