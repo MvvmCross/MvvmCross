@@ -1,6 +1,6 @@
 <Project>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.427558-pre4" />
+    <PackageReference Include="Xamarin.Forms" Version="3.0.0.446417" />
   </ItemGroup>
 
   <Import Project="XamarinBuild.targets" Condition="'$(IsXamarinForms)' == 'true'"/>
