@@ -286,16 +286,34 @@ namespace MvvmCross.Core
         public virtual IEnumerable<Assembly> GetPluginAssemblies()
         {
             var mvvmCrossAssemblyName = typeof(MvxPluginAttribute).Assembly.GetName().Name;
-
+            var allAssemblies = LoadAllReferencedAssemblies(Assembly.GetExecutingAssembly());
             var pluginAssemblies =
-                AppDomain.CurrentDomain
-                    .GetAssemblies()
+                allAssemblies
                     .AsParallel()
                     .Where(asmb=> AssemblyReferencesMvvmCross(asmb, mvvmCrossAssemblyName));
 
             return pluginAssemblies;
 
 
+        }
+
+        protected virtual IEnumerable<Assembly> LoadAllReferencedAssemblies(Assembly assembly)
+        {
+            var loadedAssemblies = new HashSet<Assembly>();
+            LoadReferencedAssemblies(assembly, loadedAssemblies);
+            return loadedAssemblies;
+        }
+
+        private static void LoadReferencedAssemblies(Assembly assembly, ISet<Assembly> loadedAssemblies)
+        {
+            foreach (var referencedAssembly in assembly.GetReferencedAssemblies())
+            {
+                var loadedAssembly = Assembly.Load(referencedAssembly);
+                if (loadedAssemblies.Add(loadedAssembly))
+                {
+                    LoadReferencedAssemblies(loadedAssembly, loadedAssemblies);
+                }
+            }
         }
 
         private bool AssemblyReferencesMvvmCross(Assembly assembly, string mvvmCrossAssemblyName)
