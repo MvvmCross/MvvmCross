@@ -51,9 +51,12 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\CustomBindingView.cs" />
     <Compile Include="Adapter\SelectedItemRecyclerAdapter.cs" />
     <Compile Include="Adapter\SelectedItemRecyclerAdapter.SelectedItemEventArgs.cs" />
     <Compile Include="Adapter\SelectedItemRecyclerAdapter.ViewHolder.cs" />
+    <Compile Include="Bindings\BinaryEditTargetBinding.cs" />
+    <Compile Include="Controls\BinaryEdit.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashScreen.cs" />
@@ -112,6 +115,7 @@
     <AndroidResource Include="Resources\layout\SplitDetailNavView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\CustomBindingView.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\RootView.axml">

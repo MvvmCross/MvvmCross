@@ -1,24 +1,32 @@
+﻿using System;
 using System.Drawing;
-using Foundation;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.iOS.Views;
-using MvvmCross.iOS.Views.Presenters.Attributes;
-using MvvmCross.TestProjects.CustomBinding.Core.ViewModels;
-using MvvmCross.TestProjects.CustomBinding.iOS.Controls;
+using MvvmCross.Platforms.Ios.Presenters.Attributes;
+using MvvmCross.Platforms.Ios.Views;
 using ObjCRuntime;
+using Playground.Core.ViewModels.Bindings;
+using Playground.iOS.Controls;
 using UIKit;
 
-namespace MvvmCross.TestProjects.CustomBinding.iOS.Views
+namespace Playground.iOS.Views
 {
-    [Register("FirstView")]
-    [MvxRootPresentation]
-    public class FirstView : MvxViewController
+
+    [MvxFromStoryboard("Main")]
+    [MvxChildPresentation]
+    public partial class CustomBindingView : MvxViewController<CustomBindingViewModel>
     {
         private UIDatePicker _datePicker;
 
+        public CustomBindingView(IntPtr handle) : base(handle)
+        {
+        }
+
         public override void ViewDidLoad()
         {
-            View = new UIView() { BackgroundColor = UIColor.White };
+            View = new UIView
+            {
+                BackgroundColor = UIColor.White
+            };
             base.ViewDidLoad();
 
             _datePicker = new UIDatePicker();
@@ -26,14 +34,16 @@ namespace MvvmCross.TestProjects.CustomBinding.iOS.Views
 
             // ios7 layout
             if (RespondsToSelector(new Selector("edgesForExtendedLayout")))
+            {
                 EdgesForExtendedLayout = UIRectEdge.None;
+            }
 
             var binaryEdit = new BinaryEdit(new RectangleF(10, 70, 300, 120));
             Add(binaryEdit);
             var textField = new UITextField(new RectangleF(10, 190, 300, 40));
             Add(textField);
 
-            var set = this.CreateBindingSet<FirstView, FirstViewModel>();
+            var set = this.CreateBindingSet<CustomBindingView, CustomBindingViewModel>();
             set.Bind(binaryEdit).For("MyCount").To(vm => vm.Counter);
             set.Bind(textField).To(vm => vm.Counter);
             set.Bind(_datePicker).For(v => v.Date).To(vm => vm.Date);
@@ -44,3 +54,4 @@ namespace MvvmCross.TestProjects.CustomBinding.iOS.Views
         }
     }
 }
+

@@ -5,12 +5,13 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace MvvmCross.TestProjects.CustomBinding.iOS.Controls
+namespace Playground.iOS.Controls
 {
     [Register("BinaryEdit")]
     public class BinaryEdit : UIView
     {
-        private List<UISwitch> _boxes = new List<UISwitch>();
+        private readonly List<UISwitch> _boxes = new List<UISwitch>();
+        private bool _isUpdating;
 
         public BinaryEdit()
         {
@@ -29,25 +30,21 @@ namespace MvvmCross.TestProjects.CustomBinding.iOS.Controls
 
             for (var i = 0; i < 4; i++)
             {
-                var box = new UISwitch (new RectangleF(10, 30*i, 300, 30));
+                var box = new UISwitch(new RectangleF(10, 30 * i, 300, 30));
                 AddSubview(box);
                 _boxes.Add(box);
-                box.ValueChanged += (sender, args) =>
-                {
-                    UpdateCount();
-                };
+                box.ValueChanged += (sender, args) => { UpdateCount(); };
             }
         }
-        private bool _isUpdating;
 
         private void UpdateCount()
         {
             if (_isUpdating)
+            {
                 return;
+            }
 
-            var handler = MyCountChanged;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            MyCountChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public event EventHandler MyCountChanged;
@@ -65,7 +62,9 @@ namespace MvvmCross.TestProjects.CustomBinding.iOS.Controls
                 var currentCount = GetCount();
 
                 if (count < 0 || count > 4)
+                {
                     return;
+                }
 
                 while (count < currentCount)
                 {
