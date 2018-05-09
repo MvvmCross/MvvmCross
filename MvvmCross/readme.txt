@@ -43,6 +43,12 @@ However, any $rootnamespace$ instances will need to be changed to your project's
 5. Add a Views folder to the root of the project and add at least one View class to this folder to correspond to the ViewModel class in the Core project (See Android/HomeView.cs.pp in sample files).
 6. Add a new Android layout to the Resources/layout folder to correspond to the View class created in the previous step. (See Android/HomeView.axml.pp in sample files).
 
+Note: If you wish to use the AppCompat versions of Android classes, you can follow the above instructions with the following modifications
+7. Add the MvvmCross v7 Android AppCompat Support Libraries NuGet package (MvvmCross.Droid.Support.v7.AppCompat) to to your Android platform specific project.
+8. When changing the the inheritance for the SplashScreen activity class, use MvxSplashScreenAppCompatActivity instead of MvxSplashScreenActivity.
+9. Add a new XML file that defines an AppCompat theme to the Resources/values folder called styles.xml. (See Android/styles.xml.pp in sample files)
+10. Ensure the theme created in the previous step is referenced in the Attribute for the MainActivity class (Theme = "@style/MainTheme").
+
 
 - iOS projects (ignore if not building for iOS) -
 1. Inside AppDelegate.cs, change the AppDelegate class to inherit from MvxApplicationDelegate<MvxIosSetup<Core.App>, Core.App> instead of ApplicationDelegate (See iOS/AppDelegate.cs.pp in sample files).
