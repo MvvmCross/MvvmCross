@@ -36,7 +36,6 @@ However, any $rootnamespace$ instances will need to be changed to your project's
 - Core project -
 1. Add an App class to the root folder (See Core/App.cs.pp in sample files).
 2. Add a ViewModels folder to the root of the project and add at least one ViewModel class to this folder (See Core/HomeViewModel.cs.pp in sample files).
-3. Add a ViewModel class called MainViewModel to the ViewModels folder that inherits from MvxViewModel (you probably won't add code to this ViewModel but it is required at the moment).
 
 
 - Xamarin.Forms UI project -
@@ -48,7 +47,7 @@ However, any $rootnamespace$ instances will need to be changed to your project's
 
 - Android project (ignore if not building for Android) -
 1. Add a reference to the Mono.Android.Export assembly.
-2. Inside MainActivity.cs, change the MainActivity class to inherit from MvxFormsAppCompatActivity<MvxFormsAndroidSetup<Core.App, FormsUI.App>, Core.App, FormsUI.App, MainViewModel> instead of Activity (See Forms/AndroidContent/MainActivity.cs.pp in sample files).
+2. Inside MainActivity.cs, change the MainActivity class to inherit from MvxFormsAppCompatActivity<MvxFormsAndroidSetup<Core.App, FormsUI.App>, Core.App, FormsUI.App> instead of Activity (See Forms/AndroidContent/MainActivity.cs.pp in sample files).
 3. Still inside MainActivity, delete all the pre-populated methods to leave a blank class.
 4. Add a new XML file that defines an AppCompat theme to the Resources/values folder called styles.xml. (See Forms/AndroidContent/styles.xml.pp in sample files)
 5. Ensure the theme created in the previous step is referenced in the Attribute for the MainActivity class (See Forms/AndroidContent/MainActivity.cs.pp in sample files).
