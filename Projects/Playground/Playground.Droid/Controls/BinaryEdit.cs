@@ -1,15 +1,17 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.Content;
 using Android.Util;
 using Android.Widget;
 
-namespace MvvmCross.TestProjects.CustomBinding.Droid.Controls
+namespace Playground.Droid.Controls
 {
     public class BinaryEdit : LinearLayout
     {
-        private List<CheckBox> _boxes = new List<CheckBox>();
+        private readonly List<CheckBox> _boxes = new List<CheckBox>();
+
+        private bool _isUpdating;
 
         public BinaryEdit(Context context, IAttributeSet attrs) :
             base(context, attrs)
@@ -24,23 +26,18 @@ namespace MvvmCross.TestProjects.CustomBinding.Droid.Controls
                 var box = new CheckBox(context);
                 AddView(box);
                 _boxes.Add(box);
-                box.CheckedChange += (sender, args) =>
-                    {
-                        UpdateCount();
-                    };
+                box.CheckedChange += (sender, args) => { UpdateCount(); };
             }
         }
-
-        private bool _isUpdating;
 
         private void UpdateCount()
         {
             if (_isUpdating)
+            {
                 return;
+            }
 
-            var handler = MyCountChanged;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            MyCountChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public event EventHandler MyCountChanged;
@@ -58,8 +55,10 @@ namespace MvvmCross.TestProjects.CustomBinding.Droid.Controls
                 var currentCount = GetCount();
 
                 if (count < 0 || count > 4)
+                {
                     return;
-                
+                }
+
                 while (count < currentCount)
                 {
                     _boxes.First(b => b.Checked).Checked = false;

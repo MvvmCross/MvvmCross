@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using MvvmCross.Binding;
-using MvvmCross.Binding.Droid.Target;
-using MvvmCross.TestProjects.CustomBinding.Droid.Controls;
+using MvvmCross.Platforms.Android.Binding.Target;
+using Playground.Droid.Controls;
 
-namespace MvvmCross.TestProjects.CustomBinding.Droid.Bindings
+namespace Playground.Droid.Bindings
 {
     public class BinaryEditTargetBinding : MvxAndroidTargetBinding<BinaryEdit, int>
     {
@@ -33,10 +33,7 @@ namespace MvvmCross.TestProjects.CustomBinding.Droid.Bindings
             binaryEdit.SetThat(value);
         }
 
-        public override MvxBindingMode DefaultMode
-        {
-            get { return MvxBindingMode.TwoWay; }
-        }
+        public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
         protected override void Dispose(bool isDisposing)
         {

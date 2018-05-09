@@ -5,92 +5,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:layout_weight="1">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Show Child"
                 local:MvxBind="Click ShowChildCommand;" />
-
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Show Modal"
                 local:MvxBind="Click ShowModalCommand;" />
-
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Show Modal Navigation"
                 local:MvxBind="Click ShowModalNavCommand;" />
-
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Show Tabs"
                 local:MvxBind="Click ShowTabsCommand;" />
-
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Show Master/Detail"
                 local:MvxBind="Click ShowSplitCommand;" />
-
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Show Override Attribute"
                 local:MvxBind="Click ShowOverrideAttributeCommand" />
-
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Show BottomSheet"
                 local:MvxBind="Click ShowSheetCommand" />
-
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Show WithDictionaryConversion Binding"
                 local:MvxBind="Click ShowDictionaryBindingCommand" />
-
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Show CollectionView"
                 local:MvxBind="Click ShowCollectionViewCommand;" />
-
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Show Shared Element transition"
                 local:MvxBind="Click ShowSharedElementsCommand;" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Show Custom Binding"
+                local:MvxBind="Click ShowCustomBindingCommand" />
         </LinearLayout>
     </ScrollView>
-
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="160dp"/>
+        android:layout_height="160dp" />
 </LinearLayout>
