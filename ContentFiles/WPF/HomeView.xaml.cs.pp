@@ -1,4 +1,3 @@
-using AlphanumericOz.Core.ViewModels;
 using MvvmCross.Platforms.Wpf.Views;
 using MvvmCross.ViewModels;
 

@@ -5,7 +5,7 @@ using MvvmCross.Forms.Platforms.Android.Views;
 namespace $rootnamespace$
 {
     [Activity(Label = "$rootnamespace$", MainLauncher = true, Theme = "@style/MainTheme", NoHistory = true)]
-    public class MainActivity : MvxFormsAppCompatActivity<MvxFormsAndroidSetup<Core.App, FormsUI.App>, Core.App, FormsUI.App, MainViewModel>
+    public class MainActivity : MvxFormsAppCompatActivity<MvxFormsAndroidSetup<Core.App, FormsUI.App>, Core.App, FormsUI.App>
     {
     }
 }
