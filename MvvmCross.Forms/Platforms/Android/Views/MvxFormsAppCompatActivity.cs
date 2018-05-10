@@ -19,7 +19,6 @@ using MvvmCross.Platforms.Android.Binding.Views;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
-using Xamarin.Forms;
 using Application = Xamarin.Forms.Application;
 
 namespace MvvmCross.Forms.Platforms.Android.Views
@@ -187,7 +186,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
             for (var i = pages.Length - 1; i >= 0; i--)
             {
                 var pg = pages[i];
-                if (pg is NavigationPage navPage)
+                if (pg is Xamarin.Forms.NavigationPage navPage)
                 {
                     if (pg.Navigation.ModalStack.Count > 0)
                     {
