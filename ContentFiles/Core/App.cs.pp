@@ -1,8 +1,10 @@
 using MvvmCross.IoC;
+using MvvmCross.ViewModels;
+using $rootnamespace$.ViewModels;
 
 namespace $rootnamespace$
 {
-    public class App : MvvmCross.ViewModels.MvxApplication
+    public class App : MvxApplication
     {
         public override void Initialize()
         {
@@ -11,7 +13,7 @@ namespace $rootnamespace$
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart<ViewModels.MainViewModel>();
+            RegisterAppStart<HomeViewModel>();
         }
     }
 }

@@ -38,7 +38,6 @@ namespace $YourNameSpace$
         {
             textField.Text = textField.Text + "";
             textField.EditingChanged += (sender, args) => { textField.Text = ""; };
-            textField.EditingDidEnd += (sender, args) => { textField.Text = ""; };
         }
 
         public void Include(UITextView textView)
@@ -135,11 +134,6 @@ namespace $YourNameSpace$
             Console.ForegroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.ForegroundColor = ConsoleColor.DarkGray;
-        }
-
-        public void Include (MvvmCross.Plugin.Json.Plugin plugin)
-        {
-            plugin.Load();
         }
     }
 }
