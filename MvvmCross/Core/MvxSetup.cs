@@ -306,10 +306,17 @@ namespace MvvmCross.Core
         {
             foreach (var referencedAssembly in assembly.GetReferencedAssemblies())
             {
-                var loadedAssembly = Assembly.Load(referencedAssembly);
-                if (loadedAssemblies.Add(loadedAssembly))
+                try
                 {
-                    LoadReferencedAssemblies(loadedAssembly, loadedAssemblies);
+                    var loadedAssembly = Assembly.Load(referencedAssembly);
+                    if (loadedAssemblies.Add(loadedAssembly))
+                    {
+                        LoadReferencedAssemblies(loadedAssembly, loadedAssemblies);
+                    }
+                }
+                catch
+                {
+                    continue;
                 }
             }
         }
