@@ -62,7 +62,7 @@ using MvvmCross.Droid.Views;
 
 namespace CalcApp.UI.Droid
 {
-    [Activity(Label = "My App", MainLauncher = true, NoHistory = true, Icon = "@drawable/icon")]
+    [Activity(Label = "My Tip Calc", MainLauncher = true, NoHistory = true, Icon = "@drawable/icon")]
     public class SplashScreenActivity : MvxSplashScreenActivity
     {
         public SplashScreenActivity()
