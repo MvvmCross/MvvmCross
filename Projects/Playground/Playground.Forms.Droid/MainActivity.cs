@@ -34,40 +34,6 @@ namespace Playground.Forms.Droid
             base.OnCreate(bundle);
         }
 
-        //public override async void OnBackPressed()
-        //{
-        //    //base.OnBackPressed();
-
-        //    var presenter = Mvx.Resolve<MvxFormsPagePresenter>();
-        //    var pages = presenter.CurrentPageTree;
-
-        //    for (var i = pages.Length - 1; i >= 0; i--)
-        //    {
-        //        var pg = pages[i];
-        //        if (pg is NavigationPage navPage)
-        //        {
-        //            if(pg.Navigation.ModalStack.Count > 0)
-        //            {
-        //                await pg.Navigation.PopModalAsync();
-        //                return;
-        //            }
-
-        //            if (pg.Navigation.NavigationStack.Count > 1)
-        //            {
-        //                var handled = pg.SendBackButtonPressed();
-        //                if (handled) return;
-        //            }
-        //        }
-        //        else 
-        //        {
-        //            var handled = pg.SendBackButtonPressed();
-        //            if (handled) return;
-        //        }
-        //    }
-                        
-        //    MoveTaskToBack(true);
-        //}
-
         protected override void OnDestroy()
         {
             base.OnDestroy();
