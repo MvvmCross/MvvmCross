@@ -51,7 +51,7 @@ namespace MvvmCross.Forms.Platforms.Wpf.Core
             return presenter;
         }
 
-        //protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsWindowsBindingBuilder();
+        protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsWindowsBindingBuilder();
     }
 
     public class MvxFormsWpfSetup<TApplication, TFormsApplication> : MvxFormsWpfSetup
