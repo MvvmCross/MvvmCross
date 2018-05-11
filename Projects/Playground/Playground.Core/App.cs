@@ -13,8 +13,6 @@ namespace Playground.Core
 {
     public class App : MvxApplication<string>
     {
-        public override string StartParameter => "Hello Playground!";
-
         /// <summary>
         /// Breaking change in v6: This method is called on a background thread. Use
         /// Startup for any UI bound actions
@@ -37,6 +35,8 @@ namespace Playground.Core
         /// <param name="hint"></param>
         public override string StartupWithHint(string hint)
         {
+            base.Startup();
+
             return "Hello Playground!";
         }
 
@@ -48,14 +48,6 @@ namespace Playground.Core
         public override void Reset()
         {
             base.Reset();
-        }
-
-        /// <summary>
-        /// Return a custom app start hint object from the subclass
-        /// </summary>
-        public override object GetAppStartHint(object hint)
-        {
-            return base.GetAppStartHint(hint);
         }
     }
 }

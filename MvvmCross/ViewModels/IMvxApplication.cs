@@ -21,9 +21,4 @@ namespace MvvmCross.ViewModels
     {
         TStartupHint StartupWithHint(TStartupHint hint);
     }
-
-    public interface IMvxApplication<TStartupHint> : IMvxApplication
-    {
-        TStartupHint StartupWithHint(TStartupHint hint);
-    }
 }

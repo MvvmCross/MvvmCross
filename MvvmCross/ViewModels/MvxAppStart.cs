@@ -99,53 +99,6 @@ namespace MvvmCross.ViewModels
         }
     }
 
-    public class MvxAppStart<TViewModel, TParameter> : MvxAppStart<TViewModel> where TViewModel : IMvxViewModel
-    {
-        public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService) : base(application, navigationService)
-        {
-        }
-
-        protected override object ApplicationStartup(object hint = null)
-        {
-            if (hint is TParameter typedHint &&
-                Application is IMvxApplication<TParameter> typedApplication)
-            {
-                return typedApplication.StartupWithHint(typedHint);
-            }
-
-            return base.ApplicationStartup(hint);
-        }
-
-        protected override void NavigateToFirstViewModel(object hint)
-        {
-            if (hint != null)
-            {
-                MvxLog.Instance.Trace("Native platform hint ignored in default MvxAppStart");
-            }
-
-            if (hint is TParameter typedHint)
-            {
-                navParam = typedHint;
-            }
-
-            try
-            {
-                if (typeof(IMvxViewModel<TParameter>).IsAssignableFrom(typeof(TViewModel)))
-                {
-                    NavigationService.Navigate(typeof(TViewModel), navParam).GetAwaiter().GetResult();
-                }
-                else
-                {
-                    NavigationService.Navigate<TViewModel>().GetAwaiter().GetResult();
-                }
-            }
-            catch (System.Exception exception)
-            {
-                throw exception.MvxWrap("Problem navigating to ViewModel {0}", typeof(TViewModel).Name);
-            }
-        }
-    }
-
     public class MvxAppStart<TViewModel, TParameter> : MvxAppStart<TViewModel> where TViewModel : IMvxViewModel<TParameter>
     {
         public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService) : base(application, navigationService)
@@ -154,9 +107,11 @@ namespace MvvmCross.ViewModels
 
         protected override object ApplicationStartup(object hint = null)
         {
-            if (hint is TParameter typedHint &&
+            if ((hint == null || hint is TParameter) &&
                 Application is IMvxApplication<TParameter> typedApplication)
             {
+                TParameter typedHint = (TParameter)hint;
+
                 return typedApplication.StartupWithHint(typedHint);
             }
 
