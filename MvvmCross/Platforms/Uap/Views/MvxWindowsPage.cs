@@ -39,7 +39,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         private void MvxWindowsPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            ViewModel?.ViewDisappeared();
+            ViewModel?.ViewDestroy();
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -104,6 +104,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            ViewModel?.ViewDisappeared();
             base.OnNavigatedFrom(e);
             var bundle = this.CreateSaveStateBundle();
             SaveStateBundle(e, bundle);
