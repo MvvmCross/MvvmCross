@@ -90,6 +90,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\MvvmCross.Forms.Wpf\MvvmCross.Forms.Platforms.Wpf.csproj">
+      <Project>{e5ec1b5c-9539-4ca8-be25-fc5b16b6f7ff}</Project>
+      <Name>MvvmCross.Forms.Platforms.Wpf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross.Forms\MvvmCross.Forms.csproj">
       <Project>{013bb2b2-8204-43bd-aa7b-e494007f0b94}</Project>
       <Name>MvvmCross.Forms</Name>
@@ -109,6 +113,10 @@
     <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj">
       <Project>{49f965f5-5824-4bbe-94ea-0178f848abdb}</Project>
       <Name>MvvmCross</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.Platforms.Wpf.csproj">
+      <Project>{fe6715f0-bb2d-4ed9-bf2b-30124ecb3aec}</Project>
+      <Name>MvvmCross.Platforms.Wpf</Name>
     </ProjectReference>
     <ProjectReference Include="..\Playground.Core\Playground.Core.csproj">
       <Project>{fe374d1a-1a19-49bc-8e93-d52399a9c3f3}</Project>
