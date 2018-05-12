@@ -43,10 +43,12 @@ namespace MvvmCross.Platforms.Wpf.Views
         {
             ViewModel?.ViewDisappearing();
             ViewModel?.ViewDisappeared();
+            ViewModel?.ViewDestroy();
         }
 
         private void MvxWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            ViewModel?.ViewCreated();
             ViewModel?.ViewAppearing();
             ViewModel?.ViewAppeared();
         }
