@@ -29,6 +29,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         private void MvxWindowsPage_Loading(FrameworkElement sender, object args)
         {
+            ViewModel?.ViewCreated();
             ViewModel?.ViewAppearing();
         }
 
@@ -40,6 +41,7 @@ namespace MvvmCross.Platforms.Uap.Views
         private void MvxWindowsPage_Unloaded(object sender, RoutedEventArgs e)
         {
             ViewModel?.ViewDisappeared();
+            ViewModel?.ViewDestroy();
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
