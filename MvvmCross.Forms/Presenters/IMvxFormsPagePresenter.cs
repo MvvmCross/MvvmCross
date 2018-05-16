@@ -13,6 +13,8 @@ namespace MvvmCross.Forms.Presenters
 {
     public interface IMvxFormsPagePresenter : IMvxAttributeViewPresenter
     {
+        IMvxFormsViewPresenter PlatformPresenter { get; set; }
+
         Application FormsApplication { get; set; }
 
         IMvxViewModelLoader ViewModelLoader { get; set; }

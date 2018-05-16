@@ -28,13 +28,11 @@ namespace MvvmCross.Forms.Presenters
         /// <summary>
         /// Initializes a new instance of the <see cref="T:MvvmCross.Forms.Views.MvxFormsPagePresenter"/> class.
         /// </summary>
-        /// <param name="platformPresenter">The native platform presenter from where the MvxFormsPagePresenter is created</param>
-        public MvxFormsPagePresenter(IMvxFormsViewPresenter platformPresenter)
+        public MvxFormsPagePresenter()
         {
-            PlatformPresenter = platformPresenter;
         }
 
-        protected IMvxFormsViewPresenter PlatformPresenter { get; }
+        public IMvxFormsViewPresenter PlatformPresenter { get; set; }
 
         private Application _formsApplication;
         public Application FormsApplication

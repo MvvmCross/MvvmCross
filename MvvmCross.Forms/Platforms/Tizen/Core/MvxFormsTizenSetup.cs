@@ -69,7 +69,8 @@ namespace MvvmCross.Forms.Platforms.Tizen.Core
 
         protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
         {
-            var formsPagePresenter = new MvxFormsPagePresenter(viewPresenter);
+            var formsPagePresenter = new MvxFormsPagePresenter();
+            formsPagePresenter.PlatformPresenter = viewPresenter;
             Mvx.IoCProvider.RegisterSingleton<IMvxFormsPagePresenter>(formsPagePresenter);
             return formsPagePresenter;
         }
