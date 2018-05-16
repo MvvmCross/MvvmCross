@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Text.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Text.json">
+      <Generator></Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MvvmCross" Version="6.0.1" />
+    <PackageReference Include="MvvmCross.Forms" Version="6.0.1" />
+    <PackageReference Include="MvvmCross.Plugin.JsonLocalization" Version="6.0.1" />
+  </ItemGroup>
+
+</Project>
