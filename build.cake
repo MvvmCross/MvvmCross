@@ -112,71 +112,10 @@ Task("Build")
     settings.BinaryLogger = new MSBuildBinaryLogSettings 
     {
         Enabled = true,
-        //FileName = "mvvmcross.binlog"
+        FileName = "mvvmcross.binlog"
     };
-
-    // TODO change back to this when parallel builds are working with Xamarin.Android again
-    // MSBuild(sln, settings);
-
-    var buildItems = new string[] 
-    {
-        "./MvvmCross/MvvmCross.csproj",
-        "./MvvmCross/MvvmCross.Platforms.Wpf.csproj",
-        "./MvvmCross.Android.Support/Fragment/MvvmCross.Droid.Support.Fragment.csproj",
-        "./MvvmCross.Android.Support/Design/MvvmCross.Droid.Support.Design.csproj",
-        "./MvvmCross.Android.Support/Core.Utils/MvvmCross.Droid.Support.Core.Utils.csproj",
-        "./MvvmCross.Android.Support/Core.UI/MvvmCross.Droid.Support.Core.UI.csproj",
-        "./MvvmCross.Android.Support/V7.AppCompat/MvvmCross.Droid.Support.V7.AppCompat.csproj",
-        "./MvvmCross.Android.Support/V7.Preference/MvvmCross.Droid.Support.V7.Preference.csproj",
-        "./MvvmCross.Android.Support/V7.RecyclerView/MvvmCross.Droid.Support.V7.RecyclerView.csproj",
-        "./MvvmCross.Android.Support/V14.Preference/MvvmCross.Droid.Support.V14.Preference.csproj",
-        "./MvvmCross.Android.Support/V17.Leanback/MvvmCross.Droid.Support.V17.Leanback.csproj",
-        "./MvvmCross.Plugins/Location/MvvmCross.Plugin.Location.csproj",
-        "./MvvmCross.Plugins/Location.Fused/MvvmCross.Plugin.Location.Fused.csproj",
-        "./MvvmCross.Plugins/PictureChooser/MvvmCross.Plugin.PictureChooser.csproj",
-        "./MvvmCross.Plugins/Email/MvvmCross.Plugin.Email.csproj",
-        "./MvvmCross.Plugins/Accelerometer/MvvmCross.Plugin.Accelerometer.csproj",
-        "./MvvmCross.Plugins/Color/MvvmCross.Plugin.Color.csproj",
-        "./MvvmCross.Plugins/FieldBinding/MvvmCross.Plugin.FieldBinding.csproj",
-        "./MvvmCross.Plugins/File/MvvmCross.Plugin.File.csproj",
-        "./MvvmCross.Plugins/Json/MvvmCross.Plugin.Json.csproj",
-        "./MvvmCross.Plugins/JsonLocalization/MvvmCross.Plugin.JsonLocalization.csproj",
-        "./MvvmCross.Plugins/Messenger/MvvmCross.Plugin.Messenger.csproj",
-        "./MvvmCross.Plugins/MethodBinding/MvvmCross.Plugin.MethodBinding.csproj",
-        "./MvvmCross.Plugins/Network/MvvmCross.Plugin.Network.csproj",
-        "./MvvmCross.Plugins/PhoneCall/MvvmCross.Plugin.PhoneCall.csproj",
-        "./MvvmCross.Plugins/PictureChooser/MvvmCross.Plugin.PictureChooser.csproj",
-        "./MvvmCross.Plugins/ResourceLoader/MvvmCross.Plugin.ResourceLoader.csproj",
-        "./MvvmCross.Plugins/ResxLocalization/MvvmCross.Plugin.ResxLocalization.csproj",
-        "./MvvmCross.Plugins/Share/MvvmCross.Plugin.Share.csproj",
-        "./MvvmCross.Plugins/Sidebar/MvvmCross.Plugin.Sidebar.csproj",
-        "./MvvmCross.Plugins/Visibility/MvvmCross.Plugin.Visibility.csproj",
-        "./MvvmCross.Plugins/WebBrowser/MvvmCross.Plugin.WebBrowser.csproj",
-        "./MvvmCross.Plugins/All/MvvmCross.Plugin.All.csproj",
-        "./MvvmCross.Forms/MvvmCross.Forms.csproj",
-        "./MvvmCross.Analyzers/CodeAnalysis/MvvmCross.CodeAnalysis.csproj"
-    };
-
-    // workaround for Xamarin.Android throwing AAPT error -2, instead of building sln :(
-    foreach(var buildItem in buildItems)
-    {   
-        var filePath = new FilePath(buildItem);
-        var name = filePath.GetFilenameWithoutExtension();
-
-        settings.BinaryLogger.FileName = name + ".binlog";
-
-        MSBuild(filePath, settings);
-    }
-
-    var testItems = GetFiles("./UnitTests/*.UnitTest/*.UnitTest.csproj");
-    foreach(var testItem in testItems)
-    {
-        var name = testItem.GetFilenameWithoutExtension();
-
-        settings.BinaryLogger.FileName = name + ".binlog";
-
-        MSBuild(testItem, settings);
-    }
+	
+    MSBuild(sln, settings);
 });
 
 Task("UnitTest")
