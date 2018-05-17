@@ -21,8 +21,8 @@ This package contains the 'MvvmCross.Forms.Platforms.Wpf' libraries for MvvmCros
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.446417" />
-    <PackageReference Include="Xamarin.Forms.Platform.WPF" Version="3.0.0.446417" />
+    <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
+    <PackageReference Include="Xamarin.Forms.Platform.WPF" Version="3.0.0.482510" />
   </ItemGroup>
   
 </Project>
