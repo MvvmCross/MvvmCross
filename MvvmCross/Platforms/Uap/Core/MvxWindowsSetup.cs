@@ -32,7 +32,6 @@ namespace MvvmCross.Platforms.Uap.Core
     {
         private IMvxWindowsFrame _rootFrame;
         private string _suspensionManagerSessionStateKey;
-        private IMvxWindowsViewPresenter _presenter;
 
         public virtual void PlatformInitialize(Frame rootFrame, IActivatedEventArgs activatedEventArgs,
             string suspensionManagerSessionStateKey = null)
@@ -60,7 +59,6 @@ namespace MvvmCross.Platforms.Uap.Core
         protected override void InitializePlatformServices()
         {
             InitializeSuspensionManager();
-            RegisterPresenter();
             base.InitializePlatformServices();
         }
 
@@ -96,33 +94,33 @@ namespace MvvmCross.Platforms.Uap.Core
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return CreateViewDispatcher(_rootFrame);
+            var dispatcher = base.CreateViewDispatcher() as MvxWindowsViewDispatcher;
+            dispatcher.UiDispatcher = _rootFrame.UnderlyingControl.Dispatcher;
+            return dispatcher;
         }
 
         protected IMvxWindowsViewPresenter Presenter
         {
             get
             {
-                _presenter = _presenter ?? CreateViewPresenter(_rootFrame);
-                return _presenter;
+                return base.ViewPresenter as IMvxWindowsViewPresenter;
             }
         }
 
-        protected virtual IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
+        protected override IMvxViewPresenter CreateViewPresenter()
         {
-            return new MvxWindowsViewPresenter(rootFrame);
+            var presenter = base.CreateViewPresenter() as IMvxWindowsViewPresenter;
+            presenter.RootFrame = _rootFrame;
+            return presenter;
         }
 
-        protected virtual MvxWindowsViewDispatcher CreateViewDispatcher(IMvxWindowsFrame rootFrame)
+        protected override void InitializeIoC()
         {
-            return new MvxWindowsViewDispatcher(Presenter, rootFrame);
-        }
+            base.InitializeIoC();
 
-        protected virtual void RegisterPresenter()
-        {
-            var presenter = Presenter;
-            Mvx.IoCProvider.RegisterSingleton(presenter);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxWindowsViewPresenter>();
+            Mvx.LazyConstructAndRegisterSingleton(() => Presenter);
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxWindowsViewDispatcher>();
         }
 
         protected override void InitializeLastChance()

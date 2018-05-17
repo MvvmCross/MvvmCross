@@ -29,6 +29,16 @@ namespace MvvmCross.Forms.Platforms.Android.Core
         private List<Assembly> _viewAssemblies;
         private Application _formsApplication;
 
+        private IMvxFormsSetupHelper _formsSetupHelper;
+
+        public virtual IMvxFormsSetupHelper FormsSetupHelper
+        {
+            get
+            {
+                return _formsSetupHelper ?? (_formsSetupHelper = Mvx.Resolve<IMvxFormsSetupHelper>());
+            }
+        }
+
         public override IEnumerable<Assembly> GetViewAssemblies()
         {
             if (_viewAssemblies == null)
@@ -42,8 +52,17 @@ namespace MvvmCross.Forms.Platforms.Android.Core
         protected override void InitializeIoC()
         {
             base.InitializeIoC();
-            Mvx.IoCProvider.RegisterSingleton<IMvxFormsSetup>(this);
-            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxFormsPagePresenter, MvxFormsPagePresenter>();
+            Mvx.RegisterSingleton<IMvxFormsSetup>(this);
+
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxFormsAndroidViewPresenter>();
+            Mvx.LazyConstructAndRegisterSingleton<IMvxFormsSetupHelper, MvxFormsSetupHelper>();
+            Mvx.Resolve<IMvxFormsSetupHelper>().InitializeIoC();
+            Mvx.LazyConstructAndRegisterSingleton(() => FormsPresenter);
+        }
+
+        protected virtual void RegisterSetupHelper()
+        {
+            Mvx.LazyConstructAndRegisterSingleton<IMvxFormsSetupHelper, MvxFormsSetupHelper>();
         }
 
         protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
@@ -76,19 +95,17 @@ namespace MvvmCross.Forms.Platforms.Android.Core
 
         protected abstract Application CreateFormsApplication();
 
-        protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
+        protected IMvxFormsViewPresenter FormsPresenter
         {
-            var formsPagePresenter = Mvx.Resolve<IMvxFormsPagePresenter>();
-            formsPagePresenter.PlatformPresenter = viewPresenter;
-            return formsPagePresenter;
+            get
+            {
+                return base.ViewPresenter as IMvxFormsViewPresenter;
+            }
         }
 
-        protected override IMvxAndroidViewPresenter CreateViewPresenter()
+        protected override IMvxViewPresenter CreateViewPresenter()
         {
-            var presenter = new MvxFormsAndroidViewPresenter(GetViewAssemblies(), FormsApplication);
-            Mvx.IoCProvider.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
-            presenter.FormsPagePresenter = CreateFormsPagePresenter(presenter);
-            return presenter;
+            return FormsSetupHelper.SetupFormsViewPresenter(base.CreateViewPresenter() as IMvxFormsViewPresenter, FormsApplication);
         }
 
         protected override IEnumerable<Assembly> ValueConverterAssemblies
@@ -113,13 +130,13 @@ namespace MvvmCross.Forms.Platforms.Android.Core
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
-            MvxFormsSetupHelper.FillTargetFactories(registry);
+            FormsSetupHelper.FillTargetFactories(registry);
             base.FillTargetFactories(registry);
         }
 
         protected override void FillBindingNames(Binding.BindingContext.IMvxBindingNameRegistry registry)
         {
-            MvxFormsSetupHelper.FillBindingNames(registry);
+            FormsSetupHelper.FillBindingNames(registry);
             base.FillBindingNames(registry);
         }
 

@@ -21,6 +21,8 @@ namespace MvvmCross.Platforms.Wpf.Presenters
         : MvxAttributeViewPresenter, IMvxWpfViewPresenter
     {
         private IMvxWpfViewLoader _wpfViewLoader;
+        private ContentControl _contentControl;
+
         protected IMvxWpfViewLoader WpfViewLoader
         {
             get
@@ -33,16 +35,28 @@ namespace MvvmCross.Platforms.Wpf.Presenters
 
         private readonly Dictionary<ContentControl, Stack<FrameworkElement>> _frameworkElementsDictionary = new Dictionary<ContentControl, Stack<FrameworkElement>>();
 
-        protected MvxWpfViewPresenter()
+        public ContentControl ContentControl
         {
-        }
+            get => _contentControl;
+            set
+            {
+                if (_contentControl == value)
+                    return;
 
-        public MvxWpfViewPresenter(ContentControl contentControl) // Accept ContentControl only for the first host view 
-        {
-            if (contentControl is Window window)
-                window.Closed += Window_Closed;
+                if (_contentControl != null)
+                {
+                    if (_contentControl is Window oldWindow)
+                        oldWindow.Closed -= Window_Closed;
 
-            _frameworkElementsDictionary.Add(contentControl, new Stack<FrameworkElement>());
+                    _frameworkElementsDictionary.Remove(_contentControl);
+                }
+
+                _contentControl = value;
+                if (_contentControl is Window window)
+                    window.Closed += Window_Closed;
+
+                _frameworkElementsDictionary.Add(_contentControl, new Stack<FrameworkElement>());
+            }
         }
 
         public override void RegisterAttributeTypes()

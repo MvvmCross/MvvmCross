@@ -26,10 +26,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     public class MvxAppCompatViewPresenter : MvxAndroidViewPresenter
     {
-        public MvxAppCompatViewPresenter(IEnumerable<Assembly> androidViewAssemblies) : base(androidViewAssemblies)
-        {
-        }
-
         protected new FragmentManager CurrentFragmentManager
         {
             get

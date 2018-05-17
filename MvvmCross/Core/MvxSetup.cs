@@ -13,6 +13,7 @@ using MvvmCross.Logging;
 using MvvmCross.Logging.LogProviders;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
@@ -20,6 +21,8 @@ namespace MvvmCross.Core
 {
     public abstract class MvxSetup : IMvxSetup
     {
+        private IMvxViewPresenter _presenter;
+
         protected static Func<IMvxSetup> SetupCreator { get; set; }
 
         protected static Assembly[] ViewAssemblies { get; set; }
@@ -54,7 +57,10 @@ namespace MvvmCross.Core
 
         protected abstract IMvxViewsContainer CreateViewsContainer();
 
-        protected abstract IMvxViewDispatcher CreateViewDispatcher();
+        protected virtual IMvxViewDispatcher CreateViewDispatcher()
+        {
+            return Mvx.Resolve<IMvxViewDispatcher>();
+        }
 
         protected IMvxLog SetupLog { get; private set; }
 
@@ -346,9 +352,10 @@ namespace MvvmCross.Core
         protected virtual void InitializeViewDispatcher()
         {
             var dispatcher = CreateViewDispatcher();
-            Mvx.IoCProvider.RegisterSingleton(dispatcher);
-            Mvx.IoCProvider.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(dispatcher);
-            Mvx.IoCProvider.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
+            dispatcher.Presenter = ViewPresenter;
+            Mvx.RegisterSingleton(dispatcher);
+            Mvx.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(dispatcher);
+            Mvx.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
         }
 
         protected virtual IMvxNavigationService InitializeNavigationService(IMvxViewModelLocatorCollection collection)
@@ -443,6 +450,28 @@ namespace MvvmCross.Core
             // always the very last thing to get initialized
             // base class implementation is empty by default
         }
+
+        protected virtual IMvxViewPresenter ViewPresenter
+        {
+            get
+            {
+                return _presenter ?? (_presenter= SetupViewPresenter());
+            }
+        }
+
+        protected IMvxViewPresenter SetupViewPresenter()
+        {
+            var presenter = CreateViewPresenter();
+            // Need to do this to make sure that even if CreateViewPresenter is overridden the view presenter is correctly registered
+            Mvx.RegisterSingleton(presenter); // Registers IMvxViewPresenter
+            return presenter;
+        }
+
+        protected virtual IMvxViewPresenter CreateViewPresenter()
+        {
+            return Mvx.Resolve<IMvxViewPresenter>();
+        }
+
 
         public IEnumerable<Type> CreatableTypes()
         {

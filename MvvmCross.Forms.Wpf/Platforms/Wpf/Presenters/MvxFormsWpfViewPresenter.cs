@@ -17,16 +17,6 @@ namespace MvvmCross.Forms.Platforms.Wpf.Presenters
         : MvxWpfViewPresenter
         , IMvxFormsViewPresenter
     {
-        public MvxFormsWpfViewPresenter(Application formsApplication) : base()
-        {
-            FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
-        }
-
-        public MvxFormsWpfViewPresenter(ContentControl contentControl, Application formsApplication) : base(contentControl)
-        {
-            FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
-        }
-
         public Application FormsApplication { get; set; }
 
         private IMvxFormsPagePresenter _formsPagePresenter;
@@ -36,13 +26,9 @@ namespace MvvmCross.Forms.Platforms.Wpf.Presenters
             {
                 if (_formsPagePresenter == null)
                     throw new ArgumentNullException(nameof(FormsPagePresenter), "IMvxFormsPagePresenter cannot be null. Set the value in CreateViewPresenter in the setup.");
-
                 return _formsPagePresenter;
             }
-            set
-            {
-                _formsPagePresenter = value;
-            }
+            set { _formsPagePresenter = value; }
         }
 
         public override void RegisterAttributeTypes()

@@ -18,11 +18,6 @@ namespace MvvmCross.Forms.Platforms.Mac.Presenters
         : MvxMacViewPresenter
         , IMvxFormsViewPresenter
     {
-        public MvxFormsMacViewPresenter(INSApplicationDelegate applicationDelegate, Application formsApplication) : base(applicationDelegate)
-        {
-            FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
-        }
-
         public Application FormsApplication { get; set; }
 
         private IMvxFormsPagePresenter _formsPagePresenter;

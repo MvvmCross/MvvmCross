@@ -18,11 +18,6 @@ namespace MvvmCross.Forms.Platforms.Ios.Presenters
         : MvxIosViewPresenter
         , IMvxFormsViewPresenter
     {
-        public MvxFormsIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window, Application formsApplication) : base (applicationDelegate, window)
-        {
-            FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
-        }
-
         public Application FormsApplication { get; set; }
 
         private IMvxFormsPagePresenter _formsPagePresenter;
@@ -41,7 +36,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Presenters
         {
             if (!await FormsPagePresenter.Show(request)) return false;
 
-            if (_window.RootViewController == null)
+            if (Window.RootViewController == null)
                 SetWindowRootViewController(FormsApplication.MainPage.CreateViewController());
             return true;
         }

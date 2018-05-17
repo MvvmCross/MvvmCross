@@ -29,24 +29,18 @@ namespace MvvmCross.Platforms.Wpf.Core
     {
         private Dispatcher _uiThreadDispatcher;
         private ContentControl _root;
-        private IMvxWpfViewPresenter _presenter;
+        private IMvxWpfViewPresenter _customPresenter;
 
         public void PlatformInitialize(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter)
         {
             _uiThreadDispatcher = uiThreadDispatcher;
-            _presenter = presenter;
+            _customPresenter = presenter;
         }
 
         public void PlatformInitialize(Dispatcher uiThreadDispatcher, ContentControl root)
         {
             _uiThreadDispatcher = uiThreadDispatcher;
             _root = root;
-        }
-
-        protected override void InitializePlatformServices()
-        {
-            RegisterPresenter();
-            base.InitializePlatformServices();
         }
 
         public override IEnumerable<Assembly> GetViewAssemblies()
@@ -70,26 +64,31 @@ namespace MvvmCross.Platforms.Wpf.Core
         {
             get
             {
-                _presenter = _presenter ?? CreateViewPresenter(_root);
-                return _presenter;
+                return base.ViewPresenter as IMvxWpfViewPresenter;
             }
         }
 
-        protected virtual IMvxWpfViewPresenter CreateViewPresenter(ContentControl root)
+        protected override IMvxViewPresenter CreateViewPresenter()
         {
-            return new MvxWpfViewPresenter(root);
+            var presenter = (_customPresenter ?? base.CreateViewPresenter()) as IMvxWpfViewPresenter;
+            presenter.ContentControl = _root;
+            return presenter;
+        }
+
+        protected override void InitializeIoC()
+        {
+            base.InitializeIoC();
+
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxWpfViewPresenter>();
+            Mvx.LazyConstructAndRegisterSingleton(() => Presenter);
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxWpfViewDispatcher>();
         }
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
         {
-            return new MvxWpfViewDispatcher(_uiThreadDispatcher, Presenter);
-        }
-
-        protected virtual void RegisterPresenter()
-        {
-            var presenter = Presenter;
-            Mvx.IoCProvider.RegisterSingleton(presenter);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
+            var dispatcher = base.CreateViewDispatcher() as MvxWpfViewDispatcher;
+            dispatcher.Dispatcher = _uiThreadDispatcher;
+            return dispatcher;
         }
 
         protected override IMvxNameMapping CreateViewToViewModelNaming()

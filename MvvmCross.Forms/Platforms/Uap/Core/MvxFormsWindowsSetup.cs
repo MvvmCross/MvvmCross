@@ -15,6 +15,7 @@ using MvvmCross.Platforms.Uap.Core;
 using MvvmCross.Platforms.Uap.Presenters;
 using MvvmCross.Platforms.Uap.Views;
 using MvvmCross.Plugin;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using Xamarin.Forms;
 
@@ -22,27 +23,18 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
 {
     public abstract class MvxFormsWindowsSetup : MvxWindowsSetup, IMvxFormsSetup
     {
+        private List<Assembly> _viewAssemblies;
         private Application _formsApplication;
-        public virtual Application FormsApplication
+        private IMvxFormsSetupHelper _formsSetupHelper;
+
+        public virtual IMvxFormsSetupHelper FormsSetupHelper
         {
             get
             {
-                if (!Xamarin.Forms.Forms.IsInitialized)
-                    Xamarin.Forms.Forms.Init(ActivationArguments, GetViewAssemblies());
-
-                if (_formsApplication == null)
-                {
-                    _formsApplication = CreateFormsApplication();
-                }
-                if(Application.Current != _formsApplication)
-                {
-                    Application.Current = _formsApplication;
-                }
-                return _formsApplication;
+                return _formsSetupHelper ?? (_formsSetupHelper = Mvx.Resolve<IMvxFormsSetupHelper>());
             }
         }
 
-        private List<Assembly> _viewAssemblies;
         public override IEnumerable<Assembly> GetViewAssemblies()
         {
             if (_viewAssemblies == null)
@@ -56,8 +48,17 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
         protected override void InitializeIoC()
         {
             base.InitializeIoC();
-            Mvx.IoCProvider.RegisterSingleton<IMvxFormsSetup>(this);
-            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxFormsPagePresenter, MvxFormsPagePresenter>();
+            Mvx.RegisterSingleton<IMvxFormsSetup>(this);
+
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxFormsUwpViewPresenter>();
+            Mvx.LazyConstructAndRegisterSingleton<IMvxFormsSetupHelper, MvxFormsSetupHelper>();
+            Mvx.Resolve<IMvxFormsSetupHelper>().InitializeIoC();
+            Mvx.LazyConstructAndRegisterSingleton(() => FormsPresenter);
+        }
+
+        protected virtual void RegisterSetupHelper()
+        {
+            Mvx.LazyConstructAndRegisterSingleton<IMvxFormsSetupHelper, MvxFormsSetupHelper>();
         }
 
         protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
@@ -66,32 +67,50 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
-        protected abstract Application CreateFormsApplication();
-
-        protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
+        public virtual Application FormsApplication
         {
-            var formsPagePresenter = Mvx.Resolve<IMvxFormsPagePresenter>();
-            formsPagePresenter.PlatformPresenter = viewPresenter;
-            return formsPagePresenter;
+            get
+            {
+                if (!Xamarin.Forms.Forms.IsInitialized)
+                    Xamarin.Forms.Forms.Init(ActivationArguments, GetViewAssemblies());
+
+                if (_formsApplication == null)
+                {
+                    _formsApplication = CreateFormsApplication();
+                }
+                if (Application.Current != _formsApplication)
+                {
+                    Application.Current = _formsApplication;
+                }
+                return _formsApplication;
+            }
         }
 
-        protected override IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
+
+        protected abstract Application CreateFormsApplication();
+
+        protected IMvxFormsViewPresenter FormsPresenter
         {
-            var presenter = new MvxFormsUwpViewPresenter(rootFrame, FormsApplication);
-            Mvx.IoCProvider.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
-            presenter.FormsPagePresenter = CreateFormsPagePresenter(presenter);
-            return presenter;
+            get
+            {
+                return base.ViewPresenter as IMvxFormsViewPresenter;
+            }
+        }
+
+        protected override IMvxViewPresenter CreateViewPresenter()
+        {
+            return FormsSetupHelper.SetupFormsViewPresenter(base.CreateViewPresenter() as IMvxFormsViewPresenter, FormsApplication);
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
-            MvxFormsSetupHelper.FillTargetFactories(registry);
+            FormsSetupHelper.FillTargetFactories(registry);
             base.FillTargetFactories(registry);
         }
 
         protected override void FillBindingNames(Binding.BindingContext.IMvxBindingNameRegistry registry)
         {
-            MvxFormsSetupHelper.FillBindingNames(registry);
+            FormsSetupHelper.FillBindingNames(registry);
             base.FillBindingNames(registry);
         }
 

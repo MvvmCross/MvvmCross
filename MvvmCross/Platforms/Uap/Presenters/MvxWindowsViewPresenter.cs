@@ -21,12 +21,10 @@ namespace MvvmCross.Platforms.Uap.Presenters
     public class MvxWindowsViewPresenter
         : MvxAttributeViewPresenter, IMvxWindowsViewPresenter
     {
-        protected readonly IMvxWindowsFrame _rootFrame;
+        public IMvxWindowsFrame RootFrame { get; set; }
 
-        public MvxWindowsViewPresenter(IMvxWindowsFrame rootFrame)
+        public MvxWindowsViewPresenter()
         {
-            _rootFrame = rootFrame;
-
             SystemNavigationManager.GetForCurrentView().BackRequested += BackButtonOnBackRequested;
         }
 
@@ -78,7 +76,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
             if (backRequestedEventArgs.Handled)
                 return;
 
-            var currentView = _rootFrame.Content as IMvxView;
+            var currentView = RootFrame.Content as IMvxView;
             if (currentView == null)
             {
                 MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe has no current page");
@@ -109,14 +107,14 @@ namespace MvvmCross.Platforms.Uap.Presenters
         protected virtual void HandleBackButtonVisibility()
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                _rootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+                RootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
 
         protected virtual Task<bool> ShowSplitView(Type viewType, MvxSplitViewPresentationAttribute attribute, MvxViewModelRequest request)
         {
             var viewsContainer = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
 
-            if (_rootFrame.Content is MvxWindowsPage currentPage)
+            if (RootFrame.Content is MvxWindowsPage currentPage)
             {
                 var splitView = currentPage.Content.FindControl<SplitView>();
                 if (splitView == null)
@@ -161,7 +159,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
             {
                 var requestText = GetRequestText(request);
 
-                var containerView = _rootFrame.UnderlyingControl.FindControl<Frame>(viewType.GetRegionName());
+                var containerView = RootFrame.UnderlyingControl.FindControl<Frame>(viewType.GetRegionName());
 
                 if (containerView != null)
                 {
@@ -178,7 +176,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
             var viewType = viewFinder.GetViewType(viewModel.GetType());
             if (viewType.HasRegionAttribute())
             {
-                var containerView = _rootFrame.UnderlyingControl?.FindControl<Frame>(viewType.GetRegionName());
+                var containerView = RootFrame.UnderlyingControl?.FindControl<Frame>(viewType.GetRegionName());
 
                 if (containerView == null)
                     throw new MvxException($"Region '{viewType.GetRegionName()}' not found in view '{viewType}'");
@@ -195,7 +193,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
 
         protected virtual Task<bool> ClosePage(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute)
         {
-            var currentView = _rootFrame.Content as IMvxView;
+            var currentView = RootFrame.Content as IMvxView;
             if (currentView == null)
             {
                 MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe has no current page");
@@ -208,13 +206,13 @@ namespace MvvmCross.Platforms.Uap.Presenters
                 return Task.FromResult(false);
             }
 
-            if (!_rootFrame.CanGoBack)
+            if (!RootFrame.CanGoBack)
             {
                 MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe refuses to go back");
                 return Task.FromResult(false);
             }
 
-            _rootFrame.GoBack();
+            RootFrame.GoBack();
 
             HandleBackButtonVisibility();
 
@@ -228,7 +226,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
                 var requestText = GetRequestText(request);
                 var viewsContainer = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
 
-                _rootFrame.Navigate(viewType, requestText); //Frame won't allow serialization of it's nav-state if it gets a non-simple type as a nav param
+                RootFrame.Navigate(viewType, requestText); //Frame won't allow serialization of it's nav-state if it gets a non-simple type as a nav param
 
                 HandleBackButtonVisibility();
                 return Task.FromResult(true);

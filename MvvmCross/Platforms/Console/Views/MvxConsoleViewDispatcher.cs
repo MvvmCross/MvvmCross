@@ -5,6 +5,7 @@
 using System;
 using System.Threading.Tasks;
 using MvvmCross.Base;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
@@ -15,6 +16,8 @@ namespace MvvmCross.Platforms.Console.Views
         , IMvxViewDispatcher
     {
         public override bool IsOnMainThread => throw new NotImplementedException();
+
+        public IMvxViewPresenter Presenter { get; set; }
 
         public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {

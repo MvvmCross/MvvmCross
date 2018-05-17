@@ -18,15 +18,6 @@ namespace MvvmCross.Forms.Platforms.Uap.Presenters
         : MvxWindowsViewPresenter
         , IMvxFormsViewPresenter
     {
-        public MvxFormsUwpViewPresenter(IMvxWindowsFrame rootFrame) : base(rootFrame)
-        {
-        }
-
-        public MvxFormsUwpViewPresenter(IMvxWindowsFrame rootFrame, Application formsApplication) : this(rootFrame)
-        {
-            FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
-        }
-
         public Application FormsApplication { get; set; }
 
         private IMvxFormsPagePresenter _formsPagePresenter;

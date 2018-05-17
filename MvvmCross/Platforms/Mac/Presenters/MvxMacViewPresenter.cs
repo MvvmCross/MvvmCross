@@ -21,8 +21,6 @@ namespace MvvmCross.Platforms.Mac.Presenters
     public class MvxMacViewPresenter
         : MvxAttributeViewPresenter, IMvxMacViewPresenter, IMvxAttributeViewPresenter
     {
-        private readonly INSApplicationDelegate _applicationDelegate;
-
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
             MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new window presentation");
@@ -58,14 +56,9 @@ namespace MvvmCross.Platforms.Mac.Presenters
             return null;
         }
 
-        protected virtual INSApplicationDelegate ApplicationDelegate => _applicationDelegate;
+        public virtual INSApplicationDelegate ApplicationDelegate { get; set; }
 
         protected virtual List<NSWindow> Windows => NSApplication.SharedApplication.Windows.ToList();
-
-        public MvxMacViewPresenter(INSApplicationDelegate applicationDelegate)
-        {
-            _applicationDelegate = applicationDelegate;
-        }
 
         public override void RegisterAttributeTypes()
         {

@@ -6,6 +6,7 @@ using System;
 using System.Threading.Tasks;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Tizen.Presenters;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
@@ -14,19 +15,14 @@ namespace MvvmCross.Platforms.Tizen.Views
     public class MvxTizenViewDispatcher
         : MvxTizenMainThreadDispatcher, IMvxViewDispatcher
     {
-        private readonly IMvxTizenViewPresenter _presenter;
-
-        public MvxTizenViewDispatcher(IMvxTizenViewPresenter presenter)
-        {
-            _presenter = presenter;
-        }
-
+        public IMvxViewPresenter Presenter { get; set; }
+               
         public async Task<bool> ShowViewModel(MvxViewModelRequest request)
         {
             Action action = () =>
             {
                 MvxLog.Instance.Trace("TizenNavigation", "Navigate requested");
-                _presenter.Show(request);
+                Presenter.Show(request);
             };
             await ExecuteOnMainThreadAsync(action);
             return true;
@@ -34,7 +30,7 @@ namespace MvvmCross.Platforms.Tizen.Views
 
         public async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            await ExecuteOnMainThreadAsync(() => _presenter.ChangePresentation(hint));
+            await ExecuteOnMainThreadAsync(() => Presenter.ChangePresentation(hint));
             return true;
         }
     }

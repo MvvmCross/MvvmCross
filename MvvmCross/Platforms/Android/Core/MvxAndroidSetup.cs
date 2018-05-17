@@ -31,7 +31,6 @@ namespace MvvmCross.Platforms.Android.Core
         : MvxSetup, IMvxAndroidGlobals, IMvxAndroidSetup
     {
         private Context _applicationContext;
-        private IMvxAndroidViewPresenter _presenter;
 
         public void PlatformInitialize(Context applicationContext)
         {
@@ -46,7 +45,6 @@ namespace MvvmCross.Platforms.Android.Core
         {
             InitializeLifetimeMonitor();
             InitializeAndroidCurrentTopActivity();
-            RegisterPresenter();
 
             Mvx.IoCProvider.RegisterSingleton<IMvxAndroidGlobals>(this);
 
@@ -118,30 +116,28 @@ namespace MvvmCross.Platforms.Android.Core
             return viewsContainer;
         }
 
-        protected IMvxAndroidViewPresenter Presenter
+        protected IMvxAndroidViewPresenter AndroidPresenter
         {
             get
             {
-                _presenter = _presenter ?? CreateViewPresenter();
-                return _presenter;
+                return base.ViewPresenter as IMvxAndroidViewPresenter;
             }
         }
 
-        protected virtual IMvxAndroidViewPresenter CreateViewPresenter()
+        protected override IMvxViewPresenter CreateViewPresenter()
         {
-            return new MvxAndroidViewPresenter(AndroidViewAssemblies);
+            var presenter = base.CreateViewPresenter() as IMvxAndroidViewPresenter;
+            presenter.AndroidViewAssemblies = AndroidViewAssemblies;
+            return presenter;
         }
 
-        protected override IMvxViewDispatcher CreateViewDispatcher()
+        protected override void InitializeIoC()
         {
-            return new MvxAndroidViewDispatcher(Presenter);
-        }
+            base.InitializeIoC();
 
-        protected virtual void RegisterPresenter()
-        {
-            var presenter = Presenter;
-            Mvx.IoCProvider.RegisterSingleton(presenter);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxAndroidViewPresenter>();
+            Mvx.LazyConstructAndRegisterSingleton(() => AndroidPresenter);
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxAndroidViewDispatcher>();
         }
 
         protected override void InitializeLastChance()

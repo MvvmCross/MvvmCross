@@ -23,13 +23,13 @@ using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Tvos.Core
 {
-    public abstract class MvxTvosSetup 
+    public abstract class MvxTvosSetup
         : MvxSetup, IMvxTvosSetup
     {
         private IMvxApplicationDelegate _applicationDelegate;
         private UIWindow _window;
 
-        private IMvxTvosViewPresenter _presenter;
+        private IMvxTvosViewPresenter _customPresenter;
 
         public virtual void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, UIWindow window)
         {
@@ -39,7 +39,7 @@ namespace MvvmCross.Platforms.Tvos.Core
 
         public virtual void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, IMvxTvosViewPresenter presenter)
         {
-            _presenter = presenter;
+            _customPresenter = presenter;
             _applicationDelegate = applicationDelegate;
         }
 
@@ -65,15 +65,9 @@ namespace MvvmCross.Platforms.Tvos.Core
             Mvx.IoCProvider.RegisterSingleton<IMvxCurrentRequest>(container);
         }
 
-        protected override IMvxViewDispatcher CreateViewDispatcher()
-        {
-            return new MvxTvosViewDispatcher(Presenter);
-        }
-
         protected override void InitializePlatformServices()
         {
             RegisterPlatformProperties();
-            RegisterPresenter();
             RegisterLifetime();
             base.InitializePlatformServices();
         }
@@ -97,21 +91,25 @@ namespace MvvmCross.Platforms.Tvos.Core
         {
             get
             {
-                _presenter = _presenter ?? CreateViewPresenter();
-                return _presenter;
+                return base.ViewPresenter as IMvxTvosViewPresenter;
             }
         }
 
-        protected virtual IMvxTvosViewPresenter CreateViewPresenter()
+        protected override IMvxViewPresenter CreateViewPresenter()
         {
-            return new MvxTvosViewPresenter(_applicationDelegate, _window);
+            var presenter = (_customPresenter ?? base.CreateViewPresenter()) as IMvxTvosViewPresenter;
+            presenter.ApplicationDelegate = ApplicationDelegate;
+            presenter.Window = Window;
+            return presenter;
         }
 
-        protected virtual void RegisterPresenter()
+        protected override void InitializeIoC()
         {
-            var presenter = Presenter;
-            Mvx.IoCProvider.RegisterSingleton(presenter);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
+            base.InitializeIoC();
+
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxTvosViewPresenter>();
+            Mvx.LazyConstructAndRegisterSingleton(() => Presenter);
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxTvosViewDispatcher>();
         }
 
         protected override void InitializeLastChance()

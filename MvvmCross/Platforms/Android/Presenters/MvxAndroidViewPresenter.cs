@@ -28,7 +28,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 {
     public class MvxAndroidViewPresenter : MvxAttributeViewPresenter, IMvxAndroidViewPresenter
     {
-        protected IEnumerable<Assembly> AndroidViewAssemblies { get; set; }
+        public IEnumerable<Assembly> AndroidViewAssemblies { get; set; }
         public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
         public const string SharedElementsBundleKey = "__sharedElementsKey";
         protected MvxViewModelRequest _pendingRequest;
@@ -68,9 +68,8 @@ namespace MvvmCross.Platforms.Android.Presenters
             }
         }
 
-        public MvxAndroidViewPresenter(IEnumerable<Assembly> androidViewAssemblies)
+        public MvxAndroidViewPresenter()
         {
-            AndroidViewAssemblies = androidViewAssemblies;
             ActivityLifetimeListener.ActivityChanged += ActivityLifetimeListener_ActivityChanged;
         }
 

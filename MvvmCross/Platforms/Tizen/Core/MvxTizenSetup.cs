@@ -32,20 +32,21 @@ namespace MvvmCross.Platforms.Tizen.Core
             CoreApplication = coreApplication;
         }
 
-        private IMvxTizenViewPresenter _presenter;
         protected IMvxTizenViewPresenter Presenter
         {
             get
             {
-                _presenter = _presenter ?? CreateViewPresenter();
-                return _presenter;
+                return base.ViewPresenter as IMvxTizenViewPresenter;
             }
         }
-
-        protected override void InitializePlatformServices()
+                
+        protected override void InitializeIoC()
         {
-            RegisterPresenter();
-            base.InitializePlatformServices();
+            base.InitializeIoC();
+
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxTizenViewPresenter>();
+            Mvx.LazyConstructAndRegisterSingleton(() => Presenter);
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxTizenViewDispatcher>();
         }
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
@@ -58,18 +59,6 @@ namespace MvvmCross.Platforms.Tizen.Core
         protected virtual IMvxTizenViewsContainer CreateTizenViewsContainer()
         {
             return new MvxTizenViewsContainer();
-        }
-
-        protected virtual IMvxTizenViewPresenter CreateViewPresenter()
-        {
-            return new MvxTizenViewPresenter();
-        }
-
-        protected virtual void RegisterPresenter()
-        {
-            var presenter = Presenter;
-            Mvx.IoCProvider.RegisterSingleton(presenter);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
         protected override void InitializeLastChance()
@@ -95,11 +84,6 @@ namespace MvvmCross.Platforms.Tizen.Core
         protected virtual MvxBindingBuilder CreateBindingBuilder()
         {
             return new MvxTizenBindingBuilder();
-        }
-
-        protected override IMvxViewDispatcher CreateViewDispatcher()
-        {
-            return new MvxTizenViewDispatcher(Presenter);
         }
 
         protected override IMvxNameMapping CreateViewToViewModelNaming()

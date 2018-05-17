@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MvvmCross.Base;
 using MvvmCross.Logging;
+using MvvmCross.Presenters;
 using MvvmCross.Tests;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
@@ -19,6 +20,8 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
     {
         public readonly List<MvxViewModelRequest> Requests = new List<MvxViewModelRequest>();
         public readonly List<MvxPresentationHint> Hints = new List<MvxPresentationHint>();
+
+        public IMvxViewPresenter Presenter { get; set; }
 
         public bool IsOnMainThread => true;
 

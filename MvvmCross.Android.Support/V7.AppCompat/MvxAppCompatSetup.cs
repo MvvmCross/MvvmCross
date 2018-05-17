@@ -11,12 +11,20 @@ using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Droid.Support.V4;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Presenters;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     public abstract class MvxAppCompatSetup : MvxAndroidSetup
     {
+        protected override void InitializeIoC()
+        {
+            base.InitializeIoC();
+
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxAppCompatViewPresenter>();
+        }
+
         protected override IEnumerable<Assembly> AndroidViewAssemblies =>
             new List<Assembly>(base.AndroidViewAssemblies)
             {
@@ -24,11 +32,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 typeof(DrawerLayout).Assembly,
                 typeof(MvxSwipeRefreshLayout).Assembly
             };
-
-        protected override IMvxAndroidViewPresenter CreateViewPresenter()
-        {
-            return new MvxAppCompatViewPresenter(AndroidViewAssemblies);
-        }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {

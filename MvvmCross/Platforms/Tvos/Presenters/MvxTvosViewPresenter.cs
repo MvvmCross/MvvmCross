@@ -21,11 +21,9 @@ namespace MvvmCross.Platforms.Tvos.Presenters
     public class MvxTvosViewPresenter
         : MvxAttributeViewPresenter, IMvxTvosViewPresenter
     {
-        private readonly IUIApplicationDelegate _applicationDelegate;
-        protected IUIApplicationDelegate ApplicationDelegate => _applicationDelegate;
+        public IUIApplicationDelegate ApplicationDelegate { get; set; }
 
-        private readonly UIWindow _window;
-        protected UIWindow Window => _window;
+        public UIWindow Window { get; set; }
 
         public UINavigationController MasterNavigationController { get; protected set; }
 
@@ -34,12 +32,6 @@ namespace MvvmCross.Platforms.Tvos.Presenters
         public IMvxTabBarViewController TabBarViewController { get; protected set; }
 
         public MvxSplitViewController SplitViewController { get; protected set; }
-
-        public MvxTvosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
-        {
-            _applicationDelegate = applicationDelegate;
-            _window = window;
-        }
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
@@ -425,7 +417,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                 viewController.PreferredContentSize = attribute.PreferredContentSize;
 
             // Check if there is a modal already presented first. Otherwise use the window root
-            var modalHost = ModalViewControllers.LastOrDefault() ?? _window.RootViewController;
+            var modalHost = ModalViewControllers.LastOrDefault() ?? Window.RootViewController;
 
             modalHost.PresentViewController(
                 viewController,
@@ -565,11 +557,11 @@ namespace MvvmCross.Platforms.Tvos.Presenters
 
         protected virtual void SetWindowRootViewController(UIViewController controller)
         {
-            foreach (var v in _window.Subviews)
+            foreach (var v in Window.Subviews)
                 v.RemoveFromSuperview();
 
-            _window.AddSubview(controller.View);
-            _window.RootViewController = controller;
+            Window.AddSubview(controller.View);
+            Window.RootViewController = controller;
         }
 
         protected virtual bool TryCloseViewControllerInsideStack(UINavigationController navigationController,

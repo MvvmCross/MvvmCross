@@ -27,8 +27,7 @@ namespace MvvmCross.Platforms.Mac.Core
     {
         private IMvxApplicationDelegate _applicationDelegate;
         private NSWindow _window;
-
-        private IMvxMacViewPresenter _presenter;
+        private IMvxMacViewPresenter _customPresenter;
 
         public void PlatformInitialize(IMvxApplicationDelegate applicationDelegate)
         {
@@ -44,7 +43,7 @@ namespace MvvmCross.Platforms.Mac.Core
         public void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter)
         {
             PlatformInitialize(applicationDelegate);
-            _presenter = presenter;
+            _customPresenter = presenter;
         }
 
         protected NSWindow Window
@@ -80,14 +79,8 @@ namespace MvvmCross.Platforms.Mac.Core
             Mvx.IoCProvider.RegisterSingleton<IMvxCurrentRequest>(container);
         }
 
-        protected override IMvxViewDispatcher CreateViewDispatcher()
-        {
-            return new MvxMacViewDispatcher(_presenter);
-        }
-
         protected override void InitializePlatformServices()
         {
-            RegisterPresenter();
             RegisterLifetime();
             base.InitializePlatformServices();
         }
@@ -97,25 +90,28 @@ namespace MvvmCross.Platforms.Mac.Core
             Mvx.IoCProvider.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
         }
 
-        protected IMvxMacViewPresenter Presenter
+        protected IMvxMacViewPresenter MacPresenter
         {
             get
             {
-                _presenter = _presenter ?? CreateViewPresenter();
-                return _presenter;
+                return base.ViewPresenter as IMvxMacViewPresenter;
             }
         }
 
-        protected virtual IMvxMacViewPresenter CreateViewPresenter()
+        protected override IMvxViewPresenter CreateViewPresenter()
         {
-            return new MvxMacViewPresenter(_applicationDelegate);
+            var presenter = (_customPresenter ?? base.CreateViewPresenter()) as IMvxMacViewPresenter;
+            presenter.ApplicationDelegate = _applicationDelegate;
+            return presenter;
         }
 
-        protected virtual void RegisterPresenter()
+        protected override void InitializeIoC()
         {
-            var presenter = this.Presenter;
-            Mvx.IoCProvider.RegisterSingleton(presenter);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
+            base.InitializeIoC();
+
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxMacViewPresenter>();
+            Mvx.LazyConstructAndRegisterSingleton(() => MacPresenter);
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxMacViewDispatcher>();
         }
 
         protected override void InitializeLastChance()

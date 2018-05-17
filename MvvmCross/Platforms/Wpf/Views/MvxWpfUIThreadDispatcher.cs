@@ -11,14 +11,9 @@ namespace MvvmCross.Platforms.Wpf.Views
     public class MvxWpfUIThreadDispatcher
         : MvxMainThreadAsyncDispatcher
     {
-        private readonly Dispatcher _dispatcher;
+        public Dispatcher Dispatcher { get; set; }
 
-        public MvxWpfUIThreadDispatcher(Dispatcher dispatcher)
-        {
-            _dispatcher = dispatcher;
-        }
-
-        public override bool IsOnMainThread => _dispatcher.CheckAccess();
+        public override bool IsOnMainThread => Dispatcher.CheckAccess();
 
         public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
@@ -28,7 +23,7 @@ namespace MvvmCross.Platforms.Wpf.Views
             }
             else
             {
-                _dispatcher.Invoke(() =>
+                Dispatcher.Invoke(() =>
                 {
                     ExceptionMaskedAction(action, maskExceptions);
                 });

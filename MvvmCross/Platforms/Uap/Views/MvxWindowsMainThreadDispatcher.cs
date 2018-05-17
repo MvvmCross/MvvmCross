@@ -10,14 +10,9 @@ namespace MvvmCross.Platforms.Uap.Views
 {
     public class MvxWindowsMainThreadDispatcher : MvxMainThreadAsyncDispatcher
     {
-        private readonly CoreDispatcher _uiDispatcher;
+        public CoreDispatcher UiDispatcher { get; set; }
 
-        public MvxWindowsMainThreadDispatcher(CoreDispatcher uiDispatcher)
-        {
-            _uiDispatcher = uiDispatcher;
-        }
-
-        public override bool IsOnMainThread => _uiDispatcher.HasThreadAccess;
+        public override bool IsOnMainThread => UiDispatcher.HasThreadAccess;
 
         public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
@@ -27,7 +22,7 @@ namespace MvvmCross.Platforms.Uap.Views
                 return true;
             }
 
-            _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => 
+            UiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => 
             {
                 ExceptionMaskedAction(action, maskExceptions);
             });

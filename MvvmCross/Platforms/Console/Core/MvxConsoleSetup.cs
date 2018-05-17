@@ -15,6 +15,13 @@ namespace MvvmCross.Platforms.Console.Core
     public abstract class MvxConsoleSetup
         : MvxSetup
     {
+        protected override void InitializeIoC()
+        {
+            base.InitializeIoC();
+
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxConsoleViewDispatcher>();
+        }
+
         protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View");
@@ -32,11 +39,6 @@ namespace MvvmCross.Platforms.Console.Core
             var container = CreateConsoleContainer();
             Mvx.IoCProvider.RegisterSingleton<IMvxConsoleNavigation>(container);
             return container;
-        }
-
-        protected override IMvxViewDispatcher CreateViewDispatcher()
-        {
-            return new MvxConsoleViewDispatcher();
         }
 
         protected virtual MvxBaseConsoleContainer CreateConsoleContainer()

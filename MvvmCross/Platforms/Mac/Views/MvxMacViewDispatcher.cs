@@ -6,6 +6,7 @@ using System;
 using System.Threading.Tasks;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Mac.Presenters;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
@@ -15,19 +16,14 @@ namespace MvvmCross.Platforms.Mac.Views
         : MvxMacUIThreadDispatcher
         , IMvxViewDispatcher
     {
-        private readonly IMvxMacViewPresenter _presenter;
-
-        public MvxMacViewDispatcher(IMvxMacViewPresenter presenter)
-        {
-            _presenter = presenter;
-        }
+        public IMvxViewPresenter Presenter { get; set; }
 
         public async Task<bool> ShowViewModel(MvxViewModelRequest request)
         {
             Action action = () =>
             {
                 MvxLog.Instance.Trace("MacNavigation", "Navigate requested");
-                _presenter.Show(request);
+                Presenter.Show(request);
             };
             await ExecuteOnMainThreadAsync(action);
             return true;
@@ -38,7 +34,7 @@ namespace MvvmCross.Platforms.Mac.Views
             Action action = () =>
                                 {
                                     MvxLog.Instance.Trace("MacNavigation", "Change presentation requested");
-                                    _presenter.ChangePresentation(hint);
+                                    Presenter.ChangePresentation(hint);
                                 };
             await ExecuteOnMainThreadAsync(action);
             return true;

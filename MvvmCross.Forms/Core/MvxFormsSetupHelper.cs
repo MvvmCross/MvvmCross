@@ -6,13 +6,16 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Forms.Bindings;
 using MvvmCross.Forms.Bindings.Target;
+using MvvmCross.Forms.Presenters;
 using MvvmCross.Forms.Views;
+using MvvmCross.Presenters;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Core
 {
-    public static class MvxFormsSetupHelper
+    public class MvxFormsSetupHelper : IMvxFormsSetupHelper
     {
-        public static void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+        public virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
             registry.RegisterPropertyInfoBindingFactory(
                 typeof(MvxListViewItemClickPropertyTargetBinding),
@@ -20,9 +23,28 @@ namespace MvvmCross.Forms.Core
                 MvxFormsPropertyBinding.MvxListView_ItemClick);
         }
 
-        public static void FillBindingNames(IMvxBindingNameRegistry registry)
+        public virtual void FillBindingNames(IMvxBindingNameRegistry registry)
         {
             
+        }
+
+        public virtual IMvxViewPresenter SetupFormsViewPresenter(IMvxFormsViewPresenter presenter, Application formsApplication)
+        {
+            presenter.FormsApplication = formsApplication;
+            presenter.FormsPagePresenter = CreateFormsPagePresenter(presenter);
+            return presenter;
+        }
+
+        protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
+        {
+            var formsPagePresenter = Mvx.Resolve<IMvxFormsPagePresenter>();
+            formsPagePresenter.PlatformPresenter = viewPresenter;
+            return formsPagePresenter;
+        }
+
+        public void InitializeIoC()
+        {
+            Mvx.LazyConstructAndRegisterSingleton<IMvxFormsPagePresenter, MvxFormsPagePresenter>();
         }
     }
 }

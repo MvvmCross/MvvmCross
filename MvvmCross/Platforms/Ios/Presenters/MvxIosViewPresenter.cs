@@ -20,8 +20,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
 {
     public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresenter
     {
-        protected readonly IUIApplicationDelegate _applicationDelegate;
-        protected readonly UIWindow _window;
+        public IUIApplicationDelegate ApplicationDelegate { get; set; }
+        public UIWindow Window { get; set; }
 
         public UINavigationController MasterNavigationController { get; protected set; }
 
@@ -74,12 +74,6 @@ namespace MvvmCross.Platforms.Ios.Presenters
             }
 
             return null;
-        }
-
-        public MvxIosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
-        {
-            _applicationDelegate = applicationDelegate;
-            _window = window;
         }
 
         public override void RegisterAttributeTypes()
@@ -301,7 +295,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
                 viewController.PreferredContentSize = attribute.PreferredContentSize;
 
             // Check if there is a modal already presented first. Otherwise use the window root
-            var modalHost = ModalViewControllers.LastOrDefault() ?? _window.RootViewController;
+            var modalHost = ModalViewControllers.LastOrDefault() ?? Window.RootViewController;
 
             modalHost.PresentViewController(
                 viewController,
@@ -531,7 +525,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
         protected void RemoveWindowSubviews()
         {
-            foreach (var v in _window.Subviews)
+            foreach (var v in Window.Subviews)
                 v.RemoveFromSuperview();
         }
 
@@ -546,13 +540,13 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             if (attribute == null || attribute.AnimationOptions == UIViewAnimationOptions.TransitionNone)
             {
-                _window.RootViewController = controller;
+                Window.RootViewController = controller;
                 return;
             }
 
             UIView.Transition(
-                _window, attribute.AnimationDuration, attribute.AnimationOptions,
-                () => _window.RootViewController = controller, null
+                Window, attribute.AnimationDuration, attribute.AnimationOptions,
+                () => Window.RootViewController = controller, null
             );
         }
     }

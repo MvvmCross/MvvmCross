@@ -15,14 +15,42 @@ using MvvmCross.Forms.Presenters;
 using MvvmCross.Platforms.Wpf.Core;
 using MvvmCross.Platforms.Wpf.Presenters;
 using MvvmCross.Platforms.Wpf.Views;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platforms.Wpf.Core
 {
-    public abstract class MvxFormsWpfSetup : MvxWpfSetup
+    public abstract class MvxFormsWpfSetup : MvxWpfSetup, IMvxFormsSetup
     {
         private Application _formsApplication;
+        private IMvxFormsSetupHelper _formsSetupHelper;
+
+        public virtual IMvxFormsSetupHelper FormsSetupHelper
+        {
+            get
+            {
+                return _formsSetupHelper ?? (_formsSetupHelper = Mvx.Resolve<IMvxFormsSetupHelper>());
+            }
+        }
+
+        protected override void InitializeIoC()
+        {
+            base.InitializeIoC();
+            Mvx.RegisterSingleton<IMvxFormsSetup>(this);
+
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxFormsWpfViewPresenter>();
+            Mvx.LazyConstructAndRegisterSingleton<IMvxFormsSetupHelper, MvxFormsSetupHelper>();
+            Mvx.Resolve<IMvxFormsSetupHelper>().InitializeIoC();
+            Mvx.LazyConstructAndRegisterSingleton(() => FormsPresenter);
+        }
+
+        protected virtual void RegisterSetupHelper()
+        {
+            Mvx.LazyConstructAndRegisterSingleton<IMvxFormsSetupHelper, MvxFormsSetupHelper>();
+        }
+
+
         public virtual Application FormsApplication
         {
             get
@@ -44,19 +72,17 @@ namespace MvvmCross.Forms.Platforms.Wpf.Core
 
         protected abstract Application CreateFormsApplication();
 
-        protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
+        protected IMvxFormsViewPresenter FormsPresenter
         {
-            var formsPagePresenter = new MvxFormsPagePresenter(viewPresenter);
-            Mvx.IoCProvider.RegisterSingleton<IMvxFormsPagePresenter>(formsPagePresenter);
-            return formsPagePresenter;
+            get
+            {
+                return base.ViewPresenter as IMvxFormsViewPresenter;
+            }
         }
 
-        protected override IMvxWpfViewPresenter CreateViewPresenter(ContentControl contentControl)
+        protected override IMvxViewPresenter CreateViewPresenter()
         {
-            var presenter = new MvxFormsWpfViewPresenter(contentControl, FormsApplication);
-            Mvx.IoCProvider.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
-            presenter.FormsPagePresenter = CreateFormsPagePresenter(presenter);
-            return presenter;
+            return FormsSetupHelper.SetupFormsViewPresenter(base.CreateViewPresenter() as IMvxFormsViewPresenter, FormsApplication);
         }
 
         protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsWindowsBindingBuilder();
