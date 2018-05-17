@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:local="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<android.support.design.widget.CoordinatorLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@color/colorPrimary">
+		<android.support.v4.widget.NestedScrollView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_gravity="fill_vertical"
+			android:layout_marginBottom="?attr/actionBarSize"
+			android:isScrollContainer="true"
+			local:layout_behavior="@string/appbar_scrolling_view_behavior">
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+				<Button
+					android:id="@+id/btn_destroy"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="20dp"
+					android:layout_marginBottom="16dp"
+					android:layout_marginLeft="60dp"
+					android:layout_marginRight="60dp"
+					android:textSize="15sp"
+					android:textAllCaps="true"
+					android:background="@color/colorAccent"
+					android:textColor="@android:color/white"
+					android:stateListAnimator="@null"
+          android:text ="Open browser"
+					local:MvxBind="Click OpenBrowserCommand" />
+			</LinearLayout>
+		</android.support.v4.widget.NestedScrollView>
+	</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
