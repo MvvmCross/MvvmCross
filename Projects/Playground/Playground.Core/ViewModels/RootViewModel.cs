@@ -11,7 +11,7 @@ using Playground.Core.Models;
 
 namespace Playground.Core.ViewModels
 {
-    public class RootViewModel : MvxViewModel
+    public class RootViewModel : MvxViewModel<string>
     {
         private readonly IMvxNavigationService _navigationService;
         private readonly IMvxViewModelLoader _mvxViewModelLoader;
@@ -133,6 +133,8 @@ namespace Playground.Core.ViewModels
 
         public IMvxAsyncCommand ShowSharedElementsCommand { get; private set; }
 
+        public string WelcomeText { get; private set; }
+
         private async Task Navigate()
         {
             try
@@ -142,6 +144,11 @@ namespace Playground.Core.ViewModels
             catch (System.Exception)
             {
             }
+        }
+
+        public override void Prepare(string parameter)
+        {
+            WelcomeText = parameter;
         }
     }
 }

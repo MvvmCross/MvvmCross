@@ -45,7 +45,7 @@ namespace MvvmCross.ViewModels
         /// Any initialization steps that need to be done on the UI thread
         /// </summary>
         /// <param name="hint"></param>
-        public virtual void Startup(object hint)
+        public virtual void Startup()
         {
             // do nothing
         }
@@ -82,6 +82,12 @@ namespace MvvmCross.ViewModels
             Mvx.RegisterSingleton(appStart);
         }
 
+        protected virtual void RegisterAppStart<TViewModel, TParameter>()
+          where TViewModel : IMvxViewModel<TParameter>
+        {
+            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel, TParameter>>();
+        }
+
         protected IEnumerable<Type> CreatableTypes()
         {
             return CreatableTypes(GetType().GetTypeInfo().Assembly);
@@ -90,6 +96,17 @@ namespace MvvmCross.ViewModels
         protected IEnumerable<Type> CreatableTypes(Assembly assembly)
         {
             return assembly.CreatableTypes();
+        }
+    }
+
+    public class MvxApplication<TStartupHint> : MvxApplication, IMvxApplication<TStartupHint>
+    {
+        public virtual TStartupHint StartupWithHint(TStartupHint hint)
+        {
+            base.Startup();
+
+            // do nothing, so just return the original hint
+            return hint;
         }
     }
 }

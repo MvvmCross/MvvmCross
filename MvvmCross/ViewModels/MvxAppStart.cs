@@ -29,15 +29,23 @@ namespace MvvmCross.ViewModels
             Startup(hint);
         }
 
-        protected virtual void Startup(object hint = null)
+        protected virtual object Startup(object hint = null)
         {
-            ApplicationStartup(hint);
+            return ApplicationStartup(hint);
         }
 
-        protected virtual void ApplicationStartup(object hint = null)
+        protected virtual object ApplicationStartup(object hint = null)
         {
             MvxLog.Instance.Trace("AppStart: Application Startup - On UI thread");
-            Application.Startup(hint);
+
+            if (hint != null)
+            {
+                MvxLog.Instance.Trace("Use generic MvxAppStart so that hint can be passed to Application.StartupWithHint");
+            }
+
+            Application.Startup();
+
+            return hint;
         }
 
         public virtual bool IsStarted => startHasCommenced != 0;
@@ -64,23 +72,71 @@ namespace MvvmCross.ViewModels
             NavigationService = navigationService;
         }
 
-        protected override void Startup(object hint = null)
+        protected override object Startup(object hint = null)
         {
-            base.Startup(hint);
+            hint = base.Startup(hint);
 
             NavigateToFirstViewModel(hint);
+
+            return hint;
         }
 
         protected virtual void NavigateToFirstViewModel(object hint)
         {
             if (hint != null)
             {
-                MvxLog.Instance.Trace("Hint ignored in default MvxAppStart");
+                MvxLog.Instance.Trace("Native platform hint ignored in default MvxAppStart");
             }
 
             try
             {
                 NavigationService.Navigate<TViewModel>().GetAwaiter().GetResult();
+            }
+            catch (System.Exception exception)
+            {
+                throw exception.MvxWrap("Problem navigating to ViewModel {0}", typeof(TViewModel).Name);
+            }
+        }
+    }
+
+    public class MvxAppStart<TViewModel, TParameter> : MvxAppStart<TViewModel> where TViewModel : IMvxViewModel<TParameter>
+    {
+        public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService) : base(application, navigationService)
+        {
+        }
+
+        protected override object ApplicationStartup(object hint = null)
+        {
+            if ((hint == null || hint is TParameter) &&
+                Application is IMvxApplication<TParameter> typedApplication)
+            {
+                TParameter typedHint = (TParameter)hint;
+
+                return typedApplication.StartupWithHint(typedHint);
+            }
+
+            return base.ApplicationStartup(hint);
+        }
+
+        protected override void NavigateToFirstViewModel(object hint)
+        {
+            TParameter navParam = default;
+
+            if (hint is TParameter typedHint)
+            {
+                navParam = typedHint;
+            }
+
+            try
+            {
+                if (typeof(IMvxViewModel<TParameter>).IsAssignableFrom(typeof(TViewModel)))
+                {
+                    NavigationService.Navigate(typeof(TViewModel), navParam).GetAwaiter().GetResult();
+                }
+                else
+                {
+                    NavigationService.Navigate<TViewModel>().GetAwaiter().GetResult();
+                }
             }
             catch (System.Exception exception)
             {

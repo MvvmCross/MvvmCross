@@ -11,7 +11,7 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Core
 {
-    public class App : MvxApplication
+    public class App : MvxApplication<string>
     {
         /// <summary>
         /// Breaking change in v6: This method is called on a background thread. Use
@@ -26,16 +26,18 @@ namespace Playground.Core
 
             Mvx.RegisterSingleton<IMvxTextProvider>(new TextProviderBuilder().TextProvider);
 
-            RegisterAppStart<RootViewModel>();
+            RegisterAppStart<RootViewModel, string>();
         }
 
         /// <summary>
         /// Do any UI bound startup actions here
         /// </summary>
         /// <param name="hint"></param>
-        public override void Startup(object hint)
+        public override string StartupWithHint(string hint)
         {
-            base.Startup(hint);
+            base.Startup();
+
+            return "Hello Playground!";
         }
 
         /// <summary>
