@@ -122,8 +122,11 @@ namespace MvvmCross.Platforms.Uap.Views
         {
             var deferral = e.SuspendingOperation.GetDeferral();
 
+            // This line returns null with other then original MvxSuspensionManager
             var suspension = Mvx.GetSingleton<IMvxSuspensionManager>() as MvxSuspensionManager;
             await Suspend(suspension);
+
+            // This throws NullReferenceException
             await suspension.SaveAsync();
             deferral.Complete();
         }
@@ -135,8 +138,11 @@ namespace MvvmCross.Platforms.Uap.Views
 
         private async void OnResuming(object sender, object e)
         {
+            // This line returns null with other then original MvxSuspensionManager
             var suspension = Mvx.GetSingleton<IMvxSuspensionManager>() as MvxSuspensionManager;
             await Resume(suspension);
+
+            // This throws NullReferenceException
             await suspension.RestoreAsync();
         }
 

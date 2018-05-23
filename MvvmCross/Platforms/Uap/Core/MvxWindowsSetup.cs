@@ -74,7 +74,7 @@ namespace MvvmCross.Platforms.Uap.Core
 
         protected virtual IMvxSuspensionManager CreateSuspensionManager()
         {
-            return new MvxSuspensionManager();
+            return new CopyOfMvxSuspensionManager();
         }
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
