@@ -16,7 +16,7 @@ RegisterAppStart<FirstViewModel>();
 
 Sometimes you want to do custom checks or logic when starting up your app. To do that you need to change a couple of things.
 
-- A typical App.cs file would look like:
+## A typical App.cs file would look like:
 
 ```c#
 public class App : MvxApplication
@@ -33,7 +33,7 @@ public class App : MvxApplication
 }
 ```
 
-- To use a custom AppStart class change it to:
+## To use a custom AppStart class change it to:
 
 ```c#
 public class App : MvxApplication
@@ -50,7 +50,7 @@ public class App : MvxApplication
 }
 ```
 
-- Now create an `AppStart.cs` file and add the following code:
+## Now create an `AppStart.cs` file and add the following code:
 
 ```c#
 public class AppStart : MvxAppStart
@@ -88,4 +88,36 @@ public class AppStart : MvxAppStart
 }
 ```
 
-**Note:** For situations where the app is launched using a protocol - e.g. from a Push notification or from an email link - then the object hint parameter start can be used to transfer a hint from the UI to the start object. Currently, it's up to you - the app developer - to write the UI side code to do this.
+## Launching using a protocol - e.g. from a Push notification or from an email link
+
+`MvxAppStart` will pass through any object received on startup to the `MvxApplication` class. There you can manipulate it or take any actions you like. It will not send the hint to the ViewModel, so use the typed `MvxAppStart<TParameter>` for that.
+
+```c#
+public class App : MvxApplication
+{
+	public override object Startup(object hint)
+	{
+		var parameter = base.Startup(hint);
+		//Do custom logic with the hint received.
+		return parameter;
+	}
+}
+```
+
+There is also a typed version of the `Startup` available. To use that your App class needs to extend `MvxApplication<TParameter>` where `TParameter` is the type you expect to receive from the operating system. Note that the ViewModel you navigate to needs to extend `IMvxViewModel<TParameter>`
+
+```c#
+public class App : MvxApplication<TParameter>
+{
+	public override void Initialize()
+	{
+		RegisterAppStart<SomeViewModel, TParameter>();
+	}
+
+	public override TParameter Startup(TParameter parameter)
+	{
+		//Do custom logic with the hint received.
+		return parameter;
+	}
+}
+```
