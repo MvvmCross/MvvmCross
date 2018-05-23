@@ -53,8 +53,7 @@ public class App : MvxApplication
 - Now create an `AppStart.cs` file and add the following code:
 
 ```c#
-public class AppStart<TViewModel> : MvxAppStart
-	where TViewModel : IMvxViewModel
+public class AppStart : MvxAppStart
 {
 	private readonly IAuthenticationService _authenticationService;
 
@@ -63,22 +62,28 @@ public class AppStart<TViewModel> : MvxAppStart
 		_authenticationService = authenticationService;
 	}
 	
-	protected override void Startup(object hint = null)
+	protected override void NavigateToFirstViewModel(object hint)
 	{
-		// You need to run Task sync otherwise code would continue before completing.
-		var tcs = new TaskCompletionSource<bool>();
-		Task.Run(async () => tcs.SetResult(await _authenticationService.IsAuthenticated()));
-		var isAuthenticated = tcs.Task.Result;
+		try
+		{
+			// You need to run Task sync otherwise code would continue before completing.
+			var tcs = new TaskCompletionSource<bool>();
+			Task.Run(async () => tcs.SetResult(await _authenticationService.IsAuthenticated()));
+			var isAuthenticated = tcs.Task.Result;
 
-		if (isAuthenticated)
-		{
-			TViewModel = typeof(HomeViewModel);
+			if (isAuthenticated)
+			{
+				NavigationService.Navigate<HomeViewModel>().GetAwaiter().GetResult();
+			}
+			else
+			{
+				NavigationService.Navigate<LoginViewModel>().GetAwaiter().GetResult();
+			}
 		}
-		else
+		catch (System.Exception exception)
 		{
-			TViewModel = typeof(LoginViewModel);
+			throw exception.MvxWrap("Problem navigating to ViewModel {0}", typeof(TViewModel).Name);
 		}
-		base.Startup(hint);
 	}
 }
 ```
