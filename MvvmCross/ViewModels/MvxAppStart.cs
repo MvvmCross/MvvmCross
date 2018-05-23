@@ -33,22 +33,21 @@ namespace MvvmCross.ViewModels
 
         protected virtual void Startup(object hint = null)
         {
-            ApplicationStartup(hint);
-
-            if (hint != null)
+            var applicationHint = ApplicationStartup(hint);
+            if (applicationHint != null)
             {
                 MvxLog.Instance.Trace("Hint ignored in default MvxAppStart");
             }
 
-            NavigateToFirstViewModel(hint);
+            NavigateToFirstViewModel(applicationHint);
         }
 
         protected abstract void NavigateToFirstViewModel(object hint);
 
-        protected virtual void ApplicationStartup(object hint = null)
+        protected virtual object ApplicationStartup(object hint = null)
         {
             MvxLog.Instance.Trace("AppStart: Application Startup - On UI thread");
-            Application.Startup(hint);
+            return Application.Startup(hint);
         }
 
         public virtual bool IsStarted => startHasCommenced != 0;
@@ -91,14 +90,16 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        protected override void ApplicationStartup(object hint = null)
+        protected override object ApplicationStartup(object hint = null)
         {
-            base.ApplicationStartup(hint);
-            if (hint is TParameter parameter && Application is IMvxApplication<TParameter> typedApplication)
+            var applicationHint = base.ApplicationStartup(hint);
+            if (applicationHint is TParameter parameter && Application is IMvxApplication<TParameter> typedApplication)
             {
                 //There is no way to pass the hint back
-                var typedHint = typedApplication.Startup(parameter);
-            }            
+                return typedApplication.Startup(parameter);
+            }
+            else
+                return applicationHint;
         }
 
         protected override void NavigateToFirstViewModel(object hint)
