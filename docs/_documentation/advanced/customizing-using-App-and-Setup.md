@@ -162,51 +162,6 @@ Mvx.RegisterSingleton<IDialogService>(new MyDialogService());
 
 For many objects the choice of when to initialize - first or last - doesn't matter. For others, the key choice is whether the service needs to be available before or after the App is created and initialized.
 
-## Changing trace/debug output
-
-Each platform provides a virtual CreateDebugTrace methods which offers your application a chance to customize where Mvx.Trace messages are displayed.
-
-To provide a custom trace implementation:
-
-* first implement a class which provides IMvxTrace
-* override Setup.CreateDebugTrace() in order to return an instead of your new class
-
-One common use of this is simply to display messages to Debug using:
-```c#
-public class MyDebugTrace : IMvxTrace
-{
-    public void Trace(MvxTraceLevel level, string tag, Func<string> message)
-	{
-		Debug.WriteLine(tag + ":" + level + ":" + message());
-	}
-
-	public void Trace(MvxTraceLevel level, string tag, string message)
-	{
-		Debug.WriteLine(tag + ":" + level + ":" + message);
-	}
-
-	public void Trace(MvxTraceLevel level, string tag, string message, params object[] args)
-	{
-		try
-		{
-			Debug.WriteLine(string.Format(tag + ":" + level + ":" + message, args));
-		}
-		catch (FormatException)
-		{
-			Trace(MvxTraceLevel.Error, tag, "Exception during trace of {0} {1} {2}", level, message);
-		}
-	}
-}
-```
-
-this can be returned during Setup using:
-```c#
-protected override IMvxTrace CreateDebugTrace() 
-{ 
-    return new MyDebugTrace(); 
-}
-```
-
 ## Changing the IoC container that MvvmCross uses
 
 IoC is the first thing that MvvmCross setup starts.
@@ -293,42 +248,6 @@ protected override IMvxViewModelLocator CreateDefaultViewModelLocator()
     return new MyViewModelLocator();
 }
 ```
-## Custom IMvxAppStart
-
-When an MvvmCross application starts by default it shows the View associated with a single ViewModel type.
-
-This default behaviour is configured in Initialize in App.cs using:
-```c#
-RegisterAppStart<FirstViewModel>();
-```
-
-If more advanced startup logic is needed, then a custom app start can be used - e.g.
-```c#
-public class CustomAppStart
-        : MvxNavigatingObject
-        , IMvxAppStart
-{
-    public void Start(object hint = null)
-    {
-        var auth = Mvx.Resolve<IAuth>();
-        if (auth.Check())
-        {
-            ShowViewModel<HomeViewModel>();
-        }
-        else
-        {
-            ShowViewModel<LoginViewModel>();
-        }
-    }
-}
-```
-
-This can then be registered in App using:
-```c#
-RegisterAppStart(new CustomAppStart());
-```
-
-**Note:** For situations where the app is launched using a protocol - e.g. from a Push notification or from an email link - then the object hint parameter start can be used to transfer a hint from the UI to the start object. Currently, it's up to you - the app developer - to write the UI side code to do this.
 
 ## Custom Presenters
 
