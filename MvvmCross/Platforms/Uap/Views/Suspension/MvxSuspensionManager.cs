@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -22,7 +22,7 @@ namespace MvvmCross.Platforms.Uap.Views.Suspension
     /// </summary>
     public class MvxSuspensionManager : IMvxSuspensionManager
     {
-        private const string SessionStateFilename = "_mvxSessionState.xml";
+        protected const string SessionStateFilename = "_mvxSessionState.xml";
 
         /// <summary>
         /// Provides access to global session state for the current session.  This state is
@@ -31,7 +31,7 @@ namespace MvvmCross.Platforms.Uap.Views.Suspension
         /// <see cref="DataContractSerializer"/> and should be as compact as possible.  Strings
         /// and other self-contained data types are strongly recommended.
         /// </summary>
-        public Dictionary<string, object> SessionState { get; private set; } = new Dictionary<string, object>();
+        public Dictionary<string, object> SessionState { get; protected set; } = new Dictionary<string, object>();
 
         /// <summary>
         /// List of custom types provided to the <see cref="DataContractSerializer"/> when
@@ -47,7 +47,7 @@ namespace MvvmCross.Platforms.Uap.Views.Suspension
         /// to save its state.
         /// </summary>
         /// <returns>An asynchronous task that reflects when session state has been saved.</returns>
-        public async Task SaveAsync()
+        public virtual async Task SaveAsync()
         {
             try
             {
@@ -91,7 +91,7 @@ namespace MvvmCross.Platforms.Uap.Views.Suspension
         /// <returns>An asynchronous task that reflects when session state has been read.  The
         /// content of <see cref="SessionState"/> should not be relied upon until this task
         /// completes.</returns>
-        public async Task RestoreAsync()
+        public virtual async Task RestoreAsync()
         {
             SessionState = new Dictionary<string, object>();
 
@@ -123,26 +123,14 @@ namespace MvvmCross.Platforms.Uap.Views.Suspension
             }
         }
 
-        private readonly DependencyProperty MvxFrameSessionStateKeyProperty =
+        protected readonly DependencyProperty MvxFrameSessionStateKeyProperty =
             DependencyProperty.RegisterAttached("_MvxFrameSessionStateKey", typeof(string), typeof(MvxSuspensionManager), null);
-        private readonly DependencyProperty MvxFrameSessionStateProperty =
+        protected readonly DependencyProperty MvxFrameSessionStateProperty =
             DependencyProperty.RegisterAttached("_MvxFrameSessionState",
                 typeof(Dictionary<string, object>), typeof(MvxSuspensionManager), null);
-        private readonly List<WeakReference<IMvxWindowsFrame>> _registeredFrames = new List<WeakReference<IMvxWindowsFrame>>();
+        protected readonly List<WeakReference<IMvxWindowsFrame>> _registeredFrames = new List<WeakReference<IMvxWindowsFrame>>();
 
-        /// <summary>
-        /// Registers a <see cref="Frame"/> instance to allow its navigation history to be saved to
-        /// and restored from <see cref="SessionState"/>.  Frames should be registered once
-        /// immediately after creation if they will participate in session state management.  Upon
-        /// registration if state has already been restored for the specified key
-        /// the navigation history will immediately be restored.  Subsequent invocations of
-        /// <see cref="RestoreAsync"/> will also restore navigation history.
-        /// </summary>
-        /// <param name="frame">An instance whose navigation history should be managed by
-        /// <see cref="MvxSuspensionManager"/></param>
-        /// <param name="sessionStateKey">A unique key into <see cref="SessionState"/> used to
-        /// store navigation-related information.</param>
-        public void RegisterFrame(IMvxWindowsFrame frame, string sessionStateKey)
+        public virtual void RegisterFrame(IMvxWindowsFrame frame, string sessionStateKey)
         {
             if (frame.GetValue(MvxFrameSessionStateKeyProperty) != null)
             {
@@ -163,14 +151,7 @@ namespace MvvmCross.Platforms.Uap.Views.Suspension
             RestoreFrameNavigationState(frame);
         }
 
-        /// <summary>
-        /// Disassociates a <see cref="Frame"/> previously registered by <see cref="RegisterFrame"/>
-        /// from <see cref="SessionState"/>.  Any navigation state previously captured will be
-        /// removed.
-        /// </summary>
-        /// <param name="frame">An instance whose navigation history should no longer be
-        /// managed.</param>
-        public void UnregisterFrame(IMvxWindowsFrame frame)
+        public virtual void UnregisterFrame(IMvxWindowsFrame frame)
         {
             // Remove session state and remove the frame from the list of frames whose navigation
             // state will be saved (along with any weak references that are no longer reachable)
@@ -182,20 +163,7 @@ namespace MvvmCross.Platforms.Uap.Views.Suspension
             });
         }
 
-        /// <summary>
-        /// Provides storage for session state associated with the specified <see cref="Frame"/>.
-        /// Frames that have been previously registered with <see cref="RegisterFrame"/> have
-        /// their session state saved and restored automatically as a part of the global
-        /// <see cref="SessionState"/>.  Frames that are not registered have transient state
-        /// that can still be useful when restoring pages that have been discarded from the
-        /// navigation cache.
-        /// </summary>
-        /// <remarks>Apps may choose to rely on <see cref="LayoutAwarePage"/> to manage
-        /// page-specific state instead of working with frame session state directly.</remarks>
-        /// <param name="frame">The instance for which session state is desired.</param>
-        /// <returns>A collection of state subject to the same serialization mechanism as
-        /// <see cref="SessionState"/>.</returns>
-        public Dictionary<string, object> SessionStateForFrame(IMvxWindowsFrame frame)
+        public virtual Dictionary<string, object> SessionStateForFrame(IMvxWindowsFrame frame)
         {
             var frameState = (Dictionary<string, object>)frame.GetValue(MvxFrameSessionStateProperty);
 
@@ -221,7 +189,7 @@ namespace MvvmCross.Platforms.Uap.Views.Suspension
             return frameState;
         }
 
-        private void RestoreFrameNavigationState(IMvxWindowsFrame frame)
+        protected virtual void RestoreFrameNavigationState(IMvxWindowsFrame frame)
         {
             var frameState = SessionStateForFrame(frame);
             if (frameState.ContainsKey("Navigation"))
@@ -230,7 +198,7 @@ namespace MvvmCross.Platforms.Uap.Views.Suspension
             }
         }
 
-        private void SaveFrameNavigationState(IMvxWindowsFrame frame)
+        protected virtual void SaveFrameNavigationState(IMvxWindowsFrame frame)
         {
             var frameState = SessionStateForFrame(frame);
             frameState["Navigation"] = frame.GetNavigationState();
