@@ -102,12 +102,12 @@ namespace MvvmCross.ViewModels
         }
     }
 
-    public class MvxApplication<THint> : MvxApplication, IMvxApplication<THint>
+    public class MvxApplication<TParameter> : MvxApplication, IMvxApplication<TParameter>
     {
-        public virtual THint Startup(THint hint)
+        public virtual TParameter Startup(TParameter parameter)
         {
             // do nothing, so just return the original hint
-            return hint;
+            return parameter;
         }
     }
 }
