@@ -16,4 +16,9 @@ namespace MvvmCross.ViewModels
 
         void Reset();
     }
+
+    public interface IMvxApplication<THint> : IMvxApplication
+    {
+        THint Startup(THint hint);
+    }
 }
