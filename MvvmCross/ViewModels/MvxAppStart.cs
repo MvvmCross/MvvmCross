@@ -11,13 +11,15 @@ namespace MvvmCross.ViewModels
 {
     public abstract class MvxAppStart : IMvxAppStart
     {
+        protected readonly IMvxNavigationService NavigationService;
         protected readonly IMvxApplication Application;
 
         private int startHasCommenced;
 
-        public MvxAppStart(IMvxApplication application)
+        public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService)
         {
             Application = application;
+            NavigationService = navigationService;
         }
 
         public void Start(object hint = null)
@@ -32,7 +34,16 @@ namespace MvvmCross.ViewModels
         protected virtual void Startup(object hint = null)
         {
             ApplicationStartup(hint);
+
+            if (hint != null)
+            {
+                MvxLog.Instance.Trace("Hint ignored in default MvxAppStart");
+            }
+
+            NavigateToFirstViewModel(hint);
         }
+
+        protected abstract void NavigateToFirstViewModel(object hint);
 
         protected virtual void ApplicationStartup(object hint = null)
         {
@@ -57,30 +68,50 @@ namespace MvvmCross.ViewModels
     public class MvxAppStart<TViewModel> : MvxAppStart
         where TViewModel : IMvxViewModel
     {
-        protected readonly IMvxNavigationService NavigationService;
-
-        public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService) : base(application)
+        public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService) : base(application, navigationService)
         {
-            NavigationService = navigationService;
         }
 
-        protected override void Startup(object hint = null)
+        protected override void NavigateToFirstViewModel(object hint)
         {
-            base.Startup(hint);
-
-            NavigateToFirstViewModel(hint);
-        }
-
-        protected virtual void NavigateToFirstViewModel(object hint)
-        {
-            if (hint != null)
-            {
-                MvxLog.Instance.Trace("Hint ignored in default MvxAppStart");
-            }
-
             try
             {
                 NavigationService.Navigate<TViewModel>().GetAwaiter().GetResult();
+            }
+            catch (System.Exception exception)
+            {
+                throw exception.MvxWrap("Problem navigating to ViewModel {0}", typeof(TViewModel).Name);
+            }
+        }
+    }
+
+    public class MvxAppStart<TViewModel, TParameter> : MvxAppStart<TViewModel> where TViewModel : IMvxViewModel<TParameter>
+    {
+        public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService) : base(application, navigationService)
+        {
+        }
+
+        protected override void ApplicationStartup(object hint = null)
+        {
+            base.ApplicationStartup(hint);
+            if (hint is TParameter parameter && Application is IMvxApplication<TParameter> typedApplication)
+            {
+                //There is no way to pass the hint back
+                var typedHint = typedApplication.Startup(parameter);
+            }            
+        }
+
+        protected override void NavigateToFirstViewModel(object hint)
+        {
+            try
+            {
+                if (hint is TParameter parameter)
+                    NavigationService.Navigate<TViewModel, TParameter>(parameter).GetAwaiter().GetResult();
+                else
+                {
+                    MvxLog.Instance.Trace($"Hint is not matching type of {nameof(TParameter)}. Doing navigation without typed parameter instead.");
+                    base.NavigateToFirstViewModel(hint);
+                }
             }
             catch (System.Exception exception)
             {
