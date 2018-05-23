@@ -82,6 +82,12 @@ namespace MvvmCross.ViewModels
             Mvx.RegisterSingleton(appStart);
         }
 
+        protected virtual void RegisterAppStart<TViewModel, TParameter>()
+          where TViewModel : IMvxViewModel<TParameter>
+        {
+            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel, TParameter>>();
+        }
+
         protected IEnumerable<Type> CreatableTypes()
         {
             return CreatableTypes(GetType().GetTypeInfo().Assembly);
@@ -90,6 +96,15 @@ namespace MvvmCross.ViewModels
         protected IEnumerable<Type> CreatableTypes(Assembly assembly)
         {
             return assembly.CreatableTypes();
+        }
+    }
+
+    public class MvxApplication<THint> : MvxApplication, IMvxApplication<THint>
+    {
+        public virtual THint Startup(THint hint)
+        {
+            // do nothing, so just return the original hint
+            return hint;
         }
     }
 }
