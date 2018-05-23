@@ -78,6 +78,7 @@
     <MtouchTlsProvider>Default</MtouchTlsProvider>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="netstandard" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
@@ -114,18 +115,27 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
-    <InterfaceDefinition Include="Main.storyboard" />
+    <InterfaceDefinition Include="Main.storyboard">
+      <SubType>Designer</SubType>
+    </InterfaceDefinition>
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bindings\BinaryEditTargetBinding.cs" />
+    <Compile Include="Controls\BinaryEdit.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Setup.cs" />
     <Compile Include="Views\ChildView.cs" />
     <Compile Include="Views\ChildView.designer.cs">
       <DependentUpon>ChildView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomBindingView.cs" />
+    <Compile Include="Views\CustomBindingView.designer.cs">
+      <DependentUpon>CustomBindingView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ModalNavView.cs" />
     <Compile Include="Views\ModalNavView.designer.cs">
