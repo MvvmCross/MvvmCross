@@ -51,38 +51,40 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\CustomBindingView.cs" />
     <Compile Include="Adapter\SelectedItemRecyclerAdapter.cs" />
     <Compile Include="Adapter\SelectedItemRecyclerAdapter.SelectedItemEventArgs.cs" />
     <Compile Include="Adapter\SelectedItemRecyclerAdapter.ViewHolder.cs" />
+    <Compile Include="Bindings\BinaryEditTargetBinding.cs" />
+    <Compile Include="Controls\BinaryEdit.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Setup.cs" />
-    <Compile Include="Views\Base\BaseSplitDetailView.cs" />
-    <Compile Include="Views\CollectionView.cs" />
-    <Compile Include="Views\DictionaryBindingView.cs" />
-    <Compile Include="Views\RootView.cs" />
-    <Compile Include="Views\SharedElements\SharedElementSecondChildView.cs" />
-    <Compile Include="Views\SharedElements\SharedElementSecondView.cs" />
-    <Compile Include="Views\SharedElements\SharedElementRootChildView.cs" />
-    <Compile Include="Views\SharedElements\SharedElementRootView.cs" />
-    <Compile Include="Views\TabsRootView.cs" />
-    <Compile Include="Views\Tab1View.cs" />
-    <Compile Include="Views\Tab2View.cs" />
-    <Compile Include="Views\Tab3View.cs" />
-    <Compile Include="Views\ChildView.cs" />
-    <Compile Include="Views\SplitRootView.cs" />
-    <Compile Include="Views\SplitMasterView.cs" />
-    <Compile Include="Views\SplitDetailView.cs" />
-    <Compile Include="Views\ModalView.cs" />
-    <Compile Include="Views\ModalNavView.cs" />
-    <Compile Include="Views\NestedModalView.cs" />
-    <Compile Include="Views\OverrideAttributeView.cs" />
-    <Compile Include="Views\SecondChildView.cs" />
-    <Compile Include="Views\SheetView.cs" />
-    <Compile Include="Views\SplitDetailNavView.cs" />
-    <Compile Include="Views\NestedChildView.cs" />
-    <Compile Include="Views\TabsRootBView.cs" />
+    <Compile Include="Activities\CollectionView.cs" />
+    <Compile Include="Fragments\DictionaryBindingView.cs" />
+    <Compile Include="Activities\RootView.cs" />
+    <Compile Include="Fragments\SharedElementSecondChildView.cs" />
+    <Compile Include="Activities\SharedElementSecondView.cs" />
+    <Compile Include="Fragments\SharedElementRootChildView.cs" />
+    <Compile Include="Activities\SharedElementRootView.cs" />
+    <Compile Include="Activities\TabsRootView.cs" />
+    <Compile Include="Fragments\Tab1View.cs" />
+    <Compile Include="Fragments\Tab2View.cs" />
+    <Compile Include="Fragments\Tab3View.cs" />
+    <Compile Include="Fragments\ChildView.cs" />
+    <Compile Include="Activities\SplitRootView.cs" />
+    <Compile Include="Fragments\SplitMasterView.cs" />
+    <Compile Include="Fragments\SplitDetailView.cs" />
+    <Compile Include="Fragments\ModalView.cs" />
+    <Compile Include="Fragments\ModalNavView.cs" />
+    <Compile Include="Fragments\NestedModalView.cs" />
+    <Compile Include="Fragments\OverrideAttributeView.cs" />
+    <Compile Include="Fragments\SecondChildView.cs" />
+    <Compile Include="Fragments\SheetView.cs" />
+    <Compile Include="Fragments\SplitDetailNavView.cs" />
+    <Compile Include="Fragments\NestedChildView.cs" />
+    <Compile Include="Activities\TabsRootBView.cs" />
     <Compile Include="MainApplication.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +115,7 @@
     <AndroidResource Include="Resources\layout\SplitDetailNavView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\CustomBindingView.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\RootView.axml">
