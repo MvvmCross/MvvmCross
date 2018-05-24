@@ -42,12 +42,12 @@ namespace MvvmCross.ViewModels
             NavigateToFirstViewModel(applicationHint);
         }
 
-        protected abstract void NavigateToFirstViewModel(object hint);
+        protected abstract void NavigateToFirstViewModel(object hint = null);
 
         protected virtual object ApplicationStartup(object hint = null)
         {
-            MvxLog.Instance.Trace("AppStart: Application Startup - On UI thread");
-            return Application.Startup(hint);
+            Application.Startup();
+            return hint;
         }
 
         public virtual bool IsStarted => startHasCommenced != 0;
@@ -71,7 +71,7 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        protected override void NavigateToFirstViewModel(object hint)
+        protected override void NavigateToFirstViewModel(object hint = null)
         {
             try
             {
@@ -94,15 +94,12 @@ namespace MvvmCross.ViewModels
         {
             var applicationHint = base.ApplicationStartup(hint);
             if (applicationHint is TParameter parameter && Application is IMvxApplication<TParameter> typedApplication)
-            {
-                //There is no way to pass the hint back
                 return typedApplication.Startup(parameter);
-            }
             else
                 return applicationHint;
         }
 
-        protected override void NavigateToFirstViewModel(object hint)
+        protected override void NavigateToFirstViewModel(object hint = null)
         {
             try
             {

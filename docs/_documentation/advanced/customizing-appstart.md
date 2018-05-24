@@ -62,7 +62,7 @@ public class AppStart : MvxAppStart
 		_authenticationService = authenticationService;
 	}
 	
-	protected override void NavigateToFirstViewModel(object hint)
+	protected override void NavigateToFirstViewModel(object hint = null)
 	{
 		try
 		{
@@ -73,6 +73,7 @@ public class AppStart : MvxAppStart
 
 			if (isAuthenticated)
 			{
+				//You need to Navigate sync so the screen is added to the root before continuing.
 				NavigationService.Navigate<HomeViewModel>().GetAwaiter().GetResult();
 			}
 			else
@@ -90,21 +91,20 @@ public class AppStart : MvxAppStart
 
 ## Launching using a protocol - e.g. from a Push notification or from an email link
 
-`MvxAppStart` will pass through any object received on startup to the `MvxApplication` class. There you can manipulate it or take any actions you like. It will not send the hint to the ViewModel, so use the typed `MvxAppStart<TParameter>` for that.
+`MvxAppStart` will call Startup on the `MvxApplication`. This enables you to do initialization on the UI Thread.
 
 ```c#
 public class App : MvxApplication
 {
-	public override object Startup(object hint)
+	public override void Startup()
 	{
-		var parameter = base.Startup(hint);
-		//Do custom logic with the hint received.
-		return parameter;
+		//Do things on the UI Thread
 	}
 }
 ```
 
 There is also a typed version of the `Startup` available. To use that your App class needs to extend `MvxApplication<TParameter>` where `TParameter` is the type you expect to receive from the operating system. Note that the ViewModel you navigate to needs to extend `IMvxViewModel<TParameter>`
+This is especially useful when receiving parameters from the native platform, like push notifications. When you already know the type of the incoming object you can set the type on the class. Otherwise set `object` as type and perform checks to discover which type it is.
 
 ```c#
 public class App : MvxApplication<TParameter>
