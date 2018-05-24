@@ -45,12 +45,9 @@ namespace MvvmCross.ViewModels
         /// <summary>
         /// Any initialization steps that need to be done on the UI thread
         /// </summary>
-        /// <param name="hint"></param>
-        public virtual object Startup(object hint)
+        public virtual void Startup()
         {
             MvxLog.Instance.Trace("AppStart: Application Startup - On UI thread");
-            // do nothing, so just return the original hint
-            return hint;
         }
 
         /// <summary>
