@@ -3,8 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Commands;
-using MvvmCross.Navigation;
-using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
@@ -19,19 +17,13 @@ namespace Playground.Core.ViewModels
 
         IMvxAsyncCommand _closeCommand;
         public IMvxAsyncCommand CloseCommand =>
-            _closeCommand ?? (_closeCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this)));
+            _closeCommand ?? (_closeCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this)));
 
 
         IMvxCommand _incrementCommand;
-        private IMvxNavigationService _navigationService;
 
         public IMvxCommand IncrementCommand =>
             _incrementCommand ?? (_incrementCommand = new MvxCommand(Increment));
-
-        public DictionaryBindingViewModel(IMvxNavigationService navigationService)
-        {
-            _navigationService = navigationService;
-        }
 
         private void Increment()
         {

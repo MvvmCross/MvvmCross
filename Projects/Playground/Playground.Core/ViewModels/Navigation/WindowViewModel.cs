@@ -18,8 +18,6 @@ namespace Playground.Core.ViewModels
 
     public class WindowViewModel : MvxViewModel
     {
-        private readonly IMvxNavigationService _navigationService;
-
         private static int _count;
 
         public string Title => $"No.{Count} Window View";
@@ -82,23 +80,21 @@ namespace Playground.Core.ViewModels
 
         public int Count { get; set; }
 
-        public WindowViewModel(IMvxNavigationService navigationService)
+        public WindowViewModel()
         {
-            _navigationService = navigationService;
-
             _count++;
             Count = _count;
 
             ShowWindowChildCommand = new MvxAsyncCommand<int>(async no =>
             {
-                await _navigationService.Navigate<WindowChildViewModel, WindowChildParam>(new WindowChildParam
+                await NavigationService.Navigate<WindowChildViewModel, WindowChildParam>(new WindowChildParam
                 {
                     ParentNo = Count,
                     ChildNo = no
                 });
             });
 
-            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
+            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
 
             ToggleSettingCommand = new MvxAsyncCommand(async () => 
             {

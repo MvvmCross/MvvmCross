@@ -11,12 +11,8 @@ namespace Playground.Core.ViewModels
 {
     public class SplitRootViewModel : MvxViewModel
     {
-        private readonly IMvxNavigationService _navigationService;
-
-        public SplitRootViewModel(IMvxNavigationService navigationService)
+        public SplitRootViewModel()
         {
-            _navigationService = navigationService;
-
             ShowInitialMenuCommand = new MvxAsyncCommand(ShowInitialViewModel);
             ShowDetailCommand = new MvxAsyncCommand(ShowDetailViewModel);
         }
@@ -35,12 +31,12 @@ namespace Playground.Core.ViewModels
 
         private async Task ShowInitialViewModel()
         {
-            await _navigationService.Navigate<SplitMasterViewModel>();
+            await NavigationService.Navigate<SplitMasterViewModel>();
         }
 
         private async Task ShowDetailViewModel()
         {
-            await _navigationService.Navigate<SplitDetailViewModel>();
+            await NavigationService.Navigate<SplitDetailViewModel>();
         }
     }
 }

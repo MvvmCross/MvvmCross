@@ -8,12 +8,9 @@ namespace Playground.Core.ViewModels
 {
     public class MixedNavResultDetailViewModel : MvxViewModel, IMvxViewModelResult<DetailResultResult>
     {
-        private readonly IMvxNavigationService _navigationService;
-
-        public MixedNavResultDetailViewModel(IMvxNavigationService navigationService)
+        public MixedNavResultDetailViewModel()
         {
-            _navigationService = navigationService;
-            CloseViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this, DetailResultResult.Build()));
+            CloseViewModelCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this, DetailResultResult.Build()));
         }
 
 
