@@ -10,8 +10,9 @@ using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.ViewModels;
+using Playground.Droid.Activities;
 
-namespace Playground.Droid.Views.Base
+namespace Playground.Droid.Fragments
 {
     public abstract class BaseSplitDetailView<TViewModel> : MvxFragment<TViewModel> where TViewModel : class, IMvxViewModel
     {
