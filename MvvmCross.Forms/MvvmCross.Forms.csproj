@@ -4,9 +4,11 @@
     <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;net461;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid81;tizen40</TargetFrameworks>
     <AssemblyName>MvvmCross.Forms</AssemblyName>
     <RootNamespace>MvvmCross.Forms</RootNamespace>
-    <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+    <Description>
+      MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
-This package contains MvvmCross to use with Xamarin.Forms</Description>
+      This package contains MvvmCross to use with Xamarin.Forms
+    </Description>
     <PackageId>MvvmCross.Forms</PackageId>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
   </PropertyGroup>
@@ -84,8 +86,17 @@ This package contains MvvmCross to use with Xamarin.Forms</Description>
       <ExcludeAssets>Runtime</ExcludeAssets>
     </PackageReference>
   </ItemGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\MvvmCross\MvvmCross.csproj" />
+  </ItemGroup>
+
+  <!-- There is something not working correctly w.r.t. multi-targetting so adding
+    direct reference seems to help get the build to work -->
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.Mac')) ">
+    <Reference Include="netstandard" />
+  </ItemGroup>
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+    <Reference Include="netstandard" />
   </ItemGroup>
 </Project>
