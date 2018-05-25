@@ -8,8 +8,6 @@ namespace Playground.Core.ViewModels.Bindings
     public class CustomBindingViewModel
         : MvxViewModel
     {
-        private readonly IMvxNavigationService _navigationService;
-
         private IMvxAsyncCommand _closeCommand;
 
         private int _counter = 2;
@@ -17,11 +15,6 @@ namespace Playground.Core.ViewModels.Bindings
         private DateTime _date = DateTime.Now;
 
         private string _hello = "Hello MvvmCross";
-
-        public CustomBindingViewModel(IMvxNavigationService navigationService)
-        {
-            _navigationService = navigationService;
-        }
 
         public string Hello
         {
@@ -31,7 +24,7 @@ namespace Playground.Core.ViewModels.Bindings
 
         public IMvxAsyncCommand CloseCommand => _closeCommand ??
                                                 (_closeCommand = new MvxAsyncCommand(async () =>
-                                                    await _navigationService.Close(this)));
+                                                    await NavigationService.Close(this)));
 
         public int Counter
         {

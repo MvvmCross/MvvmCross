@@ -10,14 +10,10 @@ namespace Playground.Core.ViewModels
 {
     public class SplitDetailNavViewModel : MvxViewModel
     {
-        private readonly IMvxNavigationService _navigationService;
-
-        public SplitDetailNavViewModel(IMvxNavigationService navigationService)
+        public SplitDetailNavViewModel()
         {
-            _navigationService = navigationService;
-
-            MainMenuCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<MixedNavFirstViewModel>());
-            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
+            MainMenuCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<MixedNavFirstViewModel>());
+            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
         }
 
         public IMvxAsyncCommand MainMenuCommand { get; private set; }

@@ -10,13 +10,6 @@ namespace Playground.Core.ViewModels
 {
     public class SharedElementRootChildViewModel : BaseViewModel
     {
-        private readonly IMvxNavigationService _navigationService;
-
-        public SharedElementRootChildViewModel(IMvxNavigationService navigationService)
-        {
-            _navigationService = navigationService;
-        }
-
         public override Task Initialize()
         {
             Items = new MvxObservableCollection<ListItemViewModel>
@@ -51,11 +44,11 @@ namespace Playground.Core.ViewModels
 
             if (item.Id % 2 == 0)
             {
-                _navigationService.Navigate<SharedElementSecondViewModel>();
+                NavigationService.Navigate<SharedElementSecondViewModel>();
             }
             else
             {
-                _navigationService.Navigate<SharedElementSecondChildViewModel>();
+                NavigationService.Navigate<SharedElementSecondChildViewModel>();
             }
         }
     }

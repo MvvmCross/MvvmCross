@@ -11,19 +11,15 @@ namespace Playground.Core.ViewModels
 {
     public class Tab1ViewModel : MvxViewModel<string>
     {
-        private readonly IMvxNavigationService _navigationService;
-
-        public Tab1ViewModel(IMvxNavigationService navigationService)
+        public Tab1ViewModel()
         {
-            _navigationService = navigationService;
+            OpenChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ChildViewModel>());
 
-            OpenChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel>());
+            OpenModalCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ModalViewModel>());
 
-            OpenModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalViewModel>());
+            OpenNavModalCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ModalNavViewModel>());
 
-            OpenNavModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalNavViewModel>());
-
-            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
+            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
         }
 
         public override async Task Initialize()

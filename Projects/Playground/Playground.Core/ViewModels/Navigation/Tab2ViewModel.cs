@@ -10,15 +10,11 @@ namespace Playground.Core.ViewModels
 {
     public class Tab2ViewModel : MvxViewModel
     {
-        private readonly IMvxNavigationService _navigationService;
-
-        public Tab2ViewModel(IMvxNavigationService navigationService)
+        public Tab2ViewModel()
         {
-            _navigationService = navigationService;
+            ShowRootViewModelCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<RootViewModel>());
 
-            ShowRootViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<RootViewModel>());
-
-            CloseViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
+            CloseViewModelCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
         }
 
         public IMvxAsyncCommand ShowRootViewModelCommand { get; private set; }
