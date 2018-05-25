@@ -12,19 +12,15 @@ namespace Playground.Core.ViewModels
 {
     public class ChildViewModel : MvxViewModel<SampleModel>
     {
-        private readonly IMvxNavigationService _navigationService;
-
         private SampleModel _parameter;
 
-        public ChildViewModel(IMvxNavigationService navigationService)
+        public ChildViewModel()
         {
-            _navigationService = navigationService;
+            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
 
-            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
+            ShowSecondChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SecondChildViewModel>());
 
-            ShowSecondChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SecondChildViewModel>());
-
-            ShowRootCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<RootViewModel>());
+            ShowRootCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<RootViewModel>());
         }
 
         public override void Prepare()

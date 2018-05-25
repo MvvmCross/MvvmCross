@@ -4,12 +4,20 @@
 
 using System;
 using MvvmCross.Exceptions;
+using MvvmCross.Logging;
+using MvvmCross.Navigation;
 
 namespace MvvmCross.ViewModels
 {
     public class MvxDefaultViewModelLocator
         : IMvxViewModelLocator
     {
+        private IMvxNavigationService _navigationService;
+        protected IMvxNavigationService NavigationService => _navigationService ?? (_navigationService = Mvx.Resolve<IMvxNavigationService>());
+
+        private IMvxLogProvider _logProvider;
+        protected IMvxLogProvider LogProvider => _logProvider ?? (_logProvider = Mvx.Resolve<IMvxLogProvider>());
+
         public virtual IMvxViewModel Reload(IMvxViewModel viewModel,
                                             IMvxBundle parameterValues,
                                             IMvxBundle savedState)
@@ -43,6 +51,8 @@ namespace MvvmCross.ViewModels
                 throw exception.MvxWrap("Problem creating viewModel of type {0}", viewModelType.Name);
             }
 
+            FinishViewModelConstruction(viewModel);
+
             RunViewModelLifecycle(viewModel, parameterValues, savedState);
 
             return viewModel;
@@ -63,6 +73,8 @@ namespace MvvmCross.ViewModels
                 throw exception.MvxWrap("Problem creating viewModel of type {0}", viewModelType.Name);
             }
 
+            FinishViewModelConstruction(viewModel);
+
             RunViewModelLifecycle(viewModel, param, parameterValues, savedState);
 
             return viewModel;
@@ -76,6 +88,15 @@ namespace MvvmCross.ViewModels
         protected virtual void CallReloadStateMethods(IMvxViewModel viewModel, IMvxBundle savedState)
         {
             viewModel.CallBundleMethods("ReloadState", savedState);
+        }
+
+        protected virtual void FinishViewModelConstruction(IMvxViewModel viewModel)
+        {
+            if (viewModel is IMvxNavigationViewModel navViewModel)
+                navViewModel.NavigationService = NavigationService;
+
+            if (viewModel is IMvxLogViewModel logViewModel)
+                logViewModel.LogProvider = LogProvider;
         }
 
         protected void RunViewModelLifecycle(IMvxViewModel viewModel, IMvxBundle parameterValues, IMvxBundle savedState)
