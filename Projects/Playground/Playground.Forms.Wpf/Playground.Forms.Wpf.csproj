@@ -114,7 +114,7 @@
       <Project>{49f965f5-5824-4bbe-94ea-0178f848abdb}</Project>
       <Name>MvvmCross</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.Platforms.Wpf.csproj">
+    <ProjectReference Include="..\..\..\MvvmCross.Platforms.Wpf\MvvmCross.Platforms.Wpf.csproj">
       <Project>{fe6715f0-bb2d-4ed9-bf2b-30124ecb3aec}</Project>
       <Name>MvvmCross.Platforms.Wpf</Name>
     </ProjectReference>
