@@ -13,7 +13,8 @@ This package contains the 'MvvmCross.Platforms.Wpf' libraries for MvvmCross</Des
 
   <ItemGroup>
     <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="Platforms\Wpf\**\*.cs" />
-    <ProjectReference Include="..\MvvmCross\MvvmCross.csproj" />
+    <ProjectReference Include="MvvmCross.csproj" />
+    <None Include="readme.txt" pack="true" PackagePath="." />
   </ItemGroup>
   
 </Project>
