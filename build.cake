@@ -207,7 +207,7 @@ Task("UploadAppVeyorArtifact")
 
 Task("Default")
     .IsDependentOn("Build")
-    .IsDependentOn("UnitTest")
+    //.IsDependentOn("UnitTest")
     .IsDependentOn("PublishPackages")
     .IsDependentOn("UploadAppVeyorArtifact")
     .Does(() => 
