@@ -71,7 +71,7 @@ Task("ResolveBuildTools")
     var vsLatest = VSWhereLatest(vsWhereSettings);
     msBuildPath = (vsLatest == null)
         ? null
-        : vsLatest.CombineWithFilePath("./MSBuild/15.0/Bin/amd64/MSBuild.exe");
+        : vsLatest.CombineWithFilePath("./MSBuild/15.0/Bin/MSBuild.exe");
 
     if (msBuildPath != null)
         Information("Found MSBuild at {0}", msBuildPath.ToString());
