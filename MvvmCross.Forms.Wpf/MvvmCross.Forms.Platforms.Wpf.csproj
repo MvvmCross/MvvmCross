@@ -16,8 +16,9 @@ This package contains the 'MvvmCross.Forms.Platforms.Wpf' libraries for MvvmCros
     <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="Platforms\Wpf\**\*.cs" />
     <ProjectReference Include="..\MvvmCross.Forms\MvvmCross.Forms.csproj" />
     <ProjectReference Include="..\MvvmCross\MvvmCross.csproj" />
-    <ProjectReference Include="..\MvvmCross.Platforms.Wpf\MvvmCross.Platforms.Wpf.csproj" />
-  </ItemGroup>
+    <ProjectReference Include="..\MvvmCross\MvvmCross.Platforms.Wpf.csproj" />
+    <None Include="readme.txt" pack="true" PackagePath="." />
+</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
