@@ -314,7 +314,7 @@ We won't go into depth here about what IoC - Inversion of Control - is.
 
 Instead, we will just say that:
 
-- Within each MvvmCross application, there is a very special object, whici is a `singleton`.
+- Within each MvvmCross application, there is a very special object, which is a `singleton`.
 - This `singleton` lives within the `Mvx` static class.
 - The application startup code can use the `Mvx.Register...` methods to let `Mvx` know how to resolve certain requests during the lifetime of the app.
 - After the registration has been done, then when any code asks for an `interface` implementation, it can do that by using the `Mvx.Resolve` methods.
@@ -324,7 +324,7 @@ One common pattern the app is also using is 'constructor injection':
 - Our `TipViewModel` uses this pattern. 
 - It presents a constructor like: `public TipViewModel(ICalculationService calculationService)`. 
 - When the app is running a part of the MvvmCross framework called the `ViewModelLocator` is used to find and create ViewModels.
-- when a `TipViewModel` is needed, the `ViewModelLocator` uses a call to `Mvx.IocConstruct` to create one.
+- When a `TipViewModel` is needed, the `ViewModelLocator` uses a call to `Mvx.IocConstruct` to create one.
 - This `Mvx.IocConstruct` call creates the `TipViewModel` using the `ICalculationService` implementation that it finds using `Mvx.Resolve`
 
 This is obviously only a very brief introduction.
