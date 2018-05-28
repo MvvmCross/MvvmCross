@@ -13,12 +13,12 @@ namespace MvvmCross.Platforms.Wpf.Views
     {
         private readonly Dispatcher _dispatcher;
 
-        public MvxWpfUIThreadDispatcher(Dispatcher dispatcher)
+        public MvxWpfUIThreadDispatcher(Dispatcher dispatcher, int manangedThreadId) : base(manangedThreadId)
         {
             _dispatcher = dispatcher;
         }
 
-        public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override void RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (_dispatcher.CheckAccess())
             {
@@ -31,9 +31,6 @@ namespace MvvmCross.Platforms.Wpf.Views
                     ExceptionMaskedAction(action, maskExceptions);
                 });
             }
-
-            // TODO - why return bool at all?
-            return true;
         }
     }
 }

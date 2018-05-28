@@ -12,15 +12,15 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
     {
         private readonly Func<Action, bool> _callback;
 
-        public CallbackMockMainThreadDispatcher(Func<Action, bool> callback)
+        public CallbackMockMainThreadDispatcher(Func<Action, bool> callback, int manangedThreadId) : base(manangedThreadId)
         {
             _callback = callback;
         }
 
-        public override bool RequestMainThreadAction(Action action,
+        public override void RequestMainThreadAction(Action action,
                                                     bool maskExceptions = true)
         {
-            return _callback(action);
+            _callback(action);
         }
     }
 }

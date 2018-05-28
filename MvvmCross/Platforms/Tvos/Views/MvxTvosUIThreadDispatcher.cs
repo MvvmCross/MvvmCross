@@ -15,14 +15,14 @@ namespace MvvmCross.Platforms.Tvos.Views
     {
         private readonly SynchronizationContext _uiSynchronizationContext;
 
-        protected MvxTvosUIThreadDispatcher()
+        protected MvxTvosUIThreadDispatcher(int managedThreadId) : base(managedThreadId)
         {
             _uiSynchronizationContext = SynchronizationContext.Current;
             if (_uiSynchronizationContext == null)
                 throw new MvxException("SynchronizationContext must not be null - check to make sure Dispatcher is created on UI thread");
         }
 
-        public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override void RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (_uiSynchronizationContext == SynchronizationContext.Current)
                 action();
@@ -31,7 +31,6 @@ namespace MvvmCross.Platforms.Tvos.Views
             {
                 ExceptionMaskedAction(action, maskExceptions);
             });
-            return true;
         }
     }
 }

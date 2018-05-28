@@ -4,7 +4,6 @@
 
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Android.App;
 using MvvmCross.Base;
 
@@ -12,7 +11,12 @@ namespace MvvmCross.Platforms.Android.Views
 {
     public class MvxAndroidMainThreadDispatcher : MvxMainThreadAsyncDispatcher
     {
-        public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public MvxAndroidMainThreadDispatcher(int managedThreadId) : base(managedThreadId)
+        {
+
+        }
+
+        public override void RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (Application.SynchronizationContext == SynchronizationContext.Current)
                 action();
@@ -23,8 +27,6 @@ namespace MvvmCross.Platforms.Android.Views
                     ExceptionMaskedAction(action, maskExceptions);
                 }, null);
             }
-
-            return true;
         }
     }
 }

@@ -10,12 +10,16 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
     public class CountingMockMainThreadDispatcher
         : MvxMainThreadAsyncDispatcher
     {
+        public CountingMockMainThreadDispatcher(int managedThreadId) : base(managedThreadId)
+        {
+
+        }
+
         public int Count { get; set; }
 
-        public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override void RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             Count++;
-            return true;
         }
     }
 }
