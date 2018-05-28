@@ -13,9 +13,9 @@ namespace MvvmCross.UnitTest.Platform
     [Collection("MvxTest")]
     public class MvxStringToTypeParserTest
     {
-        private readonly MvxTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
-        public MvxStringToTypeParserTest(MvxTestFixture fixture)
+        public MvxStringToTypeParserTest(NavigationTestFixture fixture)
         {
             _fixture = fixture;
             _fixture.ClearAll();

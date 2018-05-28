@@ -12,9 +12,9 @@ namespace MvvmCross.UnitTest.Platform
     [Collection("MvxTest")]
     public class MvxSimplePropertyDictionaryExtensionMethodsTests
     {
-        private readonly MvxTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
-        public MvxSimplePropertyDictionaryExtensionMethodsTests(MvxTestFixture fixture)
+        public MvxSimplePropertyDictionaryExtensionMethodsTests(NavigationTestFixture fixture)
         {
             _fixture = fixture;
             fixture.Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
