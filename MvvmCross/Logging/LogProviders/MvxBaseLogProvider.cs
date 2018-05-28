@@ -32,8 +32,11 @@ namespace MvvmCross.Logging.LogProviders
                = new Lazy<OpenMdc>(GetOpenMdcMethod);
         }
 
+        public IMvxLog GetLogFor(Type type)
+            => GetLogFor(type.FullName);
+
         public IMvxLog GetLogFor<T>()
-            => GetLogFor(typeof(T).FullName);
+            => GetLogFor(typeof(T));
 
         public IMvxLog GetLogFor(string name)
             => new MvxLog(GetLogger(name));

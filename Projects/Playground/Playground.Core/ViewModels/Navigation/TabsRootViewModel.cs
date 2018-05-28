@@ -14,16 +14,10 @@ namespace Playground.Core.ViewModels
 {
     public class TabsRootViewModel : MvxViewModel
     {
-        private readonly IMvxNavigationService _navigationService;
-        private readonly IMvxLog _log;
-
-        public TabsRootViewModel(IMvxNavigationService navigationService, IMvxLogProvider logProvider)
+        public TabsRootViewModel()
         {
-            _log = logProvider.GetLogFor(nameof(TabsRootViewModel));
-            _navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService));
-
             ShowInitialViewModelsCommand = new MvxAsyncCommand(ShowInitialViewModels);
-            ShowTabsRootBCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<TabsRootBViewModel>());
+            ShowTabsRootBCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<TabsRootBViewModel>());
         }
 
         public IMvxAsyncCommand ShowInitialViewModelsCommand { get; private set; }
@@ -33,9 +27,9 @@ namespace Playground.Core.ViewModels
         private async Task ShowInitialViewModels()
         {
             var tasks = new List<Task>();
-            tasks.Add(_navigationService.Navigate<Tab1ViewModel, string>("test"));
-            tasks.Add(_navigationService.Navigate<Tab2ViewModel>());
-            tasks.Add(_navigationService.Navigate<Tab3ViewModel>());
+            tasks.Add(NavigationService.Navigate<Tab1ViewModel, string>("test"));
+            tasks.Add(NavigationService.Navigate<Tab2ViewModel>());
+            tasks.Add(NavigationService.Navigate<Tab3ViewModel>());
             await Task.WhenAll(tasks);
         }
 
@@ -48,7 +42,7 @@ namespace Playground.Core.ViewModels
             {
                 if (_itemIndex == value) return;
                 _itemIndex = value;
-                _log.Trace("Tab item changed to {0}", _itemIndex.ToString());
+                Log.Trace("Tab item changed to {0}", _itemIndex.ToString());
                 RaisePropertyChanged(() => ItemIndex);
             }
         }
