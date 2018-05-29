@@ -18,6 +18,14 @@ namespace MvvmCross.ViewModels
         private IMvxLogProvider _logProvider;
         protected IMvxLogProvider LogProvider => _logProvider ?? (_logProvider = Mvx.Resolve<IMvxLogProvider>());
 
+        public MvxDefaultViewModelLocator() : this(null) { }
+
+        public MvxDefaultViewModelLocator(IMvxNavigationService navigationService)
+        {
+            if (navigationService != null)
+                _navigationService = navigationService;
+        }
+
         public virtual IMvxViewModel Reload(IMvxViewModel viewModel,
                                             IMvxBundle parameterValues,
                                             IMvxBundle savedState)

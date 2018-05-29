@@ -30,9 +30,9 @@ namespace MvvmCross.UnitTest.Navigation
     {
         protected Mock<NavigationMockDispatcher> MockDispatcher;
         protected IMvxNavigationService RoutingService;
-        private readonly MvxTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
-        public RoutingServiceTests(MvxTestFixture fixture)
+        public RoutingServiceTests(NavigationTestFixture fixture)
         {
             _fixture = fixture;
             _fixture.ClearAll();

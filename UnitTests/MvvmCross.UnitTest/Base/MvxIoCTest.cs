@@ -16,9 +16,9 @@ namespace MvvmCross.UnitTest.Base
     [Collection("MvxTest")]   
     public class MvxIocTest
     {
-        private readonly MvxTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
-        public MvxIocTest(MvxTestFixture fixture)
+        public MvxIocTest(NavigationTestFixture fixture)
         {
             _fixture = fixture;
             _fixture.ClearAll();
