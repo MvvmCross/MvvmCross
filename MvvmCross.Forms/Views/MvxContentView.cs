@@ -70,28 +70,43 @@ namespace MvvmCross.Forms.Views
     {
         public MvxContentView()
         {
-            BindingContextChangedCalled += (sender, args) => ViewModel = base.ViewModel as TViewModel;
+            BindingContextChangedCalled += SetViewModelProperty;
+        }
+
+        ~MvxContentView()
+        {
+            BindingContextChangedCalled -= SetViewModelProperty;
         }
 
         public static readonly BindableProperty ViewModelProperty = BindableProperty.Create(nameof(ViewModel),
-            typeof(TViewModel), typeof(MvxContentView<TViewModel>), null, BindingMode.Default, null, null, null, CoerceValue);
+            typeof(TViewModel), typeof(MvxContentView<TViewModel>), null, BindingMode.Default, null, ViewModelBindingPropertyChanged, null);
 
         public new TViewModel ViewModel
         {
-            get { return (TViewModel)GetValue(ViewModelProperty); }
-            set { SetValue(ViewModelProperty, value); }
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
         }
 
-        private static TViewModel CoerceValue(BindableObject bindable, object value)
+        //Necessary to set ViewModelProperty when ViewModel/DataContext/BindingContext is set
+        private void SetViewModelProperty(object sender, EventArgs args)
         {
-            (bindable as MvxContentView<TViewModel>)?.SetBaseViewModel(value as TViewModel);
-            return (bindable as MvxContentView<TViewModel>)?.DataContext as TViewModel;
+            //Prevents ViewModelProperty from getting redundantly set a second time after
+            //setting ViewModel in ViewModelBindingPropertyChanged
+            if (GetValue(ViewModelProperty) != ViewModel)
+            {
+                SetValue(ViewModelProperty, ViewModel);
+            }
         }
 
-        private void SetBaseViewModel(TViewModel newValue)
+        //Necessary to set base.viewmodel when ViewModelProperty is set through binding
+        private static void ViewModelBindingPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            base.ViewModel = newValue;
+            //Prevents ViewModel from getting redundantly set a second time after
+            //setting ViewModelProperty on BindingContextChangedCalled
+            if (((MvxContentView<TViewModel>) bindable).ViewModel != newValue)
+            {
+                ((MvxContentView<TViewModel>) bindable).ViewModel = (TViewModel) newValue;
+            }
         }
-
     }
 }
