@@ -22,9 +22,9 @@ namespace MvvmCross.UnitTest.Binding.ExpressionParse
     [Collection("MvxTest")]
     public class MvxExpressionBindingTest
     {
-        private readonly MvxTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
-        public MvxExpressionBindingTest(MvxTestFixture fixture)
+        public MvxExpressionBindingTest(NavigationTestFixture fixture)
         {
             _fixture = fixture;
         }

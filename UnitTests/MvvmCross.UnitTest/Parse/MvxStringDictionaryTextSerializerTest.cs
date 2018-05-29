@@ -14,9 +14,9 @@ namespace MvvmCross.UnitTest.Parse
     [Collection("MvxTest")]
     public class MvxStringDictionaryTextSerializerTest
     {
-        private readonly MvxTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
-        public MvxStringDictionaryTextSerializerTest(MvxTestFixture fixture)
+        public MvxStringDictionaryTextSerializerTest(NavigationTestFixture fixture)
         {
             _fixture = fixture;
         }

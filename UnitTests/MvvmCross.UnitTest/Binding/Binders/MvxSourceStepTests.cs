@@ -22,9 +22,9 @@ namespace MvvmCross.UnitTest.Binding.Binders
     [Collection("MvxTest")]
     public class MvxSourceStepTests
     {
-        private readonly MvxTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
-        public MvxSourceStepTests(MvxTestFixture fixture)
+        public MvxSourceStepTests(NavigationTestFixture fixture)
         {
             _fixture = fixture;
         }

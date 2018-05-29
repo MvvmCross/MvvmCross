@@ -20,9 +20,9 @@ namespace MvvmCross.UnitTest.Binding.Bindings
     [Collection("MvxTest")]
     public class MvxFullBindingTest
     {
-        private readonly MvxTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
-        public MvxFullBindingTest(MvxTestFixture fixture)
+        public MvxFullBindingTest(NavigationTestFixture fixture)
         {
             _fixture = fixture;
         }

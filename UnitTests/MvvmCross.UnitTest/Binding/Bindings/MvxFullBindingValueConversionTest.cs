@@ -22,9 +22,9 @@ namespace MvvmCross.UnitTest.Binding.Bindings
     [Collection("MvxTest")]
     public class MvxFullBindingValueConversionTest
     {
-        private readonly MvxTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
-        public MvxFullBindingValueConversionTest(MvxTestFixture fixture)
+        public MvxFullBindingValueConversionTest(NavigationTestFixture fixture)
         {
             _fixture = fixture;
         }
