@@ -14,9 +14,9 @@ namespace MvvmCross.UnitTest.ViewModels
     [Collection("MvxTest")]
     public class MvxObservableCollectionTest
     {
-        MvxTestFixture _fixture;
+        NavigationTestFixture _fixture;
 
-        public MvxObservableCollectionTest(MvxTestFixture fixture)
+        public MvxObservableCollectionTest(NavigationTestFixture fixture)
         {
             _fixture = fixture;
             _fixture.ClearAll();

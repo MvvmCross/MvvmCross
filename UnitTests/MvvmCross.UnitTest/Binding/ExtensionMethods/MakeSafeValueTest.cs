@@ -14,9 +14,9 @@ namespace MvvmCross.UnitTest.Binding.ExtensionMethods
     [Collection("MvxTest")]
     public class MakeSafeValueTest
     {
-        private readonly MvxTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
-        public MakeSafeValueTest(MvxTestFixture fixture)
+        public MakeSafeValueTest(NavigationTestFixture fixture)
         {
             _fixture = fixture;
         }

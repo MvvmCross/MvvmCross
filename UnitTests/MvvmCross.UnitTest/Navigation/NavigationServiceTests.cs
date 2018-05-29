@@ -5,13 +5,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moq;
- using MvvmCross.Core;
- using MvvmCross.Navigation;
+using MvvmCross.Core;
+using MvvmCross.Navigation;
 using MvvmCross.Presenters.Hints;
 using MvvmCross.Tests;
- using MvvmCross.UnitTest.Mocks.Dispatchers;
- using MvvmCross.UnitTest.Mocks.ViewModels;
- using MvvmCross.ViewModels;
+using MvvmCross.UnitTest.Mocks.Dispatchers;
+using MvvmCross.UnitTest.Mocks.ViewModels;
+using MvvmCross.ViewModels;
 using Xunit;
 
 namespace MvvmCross.UnitTest.Navigation
@@ -19,9 +19,9 @@ namespace MvvmCross.UnitTest.Navigation
     [Collection("MvxTest")]
     public class NavigationServiceTests
     {
-        private readonly MvxTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
-        public NavigationServiceTests(MvxTestFixture fixture)
+        public NavigationServiceTests(NavigationTestFixture fixture)
         {
             _fixture = fixture;
             _fixture.ClearAll();
