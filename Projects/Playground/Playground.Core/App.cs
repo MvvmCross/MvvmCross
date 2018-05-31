@@ -5,6 +5,7 @@
 using MvvmCross;
 using MvvmCross.IoC;
 using MvvmCross.Localization;
+using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using Playground.Core.Services;
 using Playground.Core.ViewModels;
@@ -26,7 +27,8 @@ namespace Playground.Core
 
             Mvx.RegisterSingleton<IMvxTextProvider>(new TextProviderBuilder().TextProvider);
 
-            RegisterAppStart<RootViewModel>();
+            //RegisterAppStart<RootViewModel>();
+            RegisterCustomAppStart<CustomMvxAppStart<RootViewModel>>();
         }
 
         /// <summary>
@@ -46,5 +48,22 @@ namespace Playground.Core
         {
             base.Reset();
         }
+    }
+
+    public class CustomMvxAppStart<TViewModel> : MvxAppStart<TViewModel>
+        where TViewModel : IMvxViewModel
+    {
+
+        public CustomMvxAppStart(IMvxApplication application,
+            IMvxNavigationService navigationService) :
+                    base(application, navigationService)
+        {
+            navigationService.Navigate<TViewModel>();
+        }
+
+        //protected override void NavigateToFirstViewModel(object hint)
+        //{
+        //    NavigationService.Navigate<TViewModel>();
+        //}
     }
 }
