@@ -7,7 +7,8 @@
              x:Class="Playground.Forms.UI.Pages.ParentContentPage" x:TypeArguments="viewModels:ParentContentViewModel">
     <ContentPage.Content>
         <StackLayout>
-            <views:ChildContentView />
+            <views:ChildContentView ViewModel="{Binding ChildViewModel1}" />
+            <Button Text="Change Child Text" Command="{Binding ChangeButtonCmd}" />
         </StackLayout>
     </ContentPage.Content>
 </views1:MvxContentPage>

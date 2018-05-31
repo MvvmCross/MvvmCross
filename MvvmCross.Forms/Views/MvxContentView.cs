@@ -83,7 +83,7 @@ namespace MvvmCross.Forms.Views
 
         public new TViewModel ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
+            get { return base.ViewModel as TViewModel; }
             set { base.ViewModel = value; }
         }
 
@@ -105,7 +105,7 @@ namespace MvvmCross.Forms.Views
             //setting ViewModelProperty on BindingContextChangedCalled
             if (((MvxContentView<TViewModel>) bindable).ViewModel != newValue)
             {
-                ((MvxContentView<TViewModel>) bindable).ViewModel = (TViewModel) newValue;
+                ((MvxContentView<TViewModel>) bindable).ViewModel = newValue as TViewModel;
             }
         }
     }

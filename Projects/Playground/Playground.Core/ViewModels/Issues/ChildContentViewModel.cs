@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using MvvmCross.Commands;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
@@ -10,7 +11,7 @@ namespace Playground.Core.ViewModels
         public string Test
         {
             get { return _test; }
-            private set { SetProperty(ref _test, value); }
+            set { SetProperty(ref _test, value); }
         }
 
         public override async Task Initialize()
