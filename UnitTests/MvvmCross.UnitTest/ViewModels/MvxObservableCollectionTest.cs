@@ -25,6 +25,8 @@ namespace MvvmCross.UnitTest.ViewModels
 
         public class DummyDispatcher : MvxSingleton<IMvxMainThreadDispatcher>, IMvxMainThreadDispatcher
         {
+            public bool IsOnMainThread => true;
+
             public bool RequestMainThreadAction(Action action, bool maskExceptions = true)
             {
                 action?.Invoke();
