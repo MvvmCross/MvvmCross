@@ -58,12 +58,12 @@ namespace Playground.Core
             IMvxNavigationService navigationService) :
                     base(application, navigationService)
         {
-            navigationService.Navigate<TViewModel>();
+         //   navigationService.Navigate<TViewModel>();
         }
 
-        //protected override void NavigateToFirstViewModel(object hint)
-        //{
-        //    NavigationService.Navigate<TViewModel>();
-        //}
+        protected override void NavigateToFirstViewModel(object hint)
+        {
+            NavigationService.Navigate<TViewModel>();
+        }
     }
 }
