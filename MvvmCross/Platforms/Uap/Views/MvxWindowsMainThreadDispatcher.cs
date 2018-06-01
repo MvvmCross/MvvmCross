@@ -17,9 +17,11 @@ namespace MvvmCross.Platforms.Uap.Views
             _uiDispatcher = uiDispatcher;
         }
 
+        public override bool IsOnMainThread => _uiDispatcher.HasThreadAccess;
+
         public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
-            if (_uiDispatcher.HasThreadAccess)
+            if (IsOnMainThread)
             {
                 action();
                 return true;

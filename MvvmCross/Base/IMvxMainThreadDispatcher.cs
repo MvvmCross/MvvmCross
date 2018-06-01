@@ -11,5 +11,6 @@ namespace MvvmCross.Base
     {
         [Obsolete("Use IMvxMainThreadAsyncDispatcher.ExecuteOnMainThreadAsync instead")]
         bool RequestMainThreadAction(Action action, bool maskExceptions = true);
+        bool IsOnMainThread { get; }
     }
 }
