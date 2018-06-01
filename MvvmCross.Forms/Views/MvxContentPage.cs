@@ -2,9 +2,11 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Forms.Views.Base;
 using MvvmCross.ViewModels;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views
 {
@@ -23,8 +25,7 @@ namespace MvvmCross.Forms.Views
             }
             set
             {
-                base.BindingContext = value;
-                BindingContext.DataContext = value;
+                BindingContext = new MvxBindingContext(value);
             }
         }
 
@@ -34,13 +35,27 @@ namespace MvvmCross.Forms.Views
             get
             {
                 if (_bindingContext == null)
-                    BindingContext = new MvxBindingContext(base.BindingContext);
+                    _bindingContext = new MvxBindingContext(base.BindingContext);
                 return _bindingContext;
             }
             set
             {
-                _bindingContext = value;
+                if (!ReferenceEquals(_bindingContext, value))
+                {
+                    _bindingContext = value;
+                    base.BindingContext = _bindingContext.DataContext;
+                }
             }
+        }
+
+        public static readonly BindableProperty ViewModelProperty = BindableProperty.Create(nameof(ViewModel), typeof(IMvxViewModel), typeof(IMvxElement), default(MvxViewModel), BindingMode.Default, null, ViewModelChanged, null, null);
+
+        private static void ViewModelChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            if (bindable is IMvxElement element)
+                element.DataContext = newvalue;
+            else
+                bindable.BindingContext = newvalue;
         }
 
         public IMvxViewModel ViewModel
@@ -52,6 +67,7 @@ namespace MvvmCross.Forms.Views
             set 
             {
                 DataContext = value;
+                SetValue(ViewModelProperty, value);
                 OnViewModelSet();
             }
         }
