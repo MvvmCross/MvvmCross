@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using MvvmCross;
 using MvvmCross.IoC;
 using MvvmCross.Localization;
@@ -54,10 +53,17 @@ namespace Playground.Core
     public class CustomMvxAppStart<TViewModel> : MvxAppStart<TViewModel>
         where TViewModel : IMvxViewModel
     {
+
         public CustomMvxAppStart(IMvxApplication application,
             IMvxNavigationService navigationService) :
                     base(application, navigationService)
         {
+            navigationService.Navigate<TViewModel>();
         }
+
+        //protected override void NavigateToFirstViewModel(object hint)
+        //{
+        //    NavigationService.Navigate<TViewModel>();
+        //}
     }
 }

@@ -114,7 +114,7 @@ namespace Playground.Core.ViewModels
             Log.Warn(() => "Testing log");
 
             await base.Initialize();
-            await Task.Delay(30000);
+            await Task.Delay(10000);
             _mvxViewModelLoader.LoadViewModel(MvxViewModelRequest.GetDefaultRequest(typeof(ChildViewModel)),
                 new SampleModel
                 {
