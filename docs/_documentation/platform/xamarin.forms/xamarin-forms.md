@@ -18,7 +18,7 @@ Use the Forms specific Setup for each platform, and we will load up the neccesar
 
 On Forms every platform has it's own presenter that inherits from the native platform presenter. This enables us to navigate between native and Xamarin.Forms views. On top of that we have the `MvxFormsPagePresenter` which handles all the comon logic for Forms related navigation.
 
-For more information about the Forms presenter see: [Xamarin.Forms view presenter](\xamarin-forms-view-presenter.html)
+For more information about the Forms presenter see: [Xamarin.Forms view presenter](xamarin-forms-view-presenter.html)
 
 # Bindings
 
