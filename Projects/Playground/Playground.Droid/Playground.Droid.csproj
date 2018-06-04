@@ -85,6 +85,7 @@
     <Compile Include="Fragments\SplitDetailNavView.cs" />
     <Compile Include="Fragments\NestedChildView.cs" />
     <Compile Include="Activities\TabsRootBView.cs" />
+    <Compile Include="Views\Base\BaseSplitDetailView.cs" />
     <Compile Include="MainApplication.cs" />
   </ItemGroup>
   <ItemGroup>

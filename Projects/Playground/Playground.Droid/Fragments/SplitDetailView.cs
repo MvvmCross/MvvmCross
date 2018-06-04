@@ -5,7 +5,7 @@
 using Android.Runtime;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
-using Playground.Droid.Activities;
+using Playground.Droid.Views.Base;
 
 namespace Playground.Droid.Fragments
 {
