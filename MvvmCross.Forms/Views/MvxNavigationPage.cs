@@ -40,7 +40,7 @@ namespace MvvmCross.Forms.Views
             get
             {
                 if (_bindingContext == null)
-                    _bindingContext = new MvxBindingContext(base.BindingContext);
+                    BindingContext = new MvxBindingContext(base.BindingContext);
                 return _bindingContext;
             }
             set
