@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Base;
 using Xunit;
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using System.Linq;
 using MvvmCross.Exceptions;
 using MvvmCross.IoC;

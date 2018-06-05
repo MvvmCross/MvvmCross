@@ -9,7 +9,7 @@ using Android.Runtime;
 using Android.Support.V14.Preferences;
 using Android.Views;
 using MvvmCross.Base;
-using MvvmCross.Platform.Android.Views;
+using MvvmCross.Platforms.Android.Views;
 
 namespace MvvmCross.Droid.Support.V14.Preference
 {

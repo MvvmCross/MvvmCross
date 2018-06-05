@@ -13,7 +13,7 @@ using MvvmCross.Binding.Attributes;
 using MvvmCross.Droid.Support.V17.Leanback.Listeners;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Android.Binding.Views;
+using MvvmCross.Platforms.Android.Binding.Views;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
 {

@@ -4,86 +4,55 @@ title: The Core Project
 category: Tutorials
 order: 2
 ---
-MvvmCross application's are normally structured with:
+MvvmCross applications normally consist on:
 
-* one shared 'core' Portable Class Library (PCL) project 
-  * containing as much code as possible: models, view models, services, converters, etc
-* one UI project per platform 
-  * each containing the bootstrap and view-specific code for that platform
+- A 'Core' project in the form of a .NET Standard library, which will contain all the shared code (so you want to maximize the amount of code placed in this project). The _Core_ will contain Models, ViewModels, Services, Converters, ...
+- One 'Platform' project per targeted platform. These projects will contain some framework initialization code, Views and SDK dependant code.
 
-Normally, you start development from the core project - and that's exactly what we'll do here.
+Normally, you start development from the _Core_ project - and that's exactly what we'll do here.
 
-To create the core, you can use the Visual Studio project template wizards, but here we'll instead build up a new project 'from empty'.
+Although it is recommended that you install any of the community made solution templates, we'll use a blank solution on this tutorial.
 
-## Create the new Portable Class Library
+## Create the new .NET Standard library
 
-Using Visual Studio, create your new `Class Library (Portable)` project using the File|New Project wizard.
+Using Visual Studio, create your new `.NET Standard 2 Library` project using the File|New Project wizard.
 
-Call it something like TipCalc.Core.csproj and name the solution TipCalc.
+Call it something like `TipCalc.Core` and name the solution `TipCalc`.
 
-When asked to choose platforms, select .NET Framework 4.5, Windows 8, Windows Phone Silverlight 8, Windows Phone 8.1, Xamarin.Android and Xamarin.iOS - this will ensure that the PCL is in **Profile259**.  If Visual Studio stops you selecting these targets with the error 'The selection does not match any portable APIs' then use the workaround described here: http://danrigby.com/2014/04/10/windowsphone81-pcl-xamarin-fix/ 
+## Delete any auto-generated class
 
-Profile259 defines a small subset of .Net including:
+No-one really needs something like `Class1.cs` :)
 
-* Microsoft.CSharp
-* mscorelib
-* System.Collections
-* System.ComponentModel
-* System.Core
-* System.Diagnostics
-* System
-* System.Globalization
-* System.IO
-* System.Linq 
-* System.Net
-* System.ObjectModel
-* System.Reflection
-* System.Resources.ResourceManager
-* System.Runtime
-* System.Security.Principal
-* System.ServiceModel.Web
-* System.Text.Encoding
-* System.Text.RegularExpressions
-* System.Threading
-* System.Windows
-* System.Xml
+## Install MvvmCross. Yey!
 
-To see the full list of assemblies, look in `C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETPortable\v4.5\Profile\Profile259`
+Open the Nuget Package Manager and search for the package `MvvmCross`.
 
-Importantly for us this Profile259 includes everything we need to build our Mvvm applications.
+If you don't really enjoy the NuGet UI experience, then you can alternatively open the Package Manager Console, and type:
 
-## Delete Class1.cs
+    Install-Package MvvmCross
 
-No-one really needs a `Class1` :)
+## Add the Tip Calculation Service
 
-## Install MvvmCross
+Create a folder called `Services`.
 
-In the Package Manager Console, enter...
-
-    Install-Package MvvmCross.Core
-
-## Add the Tip Calculation service
-
-Create a folder called 'Services'
-
-Within this folder create a new Interface which will be used for calculating tips:
+Within this folder create a new interface, which will be used for calculating tips:
 
 ```c#
 namespace TipCalc.Core.Services
 {
-    public interface ICalculation
+    public interface ICalculationService
     {
         double TipAmount(double subTotal, int generosity);
     }
 }
 ```
 
-Within this folder create an implementation of this interface:
+Within the `Services` folder now create an implementation for the interface:
 
 ```c#
 namespace TipCalc.Core.Services
 {
-    public class Calculation : ICalculation
+    public class CalculationService : ICalculationService
     {
         public double TipAmount(double subTotal, int generosity)
         {
@@ -93,86 +62,80 @@ namespace TipCalc.Core.Services
 }
 ```
 
-This provides us with some simple business logic for our app
+This provides us with some simple business logic for our app. 
 
 ## Add the ViewModel
 
 At a sketch level, we want a user interface that:
 
-* uses:
-  * our calculation service to calculate the tip
-* has inputs of:
-  * the current bill (the subTotal)
-  * a feeling for how much tip we'd like to leave (the generosity)
-* has output displays of:
-  * the calculated tip to leave
+- Uses our calculation service to calculate the tip
+- Has inputs of:
+    - The current bill (the SubTotal)
+    - A feeling for how much tip we'd like to leave (the generosity)
+- Has an output for the calculated tip to leave
 
-To represent this user interface we need to build a 'model' for the user interface - which is, of course, a 'ViewModel'
+To represent this user interface we need to build a 'model' for it. In other words, we need a `ViewModel`.
 
-Within MvvmCross, all ViewModels should inherit from `MvxViewModel`.
+Within MvvmCross, all ViewModels _should_ inherit from `MvxViewModel`.
 
-So now create a ViewModels folder in our project, and in this folder add a new `TipViewModel` class like:
+So now let's create a folder called `ViewModels`, and inside of it a new class named `TipViewModel`. This is what it should look like:
 
 ```c#
-using MvvmCross.Core.ViewModels;
+using MvvmCross.ViewModels;
 using TipCalc.Core.Services;
+using System.Threading.Tasks;
 
 namespace TipCalc.Core.ViewModels
 {
     public class TipViewModel : MvxViewModel
     {
-        readonly ICalculation _calculation;
+        readonly ICalculationService _calculationService;
 
-        public TipViewModel(ICalculation calculation)
+        public TipViewModel(ICalculationService calculationService)
         {
-            _calculation = calculation;
+            _calculationService = calculationService;
         }
 
-        public override void Start()
+        public override async Task Initialize()
         {
+            await base.Initialize();
+
             _subTotal = 100;
             _generosity = 10;
+
             Recalculate();
-            base.Start();
         }
 
-        double _subTotal;
-
+        private double _subTotal;
         public double SubTotal
         {
-            get {
-                return _subTotal;
-            }
+            get => _subTotal;
             set
             {
                 _subTotal = value;
                 RaisePropertyChanged(() => SubTotal);
+
                 Recalculate();
             }
         }
 
-        int _generosity;
-
+        private int _generosity;
         public int Generosity
         {
-            get {
-                return _generosity;
-            }
+            get => _generosity;
             set
             {
                 _generosity = value;
                 RaisePropertyChanged(() => Generosity);
+
                 Recalculate();
             }
         }
 
-        double _tip;
-
+        private double _tip;
         public double Tip
         {
-            get {
-                return _tip;
-            }
+            get => _tip;
             set
             {
                 _tip = value;
@@ -180,85 +143,78 @@ namespace TipCalc.Core.ViewModels
             }
         }
 
-        void Recalculate()
+        private void Recalculate()
         {
-            Tip = _calculation.TipAmount(SubTotal, Generosity);
+            Tip = _calculationService.TipAmount(SubTotal, Generosity);
         }
     }
 }
 ```
 
-For many of you, this `TipViewModel` will already make sense to you. If it does then **skip ahead** to 'Add the App(lication)'. If not, then here are some simple explanations:
+It is possible that this `TipViewModel` will already make sense to you. If it does, then **skip ahead** to 'Add the App(lication)'. If not, then here are some further explanations:
 
-* the `TipViewModel` is constructed with an `ICalculation` service
+- the `TipViewModel` is constructed with an `ICalculationService` service, which is injected using the MvvmCross Dependency Injection engine.
 
 ```c#
-readonly ICalculation _calculation;
+readonly ICalculationService _calculationService;
 
-public TipViewModel(ICalculation calculation)
+public TipViewModel(ICalculationService calculationService)
 {
-    _calculation = calculation;
+    _calculationService = calculationService;
 }
 ```
 
-* after construction, the `TipViewModel` will be started - during this it sets some initial values.
+- After construction, the `TipViewModel` runs the `Initialize` method, which is part of the [ViewModel lifecycle](https://www.mvvmcross.com/documentation/fundamentals/viewmodel-lifecycle) - during this it sets some initial values.
 
 ```c#
-public override void Start()
+public override async Task Initialize()
 {
-    // set some start values
-    SubTotal = 100.0;
-    Generosity = 10;
+    await base.Initialize();
+
+    _subTotal = 100;
+    _generosity = 10;
+
     Recalculate();
-    base.Start();
 }
 ```
 
-* the view data held within the `TipViewModel` is exposed through properties. 
-  * Each of these properties is backed by a private member variable
-  * Each of these properties has a get and a set 
-  * The set accessor for `Tip` is marked private
-  * All of the set accessors call `RaisePropertyChanged` to tell the base `MvxViewModel` that the data has changed
-  * The `SubTotal` and `Generosity` set accessors also call `Recalculate()`
+- The view data held within the `TipViewModel` is exposed through properties, where: 
+    - Each of these properties is backed by a private member variable
+    - Each of these properties has a getter and a setter
+    - All of the set accessors call `RaisePropertyChanged` to tell the base `MvxViewModel` that the data has changed
+    - The `SubTotal` and `Generosity` set accessors also call `Recalculate()`
 
 ```c#
-double _subTotal;
-
+private double _subTotal;
 public double SubTotal
 {
-    get {
-        return _subTotal;
-    }
+    get => _subTotal;
     set
     {
         _subTotal = value;
         RaisePropertyChanged(() => SubTotal);
+
         Recalculate();
     }
 }
 
-int _generosity;
-
+private int _generosity;
 public int Generosity
 {
-    get {
-        return _generosity;
-    }
+    get => _generosity;
     set
     {
         _generosity = value;
         RaisePropertyChanged(() => Generosity);
+
         Recalculate();
     }
 }
 
-double _tip;
-
+private double _tip;
 public double Tip
 {
-    get {
-        return _tip;
-    }
+    get => _tip;
     set
     {
         _tip = value;
@@ -267,55 +223,51 @@ public double Tip
 }
 ```
 
-* The `Recalculate` method uses the `_calculation` service to update `Tip` from the current values in `SubTotal` and `Generosity`
+- The private `Recalculate` method uses the `_calculationService` to update `Tip` from the current values of `SubTotal` and `Generosity`.
 
 ```c#
-void Recalculate()
+private void Recalculate()
 {
-    Tip = _calculation.TipAmount(SubTotal, Generosity);
+    Tip = _calculationService.TipAmount(SubTotal, Generosity);
 }
 ```
 
-## Add the App(lication)
+## Add the App(lication) class
 
-With our `Calculation` service and `TipViewModel` defined, we now just need to add the main `App` code.
+With our `CalculationService` and our `TipViewModel` defined, we now just need to add the main `App` code. This code:
 
-This code;
+- Will sit in a single class within the root folder of our .NET Standard project. 
+- Will inherit from the `MvxApplication` class
+- Is normally just called `App`
+- Is responsible for providing:
+    - Registration of which interfaces and implementations the app uses
+    - Registration of which `ViewModel` the `App` will show when it starts
 
-* will sit in a single class within the root folder of our PCL core project. 
-* this class will inherits from the `MvxApplication` class
-* this class is normally just called `App`
-* this class is responsible for providing:
-  * registration of which interfaces and implementations the app uses
-  * registration of which `ViewModel` the `App` will show when it starts
-  * control of how `ViewModel`s are located - although most applications normally just use the default implementation of this supplied by the base `MvxApplication` class.
+'Registration' here means creating an entry on the 'Inversion of Control' Container - IoC -. This record tells the IoC Container what to do when anything asks for an instance of the registered interface.
 
-'Registration' here means creating an 'Inversion of Control' - IoC - record for an interface. This IoC record tells the MvvmCross framework what to do when anything asks for an instance of that interface.
-
-For our Tip Calculation app:
-
-* we register the `Calculation` class to implement the `ICalculation` service
+Our "Tip Calculation" App class will register the `ICalculationService` as a dynamic service:
 
 ```c#
-Mvx.RegisterType<ICalculation, Calculation>();
+Mvx.RegisterType<ICalculationService, CalculationService>();
 ```
 
-this line tells the MvvmCross framework that whenever any code requests an `ICalculation` reference, then the framework should create a new instance of `Calculation`. Note the single static class `Mvx` which acts as a single place for both registering and resolving interfaces and their implementations.
+The previous line tells the IoC Container that whenever any code requests an `ICalculationService` reference, an object of type `CalculationService` should be created and returned.
 
-* we want the app to start with the `TipViewModel`
+Also note that the single static class `Mvx` acts as a single place for both registering and resolving interfaces and their implementations.
+
+Within the App class we also decide that we want the app to start with the `TipViewModel`:
 
 ```c#
-var appStart = new MvxAppStart<TipViewModel>();
-Mvx.RegisterSingleton<IMvxAppStart>(appStart);
+RegisterAppStart<TipViewModel>();
 ```
 
- this line tells the MvvmCross framework that whenever any code requests an `IMvxAppStart` reference, then the framework should return that same `appStart` instance.
+The previous line tells the MvvmCross framework that `TipViewModel` should be the first ViewModel / View pair that should appear on foreground when the app starts.
 
-So here's what App.cs looks like:
+In summary, this is what App.cs should look like:
 
 ```c#
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
+using MvvmCross;
+using MvvmCross.ViewModels;
 using TipCalc.Core.Services;
 using TipCalc.Core.ViewModels;
 
@@ -323,57 +275,57 @@ namespace TipCalc.Core
 {
     public class App : MvxApplication
     {
-        public App()
+        public override void Initialize()
         {
-            Mvx.RegisterType<ICalculation, Calculation>();
-            Mvx.RegisterSingleton<IMvxAppStart>(new MvxAppStart<TipViewModel>());
+            Mvx.RegisterType<ICalculationService, CalculationService>();
+
+            RegisterAppStart<TipViewModel>();
         }
     }
 }
 ```
 
-## Note: What is 'Inversion of Control'?
+## Our Core project is complete :)
+
+Just to recap the steps we've followed:
+
+1. We created a new .NET Standard project
+2. We added the MvvmCross libraries via NuGet
+3. We added a `ICalculationService` interface and implementation pair
+4. We added a `TipViewModel` which:
+  - Inherits from `MvxViewModel`
+  - Declares a dependency on `ICalculationService` on its constructor 
+  - Presents a number of public properties each of which called `RaisePropertyChanged` internally
+5. We added an `App` which:
+  - Inherits from `MvxApplication`
+  - Registers the `ICalculationService`/`CalculationService` pair
+  - Registers a ViewModel to use for when the app starts
+
+These are the same steps that you need to go through for every new MvvmCross application.
+
+The next step is about building a first UI for our MvvmCross application.
+
+[Next!](https://www.mvvmcross.com/documentation/tutorials/tipcalc/the-tip-calc-navigation)
+
+
+## Side note: What is 'Inversion of Control'?
 
 We won't go into depth here about what IoC - Inversion of Control - is.
 
 Instead, we will just say that:
 
-* Within each MvvmCross application, there is a single special object - a `singleton`
-* This `singleton` lives within the `Mvx` static class.
-* The application startup code can use the `Mvx.Register` methods in order to specify what will implement `interface`s during the lifetime of the app.
-* After this has been done, then later in the life when any code needs an `interface` implementation, then it can request one using the `Mvx.Resolve` methods.
+- Within each MvvmCross application, there is a very special object, which is a `singleton`.
+- This `singleton` lives within the `Mvx` static class.
+- The application startup code can use the `Mvx.Register...` methods to let `Mvx` know how to resolve certain requests during the lifetime of the app.
+- After the registration has been done, then when any code asks for an `interface` implementation, it can do that by using the `Mvx.Resolve` methods.
 
-One common pattern that is seen is 'constructor injection':
+One common pattern the app is also using is 'constructor injection':
 
-* Our `TipViewModel` uses this pattern. 
-* It presents a constructor like: `public TipViewModel(ICalculation calculation)`. 
-* When the app is running a part of the MvvmCross framework called the `ViewModelLocator` is used to find and create `ViewModel`s
-* when a `TipViewModel` is needed, the `ViewModelLocator` uses a call to `Mvx.IocConstruct` to create one.
-* This `Mvx.IocConstruct` call creates the `TipViewModel` using the `ICalculation` implementation that it finds using `Mvx.Resolve`
+- Our `TipViewModel` uses this pattern. 
+- It presents a constructor like: `public TipViewModel(ICalculationService calculationService)`. 
+- When the app is running a part of the MvvmCross framework called the `ViewModelLocator` is used to find and create ViewModels.
+- When a `TipViewModel` is needed, the `ViewModelLocator` uses a call to `Mvx.IocConstruct` to create one.
+- This `Mvx.IocConstruct` call creates the `TipViewModel` using the `ICalculationService` implementation that it finds using `Mvx.Resolve`
 
 This is obviously only a very brief introduction.
-
-If you would like to know more, please see look up some of the excellent tutorials out there on the Internet - like http://joelabrahamsson.com/inversion-of-control-an-introduction-with-examples-in-net/
-
-## The Core project is complete :)
-
-Just to recap the steps we've followed:
-
-1. We created a new PCL project using Profile259
-2. We added the MvvmCross libraries
-3. We added a `ICalculation` interface and implementation pair
-4. We added a `TipViewModel` which:
-  * inherited from `MvxViewModel`
-  * used `ICalculation` 
-  * presented a number of public properties each of which called `RaisePropertyChanged`
-5. We added an `App` which:
-  * inherited from `MvxApplication`
-  * registered the `ICalculation`/`Calculation` pair
-  * registered a special start object for `IMvxAppStart`
-
-These are the same steps that you need to go through for every new MvvmCross application.
-
-## Moving on
-
-Next we'll start looking at how to add a first UI to this MvvmCross application.
 

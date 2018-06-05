@@ -1,10 +1,14 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using Android.App;
 using Android.Content.PM;
-using MvvmCross.Platform.Android.Views;
+using Android.OS;
+using MvvmCross.Core;
+using MvvmCross.Forms.Platforms.Android.Views;
+using MvvmCross.Platforms.Android.Views;
+using Playground.Forms.UI;
 
 namespace Playground.Forms.Droid
 {
@@ -16,17 +20,12 @@ namespace Playground.Forms.Droid
         , Theme = "@style/AppTheme.Splash"
         , NoHistory = true
         , ScreenOrientation = ScreenOrientation.Portrait)]
-    public class SplashScreen : MvxSplashScreenActivity
+    public class SplashScreen : MvxFormsSplashScreenActivity<Setup, Core.App, FormsApp>
     {
-        public SplashScreen()
-            : base(Resource.Layout.SplashScreen)
-        {
-        }
-
-        protected override void TriggerFirstNavigate()
+        protected override void RunAppStart(Bundle bundle)
         {
             StartActivity(typeof(MainActivity));
-            base.TriggerFirstNavigate();
+            base.RunAppStart(bundle);
         }
     }
 }

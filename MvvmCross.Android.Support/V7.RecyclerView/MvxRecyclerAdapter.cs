@@ -9,6 +9,7 @@ using System.Windows.Input;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using Android.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Extensions;
@@ -16,7 +17,7 @@ using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 using MvvmCross.Droid.Support.V7.RecyclerView.Model;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.WeakSubscription;
 using Object = Java.Lang.Object;
 
@@ -152,7 +153,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             var vh = new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewType, itemBindingContext), itemBindingContext)
             {
                 Click = ItemClick,
-                LongClick = ItemLongClick
+                LongClick = ItemLongClick,
+                Id = ItemTemplateSelector.GetItemLayoutId(viewType)
             };
 
             return vh;
@@ -173,6 +175,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
         {
             var dataContext = GetItem(position);
+            if (((IMvxRecyclerViewHolder) holder).Id == global::Android.Resource.Layout.SimpleListItem1)
+                ((TextView) holder.ItemView).Text = dataContext?.ToString();
             ((IMvxRecyclerViewHolder)holder).DataContext = dataContext;
             OnMvxViewHolderBound(new MvxViewHolderBoundEventArgs(position, dataContext, holder));
         }
@@ -259,12 +263,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                         break;
                     case NotifyCollectionChangedAction.Move:
                         for (int i = 0; i < e.NewItems.Count; i++)
-                        {
-                            var oldItem = e.OldItems[i];
-                            var newItem = e.NewItems[i];
-
-                            NotifyItemMoved(GetViewPosition(oldItem), GetViewPosition(newItem));
-                        }
+                            NotifyItemMoved(GetViewPosition(e.OldStartingIndex + i), GetViewPosition(e.NewStartingIndex + i));
                         break;
                     case NotifyCollectionChangedAction.Replace:
                         NotifyItemRangeChanged(GetViewPosition(e.NewStartingIndex), e.NewItems.Count);

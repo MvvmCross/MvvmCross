@@ -7,15 +7,18 @@
 
 using Polly;
 
-var sln = new FilePath("./MvvmCross.sln");
+var solutionName = "MvvmCross";
+var repoName = "mvvmcross/mvvmcross";
+var sln = new FilePath("./" + solutionName + ".sln");
 var outputDir = new DirectoryPath("./artifacts");
 var nuspecDir = new DirectoryPath("./nuspec");
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
+var verbosityArg = Argument("verbosity", "Minimal");
+var verbosity = Verbosity.Minimal;
 
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 GitVersion versionInfo = null;
-
 
 Setup(context => {
     versionInfo = context.GitVersion(new GitVersionSettings {
@@ -32,7 +35,7 @@ Setup(context => {
 
     var cakeVersion = typeof(ICakeContext).Assembly.GetName().Version.ToString();
 
-    Information(Figlet("MvvmCross"));
+    Information(Figlet(solutionName));
     Information("Building version {0}, ({1}, {2}) using version {3} of Cake.",
         versionInfo.SemVer,
         configuration,
@@ -41,6 +44,8 @@ Setup(context => {
 
     Debug("Will push NuGet packages {0}", 
         ShouldPushNugetPackages(versionInfo.BranchName));
+
+    verbosity = (Verbosity) Enum.Parse(typeof(Verbosity), verbosityArg, true);
 });
 
 Task("Clean").Does(() =>
@@ -57,16 +62,28 @@ Task("ResolveBuildTools")
     .WithCriteria(() => IsRunningOnWindows())
     .Does(() => 
 {
-    var vsLatest = VSWhereLatest();
+    var vsWhereSettings = new VSWhereLatestSettings
+    {
+        IncludePrerelease = true,
+        Requires = "Component.Xamarin"
+    };
+    
+    var vsLatest = VSWhereLatest(vsWhereSettings);
     msBuildPath = (vsLatest == null)
         ? null
         : vsLatest.CombineWithFilePath("./MSBuild/15.0/Bin/MSBuild.exe");
+
+    if (msBuildPath != null)
+        Information("Found MSBuild at {0}", msBuildPath.ToString());
 });
 
 Task("Restore")
     .IsDependentOn("ResolveBuildTools")
-    .Does(() => {
-    MSBuild(sln, settings => settings.WithTarget("Restore"));
+    .Does(() => 
+{
+    var settings = GetDefaultBuildSettings()
+        .WithTarget("Restore");
+    MSBuild(sln, settings);
 });
 
 Task("PatchBuildProps")
@@ -83,23 +100,83 @@ Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>  {
 
-    var settings = new MSBuildSettings 
-    {
-        Configuration = configuration,
-        ToolPath = msBuildPath,
-        Verbosity = Verbosity.Minimal,
-        ArgumentCustomization = args => args.Append("/m")
-    };
-
-    settings = settings
+    var settings = GetDefaultBuildSettings()
         .WithProperty("DebugSymbols", "True")
         .WithProperty("DebugType", "Embedded")
         .WithProperty("Version", versionInfo.SemVer)
         .WithProperty("PackageVersion", versionInfo.SemVer)
         .WithProperty("InformationalVersion", versionInfo.InformationalVersion)
-        .WithProperty("NoPackageAnalysis", "True");
+        .WithProperty("NoPackageAnalysis", "True")
+        .WithTarget("Build");
 
-    MSBuild(sln, settings);
+    settings.BinaryLogger = new MSBuildBinaryLogSettings 
+    {
+        Enabled = true,
+        //FileName = "mvvmcross.binlog"
+    };
+
+    // TODO change back to this when parallel builds are working with Xamarin.Android again
+    // MSBuild(sln, settings);
+
+    var buildItems = new string[] 
+    {
+        "./MvvmCross/MvvmCross.csproj",
+        "./MvvmCross/MvvmCross.Platforms.Wpf.csproj",
+        "./MvvmCross.Android.Support/Fragment/MvvmCross.Droid.Support.Fragment.csproj",
+        "./MvvmCross.Android.Support/Design/MvvmCross.Droid.Support.Design.csproj",
+        "./MvvmCross.Android.Support/Core.Utils/MvvmCross.Droid.Support.Core.Utils.csproj",
+        "./MvvmCross.Android.Support/Core.UI/MvvmCross.Droid.Support.Core.UI.csproj",
+        "./MvvmCross.Android.Support/V7.AppCompat/MvvmCross.Droid.Support.V7.AppCompat.csproj",
+        "./MvvmCross.Android.Support/V7.Preference/MvvmCross.Droid.Support.V7.Preference.csproj",
+        "./MvvmCross.Android.Support/V7.RecyclerView/MvvmCross.Droid.Support.V7.RecyclerView.csproj",
+        "./MvvmCross.Android.Support/V14.Preference/MvvmCross.Droid.Support.V14.Preference.csproj",
+        "./MvvmCross.Android.Support/V17.Leanback/MvvmCross.Droid.Support.V17.Leanback.csproj",
+        "./MvvmCross.Plugins/Location/MvvmCross.Plugin.Location.csproj",
+        "./MvvmCross.Plugins/Location.Fused/MvvmCross.Plugin.Location.Fused.csproj",
+        "./MvvmCross.Plugins/PictureChooser/MvvmCross.Plugin.PictureChooser.csproj",
+        "./MvvmCross.Plugins/Email/MvvmCross.Plugin.Email.csproj",
+        "./MvvmCross.Plugins/Accelerometer/MvvmCross.Plugin.Accelerometer.csproj",
+        "./MvvmCross.Plugins/Color/MvvmCross.Plugin.Color.csproj",
+        "./MvvmCross.Plugins/FieldBinding/MvvmCross.Plugin.FieldBinding.csproj",
+        "./MvvmCross.Plugins/File/MvvmCross.Plugin.File.csproj",
+        "./MvvmCross.Plugins/Json/MvvmCross.Plugin.Json.csproj",
+        "./MvvmCross.Plugins/JsonLocalization/MvvmCross.Plugin.JsonLocalization.csproj",
+        "./MvvmCross.Plugins/Messenger/MvvmCross.Plugin.Messenger.csproj",
+        "./MvvmCross.Plugins/MethodBinding/MvvmCross.Plugin.MethodBinding.csproj",
+        "./MvvmCross.Plugins/Network/MvvmCross.Plugin.Network.csproj",
+        "./MvvmCross.Plugins/PhoneCall/MvvmCross.Plugin.PhoneCall.csproj",
+        "./MvvmCross.Plugins/PictureChooser/MvvmCross.Plugin.PictureChooser.csproj",
+        "./MvvmCross.Plugins/ResourceLoader/MvvmCross.Plugin.ResourceLoader.csproj",
+        "./MvvmCross.Plugins/ResxLocalization/MvvmCross.Plugin.ResxLocalization.csproj",
+        "./MvvmCross.Plugins/Share/MvvmCross.Plugin.Share.csproj",
+        "./MvvmCross.Plugins/Sidebar/MvvmCross.Plugin.Sidebar.csproj",
+        "./MvvmCross.Plugins/Visibility/MvvmCross.Plugin.Visibility.csproj",
+        "./MvvmCross.Plugins/WebBrowser/MvvmCross.Plugin.WebBrowser.csproj",
+        "./MvvmCross.Plugins/All/MvvmCross.Plugin.All.csproj",
+        "./MvvmCross.Forms/MvvmCross.Forms.csproj",
+        "./MvvmCross.Analyzers/CodeAnalysis/MvvmCross.CodeAnalysis.csproj"
+    };
+
+    // workaround for Xamarin.Android throwing AAPT error -2, instead of building sln :(
+    foreach(var buildItem in buildItems)
+    {   
+        var filePath = new FilePath(buildItem);
+        var name = filePath.GetFilenameWithoutExtension();
+
+        settings.BinaryLogger.FileName = name + ".binlog";
+
+        MSBuild(filePath, settings);
+    }
+
+    var testItems = GetFiles("./UnitTests/*.UnitTest/*.UnitTest.csproj");
+    foreach(var testItem in testItems)
+    {
+        var name = testItem.GetFilenameWithoutExtension();
+
+        settings.BinaryLogger.FileName = name + ".binlog";
+
+        MSBuild(testItem, settings);
+    }
 });
 
 Task("UnitTest")
@@ -138,7 +215,7 @@ Task("UnitTest")
 
 Task("PublishPackages")
     .WithCriteria(() => !BuildSystem.IsLocalBuild)
-    .WithCriteria(() => IsRepository("mvvmcross/mvvmcross"))
+    .WithCriteria(() => IsRepository(repoName))
     .WithCriteria(() => ShouldPushNugetPackages(versionInfo.BranchName))
     .Does (() =>
 {
@@ -147,7 +224,7 @@ Task("PublishPackages")
     var apiKey = nugetKeySource.Item1;
     var source = nugetKeySource.Item2;
 
-    var nugetFiles = GetFiles("MvvmCross*/**/bin/" + configuration + "/**/*.nupkg");
+    var nugetFiles = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg");
 
     var policy = Policy
         .Handle<Exception>()
@@ -167,19 +244,20 @@ Task("PublishPackages")
 
 Task("UploadAppVeyorArtifact")
     .WithCriteria(() => isRunningOnAppVeyor)
-    .Does(() => {
+    .Does(() => 
+{
 
     Information("Artifacts Dir: {0}", outputDir.FullPath);
 
     var uploadSettings = new AppVeyorUploadArtifactsSettings();
 
-    var artifacts = GetFiles("MvvmCross*/**/bin/" + configuration + "/**/*.nupkg")
+    var artifacts = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg")
         + GetFiles(outputDir.FullPath + "/**/*");
 
     foreach(var file in artifacts) {
         Information("Uploading {0}", file.FullPath);
 
-        if (file.GetExtension() == "nupkg")
+        if (file.GetExtension().Contains("nupkg"))
             uploadSettings.ArtifactType = AppVeyorUploadArtifactType.NuGetPackage;
         else
             uploadSettings.ArtifactType = AppVeyorUploadArtifactType.Auto;
@@ -198,6 +276,20 @@ Task("Default")
 });
 
 RunTarget(target);
+
+MSBuildSettings GetDefaultBuildSettings()
+{
+    var settings = new MSBuildSettings 
+    {
+        Configuration = configuration,
+        ToolPath = msBuildPath,
+        Verbosity = verbosity,
+        ArgumentCustomization = args => args.Append("/m"),
+        ToolVersion = MSBuildToolVersion.VS2017
+    };
+
+    return settings;
+}
 
 bool ShouldPushNugetPackages(string branchName)
 {

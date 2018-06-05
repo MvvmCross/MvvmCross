@@ -13,7 +13,7 @@ using Android.Views;
 using Android.Widget;
 using Java.Lang;
 using MvvmCross.Base;
-using MvvmCross.Platform.Android.Binding.BindingContext;
+using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.ViewModels;
 using Object = Java.Lang.Object;
 

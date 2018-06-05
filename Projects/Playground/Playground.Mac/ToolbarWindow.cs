@@ -2,7 +2,7 @@
 
 using System;
 using AppKit;
-using MvvmCross.Platform.Mac.Views;
+using MvvmCross.Platforms.Mac.Views;
 
 namespace Playground.Mac
 {

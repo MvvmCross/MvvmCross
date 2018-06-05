@@ -6,12 +6,15 @@ using MvvmCross.Commands;
 using MvvmCross.Localization;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
+using Playground.Core.ViewModels.Bindings;
 
 namespace Playground.Core.ViewModels
 {
     public class MainViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
+
+        private string _bindableText = "I'm bound!";
 
         private int _counter = 2;
 
@@ -23,21 +26,62 @@ namespace Playground.Core.ViewModels
 
             ShowModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalViewModel>());
 
-            ShowModalNavCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalNavViewModel>());
+            ShowModalNavCommand =
+                new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalNavViewModel>());
 
             ShowTabsCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<TabsRootViewModel>());
 
             ShowSplitCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SplitRootViewModel>());
 
-            ShowOverrideAttributeCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<OverrideAttributeViewModel>());
+            ShowOverrideAttributeCommand = new MvxAsyncCommand(async () =>
+                await _navigationService.Navigate<OverrideAttributeViewModel>());
 
             ShowSheetCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SheetViewModel>());
 
             ShowWindowCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<WindowViewModel>());
 
-            ShowMixedNavigationCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<MixedNavFirstViewModel>());
+            ShowMixedNavigationCommand =
+                new MvxAsyncCommand(async () => await _navigationService.Navigate<MixedNavFirstViewModel>());
+
+            ShowCustomBindingCommand =
+                new MvxAsyncCommand(async () => await _navigationService.Navigate<CustomBindingViewModel>());
 
             _counter = 3;
+        }
+
+        public IMvxAsyncCommand ShowChildCommand { get; }
+
+        public IMvxAsyncCommand ShowModalCommand { get; }
+
+        public IMvxAsyncCommand ShowModalNavCommand { get; }
+
+        public IMvxAsyncCommand ShowTabsCommand { get; }
+
+        public IMvxAsyncCommand ShowCustomBindingCommand { get; }
+
+        public IMvxAsyncCommand ShowSplitCommand { get; }
+
+        public IMvxAsyncCommand ShowOverrideAttributeCommand { get; }
+
+        public IMvxAsyncCommand ShowSheetCommand { get; }
+
+        public IMvxAsyncCommand ShowWindowCommand { get; }
+
+        public IMvxAsyncCommand ShowMixedNavigationCommand { get; }
+
+        public IMvxLanguageBinder TextSource => new MvxLanguageBinder("MvxBindingsExample", "Text");
+
+        public string BindableText
+        {
+            get => _bindableText;
+            set
+            {
+                if (BindableText != value)
+                {
+                    _bindableText = value;
+                    RaisePropertyChanged();
+                }
+            }
         }
 
         protected override void SaveStateToBundle(IMvxBundle bundle)
@@ -52,46 +96,6 @@ namespace Playground.Core.ViewModels
             base.ReloadFromBundle(state);
 
             _counter = int.Parse(state.Data["MyKey"]);
-        }
-
-        public IMvxAsyncCommand ShowChildCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowModalCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowModalNavCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowTabsCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowSplitCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowOverrideAttributeCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowSheetCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowWindowCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowMixedNavigationCommand { get; private set; }
-
-        public IMvxLanguageBinder TextSource
-        {
-            get { return new MvxLanguageBinder("MvxBindingsExample", "Text"); }
-        }
-
-        private string _bindableText = "I'm bound!";
-        public string BindableText
-        {
-            get
-            {
-                return _bindableText;
-            }
-            set
-            {
-                if (BindableText != value)
-                {
-                    _bindableText = value;
-                    RaisePropertyChanged();
-                }
-            }
         }
     }
 }

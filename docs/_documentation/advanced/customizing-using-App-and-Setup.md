@@ -467,14 +467,11 @@ UITextView Text
 UITextField Text
 MvxCollectionViewSource ItemsSource
 MvxTableViewSource ItemsSource
-MvxImageView ImageUrl
 UIImageView	Image
 UIDatePicker Date
 UISlider Value
 UISwitch On
 UIDatePicker Date
-IMvxImageHelper ImageUrl
-MvxImageViewLoader ImageUrl
 ```
 
 If you would like register additional shortcuts in your application, or if you'd like to replace some of the existing shortcuts, then this can be done in FillBindingNames

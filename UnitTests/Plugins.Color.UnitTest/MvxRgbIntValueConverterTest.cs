@@ -4,10 +4,10 @@
 
 using System.Globalization;
 using MvvmCross.Plugin.Color;
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using Xunit;
 
-namespace MvvmCross.Plugins.Color.UnitTest
+namespace MvvmCross.Plugin.Color.UnitTest
 {
     [Collection("Color")]
     public class MvxRgbIntValueConverterTest : MvxColorValueConverterTest

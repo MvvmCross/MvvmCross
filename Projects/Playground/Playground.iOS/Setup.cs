@@ -1,32 +1,23 @@
-﻿using MvvmCross.Platform.Ios.Core;
-using MvvmCross.Platform.Ios.Presenters;
-using MvvmCross.ViewModels;
+﻿using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Platforms.Ios.Core;
 using Playground.Core;
-using UIKit;
+using Playground.iOS.Bindings;
+using Playground.iOS.Controls;
 
 namespace Playground.iOS
 {
-    public class Setup : MvxIosSetup
+    public class Setup : MvxIosSetup<App>
     {
-        public Setup(IMvxApplicationDelegate applicationDelegate, UIWindow window)
-            : base(applicationDelegate, window)
+
+        protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
+            registry.RegisterCustomBindingFactory<BinaryEdit>(
+                "MyCount",
+                (arg) => new BinaryEditTargetBinding(arg));
+
+            base.FillTargetFactories(registry);
         }
 
-        public Setup(IMvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter)
-            : base(applicationDelegate, presenter)
-        {
-        }
 
-        protected override IMvxApplication CreateApp()
-        {
-            return new App();
-        }
-
-        protected override IMvxIosViewPresenter CreateViewPresenter()
-        {
-            return new MvxIosViewPresenter(ApplicationDelegate, Window);
-
-        }
     }
 }

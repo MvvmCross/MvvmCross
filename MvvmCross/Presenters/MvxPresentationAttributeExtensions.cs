@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MvvmCross.Presenters.Attributes;
 
 namespace MvvmCross.Presenters
 {

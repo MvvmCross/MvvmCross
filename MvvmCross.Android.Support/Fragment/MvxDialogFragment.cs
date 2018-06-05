@@ -8,7 +8,7 @@ using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.V4.EventSource;
-using MvvmCross.Platform.Android.Views;
+using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V4
@@ -19,7 +19,7 @@ namespace MvvmCross.Droid.Support.V4
     {
         protected MvxDialogFragment()
         {
-            this.AddEventListeners();
+            V4.MvxFragmentExtensions.AddEventListeners(this);
         }
 
         protected MvxDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)

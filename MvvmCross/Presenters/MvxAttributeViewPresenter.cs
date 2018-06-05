@@ -6,16 +6,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Logging;
+using MvvmCross.Presenters.Attributes;
+using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
-using MvvmCross.ViewModels.Hints;
 using MvvmCross.Views;
 
 namespace MvvmCross.Presenters
 {
     public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttributeViewPresenter
     {
-        private IMvxViewModelTypeFinder _viewModelTypeFinder;
-        public IMvxViewModelTypeFinder ViewModelTypeFinder
+        protected IMvxViewModelTypeFinder _viewModelTypeFinder;
+        public virtual IMvxViewModelTypeFinder ViewModelTypeFinder
         {
             get
             {
@@ -29,8 +30,8 @@ namespace MvvmCross.Presenters
             }
         }
 
-        private IMvxViewsContainer _viewsContainer;
-        public IMvxViewsContainer ViewsContainer
+        protected IMvxViewsContainer _viewsContainer;
+        public virtual IMvxViewsContainer ViewsContainer
         {
             get
             {
@@ -44,8 +45,8 @@ namespace MvvmCross.Presenters
             }
         }
 
-        private Dictionary<Type, MvxPresentationAttributeAction> _attributeTypesActionsDictionary;
-        public Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
+        protected Dictionary<Type, MvxPresentationAttributeAction> _attributeTypesActionsDictionary;
+        public virtual Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
         {
             get
             {

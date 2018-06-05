@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MvvmCross.Plugins.Network.UnitTest.TestClasses.GoogleBooks
+namespace MvvmCross.Plugin.Network.UnitTest.TestClasses.GoogleBooks
 {
     public static class BooksService
     {

@@ -13,7 +13,7 @@ namespace MvvmCross.Logging.LogProviders
 {
     internal class Log4NetLogProvider : MvxBaseLogProvider
     {
-        private readonly Func<string, object> _getLoggerByNameDelegate;
+        private readonly Func<Assembly, string, object> _getLoggerByNameDelegate;
 
         public Log4NetLogProvider()
         {
@@ -26,7 +26,10 @@ namespace MvvmCross.Logging.LogProviders
         }
 
         protected override Logger GetLogger(string name)
-            => new Log4NetLogger(_getLoggerByNameDelegate(name)).Log;
+        {
+            Assembly assembly = Assembly.GetCallingAssembly();
+            return new Log4NetLogger(_getLoggerByNameDelegate(assembly, name)).Log;
+        }
 
         internal static bool IsLoggerAvailable()
             => GetLogManagerType() != null;
@@ -97,13 +100,14 @@ namespace MvvmCross.Logging.LogProviders
         private static Type GetLogManagerType()
             => Type.GetType("log4net.LogManager, log4net");
 
-        private static Func<string, object> GetGetLoggerMethodCall()
+        private static Func<Assembly, string, object> GetGetLoggerMethodCall()
         {
             Type logManagerType = GetLogManagerType();
-            MethodInfo method = logManagerType.GetMethod("GetLogger", new[] { typeof(string) });
+            MethodInfo method = logManagerType.GetMethod("GetLogger", new[] { typeof(Assembly), typeof(string) });
+            ParameterExpression repositoryAssemblyParam = Expression.Parameter(typeof(Assembly), "repositoryAssembly");
             ParameterExpression nameParam = Expression.Parameter(typeof(string), "name");
-            MethodCallExpression methodCall = Expression.Call(null, method, nameParam);
-            return Expression.Lambda<Func<string, object>>(methodCall, nameParam).Compile();
+            MethodCallExpression methodCall = Expression.Call(null, method, repositoryAssemblyParam, nameParam);
+            return Expression.Lambda<Func<Assembly, string, object>>(methodCall, repositoryAssemblyParam, nameParam).Compile();
         }
 
         internal class Log4NetLogger

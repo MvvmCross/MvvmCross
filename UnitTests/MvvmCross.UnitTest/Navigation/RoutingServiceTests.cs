@@ -10,7 +10,7 @@ using Moq;
 using MvvmCross.Core;
 using MvvmCross.Exceptions;
 using MvvmCross.Navigation;
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using MvvmCross.UnitTest.Mocks.Dispatchers;
 using MvvmCross.UnitTest.Mocks.TestViewModels;
 using MvvmCross.UnitTest.Mocks.ViewModels;

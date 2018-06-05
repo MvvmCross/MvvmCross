@@ -1,4 +1,4 @@
-﻿using MvvmCross.Platform.Uap.Presenters.Attributes;
+﻿using MvvmCross.Platforms.Uap.Presenters.Attributes;
 
 namespace Playground.Uwp.Views
 {

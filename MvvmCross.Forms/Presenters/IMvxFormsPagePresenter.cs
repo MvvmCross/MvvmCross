@@ -6,13 +6,14 @@ using System;
 using MvvmCross.Forms.Core;
 using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
+using MvvmCross.Presenters.Attributes;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Presenters
 {
     public interface IMvxFormsPagePresenter : IMvxAttributeViewPresenter
     {
-        MvxFormsApplication FormsApplication { get; set; }
+        Application FormsApplication { get; set; }
 
         IMvxViewModelLoader ViewModelLoader { get; set; }
 

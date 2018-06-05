@@ -5,7 +5,7 @@
 using System;
 using System.Linq;
 using MvvmCross.Core;
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using MvvmCross.UnitTest.Mocks.TestViewModels;
 using MvvmCross.ViewModels;
 using Xunit;

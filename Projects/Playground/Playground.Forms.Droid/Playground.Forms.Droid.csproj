@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Playground.Forms.Droid</RootNamespace>
     <AssemblyName>Playground.Forms.Droid</AssemblyName>
-    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -28,10 +28,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
-    <AndroidSupportedAbis>arm64-v8a;armeabi;armeabi-v7a;x86;x86_64</AndroidSupportedAbis>
+    <AndroidSupportedAbis>
+    </AndroidSupportedAbis>
     <AotAssemblies>false</AotAssemblies>
     <EnableLLVM>false</EnableLLVM>
     <BundleAssemblies>false</BundleAssemblies>
+    <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -123,7 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>11.0.1</Version>
+      <Version>11.0.2</Version>
     </PackageReference>
     <PackageReference Include="Serilog">
       <Version>2.6.0</Version>
@@ -131,23 +133,29 @@
     <PackageReference Include="Serilog.Sinks.Xamarin">
       <Version>0.1.29</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.Compat">
+      <Version>27.0.2</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design">
-      <Version>26.1.0.1</Version>
+      <Version>27.0.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Fragment">
-      <Version>26.1.0.1</Version>
+      <Version>27.0.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v4">
-      <Version>26.1.0.1</Version>
+      <Version>27.0.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat">
-      <Version>26.1.0.1</Version>
+      <Version>27.0.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v7.CardView">
-      <Version>26.1.0.1</Version>
+      <Version>27.0.2</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms">
-      <Version>2.5.0.280555</Version>
+    <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter">
+      <Version>27.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Build.Download">
+      <Version>0.4.9</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +166,10 @@
     <ProjectReference Include="..\..\..\MvvmCross.Android.Support\Fragment\MvvmCross.Droid.Support.Fragment.csproj">
       <Project>{fc0b3e3c-8b00-48fa-af93-981a45b2be4b}</Project>
       <Name>MvvmCross.Droid.Support.Fragment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross.Android.Support\V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj">
+      <Project>{fd67cbbc-4bac-40d6-9f4c-28aae6c8533e}</Project>
+      <Name>MvvmCross.Droid.Support.V7.AppCompat</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross.Forms\MvvmCross.Forms.csproj">
       <Project>{013bb2b2-8204-43bd-aa7b-e494007f0b94}</Project>
@@ -188,5 +200,12 @@
       <Name>Playground.Forms.UI</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\MvvmCross.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <Import Project="..\..\..\XamarinForms.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

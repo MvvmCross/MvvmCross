@@ -8,7 +8,7 @@ On this page you can find MvvmCross plugins that are made by 3rd parties. Feel f
 
 Plugin | Summary | Platforms | Link
 --- | --- | --- | ---
-ACR MvvmCross User Dialogs | A cross platform library that allows you to call for standard user dialogs from a shared/portable library. | Android, iOS, Windows Phone 8.0, UWP | [Nuget](https://www.nuget.org/packages/Acr.MvvmCross.Plugins.UserDialogs/)
+ACR User Dialogs | A cross platform library that allows you to call for standard user dialogs from a shared/portable library. | Android, iOS, Windows Phone 8.0, UWP | [Github](https://github.com/aritchie/userdialogs#mvvmcross)
 Pushwoosh plugin for MvvmCross | MvvmCross plugin that wraps the native Pushwoosh SDK | Android, iOS | [Nuget](https://www.nuget.org/packages/SoToGo.Plugins.Pushwoosh/)
 Infinite Scroll Plugin | Infinite Scrolling/Incremental Scrolling for lists | Android, iOS, UWP | [Github](https://github.com/HBSequence/Sequence.Plugins)
 Bluetooth LE Plugin | Use bluetooth low energy | Android, iOS | [Nuget](https://www.nuget.org/packages/MvvmCross.Plugin.BLE/)
@@ -21,3 +21,4 @@ Mvx.Microphone | Access the device's microphone | Android, iOS | [Github](https:
 Mvx.Picasso | Target Bindings for Picasso | Android | [Github](https://github.com/willsb/Mvx.Picasso)
 ExRam.MvvmCross.ObservableBinding | Support MvvmCross-Bindings to IObservable&lt;T&gt;-properties in view models. | All | [Github](https://github.com/ExRam/ExRam.MvvmCross.ObservableBinding)
 FFImageLoading | Load images quickly and easy (even using data binding) using MvxCachedImageView | Android, iOS, Mac, Windows, Tizen | [Github](https://github.com/luberda-molinet/FFImageLoading/wiki/MvvmCross)
+Mvx.Brightness | Access the device's brightness | Android, iOS | [Nuget](https://www.nuget.org/packages/Mvx.Brightness/)

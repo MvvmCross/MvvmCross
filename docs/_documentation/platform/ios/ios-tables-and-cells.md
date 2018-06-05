@@ -8,29 +8,29 @@ category: Platforms
 
 Abstract classes
 
-- [MvxBaseTableViewSource](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Binding/iOS/Views/MvxBaseTableViewSource.cs)
+- [MvxBaseTableViewSource](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Platforms/Ios/Binding/Views/MvxBaseTableViewSource.cs)
   - base functionality only 
   - no `ItemsSource` - generally not used directly
-- [MvxTableViewSource.cs](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Binding/iOS/Views/MvxTableViewSource.cs)
+- [MvxTableViewSource.cs](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Platforms/Ios/Binding/Views/MvxTableViewSource.cs)
   - inherits from the basetable and adds `ItemsSource` for data-binding
   - inheriting classes need only to implement `protected abstract UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);`
-- [MvxExpandableTableViewSource.cs](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross-iOSSupport/MvvmCross.iOS.Support/Views/MvxExpandableTableViewSource.cs)
-  - inherits from [MvxTableViewSource.cs](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Binding/iOS/Views/MvxTableViewSource.cs)
+- [MvxExpandableTableViewSource.cs](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Platforms/Ios/Views/MvxExpandableTableViewSource.cs)
+  - inherits from [MvxTableViewSource.cs](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Platforms/Ios/Binding/Views/MvxTableViewSource.cs)
   - changes `ItemSource` to `IEnumerable<TItemSource> ItemsSource` for data-binding groups
   - inheriting classes need to implement `protected abstract UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item);` and register a header cell and table cell
   - **Note** available in [MvvmCross.iOS.Support](https://www.nuget.org/packages/MvvmCross.iOS.Support/) nuget package
 
 Concrete classes
 
-- [MvxStandardTableViewSource.cs](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Binding/iOS/Views/MvxStandardTableViewCell.cs)
+- [MvxStandardTableViewSource.cs](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Platforms/Ios/Binding/Views/MvxStandardTableViewSource.cs)
   - inherits from `MvxTableViewSource`
   - provides the 'standard iPhone cell types' via `UITableViewCellStyle` 
-  - within these you can bind `TitleText`, `DetailText`, `ImageUrl` and (with some teasing) Accessory
-- [MvxSimpleTableViewSource.cs](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Binding/iOS/Views/MvxSimpleTableViewSource.cs)
+  - within these you can bind `TitleText`, `DetailText`, and (with some teasing) Accessory
+- [MvxSimpleTableViewSource.cs](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Platforms/Ios/Binding/Views/MvxSimpleTableViewSource.cs)
   - inherits from `MvxTableViewSource`
   - provides a single cell type for all items in the collection - via `string nibName` in the `ctor`
   - within these cells you can bind what you like - see videos (later)
-- [MvxActionBasedTableViewSource.cs](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Binding/iOS/Views/MvxActionBasedTableViewSource.cs)
+- [MvxActionBasedTableViewSource.cs](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Platforms/Ios/Binding/Views/MvxActionBasedTableViewSource.cs)
   - provides some `Func<>`style hooks to allow you to implement `GetOrCreateCellFor` without inheriting a new class from `MvxTableViewSource`
 
 ## Custom table source example

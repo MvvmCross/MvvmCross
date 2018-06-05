@@ -2,33 +2,28 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.Content;
+using System.Collections.Generic;
+using System.Reflection;
+using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Android.Presenters;
-using MvvmCross.ViewModels;
 using Playground.Core;
+using Playground.Droid.Bindings;
+using Playground.Droid.Controls;
 using Serilog;
 
 namespace Playground.Droid
 {
-    public class Setup : MvxAppCompatSetup
+    public class Setup : MvxAppCompatSetup<App>
     {
-        public Setup(Context applicationContext) : base(applicationContext)
-        {
-        }
+        protected override IEnumerable<Assembly> AndroidViewAssemblies =>
+            new List<Assembly>(base.AndroidViewAssemblies)
+            {
+                typeof(MvxRecyclerView).Assembly
+            };
 
-        protected override IMvxApplication CreateApp()
-        {
-            return new App();
-        }
-
-        protected override IMvxAndroidViewPresenter CreateViewPresenter()
-        {
-            return new MvxAppCompatViewPresenter(AndroidViewAssemblies);
-        }
-
-        protected override MvxLogProviderType GetDefaultLogProviderType()
+        public override MvxLogProviderType GetDefaultLogProviderType()
             => MvxLogProviderType.Serilog;
 
         protected override IMvxLogProvider CreateLogProvider()
@@ -38,6 +33,15 @@ namespace Playground.Droid
                 .WriteTo.AndroidLog()
                 .CreateLogger();
             return base.CreateLogProvider();
+        }
+
+        protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+        {
+            registry.RegisterCustomBindingFactory<BinaryEdit>(
+                "MyCount",
+                (arg) => new BinaryEditTargetBinding(arg));
+
+            base.FillTargetFactories(registry);
         }
     }
 }

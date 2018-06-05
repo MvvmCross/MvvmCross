@@ -5,12 +5,13 @@
 using System;
 using MvvmCross.Forms.Core;
 using MvvmCross.Presenters;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Presenters
 {
     public interface IMvxFormsViewPresenter : IMvxAttributeViewPresenter
     {
-        MvxFormsApplication FormsApplication { get; set; }
+        Application FormsApplication { get; set; }
         IMvxFormsPagePresenter FormsPagePresenter { get; set; }
 
         bool ClosePlatformViews();

@@ -6,81 +6,68 @@ order: 2
 ---
 Deployed MvvmCross applications consist of two parts:
 
-- the "core" - containing all the ViewModels, Services, Models and 'business' code
-- the "ui" - containing the Views and platform specific code for interacting with the "core"
+- the "Core" - containing all the ViewModels, Services, Models and 'business' code
+- the "UI" - containing the Views and platform specific code for interacting with the "Core"
+
+Optionally, you can split your code into more projects / assemblies to improve reusability and decouple layers.
 
 For a multi-platform application, it's typical for there to be:
 
-- a single "core" project, written as a PCL (Portable Class Library)
-- a "ui" project per platform written as a native project for the current target platform.
-- optionally some "plugins" - each one containing a PCL part and native parts - each one providing reusable abstractions of native functionality such as camera, geolocation, accelerometer, files, etc
+- A "Core" project, written as a .NET Standard library
+- A "UI" project per platform, written as a native project for the current target platform. 
+- Optionally some other projects that could be .NET Standard or platform libraries, which provide reusable abstractions or specific functionalities.
 
-This is the way that MvvmCross encourages people to write their applications, and this guide will. However, other approaches are possible - e.g. a single project can include both "core" and "ui", or multiple "core" projects can be written using copy-and-paste or using a technique such as file-linking
+This is the way that MvvmCross encourages people to write their applications, and this guide will.
 
-## Some key MvvmCross objects
+## Some MvvmCross key objects
 
-There are a few key objects within an MvvmCross application:
+There are a few key objects within the framework which are expected to be found on almost every application:
 
-- in the "core", there are:
- - an `App` - responsible for starting your ViewModels and your business logic
- - a `Start` object - responsible for deciding the first `ViewModel` or `ViewModels` which should be presented
- - one or more `ViewModels` - each one responsible for a piece of user interaction
- - your services, models, etc
+- In the "Core" part:
+    - An `App` class, which is responsible for registering custom objects on the IoC container and starting your ViewModels and your business logic.
+    - Optionally an `AppStart` object - responsible for making the decision of which `ViewModel` to present first.
+    - One or more `ViewModel` objects - each one responsible for a piece of user interaction.
+    - Services, Models, ...
 
-- in each "ui", there are:
- - the native `Application` object - responsible for native lifecycle events - on each platform this object is a platform-specific class
- - an MvvmCross `Setup` class - responsible for 'bootstrapping' MvvmCross, your 'core' and your 'ui'
- - one or more `Views` - each one responsible for presenting one of your `ViewModels`
- - a `Presenter` - responsible for deciding how `Views` are shown
- - custom UI code - for controls, gestures, events, etc
+- In each application platform project:
+    - A native global `Application` handler object - responsible for native lifecycle events -. For example, on Android it would be a MainActivity / MainApplication class, while on iOS it woulde be an AppDelegate class. 
+    - Optionally a `Setup` class - responsible for bootstrapping MvvmCross and registering platform services.
+    - One or more `Views` - where generally each one is responsible for presenting one of your `ViewModels`.
+    - Optionally a custom `ViewPresenter` - responsible for deciding how `Views` are shown.
+    - UI code for controls, gestures, events.
+    - Platform services for providing some very specialized features like Accelerometer or Camera.
 
 ## How an MvvmCross application starts
 
-When an MvvmCross app starts on a native project, then:
+When an MvvmCross app starts, this is what actually happens:
 
-- the native Application will 'be created' first
-- within the construction of the native Application, a `Setup` will be created
- - the `Setup` will perform very basic tasks - e.g. initialization of the IoC system (see https://github.com/slodge/MvvmCross/wiki/Service-Location-and-Inversion-of-Control)
- - then the `Setup` will call into the core project, construct an `App` and will call `Initialize` on it.
- - during the `Initialize` your App will typically: 
-    - register your app-specific services with the IoC system
-    - create and register a `Start` object
- - the `Setup` will then configure the UI side of the project - especially things like lookup tables for views
- - finally the `Setup` will start the MvvmCross binding engine (if needed)
-- with `Setup` complete, your native Application can then actually start.
-- to do this, it requests a reference to the `Start` object and calls `Start()` on it 
-- after this, the app will start presenting `ViewModels` using databound `Views`
+1. The platform startup process fires.
+2. Within the construction of the platform Application, the MvvmCross `Setup` is created.
+3. The `Setup` performs the framework initialization in two steps: 
+    - `InitializePrimary`: Runs on the main sync context (aka main thread). Initializes the IoC, Logging mechanism and other core parts.
+    - `InitializeSecondary`: Runs on the background (never on the main thread). Constructs some other platform services like bindings, the `App` class and calls `Initialize` on it. It finally registers Views / ViewModels lookups.
+4. When `App.Initialize` is called, your app is expected to provide an `AppStart` object, which is responsible for managing the first navigation step. The last step of `Setup` initialization consist on calling `AppStart.Startup(object hint)`.
+5. `AppStart.Startup(object hint)` runs and the first ViewModel / View of your app is shown.
 
-## The MvvmCross Core
+Note: In case you are wondering about the `hint` parameter on the `Startup` method, it's something you can use to pass initial parameters from your platform project to your Core layer. Super useful when implemeting push notifications, for example.
 
-An MvvmCross Core project provides:
+## The "Core" project
 
-- an application object - typically in `App.cs`
-- one or more ViewModels - normally in a folder called `ViewModels`
-- your code: services, models, repositories, engines, units of work, etc - whatever your app needs to work
+An MvvmCross Core project is supposed to include:
+
+- An application object - typically called `App.cs`
+- Optionally, a custom `AppStart` object which manages first navigation.
+- One or more ViewModels - which are expected to be found in a folder called `ViewModels`.
+- Your code: Services, Models, Repositories, ...
  
-### App.cs
+### The "App" class
 
-In each MvvmCross application there should be one and only one `App`.
+The MvvmCross `App` class shouldn't be confused with the `ApplicationDelegate` in iOS, or with the `Application` object in Android or Windows. Those are native, SDK provided objects, while this one class is meant to be located on the common part of your code.
 
-This `App` is not to be confused with the `ApplicationDelegate` in iOS, or with the `Application` objects in Android or Windows. Those native objects are there to provide the lifecycle of the native platform-specific code.
-
-Instead, this `App` in MvvmCross is there to assist with the lifecycle of your ViewModels and your services, models, etc
-
-The key methods within an `App` are:
-
-- `Initialize` - called on start up
-- `FindViewModelLocator(MvxViewModelRequest request)` - used to find the object which provides `ViewModels` during navigation
-
-The specific jobs that your `App` should do during its `Initialize` are:
-
-- to construct and/or IoC-register any objects specific to your applications - services, models, etc
-- to register an `IMvxAppStart` object
-
-A default `App` supplied via NuGet, looks like:
+`App` is there to register an `IMvxAppStart` object and also to register your own bits to the IoC. This is what it would typically look like:
 
 ```c#
-using MvvmCross.Platform.Ioc;
+using MvvmCross.Ioc;
 
 namespace MyName.Core
 {
@@ -94,33 +81,28 @@ namespace MyName.Core
                 .RegisterAsLazySingleton();
 
             RegisterAppStart<ViewModels.MainViewModel>();
+            // if you want to use a custom AppStart, you should replace the previous line with this one:
+            // RegisterCustomAppStart<MyCustomAppStart>();
         }
     }
 }
 ```
 
-This `App`:
+In this code snippet, the first line does a bulk registration to the IoC container. It looks within the current `Assembly` (the "Core" Assembly) and uses Reflection to register all classes ending in `Service` as lazily-constructed singletons.
 
-- within Initialize
- - looks within the current `Assembly` (the "core" Assembly) and uses Reflection to register all classes ending in `Service` as lazily-constructed singletons
- - calls `RegisterAppStart<TViewModel>` to create and register a very simple `IMvxAppStart` implementation - an implementation which always shows a single `MainViewModel` when `Start()` is called
-- uses the default `ViewModelLocator` - this default uses naming conventions to locate and construct `ViewModels` and creates a new `ViewModel` for each and every request from a `View`
-
-If you wanted to use a custom `IMvxAppStart` object, see https://github.com/slodge/MvvmCross/wiki/Customising-using-App-and-Setup.
+If you want to know more about customizing this part of the MvvmCross initialization, it's highly recommended that you take a look at this document: [Customizing App and Setup](https://www.mvvmcross.com/documentation/advanced/customizing-using-App-and-Setup).
 
 ### ViewModels
 
-In each MvvmCross 'core' application your `ViewModels` provide containers for the state and the behaviour for your User Interface.
+`ViewModels` are key objects of the MVVM pattern. These should typically contain code for managing state and operations. As the name implies, ViewModels are View abstractions which provide properties, and commands to be consumed.
 
-Typically they do this using:
+When using MvvmCross, all your ViewModels should inherit from `MvxViewModel`. These should typically contain:
 
-- C# Properties
-- the `INotifyPropertyChanged` and `INotifyCollectionChanged` interfaces to send notifications when properties change
-- special `ICommand` properties which can allow View events (e.g. button taps) to call actions within the `ViewModel`
+- C# Properties which raise changes
+- Commands
+- Private methods for managing operations
     
-For MvvmCross, `ViewModels` normally inherit from `MvxViewModel`
-
-A typical `ViewModel` might look like:
+This is how a typical `ViewModel` might look like:
 
 ```c#
 public class MainViewModel : MvxViewModel
@@ -128,15 +110,21 @@ public class MainViewModel : MvxViewModel
     public MainViewModel()
     {
     }
+
+    private void Prepare()
+    {
+        // This is the first method to be called after construction
+    }
         
     public override Task Initialize()
     {
-        //TODO: Add starting logic here
+        // Async initialization, YEY!
             
         return base.Initialize();
     }
         
     public IMvxCommand ResetTextCommand => new MvxCommand(ResetText);
+
     private void ResetText()
     {
         Text = "Hello MvvmCross";
@@ -153,298 +141,226 @@ public class MainViewModel : MvxViewModel
 
 This `MainViewModel` has:
 
-- a single `Text` property which raises a `PropertyChanged` notification when it changes
-- a single `ResetTextCommand` command which will call the `ResetText()` method whenever the command is executed.
+- A `Text` property which raises a `PropertyChanged` notification when it changes
+- A `ResetTextCommand` command which will call `ResetText()` whenever the command is executed.
  
-Beyond this simple example, `ViewModels` can also:
+Beyond this super simple example, `ViewModels` may also:
 
-- contain dynamic lists (see https://github.com/slodge/MvvmCross/wiki/MvvmCross-Tutorials#working-with-collections)
-- be constructed from IoC (https://github.com/slodge/MvvmCross/wiki/Service-Location-and-Inversion-of-Control)
-- use 'techniques' like:
-- `MvxCommandCollection` (see http://slodge.blogspot.co.uk/2013/03/fixing-mvvm-commands-making-hot-tuna.html), 
-- `IMvxINPCInterceptor` (see http://slodge.blogspot.co.uk/2013/07/intercepting-raisepropertychanged.html)
-- Fody to remove some of the boilerplate code (http://slodge.blogspot.co.uk/2013/07/awesome-clean-viewmodels-via-fody.html)
-- Rio binding (see http://slodge.blogspot.co.uk/2013/07/n36-rio-binding-carnival.html)
+- Contain lists
+- Perform navigation operations to other ViewModels
+- Contain child ViewModels
+- Be constructed from IoC. [Reference](https://www.mvvmcross.com/documentation/fundamentals/inversion-of-control-ioc)
+- Injected dependencies on the Constructor / Properties. [Reference](https://www.mvvmcross.com/documentation/fundamentals/dependency-injection)
+- Fody.PropertyChanged to remove some of the boilerplate code. [Reference](https://github.com/Fody/PropertyChanged) 
 
-## The MvvmCross UI
+If you want to learn more about MvvmCross ViewModels, take a look at the documentation for [ViewModels Lifecycle](https://www.mvvmcross.com/documentation/fundamentals/viewmodel-lifecycle)
 
-An MvvmCross 'ui' project provides:
+## Platform projects
 
-- the native platform-specific application code - e.g `Main.cs` and `AppDelegate.cs` on Xamarin.iOS
-- a `Setup.cs` class
-- one or more `Views` - each one responsible for presenting one of your `ViewModels`
-- a `Presenter` - responsible for deciding how `Views` are shown
-- custom UI code - for controls, gestures, events, etc
+When using MvvmCross, a typical platform project would contain:
 
-### Platform specific application code
+- The native platform-specific initialization code - e.g `Main.cs` and `AppDelegate.cs` on Xamarin.iOS
+- Optionally, a custom `Setup.cs` class
+- One or more `Views` - each one responsible for presenting one of your `ViewModels`
+- Optionally, a custom `ViewPresenter` - responsible for deciding how `Views` are shown
+- Custom SDK dependant code - custom controls, gestures, background services, ...
+
+### MvvmCross Platform specific initilization
 
 #### iOS
 
-On iOS, we need to replace the normal `AppDelegate.cs` class with an `MvxApplicationDelegate`
+On iOS, we need to replace the normal `AppDelegate.cs` class with an `MvxApplicationDelegate` one.
 
 An initial replacement looks like:
 
 ```c#
-using Foundation;
-using UIKit;
-using MvvmCross.Platform;
-using MvvmCross.iOS.Platform;
-using MvvmCross.Core.ViewModels;
-
-namespace MyName.iOS
+namespace MyAwesomeApp.iOS
 {
     [Register("AppDelegate")]
-    public partial class AppDelegate : MvxApplicationDelegate
+    public partial class AppDelegate : MvxApplicationDelegate<MvxIosSetup<App>, App>
     {
-        public override UIWindow Window { get; set; }
-
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            Window = new UIWindow(UIScreen.MainScreen.Bounds);
+            var result = base.FinishedLaunching(application, launchOptions);
 
-            var setup = new Setup(this, Window);
-            setup.Initialize();
+            // here is where your custom code should be placed
 
-            var startup = Mvx.Resolve<IMvxAppStart>();
-            startup.Start();
-
-            Window.MakeKeyAndVisible();
-
-            return true;
+            return result;
         }
     }
 }
 ```
-  
+
+The code snippet assumes your MvvmCross App class is called `App`. It also registers the default `MvxIosSetup` as your app's setup. If you want to use a custom one, you just need to modify the class constraint.
+
 #### Android
 
-On Android, we don't normally have any `Application` to override. Instead of this, MvvmCross by default provides a `SplashScreen` - this typically looks like:
+On Android, the easiest way to declare initialization is by adding a custom `Application` class:
 
 ```c#
-using Android.App;
-using Android.Content.PM;
-using MvvmCross.Droid.Views;
-
-namespace MyName.Droid
+namespace MyAwesomeApp.Droid
 {
-    [Activity(
-         Label = "CustomBinding.Droid"
-                 , MainLauncher = true
-         , Icon = "@drawable/icon"
-         , Theme = "@style/Theme.Splash"
-         , NoHistory = true
-         , ScreenOrientation = ScreenOrientation.Portrait)]
-    public class SplashScreen : MvxSplashScreenActivity
+    [Application]
+    public class MainApplication : MvxAndroidApplication<MvxAndroidSetup, App>
     {
-        public SplashScreen()
-        : base(Resource.Layout.SplashScreen)
+        public MainApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
     }
 }
 ```
-    
-Importantly, please note that this class is marked with `MainLauncher = true` to ensure that this is the first thing created when the native platform starts.
+
+The code snippet assumes your MvvmCross App class is called `App`. It also registers the default `MvxAndroidSetup` as your app's setup. If you want to use a custom one, you just need to modify the class constraint.
+
+A final note: If your app uses Android Support packages, you should replace `MvxAndroidApplication` for `MvxAppCompatApplication` and `MvxAndroidSetup` for `MvxAppCompatSetup`.
 
 #### WPF
 
-On WPF, a new project will contain a native `App.xaml.cs`.  After adding the MvvmCross libraries via NuGet a new file is added called 'App.Xam.Mvx.cs'.  This file contains -
+On WPF, a new project will contain a native `App.xaml.cs`. You should edit it to make it look like this:
 
 ```c#
-using System;
-using System.Windows;
-using MvvmCross.Core;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Wpf.Views;
-
-namespace MyName.Wpf
+namespace MyAwesomeApp.Wpf
 {
-    public partial class App : Application
+    public partial class App : MvxApplication
     {
-        private bool _setupComplete;
-
-        private void DoSetup()
+        protected override void RegisterSetup()
         {
-            LoadMvxAssemblyResources();
-
-            var setup = new Setup(Dispatcher, MainWindow);
-            setup.Initialize();
-
-            var start = Mvx.Resolve<IMvxAppStart>();
-            start.Start();
-
-            _setupComplete = true;
-        }
-
-        protected override void OnActivated(EventArgs e)
-        {
-            if (!_setupComplete)
-                DoSetup();
-
-            base.OnActivated(e);
-        }
-
-        private void LoadMvxAssemblyResources()
-        {
-            for (var i = 0;; i++)
-            {
-                string key = "MvxAssemblyImport" + i;
-                var data = TryFindResource(key);
-                if (data == null)
-                    return;
-            }
+            this.RegisterSetupType<MvxWpfSetup<Core.App>>();
         }
     }
 }
 ```
 
-A default MainWindow should also exist.
+The code snippet assumes your MvvmCross App class is called `App`. If you want or need to use a custom Setup class, then you only need to modify the class constraint for `RegisterSetupType`.
 
 #### UWP
 
 On UWP, a new project will again contain a native `App.xaml.cs`
 
-To adapt this for MvvmCross, we simply find the method `OnLaunched` and replace the `if (rootFrame.Content == null)` block with:
-
 ```c#
-var setup = new Setup(rootFrame);
-setup.Initialize();
-
-var start = Mvx.Resolve<IMvxAppStart>();
-start.Start();
-```
-
-### Setup.cs
-
-The Setup class is the bootstrapper for the MvvmCross system.
-
-This bootstrapper goes through a lot of steps, and almost all of these are `virtual` allowing you to customize MvvmCross. 
-
-Some key ones you should be aware of are:
-
-- `CreateApplication` - your Setup **must** override this one in order to provide a new instance of your `App` object from your core project
-- `InitializeFirstChance` - a "first blood" placeholder for any steps you want to take before any of the later steps happen
-- `CreateDebugTrace` - a chance to customise where application trace is placed - see http://stackoverflow.com/a/17234083/373321 for an example
-- `InitializeLastChance` - a "last ditch" placeholder for any steps you want to take after all of earlier steps have happened.  Note that the Android and iOS base Setup classes use 'last chance' for initializing the UI data-binding system, so it's important to always call `base.InitializeLastChance()` in your override.
-
-Beyond this, a larger list of Setup customisation options is discussed in https://github.com/slodge/MvvmCross/wiki/Customising-using-App-and-Setup
-
-#### Minimal Setup - Android
-
-```c#
-using Android.Content;
-using MvvmCross.Droid.Platform;
-using MvvmCross.Core.ViewModels;
-
-namespace MyName.Droid
+namespace MyAwesomeApp.Uwp
 {
-    public class Setup : MvxAndroidSetup
+    public partial class App : MvxApplication
     {
-        public Setup(Context applicationContext) : base(applicationContext)
+        public App()
         {
+            InitializeComponent();
         }
 
-        protected override IMvxApplication CreateApp()
+        protected override void RegisterSetup()
         {
-            return new Core.App();
+            this.RegisterSetupType<MvxWindowsSetup<Core.App>>();
         }
     }
 }
 ```
 
-#### Minimal Setup - iOS
+The code snippet assumes your MvvmCross App class is called `App`. If you want or need to use a custom Setup class, then you only need to modify the class constraint for `RegisterSetupType`.
+
+#### macOS
+
+On macOS, we need to replace the normal `AppDelegate.cs` class with an `MvxApplicationDelegate` one.
+
+An initial replacement looks like:
 
 ```c#
-using UIKit;
-using MvvmCross.iOS.Platform;
-
-namespace MyName.iOS
+namespace MyAwesomeApp.Mac
 {
-    public class Setup : MvxIosSetup
-    {
-        public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
-        : base(applicationDelegate, window)
-        {
-        }
-
-        protected override IMvxApplication CreateApp ()
-        {
-            return new Core.App();
-        }
+    [Register("AppDelegate")]
+    public partial class AppDelegate : MvxApplicationDelegate<MvxMacSetup<App>, App>
+    {    
     }
 }
 ```
-    
-#### Minimal Setup - WPF
+
+The code snippet assumes your MvvmCross App class is called `App`. It also registers the default `MvxMacSetup` as your app's setup. If you want to use a custom one, you just need to modify the class constraint.
+
+#### tvOS
+
+On macOS, we need to replace the normal `AppDelegate.cs` class with an `MvxApplicationDelegate` one.
+
+An initial replacement looks like:
 
 ```c#
-using System.Windows.Threading;
-using MvvmCross.Platform;
-using MvvmCross.Core.ViewModels;
-using MvvmCross.Wpf.Platform;
-using MvvmCross.Wpf.Views;
-
-namespace MyName.Wpf
+namespace MyAwesomeApp.TvOS
 {
-    public class Setup : MvxWpfSetup
-    {
-        public Setup(Dispatcher uiThreadDispatcher, ContentControl root)
-            : base(uiThreadDispatcher, root)
-        {
-        }
-
-        protected override IMvxApplication CreateApp()
-        {
-            return new Core.App();
-        }
+    [Register("AppDelegate")]
+    public partial class AppDelegate : MvxApplicationDelegate<MvxTvosSetup<App>, App>
+    {    
     }
 }
 ```
-    
-#### Setup - UWP
+
+The code snippet assumes your MvvmCross App class is called `App`. It also registers the default `MvxTvosSetup` as your app's setup. If you want to use a custom one, you just need to modify the class constraint.
+
+### Setup Singleton
+
+The Setup Singleton is a very special object within the framework, which can be used to ensure the framework is up and running at any time.
+
+This class is accessible through platform static objects, and provides you with a method called `EnsureInitialized`. Just be sure not to abuse from it, as it may block your UI.
+
+#### Android
+The setup singleton is called `MvxAndroidSetupSingleton`. You would use it this way:
 
 ```c#
-using MvvmCross.ViewModels;
-using MvvmCross.Uwp.Platform;
-using Windows.UI.Xaml.Controls;
+var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(context);
+setup.EnsureInitialized();
+```
 
-namespace MyName.Store
-{
-    public class Setup : MvxWindowsSetup
-    {
-        public Setup(Frame rootFrame) : base(rootFrame)
-        {
-        }
+#### iOS
+The setup singleton is called `MvxIosSetupSingleton`. You would use it this way:
 
-        protected override IMvxApplication CreateApp()
-        {
-            return new Core.App();
-        }
-    }
-}
+```c#
+var setup = MvxIosSetupSingleton.EnsureSingletonAvailable(yourAppDelegate, Window);
+setup.EnsureInitialized();
+```
+
+#### macOS
+The setup singleton is called `MvxMacSetupSingleton`. You would use it this way:
+
+```c#
+var setup = MvxMacSetupSingleton.EnsureSingletonAvailable(yourAppDelegate, Window);
+setup.EnsureInitialized();
+```
+
+#### tvOS
+The setup singleton is called `MvxTvosSetupSingleton`. You would use it this way:
+
+```c#
+var setup = MvxTvosSetupSingleton.EnsureSingletonAvailable(yourAppDelegate, Window);
+setup.EnsureInitialized();
+```
+
+#### UWP
+The setup singleton is called `MvxWindowsSetupSingleton`. You would use it this way:
+
+```c#
+var setup = MvxWindowsSetupSingleton.EnsureSingletonAvailable(rootFrame, activationArguments, nameof(Suspend))
+setup.EnsureInitialized();
+```
+
+#### WPF
+The setup singleton is called `MvxWpfSetupSingleton`. You would use it this way:
+
+```c#
+var setup = MvxWpfSetupSingleton.EnsureSingletonAvailable(Dispatcher, MainWindow)
+setup.EnsureInitialized();
 ```
 
 ### Views
 
-Each UI Platform needs a set of Views
+On your platform projects, it is highly expected to find one or more Views, where each one is normally - data bound - to a ViewModel.
 
-Each View is normally databound to a single ViewModel for its entire lifetime.
+A view is typically represented as a platform "View" screen. It could be an Android Activity/Fragment, or an iOS ViewController.
 
-On each platform, Views in the Mvvm sense are typically implemented using data-bound versions of:
+One important thing to note, is that by default `View`s are associated with `ViewModel`s using a naming convention. But using generic is the preferred way. On iOS for example, this is what a View class declaration would look like:
 
-- On Windows platforms a `UserControl` - for UWP is very often specialized into a `Page`
-- On Android, an `Activity` or `Fragment`
-- On iOS, a `UIViewController`
+```c#
+public class MyView : MvxViewController<MyViewModel>
+```
 
-Within this introduction we won't go further into how these Views are actually written - instead see the introductions to data-binding on each platform within the TipCalc tutorial.
+### View Presenters
 
-One important thing to note, is that by default `View`s are associated with `ViewModel`s using a naming convention in MvvmCross. This can be overridden if required (see the https://github.com/slodge/MvvmCross/wiki/Customising-using-App-and-Setup#overriding-view-viewmodel-associations) - but by default the MvvmCross system links a View called `FooView` to a ViewModel called `FooViewModel`
+One of the main benefits MvvmCross provides you with is a super powerful, ViewModel first Navigation system. ViewPresenters are an important part of it, and they are highly customizable.
 
-### A Presenter
-
-Each UI Platform provides a `Presenter` which implements `IMvxViewPresenter`.
-
-In default applications, the `Presenter` used normally fills the entire screen with a `Page` and allows back button navigation to previous pages.
-
-When more advanced screen layouts are needed - e.g. flyouts, tabs, pivots, split-screens, etc - then these can be supplied by using a custom presenter. For more on this, see http://slodge.blogspot.co.uk/2013/06/presenter-roundup.html
-
+MvvmCross contains default ViewPresenters for all platforms, but they're highly customizable. If you want to learn more about ViewPresenters, please read the following document [ViewPresenters](https://www.mvvmcross.com/documentation/fundamentals/view-presenters).
