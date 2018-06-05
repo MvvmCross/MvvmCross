@@ -8,7 +8,7 @@
              x:Name="ParentPage">
     <ContentPage.Content>
         <StackLayout>
-            <views:ChildContentView ViewModel="{Binding ChildViewModel1}" />
+            <views:ChildContentView ViewModel="{Binding ChildViewModel1}" IsEnabled="{Binding ViewModel.ChildViewModelEnabled, Source={x:Reference ParentPage}}"/>
             <Button Text="Change Child Text" Command="{Binding ChangeButtonCmd}" />
             <Button Text="Toggle Child Enabled" Command="{Binding ToggleChildEnabledCmd}" />
         </StackLayout>

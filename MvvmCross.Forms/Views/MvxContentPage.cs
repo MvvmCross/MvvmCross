@@ -25,7 +25,8 @@ namespace MvvmCross.Forms.Views
             }
             set
             {
-                BindingContext = new MvxBindingContext(value);
+                if (value != null && !ReferenceEquals(DataContext, value))
+                    BindingContext = new MvxBindingContext(value);
             }
         }
 
@@ -40,11 +41,8 @@ namespace MvvmCross.Forms.Views
             }
             set
             {
-                if (!ReferenceEquals(_bindingContext, value))
-                {
-                    _bindingContext = value;
-                    base.BindingContext = _bindingContext.DataContext;
-                }
+                _bindingContext = value;
+                base.BindingContext = _bindingContext.DataContext;
             }
         }
 
@@ -52,10 +50,13 @@ namespace MvvmCross.Forms.Views
 
         private static void ViewModelChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            if (bindable is IMvxElement element)
-                element.DataContext = newvalue;
-            else
-                bindable.BindingContext = newvalue;
+            if (newvalue != null)
+            {
+                if (bindable is IMvxElement element)
+                    element.DataContext = newvalue;
+                else
+                    bindable.BindingContext = newvalue;
+            }
         }
 
         public IMvxViewModel ViewModel
@@ -64,7 +65,7 @@ namespace MvvmCross.Forms.Views
             {
                 return DataContext as IMvxViewModel;
             }
-            set 
+            set
             {
                 DataContext = value;
                 SetValue(ViewModelProperty, value);
@@ -72,7 +73,7 @@ namespace MvvmCross.Forms.Views
             }
         }
 
-		protected virtual void OnViewModelSet()
+        protected virtual void OnViewModelSet()
 		{
 		}
 
