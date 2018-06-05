@@ -1,13 +1,13 @@
 ﻿using System;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Ios.Presenters.Attributes;
-using MvvmCross.Platform.Ios.Views;
+using MvvmCross.Platforms.Ios.Presenters.Attributes;
+using MvvmCross.Platforms.Ios.Views;
 using Playground.Core.ViewModels;
 
 namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
-    [MvxMasterSplitViewPresentation]
+    [MvxSplitViewPresentation(MasterDetailPosition.Master)]
     public partial class SplitMasterView : MvxViewController<SplitMasterViewModel>
     {
         public SplitMasterView(IntPtr handle) : base(handle)

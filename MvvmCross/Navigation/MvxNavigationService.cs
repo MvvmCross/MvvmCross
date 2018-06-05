@@ -15,8 +15,8 @@ using MvvmCross.Core;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Navigation.EventArguments;
+using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
-using MvvmCross.ViewModels.Hints;
 using MvvmCross.Views;
 
 namespace MvvmCross.Navigation
@@ -30,6 +30,17 @@ namespace MvvmCross.Navigation
         {
             get => _viewDispatcher ?? (IMvxViewDispatcher)MvxMainThreadDispatcher.Instance;
             set => _viewDispatcher = value;
+        }
+
+        private IMvxViewsContainer _viewsContainer;
+        protected IMvxViewsContainer ViewsContainer
+        {
+            get {
+                if (_viewsContainer == null)
+                    _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
+                return _viewsContainer;
+            }
+            set => _viewsContainer = value;
         }
 
         protected static readonly Dictionary<Regex, Type> Routes = new Dictionary<Regex, Type>();
@@ -230,9 +241,17 @@ namespace MvvmCross.Navigation
 
         public virtual Task<bool> CanNavigate(string path)
         {
-            KeyValuePair<Regex, Type> entry;
+            return Task.FromResult(TryGetRoute(path, out KeyValuePair<Regex, Type> entry));
+        }
 
-            return Task.FromResult(TryGetRoute(path, out entry));
+        public virtual Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel
+        {
+            return Task.FromResult(ViewsContainer.GetViewType(typeof(TViewModel)) != null);
+        }
+
+        public virtual Task<bool> CanNavigate(Type viewModelType)
+        {
+            return Task.FromResult(ViewsContainer.GetViewType(viewModelType) != null);
         }
 
         protected virtual async Task Navigate(MvxViewModelRequest request, IMvxViewModel viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
@@ -428,28 +447,28 @@ namespace MvvmCross.Navigation
             return await Navigate<TParameter, TResult>(request, viewModel, param, presentationBundle, cancellationToken).ConfigureAwait(false);
         }
 
-        public virtual Task<bool> ChangePresentation(MvxPresentationHint hint)
+        public virtual async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
             MvxLog.Instance.Trace("Requesting presentation change");
             var args = new ChangePresentationEventArgs(hint);
             OnBeforeChangePresentation(this, args);
 
-            var result = ViewDispatcher.ChangePresentation(hint);
+            var result = await ViewDispatcher.ChangePresentation(hint);
 
             args.Result = result;
             OnAfterChangePresentation(this, args);
 
-            return Task.FromResult(result);
+            return result;
         }
 
-        public virtual Task<bool> Close(IMvxViewModel viewModel)
+        public virtual async Task<bool> Close(IMvxViewModel viewModel)
         {
             var args = new NavigateEventArgs(viewModel);
             OnBeforeClose(this, args);
-            var close = ViewDispatcher.ChangePresentation(new MvxClosePresentationHint(viewModel));
+            var close = await ViewDispatcher.ChangePresentation(new MvxClosePresentationHint(viewModel));
             OnAfterClose(this, args);
 
-            return Task.FromResult(close);
+            return close;
         }
 
         public virtual async Task<bool> Close<TResult>(IMvxViewModelResult<TResult> viewModel, TResult result)

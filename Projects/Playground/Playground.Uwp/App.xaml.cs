@@ -1,20 +1,17 @@
-﻿using MvvmCross.Platform.Uap.Core;
-using MvvmCross.Platform.Uap.Views;
-using Windows.ApplicationModel.Activation;
-using Windows.UI.Xaml.Controls;
+﻿using MvvmCross.Platforms.Uap.Core;
+using MvvmCross.Platforms.Uap.Views;
 
 namespace Playground.Uwp
 {
-    public sealed partial class App : MvxApplication
+    public sealed partial class App
     {
         public App()
         {
             InitializeComponent();
         }
+    }
 
-        protected override MvxWindowsSetup CreateSetup(Frame rootFrame, IActivatedEventArgs activatedEventArgs, string suspension)
-        {
-            return new MvxWindowsSetup<Core.App>(rootFrame, activatedEventArgs, suspension);
-        }
+    public abstract class PlaygroundApp : MvxApplication<MvxWindowsSetup<Core.App>, Core.App>
+    {
     }
 }

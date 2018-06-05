@@ -9,10 +9,11 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core;
 using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
-using MvvmCross.Platform.Android.Binding.BindingContext;
-using MvvmCross.Platform.Android.Binding.Views;
-using MvvmCross.Platform.Android.Views;
+using MvvmCross.Platforms.Android.Binding.BindingContext;
+using MvvmCross.Platforms.Android.Binding.Views;
+using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
@@ -73,7 +74,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected override void AttachBaseContext(Context @base)
         {
-            if (this is IMvxAndroidSplashScreenActivity)
+            if (this is IMvxSetupMonitor)
             {
                 // Do not attach our inflater to splash screens.
                 base.AttachBaseContext(@base);
@@ -86,6 +87,23 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             base.OnCreate(bundle);
             ViewModel?.ViewCreated();
+
+            if(!(this is IMvxSetupMonitor))
+            {
+                RunAppStart(bundle);
+            }
+        }
+        
+        protected virtual void RunAppStart(Bundle bundle)
+        {
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            if (!startup.IsStarted)
+                startup.Start(GetAppStartHint(bundle));
+        }
+
+        protected virtual object GetAppStartHint(object hint = null)
+        {
+            return null;
         }
 
         protected override void OnDestroy()

@@ -8,11 +8,11 @@ using MvvmCross.Base;
 namespace MvvmCross.UnitTest.Mocks.Dispatchers
 {
     public class CountingMockMainThreadDispatcher
-        : MvxMainThreadDispatcher, IMvxMainThreadDispatcher
+        : MvxMainThreadAsyncDispatcher
     {
         public int Count { get; set; }
 
-        public bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             Count++;
             return true;

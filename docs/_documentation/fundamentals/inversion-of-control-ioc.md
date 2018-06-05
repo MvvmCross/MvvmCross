@@ -2,7 +2,7 @@
 layout: documentation
 title: Inversion of Control
 category: Fundamentals
-order: 4
+order: 5
 ---
 Two key ideas that are used in MvvmCross are:
 

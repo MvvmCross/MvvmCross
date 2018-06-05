@@ -169,6 +169,19 @@ namespace MvvmCross.Navigation
         Task<bool> CanNavigate(string path);
 
         /// <summary>
+        /// Verifies if the provided viewmodel is available
+        /// </summary>
+        /// <returns>True if the ViewModel is available</returns>
+        Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel;
+
+        /// <summary>
+        /// Verifies if the provided viewmodel is available
+        /// </summary>
+        /// <param name="viewModelType">ViewModel type to check</param>
+        /// <returns>True if the ViewModel is available</returns>
+        Task<bool> CanNavigate(Type viewModelType);
+
+        /// <summary>
         /// Closes the View attached to the ViewModel
         /// </summary>
         /// <param name="viewModel"></param>

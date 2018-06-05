@@ -1,10 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
-    <TargetFrameworks>MonoAndroid80</TargetFrameworks>
+    <TargetFrameworks>MonoAndroid81</TargetFrameworks>
     <AssemblyName>MvvmCross.Droid.Support.V17.Leanback</AssemblyName>
     <RootNamespace>MvvmCross.Droid.Support.V17.Leanback</RootNamespace>
-    <Description>MvvmCross packages for Android Support V17.Leanback</Description>
+    <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains Support v17 Leanback support for MvvmCross.</Description>
     <PackageId>MvvmCross.Droid.Support.V17.Leanback</PackageId>
   </PropertyGroup>
   
@@ -15,7 +16,8 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.Android.Support.V17.Leanback" Version="26.1.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.V17.Leanback" Version="27.0.2" />
+    <PackageReference Include="Xamarin.Build.Download" Version="0.4.9" />
   </ItemGroup>
   
   <ItemGroup>
@@ -23,7 +25,4 @@
     <ProjectReference Include="..\Fragment\MvvmCross.Droid.Support.Fragment.csproj" />
     <ProjectReference Include="..\V7.RecyclerView\MvvmCross.Droid.Support.V7.RecyclerView.csproj" />
   </ItemGroup>
-
-  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
-
 </Project>

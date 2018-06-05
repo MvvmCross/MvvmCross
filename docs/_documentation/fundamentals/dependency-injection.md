@@ -2,7 +2,7 @@
 layout: documentation
 title: Dependency injection
 category: Fundamentals
-order: 5
+order: 6
 ---
 ## Constructor Injection
 

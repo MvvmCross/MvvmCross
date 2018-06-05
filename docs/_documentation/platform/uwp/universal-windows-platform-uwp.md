@@ -28,7 +28,7 @@ Now we will need to add some basic code to get MvvmCross up and running.
 First inside the `MvvmCrossDocs.Core` portable project create a file named `App.cs` and enter the following:
 
 ```c#
-using MvvmCross.Platform.IoC;
+using MvvmCross.IoC;
 
 namespace MvvmCrossDocs.Core
 {

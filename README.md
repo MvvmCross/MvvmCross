@@ -200,3 +200,7 @@ MvvmCross is licensed under the [MS-PL License](http://opensource.org/licenses/m
 [so]: http://stackoverflow.com/questions/tagged/mvvmcross "MvvmCross on StackOverflow"
 [xfmvx]: http://forums.xamarin.com/search?Search=mvvmcross "MvvmCross on Xamarin Forums"
 [xf]: http://forums.xamarin.com "Xamarin Forums"
+
+### .NET Foundation
+
+This project is supported by the [.NET Foundation](https://dotnetfoundation.org).

@@ -5,19 +5,21 @@
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using MvvmCross.Platform.Android.Core;
-using MvvmCross.Platform.Android.Views;
+using MvvmCross.Core;
+using MvvmCross.Platforms.Android.Core;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     [Register("mvvmcross.droid.support.v7.appcompat." + nameof(MvxSplashScreenAppCompatActivity))]
     public abstract class MvxSplashScreenAppCompatActivity
-        : MvxAppCompatActivity, IMvxAndroidSplashScreenActivity
+        : MvxAppCompatActivity, IMvxSetupMonitor
     {
-        private const int NoContent = 0;
+        protected const int NoContent = 0;
 
         private readonly int _resourceId;
+
+        private Bundle _bundle;
 
         public new MvxNullViewModel ViewModel
         {
@@ -27,6 +29,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected MvxSplashScreenAppCompatActivity(int resourceId = NoContent)
         {
+            RegisterSetup();
             _resourceId = resourceId;
         }
 
@@ -39,8 +42,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             RequestWindowFeatures();
 
+            _bundle = bundle;
+
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.InitializeFromSplashScreen(this);
+            setup.InitializeAndMonitor(this);
 
             base.OnCreate(bundle);
 
@@ -60,14 +65,14 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             base.OnResume();
             _isResumed = true;
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.InitializeFromSplashScreen(this);
+            setup.InitializeAndMonitor(this);
         }
 
         protected override void OnPause()
         {
             _isResumed = false;
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.RemoveSplashScreen(this);
+            setup.CancelMonitor(this);
             base.OnPause();
         }
 
@@ -76,13 +81,25 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             if (!_isResumed)
                 return;
 
-            TriggerFirstNavigate();
+            RunAppStart(_bundle);
         }
 
-        protected virtual void TriggerFirstNavigate()
+        protected virtual void RegisterSetup()
         {
-            var starter = Mvx.Resolve<IMvxAppStart>();
-            starter.Start();
+        }
+    }
+
+    public abstract class MvxSplashScreenAppCompatActivity<TMvxAndroidSetup, TApplication> : MvxSplashScreenAppCompatActivity
+            where TMvxAndroidSetup : MvxAppCompatSetup<TApplication>, new()
+            where TApplication : IMvxApplication, new()
+    {
+        protected MvxSplashScreenAppCompatActivity(int resourceId = NoContent) : base(resourceId)
+        {
+        }
+
+        protected override void RegisterSetup()
+        {
+            this.RegisterSetupType<TMvxAndroidSetup>();
         }
     }
 }

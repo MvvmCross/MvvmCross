@@ -4,7 +4,7 @@
 
 using MvvmCross.Plugin.JsonLocalization;
 
-namespace MvvmCross.Plugins.JsonLocalization.UnitTest.TestClasses
+namespace MvvmCross.Plugin.JsonLocalization.UnitTest.TestClasses
 {
     internal class TestDictionaryTextProvider : MvxDictionaryTextProvider
     {

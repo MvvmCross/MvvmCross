@@ -4,7 +4,7 @@
 
 using System.Collections.Generic;
 using MvvmCross.Core.Parse.StringDictionary;
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using MvvmCross.UnitTest.Mocks.TestViewModels;
 using MvvmCross.ViewModels;
 using Xunit;

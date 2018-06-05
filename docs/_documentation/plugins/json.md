@@ -72,8 +72,8 @@ var serializer = Mvx.Resolve<IMvxJsonConverter>();
 
 var exampleObject = new ExampleObject()
 {
-    Name = "Fred bloggs
-           DateOfBirth = new DateTime(1972,7,13)
+    Name = "Fred bloggs",
+    DateOfBirth = new DateTime(1972,7,13)
 };
 
 var jsonText = serializer.SerializeObject(exampleObject);

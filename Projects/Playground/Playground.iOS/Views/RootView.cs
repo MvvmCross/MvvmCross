@@ -1,7 +1,7 @@
 ﻿using System;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platform.Ios.Presenters.Attributes;
-using MvvmCross.Platform.Ios.Views;
+using MvvmCross.Platforms.Ios.Presenters.Attributes;
+using MvvmCross.Platforms.Ios.Views;
 using Playground.Core.ViewModels;
 using UIKit;
 
@@ -29,8 +29,10 @@ namespace Playground.iOS.Views
             set.Bind(btnModal).To(vm => vm.ShowModalCommand);
             set.Bind(btnNavModal).To(vm => vm.ShowModalNavCommand);
             set.Bind(btnOverrideAttribute).To(vm => vm.ShowOverrideAttributeCommand);
+            set.Bind(btnShowCustomBinding).To(vm => vm.ShowCustomBindingCommand);
 
             set.Apply();
         }
+
     }
 }

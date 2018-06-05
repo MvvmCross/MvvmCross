@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -12,8 +13,10 @@ using MvvmCross.Forms.Presenters.Attributes;
 using MvvmCross.Forms.Views;
 using MvvmCross.Logging;
 using MvvmCross.Presenters;
+using MvvmCross.Presenters.Attributes;
+using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
-using MvvmCross.ViewModels.Hints;
+using MvvmCross.Views;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Presenters
@@ -29,18 +32,19 @@ namespace MvvmCross.Forms.Presenters
         public MvxFormsPagePresenter(IMvxFormsViewPresenter platformPresenter)
         {
             PlatformPresenter = platformPresenter;
-            FormsApplication = platformPresenter.FormsApplication;
-            ViewsContainer = platformPresenter.ViewsContainer;
-            ViewModelTypeFinder = platformPresenter.ViewModelTypeFinder;
-            AttributeTypesToActionsDictionary = platformPresenter.AttributeTypesToActionsDictionary;
         }
 
         protected IMvxFormsViewPresenter PlatformPresenter { get; }
 
-        private MvxFormsApplication _formsApplication;
-        public MvxFormsApplication FormsApplication
+        private Application _formsApplication;
+        public Application FormsApplication
         {
-            get { return _formsApplication; }
+            get
+            {
+                if (_formsApplication == null)
+                    _formsApplication = PlatformPresenter.FormsApplication;
+                return _formsApplication;
+            }
             set { _formsApplication = value; }
         }
 
@@ -57,6 +61,41 @@ namespace MvvmCross.Forms.Presenters
             {
                 _viewModelLoader = value;
             }
+        }
+
+        public override IMvxViewsContainer ViewsContainer
+        {
+            get
+            {
+                if (_viewsContainer == null)
+                    _viewsContainer = PlatformPresenter.ViewsContainer;
+                return base.ViewsContainer;
+            }
+            set => base.ViewsContainer = value;
+        }
+
+        public override IMvxViewModelTypeFinder ViewModelTypeFinder
+        {
+            get
+            {
+                if (_viewModelTypeFinder == null)
+                    _viewModelTypeFinder = PlatformPresenter.ViewModelTypeFinder;
+                return base.ViewModelTypeFinder;
+            }
+            set => base.ViewModelTypeFinder = value;
+        }
+
+        public override Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
+        {
+            get
+            {
+                if (_attributeTypesActionsDictionary == null)
+                {
+                    _attributeTypesActionsDictionary = PlatformPresenter.AttributeTypesToActionsDictionary;
+                }
+                return _attributeTypesActionsDictionary;
+            }
+            set => base.AttributeTypesToActionsDictionary = value;
         }
 
         public virtual Page CreatePage(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute)
@@ -99,6 +138,31 @@ namespace MvvmCross.Forms.Presenters
                 PlatformPresenter.ShowPlatformHost(attribute.HostViewModelType);
 
             return CreatePage(view, request, attribute);
+        }
+
+        protected virtual ContentPage CreateContentPage()
+        {
+            return new ContentPage();
+        }
+
+        protected virtual NavigationPage CreateNavigationPage(Page pageRoot = null)
+        {
+            return new NavigationPage(pageRoot);
+        }
+
+        protected virtual MasterDetailPage CreateMasterDetailPage()
+        {
+            return new MasterDetailPage();
+        }
+
+        protected virtual TabbedPage CreateTabbedPage()
+        {
+            return new TabbedPage();
+        }
+
+        protected virtual CarouselPage CreateCarouselPage()
+        {
+            return new CarouselPage();
         }
 
         public override void RegisterAttributeTypes()
@@ -171,7 +235,7 @@ namespace MvvmCross.Forms.Presenters
             }
             if (hint is MvxPopPresentationHint popHint)
             {
-                var matched = await PopModalToViewModel(navigation,popHint);
+                var matched = await PopModalToViewModel(navigation, popHint);
                 if (matched) return;
 
 
@@ -202,8 +266,17 @@ namespace MvvmCross.Forms.Presenters
                 }
                 return;
             }
-
-            PlatformPresenter.ChangePresentation(hint);
+            if (hint is MvxPopRecursivePresentationHint popRecursiveHint)
+            {
+                var levels = popRecursiveHint.LevelsDeep;
+                if (levels > navigation.NavigationStack.Count())
+                    levels = navigation.NavigationStack.Count();
+                for (int i = 0; i < levels; i++)
+                {
+                    await navigation.PopAsync(popRecursiveHint.Animated);
+                }
+                return;
+            }
 
 #if DEBUG // Only showing this when debugging MVX
             MvxFormsLog.Instance.Trace(FormsApplication.Hierarchy());
@@ -300,7 +373,7 @@ namespace MvvmCross.Forms.Presenters
                 if (carouselHost == null)
                 {
                     MvxFormsLog.Instance.Trace($"Current root is not a CarouselPage show your own first to use custom Host. Assuming we need to create one.");
-                    carouselHost = new CarouselPage();
+                    carouselHost = CreateCarouselPage();
                     PushOrReplacePage(FormsApplication.MainPage, carouselHost, attribute);
                 }
                 carouselHost.Children.Add(page as ContentPage);
@@ -385,9 +458,9 @@ namespace MvvmCross.Forms.Presenters
                 if (page is MasterDetailPage masterDetailRoot)
                 {
                     if (masterDetailRoot.Master == null)
-                        masterDetailRoot.Master = new ContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) };
+                        masterDetailRoot.Master = CreateContentPage().Build(cp => cp.Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage));
                     if (masterDetailRoot.Detail == null)
-                        masterDetailRoot.Detail = new ContentPage() { Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) };
+                        masterDetailRoot.Detail = CreateContentPage().Build(cp => cp.Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage));
 
                     PushOrReplacePage(FormsApplication.MainPage, page, attribute);
                 }
@@ -400,15 +473,15 @@ namespace MvvmCross.Forms.Presenters
                 if (masterDetailHost == null)
                 {
                     //Assume we have to create the host
-                    masterDetailHost = new MasterDetailPage();
+                    masterDetailHost = CreateMasterDetailPage();
 
                     if (!string.IsNullOrWhiteSpace(attribute.Icon))
                     {
                         masterDetailHost.Icon = attribute.Icon;
                     }
 
-                    masterDetailHost.Master = new ContentPage() { Title = !string.IsNullOrWhiteSpace(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage) };
-                    masterDetailHost.Detail = new ContentPage();
+                    masterDetailHost.Master = CreateContentPage().Build(cp => cp.Title = !string.IsNullOrWhiteSpace(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage));
+                    masterDetailHost.Detail = CreateContentPage();
 
                     var masterDetailRootAttribute = new MvxMasterDetailPagePresentationAttribute { Position = MasterDetailPosition.Root, WrapInNavigationPage = attribute.WrapInNavigationPage, NoHistory = attribute.NoHistory };
 
@@ -428,7 +501,7 @@ namespace MvvmCross.Forms.Presenters
 
         public virtual bool CloseMasterDetailPage(IMvxViewModel viewModel, MvxMasterDetailPagePresentationAttribute attribute)
         {
-            var masterDetailHost = GetPageOfType<MvxMasterDetailPage>();
+            var masterDetailHost = GetPageOfType<MasterDetailPage>();
             switch (attribute.Position)
             {
                 case MasterDetailPosition.Root:
@@ -449,7 +522,7 @@ namespace MvvmCross.Forms.Presenters
             var page = CloseAndCreatePage(view, request, attribute, closeModal: false);
 
             if (FormsApplication.MainPage == null)
-                FormsApplication.MainPage = new NavigationPage(new ContentPage() { Title = nameof(ContentPage) });
+                FormsApplication.MainPage = CreateNavigationPage(CreateContentPage().Build(cp => cp.Title = nameof(ContentPage)));
 
             if (attribute.WrapInNavigationPage)
             {
@@ -463,7 +536,7 @@ namespace MvvmCross.Forms.Presenters
                 {
                     // Either last isn't a nav page, or there is no last page
                     // So, wrap the current page in a nav page and push onto stack
-                    FormsApplication.MainPage.Navigation.PushModalAsync(new NavigationPage(page));
+                    FormsApplication.MainPage.Navigation.PushModalAsync(CreateNavigationPage(page));
                 }
             }
             else
@@ -528,7 +601,7 @@ namespace MvvmCross.Forms.Presenters
                 if (tabHost == null)
                 {
                     MvxFormsLog.Instance.Trace($"Current root is not a TabbedPage show your own first to use custom Host. Assuming we need to create one.");
-                    tabHost = new TabbedPage();
+                    tabHost = CreateTabbedPage();
                     PushOrReplacePage(FormsApplication.MainPage, tabHost, attribute);
                 }
 
@@ -609,7 +682,7 @@ namespace MvvmCross.Forms.Presenters
                 // in a navigation wrapper.
                 if (navigationRootPage == null || attribute.NoHistory)
                 {
-                    var navpage = new NavigationPage(page);
+                    var navpage = CreateNavigationPage(page);
                     ReplacePageRoot(rootPage, navpage, attribute);
                 }
                 else

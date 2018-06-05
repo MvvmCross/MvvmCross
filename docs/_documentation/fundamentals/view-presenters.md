@@ -2,7 +2,7 @@
 layout: documentation
 title: View Presenters
 category: Fundamentals
-order: 3
+order: 4
 ---
 
 View Presenters are a key object in the MvvmCross architecture. It is a singleton that acts as a glue between your Views and your ViewModels. As the name implies, a view presenter takes a ViewModel presentation request (that is built once you call `ShowViewModel<MyViewModel>()`) and decides how it will be presented on the UI.
@@ -97,11 +97,11 @@ To add your own `MvxPresentationHint` you should follow these steps:
     }
     ```
 
-2. Override the method `CreatePresenter()` in the Setup class and register your custom hint in it. For example, on iOS:
+2. Override the method `CreateViewPresenter()` in the Setup class and register your custom hint in it. For example, on iOS:
     ```c#
-    protected override IMvxIosViewPresenter CreatePresenter()
+    protected override IMvxIosViewPresenter CreateViewPresenter()
     {
-        var presenter = base.CreatePresenter();
+        var presenter = base.CreateViewPresenter();
         presenter.AddPresentationHintHandler<MyCustomHint>(hint => HandleMyCustomHint(hint));
         return presenter;
     }
@@ -121,13 +121,13 @@ To add your own `MvxPresentationHint` you should follow these steps:
     ```
     **Now repeat steps 2 and 3 for each platform (if a platform should just ignore the MvxPresentationHint, it's not necessary to do anything).**
 
-4. Finally, make a call to the ChangePresentation method from a MvxViewModel or a MvxNavigatingObject when necessary:
+4. Finally, make a call to the ChangePresentation method from the IMvxNavigationService when necessary:
     ```c#
-    private void AMethod()
+    private async Task AMethodAsync()
     {
         // your code
 
-        ChangePresentation(new MyCustomHint("example"));
+        bool handled = await mvxNavigationService.ChangePresentation(new MyCustomHint("example"));
 
         // your code
     }

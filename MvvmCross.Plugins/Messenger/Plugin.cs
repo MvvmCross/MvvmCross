@@ -4,6 +4,7 @@
 
 namespace MvvmCross.Plugin.Messenger
 {
+    [MvxPlugin]
     [Preserve(AllMembers = true)]
     public class Plugin : IMvxPlugin
     {

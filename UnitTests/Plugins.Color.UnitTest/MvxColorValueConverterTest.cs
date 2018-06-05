@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Test;
+using MvvmCross.Tests;
 using MvvmCross.UI;
 using Xunit;
 
-namespace MvvmCross.Plugins.Color.UnitTest
+namespace MvvmCross.Plugin.Color.UnitTest
 {
     public class MvxColorValueConverterTest : IClassFixture<MvxTestFixture>
     {

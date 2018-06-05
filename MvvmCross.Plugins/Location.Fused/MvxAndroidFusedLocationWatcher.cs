@@ -7,7 +7,7 @@ using System.Threading;
 using Android.Content;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.Platform.Android;
+using MvvmCross.Platforms.Android;
 
 namespace MvvmCross.Plugin.Location.Fused
 {
