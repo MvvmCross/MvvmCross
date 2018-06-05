@@ -8,6 +8,7 @@
       <StackLayout>
           <Label Text="Static Text" />
           <Label Text="{Binding Test}" />
-      </StackLayout>
+          <Button Text="ChildViewEnabledOrDisabled" />
+        </StackLayout>
   </ContentView.Content>
 </views:MvxContentView>

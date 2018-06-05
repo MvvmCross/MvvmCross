@@ -10,7 +10,7 @@ namespace Playground.Core.ViewModels
         public string Test
         {
             get { return _test; }
-            private set { SetProperty(ref _test, value); }
+            set { SetProperty(ref _test, value); }
         }
 
         public override async Task Initialize()
