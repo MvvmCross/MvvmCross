@@ -41,7 +41,7 @@ namespace MvvmCross.Forms.Views
 
         public static readonly BindableProperty ViewModelProperty = BindableProperty.Create(nameof(ViewModel), typeof(IMvxViewModel), typeof(IMvxElement), default(MvxViewModel), BindingMode.Default, null, ViewModelChanged, null, null);
 
-        private static void ViewModelChanged(BindableObject bindable, object oldvalue, object newvalue)
+        protected static void ViewModelChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
             if (newvalue != null)
             {
@@ -75,6 +75,8 @@ namespace MvvmCross.Forms.Views
         : MvxBoxView
     , IMvxElement<TViewModel> where TViewModel : class, IMvxViewModel
     {
+        public new static readonly BindableProperty ViewModelProperty = BindableProperty.Create(nameof(ViewModel), typeof(TViewModel), typeof(IMvxElement<TViewModel>), default(TViewModel), BindingMode.Default, null, ViewModelChanged, null, null);
+
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
