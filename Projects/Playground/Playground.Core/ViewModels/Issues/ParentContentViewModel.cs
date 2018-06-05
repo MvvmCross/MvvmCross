@@ -29,7 +29,8 @@ namespace Playground.Core.ViewModels
 
         public override void Prepare()
         {
-            ChildViewModel1 = Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(MvxViewModelRequest<ChildViewModel>.GetDefaultRequest(), null) as ChildContentViewModel;
+            var vm = Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(MvxViewModelRequest<ChildContentViewModel>.GetDefaultRequest(), null) as ChildContentViewModel;
+            ChildViewModel1 = vm;
         }
     }
 }

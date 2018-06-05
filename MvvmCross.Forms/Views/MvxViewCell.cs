@@ -35,13 +35,13 @@ namespace MvvmCross.Forms.Views
             get
             {
                 if (_bindingContext == null)
-                    BindingContext = new MvxBindingContext(base.BindingContext);
+                    BindingContext = new MvxBindingContext();
                 return _bindingContext;
             }
             set
             {
                 _bindingContext = value;
-                base.BindingContext = _bindingContext.DataContext;
+                base.BindingContext = _bindingContext.DataContext ?? _bindingContext;
             }
         }
 
