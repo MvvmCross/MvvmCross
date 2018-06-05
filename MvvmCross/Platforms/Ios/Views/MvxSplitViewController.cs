@@ -64,7 +64,7 @@ namespace MvvmCross.Platforms.Ios.Views
 
             var toClose = ViewControllers.ToList()
                                          .Select(v => v.GetIMvxIosView())
-                                         .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
+                                         .FirstOrDefault(mvxView => mvxView?.ViewModel == viewModel);
             if (toClose != null)
             {
                 var newStack = ViewControllers.Where(v => v.GetIMvxIosView() != toClose);
