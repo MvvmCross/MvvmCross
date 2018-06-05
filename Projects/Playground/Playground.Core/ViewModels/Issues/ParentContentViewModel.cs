@@ -1,4 +1,5 @@
-﻿using MvvmCross.Commands;
+﻿using MvvmCross;
+using MvvmCross.Commands;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
@@ -28,7 +29,7 @@ namespace Playground.Core.ViewModels
 
         public override void Prepare()
         {
-            ChildViewModel1 = new ChildContentViewModel();
+            ChildViewModel1 = Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(MvxViewModelRequest<ChildViewModel>.GetDefaultRequest(), null) as ChildContentViewModel;
         }
     }
 }

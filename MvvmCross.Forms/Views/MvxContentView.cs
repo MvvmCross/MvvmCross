@@ -47,7 +47,7 @@ namespace MvvmCross.Forms.Views
 
         public static readonly BindableProperty ViewModelProperty = BindableProperty.Create(nameof(ViewModel), typeof(IMvxViewModel), typeof(IMvxElement), default(MvxViewModel), BindingMode.Default, null, ViewModelChanged, null, null);
 
-        protected static void ViewModelChanged(BindableObject bindable, object oldvalue, object newvalue)
+        internal static void ViewModelChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
             if (newvalue != null)
             {
