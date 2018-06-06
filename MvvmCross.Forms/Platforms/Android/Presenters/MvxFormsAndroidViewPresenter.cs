@@ -19,10 +19,6 @@ namespace MvvmCross.Forms.Platforms.Android.Presenters
     public class MvxFormsAndroidViewPresenter
         : MvxAppCompatViewPresenter, IMvxFormsViewPresenter
     {
-        public MvxFormsAndroidViewPresenter(IEnumerable<Assembly> androidViewAssemblies, Application formsApplication) : base(androidViewAssemblies)
-        {
-            FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
-        }
         public Application FormsApplication { get; set; }
 
         private IMvxFormsPagePresenter _formsPagePresenter;

@@ -21,6 +21,7 @@ using MvvmCross.Forms.Platforms.Android.Presenters;
 using Xamarin.Forms;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Core;
+using MvvmCross.Presenters;
 
 namespace MvvmCross.Forms.Platforms.Android.Core
 {
