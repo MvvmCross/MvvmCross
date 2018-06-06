@@ -20,7 +20,7 @@ git clone https://github.com/{YourFork}/MvvmCross.git
 
 If you are using SourceTree or another kind of visual git application, enter the url to your fork in the add new repository field.
 
-After you are done pull the develop branch, and open `MvvmCross_All.sln` in Visual Studio to get started.
+After you are done pull the develop branch, and open `MvvmCross.sln` in Visual Studio to get started.
 
 ## Working on the website
 
