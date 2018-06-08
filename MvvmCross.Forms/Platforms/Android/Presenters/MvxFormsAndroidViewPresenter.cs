@@ -50,7 +50,7 @@ namespace MvvmCross.Forms.Platforms.Android.Presenters
 
         public override async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            await FormsPagePresenter.ChangePresentation(hint);
+            if (!await FormsPagePresenter.ChangePresentation(hint)) return false;
             return await base.ChangePresentation(hint);
         }
 
