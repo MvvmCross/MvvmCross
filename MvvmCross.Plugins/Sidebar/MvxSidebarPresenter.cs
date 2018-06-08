@@ -19,11 +19,6 @@ namespace MvvmCross.Plugin.Sidebar
     {
         protected virtual MvxSidebarViewController SideBarViewController { get; set; }
 
-        public MvxSidebarPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
-                    : base(applicationDelegate, window)
-        {
-        }
-
         public override void RegisterAttributeTypes()
         {
             base.RegisterAttributeTypes();
