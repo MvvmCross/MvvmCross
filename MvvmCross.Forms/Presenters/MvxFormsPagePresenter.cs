@@ -224,7 +224,7 @@ namespace MvvmCross.Forms.Presenters
                 if (hint is MvxPopToRootPresentationHint popToRootHint)
                 {
                     // Make sure all modals are closed
-                    CloseAllModals(popToRootHint.Animated);
+                    await CloseAllModals(popToRootHint.Animated);
 
                     // Double check we have a navigation page, otherwise
                     // we can just return as we must be already at the root page
