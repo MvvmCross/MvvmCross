@@ -72,11 +72,7 @@ namespace Playground.Core.ViewModels
             get => _bindableText;
             set
             {
-                if (BindableText != value)
-                {
-                    _bindableText = value;
-                    RaisePropertyChanged();
-                }
+                SetProperty(ref _bindableText, value);
             }
         }
 

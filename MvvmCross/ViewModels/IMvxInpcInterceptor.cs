@@ -9,5 +9,6 @@ namespace MvvmCross.ViewModels
     public interface IMvxInpcInterceptor
     {
         MvxInpcInterceptionResult Intercept(IMvxNotifyPropertyChanged sender, PropertyChangedEventArgs args);
+        MvxInpcInterceptionResult Intercept(IMvxNotifyPropertyChanged sender, PropertyChangingEventArgs args);
     }
 }

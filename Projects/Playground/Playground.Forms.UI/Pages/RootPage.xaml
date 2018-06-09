@@ -10,6 +10,7 @@
         <ScrollView>
             <StackLayout Margin="10">
                 <Image Source="MvvmCross" HorizontalOptions="Center" />
+                <Label Text="{Binding WelcomeText}"/>
                 <Label Text="Forms views" TextColor="{StaticResource Red}" />
                 <Button Text="Show Child" mvx:Bi.nd="Command ShowChildCommand"/>
                 <Button Text="Show Modal" mvx:Bi.nd="Command ShowModalCommand"/>
