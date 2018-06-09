@@ -286,7 +286,7 @@ namespace MvvmCross.Core
         public virtual IEnumerable<Assembly> GetPluginAssemblies()
         {
             var mvvmCrossAssemblyName = typeof(MvxPluginAttribute).Assembly.GetName().Name;
-            var allAssemblies = LoadAllReferencedAssemblies(Assembly.GetExecutingAssembly());
+            var allAssemblies = LoadAllReferencedAssemblies(Assembly.GetEntryAssembly());
             var pluginAssemblies =
                 allAssemblies
                     .AsParallel()
