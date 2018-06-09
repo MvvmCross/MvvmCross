@@ -21,6 +21,8 @@ namespace Playground.Core.ViewModels
 
         private int _counter = 2;
 
+        private string _welcomeText = "Default welcome";
+
         public RootViewModel(IMvxViewModelLoader mvxViewModelLoader)
         {
             _mvxViewModelLoader = mvxViewModelLoader;
@@ -120,6 +122,17 @@ namespace Playground.Core.ViewModels
 
         public IMvxAsyncCommand ShowSharedElementsCommand { get; }
 
+        public string WelcomeText
+        {
+            get => _welcomeText;
+            set
+            {
+                ShouldLogInpc(true);
+                SetProperty(ref _welcomeText, value);
+                ShouldLogInpc(false);
+            }
+        }
+
         public override async Task Initialize()
         {
             Log.Warn(() => "Testing log");
@@ -143,6 +156,8 @@ namespace Playground.Core.ViewModels
                 async () =>
                 {
                     await Task.Delay(300);
+
+                    WelcomeText = "Welcome to MvvmCross!";
 
                     throw new Exception("Boom!");
                 }, exception => { });
