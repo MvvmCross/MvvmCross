@@ -132,7 +132,7 @@ Task("UnitTest")
         try 
         {
             DotNetCoreTool(project,
-                "xunit",  "-fxversion 2.0.0 --no-build -parallel none -configuration " + 
+                "xunit",  "-fxversion 2.1.0 --no-build -parallel none -configuration " + 
                 configuration + " -xml \"" + testXml.FullPath + "\"");
         }
         catch
