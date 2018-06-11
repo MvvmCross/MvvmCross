@@ -1,8 +1,7 @@
 #tool nuget:?package=GitVersion.CommandLine
 #tool nuget:?package=vswhere
-#addin nuget:?package=Cake.Figlet
-#addin nuget:?package=Cake.Incubator&version=1.7.1
-#addin nuget:?package=Cake.Git&version=0.16.1
+#addin nuget:?package=Cake.Figlet&version=1.1.0
+#addin nuget:?package=Cake.Git&version=0.17.0
 #addin nuget:?package=Polly
 
 using Polly;
