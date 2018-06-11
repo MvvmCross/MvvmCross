@@ -5,39 +5,41 @@
         - /release\/.*/
   version: 1.0.{build}
   image: Visual Studio 2017
-  install:
-  - appveyor-retry powershell .\install-android-sdk.ps1
   before_build:
   - cmd: dotnet --info
+  - cmd: dotnet tool install --tool-path . SignClient
   environment:
     NUGET_SOURCE: https://www.nuget.org/api/v2/package
     NUGET_APIKEY:
-      secure: odCUzBq+YWTrwvRhhuQZP1uldezh8PJRn79miIgZnZrDbruYkP9aoJAlTcat5AGh
+      secure: comaeGesY3d2OjzhTCIVxwQsjW31fqrWVgMBu0+WHs8JlqnVdujThv6ncTGgZmVQ
+    SIGNING_USER:
+      secure: by3V38s+rierF9BmeYoxcpNY5Z8CoxTi0FpTU357vN+qmeH9IHKpxYZK8MDIUG9W
+    SIGNING_SECRET:
+      secure: l9ST2SDzpFtdq9H4sFHwWtWqwzYRffyHmYyUNI1VHlU=
   build_script:
   - ps: .\build.ps1
   test: off
   cache:
   - '%USERPROFILE%\.nuget\packages -> **\project.json'  # project.json cache
-  on_failure:
-  - ps: Get-ChildItem *.binlog -recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 -
   branches:
       only:
         - develop
   version: 1.0.{build}
   image: Visual Studio 2017
-  install:
-  - appveyor-retry powershell .\install-android-sdk.ps1
   before_build:
   - cmd: dotnet --info
+  - cmd: dotnet tool install --tool-path . SignClient
   environment:
     NUGET_SOURCE: https://www.myget.org/F/mvvmcross/api/v2/package
     NUGET_APIKEY:
-      secure: m3uewWCh6Y5jqTZIfwMDfs8GWdbwTZjfiEl13AWY7T3u3bPspGA/lgwe8jdxjBm9
+      secure: NM0W8q3QK30yBNVmTEPvc1QD7tcCqjueGGHM/3ZxpAwYC6+BGtkTZ4TJdYgdZXyR
+    SIGNING_USER:
+      secure: by3V38s+rierF9BmeYoxcpNY5Z8CoxTi0FpTU357vN+qmeH9IHKpxYZK8MDIUG9W
+    SIGNING_SECRET:
+      secure: l9ST2SDzpFtdq9H4sFHwWtWqwzYRffyHmYyUNI1VHlU=
   build_script:
   - ps: .\build.ps1
   test: off
   cache:
   - '%USERPROFILE%\.nuget\packages -> **\project.json'  # project.json cache
-  on_failure:
-  - ps: Get-ChildItem *.binlog -recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }

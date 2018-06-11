@@ -1,15 +1,17 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Collections.Generic;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
+using System.Linq;
 using MvvmCross.Platforms.Uap.Views.Suspension;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace MvvmCross.Platforms.Uap.Views
 {
@@ -37,7 +39,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         private void MvxWindowsPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            ViewModel?.ViewDisappeared();
+            ViewModel?.ViewDestroy();
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -66,14 +68,21 @@ namespace MvvmCross.Platforms.Uap.Views
             }
         }
 
-        public void ClearBackStack()
+        public virtual void ClearBackStack()
         {
-            throw new NotImplementedException();
-            /*
-            // note - we do *not* use CanGoBack here - as that seems to always returns true!
-            while (NavigationService.BackStack.Any())
-                NavigationService.RemoveBackEntry();
-         */
+            var backStack = base.Frame?.BackStack;
+
+            while (backStack != null && backStack.Any())
+            {
+                backStack.RemoveAt(0);
+            }
+
+            UpdateBackButtonVisibility();
+        }
+        
+        protected virtual void UpdateBackButtonVisibility()
+        {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
         private string _reqData = string.Empty;
@@ -95,6 +104,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            ViewModel?.ViewDisappeared();
             base.OnNavigatedFrom(e);
             var bundle = this.CreateSaveStateBundle();
             SaveStateBundle(e, bundle);

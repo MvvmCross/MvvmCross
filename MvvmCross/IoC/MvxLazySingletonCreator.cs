@@ -22,7 +22,7 @@ namespace MvvmCross.IoC
 
                 lock (_lockObject)
                 {
-                    _instance = _instance ?? Mvx.IocConstruct(_type);
+                    _instance = _instance ?? Mvx.IoCConstruct(_type);
                     return _instance;
                 }
             }

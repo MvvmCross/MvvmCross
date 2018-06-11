@@ -349,13 +349,17 @@ namespace MvvmCross.IoC
         public void RegisterSingleton<TInterface>(Func<TInterface> theConstructor)
             where TInterface : class
         {
-#warning when the MonoTouch/Droid code fully supports CoVariance (Contra?) then we can change this)
-            RegisterSingleton(typeof(TInterface), () => (object)theConstructor());
+            RegisterSingleton(typeof(TInterface), theConstructor);
         }
 
         public void RegisterSingleton(Type interfaceType, Func<object> theConstructor)
         {
             InternalSetResolver(interfaceType, new ConstructingSingletonResolver(theConstructor));
+        }
+
+        public object IoCConstruct(Type type)
+        {
+            return IoCConstruct(type, default(IDictionary<string, object>));
         }
 
         public T IoCConstruct<T>()
@@ -364,7 +368,41 @@ namespace MvvmCross.IoC
             return (T)IoCConstruct(typeof(T));
         }
 
-        public virtual object IoCConstruct(Type type)
+        public virtual object IoCConstruct(Type type, object arguments)
+        {
+            return IoCConstruct(type, arguments.ToPropertyDictionary());
+        }
+
+        public virtual T IoCConstruct<T>(IDictionary<string, object> arguments)
+            where T : class
+        {
+            return (T)IoCConstruct(typeof(T), arguments);
+        }
+
+        public virtual T IoCConstruct<T>(object arguments)
+            where T : class
+        {
+            return (T)IoCConstruct(typeof(T), arguments.ToPropertyDictionary());
+        }
+
+        public virtual T IoCConstruct<T>(params object[] arguments) where T : class
+        {
+            return (T)IoCConstruct(typeof(T), arguments);
+        }
+
+        public virtual object IoCConstruct(Type type, params object[] arguments)
+        {
+            var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
+            var argumentTypes = arguments.Select(x => x.GetType());
+            var selectedConstructor = constructors.FirstOrDefault(x => x.GetParameters().Select(q => q.ParameterType).SequenceEqual(argumentTypes));
+
+            if (selectedConstructor == null)
+                throw new MvxIoCResolveException($"Failed to find constructor for type { type.FullName } with arguments: { argumentTypes.Select(x => x.Name + ", ") }");
+
+            return IoCConstruct(type, selectedConstructor, arguments);
+        }
+
+        public virtual object IoCConstruct(Type type, IDictionary<string, object> arguments)
         {
             var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
             var firstConstructor = constructors.FirstOrDefault();
@@ -372,11 +410,16 @@ namespace MvvmCross.IoC
             if (firstConstructor == null)
                 throw new MvxIoCResolveException("Failed to find constructor for type {0}", type.FullName);
 
-            var parameters = GetIoCParameterValues(type, firstConstructor);
+            var parameters = GetIoCParameterValues(type, firstConstructor, arguments);
+            return IoCConstruct(type, firstConstructor, parameters.ToArray());
+        }
+
+        protected virtual object IoCConstruct(Type type, ConstructorInfo constructor, object[] arguments)
+        {
             object toReturn;
             try
             {
-                toReturn = firstConstructor.Invoke(parameters.ToArray());
+                toReturn = constructor.Invoke(arguments);
             }
             catch (TargetInvocationException invocation)
             {
@@ -584,13 +627,17 @@ namespace MvvmCross.IoC
             _propertyInjector?.Inject(toReturn, _options.PropertyInjectorOptions);
         }
 
-        protected virtual List<object> GetIoCParameterValues(Type type, ConstructorInfo firstConstructor)
+        protected virtual List<object> GetIoCParameterValues(Type type, ConstructorInfo firstConstructor, IDictionary<string, object> arguments)
         {
             var parameters = new List<object>();
             foreach (var parameterInfo in firstConstructor.GetParameters())
             {
                 object parameterValue;
-                if (!TryResolve(parameterInfo.ParameterType, out parameterValue))
+                if (arguments != null && arguments.ContainsKey(parameterInfo.Name))
+                {
+                    parameterValue = arguments[parameterInfo.Name];
+                }
+                else if (!TryResolve(parameterInfo.ParameterType, out parameterValue))
                 {
                     if (parameterInfo.IsOptional)
                     {
@@ -599,7 +646,7 @@ namespace MvvmCross.IoC
                     else
                     {
                         throw new MvxIoCResolveException(
-                            "Failed to resolve parameter for parameter {0} of type {1} when creating {2}",
+                            "Failed to resolve parameter for parameter {0} of type {1} when creating {2}. You may pass it as an argument",
                             parameterInfo.Name,
                             parameterInfo.ParameterType.Name,
                             type.FullName);

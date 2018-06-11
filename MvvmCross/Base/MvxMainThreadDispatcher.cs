@@ -37,5 +37,7 @@ namespace MvvmCross.Base
         }
 
         public abstract bool RequestMainThreadAction(Action action, bool maskExceptions = true);
+
+        public abstract bool IsOnMainThread { get; }
     }
 }

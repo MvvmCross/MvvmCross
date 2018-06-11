@@ -91,7 +91,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
     public abstract class MvxSplashScreenAppCompatActivity<TMvxAndroidSetup, TApplication> : MvxSplashScreenAppCompatActivity
             where TMvxAndroidSetup : MvxAppCompatSetup<TApplication>, new()
-            where TApplication : IMvxApplication, new()
+            where TApplication : class, IMvxApplication, new()
     {
         protected MvxSplashScreenAppCompatActivity(int resourceId = NoContent) : base(resourceId)
         {

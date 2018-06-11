@@ -15,9 +15,9 @@ namespace MvvmCross.UnitTest.ViewModels
     [Collection("MvxTest")]
     public class MvxBundleTest
     {
-        private readonly MvxTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
-        public MvxBundleTest(MvxTestFixture fixture)
+        public MvxBundleTest(NavigationTestFixture fixture)
         {
             _fixture = fixture;
         }

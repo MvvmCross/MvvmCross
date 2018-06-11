@@ -1,15 +1,24 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 
 namespace MvvmCross.Platforms.Uap.Views.Suspension
 {
     public interface IMvxSuspensionManager
     {
+        Dictionary<string, object> SessionState { get; }
+
+        List<Type> KnownTypes { get; }
+
+        Task SaveAsync();
+
+        Task RestoreAsync();
+
         /// <summary>
         /// Registers a <see cref="Frame"/> instance to allow its navigation history to be saved to
         /// and restored from <see cref="MvxSuspensionManager.SessionState"/>.  Frames should be registered once
@@ -25,6 +34,15 @@ namespace MvvmCross.Platforms.Uap.Views.Suspension
         void RegisterFrame(IMvxWindowsFrame frame, string sessionStateKey);
 
         /// <summary>
+        /// Disassociates a <see cref="Frame"/> previously registered by <see cref="RegisterFrame"/>
+        /// from <see cref="SessionState"/>.  Any navigation state previously captured will be
+        /// removed.
+        /// </summary>
+        /// <param name="frame">An instance whose navigation history should no longer be
+        /// managed.</param>
+        void UnregisterFrame(IMvxWindowsFrame frame);
+
+        /// <summary>
         /// Provides storage for session state associated with the specified <see cref="Frame"/>.
         /// Frames that have been previously registered with <see cref="MvxSuspensionManager.RegisterFrame"/> have
         /// their session state saved and restored automatically as a part of the global
@@ -38,7 +56,5 @@ namespace MvvmCross.Platforms.Uap.Views.Suspension
         /// <returns>A collection of state subject to the same serialization mechanism as
         /// <see cref="MvxSuspensionManager.SessionState"/>.</returns>
         Dictionary<string, object> SessionStateForFrame(IMvxWindowsFrame frame);
-
-        List<Type> KnownTypes { get; }
     }
 }

@@ -17,11 +17,12 @@ This package contains Support v7 Design support for MvvmCross.</Description>
   
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Build.Download" Version="0.4.9" />
   </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\Fragment\MvvmCross.Droid.Support.Fragment.csproj" />
   </ItemGroup>
+
+  <Import Project="..\..\XamarinBuild.targets" />
 </Project>

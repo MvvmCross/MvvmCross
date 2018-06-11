@@ -122,7 +122,7 @@ namespace MvvmCross.Platforms.Uap.Views
         {
             var deferral = e.SuspendingOperation.GetDeferral();
 
-            var suspension = Mvx.GetSingleton<IMvxSuspensionManager>() as MvxSuspensionManager;
+            var suspension = Mvx.GetSingleton<IMvxSuspensionManager>();
             await Suspend(suspension);
             await suspension.SaveAsync();
             deferral.Complete();
@@ -135,7 +135,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         private async void OnResuming(object sender, object e)
         {
-            var suspension = Mvx.GetSingleton<IMvxSuspensionManager>() as MvxSuspensionManager;
+            var suspension = Mvx.GetSingleton<IMvxSuspensionManager>();
             await Resume(suspension);
             await suspension.RestoreAsync();
         }
@@ -152,7 +152,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
     public class MvxApplication<TMvxUapSetup, TApplication> : MvxApplication
        where TMvxUapSetup : MvxWindowsSetup<TApplication>, new()
-       where TApplication : IMvxApplication, new()
+       where TApplication : class, IMvxApplication, new()
     {
         protected override void RegisterSetup()
         {

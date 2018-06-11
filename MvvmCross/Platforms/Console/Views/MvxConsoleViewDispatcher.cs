@@ -14,6 +14,8 @@ namespace MvvmCross.Platforms.Console.Views
         : MvxMainThreadAsyncDispatcher
         , IMvxViewDispatcher
     {
+        public override bool IsOnMainThread => throw new NotImplementedException();
+
         public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             action();

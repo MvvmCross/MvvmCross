@@ -24,7 +24,7 @@ namespace MvvmCross.Platforms.Tvos.Views
 
         public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
-            if (_uiSynchronizationContext == SynchronizationContext.Current)
+            if (IsOnMainThread)
                 action();
             else
                 UIApplication.SharedApplication.BeginInvokeOnMainThread(() =>
@@ -33,5 +33,7 @@ namespace MvvmCross.Platforms.Tvos.Views
             });
             return true;
         }
+
+        public override bool IsOnMainThread => _uiSynchronizationContext == SynchronizationContext.Current;
     }
 }

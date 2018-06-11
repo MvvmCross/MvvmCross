@@ -1,15 +1,31 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using MvvmCross.Exceptions;
+using MvvmCross.Logging;
+using MvvmCross.Navigation;
 
 namespace MvvmCross.ViewModels
 {
     public class MvxDefaultViewModelLocator
         : IMvxViewModelLocator
     {
+        private IMvxNavigationService _navigationService;
+        protected IMvxNavigationService NavigationService => _navigationService ?? (_navigationService = Mvx.Resolve<IMvxNavigationService>());
+
+        private IMvxLogProvider _logProvider;
+        protected IMvxLogProvider LogProvider => _logProvider ?? (_logProvider = Mvx.Resolve<IMvxLogProvider>());
+
+        public MvxDefaultViewModelLocator() : this(null) { }
+
+        public MvxDefaultViewModelLocator(IMvxNavigationService navigationService)
+        {
+            if (navigationService != null)
+                _navigationService = navigationService;
+        }
+
         public virtual IMvxViewModel Reload(IMvxViewModel viewModel,
                                             IMvxBundle parameterValues,
                                             IMvxBundle savedState)
@@ -36,12 +52,14 @@ namespace MvvmCross.ViewModels
             IMvxViewModel viewModel;
             try
             {
-                viewModel = (IMvxViewModel)Mvx.IocConstruct(viewModelType);
+                viewModel = (IMvxViewModel)Mvx.IoCConstruct(viewModelType);
             }
             catch(Exception exception)
             {
                 throw exception.MvxWrap("Problem creating viewModel of type {0}", viewModelType.Name);
             }
+
+            FinishViewModelConstruction(viewModel);
 
             RunViewModelLifecycle(viewModel, parameterValues, savedState);
 
@@ -56,12 +74,14 @@ namespace MvvmCross.ViewModels
             IMvxViewModel<TParameter> viewModel;
             try
             {
-                viewModel = (IMvxViewModel<TParameter>)Mvx.IocConstruct(viewModelType);
+                viewModel = (IMvxViewModel<TParameter>)Mvx.IoCConstruct(viewModelType);
             }
             catch(Exception exception)
             {
                 throw exception.MvxWrap("Problem creating viewModel of type {0}", viewModelType.Name);
             }
+
+            FinishViewModelConstruction(viewModel);
 
             RunViewModelLifecycle(viewModel, param, parameterValues, savedState);
 
@@ -76,6 +96,15 @@ namespace MvvmCross.ViewModels
         protected virtual void CallReloadStateMethods(IMvxViewModel viewModel, IMvxBundle savedState)
         {
             viewModel.CallBundleMethods("ReloadState", savedState);
+        }
+
+        protected virtual void FinishViewModelConstruction(IMvxViewModel viewModel)
+        {
+            if (viewModel is IMvxNavigationViewModel navViewModel)
+                navViewModel.NavigationService = NavigationService;
+
+            if (viewModel is IMvxLogViewModel logViewModel)
+                logViewModel.LogProvider = LogProvider;
         }
 
         protected void RunViewModelLifecycle(IMvxViewModel viewModel, IMvxBundle parameterValues, IMvxBundle savedState)

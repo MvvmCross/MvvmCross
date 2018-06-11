@@ -8,6 +8,7 @@
 This package contains the 'MvvmCross.Platforms.Wpf' libraries for MvvmCross</Description>
     <PackageId>MvvmCross.Platforms.Wpf</PackageId>
     <EnableDefaultItems>false</EnableDefaultItems>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
   </PropertyGroup>
 
   <ItemGroup>

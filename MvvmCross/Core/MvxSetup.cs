@@ -286,17 +286,51 @@ namespace MvvmCross.Core
         public virtual IEnumerable<Assembly> GetPluginAssemblies()
         {
             var mvvmCrossAssemblyName = typeof(MvxPluginAttribute).Assembly.GetName().Name;
-
+            var allAssemblies = LoadAllReferencedAssemblies(Assembly.GetEntryAssembly());
             var pluginAssemblies =
-                AppDomain.CurrentDomain
-                    .GetAssemblies()
+                allAssemblies
                     .AsParallel()
-                    .Where(AssemblyReferencesMvvmCross);
+                    .Where(asmb=> AssemblyReferencesMvvmCross(asmb, mvvmCrossAssemblyName));
 
             return pluginAssemblies;
+        }
 
-            bool AssemblyReferencesMvvmCross(Assembly assembly)
-                => assembly.GetReferencedAssemblies().Any(a => a.Name == mvvmCrossAssemblyName);
+        protected virtual IEnumerable<Assembly> LoadAllReferencedAssemblies(Assembly assembly)
+        {
+            var loadedAssemblies = new HashSet<Assembly>();
+            LoadReferencedAssemblies(assembly, loadedAssemblies);
+            return loadedAssemblies;
+        }
+
+        private void LoadReferencedAssemblies(Assembly assembly, ISet<Assembly> loadedAssemblies)
+        {
+            foreach (var referencedAssembly in assembly.GetReferencedAssemblies())
+            {
+                try
+                {
+                    var loadedAssembly = Assembly.Load(referencedAssembly);
+                    if (loadedAssemblies.Add(loadedAssembly))
+                    {
+                        LoadReferencedAssemblies(loadedAssembly, loadedAssemblies);
+                    }
+                }
+                catch
+                {
+                    continue;
+                }
+            }
+        }
+
+        private bool AssemblyReferencesMvvmCross(Assembly assembly, string mvvmCrossAssemblyName)
+        {
+            try
+            {
+                return assembly.GetReferencedAssemblies().Any(a => a.Name == mvvmCrossAssemblyName);
+            }
+            catch(Exception ex)
+            {
+                return true;
+            }
         }
 
         public virtual void LoadPlugins(IMvxPluginManager pluginManager)
@@ -484,9 +518,9 @@ namespace MvvmCross.Core
     }
 
     public abstract class MvxSetup<TApplication> : MvxSetup
-        where TApplication : IMvxApplication, new()
+        where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

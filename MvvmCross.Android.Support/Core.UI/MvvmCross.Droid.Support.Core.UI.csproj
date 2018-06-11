@@ -17,10 +17,11 @@ This package contains Support Core UI support for MvvmCross.</Description>
   
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Core.UI" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Build.Download" Version="0.4.9" />
   </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
   </ItemGroup>
+
+  <Import Project="..\..\XamarinBuild.targets" />
 </Project>

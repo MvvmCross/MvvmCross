@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.IoC;
+using MvvmCross.Logging;
 using MvvmCross.Plugin;
 
 namespace MvvmCross.ViewModels
@@ -44,10 +45,9 @@ namespace MvvmCross.ViewModels
         /// <summary>
         /// Any initialization steps that need to be done on the UI thread
         /// </summary>
-        /// <param name="hint"></param>
-        public virtual void Startup(object hint)
+        public virtual void Startup()
         {
-            // do nothing
+            MvxLog.Instance.Trace("AppStart: Application Startup - On UI thread");
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace MvvmCross.ViewModels
         }
 
         protected void RegisterCustomAppStart<TMvxAppStart>()
-            where TMvxAppStart : IMvxAppStart
+            where TMvxAppStart : class, IMvxAppStart
         {
             Mvx.ConstructAndRegisterSingleton<IMvxAppStart, TMvxAppStart>();
         }
@@ -82,6 +82,12 @@ namespace MvvmCross.ViewModels
             Mvx.RegisterSingleton(appStart);
         }
 
+        protected virtual void RegisterAppStart<TViewModel, TParameter>()
+          where TViewModel : IMvxViewModel<TParameter>
+        {
+            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel, TParameter>>();
+        }
+
         protected IEnumerable<Type> CreatableTypes()
         {
             return CreatableTypes(GetType().GetTypeInfo().Assembly);
@@ -90,6 +96,15 @@ namespace MvvmCross.ViewModels
         protected IEnumerable<Type> CreatableTypes(Assembly assembly)
         {
             return assembly.CreatableTypes();
+        }
+    }
+
+    public class MvxApplication<TParameter> : MvxApplication, IMvxApplication<TParameter>
+    {
+        public virtual TParameter Startup(TParameter parameter)
+        {
+            // do nothing, so just return the original hint
+            return parameter;
         }
     }
 }
