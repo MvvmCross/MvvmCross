@@ -242,13 +242,11 @@ Task("UploadAppVeyorArtifact")
     .WithCriteria(() => isRunningOnAppVeyor)
     .Does(() => 
 {
-
     Information("Artifacts Dir: {0}", outputDir.FullPath);
 
     var uploadSettings = new AppVeyorUploadArtifactsSettings();
 
-    var artifacts = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg")
-        + GetFiles(outputDir.FullPath + "/**/*");
+    var artifacts = GetFiles(outputDir.FullPath + "/**/*");
 
     foreach(var file in artifacts) {
         Information("Uploading {0}", file.FullPath);
