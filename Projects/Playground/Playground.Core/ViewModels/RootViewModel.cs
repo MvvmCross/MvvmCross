@@ -4,9 +4,11 @@
 
 using System;
 using System.Threading.Tasks;
+using MvvmCross;
 using MvvmCross.Commands;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
+using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 using Playground.Core.Models;
 using Playground.Core.ViewModels.Bindings;
@@ -22,6 +24,15 @@ namespace Playground.Core.ViewModels
         public RootViewModel(IMvxViewModelLoader mvxViewModelLoader)
         {
             _mvxViewModelLoader = mvxViewModelLoader;
+            try
+            {
+                var messenger = Mvx.Resolve<IMvxMessenger>();
+                var str = messenger.ToString();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
 
 
             ShowChildCommand = new MvxAsyncCommand(async () =>
