@@ -116,12 +116,6 @@ Task("Build")
         .WithProperty("NoPackageAnalysis", "True")
         .WithTarget("Build");
 
-    settings.BinaryLogger = new MSBuildBinaryLogSettings 
-    {
-        Enabled = true,
-        FileName = "mvvmcross.binlog"
-    };
-	
     MSBuild(sln, settings);
 });
 
