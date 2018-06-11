@@ -3,7 +3,6 @@
 #addin nuget:?package=Cake.Figlet&version=1.1.0
 #addin nuget:?package=Cake.Git&version=0.17.0
 #addin nuget:?package=Polly
-#tool nuget:?package=SignClient&version=0.9.1&include=/tools/netcoreapp2.0/SignClient.dll
 
 using Polly;
 

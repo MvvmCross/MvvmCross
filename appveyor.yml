@@ -7,6 +7,7 @@
   image: Visual Studio 2017
   before_build:
   - cmd: dotnet --info
+  - cmd: dotnet tool install --tool-path . SignClient
   environment:
     NUGET_SOURCE: https://www.nuget.org/api/v2/package
     NUGET_APIKEY:
@@ -28,6 +29,7 @@
   image: Visual Studio 2017
   before_build:
   - cmd: dotnet --info
+  - cmd: dotnet tool install --tool-path . SignClient
   environment:
     NUGET_SOURCE: https://www.myget.org/F/mvvmcross/api/v2/package
     NUGET_APIKEY:
