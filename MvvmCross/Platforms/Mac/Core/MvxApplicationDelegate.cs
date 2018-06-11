@@ -80,7 +80,7 @@ namespace MvvmCross.Platforms.Mac.Core
 
     public class MvxApplicationDelegate<TMvxMacSetup, TApplication> : MvxApplicationDelegate
    where TMvxMacSetup : MvxMacSetup<TApplication>, new()
-   where TApplication : IMvxApplication, new()
+   where TApplication : class, IMvxApplication, new()
     {
         protected override void RegisterSetup()
         {

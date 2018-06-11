@@ -18,7 +18,6 @@ This package contains Support v7 AppCompat support for MvvmCross.</Description>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2" />
     <PackageReference Include="Xamarin.Android.Support.V7.AppCompat" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Build.Download" Version="0.4.9" />
   </ItemGroup>
   
   <ItemGroup>
@@ -27,4 +26,6 @@ This package contains Support v7 AppCompat support for MvvmCross.</Description>
     <ProjectReference Include="..\Design\MvvmCross.Droid.Support.Design.csproj" />
     <ProjectReference Include="..\Fragment\MvvmCross.Droid.Support.Fragment.csproj" />
   </ItemGroup>
+
+  <Import Project="..\..\XamarinBuild.targets" />
 </Project>

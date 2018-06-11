@@ -12,7 +12,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     public abstract class MvxAppCompatApplication<TMvxAndroidSetup, TApplication> : MvxAndroidApplication
   where TMvxAndroidSetup : MvxAppCompatSetup<TApplication>, new()
-  where TApplication : IMvxApplication, new()
+  where TApplication : class, IMvxApplication, new()
     {
         public MvxAppCompatApplication() : base()
         {

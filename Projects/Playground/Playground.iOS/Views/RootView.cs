@@ -29,8 +29,10 @@ namespace Playground.iOS.Views
             set.Bind(btnModal).To(vm => vm.ShowModalCommand);
             set.Bind(btnNavModal).To(vm => vm.ShowModalNavCommand);
             set.Bind(btnOverrideAttribute).To(vm => vm.ShowOverrideAttributeCommand);
+            set.Bind(btnShowCustomBinding).To(vm => vm.ShowCustomBindingCommand);
 
             set.Apply();
         }
+
     }
 }

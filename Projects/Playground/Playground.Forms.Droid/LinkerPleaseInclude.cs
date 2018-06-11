@@ -124,5 +124,10 @@ namespace Playground.Forms.Droid
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.ForegroundColor = ConsoleColor.DarkGray;
         }
+
+        public void Include(MvvmCross.Plugin.Json.Plugin plugin)
+        {
+            plugin.Load();
+        }
     }
 }

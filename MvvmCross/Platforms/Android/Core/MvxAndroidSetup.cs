@@ -38,13 +38,9 @@ namespace MvvmCross.Platforms.Android.Core
             _applicationContext = applicationContext;
         }
 
-        #region IMvxAndroidGlobals Members
-
         public virtual Assembly ExecutableAssembly => ViewAssemblies.FirstOrDefault() ?? GetType().Assembly;
 
         public Context ApplicationContext => _applicationContext;
-
-        #endregion IMvxAndroidGlobals Members
 
         protected override void InitializePlatformServices()
         {
@@ -264,9 +260,9 @@ namespace MvvmCross.Platforms.Android.Core
     }
 
     public class MvxAndroidSetup<TApplication> : MvxAndroidSetup
-        where TApplication : IMvxApplication, new()
+        where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

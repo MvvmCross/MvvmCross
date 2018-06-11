@@ -5,11 +5,14 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using MvvmCross;
 using MvvmCross.Core;
 using MvvmCross.Forms.Platforms.Android.Core;
 using MvvmCross.Forms.Platforms.Android.Views;
+using MvvmCross.Forms.Presenters;
 using Playground.Core.ViewModels;
 using Playground.Forms.UI;
+using Xamarin.Forms;
 
 namespace Playground.Forms.Droid
 {
@@ -20,7 +23,7 @@ namespace Playground.Forms.Droid
         // MainLauncher = true, // No Splash Screen: Uncomment this lines if removing splash screen
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
         LaunchMode = LaunchMode.SingleTask)]
-    public class MainActivity : MvxFormsAppCompatActivity <MainViewModel>
+    public class MainActivity : MvxFormsAppCompatActivity<MainViewModel>
     // No Splash Screen: use this base instead
     // MvxFormsAppCompatActivity<Setup, Core.App, FormsApp, MainViewModel>
     {
@@ -29,6 +32,11 @@ namespace Playground.Forms.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
             base.OnCreate(bundle);
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
         }
     }
 }

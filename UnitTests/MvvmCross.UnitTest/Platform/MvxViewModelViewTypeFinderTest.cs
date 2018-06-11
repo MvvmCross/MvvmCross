@@ -13,9 +13,9 @@ namespace MvvmCross.UnitTest.Platform
     [Collection("MvxTest")]
     public class MvxViewModelViewTypeFinderTest
     {
-        private readonly MvxTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
-        public MvxViewModelViewTypeFinderTest(MvxTestFixture fixture)
+        public MvxViewModelViewTypeFinderTest(NavigationTestFixture fixture)
         {
             _fixture = fixture;
         }

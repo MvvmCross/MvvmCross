@@ -16,9 +16,9 @@ namespace MvvmCross.UnitTest.ViewModels
     [Collection("MvxTest")]
     public class MvxNotifyPropertyChangedTest
     {
-        private readonly MvxTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
-        public MvxNotifyPropertyChangedTest(MvxTestFixture fixture)
+        public MvxNotifyPropertyChangedTest(NavigationTestFixture fixture)
         {
             _fixture = fixture;
         }

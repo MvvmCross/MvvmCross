@@ -12,9 +12,11 @@ namespace MvvmCross.Platforms.Android.Views
 {
     public class MvxAndroidMainThreadDispatcher : MvxMainThreadAsyncDispatcher
     {
+        public override bool IsOnMainThread => Application.SynchronizationContext == SynchronizationContext.Current;
+
         public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
-            if (Application.SynchronizationContext == SynchronizationContext.Current)
+            if (IsOnMainThread)
                 action();
             else
             {

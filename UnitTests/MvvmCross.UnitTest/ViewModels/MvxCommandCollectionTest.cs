@@ -16,9 +16,9 @@ namespace MvvmCross.UnitTest.ViewModels
     [Collection("MvxTest")]
     public class MvxCommandCollectionTest
     {
-        private MvxTestFixture _fixture;
+        private NavigationTestFixture _fixture;
 
-        public MvxCommandCollectionTest(MvxTestFixture fixture)
+        public MvxCommandCollectionTest(NavigationTestFixture fixture)
         {
             _fixture = fixture;
         }

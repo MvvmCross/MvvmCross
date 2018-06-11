@@ -2,70 +2,137 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Threading.Tasks;
+using MvvmCross;
 using MvvmCross.Commands;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
+using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 using Playground.Core.Models;
+using Playground.Core.ViewModels.Bindings;
 
 namespace Playground.Core.ViewModels
 {
     public class RootViewModel : MvxViewModel
     {
-        private readonly IMvxNavigationService _navigationService;
         private readonly IMvxViewModelLoader _mvxViewModelLoader;
 
         private int _counter = 2;
 
-        public RootViewModel(IMvxNavigationService navigationService, IMvxLogProvider logProvider, IMvxViewModelLoader mvxViewModelLoader)
+        public RootViewModel(IMvxViewModelLoader mvxViewModelLoader)
         {
-            _navigationService = navigationService;
             _mvxViewModelLoader = mvxViewModelLoader;
+            try
+            {
+                var messenger = Mvx.Resolve<IMvxMessenger>();
+                var str = messenger.ToString();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
 
-            logProvider.GetLogFor<RootViewModel>().Warn(() => "Testing log");
 
-            ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel, SampleModel>(new SampleModel { Message = "Hey", Value = 1.23m }));
+            ShowChildCommand = new MvxAsyncCommand(async () =>
+                await NavigationService.Navigate<ChildViewModel, SampleModel>(new SampleModel
+                {
+                    Message = "Hey",
+                    Value = 1.23m
+                }));
 
             ShowModalCommand = new MvxAsyncCommand(Navigate);
 
-            ShowModalNavCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalNavViewModel>());
+            ShowModalNavCommand =
+                new MvxAsyncCommand(async () => await NavigationService.Navigate<ModalNavViewModel>());
 
-            ShowTabsCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<TabsRootViewModel>());
+            ShowTabsCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<TabsRootViewModel>());
 
-            ShowSplitCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SplitRootViewModel>());
+            ShowSplitCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SplitRootViewModel>());
 
-            ShowNativeCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<NativeViewModel>());
+            ShowNativeCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<NativeViewModel>());
 
-            ShowOverrideAttributeCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<OverrideAttributeViewModel>());
+            ShowOverrideAttributeCommand = new MvxAsyncCommand(async () =>
+                await NavigationService.Navigate<OverrideAttributeViewModel>());
 
-            ShowSheetCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SheetViewModel>());
+            ShowSheetCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SheetViewModel>());
 
-            ShowWindowCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<WindowViewModel>());
+            ShowWindowCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<WindowViewModel>());
 
-            ShowMixedNavigationCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<MixedNavFirstViewModel>());
+            ShowMixedNavigationCommand =
+                new MvxAsyncCommand(async () => await NavigationService.Navigate<MixedNavFirstViewModel>());
 
-            ShowDictionaryBindingCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<DictionaryBindingViewModel>());
+            ShowDictionaryBindingCommand = new MvxAsyncCommand(async () =>
+                await NavigationService.Navigate<DictionaryBindingViewModel>());
 
-            ShowCollectionViewCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<CollectionViewModel>());
+            ShowCollectionViewCommand =
+                new MvxAsyncCommand(async () => await NavigationService.Navigate<CollectionViewModel>());
 
-            ShowSharedElementsCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SharedElementRootChildViewModel>());
+            ShowSharedElementsCommand = new MvxAsyncCommand(async () =>
+                await NavigationService.Navigate<SharedElementRootChildViewModel>());
+
+            ShowCustomBindingCommand =
+                new MvxAsyncCommand(async () => await NavigationService.Navigate<CustomBindingViewModel>());
 
             _counter = 3;
         }
 
-        public override void Prepare()
-        {
-            base.Prepare();
-        }
+        public MvxNotifyTask MyTask { get; set; }
 
-        public override async System.Threading.Tasks.Task Initialize()
+        public IMvxAsyncCommand ShowChildCommand { get; }
+
+        public IMvxAsyncCommand ShowModalCommand { get; }
+
+        public IMvxAsyncCommand ShowModalNavCommand { get; }
+
+        public IMvxAsyncCommand ShowCustomBindingCommand { get; }
+
+        public IMvxAsyncCommand ShowTabsCommand { get; }
+
+        public IMvxAsyncCommand ShowSplitCommand { get; }
+
+        public IMvxAsyncCommand ShowOverrideAttributeCommand { get; }
+
+        public IMvxAsyncCommand ShowNativeCommand { get; }
+
+        public IMvxAsyncCommand ShowSheetCommand { get; }
+
+        public IMvxAsyncCommand ShowWindowCommand { get; }
+
+        public IMvxAsyncCommand ShowMixedNavigationCommand { get; }
+
+        public IMvxAsyncCommand ShowDictionaryBindingCommand { get; }
+
+        public IMvxAsyncCommand ShowCollectionViewCommand { get; }
+
+        public IMvxAsyncCommand ShowListViewCommand =>
+            new MvxAsyncCommand(async () => await NavigationService.Navigate<ListViewModel>());
+
+        public IMvxAsyncCommand ShowBindingsViewCommand =>
+            new MvxAsyncCommand(async () => await NavigationService.Navigate<BindingsViewModel>());
+
+        public IMvxAsyncCommand ShowCodeBehindViewCommand =>
+            new MvxAsyncCommand(async () => await NavigationService.Navigate<CodeBehindViewModel>());
+
+        public IMvxAsyncCommand ShowContentViewCommand =>
+            new MvxAsyncCommand(async () => await NavigationService.Navigate<ParentContentViewModel>());
+
+        public IMvxAsyncCommand ShowSharedElementsCommand { get; }
+
+        public override async Task Initialize()
         {
+            Log.Warn(() => "Testing log");
+
             await base.Initialize();
 
-            _mvxViewModelLoader.LoadViewModel<SampleModel>(MvxViewModelRequest.GetDefaultRequest(typeof(ChildViewModel)),
-                                                           new SampleModel { Message = "From locator", Value = 2 },
-                                                           null);
+            _mvxViewModelLoader.LoadViewModel(MvxViewModelRequest.GetDefaultRequest(typeof(ChildViewModel)),
+                new SampleModel
+                {
+                    Message = "From locator",
+                    Value = 2
+                },
+                null);
         }
 
         public override void ViewAppearing()
@@ -77,10 +144,8 @@ namespace Playground.Core.ViewModels
                 {
                     await Task.Delay(300);
 
-                    throw new System.Exception("Boom!");
-                }, exception =>
-                {
-                });
+                    throw new Exception("Boom!");
+                }, exception => { });
         }
 
         protected override void SaveStateToBundle(IMvxBundle bundle)
@@ -97,49 +162,13 @@ namespace Playground.Core.ViewModels
             _counter = int.Parse(state.Data["MyKey"]);
         }
 
-        public MvxNotifyTask MyTask { get; set; }
-
-        public IMvxAsyncCommand ShowChildCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowModalCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowModalNavCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowTabsCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowSplitCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowOverrideAttributeCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowNativeCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowSheetCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowWindowCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowMixedNavigationCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowDictionaryBindingCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowCollectionViewCommand { get; private set; }
-
-        public IMvxAsyncCommand ShowListViewCommand => new MvxAsyncCommand(async () => await _navigationService.Navigate<ListViewModel>());
-
-        public IMvxAsyncCommand ShowBindingsViewCommand => new MvxAsyncCommand(async () => await _navigationService.Navigate<BindingsViewModel>());
-
-        public IMvxAsyncCommand ShowCodeBehindViewCommand => new MvxAsyncCommand(async () => await _navigationService.Navigate<CodeBehindViewModel>());
-
-        public IMvxAsyncCommand ShowContentViewCommand => new MvxAsyncCommand(async () => await _navigationService.Navigate<ParentContentViewModel>());
-
-        public IMvxAsyncCommand ShowSharedElementsCommand { get; private set; }
-
         private async Task Navigate()
         {
             try
             {
-                await _navigationService.Navigate<ModalViewModel>();
+                await NavigationService.Navigate<ModalViewModel>();
             }
-            catch (System.Exception)
+            catch (Exception)
             {
             }
         }

@@ -78,7 +78,7 @@ namespace MvvmCross.Platforms.Android.Views
             return null;
         }
 
-        protected string GetActivityName(Activity activity) => activity.Class.SimpleName;
+        protected string GetActivityName(Activity activity) => $"{activity.Class.SimpleName}_{activity.Handle.ToString()}";
 
         /// <summary>
         /// Used to store additional info along with an activity.

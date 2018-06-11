@@ -8,6 +8,8 @@ namespace MvvmCross.Logging
 {
     public interface IMvxLogProvider
     {
+        IMvxLog GetLogFor(Type type);
+
         IMvxLog GetLogFor<T>();
 
         IMvxLog GetLogFor(string name);

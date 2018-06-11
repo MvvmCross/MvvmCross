@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Foundation;
 using MvvmCross.Core;
 using MvvmCross.Platforms.Ios.Core;
@@ -16,21 +15,6 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
 {
     public abstract class MvxFormsApplicationDelegate : FormsApplicationDelegate, IMvxApplicationDelegate
     {
-        private UIWindow _window;
-        public override UIWindow Window
-        {
-            get
-            {
-                return _window;
-            }
-            set
-            {
-                var fieldInfo = typeof(FormsApplicationDelegate).GetField("_window", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                fieldInfo.SetValue(this, value);
-                _window = value;
-            }
-        }
-
         public MvxFormsApplicationDelegate() : base()
         {
             RegisterSetup();
@@ -46,11 +30,8 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
 
             RunAppStart(launchOptions);
 
-            instance.PlatformSetup<MvxFormsIosSetup>().FormsApplication.SendStart();
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
-
-            //TODO: we don't call base for now, but we might need to as soon as Forms opens up
-            return true;
+            return base.FinishedLaunching(uiApplication, launchOptions);
         }
 
         protected virtual void RunAppStart(object hint = null)
@@ -60,7 +41,6 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
                 startup.Start(GetAppStartHint(hint));
 
             LoadFormsApplication();
-            Window.MakeKeyAndVisible();
         }
 
         protected virtual object GetAppStartHint(object hint = null)
@@ -106,7 +86,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
 
     public abstract class MvxFormsApplicationDelegate<TMvxIosSetup, TApplication, TFormsApplication> : MvxFormsApplicationDelegate
         where TMvxIosSetup : MvxFormsIosSetup<TApplication, TFormsApplication>, new()
-        where TApplication : IMvxApplication, new()
+        where TApplication : class, IMvxApplication, new()
         where TFormsApplication : Application, new()
     {
         protected override void RegisterSetup()

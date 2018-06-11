@@ -47,6 +47,7 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
 
             RunAppStart(notification);
 
+            //TODO: This is also called in the base, maybe we need to remove it
             instance.PlatformSetup<MvxFormsMacSetup>().FormsApplication.SendStart();
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
 
@@ -103,7 +104,7 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
 
     public abstract class MvxFormsApplicationDelegate<TMvxMacSetup, TApplication, TFormsApplication> : MvxFormsApplicationDelegate
     where TMvxMacSetup : MvxFormsMacSetup<TApplication, TFormsApplication>, new()
-    where TApplication : IMvxApplication, new()
+    where TApplication : class, IMvxApplication, new()
     where TFormsApplication : Application, new()
     {
         protected override void RegisterSetup()

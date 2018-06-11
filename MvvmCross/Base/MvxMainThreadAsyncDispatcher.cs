@@ -39,5 +39,7 @@ namespace MvvmCross.Base
             // a new thread to wait
             await Task.Run(async () => await completion.Task);
         }
+
+        public abstract override bool IsOnMainThread { get; }
     }
 }
