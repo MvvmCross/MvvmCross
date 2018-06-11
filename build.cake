@@ -16,7 +16,6 @@ var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var verbosityArg = Argument("verbosity", "Minimal");
 var verbosity = Verbosity.Minimal;
-FilePath signClientPath;
 
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 GitVersion versionInfo = null;
@@ -47,8 +46,6 @@ Setup(context => {
         ShouldPushNugetPackages(versionInfo.BranchName));
 
     verbosity = (Verbosity) Enum.Parse(typeof(Verbosity), verbosityArg, true);
-
-    signClientPath = Context.Tools.Resolve("SignClient.dll") ?? throw new Exception("Failed to locate sign tool");
 });
 
 Task("Clean").Does(() =>
@@ -86,8 +83,6 @@ Task("Restore")
     .Does(() => 
 {
     var settings = GetDefaultBuildSettings()
-        .WithProperty("RestoreNoCache", "True")
-        .WithProperty("RestorePackagesPath", MakeAbsolute(nugetPackagesDir).FullPath.ToString())
         .WithTarget("Restore");
     MSBuild(sln, settings);
 });
@@ -114,7 +109,7 @@ Task("Build")
         .WithProperty("InformationalVersion", versionInfo.InformationalVersion)
         .WithProperty("NoPackageAnalysis", "True")
         .WithTarget("Build");
-
+	
     MSBuild(sln, settings);
 });
 
@@ -190,7 +185,6 @@ Task("SignPackages")
 
         // Build the argument list.
         var arguments = new ProcessArgumentBuilder()
-            .AppendQuoted(signClientPath.FullPath)
             .Append("sign")
             .AppendSwitchQuoted("-c", MakeAbsolute(settings.Path).FullPath)
             .AppendSwitchQuoted("-i", MakeAbsolute(file).FullPath)
@@ -201,7 +195,7 @@ Task("SignPackages")
             .AppendSwitchQuoted("-u", "https://mvvmcross.com");
 
         // Sign the binary.
-        var result = StartProcess("dotnet", new ProcessSettings { Arguments = arguments });
+        var result = StartProcess("SignClient.exe", new ProcessSettings { Arguments = arguments });
         if (result != 0)
         {
             // We should not recover from this.
