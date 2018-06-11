@@ -28,6 +28,7 @@ namespace MvvmCross.UnitTest.Plugin
             protected IMvxPluginConfiguration ConfigurationSource(Type arg) => null;
         }
 
+        [Collection("MvxTest")]
         public class TheEnsurePluginLoadedMethod : MvxPluginManagerTest
         {
             [Fact]
@@ -74,6 +75,7 @@ namespace MvvmCross.UnitTest.Plugin
             }
         }
 
+        [Collection("MvxTest")]
         public class TheIsPluginLoadedMethod : MvxPluginManagerTest
         {
             [Fact]
@@ -95,6 +97,7 @@ namespace MvvmCross.UnitTest.Plugin
             }
         }
 
+        [Collection("MvxTest")]
         public class TheTryEnsurePluginLoadedMethod : MvxPluginManagerTest
         {
             [Fact]
@@ -142,6 +145,7 @@ namespace MvvmCross.UnitTest.Plugin
             }
         }
 
+        [Collection("MvxTest")]
         public class TheLoadedPluginsProperty : MvxPluginManagerTest
         {
             [Fact]

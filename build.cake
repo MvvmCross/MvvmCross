@@ -1,8 +1,7 @@
 #tool nuget:?package=GitVersion.CommandLine
 #tool nuget:?package=vswhere
-#addin nuget:?package=Cake.Figlet
-#addin nuget:?package=Cake.Incubator&version=1.7.1
-#addin nuget:?package=Cake.Git&version=0.16.1
+#addin nuget:?package=Cake.Figlet&version=1.1.0
+#addin nuget:?package=Cake.Git&version=0.17.0
 #addin nuget:?package=Polly
 
 using Polly;
@@ -12,6 +11,7 @@ var repoName = "mvvmcross/mvvmcross";
 var sln = new FilePath("./" + solutionName + ".sln");
 var outputDir = new DirectoryPath("./artifacts");
 var nuspecDir = new DirectoryPath("./nuspec");
+var nugetPackagesDir = new DirectoryPath("./nuget/packages");
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var verbosityArg = Argument("verbosity", "Minimal");
@@ -53,6 +53,7 @@ Task("Clean").Does(() =>
     CleanDirectories("./**/bin");
     CleanDirectories("./**/obj");
     CleanDirectories(outputDir.FullPath);
+    CleanDirectories(nugetPackagesDir.FullPath);
 
     EnsureDirectoryExists(outputDir);
 });
@@ -108,12 +109,6 @@ Task("Build")
         .WithProperty("InformationalVersion", versionInfo.InformationalVersion)
         .WithProperty("NoPackageAnalysis", "True")
         .WithTarget("Build");
-
-    settings.BinaryLogger = new MSBuildBinaryLogSettings 
-    {
-        Enabled = true,
-        FileName = "mvvmcross.binlog"
-    };
 	
     MSBuild(sln, settings);
 });
@@ -126,15 +121,21 @@ Task("UnitTest")
 
     var testPaths = GetFiles("./UnitTests/*.UnitTest/*.UnitTest.csproj");
     var testsFailed = false;
+
+    var settings = new DotNetCoreTestSettings
+    {
+        Configuration = "Release",
+        NoBuild = true
+    };
+
     foreach(var project in testPaths)
     {
         var projectName = project.GetFilenameWithoutExtension();
-        var testXml = new FilePath(outputDir + "/Tests/" + projectName + ".xml").MakeAbsolute(Context.Environment);
+        var testXml = MakeAbsolute(new FilePath(outputDir + "/Tests/" + projectName + ".xml"));
+        settings.Logger = $"xunit;LogFilePath={testXml.FullPath}";
         try 
         {
-            DotNetCoreTool(project,
-                "xunit",  "-fxversion 2.0.0 --no-build -parallel none -configuration " + 
-                configuration + " -xml \"" + testXml.FullPath + "\"");
+            DotNetCoreTest(project.ToString(), settings);
         }
         catch
         {
@@ -152,10 +153,63 @@ Task("UnitTest")
         throw new Exception("Tests failed :(");
 });
 
+Task("CopyPackages")
+    .IsDependentOn("Build")
+    .Does(() => 
+{
+    var nugetFiles = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg");
+    CopyFiles(nugetFiles, outputDir);
+});
+
+Task("SignPackages")
+    .IsDependentOn("Build")
+    .IsDependentOn("CopyPackages")
+    .Does(() => 
+{
+    // Get the secret.
+    var secret = EnvironmentVariable("SIGNING_SECRET");
+    if (string.IsNullOrWhiteSpace(secret))
+        throw new InvalidOperationException("Could not resolve signing secret.");
+
+    // Get the user.
+    var user = EnvironmentVariable("SIGNING_USER");
+    if (string.IsNullOrWhiteSpace(user))
+        throw new InvalidOperationException("Could not resolve signing user.");
+
+    var settings = File("./signclient.json");
+    var files = GetFiles(outputDir + "/*.nupkg");
+
+    foreach(var file in files)
+    {
+        Information("Signing {0}...", file.FullPath);
+
+        // Build the argument list.
+        var arguments = new ProcessArgumentBuilder()
+            .Append("sign")
+            .AppendSwitchQuoted("-c", MakeAbsolute(settings.Path).FullPath)
+            .AppendSwitchQuoted("-i", MakeAbsolute(file).FullPath)
+            .AppendSwitchQuotedSecret("-s", secret)
+            .AppendSwitchQuotedSecret("-r", user)
+            .AppendSwitchQuoted("-n", "MvvmCross")
+            .AppendSwitchQuoted("-d", "MvvmCross is a cross platform MVVM framework.")
+            .AppendSwitchQuoted("-u", "https://mvvmcross.com");
+
+        // Sign the binary.
+        var result = StartProcess("SignClient.exe", new ProcessSettings { Arguments = arguments });
+        if (result != 0)
+        {
+            // We should not recover from this.
+            throw new InvalidOperationException("Signing failed!");
+        }
+    }
+});
+
 Task("PublishPackages")
     .WithCriteria(() => !BuildSystem.IsLocalBuild)
     .WithCriteria(() => IsRepository(repoName))
     .WithCriteria(() => ShouldPushNugetPackages(versionInfo.BranchName))
+    .IsDependentOn("CopyPackages")
+    //.IsDependentOn("SignPackages")
     .Does (() =>
 {
     // Resolve the API key.
@@ -163,7 +217,7 @@ Task("PublishPackages")
     var apiKey = nugetKeySource.Item1;
     var source = nugetKeySource.Item2;
 
-    var nugetFiles = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg");
+    var nugetFiles = GetFiles(outputDir + "/*.nupkg");
 
     var policy = Policy
         .Handle<Exception>()
@@ -185,13 +239,11 @@ Task("UploadAppVeyorArtifact")
     .WithCriteria(() => isRunningOnAppVeyor)
     .Does(() => 
 {
-
     Information("Artifacts Dir: {0}", outputDir.FullPath);
 
     var uploadSettings = new AppVeyorUploadArtifactsSettings();
 
-    var artifacts = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg")
-        + GetFiles(outputDir.FullPath + "/**/*");
+    var artifacts = GetFiles(outputDir.FullPath + "/**/*");
 
     foreach(var file in artifacts) {
         Information("Uploading {0}", file.FullPath);
