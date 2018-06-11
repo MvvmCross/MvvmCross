@@ -12,6 +12,7 @@ var repoName = "mvvmcross/mvvmcross";
 var sln = new FilePath("./" + solutionName + ".sln");
 var outputDir = new DirectoryPath("./artifacts");
 var nuspecDir = new DirectoryPath("./nuspec");
+var nugetPackagesDir = new DirectoryPath("./nuget/packages");
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var verbosityArg = Argument("verbosity", "Minimal");
@@ -56,6 +57,7 @@ Task("Clean").Does(() =>
     CleanDirectories("./**/bin");
     CleanDirectories("./**/obj");
     CleanDirectories(outputDir.FullPath);
+    CleanDirectories(nugetPackagesDir.FullPath);
 
     EnsureDirectoryExists(outputDir);
 });
@@ -85,6 +87,8 @@ Task("Restore")
     .Does(() => 
 {
     var settings = GetDefaultBuildSettings()
+        .WithProperty("RestoreNoCache", "True")
+        .WithProperty("RestorePackagesPath", MakeAbsolute(nugetPackagesDir).FullPath.ToString())
         .WithTarget("Restore");
     MSBuild(sln, settings);
 });
