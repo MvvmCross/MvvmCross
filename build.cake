@@ -3,6 +3,7 @@
 #addin nuget:?package=Cake.Figlet&version=1.1.0
 #addin nuget:?package=Cake.Git&version=0.17.0
 #addin nuget:?package=Polly
+#tool nuget:?package=SignClient&version=0.9.1&include=/tools/netcoreapp2.0/SignClient.dll
 
 using Polly;
 
@@ -15,6 +16,7 @@ var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var verbosityArg = Argument("verbosity", "Minimal");
 var verbosity = Verbosity.Minimal;
+FilePath signClientPath;
 
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 GitVersion versionInfo = null;
@@ -45,6 +47,8 @@ Setup(context => {
         ShouldPushNugetPackages(versionInfo.BranchName));
 
     verbosity = (Verbosity) Enum.Parse(typeof(Verbosity), verbosityArg, true);
+
+    signClientPath = Context.Tools.Resolve("SignClient.dll") ?? throw new Exception("Failed to locate sign tool");
 });
 
 Task("Clean").Does(() =>
@@ -151,10 +155,64 @@ Task("UnitTest")
         throw new Exception("Tests failed :(");
 });
 
+Task("CopyPackages")
+    .IsDependentOn("Build")
+    .Does(() => 
+{
+    var nugetFiles = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg");
+    CopyFiles(nugetFiles, outputDir);
+});
+
+Task("SignPackages")
+    .IsDependentOn("Build")
+    .IsDependentOn("CopyPackages")
+    .Does(() => 
+{
+    // Get the secret.
+    var secret = EnvironmentVariable("SIGNING_SECRET");
+    if (string.IsNullOrWhiteSpace(secret))
+        throw new InvalidOperationException("Could not resolve signing secret.");
+
+    // Get the user.
+    var user = EnvironmentVariable("SIGNING_USER");
+    if (string.IsNullOrWhiteSpace(user))
+        throw new InvalidOperationException("Could not resolve signing user.");
+
+    var settings = File("./signclient.json");
+    var files = GetFiles(outputDir + "/*.nupkg");
+
+    foreach(var file in files)
+    {
+        Information("Signing {0}...", file.FullPath);
+
+        // Build the argument list.
+        var arguments = new ProcessArgumentBuilder()
+            .AppendQuoted(signClientPath.FullPath)
+            .Append("sign")
+            .AppendSwitchQuoted("-c", MakeAbsolute(settings.Path).FullPath)
+            .AppendSwitchQuoted("-i", MakeAbsolute(file).FullPath)
+            .AppendSwitchQuotedSecret("-s", secret)
+            .AppendSwitchQuotedSecret("-r", user)
+            .AppendSwitchQuoted("-n", "MvvmCross")
+            .AppendSwitchQuoted("-d", "MvvmCross is a cross platform MVVM framework.")
+            .AppendSwitchQuoted("-u", "https://mvvmcross.com");
+
+        // Sign the binary.
+        var result = StartProcess("dotnet", new ProcessSettings { Arguments = arguments });
+        if (result != 0)
+        {
+            // We should not recover from this.
+            throw new InvalidOperationException("Signing failed!");
+        }
+    }
+});
+
 Task("PublishPackages")
     .WithCriteria(() => !BuildSystem.IsLocalBuild)
     .WithCriteria(() => IsRepository(repoName))
     .WithCriteria(() => ShouldPushNugetPackages(versionInfo.BranchName))
+    .IsDependentOn("CopyPackages")
+    //.IsDependentOn("SignPackages")
     .Does (() =>
 {
     // Resolve the API key.
@@ -162,7 +220,7 @@ Task("PublishPackages")
     var apiKey = nugetKeySource.Item1;
     var source = nugetKeySource.Item2;
 
-    var nugetFiles = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg");
+    var nugetFiles = GetFiles(outputDir + "/*.nupkg");
 
     var policy = Policy
         .Handle<Exception>()
