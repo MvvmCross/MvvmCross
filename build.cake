@@ -126,15 +126,21 @@ Task("UnitTest")
 
     var testPaths = GetFiles("./UnitTests/*.UnitTest/*.UnitTest.csproj");
     var testsFailed = false;
+
+    var settings = new DotNetCoreTestSettings
+    {
+        Configuration = "Release",
+        NoBuild = true
+    };
+
     foreach(var project in testPaths)
     {
         var projectName = project.GetFilenameWithoutExtension();
-        var testXml = new FilePath(outputDir + "/Tests/" + projectName + ".xml").MakeAbsolute(Context.Environment);
+        var testXml = MakeAbsolute(new FilePath(outputDir + "/Tests/" + projectName + ".xml"));
+        settings.Logger = $"xunit;LogFilePath={testXml.FullPath}";
         try 
         {
-            DotNetCoreTool(project,
-                "xunit",  "-fxversion 2.1.0 --no-build -parallel none -configuration " + 
-                configuration + " -xml \"" + testXml.FullPath + "\"");
+            DotNetCoreTest(project.ToString(), settings);
         }
         catch
         {
