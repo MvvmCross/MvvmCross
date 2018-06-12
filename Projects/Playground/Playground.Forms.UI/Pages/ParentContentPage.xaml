@@ -8,9 +8,11 @@
              x:Name="ParentPage">
     <ContentPage.Content>
         <StackLayout>
-            <views:ChildContentView ViewModel="{Binding ChildViewModel1}" IsEnabled="{Binding ViewModel.ChildViewModelEnabled, Source={x:Reference ParentPage}}"/>
-            <Button Text="Change Child Text" Command="{Binding ChangeButtonCmd}" />
-            <Button Text="Toggle Child Enabled" Command="{Binding ToggleChildEnabledCmd}" />
+            <views:ChildContentView ViewModel="{Binding Source={x:Reference ParentPage}, Path=ViewModel.ChildViewModel1}" IsEnabled="{Binding ViewModel.ChildViewModelEnabled, Source={x:Reference ParentPage}}"/>
+            <Button Text="Change Child1 Text" Command="{Binding ChangeButtonCmd1}" />
+            <Button Text="Toggle Child Enabled" Command="{Binding ToggleChild1EnabledCmd}" />
+            <views:ChildContentView BindingContext="{Binding Source={x:Reference ParentPage}, Path=ViewModel.ChildBindingContext2}"/>
+            <Button Text="Change Child2 Text" Command="{Binding ChangeButtonCmd2}" />
         </StackLayout>
     </ContentPage.Content>
 </views1:MvxContentPage>
