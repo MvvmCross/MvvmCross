@@ -8,7 +8,6 @@ using System.Linq;
 using System.Reflection;
 using MvvmCross.Base;
 using MvvmCross.Commands;
-using MvvmCross.Exceptions;
 using MvvmCross.IoC;
 using MvvmCross.Logging;
 using MvvmCross.Logging.LogProviders;
@@ -30,7 +29,9 @@ namespace MvvmCross.Core
             ViewAssemblies = assemblies;
             if (!(ViewAssemblies?.Any() ?? false))
             {
-                ViewAssemblies = new[] { Assembly.GetEntryAssembly() ?? Assembly.GetCallingAssembly() };
+                // fall back to all assemblies. Assembly.GetEntryAssembly() always returns
+                // null on Xamarin platforms do not use it!
+                ViewAssemblies = AppDomain.CurrentDomain.GetAssemblies();
             }
 
             // Avoid creating the instance of Setup right now, instead
@@ -286,39 +287,15 @@ namespace MvvmCross.Core
         public virtual IEnumerable<Assembly> GetPluginAssemblies()
         {
             var mvvmCrossAssemblyName = typeof(MvxPluginAttribute).Assembly.GetName().Name;
-            var allAssemblies = LoadAllReferencedAssemblies(Assembly.GetEntryAssembly());
+
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
             var pluginAssemblies =
-                allAssemblies
+                assemblies
                     .AsParallel()
-                    .Where(asmb=> AssemblyReferencesMvvmCross(asmb, mvvmCrossAssemblyName));
+                    .Where(asmb => AssemblyReferencesMvvmCross(asmb, mvvmCrossAssemblyName));
 
             return pluginAssemblies;
-        }
-
-        protected virtual IEnumerable<Assembly> LoadAllReferencedAssemblies(Assembly assembly)
-        {
-            var loadedAssemblies = new HashSet<Assembly>();
-            LoadReferencedAssemblies(assembly, loadedAssemblies);
-            return loadedAssemblies;
-        }
-
-        private void LoadReferencedAssemblies(Assembly assembly, ISet<Assembly> loadedAssemblies)
-        {
-            foreach (var referencedAssembly in assembly.GetReferencedAssemblies())
-            {
-                try
-                {
-                    var loadedAssembly = Assembly.Load(referencedAssembly);
-                    if (loadedAssemblies.Add(loadedAssembly))
-                    {
-                        LoadReferencedAssemblies(loadedAssembly, loadedAssemblies);
-                    }
-                }
-                catch
-                {
-                    continue;
-                }
-            }
         }
 
         private bool AssemblyReferencesMvvmCross(Assembly assembly, string mvvmCrossAssemblyName)
