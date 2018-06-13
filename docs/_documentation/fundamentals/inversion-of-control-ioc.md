@@ -185,6 +185,58 @@ Alternatively, if you prefer not to use this Reflection based registration, then
 
 The choice is **your's**
 
+### Supply options to IoCConstruct
+
+You can supply optional parameters to construction.
+
+```c#
+var title = "The title";
+var subtitle = "The subtitle";
+var description = "The description";
+
+// Option 1
+var arguments = new Dictionary<string, object>
+{
+    ["title"] = title,
+    ["subtitle"] = subtitle,
+    ["description"] = description
+};
+
+// Option 2
+var arguments = new { title, subtitle, description };
+
+var instance = Mvx.IoCConstruct<SomeClass>(arguments);
+```
+
+The class needs to look something like:
+
+```c#
+public class SomeClass
+{
+    public string Title { get; }
+    public string Subtitle { get; }
+    public string Description { get; }
+    public int Amount { get; }
+    public bool Enabled { get; }
+
+    public SomeClass(string title, string subtitle, string description)
+    {
+        Title = title;
+        Subtitle = subtitle;
+        Description = description;
+    }
+
+    public SomeClass(string title, int amount, bool enabled)
+    {
+        Title = title;
+        Amount = amount;
+        Enabled = enabled;
+    }
+}
+```
+
+In this case the first constructor will be called.
+
 ## Constructor Injection
 
 As well as `Mvx.Resolve<T>`, the `Mvx` static class provides a reflection based mechanism to automatically resolve parameters during object construction.
@@ -201,7 +253,7 @@ For example, if we add a class like:
 
 Then you can create this object using:
 
-        Mvx.IocConstruct<Bar>();
+        Mvx.IoCConstruct<Bar>();
 
 What happens during this call is:
 
