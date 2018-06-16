@@ -41,7 +41,7 @@ namespace MvvmCross.Forms.Views
             set
             {
                 _bindingContext = value;
-                base.BindingContext = _bindingContext.DataContext ?? _bindingContext;
+                base.BindingContext = _bindingContext.DataContext;
             }
         }
 
