@@ -186,15 +186,4 @@ namespace MvvmCross.ViewModels
             return MvxInpcInterceptionResult.NotIntercepted;
         }
     }
-
-    public class MvxPropertyChangingEventArgs<T> : PropertyChangingEventArgs
-    {
-        public MvxPropertyChangingEventArgs(string propertyName, T newValue) : base(propertyName)
-        {
-            NewValue = newValue;
-        }
-
-        public bool Cancel { get; set; }
-        public T NewValue { get; set; }
-    }
 }
