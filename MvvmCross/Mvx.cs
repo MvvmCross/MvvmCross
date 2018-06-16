@@ -11,6 +11,7 @@ namespace MvvmCross
 {
     public static class Mvx
     {
+        public static IMvxIoCProvider Instance => MvxSingleton<IMvxIoCProvider>.Instance;
         public static bool CanResolve<TService>() where TService : class
         {
             var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
