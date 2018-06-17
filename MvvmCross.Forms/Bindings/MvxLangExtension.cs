@@ -15,18 +15,14 @@ namespace MvvmCross.Forms.Bindings
     public class MvxLangExtension : MvxBaseBindExtension
     {
         public string Source { get; set; }
-
         public string NameSpaceKey { get; set; } = "";
-
         public string TypeKey { get; set; } = "";
-
         public object[] Arguments { get; set; }
-
         public string Key { get; set; }
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            if (BindableObj is BindableObject obj && !string.IsNullOrEmpty(PropertyName))
+            if (!string.IsNullOrEmpty(PropertyName))
             {
                 StringBuilder bindingBuilder = new StringBuilder($"{PropertyName} {Source}");
 
@@ -50,16 +46,16 @@ namespace MvvmCross.Forms.Bindings
                     bindingBuilder.Append($", FallbackValue={FallbackValue}");
                 }
 
-                obj.SetValue(La.ngProperty, bindingBuilder.ToString());
+                Bindable.SetValue(La.ngProperty, bindingBuilder.ToString());
             }
-            else if(Mvx.CanResolve<IMvxTextProvider>())
+            else if(!string.IsNullOrEmpty(Source) && Mvx.CanResolve<IMvxTextProvider>())
             {
                 if(Arguments == null)
                     return new MvxLanguageBinder(NameSpaceKey, TypeKey).GetText(Source);
                 else
                     return new MvxLanguageBinder(NameSpaceKey, TypeKey).GetText(Source, Arguments);
             }
-            else if(BindableObj is IMarkupExtension ext)
+            else if(BindableObjectRaw is IMarkupExtension ext)
             {
                 return ext.ProvideValue(serviceProvider);
             }

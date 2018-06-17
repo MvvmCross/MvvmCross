@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -12,6 +12,7 @@
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\Playground.Core\Playground.Core.csproj" />
+    <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
   </ItemGroup>
 
   <Import Project="..\..\..\XamarinForms.targets" />
