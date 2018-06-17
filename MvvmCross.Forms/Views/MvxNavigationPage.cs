@@ -29,7 +29,7 @@ namespace MvvmCross.Forms.Views
             }
             set
             {
-                if (value != null && !ReferenceEquals(DataContext, value))
+                if (value != null && !(_bindingContext != null && ReferenceEquals(DataContext, value)))
                     BindingContext = new MvxBindingContext(value);
             }
         }
@@ -40,7 +40,7 @@ namespace MvvmCross.Forms.Views
             get
             {
                 if (_bindingContext == null)
-                    BindingContext = new MvxBindingContext();
+                    BindingContext = new MvxBindingContext(base.BindingContext);
                 return _bindingContext;
             }
             set
