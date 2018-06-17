@@ -14,14 +14,12 @@ namespace MvvmCross.Forms.Bindings
     public class MvxBindExtension : MvxBaseBindExtension
     {
         public string Path { get; set; } = ".";
-
         public string StringFormat { get; set; }
-
         public string CommandParameter { get; set; }
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            if (BindableObj is BindableObject obj && !string.IsNullOrEmpty(PropertyName))
+            if (!string.IsNullOrEmpty(PropertyName))
             {
                 StringBuilder bindingBuilder = new StringBuilder($"{PropertyName} {Path}, Mode={Mode}");
 
@@ -45,9 +43,9 @@ namespace MvvmCross.Forms.Bindings
                     bindingBuilder.Append($", CommandParameter={CommandParameter}");
                 }
 
-                obj.SetValue(Bi.ndProperty, bindingBuilder.ToString());
+                Bindable.SetValue(Bi.ndProperty, bindingBuilder.ToString());
             }
-            else if (BindableObj is IMarkupExtension ext)
+            else if (BindableObjectRaw is IMarkupExtension ext)
             {
                 return ext.ProvideValue(serviceProvider);
             }
