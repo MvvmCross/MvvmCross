@@ -10,7 +10,7 @@ namespace MvvmCross.Plugin.Share.Platforms.Android
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxShareTask, MvxShareTask>();
+            Mvx.IoCProvider.RegisterType<IMvxShareTask, MvxShareTask>();
         }
     }
 }

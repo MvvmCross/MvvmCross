@@ -10,7 +10,7 @@ namespace MvvmCross.Plugin.WebBrowser.Platforms.Ios
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxWebBrowserTask, MvxWebBrowserTask>();
+            Mvx.IoCProvider.RegisterType<IMvxWebBrowserTask, MvxWebBrowserTask>();
         }
     }
 }

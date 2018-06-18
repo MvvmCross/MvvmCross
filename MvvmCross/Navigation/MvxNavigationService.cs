@@ -23,7 +23,7 @@ namespace MvvmCross.Navigation
 {
     public class MvxNavigationService : IMvxNavigationService
     {
-        protected readonly IMvxLog Log = Mvx.Resolve<IMvxLogProvider>().GetLogFor<MvxNavigationService>();
+        protected readonly IMvxLog Log = Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor<MvxNavigationService>();
 
         private IMvxViewDispatcher _viewDispatcher;
         public IMvxViewDispatcher ViewDispatcher
@@ -37,7 +37,7 @@ namespace MvvmCross.Navigation
         {
             get {
                 if (_viewsContainer == null)
-                    _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
+                    _viewsContainer = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
                 return _viewsContainer;
             }
             set => _viewsContainer = value;
@@ -151,7 +151,7 @@ namespace MvvmCross.Navigation
 
             if(viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
             {
-                var facade = (IMvxNavigationFacade)Mvx.IoCConstruct(viewModelType);
+                var facade = (IMvxNavigationFacade)Mvx.IoCProvider.IoCConstruct(viewModelType);
 
                 try
                 {
@@ -207,7 +207,7 @@ namespace MvvmCross.Navigation
 
             if(viewModelType.GetInterfaces().Contains(typeof(IMvxNavigationFacade)))
             {
-                var facade = (IMvxNavigationFacade)Mvx.IoCConstruct(viewModelType);
+                var facade = (IMvxNavigationFacade)Mvx.IoCProvider.IoCConstruct(viewModelType);
 
                 try
                 {

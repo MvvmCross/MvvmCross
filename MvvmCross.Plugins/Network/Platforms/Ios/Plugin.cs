@@ -13,7 +13,7 @@ namespace MvvmCross.Plugin.Network.Platforms.Ios
         public override void Load()
         {
             base.Load();
-            Mvx.RegisterType<IMvxReachability, MvxReachability>();
+            Mvx.IoCProvider.RegisterType<IMvxReachability, MvxReachability>();
         }
     }
 }

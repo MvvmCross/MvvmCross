@@ -21,8 +21,8 @@ namespace MvvmCross.Plugin.File.Platforms.Wpf
         public void Load()
         {
             var fileStore = new MvxIoFileStoreBase(Configuration.AppendDefaultPath, Configuration.BasePath);
-            Mvx.RegisterSingleton<IMvxFileStore>(fileStore);
-            Mvx.RegisterSingleton<IMvxFileStoreAsync>(fileStore);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFileStore>(fileStore);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFileStoreAsync>(fileStore);
         }
 
         public void Configure(IMvxPluginConfiguration configuration)

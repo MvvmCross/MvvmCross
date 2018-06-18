@@ -9,7 +9,7 @@ namespace MvvmCross.Plugin.Location.Platforms.Wpf
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxLocationWatcher>(() => new MvxWpfLocationWatcher());
+            Mvx.IoCProvider.RegisterSingleton<IMvxLocationWatcher>(() => new MvxWpfLocationWatcher());
         }
     }
 }

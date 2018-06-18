@@ -47,7 +47,7 @@ namespace MvvmCross.Forms.Platforms.Wpf.Core
         protected override IMvxWpfViewPresenter CreateViewPresenter(ContentControl contentControl)
         {
             var presenter = new MvxFormsWpfViewPresenter(contentControl, FormsApplication);
-            Mvx.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
             return presenter;
         }
 
@@ -70,6 +70,6 @@ namespace MvvmCross.Forms.Platforms.Wpf.Core
 
         protected override Application CreateFormsApplication() => new TFormsApplication();
 
-        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
     }
 }

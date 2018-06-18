@@ -54,7 +54,7 @@ namespace MvvmCross.Forms.Presenters
             get
             {
                 if (_viewModelLoader == null)
-                    _viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
+                    _viewModelLoader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
                 return _viewModelLoader;
             }
             set

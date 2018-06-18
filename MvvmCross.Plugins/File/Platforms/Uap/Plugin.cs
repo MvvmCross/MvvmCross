@@ -9,8 +9,8 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxFileStore, MvxWindowsFileStore>();
-            Mvx.RegisterType<IMvxFileStoreAsync, MvxWindowsFileStore>();
+            Mvx.IoCProvider.RegisterType<IMvxFileStore, MvxWindowsFileStore>();
+            Mvx.IoCProvider.RegisterType<IMvxFileStoreAsync, MvxWindowsFileStore>();
         }
     }
 }

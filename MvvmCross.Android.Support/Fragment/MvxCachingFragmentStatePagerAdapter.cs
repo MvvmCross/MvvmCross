@@ -50,7 +50,7 @@ namespace MvvmCross.Droid.Support.V4
             if (mvxFragment == null)
                 return fragment;
 
-			if (mvxFragment.GetType().IsFragmentCacheable(Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType()) && fragmentSavedState != null)
+			if (mvxFragment.GetType().IsFragmentCacheable(Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType()) && fragmentSavedState != null)
                 return fragment;
 
             var viewModel = fragInfo.ViewModel ?? CreateViewModel(position);
@@ -84,7 +84,7 @@ namespace MvvmCross.Droid.Support.V4
 
             var request = new MvxViewModelRequest(fragInfo.ViewModelType, mvxBundle, null);
 
-            return Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(request, null);
+            return Mvx.IoCProvider.Resolve<IMvxViewModelLoader>().LoadViewModel(request, null);
         }
     }
 }

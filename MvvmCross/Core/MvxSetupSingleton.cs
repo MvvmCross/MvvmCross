@@ -179,7 +179,7 @@ namespace MvvmCross.Core
                 lock (LockObject)
                 {
                     IsInitialisedTaskCompletionSource.SetResult(true);
-                    var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
+                    var dispatcher = Mvx.IoCProvider.GetSingleton<IMvxMainThreadDispatcher>();
                     dispatcher.RequestMainThreadAction(() =>
                     {
                         if (_currentMonitor != null)

@@ -43,7 +43,7 @@ namespace MvvmCross.Forms.Platforms.Wpf.Presenters
                 if (_formsPagePresenter == null)
                 {
                     _formsPagePresenter = new MvxFormsPagePresenter(this);
-                    Mvx.RegisterSingleton(_formsPagePresenter);
+                    Mvx.IoCProvider.RegisterSingleton(_formsPagePresenter);
                 }
                 return _formsPagePresenter;
             }

@@ -10,7 +10,7 @@ namespace MvvmCross.Plugin.Accelerometer.Platforms.Ios
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxAccelerometer>(new MvxAccelerometer());
+            Mvx.IoCProvider.RegisterSingleton<IMvxAccelerometer>(new MvxAccelerometer());
         }
     }
 }

@@ -28,7 +28,7 @@ namespace MvvmCross.Platforms.Wpf.Views
             }
             else
             {
-                var viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
+                var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
                 wpfView.ViewModel = viewModelLoader.LoadViewModel(request, null);
             }
 

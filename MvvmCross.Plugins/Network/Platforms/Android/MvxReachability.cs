@@ -24,7 +24,7 @@ namespace MvvmCross.Plugin.Network.Platforms.Android
         {
             get
             {
-                _connectivityManager = _connectivityManager ?? (ConnectivityManager)Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.GetSystemService(Context.ConnectivityService);
+                _connectivityManager = _connectivityManager ?? (ConnectivityManager)Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext.GetSystemService(Context.ConnectivityService);
                 return _connectivityManager;
             }
         }

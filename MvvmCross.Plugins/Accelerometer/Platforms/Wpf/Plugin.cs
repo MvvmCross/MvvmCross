@@ -9,7 +9,7 @@ namespace MvvmCross.Plugin.Accelerometer.Platforms.Wpf
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxAccelerometer>(new MvxAccelerometer());
+            Mvx.IoCProvider.RegisterSingleton<IMvxAccelerometer>(new MvxAccelerometer());
         }
     }
 }

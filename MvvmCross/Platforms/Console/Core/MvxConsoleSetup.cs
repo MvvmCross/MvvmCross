@@ -23,14 +23,14 @@ namespace MvvmCross.Platforms.Console.Core
         public virtual void InitializeMessagePump()
         {
             var messagePump = new MvxConsoleMessagePump();
-            Mvx.RegisterSingleton<IMvxMessagePump>(messagePump);
-            Mvx.RegisterSingleton<IMvxConsoleCurrentView>(messagePump);
+            Mvx.IoCProvider.RegisterSingleton<IMvxMessagePump>(messagePump);
+            Mvx.IoCProvider.RegisterSingleton<IMvxConsoleCurrentView>(messagePump);
         }
 
         protected override IMvxViewsContainer CreateViewsContainer()
         {
             var container = CreateConsoleContainer();
-            Mvx.RegisterSingleton<IMvxConsoleNavigation>(container);
+            Mvx.IoCProvider.RegisterSingleton<IMvxConsoleNavigation>(container);
             return container;
         }
 
@@ -53,7 +53,7 @@ namespace MvvmCross.Platforms.Console.Core
     public class MvxConsoleSetup<TApplication> : MvxConsoleSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

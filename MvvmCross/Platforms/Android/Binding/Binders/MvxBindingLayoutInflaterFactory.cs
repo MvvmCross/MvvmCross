@@ -23,9 +23,9 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             _source = source;
         }
 
-        protected virtual IMvxAndroidViewFactory AndroidViewFactory => _androidViewFactory ?? (_androidViewFactory = Mvx.Resolve<IMvxAndroidViewFactory>());
+        protected virtual IMvxAndroidViewFactory AndroidViewFactory => _androidViewFactory ?? (_androidViewFactory = Mvx.IoCProvider.Resolve<IMvxAndroidViewFactory>());
 
-        protected virtual IMvxAndroidViewBinder Binder => _binder ?? (_binder = Mvx.Resolve<IMvxAndroidViewBinderFactory>().Create(_source));
+        protected virtual IMvxAndroidViewBinder Binder => _binder ?? (_binder = Mvx.IoCProvider.Resolve<IMvxAndroidViewBinderFactory>().Create(_source));
 
         public virtual IList<KeyValuePair<object, IMvxUpdateableBinding>> CreatedBindings => Binder.CreatedBindings;
 

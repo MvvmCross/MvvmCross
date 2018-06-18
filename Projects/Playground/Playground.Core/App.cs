@@ -24,7 +24,7 @@ namespace Playground.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            Mvx.RegisterSingleton<IMvxTextProvider>(new TextProviderBuilder().TextProvider);
+            Mvx.IoCProvider.RegisterSingleton<IMvxTextProvider>(new TextProviderBuilder().TextProvider);
 
             RegisterAppStart<RootViewModel>();
         }

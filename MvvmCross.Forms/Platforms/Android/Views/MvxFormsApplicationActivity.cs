@@ -57,7 +57,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
             {
                 if (_formsApplication == null)
                 {
-                    var formsPresenter = Mvx.Resolve<IMvxFormsViewPresenter>();
+                    var formsPresenter = Mvx.IoCProvider.Resolve<IMvxFormsViewPresenter>();
                     _formsApplication = formsPresenter.FormsApplication;
                 }
                 return _formsApplication;
@@ -109,7 +109,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
         {
             InitializeForms(bundle);
 
-            var startup = Mvx.Resolve<IMvxAppStart>();
+            var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
             if (!startup.IsStarted)
                 startup.Start(GetAppStartHint(bundle));
 

@@ -26,7 +26,7 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             Type fragmentHostViewType = null, bool isCacheableFragment = false) : base(title, viewPagerResourceName,
             activityHostViewModelType, addToBackStack, fragmentHostViewType, isCacheableFragment)
         {
-            var context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext;
+            var context = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext;
 
             TabLayoutResourceId = !string.IsNullOrEmpty(tabLayoutResourceName)
                 ? context.Resources.GetIdentifier(tabLayoutResourceName, "id", context.PackageName)

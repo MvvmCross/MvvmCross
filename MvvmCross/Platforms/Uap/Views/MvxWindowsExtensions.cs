@@ -31,7 +31,7 @@ namespace MvvmCross.Platforms.Uap.Views
         {
             if (key > 0)
             {
-                var viewModelLoader = Mvx.Resolve<IMvxWindowsViewModelRequestTranslator>();
+                var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxWindowsViewModelRequestTranslator>();
                 viewModelLoader.RemoveSubViewModelWithKey(key);
             }
         }
@@ -95,7 +95,7 @@ namespace MvvmCross.Platforms.Uap.Views
             //#warning TODO - BackStack not cleared for WinRT
             //phoneView.ClearBackStack();
             //            }
-            var viewModelLoader = Mvx.Resolve<IMvxWindowsViewModelLoader>();
+            var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxWindowsViewModelLoader>();
             return viewModelLoader.Load(requestText, bundle);
         }
     }

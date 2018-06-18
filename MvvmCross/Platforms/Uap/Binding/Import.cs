@@ -47,12 +47,12 @@ namespace MvvmCross.Platforms.Uap.Binding
             }
             else
             {
-                Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(
+                Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(
                     registry =>
                         {
                             registry.AddOrOverwriteFrom(assembly);
                         });
-                Mvx.CallbackWhenRegistered<IMvxValueCombinerRegistry>(
+                Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueCombinerRegistry>(
                     registry =>
                         {
                             registry.AddOrOverwriteFrom(assembly);

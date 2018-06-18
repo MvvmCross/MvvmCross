@@ -13,7 +13,7 @@ namespace MvvmCross.Plugin.Visibility.Platforms.Console
         public override void Load()
         {
             base.Load();
-            Mvx.RegisterSingleton<IMvxNativeVisibility>(new MvxConsoleVisibility());
+            Mvx.IoCProvider.RegisterSingleton<IMvxNativeVisibility>(new MvxConsoleVisibility());
         }
     }
 }

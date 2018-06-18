@@ -15,7 +15,7 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
     {
         private static Type GetActivityViewModelType(Type activityType)
         {
-            if (Mvx.TryResolve(out IMvxViewModelTypeFinder associatedTypeFinder))
+            if (Mvx.IoCProvider.TryResolve(out IMvxViewModelTypeFinder associatedTypeFinder))
                 return associatedTypeFinder.FindTypeOrNull(activityType);
 
             MvxLog.Instance.Trace("No view model type finder available - assuming we are looking for a splash screen - returning null");

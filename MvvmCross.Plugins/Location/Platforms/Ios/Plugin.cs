@@ -10,7 +10,7 @@ namespace MvvmCross.Plugin.Location.Platforms.Ios
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxLocationWatcher>(() => new MvxIosLocationWatcher());
+            Mvx.IoCProvider.RegisterSingleton<IMvxLocationWatcher>(() => new MvxIosLocationWatcher());
         }
     }
 }

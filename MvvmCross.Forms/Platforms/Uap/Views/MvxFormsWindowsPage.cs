@@ -32,7 +32,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
 
         protected virtual void RunAppStart(object hint = null)
         {
-            var startup = Mvx.Resolve<IMvxAppStart>();
+            var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
             if(!startup.IsStarted)
                 startup.Start(GetAppStartHint(hint));
 
@@ -46,7 +46,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
 
         protected virtual void LoadFormsApplication()
         {
-            var presenter = Mvx.Resolve<IMvxFormsViewPresenter>() as MvxFormsUwpViewPresenter;
+            var presenter = Mvx.IoCProvider.Resolve<IMvxFormsViewPresenter>() as MvxFormsUwpViewPresenter;
             LoadApplication(presenter.FormsApplication);
         }
     }

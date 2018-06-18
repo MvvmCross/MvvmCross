@@ -43,7 +43,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             var viewModelType = fragmentView.FindAssociatedViewModelType(fragment.Activity.GetType());
             var view = fragmentView as IMvxView;
 
-            var cache = Mvx.Resolve<IMvxMultipleViewModelCache>();
+            var cache = Mvx.IoCProvider.Resolve<IMvxMultipleViewModelCache>();
             var cached = cache.GetAndClear(viewModelType, fragmentView.UniqueImmutableCacheTag);
 
             view.OnViewCreate(() => cached ?? fragmentView.LoadViewModel(bundle, fragment.Activity.GetType(), request));
@@ -145,7 +145,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
 
         public static void LoadViewModelFrom(this Android.Views.IMvxFragmentView view, MvxViewModelRequest request, IMvxBundle savedState = null)
         {
-            var loader = Mvx.Resolve<IMvxViewModelLoader>();
+            var loader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(request, savedState);
             if (viewModel == null)
             {

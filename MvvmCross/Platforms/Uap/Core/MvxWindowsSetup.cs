@@ -23,6 +23,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Presenters;
+using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Uap.Core
 {
@@ -66,7 +67,7 @@ namespace MvvmCross.Platforms.Uap.Core
         protected virtual void InitializeSuspensionManager()
         {
             var suspensionManager = CreateSuspensionManager();
-            Mvx.RegisterSingleton(suspensionManager);
+            Mvx.IoCProvider.RegisterSingleton(suspensionManager);
 
             if (_suspensionManagerSessionStateKey != null)
                 suspensionManager.RegisterFrame(_rootFrame, _suspensionManagerSessionStateKey);
@@ -80,8 +81,8 @@ namespace MvvmCross.Platforms.Uap.Core
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
             var container = CreateStoreViewsContainer();
-            Mvx.RegisterSingleton<IMvxWindowsViewModelRequestTranslator>(container);
-            Mvx.RegisterSingleton<IMvxWindowsViewModelLoader>(container);
+            Mvx.IoCProvider.RegisterSingleton<IMvxWindowsViewModelRequestTranslator>(container);
+            Mvx.IoCProvider.RegisterSingleton<IMvxWindowsViewModelLoader>(container);
             var viewsContainer = container as MvxViewsContainer;
             if (viewsContainer == null)
                 throw new MvxException("CreateViewsContainer must return an MvxViewsContainer");
@@ -120,8 +121,8 @@ namespace MvvmCross.Platforms.Uap.Core
         protected virtual void RegisterPresenter()
         {
             var presenter = Presenter;
-            Mvx.RegisterSingleton(presenter);
-            Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
+            Mvx.IoCProvider.RegisterSingleton(presenter);
+            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
         protected override void InitializeLastChance()
@@ -139,9 +140,9 @@ namespace MvvmCross.Platforms.Uap.Core
 
         protected virtual void RegisterBindingBuilderCallbacks()
         {
-            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
         }
 
         protected virtual void FillBindingNames(IMvxBindingNameRegistry registry)
@@ -194,6 +195,6 @@ namespace MvvmCross.Platforms.Uap.Core
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
 
-        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
     }
 }
