@@ -12,6 +12,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Converters;
 using MvvmCross.Core;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Mac.Binding;
 using MvvmCross.Platforms.Mac.Presenters;
 using MvvmCross.Platforms.Mac.Views;
@@ -75,8 +76,8 @@ namespace MvvmCross.Platforms.Mac.Core
 
         protected void RegisterMacViewCreator(IMvxMacViewsContainer container)
         {
-            Mvx.RegisterSingleton<IMvxMacViewCreator>(container);
-            Mvx.RegisterSingleton<IMvxCurrentRequest>(container);
+            Mvx.IoCProvider.RegisterSingleton<IMvxMacViewCreator>(container);
+            Mvx.IoCProvider.RegisterSingleton<IMvxCurrentRequest>(container);
         }
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
@@ -93,7 +94,7 @@ namespace MvvmCross.Platforms.Mac.Core
 
         protected virtual void RegisterLifetime()
         {
-            Mvx.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
+            Mvx.IoCProvider.RegisterSingleton<IMvxLifetime>(_applicationDelegate);
         }
 
         protected IMvxMacViewPresenter Presenter
@@ -113,8 +114,8 @@ namespace MvvmCross.Platforms.Mac.Core
         protected virtual void RegisterPresenter()
         {
             var presenter = this.Presenter;
-            Mvx.RegisterSingleton(presenter);
-            Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
+            Mvx.IoCProvider.RegisterSingleton(presenter);
+            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
         protected override void InitializeLastChance()
@@ -132,9 +133,9 @@ namespace MvvmCross.Platforms.Mac.Core
 
         protected virtual void RegisterBindingBuilderCallbacks()
         {
-            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(this.FillValueConverters);
-            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(this.FillTargetFactories);
-            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(this.FillBindingNames);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(this.FillValueConverters);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(this.FillTargetFactories);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(this.FillBindingNames);
         }
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
@@ -179,7 +180,7 @@ namespace MvvmCross.Platforms.Mac.Core
     public class MvxMacSetup<TApplication> : MvxMacSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

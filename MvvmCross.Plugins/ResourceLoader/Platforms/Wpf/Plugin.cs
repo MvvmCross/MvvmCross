@@ -12,7 +12,7 @@ namespace MvvmCross.Plugin.ResourceLoader.Platforms.Wpf
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxResourceLoader, MvxWpfResourceLoader>();
+            Mvx.IoCProvider.RegisterType<IMvxResourceLoader, MvxWpfResourceLoader>();
         }
     }
 }

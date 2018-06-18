@@ -85,14 +85,14 @@ namespace MvvmCross.Platforms.Uap.Presenters
                 return;
             }
 
-            var navigationService = Mvx.Resolve<IMvxNavigationService>();
+            var navigationService = Mvx.IoCProvider.Resolve<IMvxNavigationService>();
 
             backRequestedEventArgs.Handled = await navigationService.Close(currentView.ViewModel);
         }
 
         protected virtual string GetRequestText(MvxViewModelRequest request)
         {
-            var requestTranslator = Mvx.Resolve<IMvxWindowsViewModelRequestTranslator>();
+            var requestTranslator = Mvx.IoCProvider.Resolve<IMvxWindowsViewModelRequestTranslator>();
             string requestText = string.Empty;
             if (request is MvxViewModelInstanceRequest)
             {
@@ -114,7 +114,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
 
         protected virtual void ShowSplitView(Type viewType, MvxSplitViewPresentationAttribute attribute, MvxViewModelRequest request)
         {
-            var viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
+            var viewsContainer = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
 
             if (_rootFrame.Content is MvxWindowsPage currentPage)
             {
@@ -172,7 +172,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
 
         protected virtual bool CloseRegionView(IMvxViewModel viewModel, MvxRegionPresentationAttribute attribute)
         {
-            var viewFinder = Mvx.Resolve<IMvxViewsContainer>();
+            var viewFinder = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
             var viewType = viewFinder.GetViewType(viewModel.GetType());
             if (viewType.HasRegionAttribute())
             {
@@ -224,7 +224,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
             try
             {
                 var requestText = GetRequestText(request);
-                var viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
+                var viewsContainer = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
 
                 _rootFrame.Navigate(viewType, requestText); //Frame won't allow serialization of it's nav-state if it gets a non-simple type as a nav param
 

@@ -28,10 +28,10 @@ namespace MvvmCross.Forms.Bindings
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)
             {
                 var iocProvider = MvxIoCProvider.Initialize();
-                Mvx.RegisterSingleton(iocProvider);
+                Mvx.IoCProvider.RegisterSingleton(iocProvider);
             }
 
-            if (!Mvx.CanResolve<IMvxBindingParser>())
+            if (!Mvx.IoCProvider.CanResolve<IMvxBindingParser>())
             {
                 //We might want to look into returning the platform specific Forms binder
                 var builder = new MvxBindingBuilder();

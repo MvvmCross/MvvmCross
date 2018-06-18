@@ -14,6 +14,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Converters;
 using MvvmCross.Core;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Wpf.Binding;
 using MvvmCross.Platforms.Wpf.Presenters;
 using MvvmCross.Platforms.Wpf.Views;
@@ -56,7 +57,7 @@ namespace MvvmCross.Platforms.Wpf.Core
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
             var toReturn = CreateWpfViewsContainer();
-            Mvx.RegisterSingleton<IMvxWpfViewLoader>(toReturn);
+            Mvx.IoCProvider.RegisterSingleton<IMvxWpfViewLoader>(toReturn);
             return toReturn;
         }
 
@@ -87,8 +88,8 @@ namespace MvvmCross.Platforms.Wpf.Core
         protected virtual void RegisterPresenter()
         {
             var presenter = Presenter;
-            Mvx.RegisterSingleton(presenter);
-            Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
+            Mvx.IoCProvider.RegisterSingleton(presenter);
+            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
         protected override IMvxNameMapping CreateViewToViewModelNaming()
@@ -111,9 +112,9 @@ namespace MvvmCross.Platforms.Wpf.Core
 
         protected virtual void RegisterBindingBuilderCallbacks()
         {
-            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
         }
 
         protected virtual void FillBindingNames(IMvxBindingNameRegistry registry)
@@ -155,7 +156,7 @@ namespace MvvmCross.Platforms.Wpf.Core
     public class MvxWpfSetup<TApplication> : MvxWpfSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

@@ -49,7 +49,7 @@ namespace MvvmCross.Views
                 return null;
 
             IMvxViewModelTypeFinder associatedTypeFinder;
-            if (!Mvx.TryResolve(out associatedTypeFinder))
+            if (!Mvx.IoCProvider.TryResolve(out associatedTypeFinder))
             {
                 MvxLog.Instance.Trace(
                     "No view model type finder available - assuming we are looking for a splash screen - returning null");

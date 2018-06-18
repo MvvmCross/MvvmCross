@@ -121,7 +121,7 @@ namespace MvvmCross.Plugin.Network.Rest
 
             public override void WriteTo(Stream stream)
             {
-                var file = Mvx.Resolve<IMvxFileStore>();
+                var file = Mvx.IoCProvider.Resolve<IMvxFileStore>();
                 var result = file.TryReadBinaryFile(Path, (fileStream) =>
                     {
                         fileStream.CopyTo(stream);

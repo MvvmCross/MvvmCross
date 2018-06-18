@@ -30,7 +30,7 @@ namespace MvvmCross.Platforms.Android
                         return;
                     }
 
-                    Mvx.Resolve<IMvxIntentResultSource>().Result += OnMvxIntentResultReceived;
+                    Mvx.IoCProvider.Resolve<IMvxIntentResultSource>().Result += OnMvxIntentResultReceived;
                     androidView.MvxInternalStartActivityForResult(intent, requestCode);
                 });
         }
@@ -44,13 +44,13 @@ namespace MvvmCross.Platforms.Android
         {
             MvxLog.Instance.Trace("OnMvxIntentResultReceived in MvxAndroidTask");
             // TODO - is this correct - should we always remove the result registration even if this isn't necessarily our result?
-            Mvx.Resolve<IMvxIntentResultSource>().Result -= OnMvxIntentResultReceived;
+            Mvx.IoCProvider.Resolve<IMvxIntentResultSource>().Result -= OnMvxIntentResultReceived;
             ProcessMvxIntentResult(e);
         }
 
         protected void DoOnActivity(Action<Activity> action, bool ensureOnMainThread = true)
         {
-            var activity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
+            var activity = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity;
 
             if (ensureOnMainThread)
             {

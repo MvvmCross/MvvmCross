@@ -34,7 +34,7 @@ namespace MvvmCross.Base
                 if (_inpcInterceptorResolveAttempted)
                     return _inpcInterceptor;
 
-                Mvx.TryResolve<IMvxInpcInterceptor>(out _inpcInterceptor);
+                Mvx.IoCProvider.TryResolve<IMvxInpcInterceptor>(out _inpcInterceptor);
                 _inpcInterceptorResolveAttempted = true;
                 return _inpcInterceptor;
             }
@@ -46,7 +46,7 @@ namespace MvvmCross.Base
         {
             get
             {
-                _parser = _parser ?? Mvx.Resolve<IMvxStringToTypeParser>();
+                _parser = _parser ?? Mvx.IoCProvider.Resolve<IMvxStringToTypeParser>();
                 return _parser;
             }
         }
@@ -57,7 +57,7 @@ namespace MvvmCross.Base
         {
             get
             {
-                _settings = _settings ?? Mvx.Resolve<IMvxSettings>();
+                _settings = _settings ?? Mvx.IoCProvider.Resolve<IMvxSettings>();
                 return _settings;
             }
         }

@@ -94,7 +94,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
             if (_reqData != string.Empty)
             {
-                var viewModelLoader = Mvx.Resolve<IMvxWindowsViewModelLoader>();
+                var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxWindowsViewModelLoader>();
                 ViewModel = viewModelLoader.Load(e.Parameter.ToString(), LoadStateBundle(e));
             }
             _reqData = (string)e.Parameter;
@@ -109,7 +109,7 @@ namespace MvvmCross.Platforms.Uap.Views
             var bundle = this.CreateSaveStateBundle();
             SaveStateBundle(e, bundle);
 
-            var translator = Mvx.Resolve<IMvxWindowsViewModelRequestTranslator>();
+            var translator = Mvx.IoCProvider.Resolve<IMvxWindowsViewModelRequestTranslator>();
 
             if (e.NavigationMode == NavigationMode.Back)
             {
@@ -141,7 +141,7 @@ namespace MvvmCross.Platforms.Uap.Views
         {
             get
             {
-                _suspensionManager = _suspensionManager ?? Mvx.Resolve<IMvxSuspensionManager>();
+                _suspensionManager = _suspensionManager ?? Mvx.IoCProvider.Resolve<IMvxSuspensionManager>();
                 return _suspensionManager;
             }
         }

@@ -9,7 +9,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Wpf
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxPictureChooserTask, MvxPictureChooserTask>();
+            Mvx.IoCProvider.RegisterType<IMvxPictureChooserTask, MvxPictureChooserTask>();
         }
     }
 }

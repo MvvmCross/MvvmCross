@@ -36,28 +36,28 @@ namespace MvvmCross.Platforms.Ios.Views
             MvxViewModelRequest request)
             where TTargetViewModel : class, IMvxViewModel
         {
-            return Mvx.Resolve<IMvxIosViewCreator>().CreateView(request);
+            return Mvx.IoCProvider.Resolve<IMvxIosViewCreator>().CreateView(request);
         }
 
         public static IMvxIosView CreateViewControllerFor(
             this IMvxCanCreateIosView view,
             MvxViewModelRequest request)
         {
-            return Mvx.Resolve<IMvxIosViewCreator>().CreateView(request);
+            return Mvx.IoCProvider.Resolve<IMvxIosViewCreator>().CreateView(request);
         }
 
         public static IMvxIosView CreateViewControllerFor(
             this IMvxCanCreateIosView view, Type viewType,
             MvxViewModelRequest request)
         {
-            return Mvx.Resolve<IMvxIosViewCreator>().CreateViewOfType(viewType, request);
+            return Mvx.IoCProvider.Resolve<IMvxIosViewCreator>().CreateViewOfType(viewType, request);
         }
 
         public static IMvxIosView CreateViewControllerFor(
             this IMvxCanCreateIosView view,
             IMvxViewModel viewModel)
         {
-            return Mvx.Resolve<IMvxIosViewCreator>().CreateView(viewModel);
+            return Mvx.IoCProvider.Resolve<IMvxIosViewCreator>().CreateView(viewModel);
         }
     }
 }

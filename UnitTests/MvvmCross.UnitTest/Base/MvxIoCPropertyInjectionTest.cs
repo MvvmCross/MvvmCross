@@ -54,12 +54,12 @@ namespace MvvmCross.UnitTest.Base
             MvxSingleton.ClearAllSingletons();
             var instance = MvxIoCProvider.Initialize();
 
-            Mvx.RegisterType<IA, A>();
-            Mvx.RegisterType<IB, B>();
-            Mvx.RegisterType<IC, C>();
+            Mvx.IoCProvider.RegisterType<IA, A>();
+            Mvx.IoCProvider.RegisterType<IB, B>();
+            Mvx.IoCProvider.RegisterType<IC, C>();
 
             IA a;
-            var result = Mvx.TryResolve(out a);
+            var result = Mvx.IoCProvider.TryResolve(out a);
             Assert.True(result);
             Assert.NotNull(a);
             Assert.IsType<A>(a);
@@ -83,12 +83,12 @@ namespace MvvmCross.UnitTest.Base
             };
             var instance = MvxIoCProvider.Initialize(options);
 
-            Mvx.RegisterType<IA, A>();
-            Mvx.RegisterType<IB, B>();
-            Mvx.RegisterType<IC, C>();
+            Mvx.IoCProvider.RegisterType<IA, A>();
+            Mvx.IoCProvider.RegisterType<IB, B>();
+            Mvx.IoCProvider.RegisterType<IC, C>();
 
             IA a;
-            var result = Mvx.TryResolve(out a);
+            var result = Mvx.IoCProvider.TryResolve(out a);
             Assert.True(result);
             Assert.NotNull(a);
             Assert.IsType<A>(a);
@@ -113,12 +113,12 @@ namespace MvvmCross.UnitTest.Base
             };
             var instance = MvxIoCProvider.Initialize(options);
 
-            Mvx.RegisterType<IA, A>();
-            Mvx.RegisterType<IB, B>();
-            Mvx.RegisterType<IC, C>();
+            Mvx.IoCProvider.RegisterType<IA, A>();
+            Mvx.IoCProvider.RegisterType<IB, B>();
+            Mvx.IoCProvider.RegisterType<IC, C>();
 
             IA a;
-            var result = Mvx.TryResolve(out a);
+            var result = Mvx.IoCProvider.TryResolve(out a);
             Assert.True(result);
             Assert.NotNull(a);
             Assert.IsType<A>(a);

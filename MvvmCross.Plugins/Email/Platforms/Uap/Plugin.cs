@@ -9,8 +9,8 @@ namespace MvvmCross.Plugin.Email.Platforms.Uap
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxComposeEmailTask, MvxComposeEmailTask>();
-            Mvx.RegisterType<IMvxComposeEmailTaskEx, MvxComposeEmailTask>();
+            Mvx.IoCProvider.RegisterType<IMvxComposeEmailTask, MvxComposeEmailTask>();
+            Mvx.IoCProvider.RegisterType<IMvxComposeEmailTaskEx, MvxComposeEmailTask>();
         }
     }
 }

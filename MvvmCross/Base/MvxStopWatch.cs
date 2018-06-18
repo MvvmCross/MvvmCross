@@ -10,7 +10,7 @@ namespace MvvmCross.Base
     public class MvxStopWatch
         : IDisposable
     {
-        private static readonly IMvxLog _defaultLog = Mvx.Resolve<IMvxLogProvider>().GetLogFor("mvxStopWatch");
+        private static readonly IMvxLog _defaultLog = Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor("mvxStopWatch");
         
         private readonly IMvxLog _log;
         private readonly string _message;
@@ -25,7 +25,7 @@ namespace MvvmCross.Base
 
         private MvxStopWatch(string tag, string text, params object[] args)
         {
-            _log = Mvx.Resolve<IMvxLogProvider>().GetLogFor(tag);
+            _log = Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor(tag);
             _startTickCount = Environment.TickCount;
             _message = string.Format(text, args);
         }

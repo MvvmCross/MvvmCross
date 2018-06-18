@@ -66,7 +66,7 @@ namespace MvvmCross.Plugin.Sidebar
 
             if (!attribute.ShowPanel)
             {
-                var menu = Mvx.Resolve<IMvxSidebarViewController>();
+                var menu = Mvx.IoCProvider.Resolve<IMvxSidebarViewController>();
                 menu?.CloseMenu();
             }
         }
@@ -154,7 +154,7 @@ namespace MvvmCross.Plugin.Sidebar
 
                 SetWindowRootViewController(viewController, attribute);
 
-                Mvx.RegisterSingleton<IMvxSidebarViewController>(SideBarViewController);
+                Mvx.IoCProvider.RegisterSingleton<IMvxSidebarViewController>(SideBarViewController);
 
                 CloseModalViewControllers();
                 CloseTabBarViewController();

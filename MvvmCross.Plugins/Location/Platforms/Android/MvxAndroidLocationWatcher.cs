@@ -28,7 +28,7 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
             _locationListener = new MvxLocationListener(this);
         }
 
-        private Context Context => _context ?? (_context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext);
+        private Context Context => _context ?? (_context = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext);
 
         protected override void PlatformSpecificStart(MvxLocationOptions options)
         {

@@ -13,10 +13,10 @@ namespace MvvmCross.ViewModels
         : IMvxViewModelLocator
     {
         private IMvxNavigationService _navigationService;
-        protected IMvxNavigationService NavigationService => _navigationService ?? (_navigationService = Mvx.Resolve<IMvxNavigationService>());
+        protected IMvxNavigationService NavigationService => _navigationService ?? (_navigationService = Mvx.IoCProvider.Resolve<IMvxNavigationService>());
 
         private IMvxLogProvider _logProvider;
-        protected IMvxLogProvider LogProvider => _logProvider ?? (_logProvider = Mvx.Resolve<IMvxLogProvider>());
+        protected IMvxLogProvider LogProvider => _logProvider ?? (_logProvider = Mvx.IoCProvider.Resolve<IMvxLogProvider>());
 
         public MvxDefaultViewModelLocator() : this(null) { }
 
@@ -52,7 +52,7 @@ namespace MvvmCross.ViewModels
             IMvxViewModel viewModel;
             try
             {
-                viewModel = (IMvxViewModel)Mvx.IoCConstruct(viewModelType);
+                viewModel = (IMvxViewModel)Mvx.IoCProvider.IoCConstruct(viewModelType);
             }
             catch(Exception exception)
             {
@@ -74,7 +74,7 @@ namespace MvvmCross.ViewModels
             IMvxViewModel<TParameter> viewModel;
             try
             {
-                viewModel = (IMvxViewModel<TParameter>)Mvx.IoCConstruct(viewModelType);
+                viewModel = (IMvxViewModel<TParameter>)Mvx.IoCProvider.IoCConstruct(viewModelType);
             }
             catch(Exception exception)
             {

@@ -16,7 +16,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
     {
         private IMvxSourcePropertyPathParser _propertyPathParser;
 
-        protected IMvxSourcePropertyPathParser SourcePropertyPathParser => _propertyPathParser ?? (_propertyPathParser = Mvx.Resolve<IMvxSourcePropertyPathParser>());
+        protected IMvxSourcePropertyPathParser SourcePropertyPathParser => _propertyPathParser ?? (_propertyPathParser = Mvx.IoCProvider.Resolve<IMvxSourcePropertyPathParser>());
 
         private readonly List<IMvxSourceBindingFactoryExtension> _extensions = new List<IMvxSourceBindingFactoryExtension>();
 

@@ -131,7 +131,7 @@ namespace MvvmCross.Plugin.Sidebar.Views
         protected virtual IMvxIosView CreateInstance(Type viewControllerType)
         {
             var viewModelType = GetBaseType(viewControllerType);
-            var presenter = Mvx.Resolve<IMvxIosViewPresenter>();
+            var presenter = Mvx.IoCProvider.Resolve<IMvxIosViewPresenter>();
             return presenter.CreateViewControllerFor(new MvxViewModelRequest(viewModelType, null, null));
         }
 

@@ -105,7 +105,7 @@ namespace MvvmCross.Commands
 
         public MvxCommandBase()
         {
-            if (!Mvx.TryResolve<IMvxCommandHelper>(out _commandHelper))
+            if (!Mvx.IoCProvider.TryResolve<IMvxCommandHelper>(out _commandHelper))
                 _commandHelper = new MvxWeakCommandHelper();
 
             var alwaysOnUIThread = MvxSingletonCache.Instance == null || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;

@@ -170,10 +170,10 @@ namespace MvvmCross.IoC
                 if (!pair.ServiceTypes.Any())
                     continue;
 
-                var instance = Mvx.IoCConstruct(pair.ImplementationType);
+                var instance = Mvx.IoCProvider.IoCConstruct(pair.ImplementationType);
                 foreach (var serviceType in pair.ServiceTypes)
                 {
-                    Mvx.RegisterSingleton(serviceType, instance);
+                    Mvx.IoCProvider.RegisterSingleton(serviceType, instance);
                 }
             }
         }
@@ -190,7 +190,7 @@ namespace MvvmCross.IoC
                 var creationFunc = new Func<object>(() => creator.Instance);
                 foreach (var serviceType in pair.ServiceTypes)
                 {
-                    Mvx.RegisterSingleton(serviceType, creationFunc);
+                    Mvx.IoCProvider.RegisterSingleton(serviceType, creationFunc);
                 }
             }
         }
@@ -201,7 +201,7 @@ namespace MvvmCross.IoC
             {
                 foreach (var serviceType in pair.ServiceTypes)
                 {
-                    Mvx.RegisterType(serviceType, pair.ImplementationType);
+                    Mvx.IoCProvider.RegisterType(serviceType, pair.ImplementationType);
                 }
             }
         }
