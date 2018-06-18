@@ -8,9 +8,15 @@ namespace MvvmCross.Core
     {
         public bool AlwaysRaiseInpcOnUserInterfaceThread { get; set; }
 
+        public bool ShouldRaisePropertyChanging { get; set; }
+
+        public bool ShouldLogInpc { get; set; }
+
         public MvxSettings()
         {
             AlwaysRaiseInpcOnUserInterfaceThread = true;
+            ShouldRaisePropertyChanging = true;
+            ShouldLogInpc = false;
         }
     }
 }

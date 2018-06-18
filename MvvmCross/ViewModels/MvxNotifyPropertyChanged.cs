@@ -7,8 +7,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using MvvmCross.Annotations;
 using MvvmCross.Base;
+using MvvmCross.Logging;
 
 namespace MvvmCross.ViewModels
 {
@@ -18,8 +20,11 @@ namespace MvvmCross.ViewModels
     {
         private static readonly PropertyChangedEventArgs AllPropertiesChanged = new PropertyChangedEventArgs(string.Empty);
         public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangingEventHandler PropertyChanging;
 
         private bool _shouldAlwaysRaiseInpcOnUserInterfaceThread;
+        private bool _shouldRaisePropertyChanging;
+        private bool _shouldLogInpc;
 
         public bool ShouldAlwaysRaiseInpcOnUserInterfaceThread()
         {
@@ -31,37 +36,94 @@ namespace MvvmCross.ViewModels
             _shouldAlwaysRaiseInpcOnUserInterfaceThread = value;
         }
 
+        public bool ShouldRaisePropertyChanging()
+        {
+            return _shouldRaisePropertyChanging;
+        }
+
+        public void ShouldRaisePropertyChanging(bool value)
+        {
+            _shouldRaisePropertyChanging = value;
+        }
+        public bool ShouldLogInpc()
+        {
+            return _shouldLogInpc;
+        }
+
+        public void ShouldLogInpc(bool value)
+        {
+            _shouldLogInpc = value;
+        }
+
         protected MvxNotifyPropertyChanged()
         {
             var alwaysOnUIThread = MvxSingletonCache.Instance == null || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
             ShouldAlwaysRaiseInpcOnUserInterfaceThread(alwaysOnUIThread);
+            var raisePropertyChanging = MvxSingletonCache.Instance == null || MvxSingletonCache.Instance.Settings.ShouldRaisePropertyChanging;
+            ShouldRaisePropertyChanging(raisePropertyChanging);
+            var shouldLogInpc = MvxSingletonCache.Instance == null || MvxSingletonCache.Instance.Settings.ShouldLogInpc;
+            ShouldLogInpc(shouldLogInpc);
         }
 
-        [NotifyPropertyChangedInvocator]
-        public void RaisePropertyChanged<T>(Expression<Func<T>> property)
+        public bool RaisePropertyChanging<T>(T newValue, Expression<Func<T>> property)
         {
             var name = this.GetPropertyNameFromExpression(property);
-            RaisePropertyChanged(name);
+            return RaisePropertyChanging(newValue, name);
+        }
+
+        public bool RaisePropertyChanging<T>(T newValue, [CallerMemberName] string whichProperty = "")
+        {
+            var changedArgs = new MvxPropertyChangingEventArgs<T>(whichProperty, newValue);
+            return RaisePropertyChanging(changedArgs);
+        }
+
+        public virtual bool RaisePropertyChanging<T>(MvxPropertyChangingEventArgs<T> changingArgs)
+        {
+            // check for interception before broadcasting change
+            if (InterceptRaisePropertyChanging(changingArgs)
+                == MvxInpcInterceptionResult.DoNotRaisePropertyChanging)
+                return !changingArgs.Cancel;
+
+            if (ShouldLogInpc())
+                MvxLog.Instance.Trace($"Property '{changingArgs.PropertyName}' changing value to {changingArgs.NewValue.ToString()}");
+
+            PropertyChanging?.Invoke(this, changingArgs);
+
+            return !changingArgs.Cancel;
         }
 
         [NotifyPropertyChangedInvocator]
-        public void RaisePropertyChanged([CallerMemberName] string whichProperty = "")
+        public Task RaisePropertyChanged<T>(Expression<Func<T>> property)
+        {
+            var name = this.GetPropertyNameFromExpression(property);
+            return RaisePropertyChanged(name);
+        }
+
+        [NotifyPropertyChangedInvocator]
+        public virtual Task RaisePropertyChanged([CallerMemberName] string whichProperty = "")
         {
             var changedArgs = new PropertyChangedEventArgs(whichProperty);
-            RaisePropertyChanged(changedArgs);
+            return RaisePropertyChanged(changedArgs);
         }
 
-        public virtual void RaiseAllPropertiesChanged()
+        public virtual Task RaiseAllPropertiesChanged()
         {
-            RaisePropertyChanged(AllPropertiesChanged);
+            return RaisePropertyChanged(AllPropertiesChanged);
         }
 
-        public virtual void RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
+        public virtual async Task RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
         {
             // check for interception before broadcasting change
             if (InterceptRaisePropertyChanged(changedArgs)
                 == MvxInpcInterceptionResult.DoNotRaisePropertyChanged)
                 return;
+
+            void raiseChange()
+            {
+                if (ShouldLogInpc())
+                    MvxLog.Instance.Trace($"Property '{changedArgs.PropertyName}' value changed");
+                PropertyChanged?.Invoke(this, changedArgs);
+            }
 
             if (ShouldAlwaysRaiseInpcOnUserInterfaceThread())
             {
@@ -69,11 +131,11 @@ namespace MvvmCross.ViewModels
                 if (PropertyChanged == null)
                     return;
 
-                InvokeOnMainThread(() => PropertyChanged?.Invoke(this, changedArgs));
+                await InvokeOnMainThreadAsync(raiseChange);
             }
             else
             {
-                PropertyChanged?.Invoke(this, changedArgs);
+                raiseChange();
             }
         }
 
@@ -85,11 +147,17 @@ namespace MvvmCross.ViewModels
                 return false;
             }
 
+            if (ShouldRaisePropertyChanging())
+            {
+                var shouldSetValue = RaisePropertyChanging(value, propertyName);
+                if (!shouldSetValue)
+                    return false;
+            }
+
             storage = value;
             RaisePropertyChanged(propertyName);
             return true;
         }
-
         protected virtual MvxInpcInterceptionResult InterceptRaisePropertyChanged(PropertyChangedEventArgs changedArgs)
         {
             if (MvxSingletonCache.Instance != null)
@@ -98,6 +166,20 @@ namespace MvvmCross.ViewModels
                 if (interceptor != null)
                 {
                     return interceptor.Intercept(this, changedArgs);
+                }
+            }
+
+            return MvxInpcInterceptionResult.NotIntercepted;
+        }
+
+        protected virtual MvxInpcInterceptionResult InterceptRaisePropertyChanging(PropertyChangingEventArgs changingArgs)
+        {
+            if (MvxSingletonCache.Instance != null)
+            {
+                var interceptor = MvxSingletonCache.Instance.InpcInterceptor;
+                if (interceptor != null)
+                {
+                    return interceptor.Intercept(this, changingArgs);
                 }
             }
 
