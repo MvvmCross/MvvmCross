@@ -7,7 +7,6 @@ namespace Playground.Core.ViewModels
     {
         public ChildContentViewModel()
         {
-
         }
 
         private string _test;
