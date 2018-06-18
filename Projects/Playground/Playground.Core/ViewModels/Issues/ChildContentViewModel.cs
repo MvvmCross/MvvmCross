@@ -5,6 +5,10 @@ namespace Playground.Core.ViewModels
 {
     public class ChildContentViewModel : MvxViewModel
     {
+        public ChildContentViewModel()
+        {
+        }
+
         private string _test;
 
         public string Test
@@ -15,7 +19,7 @@ namespace Playground.Core.ViewModels
 
         public override async Task Initialize()
         {
-            Test = "Bound Text";
+            //Test = "Bound Text";
             await Task.Yield();
         }
     }
