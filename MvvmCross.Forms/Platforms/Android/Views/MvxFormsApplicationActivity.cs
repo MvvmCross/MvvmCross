@@ -176,7 +176,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
         public override async void OnBackPressed()
         {
-            var presenter = Mvx.Resolve<IMvxFormsPagePresenter>();
+            var presenter = Mvx.IoCProvider.Resolve<IMvxFormsPagePresenter>();
             var pages = presenter.CurrentPageTree;
 
             for (var i = pages.Length - 1; i >= 0; i--)
