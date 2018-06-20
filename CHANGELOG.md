@@ -1,5 +1,50 @@
 # Change Log
 
+## [Unreleased](https://github.com/MvvmCross/MvvmCross/tree/HEAD)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.1.2...HEAD)
+
+**Closed issues:**
+
+- Android: Registering MvxLanguageConverter for Resx localization broke [\#2967](https://github.com/MvvmCross/MvvmCross/issues/2967)
+- MvxFormsAppCompatActivity.OnBackPressed assumes the standard Forms page presenter is being used [\#2965](https://github.com/MvvmCross/MvvmCross/issues/2965)
+
+**Merged pull requests:**
+
+- Implementing INotifyPropertyChanging [\#2943](https://github.com/MvvmCross/MvvmCross/pull/2943) ([nickrandolph](https://github.com/nickrandolph))
+- Improve issue templates [\#2940](https://github.com/MvvmCross/MvvmCross/pull/2940) ([willsb](https://github.com/willsb))
+
+## [6.1.2](https://github.com/MvvmCross/MvvmCross/tree/6.1.2) (2018-06-18)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.1.1...6.1.2)
+
+**Closed issues:**
+
+- Binding stop working after upgrade from 6.0.1 to 6.1.1 on Xamarin.Forms [\#2960](https://github.com/MvvmCross/MvvmCross/issues/2960)
+
+**Merged pull requests:**
+
+- Use interface instead of class for forms presenter [\#2966](https://github.com/MvvmCross/MvvmCross/pull/2966) ([martijn00](https://github.com/martijn00))
+- Binding to Child View's BindingContextProperty [\#2959](https://github.com/MvvmCross/MvvmCross/pull/2959) ([borbmizzet](https://github.com/borbmizzet))
+
+## [6.1.1](https://github.com/MvvmCross/MvvmCross/tree/6.1.1) (2018-06-12)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.1.0...6.1.1)
+
+**Fixed bugs:**
+
+- MvxSetup Assembly.GetEntryAssembly\(\) returns null [\#2957](https://github.com/MvvmCross/MvvmCross/issues/2957)
+
+**Closed issues:**
+
+- \[Android\] 6.1 hangs on splash screen [\#2955](https://github.com/MvvmCross/MvvmCross/issues/2955)
+- The app stuck at Splash Screen when using MVVMCross 6.x [\#2953](https://github.com/MvvmCross/MvvmCross/issues/2953)
+- Nightly builds are not updated [\#2948](https://github.com/MvvmCross/MvvmCross/issues/2948)
+- Failed to resolve "MvvmCross.Core.MvxSetup" reference from "MvvmCross, Version=6.1.0.0, Culture=neutral, PublicKeyToken=null" [\#2956](https://github.com/MvvmCross/MvvmCross/issues/2956)
+- Playground.Forms.Droid can't run [\#2951](https://github.com/MvvmCross/MvvmCross/issues/2951)
+
+**Merged pull requests:**
+
+- Use AppDomain.CurrentDomain to find assemblies.  [\#2958](https://github.com/MvvmCross/MvvmCross/pull/2958) ([Cheesebaron](https://github.com/Cheesebaron))
+
 ## [6.1.0](https://github.com/MvvmCross/MvvmCross/tree/6.1.0) (2018-06-11)
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.1.0-beta2...6.1.0)
 
