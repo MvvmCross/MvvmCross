@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -61,7 +61,6 @@ namespace MvvmCross.Platforms.Uap.Presenters
             MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new page presentation");
             return new MvxPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
         }
-
 
         public override void Show(MvxViewModelRequest request)
         {
