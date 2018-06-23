@@ -445,17 +445,14 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
         {
-
         }
 
         protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
         {
-
         }
 
         protected virtual void OnFragmentPopped(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
         {
-
         }
 
         protected virtual void ShowDialogFragment(
