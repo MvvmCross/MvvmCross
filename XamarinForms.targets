@@ -1,6 +1,10 @@
 <Project>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.530893" />
+    <PackageReference Include="Xamarin.Forms" Version="3.1.0.583944" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(MSBuildProjectName.Contains('Wpf')) and '$(IsXamarinForms)' == 'true' ">
+    <PackageReference Include="Xamarin.Forms.Platform.WPF" Version="3.1.0.583944" />
   </ItemGroup>
 
   <Import Project="XamarinBuild.targets" Condition="'$(IsXamarinForms)' == 'true' and $(TargetFramework.StartsWith('MonoAndroid'))"/>
