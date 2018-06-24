@@ -23,7 +23,7 @@ namespace MvvmCross.Platforms.Tvos.Views
             {
                 MvxLog.Instance.Trace(
                     "Request is null - assuming this is a TabBar type situation where ViewDidLoad is called during construction... patching the request now - but watch out for problems with virtual calls during construction");
-                tvOSView.Request = Mvx.Resolve<IMvxCurrentRequest>().CurrentRequest;
+                tvOSView.Request = Mvx.IoCProvider.Resolve<IMvxCurrentRequest>().CurrentRequest;
             }
 
             var instanceRequest = tvOSView.Request as MvxViewModelInstanceRequest;
@@ -32,7 +32,7 @@ namespace MvvmCross.Platforms.Tvos.Views
                 return instanceRequest.ViewModelInstance;
             }
 
-            var loader = Mvx.Resolve<IMvxViewModelLoader>();
+            var loader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(tvOSView.Request, null /* no saved state on tvOS currently */);
             if(viewModel == null)
                 throw new MvxException("ViewModel not loaded for " + tvOSView.Request.ViewModelType);

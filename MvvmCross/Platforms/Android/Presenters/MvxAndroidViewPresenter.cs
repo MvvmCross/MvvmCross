@@ -40,7 +40,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             get
             {
                 if (_mvxAndroidCurrentTopActivity == null)
-                    _mvxAndroidCurrentTopActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>();
+                    _mvxAndroidCurrentTopActivity = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>();
                 return _mvxAndroidCurrentTopActivity.Activity;
             }
         }
@@ -51,7 +51,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             get
             {
                 if (_activityLifetimeListener == null)
-                    _activityLifetimeListener = Mvx.Resolve<IMvxAndroidActivityLifetimeListener>();
+                    _activityLifetimeListener = Mvx.IoCProvider.Resolve<IMvxAndroidActivityLifetimeListener>();
                 return _activityLifetimeListener;
             }
         }
@@ -62,7 +62,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             get
             {
                 if (_navigationSerializer == null)
-                    _navigationSerializer = Mvx.Resolve<IMvxNavigationSerializer>();
+                    _navigationSerializer = Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>();
                 return _navigationSerializer;
             }
         }
@@ -269,7 +269,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual Intent CreateIntentForRequest(MvxViewModelRequest request)
         {
-            IMvxAndroidViewModelRequestTranslator requestTranslator = Mvx.Resolve<IMvxAndroidViewModelRequestTranslator>();
+            IMvxAndroidViewModelRequestTranslator requestTranslator = Mvx.IoCProvider.Resolve<IMvxAndroidViewModelRequestTranslator>();
 
             if (request is MvxViewModelInstanceRequest viewModelInstanceRequest)
             {
@@ -445,17 +445,14 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual void OnFragmentChanged(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
         {
-
         }
 
         protected virtual void OnFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
         {
-
         }
 
         protected virtual void OnFragmentPopped(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute)
         {
-
         }
 
         protected virtual void ShowDialogFragment(

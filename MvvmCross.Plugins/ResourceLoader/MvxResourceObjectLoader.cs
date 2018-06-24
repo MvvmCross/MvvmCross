@@ -35,7 +35,7 @@ namespace MvvmCross.Plugin.ResourceLoader
         public TResource Load(string namespaceKey, string typeKey, string entryKey)
         {
             var streamLocation = GetStreamLocation(namespaceKey, typeKey, entryKey);
-            var resourceLoader = Mvx.Resolve<IMvxResourceLoader>();
+            var resourceLoader = Mvx.IoCProvider.Resolve<IMvxResourceLoader>();
             TResource resource = default(TResource);
             resourceLoader.GetResourceStream(streamLocation, (stream) =>
                 {

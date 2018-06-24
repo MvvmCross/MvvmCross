@@ -36,14 +36,14 @@ namespace MvvmCross.Platforms.Tvos.Views
             MvxViewModelRequest request)
             where TTargetViewModel : class, IMvxViewModel
         {
-            return Mvx.Resolve<IMvxTvosViewCreator>().CreateView(request);
+            return Mvx.IoCProvider.Resolve<IMvxTvosViewCreator>().CreateView(request);
         }
 
         public static IMvxTvosView CreateViewControllerFor(
             this IMvxCanCreateTvosView view,
             MvxViewModelRequest request)
         {
-            return Mvx.Resolve<IMvxTvosViewCreator>().CreateView(request);
+            return Mvx.IoCProvider.Resolve<IMvxTvosViewCreator>().CreateView(request);
         }
 
         public static IMvxTvosView CreateViewControllerFor(
@@ -51,14 +51,14 @@ namespace MvvmCross.Platforms.Tvos.Views
             Type viewtype,
             MvxViewModelRequest request)
         {
-            return Mvx.Resolve<IMvxTvosViewCreator>().CreateViewOfType(viewtype, request);    
+            return Mvx.IoCProvider.Resolve<IMvxTvosViewCreator>().CreateViewOfType(viewtype, request);    
         }
 
         public static IMvxTvosView CreateViewControllerFor(
             this IMvxCanCreateTvosView view,
             IMvxViewModel viewModel)
         {
-            return Mvx.Resolve<IMvxTvosViewCreator>().CreateView(viewModel);
+            return Mvx.IoCProvider.Resolve<IMvxTvosViewCreator>().CreateView(viewModel);
         }
     }
 }

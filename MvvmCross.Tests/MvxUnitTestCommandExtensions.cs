@@ -19,7 +19,7 @@ namespace MvvmCross.Tests
 
         private static MvxUnitTestCommandHelper GetCommandHelper()
         {
-            if (Mvx.TryResolve<IMvxCommandHelper>(out IMvxCommandHelper helper))
+            if (Mvx.IoCProvider.TryResolve<IMvxCommandHelper>(out IMvxCommandHelper helper))
             {
                 if (helper != null && helper is MvxUnitTestCommandHelper)
                 {
@@ -28,7 +28,7 @@ namespace MvvmCross.Tests
             }
 
             helper = new MvxUnitTestCommandHelper();
-            Mvx.RegisterSingleton<IMvxCommandHelper>(helper);
+            Mvx.IoCProvider.RegisterSingleton<IMvxCommandHelper>(helper);
             return (MvxUnitTestCommandHelper)helper;
         }
     }

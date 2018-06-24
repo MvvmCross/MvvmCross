@@ -39,7 +39,7 @@ namespace MvvmCross.Platforms.Android.Views
             androidView.EnsureSetupInitialized();
             androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity, bundle));
 
-            var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
+            var cache = Mvx.IoCProvider.Resolve<IMvxSingleViewModelCache>();
             var cached = cache.GetAndClear(bundle);
 
             var view = (IMvxView)androidView;
@@ -53,7 +53,7 @@ namespace MvvmCross.Platforms.Android.Views
                 return null;
 
             IMvxSavedStateConverter converter;
-            if (!Mvx.TryResolve<IMvxSavedStateConverter>(out converter))
+            if (!Mvx.IoCProvider.TryResolve<IMvxSavedStateConverter>(out converter))
             {
                 MvxLog.Instance.Trace("No saved state converter available - this is OK if seen during start");
                 return null;
@@ -73,10 +73,10 @@ namespace MvvmCross.Platforms.Android.Views
             var view = androidView as IMvxView;
             view.OnViewDestroy();
 
-            var currentActivity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>()?.Activity;
+            var currentActivity = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>()?.Activity;
             if (currentActivity == null && view is Activity destroyedActivity && destroyedActivity.IsFinishing)
             {
-                var appStart = Mvx.Resolve<IMvxAppStart>();
+                var appStart = Mvx.IoCProvider.Resolve<IMvxAppStart>();
                 appStart?.ResetStart();
             }
         }
@@ -109,7 +109,7 @@ namespace MvvmCross.Platforms.Android.Views
         private static void OnLifetimeEvent(this IMvxAndroidView androidView,
                                             Action<IMvxAndroidActivityLifetimeListener, Activity> report)
         {
-            var activityTracker = Mvx.Resolve<IMvxAndroidActivityLifetimeListener>();
+            var activityTracker = Mvx.IoCProvider.Resolve<IMvxAndroidActivityLifetimeListener>();
             report(activityTracker, androidView.ToActivity());
         }
 
@@ -136,7 +136,7 @@ namespace MvvmCross.Platforms.Android.Views
                                androidView.GetType().Name);
             }
 
-            var translatorService = Mvx.Resolve<IMvxAndroidViewModelLoader>();
+            var translatorService = Mvx.IoCProvider.Resolve<IMvxAndroidViewModelLoader>();
             var viewModel = translatorService.Load(activity.Intent, savedState, viewModelType);
 
             return viewModel;

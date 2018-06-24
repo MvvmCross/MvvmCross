@@ -23,7 +23,7 @@ namespace MvvmCross.Platforms.Wpf.Views
 
         protected virtual void RunAppStart(object hint = null)
         {
-            var startup = Mvx.Resolve<IMvxAppStart>();
+            var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
             if (!startup.IsStarted)
                 startup.Start(GetAppStartHint(hint));
         }

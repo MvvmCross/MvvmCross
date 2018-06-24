@@ -29,7 +29,7 @@ namespace MvvmCross.Forms.Views
 
         public static void OnBindingContextChanged(this IMvxElement element)
         {
-            var cache = Mvx.Resolve<IMvxChildViewModelCache>();
+            var cache = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>();
             var cached = cache.Get(element.FindAssociatedViewModelTypeOrNull());
 
             element.OnViewCreate(() => cached ?? element.LoadViewModel());
@@ -37,7 +37,7 @@ namespace MvvmCross.Forms.Views
 
         public static void OnViewAppearing(this IMvxElement element)
         {
-            var cache = Mvx.Resolve<IMvxChildViewModelCache>();
+            var cache = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>();
             var cached = cache.Get(element.FindAssociatedViewModelTypeOrNull());
 
             element.OnViewCreate(() => cached ?? element.LoadViewModel());
@@ -57,7 +57,7 @@ namespace MvvmCross.Forms.Views
                 return null;
             }
 
-            var loader = Mvx.Resolve<IMvxViewModelLoader>();
+            var loader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(new MvxViewModelRequest(viewModelType), null);
             if (viewModel == null)
                 throw new MvxException("ViewModel not loaded for " + viewModelType);

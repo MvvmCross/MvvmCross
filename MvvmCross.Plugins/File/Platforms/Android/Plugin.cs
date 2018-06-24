@@ -14,7 +14,7 @@ namespace MvvmCross.Plugin.File.Platforms.Android
     {
         private MvxFileConfiguration _configuration;
         private MvxFileConfiguration Configuration => _configuration ?? new MvxFileConfiguration(
-            Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.FilesDir.Path
+            Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext.FilesDir.Path
         );
         
         public void Configure(IMvxPluginConfiguration configuration)
@@ -34,8 +34,8 @@ namespace MvvmCross.Plugin.File.Platforms.Android
         {
             var fileStore = new MvxIoFileStoreBase(Configuration.AppendDefaultPath, Configuration.BasePath);
 
-            Mvx.RegisterSingleton<IMvxFileStore>(fileStore);
-            Mvx.RegisterSingleton<IMvxFileStoreAsync>(fileStore);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFileStore>(fileStore);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFileStoreAsync>(fileStore);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace MvvmCross.Plugin.Email.Platforms.Wpf
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxComposeEmailTask, MvxComposeEmailTask>();
+            Mvx.IoCProvider.RegisterType<IMvxComposeEmailTask, MvxComposeEmailTask>();
             // note that Wpf does not support IMvxComposeEmailTaskEx
         }
     }

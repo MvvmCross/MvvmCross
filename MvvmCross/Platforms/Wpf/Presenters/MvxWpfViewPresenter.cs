@@ -25,7 +25,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             get
             {
                 if (_wpfViewLoader == null)
-                    _wpfViewLoader = Mvx.Resolve<IMvxWpfViewLoader>();
+                    _wpfViewLoader = Mvx.IoCProvider.Resolve<IMvxWpfViewLoader>();
                 return _wpfViewLoader;
             }
         }

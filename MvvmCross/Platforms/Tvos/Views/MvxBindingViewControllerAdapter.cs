@@ -19,7 +19,7 @@ namespace MvvmCross.Platforms.Tvos.Views
             if (!(eventSource is IMvxTvosView))
                 throw new ArgumentException(nameof(eventSource), $"{nameof(eventSource)} should be a {nameof(IMvxTvosView)}");
 
-            TvosView.BindingContext = Mvx.Resolve<IMvxBindingContext>();
+            TvosView.BindingContext = Mvx.IoCProvider.Resolve<IMvxBindingContext>();
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)

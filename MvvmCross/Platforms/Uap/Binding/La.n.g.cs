@@ -49,7 +49,7 @@ namespace MvvmCross.Platforms.Uap.Binding
         {
             get
             {
-                _bindingCreator = _bindingCreator ?? Mvx.Resolve<IMvxBindingCreator>();
+                _bindingCreator = _bindingCreator ?? Mvx.IoCProvider.Resolve<IMvxBindingCreator>();
                 return _bindingCreator;
             }
         }

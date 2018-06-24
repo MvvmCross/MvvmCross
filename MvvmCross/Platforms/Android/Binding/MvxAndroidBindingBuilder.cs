@@ -34,13 +34,13 @@ namespace MvvmCross.Platforms.Android.Binding
         protected virtual void InitializeLayoutInflation()
         {
             var inflaterfactoryFactory = CreateLayoutInflaterFactoryFactory();
-            Mvx.RegisterSingleton(inflaterfactoryFactory);
+            Mvx.IoCProvider.RegisterSingleton(inflaterfactoryFactory);
 
             var viewFactory = CreateAndroidViewFactory();
-            Mvx.RegisterSingleton(viewFactory);
+            Mvx.IoCProvider.RegisterSingleton(viewFactory);
 
             var viewBinderFactory = CreateAndroidViewBinderFactory();
-            Mvx.RegisterSingleton(viewBinderFactory);
+            Mvx.IoCProvider.RegisterSingleton(viewBinderFactory);
         }
 
         protected virtual IMvxAndroidViewBinderFactory CreateAndroidViewBinderFactory()
@@ -66,7 +66,7 @@ namespace MvvmCross.Platforms.Android.Binding
         protected virtual void InitializeAppResourceTypeFinder()
         {
             var resourceFinder = CreateAppResourceTypeFinder();
-            Mvx.RegisterSingleton(resourceFinder);
+            Mvx.IoCProvider.RegisterSingleton(resourceFinder);
         }
 
         protected virtual IMvxAppResourceTypeFinder CreateAppResourceTypeFinder()
@@ -241,7 +241,7 @@ namespace MvvmCross.Platforms.Android.Binding
         protected virtual void InitializeContextStack()
         {
             var stack = CreateContextStack();
-            Mvx.RegisterSingleton(stack);
+            Mvx.IoCProvider.RegisterSingleton(stack);
         }
 
         protected virtual IMvxBindingContextStack<IMvxAndroidBindingContext> CreateContextStack()
@@ -252,17 +252,17 @@ namespace MvvmCross.Platforms.Android.Binding
         protected virtual void InitializeViewTypeResolver()
         {
             var typeCache = CreateViewTypeCache();
-            Mvx.RegisterSingleton<IMvxTypeCache<View>>(typeCache);
+            Mvx.IoCProvider.RegisterSingleton<IMvxTypeCache<View>>(typeCache);
 
             var fullNameViewTypeResolver = new MvxAxmlNameViewTypeResolver(typeCache);
-            Mvx.RegisterSingleton<IMvxAxmlNameViewTypeResolver>(fullNameViewTypeResolver);
+            Mvx.IoCProvider.RegisterSingleton<IMvxAxmlNameViewTypeResolver>(fullNameViewTypeResolver);
             var listViewTypeResolver = new MvxNamespaceListViewTypeResolver(typeCache);
-            Mvx.RegisterSingleton<IMvxNamespaceListViewTypeResolver>(listViewTypeResolver);
+            Mvx.IoCProvider.RegisterSingleton<IMvxNamespaceListViewTypeResolver>(listViewTypeResolver);
             var justNameTypeResolver = new MvxJustNameViewTypeResolver(typeCache);
 
             var composite = new MvxCompositeViewTypeResolver(fullNameViewTypeResolver, listViewTypeResolver, justNameTypeResolver);
             var cached = new MvxCachedViewTypeResolver(composite);
-            Mvx.RegisterSingleton<IMvxViewTypeResolver>(cached);
+            Mvx.IoCProvider.RegisterSingleton<IMvxViewTypeResolver>(cached);
         }
 
         protected virtual IMvxTypeCache<View> CreateViewTypeCache()

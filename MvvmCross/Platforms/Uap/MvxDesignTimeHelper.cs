@@ -18,7 +18,7 @@ namespace MvvmCross.Platforms.Uap
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)
             {
                 var iocProvider = MvxIoCProvider.Initialize();
-                Mvx.RegisterSingleton(iocProvider);
+                Mvx.IoCProvider.RegisterSingleton(iocProvider);
             }
         }
 

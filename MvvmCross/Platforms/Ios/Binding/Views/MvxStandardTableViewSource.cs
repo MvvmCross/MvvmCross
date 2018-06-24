@@ -88,7 +88,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             if (string.IsNullOrEmpty(bindingText))
                 return DefaultBindingDescription;
 
-            return Mvx.Resolve<IMvxBindingDescriptionParser>().Parse(bindingText);
+            return Mvx.IoCProvider.Resolve<IMvxBindingDescriptionParser>().Parse(bindingText);
         }
 
         protected override UITableViewCell GetOrCreateCellFor(UITableView tableView, NSIndexPath indexPath, object item)

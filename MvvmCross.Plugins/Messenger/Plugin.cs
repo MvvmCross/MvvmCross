@@ -10,7 +10,7 @@ namespace MvvmCross.Plugin.Messenger
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxMessenger>(new MvxMessengerHub());
+            Mvx.IoCProvider.RegisterSingleton<IMvxMessenger>(new MvxMessengerHub());
         }
     }
 }

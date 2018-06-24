@@ -44,7 +44,7 @@ namespace MvvmCross.Forms.Platforms.Wpf.Views
         {
             MvxWpfSetupSingleton.EnsureSingletonAvailable(Dispatcher, this).EnsureInitialized();
 
-            var startup = Mvx.Resolve<IMvxAppStart>();
+            var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
             if(!startup.IsStarted)
                 startup.Start(GetAppStartHint(hint));
 
@@ -58,7 +58,7 @@ namespace MvvmCross.Forms.Platforms.Wpf.Views
 
         protected virtual void LoadFormsApplication()
         {
-            var presenter = Mvx.Resolve<IMvxFormsViewPresenter>() as MvxFormsWpfViewPresenter;
+            var presenter = Mvx.IoCProvider.Resolve<IMvxFormsViewPresenter>() as MvxFormsWpfViewPresenter;
             LoadApplication(presenter.FormsApplication);
         }
     }

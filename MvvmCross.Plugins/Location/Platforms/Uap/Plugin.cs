@@ -9,7 +9,7 @@ namespace MvvmCross.Plugin.Location.Platforms.Uap
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxLocationWatcher>(() => new MvxWCommonLocationWatcher());
+            Mvx.IoCProvider.RegisterSingleton<IMvxLocationWatcher>(() => new MvxWCommonLocationWatcher());
         }
     }
 }

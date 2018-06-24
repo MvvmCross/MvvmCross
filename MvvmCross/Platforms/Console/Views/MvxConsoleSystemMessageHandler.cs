@@ -10,7 +10,7 @@ namespace MvvmCross.Platforms.Console.Views
     {
         public bool ExitFlag { get; set; }
 
-        private IMvxConsoleNavigation ConsoleNavigation => Mvx.Resolve<IMvxConsoleNavigation>();
+        private IMvxConsoleNavigation ConsoleNavigation => Mvx.IoCProvider.Resolve<IMvxConsoleNavigation>();
 
         public virtual bool HandleInput(IMvxViewModel viewModel, string input)
         {

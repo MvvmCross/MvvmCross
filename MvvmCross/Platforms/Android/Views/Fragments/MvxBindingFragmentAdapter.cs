@@ -68,7 +68,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
                     if (!string.IsNullOrEmpty(json))
                     {
                         IMvxNavigationSerializer serializer;
-                        if (!Mvx.TryResolve(out serializer))
+                        if (!Mvx.IoCProvider.TryResolve(out serializer))
                         {
                             MvxLog.Instance.Warn(
                                 "Navigation Serializer not available, deserializing ViewModel Request will be hard");
@@ -82,7 +82,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             }
 
             IMvxSavedStateConverter converter;
-            if (!Mvx.TryResolve(out converter))
+            if (!Mvx.IoCProvider.TryResolve(out converter))
             {
                 MvxLog.Instance.Warn("Saved state converter not available - saving state will be hard");
             }
@@ -111,7 +111,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             if (mvxBundle != null)
             {
                 IMvxSavedStateConverter converter;
-                if (!Mvx.TryResolve(out converter))
+                if (!Mvx.IoCProvider.TryResolve(out converter))
                 {
                     MvxLog.Instance.Warn("Saved state converter not available - saving state will be hard");
                 }
@@ -120,7 +120,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
                     converter.Write(bundleArgs.Value, mvxBundle);
                 }
             }
-            var cache = Mvx.Resolve<IMvxMultipleViewModelCache>();
+            var cache = Mvx.IoCProvider.Resolve<IMvxMultipleViewModelCache>();
             cache.Cache(FragmentView.ViewModel, FragmentView.UniqueImmutableCacheTag);
         }
 

@@ -114,7 +114,7 @@ namespace MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget, TSource> WithConversion<TValueConverter>(object converterParameter = null)
             where TValueConverter : IMvxValueConverter
         {
-            var filler = Mvx.Resolve<IMvxValueConverterRegistryFiller>();
+            var filler = Mvx.IoCProvider.Resolve<IMvxValueConverterRegistryFiller>();
             var converterName = filler.FindName(typeof(TValueConverter));
 
             return WithConversion(converterName, converterParameter);
@@ -249,7 +249,7 @@ namespace MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget> WithConversion<TValueConverter>(object converterParameter = null)
             where TValueConverter : IMvxValueConverter
         {
-            var filler = Mvx.Resolve<IMvxValueConverterRegistryFiller>();
+            var filler = Mvx.IoCProvider.Resolve<IMvxValueConverterRegistryFiller>();
             var converterName = filler.FindName(typeof(TValueConverter));
 
             return WithConversion(converterName, converterParameter);

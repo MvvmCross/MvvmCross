@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         public IMvxViewModel Load(string requestText, IMvxBundle savedState)
         {
-            var converter = Mvx.Resolve<IMvxNavigationSerializer>();
+            var converter = Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>();
             var dictionary = converter.Serializer.DeserializeObject<Dictionary<string, string>>(requestText);
 
             dictionary.TryGetValue(ExtrasKey, out string serializedRequest);
@@ -26,13 +26,13 @@ namespace MvvmCross.Platforms.Uap.Views
             if (dictionary.TryGetValue(SubViewModelKey, out string viewModelKey))
             {
                 var key = int.Parse(viewModelKey);
-                var viewModel = Mvx.Resolve<IMvxChildViewModelCache>().Get(key);
+                var viewModel = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>().Get(key);
                 if (savedState != null)
                     viewModel.ReloadState(savedState);
                 return viewModel;
             }
 
-            var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
+            var loaderService = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
             return loaderService.LoadViewModel(request, savedState);
         }
 
@@ -40,7 +40,7 @@ namespace MvvmCross.Platforms.Uap.Views
         public string GetRequestTextFor(MvxViewModelRequest request)
         {
             var returnData = new Dictionary<string, string>();
-            var converter = Mvx.Resolve<IMvxNavigationSerializer>();
+            var converter = Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>();
 
             returnData.Add(ExtrasKey, converter.Serializer.SerializeObject(request));
 
@@ -51,10 +51,10 @@ namespace MvvmCross.Platforms.Uap.Views
         public string GetRequestTextWithKeyFor(IMvxViewModel viewModel)
         {
             var returnData = new Dictionary<string, string>();
-            var converter = Mvx.Resolve<IMvxNavigationSerializer>();
+            var converter = Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>();
             var request = MvxViewModelRequest.GetDefaultRequest(viewModel.GetType());
 
-            var key = Mvx.Resolve<IMvxChildViewModelCache>().Cache(viewModel);
+            var key = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>().Cache(viewModel);
             returnData.Add(ExtrasKey, converter.Serializer.SerializeObject(request));
             returnData.Add(SubViewModelKey, key.ToString());
 
@@ -65,13 +65,13 @@ namespace MvvmCross.Platforms.Uap.Views
 
         public void RemoveSubViewModelWithKey(int key)
         {
-            Mvx.Resolve<IMvxChildViewModelCache>().Remove(key);
+            Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>().Remove(key);
         }
 
         public int RequestTextGetKey(string requestText)
         {
             var returnValue = 0;
-            var converter = Mvx.Resolve<IMvxNavigationSerializer>();
+            var converter = Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>();
             var dictionary = converter.Serializer.DeserializeObject<Dictionary<string, string>>(requestText);
 
             dictionary.TryGetValue(ExtrasKey, out string serializedRequest);

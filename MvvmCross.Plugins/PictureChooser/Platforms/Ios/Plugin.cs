@@ -12,13 +12,13 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxPictureChooserTask, MvxImagePickerTask>();
-            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverter);
+            Mvx.IoCProvider.RegisterType<IMvxPictureChooserTask, MvxImagePickerTask>();
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverter);
         }
 
         private void RegisterValueConverter()
         {
-            Mvx.Resolve<IMvxValueConverterRegistry>().AddOrOverwriteFrom(GetType().Assembly);
+            Mvx.IoCProvider.Resolve<IMvxValueConverterRegistry>().AddOrOverwriteFrom(GetType().Assembly);
         }
     }
 }

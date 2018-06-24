@@ -28,7 +28,7 @@ namespace Playground.Core.ViewModels
             _mvxViewModelLoader = mvxViewModelLoader;
             try
             {
-                var messenger = Mvx.Resolve<IMvxMessenger>();
+                var messenger = Mvx.IoCProvider.Resolve<IMvxMessenger>();
                 var str = messenger.ToString();
             }
             catch(Exception e)

@@ -52,7 +52,7 @@ namespace MvvmCross.Forms.Bindings
         private static IMvxBindingCreator ResolveBindingCreator()
         {
             IMvxBindingCreator toReturn;
-            if (!Mvx.TryResolve<IMvxBindingCreator>(out toReturn))
+            if (!Mvx.IoCProvider.TryResolve<IMvxBindingCreator>(out toReturn))
             {
                 throw new MvxException("Unable to resolve the binding creator - have you initialized Xamarin Forms Binding");
             }

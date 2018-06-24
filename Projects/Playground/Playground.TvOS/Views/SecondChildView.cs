@@ -41,7 +41,7 @@ namespace Playground.TvOS
         private void BtnCloseStack_OnPrimaryATcionTriggered(object sender, EventArgs e)
         {
             var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
-            var presenter = Mvx.GetSingleton<IMvxTvosViewPresenter>() as MvxTvosViewPresenter;
+            var presenter = Mvx.IoCProvider.GetSingleton<IMvxTvosViewPresenter>() as MvxTvosViewPresenter;
 
             if (appDelegate.Window.RootViewController.PresentedViewController != null)
             {

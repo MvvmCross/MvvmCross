@@ -11,7 +11,7 @@ namespace MvvmCross.Plugin.ResourceLoader.Platforms.Uap
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxResourceLoader, MvxStoreResourceLoader>();
+            Mvx.IoCProvider.RegisterType<IMvxResourceLoader, MvxStoreResourceLoader>();
         }
     }
 }

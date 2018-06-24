@@ -25,7 +25,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
             {
                 MvxWindowsSetupSingleton.EnsureSingletonAvailable(RootFrame, activationArgs, nameof(Suspend)).EnsureInitialized();
 
-                var startup = Mvx.Resolve<IMvxAppStart>();
+                var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
                 if (!startup.IsStarted)
                     startup.Start(GetAppStartHint(activationArgs));
 

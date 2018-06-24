@@ -26,11 +26,11 @@ namespace MvvmCross.Platforms.Console.Views
                     throw new MvxException("View Type not found for " + request.ViewModelType);
                 }
                 var view = (IMvxConsoleView)Activator.CreateInstance(viewType);
-                var viewModelLoader = Mvx.Resolve<IMvxViewModelLoader>();
+                var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
                 IMvxBundle savedState = null;
                 var viewModel = viewModelLoader.LoadViewModel(request, savedState);
                 view.HackSetViewModel(viewModel);
-                Mvx.Resolve<IMvxConsoleCurrentView>().CurrentView = view;
+                Mvx.IoCProvider.Resolve<IMvxConsoleCurrentView>().CurrentView = view;
                 _navigationStack.Push(request);
             }
         }
@@ -50,7 +50,7 @@ namespace MvvmCross.Platforms.Console.Views
 
         public override void Close(IMvxViewModel viewModel)
         {
-            var currentView = Mvx.Resolve<IMvxConsoleCurrentView>().CurrentView;
+            var currentView = Mvx.IoCProvider.Resolve<IMvxConsoleCurrentView>().CurrentView;
 
             if (currentView == null)
             {

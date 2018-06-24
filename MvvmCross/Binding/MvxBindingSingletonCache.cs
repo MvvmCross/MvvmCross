@@ -16,7 +16,7 @@ using MvvmCross.Exceptions;
 namespace MvvmCross.Binding
 {
     // this class is not perfect OO and it gets in the way of testing
-    // however, it is here for speed - to help avoid obscene numbers of Mvx.Resolve<T> calls during binding
+    // however, it is here for speed - to help avoid obscene numbers of Mvx.IoCProvider.Resolve<T> calls during binding
     public class MvxBindingSingletonCache
         : MvxSingleton<IMvxBindingSingletonCache>, IMvxBindingSingletonCache
     {
@@ -46,7 +46,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _autoValueConverters = _autoValueConverters ?? Mvx.Resolve<IMvxAutoValueConverters>();
+                _autoValueConverters = _autoValueConverters ?? Mvx.IoCProvider.Resolve<IMvxAutoValueConverters>();
                 return _autoValueConverters;
             }
         }
@@ -55,7 +55,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _bindingDescriptionParser = _bindingDescriptionParser ?? Mvx.Resolve<IMvxBindingDescriptionParser>();
+                _bindingDescriptionParser = _bindingDescriptionParser ?? Mvx.IoCProvider.Resolve<IMvxBindingDescriptionParser>();
                 return _bindingDescriptionParser;
             }
         }
@@ -64,7 +64,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _languageParser = _languageParser ?? Mvx.Resolve<IMvxLanguageBindingParser>();
+                _languageParser = _languageParser ?? Mvx.IoCProvider.Resolve<IMvxLanguageBindingParser>();
                 return _languageParser;
             }
         }
@@ -73,7 +73,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _propertyExpressionParser = _propertyExpressionParser ?? Mvx.Resolve<IMvxPropertyExpressionParser>();
+                _propertyExpressionParser = _propertyExpressionParser ?? Mvx.IoCProvider.Resolve<IMvxPropertyExpressionParser>();
                 return _propertyExpressionParser;
             }
         }
@@ -82,7 +82,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _valueConverterLookup = _valueConverterLookup ?? Mvx.Resolve<IMvxValueConverterLookup>();
+                _valueConverterLookup = _valueConverterLookup ?? Mvx.IoCProvider.Resolve<IMvxValueConverterLookup>();
                 return _valueConverterLookup;
             }
         }
@@ -91,7 +91,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _valueCombinerLookup = _valueCombinerLookup ?? Mvx.Resolve<IMvxValueCombinerLookup>();
+                _valueCombinerLookup = _valueCombinerLookup ?? Mvx.IoCProvider.Resolve<IMvxValueCombinerLookup>();
                 return _valueCombinerLookup;
             }
         }
@@ -100,7 +100,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _defaultBindingName = _defaultBindingName ?? Mvx.Resolve<IMvxBindingNameLookup>();
+                _defaultBindingName = _defaultBindingName ?? Mvx.IoCProvider.Resolve<IMvxBindingNameLookup>();
                 return _defaultBindingName;
             }
         }
@@ -109,7 +109,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _binder = _binder ?? Mvx.Resolve<IMvxBinder>();
+                _binder = _binder ?? Mvx.IoCProvider.Resolve<IMvxBinder>();
                 return _binder;
             }
         }
@@ -118,7 +118,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _sourceBindingFactory = _sourceBindingFactory ?? Mvx.Resolve<IMvxSourceBindingFactory>();
+                _sourceBindingFactory = _sourceBindingFactory ?? Mvx.IoCProvider.Resolve<IMvxSourceBindingFactory>();
                 return _sourceBindingFactory;
             }
         }
@@ -127,7 +127,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _targetBindingFactory = _targetBindingFactory ?? Mvx.Resolve<IMvxTargetBindingFactory>();
+                _targetBindingFactory = _targetBindingFactory ?? Mvx.IoCProvider.Resolve<IMvxTargetBindingFactory>();
                 return _targetBindingFactory;
             }
         }
@@ -136,7 +136,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _sourceStepFactory = _sourceStepFactory ?? Mvx.Resolve<IMvxSourceStepFactory>();
+                _sourceStepFactory = _sourceStepFactory ?? Mvx.IoCProvider.Resolve<IMvxSourceStepFactory>();
                 return _sourceStepFactory;
             }
         }
@@ -145,7 +145,7 @@ namespace MvvmCross.Binding
         {
             get
             {
-                _mainThreadDispatcher = _mainThreadDispatcher ?? Mvx.Resolve<IMvxMainThreadDispatcher>();
+                _mainThreadDispatcher = _mainThreadDispatcher ?? Mvx.IoCProvider.Resolve<IMvxMainThreadDispatcher>();
                 return _mainThreadDispatcher;
             }
         }

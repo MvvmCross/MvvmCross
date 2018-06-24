@@ -12,18 +12,18 @@ namespace MvvmCross.Binding.BindingContext
     {
         public static void CreateBindingContext(this IMvxBindingContextOwner view)
         {
-            view.BindingContext = Mvx.Resolve<IMvxBindingContext>();
+            view.BindingContext = Mvx.IoCProvider.Resolve<IMvxBindingContext>();
         }
 
         public static void CreateBindingContext(this IMvxBindingContextOwner view, string bindingText)
         {
-            view.BindingContext = Mvx.Resolve<IMvxBindingContext>().Init(null, view, bindingText);
+            view.BindingContext = Mvx.IoCProvider.Resolve<IMvxBindingContext>().Init(null, view, bindingText);
         }
 
         public static void CreateBindingContext(this IMvxBindingContextOwner view,
                                                 IEnumerable<MvxBindingDescription> bindings)
         {
-            view.BindingContext = Mvx.Resolve<IMvxBindingContext>().Init(null, view, bindings);
+            view.BindingContext = Mvx.IoCProvider.Resolve<IMvxBindingContext>().Init(null, view, bindings);
         }
 
         /*

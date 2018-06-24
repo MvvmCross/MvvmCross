@@ -21,7 +21,7 @@ namespace MvvmCross.Plugin.JsonLocalization
         {
             get
             {
-                _jsonConvert = _jsonConvert ?? Mvx.Resolve<IMvxJsonConverter>();
+                _jsonConvert = _jsonConvert ?? Mvx.IoCProvider.Resolve<IMvxJsonConverter>();
                 return _jsonConvert;
             }
         }

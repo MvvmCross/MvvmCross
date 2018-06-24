@@ -42,7 +42,7 @@ namespace MvvmCross.Forms.Platforms.Android.Core
         protected override void InitializeIoC()
         {
             base.InitializeIoC();
-            Mvx.RegisterSingleton<IMvxFormsSetup>(this);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFormsSetup>(this);
         }
 
         protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
@@ -57,7 +57,7 @@ namespace MvvmCross.Forms.Platforms.Android.Core
             {
                 if (!Xamarin.Forms.Forms.IsInitialized)
                 {
-                    var activity = Mvx.Resolve<IMvxAndroidCurrentTopActivity>()?.Activity ?? ApplicationContext;
+                    var activity = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>()?.Activity ?? ApplicationContext;
                     var asmb = activity.GetType().Assembly;
                     Xamarin.Forms.Forms.Init(activity, null, ViewAssemblies.FirstOrDefault() ?? asmb);
                 }
@@ -78,14 +78,14 @@ namespace MvvmCross.Forms.Platforms.Android.Core
         protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
         {
             var formsPagePresenter = new MvxFormsPagePresenter(viewPresenter);
-            Mvx.RegisterSingleton(formsPagePresenter);
+            Mvx.IoCProvider.RegisterSingleton(formsPagePresenter);
             return formsPagePresenter;
         }
 
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
             var presenter = new MvxFormsAndroidViewPresenter(GetViewAssemblies(), FormsApplication);
-            Mvx.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
             presenter.FormsPagePresenter = CreateFormsPagePresenter(presenter);
             return presenter;
         }
@@ -146,6 +146,6 @@ namespace MvvmCross.Forms.Platforms.Android.Core
 
         protected override Application CreateFormsApplication() => new TFormsApplication();
 
-        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
     }
 }
