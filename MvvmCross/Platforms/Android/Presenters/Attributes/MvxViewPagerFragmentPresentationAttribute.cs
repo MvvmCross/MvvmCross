@@ -28,7 +28,7 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             bool isCacheableFragment = false) : base(activityHostViewModelType, null, addToBackStack, null, null, null,
             null, null, fragmentHostViewType, isCacheableFragment)
         {
-            var context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext;
+            var context = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext;
 
             Title = title;
             ViewPagerResourceId = !string.IsNullOrEmpty(viewPagerResourceName)

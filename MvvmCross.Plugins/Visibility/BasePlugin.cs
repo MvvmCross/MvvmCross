@@ -11,12 +11,12 @@ namespace MvvmCross.Plugin.Visibility
     {
         public virtual void Load()
         {
-            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
         }
 
         private void RegisterValueConverters()
         {
-            var registry = Mvx.Resolve<IMvxValueConverterRegistry>();
+            var registry = Mvx.IoCProvider.Resolve<IMvxValueConverterRegistry>();
             registry.AddOrOverwriteFrom(GetType().GetTypeInfo().Assembly);
         }
     }

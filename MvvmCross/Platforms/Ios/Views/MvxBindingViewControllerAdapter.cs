@@ -19,7 +19,7 @@ namespace MvvmCross.Platforms.Ios.Views
             if (!(eventSource is IMvxIosView))
                 throw new ArgumentException(nameof(eventSource), $"{nameof(eventSource)} should be a {nameof(IMvxIosView)}");
 
-            IosView.BindingContext = Mvx.Resolve<IMvxBindingContext>();
+            IosView.BindingContext = Mvx.IoCProvider.Resolve<IMvxBindingContext>();
         }
 
         public override void HandleDisposeCalled(object sender, EventArgs e)

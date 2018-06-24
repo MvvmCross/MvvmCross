@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -33,11 +33,11 @@ namespace MvvmCross.Platforms.Tvos.Views
 
             if (IsMovingFromParentViewController)
             {
-                if (Mvx.TryResolve(out IMvxTvosViewPresenter iPresenter)
+                if (Mvx.IoCProvider.TryResolve(out IMvxTvosViewPresenter iPresenter)
                     && iPresenter is MvxTvosViewPresenter mvxTvosViewPresenter)
                 {
                     mvxTvosViewPresenter.CloseTabBarViewController();
-                };
+                }
             }
         }
 
@@ -153,9 +153,8 @@ namespace MvvmCross.Platforms.Tvos.Views
             return false;
         }
 
-
-        public void PresentViewControllerWithNavigation(UIViewController controller, 
-                                                        bool animated = true, 
+        public void PresentViewControllerWithNavigation(UIViewController controller,
+                                                        bool animated = true,
                                                         Action completionHandler = null)
         {
             PresentViewController(new UINavigationController(controller), animated, completionHandler);
@@ -176,7 +175,6 @@ namespace MvvmCross.Platforms.Tvos.Views
     public class MvxTabBarViewController<TViewModel> : MvxTabBarViewController
         where TViewModel : IMvxViewModel
     {
-
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
@@ -217,6 +215,5 @@ namespace MvvmCross.Platforms.Tvos.Views
             : base(handle)
         {
         }
-
     }
 }

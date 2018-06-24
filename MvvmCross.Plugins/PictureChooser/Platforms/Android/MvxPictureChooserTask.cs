@@ -87,7 +87,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
 
             // Specify where to put the image
             return
-                Mvx.Resolve<IMvxAndroidGlobals>()
+                Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>()
                     .ApplicationContext.ContentResolver.Insert(MediaStore.Images.Media.ExternalContentUri, contentValues);
         }
 
@@ -190,7 +190,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
 
         private Bitmap LoadScaledBitmap(Uri uri)
         {
-            ContentResolver contentResolver = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.ContentResolver;
+            ContentResolver contentResolver = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext.ContentResolver;
             var maxDimensionSize = GetMaximumDimension(contentResolver, uri);
             var sampleSize = (int)Math.Ceiling(maxDimensionSize / (double)_currentRequestParameters.MaxPixelDimension);
             if (sampleSize < 1)

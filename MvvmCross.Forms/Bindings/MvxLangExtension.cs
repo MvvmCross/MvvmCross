@@ -48,7 +48,7 @@ namespace MvvmCross.Forms.Bindings
 
                 Bindable.SetValue(La.ngProperty, bindingBuilder.ToString());
             }
-            else if(!string.IsNullOrEmpty(Source) && Mvx.CanResolve<IMvxTextProvider>())
+            else if(!string.IsNullOrEmpty(Source) && Mvx.IoCProvider.CanResolve<IMvxTextProvider>())
             {
                 if(Arguments == null)
                     return new MvxLanguageBinder(NameSpaceKey, TypeKey).GetText(Source);

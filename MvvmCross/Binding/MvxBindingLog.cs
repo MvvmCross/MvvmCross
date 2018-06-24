@@ -8,7 +8,7 @@ namespace MvvmCross.Binding
 {
     public static class MvxBindingLog
     {
-        public static IMvxLog Instance { get; } = Mvx.Resolve<IMvxLogProvider>().GetLogFor("MvxBind");
+        public static IMvxLog Instance { get; } = Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor("MvxBind");
 
         public static MvxLogLevel TraceBindingLevel = MvxLogLevel.Warn;
 

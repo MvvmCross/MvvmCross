@@ -9,7 +9,7 @@ namespace MvvmCross.Plugin.WebBrowser.Platforms.Wpf
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxWebBrowserTask, MvxWebBrowserTask>();
+            Mvx.IoCProvider.RegisterType<IMvxWebBrowserTask, MvxWebBrowserTask>();
         }
     }
 }

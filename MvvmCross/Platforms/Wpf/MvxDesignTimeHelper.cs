@@ -19,7 +19,7 @@ namespace MvvmCross.Platforms.Wpf
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)
             {
                 var iocProvider = MvxIoCProvider.Initialize();
-                Mvx.RegisterSingleton(iocProvider);
+                Mvx.IoCProvider.RegisterSingleton(iocProvider);
             }
         }
 

@@ -26,10 +26,10 @@ namespace MvvmCross.Platforms.Uap.Binding
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)
             {
                 var iocProvider = MvxIoCProvider.Initialize();
-                Mvx.RegisterSingleton(iocProvider);
+                Mvx.IoCProvider.RegisterSingleton(iocProvider);
             }
 
-            if (!Mvx.CanResolve<IMvxBindingParser>())
+            if (!Mvx.IoCProvider.CanResolve<IMvxBindingParser>())
             {
                 var builder = new MvxWindowsBindingBuilder(MvxWindowsBindingBuilder.BindingType.MvvmCross);
                 builder.DoRegistration();

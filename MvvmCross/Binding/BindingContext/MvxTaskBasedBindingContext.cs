@@ -87,7 +87,7 @@ namespace MvvmCross.Binding.BindingContext
         {
             get
             {
-                _binder = _binder ?? Mvx.Resolve<IMvxBinder>();
+                _binder = _binder ?? Mvx.IoCProvider.Resolve<IMvxBinder>();
                 return _binder;
             }
         }

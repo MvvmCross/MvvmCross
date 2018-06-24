@@ -8,6 +8,6 @@ namespace MvvmCross
 {
     internal static class MvxAndroidLog
     {
-        internal static IMvxLog Instance { get; } = Mvx.Resolve<IMvxLogProvider>().GetLogFor("MvxAndroid");
+        internal static IMvxLog Instance { get; } = Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor("MvxAndroid");
     }
 }

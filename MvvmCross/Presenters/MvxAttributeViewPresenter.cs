@@ -21,7 +21,7 @@ namespace MvvmCross.Presenters
             get
             {
                 if (_viewModelTypeFinder == null)
-                    _viewModelTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
+                    _viewModelTypeFinder = Mvx.IoCProvider.Resolve<IMvxViewModelTypeFinder>();
                 return _viewModelTypeFinder;
             }
             set
@@ -36,7 +36,7 @@ namespace MvvmCross.Presenters
             get
             {
                 if (_viewsContainer == null)
-                    _viewsContainer = Mvx.Resolve<IMvxViewsContainer>();
+                    _viewsContainer = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
                 return _viewsContainer;
             }
             set

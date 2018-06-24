@@ -67,7 +67,7 @@ namespace MvvmCross.Platforms.Uap.Views
             {
                 instance.EnsureInitialized();
 
-                var startup = Mvx.Resolve<IMvxAppStart>();
+                var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
                 if (!startup.IsStarted)
                     startup.Start(GetAppStartHint(activationArgs));
             }
@@ -122,7 +122,7 @@ namespace MvvmCross.Platforms.Uap.Views
         {
             var deferral = e.SuspendingOperation.GetDeferral();
 
-            var suspension = Mvx.GetSingleton<IMvxSuspensionManager>();
+            var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
             await Suspend(suspension);
             await suspension.SaveAsync();
             deferral.Complete();
@@ -135,7 +135,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         private async void OnResuming(object sender, object e)
         {
-            var suspension = Mvx.GetSingleton<IMvxSuspensionManager>();
+            var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
             await Resume(suspension);
             await suspension.RestoreAsync();
         }

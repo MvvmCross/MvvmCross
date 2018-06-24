@@ -39,7 +39,7 @@ namespace Playground.Droid.Fragments
 
         public override void OnPause()
         {
-            var top = Mvx.Resolve<IMvxAndroidCurrentTopActivity>();
+            var top = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>();
             var activity = top.Activity;
 
             base.OnPause();
