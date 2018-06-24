@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -10,12 +10,7 @@ namespace MvvmCross.ViewModels
     public class MvxViewModelLoader
         : IMvxViewModelLoader
     {
-        protected IMvxViewModelLocatorCollection LocatorCollection { get; private set; }
-
-        public MvxViewModelLoader(IMvxViewModelLocatorCollection locatorCollection)
-        {
-            LocatorCollection = locatorCollection;
-        }
+        public IMvxViewModelLocatorCollection LocatorCollection { get; set; }
 
         // Reload should be used to re-run cached ViewModels lifecycle if required.
         public IMvxViewModel ReloadViewModel(IMvxViewModel viewModel, MvxViewModelRequest request, IMvxBundle savedState)

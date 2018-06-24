@@ -29,6 +29,9 @@ namespace MvvmCross.Navigation
         event BeforeChangePresentationEventHandler BeforeChangePresentation;
         event AfterChangePresentationEventHandler AfterChangePresentation;
 
+        IMvxNavigationCache NavigationCache { get; set; }
+        IMvxViewModelLoader ViewModelLoader { get; set; }
+
         /// <summary>
         /// Navigates to an instance of a ViewModel
         /// </summary>

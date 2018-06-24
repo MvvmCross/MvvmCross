@@ -131,9 +131,9 @@ namespace MvvmCross.Platforms.Android.Core
             return presenter;
         }
 
-        protected override void InitializeIoC()
+        protected override void RegisterImplementations()
         {
-            base.InitializeIoC();
+            base.RegisterImplementations();
 
             Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxAndroidViewPresenter>();
             Mvx.LazyConstructAndRegisterSingleton(() => AndroidPresenter);

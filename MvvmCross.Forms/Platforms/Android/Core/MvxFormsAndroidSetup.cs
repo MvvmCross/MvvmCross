@@ -50,9 +50,9 @@ namespace MvvmCross.Forms.Platforms.Android.Core
             return _viewAssemblies;
         }
 
-        protected override void InitializeIoC()
+        protected override void RegisterImplementations()
         {
-            base.InitializeIoC();
+            base.RegisterImplementations();
             Mvx.RegisterSingleton<IMvxFormsSetup>(this);
 
             Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxFormsAndroidViewPresenter>();

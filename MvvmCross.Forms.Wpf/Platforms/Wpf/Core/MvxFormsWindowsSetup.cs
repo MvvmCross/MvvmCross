@@ -34,9 +34,9 @@ namespace MvvmCross.Forms.Platforms.Wpf.Core
             }
         }
 
-        protected override void InitializeIoC()
+        protected override void RegisterImplementations()
         {
-            base.InitializeIoC();
+            base.RegisterImplementations();
             Mvx.RegisterSingleton<IMvxFormsSetup>(this);
 
             Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxFormsWpfViewPresenter>();

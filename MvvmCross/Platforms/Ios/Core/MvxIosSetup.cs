@@ -100,9 +100,9 @@ namespace MvvmCross.Platforms.Ios.Core
             return presenter;
         }
 
-        protected override void InitializeIoC()
+        protected override void RegisterImplementations()
         {
-            base.InitializeIoC();
+            base.RegisterImplementations();
 
             Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxIosViewPresenter>();
             Mvx.LazyConstructAndRegisterSingleton(() => IosPresenter);

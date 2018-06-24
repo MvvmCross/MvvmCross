@@ -15,9 +15,9 @@ namespace MvvmCross.Platforms.Console.Core
     public abstract class MvxConsoleSetup
         : MvxSetup
     {
-        protected override void InitializeIoC()
+        protected override void RegisterImplementations()
         {
-            base.InitializeIoC();
+            base.RegisterImplementations();
 
             Mvx.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxConsoleViewDispatcher>();
         }

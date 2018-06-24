@@ -39,10 +39,10 @@ namespace MvvmCross.Platforms.Tizen.Core
                 return base.ViewPresenter as IMvxTizenViewPresenter;
             }
         }
-                
-        protected override void InitializeIoC()
+
+        protected override void RegisterImplementations()
         {
-            base.InitializeIoC();
+            base.RegisterImplementations();
 
             Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxTizenViewPresenter>();
             Mvx.LazyConstructAndRegisterSingleton(() => Presenter);

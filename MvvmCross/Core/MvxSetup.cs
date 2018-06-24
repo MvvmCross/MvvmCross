@@ -53,7 +53,10 @@ namespace MvvmCross.Core
             return instance;
         }
 
-        protected abstract IMvxApplication CreateApp();
+        protected virtual IMvxApplication CreateApp()
+        {
+            return Mvx.Resolve<IMvxApplication>();
+        }
 
         protected abstract IMvxViewsContainer CreateViewsContainer();
 
@@ -76,12 +79,14 @@ namespace MvvmCross.Core
             SetupLog.Trace("Setup: Primary start");
             SetupLog.Trace("Setup: FirstChance start");
             InitializeFirstChance();
+            SetupLog.Trace("Setup: Singleton Cache start");
+            InitializeSingletonCache();
+            SetupLog.Trace("Setup: Register Implementations start");
+            RegisterImplementations();
             SetupLog.Trace("Setup: PlatformServices start");
             InitializePlatformServices();
             SetupLog.Trace("Setup: MvvmCross settings start");
             InitializeSettings();
-            SetupLog.Trace("Setup: Singleton Cache start");
-            InitializeSingletonCache();
             SetupLog.Trace("Setup: ViewDispatcher start");
             InitializeViewDispatcher();
             State = MvxSetupState.InitializedPrimary;
@@ -98,8 +103,6 @@ namespace MvvmCross.Core
             PerformBootstrapActions();
             SetupLog.Trace("Setup: StringToTypeParser start");
             InitializeStringToTypeParser();
-            SetupLog.Trace("Setup: CommandHelper start");
-            InitializeCommandHelper();
             SetupLog.Trace("Setup: PluginManagerFramework start");
             var pluginManager = InitializePluginFramework();
             SetupLog.Trace("Setup: Create App");
@@ -146,19 +149,24 @@ namespace MvvmCross.Core
             // by default no Inpc calls are intercepted
         }
 
+        protected virtual IMvxChildViewModelCache CreateViewModelCache()
+        {
+            return Mvx.Resolve<IMvxChildViewModelCache>();
+        }
+
         protected virtual void InitializeViewModelCache()
         {
-            Mvx.IoCProvider.RegisterSingleton<IMvxChildViewModelCache>(new MvxChildViewModelCache());
+            CreateViewModelCache();
         }
 
         protected virtual void InitializeSettings()
         {
-            Mvx.IoCProvider.RegisterSingleton<IMvxSettings>(CreateSettings());
+            var settings = CreateSettings();
         }
 
         protected virtual IMvxSettings CreateSettings()
         {
-            return new MvxSettings();
+            return Mvx.Resolve<IMvxSettings>();
         }
 
         protected virtual void InitializeStringToTypeParser()
@@ -185,22 +193,21 @@ namespace MvvmCross.Core
         protected virtual void InitializeNavigationSerializer()
         {
             var serializer = CreateNavigationSerializer();
-            Mvx.IoCProvider.RegisterSingleton(serializer);
         }
 
         protected virtual IMvxNavigationSerializer CreateNavigationSerializer()
         {
-            return new MvxStringDictionaryNavigationSerializer();
+            return Mvx.Resolve<IMvxNavigationSerializer>();
         }
 
         protected virtual void InitializeCommandCollectionBuilder()
         {
-            Mvx.IoCProvider.RegisterSingleton(CreateCommandCollectionBuilder);
+            CreateCommandCollectionBuilder();
         }
 
         protected virtual IMvxCommandCollectionBuilder CreateCommandCollectionBuilder()
         {
-            return new MvxCommandCollectionBuilder();
+            return Mvx.Resolve<IMvxCommandCollectionBuilder>();
         }
 
         protected virtual void InitializeIoC()
@@ -211,20 +218,37 @@ namespace MvvmCross.Core
             Mvx.IoCProvider.RegisterSingleton<IMvxSetup>(this);
         }
 
-        protected virtual IMvxIocOptions CreateIocOptions()
-        {
-            return new MvxIocOptions();
-        }
-
         protected virtual IMvxIoCProvider CreateIocProvider()
         {
             return MvxIoCProvider.Initialize(CreateIocOptions());
         }
 
+        protected virtual IMvxIocOptions CreateIocOptions()
+        {
+            return Mvx.Resolve<IMvxIocOptions>();
+        }
         protected virtual void InitializeFirstChance()
         {
-            // always the very first thing to get initialized - after IoC and base platfom
+            // always the very first thing to get initialized - after IoC, logging service and base platfom
             // base class implementation is empty by default
+        }
+
+        protected virtual void RegisterImplementations()
+        {
+            // Register Singletons that can be lazy loaded
+            Mvx.LazyConstructAndRegisterSingleton<IMvxIocOptions, MvxIocOptions>();
+            Mvx.LazyConstructAndRegisterSingleton<IMvxSettings, MvxSettings>();
+            Mvx.LazyConstructAndRegisterSingleton<IMvxPluginManager, MvxPluginManager>();
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewModelLoader, MvxViewModelLoader>();
+            Mvx.LazyConstructAndRegisterSingleton<IMvxNavigationService, MvxNavigationService>();
+            Mvx.LazyConstructAndRegisterSingleton<IMvxNavigationSerializer, MvxStringDictionaryNavigationSerializer>();
+            Mvx.LazyConstructAndRegisterSingleton<IMvxViewModelTypeFinder, MvxViewModelViewTypeFinder>();
+            Mvx.LazyConstructAndRegisterSingleton<IMvxTypeToTypeLookupBuilder, MvxViewModelViewLookupBuilder>();
+            Mvx.LazyConstructAndRegisterSingleton<IMvxCommandCollectionBuilder, MvxCommandCollectionBuilder>();
+            Mvx.LazyConstructAndRegisterSingleton<IMvxChildViewModelCache, MvxChildViewModelCache>();
+
+            // Register non-singletons that will be constructed on demand
+            Mvx.RegisterType<IMvxCommandHelper, MvxWeakCommandHelper>();
         }
 
         protected virtual void InitializePlatformServices()
@@ -269,21 +293,34 @@ namespace MvvmCross.Core
             }
         }
 
-        protected virtual IMvxViewModelLoader CreateViewModelLoader(IMvxViewModelLocatorCollection collection)
+        protected virtual IMvxViewModelLoader InitializeViewModelLoader(IMvxViewModelLocatorCollection collection)
         {
-            return new MvxViewModelLoader(collection);
+            var loader = CreateViewModelLoader();
+            loader.LocatorCollection = collection;
+            return loader;
         }
 
+        protected virtual IMvxViewModelLoader CreateViewModelLoader()
+        {
+            return Mvx.Resolve<IMvxViewModelLoader>();
+        }
+
+        protected virtual IMvxNavigationService CreateNavigationService()
+        {
+            return Mvx.Resolve<MvxNavigationService>();
+        }
         protected virtual IMvxPluginManager InitializePluginFramework()
         {
             var pluginManager = CreatePluginManager();
-            Mvx.IoCProvider.RegisterSingleton(pluginManager);
+            pluginManager.ConfigurationSource = GetPluginConfiguration;
             LoadPlugins(pluginManager);
             return pluginManager;
         }
 
         protected virtual IMvxPluginManager CreatePluginManager()
-            => new MvxPluginManager(GetPluginConfiguration);
+        {
+            return Mvx.Resolve<IMvxPluginManager>();
+        }
 
         protected virtual IMvxPluginConfiguration GetPluginConfiguration(Type plugin)
         {
@@ -360,10 +397,9 @@ namespace MvvmCross.Core
 
         protected virtual IMvxNavigationService InitializeNavigationService(IMvxViewModelLocatorCollection collection)
         {
-            var loader = CreateViewModelLoader(collection);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewModelLoader>(loader);
-            var navigationService = new MvxNavigationService(null, loader);
-            Mvx.IoCProvider.RegisterSingleton<IMvxNavigationService>(navigationService);
+            var loader = InitializeViewModelLoader(collection);
+            var navigationService = CreateNavigationService();
+            navigationService.ViewModelLoader = loader;
             return navigationService;
         }
 
@@ -397,7 +433,7 @@ namespace MvvmCross.Core
         protected abstract IMvxNameMapping CreateViewToViewModelNaming();
 
         private MvxViewModelByNameLookup _viewModelNameLookup;
-        private MvxViewModelByNameLookup ViewModelNameLookup => _viewModelNameLookup ?? (_viewModelNameLookup = new MvxViewModelByNameLookup());
+        protected virtual MvxViewModelByNameLookup ViewModelNameLookup => _viewModelNameLookup ?? (_viewModelNameLookup = new MvxViewModelByNameLookup());
 
         protected virtual IMvxViewModelByNameLookup CreateViewModelByNameLookup()
         {
@@ -406,11 +442,6 @@ namespace MvvmCross.Core
         protected virtual IMvxViewModelByNameRegistry CreateViewModelByNameRegistry()
         {
             return ViewModelNameLookup;
-        }
-
-        protected virtual void RegisterViewTypeFinder()
-        {
-            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewModelTypeFinder, MvxViewModelViewTypeFinder>();
         }
 
         protected virtual void InitializeViewModelTypeFinder()
@@ -428,15 +459,13 @@ namespace MvvmCross.Core
             }
 
             var nameMappingStrategy = CreateViewToViewModelNaming();
-            Mvx.IoCProvider.RegisterSingleton(nameMappingStrategy);
-
-            RegisterViewTypeFinder();
+            Mvx.RegisterSingleton(nameMappingStrategy);
         }
 
         protected virtual void InitializeViewLookup()
         {
             var viewAssemblies = GetViewAssemblies();
-            var builder = new MvxViewModelViewLookupBuilder();
+            var builder = Mvx.Resolve<IMvxTypeToTypeLookupBuilder>();
             var viewModelViewLookup = builder.Build(viewAssemblies);
             if (viewModelViewLookup == null)
                 return;
@@ -455,7 +484,7 @@ namespace MvvmCross.Core
         {
             get
             {
-                return _presenter ?? (_presenter= SetupViewPresenter());
+                return _presenter ?? (_presenter = SetupViewPresenter());
             }
         }
 
@@ -527,7 +556,12 @@ namespace MvvmCross.Core
     public abstract class MvxSetup<TApplication> : MvxSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override void RegisterImplementations()
+        {
+            base.RegisterImplementations();
+
+            Mvx.LazyConstructAndRegisterSingleton<IMvxApplication, TApplication>();
+        }
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

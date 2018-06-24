@@ -26,9 +26,9 @@ namespace Playground.Forms.Uwp
 
     public class CustomMvxFormsWindowsSetup: MvxFormsWindowsSetup<Core.App, FormsApp>
     {
-        protected override void InitializeIoC()
+        protected override void RegisterImplementations()
         {
-            base.InitializeIoC();
+            base.RegisterImplementations();
 
             Mvx.LazyConstructAndRegisterSingleton<IMvxFormsPagePresenter, CustomFormsPagePresenter>();
         }

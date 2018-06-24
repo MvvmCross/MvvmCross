@@ -45,9 +45,9 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
             return _viewAssemblies;
         }
 
-        protected override void InitializeIoC()
+        protected override void RegisterImplementations()
         {
-            base.InitializeIoC();
+            base.RegisterImplementations();
             Mvx.RegisterSingleton<IMvxFormsSetup>(this);
 
             Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxFormsUwpViewPresenter>();

@@ -44,8 +44,9 @@ namespace MvvmCross.Navigation
         }
 
         protected static readonly Dictionary<Regex, Type> Routes = new Dictionary<Regex, Type>();
-        protected virtual IMvxNavigationCache NavigationCache { get; private set; }
-        protected IMvxViewModelLoader ViewModelLoader { get; set; }
+        public virtual IMvxNavigationCache NavigationCache { get; set; }
+        public IMvxViewModelLoader ViewModelLoader { get; set; }
+
         protected ConditionalWeakTable<IMvxViewModel, TaskCompletionSource<object>> _tcsResults = new ConditionalWeakTable<IMvxViewModel, TaskCompletionSource<object>>();
 
         public event BeforeNavigateEventHandler BeforeNavigate;
@@ -54,12 +55,6 @@ namespace MvvmCross.Navigation
         public event AfterCloseEventHandler AfterClose;
         public event BeforeChangePresentationEventHandler BeforeChangePresentation;
         public event AfterChangePresentationEventHandler AfterChangePresentation;
-
-        public MvxNavigationService(IMvxNavigationCache navigationCache, IMvxViewModelLoader viewModelLoader)
-        {
-            NavigationCache = navigationCache;
-            ViewModelLoader = viewModelLoader;
-        }
 
         public static void LoadRoutes(IEnumerable<Assembly> assemblies)
         {

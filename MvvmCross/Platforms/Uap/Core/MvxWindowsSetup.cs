@@ -114,9 +114,9 @@ namespace MvvmCross.Platforms.Uap.Core
             return presenter;
         }
 
-        protected override void InitializeIoC()
+        protected override void RegisterImplementations()
         {
-            base.InitializeIoC();
+            base.RegisterImplementations();
 
             Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxWindowsViewPresenter>();
             Mvx.LazyConstructAndRegisterSingleton(() => Presenter);

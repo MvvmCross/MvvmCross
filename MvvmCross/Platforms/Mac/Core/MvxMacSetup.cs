@@ -105,9 +105,9 @@ namespace MvvmCross.Platforms.Mac.Core
             return presenter;
         }
 
-        protected override void InitializeIoC()
+        protected override void RegisterImplementations()
         {
-            base.InitializeIoC();
+            base.RegisterImplementations();
 
             Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxMacViewPresenter>();
             Mvx.LazyConstructAndRegisterSingleton(() => MacPresenter);

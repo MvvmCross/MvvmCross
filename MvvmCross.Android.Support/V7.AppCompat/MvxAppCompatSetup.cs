@@ -18,9 +18,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     public abstract class MvxAppCompatSetup : MvxAndroidSetup
     {
-        protected override void InitializeIoC()
+        protected override void RegisterImplementations()
         {
-            base.InitializeIoC();
+            base.RegisterImplementations();
 
             Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxAppCompatViewPresenter>();
         }

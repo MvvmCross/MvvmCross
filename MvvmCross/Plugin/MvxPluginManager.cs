@@ -13,14 +13,9 @@ namespace MvvmCross.Plugin
     {
         private readonly HashSet<Type> _loadedPlugins = new HashSet<Type>();
 
-        public Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; }
+        public Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; set; }
 
         public IEnumerable<Type> LoadedPlugins => _loadedPlugins;
-
-        public MvxPluginManager(Func<Type, IMvxPluginConfiguration> configurationSource)
-        {
-            ConfigurationSource = configurationSource;
-        }
 
         public void EnsurePluginLoaded<TPlugin>(bool forceLoad = false) where TPlugin : IMvxPlugin
         {
