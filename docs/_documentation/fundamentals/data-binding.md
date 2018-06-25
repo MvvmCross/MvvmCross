@@ -103,7 +103,7 @@ There are 4 modes in which properties in the View can be bound to properties in 
 **One-Way** 
 
 - This binding mode transfers values from the ViewModel to the View
-- whenever the property changes within the ViewModel, then the corresponding View property is automatically adjusted. 
+- Whenever the property changes within the ViewModel, then the corresponding View property is automatically adjusted. 
 - This binding mode is useful when when showing, for example, data which is arriving from a dynamic source - like from a sensor or from a network data feed. 
 - In Windows/Xaml, this is very often the default binding mode - so it is the mode used when no other is selected.
 
