@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.Logging;
