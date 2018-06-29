@@ -63,7 +63,6 @@ namespace MvvmCross.Platforms.Uap.Presenters
             return new MvxPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
         }
 
-
         public override Task<bool> Show(MvxViewModelRequest request)
         {
             return GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
