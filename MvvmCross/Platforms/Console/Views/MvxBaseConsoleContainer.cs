@@ -21,16 +21,16 @@ namespace MvvmCross.Platforms.Console.Views
             _presentationHintHandlers[typeof(THint)] = hint => action((THint)hint);
         }
 
-        protected async Task<bool> HandlePresentationChange(MvxPresentationHint hint)
+        protected Task<bool> HandlePresentationChange(MvxPresentationHint hint)
         {
             Func<MvxPresentationHint, Task<bool>> handler;
 
             if (_presentationHintHandlers.TryGetValue(hint.GetType(), out handler))
             {
-                return await handler(hint);
+                return handler(hint);
             }
 
-            return false;
+            return Task.FromResult(false);
         }
 
         public abstract Task<bool> Show(MvxViewModelRequest request);

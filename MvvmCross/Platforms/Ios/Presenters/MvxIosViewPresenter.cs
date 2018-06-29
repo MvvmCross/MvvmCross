@@ -120,7 +120,6 @@ namespace MvvmCross.Platforms.Ios.Presenters
                     CloseAction = (viewModel, attribute) => CloseTabViewController(viewModel, (MvxTabPresentationAttribute)attribute)
                 });
 
-
             AttributeTypesToActionsDictionary.Add(
                 typeof(MvxModalPresentationAttribute),
                 new MvxPresentationAttributeAction
@@ -163,7 +162,6 @@ namespace MvvmCross.Platforms.Ios.Presenters
                             default:
                                 return CloseDetailSplitViewController(viewModel, splitAttribute);
                         }
-
                     }
                 });
         }
