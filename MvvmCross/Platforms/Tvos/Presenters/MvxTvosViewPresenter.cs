@@ -44,8 +44,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
             if (MasterNavigationController == null &&
-               TabBarViewController == null ||
-               !TabBarViewController.CanShowChildView())
+               (TabBarViewController == null || !TabBarViewController.CanShowChildView()))
             {
                 MvxLog.Instance.Trace($"PresentationAttribute nor MasterNavigationController found for {viewType.Name}. " +
                     $"Assuming Root presentation");
@@ -63,7 +62,6 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                 ViewType = viewType,
                 ViewModelType = viewModelType
             };
-
         }
 
         public override MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
@@ -126,7 +124,6 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                   CloseAction = (viewModel, attribute) => CloseChildViewController(viewModel,
                                                                                    (MvxChildPresentationAttribute)attribute)
               });
-
 
             AttributeTypesToActionsDictionary.Add(
                 typeof(MvxTabPresentationAttribute),
@@ -226,16 +223,16 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             return CloseModalViewController(viewModel);
         }
 
-        protected virtual async Task<bool> CloseModalViewController(IMvxViewModel viewModel)
+        protected virtual Task<bool> CloseModalViewController(IMvxViewModel viewModel)
         {
             if (ModalViewControllers == null || !ModalViewControllers.Any())
-                return false;
+                return Task.FromResult(false);
 
             var modal = ModalViewControllers
                 .FirstOrDefault(v => v is IMvxTvosView && v.GetIMvxTvosView().ViewModel == viewModel);
             if (modal != null)
             {
-                return await CloseModalViewController(modal);
+                return CloseModalViewController(modal);
             }
 
             UIViewController viewController = null;
@@ -250,10 +247,10 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             }
             if (viewController != null)
             {
-                return await CloseModalViewController(viewController);
+                return CloseModalViewController(viewController);
             }
 
-            return false;
+            return Task.FromResult(false);
         }
 
         protected virtual Task<bool> CloseModalViewController(UIViewController viewController)
@@ -611,6 +608,5 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             }
             return true;
         }
-
     }
 }
