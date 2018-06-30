@@ -41,10 +41,7 @@ namespace MvvmCross.Forms.Platforms.Wpf.Presenters
             get
             {
                 if (_formsPagePresenter == null)
-                {
-                    _formsPagePresenter = new MvxFormsPagePresenter(this);
-                    Mvx.IoCProvider.RegisterSingleton(_formsPagePresenter);
-                }
+                    throw new ArgumentNullException(nameof(FormsPagePresenter), "IMvxFormsPagePresenter cannot be null. Set the value in CreateViewPresenter in the setup.");
                 return _formsPagePresenter;
             }
             set

@@ -44,10 +44,18 @@ namespace MvvmCross.Forms.Platforms.Wpf.Core
 
         protected abstract Application CreateFormsApplication();
 
+        protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
+        {
+            var formsPagePresenter = new MvxFormsPagePresenter(viewPresenter);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFormsPagePresenter>(formsPagePresenter);
+            return formsPagePresenter;
+        }
+
         protected override IMvxWpfViewPresenter CreateViewPresenter(ContentControl contentControl)
         {
             var presenter = new MvxFormsWpfViewPresenter(contentControl, FormsApplication);
             Mvx.IoCProvider.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
+            presenter.FormsPagePresenter = CreateFormsPagePresenter(presenter);
             return presenter;
         }
 
