@@ -71,7 +71,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
         protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
         {
             var formsPagePresenter = new MvxFormsPagePresenter(viewPresenter);
-            Mvx.IoCProvider.RegisterSingleton(formsPagePresenter);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFormsPagePresenter>(formsPagePresenter);
             return formsPagePresenter;
         }
 
