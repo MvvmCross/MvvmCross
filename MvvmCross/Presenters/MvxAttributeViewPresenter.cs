@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using MvvmCross.Logging;
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.Presenters.Hints;
@@ -151,20 +152,20 @@ namespace MvvmCross.Presenters
             throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
         }
 
-        public override void ChangePresentation(MvxPresentationHint hint)
+        public override async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            if (HandlePresentationChange(hint)) return;
+            if (await HandlePresentationChange(hint)) return true;
 
             if (hint is MvxClosePresentationHint presentationHint)
             {
-                Close(presentationHint.ViewModelToClose);
-                return;
+                return await Close(presentationHint.ViewModelToClose);
             }
 
             MvxLog.Instance.Warn("Hint ignored {0}", hint.GetType().Name);
+            return false;
         }
 
-        public override void Close(IMvxViewModel viewModel)
+        public override Task<bool> Close(IMvxViewModel viewModel)
         {
             var attribute = GetPresentationAttribute(new MvxViewModelInstanceRequest(viewModel));
             var attributeType = attribute.GetType();
@@ -178,14 +179,13 @@ namespace MvvmCross.Presenters
                     throw new NullReferenceException($"attributeAction.CloseAction is null for attribute: {attributeType.Name}");
                 }
 
-                attributeAction.CloseAction.Invoke(viewModel, attribute);
-                return;
+                return attributeAction.CloseAction.Invoke(viewModel, attribute);
             }
 
             throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
         }
 
-        public override void Show(MvxViewModelRequest request)
+        public override Task<bool> Show(MvxViewModelRequest request)
         {
             var attribute = GetPresentationAttribute(request);
             attribute.ViewModelType = request.ViewModelType;
@@ -200,8 +200,7 @@ namespace MvvmCross.Presenters
                     throw new NullReferenceException($"attributeAction.ShowAction is null for attribute: {attributeType.Name}");
                 }
 
-                attributeAction.ShowAction.Invoke(attribute.ViewType, attribute, request);
-                return;
+                return attributeAction.ShowAction.Invoke(attribute.ViewType, attribute, request);
             }
 
             throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");

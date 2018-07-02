@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,6 +13,7 @@ using MvvmCross.Platforms.Wpf.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Platforms.Wpf.Presenters
 {
@@ -53,7 +54,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
                     ShowAction = (viewType, attribute, request) =>
                     {
                         var view = WpfViewLoader.CreateView(request);
-                        ShowWindow(view, (MvxWindowPresentationAttribute)attribute, request);
+                        return ShowWindow(view, (MvxWindowPresentationAttribute)attribute, request);
                     },
                     CloseAction = (viewModel, attribute) => CloseWindow(viewModel)
                 });
@@ -65,7 +66,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
                     ShowAction = (viewType, attribute, request) =>
                     {
                         var view = WpfViewLoader.CreateView(request);
-                        ShowContentView(view, (MvxContentPresentationAttribute)attribute, request);
+                        return ShowContentView(view, (MvxContentPresentationAttribute)attribute, request);
                     },
                     CloseAction = (viewModel, attribute) => CloseContentView(viewModel)
                 });
@@ -116,7 +117,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             return null;
         }
 
-        protected virtual void ShowWindow(FrameworkElement element, MvxWindowPresentationAttribute attribute, MvxViewModelRequest request)
+        protected virtual Task<bool> ShowWindow(FrameworkElement element, MvxWindowPresentationAttribute attribute, MvxViewModelRequest request)
         {
             Window window;
             if (element is MvxWindow)
@@ -150,6 +151,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
                 window.ShowDialog();
             else
                 window.Show();
+            return Task.FromResult(true);
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -161,7 +163,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
                 _frameworkElementsDictionary.Remove(window);
         }
 
-        protected virtual void ShowContentView(FrameworkElement element, MvxContentPresentationAttribute attribute, MvxViewModelRequest request)
+        protected virtual Task<bool> ShowContentView(FrameworkElement element, MvxContentPresentationAttribute attribute, MvxViewModelRequest request)
         {
             var contentControl = _frameworkElementsDictionary.Keys.FirstOrDefault(w => (w as MvxWindow)?.Identifier == attribute.WindowIdentifier) ?? _frameworkElementsDictionary.Keys.Last();
 
@@ -170,22 +172,24 @@ namespace MvvmCross.Platforms.Wpf.Presenters
 
             _frameworkElementsDictionary[contentControl].Push(element);
             contentControl.Content = element;
+            return Task.FromResult(true);
         }
 
-        public override void Close(IMvxViewModel toClose)
+        public override async Task<bool> Close(IMvxViewModel toClose)
         {
             // toClose is window
-            if (_frameworkElementsDictionary.Any(i => (i.Key as IMvxWpfView)?.ViewModel == toClose) && CloseWindow(toClose))
-                return;
+            if (_frameworkElementsDictionary.Any(i => (i.Key as IMvxWpfView)?.ViewModel == toClose) && await CloseWindow(toClose))
+                return true;
 
             // toClose is content
-            if (_frameworkElementsDictionary.Any(i => i.Value.Any() && (i.Value.Peek() as IMvxWpfView)?.ViewModel == toClose) && CloseContentView(toClose))
-                return;
+            if (_frameworkElementsDictionary.Any(i => i.Value.Any() && (i.Value.Peek() as IMvxWpfView)?.ViewModel == toClose) && await CloseContentView(toClose))
+                return true;
 
             MvxLog.Instance.Warn($"Could not close ViewModel type {toClose.GetType().Name}");
+            return false;
         }
 
-        protected virtual bool CloseWindow(IMvxViewModel toClose)
+        protected virtual Task<bool> CloseWindow(IMvxViewModel toClose)
         {
             var item = _frameworkElementsDictionary.FirstOrDefault(i => (i.Key as IMvxWpfView)?.ViewModel == toClose);
             var contentControl = item.Key;
@@ -193,13 +197,13 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             {
                 _frameworkElementsDictionary.Remove(window);
                 window.Close();
-                return true;
+                return Task.FromResult(true);
             }
 
-            return false;
+            return Task.FromResult(false); 
         }
 
-        protected virtual bool CloseContentView(IMvxViewModel toClose)
+        protected virtual Task<bool> CloseContentView(IMvxViewModel toClose)
         {
             var item = _frameworkElementsDictionary.FirstOrDefault(i => i.Value.Any() && (i.Value.Peek() as IMvxWpfView)?.ViewModel == toClose);
             var contentControl = item.Key;
@@ -211,7 +215,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             if (elements.Any())
             {
                 contentControl.Content = elements.Peek();
-                return true;
+                return Task.FromResult(true);
             }
 
             // Close window if no contents
@@ -219,10 +223,10 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             {
                 _frameworkElementsDictionary.Remove(window);
                 window.Close();
-                return true;
+                return Task.FromResult(true);
             }
 
-            return false;
+            return Task.FromResult(false);
         }
     }
 }
