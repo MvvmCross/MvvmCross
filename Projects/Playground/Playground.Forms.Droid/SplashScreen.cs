@@ -21,6 +21,11 @@ namespace Playground.Forms.Droid
         , ScreenOrientation = ScreenOrientation.Portrait)]
     public class SplashScreen : MvxFormsSplashScreenActivity<Setup, Core.App, FormsApp>
     {
+        public SplashScreen()
+            : base(Resource.Layout.SplashScreen)
+        {
+        }
+
         protected override Task RunAppStartAsync(Bundle bundle)
         {
             StartActivity(typeof(MainActivity));
