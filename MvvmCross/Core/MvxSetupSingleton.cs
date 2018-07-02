@@ -185,7 +185,7 @@ namespace MvvmCross.Core
 
                 if (monitor != null)
                 {
-                    var dispatcher = Mvx.GetSingleton<IMvxMainThreadAsyncDispatcher>();
+                    var dispatcher = Mvx.IoCProvider.GetSingleton<IMvxMainThreadAsyncDispatcher>();
                     await dispatcher.ExecuteOnMainThreadAsync(async () =>
                     {
                         if (monitor != null)
