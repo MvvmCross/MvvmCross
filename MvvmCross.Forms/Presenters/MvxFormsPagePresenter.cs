@@ -291,7 +291,6 @@ namespace MvvmCross.Forms.Presenters
                 MvxFormsLog.Instance.Trace(FormsApplication.Hierarchy());
             }
 #endif
-            }
         }
 
         protected virtual bool RemoveByViewModel(INavigation navigation, Type viewModelToRemove)
@@ -368,7 +367,6 @@ namespace MvvmCross.Forms.Presenters
                 MvxFormsLog.Instance.Trace(FormsApplication.Hierarchy());
             }
 #endif
-            }
         }
 
         public virtual async Task<bool> ShowCarouselPage(
@@ -404,7 +402,7 @@ namespace MvvmCross.Forms.Presenters
         public virtual Task<bool> CloseCarouselPage(IMvxViewModel viewModel, MvxCarouselPagePresentationAttribute attribute)
         {
             if (attribute.Position == CarouselPosition.Root)
-                return await ClosePage(FormsApplication.MainPage, null, attribute);
+                return ClosePage(FormsApplication.MainPage, null, attribute);
             else
             {
                 var carouselHost = GetPageOfType<MvxCarouselPage>();
@@ -465,7 +463,7 @@ namespace MvvmCross.Forms.Presenters
 
         public virtual Task<bool> CloseContentPage(IMvxViewModel viewModel, MvxContentPagePresentationAttribute attribute)
         {
-            return await ClosePage(FormsApplication.MainPage, null, attribute);
+            return ClosePage(FormsApplication.MainPage, null, attribute);
         }
 
         public virtual async Task<bool> ShowMasterDetailPage(
@@ -528,11 +526,11 @@ namespace MvvmCross.Forms.Presenters
             switch (attribute.Position)
             {
                 case MasterDetailPosition.Root:
-                    return await ClosePage(FormsApplication.MainPage, null, attribute);
+                    return ClosePage(FormsApplication.MainPage, null, attribute);
                 case MasterDetailPosition.Master:
-                    return await ClosePage(masterDetailHost.Master, null, attribute);
+                    return ClosePage(masterDetailHost.Master, null, attribute);
                 case MasterDetailPosition.Detail:
-                    return await ClosePage(masterDetailHost.Detail, null, attribute);
+                    return ClosePage(masterDetailHost.Detail, null, attribute);
             }
             return Task.FromResult(true);
         }
@@ -638,7 +636,7 @@ namespace MvvmCross.Forms.Presenters
         public virtual Task<bool> CloseTabbedPage(IMvxViewModel viewModel, MvxTabbedPagePresentationAttribute attribute)
         {
             if (attribute.Position == TabbedPosition.Root)
-                return await ClosePage(FormsApplication.MainPage, null, attribute);
+                return ClosePage(FormsApplication.MainPage, null, attribute);
             else
             {
                 var tabHost = GetPageOfType<MvxTabbedPage>();
