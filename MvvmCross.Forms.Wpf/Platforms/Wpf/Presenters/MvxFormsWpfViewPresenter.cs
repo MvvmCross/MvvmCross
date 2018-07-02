@@ -2,15 +2,13 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Forms.Presenters;
 using System;
-using MvvmCross.Forms.Core;
+using System.Windows.Controls;
+using MvvmCross.Forms.Presenters;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Wpf.Presenters;
-using MvvmCross.Platforms.Wpf.Views;
 using MvvmCross.ViewModels;
 using Xamarin.Forms;
-using System.Windows.Controls;
 
 namespace MvvmCross.Forms.Platforms.Wpf.Presenters
 {
@@ -41,10 +39,8 @@ namespace MvvmCross.Forms.Platforms.Wpf.Presenters
             get
             {
                 if (_formsPagePresenter == null)
-                {
-                    _formsPagePresenter = new MvxFormsPagePresenter(this);
-                    Mvx.IoCProvider.RegisterSingleton(_formsPagePresenter);
-                }
+                    throw new ArgumentNullException(nameof(FormsPagePresenter), "IMvxFormsPagePresenter cannot be null. Set the value in CreateViewPresenter in the setup.");
+
                 return _formsPagePresenter;
             }
             set
