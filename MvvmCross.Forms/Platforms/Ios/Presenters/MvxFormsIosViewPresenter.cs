@@ -23,12 +23,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Presenters
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
         }
 
-        private Application _formsApplication;
-        public Application FormsApplication
-        {
-            get { return _formsApplication; }
-            set { _formsApplication = value; }
-        }
+        public Application FormsApplication { get; set; }
 
         private IMvxFormsPagePresenter _formsPagePresenter;
         public virtual IMvxFormsPagePresenter FormsPagePresenter
