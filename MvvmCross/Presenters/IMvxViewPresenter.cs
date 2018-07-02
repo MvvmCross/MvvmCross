@@ -3,18 +3,19 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters
 {
     public interface IMvxViewPresenter
     {
-        void Show(MvxViewModelRequest request);
+        Task<bool> Show(MvxViewModelRequest request);
 
-        void ChangePresentation(MvxPresentationHint hint);
+        Task<bool> ChangePresentation(MvxPresentationHint hint);
 
-        void AddPresentationHintHandler<THint>(Func<THint, bool> action) where THint : MvxPresentationHint;
+        void AddPresentationHintHandler<THint>(Func<THint, Task<bool>> action) where THint : MvxPresentationHint;
 
-        void Close(IMvxViewModel toClose);
+        Task<bool> Close(IMvxViewModel toClose);
     }
 }

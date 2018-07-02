@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -14,6 +14,7 @@ using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
 using UIKit;
 using MvvmCross.Presenters.Attributes;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Platforms.Tvos.Presenters
 {
@@ -43,8 +44,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
             if (MasterNavigationController == null &&
-               TabBarViewController == null ||
-               !TabBarViewController.CanShowChildView())
+               (TabBarViewController == null || !TabBarViewController.CanShowChildView()))
             {
                 MvxLog.Instance.Trace($"PresentationAttribute nor MasterNavigationController found for {viewType.Name}. " +
                     $"Assuming Root presentation");
@@ -62,7 +62,6 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                 ViewType = viewType,
                 ViewModelType = viewModelType
             };
-
         }
 
         public override MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
@@ -103,7 +102,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                     ShowAction = (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        ShowRootViewController(viewController,
+                        return ShowRootViewController(viewController,
                                                (MvxRootPresentationAttribute)attribute,
                                                request);
                     },
@@ -118,14 +117,13 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                   ShowAction = (viewType, attribute, request) =>
                   {
                       var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                      ShowChildViewController(viewController,
+                      return ShowChildViewController(viewController,
                                               (MvxChildPresentationAttribute)attribute,
                                               request);
                   },
                   CloseAction = (viewModel, attribute) => CloseChildViewController(viewModel,
                                                                                    (MvxChildPresentationAttribute)attribute)
               });
-
 
             AttributeTypesToActionsDictionary.Add(
                 typeof(MvxTabPresentationAttribute),
@@ -134,7 +132,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                     ShowAction = (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        ShowTabViewController(viewController,
+                        return ShowTabViewController(viewController,
                                               (MvxTabPresentationAttribute)attribute,
                                               request);
                     },
@@ -149,7 +147,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                   ShowAction = (viewType, attribute, request) =>
                   {
                       var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                      ShowModalViewController(viewController, (MvxModalPresentationAttribute)attribute, request);
+                      return ShowModalViewController(viewController, (MvxModalPresentationAttribute)attribute, request);
                   },
                   CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel, (MvxModalPresentationAttribute)attribute)
               });
@@ -161,43 +159,43 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                   ShowAction = (viewType, attribute, request) =>
                   {
                       var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                      ShowMasterDetailSplitViewController(viewController, (MvxMasterDetailPresentationAttribute)attribute, request);
+                      return ShowMasterDetailSplitViewController(viewController, (MvxMasterDetailPresentationAttribute)attribute, request);
                   },
                   CloseAction = (viewModel, attribute) => CloseMasterSplitViewController(viewModel, (MvxMasterDetailPresentationAttribute)attribute)
               });
         }
 
-        protected virtual bool CloseRootViewController(IMvxViewModel viewModel,
+        protected virtual Task<bool> CloseRootViewController(IMvxViewModel viewModel,
                                      MvxRootPresentationAttribute attribute)
         {
             MvxLog.Instance.Warn($"Ignored attempt to close the window root (ViewModel type: {viewModel.GetType().Name}");
-            return false;
+            return Task.FromResult(false);
         }
 
-        protected virtual bool CloseChildViewController(IMvxViewModel viewModel, MvxChildPresentationAttribute attribute)
+        protected virtual Task<bool> CloseChildViewController(IMvxViewModel viewModel, MvxChildPresentationAttribute attribute)
         {
             if (ModalViewControllers.Any())
             {
                 foreach (var navController in ModalViewControllers.Where(v => v is UINavigationController))
                 {
                     if (TryCloseViewControllerInsideStack((UINavigationController)navController, viewModel))
-                        return true;
+                        return Task.FromResult(true);
                 }
             }
 
             if (TabBarViewController != null && TabBarViewController.CloseChildViewModel(viewModel))
-                return true;
+                return Task.FromResult(true);
 
             if (MasterNavigationController != null && TryCloseViewControllerInsideStack(MasterNavigationController, viewModel))
-                return true;
+                return Task.FromResult(true);
 
-            return false;
+            return Task.FromResult(false);
         }
 
-        public void CloseTabBarViewController()
+        public Task<bool> CloseTabBarViewController()
         {
             if (TabBarViewController == null)
-                return;
+                return Task.FromResult(true);
 
             if (TabBarViewController is UITabBarController tabController
                && tabController.ViewControllers != null)
@@ -207,34 +205,34 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             }
 
             TabBarViewController = null;
+            return Task.FromResult(true);
         }
 
-        protected virtual bool CloseTabViewController(IMvxViewModel viewModel,
+        protected virtual Task<bool> CloseTabViewController(IMvxViewModel viewModel,
                                     MvxTabPresentationAttribute attribute)
         {
             if (TabBarViewController != null && TabBarViewController.CloseTabViewModel(viewModel))
-                return true;
+                return Task.FromResult(true);
 
-            return false;
+            return Task.FromResult(false);
         }
 
-        protected virtual bool CloseModalViewController(IMvxViewModel viewModel,
+        protected virtual Task<bool> CloseModalViewController(IMvxViewModel viewModel,
                                                         MvxModalPresentationAttribute attribute)
         {
             return CloseModalViewController(viewModel);
         }
 
-        protected virtual bool CloseModalViewController(IMvxViewModel viewModel)
+        protected virtual Task<bool> CloseModalViewController(IMvxViewModel viewModel)
         {
             if (ModalViewControllers == null || !ModalViewControllers.Any())
-                return false;
+                return Task.FromResult(false);
 
             var modal = ModalViewControllers
                 .FirstOrDefault(v => v is IMvxTvosView && v.GetIMvxTvosView().ViewModel == viewModel);
             if (modal != null)
             {
-                CloseModalViewController(modal);
-                return true;
+                return CloseModalViewController(modal);
             }
 
             UIViewController viewController = null;
@@ -249,17 +247,16 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             }
             if (viewController != null)
             {
-                CloseModalViewController(viewController);
-                return true;
+                return CloseModalViewController(viewController);
             }
 
-            return false;
+            return Task.FromResult(false);
         }
 
-        protected virtual void CloseModalViewController(UIViewController viewController)
+        protected virtual Task<bool> CloseModalViewController(UIViewController viewController)
         {
             if (viewController == null)
-                return;
+                return Task.FromResult(true);
 
             if (viewController is UINavigationController navController)
             {
@@ -269,47 +266,50 @@ namespace MvvmCross.Platforms.Tvos.Presenters
 
             viewController.DismissViewController(true, null);
             ModalViewControllers.Remove(viewController);
+            return Task.FromResult(true);
         }
 
-        public virtual void CloseModalViewController()
+        public virtual Task<bool> CloseModalViewController()
         {
             MasterNavigationController.PopViewController(true);
+            return Task.FromResult(true);
         }
 
-        protected void CloseMasterNavigationController()
+        protected Task<bool> CloseMasterNavigationController()
         {
             if (MasterNavigationController == null)
-                return;
+                return Task.FromResult(true);
             if (MasterNavigationController.ViewControllers != null)
             {
                 foreach (var v in MasterNavigationController.ViewControllers)
                     v.DidMoveToParentViewController(null);
             }
             MasterNavigationController = null;
+            return Task.FromResult(true);
         }
 
-        protected virtual bool CloseMasterSplitViewController(IMvxViewModel viewModel, MvxMasterDetailPresentationAttribute attribute)
+        protected virtual async Task<bool> CloseMasterSplitViewController(IMvxViewModel viewModel, MvxMasterDetailPresentationAttribute attribute)
         {
             if (SplitViewController != null &&
                 attribute.Position != MasterDetailPosition.Root &&
-                CloseChildViewModel(viewModel))
+                await CloseChildViewModel(viewModel))
                 return true;
             else if (attribute.Position == MasterDetailPosition.Root)
                 return false;
             return true;
         }
 
-        protected virtual bool CloseDetailSplitViewController(IMvxViewModel viewModel, MvxMasterDetailPresentationAttribute attribute)
+        protected virtual async Task<bool> CloseDetailSplitViewController(IMvxViewModel viewModel, MvxMasterDetailPresentationAttribute attribute)
         {
-            if (SplitViewController != null && CloseChildViewModel(viewModel))
+            if (SplitViewController != null && await CloseChildViewModel(viewModel))
                 return true;
             return true;
         }
 
-        public virtual bool CloseChildViewModel(IMvxViewModel viewModel)
+        public virtual Task<bool> CloseChildViewModel(IMvxViewModel viewModel)
         {
             if (!SplitViewController.ViewControllers.Any())
-                return false;
+                return Task.FromResult(false);
 
             var toClose = SplitViewController.ViewControllers.ToList()
                                          .Select(v => v.GetIMvxTvosView())
@@ -319,16 +319,16 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                 var newStack = SplitViewController.ViewControllers.Where(v => v.GetIMvxTvosView() != toClose);
                 SplitViewController.ViewControllers = newStack.ToArray();
 
-                return true;
+                return Task.FromResult(true);
             }
 
-            return false;
+            return Task.FromResult(false);
         }
 
-        protected void CloseSplitViewController()
+        protected Task<bool> CloseSplitViewController()
         {
             if (SplitViewController == null)
-                return;
+                return Task.FromResult(true);
 
             if (SplitViewController is UISplitViewController splitController
                && splitController.ViewControllers != null)
@@ -337,21 +337,22 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                     item.DidMoveToParentViewController(null);
             }
             SplitViewController = null;
+            return Task.FromResult(true);
         }
 
-        public override void Close(IMvxViewModel viewModel)
+        public override Task<bool> Close(IMvxViewModel viewModel)
         {
-            GetPresentationAttributeAction(new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute)
+            return GetPresentationAttributeAction(new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute)
                 .CloseAction.Invoke(viewModel, attribute);
         }
 
-        public override void Show(MvxViewModelRequest request)
+        public override Task<bool> Show(MvxViewModelRequest request)
         {
-            GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute)
+            return GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute)
                 .ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
 
-        protected virtual void ShowRootViewController(UIViewController viewController,
+        protected virtual async Task<bool> ShowRootViewController(UIViewController viewController,
                                            MvxRootPresentationAttribute attribute,
                                            MvxViewModelRequest request)
         {
@@ -360,22 +361,21 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                 //NOTE clean up must be done first incase we are enbedding into a navigation controller
                 //before setting the tab view controller, otherwise this will reset the view stack and your tab
                 //controller will be null. 
-                SetupWindowRootNavigation(viewController, attribute);
+                await SetupWindowRootNavigation(viewController, attribute);
                 this.TabBarViewController = (IMvxTabBarViewController)viewController;
 
-                CloseModalViewControllers();
-
-                return;
+                return await CloseModalViewControllers();
             }
 
-            SetupWindowRootNavigation(viewController, attribute);
+            await SetupWindowRootNavigation(viewController, attribute);
 
-            CloseModalViewControllers();
-            CloseTabBarViewController();
-            CloseSplitViewController();
+            if(!(await CloseModalViewControllers()))return false;
+            if(!(await CloseTabBarViewController()))return false;
+            if(!(await CloseSplitViewController()))return false;
+            return true;
         }
 
-        protected virtual void ShowChildViewController(UIViewController viewController,
+        protected virtual Task<bool> ShowChildViewController(UIViewController viewController,
                                                         MvxChildPresentationAttribute attribute,
                                                         MvxViewModelRequest request)
         {
@@ -387,7 +387,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                 if (ModalViewControllers.LastOrDefault() is UINavigationController navigationController)
                 {
                     PushViewControllerIntoStack(navigationController, viewController, attribute.Animated);
-                    return;
+                    return Task.FromResult(true);
                 }
                 else
                 {
@@ -397,19 +397,19 @@ namespace MvvmCross.Platforms.Tvos.Presenters
 
             if (TabBarViewController != null && TabBarViewController.ShowChildView(viewController))
             {
-                return;
+                return Task.FromResult(true);
             }
 
             if (MasterNavigationController != null)
             {
                 PushViewControllerIntoStack(MasterNavigationController, viewController, attribute.Animated);
-                return;
+                return Task.FromResult(true);
             }
 
             throw new MvxException($"Trying to show View type: {viewController.GetType().Name} as child, but there is no current stack!");
         }
 
-        protected virtual void ShowModalViewController(UIViewController viewController,
+        protected virtual Task<bool> ShowModalViewController(UIViewController viewController,
                                                        MvxModalPresentationAttribute attribute,
                                                        MvxViewModelRequest request)
         {
@@ -433,9 +433,10 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                 null);
 
             ModalViewControllers.Add(viewController);
+            return Task.FromResult(true);
         }
 
-        protected virtual void ShowTabViewController(UIViewController viewController,
+        protected virtual Task<bool> ShowTabViewController(UIViewController viewController,
                                            MvxTabPresentationAttribute attribute,
                                            MvxViewModelRequest request)
         {
@@ -455,47 +456,49 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             TabBarViewController.ShowTabView(
                 viewController,
                 attribute);
+            return Task.FromResult(true);
         }
 
-        protected virtual void ShowMasterDetailSplitViewController(
+        protected virtual async Task<bool> ShowMasterDetailSplitViewController(
           UIViewController viewController,
             MvxMasterDetailPresentationAttribute attribute,
           MvxViewModelRequest request)
         {
             if (SplitViewController != null && attribute.Position == MasterDetailPosition.Master)
             {
-                ShowMasterView(viewController, attribute.WrapInNavigationController);
+                return await ShowMasterView(viewController, attribute.WrapInNavigationController);
             }
             else if (SplitViewController != null && attribute.Position == MasterDetailPosition.Detail)
             {
-                ShowDetailView(viewController, attribute.WrapInNavigationController);
+                return await ShowDetailView(viewController, attribute.WrapInNavigationController);
             }
             else if (viewController is MvxSplitViewController && attribute.Position == MasterDetailPosition.Root)
             {
                 SplitViewController = (MvxSplitViewController)viewController;
 
                 // set root
-                SetupSplitViewWindowRootNavigation(viewController, attribute);
+                await SetupSplitViewWindowRootNavigation(viewController, attribute);
 
-                CloseModalViewControllers();
-                CloseTabBarViewController();
-                return;
+                await CloseModalViewControllers();
+                await CloseTabBarViewController();
             }
             else
             {
                 throw new MvxException("Trying to show a master page without a SplitViewController, this is not possible!");
             }
+            return true;
         }
 
-        public virtual void ShowDetailView(UIViewController viewController, bool wrapInNavigationController)
+        public virtual Task<bool> ShowDetailView(UIViewController viewController, bool wrapInNavigationController)
         {
             viewController = wrapInNavigationController ?
                 new MvxNavigationController(viewController) : viewController;
 
             SplitViewController.ShowDetailViewController(viewController, SplitViewController);
+            return Task.FromResult(true);
         }
 
-        public virtual void ShowMasterView(UIViewController viewController, bool wrapInNavigationController)
+        public virtual Task<bool> ShowMasterView(UIViewController viewController, bool wrapInNavigationController)
         {
             var stack = SplitViewController.ViewControllers.ToList();
 
@@ -508,16 +511,16 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             stack.Insert(0, viewController);
 
             SplitViewController.ViewControllers = stack.ToArray();
+            return Task.FromResult(true);
         }
-        public bool PresentModalViewController(UIViewController viewController, bool animated)
+        public Task<bool> PresentModalViewController(UIViewController viewController, bool animated)
         {
-            ShowModalViewController(viewController, new MvxModalPresentationAttribute { Animated = animated }, null);
-            return true;
+            return ShowModalViewController(viewController, new MvxModalPresentationAttribute { Animated = animated }, null);
         }
 
-        public virtual void CloseTopModalViewController()
+        public virtual Task<bool> CloseTopModalViewController()
         {
-            CloseModalViewController(ModalViewControllers?.Last());
+            return CloseModalViewController(ModalViewControllers?.Last());
         }
 
         protected virtual void PushViewControllerIntoStack(UINavigationController navigationController, UIViewController viewController, bool animated)
@@ -528,7 +531,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                 TabBarViewController = tabBarController;
         }
 
-        protected void SetupWindowRootNavigation(UIViewController viewController,
+        protected Task<bool> SetupWindowRootNavigation(UIViewController viewController,
                                                  MvxRootPresentationAttribute attribute)
         {
             if (attribute.WrapInNavigationController)
@@ -539,12 +542,12 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             else
             {
                 SetWindowRootViewController(viewController);
-                CloseMasterNavigationController();
+                return CloseMasterNavigationController();
             }
-
+            return Task.FromResult(true);
         }
 
-        protected void SetupSplitViewWindowRootNavigation(UIViewController viewController,
+        protected Task<bool> SetupSplitViewWindowRootNavigation(UIViewController viewController,
                                                MvxMasterDetailPresentationAttribute attribute)
         {
             if (attribute.WrapInNavigationController)
@@ -555,9 +558,9 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             else
             {
                 SetWindowRootViewController(viewController);
-                CloseMasterNavigationController();
+                return CloseMasterNavigationController();
             }
-
+            return Task.FromResult(true);
         }
 
         protected virtual void SetWindowRootViewController(UIViewController controller)
@@ -597,13 +600,13 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             return new MvxNavigationController(viewController);
         }
 
-        protected void CloseModalViewControllers()
+        protected async Task<bool> CloseModalViewControllers()
         {
             while (ModalViewControllers.Any())
             {
-                CloseModalViewController(ModalViewControllers.LastOrDefault());
+                if(!(await CloseModalViewController(ModalViewControllers.LastOrDefault())))return false;
             }
+            return true;
         }
-
     }
 }
