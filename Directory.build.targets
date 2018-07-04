@@ -35,9 +35,5 @@
     <DefineConstants>$(DefineConstants);TIZEN</DefineConstants>
   </PropertyGroup>
   
-  <ItemGroup Condition="$(TargetFramework.StartsWith('uap')) and '$(IsLibraryProject)' == 'true' ">
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.5" />
-  </ItemGroup>
-
   <Import Project="XamarinForms.targets" Condition="'$(IsXamarinForms)' == 'true'"/>
 </Project>
