@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Threading.Tasks;
 using MvvmCross;
 using MvvmCross.IoC;
 using MvvmCross.Localization;
@@ -32,9 +33,9 @@ namespace Playground.Core
         /// <summary>
         /// Do any UI bound startup actions here
         /// </summary>
-        public override void Startup()
+        public override Task Startup()
         {
-            base.Startup();
+            return base.Startup();
         }
 
         /// <summary>
