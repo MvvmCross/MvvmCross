@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading;
+using System.Threading.Tasks;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
@@ -28,25 +29,25 @@ namespace MvvmCross.ViewModels
             if (Interlocked.CompareExchange(ref startHasCommenced, 1, 0) == 1)
                 return;
 
-            Startup(hint);
+            StartAsync(hint).GetAwaiter().GetResult();
         }
 
-        protected virtual void Startup(object hint = null)
+        public async Task StartAsync(object hint = null)
         {
-            var applicationHint = ApplicationStartup(hint);
+            var applicationHint = await ApplicationStartup(hint);
             if (applicationHint != null)
             {
                 MvxLog.Instance.Trace("Hint ignored in default MvxAppStart");
             }
 
-            NavigateToFirstViewModel(applicationHint);
+            await NavigateToFirstViewModel(applicationHint);
         }
 
-        protected abstract void NavigateToFirstViewModel(object hint = null);
+        protected abstract Task NavigateToFirstViewModel(object hint = null);
 
-        protected virtual object ApplicationStartup(object hint = null)
+        protected virtual async Task<object> ApplicationStartup(object hint = null)
         {
-            Application.Startup();
+            await Application.Startup();
             return hint;
         }
 
@@ -71,11 +72,11 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        protected override void NavigateToFirstViewModel(object hint = null)
+        protected override async Task NavigateToFirstViewModel(object hint = null)
         {
             try
             {
-                NavigationService.Navigate<TViewModel>().GetAwaiter().GetResult();
+                await NavigationService.Navigate<TViewModel>();
             }
             catch (System.Exception exception)
             {
@@ -90,16 +91,16 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        protected override object ApplicationStartup(object hint = null)
+        protected override async Task<object> ApplicationStartup(object hint = null)
         {
-            var applicationHint = base.ApplicationStartup(hint);
+            var applicationHint = await base.ApplicationStartup(hint);
             if (applicationHint is TParameter parameter && Application is IMvxApplication<TParameter> typedApplication)
                 return typedApplication.Startup(parameter);
             else
                 return applicationHint;
         }
 
-        protected override void NavigateToFirstViewModel(object hint = null)
+        protected override async Task NavigateToFirstViewModel(object hint = null)
         {
             try
             {
@@ -108,7 +109,7 @@ namespace MvvmCross.ViewModels
                 else
                 {
                     MvxLog.Instance.Trace($"Hint is not matching type of {nameof(TParameter)}. Doing navigation without typed parameter instead.");
-                    base.NavigateToFirstViewModel(hint);
+                    await base.NavigateToFirstViewModel(hint);
                 }
             }
             catch (System.Exception exception)
