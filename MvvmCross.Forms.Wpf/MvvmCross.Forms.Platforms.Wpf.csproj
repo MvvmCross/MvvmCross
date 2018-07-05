@@ -17,6 +17,10 @@ This package contains the 'MvvmCross.Forms.Platforms.Wpf' libraries for MvvmCros
     <ProjectReference Include="..\MvvmCross.Forms\MvvmCross.Forms.csproj" />
     <ProjectReference Include="..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\MvvmCross.Wpf\MvvmCross.Platforms.Wpf.csproj" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
 
   <Import Project="..\XamarinFormsWpf.targets" />

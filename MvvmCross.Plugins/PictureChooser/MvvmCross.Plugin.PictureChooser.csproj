@@ -24,6 +24,10 @@ This package contains the 'PictureChooser' plugin for MvvmCross</Description>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
     <Compile Include="Platforms\Net\**\*.cs" />
     <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="Platforms\Wpf\**\*.cs" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">
