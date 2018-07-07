@@ -23,7 +23,7 @@ namespace MvvmCross.Platforms.Uap.Views
         {
             if (IsOnMainThread)
             {
-                action();
+                ExceptionMaskedAction(action, maskExceptions);
                 return true;
             }
 

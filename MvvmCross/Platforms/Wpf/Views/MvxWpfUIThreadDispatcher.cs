@@ -24,7 +24,7 @@ namespace MvvmCross.Platforms.Wpf.Views
         {
             if (IsOnMainThread)
             {
-                action();
+                ExceptionMaskedAction(action, maskExceptions);
             }
             else
             {
