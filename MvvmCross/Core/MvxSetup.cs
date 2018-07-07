@@ -304,9 +304,10 @@ namespace MvvmCross.Core
             {
                 return assembly.GetReferencedAssemblies().Any(a => a.Name == mvvmCrossAssemblyName);
             }
-            catch(Exception ex)
+            catch(Exception)
             {
-                return true;
+                // TODO: Should the response here be true or false? Surely if exception we should return false?
+                return true; 
             }
         }
 

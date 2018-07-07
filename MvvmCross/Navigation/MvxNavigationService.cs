@@ -259,8 +259,9 @@ namespace MvvmCross.Navigation
             var args = new NavigateEventArgs(viewModel);
             OnBeforeNavigate(this, args);
 
-            ViewDispatcher.ShowViewModel(request);
-
+            // TODO: ShowViewModel returns bool value to indicate success. How should this be handled in navigation service
+            await ViewDispatcher.ShowViewModel(request); 
+            
             if(viewModel.InitializeTask?.Task != null)
                 await viewModel.InitializeTask.Task.ConfigureAwait(false);
 
@@ -284,8 +285,10 @@ namespace MvvmCross.Navigation
             viewModel.CloseCompletionSource = tcs;
             _tcsResults.Add(viewModel, tcs);
 
-            ViewDispatcher.ShowViewModel(request);
+            // TODO: ShowViewModel returns bool value to indicate success. How should this be handled in navigation service
+            await ViewDispatcher.ShowViewModel(request);
 
+            // TODO: Should Initialize task be done on UI or non-UI thread? Now that ShowViewModel is async, we could ConfigureAwait it to return on non-UI thread
             if(viewModel.InitializeTask?.Task != null)
                 await viewModel.InitializeTask.Task.ConfigureAwait(false);
 
@@ -318,7 +321,8 @@ namespace MvvmCross.Navigation
             viewModel.CloseCompletionSource = tcs;
             _tcsResults.Add(viewModel, tcs);
 
-            ViewDispatcher.ShowViewModel(request);
+            // TODO: ShowViewModel returns bool value to indicate success. How should this be handled in navigation service
+            await ViewDispatcher.ShowViewModel(request);
 
             if(viewModel.InitializeTask?.Task != null)
                 await viewModel.InitializeTask.Task.ConfigureAwait(false);
