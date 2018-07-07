@@ -125,17 +125,19 @@ namespace MvvmCross.ViewModels
                 PropertyChanged?.Invoke(this, changedArgs);
             }
 
+            void exceptionMasked() => MvxMainThreadDispatcher.ExceptionMaskedAction(raiseChange, true);
+
             if (ShouldAlwaysRaiseInpcOnUserInterfaceThread())
             {
                 // check for subscription before potentially causing a cross-threaded call
                 if (PropertyChanged == null)
                     return;
 
-                await InvokeOnMainThreadAsync(raiseChange);
+                await InvokeOnMainThreadAsync(exceptionMasked);
             }
             else
             {
-                raiseChange();
+                exceptionMasked();
             }
         }
 

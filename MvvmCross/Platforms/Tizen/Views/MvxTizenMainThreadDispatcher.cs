@@ -13,7 +13,7 @@ namespace MvvmCross.Platforms.Tizen.Views
         public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             //TODO: implement
-            action();
+            ExceptionMaskedAction(action, maskExceptions);
             return true;
         }
     }

@@ -4,7 +4,6 @@
 
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Android.App;
 using MvvmCross.Base;
 
@@ -17,7 +16,7 @@ namespace MvvmCross.Platforms.Android.Views
         public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (IsOnMainThread)
-                action();
+                ExceptionMaskedAction(action, maskExceptions);
             else
             {
                 Application.SynchronizationContext.Post(ignored =>

@@ -16,7 +16,7 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
 
         public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
-            action();
+            ExceptionMaskedAction(action, maskExceptions);
             Count++;
             return true;
         }
