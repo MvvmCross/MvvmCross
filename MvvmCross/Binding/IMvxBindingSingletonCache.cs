@@ -27,6 +27,6 @@ namespace MvvmCross.Binding
         IMvxTargetBindingFactory TargetBindingFactory { get; }
         IMvxSourceStepFactory SourceStepFactory { get; }
         IMvxValueCombinerLookup ValueCombinerLookup { get; }
-        IMvxMainThreadDispatcher MainThreadDispatcher { get; }
+        IMvxMainThreadAsyncDispatcher MainThreadDispatcher { get; }
     }
 }
