@@ -25,7 +25,7 @@ namespace MvvmCross.Platforms.Ios.Views
         public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (IsOnMainThread)
-                action();
+                ExceptionMaskedAction(action, maskExceptions);
             else
                 UIApplication.SharedApplication.BeginInvokeOnMainThread(() =>
                 {
