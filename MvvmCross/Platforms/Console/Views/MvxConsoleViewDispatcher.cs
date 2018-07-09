@@ -18,7 +18,7 @@ namespace MvvmCross.Platforms.Console.Views
 
         public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
-            action();
+            ExceptionMaskedAction(action, maskExceptions);
             return true;
         }
 
