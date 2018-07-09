@@ -59,7 +59,7 @@ namespace MvvmCross.Forms.Bindings
 
                 BindableObjectRaw = parentObjects.FirstOrDefault();
                 Bindable = BindableObjectRaw as BindableObject;
-                rootObject = parentObject ?? throw new ArgumentNullException("parentObject");
+                rootObject = parentObject;
             }
             else
             {
