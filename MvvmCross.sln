@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 		XamarinBuild.targets = XamarinBuild.targets
 		XamarinForms.targets = XamarinForms.targets
+		XamarinFormsWpf.targets = XamarinFormsWpf.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{77C7235F-1977-426F-86E8-77A29B5DF68F}"
@@ -143,7 +144,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Wpf", "Projects\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.Visibility.UnitTest", "UnitTests\Plugins.Visibility.UnitTest\MvvmCross.Plugins.Visibility.UnitTest.csproj", "{B5581657-2A45-4FE7-AFC9-96EA06188582}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Platforms.Wpf", "MvvmCross\MvvmCross.Platforms.Wpf.csproj", "{FE6715F0-BB2D-4ED9-BF2B-30124ECB3AEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Platforms.Wpf", "MvvmCross.Wpf\MvvmCross.Platforms.Wpf.csproj", "{FE6715F0-BB2D-4ED9-BF2B-30124ECB3AEC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fragments", "Fragments", "{48D712C3-A307-4CF8-9A3B-5A6E011E2191}"
 EndProject
