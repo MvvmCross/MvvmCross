@@ -13,9 +13,11 @@ namespace Playground.Core.ViewModels
         public SplitDetailViewModel()
         {
             ShowChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SplitDetailNavViewModel>());
+            ShowTabsCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<TabsRootBViewModel>());
         }
 
         public IMvxAsyncCommand ShowChildCommand { get; private set; }
+        public IMvxAsyncCommand ShowTabsCommand { get; private set; }
 
         public string ContentText => "Text for the Content Area";
 
