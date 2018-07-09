@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using MvvmCross.Base;
 
 namespace MvvmCross.ViewModels
@@ -250,15 +251,15 @@ namespace MvvmCross.ViewModels
                 new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedItems, start));
         }
 
-        protected virtual void InvokeOnMainThread(Action action)
+        protected virtual Task InvokeOnMainThread(Action action)
         {
-            var dispatcher = MvxSingleton<IMvxMainThreadDispatcher>.Instance;
-            dispatcher?.RequestMainThreadAction(action);
+            var dispatcher = MvxSingleton<IMvxMainThreadAsyncDispatcher>.Instance;
+            return dispatcher?.ExecuteOnMainThreadAsync(action);
         }
 
-        protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+        protected async override void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-            InvokeOnMainThread(() => base.OnPropertyChanged(e));
+            await InvokeOnMainThread(() => base.OnPropertyChanged(e));
         }
     }
 }
