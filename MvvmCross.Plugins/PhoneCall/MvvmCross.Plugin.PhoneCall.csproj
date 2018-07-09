@@ -67,7 +67,6 @@ This package contains the 'PhoneCall' plugin for MvvmCross</Description>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">
     <Compile Include="Platforms\Tizen\**\*.cs" />
     <Compile Include="Platforms\Xamarin-common\**\*.cs" />
-    <PackageReference Include="Tizen.NET" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>
