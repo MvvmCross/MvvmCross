@@ -58,6 +58,7 @@
     <Compile Include="Bindings\BinaryEditTargetBinding.cs" />
     <Compile Include="Controls\BinaryEdit.cs" />
     <Compile Include="Fragments\BaseSplitDetailView.cs" />
+    <Compile Include="Fragments\TabsRootBView.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,7 +87,6 @@
     <Compile Include="Fragments\SheetView.cs" />
     <Compile Include="Fragments\SplitDetailNavView.cs" />
     <Compile Include="Fragments\NestedChildView.cs" />
-    <Compile Include="Activities\TabsRootBView.cs" />
     <Compile Include="MainApplication.cs" />
   </ItemGroup>
   <ItemGroup>
