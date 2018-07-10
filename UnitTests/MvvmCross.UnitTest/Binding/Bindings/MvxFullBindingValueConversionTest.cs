@@ -461,7 +461,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
             Type targetType, out MockSourceBinding mockSource, out MockTargetBinding mockTarget)
         {
             _fixture.ClearAll();
-            _fixture.Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(new InlineMockMainThreadDispatcher());
+            _fixture.Ioc.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(new InlineMockMainThreadDispatcher());
 
             var mockSourceBindingFactory = new Mock<IMvxSourceBindingFactory>();
             _fixture.Ioc.RegisterSingleton(mockSourceBindingFactory.Object);
