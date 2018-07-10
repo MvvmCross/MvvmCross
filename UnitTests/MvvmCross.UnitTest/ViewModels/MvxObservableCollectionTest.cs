@@ -36,8 +36,7 @@ namespace MvvmCross.UnitTest.ViewModels
 
             public Task ExecuteOnMainThreadAsync(Func<Task> action, bool maskExceptions = true)
             {
-                action?.Invoke();
-                return Task.CompletedTask;
+                return action?.Invoke();
             }
         }
 
