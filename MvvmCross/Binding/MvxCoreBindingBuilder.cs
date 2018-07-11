@@ -116,6 +116,7 @@ namespace MvvmCross.Binding
         {
             registry.AddOrOverwrite("CommandParameter", new MvxCommandParameterValueConverter());
             registry.AddOrOverwrite("Language", new MvxLanguageConverter());
+            registry.AddOrOverwrite("InvertedBoolean", new MvxInvertedBooleanValueConverter());
         }
 
         protected virtual void RegisterValueCombinerProvider()
@@ -155,7 +156,7 @@ namespace MvvmCross.Binding
             registry.AddOrOverwrite("And", new MvxAndValueCombiner());
             registry.AddOrOverwrite("Or", new MvxOrValueCombiner());
             registry.AddOrOverwrite("XOr", new MvxXorValueCombiner());
-			registry.AddOrOverwrite("Inverted", new MvxInvertedValueCombiner());
+            registry.AddOrOverwrite("Inverted", new MvxInvertedValueCombiner());
 
             // Note: MvxValueConverterValueCombiner is not registered - it is unconventional
             //registry.AddOrOverwrite("ValueConverter", new MvxValueConverterValueCombiner());
