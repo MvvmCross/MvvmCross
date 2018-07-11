@@ -8,7 +8,7 @@ using MvvmCross.Converters;
 
 namespace MvvmCross.Binding.ValueConverters
 {
-    public class MvxInvertedBooleanConverter : MvxValueConverter<bool, bool>
+    public class MvxInvertedBooleanValueConverter : MvxValueConverter<bool, bool>
     {
         protected override bool Convert(bool value, Type targetType, object parameter, CultureInfo culture)
         {

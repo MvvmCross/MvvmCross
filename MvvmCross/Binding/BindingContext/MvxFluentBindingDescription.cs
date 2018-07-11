@@ -167,7 +167,7 @@ namespace MvvmCross.Binding.BindingContext
 
         public MvxFluentBindingDescription<TTarget, TSource> WithInvertedBoolean()
         {
-            SourceStepDescription.Converter = new MvxInvertedBooleanConverter();
+            SourceStepDescription.Converter = new MvxInvertedBooleanValueConverter();
             return this;
         }
     }
@@ -308,7 +308,7 @@ namespace MvvmCross.Binding.BindingContext
 
         public MvxFluentBindingDescription<TTarget> WithInvertedBoolean()
         {
-            SourceStepDescription.Converter = new MvxInvertedBooleanConverter();
+            SourceStepDescription.Converter = new MvxInvertedBooleanValueConverter();
             return this;
         }
     }
