@@ -487,7 +487,7 @@ namespace MvvmCross.Navigation
 
         public virtual async Task<bool> Close(IMvxViewModel viewModel, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var args = new NavigateEventArgs(viewModel);
+            var args = new NavigateEventArgs(viewModel, cancellationToken);
             OnBeforeClose(this, args);
 
             if (cancellationToken.IsCancellationRequested)
