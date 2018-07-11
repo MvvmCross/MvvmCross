@@ -73,7 +73,7 @@ namespace MvvmCross.Core
             Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxTypeToTypeLookupBuilder, MvxViewModelViewLookupBuilder>();
             Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxCommandCollectionBuilder, MvxCommandCollectionBuilder>();
             Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxChildViewModelCache, MvxChildViewModelCache>();
-            //Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxStringToTypeParser, MvxStringToTypeParser>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxStringToTypeParser, MvxStringToTypeParser>();
 
             RegisterViewDispatcher();
             RegisterApp();
@@ -114,10 +114,10 @@ namespace MvvmCross.Core
             InitializePlatformServices();
             SetupLog.Trace("Setup: MvvmCross settings start");
             InitializeSettings();
-            SetupLog.Trace("Setup: ViewDispatcher start");
-            InitializeViewDispatcher();
             SetupLog.Trace("Setup: ViewPresenter start");
             InitializeViewPresenter();
+            SetupLog.Trace("Setup: ViewDispatcher start");
+            InitializeViewDispatcher();
             State = MvxSetupState.InitializedPrimary;
         }
 
@@ -243,6 +243,12 @@ namespace MvvmCross.Core
             return Mvx.IoCProvider.Resolve<IMvxSettings>();
         }
 
+        protected virtual IMvxViewPresenter InitializeViewPresenter()
+        {
+            _presenter = Mvx.IoCProvider.Resolve<IMvxViewPresenter>();
+            return _presenter;
+        }
+
         protected virtual IMvxViewDispatcher InitializeViewDispatcher()
         {
             var dispatcher = Mvx.IoCProvider.Resolve<IMvxViewDispatcher>();
@@ -250,12 +256,6 @@ namespace MvvmCross.Core
             Mvx.IoCProvider.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(dispatcher);
             Mvx.IoCProvider.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
             return dispatcher;
-        }
-
-        protected virtual IMvxViewPresenter InitializeViewPresenter()
-        {
-            _presenter = Mvx.IoCProvider.Resolve<IMvxViewPresenter>();
-            return _presenter;
         }
 
         protected virtual void PerformBootstrapActions()
@@ -361,7 +361,7 @@ namespace MvvmCross.Core
 
         protected virtual IMvxNavigationService InitializeNavigationService(IMvxViewModelLoader loader)
         {
-            var navigationService = Mvx.IoCProvider.Resolve<MvxNavigationService>();
+            var navigationService = Mvx.IoCProvider.Resolve<IMvxNavigationService>();
             navigationService.ViewModelLoader = loader;
             return navigationService;
         }
