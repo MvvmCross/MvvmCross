@@ -29,14 +29,14 @@ namespace MvvmCross.Navigation
         /// <param name="path">URI to route</param>
         /// <param name="presentationBundle"></param>
         /// <returns>A task to await upon</returns>
-        public static Task Navigate(this IMvxNavigationService navigationService, Uri path, IMvxBundle presentationBundle = null)
+        public static Task Navigate(this IMvxNavigationService navigationService, Uri path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return navigationService.Navigate(path.ToString(), presentationBundle);
+            return navigationService.Navigate(path.ToString(), presentationBundle, cancellationToken);
         }
 
-        public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null)
+        public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return navigationService.Navigate<TParameter>(path.ToString(), param, presentationBundle);
+            return navigationService.Navigate<TParameter>(path.ToString(), param, presentationBundle, cancellationToken);
         }
 
         public static Task Navigate<TResult>(this IMvxNavigationService navigationService, Uri path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
