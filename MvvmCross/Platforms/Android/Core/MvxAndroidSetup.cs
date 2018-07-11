@@ -4,26 +4,26 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Android.Content;
 using Android.Views;
-using MvvmCross.Converters;
-using MvvmCross.Exceptions;
-using MvvmCross.IoC;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Converters;
 using MvvmCross.Core;
+using MvvmCross.Exceptions;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Android.Binding;
 using MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers;
 using MvvmCross.Platforms.Android.Binding.Views;
 using MvvmCross.Platforms.Android.Presenters;
 using MvvmCross.Platforms.Android.Views;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
-using MvvmCross.Presenters;
-using System.Linq;
 
 namespace MvvmCross.Platforms.Android.Core
 {
@@ -41,6 +41,47 @@ namespace MvvmCross.Platforms.Android.Core
 
         public Context ApplicationContext => _applicationContext;
 
+        protected override void RegisterImplementations()
+        {
+            base.RegisterImplementations();
+
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxIntentResultSink, MvxIntentResultSink>();
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxIntentResultSink>(intentResultRouter => Mvx.IoCProvider.RegisterSingleton((IMvxIntentResultSource)intentResultRouter));
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxSingleViewModelCache, MvxSingleViewModelCache>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxMultipleViewModelCache, MvxMultipleViewModelCache>();
+        }
+
+        protected override void RegisterViewPresenter()
+        {
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxAndroidViewPresenter>();
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxViewPresenter>(presenter =>
+            {
+                if (presenter is IMvxAndroidViewPresenter droidPresenter)
+                {
+                    droidPresenter.AndroidViewAssemblies = AndroidViewAssemblies;
+                    Mvx.IoCProvider.RegisterSingleton(droidPresenter);
+                }
+            });
+        }
+
+        protected override void RegisterViewsContainer()
+        {
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewsContainer, MvxAndroidViewsContainer>();
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxViewsContainer>(container =>
+            {
+                Mvx.IoCProvider.RegisterSingleton((IMvxAndroidViewModelRequestTranslator)container);
+                Mvx.IoCProvider.RegisterSingleton((IMvxAndroidViewModelLoader)container);
+                var viewsContainer = container as MvxViewsContainer;
+                if (viewsContainer == null)
+                    throw new MvxException("CreateViewsContainer must return an MvxViewsContainer");
+            });
+        }
+
+        protected override void RegisterViewDispatcher()
+        {
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxAndroidViewDispatcher>();
+        }
+
         protected override void InitializePlatformServices()
         {
             InitializeLifetimeMonitor();
@@ -48,15 +89,6 @@ namespace MvvmCross.Platforms.Android.Core
 
             Mvx.IoCProvider.RegisterSingleton<IMvxAndroidGlobals>(this);
 
-            var intentResultRouter = new MvxIntentResultSink();
-            Mvx.IoCProvider.RegisterSingleton<IMvxIntentResultSink>(intentResultRouter);
-            Mvx.IoCProvider.RegisterSingleton<IMvxIntentResultSource>(intentResultRouter);
-
-            var viewModelTemporaryCache = new MvxSingleViewModelCache();
-            Mvx.IoCProvider.RegisterSingleton<IMvxSingleViewModelCache>(viewModelTemporaryCache);
-
-            var viewModelMultiTemporaryCache = new MvxMultipleViewModelCache();
-            Mvx.IoCProvider.RegisterSingleton<IMvxMultipleViewModelCache>(viewModelMultiTemporaryCache);
             base.InitializePlatformServices();
         }
 
@@ -105,39 +137,12 @@ namespace MvvmCross.Platforms.Android.Core
             return new MvxSavedStateConverter();
         }
 
-        protected sealed override IMvxViewsContainer CreateViewsContainer()
-        {
-            var container = CreateViewsContainer(_applicationContext);
-            Mvx.IoCProvider.RegisterSingleton<IMvxAndroidViewModelRequestTranslator>(container);
-            Mvx.IoCProvider.RegisterSingleton<IMvxAndroidViewModelLoader>(container);
-            var viewsContainer = container as MvxViewsContainer;
-            if (viewsContainer == null)
-                throw new MvxException("CreateViewsContainer must return an MvxViewsContainer");
-            return viewsContainer;
-        }
-
         protected IMvxAndroidViewPresenter AndroidPresenter
         {
             get
             {
                 return base.ViewPresenter as IMvxAndroidViewPresenter;
             }
-        }
-
-        protected override IMvxViewPresenter CreateViewPresenter()
-        {
-            var presenter = base.CreateViewPresenter() as IMvxAndroidViewPresenter;
-            presenter.AndroidViewAssemblies = AndroidViewAssemblies;
-            return presenter;
-        }
-
-        protected override void RegisterImplementations()
-        {
-            base.RegisterImplementations();
-
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxAndroidViewPresenter>();
-            Mvx.LazyConstructAndRegisterSingleton(() => AndroidPresenter);
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxAndroidViewDispatcher>();
         }
 
         protected override void InitializeLastChance()
@@ -258,7 +263,10 @@ namespace MvvmCross.Platforms.Android.Core
     public class MvxAndroidSetup<TApplication> : MvxAndroidSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override void RegisterApp()
+        {
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxApplication, TApplication>();
+        }
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

@@ -9,6 +9,7 @@ using Android.Support.V7.Widget;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Droid.Support.V4;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Presenters;
 using MvvmCross.Presenters;
@@ -18,11 +19,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     public abstract class MvxAppCompatSetup : MvxAndroidSetup
     {
-        protected override void RegisterImplementations()
+        protected override void RegisterViewPresenter()
         {
-            base.RegisterImplementations();
-
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxAppCompatViewPresenter>();
+            base.RegisterViewPresenter();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxAppCompatViewPresenter>();
         }
 
         protected override IEnumerable<Assembly> AndroidViewAssemblies =>
@@ -49,7 +49,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     public class MvxAppCompatSetup<TApplication> : MvxAppCompatSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override void RegisterApp()
+        {
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxApplication, TApplication>();
+        }
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

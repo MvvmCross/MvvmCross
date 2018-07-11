@@ -5,21 +5,20 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Converters;
-using MvvmCross.Plugin;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Converters;
 using MvvmCross.Core;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Tvos.Binding;
 using MvvmCross.Platforms.Tvos.Presenters;
 using MvvmCross.Platforms.Tvos.Views;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using UIKit;
-using MvvmCross.Presenters;
-using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Tvos.Core
 {
@@ -47,22 +46,25 @@ namespace MvvmCross.Platforms.Tvos.Core
 
         protected IMvxApplicationDelegate ApplicationDelegate => _applicationDelegate;
 
-        protected sealed override IMvxViewsContainer CreateViewsContainer()
+        protected override void RegisterViewPresenter()
         {
-            var container = CreateTvosViewsContainer();
-            RegisterTvosViewCreator(container);
-            return container;
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxTvosViewPresenter>();
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxViewPresenter>(presenter => Mvx.IoCProvider.RegisterSingleton((IMvxTvosViewPresenter)presenter));
         }
 
-        protected virtual IMvxTvosViewsContainer CreateTvosViewsContainer()
+        protected override void RegisterViewsContainer()
         {
-            return new MvxTvosViewsContainer();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewsContainer, MvxTvosViewsContainer>();
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxViewsContainer>(container =>
+            {
+                Mvx.IoCProvider.RegisterSingleton((IMvxTvosViewCreator)container);
+                Mvx.IoCProvider.RegisterSingleton((IMvxCurrentRequest)container);
+            });
         }
 
-        protected virtual void RegisterTvosViewCreator(IMvxTvosViewsContainer container)
+        protected override void RegisterViewDispatcher()
         {
-            Mvx.IoCProvider.RegisterSingleton<IMvxTvosViewCreator>(container);
-            Mvx.IoCProvider.RegisterSingleton<IMvxCurrentRequest>(container);
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxTvosViewDispatcher>();
         }
 
         protected override void InitializePlatformServices()
@@ -93,23 +95,6 @@ namespace MvvmCross.Platforms.Tvos.Core
             {
                 return base.ViewPresenter as IMvxTvosViewPresenter;
             }
-        }
-
-        protected override IMvxViewPresenter CreateViewPresenter()
-        {
-            var presenter = (_customPresenter ?? base.CreateViewPresenter()) as IMvxTvosViewPresenter;
-            presenter.ApplicationDelegate = ApplicationDelegate;
-            presenter.Window = Window;
-            return presenter;
-        }
-
-        protected override void RegisterImplementations()
-        {
-            base.RegisterImplementations();
-
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxTvosViewPresenter>();
-            Mvx.LazyConstructAndRegisterSingleton(() => Presenter);
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxTvosViewDispatcher>();
         }
 
         protected override void InitializeLastChance()
@@ -175,7 +160,10 @@ namespace MvvmCross.Platforms.Tvos.Core
     public class MvxTvosSetup<TApplication> : MvxTvosSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override void RegisterApp()
+        {
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxApplication, TApplication>();
+        }
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

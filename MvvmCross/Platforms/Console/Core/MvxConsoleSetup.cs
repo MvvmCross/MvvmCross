@@ -9,17 +9,30 @@ using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using System.Collections.Generic;
 using System.Reflection;
+using MvvmCross.Presenters;
+using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Console.Core
 {
     public abstract class MvxConsoleSetup
         : MvxSetup
     {
-        protected override void RegisterImplementations()
+        protected override void RegisterViewPresenter()
         {
-            base.RegisterImplementations();
+            // TODO: Should there be a console presenter?
+            //Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxConsoleViewPresenter>();
+            //Mvx.IoCProvider.CallbackWhenRegistered<IMvxViewPresenter>(presenter => Mvx.IoCProvider.RegisterSingleton((IMvxConsoleViewPresenter)presenter));
+        }
 
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxConsoleViewDispatcher>();
+        protected override void RegisterViewsContainer()
+        {
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewsContainer, MvxConsoleContainer>();
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxViewsContainer>(container => Mvx.IoCProvider.RegisterSingleton((IMvxConsoleNavigation)container));
+        }
+
+        protected override void RegisterViewDispatcher()
+        {
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxConsoleViewDispatcher>();
         }
 
         protected override IMvxNameMapping CreateViewToViewModelNaming()
@@ -34,18 +47,6 @@ namespace MvvmCross.Platforms.Console.Core
             Mvx.IoCProvider.RegisterSingleton<IMvxConsoleCurrentView>(messagePump);
         }
 
-        protected override IMvxViewsContainer CreateViewsContainer()
-        {
-            var container = CreateConsoleContainer();
-            Mvx.IoCProvider.RegisterSingleton<IMvxConsoleNavigation>(container);
-            return container;
-        }
-
-        protected virtual MvxBaseConsoleContainer CreateConsoleContainer()
-        {
-            return new MvxConsoleContainer();
-        }
-
         protected override void InitializeLastChance()
         {
             InitializeMessagePump();
@@ -55,7 +56,10 @@ namespace MvvmCross.Platforms.Console.Core
     public class MvxConsoleSetup<TApplication> : MvxConsoleSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override void RegisterApp()
+        {
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxApplication, TApplication>();
+        }
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

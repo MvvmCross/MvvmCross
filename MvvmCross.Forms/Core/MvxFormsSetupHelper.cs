@@ -15,6 +15,25 @@ namespace MvvmCross.Forms.Core
 {
     public class MvxFormsSetupHelper : IMvxFormsSetupHelper
     {
+        private Application _formsApplication;
+        public virtual Application FormsApplication
+        {
+            get
+            {
+                if (_formsApplication == null)
+                {
+                    _formsApplication = Mvx.IoCProvider.Resolve<Application>();
+                }
+
+                if (Application.Current != _formsApplication)
+                {
+                    Application.Current = _formsApplication;
+                }
+
+                return _formsApplication;
+            }
+        }
+
         public virtual void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
             registry.RegisterPropertyInfoBindingFactory(
@@ -28,23 +47,19 @@ namespace MvvmCross.Forms.Core
             
         }
 
-        public virtual IMvxViewPresenter SetupFormsViewPresenter(IMvxFormsViewPresenter presenter, Application formsApplication)
+        public virtual IMvxViewPresenter InitializeFormsViewPresenter(IMvxFormsViewPresenter presenter, Application formsApplication)
         {
+            Mvx.IoCProvider.RegisterSingleton(presenter);
             presenter.FormsApplication = formsApplication;
-            presenter.FormsPagePresenter = CreateFormsPagePresenter(presenter);
+            presenter.FormsPagePresenter = InitializeFormsPagePresenter(presenter);
             return presenter;
         }
 
-        protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
+        protected virtual IMvxFormsPagePresenter InitializeFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
         {
-            var formsPagePresenter = Mvx.Resolve<IMvxFormsPagePresenter>();
+            var formsPagePresenter = Mvx.IoCProvider.Resolve<IMvxFormsPagePresenter>();
             formsPagePresenter.PlatformPresenter = viewPresenter;
             return formsPagePresenter;
-        }
-
-        public void InitializeIoC()
-        {
-            Mvx.LazyConstructAndRegisterSingleton<IMvxFormsPagePresenter, MvxFormsPagePresenter>();
         }
     }
 }

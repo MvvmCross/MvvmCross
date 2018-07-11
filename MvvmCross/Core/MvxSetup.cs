@@ -6,6 +6,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MvvmCross.Base;
+using MvvmCross.Commands;
+using MvvmCross.IoC;
+using MvvmCross.Logging;
+using MvvmCross.Logging.LogProviders;
+using MvvmCross.Navigation;
+using MvvmCross.Plugin;
+using MvvmCross.Presenters;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Core
 {
@@ -54,16 +64,21 @@ namespace MvvmCross.Core
         protected virtual void RegisterImplementations()
         {
             // Register Singletons that can be lazy loaded
-            Mvx.LazyConstructAndRegisterSingleton<IMvxSettings, MvxSettings>();
-            Mvx.LazyConstructAndRegisterSingleton<IMvxPluginManager, MvxPluginManager>();
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewModelLoader, MvxViewModelLoader>();
-            Mvx.LazyConstructAndRegisterSingleton<IMvxNavigationService, MvxNavigationService>();
-            Mvx.LazyConstructAndRegisterSingleton<IMvxNavigationSerializer, MvxStringDictionaryNavigationSerializer>();
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewModelTypeFinder, MvxViewModelViewTypeFinder>();
-            Mvx.LazyConstructAndRegisterSingleton<IMvxTypeToTypeLookupBuilder, MvxViewModelViewLookupBuilder>();
-            Mvx.LazyConstructAndRegisterSingleton<IMvxCommandCollectionBuilder, MvxCommandCollectionBuilder>();
-            Mvx.LazyConstructAndRegisterSingleton<IMvxChildViewModelCache, MvxChildViewModelCache>();
-            //Mvx.LazyConstructAndRegisterSingleton<IMvxStringToTypeParser, MvxStringToTypeParser>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxSettings, MvxSettings>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxPluginManager, MvxPluginManager>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewModelLoader, MvxViewModelLoader>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxNavigationService, MvxNavigationService>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxNavigationSerializer, MvxStringDictionaryNavigationSerializer>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewModelTypeFinder, MvxViewModelViewTypeFinder>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxTypeToTypeLookupBuilder, MvxViewModelViewLookupBuilder>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxCommandCollectionBuilder, MvxCommandCollectionBuilder>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxChildViewModelCache, MvxChildViewModelCache>();
+            //Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxStringToTypeParser, MvxStringToTypeParser>();
+
+            RegisterViewDispatcher();
+            RegisterApp();
+            RegisterViewsContainer();
+            RegisterViewPresenter();
 
             // Register non-singletons that will be constructed on demand
             //Mvx.RegisterType<IMvxCommandHelper, MvxWeakCommandHelper>();
@@ -232,15 +247,15 @@ namespace MvvmCross.Core
         {
             var dispatcher = Mvx.IoCProvider.Resolve<IMvxViewDispatcher>();
             dispatcher.Presenter = ViewPresenter;
-            Mvx.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(dispatcher);
-            Mvx.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
-            return IMvxViewDispatcher;
+            Mvx.IoCProvider.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(dispatcher);
+            Mvx.IoCProvider.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
+            return dispatcher;
         }
 
         protected virtual IMvxViewPresenter InitializeViewPresenter()
         {
             _presenter = Mvx.IoCProvider.Resolve<IMvxViewPresenter>();
-            return presenter;
+            return _presenter;
         }
 
         protected virtual void PerformBootstrapActions()
@@ -270,7 +285,7 @@ namespace MvvmCross.Core
         protected virtual IMvxStringToTypeParser InitializeStringToTypeParser()
         {
             var parser = Mvx.IoCProvider.Resolve<IMvxStringToTypeParser>();
-            Mvx.IoCProvider.RegisterSingleton<IMvxFillableStringToTypeParser>(parser);
+            Mvx.IoCProvider.RegisterSingleton((IMvxFillableStringToTypeParser)parser);
             return parser;
         }
 
@@ -386,7 +401,7 @@ namespace MvvmCross.Core
             }
 
             var nameMappingStrategy = CreateViewToViewModelNaming();
-            Mvx.RegisterSingleton(nameMappingStrategy);
+            Mvx.IoCProvider.RegisterSingleton(nameMappingStrategy);
         }
 
         protected abstract IMvxNameMapping CreateViewToViewModelNaming();
@@ -510,11 +525,9 @@ namespace MvvmCross.Core
     public abstract class MvxSetup<TApplication> : MvxSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override void RegisterImplementations()
+        protected override void RegisterApp()
         {
-            base.RegisterImplementations();
-
-            Mvx.LazyConstructAndRegisterSingleton<IMvxApplication, TApplication>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxApplication, TApplication>();
         }
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()

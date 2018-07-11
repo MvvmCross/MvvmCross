@@ -40,25 +40,21 @@ namespace MvvmCross.Platforms.Tizen.Core
             }
         }
 
-        protected override void RegisterImplementations()
+        protected override void RegisterViewPresenter()
         {
-            base.RegisterImplementations();
-
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxTizenViewPresenter>();
-            Mvx.LazyConstructAndRegisterSingleton(() => Presenter);
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxTizenViewDispatcher>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxTizenViewPresenter>();
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxViewPresenter>(presenter => Mvx.IoCProvider.RegisterSingleton((IMvxTizenViewPresenter)presenter));
         }
 
-        protected sealed override IMvxViewsContainer CreateViewsContainer()
+        protected override void RegisterViewsContainer()
         {
-            var container = CreateTizenViewsContainer();
-            Mvx.IoCProvider.RegisterSingleton(container);
-            return container;
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewsContainer, MvxTizenViewsContainer>();
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxViewsContainer>(container => Mvx.IoCProvider.RegisterSingleton((IMvxTizenViewsContainer)container));
         }
 
-        protected virtual IMvxTizenViewsContainer CreateTizenViewsContainer()
+        protected override void RegisterViewDispatcher()
         {
-            return new MvxTizenViewsContainer();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxTizenViewDispatcher>();
         }
 
         protected override void InitializeLastChance()
@@ -124,7 +120,10 @@ namespace MvvmCross.Platforms.Tizen.Core
     public class MvxTizenSetup<TApplication> : MvxTizenSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override void RegisterApp()
+        {
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxApplication, TApplication>();
+        }
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

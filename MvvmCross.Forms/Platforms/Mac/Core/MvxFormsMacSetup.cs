@@ -19,6 +19,7 @@ using MvvmCross.Forms.Presenters;
 using Xamarin.Forms;
 using System.Linq;
 using MvvmCross.Presenters;
+using MvvmCross.IoC;
 
 namespace MvvmCross.Forms.Platforms.Mac.Core
 {
@@ -32,7 +33,7 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
         {
             get
             {
-                return _formsSetupHelper ?? (_formsSetupHelper = Mvx.Resolve<IMvxFormsSetupHelper>());
+                return _formsSetupHelper ?? (_formsSetupHelper = Mvx.IoCProvider.Resolve<IMvxFormsSetupHelper>());
             }
         }
 
@@ -49,18 +50,24 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
         protected override void RegisterImplementations()
         {
             base.RegisterImplementations();
-            Mvx.RegisterSingleton<IMvxFormsSetup>(this);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFormsSetup>(this);
 
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxFormsMacViewPresenter>();
-            Mvx.LazyConstructAndRegisterSingleton<IMvxFormsSetupHelper, MvxFormsSetupHelper>();
-            Mvx.Resolve<IMvxFormsSetupHelper>().InitializeIoC();
-            Mvx.LazyConstructAndRegisterSingleton(() => FormsPresenter);
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxFormsSetupHelper, MvxFormsSetupHelper>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxFormsPagePresenter, MvxFormsPagePresenter>();
         }
 
-        protected virtual void RegisterSetupHelper()
+        protected override void RegisterViewPresenter()
         {
-            Mvx.LazyConstructAndRegisterSingleton<IMvxFormsSetupHelper, MvxFormsSetupHelper>();
+            base.RegisterViewPresenter();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxFormsMacViewPresenter>();
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxViewPresenter>(presenter =>
+            {
+                if (presenter is IMvxFormsViewPresenter formsPresenter)
+                    FormsSetupHelper.InitializeFormsViewPresenter(formsPresenter, FormsApplication);
+            });
         }
+
+        protected abstract void RegisterFormsApp();
 
         protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
         {
@@ -74,19 +81,10 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
             {
                 if (!Xamarin.Forms.Forms.IsInitialized)
                     Xamarin.Forms.Forms.Init();
-                if (_formsApplication == null)
-                {
-                    _formsApplication = CreateFormsApplication();
-                }
-                if (Application.Current != _formsApplication)
-                {
-                    Application.Current = _formsApplication;
-                }
-                return _formsApplication;
+
+                return FormsSetupHelper.FormsApplication;
             }
         }
-
-        protected abstract Application CreateFormsApplication();
 
         protected IMvxFormsViewPresenter FormsPresenter
         {
@@ -94,11 +92,6 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
             {
                 return base.ViewPresenter as IMvxFormsViewPresenter;
             }
-        }
-
-        protected override IMvxViewPresenter CreateViewPresenter()
-        {
-            return FormsSetupHelper.SetupFormsViewPresenter(base.CreateViewPresenter() as IMvxFormsViewPresenter, FormsApplication);
         }
 
         protected override List<Assembly> ValueConverterAssemblies
@@ -137,6 +130,16 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
         where TApplication : class, IMvxApplication, new()
         where TFormsApplication : Application, new()
     {
+        protected override void RegisterApp()
+        {
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxApplication, TApplication>();
+        }
+
+        protected override void RegisterFormsApp()
+        {
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<Application, TFormsApplication>();
+        }
+
         public override IEnumerable<Assembly> GetViewAssemblies()
         {
             return new List<Assembly>(base.GetViewAssemblies().Union(new[] { typeof(TFormsApplication).GetTypeInfo().Assembly }));
@@ -146,9 +149,5 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
         {
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
-
-        protected override Application CreateFormsApplication() => new TFormsApplication();
-
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
     }
 }

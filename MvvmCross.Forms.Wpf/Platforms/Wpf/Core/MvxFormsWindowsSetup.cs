@@ -82,7 +82,7 @@ namespace MvvmCross.Forms.Platforms.Wpf.Core
 
         protected override IMvxViewPresenter CreateViewPresenter()
         {
-            return FormsSetupHelper.SetupFormsViewPresenter(base.CreateViewPresenter() as IMvxFormsViewPresenter, FormsApplication);
+            return FormsSetupHelper.InitializeFormsViewPresenter(base.CreateViewPresenter() as IMvxFormsViewPresenter, FormsApplication);
         }
 
         protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsWindowsBindingBuilder();

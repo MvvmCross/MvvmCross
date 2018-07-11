@@ -61,22 +61,25 @@ namespace MvvmCross.Platforms.Mac.Core
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "ViewController");
         }
 
-        protected sealed override IMvxViewsContainer CreateViewsContainer()
+        protected override void RegisterViewPresenter()
         {
-            var container = CreateMacViewsContainer();
-            RegisterMacViewCreator(container);
-            return container;
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxMacViewPresenter>();
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxViewPresenter>(presenter => Mvx.IoCProvider.RegisterSingleton((IMvxMacViewPresenter)presenter));
         }
 
-        protected virtual IMvxMacViewsContainer CreateMacViewsContainer()
+        protected override void RegisterViewsContainer()
         {
-            return new MvxMacViewsContainer();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewsContainer, MvxMacViewsContainer>();
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxViewsContainer>(container =>
+            {
+                Mvx.IoCProvider.RegisterSingleton((IMvxMacViewCreator)container);
+                Mvx.IoCProvider.RegisterSingleton((IMvxCurrentRequest)container);
+            });
         }
 
-        protected void RegisterMacViewCreator(IMvxMacViewsContainer container)
+        protected override void RegisterViewDispatcher()
         {
-            Mvx.IoCProvider.RegisterSingleton<IMvxMacViewCreator>(container);
-            Mvx.IoCProvider.RegisterSingleton<IMvxCurrentRequest>(container);
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxMacViewDispatcher>();
         }
 
         protected override void InitializePlatformServices()
@@ -96,22 +99,6 @@ namespace MvvmCross.Platforms.Mac.Core
             {
                 return base.ViewPresenter as IMvxMacViewPresenter;
             }
-        }
-
-        protected override IMvxViewPresenter CreateViewPresenter()
-        {
-            var presenter = (_customPresenter ?? base.CreateViewPresenter()) as IMvxMacViewPresenter;
-            presenter.ApplicationDelegate = _applicationDelegate;
-            return presenter;
-        }
-
-        protected override void RegisterImplementations()
-        {
-            base.RegisterImplementations();
-
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxMacViewPresenter>();
-            Mvx.LazyConstructAndRegisterSingleton(() => MacPresenter);
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxMacViewDispatcher>();
         }
 
         protected override void InitializeLastChance()
@@ -176,7 +163,10 @@ namespace MvvmCross.Platforms.Mac.Core
     public class MvxMacSetup<TApplication> : MvxMacSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
+        protected override void RegisterApp()
+        {
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxApplication, TApplication>();
+        }
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

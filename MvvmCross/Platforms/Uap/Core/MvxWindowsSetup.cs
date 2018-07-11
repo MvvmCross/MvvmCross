@@ -50,6 +50,43 @@ namespace MvvmCross.Platforms.Uap.Core
         {
             _rootFrame = rootFrame;
         }
+        protected override void RegisterViewPresenter()
+        {
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxWindowsViewPresenter>();
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxViewPresenter>(presenter =>
+            {
+                if (presenter is IMvxWindowsViewPresenter winPresenter)
+                {
+                    winPresenter.RootFrame = _rootFrame;
+                    Mvx.IoCProvider.RegisterSingleton(winPresenter);
+                }
+            });
+        }
+
+        protected override void RegisterViewsContainer()
+        {
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewsContainer, MvxWindowsViewsContainer>();
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxViewsContainer>(container =>
+            {
+                Mvx.IoCProvider.RegisterSingleton((IMvxWindowsViewModelRequestTranslator)container);
+                Mvx.IoCProvider.RegisterSingleton((IMvxWindowsViewModelLoader)container);
+                var viewsContainer = container as MvxViewsContainer;
+                if (viewsContainer == null)
+                    throw new MvxException("CreateViewsContainer must return an MvxViewsContainer");
+            });
+        }
+
+        protected override void RegisterViewDispatcher()
+        {
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxWindowsViewDispatcher>();
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxViewDispatcher>(dispatcher =>
+            {
+                if(dispatcher is MvxWindowsMainThreadDispatcher winDispatcher)
+                    winDispatcher.UiDispatcher = _rootFrame.UnderlyingControl.Dispatcher;
+            });
+
+        }
+
 
         public virtual void UpdateActivationArguments(IActivatedEventArgs e)
         {
@@ -76,29 +113,6 @@ namespace MvvmCross.Platforms.Uap.Core
             return new MvxSuspensionManager();
         }
 
-        protected sealed override IMvxViewsContainer CreateViewsContainer()
-        {
-            var container = CreateStoreViewsContainer();
-            Mvx.IoCProvider.RegisterSingleton<IMvxWindowsViewModelRequestTranslator>(container);
-            Mvx.IoCProvider.RegisterSingleton<IMvxWindowsViewModelLoader>(container);
-            var viewsContainer = container as MvxViewsContainer;
-            if (viewsContainer == null)
-                throw new MvxException("CreateViewsContainer must return an MvxViewsContainer");
-            return container;
-        }
-
-        protected virtual IMvxStoreViewsContainer CreateStoreViewsContainer()
-        {
-            return new MvxWindowsViewsContainer();
-        }
-
-        protected override IMvxViewDispatcher CreateViewDispatcher()
-        {
-            var dispatcher = base.CreateViewDispatcher() as MvxWindowsViewDispatcher;
-            dispatcher.UiDispatcher = _rootFrame.UnderlyingControl.Dispatcher;
-            return dispatcher;
-        }
-
         protected IMvxWindowsViewPresenter Presenter
         {
             get
@@ -106,23 +120,6 @@ namespace MvvmCross.Platforms.Uap.Core
                 return base.ViewPresenter as IMvxWindowsViewPresenter;
             }
         }
-
-        protected override IMvxViewPresenter CreateViewPresenter()
-        {
-            var presenter = base.CreateViewPresenter() as IMvxWindowsViewPresenter;
-            presenter.RootFrame = _rootFrame;
-            return presenter;
-        }
-
-        protected override void RegisterImplementations()
-        {
-            base.RegisterImplementations();
-
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewPresenter, MvxWindowsViewPresenter>();
-            Mvx.LazyConstructAndRegisterSingleton(() => Presenter);
-            Mvx.LazyConstructAndRegisterSingleton<IMvxViewDispatcher, MvxWindowsViewDispatcher>();
-        }
-
         protected override void InitializeLastChance()
         {
             InitializeBindingBuilder();
@@ -188,11 +185,14 @@ namespace MvvmCross.Platforms.Uap.Core
     public class MvxWindowsSetup<TApplication> : MvxWindowsSetup
          where TApplication : class, IMvxApplication, new()
     {
+        protected override void RegisterApp()
+        {
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IMvxApplication, TApplication>();
+        }
+
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
-
-        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
     }
 }

@@ -12,10 +12,12 @@ namespace MvvmCross.Forms.Core
 {
     public interface IMvxFormsSetupHelper
     {
+        Application FormsApplication { get; }
+
         void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry);
+
         void FillBindingNames(IMvxBindingNameRegistry registry);
 
-        IMvxViewPresenter SetupFormsViewPresenter(IMvxFormsViewPresenter presenter, Application formsApplication);
-        void InitializeIoC();
+        IMvxViewPresenter InitializeFormsViewPresenter(IMvxFormsViewPresenter presenter, Application formsApplication);
     }
 }
