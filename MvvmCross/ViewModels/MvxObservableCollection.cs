@@ -253,7 +253,7 @@ namespace MvvmCross.ViewModels
 
         protected virtual Task InvokeOnMainThread(Action action)
         {
-            var dispatcher = MvxSingleton<IMvxMainThreadAsyncDispatcher>.Instance;
+            var dispatcher = Mvx.IoCProvider.Resolve<IMvxMainThreadAsyncDispatcher>();
             return dispatcher?.ExecuteOnMainThreadAsync(action);
         }
 
