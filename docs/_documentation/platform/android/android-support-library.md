@@ -20,8 +20,9 @@ To get bindings working when using the support libraries (for example if you wan
 ```c#
 namespace MyAwesomeApp.Droid
 {
-public class Setup : MvxAppCompatSetup
-{
-    ...
+    public class Setup : MvxAppCompatSetup
+    {
+        ...
+    }
 }
 ```
