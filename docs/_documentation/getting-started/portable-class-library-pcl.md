@@ -9,7 +9,7 @@ order: 5
 
 With C# Views it is possible to write the MvvM either as a PCL or as a shared project. It is not possible to do that with XAML, you must use a PCL. You might think that this would be a disadvantage because in C# shared projects you can use "#ifdef" statements to conditionally compile code dependent on target platform. Thus you might reason that this would make maintaining and understanding the coding more productive.
 
-However [Xamarin PCL](http://developer.xamarin.com/guides/cross-platform/xamarin-forms/working-with/platform-specifics/) achieves a similar outcome using a class known as the Device. This class although part of the Portable Class Library has methods that return different values depending on the native platform your App is installed on.
+However [Xamarin PCL](https://docs.microsoft.com/es-es/xamarin/xamarin-forms/platform/device) achieves a similar outcome using a class known as the Device. This class although part of the Portable Class Library has methods that return different values depending on the native platform your App is installed on.
 
 The Device static class is available in both C# and XAML coding if you know how to use it.
 

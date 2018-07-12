@@ -415,7 +415,7 @@ I'm not going to go into any more detail on writing plugins here.
 
 If you'd like to see more about writing your own plugin, then:
 
-- see the [Plugins](https://github.com/slodge/MvvmCross/wiki/MvvmCross-plugins) article
+- see the [Getting started](https://www.mvvmcross.com/documentation/plugins/getting-started?scroll=1320) article
 - there's a presentation on this at https://speakerdeck.com/cirrious/plugins-in-mvvmcross
 - there's a sample which creates a `Vibrate` plugin at https://github.com/slodge/MvvmCross-Tutorials/tree/master/GoodVibrations
 
