@@ -185,8 +185,3 @@ public void Valid_Model_Raises_CanExecute_Test()
 * The [Twitter Search](https://github.com/slodge/MvvmCross-Tutorials/tree/master/Sample%20-%20TwitterSearch) example has a [test project](https://github.com/slodge/MvvmCross-Tutorials/tree/master/Sample%20-%20TwitterSearch/TwitterSearch.Test) which can be used as reference as well
 
 * There is a [N=29 video tutorial](http://slodge.blogspot.co.uk/2013/06/n29-testing-n1-days-of-mvvmcross.html) on testing
-
-* [MvvmCross: Enable Unit-testing](http://blog.fire-development.com/2013/06/29/mvvmcross-enable-unit-testing/). A blog post presenting a slightly different approach, using a custom `MvvmCrossTestSetup` class.
-
-* [MvvmCross: Unit-testing with AutoFixture](http://blog.fire-development.com/2013/06/29/mvvmcross-unit-testing-with-autofixture/). A blog post introducing a way to combine MvvmCross with [AutoFixture](https://github.com/AutoFixture/AutoFixture)
-
