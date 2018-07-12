@@ -220,4 +220,5 @@ Bundle CreateActivityTransitionOptions(Intent intent, MvxActivityPresentationAtt
 ```
 
 ## Sample please!
-You can browse the code of the [Playground](https://github.com/MvvmCross/MvvmCross/tree/master/TestProjects/Playground) Android project to see this presenter in action.
+
+You can browse the code of the [Playground](https://github.com/MvvmCross/MvvmCross/blob/master/Projects/Playground/) (Android project) to see this presenter in action.
