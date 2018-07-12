@@ -37,12 +37,14 @@ namespace Playground.Core.ViewModels
             }
 
 
-            ShowChildCommand = new MvxAsyncCommand(async () =>
-                await NavigationService.Navigate<ChildViewModel, SampleModel>(new SampleModel
+            ShowChildCommand = new MvxAsyncCommand(async () => {
+                var result = await NavigationService.Navigate<ChildViewModel, SampleModel, SampleModel>(new SampleModel
                 {
                     Message = "Hey",
                     Value = 1.23m
-                }));
+                });
+                var testIfReturn = result;
+            });
 
             ShowModalCommand = new MvxAsyncCommand(Navigate);
 
