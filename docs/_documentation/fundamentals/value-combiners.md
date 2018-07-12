@@ -7,7 +7,7 @@ order: 9
 
 ### ValueCombiners
 
-Tibet binding (see [wiki/Databinding](https://github.com/slodge/MvvmCross/wiki/Databinding)) introduced a new interface into binding - `IMvxValueCombiner` - this interface allows multiple binding sources to be combined together within a single target expression. This interface is used in, for example, the `MvxFormatValueCombiner` in order to enable binding expressions like:
+Tibet binding (see [wiki/Databinding](https://www.mvvmcross.com/documentation/fundamentals/data-binding)) introduced a new interface into binding - `IMvxValueCombiner` - this interface allows multiple binding sources to be combined together within a single target expression. This interface is used in, for example, the `MvxFormatValueCombiner` in order to enable binding expressions like:
 
          local:MvxBind="Text Format('{0} {1} {2}', Greeting(Gender), FirstName, LastName)"
          

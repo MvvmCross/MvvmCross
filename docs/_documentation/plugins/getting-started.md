@@ -11,7 +11,7 @@ Each plugin is suposed to provide abstractions of native functionalities such as
 ### A note about MvvmCross 5 and below
 
 If you are using a version of MvvmCross less than Mvx 6.0.0, you will need to add the bootstrap file yourself.
-The bootstrap file is available [here](https://github.com/MvvmCross/MvvmCross/blob/develop/nuspec/BootstrapContent/WebBrowserPluginBootstrap.cs.pp)
+The bootstrap file is available [here](https://github.com/MvvmCross/MvvmCross/blob/5.7.0/nuspec/BootstrapContent/WebBrowserPluginBootstrap.cs.pp)
 
 An example bootstrap class would look like:
 
