@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -77,12 +77,11 @@ namespace MvvmCross.Platforms.Ios.Views
 			ViewModel?.ViewDisappeared();
 		}
 
-        public override void DidMoveToParentViewController (UIViewController parent)
+        public override void DidMoveToParentViewController(UIViewController parent)
         {
-            base.DidMoveToParentViewController (parent);
-            if (parent == null) {
-                ViewModel?.ViewDestroy ();
-            }
+            base.DidMoveToParentViewController(parent);
+            if (parent == null)
+                ViewModel?.ViewDestroy();
         }
 
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender) {

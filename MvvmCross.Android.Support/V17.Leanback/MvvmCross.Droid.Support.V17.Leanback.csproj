@@ -16,7 +16,7 @@ This package contains Support v17 Leanback support for MvvmCross.</Description>
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.Android.Support.V17.Leanback" Version="27.0.2" />
+    <PackageReference Include="Xamarin.Android.Support.V17.Leanback" Version="27.0.2.1" />
   </ItemGroup>
   
   <ItemGroup>

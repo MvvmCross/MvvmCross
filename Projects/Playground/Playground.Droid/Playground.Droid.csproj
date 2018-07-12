@@ -193,16 +193,16 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Serilog">
-      <Version>2.6.0</Version>
+      <Version>2.7.1</Version>
     </PackageReference>
     <PackageReference Include="Serilog.Sinks.Xamarin">
       <Version>0.1.29</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design">
-      <Version>27.0.2</Version>
+      <Version>27.0.2.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat">
-      <Version>27.0.2</Version>
+      <Version>27.0.2.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
