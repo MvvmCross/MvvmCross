@@ -390,7 +390,6 @@ If you want to see how these plugins can be used in your applications, then:
   - N=9 - Messenger http://slodge.blogspot.co.uk/2013/05/n9-getting-message-n1-days-of-mvvmcross.html
   - N=10 - SQLite http://slodge.blogspot.co.uk/2013/05/n10-sqlite-persistent-data-storage-n1.html
   - N=12 -> N=17 - the Collect-A-Bull app http://slodge.blogspot.co.uk/2013/05/n12-collect-bull-full-app-part-1-n1.html
-- see the [Plugins](https://github.com/slodge/MvvmCross/wiki/MvvmCross-plugins) article
 
 #### Plugin Authoring
 
@@ -415,7 +414,7 @@ I'm not going to go into any more detail on writing plugins here.
 
 If you'd like to see more about writing your own plugin, then:
 
-- see the [Plugins](https://github.com/slodge/MvvmCross/wiki/MvvmCross-plugins) article
+- see the [Getting started](https://www.mvvmcross.com/documentation/plugins/getting-started?scroll=1320) article
 - there's a presentation on this at https://speakerdeck.com/cirrious/plugins-in-mvvmcross
 - there's a sample which creates a `Vibrate` plugin at https://github.com/slodge/MvvmCross-Tutorials/tree/master/GoodVibrations
 
@@ -556,13 +555,6 @@ However, if you feel the MvvmCross detection is wrong - if your app has some beh
             var instance = MvxIoCProvider.Initialize(options);
 
 **Note:** in the event of recursion causing a stack overflow, some mobile runtimes will **not** throw a `StackOverlowException` - but will instead simply exit without warning - this situation can be hard to debug.
-
-### What if... I want advanced IoC features like child containers
-
-The IoC container in MvvmCross is designed to be quite lightweight and is targeted at a level of functionality required in the mobile applications I have built.
-
-If you need more advanced/complex functionality, then you may need to use a different provider or a different approach - some suggestions for this are discussed in: http://stackoverflow.com/questions/16514691/child-containers-in-mvvmcross-ioc
-
 
 ### What if... I want to mix Dynamic and Singleton types
 

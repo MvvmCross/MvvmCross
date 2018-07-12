@@ -117,4 +117,4 @@ AttributeTypesToShowMethodDictionary.Add(
 
 
 ## Sample please!
-You can browse the code of the [Playground](https://github.com/MvvmCross/MvvmCross/tree/master/TestProjects/Playground) macOS project to see this presenter in action.
+You can browse the code of the [Playground](https://github.com/MvvmCross/MvvmCross/tree/master/Projects/Playground) (macOS project) to see this presenter in action.

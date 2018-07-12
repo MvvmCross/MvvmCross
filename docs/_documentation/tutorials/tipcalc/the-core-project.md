@@ -305,7 +305,7 @@ These are the same steps that you need to go through for every new MvvmCross app
 
 The next step is about building a first UI for our MvvmCross application.
 
-[Next!](https://www.mvvmcross.com/documentation/tutorials/tipcalc/the-tip-calc-navigation)
+[Next!](https://www.mvvmcross.com/documentation/tutorials/tipcalc/a-xamarinandroid-ui-project)
 
 
 ## Side note: What is 'Inversion of Control'?

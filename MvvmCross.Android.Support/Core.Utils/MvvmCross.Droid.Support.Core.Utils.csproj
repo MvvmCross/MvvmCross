@@ -16,7 +16,7 @@ This package contains Support Core Util support for MvvmCross.</Description>
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="27.0.2" />
+    <PackageReference Include="Xamarin.Android.Support.Core.Utils" Version="27.0.2.1" />
   </ItemGroup>
   
   <ItemGroup>
