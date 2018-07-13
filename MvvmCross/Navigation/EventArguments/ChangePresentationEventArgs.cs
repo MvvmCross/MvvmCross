@@ -3,17 +3,18 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Navigation.EventArguments
 {
-    public class ChangePresentationEventArgs : EventArgs
+    public class ChangePresentationEventArgs : MvxCancelEventArgs
     {
-        public ChangePresentationEventArgs()
+        public ChangePresentationEventArgs(CancellationToken cancellationToken = default) : base(cancellationToken)
         {
         }
 
-        public ChangePresentationEventArgs(MvxPresentationHint hint)
+        public ChangePresentationEventArgs(MvxPresentationHint hint, CancellationToken cancellationToken = default) : this(cancellationToken)
         {
             Hint = hint;
         }
