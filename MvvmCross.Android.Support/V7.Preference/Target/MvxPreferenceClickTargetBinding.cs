@@ -55,12 +55,7 @@ namespace MvvmCross.Droid.Support.V7.Preference.Target
             if (view == null)
                 return;
 
-            var shouldBeEnabled = false;
-            if (_command != null)
-            {
-                shouldBeEnabled = _command.CanExecute(null);
-            }
-            view.Enabled = shouldBeEnabled;
+            view.Enabled = _command?.CanExecute(null) ?? false;
         }
 
         private void OnCanExecuteChanged(object sender, EventArgs e)
