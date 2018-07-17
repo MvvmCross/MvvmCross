@@ -39,4 +39,16 @@
     <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63102-01" PrivateAssets="All"/>
   </ItemGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <TargetsToBuild>All</TargetsToBuild> 
+    <!--<TargetsToBuild>Android</TargetsToBuild>-->
+    <!--<TargetsToBuild>Uap</TargetsToBuild>--> 
+    <!--<TargetsToBuild>iOS</TargetsToBuild>--> 
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' != 'Debug' ">
+    <TargetsToBuild>All</TargetsToBuild>
+  </PropertyGroup>
+
 </Project>
