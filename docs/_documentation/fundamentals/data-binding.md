@@ -965,14 +965,10 @@ set.Bind(button).To(vm => vm.readonly)
 
 ### Inverting boolean value
 
-If you want to easily invert a View Model boolean value you can make use of the `WithInvertedBoolean` Fluent binding extension or `MvxInvertedBooleanConverter` for XML bindings.
+If you want to easily invert a View Model boolean value you can make use of the `WithInvertedBoolean` Fluent binding.
 
 ```c#
 set.Bind(button).For(v => v.Hidden).To(vm => vm.CanShow).WithInvertedBoolean();
-```
-
-```Text
-local:MvxBind="Enabled InvertedBoolean(CanDisable);"
 ```
 
 ### Default view properties
