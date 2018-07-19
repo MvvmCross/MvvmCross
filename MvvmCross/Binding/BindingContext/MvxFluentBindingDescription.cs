@@ -164,6 +164,12 @@ namespace MvvmCross.Binding.BindingContext
             ClearBindingKey = clearBindingKey;
             return this;
         }
+
+        public MvxFluentBindingDescription<TTarget, TSource> WithInvertedBoolean()
+        {
+            SourceStepDescription.Converter = new MvxInvertedBooleanValueConverter();
+            return this;
+        }
     }
 
     public class MvxFluentBindingDescription<TTarget>
@@ -297,6 +303,12 @@ namespace MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget> WithClearBindingKey(object clearBindingKey)
         {
             ClearBindingKey = clearBindingKey;
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget> WithInvertedBoolean()
+        {
+            SourceStepDescription.Converter = new MvxInvertedBooleanValueConverter();
             return this;
         }
     }
