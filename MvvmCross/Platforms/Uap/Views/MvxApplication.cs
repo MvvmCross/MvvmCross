@@ -94,11 +94,6 @@ namespace MvvmCross.Platforms.Uap.Views
                 Window.Current.Content = rootFrame;
             }
 
-            if (activationArgs.PreviousExecutionState == ApplicationExecutionState.Terminated)
-            {
-                OnResumeFromTerminateState();
-            }
-
             RootFrame = rootFrame;
 
             return rootFrame;
@@ -107,10 +102,6 @@ namespace MvvmCross.Platforms.Uap.Views
         protected virtual Frame CreateFrame()
         {
             return new Frame();
-        }
-
-        protected virtual void OnResumeFromTerminateState()
-        {
         }
 
         protected virtual void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
@@ -133,16 +124,13 @@ namespace MvvmCross.Platforms.Uap.Views
             return Task.CompletedTask;
         }
 
-        private async void OnResuming(object sender, object e)
+        private void OnResuming(object sender, object e)
         {
-            var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
-            await Resume(suspension);
-            await suspension.RestoreAsync();
+            Resume(e);
         }
 
-        protected virtual Task Resume(IMvxSuspensionManager suspensionManager)
-        {
-            return Task.CompletedTask;
+        protected virtual void Resume(object e)
+        {           
         }
 
         protected virtual void RegisterSetup()
