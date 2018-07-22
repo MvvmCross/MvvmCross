@@ -121,5 +121,8 @@ namespace MvvmCross.Platforms.Ios.Binding
 
         public static string BindTextFocus(this UIView uiView)
             => MvxIosPropertyBinding.UITextField_TextFocus;
+
+        public static string BindClicked(this UIBarButtonItem uiBarButtonItem)
+            => MvxIosPropertyBinding.UIBarButtonItem_Clicked;
     }
 }
