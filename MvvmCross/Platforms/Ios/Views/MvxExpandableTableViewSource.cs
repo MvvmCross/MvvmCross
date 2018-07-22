@@ -1,8 +1,9 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -28,21 +29,27 @@ namespace MvvmCross.Platforms.Ios.Views
 	    private SectionExpandableController _sectionExpandableController = new DefaultAllSectionsExpandableController();
         private readonly EventHandler _headerButtonCommand;
 
-        private IEnumerable<TItemSource> _itemsSource;
-        public new IEnumerable<TItemSource> ItemsSource
+        private IEnumerable _itemsSource;
+        public new IEnumerable ItemsSource
         {
-            get
-            {
-                return _itemsSource;
-            }
+            get => _itemsSource;
             set
             {
-                _itemsSource = value;
-	            _sectionExpandableController.ResetState();
+                if (value is IEnumerable<TItemSource> itemsSource)
+                {
+                    _itemsSource = itemsSource;
+                    _sectionExpandableController.ResetState();
 
-                ReloadTableData();
+                    ReloadTableData();
+                }
+                else
+                {
+                    throw new ArgumentException("value must be of type IEnumerable<TItemSource>");
+                }
             }
         }
+
+        private IEnumerable<TItemSource> CastItemSource => ItemsSource as IEnumerable<TItemSource>;
 
         public MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
         {
@@ -99,36 +106,36 @@ namespace MvvmCross.Platforms.Ios.Views
 
         public override nint RowsInSection(UITableView tableview, nint section)
         {
-            if (ItemsSource == null)
+            if (CastItemSource == null)
                 return 0;
             // If the section is not colapsed return the rows in that section otherwise return 0
-            if (ItemsSource.ElementAt((int)section).Any() && _sectionExpandableController.IsExpanded((int)section))
-                return ItemsSource.ElementAt((int)section).Count();
+            if (CastItemSource.ElementAt((int)section).Any() && _sectionExpandableController.IsExpanded((int)section))
+                return CastItemSource.ElementAt((int)section).Count();
             return 0;
         }
 
         public override nint NumberOfSections(UITableView tableView)
         {
-            if (ItemsSource == null)
+            if (CastItemSource == null)
                 return 0;
 
-            return ItemsSource.Count();
+            return CastItemSource.Count();
         }
 
         protected override object GetItemAt(NSIndexPath indexPath)
         {
-            if (ItemsSource == null)
+            if (CastItemSource == null)
                 return null;
 
-            return ((IEnumerable<object>)ItemsSource.ElementAt(indexPath.Section)).ElementAt(indexPath.Row);
+            return ((IEnumerable<object>)CastItemSource.ElementAt(indexPath.Section)).ElementAt(indexPath.Row);
         }
 
         protected object GetHeaderItemAt(nint section)
         {
-            if (ItemsSource == null)
+            if (CastItemSource == null)
                 return null;
 
-            return ItemsSource.ElementAt((int)section);
+            return CastItemSource.ElementAt((int)section);
         }
 
         public override UIView GetViewForHeader(UITableView tableView, nint section)
