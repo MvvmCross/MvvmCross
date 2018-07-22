@@ -1,8 +1,7 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Threading.Tasks;
 using MvvmCross.Forms.Platforms.Uap.Presenters;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.ViewModels;
@@ -14,6 +13,10 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
     {
         public MvxFormsWindowsPage()
         {
+            // This is required so that navigating to a native page and back again doesn't
+            // reload XF
+            NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Required;
+
             // Wait for page to load to kick off setup and loading forms 
             // This is required for when setup becomes async aware
             Loaded += MvxWindowsPage_Loaded;
@@ -23,17 +26,13 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
         {
             Loaded -= MvxWindowsPage_Loaded;
 
-            // This is required so that navigating to a native page and back again doesn't
-            // reload XF
-            NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Required;
-
             RunAppStart(e);
         }
 
         protected virtual void RunAppStart(object hint = null)
         {
             var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
-            if(!startup.IsStarted)
+            if (!startup.IsStarted)
                 startup.Start(GetAppStartHint(hint));
 
             LoadFormsApplication();
