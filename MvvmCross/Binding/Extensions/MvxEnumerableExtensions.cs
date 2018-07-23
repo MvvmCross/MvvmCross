@@ -2,7 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace MvvmCross.Binding.Extensions
 {
@@ -83,6 +85,26 @@ namespace MvvmCross.Binding.Extensions
             }
 
             return enumerator.Current;
+        }
+
+        public static IEnumerable Filter(this IEnumerable items, Func<object, bool> predicate)
+        {
+            if (items == null)
+                return null;
+
+            var enumerator = items.GetEnumerator();
+            var matchList = new List<object>();
+            while(enumerator.MoveNext())
+            {
+                var match = predicate(enumerator.Current);
+                if (match)
+                    matchList.Add(enumerator.Current);
+            }
+
+            if (matchList.Count == 0)
+                return null;
+
+            return matchList;
         }
     }
 }
