@@ -751,7 +751,11 @@ namespace MvvmCross.Forms.Presenters
             {
                 // Check for modals
                 var topMostModal = navigationPage?.Navigation?.ModalStack?.LastOrDefault();
-                if (topMostModal != null && topMostModal != navigationPage)
+				var modalNotRootPage = topMostModal != null && topMostModal != navigationPage;
+				var modalNotContainingRootPage = topMostModal is MasterDetailPage md &&
+				                                 md.Master != navigationPage &&
+				                                 md.Detail != navigationPage;
+                if (modalNotRootPage && modalNotContainingRootPage)
                 {
                     var currentModalNav = BuildPageTree(topMostModal);
                     if (currentModalNav != null) return (List<Page> list) => currentModalNav(pageListBuilder(list));
