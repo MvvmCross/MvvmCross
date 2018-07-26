@@ -25,15 +25,15 @@ namespace MvvmCross.ViewModels
 
         public void Start(object hint = null)
         {
-            // Check whether Start has commenced, and return if it has
-            if (Interlocked.CompareExchange(ref startHasCommenced, 1, 0) == 1)
-                return;
-
             StartAsync(hint).GetAwaiter().GetResult();
         }
 
         public async Task StartAsync(object hint = null)
         {
+            // Check whether Start has commenced, and return if it has
+            if (Interlocked.CompareExchange(ref startHasCommenced, 1, 0) == 1)
+                return;
+
             var applicationHint = await ApplicationStartup(hint);
             if (applicationHint != null)
             {
