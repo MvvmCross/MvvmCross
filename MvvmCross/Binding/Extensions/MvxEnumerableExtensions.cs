@@ -92,13 +92,12 @@ namespace MvvmCross.Binding.Extensions
             if (items == null)
                 return null;
 
-            var enumerator = items.GetEnumerator();
             var matchList = new List<object>();
-            while(enumerator.MoveNext())
+            foreach (var item in items)
             {
-                var match = predicate(enumerator.Current);
+                var match = predicate(item);
                 if (match)
-                    matchList.Add(enumerator.Current);
+                    matchList.Add(item);
             }
 
             if (matchList.Count == 0)
