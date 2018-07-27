@@ -8,7 +8,7 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Forms.UI.Pages
 {
-    [MvxContentPagePresentation(WrapInNavigationPage = true)]
+    [MvxContentPagePresentation(WrapInNavigationPage = true, NoHistory = true)]
     //[MvxModalPresentation]
     public partial class RootPage : MvxContentPage<RootViewModel>
     {
