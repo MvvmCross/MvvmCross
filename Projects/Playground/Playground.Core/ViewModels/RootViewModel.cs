@@ -31,13 +31,13 @@ namespace Playground.Core.ViewModels
                 var messenger = Mvx.IoCProvider.Resolve<IMvxMessenger>();
                 var str = messenger.ToString();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
 
-
-            ShowChildCommand = new MvxAsyncCommand(async () => {
+            ShowChildCommand = new MvxAsyncCommand(async () =>
+            {
                 var result = await NavigationService.Navigate<ChildViewModel, SampleModel, SampleModel>(new SampleModel
                 {
                     Message = "Hey",
