@@ -20,9 +20,9 @@ namespace MvvmCross.ViewModels
             NavigationService = navigationService;
         }
 
-        public virtual IMvxNavigationService NavigationService { get; }
+        protected virtual IMvxNavigationService NavigationService { get; }
 
-        public virtual IMvxLogProvider LogProvider { get; }
+        protected virtual IMvxLogProvider LogProvider { get; }
 
         protected virtual IMvxLog Log => _log ?? (_log = LogProvider.GetLogFor(GetType()));
     }
