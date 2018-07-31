@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 
 namespace Playground.Core.ViewModels
 {
@@ -16,7 +17,7 @@ namespace Playground.Core.ViewModels
         public int ChildNo { get; set; }
     }
 
-    public class WindowViewModel : MvxViewModel
+    public class WindowViewModel : MvxNavigationViewModel
     {
         private static int _count;
 
@@ -80,7 +81,7 @@ namespace Playground.Core.ViewModels
 
         public int Count { get; set; }
 
-        public WindowViewModel()
+        public WindowViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
             _count++;
             Count = _count;

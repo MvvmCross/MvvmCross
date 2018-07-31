@@ -15,7 +15,7 @@ using Playground.Core.ViewModels.Bindings;
 
 namespace Playground.Core.ViewModels
 {
-    public class RootViewModel : MvxViewModel
+    public class RootViewModel : MvxNavigationViewModel
     {
         private readonly IMvxViewModelLoader _mvxViewModelLoader;
 
@@ -23,7 +23,7 @@ namespace Playground.Core.ViewModels
 
         private string _welcomeText = "Default welcome";
 
-        public RootViewModel(IMvxViewModelLoader mvxViewModelLoader)
+        public RootViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService, IMvxViewModelLoader mvxViewModelLoader) : base(logProvider, navigationService)
         {
             _mvxViewModelLoader = mvxViewModelLoader;
             try

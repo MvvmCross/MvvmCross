@@ -3,14 +3,15 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class SplitDetailNavViewModel : MvxViewModel
+    public class SplitDetailNavViewModel : MvxNavigationViewModel
     {
-        public SplitDetailNavViewModel()
+        public SplitDetailNavViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
             MainMenuCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<MixedNavFirstViewModel>());
             CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));

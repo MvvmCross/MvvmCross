@@ -5,13 +5,18 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class MixedNavTabsViewModel : MvxViewModel
+    public class MixedNavTabsViewModel : MvxNavigationViewModel
     {
+        public MixedNavTabsViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
+        {
+        }
+
         public override async void ViewAppearing()
         {
             await ShowInitialViewModels();
