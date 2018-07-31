@@ -4,19 +4,20 @@
 
 using MvvmCross.Commands;
 using MvvmCross.Localization;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using Playground.Core.ViewModels.Bindings;
 
 namespace Playground.Core.ViewModels
 {
-    public class MainViewModel : MvxViewModel
+    public class MainViewModel : MvxNavigationViewModel
     {
         private string _bindableText = "I'm bound!";
 
         private int _counter = 2;
 
-        public MainViewModel()
+        public MainViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
             ShowChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ChildViewModel>());
 

@@ -5,12 +5,13 @@
 using System;
 using System.Collections.Generic;
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class MixedNavMasterDetailViewModel : MvxViewModel
+    public class MixedNavMasterDetailViewModel : MvxNavigationViewModel
     {
         private MenuItem _menuItem;
         private IMvxAsyncCommand<MenuItem> _onSelectedChangedCommand;
@@ -23,7 +24,7 @@ namespace Playground.Core.ViewModels
             public Type ViewModelType { get; set; }
         }
 
-        public MixedNavMasterDetailViewModel()
+        public MixedNavMasterDetailViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
             Menu = new[] {
                 new MenuItem { Title = "Root", Description = "The root page", ViewModelType = typeof(MixedNavMasterRootContentViewModel) },

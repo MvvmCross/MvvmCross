@@ -1,12 +1,13 @@
 ﻿using System;
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels.Bindings
 {
     public class CustomBindingViewModel
-        : MvxViewModel
+        : MvxNavigationViewModel
     {
         private IMvxAsyncCommand _closeCommand;
 
@@ -15,6 +16,10 @@ namespace Playground.Core.ViewModels.Bindings
         private DateTime _date = DateTime.Now;
 
         private string _hello = "Hello MvvmCross";
+
+        public CustomBindingViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
+        {
+        }
 
         public string Hello
         {

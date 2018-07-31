@@ -3,15 +3,16 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class NestedChildViewModel : MvxViewModel
+    public class NestedChildViewModel : MvxNavigationViewModel
     {
-        public NestedChildViewModel()
+        public NestedChildViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
             CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
             PopToChildCommand = new MvxCommand(() => NavigationService.ChangePresentation(new MvxPopPresentationHint(typeof(ChildViewModel))));
