@@ -31,7 +31,7 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var request = new MvxViewModelRequest<MvxNullViewModel>(null, null);
             var state = new MvxBundle();
-            var loader = new MvxViewModelLoader(null);
+            var loader = new MvxViewModelLoader();
             var viewModel = loader.LoadViewModel(request, state);
 
             Assert.IsType<MvxNullViewModel>(viewModel);
@@ -56,7 +56,7 @@ namespace MvvmCross.UnitTest.ViewModels
             var parameters = new Dictionary<string, string> { { "foo", "bar" } };
             var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null);
             var state = new MvxBundle();
-            var loader = new MvxViewModelLoader(mockCollection.Object);
+            var loader = new MvxViewModelLoader { LocatorCollection = mockCollection.Object };
             var viewModel = loader.LoadViewModel(request, state);
 
             Assert.Equal(outViewModel, viewModel);
@@ -79,7 +79,7 @@ namespace MvvmCross.UnitTest.ViewModels
             var parameters = new Dictionary<string, string> { { "foo", "bar" } };
             var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null);
             var state = new MvxBundle();
-            var loader = new MvxViewModelLoader(mockCollection.Object);
+            var loader = new MvxViewModelLoader { LocatorCollection = mockCollection.Object };
             Assert.Throws<MvxException>(() => {
                 var viewModel = loader.LoadViewModel(request, state);
             });
@@ -97,7 +97,7 @@ namespace MvvmCross.UnitTest.ViewModels
             var parameters = new Dictionary<string, string> { { "foo", "bar" } };
             var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null);
             var state = new MvxBundle();
-            var loader = new MvxViewModelLoader(mockCollection.Object);
+            var loader = new MvxViewModelLoader { LocatorCollection = mockCollection.Object };
 
             Assert.Throws<MvxException>(() => {
                 var viewModel = loader.LoadViewModel(request, state);

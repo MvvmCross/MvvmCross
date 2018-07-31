@@ -20,7 +20,7 @@ namespace MvvmCross.UnitTest.Plugin
 
             protected MvxPluginManagerTest()
             {
-                PluginManager = new MvxPluginManager(ConfigurationSource);
+                PluginManager = new MvxPluginManager { ConfigurationSource = ConfigurationSource };
 
                 Setup();
             }
