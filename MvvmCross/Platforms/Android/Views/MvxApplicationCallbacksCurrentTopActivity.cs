@@ -10,7 +10,7 @@ namespace MvvmCross.Platforms.Android.Views
 {
     public class MvxApplicationCallbacksCurrentTopActivity : Java.Lang.Object, Application.IActivityLifecycleCallbacks, IMvxAndroidCurrentTopActivity
     {
-        protected ConcurrentDictionary<string, ActivityInfo> _Activities { private set; } = new ConcurrentDictionary<string, ActivityInfo>();
+        protected ConcurrentDictionary<string, ActivityInfo> _Activities { get; private set; } = new ConcurrentDictionary<string, ActivityInfo>();
         public Activity Activity => GetCurrentActivity();
 
         public void OnActivityCreated(Activity activity, Bundle savedInstanceState)
