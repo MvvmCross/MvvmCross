@@ -12,6 +12,7 @@ using MvvmCross.Plugin.Messenger;
 using MvvmCross.ViewModels;
 using Playground.Core.Models;
 using Playground.Core.ViewModels.Bindings;
+using Playground.Core.ViewModels.Samples;
 
 namespace Playground.Core.ViewModels
 {
@@ -121,6 +122,9 @@ namespace Playground.Core.ViewModels
 
         public IMvxAsyncCommand ShowContentViewCommand =>
             new MvxAsyncCommand(async () => await NavigationService.Navigate<ParentContentViewModel>());
+
+        public IMvxAsyncCommand ConvertersCommand =>
+            new MvxAsyncCommand(async ()=> await NavigationService.Navigate<ConvertersViewModel>());
 
         public IMvxAsyncCommand ShowSharedElementsCommand { get; }
 

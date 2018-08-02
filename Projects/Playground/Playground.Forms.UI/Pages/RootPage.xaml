@@ -27,6 +27,7 @@
                 <Button Text="Show ListView" mvx:Bi.nd="Command ShowListViewCommand"/>
                 <Button Text="Show Bindings view" mvx:Bi.nd="Command ShowBindingsViewCommand"/>
                 <Button Text="Show CodeBehind view" mvx:Bi.nd="Command ShowCodeBehindViewCommand"/>
+                <Button Text="Show Converters view" mvx:Bi.nd="Command ConvertersCommand" />
             </StackLayout>
         </ScrollView>
 	</ContentPage.Content>
