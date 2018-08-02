@@ -83,7 +83,7 @@ namespace MvvmCross.Platforms.Android.Views
         /// <summary>
         /// Used to store additional info along with an activity.
         /// </summary>
-        private class ActivityInfo
+        protected class ActivityInfo
         {
             public bool IsCurrent { get; set; }
             public Activity Activity { get; set; }
