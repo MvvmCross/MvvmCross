@@ -219,9 +219,9 @@ protected override FillValueConverters (IMvxValueConverterRegistry registry)
 
 Note: unless your application is very large, this is most likely only a micro-optimization and will most likely not significantly change your app's startup time.
  
-### Using Value Converters in Windows (conventional Xaml binding)
+### Using Value Converters in Windows and Xamarin.Forms (conventional Xaml binding) (conventional Xaml binding)
 
-The `IMvxValueConverter` interface is closely based on the `IValueConverter` interface used in Windows WPF and Silverlight Xaml binding. This interface is also similar (but slightly different) to the `IValueConverter` interface used in Windows WinRT Xaml binding. 
+The `IMvxValueConverter` interface is closely based on the `IValueConverter` interface used in Windows WPF and Silverlight Xaml binding. This interface is also similar (but slightly different) to the `IValueConverter` interface used in Windows WinRT Xaml binding and `IValueConverter` interface used in Xamarin.Forms Xaml binding. 
 
 Because these Xaml `IValueConverter` interfaces are not 100% identical to each other, nor to the `IMvxValueConverter` version, shared Mvx ValueConverters cannot be used directly in Windows Xaml binding - they must instead be wrapped for use in Xaml.
 
