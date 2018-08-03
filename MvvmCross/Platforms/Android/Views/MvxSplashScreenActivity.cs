@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Threading.Tasks;
 using Android.OS;
 using Android.Runtime;
@@ -77,7 +78,7 @@ namespace MvvmCross.Platforms.Android.Views
             base.OnPause();
         }
 
-        public virtual async Task InitializationComplete()
+        public virtual async Task InitializationComplete(Exception initializationException)
         {
             if (!_isResumed)
                 return;
