@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Core
 {
@@ -102,7 +103,11 @@ namespace MvvmCross.Core
                 else
                 {
                     if (IsInitialisedTaskCompletionSource.Task.IsCompleted)
+                    {
+                        if (IsInitialisedTaskCompletionSource.Task.IsFaulted)
+                            throw IsInitialisedTaskCompletionSource.Task.Exception;
                         return;
+                    }
 
                     MvxLog.Instance.Trace("EnsureInitialized has already been called so now waiting for completion");
                 }
@@ -123,7 +128,7 @@ namespace MvvmCross.Core
                     // but don't do it otherwise because it's done elsewhere
                     if (IsInitialisedTaskCompletionSource.Task.IsCompleted)
                     {
-                        _currentMonitor?.InitializationComplete();
+                        _currentMonitor?.InitializationComplete(SetupException);
                     }
 
                     return;
@@ -169,17 +174,32 @@ namespace MvvmCross.Core
             base.Dispose(isDisposing);
         }
 
+        private Exception SetupException { get; set; }
         private void StartSetupInitialization()
         {
             IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
             _setup.InitializePrimary();
             Task.Run(async () =>
             {
-                _setup.InitializeSecondary();
+                try
+                {
+                    _setup.InitializeSecondary();
+                }
+                catch(Exception ex)
+                {
+                    SetupException = ex;
+                }
                 IMvxSetupMonitor monitor;
                 lock (LockObject)
                 {
-                    IsInitialisedTaskCompletionSource.SetResult(true);
+                    if (SetupException == null)
+                    {
+                        IsInitialisedTaskCompletionSource.SetResult(true);
+                    }
+                    else
+                    {
+                        IsInitialisedTaskCompletionSource.SetException(SetupException);
+                    }
                     monitor = _currentMonitor;
                 }
 
@@ -190,7 +210,7 @@ namespace MvvmCross.Core
                     {
                         if (monitor != null)
                         {
-                            await monitor.InitializationComplete();
+                            await monitor.InitializationComplete(SetupException);
                         }
                     });
                 }
