@@ -148,7 +148,7 @@ namespace MvvmCross.Droid.Support.V4
 
         public static void LoadViewModelFrom(this IMvxFragmentView view, MvxViewModelRequest request, IMvxBundle savedState = null)
         {
-            var loader = Mvx.Resolve<IMvxViewModelLoader>();
+            var loader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(request, savedState);
             if (viewModel == null) {
                 MvxAndroidLog.Instance.Warn("ViewModel not loaded for {0}", request.ViewModelType.FullName);
