@@ -48,7 +48,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             var viewModelType = fragmentView.FindAssociatedViewModelType(fragment.Activity.GetType());
             var view = fragmentView as IMvxView;
 
-            var cached = cache.GetAndClear(fragmentView.ViewModel.GetType(), fragmentView.UniqueImmutableCacheTag);
+            var cached = cache.GetAndClear(viewModelType, fragmentView.UniqueImmutableCacheTag);
 
             view.OnViewCreate(() => cached ?? fragmentView.LoadViewModel(bundle, fragment.Activity.GetType(), request));
         }
