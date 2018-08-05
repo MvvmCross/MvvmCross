@@ -206,12 +206,14 @@ namespace Playground.Core.ViewModels
             try
             {
                 var request = new MvxRestRequest("http://github.com/asdsadadad");
-                var client = Mvx.IoCProvider.Resolve<IMvxRestClient>();
-                var task = client.MakeRequestAsync(request);
+                if(Mvx.IoCProvider.TryResolve(out IMvxRestClient client))
+                {
+                    var task = client.MakeRequestAsync(request);
 
-                var result = await task;
-               
-                return result;
+                    var result = await task;
+
+                    return result;
+                }
             }
             catch (WebException webException)
             {
