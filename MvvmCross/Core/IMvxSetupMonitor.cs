@@ -9,6 +9,6 @@ namespace MvvmCross.Core
 {
     public interface IMvxSetupMonitor
     {
-        Task InitializationComplete(Exception inititializationException);
+        Task InitializationComplete();
     }
 }

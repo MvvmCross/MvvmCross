@@ -128,7 +128,7 @@ namespace MvvmCross.Core
                     // but don't do it otherwise because it's done elsewhere
                     if (IsInitialisedTaskCompletionSource.Task.IsCompleted)
                     {
-                        _currentMonitor?.InitializationComplete(SetupException);
+                        _currentMonitor?.InitializationComplete();
                     }
 
                     return;
@@ -210,7 +210,7 @@ namespace MvvmCross.Core
                     {
                         if (monitor != null)
                         {
-                            await monitor.InitializationComplete(SetupException);
+                            await monitor.InitializationComplete();
                         }
                     });
                 }
