@@ -217,8 +217,8 @@ namespace Playground.Core.ViewModels
             }
             catch (WebException webException)
             {
-                return default(MvxRestResponse);
             }
+            return default(MvxRestResponse);
         }
     }
 }
