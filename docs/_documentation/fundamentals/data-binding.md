@@ -89,7 +89,7 @@ The technique generally used for this is for the ViewModel to expose special `Co
 
 For example, a `CheckBox` might have a `CheckedCommand` and this might be bindable to a `RememberMeChangedCommand` on the ViewModel.
 
-Within Windows, For sometimes, when a View has not exposed
+Within Windows, for sometimes, when a View has not exposed
 
 ### Binding Modes 
 
