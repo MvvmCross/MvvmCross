@@ -178,6 +178,10 @@
       <Project>{9a82f120-fbe8-4205-94a3-575630dbcbb9}</Project>
       <Name>MvvmCross.Plugin.Json</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Network\MvvmCross.Plugin.Network.csproj">
+      <Project>{380d2dab-d4b0-437d-a61b-e44ffb87374b}</Project>
+      <Name>MvvmCross.Plugin.Network</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj">
       <Project>{4d47736f-d8dc-42f1-8f75-8fc3eff28894}</Project>
       <Name>MvvmCross.Plugin.ResourceLoader</Name>
