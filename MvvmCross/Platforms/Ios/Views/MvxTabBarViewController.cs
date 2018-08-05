@@ -16,6 +16,30 @@ namespace MvvmCross.Platforms.Ios.Views
     {
         private int _tabsCount = 0;
 
+        public virtual UIViewController VisibleUIViewController
+        {
+            get
+            {
+                var topViewController = (SelectedViewController as UINavigationController)?.TopViewController ?? SelectedViewController;
+
+                if (topViewController != null && topViewController.PresentedViewController != null)
+                {
+                    if (topViewController.PresentedViewController is UINavigationController presentedNavigationController)
+                    {
+                        return presentedNavigationController.TopViewController;
+                    }
+                    else
+                    {
+                        return topViewController.PresentedViewController;
+                    }
+                }
+                else
+                {
+                    return topViewController;
+                }
+            }
+        }
+
         public MvxTabBarViewController() : base()
         {
             // WORKAROUND: UIKit makes a first ViewDidLoad call, because a TabViewController expects it's view (tabs) to be drawn 
@@ -194,30 +218,6 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
-        }
-
-        public virtual UIViewController VisibleUIViewController
-        {
-            get
-            {
-                var topViewController = (SelectedViewController as UINavigationController)?.TopViewController ?? SelectedViewController;
-
-                if (topViewController != null && topViewController.PresentedViewController != null)
-                {
-                    if (topViewController.PresentedViewController is UINavigationController presentedNavigationController)
-                    {
-                        return presentedNavigationController.TopViewController;
-                    }
-                    else
-                    {
-                        return topViewController.PresentedViewController;
-                    }
-                }
-                else
-                {
-                    return topViewController;
-                }
-            }
         }
 
         public MvxTabBarViewController() : base()
