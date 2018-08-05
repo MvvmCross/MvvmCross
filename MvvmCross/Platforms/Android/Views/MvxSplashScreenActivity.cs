@@ -78,7 +78,7 @@ namespace MvvmCross.Platforms.Android.Views
             base.OnPause();
         }
 
-        public virtual async Task InitializationComplete(Exception initializationException)
+        public virtual async Task InitializationComplete()
         {
             if (!_isResumed)
                 return;

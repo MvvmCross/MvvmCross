@@ -78,7 +78,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             base.OnPause();
         }
 
-        public virtual async Task InitializationComplete(Exception initializationException)
+        public virtual async Task InitializationComplete()
         {
             if (!_isResumed)
                 return;
