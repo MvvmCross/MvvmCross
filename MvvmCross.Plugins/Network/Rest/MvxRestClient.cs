@@ -13,7 +13,7 @@ using MvvmCross.Logging;
 namespace MvvmCross.Plugin.Network.Rest
 {
     [Preserve(AllMembers = true)]
-	public class MvxRestClient : IMvxRestClient
+    public class MvxRestClient : IMvxRestClient
     {
         protected static void TryCatch(Action toTry, Action<Exception> errorAction)
         {
@@ -37,6 +37,8 @@ namespace MvvmCross.Plugin.Network.Rest
                 };
         }
 
+        #region settings
+
         public void ClearSetting(string key)
         {
             try
@@ -54,103 +56,9 @@ namespace MvvmCross.Plugin.Network.Rest
             Options[key] = value;
         }
 
-        public IMvxAbortable MakeRequest(MvxRestRequest restRequest, Action<MvxStreamRestResponse> successAction, Action<Exception> errorAction)
-        {
-            HttpWebRequest httpRequest = null;
+        #endregion
 
-            TryCatch(() =>
-            {
-                httpRequest = BuildHttpRequest(restRequest);
-
-                Action processResponse = () => ProcessResponse(restRequest, httpRequest, successAction, errorAction);
-                if (restRequest.NeedsRequestStream)
-                {
-                    ProcessRequestThen(restRequest, httpRequest, processResponse, errorAction);
-                }
-                else
-                {
-                    processResponse();
-                }
-            }, errorAction);
-
-            return httpRequest != null ? new MvxRestRequestAsyncHandle(httpRequest) : null;
-        }
-
-        public IMvxAbortable MakeRequest(MvxRestRequest restRequest, Action<MvxRestResponse> successAction, Action<Exception> errorAction)
-        {
-            HttpWebRequest httpRequest = null;
-
-            TryCatch(() =>
-            {
-                httpRequest = BuildHttpRequest(restRequest);
-
-                Action processResponse = () => ProcessResponse(restRequest, httpRequest, successAction, errorAction);
-                if (restRequest.NeedsRequestStream)
-                {
-                    ProcessRequestThen(restRequest, httpRequest, processResponse, errorAction);
-                }
-                else
-                {
-                    processResponse();
-                }
-            }, errorAction);
-
-            return httpRequest != null ? new MvxRestRequestAsyncHandle(httpRequest) : null;
-        }
-
-        public Task<MvxStreamRestResponse> MakeStreamRequestAsync(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            TaskCompletionSource<MvxStreamRestResponse> taskCompletionSource = new TaskCompletionSource<MvxStreamRestResponse>();
-
-            HttpWebRequest httpRequest = BuildHttpRequest(restRequest);
-
-            using (CancellationTokenRegistration tokenRegistration = cancellationToken.Register(() =>
-            {
-                httpRequest.Abort();
-                taskCompletionSource.SetCanceled();
-            }))
-            {
-                Action processResponse = () => ProcessStreamResponse(restRequest, httpRequest, response => taskCompletionSource.SetResult(response));
-                Action<Exception> processExceptionResponse = (ex) => ProcessStreamExceptionResponse(restRequest, ex, response => taskCompletionSource.SetResult(response));
-                if (restRequest.NeedsRequestStream)
-                {
-                    ProcessRequestThen(restRequest, httpRequest, processResponse, processExceptionResponse);
-                }
-                else
-                {
-                    processResponse();
-                }
-            }
-
-            return taskCompletionSource.Task;
-        }
-
-        public Task<MvxRestResponse> MakeRequestAsync(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            TaskCompletionSource<MvxRestResponse> taskCompletionSource = new TaskCompletionSource<MvxRestResponse>();
-
-            HttpWebRequest httpRequest = BuildHttpRequest(restRequest);
-
-            using (CancellationTokenRegistration tokenRegistration = cancellationToken.Register(() =>
-            {
-                httpRequest.Abort();
-                taskCompletionSource.SetCanceled();
-            }))
-            {
-                Action processResponse = () => ProcessResponse(restRequest, httpRequest, response => taskCompletionSource.SetResult(response));
-                Action<Exception> processExceptionResponse = (ex) => ProcessExceptionResponse(restRequest, ex, response => taskCompletionSource.SetResult(response));
-                if (restRequest.NeedsRequestStream)
-                {
-                    ProcessRequestThen(restRequest, httpRequest, processResponse, processExceptionResponse);
-                }
-                else
-                {
-                    processResponse();
-                }
-            }
-
-            return taskCompletionSource.Task;
-        }
+        #region BuildHttpRequest methods
 
         protected virtual HttpWebRequest BuildHttpRequest(MvxRestRequest restRequest)
         {
@@ -242,77 +150,67 @@ namespace MvvmCross.Plugin.Network.Rest
             // do nothing by default
         }
 
-        protected virtual void ProcessResponse(MvxRestRequest restRequest, HttpWebRequest httpRequest, Action<MvxRestResponse> successAction)
+        #endregion
+
+        #region IMvxAbortable legacy methods
+
+        public IMvxAbortable MakeRequest(MvxRestRequest restRequest, Action<MvxStreamRestResponse> successAction, Action<Exception> errorAction)
         {
-            httpRequest.BeginGetResponse(result =>
+            HttpWebRequest httpRequest = null;
+
+            TryCatch(() =>
             {
-                var response = (HttpWebResponse)httpRequest.EndGetResponse(result);
+                httpRequest = BuildHttpRequest(restRequest);
 
-                var code = response.StatusCode;
-
-                var restResponse = new MvxRestResponse
+                Action processResponse = () => ProcessResponse(restRequest, httpRequest, successAction, errorAction);
+                if (restRequest.NeedsRequestStream)
                 {
-                    CookieCollection = response.Cookies,
-                    Tag = restRequest.Tag,
-                    StatusCode = code
-                };
-                successAction?.Invoke(restResponse);
-            }, null);
-        }
-
-        protected virtual void ProcessStreamResponse(MvxRestRequest restRequest, HttpWebRequest httpRequest, Action<MvxStreamRestResponse> successAction)
-        {
-            httpRequest.BeginGetResponse(result =>
-            {
-                var response = (HttpWebResponse)httpRequest.EndGetResponse(result);
-
-                var code = response.StatusCode;
-                var responseStream = response.GetResponseStream();
-                var restResponse = new MvxStreamRestResponse
+                    ProcessRequestThen(restRequest, httpRequest, processResponse, errorAction);
+                }
+                else
                 {
-                    CookieCollection = response.Cookies,
-                    Stream = responseStream,
-                    Tag = restRequest.Tag,
-                    StatusCode = code
-                };
-                successAction?.Invoke(restResponse);
-            }, null);
+                    processResponse();
+                }
+            }, errorAction);
+
+            return httpRequest != null ? new MvxRestRequestAsyncHandle(httpRequest) : null;
         }
 
-        protected virtual void ProcessStreamExceptionResponse(MvxRestRequest restRequest, Exception ex, Action<MvxStreamRestResponse> continueAction)
+        public IMvxAbortable MakeRequest(MvxRestRequest restRequest, Action<MvxRestResponse> successAction, Action<Exception> errorAction)
         {
-            var restResponse = new MvxStreamRestResponse
-            {
-                Tag = restRequest?.Tag,
-                StatusCode = HttpStatusCode.BadRequest
-            };
+            HttpWebRequest httpRequest = null;
 
-            continueAction?.Invoke(restResponse);
+            TryCatch(() =>
+            {
+                httpRequest = BuildHttpRequest(restRequest);
+
+                Action processResponse = () => ProcessResponse(restRequest, httpRequest, successAction, errorAction);
+                if (restRequest.NeedsRequestStream)
+                {
+                    ProcessRequestThen(restRequest, httpRequest, processResponse, errorAction);
+                }
+                else
+                {
+                    processResponse();
+                }
+            }, errorAction);
+
+            return httpRequest != null ? new MvxRestRequestAsyncHandle(httpRequest) : null;
         }
 
-        protected virtual void ProcessExceptionResponse(MvxRestRequest restRequest, Exception ex, Action<MvxRestResponse> continueAction)
-        {
-            var restResponse = new MvxRestResponse
-            {
-                Tag = restRequest?.Tag,
-                StatusCode = HttpStatusCode.BadRequest
-            };
-
-            continueAction?.Invoke(restResponse);
-        }
-
-        protected virtual void ProcessRequestThen(MvxRestRequest restRequest, HttpWebRequest httpRequest, Action continueAction)
+        protected virtual void ProcessRequestThen(MvxRestRequest restRequest, HttpWebRequest httpRequest, Action continueAction, Action<Exception> errorAction)
         {
             httpRequest.BeginGetRequestStream(result =>
-            {
-                using (var stream = httpRequest.EndGetRequestStream(result))
+                TryCatch(() =>
                 {
-                    restRequest.ProcessRequestStream(stream);
-                    stream.Flush();
-                }
+                    using (var stream = httpRequest.EndGetRequestStream(result))
+                    {
+                        restRequest.ProcessRequestStream(stream);
+                        stream.Flush();
+                    }
 
-                continueAction?.Invoke();
-            }, null);
+                    continueAction?.Invoke();
+                }, errorAction), null);
         }
 
         protected virtual void ProcessResponse(MvxRestRequest restRequest, HttpWebRequest httpRequest, Action<MvxRestResponse> successAction, Action<Exception> errorAction)
@@ -354,19 +252,102 @@ namespace MvvmCross.Plugin.Network.Rest
                 }, errorAction), null);
         }
 
-        protected virtual void ProcessRequestThen(MvxRestRequest restRequest, HttpWebRequest httpRequest, Action continueAction, Action<Exception> errorAction)
-        {
-            httpRequest.BeginGetRequestStream(result =>
-                TryCatch(() =>
-                {
-                    using (var stream = httpRequest.EndGetRequestStream(result))
-                    {
-                        restRequest.ProcessRequestStream(stream);
-                        stream.Flush();
-                    }
+        #endregion
 
-                    continueAction?.Invoke();
-                }, errorAction), null);
+        public async Task<MvxStreamRestResponse> MakeStreamRequestAsync(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            HttpWebRequest httpRequest = BuildHttpRequest(restRequest);
+
+            using (CancellationTokenRegistration tokenRegistration = cancellationToken.Register(() => httpRequest.Abort()))
+            {
+                if (restRequest.NeedsRequestStream)
+                {
+                    try
+                    {
+                        await ProcessRequestThen(restRequest, httpRequest).ConfigureAwait(false);
+                    }
+                    catch (Exception)
+                    {
+                        return new MvxStreamRestResponse
+                        {
+                            Tag = restRequest?.Tag,
+                            StatusCode = HttpStatusCode.BadRequest
+                        };
+                    }
+                }
+
+                var response = await ProcessStreamResponse(restRequest, httpRequest).ConfigureAwait(false);
+
+                return response;
+            }
+        }
+
+        public async Task<MvxRestResponse> MakeRequestAsync(MvxRestRequest restRequest, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            HttpWebRequest httpRequest = BuildHttpRequest(restRequest);
+
+            using (CancellationTokenRegistration tokenRegistration = cancellationToken.Register(() => httpRequest.Abort()))
+            {
+                if (restRequest.NeedsRequestStream)
+                {
+                    try
+                    {
+                        await ProcessRequestThen(restRequest, httpRequest).ConfigureAwait(false);
+                    }
+                    catch (Exception)
+                    {
+                        return new MvxRestResponse
+                        {
+                            Tag = restRequest?.Tag,
+                            StatusCode = HttpStatusCode.BadRequest
+                        };
+                    }
+                }
+
+                var response = await ProcessResponse(restRequest, httpRequest).ConfigureAwait(false);
+
+                return response;
+            }
+        }
+
+        protected virtual async Task<MvxRestResponse> ProcessResponse(MvxRestRequest restRequest, HttpWebRequest httpRequest)
+        {
+            var response = (HttpWebResponse)await httpRequest.GetResponseAsync().ConfigureAwait(false);
+
+            var restResponse = new MvxRestResponse
+            {
+                CookieCollection = response.Cookies,
+                Tag = restRequest.Tag,
+                StatusCode = response.StatusCode
+            };
+
+            return restResponse;
+        }
+
+        protected virtual async Task<MvxStreamRestResponse> ProcessStreamResponse(MvxRestRequest restRequest, HttpWebRequest httpRequest)
+        {
+            var response = (HttpWebResponse)await httpRequest.GetResponseAsync().ConfigureAwait(false);
+
+            var code = response.StatusCode;
+            var responseStream = response.GetResponseStream();
+            var restResponse = new MvxStreamRestResponse
+            {
+                CookieCollection = response.Cookies,
+                Stream = responseStream,
+                Tag = restRequest.Tag,
+                StatusCode = code
+            };
+
+            return restResponse;
+        }
+        
+        protected virtual async Task ProcessRequestThen(MvxRestRequest restRequest, HttpWebRequest httpRequest)
+        {
+            using (var stream = await httpRequest.GetRequestStreamAsync().ConfigureAwait(false))
+            {
+                restRequest.ProcessRequestStream(stream);
+                stream.Flush();
+            }
         }
     }
 }
