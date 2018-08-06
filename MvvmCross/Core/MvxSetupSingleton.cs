@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
@@ -174,31 +175,31 @@ namespace MvvmCross.Core
             base.Dispose(isDisposing);
         }
 
-        private Exception SetupException { get; set; }
         private void StartSetupInitialization()
         {
             IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
             _setup.InitializePrimary();
             Task.Run(async () =>
             {
+                ExceptionDispatchInfo setupException = null;
                 try
                 {
                     _setup.InitializeSecondary();
                 }
                 catch(Exception ex)
                 {
-                    SetupException = ex;
+                    setupException = ExceptionDispatchInfo.Capture(ex);
                 }
                 IMvxSetupMonitor monitor;
                 lock (LockObject)
                 {
-                    if (SetupException == null)
+                    if (setupException == null)
                     {
                         IsInitialisedTaskCompletionSource.SetResult(true);
                     }
                     else
                     {
-                        IsInitialisedTaskCompletionSource.SetException(SetupException);
+                        IsInitialisedTaskCompletionSource.SetException(setupException.SourceException);
                     }
                     monitor = _currentMonitor;
                 }
