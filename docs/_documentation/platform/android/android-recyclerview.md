@@ -8,6 +8,11 @@ Available in Android Support RecyclerView, MvvmCross 5.
 
 MvvmCross has a implementation of Android's RecyclerView, which allows us to bind a collection of ViewModels to the `ItemsSource` property. It works similarly to a ListView. However, a RecyclerView is out of the box a more resource friendly view, due to enforcing the use of the ViewHolder pattern, it also supports refreshing parts of the View rather than the invalidating the entire View. RecyclerView, although very efficient, it does not come with all the blows and whistles that a normal ListView comes with, such as built in item click events, highlighting selected row and more. Some of these we have covered for you and this article serves the purpose of the common uses of a `MvxRecyclerView`.
 
+Currently `MvxRecyclerView` supports binding to the following properties:
+- ItemsSource
+- ItemClick
+- ItemLongClick
+
 ## Getting started
 
 First you need to ensure that you have the `MvvmCross.Droid.Support.V7.RecyclerView` NuGet package installed in your Application project.
@@ -87,6 +92,8 @@ Assuming you have a ViewModel type for each of these group like: MammalViewModel
 
 To create your own `ItemTemplateSelector` you must create a class implementing the `IMvxItemTemplate` interface, which has two very important methods. `GetItemViewType(object forItemObject)` is used for the RecyclerView to determine how to recycle the Views. If you return `0` it will assume there is only one View type. Usually you would just return the layout id here. `GetItemLayoutId(int fromViewType)` this method is used to provide the actual id of the layout you want to use for the View type.
 
+> Ensure you are returning something else than `0` from `GetItemViewType(object)` if you use multiple views in your `ItemTemplateSelector`.
+
 A small example:
 
 ```csharp
@@ -133,4 +140,60 @@ To use this `ItemTemplateSelctor` you will need to provide it in the `MvxItemTem
 
 The `ItemTemplateId` property in your `ItemTemplateSelector` will get overwritten if you provide both the `MvxItemTemplateSelector` and `MvxItemTemplate`, by the value in `MvxItemTemplate`.
 
-If you do not provide a `MvxItemTemplateSelector` the `MvxRecyclerAdapter` will fallback to use `MvxDefaultItemTemplateSelector`.
+> Note: If you do not provide a `MvxItemTemplateSelector` the `MvxRecyclerAdapter` will fallback to use `MvxDefaultItemTemplateSelector`.
+
+### ItemClick and ItemLongClick commands
+
+`ItemClick` and `ItemLongClick` can be bound on a `MvxRecyclerView` to execute a command when a specific item in the view is either clicked or long clicked.
+
+This is similar to `MvxListView`s `SelectedItem` property you can bind to, although in this case you can also get the long click.
+
+When you create your command, you can optionally get the `ViewModel` bound in the `ItemsSource`. Just be careful when doing so for an `ItemsSource` containing multiple types.
+
+The binding to your command would look as follows.
+
+```xml
+<mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
+    local:MvxBind="ItemClick ItemClickCommand; ItemLongClickCommand"
+    ... />
+```
+
+#### Single ViewModel Items Sources
+
+```csharp
+private MvxCommand<DogViewModel> _dogClickCommand;
+public MvxCommand<DogViewModel> DogClickCommand => _dogClickCommand = 
+    _dogClickCommand ?? new MvxCommand<DogViewModel>(OnDogClickCommand);
+
+private void OnDogClickCommand(DogViewModel dog)
+{
+    // write on dog clicked logic here
+}
+```
+
+#### Multiple ViewModel Items Source
+
+Given that `DogViewModel` and `CatViewModel` both derive from `MammalViewModel` you could create your command as follows for a `MvxRecyclerView` bound to an `ItemsSource` containing `DogViewModel` and `CatViewModel` instances.
+
+```csharp
+private MvxCommand<MammalViewModel> _itemClickCommand;
+public MvxCommand<DogViewModel> ItemClickCommand => _itemClickCommand = 
+    _itemClickCommand ?? new MvxCommand<DogViewModel>(OnItemClickCommand);
+
+private void OnItemClickCommand(MammalViewModel animal)
+{
+    // do common animal stuff here
+
+    if (animal is DogViewModel dog)
+    {
+        // do dog stuff
+    }
+    else if (animal is CatViewModel cat)
+    {
+        // do cat stuff
+    }
+}
+```
+
+Alternatively you could go a level lower and just use `object` instead of `MammalViewModel` if you do not need to do common stuff with the `MammalViewModel`.
+
