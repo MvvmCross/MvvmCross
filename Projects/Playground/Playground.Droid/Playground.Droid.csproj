@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\CustomBindingView.cs" />
+    <Compile Include="Activities\ThisActivityFreezesTheSplashScreen.cs" />
     <Compile Include="Adapter\SelectedItemRecyclerAdapter.cs" />
     <Compile Include="Adapter\SelectedItemRecyclerAdapter.SelectedItemEventArgs.cs" />
     <Compile Include="Adapter\SelectedItemRecyclerAdapter.ViewHolder.cs" />
