@@ -86,17 +86,32 @@ There is an attribute member that can be used to customize the presentation:
 To override a presentation attribute at runtime you can implement the `IMvxOverridePresentationAttribute` in your view controller and determine the presentation attribute in the `PresentationAttribute` method like this:
 
 ```c#
-public MvxBasePresentationAttribute PresentationAttribute(MvxViewModelRequest request)
+[MvxFromStoryboard("Main")]
+public partial class LoginView : MvxViewController<LoginViewModel>, IMvxOverridePresentationAttribute
 {
-    return new MvxModalPresentationAttribute
+
+    public MvxBasePresentationAttribute PresentationAttribute(MvxViewModelRequest request)
     {
-        ModalPresentationStyle = UIModalPresentationStyle.OverFullScreen,
-        ModalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-    };
+        if (request.PresentationValues != null)
+        {
+            if (request.PresentationValues.ContainsKey("NavigationMode") &&
+                request.PresentationValues["NavigationMode"] == "Modal")
+            {
+                return new MvxModalPresentationAttribute
+                {
+                    WrapInNavigationController = true,
+                    ModalPresentationStyle = UIModalPresentationStyle.OverFullScreen,
+                    ModalTransitionStyle = UIModalTransitionStyle.CrossDissolv
+                };
+            }
+        }
+
+        return null;
+    }
 }
 ```
 
-As you can see in the code snippet, you will be able to make your choice using a `MvxViewModelRequest`. This object will contain the `PresentationValues` dictionary alongside other properties. 
+As you can see in the code snippet, you will be able to make your choice using a `MvxViewModelRequest`. This object will contain the `PresentationValues` dictionary alongside other properties. This way your ViewModel can let the presentation (the view) know of a custom case in which it should be opened.
 
 If you return `null` from the `PresentationAttribute` method, the ViewPresenter will fallback to the attribute used to decorate the view. If the view is not decorated with any presentation attribute, then it will use the default attribute instead.
 

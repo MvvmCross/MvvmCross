@@ -82,16 +82,31 @@ Used to indicate that this is a NavigationPage.
 To override a presentation attribute at runtime you can implement the `IMvxOverridePresentationAttribute` in your view and determine the presentation attribute in the `PresentationAttribute` method like this:
 
 ```c#
-public MvxBasePresentationAttribute PresentationAttribute(MvxViewModelRequest request)
+[MvxContentPagePresentation(WrapInNavigationPage = true, NoHistory = true, Title = "Sign In")]
+public partial class LoginPage : MvxContentPage<LoginViewModel>, IMvxOverridePresentationAttribute
 {
-    return new MvxContentPagePresentationAttribute()
+
+    public MvxBasePresentationAttribute PresentationAttribute(MvxViewModelRequest request)
     {
-        
-    };
+        if (request.PresentationValues != null)
+        {
+            if (request.PresentationValues.ContainsKey("NavigationMode") &&
+                request.PresentationValues["NavigationMode"] == "Modal")
+            {
+                return new MvxModalPresentationAttribute
+                {
+                    WrapInNavigationPage = true,
+                    NoHistory = true
+                };
+            }
+        }
+
+        return null;
+    }
 }
 ```
 
-As you can see in the code snippet, you will be able to make your choice using a `MvxViewModelRequest`. This object will contain the `PresentationValues` dictionary alongside other properties. 
+As you can see in the code snippet, you will be able to make your choice using a `MvxViewModelRequest`. This object will contain the `PresentationValues` dictionary alongside other properties. This way your ViewModel can let the presentation (the view) know of a custom case in which it should be opened.
 
 If you return `null` from the `PresentationAttribute` method, the ViewPresenter will fallback to the attribute used to decorate the view. If the view is not decorated with any presentation attribute, then it will use the default attribute instead.
 
