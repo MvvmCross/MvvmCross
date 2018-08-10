@@ -958,5 +958,21 @@ namespace MvvmCross.Forms.Presenters
                 throw new MvxException(ex, "Cannot replace MainPage root");
             }
         }
+
+        private Page FindViewFromViewModel(IMvxViewModel mvxViewModel)
+        {
+            var root = TopNavigationPage();
+            Page page = null;
+
+            if (root?.Navigation?.NavigationStack != null)
+            {
+                // finding the view from viewmodel in navigation stack
+                page = root.Navigation.NavigationStack
+                    .OfType<IMvxPage>()
+                    .FirstOrDefault(x => x.ViewModel == mvxViewModel) as Page;
+            }
+
+            return page;
+        }
     }
 }
