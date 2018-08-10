@@ -402,7 +402,17 @@ namespace MvvmCross.Forms.Presenters
         public virtual Task<bool> CloseCarouselPage(IMvxViewModel viewModel, MvxCarouselPagePresentationAttribute attribute)
         {
             if (attribute.Position == CarouselPosition.Root)
-                return ClosePage(FormsApplication.MainPage, null, attribute);
+            {
+                var view = FindViewFromViewModel(viewModel);
+
+                if (view == null)
+                {
+                    MvxFormsLog.Instance.Warn("Ignoring close for ViewModel - Matching View for ViewModel instance failed");
+                    return Task.FromResult(false);
+                }
+
+                return ClosePage(FormsApplication.MainPage, view, attribute);
+            }
             else
             {
                 var carouselHost = GetPageOfType<MvxCarouselPage>();
@@ -463,7 +473,15 @@ namespace MvvmCross.Forms.Presenters
 
         public virtual Task<bool> CloseContentPage(IMvxViewModel viewModel, MvxContentPagePresentationAttribute attribute)
         {
-            return ClosePage(FormsApplication.MainPage, null, attribute);
+            var view = FindViewFromViewModel(viewModel);
+
+            if (view == null)
+            {
+                MvxFormsLog.Instance.Warn("Ignoring close for ViewModel - Matching View for ViewModel instance failed");
+                return Task.FromResult(false);
+            }
+
+            return ClosePage(FormsApplication.MainPage, view, attribute);
         }
 
         public virtual async Task<bool> ShowMasterDetailPage(
@@ -530,7 +548,8 @@ namespace MvvmCross.Forms.Presenters
                 case MasterDetailPosition.Master:
                     return ClosePage(masterDetailHost.Master, null, attribute);
                 case MasterDetailPosition.Detail:
-                    return ClosePage(masterDetailHost.Detail, null, attribute);
+                    var view = FindViewFromViewModel(viewModel);
+                    return ClosePage(masterDetailHost.Detail, view, attribute);
             }
             return Task.FromResult(true);
         }
@@ -599,7 +618,14 @@ namespace MvvmCross.Forms.Presenters
 
         public virtual async Task<bool> CloseNavigationPage(IMvxViewModel viewModel, MvxNavigationPagePresentationAttribute attribute)
         {
-            return await ClosePage(FormsApplication.MainPage, null, attribute);
+            var view = FindViewFromViewModel(viewModel);
+
+            if (view == null)
+            {
+                MvxFormsLog.Instance.Warn("Ignoring close for ViewModel - Matching View for ViewModel instance failed");
+                return false;
+            }
+            return await ClosePage(FormsApplication.MainPage, view, attribute);
         }
 
         public virtual async Task<bool> ShowTabbedPage(
@@ -636,7 +662,17 @@ namespace MvvmCross.Forms.Presenters
         public virtual Task<bool> CloseTabbedPage(IMvxViewModel viewModel, MvxTabbedPagePresentationAttribute attribute)
         {
             if (attribute.Position == TabbedPosition.Root)
-                return ClosePage(FormsApplication.MainPage, null, attribute);
+            {
+                var view = FindViewFromViewModel(viewModel);
+
+                if (view == null)
+                {
+                    MvxFormsLog.Instance.Warn("Ignoring close for ViewModel - Matching View for ViewModel instance failed");
+                    return Task.FromResult(false);
+                }
+
+                return ClosePage(FormsApplication.MainPage, view, attribute);
+            }
             else
             {
                 var tabHost = GetPageOfType<MvxTabbedPage>();
