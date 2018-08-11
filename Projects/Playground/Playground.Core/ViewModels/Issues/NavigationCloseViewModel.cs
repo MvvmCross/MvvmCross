@@ -18,14 +18,8 @@ namespace Playground.Core.ViewModels
             _mvxNavigationService = mvxNavigationService;
         }
 
-        public IMvxAsyncCommand TryToCloseNewViewModelCommand => new MvxAsyncCommand(TryToCloseNewViewModelAsync);
         public IMvxAsyncCommand OpenChildThenCloseThisCommand => new MvxAsyncCommand(CloseThisAndOpenChildAsync);
-
-
-        private async Task TryToCloseNewViewModelAsync()
-        {
-            await _mvxNavigationService.Close(new SecondChildViewModel());
-        }
+        public IMvxAsyncCommand TryToCloseNewViewModelCommand => new MvxAsyncCommand(TryToCloseNewViewModelAsync);
 
         private async Task CloseThisAndOpenChildAsync()
         {
@@ -33,5 +27,9 @@ namespace Playground.Core.ViewModels
             await _mvxNavigationService.Close(this);
         }
 
+        private async Task TryToCloseNewViewModelAsync()
+        {
+            await _mvxNavigationService.Close(new SecondChildViewModel());
+        }
     }
 }
