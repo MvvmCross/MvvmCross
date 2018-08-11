@@ -122,11 +122,14 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowCodeBehindViewCommand =>
             new MvxAsyncCommand(async () => await NavigationService.Navigate<CodeBehindViewModel>());
 
+        public IMvxAsyncCommand ShowNavigationCloseCommand =>
+            new MvxAsyncCommand(async () => await NavigationService.Navigate<NavigationCloseViewModel>());
+
         public IMvxAsyncCommand ShowContentViewCommand =>
             new MvxAsyncCommand(async () => await NavigationService.Navigate<ParentContentViewModel>());
 
         public IMvxAsyncCommand ConvertersCommand =>
-            new MvxAsyncCommand(async ()=> await NavigationService.Navigate<ConvertersViewModel>());
+            new MvxAsyncCommand(async () => await NavigationService.Navigate<ConvertersViewModel>());
 
         public IMvxAsyncCommand ShowSharedElementsCommand { get; }
 
@@ -206,7 +209,7 @@ namespace Playground.Core.ViewModels
             try
             {
                 var request = new MvxRestRequest("http://github.com/asdsadadad");
-                if(Mvx.IoCProvider.TryResolve(out IMvxRestClient client))
+                if (Mvx.IoCProvider.TryResolve(out IMvxRestClient client))
                 {
                     var task = client.MakeRequestAsync(request);
 
