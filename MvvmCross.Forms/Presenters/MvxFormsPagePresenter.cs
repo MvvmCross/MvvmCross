@@ -403,15 +403,7 @@ namespace MvvmCross.Forms.Presenters
         {
             if (attribute.Position == CarouselPosition.Root)
             {
-                var view = FindViewFromViewModel(viewModel);
-
-                if (view == null)
-                {
-                    MvxFormsLog.Instance.Warn("Ignoring close for ViewModel - Matching View for ViewModel instance failed");
-                    return Task.FromResult(false);
-                }
-
-                return ClosePage(FormsApplication.MainPage, view, attribute);
+                return FindAndCloseViewFromViewModel(viewModel, FormsApplication.MainPage, attribute);
             }
             else
             {
@@ -473,15 +465,7 @@ namespace MvvmCross.Forms.Presenters
 
         public virtual Task<bool> CloseContentPage(IMvxViewModel viewModel, MvxContentPagePresentationAttribute attribute)
         {
-            var view = FindViewFromViewModel(viewModel);
-
-            if (view == null)
-            {
-                MvxFormsLog.Instance.Warn("Ignoring close for ViewModel - Matching View for ViewModel instance failed");
-                return Task.FromResult(false);
-            }
-
-            return ClosePage(FormsApplication.MainPage, view, attribute);
+            return FindAndCloseViewFromViewModel(viewModel, FormsApplication.MainPage, attribute);
         }
 
         public virtual async Task<bool> ShowMasterDetailPage(
@@ -548,8 +532,7 @@ namespace MvvmCross.Forms.Presenters
                 case MasterDetailPosition.Master:
                     return ClosePage(masterDetailHost.Master, null, attribute);
                 case MasterDetailPosition.Detail:
-                    var view = FindViewFromViewModel(viewModel);
-                    return ClosePage(masterDetailHost.Detail, view, attribute);
+                    return FindAndCloseViewFromViewModel(viewModel, masterDetailHost.Detail, attribute);
             }
             return Task.FromResult(true);
         }
@@ -616,16 +599,9 @@ namespace MvvmCross.Forms.Presenters
             return true;
         }
 
-        public virtual async Task<bool> CloseNavigationPage(IMvxViewModel viewModel, MvxNavigationPagePresentationAttribute attribute)
+        public virtual Task<bool> CloseNavigationPage(IMvxViewModel viewModel, MvxNavigationPagePresentationAttribute attribute)
         {
-            var view = FindViewFromViewModel(viewModel);
-
-            if (view == null)
-            {
-                MvxFormsLog.Instance.Warn("Ignoring close for ViewModel - Matching View for ViewModel instance failed");
-                return false;
-            }
-            return await ClosePage(FormsApplication.MainPage, view, attribute);
+            return FindAndCloseViewFromViewModel(viewModel, FormsApplication.MainPage, attribute);
         }
 
         public virtual async Task<bool> ShowTabbedPage(
@@ -663,15 +639,7 @@ namespace MvvmCross.Forms.Presenters
         {
             if (attribute.Position == TabbedPosition.Root)
             {
-                var view = FindViewFromViewModel(viewModel);
-
-                if (view == null)
-                {
-                    MvxFormsLog.Instance.Warn("Ignoring close for ViewModel - Matching View for ViewModel instance failed");
-                    return Task.FromResult(false);
-                }
-
-                return ClosePage(FormsApplication.MainPage, view, attribute);
+                return FindAndCloseViewFromViewModel(viewModel, FormsApplication.MainPage, attribute);
             }
             else
             {
@@ -995,20 +963,26 @@ namespace MvvmCross.Forms.Presenters
             }
         }
 
-        private Page FindViewFromViewModel(IMvxViewModel mvxViewModel)
+        protected virtual Task<bool> FindAndCloseViewFromViewModel(IMvxViewModel mvxViewModel, Page rootPage, MvxPagePresentationAttribute attribute)
         {
             var root = TopNavigationPage();
-            Page page = null;
+            Page pageToClose = null;
 
             if (root?.Navigation?.NavigationStack != null)
             {
                 // finding the view from viewmodel in navigation stack
-                page = root.Navigation.NavigationStack
+                pageToClose = root.Navigation.NavigationStack
                     .OfType<IMvxPage>()
                     .FirstOrDefault(x => x.ViewModel == mvxViewModel) as Page;
+
+                if (pageToClose == null)
+                {
+                    MvxFormsLog.Instance.Warn("Ignoring close for ViewModel - Matching View for ViewModel instance failed");
+                    return Task.FromResult(false);
+                }
             }
 
-            return page;
+            return ClosePage(rootPage, pageToClose, attribute);
         }
     }
 }
