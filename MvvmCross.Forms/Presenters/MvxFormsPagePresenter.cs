@@ -968,18 +968,15 @@ namespace MvvmCross.Forms.Presenters
             var root = TopNavigationPage();
             Page pageToClose = null;
 
-            if (root?.Navigation?.NavigationStack != null)
-            {
-                // finding the view from viewmodel in navigation stack
-                pageToClose = root.Navigation.NavigationStack
-                    .OfType<IMvxPage>()
-                    .FirstOrDefault(x => x.ViewModel == mvxViewModel) as Page;
+            // finding the view from viewmodel in navigation stack
+            pageToClose = root?.Navigation?.NavigationStack?
+                .OfType<IMvxPage>()
+                .FirstOrDefault(x => x.ViewModel == mvxViewModel) as Page;
 
-                if (pageToClose == null)
-                {
-                    MvxFormsLog.Instance.Warn("Ignoring close for ViewModel - Matching View for ViewModel instance failed");
-                    return Task.FromResult(false);
-                }
+            if (pageToClose == null)
+            {
+                MvxFormsLog.Instance.Warn("Ignoring close for ViewModel - Matching View for ViewModel instance failed");
+                return Task.FromResult(false);
             }
 
             return ClosePage(rootPage, pageToClose, attribute);
