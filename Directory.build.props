@@ -41,8 +41,8 @@
   </ItemGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <TargetsToBuild>All</TargetsToBuild> 
-    <!--<TargetsToBuild>Android</TargetsToBuild>-->
+    <!-- <TargetsToBuild>All</TargetsToBuild> -->
+    <TargetsToBuild>Android</TargetsToBuild>
     <!--<TargetsToBuild>Uap</TargetsToBuild>--> 
     <!--<TargetsToBuild>iOS</TargetsToBuild>--> 
   </PropertyGroup>
