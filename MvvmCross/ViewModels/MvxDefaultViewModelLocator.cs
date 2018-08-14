@@ -60,7 +60,7 @@ namespace MvvmCross.ViewModels
                 throw exception.MvxWrap("Problem creating viewModel of type {0}", viewModelType.Name);
             }
 
-            RunViewModelLifecycle(viewModel, parameterValues, savedState);
+            RunViewModelLifecycle(viewModel, parameterValues, savedState, navigationArgs);
 
             return viewModel;
         }
@@ -80,7 +80,7 @@ namespace MvvmCross.ViewModels
                 throw exception.MvxWrap("Problem creating viewModel of type {0}", viewModelType.Name);
             }
 
-            RunViewModelLifecycle(viewModel, param, parameterValues, savedState);
+            RunViewModelLifecycle(viewModel, param, parameterValues, savedState, navigationArgs);
 
             return viewModel;
         }
@@ -95,7 +95,7 @@ namespace MvvmCross.ViewModels
             viewModel.CallBundleMethods("ReloadState", savedState);
         }
 
-        protected void RunViewModelLifecycle(IMvxViewModel viewModel, IMvxBundle parameterValues, IMvxBundle savedState)
+        protected void RunViewModelLifecycle(IMvxViewModel viewModel, IMvxBundle parameterValues, IMvxBundle savedState, IMvxNavigateEventArgs navigationArgs)
         {
             try
             {
