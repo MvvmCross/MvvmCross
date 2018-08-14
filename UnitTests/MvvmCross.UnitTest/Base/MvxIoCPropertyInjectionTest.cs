@@ -8,7 +8,7 @@ using Xunit;
 
 namespace MvvmCross.UnitTest.Base
 {
-    
+    [Collection("MvxTest")]
     public class MvxIocPropertyInjectionTest
     {
         public interface IA
