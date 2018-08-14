@@ -59,8 +59,6 @@ namespace MvvmCross.ViewModels
                 throw exception.MvxWrap("Problem creating viewModel of type {0}", viewModelType.Name);
             }
 
-            FinishViewModelConstruction(viewModel);
-
             RunViewModelLifecycle(viewModel, parameterValues, savedState);
 
             return viewModel;
@@ -81,8 +79,6 @@ namespace MvvmCross.ViewModels
                 throw exception.MvxWrap("Problem creating viewModel of type {0}", viewModelType.Name);
             }
 
-            FinishViewModelConstruction(viewModel);
-
             RunViewModelLifecycle(viewModel, param, parameterValues, savedState);
 
             return viewModel;
@@ -96,15 +92,6 @@ namespace MvvmCross.ViewModels
         protected virtual void CallReloadStateMethods(IMvxViewModel viewModel, IMvxBundle savedState)
         {
             viewModel.CallBundleMethods("ReloadState", savedState);
-        }
-
-        protected virtual void FinishViewModelConstruction(IMvxViewModel viewModel)
-        {
-            if (viewModel is IMvxNavigationViewModel navViewModel)
-                navViewModel.NavigationService = NavigationService;
-
-            if (viewModel is IMvxLogViewModel logViewModel)
-                logViewModel.LogProvider = LogProvider;
         }
 
         protected void RunViewModelLifecycle(IMvxViewModel viewModel, IMvxBundle parameterValues, IMvxBundle savedState)

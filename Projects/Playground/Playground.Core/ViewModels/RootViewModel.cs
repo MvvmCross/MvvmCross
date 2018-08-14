@@ -18,7 +18,7 @@ using Playground.Core.ViewModels.Samples;
 
 namespace Playground.Core.ViewModels
 {
-    public class RootViewModel : MvxViewModel
+    public class RootViewModel : MvxNavigationViewModel
     {
         private readonly IMvxViewModelLoader _mvxViewModelLoader;
 
@@ -26,7 +26,7 @@ namespace Playground.Core.ViewModels
 
         private string _welcomeText = "Default welcome";
 
-        public RootViewModel(IMvxViewModelLoader mvxViewModelLoader)
+        public RootViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService, IMvxViewModelLoader mvxViewModelLoader) : base(logProvider, navigationService)
         {
             _mvxViewModelLoader = mvxViewModelLoader;
             try
@@ -34,13 +34,13 @@ namespace Playground.Core.ViewModels
                 var messenger = Mvx.IoCProvider.Resolve<IMvxMessenger>();
                 var str = messenger.ToString();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
 
-
-            ShowChildCommand = new MvxAsyncCommand(async () => {
+            ShowChildCommand = new MvxAsyncCommand(async () =>
+            {
                 var result = await NavigationService.Navigate<ChildViewModel, SampleModel, SampleModel>(new SampleModel
                 {
                     Message = "Hey",
