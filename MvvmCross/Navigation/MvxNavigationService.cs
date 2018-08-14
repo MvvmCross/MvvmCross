@@ -259,7 +259,7 @@ namespace MvvmCross.Navigation
         {
             var hasNavigated = false;
 
-            var args = new MvxNavigateEventArgs(NavigationMode.Show, viewModel, cancellationToken);
+            var args = new MvxNavigateEventArgs(viewModel, NavigationMode.Show, cancellationToken);
             OnBeforeNavigate(this, args);
 
             if (args.Cancel)
@@ -290,7 +290,7 @@ namespace MvvmCross.Navigation
                 });
             }
 
-            var args = new MvxNavigateEventArgs(NavigationMode.Show, viewModel, cancellationToken);
+            var args = new MvxNavigateEventArgs(viewModel, NavigationMode.Show, cancellationToken);
             OnBeforeNavigate(this, args);
 
             viewModel.CloseCompletionSource = tcs;
@@ -333,7 +333,7 @@ namespace MvvmCross.Navigation
 
             if (args == null)
             {
-                args = new MvxNavigateEventArgs(NavigationMode.Show, viewModel, cancellationToken);
+                args = new MvxNavigateEventArgs(viewModel, NavigationMode.Show, cancellationToken);
             }
             OnBeforeNavigate(this, args);
 
@@ -470,7 +470,7 @@ namespace MvvmCross.Navigation
 
         public virtual async Task<TResult> Navigate<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var args = new MvxNavigateEventArgs(NavigationMode.Show, viewModel, cancellationToken);
+            var args = new MvxNavigateEventArgs(viewModel, NavigationMode.Show, cancellationToken);
             var request = new MvxViewModelInstanceRequest(viewModel) { PresentationValues = presentationBundle?.SafeGetData() };
             ViewModelLoader.ReloadViewModel(viewModel, param, request, null);
             return await Navigate<TParameter, TResult>(request, viewModel, param, presentationBundle, cancellationToken, args).ConfigureAwait(false);
@@ -495,7 +495,7 @@ namespace MvvmCross.Navigation
 
         public virtual async Task<bool> Close(IMvxViewModel viewModel, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var args = new MvxNavigateEventArgs(NavigationMode.Close, viewModel, cancellationToken);
+            var args = new MvxNavigateEventArgs(viewModel, NavigationMode.Close, cancellationToken);
             OnBeforeClose(this, args);
 
             if (args.Cancel)
