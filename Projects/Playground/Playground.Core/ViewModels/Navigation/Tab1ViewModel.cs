@@ -4,14 +4,15 @@
 
 using System.Threading.Tasks;
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class Tab1ViewModel : MvxViewModel<string>
+    public class Tab1ViewModel : MvxNavigationViewModel<string>
     {
-        public Tab1ViewModel()
+        public Tab1ViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
             OpenChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ChildViewModel>());
 
