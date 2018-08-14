@@ -22,7 +22,7 @@ namespace MvvmCross.Navigation.EventArguments
             Mode = mode;
         }
 
-        public MvxNavigateEventArgs(NavigationMode mode, IMvxViewModel viewModel, CancellationToken cancellationToken = default) : this(mode, cancellationToken)
+        public MvxNavigateEventArgs(IMvxViewModel viewModel, NavigationMode mode, CancellationToken cancellationToken = default) : this(mode, cancellationToken)
         {
             ViewModel = viewModel;
         }
