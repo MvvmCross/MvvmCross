@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using Moq;
 using MvvmCross.Exceptions;
+using MvvmCross.Navigation.EventArguments;
 using MvvmCross.Tests;
 using MvvmCross.UnitTest.Mocks.TestViewModels;
 using MvvmCross.ViewModels;
@@ -32,7 +33,8 @@ namespace MvvmCross.UnitTest.ViewModels
             var request = new MvxViewModelRequest<MvxNullViewModel>(null, null);
             var state = new MvxBundle();
             var loader = new MvxViewModelLoader(null);
-            var viewModel = loader.LoadViewModel(request, state);
+            var args = new MvxNavigateEventArgs(NavigationMode.Show);
+            var viewModel = loader.LoadViewModel(request, state, args);
 
             Assert.IsType<MvxNullViewModel>(viewModel);
         }
@@ -46,7 +48,7 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var mockLocator = new Mock<IMvxViewModelLocator>();
             mockLocator.Setup(
-                m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>()))
+                m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxNavigateEventArgs>()))
                        .Returns(() => outViewModel);
 
             var mockCollection = new Mock<IMvxViewModelLocatorCollection>();
@@ -57,7 +59,8 @@ namespace MvvmCross.UnitTest.ViewModels
             var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null);
             var state = new MvxBundle();
             var loader = new MvxViewModelLoader(mockCollection.Object);
-            var viewModel = loader.LoadViewModel(request, state);
+            var args = new MvxNavigateEventArgs(NavigationMode.Show);
+            var viewModel = loader.LoadViewModel(request, state, args);
 
             Assert.Equal(outViewModel, viewModel);
         }
@@ -69,7 +72,7 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var mockLocator = new Mock<IMvxViewModelLocator>();
             mockLocator.Setup(
-                m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>()))
+                m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxNavigateEventArgs>()))
                        .Throws<MvxException>();
 
             var mockCollection = new Mock<IMvxViewModelLocatorCollection>();
@@ -80,8 +83,10 @@ namespace MvvmCross.UnitTest.ViewModels
             var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null);
             var state = new MvxBundle();
             var loader = new MvxViewModelLoader(mockCollection.Object);
-            Assert.Throws<MvxException>(() => {
-                var viewModel = loader.LoadViewModel(request, state);
+            var args = new MvxNavigateEventArgs(NavigationMode.Show);
+            Assert.Throws<MvxException>(() =>
+            {
+                var viewModel = loader.LoadViewModel(request, state, args);
             });
         }
 
@@ -98,9 +103,10 @@ namespace MvvmCross.UnitTest.ViewModels
             var request = new MvxViewModelRequest<Test2ViewModel>(new MvxBundle(parameters), null);
             var state = new MvxBundle();
             var loader = new MvxViewModelLoader(mockCollection.Object);
-
-            Assert.Throws<MvxException>(() => {
-                var viewModel = loader.LoadViewModel(request, state);
+            var args = new MvxNavigateEventArgs(NavigationMode.Show);
+            Assert.Throws<MvxException>(() =>
+            {
+                var viewModel = loader.LoadViewModel(request, state, args);
             });
         }
     }
