@@ -27,6 +27,10 @@ namespace MvvmCross.Droid.Support.V7.Preference
             registry.RegisterCustomBindingFactory<TwoStatePreference>(
                 MvxPreferencePropertyBinding.TwoStatePreference_Checked,
                 preference => new MvxTwoStatePreferenceCheckedTargetBinding(preference));
+
+            registry.RegisterCustomBindingFactory<Android.Support.V7.Preferences.Preference>(
+                MvxPreferencePropertyBinding.Preference_Click,
+                preference => new MvxPreferenceClickTargetBinding(preference));
         }
     }
 }

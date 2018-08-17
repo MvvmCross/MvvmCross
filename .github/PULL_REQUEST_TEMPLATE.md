@@ -20,5 +20,5 @@
 
 - [ ] All projects build
 - [ ] Follows style guide lines ([code style guide](https://github.com/MvvmCross/MvvmCross#code-style-guidelines))
-- [ ] Relevant documentation was updated ([docs style guide](https://www.mvvmcross.com/documentation/contribute/mvvmcross-docs-style-guide))
+- [ ] Relevant documentation was updated ([docs style guide](https://www.mvvmcross.com/documentation/contributing/mvvmcross-docs-style-guide))
 - [ ] Rebased onto current develop

@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Base;
 using MvvmCross.Converters;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
@@ -176,8 +175,7 @@ namespace MvvmCross.Platforms.Ios.Binding
 
             registry.RegisterCustomBindingFactory<UISwitch>(
                 MvxIosPropertyBinding.UISwitch_On,
-                uiSwitch => new MvxUISwitchOnTargetBinding(uiSwitch)
-            );
+                uiSwitch => new MvxUISwitchOnTargetBinding(uiSwitch));
 
             registry.RegisterPropertyInfoBindingFactory(
                 typeof(MvxUISearchBarTextTargetBinding),

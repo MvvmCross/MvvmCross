@@ -3,6 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Commands;
+using MvvmCross.Logging;
+using MvvmCross.Navigation;
 
 namespace Playground.Core.ViewModels
 {
@@ -21,6 +23,10 @@ namespace Playground.Core.ViewModels
 
 
         IMvxCommand _incrementCommand;
+
+        public DictionaryBindingViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
+        {
+        }
 
         public IMvxCommand IncrementCommand =>
             _incrementCommand ?? (_incrementCommand = new MvxCommand(Increment));

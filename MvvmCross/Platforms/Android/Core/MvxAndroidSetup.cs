@@ -38,7 +38,7 @@ namespace MvvmCross.Platforms.Android.Core
             _applicationContext = applicationContext;
         }
 
-        public virtual Assembly ExecutableAssembly => ViewAssemblies.FirstOrDefault() ?? GetType().Assembly;
+        public virtual Assembly ExecutableAssembly => ViewAssemblies?.FirstOrDefault() ?? GetType().Assembly;
 
         public Context ApplicationContext => _applicationContext;
 

@@ -3,14 +3,15 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class NestedModalViewModel : MvxViewModel
+    public class NestedModalViewModel : MvxNavigationViewModel
     {
-        public NestedModalViewModel()
+        public NestedModalViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
             CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
 
