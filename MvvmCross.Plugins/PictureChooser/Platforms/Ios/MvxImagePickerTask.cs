@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -19,29 +19,31 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
 	public class MvxImagePickerTask
         : MvxIosTask, IMvxPictureChooserTask
     {
-        private readonly UIImagePickerController _picker;
+        private UIImagePickerController _picker;
         private bool _currentlyActive;
         private int _maxPixelDimension;
         private int _percentQuality;
         private Action<Stream, string> _pictureAvailable;
         private Action _assumeCancelled;
 
-        public MvxImagePickerTask()
+        private UIImagePickerController EnsurePickerController()
         {
-            _picker = new UIImagePickerController
-            {
-                //CameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Photo,
-                //CameraDevice = UIImagePickerControllerCameraDevice.Front
-            };
+            if (_picker != null) return _picker;
+
+            _picker = new UIImagePickerController();
             _picker.FinishedPickingMedia += Picker_FinishedPickingMedia;
             _picker.FinishedPickingImage += Picker_FinishedPickingImage;
             _picker.Canceled += Picker_Canceled;
+
+            return _picker;
         }
 
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable,
                                      Action assumeCancelled)
         {
-            _picker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+            var picker = EnsurePickerController();
+
+            picker.SourceType = UIImagePickerControllerSourceType.PhotoLibrary;
             ChoosePictureCommon(maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
         }
 
@@ -54,7 +56,9 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
         public void TakePicture(int maxPixelDimension, int percentQuality, Action<Stream> pictureAvailable,
                                 Action assumeCancelled)
         {
-            _picker.SourceType = UIImagePickerControllerSourceType.Camera;
+            var picker = EnsurePickerController();
+
+            picker.SourceType = UIImagePickerControllerSourceType.Camera;
             ChoosePictureCommon(maxPixelDimension, percentQuality, (stream, name) => pictureAvailable(stream), assumeCancelled);
         }
 
@@ -85,10 +89,11 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
             _pictureAvailable = pictureAvailable;
             _assumeCancelled = assumeCancelled;
 
-            UIApplication.SharedApplication.KeyWindow.GetTopModalHostViewController().PresentViewController(_picker, true, null);            
+            var picker = EnsurePickerController();
+            UIApplication.SharedApplication.KeyWindow.GetTopModalHostViewController().PresentViewController(picker, true, null);            
         }
 
-        private void HandleImagePick(UIImage image, string name)
+        private void HandleImagePick(UIImagePickerController picker, UIImage image, string name)
         {
             ClearCurrentlyActive();
             if (image != null)
@@ -113,28 +118,28 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
                 _assumeCancelled?.Invoke();
             }
 
-            _picker.DismissViewController(true, () => { });
+            picker.DismissViewController(true, () => { });
         }
 
         private void Picker_FinishedPickingMedia(object sender, UIImagePickerMediaPickedEventArgs e)
         {
             NSUrl referenceURL = e.Info[new NSString("UIImagePickerControllerReferenceURL")] as NSUrl;
             var image = e.EditedImage ?? e.OriginalImage;
-            HandleImagePick(image, referenceURL != null ? referenceURL.AbsoluteString : string.Empty);
+            HandleImagePick(sender as UIImagePickerController, image, referenceURL != null ? referenceURL.AbsoluteString : string.Empty);
         }
 
         private void Picker_FinishedPickingImage(object sender, UIImagePickerImagePickedEventArgs e)
         {
             NSUrl referenceURL = e.EditingInfo["UIImagePickerControllerReferenceURL"] as NSUrl;
             var image = e.Image;
-            HandleImagePick(image, referenceURL != null ? referenceURL.AbsoluteString : string.Empty);
+            HandleImagePick(sender as UIImagePickerController, image, referenceURL != null ? referenceURL.AbsoluteString : string.Empty);
         }
 
         private void Picker_Canceled(object sender, EventArgs e)
         {
             ClearCurrentlyActive();
             _assumeCancelled?.Invoke();
-            _picker.DismissViewController(true, () => { });        
+            (sender as UIImagePickerController).DismissViewController(true, () => { });        
         }
 
         private void SetCurrentlyActive()

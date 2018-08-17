@@ -1120,12 +1120,13 @@ MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatRadioGroup | SelectedIte
 
 **Android - `using MvvmCross.Droid.Support.V7.Preference`**
 
-Base Control | String | Extension method
+Base Control | String | Extension method | Mvx version introduced
 ---- | --------- | ---------
 Android.Support.V7.Preferences.Preference | Value | BindValue()
 Android.Support.V7.Preferences.ListPreference | Value | BindValue()
 Android.Support.V7.Preferences.EditTextPreference | Text | BindText()
 Android.Support.V7.Preferences.TwoStatePreference | Checked | BindChecked()
+Android.Support.V7.Preferences.Preference | PreferenceClick | BindClick() | 6.2.0
 
 **iOS**
 
@@ -1176,6 +1177,7 @@ UIKit.UIView | TextFocus | BindTextFocus()
 UIKit.UIView | Visibility | BindVisibility()
 UIKit.UIView | TwoFingerTap | BindTwoFingerTap()
 UIKit.UIView | LayerBorderWidth | BindLayerBorderWidth()
+UIKit.UIBarButtonItem | Clicked | BindClicked()
 
 **Mac**
 

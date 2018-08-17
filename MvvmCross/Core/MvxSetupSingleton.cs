@@ -3,10 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Core
 {
@@ -102,7 +104,11 @@ namespace MvvmCross.Core
                 else
                 {
                     if (IsInitialisedTaskCompletionSource.Task.IsCompleted)
+                    {
+                        if (IsInitialisedTaskCompletionSource.Task.IsFaulted)
+                            throw IsInitialisedTaskCompletionSource.Task.Exception;
                         return;
+                    }
 
                     MvxLog.Instance.Trace("EnsureInitialized has already been called so now waiting for completion");
                 }
@@ -175,11 +181,26 @@ namespace MvvmCross.Core
             _setup.InitializePrimary();
             Task.Run(async () =>
             {
-                _setup.InitializeSecondary();
+                ExceptionDispatchInfo setupException = null;
+                try
+                {
+                    _setup.InitializeSecondary();
+                }
+                catch(Exception ex)
+                {
+                    setupException = ExceptionDispatchInfo.Capture(ex);
+                }
                 IMvxSetupMonitor monitor;
                 lock (LockObject)
                 {
-                    IsInitialisedTaskCompletionSource.SetResult(true);
+                    if (setupException == null)
+                    {
+                        IsInitialisedTaskCompletionSource.SetResult(true);
+                    }
+                    else
+                    {
+                        IsInitialisedTaskCompletionSource.SetException(setupException.SourceException);
+                    }
                     monitor = _currentMonitor;
                 }
 

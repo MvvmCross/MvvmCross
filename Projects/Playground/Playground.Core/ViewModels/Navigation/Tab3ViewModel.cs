@@ -3,15 +3,16 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class Tab3ViewModel : MvxViewModel
+    public class Tab3ViewModel : MvxNavigationViewModel
     {
-        public Tab3ViewModel()
+        public Tab3ViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
             ShowRootViewModelCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<RootViewModel>());
 

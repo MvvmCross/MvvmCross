@@ -1,24 +1,26 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Threading;
+using System.Collections;
+using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.Runtime;
 using Android.Widget;
 using Java.Lang;
-using MvvmCross.Logging;
+using MvvmCross.Binding.Extensions;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using Object = Java.Lang.Object;
-using String = Java.Lang.String;
 
 namespace MvvmCross.Platforms.Android.Binding.Views
 {
     public class MvxFilteringAdapter
         : MvxAdapter, IFilterable
     {
+        private object _syncLock = new object();
+
         private class MyFilter : Filter
         {
             private readonly MvxFilteringAdapter _owner;
@@ -34,48 +36,64 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             {
                 var stringConstraint = constraint == null ? string.Empty : constraint.ToString();
 
-                var count = _owner.SetConstraintAndWaitForDataChange(stringConstraint);
+                var (count, items) = _owner.FilterValues(stringConstraint);
+
+                if (count == -1)
+                    return new FilterResults();
 
                 return new FilterResults
                 {
-                    Count = count
+                    Count = count,
+                    Values = new MvxReplaceableJavaContainer { Object = items }
                 };
             }
 
             protected override void PublishResults(ICharSequence constraint, FilterResults results)
             {
-                // force a refresh
-                _owner.NotifyDataSetInvalidated();
-            }
-
-            public override ICharSequence ConvertResultToStringFormatted(Object resultValue)
-            {
-                var ourContainer = resultValue as MvxJavaContainer;
-                if (ourContainer == null)
+                if (results != null && results.Count > 0)
                 {
-                    return base.ConvertResultToStringFormatted(resultValue);
+                    var items = results.Values as MvxReplaceableJavaContainer;
+                    if (items != null)
+                    {
+                        lock(_owner._syncLock)
+                        {
+                            _owner.FilteredItemsSource = items.Object as IEnumerable;
+                            _owner.NotifyDataSetChanged();
+                        }
+                    }
                 }
-
-                return new String(ourContainer.Object.ToString());
             }
 
             #endregion Overrides of Filter
         }
 
-        private int SetConstraintAndWaitForDataChange(string newConstraint)
+        public Func<object, string, bool> DefaultFilterPredicate = (item, filterString) => item.ToString().ToLowerInvariant().Contains(filterString.ToLowerInvariant());
+        public Func<object, string, bool> FilterPredicate { get; set; }
+
+        protected virtual (int, IEnumerable) FilterValues(string constraint)
         {
-            if (PartialText == newConstraint)
-            {
-                return Count;
-            }
-            
-            MvxLog.Instance.Trace("Wait starting for {0}", newConstraint);
-            _dataChangedEvent.Reset();
-            PartialText = newConstraint;
-            _dataChangedEvent.WaitOne();
-            MvxLog.Instance.Trace("Wait finished with {1} items for {0}", newConstraint, Count);
-            return Count;
+            if (PartialText == constraint)
+                return (-1, null);
+
+            PartialText = constraint;
+            var filteredItems = ItemsSource.Filter(item => FilterPredicate(item, constraint));
+            return (filteredItems.Count(), filteredItems);
         }
+
+        public override IEnumerable ItemsSource
+        {
+            get => base.ItemsSource;
+            set
+            {
+                lock(_syncLock)
+                {
+                    FilteredItemsSource = value;
+                }
+                base.ItemsSource = value;
+            }
+        }
+
+        private IEnumerable FilteredItemsSource { get; set; }
 
         private string _partialText;
 
@@ -83,10 +101,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         public string PartialText
         {
-            get
-            {
-                return _partialText;
-            }
+            get => _partialText;
             private set
             {
                 _partialText = value;
@@ -104,14 +119,6 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             });
         }
 
-        private readonly ManualResetEvent _dataChangedEvent = new ManualResetEvent(false);
-
-        public override void NotifyDataSetChanged()
-        {
-            _dataChangedEvent.Set();
-            base.NotifyDataSetChanged();
-        }
-
         public MvxFilteringAdapter(Context context) : this(context, MvxAndroidBindingContextHelpers.Current())
         {
         }
@@ -119,6 +126,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         public MvxFilteringAdapter(Context context, IMvxAndroidBindingContext bindingContext) : base(context, bindingContext)
         {
             ReturnSingleObjectFromGetItem = true;
+            FilterPredicate = DefaultFilterPredicate;
             Filter = new MyFilter(this);
         }
         
@@ -146,6 +154,35 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
 
             return base.GetItem(position);
+        }
+
+        public override object GetRawItem(int position)
+        {
+            lock(_syncLock)
+            {
+                var element = FilteredItemsSource?.ElementAt(position);
+                return element;
+            }
+        }
+
+        public override int GetPosition(object item)
+        {
+            lock (_syncLock)
+            {
+                var pos = FilteredItemsSource?.GetPosition(item) ?? 0;
+                return pos;
+            }
+        }
+
+        public override int Count
+        {
+            get
+            {
+                lock(_syncLock)
+                {
+                    return FilteredItemsSource?.Count() ?? 0;
+                }
+            }
         }
 
         #region Implementation of IFilterable

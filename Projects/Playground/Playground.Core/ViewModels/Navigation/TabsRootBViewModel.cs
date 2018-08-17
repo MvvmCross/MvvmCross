@@ -12,9 +12,9 @@ using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class TabsRootBViewModel : MvxViewModel
+    public class TabsRootBViewModel : MvxNavigationViewModel
     {
-        public TabsRootBViewModel()
+        public TabsRootBViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
             ShowInitialViewModelsCommand = new MvxAsyncCommand(ShowInitialViewModels);
         }

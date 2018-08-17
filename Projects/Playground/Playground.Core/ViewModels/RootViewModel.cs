@@ -3,19 +3,22 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Net;
 using System.Threading.Tasks;
 using MvvmCross;
 using MvvmCross.Commands;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin.Messenger;
+using MvvmCross.Plugin.Network.Rest;
 using MvvmCross.ViewModels;
 using Playground.Core.Models;
 using Playground.Core.ViewModels.Bindings;
+using Playground.Core.ViewModels.Samples;
 
 namespace Playground.Core.ViewModels
 {
-    public class RootViewModel : MvxViewModel
+    public class RootViewModel : MvxNavigationViewModel
     {
         private readonly IMvxViewModelLoader _mvxViewModelLoader;
 
@@ -23,7 +26,7 @@ namespace Playground.Core.ViewModels
 
         private string _welcomeText = "Default welcome";
 
-        public RootViewModel(IMvxViewModelLoader mvxViewModelLoader)
+        public RootViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService, IMvxViewModelLoader mvxViewModelLoader) : base(logProvider, navigationService)
         {
             _mvxViewModelLoader = mvxViewModelLoader;
             try
@@ -31,13 +34,13 @@ namespace Playground.Core.ViewModels
                 var messenger = Mvx.IoCProvider.Resolve<IMvxMessenger>();
                 var str = messenger.ToString();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
 
-
-            ShowChildCommand = new MvxAsyncCommand(async () => {
+            ShowChildCommand = new MvxAsyncCommand(async () =>
+            {
                 var result = await NavigationService.Navigate<ChildViewModel, SampleModel, SampleModel>(new SampleModel
                 {
                     Message = "Hey",
@@ -122,6 +125,9 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowContentViewCommand =>
             new MvxAsyncCommand(async () => await NavigationService.Navigate<ParentContentViewModel>());
 
+        public IMvxAsyncCommand ConvertersCommand =>
+            new MvxAsyncCommand(async ()=> await NavigationService.Navigate<ConvertersViewModel>());
+
         public IMvxAsyncCommand ShowSharedElementsCommand { get; }
 
         public string WelcomeText
@@ -151,6 +157,8 @@ namespace Playground.Core.ViewModels
                     Value = 2
                 },
                 null);
+
+            await MakeRequest();
         }
 
         public override void ViewAppearing()
@@ -191,6 +199,26 @@ namespace Playground.Core.ViewModels
             catch (Exception)
             {
             }
+        }
+
+        public async Task<MvxRestResponse> MakeRequest()
+        {
+            try
+            {
+                var request = new MvxRestRequest("http://github.com/asdsadadad");
+                if(Mvx.IoCProvider.TryResolve(out IMvxRestClient client))
+                {
+                    var task = client.MakeRequestAsync(request);
+
+                    var result = await task;
+
+                    return result;
+                }
+            }
+            catch (WebException webException)
+            {
+            }
+            return default(MvxRestResponse);
         }
     }
 }

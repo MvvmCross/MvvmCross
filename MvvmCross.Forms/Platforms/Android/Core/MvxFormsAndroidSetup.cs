@@ -59,7 +59,7 @@ namespace MvvmCross.Forms.Platforms.Android.Core
                 {
                     var activity = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>()?.Activity ?? ApplicationContext;
                     var asmb = activity.GetType().Assembly;
-                    Xamarin.Forms.Forms.Init(activity, null, ViewAssemblies.FirstOrDefault() ?? asmb);
+                    Xamarin.Forms.Forms.Init(activity, null, ExecutableAssembly ?? asmb);
                 }
                 if (_formsApplication == null)
                 {
