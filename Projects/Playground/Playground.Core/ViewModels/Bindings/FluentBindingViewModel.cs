@@ -23,11 +23,11 @@ namespace Playground.Core.ViewModels.Bindings
 
         public MvxInteraction<bool> ClearBindingInteraction { get; } = new MvxInteraction<bool>();
 
-        string _name;
+        string _textValue;
         public string TextValue
         {
-            get => _name;
-            set => SetProperty(ref _name, value);
+            get => _textValue;
+            set => SetProperty(ref _textValue, value);
         }
 
         void ClearBindings()
