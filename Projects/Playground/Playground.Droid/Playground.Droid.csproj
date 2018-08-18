@@ -58,6 +58,7 @@
     <Compile Include="Bindings\BinaryEditTargetBinding.cs" />
     <Compile Include="Controls\BinaryEdit.cs" />
     <Compile Include="Fragments\BaseSplitDetailView.cs" />
+    <Compile Include="Fragments\FluentBindingView.cs" />
     <Compile Include="Fragments\TabsRootBView.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -223,6 +224,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\mvvmcross_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\FluentBindingView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\..\XamarinBuild.targets" />
