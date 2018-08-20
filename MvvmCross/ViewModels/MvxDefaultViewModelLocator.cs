@@ -6,6 +6,7 @@ using System;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
+using MvvmCross.Navigation.EventArguments;
 
 namespace MvvmCross.ViewModels
 {
@@ -28,9 +29,9 @@ namespace MvvmCross.ViewModels
 
         public virtual IMvxViewModel Reload(IMvxViewModel viewModel,
                                             IMvxBundle parameterValues,
-                                            IMvxBundle savedState)
+                                            IMvxBundle savedState, IMvxNavigateEventArgs navigationArgs)
         {
-            RunViewModelLifecycle(viewModel, parameterValues, savedState);
+            RunViewModelLifecycle(viewModel, parameterValues, savedState, navigationArgs);
 
             return viewModel;
         }
@@ -38,28 +39,28 @@ namespace MvvmCross.ViewModels
         public virtual IMvxViewModel<TParameter> Reload<TParameter>(IMvxViewModel<TParameter> viewModel,
                                                                     TParameter param,
                                                                     IMvxBundle parameterValues,
-                                                                    IMvxBundle savedState)
+                                                                    IMvxBundle savedState, IMvxNavigateEventArgs navigationArgs)
         {
-            RunViewModelLifecycle(viewModel, param, parameterValues, savedState);
+            RunViewModelLifecycle(viewModel, param, parameterValues, savedState, navigationArgs);
 
             return viewModel;
         }
 
         public virtual IMvxViewModel Load(Type viewModelType,
                                           IMvxBundle parameterValues,
-                                          IMvxBundle savedState)
+                                          IMvxBundle savedState, IMvxNavigateEventArgs navigationArgs)
         {
             IMvxViewModel viewModel;
             try
             {
                 viewModel = (IMvxViewModel)Mvx.IoCProvider.IoCConstruct(viewModelType);
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw exception.MvxWrap("Problem creating viewModel of type {0}", viewModelType.Name);
             }
 
-            RunViewModelLifecycle(viewModel, parameterValues, savedState);
+            RunViewModelLifecycle(viewModel, parameterValues, savedState, navigationArgs);
 
             return viewModel;
         }
@@ -67,19 +68,19 @@ namespace MvvmCross.ViewModels
         public virtual IMvxViewModel<TParameter> Load<TParameter>(Type viewModelType,
                                                                   TParameter param,
                                                                   IMvxBundle parameterValues,
-                                                                  IMvxBundle savedState)
+                                                                  IMvxBundle savedState, IMvxNavigateEventArgs navigationArgs)
         {
             IMvxViewModel<TParameter> viewModel;
             try
             {
                 viewModel = (IMvxViewModel<TParameter>)Mvx.IoCProvider.IoCConstruct(viewModelType);
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw exception.MvxWrap("Problem creating viewModel of type {0}", viewModelType.Name);
             }
 
-            RunViewModelLifecycle(viewModel, param, parameterValues, savedState);
+            RunViewModelLifecycle(viewModel, param, parameterValues, savedState, navigationArgs);
 
             return viewModel;
         }
@@ -94,44 +95,63 @@ namespace MvvmCross.ViewModels
             viewModel.CallBundleMethods("ReloadState", savedState);
         }
 
-        protected void RunViewModelLifecycle(IMvxViewModel viewModel, IMvxBundle parameterValues, IMvxBundle savedState)
+        protected void RunViewModelLifecycle(IMvxViewModel viewModel, IMvxBundle parameterValues, IMvxBundle savedState, IMvxNavigateEventArgs navigationArgs)
         {
             try
             {
                 CallCustomInitMethods(viewModel, parameterValues);
-                if(savedState != null)
+                if (navigationArgs.Cancel)
+                    return;
+                if (savedState != null)
                 {
                     CallReloadStateMethods(viewModel, savedState);
+                    if (navigationArgs.Cancel)
+                        return;
                 }
                 viewModel.Start();
+                if (navigationArgs.Cancel)
+                    return;
 
                 viewModel.Prepare();
+                if (navigationArgs.Cancel)
+                    return;
 
                 viewModel.InitializeTask = MvxNotifyTask.Create(() => viewModel.Initialize());
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw exception.MvxWrap("Problem running viewModel lifecycle of type {0}", viewModel.GetType().Name);
             }
         }
 
-        protected void RunViewModelLifecycle<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle parameterValues, IMvxBundle savedState)
+        protected void RunViewModelLifecycle<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle parameterValues, IMvxBundle savedState, IMvxNavigateEventArgs navigationArgs)
         {
             try
             {
                 CallCustomInitMethods(viewModel, parameterValues);
-                if(savedState != null)
+                if (navigationArgs.Cancel)
+                    return;
+                if (savedState != null)
                 {
                     CallReloadStateMethods(viewModel, savedState);
+                    if (navigationArgs.Cancel)
+                        return;
                 }
                 viewModel.Start();
+                if (navigationArgs.Cancel)
+                    return;
 
                 viewModel.Prepare();
+                if (navigationArgs.Cancel)
+                    return;
+
                 viewModel.Prepare(param);
+                if (navigationArgs.Cancel)
+                    return;
 
                 viewModel.InitializeTask = MvxNotifyTask.Create(() => viewModel.Initialize());
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw exception.MvxWrap("Problem running viewModel lifecycle of type {0}", viewModel.GetType().Name);
             }
