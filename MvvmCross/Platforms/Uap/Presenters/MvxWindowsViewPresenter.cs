@@ -23,6 +23,9 @@ namespace MvvmCross.Platforms.Uap.Presenters
     {
         protected readonly IMvxWindowsFrame _rootFrame;
 
+        private MvxWindowsContentDialog mDialogView;
+
+
         public MvxWindowsViewPresenter(IMvxWindowsFrame rootFrame)
         {
             _rootFrame = rootFrame;
@@ -54,6 +57,14 @@ namespace MvvmCross.Platforms.Uap.Presenters
                {
                    ShowAction = (view, attribute, request) => ShowRegionView(view, (MvxRegionPresentationAttribute)attribute, request),
                    CloseAction = (viewModel, attribute) => CloseRegionView(viewModel, (MvxRegionPresentationAttribute)attribute)
+               });
+
+            AttributeTypesToActionsDictionary.Add(
+               typeof(MvxModalViewPresentationAttribute),
+               new MvxPresentationAttributeAction
+               {
+                   ShowAction = (view, attribute, request) => ShowModal(view, attribute, request),
+                   CloseAction = (viewModel, attribute) => CloseModal(viewModel, attribute)
                });
         }
 
@@ -239,6 +250,41 @@ namespace MvvmCross.Platforms.Uap.Presenters
                     exception.ToLongString());
                 return Task.FromResult(false);
             }
+        }
+
+        protected virtual async Task<bool> ShowModal(Type viewType, MvxBasePresentationAttribute attribute, MvxViewModelRequest request)
+        {
+            try
+            {
+                var modalAttribute = (MvxModalViewPresentationAttribute)attribute;
+                var instanceReques = (MvxViewModelInstanceRequest)request;
+
+                if (Activator.CreateInstance(viewType) is MvxWindowsContentDialog modalView)
+                {
+                    modalView.ViewModel = instanceReques.ViewModelInstance;
+
+                    mDialogView = modalView;
+
+                    await modalView.ShowAsync(modalAttribute.Placement);
+
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception exception)
+            {
+                MvxLog.Instance.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
+                    exception.ToLongString());
+                return false;
+            }
+        }
+
+        protected virtual Task<bool> CloseModal(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute)
+        {
+            mDialogView?.Hide();
+
+            return Task.FromResult(true);
         }
     }
 }
