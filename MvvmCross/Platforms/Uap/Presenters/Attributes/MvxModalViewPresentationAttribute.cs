@@ -3,16 +3,16 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Presenters.Attributes;
+using Windows.UI.Xaml.Controls;
 
 namespace MvvmCross.Platforms.Uap.Presenters.Attributes
 {
-    public sealed class MvxRegionPresentationAttribute : MvxBasePresentationAttribute
+    public sealed class MvxModalViewPresentationAttribute : MvxBasePresentationAttribute
     {
-        public MvxRegionPresentationAttribute(string regionName = null)
+        public MvxModalViewPresentationAttribute()
         {
-            Name = regionName;
         }
 
-        public string Name { get; private set; }
+        public ContentDialogPlacement Placement { get; set; }
     }
 }

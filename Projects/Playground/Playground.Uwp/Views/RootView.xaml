@@ -15,5 +15,9 @@
                 Command="{Binding ShowSplitCommand}"
                 Margin="5"
                 Padding="5" />
+        <Button Content="Show Modaliew"
+                Command="{Binding ShowModalCommand}"
+                Margin="5"
+                Padding="5" />
     </StackPanel>
 </views:MvxWindowsPage>

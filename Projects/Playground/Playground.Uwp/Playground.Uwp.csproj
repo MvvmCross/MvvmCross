@@ -98,6 +98,9 @@
     <Compile Include="Views\ChildView.xaml.cs">
       <DependentUpon>ChildView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ModalView.xaml.cs">
+      <DependentUpon>ModalView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RootView.xaml.cs">
       <DependentUpon>RootView.xaml</DependentUpon>
     </Compile>
@@ -141,6 +144,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ModalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RootView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -162,7 +169,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\JsonLocalization\MvvmCross.Plugin.JsonLocalization.csproj">
       <Project>{c783ef46-1822-4baf-8eca-e820fff26633}</Project>
