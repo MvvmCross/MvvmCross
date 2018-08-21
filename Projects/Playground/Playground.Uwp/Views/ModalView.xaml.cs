@@ -3,7 +3,6 @@ using MvvmCross.Platforms.Uap.Views;
 using MvvmCross.ViewModels;
 using Playground.Core.ViewModels;
 
-
 namespace Playground.Uwp.Views
 {
     [MvxViewFor(typeof(ModalViewModel))]
