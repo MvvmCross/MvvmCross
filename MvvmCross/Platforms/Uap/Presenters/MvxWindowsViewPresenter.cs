@@ -23,8 +23,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
     {
         protected readonly IMvxWindowsFrame _rootFrame;
 
-        private MvxWindowsContentDialog mDialogView;
-
+        private MvxWindowsContentDialog _windowsContentDialog;
 
         public MvxWindowsViewPresenter(IMvxWindowsFrame rootFrame)
         {
@@ -256,15 +255,14 @@ namespace MvvmCross.Platforms.Uap.Presenters
         {
             try
             {
-                var modalAttribute = (MvxModalViewPresentationAttribute)attribute;
-                var instanceReques = (MvxViewModelInstanceRequest)request;
-
                 if (Activator.CreateInstance(viewType) is MvxWindowsContentDialog modalView)
                 {
+                    var instanceReques = (MvxViewModelInstanceRequest)request;
                     modalView.ViewModel = instanceReques.ViewModelInstance;
 
-                    mDialogView = modalView;
+                    _windowsContentDialog = modalView;
 
+                    var modalAttribute = (MvxModalViewPresentationAttribute)attribute;
                     await modalView.ShowAsync(modalAttribute.Placement);
 
                     return true;
@@ -282,7 +280,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
 
         protected virtual Task<bool> CloseModal(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute)
         {
-            mDialogView?.Hide();
+            _windowsContentDialog?.Hide();
 
             return Task.FromResult(true);
         }
