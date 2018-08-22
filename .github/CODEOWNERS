@@ -44,4 +44,4 @@ MvvmCross.Plugins/*                        @mvvmcross/plugins @mvvmcross/maintai
 MvvmCross.Forms.Wpf/*                      @mvvmcross/wpf @mvvmcross/xamarin-forms @mvvmcross/maintainers
 MvvmCross.Wpf/*                            @mvvmcross/wpf @mvvmcross/maintainers
 
-UnitTests/*                                @mvvmcross/maintainers @mvvmcross/learning @mvvmcross/devops @mvvmcross/android @mvvmcross/ios @mvvmcross/mac @mvvmcross/tizen @mvvmcross/uap @mvvmcross/wpf @mvvmcross/plugins
+UnitTests/*                                @mvvmcross/maintainers @mvvmcross/docs @mvvmcross/devops @mvvmcross/android @mvvmcross/ios @mvvmcross/mac @mvvmcross/tizen @mvvmcross/uap @mvvmcross/wpf @mvvmcross/plugins
