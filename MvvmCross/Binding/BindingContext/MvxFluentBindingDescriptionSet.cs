@@ -60,5 +60,26 @@ namespace MvvmCross.Binding.BindingContext
                 applicable.Apply();
             base.Apply();
         }
+
+        public void ApplyWithClearBindingKey(object clearBindingKey)
+        {
+            foreach (var applicable in _applicables)
+            {
+                if (applicable is IMvxBaseFluentBindingDescription fluentBindingDescription)
+                {
+                    fluentBindingDescription.ClearBindingKey = clearBindingKey;
+                }
+                else
+                {
+                    MvxBindingLog.Warning("Fluent binding description must implement {0} in order to add {1}",
+                        nameof(IMvxBaseFluentBindingDescription),
+                        nameof(IMvxBaseFluentBindingDescription.ClearBindingKey));
+                }
+
+                applicable.Apply();
+            }
+
+            base.Apply();
+        }
     }
 }

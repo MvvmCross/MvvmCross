@@ -4,6 +4,7 @@
 
 using Android.App;
 using Android.OS;
+using Android.Views;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
@@ -11,7 +12,8 @@ using Playground.Core.ViewModels;
 namespace Playground.Droid.Activities
 {
     [MvxActivityPresentation]
-    [Activity(Theme = "@style/AppTheme")]
+    [Activity(Theme = "@style/AppTheme",
+        WindowSoftInputMode = SoftInput.AdjustPan)]
     public class RootView : MvxAppCompatActivity<RootViewModel>
     {
         protected override void OnCreate(Bundle bundle)

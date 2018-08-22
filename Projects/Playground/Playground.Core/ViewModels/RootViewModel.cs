@@ -82,6 +82,9 @@ namespace Playground.Core.ViewModels
             ShowCustomBindingCommand =
                 new MvxAsyncCommand(async () => await NavigationService.Navigate<CustomBindingViewModel>());
 
+            ShowFluentBindingCommand =
+                new MvxAsyncCommand(async () => await NavigationService.Navigate<FluentBindingViewModel>());
+
             _counter = 3;
         }
 
@@ -126,9 +129,11 @@ namespace Playground.Core.ViewModels
             new MvxAsyncCommand(async () => await NavigationService.Navigate<ParentContentViewModel>());
 
         public IMvxAsyncCommand ConvertersCommand =>
-            new MvxAsyncCommand(async ()=> await NavigationService.Navigate<ConvertersViewModel>());
+            new MvxAsyncCommand(async () => await NavigationService.Navigate<ConvertersViewModel>());
 
         public IMvxAsyncCommand ShowSharedElementsCommand { get; }
+
+        public IMvxAsyncCommand ShowFluentBindingCommand { get; }
 
         public string WelcomeText
         {
@@ -206,7 +211,7 @@ namespace Playground.Core.ViewModels
             try
             {
                 var request = new MvxRestRequest("http://github.com/asdsadadad");
-                if(Mvx.IoCProvider.TryResolve(out IMvxRestClient client))
+                if (Mvx.IoCProvider.TryResolve(out IMvxRestClient client))
                 {
                     var task = client.MakeRequestAsync(request);
 
