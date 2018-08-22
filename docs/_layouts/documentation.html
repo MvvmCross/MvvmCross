@@ -1,49 +1,37 @@
 ---
-layout: documentation_layout
+layout: default
 ---
-
-<div class="documentation-menu">
-     {% include documentation-menu.html %}
+<div class="doc-container">
+    <div class="doc-menu">
+        {% assign navurl = page.url | remove: 'index.html' %}
+        {% assign docs_by_category = site.documentation | group_by: "category" %}
+        {% for ident in site.category_order %}
+        {% assign category = docs_by_category | where: "name", ident | first %}
+        <p class="category">{{ category.name }}</p>
+        <ul>
+        {% assign items = category.items | sort: "order"  %}
+        {% for item in items %}
+            <li>
+            {% if item.url == navurl %}
+                <a href="{{ item.url | relative_url }}" class="active doc-link" role="link">  {{ item.title }} </a>
+            {% else %}
+                <a href="{{ item.url | relative_url }}" class="doc-link" role="link">  {{ item.title }} </a>
+            {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+        {% endfor %}
+    </div>
+    <article class="documentation">
+        <header class="doc-header">
+            <h1 class="doc-title">{{ page.title | escape }}</h1>
+            <a class="edit-button" href="{{ site.github.repository_url }}/tree/master/docs/{{ page.relative_path }}">Edit</a>
+        </header>
+        <section>
+            {{ content }}
+        </section>
+    </article>
 </div>
-
-<article class="documentation">
-
-  <header class="documentation-header">
-    <h1 class="documentation-title">{{ page.title | escape }}</h1>
-    <a class="documentation-edit button" href="{{site.github.repository_url}}/tree/master/docs/{{page.relative_path}}">Edit</a>
-  </header>
-
-  <div class="documentation-content">
-    {{content}}
-  </div>
-
-</article>
-
-<script src="{{ "/js/jquery-3.2.1.min.js" | relative_url }}"></script>
-<script>
-   $(document).ready(function (){
-
-     var scrollPosition = getParameterByName('scroll');
-     if(scrollPosition)
-      $(".documentation-menu").scrollTop(scrollPosition);
-
-     $('.menu-item').click(function(){
-        var scrollTop = $(".documentation-menu").scrollTop();
-        if(scrollTop > 0)
-          $(this).attr("href",this.href + "?scroll=" + $(".documentation-menu").scrollTop());
-     });
-
-     function getParameterByName(name, url) {
-        if (!url) {
-          url = window.location.href;
-        }
-        name = name.replace(/[\[\]]/g, "\\$&");
-        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }
-
-   });
-</script>
+<style>footer { display: none; }</style>
+{% include deeplink.html %}
+{% include doc-scroll.html %}

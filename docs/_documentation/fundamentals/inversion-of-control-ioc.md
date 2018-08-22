@@ -2,7 +2,7 @@
 layout: documentation
 title: Inversion of Control
 category: Fundamentals
-order: 8
+order: 5
 ---
 Two key ideas that are used in MvvmCross are:
 
@@ -82,6 +82,33 @@ One final option, is that you can register the `IFoo` and `Foo` pair as:
 
 In this case, every call to `Mvx.Resolve<IFoo>()` will create a new `Foo` - every call will return a different `Foo`.
 
+### Open-Generic registration
+
+There are situations where you have an interface with a generic type parameter `IFoo<T>` and you have to register it in the IoC with different T types. One way to do this is to register it as many times as T types you have:
+
+    Mvx.RegisterType<IFoo<Bar1>, Foo<Bar1>>();
+    Mvx.RegisterType<IFoo<Bar2>, Foo<Bar2>>();
+    Mvx.RegisterType<IFoo<Bar3>, Foo<Bar3>>();
+    Mvx.RegisterType<IFoo<Bar4>, Foo<Bar4>>();
+
+but this creates boilerplate code and in case you need another instance with a different T type, you have to register it as well. To solve this you can register this interface as *open-generic*, i.e. you don't specify the generic type parameter in neither the interface nor the implementation:
+
+    Mvx.RegisterType(typeof(IFoo<>), typeof(Foo<>));
+
+Then at the moment of resolving the interface the implementation takes the same generic type parameter that the interface, e.g. if you resolve `var foo = Mvx.Resolve<IFoo<Bar1>>();` then `foo` will be of type `Foo<Bar1>`.
+As you can see this give us more flexibility and scalability because we can effortlessly change the generic type parameters at the moment of resolving the interface and we don't need to add anything to register the interface with a new generic type parameter.
+
+### Child Containers
+
+Sometimes you'd like to add some instances or types to an IoC Container for a specific purpose and not to the app-wide container. You can use Child Containers for that:
+
+    var container = Mvx.Resolve<IMvxIoCProvider>();
+    var childContainer = container.CreateChildContainer():
+    childContainer.RegisterType<IFoo, Foo>(); // Is only registered in Child Container scope
+    childContainer.Create<IFoo>();
+
+You can create as many and as deeply nested Child Containers as you want - each container inherits all dependencies registered on it's parent container.
+
 ### Last-registered wins
 
 If you create several implementations of an interface and register them all:
@@ -158,6 +185,58 @@ Alternatively, if you prefer not to use this Reflection based registration, then
 
 The choice is **your's**
 
+### Supply options to IoCConstruct
+
+You can supply optional parameters to construction.
+
+```c#
+var title = "The title";
+var subtitle = "The subtitle";
+var description = "The description";
+
+// Option 1
+var arguments = new Dictionary<string, object>
+{
+    ["title"] = title,
+    ["subtitle"] = subtitle,
+    ["description"] = description
+};
+
+// Option 2
+var arguments = new { title, subtitle, description };
+
+var instance = Mvx.IoCConstruct<SomeClass>(arguments);
+```
+
+The class needs to look something like:
+
+```c#
+public class SomeClass
+{
+    public string Title { get; }
+    public string Subtitle { get; }
+    public string Description { get; }
+    public int Amount { get; }
+    public bool Enabled { get; }
+
+    public SomeClass(string title, string subtitle, string description)
+    {
+        Title = title;
+        Subtitle = subtitle;
+        Description = description;
+    }
+
+    public SomeClass(string title, int amount, bool enabled)
+    {
+        Title = title;
+        Amount = amount;
+        Enabled = enabled;
+    }
+}
+```
+
+In this case the first constructor will be called.
+
 ## Constructor Injection
 
 As well as `Mvx.Resolve<T>`, the `Mvx` static class provides a reflection based mechanism to automatically resolve parameters during object construction.
@@ -174,7 +253,7 @@ For example, if we add a class like:
 
 Then you can create this object using:
 
-        Mvx.IocConstruct<Bar>();
+        Mvx.IoCConstruct<Bar>();
 
 What happens during this call is:
 
@@ -302,7 +381,7 @@ For example, existing plugins include:
 - a ResourceLoader plugin which provides a way to access resource files packaged within the .apk, .app or .ipa for the application
 - a SQLite plugin which provides access to `SQLite-net` on all platforms.
 
-####Plugin Use
+#### Plugin Use
 
 If you want to see how these plugins can be used in your applications, then:
 
@@ -311,9 +390,8 @@ If you want to see how these plugins can be used in your applications, then:
   - N=9 - Messenger http://slodge.blogspot.co.uk/2013/05/n9-getting-message-n1-days-of-mvvmcross.html
   - N=10 - SQLite http://slodge.blogspot.co.uk/2013/05/n10-sqlite-persistent-data-storage-n1.html
   - N=12 -> N=17 - the Collect-A-Bull app http://slodge.blogspot.co.uk/2013/05/n12-collect-bull-full-app-part-1-n1.html
-- see the [Plugins](https://github.com/slodge/MvvmCross/wiki/MvvmCross-plugins) article
 
-####Plugin Authoring
+#### Plugin Authoring
 
 Writing plugins is easy to do, but can feel a bit daunting at first.
 
@@ -336,7 +414,7 @@ I'm not going to go into any more detail on writing plugins here.
 
 If you'd like to see more about writing your own plugin, then:
 
-- see the [Plugins](https://github.com/slodge/MvvmCross/wiki/MvvmCross-plugins) article
+- see the [Getting started](https://www.mvvmcross.com/documentation/plugins/getting-started?scroll=1320) article
 - there's a presentation on this at https://speakerdeck.com/cirrious/plugins-in-mvvmcross
 - there's a sample which creates a `Vibrate` plugin at https://github.com/slodge/MvvmCross-Tutorials/tree/master/GoodVibrations
 
@@ -368,7 +446,7 @@ If you want to replace the MvvmCross implementation, then you'll need to:
 - write some kind of `Adapter` layer to provide their service location code as an `IMvxIoCProvider`
 - override `CreateIocProvider` in your `Setup` class to provide this alternative `IMvxIoCProvider` implementation.
 
-Alternatively, you may be able to organise a hybrid situation - where two IoC/ServiceLocation systems exist side-by-side.
+Alternatively, you may be able to organize a hybrid situation - where two IoC/ServiceLocation systems exist side-by-side.
 
 ### What if... I want to use Property Injection as an IoC mechanism?
 
@@ -465,7 +543,7 @@ For example:
 
 At runtime, by default MvvmCross's Ioc will throw an `MvxIoCResolveException` from `Resolve` or return `false` from `TryResolve` if it detects recursion has occurred.
 
-Generally in this situation you need to refactor your code to remove the circular dependency - for example see one suggestion in [http://stackoverflow.com/questions/1453128/is-there-a-good-proper-way-of-solving-the-dependency-injection-loop-problem-in-t/1453242#1453242](Stack Overflow) - other stackoverflow Q&As may also help.
+Generally in this situation you need to refactor your code to remove the circular dependency - for example see one suggestion in [Stack Overflow](http://stackoverflow.com/questions/1453128/is-there-a-good-proper-way-of-solving-the-dependency-injection-loop-problem-in-t/1453242#1453242) - other stackoverflow Q&As may also help.
 
 However, if you feel the MvvmCross detection is wrong - if your app has some behaviour which means it can survive the recursive dependency - then you can turn this detection off if you want to using the options - e.g:
 
@@ -474,16 +552,9 @@ However, if you feel the MvvmCross detection is wrong - if your app has some beh
                 TryToDetectDynamicCircularReferences = false
                 TryToDetectSingletonCircularReferences = false
             };
-            var instance = MvxSimpleIoCContainer.Initialize(options);
+            var instance = MvxIoCProvider.Initialize(options);
 
 **Note:** in the event of recursion causing a stack overflow, some mobile runtimes will **not** throw a `StackOverlowException` - but will instead simply exit without warning - this situation can be hard to debug.
-
-### What if... I want advanced IoC features like child containers
-
-The IoC container in MvvmCross is designed to be quite lightweight and is targeted at a level of functionality required in the mobile applications I have built.
-
-If you need more advanced/complex functionality, then you may need to use a different provider or a different approach - some suggestions for this are discussed in: http://stackoverflow.com/questions/16514691/child-containers-in-mvvmcross-ioc
-
 
 ### What if... I want to mix Dynamic and Singleton types
 

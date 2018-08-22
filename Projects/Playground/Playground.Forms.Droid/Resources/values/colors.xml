@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	
+    <!--Syles-->
+	<color name="colorPrimary">#1E70B8</color>
+	<color name="colorPrimaryDark">#165992</color>
+	<color name="colorAccent">#0A2A46</color>
+
+	<!-- White to Black -->
+    <color name="white">#FFFFFF</color>
+    <color name="light_gray">#EFF2F5</color>
+    <color name="med_gray">#C7D2DC</color>
+    <color name="gray">#5C7082</color>
+    <color name="dark_gray">#FF2B343D</color>
+    <color name="black">#0D131A</color>
+
+	<!--Specific Color-->
+	
+	
+	<!--Text Color-->
+	
+</resources>

@@ -2,6 +2,7 @@
 layout: documentation
 title: Upgrade from 3 to MvvmCross 4
 category: Upgrading
+Order: 1
 ---
 ## NuGet package changes
 

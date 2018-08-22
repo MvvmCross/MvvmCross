@@ -2,8 +2,9 @@
 layout: documentation
 title: Value converters
 category: Fundamentals
-order: 4
+order: 8
 ---
+
 Value Converters in MvvmCross are used to provide mappings to/from logical values in the view models and presented values in the user interface.
 
 A Value Converter is any class which implements the `IMvxValueConverter` interface
@@ -25,13 +26,13 @@ For value converters which are used with non-editable UI fields (e.g. labels, im
 
 Within MvvmCross, we try to encourage the use of cross-platform value converters wherever possible - but it is also possible and straight-forward to implement platform specific value converters.
      
-Note: this article assumes the reader has an understanding already of MvvmCross data-binding syntax - see [wiki/Databinding](https://github.com/slodge/MvvmCross/wiki/Databinding)
+Note: this article assumes the reader has an understanding already of MvvmCross data-binding syntax - see [wiki/Databinding](https://www.mvvmcross.com/documentation/fundamentals/data-binding)
 
 ### ValueConverter Samples
 
 For several good ValueConverter samples, including Strings, Dates, Colors, Visibility and Two-Way conversion, please see:
 
-- Value Conversion sample - https://github.com/slodge/MvvmCross-Tutorials/tree/master/ValueConversion
+- [Value Conversion sample](https://github.com/MvvmCross/MvvmCross-Samples/tree/master/ValueConversion)
 - N+1 Video - http://slodge.blogspot.ca/2013/04/n4-valueconverters-n1-days-of-mvvmcross.html
 
 ### A first ValueConverter
@@ -128,12 +129,12 @@ The `object parameter` parameter is a general purpose field which you can use in
   
   Both of these would result in the AbbreviateIfLongerThan ValueConverter being called with parameter of `long` 12
 
-Note that the only types that are used when parameters are parsed from text binding descriptions are: `long`, `double`, `bool` or `string` (for more on the binding parsing engine, see [wiki/Databinding](https://github.com/slodge/MvvmCross/wiki/Databinding))
+Note that the only types that are used when parameters are parsed from text binding descriptions are: `long`, `double`, `bool` or `string` (for more on the binding parsing engine, see [wiki/Databinding](https://www.mvvmcross.com/documentation/fundamentals/data-binding))
     
 
 ### Referencing Value Converters in iOS and Droid
 
-Data-Binding syntax including how to specify ValueConverters using Swiss, Fluent and Tibet binding is discussed in [wiki/Databinding](https://github.com/slodge/MvvmCross/wiki/Databinding). This covers all syntax including:
+Data-Binding syntax including how to specify ValueConverters using Swiss, Fluent and Tibet binding is discussed in [wiki/Databinding](https://www.mvvmcross.com/documentation/fundamentals/data-binding). This covers all syntax including:
 
 - Swiss
    
@@ -156,7 +157,7 @@ To find the specified ValueConverter, MvvmCross maintains a registry of ValueCon
 
 Typically, this registry is created using a one-pass Reflection sweep on your application's Core and UI (platform-specific) projects. This sweep:
 
-- locates all instanciable classes which implement `IMvxValueConverter` within your assemblies
+- locates all instantiable classes which implement `IMvxValueConverter` within your assemblies
 - creates an instance of each one
 - registers the instance with the name stripped of any `Mvx` prefix and any `ValueConverter` or `Converter` postfix.
 
@@ -197,12 +198,12 @@ protected override FillValueConverters (IMvxValueConverterRegistry registry)
 }
 ```
 
-Finally, ValueConverters can also be registered using a technique called "ValueConverter holders". This technique uses Reflection against indidivual Types which then hold ValueConverters in public instance or static fields. This technique was common in earlier MvvmCross versions, but is not recommended within v3 - it's kept only for backwards compatability.
+Finally, ValueConverters can also be registered using a technique called "ValueConverter holders". This technique uses Reflection against individual Types which then hold ValueConverters in public instance or static fields. This technique was common in earlier MvvmCross versions, but is not recommended within v3 - it's kept only for backwards compatibility.
 
 
 ### Preventing the ValueConverter Reflection Sweeps in iOS and Droid
 
-The ValueConverter sweeps do use a small amount of Reflection and so can add a very small amount of lag to application start time. If you'd prefer to minimise this small startup lag in your application, then you can, of course, disable the sweeps and can use direct registration instead.
+The ValueConverter sweeps do use a small amount of Reflection and so can add a very small amount of lag to application start time. If you'd prefer to minimize this small startup lag in your application, then you can, of course, disable the sweeps and can use direct registration instead.
 
 To do this, override the `FillValueConverters` method in your `Setup` class, do not call the base class method and instead use just register your own value converters - e.g.
 
@@ -216,11 +217,11 @@ protected override FillValueConverters (IMvxValueConverterRegistry registry)
 }
 ```
 
-Note: unless your application is very large, this is most likely only a micro-optimisation and will most likely not significantly change your app's startup time.
+Note: unless your application is very large, this is most likely only a micro-optimization and will most likely not significantly change your app's startup time.
  
-### Using Value Converters in Windows (conventional Xaml binding)
+### Using Value Converters in Windows and Xamarin.Forms (conventional Xaml binding) (conventional Xaml binding)
 
-The `IMvxValueConverter` interface is closely based on the `IValueConverter` interface used in Windows WPF and Silverlight Xaml binding. This interface is also similar (but slightly different) to the `IValueConverter` interface used in Windows WinRT Xaml binding. 
+The `IMvxValueConverter` interface is closely based on the `IValueConverter` interface used in Windows WPF and Silverlight Xaml binding. This interface is also similar (but slightly different) to the `IValueConverter` interface used in Windows WinRT Xaml binding and `IValueConverter` interface used in Xamarin.Forms Xaml binding. 
 
 Because these Xaml `IValueConverter` interfaces are not 100% identical to each other, nor to the `IMvxValueConverter` version, shared Mvx ValueConverters cannot be used directly in Windows Xaml binding - they must instead be wrapped for use in Xaml.
 
@@ -262,7 +263,7 @@ public class TheNativeTruthValueConverter
 
 ### Using Value Converters in Windows (Tibet binding)
 
-In addition to 'traditional' Xaml bindings, MvvmCross also allows 'Tibet' binding within Windows - for more on this see [wiki/Databinding](https://github.com/slodge/MvvmCross/wiki/Databinding).
+In addition to 'traditional' Xaml bindings, MvvmCross also allows 'Tibet' binding within Windows.
 
 When Tibet binding is used, then Value Converters can be accessed by name - exactly as in Droid and iOS binding - without the above native Xaml wrapping.
 
@@ -273,7 +274,7 @@ To include all value converters within an Assembly at the Xaml level, then use a
 This may sound complicated... but actually it is quite simple. 
 
 - Suppose you have an Assembly `MyTools` containing `FooValueConverter`, `BarValueConverter`, etc
-- Within this Assembly add a simple, instanciable public Class which we will use only for the import - e.g. `public class MarkerClass {}`
+- Within this Assembly add a simple, instantiable public Class which we will use only for the import - e.g. `public class MarkerClass {}`
 - Then within the xaml, you can include a static resource import block like:
 
 ```xml
@@ -345,7 +346,7 @@ public class SayPleaseVisibilityValueConverter : MvxBaseVisibilityValueConverter
 {
     protected override MvxVisibility Convert(string value, object parameter, CultureInfo culture)
     {
-        return (value == "Please) ? MvxVisibility.Visible : MvxVisibility.Collapsed;
+        return (value == "Please") ? MvxVisibility.Visible : MvxVisibility.Collapsed;
     }
 }
 ```
@@ -406,7 +407,7 @@ Note: to use the Color converters at design-time on the Windows platforms, you c
 
 ### The Mvx Language ValueConverter
 
-The MvvmCross internationalisation (i18n) techniques are based on the JsonLocalisation plugin with `TextSource` properties in each ViewModel and with `mvxLang` binding attributes.
+The MvvmCross internationalization (i18n) techniques are based on the JsonLocalisation plugin with `TextSource` properties in each ViewModel and with `mvxLang` binding attributes.
 
 Under the covers, these `mvxLang` bindings are actually just normal bindings which make use of the `MvxLanguageValueConverter`. This is automatically registered using the name `Language`.
 This consumes the `TextSource` as it's `value` and the `Key` as its `parameter`.
@@ -421,7 +422,7 @@ Is actually equivalent to a normal binding:
  
 ### Using internationalised text in your ValueConverters
 
-Earlier we considered a `MyTimeAgoValueConverer` which returned strings like "just now" from it's `Convert` implementation,
+Earlier we considered a `MyTimeAgoValueConverter` which returned strings like "just now" from it's `Convert` implementation,
 
 If using the MvvmCross JsonLocalisation system, then that same value converter could be rewritten to make use of a `IMvxTextProvider` reference.
 
@@ -518,22 +519,22 @@ In summary - **ValueConverters are good** - use them.
 
 ### ValueConverters and FallbackValues
 
-When specifying a binding, you can also provide a `FallbackValue` - see [wiki/Databinding](https://github.com/slodge/MvvmCross/wiki/Databinding). This `FallbackValue` is used within the View:
+When specifying a binding, you can also provide a `FallbackValue` - see [wiki/Databinding](https://www.mvvmcross.com/documentation/fundamentals/data-binding). This `FallbackValue` is used within the View:
 
 - whenever the binding source path is missing - e.g. if you specify a Path of `Child.Property` and `Child` is currently `null`
 - whenever the value converter throws an exception during the `Convert` conversion
   
 Note that in 'normal binding' `FallbackValue`s are not themselves passed through the ValueConverter. So, this conversion is **not** correct:
 
-     local:MvxBind="Text Visibility(IsEnabled), FalllbackValue=false"
+     local:MvxBind="Text Visibility(IsEnabled), FallbackValue=false"
 
 If you do want to pass a `FallbackValue` through the Value Converter then you can do this using recursive binding syntax within the `Tibet` binding engine - e.g.
 
-     local:MvxBind="Text Visibility((IsEnabled, FalllbackValue=false))"
+     local:MvxBind="Text Visibility((IsEnabled, FallbackValue=false))"
 
 ### Tibet: ValueCombiners
 
-Tibet binding (see [wiki/Databinding](https://github.com/slodge/MvvmCross/wiki/Databinding)) introduced a new interface into binding - `IMvxValueCombiner` - this interface allows multiple binding sources to be combined together within a single target expression. This interface is used in, for example, the `MvxFormatValueCombiner` in order to enable binding expressions like:
+Tibet binding introduced a new interface into binding - `IMvxValueCombiner` - this interface allows multiple binding sources to be combined together within a single target expression. This interface is used in, for example, the `MvxFormatValueCombiner` in order to enable binding expressions like:
 
          local:MvxBind="Text Format('{0} {1} {2}', Greeting(Gender), FirstName, LastName)"
          
@@ -605,7 +606,7 @@ The 'standard' ValueCombiners available in MvvmCross are:
 
 - `If` - used for if-else conditional display with syntax 
 
-        If(booleab-test, value-if-true, value-if-false)
+        If(boolean-test, value-if-true, value-if-false)
 
    For example:
 
@@ -633,7 +634,7 @@ The 'standard' ValueCombiners available in MvvmCross are:
         And(HasProAccount, HasCreditCardDetails)
         HasProAccount && HasCreditCardDetails
 
-- Add - used for contatenation or addition - works with `string`, `int`, `double` Types (other input types may be accepted, but will be converted to one of these types). Also available as the `+` operator
+- Add - used for concatenation or addition - works with `string`, `int`, `double` Types (other input types may be accepted, but will be converted to one of these types). Also available as the `+` operator
 
         Add(item-one, item-two, ...)
      
@@ -646,7 +647,7 @@ The 'standard' ValueCombiners available in MvvmCross are:
 
          FirstName + ' ' + LastName
 
-- To be coninued... Subtract, Multiply, Divide, Modulus, etc
+- To be continued... Subtract, Multiply, Divide, Modulus, etc
 
 - To be continued... GreaterThan, EqualTo, LessThan, GreaterThanOrEqualTo, LessThanOrEqualTo etc
 

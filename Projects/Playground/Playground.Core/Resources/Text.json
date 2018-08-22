@@ -1,0 +1,5 @@
+﻿{
+    "ThisIsLocalized": "Localized text",
+    "ThisIsLocalizedToo": "I'm using MvxLang markup!",
+    "ThisIsLocalizedThroughMvxBind": "MvxBind markup with converter!"
+}
