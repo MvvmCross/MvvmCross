@@ -1,0 +1,47 @@
+# A CODEOWNERS file uses a pattern that follows the same rules used in gitignore files.
+# The pattern is followed by one or more GitHub usernames or team names using the
+# standard @username or @org/team-name format. You can also refer to a user by an
+# email address that has been added to their GitHub account, for example user@example.com
+
+*                                          @mvvmcross/core
+
+.github/*                                  @mvvmcross/maintainers
+version.json                               @mvvmcross/maintainers
+ContentFiles                               @mvvmcross/maintainers
+
+build.*                                    @mvvmcross/devops
+signclient.json                            @mvvmcross/devops
+*.ps1                                      @mvvmcross/devops
+NuGet.*                                    @mvvmcross/devops
+appveyor.yml                               @mvvmcross/devops
+tools/*                                    @mvvmcross/devops
+MvvmCross.Analyzers/*                      @mvvmcross/devops
+
+Projects/*                                 @mvvmcross/docs
+snippets/*                                 @mvvmcross/docs
+*.md                                       @mvvmcross/docs
+docs/*                                     @mvvmcross/docs
+
+MvvmCross/*                                @mvvmcross/maintainers
+MvvmCross/Platforms/Android/*              @mvvmcross/android
+MvvmCross/Platforms/Ios/*                  @mvvmcross/ios
+MvvmCross/Platforms/Mac/*                  @mvvmcross/mac
+MvvmCross/Platforms/Tvos/*                 @mvvmcross/ios @mvvmcross/mac
+MvvmCross/Platforms/Tizen/*                @mvvmcross/tizen
+MvvmCross/Platforms/Uap/*                  @mvvmcross/uap
+MvvmCross/Platforms/Wpf/*                  @mvvmcross/wpf
+
+MvvmCross.Forms/*                          @mvvmcross/xamarin-forms @mvvmcross/maintainers
+MvvmCross.Forms/Platforms/Android/*        @mvvmcross/android
+MvvmCross.Forms/Platforms/Ios/*            @mvvmcross/ios
+MvvmCross.Forms/Platforms/Mac/*            @mvvmcross/mac
+MvvmCross.Forms/Platforms/Tizen/*          @mvvmcross/tizen
+MvvmCross.Forms/Platforms/Uap/*            @mvvmcross/uap
+
+MvvmCross.Android.Support/*                @mvvmcross/android @mvvmcross/maintainers
+MvvmCross.Plugins/*                        @mvvmcross/plugins @mvvmcross/maintainers
+
+MvvmCross.Forms.Wpf/*                      @mvvmcross/wpf @mvvmcross/xamarin-forms @mvvmcross/maintainers
+MvvmCross.Wpf/*                            @mvvmcross/wpf @mvvmcross/maintainers
+
+UnitTests/*                                @mvvmcross/maintainers @mvvmcross/docs @mvvmcross/devops @mvvmcross/android @mvvmcross/ios @mvvmcross/mac @mvvmcross/tizen @mvvmcross/uap @mvvmcross/wpf @mvvmcross/plugins
