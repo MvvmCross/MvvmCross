@@ -4,6 +4,7 @@
 
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace MvvmCross.Platforms.Uap.Views
@@ -14,6 +15,42 @@ namespace MvvmCross.Platforms.Uap.Views
     {
         public MvxWindowsContentDialog()
         {
+            Loading += MvxWindowsContentDialog_Loading;
+            Loaded += MvxWindowsContentDialog_Loaded;
+            Opened += MvxWindowsContentDialog_Opened;
+            Unloaded += MvxWindowsContentDialog_Unloaded;
+            Closed += MvxWindowsContentDialog_Closed;
+            Closing += MvxWindowsContentDialog_Closing;
+        }
+
+        private void MvxWindowsContentDialog_Loading(FrameworkElement sender, object args)
+        {
+            ViewModel?.ViewAppearing();
+        }
+
+        private void MvxWindowsContentDialog_Loaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel?.ViewAppeared();
+        }
+
+        private void MvxWindowsContentDialog_Opened(ContentDialog sender, ContentDialogOpenedEventArgs args)
+        {
+            ViewModel?.ViewCreated();
+        }
+
+        private void MvxWindowsContentDialog_Unloaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel?.ViewDestroy();
+        }
+
+        private void MvxWindowsContentDialog_Closing(ContentDialog sender, ContentDialogClosingEventArgs args)
+        {
+            ViewModel?.ViewDisappearing();
+        }
+
+        private void MvxWindowsContentDialog_Closed(ContentDialog sender, ContentDialogClosedEventArgs args)
+        {
+            ViewModel?.ViewDisappeared();
         }
 
         private IMvxViewModel _viewModel;
