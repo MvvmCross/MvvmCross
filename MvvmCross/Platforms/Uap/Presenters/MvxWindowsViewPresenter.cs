@@ -62,7 +62,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
                typeof(MvxModalViewPresentationAttribute),
                new MvxPresentationAttributeAction
                {
-                   ShowAction = (view, attribute, request) => ShowModal(view, attribute, request),
+                   ShowAction = (view, attribute, request) => ShowModal(view, (MvxModalViewPresentationAttribute)attribute, (MvxViewModelInstanceRequest)request),
                    CloseAction = (viewModel, attribute) => CloseModal(viewModel, attribute)
                });
         }
@@ -251,19 +251,17 @@ namespace MvvmCross.Platforms.Uap.Presenters
             }
         }
 
-        protected virtual async Task<bool> ShowModal(Type viewType, MvxBasePresentationAttribute attribute, MvxViewModelRequest request)
+        protected virtual async Task<bool> ShowModal(Type viewType, MvxModalViewPresentationAttribute attribute, MvxViewModelInstanceRequest request)
         {
             try
             {
                 if (Activator.CreateInstance(viewType) is MvxWindowsContentDialog modalView)
                 {
-                    var instanceReques = (MvxViewModelInstanceRequest)request;
-                    modalView.ViewModel = instanceReques.ViewModelInstance;
+                    modalView.ViewModel = request.ViewModelInstance;
 
                     _windowsContentDialog = modalView;
 
-                    var modalAttribute = (MvxModalViewPresentationAttribute)attribute;
-                    await modalView.ShowAsync(modalAttribute.Placement);
+                    await modalView.ShowAsync(attribute.Placement);
 
                     return true;
                 }
