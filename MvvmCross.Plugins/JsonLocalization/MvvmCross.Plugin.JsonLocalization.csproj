@@ -1,0 +1,17 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <AssemblyName>MvvmCross.Plugin.JsonLocalization</AssemblyName>
+    <RootNamespace>MvvmCross.Plugin.JsonLocalization</RootNamespace>
+    <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains the 'JsonLocalization' plugin for MvvmCross</Description>
+    <PackageId>MvvmCross.Plugin.JsonLocalization</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
+    <ProjectReference Include="..\Json\MvvmCross.Plugin.Json.csproj" />
+    <ProjectReference Include="..\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj" />
+  </ItemGroup>
+</Project>

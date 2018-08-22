@@ -16,8 +16,18 @@ The PhoneCall plugin is available on Android, iOS, and WindowsPhone with a Skype
 
 The PhoneCall plugin is very simple - e.g. it doesn't provide any detection of whether or not a phone call is currently possible - e.g. for flight mode or for iPod-type devices without cell connectivity.
 
-Sample using the PhoneCall plugin include:
+## Setup
 
-- CustomerManagement - https://github.com/slodge/MvvmCross-Tutorials/tree/master/Sample%20-%20CustomerManagement
-- Conference - https://github.com/slodge/MvvmCross-Tutorials/tree/master/Sample%20-%20CirriousConference
+Install the ```MvvmCross.Plugin.PhoneCall``` nuget in the Core and the platforms you want to support. After that you can inject the ```IMvxPhoneCallTask``` in your constructor and use it:
+
+```c#
+public class MyViewModel : MvxViewModel
+{
+    public MyViewModel(IMvxPhoneCallTask phoneCallTask)
+    {
+        phoneCallTask.MakePhoneCall("Contact name", "+310631798511");
+    }
+}
+```
+
 

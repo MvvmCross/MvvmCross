@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tabs Root View-->
+        <scene sceneID="evX-18-sel">
+            <objects>
+                <tabBarController storyboardIdentifier="TabsRootView" id="FKA-Nj-OdK" customClass="TabsRootView" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IEQ-Tt-Rz4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4N5-N3-TgT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="633" y="668"/>
+        </scene>
+        <!--Tab1 View-->
+        <scene sceneID="123">
+            <objects>
+                <viewController storyboardIdentifier="Tab1View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="124" customClass="Tab1View" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="121"/>
+                        <viewControllerLayoutGuide type="bottom" id="122"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="125">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="155">
+                                <rect key="frame" x="146.5" y="162" width="84" height="30"/>
+                                <state key="normal" title="Show modal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="156">
+                                <rect key="frame" x="105" y="106" width="167" height="30"/>
+                                <state key="normal" title="Initiate Modal navigation">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="157">
+                                <rect key="frame" x="150" y="225" width="75" height="30"/>
+                                <state key="normal" title="Show child">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This tab is wrapped in a NavigationController" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="172">
+                                <rect key="frame" x="39" y="56" width="299" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="157" firstAttribute="centerX" secondItem="125" secondAttribute="centerX" id="163"/>
+                            <constraint firstItem="172" firstAttribute="top" secondItem="121" secondAttribute="bottom" constant="36" id="173"/>
+                            <constraint firstItem="172" firstAttribute="leading" secondItem="125" secondAttribute="leading" constant="39" id="174"/>
+                            <constraint firstAttribute="trailing" secondItem="172" secondAttribute="trailing" constant="37" id="175"/>
+                            <constraint firstItem="156" firstAttribute="top" secondItem="172" secondAttribute="bottom" constant="33" id="402"/>
+                            <constraint firstItem="156" firstAttribute="centerX" secondItem="125" secondAttribute="centerX" constant="1" id="403"/>
+                            <constraint firstItem="155" firstAttribute="top" secondItem="156" secondAttribute="bottom" constant="26" id="404"/>
+                            <constraint firstItem="155" firstAttribute="centerX" secondItem="125" secondAttribute="centerX" constant="1" id="405"/>
+                            <constraint firstItem="157" firstAttribute="centerX" secondItem="125" secondAttribute="centerX" id="406"/>
+                            <constraint firstItem="157" firstAttribute="top" secondItem="155" secondAttribute="bottom" constant="33" id="407"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnChild" destination="157" id="name-outlet-157"/>
+                        <outlet property="btnModal" destination="155" id="name-outlet-155"/>
+                        <outlet property="btnNavModal" destination="156" id="name-outlet-156"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="126" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1303" y="668"/>
+        </scene>
+        <!--Tab2 View-->
+        <scene sceneID="130">
+            <objects>
+                <viewController storyboardIdentifier="Tab2View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="131" customClass="Tab2View" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="128"/>
+                        <viewControllerLayoutGuide type="bottom" id="129"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="132">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I am a plain ViewController! Look at TabsView to see how my title and icon are set" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="164">
+                                <rect key="frame" x="61" y="174" width="278" height="50.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="333">
+                                <rect key="frame" x="168" y="317.5" width="39" height="30"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="369">
+                                <rect key="frame" x="106" y="254.5" width="163" height="30"/>
+                                <state key="normal" title="Initiate Stack navigation">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="164" firstAttribute="leading" secondItem="132" secondAttribute="leading" constant="61" id="165"/>
+                            <constraint firstAttribute="trailing" secondItem="164" secondAttribute="trailing" constant="36" id="166"/>
+                            <constraint firstItem="164" firstAttribute="top" secondItem="128" secondAttribute="bottom" constant="154" id="167"/>
+                            <constraint firstItem="369" firstAttribute="top" secondItem="164" secondAttribute="bottom" constant="30" id="370"/>
+                            <constraint firstItem="369" firstAttribute="centerX" secondItem="132" secondAttribute="centerX" id="371"/>
+                            <constraint firstItem="333" firstAttribute="top" secondItem="369" secondAttribute="bottom" constant="33" id="372"/>
+                            <constraint firstItem="333" firstAttribute="centerX" secondItem="132" secondAttribute="centerX" id="373"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="333" id="name-outlet-333"/>
+                        <outlet property="btnShowStack" destination="369" id="name-outlet-369"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="133" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1967" y="668"/>
+        </scene>
+        <!--Tab3 View-->
+        <scene sceneID="448">
+            <objects>
+                <viewController storyboardIdentifier="Tab3View" useStoryboardIdentifierAsRestorationIdentifier="YES" id="449" customClass="Tab3View" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="459"/>
+                        <viewControllerLayoutGuide type="bottom" id="464"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="454">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I am a plain ViewController! My title and icon are set by implementing the IMvxTabBarItemViewController interface" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="455">
+                                <rect key="frame" x="61" y="174" width="278" height="50.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="451">
+                                <rect key="frame" x="168" y="317.5" width="39" height="30"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="453">
+                                <rect key="frame" x="106" y="254.5" width="163" height="30"/>
+                                <state key="normal" title="Initiate Stack navigation">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="455" firstAttribute="leading" secondItem="454" secondAttribute="leading" constant="61" id="456"/>
+                            <constraint firstAttribute="trailing" secondItem="455" secondAttribute="trailing" constant="36" id="457"/>
+                            <constraint firstItem="455" firstAttribute="top" secondItem="459" secondAttribute="bottom" constant="154" id="458"/>
+                            <constraint firstItem="453" firstAttribute="top" secondItem="455" secondAttribute="bottom" constant="30" id="460"/>
+                            <constraint firstItem="453" firstAttribute="centerX" secondItem="454" secondAttribute="centerX" id="461"/>
+                            <constraint firstItem="451" firstAttribute="top" secondItem="453" secondAttribute="bottom" constant="33" id="462"/>
+                            <constraint firstItem="451" firstAttribute="centerX" secondItem="454" secondAttribute="centerX" id="463"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="451" id="450"/>
+                        <outlet property="btnShowStack" destination="453" id="452"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="465" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2627" y="667"/>
+        </scene>
+        <!--Override Attribute View-->
+        <scene sceneID="486">
+            <objects>
+                <viewController storyboardIdentifier="OverrideAttributeView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="487" customClass="OverrideAttributeView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="494"/>
+                        <viewControllerLayoutGuide type="bottom" id="498"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="492">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="489">
+                                <rect key="frame" x="168" y="196" width="39" height="30"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="491">
+                                <rect key="frame" x="109" y="120" width="157" height="30"/>
+                                <state key="normal" title="Initiate Tabs navigation">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="491" firstAttribute="top" secondItem="494" secondAttribute="bottom" constant="100" id="493"/>
+                            <constraint firstItem="491" firstAttribute="centerX" secondItem="492" secondAttribute="centerX" id="495"/>
+                            <constraint firstItem="489" firstAttribute="centerX" secondItem="492" secondAttribute="centerX" id="496"/>
+                            <constraint firstItem="489" firstAttribute="top" secondItem="491" secondAttribute="bottom" constant="46" id="497"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnClose" destination="489" id="488"/>
+                        <outlet property="btnTabs" destination="491" id="490"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="499" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2540" y="-3"/>
+        </scene>
+    </scenes>
+</document>

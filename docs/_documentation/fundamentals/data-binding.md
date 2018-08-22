@@ -2,17 +2,17 @@
 layout: documentation
 title: Data binding
 category: Fundamentals
-order: 2
+order: 1
 ---
-DataBinding is the key technology that MVVM relies on to link Views with their View-Models.
+Data binding is the key technology that MVVM relies on, to link Views with their View-Models.
 
-DataBinding provides and maintains the automated Two-Way connection between View and ViewModel. A good understanding of Data binding is essential for every MVVM developer.
+Data binding provides and maintains the automated Two-Way connection between View and ViewModel. A good understanding of data binding is essential for every MVVM developer.
 
-Within MvvmCross, data binding was initially built to mirror the structure provided by Microsoft in their XAML based frameworks, but in more recent developments MvvmCross has extended databinding in new directions.
+Within MvvmCross, data binding was initially built to mirror the structure provided by Microsoft in their XAML based frameworks, but in more recent developments MvvmCross has extended data binding in new directions.
 
-This article focuses first on the core 'Windows' databinding approach, but then later extends to some of the newer ideas.
+This article focuses first on the core 'Windows' data binding approach, but then later extends to some of the newer ideas.
 
-### Core Windows Databinding
+### Core Windows Data binding
 In this structure, for each binding:
 
 - C# properties are used in both View and ViewModel
@@ -21,9 +21,9 @@ In this structure, for each binding:
 - can optionally be specified with a ValueConverter - and this can optionally also be parameterised
 - can also optionally be specified with a FallbackValue for when binding fails.
 
-### C# properties and data-binding
+### C# properties and Data binding
 
-C# properties are used for data-binding on both the View and the ViewModel.
+C# properties are used for data binding on both the View and the ViewModel.
 
 On the ViewModel, these properties often look like:
 
@@ -31,9 +31,7 @@ On the ViewModel, these properties often look like:
 private string _myProperty;
 public string MyProperty
 {
-    get {
-        return _myProperty;
-    }
+    get => _myProperty;
     set
     {
         _myProperty = value;
@@ -43,13 +41,13 @@ public string MyProperty
 }
 ```
 
-> Note: MvvmCross provides helper methods to assign and fire the `PropertyChanged` event, after checking whether value actually changed. Consider using `SetProperty()` for this, which is present on `MvxViewModel` and `MvxPropertyChanged`.
+> Note: MvvmCross provides helper methods to assign the backing field and fire the `PropertyChanged` event, after checking whether value actually changed. Consider using `SetProperty()` for this, which is present on `MvxViewModel` and `MvxPropertyChanged`.
 
 This pattern uses a local private backing variable to store the current value, and relies on `RaisePropertyChanged` to signal changes in the value to any listening Views.
 
 In the View:
 
-- in Windows platforms, `DependencyProperty` objects are used to store variable values. These `DependencyProperty` objects provide well-known mechanisms:
+- on Windows platforms, `DependencyProperty` objects are used to store variable values. These `DependencyProperty` objects provide well-known mechanisms:
   - to allow both `get` and `set` of the value within the View.
   - to listen for changes on the value within the View - e.g. when the user enters new text into a `TextBox` 
 
@@ -61,11 +59,11 @@ In the View:
      - custom C# methods have to be used to get and set the variable values
      - custom Java listeners or Objective-C delegates have to be used to detect when the UI View state changes (e.g. when the user enters text or taps on a button).
 
-For more info on the details on implementing custom bindings, see the [custom bindings blog post by Stuart Lodge](http://slodge.blogspot.co.uk/2013/06/n28-custom-bindings-n1-days-of-mvvmcross.html)
+For more info on the details on implementing custom bindings, see the [official documentation](https://www.mvvmcross.com/documentation/advanced/custom-data-binding)
 
 ### DataBound properties
 
-Using the View and ViewModel properties described above, it's common for a ViewModel C# property to be used to model the value of a View property.
+Using the View and ViewModel properties described above, it is common for a ViewModel C# property to be used to model the value of a View property.
 
 For example:
 
@@ -76,14 +74,8 @@ For example:
 private bool _rememberMe;
 public bool RememberMe
 {
-    get {
-        return _rememberMe;
-    }
-    set
-    {
-        _rememberMe = value;
-        RaisePropertyChanged(() => RememberMe);
-    }
+    get => _rememberMe;
+    set => SetProperty(ref _rememberMe, value);
 }
 ```
 
@@ -91,7 +83,7 @@ public bool RememberMe
 
 ### DataBound events and actions
 
-Databinding also enables a ViewModel to react to 'events' which occur in a View - e.g. for a ViewModel to respond to events such as a button being pressed.
+Data binding also enables a ViewModel to react to 'events' which occur in a View - e.g. for a ViewModel to respond to events such as a button being pressed.
 
 The technique generally used for this is for the ViewModel to expose special `Command` properties which can be bound to corresponding `Command` properties on the View.
 
@@ -156,7 +148,7 @@ Further, MvvmCross provides some supporting base classes to help with writing va
 - `MvxValueConverter<TFrom>`
 - `MvxValueConverter<TFrom, TTo>`
 
-As an example, a `LengthValueConverter` which is only used to help display the lenght of a string - with no `ConvertBack` use - might be implemented:
+As an example, a `LengthValueConverter` which is only used to help display the length of a string - with no `ConvertBack` use - might be implemented:
 
 ```c#
 public class LengthValueConverter
@@ -188,8 +180,6 @@ Notes:
 - in this example, if `Customer` is an object which has a `null` `FirstName` then this will **not** cause the Fallback to be used. The Fallback is there only for cases where the value is `Unset` - where the binding engine cannot find a value. A `null` value is still a value - so it doesn't trigger the Fallback.
 - one situation which can trigger an `UnsetValue` is if an `Exception` is thrown - e.g. during the evaluation of a ValueConverter. In this case, the binding engine will treat this `Exception` as an `UnsetValue` and so the `FallbackValue` will be used.
 
-
-
 ### A note about `DataContext`
 
 While we have used the terms `View` and `ViewModel` throughout this article, you will also see `DataContext` used in this article and in code.
@@ -199,11 +189,11 @@ While we have used the terms `View` and `ViewModel` throughout this article, you
 `ViewModel` and `DataContext` can be considered as the same thing.
 
 
-##MvvmCross Databinding
+## MvvmCross Data binding
 
-Databinding has always been at the heart of MvvmCross, and the functionality has grown over the different versions of MvvmCross.
+Data binding has always been at the heart of MvvmCross, and the functionality has grown over the different versions of MvvmCross.
   
-The evolution of MvvmCross Data-Binding can be trace over a path of:
+The evolution of MvvmCross data binding can be trace over a path of:
 
 - JSON
 - Swiss
@@ -212,33 +202,37 @@ The evolution of MvvmCross Data-Binding can be trace over a path of:
 
 **JSON**
 
-In the first versions of MvvmCross the databinding framework used strings based on JSON to achieve databinding.
+In the first versions of MvvmCross the data binding framework used strings based on JSON to achieve data binding.
 
 This JSON version is now retired - it is no longer easily available in MvvmCross v3. If you come across any samples or documents which use JSON binding, then be aware that these samples are now **out of date**.
 
 **Swiss**
 
-The replacement for JSON databinding was called 'Swiss'. It provides the same functionality as the JSON binding, but used a cleaner, less verbose syntax that is easier to use.
+The replacement for JSON data binding was called 'Swiss'. It provides the same functionality as the JSON binding, but used a cleaner, less verbose syntax that is easier to use.
 
 For example:
 
 - a binding in JSON which was written:
 
-      {
-        'Text'
-          {
-            'Path':'TweetText',
-            'Converter':'RemainingLength',
-            'ConverterParameter':140
-          }
-      }
+```json
+{
+    'Text':
+    {
+        'Path':'TweetText',
+        'Converter':'RemainingLength',
+        'ConverterParameter':140
+    }
+}
+```
 
 - could be rewritten in Swiss using:
 
-      Text TweetText, 
-         Converter=RemainingLength,
-         ConverterParameter=140
-      
+```js
+Text TweetText,
+    Converter=RemainingLength,
+    ConverterParameter=140
+```
+
 **Fluent** 
 
 In addition to providing text-format binding statement which can be easily included in xml layout files, MvvmCross also provides a C# based syntax to enable bindings to be easily constructed using code.
@@ -249,16 +243,19 @@ As an example:
 
 - the text binding:
 
-      Text TweetText, 
-         Converter=RemainingLength,
-         ConverterParameter=140
-         
+```js
+Text TweetText,
+    Converter=RemainingLength,
+    ConverterParameter=140
+```
 - might be rewritten using fluent bindings as:
 
-       this.CreatingBinding(label)
-           .For(l => l.Text)
-           .To(vm => vm.TweetText)
-           .WithConversion("RemainingLength", 140); 
+```c#
+this.CreatingBinding(label)
+    .For(l => l.Text)
+    .To(vm => vm.TweetText)
+    .WithConversion("RemainingLength", 140);
+```
 
 Fluent binding is especially useful in the iOS and OSX platforms where the Xml layout formats are not easily human-editable.
 
@@ -268,7 +265,7 @@ As the MvvmCross binding format evolved from its JSON origins through to Swiss a
 
 The future of MvvmCross continues to aim to include cosmetic improvements, but also aims to deliver functional enhancements as well.
 
-The current ideads for improvements and enhancements include:
+The current ideas for improvements and enhancements include:
 
 - Tibet binding
   - multi-binding
@@ -282,9 +279,11 @@ The current ideads for improvements and enhancements include:
 
 Using these ideas, then a binding like:
 
+```js
       Text TweetText, 
          Converter=RemainingLength,
          ConverterParameter=140
+```
 
 might be rewritten:
 
@@ -296,7 +295,7 @@ or perhaps even:
 
 These ideas and their current development status are discussed further later in this article.
 
-Beyond these, of course, the opportunity is there for plenty more ideas and improvements from the community - the evolution of MvvmCross and its databinding is driven by real users and the invention and ideas their real apps require.
+Beyond these, of course, the opportunity is there for plenty more ideas and improvements from the community - the evolution of MvvmCross and its data binding is driven by real users and the invention and ideas their real apps require.
 
 
 ### JSON
@@ -336,13 +335,17 @@ Beyond this basic `$TargetPath$` to `$SourcePath$` syntax:
      
 - If a converter is needed, then this can be added using:
 
-       , Converter=$ConverterName$
+```js
+, Converter=$ConverterName$
+```
 
   where `$ConverterName$` is the name of the Value Converter to use - which typically is the class name without it's `ValueConverter` postfix - e.g. the name "Length" would be used for the class `LengthValueConverter`
   
 - If a ConverterParameter is needed then this can be added using:
 
-       , ConverterParameter=$ParameterValue$
+```js
+, ConverterParameter=$ParameterValue$
+```
 
   where `$ParameterValue$` is one of:
 
@@ -355,17 +358,21 @@ Beyond this basic `$TargetPath$` to `$SourcePath$` syntax:
 
 - If a FallbackValue is needed then this can be added using:
 
-       , FallbackValue=$FallbackValue$
+```js
+, FallbackValue=$FallbackValue$
+````
 
   where `$FallbackValue$` has the same permitted contents as `$ParameterValue$` above, but can also additionally be:
   
   - the `ToString()` representation of an Enum value.
   
-  This is especially useful in, for example, the binding of `Visibililty` properties.
+  This is especially useful in, for example, the binding of `Visibility` properties.
 
 - If a specific Binding Mode is needed, then this can be added:
 
-       , Mode=$WhichMode$
+```js
+, Mode=$WhichMode$
+```
 
   where `$WhichMode$` is one of:
   
@@ -379,47 +386,59 @@ Beyond this basic `$TargetPath$` to `$SourcePath$` syntax:
 
 - One very specific extension to 'Swiss' binding is the `CommandParameter` binding, this binding uses an implicit ValueConverter to specify the parameter for an `ICommand` invocation. This is specified using:
 
-       , CommandParameter=$CPValue$
-       
+```js
+, CommandParameter=$CPValue$
+```
+
   where `$CPValue$` is a literal value similar to `$ParameterValue$` above
-
-
 
 Some examples of Swiss binding statements are:
 
 ---
 
-    Text Customer.FirstName
-  
+```js
+Text Customer.FirstName
+````
+
 Bind the `Text` property to `Customer.FirstName` on the ViewModel.
 
 ---
 
-    Text Title, Converter=Length
-  
+```js
+Text Title, Converter=Length
+```
+
 Bind the `Text` property to `Title` on the ViewModel, but apply the `Length` value converter - which will normally be a default instance of the class `LengthValueConverter`.
 
 ---
 
-    Text Order.Amount, Converter=Trim, ConverterParameter='£'
-  
+```js
+Text Order.Amount, Converter=Trim, ConverterParameter='£'
+```
+
 Bind the `Text` property to `Order.Amount` on the ViewModel, but apply the `Trim` value converter, passing it the string "£".
 
 ---
 
-    Text Order.Amount, Converter=Trim, ConverterParameter='£', FallbackValue='N/A'
-  
+```js
+Text Order.Amount, Converter=Trim, ConverterParameter='£', FallbackValue='N/A'
+```
+
 Bind the `Text` property to `Order.Amount` on the ViewModel, but apply the `Trim` value converter, passing it the string "£". If no `Order` is available, or if the Order object doesn't have an `Amount` value, then display "N/A"
 
 ---
 
-    Value Count, Mode=TwoWay
-  
+```js
+Value Count, Mode=TwoWay
+```
+
 Bind the `Value` property to `Count` on the ViewModel, and ensure this binding is both from View to ViewModel and from ViewModel to View.
  
 ---
 
-    Click DayCommand, CommandParameter='Thursday'
+```js
+Click DayCommand, CommandParameter='Thursday'
+```
 
 Bind the `Click` event to the `DayCommand` property on the ViewModel (which should implement `ICommand`). When invoked, ensure that Execute is passeda parameter value of "Thursday"
 
@@ -431,63 +450,81 @@ This syntax is generally done using the `CreateBindingSet<TView, TViewModel>` he
 
 The syntax includes:
 
-    Bind($ViewObject$) 
+```js
+Bind($ViewObject$) 
+````
 
 where `$ViewObject$` is the view target for binding.
 
-    For(v => v.$ViewProperty$) 
+```c#
+For(v => v.$ViewProperty$) 
+```
 
 where `$ViewProperty$` is the property on the view for binding.
 
-If `For` is not provided, then the default view property is used - e.g. for a `UILabel` the default is `Text`
+> If `For` is not provided, then the default view property is used. [Look at the tables at the bottom of this page][#default-view-properties] to see all the default bindings used for each platforms control type.
 
-    To(vm => vm.$ViewModelPath$)
+```c#
+To(vm => vm.$ViewModelPath$)
+```
 
 where `$ViewModelPath$` is the path to the view model 'source'  property for binding.
 
-    OneWay()
-    TwoWay()
-    OneWayToSource()
-    OneTime()
-    
+```c#
+OneWay()
+TwoWay()
+OneWayToSource()
+OneTime()
+```
+
 all of which provide the mode for the binding
 
-    WithConversion($name$, $parameter$)
-    
+```c#
+WithConversion($name$, $parameter$)
+```
+
 where `$name$` is the name of the value converter to use, and `$parameter$` is the parameter to pass in. 
 
 Using this syntax, an example binding set is:
 
-     var set = this.CreateBindingSet<MyView, MyViewModel>();
-     set.Bind(nameLabel)
-        .For(v => v.Text)
-        .To(vm => vm.Customer.FirstName);
-     set.Bind(creditLabel)
-        .For(v => v.Text)
-        .To(vm => vm.Customer.Total)
-        .WithConversion("CurrencyFormat", "$");
-     set.Bind(cardLabel)
-        .For(v => v.Text)
-        .To(vm => vm.Customer.Cards["Primary"].Number)
-        .WithConversion("LastFour")
-        .OneWay()
-        .FallbackValue("N/A");
-     set.Bind(warningView)
-        .For(v => v.Hidden)
-        .To(vm => vm.Customer.Alert)
-        .WithConversion("Not")
-        .FallbackValue(true);
-     set.Apply();  
+```c#
+var set = this.CreateBindingSet<MyView, MyViewModel>();
+set.Bind(nameLabel)
+    .For(v => v.Text)
+    .To(vm => vm.Customer.FirstName);
+set.Bind(creditLabel)
+    .For(v => v.Text)
+    .To(vm => vm.Customer.Total)
+    .WithConversion("CurrencyFormat", "$");
+set.Bind(cardLabel)
+    .For(v => v.Text)
+    .To(vm => vm.Customer.Cards["Primary"].Number)
+    .WithConversion("LastFour")
+    .OneWay()
+    .FallbackValue("N/A");
+set.Bind(warningView)
+    .For(v => v.Hidden)
+    .To(vm => vm.Customer.Alert)
+    .WithConversion("Not")
+    .FallbackValue(true);
+set.Apply();
+```
 
-In addition to the `Expression` based Fluent bindings, string based Fluent bindings are also available. This is particularly useful for situations where bindings are needed to View events or to binding targets which are not fully exposed as C# properties. For example, even though a `UIButton` does not have a `Title` property in C#, a 'Title' property can still be set using:
+ **Note:** when using a fluent binding, always remember to use `.Apply()` - if this is missed then the binding won't ever be created.
 
-    set.Bind(okButton)
-       .For("Title")
-       .To(vm => vm.Caption);
-           
+### MvvmCross Defined Custom bindings
 
-**Note:** when using a fluent binding, always remember to use `.Apply()` - if this is missed then the binding won't ever be created.
+In addition to the `Expression` based Fluent bindings, `String` and `Extension Method` based Fluent bindings are also available. They are particularly useful for situations where bindings are needed to View events or to binding targets which are not fully exposed as C# properties. For example, even though a `UIButton` does not have a `Title` property in C#, a `Title` property can still be set via the use of custom bindings:
 
+```c#
+set.Bind(okButton)
+    .For("Title")
+    .To(vm => vm.Caption);
+
+set.Bind(okButton)
+    .For(c => c.BindText())
+    .To(vm => vm.Caption);
+```
 
 ### Tibet
 
@@ -510,38 +547,37 @@ In Swiss binding, each binding can only reference a single ViewModel property pa
 
 This meant that if a ViewModel had 2 properties like `FirstName` and `LastName`, then the main way to create a display of the ful name was to create a new ViewModel property - e.g.:
 
-    private string _firstName;
-    public string FirstName
-    {
-       get { return _firstName; }
-       set 
-       { 
-          _firstName = value;
-          RaisePropertyChanged(() => FirstName);
-          RaisePropertyChanged(() => FullName);
-       }
+```c#
+private string _firstName;
+public string FirstName
+{
+    get => _firstName;
+    set 
+    { 
+        if (SetProperty(ref _firstName, value))
+            RaisePropertyChanged(() => FullName);
     }
-    
-    private string _lastName;
-    public string LastName
-    {
-       get { return _lastName; }
-       set 
-       { 
-          _lastName = value;
-          RaisePropertyChanged(() => LastName);
-          RaisePropertyChanged(() => FullName);
-       }
-    }
+}
 
-    public string FullName
-    {
-       get { return _firstName + " " + _lastName; }
+private string _lastName;
+public string LastName
+{
+    get => _lastName;
+    set 
+    { 
+        if (SetProperty(ref _lastName, value))
+            RaisePropertyChanged(() => FullName);
     }
+}
+
+public string FullName => _firstName + " " + _lastName;
+```
 
 With Multi-Binding, the addition of the `FullName` property is no longer necessary - instead the binding can be written inside the binding expression directly as:
 
-    Text FirstName + ' ' + LastName
+```js
+Text FirstName + ' ' + LastName
+```
 
 This **multi-binding** will cause `Text` to automatically be updated whenever either of `FirstName` or `LastName` change.
 
@@ -572,7 +608,7 @@ Notes:
 - some ValueCombiners are also available in `operator` form - e.g. `Add` can be used as `+` and `GreaterThan` can be used as `>`
 - combination is an interpretation, not a compilation step - especially because dynamic code generation is not supported on all MvvmCross platforms.
 - for direct comparison/combination of simple `string`, `long` and `double` values, this 'interpretation' should work well. Using combiners for more complicated combinations is less well defined.
-- currenly ValueCombiners typically try to use `long` rather than `int` and `double` rather than `float`.
+- currently ValueCombiners typically try to use `long` rather than `int` and `double` rather than `float`.
 
 **Important note:** The current interface of value combiners is currently a proposal and working prototype only. As we learn more about the real use, benefits and challenges of value combination we may revise the API, including making breaking changes to any value combiners produced by the community. In particular, it's possible we may make changes to the type safety of the APIs, and we may try to reduce the complexity of the APIs - as Value Combiners are currently quite 'open' in the source/target types they accept and this makes developing them quite complicated.
 
@@ -582,20 +618,26 @@ As we've seen in the previous Multi-Binding and Value-Combining steps, literals 
 
 For example, a binding:
 
-    Value 100 * Ratio
-    
+```js
+Value 100 * Ratio
+```
+
 uses the literal 100 to provide a way of translating a `Ratio` into a `Percentage`.
 
 Or a binding:
 
-    Value 'True'
-    
+```js
+Value 'True'
+```
+
 uses a literal string which is automatically converted to a boolean if Value is a boolean property.
 
 Or a binding:
 
-    Value Format('Hello {1} - today is {0:ddd MMM yyyy}', TheDate, Name)
-    
+```json
+Value Format('Hello {1} - today is {0:ddd MMM yyyy}', TheDate, Name)
+```
+
 uses a literal string to assist formating `TheDate` and `Name`
 
 **Binding macros**
@@ -606,7 +648,7 @@ Ideas being considered in this area include:
 
 - access to `parent`, `global` and `named(name)` binding contexts
 - access to shared variables - e.g, shared numbers, strings and Colors which could provide more theming/styling options
-- access to i18n resources to make text localisation more straight-forward
+- access to i18n resources to make text localization more straight-forward
 
 It is likely that that prefix characters, such as `$`, `#` or `@`, might be used as simple markers to enable the identification of these 'macros'
 
@@ -616,13 +658,17 @@ This change allows shorter simpler binding expressions to be used.
 
 This means that a Swiss binding of:
 
-      Text TweetText, 
-         Converter=RemainingLength,
-         ConverterParameter=140
+```js
+Text TweetText, 
+    Converter=RemainingLength,
+    ConverterParameter=140
+````
 
 can be rewritten in Tibet as:
 
-      Text RemainingLength(TweetText,140)
+```js
+Text RemainingLength(TweetText, 140)
+```
 
 Note that the function name space is shared between the Value Combiners and the Value Converters. When looking for a name, MvvmCross first looks for a matching ValueCombiner, and then second for a matching ValueConverter.
      
@@ -632,104 +678,120 @@ In addition to supporting multiple bound source values, Tibet binding further in
 
 For example, Length and Trim value converters could be applied with the Add value combiner as:
 
-       Text Length(Trim(FirstName + ' ' + LastName))
+```js
+Text Length(Trim(FirstName + ' ' + LastName))
+```
 
 **A Mild Warning** 
 
 Tibet binding provides developers with many options for more advanced bindings.
 
-This advancement is, of course, not free - it does come with a small memory and processing cost during both the construction and the exceution of the bindings.
+This advancement is, of course, not free - it does come with a small memory and processing cost during both the construction and the execution of the bindings.
 
-In general, this additional overhead is very small and so should not be of concern to developers. However, it's always important to be aware of your application's performance - so always consider how a binding will be constructed and evaluated, especially when applying large numbers of bindings, when applying bindings within loops (collections) or when applying bindings to data which changes very frequently. Always consider applying source (ViewModel-based) data manipulation, writing a single optimised combiner/converter or consider simple `OneTime` binding as potential ways to avoid performance issues.
+In general, this additional overhead is very small and so should not be of concern to developers. However, it's always important to be aware of your application's performance - so always consider how a binding will be constructed and evaluated, especially when applying large numbers of bindings, when applying bindings within loops (collections) or when applying bindings to data which changes very frequently. Always consider applying source (ViewModel-based) data manipulation, writing a single optimized combiner/converter or consider simple `OneTime` binding as potential ways to avoid performance issues.
 
 ### Rio
 
 Within ViewModels, Mvvm in C# has always been centred around the `INotifyPropertyChanged` interface.
 
 This interface is typically implemented around C# properties which look like:
- 
-        private string _lastName;
-        public string LastName
-        {
-           get { return _lastName; }
-           set 
-           { 
-              _lastName = value;
-              RaisePropertyChanged(() => LastName);
-           }
-        }
+
+```c#
+private string _lastName;
+public string LastName
+{
+    get => _lastName;
+    set => SetProperty(ref _lastName, value);
+}
+```
 
 and this is further enhanced using `ICommand` properties for action callbacks - e.g.
 
-    private ICommand _submitCommand;
-    public ICommand SubmitCommand
+```c#
+private ICommand _submitCommand;
+public ICommand SubmitCommand
+{
+    get
     {
-        get
-        {
-             _submitCommand = _submitCommand ?? new MvxCommand(DoSubmit);
-             return _submitCommand;
-        }
+        _submitCommand = _submitCommand ?? new MvxCommand(DoSubmit);
+        return _submitCommand;
     }
+}
+```
 
 This syntax is well understood by experienced Mvvm developers, but can also appear quite verbose when dealing with very small view models.
 
-Some developers have worked around this verbosity by using techniques such as post-compilation injectio of code - e.g. using the AOP Property plugin from Fody.
+Some developers have worked around this verbosity by using techniques such as post-compilation injection of code - e.g. using the AOP Property plugin from Fody.
 
 Rio binding offers developers a different approach - using the new FieldBinding and MethodBinding plugins.
 
 **FieldBinding**
 
-With the field binding plugin, MvvmCross databinding can use ViewModel public fields as data-sources for binding - e.g.
+With the field binding plugin, MvvmCross data binding can use ViewModel public fields as data-sources for binding - e.g.
 
-     public string LastName;
-     
+```c#
+public string LastName;
+```
+
 Further, to provide events to drive UI updates, a lightweight `INotifyChanged` interface has been added, along with abbreviated helper interfaces and classes - `INC<T>` and `NC<T>`. These can be used as:
 
-     public readonly INC<string> LastName = new NC<string>();
+```c#
+public readonly INC<string> LastName = new NC<string>();
+```
 
 A `LastName` declared in this way can be databound exactly as te earlier `INotifyPropertyChanged`-based property:
 
-    Text LastName
+```c#
+Text LastName
+```
 
 Further, the underlying `string` field can be accessed in code using:
 
-    LastName.Value = "Hello";
-    Mvx.Trace("Current value is {0}", LastName.Value);
+```c#
+LastName.Value = "Hello";
+Mvx.Trace("Current value is {0}", LastName.Value);
+```
 
 To use FieldBinding, import the Field binding plugin into both your `core` and your UI projects.
 
 **Notes:** 
 
-- In addition to the syntatic changes of Rio, there are also some slight performance improvements - achieved by avoiding some Reflection-based get/set and by avoiding string-based event notifications.
+- In addition to the syntactic changes of Rio, there are also some slight performance improvements - achieved by avoiding some Reflection-based get/set and by avoiding string-based event notifications.
 - `INotifyChanged` binding has no way to support the `INotifyPropertyChanged` feature 'all changed' which is achieved by signalling a property change with a null or empty property name.
 - `INotifyChanged` itself is a very simple interface - so you can easily implement your own classes to implement this if you require extensions.
 
- 
 **MethodBinding**
 
-With the method binding plugin, MvvmCross databinding can use ViewModel public methods as sources for `ICommand` without declaring an `ICommand` property.
+With the method binding plugin, MvvmCross data binding can use ViewModel public methods as sources for `ICommand` without declaring an `ICommand` property.
 
 For example, a method
 
-    public void GoHome()
-    {
-    	ShowViewModel<HomeViewModel>();
-    }
-    
+```c#
+public void GoHome()
+{
+    ShowViewModel<HomeViewModel>();
+}
+```
+ 
 can be used in binding as:
 
-    Click GoHome 
+```c#
+Click GoHome 
+```
 
 Where a single argument is available within the source method, Method Binding uses the command parameter for this call. This is useful in, for example, list item selection events - e.g.:
 
-    public void ShowDetail(ListItem item)
-    {
-    	ShowViewModel<DetailViewModel>(new { id = item.Id} );
-    }
-    
+```c#
+public void ShowDetail(ListItem item)
+{
+    ShowViewModel<DetailViewModel>(new { id = item.Id} );
+}
+```
 bound with:
 
+```c#
     ItemClick ShowDetail 
+```
 
 To use MethodBinding, import the Method binding plugin into just your UI projects - there is no 'core' component required for these plugins.
 
@@ -737,7 +799,9 @@ To use MethodBinding, import the Method binding plugin into just your UI project
 
 However, in MvvmCross, this auto-enable/disable binding isn't currently widely supported - with support instead being given to secondary binding properties - e.g. to pairs of bindings like:
 
+```js
     Click GoHome; IsEnabled CanGoHome
+```
 
 **The Rio Effect**
 
@@ -747,120 +811,114 @@ However, the effect on the code-size and readability can be striking.
      
 A Rio `INotifyChanged` ViewModel like:
 
-     public class MathsViewModel
-     {
-     	public readonly INC<double> SubTotal = new NC<double>();
-     	public readonly INC<double> Percent = new NC<double>();
-        
-        public void Calculate()
-        {
-            Total.Value = SubTotal.Value * Percent.Value;
-        }    
-         
-     	public readonly INC<double> Total = new NC<double>();         
-     }
+```c#
+public class MathsViewModel
+{
+    public readonly INC<double> SubTotal = new NC<double>();
+    public readonly INC<double> Percent = new NC<double>();
+
+    public void Calculate()
+    {
+        Total.Value = SubTotal.Value * Percent.Value;
+    }
+
+    public readonly INC<double> Total = new NC<double>();
+}
+```
      
 is equivalent to a `INotifyPropertyChanged` ViewModel of:
-     
-     public class MathsViewModel
-     {
-     	private double _subTotal;
-        public double SubTotal
+
+```c#
+public class MathsViewModel
+{
+    private double _subTotal;
+    public double SubTotal
+    {
+        get => _subTotal;
+        set => SetProperty(ref _subTotal, value);
+    } 
+
+    private double _percent;
+    public double Percent
+    {
+        get => _percent;
+        set => SetProperty(ref _percent, value);
+    }
+
+    private ICommand _calculateCommand;
+    public ICommand CalculateCommand;
+    {
+        get 
         {
-           get { return _subTotal; }
-           set
-           {
-           	  _subTotal = value;
-           	  RaisePropertyChanged(() => SubTotal);
-           }
-        } 
-        
-     	private double _precent;
-        public double Percent
-        {
-           get { return _percent; }
-           set
-           {
-           	  _percent = value;
-           	  RaisePropertyChanged(() => Percent);
-           }
+            _calculateCommand = _calculateCommand ?? new MvxCommand(Calculate);
+            return _calculateCommand;
         }
+    }
+
+    private void Calculate()
+    {
+        Total = SubTotal * Percent;
+    }    
         
-        private ICommand _calculateCommand;
-        public ICommand CalculateCommand;
-        {
-           get 
-           {
-              _calculateCommand = _calculateCommand ?? new MvxCommand(Calculate);
-              return _calculateCommand;
-           }
-        }
-        
-        private void Calculate()
-        {
-            Total = SubTotal * Percent;
-        }    
-         
-     	private double _total;
-        public double Total
-        {
-           get { return _total; }
-           set
-           {
-           	  _total = value;
-           	  RaisePropertyChanged(() => Total);
-           }
-        }         
-     }
+    private double _total;
+    public double Total
+    {
+        get => _total;
+        set => SetProperty(ref _total, value);
+    }
+}
+```
      
 **BindingEx - Tibet and Rio in Xaml**
 
-Xaml is a platform and product from Microsoft which offers excellent tooling, lots of extensibility for adding new controls, but only limited extensibility for adding customisation.
+Xaml is a platform and product from Microsoft which offers excellent tooling, lots of extensibility for adding new controls, but only limited extensibility for adding customization.
 
 Unfortunately, this means MvvmCross can't intercept the 'normal' Xaml binding syntax which might look like:
 
-     Text="{Binding FirstName}"
-     
+```js
+Text="{Binding FirstName}"
+```
+
 However, MvvmCross Swiss, Tibet and Rio binding can be enabled through `AttachedProperties` 
 
 In particular two `AttachedProperties` is supplied in the BindingEx package:
 
 - `mvx:Bi.nd` - for bindings
-- `mvx:La.ng` - for internationalisation extensions
+- `mvx:La.ng` - for internationalization extensions
 
 To add these properties to your Windows Uwp or WPF MvvmCross app:
 
 - include the MvvmCross.Binding package
-- include an additional step in Setup which initialises the WindowsBinding framework
+- include an additional step in Setup which initializes the WindowsBinding framework
 
-        protected override void InitializeLastChance()
-        {
-            base.InitializeLastChance();
-            
-            var builder = new MvxWindowsBindingBuilder();
-            builder.DoRegistration();        
-        }
+```c#
+protected override void InitializeLastChance()
+{
+    base.InitializeLastChance();
+    
+    var builder = new MvxWindowsBindingBuilder();
+    builder.DoRegistration();        
+}
+```
 
 - in your Xaml files include an xml attribute for `mvx` - this will be different according to the platform:
 
  - Uwp
  
-       xmlns:mvx="using:mvx"
+    xmlns:mvx="using:mvx"
         
  - WPF
 
-       xmlns:mvx="clr-namespace:mvx;assembly=MvvmCross.Binding.Wpf"
+    xmlns:mvx="clr-namespace:mvx;assembly=MvvmCross.Binding.Wpf"
 
 
 - in your Xaml files you can now include bindings within tags such as:
 
-       `<TextBlock mvx:Bi.nd="Text Customer.FirstName; Visible=ShowFirstName" />`
+    `<TextBlock mvx:Bi.nd="Text Customer.FirstName; Visible=ShowFirstName" />`
 
-- for design-time support, you may also need to pull in additional value converters into the Xaml namespace. For more on this, see http://slodge.blogspot.co.uk/2013/07/n35-multibinding-with-tibet-n1-videos.html
+- for design-time support, you may also need to pull in additional value converters into the Xaml namespace. For more on this, see [slodge's tutorial](http://slodge.blogspot.co.uk/2013/07/n35-multibinding-with-tibet-n1-videos.html)
 
 Once installed, the syntax within these `AttachedProperties` bindings is exactly the same as within all other Swiss and Tibet binding - and this binding functionality can be extended with custom bindings, with FieldBinding, etc - just as in MvvmCross on non-Xaml platforms.
-
-
 
 ### Beyond Rio
 The framework that enables the Rio and Tibet binding extensions is interface-based and is built upon the small `CrossCore` platform which underpins `MvvmCross`.
@@ -868,3 +926,343 @@ The framework that enables the Rio and Tibet binding extensions is interface-bas
 We're excited by the possibilities that this framework can provide - by the inventions that the community can now develop.
 
 Anyone wishing to experiment with creating their own source binding plugins is encouraged to get started by looking at the source code for the MethodBinding and FieldBinding plugins.
+
+### Generic and typed bindings
+
+This change will add a generic "WithConversion" method. This will allow developers to strongly type the use of value converters, making refactoring a lot easier and more save. For example:
+
+```c#
+set.Bind(textField).To(vm => vm.Counter).WithConversion<SomeValueConverter>();
+```
+
+Add something about the Generic implementation of IMvxTargetBinding [#1610](https://github.com/MvvmCross/MvvmCross/pull/1610)
+
+### Dictionary Conversion
+
+Dictionary conversion allows for mapped conversions to be set up within the view's binding code, useful for quickly binding things like icons or colors to state properties.
+
+```c#
+set.Bind(button).To(vm => vm.readonly)
+   .WithDictionaryConversion(new Dictionary<bool, Icon>
+    {
+        {true, GreyIcon},
+        {false, BlueIcon}
+    });
+```
+
+Additionally, a fallback can be supplied for when a key cannot be found against the supplied Dictionary.
+
+```c#
+set.Bind(button).To(vm => vm.readonly)
+   .WithDictionaryConversion(new Dictionary<bool, Icon>
+    {
+        {true, GreyIcon},
+        {false, BlueIcon}
+    }, RedIcon);
+```
+
+*Note* : This feature is only available in fluent binding.
+
+### Default view properties
+
+The tables in this section describe the default view properties used in a Fluent binding when the `For` method chain is not provided.
+
+**Android**
+
+Base Control | Default
+---- | ---------
+Android.Widget.Button| Click
+Android.Widget.CheckBox | Checked
+Android.Widget.TextView | Text
+Android.Widget.CompoundButton | Checked
+Android.Widget.SeekBar | Progress
+Android.Widget.SearchView | Query
+MvvmCross.Binding.Droid.Views.MvxListView | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxLinearLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxGridView | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxRelativeLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxFrameLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxTableLayout | ItemsSource
+MvvmCross.Binding.Droid.Views.MvxFrameControl | DataContext
+MvvmCross.Binding.Droid.Views.MvxDatePicker | Value
+MvvmCross.Binding.Droid.Views.MvxTimePicker | Value
+
+**iOS**
+
+Base Control | Default
+---- | ---------
+UIKit.UIButton | TouchUpInside
+UIKit.UIBarButtonItem | Clicked
+UIKit.UISearchBar | Text
+UIKit.UITextField | Text
+UIKit.UITextView | Text
+UIKit.UILabel | Text
+UIKit.UIImageView | Image
+UIKit.UIDatePicker | Date
+UIKit.UISlider | Value
+UIKit.UISwitch | On
+UIKit.UIProgressView | Progress
+UIKit.UISegmentedControl | SelectedSegment
+UIKit.UIPageControl | CurrentPage
+UIKit.UIActivityIndicatorView | Hidden
+MvvmCross.Binding.iOS.Views.MvxCollectionViewSource | ItemsSource
+MvvmCross.Binding.iOS.Views.MvxTableViewSource | ItemsSource
+
+**Mac**
+
+Base Control | Default
+---- | ---------
+AppKit.NSButton | Activated
+AppKit.NSButtonCell | Activated
+AppKit.NSSegmentedControl | SelectedSegment
+AppKit.NSSearchField | Text
+AppKit.NSTextField | StringValue
+AppKit.NSTextView | StringValue
+AppKit.NSImageView | Image
+AppKit.NSDatePicker | Date
+AppKit.NSSlider | IntValue
+AppKit.NSMenuItem | Activated
+
+**tvOS**
+
+Base Control | Default
+---- | ---------
+UIKit.UIButton | TouchUpInside
+UIKit.UIBarButtonItem | Clicked
+UIKit.UISearchBar | Text
+UIKit.UITextField | Text
+UIKit.UITextView | Text
+UIKit.UILabel | Text
+UIKit.UIImageView | Image
+UIKit.UIProgressView | Progress
+UIKit.UISegmentedControl | SelectedSegment
+UIKit.UIActivityIndicatorView | Hidden
+MvvmCross.Binding.tvOS.Views.MvxCollectionViewSource | ItemsSource
+MvvmCross.Binding.tvOS.Views.MvxTableViewSource | ItemsSource
+
+### Built in bindings
+
+The following tables shows all the bindings built into MvvmCross. 
+
+> When using extension method based bindings you will have to include the relevant using namespace to access the extension methods. Additionally, extension method based bindings are only supported starting with MvvmCross 5.
+
+**Android**
+
+```Text
+# MvvmCross 6.x.x 
+using MvvmCross.Platforms.Android.Binding
+# MvvmCross 5.x.x
+using MvvmCross.Binding.Droid
+```
+
+Base Control | String | Extension method | Mvx version introduced
+---- | --------- | --------- | ---------
+Android.Views.View | Visible | BindVisible()
+Android.Views.View | Hidden | BindHidden()
+Android.Views.View | Click | BindClick()
+Android.Views.View | LongClick | BindLongClick()
+Android.Views.View | Margin | BindMargin() | 6.0.0
+Android.Views.View | MarginLeft | BindMarginLeft() | 6.0.0
+Android.Views.View | MarginRight | BindMarginRight() | 6.0.0
+Android.Views.View | MarginTop | BindMarginTop() | 6.0.0
+Android.Views.View | MarginBottom | BindMarginBottom() | 6.0.0
+Android.Views.View | MarginStart | BindMarginStart() | 6.0.0
+Android.Views.View | MarginEnd | BindMarginEnd() | 6.0.0
+Android.Widget.TextView | Text | BindText()
+Android.Widget.TextView | TextFormatted | BindTextFormatted()
+Android.Widget.CompoundButton | Checked | BindChecked()
+Android.Widget.SeekBar | Progress | BindProgress()
+Android.Widget.ImageView | Bitmap | BindBitmap()
+Android.Widget.ImageView | Drawable | BindDrawable()
+Android.Widget.ImageView | DrawableId | BindDrawableId()
+Android.Widget.ImageView | DrawableName | BindDrawableName()
+Android.Widget.ImageView | ResourceName | BindResourceName()
+Android.Widget.ImageView | AssetImagePath | BindAssetImagePath()
+Android.Widget.EditText | TextFocus | BindTextFocus()
+Android.Widget.SearchView | Query | BindQuery()
+Android.Widget.RatingBar | Rating | BindRating()
+Android.Widget.AdapterView | SelectedItemPosition | BindSelectedItemPosition()
+Android.Preferences.Preference | Value | BindValue()
+Android.Preferences.EditTextPreference | Text | BindText()
+Android.Preferences.ListPreference | Value | BindValue()
+Android.Preferences.TwoStatePreference | Checked | BindChecked()
+MvvmCross.Binding.Droid.Views.MvxAutoCompleteTextView | PartialText | BindPartialText()
+MvvmCross.Binding.Droid.Views.MvxAutoCompleteTextView | SelectedObject | BindSelectedObject()
+MvvmCross.Binding.Droid.Views.MvxSpinner | SelectedItem | BindSelectedItem()
+MvvmCross.Binding.Droid.Views.MvxListView | SelectedItem | BindSelectedItem()
+MvvmCross.Binding.Droid.Views.MvxExpandableListView | SelectedItem | BindSelectedItem()
+MvvmCross.Binding.Droid.Views.MvxRadioGroup | SelectedItem | BindSelectedItem()
+
+**Android**
+
+```Text
+# MvvmCross 6.x.x 
+using MvvmCross.Plugin.Color.Platforms.Android.Binding
+# MvvmCross 5.x.x
+using MvvmCross.Plugins.Color.Droid
+```
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Android.Widget.TextView | TextColor | BindTextColor()
+Android.Views.View | BackgroundColor | BindBackgroundColor()
+
+**Android - `using MvvmCross.Droid.Support.V7.AppCompat`**
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Android.Support.V7.Widget.SearchView | Query | BindQuery()
+Android.Support.V7.Widget.Toolbar | Subtitle | BindSubtitle()
+MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatAutoCompleteTextView | PartialText | BindPartialText()
+MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatAutoCompleteTextView | SelectedObject | BindSelectedObject()
+MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatSpinner | SelectedItem | BindSelectedItem()
+MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatRadioGroup | SelectedItem | BindSelectedItem()
+
+**Android - `using MvvmCross.Droid.Support.V7.Preference`**
+
+Base Control | String | Extension method | Mvx version introduced
+---- | --------- | ---------
+Android.Support.V7.Preferences.Preference | Value | BindValue()
+Android.Support.V7.Preferences.ListPreference | Value | BindValue()
+Android.Support.V7.Preferences.EditTextPreference | Text | BindText()
+Android.Support.V7.Preferences.TwoStatePreference | Checked | BindChecked()
+Android.Support.V7.Preferences.Preference | PreferenceClick | BindClick() | 6.2.0
+
+**iOS**
+
+```Text
+# MvvmCross 6.x.x 
+using MvvmCross.Platforms.Ios.Binding
+# MvvmCross 5.x.x
+using MvvmCross.Binding.iOS
+```
+
+Base Control | String | Extension method
+---- | --------- | ---------
+UIKit.UIControl | TouchDown | BindTouchDown()
+UIKit.UIControl | TouchDownRepeat | BindTouchDownRepeat()
+UIKit.UIControl | TouchDragInside | BindTouchDragInside()
+UIKit.UIControl | TouchUpInside | BindTouchUpInside()
+UIKit.UIControl | ValueChanged | BindValueChanged()
+UIKit.UIControl | PrimaryActionTriggered | BindPrimaryActionTriggered()
+UIKit.UIControl | EditingDidBegin | BindEditingDidBegin()
+UIKit.UIControl | EditingChanged | BindEditingChanged()
+UIKit.UIControl | EditingDidEnd | BindEditingDidEnd()
+UIKit.UIControl | EditingDidEndOnExit | BindEditingDidEndOnExit()
+UIKit.UIControl | AllTouchEvents | BindAllTouchEvents()
+UIKit.UIControl | AllEditingEvents | BindAllEditingEvents()
+UIKit.UIControl | AllEvents | BindAllEvents()
+UIKit.UIActivityIndicatorView | Hidden | BindHidden()
+UIKit.UISlider | Value | BindValue()
+UIKit.UIStepper | Value | BindValue()
+UIKit.UISegmentedControl | SelectedSegment | BindSelectedSegment()
+UIKit.UIPageControl | CurrentPage | BindCurrentPage()
+UIKit.UIDatePicker | Date | BindDate()
+UIKit.UITextField | ShouldReturn | BindShouldReturn()
+UIKit.UIDatePicker | Time | BindTime()
+UIKit.UILabel | Text | BindText()
+UIKit.UITextField | Text | BindText()
+UIKit.UITextView | Text | BindText()
+UIKit.UISwitch | On | BindOn()
+UIKit.UISearchBar | Text | BindText()
+UIKit.UIButton | Title | BindTitle()
+UIKit.UIButton | DisabledTitle | BindDisabledTitle()
+UIKit.UIButton | HighlightedTitle | BindHighlightedTitle()
+UIKit.UIButton | SelectedTitle | BindSelectedTitle()
+UIKit.UIView | Tap | BindTap()
+UIKit.UIView | Hidden | BindHidden()
+UIKit.UIView | Visible | BindVisible()
+UIKit.UIView | DoubleTap | BindDoubleTap()
+UIKit.UIView | TextFocus | BindTextFocus()
+UIKit.UIView | Visibility | BindVisibility()
+UIKit.UIView | TwoFingerTap | BindTwoFingerTap()
+UIKit.UIView | LayerBorderWidth | BindLayerBorderWidth()
+UIKit.UIBarButtonItem | Clicked | BindClicked()
+
+**Mac**
+
+```Text
+# MvvmCross 6.x.x 
+using MvvmCross.Platforms.Mac.Binding
+# MvvmCross 5.x.x
+using MvvmCross.Binding.Mac
+```
+
+Base Control | String | Extension method
+---- | --------- | ---------
+AppKit.NSView | Visibility | BindVisibility()
+AppKit.NSView | Visible | BindVisible()
+AppKit.NSSlider | IntValue | BindIntValue()
+AppKit.NSSegmentedControl | SelectedSegment | BindSelectedSegment()
+AppKit.NSDatePicker | Time | BindTime()
+AppKit.NSDatePicker | Date | BindDate()
+AppKit.NSTextField | StringValue | BindStringValue()
+AppKit.NSTextView | StringValue | BindStringValue()
+AppKit.NSButton | State | BindState()
+AppKit.NSButton | Title | BindTitle()
+AppKit.NSMenuItem | State | BindState()
+AppKit.NSSearchField | Text | BindText()
+AppKit.NSTabViewController | SelectedTabViewItemIndex | BindSelectedTabViewItemIndex()
+
+**tvOS**
+
+```Text
+# MvvmCross 6.x.x 
+using MvvmCross.Platforms.Tvos.Binding
+# MvvmCross 5.x.x
+using MvvmCross.Binding.tvOS
+```
+
+Base Control | String | Extension method
+---- | --------- | ---------
+UIKit.UIControl | TouchUpInside | BindTouchUpInside()
+UIKit.UIControl | ValueChanged | BindValueChanged()
+UIKit.UIActivityIndicatorView | Hidden | BindHidden()
+UIKit.UISegmentedControl | SelectedSegment | BindSelectedSegment()
+UIKit.UITextField | ShouldReturn | BindShouldReturn()
+UIKit.UILabel | Text | BindText()
+UIKit.UITextField | Text | BindText()
+UIKit.UITextView | Text | BindText()
+UIKit.UISearchBar | Text | BindText()
+UIKit.UIButton | Title | BindTitle()
+UIKit.UIButton | DisabledTitle | BindDisabledTitle()
+UIKit.UIButton | HighlightedTitle | BindHighlightedTitle()
+UIKit.UIButton | SelectedTitle | BindSelectedTitle()
+UIKit.UIView | Tap | BindTap()
+UIKit.UIView | Hidden | BindHidden()
+UIKit.UIView | Visible | BindVisible()
+UIKit.UIView | TextFocus | BindTextFocus()
+UIKit.UIView | DoubleTap | BindDoubleTap()
+UIKit.UIView | Visibility | BindVisibility()
+UIKit.UIView | TwoFingerTap | BindTwoFingerTap()
+UIKit.UIView | LayerBorderWidth | BindLayerBorderWidth()
+
+**UWP**
+
+```Text
+# MvvmCross 6.x.x 
+using MvvmCross.Platforms.Uap.Binding
+# MvvmCross 5.x.x
+using MvvmCross.Binding.Uwp
+```
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Windows.UI.Xaml.FrameworkElement | Visible | BindVisible()
+Windows.UI.Xaml.FrameworkElement | Collapsed | BindCollapsed()
+Windows.UI.Xaml.FrameworkElement | Hidden | BindHidden()
+
+**WPF**
+
+```Text
+# MvvmCross 6.x.x 
+using MvvmCross.Platforms.Wpf.Binding
+# MvvmCross 5.x.x
+using MvvmCross.BindingEx.Wpf / using MvvmCross.BindingEx.WindowsCommon
+```
+
+Base Control | String | Extension method
+---- | --------- | ---------
+Windows.UI.Xaml.FrameworkElement | Visible | BindVisible()
+Windows.UI.Xaml.FrameworkElement | Collapsed | BindCollapsed()
+Windows.UI.Xaml.FrameworkElement | Hidden | BindHidden()

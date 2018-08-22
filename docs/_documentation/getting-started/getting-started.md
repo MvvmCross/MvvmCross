@@ -17,41 +17,38 @@ The high level features that MvvmCross provides you with are:
 * Navigation system
 * Data Binding
 * Platform specifics support
-* Inversion of control and Dependency Injection
+* Inversion of Control container and Dependency Injection engine
 * Lots of plugins for common functionalities
 * Unit test helpers
 * Complete flexibility - your app is King!
 
-## Your first project with Xamarin and MvvmCross
+## Xamarin traditional vs Xamarin Forms
 
-Here is a video that will help you creating a project from scratch with Xamarin and MvvmCross:
+It doesn't matter if your next app is will be made using Xamarin traditional or Xamarin.Forms, because MvvmCross supports both approaches! 
 
-[https://www.youtube.com/watch?v=NihmK6R9r4s](https://www.youtube.com/watch?v=NihmK6R9r4s)
+## TipCalc Tutorial
 
-It gives all the detailed steps for a solution that includes a _Core_ PCL and app projects for iOS, Android and Windows Phone.
+The best way to get started with Xamarin & MvvmCross is to follow the TipCalc tutorial, which will guide you through the basics.
 
-Here is the article that contains the text version:
-
-[http://jonathanroux.com/2016/02/09/mvvmcross-4-and-xamarin-project-setup/](http://jonathanroux.com/2016/02/09/mvvmcross-4-and-xamarin-project-setup/)
+You can find it [here](https://www.mvvmcross.com/documentation/tutorials/tipcalc/the-tip-calc-tutorial).
 
 ## MvvmCross Templates
 
-You can also install the templates for Visual Studio and Xamarin Studio:
+It is also recommended to use one of the templates available for Visual Studio / Visual Studio for Mac:
 
 Name | Author | Link
 ---- | --------- | -------
 XabluCross for MvvmCross | XabluCross | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=XabluCross.XabluCrossVSPackage)
-MvvmCross for Visual Studio | Jim Bennet | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=JimBobBennett.MvvmCrossforVisualStudio) - [Xamarin Studio](http://addins.monodevelop.com/Project/Index/227)
+MvvmCross for Visual Studio | Jim Bennett | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=JimBobBennett.MvvmCrossforVisualStudio-19327) - [Visual Studio for Mac](http://addins.monodevelop.com/Project/Index/227)
 MvvmCross Plugin Template for Visual Studio | EShy | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=EShy.MvvmCrossPluginTemplateforVisualStudio)
 Xamarin MvvmCross Dreams | Artmdev | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=Artmdev.XamarinMvvmCrossDREAMS)
-Xamarin Forms with MvvmCross Solution Template | Cristian Chereches | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=CristianChereches.XamarinFormswithMvvmCrossSolutionTemplate)
+Xamarin Forms with MvvmCross 5 Solution Template | Paul Datsiuk | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=PaulDatsiuk.XamarinFormswithMvvmCross5SolutionTemplate)
 Ninja Coder For MvvmCross and Xamarin Forms | Ninja Coder for MvvmCross | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=NinjaCoderforMvvmCross.NinjaCoderForMvvmCrossandXamarinForms)
 MVXTemplates | Luke Pothier | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=LukePothier.MVXTemplates)
 
 You can choose to download and install an extension manually, or you can get it from the Extension Manager in Visual Studio / the Add-In Gallery in Xamarin Studio (Visual Studio for Mac).
 
+## Show me some code please!
 
-## Help updating the docs!
-
-Everyone can contribute and help improving the docs! The docs are part of the source tree, so just go over to github and help us out!
+Please check [this document](https://www.mvvmcross.com/documentation/getting-started/mvvmcross-overview) to get an overview of how MvvmCross works.
 
