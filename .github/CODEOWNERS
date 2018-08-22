@@ -3,45 +3,45 @@
 # standard @username or @org/team-name format. You can also refer to a user by an
 # email address that has been added to their GitHub account, for example user@example.com
 
-*                                          @mvvmcross/core
+*                                          @MvvmCross/core
 
-.github/*                                  @mvvmcross/maintainers
-version.json                               @mvvmcross/maintainers
-ContentFiles                               @mvvmcross/maintainers
+.github/*                                  @MvvmCross/maintainers
+version.json                               @MvvmCross/maintainers
+ContentFiles                               @MvvmCross/maintainers
 
-build.*                                    @mvvmcross/devops
-signclient.json                            @mvvmcross/devops
-*.ps1                                      @mvvmcross/devops
-NuGet.*                                    @mvvmcross/devops
-appveyor.yml                               @mvvmcross/devops
-tools/*                                    @mvvmcross/devops
-MvvmCross.Analyzers/*                      @mvvmcross/devops
+build.*                                    @MvvmCross/devops
+signclient.json                            @MvvmCross/devops
+*.ps1                                      @MvvmCross/devops
+NuGet.*                                    @MvvmCross/devops
+appveyor.yml                               @MvvmCross/devops
+tools/*                                    @MvvmCross/devops
+MvvmCross.Analyzers/*                      @MvvmCross/devops
 
-Projects/*                                 @mvvmcross/docs
-snippets/*                                 @mvvmcross/docs
-*.md                                       @mvvmcross/docs
-docs/*                                     @mvvmcross/docs
+Projects/*                                 @MvvmCross/docs
+snippets/*                                 @MvvmCross/docs
+*.md                                       @MvvmCross/docs
+docs/*                                     @MvvmCross/docs
 
-MvvmCross/*                                @mvvmcross/maintainers
-MvvmCross/Platforms/Android/*              @mvvmcross/android
-MvvmCross/Platforms/Ios/*                  @mvvmcross/ios
-MvvmCross/Platforms/Mac/*                  @mvvmcross/mac
-MvvmCross/Platforms/Tvos/*                 @mvvmcross/ios @mvvmcross/mac
-MvvmCross/Platforms/Tizen/*                @mvvmcross/tizen
-MvvmCross/Platforms/Uap/*                  @mvvmcross/uap
-MvvmCross/Platforms/Wpf/*                  @mvvmcross/wpf
+MvvmCross/*                                @MvvmCross/maintainers
+MvvmCross/Platforms/Android/*              @MvvmCross/android
+MvvmCross/Platforms/Ios/*                  @MvvmCross/ios
+MvvmCross/Platforms/Mac/*                  @MvvmCross/mac
+MvvmCross/Platforms/Tvos/*                 @MvvmCross/ios @MvvmCross/mac
+MvvmCross/Platforms/Tizen/*                @MvvmCross/tizen
+MvvmCross/Platforms/Uap/*                  @MvvmCross/uap
+MvvmCross/Platforms/Wpf/*                  @MvvmCross/wpf
 
-MvvmCross.Forms/*                          @mvvmcross/xamarin-forms @mvvmcross/maintainers
-MvvmCross.Forms/Platforms/Android/*        @mvvmcross/android
-MvvmCross.Forms/Platforms/Ios/*            @mvvmcross/ios
-MvvmCross.Forms/Platforms/Mac/*            @mvvmcross/mac
-MvvmCross.Forms/Platforms/Tizen/*          @mvvmcross/tizen
-MvvmCross.Forms/Platforms/Uap/*            @mvvmcross/uap
+MvvmCross.Forms/*                          @MvvmCross/xamarin-forms @MvvmCross/maintainers
+MvvmCross.Forms/Platforms/Android/*        @MvvmCross/android
+MvvmCross.Forms/Platforms/Ios/*            @MvvmCross/ios
+MvvmCross.Forms/Platforms/Mac/*            @MvvmCross/mac
+MvvmCross.Forms/Platforms/Tizen/*          @MvvmCross/tizen
+MvvmCross.Forms/Platforms/Uap/*            @MvvmCross/uap
 
-MvvmCross.Android.Support/*                @mvvmcross/android @mvvmcross/maintainers
-MvvmCross.Plugins/*                        @mvvmcross/plugins @mvvmcross/maintainers
+MvvmCross.Android.Support/*                @MvvmCross/android @MvvmCross/maintainers
+MvvmCross.Plugins/*                        @MvvmCross/plugins @MvvmCross/maintainers
 
-MvvmCross.Forms.Wpf/*                      @mvvmcross/wpf @mvvmcross/xamarin-forms @mvvmcross/maintainers
-MvvmCross.Wpf/*                            @mvvmcross/wpf @mvvmcross/maintainers
+MvvmCross.Forms.Wpf/*                      @MvvmCross/wpf @MvvmCross/xamarin-forms @MvvmCross/maintainers
+MvvmCross.Wpf/*                            @MvvmCross/wpf @MvvmCross/maintainers
 
-UnitTests/*                                @mvvmcross/maintainers @mvvmcross/docs @mvvmcross/devops @mvvmcross/android @mvvmcross/ios @mvvmcross/mac @mvvmcross/tizen @mvvmcross/uap @mvvmcross/wpf @mvvmcross/plugins
+UnitTests/*                                @MvvmCross/maintainers @MvvmCross/docs @MvvmCross/devops @MvvmCross/android @MvvmCross/ios @MvvmCross/mac @MvvmCross/tizen @MvvmCross/uap @MvvmCross/wpf @MvvmCross/plugins
