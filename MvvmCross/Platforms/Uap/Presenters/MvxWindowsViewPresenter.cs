@@ -15,6 +15,9 @@ using MvvmCross.Presenters;
 using MvvmCross.Views;
 using MvvmCross.Presenters.Attributes;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml;
+using System.Linq;
 
 namespace MvvmCross.Platforms.Uap.Presenters
 {
@@ -22,8 +25,6 @@ namespace MvvmCross.Platforms.Uap.Presenters
         : MvxAttributeViewPresenter, IMvxWindowsViewPresenter
     {
         protected readonly IMvxWindowsFrame _rootFrame;
-
-        private MvxWindowsContentDialog _windowsContentDialog;
 
         public MvxWindowsViewPresenter(IMvxWindowsFrame rootFrame)
         {
@@ -259,8 +260,6 @@ namespace MvvmCross.Platforms.Uap.Presenters
                 {
                     modalView.ViewModel = request.ViewModelInstance;
 
-                    _windowsContentDialog = modalView;
-
                     await modalView.ShowAsync(attribute.Placement);
 
                     return true;
@@ -278,7 +277,8 @@ namespace MvvmCross.Platforms.Uap.Presenters
 
         protected virtual Task<bool> CloseModal(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute)
         {
-            _windowsContentDialog?.Hide();
+            var popups = VisualTreeHelper.GetOpenPopups(Window.Current).FirstOrDefault(p => p.Child is ContentDialog);
+            (popups?.Child as ContentDialog)?.Hide();
 
             return Task.FromResult(true);
         }
