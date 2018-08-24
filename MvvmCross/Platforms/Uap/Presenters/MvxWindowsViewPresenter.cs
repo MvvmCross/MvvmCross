@@ -258,7 +258,6 @@ namespace MvvmCross.Platforms.Uap.Presenters
             {
                 if (Activator.CreateInstance(viewType) is MvxWindowsContentDialog modalView)
                 {
-
                     if (request is MvxViewModelInstanceRequest instanceRequest)
                     {
                         modalView.ViewModel = instanceRequest.ViewModelInstance;
