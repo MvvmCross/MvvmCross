@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,10 +11,10 @@ namespace MvvmCross.Plugin.Location.Platforms.Wpf
     /// <summary>
     /// Location Watcher Plugin for WPF developers.
     /// </summary>
-    /// <remarks>Warning - this is not fully tested - see https://github.com/MvvmCross/MvvmCross/pull/632
+    /// <remarks>Warning - this is not fully tested - see <a href="https://github.com/MvvmCross/MvvmCross/pull/632">MvvmCross/pull/632</a>
     /// </remarks>
-    /// <see cref="http://code.msdn.microsoft.com/windowsdesktop/Windows-7-Geolocation-API-25585fac"/>
-    /// <seealso cref="http://www.techsupportalert.com/content/how-enable-or-disable-location-sensing-windows-7-and-8.htm"/>
+    /// See <a href="http://code.msdn.microsoft.com/windowsdesktop/Windows-7-Geolocation-API-25585fac">Windows 7 Geolocation API</a>
+    /// and <a href="http://www.techsupportalert.com/content/how-enable-or-disable-location-sensing-windows-7-and-8.htm">How to enable/disable location sensin in Windows 7 and 8</a>
     public sealed class MvxWpfLocationWatcher : MvxLocationWatcher
     {
         private GeoCoordinateWatcher _geolocator;
