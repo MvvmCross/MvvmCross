@@ -11,7 +11,7 @@ namespace MvvmCross.Platforms.Uap.Views
 {
     public class MvxWindowsContentDialog
         : ContentDialog
-        , IMvxView
+        , IMvxWindowsContentDialog
     {
         public MvxWindowsContentDialog()
         {
