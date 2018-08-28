@@ -256,14 +256,15 @@ namespace MvvmCross.Platforms.Uap.Presenters
         {
             try
             {
-                if (Activator.CreateInstance(viewType) is MvxWindowsContentDialog modalView)
+                IMvxWindowsContentDialog contentDialog;
+                if ((contentDialog = CreateContentDialog(attribute, viewType)) != null)
                 {
                     if (request is MvxViewModelInstanceRequest instanceRequest)
                     {
-                        modalView.ViewModel = instanceRequest.ViewModelInstance;
+                        contentDialog.ViewModel = instanceRequest.ViewModelInstance;
                     }
 
-                    await modalView.ShowAsync(attribute.Placement);
+                    await contentDialog.ShowAsync(attribute.Placement);
 
                     return true;
                 }
@@ -275,6 +276,20 @@ namespace MvvmCross.Platforms.Uap.Presenters
                 MvxLog.Instance.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
                     exception.ToLongString());
                 return false;
+            }
+        }
+
+        protected virtual IMvxWindowsContentDialog CreateContentDialog(MvxBasePresentationAttribute attribute,
+            Type viewType)
+        {
+            try
+            {
+                var contentControl = (IMvxWindowsContentDialog)Activator.CreateInstance(viewType);
+                return contentControl;
+            }
+            catch (Exception ex)
+            {
+                throw new MvxException(ex, $"Cannot create ContentDialog '{viewType.FullName}'. Are you use the wrong base class?");
             }
         }
 
