@@ -256,8 +256,8 @@ namespace MvvmCross.Platforms.Uap.Presenters
         {
             try
             {
-                IMvxWindowsContentDialog contentDialog;
-                if ((contentDialog = CreateContentDialog(attribute, viewType)) != null)
+                var contentDialog = CreateContentDialog(attribute, viewType);
+                if (contentDialog != null)
                 {
                     if (request is MvxViewModelInstanceRequest instanceRequest)
                     {
