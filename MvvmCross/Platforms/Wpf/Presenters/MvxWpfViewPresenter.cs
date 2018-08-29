@@ -120,15 +120,15 @@ namespace MvvmCross.Platforms.Wpf.Presenters
         protected virtual Task<bool> ShowWindow(FrameworkElement element, MvxWindowPresentationAttribute attribute, MvxViewModelRequest request)
         {
             Window window;
-            if (element is MvxWindow)
+            if (element is IMvxWindow mvxWindow)
             {
                 window = (Window)element;
-                ((MvxWindow)window).Identifier = attribute.Identifier ?? element.GetType().Name;
+                mvxWindow.Identifier = attribute.Identifier ?? element.GetType().Name;
             }
-            else if (element is Window)
+            else if (element is Window normalWindow)
             {
                 // Accept normal Window class
-                window = (Window)element;
+                window = normalWindow;
             }
             else
             {
