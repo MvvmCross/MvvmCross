@@ -6,10 +6,10 @@ using Playground.Core.ViewModels;
 namespace Playground.Uwp.Views
 {
     [MvxViewFor(typeof(ModalViewModel))]
-    [MvxModalViewPresentation]
-    public sealed partial class ModalView : MvxWindowsContentDialog
+    [MvxDialogViewPresentationAttribute]
+    public sealed partial class DialogView : MvxWindowsContentDialog
     {
-        public ModalView()
+        public DialogView()
         {
             this.InitializeComponent();
         }

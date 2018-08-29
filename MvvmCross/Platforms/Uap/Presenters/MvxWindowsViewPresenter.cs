@@ -60,11 +60,11 @@ namespace MvvmCross.Platforms.Uap.Presenters
                });
 
             AttributeTypesToActionsDictionary.Add(
-               typeof(MvxModalViewPresentationAttribute),
+               typeof(MvxDialogViewPresentationAttributeAttribute),
                new MvxPresentationAttributeAction
                {
-                   ShowAction = (view, attribute, request) => ShowModal(view, (MvxModalViewPresentationAttribute)attribute, request),
-                   CloseAction = (viewModel, attribute) => CloseModal(viewModel, attribute)
+                   ShowAction = (view, attribute, request) => ShowDialog(view, (MvxDialogViewPresentationAttributeAttribute)attribute, request),
+                   CloseAction = (viewModel, attribute) => CloseDialog(viewModel, attribute)
                });
         }
 
@@ -252,7 +252,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
             }
         }
 
-        protected virtual async Task<bool> ShowModal(Type viewType, MvxModalViewPresentationAttribute attribute, MvxViewModelRequest request)
+        protected virtual async Task<bool> ShowDialog(Type viewType, MvxDialogViewPresentationAttributeAttribute attribute, MvxViewModelRequest request)
         {
             try
             {
@@ -293,7 +293,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
             }
         }
 
-        protected virtual Task<bool> CloseModal(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute)
+        protected virtual Task<bool> CloseDialog(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute)
         {
             var popups = VisualTreeHelper.GetOpenPopups(Window.Current).FirstOrDefault(p => p.Child is ContentDialog);
             (popups?.Child as ContentDialog)?.Hide();
