@@ -11,6 +11,12 @@
         android:layout_marginTop="10dp"
         android:text="Show Child"
         local:MvxBind="Click OpenChildCommand;" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Show Tab 2"
+        local:MvxBind="Click OpenTab2Command;" />
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
