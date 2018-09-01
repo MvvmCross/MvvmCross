@@ -20,6 +20,5 @@ namespace Playground.Uwp.Views
 
     public abstract class SplitDetailViewPage : MvxWindowsPage<SplitDetailViewModel>
     {
-
     }
 }
