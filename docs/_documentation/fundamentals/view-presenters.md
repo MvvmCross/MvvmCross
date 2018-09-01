@@ -27,13 +27,13 @@ Let's take a look now at the methods of that interface:
 
 ## View Presenters on each platform
 Each platform has its own View Presenter:
-- Android: [MvxAndroidViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Droid/Views/MvxAndroidViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/presenters/android-view-presenter)
-- Android (support packages): [MvxAppCompatViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross-AndroidSupport/MvvmCross.Droid.Support.V7.AppCompat/MvxAppCompatViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/presenters/android-view-presenter)
-- iOS: [MvxIosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/iOS/iOS/Views/Presenters/MvxIosViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/presenters/ios-view-presenter)
-- UWP: [MvxWindowsViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Windows/Uwp/Views/MvxWindowsViewPresenter.cs)
-- WPF: [MvxWpfViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Windows/Wpf/Views/Presenters/MvxWpfViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/presenters/wpf-view-presenter)
-- macOS: [MvxMacViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Mac/Mac/Views/Presenters/MvxMacViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/presenters/mac-view-presenter)
-- tvOS: [MvxTvosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/tvOS/tvOS/Views/Presenters/MvxTvosViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/presenters/tvos-view-presenter)
+- Android: [MvxAndroidViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Droid/Views/MvxAndroidViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/android/android-view-presenter)
+- Android (support packages): [MvxAppCompatViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross.Android.Support/V7.AppCompat/MvxAppCompatViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/android/android-view-presenter)
+- iOS: [MvxIosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/iOS/iOS/Views/Presenters/MvxIosViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/ios/ios-view-presenter)
+- UWP: [MvxWindowsViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Platforms/Uap/Presenters/MvxWindowsViewPresenter.cs)
+- WPF: [MvxWpfViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Platforms/Wpf/Presenters/MvxWpfViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/wpf/wpf-view-presenter)
+- macOS: [MvxMacViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Platforms/Mac/Presenters/MvxMacViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/macos/mac-view-presenter)
+- tvOS: [MvxTvosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Platforms/Tvos/Presenters/MvxTvosViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/tvos/tvos-view-presenter)
 
 When you navigate to selected ViewModel, platform specific View Presenter handles displaying View properly.
 
