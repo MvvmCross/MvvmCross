@@ -7,11 +7,15 @@ namespace Playground.Uwp.Views
 {
     [MvxViewFor(typeof(ModalViewModel))]
     [MvxDialogViewPresentationAttribute]
-    public sealed partial class DialogView : MvxWindowsContentDialog
+    public sealed partial class DialogView : DialogViewBase
     {
         public DialogView()
         {
             this.InitializeComponent();
         }
+    }
+
+    public abstract class DialogViewBase : MvxWindowsContentDialog<ModalViewModel>
+    {
     }
 }
