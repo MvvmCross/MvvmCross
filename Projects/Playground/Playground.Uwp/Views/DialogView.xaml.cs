@@ -6,7 +6,7 @@ using Playground.Core.ViewModels;
 namespace Playground.Uwp.Views
 {
     [MvxViewFor(typeof(ModalViewModel))]
-    [MvxDialogViewPresentationAttribute]
+    [MvxDialogViewPresentation]
     public sealed partial class DialogView : DialogViewBase
     {
         public DialogView()

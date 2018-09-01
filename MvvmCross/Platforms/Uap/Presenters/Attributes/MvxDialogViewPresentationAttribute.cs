@@ -7,9 +7,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace MvvmCross.Platforms.Uap.Presenters.Attributes
 {
-    public class MvxDialogViewPresentationAttributeAttribute : MvxBasePresentationAttribute
+    public class MvxDialogViewPresentationAttribute : MvxBasePresentationAttribute
     {
-        public MvxDialogViewPresentationAttributeAttribute()
+        public MvxDialogViewPresentationAttribute()
         {
         }
 
