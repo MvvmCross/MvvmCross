@@ -60,10 +60,10 @@ namespace MvvmCross.Platforms.Uap.Presenters
                });
 
             AttributeTypesToActionsDictionary.Add(
-               typeof(MvxDialogViewPresentationAttributeAttribute),
+               typeof(MvxDialogViewPresentationAttribute),
                new MvxPresentationAttributeAction
                {
-                   ShowAction = (view, attribute, request) => ShowDialog(view, (MvxDialogViewPresentationAttributeAttribute)attribute, request),
+                   ShowAction = (view, attribute, request) => ShowDialog(view, (MvxDialogViewPresentationAttribute)attribute, request),
                    CloseAction = (viewModel, attribute) => CloseDialog(viewModel, attribute)
                });
         }
@@ -252,7 +252,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
             }
         }
 
-        protected virtual async Task<bool> ShowDialog(Type viewType, MvxDialogViewPresentationAttributeAttribute attribute, MvxViewModelRequest request)
+        protected virtual async Task<bool> ShowDialog(Type viewType, MvxDialogViewPresentationAttribute attribute, MvxViewModelRequest request)
         {
             try
             {
