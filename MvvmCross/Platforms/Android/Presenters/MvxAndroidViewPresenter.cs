@@ -21,7 +21,6 @@ using MvvmCross.Platforms.Android.Views;
 using MvvmCross.Platforms.Android.Views.Fragments;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
-using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
@@ -204,21 +203,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             }
             return null;
         }
-
-        public override Task<bool> ChangePresentation(MvxPresentationHint hint)
-        {
-            if (hint is MvxPagePresentationHint pagePresentationHint)
-            {
-                var request = new MvxViewModelRequest(pagePresentationHint.ViewModel);
-                var attribute = GetPresentationAttribute(request);
-                GetPresentationAttributeAction(request, out attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
-
-                return Task.FromResult(true);
-            }
-
-            return base.ChangePresentation(hint);
-        }
-
+        
         protected Type GetCurrentActivityViewModelType()
         {
             Type currentActivityType = CurrentActivity?.GetType();
