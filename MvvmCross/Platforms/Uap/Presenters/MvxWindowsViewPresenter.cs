@@ -295,7 +295,16 @@ namespace MvvmCross.Platforms.Uap.Presenters
 
         protected virtual Task<bool> CloseDialog(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute)
         {
-            var popups = VisualTreeHelper.GetOpenPopups(Window.Current).FirstOrDefault(p => p.Child is ContentDialog);
+            var popups = VisualTreeHelper.GetOpenPopups(Window.Current).FirstOrDefault(p =>
+            {
+                if (attribute.ViewType.IsAssignableFrom(p.Child.GetType())
+                    && p.Child is IMvxWindowsContentDialog dialog)
+                {
+                    return dialog.ViewModel == viewModel;
+                }
+                return false;
+            });
+
             (popups?.Child as ContentDialog)?.Hide();
 
             return Task.FromResult(true);
