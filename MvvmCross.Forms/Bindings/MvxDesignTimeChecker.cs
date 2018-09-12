@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -21,8 +21,7 @@ namespace MvvmCross.Forms.Bindings
 
             _checked = true;
 
-            // if Application.Current == null Forms is in design mode
-            if (Application.Current != null)
+            if (!IsDesignTime)
                 return;
 
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)
@@ -38,5 +37,7 @@ namespace MvvmCross.Forms.Bindings
                 builder.DoRegistration();
             }
         }
+
+        public static bool IsDesignTime => DesignMode.IsDesignModeEnabled;
     }
 }
