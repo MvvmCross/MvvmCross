@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -24,17 +24,24 @@ namespace MvvmCross.Forms.Bindings
             if (!IsDesignTime)
                 return;
 
-            if (MvxSingleton<IMvxIoCProvider>.Instance == null)
+            try
             {
-                var iocProvider = MvxIoCProvider.Initialize();
-                Mvx.IoCProvider.RegisterSingleton(iocProvider);
-            }
+                if (MvxSingleton<IMvxIoCProvider>.Instance == null)
+                {
+                    var iocProvider = MvxIoCProvider.Initialize();
+                    Mvx.IoCProvider.RegisterSingleton(iocProvider);
+                }
 
-            if (!Mvx.IoCProvider.CanResolve<IMvxBindingParser>())
+                if (!Mvx.IoCProvider.CanResolve<IMvxBindingParser>())
+                {
+                    //We might want to look into returning the platform specific Forms binder
+                    var builder = new MvxBindingBuilder();
+                    builder.DoRegistration();
+                }
+            }
+            catch
             {
-                //We might want to look into returning the platform specific Forms binder
-                var builder = new MvxBindingBuilder();
-                builder.DoRegistration();
+                // ignore
             }
         }
 
