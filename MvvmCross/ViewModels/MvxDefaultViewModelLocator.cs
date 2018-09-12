@@ -100,20 +100,20 @@ namespace MvvmCross.ViewModels
             try
             {
                 CallCustomInitMethods(viewModel, parameterValues);
-                if (navigationArgs.Cancel)
+                if (navigationArgs?.Cancel == true)
                     return;
                 if (savedState != null)
                 {
                     CallReloadStateMethods(viewModel, savedState);
-                    if (navigationArgs.Cancel)
+                    if (navigationArgs?.Cancel == true)
                         return;
                 }
                 viewModel.Start();
-                if (navigationArgs.Cancel)
+                if (navigationArgs?.Cancel == true)
                     return;
 
                 viewModel.Prepare();
-                if (navigationArgs.Cancel)
+                if (navigationArgs?.Cancel == true)
                     return;
 
                 viewModel.InitializeTask = MvxNotifyTask.Create(() => viewModel.Initialize());
@@ -129,24 +129,24 @@ namespace MvvmCross.ViewModels
             try
             {
                 CallCustomInitMethods(viewModel, parameterValues);
-                if (navigationArgs.Cancel)
+                if (navigationArgs?.Cancel == true)
                     return;
                 if (savedState != null)
                 {
                     CallReloadStateMethods(viewModel, savedState);
-                    if (navigationArgs.Cancel)
+                    if (navigationArgs?.Cancel == true)
                         return;
                 }
                 viewModel.Start();
-                if (navigationArgs.Cancel)
+                if (navigationArgs?.Cancel == true)
                     return;
 
                 viewModel.Prepare();
-                if (navigationArgs.Cancel)
+                if (navigationArgs?.Cancel == true)
                     return;
 
                 viewModel.Prepare(param);
-                if (navigationArgs.Cancel)
+                if (navigationArgs?.Cancel == true)
                     return;
 
                 viewModel.InitializeTask = MvxNotifyTask.Create(() => viewModel.Initialize());
