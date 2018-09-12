@@ -51,7 +51,6 @@ namespace MvvmCross.Forms.Bindings
                 {
                     MvxFormsLog.Instance.Trace("Can only use MvxBind on a bindable view");
                 }
-                
             }
             else if (BindableObjectRaw is IMarkupExtension ext)
             {
