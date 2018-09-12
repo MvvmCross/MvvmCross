@@ -28,6 +28,16 @@
                 <Button Text="Show Bindings view" mvx:Bi.nd="Command ShowBindingsViewCommand"/>
                 <Button Text="Show CodeBehind view" mvx:Bi.nd="Command ShowCodeBehindViewCommand"/>
                 <Button Text="Show Converters view" mvx:Bi.nd="Command ConvertersCommand" />
+
+                <Label Text="{mvx:MvxLang ShowLabel}" TextColor="{StaticResource PrimaryColor}">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding IsVisible}" Value="True">
+                            <Setter Property="Text" Value="{mvx:MvxLang HideLabel}" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+
+                <Button Text="Trigger Visibility" mvx:Bi.nd="Command TriggerVisibilityCommand" />
             </StackLayout>
         </ScrollView>
 	</ContentPage.Content>
