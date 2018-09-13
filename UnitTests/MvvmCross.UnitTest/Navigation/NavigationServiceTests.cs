@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -265,9 +265,10 @@ namespace MvvmCross.UnitTest.Navigation
             tasks.Add(navigationService.Navigate<SimpleParameterTestViewModel, string>("hello"));
             tasks.Add(navigationService.Navigate<SimpleParameterTestViewModel, string>("hello", new MvxBundle()));
             await Task.WhenAll(tasks);
+            await Task.Delay(200);
 
-            Assert.True(beforeNavigate == 6);
-            Assert.True(afterNavigate == 6);
+            Assert.Equal(6, beforeNavigate);
+            Assert.Equal(6, afterNavigate);
         }
 
         [Fact]
