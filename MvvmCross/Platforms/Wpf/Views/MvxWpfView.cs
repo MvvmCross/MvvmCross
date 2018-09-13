@@ -33,13 +33,13 @@ namespace MvvmCross.Platforms.Wpf.Views
         {
             ViewModel?.ViewDisappearing();
             ViewModel?.ViewDisappeared();
+            ViewModel?.ViewDestroy();
         }
 
         private void MvxWpfView_Loaded(object sender, RoutedEventArgs e)
         {
             ViewModel?.ViewAppearing();
             ViewModel?.ViewAppeared();
-            ViewModel?.ViewDestroy();
         }
 
         public void Dispose()

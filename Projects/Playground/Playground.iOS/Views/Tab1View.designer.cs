@@ -1,6 +1,6 @@
-// WARNING
+﻿// WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
+// This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
@@ -26,6 +26,10 @@ namespace Playground.iOS.Views
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton btnNavModal { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton btnTab2 { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
             if (btnChild != null) {
@@ -41,6 +45,11 @@ namespace Playground.iOS.Views
             if (btnNavModal != null) {
                 btnNavModal.Dispose ();
                 btnNavModal = null;
+            }
+
+            if (btnTab2 != null) {
+                btnTab2.Dispose ();
+                btnTab2 = null;
             }
         }
     }

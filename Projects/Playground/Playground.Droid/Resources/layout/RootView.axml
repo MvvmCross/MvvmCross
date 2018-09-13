@@ -80,6 +80,12 @@
                 android:layout_marginTop="10dp"
                 android:text="Show Custom Binding"
                 local:MvxBind="Click ShowCustomBindingCommand" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Show Fluent Binding Example"
+                local:MvxBind="Click ShowFluentBindingCommand" />
         </LinearLayout>
     </ScrollView>
     <FrameLayout

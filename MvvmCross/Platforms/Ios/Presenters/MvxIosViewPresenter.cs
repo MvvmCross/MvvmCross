@@ -5,16 +5,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CoreGraphics;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
-using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
-using UIKit;
 using MvvmCross.Presenters.Attributes;
-using System.Threading.Tasks;
+using MvvmCross.Presenters.Hints;
+using MvvmCross.ViewModels;
+using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Presenters
 {
@@ -206,6 +207,41 @@ namespace MvvmCross.Platforms.Ios.Presenters
             if (!await CloseTabBarViewController()) return false;
             if (!await CloseSplitViewController()) return false;
             return true;
+        }
+
+        public override Task<bool> ChangePresentation(MvxPresentationHint hint)
+        {
+            if (hint is MvxPagePresentationHint pagePresentationHint)
+            {
+                if (TabBarViewController is UITabBarController tabsController
+                    && tabsController.ViewControllers != null)
+                {
+                    foreach (var vc in tabsController.ViewControllers)
+                    {
+                        IMvxIosView tabView;
+
+                        if(vc is UINavigationController)
+                        {
+                            var root = ((UINavigationController)vc).ViewControllers.FirstOrDefault();
+                            tabView = root.GetIMvxIosView();
+                        }
+                        else 
+                        {
+                            tabView = vc.GetIMvxIosView();
+                        }
+
+                        var viewModelType = tabView.GetViewModelType();
+
+                        if (viewModelType != null && viewModelType == pagePresentationHint.ViewModel)
+                        {
+                            tabsController.SelectedViewController = vc;
+                            return Task.FromResult(true);
+                        }
+                    }
+                }
+            }
+            
+            return base.ChangePresentation(hint);
         }
 
         protected void SetupWindowRootNavigation(UIViewController viewController, MvxRootPresentationAttribute attribute)

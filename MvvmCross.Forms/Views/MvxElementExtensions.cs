@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Exceptions;
+using MvvmCross.Forms.Bindings;
 using MvvmCross.Forms.Views.Base;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
@@ -27,24 +28,33 @@ namespace MvvmCross.Forms.Views
             var adapter = new MvxCellAdapter(cell);
         }
 
-        public static void OnBindingContextChanged(this IMvxElement element)
+        private static void LoadViewModelForElement(IMvxElement element)
         {
-            var cache = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>();
-            var cached = cache.Get(element.FindAssociatedViewModelTypeOrNull());
+            IMvxViewModel cached = null;
+            if (!MvxDesignTimeChecker.IsDesignTime)
+            {
+                var cache = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>();
+                cached = cache.Get(element.FindAssociatedViewModelTypeOrNull());
+            }
 
             element.OnViewCreate(() => cached ?? element.LoadViewModel());
+        }
+
+        public static void OnBindingContextChanged(this IMvxElement element)
+        {
+            LoadViewModelForElement(element);
         }
 
         public static void OnViewAppearing(this IMvxElement element)
         {
-            var cache = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>();
-            var cached = cache.Get(element.FindAssociatedViewModelTypeOrNull());
-
-            element.OnViewCreate(() => cached ?? element.LoadViewModel());
+            LoadViewModelForElement(element);
         }
 
         private static IMvxViewModel LoadViewModel(this IMvxElement element)
         {
+            if (MvxDesignTimeChecker.IsDesignTime)
+                return new MvxNullViewModel();
+
             var viewModelType = element.FindAssociatedViewModelTypeOrNull();
             if (viewModelType == typeof(MvxNullViewModel))
                 return new MvxNullViewModel();
