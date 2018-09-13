@@ -328,6 +328,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="11854">
+                                <rect key="frame" x="168.5" y="288" width="77" height="30"/>
+                                <state key="normal" title="Show tab 2">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -341,12 +347,15 @@
                             <constraint firstItem="155" firstAttribute="centerX" secondItem="125" secondAttribute="centerX" constant="1" id="405"/>
                             <constraint firstItem="157" firstAttribute="centerX" secondItem="125" secondAttribute="centerX" id="406"/>
                             <constraint firstItem="157" firstAttribute="top" secondItem="155" secondAttribute="bottom" constant="33" id="407"/>
+                            <constraint id="11855" firstItem="11854" firstAttribute="centerX" secondItem="125" secondAttribute="centerX"/>
+                            <constraint id="11856" firstItem="11854" firstAttribute="top" secondItem="157" secondAttribute="bottom" constant="33"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="btnChild" destination="157" id="name-outlet-157"/>
                         <outlet property="btnModal" destination="155" id="name-outlet-155"/>
                         <outlet property="btnNavModal" destination="156" id="name-outlet-156"/>
+                        <outlet property="btnTab2" destination="11854" id="name-outlet-11854"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="126" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -738,9 +747,4 @@
             <point key="canvasLocation" x="3304" y="1373"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="home.png" width="25" height="25"/>
-        <image name="ic_tabbar_menu.png" width="25" height="25"/>
-        <image name="settings.png" width="24" height="24"/>
-    </resources>
 </document>

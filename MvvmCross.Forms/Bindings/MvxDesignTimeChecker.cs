@@ -21,22 +21,30 @@ namespace MvvmCross.Forms.Bindings
 
             _checked = true;
 
-            // if Application.Current == null Forms is in design mode
-            if (Application.Current != null)
+            if (!IsDesignTime)
                 return;
 
-            if (MvxSingleton<IMvxIoCProvider>.Instance == null)
+            try
             {
-                var iocProvider = MvxIoCProvider.Initialize();
-                Mvx.IoCProvider.RegisterSingleton(iocProvider);
-            }
+                if (MvxSingleton<IMvxIoCProvider>.Instance == null)
+                {
+                    var iocProvider = MvxIoCProvider.Initialize();
+                    Mvx.IoCProvider.RegisterSingleton(iocProvider);
+                }
 
-            if (!Mvx.IoCProvider.CanResolve<IMvxBindingParser>())
+                if (!Mvx.IoCProvider.CanResolve<IMvxBindingParser>())
+                {
+                    //We might want to look into returning the platform specific Forms binder
+                    var builder = new MvxBindingBuilder();
+                    builder.DoRegistration();
+                }
+            }
+            catch
             {
-                //We might want to look into returning the platform specific Forms binder
-                var builder = new MvxBindingBuilder();
-                builder.DoRegistration();
+                // ignore
             }
         }
+
+        public static bool IsDesignTime => DesignMode.IsDesignModeEnabled;
     }
 }

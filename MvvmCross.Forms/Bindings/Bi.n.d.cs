@@ -20,13 +20,14 @@ namespace MvvmCross.Forms.Bindings
         }
 
         // ReSharper disable once InconsistentNaming
-        public static readonly BindableProperty ndProperty = BindableProperty.CreateAttached("nd",
-                                                                                             typeof(string),
-                                                                                             typeof(Bi),
-                                                                                             null,
-                                                                                             BindingMode.OneWay,
-                                                                                             null,
-                                                                                             CallBackWhenndIsChanged);
+        public static readonly BindableProperty ndProperty = 
+            BindableProperty.CreateAttached("nd",
+                                            typeof(string),
+                                            typeof(Bi),
+                                            null,
+                                            BindingMode.OneWay,
+                                            null,
+                                            CallBackWhenndIsChanged);
 
         public static string Getnd(BindableObject obj)
         {
@@ -51,8 +52,10 @@ namespace MvvmCross.Forms.Bindings
 
         private static IMvxBindingCreator ResolveBindingCreator()
         {
-            IMvxBindingCreator toReturn;
-            if (!Mvx.IoCProvider.TryResolve<IMvxBindingCreator>(out toReturn))
+            if (MvxDesignTimeChecker.IsDesignTime)
+                return null;
+
+            if (!Mvx.IoCProvider.TryResolve(out IMvxBindingCreator toReturn))
             {
                 throw new MvxException("Unable to resolve the binding creator - have you initialized Xamarin Forms Binding");
             }
