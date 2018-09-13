@@ -20,6 +20,7 @@ using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
+using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
@@ -151,6 +152,56 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
 
             return base.CreatePresentationAttribute(viewModelType, viewType);
+        }
+
+        public override Task<bool> ChangePresentation(MvxPresentationHint hint)
+        {
+            if (hint is MvxPagePresentationHint pagePresentationHint)
+            {
+                var request = new MvxViewModelRequest(pagePresentationHint.ViewModel);
+                var attribute = GetPresentationAttribute(request);
+
+                if (attribute is MvxViewPagerFragmentPresentationAttribute pagerFragmentAttribute)
+                {
+                    var viewPager = FindViewPagerInFragmentPresentation(pagerFragmentAttribute);
+                    if (viewPager?.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
+                    {
+                        var index = adapter.FragmentsInfo.FindIndex(f => f.Tag == pagerFragmentAttribute.Title);
+                        if (index < 0)
+                        {
+                            MvxAndroidLog.Instance.Trace("Did not find ViewPager index for {0}, skipping presentation change...",
+                                pagerFragmentAttribute.Title);
+
+                            return Task.FromResult(false);
+                        }
+
+                        viewPager.SetCurrentItem(index, true);
+                        return Task.FromResult(true);
+                    }
+                }
+            }
+
+            return base.ChangePresentation(hint);
+        }
+
+        private ViewPager FindViewPagerInFragmentPresentation(MvxViewPagerFragmentPresentationAttribute pagerFragmentAttribute)
+        {
+            ViewPager viewPager = null;
+
+            // check for a ViewPager inside a Fragment
+            if (pagerFragmentAttribute.FragmentHostViewType != null)
+            {
+                var fragment = GetFragmentByViewType(pagerFragmentAttribute.FragmentHostViewType);
+                viewPager = fragment.View.FindViewById<ViewPager>(pagerFragmentAttribute.ViewPagerResourceId);
+            }
+
+            // check for a ViewPager inside an Activity
+            if (viewPager == null && pagerFragmentAttribute.ActivityHostViewModelType != null)
+            {
+                viewPager = CurrentActivity.FindViewById<ViewPager>(pagerFragmentAttribute.ViewPagerResourceId);
+            }
+
+            return viewPager;
         }
 
         #region Show implementations
@@ -403,20 +454,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             if (viewPager.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
             {
-                if (adapter.FragmentsInfo.Any(f => f.Tag == attribute.Title))
-                {
-                    var index = adapter.FragmentsInfo.FindIndex(f => f.Tag == attribute.Title);
-                    viewPager.SetCurrentItem(index > -1 ? index : 0, true);
-                }
+                if (request is MvxViewModelInstanceRequest instanceRequest)
+                    adapter.FragmentsInfo.Add(new MvxViewPagerFragmentInfo(attribute.Title, attribute.ViewType, instanceRequest.ViewModelInstance));
                 else
-                {
-                    if (request is MvxViewModelInstanceRequest instanceRequest)
-                        adapter.FragmentsInfo.Add(new MvxViewPagerFragmentInfo(attribute.Title, attribute.ViewType, instanceRequest.ViewModelInstance));
-                    else
-                        adapter.FragmentsInfo.Add(new MvxViewPagerFragmentInfo(attribute.Title, attribute.ViewType, attribute.ViewModelType));
+                    adapter.FragmentsInfo.Add(new MvxViewPagerFragmentInfo(attribute.Title, attribute.ViewType, attribute.ViewModelType));
 
-                    adapter.NotifyDataSetChanged();
-                }
+                adapter.NotifyDataSetChanged();
             }
             else
             {
