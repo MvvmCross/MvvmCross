@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -257,13 +257,15 @@ namespace MvvmCross.UnitTest.Navigation
             navigationService.BeforeNavigate += (sender, e) => beforeNavigate++;
             navigationService.AfterNavigate += (sender, e) => afterNavigate++;
 
-            var tasks = new List<Task>();
-            tasks.Add(navigationService.Navigate<SimpleTestViewModel>());
-            tasks.Add(navigationService.Navigate<SimpleTestViewModel>(new MvxBundle()));
-            tasks.Add(navigationService.Navigate<SimpleResultTestViewModel, bool>());
-            tasks.Add(navigationService.Navigate<SimpleResultTestViewModel, bool>(new MvxBundle()));
-            tasks.Add(navigationService.Navigate<SimpleParameterTestViewModel, string>("hello"));
-            tasks.Add(navigationService.Navigate<SimpleParameterTestViewModel, string>("hello", new MvxBundle()));
+            var tasks = new Task[]
+            {
+                navigationService.Navigate<SimpleTestViewModel>(),
+                navigationService.Navigate<SimpleTestViewModel>(new MvxBundle()),
+                navigationService.Navigate<SimpleResultTestViewModel, bool>(),
+                navigationService.Navigate<SimpleResultTestViewModel, bool>(new MvxBundle()),
+                navigationService.Navigate<SimpleParameterTestViewModel, string>("hello"),
+                navigationService.Navigate<SimpleParameterTestViewModel, string>("hello", new MvxBundle())
+            };
             await Task.WhenAll(tasks);
             await Task.Delay(200);
 
@@ -281,9 +283,11 @@ namespace MvvmCross.UnitTest.Navigation
             navigationService.BeforeClose += (sender, e) => beforeClose++;
             navigationService.AfterClose += (sender, e) => afterClose++;
 
-            var tasks = new List<Task>();
-            tasks.Add(navigationService.Close(new SimpleTestViewModel()));
-            tasks.Add(navigationService.Close<bool>(new SimpleResultTestViewModel(), false));
+            var tasks = new Task[]
+            {
+                navigationService.Close(new SimpleTestViewModel()),
+                navigationService.Close<bool>(new SimpleResultTestViewModel(), false)
+            };
             await Task.WhenAll(tasks);
 
             Assert.Equal(2, beforeClose);
