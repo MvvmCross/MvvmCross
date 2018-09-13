@@ -203,7 +203,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             }
             return null;
         }
-
+        
         protected Type GetCurrentActivityViewModelType()
         {
             Type currentActivityType = CurrentActivity?.GetType();
