@@ -141,7 +141,7 @@ namespace MvvmCross.UnitTest.Navigation
                 x => x.ShowViewModel(It.Is<MvxViewModelInstanceRequest>(t => t.ViewModelInstance == mockVm.Object)),
                 Times.Once);
 
-            Assert.True(MockDispatcher.Object.Requests.Count > 0);
+            Assert.NotEmpty(MockDispatcher.Object.Requests);
         }
 
         [Fact]
@@ -159,7 +159,7 @@ namespace MvvmCross.UnitTest.Navigation
                 x => x.ShowViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(SimpleParameterTestViewModel))),
                 Times.Once);
 
-            Assert.True(MockDispatcher.Object.Requests.Count > 0);
+            Assert.NotEmpty(MockDispatcher.Object.Requests);
         }
 
         [Fact]
@@ -179,7 +179,7 @@ namespace MvvmCross.UnitTest.Navigation
                 x => x.ShowViewModel(It.Is<MvxViewModelInstanceRequest>(t => t.ViewModelInstance == mockVm.Object)),
                 Times.Once);
 
-            Assert.True(MockDispatcher.Object.Requests.Count > 0);
+            Assert.NotEmpty(MockDispatcher.Object.Requests);
         }
 
         [Fact]
@@ -226,7 +226,7 @@ namespace MvvmCross.UnitTest.Navigation
                 x => x.ShowViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(SimpleParameterTestViewModel))),
                 Times.Once);
 
-            Assert.True(MockDispatcher.Object.Requests.Count > 0);
+            Assert.NotEmpty(MockDispatcher.Object.Requests);
         }
 
         [Fact]
@@ -243,7 +243,7 @@ namespace MvvmCross.UnitTest.Navigation
                 x => x.ShowViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(SimpleResultTestViewModel))),
                 Times.Once);
 
-            Assert.True(MockDispatcher.Object.Requests.Count > 0);
+            Assert.NotEmpty(MockDispatcher.Object.Requests);
             Assert.True(result);
         }
 
@@ -257,17 +257,20 @@ namespace MvvmCross.UnitTest.Navigation
             navigationService.BeforeNavigate += (sender, e) => beforeNavigate++;
             navigationService.AfterNavigate += (sender, e) => afterNavigate++;
 
-            var tasks = new List<Task>();
-            tasks.Add(navigationService.Navigate<SimpleTestViewModel>());
-            tasks.Add(navigationService.Navigate<SimpleTestViewModel>(new MvxBundle()));
-            tasks.Add(navigationService.Navigate<SimpleResultTestViewModel, bool>());
-            tasks.Add(navigationService.Navigate<SimpleResultTestViewModel, bool>(new MvxBundle()));
-            tasks.Add(navigationService.Navigate<SimpleParameterTestViewModel, string>("hello"));
-            tasks.Add(navigationService.Navigate<SimpleParameterTestViewModel, string>("hello", new MvxBundle()));
+            var tasks = new Task[]
+            {
+                navigationService.Navigate<SimpleTestViewModel>(),
+                navigationService.Navigate<SimpleTestViewModel>(new MvxBundle()),
+                navigationService.Navigate<SimpleResultTestViewModel, bool>(),
+                navigationService.Navigate<SimpleResultTestViewModel, bool>(new MvxBundle()),
+                navigationService.Navigate<SimpleParameterTestViewModel, string>("hello"),
+                navigationService.Navigate<SimpleParameterTestViewModel, string>("hello", new MvxBundle())
+            };
             await Task.WhenAll(tasks);
+            await Task.Delay(200);
 
-            Assert.True(beforeNavigate == 6);
-            Assert.True(afterNavigate == 6);
+            Assert.Equal(6, beforeNavigate);
+            Assert.Equal(6, afterNavigate);
         }
 
         [Fact]
@@ -280,13 +283,15 @@ namespace MvvmCross.UnitTest.Navigation
             navigationService.BeforeClose += (sender, e) => beforeClose++;
             navigationService.AfterClose += (sender, e) => afterClose++;
 
-            var tasks = new List<Task>();
-            tasks.Add(navigationService.Close(new SimpleTestViewModel()));
-            tasks.Add(navigationService.Close<bool>(new SimpleResultTestViewModel(), false));
+            var tasks = new Task[]
+            {
+                navigationService.Close(new SimpleTestViewModel()),
+                navigationService.Close<bool>(new SimpleResultTestViewModel(), false)
+            };
             await Task.WhenAll(tasks);
 
-            Assert.True(beforeClose == 2);
-            Assert.True(afterClose == 2);
+            Assert.Equal(2, beforeClose);
+            Assert.Equal(2, afterClose);
         }
 
         [Fact]
@@ -301,8 +306,8 @@ namespace MvvmCross.UnitTest.Navigation
 
             navigationService.ChangePresentation(new MvxClosePresentationHint(new SimpleTestViewModel()));
 
-            Assert.True(beforeChangePresentation == 1);
-            Assert.True(afterChangePresentation == 1);
+            Assert.Equal(1, beforeChangePresentation);
+            Assert.Equal(1, afterChangePresentation);
         }
     }
 }
