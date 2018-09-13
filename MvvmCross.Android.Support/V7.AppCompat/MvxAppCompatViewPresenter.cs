@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -171,9 +171,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                         var fragment = GetFragmentByViewType(pagerFragmentAttribute.FragmentHostViewType);
                         viewPager = fragment.View.FindViewById<ViewPager>(pagerFragmentAttribute.ViewPagerResourceId);
                     }
-
+                    
                     // check for a ViewPager inside an Activity
-                    if (pagerFragmentAttribute.ActivityHostViewModelType != null)
+                    if (viewPager == null && pagerFragmentAttribute.ActivityHostViewModelType != null)
                     {
                         viewPager = CurrentActivity.FindViewById<ViewPager>(pagerFragmentAttribute.ViewPagerResourceId);
                     }
