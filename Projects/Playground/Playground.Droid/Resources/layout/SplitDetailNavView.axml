@@ -24,11 +24,6 @@
     <Button
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="Main Menu"
-        local:MvxBind="Click MainMenuCommand" />
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
         android:text="Close"
         local:MvxBind="Click CloseCommand" />
 </LinearLayout>
