@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -7,6 +7,7 @@ using System.Net;
 using System.Threading.Tasks;
 using MvvmCross;
 using MvvmCross.Commands;
+using MvvmCross.Localization;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin.Messenger;
@@ -25,6 +26,11 @@ namespace Playground.Core.ViewModels
         private int _counter = 2;
 
         private string _welcomeText = "Default welcome";
+
+        public IMvxLanguageBinder TextSource
+        {
+            get { return new MvxLanguageBinder("Playground.Core", "Text"); }
+        }
 
         public RootViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService, IMvxViewModelLoader mvxViewModelLoader) : base(logProvider, navigationService)
         {
@@ -86,6 +92,9 @@ namespace Playground.Core.ViewModels
                 new MvxAsyncCommand(async () => await NavigationService.Navigate<FluentBindingViewModel>());
 
             _counter = 3;
+
+            TriggerVisibilityCommand =
+                new MvxCommand(() => IsVisible = !IsVisible);
         }
 
         public MvxNotifyTask MyTask { get; set; }
@@ -134,6 +143,15 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowSharedElementsCommand { get; }
 
         public IMvxAsyncCommand ShowFluentBindingCommand { get; }
+
+        public IMvxCommand TriggerVisibilityCommand { get; }
+
+        private bool _isVisible;
+        public bool IsVisible
+        {
+            get => _isVisible;
+            set => SetProperty(ref _isVisible, value);
+        }
 
         public string WelcomeText
         {
