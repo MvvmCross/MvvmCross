@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -183,7 +183,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                         if (adapter.FragmentsInfo.Any(f => f.Tag == pagerFragmentAttribute.Title))
                         {
                             var index = adapter.FragmentsInfo.FindIndex(f => f.Tag == pagerFragmentAttribute.Title);
-                            viewPager.SetCurrentItem(index > -1 ? index : 0, true);
+                            if (index < 0)
+                                index = 0;
+
+                            viewPager.SetCurrentItem(index, true);
 
                             return Task.FromResult(true);
                         }
