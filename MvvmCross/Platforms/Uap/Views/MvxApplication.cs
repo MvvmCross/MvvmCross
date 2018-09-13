@@ -130,7 +130,6 @@ namespace MvvmCross.Platforms.Uap.Views
             return Task.CompletedTask;
         }
 
-
         protected virtual Task Resume(IMvxSuspensionManager suspensionManager)
         {
             return Task.CompletedTask;
