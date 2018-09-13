@@ -1,29 +1,21 @@
 ﻿using System;
 using System.Threading.Tasks;
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class MixedNavResultDetailViewModel : MvxViewModel, IMvxViewModelResult<DetailResultResult>
+    public class MixedNavResultDetailViewModel : MvxNavigationViewModelResult<DetailResultResult>, IMvxViewModelResult<DetailResultResult>
     {
-        public MixedNavResultDetailViewModel()
+        public MixedNavResultDetailViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
             CloseViewModelCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this, DetailResultResult.Build()));
         }
 
 
         public IMvxAsyncCommand CloseViewModelCommand { get; private set; }
-        public TaskCompletionSource<object> CloseCompletionSource { get; set; }
-
-        public override void ViewDestroy(bool viewFinishing = true)
-        {
-            if (viewFinishing && CloseCompletionSource != null && !CloseCompletionSource.Task.IsCompleted && !CloseCompletionSource.Task.IsFaulted)
-                CloseCompletionSource?.TrySetCanceled();
-
-            base.ViewDestroy(viewFinishing);
-        }
     }
 
     public class DetailResultParams

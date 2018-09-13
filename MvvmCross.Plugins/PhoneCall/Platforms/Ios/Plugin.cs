@@ -10,7 +10,7 @@ namespace MvvmCross.Plugin.PhoneCall.Platforms.Ios
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxPhoneCallTask, MvxPhoneCallTask>();
+            Mvx.IoCProvider.RegisterType<IMvxPhoneCallTask, MvxPhoneCallTask>();
         }
     }
 }

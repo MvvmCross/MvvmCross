@@ -10,7 +10,7 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxLocationWatcher>(() => new MvxAndroidLocationWatcher());
+            Mvx.IoCProvider.RegisterSingleton<IMvxLocationWatcher>(() => new MvxAndroidLocationWatcher());
 		}
     }
 }

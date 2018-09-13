@@ -12,7 +12,7 @@ namespace MvvmCross.Plugin.Visibility.Platforms.Wpf
         public override void Load()
         {
             base.Load();
-            Mvx.RegisterSingleton<IMvxNativeVisibility>(new MvxWpfVisibility());
+            Mvx.IoCProvider.RegisterSingleton<IMvxNativeVisibility>(new MvxWpfVisibility());
         }
     }
 }

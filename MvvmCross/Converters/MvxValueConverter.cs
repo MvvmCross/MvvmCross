@@ -26,7 +26,7 @@ namespace MvvmCross.Converters
         : IMvxValueConverter
     {
         protected static IMvxLog Log 
-            => Mvx.Resolve<IMvxLogProvider>().GetLogFor<MvxValueConverter>();
+            => Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor<MvxValueConverter>();
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -69,7 +69,7 @@ namespace MvvmCross.Converters
         : IMvxValueConverter
     {
         protected static IMvxLog Log
-            => Mvx.Resolve<IMvxLogProvider>().GetLogFor<MvxValueConverter>();
+            => Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor<MvxValueConverter>();
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

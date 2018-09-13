@@ -14,7 +14,7 @@ namespace MvvmCross.Plugin.Color
     {
         private IMvxNativeColor _nativeColor;
 
-        private IMvxNativeColor NativeColor => _nativeColor ?? (_nativeColor = Mvx.Resolve<IMvxNativeColor>());
+        private IMvxNativeColor NativeColor => _nativeColor ?? (_nativeColor = Mvx.IoCProvider.Resolve<IMvxNativeColor>());
 
         protected abstract MvxColor Convert(object value, object parameter, CultureInfo culture);
 

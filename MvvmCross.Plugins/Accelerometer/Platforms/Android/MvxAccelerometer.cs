@@ -26,7 +26,7 @@ namespace MvvmCross.Plugin.Accelerometer.Platforms.Android
                 throw new MvxException("Accelerometer already started");
             }
 
-            var globals = Mvx.Resolve<IMvxAndroidGlobals>();
+            var globals = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>();
             _sensorManager = (SensorManager) globals.ApplicationContext.GetSystemService(Context.SensorService);
             if (_sensorManager == null)
                 throw new MvxException("Failed to find SensorManager");

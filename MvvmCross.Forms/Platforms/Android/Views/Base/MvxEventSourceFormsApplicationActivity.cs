@@ -30,7 +30,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views.Base
 
             if (IsTaskRoot)
             {
-                var appStart = Mvx.Resolve<IMvxAppStart>();
+                var appStart = Mvx.IoCProvider.Resolve<IMvxAppStart>();
                 appStart.ResetStart();
             }
         }

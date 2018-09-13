@@ -2,15 +2,14 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Forms.Presenters;
 using System;
-using MvvmCross.Forms.Core;
+using System.Threading.Tasks;
+using System.Windows.Controls;
+using MvvmCross.Forms.Presenters;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Wpf.Presenters;
-using MvvmCross.Platforms.Wpf.Views;
 using MvvmCross.ViewModels;
 using Xamarin.Forms;
-using System.Windows.Controls;
 
 namespace MvvmCross.Forms.Platforms.Wpf.Presenters
 {
@@ -28,12 +27,7 @@ namespace MvvmCross.Forms.Platforms.Wpf.Presenters
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
         }
 
-        private Application _formsApplication;
-        public Application FormsApplication
-        {
-            get { return _formsApplication; }
-            set { _formsApplication = value; }
-        }
+        public Application FormsApplication { get; set; }
 
         private IMvxFormsPagePresenter _formsPagePresenter;
         public virtual IMvxFormsPagePresenter FormsPagePresenter
@@ -41,10 +35,8 @@ namespace MvvmCross.Forms.Platforms.Wpf.Presenters
             get
             {
                 if (_formsPagePresenter == null)
-                {
-                    _formsPagePresenter = new MvxFormsPagePresenter(this);
-                    Mvx.RegisterSingleton(_formsPagePresenter);
-                }
+                    throw new ArgumentNullException(nameof(FormsPagePresenter), "IMvxFormsPagePresenter cannot be null. Set the value in CreateViewPresenter in the setup.");
+
                 return _formsPagePresenter;
             }
             set
@@ -59,20 +51,20 @@ namespace MvvmCross.Forms.Platforms.Wpf.Presenters
             FormsPagePresenter.RegisterAttributeTypes();
         }
 
-        public override void ChangePresentation(MvxPresentationHint hint)
+        public override async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            FormsPagePresenter.ChangePresentation(hint);
-            base.ChangePresentation(hint);
+            if (!await FormsPagePresenter.ChangePresentation(hint)) return false;
+            return await base.ChangePresentation(hint);
         }
 
-        public override void Show(MvxViewModelRequest request)
+        public override Task<bool> Show(MvxViewModelRequest request)
         {
-            FormsPagePresenter.Show(request);
+            return FormsPagePresenter.Show(request);
         }
 
-        public override void Close(IMvxViewModel viewModel)
+        public override Task<bool> Close(IMvxViewModel viewModel)
         {
-            FormsPagePresenter.Close(viewModel);
+            return FormsPagePresenter.Close(viewModel);
         }
 
         public virtual bool ShowPlatformHost(Type hostViewModel = null)

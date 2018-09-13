@@ -20,6 +20,7 @@ using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using UIKit;
 using MvvmCross.Presenters;
+using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Ios.Core
 {
@@ -57,8 +58,8 @@ namespace MvvmCross.Platforms.Ios.Core
 
         protected virtual void RegisterIosViewCreator(IMvxIosViewsContainer container)
         {
-            Mvx.RegisterSingleton<IMvxIosViewCreator>(container);
-            Mvx.RegisterSingleton<IMvxCurrentRequest>(container);
+            Mvx.IoCProvider.RegisterSingleton<IMvxIosViewCreator>(container);
+            Mvx.IoCProvider.RegisterSingleton<IMvxCurrentRequest>(container);
         }
 
         protected override IMvxViewDispatcher CreateViewDispatcher()
@@ -76,7 +77,7 @@ namespace MvvmCross.Platforms.Ios.Core
 
         protected virtual void RegisterPlatformProperties()
         {
-            Mvx.RegisterSingleton<IMvxIosSystem>(CreateIosSystemProperties());
+            Mvx.IoCProvider.RegisterSingleton<IMvxIosSystem>(CreateIosSystemProperties());
         }
 
         protected virtual MvxIosSystem CreateIosSystemProperties()
@@ -86,7 +87,7 @@ namespace MvvmCross.Platforms.Ios.Core
 
         protected virtual void RegisterLifetime()
         {
-            Mvx.RegisterSingleton<IMvxLifetime>(ApplicationDelegate);
+            Mvx.IoCProvider.RegisterSingleton<IMvxLifetime>(ApplicationDelegate);
         }
 
         protected IMvxIosViewPresenter Presenter
@@ -106,8 +107,8 @@ namespace MvvmCross.Platforms.Ios.Core
         protected virtual void RegisterPresenter()
         {
             var presenter = Presenter;
-            Mvx.RegisterSingleton(presenter);
-            Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
+            Mvx.IoCProvider.RegisterSingleton(presenter);
+            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
         protected override void InitializeLastChance()
@@ -125,9 +126,9 @@ namespace MvvmCross.Platforms.Ios.Core
 
         protected virtual void RegisterBindingBuilderCallbacks()
         {
-            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
         }
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
@@ -173,7 +174,7 @@ namespace MvvmCross.Platforms.Ios.Core
     public class MvxIosSetup<TApplication> : MvxIosSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {

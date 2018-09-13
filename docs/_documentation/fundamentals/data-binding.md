@@ -59,7 +59,7 @@ In the View:
      - custom C# methods have to be used to get and set the variable values
      - custom Java listeners or Objective-C delegates have to be used to detect when the UI View state changes (e.g. when the user enters text or taps on a button).
 
-For more info on the details on implementing custom bindings, see the [custom bindings blog post by Stuart Lodge](http://slodge.blogspot.co.uk/2013/06/n28-custom-bindings-n1-days-of-mvvmcross.html)
+For more info on the details on implementing custom bindings, see the [official documentation](https://www.mvvmcross.com/documentation/advanced/custom-data-binding)
 
 ### DataBound properties
 
@@ -916,7 +916,7 @@ protected override void InitializeLastChance()
 
     `<TextBlock mvx:Bi.nd="Text Customer.FirstName; Visible=ShowFirstName" />`
 
-- for design-time support, you may also need to pull in additional value converters into the Xaml namespace. For more on this, see http://slodge.blogspot.co.uk/2013/07/n35-multibinding-with-tibet-n1-videos.html
+- for design-time support, you may also need to pull in additional value converters into the Xaml namespace. For more on this, see [slodge's tutorial](http://slodge.blogspot.co.uk/2013/07/n35-multibinding-with-tibet-n1-videos.html)
 
 Once installed, the syntax within these `AttachedProperties` bindings is exactly the same as within all other Swiss and Tibet binding - and this binding functionality can be extended with custom bindings, with FieldBinding, etc - just as in MvvmCross on non-Xaml platforms.
 
@@ -962,6 +962,35 @@ set.Bind(button).To(vm => vm.readonly)
 ```
 
 *Note* : This feature is only available in fluent binding.
+
+### Clear Bindings
+
+If you want to dynamically remove individual bindings after you have applied them to your view you need to add a `ClearBindingKey` to your binding descriptions. The `ClearBindingKey` can be any object type.
+
+***Individual binding***
+
+```c#
+bindingSet.Bind(_inputText)
+    .For(v => v.Text)
+    .To(vm => vm.TextValue)
+    .WithClearBindingKey(nameof(_inputText));
+```
+
+***Binding set*** (applied to all descriptions in the set)
+
+```c#
+bindingSet.Bind(_inputText)
+    .For(v => v.Text)
+    .To(vm => vm.TextValue);
+
+bindingSet.ApplyWithClearBindingKey(nameof(FluentBindingView));
+```
+
+To remove the binding using the `ClearBindingKey` you can make use of `ClearBindings` extension on the `IMvxBindingContextOwner`
+
+ ```c#
+ this.ClearBindings(nameof(FluentBindingView));
+ ```
 
 ### Default view properties
 
@@ -1120,12 +1149,13 @@ MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatRadioGroup | SelectedIte
 
 **Android - `using MvvmCross.Droid.Support.V7.Preference`**
 
-Base Control | String | Extension method
+Base Control | String | Extension method | Mvx version introduced
 ---- | --------- | ---------
 Android.Support.V7.Preferences.Preference | Value | BindValue()
 Android.Support.V7.Preferences.ListPreference | Value | BindValue()
 Android.Support.V7.Preferences.EditTextPreference | Text | BindText()
 Android.Support.V7.Preferences.TwoStatePreference | Checked | BindChecked()
+Android.Support.V7.Preferences.Preference | PreferenceClick | BindClick() | 6.2.0
 
 **iOS**
 
@@ -1176,6 +1206,7 @@ UIKit.UIView | TextFocus | BindTextFocus()
 UIKit.UIView | Visibility | BindVisibility()
 UIKit.UIView | TwoFingerTap | BindTwoFingerTap()
 UIKit.UIView | LayerBorderWidth | BindLayerBorderWidth()
+UIKit.UIBarButtonItem | Clicked | BindClicked()
 
 **Mac**
 

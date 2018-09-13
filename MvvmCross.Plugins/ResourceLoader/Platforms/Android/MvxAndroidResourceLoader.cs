@@ -27,6 +27,6 @@ namespace MvvmCross.Plugin.ResourceLoader.Platforms.Android
 
         #endregion
 
-        private AssetManager Assets => _assets ?? (_assets = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.Assets);
+        private AssetManager Assets => _assets ?? (_assets = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext.Assets);
     }
 }

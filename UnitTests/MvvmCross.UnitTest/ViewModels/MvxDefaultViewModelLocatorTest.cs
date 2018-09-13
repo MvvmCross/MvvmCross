@@ -6,6 +6,7 @@ using System;
 using MvvmCross.Core;
 using MvvmCross.Exceptions;
 using MvvmCross.Navigation;
+using MvvmCross.Navigation.EventArguments;
 using MvvmCross.Tests;
 using MvvmCross.UnitTest.Mocks.TestViewModels;
 using MvvmCross.ViewModels;
@@ -49,8 +50,9 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
             var toTest = new MvxDefaultViewModelLocator(navigationService);
+            var args = new MvxNavigateEventArgs(NavigationMode.Show);
 
-            IMvxViewModel viewModel = toTest.Load(typeof(Test1ViewModel), bundle, null);
+            IMvxViewModel viewModel = toTest.Load(typeof(Test1ViewModel), bundle, null, args);
 
             Assert.NotNull(viewModel);
             var typedViewModel = (Test1ViewModel)viewModel;
@@ -108,7 +110,8 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
             var toTest = new MvxDefaultViewModelLocator(navigationService);
-            IMvxViewModel viewModel = toTest.Load(typeof(Test1ViewModel), initBundle, reloadBundle);
+            var args = new MvxNavigateEventArgs(NavigationMode.Show);
+            IMvxViewModel viewModel = toTest.Load(typeof(Test1ViewModel), initBundle, reloadBundle, args);
 
             Assert.NotNull(viewModel);
             var typedViewModel = (Test1ViewModel)viewModel;
@@ -135,9 +138,10 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
             var toTest = new MvxDefaultViewModelLocator(navigationService);
-
-            Assert.Throws<MvxException>(() => {
-                IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
+            var args = new MvxNavigateEventArgs(NavigationMode.Show);
+            Assert.Throws<MvxException>(() =>
+            {
+                IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null, args);
             });
         }
 
@@ -152,9 +156,11 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
             var toTest = new MvxDefaultViewModelLocator(navigationService);
+            var args = new MvxNavigateEventArgs(NavigationMode.Show);
 
-            Assert.Throws<MvxException>(() => {
-                IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
+            Assert.Throws<MvxException>(() =>
+            {
+                IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null, args);
             });
         }
 
@@ -170,9 +176,10 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
             var toTest = new MvxDefaultViewModelLocator(navigationService);
-
-            Assert.Throws<MvxException>(() => {
-                IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null);
+            var args = new MvxNavigateEventArgs(NavigationMode.Show);
+            Assert.Throws<MvxException>(() =>
+            {
+                IMvxViewModel viewModel = toTest.Load(typeof(Test4ViewModel), bundle, null, args);
             });
         }
     }

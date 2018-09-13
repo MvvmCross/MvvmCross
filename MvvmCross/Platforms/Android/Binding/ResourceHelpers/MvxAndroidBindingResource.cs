@@ -23,7 +23,7 @@ namespace MvvmCross.Platforms.Android.Binding.ResourceHelpers
 
         private MvxAndroidBindingResource()
         {
-            var finder = Mvx.Resolve<IMvxAppResourceTypeFinder>();
+            var finder = Mvx.IoCProvider.Resolve<IMvxAppResourceTypeFinder>();
             var resourceType = finder.Find();
             try
             {

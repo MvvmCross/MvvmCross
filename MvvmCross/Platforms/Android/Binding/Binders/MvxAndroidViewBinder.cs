@@ -30,7 +30,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
 
         private IMvxBinder _binder;
 
-        protected IMvxBinder Binder => _binder ?? (_binder = Mvx.Resolve<IMvxBinder>());
+        protected IMvxBinder Binder => _binder ?? (_binder = Mvx.IoCProvider.Resolve<IMvxBinder>());
 
         public IList<KeyValuePair<object, IMvxUpdateableBinding>> CreatedBindings => _viewBindings;
 

@@ -16,7 +16,8 @@ namespace Playground.Droid.Activities
     [MvxActivityPresentation]
     [Activity(
         Theme = "@style/AppTheme",
-        LaunchMode = LaunchMode.SingleTop)]
+        LaunchMode = LaunchMode.SingleTop,
+        ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
     public class SplitRootView : MvxAppCompatActivity<SplitRootViewModel>
     {
         public DrawerLayout DrawerLayout { get; set; }

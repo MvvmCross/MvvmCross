@@ -16,7 +16,7 @@ namespace MvvmCross.ViewModels
     {
         public virtual IDictionary<Type, Type> Build(IEnumerable<Assembly> sourceAssemblies)
         {
-            var associatedTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
+            var associatedTypeFinder = Mvx.IoCProvider.Resolve<IMvxViewModelTypeFinder>();
 
             var views = from assembly in sourceAssemblies
                         from candidateViewType in assembly.ExceptionSafeGetTypes()

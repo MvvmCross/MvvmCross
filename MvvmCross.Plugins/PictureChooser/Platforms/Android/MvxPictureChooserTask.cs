@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -87,7 +87,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
 
             // Specify where to put the image
             return
-                Mvx.Resolve<IMvxAndroidGlobals>()
+                Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>()
                     .ApplicationContext.ContentResolver.Insert(MediaStore.Images.Media.ExternalContentUri, contentValues);
         }
 
@@ -104,26 +104,36 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
 
         protected override void ProcessMvxIntentResult(MvxIntentResultEventArgs result)
         {
-            MvxPluginLog.Instance.Trace("ProcessMvxIntentResult started...");
-
-            Uri uri;
-
-            switch ((MvxIntentRequestCode)result.RequestCode)
+            try
             {
-                case MvxIntentRequestCode.PickFromFile:
-                    uri = result.Data?.Data;
-                    break;
-                case MvxIntentRequestCode.PickFromCamera:
-                    uri = _cachedUriLocation;
-                    break;
-                default:
-                    // ignore this result - it's not for us
-                    MvxPluginLog.Instance.Trace("Unexpected request received from MvxIntentResult - request was {0}",
-                                   result.RequestCode);
-                    return;
-            }
+                MvxPluginLog.Instance.Trace("ProcessMvxIntentResult started...");
 
-            ProcessPictureUri(result, uri);
+                Uri uri;
+
+                switch ((MvxIntentRequestCode)result.RequestCode)
+                {
+                    case MvxIntentRequestCode.PickFromFile:
+                        uri = result.Data?.Data;
+                        break;
+                    case MvxIntentRequestCode.PickFromCamera:
+                        uri = _cachedUriLocation;
+                        break;
+                    default:
+                        // ignore this result - it's not for us
+                        MvxPluginLog.Instance.Trace("Unexpected request received from MvxIntentResult - request was {0}",
+                                       result.RequestCode);
+                        return;
+                }
+
+                ProcessPictureUri(result, uri);
+            }
+            catch (Exception e)
+            {
+                // TODO: We currently have no way of bubbling this up. Throwing here
+                // can crash the app :(
+
+                MvxPluginLog.Instance.ErrorException("Failed to process Intent from PictureChooser", e);
+            }
         }
 
         private void ProcessPictureUri(MvxIntentResultEventArgs result, Uri uri)
@@ -190,7 +200,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
 
         private Bitmap LoadScaledBitmap(Uri uri)
         {
-            ContentResolver contentResolver = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext.ContentResolver;
+            ContentResolver contentResolver = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext.ContentResolver;
             var maxDimensionSize = GetMaximumDimension(contentResolver, uri);
             var sampleSize = (int)Math.Ceiling(maxDimensionSize / (double)_currentRequestParameters.MaxPixelDimension);
             if (sampleSize < 1)

@@ -15,7 +15,7 @@ namespace MvvmCross.Binding.Binders
                                 IEnumerable<Type> types)
             where T : class
         {
-            var filler = Mvx.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
+            var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, assemblies);
             registry.Fill(filler, types);
         }
@@ -25,7 +25,7 @@ namespace MvvmCross.Binding.Binders
             if (assemblies == null)
                 return;
 
-            var filler = Mvx.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
+            var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, assemblies);
         }
 
@@ -43,7 +43,7 @@ namespace MvvmCross.Binding.Binders
 
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, Assembly assembly)
         {
-            var filler = Mvx.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
+            var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, assembly);
         }
 
@@ -58,7 +58,7 @@ namespace MvvmCross.Binding.Binders
             if (types == null)
                 return;
 
-            var filler = Mvx.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
+            var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, types);
         }
 
@@ -82,7 +82,7 @@ namespace MvvmCross.Binding.Binders
 
         public static void Fill<T>(this IMvxNamedInstanceRegistry<T> registry, Type type)
         {
-            var filler = Mvx.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
+            var filler = Mvx.IoCProvider.Resolve<IMvxNamedInstanceRegistryFiller<T>>();
             registry.Fill(filler, type);
         }
     }

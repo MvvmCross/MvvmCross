@@ -5,6 +5,8 @@
 using MvvmCross.Forms.Views;
 using MvvmCross.Forms.Presenters.Attributes;
 using Playground.Core.ViewModels;
+using Xamarin.Forms;
+using System;
 
 namespace Playground.Forms.UI.Pages
 {
@@ -14,6 +16,15 @@ namespace Playground.Forms.UI.Pages
         public ChildPage()
         {
             InitializeComponent();
+
+            BrokenTextLabel.PropertyChanged += BrokenTextLabel_PropertyChanged;
+        }
+
+        private void BrokenTextLabel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            // This demonstrates how MvxFullBinding captures UI exception
+            if(e.PropertyName==nameof(BrokenTextLabel.Text))
+                throw new NotImplementedException();
         }
     }
 }

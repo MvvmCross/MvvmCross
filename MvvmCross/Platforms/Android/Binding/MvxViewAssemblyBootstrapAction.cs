@@ -14,19 +14,19 @@ namespace MvvmCross.Platforms.Android.Binding
     {
         public virtual void Run()
         {
-            Mvx.CallbackWhenRegistered<IMvxTypeCache<View>>(RegisterViewTypes);
-            Mvx.CallbackWhenRegistered<IMvxNamespaceListViewTypeResolver>(RegisterNamespace);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxTypeCache<View>>(RegisterViewTypes);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxNamespaceListViewTypeResolver>(RegisterNamespace);
         }
 
         protected virtual void RegisterViewTypes()
         {
-            var cache = Mvx.Resolve<IMvxTypeCache<View>>();
+            var cache = Mvx.IoCProvider.Resolve<IMvxTypeCache<View>>();
             cache.AddAssembly(typeof(TView).Assembly);
         }
 
         protected virtual void RegisterNamespace()
         {
-            var resolver = Mvx.Resolve<IMvxNamespaceListViewTypeResolver>();
+            var resolver = Mvx.IoCProvider.Resolve<IMvxNamespaceListViewTypeResolver>();
             resolver.Add(typeof(TView).Namespace);
         }
     }

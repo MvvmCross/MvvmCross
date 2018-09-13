@@ -22,7 +22,7 @@ namespace MvvmCross.ViewModels
         where T : class, IMvxTextSerializer
     {
         public MvxNavigationSerializer()
-            : base(Mvx.Resolve<T>())
+            : base(Mvx.IoCProvider.Resolve<T>())
         {
         }
     }

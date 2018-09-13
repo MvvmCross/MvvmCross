@@ -1,7 +1,16 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
-  <PropertyGroup>
+  <PropertyGroup Condition=" '$(TargetsToBuild)' == 'All' ">
     <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;net461;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid81;tizen40;netcoreapp2.0;uap10.0.16299</TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;net461;Xamarin.iOS10;Xamarin.Mac20;Xamarin.TVOS10;Xamarin.WatchOS10;MonoAndroid81;tizen40;netcoreapp2.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetsToBuild)' != 'All' ">
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Android' ">netstandard2.0;MonoAndroid81;</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Uap' ">netstandard2.0;uap10.0.16299</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'iOS' ">netstandard2.0;Xamarin.iOS10</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <AssemblyName>MvvmCross.Plugin.PictureChooser</AssemblyName>
     <RootNamespace>MvvmCross.Plugin.PictureChooser</RootNamespace>
     <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
@@ -24,6 +33,10 @@ This package contains the 'PictureChooser' plugin for MvvmCross</Description>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
     <Compile Include="Platforms\Net\**\*.cs" />
     <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="Platforms\Wpf\**\*.cs" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">
@@ -62,13 +75,12 @@ This package contains the 'PictureChooser' plugin for MvvmCross</Description>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
     <Compile Include="Platforms\Android\**\*.cs" />
     <Compile Include="Platforms\Xamarin-common\**\*.cs" />
-    <PackageReference Include="Xamarin.Android.Support.Exif" Version="27.0.2" />
+    <PackageReference Include="Xamarin.Android.Support.Exif" Version="27.0.2.1" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">
     <Compile Include="Platforms\Tizen\**\*.cs" />
     <Compile Include="Platforms\Xamarin-common\**\*.cs" />
-    <PackageReference Include="Tizen.NET" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>

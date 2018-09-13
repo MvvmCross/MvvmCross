@@ -64,7 +64,7 @@ namespace MvvmCross.Plugin.Network.Rest
 
         public MvxJsonRestClient()
         {
-            JsonConverterProvider = () => Mvx.Resolve<IMvxJsonConverter>();
+            JsonConverterProvider = () => Mvx.IoCProvider.Resolve<IMvxJsonConverter>();
         }
     }
 }

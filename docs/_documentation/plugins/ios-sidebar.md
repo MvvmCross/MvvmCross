@@ -69,4 +69,4 @@ So when the presenter receives a request to show the master view **and** the app
 
 Subsequent touches on the UI master view which result in a request for view controller that requests to be shown as a detail view will then be shown in this same view (with no navigation occurring) but placed in the detail panel of the same instance of the split view created when the user navigated to the master view.
 
-Confused? See the [demo applications](https://github.com/MvvmCross/MvvmCross/tree/develop/TestProjects/iOS-Support)
+Confused? See the [demo applications](https://github.com/MvvmCross/MvvmCross/tree/master/Projects/IosSupport/XamarinSidebar)

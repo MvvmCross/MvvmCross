@@ -18,7 +18,7 @@ namespace MvvmCross.Binding.BindingContext
             where TSource : IMvxLocalizedTextSourceOwner
             where TTarget : class
         {
-            var valueConverter = Mvx.Resolve<IMvxValueConverterLookup>().Find("Language");
+            var valueConverter = Mvx.IoCProvider.Resolve<IMvxValueConverterLookup>().Find("Language");
             return bindingDescription.To(vm => vm.LocalizedTextSource)
                 .OneTime()
                 .WithConversion(valueConverter, localizationId);

@@ -10,7 +10,7 @@ namespace MvvmCross.Plugin.Location.Fused
     {
         public void Load()
         {
-            Mvx.RegisterSingleton<IMvxLocationWatcher>(() => new MvxAndroidFusedLocationWatcher());
+            Mvx.IoCProvider.RegisterSingleton<IMvxLocationWatcher>(() => new MvxAndroidFusedLocationWatcher());
         }
     }
 }

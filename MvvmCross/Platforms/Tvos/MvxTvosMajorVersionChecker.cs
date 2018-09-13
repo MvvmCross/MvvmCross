@@ -18,7 +18,7 @@ namespace MvvmCross.Platforms.Tvos
         private static bool ReadIsTvosVersionOrHigher(int target, bool defaultValue)
         {
             IMvxTvosSystem tvosSystem;
-            Mvx.TryResolve<IMvxTvosSystem>(out tvosSystem);
+            Mvx.IoCProvider.TryResolve<IMvxTvosSystem>(out tvosSystem);
             if (tvosSystem == null)
             {
                 MvxLog.Instance.Warn("IMvxTvosSystem not found - so assuming we {1} on tvOS {0} or later", target, defaultValue ? "are" : "are not");

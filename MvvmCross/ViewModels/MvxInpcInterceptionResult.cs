@@ -8,6 +8,8 @@ namespace MvvmCross.ViewModels
     {
         NotIntercepted,
         RaisePropertyChanged,
-        DoNotRaisePropertyChanged
+        DoNotRaisePropertyChanged,
+        RaisePropertyChanging,
+        DoNotRaisePropertyChanging
     }
 }

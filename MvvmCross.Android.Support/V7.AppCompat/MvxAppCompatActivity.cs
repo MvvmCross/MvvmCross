@@ -96,7 +96,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         
         protected virtual void RunAppStart(Bundle bundle)
         {
-            var startup = Mvx.Resolve<IMvxAppStart>();
+            var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
             if (!startup.IsStarted)
                 startup.Start(GetAppStartHint(bundle));
         }

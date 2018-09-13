@@ -75,7 +75,8 @@ namespace MvvmCross.Forms.Views
 
         protected virtual void OnViewModelSet()
 		{
-		}
+            ViewModel?.ViewCreated();
+        }
 
         protected override void OnAppearing()
         {
@@ -89,6 +90,7 @@ namespace MvvmCross.Forms.Views
             base.OnDisappearing();
             ViewModel?.ViewDisappearing();
             ViewModel?.ViewDisappeared();
+            ViewModel?.ViewDestroy();
         }
     }
 

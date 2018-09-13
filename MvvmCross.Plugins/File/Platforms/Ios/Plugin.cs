@@ -33,8 +33,8 @@ namespace MvvmCross.Plugin.File.Platforms.Ios
         {
             var fileStore = new MvxIosFileStore(Configuration.AppendDefaultPath, Configuration.BasePath);
 
-            Mvx.RegisterSingleton<IMvxFileStore>(fileStore);
-            Mvx.RegisterSingleton<IMvxFileStoreAsync>(fileStore);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFileStore>(fileStore);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFileStoreAsync>(fileStore);
         }
     }
 }

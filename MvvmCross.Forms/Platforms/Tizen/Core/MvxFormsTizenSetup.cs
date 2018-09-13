@@ -38,7 +38,7 @@ namespace MvvmCross.Forms.Platforms.Tizen.Core
         protected override void InitializeIoC()
         {
             base.InitializeIoC();
-            Mvx.RegisterSingleton<IMvxFormsSetup>(this);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFormsSetup>(this);
         }
 
         protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
@@ -70,14 +70,14 @@ namespace MvvmCross.Forms.Platforms.Tizen.Core
         protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
         {
             var formsPagePresenter = new MvxFormsPagePresenter(viewPresenter);
-            Mvx.RegisterSingleton(formsPagePresenter);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFormsPagePresenter>(formsPagePresenter);
             return formsPagePresenter;
         }
 
         protected override IMvxTizenViewPresenter CreateViewPresenter()
         {
             var presenter = new MvxFormsTizenViewPresenter(FormsApplication);
-            Mvx.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
             presenter.FormsPagePresenter = CreateFormsPagePresenter(presenter);
             return presenter;
         }
@@ -130,6 +130,6 @@ namespace MvvmCross.Forms.Platforms.Tizen.Core
 
         protected override Application CreateFormsApplication() => new TFormsApplication();
 
-        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
     }
 }

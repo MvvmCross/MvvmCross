@@ -11,6 +11,7 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Converters;
 using MvvmCross.Core;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Tizen.Binding;
 using MvvmCross.Platforms.Tizen.Presenters;
 using MvvmCross.Platforms.Tizen.Views;
@@ -50,7 +51,7 @@ namespace MvvmCross.Platforms.Tizen.Core
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
             var container = CreateTizenViewsContainer();
-            Mvx.RegisterSingleton(container);
+            Mvx.IoCProvider.RegisterSingleton(container);
             return container;
         }
 
@@ -67,8 +68,8 @@ namespace MvvmCross.Platforms.Tizen.Core
         protected virtual void RegisterPresenter()
         {
             var presenter = Presenter;
-            Mvx.RegisterSingleton(presenter);
-            Mvx.RegisterSingleton<IMvxViewPresenter>(presenter);
+            Mvx.IoCProvider.RegisterSingleton(presenter);
+            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
         protected override void InitializeLastChance()
@@ -86,9 +87,9 @@ namespace MvvmCross.Platforms.Tizen.Core
 
         protected virtual void RegisterBindingBuilderCallbacks()
         {
-            Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            Mvx.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            Mvx.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
         }
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
@@ -139,7 +140,7 @@ namespace MvvmCross.Platforms.Tizen.Core
     public class MvxTizenSetup<TApplication> : MvxTizenSetup
         where TApplication : class, IMvxApplication, new()
     {
-        protected override IMvxApplication CreateApp() => Mvx.IoCConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
 
         public override IEnumerable<Assembly> GetViewModelAssemblies()
         {
