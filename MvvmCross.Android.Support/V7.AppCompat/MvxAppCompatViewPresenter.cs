@@ -166,16 +166,17 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     var viewPager = FindViewPagerInFragmentPresentation(pagerFragmentAttribute);
                     if (viewPager?.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
                     {
-                        if (adapter.FragmentsInfo.Any(f => f.Tag == pagerFragmentAttribute.Title))
+                        var index = adapter.FragmentsInfo.FindIndex(f => f.Tag == pagerFragmentAttribute.Title);
+                        if (index < 0)
                         {
-                            var index = adapter.FragmentsInfo.FindIndex(f => f.Tag == pagerFragmentAttribute.Title);
-                            if (index < 0)
-                                index = 0;
+                            MvxAndroidLog.Instance.Trace("Did not find ViewPager index for {0}, skipping presentation change...",
+                                pagerFragmentAttribute.Title);
 
-                            viewPager.SetCurrentItem(index, true);
-
-                            return Task.FromResult(true);
+                            return Task.FromResult(false);
                         }
+
+                        viewPager.SetCurrentItem(index, true);
+                        return Task.FromResult(true);
                     }
                 }
             }
