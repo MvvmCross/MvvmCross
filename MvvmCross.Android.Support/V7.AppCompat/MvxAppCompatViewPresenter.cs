@@ -163,21 +163,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
                 if (attribute is MvxViewPagerFragmentPresentationAttribute pagerFragmentAttribute)
                 {
-                    ViewPager viewPager = null;
-
-                    // check for a ViewPager inside a Fragment
-                    if (pagerFragmentAttribute.FragmentHostViewType != null)
-                    {
-                        var fragment = GetFragmentByViewType(pagerFragmentAttribute.FragmentHostViewType);
-                        viewPager = fragment.View.FindViewById<ViewPager>(pagerFragmentAttribute.ViewPagerResourceId);
-                    }
-                    
-                    // check for a ViewPager inside an Activity
-                    if (viewPager == null && pagerFragmentAttribute.ActivityHostViewModelType != null)
-                    {
-                        viewPager = CurrentActivity.FindViewById<ViewPager>(pagerFragmentAttribute.ViewPagerResourceId);
-                    }
-
+                    var viewPager = FindViewPagerInFragmentPresentation(pagerFragmentAttribute);
                     if (viewPager?.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
                     {
                         if (adapter.FragmentsInfo.Any(f => f.Tag == pagerFragmentAttribute.Title))
@@ -195,6 +181,26 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             }
 
             return base.ChangePresentation(hint);
+        }
+
+        private ViewPager FindViewPagerInFragmentPresentation(MvxViewPagerFragmentPresentationAttribute pagerFragmentAttribute)
+        {
+            ViewPager viewPager = null;
+
+            // check for a ViewPager inside a Fragment
+            if (pagerFragmentAttribute.FragmentHostViewType != null)
+            {
+                var fragment = GetFragmentByViewType(pagerFragmentAttribute.FragmentHostViewType);
+                viewPager = fragment.View.FindViewById<ViewPager>(pagerFragmentAttribute.ViewPagerResourceId);
+            }
+
+            // check for a ViewPager inside an Activity
+            if (viewPager == null && pagerFragmentAttribute.ActivityHostViewModelType != null)
+            {
+                viewPager = CurrentActivity.FindViewById<ViewPager>(pagerFragmentAttribute.ViewPagerResourceId);
+            }
+
+            return viewPager;
         }
 
         #region Show implementations
