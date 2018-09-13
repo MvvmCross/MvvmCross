@@ -25,8 +25,7 @@ namespace MvvmCross.Platforms.Uap.Views
         public MvxApplication()
         {
             RegisterSetup();
-            Suspending += OnSuspending;
-            Resuming += OnResuming;
+            EnteredBackground += OnEnteredBackground;
         }
 
         /// <summary>
@@ -119,14 +118,11 @@ namespace MvvmCross.Platforms.Uap.Views
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName, e.Exception);
         }
 
-        private async void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnEnteredBackground(object sender, object e)
         {
-            var deferral = e.SuspendingOperation.GetDeferral();
-
             var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
             await Suspend(suspension);
             await suspension.SaveAsync();
-            deferral.Complete();
         }
 
         protected virtual Task Suspend(IMvxSuspensionManager suspensionManager)
@@ -134,12 +130,6 @@ namespace MvvmCross.Platforms.Uap.Views
             return Task.CompletedTask;
         }
 
-        private async void OnResuming(object sender, object e)
-        {
-            var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
-            await Resume(suspension);
-            await suspension.RestoreAsync();
-        }
 
         protected virtual Task Resume(IMvxSuspensionManager suspensionManager)
         {
