@@ -23,6 +23,7 @@ namespace Playground.iOS.Views
             set.Bind(btnModal).To(vm => vm.OpenModalCommand);
             set.Bind(btnNavModal).To(vm => vm.OpenNavModalCommand);
             set.Bind(btnChild).To(vm => vm.OpenChildCommand);
+            set.Bind(btnTab2).To(vm => vm.OpenTab2Command);
 
             set.Apply();
         }

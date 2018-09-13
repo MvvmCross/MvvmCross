@@ -60,7 +60,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
             {
                 if (_formsApplication == null)
                 {
-                    var formsPresenter = Mvx.Resolve<IMvxFormsViewPresenter>();
+                    var formsPresenter = Mvx.IoCProvider.Resolve<IMvxFormsViewPresenter>();
                     _formsApplication = formsPresenter.FormsApplication;
                 }
 
@@ -113,7 +113,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
         {
             InitializeForms(bundle);
 
-            var startup = Mvx.Resolve<IMvxAppStart>();
+            var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
             if (!startup.IsStarted)
                 startup.Start(GetAppStartHint(bundle));
 
@@ -180,7 +180,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
         public override async void OnBackPressed()
         {
-            var presenter = Mvx.Resolve<IMvxFormsPagePresenter>();
+            var presenter = Mvx.IoCProvider.Resolve<IMvxFormsPagePresenter>();
             var pages = presenter.CurrentPageTree;
 
             for (var i = pages.Length - 1; i >= 0; i--)

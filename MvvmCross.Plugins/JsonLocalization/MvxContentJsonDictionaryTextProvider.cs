@@ -16,7 +16,7 @@ namespace MvvmCross.Plugin.JsonLocalization
         {
             get
             {
-                _resourceLoader = _resourceLoader ?? Mvx.Resolve<IMvxResourceLoader>();
+                _resourceLoader = _resourceLoader ?? Mvx.IoCProvider.Resolve<IMvxResourceLoader>();
                 return _resourceLoader;
             }
         }

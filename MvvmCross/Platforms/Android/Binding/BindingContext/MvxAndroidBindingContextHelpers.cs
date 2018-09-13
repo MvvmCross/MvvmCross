@@ -16,7 +16,7 @@ namespace MvvmCross.Platforms.Android.Binding.BindingContext
         public static T Current<T>()
             where T : class, IMvxBindingContext
         {
-            var stack = Mvx.Resolve<IMvxBindingContextStack<T>>();
+            var stack = Mvx.IoCProvider.Resolve<IMvxBindingContextStack<T>>();
             return stack.Current;
         }
     }

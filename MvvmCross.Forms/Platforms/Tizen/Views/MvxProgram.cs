@@ -16,7 +16,7 @@ namespace MvvmCross.Forms.Platforms.Tizen.Views
             {
                 if (_formsApplication == null)
                 {
-                    var formsPresenter = Mvx.Resolve<IMvxFormsViewPresenter>();
+                    var formsPresenter = Mvx.IoCProvider.Resolve<IMvxFormsViewPresenter>();
                     _formsApplication = formsPresenter.FormsApplication;
                 }
 

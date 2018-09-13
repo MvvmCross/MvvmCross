@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -15,6 +15,30 @@ namespace MvvmCross.Platforms.Ios.Views
     public class MvxTabBarViewController : MvxBaseTabBarViewController, IMvxTabBarViewController
     {
         private int _tabsCount = 0;
+
+        public virtual UIViewController VisibleUIViewController
+        {
+            get
+            {
+                var topViewController = (SelectedViewController as UINavigationController)?.TopViewController ?? SelectedViewController;
+
+                if (topViewController != null && topViewController.PresentedViewController != null)
+                {
+                    if (topViewController.PresentedViewController is UINavigationController presentedNavigationController)
+                    {
+                        return presentedNavigationController.TopViewController;
+                    }
+                    else
+                    {
+                        return topViewController.PresentedViewController;
+                    }
+                }
+                else
+                {
+                    return topViewController;
+                }
+            }
+        }
 
         public MvxTabBarViewController() : base()
         {
@@ -33,11 +57,11 @@ namespace MvvmCross.Platforms.Ios.Views
 
             if (IsMovingFromParentViewController)
             {
-                if (Mvx.TryResolve(out IMvxIosViewPresenter iPresenter)
+                if (Mvx.IoCProvider.TryResolve(out IMvxIosViewPresenter iPresenter)
                     && iPresenter is MvxIosViewPresenter mvxIosViewPresenter)
                 {
                     mvxIosViewPresenter.CloseTabBarViewController();
-                };
+                }
             }
         }
 
@@ -194,31 +218,6 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
-        }
-
-        public virtual UIViewController VisibleUIViewController
-        {
-            get
-            {
-                var topViewController = (SelectedViewController as UINavigationController)?.TopViewController ?? SelectedViewController;
-
-                if (topViewController.PresentedViewController != null)
-                {
-                    var presentedNavigationController = topViewController.PresentedViewController as UINavigationController;
-                    if (presentedNavigationController != null)
-                    {
-                        return presentedNavigationController.TopViewController;
-                    }
-                    else
-                    {
-                        return topViewController.PresentedViewController;
-                    }
-                }
-                else
-                {
-                    return topViewController;
-                }
-            }
         }
 
         public MvxTabBarViewController() : base()

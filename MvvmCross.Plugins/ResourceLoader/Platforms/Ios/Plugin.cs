@@ -12,7 +12,7 @@ namespace MvvmCross.Plugin.ResourceLoader.Platforms.Ios
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxResourceLoader, MvxIosResourceLoader>();
+            Mvx.IoCProvider.RegisterType<IMvxResourceLoader, MvxIosResourceLoader>();
         }
     }
 }

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Threading.Tasks;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
@@ -31,44 +32,48 @@ namespace MvvmCross.Plugin.Sidebar
                 typeof(MvxSidebarPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
-                    ShowAction = (viewType, attribute, request) =>
+                    ShowAction = async (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        ShowSidebarViewController(viewController, (MvxSidebarPresentationAttribute)attribute, request);
+                        return await ShowSidebarViewController(viewController, (MvxSidebarPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseSidebarViewController(viewModel, (MvxSidebarPresentationAttribute)attribute)
+                    CloseAction = async (viewModel, attribute) => CloseSidebarViewController(viewModel, (MvxSidebarPresentationAttribute)attribute)
                 });
         }
 
-        protected virtual void ShowSidebarViewController(
+        protected virtual async Task<bool> ShowSidebarViewController(
             UIViewController viewController,
             MvxSidebarPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
             if (SideBarViewController == null)
-                ShowRootViewController(new MvxSidebarViewController(), null, request);
+            {
+                if (!await ShowRootViewController(new MvxSidebarViewController(), null, request)) return false;
+            }
 
             switch (attribute.HintType)
             {
                 case MvxPanelHintType.PopToRoot:
-                    ShowPanelAndPopToRoot(attribute, viewController);
+                    if (!ShowPanelAndPopToRoot(attribute, viewController)) return false;
                     break;
 
                 case MvxPanelHintType.ResetRoot:
-                    ShowPanelAndResetToRoot(attribute, viewController);
+                    if (!ShowPanelAndResetToRoot(attribute, viewController)) return false;
                     break;
 
                 case MvxPanelHintType.PushPanel:
                 default:
-                    ShowPanel(attribute, viewController);
+                    if (!ShowPanel(attribute, viewController)) return false;
                     break;
             }
 
             if (!attribute.ShowPanel)
             {
-                var menu = Mvx.Resolve<IMvxSidebarViewController>();
+                var menu = Mvx.IoCProvider.Resolve<IMvxSidebarViewController>();
                 menu?.CloseMenu();
             }
+
+            return true;
         }
 
         protected virtual bool ShowPanelAndPopToRoot(MvxSidebarPresentationAttribute attribute, UIViewController viewController)
@@ -142,7 +147,7 @@ namespace MvvmCross.Plugin.Sidebar
             return true;
         }
 
-        protected override void ShowRootViewController(UIViewController viewController, MvxRootPresentationAttribute attribute, MvxViewModelRequest request)
+        protected override async Task<bool> ShowRootViewController(UIViewController viewController, MvxRootPresentationAttribute attribute, MvxViewModelRequest request)
         {
             // check if viewController is a MvxSidebarPanelController
             if (viewController is MvxSidebarViewController sidebarView)
@@ -154,21 +159,21 @@ namespace MvvmCross.Plugin.Sidebar
 
                 SetWindowRootViewController(viewController, attribute);
 
-                Mvx.RegisterSingleton<IMvxSidebarViewController>(SideBarViewController);
+                Mvx.IoCProvider.RegisterSingleton<IMvxSidebarViewController>(SideBarViewController);
 
-                CloseModalViewControllers();
-                CloseTabBarViewController();
-                CloseSplitViewController();
+                if (!await CloseModalViewControllers()) return false;
+                if (!await CloseTabBarViewController()) return false;
+                if (!await CloseSplitViewController()) return false;
                 CloseMasterNavigationController();
 
-                return;
+                return true;
             }
             else
             {
                 SideBarViewController = null;
                 MasterNavigationController = null;
             
-                base.ShowRootViewController(viewController, attribute, request);
+                return await base.ShowRootViewController(viewController, attribute, request);
             }
         }
 

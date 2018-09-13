@@ -8,6 +8,6 @@ namespace MvvmCross.Plugin.ResourceLoader
 {
     internal static class MvxPluginLog
     {
-        internal static IMvxLog Instance { get; } = Mvx.Resolve<IMvxLogProvider>().GetLogFor("MvxPlugin");
+        internal static IMvxLog Instance { get; } = Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor("MvxPlugin");
     }
 }

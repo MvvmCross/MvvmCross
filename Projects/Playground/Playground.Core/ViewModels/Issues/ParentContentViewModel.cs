@@ -40,10 +40,10 @@ namespace Playground.Core.ViewModels
 
         public override void Prepare()
         {
-            var vm = Mvx.Resolve<IMvxViewModelLoader>().LoadViewModel(MvxViewModelRequest<ChildContentViewModel>.GetDefaultRequest(), null) as ChildContentViewModel;
+            var vm = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>().LoadViewModel(MvxViewModelRequest<ChildContentViewModel>.GetDefaultRequest(), null) as ChildContentViewModel;
             vm.Test = "Child 1";
             ChildViewModel1 = vm;
-            var bc = Mvx.Resolve<IMvxViewModelLoader>()
+            var bc = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>()
                     .LoadViewModel(MvxViewModelRequest<ChildContentViewModel>.GetDefaultRequest(), null) as
                 ChildContentViewModel;
             bc.Test = "Child 2";

@@ -10,8 +10,8 @@ namespace MvvmCross.Plugin.Network
     {
         public virtual void Load()
         {
-            Mvx.RegisterType<IMvxRestClient, MvxJsonRestClient>();
-            Mvx.RegisterType<IMvxJsonRestClient, MvxJsonRestClient>();
+            Mvx.IoCProvider.RegisterType<IMvxRestClient, MvxJsonRestClient>();
+            Mvx.IoCProvider.RegisterType<IMvxJsonRestClient, MvxJsonRestClient>();
         }        
     }
 }

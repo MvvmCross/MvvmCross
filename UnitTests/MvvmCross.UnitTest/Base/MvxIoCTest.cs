@@ -117,7 +117,7 @@ namespace MvvmCross.UnitTest.Base
                 if (FirstTime)
                 {
                     FirstTime = false;
-                    var a = Mvx.Resolve<IA>();
+                    var a = Mvx.IoCProvider.Resolve<IA>();
                 }
             }
         }
@@ -179,12 +179,12 @@ namespace MvvmCross.UnitTest.Base
             MvxSingleton.ClearAllSingletons();
             var instance = MvxIoCProvider.Initialize();
 
-            Mvx.LazyConstructAndRegisterSingleton<IA, A>();
-            Mvx.LazyConstructAndRegisterSingleton<IB, B>();
-            Mvx.LazyConstructAndRegisterSingleton<IC, C>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IA, A>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IB, B>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IC, C>();
 
             IA a;
-            var result = Mvx.TryResolve(out a);
+            var result = Mvx.IoCProvider.TryResolve(out a);
             Assert.False(result);
             Assert.Null(a);
         }
@@ -195,12 +195,12 @@ namespace MvvmCross.UnitTest.Base
             MvxSingleton.ClearAllSingletons();
             var instance = MvxIoCProvider.Initialize();
 
-            Mvx.LazyConstructAndRegisterSingleton<IA, A>();
-            Mvx.LazyConstructAndRegisterSingleton<IB, B>();
-            Mvx.LazyConstructAndRegisterSingleton<IC, C2>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IA, A>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IB, B>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IC, C2>();
 
             IA a;
-            var result = Mvx.TryResolve(out a);
+            var result = Mvx.IoCProvider.TryResolve(out a);
             Assert.True(result);
             Assert.NotNull(a);
         }
@@ -211,19 +211,19 @@ namespace MvvmCross.UnitTest.Base
             MvxSingleton.ClearAllSingletons();
             var instance = MvxIoCProvider.Initialize();
 
-            Mvx.LazyConstructAndRegisterSingleton<IA, A>();
-            Mvx.LazyConstructAndRegisterSingleton<IB, B>();
-            Mvx.LazyConstructAndRegisterSingleton<IC, C2>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IA, A>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IB, B>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IC, C2>();
 
             IA a0;
-            var result = Mvx.TryResolve(out a0);
+            var result = Mvx.IoCProvider.TryResolve(out a0);
             Assert.True(result);
             Assert.NotNull(a0);
 
             for (int i = 0; i < 100; i++)
             {
                 IA a1;
-                result = Mvx.TryResolve(out a1);
+                result = Mvx.IoCProvider.TryResolve(out a1);
                 Assert.True(result);
                 Assert.Equal(a0, a1);
             }
@@ -235,19 +235,19 @@ namespace MvvmCross.UnitTest.Base
             MvxSingleton.ClearAllSingletons();
             var instance = MvxIoCProvider.Initialize();
 
-            Mvx.LazyConstructAndRegisterSingleton<IB, B>();
-            Mvx.LazyConstructAndRegisterSingleton<IC, C2>();
-            Mvx.ConstructAndRegisterSingleton<IA, A>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IB, B>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IC, C2>();
+            Mvx.IoCProvider.ConstructAndRegisterSingleton<IA, A>();
 
             IA a0;
-            var result = Mvx.TryResolve(out a0);
+            var result = Mvx.IoCProvider.TryResolve(out a0);
             Assert.True(result);
             Assert.NotNull(a0);
 
             for (int i = 0; i < 100; i++)
             {
                 IA a1;
-                result = Mvx.TryResolve(out a1);
+                result = Mvx.IoCProvider.TryResolve(out a1);
                 Assert.True(result);
                 Assert.Equal(a0, a1);
             }
@@ -259,16 +259,16 @@ namespace MvvmCross.UnitTest.Base
             MvxSingleton.ClearAllSingletons();
             var instance = MvxIoCProvider.Initialize();
 
-            Mvx.LazyConstructAndRegisterSingleton<IB, B>();
-            Mvx.LazyConstructAndRegisterSingleton<IC, C2>();
-            Mvx.RegisterType<IA, A>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IB, B>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IC, C2>();
+            Mvx.IoCProvider.RegisterType<IA, A>();
 
             var previous = new Dictionary<IA, bool>();
 
             for (int i = 0; i < 100; i++)
             {
                 IA a1;
-                var result = Mvx.TryResolve(out a1);
+                var result = Mvx.IoCProvider.TryResolve(out a1);
                 Assert.True(result);
                 Assert.False(previous.ContainsKey(a1));
                 Assert.Equal(i, previous.Count);
@@ -282,12 +282,12 @@ namespace MvvmCross.UnitTest.Base
             MvxSingleton.ClearAllSingletons();
             var instance = MvxIoCProvider.Initialize();
 
-            Mvx.RegisterType<IB, B>();
-            Mvx.LazyConstructAndRegisterSingleton<IC, C2>();
-            Mvx.RegisterType<IA, A>();
+            Mvx.IoCProvider.RegisterType<IB, B>();
+            Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IC, C2>();
+            Mvx.IoCProvider.RegisterType<IA, A>();
 
             IA a1;
-            var result = Mvx.TryResolve(out a1);
+            var result = Mvx.IoCProvider.TryResolve(out a1);
             Assert.True(result);
             Assert.NotNull(a1);
             Assert.NotNull(a1.B);
@@ -302,8 +302,8 @@ namespace MvvmCross.UnitTest.Base
 
             instance.RegisterType<IC>(() => new C2());
 
-            var c1 = Mvx.Resolve<IC>();
-            var c2 = Mvx.Resolve<IC>();
+            var c1 = Mvx.IoCProvider.Resolve<IC>();
+            var c2 = Mvx.IoCProvider.Resolve<IC>();
 
             Assert.NotNull(c1);
             Assert.NotNull(c2);
@@ -319,8 +319,8 @@ namespace MvvmCross.UnitTest.Base
 
             instance.RegisterType(typeof(IC), () => new C2());
 
-            var c1 = Mvx.Resolve<IC>();
-            var c2 = Mvx.Resolve<IC>();
+            var c1 = Mvx.IoCProvider.Resolve<IC>();
+            var c2 = Mvx.IoCProvider.Resolve<IC>();
 
             Assert.NotNull(c1);
             Assert.NotNull(c2);
@@ -337,7 +337,7 @@ namespace MvvmCross.UnitTest.Base
             instance.RegisterType(typeof(IC), () => "Fail");
 
             Assert.Throws<MvxIoCResolveException>(() => {
-                var c1 = Mvx.Resolve<IC>();
+                var c1 = Mvx.IoCProvider.Resolve<IC>();
             });
         }
 
@@ -350,7 +350,7 @@ namespace MvvmCross.UnitTest.Base
             instance.RegisterType(typeof(IC), () => 36);
 
             Assert.Throws<MvxIoCResolveException>(() => {
-                var c1 = Mvx.Resolve<IC>();
+                var c1 = Mvx.IoCProvider.Resolve<IC>();
             });
         }
 
@@ -365,7 +365,7 @@ namespace MvvmCross.UnitTest.Base
             instance.RegisterType(typeof(IOG<>), typeof(OG<>));
 
             IOG<C2> toResolve = null;
-            Mvx.TryResolve<IOG<C2>>(out toResolve);
+            Mvx.IoCProvider.TryResolve<IOG<C2>>(out toResolve);
 
             Assert.NotNull(toResolve);
             Assert.Contains(toResolve.GetType().GetTypeInfo().ImplementedInterfaces, i => i == typeof(IOG<C2>));
@@ -381,7 +381,7 @@ namespace MvvmCross.UnitTest.Base
             instance.RegisterType(typeof(IOG<C2>), typeof(OG<C2>));
             
             IOG<C2> toResolve = null;
-            Mvx.TryResolve<IOG<C2>>(out toResolve);
+            Mvx.IoCProvider.TryResolve<IOG<C2>>(out toResolve);
 
             Assert.NotNull(toResolve);
             Assert.Contains(toResolve.GetType().GetTypeInfo().ImplementedInterfaces, i => i == typeof(IOG<C2>));
@@ -397,7 +397,7 @@ namespace MvvmCross.UnitTest.Base
             instance.RegisterType(typeof(IOG2<,>), typeof(OG2<,>));
 
             IOG2<C2, C> toResolve = null;
-            Mvx.TryResolve<IOG2<C2,C>>(out toResolve);
+            Mvx.IoCProvider.TryResolve<IOG2<C2,C>>(out toResolve);
 
             Assert.NotNull(toResolve);
             Assert.Contains(toResolve.GetType().GetTypeInfo().ImplementedInterfaces, i => i == typeof(IOG2<C2, C>));
@@ -413,7 +413,7 @@ namespace MvvmCross.UnitTest.Base
             instance.RegisterType(typeof(IOG2<C2,C>), typeof(OG2<C2,C>));
 
             IOG2<C2, C> toResolve = null;
-            Mvx.TryResolve<IOG2<C2, C>>(out toResolve);
+            Mvx.IoCProvider.TryResolve<IOG2<C2, C>>(out toResolve);
 
             Assert.NotNull(toResolve);
             Assert.Contains(toResolve.GetType().GetTypeInfo().ImplementedInterfaces, i => i == typeof(IOG2<C2, C>));
@@ -428,7 +428,7 @@ namespace MvvmCross.UnitTest.Base
 
             IOG<C2> toResolve = null;
 
-            var isResolved = Mvx.TryResolve<IOG<C2>>(out toResolve);
+            var isResolved = Mvx.IoCProvider.TryResolve<IOG<C2>>(out toResolve);
 
             Assert.False(isResolved);
             Assert.Null(toResolve);
@@ -444,7 +444,7 @@ namespace MvvmCross.UnitTest.Base
             instance.RegisterType(typeof(IOG<>), typeof(OG<>));
 
             IHasOGParameter toResolve = null;
-            Mvx.TryResolve<IHasOGParameter>(out toResolve);
+            Mvx.IoCProvider.TryResolve<IHasOGParameter>(out toResolve);
 
             Assert.NotNull(toResolve);
             Assert.Contains(toResolve.GetType().GetTypeInfo().ImplementedInterfaces, i => i == typeof(IHasOGParameter));

@@ -19,7 +19,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
         {
             get
             {
-                _byNameLookup = _byNameLookup ?? Mvx.Resolve<IMvxViewModelByNameLookup>();
+                _byNameLookup = _byNameLookup ?? Mvx.IoCProvider.Resolve<IMvxViewModelByNameLookup>();
                 return _byNameLookup;
             }
         }

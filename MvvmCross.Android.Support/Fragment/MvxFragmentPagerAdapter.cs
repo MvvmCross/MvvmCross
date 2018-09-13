@@ -48,7 +48,7 @@ namespace MvvmCross.Droid.Support.V4
 
                 var fragmentAsView = (IMvxView) fragInfo.CachedFragment;
 
-                fragmentAsView.ViewModel = fragInfo.ViewModel ?? Mvx.Resolve<IMvxViewModelLoader>()
+                fragmentAsView.ViewModel = fragInfo.ViewModel ?? Mvx.IoCProvider.Resolve<IMvxViewModelLoader>()
                     .LoadViewModel(new MvxViewModelRequest(fragInfo.ViewModelType, null, null), null);
             }
 

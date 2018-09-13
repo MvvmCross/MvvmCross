@@ -11,6 +11,6 @@ namespace MvvmCross.Tests
 {
     internal static class MvxTestLog
     {
-        internal static IMvxLog Instance { get; } = Mvx.Resolve<IMvxLogProvider>().GetLogFor("MvxTest");
+        internal static IMvxLog Instance { get; } = Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor("MvxTest");
     }
 }

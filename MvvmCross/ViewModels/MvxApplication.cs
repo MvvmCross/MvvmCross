@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 using MvvmCross.IoC;
 using MvvmCross.Logging;
 using MvvmCross.Plugin;
@@ -45,9 +46,10 @@ namespace MvvmCross.ViewModels
         /// <summary>
         /// Any initialization steps that need to be done on the UI thread
         /// </summary>
-        public virtual void Startup()
+        public virtual Task Startup()
         {
             MvxLog.Instance.Trace("AppStart: Application Startup - On UI thread");
+            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -68,24 +70,24 @@ namespace MvvmCross.ViewModels
         protected void RegisterCustomAppStart<TMvxAppStart>()
             where TMvxAppStart : class, IMvxAppStart
         {
-            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, TMvxAppStart>();
+            Mvx.IoCProvider.ConstructAndRegisterSingleton<IMvxAppStart, TMvxAppStart>();
         }
 
         protected void RegisterAppStart<TViewModel>()
             where TViewModel : IMvxViewModel
         {
-            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel>>();
+            Mvx.IoCProvider.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel>>();
         }
 
         protected void RegisterAppStart(IMvxAppStart appStart)
         {
-            Mvx.RegisterSingleton(appStart);
+            Mvx.IoCProvider.RegisterSingleton(appStart);
         }
 
         protected virtual void RegisterAppStart<TViewModel, TParameter>()
           where TViewModel : IMvxViewModel<TParameter>
         {
-            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel, TParameter>>();
+            Mvx.IoCProvider.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel, TParameter>>();
         }
 
         protected IEnumerable<Type> CreatableTypes()

@@ -17,7 +17,7 @@ using MvvmCross.Exceptions;
 namespace MvvmCross.Binding.BindingContext
 {
     public class MvxBaseFluentBindingDescription<TTarget>
-        : MvxApplicableTo<TTarget>
+        : MvxApplicableTo<TTarget>, IMvxBaseFluentBindingDescription
         where TTarget : class
     {
         private readonly TTarget _target;
@@ -66,7 +66,7 @@ namespace MvvmCross.Binding.BindingContext
 
             public MvxSourceStepDescription CreateSourceStep(MvxSourceStepDescription inputs)
             {
-                var parser = Mvx.Resolve<IMvxBindingDescriptionParser>();
+                var parser = Mvx.IoCProvider.Resolve<IMvxBindingDescriptionParser>();
                 var parsedDescription = parser.ParseSingle(_freeText);
 
                 if (inputs.Converter == null
@@ -126,7 +126,7 @@ namespace MvvmCross.Binding.BindingContext
 
             public MvxSourceStepDescription CreateSourceStep(MvxSourceStepDescription inputs)
             {
-                var parser = Mvx.Resolve<IMvxBindingDescriptionParser>();
+                var parser = Mvx.IoCProvider.Resolve<IMvxBindingDescriptionParser>();
                 var innerSteps = _useParser ?
                     _properties.Select(p => parser.ParseSingle(p).Source) :
                     _properties.Select(p => new MvxPathSourceStepDescription { SourcePropertyPath = p });
@@ -162,6 +162,12 @@ namespace MvvmCross.Binding.BindingContext
         }
 
         protected object ClearBindingKey { get; set; }
+
+        object IMvxBaseFluentBindingDescription.ClearBindingKey
+        {
+            get => ClearBindingKey;
+            set => ClearBindingKey = value;
+        }
 
         protected MvxBindingDescription BindingDescription => _bindingDescription;
 

@@ -16,7 +16,7 @@ namespace MvvmCross.Plugin.Location.Fused
 		: MvxLocationWatcher
 	{
 		private Context _context;
-        private Context Context => _context ?? (_context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext);
+        private Context Context => _context ?? (_context = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext);
         private FusedLocationHandler _locationHandler;
 
 		protected override void PlatformSpecificStart(MvxLocationOptions options)

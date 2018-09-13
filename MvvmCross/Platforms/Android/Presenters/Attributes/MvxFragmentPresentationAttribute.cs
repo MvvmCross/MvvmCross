@@ -52,7 +52,7 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             bool isCacheableFragment = false
         )
         {
-            var context = Mvx.Resolve<IMvxAndroidGlobals>().ApplicationContext;
+            var context = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext;
 
             ActivityHostViewModelType = activityHostViewModelType;
             FragmentContentId = !string.IsNullOrEmpty(fragmentContentResourceName) ? context.Resources.GetIdentifier(fragmentContentResourceName, "id", context.PackageName) : global::Android.Resource.Id.Content;

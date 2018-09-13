@@ -3,10 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Core
 {
@@ -102,7 +104,11 @@ namespace MvvmCross.Core
                 else
                 {
                     if (IsInitialisedTaskCompletionSource.Task.IsCompleted)
+                    {
+                        if (IsInitialisedTaskCompletionSource.Task.IsFaulted)
+                            throw IsInitialisedTaskCompletionSource.Task.Exception;
                         return;
+                    }
 
                     MvxLog.Instance.Trace("EnsureInitialized has already been called so now waiting for completion");
                 }
@@ -115,20 +121,20 @@ namespace MvvmCross.Core
             lock (LockObject)
             {
                 _currentMonitor = setupMonitor;
-                
+
                 // if the tcs is not null, it means the initialization is running
                 if (IsInitialisedTaskCompletionSource != null)
                 {
                     // If the task is already completed at this point, let the monitor know it has finished. 
                     // but don't do it otherwise because it's done elsewhere
-                    if(IsInitialisedTaskCompletionSource.Task.IsCompleted)
+                    if (IsInitialisedTaskCompletionSource.Task.IsCompleted)
                     {
                         _currentMonitor?.InitializationComplete();
                     }
 
                     return;
                 }
-                
+
                 StartSetupInitialization();
             }
         }
@@ -173,18 +179,39 @@ namespace MvvmCross.Core
         {
             IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
             _setup.InitializePrimary();
-            Task.Run(() =>
+            Task.Run(async () =>
             {
-                _setup.InitializeSecondary();
+                ExceptionDispatchInfo setupException = null;
+                try
+                {
+                    _setup.InitializeSecondary();
+                }
+                catch(Exception ex)
+                {
+                    setupException = ExceptionDispatchInfo.Capture(ex);
+                }
+                IMvxSetupMonitor monitor;
                 lock (LockObject)
                 {
-                    IsInitialisedTaskCompletionSource.SetResult(true);
-                    var dispatcher = Mvx.GetSingleton<IMvxMainThreadDispatcher>();
-                    dispatcher.RequestMainThreadAction(() =>
+                    if (setupException == null)
                     {
-                        if (_currentMonitor != null)
+                        IsInitialisedTaskCompletionSource.SetResult(true);
+                    }
+                    else
+                    {
+                        IsInitialisedTaskCompletionSource.SetException(setupException.SourceException);
+                    }
+                    monitor = _currentMonitor;
+                }
+
+                if (monitor != null)
+                {
+                    var dispatcher = Mvx.IoCProvider.GetSingleton<IMvxMainThreadAsyncDispatcher>();
+                    await dispatcher.ExecuteOnMainThreadAsync(async () =>
+                    {
+                        if (monitor != null)
                         {
-                            _currentMonitor?.InitializationComplete();
+                            await monitor.InitializationComplete();
                         }
                     });
                 }

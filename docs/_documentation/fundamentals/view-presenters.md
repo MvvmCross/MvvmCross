@@ -16,7 +16,7 @@ Going further with the previous idea, it is important to notice that each platfo
 - On MacOS, once again the same app could include a window with a split view.
 - ...
 
-MvvmCross provides default presenters for each platform that support the most used patterns and strategies. However, sometimes you might find yourself needing to display a ViewModel in a particular or rare way that is not covered. This means, you will need to create a custom presenter by subclassing one of the provided by MvvmCross or by implementing the interface [IMvxViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/89eb738f36e600f6e9aa1555e2b4bb6484c553cb/MvvmCross/Core/Core/Views/IMvxViewPresenter.cs).
+MvvmCross provides default presenters for each platform that support the most used patterns and strategies. However, sometimes you might find yourself needing to display a ViewModel in a particular or rare way that is not covered. This means, you will need to create a custom presenter by subclassing one of the provided by MvvmCross or by implementing the interface [IMvxViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/master/MvvmCross/Presenters/IMvxViewPresenter.cs).
 
 Let's take a look now at the methods of that interface:
 
@@ -27,19 +27,20 @@ Let's take a look now at the methods of that interface:
 
 ## View Presenters on each platform
 Each platform has its own View Presenter:
-- Android: [MvxAndroidViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Droid/Droid/Views/MvxAndroidViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/android/android-view-presenter)
-- Android (support packages): [MvxAppCompatViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross.Android.Support/V7.AppCompat/MvxAppCompatViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/android/android-view-presenter)
-- iOS: [MvxIosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/iOS/iOS/Views/Presenters/MvxIosViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/ios/ios-view-presenter)
-- UWP: [MvxWindowsViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Platforms/Uap/Presenters/MvxWindowsViewPresenter.cs)
-- WPF: [MvxWpfViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Platforms/Wpf/Presenters/MvxWpfViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/wpf/wpf-view-presenter)
-- macOS: [MvxMacViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Platforms/Mac/Presenters/MvxMacViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/macos/mac-view-presenter)
-- tvOS: [MvxTvosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/develop/MvvmCross/Platforms/Tvos/Presenters/MvxTvosViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/tvos/tvos-view-presenter)
+- Android: [MvxAndroidViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/master/MvvmCross/Platforms/Android/Presenters/MvxAndroidViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/android/android-view-presenter)
+- Android (support packages): [MvxAppCompatViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/master/MvvmCross.Android.Support/V7.AppCompat/MvxAppCompatViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/android/android-view-presenter)
+- iOS: [MvxIosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/master/MvvmCross/Platforms/Ios/Presenters/MvxIosViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/ios/ios-view-presenter)
+- UWP: [MvxWindowsViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/master/MvvmCross/Platforms/Uap/Presenters/MvxWindowsViewPresenter.cs)
+- WPF: [MvxWpfViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/master/MvvmCross/Platforms/Wpf/Presenters/MvxWpfViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/wpf/wpf-view-presenter)
+- macOS: [MvxMacViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/master/MvvmCross/Platforms/Mac/Presenters/MvxMacViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/macos/mac-view-presenter)
+- tvOS: [MvxTvosViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/master/MvvmCross/Platforms/Tvos/Presenters/MvxTvosViewPresenter.cs) - [Documentation](https://www.mvvmcross.com/documentation/platform/tvos/tvos-view-presenter)
+- Tizen: [MvxTizenViewPresenter](https://github.com/MvvmCross/MvvmCross/blob/master/MvvmCross/Platforms/Tizen/Presenters/MvxTizenViewPresenter.cs)
 
 When you navigate to selected ViewModel, platform specific View Presenter handles displaying View properly.
 
  ![View Presenter schema](../../assets/img/ViewPresenterSchema.png)
 
-MvvmCross ViewPresenters will provide you with a set of attributes on each platform. For example on iOS, [these](https://github.com/MvvmCross/MvvmCross/tree/develop/MvvmCross/iOS/iOS/Views/Presenters/Attributes) are the existing ones: 
+MvvmCross ViewPresenters will provide you with a set of attributes on each platform. For example on iOS, [these](https://github.com/MvvmCross/MvvmCross/tree/master/MvvmCross/Platforms/Ios/Presenters/Attributes) are the existing ones: 
 
 - MvxTabPresentationAttribute – for tabs
 - MvxRootPresentationAttribute – to set a ViewController as root
@@ -77,7 +78,7 @@ In this example the attribute is telling the Presenter that whenever a ViewModel
 ## Requesting presentation changes
 Although for most apps showing / closing ViewModels is enough, there is one more tool that MvvmCross offers, and it is extremely powerful: the ability to request a change to the UI layer.
 
-The best example we can give about this is the `Close` method itself. Once you call Close from a ViewModel or a MvxNavigatingObject, what MvvmCross internally do is to send a `MvxClosePresentationHint` to the ViewPresenter, which then calls `Close(IMvxViewModel toClose)`. You can see how this happen in the [iOS Presenter](https://github.com/MvvmCross/MvvmCross/blob/b4ca1f492b996c9a836f494b7873033336ea83de/MvvmCross/iOS/iOS/Views/Presenters/MvxIosViewPresenter.cs#L67).
+The best example we can give about this is the `Close` method itself. Once you call Close from a ViewModel or a MvxNavigatingObject, what MvvmCross internally do is to send a `MvxClosePresentationHint` to the ViewPresenter, which then calls `Close(IMvxViewModel toClose)`. You can see how this happen in the [Base Presenter](https://github.com/MvvmCross/MvvmCross/blob/master/MvvmCross/Presenters/MvxAttributeViewPresenter.cs#L158).
 
 It is important to remark here that these are just unbound requests. Each platform is then responsible for deciding how a presentation hint should be handled - you can also decide to just ignore a hint type -.
 

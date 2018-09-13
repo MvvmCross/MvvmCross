@@ -18,7 +18,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
     {
         private IMvxViewTypeResolver _viewTypeResolver;
 
-        protected IMvxViewTypeResolver ViewTypeResolver => _viewTypeResolver ?? (_viewTypeResolver = Mvx.Resolve<IMvxViewTypeResolver>());
+        protected IMvxViewTypeResolver ViewTypeResolver => _viewTypeResolver ?? (_viewTypeResolver = Mvx.IoCProvider.Resolve<IMvxViewTypeResolver>());
 
         public virtual View CreateView(View parent, string name, Context context, IAttributeSet attrs)
         {

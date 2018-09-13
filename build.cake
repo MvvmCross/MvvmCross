@@ -209,7 +209,7 @@ Task("PublishPackages")
     .WithCriteria(() => IsRepository(repoName))
     .WithCriteria(() => ShouldPushNugetPackages(versionInfo.BranchName))
     .IsDependentOn("CopyPackages")
-    //.IsDependentOn("SignPackages")
+    .IsDependentOn("SignPackages")
     .Does (() =>
 {
     // Resolve the API key.

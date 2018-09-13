@@ -76,7 +76,7 @@ namespace MvvmCross.Platforms.Android.Views
                 return null;
             }
 
-            var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
+            var loaderService = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
             var viewModelRequest = MvxViewModelRequest.GetDefaultRequest(viewModelTypeHint);
             var viewModel = loaderService.LoadViewModel(viewModelRequest, savedState);
             return viewModel;
@@ -88,7 +88,7 @@ namespace MvvmCross.Platforms.Android.Views
             if (extraData == null)
                 return null;
 
-            var converter = Mvx.Resolve<IMvxNavigationSerializer>();
+            var converter = Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>();
             var viewModelRequest = converter.Serializer.DeserializeObject<MvxViewModelRequest>(extraData);
 
             return ViewModelFromRequest(viewModelRequest, savedState);
@@ -96,7 +96,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         protected virtual IMvxViewModel ViewModelFromRequest(MvxViewModelRequest viewModelRequest, IMvxBundle savedState)
         {
-            var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
+            var loaderService = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(viewModelRequest, savedState);
             return viewModel;
         }
@@ -107,7 +107,7 @@ namespace MvvmCross.Platforms.Android.Views
             if (embeddedViewModelKey != 0)
             {
                 {
-                    mvxViewModel = Mvx.Resolve<IMvxChildViewModelCache>().Get(embeddedViewModelKey);
+                    mvxViewModel = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>().Get(embeddedViewModelKey);
                     if (mvxViewModel != null)
                     {
                         RemoveSubViewModelWithKey(embeddedViewModelKey);
@@ -127,7 +127,7 @@ namespace MvvmCross.Platforms.Android.Views
                 throw new MvxException("View Type not found for " + request.ViewModelType);
             }
 
-            var converter = Mvx.Resolve<IMvxNavigationSerializer>();
+            var converter = Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>();
             var requestText = converter.Serializer.SerializeObject(request);
 
             var intent = new Intent(_applicationContext, viewType);
@@ -151,7 +151,7 @@ namespace MvvmCross.Platforms.Android.Views
             var request = MvxViewModelRequest.GetDefaultRequest(viewModel.GetType());
             var intent = GetIntentFor(request);
 
-            var key = Mvx.Resolve<IMvxChildViewModelCache>().Cache(viewModel);
+            var key = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>().Cache(viewModel);
             intent.PutExtra(SubViewModelKey, key);
 
             return new Tuple<Intent, int>(intent, key);
@@ -159,7 +159,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         public void RemoveSubViewModelWithKey(int key)
         {
-            Mvx.Resolve<IMvxChildViewModelCache>().Remove(key);
+            Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>().Remove(key);
         }
 
         #endregion Implementation of IMvxAndroidViewModelRequestTranslator

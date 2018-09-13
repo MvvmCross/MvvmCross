@@ -9,19 +9,11 @@ using MvvmCross.Navigation;
 namespace MvvmCross.ViewModels
 {
     public abstract class MvxViewModel
-        : MvxNotifyPropertyChanged, IMvxViewModel, IMvxNavigationViewModel, IMvxLogViewModel
+        : MvxNotifyPropertyChanged, IMvxViewModel
     {
-        private IMvxLog _log;
-
         protected MvxViewModel()
         {
         }
-
-        public virtual IMvxNavigationService NavigationService { get; set; }
-
-        public virtual IMvxLogProvider LogProvider { get; set; }
-
-        protected virtual IMvxLog Log => _log ?? (_log = LogProvider.GetLogFor(GetType()));
 
         public virtual void ViewCreated()
         {

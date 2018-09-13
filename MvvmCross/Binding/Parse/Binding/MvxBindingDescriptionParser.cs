@@ -24,7 +24,7 @@ namespace MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                _bindingParser = _bindingParser ?? Mvx.Resolve<IMvxBindingParser>();
+                _bindingParser = _bindingParser ?? Mvx.IoCProvider.Resolve<IMvxBindingParser>();
                 return _bindingParser;
             }
         }
@@ -35,7 +35,7 @@ namespace MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                _languageBindingParser = _languageBindingParser ?? Mvx.Resolve<IMvxLanguageBindingParser>();
+                _languageBindingParser = _languageBindingParser ?? Mvx.IoCProvider.Resolve<IMvxLanguageBindingParser>();
                 return _languageBindingParser;
             }
         }
@@ -44,7 +44,7 @@ namespace MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                _valueConverterLookup = _valueConverterLookup ?? Mvx.Resolve<IMvxValueConverterLookup>();
+                _valueConverterLookup = _valueConverterLookup ?? Mvx.IoCProvider.Resolve<IMvxValueConverterLookup>();
                 return _valueConverterLookup;
             }
         }

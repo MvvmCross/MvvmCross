@@ -52,7 +52,7 @@ namespace MvvmCross.Platforms.Android.Views
             if (request == null)
                 request = MvxViewModelRequest.GetDefaultRequest(viewModelType);
 
-            var viewModelCache = Mvx.Resolve<IMvxChildViewModelCache>();
+            var viewModelCache = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>();
             if (viewModelCache.Exists(viewModelType))
             {
                 var viewModelCached = viewModelCache.Get(viewModelType);
@@ -60,7 +60,7 @@ namespace MvvmCross.Platforms.Android.Views
                 return viewModelCached;
             }
 
-            var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
+            var loaderService = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(request, savedState);
 
             return viewModel;

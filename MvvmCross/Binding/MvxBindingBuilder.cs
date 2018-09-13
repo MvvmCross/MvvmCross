@@ -33,8 +33,8 @@ namespace MvvmCross.Binding
         {
             var sourceStepFactory = CreateSourceStepFactoryRegistry();
             FillSourceStepFactory(sourceStepFactory);
-            Mvx.RegisterSingleton<IMvxSourceStepFactoryRegistry>(sourceStepFactory);
-            Mvx.RegisterSingleton<IMvxSourceStepFactory>(sourceStepFactory);
+            Mvx.IoCProvider.RegisterSingleton<IMvxSourceStepFactoryRegistry>(sourceStepFactory);
+            Mvx.IoCProvider.RegisterSingleton<IMvxSourceStepFactory>(sourceStepFactory);
         }
 
         protected virtual void FillSourceStepFactory(IMvxSourceStepFactoryRegistry registry)
@@ -52,12 +52,12 @@ namespace MvvmCross.Binding
         protected virtual void RegisterSourceFactory()
         {
             var sourceFactory = CreateSourceBindingFactory();
-            Mvx.RegisterSingleton<IMvxSourceBindingFactory>(sourceFactory);
+            Mvx.IoCProvider.RegisterSingleton<IMvxSourceBindingFactory>(sourceFactory);
             var extensionHost = sourceFactory as IMvxSourceBindingFactoryExtensionHost;
             if (extensionHost != null)
             {
                 RegisterSourceBindingFactoryExtensions(extensionHost);
-                Mvx.RegisterSingleton<IMvxSourceBindingFactoryExtensionHost>(extensionHost);
+                Mvx.IoCProvider.RegisterSingleton<IMvxSourceBindingFactoryExtensionHost>(extensionHost);
             }
             else
                 MvxLog.Instance.Trace("source binding factory extension host not provided - so no source extensions will be used");
@@ -76,8 +76,8 @@ namespace MvvmCross.Binding
         protected virtual void RegisterTargetFactory()
         {
             var targetRegistry = CreateTargetBindingRegistry();
-            Mvx.RegisterSingleton<IMvxTargetBindingFactoryRegistry>(targetRegistry);
-            Mvx.RegisterSingleton<IMvxTargetBindingFactory>(targetRegistry);
+            Mvx.IoCProvider.RegisterSingleton<IMvxTargetBindingFactoryRegistry>(targetRegistry);
+            Mvx.IoCProvider.RegisterSingleton<IMvxTargetBindingFactory>(targetRegistry);
             FillTargetFactories(targetRegistry);
         }
 

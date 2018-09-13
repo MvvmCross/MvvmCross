@@ -10,6 +10,6 @@ namespace MvvmCross.Forms
 {
     internal static class MvxFormsLog
     {
-        internal static IMvxLog Instance { get; } = Mvx.Resolve<IMvxLogProvider>().GetLogFor("MvxForms");
+        internal static IMvxLog Instance { get; } = Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor("MvxForms");
     }
 }

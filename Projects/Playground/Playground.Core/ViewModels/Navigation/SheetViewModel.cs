@@ -4,14 +4,15 @@
 
 using System.Threading.Tasks;
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class SheetViewModel : MvxViewModel
+    public class SheetViewModel : MvxNavigationViewModel
     {
-        public SheetViewModel()
+        public SheetViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
             CloseCommand = new MvxAsyncCommand(CloseSheet);
         }

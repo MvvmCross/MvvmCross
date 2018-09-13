@@ -10,7 +10,7 @@ namespace MvvmCross.Plugin.Network.Platforms.Uap
         public override void Load()
         {
 #warning TODO - WINDOWS STORE SHOULD ADD IMvxReachability!
-            // Mvx.RegisterType<IMvxReachability, MvxReachability>();
+            // Mvx.IoCProvider.RegisterType<IMvxReachability, MvxReachability>();
         }
     }
 }
