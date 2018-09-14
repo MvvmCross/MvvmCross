@@ -19,6 +19,8 @@ var verbosity = Verbosity.Minimal;
 
 var signingSecret = EnvironmentVariable("SIGNING_SECRET");
 var signingUser = EnvironmentVariable("SIGNING_USER");
+var didSignPackages = false;
+
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 GitVersion versionInfo = null;
 
@@ -198,6 +200,8 @@ Task("SignPackages")
             throw new InvalidOperationException("Signing failed!");
         }
     }
+
+    didSignPackages = true;
 });
 
 Task("PublishPackages")
@@ -208,6 +212,12 @@ Task("PublishPackages")
     .IsDependentOn("SignPackages")
     .Does (() =>
 {
+    if (!didSignPackages)
+    {
+        Warning("Packages were not signed. Not publishing packages");
+        return;
+    }
+
     // Resolve the API key.
     var nugetKeySource = GetNugetKeyAndSource();
     var apiKey = nugetKeySource.Item1;
