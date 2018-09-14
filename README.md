@@ -158,7 +158,7 @@ Otherwise default ReSharper C# code style applies.
 ### Project Workflow
 
 Our workflow is loosely based on [Github Flow](http://scottchacon.com/2011/08/31/github-flow.html).
-We actively do development on the **develop** branch. This means that all pull requests by contributors need to be develop and requested against the deveop branch.
+We actively do development on the **develop** branch. This means that all pull requests by contributors need to be develop and requested against the develop branch.
 The master branch contains tags reflecting what is currently on NuGet.org.
 
 ### Submitting Pull Requests
