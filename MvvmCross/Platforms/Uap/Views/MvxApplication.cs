@@ -118,11 +118,14 @@ namespace MvvmCross.Platforms.Uap.Views
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName, e.Exception);
         }
 
-        private async void OnEnteredBackground(object sender, object e)
+        private async void OnEnteredBackground(object sender, EnteredBackgroundEventArgs e)
         {
+            var deferral = e.GetDeferral();
+
             var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
             await Suspend(suspension);
             await suspension.SaveAsync();
+            deferral.Complete();
         }
 
         protected virtual Task Suspend(IMvxSuspensionManager suspensionManager)
