@@ -26,6 +26,7 @@ namespace MvvmCross.Platforms.Uap.Views
         {
             RegisterSetup();
             EnteredBackground += OnEnteredBackground;
+            Resuming += OnResuming;
         }
 
         /// <summary>
@@ -131,6 +132,12 @@ namespace MvvmCross.Platforms.Uap.Views
         protected virtual Task Suspend(IMvxSuspensionManager suspensionManager)
         {
             return Task.CompletedTask;
+        }
+
+        private async void OnResuming(object sender, object e)
+        {
+            var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
+            await Resume(suspension);
         }
 
         protected virtual Task Resume(IMvxSuspensionManager suspensionManager)
