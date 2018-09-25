@@ -14,7 +14,7 @@ There are lots of articles and introductions available on this - some good start
 
 -----
 
-Specifically within MvvmCross, we provide a single static class `Mvx` which acts as a single place for both registering and resolving interfaces and their implementations.
+Specifically within MvvmCross, we provide the singleton instance `Mvx.IoCProvider` which acts as a single place for both registering and resolving interfaces and their implementations.
 
 ## Service Location - Registration and Resolution
 
@@ -40,18 +40,18 @@ public class Foo : IFoo
 With this pair written you could then register a `Foo` instance as a singleton which implements `IFoo` using:
 
         // every time someone needs an IFoo they will get the same one
-        Mvx.RegisterSingleton<IFoo>(new Foo());
+        Mvx.IoCProvider.RegisterSingleton<IFoo>(new Foo());
 
 If you did this, then any code can call:
 
-        var foo = Mvx.Resolve<IFoo>();
+        var foo = Mvx.IoCProvider.Resolve<IFoo>();
 
 and every single call would return **the same instance** of Foo
 
 An alternative syntax for singleton registration - especially useful when the registered type requires constructor dependency injection - is:
 
         // every time someone needs an IFoo they will get the same one
-        Mvx.ConstructAndRegisterSingleton<IFoo, Foo>();
+        Mvx.IoCProvider.ConstructAndRegisterSingleton<IFoo, Foo>();
 
 ### Lazy Singleton Registration
 
@@ -59,18 +59,18 @@ As a variation on this, you could register a lazy singleton. This is written
 
         // every time someone needs an IFoo they will get the same one
         // but we don't create it until someone asks for it
-        Mvx.RegisterSingleton<IFoo>(() => new Foo());
+        Mvx.IoCProvider.RegisterSingleton<IFoo>(() => new Foo());
 
 In this case:
 
 - no `Foo` is created initially
-- the first time any code calls `Mvx.Resolve<IFoo>()` then a new `Foo` will be created and returned
+- the first time any code calls `Mvx.IoCProvider.Resolve<IFoo>()` then a new `Foo` will be created and returned
 - all subsequent calls will get the same instance that was created the first time
 
 An alternative syntax for lazy singleton registration - especially useful when the registered type requires constructor dependency injection - is:
 
         // every time someone needs an IFoo they will get the same one
-        Mvx.LazyConstructAndRegisterSingleton<IFoo, Foo>();
+        Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IFoo, Foo>();
 
 
 ### 'Dynamic' Registration
@@ -78,22 +78,22 @@ An alternative syntax for lazy singleton registration - especially useful when t
 One final option, is that you can register the `IFoo` and `Foo` pair as:
 
         // every time someone needs an IFoo they will get a new one
-        Mvx.RegisterType<IFoo, Foo>();
+        Mvx.IoCProvider.RegisterType<IFoo, Foo>();
 
-In this case, every call to `Mvx.Resolve<IFoo>()` will create a new `Foo` - every call will return a different `Foo`.
+In this case, every call to `Mvx.IoCProvider.Resolve<IFoo>()` will create a new `Foo` - every call will return a different `Foo`.
 
 ### Open-Generic registration
 
 There are situations where you have an interface with a generic type parameter `IFoo<T>` and you have to register it in the IoC with different T types. One way to do this is to register it as many times as T types you have:
 
-    Mvx.RegisterType<IFoo<Bar1>, Foo<Bar1>>();
-    Mvx.RegisterType<IFoo<Bar2>, Foo<Bar2>>();
-    Mvx.RegisterType<IFoo<Bar3>, Foo<Bar3>>();
-    Mvx.RegisterType<IFoo<Bar4>, Foo<Bar4>>();
+    Mvx.IoCProvider.RegisterType<IFoo<Bar1>, Foo<Bar1>>();
+    Mvx.IoCProvider.RegisterType<IFoo<Bar2>, Foo<Bar2>>();
+    Mvx.IoCProvider.RegisterType<IFoo<Bar3>, Foo<Bar3>>();
+    Mvx.IoCProvider.RegisterType<IFoo<Bar4>, Foo<Bar4>>();
 
 but this creates boilerplate code and in case you need another instance with a different T type, you have to register it as well. To solve this you can register this interface as *open-generic*, i.e. you don't specify the generic type parameter in neither the interface nor the implementation:
 
-    Mvx.RegisterType(typeof(IFoo<>), typeof(Foo<>));
+    Mvx.IoCProvider.RegisterType(typeof(IFoo<>), typeof(Foo<>));
 
 Then at the moment of resolving the interface the implementation takes the same generic type parameter that the interface, e.g. if you resolve `var foo = Mvx.Resolve<IFoo<Bar1>>();` then `foo` will be of type `Foo<Bar1>`.
 As you can see this give us more flexibility and scalability because we can effortlessly change the generic type parameters at the moment of resolving the interface and we don't need to add anything to register the interface with a new generic type parameter.
@@ -102,8 +102,7 @@ As you can see this give us more flexibility and scalability because we can effo
 
 Sometimes you'd like to add some instances or types to an IoC Container for a specific purpose and not to the app-wide container. You can use Child Containers for that:
 
-    var container = Mvx.Resolve<IMvxIoCProvider>();
-    var childContainer = container.CreateChildContainer():
+    var childContainer = Mvx.IoCProvider.CreateChildContainer():
     childContainer.RegisterType<IFoo, Foo>(); // Is only registered in Child Container scope
     childContainer.Create<IFoo>();
 
@@ -113,11 +112,11 @@ You can create as many and as deeply nested Child Containers as you want - each 
 
 If you create several implementations of an interface and register them all:
 
-        Mvx.RegisterType<IFoo, Foo1>();
-        Mvx.RegisterSingleton<IFoo>(new Foo2());
-        Mvx.RegisterType<IFoo, Foo3>();
+        Mvx.IoCProvider.RegisterType<IFoo, Foo1>();
+        Mvx.IoCProvider.RegisterSingleton<IFoo>(new Foo2());
+        Mvx.IoCProvider.RegisterType<IFoo, Foo3>();
 
-Then each call **replaces** the previous registration - so when a client calls `Mvx.Resolve<IFoo>()` then the most recent registration will be returned.
+Then each call **replaces** the previous registration - so when a client calls `Mvx.IoCProvider.Resolve<IFoo>()` then the most recent registration will be returned.
 
 This can be useful for:
 
@@ -178,10 +177,10 @@ And you can also, of course, use the same type of registration logic on assembli
 
 Alternatively, if you prefer not to use this Reflection based registration, then you can instead just manually register your implementations:
 
-            Mvx.RegisterSingleton<IMixer>(new MyMixer());
-            Mvx.RegisterSingleton<ICheese>(new MyCheese());
-            Mvx.RegisterType<IBeer, Beer>();
-            Mvx.RegisterType<IWine, Wine>();
+            Mvx.IoCProvider.RegisterSingleton<IMixer>(new MyMixer());
+            Mvx.IoCProvider.RegisterSingleton<ICheese>(new MyCheese());
+            Mvx.IoCProvider.RegisterType<IBeer, Beer>();
+            Mvx.IoCProvider.RegisterType<IWine, Wine>();
 
 The choice is **your's**
 
@@ -239,7 +238,7 @@ In this case the first constructor will be called.
 
 ## Constructor Injection
 
-As well as `Mvx.Resolve<T>`, the `Mvx` static class provides a reflection based mechanism to automatically resolve parameters during object construction.
+As well as `Mvx.IoCProvider.Resolve<T>`, the `Mvx.IoCProvider` instance provides a reflection based mechanism to automatically resolve parameters during object construction.
 
 For example, if we add a class like:
 
@@ -253,14 +252,14 @@ For example, if we add a class like:
 
 Then you can create this object using:
 
-        Mvx.IoCConstruct<Bar>();
+        Mvx.IoCProvider.IoCConstruct<Bar>();
 
 What happens during this call is:
 
 - MvvmCross:
   - uses Reflection to find the constructor of `Bar`
   - looks at the parameters for that constructor and sees it needs an `IFoo`
-  - uses `Mvx.Resolve<IFoo>()` to get hold of the registered implementation for `IFoo`
+  - uses `Mvx.IoCProvider.Resolve<IFoo>()` to get hold of the registered implementation for `IFoo`
   - uses Reflection to call the constructor with the `IFoo` parameter
 
 ### Constructor Injection and ViewModels
@@ -277,7 +276,7 @@ If you declare a ViewModel like:
              }
          }
 
-then MvvmCross will use the `Mvx` static class to resolve objects for `jsonConverter` and `locationWatcher` when a `MyViewModel` is created.
+then MvvmCross will use the `Mvx.IoCProvider` static class to resolve objects for `jsonConverter` and `locationWatcher` when a `MyViewModel` is created.
 
 **This is important** because:
 
@@ -287,7 +286,7 @@ then MvvmCross will use the `Mvx` static class to resolve objects for `jsonConve
 
 ### Constructor Injection and Chaining
 
-Internally, the `Mvx.Resolve<T>` mechanism uses constructor injection when new objects are needed.
+Internally, the `Mvx.IoCProvider.Resolve<T>` mechanism uses constructor injection when new objects are needed.
 
 This enables you to register implementations which depend on other interfaces like:
 
@@ -308,9 +307,9 @@ This enables you to register implementations which depend on other interfaces li
 
 If you then register this calculator as:
 
-         Mvx.RegisterType<ITaxCalculator, TaxCalculator>();
+         Mvx.IoCProvider.RegisterType<ITaxCalculator, TaxCalculator>();
 
-Then when a client calls `Mvx.Resolve<ITaxCalculator>()` then what will happen is that MvvmCross will create a new `TaxCalculator` instance, resolving all of `ICustomerRepository` `IForeignExchange` and `ITaxRuleList` during the operation.
+Then when a client calls `Mvx.IoCProvider.Resolve<ITaxCalculator>()` then what will happen is that MvvmCross will create a new `TaxCalculator` instance, resolving all of `ICustomerRepository` `IForeignExchange` and `ITaxRuleList` during the operation.
 
 Further, this process is **recursive** - so if any of these returned objects requires another object  - e.g. if your `IForeignExchange` implementation requires a `IChargeCommission` object - then MvvmCross will use `Resolve` to provide an `IChargeCommission` instance for you.
 
@@ -360,7 +359,7 @@ You can then register these implementations in each of the platform-specific Set
 
         protected override void InitializeFirstChance()
         {
-            Mvx.RegisterSingleton<IScreenSize>(new WindowsPhoneScreenSize());
+            Mvx.IoCProvider.RegisterSingleton<IScreenSize>(new WindowsPhoneScreenSize());
             base.InitializeFirstChance();
         }
 
@@ -368,7 +367,7 @@ With this done, then `MyViewModel` will get provided with the correct platform s
 
 ### 2. Use or create a *plugin*
 
-A *Plugin* is an MvvmCross pattern for combining a PCL assembly, plus optionally some platform specific assemblies in order to package up some functionality.
+A *Plugin* is an MvvmCross pattern for combining a .NET Standard assembly, plus optionally some platform specific assemblies in order to package up some functionality.
 
 This plugin layer is simply a pattern - some simple conventions - for naming related Assemblies, for including small `PluginLoader` and `Plugin` helper classes, and for using IoC. Through this pattern it allows functionality to be easily included, reused and tested across platforms and across applications.
 
@@ -397,7 +396,7 @@ Writing plugins is easy to do, but can feel a bit daunting at first.
 
 The key steps are:
 
-1. Create the main PCL Assembly for the plugin - this should include:
+1. Create the main .NET Standard Assembly for the plugin - this should include:
    - the interfaces your plugin will register
    - any shared portable code (which may include implementations of one or more of the interfaces)
    - a special `PluginLoader` class which MvvmCross will use to start the plugin
@@ -512,7 +511,7 @@ To do this, you can use:
 
 or
 
-     var injector = Mvx.Resolve<IMvxPropertyInjector>();
+     var injector = Mvx.IoCProvider.Resolve<IMvxPropertyInjector>();
 
 and then:
 
@@ -543,7 +542,7 @@ For example:
 
 At runtime, by default MvvmCross's Ioc will throw an `MvxIoCResolveException` from `Resolve` or return `false` from `TryResolve` if it detects recursion has occurred.
 
-Generally in this situation you need to refactor your code to remove the circular dependency - for example see one suggestion in [Stack Overflow](http://stackoverflow.com/questions/1453128/is-there-a-good-proper-way-of-solving-the-dependency-injection-loop-problem-in-t/1453242#1453242) - other stackoverflow Q&As may also help.
+Generally in this situation you need to refactor your code to remove the circular dependency - for example see one suggestion in [Stack Overflow](http://stackoverflow.com/questions/1453128/is-there-a-good-proper-way-of-solving-the-dependency-injection-loop-problem-in-t/1453242#1453242) - other Stack Overflow Q&As may also help.
 
 However, if you feel the MvvmCross detection is wrong - if your app has some behaviour which means it can survive the recursive dependency - then you can turn this detection off if you want to using the options - e.g:
 
@@ -554,7 +553,7 @@ However, if you feel the MvvmCross detection is wrong - if your app has some beh
             };
             var instance = MvxIoCProvider.Initialize(options);
 
-**Note:** in the event of recursion causing a stack overflow, some mobile runtimes will **not** throw a `StackOverlowException` - but will instead simply exit without warning - this situation can be hard to debug.
+**Note:** in the event of recursion causing a stack overflow, some mobile runtimes will **not** throw a `StackOverflowException` - but will instead simply exit without warning - this situation can be hard to debug.
 
 ### What if... I want to mix Dynamic and Singleton types
 
@@ -563,7 +562,7 @@ If you use constructor injection, then for each dependency you can only ever rec
 Take the following code:
 
 ```c#
-// Registered with Mvx.RegisterType<IBar, Bar>();
+// Registered with Mvx.IoCProvider.RegisterType<IBar, Bar>();
 public class Bar : IBar
 {
     public void DoStuff()
@@ -606,7 +605,7 @@ public class FooSingleton : IFooSingleton
 
     public void DoFoo()
     {
-        var bar = Mvx.Resolve<IBar>();
+        var bar = Mvx.IoCProvider.Resolve<IBar>();
         bar.DoStuff();
     }
 }
