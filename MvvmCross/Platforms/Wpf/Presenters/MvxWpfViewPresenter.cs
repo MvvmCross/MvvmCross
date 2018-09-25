@@ -32,6 +32,10 @@ namespace MvvmCross.Platforms.Wpf.Presenters
         }
 
         private readonly Dictionary<ContentControl, Stack<FrameworkElement>> _frameworkElementsDictionary = new Dictionary<ContentControl, Stack<FrameworkElement>>();
+        protected Dictionary<ContentControl, Stack<FrameworkElement>> FrameworkElementsDictionary
+        {
+            get { return _frameworkElementsDictionary; }
+        }
 
         protected MvxWpfViewPresenter()
         {
