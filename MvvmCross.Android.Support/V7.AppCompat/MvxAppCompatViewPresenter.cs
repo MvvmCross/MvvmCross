@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -166,11 +166,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     var viewPager = FindViewPagerInFragmentPresentation(pagerFragmentAttribute);
                     if (viewPager?.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
                     {
-                        var index = adapter.FragmentsInfo.FindIndex(f => f.Tag == pagerFragmentAttribute.Title);
+                        var fragmentInfo = FindFragmentInfoFromAttribute(pagerFragmentAttribute, adapter);
+                        var index = adapter.FragmentsInfo.IndexOf(fragmentInfo);
                         if (index < 0)
                         {
                             MvxAndroidLog.Instance.Trace("Did not find ViewPager index for {0}, skipping presentation change...",
-                                pagerFragmentAttribute.Title);
+                                pagerFragmentAttribute.Tag);
 
                             return Task.FromResult(false);
                         }
@@ -452,12 +453,15 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             if (viewPager == null)
                 throw new MvxException("ViewPager not found");
 
+            var tag = attribute.Tag ?? attribute.ViewType.FragmentJavaName();
             if (viewPager.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
             {
                 if (request is MvxViewModelInstanceRequest instanceRequest)
-                    adapter.FragmentsInfo.Add(new MvxViewPagerFragmentInfo(attribute.Title, attribute.ViewType, instanceRequest.ViewModelInstance));
+                    adapter.FragmentsInfo.Add(new MvxViewPagerFragmentInfo(
+                        attribute.Title, tag, attribute.ViewType, instanceRequest.ViewModelInstance));
                 else
-                    adapter.FragmentsInfo.Add(new MvxViewPagerFragmentInfo(attribute.Title, attribute.ViewType, attribute.ViewModelType));
+                    adapter.FragmentsInfo.Add(new MvxViewPagerFragmentInfo(
+                        attribute.Title, tag, attribute.ViewType, attribute.ViewModelType));
 
                 adapter.NotifyDataSetChanged();
             }
@@ -465,9 +469,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             {
                 var fragments = new List<MvxViewPagerFragmentInfo>();
                 if (request is MvxViewModelInstanceRequest instanceRequest)
-                    fragments.Add(new MvxViewPagerFragmentInfo(attribute.Title, attribute.ViewType, instanceRequest.ViewModelInstance));
+                    fragments.Add(new MvxViewPagerFragmentInfo(
+                        attribute.Title, tag, attribute.ViewType, instanceRequest.ViewModelInstance));
                 else
-                    fragments.Add(new MvxViewPagerFragmentInfo(attribute.Title, attribute.ViewType, attribute.ViewModelType));
+                    fragments.Add(new MvxViewPagerFragmentInfo(
+                        attribute.Title, tag, attribute.ViewType, attribute.ViewModelType));
 
                 viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(CurrentActivity, fragmentManager, fragments);
             }
@@ -548,7 +554,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             if (viewPager?.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
             {
                 var ft = fragmentManager.BeginTransaction();
-                var fragmentInfo = adapter.FragmentsInfo.Find(x => x.FragmentType == attribute.ViewType && x.ViewModelType == attribute.ViewModelType);
+                var fragmentInfo = FindFragmentInfoFromAttribute(attribute, adapter);
                 var fragment = fragmentManager.FindFragmentByTag(fragmentInfo.Tag);
                 adapter.FragmentsInfo.Remove(fragmentInfo);
                 ft.Remove(fragment);
@@ -559,6 +565,25 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 return Task.FromResult(true);
             }
             return Task.FromResult(false);
+        }
+
+        private MvxViewPagerFragmentInfo FindFragmentInfoFromAttribute(
+            MvxViewPagerFragmentPresentationAttribute attribute, MvxCachingFragmentStatePagerAdapter adapter)
+        {
+            MvxViewPagerFragmentInfo fragmentInfo = null;
+            if (attribute.Tag != null)
+            {
+                fragmentInfo = adapter.FragmentsInfo.FirstOrDefault(f => f.Tag == attribute.Tag);
+            }
+
+            if (fragmentInfo == null)
+            {
+                fragmentInfo = adapter.FragmentsInfo.Find(x =>
+                x.FragmentType == attribute.ViewType &&
+                x.ViewModelType == attribute.ViewModelType);
+            }
+
+            return fragmentInfo;
         }
 
         protected override bool CloseFragments()
