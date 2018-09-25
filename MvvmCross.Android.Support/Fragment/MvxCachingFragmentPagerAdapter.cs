@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,6 +13,7 @@ using Android.Views;
 using Java.Lang;
 using MvvmCross.Logging;
 using Object = Java.Lang.Object;
+using MvvmCross.Platforms.Android.Views;
 
 namespace MvvmCross.Droid.Support.V4
 {
@@ -108,7 +109,7 @@ namespace MvvmCross.Droid.Support.V4
             //if fragment tag is null let's set it to something meaning full;
             if (string.IsNullOrEmpty(fragmentTag))
             {
-                fragmentTag = FragmentJavaName(fragment.GetType());
+                fragmentTag = fragment.GetType().FragmentJavaName();
             }
 
 #if DEBUG
@@ -124,11 +125,6 @@ namespace MvvmCross.Droid.Support.V4
             _curTransaction.Add(container.Id, fragment, fragmentTag);
 
             return fragment;
-        }
-
-        protected string FragmentJavaName(Type fragmentType)
-        {
-            return Class.FromType(fragmentType).Name;
         }
 
         public override bool IsViewFromObject(View view, Object objectValue)

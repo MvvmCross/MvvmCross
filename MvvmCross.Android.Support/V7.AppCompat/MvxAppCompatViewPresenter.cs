@@ -267,7 +267,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             MvxFragmentPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var fragmentName = FragmentJavaName(attribute.ViewType);
+            var fragmentName = attribute.ViewType.FragmentJavaName();
 
             IMvxFragmentView fragment = null;
             if (attribute.IsCacheableFragment)
@@ -369,7 +369,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
            MvxDialogFragmentPresentationAttribute attribute,
            MvxViewModelRequest request)
         {
-            var fragmentName = FragmentJavaName(attribute.ViewType);
+            var fragmentName = attribute.ViewType.FragmentJavaName();
             IMvxFragmentView mvxFragmentView = CreateFragment(attribute, fragmentName);
             var dialog = mvxFragmentView as DialogFragment;
             if (dialog == null)
@@ -515,7 +515,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         #region Close implementations
         protected override Task<bool> CloseFragmentDialog(IMvxViewModel viewModel, MvxDialogFragmentPresentationAttribute attribute)
         {
-            string tag = FragmentJavaName(attribute.ViewType);
+            string tag = attribute.ViewType.FragmentJavaName();
             var toClose = CurrentFragmentManager.FindFragmentByTag(tag);
             if (toClose != null && toClose is DialogFragment dialog)
             {
@@ -601,7 +601,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             FragmentManager fragmentManager,
             MvxFragmentPresentationAttribute fragmentAttribute)
         {
-            var fragmentName = FragmentJavaName(fragmentAttribute.ViewType);
+            var fragmentName = fragmentAttribute.ViewType.FragmentJavaName();
 
             if (fragmentManager.BackStackEntryCount > 0)
             {
@@ -652,7 +652,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected virtual new Fragment GetFragmentByViewType(Type type)
         {
-            var fragmentName = FragmentJavaName(type);
+            var fragmentName = type.FragmentJavaName();
             var fragment = CurrentFragmentManager?.FindFragmentByTag(fragmentName);
 
             if (fragment != null)
