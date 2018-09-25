@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -269,11 +269,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             MvxViewModelRequest request)
         {
             var fragmentName = attribute.ViewType.FragmentJavaName();
+            var tag = attribute.Tag ?? fragmentName;
 
             IMvxFragmentView fragment = null;
             if (attribute.IsCacheableFragment)
             {
-                fragment = (IMvxFragmentView)fragmentManager.FindFragmentByTag(fragmentName);
+                fragment = (IMvxFragmentView)fragmentManager.FindFragmentByTag(tag);
             }
             fragment = fragment ?? CreateFragment(attribute, fragmentName);
 
@@ -312,7 +313,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             OnFragmentChanging(ft, fragmentView, attribute, request);
 
-            ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
+            ft.Replace(attribute.FragmentContentId, (Fragment)fragment, tag);
             ft.CommitAllowingStateLoss();
 
             OnFragmentChanged(ft, fragmentView, attribute, request);
@@ -371,6 +372,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
            MvxViewModelRequest request)
         {
             var fragmentName = attribute.ViewType.FragmentJavaName();
+            var tag = attribute.Tag ?? fragmentName;
+
             IMvxFragmentView mvxFragmentView = CreateFragment(attribute, fragmentName);
             var dialog = mvxFragmentView as DialogFragment;
             if (dialog == null)
@@ -400,7 +403,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             OnFragmentChanging(ft, dialog, attribute, request);
 
-            dialog.Show(ft, fragmentName);
+            dialog.Show(ft, tag);
 
             OnFragmentChanged(ft, dialog, attribute, request);
             return Task.FromResult(true);
@@ -426,7 +429,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                     throw new MvxException("Fragment not found", attribute.FragmentHostViewType.Name);
 
                 if(fragment.View == null)
-                    throw new MvxException("Fragment.View is null. Please consider calling Navigate later in your code", attribute.FragmentHostViewType.Name);
+                    throw new MvxException("Fragment.View is null. Please consider calling Navigate later in your code", 
+                        attribute.FragmentHostViewType.Name);
 
                 viewPager = fragment.View.FindViewById<ViewPager>(attribute.ViewPagerResourceId);
                 fragmentManager = fragment.ChildFragmentManager;
@@ -521,7 +525,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         #region Close implementations
         protected override Task<bool> CloseFragmentDialog(IMvxViewModel viewModel, MvxDialogFragmentPresentationAttribute attribute)
         {
-            string tag = attribute.ViewType.FragmentJavaName();
+            var fragmentName = attribute.ViewType.FragmentJavaName();
+            var tag = attribute.Tag ?? fragmentName;
             var toClose = CurrentFragmentManager.FindFragmentByTag(tag);
             if (toClose != null && toClose is DialogFragment dialog)
             {
@@ -627,6 +632,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             MvxFragmentPresentationAttribute fragmentAttribute)
         {
             var fragmentName = fragmentAttribute.ViewType.FragmentJavaName();
+            var tag = fragmentAttribute.Tag ?? fragmentName;
 
             if (fragmentManager.BackStackEntryCount > 0)
             {
@@ -635,10 +641,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
                 return true;
             }
-            else if (fragmentManager.Fragments.Count > 0 && fragmentManager.FindFragmentByTag(fragmentName) != null)
+            else if (fragmentManager.Fragments.Count > 0 && fragmentManager.FindFragmentByTag(tag) != null)
             {
                 var ft = fragmentManager.BeginTransaction();
-                var fragment = fragmentManager.FindFragmentByTag(fragmentName);
+                var fragment = fragmentManager.FindFragmentByTag(tag);
 
                 if (!fragmentAttribute.EnterAnimation.Equals(int.MinValue) && !fragmentAttribute.ExitAnimation.Equals(int.MinValue))
                 {
