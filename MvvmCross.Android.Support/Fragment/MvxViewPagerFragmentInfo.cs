@@ -4,6 +4,7 @@
 
 using System;
 using Android.Support.V4.App;
+using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V4
@@ -19,7 +20,7 @@ namespace MvvmCross.Droid.Support.V4
                             object parameterValuesObject = null)
         {
             Title = title;
-            Tag = tag ?? title;
+            Tag = tag ?? fragmentType.FragmentJavaName();
             FragmentType = fragmentType;
             ViewModelType = viewModelType;
             ParameterValuesObject = parameterValuesObject;
