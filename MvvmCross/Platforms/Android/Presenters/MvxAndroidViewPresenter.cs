@@ -12,7 +12,6 @@ using Android.Content;
 using Android.OS;
 using Android.Util;
 using Android.Views;
-using Java.Lang;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Core;
@@ -360,7 +359,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             MvxFragmentPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var fragmentName = FragmentJavaName(attribute.ViewType);
+            var fragmentName = attribute.ViewType.FragmentJavaName();
 
             IMvxFragmentView fragment = null;
             if (attribute.IsCacheableFragment)
@@ -463,7 +462,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             MvxDialogFragmentPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var fragmentName = FragmentJavaName(attribute.ViewType);
+            var fragmentName = attribute.ViewType.FragmentJavaName();
             IMvxFragmentView mvxFragmentView = CreateFragment(attribute, fragmentName);
             var dialog = (DialogFragment)mvxFragmentView;
 
@@ -525,7 +524,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual Task<bool> CloseFragmentDialog(IMvxViewModel viewModel, MvxDialogFragmentPresentationAttribute attribute)
         {
-            string tag = FragmentJavaName(attribute.ViewType);
+            string tag = attribute.ViewType.FragmentJavaName();
             var toClose = CurrentFragmentManager.FindFragmentByTag(tag);
             if (toClose != null && toClose is DialogFragment dialog)
             {
@@ -575,7 +574,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             FragmentManager fragmentManager,
             MvxFragmentPresentationAttribute fragmentAttribute)
         {
-            var fragmentName = FragmentJavaName(fragmentAttribute.ViewType);
+            var fragmentName = fragmentAttribute.ViewType.FragmentJavaName();
 
             if (fragmentManager.BackStackEntryCount > 0)
             {
@@ -609,11 +608,6 @@ namespace MvvmCross.Platforms.Android.Presenters
         }
         #endregion
 
-        protected virtual string FragmentJavaName(Type fragmentType)
-        {
-            return Class.FromType(fragmentType).Name;
-        }
-
         protected virtual IMvxFragmentView CreateFragment(MvxBasePresentationAttribute attribute,
             string fragmentName)
         {
@@ -630,7 +624,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual Fragment GetFragmentByViewType(Type type)
         {
-            var fragmentName = FragmentJavaName(type);
+            var fragmentName = type.FragmentJavaName();
             var fragment = CurrentFragmentManager?.FindFragmentByTag(fragmentName);
 
             if (fragment != null)
