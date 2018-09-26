@@ -583,9 +583,19 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             if (fragmentInfo == null)
             {
-                fragmentInfo = adapter.FragmentsInfo.Find(x =>
-                x.FragmentType == attribute.ViewType &&
-                x.ViewModelType == attribute.ViewModelType);
+                bool IsMatch(MvxViewPagerFragmentInfo info)
+                {
+                    if (attribute.ViewType == null) return false;
+
+                    var viewTypeMatches = info.FragmentType == attribute.ViewType;
+
+                    if (attribute.ViewModelType != null)
+                        return viewTypeMatches && info.ViewModelType == attribute.ViewModelType;
+
+                    return viewTypeMatches;
+                }
+
+                fragmentInfo = adapter.FragmentsInfo.FirstOrDefault(IsMatch);
             }
 
             return fragmentInfo;
