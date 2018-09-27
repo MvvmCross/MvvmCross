@@ -14,6 +14,10 @@ namespace MvvmCross.Presenters.Hints
             Animated = animated;
         }
 
+        public MvxPopToRootPresentationHint(MvxBundle body, bool animated = true) : this(animated)
+        {
+        }
+
         public bool Animated { get; set; }
     }
 }
