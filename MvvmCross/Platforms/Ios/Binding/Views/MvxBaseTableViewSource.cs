@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -14,7 +14,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 {
     public abstract class MvxBaseTableViewSource : UITableViewSource
     {
-        private readonly UITableView _tableView;
+        [Weak] private UITableView _tableView;
 
         protected MvxBaseTableViewSource(UITableView tableView)
         {
@@ -50,7 +50,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         {
             try
             {
-                _tableView.ReloadData();
+                TableView.ReloadData();
             }
             catch (Exception exception)
             {
