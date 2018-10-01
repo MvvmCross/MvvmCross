@@ -207,7 +207,7 @@ public override void ViewDestroy(bool viewFinishing = true)
 To check if you are able to navigate to a certain ViewModel you can use the `CanNavigate` method.
 
 ```c#
-if (Mvx.Resolve<IMvxNavigationService>().CanNavigate<NextViewModel>())
+if (Mvx.IoCProvider.Resolve<IMvxNavigationService>().CanNavigate<NextViewModel>())
 {
     //Do something
 }
@@ -216,7 +216,7 @@ if (Mvx.Resolve<IMvxNavigationService>().CanNavigate<NextViewModel>())
 If you want to intercept ViewModel navigation changes you can hook into the events of the NavigationService.
 
 ```c#
-Mvx.Resolve<IMvxNavigationService>().AfterClose += (object sender, NavigateEventArgs e) =>
+Mvx.IoCProvider.Resolve<IMvxNavigationService>().AfterClose += (object sender, NavigateEventArgs e) =>
  {
     //Do something with e.ViewModel
 };
