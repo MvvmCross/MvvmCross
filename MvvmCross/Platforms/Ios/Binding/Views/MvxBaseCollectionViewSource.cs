@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         public static readonly NSString UnknownCellIdentifier = null;
 
         private readonly NSString _cellIdentifier;
-        private readonly UICollectionView _collectionView;
+        [Weak] private UICollectionView _collectionView;
 
         protected virtual NSString DefaultCellIdentifier => _cellIdentifier;
 
@@ -41,7 +41,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         {
             try
             {
-                _collectionView.ReloadData();
+                CollectionView.ReloadData();
             }
             catch (Exception exception)
             {
