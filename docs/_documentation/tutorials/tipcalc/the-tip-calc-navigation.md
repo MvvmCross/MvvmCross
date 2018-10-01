@@ -26,7 +26,7 @@ RegisterAppStart<TipViewModel>();
 That line can be also replaced by this code, since that's what it does internally:
 
 ```c#
-Mvx.RegisterSingleton<IMvxAppStart>(new MvxAppStart<TipViewModel>());
+Mvx.IoCProvider.RegisterSingleton<IMvxAppStart>(new MvxAppStart<TipViewModel>());
 ```
 
 The only exception to the rule is, in terms of AppStart, Android. This is because Android requires the application to indicate which Activity will be the first to show up. We are doing so through the `MainLauncher=true` property value within the `[Activity]` attribute.

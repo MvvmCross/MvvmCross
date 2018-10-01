@@ -64,7 +64,7 @@ Most of these steps are virtual - so they allow customization. Also most of thes
 protected virtual void InitialiseFoo()
 {
     var foo = CreateFoo();
-    Mvx.RegisterSingleton<Foo>();
+    Mvx.IoCProvider.RegisterSingleton<Foo>();
 }
         
 protected virtual IFoo CreateFoo()
@@ -146,18 +146,18 @@ These two placeholders provide key places for you to create and register service
 For example, if you wanted to implement an EncryptionService which would provide native data-encryption for your application, then you could do this during Setup.InitializeFirstChance using:
 
 ```c#
- Mvx.RegisterType<IEncryption, MyEncryption>();
+ Mvx.IoCProvider..RegisterType<IEncryption, MyEncryption>();
 ```
 This would then allow all of your App code - including code executed during App.Initialize() to use calls like:
 
 ```c#
-var encryption = Mvx.Resolve<IEncryption>();
+var encryption = Mvx.IoCProvider.Resolve<IEncryption>();
 var safe = encryption.Encode(raw);
 ```
 
 Alternatively, if you wanted to implement a DialogService which would be used during normal UI flow, then you might choose to register this during Setup.InitializeLastChance as:
 ```c#
-Mvx.RegisterSingleton<IDialogService>(new MyDialogService());
+Mvx.IoCProvider..RegisterSingleton<IDialogService>(new MyDialogService());
 ```
 
 For many objects the choice of when to initialize - first or last - doesn't matter. For others, the key choice is whether the service needs to be available before or after the App is created and initialized.
@@ -325,13 +325,13 @@ One final technique used for registering value converters is used by some of the
 
 This technique involves using the CallbackWhenRegistered IoC method on the IMvxValueConverterRegistry interface. This is used, for example, in the Visibility plugin as:
 ```c#
-Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
+Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
     
     // ...
     
 private void RegisterValueConverters()
 {
-    var registry = Mvx.Resolve<IMvxValueConverterRegistry>();
+    var registry = Mvx.IoCProvider.Resolve<IMvxValueConverterRegistry>();
     registry.AddOrOverwriteFrom(GetType().Assembly);
 }   
 ```
@@ -443,7 +443,7 @@ protected override void InitializeViewLookup()
         { typeof (UmpteenthViewModel), typeof(UmpteenthView) },
     };
 
-    var container = Mvx.Resolve<IMvxViewsContainer>();
+    var container = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
     container.AddAll(viewModelViewLookup);
 }
 ```

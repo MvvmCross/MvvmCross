@@ -259,7 +259,7 @@ public class DetailViewModel : MvxViewModel
 
     public DetailViewModel()
     {
-        repository = Mvx.Resolve<IDetailRepository>();
+        repository = Mvx.IoCProvider.Resolve<IDetailRepository>();
     }
 
     // ...

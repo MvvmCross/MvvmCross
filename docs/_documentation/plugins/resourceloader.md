@@ -24,7 +24,7 @@ public interface IMvxResourceLoader
 For a text file 'Hello.txt' bundled in a folder 'Foo', this can be called as:    
 
 ```c#
-var loader = Mvx.Resolve<IMvxResourceLoader>();
+var loader = Mvx.IoCProvider.Resolve<IMvxResourceLoader>();
 var contents = loader.GetTextResource("Foo/Hello.txt");
 ```
 
