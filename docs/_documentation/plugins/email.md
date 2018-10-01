@@ -19,7 +19,7 @@ The implementation on Windows Uwp and Wpf is very simplistic - using only 'mailt
 To send an email you can use:
 
 ```c#
-Mvx.Resolve<IMvxComposeEmailTask>()
+Mvx.IoCProvider.Resolve<IMvxComposeEmailTask>()
 .ComposeEmail("me@slodge.com",
               string.Empty,
               "MvvmCross Email

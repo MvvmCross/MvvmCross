@@ -50,7 +50,7 @@ To make a simple fixed url Rest request, you can use:
 
 ```c#
 var request = new MvxRestRequest("http://myService.org/things/list");
-var client = Mvx.Resolve<IMvxRestClient>();
+var client = Mvx.IoCProvider.Resolve<IMvxRestClient>();
 client.MakeRequest(request,
 (MvxStreamRestResponse response) => {
     // do something with the response.StatusCode and response.Stream
@@ -68,7 +68,7 @@ var request = new MvxJsonRestRequest<Person>("http://myService.org/things/add")
     Body = person
 };
 
-var client = Mvx.Resolve<IMvxJsonRestClient>();
+var client = Mvx.IoCProvider.Resolve<IMvxJsonRestClient>();
 client.MakeRequestFor<PersonAddResult>(request,
 (MvxDecodedRestResponse<PersonAddResult> response) => {
     // do something with the response.StatusCode and response.Result

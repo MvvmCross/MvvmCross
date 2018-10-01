@@ -144,7 +144,7 @@ if (rootFrame.Content == null)
     var setup = new Setup( rootFrame );
     setup.Initialize();
 
-    var start = MvvmCross.Platform.Mvx.Resolve<MvvmCross.Core.ViewModels.IMvxAppStart>();
+    var start = MvvmCross.Platform.Mvx.IoCProvider.Resolve<MvvmCross.Core.ViewModels.IMvxAppStart>();
     start.Start();
 }
 ```

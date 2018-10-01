@@ -101,7 +101,7 @@ This GC-based unsubscription will occur whenever the subscription token returned
 public void MayNotEverReceiveAMessage()
 {
     var token = _messenger.Subscribe<MyMessage>((message) => {
-        Mvx.Trace("Message received!");
+        Mvx.IoCProvider.Trace("Message received!");
     });
     // token goes out of scope now
     // - so will be garbage collected *at some point*
