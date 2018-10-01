@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,11 +13,13 @@ using Android.Views;
 using Java.Lang;
 using MvvmCross.Logging;
 using Object = Java.Lang.Object;
+using MvvmCross.Platforms.Android.Views;
 
 namespace MvvmCross.Droid.Support.V4
 {
     //http://speakman.net.nz/blog/2014/02/20/a-bug-in-and-a-fix-for-the-way-fragmentstatepageradapter-handles-fragment-restoration/
     //https://github.com/adamsp/FragmentStatePagerIssueExample/blob/master/app/src/main/java/com/example/fragmentstatepagerissueexample/app/FixedFragmentStatePagerAdapter.java
+    //https://android.googlesource.com/platform/frameworks/support/+/320113721c2e14bbc2403809046fa2959a665c11/fragment/src/main/java/androidx/fragment/app/FragmentStatePagerAdapter.java
     [Register("mvvmcross.droid.support.v4.MvxCachingFragmentPagerAdapter")]
     public abstract class MvxCachingFragmentPagerAdapter : PagerAdapter
     {
@@ -28,14 +30,21 @@ namespace MvvmCross.Droid.Support.V4
         private List<string> _savedFragmentTags = new List<string>();
         private readonly List<Fragment.SavedState> _savedState = new List<Fragment.SavedState>();
 
-		protected MvxCachingFragmentPagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
+        protected MvxCachingFragmentPagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
+#if DEBUG
+            FragmentManager.EnableDebugLogging(true);
+#endif
         }
 
-		protected MvxCachingFragmentPagerAdapter(FragmentManager fragmentManager)
+        protected MvxCachingFragmentPagerAdapter(FragmentManager fragmentManager)
         {
             _fragmentManager = fragmentManager;
+
+#if DEBUG
+            FragmentManager.EnableDebugLogging(true);
+#endif
         }
 
         public abstract Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null);
@@ -48,8 +57,8 @@ namespace MvvmCross.Droid.Support.V4
                 _curTransaction = _fragmentManager.BeginTransaction();
 
 #if DEBUG
-            MvxAndroidLog.Instance.Trace("Removing item #" + position + ": f=" + objectValue + " v=" + ((Fragment) objectValue).View +
-                      " t=" + fragment.Tag);
+            MvxAndroidLog.Instance.Trace(
+                $"Removing item #{position}: f={objectValue} v={((Fragment)objectValue).View} t={fragment.Tag}");
 #endif
 
             while (_savedState.Count <= position)
@@ -58,8 +67,8 @@ namespace MvvmCross.Droid.Support.V4
                 _savedFragmentTags.Add(null);
             }
 
-            _savedState[position] = _fragmentManager.SaveFragmentInstanceState(fragment);
-            _savedFragmentTags[position] = fragment.Tag;
+            _savedState[position] = fragment.IsAdded ? _fragmentManager.SaveFragmentInstanceState(fragment) : null;
+            _savedFragmentTags[position] = fragment.IsAdded ? fragment.Tag : null;
             _fragments[position] = null;
 
             _curTransaction.Remove(fragment);
@@ -72,7 +81,6 @@ namespace MvvmCross.Droid.Support.V4
 
             _curTransaction.CommitAllowingStateLoss();
             _curTransaction = null;
-            _fragmentManager.ExecutePendingTransactions();
         }
 
         public override Object InstantiateItem(ViewGroup container, int position)
@@ -108,7 +116,7 @@ namespace MvvmCross.Droid.Support.V4
             //if fragment tag is null let's set it to something meaning full;
             if (string.IsNullOrEmpty(fragmentTag))
             {
-                fragmentTag = FragmentJavaName(fragment.GetType());
+                fragmentTag = fragment.GetType().FragmentJavaName();
             }
 
 #if DEBUG
@@ -124,11 +132,6 @@ namespace MvvmCross.Droid.Support.V4
             _curTransaction.Add(container.Id, fragment, fragmentTag);
 
             return fragment;
-        }
-
-        protected string FragmentJavaName(Type fragmentType)
-        {
-            return Class.FromType(fragmentType).Name;
         }
 
         public override bool IsViewFromObject(View view, Object objectValue)
@@ -171,7 +174,7 @@ namespace MvvmCross.Droid.Support.V4
 
                 var index = Integer.ParseInt(key.Substring(1));
 
-				if (_fragmentManager.Fragments == null) return;
+                if (_fragmentManager.Fragments == null) return;
 
                 var f = _fragmentManager.GetFragment(bundle, key);
                 if (f != null)
@@ -237,6 +240,15 @@ namespace MvvmCross.Droid.Support.V4
         protected virtual string GetTag(int position)
         {
             return null;
+        }
+
+        public override void StartUpdate(ViewGroup container)
+        {
+            if (container.Id == View.NoId)
+            {
+                throw new IllegalStateException("ViewPager with adapter " + this
+                    + " requires a view id");
+            }
         }
     }
 }

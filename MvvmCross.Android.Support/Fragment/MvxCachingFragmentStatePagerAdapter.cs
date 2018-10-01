@@ -44,7 +44,7 @@ namespace MvvmCross.Droid.Support.V4
         public override Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null)
         {
             var fragInfo = FragmentsInfo.ElementAt(position);
-            var fragment = Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
+            var fragment = Fragment.Instantiate(_context, fragInfo.FragmentType.FragmentJavaName());
 
             var mvxFragment = fragment as IMvxFragmentView;
             if (mvxFragment == null)
