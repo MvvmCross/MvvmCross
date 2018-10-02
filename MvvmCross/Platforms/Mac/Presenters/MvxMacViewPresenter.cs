@@ -130,11 +130,6 @@ namespace MvvmCross.Platforms.Mac.Presenters
                 });
         }
 
-        public override Task<bool> Show(MvxViewModelRequest request)
-        {
-            return GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
-        }
-
         protected virtual Task<bool> ShowWindowViewController(
             NSViewController viewController,
             MvxWindowPresentationAttribute attribute,
