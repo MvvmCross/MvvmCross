@@ -211,11 +211,6 @@ namespace MvvmCross.Platforms.Android.Presenters
             return activityViewModelType;
         }
 
-        public override Task<bool> Show(MvxViewModelRequest request)
-        {
-            return GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
-        }
-
         #region Show implementations
         protected virtual Task<bool> ShowActivity(
             Type view,
@@ -494,11 +489,6 @@ namespace MvvmCross.Platforms.Android.Presenters
             return Task.FromResult(true);
         }
         #endregion
-
-        public override Task<bool> Close(IMvxViewModel viewModel)
-        {
-            return GetPresentationAttributeAction(new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);
-        }
 
         #region Close implementations
         protected virtual Task<bool> CloseActivity(IMvxViewModel viewModel, MvxActivityPresentationAttribute attribute)
