@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using Windows.UI.Xaml;
@@ -12,6 +13,7 @@ namespace MvvmCross.Platforms.Uap.Views
     public class MvxWindowsContentDialog
         : ContentDialog
         , IMvxWindowsContentDialog
+        , IDisposable
     {
         public MvxWindowsContentDialog()
         {
@@ -65,6 +67,35 @@ namespace MvvmCross.Platforms.Uap.Views
 
                 _viewModel = value;
                 DataContext = ViewModel;
+                OnViewModelSet();
+            }
+        }
+
+        protected virtual void OnViewModelSet()
+        {
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~MvxWindowsContentDialog()
+        {
+            Dispose(false);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                Loading -= MvxWindowsContentDialog_Loading;
+                Loaded -= MvxWindowsContentDialog_Loaded;
+                Opened -= MvxWindowsContentDialog_Opened;
+                Closed -= MvxWindowsContentDialog_Closed;
+                Closing -= MvxWindowsContentDialog_Closing;
+                Unloaded -= MvxWindowsContentDialog_Unloaded;
             }
         }
     }
