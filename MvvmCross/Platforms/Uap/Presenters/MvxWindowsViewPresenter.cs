@@ -33,6 +33,21 @@ namespace MvvmCross.Platforms.Uap.Presenters
             SystemNavigationManager.GetForCurrentView().BackRequested += BackButtonOnBackRequested;
         }
 
+        private IMvxViewModelLoader _viewModelLoader;
+        public IMvxViewModelLoader ViewModelLoader
+        {
+            get
+            {
+                if (_viewModelLoader == null)
+                    _viewModelLoader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
+                return _viewModelLoader;
+            }
+            set
+            {
+                _viewModelLoader = value;
+            }
+        }
+
         public override void RegisterAttributeTypes()
         {
             AttributeTypesToActionsDictionary.Add(
@@ -256,16 +271,10 @@ namespace MvvmCross.Platforms.Uap.Presenters
         {
             try
             {
-                var contentDialog = CreateContentDialog(attribute, viewType);
+                var contentDialog = (IMvxWindowsContentDialog)CreateControl(viewType, request, attribute);
                 if (contentDialog != null)
                 {
-                    if (request is MvxViewModelInstanceRequest instanceRequest)
-                    {
-                        contentDialog.ViewModel = instanceRequest.ViewModelInstance;
-                    }
-
                     await contentDialog.ShowAsync(attribute.Placement);
-
                     return true;
                 }
 
@@ -279,17 +288,24 @@ namespace MvvmCross.Platforms.Uap.Presenters
             }
         }
 
-        protected virtual IMvxWindowsContentDialog CreateContentDialog(MvxBasePresentationAttribute attribute,
-            Type viewType)
+        public virtual Control CreateControl(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute)
         {
             try
             {
-                var contentControl = (IMvxWindowsContentDialog)Activator.CreateInstance(viewType);
-                return contentControl;
+                var control = Activator.CreateInstance(viewType) as Control;
+                if (control is IMvxView mvxControl)
+                {
+                    if (request is MvxViewModelInstanceRequest instanceRequest)
+                        mvxControl.ViewModel = instanceRequest.ViewModelInstance;
+                    else
+                        mvxControl.ViewModel = ViewModelLoader.LoadViewModel(request, null);
+                }
+
+                return control;
             }
             catch (Exception ex)
             {
-                throw new MvxException(ex, $"Cannot create ContentDialog '{viewType.FullName}'. Are you use the wrong base class?");
+                throw new MvxException(ex, $"Cannot create Control '{viewType.FullName}'. Are you use the wrong base class?");
             }
         }
 
