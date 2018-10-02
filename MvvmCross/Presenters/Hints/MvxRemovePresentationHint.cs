@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters.Hints
@@ -10,9 +11,18 @@ namespace MvvmCross.Presenters.Hints
     public class MvxRemovePresentationHint
         : MvxPresentationHint
     {
-        public MvxRemovePresentationHint(Type viewModelToRemove)
+        public MvxRemovePresentationHint(Type viewModelToRemove) : base()
         {
             ViewModelToRemove = viewModelToRemove;
+        }
+
+        public MvxRemovePresentationHint(Type viewModelToRemove, MvxBundle body) : base(body)
+        {
+            ViewModelToRemove = viewModelToRemove;
+        }
+
+        public MvxRemovePresentationHint(Type viewModelToRemove, IDictionary<string, string> hints) : this(viewModelToRemove, new MvxBundle(hints))
+        {
         }
 
         public Type ViewModelToRemove { get; private set; }
