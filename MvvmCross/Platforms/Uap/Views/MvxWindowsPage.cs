@@ -65,7 +65,12 @@ namespace MvvmCross.Platforms.Uap.Views
 
                 _viewModel = value;
                 DataContext = ViewModel;
+                OnViewModelSet();
             }
+        }
+
+        protected virtual void OnViewModelSet()
+        {
         }
 
         public virtual void ClearBackStack()
