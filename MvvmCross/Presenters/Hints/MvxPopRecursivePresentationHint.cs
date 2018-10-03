@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters.Hints
@@ -10,10 +11,20 @@ namespace MvvmCross.Presenters.Hints
     public class MvxPopRecursivePresentationHint
         : MvxPresentationHint
     {
-        public MvxPopRecursivePresentationHint(int levelsDeep, bool animated = false)
+        public MvxPopRecursivePresentationHint(int levelsDeep, bool animated = false) : base()
         {
             LevelsDeep = levelsDeep;
             Animated = animated;
+        }
+
+        public MvxPopRecursivePresentationHint(MvxBundle body, int levelsDeep, bool animated = true) : base(body)
+        {
+            LevelsDeep = levelsDeep;
+            Animated = animated;
+        }
+
+        public MvxPopRecursivePresentationHint(IDictionary<string, string> hints, int levelsDeep, bool animated = true) : this(new MvxBundle(hints), levelsDeep, animated)
+        {
         }
 
         public int LevelsDeep { get; private set; }
