@@ -271,7 +271,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
         {
             try
             {
-                var contentDialog = (IMvxWindowsContentDialog)CreateControl(viewType, request, attribute);
+                var contentDialog = (ContentDialog)CreateControl(viewType, request, attribute);
                 if (contentDialog != null)
                 {
                     await contentDialog.ShowAsync(attribute.Placement);

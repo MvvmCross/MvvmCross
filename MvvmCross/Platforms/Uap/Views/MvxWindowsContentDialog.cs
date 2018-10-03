@@ -102,7 +102,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
     public class MvxWindowsContentDialog<TViewModel>
         : MvxWindowsContentDialog
-        , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
+        , IMvxWindowsContentDialog<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {
