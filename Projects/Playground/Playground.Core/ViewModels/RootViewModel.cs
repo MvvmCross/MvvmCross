@@ -16,6 +16,7 @@ using MvvmCross.ViewModels;
 using Playground.Core.Models;
 using Playground.Core.ViewModels.Bindings;
 using Playground.Core.ViewModels.Samples;
+using Plugin.Geolocator;
 
 namespace Playground.Core.ViewModels
 {
@@ -217,6 +218,18 @@ namespace Playground.Core.ViewModels
         {
             try
             {
+
+                var locator = CrossGeolocator.Current;
+
+                try
+                {
+                    var position = await locator.GetPositionAsync();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
                 await NavigationService.Navigate<ModalViewModel>();
             }
             catch (Exception)

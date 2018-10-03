@@ -8,6 +8,7 @@ using Android.Views;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
+using Plugin.CurrentActivity;
 
 namespace Playground.Droid.Activities
 {
@@ -20,7 +21,15 @@ namespace Playground.Droid.Activities
         {
             base.OnCreate(bundle);
 
+            CrossCurrentActivity.Current.Init(this, bundle);
+
             SetContentView(Resource.Layout.RootView);
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
+        {
+            Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }
