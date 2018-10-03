@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Collections.Generic;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters.Hints
@@ -9,9 +10,18 @@ namespace MvvmCross.Presenters.Hints
     public class MvxClosePresentationHint
         : MvxPresentationHint
     {
-        public MvxClosePresentationHint(IMvxViewModel viewModelToClose)
+        public MvxClosePresentationHint(IMvxViewModel viewModelToClose) : base()
         {
             ViewModelToClose = viewModelToClose;
+        }
+
+        public MvxClosePresentationHint(IMvxViewModel viewModelToClose, MvxBundle body) : base(body)
+        {
+            ViewModelToClose = viewModelToClose;
+        }
+
+        public MvxClosePresentationHint(IMvxViewModel viewModelToClose, IDictionary<string, string> hints) : this(viewModelToClose, new MvxBundle(hints))
+        {
         }
 
         public IMvxViewModel ViewModelToClose { get; private set; }
