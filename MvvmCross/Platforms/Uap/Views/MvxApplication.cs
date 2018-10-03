@@ -115,7 +115,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected virtual void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+            throw new Exception("Failed to load Page " + e.SourcePageType.FullName, e.Exception);
         }
 
         private async void OnSuspending(object sender, SuspendingEventArgs e)
