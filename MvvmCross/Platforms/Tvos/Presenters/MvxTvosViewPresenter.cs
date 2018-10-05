@@ -340,18 +340,6 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             return Task.FromResult(true);
         }
 
-        public override Task<bool> Close(IMvxViewModel viewModel)
-        {
-            return GetPresentationAttributeAction(new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute)
-                .CloseAction.Invoke(viewModel, attribute);
-        }
-
-        public override Task<bool> Show(MvxViewModelRequest request)
-        {
-            return GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute)
-                .ShowAction.Invoke(attribute.ViewType, attribute, request);
-        }
-
         protected virtual async Task<bool> ShowRootViewController(UIViewController viewController,
                                            MvxRootPresentationAttribute attribute,
                                            MvxViewModelRequest request)
