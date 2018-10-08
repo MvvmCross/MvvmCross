@@ -11,7 +11,6 @@ MvvmCross
 [![Build status](https://ci.appveyor.com/api/projects/status/eih9kn75kujmmuf1?svg=true)](https://ci.appveyor.com/project/MvvmCross/mvvmcross)
 [![NuGet](https://img.shields.io/nuget/v/MvvmCross.svg)](https://www.nuget.org/packages/MvvmCross/)
 [![NuGet Pre Release](https://img.shields.io/nuget/vpre/MvvmCross.svg)](https://www.nuget.org/packages/MvvmCross/)
-[![GitHub tag](https://img.shields.io/github/tag/mvvmcross/mvvmcross.svg)](https://github.com/MvvmCross/MvvmCross/releases)
 [![MyGet](https://img.shields.io/myget/mvvmcross/v/MvvmCross.svg)](https://www.myget.org/F/mvvmcross/api/v3/index.json)
 [![OpenCollective](https://opencollective.com/mvvmcross/backers/badge.svg)](#backers) 
 [![OpenCollective](https://opencollective.com/mvvmcross/sponsors/badge.svg)](#sponsors)
