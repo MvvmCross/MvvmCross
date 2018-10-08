@@ -181,8 +181,6 @@ MvvmCross is licensed under the [MS-PL License](http://opensource.org/licenses/m
 
 * [MonoCross](http://code.google.com/p/monocross/) was the original starting point for this project, and was used as a reference under MIT
 * Tiny bits of [MvvmLight](http://mvvmlight.codeplex.com/) are redistributed and modified under MIT
-* [NewtonSoft.Json](https://github.com/JamesNK/Newtonsoft.Json) is redistributed and modified here under MIT
-* The original work on the [JSON.Net port](https://github.com/chrisntr/Newtonsoft.Json) to MonoTouch and MonoDroid was done by @ChrisNTR
 * [Sqlite-net](https://github.com/praeclarum/sqlite-net/blob/master/LICENSE.md) - custom license
 * Messenger ideas from [JonathanPeppers/XPlatUtils](https://github.com/jonathanpeppers/XPlatUtils) under Apache License Version 2.0, and from GrumpyDev/TinyMessenger under simple license of "THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY"
 * [Color codes](https://github.com/mono/sysdrawing-coregraphics) under MIT License
