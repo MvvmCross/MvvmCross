@@ -5,6 +5,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Wpf.Views
@@ -23,6 +24,8 @@ namespace MvvmCross.Platforms.Wpf.Views
             }
         }
 
+        public IMvxBindingContext BindingContext { get; set; }
+        
         public MvxWpfView()
         {
             Unloaded += MvxWpfView_Unloaded;
