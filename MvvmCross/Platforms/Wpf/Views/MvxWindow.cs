@@ -4,6 +4,7 @@
 
 using System;
 using System.Windows;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Wpf.Views
@@ -23,6 +24,8 @@ namespace MvvmCross.Platforms.Wpf.Views
         }
 
         public string Identifier { get; set; }
+
+        public IMvxBindingContext BindingContext { get; set; }
 
         public MvxWindow()
         {
