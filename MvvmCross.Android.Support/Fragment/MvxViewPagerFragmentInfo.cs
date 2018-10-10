@@ -10,28 +10,18 @@ namespace MvvmCross.Droid.Support.V4
 {
     public class MvxViewPagerFragmentInfo
     {
-        public MvxViewPagerFragmentInfo(string title, Type fragmentType, Type viewModelType, object parameterValuesObject = null)
-            : this(title, null, fragmentType, viewModelType, parameterValuesObject)
-        {
-        }
-
         public MvxViewPagerFragmentInfo(string title, string tag, Type fragmentType, Type viewModelType,
-                            object parameterValuesObject = null)
+            object parameterValuesObject = null)
         {
             Title = title;
-            Tag = tag ?? title;
+            Tag = tag;
             FragmentType = fragmentType;
             ViewModelType = viewModelType;
             ParameterValuesObject = parameterValuesObject;
         }
 
-        public MvxViewPagerFragmentInfo(string title, Type fragmentType, IMvxViewModel viewModel, object parameterValuesObject = null)
-            : this(title, null, fragmentType, viewModel.GetType(), parameterValuesObject)
-        {
-            ViewModel = viewModel;
-        }
-
-        public MvxViewPagerFragmentInfo(string title, string tag, Type fragmentType, IMvxViewModel viewModel, object parameterValuesObject = null)
+        public MvxViewPagerFragmentInfo(string title, string tag, Type fragmentType, 
+            IMvxViewModel viewModel, object parameterValuesObject = null)
             : this(title, tag, fragmentType, viewModel.GetType(), parameterValuesObject)
         {
             ViewModel = viewModel;
