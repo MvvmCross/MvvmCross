@@ -45,6 +45,8 @@ Xamarin MvvmCross Dreams | Artmdev | [Visual Studio](https://marketplace.visuals
 Xamarin Forms 3 with MvvmCross 6 Solution Template | Paul Datsiuk | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=PaulDatsiuk.XamarinFormswithMvvmCross5SolutionTemplate)
 Ninja Coder For MvvmCross and Xamarin Forms | Ninja Coder for MvvmCross | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=NinjaCoderforMvvmCross.NinjaCoderForMvvmCrossandXamarinForms)
 MVXTemplates | Luke Pothier | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=LukePothier.MVXTemplates)
+Mvx Toolkit | Jeremy Tillman | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=jtillman.mvxtoolkit)
+MvxScaffolding | Plac3hold3r | [Visual Studio](https://marketplace.visualstudio.com/items?itemName=Plac3Hold3r.MvxScaffolding) - [dotnet template CLI](https://www.nuget.org/packages/MvxScaffolding.Templates/)
 
 You can choose to download and install an extension manually, or you can get it from the Extension Manager in Visual Studio / the Add-In Gallery in Xamarin Studio (Visual Studio for Mac).
 

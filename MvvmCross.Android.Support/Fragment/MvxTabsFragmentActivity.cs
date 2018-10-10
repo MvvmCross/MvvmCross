@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,9 +11,9 @@ using Android.Runtime;
 using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
-using Java.Lang;
 using MvvmCross.Base;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
+using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 using Object = Java.Lang.Object;
 
@@ -176,9 +176,10 @@ namespace MvvmCross.Droid.Support.V4
                 {
                     if (newTab.CachedFragment == null)
                     {
-                        newTab.CachedFragment = Fragment.Instantiate(this,
-                                                                     FragmentJavaName(newTab.FragmentType),
-                                                                     newTab.Bundle);
+                        newTab.CachedFragment =
+                            Fragment.Instantiate(
+                                this, newTab.FragmentType.FragmentJavaName(), newTab.Bundle);
+
                         FixupDataContext(newTab);
                         ft.Add(_tabContentId, newTab.CachedFragment, newTab.Tag);
                     }
@@ -203,11 +204,6 @@ namespace MvvmCross.Droid.Support.V4
 
             if (consumer.DataContext != newTab.ViewModel)
                 consumer.DataContext = newTab.ViewModel;
-        }
-
-        protected virtual string FragmentJavaName(Type fragmentType)
-        {
-            return Class.FromType(fragmentType).Name;
         }
 
         public virtual void OnTabFragmentChanging(string tag, FragmentTransaction transaction)

@@ -129,7 +129,7 @@ namespace MvvmCross.Presenters
             return CreatePresentationAttribute(request.ViewModelType, viewType);
         }
 
-        public virtual MvxPresentationAttributeAction GetPresentationAttributeAction(MvxViewModelRequest request, out MvxBasePresentationAttribute attribute)
+        protected virtual MvxPresentationAttributeAction GetPresentationAttributeAction(MvxViewModelRequest request, out MvxBasePresentationAttribute attribute)
         {
             attribute = GetPresentationAttribute(request);
             attribute.ViewModelType = request.ViewModelType;
@@ -167,43 +167,12 @@ namespace MvvmCross.Presenters
 
         public override Task<bool> Close(IMvxViewModel viewModel)
         {
-            var attribute = GetPresentationAttribute(new MvxViewModelInstanceRequest(viewModel));
-            var attributeType = attribute.GetType();
-
-            if (AttributeTypesToActionsDictionary.TryGetValue(
-                attributeType,
-                out MvxPresentationAttributeAction attributeAction))
-            {
-                if (attributeAction.CloseAction == null)
-                {
-                    throw new NullReferenceException($"attributeAction.CloseAction is null for attribute: {attributeType.Name}");
-                }
-
-                return attributeAction.CloseAction.Invoke(viewModel, attribute);
-            }
-
-            throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
+            return GetPresentationAttributeAction(new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);
         }
 
         public override Task<bool> Show(MvxViewModelRequest request)
         {
-            var attribute = GetPresentationAttribute(request);
-            attribute.ViewModelType = request.ViewModelType;
-            var attributeType = attribute.GetType();
-
-            if (AttributeTypesToActionsDictionary.TryGetValue(
-                attributeType,
-                out MvxPresentationAttributeAction attributeAction))
-            {
-                if (attributeAction.ShowAction == null)
-                {
-                    throw new NullReferenceException($"attributeAction.ShowAction is null for attribute: {attributeType.Name}");
-                }
-
-                return attributeAction.ShowAction.Invoke(attribute.ViewType, attribute, request);
-            }
-
-            throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
+            return GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
     }
 }

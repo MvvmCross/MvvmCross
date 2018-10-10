@@ -15,6 +15,9 @@ using MvvmCross.Presenters;
 using MvvmCross.Views;
 using MvvmCross.Presenters.Attributes;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml;
+using System.Linq;
 
 namespace MvvmCross.Platforms.Uap.Presenters
 {
@@ -28,6 +31,21 @@ namespace MvvmCross.Platforms.Uap.Presenters
             _rootFrame = rootFrame;
 
             SystemNavigationManager.GetForCurrentView().BackRequested += BackButtonOnBackRequested;
+        }
+
+        private IMvxViewModelLoader _viewModelLoader;
+        public IMvxViewModelLoader ViewModelLoader
+        {
+            get
+            {
+                if (_viewModelLoader == null)
+                    _viewModelLoader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
+                return _viewModelLoader;
+            }
+            set
+            {
+                _viewModelLoader = value;
+            }
         }
 
         public override void RegisterAttributeTypes()
@@ -55,22 +73,20 @@ namespace MvvmCross.Platforms.Uap.Presenters
                    ShowAction = (view, attribute, request) => ShowRegionView(view, (MvxRegionPresentationAttribute)attribute, request),
                    CloseAction = (viewModel, attribute) => CloseRegionView(viewModel, (MvxRegionPresentationAttribute)attribute)
                });
+
+            AttributeTypesToActionsDictionary.Add(
+               typeof(MvxDialogViewPresentationAttribute),
+               new MvxPresentationAttributeAction
+               {
+                   ShowAction = (view, attribute, request) => ShowDialog(view, (MvxDialogViewPresentationAttribute)attribute, request),
+                   CloseAction = (viewModel, attribute) => CloseDialog(viewModel, attribute)
+               });
         }
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
         {
             MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new page presentation");
             return new MvxPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
-        }
-
-        public override Task<bool> Show(MvxViewModelRequest request)
-        {
-            return GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
-        }
-
-        public override Task<bool> Close(IMvxViewModel viewModel)
-        {
-            return GetPresentationAttributeAction(new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);
         }
 
         protected virtual async void BackButtonOnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
@@ -239,6 +255,65 @@ namespace MvvmCross.Platforms.Uap.Presenters
                     exception.ToLongString());
                 return Task.FromResult(false);
             }
+        }
+
+        protected virtual async Task<bool> ShowDialog(Type viewType, MvxDialogViewPresentationAttribute attribute, MvxViewModelRequest request)
+        {
+            try
+            {
+                var contentDialog = (ContentDialog)CreateControl(viewType, request, attribute);
+                if (contentDialog != null)
+                {
+                    await contentDialog.ShowAsync(attribute.Placement);
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception exception)
+            {
+                MvxLog.Instance.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
+                    exception.ToLongString());
+                return false;
+            }
+        }
+
+        public virtual Control CreateControl(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute)
+        {
+            try
+            {
+                var control = Activator.CreateInstance(viewType) as Control;
+                if (control is IMvxView mvxControl)
+                {
+                    if (request is MvxViewModelInstanceRequest instanceRequest)
+                        mvxControl.ViewModel = instanceRequest.ViewModelInstance;
+                    else
+                        mvxControl.ViewModel = ViewModelLoader.LoadViewModel(request, null);
+                }
+
+                return control;
+            }
+            catch (Exception ex)
+            {
+                throw new MvxException(ex, $"Cannot create Control '{viewType.FullName}'. Are you use the wrong base class?");
+            }
+        }
+
+        protected virtual Task<bool> CloseDialog(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute)
+        {
+            var popups = VisualTreeHelper.GetOpenPopups(Window.Current).FirstOrDefault(p =>
+            {
+                if (attribute.ViewType.IsAssignableFrom(p.Child.GetType())
+                    && p.Child is IMvxWindowsContentDialog dialog)
+                {
+                    return dialog.ViewModel == viewModel;
+                }
+                return false;
+            });
+
+            (popups?.Child as ContentDialog)?.Hide();
+
+            return Task.FromResult(true);
         }
     }
 }

@@ -17,6 +17,10 @@ var configuration = Argument("configuration", "Release");
 var verbosityArg = Argument("verbosity", "Minimal");
 var verbosity = Verbosity.Minimal;
 
+var signingSecret = EnvironmentVariable("SIGNING_SECRET");
+var signingUser = EnvironmentVariable("SIGNING_USER");
+var didSignPackages = false;
+
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 GitVersion versionInfo = null;
 
@@ -102,8 +106,6 @@ Task("Build")
     .Does(() =>  {
 
     var settings = GetDefaultBuildSettings()
-        .WithProperty("DebugSymbols", "True")
-        .WithProperty("DebugType", "Embedded")
         .WithProperty("Version", versionInfo.SemVer)
         .WithProperty("PackageVersion", versionInfo.SemVer)
         .WithProperty("InformationalVersion", versionInfo.InformationalVersion)
@@ -162,20 +164,14 @@ Task("CopyPackages")
 });
 
 Task("SignPackages")
+    .WithCriteria(() => !BuildSystem.IsLocalBuild)
+    .WithCriteria(() => IsRepository(repoName))
+    .WithCriteria(() => !string.IsNullOrEmpty(signingSecret))
+    .WithCriteria(() => !string.IsNullOrEmpty(signingUser))
     .IsDependentOn("Build")
     .IsDependentOn("CopyPackages")
     .Does(() => 
 {
-    // Get the secret.
-    var secret = EnvironmentVariable("SIGNING_SECRET");
-    if (string.IsNullOrWhiteSpace(secret))
-        throw new InvalidOperationException("Could not resolve signing secret.");
-
-    // Get the user.
-    var user = EnvironmentVariable("SIGNING_USER");
-    if (string.IsNullOrWhiteSpace(user))
-        throw new InvalidOperationException("Could not resolve signing user.");
-
     var settings = File("./signclient.json");
     var files = GetFiles(outputDir + "/*.nupkg");
 
@@ -188,8 +184,8 @@ Task("SignPackages")
             .Append("sign")
             .AppendSwitchQuoted("-c", MakeAbsolute(settings.Path).FullPath)
             .AppendSwitchQuoted("-i", MakeAbsolute(file).FullPath)
-            .AppendSwitchQuotedSecret("-s", secret)
-            .AppendSwitchQuotedSecret("-r", user)
+            .AppendSwitchQuotedSecret("-s", signingSecret)
+            .AppendSwitchQuotedSecret("-r", signingUser)
             .AppendSwitchQuoted("-n", "MvvmCross")
             .AppendSwitchQuoted("-d", "MvvmCross is a cross platform MVVM framework.")
             .AppendSwitchQuoted("-u", "https://mvvmcross.com");
@@ -202,6 +198,8 @@ Task("SignPackages")
             throw new InvalidOperationException("Signing failed!");
         }
     }
+
+    didSignPackages = true;
 });
 
 Task("PublishPackages")
@@ -212,6 +210,12 @@ Task("PublishPackages")
     .IsDependentOn("SignPackages")
     .Does (() =>
 {
+    if (!didSignPackages)
+    {
+        Warning("Packages were not signed. Not publishing packages");
+        return;
+    }
+
     // Resolve the API key.
     var nugetKeySource = GetNugetKeyAndSource();
     var apiKey = nugetKeySource.Item1;

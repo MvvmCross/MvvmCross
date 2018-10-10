@@ -5,17 +5,17 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Uwp.Views
 {
-    [MvxViewFor(typeof(RootViewModel))]
-    [MvxPagePresentation]
-    public sealed partial class RootView : RootViewPage
+    [MvxViewFor(typeof(ModalViewModel))]
+    [MvxDialogViewPresentation]
+    public sealed partial class DialogView : DialogViewBase
     {
-        public RootView()
+        public DialogView()
         {
             this.InitializeComponent();
         }
     }
 
-    public abstract class RootViewPage : MvxWindowsPage<RootViewModel>
+    public abstract class DialogViewBase : MvxWindowsContentDialog<ModalViewModel>
     {
     }
 }
