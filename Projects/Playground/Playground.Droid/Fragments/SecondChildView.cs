@@ -12,7 +12,7 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Fragments
 {
-    [MvxFragmentPresentation(typeof(RootViewModel), Resource.Id.content_frame, true)]
+    [MvxFragmentPresentation(typeof(RootViewModel), Resource.Id.content_frame)]
     [MvxFragmentPresentation(typeof(SplitRootViewModel), Resource.Id.split_content_frame)]
     [Register(nameof(SecondChildView))]
     public class SecondChildView : MvxFragment<SecondChildViewModel>
@@ -24,6 +24,13 @@ namespace Playground.Droid.Fragments
             var view = this.BindingInflate(Resource.Layout.SecondChildView, null);
 
             return view;
+        }
+
+        public override void OnViewCreated(View view, Bundle savedInstanceState)
+        {
+            base.OnViewCreated(view, savedInstanceState);
+
+            ViewModel.ShowNestedChildCommand.Execute();
         }
     }
 }
