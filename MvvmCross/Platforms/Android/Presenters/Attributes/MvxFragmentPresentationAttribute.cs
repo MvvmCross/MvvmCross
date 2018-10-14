@@ -27,7 +27,7 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             bool isCacheableFragment = false,
             string tag = null,
             string popBackStackImmediateName = "",
-            int popBackStackImmediateFlag = 1
+            MvxPopBackStack popBackStackImmediateFlag = MvxPopBackStack.Inclusive
         )
         {
             ActivityHostViewModelType = activityHostViewModelType;
@@ -41,6 +41,8 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             FragmentHostViewType = fragmentHostViewType;
             IsCacheableFragment = isCacheableFragment;
             Tag = tag;
+            PopBackStackImmediateName = popBackStackImmediateName;
+            PopBackStackImmediateFlag = popBackStackImmediateFlag;
         }
 
         public MvxFragmentPresentationAttribute(
@@ -56,7 +58,7 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             bool isCacheableFragment = false,
             string tag = null,
             string popBackStackImmediateName = "",
-            int popBackStackImmediateFlag = 1
+            MvxPopBackStack popBackStackImmediateFlag = MvxPopBackStack.Inclusive
         )
         {
             var context = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext;
@@ -72,6 +74,8 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             FragmentHostViewType = fragmentHostViewType;
             IsCacheableFragment = isCacheableFragment;
             Tag = tag;
+            PopBackStackImmediateName = popBackStackImmediateName;
+            PopBackStackImmediateFlag = popBackStackImmediateFlag;
         }
 
         /// <summary>
