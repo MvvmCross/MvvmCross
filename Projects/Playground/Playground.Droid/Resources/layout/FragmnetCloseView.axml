@@ -13,7 +13,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Forward - Default Pop"
+        android:text="Forward"
         local:MvxBind="Click ForwardCommand" />
     <Button
         android:layout_width="match_parent"
