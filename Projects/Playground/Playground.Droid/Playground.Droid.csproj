@@ -59,6 +59,7 @@
     <Compile Include="Controls\BinaryEdit.cs" />
     <Compile Include="Fragments\BaseSplitDetailView.cs" />
     <Compile Include="Fragments\FluentBindingView.cs" />
+    <Compile Include="Fragments\FragmentCloseView.cs" />
     <Compile Include="Fragments\TabsRootBView.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -227,6 +228,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\FluentBindingView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\FragmnetCloseView.axml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
