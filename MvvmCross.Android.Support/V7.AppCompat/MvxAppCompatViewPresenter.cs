@@ -641,7 +641,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             if (fragmentManager.BackStackEntryCount > 0)
             {
-                var popBackStackFragmentName = fragmentAttribute.PopBackStackImmediateName == ""
+                var popBackStackFragmentName = fragmentAttribute.PopBackStackImmediateName?.Trim() == ""
                     ? fragmentName
                     : fragmentAttribute.PopBackStackImmediateName;
 
