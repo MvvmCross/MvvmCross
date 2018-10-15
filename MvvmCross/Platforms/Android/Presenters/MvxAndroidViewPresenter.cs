@@ -568,7 +568,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             if (fragmentManager.BackStackEntryCount > 0)
             {
-                var popBackStackFragmentName = fragmentAttribute.PopBackStackImmediateName == "" 
+                var popBackStackFragmentName = fragmentAttribute.PopBackStackImmediateName?.Trim() == "" 
                     ? fragmentName 
                     : fragmentAttribute.PopBackStackImmediateName;
 
