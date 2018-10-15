@@ -344,7 +344,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 throw new NullReferenceException($"Fragment host not found when trying to show View {view.Name} as Nested Fragment");
 
             if (!fragmentHost.IsVisible)
-                throw new InvalidOperationException($"Fragment host is not visible when trying to show View {view.Name} as Nested Fragment");
+                MvxLog.Instance.Warn("Fragment host is not visible when trying to show View {0} as Nested Fragment", view.Name);
 
             PerformShowFragmentTransaction(fragmentHost.ChildFragmentManager, attribute, request);
         }
