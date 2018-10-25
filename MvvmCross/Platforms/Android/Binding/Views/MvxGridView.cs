@@ -174,6 +174,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
             else
             {
+                //expand the view to the full height of it's contents to disable scrolling
                 var expandSpec = MeasureSpec.MakeMeasureSpec(MeasuredSizeMask, MeasureSpecMode.AtMost);
                 base.OnMeasure(widthMeasureSpec, expandSpec);
                 LayoutParameters.Height = MeasuredHeight;
