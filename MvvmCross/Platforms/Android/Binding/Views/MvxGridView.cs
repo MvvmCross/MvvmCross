@@ -171,7 +171,6 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         {
             if (NestedScrollingEnabled)
                 base.OnMeasure(widthMeasureSpec, heightMeasureSpec);
-
             else
             {
                 //expand the view to the full height of it's contents to disable scrolling
