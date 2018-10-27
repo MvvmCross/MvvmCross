@@ -61,7 +61,7 @@ namespace MvvmCross.ViewModels
             ShouldAlwaysRaiseInpcOnUserInterfaceThread(alwaysOnUIThread);
             var raisePropertyChanging = MvxSingletonCache.Instance == null || MvxSingletonCache.Instance.Settings.ShouldRaisePropertyChanging;
             ShouldRaisePropertyChanging(raisePropertyChanging);
-            var shouldLogInpc = MvxSingletonCache.Instance == null || MvxSingletonCache.Instance.Settings.ShouldLogInpc;
+            var shouldLogInpc = MvxSingletonCache.Instance != null && MvxSingletonCache.Instance.Settings.ShouldLogInpc;
             ShouldLogInpc(shouldLogInpc);
         }
 
