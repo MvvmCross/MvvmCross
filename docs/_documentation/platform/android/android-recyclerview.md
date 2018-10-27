@@ -99,7 +99,7 @@ A small example:
 ```csharp
 namespace Zoo.App
 {
-    public class AnimalTemplateSelector : IMvxItemTemplateSelector
+    public class AnimalTemplateSelector : IMvxTemplateSelector
     {
         public int ItemTemplateId { get; set; } // fallback ItemTemplateId 
         
@@ -130,17 +130,17 @@ namespace Zoo.App
 }
 ```
 
-To use this `ItemTemplateSelctor` you will need to provide it in the `MvxItemTemplateSelector` attribute on the `MvxRecylcerView`. It must be of the format: `Fully.Qualified.ClassName,Assembly.Name`. Hence, for the example above. Let us say the assembly will be `Zoo.App.Droid` and as you see the namespace is `Zoo.App` then the string will be: `Zoo.App.AnimalTemplateSelector,Zoo.App.Droid`.
+To use this `ItemTemplateSelctor` you will need to provide it in the `MvxTemplateSelector` attribute on the `MvxRecylcerView`. It must be of the format: `Fully.Qualified.ClassName,Assembly.Name`. Hence, for the example above. Let us say the assembly will be `Zoo.App.Droid` and as you see the namespace is `Zoo.App` then the string will be: `Zoo.App.AnimalTemplateSelector,Zoo.App.Droid`.
 
 ```xml
 <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
-    local:MvxItemTemplateSelector="Zoo.App.AnimalTemplateSelector,Zoo.App.Droid"
+    local:MvxTemplateSelector="Zoo.App.AnimalTemplateSelector,Zoo.App.Droid"
     ... />
 ```
 
-The `ItemTemplateId` property in your `ItemTemplateSelector` will get overwritten if you provide both the `MvxItemTemplateSelector` and `MvxItemTemplate`, by the value in `MvxItemTemplate`.
+The `ItemTemplateId` property in your `ItemTemplateSelector` will get overwritten if you provide both the `MvxTemplateSelector` and `MvxItemTemplate`, by the value in `MvxItemTemplate`.
 
-> Note: If you do not provide a `MvxItemTemplateSelector` the `MvxRecyclerAdapter` will fallback to use `MvxDefaultItemTemplateSelector`.
+> Note: If you do not provide a `MvxTemplateSelector` the `MvxRecyclerAdapter` will fallback to use `MvxDefaultItemTemplateSelector`.
 
 ### ItemClick and ItemLongClick commands
 
