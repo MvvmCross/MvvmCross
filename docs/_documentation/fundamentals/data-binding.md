@@ -909,7 +909,7 @@ protected override void InitializeLastChance()
         
  - WPF
 
-    xmlns:mvx="clr-namespace:mvx;assembly=MvvmCross.Binding.Wpf"
+    xmlns:mvx="clr-namespace:MvvmCross.Platforms.Wpf.Binding;assembly=MvvmCross.Platforms.Wpf"
 
 
 - in your Xaml files you can now include bindings within tags such as:
