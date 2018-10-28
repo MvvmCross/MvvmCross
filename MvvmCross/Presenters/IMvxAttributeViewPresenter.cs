@@ -14,7 +14,7 @@ namespace MvvmCross.Presenters
     {
         IMvxViewModelTypeFinder ViewModelTypeFinder { get; set; }
         IMvxViewsContainer ViewsContainer { get; set; }
-        Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary { get; }
+        IDictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary { get; }
         void RegisterAttributeTypes();
 
         //TODO: Maybe move those to helper class

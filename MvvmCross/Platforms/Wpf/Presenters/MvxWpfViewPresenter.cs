@@ -56,29 +56,21 @@ namespace MvvmCross.Platforms.Wpf.Presenters
 
         public override void RegisterAttributeTypes()
         {
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxWindowPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxWindowPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var view = WpfViewLoader.CreateView(request);
                         return ShowWindow(view, (MvxWindowPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseWindow(viewModel)
-                });
+                    (viewModel, attribute) => CloseWindow(viewModel));
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxContentPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxContentPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var view = WpfViewLoader.CreateView(request);
                         return ShowContentView(view, (MvxContentPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseContentView(viewModel)
-                });
+                    (viewModel, attribute) => CloseContentView(viewModel));
         }
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)

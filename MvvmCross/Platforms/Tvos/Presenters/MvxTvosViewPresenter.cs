@@ -95,74 +95,45 @@ namespace MvvmCross.Platforms.Tvos.Presenters
 
         public override void RegisterAttributeTypes()
         {
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxRootPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxRootPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        return ShowRootViewController(viewController,
-                                               (MvxRootPresentationAttribute)attribute,
-                                               request);
+                        return ShowRootViewController(viewController, attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseRootViewController(viewModel,
-                                                                                    (MvxRootPresentationAttribute)attribute)
-                });
+                    CloseRootViewController);
 
-            AttributeTypesToActionsDictionary.Add(
-              typeof(MvxChildPresentationAttribute),
-              new MvxPresentationAttributeAction
-              {
-                  ShowAction = (viewType, attribute, request) =>
-                  {
-                      var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                      return ShowChildViewController(viewController,
-                                              (MvxChildPresentationAttribute)attribute,
-                                              request);
-                  },
-                  CloseAction = (viewModel, attribute) => CloseChildViewController(viewModel,
-                                                                                   (MvxChildPresentationAttribute)attribute)
-              });
+            AttributeTypesToActionsDictionary.Register<MvxChildPresentationAttribute>(
+                    (viewType, attribute, request) =>
+                      {
+                          var viewController = (UIViewController)this.CreateViewControllerFor(request);
+                          return ShowChildViewController(viewController, attribute, request);
+                      },
+                    CloseChildViewController);
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxTabPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxTabPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        return ShowTabViewController(viewController,
-                                              (MvxTabPresentationAttribute)attribute,
-                                              request);
+                        return ShowTabViewController(viewController, attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseTabViewController(viewModel,
-                                                                                   (MvxTabPresentationAttribute)attribute)
-                });
+                    CloseTabViewController);
 
-            AttributeTypesToActionsDictionary.Add(
-              typeof(MvxModalPresentationAttribute),
-              new MvxPresentationAttributeAction
-              {
-                  ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxModalPresentationAttribute>(
+                    (viewType, attribute, request) =>
                   {
                       var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                      return ShowModalViewController(viewController, (MvxModalPresentationAttribute)attribute, request);
+                      return ShowModalViewController(viewController, attribute, request);
                   },
-                  CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel, (MvxModalPresentationAttribute)attribute)
-              });
+                  CloseModalViewController);
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxMasterDetailPresentationAttribute),
-              new MvxPresentationAttributeAction
-              {
-                  ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxMasterDetailPresentationAttribute>(
+                    (viewType, attribute, request) =>
                   {
                       var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                      return ShowMasterDetailSplitViewController(viewController, (MvxMasterDetailPresentationAttribute)attribute, request);
+                      return ShowMasterDetailSplitViewController(viewController, attribute, request);
                   },
-                  CloseAction = (viewModel, attribute) => CloseMasterSplitViewController(viewModel, (MvxMasterDetailPresentationAttribute)attribute)
-              });
+                  CloseMasterSplitViewController);
         }
 
         protected virtual Task<bool> CloseRootViewController(IMvxViewModel viewModel,
