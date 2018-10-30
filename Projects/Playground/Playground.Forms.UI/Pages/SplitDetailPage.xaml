@@ -12,8 +12,10 @@
     <ContentPage.Content>
         <StackLayout Margin="10">
             <Label Text="I'm a detail navigation page" />
-            <Button mvx:Bi.nd="Command ShowChildCommand" Text="Show Child" />
-            <Button mvx:Bi.nd="Command ShowTabsCommand" Text="Show Tabbed Child" />
+            <Button mvx:Bi.nd="Command ShowChildCommand" 
+                    Text="Show Child" />
+            <Button mvx:Bi.nd="Command ShowTabbedChildCommand" 
+                    Text="Show Tabbed Child" />
         </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>
