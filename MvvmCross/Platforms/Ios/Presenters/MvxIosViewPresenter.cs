@@ -85,62 +85,43 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
         public override void RegisterAttributeTypes()
         {
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxRootPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxRootPresentationAttribute>(
+                (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        return ShowRootViewController(viewController, (MvxRootPresentationAttribute)attribute, request);
+                        return ShowRootViewController(viewController, attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseRootViewController(viewModel, (MvxRootPresentationAttribute)attribute)
-                });
+                    CloseRootViewController);
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxChildPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxChildPresentationAttribute>(
+                (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        return ShowChildViewController(viewController, (MvxChildPresentationAttribute)attribute, request);
+                        return ShowChildViewController(viewController, attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseChildViewController(viewModel, (MvxChildPresentationAttribute)attribute)
-                });
+                    CloseChildViewController);
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxTabPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxTabPresentationAttribute>(
+                (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        return ShowTabViewController(viewController, (MvxTabPresentationAttribute)attribute, request);
+                        return ShowTabViewController(viewController, attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseTabViewController(viewModel, (MvxTabPresentationAttribute)attribute)
-                });
+                    CloseTabViewController);
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxModalPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxModalPresentationAttribute>(
+                (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        return ShowModalViewController(viewController, (MvxModalPresentationAttribute)attribute, request);
+                        return ShowModalViewController(viewController, attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel, (MvxModalPresentationAttribute)attribute)
-                });
+                    CloseModalViewController);
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxSplitViewPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxSplitViewPresentationAttribute>(
+                (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        var splitAttribute = (MvxSplitViewPresentationAttribute)attribute;
+                        var splitAttribute = attribute;
                         switch (splitAttribute.Position)
                         {
                             case MasterDetailPosition.Master:
@@ -151,9 +132,9 @@ namespace MvvmCross.Platforms.Ios.Presenters
                         }
                         return Task.FromResult(true);
                     },
-                    CloseAction = (viewModel, attribute) =>
+                (viewModel, attribute) =>
                     {
-                        var splitAttribute = (MvxSplitViewPresentationAttribute)attribute;
+                        var splitAttribute = attribute;
                         switch (splitAttribute.Position)
                         {
                             case MasterDetailPosition.Master:
@@ -163,8 +144,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
                             default:
                                 return CloseDetailSplitViewController(viewModel, splitAttribute);
                         }
-                    }
-                });
+                    });
         }
 
         protected virtual async Task<bool> ShowRootViewController(
@@ -220,12 +200,12 @@ namespace MvvmCross.Platforms.Ios.Presenters
                     {
                         IMvxIosView tabView;
 
-                        if(vc is UINavigationController)
+                        if (vc is UINavigationController)
                         {
                             var root = ((UINavigationController)vc).ViewControllers.FirstOrDefault();
                             tabView = root.GetIMvxIosView();
                         }
-                        else 
+                        else
                         {
                             tabView = vc.GetIMvxIosView();
                         }
@@ -240,7 +220,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
                     }
                 }
             }
-            
+
             return base.ChangePresentation(hint);
         }
 
@@ -274,7 +254,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
                 {
                     PushViewControllerIntoStack(modalNavController, viewController, attribute);
 
-                    return Task.FromResult(true); 
+                    return Task.FromResult(true);
                 }
                 else
                 {
