@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>MonoAndroid81</TargetFrameworks>
     <AssemblyName>MvvmCross.Droid.Support.Fragment</AssemblyName>
-    <RootNamespace>MvvmCross.Droid.Support.Fragment</RootNamespace>
+    <RootNamespace>MvvmCross.Droid.Support.Fragments</RootNamespace>
     <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
 This package contains Support Fragment support for MvvmCross.</Description>

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -15,6 +15,7 @@ using MvvmCross.Plugin.Network.Rest;
 using MvvmCross.ViewModels;
 using Playground.Core.Models;
 using Playground.Core.ViewModels.Bindings;
+using Playground.Core.ViewModels.Navigation;
 using Playground.Core.ViewModels.Samples;
 
 namespace Playground.Core.ViewModels
@@ -95,6 +96,8 @@ namespace Playground.Core.ViewModels
 
             TriggerVisibilityCommand =
                 new MvxCommand(() => IsVisible = !IsVisible);
+
+            FragmentCloseCommand = new MvxAsyncCommand(() => NavigationService.Navigate<FragmentCloseViewModel>());
         }
 
         public MvxNotifyTask MyTask { get; set; }
@@ -145,6 +148,8 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowFluentBindingCommand { get; }
 
         public IMvxCommand TriggerVisibilityCommand { get; }
+
+        public IMvxCommand FragmentCloseCommand { get; }
 
         private bool _isVisible;
         public bool IsVisible

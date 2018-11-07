@@ -46,8 +46,8 @@ namespace MvvmCross.Presenters
             }
         }
 
-        protected Dictionary<Type, MvxPresentationAttributeAction> _attributeTypesActionsDictionary;
-        public virtual Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
+        protected IDictionary<Type, MvxPresentationAttributeAction> _attributeTypesActionsDictionary;
+        public virtual IDictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
         {
             get
             {
