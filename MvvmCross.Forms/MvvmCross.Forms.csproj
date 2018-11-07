@@ -34,6 +34,11 @@
     <Compile Include="Platforms\Netstandard\**\*.cs" />
   </ItemGroup>
 
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
+    <Compile Include="Platforms\Net\**\*.cs" />
+    <Compile Include="Platforms\Console\**\*.cs" />
+  </ItemGroup>
+
   <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
     <Compile Include="Platforms\Net\**\*.cs" />
     <Compile Include="Platforms\Console\**\*.cs" />

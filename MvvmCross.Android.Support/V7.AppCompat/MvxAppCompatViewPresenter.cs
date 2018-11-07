@@ -46,21 +46,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             base.RegisterAttributeTypes();
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxTabLayoutPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (view, attribute, request) => ShowTabLayout(view, (MvxTabLayoutPresentationAttribute)attribute, request),
-                    CloseAction = (viewModel, attribute) => CloseViewPagerFragment(viewModel, (MvxViewPagerFragmentPresentationAttribute)attribute)
-                });
-
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxViewPagerFragmentPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (view, attribute, request) => ShowViewPagerFragment(view, (MvxViewPagerFragmentPresentationAttribute)attribute, request),
-                    CloseAction = (viewModel, attribute) => CloseViewPagerFragment(viewModel, (MvxViewPagerFragmentPresentationAttribute)attribute)
-                });
+            AttributeTypesToActionsDictionary.Register<MvxTabLayoutPresentationAttribute>(ShowTabLayout, CloseViewPagerFragment);
+            AttributeTypesToActionsDictionary.Register<MvxViewPagerFragmentPresentationAttribute>(ShowViewPagerFragment, CloseViewPagerFragment);
         }
 
         public override MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request)
@@ -86,8 +73,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                         var fragmentHost = GetFragmentByViewType(item.FragmentHostViewType);
 
                         // if the fragment exists, is on top, and (has the ContentId or the attribute is for ViewPager), then use it as current attribute 
-                        if (fragmentHost != null 
-                            && fragmentHost.IsVisible 
+                        if (fragmentHost != null
+                            && fragmentHost.IsVisible
                             && (fragmentHost.View.FindViewById(item.FragmentContentId) != null || item is MvxViewPagerFragmentPresentationAttribute))
                         {
                             attribute = item;
@@ -258,7 +245,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 throw new NullReferenceException($"Fragment host not found when trying to show View {view.Name} as Nested Fragment");
 
             if (!fragmentHost.IsVisible)
-                throw new InvalidOperationException($"Fragment host is not visible when trying to show View {view.Name} as Nested Fragment");
+                MvxAndroidLog.Instance.Warn("Fragment host is not visible when trying to show View {0} as Nested Fragment", view.Name);
 
             PerformShowFragmentTransaction(fragmentHost.ChildFragmentManager, attribute, request);
         }
@@ -421,11 +408,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             if (attribute.FragmentHostViewType != null)
             {
                 var fragment = GetFragmentByViewType(attribute.FragmentHostViewType);
-                if(fragment == null)
+                if (fragment == null)
                     throw new MvxException("Fragment not found", attribute.FragmentHostViewType.Name);
 
-                if(fragment.View == null)
-                    throw new MvxException("Fragment.View is null. Please consider calling Navigate later in your code", 
+                if (fragment.View == null)
+                    throw new MvxException("Fragment.View is null. Please consider calling Navigate later in your code",
                         attribute.FragmentHostViewType.Name);
 
                 viewPager = fragment.View.FindViewById<ViewPager>(attribute.ViewPagerResourceId);
@@ -438,7 +425,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 var currentActivityViewModelType = GetCurrentActivityViewModelType();
 
                 // if the host Activity is not the top-most Activity, then show it before proceeding, and return false for now
-                if(attribute.ActivityHostViewModelType != currentActivityViewModelType)
+                if (attribute.ActivityHostViewModelType != currentActivityViewModelType)
                 {
                     _pendingRequest = request;
                     ShowHostActivity(attribute);
@@ -477,10 +464,10 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
                 viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(CurrentActivity, fragmentManager, fragments);
             }
-        
+
             return Task.FromResult(true);
         }
-        
+
         protected virtual async Task<bool> ShowTabLayout(
             Type view,
             MvxTabLayoutPresentationAttribute attribute,
@@ -489,7 +476,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             var showViewPagerFragment = await ShowViewPagerFragment(view, attribute, request);
             if (!showViewPagerFragment)
                 return false;
-            
+
             ViewPager viewPager = null;
             TabLayout tabLayout = null;
 
@@ -511,7 +498,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             if (viewPager == null || tabLayout == null)
                 throw new MvxException("ViewPager or TabLayout not found");
-            
+
             tabLayout.SetupWithViewPager(viewPager);
             return true;
 
@@ -519,7 +506,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         #endregion
 
         #region Close implementations
-        protected override Task<bool> CloseFragmentDialog(IMvxViewModel viewModel, 
+        protected override Task<bool> CloseFragmentDialog(IMvxViewModel viewModel,
             MvxDialogFragmentPresentationAttribute attribute)
         {
             var fragmentName = attribute.ViewType.FragmentJavaName();
@@ -533,7 +520,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return Task.FromResult(false);
         }
 
-        protected virtual Task<bool> CloseViewPagerFragment(IMvxViewModel viewModel, 
+        protected virtual Task<bool> CloseViewPagerFragment(IMvxViewModel viewModel,
             MvxViewPagerFragmentPresentationAttribute attribute)
         {
             ViewPager viewPager = null;
@@ -641,12 +628,16 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             if (fragmentManager.BackStackEntryCount > 0)
             {
-                fragmentManager.PopBackStackImmediate(fragmentName, 1);
+                var popBackStackFragmentName = fragmentAttribute.PopBackStackImmediateName?.Trim() == ""
+                    ? fragmentName
+                    : fragmentAttribute.PopBackStackImmediateName;
+
+                fragmentManager.PopBackStackImmediate(popBackStackFragmentName, (int)fragmentAttribute.PopBackStackImmediateFlag);
                 OnFragmentPopped(null, null, fragmentAttribute);
 
                 return true;
             }
-            
+
             if (fragmentManager.Fragments.Count > 0 && fragmentManager.FindFragmentByTag(tag) != null)
             {
                 var ft = fragmentManager.BeginTransaction();
@@ -674,8 +665,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             if (attribute == null)
                 return;
-            
-            if (attribute.EnterAnimation != int.MinValue && 
+
+            if (attribute.EnterAnimation != int.MinValue &&
                 attribute.ExitAnimation != int.MinValue)
             {
                 if (attribute.PopEnterAnimation != int.MinValue &&
@@ -694,7 +685,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                         attribute.ExitAnimation);
                 }
             }
-            
+
             if (attribute.TransitionStyle != int.MinValue)
                 fragmentTransaction.SetTransitionStyle(attribute.TransitionStyle);
         }

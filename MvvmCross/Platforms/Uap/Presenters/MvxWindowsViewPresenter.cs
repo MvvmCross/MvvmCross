@@ -50,37 +50,10 @@ namespace MvvmCross.Platforms.Uap.Presenters
 
         public override void RegisterAttributeTypes()
         {
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxPagePresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (view, attribute, request) => ShowPage(view, attribute, request),
-                    CloseAction = (viewModel, attribute) => ClosePage(viewModel, attribute)
-                });
-
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxSplitViewPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (view, attribute, request) => ShowSplitView(view, (MvxSplitViewPresentationAttribute)attribute, request),
-                    CloseAction = (viewModel, attribute) => CloseSplitView(viewModel, (MvxSplitViewPresentationAttribute)attribute)
-                });
-
-            AttributeTypesToActionsDictionary.Add(
-               typeof(MvxRegionPresentationAttribute),
-               new MvxPresentationAttributeAction
-               {
-                   ShowAction = (view, attribute, request) => ShowRegionView(view, (MvxRegionPresentationAttribute)attribute, request),
-                   CloseAction = (viewModel, attribute) => CloseRegionView(viewModel, (MvxRegionPresentationAttribute)attribute)
-               });
-
-            AttributeTypesToActionsDictionary.Add(
-               typeof(MvxDialogViewPresentationAttribute),
-               new MvxPresentationAttributeAction
-               {
-                   ShowAction = (view, attribute, request) => ShowDialog(view, (MvxDialogViewPresentationAttribute)attribute, request),
-                   CloseAction = (viewModel, attribute) => CloseDialog(viewModel, attribute)
-               });
+            AttributeTypesToActionsDictionary.Register<MvxPagePresentationAttribute>(ShowPage, ClosePage);
+            AttributeTypesToActionsDictionary.Register<MvxSplitViewPresentationAttribute>(ShowSplitView, CloseSplitView);
+            AttributeTypesToActionsDictionary.Register<MvxRegionPresentationAttribute>(ShowRegionView, CloseRegionView);
+            AttributeTypesToActionsDictionary.Register<MvxDialogViewPresentationAttribute>(ShowDialog, CloseDialog);
         }
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
