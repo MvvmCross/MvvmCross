@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -105,7 +105,8 @@ namespace MvvmCross.Commands
 
         public MvxCommandBase()
         {
-            if (!Mvx.IoCProvider.TryResolve<IMvxCommandHelper>(out _commandHelper))
+            // fallback on MvxWeakCommandHelper if no IoC has been set up
+            if (!Mvx.IoCProvider?.TryResolve(out _commandHelper) ?? true)
                 _commandHelper = new MvxWeakCommandHelper();
 
             var alwaysOnUIThread = MvxSingletonCache.Instance == null || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
