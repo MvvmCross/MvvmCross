@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using MvvmCross.Commands;
 using Xunit;
 
@@ -37,6 +38,28 @@ namespace MvvmCross.UnitTest.ViewModels
 
             command.Execute();
 
+            Assert.Equal(1, i);
+        }
+
+        [Fact]
+        public void CanExecuteChanged()
+        {
+            var canExecute = false;
+
+            var command = new MvxCommand(() => { }, () => canExecute);
+
+            Assert.False(command.CanExecute());
+
+            var i = 0;
+            command.CanExecuteChanged += (s, e) =>
+            {
+                i++;
+            };
+
+            canExecute = true;
+            command.RaiseCanExecuteChanged();
+
+            Assert.True(command.CanExecute());
             Assert.Equal(1, i);
         }
     }
