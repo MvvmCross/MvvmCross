@@ -6,9 +6,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using MvvmCross.Base;
 using MvvmCross.Commands;
-using MvvmCross.Tests;
 using MvvmCross.UnitTest.Mocks.Dispatchers;
-using MvvmCross.ViewModels;
 using Xunit;
 
 namespace MvvmCross.UnitTest.ViewModels

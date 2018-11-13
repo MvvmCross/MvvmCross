@@ -105,10 +105,12 @@ namespace MvvmCross.Commands
 
         public MvxCommandBase()
         {
-            if (!Mvx.IoCProvider.TryResolve<IMvxCommandHelper>(out _commandHelper))
+            // fallback on MvxWeakCommandHelper if no IoC has been set up
+            if (!Mvx.IoCProvider?.TryResolve(out _commandHelper) ?? true)
                 _commandHelper = new MvxWeakCommandHelper();
 
-            var alwaysOnUIThread = MvxSingletonCache.Instance == null || MvxSingletonCache.Instance.Settings.AlwaysRaiseInpcOnUserInterfaceThread;
+            // default to true if no Singleton Cache has been set up
+            var alwaysOnUIThread = MvxSingletonCache.Instance?.Settings.AlwaysRaiseInpcOnUserInterfaceThread ?? true;
             ShouldAlwaysRaiseCECOnUserInterfaceThread = alwaysOnUIThread;
         }
 

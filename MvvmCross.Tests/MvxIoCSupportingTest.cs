@@ -23,6 +23,7 @@ namespace MvvmCross.Tests
         public void Reset()
         {
             MvxSingleton.ClearAllSingletons();
+            Ioc = null;
         }
 
         protected virtual IMvxIocOptions CreateIocOptions()
