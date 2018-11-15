@@ -13,11 +13,26 @@ using MvvmCross.Logging.LogProviders;
 
 namespace MvvmCross.Tests
 {
-    internal sealed class TestLogProvider : MvxBaseLogProvider
+    public class TestLogProvider : MvxBaseLogProvider
     {
-        protected override Logger GetLogger(string name) => new TestLogger(name).Log;
+        private TestLogger _logger;
 
-        private static string MessageFormatter(string loggerName, MvxLogLevel level, object message, Exception e)
+        public TestLogProvider(TestLogger logger)
+        {
+            _logger = logger;
+        }
+
+        protected override Logger GetLogger(string name)
+        {
+            if (_logger == null)
+            {
+                _logger = new DefaultTestLogger(name);
+            }
+
+            return _logger.Log;
+        }
+
+        public static string MessageFormatter(string loggerName, MvxLogLevel level, object message, Exception e)
         {
             var stringBuilder = new StringBuilder();
             stringBuilder.Append(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture));
@@ -40,32 +55,37 @@ namespace MvvmCross.Tests
             return stringBuilder.ToString();
         }
 
-        public class TestLogger
+        private class DefaultTestLogger : TestLogger
         {
-            private readonly string _name;
+            public DefaultTestLogger(string name)
+                : base(name) { }
 
-            public TestLogger(string name)
+            protected override void Write(MvxLogLevel logLevel, string message, Exception e = null)
             {
-                _name = name;
-            }
-
-            public bool Log(MvxLogLevel logLevel, Func<string> messageFunc, Exception exception,
-                params object[] formatParameters)
-            {
-                if (messageFunc == null) return true;
-
-                messageFunc = LogMessageFormatter.SimulateStructuredLogging(messageFunc, formatParameters);
-
-                Write(logLevel, messageFunc(), exception);
-                return true;
-            }
-
-            protected void Write(MvxLogLevel logLevel, string message, Exception e = null)
-            {
-                var formattedMessage = MessageFormatter(_name, logLevel, message, e);
-
-                //Console.WriteLine(formattedMessage);
             }
         }
+    }
+
+    public abstract class TestLogger
+    {
+        private readonly string _name;
+
+        public TestLogger(string name)
+        {
+            _name = name;
+        }
+
+        public bool Log(MvxLogLevel logLevel, Func<string> messageFunc, Exception exception,
+            params object[] formatParameters)
+        {
+            if (messageFunc == null) return true;
+
+            messageFunc = LogMessageFormatter.SimulateStructuredLogging(messageFunc, formatParameters);
+
+            Write(logLevel, messageFunc(), exception);
+            return true;
+        }
+
+        protected abstract void Write(MvxLogLevel logLevel, string message, Exception e = null);
     }
 }
