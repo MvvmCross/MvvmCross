@@ -4,14 +4,17 @@
 
 using MvvmCross.Binding.Parse.Binding;
 using MvvmCross.Tests;
+using MvvmCross.UnitTest.Common;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace MvvmCross.UnitTest.Binding.Parse.Binding
 {
     public abstract class MvxBindingTest : IClassFixture<MvxTestFixture>
     {
-        public MvxBindingTest(MvxTestFixture fixture)
+        public MvxBindingTest(MvxTestFixture fixture, ITestOutputHelper testOutputHelper)
         {
+            fixture.SetupTestLogger(new XunitTestLogger("MvxTest", testOutputHelper));
         }
 
         protected void AssertAreEquivalent(MvxSerializableBindingSpecification expected,
