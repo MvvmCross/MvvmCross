@@ -10,6 +10,7 @@ var solutionName = "MvvmCross";
 var repoName = "mvvmcross/mvvmcross";
 var sln = new FilePath("./" + solutionName + ".sln");
 var outputDir = new DirectoryPath("./artifacts");
+var gitVersionLog = new FilePath("./artifacts/gitversion.log");
 var nuspecDir = new DirectoryPath("./nuspec");
 var nugetPackagesDir = new DirectoryPath("./nuget/packages");
 var target = Argument("target", "Default");
@@ -24,10 +25,13 @@ var didSignPackages = false;
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 GitVersion versionInfo = null;
 
-Setup(context => {
-    versionInfo = context.GitVersion(new GitVersionSettings {
+Setup(context => 
+{
+    versionInfo = context.GitVersion(new GitVersionSettings 
+    {
         UpdateAssemblyInfo = true,
-        OutputType = GitVersionOutput.Json
+        OutputType = GitVersionOutput.Json,
+        LogFilePath = gitVersionLog
     });
 
     if (isRunningOnAppVeyor)
