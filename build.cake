@@ -31,7 +31,7 @@ Setup(context =>
     {
         UpdateAssemblyInfo = true,
         OutputType = GitVersionOutput.Json,
-        LogFilePath = gitVersionLog
+        LogFilePath = gitVersionLog.MakeAbsolute(context.Environment)
     });
 
     if (isRunningOnAppVeyor)
@@ -249,17 +249,15 @@ Task("UploadAppVeyorArtifact")
 {
     Information("Artifacts Dir: {0}", outputDir.FullPath);
 
-    var uploadSettings = new AppVeyorUploadArtifactsSettings();
+    var uploadSettings = new AppVeyorUploadArtifactsSettings {
+        ArtifactType = AppVeyorUploadArtifactType.Auto
+    };
 
     var artifacts = GetFiles(outputDir.FullPath + "/**/*");
 
-    foreach(var file in artifacts) {
+    foreach(var file in artifacts) 
+    {
         Information("Uploading {0}", file.FullPath);
-
-        if (file.GetExtension().Contains("nupkg"))
-            uploadSettings.ArtifactType = AppVeyorUploadArtifactType.NuGetPackage;
-        else
-            uploadSettings.ArtifactType = AppVeyorUploadArtifactType.Auto;
 
         AppVeyor.UploadArtifact(file.FullPath, uploadSettings);
     }
