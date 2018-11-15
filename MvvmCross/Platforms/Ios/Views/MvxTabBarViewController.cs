@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Foundation;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.ViewModels;
@@ -14,6 +15,35 @@ namespace MvvmCross.Platforms.Ios.Views
 {
     public class MvxTabBarViewController : MvxBaseTabBarViewController, IMvxTabBarViewController
     {
+        public MvxTabBarViewController() : base()
+        {
+            // WORKAROUND: UIKit makes a first ViewDidLoad call, because a TabViewController expects it's view (tabs) to be drawn 
+            // on construction. Therefore we need to call ViewDidLoad "manually", otherwise ViewModel will be null
+            ViewDidLoad();
+        }
+
+        public MvxTabBarViewController(NSCoder coder) : base(coder)
+        {
+            // WORKAROUND: UIKit makes a first ViewDidLoad call, because a TabViewController expects it's view (tabs) to be drawn 
+            // on construction. Therefore we need to call ViewDidLoad "manually", otherwise ViewModel will be null
+            ViewDidLoad();
+        }
+
+        protected MvxTabBarViewController(NSObjectFlag t) : base(t)
+        {
+        }
+
+        protected internal MvxTabBarViewController(IntPtr handle) : base(handle)
+        {
+        }
+
+        public MvxTabBarViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+            // WORKAROUND: UIKit makes a first ViewDidLoad call, because a TabViewController expects it's view (tabs) to be drawn 
+            // on construction. Therefore we need to call ViewDidLoad "manually", otherwise ViewModel will be null
+            ViewDidLoad();
+        }
+
         private int _tabsCount = 0;
 
         public virtual UIViewController VisibleUIViewController
@@ -38,17 +68,6 @@ namespace MvvmCross.Platforms.Ios.Views
                     return topViewController;
                 }
             }
-        }
-
-        public MvxTabBarViewController() : base()
-        {
-            // WORKAROUND: UIKit makes a first ViewDidLoad call, because a TabViewController expects it's view (tabs) to be drawn 
-            // on construction. Therefore we need to call ViewDidLoad "manually", otherwise ViewModel will be null
-            ViewDidLoad();
-        }
-
-        public MvxTabBarViewController(IntPtr handle) : base(handle)
-        {
         }
 
         public override void ViewWillDisappear(bool animated)
@@ -214,18 +233,30 @@ namespace MvvmCross.Platforms.Ios.Views
     public class MvxTabBarViewController<TViewModel> : MvxTabBarViewController
         where TViewModel : IMvxViewModel
     {
+        public MvxTabBarViewController()
+        {
+        }
+
+        public MvxTabBarViewController(NSCoder coder) : base(coder)
+        {
+        }
+
+        public MvxTabBarViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+        }
+
+        protected MvxTabBarViewController(NSObjectFlag t) : base(t)
+        {
+        }
+
+        protected internal MvxTabBarViewController(IntPtr handle) : base(handle)
+        {
+        }
+
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
-        }
-
-        public MvxTabBarViewController() : base()
-        {
-        }
-
-        public MvxTabBarViewController(IntPtr handle) : base(handle)
-        {
         }
     }
 }

@@ -14,19 +14,27 @@ namespace MvvmCross.Platforms.Ios.Views
     public class MvxViewController
         : MvxEventSourceViewController, IMvxIosView
     {
-        public MvxViewController()
+        public MvxViewController() : base()
         {
             this.AdaptForBinding();
         }
 
-        public MvxViewController(IntPtr handle)
-            : base(handle)
+        public MvxViewController(NSCoder coder) : base(coder)
         {
             this.AdaptForBinding();
         }
 
-        protected MvxViewController(string nibName, NSBundle bundle)
-            : base(nibName, bundle)
+        protected MvxViewController(NSObjectFlag t) : base(t)
+        {
+            this.AdaptForBinding();
+        }
+
+        protected internal MvxViewController(IntPtr handle) : base(handle)
+        {
+            this.AdaptForBinding();
+        }
+
+        public MvxViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
         {
             this.AdaptForBinding();
         }
@@ -97,13 +105,19 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        public MvxViewController(IntPtr handle)
-            : base(handle)
+        public MvxViewController(NSCoder coder) : base(coder)
         {
         }
 
-        protected MvxViewController(string nibName, NSBundle bundle)
-            : base(nibName, bundle)
+        public MvxViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+        }
+
+        protected MvxViewController(NSObjectFlag t) : base(t)
+        {
+        }
+
+        protected internal MvxViewController(IntPtr handle) : base(handle)
         {
         }
 
