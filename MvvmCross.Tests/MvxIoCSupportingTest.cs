@@ -13,6 +13,8 @@ namespace MvvmCross.Tests
 {
     public class MvxIoCSupportingTest
     {
+        private TestLogger _logger;
+
         public IMvxIoCProvider Ioc { get; private set; }
 
         public void Setup()
@@ -61,9 +63,15 @@ namespace MvvmCross.Tests
         {
         }
 
+        public void SetupTestLogger(TestLogger logger)
+        {
+            _logger = logger;
+            CreateLog();
+        }
+
         protected virtual void CreateLog()
         {
-            var logProvider = new TestLogProvider();
+            var logProvider = new TestLogProvider(_logger);
             Ioc.RegisterSingleton<IMvxLogProvider>(logProvider);
 
             var globalLog = logProvider.GetLogFor<MvxLog>();
