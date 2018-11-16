@@ -42,6 +42,8 @@ namespace MvvmCross.Plugin.Sidebar
             MvxSidebarPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
+            if (!await CloseModalViewControllers()) return false;
+            
             if (SideBarViewController == null)
             {
                 if (!await ShowRootViewController(new MvxSidebarViewController(), null, request)) return false;
