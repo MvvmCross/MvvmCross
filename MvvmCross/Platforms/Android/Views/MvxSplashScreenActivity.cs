@@ -93,6 +93,11 @@ namespace MvvmCross.Platforms.Android.Views
                 await startup.StartAsync(GetAppStartHint(bundle));
         }
 
+        protected virtual object GetAppStartHint(object hint = null)
+        {
+            return null;
+        }
+
         protected virtual void RegisterSetup()
         {
         }

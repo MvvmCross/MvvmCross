@@ -93,6 +93,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 await startup.StartAsync(GetAppStartHint(bundle));
         }
 
+        protected virtual object GetAppStartHint(object hint = null)
+        {
+            return null;
+        }
+
         protected virtual void RegisterSetup()
         {
         }
