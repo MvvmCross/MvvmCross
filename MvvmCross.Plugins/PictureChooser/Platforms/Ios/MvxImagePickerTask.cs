@@ -28,16 +28,33 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
 
         private UIImagePickerController EnsurePickerController()
         {
-            if (_picker != null) return _picker;
+            if (_picker != null)
+            {
+                UnsubscribeEvents();
+                SubscribeEvents();
+                return _picker;
+            }
 
             _picker = new UIImagePickerController();
-            _picker.FinishedPickingMedia += Picker_FinishedPickingMedia;
-            _picker.FinishedPickingImage += Picker_FinishedPickingImage;
-            _picker.Canceled += Picker_Canceled;
+            SubscribeEvents();
 
             return _picker;
         }
 
+        private void SubscribeEvents()
+        {
+            _picker.FinishedPickingMedia += Picker_FinishedPickingMedia;
+            _picker.FinishedPickingImage += Picker_FinishedPickingImage;
+            _picker.Canceled += Picker_Canceled;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            _picker.FinishedPickingMedia -= Picker_FinishedPickingMedia;
+            _picker.FinishedPickingImage -= Picker_FinishedPickingImage;
+            _picker.Canceled -= Picker_Canceled;
+        }
+        
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable,
                                      Action assumeCancelled)
         {
@@ -104,7 +121,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
                     image = image.ImageToFitSize(new CGSize(_maxPixelDimension, _maxPixelDimension));
                 }
 
-                using (NSData data = image.AsJPEG(_percentQuality / 100f))
+                using (var data = image.AsJPEG(_percentQuality / 100f))
                 {
                     var byteArray = new byte[data.Length];
                     Marshal.Copy(data.Bytes, byteArray, 0, Convert.ToInt32(data.Length));
@@ -123,23 +140,28 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
 
         private void Picker_FinishedPickingMedia(object sender, UIImagePickerMediaPickedEventArgs e)
         {
-            NSUrl referenceURL = e.Info[new NSString("UIImagePickerControllerReferenceURL")] as NSUrl;
+            // As of iOS 12, multiple taps on an image in the library may lead to the FinishedPickingImage event
+            // being fired more than once (see #3215). We unsubscribe from the controller events to prevent this.
+            UnsubscribeEvents();
+            var referenceURL = e.Info[new NSString("UIImagePickerControllerReferenceURL")] as NSUrl;
             var image = e.EditedImage ?? e.OriginalImage;
-            HandleImagePick(sender as UIImagePickerController, image, referenceURL != null ? referenceURL.AbsoluteString : string.Empty);
+            HandleImagePick((UIImagePickerController)sender, image, referenceURL != null ? referenceURL.AbsoluteString : string.Empty);
         }
 
         private void Picker_FinishedPickingImage(object sender, UIImagePickerImagePickedEventArgs e)
         {
-            NSUrl referenceURL = e.EditingInfo["UIImagePickerControllerReferenceURL"] as NSUrl;
+            UnsubscribeEvents();
+            var referenceURL = e.EditingInfo["UIImagePickerControllerReferenceURL"] as NSUrl;
             var image = e.Image;
-            HandleImagePick(sender as UIImagePickerController, image, referenceURL != null ? referenceURL.AbsoluteString : string.Empty);
+            HandleImagePick((UIImagePickerController)sender, image, referenceURL != null ? referenceURL.AbsoluteString : string.Empty);
         }
 
         private void Picker_Canceled(object sender, EventArgs e)
         {
+            UnsubscribeEvents();
             ClearCurrentlyActive();
             _assumeCancelled?.Invoke();
-            (sender as UIImagePickerController).DismissViewController(true, () => { });        
+            ((UIImagePickerController) sender).DismissViewController(true, () => { });        
         }
 
         private void SetCurrentlyActive()
