@@ -189,10 +189,10 @@ namespace Playground.Core.ViewModels
         {
             Log.Warn(() => "Testing log");
 
-            await base.Initialize();
+            await base.Initialize().ConfigureAwait(false);
 
             // Uncomment this to demonstrate use of StartAsync for async first navigation
-            // await Task.Delay(5000);
+            //await Task.Delay(5000).ConfigureAwait(false);
 
             _mvxViewModelLoader.LoadViewModel(MvxViewModelRequest.GetDefaultRequest(typeof(ChildViewModel)),
                 new SampleModel
@@ -202,7 +202,7 @@ namespace Playground.Core.ViewModels
                 },
                 null);
 
-            await MakeRequest();
+            await MakeRequest().ConfigureAwait(false);
         }
 
         public override void ViewAppearing()
@@ -254,7 +254,7 @@ namespace Playground.Core.ViewModels
                 {
                     var task = client.MakeRequestAsync(request);
 
-                    var result = await task;
+                    var result = await task.ConfigureAwait(false);
 
                     return result;
                 }
