@@ -4,6 +4,7 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+using MvvmCross.Base;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
@@ -25,7 +26,8 @@ namespace MvvmCross.ViewModels
 
         public void Start(object hint = null)
         {
-            StartAsync(hint).GetAwaiter().GetResult();
+            // force start to run serially on current thread
+            MvxAsyncPump.Run(() => StartAsync(hint));
         }
 
         public async Task StartAsync(object hint = null)
@@ -34,20 +36,20 @@ namespace MvvmCross.ViewModels
             if (Interlocked.CompareExchange(ref startHasCommenced, 1, 0) == 1)
                 return;
 
-            var applicationHint = await ApplicationStartup(hint).ConfigureAwait(false);
+            var applicationHint = await ApplicationStartup(hint);
             if (applicationHint != null)
             {
                 MvxLog.Instance.Trace("Hint ignored in default MvxAppStart");
             }
 
-            await NavigateToFirstViewModel(applicationHint).ConfigureAwait(false);
+            await NavigateToFirstViewModel(applicationHint);
         }
 
         protected abstract Task NavigateToFirstViewModel(object hint = null);
 
         protected virtual async Task<object> ApplicationStartup(object hint = null)
         {
-            await Application.Startup().ConfigureAwait(false);
+            await Application.Startup();
             return hint;
         }
 
@@ -76,7 +78,7 @@ namespace MvvmCross.ViewModels
         {
             try
             {
-                await NavigationService.Navigate<TViewModel>().ConfigureAwait(false);
+                await NavigationService.Navigate<TViewModel>();
             }
             catch (System.Exception exception)
             {
@@ -93,7 +95,7 @@ namespace MvvmCross.ViewModels
 
         protected override async Task<object> ApplicationStartup(object hint = null)
         {
-            var applicationHint = await base.ApplicationStartup(hint).ConfigureAwait(false);
+            var applicationHint = await base.ApplicationStartup(hint);
             if (applicationHint is TParameter parameter && Application is IMvxApplication<TParameter> typedApplication)
                 return typedApplication.Startup(parameter);
             else
@@ -106,12 +108,12 @@ namespace MvvmCross.ViewModels
             {
                 if (hint is TParameter parameter)
                 {
-                    await NavigationService.Navigate<TViewModel, TParameter>(parameter).ConfigureAwait(false);
+                    await NavigationService.Navigate<TViewModel, TParameter>(parameter);
                 }
                 else
                 {
                     MvxLog.Instance.Trace($"Hint is not matching type of {nameof(TParameter)}. Doing navigation without typed parameter instead.");
-                    await base.NavigateToFirstViewModel(hint).ConfigureAwait(false);
+                    await base.NavigateToFirstViewModel(hint);
                 }
             }
             catch (System.Exception exception)
