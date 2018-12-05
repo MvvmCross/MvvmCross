@@ -45,7 +45,10 @@ namespace MvvmCross.Base
 
                 task.GetAwaiter().GetResult();
             }
-            finally { SynchronizationContext.SetSynchronizationContext(oldContext); }
+            finally
+            {
+                SynchronizationContext.SetSynchronizationContext(oldContext);
+            }
         }
 
         /// <summary>
