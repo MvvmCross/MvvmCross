@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -38,7 +38,10 @@ namespace MvvmCross.Base
                 if (task == null)
                     throw new InvalidOperationException("No task provided.");
 
-                task.ContinueWith(delegate { synchronousContext.Complete(); }, TaskScheduler.Default);
+                task.ContinueWith(delegate 
+                {
+                    synchronousContext.Complete();
+                }, TaskScheduler.Default);
 
                 // Pump continuations and propagate any exceptions
                 synchronousContext.RunOnCurrentThread();
@@ -74,6 +77,9 @@ namespace MvvmCross.Base
             {
                 if (callback == null)
                     throw new ArgumentNullException("d");
+
+                if (_queue.IsAddingCompleted)
+                    return;
 
                 _queue.Add(Tuple.Create(callback, state));
             }
