@@ -31,6 +31,8 @@ The current state of Visual Studio for Mac doesn't allow us to build MvvmCross. 
 
 On Windows, simply run MvvmCross in Visual Studio. Note: you need Visual Studio 2017 15.7 or higher to be able to compile.
 
+To debug into the source code of MvvmCross on Mac with Visual Studio for Mac (VSM), run `msbuild MvvmCross.sln /t:Build /p:Configuration=Debug` first to generate the local DLLs, then create VSM projects and add the generated DLLs as local .NET Assembly references. Both break points and line-by-line debugging are supported.
+
 # Make a new release locally
 
 * Open Powershell and run the script
