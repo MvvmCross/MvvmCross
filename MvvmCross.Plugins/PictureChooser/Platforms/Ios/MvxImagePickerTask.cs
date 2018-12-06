@@ -11,6 +11,7 @@ using Foundation;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Ios;
 using MvvmCross.Platforms.Ios.Views;
+using MvvmCross.WeakSubscription;
 using UIKit;
 
 namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
@@ -26,18 +27,50 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
         private Action<Stream, string> _pictureAvailable;
         private Action _assumeCancelled;
 
+        #region Event subscriptions
+
+        private IDisposable _mediaSubscription;
+        private IDisposable _imageSubscription;
+        private IDisposable _cancelledSubscription;
+
+        #endregion
+        
         private UIImagePickerController EnsurePickerController()
         {
-            if (_picker != null) return _picker;
+            if (_picker != null)
+            {
+                UnsubscribeEvents();
+                SubscribeEvents();
+                return _picker;
+            }
 
             _picker = new UIImagePickerController();
-            _picker.FinishedPickingMedia += Picker_FinishedPickingMedia;
-            _picker.FinishedPickingImage += Picker_FinishedPickingImage;
-            _picker.Canceled += Picker_Canceled;
+            SubscribeEvents();
 
             return _picker;
         }
 
+        private void SubscribeEvents()
+        {
+            _mediaSubscription = _picker.WeakSubscribe<UIImagePickerController, UIImagePickerMediaPickedEventArgs>(
+                nameof(_picker.FinishedPickingMedia), Picker_FinishedPickingMedia);
+            
+            _imageSubscription = _picker.WeakSubscribe<UIImagePickerController, UIImagePickerImagePickedEventArgs>(
+                nameof(_picker.FinishedPickingImage), Picker_FinishedPickingImage);
+            
+            _cancelledSubscription = _picker.WeakSubscribe(nameof(_picker.Canceled), Picker_Canceled);
+        }
+
+        private void UnsubscribeEvents()
+        {
+            _mediaSubscription?.Dispose();
+            _mediaSubscription = null;
+            _imageSubscription?.Dispose();
+            _imageSubscription = null;
+            _cancelledSubscription?.Dispose();
+            _cancelledSubscription = null;
+        }
+        
         public void ChoosePictureFromLibrary(int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable,
                                      Action assumeCancelled)
         {
@@ -123,23 +156,28 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Ios
 
         private void Picker_FinishedPickingMedia(object sender, UIImagePickerMediaPickedEventArgs e)
         {
-            NSUrl referenceURL = e.Info[new NSString("UIImagePickerControllerReferenceURL")] as NSUrl;
+            // As of iOS 12, multiple taps on an image in the library may lead to the FinishedPickingImage event
+            // being fired more than once (see #3215). We unsubscribe from the controller events to prevent this.
+            UnsubscribeEvents();
+            var referenceURL = e.Info[new NSString("UIImagePickerControllerReferenceURL")] as NSUrl;
             var image = e.EditedImage ?? e.OriginalImage;
-            HandleImagePick(sender as UIImagePickerController, image, referenceURL != null ? referenceURL.AbsoluteString : string.Empty);
+            HandleImagePick((UIImagePickerController)sender, image, referenceURL != null ? referenceURL.AbsoluteString : string.Empty);
         }
 
         private void Picker_FinishedPickingImage(object sender, UIImagePickerImagePickedEventArgs e)
         {
-            NSUrl referenceURL = e.EditingInfo["UIImagePickerControllerReferenceURL"] as NSUrl;
+            UnsubscribeEvents();
+            var referenceURL = e.EditingInfo["UIImagePickerControllerReferenceURL"] as NSUrl;
             var image = e.Image;
-            HandleImagePick(sender as UIImagePickerController, image, referenceURL != null ? referenceURL.AbsoluteString : string.Empty);
+            HandleImagePick((UIImagePickerController)sender, image, referenceURL != null ? referenceURL.AbsoluteString : string.Empty);
         }
 
         private void Picker_Canceled(object sender, EventArgs e)
         {
+            UnsubscribeEvents();
             ClearCurrentlyActive();
             _assumeCancelled?.Invoke();
-            (sender as UIImagePickerController).DismissViewController(true, () => { });        
+            ((UIImagePickerController) sender).DismissViewController(true, () => { });        
         }
 
         private void SetCurrentlyActive()
