@@ -59,13 +59,21 @@ namespace MvvmCross.Base
         /// </summary>
         private sealed class SingleThreadSynchronizationContext : SynchronizationContext
         {
-            private readonly BlockingCollection<Tuple<SendOrPostCallback, object>> _queue =
-                new BlockingCollection<Tuple<SendOrPostCallback, object>>();
+            private readonly BlockingCollection<Tuple<SendOrPostCallback, object>> _queue;
 
-            private readonly Thread _thread = Thread.CurrentThread;
+            private readonly int _ownerThreadId;
 
             internal SingleThreadSynchronizationContext()
             {
+                _ownerThreadId = Environment.CurrentManagedThreadId;
+                _queue =
+                    new BlockingCollection<Tuple<SendOrPostCallback, object>>();
+            }
+
+            private SingleThreadSynchronizationContext(SingleThreadSynchronizationContext toCopy)
+            {
+                _ownerThreadId = toCopy._ownerThreadId;
+                _queue = toCopy._queue;
             }
 
             /// <summary>
@@ -100,6 +108,11 @@ namespace MvvmCross.Base
             /// Notifies the context that no more work will arrive.
             /// </summary>
             public void Complete() => _queue.CompleteAdding();
+
+            public override SynchronizationContext CreateCopy()
+            {
+                return new SingleThreadSynchronizationContext(this);
+            }
         }
     }
 }
