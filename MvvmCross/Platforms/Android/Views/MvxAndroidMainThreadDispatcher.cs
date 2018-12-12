@@ -6,13 +6,12 @@ using System;
 using System.Threading;
 using Android.App;
 using MvvmCross.Base;
+using static MvvmCross.Base.MvxAsyncPump;
 
 namespace MvvmCross.Platforms.Android.Views
 {
     public class MvxAndroidMainThreadDispatcher : MvxMainThreadAsyncDispatcher
     {
-        public override bool IsOnMainThread => Application.SynchronizationContext == SynchronizationContext.Current;
-
         public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (IsOnMainThread)
@@ -26,6 +25,20 @@ namespace MvvmCross.Platforms.Android.Views
             }
 
             return true;
+        }
+
+        public override bool IsOnMainThread
+        {
+            get
+            {
+                if (Application.SynchronizationContext == SynchronizationContext.Current)
+                    return true;
+
+                if (SynchronizationContext.Current is SingleThreadSynchronizationContext)
+                    return true;
+
+                return false;
+            }
         }
     }
 }

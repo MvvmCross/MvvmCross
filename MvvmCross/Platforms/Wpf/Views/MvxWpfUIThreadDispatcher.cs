@@ -3,8 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading;
 using System.Windows.Threading;
 using MvvmCross.Base;
+using static MvvmCross.Base.MvxAsyncPump;
 
 namespace MvvmCross.Platforms.Wpf.Views
 {
@@ -17,8 +19,6 @@ namespace MvvmCross.Platforms.Wpf.Views
         {
             _dispatcher = dispatcher;
         }
-
-        public override bool IsOnMainThread => _dispatcher.CheckAccess();
 
         public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
@@ -36,6 +36,20 @@ namespace MvvmCross.Platforms.Wpf.Views
 
             // TODO - why return bool at all?
             return true;
+        }
+
+        public override bool IsOnMainThread
+        {
+            get
+            {
+                if (_dispatcher.CheckAccess())
+                    return true;
+
+                if (SynchronizationContext.Current is SingleThreadSynchronizationContext)
+                    return true;
+
+                return false;
+            }
         }
     }
 }
