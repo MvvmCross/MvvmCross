@@ -35,10 +35,8 @@ namespace MvvmCross.Platforms.Wpf
 
         public static void Initialize()
         {
-
             if (!IsInDesignTime)
                 return;
-
 
             if (MvxSingleton<IMvxIoCProvider>.Instance == null)
             {
@@ -49,9 +47,7 @@ namespace MvvmCross.Platforms.Wpf
             MvxSetup.RegisterSetupType<MvxWpfSetup<App>>(System.Reflection.Assembly.GetExecutingAssembly());
             var instance = MvxWpfSetupSingleton.EnsureSingletonAvailable(Application.Current.Dispatcher, new Content());
             instance.InitializeAndMonitor(null);
-
         }
-
 
         class App : ViewModels.MvxApplication
         {
@@ -60,6 +56,5 @@ namespace MvvmCross.Platforms.Wpf
         class Content : ContentControl
         {
         }
-
     }
 }

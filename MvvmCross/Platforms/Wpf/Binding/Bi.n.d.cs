@@ -66,7 +66,6 @@ namespace MvvmCross.Platforms.Wpf.Binding
             object sender,
             DependencyPropertyChangedEventArgs args)
         {
-
             var bindingCreator = BindingCreator;
 
             bindingCreator?.CreateBindings(sender, args, ParseBindingDescriptions);
