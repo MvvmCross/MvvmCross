@@ -448,6 +448,78 @@ At this point you should be able to set the `TipCalc.Forms.iOS` as the startup p
 
 ![TipCalc Android Forms]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_Forms_iOS.png)
 
+## Add a Xamarin.UWP project
+
+Xamarin typically provides you with very nice and easy to use templates for creating cross-platform Xamarin.Forms apps. But in this case, same as we did with Android and iOS, we will add a blank application and do all the steps by ourselves.
+
+Add a new project to your solution - a 'Blank App (UWP)' application with name `TipCalc.Forms.UWP`. Set it's minimum version to `Windows 10 Fall Creators Update` as that is the minimum version which supports .NET Standard 2.0.
+
+### Install MvvmCross.Forms package
+
+Open the Nuget Package Manager and search for the package `MvvmCross.Forms`.
+
+If you don't really enjoy the NuGet UI experience, then you can alternatively open the Package Manager Console, and type:
+
+    Install-Package MvvmCross.Forms
+
+Installing this package will also install Xamarin.Forms and the MvvmCross package.
+
+### Add references to TipCalc.Core and TipCalc.Forms.UI
+
+Add a reference to both `TipCalc.Core` and `TipCalc.Forms.UI` projects.
+
+## Delete MainPage.xaml
+
+Because we will add our own view.
+
+### Edit App.xaml.cs
+
+The `App` class plays a very important role on UWP apps, as it provides a set of callback that the OS uses to inform you about events in your application's lifecycle. We won't dig further into it's responsibilities, but you may want to read about it in the official documentation for the platform.
+
+Open the `App.xaml.cs` and delete all the class content. Leave only the default constructor in place:
+
+```c#
+public sealed partial class App
+{
+    public App()
+    {
+        InitializeComponent();
+    }
+}
+```
+
+On the same file add another class, which will contain the necessary information to get MvvmCross up and running:
+
+```c#
+public abstract class TipCalcApp : MvxWindowsApplication<MvxFormsWindowsSetup<App, FormsApp>, App, FormsApp>
+{
+}
+```
+Here we are letting MvvmCross know that:
+- We want to use the default provided `Setup`
+- Our _Core_ application class is `App`
+- Our _Xamarin.Forms_ application class is `FormsApp`
+
+### Edit App.xaml
+
+We will use the TipCalcApp class in Xaml. Open the file and replace all the content for this code:
+
+```xml
+<local:TipCalcApp x:Class="TipCalc.Forms.UWP.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TipCalc.Forms.UWP"
+    RequestedTheme="Light">
+
+</local:TipCalcApp>
+```
+
+What this code snippet does, is to set the App base class type to `TipCalcApp`.
+
+At this point you should be able to set the `TipCalc.Forms.UWP` as the startup project and finally give the app a run! This is what you should see:
+
+![TipCalc UWP]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_UWP.png)
+
 ## Moving on...
 
 There's more we could do to make the Forms User Interface nicer and to make the app richer... but for this first application, we will leave it here for now.
