@@ -4,6 +4,7 @@
 
 using System;
 using System.Windows;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Wpf.Views
@@ -11,6 +12,7 @@ namespace MvvmCross.Platforms.Wpf.Views
     public class MvxWindow : Window, IMvxWindow, IMvxWpfView, IDisposable
     {
         private IMvxViewModel _viewModel;
+        private IMvxBindingContext _bindingContext;
 
         public IMvxViewModel ViewModel
         {
@@ -19,10 +21,26 @@ namespace MvvmCross.Platforms.Wpf.Views
             {
                 _viewModel = value;
                 DataContext = value;
+                BindingContext.DataContext = value;
             }
         }
 
         public string Identifier { get; set; }
+
+        public IMvxBindingContext BindingContext
+        {
+            get
+            {
+                if (_bindingContext != null)
+                    return _bindingContext;
+
+                if (Mvx.IoCProvider != null)
+                    this.CreateBindingContext();
+
+                return _bindingContext;
+            }
+            set => _bindingContext = value;
+        }
 
         public MvxWindow()
         {
