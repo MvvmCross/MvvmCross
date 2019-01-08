@@ -10,7 +10,7 @@ The `ResxLocalization` plugin provides a support class to help use RESX files fo
 The `ResxLocalization` plugin is a single PCL Assembly and isn't really a typical plugin - it doesn't itself register any singletons or services with the MvvmCross IoC container.
 
 To start using it register your Resx file in the App.cs file:
-`Mvx.RegisterSingleton(new MvxResxTextProvider(Strings.ResourceManager));`
+`Mvx.IoCProvider.RegisterSingleton(new MvxResxTextProvider(Strings.ResourceManager));`
 
 For more advice on using the Localization library, see the [blog post](https://mobileprogrammerblog.wordpress.com/2017/12/30/mvvm-cross-with-xamarin-platform-resx-localization) by [@DKrzyczkowski](https://twitter.com/@DKrzyczkowski/).
 
