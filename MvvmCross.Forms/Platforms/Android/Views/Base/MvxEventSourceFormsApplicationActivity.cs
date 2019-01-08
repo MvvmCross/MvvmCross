@@ -28,10 +28,9 @@ namespace MvvmCross.Forms.Platforms.Android.Views.Base
             DestroyCalled.Raise(this);
             base.OnDestroy();
 
-            if (IsTaskRoot)
+            if (IsTaskRoot && Mvx.IoCProvider.TryResolve(out IMvxAppStart startup))
             {
-                var appStart = Mvx.IoCProvider.Resolve<IMvxAppStart>();
-                appStart.ResetStart();
+                startup.ResetStart();
             }
         }
 

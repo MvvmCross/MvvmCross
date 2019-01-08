@@ -36,10 +36,10 @@ namespace MvvmCross.Platforms.Tvos.Core
 
         protected virtual void RunAppStart(object hint = null)
         {
-            var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
-            if (!startup.IsStarted)
+            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
+            {
                 startup.Start(GetAppStartHint(hint));
-
+            }
             Window.MakeKeyAndVisible();
         }
 
