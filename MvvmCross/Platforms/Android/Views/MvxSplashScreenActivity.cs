@@ -35,6 +35,11 @@ namespace MvvmCross.Platforms.Android.Views
             _resourceId = resourceId;
         }
 
+        protected MvxSplashScreenActivity(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
+
         protected virtual void RequestWindowFeatures()
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
