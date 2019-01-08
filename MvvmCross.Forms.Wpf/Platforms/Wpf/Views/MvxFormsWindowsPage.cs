@@ -44,8 +44,7 @@ namespace MvvmCross.Forms.Platforms.Wpf.Views
         {
             MvxWpfSetupSingleton.EnsureSingletonAvailable(Dispatcher, this).EnsureInitialized();
 
-            var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
-            if(!startup.IsStarted)
+            if(Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
                 startup.Start(GetAppStartHint(hint));
 
             LoadFormsApplication();
