@@ -34,6 +34,8 @@ namespace MvvmCross.Platforms.Android.Binding
         public const string EditTextPreference_Text = "Text";
         public const string ListPreference_Value = "Value";
         public const string TwoStatePreference_Checked = "Checked";
+        public const string NumberPicker_Value = "Value";
+        public const string NumberPicker_DisplayedValues = "DisplayedValues";
 
         public const string View_Margin = "Margin";
         public const string View_MarginLeft = "MarginLeft";

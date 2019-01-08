@@ -110,6 +110,15 @@ namespace MvvmCross.Platforms.Android.Binding
                 typeof(SeekBar),
                 MvxAndroidPropertyBinding.SeekBar_Progress);
 
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxNumberPickerValueTargetBinding),
+                typeof(NumberPicker),
+                MvxAndroidPropertyBinding.NumberPicker_Value);
+
+            registry.RegisterCustomBindingFactory<NumberPicker>(
+                MvxAndroidPropertyBinding.NumberPicker_DisplayedValues, 
+                view => new MvxNumberPickerDisplayedValuesTargetBinding(view));
+
             registry.RegisterCustomBindingFactory<View>(
                 MvxAndroidPropertyBinding.View_Visible,
                 view => new MvxViewVisibleBinding(view));
@@ -228,6 +237,8 @@ namespace MvvmCross.Platforms.Android.Binding
             registry.AddOrOverwrite(typeof(CompoundButton), MvxAndroidPropertyBinding.CompoundButton_Checked);
             registry.AddOrOverwrite(typeof(SeekBar), MvxAndroidPropertyBinding.SeekBar_Progress);
             registry.AddOrOverwrite(typeof(SearchView), MvxAndroidPropertyBinding.SearchView_Query);
+            registry.AddOrOverwrite(typeof(NumberPicker), MvxAndroidPropertyBinding.NumberPicker_Value);
+            registry.AddOrOverwrite(typeof(NumberPicker), MvxAndroidPropertyBinding.NumberPicker_DisplayedValues);
         }
 
         protected override void RegisterPlatformSpecificComponents()
