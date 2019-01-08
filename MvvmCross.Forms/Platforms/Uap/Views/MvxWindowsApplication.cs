@@ -25,8 +25,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
             {
                 MvxWindowsSetupSingleton.EnsureSingletonAvailable(RootFrame, activationArgs, nameof(Suspend)).EnsureInitialized();
 
-                var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
-                if (!startup.IsStarted)
+                if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
                     startup.Start(GetAppStartHint(activationArgs));
 
                 var hostType = HostWindowsPageType();

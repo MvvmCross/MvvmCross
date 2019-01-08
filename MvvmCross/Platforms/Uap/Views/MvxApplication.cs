@@ -67,9 +67,10 @@ namespace MvvmCross.Platforms.Uap.Views
             {
                 instance.EnsureInitialized();
 
-                var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
-                if (!startup.IsStarted)
+                if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
+                {
                     startup.Start(GetAppStartHint(activationArgs));
+                }
             }
             else
             {

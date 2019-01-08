@@ -123,9 +123,10 @@ namespace MvvmCross.Platforms.Android.Views
         
         protected virtual void RunAppStart(Bundle bundle)
         {
-            var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
-            if (!startup.IsStarted)
-                startup.Start(GetAppStartHint(bundle));
+            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
+            {
+                await startup.StartAsync(GetAppStartHint(bundle));
+            }
         }
 
         protected virtual object GetAppStartHint(object hint = null)
