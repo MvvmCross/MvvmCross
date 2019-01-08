@@ -35,6 +35,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             _resourceId = resourceId;
         }
 
+        protected MvxSplashScreenAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
+
         protected virtual void RequestWindowFeatures()
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
