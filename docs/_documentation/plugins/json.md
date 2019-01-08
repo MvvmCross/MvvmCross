@@ -68,7 +68,7 @@ public class ExampleObject
     }
 }
 
-var serializer = Mvx.Resolve<IMvxJsonConverter>();
+var serializer = Mvx.IoCProvider.Resolve<IMvxJsonConverter>();
 
 var exampleObject = new ExampleObject()
 {
