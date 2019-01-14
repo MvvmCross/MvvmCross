@@ -1006,6 +1006,7 @@ Android.Widget.TextView | Text
 Android.Widget.CompoundButton | Checked
 Android.Widget.SeekBar | Progress
 Android.Widget.SearchView | Query
+Android.Support.Design.Widget.FloatingActionButton | Click
 MvvmCross.Binding.Droid.Views.MvxListView | ItemsSource
 MvvmCross.Binding.Droid.Views.MvxLinearLayout | ItemsSource
 MvvmCross.Binding.Droid.Views.MvxGridView | ItemsSource
