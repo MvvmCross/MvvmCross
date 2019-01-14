@@ -1085,8 +1085,8 @@ using MvvmCross.Platforms.Android.Binding
 using MvvmCross.Binding.Droid
 ```
 
-Base Control | String | Extension method | Mvx version introduced
----- | --------- | --------- | ---------
+Base Control | String | Extension method | Mvx version introduced | Notes
+---- | --------- | --------- | --------- | ---------
 Android.Views.View | Visible | BindVisible()
 Android.Views.View | Hidden | BindHidden()
 Android.Views.View | Click | BindClick()
@@ -1112,6 +1112,8 @@ Android.Widget.EditText | TextFocus | BindTextFocus()
 Android.Widget.SearchView | Query | BindQuery()
 Android.Widget.RatingBar | Rating | BindRating()
 Android.Widget.AdapterView | SelectedItemPosition | BindSelectedItemPosition()
+Android.Widget.NumberPicker | DisplayedValues | BindDisplayedValues() | 6.3 | Must be before `Value` binding
+Android.Widget.NumberPicker | Value | BindValue() | 6.3 | Must be after `DislayedValues` binding
 Android.Preferences.Preference | Value | BindValue()
 Android.Preferences.EditTextPreference | Text | BindText()
 Android.Preferences.ListPreference | Value | BindValue()
@@ -1151,7 +1153,7 @@ MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatRadioGroup | SelectedIte
 **Android - `using MvvmCross.Droid.Support.V7.Preference`**
 
 Base Control | String | Extension method | Mvx version introduced
----- | --------- | ---------
+---- | --------- | --------- | ---------
 Android.Support.V7.Preferences.Preference | Value | BindValue()
 Android.Support.V7.Preferences.ListPreference | Value | BindValue()
 Android.Support.V7.Preferences.EditTextPreference | Text | BindText()
