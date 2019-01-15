@@ -621,14 +621,17 @@ namespace MvvmCross.Platforms.Android.Presenters
                 //let's try again finding it
                 var frag = parentFrag?.ChildFragmentManager?.FindFragmentByTag(fragmentName);
 
+                if (frag == null)
+                {
+                    //reloop for other fragments
+                    frag = FindFragmentInChildren(fragmentName, parentFrag?.ChildFragmentManager);
+                }
+
                 //if we found the frag lets return it!
                 if (frag != null)
                 {
                     return frag;
                 }
-
-                //reloop for other fragments
-                FindFragmentInChildren(fragmentName, parentFrag?.ChildFragmentManager);
             }
 
             return null;
