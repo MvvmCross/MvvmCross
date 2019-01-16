@@ -726,14 +726,17 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 //let's try again finding it
                 var frag = fragment?.ChildFragmentManager?.FindFragmentByTag(fragmentName);
 
+                if (frag == null)
+                {
+                    //re-loop for other fragments
+                    frag = FindFragmentInChildren(fragmentName, fragment?.ChildFragmentManager);
+                }
+
                 //if we found the frag lets return it!
                 if (frag != null)
                 {
                     return frag;
-                }
-
-                //re-loop for other fragments
-                FindFragmentInChildren(fragmentName, fragment?.ChildFragmentManager);
+                }                
             }
 
             return null;
