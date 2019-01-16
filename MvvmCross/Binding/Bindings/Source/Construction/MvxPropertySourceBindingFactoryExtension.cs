@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -98,16 +98,16 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
             PropertyInfo pi;
             if (PropertyInfoCache.TryGetValue(key, out pi))
                 return pi;
-            
-            //Try top level properties first
-            //This extension method "GetProperty" always uses the DeclaredOnly flag
-            pi = sourceType.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public);
 
-            if (pi == null)
+            while (sourceType != null)
             {
-                //Try base properties. 
-                //This extension method "GetProperty" uses runtime properties instead of simple non declared properties (ie: in hierarchy)
-                pi = sourceType.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
+                //Use BindingFlags.DeclaredOnly to avoid AmbiguousMatchException
+                pi = sourceType.GetProperty(propertyName, BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance);
+                if (pi != null)
+                {
+                    break;
+                }
+                sourceType = sourceType.BaseType;
             }
 
             PropertyInfoCache.TryAdd(key, pi);
