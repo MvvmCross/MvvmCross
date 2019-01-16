@@ -9,6 +9,7 @@ This package contains the 'MvvmCross.Platforms.Wpf' libraries for MvvmCross</Des
     <PackageId>MvvmCross.Platforms.Wpf</PackageId>
     <EnableDefaultItems>false</EnableDefaultItems>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+    <ExtrasEnableWpfProjectSetup>true</ExtrasEnableWpfProjectSetup>
   </PropertyGroup>
 
   <ItemGroup>
