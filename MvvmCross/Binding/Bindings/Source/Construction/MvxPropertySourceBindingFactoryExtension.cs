@@ -99,6 +99,7 @@ namespace MvvmCross.Binding.Bindings.Source.Construction
             if (PropertyInfoCache.TryGetValue(key, out pi))
                 return pi;
 
+            //Get lowest property
             while (sourceType != null)
             {
                 //Use BindingFlags.DeclaredOnly to avoid AmbiguousMatchException
