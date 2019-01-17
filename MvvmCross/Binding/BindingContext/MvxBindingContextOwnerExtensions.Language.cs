@@ -24,15 +24,26 @@ namespace MvvmCross.Binding.BindingContext
             owner.BindLanguage(target, targetPath, sourceKey);
         }
 
+        public static void BindLanguage<TTarget>(this IMvxBindingContextOwner owner
+                                                 , TTarget target
+                                                 , string sourceKey
+                                                 , MvxBindingMode bindingMode)
+        {
+            var parser = PropertyExpressionParser;
+            var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
+            owner.BindLanguage(target, targetPath, sourceKey, bindingMode: bindingMode);
+        }
+
         public static void BindLanguage<TTarget, TViewModel>(this IMvxBindingContextOwner owner
                                                              , TTarget target
                                                              , string sourceKey
-                                                             , Expression<Func<TViewModel, IMvxTextProvider>> textProvider)
+                                                             , Expression<Func<TViewModel, IMvxTextProvider>> textProvider
+                                                             , MvxBindingMode bindingMode = MvxBindingMode.OneTime)
         {
             var parser = PropertyExpressionParser;
             var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
             var sourcePath = parser.Parse(textProvider).Print();
-            owner.BindLanguage(target, targetPath, sourceKey, sourcePath);
+            owner.BindLanguage(target, targetPath, sourceKey, sourcePath, bindingMode: bindingMode);
         }
 
         public static void BindLanguage<TTarget>(this IMvxBindingContextOwner owner
