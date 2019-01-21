@@ -24,8 +24,17 @@ namespace MvvmCross.IoC
             {
                 // MvxLog.Instance can be null, when reflecting for Setup.cs
                 // Check for null
+
                 MvxLog.Instance?.Warn("ReflectionTypeLoadException masked during loading of {0} - error {1}",
-                    assembly.FullName, e.ToLongString());
+                                      assembly.FullName, e.ToLongString());
+
+                if (e.LoaderExceptions != null)
+                {
+                    foreach (var excp in e.LoaderExceptions)
+                    {
+                        MvxLog.Instance?.Warn(e.Message);
+                    }
+                }
 
                 if (Debugger.IsAttached)
                     Debugger.Break();
