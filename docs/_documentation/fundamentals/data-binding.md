@@ -552,22 +552,14 @@ private string _firstName;
 public string FirstName
 {
     get => _firstName;
-    set 
-    { 
-        if (SetProperty(ref _firstName, value))
-            RaisePropertyChanged(() => FullName);
-    }
+    set => SetProperty(ref _firstName, value, () => RaisePropertyChanged(() => FullName));
 }
 
 private string _lastName;
 public string LastName
 {
     get => _lastName;
-    set 
-    { 
-        if (SetProperty(ref _lastName, value))
-            RaisePropertyChanged(() => FullName);
-    }
+    set => SetProperty(ref _lastName, value, () => RaisePropertyChanged(() => FullName));
 }
 
 public string FullName => _firstName + " " + _lastName;
