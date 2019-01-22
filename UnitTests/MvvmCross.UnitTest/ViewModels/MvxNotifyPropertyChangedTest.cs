@@ -31,6 +31,19 @@ namespace MvvmCross.UnitTest.ViewModels
             public string Foo { get => _foo; set => SetProperty(ref _foo, value); }
         }
 
+        public class TestInpc2 : MvxNotifyPropertyChanged
+        {
+            public int TestActionValue;
+
+            private string _foo;
+
+            public string Foo
+            {
+                get => _foo;
+                set => SetProperty(ref _foo, value, () => TestActionValue++);
+            }
+        }
+
         [Fact]
         public void Test_RaisePropertyChangingForExpression()
         {
@@ -220,6 +233,22 @@ namespace MvvmCross.UnitTest.ViewModels
             Assert.Equal(1, dispatcher.Count);
             Assert.True(notified.Count == 2);
             Assert.True(notified[0] == "Foo");
+        }
+
+        [Fact]
+        public void Test_SetPropertyAfterActionCalledAfterPropertyChanged()
+        {
+            _fixture.ClearAll();
+            var dispatcher = new InlineMockMainThreadDispatcher();
+            _fixture.Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
+
+            var t = new TestInpc2();
+            Assert.Equal(0, t.TestActionValue);
+            t.Foo = "Foo";
+            Assert.Equal(1, t.TestActionValue);
+            t.Foo = "Foobar";
+            Assert.Equal(2, t.TestActionValue);
+            Assert.NotEqual(0, t.TestActionValue);
         }
 
         public class Interceptor : IMvxInpcInterceptor
