@@ -142,6 +142,18 @@ namespace MvvmCross.ViewModels
         }
 
         [NotifyPropertyChangedInvocator]
+        protected virtual bool SetProperty<T>(ref T storage, T value, Action afterAction, [CallerMemberName] string propertyName = null)
+        {
+            if (!SetProperty(ref storage, value, propertyName))
+            {
+                return false;
+            }
+
+            afterAction?.Invoke();
+            return true;
+        }
+
+        [NotifyPropertyChangedInvocator]
         protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(storage, value))
@@ -160,6 +172,7 @@ namespace MvvmCross.ViewModels
             RaisePropertyChanged(propertyName);
             return true;
         }
+
         protected virtual MvxInpcInterceptionResult InterceptRaisePropertyChanged(PropertyChangedEventArgs changedArgs)
         {
             if (MvxSingletonCache.Instance != null)
