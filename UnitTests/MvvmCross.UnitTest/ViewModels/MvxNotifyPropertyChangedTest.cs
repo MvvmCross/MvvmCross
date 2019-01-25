@@ -44,6 +44,25 @@ namespace MvvmCross.UnitTest.ViewModels
             }
         }
 
+        public class TestInpc3 : MvxNotifyPropertyChanged
+        {
+            public int TestActionValue;
+
+            private string _foo;
+
+            public string Foo
+            {
+                get => _foo;
+                set => SetProperty(ref _foo, value, (setPropertyResult) =>
+                {
+                    if (setPropertyResult)
+                    {
+                        TestActionValue++;
+                    }
+                });
+            }
+        }
+
         [Fact]
         public void Test_RaisePropertyChangingForExpression()
         {
@@ -242,13 +261,25 @@ namespace MvvmCross.UnitTest.ViewModels
             var dispatcher = new InlineMockMainThreadDispatcher();
             _fixture.Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
 
-            var t = new TestInpc2();
-            Assert.Equal(0, t.TestActionValue);
-            t.Foo = "Foo";
-            Assert.Equal(1, t.TestActionValue);
-            t.Foo = "Foobar";
-            Assert.Equal(2, t.TestActionValue);
-            Assert.NotEqual(0, t.TestActionValue);
+            var t2 = new TestInpc2();
+            Assert.Equal(0, t2.TestActionValue);
+            t2.Foo = "Foo";
+            Assert.Equal(1, t2.TestActionValue);
+            t2.Foo = "Foo";
+            Assert.Equal(1, t2.TestActionValue);
+            t2.Foo = "Foobar";
+            Assert.Equal(2, t2.TestActionValue);
+            Assert.NotEqual(0, t2.TestActionValue);
+
+            var t3 = new TestInpc3();
+            Assert.Equal(0, t3.TestActionValue);
+            t3.Foo = "Foo";
+            Assert.Equal(1, t3.TestActionValue);
+            t3.Foo = "Foo";
+            Assert.Equal(1, t3.TestActionValue);
+            t3.Foo = "Foobar";
+            Assert.Equal(2, t3.TestActionValue);
+            Assert.NotEqual(0, t3.TestActionValue);
         }
 
         public class Interceptor : IMvxInpcInterceptor

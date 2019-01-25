@@ -142,15 +142,21 @@ namespace MvvmCross.ViewModels
         }
 
         [NotifyPropertyChangedInvocator]
+        protected virtual void SetProperty<T>(ref T storage, T value, Action<bool> action, [CallerMemberName] string propertyName = null)
+        {
+            action?.Invoke(SetProperty(ref storage, value, propertyName));
+        }
+
+        [NotifyPropertyChangedInvocator]
         protected virtual bool SetProperty<T>(ref T storage, T value, Action afterAction, [CallerMemberName] string propertyName = null)
         {
-            if (!SetProperty(ref storage, value, propertyName))
+            if (SetProperty(ref storage, value, propertyName))
             {
-                return false;
+                afterAction?.Invoke();
+                return true;
             }
 
-            afterAction?.Invoke();
-            return true;
+            return false;
         }
 
         [NotifyPropertyChangedInvocator]

@@ -559,7 +559,13 @@ private string _lastName;
 public string LastName
 {
     get => _lastName;
-    set => SetProperty(ref _lastName, value, () => RaisePropertyChanged(() => FullName));
+    set => SetProperty(ref _lastName, value, (setPropertyResult) => 
+    {
+        if (setPropertyResult)
+        {
+            RaisePropertyChanged(() => FullName);
+        }
+    }
 }
 
 public string FullName => _firstName + " " + _lastName;
