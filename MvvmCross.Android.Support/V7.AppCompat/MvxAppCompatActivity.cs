@@ -104,7 +104,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            return hint;
         }
 
         protected override void OnDestroy()

@@ -117,7 +117,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            return hint;
         }
 
         public virtual void InitializeForms(Bundle bundle)

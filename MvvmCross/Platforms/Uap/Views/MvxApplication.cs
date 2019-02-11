@@ -80,7 +80,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            return hint;
         }
 
         protected virtual Frame InitializeFrame(IActivatedEventArgs activationArgs)

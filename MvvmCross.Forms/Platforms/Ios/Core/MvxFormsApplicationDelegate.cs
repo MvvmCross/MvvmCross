@@ -44,7 +44,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            return hint;
         }
 
         protected virtual void LoadFormsApplication()
