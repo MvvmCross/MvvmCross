@@ -37,9 +37,13 @@ namespace MvvmCross.Tests
         {
             // fake set up of the IoC
             Reset();
+            var logProvider = CreateLogProvider();
+            var log = CreateLog(logProvider);
             Ioc = MvxIoCProvider.Initialize(options ?? CreateIocOptions());
             Ioc.RegisterSingleton(Ioc);
-            CreateLog();
+            Ioc.RegisterSingleton(logProvider);
+            Ioc.RegisterSingleton(log);
+
             InitializeSingletonCache();
             InitializeMvxSettings();
             AdditionalSetup();
@@ -66,19 +70,26 @@ namespace MvvmCross.Tests
         public void SetupTestLogger(TestLogger logger)
         {
             _logger = logger;
-            CreateLog();
+
+            var logProvider = CreateLogProvider();
+            var log = CreateLog(logProvider);
+
+            Ioc.RegisterSingleton(logProvider);
+            Ioc.RegisterSingleton(log);
         }
 
-        protected virtual void CreateLog()
+        protected virtual IMvxLogProvider CreateLogProvider()
         {
             var logProvider = new TestLogProvider(_logger);
-            Ioc.RegisterSingleton<IMvxLogProvider>(logProvider);
+            return logProvider;
+        }
 
-            var globalLog = logProvider.GetLogFor<MvxLog>();
+        protected virtual IMvxLog CreateLog(IMvxLogProvider logProvider)
+        {
+            var globalLog = logProvider.GetLogFor<MvxIoCSupportingTest>();
             MvxLog.Instance = globalLog;
-            Ioc.RegisterSingleton(globalLog);
 
-            var pluginLog = logProvider.GetLogFor("MvxPlugin");
+            return globalLog;
         }
 
         public void SetInvariantCulture()
