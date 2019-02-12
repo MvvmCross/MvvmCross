@@ -39,7 +39,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            return hint;
         }
 
         protected virtual void LoadFormsApplication()

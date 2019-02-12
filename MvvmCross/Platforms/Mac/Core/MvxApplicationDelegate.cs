@@ -49,7 +49,7 @@ namespace MvvmCross.Platforms.Mac.Core
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            return hint;
         }
 
         public override void WillBecomeActive(Foundation.NSNotification notification)
