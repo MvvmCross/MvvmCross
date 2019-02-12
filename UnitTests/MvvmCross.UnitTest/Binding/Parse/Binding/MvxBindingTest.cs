@@ -15,6 +15,7 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding
         public MvxBindingTest(MvxTestFixture fixture, ITestOutputHelper testOutputHelper)
         {
             fixture.SetupTestLogger(new XunitTestLogger("MvxTest", testOutputHelper));
+            fixture.ClearAll();
         }
 
         protected void AssertAreEquivalent(MvxSerializableBindingSpecification expected,
