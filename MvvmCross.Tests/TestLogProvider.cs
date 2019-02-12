@@ -65,27 +65,4 @@ namespace MvvmCross.Tests
             }
         }
     }
-
-    public abstract class TestLogger
-    {
-        private readonly string _name;
-
-        public TestLogger(string name)
-        {
-            _name = name;
-        }
-
-        public bool Log(MvxLogLevel logLevel, Func<string> messageFunc, Exception exception,
-            params object[] formatParameters)
-        {
-            if (messageFunc == null) return true;
-
-            messageFunc = LogMessageFormatter.SimulateStructuredLogging(messageFunc, formatParameters);
-
-            Write(logLevel, messageFunc(), exception);
-            return true;
-        }
-
-        protected abstract void Write(MvxLogLevel logLevel, string message, Exception e = null);
-    }
 }
