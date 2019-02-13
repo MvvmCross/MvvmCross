@@ -436,7 +436,7 @@ public class MyTimeAgoValueConverter : MvxValueConverter<DateTime, string>
     {
         get
         {
-            _textProvider = _textProvider ?? Mvx.Resolve<IMvxTextProvider>();
+            _textProvider = _textProvider ?? Mvx.IoCProvider.Resolve<IMvxTextProvider>();
             return _textProvider;
         }
     }

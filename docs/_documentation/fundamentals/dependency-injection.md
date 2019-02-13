@@ -6,7 +6,7 @@ order: 6
 ---
 ## Constructor Injection
 
-As well as `Mvx.Resolve<T>`, the `Mvx` static class provides a reflection based mechanism to automatically resolve parameters during object construction.
+As well as `Mvx.IoCProvider.Resolve<T>`, the `Mvx.IoCProvider` singleton instance provides a reflection based mechanism to automatically resolve parameters during object construction.
 
 For example, if we add a class like:
 
@@ -22,14 +22,14 @@ public class Bar
 
 Then you can create this object using:
 
-        Mvx.IocConstruct<Bar>();
+        Mvx.IoCProvider.IocConstruct<Bar>();
 
 What happens during this call is:
 
 - MvvmCross:
   - uses Reflection to find the constructor of `Bar`
   - looks at the parameters for that constructor and sees it needs an `IFoo`
-  - uses `Mvx.Resolve<IFoo>()` to get hold of the registered implementation for `IFoo`
+  - uses `Mvx.IoCProvider.Resolve<IFoo>()` to get hold of the registered implementation for `IFoo`
   - uses Reflection to call the constructor with the `IFoo` parameter
 
 ### Constructor Injection and ViewModels
@@ -48,7 +48,7 @@ public class MyViewModel : MvxViewModel
 }
 ```
 
-then MvvmCross will use the `Mvx` static class to resolve objects for `jsonConverter` and `locationWatcher` when a `MyViewModel` is created.
+then MvvmCross will use the `Mvx.IoCProvider` singleton instance to resolve objects for `jsonConverter` and `locationWatcher` when a `MyViewModel` is created.
 
 **This is important** because:
 
@@ -58,7 +58,7 @@ then MvvmCross will use the `Mvx` static class to resolve objects for `jsonConve
 
 ### Constructor Injection and Chaining
 
-Internally, the `Mvx.Resolve<T>` mechanism uses constructor injection when new objects are needed.
+Internally, the `Mvx.IoCProvider.Resolve<T>` mechanism uses constructor injection when new objects are needed.
 
 This enables you to register implementations which depend on other interfaces like:
 
@@ -81,9 +81,9 @@ public class TaxCalculator
 
 If you then register this calculator as:
 
-         Mvx.RegisterType<ITaxCalculator, TaxCalculator>();
+         Mvx.IoCProvider.RegisterType<ITaxCalculator, TaxCalculator>();
 
-Then when a client calls `Mvx.Resolve<ITaxCalculator>()` then what will happen is that MvvmCross will create a new `TaxCalculator` instance, resolving all of `ICustomerRepository` `IForeignExchange` and `ITaxRuleList` during the operation.
+Then when a client calls `Mvx.IoCProvider.Resolve<ITaxCalculator>()` then what will happen is that MvvmCross will create a new `TaxCalculator` instance, resolving all of `ICustomerRepository` `IForeignExchange` and `ITaxRuleList` during the operation.
 
 Further, this process is **recursive** - so if any of these returned objects requires another object  - e.g. if your `IForeignExchange` implementation requires a `IChargeCommission` object - then MvvmCross will use `Resolve` to provide an `IChargeCommission` instance for you.
 
@@ -136,7 +136,7 @@ public class FooSingleton : IFooSingleton
 
     public void DoFoo()
     {
-        var bar = Mvx.Resolve<IBar>();
+        var bar = Mvx.IoCProvider.Resolve<IBar>();
         bar.DoStuff();
     }
 }

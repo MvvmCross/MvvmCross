@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using Android.Support.Design.Widget;
 using Android.Support.V7.Widget;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
@@ -44,6 +45,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         public static void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
         {
             registry.AddOrOverwrite(typeof(SearchView), MvxAppCompatPropertyBinding.SearchView_Query);
+            registry.AddOrOverwrite(typeof(FloatingActionButton), MvxAppCompatPropertyBinding.FloatingActionButton_Click);
         }
     }
 }

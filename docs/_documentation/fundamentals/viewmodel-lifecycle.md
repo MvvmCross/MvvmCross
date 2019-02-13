@@ -43,7 +43,7 @@ public class MyViewModel : MvxViewModel
 If you need to send some parameters to a ViewModel, you will want to use this method. MvxViewModel can have two Prepare methods:
 
 - Parameterless `Prepare`: Called in every scenario.
-- `Prepare(TParameter parameter)`: Called when you are navigating to a ViewModel with initial parameters. You shouldn't perform any logics on this method more than saving the parameters.
+- `Prepare(TParameter parameter)`: Called when you are navigating to a ViewModel with initial parameters and after the parameterless version of it. You shouldn't perform any logics on this method more than saving the parameters.
 
 This is how a typical ViewModel with initial parameters look like:
 
@@ -259,7 +259,7 @@ public class DetailViewModel : MvxViewModel
 
     public DetailViewModel()
     {
-        repository = Mvx.Resolve<IDetailRepository>();
+        repository = Mvx.IoCProvider.Resolve<IDetailRepository>();
     }
 
     // ...

@@ -115,7 +115,7 @@ namespace MvvmCross.Platforms.Android.Views
             base.OnCreate(bundle);
             ViewModel?.ViewCreated();
         }
-        
+
         protected override void OnDestroy()
         {
             base.OnDestroy();

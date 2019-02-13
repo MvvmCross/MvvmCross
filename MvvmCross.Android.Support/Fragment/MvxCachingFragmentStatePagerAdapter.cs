@@ -24,10 +24,12 @@ namespace MvvmCross.Droid.Support.V4
 		: MvxCachingFragmentPagerAdapter
     {
         private readonly Context _context;
+        private readonly Type _activityType;
 
-		protected MvxCachingFragmentStatePagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
+        protected MvxCachingFragmentStatePagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
+            _activityType = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType();
         }
 
 		public MvxCachingFragmentStatePagerAdapter(Context context, FragmentManager fragmentManager,
@@ -35,6 +37,7 @@ namespace MvvmCross.Droid.Support.V4
         {
             _context = context;
             FragmentsInfo = fragmentsInfo;
+            _activityType = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType();
         }
 
         public override int Count => FragmentsInfo?.Count() ?? 0;
@@ -50,7 +53,7 @@ namespace MvvmCross.Droid.Support.V4
             if (mvxFragment == null)
                 return fragment;
 
-			if (mvxFragment.GetType().IsFragmentCacheable(Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType()) && fragmentSavedState != null)
+			if (mvxFragment.GetType().IsFragmentCacheable(_activityType) && fragmentSavedState != null)
                 return fragment;
 
             var viewModel = fragInfo.ViewModel ?? CreateViewModel(position);

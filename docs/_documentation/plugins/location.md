@@ -53,7 +53,7 @@ public class LocationService
 
     private void OnError(MvxLocationError error)
     {
-        Mvx.Error("Seen location error {0}", error.Code);
+        Mvx.IoCProvider.Error("Seen location error {0}", error.Code);
     }
 }
 ```
