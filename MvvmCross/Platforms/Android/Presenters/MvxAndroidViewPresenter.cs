@@ -33,7 +33,7 @@ namespace MvvmCross.Platforms.Android.Presenters
         protected MvxViewModelRequest _pendingRequest;
 
         protected virtual FragmentManager CurrentFragmentManager => CurrentActivity.FragmentManager;
-        
+
         private IMvxAndroidCurrentTopActivity _mvxAndroidCurrentTopActivity;
         protected virtual Activity CurrentActivity
         {
@@ -102,29 +102,9 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         public override void RegisterAttributeTypes()
         {
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxActivityPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (view, attribute, request) => ShowActivity(view, (MvxActivityPresentationAttribute)attribute, request),
-                    CloseAction = (viewModel, attribute) => CloseActivity(viewModel, (MvxActivityPresentationAttribute)attribute)
-                });
-
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxFragmentPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (view, attribute, request) => ShowFragment(view, (MvxFragmentPresentationAttribute)attribute, request),
-                    CloseAction = (viewModel, attribute) => CloseFragment(viewModel, (MvxFragmentPresentationAttribute)attribute)
-                });
-
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxDialogFragmentPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (view, attribute, request) => ShowDialogFragment(view, (MvxDialogFragmentPresentationAttribute)attribute, request),
-                    CloseAction = (viewModel, attribute) => CloseFragmentDialog(viewModel, (MvxDialogFragmentPresentationAttribute)attribute)
-                });
+            AttributeTypesToActionsDictionary.Register<MvxActivityPresentationAttribute>(ShowActivity, CloseActivity);
+            AttributeTypesToActionsDictionary.Register<MvxFragmentPresentationAttribute>(ShowFragment, CloseFragment);
+            AttributeTypesToActionsDictionary.Register<MvxDialogFragmentPresentationAttribute>(ShowDialogFragment, CloseFragmentDialog);
         }
 
         public override MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request)
@@ -202,7 +182,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             }
             return null;
         }
-        
+
         protected Type GetCurrentActivityViewModelType()
         {
             Type currentActivityType = CurrentActivity?.GetType();
@@ -344,7 +324,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 throw new NullReferenceException($"Fragment host not found when trying to show View {view.Name} as Nested Fragment");
 
             if (!fragmentHost.IsVisible)
-                throw new InvalidOperationException($"Fragment host is not visible when trying to show View {view.Name} as Nested Fragment");
+                MvxLog.Instance.Warn("Fragment host is not visible when trying to show View {0} as Nested Fragment", view.Name);
 
             PerformShowFragmentTransaction(fragmentHost.ChildFragmentManager, attribute, request);
         }
@@ -568,7 +548,11 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             if (fragmentManager.BackStackEntryCount > 0)
             {
-                fragmentManager.PopBackStackImmediate(fragmentName, PopBackStackFlags.Inclusive);
+                var popBackStackFragmentName = fragmentAttribute.PopBackStackImmediateName?.Trim() == ""
+                    ? fragmentName
+                    : fragmentAttribute.PopBackStackImmediateName;
+
+                fragmentManager.PopBackStackImmediate(popBackStackFragmentName, fragmentAttribute.PopBackStackImmediateFlag.ToNativePopBackStackFlags());
 
                 OnFragmentPopped(null, null, fragmentAttribute);
                 return true;
@@ -627,7 +611,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual Fragment FindFragmentInChildren(string fragmentName, FragmentManager fragManager)
         {
-            if(fragManager.BackStackEntryCount == 0)
+            if (fragManager.BackStackEntryCount == 0)
                 return null;
 
             for (int i = 0; i < fragManager.BackStackEntryCount; i++)
@@ -637,14 +621,17 @@ namespace MvvmCross.Platforms.Android.Presenters
                 //let's try again finding it
                 var frag = parentFrag?.ChildFragmentManager?.FindFragmentByTag(fragmentName);
 
+                if (frag == null)
+                {
+                    //reloop for other fragments
+                    frag = FindFragmentInChildren(fragmentName, parentFrag?.ChildFragmentManager);
+                }
+
                 //if we found the frag lets return it!
                 if (frag != null)
                 {
                     return frag;
                 }
-
-                //reloop for other fragments
-                FindFragmentInChildren(fragmentName, parentFrag?.ChildFragmentManager);
             }
 
             return null;

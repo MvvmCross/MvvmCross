@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -108,7 +108,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             if (bindable != null)
             {
                 var bindingContext = bindable.BindingContext as MvxTaskBasedBindingContext;
-                if (bindingContext != null && _tableView.RowHeight == UITableView.AutomaticDimension)
+                if (bindingContext != null && tableView.RowHeight == UITableView.AutomaticDimension)
                     bindingContext.RunSynchronously = true;
                 bindable.DataContext = item;
             }

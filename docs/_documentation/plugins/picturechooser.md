@@ -25,7 +25,7 @@ This interface is designed for single use only - i.e. each time you require a pi
 The interface can be used as:
 
 ```c#
-var task = Mvx.Resolve<IMvxPictureChooserTask>();
+var task = Mvx.IoCProvider.Resolve<IMvxPictureChooserTask>();
 task.ChoosePictureFromLibrary(500, 90,
 stream => {
     // use the stream
@@ -57,14 +57,14 @@ public interface IMvxCombinedPictureChooserTask
 Client code can test for the availability of this interface using:
 
 ```c#
-var isAvailable = Mvx.CanResolve<IMvxCombinedPictureChooserTask>();
+var isAvailable = Mvx.IoCProvider.CanResolve<IMvxCombinedPictureChooserTask>();
 ```
 
 or:
 
 ```c#
 IMvxCombinedPictureChooserTask combined;
-var isAvailable = Mvx.TryResolve(out combined);
+var isAvailable = Mvx.IoCProvider.TryResolve(out combined);
 ```
 
 Finally, the `PictureChooser` plugin also provides an "InMemoryImage" ValueConverter - `MvxInMemoryImageValueConverter`. This value converter allows images to be decoded from byte arrays for use on-screen.

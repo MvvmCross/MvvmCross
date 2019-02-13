@@ -552,21 +552,19 @@ private string _firstName;
 public string FirstName
 {
     get => _firstName;
-    set 
-    { 
-        if (SetProperty(ref _firstName, value))
-            RaisePropertyChanged(() => FullName);
-    }
+    set => SetProperty(ref _firstName, value, () => RaisePropertyChanged(() => FullName));
 }
 
 private string _lastName;
 public string LastName
 {
     get => _lastName;
-    set 
-    { 
-        if (SetProperty(ref _lastName, value))
+    set => SetProperty(ref _lastName, value, (setPropertyResult) => 
+    {
+        if (setPropertyResult)
+        {
             RaisePropertyChanged(() => FullName);
+        }
     }
 }
 
@@ -909,7 +907,7 @@ protected override void InitializeLastChance()
         
  - WPF
 
-    xmlns:mvx="clr-namespace:mvx;assembly=MvvmCross.Binding.Wpf"
+    xmlns:mvx="clr-namespace:MvvmCross.Platforms.Wpf.Binding;assembly=MvvmCross.Platforms.Wpf"
 
 
 - in your Xaml files you can now include bindings within tags such as:
@@ -1006,6 +1004,7 @@ Android.Widget.TextView | Text
 Android.Widget.CompoundButton | Checked
 Android.Widget.SeekBar | Progress
 Android.Widget.SearchView | Query
+Android.Support.Design.Widget.FloatingActionButton | Click
 MvvmCross.Binding.Droid.Views.MvxListView | ItemsSource
 MvvmCross.Binding.Droid.Views.MvxLinearLayout | ItemsSource
 MvvmCross.Binding.Droid.Views.MvxGridView | ItemsSource
@@ -1084,8 +1083,8 @@ using MvvmCross.Platforms.Android.Binding
 using MvvmCross.Binding.Droid
 ```
 
-Base Control | String | Extension method | Mvx version introduced
----- | --------- | --------- | ---------
+Base Control | String | Extension method | Mvx version introduced | Notes
+---- | --------- | --------- | --------- | ---------
 Android.Views.View | Visible | BindVisible()
 Android.Views.View | Hidden | BindHidden()
 Android.Views.View | Click | BindClick()
@@ -1111,6 +1110,8 @@ Android.Widget.EditText | TextFocus | BindTextFocus()
 Android.Widget.SearchView | Query | BindQuery()
 Android.Widget.RatingBar | Rating | BindRating()
 Android.Widget.AdapterView | SelectedItemPosition | BindSelectedItemPosition()
+Android.Widget.NumberPicker | DisplayedValues | BindDisplayedValues() | 6.2.3 | Must be before `Value` binding
+Android.Widget.NumberPicker | Value | BindValue() | 6.2.3 | Must be after `DislayedValues` binding
 Android.Preferences.Preference | Value | BindValue()
 Android.Preferences.EditTextPreference | Text | BindText()
 Android.Preferences.ListPreference | Value | BindValue()
@@ -1150,7 +1151,7 @@ MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatRadioGroup | SelectedIte
 **Android - `using MvvmCross.Droid.Support.V7.Preference`**
 
 Base Control | String | Extension method | Mvx version introduced
----- | --------- | ---------
+---- | --------- | --------- | ---------
 Android.Support.V7.Preferences.Preference | Value | BindValue()
 Android.Support.V7.Preferences.ListPreference | Value | BindValue()
 Android.Support.V7.Preferences.EditTextPreference | Text | BindText()

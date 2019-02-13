@@ -14,19 +14,24 @@ namespace MvvmCross.Platforms.Ios.Views
 {
     public class MvxSplitViewController : MvxBaseSplitViewController, IMvxSplitViewController
     {
-        public MvxSplitViewController()
+        public MvxSplitViewController() : base()
         {
         }
 
-        public MvxSplitViewController(IntPtr handle)
-            : base(handle)
+        public MvxSplitViewController(NSCoder coder) : base(coder)
         {
         }
 
-        protected MvxSplitViewController(string nibName, NSBundle bundle)
-            : base(nibName, bundle)
+        protected MvxSplitViewController(NSObjectFlag t) : base(t)
         {
-            this.AdaptForBinding();
+        }
+
+        protected internal MvxSplitViewController(IntPtr handle) : base(handle)
+        {
+        }
+
+        public MvxSplitViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
         }
 
         public override void ViewDidLoad()
@@ -80,24 +85,30 @@ namespace MvvmCross.Platforms.Ios.Views
     public class MvxSplitViewController<TViewModel> : MvxSplitViewController
         where TViewModel : IMvxViewModel
     {
+        public MvxSplitViewController()
+        {
+        }
+
+        public MvxSplitViewController(NSCoder coder) : base(coder)
+        {
+        }
+
+        public MvxSplitViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+        }
+
+        protected MvxSplitViewController(NSObjectFlag t) : base(t)
+        {
+        }
+
+        protected internal MvxSplitViewController(IntPtr handle) : base(handle)
+        {
+        }
+
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
-        }
-
-        public MvxSplitViewController() : base()
-        {
-        }
-
-        public MvxSplitViewController(IntPtr handle)
-            : base(handle)
-        {
-        }
-
-        protected MvxSplitViewController(string nibName, NSBundle bundle)
-            : base(nibName, bundle)
-        {
         }
     }
 }

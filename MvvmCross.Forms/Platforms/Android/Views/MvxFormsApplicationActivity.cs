@@ -109,8 +109,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
         {
             InitializeForms(bundle);
 
-            var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
-            if (!startup.IsStarted)
+            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
                 startup.Start(GetAppStartHint(bundle));
 
             InitializeApplication();
@@ -118,7 +117,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            return hint;
         }
 
         public virtual void InitializeForms(Bundle bundle)

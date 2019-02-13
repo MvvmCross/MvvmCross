@@ -18,7 +18,25 @@ namespace MvvmCross.Base
 
         protected Task InvokeOnMainThreadAsync(Action action, bool maskExceptions = true)
         {
-            return AsyncDispatcher?.ExecuteOnMainThreadAsync(action, maskExceptions);
+            // this corner case should only happen when there is no IoC
+            // i.e. when running in a UnitTest environment, falling back
+            // to just executing action
+            if (AsyncDispatcher == null)
+            {
+                try
+                {
+                    action();
+                }
+                catch
+                {
+                    if (!maskExceptions)
+                        throw;
+                }
+                
+                return Task.CompletedTask;
+            }
+
+            return AsyncDispatcher.ExecuteOnMainThreadAsync(action, maskExceptions);
         }
     }
 }

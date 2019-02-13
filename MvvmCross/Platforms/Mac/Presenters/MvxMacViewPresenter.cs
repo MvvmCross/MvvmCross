@@ -69,65 +69,45 @@ namespace MvvmCross.Platforms.Mac.Presenters
 
         public override void RegisterAttributeTypes()
         {
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxWindowPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxWindowPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
                         return ShowWindowViewController(viewController, (MvxWindowPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => Close(viewModel)
-                });
+                    (viewModel, attribute) => Close(viewModel));
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxContentPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxContentPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
                         return ShowContentViewController(viewController, (MvxContentPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => Close(viewModel)
-                });
+                    (viewModel, attribute) => Close(viewModel));
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxModalPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxModalPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
                         return ShowModalViewController(viewController, (MvxModalPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => Close(viewModel)
-                });
+                    (viewModel, attribute) => Close(viewModel));
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxSheetPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxSheetPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
                         return ShowSheetViewController(viewController, (MvxSheetPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => Close(viewModel)
-                });
+                    (viewModel, attribute) => Close(viewModel));
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxTabPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxTabPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
                         return ShowTabViewController(viewController, (MvxTabPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => Close(viewModel)
-                });
+                    (viewModel, attribute) => Close(viewModel));
         }
 
         protected virtual Task<bool> ShowWindowViewController(

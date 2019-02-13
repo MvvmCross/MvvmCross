@@ -107,7 +107,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             {
                 var bindingContext = bindable.BindingContext as MvxTaskBasedBindingContext;
 
-                var isTaskBasedBindingContextAndHasAutomaticDimension = bindingContext != null && TableView.RowHeight == UITableView.AutomaticDimension;
+                var isTaskBasedBindingContextAndHasAutomaticDimension = bindingContext != null && tableView.RowHeight == UITableView.AutomaticDimension;
 
                 // RunSynchronously must be called before DataContext is set
                 if (isTaskBasedBindingContextAndHasAutomaticDimension)

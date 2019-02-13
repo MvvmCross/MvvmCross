@@ -13,6 +13,8 @@ namespace MvvmCross.Tests
 {
     public class MvxIoCSupportingTest
     {
+        private TestLogger _logger;
+
         public IMvxIoCProvider Ioc { get; private set; }
 
         public void Setup()
@@ -23,6 +25,7 @@ namespace MvvmCross.Tests
         public void Reset()
         {
             MvxSingleton.ClearAllSingletons();
+            Ioc = null;
         }
 
         protected virtual IMvxIocOptions CreateIocOptions()
@@ -34,9 +37,13 @@ namespace MvvmCross.Tests
         {
             // fake set up of the IoC
             Reset();
+            var logProvider = CreateLogProvider();
+            var log = CreateLog(logProvider);
             Ioc = MvxIoCProvider.Initialize(options ?? CreateIocOptions());
             Ioc.RegisterSingleton(Ioc);
-            CreateLog();
+            Ioc.RegisterSingleton(logProvider);
+            Ioc.RegisterSingleton(log);
+
             InitializeSingletonCache();
             InitializeMvxSettings();
             AdditionalSetup();
@@ -60,16 +67,29 @@ namespace MvvmCross.Tests
         {
         }
 
-        protected virtual void CreateLog()
+        public void SetupTestLogger(TestLogger logger)
         {
-            var logProvider = new TestLogProvider();
-            Ioc.RegisterSingleton<IMvxLogProvider>(logProvider);
+            _logger = logger;
 
-            var globalLog = logProvider.GetLogFor<MvxLog>();
+            var logProvider = CreateLogProvider();
+            var log = CreateLog(logProvider);
+
+            Ioc.RegisterSingleton(logProvider);
+            Ioc.RegisterSingleton(log);
+        }
+
+        protected virtual IMvxLogProvider CreateLogProvider()
+        {
+            var logProvider = new TestLogProvider(_logger);
+            return logProvider;
+        }
+
+        protected virtual IMvxLog CreateLog(IMvxLogProvider logProvider)
+        {
+            var globalLog = logProvider.GetLogFor<MvxIoCSupportingTest>();
             MvxLog.Instance = globalLog;
-            Ioc.RegisterSingleton(globalLog);
 
-            var pluginLog = logProvider.GetLogFor("MvxPlugin");
+            return globalLog;
         }
 
         public void SetInvariantCulture()

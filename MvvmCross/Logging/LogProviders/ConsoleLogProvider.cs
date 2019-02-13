@@ -26,7 +26,7 @@ namespace MvvmCross.Logging.LogProviders
         private static string MessageFormatter(string loggerName, MvxLogLevel level, object message, Exception e)
         {
             var stringBuilder = new StringBuilder();
-            stringBuilder.Append(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture));
+            stringBuilder.Append(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture));
             stringBuilder.Append(" ");
 
             // Append a readable representation of the log level
