@@ -93,15 +93,22 @@ namespace MvvmCross.Platforms.Android.Views
 
         protected virtual async Task RunAppStartAsync(Bundle bundle)
         {
-            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
+            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup))
             {
-                await startup.StartAsync(GetAppStartHint(bundle));
+                if(!startup.IsStarted)
+                {
+                    await startup.StartAsync(GetAppStartHint(bundle));
+                }
+                else
+                {
+                    Finish();
+                }
             }
         }
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            return hint;
         }
 
         protected virtual void RegisterSetup()
