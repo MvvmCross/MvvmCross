@@ -544,40 +544,49 @@ namespace MvvmCross.Platforms.Android.Presenters
             FragmentManager fragmentManager,
             MvxFragmentPresentationAttribute fragmentAttribute)
         {
-            var fragmentName = fragmentAttribute.ViewType.FragmentJavaName();
-
-            if (fragmentManager.BackStackEntryCount > 0)
+            try
             {
-                var popBackStackFragmentName = fragmentAttribute.PopBackStackImmediateName?.Trim() == ""
-                    ? fragmentName
-                    : fragmentAttribute.PopBackStackImmediateName;
+                var fragmentName = fragmentAttribute.ViewType.FragmentJavaName();
 
-                fragmentManager.PopBackStackImmediate(popBackStackFragmentName, fragmentAttribute.PopBackStackImmediateFlag.ToNativePopBackStackFlags());
-
-                OnFragmentPopped(null, null, fragmentAttribute);
-                return true;
-            }
-            else if (CurrentFragmentManager.FindFragmentByTag(fragmentName) != null)
-            {
-                var ft = fragmentManager.BeginTransaction();
-                var fragment = fragmentManager.FindFragmentByTag(fragmentName);
-
-                if (!fragmentAttribute.EnterAnimation.Equals(int.MinValue) && !fragmentAttribute.ExitAnimation.Equals(int.MinValue))
+                if (fragmentManager.BackStackEntryCount > 0)
                 {
-                    if (!fragmentAttribute.PopEnterAnimation.Equals(int.MinValue) && !fragmentAttribute.PopExitAnimation.Equals(int.MinValue))
-                        ft.SetCustomAnimations(fragmentAttribute.EnterAnimation, fragmentAttribute.ExitAnimation, fragmentAttribute.PopEnterAnimation, fragmentAttribute.PopExitAnimation);
-                    else
-                        ft.SetCustomAnimations(fragmentAttribute.EnterAnimation, fragmentAttribute.ExitAnimation);
+                    var popBackStackFragmentName = fragmentAttribute.PopBackStackImmediateName?.Trim() == ""
+                        ? fragmentName
+                        : fragmentAttribute.PopBackStackImmediateName;
+
+                    fragmentManager.PopBackStackImmediate(popBackStackFragmentName, fragmentAttribute.PopBackStackImmediateFlag.ToNativePopBackStackFlags());
+
+                    OnFragmentPopped(null, null, fragmentAttribute);
+                    return true;
                 }
-                if (fragmentAttribute.TransitionStyle != int.MinValue)
-                    ft.SetTransitionStyle(fragmentAttribute.TransitionStyle);
+                else if (CurrentFragmentManager.FindFragmentByTag(fragmentName) != null)
+                {
+                    var ft = fragmentManager.BeginTransaction();
+                    var fragment = fragmentManager.FindFragmentByTag(fragmentName);
 
-                ft.Remove(fragment);
-                ft.CommitAllowingStateLoss();
+                    if (!fragmentAttribute.EnterAnimation.Equals(int.MinValue) && !fragmentAttribute.ExitAnimation.Equals(int.MinValue))
+                    {
+                        if (!fragmentAttribute.PopEnterAnimation.Equals(int.MinValue) && !fragmentAttribute.PopExitAnimation.Equals(int.MinValue))
+                            ft.SetCustomAnimations(fragmentAttribute.EnterAnimation, fragmentAttribute.ExitAnimation, fragmentAttribute.PopEnterAnimation, fragmentAttribute.PopExitAnimation);
+                        else
+                            ft.SetCustomAnimations(fragmentAttribute.EnterAnimation, fragmentAttribute.ExitAnimation);
+                    }
+                    if (fragmentAttribute.TransitionStyle != int.MinValue)
+                        ft.SetTransitionStyle(fragmentAttribute.TransitionStyle);
 
-                OnFragmentPopped(ft, fragment, fragmentAttribute);
-                return true;
+                    ft.Remove(fragment);
+                    ft.CommitAllowingStateLoss();
+
+                    OnFragmentPopped(ft, fragment, fragmentAttribute);
+                    return true;
+                }
             }
+            catch (System.Exception ex)
+            {
+                MvxLog.Instance.Error("Cannot close fragment transaction", ex);
+                return false;
+            }
+
             return false;
         }
         #endregion
