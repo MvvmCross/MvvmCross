@@ -10,6 +10,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
 using Java.Lang;
+using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using String = Java.Lang.String;
@@ -44,20 +45,16 @@ namespace MvvmCross.Droid.Support.V4
 
             if (fragInfo.CachedFragment == null)
             {
-                fragInfo.CachedFragment = Fragment.Instantiate(_context, FragmentJavaName(fragInfo.FragmentType));
+                fragInfo.CachedFragment = 
+                    Fragment.Instantiate(_context, fragInfo.FragmentType.FragmentJavaName());
 
                 var fragmentAsView = (IMvxView) fragInfo.CachedFragment;
 
-                fragmentAsView.ViewModel = fragInfo.ViewModel ?? Mvx.Resolve<IMvxViewModelLoader>()
+                fragmentAsView.ViewModel = fragInfo.ViewModel ?? Mvx.IoCProvider.Resolve<IMvxViewModelLoader>()
                     .LoadViewModel(new MvxViewModelRequest(fragInfo.ViewModelType, null, null), null);
             }
 
             return fragInfo.CachedFragment;
-        }
-
-        protected static string FragmentJavaName(Type fragmentType)
-        {
-            return Class.FromType(fragmentType).Name;
         }
 
         public override ICharSequence GetPageTitleFormatted(int position)

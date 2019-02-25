@@ -41,14 +41,15 @@ namespace MvvmCross.Platforms.Mac.Core
 
         protected virtual void RunAppStart(object hint = null)
         {
-            var startup = Mvx.Resolve<IMvxAppStart>();
-            if (!startup.IsStarted)
+            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
+            {
                 startup.Start(GetAppStartHint(hint));
+            }
         }
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            return hint;
         }
 
         public override void WillBecomeActive(Foundation.NSNotification notification)
@@ -80,7 +81,7 @@ namespace MvvmCross.Platforms.Mac.Core
 
     public class MvxApplicationDelegate<TMvxMacSetup, TApplication> : MvxApplicationDelegate
    where TMvxMacSetup : MvxMacSetup<TApplication>, new()
-   where TApplication : IMvxApplication, new()
+   where TApplication : class, IMvxApplication, new()
     {
         protected override void RegisterSetup()
         {

@@ -41,7 +41,7 @@ namespace MvvmCross.Plugin.Network.Rest
         private void InitializeCommon()
         {
             ContentType = MvxContentType.Json;
-            JsonConverterProvider = () => Mvx.Resolve<IMvxJsonConverter>();
+            JsonConverterProvider = () => Mvx.IoCProvider.Resolve<IMvxJsonConverter>();
         }
     }
 }

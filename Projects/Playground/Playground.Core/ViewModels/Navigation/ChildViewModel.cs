@@ -4,27 +4,43 @@
 
 using System.Threading.Tasks;
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using Playground.Core.Models;
 
 namespace Playground.Core.ViewModels
 {
-    public class ChildViewModel : MvxViewModel<SampleModel>
+    public class ChildViewModel : MvxNavigationViewModel<SampleModel, SampleModel>
     {
-        private readonly IMvxNavigationService _navigationService;
+        public string BrokenTextValue { get => _brokenTextValue; set => SetProperty(ref _brokenTextValue, value); }
+        public string AnotherBrokenTextValue { get => _anotherBrokenTextValue; set => SetProperty(ref _anotherBrokenTextValue, value); }
 
         private SampleModel _parameter;
+        private string _brokenTextValue;
+        private string _anotherBrokenTextValue;
 
-        public ChildViewModel(IMvxNavigationService navigationService)
+        public ChildViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
-            _navigationService = navigationService;
+            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this, new SampleModel
+            {
+                Message = "This returned correctly",
+                Value = 5.67m
+            }));
 
-            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
+            ShowSecondChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SecondChildViewModel>());
 
-            ShowSecondChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SecondChildViewModel>());
+            ShowRootCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<RootViewModel>());
 
-            ShowRootCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<RootViewModel>());
+            PropertyChanged += ChildViewModel_PropertyChanged;
+        }
+
+        private void ChildViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            // Demonstrates that exceptions can be raised on property changed but are swallowed by default to 
+            // protect the app from crashing
+            if (e.PropertyName == nameof(BrokenTextValue))
+                throw new System.NotImplementedException();
         }
 
         public override void Prepare()
@@ -47,7 +63,7 @@ namespace Playground.Core.ViewModels
             base.ReloadFromBundle(state);
         }
 
-        public async override System.Threading.Tasks.Task Initialize()
+        public override async System.Threading.Tasks.Task Initialize()
         {
             await base.Initialize();
 
@@ -68,5 +84,17 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowSecondChildCommand { get; private set; }
 
         public IMvxAsyncCommand ShowRootCommand { get; private set; }
+
+        public override void ViewAppeared()
+        {
+            base.ViewAppeared();
+
+            Task.Run(async () =>
+            {
+                await Task.Delay(1000);
+                BrokenTextValue = "This will throw exception in UI layer";
+                AnotherBrokenTextValue = "This will throw exception in page";
+            });
+        }
     }
 }

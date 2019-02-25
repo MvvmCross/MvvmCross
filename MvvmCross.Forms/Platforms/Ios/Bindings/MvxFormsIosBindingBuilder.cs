@@ -28,7 +28,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Bindings
         private void InitializeBindingCreator()
         {
             var creator = CreateBindingCreator();
-            Mvx.RegisterSingleton(creator);
+            Mvx.IoCProvider.RegisterSingleton(creator);
         }
 
         protected virtual IMvxBindingCreator CreateBindingCreator()

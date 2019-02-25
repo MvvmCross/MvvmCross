@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Threading.Tasks;
 using MvvmCross;
 using MvvmCross.IoC;
 using MvvmCross.Localization;
@@ -24,7 +25,7 @@ namespace Playground.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            Mvx.RegisterSingleton<IMvxTextProvider>(new TextProviderBuilder().TextProvider);
+            Mvx.IoCProvider.RegisterSingleton<IMvxTextProvider>(new TextProviderBuilder().TextProvider);
 
             RegisterAppStart<RootViewModel>();
         }
@@ -32,10 +33,9 @@ namespace Playground.Core
         /// <summary>
         /// Do any UI bound startup actions here
         /// </summary>
-        /// <param name="hint"></param>
-        public override void Startup(object hint)
+        public override Task Startup()
         {
-            base.Startup(hint);
+            return base.Startup();
         }
 
         /// <summary>

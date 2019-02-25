@@ -4,19 +4,16 @@
 
 using System.Threading.Tasks;
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class SheetViewModel : MvxViewModel
+    public class SheetViewModel : MvxNavigationViewModel
     {
-        private readonly IMvxNavigationService _navigationService;
-
-        public SheetViewModel(IMvxNavigationService navigationService)
+        public SheetViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
-            _navigationService = navigationService;
-
             CloseCommand = new MvxAsyncCommand(CloseSheet);
         }
 
@@ -24,7 +21,7 @@ namespace Playground.Core.ViewModels
 
         private async Task CloseSheet()
         {
-            await _navigationService.Close(this);
+            await NavigationService.Close(this);
         }
     }
 }

@@ -88,7 +88,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.AttributeHelpers
                 return;
             areBindingResourcesInitialized = true;
 
-            var resourceTypeFinder = Mvx.Resolve<IMvxAppResourceTypeFinder>().Find();
+            var resourceTypeFinder = Mvx.IoCProvider.Resolve<IMvxAppResourceTypeFinder>().Find();
             var styleableType = resourceTypeFinder.GetNestedType("Styleable");
 
             MvxRecyclerViewItemTemplateSelectorGroupId = (int[])styleableType.GetField("MvxRecyclerView").GetValue(null);

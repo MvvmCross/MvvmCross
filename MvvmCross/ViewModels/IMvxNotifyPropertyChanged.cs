@@ -5,20 +5,31 @@
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace MvvmCross.ViewModels
 {
-    public interface IMvxNotifyPropertyChanged : INotifyPropertyChanged
+    public interface IMvxNotifyPropertyChanged : INotifyPropertyChanged, INotifyPropertyChanging
     {
         // this ShouldAlwaysRaiseInpcOnUserInterfaceThread is not a Property so as to avoid Inpc pollution
         bool ShouldAlwaysRaiseInpcOnUserInterfaceThread();
 
         void ShouldAlwaysRaiseInpcOnUserInterfaceThread(bool value);
 
-        void RaisePropertyChanged<T>(Expression<Func<T>> property);
+        bool ShouldRaisePropertyChanging();
 
-        void RaisePropertyChanged(string whichProperty);
+        void ShouldRaisePropertyChanging(bool value);
 
-        void RaisePropertyChanged(PropertyChangedEventArgs changedArgs);
+        bool RaisePropertyChanging<T>(T newValue, Expression<Func<T>> property);
+
+        bool RaisePropertyChanging<T>(T newValue, string whichProperty);
+
+        bool RaisePropertyChanging<T>(MvxPropertyChangingEventArgs<T> changingArgs);
+
+        Task RaisePropertyChanged<T>(Expression<Func<T>> property);
+
+        Task RaisePropertyChanged(string whichProperty);
+
+        Task RaisePropertyChanged(PropertyChangedEventArgs changedArgs);
     }
 }

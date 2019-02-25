@@ -29,11 +29,11 @@ namespace MvvmCross.Forms.Bindings.Target
 
         public override void SubscribeToEvents()
         {
-            var formsElement = Target as Element;
-            if (formsElement == null)
+            var bindableObject = Target as BindableObject;
+            if (bindableObject == null)
                 return;
 
-            _propertyChangedSubscription = formsElement.WeakSubscribe(OnElementPropertyChanged);
+            _propertyChangedSubscription = bindableObject.WeakSubscribe(OnBindableObjectPropertyChanged);
         }
 
         public override Type TargetType => _actualPropertyType;
@@ -43,7 +43,7 @@ namespace MvvmCross.Forms.Bindings.Target
 
         protected virtual object GetValueByReflection()
         {
-            var target = Target as Element;
+            var target = Target as BindableObject;
             if (target == null)
             {
                 MvxBindingLog.Warning("Weak Target is null in {0} - skipping Get", GetType().Name);
@@ -56,14 +56,14 @@ namespace MvvmCross.Forms.Bindings.Target
         protected override void SetValueImpl(object target, object value)
         {
             MvxBindingLog.Trace("Receiving setValue to " + (value ?? ""));
-            var frameworkElement = target as Element;
-            if (frameworkElement == null)
+            var bindableObject = target as BindableObject;
+            if (bindableObject == null)
             {
                 MvxBindingLog.Warning("Weak Target is null in {0} - skipping set", GetType().Name);
                 return;
             }
 
-            frameworkElement.SetValue(_targetBindableProperty, value);
+            bindableObject.SetValue(_targetBindableProperty, value);
         }
 
         protected override object MakeSafeValue(object value)
@@ -85,13 +85,13 @@ namespace MvvmCross.Forms.Bindings.Target
                 return null;
         }
 
-        private void OnElementPropertyChanged(object sender, PropertyChangedEventArgs args)
+        private void OnBindableObjectPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            var formsElement = Target as Element;
+            var bindableObject = Target as BindableObject;
 
             if (args.PropertyName == _targetBindableProperty.PropertyName)
             {
-                FireValueChanged(formsElement.GetValue(_targetBindableProperty));
+                FireValueChanged(bindableObject.GetValue(_targetBindableProperty));
             }
         }
     }

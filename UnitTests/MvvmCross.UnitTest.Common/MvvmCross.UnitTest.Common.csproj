@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>MvvmCross.UnitTest.Common</AssemblyName>
+    <RootNamespace>MvvmCross.UnitTest.Common</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\MvvmCross.Tests\MvvmCross.Tests.csproj" />
+  </ItemGroup>
+
+</Project>

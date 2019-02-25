@@ -12,7 +12,7 @@ namespace MvvmCross.Base
 {
     public abstract class MvxMainThreadDispatcher : MvxSingleton<IMvxMainThreadDispatcher>, IMvxMainThreadDispatcher
     {
-        protected static void ExceptionMaskedAction(Action action, bool maskExceptions)
+        public static void ExceptionMaskedAction(Action action, bool maskExceptions)
         {
             try
             {
@@ -37,5 +37,7 @@ namespace MvvmCross.Base
         }
 
         public abstract bool RequestMainThreadAction(Action action, bool maskExceptions = true);
+
+        public abstract bool IsOnMainThread { get; }
     }
 }

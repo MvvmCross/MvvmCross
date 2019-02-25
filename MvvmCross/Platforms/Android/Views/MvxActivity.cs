@@ -123,14 +123,15 @@ namespace MvvmCross.Platforms.Android.Views
         
         protected virtual void RunAppStart(Bundle bundle)
         {
-            var startup = Mvx.Resolve<IMvxAppStart>();
-            if (!startup.IsStarted)
-                startup.Start(GetAppStartHint(bundle));
+            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
+            {
+                startup.StartAsync(GetAppStartHint(bundle));
+            }
         }
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            return hint;
         }
 
         protected override void OnDestroy()

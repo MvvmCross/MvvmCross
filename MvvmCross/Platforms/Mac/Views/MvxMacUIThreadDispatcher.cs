@@ -26,8 +26,8 @@ namespace MvvmCross.Platforms.Mac.Views
         public override bool RequestMainThreadAction(Action action,
             bool maskExceptions = true)
         {
-            if (_uiSynchronizationContext == SynchronizationContext.Current)
-                action();
+            if (IsOnMainThread)
+                ExceptionMaskedAction(action, maskExceptions);
             else
                 NSApplication.SharedApplication.BeginInvokeOnMainThread(() =>
                 {
@@ -35,5 +35,7 @@ namespace MvvmCross.Platforms.Mac.Views
                 });
             return true;
         }
+
+        public override bool IsOnMainThread => _uiSynchronizationContext == SynchronizationContext.Current;
     }
 }

@@ -82,7 +82,7 @@ namespace MvvmCross.Platforms.Android.Views
             if (mvxBundle != null)
             {
                 IMvxSavedStateConverter converter;
-                if (!Mvx.TryResolve<IMvxSavedStateConverter>(out converter))
+                if (!Mvx.IoCProvider.TryResolve<IMvxSavedStateConverter>(out converter))
                 {
                     MvxLog.Instance.Warn("Saved state converter not available - saving state will be hard");
                 }
@@ -91,14 +91,14 @@ namespace MvvmCross.Platforms.Android.Views
                     converter.Write(bundleArgs.Value, mvxBundle);
                 }
             }
-            var cache = Mvx.Resolve<IMvxSingleViewModelCache>();
+            var cache = Mvx.IoCProvider.Resolve<IMvxSingleViewModelCache>();
             cache.Cache(AndroidView.ViewModel, bundleArgs.Value);
         }
 
         protected override void EventSourceOnActivityResultCalled(object sender,
                                                                   MvxValueEventArgs<MvxActivityResultParameters> args)
         {
-            var sink = Mvx.Resolve<IMvxIntentResultSink>();
+            var sink = Mvx.IoCProvider.Resolve<IMvxIntentResultSink>();
             var resultParameters = args.Value;
             var intentResult = new MvxIntentResultEventArgs(resultParameters.RequestCode, resultParameters.ResultCode,
                                                             resultParameters.Data);

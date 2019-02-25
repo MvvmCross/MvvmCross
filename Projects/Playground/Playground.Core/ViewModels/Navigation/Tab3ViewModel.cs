@@ -3,25 +3,22 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class Tab3ViewModel : MvxViewModel
+    public class Tab3ViewModel : MvxNavigationViewModel
     {
-        private readonly IMvxNavigationService _navigationService;
-
-        public Tab3ViewModel(IMvxNavigationService navigationService)
+        public Tab3ViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
-            _navigationService = navigationService;
+            ShowRootViewModelCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<RootViewModel>());
 
-            ShowRootViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<RootViewModel>());
+            CloseViewModelCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
 
-            CloseViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
-
-            ShowPageOneCommand = new MvxCommand(() => _navigationService.ChangePresentation(new MvxPagePresentationHint(typeof(Tab1ViewModel))));
+            ShowPageOneCommand = new MvxCommand(() => NavigationService.ChangePresentation(new MvxPagePresentationHint(typeof(Tab1ViewModel))));
         }
 
         public IMvxAsyncCommand ShowRootViewModelCommand { get; private set; }

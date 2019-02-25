@@ -23,14 +23,15 @@ namespace MvvmCross.Platforms.Wpf.Views
 
         protected virtual void RunAppStart(object hint = null)
         {
-            var startup = Mvx.Resolve<IMvxAppStart>();
-            if (!startup.IsStarted)
+            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
+            {
                 startup.Start(GetAppStartHint(hint));
+            }
         }
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            return hint;
         }
 
         protected virtual void RegisterSetup()
@@ -40,7 +41,7 @@ namespace MvvmCross.Platforms.Wpf.Views
 
     public class MvxApplication<TMvxWpfSetup, TApplication> : MvxApplication
        where TMvxWpfSetup : MvxWpfSetup<TApplication>, new()
-       where TApplication : IMvxApplication, new()
+       where TApplication : class, IMvxApplication, new()
     {
         protected override void RegisterSetup()
         {

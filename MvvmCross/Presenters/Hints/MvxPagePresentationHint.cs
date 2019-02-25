@@ -3,17 +3,26 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters.Hints
 {
-    //Only available on Xamarin.Forms
     public class MvxPagePresentationHint
         : MvxPresentationHint
     {
-        public MvxPagePresentationHint(Type viewModel)
+        public MvxPagePresentationHint(Type viewModel) : base()
         {
             ViewModel = viewModel;
+        }
+
+        public MvxPagePresentationHint(Type viewModel, MvxBundle body) : base(body)
+        {
+            ViewModel = viewModel;
+        }
+
+        public MvxPagePresentationHint(Type viewModel, IDictionary<string, string> hints) : this(viewModel, new MvxBundle(hints))
+        {
         }
 
         public Type ViewModel { get; private set; }

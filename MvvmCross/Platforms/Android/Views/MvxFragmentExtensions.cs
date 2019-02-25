@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -52,7 +52,7 @@ namespace MvvmCross.Platforms.Android.Views
             if (request == null)
                 request = MvxViewModelRequest.GetDefaultRequest(viewModelType);
 
-            var viewModelCache = Mvx.Resolve<IMvxChildViewModelCache>();
+            var viewModelCache = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>();
             if (viewModelCache.Exists(viewModelType))
             {
                 var viewModelCached = viewModelCache.Get(viewModelType);
@@ -60,7 +60,7 @@ namespace MvvmCross.Platforms.Android.Views
                 return viewModelCached;
             }
 
-            var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
+            var loaderService = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(request, savedState);
 
             return viewModel;
@@ -86,6 +86,11 @@ namespace MvvmCross.Platforms.Android.Views
             {
                 throw exception.MvxWrap("Problem running viewModel lifecycle of type {0}", viewModel.GetType().Name);
             }
+        }
+
+        public static string FragmentJavaName(this Type fragmentType)
+        {
+            return Java.Lang.Class.FromType(fragmentType).Name;
         }
     }
 }

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using MvvmCross.Base;
 
 namespace MvvmCross.IoC
@@ -145,6 +146,36 @@ namespace MvvmCross.IoC
         public virtual object IoCConstruct(Type type)
         {
             return _provider.IoCConstruct(type);
+        }
+
+        public T IoCConstruct<T>(IDictionary<string, object> arguments) where T : class
+        {
+            return _provider.IoCConstruct<T>(arguments);
+        }
+
+        public T IoCConstruct<T>(params object[] arguments) where T : class
+        {
+            return _provider.IoCConstruct<T>(arguments);
+        }
+
+        public T IoCConstruct<T>(object arguments) where T : class
+        {
+            return _provider.IoCConstruct<T>(arguments);
+        }
+
+        public object IoCConstruct(Type type, IDictionary<string, object> arguments = null)
+        {
+            return _provider.IoCConstruct(type, arguments);
+        }
+
+        public object IoCConstruct(Type type, object arguments)
+        {
+            return _provider.IoCConstruct(type, arguments);
+        }
+
+        public object IoCConstruct(Type type, params object[] arguments)
+        {
+            return _provider.IoCConstruct(type, arguments);
         }
 
         public void CallbackWhenRegistered<T>(Action action)

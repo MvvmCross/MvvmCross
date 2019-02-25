@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Binding.Bindings.Source.Construction;
+using MvvmCross.IoC;
 
 namespace MvvmCross.Plugin.MethodBinding
 {
@@ -12,7 +13,7 @@ namespace MvvmCross.Plugin.MethodBinding
     {
         public void Load()
         {
-            Mvx.CallbackWhenRegistered<IMvxSourceBindingFactoryExtensionHost>(OnHostRegistered);
+            Mvx.IoCProvider.CallbackWhenRegistered<IMvxSourceBindingFactoryExtensionHost>(OnHostRegistered);
         }
 
         private void OnHostRegistered(IMvxSourceBindingFactoryExtensionHost host)

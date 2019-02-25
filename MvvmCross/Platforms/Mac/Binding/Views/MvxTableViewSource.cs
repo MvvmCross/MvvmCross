@@ -68,7 +68,7 @@ namespace MvvmCross.Platforms.Mac.Binding.Views
             _tableView.ReloadData();
         }
 
-        private NSView GetOrCreateViewFor(NSTableView tableView, NSTableColumn tableColumn)
+        protected virtual NSView GetOrCreateViewFor(NSTableView tableView, NSTableColumn tableColumn)
         {
             var view = tableView.MakeView(tableColumn.Identifier, this);
             var bindableColumn = tableColumn as MvxTableColumn;

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -24,16 +24,26 @@ namespace MvvmCross.Binding.BindingContext
             owner.BindLanguage(target, targetPath, sourceKey);
         }
 
+        public static void BindLanguage<TTarget>(this IMvxBindingContextOwner owner
+                                                 , TTarget target
+                                                 , string sourceKey
+                                                 , MvxBindingMode bindingMode)
+        {
+            var parser = PropertyExpressionParser;
+            var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
+            owner.BindLanguage(target, targetPath, sourceKey, bindingMode: bindingMode);
+        }
+
         public static void BindLanguage<TTarget, TViewModel>(this IMvxBindingContextOwner owner
                                                              , TTarget target
                                                              , string sourceKey
-                                                             ,
-                                                             Expression<Func<TViewModel, IMvxTextProvider>> textProvider)
+                                                             , Expression<Func<TViewModel, IMvxTextProvider>> textProvider
+                                                             , MvxBindingMode bindingMode = MvxBindingMode.OneTime)
         {
             var parser = PropertyExpressionParser;
             var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
             var sourcePath = parser.Parse(textProvider).Print();
-            owner.BindLanguage(target, targetPath, sourceKey, sourcePath);
+            owner.BindLanguage(target, targetPath, sourceKey, sourcePath, bindingMode: bindingMode);
         }
 
         public static void BindLanguage<TTarget>(this IMvxBindingContextOwner owner
@@ -42,12 +52,13 @@ namespace MvvmCross.Binding.BindingContext
                                                  , string sourceKey
                                                  , string sourcePropertyName = null
                                                  , string fallbackValue = null
-                                                 , string converterName = null)
+                                                 , string converterName = null
+                                                 , MvxBindingMode bindingMode = MvxBindingMode.OneTime)
         {
             var parser = PropertyExpressionParser;
             var parsedTargetPath = parser.Parse(targetPropertyExpression);
             var parsedTargetPathText = parsedTargetPath.Print();
-            owner.BindLanguage(target, parsedTargetPathText, sourceKey, sourcePropertyName, fallbackValue, converterName);
+            owner.BindLanguage(target, parsedTargetPathText, sourceKey, sourcePropertyName, fallbackValue, converterName, bindingMode);
         }
 
         public static void BindLanguage<TTarget, TViewModel>(this IMvxBindingContextOwner owner
@@ -58,14 +69,15 @@ namespace MvvmCross.Binding.BindingContext
                                                              ,
                                                              Expression<Func<TViewModel, IMvxLanguageBinder>> sourcePropertyExpression
                                                              , string fallbackValue = null
-                                                             , string converterName = null)
+                                                             , string converterName = null
+                                                             , MvxBindingMode bindingMode = MvxBindingMode.OneTime)
         {
             var parser = PropertyExpressionParser;
             var parsedTargetPath = parser.Parse(targetPropertyExpression);
             var parsedTargetPathText = parsedTargetPath.Print();
             var parsedSourcePath = parser.Parse(sourcePropertyExpression);
             var sourcePropertyName = parsedSourcePath.Print();
-            owner.BindLanguage(target, parsedTargetPathText, sourceKey, sourcePropertyName, fallbackValue, converterName);
+            owner.BindLanguage(target, parsedTargetPathText, sourceKey, sourcePropertyName, fallbackValue, converterName, bindingMode);
         }
 
         public static void BindLanguage(this IMvxBindingContextOwner owner
@@ -73,9 +85,10 @@ namespace MvvmCross.Binding.BindingContext
                                         , string sourceKey
                                         , string sourcePropertyName = null
                                         , string fallbackValue = null
-                                        , string converterName = null)
+                                        , string converterName = null
+                                        , MvxBindingMode bindingMode = MvxBindingMode.OneTime)
         {
-            owner.BindLanguage(owner, targetPropertyName, sourceKey, sourcePropertyName, fallbackValue, converterName);
+            owner.BindLanguage(owner, targetPropertyName, sourceKey, sourcePropertyName, fallbackValue, converterName, bindingMode);
         }
 
         public static void BindLanguage(this IMvxBindingContextOwner owner
@@ -84,7 +97,8 @@ namespace MvvmCross.Binding.BindingContext
                                         , string sourceKey
                                         , string sourcePropertyName = null
                                         , string fallbackValue = null
-                                        , string converterName = null)
+                                        , string converterName = null
+                                        , MvxBindingMode bindingMode = MvxBindingMode.OneTime)
         {
             converterName = converterName ?? LanguageParser.DefaultConverterName;
             sourcePropertyName = sourcePropertyName ?? LanguageParser.DefaultTextSourceName;
@@ -101,7 +115,7 @@ namespace MvvmCross.Binding.BindingContext
                     ConverterParameter = sourceKey,
                     FallbackValue = fallbackValue,
                 },
-                Mode = MvxBindingMode.OneTime
+                Mode = bindingMode
             };
             owner.AddBinding(target, bindingDescription);
         }

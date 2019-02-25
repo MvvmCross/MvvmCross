@@ -3,11 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Runtime.Serialization;
 
 namespace MvvmCross.Exceptions
 {
-    // Officially exception should support serialisation, but we don't add it here - mainly because of
-    // serialization limits in PCLs
+    [Serializable]
     public class MvxIoCResolveException : MvxException
     {
         public MvxIoCResolveException()
@@ -30,5 +30,13 @@ namespace MvvmCross.Exceptions
             : base(innerException, messageFormat, formatArguments)
         {
         }
+
+        public MvxIoCResolveException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+
+        protected MvxIoCResolveException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }        
     }
 }

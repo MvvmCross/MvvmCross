@@ -8,12 +8,13 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("MvvmCross.Tests")]
 [assembly: InternalsVisibleTo("MvvmCross.Forms")]
 [assembly: InternalsVisibleTo("MvvmCross.Platforms.Wpf")]
+[assembly: InternalsVisibleTo("MvvmCross.Forms.Platforms.Wpf")]
 
 namespace MvvmCross.Logging.LogProviders
 {
-    internal delegate bool Logger(MvxLogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters);
+    public delegate bool Logger(MvxLogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters);
 
-    internal abstract class MvxBaseLogProvider : IMvxLogProvider
+    public abstract class MvxBaseLogProvider : IMvxLogProvider
     {
         protected delegate IDisposable OpenNdc(string message);
         protected delegate IDisposable OpenMdc(string key, string value);
@@ -31,8 +32,11 @@ namespace MvvmCross.Logging.LogProviders
                = new Lazy<OpenMdc>(GetOpenMdcMethod);
         }
 
+        public IMvxLog GetLogFor(Type type)
+            => GetLogFor(type.FullName);
+
         public IMvxLog GetLogFor<T>()
-            => GetLogFor(typeof(T).FullName);
+            => GetLogFor(typeof(T));
 
         public IMvxLog GetLogFor(string name)
             => new MvxLog(GetLogger(name));

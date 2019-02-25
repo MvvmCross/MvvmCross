@@ -36,16 +36,16 @@ namespace MvvmCross.Platforms.Tvos.Core
 
         protected virtual void RunAppStart(object hint = null)
         {
-            var startup = Mvx.Resolve<IMvxAppStart>();
-            if (!startup.IsStarted)
+            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
+            {
                 startup.Start(GetAppStartHint(hint));
-
+            }
             Window.MakeKeyAndVisible();
         }
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            return hint;
         }
 
         public override void WillEnterForeground(UIApplication application)
@@ -78,7 +78,7 @@ namespace MvvmCross.Platforms.Tvos.Core
 
     public abstract class MvxApplicationDelegate<TMvxTvosSetup, TApplication> : MvxApplicationDelegate
        where TMvxTvosSetup : MvxTvosSetup<TApplication>, new()
-       where TApplication : IMvxApplication, new()
+       where TApplication : class, IMvxApplication, new()
     {
         protected override void RegisterSetup()
         {

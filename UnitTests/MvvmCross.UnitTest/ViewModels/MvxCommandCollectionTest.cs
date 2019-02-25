@@ -6,9 +6,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using MvvmCross.Base;
 using MvvmCross.Commands;
-using MvvmCross.Tests;
 using MvvmCross.UnitTest.Mocks.Dispatchers;
-using MvvmCross.ViewModels;
 using Xunit;
 
 namespace MvvmCross.UnitTest.ViewModels
@@ -16,9 +14,9 @@ namespace MvvmCross.UnitTest.ViewModels
     [Collection("MvxTest")]
     public class MvxCommandCollectionTest
     {
-        private MvxTestFixture _fixture;
+        private NavigationTestFixture _fixture;
 
-        public MvxCommandCollectionTest(MvxTestFixture fixture)
+        public MvxCommandCollectionTest(NavigationTestFixture fixture)
         {
             _fixture = fixture;
         }

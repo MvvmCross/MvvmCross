@@ -5,7 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 using MvvmCross.IoC;
+using MvvmCross.Logging;
 using MvvmCross.Plugin;
 
 namespace MvvmCross.ViewModels
@@ -44,10 +46,10 @@ namespace MvvmCross.ViewModels
         /// <summary>
         /// Any initialization steps that need to be done on the UI thread
         /// </summary>
-        /// <param name="hint"></param>
-        public virtual void Startup(object hint)
+        public virtual Task Startup()
         {
-            // do nothing
+            MvxLog.Instance.Trace("AppStart: Application Startup - On UI thread");
+            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -66,20 +68,26 @@ namespace MvvmCross.ViewModels
         }
 
         protected void RegisterCustomAppStart<TMvxAppStart>()
-            where TMvxAppStart : IMvxAppStart
+            where TMvxAppStart : class, IMvxAppStart
         {
-            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, TMvxAppStart>();
+            Mvx.IoCProvider.ConstructAndRegisterSingleton<IMvxAppStart, TMvxAppStart>();
         }
 
         protected void RegisterAppStart<TViewModel>()
             where TViewModel : IMvxViewModel
         {
-            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel>>();
+            Mvx.IoCProvider.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel>>();
         }
 
         protected void RegisterAppStart(IMvxAppStart appStart)
         {
-            Mvx.RegisterSingleton(appStart);
+            Mvx.IoCProvider.RegisterSingleton(appStart);
+        }
+
+        protected virtual void RegisterAppStart<TViewModel, TParameter>()
+          where TViewModel : IMvxViewModel<TParameter>
+        {
+            Mvx.IoCProvider.ConstructAndRegisterSingleton<IMvxAppStart, MvxAppStart<TViewModel, TParameter>>();
         }
 
         protected IEnumerable<Type> CreatableTypes()
@@ -90,6 +98,15 @@ namespace MvvmCross.ViewModels
         protected IEnumerable<Type> CreatableTypes(Assembly assembly)
         {
             return assembly.CreatableTypes();
+        }
+    }
+
+    public class MvxApplication<TParameter> : MvxApplication, IMvxApplication<TParameter>
+    {
+        public virtual TParameter Startup(TParameter parameter)
+        {
+            // do nothing, so just return the original hint
+            return parameter;
         }
     }
 }

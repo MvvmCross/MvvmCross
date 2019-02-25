@@ -18,11 +18,13 @@ namespace MvvmCross.Platforms.Wpf.Views
             _dispatcher = dispatcher;
         }
 
+        public override bool IsOnMainThread => _dispatcher.CheckAccess();
+
         public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
-            if (_dispatcher.CheckAccess())
+            if (IsOnMainThread)
             {
-                action();
+                ExceptionMaskedAction(action, maskExceptions);
             }
             else
             {

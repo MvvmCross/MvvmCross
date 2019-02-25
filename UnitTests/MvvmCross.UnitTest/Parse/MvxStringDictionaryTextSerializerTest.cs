@@ -14,9 +14,9 @@ namespace MvvmCross.UnitTest.Parse
     [Collection("MvxTest")]
     public class MvxStringDictionaryTextSerializerTest
     {
-        private readonly MvxTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
-        public MvxStringDictionaryTextSerializerTest(MvxTestFixture fixture)
+        public MvxStringDictionaryTextSerializerTest(NavigationTestFixture fixture)
         {
             _fixture = fixture;
         }
@@ -28,7 +28,7 @@ namespace MvvmCross.UnitTest.Parse
 
             var viewModelNameLookup = new MvxViewModelByNameLookup();
             viewModelNameLookup.AddAll(GetType().Assembly);
-            Mvx.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelNameLookup);
+            Mvx.IoCProvider.RegisterSingleton<IMvxViewModelByNameLookup>(viewModelNameLookup);
 
             var parameterBundle = new MvxBundle(new Dictionary<string, string> { { "On'e", "1'\\" }, { "Two", "2" } });
             var presentationBundle =

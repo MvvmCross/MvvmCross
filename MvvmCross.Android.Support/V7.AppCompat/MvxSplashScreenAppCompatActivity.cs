@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
+using System.Threading.Tasks;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -31,6 +33,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             RegisterSetup();
             _resourceId = resourceId;
+        }
+
+        protected MvxSplashScreenAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
         }
 
         protected virtual void RequestWindowFeatures()
@@ -76,12 +83,20 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             base.OnPause();
         }
 
-        public virtual void InitializationComplete()
+        public virtual async Task InitializationComplete()
         {
             if (!_isResumed)
                 return;
 
-            RunAppStart(_bundle);
+            await RunAppStartAsync(_bundle);
+        }
+
+        protected virtual async Task RunAppStartAsync(Bundle bundle)
+        {
+            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
+            {
+                await startup.StartAsync(GetAppStartHint(bundle));
+            }
         }
 
         protected virtual void RegisterSetup()
@@ -91,7 +106,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
     public abstract class MvxSplashScreenAppCompatActivity<TMvxAndroidSetup, TApplication> : MvxSplashScreenAppCompatActivity
             where TMvxAndroidSetup : MvxAppCompatSetup<TApplication>, new()
-            where TApplication : IMvxApplication, new()
+            where TApplication : class, IMvxApplication, new()
     {
         protected MvxSplashScreenAppCompatActivity(int resourceId = NoContent) : base(resourceId)
         {

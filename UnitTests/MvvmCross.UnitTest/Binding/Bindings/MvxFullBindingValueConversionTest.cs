@@ -22,9 +22,9 @@ namespace MvvmCross.UnitTest.Binding.Bindings
     [Collection("MvxTest")]
     public class MvxFullBindingValueConversionTest
     {
-        private readonly MvxTestFixture _fixture;
+        private readonly NavigationTestFixture _fixture;
 
-        public MvxFullBindingValueConversionTest(MvxTestFixture fixture)
+        public MvxFullBindingValueConversionTest(NavigationTestFixture fixture)
         {
             _fixture = fixture;
         }
@@ -461,7 +461,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
             Type targetType, out MockSourceBinding mockSource, out MockTargetBinding mockTarget)
         {
             _fixture.ClearAll();
-            _fixture.Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(new InlineMockMainThreadDispatcher());
+            _fixture.Ioc.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(new InlineMockMainThreadDispatcher());
 
             var mockSourceBindingFactory = new Mock<IMvxSourceBindingFactory>();
             _fixture.Ioc.RegisterSingleton(mockSourceBindingFactory.Object);

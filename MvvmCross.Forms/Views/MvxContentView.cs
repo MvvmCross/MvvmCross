@@ -5,6 +5,7 @@
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Forms.Views.Base;
 using MvvmCross.ViewModels;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Views
 {
@@ -23,8 +24,8 @@ namespace MvvmCross.Forms.Views
             }
             set
             {
-                base.BindingContext = value;
-                BindingContext.DataContext = value;
+                if (value != null && !(_bindingContext != null && ReferenceEquals(DataContext, value)))
+                    BindingContext = new MvxBindingContext(value);
             }
         }
 
@@ -40,6 +41,20 @@ namespace MvvmCross.Forms.Views
             set
             {
                 _bindingContext = value;
+                base.BindingContext = _bindingContext.DataContext;
+            }
+        }
+
+        public static readonly BindableProperty ViewModelProperty = BindableProperty.Create(nameof(ViewModel), typeof(IMvxViewModel), typeof(IMvxElement), default(MvxViewModel), BindingMode.Default, null, ViewModelChanged, null, null);
+
+        internal static void ViewModelChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            if (newvalue != null)
+            {
+                if (bindable is IMvxElement element)
+                    element.DataContext = newvalue;
+                else
+                    bindable.BindingContext = newvalue;
             }
         }
 
@@ -52,6 +67,7 @@ namespace MvvmCross.Forms.Views
             set
             {
                 DataContext = value;
+                SetValue(ViewModelProperty, value);
                 OnViewModelSet();
             }
         }
@@ -65,6 +81,8 @@ namespace MvvmCross.Forms.Views
         : MvxContentView
     , IMvxElement<TViewModel> where TViewModel : class, IMvxViewModel
     {
+        public new static readonly BindableProperty ViewModelProperty = BindableProperty.Create(nameof(ViewModel), typeof(TViewModel), typeof(IMvxElement<TViewModel>), default(TViewModel), BindingMode.Default, null, ViewModelChanged, null, null);
+
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }

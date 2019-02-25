@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 
 namespace Playground.Core.ViewModels
 {
@@ -16,10 +17,8 @@ namespace Playground.Core.ViewModels
         public int ChildNo { get; set; }
     }
 
-    public class WindowViewModel : MvxViewModel
+    public class WindowViewModel : MvxNavigationViewModel
     {
-        private readonly IMvxNavigationService _navigationService;
-
         private static int _count;
 
         public string Title => $"No.{Count} Window View";
@@ -82,23 +81,21 @@ namespace Playground.Core.ViewModels
 
         public int Count { get; set; }
 
-        public WindowViewModel(IMvxNavigationService navigationService)
+        public WindowViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
-            _navigationService = navigationService;
-
             _count++;
             Count = _count;
 
             ShowWindowChildCommand = new MvxAsyncCommand<int>(async no =>
             {
-                await _navigationService.Navigate<WindowChildViewModel, WindowChildParam>(new WindowChildParam
+                await NavigationService.Navigate<WindowChildViewModel, WindowChildParam>(new WindowChildParam
                 {
                     ParentNo = Count,
                     ChildNo = no
                 });
             });
 
-            CloseCommand = new MvxAsyncCommand(async () => await _navigationService.Close(this));
+            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
 
             ToggleSettingCommand = new MvxAsyncCommand(async () => 
             {

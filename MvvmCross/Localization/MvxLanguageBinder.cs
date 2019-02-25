@@ -35,7 +35,7 @@ namespace MvvmCross.Localization
 
                 lock (this)
                 {
-                    Mvx.TryResolve(out _cachedTextProvider);
+                    Mvx.IoCProvider.TryResolve(out _cachedTextProvider);
                     if (_cachedTextProvider == null)
                     {
                         throw new MvxException(

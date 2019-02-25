@@ -54,7 +54,7 @@ namespace MvvmCross.Platforms.Wpf.Binding
         private static IMvxBindingCreator ResolveBindingCreator()
         {
             IMvxBindingCreator toReturn;
-            if (!Mvx.TryResolve<IMvxBindingCreator>(out toReturn))
+            if (!Mvx.IoCProvider.TryResolve<IMvxBindingCreator>(out toReturn))
             {
                 throw new MvxException("Unable to resolve the binding creator - have you initialized Windows Binding");
             }
@@ -66,7 +66,6 @@ namespace MvvmCross.Platforms.Wpf.Binding
             object sender,
             DependencyPropertyChangedEventArgs args)
         {
-            // bindingCreator may be null in the designer currently
             var bindingCreator = BindingCreator;
 
             bindingCreator?.CreateBindings(sender, args, ParseBindingDescriptions);

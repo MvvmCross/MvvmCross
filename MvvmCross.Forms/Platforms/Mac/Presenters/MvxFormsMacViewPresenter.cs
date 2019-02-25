@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using AppKit;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Presenters;
@@ -22,12 +23,7 @@ namespace MvvmCross.Forms.Platforms.Mac.Presenters
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
         }
 
-        private Application _formsApplication;
-        public Application FormsApplication
-        {
-            get { return _formsApplication; }
-            set { _formsApplication = value; }
-        }
+        public Application FormsApplication { get; set; }
 
         private IMvxFormsPagePresenter _formsPagePresenter;
         public virtual IMvxFormsPagePresenter FormsPagePresenter
@@ -41,9 +37,9 @@ namespace MvvmCross.Forms.Platforms.Mac.Presenters
             set { _formsPagePresenter = value; }
         }
 
-        public override void Show(MvxViewModelRequest request)
+        public override Task<bool> Show(MvxViewModelRequest request)
         {
-            FormsPagePresenter.Show(request);
+            return FormsPagePresenter.Show(request);
         }
 
         public override void RegisterAttributeTypes()
@@ -53,15 +49,15 @@ namespace MvvmCross.Forms.Platforms.Mac.Presenters
             FormsPagePresenter.RegisterAttributeTypes();
         }
 
-        public override void ChangePresentation(MvxPresentationHint hint)
+        public override async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            FormsPagePresenter.ChangePresentation(hint);
-            base.ChangePresentation(hint);
+            if (!await FormsPagePresenter.ChangePresentation(hint)) return false;
+            return await base.ChangePresentation(hint);
         }
 
-        public override void Close(IMvxViewModel viewModel)
+        public override Task<bool> Close(IMvxViewModel viewModel)
         {
-            FormsPagePresenter.Close(viewModel);
+            return FormsPagePresenter.Close(viewModel);
         }
 
         public virtual bool ShowPlatformHost(Type hostViewModel = null)

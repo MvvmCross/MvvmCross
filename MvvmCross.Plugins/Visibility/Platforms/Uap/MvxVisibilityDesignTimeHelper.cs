@@ -15,7 +15,7 @@ namespace MvvmCross.Plugin.Visibility.Platforms.Uap
             if (!IsInDesignTool)
                 return;
 
-            if (Mvx.CanResolve<IMvxNativeVisibility>())
+            if (Mvx.IoCProvider.CanResolve<IMvxNativeVisibility>())
                 return;
 
             var forceVisibilityLoaded = new Plugin();

@@ -67,9 +67,10 @@ namespace MvvmCross.Platforms.Uap.Views
             {
                 instance.EnsureInitialized();
 
-                var startup = Mvx.Resolve<IMvxAppStart>();
-                if (!startup.IsStarted)
+                if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
+                {
                     startup.Start(GetAppStartHint(activationArgs));
+                }
             }
             else
             {
@@ -79,7 +80,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            return hint;
         }
 
         protected virtual Frame InitializeFrame(IActivatedEventArgs activationArgs)
@@ -115,14 +116,14 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected virtual void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+            throw new Exception("Failed to load Page " + e.SourcePageType.FullName, e.Exception);
         }
 
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
 
-            var suspension = Mvx.GetSingleton<IMvxSuspensionManager>() as MvxSuspensionManager;
+            var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
             await Suspend(suspension);
             await suspension.SaveAsync();
             deferral.Complete();
@@ -135,7 +136,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         private async void OnResuming(object sender, object e)
         {
-            var suspension = Mvx.GetSingleton<IMvxSuspensionManager>() as MvxSuspensionManager;
+            var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
             await Resume(suspension);
             await suspension.RestoreAsync();
         }
@@ -152,7 +153,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
     public class MvxApplication<TMvxUapSetup, TApplication> : MvxApplication
        where TMvxUapSetup : MvxWindowsSetup<TApplication>, new()
-       where TApplication : IMvxApplication, new()
+       where TApplication : class, IMvxApplication, new()
     {
         protected override void RegisterSetup()
         {

@@ -10,7 +10,7 @@ namespace MvvmCross.Plugin.Share.Platforms.Ios
     {
         public void Load()
         {
-            Mvx.RegisterType<IMvxShareTask, MvxShareTask>();
+            Mvx.IoCProvider.RegisterType<IMvxShareTask, MvxShareTask>();
         }
     }
 }

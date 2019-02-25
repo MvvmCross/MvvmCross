@@ -1,10 +1,11 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using Foundation;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Platforms.Ios.Views.Base;
 using MvvmCross.ViewModels;
 using UIKit;
 
@@ -12,19 +13,27 @@ namespace MvvmCross.Platforms.Ios.Views
 {
     public class MvxBaseSplitViewController : MvxEventSourceSplitViewController, IMvxIosView
     {
-        public MvxBaseSplitViewController()
+        public MvxBaseSplitViewController() : base()
         {
             this.AdaptForBinding();
         }
 
-        public MvxBaseSplitViewController(IntPtr handle)
-            : base(handle)
+        public MvxBaseSplitViewController(NSCoder coder) : base(coder)
         {
             this.AdaptForBinding();
         }
 
-        protected MvxBaseSplitViewController(string nibName, NSBundle bundle)
-            : base(nibName, bundle)
+        protected MvxBaseSplitViewController(NSObjectFlag t) : base(t)
+        {
+            this.AdaptForBinding();
+        }
+
+        protected internal MvxBaseSplitViewController(IntPtr handle) : base(handle)
+        {
+            this.AdaptForBinding();
+        }
+
+        public MvxBaseSplitViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
         {
             this.AdaptForBinding();
         }
@@ -79,9 +88,7 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             base.DidMoveToParentViewController(parent);
             if (parent == null)
-            {
                 ViewModel?.ViewDestroy();
-            }
         }
 
         public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
@@ -98,13 +105,19 @@ namespace MvvmCross.Platforms.Ios.Views
         {
         }
 
-        public MvxBaseSplitViewController(IntPtr handle)
-            : base(handle)
+        public MvxBaseSplitViewController(NSCoder coder) : base(coder)
         {
         }
 
-        protected MvxBaseSplitViewController(string nibName, NSBundle bundle)
-            : base(nibName, bundle)
+        public MvxBaseSplitViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+        }
+
+        protected MvxBaseSplitViewController(NSObjectFlag t) : base(t)
+        {
+        }
+
+        protected internal MvxBaseSplitViewController(IntPtr handle) : base(handle)
         {
         }
 

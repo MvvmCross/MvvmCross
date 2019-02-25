@@ -28,8 +28,13 @@ namespace MvvmCross.Droid.Support.V4
 
         public static void OnCreate(this IMvxFragmentView fragmentView, IMvxBundle bundle, MvxViewModelRequest request = null)
         {
+            var cache = Mvx.IoCProvider.Resolve<IMvxMultipleViewModelCache>();
+
             if (fragmentView.ViewModel != null)
             {
+                // check if ViewModel instance was cached. If so, clear it and ignore previous instance
+                cache.GetAndClear(fragmentView.ViewModel.GetType(), fragmentView.UniqueImmutableCacheTag);
+
                 //TODO call MvxViewModelLoader.Reload when it's added in MvvmCross, tracked by #1165
                 //until then, we're going to re-run the viewmodel lifecycle here.
                 Platforms.Android.Views.MvxFragmentExtensions.RunViewModelLifecycle(fragmentView.ViewModel, bundle, request);
@@ -45,7 +50,6 @@ namespace MvvmCross.Droid.Support.V4
             var viewModelType = fragmentView.FindAssociatedViewModelType(fragment.Activity.GetType());
             var view = fragmentView as IMvxView;
 
-            var cache = Mvx.Resolve<IMvxMultipleViewModelCache>();
             var cached = cache.GetAndClear(viewModelType, fragmentView.UniqueImmutableCacheTag);
 
             view.OnViewCreate(() => cached ?? fragmentView.LoadViewModel(bundle, fragment.Activity.GetType(), request));
@@ -144,7 +148,7 @@ namespace MvvmCross.Droid.Support.V4
 
         public static void LoadViewModelFrom(this IMvxFragmentView view, MvxViewModelRequest request, IMvxBundle savedState = null)
         {
-            var loader = Mvx.Resolve<IMvxViewModelLoader>();
+            var loader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
             var viewModel = loader.LoadViewModel(request, savedState);
             if (viewModel == null) {
                 MvxAndroidLog.Instance.Warn("ViewModel not loaded for {0}", request.ViewModelType.FullName);

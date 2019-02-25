@@ -1,0 +1,28 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras">
+  <PropertyGroup>
+    <TargetFrameworks>net461</TargetFrameworks>
+    <PackageTargetFallback>$(PackageTargetFallback);net45</PackageTargetFallback>
+    <AssemblyName>MvvmCross.Forms.Platforms.Wpf</AssemblyName>
+    <RootNamespace>MvvmCross.Forms.Platforms.Wpf</RootNamespace>
+    <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains the 'MvvmCross.Forms.Platforms.Wpf' libraries for MvvmCross</Description>
+    <PackageId>MvvmCross.Forms.Platforms.Wpf</PackageId>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+    <ExtrasEnableWpfProjectSetup>true</ExtrasEnableWpfProjectSetup>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="Platforms\Wpf\**\*.cs" />
+    <ProjectReference Include="..\MvvmCross.Forms\MvvmCross.Forms.csproj" />
+    <ProjectReference Include="..\MvvmCross\MvvmCross.csproj" />
+    <ProjectReference Include="..\MvvmCross.Wpf\MvvmCross.Platforms.Wpf.csproj" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+
+  <Import Project="..\XamarinFormsWpf.targets" />
+</Project>

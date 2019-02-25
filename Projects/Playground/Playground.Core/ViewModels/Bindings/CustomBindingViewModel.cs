@@ -1,15 +1,14 @@
 ﻿using System;
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels.Bindings
 {
     public class CustomBindingViewModel
-        : MvxViewModel
+        : MvxNavigationViewModel
     {
-        private readonly IMvxNavigationService _navigationService;
-
         private IMvxAsyncCommand _closeCommand;
 
         private int _counter = 2;
@@ -18,9 +17,8 @@ namespace Playground.Core.ViewModels.Bindings
 
         private string _hello = "Hello MvvmCross";
 
-        public CustomBindingViewModel(IMvxNavigationService navigationService)
+        public CustomBindingViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
-            _navigationService = navigationService;
         }
 
         public string Hello
@@ -31,7 +29,7 @@ namespace Playground.Core.ViewModels.Bindings
 
         public IMvxAsyncCommand CloseCommand => _closeCommand ??
                                                 (_closeCommand = new MvxAsyncCommand(async () =>
-                                                    await _navigationService.Close(this)));
+                                                    await NavigationService.Close(this)));
 
         public int Counter
         {

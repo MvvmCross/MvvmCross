@@ -60,7 +60,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
             {
                 if (_formsApplication == null)
                 {
-                    var formsPresenter = Mvx.Resolve<IMvxFormsViewPresenter>();
+                    var formsPresenter = Mvx.IoCProvider.Resolve<IMvxFormsViewPresenter>();
                     _formsApplication = formsPresenter.FormsApplication;
                 }
 
@@ -113,8 +113,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
         {
             InitializeForms(bundle);
 
-            var startup = Mvx.Resolve<IMvxAppStart>();
-            if (!startup.IsStarted)
+            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
                 startup.Start(GetAppStartHint(bundle));
 
             InitializeApplication();
@@ -122,7 +121,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            return hint;
         }
 
         public virtual void InitializeForms(Bundle bundle)
@@ -178,17 +177,36 @@ namespace MvvmCross.Forms.Platforms.Android.Views
             ViewModel?.ViewDisappeared();
         }
 
-        public override void OnBackPressed()
+        public override async void OnBackPressed()
         {
-            var page = Xamarin.Forms.Application.Current.MainPage;
-            if (page == null || (page?.Navigation?.NavigationStack?.Count <= 1 && page?.Navigation?.ModalStack?.Count == 0))
+            var presenter = Mvx.IoCProvider.Resolve<IMvxFormsPagePresenter>();
+            var pages = presenter.CurrentPageTree;
+
+            for (var i = pages.Length - 1; i >= 0; i--)
             {
-                MoveTaskToBack(true);
+                var pg = pages[i];
+                if (pg is Xamarin.Forms.NavigationPage navPage)
+                {
+                    if (pg.Navigation.ModalStack.Count > 0)
+                    {
+                        await pg.Navigation.PopModalAsync();
+                        return;
+                    }
+
+                    if (pg.Navigation.NavigationStack.Count > 1)
+                    {
+                        var handled = pg.SendBackButtonPressed();
+                        if (handled) return;
+                    }
+                }
+                else
+                {
+                    var handled = pg.SendBackButtonPressed();
+                    if (handled) return;
+                }
             }
-            else
-            {
-                base.OnBackPressed();
-            }
+
+            MoveTaskToBack(true);
         }
 
         public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
@@ -215,7 +233,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
     public abstract class MvxFormsAppCompatActivity<TMvxAndroidSetup, TApplication, TFormsApplication> : MvxFormsAppCompatActivity
     where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
-    where TApplication : IMvxApplication, new()
+    where TApplication : class, IMvxApplication, new()
     where TFormsApplication : Application, new()
     {
         protected override void RegisterSetup()
@@ -226,7 +244,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
     public abstract class MvxFormsAppCompatActivity<TMvxAndroidSetup, TApplication, TFormsApplication, TViewModel> : MvxFormsAppCompatActivity<TViewModel>
     where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
-    where TApplication : IMvxApplication, new()
+    where TApplication : class, IMvxApplication, new()
     where TFormsApplication : Application, new()
          where TViewModel : class, IMvxViewModel
     {

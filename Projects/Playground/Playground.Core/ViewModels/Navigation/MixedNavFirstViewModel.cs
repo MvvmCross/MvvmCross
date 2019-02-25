@@ -4,18 +4,16 @@
 
 using System.Threading.Tasks;
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class MixedNavFirstViewModel : MvxViewModel
+    public class MixedNavFirstViewModel : MvxNavigationViewModel
     {
-        private readonly IMvxNavigationService _navigationService;
-        
-        public MixedNavFirstViewModel(IMvxNavigationService navigationService)
+        public MixedNavFirstViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
-            _navigationService = navigationService;
         }
 
         public IMvxAsyncCommand LoginCommand => new MvxAsyncCommand(GotoMasterDetailPage, CanLogin);
@@ -27,8 +25,8 @@ namespace Playground.Core.ViewModels
 
         private async Task GotoMasterDetailPage()
         {
-            await _navigationService.Navigate<MixedNavMasterDetailViewModel>();
-            await _navigationService.Navigate<MixedNavMasterRootContentViewModel>();
+            await NavigationService.Navigate<MixedNavMasterDetailViewModel>();
+            await NavigationService.Navigate<MixedNavMasterRootContentViewModel>();
         }
     }
 }

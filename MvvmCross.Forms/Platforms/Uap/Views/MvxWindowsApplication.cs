@@ -25,8 +25,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
             {
                 MvxWindowsSetupSingleton.EnsureSingletonAvailable(RootFrame, activationArgs, nameof(Suspend)).EnsureInitialized();
 
-                var startup = Mvx.Resolve<IMvxAppStart>();
-                if (!startup.IsStarted)
+                if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
                     startup.Start(GetAppStartHint(activationArgs));
 
                 var hostType = HostWindowsPageType();
@@ -39,7 +38,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
 
     public abstract class MvxWindowsApplication<TMvxUapSetup, TApplication, TFormsApplication> : MvxWindowsApplication
        where TMvxUapSetup : MvxFormsWindowsSetup<TApplication, TFormsApplication>, new()
-       where TApplication : IMvxApplication, new()
+       where TApplication : class, IMvxApplication, new()
         where TFormsApplication : Application, new()
     {
         protected abstract override Type HostWindowsPageType();
@@ -52,7 +51,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
 
     public class MvxWindowsApplication<TMvxUapSetup, TApplication, TFormsApplication, THostPageType> : MvxWindowsApplication<TMvxUapSetup, TApplication, TFormsApplication>
        where TMvxUapSetup : MvxFormsWindowsSetup<TApplication, TFormsApplication>, new()
-       where TApplication : IMvxApplication, new()
+       where TApplication : class, IMvxApplication, new()
         where TFormsApplication : Application, new()
         where THostPageType : MvxFormsWindowsPage
     {

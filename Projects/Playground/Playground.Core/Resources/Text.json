@@ -1,5 +1,7 @@
 ﻿{
     "ThisIsLocalized": "Localized text",
     "ThisIsLocalizedToo": "I'm using MvxLang markup!",
-    "ThisIsLocalizedThroughMvxBind": "MvxBind markup with converter!"
+    "ThisIsLocalizedThroughMvxBind": "MvxBind markup with converter!",
+    "HideLabel": "I am hidden!",
+    "ShowLabel": "I am not hidden!"
 }

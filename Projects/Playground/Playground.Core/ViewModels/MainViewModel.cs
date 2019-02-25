@@ -4,47 +4,44 @@
 
 using MvvmCross.Commands;
 using MvvmCross.Localization;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using Playground.Core.ViewModels.Bindings;
 
 namespace Playground.Core.ViewModels
 {
-    public class MainViewModel : MvxViewModel
+    public class MainViewModel : MvxNavigationViewModel
     {
-        private readonly IMvxNavigationService _navigationService;
-
         private string _bindableText = "I'm bound!";
 
         private int _counter = 2;
 
-        public MainViewModel(IMvxNavigationService navigationService)
+        public MainViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
-            _navigationService = navigationService;
+            ShowChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ChildViewModel>());
 
-            ShowChildCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChildViewModel>());
-
-            ShowModalCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalViewModel>());
+            ShowModalCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ModalViewModel>());
 
             ShowModalNavCommand =
-                new MvxAsyncCommand(async () => await _navigationService.Navigate<ModalNavViewModel>());
+                new MvxAsyncCommand(async () => await NavigationService.Navigate<ModalNavViewModel>());
 
-            ShowTabsCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<TabsRootViewModel>());
+            ShowTabsCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<TabsRootViewModel>());
 
-            ShowSplitCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SplitRootViewModel>());
+            ShowSplitCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SplitRootViewModel>());
 
             ShowOverrideAttributeCommand = new MvxAsyncCommand(async () =>
-                await _navigationService.Navigate<OverrideAttributeViewModel>());
+                await NavigationService.Navigate<OverrideAttributeViewModel>());
 
-            ShowSheetCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SheetViewModel>());
+            ShowSheetCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SheetViewModel>());
 
-            ShowWindowCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<WindowViewModel>());
+            ShowWindowCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<WindowViewModel>());
 
             ShowMixedNavigationCommand =
-                new MvxAsyncCommand(async () => await _navigationService.Navigate<MixedNavFirstViewModel>());
+                new MvxAsyncCommand(async () => await NavigationService.Navigate<MixedNavFirstViewModel>());
 
             ShowCustomBindingCommand =
-                new MvxAsyncCommand(async () => await _navigationService.Navigate<CustomBindingViewModel>());
+                new MvxAsyncCommand(async () => await NavigationService.Navigate<CustomBindingViewModel>());
 
             _counter = 3;
         }
@@ -76,11 +73,7 @@ namespace Playground.Core.ViewModels
             get => _bindableText;
             set
             {
-                if (BindableText != value)
-                {
-                    _bindableText = value;
-                    RaisePropertyChanged();
-                }
+                SetProperty(ref _bindableText, value);
             }
         }
 

@@ -5,9 +5,10 @@
     xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
     xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
     xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
-    x:Class="Playground.Forms.UI.Pages.ChildPage" Title="Child page">
+    x:Class="Playground.Forms.UI.Pages.ChildPage" Title="Child page" >
     <ContentPage.Content>
-      <StackLayout Margin="10">
+        <StackLayout Margin="10">
+            <Label mvx:Bi.nd="Text AnotherBrokenTextValue, Mode=OneWay" x:Name="BrokenTextLabel" />
             <Label Text="Im a child view" TextColor="{StaticResource AdditionalColor}" />
             <Button Text="Show Second Child" mvx:Bi.nd="Command ShowSecondChildCommand"/>
             <Button Text="Close" mvx:Bi.nd="Command CloseCommand"/>

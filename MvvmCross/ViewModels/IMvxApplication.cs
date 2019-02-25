@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Threading.Tasks;
 using MvvmCross.Plugin;
 
 namespace MvvmCross.ViewModels
@@ -12,8 +13,13 @@ namespace MvvmCross.ViewModels
 
         void Initialize();
 
-        void Startup(object hint);
+        Task Startup();
 
         void Reset();
+    }
+
+    public interface IMvxApplication<THint> : IMvxApplication
+    {
+        THint Startup(THint hint);
     }
 }

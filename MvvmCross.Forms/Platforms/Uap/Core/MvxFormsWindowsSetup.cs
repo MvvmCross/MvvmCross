@@ -56,7 +56,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
         protected override void InitializeIoC()
         {
             base.InitializeIoC();
-            Mvx.RegisterSingleton<IMvxFormsSetup>(this);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFormsSetup>(this);
         }
 
         protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
@@ -70,14 +70,14 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
         protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
         {
             var formsPagePresenter = new MvxFormsPagePresenter(viewPresenter);
-            Mvx.RegisterSingleton(formsPagePresenter);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFormsPagePresenter>(formsPagePresenter);
             return formsPagePresenter;
         }
 
         protected override IMvxWindowsViewPresenter CreateViewPresenter(IMvxWindowsFrame rootFrame)
         {
             var presenter = new MvxFormsUwpViewPresenter(rootFrame, FormsApplication);
-            Mvx.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
             presenter.FormsPagePresenter = CreateFormsPagePresenter(presenter);
             return presenter;
         }
@@ -98,7 +98,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
     }
 
     public class MvxFormsWindowsSetup<TApplication, TFormsApplication> : MvxFormsWindowsSetup
-        where TApplication : IMvxApplication, new()
+        where TApplication : class, IMvxApplication, new()
         where TFormsApplication : Application, new()        
     {
         public override IEnumerable<Assembly> GetViewAssemblies()
@@ -113,6 +113,6 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
 
         protected override Application CreateFormsApplication() => new TFormsApplication();
 
-        protected override IMvxApplication CreateApp() => Mvx.IocConstruct<TApplication>();
+        protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
     }
 }

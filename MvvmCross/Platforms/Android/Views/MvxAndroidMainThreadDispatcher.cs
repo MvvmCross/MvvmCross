@@ -4,7 +4,6 @@
 
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Android.App;
 using MvvmCross.Base;
 
@@ -12,10 +11,12 @@ namespace MvvmCross.Platforms.Android.Views
 {
     public class MvxAndroidMainThreadDispatcher : MvxMainThreadAsyncDispatcher
     {
+        public override bool IsOnMainThread => Application.SynchronizationContext == SynchronizationContext.Current;
+
         public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
-            if (Application.SynchronizationContext == SynchronizationContext.Current)
-                action();
+            if (IsOnMainThread)
+                ExceptionMaskedAction(action, maskExceptions);
             else
             {
                 Application.SynchronizationContext.Post(ignored =>
