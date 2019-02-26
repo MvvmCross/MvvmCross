@@ -131,7 +131,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            return hint;
         }
 
         protected override void OnDestroy()

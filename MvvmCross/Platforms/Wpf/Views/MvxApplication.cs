@@ -31,7 +31,7 @@ namespace MvvmCross.Platforms.Wpf.Views
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            return hint;
         }
 
         protected virtual void RegisterSetup()

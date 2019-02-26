@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Windows.Input;
 using Android.Content;
+using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
@@ -169,6 +170,12 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec)
         {
+            if (Build.VERSION.SdkInt < BuildVersionCodes.Lollipop)
+            {
+                base.OnMeasure(widthMeasureSpec, heightMeasureSpec);
+                return;
+            }
+
             if (NestedScrollingEnabled)
                 base.OnMeasure(widthMeasureSpec, heightMeasureSpec);
             else
