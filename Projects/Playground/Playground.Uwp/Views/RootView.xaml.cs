@@ -7,11 +7,15 @@ namespace Playground.Uwp.Views
 {
     [MvxViewFor(typeof(RootViewModel))]
     [MvxPagePresentation]
-    public sealed partial class RootView : MvxWindowsPage
+    public sealed partial class RootView : RootViewPage
     {
         public RootView()
         {
             this.InitializeComponent();
         }
+    }
+
+    public abstract class RootViewPage : MvxWindowsPage<RootViewModel>
+    {
     }
 }

@@ -201,7 +201,7 @@ On Android, the easiest way to declare initialization is by adding a custom `App
 namespace MyAwesomeApp.Droid
 {
     [Application]
-    public class MainApplication : MvxAndroidApplication<MvxAndroidSetup, App>
+    public class MainApplication : MvxAndroidApplication<MvxAndroidSetup<App>, App>
     {
         public MainApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {

@@ -31,11 +31,16 @@ This package contains the 'Core' libraries for MvvmCross</Description>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
     <Compile Include="Platforms\Netstandard\**\*.cs" />
   </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
+    <Compile Include="Platforms\Net\**\*.cs" />
+    <Compile Include="Platforms\Console\**\*.cs" />
+  </ItemGroup>
   
   <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
     <Compile Include="Platforms\Net\**\*.cs" />
     <Compile Include="Platforms\Console\**\*.cs" />
-    <PackageReference Include="System.Console" Version="4.3.0" />
+    <PackageReference Include="System.Console" Version="4.3.1" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">

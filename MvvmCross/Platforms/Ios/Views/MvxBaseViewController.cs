@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -15,17 +15,25 @@ namespace MvvmCross.Platforms.Ios.Views
 	/// </summary>
 	public abstract class MvxBaseViewController<TViewModel> : MvxViewController where TViewModel : IMvxViewModel
     {
-		public MvxBaseViewController()
-		{
-		}
-
-		public MvxBaseViewController(IntPtr handle) : base(handle)
+        public MvxBaseViewController()
         {
-		}
+        }
 
-		protected MvxBaseViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        public MvxBaseViewController(NSCoder coder) : base(coder)
         {
-		}
+        }
+
+        protected MvxBaseViewController(NSObjectFlag t) : base(t)
+        {
+        }
+
+        protected internal MvxBaseViewController(IntPtr handle) : base(handle)
+        {
+        }
+
+        public MvxBaseViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+        }
 
         /// <summary>
         /// Gets or sets the view model.

@@ -3,7 +3,7 @@ layout: documentation
 title: Network
 category: Plugins
 ---
-The original purpose of the `Network` plugin was to provide `IMvxReachability` **on iOS only**
+The purpose of the `Network` plugin is to provide an implementation `IMvxReachability`. It is currently implemented for iOS, Android, UWP and WPF.
 
 ```c#
 public interface IMvxReachability
@@ -12,9 +12,7 @@ public interface IMvxReachability
 }
 ```
 
-**Note:** this interface is currently implemented on iOS only, although some contributors are working on other platforms (e.g. for Android see https://github.com/slodge/MvvmCross/issues/362)
-
-Since this original purpose, Network has now further been expanded to provide a simple Rest implementation - and this is available on Droid, iOS, Windows Uwp and Wpf.
+Since this original purpose, Network has now further been expanded to provide a simple Rest implementation - and this is available on Android, iOS, Windows UWP and WPF.
 
 The Rest client is mainly implemented using the `IMvxRestClient` and `IMvxJsonRestClient` interfaces
 
@@ -52,7 +50,7 @@ To make a simple fixed url Rest request, you can use:
 
 ```c#
 var request = new MvxRestRequest("http://myService.org/things/list");
-var client = Mvx.Resolve<IMvxRestClient>();
+var client = Mvx.IoCProvider.Resolve<IMvxRestClient>();
 client.MakeRequest(request,
 (MvxStreamRestResponse response) => {
     // do something with the response.StatusCode and response.Stream
@@ -70,7 +68,7 @@ var request = new MvxJsonRestRequest<Person>("http://myService.org/things/add")
     Body = person
 };
 
-var client = Mvx.Resolve<IMvxJsonRestClient>();
+var client = Mvx.IoCProvider.Resolve<IMvxJsonRestClient>();
 client.MakeRequestFor<PersonAddResult>(request,
 (MvxDecodedRestResponse<PersonAddResult> response) => {
     // do something with the response.StatusCode and response.Result

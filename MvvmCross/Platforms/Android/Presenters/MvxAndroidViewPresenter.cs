@@ -12,7 +12,6 @@ using Android.Content;
 using Android.OS;
 using Android.Util;
 using Android.Views;
-using Java.Lang;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Core;
@@ -34,7 +33,7 @@ namespace MvvmCross.Platforms.Android.Presenters
         protected MvxViewModelRequest _pendingRequest;
 
         protected virtual FragmentManager CurrentFragmentManager => CurrentActivity.FragmentManager;
-        
+
         private IMvxAndroidCurrentTopActivity _mvxAndroidCurrentTopActivity;
         protected virtual Activity CurrentActivity
         {
@@ -103,29 +102,9 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         public override void RegisterAttributeTypes()
         {
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxActivityPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (view, attribute, request) => ShowActivity(view, (MvxActivityPresentationAttribute)attribute, request),
-                    CloseAction = (viewModel, attribute) => CloseActivity(viewModel, (MvxActivityPresentationAttribute)attribute)
-                });
-
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxFragmentPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (view, attribute, request) => ShowFragment(view, (MvxFragmentPresentationAttribute)attribute, request),
-                    CloseAction = (viewModel, attribute) => CloseFragment(viewModel, (MvxFragmentPresentationAttribute)attribute)
-                });
-
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxDialogFragmentPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (view, attribute, request) => ShowDialogFragment(view, (MvxDialogFragmentPresentationAttribute)attribute, request),
-                    CloseAction = (viewModel, attribute) => CloseFragmentDialog(viewModel, (MvxDialogFragmentPresentationAttribute)attribute)
-                });
+            AttributeTypesToActionsDictionary.Register<MvxActivityPresentationAttribute>(ShowActivity, CloseActivity);
+            AttributeTypesToActionsDictionary.Register<MvxFragmentPresentationAttribute>(ShowFragment, CloseFragment);
+            AttributeTypesToActionsDictionary.Register<MvxDialogFragmentPresentationAttribute>(ShowDialogFragment, CloseFragmentDialog);
         }
 
         public override MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request)
@@ -210,11 +189,6 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             var activityViewModelType = ViewModelTypeFinder.FindTypeOrNull(currentActivityType);
             return activityViewModelType;
-        }
-
-        public override Task<bool> Show(MvxViewModelRequest request)
-        {
-            return GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
         }
 
         #region Show implementations
@@ -350,7 +324,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 throw new NullReferenceException($"Fragment host not found when trying to show View {view.Name} as Nested Fragment");
 
             if (!fragmentHost.IsVisible)
-                throw new InvalidOperationException($"Fragment host is not visible when trying to show View {view.Name} as Nested Fragment");
+                MvxLog.Instance.Warn("Fragment host is not visible when trying to show View {0} as Nested Fragment", view.Name);
 
             PerformShowFragmentTransaction(fragmentHost.ChildFragmentManager, attribute, request);
         }
@@ -360,7 +334,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             MvxFragmentPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var fragmentName = FragmentJavaName(attribute.ViewType);
+            var fragmentName = attribute.ViewType.FragmentJavaName();
 
             IMvxFragmentView fragment = null;
             if (attribute.IsCacheableFragment)
@@ -463,7 +437,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             MvxDialogFragmentPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var fragmentName = FragmentJavaName(attribute.ViewType);
+            var fragmentName = attribute.ViewType.FragmentJavaName();
             IMvxFragmentView mvxFragmentView = CreateFragment(attribute, fragmentName);
             var dialog = (DialogFragment)mvxFragmentView;
 
@@ -496,11 +470,6 @@ namespace MvvmCross.Platforms.Android.Presenters
         }
         #endregion
 
-        public override Task<bool> Close(IMvxViewModel viewModel)
-        {
-            return GetPresentationAttributeAction(new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);
-        }
-
         #region Close implementations
         protected virtual Task<bool> CloseActivity(IMvxViewModel viewModel, MvxActivityPresentationAttribute attribute)
         {
@@ -525,7 +494,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual Task<bool> CloseFragmentDialog(IMvxViewModel viewModel, MvxDialogFragmentPresentationAttribute attribute)
         {
-            string tag = FragmentJavaName(attribute.ViewType);
+            string tag = attribute.ViewType.FragmentJavaName();
             var toClose = CurrentFragmentManager.FindFragmentByTag(tag);
             if (toClose != null && toClose is DialogFragment dialog)
             {
@@ -575,11 +544,15 @@ namespace MvvmCross.Platforms.Android.Presenters
             FragmentManager fragmentManager,
             MvxFragmentPresentationAttribute fragmentAttribute)
         {
-            var fragmentName = FragmentJavaName(fragmentAttribute.ViewType);
+            var fragmentName = fragmentAttribute.ViewType.FragmentJavaName();
 
             if (fragmentManager.BackStackEntryCount > 0)
             {
-                fragmentManager.PopBackStackImmediate(fragmentName, PopBackStackFlags.Inclusive);
+                var popBackStackFragmentName = fragmentAttribute.PopBackStackImmediateName?.Trim() == ""
+                    ? fragmentName
+                    : fragmentAttribute.PopBackStackImmediateName;
+
+                fragmentManager.PopBackStackImmediate(popBackStackFragmentName, fragmentAttribute.PopBackStackImmediateFlag.ToNativePopBackStackFlags());
 
                 OnFragmentPopped(null, null, fragmentAttribute);
                 return true;
@@ -609,11 +582,6 @@ namespace MvvmCross.Platforms.Android.Presenters
         }
         #endregion
 
-        protected virtual string FragmentJavaName(Type fragmentType)
-        {
-            return Class.FromType(fragmentType).Name;
-        }
-
         protected virtual IMvxFragmentView CreateFragment(MvxBasePresentationAttribute attribute,
             string fragmentName)
         {
@@ -630,7 +598,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual Fragment GetFragmentByViewType(Type type)
         {
-            var fragmentName = FragmentJavaName(type);
+            var fragmentName = type.FragmentJavaName();
             var fragment = CurrentFragmentManager?.FindFragmentByTag(fragmentName);
 
             if (fragment != null)
@@ -643,7 +611,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual Fragment FindFragmentInChildren(string fragmentName, FragmentManager fragManager)
         {
-            if(fragManager.BackStackEntryCount == 0)
+            if (fragManager.BackStackEntryCount == 0)
                 return null;
 
             for (int i = 0; i < fragManager.BackStackEntryCount; i++)
@@ -653,14 +621,17 @@ namespace MvvmCross.Platforms.Android.Presenters
                 //let's try again finding it
                 var frag = parentFrag?.ChildFragmentManager?.FindFragmentByTag(fragmentName);
 
+                if (frag == null)
+                {
+                    //reloop for other fragments
+                    frag = FindFragmentInChildren(fragmentName, parentFrag?.ChildFragmentManager);
+                }
+
                 //if we found the frag lets return it!
                 if (frag != null)
                 {
                     return frag;
                 }
-
-                //reloop for other fragments
-                FindFragmentInChildren(fragmentName, parentFrag?.ChildFragmentManager);
             }
 
             return null;

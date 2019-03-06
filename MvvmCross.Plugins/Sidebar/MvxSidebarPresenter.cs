@@ -28,17 +28,13 @@ namespace MvvmCross.Plugin.Sidebar
         {
             base.RegisterAttributeTypes();
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxSidebarPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = async (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxSidebarPresentationAttribute>(
+                    async (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        return await ShowSidebarViewController(viewController, (MvxSidebarPresentationAttribute)attribute, request);
+                        return await ShowSidebarViewController(viewController, attribute, request);
                     },
-                    CloseAction = async (viewModel, attribute) => CloseSidebarViewController(viewModel, (MvxSidebarPresentationAttribute)attribute)
-                });
+                    async (viewModel, attribute) => CloseSidebarViewController(viewModel, attribute));
         }
 
         protected virtual async Task<bool> ShowSidebarViewController(
@@ -46,6 +42,8 @@ namespace MvvmCross.Plugin.Sidebar
             MvxSidebarPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
+            if (!await CloseModalViewControllers()) return false;
+            
             if (SideBarViewController == null)
             {
                 if (!await ShowRootViewController(new MvxSidebarViewController(), null, request)) return false;

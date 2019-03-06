@@ -89,7 +89,7 @@ The technique generally used for this is for the ViewModel to expose special `Co
 
 For example, a `CheckBox` might have a `CheckedCommand` and this might be bindable to a `RememberMeChangedCommand` on the ViewModel.
 
-Within Windows, For sometimes, when a View has not exposed
+Within Windows, for sometimes, when a View has not exposed
 
 ### Binding Modes 
 
@@ -103,7 +103,7 @@ There are 4 modes in which properties in the View can be bound to properties in 
 **One-Way** 
 
 - This binding mode transfers values from the ViewModel to the View
-- whenever the property changes within the ViewModel, then the corresponding View property is automatically adjusted. 
+- Whenever the property changes within the ViewModel, then the corresponding View property is automatically adjusted. 
 - This binding mode is useful when when showing, for example, data which is arriving from a dynamic source - like from a sensor or from a network data feed. 
 - In Windows/Xaml, this is very often the default binding mode - so it is the mode used when no other is selected.
 
@@ -552,21 +552,19 @@ private string _firstName;
 public string FirstName
 {
     get => _firstName;
-    set 
-    { 
-        if (SetProperty(ref _firstName, value))
-            RaisePropertyChanged(() => FullName);
-    }
+    set => SetProperty(ref _firstName, value, () => RaisePropertyChanged(() => FullName));
 }
 
 private string _lastName;
 public string LastName
 {
     get => _lastName;
-    set 
-    { 
-        if (SetProperty(ref _lastName, value))
+    set => SetProperty(ref _lastName, value, (setPropertyResult) => 
+    {
+        if (setPropertyResult)
+        {
             RaisePropertyChanged(() => FullName);
+        }
     }
 }
 
@@ -909,7 +907,7 @@ protected override void InitializeLastChance()
         
  - WPF
 
-    xmlns:mvx="clr-namespace:mvx;assembly=MvvmCross.Binding.Wpf"
+    xmlns:mvx="clr-namespace:MvvmCross.Platforms.Wpf.Binding;assembly=MvvmCross.Platforms.Wpf"
 
 
 - in your Xaml files you can now include bindings within tags such as:
@@ -963,6 +961,35 @@ set.Bind(button).To(vm => vm.readonly)
 
 *Note* : This feature is only available in fluent binding.
 
+### Clear Bindings
+
+If you want to dynamically remove individual bindings after you have applied them to your view you need to add a `ClearBindingKey` to your binding descriptions. The `ClearBindingKey` can be any object type.
+
+***Individual binding***
+
+```c#
+bindingSet.Bind(_inputText)
+    .For(v => v.Text)
+    .To(vm => vm.TextValue)
+    .WithClearBindingKey(nameof(_inputText));
+```
+
+***Binding set*** (applied to all descriptions in the set)
+
+```c#
+bindingSet.Bind(_inputText)
+    .For(v => v.Text)
+    .To(vm => vm.TextValue);
+
+bindingSet.ApplyWithClearBindingKey(nameof(FluentBindingView));
+```
+
+To remove the binding using the `ClearBindingKey` you can make use of `ClearBindings` extension on the `IMvxBindingContextOwner`
+
+ ```c#
+ this.ClearBindings(nameof(FluentBindingView));
+ ```
+
 ### Default view properties
 
 The tables in this section describe the default view properties used in a Fluent binding when the `For` method chain is not provided.
@@ -977,6 +1004,7 @@ Android.Widget.TextView | Text
 Android.Widget.CompoundButton | Checked
 Android.Widget.SeekBar | Progress
 Android.Widget.SearchView | Query
+Android.Support.Design.Widget.FloatingActionButton | Click
 MvvmCross.Binding.Droid.Views.MvxListView | ItemsSource
 MvvmCross.Binding.Droid.Views.MvxLinearLayout | ItemsSource
 MvvmCross.Binding.Droid.Views.MvxGridView | ItemsSource
@@ -1055,8 +1083,8 @@ using MvvmCross.Platforms.Android.Binding
 using MvvmCross.Binding.Droid
 ```
 
-Base Control | String | Extension method | Mvx version introduced
----- | --------- | --------- | ---------
+Base Control | String | Extension method | Mvx version introduced | Notes
+---- | --------- | --------- | --------- | ---------
 Android.Views.View | Visible | BindVisible()
 Android.Views.View | Hidden | BindHidden()
 Android.Views.View | Click | BindClick()
@@ -1082,6 +1110,8 @@ Android.Widget.EditText | TextFocus | BindTextFocus()
 Android.Widget.SearchView | Query | BindQuery()
 Android.Widget.RatingBar | Rating | BindRating()
 Android.Widget.AdapterView | SelectedItemPosition | BindSelectedItemPosition()
+Android.Widget.NumberPicker | DisplayedValues | BindDisplayedValues() | 6.2.3 | Must be before `Value` binding
+Android.Widget.NumberPicker | Value | BindValue() | 6.2.3 | Must be after `DislayedValues` binding
 Android.Preferences.Preference | Value | BindValue()
 Android.Preferences.EditTextPreference | Text | BindText()
 Android.Preferences.ListPreference | Value | BindValue()
@@ -1121,7 +1151,7 @@ MvvmCross.Droid.Support.V7.AppCompat.Widget.MvxAppCompatRadioGroup | SelectedIte
 **Android - `using MvvmCross.Droid.Support.V7.Preference`**
 
 Base Control | String | Extension method | Mvx version introduced
----- | --------- | ---------
+---- | --------- | --------- | ---------
 Android.Support.V7.Preferences.Preference | Value | BindValue()
 Android.Support.V7.Preferences.ListPreference | Value | BindValue()
 Android.Support.V7.Preferences.EditTextPreference | Text | BindText()

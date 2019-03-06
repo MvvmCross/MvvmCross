@@ -27,6 +27,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             : base(tableView)
         {
             _cellIdentifier = new NSString(cellIdentifier);
+            tableView.RegisterNibForCellReuse(UINib.FromName(cellIdentifier, NSBundle.MainBundle), cellIdentifier);
         }
 
         public MvxSimpleTableViewSource(UITableView tableView, string nibName, string cellIdentifier = null,

@@ -9,7 +9,7 @@ The `WebBrowser` plugin provides cross platform support for showing web pages us
 private void MySampleCommand()
 {
     PluginLoader.Instance.EnsureLoaded();
-    var task = Mvx.Resolve<IMvxWebBrowserTask>();
+    var task = Mvx.IoCProvider.Resolve<IMvxWebBrowserTask>();
     task.ShowWebPage("http://www.xamarin.com");
 }
 ```

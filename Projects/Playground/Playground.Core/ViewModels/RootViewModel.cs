@@ -7,6 +7,7 @@ using System.Net;
 using System.Threading.Tasks;
 using MvvmCross;
 using MvvmCross.Commands;
+using MvvmCross.Localization;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin.Messenger;
@@ -14,6 +15,7 @@ using MvvmCross.Plugin.Network.Rest;
 using MvvmCross.ViewModels;
 using Playground.Core.Models;
 using Playground.Core.ViewModels.Bindings;
+using Playground.Core.ViewModels.Navigation;
 using Playground.Core.ViewModels.Samples;
 
 namespace Playground.Core.ViewModels
@@ -25,6 +27,11 @@ namespace Playground.Core.ViewModels
         private int _counter = 2;
 
         private string _welcomeText = "Default welcome";
+
+        public IMvxLanguageBinder TextSource
+        {
+            get { return new MvxLanguageBinder("Playground.Core", "Text"); }
+        }
 
         public RootViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService, IMvxViewModelLoader mvxViewModelLoader) : base(logProvider, navigationService)
         {
@@ -82,7 +89,15 @@ namespace Playground.Core.ViewModels
             ShowCustomBindingCommand =
                 new MvxAsyncCommand(async () => await NavigationService.Navigate<CustomBindingViewModel>());
 
+            ShowFluentBindingCommand =
+                new MvxAsyncCommand(async () => await NavigationService.Navigate<FluentBindingViewModel>());
+
             _counter = 3;
+
+            TriggerVisibilityCommand =
+                new MvxCommand(() => IsVisible = !IsVisible);
+
+            FragmentCloseCommand = new MvxAsyncCommand(() => NavigationService.Navigate<FragmentCloseViewModel>());
         }
 
         public MvxNotifyTask MyTask { get; set; }
@@ -132,6 +147,19 @@ namespace Playground.Core.ViewModels
             new MvxAsyncCommand(async () => await NavigationService.Navigate<ConvertersViewModel>());
 
         public IMvxAsyncCommand ShowSharedElementsCommand { get; }
+
+        public IMvxAsyncCommand ShowFluentBindingCommand { get; }
+
+        public IMvxCommand TriggerVisibilityCommand { get; }
+
+        public IMvxCommand FragmentCloseCommand { get; }
+
+        private bool _isVisible;
+        public bool IsVisible
+        {
+            get => _isVisible;
+            set => SetProperty(ref _isVisible, value);
+        }
 
         public string WelcomeText
         {

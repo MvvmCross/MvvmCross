@@ -35,6 +35,11 @@ namespace MvvmCross.Platforms.Android.Views
             _resourceId = resourceId;
         }
 
+        protected MvxSplashScreenActivity(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
+
         protected virtual void RequestWindowFeatures()
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
@@ -88,9 +93,10 @@ namespace MvvmCross.Platforms.Android.Views
 
         protected virtual async Task RunAppStartAsync(Bundle bundle)
         {
-            var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
-            if (!startup.IsStarted)
+            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
+            {
                 await startup.StartAsync(GetAppStartHint(bundle));
+            }
         }
 
         protected virtual void RegisterSetup()

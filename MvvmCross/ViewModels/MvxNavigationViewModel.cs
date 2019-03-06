@@ -11,7 +11,6 @@ namespace MvvmCross.ViewModels
     public abstract class MvxNavigationViewModel
         : MvxViewModel
     {
-        private IMvxLogProvider _logProvider;
         private IMvxLog _log;
 
         protected MvxNavigationViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base()

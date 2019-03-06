@@ -10,6 +10,7 @@ var solutionName = "MvvmCross";
 var repoName = "mvvmcross/mvvmcross";
 var sln = new FilePath("./" + solutionName + ".sln");
 var outputDir = new DirectoryPath("./artifacts");
+var gitVersionLog = new FilePath("./artifacts/gitversion.log");
 var nuspecDir = new DirectoryPath("./nuspec");
 var nugetPackagesDir = new DirectoryPath("./nuget/packages");
 var target = Argument("target", "Default");
@@ -17,13 +18,20 @@ var configuration = Argument("configuration", "Release");
 var verbosityArg = Argument("verbosity", "Minimal");
 var verbosity = Verbosity.Minimal;
 
+var signingSecret = EnvironmentVariable("SIGNING_SECRET");
+var signingUser = EnvironmentVariable("SIGNING_USER");
+var didSignPackages = false;
+
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 GitVersion versionInfo = null;
 
-Setup(context => {
-    versionInfo = context.GitVersion(new GitVersionSettings {
+Setup(context => 
+{
+    versionInfo = context.GitVersion(new GitVersionSettings 
+    {
         UpdateAssemblyInfo = true,
-        OutputType = GitVersionOutput.Json
+        OutputType = GitVersionOutput.Json,
+        LogFilePath = gitVersionLog.MakeAbsolute(context.Environment)
     });
 
     if (isRunningOnAppVeyor)
@@ -102,8 +110,6 @@ Task("Build")
     .Does(() =>  {
 
     var settings = GetDefaultBuildSettings()
-        .WithProperty("DebugSymbols", "True")
-        .WithProperty("DebugType", "Embedded")
         .WithProperty("Version", versionInfo.SemVer)
         .WithProperty("PackageVersion", versionInfo.SemVer)
         .WithProperty("InformationalVersion", versionInfo.InformationalVersion)
@@ -162,20 +168,14 @@ Task("CopyPackages")
 });
 
 Task("SignPackages")
+    .WithCriteria(() => !BuildSystem.IsLocalBuild)
+    .WithCriteria(() => IsRepository(repoName))
+    .WithCriteria(() => !string.IsNullOrEmpty(signingSecret))
+    .WithCriteria(() => !string.IsNullOrEmpty(signingUser))
     .IsDependentOn("Build")
     .IsDependentOn("CopyPackages")
     .Does(() => 
 {
-    // Get the secret.
-    var secret = EnvironmentVariable("SIGNING_SECRET");
-    if (string.IsNullOrWhiteSpace(secret))
-        throw new InvalidOperationException("Could not resolve signing secret.");
-
-    // Get the user.
-    var user = EnvironmentVariable("SIGNING_USER");
-    if (string.IsNullOrWhiteSpace(user))
-        throw new InvalidOperationException("Could not resolve signing user.");
-
     var settings = File("./signclient.json");
     var files = GetFiles(outputDir + "/*.nupkg");
 
@@ -188,8 +188,8 @@ Task("SignPackages")
             .Append("sign")
             .AppendSwitchQuoted("-c", MakeAbsolute(settings.Path).FullPath)
             .AppendSwitchQuoted("-i", MakeAbsolute(file).FullPath)
-            .AppendSwitchQuotedSecret("-s", secret)
-            .AppendSwitchQuotedSecret("-r", user)
+            .AppendSwitchQuotedSecret("-s", signingSecret)
+            .AppendSwitchQuotedSecret("-r", signingUser)
             .AppendSwitchQuoted("-n", "MvvmCross")
             .AppendSwitchQuoted("-d", "MvvmCross is a cross platform MVVM framework.")
             .AppendSwitchQuoted("-u", "https://mvvmcross.com");
@@ -202,6 +202,8 @@ Task("SignPackages")
             throw new InvalidOperationException("Signing failed!");
         }
     }
+
+    didSignPackages = true;
 });
 
 Task("PublishPackages")
@@ -209,9 +211,15 @@ Task("PublishPackages")
     .WithCriteria(() => IsRepository(repoName))
     .WithCriteria(() => ShouldPushNugetPackages(versionInfo.BranchName))
     .IsDependentOn("CopyPackages")
-    //.IsDependentOn("SignPackages")
+    .IsDependentOn("SignPackages")
     .Does (() =>
 {
+    if (!didSignPackages)
+    {
+        Warning("Packages were not signed. Not publishing packages");
+        return;
+    }
+
     // Resolve the API key.
     var nugetKeySource = GetNugetKeyAndSource();
     var apiKey = nugetKeySource.Item1;
@@ -241,17 +249,15 @@ Task("UploadAppVeyorArtifact")
 {
     Information("Artifacts Dir: {0}", outputDir.FullPath);
 
-    var uploadSettings = new AppVeyorUploadArtifactsSettings();
+    var uploadSettings = new AppVeyorUploadArtifactsSettings {
+        ArtifactType = AppVeyorUploadArtifactType.Auto
+    };
 
     var artifacts = GetFiles(outputDir.FullPath + "/**/*");
 
-    foreach(var file in artifacts) {
+    foreach(var file in artifacts) 
+    {
         Information("Uploading {0}", file.FullPath);
-
-        if (file.GetExtension().Contains("nupkg"))
-            uploadSettings.ArtifactType = AppVeyorUploadArtifactType.NuGetPackage;
-        else
-            uploadSettings.ArtifactType = AppVeyorUploadArtifactType.Auto;
 
         AppVeyor.UploadArtifact(file.FullPath, uploadSettings);
     }

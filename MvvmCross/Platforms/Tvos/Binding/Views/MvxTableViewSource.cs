@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,6 +11,7 @@ using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Extensions;
 using MvvmCross.WeakSubscription;
 using UIKit;
+using System.Linq;
 
 namespace MvvmCross.Platforms.Tvos.Binding.Views
 {
@@ -141,11 +142,9 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
                         if (args.NewItems.Count != args.OldItems.Count)
                             return false;
 
-                        var indexPath = NSIndexPath.FromRowSection(args.NewStartingIndex, 0);
-                        TableView.ReloadRows(new[]
-                            {
-                                indexPath
-                            }, ReplaceAnimation);
+                        var indexPaths = Enumerable.Range(args.NewStartingIndex, args.NewItems.Count)
+                            .Select(index => NSIndexPath.FromRowSection(index, 0)).ToArray();
+                        TableView.ReloadRows(indexPaths, ReplaceAnimation);
                         return true;
                     }
                 default:

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Exceptions;
@@ -21,8 +22,23 @@ namespace MvvmCross.IoC
             }
             catch (ReflectionTypeLoadException e)
             {
-                MvxLog.Instance.Warn("ReflectionTypeLoadException masked during loading of {0} - error {1}",
-                    assembly.FullName, e.ToLongString());
+                // MvxLog.Instance can be null, when reflecting for Setup.cs
+                // Check for null
+
+                MvxLog.Instance?.Warn("ReflectionTypeLoadException masked during loading of {0} - error {1}",
+                                      assembly.FullName, e.ToLongString());
+
+                if (e.LoaderExceptions != null)
+                {
+                    foreach (var excp in e.LoaderExceptions)
+                    {
+                        MvxLog.Instance?.Warn(e.Message);
+                    }
+                }
+
+                if (Debugger.IsAttached)
+                    Debugger.Break();
+
                 return new Type[0];
             }
         }

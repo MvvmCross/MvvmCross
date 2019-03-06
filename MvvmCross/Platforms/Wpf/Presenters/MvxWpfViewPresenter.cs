@@ -31,7 +31,16 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             }
         }
 
-        private readonly Dictionary<ContentControl, Stack<FrameworkElement>> _frameworkElementsDictionary = new Dictionary<ContentControl, Stack<FrameworkElement>>();
+        private Dictionary<ContentControl, Stack<FrameworkElement>> _frameworkElementsDictionary;
+        protected Dictionary<ContentControl, Stack<FrameworkElement>> FrameworkElementsDictionary
+        {
+            get
+            {
+                if (_frameworkElementsDictionary == null)
+                    _frameworkElementsDictionary = new Dictionary<ContentControl, Stack<FrameworkElement>>();
+                return _frameworkElementsDictionary;
+            }
+        }
 
         protected MvxWpfViewPresenter()
         {
@@ -42,34 +51,26 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             if (contentControl is Window window)
                 window.Closed += Window_Closed;
 
-            _frameworkElementsDictionary.Add(contentControl, new Stack<FrameworkElement>());
+            FrameworkElementsDictionary.Add(contentControl, new Stack<FrameworkElement>());
         }
 
         public override void RegisterAttributeTypes()
         {
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxWindowPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxWindowPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var view = WpfViewLoader.CreateView(request);
                         return ShowWindow(view, (MvxWindowPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseWindow(viewModel)
-                });
+                    (viewModel, attribute) => CloseWindow(viewModel));
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxContentPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxContentPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var view = WpfViewLoader.CreateView(request);
                         return ShowContentView(view, (MvxContentPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseContentView(viewModel)
-                });
+                    (viewModel, attribute) => CloseContentView(viewModel));
         }
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
@@ -120,15 +121,15 @@ namespace MvvmCross.Platforms.Wpf.Presenters
         protected virtual Task<bool> ShowWindow(FrameworkElement element, MvxWindowPresentationAttribute attribute, MvxViewModelRequest request)
         {
             Window window;
-            if (element is MvxWindow)
+            if (element is IMvxWindow mvxWindow)
             {
                 window = (Window)element;
-                ((MvxWindow)window).Identifier = attribute.Identifier ?? element.GetType().Name;
+                mvxWindow.Identifier = attribute.Identifier ?? element.GetType().Name;
             }
-            else if (element is Window)
+            else if (element is Window normalWindow)
             {
                 // Accept normal Window class
-                window = (Window)element;
+                window = normalWindow;
             }
             else
             {
@@ -139,11 +140,11 @@ namespace MvvmCross.Platforms.Wpf.Presenters
                 };
             }
             window.Closed += Window_Closed;
-            _frameworkElementsDictionary.Add(window, new Stack<FrameworkElement>());
+            FrameworkElementsDictionary.Add(window, new Stack<FrameworkElement>());
 
             if (!(element is Window))
             {
-                _frameworkElementsDictionary[window].Push(element);
+                FrameworkElementsDictionary[window].Push(element);
                 window.Content = element;
             }
 
@@ -159,18 +160,18 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             var window = sender as Window;
             window.Closed -= Window_Closed;
 
-            if (_frameworkElementsDictionary.ContainsKey(window))
-                _frameworkElementsDictionary.Remove(window);
+            if (FrameworkElementsDictionary.ContainsKey(window))
+                FrameworkElementsDictionary.Remove(window);
         }
 
         protected virtual Task<bool> ShowContentView(FrameworkElement element, MvxContentPresentationAttribute attribute, MvxViewModelRequest request)
         {
-            var contentControl = _frameworkElementsDictionary.Keys.FirstOrDefault(w => (w as MvxWindow)?.Identifier == attribute.WindowIdentifier) ?? _frameworkElementsDictionary.Keys.Last();
+            var contentControl = FrameworkElementsDictionary.Keys.FirstOrDefault(w => (w as MvxWindow)?.Identifier == attribute.WindowIdentifier) ?? FrameworkElementsDictionary.Keys.Last();
 
-            if (!attribute.StackNavigation && _frameworkElementsDictionary[contentControl].Any())
-                _frameworkElementsDictionary[contentControl].Pop(); // Close previous view
+            if (!attribute.StackNavigation && FrameworkElementsDictionary[contentControl].Any())
+                FrameworkElementsDictionary[contentControl].Pop(); // Close previous view
 
-            _frameworkElementsDictionary[contentControl].Push(element);
+            FrameworkElementsDictionary[contentControl].Push(element);
             contentControl.Content = element;
             return Task.FromResult(true);
         }
@@ -178,11 +179,11 @@ namespace MvvmCross.Platforms.Wpf.Presenters
         public override async Task<bool> Close(IMvxViewModel toClose)
         {
             // toClose is window
-            if (_frameworkElementsDictionary.Any(i => (i.Key as IMvxWpfView)?.ViewModel == toClose) && await CloseWindow(toClose))
+            if (FrameworkElementsDictionary.Any(i => (i.Key as IMvxWpfView)?.ViewModel == toClose) && await CloseWindow(toClose))
                 return true;
 
             // toClose is content
-            if (_frameworkElementsDictionary.Any(i => i.Value.Any() && (i.Value.Peek() as IMvxWpfView)?.ViewModel == toClose) && await CloseContentView(toClose))
+            if (FrameworkElementsDictionary.Any(i => i.Value.Any() && (i.Value.Peek() as IMvxWpfView)?.ViewModel == toClose) && await CloseContentView(toClose))
                 return true;
 
             MvxLog.Instance.Warn($"Could not close ViewModel type {toClose.GetType().Name}");
@@ -191,11 +192,11 @@ namespace MvvmCross.Platforms.Wpf.Presenters
 
         protected virtual Task<bool> CloseWindow(IMvxViewModel toClose)
         {
-            var item = _frameworkElementsDictionary.FirstOrDefault(i => (i.Key as IMvxWpfView)?.ViewModel == toClose);
+            var item = FrameworkElementsDictionary.FirstOrDefault(i => (i.Key as IMvxWpfView)?.ViewModel == toClose);
             var contentControl = item.Key;
             if (contentControl is Window window)
             {
-                _frameworkElementsDictionary.Remove(window);
+                FrameworkElementsDictionary.Remove(window);
                 window.Close();
                 return Task.FromResult(true);
             }
@@ -205,7 +206,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
 
         protected virtual Task<bool> CloseContentView(IMvxViewModel toClose)
         {
-            var item = _frameworkElementsDictionary.FirstOrDefault(i => i.Value.Any() && (i.Value.Peek() as IMvxWpfView)?.ViewModel == toClose);
+            var item = FrameworkElementsDictionary.FirstOrDefault(i => i.Value.Any() && (i.Value.Peek() as IMvxWpfView)?.ViewModel == toClose);
             var contentControl = item.Key;
             var elements = item.Value;
 
@@ -221,7 +222,7 @@ namespace MvvmCross.Platforms.Wpf.Presenters
             // Close window if no contents
             if (contentControl is Window window)
             {
-                _frameworkElementsDictionary.Remove(window);
+                FrameworkElementsDictionary.Remove(window);
                 window.Close();
                 return Task.FromResult(true);
             }
