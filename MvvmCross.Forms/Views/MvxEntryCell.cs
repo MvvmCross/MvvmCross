@@ -88,7 +88,6 @@ namespace MvvmCross.Forms.Views
             base.OnDisappearing();
             ViewModel?.ViewDisappearing();
             ViewModel?.ViewDisappeared();
-            ViewModel?.ViewDestroy();
         }
     }
 
