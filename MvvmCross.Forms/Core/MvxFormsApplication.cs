@@ -13,7 +13,7 @@ namespace MvvmCross.Forms.Core
     {
         protected MvxFormsApplication()
         {
-            this.ModalPopped += OnModalPopped;
+            ModalPopped += OnModalPopped;
         }
 
         public event EventHandler Start;
@@ -37,12 +37,20 @@ namespace MvvmCross.Forms.Core
             Resume?.Invoke(this, EventArgs.Empty);
         }
 
+        protected override void OnPropertyChanging(string propertyName = null)
+        {
+            if (propertyName == nameof(MainPage)
+                && MainPage is IMvxPage mvxPage
+                && mvxPage.ViewModel is IMvxViewModel mvxViewModel)
+                mvxViewModel.ViewDestroy(true);
+
+            base.OnPropertyChanging(propertyName);
+        }
+
         private void OnModalPopped(object sender, ModalPoppedEventArgs e)
         {
             if (e.Modal is IMvxPage mvxPage && mvxPage.ViewModel is IMvxViewModel modalViewModel)
-            {
                 modalViewModel.ViewDestroy(true);
-            }
         }
     }
 }
