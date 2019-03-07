@@ -623,34 +623,42 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             FragmentManager fragmentManager,
             MvxFragmentPresentationAttribute fragmentAttribute)
         {
-            var fragmentName = fragmentAttribute.ViewType.FragmentJavaName();
-            var tag = fragmentAttribute.Tag ?? fragmentName;
-
-            if (fragmentManager.BackStackEntryCount > 0)
+            try
             {
-                var popBackStackFragmentName = fragmentAttribute.PopBackStackImmediateName?.Trim() == ""
-                    ? fragmentName
-                    : fragmentAttribute.PopBackStackImmediateName;
+                var fragmentName = fragmentAttribute.ViewType.FragmentJavaName();
+                var tag = fragmentAttribute.Tag ?? fragmentName;
 
-                fragmentManager.PopBackStackImmediate(popBackStackFragmentName, (int)fragmentAttribute.PopBackStackImmediateFlag);
-                OnFragmentPopped(null, null, fragmentAttribute);
+                if (fragmentManager.BackStackEntryCount > 0)
+                {
+                    var popBackStackFragmentName = fragmentAttribute.PopBackStackImmediateName?.Trim() == ""
+                        ? fragmentName
+                        : fragmentAttribute.PopBackStackImmediateName;
 
-                return true;
+                    fragmentManager.PopBackStackImmediate(popBackStackFragmentName, (int)fragmentAttribute.PopBackStackImmediateFlag);
+                    OnFragmentPopped(null, null, fragmentAttribute);
+
+                    return true;
+                }
+
+                if (fragmentManager.Fragments.Count > 0 && fragmentManager.FindFragmentByTag(tag) != null)
+                {
+                    var ft = fragmentManager.BeginTransaction();
+                    var fragment = fragmentManager.FindFragmentByTag(tag);
+
+                    SetAnimationsOnTransaction(ft, fragmentAttribute);
+
+                    ft.Remove(fragment);
+                    ft.CommitAllowingStateLoss();
+
+                    OnFragmentPopped(ft, fragment, fragmentAttribute);
+
+                    return true;
+                }
             }
-
-            if (fragmentManager.Fragments.Count > 0 && fragmentManager.FindFragmentByTag(tag) != null)
+            catch (System.Exception ex)
             {
-                var ft = fragmentManager.BeginTransaction();
-                var fragment = fragmentManager.FindFragmentByTag(tag);
-
-                SetAnimationsOnTransaction(ft, fragmentAttribute);
-
-                ft.Remove(fragment);
-                ft.CommitAllowingStateLoss();
-
-                OnFragmentPopped(ft, fragment, fragmentAttribute);
-
-                return true;
+                MvxAndroidLog.Instance.Error("Cannot close fragment transaction", ex);
+                return false;
             }
 
             return false;
@@ -736,7 +744,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 if (frag != null)
                 {
                     return frag;
-                }                
+                }
             }
 
             return null;
