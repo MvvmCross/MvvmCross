@@ -260,7 +260,9 @@ namespace MvvmCross.Platforms.Android.Presenters
             var activity = CurrentActivity;
             if (activity == null)
             {
-                MvxLog.Instance.Warn("Cannot Resolve current top activity");
+                MvxLog.Instance.Warn("Cannot Resolve current top activity. Creating new activity from Application Context");
+                intent.AddFlags(ActivityFlags.NewTask);
+                Application.Context.StartActivity(intent, bundle);
                 return;
             }
             activity.StartActivity(intent, bundle);
