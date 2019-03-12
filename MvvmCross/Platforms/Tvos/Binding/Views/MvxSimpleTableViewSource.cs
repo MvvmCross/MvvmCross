@@ -23,21 +23,17 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             MvxLog.Instance.Warn("MvxSimpleTableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
-        public MvxSimpleTableViewSource(UITableView tableView, string cellIdentifier)
-            : base(tableView)
-        {
-            _cellIdentifier = new NSString(cellIdentifier);
-            tableView.RegisterNibForCellReuse(UINib.FromName(cellIdentifier, NSBundle.MainBundle), cellIdentifier);
-        }
-
         public MvxSimpleTableViewSource(UITableView tableView, string nibName, string cellIdentifier = null,
-                                        NSBundle bundle = null)
+                                        NSBundle bundle = null, bool registerNibForCellReuse = true)
             : base(tableView)
         {
             // if no cellIdentifier supplied, then use the nibName as cellId
             cellIdentifier = cellIdentifier ?? nibName;
             _cellIdentifier = new NSString(cellIdentifier);
-            tableView.RegisterNibForCellReuse(UINib.FromName(nibName, bundle ?? NSBundle.MainBundle), cellIdentifier);
+
+            if (registerNibForCellReuse) {
+                tableView.RegisterNibForCellReuse(UINib.FromName(nibName, bundle ?? NSBundle.MainBundle), cellIdentifier);
+            }
         }
 
         public MvxSimpleTableViewSource(UITableView tableView, Type cellType, string cellIdentifier = null)
