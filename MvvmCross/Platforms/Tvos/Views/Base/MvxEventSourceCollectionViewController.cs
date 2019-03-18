@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -12,18 +12,27 @@ namespace MvvmCross.Platforms.Tvos.Views.Base
     public class MvxEventSourceCollectionViewController
         : UICollectionViewController, IMvxEventSourceViewController
     {
-        protected MvxEventSourceCollectionViewController(UICollectionViewLayout layout)
-            : base(layout)
+        public MvxEventSourceCollectionViewController()
         {
         }
 
-        protected MvxEventSourceCollectionViewController(IntPtr handle)
-            : base(handle)
+        public MvxEventSourceCollectionViewController(NSCoder coder) : base(coder)
         {
         }
 
-        protected MvxEventSourceCollectionViewController(string nibName, NSBundle bundle)
-            : base(nibName, bundle)
+        protected MvxEventSourceCollectionViewController(NSObjectFlag t) : base(t)
+        {
+        }
+
+        protected internal MvxEventSourceCollectionViewController(IntPtr handle) : base(handle)
+        {
+        }
+
+        public MvxEventSourceCollectionViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+        }
+
+        public MvxEventSourceCollectionViewController(UICollectionViewLayout layout) : base(layout)
         {
         }
 
