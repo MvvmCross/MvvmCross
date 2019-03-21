@@ -123,6 +123,14 @@ namespace $YourNameSpace$
         {
             service = new MvxNavigationService(null, loader);
         }
+        
+        public void Include(UIImagePickerController uIImagePickerController)
+        {
+            var x = uIImagePickerController.SourceType;
+            uIImagePickerController.FinishedPickingMedia += (s, e) => { };
+            uIImagePickerController.FinishedPickingImage += (s, e) => { };
+            uIImagePickerController.Canceled += (s, e) => { };
+        }
 
         public void Include(ConsoleColor color)
         {
