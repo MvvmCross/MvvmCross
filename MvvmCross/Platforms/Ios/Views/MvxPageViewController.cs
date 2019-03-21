@@ -15,7 +15,7 @@ namespace MvvmCross.Platforms.Ios.Views
 {
     public class MvxPageViewController : MvxEventSourcePageViewController, IMvxIosView
     {
-        public MvxPageViewController(UIPageViewControllerTransitionStyle style, UIPageViewControllerNavigationOrientation navigationOrientation, UIPageViewControllerSpineLocation spineLocation) : base(style, navigationOrientation, spineLocation)
+        public MvxPageViewController(UIPageViewControllerTransitionStyle style = UIPageViewControllerTransitionStyle.Scroll, UIPageViewControllerNavigationOrientation navigationOrientation = UIPageViewControllerNavigationOrientation.Horizontal, UIPageViewControllerSpineLocation spineLocation = UIPageViewControllerSpineLocation.None) : base(style, navigationOrientation, spineLocation)
         {
             this.AdaptForBinding();
         }
@@ -26,11 +26,6 @@ namespace MvvmCross.Platforms.Ios.Views
         }
 
         public MvxPageViewController(UIPageViewControllerTransitionStyle style, UIPageViewControllerNavigationOrientation navigationOrientation) : base(style, navigationOrientation)
-        {
-            this.AdaptForBinding();
-        }
-
-        public MvxPageViewController() : base()
         {
             this.AdaptForBinding();
         }
