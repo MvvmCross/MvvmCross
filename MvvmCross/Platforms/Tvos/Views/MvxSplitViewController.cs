@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -9,6 +9,7 @@ using UIKit;
 
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.ViewModels;
+using MvvmCross.Platforms.Tvos.Views.Base;
 
 namespace MvvmCross.Platforms.Tvos.Views
 {
@@ -16,6 +17,31 @@ namespace MvvmCross.Platforms.Tvos.Views
         : MvxEventSourceSplitViewController
         ,IMvxTvosView
     {
+        public MvxSplitViewController()
+        {
+            this.AdaptForBinding();
+        }
+
+        public MvxSplitViewController(NSCoder coder) : base(coder)
+        {
+            this.AdaptForBinding();
+        }
+
+        protected MvxSplitViewController(NSObjectFlag t) : base(t)
+        {
+            this.AdaptForBinding();
+        }
+
+        protected internal MvxSplitViewController(IntPtr handle) : base(handle)
+        {
+            this.AdaptForBinding();
+        }
+
+        public MvxSplitViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+            this.AdaptForBinding();
+        }
+
         public object DataContext
         {
             get { return BindingContext.DataContext; }
@@ -31,23 +57,6 @@ namespace MvvmCross.Platforms.Tvos.Views
         public MvxViewModelRequest Request { get; set; }
 
         public IMvxBindingContext BindingContext { get; set; }
-
-        public MvxSplitViewController()
-        {
-            this.AdaptForBinding();
-        }
-
-        public MvxSplitViewController(IntPtr handle)
-            : base(handle)
-        {
-            this.AdaptForBinding();
-        }
-
-        protected MvxSplitViewController(string nibName, NSBundle bundle)
-            : base(nibName, bundle)
-        {
-            this.AdaptForBinding();
-        }
 
         public override void ViewDidLoad()
         {
@@ -101,24 +110,30 @@ namespace MvvmCross.Platforms.Tvos.Views
     public class MvxSplitViewController<TViewModel> : MvxSplitViewController, IMvxTvosView<TViewModel>
        where TViewModel : class, IMvxViewModel
     {
-        public new TViewModel ViewModel
-        {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
-        }
-
         public MvxSplitViewController()
         {
         }
 
-        public MvxSplitViewController(IntPtr handle)
-            : base(handle)
+        public MvxSplitViewController(NSCoder coder) : base(coder)
         {
         }
 
-        protected MvxSplitViewController(string nibName, NSBundle bundle)
-            : base(nibName, bundle)
+        public MvxSplitViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
         {
+        }
+
+        protected MvxSplitViewController(NSObjectFlag t) : base(t)
+        {
+        }
+
+        protected internal MvxSplitViewController(IntPtr handle) : base(handle)
+        {
+        }
+
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
         }
     }
 }

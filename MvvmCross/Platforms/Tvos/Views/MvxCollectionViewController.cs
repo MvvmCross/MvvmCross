@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -14,20 +14,32 @@ namespace MvvmCross.Platforms.Tvos.Views
     public class MvxCollectionViewController
         : MvxEventSourceCollectionViewController, IMvxTvosView
     {
-        protected MvxCollectionViewController(UICollectionViewLayout layout)
-            : base(layout)
+        public MvxCollectionViewController()
         {
             this.AdaptForBinding();
         }
 
-        protected MvxCollectionViewController(IntPtr handle)
-            : base(handle)
+        public MvxCollectionViewController(NSCoder coder) : base(coder)
         {
             this.AdaptForBinding();
         }
 
-        protected MvxCollectionViewController(string nibName, NSBundle bundle)
-            : base(nibName, bundle)
+        protected MvxCollectionViewController(NSObjectFlag t) : base(t)
+        {
+            this.AdaptForBinding();
+        }
+
+        protected internal MvxCollectionViewController(IntPtr handle) : base(handle)
+        {
+            this.AdaptForBinding();
+        }
+
+        public MvxCollectionViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+            this.AdaptForBinding();
+        }
+
+        public MvxCollectionViewController(UICollectionViewLayout layout) : base(layout)
         {
             this.AdaptForBinding();
         }
@@ -95,15 +107,27 @@ namespace MvvmCross.Platforms.Tvos.Views
     public class MvxCollectionViewController<TViewModel>
         : MvxCollectionViewController, IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
-        protected MvxCollectionViewController(UICollectionViewLayout layout) : base(layout)
+        public MvxCollectionViewController()
         {
         }
 
-        protected MvxCollectionViewController(IntPtr handle) : base(handle)
+        public MvxCollectionViewController(NSCoder coder) : base(coder)
         {
         }
 
-        protected MvxCollectionViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        public MvxCollectionViewController(UICollectionViewLayout layout) : base(layout)
+        {
+        }
+
+        public MvxCollectionViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+        }
+
+        protected MvxCollectionViewController(NSObjectFlag t) : base(t)
+        {
+        }
+
+        protected internal MvxCollectionViewController(IntPtr handle) : base(handle)
         {
         }
 

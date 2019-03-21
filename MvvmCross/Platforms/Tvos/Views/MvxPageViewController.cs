@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -15,18 +15,46 @@ namespace MvvmCross.Platforms.Tvos.Views
 {
     public class MvxPageViewController : MvxEventSourcePageViewController, IMvxTvosView
     {
-        private Dictionary<string, UIViewController> _pagedViewControllerCache = null;
+        private Dictionary<string, UIViewController> _pagedViewControllerCache = new Dictionary<string, UIViewController>();
 
-        public MvxPageViewController(UIPageViewControllerTransitionStyle style = UIPageViewControllerTransitionStyle.Scroll, UIPageViewControllerNavigationOrientation orientation = UIPageViewControllerNavigationOrientation.Horizontal, UIPageViewControllerSpineLocation spine = UIPageViewControllerSpineLocation.None) : base(style, orientation, spine)
+        public MvxPageViewController(UIPageViewControllerTransitionStyle style = UIPageViewControllerTransitionStyle.Scroll, UIPageViewControllerNavigationOrientation navigationOrientation = UIPageViewControllerNavigationOrientation.Horizontal, UIPageViewControllerSpineLocation spineLocation = UIPageViewControllerSpineLocation.None) : base(style, navigationOrientation, spineLocation)
         {
             this.AdaptForBinding();
-            _pagedViewControllerCache = new Dictionary<string, UIViewController>();
         }
 
-        public MvxPageViewController(IntPtr handle) : base(handle)
+        public MvxPageViewController(UIPageViewControllerTransitionStyle style, UIPageViewControllerNavigationOrientation navigationOrientation, UIPageViewControllerSpineLocation spineLocation, float interPageSpacing) : base(style, navigationOrientation, spineLocation, interPageSpacing)
         {
             this.AdaptForBinding();
-            _pagedViewControllerCache = new Dictionary<string, UIViewController>();
+        }
+
+        public MvxPageViewController(UIPageViewControllerTransitionStyle style, UIPageViewControllerNavigationOrientation navigationOrientation) : base(style, navigationOrientation)
+        {
+            this.AdaptForBinding();
+        }
+
+        public MvxPageViewController(NSCoder coder) : base(coder)
+        {
+            this.AdaptForBinding();
+        }
+
+        protected MvxPageViewController(NSObjectFlag t) : base(t)
+        {
+            this.AdaptForBinding();
+        }
+
+        protected internal MvxPageViewController(IntPtr handle) : base(handle)
+        {
+            this.AdaptForBinding();
+        }
+
+        public MvxPageViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+            this.AdaptForBinding();
+        }
+
+        public MvxPageViewController(UIPageViewControllerTransitionStyle style, UIPageViewControllerNavigationOrientation navigationOrientation, NSDictionary options) : base(style, navigationOrientation, options)
+        {
+            this.AdaptForBinding();
         }
 
         public MvxViewModelRequest Request { get; set; }

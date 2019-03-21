@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Foundation;
 using MvvmCross.Platforms.Tvos.Presenters;
 using MvvmCross.Platforms.Tvos.Presenters.Attributes;
 using MvvmCross.ViewModels;
@@ -17,13 +18,23 @@ namespace MvvmCross.Platforms.Tvos.Views
     {
         private int _tabsCount = 0;
 
-        protected MvxTabBarViewController()
-            : base()
+        public MvxTabBarViewController()
         {
         }
 
-        protected MvxTabBarViewController(IntPtr handle)
-            : base(handle)
+        public MvxTabBarViewController(NSCoder coder) : base(coder)
+        {
+        }
+
+        protected MvxTabBarViewController(NSObjectFlag t) : base(t)
+        {
+        }
+
+        protected internal MvxTabBarViewController(IntPtr handle) : base(handle)
+        {
+        }
+
+        public MvxTabBarViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
         {
         }
 
@@ -170,16 +181,6 @@ namespace MvvmCross.Platforms.Tvos.Views
             var newTabs = ViewControllers.Where(v => v != toClose);
             ViewControllers = newTabs.ToArray();
         }
-    }
-
-    public class MvxTabBarViewController<TViewModel> : MvxTabBarViewController
-        where TViewModel : IMvxViewModel
-    {
-        public new TViewModel ViewModel
-        {
-            get { return (TViewModel)base.ViewModel; }
-            set { base.ViewModel = value; }
-        }
 
         public virtual UIViewController VisibleUIViewController
         {
@@ -206,14 +207,35 @@ namespace MvvmCross.Platforms.Tvos.Views
                 }
             }
         }
+    }
 
-        protected MvxTabBarViewController()
+    public class MvxTabBarViewController<TViewModel> : MvxTabBarViewController
+        where TViewModel : IMvxViewModel
+    {
+        public MvxTabBarViewController()
         {
         }
 
-        protected MvxTabBarViewController(IntPtr handle)
-            : base(handle)
+        public MvxTabBarViewController(NSCoder coder) : base(coder)
         {
+        }
+
+        public MvxTabBarViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+        }
+
+        protected MvxTabBarViewController(NSObjectFlag t) : base(t)
+        {
+        }
+
+        protected internal MvxTabBarViewController(IntPtr handle) : base(handle)
+        {
+        }
+
+        public new TViewModel ViewModel
+        {
+            get { return (TViewModel)base.ViewModel; }
+            set { base.ViewModel = value; }
         }
     }
 }
