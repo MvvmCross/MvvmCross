@@ -22,6 +22,10 @@ var signingSecret = EnvironmentVariable("SIGNING_SECRET");
 var signingUser = EnvironmentVariable("SIGNING_USER");
 var didSignPackages = false;
 
+var githubToken = Argument("github_token", "");
+var githubTokenEnv = EnvironmentVariable("CHANGELOG_GITHUB_TOKEN");
+var sinceTag = Argument("since_tag", "");
+
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 GitVersion versionInfo = null;
 
@@ -260,6 +264,52 @@ Task("UploadAppVeyorArtifact")
         Information("Uploading {0}", file.FullPath);
 
         AppVeyor.UploadArtifact(file.FullPath, uploadSettings);
+    }
+});
+
+Task("UpdateChangelog")
+    .Does(() => 
+{
+    var arguments = new ProcessArgumentBuilder();
+    if (!string.IsNullOrEmpty(githubToken))
+        arguments.Append("--token {0}", githubToken);
+    else if (!string.IsNullOrEmpty(githubTokenEnv))
+        arguments.Append("--token {0}", githubTokenEnv);
+
+    // Exclude labels
+    var excludeLabels = new [] {
+        "t/question",
+        "s/wont-fix",
+        "s/duplicate",
+        "s/deprecated",
+        "s/invalid"
+    };
+    arguments.Append("--exclude-labels {0}", string.Join(",", excludeLabels));
+
+    // bug labels
+    arguments.Append("--bug-labels {0}", "t/bug");
+
+    // enhancement labels
+    arguments.Append("--enhancement-labels {0}", "t/feature");
+
+    // breaking labels (enable when github_changelog_generator 1.15 is released)
+    //arguments.Append("--breaking-labels {0}", "t/breaking");
+
+    arguments.Append("--max-issues 500");
+
+    if (!string.IsNullOrEmpty(sinceTag))
+        arguments.Append("--since-tag {0}", sinceTag);
+
+    if (versionInfo.BranchName.Contains("release/"))
+        arguments.Append("--future-version {0}", versionInfo.MajorMinorPatch);
+
+    Information("Starting github_changelog_generator with arguments: {0}", arguments.Render());
+
+    using(var process = StartAndReturnProcess("github_changelog_generator",
+        new ProcessSettings { Arguments = arguments }))
+    {
+        process.WaitForExit();
+        Information("Exit code: {0}", process.GetExitCode());
     }
 });
 
