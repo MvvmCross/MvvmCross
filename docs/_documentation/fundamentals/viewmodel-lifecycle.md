@@ -57,7 +57,7 @@ public class MyViewModel : MvxViewModel<MyParameterModel>
         _myService = myService;
     }
 
-    public void Prepare(MyParameterModel parameter)
+    public override void Prepare(MyParameterModel parameter)
     {
 
     }
@@ -139,19 +139,18 @@ public class MyViewModel : MvxViewModel<MyParameterModel>
         _initialParameter = _jsonSerializer.Deserialize<MyParameterModel>(serializedParameter);
     }
 
-    public void Prepare()
+    public override void Prepare()
     {
     }
 
-    public void Prepare(MyParameterModel parameter)
+    public override void Prepare(MyParameterModel parameter)
     {
         _initialParameter = parameter;
     }
 
-    public async Task Initialize()
+    public override async Task Initialize()
     {
-        await base.Initialize();
-
+        await base.Initialize();        
         // do something with _initialParameter
     }
 
@@ -174,7 +173,7 @@ void ViewDisappearing();
 
 void ViewDisappeared();
 
-void ViewDestroy();
+void ViewDestroy (bool viewFinishing = true);
 ```
 
 The MvxViewController, MvxFragment(s), MvxActivity and the UWP views will call those methods when the platform specific events are fired. This will give you a more refined control of the ViewModel and its state. There may be certain bindings that you want to update or resources that you want to clean up in these calls.
