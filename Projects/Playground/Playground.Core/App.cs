@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MvvmCross;
 using MvvmCross.IoC;
 using MvvmCross.Localization;
+using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using Playground.Core.Services;
 using Playground.Core.ViewModels;
@@ -27,6 +28,8 @@ namespace Playground.Core
 
             Mvx.IoCProvider.RegisterSingleton<IMvxTextProvider>(new TextProviderBuilder().TextProvider);
 
+            Mvx.IoCProvider.RegisterType<IMyInterface, IMvxNavigationService>(navService => new MyClass(navService));
+
             RegisterAppStart<RootViewModel>();
         }
 
@@ -39,13 +42,24 @@ namespace Playground.Core
         }
 
         /// <summary>
-        /// If the application is restarted (eg primary activity on Android 
+        /// If the application is restarted (eg primary activity on Android
         /// can be restarted) this method will be called before Startup
         /// is called again
         /// </summary>
         public override void Reset()
         {
             base.Reset();
+        }
+    }
+
+    public interface IMyInterface
+    {
+    }
+
+    public class MyClass : IMyInterface
+    {
+        public MyClass(IMvxNavigationService navService)
+        {
         }
     }
 }

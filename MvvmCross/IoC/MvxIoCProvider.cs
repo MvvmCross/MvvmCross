@@ -10,7 +10,7 @@ namespace MvvmCross.IoC
 {
     /// <summary>
     /// Singleton IoC Provider.
-    /// 
+    ///
     /// Delegates to the <see cref="MvxIoCContainer"/> implementation
     /// </summary>
     public class MvxIoCProvider
@@ -26,6 +26,7 @@ namespace MvvmCross.IoC
             // create a new ioc container - it will register itself as the singleton
             // ReSharper disable ObjectCreationAsStatement
             new MvxIoCProvider(options);
+
             // ReSharper restore ObjectCreationAsStatement
             return Instance;
         }
@@ -101,6 +102,51 @@ namespace MvvmCross.IoC
 
         public void RegisterType<TInterface>(Func<TInterface> constructor)
             where TInterface : class
+        {
+            _provider.RegisterType(constructor);
+        }
+
+        public void RegisterType<TInterface, TParameter1>(Func<TParameter1, TInterface> constructor)
+            where TInterface : class
+            where TParameter1 : class
+        {
+            _provider.RegisterType(constructor);
+        }
+
+        public void RegisterType<TInterface, TParameter1, TParameter2>(Func<TParameter1, TParameter2, TInterface> constructor)
+            where TInterface : class
+            where TParameter1 : class
+            where TParameter2 : class
+        {
+            _provider.RegisterType(constructor);
+        }
+
+        public void RegisterType<TInterface, TParameter1, TParameter2, TParameter3>(Func<TParameter1, TParameter2, TParameter3, TInterface> constructor)
+            where TInterface : class
+            where TParameter1 : class
+            where TParameter2 : class
+            where TParameter3 : class
+        {
+            _provider.RegisterType(constructor);
+        }
+
+        public void RegisterType<TInterface, TParameter1, TParameter2, TParameter3, TParameter4>(Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> constructor)
+            where TInterface : class
+            where TParameter1 : class
+            where TParameter2 : class
+            where TParameter3 : class
+            where TParameter4 : class
+        {
+            _provider.RegisterType(constructor);
+        }
+
+        public void RegisterType<TInterface, TParameter1, TParameter2, TParameter3, TParameter4, TParameter5>(Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> constructor)
+            where TInterface : class
+            where TParameter1 : class
+            where TParameter2 : class
+            where TParameter3 : class
+            where TParameter4 : class
+            where TParameter5 : class
         {
             _provider.RegisterType(constructor);
         }

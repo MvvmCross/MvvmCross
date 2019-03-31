@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics;
 using System.Net;
 using System.Threading.Tasks;
 using MvvmCross;
@@ -14,6 +15,7 @@ using MvvmCross.Plugin.Messenger;
 using MvvmCross.Plugin.Network.Rest;
 using MvvmCross.ViewModels;
 using Playground.Core.Models;
+using Playground.Core.Services;
 using Playground.Core.ViewModels.Bindings;
 using Playground.Core.ViewModels.Navigation;
 using Playground.Core.ViewModels.Samples;
@@ -92,6 +94,9 @@ namespace Playground.Core.ViewModels
             ShowFluentBindingCommand =
                 new MvxAsyncCommand(async () => await NavigationService.Navigate<FluentBindingViewModel>());
 
+            RegisterAndResolveWithReflectionCommand = new MvxAsyncCommand(RegisterAndResolveWithReflection);
+            RegisterAndResolveWithNoReflectionCommand = new MvxAsyncCommand(RegisterAndResolveWithNoReflection);
+
             _counter = 3;
 
             TriggerVisibilityCommand =
@@ -147,11 +152,16 @@ namespace Playground.Core.ViewModels
 
         public IMvxAsyncCommand ShowFluentBindingCommand { get; }
 
+        public IMvxAsyncCommand RegisterAndResolveWithReflectionCommand { get; }
+
+        public IMvxAsyncCommand RegisterAndResolveWithNoReflectionCommand { get; }
+
         public IMvxCommand TriggerVisibilityCommand { get; }
 
         public IMvxCommand FragmentCloseCommand { get; }
 
         private bool _isVisible;
+
         public bool IsVisible
         {
             get => _isVisible;
@@ -168,6 +178,12 @@ namespace Playground.Core.ViewModels
                 ShouldLogInpc(false);
             }
         }
+
+        public string TimeToRegister { get; set; }
+
+        public string TimeToResolve { get; set; }
+
+        public string TotalTime { get; set; }
 
         public override async Task Initialize()
         {
@@ -192,6 +208,8 @@ namespace Playground.Core.ViewModels
         public override void ViewAppearing()
         {
             base.ViewAppearing();
+
+            var myInstance = Mvx.IoCProvider.Resolve<IMyInterface>();
 
             MyTask = MvxNotifyTask.Create(
                 async () =>
@@ -247,6 +265,46 @@ namespace Playground.Core.ViewModels
             {
             }
             return default(MvxRestResponse);
+        }
+
+        private async Task RegisterAndResolveWithReflection()
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            Mvx.IoCProvider.RegisterTypesWithReflection();
+            var registered = stopwatch.ElapsedTicks;
+            for (int i = 0; i < 20; i++)
+            {
+                Mvx.IoCProvider.ResolveTypes();
+            }
+            stopwatch.Stop();
+            var total = stopwatch.ElapsedTicks;
+            var resolved = total - registered;
+
+            TimeToRegister = $"Time to register using reflection - {registered}";
+            TimeToResolve = $"Time to resolve using reflection - {resolved}";
+            TotalTime = $"Total time using reflection - {total}";
+            await RaiseAllPropertiesChanged();
+        }
+
+        private async Task RegisterAndResolveWithNoReflection()
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            Mvx.IoCProvider.RegisterTypesWithNoReflection();
+            var registered = stopwatch.ElapsedTicks;
+            for (int i = 0; i < 20; i++)
+            {
+                Mvx.IoCProvider.ResolveTypes();
+            }
+            stopwatch.Stop();
+            var total = stopwatch.ElapsedTicks;
+            var resolved = total - registered;
+
+            TimeToRegister = $"Time to register - NO reflection - {registered}";
+            TimeToResolve = $"Time to resolve - NO reflection - {resolved}";
+            TotalTime = $"Total time - NO reflection - {total}";
+            await RaiseAllPropertiesChanged();
         }
     }
 }

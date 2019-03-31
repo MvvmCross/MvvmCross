@@ -24,6 +24,7 @@ namespace MvvmCross.IoC
         private readonly IMvxIoCProvider _parentProvider;
 
         protected object LockObject => _lockObject;
+
         protected IMvxIocOptions Options => _options;
 
         public MvxIoCContainer(IMvxIocOptions options, IMvxIoCProvider parentProvider = null)
@@ -90,6 +91,257 @@ namespace MvvmCross.IoC
             private readonly Func<object> _constructor;
 
             public FuncConstructingResolver(Func<object> constructor)
+            {
+                _constructor = constructor;
+            }
+
+            public object Resolve()
+            {
+                return _constructor();
+            }
+
+            public void SetGenericTypeParameters(Type[] genericTypeParameters)
+            {
+                throw new InvalidOperationException("This Resolver does not set generic type parameters");
+            }
+
+            public ResolverType ResolveType => ResolverType.DynamicPerResolve;
+        }
+
+        public class TypedFuncConstructingResolver<TInterface, TParameter1> : IResolver
+            where TInterface : class
+            where TParameter1 : class
+        {
+            protected readonly MvxIoCContainer _provider;
+            private readonly Func<TParameter1, TInterface> _constructor;
+
+            protected TypedFuncConstructingResolver(MvxIoCContainer parent)
+            {
+                _provider = parent;
+            }
+
+            public TypedFuncConstructingResolver(Func<TParameter1, TInterface> typedConstructor, MvxIoCContainer parent) : this(parent)
+            {
+                _constructor = typedConstructor;
+            }
+
+            public virtual object Resolve()
+            {
+                _provider.InternalTryResolve(typeof(TParameter1), out var parameter1);
+                return _constructor((TParameter1)parameter1);
+            }
+
+            public void SetGenericTypeParameters(Type[] genericTypeParameters)
+            {
+                throw new InvalidOperationException("This Resolver does not set generic type parameters");
+            }
+
+            public ResolverType ResolveType => ResolverType.DynamicPerResolve;
+        }
+
+        public class TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2> : TypedFuncConstructingResolver<TInterface, TParameter1>
+            where TInterface : class
+            where TParameter1 : class
+            where TParameter2 : class
+        {
+            private readonly Func<TParameter1, TParameter2, TInterface> _constructor;
+
+            protected TypedFuncConstructingResolver(MvxIoCContainer parent) : base(parent)
+            {
+            }
+
+            public TypedFuncConstructingResolver(Func<TParameter1, TParameter2, TInterface> typedConstructor, MvxIoCContainer parent) : this(parent)
+            {
+                _constructor = typedConstructor;
+            }
+
+            public override object Resolve()
+            {
+                _provider.InternalTryResolve(typeof(TParameter1), out var parameter1);
+                _provider.InternalTryResolve(typeof(TParameter2), out var parameter2);
+                return _constructor((TParameter1)parameter1, (TParameter2)parameter2);
+            }
+        }
+
+        public class TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2, TParameter3> : TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2>
+            where TInterface : class
+            where TParameter1 : class
+            where TParameter2 : class
+            where TParameter3 : class
+        {
+            private readonly Func<TParameter1, TParameter2, TParameter3, TInterface> _constructor;
+
+            protected TypedFuncConstructingResolver(MvxIoCContainer parent) : base(parent)
+            {
+            }
+
+            public TypedFuncConstructingResolver(Func<TParameter1, TParameter2, TParameter3, TInterface> typedConstructor, MvxIoCContainer parent) : this(parent)
+            {
+                _constructor = typedConstructor;
+            }
+
+            public override object Resolve()
+            {
+                _provider.InternalTryResolve(typeof(TParameter1), out var parameter1);
+                _provider.InternalTryResolve(typeof(TParameter2), out var parameter2);
+                _provider.InternalTryResolve(typeof(TParameter3), out var parameter3);
+                return _constructor((TParameter1)parameter1, (TParameter2)parameter2, (TParameter3)parameter3);
+            }
+        }
+
+        public class TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2, TParameter3, TParameter4> : TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2, TParameter3>
+            where TInterface : class
+            where TParameter1 : class
+            where TParameter2 : class
+            where TParameter3 : class
+            where TParameter4 : class
+        {
+            private readonly Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> _constructor;
+
+            protected TypedFuncConstructingResolver(MvxIoCContainer parent) : base(parent)
+            {
+            }
+
+            public TypedFuncConstructingResolver(Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> typedConstructor, MvxIoCContainer parent) : this(parent)
+            {
+                _constructor = typedConstructor;
+            }
+
+            public override object Resolve()
+            {
+                _provider.InternalTryResolve(typeof(TParameter1), out var parameter1);
+                _provider.InternalTryResolve(typeof(TParameter2), out var parameter2);
+                _provider.InternalTryResolve(typeof(TParameter3), out var parameter3);
+                _provider.InternalTryResolve(typeof(TParameter4), out var parameter4);
+                return _constructor((TParameter1)parameter1, (TParameter2)parameter2, (TParameter3)parameter3, (TParameter4)parameter4);
+            }
+        }
+
+        public class TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2, TParameter3, TParameter4, TParameter5> : TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2, TParameter3, TParameter4>
+            where TInterface : class
+            where TParameter1 : class
+            where TParameter2 : class
+            where TParameter3 : class
+            where TParameter4 : class
+            where TParameter5 : class
+        {
+            private readonly Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> _constructor;
+
+            protected TypedFuncConstructingResolver(MvxIoCContainer parent) : base(parent)
+            {
+            }
+
+            public TypedFuncConstructingResolver(Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> typedConstructor, MvxIoCContainer parent) : this(parent)
+            {
+                _constructor = typedConstructor;
+            }
+
+            public override object Resolve()
+            {
+                _provider.InternalTryResolve(typeof(TParameter1), out var parameter1);
+                _provider.InternalTryResolve(typeof(TParameter2), out var parameter2);
+                _provider.InternalTryResolve(typeof(TParameter3), out var parameter3);
+                _provider.InternalTryResolve(typeof(TParameter4), out var parameter4);
+                _provider.InternalTryResolve(typeof(TParameter5), out var parameter5);
+                return _constructor((TParameter1)parameter1, (TParameter2)parameter2, (TParameter3)parameter3, (TParameter4)parameter4, (TParameter5)parameter5);
+            }
+        }
+
+        public class ParameterFuncConstructingResolver : IResolver
+        {
+            private readonly Func<object> _constructor;
+
+            public static ParameterFuncConstructingResolver CreateResolver<TInterface, TParameter1>(
+                Func<TParameter1, TInterface> typedConstructor, MvxIoCContainer parent)
+                where TInterface : class
+                where TParameter1 : class
+            {
+                var resolver = new Func<object>(() =>
+                {
+                    parent.InternalTryResolve(typeof(TParameter1), out var parameter1);
+                    return typedConstructor((TParameter1)parameter1);
+                });
+
+                return new ParameterFuncConstructingResolver(resolver);
+            }
+
+            public static ParameterFuncConstructingResolver CreateResolver<TInterface, TParameter1, TParameter2>(
+                Func<TParameter1, TParameter2, TInterface> typedConstructor, MvxIoCContainer parent)
+                where TInterface : class
+                where TParameter1 : class
+                where TParameter2 : class
+            {
+                var resolver = new Func<object>(() =>
+                {
+                    parent.InternalTryResolve(typeof(TParameter1), out var parameter1);
+                    parent.InternalTryResolve(typeof(TParameter2), out var parameter2);
+                    return typedConstructor((TParameter1)parameter1, (TParameter2)parameter2);
+                });
+
+                return new ParameterFuncConstructingResolver(resolver);
+            }
+
+            public static ParameterFuncConstructingResolver CreateResolver<TInterface, TParameter1, TParameter2, TParameter3>(
+                Func<TParameter1, TParameter2, TParameter3, TInterface> typedConstructor, MvxIoCContainer parent)
+                where TInterface : class
+                where TParameter1 : class
+                where TParameter2 : class
+                where TParameter3 : class
+            {
+                var resolver = new Func<object>(() =>
+                {
+                    parent.InternalTryResolve(typeof(TParameter1), out var parameter1);
+                    parent.InternalTryResolve(typeof(TParameter2), out var parameter2);
+                    parent.InternalTryResolve(typeof(TParameter3), out var parameter3);
+                    return typedConstructor((TParameter1)parameter1, (TParameter2)parameter2, (TParameter3)parameter3);
+                });
+
+                return new ParameterFuncConstructingResolver(resolver);
+            }
+
+            public static ParameterFuncConstructingResolver CreateResolver<TInterface, TParameter1, TParameter2, TParameter3, TParameter4>(
+                Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> typedConstructor, MvxIoCContainer parent)
+                where TInterface : class
+                where TParameter1 : class
+                where TParameter2 : class
+                where TParameter3 : class
+                where TParameter4 : class
+            {
+                var resolver = new Func<object>(() =>
+                {
+                    parent.InternalTryResolve(typeof(TParameter1), out var parameter1);
+                    parent.InternalTryResolve(typeof(TParameter2), out var parameter2);
+                    parent.InternalTryResolve(typeof(TParameter3), out var parameter3);
+                    parent.InternalTryResolve(typeof(TParameter4), out var parameter4);
+                    return typedConstructor((TParameter1)parameter1, (TParameter2)parameter2, (TParameter3)parameter3, (TParameter4)parameter4);
+                });
+
+                return new ParameterFuncConstructingResolver(resolver);
+            }
+
+            public static ParameterFuncConstructingResolver CreateResolver<TInterface, TParameter1, TParameter2, TParameter3, TParameter4, TParameter5>(
+                Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> typedConstructor, MvxIoCContainer parent)
+                where TInterface : class
+                where TParameter1 : class
+                where TParameter2 : class
+                where TParameter3 : class
+                where TParameter4 : class
+                where TParameter5 : class
+            {
+                var resolver = new Func<object>(() =>
+                {
+                    parent.InternalTryResolve(typeof(TParameter1), out var parameter1);
+                    parent.InternalTryResolve(typeof(TParameter2), out var parameter2);
+                    parent.InternalTryResolve(typeof(TParameter3), out var parameter3);
+                    parent.InternalTryResolve(typeof(TParameter4), out var parameter4);
+                    parent.InternalTryResolve(typeof(TParameter5), out var parameter5);
+                    return typedConstructor((TParameter1)parameter1, (TParameter2)parameter2, (TParameter3)parameter3, (TParameter4)parameter4, (TParameter5)parameter5);
+                });
+
+                return new ParameterFuncConstructingResolver(resolver);
+            }
+
+            private ParameterFuncConstructingResolver(Func<object> constructor)
             {
                 _constructor = constructor;
             }
@@ -303,6 +555,65 @@ namespace MvvmCross.IoC
             where TInterface : class
         {
             var resolver = new FuncConstructingResolver(constructor);
+            InternalSetResolver(typeof(TInterface), resolver);
+        }
+
+        public void RegisterType<TInterface, TParameter1>(Func<TParameter1, TInterface> constructor)
+            where TInterface : class
+            where TParameter1 : class
+        {
+            var resolver = new TypedFuncConstructingResolver<TInterface, TParameter1>(constructor, this);
+
+            //            var resolver = ParameterFuncConstructingResolver.CreateResolver(constructor, this);
+            InternalSetResolver(typeof(TInterface), resolver);
+        }
+
+        public void RegisterType<TInterface, TParameter1, TParameter2>(Func<TParameter1, TParameter2, TInterface> constructor)
+            where TInterface : class
+            where TParameter1 : class
+            where TParameter2 : class
+        {
+            var resolver = new TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2>(constructor, this);
+
+            //            var resolver = ParameterFuncConstructingResolver.CreateResolver(constructor, this);
+            InternalSetResolver(typeof(TInterface), resolver);
+        }
+
+        public void RegisterType<TInterface, TParameter1, TParameter2, TParameter3>(Func<TParameter1, TParameter2, TParameter3, TInterface> constructor)
+            where TInterface : class
+            where TParameter1 : class
+            where TParameter2 : class
+            where TParameter3 : class
+        {
+            //var resolver = ParameterFuncConstructingResolver.CreateResolver(constructor, this);
+            var resolver = new TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2, TParameter3>(constructor, this);
+            InternalSetResolver(typeof(TInterface), resolver);
+        }
+
+        public void RegisterType<TInterface, TParameter1, TParameter2, TParameter3, TParameter4>(Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> constructor)
+            where TInterface : class
+            where TParameter1 : class
+            where TParameter2 : class
+            where TParameter3 : class
+            where TParameter4 : class
+        {
+            var resolver = new TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2, TParameter3, TParameter4>(constructor, this);
+
+            //var resolver = ParameterFuncConstructingResolver.CreateResolver(constructor, this);
+            InternalSetResolver(typeof(TInterface), resolver);
+        }
+
+        public void RegisterType<TInterface, TParameter1, TParameter2, TParameter3, TParameter4, TParameter5>(Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> constructor)
+            where TInterface : class
+            where TParameter1 : class
+            where TParameter2 : class
+            where TParameter3 : class
+            where TParameter4 : class
+            where TParameter5 : class
+        {
+            var resolver = new TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2, TParameter3, TParameter4, TParameter5>(constructor, this);
+
+            //var resolver = ParameterFuncConstructingResolver.CreateResolver(constructor, this);
             InternalSetResolver(typeof(TInterface), resolver);
         }
 
