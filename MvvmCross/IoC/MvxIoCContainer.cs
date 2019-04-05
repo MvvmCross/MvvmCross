@@ -562,9 +562,9 @@ namespace MvvmCross.IoC
             where TInterface : class
             where TParameter1 : class
         {
-            var resolver = new TypedFuncConstructingResolver<TInterface, TParameter1>(constructor, this);
+            //var resolver = new TypedFuncConstructingResolver<TInterface, TParameter1>(constructor, this);
 
-            //            var resolver = ParameterFuncConstructingResolver.CreateResolver(constructor, this);
+            var resolver = ParameterFuncConstructingResolver.CreateResolver(constructor, this);
             InternalSetResolver(typeof(TInterface), resolver);
         }
 
@@ -573,9 +573,9 @@ namespace MvvmCross.IoC
             where TParameter1 : class
             where TParameter2 : class
         {
-            var resolver = new TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2>(constructor, this);
+            //var resolver = new TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2>(constructor, this);
 
-            //            var resolver = ParameterFuncConstructingResolver.CreateResolver(constructor, this);
+            var resolver = ParameterFuncConstructingResolver.CreateResolver(constructor, this);
             InternalSetResolver(typeof(TInterface), resolver);
         }
 
@@ -585,8 +585,9 @@ namespace MvvmCross.IoC
             where TParameter2 : class
             where TParameter3 : class
         {
-            //var resolver = ParameterFuncConstructingResolver.CreateResolver(constructor, this);
-            var resolver = new TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2, TParameter3>(constructor, this);
+            var resolver = ParameterFuncConstructingResolver.CreateResolver(constructor, this);
+
+            //var resolver = new TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2, TParameter3>(constructor, this);
             InternalSetResolver(typeof(TInterface), resolver);
         }
 
@@ -597,9 +598,9 @@ namespace MvvmCross.IoC
             where TParameter3 : class
             where TParameter4 : class
         {
-            var resolver = new TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2, TParameter3, TParameter4>(constructor, this);
+            //var resolver = new TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2, TParameter3, TParameter4>(constructor, this);
 
-            //var resolver = ParameterFuncConstructingResolver.CreateResolver(constructor, this);
+            var resolver = ParameterFuncConstructingResolver.CreateResolver(constructor, this);
             InternalSetResolver(typeof(TInterface), resolver);
         }
 
@@ -611,9 +612,9 @@ namespace MvvmCross.IoC
             where TParameter4 : class
             where TParameter5 : class
         {
-            var resolver = new TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2, TParameter3, TParameter4, TParameter5>(constructor, this);
+            //var resolver = new TypedFuncConstructingResolver<TInterface, TParameter1, TParameter2, TParameter3, TParameter4, TParameter5>(constructor, this);
 
-            //var resolver = ParameterFuncConstructingResolver.CreateResolver(constructor, this);
+            var resolver = ParameterFuncConstructingResolver.CreateResolver(constructor, this);
             InternalSetResolver(typeof(TInterface), resolver);
         }
 
