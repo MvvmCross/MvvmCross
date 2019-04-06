@@ -5,15 +5,13 @@
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Base;
-using Xunit;
-using MvvmCross.Tests;
-using System.Linq;
 using MvvmCross.Exceptions;
 using MvvmCross.IoC;
+using Xunit;
 
 namespace MvvmCross.UnitTest.Base
 {
-    [Collection("MvxTest")]   
+    [Collection("MvxTest")]
     public class MvxIocTest
     {
         private readonly NavigationTestFixture _fixture;
@@ -24,9 +22,9 @@ namespace MvvmCross.UnitTest.Base
             _fixture.ClearAll();
         }
 
-        public interface IA 
-        { 
-            IB B { get; } 
+        public interface IA
+        {
+            IB B { get; }
         }
 
         public interface IB
@@ -35,6 +33,14 @@ namespace MvvmCross.UnitTest.Base
         }
 
         public interface IC
+        {
+        }
+
+        public interface ID
+        {
+        }
+
+        public interface IE
         {
         }
 
@@ -49,6 +55,31 @@ namespace MvvmCross.UnitTest.Base
         public interface IHasOGParameter
         {
             IOG<C> OpenGeneric { get; }
+        }
+
+        public interface IHasOneParameter
+        {
+            IA A { get; }
+        }
+
+        public interface IHasTwoParameters : IHasOneParameter
+        {
+            IB B { get; }
+        }
+
+        public interface IHasThreeParameters : IHasTwoParameters
+        {
+            IC C { get; }
+        }
+
+        public interface IHasFourParameters : IHasThreeParameters
+        {
+            ID D { get; }
+        }
+
+        public interface IHasFiveParameters : IHasFourParameters
+        {
+            IE E { get; }
         }
 
         public class A : IA
@@ -85,12 +116,16 @@ namespace MvvmCross.UnitTest.Base
             }
         }
 
-        public class D
+        public class D : ID
         {
             public string Title { get; }
+
             public string Subtitle { get; }
+
             public string Description { get; }
+
             public int Amount { get; }
+
             public bool Enabled { get; }
 
             public D(string title, string subtitle, string description)
@@ -106,6 +141,10 @@ namespace MvvmCross.UnitTest.Base
                 Amount = amount;
                 Enabled = enabled;
             }
+        }
+
+        public class E : IE
+        {
         }
 
         public class COdd : IC
@@ -138,6 +177,45 @@ namespace MvvmCross.UnitTest.Base
             }
 
             public IOG<C> OpenGeneric { get; }
+        }
+
+        public class HasMultipleConstructors : IHasOneParameter, IHasTwoParameters, IHasThreeParameters,
+            IHasFourParameters, IHasFiveParameters
+        {
+            public IA A { get; }
+
+            public IB B { get; }
+
+            public IC C { get; }
+
+            public ID D { get; }
+
+            public IE E { get; }
+
+            public HasMultipleConstructors(IA a)
+            {
+                A = a;
+            }
+
+            public HasMultipleConstructors(IA a, IB b) : this(a)
+            {
+                B = b;
+            }
+
+            public HasMultipleConstructors(IA a, IB b, IC c) : this(a, b)
+            {
+                C = c;
+            }
+
+            public HasMultipleConstructors(IA a, IB b, IC c, ID d) : this(a, b, c)
+            {
+                D = d;
+            }
+
+            public HasMultipleConstructors(IA a, IB b, IC c, ID d, IE e) : this(a, b, c, d)
+            {
+                E = e;
+            }
         }
 
         [Fact]
@@ -312,6 +390,67 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
+        public void RegisterType_with_no_reflection_creates_different_objects()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxIoCProvider.Initialize();
+
+            instance.RegisterType<IA, IB>(b => new A(b));
+            instance.RegisterType<IB, IC>(c => new B(c));
+            instance.RegisterType<IC>(() => new C2());
+
+            var typesToResolve = new[] { typeof(IA), typeof(IB), typeof(IC) };
+            foreach (var type in typesToResolve)
+            {
+                var obj1 = Mvx.IoCProvider.Resolve(type);
+                var obj2 = Mvx.IoCProvider.Resolve(type);
+
+                Assert.NotNull(obj1);
+                Assert.NotNull(obj2);
+
+                Assert.NotEqual(obj1, obj2);
+            }
+        }
+
+        [Fact]
+        public void RegisterType_with_no_reflection_with_up_to_5_parameters()
+        {
+            MvxSingleton.ClearAllSingletons();
+            var instance = MvxIoCProvider.Initialize();
+
+            instance.RegisterType<IA, IB>(b => new A(b));
+            instance.RegisterType<IB, IC>(c => new B(c));
+            instance.RegisterType<IC>(() => new C2());
+            instance.RegisterType<ID>(() => new D("Test", "Test subtitle", "Description"));
+            instance.RegisterType<IE>(() => new E());
+
+            instance.RegisterType<IHasFiveParameters, IA, IB, IC, ID, IE>((a, b, c, d, e) =>
+                new HasMultipleConstructors(a, b, c, d, e));
+            instance.RegisterType<IHasFourParameters, IA, IB, IC, ID>((a, b, c, d) =>
+                new HasMultipleConstructors(a, b, c, d));
+            instance.RegisterType<IHasThreeParameters, IA, IB, IC>((a, b, c) => new HasMultipleConstructors(a, b, c));
+            instance.RegisterType<IHasTwoParameters, IA, IB>((a, b) => new HasMultipleConstructors(a, b));
+            instance.RegisterType<IHasOneParameter, IA>(a => new HasMultipleConstructors(a));
+
+            var obj1 = Mvx.IoCProvider.Resolve<IHasOneParameter>();
+            var obj2 = Mvx.IoCProvider.Resolve<IHasTwoParameters>();
+            var obj3 = Mvx.IoCProvider.Resolve<IHasThreeParameters>();
+            var obj4 = Mvx.IoCProvider.Resolve<IHasFourParameters>();
+            var obj5 = Mvx.IoCProvider.Resolve<IHasFiveParameters>();
+
+            Assert.NotNull(obj1);
+            Assert.NotNull(obj1.A);
+            Assert.NotNull(obj2);
+            Assert.NotNull(obj2.B);
+            Assert.NotNull(obj3);
+            Assert.NotNull(obj3.C);
+            Assert.NotNull(obj4);
+            Assert.NotNull(obj4.D);
+            Assert.NotNull(obj5);
+            Assert.NotNull(obj5.E);
+        }
+
+        [Fact]
         public void Non_generic_RegisterType_with_constructor_creates_different_objects()
         {
             MvxSingleton.ClearAllSingletons();
@@ -336,7 +475,8 @@ namespace MvvmCross.UnitTest.Base
 
             instance.RegisterType(typeof(IC), () => "Fail");
 
-            Assert.Throws<MvxIoCResolveException>(() => {
+            Assert.Throws<MvxIoCResolveException>(() =>
+            {
                 var c1 = Mvx.IoCProvider.Resolve<IC>();
             });
         }
@@ -349,7 +489,8 @@ namespace MvvmCross.UnitTest.Base
 
             instance.RegisterType(typeof(IC), () => 36);
 
-            Assert.Throws<MvxIoCResolveException>(() => {
+            Assert.Throws<MvxIoCResolveException>(() =>
+            {
                 var c1 = Mvx.IoCProvider.Resolve<IC>();
             });
         }
@@ -379,7 +520,7 @@ namespace MvvmCross.UnitTest.Base
             ((MvxIoCProvider)instance).CleanAllResolvers();
 
             instance.RegisterType(typeof(IOG<C2>), typeof(OG<C2>));
-            
+
             IOG<C2> toResolve = null;
             Mvx.IoCProvider.TryResolve<IOG<C2>>(out toResolve);
 
@@ -397,7 +538,7 @@ namespace MvvmCross.UnitTest.Base
             instance.RegisterType(typeof(IOG2<,>), typeof(OG2<,>));
 
             IOG2<C2, C> toResolve = null;
-            Mvx.IoCProvider.TryResolve<IOG2<C2,C>>(out toResolve);
+            Mvx.IoCProvider.TryResolve<IOG2<C2, C>>(out toResolve);
 
             Assert.NotNull(toResolve);
             Assert.Contains(toResolve.GetType().GetTypeInfo().ImplementedInterfaces, i => i == typeof(IOG2<C2, C>));
@@ -410,7 +551,7 @@ namespace MvvmCross.UnitTest.Base
             var instance = MvxIoCProvider.Initialize();
             ((MvxIoCProvider)instance).CleanAllResolvers();
 
-            instance.RegisterType(typeof(IOG2<C2,C>), typeof(OG2<C2,C>));
+            instance.RegisterType(typeof(IOG2<C2, C>), typeof(OG2<C2, C>));
 
             IOG2<C2, C> toResolve = null;
             Mvx.IoCProvider.TryResolve<IOG2<C2, C>>(out toResolve);
@@ -453,7 +594,7 @@ namespace MvvmCross.UnitTest.Base
             Assert.True(toResolve.OpenGeneric.GetType() == typeof(OG<C>));
         }
 
-        #endregion
+        #endregion Open-Generics
 
         #region Child Container
 
@@ -478,7 +619,7 @@ namespace MvvmCross.UnitTest.Base
             Assert.NotNull(b.C);
         }
 
-        #endregion
+        #endregion Child Container
 
         [Fact]
         public void IocConstruct_WithDictionaryArguments_CreatesObject()
@@ -572,7 +713,8 @@ namespace MvvmCross.UnitTest.Base
             var subtitle = "The subtitle";
             var enabled = true;
 
-            Assert.Throws<MvxIoCResolveException>(() => {
+            Assert.Throws<MvxIoCResolveException>(() =>
+            {
                 var d = instance.IoCConstruct<D>(title, subtitle, enabled);
             });
         }
