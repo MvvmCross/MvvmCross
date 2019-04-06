@@ -3025,7 +3025,6 @@ namespace Playground.Core.Services
             var instance998 = provider.Resolve<Interface998>();
             var instance999 = provider.Resolve<Interface999>();
             var instance1000 = provider.Resolve<Interface1000>();
-
         }
 
         public interface IConstructorParameter1 { }
