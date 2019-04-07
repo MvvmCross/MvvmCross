@@ -183,6 +183,56 @@ namespace MvvmCross.IoC
             ioc.RegisterSingleton(type, constructor);
         }
 
+        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1>(this IMvxIoCProvider ioc, Func<TParameter1, TInterface> constructor)
+            where TInterface : class
+            where TParameter1 : class
+        {
+            var resolver = ioc.CreateResolver(constructor);
+            ioc.RegisterSingleton(resolver);
+        }
+
+        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1, TParameter2>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TInterface> constructor)
+            where TInterface : class
+            where TParameter1 : class
+            where TParameter2 : class
+        {
+            var resolver = ioc.CreateResolver(constructor);
+            ioc.RegisterSingleton(resolver);
+        }
+
+        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1, TParameter2, TParameter3>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TInterface> constructor)
+            where TInterface : class
+            where TParameter1 : class
+            where TParameter2 : class
+            where TParameter3 : class
+        {
+            var resolver = ioc.CreateResolver(constructor);
+            ioc.RegisterSingleton(resolver);
+        }
+
+        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1, TParameter2, TParameter3, TParameter4>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> constructor)
+            where TInterface : class
+            where TParameter1 : class
+            where TParameter2 : class
+            where TParameter3 : class
+            where TParameter4 : class
+        {
+            var resolver = ioc.CreateResolver(constructor);
+            ioc.RegisterSingleton(resolver);
+        }
+
+        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1, TParameter2, TParameter3, TParameter4, TParameter5>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> constructor)
+            where TInterface : class
+            where TParameter1 : class
+            where TParameter2 : class
+            where TParameter3 : class
+            where TParameter4 : class
+            where TParameter5 : class
+        {
+            var resolver = ioc.CreateResolver(constructor);
+            ioc.RegisterSingleton(resolver);
+        }
+
         public static void RegisterType<TType>(this IMvxIoCProvider ioc)
             where TType : class
         {
