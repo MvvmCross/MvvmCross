@@ -106,51 +106,6 @@ namespace MvvmCross.IoC
             _provider.RegisterType(constructor);
         }
 
-        public void RegisterType<TInterface, TParameter1>(Func<TParameter1, TInterface> constructor)
-            where TInterface : class
-            where TParameter1 : class
-        {
-            _provider.RegisterType(constructor);
-        }
-
-        public void RegisterType<TInterface, TParameter1, TParameter2>(Func<TParameter1, TParameter2, TInterface> constructor)
-            where TInterface : class
-            where TParameter1 : class
-            where TParameter2 : class
-        {
-            _provider.RegisterType(constructor);
-        }
-
-        public void RegisterType<TInterface, TParameter1, TParameter2, TParameter3>(Func<TParameter1, TParameter2, TParameter3, TInterface> constructor)
-            where TInterface : class
-            where TParameter1 : class
-            where TParameter2 : class
-            where TParameter3 : class
-        {
-            _provider.RegisterType(constructor);
-        }
-
-        public void RegisterType<TInterface, TParameter1, TParameter2, TParameter3, TParameter4>(Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> constructor)
-            where TInterface : class
-            where TParameter1 : class
-            where TParameter2 : class
-            where TParameter3 : class
-            where TParameter4 : class
-        {
-            _provider.RegisterType(constructor);
-        }
-
-        public void RegisterType<TInterface, TParameter1, TParameter2, TParameter3, TParameter4, TParameter5>(Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> constructor)
-            where TInterface : class
-            where TParameter1 : class
-            where TParameter2 : class
-            where TParameter3 : class
-            where TParameter4 : class
-            where TParameter5 : class
-        {
-            _provider.RegisterType(constructor);
-        }
-
         public void RegisterType(Type t, Func<object> constructor)
         {
             _provider.RegisterType(t, constructor);

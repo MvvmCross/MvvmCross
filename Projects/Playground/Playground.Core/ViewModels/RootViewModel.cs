@@ -209,8 +209,6 @@ namespace Playground.Core.ViewModels
         {
             base.ViewAppearing();
 
-            var myInstance = Mvx.IoCProvider.Resolve<IMyInterface>();
-
             MyTask = MvxNotifyTask.Create(
                 async () =>
                 {
