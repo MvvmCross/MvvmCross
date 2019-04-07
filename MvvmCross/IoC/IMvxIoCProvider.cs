@@ -34,26 +34,26 @@ namespace MvvmCross.IoC
 
         object GetSingleton(Type type);
 
-        void RegisterType<TFrom, TTo>()
+        void RegisterType<TFrom, TTo>(bool overrideIfExists = true)
             where TFrom : class
             where TTo : class, TFrom;
 
-        void RegisterType<TInterface>(Func<TInterface> constructor)
+        void RegisterType<TInterface>(Func<TInterface> constructor, bool overrideIfExists = true)
             where TInterface : class;
 
-        void RegisterType(Type t, Func<object> constructor);
+        void RegisterType(Type t, Func<object> constructor, bool overrideIfExists = true);
 
-        void RegisterType(Type tFrom, Type tTo);
+        void RegisterType(Type tFrom, Type tTo, bool overrideIfExists = true);
 
-        void RegisterSingleton<TInterface>(TInterface theObject)
+        void RegisterSingleton<TInterface>(TInterface theObject, bool overrideIfExists = true)
             where TInterface : class;
 
-        void RegisterSingleton(Type tInterface, object theObject);
+        void RegisterSingleton(Type tInterface, object theObject, bool overrideIfExists = true);
 
-        void RegisterSingleton<TInterface>(Func<TInterface> theConstructor)
+        void RegisterSingleton<TInterface>(Func<TInterface> theConstructor, bool overrideIfExists = true)
             where TInterface : class;
 
-        void RegisterSingleton(Type tInterface, Func<object> theConstructor);
+        void RegisterSingleton(Type tInterface, Func<object> theConstructor, bool overrideIfExists = true);
 
         T IoCConstruct<T>()
             where T : class;

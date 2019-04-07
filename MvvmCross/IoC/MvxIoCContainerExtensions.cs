@@ -101,30 +101,30 @@ namespace MvvmCross.IoC
             ioc.CallbackWhenRegistered<T>(simpleAction);
         }
 
-        public static TType ConstructAndRegisterSingleton<TInterface, TType>(this IMvxIoCProvider ioc)
+        public static TType ConstructAndRegisterSingleton<TInterface, TType>(this IMvxIoCProvider ioc, bool overrideIfExists = true)
             where TInterface : class
             where TType : class, TInterface
         {
             var instance = ioc.IoCConstruct<TType>();
-            ioc.RegisterSingleton<TInterface>(instance);
+            ioc.RegisterSingleton<TInterface>(instance, overrideIfExists);
             return instance;
         }
 
-        public static TType ConstructAndRegisterSingleton<TInterface, TType>(this IMvxIoCProvider ioc, IDictionary<string, object> arguments)
+        public static TType ConstructAndRegisterSingleton<TInterface, TType>(this IMvxIoCProvider ioc, IDictionary<string, object> arguments, bool overrideIfExists = true)
             where TInterface : class
             where TType : class, TInterface
         {
             var instance = ioc.IoCConstruct<TType>(arguments);
-            ioc.RegisterSingleton<TInterface>(instance);
+            ioc.RegisterSingleton<TInterface>(instance, overrideIfExists);
             return instance;
         }
 
-        public static TType ConstructAndRegisterSingleton<TInterface, TType>(this IMvxIoCProvider ioc, object arguments)
+        public static TType ConstructAndRegisterSingleton<TInterface, TType>(this IMvxIoCProvider ioc, object arguments, bool overrideIfExists = true)
             where TInterface : class
             where TType : class, TInterface
         {
             var instance = ioc.IoCConstruct<TType>(arguments);
-            ioc.RegisterSingleton<TInterface>(instance);
+            ioc.RegisterSingleton<TInterface>(instance, overrideIfExists);
             return instance;
         }
 
@@ -137,24 +137,33 @@ namespace MvvmCross.IoC
             return instance;
         }
 
-        public static object ConstructAndRegisterSingleton(this IMvxIoCProvider ioc, Type type)
+        public static TType ConstructAndRegisterSingletonNoOverride<TInterface, TType>(this IMvxIoCProvider ioc, params object[] arguments)
+            where TInterface : class
+            where TType : class, TInterface
+        {
+            var instance = ioc.IoCConstruct<TType>(arguments);
+            ioc.RegisterSingleton<TInterface>(instance, false);
+            return instance;
+        }
+
+        public static object ConstructAndRegisterSingleton(this IMvxIoCProvider ioc, Type type, bool overrideIfExists = true)
         {
             var instance = ioc.IoCConstruct(type);
-            ioc.RegisterSingleton(type, instance);
+            ioc.RegisterSingleton(type, instance, overrideIfExists);
             return instance;
         }
 
-        public static object ConstructAndRegisterSingleton(this IMvxIoCProvider ioc, Type type, IDictionary<string, object> arguments)
+        public static object ConstructAndRegisterSingleton(this IMvxIoCProvider ioc, Type type, IDictionary<string, object> arguments, bool overrideIfExists = true)
         {
             var instance = ioc.IoCConstruct(type, arguments);
-            ioc.RegisterSingleton(type, instance);
+            ioc.RegisterSingleton(type, instance, overrideIfExists);
             return instance;
         }
 
-        public static object ConstructAndRegisterSingleton(this IMvxIoCProvider ioc, Type type, object arguments)
+        public static object ConstructAndRegisterSingleton(this IMvxIoCProvider ioc, Type type, object arguments, bool overrideIfExists = true)
         {
             var instance = ioc.IoCConstruct(type, arguments);
-            ioc.RegisterSingleton(type, instance);
+            ioc.RegisterSingleton(type, instance, overrideIfExists);
             return instance;
         }
 
@@ -165,52 +174,59 @@ namespace MvvmCross.IoC
             return instance;
         }
 
-        public static void LazyConstructAndRegisterSingleton<TInterface, TType>(this IMvxIoCProvider ioc)
+        public static object ConstructAndRegisterSingletonNoOverride(this IMvxIoCProvider ioc, Type type, params object[] arguments)
+        {
+            var instance = ioc.IoCConstruct(type, arguments);
+            ioc.RegisterSingleton(type, instance, false);
+            return instance;
+        }
+
+        public static void LazyConstructAndRegisterSingleton<TInterface, TType>(this IMvxIoCProvider ioc, bool overrideIfExists = true)
             where TInterface : class
             where TType : class, TInterface
         {
-            ioc.RegisterSingleton<TInterface>(() => ioc.IoCConstruct<TType>());
+            ioc.RegisterSingleton<TInterface>(() => ioc.IoCConstruct<TType>(), overrideIfExists);
         }
 
-        public static void LazyConstructAndRegisterSingleton<TInterface>(this IMvxIoCProvider ioc, Func<TInterface> constructor)
+        public static void LazyConstructAndRegisterSingleton<TInterface>(this IMvxIoCProvider ioc, Func<TInterface> constructor, bool overrideIfExists = true)
             where TInterface : class
         {
-            ioc.RegisterSingleton<TInterface>(constructor);
+            ioc.RegisterSingleton<TInterface>(constructor, overrideIfExists);
         }
 
-        public static void LazyConstructAndRegisterSingleton(this IMvxIoCProvider ioc, Type type, Func<object> constructor)
+        public static void LazyConstructAndRegisterSingleton(this IMvxIoCProvider ioc, Type type, Func<object> constructor, bool overrideIfExists = true)
         {
-            ioc.RegisterSingleton(type, constructor);
+            ioc.RegisterSingleton(type, constructor, overrideIfExists);
         }
 
-        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1>(this IMvxIoCProvider ioc, Func<TParameter1, TInterface> constructor)
+        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1>(this IMvxIoCProvider ioc, Func<TParameter1, TInterface> constructor, bool overrideIfExists = true)
             where TInterface : class
             where TParameter1 : class
         {
             var resolver = ioc.CreateResolver(constructor);
-            ioc.RegisterSingleton(resolver);
+            ioc.RegisterSingleton(resolver, overrideIfExists);
         }
 
-        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1, TParameter2>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TInterface> constructor)
+        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1, TParameter2>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TInterface> constructor, bool overrideIfExists = true)
             where TInterface : class
             where TParameter1 : class
             where TParameter2 : class
         {
             var resolver = ioc.CreateResolver(constructor);
-            ioc.RegisterSingleton(resolver);
+            ioc.RegisterSingleton(resolver, overrideIfExists);
         }
 
-        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1, TParameter2, TParameter3>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TInterface> constructor)
+        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1, TParameter2, TParameter3>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TInterface> constructor, bool overrideIfExists = true)
             where TInterface : class
             where TParameter1 : class
             where TParameter2 : class
             where TParameter3 : class
         {
             var resolver = ioc.CreateResolver(constructor);
-            ioc.RegisterSingleton(resolver);
+            ioc.RegisterSingleton(resolver, overrideIfExists);
         }
 
-        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1, TParameter2, TParameter3, TParameter4>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> constructor)
+        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1, TParameter2, TParameter3, TParameter4>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> constructor, bool overrideIfExists = true)
             where TInterface : class
             where TParameter1 : class
             where TParameter2 : class
@@ -218,10 +234,10 @@ namespace MvvmCross.IoC
             where TParameter4 : class
         {
             var resolver = ioc.CreateResolver(constructor);
-            ioc.RegisterSingleton(resolver);
+            ioc.RegisterSingleton(resolver, overrideIfExists);
         }
 
-        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1, TParameter2, TParameter3, TParameter4, TParameter5>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> constructor)
+        public static void LazyConstructAndRegisterSingleton<TInterface, TParameter1, TParameter2, TParameter3, TParameter4, TParameter5>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> constructor, bool overrideIfExists = true)
             where TInterface : class
             where TParameter1 : class
             where TParameter2 : class
@@ -230,48 +246,48 @@ namespace MvvmCross.IoC
             where TParameter5 : class
         {
             var resolver = ioc.CreateResolver(constructor);
-            ioc.RegisterSingleton(resolver);
+            ioc.RegisterSingleton(resolver, overrideIfExists);
         }
 
-        public static void RegisterType<TType>(this IMvxIoCProvider ioc)
+        public static void RegisterType<TType>(this IMvxIoCProvider ioc, bool overrideIfExists = true)
             where TType : class
         {
-            ioc.RegisterType<TType, TType>();
+            ioc.RegisterType<TType, TType>(overrideIfExists);
         }
 
-        public static void RegisterType(this IMvxIoCProvider ioc, Type tType)
+        public static void RegisterType(this IMvxIoCProvider ioc, Type tType, bool overrideIfExists = true)
         {
-            ioc.RegisterType(tType, tType);
+            ioc.RegisterType(tType, tType, overrideIfExists);
         }
 
-        public static void RegisterType<TInterface, TParameter1>(this IMvxIoCProvider ioc, Func<TParameter1, TInterface> constructor)
+        public static void RegisterType<TInterface, TParameter1>(this IMvxIoCProvider ioc, Func<TParameter1, TInterface> constructor, bool overrideIfExists = true)
            where TInterface : class
            where TParameter1 : class
         {
             var resolver = ioc.CreateResolver(constructor);
-            ioc.RegisterType(resolver);
+            ioc.RegisterType(resolver, overrideIfExists);
         }
 
-        public static void RegisterType<TInterface, TParameter1, TParameter2>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TInterface> constructor)
+        public static void RegisterType<TInterface, TParameter1, TParameter2>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TInterface> constructor, bool overrideIfExists = true)
             where TInterface : class
             where TParameter1 : class
             where TParameter2 : class
         {
             var resolver = ioc.CreateResolver(constructor);
-            ioc.RegisterType(resolver);
+            ioc.RegisterType(resolver, overrideIfExists);
         }
 
-        public static void RegisterType<TInterface, TParameter1, TParameter2, TParameter3>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TInterface> constructor)
+        public static void RegisterType<TInterface, TParameter1, TParameter2, TParameter3>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TInterface> constructor, bool overrideIfExists = true)
             where TInterface : class
             where TParameter1 : class
             where TParameter2 : class
             where TParameter3 : class
         {
             var resolver = ioc.CreateResolver(constructor);
-            ioc.RegisterType(resolver);
+            ioc.RegisterType(resolver, overrideIfExists);
         }
 
-        public static void RegisterType<TInterface, TParameter1, TParameter2, TParameter3, TParameter4>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> constructor)
+        public static void RegisterType<TInterface, TParameter1, TParameter2, TParameter3, TParameter4>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TParameter4, TInterface> constructor, bool overrideIfExists = true)
             where TInterface : class
             where TParameter1 : class
             where TParameter2 : class
@@ -279,10 +295,10 @@ namespace MvvmCross.IoC
             where TParameter4 : class
         {
             var resolver = ioc.CreateResolver(constructor);
-            ioc.RegisterType(resolver);
+            ioc.RegisterType(resolver, overrideIfExists);
         }
 
-        public static void RegisterType<TInterface, TParameter1, TParameter2, TParameter3, TParameter4, TParameter5>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> constructor)
+        public static void RegisterType<TInterface, TParameter1, TParameter2, TParameter3, TParameter4, TParameter5>(this IMvxIoCProvider ioc, Func<TParameter1, TParameter2, TParameter3, TParameter4, TParameter5, TInterface> constructor, bool overrideIfExists = true)
             where TInterface : class
             where TParameter1 : class
             where TParameter2 : class
@@ -291,7 +307,7 @@ namespace MvvmCross.IoC
             where TParameter5 : class
         {
             var resolver = ioc.CreateResolver(constructor);
-            ioc.RegisterType(resolver);
+            ioc.RegisterType(resolver, overrideIfExists);
         }
     }
 }

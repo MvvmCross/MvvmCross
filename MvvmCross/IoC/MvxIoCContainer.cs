@@ -293,11 +293,11 @@ namespace MvvmCross.IoC
             }
         }
 
-        public void RegisterType<TInterface, TToConstruct>()
+        public void RegisterType<TInterface, TToConstruct>(bool overrideIfExists = true)
             where TInterface : class
             where TToConstruct : class, TInterface
         {
-            RegisterType(typeof(TInterface), typeof(TToConstruct));
+            RegisterType(typeof(TInterface), typeof(TToConstruct), overrideIfExists);
         }
 
         public void RegisterType<TInterface>(Func<TInterface> constructor, bool overrideIfExists = true)
@@ -307,7 +307,7 @@ namespace MvvmCross.IoC
             InternalSetResolver(typeof(TInterface), resolver, overrideIfExists);
         }
 
-        public void RegisterType(Type t, Func<object> constructor)
+        public void RegisterType(Type t, Func<object> constructor, bool overrideIfExists = true)
         {
             var resolver = new FuncConstructingResolver(() =>
             {
@@ -318,10 +318,10 @@ namespace MvvmCross.IoC
                 return ret;
             });
 
-            InternalSetResolver(t, resolver);
+            InternalSetResolver(t, resolver, overrideIfExists);
         }
 
-        public void RegisterType(Type interfaceType, Type constructType)
+        public void RegisterType(Type interfaceType, Type constructType, bool overrideIfExists = true)
         {
             IResolver resolver = null;
             if (interfaceType.GetTypeInfo().IsGenericTypeDefinition)
@@ -333,29 +333,29 @@ namespace MvvmCross.IoC
                 resolver = new ConstructingResolver(constructType, this);
             }
 
-            InternalSetResolver(interfaceType, resolver);
+            InternalSetResolver(interfaceType, resolver, overrideIfExists);
         }
 
-        public void RegisterSingleton<TInterface>(TInterface theObject)
+        public void RegisterSingleton<TInterface>(TInterface theObject, bool overrideIfExists = true)
             where TInterface : class
         {
-            RegisterSingleton(typeof(TInterface), theObject);
+            RegisterSingleton(typeof(TInterface), theObject, overrideIfExists);
         }
 
-        public void RegisterSingleton(Type interfaceType, object theObject)
+        public void RegisterSingleton(Type interfaceType, object theObject, bool overrideIfExists = true)
         {
-            InternalSetResolver(interfaceType, new SingletonResolver(theObject));
+            InternalSetResolver(interfaceType, new SingletonResolver(theObject), overrideIfExists);
         }
 
-        public void RegisterSingleton<TInterface>(Func<TInterface> theConstructor)
+        public void RegisterSingleton<TInterface>(Func<TInterface> theConstructor, bool overrideIfExists = true)
             where TInterface : class
         {
-            RegisterSingleton(typeof(TInterface), theConstructor);
+            RegisterSingleton(typeof(TInterface), theConstructor, overrideIfExists);
         }
 
-        public void RegisterSingleton(Type interfaceType, Func<object> theConstructor)
+        public void RegisterSingleton(Type interfaceType, Func<object> theConstructor, bool overrideIfExists = true)
         {
-            InternalSetResolver(interfaceType, new ConstructingSingletonResolver(theConstructor));
+            InternalSetResolver(interfaceType, new ConstructingSingletonResolver(theConstructor), overrideIfExists);
         }
 
         public object IoCConstruct(Type type)
