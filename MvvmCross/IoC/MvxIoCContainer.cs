@@ -300,11 +300,11 @@ namespace MvvmCross.IoC
             RegisterType(typeof(TInterface), typeof(TToConstruct));
         }
 
-        public void RegisterType<TInterface>(Func<TInterface> constructor)
+        public void RegisterType<TInterface>(Func<TInterface> constructor, bool overrideIfExists = true)
             where TInterface : class
         {
             var resolver = new FuncConstructingResolver(constructor);
-            InternalSetResolver(typeof(TInterface), resolver);
+            InternalSetResolver(typeof(TInterface), resolver, overrideIfExists);
         }
 
         public void RegisterType(Type t, Func<object> constructor)
@@ -602,12 +602,16 @@ namespace MvvmCross.IoC
             }
         }
 
-        private void InternalSetResolver(Type interfaceType, IResolver resolver)
+        private void InternalSetResolver(Type interfaceType, IResolver resolver, bool overrideIfExists)
         {
             List<Action> actions;
             lock (_lockObject)
             {
-                _resolvers[interfaceType] = resolver;
+                if (overrideIfExists || !_resolvers.ContainsKey(interfaceType))
+                {
+                    _resolvers[interfaceType] = resolver;
+                }
+
                 if (_waiters.TryGetValue(interfaceType, out actions))
                 {
                     _waiters.Remove(interfaceType);
