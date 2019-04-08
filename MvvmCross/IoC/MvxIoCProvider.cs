@@ -93,49 +93,49 @@ namespace MvvmCross.IoC
             return _provider.Create(t);
         }
 
-        public void RegisterType<TInterface, TToConstruct>()
+        public void RegisterType<TInterface, TToConstruct>(bool overrideIfExists = true)
             where TInterface : class
             where TToConstruct : class, TInterface
         {
-            _provider.RegisterType<TInterface, TToConstruct>();
+            _provider.RegisterType<TInterface, TToConstruct>(overrideIfExists);
         }
 
-        public void RegisterType<TInterface>(Func<TInterface> constructor)
+        public void RegisterType<TInterface>(Func<TInterface> constructor, bool overrideIfExists = true)
             where TInterface : class
         {
-            _provider.RegisterType(constructor);
+            _provider.RegisterType(constructor, overrideIfExists);
         }
 
-        public void RegisterType(Type t, Func<object> constructor)
+        public void RegisterType(Type t, Func<object> constructor, bool overrideIfExists = true)
         {
-            _provider.RegisterType(t, constructor);
+            _provider.RegisterType(t, constructor, overrideIfExists);
         }
 
-        public void RegisterType(Type interfaceType, Type constructType)
+        public void RegisterType(Type interfaceType, Type constructType, bool overrideIfExists = true)
         {
-            _provider.RegisterType(interfaceType, constructType);
+            _provider.RegisterType(interfaceType, constructType, overrideIfExists);
         }
 
-        public void RegisterSingleton<TInterface>(TInterface theObject)
+        public void RegisterSingleton<TInterface>(TInterface theObject, bool overrideIfExists = true)
             where TInterface : class
         {
-            _provider.RegisterSingleton(theObject);
+            _provider.RegisterSingleton(theObject, overrideIfExists);
         }
 
-        public void RegisterSingleton(Type interfaceType, object theObject)
+        public void RegisterSingleton(Type interfaceType, object theObject, bool overrideIfExists = true)
         {
-            _provider.RegisterSingleton(interfaceType, theObject);
+            _provider.RegisterSingleton(interfaceType, theObject, overrideIfExists);
         }
 
-        public void RegisterSingleton<TInterface>(Func<TInterface> theConstructor)
+        public void RegisterSingleton<TInterface>(Func<TInterface> theConstructor, bool overrideIfExists = true)
             where TInterface : class
         {
-            _provider.RegisterSingleton(theConstructor);
+            _provider.RegisterSingleton(theConstructor, overrideIfExists);
         }
 
-        public void RegisterSingleton(Type interfaceType, Func<object> theConstructor)
+        public void RegisterSingleton(Type interfaceType, Func<object> theConstructor, bool overrideIfExists = true)
         {
-            _provider.RegisterSingleton(interfaceType, theConstructor);
+            _provider.RegisterSingleton(interfaceType, theConstructor, overrideIfExists);
         }
 
         public T IoCConstruct<T>()
