@@ -18,11 +18,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView")]
     public class MvxRecyclerView : Android.Support.V7.Widget.RecyclerView
     {
-        public MvxRecyclerView(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer)
-        {
-        }
-
         public MvxRecyclerView(Context context, IAttributeSet attrs) :
             this(context, attrs, 0, new MvxRecyclerAdapter())
         {
@@ -31,6 +26,19 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle) 
             : this(context, attrs, defStyle, new MvxRecyclerAdapter())
         {
+        }
+
+        [Preserve(Conditional = true)]
+        protected MvxRecyclerView(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
+
+        [Preserve(Conditional = true)]
+        protected static void LinkerPleaseInclude(MvxRecyclerView list)
+        {
+            list.ItemsSource = null;
+            list.Click += (sender, args) => { };
         }
 
         public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter) 
@@ -78,6 +86,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             GetLayoutManager()?.RemoveAllViews();
         }
 
+        [MvxSetToNullAfterBinding]
         public new IMvxRecyclerAdapter Adapter
         {
             get
@@ -118,29 +127,30 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         public IEnumerable ItemsSource
         {
             get { return Adapter.ItemsSource; }
-            set { Adapter.ItemsSource = value; }
+            set
+            {
+                var adapter = Adapter;
+                if (adapter != null)
+                    adapter.ItemsSource = value;
+            }
         }
 
         public int ItemTemplateId
         {
             get
             {
-                var singleItemDefaultTemplateSelector = ItemTemplateSelector as MvxDefaultTemplateSelector;
-
-                if (singleItemDefaultTemplateSelector == null)
+                if (!(ItemTemplateSelector is MvxDefaultTemplateSelector singleItemDefaultTemplateSelector))
                     throw new InvalidOperationException(
-                        $"If you wan't to use single item-template RecyclerView Adapter you can't change it's" +
+                        $"If you don't want to use single item-template RecyclerView Adapter you can't change it's" +
                         $"{nameof(IMvxTemplateSelector)} to anything other than {nameof(MvxDefaultTemplateSelector)}");
 
                 return singleItemDefaultTemplateSelector.ItemTemplateId;
             }
             set
             {
-                var singleItemDefaultTemplateSelector = ItemTemplateSelector as MvxDefaultTemplateSelector;
-
-                if (singleItemDefaultTemplateSelector == null)
+                if (!(ItemTemplateSelector is MvxDefaultTemplateSelector singleItemDefaultTemplateSelector))
                     throw new InvalidOperationException(
-                        $"If you wan't to use single item-template RecyclerView Adapter you can't change it's" +
+                        $"If you don't want to use single item-template RecyclerView Adapter you can't change it's" +
                         $"{nameof(IMvxTemplateSelector)} to anything other than {nameof(MvxDefaultTemplateSelector)}");
 
                 singleItemDefaultTemplateSelector.ItemTemplateId = value;
@@ -154,12 +164,14 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             set { Adapter.ItemTemplateSelector = value; }
         }
 
+        [MvxSetToNullAfterBinding]
         public ICommand ItemClick
         {
             get { return Adapter.ItemClick; }
             set { Adapter.ItemClick = value; }
         }
 
+        [MvxSetToNullAfterBinding]
         public ICommand ItemLongClick
         {
             get { return Adapter.ItemLongClick; }

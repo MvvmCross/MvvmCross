@@ -241,15 +241,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (Looper.MainLooper == Looper.MyLooper())
-            {
-                NotifyDataSetChanged(e);
-            }
-            else
-            {
-                var h = new Handler(Looper.MainLooper);
-                h.Post(() => NotifyDataSetChanged(e));
-            }
+            if (Looper.MainLooper != Looper.MyLooper())
+                MvxBindingLog.Error("All collection changes ");
+
+            NotifyDataSetChanged(e);
         }
 
         public virtual void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)
