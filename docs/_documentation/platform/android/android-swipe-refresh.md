@@ -35,7 +35,7 @@ private async Task ExecuteRefreshCommand()
 {
     IsBusy = true;
     // do refresh work here
-    IsBusy= false;
+    IsBusy = false;
 }
 ```
 
