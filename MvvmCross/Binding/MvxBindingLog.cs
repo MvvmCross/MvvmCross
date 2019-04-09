@@ -16,7 +16,7 @@ namespace MvvmCross.Binding
         {
             if (level < TraceBindingLevel) return;
 
-            Instance.Log(level, () => string.Format(message, args));
+            Instance.Log(level, () => message, null, args);
         }
 
         public static void Trace(string message, params object[] args)
