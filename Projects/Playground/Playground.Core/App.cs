@@ -39,7 +39,7 @@ namespace Playground.Core
         }
 
         /// <summary>
-        /// If the application is restarted (eg primary activity on Android 
+        /// If the application is restarted (eg primary activity on Android
         /// can be restarted) this method will be called before Startup
         /// is called again
         /// </summary>

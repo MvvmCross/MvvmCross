@@ -86,16 +86,47 @@
                 android:layout_marginTop="10dp"
                 android:text="Show Fluent Binding Example"
                 local:MvxBind="Click ShowFluentBindingCommand" />
-             <Button
+            <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Show Fragment Close Example"
                 local:MvxBind="Click FragmentCloseCommand" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Register and Resolve with Reflection"
+                local:MvxBind="Click RegisterAndResolveWithReflectionCommand;" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Register and Resolve NO Reflection"
+                local:MvxBind="Click RegisterAndResolveWithNoReflectionCommand;"
+                android:id="@+id/button2" />
+            <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        local:MvxBind="Text TimeToRegister" />
+          <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        local:MvxBind="Text TimeToResolve" />
+             <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        local:MvxBind="Text TotalTime" />
         </LinearLayout>
     </ScrollView>
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="160dp" />
+        android:layout_height="160dp"
+        android:minWidth="25px"
+        android:minHeight="25px">
+    </FrameLayout>
 </LinearLayout>

@@ -10,7 +10,7 @@ namespace MvvmCross.IoC
 {
     /// <summary>
     /// Singleton IoC Provider.
-    /// 
+    ///
     /// Delegates to the <see cref="MvxIoCContainer"/> implementation
     /// </summary>
     public class MvxIoCProvider
@@ -26,6 +26,7 @@ namespace MvvmCross.IoC
             // create a new ioc container - it will register itself as the singleton
             // ReSharper disable ObjectCreationAsStatement
             new MvxIoCProvider(options);
+
             // ReSharper restore ObjectCreationAsStatement
             return Instance;
         }
