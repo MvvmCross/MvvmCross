@@ -26,6 +26,7 @@ namespace MvvmCross.Navigation
         protected readonly IMvxLog Log = Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor<MvxNavigationService>();
 
         private IMvxViewDispatcher _viewDispatcher;
+
         public IMvxViewDispatcher ViewDispatcher
         {
             get => _viewDispatcher ?? (IMvxViewDispatcher)MvxMainThreadDispatcher.Instance;
@@ -33,6 +34,7 @@ namespace MvvmCross.Navigation
         }
 
         private IMvxViewsContainer _viewsContainer;
+
         protected IMvxViewsContainer ViewsContainer
         {
             get
@@ -44,16 +46,24 @@ namespace MvvmCross.Navigation
             set => _viewsContainer = value;
         }
 
-        protected static readonly Dictionary<Regex, Type> Routes = new Dictionary<Regex, Type>();
+        protected readonly Dictionary<Regex, Type> Routes = new Dictionary<Regex, Type>();
+
         protected virtual IMvxNavigationCache NavigationCache { get; private set; }
+
         protected IMvxViewModelLoader ViewModelLoader { get; set; }
+
         protected ConditionalWeakTable<IMvxViewModel, TaskCompletionSource<object>> _tcsResults = new ConditionalWeakTable<IMvxViewModel, TaskCompletionSource<object>>();
 
         public event BeforeNavigateEventHandler BeforeNavigate;
+
         public event AfterNavigateEventHandler AfterNavigate;
+
         public event BeforeCloseEventHandler BeforeClose;
+
         public event AfterCloseEventHandler AfterClose;
+
         public event BeforeChangePresentationEventHandler BeforeChangePresentation;
+
         public event AfterChangePresentationEventHandler AfterChangePresentation;
 
         public MvxNavigationService(IMvxNavigationCache navigationCache, IMvxViewModelLoader viewModelLoader)
@@ -62,7 +72,7 @@ namespace MvvmCross.Navigation
             ViewModelLoader = viewModelLoader;
         }
 
-        public static void LoadRoutes(IEnumerable<Assembly> assemblies)
+        public void LoadRoutes(IEnumerable<Assembly> assemblies)
         {
             Routes.Clear();
             foreach (var routeAttr in
@@ -86,6 +96,7 @@ namespace MvvmCross.Navigation
                         entry = default(KeyValuePair<Regex, Type>);
                         Log.Trace("Unable to find routing for {0}", url);
                         return false;
+
                     case 1:
                         entry = matches[0];
                         return true;
@@ -102,6 +113,7 @@ namespace MvvmCross.Navigation
                 Log.Warn("The following regular expressions match the provided url ({0}), each RegEx must be unique (otherwise try using IMvxRoutingFacade): {1}",
                     matches.Count - 1,
                     string.Join(", ", matches.Select(t => t.Key.ToString())));
+
                 // there is more than one match
                 entry = default(KeyValuePair<Regex, Type>);
                 return false;
