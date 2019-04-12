@@ -78,7 +78,7 @@ There is built-in support for quite some popular logging frameworks. These ones 
 To enable any of them override the `GetDefaultLogProviderType` in your platform projects `Setup.cs`.
 
 ```c#
-protected override MvxLogProviderType GetDefaultLogProviderType() => MvxLogProviderType.Serilog;
+public override MvxLogProviderType GetDefaultLogProviderType() => MvxLogProviderType.Serilog;
 ```
 
 If you have your own logging provider or want to implement one, you need to override this method on Setup: `protected override IMvxLogProvider CreateLogProvider()` and return your own implementation for it.

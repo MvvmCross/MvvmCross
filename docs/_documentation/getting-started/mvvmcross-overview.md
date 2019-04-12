@@ -111,7 +111,7 @@ public class MainViewModel : MvxViewModel
     {
     }
 
-    private void Prepare()
+    public override void Prepare()
     {
         // This is the first method to be called after construction
     }
