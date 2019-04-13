@@ -14,7 +14,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
   where TMvxAndroidSetup : MvxAppCompatSetup<TApplication>, new()
   where TApplication : class, IMvxApplication, new()
     {
-        private StartupLifecycleCallback activityLifecycle;
+        private IActivityLifecycleCallbacks activityLifecycle;
 
         public MvxAppCompatApplication()
         {
@@ -33,9 +33,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             base.OnCreate();
 
-            activityLifecycle = new StartupLifecycleCallback();
+            activityLifecycle = CreateActivityLifecycleObserver();
             RegisterActivityLifecycleCallbacks(activityLifecycle);
         }
+
+        protected virtual IActivityLifecycleCallbacks CreateActivityLifecycleObserver() => new StartupLifecycleCallback();
 
         protected override void Dispose(bool disposing)
         {
@@ -48,5 +50,4 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             base.Dispose(disposing);
         }
     }
-
 }
