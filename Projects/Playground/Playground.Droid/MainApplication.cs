@@ -13,7 +13,13 @@ namespace Playground.Droid
     [Application]
     public class MainApplication : MvxAppCompatApplication<Setup, App>
     {
-        public MainApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        [Preserve]
+        protected MainApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
+
+        [Preserve]
+        public MainApplication()
         {
         }
     }

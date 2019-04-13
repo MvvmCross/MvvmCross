@@ -14,11 +14,13 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
   where TMvxAndroidSetup : MvxAppCompatSetup<TApplication>, new()
   where TApplication : class, IMvxApplication, new()
     {
-        public MvxAppCompatApplication() : base()
+        private StartupLifecycleCallback activityLifecycle;
+
+        public MvxAppCompatApplication()
         {
         }
 
-        public MvxAppCompatApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        protected MvxAppCompatApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
 
@@ -26,5 +28,25 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             this.RegisterSetupType<TMvxAndroidSetup>();
         }
+
+        public override void OnCreate()
+        {
+            base.OnCreate();
+
+            activityLifecycle = new StartupLifecycleCallback();
+            RegisterActivityLifecycleCallbacks(activityLifecycle);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                UnregisterActivityLifecycleCallbacks(activityLifecycle);
+                activityLifecycle.Dispose();
+            }
+
+            base.Dispose(disposing);
+        }
     }
+
 }

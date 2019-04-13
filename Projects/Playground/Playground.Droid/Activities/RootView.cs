@@ -14,7 +14,7 @@ namespace Playground.Droid.Activities
     [MvxActivityPresentation]
     [Activity(Theme = "@style/AppTheme",
         WindowSoftInputMode = SoftInput.AdjustPan)]
-    public class RootView : MvxAppCompatActivity<RootViewModel>
+    public class RootView : MvxAppCompatActivity<RootViewModel>, IShutdownActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
