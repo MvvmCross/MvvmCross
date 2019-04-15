@@ -26,9 +26,9 @@ namespace MvvmCross.Logging.LogProviders
         /// <returns></returns>
         public static Func<string> SimulateStructuredLogging(Func<string> messageBuilder, object[] formatParameters)
         {
-            if (formatParameters == null || formatParameters.Length == 0) 
+            if (formatParameters == null || formatParameters.Length == 0)
                 return messageBuilder;
-            
+
             return () =>
             {
                 string targetMessage = messageBuilder();
@@ -46,14 +46,13 @@ namespace MvvmCross.Logging.LogProviders
 
         public static string FormatStructuredMessage(string targetMessage, object[] formatParameters, out IEnumerable<string> patternMatches)
         {
-            if (formatParameters.Length == 0)
+            if (formatParameters == null || formatParameters.Length == 0)
             {
                 patternMatches = Enumerable.Empty<string>();
                 return targetMessage;
             }
 
-            List<string> processedArguments = new List<string>();
-            patternMatches = processedArguments;
+            List<string> processedArguments = null;
 
             foreach (Match match in Pattern.Matches(targetMessage))
             {
@@ -61,6 +60,7 @@ namespace MvvmCross.Logging.LogProviders
 
                 if (!int.TryParse(arg, out var notUsed))
                 {
+                    processedArguments = processedArguments ?? new List<string>(formatParameters.Length);
                     int argumentIndex = processedArguments.IndexOf(arg);
                     if (argumentIndex == -1)
                     {
@@ -69,9 +69,12 @@ namespace MvvmCross.Logging.LogProviders
                     }
 
                     targetMessage = ReplaceFirst(targetMessage, match.Value,
-                        "{" + argumentIndex + match.Groups["format"].Value + "}");
+                        string.Concat("{", argumentIndex.ToString(), match.Groups["format"].Value, "}"));
                 }
             }
+
+            patternMatches = processedArguments ?? Enumerable.Empty<string>();
+
             try
             {
                 return string.Format(CultureInfo.InvariantCulture, targetMessage, formatParameters);
