@@ -45,6 +45,7 @@ private async Task ExecuteRefreshCommand()
 <MvxSwipeRefreshLayout
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:id="@+id/refresher"
     local:MvxBind="Refreshing IsBusy; RefreshCommand RefreshCommand">
     <ScrollView />
     <!-- or -->
@@ -53,5 +54,15 @@ private async Task ExecuteRefreshCommand()
     <ListView />
 </MvxSwipeRefreshLayout>
 ```
+### Code in your OnCreate(): for changing the loader color
+
+ public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Android.OS.Bundle savedInstanceState)
+ {
+    base.OnCreateView(inflater, container, savedInstanceState);
+    var view = this.BindingInflate(Resource.Layout.yourView, container, false);
+    var refresher = view.FindViewById<MvxSwipeRefreshLayout>(Resource.Id.refresher);
+    refresher.SetColorScheme (Resource.Color.blue);
+    return view;
+  }
 
 [nugetpackage]: https://www.nuget.org/packages/MvvmCross.Droid.Support.Core.UI/
