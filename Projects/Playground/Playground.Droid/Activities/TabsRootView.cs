@@ -15,14 +15,22 @@ namespace Playground.Droid.Activities
     [Activity(Theme = "@style/AppTheme", ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
     public class TabsRootView : MvxAppCompatActivity<TabsRootViewModel>
     {
+        Bundle startBundle;
+        bool isStarted;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
             SetContentView(Resource.Layout.TabsRootView);
+            startBundle = bundle;
+        }
 
-            if (bundle == null)
+        protected override void OnResume()
+        {
+            base.OnResume();
+            if (startBundle == null && !isStarted)
             {
+                isStarted = true;
                 ViewModel.ShowInitialViewModelsCommand.Execute();
             }
         }
