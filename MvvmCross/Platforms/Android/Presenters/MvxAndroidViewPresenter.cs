@@ -35,6 +35,7 @@ namespace MvvmCross.Platforms.Android.Presenters
         protected virtual FragmentManager CurrentFragmentManager => CurrentActivity.FragmentManager;
 
         private IMvxAndroidCurrentTopActivity _mvxAndroidCurrentTopActivity;
+
         protected virtual Activity CurrentActivity
         {
             get

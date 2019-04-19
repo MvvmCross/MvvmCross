@@ -3,19 +3,62 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Android.App;
 using Android.Runtime;
 using MvvmCross.Core;
+using MvvmCross.Platforms.Android;
+using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
-    public abstract class MvxAppCompatApplication<TMvxAndroidSetup, TApplication> : MvxAndroidApplication
-  where TMvxAndroidSetup : MvxAppCompatSetup<TApplication>, new()
-  where TApplication : class, IMvxApplication, new()
+    public abstract class MvxAppCompatApplication : MvxAndroidApplication, IMvxActivityLifecycleCallbacksProvider
     {
         private IActivityLifecycleCallbacks activityLifecycle;
 
+        /// <summary>
+        /// Using the top activity discovered by MvxStartupLifecycleCallback works in more situations than using the old MvxApplicationCallbacksCurrentTopActivity.
+        /// But the IoCProvider is not yet available. So make it discoverable by MvxAndroidSetup which will register it.
+        /// As CreateActivityLifecycleObserver can be overriden, the resulting IActivityLifecycleCallbacks may not implement IMvxAndroidCurrentTopActivity. Make sure this is handled.
+        /// </summary>
+        public IMvxAndroidCurrentTopActivity AndroidCurrentTopActivityFinder => activityLifecycle as IMvxAndroidCurrentTopActivity;
+
+        public MvxAppCompatApplication()
+        {
+        }
+
+        protected MvxAppCompatApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
+
+        public override void OnCreate()
+        {
+            base.OnCreate();
+
+            activityLifecycle = CreateActivityLifecycleObserver();
+            RegisterActivityLifecycleCallbacks(activityLifecycle);
+        }
+
+        protected virtual IActivityLifecycleCallbacks CreateActivityLifecycleObserver() => new MvxStartupLifecycleCallback();
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                UnregisterActivityLifecycleCallbacks(activityLifecycle);
+                activityLifecycle.Dispose();
+            }
+
+            base.Dispose(disposing);
+        }
+    }
+
+
+    public abstract class MvxAppCompatApplication<TMvxAndroidSetup, TApplication> : MvxAppCompatApplication
+          where TMvxAndroidSetup : MvxAppCompatSetup<TApplication>, new()
+          where TApplication : class, IMvxApplication, new()
+    {
         public MvxAppCompatApplication()
         {
         }
@@ -27,27 +70,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         protected override void RegisterSetup()
         {
             this.RegisterSetupType<TMvxAndroidSetup>();
-        }
-
-        public override void OnCreate()
-        {
-            base.OnCreate();
-
-            activityLifecycle = CreateActivityLifecycleObserver();
-            RegisterActivityLifecycleCallbacks(activityLifecycle);
-        }
-
-        protected virtual IActivityLifecycleCallbacks CreateActivityLifecycleObserver() => new StartupLifecycleCallback();
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                UnregisterActivityLifecycleCallbacks(activityLifecycle);
-                activityLifecycle.Dispose();
-            }
-
-            base.Dispose(disposing);
         }
     }
 }

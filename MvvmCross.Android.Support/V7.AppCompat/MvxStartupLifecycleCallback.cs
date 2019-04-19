@@ -61,7 +61,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     {
     }
 
-    public class StartupLifecycleCallback : Java.Lang.Object, Application.IActivityLifecycleCallbacks, IMvxSetupMonitor, IMvxAndroidCurrentTopActivity
+    public class MvxStartupLifecycleCallback : Java.Lang.Object, Application.IActivityLifecycleCallbacks, IMvxSetupMonitor, IMvxAndroidCurrentTopActivity
     {
         protected int startedActivities;
         protected Activity startupActivity;
