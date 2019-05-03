@@ -33,6 +33,8 @@ namespace MvvmCross.Platforms.Tvos.Presenters
 
         public IMvxTabBarViewController TabBarViewController { get; protected set; }
 
+        public IMvxPageViewController PageViewController { get; protected set; }
+
         public MvxSplitViewController SplitViewController { get; protected set; }
 
         public MvxTvosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
@@ -119,6 +121,14 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                     },
                     CloseTabViewController);
 
+            AttributeTypesToActionsDictionary.Register<MvxPagePresentationAttribute>(
+                 (viewType, attribute, request) =>
+                     {
+                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
+                         return ShowPageViewController(viewController, attribute, request);
+                     },
+                     ClosePageViewController);
+
             AttributeTypesToActionsDictionary.Register<MvxModalPresentationAttribute>(
                     (viewType, attribute, request) =>
                   {
@@ -183,6 +193,14 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                                     MvxTabPresentationAttribute attribute)
         {
             if (TabBarViewController != null && TabBarViewController.CloseTabViewModel(viewModel))
+                return Task.FromResult(true);
+
+            return Task.FromResult(false);
+        }
+
+        protected virtual Task<bool> ClosePageViewController(IMvxViewModel viewModel, MvxPagePresentationAttribute attribute)
+        {
+            if (PageViewController != null && PageViewController.RemovePage(viewModel))
                 return Task.FromResult(true);
 
             return Task.FromResult(false);
@@ -413,6 +431,30 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                 viewController = CreateNavigationController(viewController);
 
             TabBarViewController.ShowTabView(
+                viewController,
+                attribute);
+            return Task.FromResult(true);
+        }
+
+        protected virtual Task<bool> ShowPageViewController(
+            UIViewController viewController,
+            MvxPagePresentationAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            if (PageViewController == null)
+                throw new MvxException("Trying to show a page without a PageViewController, this is not possible!");
+
+            /*if (viewController is IMvxTabBarItemViewController tabBarItem)
+            {
+                attribute.TabName = tabBarItem.TabName;
+                attribute.TabIconName = tabBarItem.TabIconName;
+                attribute.TabSelectedIconName = tabBarItem.TabSelectedIconName;
+            }*/
+
+            if (attribute.WrapInNavigationController)
+                viewController = CreateNavigationController(viewController);
+
+            PageViewController.AddPage(
                 viewController,
                 attribute);
             return Task.FromResult(true);
