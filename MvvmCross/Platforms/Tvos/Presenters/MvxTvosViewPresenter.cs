@@ -344,6 +344,17 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                 return await CloseModalViewControllers();
             }
 
+            if (viewController is IMvxPageViewController)
+            {
+                //NOTE clean up must be done first incase we are enbedding into a navigation controller
+                //before setting the page view controller, otherwise this will reset the view stack and your page
+                //controller will be null. 
+                await SetupWindowRootNavigation(viewController, attribute);
+                this.PageViewController = (IMvxPageViewController)viewController;
+
+                return await CloseModalViewControllers();
+            }
+
             await SetupWindowRootNavigation(viewController, attribute);
 
             if(!(await CloseModalViewControllers()))return false;

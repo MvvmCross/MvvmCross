@@ -14,43 +14,8 @@ namespace Playground.iOS.Views
     [Register ("Page1View")]
     partial class Page1View
     {
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton btnChild { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton btnModal { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton btnNavModal { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton btnTab2 { get; set; }
-
         void ReleaseDesignerOutlets ()
         {
-            if (btnChild != null) {
-                btnChild.Dispose ();
-                btnChild = null;
-            }
-
-            if (btnModal != null) {
-                btnModal.Dispose ();
-                btnModal = null;
-            }
-
-            if (btnNavModal != null) {
-                btnNavModal.Dispose ();
-                btnNavModal = null;
-            }
-
-            if (btnTab2 != null) {
-                btnTab2.Dispose ();
-                btnTab2 = null;
-            }
         }
     }
 }

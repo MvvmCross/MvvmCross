@@ -176,6 +176,19 @@ namespace MvvmCross.Platforms.Ios.Presenters
                 return true;
             }
 
+            if (viewController is IMvxPageViewController pageViewController)
+            {
+                PageViewController = pageViewController;
+
+                // set root
+                SetupWindowRootNavigation(viewController, attribute);
+
+                if (!await CloseModalViewControllers()) return false;
+                if (!await CloseSplitViewController()) return false;
+
+                return true;
+            }
+
             // check if viewController is a SplitViewController
             if (viewController is IMvxSplitViewController splitController)
             {

@@ -8,7 +8,7 @@ namespace Playground.iOS.Views
 {
     [MvxFromStoryboard("Main")]
     [MvxPagePresentation(WrapInNavigationController = false)]
-    public partial class Page1View : MvxViewController<Tab3ViewModel>
+    public partial class Page1View : MvxViewController<Page1ViewModel>
     {
         public Page1View(IntPtr handle) : base(handle)
         {
