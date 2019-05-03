@@ -121,7 +121,7 @@ namespace MvvmCross.Platforms.Ios.Views
         }
     }
 
-    public class MvxBasePageViewController<TViewModel> : MvxPageViewController, IMvxIosView<TViewModel> where TViewModel : class, IMvxPageViewModel
+    public class MvxBasePageViewController<TViewModel> : MvxPageViewController, IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
     {
         public MvxBasePageViewController()
         {

@@ -113,10 +113,10 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             AttributeTypesToActionsDictionary.Register<MvxPagePresentationAttribute>(
                 (viewType, attribute, request) =>
-                {
-                    var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                    return ShowPageViewController(viewController, attribute, request);
-                },
+                    {
+                        var viewController = (UIViewController)this.CreateViewControllerFor(request);
+                        return ShowPageViewController(viewController, attribute, request);
+                    },
                     ClosePageViewController);
 
             AttributeTypesToActionsDictionary.Register<MvxModalPresentationAttribute>(
@@ -316,7 +316,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             MvxViewModelRequest request)
         {
             if (PageViewController == null)
-                throw new MvxException("Trying to show a paeg without a PageViewController, this is not possible!");
+                throw new MvxException("Trying to show a page without a PageViewController, this is not possible!");
 
             /*if (viewController is IMvxTabBarItemViewController tabBarItem)
             {
@@ -427,7 +427,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             return Task.FromResult(false);
         }
 
-        protected virtual Task<bool> ClosePageViewController(IMvxViewModel viewModel, MvxTabPresentationAttribute attribute)
+        protected virtual Task<bool> ClosePageViewController(IMvxViewModel viewModel, MvxPagePresentationAttribute attribute)
         {
             if (PageViewController != null && PageViewController.RemovePage(viewModel))
                 return Task.FromResult(true);
