@@ -318,7 +318,7 @@ namespace MvvmCross.Core
 
             if (logProviderCreator != null)
             {
-                iocProvider.RegisterSingleton(logProviderCreator, false);
+                iocProvider.RegisterSingleton(logProviderCreator);
             }
         }
 
