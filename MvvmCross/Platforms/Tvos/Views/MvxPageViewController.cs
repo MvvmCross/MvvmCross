@@ -51,57 +51,48 @@ namespace MvvmCross.Platforms.Tvos.Views
         {
             base.ViewDidLoad();
 
-            GetNextViewController = GetNextViewControllerPage;
-            GetPreviousViewController = GetPreviousViewControllerPage;
+            GetNextViewController = (pc, rc) => GetNextViewControllerPage(rc);
+            GetPreviousViewController = (pc, rc) => GetPreviousViewControllerPage(rc);
         }
 
-        protected UIPageViewGetViewController GetNextViewControllerPage = delegate (UIPageViewController pc, UIViewController rc)
-        {
-            return pc.ViewControllers?.ElementAtOrDefault(pc.ViewControllers.ToList().IndexOf(rc) + 1);
-        };
+        private List<UIViewController> Pages = new List<UIViewController>();
 
-        protected UIPageViewGetViewController GetPreviousViewControllerPage = delegate (UIPageViewController pc, UIViewController rc)
-        {
-            return pc.ViewControllers?.ElementAtOrDefault(pc.ViewControllers.ToList().IndexOf(rc) - 1);
-        };
+        public bool IsFirstPage(UIViewController viewController) => Pages.IndexOf(viewController) == 0;
+
+        public bool IsLastPage(UIViewController viewController) => Pages.IndexOf(viewController) == Pages.Count - 1;
+
+        protected UIViewController GetNextViewControllerPage(UIViewController rc) => IsLastPage(rc) ? null : Pages[Pages.IndexOf(rc) + 1];
+
+        protected UIViewController GetPreviousViewControllerPage(UIViewController rc) => IsFirstPage(rc) ? null : Pages[Pages.IndexOf(rc) - 1];
 
         public void AddPage(UIViewController viewController, MvxPagePresentationAttribute attribute)
         {
             // add Page
-            var currentTabs = new List<UIViewController>();
-            if (ViewControllers != null)
+            Pages.Add(viewController);
+
+            // Start the ui page view controller when we add the first page
+            if (Pages.Count == 1)
             {
-                currentTabs = ViewControllers.ToList();
+                SetViewControllers(Pages.ToArray(), UIPageViewControllerNavigationDirection.Forward, true, null);
             }
-
-            currentTabs.Add(viewController);
-
-            // update current Tabs
-            SetViewControllers(currentTabs.ToArray(), UIPageViewControllerNavigationDirection.Forward, true, null);
         }
 
         public bool RemovePage(IMvxViewModel viewModel)
         {
-            if (ViewControllers == null || !ViewControllers.Any())
+            if (Pages == null || !Pages.Any())
                 return false;
 
-            // loop through plain Tabs
-            var plainToClose = ViewControllers.Where(v => !(v is UINavigationController))
+            var pageToClose = Pages.Where(v => !(v is UINavigationController))
                                               .Select(v => v.GetIMvxTvosView())
                                               .FirstOrDefault(mvxView => mvxView.ViewModel == viewModel);
-            if (plainToClose != null)
+
+            if (pageToClose != null)
             {
-                RemovePageViewController((UIViewController)plainToClose);
+                Pages = Pages.Where(v => v != pageToClose).ToList();
                 return true;
             }
 
             return false;
-        }
-
-        protected virtual void RemovePageViewController(UIViewController toClose)
-        {
-            var newPages = ViewControllers.Where(v => v != toClose);
-            SetViewControllers(newPages.ToArray(), UIPageViewControllerNavigationDirection.Forward, true, null);
         }
     }
 
