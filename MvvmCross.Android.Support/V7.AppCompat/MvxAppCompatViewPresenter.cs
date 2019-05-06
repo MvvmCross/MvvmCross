@@ -509,13 +509,21 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         protected override Task<bool> CloseFragmentDialog(IMvxViewModel viewModel,
             MvxDialogFragmentPresentationAttribute attribute)
         {
-            var fragmentName = attribute.ViewType.FragmentJavaName();
-            var tag = attribute.Tag ?? fragmentName;
-            var toClose = CurrentFragmentManager.FindFragmentByTag(tag);
-            if (toClose != null && toClose is DialogFragment dialog)
+            try
             {
-                dialog.DismissAllowingStateLoss();
-                return Task.FromResult(true);
+                var fragmentName = attribute.ViewType.FragmentJavaName();
+                var tag = attribute.Tag ?? fragmentName;
+                var toClose = CurrentFragmentManager.FindFragmentByTag(tag);
+                if (toClose != null && toClose is DialogFragment dialog)
+                {
+                    dialog.DismissAllowingStateLoss();
+                    return Task.FromResult(true);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                MvxAndroidLog.Instance.Error("Cannot close fragment dialog", ex);
+                return Task.FromResult(false);
             }
             return Task.FromResult(false);
         }
