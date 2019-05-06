@@ -228,6 +228,12 @@ namespace MvvmCross.Platforms.Android.Presenters
                     }
                 }
 
+                if(!transitionElementPairs.Any())
+                {
+                    MvxLog.Instance.Warn("No transition elements are provided");
+                    return bundle;
+                }
+
                 if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
                 {
                     var activityOptions = ActivityOptions.MakeSceneTransitionAnimation(CurrentActivity, transitionElementPairs.ToArray());
