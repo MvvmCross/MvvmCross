@@ -145,6 +145,22 @@
     <Compile Include="Views\ModalView.designer.cs">
       <DependentUpon>ModalView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Page1View.cs" />
+    <Compile Include="Views\Page1View.designer.cs">
+      <DependentUpon>Page1View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Page2View.cs" />
+    <Compile Include="Views\Page2View.designer.cs">
+      <DependentUpon>Page2View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Page3View.cs" />
+    <Compile Include="Views\Page3View.designer.cs">
+      <DependentUpon>Page3View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PagesRootView.cs" />
+    <Compile Include="Views\PagesRootView.designer.cs">
+      <DependentUpon>PagesRootView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\RootView.cs" />
     <Compile Include="Views\RootView.designer.cs">
       <DependentUpon>RootView.cs</DependentUpon>
