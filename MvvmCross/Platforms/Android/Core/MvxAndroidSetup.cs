@@ -230,7 +230,7 @@ namespace MvvmCross.Platforms.Android.Core
 
         protected virtual IDictionary<string, string> ViewNamespaceAbbreviations => new Dictionary<string, string>
         {
-            { "Mvx", "mvvmcross.platforms.android.views"
+            { "Mvx", "mvvmcross.platforms.android.binding.views"
             }
         };
 
