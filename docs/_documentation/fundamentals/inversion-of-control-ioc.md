@@ -322,7 +322,7 @@ When you want to include functionality like this, then there are two main choice
 1. Declare an interface in your core library, but then provide and register an implementation in each of your UI projects.
 2. Use or create a *plugin*
 
-### 1. PCL-Interface with Platform-Specific Implementation
+### 1. .NET Standard-Interface with Platform-Specific Implementation
 
 In your core project, you can declare an interface and you can use that interface in your classes there - e.g.:
 
