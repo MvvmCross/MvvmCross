@@ -231,8 +231,6 @@ namespace MvvmCross.Platforms.Android.Core
         protected virtual IDictionary<string, string> ViewNamespaceAbbreviations => new Dictionary<string, string>
         {
             { "Mvx", "mvvmcross.platforms.android.views"
-            },
-            { "Mvx", "mvvmcross.platforms.android.binding.views"
             }
         };
 
@@ -242,7 +240,7 @@ namespace MvvmCross.Platforms.Android.Core
             "Android.Widget",
             "Android.Webkit",
             "MvvmCross.Platforms.Android.Views",
-            "MvvmCross.Platforms.Android.Binding.Views",
+            "MvvmCross.Platforms.Android.Binding.Views"
         };
 
         protected virtual IEnumerable<Assembly> AndroidViewAssemblies => new List<Assembly>()
