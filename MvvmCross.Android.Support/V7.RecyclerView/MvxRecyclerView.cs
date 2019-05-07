@@ -50,14 +50,11 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 return;
 
             var currentLayoutManager = GetLayoutManager();
-
-            // Love you Android
-            // https://code.google.com/p/android/issues/detail?id=77846#c10
-            // Don't believe those bastards, it's not fixed - workaround hack hack hack
             if (currentLayoutManager == null)
                 SetLayoutManager(new MvxGuardedLinearLayoutManager(context));
 
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
+            //TODO: this code is not extensible and should be avoided/moved in a parameter
             var itemTemplateSelector = MvxRecyclerViewAttributeExtensions.BuildItemTemplateSelector(context, attrs, itemTemplateId);
 
             adapter.ItemTemplateSelector = itemTemplateSelector;
@@ -70,33 +67,29 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 ItemTemplateId = itemTemplateId;
         }
 
-        public sealed override void SetLayoutManager(LayoutManager layout)
-        {
-            base.SetLayoutManager(layout);
-        }
-
         protected override void OnDetachedFromWindow()
         {
             base.OnDetachedFromWindow();
+            DetachedFromWindow();
+        }
 
+        protected virtual void DetachedFromWindow()
+        {
             // Remove all the views that are currently in play.
             // This clears out all of the ViewHolder DataContexts by detaching the ViewHolder.
             // Eventually the GC will come along and clear out the binding contexts.
             // Issue #1405
+             //Note: this has a side effect of breaking fragment transitions, as the recyclerview is cleared before the transition starts, which empties the view and displays a "black" screen while transitioning.
             GetLayoutManager()?.RemoveAllViews();
         }
 
         [MvxSetToNullAfterBinding]
         public new IMvxRecyclerAdapter Adapter
         {
-            get
-            {
-                return GetAdapter() as IMvxRecyclerAdapter;
-            }
+            get => GetAdapter() as IMvxRecyclerAdapter;
             set
             {
                 var existing = Adapter;
-
                 if (existing == value)
                     return;
 
@@ -126,7 +119,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return Adapter.ItemsSource; }
+            get => Adapter.ItemsSource;
             set
             {
                 var adapter = Adapter;
@@ -160,22 +153,22 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public IMvxTemplateSelector ItemTemplateSelector
         {
-            get { return Adapter.ItemTemplateSelector; }
-            set { Adapter.ItemTemplateSelector = value; }
+            get => Adapter.ItemTemplateSelector;
+            set => Adapter.ItemTemplateSelector = value;
         }
 
         [MvxSetToNullAfterBinding]
         public ICommand ItemClick
         {
-            get { return Adapter.ItemClick; }
-            set { Adapter.ItemClick = value; }
+            get => Adapter.ItemClick;
+            set => Adapter.ItemClick = value;
         }
 
         [MvxSetToNullAfterBinding]
         public ICommand ItemLongClick
         {
-            get { return Adapter.ItemLongClick; }
-            set { Adapter.ItemLongClick = value; }
+            get => Adapter.ItemLongClick;
+            set => Adapter.ItemLongClick = value;
         }
     }
 }
