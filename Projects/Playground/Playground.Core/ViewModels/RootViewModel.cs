@@ -146,6 +146,9 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowCodeBehindViewCommand =>
             new MvxAsyncCommand(async () => await NavigationService.Navigate<CodeBehindViewModel>());
 
+        public IMvxAsyncCommand ShowNavigationCloseCommand =>
+            new MvxAsyncCommand(async () => await NavigationService.Navigate<NavigationCloseViewModel>());
+
         public IMvxAsyncCommand ShowContentViewCommand =>
             new MvxAsyncCommand(async () => await NavigationService.Navigate<ParentContentViewModel>());
 
