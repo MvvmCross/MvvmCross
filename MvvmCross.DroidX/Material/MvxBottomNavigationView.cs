@@ -48,11 +48,11 @@ namespace MvvmCross.Droid.Support.Design
 
         public bool OnNavigationItemSelected(IMenuItem item)
         {
-            var mvxMenuItem = this.FindItemByMenuItem(item);
+            var menuItem = this.FindItemByMenuItem(item);
 
-            if (mvxMenuItem != null && HandleNavigate.CanExecute(mvxMenuItem.ViewModel))
+            if (menuItem != null && HandleNavigate.CanExecute(menuItem.ViewModel))
             {
-                HandleNavigate.Execute(mvxMenuItem.ViewModel);
+                HandleNavigate.Execute(menuItem.ViewModel);
                 return true;
             }
 
