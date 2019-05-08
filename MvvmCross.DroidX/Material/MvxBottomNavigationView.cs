@@ -32,7 +32,6 @@ namespace MvvmCross.Droid.Support.Design
 
         protected MvxBottomNavigationView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            this.SetOnNavigationItemSelectedListener(this);
         }
 
         public void AddItem(IMenuItem item, Type viewModel)
