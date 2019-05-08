@@ -74,6 +74,16 @@ namespace MvvmCross.Droid.Support.Design
         }
 
         public ICommand HandleNavigate { get; set; }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                SetOnNavigationItemSelectedListener(null);
+            }
+
+            base.Dispose(disposing);
+        }
     }
 
     public class MvxMenuItem
