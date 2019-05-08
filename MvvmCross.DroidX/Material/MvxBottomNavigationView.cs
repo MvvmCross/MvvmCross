@@ -7,13 +7,14 @@ using Android.Widget;
 using Android.Util;
 using Android.Views;
 using Android.Support.Design.Widget;
+using System.Linq;
 
 namespace MvvmCross.Droid.Support.Design
 {
     [Register("mvvmcross.droid.support.design.MvxBottomNavigationView")]
     public class MvxBottomNavigationView : BottomNavigationView, BottomNavigationView.IOnNavigationItemSelectedListener
     {
-        public List<MvxMenuItem> ItemsSource = new List<MvxMenuItem>();
+        private readonly Dictionary<IMenuItem, Type> _lookup = new Dictionary<IMenuItem, Type>();
 
         public MvxBottomNavigationView(Context context) : base(context)
         {
@@ -36,10 +37,10 @@ namespace MvvmCross.Droid.Support.Design
 
         public void AddItem(IMenuItem item, Type viewModel)
         {
-            ItemsSource.Add(new MvxMenuItem(item, viewModel));
+            _lookup.Add(item, viewModel);
 
             // The first item is autoselected
-            if (ItemsSource.Count == 1)
+            if (_lookup.Count == 1)
             {
                 OnNavigationItemSelected(item);
             }
@@ -47,30 +48,25 @@ namespace MvvmCross.Droid.Support.Design
 
         public bool OnNavigationItemSelected(IMenuItem item)
         {
-            var menuItem = this.FindItemByMenuItem(item);
+            var viewModelType = this.FindItemByMenuItem(item);
 
-            if (menuItem != null && HandleNavigate.CanExecute(menuItem.ViewModel))
+            if (viewModelType != null && HandleNavigate.CanExecute(viewModelType))
             {
-                HandleNavigate.Execute(menuItem.ViewModel);
+                HandleNavigate.Execute(viewModelType);
                 return true;
             }
 
             return false;
         }
 
-        public MvxMenuItem FindItemByViewModel(Type viewModel)
+        public IMenuItem FindItemByViewModel(Type viewModel)
         {
-            return ItemsSource.Find(i => i.ViewModel == viewModel);
+            return _lookup.FirstOrDefault(i => i.Value == viewModel).Key;
         }
 
-        public int FindPositionByViewModel(Type viewModel)
+        public Type FindItemByMenuItem(IMenuItem item)
         {
-            return ItemsSource.FindIndex(i => i.ViewModel == viewModel);
-        }
-
-        public MvxMenuItem FindItemByMenuItem(IMenuItem item)
-        {
-            return ItemsSource.Find(i => i.MenuItem == item);
+            return _lookup[item];
         }
 
         public ICommand HandleNavigate { get; set; }
@@ -83,18 +79,6 @@ namespace MvvmCross.Droid.Support.Design
             }
 
             base.Dispose(disposing);
-        }
-    }
-
-    public class MvxMenuItem
-    {
-        public IMenuItem MenuItem { get; set; }
-        public Type ViewModel { get; set; }
-
-        public MvxMenuItem(IMenuItem menuItem, Type viewModel)
-        {
-            this.MenuItem = menuItem;
-            this.ViewModel = viewModel;
         }
     }
 }
