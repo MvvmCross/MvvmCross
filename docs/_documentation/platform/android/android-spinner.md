@@ -80,7 +80,7 @@ Given that we called the Item Template above `country_item_template.axml` it wil
 
 The `HandleItemSelected` command, can be bound to a command in your ViewModel. When executed this will provide the `ViewModel` bound to the selected row as the command parameter.
 
-```c#
+```csharp
 private MvxCommand<CountryViewModel> _countrySelectedCommand;
 public MvxCommand<DogViewModel> CountrySelectedCommand => _countrySelectedCommand = 
     _countrySelectedCommand ?? new MvxCommand<DogViewModel>(OnCountrySelectedCommand);
@@ -89,4 +89,4 @@ private void OnCountrySelectedCommand(CountryViewModel country)
 {
     // write on country selected logic here
 }
-```c#
+```
