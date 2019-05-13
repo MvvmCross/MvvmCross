@@ -6,113 +6,44 @@ using System;
 using System.Windows.Input;
 using Android.Runtime;
 using Android.Views;
+using MvvmCross.Base;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
+using MvvmCross.Platforms.Android.WeakSubscription;
 
 namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerViewHolder")]
     public class MvxRecyclerViewHolder 
-        : Android.Support.V7.Widget.RecyclerView.ViewHolder, IMvxRecyclerViewHolder, IMvxBindingContextOwner
+        : Android.Support.V7.Widget.RecyclerView.ViewHolder, IMvxRecyclerViewHolder
     {
-        private readonly IMvxBindingContext _bindingContext;
-
+        private IMvxBindingContext _bindingContext;
+        private IDisposable clickSubscription, longClickSubscription;
         private object _cachedDataContext;
-        private ICommand _click, _longClick;
-        private bool _clickOverloaded, _longClickOverloaded;
+        private IDisposable itemViewClickSubscription, itemViewLongClickSubscription;
+
+        public event EventHandler<EventArgs> Click;
+        public event EventHandler<EventArgs> LongClick;
 
         public IMvxBindingContext BindingContext
         {
-            get { return _bindingContext; }
-            set { throw new NotImplementedException("BindingContext is readonly in the list item"); }
+            get => _bindingContext;
+            set => throw new NotImplementedException("BindingContext is readonly in the list item");
         }
 
         public int Id { get; set; }
 
         public object DataContext
         {
-            get
-            {
-                return _bindingContext.DataContext;
-            }
+            get => _bindingContext.DataContext;
             set
             {
                 _bindingContext.DataContext = value;
 
                 // This is just a precaution.  If we've set the DataContext to something
                 // then we don't need to have the old one still cached.
-                if (value != null)
-                    _cachedDataContext = null;
+                _cachedDataContext = null;
             }
-        }
-
-        public ICommand Click
-        {
-            get
-            {
-                return _click;
-            }
-            set
-            {
-                _click = value;
-                if (_click != null)
-                    EnsureClickOverloaded();
-            }
-        }
-
-        private void EnsureClickOverloaded()
-        {
-            if (_clickOverloaded)
-                return;
-            _clickOverloaded = true;
-            ItemView.Click += OnItemViewOnClick;
-        }
-
-        public ICommand LongClick
-        {
-            get
-            {
-                return _longClick;
-            }
-            set
-            {
-                _longClick = value;
-                if (_longClick != null)
-                    EnsureLongClickOverloaded();
-            }
-        }
-
-        private void EnsureLongClickOverloaded()
-        {
-            if (_longClickOverloaded)
-                return;
-            _longClickOverloaded = true;
-            ItemView.LongClick += OnItemViewOnLongClick;
-        }
-
-        protected virtual void ExecuteCommandOnItem(ICommand command)
-        {
-            if (command == null)
-                return;
-
-            var item = DataContext;
-            if (item == null)
-                return;
-
-            if (!command.CanExecute(item))
-                return;
-
-            command.Execute(item);
-        }
-
-        private void OnItemViewOnClick(object sender, EventArgs args)
-        {
-            ExecuteCommandOnItem(Click);
-        }
-
-        private void OnItemViewOnLongClick(object sender, View.LongClickEventArgs args)
-        {
-            ExecuteCommandOnItem(LongClick);
         }
 
         public MvxRecyclerViewHolder(View itemView, IMvxAndroidBindingContext context)
@@ -121,7 +52,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             _bindingContext = context;
         }
 
-        public MvxRecyclerViewHolder(IntPtr handle, JniHandleOwnership ownership)
+        [Preserve(Conditional = true)]
+        protected MvxRecyclerViewHolder(IntPtr handle, JniHandleOwnership ownership)
             : base(handle, ownership)
         {
         }
@@ -129,36 +61,59 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         public virtual void OnAttachedToWindow()
         {
             if (_cachedDataContext != null && DataContext == null)
-                DataContext = _cachedDataContext;
+                _bindingContext.DataContext = _cachedDataContext;
+            _cachedDataContext = null;
+
+            if (itemViewClickSubscription == null)
+                itemViewClickSubscription = ItemView.WeakSubscribe(nameof(View.Click), OnItemViewClick);
+            if (itemViewLongClickSubscription == null)
+                itemViewLongClickSubscription = ItemView.WeakSubscribe<View, View.LongClickEventArgs>(nameof(View.LongClick), OnItemViewLongClick);
         }
 
         public virtual void OnDetachedFromWindow()
         {
+            itemViewClickSubscription.Dispose();
+            itemViewClickSubscription = null;
+            itemViewLongClickSubscription.Dispose();
+            itemViewLongClickSubscription = null;
+
             _cachedDataContext = DataContext;
-            DataContext = null;
+            _bindingContext.DataContext = null;
+        }
+
+        protected virtual void OnItemViewClick(object sender, EventArgs e)
+        {
+            Click?.Invoke(this, e);
+        }
+
+        protected virtual void OnItemViewLongClick(object sender, EventArgs e)
+        {
+            LongClick?.Invoke(this, e);
         }
 
         public virtual void OnViewRecycled()
         {
             _cachedDataContext = null;
-            DataContext = null;
+            _bindingContext.DataContext = null;
         }
 
         protected override void Dispose(bool disposing)
         {
-            // Clean up the binding context since nothing
-            // explicitly Disposes of the ViewHolder.
-            _bindingContext?.ClearAllBindings();
+            itemViewClickSubscription?.Dispose();
+            itemViewClickSubscription = null;
+            itemViewLongClickSubscription?.Dispose();
+            itemViewLongClickSubscription = null;
 
-            if (disposing)
+            _cachedDataContext = null;
+            clickSubscription?.Dispose();
+            longClickSubscription?.Dispose();
+
+            if (_bindingContext != null)
             {
-                _cachedDataContext = null;
-
-                if (ItemView != null)
-                {
-                    ItemView.Click -= OnItemViewOnClick;
-                    ItemView.LongClick -= OnItemViewOnLongClick;
-                }
+                _bindingContext.DataContext = null;
+                _bindingContext.ClearAllBindings();
+                _bindingContext.DisposeIfDisposable();
+                _bindingContext = null;
             }
 
             base.Dispose(disposing);

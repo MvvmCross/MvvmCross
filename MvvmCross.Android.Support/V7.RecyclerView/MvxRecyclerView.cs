@@ -28,17 +28,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
         }
 
-        [Preserve(Conditional = true)]
+        [Android.Runtime.Preserve(Conditional = true)]
         protected MvxRecyclerView(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
-        }
-
-        [Preserve(Conditional = true)]
-        protected static void LinkerPleaseInclude(MvxRecyclerView list)
-        {
-            list.ItemsSource = null;
-            list.Click += (sender, args) => { };
         }
 
         public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter) 
@@ -54,7 +47,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 SetLayoutManager(new MvxGuardedLinearLayoutManager(context));
 
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
-            //TODO: this code is not extensible and should be avoided/moved in a parameter
             var itemTemplateSelector = MvxRecyclerViewAttributeExtensions.BuildItemTemplateSelector(context, attrs, itemTemplateId);
 
             adapter.ItemTemplateSelector = itemTemplateSelector;
@@ -110,9 +102,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 }
 
                 if (existing != null)
-                {
                     existing.ItemsSource = null;
-                }
             }
         }
 

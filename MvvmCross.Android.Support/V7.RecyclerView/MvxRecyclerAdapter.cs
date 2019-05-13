@@ -33,7 +33,11 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         protected IMvxAndroidBindingContext BindingContext { get; }
 
-        public MvxRecyclerAdapter(IMvxAndroidBindingContext bindingContext = null)
+        public MvxRecyclerAdapter() : this(null)
+        {
+        }
+
+        public MvxRecyclerAdapter(IMvxAndroidBindingContext bindingContext)
         {
             BindingContext = bindingContext ?? MvxAndroidBindingContextHelpers.Current();
         }
@@ -116,11 +120,12 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             base.OnViewDetachedFromWindow(holder);
         }
 
-        public override void OnViewRecycled(Object holder)
+        public override int GetItemViewType(int position)
         {
-            var viewHolder = (IMvxRecyclerViewHolder)holder;
-            viewHolder.OnViewRecycled();
-            base.OnViewRecycled(holder);
+            var itemAtPosition = GetItem(position);
+            var viewTypeIndex = ItemTemplateSelector.GetItemViewType(itemAtPosition);
+            var viewType = ItemTemplateSelector.GetItemLayoutId(viewTypeIndex);
+            return viewType;
         }
 
         public override Android.Support.V7.Widget.RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -129,20 +134,10 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
             var vh = new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewType, itemBindingContext), itemBindingContext)
             {
-                Click = ItemClick,
-                LongClick = ItemLongClick,
                 Id = viewType
             };
 
             return vh;
-        }
-
-        public override int GetItemViewType(int position)
-        {
-            var itemAtPosition = GetItem(position);
-            var viewTypeIndex = ItemTemplateSelector.GetItemViewType(itemAtPosition);
-            var viewType = ItemTemplateSelector.GetItemLayoutId(viewTypeIndex);
-            return viewType;
         }
 
         protected virtual View InflateViewForHolder(ViewGroup parent, int viewType, IMvxAndroidBindingContext bindingContext)
@@ -153,10 +148,55 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
         {
             var dataContext = GetItem(position);
-            if (((IMvxRecyclerViewHolder) holder).Id == global::Android.Resource.Layout.SimpleListItem1)
-                ((TextView) holder.ItemView).Text = dataContext?.ToString();
-            ((IMvxRecyclerViewHolder)holder).DataContext = dataContext;
+            var viewHolder = (IMvxRecyclerViewHolder)holder;
+            viewHolder.DataContext = dataContext;
+
+            if (viewHolder.Id == global::Android.Resource.Layout.SimpleListItem1)
+                ((TextView)holder.ItemView).Text = dataContext?.ToString();
+
+            viewHolder.Click -= OnItemViewClick;
+            viewHolder.LongClick -= OnItemViewLongClick;
+            viewHolder.Click += OnItemViewClick;
+            viewHolder.LongClick += OnItemViewLongClick;
+
             OnMvxViewHolderBound(new MvxViewHolderBoundEventArgs(position, dataContext, holder));
+        }
+
+        public override void OnViewRecycled(Object holder)
+        {
+            var viewHolder = (IMvxRecyclerViewHolder)holder;
+            viewHolder.Click -= OnItemViewClick;
+            viewHolder.LongClick -= OnItemViewLongClick;
+            viewHolder.OnViewRecycled();
+        }
+
+        public override void OnDetachedFromRecyclerView(Android.Support.V7.Widget.RecyclerView recyclerView)
+        {
+            base.OnDetachedFromRecyclerView(recyclerView);
+            Clean(false);
+        }
+
+        /// <summary>
+        /// By default, force recycling a view if it has animations
+        /// </summary>
+        public override bool OnFailedToRecycleView(Object holder) => true;
+
+        protected virtual void OnItemViewClick(object sender, EventArgs e)
+        {
+            var holder = (IMvxRecyclerViewHolder)sender;
+            ExecuteCommandOnItem(ItemClick, holder.DataContext);
+        }
+
+        protected virtual void OnItemViewLongClick(object sender, EventArgs e)
+        {
+            var holder = (IMvxRecyclerViewHolder)sender;
+            ExecuteCommandOnItem(ItemLongClick, holder.DataContext);
+        }
+
+        protected virtual void ExecuteCommandOnItem(ICommand command, object itemDataContext)
+        {
+            if (command != null && itemDataContext != null && command.CanExecute(itemDataContext))
+                command.Execute(itemDataContext);
         }
 
         public override int ItemCount => _itemsSource.Count();
@@ -165,10 +205,18 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
             var itemsSourcePosition = GetItemsSourcePosition(viewPosition);
 
-            if (itemsSourcePosition >= 0 && itemsSourcePosition < _itemsSource.Count())
-                return _itemsSource.ElementAt(itemsSourcePosition);
+            //Do not check if viewPosition is in the range for non IList enumerables. Ie: do not call Count() on the list, as it triggers a full enumeration and kills performance for a streaming source.
+            if (ItemsSource is IList items)
+            {
+                if (itemsSourcePosition >= 0 && itemsSourcePosition < items.Count)
+                    return items[itemsSourcePosition];
+                Mvx.IoCProvider.Resolve<IMvxLog>().Error($"MvxRecyclerView GetItem index out of range. viewPosition:{viewPosition} itemsSourcePosition:{itemsSourcePosition} itemCount:{_itemsSource.Count()}");
+                //We should trigger an exception instead of hiding it here, as it means you have bugs in your code.
+                return null; 
+            }
 
-            return null;
+            //May crash if itemsSourcePosition is out or range. Which should never happen anyway, except when you have bugs in your code.
+            return _itemsSource.ElementAt(itemsSourcePosition);
         }
 
         protected virtual int GetViewPosition(object item)
@@ -253,23 +301,25 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             MvxViewHolderBound?.Invoke(obj);
         }
 
+        private void Clean(bool disposing)
+        {
+            if (disposing)
+            {
+            _subscription?.Dispose();
+            _subscription = null;
+            _itemClick = null;
+            _itemLongClick = null;
+            _itemsSource = null;
+            _itemTemplateSelector = null;
+            }
+        }
+
         /// <summary>
         /// Always called with disposing = false, as it is only disposed from java
         /// </summary>
         protected override void Dispose(bool disposing)
         {
-            //Mvx.IoCProvider.Resolve<IMvxLog>().Trace("MvxRecyclerAdapter Dispose");
-
-            //if (disposing)
-            {
-                _subscription?.Dispose();
-                _subscription = null;
-                _itemClick = null;
-                _itemLongClick = null;
-                _itemsSource = null;
-                _itemTemplateSelector = null;
-            }
-
+            Clean(true);
             base.Dispose(disposing);
         }
     }
