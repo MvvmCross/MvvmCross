@@ -25,6 +25,8 @@ namespace MvvmCross.Platforms.Uap.Views
         public MvxApplication()
         {
             RegisterSetup();
+            EnteredBackground += OnEnteredBackground;
+            LeavingBackground += OnLeavingBackground;
             Suspending += OnSuspending;
             Resuming += OnResuming;
         }
@@ -119,26 +121,67 @@ namespace MvvmCross.Platforms.Uap.Views
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName, e.Exception);
         }
 
-        private async void OnSuspending(object sender, SuspendingEventArgs e)
+        protected virtual async void OnEnteredBackground(object sender, EnteredBackgroundEventArgs e)
         {
-            var deferral = e.SuspendingOperation.GetDeferral();
-
-            var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
-            await Suspend(suspension);
-            await suspension.SaveAsync();
-            deferral.Complete();
+            var deferral = e.GetDeferral();
+            try
+            {
+                var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
+                await EnteringBackground(suspension);
+            }
+            finally
+            {
+                deferral.Complete();
+            }
         }
 
-        protected virtual Task Suspend(IMvxSuspensionManager suspensionManager)
+        protected virtual async Task EnteringBackground(IMvxSuspensionManager suspensionManager)
+        {
+            await suspensionManager.SaveAsync();
+        }
+
+        protected virtual async void OnLeavingBackground(object sender, LeavingBackgroundEventArgs e)
+        {
+            var deferral = e.GetDeferral();
+            try
+            {
+                var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
+                await LeaveBackground(suspension);
+            }
+            finally
+            {
+                deferral.Complete();
+            }
+        }
+
+        protected virtual Task LeaveBackground(IMvxSuspensionManager suspensionManager)
         {
             return Task.CompletedTask;
         }
 
-        private async void OnResuming(object sender, object e)
+        protected virtual async Task Suspend(IMvxSuspensionManager suspensionManager)
+        {
+            await suspensionManager.SaveAsync();
+        }
+
+        protected virtual async void OnSuspending(object sender, SuspendingEventArgs e)
+        {
+            var deferral = e.SuspendingOperation.GetDeferral();
+            try
+            {
+                var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
+                await Suspend(suspension);
+            }
+            finally
+            {
+                deferral.Complete();
+            }
+        }
+
+        protected virtual async void OnResuming(object sender, object e)
         {
             var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
             await Resume(suspension);
-            await suspension.RestoreAsync();
         }
 
         protected virtual Task Resume(IMvxSuspensionManager suspensionManager)

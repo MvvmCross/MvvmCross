@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using MvvmCross;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
@@ -19,6 +16,7 @@ namespace Playground.Core.ViewModels
         }
 
         public IMvxAsyncCommand OpenChildThenCloseThisCommand => new MvxAsyncCommand(CloseThisAndOpenChildAsync);
+
         public IMvxAsyncCommand TryToCloseNewViewModelCommand => new MvxAsyncCommand(TryToCloseNewViewModelAsync);
 
         private async Task CloseThisAndOpenChildAsync()
@@ -29,7 +27,7 @@ namespace Playground.Core.ViewModels
 
         private async Task TryToCloseNewViewModelAsync()
         {
-            await _mvxNavigationService.Close(new SecondChildViewModel());
+            await _mvxNavigationService.Close(Mvx.IoCProvider.Resolve<SecondChildViewModel>());
         }
     }
 }
