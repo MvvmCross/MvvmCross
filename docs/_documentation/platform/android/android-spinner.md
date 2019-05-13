@@ -89,3 +89,4 @@ private void OnCountrySelectedCommand(CountryViewModel country)
 {
     // write on country selected logic here
 }
+```
