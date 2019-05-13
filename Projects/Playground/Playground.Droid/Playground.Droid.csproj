@@ -90,6 +90,7 @@
     <Compile Include="Fragments\SplitDetailNavView.cs" />
     <Compile Include="Fragments\NestedChildView.cs" />
     <Compile Include="MainApplication.cs" />
+    <Compile Include="TemplateSelectors\AnimalTemplateSelector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -152,9 +153,7 @@
     <AndroidResource Include="Resources\layout\SheetView.axml" />
     <AndroidResource Include="Resources\layout\TabsRootBView.axml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\drawable\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross.Android.Support\Design\MvvmCross.Droid.Support.Design.csproj">
       <Project>{45f63a4a-9a37-4929-9c80-48a91f346e0d}</Project>
@@ -171,6 +170,10 @@
     <ProjectReference Include="..\..\..\MvvmCross.Android.Support\V7.RecyclerView\MvvmCross.Droid.Support.V7.RecyclerView.csproj">
       <Project>{6f49cfe7-3fcb-463d-85dc-1798e2be771e}</Project>
       <Name>MvvmCross.Droid.Support.V7.RecyclerView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Color\MvvmCross.Plugin.Color.csproj">
+      <Project>{6fcbe659-3b43-4a42-932d-d9a2a7f439d3}</Project>
+      <Name>MvvmCross.Plugin.Color</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\JsonLocalization\MvvmCross.Plugin.JsonLocalization.csproj">
       <Project>{c783ef46-1822-4baf-8eca-e820fff26633}</Project>
@@ -210,6 +213,9 @@
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat">
       <Version>28.0.0.1</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.FFImageLoading">
+      <Version>2.4.9.961</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\mvvmcross_logo.png" />
@@ -236,6 +242,24 @@
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\itemtemplate_cat.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\itemtemplate_dog.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\itemtemplate_monkey.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\star.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\..\XamarinBuild.targets" />
