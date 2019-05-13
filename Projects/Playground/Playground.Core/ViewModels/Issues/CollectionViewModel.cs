@@ -172,17 +172,14 @@ namespace Playground.Core.ViewModels
 
         public class CatViewModel : AnimalViewModel
         {
-
         }
 
         public class DogViewModel : AnimalViewModel
         {
-
         }
 
         public class MonkeyViewModel : AnimalViewModel
         {
-
         }
     }
 }
