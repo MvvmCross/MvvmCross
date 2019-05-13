@@ -33,6 +33,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         protected IMvxAndroidBindingContext BindingContext { get; }
 
+        public bool ReloadOnAllItemsSourceSets { get; set; }
+
         public MvxRecyclerAdapter() : this(null)
         {
         }
@@ -46,8 +48,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             : base(javaReference, transfer)
         {
         }
-
-        public bool ReloadOnAllItemsSourceSets { get; set; }
 
         [MvxSetToNullAfterBinding]
         public ICommand ItemClick
@@ -90,7 +90,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         [MvxSetToNullAfterBinding]
         public virtual IMvxTemplateSelector ItemTemplateSelector
-            {
+        {
             get => _itemTemplateSelector;
             set
             {
@@ -132,12 +132,12 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
             var itemBindingContext = new MvxAndroidBindingContext(parent.Context, BindingContext.LayoutInflaterHolder);
 
-            var vh = new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewType, itemBindingContext), itemBindingContext)
+            var viewHolder = new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewType, itemBindingContext), itemBindingContext)
             {
                 Id = viewType
             };
 
-            return vh;
+            return viewHolder;
         }
 
         protected virtual View InflateViewForHolder(ViewGroup parent, int viewType, IMvxAndroidBindingContext bindingContext)
@@ -262,7 +262,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if(_subscription == null || _itemsSource == null) //Object disposed
+            if (_subscription == null || _itemsSource == null) //Object disposed
                 return;
 
             if (Looper.MainLooper == Looper.MyLooper())
@@ -273,25 +273,25 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public virtual void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)
         {
-                switch (e.Action)
-                {
-                    case NotifyCollectionChangedAction.Add:
-                        NotifyItemRangeInserted(GetViewPosition(e.NewStartingIndex), e.NewItems.Count);
-                        break;
-                    case NotifyCollectionChangedAction.Move:
-                        for (var i = 0; i < e.NewItems.Count; i++)
-                            NotifyItemMoved(GetViewPosition(e.OldStartingIndex + i), GetViewPosition(e.NewStartingIndex + i));
-                        break;
-                    case NotifyCollectionChangedAction.Replace:
-                        NotifyItemRangeChanged(GetViewPosition(e.NewStartingIndex), e.NewItems.Count);
-                        break;
-                    case NotifyCollectionChangedAction.Remove:
-                        NotifyItemRangeRemoved(GetViewPosition(e.OldStartingIndex), e.OldItems.Count);
-                        break;
-                    case NotifyCollectionChangedAction.Reset:
-                        NotifyDataSetChanged();
-                        break;
-                }
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    NotifyItemRangeInserted(GetViewPosition(e.NewStartingIndex), e.NewItems.Count);
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    for (var i = 0; i < e.NewItems.Count; i++)
+                        NotifyItemMoved(GetViewPosition(e.OldStartingIndex + i), GetViewPosition(e.NewStartingIndex + i));
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    NotifyItemRangeChanged(GetViewPosition(e.NewStartingIndex), e.NewItems.Count);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    NotifyItemRangeRemoved(GetViewPosition(e.OldStartingIndex), e.OldItems.Count);
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    NotifyDataSetChanged();
+                    break;
+            }
         }
 
         public event Action<MvxViewHolderBoundEventArgs> MvxViewHolderBound;
@@ -305,12 +305,12 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
             if (disposing)
             {
-            _subscription?.Dispose();
-            _subscription = null;
-            _itemClick = null;
-            _itemLongClick = null;
-            _itemsSource = null;
-            _itemTemplateSelector = null;
+                _subscription?.Dispose();
+                _subscription = null;
+                _itemClick = null;
+                _itemLongClick = null;
+                _itemsSource = null;
+                _itemTemplateSelector = null;
             }
         }
 
