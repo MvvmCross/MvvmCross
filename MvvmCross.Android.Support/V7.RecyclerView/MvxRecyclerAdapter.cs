@@ -210,7 +210,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             {
                 if (itemsSourcePosition >= 0 && itemsSourcePosition < items.Count)
                     return items[itemsSourcePosition];
-                Mvx.IoCProvider.Resolve<IMvxLog>().Error($"MvxRecyclerView GetItem index out of range. viewPosition:{viewPosition} itemsSourcePosition:{itemsSourcePosition} itemCount:{_itemsSource.Count()}");
+                MvxAndroidLog.Instance.Error($"MvxRecyclerView GetItem index out of range. viewPosition:{viewPosition} itemsSourcePosition:{itemsSourcePosition} itemCount:{_itemsSource.Count()}");
                 //We should trigger an exception instead of hiding it here, as it means you have bugs in your code.
                 return null; 
             }
@@ -240,7 +240,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         protected virtual void SetItemsSource(IEnumerable value)
         {
             if (Looper.MainLooper != Looper.MyLooper())
-                Mvx.IoCProvider.Resolve<IMvxLog>().Error("ItemsSource property set on a worker thread. This leads to crash in the RecyclerView. It must be set only from the main thread.");
+                MvxAndroidLog.Instance.Error("ItemsSource property set on a worker thread. This leads to crash in the RecyclerView. It must be set only from the main thread.");
 
             if (ReferenceEquals(_itemsSource, value) && !ReloadOnAllItemsSourceSets)
                 return;
@@ -268,7 +268,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             if (Looper.MainLooper == Looper.MyLooper())
                 NotifyDataSetChanged(e);
             else
-                Mvx.IoCProvider.Resolve<IMvxLog>().Error("ItemsSource collection content changed on a worker thread. This leads to crash in the RecyclerView as it will not be aware of changes immediatly and may get a deleted item or update an item with a bad item template. All changes must be synchronized on the main thread.");
+                MvxAndroidLog.Instance.Error("ItemsSource collection content changed on a worker thread. This leads to crash in the RecyclerView as it will not be aware of changes immediatly and may get a deleted item or update an item with a bad item template. All changes must be synchronized on the main thread.");
         }
 
         public virtual void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)
