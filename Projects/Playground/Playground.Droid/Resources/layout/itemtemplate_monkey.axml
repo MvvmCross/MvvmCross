@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
+    <FFImageLoading.Cross.MvxCachedImageView
+        android:id="@+id/image"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:scaleType="centerCrop"
+        local:MvxBind="ImagePath ImageUrl" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textAlignment="gravity"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        android:elevation="6dp"
+        android:textColor="@color/white"
+        tools:text="Animal Name"
+        local:MvxBind="Text Name" />
+
+    <TextView
+        android:id="@+id/favorite_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textAlignment="gravity"
+        android:layout_below="@id/name"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        android:elevation="6dp"
+        android:text="Favorite Color"
+        local:MvxBind="TextColor NativeColor(FavoriteColor)" />
+
+    <ImageView
+        android:id="@+id/favorite"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:tint="#FFFF00"
+        android:src="@drawable/star"
+        local:MvxBind="Visible Favorite" />
+</RelativeLayout>
