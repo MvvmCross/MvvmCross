@@ -34,14 +34,14 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual FragmentManager CurrentFragmentManager => CurrentActivity.FragmentManager;
 
-        private IMvxAndroidCurrentTopActivity _mvxAndroidCurrentTopActivity;
+        private IMvxAndroidCurrentTopActivity _androidCurrentTopActivity;
         protected virtual Activity CurrentActivity
         {
             get
             {
-                if (_mvxAndroidCurrentTopActivity == null)
-                    _mvxAndroidCurrentTopActivity = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>();
-                return _mvxAndroidCurrentTopActivity.Activity;
+                if (_androidCurrentTopActivity == null)
+                    _androidCurrentTopActivity = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>();
+                return _androidCurrentTopActivity.Activity;
             }
         }
 
