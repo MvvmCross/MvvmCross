@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Android.Runtime;
 using Android.Support.V4.View;
 using Android.Support.V7.Widget;
-using Android.Views;
 using Android.Widget;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
@@ -21,27 +21,25 @@ namespace Playground.Droid.Adapter
         {
         }
 
-        public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
+        [Android.Runtime.Preserve(Conditional = true)]
+        protected SelectedItemRecyclerAdapter(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-            var itemBindingContext = new MvxAndroidBindingContext(parent.Context, BindingContext.LayoutInflaterHolder);
-            View view = InflateViewForHolder(parent, viewType, itemBindingContext);
-
-            return new SelectedItemViewHolder(view, itemBindingContext, OnClick)
-            {
-                Click = ItemClick,
-                LongClick = ItemLongClick
-            };
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            ImageView itemLogo = holder.ItemView.FindViewById<ImageView>(Resource.Id.img_logo);
+            var itemLogo = holder.ItemView.FindViewById<ImageView>(Resource.Id.img_logo);
             ViewCompat.SetTransitionName(itemLogo, "anim_img" + position);
 
             base.OnBindViewHolder(holder, position);
         }
 
-        private void OnClick(int position, View view, object dataContext)
-            => OnItemClick?.Invoke(this, new SelectedItemEventArgs(position, view, dataContext));
+        protected override void OnItemViewClick(object sender, EventArgs e)
+        {
+            base.OnItemViewClick(sender,e);
+
+            var holder = (MvxRecyclerViewHolder)sender;
+            OnItemClick?.Invoke(this, new SelectedItemEventArgs(holder.AdapterPosition, holder.ItemView, holder.DataContext));
+        }
     }
 }

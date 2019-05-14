@@ -15,7 +15,6 @@ using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Extensions;
 using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
 using MvvmCross.Droid.Support.V7.RecyclerView.Model;
-using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.WeakSubscription;
@@ -27,70 +26,56 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
     public class MvxRecyclerAdapter
         : Android.Support.V7.Widget.RecyclerView.Adapter, IMvxRecyclerAdapter, IMvxRecyclerAdapterBindableHolder
     {
-        private readonly IMvxAndroidBindingContext _bindingContext;
-
         private ICommand _itemClick, _itemLongClick;
         private IEnumerable _itemsSource;
         private IDisposable _subscription;
         private IMvxTemplateSelector _itemTemplateSelector;
 
-        protected IMvxAndroidBindingContext BindingContext => _bindingContext;
+        protected IMvxAndroidBindingContext BindingContext { get; }
 
-        public MvxRecyclerAdapter() : this(MvxAndroidBindingContextHelpers.Current())
+        public bool ReloadOnAllItemsSourceSets { get; set; }
+
+        public MvxRecyclerAdapter() : this(null)
         {
         }
 
         public MvxRecyclerAdapter(IMvxAndroidBindingContext bindingContext)
         {
-            _bindingContext = bindingContext;
+            BindingContext = bindingContext ?? MvxAndroidBindingContextHelpers.Current();
         }
 
-        public MvxRecyclerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
+        protected MvxRecyclerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
         }
 
-        public bool ReloadOnAllItemsSourceSets { get; set; }
-
+        [MvxSetToNullAfterBinding]
         public ICommand ItemClick
         {
-            get
-            {
-                return _itemClick;
-            }
+            get => _itemClick;
             set
             {
                 if (ReferenceEquals(_itemClick, value))
-                {
                     return;
-                }
 
-                if (_itemClick != null)
-                {
+                if (_itemClick != null && value != null)
                     MvxAndroidLog.Instance.Warn("Changing ItemClick may cause inconsistencies where some items still call the old command.");
-                }
 
                 _itemClick = value;
             }
         }
 
+        [MvxSetToNullAfterBinding]
         public ICommand ItemLongClick
         {
-            get
-            {
-                return _itemLongClick;
-            }
+            get => _itemLongClick;
             set
             {
                 if (ReferenceEquals(_itemLongClick, value))
-                {
                     return;
-                }
 
-                if (_itemLongClick != null)
-                {
+                if (_itemLongClick != null && value != null)
                     MvxAndroidLog.Instance.Warn("Changing ItemLongClick may cause inconsistencies where some items still call the old command.");
-                }
 
                 _itemLongClick = value;
             }
@@ -99,16 +84,14 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get { return _itemsSource; }
-            set { SetItemsSource(value); }
+            get => _itemsSource;
+            set => SetItemsSource(value);
         }
 
+        [MvxSetToNullAfterBinding]
         public virtual IMvxTemplateSelector ItemTemplateSelector
         {
-            get
-            {
-                return _itemTemplateSelector;
-            }
+            get => _itemTemplateSelector;
             set
             {
                 if (ReferenceEquals(_itemTemplateSelector, value))
@@ -132,53 +115,88 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public override void OnViewDetachedFromWindow(Object holder)
         {
-            base.OnViewDetachedFromWindow(holder);
-
             var viewHolder = (IMvxRecyclerViewHolder)holder;
             viewHolder.OnDetachedFromWindow();
+            base.OnViewDetachedFromWindow(holder);
         }
 
-        public override void OnViewRecycled(Object holder)
+        public override int GetItemViewType(int position)
         {
-            base.OnViewRecycled(holder);
-
-            var viewHolder = (IMvxRecyclerViewHolder)holder;
-            viewHolder.OnViewRecycled();
+            var itemAtPosition = GetItem(position);
+            var viewTypeIndex = ItemTemplateSelector.GetItemViewType(itemAtPosition);
+            var viewType = ItemTemplateSelector.GetItemLayoutId(viewTypeIndex);
+            return viewType;
         }
 
         public override Android.Support.V7.Widget.RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             var itemBindingContext = new MvxAndroidBindingContext(parent.Context, BindingContext.LayoutInflaterHolder);
 
-            var vh = new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewType, itemBindingContext), itemBindingContext)
+            var viewHolder = new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewType, itemBindingContext), itemBindingContext)
             {
-                Click = ItemClick,
-                LongClick = ItemLongClick,
-                Id = ItemTemplateSelector.GetItemLayoutId(viewType)
+                Id = viewType
             };
 
-            return vh;
-        }
-
-        public override int GetItemViewType(int position)
-        {
-            var itemAtPosition = GetItem(position);
-            return ItemTemplateSelector.GetItemViewType(itemAtPosition);
+            return viewHolder;
         }
 
         protected virtual View InflateViewForHolder(ViewGroup parent, int viewType, IMvxAndroidBindingContext bindingContext)
         {
-            var layoutId = ItemTemplateSelector.GetItemLayoutId(viewType);
-            return bindingContext.BindingInflate(layoutId, parent, false);
+            return bindingContext.BindingInflate(viewType, parent, false);
         }
 
         public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
         {
             var dataContext = GetItem(position);
-            if (((IMvxRecyclerViewHolder) holder).Id == global::Android.Resource.Layout.SimpleListItem1)
-                ((TextView) holder.ItemView).Text = dataContext?.ToString();
-            ((IMvxRecyclerViewHolder)holder).DataContext = dataContext;
+            var viewHolder = (IMvxRecyclerViewHolder)holder;
+            viewHolder.DataContext = dataContext;
+
+            if (viewHolder.Id == global::Android.Resource.Layout.SimpleListItem1)
+                ((TextView)holder.ItemView).Text = dataContext?.ToString();
+
+            viewHolder.Click -= OnItemViewClick;
+            viewHolder.LongClick -= OnItemViewLongClick;
+            viewHolder.Click += OnItemViewClick;
+            viewHolder.LongClick += OnItemViewLongClick;
+
             OnMvxViewHolderBound(new MvxViewHolderBoundEventArgs(position, dataContext, holder));
+        }
+
+        public override void OnViewRecycled(Object holder)
+        {
+            var viewHolder = (IMvxRecyclerViewHolder)holder;
+            viewHolder.Click -= OnItemViewClick;
+            viewHolder.LongClick -= OnItemViewLongClick;
+            viewHolder.OnViewRecycled();
+        }
+
+        public override void OnDetachedFromRecyclerView(Android.Support.V7.Widget.RecyclerView recyclerView)
+        {
+            base.OnDetachedFromRecyclerView(recyclerView);
+            Clean(false);
+        }
+
+        /// <summary>
+        /// By default, force recycling a view if it has animations
+        /// </summary>
+        public override bool OnFailedToRecycleView(Object holder) => true;
+
+        protected virtual void OnItemViewClick(object sender, EventArgs e)
+        {
+            var holder = (IMvxRecyclerViewHolder)sender;
+            ExecuteCommandOnItem(ItemClick, holder.DataContext);
+        }
+
+        protected virtual void OnItemViewLongClick(object sender, EventArgs e)
+        {
+            var holder = (IMvxRecyclerViewHolder)sender;
+            ExecuteCommandOnItem(ItemLongClick, holder.DataContext);
+        }
+
+        protected virtual void ExecuteCommandOnItem(ICommand command, object itemDataContext)
+        {
+            if (command != null && itemDataContext != null && command.CanExecute(itemDataContext))
+                command.Execute(itemDataContext);
         }
 
         public override int ItemCount => _itemsSource.Count();
@@ -187,12 +205,18 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
             var itemsSourcePosition = GetItemsSourcePosition(viewPosition);
 
-            if (itemsSourcePosition >= 0 && itemsSourcePosition < _itemsSource.Count())
+            //Do not check if viewPosition is in the range for non IList enumerables. Ie: do not call Count() on the list, as it triggers a full enumeration and kills performance for a streaming source.
+            if (ItemsSource is IList items)
             {
-                return _itemsSource.ElementAt(itemsSourcePosition);
+                if (itemsSourcePosition >= 0 && itemsSourcePosition < items.Count)
+                    return items[itemsSourcePosition];
+                MvxAndroidLog.Instance.Error($"MvxRecyclerView GetItem index out of range. viewPosition:{viewPosition} itemsSourcePosition:{itemsSourcePosition} itemCount:{_itemsSource.Count()}");
+                //We should trigger an exception instead of hiding it here, as it means you have bugs in your code.
+                return null; 
             }
 
-            return null;
+            //May crash if itemsSourcePosition is out or range. Which should never happen anyway, except when you have bugs in your code.
+            return _itemsSource.ElementAt(itemsSourcePosition);
         }
 
         protected virtual int GetViewPosition(object item)
@@ -215,72 +239,58 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         protected virtual void SetItemsSource(IEnumerable value)
         {
+            if (Looper.MainLooper != Looper.MyLooper())
+                MvxAndroidLog.Instance.Error("ItemsSource property set on a worker thread. This leads to crash in the RecyclerView. It must be set only from the main thread.");
+
             if (ReferenceEquals(_itemsSource, value) && !ReloadOnAllItemsSourceSets)
-            {
                 return;
-            }
 
             _subscription?.Dispose();
             _subscription = null;
 
-            _itemsSource = value;
-
-            if (_itemsSource != null && !(_itemsSource is IList))
+            if (value != null && !(value is IList))
             {
                 MvxBindingLog.Warning("Binding to IEnumerable rather than IList - this can be inefficient, especially for large lists");
             }
 
-            var newObservable = _itemsSource as INotifyCollectionChanged;
-            if (newObservable != null)
-            {
+            if (value is INotifyCollectionChanged newObservable)
                 _subscription = newObservable.WeakSubscribe(OnItemsSourceCollectionChanged);
-            }
 
+            _itemsSource = value;
             NotifyDataSetChanged();
         }
 
         protected virtual void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            if (_subscription == null || _itemsSource == null) //Object disposed
+                return;
+
             if (Looper.MainLooper == Looper.MyLooper())
-            {
                 NotifyDataSetChanged(e);
-            }
             else
-            {
-                var h = new Handler(Looper.MainLooper);
-                h.Post(() => NotifyDataSetChanged(e));
-            }
+                MvxAndroidLog.Instance.Error("ItemsSource collection content changed on a worker thread. This leads to crash in the RecyclerView as it will not be aware of changes immediatly and may get a deleted item or update an item with a bad item template. All changes must be synchronized on the main thread.");
         }
 
         public virtual void NotifyDataSetChanged(NotifyCollectionChangedEventArgs e)
         {
-            try
+            switch (e.Action)
             {
-                switch (e.Action)
-                {
-                    case NotifyCollectionChangedAction.Add:
-                        NotifyItemRangeInserted(GetViewPosition(e.NewStartingIndex), e.NewItems.Count);
-                        break;
-                    case NotifyCollectionChangedAction.Move:
-                        for (int i = 0; i < e.NewItems.Count; i++)
-                            NotifyItemMoved(GetViewPosition(e.OldStartingIndex + i), GetViewPosition(e.NewStartingIndex + i));
-                        break;
-                    case NotifyCollectionChangedAction.Replace:
-                        NotifyItemRangeChanged(GetViewPosition(e.NewStartingIndex), e.NewItems.Count);
-                        break;
-                    case NotifyCollectionChangedAction.Remove:
-                        NotifyItemRangeRemoved(GetViewPosition(e.OldStartingIndex), e.OldItems.Count);
-                        break;
-                    case NotifyCollectionChangedAction.Reset:
-                        NotifyDataSetChanged();
-                        break;
-                }
-            }
-            catch (Exception exception)
-            {
-                MvxAndroidLog.Instance.Warn(
-                    "Exception masked during Adapter RealNotifyDataSetChanged {0}. Are you trying to update your collection from a background task? See http://goo.gl/0nW0L6",
-                    exception.ToLongString());
+                case NotifyCollectionChangedAction.Add:
+                    NotifyItemRangeInserted(GetViewPosition(e.NewStartingIndex), e.NewItems.Count);
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    for (var i = 0; i < e.NewItems.Count; i++)
+                        NotifyItemMoved(GetViewPosition(e.OldStartingIndex + i), GetViewPosition(e.NewStartingIndex + i));
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    NotifyItemRangeChanged(GetViewPosition(e.NewStartingIndex), e.NewItems.Count);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    NotifyItemRangeRemoved(GetViewPosition(e.OldStartingIndex), e.OldItems.Count);
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    NotifyDataSetChanged();
+                    break;
             }
         }
 
@@ -289,6 +299,28 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         protected virtual void OnMvxViewHolderBound(MvxViewHolderBoundEventArgs obj)
         {
             MvxViewHolderBound?.Invoke(obj);
+        }
+
+        private void Clean(bool disposing)
+        {
+            if (disposing)
+            {
+                _subscription?.Dispose();
+                _subscription = null;
+                _itemClick = null;
+                _itemLongClick = null;
+                _itemsSource = null;
+                _itemTemplateSelector = null;
+            }
+        }
+
+        /// <summary>
+        /// Always called with disposing = false, as it is only disposed from java
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            Clean(true);
+            base.Dispose(disposing);
         }
     }
 }

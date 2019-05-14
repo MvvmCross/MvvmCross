@@ -54,7 +54,6 @@
     <Compile Include="Activities\CustomBindingView.cs" />
     <Compile Include="Adapter\SelectedItemRecyclerAdapter.cs" />
     <Compile Include="Adapter\SelectedItemRecyclerAdapter.SelectedItemEventArgs.cs" />
-    <Compile Include="Adapter\SelectedItemRecyclerAdapter.ViewHolder.cs" />
     <Compile Include="Bindings\BinaryEditTargetBinding.cs" />
     <Compile Include="Controls\BinaryEdit.cs" />
     <Compile Include="Fragments\BaseSplitDetailView.cs" />
