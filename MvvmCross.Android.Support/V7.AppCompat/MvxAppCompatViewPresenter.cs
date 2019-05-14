@@ -172,7 +172,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return base.ChangePresentation(hint);
         }
 
-        private ViewPager FindViewPagerInFragmentPresentation(MvxViewPagerFragmentPresentationAttribute pagerFragmentAttribute)
+        protected virtual ViewPager FindViewPagerInFragmentPresentation(MvxViewPagerFragmentPresentationAttribute pagerFragmentAttribute)
         {
             ViewPager viewPager = null;
 
@@ -565,7 +565,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return Task.FromResult(false);
         }
 
-        private static MvxViewPagerFragmentInfo FindFragmentInfoFromAttribute(
+        protected virtual MvxViewPagerFragmentInfo FindFragmentInfoFromAttribute(
             MvxFragmentPresentationAttribute attribute, MvxCachingFragmentStatePagerAdapter adapter)
         {
             MvxViewPagerFragmentInfo fragmentInfo = null;
