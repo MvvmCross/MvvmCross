@@ -301,7 +301,7 @@ Task("UpdateChangelog")
         arguments.Append("--since-tag {0}", sinceTag);
 
     if (versionInfo.BranchName.Contains("release/"))
-        arguments.Append("--future-version {0}", versionInfo.MajorMinorPatch);
+        arguments.Append("--future-release {0}", versionInfo.MajorMinorPatch);
 
     Information("Starting github_changelog_generator with arguments: {0}", arguments.Render());
 
