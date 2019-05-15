@@ -28,6 +28,7 @@
                 <Button Text="Show Bindings view" mvx:Bi.nd="Command ShowBindingsViewCommand"/>
                 <Button Text="Show CodeBehind view" mvx:Bi.nd="Command ShowCodeBehindViewCommand"/>
                 <Button Text="Show Converters view" mvx:Bi.nd="Command ConvertersCommand" />
+                <Button Text="Show Navigation close view" mvx:Bi.nd="Command ShowNavigationCloseCommand" />
 
                 <Label Text="{mvx:MvxLang ShowLabel}" TextColor="{StaticResource PrimaryColor}">
                     <Label.Triggers>

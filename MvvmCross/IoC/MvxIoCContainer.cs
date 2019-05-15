@@ -24,6 +24,7 @@ namespace MvvmCross.IoC
         private readonly IMvxIoCProvider _parentProvider;
 
         protected object LockObject => _lockObject;
+
         protected IMvxIocOptions Options => _options;
 
         public MvxIoCContainer(IMvxIocOptions options, IMvxIoCProvider parentProvider = null)

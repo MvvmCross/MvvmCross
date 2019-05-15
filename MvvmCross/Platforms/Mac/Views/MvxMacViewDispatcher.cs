@@ -24,10 +24,10 @@ namespace MvvmCross.Platforms.Mac.Views
 
         public async Task<bool> ShowViewModel(MvxViewModelRequest request)
         {
-            Action action = () =>
+            Func<Task> action = () =>
             {
                 MvxLog.Instance.Trace("MacNavigation", "Navigate requested");
-                _presenter.Show(request);
+                return _presenter.Show(request);
             };
             await ExecuteOnMainThreadAsync(action);
             return true;
@@ -35,10 +35,10 @@ namespace MvvmCross.Platforms.Mac.Views
 
         public async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            Action action = () =>
+            Func<Task> action = () =>
                                 {
                                     MvxLog.Instance.Trace("MacNavigation", "Change presentation requested");
-                                    _presenter.ChangePresentation(hint);
+                                    return _presenter.ChangePresentation(hint);
                                 };
             await ExecuteOnMainThreadAsync(action);
             return true;

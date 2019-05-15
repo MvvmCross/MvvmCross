@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -18,36 +18,27 @@ namespace MvvmCross.Platforms.Mac.Presenters.Attributes
         public static NSWindowTitleVisibility DefaultTitleVisibility = NSWindowTitleVisibility.Visible;
         public static bool DefaultShouldCascadeWindows = true;
 
-        public static float InitialPositionX { get; } = float.MinValue;
-        public static float InitialPositionY { get; } = float.MinValue;
-        public static float InitialWidth { get; } = float.MinValue;
-        public static float InitialHeight { get; } = float.MinValue;
-        public static NSWindowStyle? InitialWindowStyle { get; } = null;
-        public static NSBackingStore? InitialBufferingType { get; } = null;
-        public static NSWindowTitleVisibility? InitialTitleVisibilty { get; } = null;
-        public static bool? InitialShouldCascadeWindows { get; } = null;
-
         public MvxWindowPresentationAttribute(string windowControllerName = null, string storyboardName = null)
         {
             WindowControllerName = windowControllerName;
             StoryboardName = storyboardName;
         }
 
-        public float PositionX { get; set; } = InitialPositionX;
+        public float PositionX { get; set; } = DefaultPositionX;
 
-        public float PositionY { get; set; } = InitialPositionY;
+        public float PositionY { get; set; } = DefaultPositionY;
 
-        public float Width { get; set; } = InitialWidth;
+        public float Width { get; set; } = DefaultWidth;
 
-        public float Height { get; set; } = InitialHeight;
+        public float Height { get; set; } = DefaultHeight;
 
-        public NSWindowStyle? WindowStyle { get; set; } = InitialWindowStyle;
+        public NSWindowStyle WindowStyle { get; set; } = DefaultWindowStyle;
 
-        public NSBackingStore? BufferingType { get; set; } = InitialBufferingType;
+        public NSBackingStore BufferingType { get; set; } = DefaultBufferingType;
 
-        public NSWindowTitleVisibility? TitleVisibility { get; set; } = InitialTitleVisibilty;
+        public NSWindowTitleVisibility TitleVisibility { get; set; } = DefaultTitleVisibility;
 
-        public bool? ShouldCascadeWindows { get; set; } = InitialShouldCascadeWindows;
+        public bool ShouldCascadeWindows { get; set; } = DefaultShouldCascadeWindows;
 
         public string Identifier { get; set; }
 

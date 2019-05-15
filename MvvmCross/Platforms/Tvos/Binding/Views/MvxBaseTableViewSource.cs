@@ -31,6 +31,8 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
 
         public bool DeselectAutomatically { get; set; }
 
+        public bool DeselectChangedEnabled { get; set; }
+
         public ICommand SelectionChangedCommand { get; set; }
 
         public ICommand AccessoryTappedCommand { get; set; }
@@ -76,6 +78,22 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
                 command.Execute(item);
 
             SelectedItem = item;
+        }
+
+        public override void RowDeselected(UITableView tableView, NSIndexPath indexPath)
+        {
+            if (DeselectChangedEnabled && !DeselectAutomatically)
+            {
+                var item = GetItemAt(indexPath);
+
+                var command = SelectionChangedCommand;
+                if (command != null && command.CanExecute(item))
+                    command.Execute(item);
+
+                SelectedItem = null;
+            }
+
+            base.RowDeselected(tableView, indexPath);
         }
 
         private object _selectedItem;

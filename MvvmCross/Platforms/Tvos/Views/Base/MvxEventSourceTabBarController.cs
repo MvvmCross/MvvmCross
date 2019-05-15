@@ -1,8 +1,9 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Foundation;
 using MvvmCross.Base;
 using UIKit;
 
@@ -11,12 +12,23 @@ namespace MvvmCross.Platforms.Tvos.Views.Base
     public class MvxEventSourceTabBarController
         : UITabBarController, IMvxEventSourceViewController
     {
-        protected MvxEventSourceTabBarController()
+        public MvxEventSourceTabBarController()
         {
         }
 
-        protected MvxEventSourceTabBarController(IntPtr handle)
-            : base(handle)
+        public MvxEventSourceTabBarController(NSCoder coder) : base(coder)
+        {
+        }
+
+        protected MvxEventSourceTabBarController(NSObjectFlag t) : base(t)
+        {
+        }
+
+        protected internal MvxEventSourceTabBarController(IntPtr handle) : base(handle)
+        {
+        }
+
+        public MvxEventSourceTabBarController(string nibName, NSBundle bundle) : base(nibName, bundle)
         {
         }
 

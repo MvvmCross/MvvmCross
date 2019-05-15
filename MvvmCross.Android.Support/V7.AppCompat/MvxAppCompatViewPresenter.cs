@@ -172,7 +172,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return base.ChangePresentation(hint);
         }
 
-        private ViewPager FindViewPagerInFragmentPresentation(MvxViewPagerFragmentPresentationAttribute pagerFragmentAttribute)
+        protected virtual ViewPager FindViewPagerInFragmentPresentation(MvxViewPagerFragmentPresentationAttribute pagerFragmentAttribute)
         {
             ViewPager viewPager = null;
 
@@ -509,13 +509,21 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         protected override Task<bool> CloseFragmentDialog(IMvxViewModel viewModel,
             MvxDialogFragmentPresentationAttribute attribute)
         {
-            var fragmentName = attribute.ViewType.FragmentJavaName();
-            var tag = attribute.Tag ?? fragmentName;
-            var toClose = CurrentFragmentManager.FindFragmentByTag(tag);
-            if (toClose != null && toClose is DialogFragment dialog)
+            try
             {
-                dialog.DismissAllowingStateLoss();
-                return Task.FromResult(true);
+                var fragmentName = attribute.ViewType.FragmentJavaName();
+                var tag = attribute.Tag ?? fragmentName;
+                var toClose = CurrentFragmentManager.FindFragmentByTag(tag);
+                if (toClose != null && toClose is DialogFragment dialog)
+                {
+                    dialog.DismissAllowingStateLoss();
+                    return Task.FromResult(true);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                MvxAndroidLog.Instance.Error("Cannot close fragment dialog", ex);
+                return Task.FromResult(false);
             }
             return Task.FromResult(false);
         }
@@ -557,7 +565,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return Task.FromResult(false);
         }
 
-        private static MvxViewPagerFragmentInfo FindFragmentInfoFromAttribute(
+        protected virtual MvxViewPagerFragmentInfo FindFragmentInfoFromAttribute(
             MvxFragmentPresentationAttribute attribute, MvxCachingFragmentStatePagerAdapter adapter)
         {
             MvxViewPagerFragmentInfo fragmentInfo = null;
@@ -623,34 +631,42 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             FragmentManager fragmentManager,
             MvxFragmentPresentationAttribute fragmentAttribute)
         {
-            var fragmentName = fragmentAttribute.ViewType.FragmentJavaName();
-            var tag = fragmentAttribute.Tag ?? fragmentName;
-
-            if (fragmentManager.BackStackEntryCount > 0)
+            try
             {
-                var popBackStackFragmentName = fragmentAttribute.PopBackStackImmediateName?.Trim() == ""
-                    ? fragmentName
-                    : fragmentAttribute.PopBackStackImmediateName;
+                var fragmentName = fragmentAttribute.ViewType.FragmentJavaName();
+                var tag = fragmentAttribute.Tag ?? fragmentName;
 
-                fragmentManager.PopBackStackImmediate(popBackStackFragmentName, (int)fragmentAttribute.PopBackStackImmediateFlag);
-                OnFragmentPopped(null, null, fragmentAttribute);
+                if (fragmentManager.BackStackEntryCount > 0)
+                {
+                    var popBackStackFragmentName = fragmentAttribute.PopBackStackImmediateName?.Trim() == ""
+                        ? fragmentName
+                        : fragmentAttribute.PopBackStackImmediateName;
 
-                return true;
+                    fragmentManager.PopBackStackImmediate(popBackStackFragmentName, (int)fragmentAttribute.PopBackStackImmediateFlag);
+                    OnFragmentPopped(null, null, fragmentAttribute);
+
+                    return true;
+                }
+
+                if (fragmentManager.Fragments.Count > 0 && fragmentManager.FindFragmentByTag(tag) != null)
+                {
+                    var ft = fragmentManager.BeginTransaction();
+                    var fragment = fragmentManager.FindFragmentByTag(tag);
+
+                    SetAnimationsOnTransaction(ft, fragmentAttribute);
+
+                    ft.Remove(fragment);
+                    ft.CommitAllowingStateLoss();
+
+                    OnFragmentPopped(ft, fragment, fragmentAttribute);
+
+                    return true;
+                }
             }
-
-            if (fragmentManager.Fragments.Count > 0 && fragmentManager.FindFragmentByTag(tag) != null)
+            catch (System.Exception ex)
             {
-                var ft = fragmentManager.BeginTransaction();
-                var fragment = fragmentManager.FindFragmentByTag(tag);
-
-                SetAnimationsOnTransaction(ft, fragmentAttribute);
-
-                ft.Remove(fragment);
-                ft.CommitAllowingStateLoss();
-
-                OnFragmentPopped(ft, fragment, fragmentAttribute);
-
-                return true;
+                MvxAndroidLog.Instance.Error("Cannot close fragment transaction", ex);
+                return false;
             }
 
             return false;
@@ -736,7 +752,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 if (frag != null)
                 {
                     return frag;
-                }                
+                }
             }
 
             return null;

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -6,10 +6,9 @@ using System;
 
 using Foundation;
 using MvvmCross.Base;
-using MvvmCross.Platforms.Tvos.Views.Base;
 using UIKit;
 
-namespace MvvmCross.Platforms.Tvos.Views
+namespace MvvmCross.Platforms.Tvos.Views.Base
 {
     public class MvxEventSourceSplitViewController : UISplitViewController, IMvxEventSourceViewController
     {
@@ -17,15 +16,22 @@ namespace MvvmCross.Platforms.Tvos.Views
         {
         }
 
-        protected MvxEventSourceSplitViewController(IntPtr handle)
-           : base(handle)
+        public MvxEventSourceSplitViewController(NSCoder coder) : base(coder)
         {
         }
 
-        protected MvxEventSourceSplitViewController(string nibName, NSBundle bundle)
-            : base(nibName, bundle)
+        protected MvxEventSourceSplitViewController(NSObjectFlag t) : base(t)
         {
         }
+
+        protected internal MvxEventSourceSplitViewController(IntPtr handle) : base(handle)
+        {
+        }
+
+        public MvxEventSourceSplitViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+        }
+
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);

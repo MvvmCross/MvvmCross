@@ -7,14 +7,14 @@ using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Binding.Views.Gestures
 {
-    public abstract class MvxGestureRecognizerBehavior
+    public abstract class MvxGestureRecognizerBehavior : UIGestureRecognizerDelegate
     {
         public ICommand Command { get; set; }
 
         protected void FireCommand(object argument = null)
         {
             var command = Command;
-            command?.Execute(null);
+            command?.Execute(argument);
         }
 
         protected void AddGestureRecognizer(UIView target, UIGestureRecognizer tap)
@@ -22,7 +22,15 @@ namespace MvvmCross.Platforms.Ios.Binding.Views.Gestures
             if (!target.UserInteractionEnabled)
                 target.UserInteractionEnabled = true;
 
+            if (target is UITextField && tap is UITapGestureRecognizer)
+                tap.WeakDelegate = this;
+
             target.AddGestureRecognizer(tap);
+        }
+
+        public override bool ShouldBeRequiredToFailBy(UIGestureRecognizer gestureRecognizer, UIGestureRecognizer otherGestureRecognizer)
+        {
+            return true;
         }
     }
 

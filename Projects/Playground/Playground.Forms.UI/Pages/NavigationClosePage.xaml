@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage x:TypeArguments="viewModels:NavigationCloseViewModel"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+             xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
+             xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Playground.Forms.UI.Pages.NavigationClosePage">
+    <ContentPage.Content>
+        <StackLayout Margin="10">
+            <Label Text="Navigation close test" />
+            <Button Text="Try to close new viewmodel" mvx:Bi.nd="Command TryToCloseNewViewModelCommand"/>
+            <Button Text="Open child then close this" mvx:Bi.nd="Command OpenChildThenCloseThisCommand"/>
+        </StackLayout>
+    </ContentPage.Content>
+</views:MvxContentPage>

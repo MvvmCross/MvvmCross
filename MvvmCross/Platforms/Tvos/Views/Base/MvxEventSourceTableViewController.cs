@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -12,18 +12,23 @@ namespace MvvmCross.Platforms.Tvos.Views.Base
     public class MvxEventSourceTableViewController
         : UITableViewController, IMvxEventSourceViewController
     {
-        protected MvxEventSourceTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
-            : base(style)
+        public MvxEventSourceTableViewController(NSCoder coder) : base(coder)
         {
         }
 
-        protected MvxEventSourceTableViewController(IntPtr handle)
-            : base(handle)
+        protected MvxEventSourceTableViewController(NSObjectFlag t) : base(t)
         {
         }
 
-        protected MvxEventSourceTableViewController(string nibName, NSBundle bundle)
-            : base(nibName, bundle)
+        protected internal MvxEventSourceTableViewController(IntPtr handle) : base(handle)
+        {
+        }
+
+        public MvxEventSourceTableViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+        }
+
+        public MvxEventSourceTableViewController(UITableViewStyle withStyle = UITableViewStyle.Plain) : base(withStyle)
         {
         }
 

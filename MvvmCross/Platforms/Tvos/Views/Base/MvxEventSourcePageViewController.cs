@@ -1,8 +1,9 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
+using Foundation;
 using MvvmCross.Base;
 using UIKit;
 
@@ -10,11 +11,39 @@ namespace MvvmCross.Platforms.Tvos.Views.Base
 {
     public class MvxEventSourcePageViewController : UIPageViewController, IMvxEventSourceViewController
     {
-        public MvxEventSourcePageViewController(UIPageViewControllerTransitionStyle style, UIPageViewControllerNavigationOrientation orientation, UIPageViewControllerSpineLocation spine) : base(style, orientation, spine)
+        public MvxEventSourcePageViewController(UIPageViewControllerTransitionStyle style, UIPageViewControllerNavigationOrientation navigationOrientation, UIPageViewControllerSpineLocation spineLocation) : base(style, navigationOrientation, spineLocation)
         {
         }
 
-        public MvxEventSourcePageViewController(IntPtr handle) : base(handle)
+        public MvxEventSourcePageViewController(UIPageViewControllerTransitionStyle style, UIPageViewControllerNavigationOrientation navigationOrientation, UIPageViewControllerSpineLocation spineLocation, float interPageSpacing) : base(style, navigationOrientation, spineLocation, interPageSpacing)
+        {
+        }
+
+        public MvxEventSourcePageViewController(UIPageViewControllerTransitionStyle style, UIPageViewControllerNavigationOrientation navigationOrientation) : base(style, navigationOrientation)
+        {
+        }
+
+        public MvxEventSourcePageViewController()
+        {
+        }
+
+        public MvxEventSourcePageViewController(NSCoder coder) : base(coder)
+        {
+        }
+
+        protected MvxEventSourcePageViewController(NSObjectFlag t) : base(t)
+        {
+        }
+
+        protected internal MvxEventSourcePageViewController(IntPtr handle) : base(handle)
+        {
+        }
+
+        public MvxEventSourcePageViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+        }
+
+        public MvxEventSourcePageViewController(UIPageViewControllerTransitionStyle style, UIPageViewControllerNavigationOrientation navigationOrientation, NSDictionary options) : base(style, navigationOrientation, options)
         {
         }
 

@@ -47,7 +47,7 @@ One of the main advantages of using MvvmCross with Xamarin is the flexibility it
 
 Add a reference to your `TipCalc.Core` project - the project we created in the first step.
 
-## Add a FormsApp.xaml class
+## Add a FormsApp.xaml class
 
 Add a 'Forms ContentPage Xaml' file to the root of your `TipCalc.Forms.UI` project named `FormsApp`. This will add two files:
 
@@ -274,7 +274,7 @@ Now do the same with an axml file called `Toolbar.axml`:
     android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 ```
 
-### Add a default style for your Android app:
+### Add a default style for your Android app:
 
 If it doesn't exist, add a folder named `values` inside the `Resources` folder.
 

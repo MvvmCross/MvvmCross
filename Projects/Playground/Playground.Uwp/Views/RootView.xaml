@@ -20,5 +20,17 @@
                 Command="{Binding ShowModalCommand}"
                 Margin="5"
                 Padding="5" />
+
+        <Button Content="Register and Resolve With Reflection"
+                Command="{Binding RegisterAndResolveWithReflectionCommand}"
+                Margin="5"
+                Padding="5" />
+        <Button Content="Register and Resolve With No Reflection"
+                Command="{Binding RegisterAndResolveWithNoReflectionCommand}"
+                Margin="5"
+                Padding="5" />
+        <TextBlock Text="{Binding TimeToRegister}" />
+        <TextBlock Text="{Binding TimeToResolve}" />
+        <TextBlock Text="{Binding TotalTime}" />
     </StackPanel>
 </app:RootViewPage>
