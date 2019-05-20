@@ -57,7 +57,7 @@ namespace MvvmCross.Platforms.Ios.Views
             GetPreviousViewController = (pc, rc) => GetPreviousViewControllerPage(rc);
         }
 
-        public IList<UIViewController> Pages { get; } = new List<UIViewController>();
+        public IList<UIViewController> Pages { get; protected set;  } = new List<UIViewController>();
 
         public virtual bool IsFirstPage(UIViewController viewController) => Pages.IndexOf(viewController) == 0;
 
