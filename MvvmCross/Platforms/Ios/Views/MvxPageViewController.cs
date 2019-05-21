@@ -57,17 +57,17 @@ namespace MvvmCross.Platforms.Ios.Views
             GetPreviousViewController = (pc, rc) => GetPreviousViewControllerPage(rc);
         }
 
-        private List<UIViewController> Pages = new List<UIViewController>();
+        public IList<UIViewController> Pages { get; protected set;  } = new List<UIViewController>();
 
-        public bool IsFirstPage(UIViewController viewController) => Pages.IndexOf(viewController) == 0;
+        public virtual bool IsFirstPage(UIViewController viewController) => Pages.IndexOf(viewController) == 0;
 
-        public bool IsLastPage(UIViewController viewController) => Pages.IndexOf(viewController) == Pages.Count - 1;
+        public virtual bool IsLastPage(UIViewController viewController) => Pages.IndexOf(viewController) == Pages.Count - 1;
 
-        protected UIViewController GetNextViewControllerPage(UIViewController rc) => IsLastPage(rc) ? null : Pages[Pages.IndexOf(rc) + 1];
+        protected virtual UIViewController GetNextViewControllerPage(UIViewController rc) => IsLastPage(rc) ? null : Pages[Pages.IndexOf(rc) + 1];
 
-        protected UIViewController GetPreviousViewControllerPage(UIViewController rc) => IsFirstPage(rc) ? null : Pages[Pages.IndexOf(rc) - 1];
+        protected virtual UIViewController GetPreviousViewControllerPage(UIViewController rc) => IsFirstPage(rc) ? null : Pages[Pages.IndexOf(rc) - 1];
 
-        public void AddPage(UIViewController viewController, MvxPagePresentationAttribute attribute)
+        public virtual void AddPage(UIViewController viewController, MvxPagePresentationAttribute attribute)
         {
             // add Page
             Pages.Add(viewController);
@@ -79,7 +79,7 @@ namespace MvvmCross.Platforms.Ios.Views
             }
         }
 
-        public bool RemovePage(IMvxViewModel viewModel)
+        public virtual bool RemovePage(IMvxViewModel viewModel)
         {
             if (Pages == null || !Pages.Any())
                 return false;
