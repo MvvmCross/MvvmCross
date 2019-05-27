@@ -33,6 +33,8 @@ namespace MvvmCross.Platforms.Tvos.Presenters
 
         public IMvxTabBarViewController TabBarViewController { get; protected set; }
 
+        public IMvxPageViewController PageViewController { get; protected set; }
+
         public MvxSplitViewController SplitViewController { get; protected set; }
 
         public MvxTvosViewPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
@@ -95,74 +97,53 @@ namespace MvvmCross.Platforms.Tvos.Presenters
 
         public override void RegisterAttributeTypes()
         {
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxRootPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxRootPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        return ShowRootViewController(viewController,
-                                               (MvxRootPresentationAttribute)attribute,
-                                               request);
+                        return ShowRootViewController(viewController, attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseRootViewController(viewModel,
-                                                                                    (MvxRootPresentationAttribute)attribute)
-                });
+                    CloseRootViewController);
 
-            AttributeTypesToActionsDictionary.Add(
-              typeof(MvxChildPresentationAttribute),
-              new MvxPresentationAttributeAction
-              {
-                  ShowAction = (viewType, attribute, request) =>
-                  {
-                      var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                      return ShowChildViewController(viewController,
-                                              (MvxChildPresentationAttribute)attribute,
-                                              request);
-                  },
-                  CloseAction = (viewModel, attribute) => CloseChildViewController(viewModel,
-                                                                                   (MvxChildPresentationAttribute)attribute)
-              });
+            AttributeTypesToActionsDictionary.Register<MvxChildPresentationAttribute>(
+                    (viewType, attribute, request) =>
+                      {
+                          var viewController = (UIViewController)this.CreateViewControllerFor(request);
+                          return ShowChildViewController(viewController, attribute, request);
+                      },
+                    CloseChildViewController);
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxTabPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxTabPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        return ShowTabViewController(viewController,
-                                              (MvxTabPresentationAttribute)attribute,
-                                              request);
+                        return ShowTabViewController(viewController, attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => CloseTabViewController(viewModel,
-                                                                                   (MvxTabPresentationAttribute)attribute)
-                });
+                    CloseTabViewController);
 
-            AttributeTypesToActionsDictionary.Add(
-              typeof(MvxModalPresentationAttribute),
-              new MvxPresentationAttributeAction
-              {
-                  ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxPagePresentationAttribute>(
+                 (viewType, attribute, request) =>
+                     {
+                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
+                         return ShowPageViewController(viewController, attribute, request);
+                     },
+                     ClosePageViewController);
+
+            AttributeTypesToActionsDictionary.Register<MvxModalPresentationAttribute>(
+                    (viewType, attribute, request) =>
                   {
                       var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                      return ShowModalViewController(viewController, (MvxModalPresentationAttribute)attribute, request);
+                      return ShowModalViewController(viewController, attribute, request);
                   },
-                  CloseAction = (viewModel, attribute) => CloseModalViewController(viewModel, (MvxModalPresentationAttribute)attribute)
-              });
+                  CloseModalViewController);
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxMasterDetailPresentationAttribute),
-              new MvxPresentationAttributeAction
-              {
-                  ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxMasterDetailPresentationAttribute>(
+                    (viewType, attribute, request) =>
                   {
                       var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                      return ShowMasterDetailSplitViewController(viewController, (MvxMasterDetailPresentationAttribute)attribute, request);
+                      return ShowMasterDetailSplitViewController(viewController, attribute, request);
                   },
-                  CloseAction = (viewModel, attribute) => CloseMasterSplitViewController(viewModel, (MvxMasterDetailPresentationAttribute)attribute)
-              });
+                  CloseMasterSplitViewController);
         }
 
         protected virtual Task<bool> CloseRootViewController(IMvxViewModel viewModel,
@@ -212,6 +193,14 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                                     MvxTabPresentationAttribute attribute)
         {
             if (TabBarViewController != null && TabBarViewController.CloseTabViewModel(viewModel))
+                return Task.FromResult(true);
+
+            return Task.FromResult(false);
+        }
+
+        protected virtual Task<bool> ClosePageViewController(IMvxViewModel viewModel, MvxPagePresentationAttribute attribute)
+        {
+            if (PageViewController != null && PageViewController.RemovePage(viewModel))
                 return Task.FromResult(true);
 
             return Task.FromResult(false);
@@ -340,18 +329,6 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             return Task.FromResult(true);
         }
 
-        public override Task<bool> Close(IMvxViewModel viewModel)
-        {
-            return GetPresentationAttributeAction(new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute)
-                .CloseAction.Invoke(viewModel, attribute);
-        }
-
-        public override Task<bool> Show(MvxViewModelRequest request)
-        {
-            return GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute)
-                .ShowAction.Invoke(attribute.ViewType, attribute, request);
-        }
-
         protected virtual async Task<bool> ShowRootViewController(UIViewController viewController,
                                            MvxRootPresentationAttribute attribute,
                                            MvxViewModelRequest request)
@@ -363,6 +340,17 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                 //controller will be null. 
                 await SetupWindowRootNavigation(viewController, attribute);
                 this.TabBarViewController = (IMvxTabBarViewController)viewController;
+
+                return await CloseModalViewControllers();
+            }
+
+            if (viewController is IMvxPageViewController)
+            {
+                //NOTE clean up must be done first incase we are enbedding into a navigation controller
+                //before setting the page view controller, otherwise this will reset the view stack and your page
+                //controller will be null. 
+                await SetupWindowRootNavigation(viewController, attribute);
+                this.PageViewController = (IMvxPageViewController)viewController;
 
                 return await CloseModalViewControllers();
             }
@@ -454,6 +442,30 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                 viewController = CreateNavigationController(viewController);
 
             TabBarViewController.ShowTabView(
+                viewController,
+                attribute);
+            return Task.FromResult(true);
+        }
+
+        protected virtual Task<bool> ShowPageViewController(
+            UIViewController viewController,
+            MvxPagePresentationAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            if (PageViewController == null)
+                throw new MvxException("Trying to show a page without a PageViewController, this is not possible!");
+
+            /*if (viewController is IMvxTabBarItemViewController tabBarItem)
+            {
+                attribute.TabName = tabBarItem.TabName;
+                attribute.TabIconName = tabBarItem.TabIconName;
+                attribute.TabSelectedIconName = tabBarItem.TabSelectedIconName;
+            }*/
+
+            if (attribute.WrapInNavigationController)
+                viewController = CreateNavigationController(viewController);
+
+            PageViewController.AddPage(
                 viewController,
                 attribute);
             return Task.FromResult(true);

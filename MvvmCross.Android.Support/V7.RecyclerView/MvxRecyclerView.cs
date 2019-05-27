@@ -18,11 +18,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView")]
     public class MvxRecyclerView : Android.Support.V7.Widget.RecyclerView
     {
-        public MvxRecyclerView(IntPtr javaReference, JniHandleOwnership transfer)
-            : base(javaReference, transfer)
-        {
-        }
-
         public MvxRecyclerView(Context context, IAttributeSet attrs) :
             this(context, attrs, 0, new MvxRecyclerAdapter())
         {
@@ -30,6 +25,12 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public MvxRecyclerView(Context context, IAttributeSet attrs, int defStyle) 
             : this(context, attrs, defStyle, new MvxRecyclerAdapter())
+        {
+        }
+
+        [Android.Runtime.Preserve(Conditional = true)]
+        protected MvxRecyclerView(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
         {
         }
 
@@ -42,10 +43,6 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 return;
 
             var currentLayoutManager = GetLayoutManager();
-
-            // Love you Android
-            // https://code.google.com/p/android/issues/detail?id=77846#c10
-            // Don't believe those bastards, it's not fixed - workaround hack hack hack
             if (currentLayoutManager == null)
                 SetLayoutManager(new MvxGuardedLinearLayoutManager(context));
 
@@ -62,32 +59,29 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 ItemTemplateId = itemTemplateId;
         }
 
-        public sealed override void SetLayoutManager(LayoutManager layout)
-        {
-            base.SetLayoutManager(layout);
-        }
-
         protected override void OnDetachedFromWindow()
         {
             base.OnDetachedFromWindow();
+            DetachedFromWindow();
+        }
 
+        protected virtual void DetachedFromWindow()
+        {
             // Remove all the views that are currently in play.
             // This clears out all of the ViewHolder DataContexts by detaching the ViewHolder.
             // Eventually the GC will come along and clear out the binding contexts.
             // Issue #1405
+             //Note: this has a side effect of breaking fragment transitions, as the recyclerview is cleared before the transition starts, which empties the view and displays a "black" screen while transitioning.
             GetLayoutManager()?.RemoveAllViews();
         }
 
+        [MvxSetToNullAfterBinding]
         public new IMvxRecyclerAdapter Adapter
         {
-            get
-            {
-                return GetAdapter() as IMvxRecyclerAdapter;
-            }
+            get => GetAdapter() as IMvxRecyclerAdapter;
             set
             {
                 var existing = Adapter;
-
                 if (existing == value)
                     return;
 
@@ -108,39 +102,38 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
                 }
 
                 if (existing != null)
-                {
                     existing.ItemsSource = null;
-                }
             }
         }
 
         [MvxSetToNullAfterBinding]
         public IEnumerable ItemsSource
         {
-            get { return Adapter.ItemsSource; }
-            set { Adapter.ItemsSource = value; }
+            get => Adapter.ItemsSource;
+            set
+            {
+                var adapter = Adapter;
+                if (adapter != null)
+                    adapter.ItemsSource = value;
+            }
         }
 
         public int ItemTemplateId
         {
             get
             {
-                var singleItemDefaultTemplateSelector = ItemTemplateSelector as MvxDefaultTemplateSelector;
-
-                if (singleItemDefaultTemplateSelector == null)
+                if (!(ItemTemplateSelector is MvxDefaultTemplateSelector singleItemDefaultTemplateSelector))
                     throw new InvalidOperationException(
-                        $"If you wan't to use single item-template RecyclerView Adapter you can't change it's" +
+                        $"If you don't want to use single item-template RecyclerView Adapter you can't change it's" +
                         $"{nameof(IMvxTemplateSelector)} to anything other than {nameof(MvxDefaultTemplateSelector)}");
 
                 return singleItemDefaultTemplateSelector.ItemTemplateId;
             }
             set
             {
-                var singleItemDefaultTemplateSelector = ItemTemplateSelector as MvxDefaultTemplateSelector;
-
-                if (singleItemDefaultTemplateSelector == null)
+                if (!(ItemTemplateSelector is MvxDefaultTemplateSelector singleItemDefaultTemplateSelector))
                     throw new InvalidOperationException(
-                        $"If you wan't to use single item-template RecyclerView Adapter you can't change it's" +
+                        $"If you don't want to use single item-template RecyclerView Adapter you can't change it's" +
                         $"{nameof(IMvxTemplateSelector)} to anything other than {nameof(MvxDefaultTemplateSelector)}");
 
                 singleItemDefaultTemplateSelector.ItemTemplateId = value;
@@ -150,20 +143,22 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
 
         public IMvxTemplateSelector ItemTemplateSelector
         {
-            get { return Adapter.ItemTemplateSelector; }
-            set { Adapter.ItemTemplateSelector = value; }
+            get => Adapter.ItemTemplateSelector;
+            set => Adapter.ItemTemplateSelector = value;
         }
 
+        [MvxSetToNullAfterBinding]
         public ICommand ItemClick
         {
-            get { return Adapter.ItemClick; }
-            set { Adapter.ItemClick = value; }
+            get => Adapter.ItemClick;
+            set => Adapter.ItemClick = value;
         }
 
+        [MvxSetToNullAfterBinding]
         public ICommand ItemLongClick
         {
-            get { return Adapter.ItemLongClick; }
-            set { Adapter.ItemLongClick = value; }
+            get => Adapter.ItemLongClick;
+            set => Adapter.ItemLongClick = value;
         }
     }
 }

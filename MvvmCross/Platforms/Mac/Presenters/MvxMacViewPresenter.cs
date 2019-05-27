@@ -69,70 +69,45 @@ namespace MvvmCross.Platforms.Mac.Presenters
 
         public override void RegisterAttributeTypes()
         {
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxWindowPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxWindowPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
                         return ShowWindowViewController(viewController, (MvxWindowPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => Close(viewModel)
-                });
+                    (viewModel, attribute) => Close(viewModel));
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxContentPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxContentPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
                         return ShowContentViewController(viewController, (MvxContentPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => Close(viewModel)
-                });
+                    (viewModel, attribute) => Close(viewModel));
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxModalPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxModalPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
                         return ShowModalViewController(viewController, (MvxModalPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => Close(viewModel)
-                });
+                    (viewModel, attribute) => Close(viewModel));
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxSheetPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxSheetPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
                         return ShowSheetViewController(viewController, (MvxSheetPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => Close(viewModel)
-                });
+                    (viewModel, attribute) => Close(viewModel));
 
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxTabPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (viewType, attribute, request) =>
+            AttributeTypesToActionsDictionary.Register<MvxTabPresentationAttribute>(
+                    (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
                         return ShowTabViewController(viewController, (MvxTabPresentationAttribute)attribute, request);
                     },
-                    CloseAction = (viewModel, attribute) => Close(viewModel)
-                });
-        }
-
-        public override Task<bool> Show(MvxViewModelRequest request)
-        {
-            return GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
+                    (viewModel, attribute) => Close(viewModel));
         }
 
         protected virtual Task<bool> ShowWindowViewController(
@@ -156,7 +131,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
                 if (windowController == null)
                 {
                     windowController = CreateWindowController(window);
-                    windowController.ShouldCascadeWindows = attribute.ShouldCascadeWindows ?? MvxWindowPresentationAttribute.DefaultShouldCascadeWindows;
+                    windowController.ShouldCascadeWindows = attribute.ShouldCascadeWindows;
                 }
                 windowController.Window = window;
             }
@@ -178,35 +153,35 @@ namespace MvvmCross.Platforms.Mac.Presenters
 
         protected virtual void UpdateWindow(MvxWindowPresentationAttribute attribute, NSWindow window)
         {
-            var positionX = attribute.PositionX != MvxWindowPresentationAttribute.InitialPositionX ? attribute.PositionX : (float)window.Frame.X;
-            var positionY = attribute.PositionY != MvxWindowPresentationAttribute.InitialPositionY ? attribute.PositionY : (float)window.Frame.Y;
-            var width = attribute.Width != MvxWindowPresentationAttribute.InitialWidth ? attribute.Width : (float)window.Frame.Width;
-            var height = attribute.Height != MvxWindowPresentationAttribute.InitialHeight ? attribute.Height : (float)window.Frame.Height;
+            var positionX = (float)window.Frame.X;
+            var positionY = (float)window.Frame.Y;
+            var width = (float)window.Frame.Width;
+            var height = (float)window.Frame.Height;
 
             var newFrame = new CGRect(positionX, positionY, width, height);
             window.SetFrame(newFrame, false);
 
-            window.StyleMask = attribute.WindowStyle ?? window.StyleMask;
-            window.BackingType = attribute.BufferingType ?? window.BackingType;
-            window.TitleVisibility = attribute.TitleVisibility ?? window.TitleVisibility;
+            window.StyleMask = attribute.WindowStyle;
+            window.BackingType = attribute.BufferingType;
+            window.TitleVisibility = attribute.TitleVisibility;
         }
 
         protected virtual NSWindow CreateWindow(MvxWindowPresentationAttribute attribute)
         {
             NSWindow window;
-            var positionX = attribute.PositionX != MvxWindowPresentationAttribute.InitialPositionX ? attribute.PositionX : MvxWindowPresentationAttribute.DefaultPositionX;
-            var positionY = attribute.PositionY != MvxWindowPresentationAttribute.InitialPositionY ? attribute.PositionY : MvxWindowPresentationAttribute.DefaultPositionY;
-            var width = attribute.Width != MvxWindowPresentationAttribute.InitialWidth ? attribute.Width : MvxWindowPresentationAttribute.DefaultWidth;
-            var height = attribute.Height != MvxWindowPresentationAttribute.InitialHeight ? attribute.Height : MvxWindowPresentationAttribute.DefaultHeight;
+            var positionX = attribute.PositionX;
+            var positionY = attribute.PositionY;
+            var width = attribute.Width;
+            var height = attribute.Height;
 
             window = new NSWindow(
                 new CGRect(positionX, positionY, width, height),
-                attribute.WindowStyle ?? MvxWindowPresentationAttribute.DefaultWindowStyle,
-                attribute.BufferingType ?? MvxWindowPresentationAttribute.DefaultBufferingType,
+                attribute.WindowStyle,
+                attribute.BufferingType,
                 false,
                 NSScreen.MainScreen)
             {
-                TitleVisibility = attribute.TitleVisibility ?? MvxWindowPresentationAttribute.DefaultTitleVisibility,
+                TitleVisibility = attribute.TitleVisibility,
             };
             return window;
         }
@@ -225,7 +200,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
                 // Instantiate using Reflection - failure is possible if blank constructor is missing
                 windowController = (MvxWindowController)Activator.CreateInstance(Type.GetType(attribute.WindowControllerName));
             }
-            windowController.ShouldCascadeWindows = attribute.ShouldCascadeWindows ?? windowController.ShouldCascadeWindows;
+            windowController.ShouldCascadeWindows = attribute.ShouldCascadeWindows;
             return windowController;
         }
 

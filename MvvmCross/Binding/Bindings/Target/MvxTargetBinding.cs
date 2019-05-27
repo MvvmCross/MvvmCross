@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -50,9 +50,7 @@ namespace MvvmCross.Binding.Bindings.Target
         { 
             get 
             {
-                TTarget target = null;
-                _target.TryGetTarget(out target);
-
+                _target.TryGetTarget(out var target);
                 return target;
             } 
         }
@@ -77,7 +75,9 @@ namespace MvvmCross.Binding.Bindings.Target
 
         public void SetValue(object value)
         {
-            SetValue((TValue)value);
+            if (value != null && !(value is TValue))
+                MvxBindingLog.Error($"Invalid value type for target binding {GetType().Name}: received {value.GetType().Name} but expects {typeof(TValue).Name}. And cast failed.");
+            SetValue(value == null ? default(TValue) : (TValue)value);
         }
     }
 }

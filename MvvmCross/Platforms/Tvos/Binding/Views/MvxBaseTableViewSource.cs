@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -30,6 +30,8 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         protected UITableView TableView => _tableView;
 
         public bool DeselectAutomatically { get; set; }
+
+        public bool DeselectChangedEnabled { get; set; }
 
         public ICommand SelectionChangedCommand { get; set; }
 
@@ -78,6 +80,22 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             SelectedItem = item;
         }
 
+        public override void RowDeselected(UITableView tableView, NSIndexPath indexPath)
+        {
+            if (DeselectChangedEnabled && !DeselectAutomatically)
+            {
+                var item = GetItemAt(indexPath);
+
+                var command = SelectionChangedCommand;
+                if (command != null && command.CanExecute(item))
+                    command.Execute(item);
+
+                SelectedItem = null;
+            }
+
+            base.RowDeselected(tableView, indexPath);
+        }
+
         private object _selectedItem;
 
         public object SelectedItem
@@ -108,7 +126,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
             if (bindable != null)
             {
                 var bindingContext = bindable.BindingContext as MvxTaskBasedBindingContext;
-                if (bindingContext != null && _tableView.RowHeight == UITableView.AutomaticDimension)
+                if (bindingContext != null && tableView.RowHeight == UITableView.AutomaticDimension)
                     bindingContext.RunSynchronously = true;
                 bindable.DataContext = item;
             }

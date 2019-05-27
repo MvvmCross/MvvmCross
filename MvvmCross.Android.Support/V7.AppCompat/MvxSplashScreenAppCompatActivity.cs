@@ -35,6 +35,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             _resourceId = resourceId;
         }
 
+        protected MvxSplashScreenAppCompatActivity(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
+        }
+
         protected virtual void RequestWindowFeatures()
         {
             RequestWindowFeature(WindowFeatures.NoTitle);
@@ -88,9 +93,22 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected virtual async Task RunAppStartAsync(Bundle bundle)
         {
-            var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
-            if (!startup.IsStarted)
-                await startup.StartAsync(GetAppStartHint(bundle));
+            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup))
+            {
+                if(!startup.IsStarted)
+                {
+                    await startup.StartAsync(GetAppStartHint(bundle));
+                }
+                else
+                {
+                    Finish();
+                }
+            }
+        }
+
+        protected virtual object GetAppStartHint(object hint = null)
+        {
+            return hint;
         }
 
         protected virtual void RegisterSetup()

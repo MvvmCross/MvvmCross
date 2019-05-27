@@ -5,7 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using MvvmCross.Presenters.Attributes;
+using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters
 {
@@ -40,6 +42,20 @@ namespace MvvmCross.Presenters
             return viewType.GetBasePresentationAttributes()
                 .Select(x => x.ViewModelType)
                 .FirstOrDefault();
+        }
+
+        public static void Register<TMvxPresentationAttribute>(
+            this IDictionary<Type, MvxPresentationAttributeAction> attributeTypesToActionsDictionary,
+            Func<Type, TMvxPresentationAttribute, MvxViewModelRequest, Task<bool>> showAction,
+            Func<IMvxViewModel, TMvxPresentationAttribute, Task<bool>> closeAction) where TMvxPresentationAttribute : class, IMvxPresentationAttribute
+        {
+            attributeTypesToActionsDictionary.Add(
+                typeof(TMvxPresentationAttribute),
+                new MvxPresentationAttributeAction
+                {
+                    ShowAction = (view, attribute, request) => showAction(view, attribute as TMvxPresentationAttribute, request),
+                    CloseAction = (viewModel, attribute) => closeAction(viewModel, attribute as TMvxPresentationAttribute)
+                });
         }
     }
 }

@@ -4,14 +4,36 @@
 
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using MvvmCross.Base;
+using MvvmCross.Core;
 using MvvmCross.IoC;
+using MvvmCross.Platforms.Wpf.Core;
 
 namespace MvvmCross.Platforms.Wpf
 {
-    public abstract class MvxDesignTimeHelper
+    internal static class MvxDesignTimeHelper
     {
-        protected MvxDesignTimeHelper()
+        private static bool? _isInDesignTime;
+
+        public static bool IsInDesignTime
+        {
+            get
+            {
+                if (!_isInDesignTime.HasValue)
+                {
+                    _isInDesignTime =
+                        (bool)
+                        DesignerProperties.IsInDesignModeProperty
+                            .GetMetadata(typeof(DependencyObject))
+                            .DefaultValue;
+                }
+
+                return _isInDesignTime.Value;
+            }
+        }
+
+        public static void Initialize()
         {
             if (!IsInDesignTime)
                 return;
@@ -21,25 +43,18 @@ namespace MvvmCross.Platforms.Wpf
                 var iocProvider = MvxIoCProvider.Initialize();
                 Mvx.IoCProvider.RegisterSingleton(iocProvider);
             }
+
+            MvxSetup.RegisterSetupType<MvxWpfSetup<App>>(System.Reflection.Assembly.GetExecutingAssembly());
+            var instance = MvxWpfSetupSingleton.EnsureSingletonAvailable(Application.Current.Dispatcher, new Content());
+            instance.InitializeAndMonitor(null);
         }
 
-        private static bool? _isInDesignTime;
-
-        protected static bool IsInDesignTime
+        class App : ViewModels.MvxApplication
         {
-            get
-            {
-                if (!_isInDesignTime.HasValue)
-                {
-                    _isInDesignTime =
-                        (bool)
-                        DesignerProperties.IsInDesignModeProperty
-                                          .GetMetadata(typeof(DependencyObject))
-                                          .DefaultValue;
-                }
+        }
 
-                return _isInDesignTime.Value;
-            }
+        class Content : ContentControl
+        {
         }
     }
 }

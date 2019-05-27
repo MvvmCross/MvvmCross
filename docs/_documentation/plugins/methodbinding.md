@@ -5,7 +5,7 @@ category: Plugins
 ---
 The `MethodBinding` plugin is part of the `Rio` binding extensions for MvvmCross.
 
-The MethodBinding plugin is a pure PCL plugin - it contains only a PCL assembly.
+The MethodBinding plugin is a pure .NET Standard plugin - it contains only .NET Standard assemblies.
 
 When MethodBinding is loaded, then MvvmCross data-binding:
 

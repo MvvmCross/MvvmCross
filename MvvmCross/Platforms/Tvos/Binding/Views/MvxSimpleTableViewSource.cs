@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -24,13 +24,16 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         }
 
         public MvxSimpleTableViewSource(UITableView tableView, string nibName, string cellIdentifier = null,
-                                        NSBundle bundle = null)
+                                        NSBundle bundle = null, bool registerNibForCellReuse = true)
             : base(tableView)
         {
             // if no cellIdentifier supplied, then use the nibName as cellId
             cellIdentifier = cellIdentifier ?? nibName;
             _cellIdentifier = new NSString(cellIdentifier);
-            tableView.RegisterNibForCellReuse(UINib.FromName(nibName, bundle ?? NSBundle.MainBundle), cellIdentifier);
+
+            if (registerNibForCellReuse) {
+                tableView.RegisterNibForCellReuse(UINib.FromName(nibName, bundle ?? NSBundle.MainBundle), cellIdentifier);
+            }
         }
 
         public MvxSimpleTableViewSource(UITableView tableView, Type cellType, string cellIdentifier = null)

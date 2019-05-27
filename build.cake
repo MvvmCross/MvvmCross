@@ -10,6 +10,7 @@ var solutionName = "MvvmCross";
 var repoName = "mvvmcross/mvvmcross";
 var sln = new FilePath("./" + solutionName + ".sln");
 var outputDir = new DirectoryPath("./artifacts");
+var gitVersionLog = new FilePath("./artifacts/gitversion.log");
 var nuspecDir = new DirectoryPath("./nuspec");
 var nugetPackagesDir = new DirectoryPath("./nuget/packages");
 var target = Argument("target", "Default");
@@ -21,13 +22,20 @@ var signingSecret = EnvironmentVariable("SIGNING_SECRET");
 var signingUser = EnvironmentVariable("SIGNING_USER");
 var didSignPackages = false;
 
+var githubToken = Argument("github_token", "");
+var githubTokenEnv = EnvironmentVariable("CHANGELOG_GITHUB_TOKEN");
+var sinceTag = Argument("since_tag", "");
+
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 GitVersion versionInfo = null;
 
-Setup(context => {
-    versionInfo = context.GitVersion(new GitVersionSettings {
+Setup(context => 
+{
+    versionInfo = context.GitVersion(new GitVersionSettings 
+    {
         UpdateAssemblyInfo = true,
-        OutputType = GitVersionOutput.Json
+        OutputType = GitVersionOutput.Json,
+        LogFilePath = gitVersionLog.MakeAbsolute(context.Environment)
     });
 
     if (isRunningOnAppVeyor)
@@ -106,8 +114,6 @@ Task("Build")
     .Does(() =>  {
 
     var settings = GetDefaultBuildSettings()
-        .WithProperty("DebugSymbols", "True")
-        .WithProperty("DebugType", "Embedded")
         .WithProperty("Version", versionInfo.SemVer)
         .WithProperty("PackageVersion", versionInfo.SemVer)
         .WithProperty("InformationalVersion", versionInfo.InformationalVersion)
@@ -247,19 +253,63 @@ Task("UploadAppVeyorArtifact")
 {
     Information("Artifacts Dir: {0}", outputDir.FullPath);
 
-    var uploadSettings = new AppVeyorUploadArtifactsSettings();
+    var uploadSettings = new AppVeyorUploadArtifactsSettings {
+        ArtifactType = AppVeyorUploadArtifactType.Auto
+    };
 
     var artifacts = GetFiles(outputDir.FullPath + "/**/*");
 
-    foreach(var file in artifacts) {
+    foreach(var file in artifacts) 
+    {
         Information("Uploading {0}", file.FullPath);
 
-        if (file.GetExtension().Contains("nupkg"))
-            uploadSettings.ArtifactType = AppVeyorUploadArtifactType.NuGetPackage;
-        else
-            uploadSettings.ArtifactType = AppVeyorUploadArtifactType.Auto;
-
         AppVeyor.UploadArtifact(file.FullPath, uploadSettings);
+    }
+});
+
+Task("UpdateChangelog")
+    .Does(() => 
+{
+    var arguments = new ProcessArgumentBuilder();
+    if (!string.IsNullOrEmpty(githubToken))
+        arguments.Append("--token {0}", githubToken);
+    else if (!string.IsNullOrEmpty(githubTokenEnv))
+        arguments.Append("--token {0}", githubTokenEnv);
+
+    // Exclude labels
+    var excludeLabels = new [] {
+        "t/question",
+        "s/wont-fix",
+        "s/duplicate",
+        "s/deprecated",
+        "s/invalid"
+    };
+    arguments.Append("--exclude-labels {0}", string.Join(",", excludeLabels));
+
+    // bug labels
+    arguments.Append("--bug-labels {0}", "t/bug");
+
+    // enhancement labels
+    arguments.Append("--enhancement-labels {0}", "t/feature");
+
+    // breaking labels (enable when github_changelog_generator 1.15 is released)
+    //arguments.Append("--breaking-labels {0}", "t/breaking");
+
+    arguments.Append("--max-issues 500");
+
+    if (!string.IsNullOrEmpty(sinceTag))
+        arguments.Append("--since-tag {0}", sinceTag);
+
+    if (versionInfo.BranchName.Contains("release/"))
+        arguments.Append("--future-release {0}", versionInfo.MajorMinorPatch);
+
+    Information("Starting github_changelog_generator with arguments: {0}", arguments.Render());
+
+    using(var process = StartAndReturnProcess("github_changelog_generator",
+        new ProcessSettings { Arguments = arguments }))
+    {
+        process.WaitForExit();
+        Information("Exit code: {0}", process.GetExitCode());
     }
 });
 

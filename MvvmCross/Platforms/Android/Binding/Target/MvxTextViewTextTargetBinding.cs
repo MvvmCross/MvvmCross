@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -45,20 +45,23 @@ namespace MvvmCross.Platforms.Android.Binding.Target
 
         protected override void SetValueImpl(object target, object toSet)
         {
-            ((TextView)target).Text = (string)toSet;
+            ((TextView)target).SetText((string)toSet, TextView.BufferType.Normal);
         }
 
         public override MvxBindingMode DefaultMode => _isEditTextBinding ? MvxBindingMode.TwoWay : MvxBindingMode.OneWay;
 
         public override void SubscribeToEvents()
         {
-            var view = TextView;
-            if (view == null)
-                return;
+            if (_isEditTextBinding)
+            {
+                var view = TextView;
+                if (view == null)
+                    return;
 
-            _subscription = view.WeakSubscribe<TextView, AfterTextChangedEventArgs>(
-                nameof(view.AfterTextChanged),
-                EditTextOnAfterTextChanged);
+                _subscription = view.WeakSubscribe<TextView, AfterTextChangedEventArgs>(
+                    nameof(view.AfterTextChanged),
+                    EditTextOnAfterTextChanged);
+            }
         }
 
         private void EditTextOnAfterTextChanged(object sender, AfterTextChangedEventArgs e)

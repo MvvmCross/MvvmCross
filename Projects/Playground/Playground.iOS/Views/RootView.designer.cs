@@ -32,6 +32,10 @@ namespace Playground.iOS.Views
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton btnPages { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton btnShowCustomBinding { get; set; }
 
         [Outlet]
@@ -62,6 +66,11 @@ namespace Playground.iOS.Views
             if (btnOverrideAttribute != null) {
                 btnOverrideAttribute.Dispose ();
                 btnOverrideAttribute = null;
+            }
+
+            if (btnPages != null) {
+                btnPages.Dispose ();
+                btnPages = null;
             }
 
             if (btnShowCustomBinding != null) {

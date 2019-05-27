@@ -24,7 +24,10 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             int popExitAnimation = int.MinValue,
             int transitionStyle = int.MinValue,
             Type fragmentHostViewType = null,
-            bool isCacheableFragment = false
+            bool isCacheableFragment = false,
+            string tag = null,
+            string popBackStackImmediateName = "",
+            MvxPopBackStack popBackStackImmediateFlag = MvxPopBackStack.Inclusive
         )
         {
             ActivityHostViewModelType = activityHostViewModelType;
@@ -37,6 +40,9 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             TransitionStyle = transitionStyle;
             FragmentHostViewType = fragmentHostViewType;
             IsCacheableFragment = isCacheableFragment;
+            Tag = tag;
+            PopBackStackImmediateName = popBackStackImmediateName;
+            PopBackStackImmediateFlag = popBackStackImmediateFlag;
         }
 
         public MvxFragmentPresentationAttribute(
@@ -49,7 +55,10 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             string popExitAnimation = null,
             string transitionStyle = null,
             Type fragmentHostViewType = null,
-            bool isCacheableFragment = false
+            bool isCacheableFragment = false,
+            string tag = null,
+            string popBackStackImmediateName = "",
+            MvxPopBackStack popBackStackImmediateFlag = MvxPopBackStack.Inclusive
         )
         {
             var context = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext;
@@ -64,6 +73,9 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             TransitionStyle = !string.IsNullOrEmpty(transitionStyle) ? context.Resources.GetIdentifier(transitionStyle, "style", context.PackageName) : int.MinValue;
             FragmentHostViewType = fragmentHostViewType;
             IsCacheableFragment = isCacheableFragment;
+            Tag = tag;
+            PopBackStackImmediateName = popBackStackImmediateName;
+            PopBackStackImmediateFlag = popBackStackImmediateFlag;
         }
 
         /// <summary>
@@ -116,5 +128,24 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
         /// Indicates if the fragment can be cached. False by default.
         /// </summary>
         public bool IsCacheableFragment { get; set; } = DefaultIsCacheableFragment;
+
+        /// <summary>
+        /// Tag for the Fragment. Used in transactions and for finding the Fragment at a later time
+        /// </summary>
+        public string Tag { get; set; }
+
+        public static string DefaultPopBackStackImmediateName = "";
+        /// <summary>
+        /// The name to be passed into PopBackStackImmediate.
+        /// Assigning an empty string will default to using the FragmentJavaName
+        /// Assigning a null will pop the top fragment
+        /// </summary>
+        public string PopBackStackImmediateName { get; set; } = DefaultPopBackStackImmediateName;
+
+        public static MvxPopBackStack DefaultPopBackStackImmediateFlag = MvxPopBackStack.Inclusive;
+        /// <summary>
+        /// Flag to be used with PopBackStackImmediate. 
+        /// </summary>
+        public MvxPopBackStack PopBackStackImmediateFlag { get; set; } = DefaultPopBackStackImmediateFlag;
     }
 }

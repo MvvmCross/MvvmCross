@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Controls;
 using MvvmCross.Binding;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platforms.Wpf.Bindings;
@@ -60,6 +61,18 @@ namespace MvvmCross.Forms.Platforms.Wpf.Core
         }
 
         protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsWindowsBindingBuilder();
+
+        protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+        {
+            MvxFormsSetupHelper.FillTargetFactories(registry);
+            base.FillTargetFactories(registry);
+        }
+
+        protected override void FillBindingNames(IMvxBindingNameRegistry registry)
+        {
+            MvxFormsSetupHelper.FillBindingNames(registry);
+            base.FillBindingNames(registry);
+        }
     }
 
     public class MvxFormsWpfSetup<TApplication, TFormsApplication> : MvxFormsWpfSetup

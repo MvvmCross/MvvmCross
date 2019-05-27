@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -33,7 +33,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
 
             if (!PropertyInfo.CanRead)
             {
-                MvxBindingLog.Error("GetValue ignored in binding - target property is writeonly");
+                MvxBindingLog.Error("GetValue ignored in binding - target property {0}.{1} is writeonly", PropertyInfo.DeclaringType?.Name, PropertyName);
                 return MvxBindingConstant.UnsetValue;
             }
 
@@ -61,7 +61,7 @@ namespace MvvmCross.Binding.Bindings.Source.Leaf
 
             if (!PropertyInfo.CanWrite)
             {
-                MvxBindingLog.Warning("SetValue ignored in binding - target property is readonly");
+                MvxBindingLog.Warning("SetValue ignored in binding - target property {0}.{1} is readonly", PropertyInfo.DeclaringType?.Name, PropertyName);
                 return;
             }
 

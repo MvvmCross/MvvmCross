@@ -7,16 +7,12 @@ using System;
 namespace MvvmCross.Presenters.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public abstract class MvxBasePresentationAttribute : Attribute
+    public abstract class MvxBasePresentationAttribute : Attribute, IMvxPresentationAttribute
     {
-        /// <summary>
-        /// That shall be used only if you are using non generic views.
-        /// </summary>
+        /// <inheritdoc />
         public Type ViewModelType { get; set; }
 
-        /// <summary>
-        /// Type of the view
-        /// </summary>
+        /// <inheritdoc />
         public Type ViewType { get; set; }
     }
 }

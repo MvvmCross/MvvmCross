@@ -8,6 +8,7 @@ using MvvmCross.Binding.Parse.Binding.Tibet;
 using MvvmCross.Logging;
 using MvvmCross.Tests;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
 {
@@ -15,7 +16,8 @@ namespace MvvmCross.UnitTest.Binding.Parse.Binding.Swiss
     public class MvxTibetBindingTest
         : MvxBaseSwissBindingTest<MvxTibetBindingParser>
     {
-        public MvxTibetBindingTest(MvxTestFixture fixture) : base(fixture)
+        public MvxTibetBindingTest(MvxTestFixture fixture, ITestOutputHelper testOutputHelper)
+            : base(fixture, testOutputHelper)
         {
         }
 

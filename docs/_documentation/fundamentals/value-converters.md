@@ -293,7 +293,7 @@ This may sound complicated... but actually it is quite simple.
  
 ### Using platform-specific Value Converters
 
-Most of the discussions so far have assumed that ValueConverters are placed in shared PCL code and are shared between platforms.
+Most of the discussions so far have assumed that ValueConverters are placed in shared .NET Standard code and are shared between platforms.
 
 Beyond this, ValueConverters can also of course be used within UI projects for platform specific functionality. This is seen particularly often for things like loading images and resources or for performing platform specific layout adjustments.
 

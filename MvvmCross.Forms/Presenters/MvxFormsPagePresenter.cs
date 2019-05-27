@@ -85,7 +85,7 @@ namespace MvvmCross.Forms.Presenters
             set => base.ViewModelTypeFinder = value;
         }
 
-        public override Dictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
+        public override IDictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
         {
             get
             {
@@ -167,53 +167,12 @@ namespace MvvmCross.Forms.Presenters
 
         public override void RegisterAttributeTypes()
         {
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxCarouselPagePresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (view, attribute, request) => ShowCarouselPage(view, (MvxCarouselPagePresentationAttribute)attribute, request),
-                    CloseAction = (viewModel, attribute) => CloseCarouselPage(viewModel, (MvxCarouselPagePresentationAttribute)attribute)
-                });
-
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxContentPagePresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (view, attribute, request) => ShowContentPage(view, (MvxContentPagePresentationAttribute)attribute, request),
-                    CloseAction = (viewModel, attribute) => CloseContentPage(viewModel, (MvxContentPagePresentationAttribute)attribute)
-                });
-
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxMasterDetailPagePresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (view, attribute, request) => ShowMasterDetailPage(view, (MvxMasterDetailPagePresentationAttribute)attribute, request),
-                    CloseAction = (viewModel, attribute) => CloseMasterDetailPage(viewModel, (MvxMasterDetailPagePresentationAttribute)attribute)
-                });
-
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxModalPresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (view, attribute, request) => ShowModal(view, (MvxModalPresentationAttribute)attribute, request),
-                    CloseAction = (viewModel, attribute) => CloseModal(viewModel, (MvxModalPresentationAttribute)attribute)
-                });
-
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxNavigationPagePresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (view, attribute, request) => ShowNavigationPage(view, (MvxNavigationPagePresentationAttribute)attribute, request),
-                    CloseAction = (viewModel, attribute) => CloseNavigationPage(viewModel, (MvxNavigationPagePresentationAttribute)attribute)
-                });
-
-            AttributeTypesToActionsDictionary.Add(
-                typeof(MvxTabbedPagePresentationAttribute),
-                new MvxPresentationAttributeAction
-                {
-                    ShowAction = (view, attribute, request) => ShowTabbedPage(view, (MvxTabbedPagePresentationAttribute)attribute, request),
-                    CloseAction = (viewModel, attribute) => CloseTabbedPage(viewModel, (MvxTabbedPagePresentationAttribute)attribute)
-                });
+            AttributeTypesToActionsDictionary.Register<MvxCarouselPagePresentationAttribute>(ShowCarouselPage, CloseCarouselPage);
+            AttributeTypesToActionsDictionary.Register<MvxContentPagePresentationAttribute>(ShowContentPage, CloseContentPage);
+            AttributeTypesToActionsDictionary.Register<MvxMasterDetailPagePresentationAttribute>(ShowMasterDetailPage, CloseMasterDetailPage);
+            AttributeTypesToActionsDictionary.Register<MvxModalPresentationAttribute>(ShowModal, CloseModal);
+            AttributeTypesToActionsDictionary.Register<MvxNavigationPagePresentationAttribute>(ShowNavigationPage, CloseNavigationPage);
+            AttributeTypesToActionsDictionary.Register<MvxTabbedPagePresentationAttribute>(ShowTabbedPage, CloseTabbedPage);
         }
 
         public async override Task<bool> ChangePresentation(MvxPresentationHint hint)
@@ -402,7 +361,9 @@ namespace MvvmCross.Forms.Presenters
         public virtual Task<bool> CloseCarouselPage(IMvxViewModel viewModel, MvxCarouselPagePresentationAttribute attribute)
         {
             if (attribute.Position == CarouselPosition.Root)
-                return ClosePage(FormsApplication.MainPage, null, attribute);
+            {
+                return FindAndCloseViewFromViewModel(viewModel, FormsApplication.MainPage, attribute);
+            }
             else
             {
                 var carouselHost = GetPageOfType<MvxCarouselPage>();
@@ -463,7 +424,7 @@ namespace MvvmCross.Forms.Presenters
 
         public virtual Task<bool> CloseContentPage(IMvxViewModel viewModel, MvxContentPagePresentationAttribute attribute)
         {
-            return ClosePage(FormsApplication.MainPage, null, attribute);
+            return FindAndCloseViewFromViewModel(viewModel, FormsApplication.MainPage, attribute);
         }
 
         public virtual async Task<bool> ShowMasterDetailPage(
@@ -530,7 +491,7 @@ namespace MvvmCross.Forms.Presenters
                 case MasterDetailPosition.Master:
                     return ClosePage(masterDetailHost.Master, null, attribute);
                 case MasterDetailPosition.Detail:
-                    return ClosePage(masterDetailHost.Detail, null, attribute);
+                    return FindAndCloseViewFromViewModel(viewModel, masterDetailHost.Detail, attribute);
             }
             return Task.FromResult(true);
         }
@@ -597,9 +558,9 @@ namespace MvvmCross.Forms.Presenters
             return true;
         }
 
-        public virtual async Task<bool> CloseNavigationPage(IMvxViewModel viewModel, MvxNavigationPagePresentationAttribute attribute)
+        public virtual Task<bool> CloseNavigationPage(IMvxViewModel viewModel, MvxNavigationPagePresentationAttribute attribute)
         {
-            return await ClosePage(FormsApplication.MainPage, null, attribute);
+            return FindAndCloseViewFromViewModel(viewModel, FormsApplication.MainPage, attribute);
         }
 
         public virtual async Task<bool> ShowTabbedPage(
@@ -636,7 +597,9 @@ namespace MvvmCross.Forms.Presenters
         public virtual Task<bool> CloseTabbedPage(IMvxViewModel viewModel, MvxTabbedPagePresentationAttribute attribute)
         {
             if (attribute.Position == TabbedPosition.Root)
-                return ClosePage(FormsApplication.MainPage, null, attribute);
+            {
+                return FindAndCloseViewFromViewModel(viewModel, FormsApplication.MainPage, attribute);
+            }
             else
             {
                 var tabHost = GetPageOfType<MvxTabbedPage>();
@@ -957,6 +920,25 @@ namespace MvvmCross.Forms.Presenters
             {
                 throw new MvxException(ex, "Cannot replace MainPage root");
             }
+        }
+
+        protected virtual Task<bool> FindAndCloseViewFromViewModel(IMvxViewModel mvxViewModel, Page rootPage, MvxPagePresentationAttribute attribute)
+        {
+            var root = TopNavigationPage();
+            Page pageToClose = null;
+
+            // finding the view from viewmodel in navigation stack
+            pageToClose = root?.Navigation?.NavigationStack?
+                .OfType<IMvxPage>()
+                .FirstOrDefault(x => x.ViewModel == mvxViewModel) as Page;
+
+            if (pageToClose == null)
+            {
+                MvxFormsLog.Instance.Warn("Ignoring close for ViewModel - Matching View for ViewModel instance failed");
+                return Task.FromResult(false);
+            }
+
+            return ClosePage(rootPage, pageToClose, attribute);
         }
     }
 }

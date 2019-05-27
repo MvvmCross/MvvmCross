@@ -95,6 +95,12 @@ namespace MvvmCross.Platforms.Android.Binding
         public static string BindChecked(this TwoStatePreference twoStatePreference)
             => MvxAndroidPropertyBinding.TwoStatePreference_Checked;
 
+        public static string BindDisplayedValues(this NumberPicker numberPicker)
+            => MvxAndroidPropertyBinding.NumberPicker_DisplayedValues;
+
+        public static string BindValue(this NumberPicker numberPicker)
+            => MvxAndroidPropertyBinding.NumberPicker_Value;
+
         public static string BindMargin(this View view)
             => MvxAndroidPropertyBinding.View_Margin;
 

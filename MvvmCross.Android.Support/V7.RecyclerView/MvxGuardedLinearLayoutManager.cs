@@ -18,10 +18,20 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         {
         }
 
+        [Android.Runtime.Preserve(Conditional = true)]
         protected MvxGuardedLinearLayoutManager(IntPtr ptr, JniHandleOwnership transfer) : base(ptr, transfer)
         {
         }
 
+        /// <summary>
+        /// Fix issue like https://code.google.com/p/android/issues/detail?id=77846#c1 but may not be exactly the same.
+        /// https://stackoverflow.com/questions/30220771/recyclerview-inconsistency-detected-invalid-item-position?page=1&tab=active#tab-top
+        /// </summary>
+        public override bool SupportsPredictiveItemAnimations() => false;
+
+        /// <summary>
+        /// This should not be needed anymore, as it should be caused by SupportsPredictiveItemAnimations
+        /// </summary>
         public override void OnLayoutChildren(Android.Support.V7.Widget.RecyclerView.Recycler recycler,
             Android.Support.V7.Widget.RecyclerView.State state)
         {
