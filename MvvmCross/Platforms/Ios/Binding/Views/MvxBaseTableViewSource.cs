@@ -92,8 +92,6 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 
                 SelectedItem = null;
             }
-
-            base.RowDeselected(tableView, indexPath);
         }
 
         private object _selectedItem;
