@@ -4,7 +4,7 @@
         - master
         - /release\/.*/
   version: 1.0.{build}
-  image: Visual Studio 2017
+  image: Visual Studio 2019
   before_build:
   - cmd: dotnet --info
   - cmd: dotnet tool install --tool-path . SignClient
@@ -26,7 +26,7 @@
       only:
         - develop
   version: 1.0.{build}
-  image: Visual Studio 2017
+  image: Visual Studio 2019
   before_build:
   - cmd: dotnet --info
   - cmd: dotnet tool install --tool-path . SignClient
