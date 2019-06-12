@@ -38,8 +38,6 @@ namespace MvvmCross.UnitTest.Navigation
             _fixture = fixture;
             _fixture.ClearAll();
 
-            RoutingService.LoadRoutes(new[] { typeof(RoutingServiceTests).Assembly });
-
             // ReSharper disable once AssignNullToNotNullAttribute
             Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
@@ -66,6 +64,7 @@ namespace MvvmCross.UnitTest.Navigation
             {
                 ViewDispatcher = MockDispatcher.Object,
             };
+            RoutingService.LoadRoutes(new[] { typeof(RoutingServiceTests).Assembly });
             fixture.Ioc.RegisterSingleton(navigationService);
             fixture.Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
         }
