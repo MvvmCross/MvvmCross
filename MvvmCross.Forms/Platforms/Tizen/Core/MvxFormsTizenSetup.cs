@@ -2,21 +2,22 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Forms.Presenters;
-using MvvmCross.Localization;
-using System.Collections.Generic;
-using System.Reflection;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platforms.Tizen.Bindings;
+using MvvmCross.Forms.Platforms.Tizen.Presenters;
+using MvvmCross.Forms.Presenters;
+using MvvmCross.IoC;
+using MvvmCross.Localization;
 using MvvmCross.Platforms.Tizen.Core;
 using MvvmCross.Platforms.Tizen.Presenters;
 using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
-using MvvmCross.Forms.Platforms.Tizen.Presenters;
 using Xamarin.Forms;
-using System.Linq;
 
 namespace MvvmCross.Forms.Platforms.Tizen.Core
 {
@@ -35,10 +36,11 @@ namespace MvvmCross.Forms.Platforms.Tizen.Core
             return _viewAssemblies;
         }
 
-        protected override void InitializeIoC()
+        protected override IMvxIoCProvider InitializeIoC()
         {
-            base.InitializeIoC();
-            Mvx.IoCProvider.RegisterSingleton<IMvxFormsSetup>(this);
+            var provider = base.InitializeIoC();
+            provider.RegisterSingleton<IMvxFormsSetup>(this);
+            return provider;
         }
 
         protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)

@@ -21,6 +21,7 @@ using MvvmCross.Forms.Platforms.Android.Presenters;
 using Xamarin.Forms;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Core;
+using MvvmCross.IoC;
 
 namespace MvvmCross.Forms.Platforms.Android.Core
 {
@@ -39,10 +40,11 @@ namespace MvvmCross.Forms.Platforms.Android.Core
             return _viewAssemblies;
         }
 
-        protected override void InitializeIoC()
+        protected override IMvxIoCProvider InitializeIoC()
         {
-            base.InitializeIoC();
-            Mvx.IoCProvider.RegisterSingleton<IMvxFormsSetup>(this);
+            var provider = base.InitializeIoC();
+            provider.RegisterSingleton<IMvxFormsSetup>(this);
+            return provider;
         }
 
         protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
