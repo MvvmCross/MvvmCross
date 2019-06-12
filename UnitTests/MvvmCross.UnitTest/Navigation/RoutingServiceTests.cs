@@ -38,7 +38,8 @@ namespace MvvmCross.UnitTest.Navigation
             _fixture = fixture;
             _fixture.ClearAll();
 
-            MvxNavigationService.LoadRoutes(new[] { typeof(RoutingServiceTests).Assembly });
+            RoutingService.LoadRoutes(new[] { typeof(RoutingServiceTests).Assembly });
+
             // ReSharper disable once AssignNullToNotNullAttribute
             Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
