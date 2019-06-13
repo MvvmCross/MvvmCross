@@ -511,6 +511,16 @@ set.Apply();
 ```
 
  **Note:** when using a fluent binding, always remember to use `.Apply()` - if this is missed then the binding won't ever be created.
+ 
+ ***Alternatively:*** A bindingset can be used as a disposable and wrapped in a using block to automatically call the `.Apply()` method.
+ ```c#
+ using(var set = this.CreateBindingSet<MyView, MyViewModel>())
+ {
+    set.Bind(nameLabel)
+        .For(v => v.Text)
+        .To(vm => vm.Customer.FirstName);
+ }
+ ```
 
 ### MvvmCross Defined Custom bindings
 
