@@ -11,7 +11,7 @@
   environment:
     NUGET_SOURCE: https://www.nuget.org/api/v2/package
     NUGET_APIKEY:
-      secure: comaeGesY3d2OjzhTCIVxwQsjW31fqrWVgMBu0+WHs8JlqnVdujThv6ncTGgZmVQ
+      secure: TtdVOVJl8JjU0fMTW+SgOJP9guspLnxu9DAPBdPsFtjPpO9neWmqy10ErlD0EeDR
     SIGNING_USER:
       secure: by3V38s+rierF9BmeYoxcpNY5Z8CoxTi0FpTU357vN+qmeH9IHKpxYZK8MDIUG9W
     SIGNING_SECRET:
