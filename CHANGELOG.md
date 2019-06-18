@@ -1,5 +1,32 @@
 # Change Log
 
+## [6.3.1](https://github.com/MvvmCross/MvvmCross/tree/6.3.1) (2019-06-18)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.3.0...6.3.1)
+
+**Implemented enhancements:**
+
+- Open up methods in PageViewController to be able to customize behavior [\#3406](https://github.com/MvvmCross/MvvmCross/pull/3406) ([martijn00](https://github.com/martijn00))
+
+**Fixed bugs:**
+
+- ios MvxBaseTableViewSource: RowDeselected\(..\) must not call its base method [\#3413](https://github.com/MvvmCross/MvvmCross/issues/3413)
+- \[Android\] AppStart deadlocks [\#3268](https://github.com/MvvmCross/MvvmCross/issues/3268)
+
+**Closed issues:**
+
+- Compile issues after updating to 6.3.0 [\#3420](https://github.com/MvvmCross/MvvmCross/issues/3420)
+
+**Merged pull requests:**
+
+- Correct doc from "childs" to "children" [\#3430](https://github.com/MvvmCross/MvvmCross/pull/3430) ([jschmid](https://github.com/jschmid))
+- Added MvxPanelHintTypes for MvvmCross 6 [\#3427](https://github.com/MvvmCross/MvvmCross/pull/3427) ([xunreal75](https://github.com/xunreal75))
+- Fix: TYPO [\#3426](https://github.com/MvvmCross/MvvmCross/pull/3426) ([konabe](https://github.com/konabe))
+- Fix: Typo: Remove extra period [\#3421](https://github.com/MvvmCross/MvvmCross/pull/3421) ([konabe](https://github.com/konabe))
+- Make attributes only available on netstandard [\#3419](https://github.com/MvvmCross/MvvmCross/pull/3419) ([martijn00](https://github.com/martijn00))
+- Fix for \#3413: RowDeselected\(..\) must not call its base method [\#3415](https://github.com/MvvmCross/MvvmCross/pull/3415) ([markuspalme](https://github.com/markuspalme))
+- Update docs on adding sections to a UITableView [\#3410](https://github.com/MvvmCross/MvvmCross/pull/3410) ([c-lamont](https://github.com/c-lamont))
+- Facade MvxViewModelInstanceRequest instance overwritten [\#3405](https://github.com/MvvmCross/MvvmCross/pull/3405) ([CMorooney](https://github.com/CMorooney))
+
 ## [6.3.0](https://github.com/MvvmCross/MvvmCross/tree/6.3.0) (2019-05-15)
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.2.3...6.3.0)
 
