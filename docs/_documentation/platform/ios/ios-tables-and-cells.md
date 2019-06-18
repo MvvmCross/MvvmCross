@@ -95,6 +95,41 @@ public class PolymorphicListItemTypesView : MvxTableViewController
     }
 }
 ```
+### Implementing sections
+
+In the example above, `GetOrCreateCellFor` will try to bind your data 1 to 1 with your data source.
+If you would like to implement sections, then you need to manually tell your `MvxTableViewSource` which data should be bound with which view.
+To do this, override `GetItemAt` and return the `object` that you want to have bound to the `UITableViewCell` when `GetOrCreateCellFor` is called.
+
+An example may be 
+```c#
+class MySection
+{
+    public string SectionTitle { get; set; }
+    public List<MyRow> MyRows { get; set; }
+}
+
+class MyRow
+{
+    public string InterestingRowData { get; set; }
+}
+
+private List<MySection> MySections = new List<MySection>()
+{
+    new MySection(){SectionTitle = "Section1", MyRows = new List<MyRow>(){ new MyRow() { InterestingRowData = "Data for Section1 Row1"} } }
+};
+
+protected override object GetItemAt(NSIndexPath indexPath)
+{
+    return MySections[indexPath.Section].MyRows[indexPath.Row];
+}
+
+public override string TitleForHeader(UITableView tableView, nint section)
+{
+    return MySections[(int)section].SectionTitle;
+}
+```
+
 
 ## References
 

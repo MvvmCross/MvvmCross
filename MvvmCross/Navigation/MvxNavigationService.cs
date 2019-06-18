@@ -169,7 +169,14 @@ namespace MvvmCross.Navigation
                         request.ParameterValues = facadeRequest.ParameterValues;
                     }
 
-                    request.ViewModelInstance = ViewModelLoader.LoadViewModel(request, null);
+                    if (facadeRequest is MvxViewModelInstanceRequest instanceRequest)
+                    {
+                        request.ViewModelInstance = instanceRequest.ViewModelInstance ?? ViewModelLoader.LoadViewModel(request, null);
+                    }
+                    else
+                    {
+                        request.ViewModelInstance = ViewModelLoader.LoadViewModel(request, null);
+                    }
                 }
                 catch (Exception ex)
                 {
