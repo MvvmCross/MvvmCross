@@ -93,6 +93,7 @@ namespace MvvmCross.Core
             // Piers Myers(https://stackoverflow.com/users/275751/piers-myers)'s question and
             // Charlie Brown(https://stackoverflow.com/users/825578/charlie-brown)'s answer
             public delegate bool TryParseHandler(string input, NumberStyles style, IFormatProvider provider, out T result);
+
             private TryParseHandler _tryParseHandler;
 
             public NumberParser(TryParseHandler handler) => _tryParseHandler = handler;
@@ -139,6 +140,7 @@ namespace MvvmCross.Core
         }
 
 #else
+
         // UNITY3D does not support Guid.TryParse
         // See https://github.com/slodge/MvvmCross/issues/215
         public class GuidParser : ValueParser
@@ -171,6 +173,7 @@ namespace MvvmCross.Core
         }
 
         public IDictionary<Type, IParser> TypeParsers { get; private set; }
+
         public IList<IExtraParser> ExtraParsers { get; private set; }
 
         public MvxStringToTypeParser()

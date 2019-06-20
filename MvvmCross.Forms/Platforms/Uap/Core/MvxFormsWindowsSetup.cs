@@ -11,6 +11,7 @@ using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platforms.Uap.Bindings;
 using MvvmCross.Forms.Platforms.Uap.Presenters;
 using MvvmCross.Forms.Presenters;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Uap.Core;
 using MvvmCross.Platforms.Uap.Presenters;
 using MvvmCross.Platforms.Uap.Views;
@@ -34,7 +35,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
                 {
                     _formsApplication = CreateFormsApplication();
                 }
-                if(Application.Current != _formsApplication)
+                if (Application.Current != _formsApplication)
                 {
                     Application.Current = _formsApplication;
                 }
@@ -53,10 +54,11 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
             return _viewAssemblies;
         }
 
-        protected override void InitializeIoC()
+        protected override IMvxIoCProvider InitializeIoC()
         {
-            base.InitializeIoC();
-            Mvx.IoCProvider.RegisterSingleton<IMvxFormsSetup>(this);
+            var provider = base.InitializeIoC();
+            provider.RegisterSingleton<IMvxFormsSetup>(this);
+            return provider;
         }
 
         protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
@@ -99,7 +101,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
 
     public class MvxFormsWindowsSetup<TApplication, TFormsApplication> : MvxFormsWindowsSetup
         where TApplication : class, IMvxApplication, new()
-        where TFormsApplication : Application, new()        
+        where TFormsApplication : Application, new()
     {
         public override IEnumerable<Assembly> GetViewAssemblies()
         {
