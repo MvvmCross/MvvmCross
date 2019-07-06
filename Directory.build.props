@@ -40,11 +40,12 @@
     <None Include="$(MSBuildThisFileDirectory)\LICENSE" Pack="true" PackagePath=""/>
   </ItemGroup>
 
+  <PropertyGroup>
+    <TargetsToBuildDeveloperOverride>Uap</TargetsToBuildDeveloperOverride>          
+  </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <TargetsToBuild>All</TargetsToBuild> 
-    <!--<TargetsToBuild>Android</TargetsToBuild>-->
-    <!--<TargetsToBuild>Uap</TargetsToBuild>--> 
-    <!--<TargetsToBuild>iOS</TargetsToBuild>--> 
+    <TargetsToBuild>$(TargetsToBuildDeveloperOverride)</TargetsToBuild> 
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' != 'Debug' ">
