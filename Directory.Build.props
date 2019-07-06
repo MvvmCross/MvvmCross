@@ -64,12 +64,12 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <TargetsToBuildDeveloperOverride>Uap</TargetsToBuildDeveloperOverride>          
+  </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <TargetsToBuild>All</TargetsToBuild> 
-    <!--<TargetsToBuild>Android</TargetsToBuild>-->
-    <!--<TargetsToBuild>Uap</TargetsToBuild>--> 
-    <!--<TargetsToBuild>iOS</TargetsToBuild>--> 
-    <!--<TargetsToBuild>Tizen</TargetsToBuild>--> 
+    <TargetsToBuild>$(TargetsToBuildDeveloperOverride)</TargetsToBuild> 
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' != 'Debug' ">
