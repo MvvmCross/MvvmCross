@@ -21,18 +21,17 @@ namespace Playground.iOS.Views
 
             View.BackgroundColor = UIColor.LightGray;
 
-            var set = this.CreateBindingSet<RootView, RootViewModel>();
-
-            set.Bind(btnTabs).To(vm => vm.ShowTabsCommand);
-            set.Bind(btnPages).To(vm => vm.ShowPagesCommand);
-            set.Bind(btnSplit).To(vm => vm.ShowSplitCommand);
-            set.Bind(btnChild).To(vm => vm.ShowChildCommand);
-            set.Bind(btnModal).To(vm => vm.ShowModalCommand);
-            set.Bind(btnNavModal).To(vm => vm.ShowModalNavCommand);
-            set.Bind(btnOverrideAttribute).To(vm => vm.ShowOverrideAttributeCommand);
-            set.Bind(btnShowCustomBinding).To(vm => vm.ShowCustomBindingCommand);
-
-            set.Apply();
+            using (var set = this.CreateBindingSet<RootView, RootViewModel>())
+            {
+                set.Bind(btnTabs).To(vm => vm.ShowTabsCommand);
+                set.Bind(btnPages).To(vm => vm.ShowPagesCommand);
+                set.Bind(btnSplit).To(vm => vm.ShowSplitCommand);
+                set.Bind(btnChild).To(vm => vm.ShowChildCommand);
+                set.Bind(btnModal).To(vm => vm.ShowModalCommand);
+                set.Bind(btnNavModal).To(vm => vm.ShowModalNavCommand);
+                set.Bind(btnOverrideAttribute).To(vm => vm.ShowOverrideAttributeCommand);
+                set.Bind(btnShowCustomBinding).To(vm => vm.ShowCustomBindingCommand);
+            }
         }
     }
 }
