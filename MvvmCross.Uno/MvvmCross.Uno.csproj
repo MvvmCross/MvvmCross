@@ -1,0 +1,29 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras">
+  <PropertyGroup>
+    <TargetFrameworks>monoandroid80;xamarinios10;netstandard2.0;uap10.0.16299</TargetFrameworks>
+    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid80' or '$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="Uno.UI" Version="1.43.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\MvvmCross\**\*.cs" Exclude="..\MvvmCross\Platforms\**\*.cs;..\MvvmCross\Resources\*.cs;..\MvvmCross\obj\**\*.*;..\MvvmCross\bin\**\*.*" />
+    <Compile Include="..\MvvmCross\Platforms\Windows-common\**\*.cs" />
+    <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="..\MvvmCross\Platforms\Uap\**\*.cs" />
+    <!--<Page Include="..\MvvmCross\**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon> 
+    </Compile>-->
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid80' ">
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+  <!--<ItemGroup>
+    <UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+  </ItemGroup>-->
+</Project>
+
