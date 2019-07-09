@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace MvvmCross.Platforms.Uap.Views
 {
-    public class MvxWindowsContentDialog
+    public partial class MvxWindowsContentDialog
         : ContentDialog
         , IMvxWindowsContentDialog
         , IDisposable
@@ -25,7 +25,7 @@ namespace MvvmCross.Platforms.Uap.Views
             Unloaded += MvxWindowsContentDialog_Unloaded;
         }
 
-        private void MvxWindowsContentDialog_Loading(FrameworkElement sender, object args)
+        private void MvxWindowsContentDialog_Loading(object sender, object args)
         {
             ViewModel?.ViewAppearing();
         }
@@ -100,7 +100,7 @@ namespace MvvmCross.Platforms.Uap.Views
         }
     }
 
-    public class MvxWindowsContentDialog<TViewModel>
+    public partial class MvxWindowsContentDialog<TViewModel>
         : MvxWindowsContentDialog
         , IMvxWindowsContentDialog<TViewModel> where TViewModel : class, IMvxViewModel
     {
