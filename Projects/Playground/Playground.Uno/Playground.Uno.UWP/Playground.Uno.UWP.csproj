@@ -101,9 +101,6 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
@@ -117,6 +114,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\MvvmCross.Uno\MvvmCross.Uno.csproj" />
+    <ProjectReference Include="..\..\..\..\MvvmCross.Uno.Plugins\MvvmCross.Uno.Plugins.csproj" />
+    <ProjectReference Include="..\Playground.Uno.Core\Playground.Uno.Core.csproj">
+      <Project>{8db80d5e-ddc2-4eb4-a948-c768dc847fc0}</Project>
+      <Name>Playground.Uno.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\Playground.Uno.Shared\Playground.Uno.Shared.projitems" Label="Shared" Condition="Exists('..\Playground.Uno.Shared\Playground.Uno.Shared.projitems')" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

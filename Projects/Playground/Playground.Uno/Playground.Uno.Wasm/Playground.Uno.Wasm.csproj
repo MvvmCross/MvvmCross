@@ -30,9 +30,13 @@
     <Content Include="LinkerConfig.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="1.43.1" />
-    <PackageReference Include="Uno.Wasm.Bootstrap" Version="1.0.0-dev.137" />
+    <PackageReference Include="Uno.UI" Version="1.46.0-dev.2135" />
+    <PackageReference Include="Uno.Wasm.Bootstrap" Version="1.0.0-dev.300" />
     <DotNetCliToolReference Include="Uno.Wasm.Bootstrap.Cli" Version="1.0.0-dev.137" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\MvvmCross.Uno\MvvmCross.Uno.csproj" />
+    <ProjectReference Include="..\Playground.Uno.Core\Playground.Uno.Core.csproj" />
   </ItemGroup>
   <Import Project="..\Playground.Uno.Shared\Playground.Uno.Shared.projitems" Label="Shared" Condition="Exists('..\Playground.Uno.Shared\Playground.Uno.Shared.projitems')" />
 </Project>
