@@ -59,7 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="1.43.1" />
+    <PackageReference Include="Uno.UI" Version="1.46.0-dev.2135" />
     <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.32" />
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +83,20 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Styles.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\MvvmCross.Uno.Plugins\MvvmCross.Uno.Plugins.csproj">
+      <Project>{5abb12b2-64d0-4fee-affb-80e0fd81ea50}</Project>
+      <Name>MvvmCross.Uno.Plugins</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\MvvmCross.Uno\MvvmCross.Uno.csproj">
+      <Project>{14bc1c8b-ce4c-4239-83cf-6f8c8268274a}</Project>
+      <Name>MvvmCross.Uno</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Playground.Uno.Core\Playground.Uno.Core.csproj">
+      <Project>{8db80d5e-ddc2-4eb4-a948-c768dc847fc0}</Project>
+      <Name>Playground.Uno.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\Playground.Uno.Shared\Playground.Uno.Shared.projitems" Label="Shared" Condition="Exists('..\Playground.Uno.Shared\Playground.Uno.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

@@ -1,0 +1,59 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras">
+  <PropertyGroup>
+    <TargetFrameworks>monoandroid80;xamarinios10;netstandard2.0;uap10.0.16299</TargetFrameworks>
+    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid80' or '$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="Uno.UI" Version="1.46.0-dev.2135" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MvvmCross.Uno\MvvmCross.Uno.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\MvvmCross.Plugins\Accelerometer\**\*.cs" Exclude="..\MvvmCross.Plugins\Accelerometer\Platforms\**\*.cs;..\MvvmCross.Plugins\Accelerometer\Resources\*.cs;..\MvvmCross.Plugins\Accelerometer\obj\**\*.*;..\MvvmCross.Plugins\Accelerometer\bin\**\*.*" />
+    <Compile Include="..\MvvmCross.Plugins\Accelerometer\Platforms\Windows-common\**\*.cs" />
+    <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="..\MvvmCross.Plugins\Accelerometer\Platforms\Uap\**\*.cs" />
+
+    <Compile Include="..\MvvmCross.Plugins\File\**\*.cs" Exclude="..\MvvmCross.Plugins\File\Platforms\**\*.cs;..\MvvmCross.Plugins\File\Resources\*.cs;..\MvvmCross.Plugins\File\obj\**\*.*;..\MvvmCross.Plugins\File\bin\**\*.*" />
+    <Compile Include="..\MvvmCross.Plugins\File\Platforms\Windows-common\**\*.cs" />
+    <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="..\MvvmCross.Plugins\File\Platforms\Uap\**\*.cs" />
+
+
+    <Compile Include="..\MvvmCross.Plugins\Json\**\*.cs" Exclude="..\MvvmCross.Plugins\Json\Platforms\**\*.cs;..\MvvmCross.Plugins\Json\Resources\*.cs;..\MvvmCross.Plugins\Json\obj\**\*.*;..\MvvmCross.Plugins\Json\bin\**\*.*" />
+    <Compile Include="..\MvvmCross.Plugins\Json\Platforms\Windows-common\**\*.cs" />
+    <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="..\MvvmCross.Plugins\Json\Platforms\Uap\**\*.cs" />
+
+    <Compile Include="..\MvvmCross.Plugins\JsonLocalization\**\*.cs" Exclude="..\MvvmCross.Plugins\JsonLocalization\Platforms\**\*.cs;..\MvvmCross.Plugins\JsonLocalization\Resources\*.cs;..\MvvmCross.Plugins\JsonLocalization\obj\**\*.*;..\MvvmCross.Plugins\JsonLocalization\bin\**\*.*" />
+    <Compile Include="..\MvvmCross.Plugins\JsonLocalization\Platforms\Windows-common\**\*.cs" />
+    <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="..\MvvmCross.Plugins\JsonLocalization\Platforms\Uap\**\*.cs" />
+
+
+    <Compile Include="..\MvvmCross.Plugins\Messenger\**\*.cs" Exclude="..\MvvmCross.Plugins\Messenger\Platforms\**\*.cs;..\MvvmCross.Plugins\Messenger\Resources\*.cs;..\MvvmCross.Plugins\Messenger\obj\**\*.*;..\MvvmCross.Plugins\Messenger\bin\**\*.*" />
+    <Compile Include="..\MvvmCross.Plugins\Messenger\Platforms\Windows-common\**\*.cs" />
+    <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="..\MvvmCross.Plugins\Messenger\Platforms\Uap\**\*.cs" />
+
+
+    <Compile Include="..\MvvmCross.Plugins\Network\**\*.cs" Exclude="..\MvvmCross.Plugins\Network\Platforms\**\*.cs;..\MvvmCross.Plugins\Network\Resources\*.cs;..\MvvmCross.Plugins\Network\obj\**\*.*;..\MvvmCross.Plugins\Network\bin\**\*.*" />
+    <Compile Include="..\MvvmCross.Plugins\Network\Platforms\Windows-common\**\*.cs" />
+    <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="..\MvvmCross.Plugins\Network\Platforms\Uap\**\*.cs" />
+
+
+    <Compile Include="..\MvvmCross.Plugins\ResourceLoader\**\*.cs" Exclude="..\MvvmCross.Plugins\ResourceLoader\Platforms\**\*.cs;..\MvvmCross.Plugins\ResourceLoader\Resources\*.cs;..\MvvmCross.Plugins\ResourceLoader\obj\**\*.*;..\MvvmCross.Plugins\ResourceLoader\bin\**\*.*" />
+    <Compile Include="..\MvvmCross.Plugins\ResourceLoader\Platforms\Windows-common\**\*.cs" />
+    <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="..\MvvmCross.Plugins\ResourceLoader\Platforms\Uap\**\*.cs" />
+
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid80' ">
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+</Project>
+

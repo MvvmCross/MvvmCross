@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -13,10 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Text.json">
+    <EmbeddedResource Include="..\..\Playground.Core\Resources\Text.json">
       <Generator></Generator>
     </EmbeddedResource>
   </ItemGroup>
+
 
   <ItemGroup>
     <!--<ProjectReference Include="..\..\..\MvvmCross.Plugins\JsonLocalization\MvvmCross.Plugin.JsonLocalization.csproj" />
@@ -24,6 +25,7 @@
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\Messenger\MvvmCross.Plugin.Messenger.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\Network\MvvmCross.Plugin.Network.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj" />-->
+    <ProjectReference Include="..\..\..\..\MvvmCross.Uno.Plugins\MvvmCross.Uno.Plugins.csproj" />
     <ProjectReference Include="..\..\..\..\MvvmCross.Uno\MvvmCross.Uno.csproj" />
   </ItemGroup>
 
