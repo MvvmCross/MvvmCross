@@ -18,9 +18,13 @@ namespace MvvmCross.IoC
         }
 
         public bool TryToDetectSingletonCircularReferences { get; set; }
+
         public bool TryToDetectDynamicCircularReferences { get; set; }
+
         public bool CheckDisposeIfPropertyInjectionFails { get; set; }
+
         public Type PropertyInjectorType { get; set; }
+
         public IMvxPropertyInjectorOptions PropertyInjectorOptions { get; set; }
     }
 }
