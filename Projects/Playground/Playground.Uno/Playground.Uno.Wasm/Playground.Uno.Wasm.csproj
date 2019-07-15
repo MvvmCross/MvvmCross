@@ -6,6 +6,7 @@
     <WasmHead>true</WasmHead>
     <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
     <NoWarn>NU1701</NoWarn>
+    <MonoRuntimeDebuggerEnabled Condition="'$(Configuration)'=='Debug'">true</MonoRuntimeDebuggerEnabled>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="..\Playground.Uno.UWP\Assets\*.png" Link="Assets\%(FileName)%(Extension)" />
@@ -30,12 +31,15 @@
     <Content Include="LinkerConfig.xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
     <PackageReference Include="Uno.UI" Version="1.46.0-dev.2135" />
     <PackageReference Include="Uno.Wasm.Bootstrap" Version="1.0.0-dev.300" />
     <DotNetCliToolReference Include="Uno.Wasm.Bootstrap.Cli" Version="1.0.0-dev.137" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\MvvmCross.Uno\MvvmCross.Uno.csproj" />
+    <ProjectReference Include="..\..\..\..\MvvmCross.Uno.Plugins\MvvmCross.Uno.Plugins.csproj" />
     <ProjectReference Include="..\Playground.Uno.Core\Playground.Uno.Core.csproj" />
   </ItemGroup>
   <Import Project="..\Playground.Uno.Shared\Playground.Uno.Shared.projitems" Label="Shared" Condition="Exists('..\Playground.Uno.Shared\Playground.Uno.Shared.projitems')" />

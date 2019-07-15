@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Localization;
-using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
@@ -33,10 +32,11 @@ namespace Playground.Core.ViewModels
 
         public IMvxLanguageBinder TextSource
         {
-            get { return new MvxLanguageBinder("Playground.Core", "Text"); }
+            get { return new MvxLanguageBinder("Playground.Uno.Core", "Text"); }
         }
 
         private string _bindableText = "I'm bound!";
+
         public string BindableText
         {
             get
