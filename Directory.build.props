@@ -45,6 +45,7 @@
     <!--<TargetsToBuild>Android</TargetsToBuild>-->
     <!--<TargetsToBuild>Uap</TargetsToBuild>--> 
     <!--<TargetsToBuild>iOS</TargetsToBuild>--> 
+    <!--<TargetsToBuild>Tizen</TargetsToBuild>--> 
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' != 'Debug' ">
