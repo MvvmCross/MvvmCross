@@ -82,7 +82,7 @@ This package contains the 'Location' plugin for MvvmCross</Description>
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">
-    <PackageReference Include="Tizen.NET" Version="4.0.0" />
+    <PackageReference Include="Tizen.NET" Version="5.0.0.14629" />
     <Compile Include="Platforms\Tizen\**\*.cs" />
     <Compile Include="Platforms\Xamarin-common\**\*.cs" />
   </ItemGroup>
