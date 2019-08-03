@@ -624,7 +624,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public static void MvxIocProvider_NonLazySingleton_ReturnsSameSingleton()
+        public void MvxIocProvider_NonLazySingleton_ReturnsSameSingleton()
         {
             Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IB, B>();
             Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IC, C2>();
