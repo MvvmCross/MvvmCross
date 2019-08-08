@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -159,6 +159,29 @@ namespace MvvmCross.UnitTest.Base
 
         protected class E : IE
         {
+        }
+
+        protected class F
+        {
+            private readonly IC _c;
+            private readonly string _first;
+            private readonly int _second;
+
+            public F(IC c, string first, int second)
+            {
+                _c = c;
+                _first = first;
+                _second = second;
+            }
+
+            public F(string first)
+            {
+                _first = first;
+            }
+
+            public string First => _first;
+            public int Second => _second;
+            public IC C => _c;
         }
 
         protected class COdd : IC
@@ -621,6 +644,21 @@ namespace MvvmCross.UnitTest.Base
             var enabled = true;
 
             Assert.Throws<MvxIoCResolveException>(() => { _iocProvider.IoCConstruct<D>(title, subtitle, enabled); });
+        }
+
+        [Fact]
+        public virtual void IocConstruct_WithMultipleTypedArgumentsAndInjectedArgument_CreatesObject()
+        {
+            _iocProvider.RegisterType<IC, C2>();
+            var first = "first";
+            var second = 2;
+
+            var f = _iocProvider.IoCConstruct<F>(first, second);
+            
+            Assert.NotNull(f);
+            Assert.NotNull(f.C);
+            Assert.Equal(first, f.First);
+            Assert.Equal(second, f.Second);
         }
 
         [Fact]

@@ -239,5 +239,54 @@ namespace MvvmCross.IoC
 
             return Activator.CreateInstance(type);
         }
+        
+        public static ConstructorInfo FindApplicableConstructor(this Type type, IDictionary<string, object> arguments)
+        {
+            var constructors = type.GetConstructors();
+            if (arguments == null || arguments.Count == 0)
+            {
+                return constructors.FirstOrDefault();
+            }
+            
+            var names = arguments.Keys;
+
+            foreach (var constructor in constructors)
+            {
+                var parameters = constructor.GetParameters();
+                if (parameters.All(p => names.Contains(p.Name)))
+                {
+                    return constructor;
+                }
+            }
+
+            return constructors.FirstOrDefault();
+        }
+        
+        public static ConstructorInfo FindApplicableConstructor(this Type type, object[] arguments)
+        {
+            var constructors = type.GetConstructors();
+            
+            foreach (var constructor in constructors)
+            {
+                var parameterTypes = constructor.GetParameters().Select(p => p.ParameterType);
+                var unusedArguments = arguments.ToList();
+
+                foreach (var parameterType in parameterTypes)
+                {
+                    var argumentMatch = unusedArguments.FirstOrDefault(arg => parameterType.IsInstanceOfType(arg));
+                    if (argumentMatch != null)
+                    {
+                        unusedArguments.Remove(argumentMatch);
+                    }
+                }
+
+                if (unusedArguments.Count == 0)
+                {
+                    return constructor;
+                }
+            }
+
+            return constructors.FirstOrDefault();
+        }
     }
 }
