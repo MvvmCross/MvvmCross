@@ -234,7 +234,7 @@ namespace MvvmCross.UnitTest.Base
         #endregion
 
         [Fact]
-        public void TryResolve_CircularButSafeDynamicWithOptionOff_ReturnsTrue()
+        public virtual void TryResolve_CircularButSafeDynamicWithOptionOff_ReturnsTrue()
         {
             COdd.FirstTime = true;
             
@@ -251,7 +251,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void TryResolve_CircularButSafeDynamicWithOptionOn_ReturnsFalse()
+        public virtual void TryResolve_CircularButSafeDynamicWithOptionOn_ReturnsFalse()
         {
             COdd.FirstTime = true;
 
@@ -265,7 +265,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void TryResolve_CircularLazyRegistration_ReturnsFalse()
+        public virtual void TryResolve_CircularLazyRegistration_ReturnsFalse()
         {
             _iocProvider.LazyConstructAndRegisterSingleton<IA, A>();
             _iocProvider.LazyConstructAndRegisterSingleton<IB, B>();
@@ -277,7 +277,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void TryResolve_NonCircularRegistration_ReturnsTrue()
+        public virtual void TryResolve_NonCircularRegistration_ReturnsTrue()
         {
             _iocProvider.LazyConstructAndRegisterSingleton<IA, A>();
             _iocProvider.LazyConstructAndRegisterSingleton<IB, B>();
@@ -289,7 +289,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void TryResolve_LazySingleton_ReturnsSameSingletonEachTime()
+        public virtual void TryResolve_LazySingleton_ReturnsSameSingletonEachTime()
         {
             _iocProvider.LazyConstructAndRegisterSingleton<IA, A>();
             _iocProvider.LazyConstructAndRegisterSingleton<IB, B>();
@@ -308,7 +308,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void TryResolve_NonLazySingleton_ReturnsSameSingletonEachTime()
+        public virtual void TryResolve_NonLazySingleton_ReturnsSameSingletonEachTime()
         {
             _iocProvider.LazyConstructAndRegisterSingleton<IB, B>();
             _iocProvider.LazyConstructAndRegisterSingleton<IC, C2>();
@@ -327,7 +327,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void TryResolve_Dynamic_ReturnsDifferentInstanceEachTime()
+        public virtual void TryResolve_Dynamic_ReturnsDifferentInstanceEachTime()
         {
             _iocProvider.LazyConstructAndRegisterSingleton<IB, B>();
             _iocProvider.LazyConstructAndRegisterSingleton<IC, C2>();
@@ -346,7 +346,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void TryResolve_ParameterConstructors_CreatesParametersUsingIocResolution()
+        public virtual void TryResolve_ParameterConstructors_CreatesParametersUsingIocResolution()
         {
             _iocProvider.RegisterType<IB, B>();
             _iocProvider.LazyConstructAndRegisterSingleton<IC, C2>();
@@ -360,7 +360,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void RegisterType_with_constructor_creates_different_objects()
+        public virtual void RegisterType_with_constructor_creates_different_objects()
         {
             _iocProvider.RegisterType<IC>(() => new C2());
 
@@ -374,7 +374,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void RegisterType_with_no_reflection_creates_different_objects()
+        public virtual void RegisterType_with_no_reflection_creates_different_objects()
         {
             _iocProvider.RegisterType<IA, IB>(b => new A(b));
             _iocProvider.RegisterType<IB, IC>(c => new B(c));
@@ -394,7 +394,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void RegisterType_with_no_reflection_with_up_to_5_parameters()
+        public virtual void RegisterType_with_no_reflection_with_up_to_5_parameters()
         {
             _iocProvider.RegisterType<IA, IB>(b => new A(b));
             _iocProvider.RegisterType<IB, IC>(c => new B(c));
@@ -427,7 +427,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void Non_generic_RegisterType_with_constructor_creates_different_objects()
+        public virtual void Non_generic_RegisterType_with_constructor_creates_different_objects()
         {
             _iocProvider.RegisterType(typeof(IC), () => new C2());
 
@@ -441,7 +441,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void Non_generic_RegisterType_with_constructor_throws_if_constructor_returns_incompatible_reference()
+        public virtual void Non_generic_RegisterType_with_constructor_throws_if_constructor_returns_incompatible_reference()
         {
             _iocProvider.RegisterType(typeof(IC), () => "Fail");
 
@@ -449,7 +449,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void Non_generic_RegisterType_with_constructor_throws_if_constructor_returns_incompatible_value()
+        public virtual void Non_generic_RegisterType_with_constructor_throws_if_constructor_returns_incompatible_value()
         {
             _iocProvider.RegisterType(typeof(IC), () => 36);
 
@@ -459,7 +459,7 @@ namespace MvvmCross.UnitTest.Base
         #region Open-Generics
 
         [Fact]
-        public void Resolves_successfully_when_registered_open_generic_with_one_generic_type_parameter()
+        public virtual void Resolves_successfully_when_registered_open_generic_with_one_generic_type_parameter()
         {
             _iocProvider.RegisterType(typeof(IOG<>), typeof(OG<>));
 
@@ -471,7 +471,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void Resolves_successfully_when_registered_closed_generic_with_one_generic_type_parameter()
+        public virtual void Resolves_successfully_when_registered_closed_generic_with_one_generic_type_parameter()
         {
             _iocProvider.RegisterType(typeof(IOG<C2>), typeof(OG<C2>));
 
@@ -483,7 +483,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void Resolves_successfully_when_registered_open_generic_with_two_generic_type_parameter()
+        public virtual void Resolves_successfully_when_registered_open_generic_with_two_generic_type_parameter()
         {
             _iocProvider.RegisterType(typeof(IOG2<,>), typeof(OG2<,>));
 
@@ -495,7 +495,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void Resolves_successfully_when_registered_closed_generic_with_two_generic_type_parameter()
+        public virtual void Resolves_successfully_when_registered_closed_generic_with_two_generic_type_parameter()
         {
             _iocProvider.RegisterType(typeof(IOG2<C2, C>), typeof(OG2<C2, C>));
 
@@ -507,7 +507,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void Resolves_unsuccessfully_when_registered_open_generic_with_one_generic_parameter_that_was_not_registered()
+        public virtual void Resolves_unsuccessfully_when_registered_open_generic_with_one_generic_parameter_that_was_not_registered()
         {
             var isResolved = _iocProvider.TryResolve(out IOG<C2> toResolve);
 
@@ -516,7 +516,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void Resolves_successfully_when_resolving_entity_that_has_injected_an_open_generic_parameter()
+        public virtual void Resolves_successfully_when_resolving_entity_that_has_injected_an_open_generic_parameter()
         {
             _iocProvider.RegisterType<IHasOGParameter, HasOGParameter>();
             _iocProvider.RegisterType(typeof(IOG<>), typeof(OG<>));
@@ -535,7 +535,7 @@ namespace MvvmCross.UnitTest.Base
         #region Child Container
 
         [Fact]
-        public void Resolves_successfully_when_using_childcontainer()
+        public virtual void Resolves_successfully_when_using_childcontainer()
         {
             _iocProvider.RegisterType<IC, C2>();
             var childContainer = _iocProvider.CreateChildContainer();
@@ -555,7 +555,7 @@ namespace MvvmCross.UnitTest.Base
         #endregion Child Container
 
         [Fact]
-        public void IocConstruct_WithDictionaryArguments_CreatesObject()
+        public virtual void IocConstruct_WithDictionaryArguments_CreatesObject()
         {
             var c = new C2();
             var arguments = new Dictionary<string, object> {["c"] = c};
@@ -563,14 +563,14 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void IocConstruct_WithAnonymousTypeArguments_CreatesObject()
+        public virtual void IocConstruct_WithAnonymousTypeArguments_CreatesObject()
         {
             var c = new C2();
             _iocProvider.IoCConstruct<B>(new {c});
         }
 
         [Fact]
-        public void IocConstruct_WithMultipleDictionaryArguments_CreatesObject()
+        public virtual void IocConstruct_WithMultipleDictionaryArguments_CreatesObject()
         {
             var title = "The title";
             var subtitle = "The subtitle";
@@ -585,7 +585,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void IocConstruct_WithMultipleAnonymousArguments_CreatesObject()
+        public virtual void IocConstruct_WithMultipleAnonymousArguments_CreatesObject()
         {
             var title = "The title";
             var subtitle = "The subtitle";
@@ -600,7 +600,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void IocConstruct_WithMultipleTypedArguments_CreatesObject()
+        public virtual void IocConstruct_WithMultipleTypedArguments_CreatesObject()
         {
             var title = "The title";
             var amount = 5;
@@ -614,7 +614,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void IocConstruct_WithMultipleTypedArguments_ThrowsFailedToFindCtor()
+        public virtual void IocConstruct_WithMultipleTypedArguments_ThrowsFailedToFindCtor()
         {
             var title = "The title";
             var subtitle = "The subtitle";
@@ -624,7 +624,7 @@ namespace MvvmCross.UnitTest.Base
         }
 
         [Fact]
-        public void MvxIocProvider_NonLazySingleton_ReturnsSameSingleton()
+        public virtual void MvxIocProvider_NonLazySingleton_ReturnsSameSingleton()
         {
             Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IB, B>();
             Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IC, C2>();
