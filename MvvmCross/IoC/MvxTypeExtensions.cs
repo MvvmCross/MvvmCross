@@ -259,7 +259,7 @@ namespace MvvmCross.IoC
                 }
             }
 
-            return constructors.FirstOrDefault();
+            return null;
         }
         
         public static ConstructorInfo FindApplicableConstructor(this Type type, object[] arguments)
@@ -286,7 +286,7 @@ namespace MvvmCross.IoC
                 }
             }
 
-            return constructors.FirstOrDefault();
+            return null;
         }
     }
 }
