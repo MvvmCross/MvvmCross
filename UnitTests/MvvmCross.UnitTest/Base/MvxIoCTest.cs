@@ -36,67 +36,67 @@ namespace MvvmCross.UnitTest.Base
 
         #region Test data
 
-        private interface IA
+        protected interface IA
         {
             IB B { get; }
         }
 
-        private interface IB
+        protected interface IB
         {
             IC C { get; }
         }
 
-        private interface IC
+        protected interface IC
         {
         }
 
-        private interface ID
+        protected interface ID
         {
         }
 
-        private interface IE
+        protected interface IE
         {
         }
 
-        private interface IOG<T>
+        protected interface IOG<T>
         {
         }
 
-        private interface IOG2<T, T2>
+        protected interface IOG2<T, T2>
         {
         }
 
-        private interface IHasOGParameter
+        protected interface IHasOGParameter
         {
             IOG<C> OpenGeneric { get; }
         }
 
-        private interface IHasOneParameter
+        protected interface IHasOneParameter
         {
             IA A { get; }
         }
 
-        private interface IHasTwoParameters : IHasOneParameter
+        protected interface IHasTwoParameters : IHasOneParameter
         {
             IB B { get; }
         }
 
-        private interface IHasThreeParameters : IHasTwoParameters
+        protected interface IHasThreeParameters : IHasTwoParameters
         {
             IC C { get; }
         }
 
-        private interface IHasFourParameters : IHasThreeParameters
+        protected interface IHasFourParameters : IHasThreeParameters
         {
             ID D { get; }
         }
 
-        private interface IHasFiveParameters : IHasFourParameters
+        protected interface IHasFiveParameters : IHasFourParameters
         {
             IE E { get; }
         }
 
-        private class A : IA
+        protected class A : IA
         {
             public A(IB b)
             {
@@ -106,7 +106,7 @@ namespace MvvmCross.UnitTest.Base
             public IB B { get; set; }
         }
 
-        private class B : IB
+        protected class B : IB
         {
             public B(IC c)
             {
@@ -116,21 +116,21 @@ namespace MvvmCross.UnitTest.Base
             public IC C { get; set; }
         }
 
-        private class C : IC
+        protected class C : IC
         {
             public C(IA a)
             {
             }
         }
 
-        private class C2 : IC
+        protected class C2 : IC
         {
             public C2()
             {
             }
         }
 
-        private class D : ID
+        protected class D : ID
         {
             public string Title { get; }
 
@@ -157,11 +157,11 @@ namespace MvvmCross.UnitTest.Base
             }
         }
 
-        private class E : IE
+        protected class E : IE
         {
         }
 
-        private class COdd : IC
+        protected class COdd : IC
         {
             public static bool FirstTime = true;
 
@@ -175,15 +175,15 @@ namespace MvvmCross.UnitTest.Base
             }
         }
 
-        private class OG<T> : IOG<T>
+        protected class OG<T> : IOG<T>
         {
         }
 
-        private class OG2<T, T2> : IOG2<T, T2>
+        protected class OG2<T, T2> : IOG2<T, T2>
         {
         }
 
-        private class HasOGParameter : IHasOGParameter
+        protected class HasOGParameter : IHasOGParameter
         {
             public HasOGParameter(IOG<C> openGeneric)
             {
@@ -193,7 +193,7 @@ namespace MvvmCross.UnitTest.Base
             public IOG<C> OpenGeneric { get; }
         }
 
-        private class HasMultipleConstructors : IHasFiveParameters
+        protected class HasMultipleConstructors : IHasFiveParameters
         {
             public IA A { get; }
 
