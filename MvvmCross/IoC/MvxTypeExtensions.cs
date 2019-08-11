@@ -247,13 +247,21 @@ namespace MvvmCross.IoC
             {
                 return constructors.OrderBy(c => c.GetParameters().Length).FirstOrDefault();
             }
-            
-            var names = arguments.Keys;
 
+            var unusedKeys = new List<string>(arguments.Keys);
+            
             foreach (var constructor in constructors)
             {
                 var parameters = constructor.GetParameters();
-                if (parameters.All(p => names.Contains(p.Name)))
+                foreach (var parameter in parameters)
+                {
+                    if (unusedKeys.Contains(parameter.Name) && parameter.ParameterType.IsInstanceOfType(arguments[parameter.Name]))
+                    {
+                        unusedKeys.Remove(parameter.Name);
+                    }
+                }
+
+                if (unusedKeys.Count == 0)
                 {
                     return constructor;
                 }
