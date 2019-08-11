@@ -245,7 +245,7 @@ namespace MvvmCross.IoC
             var constructors = type.GetConstructors();
             if (arguments == null || arguments.Count == 0)
             {
-                return null;
+                return constructors.OrderBy(c => c.GetParameters().Length).FirstOrDefault();
             }
             
             var names = arguments.Keys;
@@ -265,6 +265,10 @@ namespace MvvmCross.IoC
         public static ConstructorInfo FindApplicableConstructor(this Type type, object[] arguments)
         {
             var constructors = type.GetConstructors();
+            if (arguments == null || arguments.Length == 0)
+            {
+                return constructors.OrderBy(c => c.GetParameters().Length).FirstOrDefault();
+            }
             
             foreach (var constructor in constructors)
             {
