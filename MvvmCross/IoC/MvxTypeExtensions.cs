@@ -245,7 +245,7 @@ namespace MvvmCross.IoC
             var constructors = type.GetConstructors();
             if (arguments == null || arguments.Count == 0)
             {
-                return constructors.FirstOrDefault();
+                return null;
             }
             
             var names = arguments.Keys;
