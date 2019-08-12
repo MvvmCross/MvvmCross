@@ -57,18 +57,21 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <Compile Include="Platforms\Apple-common\**\*.cs" />
     <Compile Include="Platforms\Ios\**\*.cs" />
     <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+    <Reference Include="OpenTK-1.0" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.Mac')) ">
     <Compile Include="Platforms\Apple-common\**\*.cs" />
     <Compile Include="Platforms\Mac\**\*.cs" />
     <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+    <Reference Include="OpenTK" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.TVOS')) ">
     <Compile Include="Platforms\Apple-common\**\*.cs" />
     <Compile Include="Platforms\Tvos\**\*.cs" />
     <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+    <Reference Include="OpenTK-1.0" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.WatchOS')) ">
