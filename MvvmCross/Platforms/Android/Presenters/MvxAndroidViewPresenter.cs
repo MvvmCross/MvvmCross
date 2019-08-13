@@ -258,12 +258,12 @@ namespace MvvmCross.Platforms.Android.Presenters
                 return requestTranslator.GetIntentFor(request);
             }
 
-            var instanceRequest = requestTranslator.GetIntentWithKeyFor(
+            var intentWithKey = requestTranslator.GetIntentWithKeyFor(
                 viewModelInstanceRequest.ViewModelInstance,
                 viewModelInstanceRequest
             );
 
-            return instanceRequest.Item1;
+            return intentWithKey.intent;
         }
 
         protected virtual void ShowIntent(Intent intent, Bundle bundle)
