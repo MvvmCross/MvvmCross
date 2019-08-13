@@ -3,12 +3,19 @@
     <TargetFrameworks>monoandroid80;xamarinios10;netstandard2.0;uap10.0.16299</TargetFrameworks>
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <DefineConstants>UNO</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
     <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|monoandroid80|AnyCPU'">
+    <DefineConstants>$(DefineConstants);TRACE;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|monoandroid80|AnyCPU'">
+    <DefineConstants>$(DefineConstants);TRACE;</DefineConstants>
+  </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid80' or '$(TargetFramework)'=='netstandard2.0'">
-    <PackageReference Include="Uno.UI" Version="1.46.0-dev.2135" />
+    <PackageReference Include="Uno.UI" Version="1.46.196-dev.2440" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\MvvmCross\**\*.cs" Exclude="..\MvvmCross\Platforms\**\*.cs;..\MvvmCross\Resources\*.cs;..\MvvmCross\obj\**\*.*;..\MvvmCross\bin\**\*.*" />
@@ -21,6 +28,9 @@
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid80' ">
     <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="..\MvvmCross\Logging\LogProviders\Log4NetLogProvider.cs" />
   </ItemGroup>
   <!--<ItemGroup>
     <UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />

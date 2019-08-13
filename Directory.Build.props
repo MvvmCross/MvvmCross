@@ -28,6 +28,7 @@
     <IsTestProject>$(MSBuildProjectName.Contains('UnitTest'))</IsTestProject>
     <IsLibraryProject>$(MSBuildProjectName.Contains('MvvmCross'))</IsLibraryProject>
     <IsXamarinForms>$(MSBuildProjectName.Contains('.Forms'))</IsXamarinForms>
+    <IsUno>$(MSBuildProjectName.Contains('.Uno'))</IsUno>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -53,6 +54,10 @@
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
+
+  <ItemGroup Condition="'$(IsLibraryProject)' == 'true' and '$(IsUno)' == 'false' ">
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" PrivateAssets="All" />
+  </ItemGroup>
 
   <ItemGroup Condition="'$(IsLibraryProject)' == 'true'">
     <None Include="$(MSBuildThisFileDirectory)\LICENSE" Pack="true" PackagePath="\" />

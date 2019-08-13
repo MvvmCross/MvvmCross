@@ -290,11 +290,12 @@ namespace MvvmCross.Core
                 case MvxLogProviderType.EntLib:
                     logProviderCreator = () => new EntLibLogProvider();
                     break;
+#if !UNO
 
                 case MvxLogProviderType.Log4Net:
                     logProviderCreator = () => new Log4NetLogProvider();
                     break;
-
+#endif
                 case MvxLogProviderType.Loupe:
                     logProviderCreator = () => new LoupeLogProvider();
                     break;

@@ -29,13 +29,14 @@
     <Compile Remove="Program.cs" />
     <Compile Include="Program.cs" />
     <Content Include="LinkerConfig.xml" />
+    <Content Include="wwwroot/web.config" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
-    <PackageReference Include="Uno.UI" Version="1.46.0-dev.2135" />
-    <PackageReference Include="Uno.Wasm.Bootstrap" Version="1.0.0-dev.300" />
-    <DotNetCliToolReference Include="Uno.Wasm.Bootstrap.Cli" Version="1.0.0-dev.137" />
+    <PackageReference Include="Uno.UI" Version="1.46.196-dev.2440" />
+    <PackageReference Include="Uno.Wasm.Bootstrap" Version="1.0.0-dev.302" />
+    <DotNetCliToolReference Include="Uno.Wasm.Bootstrap.Cli" Version="1.0.0-dev.244" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\MvvmCross.Uno\MvvmCross.Uno.csproj" />
