@@ -5,6 +5,19 @@
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
     <DefineConstants>UNO</DefineConstants>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <AssemblyName>MvvmCross.Uno</AssemblyName>
+    <RootNamespace>MvvmCross</RootNamespace>
+    <Description>
+      MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+      This package contains the 'Core' libraries for MvvmCross built to be used by applications using the Uno platform
+    </Description>
+    <PackageId>MvvmCross.Uno</PackageId>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
     <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
   </PropertyGroup>
