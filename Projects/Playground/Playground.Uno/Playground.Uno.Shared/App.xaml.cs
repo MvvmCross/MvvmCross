@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.Extensions.Logging;
+using MvvmCross.Core;
 using MvvmCross.Platforms.Uap.Core;
 using MvvmCross.Platforms.Uap.Views;
 using Uno.Extensions;
@@ -10,6 +11,11 @@ namespace Playground.Uwp
     {
         public App()
         {
+#if __WASM__
+            Windows.UI.Core.CoreDispatcher.HasThreadAccessOverride = true;
+            MvxSetupSingleton.SupportsMultiThreadedStartup = false;
+#endif
+
             ConfigureFilters(LogExtensionPoint.AmbientLoggerFactory);
             InitializeComponent();
 

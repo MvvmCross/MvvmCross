@@ -37,6 +37,8 @@ namespace MvvmCross.Core
     public abstract class MvxSetupSingleton
        : MvxSingleton<MvxSetupSingleton>
     {
+        public static bool SupportsMultiThreadedStartup { get; set; } = true;
+
         private static readonly object LockObject = new object();
         private static TaskCompletionSource<bool> IsInitialisedTaskCompletionSource;
         private IMvxSetup _setup;
@@ -181,39 +183,53 @@ namespace MvvmCross.Core
 
             //Task.Run(async () =>
             //{
-            ExceptionDispatchInfo setupException = null;
-            try
+            Func<Task> secondaryStartup = async () =>
             {
-                _setup.InitializeSecondary();
-            }
-            catch (Exception ex)
-            {
-                setupException = ExceptionDispatchInfo.Capture(ex);
-            }
-            IMvxSetupMonitor monitor;
-            lock (LockObject)
-            {
-                if (setupException == null)
+                ExceptionDispatchInfo setupException = null;
+                try
                 {
-                    IsInitialisedTaskCompletionSource.SetResult(true);
+                    _setup.InitializeSecondary();
                 }
-                else
+                catch (Exception ex)
                 {
-                    IsInitialisedTaskCompletionSource.SetException(setupException.SourceException);
+                    setupException = ExceptionDispatchInfo.Capture(ex);
                 }
-                monitor = _currentMonitor;
-            }
 
-            if (monitor != null)
-            {
-                var dispatcher = Mvx.IoCProvider.GetSingleton<IMvxMainThreadAsyncDispatcher>();
-                await dispatcher.ExecuteOnMainThreadAsync(async () =>
+                IMvxSetupMonitor monitor;
+                lock (LockObject)
                 {
-                    if (monitor != null)
+                    if (setupException == null)
                     {
-                        await monitor.InitializationComplete();
+                        IsInitialisedTaskCompletionSource.SetResult(true);
                     }
-                });
+                    else
+                    {
+                        IsInitialisedTaskCompletionSource.SetException(setupException.SourceException);
+                    }
+
+                    monitor = _currentMonitor;
+                }
+
+                if (monitor != null)
+                {
+                    var dispatcher = Mvx.IoCProvider.GetSingleton<IMvxMainThreadAsyncDispatcher>();
+                    await dispatcher.ExecuteOnMainThreadAsync(async () =>
+                    {
+                        if (monitor != null)
+                        {
+                            await monitor.InitializationComplete();
+                        }
+                    });
+                }
+            };
+
+            if (SupportsMultiThreadedStartup)
+            {
+                Task.Run(secondaryStartup);
+            }
+            else
+            {
+                await secondaryStartup();
             }
 
             //});
