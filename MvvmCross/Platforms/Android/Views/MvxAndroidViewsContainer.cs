@@ -146,7 +146,7 @@ namespace MvvmCross.Platforms.Android.Views
             //                intent.AddFlags(ActivityFlags.ClearTop);
         }
 
-        public virtual (Intent Intent, int Key) GetIntentWithKeyFor(IMvxViewModel viewModel, MvxViewModelRequest request)
+        public virtual (Intent intent, int key) GetIntentWithKeyFor(IMvxViewModel viewModel, MvxViewModelRequest request)
         {
             request = request ?? MvxViewModelRequest.GetDefaultRequest(viewModel.GetType());
             var intent = GetIntentFor(request);

@@ -13,7 +13,7 @@ namespace MvvmCross.Platforms.Android.Views
         Intent GetIntentFor(MvxViewModelRequest request);
 
         // Important: if calling GetIntentWithKeyFor then you must later call RemoveSubViewModelWithKey on the returned key
-        (Intent Intent, int Key) GetIntentWithKeyFor(IMvxViewModel existingViewModelToUse, MvxViewModelRequest request);
+        (Intent intent, int key) GetIntentWithKeyFor(IMvxViewModel existingViewModelToUse, MvxViewModelRequest request);
 
         void RemoveSubViewModelWithKey(int key);
     }
