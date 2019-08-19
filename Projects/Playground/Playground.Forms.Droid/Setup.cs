@@ -3,8 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using Android.Content;
+using MvvmCross;
 using MvvmCross.Forms.Platforms.Android.Core;
+using MvvmCross.Forms.Presenters;
 using MvvmCross.Logging;
+using Playground.Core;
 using Playground.Forms.UI;
 using Serilog;
 
@@ -12,8 +15,22 @@ namespace Playground.Forms.Droid
 {
     public class Setup : MvxFormsAndroidSetup<Core.App, FormsApp>
     {
+        #region Public Methods
+
         public override MvxLogProviderType GetDefaultLogProviderType()
             => MvxLogProviderType.Serilog;
+
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        protected override IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
+        {
+            // Workaround/fix for: https://github.com/MvvmCross/MvvmCross/issues/2502
+            var formsPagePresenter = new SavingsAppMvxFormsPagePresenter(viewPresenter);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFormsPagePresenter>(formsPagePresenter);
+            return formsPagePresenter;
+        }
 
         protected override IMvxLogProvider CreateLogProvider()
         {
@@ -23,5 +40,7 @@ namespace Playground.Forms.Droid
                 .CreateLogger();
             return base.CreateLogProvider();
         }
+
+        #endregion Protected Methods
     }
 }
