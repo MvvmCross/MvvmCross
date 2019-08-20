@@ -15,14 +15,8 @@ namespace Playground.Forms.Droid
 {
     public class Setup : MvxFormsAndroidSetup<Core.App, FormsApp>
     {
-        #region Public Methods
-
         public override MvxLogProviderType GetDefaultLogProviderType()
             => MvxLogProviderType.Serilog;
-
-        #endregion Public Methods
-
-        #region Protected Methods
 
         protected override IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
         {
@@ -40,7 +34,5 @@ namespace Playground.Forms.Droid
                 .CreateLogger();
             return base.CreateLogProvider();
         }
-
-        #endregion Protected Methods
     }
 }

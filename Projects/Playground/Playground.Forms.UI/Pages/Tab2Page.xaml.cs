@@ -8,16 +8,13 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Forms.UI.Pages
 {
-    [MvxTabbedPagePresentation(WrapInNavigationPage = true, HostViewModelType = typeof(Tab1ViewModel))]
+    //[MvxTabbedPagePresentation(WrapInNavigationPage = true, HostViewModelType = typeof(Tab1ViewModel))]
+    [MvxTabbedPagePresentation(WrapInNavigationPage = false)]
     public partial class Tab2Page : MvxContentPage<Tab2ViewModel>
     {
-        #region Public Constructors
-
         public Tab2Page()
         {
             InitializeComponent();
         }
-
-        #endregion Public Constructors
     }
 }
