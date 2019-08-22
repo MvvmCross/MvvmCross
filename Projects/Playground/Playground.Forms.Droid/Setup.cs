@@ -21,7 +21,7 @@ namespace Playground.Forms.Droid
         protected override IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
         {
             // Workaround/fix for: https://github.com/MvvmCross/MvvmCross/issues/2502
-            var formsPagePresenter = new SavingsAppMvxFormsPagePresenter(viewPresenter);
+            var formsPagePresenter = new CustomMvxFormsPagePresenter(viewPresenter);
             Mvx.IoCProvider.RegisterSingleton<IMvxFormsPagePresenter>(formsPagePresenter);
             return formsPagePresenter;
         }

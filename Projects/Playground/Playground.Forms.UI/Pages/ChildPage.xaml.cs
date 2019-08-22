@@ -10,7 +10,7 @@ using System;
 
 namespace Playground.Forms.UI.Pages
 {
-    [MvxContentPagePresentation(WrapInNavigationPage = true, NoHistory = false)]
+    [MvxContentPagePresentation(WrapInNavigationPage = true, NoHistory = false, HostViewModelType = typeof(Tab1ViewModel))]
     public partial class ChildPage : MvxContentPage<ChildViewModel>
     {
         public ChildPage()

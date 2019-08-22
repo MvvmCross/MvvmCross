@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using MvvmCross.Exceptions;
 using MvvmCross.Forms.Presenters;
@@ -16,17 +17,43 @@ namespace Playground.Core
     /// Fixes https://github.com/MvvmCross/MvvmCross/issues/2502
     /// </summary>
     /// <seealso cref="MvvmCross.Forms.Presenters.MvxFormsPagePresenter" />
-    public class SavingsAppMvxFormsPagePresenter : MvxFormsPagePresenter
+    public class CustomMvxFormsPagePresenter : MvxFormsPagePresenter
     {
-        #region Public Constructors
-
-        public SavingsAppMvxFormsPagePresenter(IMvxFormsViewPresenter platformPresenter) : base(platformPresenter)
+        public CustomMvxFormsPagePresenter(IMvxFormsViewPresenter platformPresenter) : base(platformPresenter)
         {
         }
 
-        #endregion Public Constructors
+        public override async Task<bool> ShowContentPage(
+            Type view,
+            MvxContentPagePresentationAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            var showPlatformViews = true;
+            // TODO: if we need to do this for tab nav children, need to find a better way other than hard-coding the types..
+            if (((MvxViewModelInstanceRequest) request)?.ViewModelInstance?.GetType()
+                ?.Equals(typeof(ViewModels.ChildViewModel)) ?? false)
+            {
+                // this avoids extra tabs being created (on Android.. )
+                //TODO: iOS?
+                showPlatformViews = false;
+            }
+            var page = await CloseAndCreatePage(view, request, attribute, showPlatformViews: showPlatformViews);
+            await PushOrReplacePage(FormsApplication.MainPage, page, attribute);
+            return true;
+        }
 
-        #region Public Methods
+        private TabbedPage FindTabbedPage(Page page)
+        {
+            switch (page)
+            {
+                case TabbedPage tabbedPage:
+                    return tabbedPage;
+                case NavigationPage navPage:
+                    return FindTabbedPage(navPage.CurrentPage);
+                default:
+                    return null;
+            }
+        }
 
         public override async Task PushOrReplacePage(Page rootPage, Page page, MvxPagePresentationAttribute attribute)
         {
@@ -37,6 +64,28 @@ namespace Playground.Core
             }
 
             var navigationRootPage = GetPageOfType<NavigationPage>(rootPage);
+
+            // FIX: if our root page is a tabbed page then we need to check the different tabs for the appropriate navigation stack
+            if (attribute.WrapInNavigationPage && attribute.HostViewModelType != null)
+            {
+                var tabbedPage = FindTabbedPage(rootPage);
+                if (tabbedPage != null)
+                {
+                    // find the child that is a navigation stack with a view using the HostViewModelType as its view model
+                    foreach (var tab in tabbedPage.Children)
+                    {
+                        if (!(tab is NavigationPage navPage)) continue;
+
+                        // does this stack have the view with the view model type we want
+                        if (navPage?.Navigation?.NavigationStack?.OfType<IMvxPage>().FirstOrDefault(x => x.ViewModel.GetType() == attribute.HostViewModelType) is Page)
+                        {
+                            navigationRootPage = navPage;
+                            break;
+                        }
+                    }
+                }
+            }
+            // END OF: FIX
 
             // Step down through any nested navigation pages to make sure we're pushing to the
             // most nested navigation page
@@ -101,11 +150,21 @@ namespace Playground.Core
                     await PushOrReplacePage(FormsApplication.MainPage, tabHost, attribute);
                 }
 
+                // FIX: when attribute indicates page should be wrapped in a NavigationPage, do so
+                if (attribute.WrapInNavigationPage)
+                {
+                    page = CreateNavigationPage(page).Build(tp =>
+                    {
+                        tp.Title = page.Title;
+                        //tp.IconImageSource = page.IconImageSource;
+                        tp.Icon = page.Icon;
+                    });
+                }
+                // END OF: FIX
+
                 tabHost.Children.Add(page);
             }
             return true;
         }
-
-        #endregion Public Methods
     }
 }
