@@ -6,10 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.Content;
+using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
 using Java.Lang;
 using MvvmCross.Platforms.Android;
+using MvvmCross.Platforms.Android.Presenters;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
@@ -59,6 +61,8 @@ namespace MvvmCross.Droid.Support.V4
 
             mvxFragment.ViewModel = GetViewModel(fragmentInfo);
 
+            fragmentInfo.CachedFragment.Arguments = GetArguments(fragmentInfo);
+
             return fragment;
         }
 
@@ -87,6 +91,19 @@ namespace MvvmCross.Droid.Support.V4
             var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
 
             return viewModelLoader.LoadViewModel(fragmentInfo.Request, null);
+        }
+        
+        private static Bundle GetArguments(MvxViewPagerFragmentInfo fragmentInfo)
+        {
+            var navigationSerializer = Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>();
+
+            var serializedRequest = navigationSerializer.Serializer.SerializeObject(fragmentInfo.Request);
+
+            var bundle = new Bundle();
+
+            bundle.PutString(MvxAndroidViewPresenter.ViewModelRequestBundleKey, serializedRequest);
+
+            return bundle;
         }
     }
 }
