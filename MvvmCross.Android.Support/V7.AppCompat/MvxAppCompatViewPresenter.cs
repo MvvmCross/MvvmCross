@@ -441,28 +441,23 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 throw new MvxException("ViewPager not found");
 
             var tag = attribute.Tag ?? attribute.ViewType.FragmentJavaName();
+            var fragmentInfo = new MvxViewPagerFragmentInfo(attribute.Title, tag, attribute.ViewType, request);
+
             if (viewPager.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
             {
-                if (request is MvxViewModelInstanceRequest instanceRequest)
-                    adapter.FragmentsInfo.Add(new MvxViewPagerFragmentInfo(
-                        attribute.Title, tag, attribute.ViewType, instanceRequest.ViewModelInstance));
-                else
-                    adapter.FragmentsInfo.Add(new MvxViewPagerFragmentInfo(
-                        attribute.Title, tag, attribute.ViewType, attribute.ViewModelType));
-
+                adapter.FragmentsInfo.Add(fragmentInfo);
                 adapter.NotifyDataSetChanged();
             }
             else
             {
-                var fragments = new List<MvxViewPagerFragmentInfo>();
-                if (request is MvxViewModelInstanceRequest instanceRequest)
-                    fragments.Add(new MvxViewPagerFragmentInfo(
-                        attribute.Title, tag, attribute.ViewType, instanceRequest.ViewModelInstance));
-                else
-                    fragments.Add(new MvxViewPagerFragmentInfo(
-                        attribute.Title, tag, attribute.ViewType, attribute.ViewModelType));
-
-                viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(CurrentActivity, fragmentManager, fragments);
+                viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(
+                    CurrentActivity, 
+                    fragmentManager, 
+                    new List<MvxViewPagerFragmentInfo>
+                    {
+                        fragmentInfo
+                    }
+                );
             }
 
             return Task.FromResult(true);
@@ -584,7 +579,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 var viewTypeMatches = info.FragmentType == attribute.ViewType;
 
                 if (attribute.ViewModelType != null)
-                    return viewTypeMatches && info.ViewModelType == attribute.ViewModelType;
+                    return viewTypeMatches && info.Request?.ViewModelType == attribute.ViewModelType;
 
                 return viewTypeMatches;
             }

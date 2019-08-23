@@ -8,23 +8,25 @@ using System.Linq;
 using Android.Content;
 using Android.Runtime;
 using Android.Support.V4.App;
-using Android.Support.V4.View;
 using Java.Lang;
-using MvvmCross.Core;
 using MvvmCross.Platforms.Android;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
-using String = Java.Lang.String;
+using JavaObject = Java.Lang.Object;
+using JavaString = Java.Lang.String;
 
 namespace MvvmCross.Droid.Support.V4
 {
     [Register("mvvmcross.droid.support.v4.MvxCachingFragmentStatePagerAdapter")]
-    public class MvxCachingFragmentStatePagerAdapter
-		: MvxCachingFragmentPagerAdapter
+    public class MvxCachingFragmentStatePagerAdapter : MvxCachingFragmentPagerAdapter
     {
         private readonly Context _context;
         private readonly Type _activityType;
+
+        public List<MvxViewPagerFragmentInfo> FragmentsInfo { get; }
+
+        public override int Count => FragmentsInfo?.Count ?? 0;
 
         protected MvxCachingFragmentStatePagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
@@ -32,7 +34,7 @@ namespace MvvmCross.Droid.Support.V4
             _activityType = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType();
         }
 
-		public MvxCachingFragmentStatePagerAdapter(Context context, FragmentManager fragmentManager,
+        public MvxCachingFragmentStatePagerAdapter(Context context, FragmentManager fragmentManager,
             List<MvxViewPagerFragmentInfo> fragmentsInfo) : base(fragmentManager)
         {
             _context = context;
@@ -40,36 +42,34 @@ namespace MvvmCross.Droid.Support.V4
             _activityType = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType();
         }
 
-        public override int Count => FragmentsInfo?.Count() ?? 0;
-
-        public List<MvxViewPagerFragmentInfo> FragmentsInfo { get; }
-
         public override Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null)
         {
-            var fragInfo = FragmentsInfo.ElementAt(position);
-            var fragment = Fragment.Instantiate(_context, fragInfo.FragmentType.FragmentJavaName());
+            var fragmentInfo = FragmentsInfo.ElementAt(position);
+            var fragment = Fragment.Instantiate(_context, fragmentInfo.FragmentType.FragmentJavaName());
 
-            var mvxFragment = fragment as IMvxFragmentView;
-            if (mvxFragment == null)
+            if (!(fragment is IMvxFragmentView mvxFragment))
+            {
                 return fragment;
+            }
 
-			if (mvxFragment.GetType().IsFragmentCacheable(_activityType) && fragmentSavedState != null)
+            if (mvxFragment.GetType().IsFragmentCacheable(_activityType) && fragmentSavedState != null)
+            {
                 return fragment;
+            }
 
-            var viewModel = fragInfo.ViewModel ?? CreateViewModel(position);
-            mvxFragment.ViewModel = viewModel;
+            mvxFragment.ViewModel = GetViewModel(fragmentInfo);
 
             return fragment;
         }
 
-        public override int GetItemPosition(Java.Lang.Object @object)
+        public override int GetItemPosition(JavaObject @object)
         {
-            return PagerAdapter.PositionNone;
+            return PositionNone;
         }
 
         public override ICharSequence GetPageTitleFormatted(int position)
         {
-            return new String(FragmentsInfo.ElementAt(position).Title);
+            return new JavaString(FragmentsInfo.ElementAt(position).Title);
         }
 
         protected override string GetTag(int position)
@@ -77,17 +77,16 @@ namespace MvvmCross.Droid.Support.V4
             return FragmentsInfo.ElementAt(position).Tag;
         }
 
-        private IMvxViewModel CreateViewModel(int position)
+        private static IMvxViewModel GetViewModel(MvxViewPagerFragmentInfo fragmentInfo)
         {
-            var fragInfo = FragmentsInfo.ElementAt(position);
+            if (fragmentInfo.Request is MvxViewModelInstanceRequest instanceRequest)
+            {
+                return instanceRequest.ViewModelInstance;
+            }
 
-            MvxBundle mvxBundle = null;
-            if (fragInfo.ParameterValuesObject != null)
-                mvxBundle = new MvxBundle(fragInfo.ParameterValuesObject.ToSimplePropertyDictionary());
+            var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
 
-            var request = new MvxViewModelRequest(fragInfo.ViewModelType, mvxBundle, null);
-
-            return Mvx.IoCProvider.Resolve<IMvxViewModelLoader>().LoadViewModel(request, null);
+            return viewModelLoader.LoadViewModel(fragmentInfo.Request, null);
         }
     }
 }
