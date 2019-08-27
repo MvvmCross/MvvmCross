@@ -137,7 +137,7 @@
       <Version>28.0.0.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design">
-      <Version>28.0.0.1</Version>
+      <Version>28.0.0.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Fragment">
       <Version>28.0.0.1</Version>
