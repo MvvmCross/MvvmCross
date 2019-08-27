@@ -251,14 +251,19 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual Intent CreateIntentForRequest(MvxViewModelRequest request)
         {
-            IMvxAndroidViewModelRequestTranslator requestTranslator = Mvx.IoCProvider.Resolve<IMvxAndroidViewModelRequestTranslator>();
+            var requestTranslator = Mvx.IoCProvider.Resolve<IMvxAndroidViewModelRequestTranslator>();
 
-            if (request is MvxViewModelInstanceRequest viewModelInstanceRequest)
+            if (!(request is MvxViewModelInstanceRequest viewModelInstanceRequest))
             {
-                var instanceRequest = requestTranslator.GetIntentWithKeyFor(viewModelInstanceRequest.ViewModelInstance);
-                return instanceRequest.Item1;
+                return requestTranslator.GetIntentFor(request);
             }
-            return requestTranslator.GetIntentFor(request);
+
+            var intentWithKey = requestTranslator.GetIntentWithKeyFor(
+                viewModelInstanceRequest.ViewModelInstance,
+                viewModelInstanceRequest
+            );
+
+            return intentWithKey.intent;
         }
 
         protected virtual void ShowIntent(Intent intent, Bundle bundle)
