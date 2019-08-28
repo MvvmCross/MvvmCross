@@ -36,7 +36,7 @@ This package contains the 'Visibility' plugin for MvvmCross</Description>
     <Compile Include="Platforms\Console\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) And '$(OS)' == 'Windows_NT' ">
     <Compile Include="Platforms\Net\**\*.cs" />
     <Compile Include="Platforms\Wpf\**\*.cs" />
     <Reference Include="PresentationCore" />
