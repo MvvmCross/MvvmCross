@@ -12,17 +12,14 @@ This package contains the 'MvvmCross.Platforms.Wpf' libraries for MvvmCross</Des
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="..\MvvmCross\Platforms\Wpf\**\*.cs" />
+  <ItemGroup Condition=" '$(OS)' == 'Windows_NT' ">
+    <Compile Include="..\MvvmCross\Platforms\Wpf\**\*.cs" />
     <ProjectReference Include="..\MvvmCross\MvvmCross.csproj" />
-    <None Include="..\MvvmCross\readme.txt" pack="true" PackagePath="." />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
+    <None Include="..\MvvmCross\readme.txt" pack="true" PackagePath="." />
   </ItemGroup>
   
 </Project>
