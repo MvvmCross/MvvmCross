@@ -1,3 +1,22 @@
+trigger:
+  branches:
+    include:
+    - develop
+    - releases/*
+  paths:
+    exclude:
+    - '**/*.md'
+    - docs/*
+pr:
+  branches:
+    include:
+    - develop
+    - releases/*
+  paths:
+    exclude:
+    - '**/*.md'
+    - docs/*
+
 pool:
   vmImage: windows-2019
 
