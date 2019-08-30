@@ -335,8 +335,9 @@ MSBuildSettings GetDefaultBuildSettings()
     // workaround for derped Java Home ENV vars
     if (IsRunningOnWindows() && isRunningOnPipelines)
     {
-        Information("Setting JavaSdkDirectory");
-        settings = settings.WithProperty("JavaSdkDirectory", @"C:/Program Files/Java/zulu-8-azure-jdk_8.38.0.13-8.0.212-win_x64");
+        var javaSdkDir = EnvironmentVariable("JAVA_HOME_8_X64");
+        Information("Setting JavaSdkDirectory to: " + javaSdkDir);
+        settings = settings.WithProperty("JavaSdkDirectory", javaSdkDir);
     }
 
     return settings;
