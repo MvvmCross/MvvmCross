@@ -18,15 +18,18 @@ var configuration = Argument("configuration", "Release");
 var verbosityArg = Argument("verbosity", "Minimal");
 var verbosity = Verbosity.Minimal;
 
-var signingSecret = EnvironmentVariable("SIGNING_SECRET");
-var signingUser = EnvironmentVariable("SIGNING_USER");
+var signingSecret = Argument("signing_secret", "");
+var signingUser = Argument("signing_user", "");
 var didSignPackages = false;
+
+var nugetSource = Argument("nuget_source", "");
+var nugetApiKey = Argument("nuget_apikey", "");
 
 var githubToken = Argument("github_token", "");
 var githubTokenEnv = EnvironmentVariable("CHANGELOG_GITHUB_TOKEN");
 var sinceTag = Argument("since_tag", "");
 
-var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
+var isRunningOnPipelines = TFBuild.IsRunningOnAzurePipelines || TFBuild.IsRunningOnAzurePipelinesHosted;
 GitVersion versionInfo = null;
 
 Setup(context => 
@@ -38,10 +41,10 @@ Setup(context =>
         LogFilePath = gitVersionLog.MakeAbsolute(context.Environment)
     });
 
-    if (isRunningOnAppVeyor)
+    if (isRunningOnPipelines)
     {
-        var buildNumber = AppVeyor.Environment.Build.Number;
-        AppVeyor.UpdateBuildVersion(versionInfo.InformationalVersion
+        var buildNumber = TFBuild.Environment.Build.Number;
+        TFBuild.Commands.UpdateBuildNumber(versionInfo.InformationalVersion
             + "-" + buildNumber);
     }
 
@@ -134,7 +137,7 @@ Task("UnitTest")
 
     var settings = new DotNetCoreTestSettings
     {
-        Configuration = "Release",
+        Configuration = configuration,
         NoBuild = true
     };
 
@@ -153,10 +156,17 @@ Task("UnitTest")
         }
     }
 
-    if (isRunningOnAppVeyor)
+    if (isRunningOnPipelines)
     {
-        foreach(var testResult in GetFiles(outputDir + "/Tests/*.xml"))
-            AppVeyor.UploadTestResults(testResult, AppVeyorTestResultsType.XUnit);
+        var data = new TFBuildPublishTestResultsData
+        {
+            Configuration = configuration,
+            TestResultsFiles = GetFiles(outputDir + "/Tests/*.xml").ToList(),
+            TestRunner = TFTestRunnerType.XUnit,
+            TestRunTitle = "MvvmCross Unit Tests",
+            MergeTestResults = true
+        };
+        TFBuild.Commands.PublishTestResults(data);
     }
 
     if (testsFailed)
@@ -214,6 +224,8 @@ Task("PublishPackages")
     .WithCriteria(() => !BuildSystem.IsLocalBuild)
     .WithCriteria(() => IsRepository(repoName))
     .WithCriteria(() => ShouldPushNugetPackages(versionInfo.BranchName))
+    .WithCriteria(() => !string.IsNullOrEmpty(nugetSource))
+    .WithCriteria(() => !string.IsNullOrEmpty(nugetApiKey))
     .IsDependentOn("CopyPackages")
     .IsDependentOn("SignPackages")
     .Does (() =>
@@ -223,11 +235,6 @@ Task("PublishPackages")
         Warning("Packages were not signed. Not publishing packages");
         return;
     }
-
-    // Resolve the API key.
-    var nugetKeySource = GetNugetKeyAndSource();
-    var apiKey = nugetKeySource.Item1;
-    var source = nugetKeySource.Item2;
 
     var nugetFiles = GetFiles(outputDir + "/*.nupkg");
 
@@ -240,31 +247,21 @@ Task("PublishPackages")
     {
         policy.Execute(() =>
             NuGetPush(nugetFile, new NuGetPushSettings {
-                Source = source,
-                ApiKey = apiKey
+                Source = nugetSource,
+                ApiKey = nugetApiKey
             })
         );
     }
 });
 
-Task("UploadAppVeyorArtifact")
-    .WithCriteria(() => isRunningOnAppVeyor)
+Task("UploadArtifacts")
+    .WithCriteria(() => isRunningOnPipelines)
     .Does(() => 
 {
     Information("Artifacts Dir: {0}", outputDir.FullPath);
-
-    var uploadSettings = new AppVeyorUploadArtifactsSettings {
-        ArtifactType = AppVeyorUploadArtifactType.Auto
-    };
-
     var artifacts = GetFiles(outputDir.FullPath + "/**/*");
 
-    foreach(var file in artifacts) 
-    {
-        Information("Uploading {0}", file.FullPath);
-
-        AppVeyor.UploadArtifact(file.FullPath, uploadSettings);
-    }
+    TFBuild.Commands.UploadArtifactDirectory(outputDir, "build artifacts");
 });
 
 Task("UpdateChangelog")
@@ -317,7 +314,7 @@ Task("Default")
     .IsDependentOn("Build")
     .IsDependentOn("UnitTest")
     .IsDependentOn("PublishPackages")
-    .IsDependentOn("UploadAppVeyorArtifact")
+    .IsDependentOn("UploadArtifacts")
     .Does(() => 
 {
 });
@@ -360,9 +357,9 @@ bool IsMasterOrReleases(string branchName)
 
 bool IsRepository(string repoName)
 {
-    if (isRunningOnAppVeyor)
+    if (isRunningOnPipelines)
     {
-        var buildEnvRepoName = AppVeyor.Environment.Repository.Name;
+        var buildEnvRepoName = TFBuild.Environment.Repository.RepoName;
         Information("Checking repo name: {0} against build repo name: {1}", repoName, buildEnvRepoName);
         return StringComparer.OrdinalIgnoreCase.Equals(repoName, buildEnvRepoName);
     }
@@ -405,38 +402,4 @@ Tuple<bool, string> IsTagged()
         Debug("HEAD is tagged: {0}", tag.FriendlyName);
         return Tuple.Create<bool, string>(true, tag.FriendlyName);
     }
-}
-
-Tuple<string, string> GetNugetKeyAndSource()
-{
-    var apiKeyKey = string.Empty;
-    var sourceKey = string.Empty;
-    if (isRunningOnAppVeyor)
-    {
-        apiKeyKey = "NUGET_APIKEY";
-        sourceKey = "NUGET_SOURCE";
-    }
-    else
-    {
-        if (StringComparer.OrdinalIgnoreCase.Equals(versionInfo.BranchName, "develop"))
-        {
-            apiKeyKey = "NUGET_APIKEY_DEVELOP";
-            sourceKey = "NUGET_SOURCE_DEVELOP";
-        }
-        else if (IsMasterOrReleases(versionInfo.BranchName))
-        {
-            apiKeyKey = "NUGET_APIKEY_MASTER";
-            sourceKey = "NUGET_SOURCE_MASTER";
-        }
-    }
-
-    var apiKey = EnvironmentVariable(apiKeyKey);
-    if (string.IsNullOrEmpty(apiKey))
-        throw new Exception(string.Format("The {0} environment variable is not defined.", apiKeyKey));
-
-    var source = EnvironmentVariable(sourceKey);
-    if (string.IsNullOrEmpty(source))
-        throw new Exception(string.Format("The {0} environment variable is not defined.", sourceKey));
-
-    return Tuple.Create(apiKey, source);
 }

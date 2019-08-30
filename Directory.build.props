@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
     <PackageLicenseExpression>MS-PL</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/MvvmCross</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/MvvmCross/MvvmCross</PackageProjectUrl>
     <PackageIconUrl>http://i.imgur.com/Baucn8c.png</PackageIconUrl>
     <Authors>.NET Foundation and Contributors</Authors>
     <Owners>MvvmCross;slodge;cheesebaron;martijn00</Owners>
