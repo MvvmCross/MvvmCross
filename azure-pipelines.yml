@@ -17,4 +17,4 @@ steps:
   inputs:
     targetType: filePath
     filePath: .\build.ps1
-    arguments: "--verbosity=Verbose --signing_secret='$(SIGNING_SECRET)' --signing_user='$(SIGNING_USER)' --nuget_source='$(NUGET_SOURCE)' --nuget_apikey='$(NUGET_APIKEY)'"
+    arguments: "--verbosity=Verbose --signing_secret='$(SIGNING_SECRET)' --signing_user='$(SIGNING_USER)' --package_source='$(NUGET_SOURCE)' --package_apikey='$(NUGET_APIKEY)'"

@@ -22,8 +22,8 @@ var signingSecret = Argument("signing_secret", "");
 var signingUser = Argument("signing_user", "");
 var didSignPackages = false;
 
-var nugetSource = Argument("nuget_source", "");
-var nugetApiKey = Argument("nuget_apikey", "");
+var nugetSource = Argument("package_source", "");
+var nugetApiKey = Argument("package_apikey", "");
 
 var githubToken = Argument("github_token", "");
 var githubTokenEnv = EnvironmentVariable("CHANGELOG_GITHUB_TOKEN");
