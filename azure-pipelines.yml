@@ -1,0 +1,17 @@
+pool:
+  vmImage: windows-2019
+
+variables:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'Install SignClient'
+  inputs:
+    command: custom
+    custom: tool
+    arguments: 'install --tool-path . SignClient'
+
+- task: cake-build.cake.cake-build-task.Cake@0
+  displayName: 'Run Cake Build'  inputs:
+  arguments: '--signing_secret=$(SIGNING_SECRET) --signing_user=$(SIGNING_USER) --nuget_source=$(NUGET_SOURCE) --nuget_apikey=$(NUGET_APIKEY)'
