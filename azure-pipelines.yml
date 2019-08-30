@@ -36,4 +36,4 @@ steps:
   inputs:
     targetType: filePath
     filePath: .\build.ps1
-    arguments: "--verbosity=Minimal --signing_secret='$(SIGNING_SECRET)' --signing_user='$(SIGNING_USER)' --package_source='$(NUGET_SOURCE)' --package_apikey='$(NUGET_APIKEY)'"
+    arguments: "--verbosity=Normal --signing_secret='$(SIGNING_SECRET)' --signing_user='$(SIGNING_USER)' --package_source='$(NUGET_SOURCE)' --package_apikey='$(NUGET_APIKEY)'"
