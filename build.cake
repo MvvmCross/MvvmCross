@@ -332,6 +332,12 @@ MSBuildSettings GetDefaultBuildSettings()
         ToolVersion = MSBuildToolVersion.VS2019
     };
 
+    // workaround for derped Java Home ENV vars
+    if (IsRunningOnWindows && isRunningOnPipelines)
+    {
+        settings = settings.WithProperty("JavaSdkDirectory", @"C:/Program Files/Java/zulu-8-azure-jdk_8.38.0.13-8.0.212-win_x64");
+    }
+
     return settings;
 }
 
