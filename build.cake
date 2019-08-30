@@ -43,9 +43,9 @@ Setup(context =>
 
     if (isRunningOnPipelines)
     {
-        var buildNumber = TFBuild.Environment.Build.Number;
-        TFBuild.Commands.UpdateBuildNumber(versionInfo.InformationalVersion
-            + "-" + buildNumber);
+        var buildNumber = versionInfo.InformationalVersion + "-" + TFBuild.Environment.Build.Number;
+        buildNumber = buildNumber.Replace("/", "-");
+        TFBuild.Commands.UpdateBuildNumber(buildNumber);
     }
 
     var cakeVersion = typeof(ICakeContext).Assembly.GetName().Version.ToString();
