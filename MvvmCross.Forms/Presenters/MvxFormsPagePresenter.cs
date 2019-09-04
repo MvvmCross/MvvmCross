@@ -181,7 +181,7 @@ namespace MvvmCross.Forms.Presenters
             try
             {
 #endif
-                var navigation = GetPageOfType<NavigationPage>().Navigation;
+                var navigation = GetPageOfType<NavigationPage>()?.Navigation;
                 if (hint is MvxPopToRootPresentationHint popToRootHint)
                 {
                     // Make sure all modals are closed
