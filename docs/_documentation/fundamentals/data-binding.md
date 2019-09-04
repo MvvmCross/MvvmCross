@@ -555,7 +555,7 @@ The core parts of Tibet are:
 
 In Swiss binding, each binding can only reference a single ViewModel property path.
 
-This meant that if a ViewModel had 2 properties like `FirstName` and `LastName`, then the main way to create a display of the ful name was to create a new ViewModel property - e.g.:
+This meant that if a ViewModel had 2 properties like `FirstName` and `LastName`, then the main way to create a display of the full name was to create a new ViewModel property - e.g.:
 
 ```c#
 private string _firstName;

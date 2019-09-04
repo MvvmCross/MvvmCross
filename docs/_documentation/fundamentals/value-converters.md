@@ -316,7 +316,7 @@ If you require other visibility logic - e.g. if you need a mapping for a `nullab
 
 To use these converters on each platform, use:
 
-- Droid (not that in Droid there is no support for the `Invisible` state - cross platform, we only support `Visible` and `Gone`):
+- Droid (note that in Droid there is no support for the `Invisible` state - cross platform, we only support `Visible` and `Gone`):
   
         local:MvxBind="Visibility Visibility(VMProperty)"
         

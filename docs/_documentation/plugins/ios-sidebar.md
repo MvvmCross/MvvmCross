@@ -20,7 +20,7 @@ This attribute is used by the presenter to make decisions about what to do with 
 ```c#
 [Register("CenterPanelView")]
 [MvxSidebarPresentation(
-     MvxPanelEnum.Center, MvxPanelHintType.ActivePanel, true)]
+     MvxPanelEnum.Center, MvxPanelHintType.ResetRoot, true)]
 public class CenterPanelView
     : BaseViewController<CenterPanelViewModel>
 {
@@ -43,7 +43,7 @@ However on devices with large screens this would often be displayed to the user 
 
 The issue this behaviour deals with is that often iOS application will only user split views as the root view controller, this gets around this issue by allowing a split view to be shown as part of the normal flow of views without the need for explicitly setting this view as the root view in the view hierarchy.
 
-You can see an example of this below:
+You can see an example of this below:(example is outdated - possible MvxPanelHintType are .ResetRoot , .PopToRoot and .PushPanel)
 
 ```c#
 [Register("MasterView")]
