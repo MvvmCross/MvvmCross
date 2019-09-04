@@ -186,6 +186,8 @@ Task("SignPackages")
     .WithCriteria(() => IsRepository(repoName))
     .WithCriteria(() => !string.IsNullOrEmpty(signingSecret))
     .WithCriteria(() => !string.IsNullOrEmpty(signingUser))
+    .WithCriteria(() => isRunningOnPipelines)
+    .WithCriteria(() => !TFBuild.Environment.PullRequest.IsPullRequest)
     .IsDependentOn("Build")
     .IsDependentOn("CopyPackages")
     .Does(() => 
