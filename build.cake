@@ -294,13 +294,22 @@ Task("UpdateChangelog")
     // breaking labels (enable when github_changelog_generator 1.15 is released)
     //arguments.Append("--breaking-labels {0}", "t/breaking");
 
-    arguments.Append("--max-issues 500");
+    arguments.Append("--max-issues 200");
 
+    if (!string.IsNullOrEmpty(sinceTag) && versionInfo.BranchName.Contains("release/"))
+    {
+        arguments.Append("--between-tags {0},{1}", sinceTag, versionInfo.MajorMinorPatch);
+
+        arguments.Append("--future-release {0}", versionInfo.MajorMinorPatch);
+    }
+    else 
+    {
     if (!string.IsNullOrEmpty(sinceTag))
         arguments.Append("--since-tag {0}", sinceTag);
 
     if (versionInfo.BranchName.Contains("release/"))
         arguments.Append("--future-release {0}", versionInfo.MajorMinorPatch);
+    }
 
     Information("Starting github_changelog_generator with arguments: {0}", arguments.Render());
 
