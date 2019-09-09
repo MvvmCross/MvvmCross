@@ -29,6 +29,8 @@ var githubToken = Argument("github_token", "");
 var githubTokenEnv = EnvironmentVariable("CHANGELOG_GITHUB_TOKEN");
 var sinceTag = Argument("since_tag", "");
 
+var shouldPublishPackages = false;
+
 var isRunningOnPipelines = TFBuild.IsRunningOnAzurePipelines || TFBuild.IsRunningOnAzurePipelinesHosted;
 GitVersion versionInfo = null;
 
@@ -57,8 +59,9 @@ Setup(context =>
         target,
         cakeVersion);
 
-    Debug("Will push NuGet packages {0}", 
-        ShouldPushNugetPackages(versionInfo.BranchName));
+    shouldPublishPackages = ShouldPushNugetPackages(versionInfo.BranchName, nugetSource);
+
+    Information("Will push NuGet packages {0}", shouldPublishPackages);
 
     verbosity = (Verbosity) Enum.Parse(typeof(Verbosity), verbosityArg, true);
 });
@@ -225,9 +228,9 @@ Task("SignPackages")
 Task("PublishPackages")
     .WithCriteria(() => !BuildSystem.IsLocalBuild)
     .WithCriteria(() => IsRepository(repoName))
-    .WithCriteria(() => ShouldPushNugetPackages(versionInfo.BranchName))
     .WithCriteria(() => !string.IsNullOrEmpty(nugetSource))
     .WithCriteria(() => !string.IsNullOrEmpty(nugetApiKey))
+    .WithCriteria(() => shouldPublishPackages)
     .IsDependentOn("CopyPackages")
     .IsDependentOn("SignPackages")
     .Does (() =>
@@ -236,6 +239,35 @@ Task("PublishPackages")
     {
         Warning("Packages were not signed. Not publishing packages");
         return;
+    }
+
+    var nugetPushSettings = new NuGetPushSettings
+    {
+        Source = nugetSource,
+        ApiKey = nugetApiKey
+    };
+
+    if (nugetSource.Contains("github.com"))
+    {
+        var nugetSourceSettings = new NuGetSourcesSettings
+        {
+            UserName = "Cheesebaron",
+            Password = nugetApiKey,
+            IsSensitiveSource = true
+        };
+
+        var feed = new 
+        {
+            Name = "GitHub",
+            Source = nugetSource
+        };
+
+        NuGetAddSource(feed.Name, feed.Source, nugetSourceSettings);
+
+        nugetPushSettings = new NuGetPushSettings
+        {
+            Source = feed.Source
+        };
     }
 
     var nugetFiles = GetFiles(outputDir + "/*.nupkg");
@@ -248,15 +280,13 @@ Task("PublishPackages")
     foreach(var nugetFile in nugetFiles)
     {
         policy.Execute(() =>
-            NuGetPush(nugetFile, new NuGetPushSettings {
-                Source = nugetSource,
-                ApiKey = nugetApiKey
-            })
+            NuGetPush(nugetFile, nugetPushSettings)
         );
     }
 });
 
 Task("UploadArtifacts")
+    .IsDependentOn("CopyPackages")
     .WithCriteria(() => isRunningOnPipelines)
     .Does(() => 
 {
@@ -294,13 +324,22 @@ Task("UpdateChangelog")
     // breaking labels (enable when github_changelog_generator 1.15 is released)
     //arguments.Append("--breaking-labels {0}", "t/breaking");
 
-    arguments.Append("--max-issues 500");
+    arguments.Append("--max-issues 200");
 
-    if (!string.IsNullOrEmpty(sinceTag))
-        arguments.Append("--since-tag {0}", sinceTag);
+    if (!string.IsNullOrEmpty(sinceTag) && versionInfo.BranchName.Contains("release/"))
+    {
+        arguments.Append("--between-tags {0},{1}", sinceTag, versionInfo.MajorMinorPatch);
 
-    if (versionInfo.BranchName.Contains("release/"))
         arguments.Append("--future-release {0}", versionInfo.MajorMinorPatch);
+    }
+    else 
+    {
+        if (!string.IsNullOrEmpty(sinceTag))
+            arguments.Append("--since-tag {0}", sinceTag);
+
+        if (versionInfo.BranchName.Contains("release/"))
+            arguments.Append("--future-release {0}", versionInfo.MajorMinorPatch);
+    }
 
     Information("Starting github_changelog_generator with arguments: {0}", arguments.Render());
 
@@ -315,8 +354,8 @@ Task("UpdateChangelog")
 Task("Default")
     .IsDependentOn("Build")
     .IsDependentOn("UnitTest")
-    .IsDependentOn("PublishPackages")
     .IsDependentOn("UploadArtifacts")
+    .IsDependentOn("PublishPackages")
     .Does(() => 
 {
 });
@@ -345,12 +384,17 @@ MSBuildSettings GetDefaultBuildSettings()
     return settings;
 }
 
-bool ShouldPushNugetPackages(string branchName)
+bool ShouldPushNugetPackages(string branchName, string nugetSource)
 {
     if (StringComparer.OrdinalIgnoreCase.Equals(branchName, "develop"))
         return true;
 
-    return IsMasterOrReleases(branchName) && IsTagged().Item1;
+    var masterOrRelease = IsMasterOrReleases(branchName);
+
+    if (masterOrRelease && nugetSource != null && nugetSource.Contains("github.com"))
+        return true;
+
+    return masterOrRelease && IsTagged().Item1;
 }
 
 bool IsMasterOrReleases(string branchName)
