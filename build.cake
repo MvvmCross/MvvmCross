@@ -29,6 +29,8 @@ var githubToken = Argument("github_token", "");
 var githubTokenEnv = EnvironmentVariable("CHANGELOG_GITHUB_TOKEN");
 var sinceTag = Argument("since_tag", "");
 
+var shouldPublishPackages = false;
+
 var isRunningOnPipelines = TFBuild.IsRunningOnAzurePipelines || TFBuild.IsRunningOnAzurePipelinesHosted;
 GitVersion versionInfo = null;
 
@@ -57,8 +59,9 @@ Setup(context =>
         target,
         cakeVersion);
 
-    Debug("Will push NuGet packages {0}", 
-        ShouldPushNugetPackages(versionInfo.BranchName));
+    shouldPublishPackages = ShouldPushNugetPackages(versionInfo.BranchName, nugetSource);
+
+    Information("Will push NuGet packages {0}", shouldPublishPackages);
 
     verbosity = (Verbosity) Enum.Parse(typeof(Verbosity), verbosityArg, true);
 });
@@ -225,9 +228,9 @@ Task("SignPackages")
 Task("PublishPackages")
     .WithCriteria(() => !BuildSystem.IsLocalBuild)
     .WithCriteria(() => IsRepository(repoName))
-    .WithCriteria(() => ShouldPushNugetPackages(versionInfo.BranchName))
     .WithCriteria(() => !string.IsNullOrEmpty(nugetSource))
     .WithCriteria(() => !string.IsNullOrEmpty(nugetApiKey))
+    .WithCriteria(() => shouldPublishPackages)
     .IsDependentOn("CopyPackages")
     .IsDependentOn("SignPackages")
     .Does (() =>
@@ -283,6 +286,7 @@ Task("PublishPackages")
 });
 
 Task("UploadArtifacts")
+    .IsDependentOn("CopyPackages")
     .WithCriteria(() => isRunningOnPipelines)
     .Does(() => 
 {
@@ -380,12 +384,17 @@ MSBuildSettings GetDefaultBuildSettings()
     return settings;
 }
 
-bool ShouldPushNugetPackages(string branchName)
+bool ShouldPushNugetPackages(string branchName, string nugetSource)
 {
     if (StringComparer.OrdinalIgnoreCase.Equals(branchName, "develop"))
         return true;
 
-    return IsMasterOrReleases(branchName) && IsTagged().Item1;
+    var masterOrRelease = IsMasterOrReleases(branchName);
+
+    if (masterOrRelease && nugetSource != null && nugetSource.Contains("github.com"))
+        return true;
+
+    return masterOrRelease && IsTagged().Item1;
 }
 
 bool IsMasterOrReleases(string branchName)
