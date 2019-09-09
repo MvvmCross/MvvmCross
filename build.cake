@@ -238,6 +238,35 @@ Task("PublishPackages")
         return;
     }
 
+    var nugetPushSettings = new NuGetPushSettings
+    {
+        Source = nugetSource,
+        ApiKey = nugetApiKey
+    };
+
+    if (nugetSource.Contains("github.com"))
+    {
+        var nugetSourceSettings = new NuGetSourcesSettings
+        {
+            UserName = "Cheesebaron",
+            Password = nugetApiKey,
+            IsSensitiveSource = true
+        };
+
+        var feed = new 
+        {
+            Name = "GitHub",
+            Source = nugetSource
+        };
+
+        NuGetAddSource(feed.Name, feed.Source, nugetSourceSettings);
+
+        nugetPushSettings = new NuGetPushSettings
+        {
+            Source = feed.Source
+        };
+    }
+
     var nugetFiles = GetFiles(outputDir + "/*.nupkg");
 
     var policy = Policy
@@ -248,10 +277,7 @@ Task("PublishPackages")
     foreach(var nugetFile in nugetFiles)
     {
         policy.Execute(() =>
-            NuGetPush(nugetFile, new NuGetPushSettings {
-                Source = nugetSource,
-                ApiKey = nugetApiKey
-            })
+            NuGetPush(nugetFile, nugetPushSettings)
         );
     }
 });
@@ -304,11 +330,11 @@ Task("UpdateChangelog")
     }
     else 
     {
-    if (!string.IsNullOrEmpty(sinceTag))
-        arguments.Append("--since-tag {0}", sinceTag);
+        if (!string.IsNullOrEmpty(sinceTag))
+            arguments.Append("--since-tag {0}", sinceTag);
 
-    if (versionInfo.BranchName.Contains("release/"))
-        arguments.Append("--future-release {0}", versionInfo.MajorMinorPatch);
+        if (versionInfo.BranchName.Contains("release/"))
+            arguments.Append("--future-release {0}", versionInfo.MajorMinorPatch);
     }
 
     Information("Starting github_changelog_generator with arguments: {0}", arguments.Render());
