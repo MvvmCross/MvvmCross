@@ -5,9 +5,9 @@
     <Owners>MvvmCross;slodge;cheesebaron;martijn00</Owners>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <NeutralLanguage>en</NeutralLanguage>
-    <Version>6.1.0</Version>
+    <Version>6.4.0</Version>
     
-    <LangVersion>latest</LangVersion>
+    <LangVersion>7.3</LangVersion>
     <NoWarn>$(NoWarn);1591;1701;1702;1705;VSX1000;NU1603</NoWarn>
 
     <Platform>AnyCPU</Platform>

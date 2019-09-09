@@ -393,26 +393,28 @@ namespace MvvmCross.IoC
 
         public virtual object IoCConstruct(Type type, params object[] arguments)
         {
-            var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
-            var argumentTypes = arguments.Select(x => x.GetType());
-            var selectedConstructor = constructors.FirstOrDefault(x => x.GetParameters().Select(q => q.ParameterType).SequenceEqual(argumentTypes));
+            var selectedConstructor = type.FindApplicableConstructor(arguments);
 
             if (selectedConstructor == null)
-                throw new MvxIoCResolveException($"Failed to find constructor for type { type.FullName } with arguments: { argumentTypes.Select(x => x.Name + ", ") }");
+            {
+                throw new MvxIoCResolveException($"Failed to find constructor for type { type.FullName } with arguments: { arguments.Select(x => x.GetType().Name + ", ") }");
+            }
 
-            return IoCConstruct(type, selectedConstructor, arguments);
+            var parameters = GetIoCParameterValues(type, selectedConstructor, arguments);
+            return IoCConstruct(type, selectedConstructor, parameters.ToArray());
         }
 
         public virtual object IoCConstruct(Type type, IDictionary<string, object> arguments)
         {
-            var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public);
-            var firstConstructor = constructors.FirstOrDefault();
+            var selectedConstructor = type.FindApplicableConstructor(arguments);
 
-            if (firstConstructor == null)
+            if (selectedConstructor == null)
+            {
                 throw new MvxIoCResolveException("Failed to find constructor for type {0}", type.FullName);
+            }
 
-            var parameters = GetIoCParameterValues(type, firstConstructor, arguments);
-            return IoCConstruct(type, firstConstructor, parameters.ToArray());
+            var parameters = GetIoCParameterValues(type, selectedConstructor, arguments);
+            return IoCConstruct(type, selectedConstructor, parameters.ToArray());
         }
 
         protected virtual object IoCConstruct(Type type, ConstructorInfo constructor, object[] arguments)
@@ -628,35 +630,64 @@ namespace MvvmCross.IoC
             _propertyInjector?.Inject(toReturn, _options.PropertyInjectorOptions);
         }
 
-        protected virtual List<object> GetIoCParameterValues(Type type, ConstructorInfo firstConstructor, IDictionary<string, object> arguments)
+        protected virtual List<object> GetIoCParameterValues(Type type, ConstructorInfo selectedConstructor, IDictionary<string, object> arguments)
         {
             var parameters = new List<object>();
-            foreach (var parameterInfo in firstConstructor.GetParameters())
+            foreach (var parameterInfo in selectedConstructor.GetParameters())
             {
-                object parameterValue;
                 if (arguments != null && arguments.ContainsKey(parameterInfo.Name))
                 {
-                    parameterValue = arguments[parameterInfo.Name];
+                    parameters.Add(arguments[parameterInfo.Name]);
                 }
-                else if (!TryResolve(parameterInfo.ParameterType, out parameterValue))
+                else if (TryResolveParameter(type, parameterInfo, out var parameterValue))
                 {
-                    if (parameterInfo.IsOptional)
-                    {
-                        parameterValue = Type.Missing;
-                    }
-                    else
-                    {
-                        throw new MvxIoCResolveException(
-                            "Failed to resolve parameter for parameter {0} of type {1} when creating {2}. You may pass it as an argument",
-                            parameterInfo.Name,
-                            parameterInfo.ParameterType.Name,
-                            type.FullName);
-                    }
+                    parameters.Add(parameterValue);
                 }
-
-                parameters.Add(parameterValue);
             }
             return parameters;
+        }
+        
+        protected virtual List<object> GetIoCParameterValues(Type type, ConstructorInfo selectedConstructor, object[] arguments)
+        {
+            var parameters = new List<object>();
+            var unusedArguments = arguments.ToList();
+            
+            foreach (var parameterInfo in selectedConstructor.GetParameters())
+            {
+                var argumentMatch = unusedArguments.FirstOrDefault(arg => parameterInfo.ParameterType.IsInstanceOfType(arg));
+                
+                if (argumentMatch != null)
+                {
+                    parameters.Add(argumentMatch);
+                    unusedArguments.Remove(argumentMatch);
+                }
+                else if (TryResolveParameter(type, parameterInfo, out var parameterValue))
+                {
+                    parameters.Add(parameterValue);
+                }
+            }
+            return parameters;
+        }
+
+        private bool TryResolveParameter(Type type, ParameterInfo parameterInfo, out object parameterValue)
+        {
+            if (!TryResolve(parameterInfo.ParameterType, out parameterValue))
+            {
+                if (parameterInfo.IsOptional)
+                {
+                    parameterValue = Type.Missing;
+                }
+                else
+                {
+                    throw new MvxIoCResolveException(
+                        "Failed to resolve parameter for parameter {0} of type {1} when creating {2}. You may pass it as an argument",
+                        parameterInfo.Name,
+                        parameterInfo.ParameterType.Name,
+                        type.FullName);
+                }
+            }
+
+            return true;
         }
     }
 }

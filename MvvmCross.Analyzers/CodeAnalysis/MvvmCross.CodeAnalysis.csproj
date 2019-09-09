@@ -9,7 +9,7 @@ This package contains the 'Code Analysis' analyzers and code fixes for MvvmCross
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis" Version="2.10.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="3.2.1" />
   </ItemGroup>
 
   <ItemGroup>

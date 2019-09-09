@@ -19,35 +19,35 @@ namespace MvvmCross
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static bool CanResolve<TService>() where TService : class
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             return ioc.CanResolve<TService>();
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static bool CanResolve(Type serviceType)
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             return ioc.CanResolve(serviceType);
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static TService Resolve<TService>() where TService : class
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             return ioc.Resolve<TService>();
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static object Resolve(Type serviceType)
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             return ioc.Resolve(serviceType);
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static bool TryResolve<TService>(out TService service) where TService : class
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             if (ioc == null)
             {
                 service = null;
@@ -59,7 +59,7 @@ namespace MvvmCross
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static bool TryResolve(Type serviceType, out object service)
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             if (ioc == null)
             {
                 service = null;
@@ -72,14 +72,14 @@ namespace MvvmCross
         public static T Create<T>()
             where T : class
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             return ioc.Create<T>();
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static object Create(Type type)
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             return ioc.Create(type);
         }
 
@@ -87,14 +87,14 @@ namespace MvvmCross
         public static T GetSingleton<T>()
             where T : class
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             return ioc.GetSingleton<T>();
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static object GetSingleton(Type type)
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             return ioc.GetSingleton(type);
         }
 
@@ -102,7 +102,7 @@ namespace MvvmCross
         public static void RegisterType<TType>()
             where TType : class
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             ioc.RegisterType<TType>();
         }
 
@@ -111,7 +111,7 @@ namespace MvvmCross
             where TInterface : class
             where TType : class, TInterface
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             ioc.RegisterType<TInterface, TType>();
         }
 
@@ -119,28 +119,28 @@ namespace MvvmCross
         public static void RegisterType<TInterface>(Func<TInterface> constructor)
             where TInterface : class
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             ioc.RegisterType(constructor);
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static void RegisterType(Type tType)
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             ioc.RegisterType(tType);
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static void RegisterType(Type type, Func<object> constructor)
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             ioc.RegisterType(type, constructor);
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static void RegisterType(Type tInterface, Type tType)
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             ioc.RegisterType(tInterface, tType);
         }
 
@@ -148,14 +148,14 @@ namespace MvvmCross
         public static void RegisterSingleton<TInterface>(Func<TInterface> serviceConstructor)
             where TInterface : class
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             ioc.RegisterSingleton(serviceConstructor);
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static void RegisterSingleton(Type tInterface, Func<object> serviceConstructor)
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             ioc.RegisterSingleton(tInterface, serviceConstructor);
         }
 
@@ -163,14 +163,14 @@ namespace MvvmCross
         public static void RegisterSingleton<TInterface>(TInterface service)
             where TInterface : class
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             ioc.RegisterSingleton(service);
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static void RegisterSingleton(Type tInterface, object service)
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             ioc.RegisterSingleton(tInterface, service);
         }
 
@@ -178,7 +178,7 @@ namespace MvvmCross
         public static T IoCConstruct<T>()
             where T : class
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             return ioc.IoCConstruct<T>();
         }
 
@@ -186,7 +186,7 @@ namespace MvvmCross
         public static T IoCConstruct<T>(IDictionary<string, object> arguments)
             where T : class
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             return ioc.IoCConstruct<T>(arguments);
         }
 
@@ -194,7 +194,7 @@ namespace MvvmCross
         public static T IoCConstruct<T>(object arguments)
             where T : class
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             return ioc.IoCConstruct<T>(arguments);
         }
 
@@ -202,35 +202,35 @@ namespace MvvmCross
         public static T IoCConstruct<T>(params object[] arguments)
             where T : class
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             return ioc.IoCConstruct<T>(arguments);
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static object IoCConstruct(Type type)
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             return ioc.IoCConstruct(type);
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static object IoCConstruct(Type type, IDictionary<string, object> arguments)
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             return ioc.IoCConstruct(type, arguments);
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static object IoCConstruct(Type type, object arguments)
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             return ioc.IoCConstruct(type, arguments);
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static object IoCConstruct(Type type, params object[] arguments)
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             return ioc.IoCConstruct(type, arguments);
         }
 
@@ -238,21 +238,21 @@ namespace MvvmCross
         public static void CallbackWhenRegistered<T>(Action<T> action)
             where T : class
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             ioc.CallbackWhenRegistered<T>(action);
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static void CallbackWhenRegistered<T>(Action action)
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             ioc.CallbackWhenRegistered<T>(action);
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static void CallbackWhenRegistered(Type type, Action action)
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             ioc.CallbackWhenRegistered(type, action);
         }
 
@@ -261,7 +261,7 @@ namespace MvvmCross
             where TInterface : class
             where TType : class, TInterface
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             ioc.ConstructAndRegisterSingleton<TInterface, TType>();
         }
 
@@ -270,7 +270,7 @@ namespace MvvmCross
             where TInterface : class
             where TType : class, TInterface
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             ioc.LazyConstructAndRegisterSingleton<TInterface, TType>();
         }
 
@@ -278,21 +278,21 @@ namespace MvvmCross
         public static void LazyConstructAndRegisterSingleton<TInterface>(Func<TInterface> constructor)
             where TInterface : class
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             ioc.LazyConstructAndRegisterSingleton<TInterface>(constructor);
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static void LazyConstructAndRegisterSingleton(Type type, Func<object> constructor)
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             ioc.LazyConstructAndRegisterSingleton(type, constructor);
         }
 
         [Obsolete("Use Mvx.IoCProvider instead")]
         public static IMvxIoCProvider CreateChildContainer()
         {
-            var ioc = MvxSingleton<IMvxIoCProvider>.Instance;
+            var ioc = IoCProvider;
             return ioc.CreateChildContainer();
         }
     }

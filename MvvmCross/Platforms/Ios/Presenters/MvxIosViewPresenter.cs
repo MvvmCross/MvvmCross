@@ -352,6 +352,12 @@ namespace MvvmCross.Platforms.Ios.Presenters
             MvxModalPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
+            // Content size should be set to a target view controller, not the navigation one
+            if (attribute.PreferredContentSize != default(CGSize))
+            {
+                viewController.PreferredContentSize = attribute.PreferredContentSize;
+            }
+
             // setup modal based on attribute
             if (attribute.WrapInNavigationController)
             {
@@ -360,8 +366,6 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             viewController.ModalPresentationStyle = attribute.ModalPresentationStyle;
             viewController.ModalTransitionStyle = attribute.ModalTransitionStyle;
-            if (attribute.PreferredContentSize != default(CGSize))
-                viewController.PreferredContentSize = attribute.PreferredContentSize;
 
             // Check if there is a modal already presented first. Otherwise use the window root
             var modalHost = ModalViewControllers.LastOrDefault() ?? _window.RootViewController;

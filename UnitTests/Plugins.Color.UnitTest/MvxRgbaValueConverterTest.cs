@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Globalization;
-using MvvmCross.Plugin.Color;
 using MvvmCross.Tests;
 using Xunit;
 
@@ -29,7 +28,7 @@ namespace MvvmCross.Plugin.Color.UnitTest
             var actual = converter.Convert(rgba, typeof(object), null, CultureInfo.CurrentUICulture);
             var wrapped = actual as WrappedColor;
             Assert.NotNull(wrapped);
-            Assert.Equal(expected, (uint)wrapped.Color.ARGB);
+            Assert.Equal(expected, (uint)wrapped.Color.ToArgb());
         }
 
         [Theory]
@@ -45,7 +44,7 @@ namespace MvvmCross.Plugin.Color.UnitTest
             var actual = converter.Convert(rgba, typeof(object), null, CultureInfo.CurrentUICulture);
             var wrapped = actual as WrappedColor;
             Assert.NotNull(wrapped);
-            Assert.Equal(expected, (uint)wrapped.Color.ARGB);
+            Assert.Equal(expected, (uint)wrapped.Color.ToArgb());
         }
 
         [Theory]
@@ -61,7 +60,7 @@ namespace MvvmCross.Plugin.Color.UnitTest
             var actual = converter.Convert(rgba, typeof(object), null, CultureInfo.CurrentUICulture);
             var wrapped = actual as WrappedColor;
             Assert.NotNull(wrapped);
-            Assert.Equal(expected, (uint)wrapped.Color.ARGB);
+            Assert.Equal(expected, (uint)wrapped.Color.ToArgb());
         }
 
         [Theory]
@@ -77,7 +76,7 @@ namespace MvvmCross.Plugin.Color.UnitTest
             var actual = converter.Convert(rgba, typeof(object), null, CultureInfo.CurrentUICulture);
             var wrapped = actual as WrappedColor;
             Assert.NotNull(wrapped);
-            Assert.Equal(expected, (uint)wrapped.Color.ARGB);
+            Assert.Equal(expected, (uint)wrapped.Color.ToArgb());
         }
 
         [Theory]
@@ -93,7 +92,7 @@ namespace MvvmCross.Plugin.Color.UnitTest
             var actual = converter.Convert(rgba, typeof(object), null, CultureInfo.CurrentUICulture);
             var wrapped = actual as WrappedColor;
             Assert.NotNull(wrapped);
-            Assert.Equal(expected, (uint)wrapped.Color.ARGB);
+            Assert.Equal(expected, (uint)wrapped.Color.ToArgb());
         }
 
         [Theory]
@@ -109,7 +108,7 @@ namespace MvvmCross.Plugin.Color.UnitTest
             var actual = converter.Convert(rgba, typeof(object), null, CultureInfo.CurrentUICulture);
             var wrapped = actual as WrappedColor;
             Assert.NotNull(wrapped);
-            Assert.Equal(expected, (uint)wrapped.Color.ARGB);
+            Assert.Equal(expected, (uint)wrapped.Color.ToArgb());
         }
     }
 }

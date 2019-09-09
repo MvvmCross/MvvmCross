@@ -33,6 +33,10 @@
     <EnableLLVM>false</EnableLLVM>
     <BundleAssemblies>false</BundleAssemblies>
     <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <AndroidDexTool>d8</AndroidDexTool>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
+    <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -62,6 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="Views\NativeView.cs" />
     <Compile Include="Views\SheetView.cs" />
     <Compile Include="Views\OverrideAttributeView.cs" />
   </ItemGroup>
@@ -125,7 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>12.0.1</Version>
+      <Version>12.0.2</Version>
     </PackageReference>
     <PackageReference Include="Serilog">
       <Version>2.8.0</Version>
@@ -202,6 +207,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\MvvmCross.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\NativeView.axml">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>

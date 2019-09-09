@@ -31,6 +31,10 @@
     <EnableLLVM>false</EnableLLVM>
     <BundleAssemblies>false</BundleAssemblies>
     <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
+    <AndroidDexTool>d8</AndroidDexTool>
+    <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -213,7 +217,7 @@
       <Version>28.0.0.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.FFImageLoading">
-      <Version>2.4.9.961</Version>
+      <Version>2.4.11.982</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
