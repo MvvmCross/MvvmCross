@@ -315,8 +315,8 @@ Task("UpdateChangelog")
 Task("Default")
     .IsDependentOn("Build")
     .IsDependentOn("UnitTest")
-    .IsDependentOn("PublishPackages")
     .IsDependentOn("UploadArtifacts")
+    .IsDependentOn("PublishPackages")
     .Does(() => 
 {
 });
