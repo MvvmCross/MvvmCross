@@ -28,7 +28,7 @@ namespace MvvmCross.ViewModels
 
             try
             {
-                return views.ToDictionary(x => x.Key, x => x.Value);
+                return filteredViews.ToDictionary(x => x.Key, x => x.Value);
             }
             catch (ArgumentException exception)
             {
