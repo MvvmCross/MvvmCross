@@ -41,7 +41,7 @@ namespace MvvmCross.ViewModels
             return views;
         }
 
-        private static Exception ReportBuildProblem(IEnumerable<KeyValuePair<Type, Type>> views,
+        protected virtual Exception ReportBuildProblem(IEnumerable<KeyValuePair<Type, Type>> views,
                                                     ArgumentException exception)
         {
             var overSizedCounts = views.GroupBy(x => x.Key)
