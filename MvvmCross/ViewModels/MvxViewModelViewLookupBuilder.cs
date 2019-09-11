@@ -24,6 +24,8 @@ namespace MvvmCross.ViewModels
                         where viewModelType != null
                         select new KeyValuePair<Type, Type>(viewModelType, candidateViewType);
 
+            var filteredViews = FilterViews(views);
+
             try
             {
                 return views.ToDictionary(x => x.Key, x => x.Value);
@@ -32,6 +34,11 @@ namespace MvvmCross.ViewModels
             {
                 throw ReportBuildProblem(views, exception);
             }
+        }
+
+        protected virtual IEnumerable<KeyValuePair<Type, Type>> FilterViews(IEnumerable<KeyValuePair<Type, Type>> views)
+        {
+            return views;
         }
 
         private static Exception ReportBuildProblem(IEnumerable<KeyValuePair<Type, Type>> views,
