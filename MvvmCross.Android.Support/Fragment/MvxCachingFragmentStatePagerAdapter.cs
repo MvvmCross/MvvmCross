@@ -61,7 +61,7 @@ namespace MvvmCross.Droid.Support.V4
 
             mvxFragment.ViewModel = GetViewModel(fragmentInfo);
 
-            fragmentInfo.CachedFragment.Arguments = GetArguments(fragmentInfo);
+            fragment.Arguments = GetArguments(fragmentInfo);
 
             return fragment;
         }
