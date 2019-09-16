@@ -6,7 +6,7 @@ category: Platforms
 
 Available in Android Support RecyclerView, MvvmCross 4.
 
-MvvmCross has a implementation of Android's RecyclerView, which allows us to bind a collection of ViewModels to the `ItemsSource` property. It works similarly to a ListView. However, a RecyclerView is out of the box a more resource friendly view, due to enforcing the use of the ViewHolder pattern, it also supports refreshing parts of the View rather than the invalidating the entire View. RecyclerView, although very efficient, it does not come with all the blows and whistles that a normal ListView comes with, such as built in item click events, highlighting selected row and more. Some of these we have covered for you and this article serves the purpose of the common uses of a `MvxRecyclerView`.
+MvvmCross has a implementation of Android's RecyclerView, which allows us to bind a collection of ViewModels to the `ItemsSource` property. It works similarly to a ListView. However, a RecyclerView is out of the box a more resource friendly view, due to enforcing the use of the ViewHolder pattern, it also supports refreshing parts of the View rather than the invalidating the entire View. RecyclerView, although very efficient, it does not come with all the bells and whistles that a normal ListView comes with, such as built in item click events, highlighting selected row and more. Some of these we have covered for you and this article serves the purpose of the common uses of a `MvxRecyclerView`.
 
 Currently `MvxRecyclerView` supports binding to the following properties:
 - ItemsSource
