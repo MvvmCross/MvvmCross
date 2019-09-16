@@ -243,10 +243,6 @@ DerivedData
 Pods
 nuspec/nuget.exe
 
-# NuGet
-packages/
-repositories.config
-
 #Build
 project.lock.json
 tools/*
@@ -260,3 +256,6 @@ artifacts/
 
 # dotnet tools
 .store/
+
+# NuGet packages
+.nuget-packages
