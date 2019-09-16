@@ -24,6 +24,12 @@ variables:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 
 steps:
+- task: CacheBeta@0
+  displayName: 'NuGet Cache'
+  inputs:
+    key: 'NuGetCache'
+    path: '.nuget-packages'
+
 - task: DotNetCoreCLI@2
   displayName: 'Install SignClient'
   inputs:
