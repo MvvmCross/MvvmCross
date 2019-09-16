@@ -1,4 +1,4 @@
-#tool nuget:?package=GitVersion.CommandLine&version=4.0.0
+#tool nuget:?package=GitVersion.CommandLine&version=5.0.1
 #tool nuget:?package=vswhere&version=2.6.7
 #addin nuget:?package=Cake.Figlet&version=1.3.0
 #addin nuget:?package=Cake.Git&version=0.19.0
