@@ -122,7 +122,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Filter">
       <Version>1.1.1</Version>
     </PackageReference>
-    <PackageReference Include="Uno.UI" Version="1.46.196-dev.2440" />
+    <PackageReference Include="Uno.UI" Version="1.46.230-dev.2723" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Contents.json">
