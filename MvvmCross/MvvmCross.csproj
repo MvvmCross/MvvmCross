@@ -28,7 +28,6 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <None Include="Resources\*.cs" />
     <Compile Remove="Resources\*.cs" />
     <None Include="readme.txt" pack="true" PackagePath="." />
-    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
   </ItemGroup>
   
   <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
