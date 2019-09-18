@@ -28,6 +28,7 @@ namespace MvvmCross.Navigation
         /// <param name="navigationService"></param>
         /// <param name="path">URI to route</param>
         /// <param name="presentationBundle"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>A task to await upon</returns>
         public static Task Navigate(this IMvxNavigationService navigationService, Uri path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
         {

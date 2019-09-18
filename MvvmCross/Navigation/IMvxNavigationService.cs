@@ -52,6 +52,7 @@ namespace MvvmCross.Navigation
         /// </summary>
         /// <param name="viewModel"></param>
         /// <param name="presentationBundle"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>Boolean indicating successful navigation</returns>
         Task<bool> Navigate(IMvxViewModel viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
 
@@ -62,6 +63,7 @@ namespace MvvmCross.Navigation
         /// <param name="viewModel"></param>
         /// <param name="param"></param>
         /// <param name="presentationBundle"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>Boolean indicating successful navigation</returns>
         Task<bool> Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
 
@@ -92,6 +94,7 @@ namespace MvvmCross.Navigation
         /// </summary>
         /// <param name="viewModelType"></param>
         /// <param name="presentationBundle"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>Boolean indicating successful navigation</returns>
         Task<bool> Navigate(Type viewModelType, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
 
@@ -102,6 +105,7 @@ namespace MvvmCross.Navigation
         /// <param name="viewModelType"></param>
         /// <param name="param"></param>
         /// <param name="presentationBundle"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>Boolean indicating successful navigation</returns>
         Task<bool> Navigate<TParameter>(Type viewModelType, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
 
@@ -132,6 +136,7 @@ namespace MvvmCross.Navigation
         /// </summary>
         /// <param name="path">URI to route</param>
         /// <param name="presentationBundle"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>Boolean indicating successful navigation</returns>
         Task<bool> Navigate(string path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
 
@@ -142,6 +147,7 @@ namespace MvvmCross.Navigation
         /// <param name="path"></param>
         /// <param name="param"></param>
         /// <param name="presentationBundle"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>Boolean indicating successful navigation</returns>
         Task<bool> Navigate<TParameter>(string path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
 
@@ -203,6 +209,7 @@ namespace MvvmCross.Navigation
         /// Closes the View attached to the ViewModel
         /// </summary>
         /// <param name="viewModel"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<bool> Close(IMvxViewModel viewModel, CancellationToken cancellationToken = default(CancellationToken));
 
@@ -212,6 +219,7 @@ namespace MvvmCross.Navigation
         /// <typeparam name="TResult"></typeparam>
         /// <param name="viewModel"></param>
         /// <param name="result"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<bool> Close<TResult>(IMvxViewModelResult<TResult> viewModel, TResult result, CancellationToken cancellationToken = default(CancellationToken));
 
@@ -219,6 +227,7 @@ namespace MvvmCross.Navigation
         /// Dispatches a ChangePresentation with Hint
         /// </summary>
         /// <param name="hint"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<bool> ChangePresentation(MvxPresentationHint hint, CancellationToken cancellationToken = default(CancellationToken));
     }

@@ -42,10 +42,10 @@ namespace MvvmCross.Platforms.Tizen.Core
             }
         }
 
-        protected override void InitializePlatformServices()
+        protected override void InitializeFirstChance()
         {
             RegisterPresenter();
-            base.InitializePlatformServices();
+            base.InitializeFirstChance();
         }
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
