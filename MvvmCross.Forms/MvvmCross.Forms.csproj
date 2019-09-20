@@ -87,7 +87,7 @@
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.Compat" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.Annotations" Version="28.0.0.1" />
-    <PackageReference Include="Xamarin.Android.Support.Core.UI" Version="28.0.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.Core.UI" Version="28.0.0.3" />
     <ProjectReference Include="..\MvvmCross.Android.Support\V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj" />
     <ProjectReference Include="..\MvvmCross.Android.Support\Fragment\MvvmCross.Droid.Support.Fragment.csproj" />
     <ProjectReference Include="..\MvvmCross.Android.Support\Core.UI\MvvmCross.Droid.Support.Core.UI.csproj" />
