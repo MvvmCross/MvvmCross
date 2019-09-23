@@ -178,6 +178,17 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             return _bindingVisitor.OnViewCreated(view, Context, attrs);
         }
 
+        public override View OnCreateView(Context viewContext, View parent, string name, IAttributeSet attrs)
+        {
+            if (Debug)
+                MvxLog.Instance.Trace(Tag, "... OnCreateView 4 ... {0}", name);
+
+            return _bindingVisitor.OnViewCreated(
+                base.OnCreateView(viewContext, parent, name, attrs),
+                viewContext,
+                attrs);
+        }
+
         // Mimic PhoneLayoutInflater's OnCreateView.
         private View PhoneLayoutInflaterOnCreateView(string name, IAttributeSet attrs)
         {
