@@ -170,6 +170,7 @@ namespace MvvmCross.Platforms.Ios.Views
                 buttonFrame.Width = UIScreen.MainScreen.ApplicationFrame.Width;
                 var hiddenButton = CreateHiddenHeaderButton(buttonFrame, section);
                 header.ContentView.AddSubview(hiddenButton);
+                header.ContentView.SendSubviewToBack(hiddenButton);
             }
 
             // Set the header data context
