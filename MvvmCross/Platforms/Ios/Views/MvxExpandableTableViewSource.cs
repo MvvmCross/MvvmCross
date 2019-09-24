@@ -165,11 +165,12 @@ namespace MvvmCross.Platforms.Ios.Views
 
             if (!hasHiddenButton)
             {
-                // Create a button to make the header clickable
-                var buttonFrame = header.Frame;
-                buttonFrame.Width = UIScreen.MainScreen.ApplicationFrame.Width;
-                var hiddenButton = CreateHiddenHeaderButton(buttonFrame, section);
+                var hiddenButton = CreateHiddenHeaderButton(section);
                 header.ContentView.AddSubview(hiddenButton);
+                hiddenButton.LeadingAnchor.ConstraintEqualTo(header.ContentView.LeadingAnchor).Active = true;
+                hiddenButton.TrailingAnchor.ConstraintEqualTo(header.ContentView.TrailingAnchor).Active = true;
+                hiddenButton.TopAnchor.ConstraintEqualTo(header.ContentView.TopAnchor).Active = true;
+                hiddenButton.BottomAnchor.ConstraintEqualTo(header.ContentView.BottomAnchor).Active = true;
                 header.ContentView.SendSubviewToBack(hiddenButton);
             }
 
@@ -180,11 +181,14 @@ namespace MvvmCross.Platforms.Ios.Views
             return header.ContentView;
         }
 
-        private HiddenHeaderButton CreateHiddenHeaderButton(CGRect frame, nint tag)
+        private HiddenHeaderButton CreateHiddenHeaderButton(nint tag)
         {
-            var button = new HiddenHeaderButton(frame);
-            button.Tag = tag;
-            button.TouchUpInside += _headerButtonCommand;
+            var button = new HiddenHeaderButton()
+            {
+                Tag = tag,
+                TranslatesAutoresizingMaskIntoConstraints = false
+            };
+            button.TouchUpInside += OnHeaderButtonClicked;
             return button;
         }
 
@@ -247,8 +251,5 @@ namespace MvvmCross.Platforms.Ios.Views
 
     public class HiddenHeaderButton : UIButton
     {
-        public HiddenHeaderButton(CGRect frame) : base(frame)
-        {
-        }
     }
 }
