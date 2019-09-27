@@ -155,6 +155,9 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowContentViewCommand =>
             new MvxAsyncCommand(async () => await NavigationService.Navigate<ParentContentViewModel>());
 
+        public IMvxAsyncCommand ShowMvxChangeTabBehaviorCommand =>
+            new MvxAsyncCommand(async () => await NavigationService.Navigate<ChangeTabBehaviorViewModel>());
+
         public IMvxAsyncCommand ConvertersCommand =>
             new MvxAsyncCommand(async () => await NavigationService.Navigate<ConvertersViewModel>());
 
