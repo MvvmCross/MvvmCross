@@ -8,8 +8,6 @@
 - MvxExpandableTableViewSource doesn't let touches through [\#3574](https://github.com/MvvmCross/MvvmCross/issues/3574)
 - MvxLayoutInflater CreateCustomViewInternal fails on Android 10 [\#3550](https://github.com/MvvmCross/MvvmCross/issues/3550)
 - NullReferenceException when initializing fragment in ViewPager [\#3535](https://github.com/MvvmCross/MvvmCross/issues/3535)
-- Fix header cells in MvxExpandableTableViewSource not passing touches to subviews [\#3575](https://github.com/MvvmCross/MvvmCross/pull/3575) ([Cheesebaron](https://github.com/Cheesebaron))
-- Fix MvxLayoutInflater throwing NoSuchFieldException on Android Q [\#3573](https://github.com/MvvmCross/MvvmCross/pull/3573) ([Cheesebaron](https://github.com/Cheesebaron))
 
 **Closed issues:**
 
@@ -18,6 +16,8 @@
 
 **Merged pull requests:**
 
+- Fix header cells in MvxExpandableTableViewSource not passing touches to subviews [\#3575](https://github.com/MvvmCross/MvvmCross/pull/3575) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix MvxLayoutInflater throwing NoSuchFieldException on Android Q [\#3573](https://github.com/MvvmCross/MvvmCross/pull/3573) ([Cheesebaron](https://github.com/Cheesebaron))
 - Update Play Services in Location Fused plugin [\#3583](https://github.com/MvvmCross/MvvmCross/pull/3583) ([Cheesebaron](https://github.com/Cheesebaron))
 - Update nuget packages [\#3582](https://github.com/MvvmCross/MvvmCross/pull/3582) ([martijn00](https://github.com/martijn00))
 - Bump to latest version of MSBuild SDK Extras [\#3581](https://github.com/MvvmCross/MvvmCross/pull/3581) ([Cheesebaron](https://github.com/Cheesebaron))
