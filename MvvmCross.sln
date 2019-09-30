@@ -1,10 +1,11 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29319.158
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BD9762CF-E104-481C-96A6-26E624B86283}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		azure-pipelines.yml = azure-pipelines.yml
 		build.cake = build.cake
 		Directory.build.props = Directory.build.props
 		Directory.build.targets = Directory.build.targets
@@ -13,7 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		XamarinBuild.targets = XamarinBuild.targets
 		XamarinForms.targets = XamarinForms.targets
 		XamarinFormsWpf.targets = XamarinFormsWpf.targets
-		azure-pipelines.yml = azure-pipelines.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{77C7235F-1977-426F-86E8-77A29B5DF68F}"
@@ -42,7 +42,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.V17
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{9EA04A6A-1367-4316-A6E9-A5173A060475}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross", "MvvmCross\MvvmCross.csproj", "{49F965F5-5824-4BBE-94EA-0178F848ABDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross", "MvvmCross\MvvmCross.csproj", "{49F965F5-5824-4BBE-94EA-0178F848ABDB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Forms", "MvvmCross.Forms\MvvmCross.Forms.csproj", "{013BB2B2-8204-43BD-AA7B-E494007F0B94}"
 EndProject
@@ -156,7 +156,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Eventhooks", "Eventhooks", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Forms.Platforms.Wpf", "MvvmCross.Forms.Wpf\MvvmCross.Forms.Platforms.Wpf.csproj", "{E5EC1B5C-9539-4CA8-BE25-FC5B16B6F7FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.UnitTest.Common", "UnitTests\MvvmCross.UnitTest.Common\MvvmCross.UnitTest.Common.csproj", "{E11414C4-82BA-46C7-9298-209EA24A8C56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.UnitTest.Common", "UnitTests\MvvmCross.UnitTest.Common\MvvmCross.UnitTest.Common.csproj", "{E11414C4-82BA-46C7-9298-209EA24A8C56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
