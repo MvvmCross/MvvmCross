@@ -42,7 +42,7 @@ namespace MvvmCross.Platforms.Android.Core
 
         public Context ApplicationContext => _applicationContext;
 
-        protected override void InitializePlatformServices()
+        protected override void InitializeFirstChance()
         {
             InitializeLifetimeMonitor();
             InitializeAndroidCurrentTopActivity();
@@ -59,7 +59,7 @@ namespace MvvmCross.Platforms.Android.Core
 
             var viewModelMultiTemporaryCache = new MvxMultipleViewModelCache();
             Mvx.IoCProvider.RegisterSingleton<IMvxMultipleViewModelCache>(viewModelMultiTemporaryCache);
-            base.InitializePlatformServices();
+            base.InitializeFirstChance();
         }
 
         protected virtual void InitializeAndroidCurrentTopActivity()
