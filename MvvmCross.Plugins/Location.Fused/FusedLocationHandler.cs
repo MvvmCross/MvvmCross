@@ -76,19 +76,19 @@ namespace MvvmCross.Plugin.Location.Fused
             if (location != null)
                 _owner.OnLocationUpdated(location);
 
-            MvxPluginLog.Instance.Trace("Plugin.Location.Fused", "OnConnected");
+            MvxPluginLog.Instance.Trace("Plugin.Location.Fused - OnConnected");
         }
 
 		public void OnConnectionSuspended(int cause)
 		{
             // disconnected
-            MvxPluginLog.Instance.Trace("Plugin.Location.Fused", "OnConnectionSuspended: {0}", cause);
+            MvxPluginLog.Instance.Trace("Plugin.Location.Fused - OnConnectionSuspended: {0}", cause);
 		}
 
 		public void OnConnectionFailed(ConnectionResult result)
 		{
 			_owner.OnLocationError(ToMvxLocationErrorCode(result));
-            MvxPluginLog.Instance.Trace("Plugin.Location.Fused", "OnConnectionFailed: {0}", result);
+            MvxPluginLog.Instance.Error("Plugin.Location.Fused - OnConnectionFailed: {0}", result);
 
             _client?.Reconnect();
 		}

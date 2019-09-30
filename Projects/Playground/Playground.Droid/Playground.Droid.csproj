@@ -89,6 +89,7 @@
     <Compile Include="Fragments\NestedChildView.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="TemplateSelectors\AnimalTemplateSelector.cs" />
+    <Compile Include="Fragments\LocationView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -119,6 +120,10 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\CustomBindingView.axml" />
+    <AndroidResource Include="Resources\layout\location.axml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\RootView.axml">
@@ -197,6 +202,10 @@
       <Project>{fe374d1a-1a19-49bc-8e93-d52399a9c3f3}</Project>
       <Name>Playground.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Location.Fused\MvvmCross.Plugin.Location.Fused.csproj">
+      <Project>{DFFD6E95-ED3B-47B6-AA09-7A261367C262}</Project>
+      <Name>MvvmCross.Plugin.Location.Fused</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Serilog">
@@ -214,6 +223,9 @@
     <PackageReference Include="Xamarin.FFImageLoading">
       <Version>2.4.11.982</Version>
     </PackageReference>
+    <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="71.1620.0" />
+    <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.3" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\mvvmcross_logo.png" />

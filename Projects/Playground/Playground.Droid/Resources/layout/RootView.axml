@@ -105,6 +105,12 @@
                 android:text="Register and Resolve NO Reflection"
                 local:MvxBind="Click RegisterAndResolveWithNoReflectionCommand;"
                 android:id="@+id/button2" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Location"
+                local:MvxBind="Click ShowLocationCommand;" />
             <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

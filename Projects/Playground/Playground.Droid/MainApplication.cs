@@ -7,6 +7,7 @@ using Android.App;
 using Android.Runtime;
 using MvvmCross.Droid.Support.V7.AppCompat;
 using Playground.Core;
+using Plugin.CurrentActivity;
 
 namespace Playground.Droid
 {
@@ -15,6 +16,13 @@ namespace Playground.Droid
     {
         public MainApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
+        }
+
+        public override void OnCreate()
+        {
+            base.OnCreate();
+
+            CrossCurrentActivity.Current.Init(this);
         }
     }
 }
