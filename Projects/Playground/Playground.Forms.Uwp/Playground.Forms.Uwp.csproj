@@ -168,7 +168,7 @@
       <Project>{9a317670-f2d9-4155-9ea7-f8cfd3cfe79f}</Project>
       <Name>Playground.Forms.UI</Name>
     </ProjectReference>
-  <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.8" />
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.9" />
   </ItemGroup>
   <Import Project="..\..\..\XamarinForms.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />

@@ -3,5 +3,5 @@
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
   </ItemGroup>
 
-  <Import Project="XamarinBuild.targets" Condition="'$(IsXamarinForms)' == 'true' and $(TargetFramework.StartsWith('MonoAndroid'))"/>
+  <Import Project="XamarinBuild.targets" Condition="'$(IsXamarinForms)' == 'true' and $(TargetFramework.StartsWith('monoandroid'))"/>
 </Project>
