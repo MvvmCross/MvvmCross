@@ -53,8 +53,8 @@ namespace MvvmCross.Forms.Platforms.Tizen.Core
         {
             get
             {
-                if (!Xamarin.Forms.Platform.Tizen.Forms.IsInitialized)
-                    Xamarin.Forms.Platform.Tizen.Forms.Init(CoreApplication);
+                if (!Xamarin.Forms.Forms.IsInitialized)
+                    Xamarin.Forms.Forms.Init(CoreApplication);
                 if (_formsApplication == null)
                 {
                     _formsApplication = CreateFormsApplication();
