@@ -5,7 +5,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BD9762CF-E104-481C-96A6-26E624B86283}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		appveyor.yml = appveyor.yml
 		build.cake = build.cake
 		Directory.build.props = Directory.build.props
 		Directory.build.targets = Directory.build.targets
@@ -14,12 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		XamarinBuild.targets = XamarinBuild.targets
 		XamarinForms.targets = XamarinForms.targets
 		XamarinFormsWpf.targets = XamarinFormsWpf.targets
+		azure-pipelines.yml = azure-pipelines.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{77C7235F-1977-426F-86E8-77A29B5DF68F}"
-	ProjectSection(SolutionItems) = preProject
-		Projects\Playground\Playground.Droid\Views\TabsRootBView.cs = Projects\Playground\Playground.Droid\Views\TabsRootBView.cs
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Android.Support", "Android.Support", "{39679555-D062-48EB-8BED-FD52AA3046B6}"
 EndProject
@@ -45,7 +42,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.V17
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{9EA04A6A-1367-4316-A6E9-A5173A060475}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross", "MvvmCross\MvvmCross.csproj", "{49F965F5-5824-4BBE-94EA-0178F848ABDB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross", "MvvmCross\MvvmCross.csproj", "{49F965F5-5824-4BBE-94EA-0178F848ABDB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Forms", "MvvmCross.Forms\MvvmCross.Forms.csproj", "{013BB2B2-8204-43BD-AA7B-E494007F0B94}"
 EndProject

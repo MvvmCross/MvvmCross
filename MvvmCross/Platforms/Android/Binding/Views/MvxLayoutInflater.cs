@@ -178,6 +178,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             return _bindingVisitor.OnViewCreated(view, Context, attrs);
         }
 
+#if __ANDROID_29__
         public override View OnCreateView(Context viewContext, View parent, string name, IAttributeSet attrs)
         {
             if (Debug)
@@ -188,6 +189,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 viewContext,
                 attrs);
         }
+#endif
 
         // Mimic PhoneLayoutInflater's OnCreateView.
         private View PhoneLayoutInflaterOnCreateView(string name, IAttributeSet attrs)
@@ -315,7 +317,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                     Object[] constructorArgsArr = null;
                     Object lastContext = null;
 
-                    if (Build.VERSION.SdkInt < BuildVersionCodes.Q)
+                    if (Build.VERSION.SdkInt <= BuildVersionCodes.P)
                     {
                         if (_constructorArgs == null)
                         {
@@ -336,9 +338,11 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                     
                     try
                     {
-                        if (Build.VERSION.SdkInt >= BuildVersionCodes.Q)
+#if __ANDROID_29__
+                        if (Build.VERSION.SdkInt > BuildVersionCodes.P)
                             view = CreateView(viewContext, name, null, attrs);
                         else
+#endif
                             view = CreateView(name, null, attrs);
                     }
                     catch (ClassNotFoundException) 
@@ -346,7 +350,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                     }
                     finally
                     {
-                        if (Build.VERSION.SdkInt < BuildVersionCodes.Q)
+                        if (Build.VERSION.SdkInt <= BuildVersionCodes.P)
                         {
                             constructorArgsArr[0] = lastContext;
                             _constructorArgs.Set(this, constructorArgsArr);
