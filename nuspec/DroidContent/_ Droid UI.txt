@@ -1,4 +1,0 @@
-The steps to get this Android UI working are:
-
-1. Add a reference to your Core PCL project
-2. Remove any old `MainLauncher` activities - eg Activity1

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<views:MvxContentPage
+    x:Class="Playground.Forms.UI.Pages.SplitDetailPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mvx="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+    xmlns:viewModels="clr-namespace:Playground.Core.ViewModels;assembly=Playground.Core"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    Title="SplitDetail page"
+    x:TypeArguments="viewModels:SplitDetailViewModel"
+    Icon="hamburger.png">
+    <ContentPage.Content>
+        <StackLayout Margin="10">
+            <Label Text="I'm a detail navigation page" />
+            <Button mvx:Bi.nd="Command ShowChildCommand" 
+                    Text="Show Child" />
+            <Button mvx:Bi.nd="Command ShowTabbedChildCommand" 
+                    Text="Show Tabbed Child" />
+        </StackLayout>
+    </ContentPage.Content>
+</views:MvxContentPage>

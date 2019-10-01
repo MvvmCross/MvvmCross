@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+    <Button
+        android:id="@+id/add_more_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Add More Animals"
+        local:MvxBind="Click AddAnimalCommand, CommandParameter=10" />
+
+    <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
+        android:id="@+id/animal_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/add_more_button"
+        local:MvxTemplateSelector="@string/templateselector_animal"
+        local:MvxBind="ItemsSource Animals; ItemClick MarkFavoriteCommand; ItemLongClick DeleteAnimalCommand" />
+</RelativeLayout>

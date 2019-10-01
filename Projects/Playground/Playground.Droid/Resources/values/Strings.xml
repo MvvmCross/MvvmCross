@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="hello">Hello World, Click Me!</string>
+	<string name="app_name">Playground</string>
+	<string name="drawer_open">Open navigation drawer</string>
+	<string name="drawer_close">Close navigation drawer</string>
+	<string name="details_text_description_placeholder">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim</string>
+  <string name="templateselector_animal">Playground.Droid.TemplateSelectors.AnimalTemplateSelector,Playground.Droid</string>
+</resources>

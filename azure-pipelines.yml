@@ -1,0 +1,39 @@
+trigger:
+  branches:
+    include:
+    - develop
+    - releases/*
+  paths:
+    exclude:
+    - '**/*.md'
+    - docs/*
+pr:
+  branches:
+    include:
+    - develop
+    - releases/*
+  paths:
+    exclude:
+    - '**/*.md'
+    - docs/*
+
+pool:
+  vmImage: windows-2019
+
+variables:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'Install SignClient'
+  inputs:
+    command: custom
+    custom: tool
+    arguments: 'install --tool-path . SignClient'
+
+- task: PowerShell@2
+  displayName: 'Run Cake Build'
+  inputs:
+    targetType: filePath
+    filePath: .\build.ps1
+    arguments: "--verbosity=Normal --signing_secret='$(SIGNING_SECRET)' --signing_user='$(SIGNING_USER)' --package_source='$(NUGET_SOURCE)' --package_apikey='$(NUGET_APIKEY)'"
