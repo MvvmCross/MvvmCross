@@ -9,10 +9,10 @@
              Title="Second Tab"
              x:Class="Playground.Forms.UI.Pages.SecondTabForBehaviorPage">
     <StackLayout>
-        <Label Text="{Binding SampleModel.Message}" 
+        <Label Text="{Binding Message}" 
                FontSize="Title"
                HorizontalOptions="Center" />
-        <Label Text="{Binding SampleModel.Value}" 
+        <Label Text="{Binding Value}" 
                FontSize="Title"
                HorizontalOptions="Center" />
     </StackLayout>

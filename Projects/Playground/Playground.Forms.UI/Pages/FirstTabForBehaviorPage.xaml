@@ -9,14 +9,14 @@
              Title="First Tab"
              x:Class="Playground.Forms.UI.Pages.FirstTabForBehaviorPage">
     <StackLayout>
-        <Entry Text="{Binding SampleModel.Message, Mode=TwoWay}" 
+        <Entry Text="{Binding Message, Mode=TwoWay}" 
                Placeholder="Please Enter Some Message" />
-        <Label Text="{Binding SampleModel.Value}" 
+        <Label Text="{Binding Value}" 
                FontSize="Title"
                HorizontalOptions="Center" />
         <Stepper Minimum="-20" 
                  Maximum="20" 
-                 Value="{Binding SampleModel.Value, Mode=TwoWay}" 
+                 Value="{Binding Value, Mode=TwoWay}" 
                  HorizontalOptions="Center"/>
     </StackLayout>
 </views:MvxContentPage>
