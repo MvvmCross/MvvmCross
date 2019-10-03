@@ -389,7 +389,7 @@ namespace MvvmCross.Core
 
             var pluginTypes =
                 GetPluginAssemblies()
-                    .SelectMany(assembly => assembly.GetTypes())
+                    .SelectMany(assembly => assembly.ExceptionSafeGetTypes())
                     .Where(TypeContainsPluginAttribute);
 
             foreach (var pluginType in pluginTypes)
@@ -568,7 +568,7 @@ namespace MvvmCross.Core
                 _state = value;
                 FireStateChange(value);
             }
-        }
+        }       
 
         private void FireStateChange(MvxSetupState state)
         {
