@@ -568,7 +568,7 @@ namespace MvvmCross.Core
                 _state = value;
                 FireStateChange(value);
             }
-        }       
+        }
 
         private void FireStateChange(MvxSetupState state)
         {
