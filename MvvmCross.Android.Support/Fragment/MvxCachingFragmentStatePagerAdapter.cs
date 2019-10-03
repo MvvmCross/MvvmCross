@@ -26,9 +26,9 @@ namespace MvvmCross.Droid.Support.V4
         private readonly Context _context;
         private readonly Type _activityType;
 
-        public List<MvxViewPagerFragmentInfo> FragmentsInfo { get; }
+        public IEnumerable<MvxViewPagerFragmentInfo> FragmentsInfo { get; }
 
-        public override int Count => FragmentsInfo?.Count ?? 0;
+        public override int Count => FragmentsInfo?.Count() ?? 0;
 
         protected MvxCachingFragmentStatePagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
@@ -37,7 +37,7 @@ namespace MvvmCross.Droid.Support.V4
         }
 
         public MvxCachingFragmentStatePagerAdapter(Context context, FragmentManager fragmentManager,
-            List<MvxViewPagerFragmentInfo> fragmentsInfo) : base(fragmentManager)
+            IEnumerable<MvxViewPagerFragmentInfo> fragmentsInfo) : base(fragmentManager)
         {
             _context = context;
             FragmentsInfo = fragmentsInfo;

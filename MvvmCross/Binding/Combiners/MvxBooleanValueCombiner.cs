@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -13,7 +13,7 @@ namespace MvvmCross.Binding.Combiners
     public class MvxInvertedValueCombiner
 			: MvxBooleanValueCombiner
 	{
-		protected override bool TryCombine(List<bool> stepValues, out object value)
+		protected override bool TryCombine(IEnumerable<bool> stepValues, out object value)
 		{
 			value = stepValues.Any(x => !x)
 							  && true;
@@ -24,7 +24,7 @@ namespace MvvmCross.Binding.Combiners
     public class MvxAndValueCombiner
         : MvxBooleanValueCombiner
     {
-        protected override bool TryCombine(List<bool> stepValues, out object value)
+        protected override bool TryCombine(IEnumerable<bool> stepValues, out object value)
         {
             value = stepValues.All(x => x);
             return true;
@@ -34,7 +34,7 @@ namespace MvvmCross.Binding.Combiners
     public class MvxOrValueCombiner
         : MvxBooleanValueCombiner
     {
-        protected override bool TryCombine(List<bool> stepValues, out object value)
+        protected override bool TryCombine(IEnumerable<bool> stepValues, out object value)
         {
             value = stepValues.Any(x => x);
             return true;
@@ -44,7 +44,7 @@ namespace MvvmCross.Binding.Combiners
     public class MvxNotValueCombiner
         : MvxBooleanValueCombiner
     {
-        protected override bool TryCombine(List<bool> stepValues, out object value)
+        protected override bool TryCombine(IEnumerable<bool> stepValues, out object value)
         {
             value = stepValues.All(x => !x);
             return true;
@@ -54,7 +54,7 @@ namespace MvvmCross.Binding.Combiners
     public class MvxXorValueCombiner
         : MvxBooleanValueCombiner
     {
-        protected override bool TryCombine(List<bool> stepValues, out object value)
+        protected override bool TryCombine(IEnumerable<bool> stepValues, out object value)
         {
             value = stepValues.Any(x => !x)
                 && stepValues.Any(x => x);
@@ -95,7 +95,7 @@ namespace MvvmCross.Binding.Combiners
             return TryCombine(stepValues, out value);
         }
 
-        protected abstract bool TryCombine(List<bool> stepValues, out object value);
+        protected abstract bool TryCombine(IEnumerable<bool> stepValues, out object value);
 
         protected virtual bool TryConvertToBool(object objectValue, out bool booleanValue)
         {
