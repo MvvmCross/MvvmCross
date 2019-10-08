@@ -30,7 +30,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView.GuardedLayoutManagers
         public override bool SupportsPredictiveItemAnimations() => false;
 
         /// <summary>
-        /// This should not be needed anymore, as it should be caused by SupportsPredictiveItemAnimations
+        /// This should not be needed anymore, as it should be caused by SupportsPredictiveItemAnimations.
         /// </summary>
         public override void OnLayoutChildren(Android.Support.V7.Widget.RecyclerView.Recycler recycler,
             Android.Support.V7.Widget.RecyclerView.State state)
