@@ -9,7 +9,7 @@ using Android.Support.V7.Widget;
 using Java.Lang;
 using MvvmCross.Logging;
 
-namespace MvvmCross.Droid.Support.V7.RecyclerView.GuardedLayoutManagers
+namespace MvvmCross.Droid.Support.V7.RecyclerView
 {
     [Register("mvvmcross.droid.support.v7.recyclerview.MvxGuardedGridLayoutManager")]
     public class MvxGuardedGridLayoutManager : GridLayoutManager
