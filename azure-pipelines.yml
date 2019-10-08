@@ -24,6 +24,12 @@ variables:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 
 steps:
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk'
+  inputs:
+    packageType: sdk
+    version: 3.0.100
+
 - task: DotNetCoreCLI@2
   displayName: 'Install SignClient'
   inputs:
