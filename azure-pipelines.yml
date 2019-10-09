@@ -34,10 +34,10 @@ stages:
         packageType: sdk
         version: 3.0.x
 
-    - task: MSBuild@1
-      inputs:
-        solution: 'MvvmCross.sln'
-        msbuildArguments: '/target:Restore'
+    # - task: MSBuild@1
+    #   inputs:
+    #     solution: 'MvvmCross.sln'
+    #     msbuildArguments: '/target:Restore'
 
     - task: PowerShell@2
       displayName: 'Run Cake Build'
