@@ -229,6 +229,7 @@ Task("UpdateChangelog")
 Task("Default")
     .IsDependentOn("Build")
     .IsDependentOn("UnitTest")
+    .IsDependentOn("CopyPackages")
     .Does(() => 
 {
 });
