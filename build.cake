@@ -58,7 +58,7 @@ Task("Clean").Does(() =>
     CleanDirectories("./**/obj");
     CleanDirectories(outputDir.FullPath);
 
-    CopyFile(gitVersionLog, outputDir + "gitversion.log");
+    CopyFile(gitVersionLog, outputDir + "/gitversion.log");
 });
 
 FilePath msBuildPath;
