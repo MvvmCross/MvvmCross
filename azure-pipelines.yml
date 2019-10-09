@@ -17,29 +17,82 @@ pr:
     - '**/*.md'
     - docs/*
 
-pool:
-  vmImage: windows-2019
+stages:
+- stage: Build
+  variables:
+    DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 
-variables:
-  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  jobs:
+  - job: Build
+    pool:
+      vmImage: windows-latest
 
-steps:
-- task: UseDotNet@2
-  displayName: 'Use .NET Core sdk'
-  inputs:
-    packageType: sdk
-    version: 3.0.100
+    steps:
+    - task: UseDotNet@2
+      displayName: 'Use .NET Core sdk'
+      inputs:
+        packageType: sdk
+        version: 3.0.x
 
-- task: DotNetCoreCLI@2
-  displayName: 'Install SignClient'
-  inputs:
-    command: custom
-    custom: tool
-    arguments: 'install --tool-path . SignClient'
+    - task: PowerShell@2
+      displayName: 'Run Cake Build'
+      inputs:
+        targetType: filePath
+        filePath: .\build.ps1
+        arguments: "--verbosity=Normal --artifactsDir=$(Build.ArtifactStagingDirectory)"
+    
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)/NuGet'
+        artifactName: 'NuGetPackages'
+    
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathtoPublish: '$(Build.SourcesDirectory)/signclient.json'
+        artifactName: 'Signing'
 
-- task: PowerShell@2
-  displayName: 'Run Cake Build'
-  inputs:
-    targetType: filePath
-    filePath: .\build.ps1
-    arguments: "--verbosity=Normal --signing_secret='$(SIGNING_SECRET)' --signing_user='$(SIGNING_USER)' --package_source='$(NUGET_SOURCE)' --package_apikey='$(NUGET_APIKEY)'"
+- stage: CodeSign
+  condition: and(succeeded('Build'), not(eq(variables['build.reason'], 'PullRequest')))
+  - deployment: CodeSign
+    displayName: Code Signing
+    pool:
+      vmImage: windows-latest
+    environment: Code Sign - CI
+    variables:
+    - group: MvvmCross Common
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+
+            - task: DownloadPipelineArtifact@2
+              displayName: Download NuGet Artifacts
+              inputs:
+                artifactName: NuGetPackages
+                targetPath: $(Pipeline.Workspace)/ToSign/NuGet
+
+            - download: current
+              artifact: Signing
+
+            - task: DotNetCoreCLI@2
+              inputs:
+                command: custom
+                custom: tool
+                arguments: install --tool-path . SignClient
+              displayName: Install SignTool tool
+
+            - pwsh: |
+              .\SignClient "Sign" `
+              --baseDirectory "$(Pipeline.Workspace)\ToSign" `
+              --input "**/*.nupkg" `
+              --config "$(Pipeline.Workspace)\Signing\signclient.json" `
+              --user "$(SIGNING_USER)" `
+              --secret "$(SIGNING_SECRET)" `
+              --name "MvvmCross" `
+              --description "MvvmCross is a cross platform MVVM framework." `
+              --descriptionUrl "https://mvvmcross.com"
+              displayName: Authenticode Sign artifacts
+
+            - publish: $(Pipeline.Workspace)/ToSign/NuGet
+              displayName: Publish Signed NuGet Packages
+              artifact: NuGetPackagesSigned
