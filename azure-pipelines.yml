@@ -66,34 +66,34 @@ stages:
         deploy:
           steps:
 
-            - task: DownloadPipelineArtifact@2
-              displayName: Download NuGet Artifacts
-              inputs:
-                artifactName: NuGetPackages
-                targetPath: $(Pipeline.Workspace)/ToSign/NuGet
+          - task: DownloadPipelineArtifact@2
+            displayName: Download NuGet Artifacts
+            inputs:
+              artifactName: NuGetPackages
+              targetPath: $(Pipeline.Workspace)/ToSign/NuGet
 
-            - download: current
-              artifact: Signing
+          - download: current
+            artifact: Signing
 
-            - task: DotNetCoreCLI@2
-              inputs:
-                command: custom
-                custom: tool
-                arguments: install --tool-path . SignClient
-              displayName: Install SignTool tool
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: custom
+              custom: tool
+              arguments: install --tool-path . SignClient
+            displayName: Install SignTool tool
 
-            - pwsh: |
-              .\SignClient "Sign" `
-              --baseDirectory "$(Pipeline.Workspace)\ToSign" `
-              --input "**/*.nupkg" `
-              --config "$(Pipeline.Workspace)\Signing\signclient.json" `
-              --user "$(SIGNING_USER)" `
-              --secret "$(SIGNING_SECRET)" `
-              --name "MvvmCross" `
-              --description "MvvmCross is a cross platform MVVM framework." `
-              --descriptionUrl "https://mvvmcross.com"
-              displayName: Authenticode Sign artifacts
+          - pwsh: |
+            .\SignClient "Sign" `
+            --baseDirectory "$(Pipeline.Workspace)\ToSign" `
+            --input "**/*.nupkg" `
+            --config "$(Pipeline.Workspace)\Signing\signclient.json" `
+            --user "$(SIGNING_USER)" `
+            --secret "$(SIGNING_SECRET)" `
+            --name "MvvmCross" `
+            --description "MvvmCross is a cross platform MVVM framework" `
+            --descriptionUrl "https://mvvmcross.com"
+            displayName: Authenticode Sign artifacts
 
-            - publish: $(Pipeline.Workspace)/ToSign/NuGet
-              displayName: Publish Signed NuGet Packages
-              artifact: NuGetPackagesSigned
+          - publish: $(Pipeline.Workspace)/ToSign/NuGet
+            displayName: Publish Signed NuGet Packages
+            artifact: NuGetPackagesSigned
