@@ -242,9 +242,7 @@ MSBuildSettings GetDefaultBuildSettings()
     {
         Configuration = configuration,
         ToolPath = msBuildPath,
-        Verbosity = verbosity,
-        ArgumentCustomization = args => args.Append("/m"),
-        ToolVersion = MSBuildToolVersion.VS2019
+        Verbosity = verbosity
     };
 
     // workaround for derped Java Home ENV vars
