@@ -83,15 +83,15 @@ stages:
             displayName: Install SignTool tool
 
           - pwsh: |
-            .\SignClient "Sign" `
-            --baseDirectory "$(Pipeline.Workspace)\ToSign" `
-            --input "**/*.nupkg" `
-            --config "$(Pipeline.Workspace)\Signing\signclient.json" `
-            --user "$(SIGNING_USER)" `
-            --secret "$(SIGNING_SECRET)" `
-            --name "MvvmCross" `
-            --description "MvvmCross is a cross platform MVVM framework" `
-            --descriptionUrl "https://mvvmcross.com"
+              .\SignClient "Sign" `
+              --baseDirectory "$(Pipeline.Workspace)\ToSign" `
+              --input "**/*.nupkg" `
+              --config "$(Pipeline.Workspace)\Signing\signclient.json" `
+              --user "$(SIGNING_USER)" `
+              --secret "$(SIGNING_SECRET)" `
+              --name "MvvmCross" `
+              --description "MvvmCross is a cross platform MVVM framework" `
+              --descriptionUrl "https://mvvmcross.com"
             displayName: Authenticode Sign artifacts
 
           - publish: $(Pipeline.Workspace)/ToSign/NuGet
