@@ -5,15 +5,14 @@
 
 var solutionName = "MvvmCross";
 var repoName = "mvvmcross/mvvmcross";
-var sln = new FilePath("./" + solutionName + ".sln");
-var outputDir = new DirectoryPath(artifactsDir);
-var gitVersionLog = new FilePath("./artifacts/gitversion.log");
-var nuspecDir = new DirectoryPath("./nuspec");
-var nugetPackagesDir = new DirectoryPath("./nuget/packages");
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var verbosityArg = Argument("verbosity", "Minimal");
 var artifactsDir = Argument("artifactsDir", "./artifacts");
+var sln = new FilePath("./" + solutionName + ".sln");
+var outputDir = new DirectoryPath(artifactsDir);
+var gitVersionLog = new FilePath("./gitversion.log");
+var nuspecDir = new DirectoryPath("./nuspec");
 var verbosity = Verbosity.Minimal;
 
 var githubToken = Argument("github_token", "");
@@ -53,12 +52,13 @@ Setup(context =>
 
 Task("Clean").Does(() =>
 {
+    EnsureDirectoryExists(outputDir.FullPath);
+
     CleanDirectories("./**/bin");
     CleanDirectories("./**/obj");
     CleanDirectories(outputDir.FullPath);
-    CleanDirectories(nugetPackagesDir.FullPath);
 
-    EnsureDirectoryExists(outputDir);
+    CopyFile(gitVersionLog, outputDir + "gitversion.log");
 });
 
 FilePath msBuildPath;
