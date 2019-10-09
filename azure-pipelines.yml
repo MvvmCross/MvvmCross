@@ -53,6 +53,7 @@ stages:
 
 - stage: CodeSign
   condition: and(succeeded('Build'), not(eq(variables['build.reason'], 'PullRequest')))
+  jobs:
   - deployment: CodeSign
     displayName: Code Signing
     pool:
