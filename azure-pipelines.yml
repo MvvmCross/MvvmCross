@@ -34,23 +34,18 @@ stages:
         packageType: sdk
         version: 3.0.x
 
-    # - task: MSBuild@1
-    #   inputs:
-    #     solution: 'MvvmCross.sln'
-    #     msbuildArguments: '/target:Restore'
-
     - task: PowerShell@2
       displayName: 'Run Cake Build'
       inputs:
         targetType: filePath
         filePath: .\build.ps1
         arguments: "--verbosity=Normal --artifactsDir=$(Build.ArtifactStagingDirectory)"
-    
+
     - task: PublishBuildArtifacts@1
       inputs:
         pathtoPublish: '$(Build.ArtifactStagingDirectory)/NuGet'
         artifactName: 'NuGetPackages'
-    
+
     - task: PublishBuildArtifacts@1
       inputs:
         pathtoPublish: '$(Build.SourcesDirectory)/signclient.json'
