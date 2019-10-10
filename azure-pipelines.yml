@@ -66,15 +66,6 @@ stages:
         deploy:
           steps:
 
-          - task: DownloadPipelineArtifact@2
-            displayName: Download NuGet Artifacts
-            inputs:
-              artifactName: NuGetPackages
-              targetPath: $(Pipeline.Workspace)/ToSign/NuGet
-
-          - download: current
-            artifact: Signing
-
           - task: DotNetCoreCLI@2
             inputs:
               command: custom
@@ -84,7 +75,7 @@ stages:
 
           - pwsh: |
               .\SignClient "Sign" `
-              --baseDirectory "$(Pipeline.Workspace)\ToSign" `
+              --baseDirectory "$(Pipeline.Workspace)\NuGetPackages" `
               --input "**/*.nupkg" `
               --config "$(Pipeline.Workspace)\Signing\signclient.json" `
               --user "$(SIGNING_USER)" `
