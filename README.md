@@ -111,7 +111,7 @@ Grab the latest [MvvmCross NuGet](https://www.nuget.org/packages/MvvmCross/) pac
 
 > Install-Package MvvmCross
 
-Make sure that both the shared core project and your application projects include the NuGet. For more details please visit the [Getting Started documentation.](https://www.mvvmcross.com/documentation/getting-started/getting-started) which also provide easier ways, through Visual Studio and Xamarin Studio plugins to install and manage MvvmCross in your project.
+Make sure that both the shared core project and your application projects include the NuGet. For more details please visit the [Getting Started documentation,](https://www.mvvmcross.com/documentation/getting-started/getting-started) which also provides easier ways, through Visual Studio and Xamarin Studio plugins to install and manage MvvmCross in your project.
 
 ## Filing issues
 
