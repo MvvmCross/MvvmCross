@@ -84,7 +84,7 @@ If you call your layout `item_contact`, then using it when filling out the `MvxI
 
 ### Using an Item Template Selector
 
-An `ItemTemplateSelector` is especially useful, when wanting to show different types of ViewModels in the same list and you want to present them with different views for each different type of ViewModel. The idea behind the `ItemTemplateSelector` class is that you then do not have to extend the `MvxRecylcerAdapter`, to provide different Views for different ViewModel types.
+An `ItemTemplateSelector` is especially useful, when wanting to show different types of ViewModels in the same list and you want to present them with different views for each different type of ViewModel. The idea behind the `ItemTemplateSelector` class is that you then do not have to extend the `MvxRecyclerAdapter`, to provide different Views for different ViewModel types.
 
 So let us say are trying to keep track of animals in a zoo and you want a different View for each group of Animal. So mammals have its own View, reptiles its own View and so on.
 
@@ -130,7 +130,7 @@ namespace Zoo.App
 }
 ```
 
-To use this `ItemTemplateSelctor` you will need to provide it in the `MvxTemplateSelector` attribute on the `MvxRecylcerView`. It must be of the format: `Fully.Qualified.ClassName,Assembly.Name`. Hence, for the example above. Let us say the assembly will be `Zoo.App.Droid` and as you see the namespace is `Zoo.App` then the string will be: `Zoo.App.AnimalTemplateSelector,Zoo.App.Droid`.
+To use this `ItemTemplateSelctor` you will need to provide it in the `MvxTemplateSelector` attribute on the `MvxRecyclerView`. It must be of the format: `Fully.Qualified.ClassName,Assembly.Name`. Hence, for the example above. Let us say the assembly will be `Zoo.App.Droid` and as you see the namespace is `Zoo.App` then the string will be: `Zoo.App.AnimalTemplateSelector,Zoo.App.Droid`.
 
 ```xml
 <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
