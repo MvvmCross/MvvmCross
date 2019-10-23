@@ -20,7 +20,7 @@ namespace MvvmCross.Platforms.Android.Binding.BindingContext
                 return null;
             
             if (Mvx.IoCProvider.TryResolve<IMvxBindingContextStack<T>>(out var stack))
-                return stack.Current;
+                return stack?.Current;
 
             return null;
         }
