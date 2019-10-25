@@ -586,6 +586,10 @@ namespace MvvmCross.IoC
                 }
 
                 var raw = resolver.Resolve();
+                if (raw == null)
+                {
+                    throw new MvxException("Resolver returned null");
+                }
                 if (!type.IsInstanceOfType(raw))
                 {
                     throw new MvxException("Resolver returned object type {0} which does not support interface {1}",
