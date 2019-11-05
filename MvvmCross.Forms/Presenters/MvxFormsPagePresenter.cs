@@ -518,7 +518,7 @@ namespace MvvmCross.Forms.Presenters
                 {
                     // Either last isn't a nav page, or there is no last page
                     // So, wrap the current page in a nav page and push onto stack
-                    await FormsApplication.MainPage.Navigation.PushModalAsync(new NavigationPage(page));
+                    await FormsApplication.MainPage.Navigation.PushModalAsync(CreateNavigationPage(page));
                 }
             }
             else
