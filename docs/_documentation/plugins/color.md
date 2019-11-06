@@ -3,12 +3,12 @@ layout: documentation
 title: Color
 category: Plugins
 ---
-The `Color` plugin provides native implementations for conversion from the cross-platform `MvxColor` to platform-specific `Color` implementations.
+The `Color` plugin provides native implementations for conversion from `System.Drawing.Color` to platform-specific `Color` implementations.
 
 ```c#
 public interface IMvxNativeColor
 {
-    object ToNative(MvxColor mvxColor);
+    object ToNative(System.Drawing.Color color);
 }
 ```
 
