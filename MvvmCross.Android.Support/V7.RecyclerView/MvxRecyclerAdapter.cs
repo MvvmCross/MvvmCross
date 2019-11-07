@@ -123,26 +123,27 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         public override int GetItemViewType(int position)
         {
             var itemAtPosition = GetItem(position);
-            var viewTypeIndex = ItemTemplateSelector.GetItemViewType(itemAtPosition);
-            var viewType = ItemTemplateSelector.GetItemLayoutId(viewTypeIndex);
+            var viewType = ItemTemplateSelector.GetItemViewType(itemAtPosition);
+            
             return viewType;
         }
 
         public override Android.Support.V7.Widget.RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
+            var viewLayoutId = ItemTemplateSelector.GetItemLayoutId(viewType);
             var itemBindingContext = new MvxAndroidBindingContext(parent.Context, BindingContext.LayoutInflaterHolder);
 
-            var viewHolder = new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewType, itemBindingContext), itemBindingContext)
+            var viewHolder = new MvxRecyclerViewHolder(InflateViewForHolder(parent, viewLayoutId, itemBindingContext), itemBindingContext)
             {
-                Id = viewType
+                Id = viewLayoutId
             };
 
             return viewHolder;
         }
 
-        protected virtual View InflateViewForHolder(ViewGroup parent, int viewType, IMvxAndroidBindingContext bindingContext)
+        protected virtual View InflateViewForHolder(ViewGroup parent, int viewLayoutId, IMvxAndroidBindingContext bindingContext)
         {
-            return bindingContext.BindingInflate(viewType, parent, false);
+            return bindingContext.BindingInflate(viewLayoutId, parent, false);
         }
 
         public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
