@@ -20,19 +20,19 @@ namespace MvvmCross.Plugin.Color.UnitTest
 
         public class WrappedColor
         {
-            public WrappedColor(MvxColor color)
+            public WrappedColor(System.Drawing.Color color)
             {
                 Color = color;
             }
 
-            public MvxColor Color { get; private set; }
+            public System.Drawing.Color Color { get; private set; }
         }
 
         public class MockNative : IMvxNativeColor
         {
-            public object ToNative(MvxColor mvxColor)
+            public object ToNative(System.Drawing.Color color)
             {
-                return new WrappedColor(mvxColor);
+                return new WrappedColor(color);
             }
         }
     }

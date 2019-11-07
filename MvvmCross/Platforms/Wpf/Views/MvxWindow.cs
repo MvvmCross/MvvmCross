@@ -13,6 +13,7 @@ namespace MvvmCross.Platforms.Wpf.Views
     {
         private IMvxViewModel _viewModel;
         private IMvxBindingContext _bindingContext;
+        private bool _unloaded = false;
 
         public IMvxViewModel ViewModel
         {
@@ -44,7 +45,8 @@ namespace MvvmCross.Platforms.Wpf.Views
 
         public MvxWindow()
         {
-            Unloaded += MvxWindow_Unloaded;
+            Closed += MvxWindow_Closed;
+            Unloaded += MvxWindow_Unloaded;            
             Loaded += MvxWindow_Loaded;
             Initialized += MvxWindow_Initialized;
         }
@@ -57,17 +59,25 @@ namespace MvvmCross.Platforms.Wpf.Views
             }
         }
 
-        private void MvxWindow_Unloaded(object sender, RoutedEventArgs e)
-        {
-            ViewModel?.ViewDisappearing();
-            ViewModel?.ViewDisappeared();
-            ViewModel?.ViewDestroy();
-        }
+        private void MvxWindow_Closed(object sender, EventArgs e) => Unload();
+
+        private void MvxWindow_Unloaded(object sender, RoutedEventArgs e) => Unload();
 
         private void MvxWindow_Loaded(object sender, RoutedEventArgs e)
         {
             ViewModel?.ViewAppearing();
             ViewModel?.ViewAppeared();
+        }
+
+        private void Unload()
+        {
+            if (!_unloaded)
+            {
+                ViewModel?.ViewDisappearing();
+                ViewModel?.ViewDisappeared();
+                ViewModel?.ViewDestroy();
+                _unloaded = true;
+            }
         }
 
         public void Dispose()
@@ -87,6 +97,7 @@ namespace MvvmCross.Platforms.Wpf.Views
             {
                 Unloaded -= MvxWindow_Unloaded;
                 Loaded -= MvxWindow_Loaded;
+                Closed -= MvxWindow_Closed;
             }
         }
     }

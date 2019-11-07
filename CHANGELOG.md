@@ -1,5 +1,98 @@
 # Change Log
 
+## [6.4.1](https://github.com/MvvmCross/MvvmCross/tree/6.4.1) (2019-09-30)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.4.0...6.4.1)
+
+**Fixed bugs:**
+
+- MvxExpandableTableViewSource doesn't let touches through [\#3574](https://github.com/MvvmCross/MvvmCross/issues/3574)
+- MvxLayoutInflater CreateCustomViewInternal fails on Android 10 [\#3550](https://github.com/MvvmCross/MvvmCross/issues/3550)
+- NullReferenceException when initializing fragment in ViewPager [\#3535](https://github.com/MvvmCross/MvvmCross/issues/3535)
+
+**Closed issues:**
+
+- Update Fused Location plugin to latest version of Play Services [\#3580](https://github.com/MvvmCross/MvvmCross/issues/3580)
+- Nested fragment inside viewpager caused error “Fragment host not found” [\#3380](https://github.com/MvvmCross/MvvmCross/issues/3380)
+
+**Merged pull requests:**
+
+- Fix header cells in MvxExpandableTableViewSource not passing touches to subviews [\#3575](https://github.com/MvvmCross/MvvmCross/pull/3575) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix MvxLayoutInflater throwing NoSuchFieldException on Android Q [\#3573](https://github.com/MvvmCross/MvvmCross/pull/3573) ([Cheesebaron](https://github.com/Cheesebaron))
+- Update Play Services in Location Fused plugin [\#3583](https://github.com/MvvmCross/MvvmCross/pull/3583) ([Cheesebaron](https://github.com/Cheesebaron))
+- Update nuget packages [\#3582](https://github.com/MvvmCross/MvvmCross/pull/3582) ([martijn00](https://github.com/martijn00))
+- Bump to latest version of MSBuild SDK Extras [\#3581](https://github.com/MvvmCross/MvvmCross/pull/3581) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix some comments and obsolete warning [\#3557](https://github.com/MvvmCross/MvvmCross/pull/3557) ([martijn00](https://github.com/martijn00))
+- Stop using dynamic [\#3556](https://github.com/MvvmCross/MvvmCross/pull/3556) ([martijn00](https://github.com/martijn00))
+- Update Plugins getting-started.md to proper load non explicitly referenced plugins [\#3555](https://github.com/MvvmCross/MvvmCross/pull/3555) ([fedemkr](https://github.com/fedemkr))
+- Ci/build script updates [\#3553](https://github.com/MvvmCross/MvvmCross/pull/3553) ([Cheesebaron](https://github.com/Cheesebaron))
+- Update android-recyclerview.md [\#3552](https://github.com/MvvmCross/MvvmCross/pull/3552) ([pearsonallen](https://github.com/pearsonallen))
+- NullReferenceException when initializing fragment in ViewPager [\#3549](https://github.com/MvvmCross/MvvmCross/pull/3549) ([Prin53](https://github.com/Prin53))
+- Views filtering in MvxViewModelViewLookupBuilder [\#3539](https://github.com/MvvmCross/MvvmCross/pull/3539) ([orzech85](https://github.com/orzech85))
+- Update github-pages gem and Jekyll [\#3536](https://github.com/MvvmCross/MvvmCross/pull/3536) ([Cheesebaron](https://github.com/Cheesebaron))
+- Bump MSBuild.Sdk.Extras from 2.0.41 to 2.0.43 [\#3529](https://github.com/MvvmCross/MvvmCross/pull/3529) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+## [6.4.0](https://github.com/MvvmCross/MvvmCross/tree/6.4.0) (2019-09-09)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.3.1...6.4.0)
+
+**Implemented enhancements:**
+
+- Prepare MvxIoCTest to allow other IoC providers [\#3484](https://github.com/MvvmCross/MvvmCross/pull/3484) ([SamuelDebruyn](https://github.com/SamuelDebruyn))
+- Impliment apply\(\) on dispose of clear binding set [\#3431](https://github.com/MvvmCross/MvvmCross/pull/3431) ([Tyron18](https://github.com/Tyron18))
+
+**Fixed bugs:**
+
+- ViewPager ignores Presentation Values [\#3497](https://github.com/MvvmCross/MvvmCross/issues/3497)
+- Modal Popover Presentation Crash  [\#3515](https://github.com/MvvmCross/MvvmCross/issues/3515)
+- RequestTranslator ignores Presentation/Parameter values [\#3482](https://github.com/MvvmCross/MvvmCross/issues/3482)
+- Prevent null reference when trying to look up latest binding context [\#3518](https://github.com/MvvmCross/MvvmCross/pull/3518) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix ctor name in target binding [\#3511](https://github.com/MvvmCross/MvvmCross/pull/3511) ([Cheesebaron](https://github.com/Cheesebaron))
+- RequestTranslator ignores Presentation/Parameter values [\#3487](https://github.com/MvvmCross/MvvmCross/pull/3487) ([Prin53](https://github.com/Prin53))
+
+**Closed issues:**
+
+- MvxSpinner classNotFoundException inside fragment [\#3454](https://github.com/MvvmCross/MvvmCross/issues/3454)
+- Bindings not attempted in MvxRecycler item template layout when given item in ItemsSource is null  [\#3424](https://github.com/MvvmCross/MvvmCross/issues/3424)
+
+**Merged pull requests:**
+
+- Switch to Azure Pipelines [\#3397](https://github.com/MvvmCross/MvvmCross/pull/3397) ([Cheesebaron](https://github.com/Cheesebaron))
+- MvvmCross 6.4.0 blog post [\#3533](https://github.com/MvvmCross/MvvmCross/pull/3533) ([Cheesebaron](https://github.com/Cheesebaron))
+- Update android-spinner.md [\#3530](https://github.com/MvvmCross/MvvmCross/pull/3530) ([SebastienForay](https://github.com/SebastienForay))
+- Don't try to sign packages for Pull Requests [\#3525](https://github.com/MvvmCross/MvvmCross/pull/3525) ([Cheesebaron](https://github.com/Cheesebaron))
+- Update ios-uirefreshcontrol.md [\#3524](https://github.com/MvvmCross/MvvmCross/pull/3524) ([Nerves82](https://github.com/Nerves82))
+- Fix presentation hint for non-forms views in forms presenter [\#3522](https://github.com/MvvmCross/MvvmCross/pull/3522) ([orzech85](https://github.com/orzech85))
+- Example of Android Native View for MvvmCross.Forms [\#3521](https://github.com/MvvmCross/MvvmCross/pull/3521) ([orzech85](https://github.com/orzech85))
+- Bump Moq from 4.12.0 to 4.13.0 [\#3519](https://github.com/MvvmCross/MvvmCross/pull/3519) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Modal Popover Presentation Crash [\#3516](https://github.com/MvvmCross/MvvmCross/pull/3516) ([Prin53](https://github.com/Prin53))
+- Cleanup csproj files [\#3512](https://github.com/MvvmCross/MvvmCross/pull/3512) ([martijn00](https://github.com/martijn00))
+- Add more Android Target bindings [\#3510](https://github.com/MvvmCross/MvvmCross/pull/3510) ([Cheesebaron](https://github.com/Cheesebaron))
+- Update github-pages gem [\#3509](https://github.com/MvvmCross/MvvmCross/pull/3509) ([Cheesebaron](https://github.com/Cheesebaron))
+- ViewPager ignores Presentation Values [\#3501](https://github.com/MvvmCross/MvvmCross/pull/3501) ([Prin53](https://github.com/Prin53))
+- Bump MSBuild.Sdk.Extras from 2.0.31 to 2.0.41 [\#3496](https://github.com/MvvmCross/MvvmCross/pull/3496) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.CodeAnalysis from 3.1.0 to 3.2.1 [\#3493](https://github.com/MvvmCross/MvvmCross/pull/3493) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- IocConstruct constructor lookup & constructor injection [\#3491](https://github.com/MvvmCross/MvvmCross/pull/3491) ([SamuelDebruyn](https://github.com/SamuelDebruyn))
+- Bump Xamarin.Forms.Platform.WPF from 3.6.0.220655 to 4.1.0.673156 [\#3490](https://github.com/MvvmCross/MvvmCross/pull/3490) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.Forms from 3.6.0.220655 to 4.1.0.673156 [\#3489](https://github.com/MvvmCross/MvvmCross/pull/3489) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Update tizen backend implementation [\#3477](https://github.com/MvvmCross/MvvmCross/pull/3477) ([rookiejava](https://github.com/rookiejava))
+- Minor typo [\#3473](https://github.com/MvvmCross/MvvmCross/pull/3473) ([garyng](https://github.com/garyng))
+- Bump Microsoft.SourceLink.GitHub from 1.0.0-beta2-19351-01 to 1.0.0-beta2-19367-01 [\#3471](https://github.com/MvvmCross/MvvmCross/pull/3471) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Minor typo in docs [\#3469](https://github.com/MvvmCross/MvvmCross/pull/3469) ([garyng](https://github.com/garyng))
+- Bump MSBuild.Sdk.Extras from 2.0.29 to 2.0.31 [\#3468](https://github.com/MvvmCross/MvvmCross/pull/3468) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Breaking up logic for creating view lookup [\#3461](https://github.com/MvvmCross/MvvmCross/pull/3461) ([nickrandolph](https://github.com/nickrandolph))
+- Increment Min Android Version [\#3458](https://github.com/MvvmCross/MvvmCross/pull/3458) ([nickrandolph](https://github.com/nickrandolph))
+- Replace MvxColor with System.Drawing.Color [\#3456](https://github.com/MvvmCross/MvvmCross/pull/3456) ([Strifex](https://github.com/Strifex))
+- Bump Microsoft.SourceLink.GitHub from 1.0.0-beta2-18618-05 to 1.0.0-beta2-19351-01 [\#3451](https://github.com/MvvmCross/MvvmCross/pull/3451) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.NETCore.UniversalWindowsPlatform from 6.2.3 to 6.2.8 [\#3448](https://github.com/MvvmCross/MvvmCross/pull/3448) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump MSBuild.Sdk.Extras from 2.0.24 to 2.0.29 [\#3447](https://github.com/MvvmCross/MvvmCross/pull/3447) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.FFImageLoading from 2.4.9.961 to 2.4.11.982 [\#3446](https://github.com/MvvmCross/MvvmCross/pull/3446) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.CodeAnalysis from 2.10.0 to 3.1.0 [\#3444](https://github.com/MvvmCross/MvvmCross/pull/3444) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.NET.Test.Sdk from 15.9.0 to 16.2.0 [\#3443](https://github.com/MvvmCross/MvvmCross/pull/3443) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Moq from 4.10.1 to 4.12.0 [\#3441](https://github.com/MvvmCross/MvvmCross/pull/3441) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Newtonsoft.Json from 12.0.1 to 12.0.2 [\#3440](https://github.com/MvvmCross/MvvmCross/pull/3440) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Update value-converters.md [\#3437](https://github.com/MvvmCross/MvvmCross/pull/3437) ([An0d](https://github.com/An0d))
+- Switch to Azure Pipelines [\#3397](https://github.com/MvvmCross/MvvmCross/pull/3397) ([Cheesebaron](https://github.com/Cheesebaron))
+- Tidying up and making startup more consistent [\#3372](https://github.com/MvvmCross/MvvmCross/pull/3372) ([nickrandolph](https://github.com/nickrandolph))
+
 ## [6.3.1](https://github.com/MvvmCross/MvvmCross/tree/6.3.1) (2019-06-18)
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.3.0...6.3.1)
 

@@ -48,14 +48,14 @@ namespace MvvmCross.Plugin.Location.Fused
 		{
 			if (androidLocation == null)
 			{
-				MvxPluginLog.Instance.Trace("Android: Null location seen");
+				MvxPluginLog.Instance.Warn("Android: Null location seen");
 				return;
 			}
 
 			if (androidLocation.Latitude == double.MaxValue || 
                 androidLocation.Longitude == double.MaxValue)
 			{
-				MvxPluginLog.Instance.Trace("Android: Invalid location seen");
+				MvxPluginLog.Instance.Warn("Android: Invalid location seen");
 				return;
 			}
 
@@ -70,7 +70,7 @@ namespace MvvmCross.Plugin.Location.Fused
 			}
 			catch (Exception exception)
 			{
-				MvxPluginLog.Instance.Trace("Android: Exception seen in converting location " + exception.ToLongString());
+				MvxPluginLog.Instance.Error(exception, "Android: Exception seen in converting location");
 				return;
 			}
 

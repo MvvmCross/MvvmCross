@@ -83,10 +83,11 @@ The `HandleItemSelected` command, can be bound to a command in your ViewModel. W
 
 ```csharp
 private MvxCommand<CountryViewModel> _countrySelectedCommand;
-public MvxCommand<DogViewModel> CountrySelectedCommand => _countrySelectedCommand = 
-    _countrySelectedCommand ?? new MvxCommand<DogViewModel>(OnCountrySelectedCommand);
+public MvxCommand<CountryViewModel> CountrySelectedCommand => _countrySelectedCommand = 
+    _countrySelectedCommand ?? new MvxCommand<CountryViewModel>(OnCountrySelectedCommand);
 
 private void OnCountrySelectedCommand(CountryViewModel country)
 {
     // write on country selected logic here
 }
+```

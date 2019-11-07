@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using MvvmCross.Commands;
 using MvvmCross.UI;
@@ -70,12 +71,12 @@ namespace Playground.Core.ViewModels
             "Erik", "Daniel", "Aaron", "Emmanuel", "Iain", "Martin"
         };
 
-        private MvxColor[] _colors = new[]
+        private Color[] _colors = new[]
         {
-            MvxColors.Yellow, MvxColors.Green, MvxColors.Blue, MvxColors.Red, MvxColors.Brown,
-            MvxColors.Gold, MvxColors.Orange, MvxColors.Purple, MvxColors.Teal, MvxColors.Pink,
-            MvxColors.Azure, MvxColors.Crimson, MvxColors.Cyan, MvxColors.Gray, MvxColors.Silver,
-            MvxColors.PapayaWhip, MvxColors.Magenta
+            Color.Yellow, Color.Green, Color.Blue, Color.Red, Color.Brown,
+            Color.Gold, Color.Orange, Color.Purple, Color.Teal, Color.Pink,
+            Color.Azure, Color.Crimson, Color.Cyan, Color.Gray, Color.Silver,
+            Color.PapayaWhip, Color.Magenta
         };
 
         private void DoAddAnimalCommand(int count)
@@ -142,7 +143,7 @@ namespace Playground.Core.ViewModels
         {
             private string _name;
             private string _imageUrl;
-            private MvxColor _favoriteColor;
+            private Color _favoriteColor;
             private bool _favorite;
 
             public string Name
@@ -157,7 +158,7 @@ namespace Playground.Core.ViewModels
                 set => SetProperty(ref _imageUrl, value);
             }
 
-            public MvxColor FavoriteColor
+            public Color FavoriteColor
             {
                 get => _favoriteColor;
                 set => SetProperty(ref _favoriteColor, value);

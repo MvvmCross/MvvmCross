@@ -3,14 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Globalization;
-using MvvmCross.UI;
 
 namespace MvvmCross.Plugin.Color
 {
     [Preserve(AllMembers = true)]
 	public class MvxRGBValueConverter : MvxColorValueConverter<string>
     {
-        protected override MvxColor Convert(string value, object parameter, CultureInfo culture)
-            => MvxColor.ParseHexString(value);
+        protected override System.Drawing.Color Convert(string value, object parameter, CultureInfo culture)
+            => MvxHexParser.ColorFromHexString(value);
     }
 }

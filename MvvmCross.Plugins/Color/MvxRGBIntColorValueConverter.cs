@@ -3,16 +3,19 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Globalization;
-using MvvmCross.UI;
 
 namespace MvvmCross.Plugin.Color
 {
     [Preserve(AllMembers = true)]
 	public class MvxRGBIntColorValueConverter : MvxColorValueConverter<int>
     {
-        protected override MvxColor Convert(int value, object parameter, CultureInfo culture)
+        protected override System.Drawing.Color Convert(int value, object parameter, CultureInfo culture)
         {
-            return new MvxColor(value, 255);
+            MvxHexParser.ParseRGBInteger(value, out int red, out int green, out int blue);
+
+            var color = System.Drawing.Color.FromArgb(red, green, blue);
+
+            return color;
         }
     }
 }
