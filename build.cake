@@ -2,34 +2,22 @@
 #tool nuget:?package=vswhere&version=2.7.1
 #addin nuget:?package=Cake.Figlet&version=1.3.1
 #addin nuget:?package=Cake.Git&version=0.21.0
-#addin nuget:?package=Polly&version=7.1.1
-
-using Polly;
 
 var solutionName = "MvvmCross";
 var repoName = "mvvmcross/mvvmcross";
-var sln = new FilePath("./" + solutionName + ".sln");
-var outputDir = new DirectoryPath("./artifacts");
-var gitVersionLog = new FilePath("./artifacts/gitversion.log");
-var nuspecDir = new DirectoryPath("./nuspec");
-var nugetPackagesDir = new DirectoryPath("./nuget/packages");
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var verbosityArg = Argument("verbosity", "Minimal");
+var artifactsDir = Argument("artifactsDir", "./artifacts");
+var sln = new FilePath("./" + solutionName + ".sln");
+var outputDir = new DirectoryPath(artifactsDir);
+var gitVersionLog = new FilePath("./gitversion.log");
+var nuspecDir = new DirectoryPath("./nuspec");
 var verbosity = Verbosity.Minimal;
-
-var signingSecret = Argument("signing_secret", "");
-var signingUser = Argument("signing_user", "");
-var didSignPackages = false;
-
-var nugetSource = Argument("package_source", "");
-var nugetApiKey = Argument("package_apikey", "");
 
 var githubToken = Argument("github_token", "");
 var githubTokenEnv = EnvironmentVariable("CHANGELOG_GITHUB_TOKEN");
 var sinceTag = Argument("since_tag", "");
-
-var shouldPublishPackages = false;
 
 var isRunningOnPipelines = TFBuild.IsRunningOnAzurePipelines || TFBuild.IsRunningOnAzurePipelinesHosted;
 GitVersion versionInfo = null;
@@ -59,21 +47,18 @@ Setup(context =>
         target,
         cakeVersion);
 
-    shouldPublishPackages = ShouldPushNugetPackages(versionInfo.BranchName, nugetSource);
-
-    Information("Will push NuGet packages {0}", shouldPublishPackages);
-
     verbosity = (Verbosity) Enum.Parse(typeof(Verbosity), verbosityArg, true);
 });
 
 Task("Clean").Does(() =>
 {
+    EnsureDirectoryExists(outputDir.FullPath);
+
     CleanDirectories("./**/bin");
     CleanDirectories("./**/obj");
     CleanDirectories(outputDir.FullPath);
-    CleanDirectories(nugetPackagesDir.FullPath);
 
-    EnsureDirectoryExists(outputDir);
+    CopyFile(gitVersionLog, outputDir + "/gitversion.log");
 });
 
 FilePath msBuildPath;
@@ -180,120 +165,10 @@ Task("CopyPackages")
     .IsDependentOn("Build")
     .Does(() => 
 {
+    EnsureDirectoryExists(outputDir + "/NuGet/");
+
     var nugetFiles = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg");
-    CopyFiles(nugetFiles, outputDir);
-});
-
-Task("SignPackages")
-    .WithCriteria(() => !BuildSystem.IsLocalBuild)
-    .WithCriteria(() => IsRepository(repoName))
-    .WithCriteria(() => !string.IsNullOrEmpty(signingSecret))
-    .WithCriteria(() => !string.IsNullOrEmpty(signingUser))
-    .WithCriteria(() => isRunningOnPipelines)
-    .WithCriteria(() => !TFBuild.Environment.PullRequest.IsPullRequest)
-    .IsDependentOn("Build")
-    .IsDependentOn("CopyPackages")
-    .Does(() => 
-{
-    var settings = File("./signclient.json");
-    var files = GetFiles(outputDir + "/*.nupkg");
-
-    foreach(var file in files)
-    {
-        Information("Signing {0}...", file.FullPath);
-
-        // Build the argument list.
-        var arguments = new ProcessArgumentBuilder()
-            .Append("sign")
-            .AppendSwitchQuoted("-c", MakeAbsolute(settings.Path).FullPath)
-            .AppendSwitchQuoted("-i", MakeAbsolute(file).FullPath)
-            .AppendSwitchQuotedSecret("-s", signingSecret)
-            .AppendSwitchQuotedSecret("-r", signingUser)
-            .AppendSwitchQuoted("-n", "MvvmCross")
-            .AppendSwitchQuoted("-d", "MvvmCross is a cross platform MVVM framework.")
-            .AppendSwitchQuoted("-u", "https://mvvmcross.com");
-
-        // Sign the binary.
-        var result = StartProcess("SignClient.exe", new ProcessSettings { Arguments = arguments });
-        if (result != 0)
-        {
-            // We should not recover from this.
-            throw new InvalidOperationException("Signing failed!");
-        }
-    }
-
-    didSignPackages = true;
-});
-
-Task("PublishPackages")
-    .WithCriteria(() => !BuildSystem.IsLocalBuild)
-    .WithCriteria(() => IsRepository(repoName))
-    .WithCriteria(() => !string.IsNullOrEmpty(nugetSource))
-    .WithCriteria(() => !string.IsNullOrEmpty(nugetApiKey))
-    .WithCriteria(() => shouldPublishPackages)
-    .IsDependentOn("CopyPackages")
-    .IsDependentOn("SignPackages")
-    .Does (() =>
-{
-    if (!didSignPackages)
-    {
-        Warning("Packages were not signed. Not publishing packages");
-        return;
-    }
-
-    var nugetPushSettings = new NuGetPushSettings
-    {
-        Source = nugetSource,
-        ApiKey = nugetApiKey
-    };
-
-    if (nugetSource.Contains("github.com"))
-    {
-        var nugetSourceSettings = new NuGetSourcesSettings
-        {
-            UserName = "Cheesebaron",
-            Password = nugetApiKey,
-            IsSensitiveSource = true
-        };
-
-        var feed = new 
-        {
-            Name = "GitHub",
-            Source = nugetSource
-        };
-
-        NuGetAddSource(feed.Name, feed.Source, nugetSourceSettings);
-
-        nugetPushSettings = new NuGetPushSettings
-        {
-            Source = feed.Source
-        };
-    }
-
-    var nugetFiles = GetFiles(outputDir + "/*.nupkg");
-
-    var policy = Policy
-        .Handle<Exception>()
-        .WaitAndRetry(5, retryAttempt => 
-            TimeSpan.FromSeconds(Math.Pow(1.5, retryAttempt)));
-
-    foreach(var nugetFile in nugetFiles)
-    {
-        policy.Execute(() =>
-            NuGetPush(nugetFile, nugetPushSettings)
-        );
-    }
-});
-
-Task("UploadArtifacts")
-    .IsDependentOn("CopyPackages")
-    .WithCriteria(() => isRunningOnPipelines)
-    .Does(() => 
-{
-    Information("Artifacts Dir: {0}", outputDir.FullPath);
-    var artifacts = GetFiles(outputDir.FullPath + "/**/*");
-
-    TFBuild.Commands.UploadArtifactDirectory(outputDir, "build artifacts");
+    CopyFiles(nugetFiles, new DirectoryPath(outputDir + "/NuGet/"));
 });
 
 Task("UpdateChangelog")
@@ -354,8 +229,7 @@ Task("UpdateChangelog")
 Task("Default")
     .IsDependentOn("Build")
     .IsDependentOn("UnitTest")
-    .IsDependentOn("UploadArtifacts")
-    .IsDependentOn("PublishPackages")
+    .IsDependentOn("CopyPackages")
     .Does(() => 
 {
 });
@@ -368,9 +242,7 @@ MSBuildSettings GetDefaultBuildSettings()
     {
         Configuration = configuration,
         ToolPath = msBuildPath,
-        Verbosity = verbosity,
-        ArgumentCustomization = args => args.Append("/m"),
-        ToolVersion = MSBuildToolVersion.VS2019
+        Verbosity = verbosity
     };
 
     // workaround for derped Java Home ENV vars
@@ -382,78 +254,4 @@ MSBuildSettings GetDefaultBuildSettings()
     }
 
     return settings;
-}
-
-bool ShouldPushNugetPackages(string branchName, string nugetSource)
-{
-    if (StringComparer.OrdinalIgnoreCase.Equals(branchName, "develop"))
-        return true;
-
-    var masterOrRelease = IsMasterOrReleases(branchName);
-
-    if (masterOrRelease && nugetSource != null && nugetSource.Contains("github.com"))
-        return true;
-
-    return masterOrRelease && IsTagged().Item1;
-}
-
-bool IsMasterOrReleases(string branchName)
-{
-    if (StringComparer.OrdinalIgnoreCase.Equals(branchName, "master"))
-        return true;
-
-    if (branchName.StartsWith("release/", StringComparison.OrdinalIgnoreCase) ||
-        branchName.StartsWith("releases/", StringComparison.OrdinalIgnoreCase))
-        return true;
-
-    return false;
-}
-
-bool IsRepository(string repoName)
-{
-    if (isRunningOnPipelines)
-    {
-        var buildEnvRepoName = TFBuild.Environment.Repository.RepoName;
-        Information("Checking repo name: {0} against build repo name: {1}", repoName, buildEnvRepoName);
-        return StringComparer.OrdinalIgnoreCase.Equals(repoName, buildEnvRepoName);
-    }
-    else
-    {
-        try
-        {
-            var path = MakeAbsolute(sln).GetDirectory().FullPath;
-            using (var repo = new LibGit2Sharp.Repository(path))
-            {
-                var origin = repo.Network.Remotes.FirstOrDefault(
-                    r => r.Name.ToLowerInvariant() == "origin");
-                return origin.Url.ToLowerInvariant() == 
-                    "https://github.com/" + repoName.ToLowerInvariant();
-            }
-        }
-        catch(Exception ex)
-        {
-            Information("Failed to lookup repository: {0}", ex);
-            return false;
-        }
-    }
-}
-
-Tuple<bool, string> IsTagged()
-{
-    var path = MakeAbsolute(sln).GetDirectory().FullPath;
-    using (var repo = new LibGit2Sharp.Repository(path))
-    {
-        var head = repo.Head;
-        var headSha = head.Tip.Sha;
-        
-        var tag = repo.Tags.FirstOrDefault(t => t.Target.Sha == headSha);
-        if (tag == null)
-        {
-            Debug("HEAD is not tagged");
-            return Tuple.Create<bool, string>(false, null);
-        }
-
-        Debug("HEAD is tagged: {0}", tag.FriendlyName);
-        return Tuple.Create<bool, string>(true, tag.FriendlyName);
-    }
 }

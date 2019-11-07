@@ -80,7 +80,6 @@ This package contains the 'Email' plugin for MvvmCross</Description>
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">
-    <PackageReference Include="Tizen.NET" Version="4.0.0" />
     <Compile Include="Platforms\Tizen\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
   </ItemGroup>
