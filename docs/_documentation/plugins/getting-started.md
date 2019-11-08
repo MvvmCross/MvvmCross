@@ -8,7 +8,7 @@ In order to help reusability and reduce weight and complexity, MvvmCross introdu
 
 Each plugin is suposed to provide abstractions of native functionalities such as camera, geolocation, accelerometer or files. Using plugins is extremely easy! You just need to install a nuget package on your _Core_ project and your _platform_ projects.
 
-There is just one exception, if the plugin is not explicitly referenced somehow in your project it won't be loaded. So if you use plugins such us _Method binding_ just be sure to add a explicit reference in _LinkerPleaseInclude_ like:
+There is just one exception, if the plugin is not explicitly referenced somehow in your project it won't be loaded. So if you use plugins such as _Method binding_ just be sure to add a explicit reference in _LinkerPleaseInclude_ like:
 
 ```csharp
 public void Include(MvvmCross.Plugin.MethodBinding.Plugin p)
