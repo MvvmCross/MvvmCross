@@ -115,7 +115,7 @@ Make sure that both the shared core project and your application projects includ
 
 ## Filing issues
 
-We strive to keep the GitHub issues list for bugs, features and other important project management tasks. If you have questions please see the [Questions & support section below](#questions--support).
+We strive to keep an active GitHub issues list for bugs, features and other important project management tasks. If you have questions please see the [Questions & support section below](#questions--support).
 
 When filing issues, please select the appropriate [issue template](https://github.com/MvvmCross/MvvmCross/issues/new/choose). The best way to get your bug fixed is to be as detailed as you can be about the problem.
 Providing a minimal git repository with a project showing how to reproduce the problem is ideal. Here are a couple of questions you can answer before filing a bug.
