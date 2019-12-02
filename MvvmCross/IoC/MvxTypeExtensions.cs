@@ -32,7 +32,7 @@ namespace MvvmCross.IoC
                 {
                     foreach (var excp in e.LoaderExceptions)
                     {
-                        MvxLog.Instance?.Warn(e.Message);
+                        MvxLog.Instance?.Warn(excp.ToLongString());
                     }
                 }
 
