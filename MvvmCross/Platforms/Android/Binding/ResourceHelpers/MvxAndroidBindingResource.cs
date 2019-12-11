@@ -3,25 +3,14 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Base;
-using MvvmCross.Exceptions;
 using MvvmCross.Binding;
+using MvvmCross.Exceptions;
 
 namespace MvvmCross.Platforms.Android.Binding.ResourceHelpers
-{ 
-    public class MvxAndroidBindingResource
-        : MvxSingleton<IMvxAndroidBindingResource>
-        , IMvxAndroidBindingResource
+{
+    public class MvxAndroidBindingResource : IMvxAndroidBindingResource
     {
-        public static void Initialize()
-        {
-            if (Instance != null)
-                return;
-
-            var androidBindingResource = new MvxAndroidBindingResource();
-        }
-
-        private MvxAndroidBindingResource()
+        public MvxAndroidBindingResource()
         {
             var finder = Mvx.IoCProvider.Resolve<IMvxAppResourceTypeFinder>();
             var resourceType = finder.Find();
