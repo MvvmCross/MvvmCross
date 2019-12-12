@@ -2,16 +2,14 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.Graphics;
 using Android.Preferences;
 using Android.Views;
 using Android.Webkit;
 using Android.Widget;
-using MvvmCross.Base;
-using MvvmCross.IoC;
 using MvvmCross.Binding;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Android.Binding.Binders;
 using MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
@@ -61,7 +59,13 @@ namespace MvvmCross.Platforms.Android.Binding
 
         protected virtual void InitializeBindingResources()
         {
-            MvxAndroidBindingResource.Initialize();
+            var mvxAndroidBindingResource = CreateAndroidBindingResource();
+            Mvx.IoCProvider.RegisterSingleton(mvxAndroidBindingResource);
+        }
+
+        protected virtual IMvxAndroidBindingResource CreateAndroidBindingResource()
+        {
+            return new MvxAndroidBindingResource();
         }
 
         protected virtual void InitializeAppResourceTypeFinder()
