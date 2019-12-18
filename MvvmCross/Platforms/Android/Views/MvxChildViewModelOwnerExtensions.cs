@@ -33,10 +33,12 @@ namespace MvvmCross.Platforms.Android.Views
 
         public static Intent CreateIntentFor(this IMvxChildViewModelOwner view, IMvxViewModel subViewModel)
         {
-            var intentWithKey =
-                Mvx.IoCProvider.Resolve<IMvxAndroidViewModelRequestTranslator>().GetIntentWithKeyFor(subViewModel);
-            view.OwnedSubViewModelIndicies.Add(intentWithKey.Item2);
-            return intentWithKey.Item1;
+            var requestTranslator = Mvx.IoCProvider.Resolve<IMvxAndroidViewModelRequestTranslator>();
+            var (intent, key) = requestTranslator.GetIntentWithKeyFor(subViewModel, null);
+
+            view.OwnedSubViewModelIndicies.Add(key);
+
+            return intent;
         }
 
         public static void ClearOwnedSubIndicies(this IMvxChildViewModelOwner view)

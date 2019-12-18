@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using CoreGraphics;
+using System.Windows.Input;
 using Foundation;
 using MvvmCross.Base;
 using MvvmCross.Platforms.Ios.Binding.Views;
@@ -19,7 +19,7 @@ namespace MvvmCross.Platforms.Ios.Views
 {
     public abstract class MvxExpandableTableViewSource : MvxExpandableTableViewSource<IEnumerable<object>, object>
     {
-        public MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
+        protected MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
         {
         }
     }
@@ -27,7 +27,6 @@ namespace MvvmCross.Platforms.Ios.Views
     public abstract class MvxExpandableTableViewSource<TItemSource, TItem> : MvxTableViewSource where TItemSource : IEnumerable<TItem>
     {
 	    private SectionExpandableController _sectionExpandableController = new DefaultAllSectionsExpandableController();
-        private readonly EventHandler _headerButtonCommand;
 
         private IEnumerable _itemsSource;
         public new IEnumerable ItemsSource
@@ -49,38 +48,44 @@ namespace MvvmCross.Platforms.Ios.Views
             }
         }
 
+        public ICommand HeaderTappedCommand { get; set; }
+
         private IEnumerable<TItemSource> CastItemSource => ItemsSource as IEnumerable<TItemSource>;
 
-        public MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
+        protected MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
         {
-            _headerButtonCommand = (sender, e) =>
+        }
+
+        private void OnHeaderButtonClicked(object sender, EventArgs e)
+        {
+            var button = sender as UIButton;
+            var section = button.Tag;
+
+            var changedSectionsResponse = _sectionExpandableController.ToggleState((int)section);
+            TableView.ReloadData();
+
+            var pathsToAnimate = new List<NSIndexPath>();
+
+            foreach (var changedSection in changedSectionsResponse.AllModifiedIndexes)
             {
-                var button = sender as UIButton;
-                var section = button.Tag;
+                // Animate the section cells
+                nint rowCountForSection = RowsInSection(TableView, changedSection);
 
-	            var changedSectionsResponse = _sectionExpandableController.ToggleState((int) section);
-                tableView.ReloadData();
+                for (int i = 0; i < rowCountForSection; i++)
+                    pathsToAnimate.Add(NSIndexPath.FromItemSection(i, changedSection));
+            }
 
-	            List<NSIndexPath> pathsToAnimate = new List<NSIndexPath>();
+            TableView.ReloadRows(pathsToAnimate.ToArray(), UITableViewRowAnimation.Automatic);
+            ScrollToSection(TableView, section);
 
-	            foreach (var changedSection in changedSectionsResponse.AllModifiedIndexes)
-	            {
-		            // Animate the section cells
-		            nint rowCountForSection = RowsInSection(tableView, changedSection);
+            if (changedSectionsResponse.CollapsedIndexes.Any())
+                OnSectionCollapsed(changedSectionsResponse.CollapsedIndexes);
 
-		            for (int i = 0; i < rowCountForSection; i++)
-						pathsToAnimate.Add(NSIndexPath.FromItemSection(i, changedSection));
-	            }
+            if (changedSectionsResponse.ExpandedIndexes.Any())
+                OnSectionExpanded(changedSectionsResponse.ExpandedIndexes);
 
-	            tableView.ReloadRows(pathsToAnimate.ToArray(), UITableViewRowAnimation.Automatic);
-	            ScrollToSection(tableView, section);
-
-	            if (changedSectionsResponse.CollapsedIndexes.Any())
-		            OnSectionCollapsed(changedSectionsResponse.CollapsedIndexes);
-
-	            if (changedSectionsResponse.ExpandedIndexes.Any())
-		            OnSectionExpanded(changedSectionsResponse.ExpandedIndexes);
-            };
+            if (HeaderTappedCommand != null && HeaderTappedCommand.CanExecute((int)section))
+                HeaderTappedCommand.Execute((int)section);
         }
 
 	    protected virtual void OnSectionExpanded(IEnumerable<int> sectionIndexes)
@@ -165,11 +170,13 @@ namespace MvvmCross.Platforms.Ios.Views
 
             if (!hasHiddenButton)
             {
-                // Create a button to make the header clickable
-                var buttonFrame = header.Frame;
-                buttonFrame.Width = UIScreen.MainScreen.ApplicationFrame.Width;
-                var hiddenButton = CreateHiddenHeaderButton(buttonFrame, section);
+                var hiddenButton = CreateHiddenHeaderButton(section);
                 header.ContentView.AddSubview(hiddenButton);
+                hiddenButton.LeadingAnchor.ConstraintEqualTo(header.ContentView.LeadingAnchor).Active = true;
+                hiddenButton.TrailingAnchor.ConstraintEqualTo(header.ContentView.TrailingAnchor).Active = true;
+                hiddenButton.TopAnchor.ConstraintEqualTo(header.ContentView.TopAnchor).Active = true;
+                hiddenButton.BottomAnchor.ConstraintEqualTo(header.ContentView.BottomAnchor).Active = true;
+                header.ContentView.SendSubviewToBack(hiddenButton);
             }
 
             // Set the header data context
@@ -179,11 +186,14 @@ namespace MvvmCross.Platforms.Ios.Views
             return header.ContentView;
         }
 
-        private HiddenHeaderButton CreateHiddenHeaderButton(CGRect frame, nint tag)
+        private HiddenHeaderButton CreateHiddenHeaderButton(nint tag)
         {
-            var button = new HiddenHeaderButton(frame);
-            button.Tag = tag;
-            button.TouchUpInside += _headerButtonCommand;
+            var button = new HiddenHeaderButton()
+            {
+                Tag = tag,
+                TranslatesAutoresizingMaskIntoConstraints = false
+            };
+            button.TouchUpInside += OnHeaderButtonClicked;
             return button;
         }
 
@@ -246,8 +256,5 @@ namespace MvvmCross.Platforms.Ios.Views
 
     public class HiddenHeaderButton : UIButton
     {
-        public HiddenHeaderButton(CGRect frame) : base(frame)
-        {
-        }
     }
 }

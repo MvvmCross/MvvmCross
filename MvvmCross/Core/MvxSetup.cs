@@ -116,8 +116,10 @@ namespace MvvmCross.Core
             InitializeViewModelTypeFinder();
             SetupLog.Trace("Setup: ViewsContainer start");
             InitializeViewsContainer();
+            SetupLog.Trace("Setup: Lookup Dictionary start");
+            var lookup = InitializeLookupDictionary();
             SetupLog.Trace("Setup: Views start");
-            InitializeViewLookup();
+            InitializeViewLookup(lookup);
             SetupLog.Trace("Setup: CommandCollectionBuilder start");
             InitializeCommandCollectionBuilder();
             SetupLog.Trace("Setup: NavigationSerializer start");
@@ -387,7 +389,7 @@ namespace MvvmCross.Core
 
             var pluginTypes =
                 GetPluginAssemblies()
-                    .SelectMany(assembly => assembly.GetTypes())
+                    .SelectMany(assembly => assembly.ExceptionSafeGetTypes())
                     .Where(TypeContainsPluginAttribute);
 
             foreach (var pluginType in pluginTypes)
@@ -498,11 +500,16 @@ namespace MvvmCross.Core
             return nameMappingStrategy;
         }
 
-        protected virtual IMvxViewsContainer InitializeViewLookup()
+        protected virtual IDictionary<Type, Type> InitializeLookupDictionary()
         {
             var viewAssemblies = GetViewAssemblies();
             var builder = Mvx.IoCProvider.Resolve<IMvxTypeToTypeLookupBuilder>();
             var viewModelViewLookup = builder.Build(viewAssemblies);
+            return viewModelViewLookup;
+        }
+
+        protected virtual IMvxViewsContainer InitializeViewLookup(IDictionary<Type, Type> viewModelViewLookup)
+        {
             if (viewModelViewLookup == null)
                 return null;
 

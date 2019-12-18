@@ -9,14 +9,13 @@ using MvvmCross.UI;
 
 namespace MvvmCross.Plugin.Color
 {
-    public abstract class MvxColorValueConverter
-        : MvxValueConverter
+    public abstract class MvxColorValueConverter : MvxValueConverter
     {
         private IMvxNativeColor _nativeColor;
 
         private IMvxNativeColor NativeColor => _nativeColor ?? (_nativeColor = Mvx.IoCProvider.Resolve<IMvxNativeColor>());
 
-        protected abstract MvxColor Convert(object value, object parameter, CultureInfo culture);
+        protected abstract System.Drawing.Color Convert(object value, object parameter, CultureInfo culture);
 
         public sealed override object Convert(object value, Type targetType, object parameter,
                                        CultureInfo culture)
@@ -25,14 +24,13 @@ namespace MvvmCross.Plugin.Color
         }
     }
 
-    public abstract class MvxColorValueConverter<T>
-        : MvxColorValueConverter
+    public abstract class MvxColorValueConverter<T> : MvxColorValueConverter
     {
-        protected sealed override MvxColor Convert(object value, object parameter, CultureInfo culture)
+        protected sealed override System.Drawing.Color Convert(object value, object parameter, CultureInfo culture)
         {
             return Convert((T)value, parameter, culture);
         }
 
-        protected abstract MvxColor Convert(T value, object parameter, CultureInfo culture);
+        protected abstract System.Drawing.Color Convert(T value, object parameter, CultureInfo culture);
     }
 }

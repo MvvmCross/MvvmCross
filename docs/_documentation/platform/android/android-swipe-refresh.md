@@ -20,12 +20,22 @@ This allows you to bind an Command from your ViewModel to this event to refresh 
 ### ViewModel
 
 ```csharp
-private MvxCommand _refreshCommand;
-public ICommand RefreshCommand => _refreshCommand = _refreshCommand ?? new MvxCommand(DoRefreshCommand);
+private IMvxAsyncCommand _refreshCommand;
+public IMvxAsyncCommand RefreshCommand 
+    => _refreshCommand ?? (_refreshCommand = new MvxAsyncCommand(ExecuteRefreshCommand));
 
-private DoRefreshCommand()
+private bool _isBusy;
+public bool IsBusy
 {
-    // load stuff
+    get => _isBusy;
+    set => SetProperty(ref _isBusy, value);
+}
+
+private async Task ExecuteRefreshCommand()
+{
+    IsBusy = true;
+    // do refresh work here
+    IsBusy = false;
 }
 ```
 
@@ -35,7 +45,7 @@ private DoRefreshCommand()
 <MvxSwipeRefreshLayout
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    local:MvxBind="RefreshCommand RefreshCommand">
+    local:MvxBind="Refreshing IsBusy; RefreshCommand RefreshCommand">
     <ScrollView />
     <!-- or -->
     <RecyclerView />

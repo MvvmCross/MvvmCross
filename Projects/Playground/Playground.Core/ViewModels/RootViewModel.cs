@@ -17,6 +17,7 @@ using MvvmCross.ViewModels;
 using Playground.Core.Models;
 using Playground.Core.Services;
 using Playground.Core.ViewModels.Bindings;
+using Playground.Core.ViewModels.Location;
 using Playground.Core.ViewModels.Navigation;
 using Playground.Core.ViewModels.Samples;
 
@@ -105,6 +106,8 @@ namespace Playground.Core.ViewModels
                 new MvxCommand(() => IsVisible = !IsVisible);
 
             FragmentCloseCommand = new MvxAsyncCommand(() => NavigationService.Navigate<FragmentCloseViewModel>());
+
+            ShowLocationCommand = new MvxAsyncCommand(() => NavigationService.Navigate<LocationViewModel>());
         }
 
         public MvxNotifyTask MyTask { get; set; }
@@ -166,6 +169,7 @@ namespace Playground.Core.ViewModels
         public IMvxCommand TriggerVisibilityCommand { get; }
 
         public IMvxCommand FragmentCloseCommand { get; }
+        public IMvxAsyncCommand ShowLocationCommand { get; }
 
         private bool _isVisible;
 

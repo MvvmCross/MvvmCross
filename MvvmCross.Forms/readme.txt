@@ -15,9 +15,9 @@ See the documentation at https://www.mvvmcross.com/ to learn how to make full us
 2. Your solution already has a platform specific project for every platform you wish to support. 
    Platforms include Xamarin.iOS, Xamarin.Android and Universal Windows Platform (UWP).
 3. Your solution already has an additional .NET Standard 2.x project where your Xamarin.Forms views will be located (often referred to as the Xamarin.Forms UI project).
-4. You have added the MvvmCross NuGet package (MvvmCross) to to all projects in your solution.
-5. You have added the Xamarin.Forms NuGet package (Xamarin.Forms) to to all the platform specific projects & the Xamarin.Forms UI project.
-6. You have added this NuGet package (MvvmCross.Forms) to to all the platform specific projects & the Xamarin.Forms UI project.
+4. You have added the MvvmCross NuGet package (MvvmCross) to all projects in your solution.
+5. You have added the Xamarin.Forms NuGet package (Xamarin.Forms) to all the platform specific projects & the Xamarin.Forms UI project.
+6. You have added this NuGet package (MvvmCross.Forms) to all the platform specific projects & the Xamarin.Forms UI project.
 7. Each of the platform specific projects and the Xamarin.Forms UI project has a reference to the Core project.
 8. Each of the platform specific projects also has a reference to the Xamarin.Forms UI project.
 

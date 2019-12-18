@@ -32,7 +32,7 @@ namespace MvvmCross.IoC
                 {
                     foreach (var excp in e.LoaderExceptions)
                     {
-                        MvxLog.Instance?.Warn(e.Message);
+                        MvxLog.Instance?.Warn(excp.ToLongString());
                     }
                 }
 
@@ -238,6 +238,67 @@ namespace MvvmCross.IoC
                 return null;
 
             return Activator.CreateInstance(type);
+        }
+        
+        public static ConstructorInfo FindApplicableConstructor(this Type type, IDictionary<string, object> arguments)
+        {
+            var constructors = type.GetConstructors();
+            if (arguments == null || arguments.Count == 0)
+            {
+                return constructors.OrderBy(c => c.GetParameters().Length).FirstOrDefault();
+            }
+
+            var unusedKeys = new List<string>(arguments.Keys);
+            
+            foreach (var constructor in constructors)
+            {
+                var parameters = constructor.GetParameters();
+                foreach (var parameter in parameters)
+                {
+                    if (unusedKeys.Contains(parameter.Name) && parameter.ParameterType.IsInstanceOfType(arguments[parameter.Name]))
+                    {
+                        unusedKeys.Remove(parameter.Name);
+                    }
+                }
+
+                if (unusedKeys.Count == 0)
+                {
+                    return constructor;
+                }
+            }
+
+            return null;
+        }
+        
+        public static ConstructorInfo FindApplicableConstructor(this Type type, object[] arguments)
+        {
+            var constructors = type.GetConstructors();
+            if (arguments == null || arguments.Length == 0)
+            {
+                return constructors.OrderBy(c => c.GetParameters().Length).FirstOrDefault();
+            }
+            
+            foreach (var constructor in constructors)
+            {
+                var parameterTypes = constructor.GetParameters().Select(p => p.ParameterType);
+                var unusedArguments = arguments.ToList();
+
+                foreach (var parameterType in parameterTypes)
+                {
+                    var argumentMatch = unusedArguments.FirstOrDefault(arg => parameterType.IsInstanceOfType(arg));
+                    if (argumentMatch != null)
+                    {
+                        unusedArguments.Remove(argumentMatch);
+                    }
+                }
+
+                if (unusedArguments.Count == 0)
+                {
+                    return constructor;
+                }
+            }
+
+            return null;
         }
     }
 }
