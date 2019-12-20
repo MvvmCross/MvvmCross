@@ -8,7 +8,7 @@ MvvmCross
 ==========
 [![Twitter: @MvvmCross](https://img.shields.io/badge/contact-@MvvmCross-blue.svg?style=flat)](https://twitter.com/MvvmCross)
 ![license](https://img.shields.io/github/license/mvvmcross/mvvmcross.svg)
-[![Build status](https://ci.appveyor.com/api/projects/status/eih9kn75kujmmuf1?svg=true)](https://ci.appveyor.com/project/MvvmCross/mvvmcross)
+[![Build Status](https://dev.azure.com/Cheesebaron/MvvmCross/_apis/build/status/MvvmCross-develop?branchName=develop)](https://dev.azure.com/Cheesebaron/MvvmCross/_build/latest?definitionId=10&branchName=develop)
 [![NuGet](https://img.shields.io/nuget/v/MvvmCross.svg)](https://www.nuget.org/packages/MvvmCross/)
 [![NuGet Pre Release](https://img.shields.io/nuget/vpre/MvvmCross.svg)](https://www.nuget.org/packages/MvvmCross/)
 [![MyGet](https://img.shields.io/myget/mvvmcross/v/MvvmCross.svg)](https://www.myget.org/F/mvvmcross/api/v3/index.json)
@@ -115,7 +115,7 @@ Make sure that both the shared core project and your application projects includ
 
 ## Filing issues
 
-We strive to keep the GitHub issues list for bugs, features and other important project management tasks. If you have questions please see the [Questions & support section below](#questions--support).
+We want to keep the GitHub issues list for bugs, features and other important project management tasks only. If you have questions please see the [Questions & support section below](#questions--support).
 
 When filing issues, please select the appropriate [issue template](https://github.com/MvvmCross/MvvmCross/issues/new/choose). The best way to get your bug fixed is to be as detailed as you can be about the problem.
 Providing a minimal git repository with a project showing how to reproduce the problem is ideal. Here are a couple of questions you can answer before filing a bug.
