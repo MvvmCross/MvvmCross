@@ -23,11 +23,11 @@ namespace MvvmCross.Plugin.Location.Fused
 		{
 			if (_locationHandler == null)
 				_locationHandler = new FusedLocationHandler(this, Context);
-
-			_locationHandler.Start(options);
+            
+            _locationHandler.StartAsync(options).GetAwaiter();
 		}
 
-        protected override void PlatformSpecificStop() => _locationHandler.Stop();
+        protected override void PlatformSpecificStop() => _locationHandler.StopAsync().GetAwaiter();
 
         public override MvxGeoLocation CurrentLocation 
 		{
@@ -36,15 +36,15 @@ namespace MvvmCross.Plugin.Location.Fused
 				if (_locationHandler == null)
 					throw new MvxException("Location Manager not started");
 
-				var androidLocation = _locationHandler.GetLastKnownLocation();
-				if (androidLocation == null)
-					return null;
+                var androidLocation = _locationHandler.LastKnownLocation;
+                if (androidLocation == null)
+                    return null;
 
-				return CreateLocation(androidLocation);
-			}
+                return CreateLocation(androidLocation);
+            }
 		}
 
-		internal void OnLocationUpdated(global::Android.Locations.Location androidLocation)
+        internal void OnLocationUpdated(global::Android.Locations.Location androidLocation)
 		{
 			if (androidLocation == null)
 			{
