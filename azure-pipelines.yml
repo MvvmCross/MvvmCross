@@ -85,6 +85,6 @@ stages:
               --descriptionUrl "https://mvvmcross.com"
             displayName: Authenticode Sign artifacts
 
-          - publish: $(Pipeline.Workspace)/ToSign/NuGet
+          - publish: $(Pipeline.Workspace)/NuGetPackages
             displayName: Publish Signed NuGet Packages
             artifact: NuGetPackagesSigned
