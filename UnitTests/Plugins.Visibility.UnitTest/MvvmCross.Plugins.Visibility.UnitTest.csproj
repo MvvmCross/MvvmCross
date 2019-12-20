@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
     <AssemblyName>MvvmCross.Plugins.Visibility.UnitTest</AssemblyName>
     <RootNamespace>MvvmCross.Plugins.Visibility.UnitTest</RootNamespace>
