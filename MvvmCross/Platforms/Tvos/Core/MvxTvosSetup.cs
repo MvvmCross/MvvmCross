@@ -70,12 +70,12 @@ namespace MvvmCross.Platforms.Tvos.Core
             return new MvxTvosViewDispatcher(Presenter);
         }
 
-        protected override void InitializePlatformServices()
+        protected override void InitializeFirstChance()
         {
             RegisterPlatformProperties();
             RegisterPresenter();
             RegisterLifetime();
-            base.InitializePlatformServices();
+            base.InitializeFirstChance();
         }
 
         protected virtual void RegisterPlatformProperties()

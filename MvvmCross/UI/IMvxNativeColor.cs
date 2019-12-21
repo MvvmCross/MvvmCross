@@ -6,6 +6,6 @@ namespace MvvmCross.UI
 {
     public interface IMvxNativeColor
     {
-        object ToNative(MvxColor mvxColor);
+        object ToNative(System.Drawing.Color color);
     }
 }

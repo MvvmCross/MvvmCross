@@ -8,7 +8,7 @@ MvvmCross
 ==========
 [![Twitter: @MvvmCross](https://img.shields.io/badge/contact-@MvvmCross-blue.svg?style=flat)](https://twitter.com/MvvmCross)
 ![license](https://img.shields.io/github/license/mvvmcross/mvvmcross.svg)
-[![Build status](https://ci.appveyor.com/api/projects/status/eih9kn75kujmmuf1?svg=true)](https://ci.appveyor.com/project/MvvmCross/mvvmcross)
+[![Build Status](https://dev.azure.com/Cheesebaron/MvvmCross/_apis/build/status/MvvmCross-develop?branchName=develop)](https://dev.azure.com/Cheesebaron/MvvmCross/_build/latest?definitionId=10&branchName=develop)
 [![NuGet](https://img.shields.io/nuget/v/MvvmCross.svg)](https://www.nuget.org/packages/MvvmCross/)
 [![NuGet Pre Release](https://img.shields.io/nuget/vpre/MvvmCross.svg)](https://www.nuget.org/packages/MvvmCross/)
 [![MyGet](https://img.shields.io/myget/mvvmcross/v/MvvmCross.svg)](https://www.myget.org/F/mvvmcross/api/v3/index.json)
@@ -111,11 +111,11 @@ Grab the latest [MvvmCross NuGet](https://www.nuget.org/packages/MvvmCross/) pac
 
 > Install-Package MvvmCross
 
-Make sure that both the shared core project and your application projects include the NuGet. For more details please visit the [Getting Started documentation.](https://www.mvvmcross.com/documentation/getting-started/getting-started) which also provide easier ways, through Visual Studio and Xamarin Studio plugins to install and manage MvvmCross in your project.
+Make sure that both the shared core project and your application projects include the NuGet. For more details please visit the [Getting Started documentation,](https://www.mvvmcross.com/documentation/getting-started/getting-started) which also provides easier ways, through Visual Studio and Xamarin Studio plugins to install and manage MvvmCross in your project.
 
 ## Filing issues
 
-We strive to keep the GitHub issues list for bugs, features and other important project management tasks. If you have questions please see the [Questions & support section below](#questions--support).
+We want to keep the GitHub issues list for bugs, features and other important project management tasks only. If you have questions please see the [Questions & support section below](#questions--support).
 
 When filing issues, please select the appropriate [issue template](https://github.com/MvvmCross/MvvmCross/issues/new/choose). The best way to get your bug fixed is to be as detailed as you can be about the problem.
 Providing a minimal git repository with a project showing how to reproduce the problem is ideal. Here are a couple of questions you can answer before filing a bug.
@@ -126,7 +126,7 @@ Providing a minimal git repository with a project showing how to reproduce the p
 4. What are the _*EXACT*_ steps to reproduce this problem?
 5. What platform(s) are you experiencing the problem on?
 
-Remember GitHub issues support [markdown](http://github.github.com/github-flavored-markdown/). When filing bugs please make sure you check the formatting of the issue before clicking submit.
+Remember GitHub issues support [markdown](https://github.github.com/github-flavored-markdown/). When filing bugs please make sure you check the formatting of the issue before clicking submit.
 
 ## Contributing code
 
@@ -170,16 +170,16 @@ Note that code submissions will be reviewed and tested. Only code that meets qua
 
 ## Questions & support
 
-* [StackOverflow](http://stackoverflow.com/questions/tagged/mvvmcross)
-* [Xamarin forums](http://forums.xamarin.com)
+* [StackOverflow](https://stackoverflow.com/questions/tagged/mvvmcross)
+* [Xamarin forums](https://forums.xamarin.com)
 * [Slack](https://xamarinchat.herokuapp.com/) join the #mvvmcross channel after you are in
 
 ### Licensing
 
-MvvmCross is licensed under the [MS-PL License](http://opensource.org/licenses/ms-pl.html)
+MvvmCross is licensed under the [MS-PL License](https://opensource.org/licenses/ms-pl.html)
 
-* [MonoCross](http://code.google.com/p/monocross/) was the original starting point for this project, and was used as a reference under MIT
-* Tiny bits of [MvvmLight](http://mvvmlight.codeplex.com/) are redistributed and modified under MIT
+* [MonoCross](https://code.google.com/p/monocross/) was the original starting point for this project, and was used as a reference under MIT
+* Tiny bits of [MvvmLight](https://mvvmlight.codeplex.com/) are redistributed and modified under MIT
 * Messenger ideas from [JonathanPeppers/XPlatUtils](https://github.com/jonathanpeppers/XPlatUtils) under Apache License Version 2.0, and from GrumpyDev/TinyMessenger under simple license of "THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY"
 * [Color codes](https://github.com/mono/sysdrawing-coregraphics) under MIT License
 * Some bits of [Mvvm.Async](https://github.com/StephenCleary/Mvvm.Async) are redistributed and modified under MIT License
@@ -187,12 +187,12 @@ MvvmCross is licensed under the [MS-PL License](http://opensource.org/licenses/m
 
 ### Acknowledgements
 
-* Thanks to [McCannLondon](http://blogs.mccannlondon.co.uk/) for sponsoring the initial part of this work
-* Thanks to [JetBrains](http://jetbrains.com) for a community Resharper license to use on this project
+* Thanks to [McCannLondon](https://blogs.mccannlondon.co.uk/) for sponsoring the initial part of this work
+* Thanks to [JetBrains](https://jetbrains.com) for a community Resharper license to use on this project
 
-[so]: http://stackoverflow.com/questions/tagged/mvvmcross "MvvmCross on StackOverflow"
-[xfmvx]: http://forums.xamarin.com/search?Search=mvvmcross "MvvmCross on Xamarin Forums"
-[xf]: http://forums.xamarin.com "Xamarin Forums"
+[so]: https://stackoverflow.com/questions/tagged/mvvmcross "MvvmCross on StackOverflow"
+[xfmvx]: https://forums.xamarin.com/search?Search=mvvmcross "MvvmCross on Xamarin Forums"
+[xf]: https://forums.xamarin.com "Xamarin Forums"
 
 ### .NET Foundation
 

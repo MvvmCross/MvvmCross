@@ -20,6 +20,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
     public class MvxAndroidViewBinder : IMvxAndroidViewBinder
     {
         private readonly List<KeyValuePair<object, IMvxUpdateableBinding>> _viewBindings = new List<KeyValuePair<object, IMvxUpdateableBinding>>();
+        private readonly Lazy<IMvxAndroidBindingResource> mvxAndroidBindingResource = new Lazy<IMvxAndroidBindingResource>(() => Mvx.IoCProvider.GetSingleton<IMvxAndroidBindingResource>());
 
         private readonly object _source;
 
@@ -38,18 +39,18 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
         {
             using (
                 var typedArray = context.ObtainStyledAttributes(attrs,
-                                                                MvxAndroidBindingResource.Instance.BindingStylableGroupId))
+                                                                mvxAndroidBindingResource.Value.BindingStylableGroupId))
             {
                 int numStyles = typedArray.IndexCount;
                 for (var i = 0; i < numStyles; ++i)
                 {
                     var attributeId = typedArray.GetIndex(i);
 
-                    if (attributeId == MvxAndroidBindingResource.Instance.BindingBindId)
+                    if (attributeId == mvxAndroidBindingResource.Value.BindingBindId)
                     {
                         ApplyBindingsFromAttribute(view, typedArray, attributeId);
                     }
-                    else if (attributeId == MvxAndroidBindingResource.Instance.BindingLangId)
+                    else if (attributeId == mvxAndroidBindingResource.Value.BindingLangId)
                     {
                         ApplyLanguageBindingsFromAttribute(view, typedArray, attributeId);
                     }

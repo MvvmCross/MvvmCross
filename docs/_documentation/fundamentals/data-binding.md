@@ -511,6 +511,16 @@ set.Apply();
 ```
 
  **Note:** when using a fluent binding, always remember to use `.Apply()` - if this is missed then the binding won't ever be created.
+ 
+ ***Alternatively:*** A bindingset can be used as a disposable and wrapped in a using block to automatically call the `.Apply()` method.
+ ```c#
+ using(var set = this.CreateBindingSet<MyView, MyViewModel>())
+ {
+    set.Bind(nameLabel)
+        .For(v => v.Text)
+        .To(vm => vm.Customer.FirstName);
+ }
+ ```
 
 ### MvvmCross Defined Custom bindings
 
@@ -545,7 +555,7 @@ The core parts of Tibet are:
 
 In Swiss binding, each binding can only reference a single ViewModel property path.
 
-This meant that if a ViewModel had 2 properties like `FirstName` and `LastName`, then the main way to create a display of the ful name was to create a new ViewModel property - e.g.:
+This meant that if a ViewModel had 2 properties like `FirstName` and `LastName`, then the main way to create a display of the full name was to create a new ViewModel property - e.g.:
 
 ```c#
 private string _firstName;

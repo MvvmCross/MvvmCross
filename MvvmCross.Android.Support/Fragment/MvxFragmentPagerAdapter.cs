@@ -10,10 +10,10 @@ using Android.OS;
 using Android.Runtime;
 using Android.Support.V4.App;
 using Java.Lang;
+using MvvmCross.Platforms.Android.Presenters;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
-using MvvmCross.Views;
-using String = Java.Lang.String;
+using JavaString = Java.Lang.String;
 
 namespace MvvmCross.Droid.Support.V4
 {
@@ -22,7 +22,7 @@ namespace MvvmCross.Droid.Support.V4
     {
         private readonly Context _context;
 
-        public IEnumerable<MvxViewPagerFragmentInfo> Fragments { get; private set; }
+        public IEnumerable<MvxViewPagerFragmentInfo> Fragments { get; }
 
         public override int Count => Fragments.Count();
 
@@ -41,31 +41,62 @@ namespace MvvmCross.Droid.Support.V4
 
         public override Fragment GetItem(int position)
         {
-            var fragInfo = Fragments.ElementAt(position);
+            var fragmentInfo = Fragments.ElementAt(position);
 
-            if (fragInfo.CachedFragment == null)
+            if (fragmentInfo.CachedFragment != null)
             {
-                fragInfo.CachedFragment = 
-                    Fragment.Instantiate(_context, fragInfo.FragmentType.FragmentJavaName());
-
-                var fragmentAsView = (IMvxView) fragInfo.CachedFragment;
-
-                fragmentAsView.ViewModel = fragInfo.ViewModel ?? Mvx.IoCProvider.Resolve<IMvxViewModelLoader>()
-                    .LoadViewModel(new MvxViewModelRequest(fragInfo.ViewModelType, null, null), null);
+                return fragmentInfo.CachedFragment;
             }
 
-            return fragInfo.CachedFragment;
+            fragmentInfo.CachedFragment = 
+                Fragment.Instantiate(_context, fragmentInfo.FragmentType.FragmentJavaName());
+
+            if (!(fragmentInfo.CachedFragment is IMvxFragmentView mvxFragment))
+            {
+                return fragmentInfo.CachedFragment;
+            }
+
+            mvxFragment.ViewModel = GetViewModel(fragmentInfo);
+
+            fragmentInfo.CachedFragment.Arguments = GetArguments(fragmentInfo);
+
+            return fragmentInfo.CachedFragment;
         }
 
         public override ICharSequence GetPageTitleFormatted(int position)
         {
-            return new String(Fragments.ElementAt(position).Title);
+            return new JavaString(Fragments.ElementAt(position).Title);
         }
 
         public override void RestoreState(IParcelable state, ClassLoader loader)
         {
             //Don't call restore to prevent crash on rotation
             //base.RestoreState (state, loader);
+        }
+
+        private static IMvxViewModel GetViewModel(MvxViewPagerFragmentInfo fragmentInfo)
+        {
+            if (fragmentInfo.Request is MvxViewModelInstanceRequest instanceRequest)
+            {
+                return instanceRequest.ViewModelInstance;
+            }
+
+            var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
+
+            return viewModelLoader.LoadViewModel(fragmentInfo.Request, null);
+        }
+        
+        private static Bundle GetArguments(MvxViewPagerFragmentInfo fragmentInfo)
+        {
+            var navigationSerializer = Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>();
+
+            var serializedRequest = navigationSerializer.Serializer.SerializeObject(fragmentInfo.Request);
+
+            var bundle = new Bundle();
+
+            bundle.PutString(MvxAndroidViewPresenter.ViewModelRequestBundleKey, serializedRequest);
+
+            return bundle;
         }
     }
 }

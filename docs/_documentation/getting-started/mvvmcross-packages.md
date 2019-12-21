@@ -26,7 +26,6 @@ Name | Description | Link
 `MvvmCross.Droid.Support.Fragment`        |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.Fragment/)
 `MvvmCross.Droid.Support.Design`          |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.Design/)
 `MvvmCross.Droid.Support.Core.UI`         |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.Core.UI/)
-`MvvmCross.Droid.Support.Core.Utils`      |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.Core.Utils/)
 
 
 ## Plugins

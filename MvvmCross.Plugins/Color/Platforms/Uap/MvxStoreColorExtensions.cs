@@ -1,20 +1,15 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
-
-using MvvmCross.UI;
 
 namespace MvvmCross.Plugin.Color.Platforms.Uap
 {
     public static class MvxStoreColorExtensions
     {
-        public static Windows.UI.Color ToNativeColor(this MvxColor mvxColor)
+        public static Windows.UI.Color ToNativeColor(this System.Drawing.Color color)
         {
-            var color = Windows.UI.Color.FromArgb((byte)mvxColor.A,
-                                                  (byte)mvxColor.R,
-                                                  (byte)mvxColor.G,
-                                                  (byte)mvxColor.B);
-            return color;
+            var windowsColor = Windows.UI.Color.FromArgb(color.A, color.R, color.G, color.B);
+            return windowsColor;
         }
     }
 }
