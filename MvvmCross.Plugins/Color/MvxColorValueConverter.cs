@@ -28,7 +28,10 @@ namespace MvvmCross.Plugin.Color
     {
         protected sealed override System.Drawing.Color Convert(object value, object parameter, CultureInfo culture)
         {
-            return Convert((T)value, parameter, culture);
+            if (value is T t)
+                return Convert(t, parameter, culture);
+
+            return default;
         }
 
         protected abstract System.Drawing.Color Convert(T value, object parameter, CultureInfo culture);
