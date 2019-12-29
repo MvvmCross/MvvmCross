@@ -94,11 +94,13 @@ namespace MvvmCross.Platforms.Wpf.Core
         protected override void InitializeFirstChance()
         {
             RegisterPresenter();
+            base.InitializeFirstChance();
         }
 
         protected override void InitializeLastChance()
         {
             InitializeBindingBuilder();
+            base.InitializeLastChance();
         }
 
         protected virtual void InitializeBindingBuilder()
