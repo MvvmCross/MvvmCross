@@ -32,7 +32,7 @@ stages:
       displayName: 'Use .NET Core sdk'
       inputs:
         packageType: sdk
-        version: 3.0.x
+        version: 3.1.x
 
     - task: PowerShell@2
       displayName: 'Run Cake Build'
@@ -44,7 +44,7 @@ stages:
     - task: PublishBuildArtifacts@1
       inputs:
         pathtoPublish: '$(Build.ArtifactStagingDirectory)/NuGet'
-        artifactName: 'NuGetPackages'
+        artifactName: 'UnsignedNuGetPackages'
 
     - task: PublishBuildArtifacts@1
       inputs:
@@ -75,7 +75,7 @@ stages:
 
           - pwsh: |
               .\SignClient "Sign" `
-              --baseDirectory "$(Pipeline.Workspace)\NuGetPackages" `
+              --baseDirectory "$(Pipeline.Workspace)\UnsigedNuGetPackages" `
               --input "**/*.nupkg" `
               --config "$(Pipeline.Workspace)\Signing\signclient.json" `
               --user "$(SIGNING_USER)" `
@@ -85,6 +85,7 @@ stages:
               --descriptionUrl "https://mvvmcross.com"
             displayName: Authenticode Sign artifacts
 
-          - publish: $(Pipeline.Workspace)/ToSign/NuGet
-            displayName: Publish Signed NuGet Packages
-            artifact: NuGetPackagesSigned
+          - task: PublishBuildArtifacts@1
+            inputs:
+              pathtoPublish: '$(Pipeline.Workspace)\UnsigedNuGetPackages'
+              artifactName: 'SignedNuGetPackages'
