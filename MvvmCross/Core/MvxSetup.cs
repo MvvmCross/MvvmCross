@@ -80,8 +80,6 @@ namespace MvvmCross.Core
             SetupLog.Trace("Setup: Primary start");
             SetupLog.Trace("Setup: FirstChance start");
             InitializeFirstChance();
-            SetupLog.Trace("Setup: Platform services");
-            InitializePlatformServices();
             SetupLog.Trace("Setup: MvvmCross settings start");
             InitializeSettings();
             SetupLog.Trace("Setup: Singleton Cache start");
@@ -265,11 +263,6 @@ namespace MvvmCross.Core
         {
             // always the very first thing to get initialized - after IoC and base platform
             // base class implementation is empty by default
-        }
-
-        [Obsolete("Use InitializeFirstChance instead")]
-        protected virtual void InitializePlatformServices()
-        {
         }
 
         protected virtual void InitializeLoggingServices()
