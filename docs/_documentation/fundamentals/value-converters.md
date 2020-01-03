@@ -358,11 +358,11 @@ public class SayPleaseVisibilityValueConverter : MvxBaseVisibilityValueConverter
 
 ### The Mvx Color ValueConverters
 
-The Color plugin contains a couple of simple value converters which assist with `MvxColor` on each platform.
+The Color plugin contains a couple of simple value converters which assist with `System.Drawing.Color` on each platform.
 
 These are:
 
-- `MvxNativeColorValueConverter` registered as "NativeColor" - this converts `MvxColor` properties on the ViewModel to a native color format.
+- `MvxNativeColorValueConverter` registered as "NativeColor" - this converts `System.Drawing.Color` properties on the ViewModel to a native color format.
 -  `MvxRGBAValueConverter` registered as "RGBA" - this converts Hex ViewModel string properties like "RGB", "RRGGBB" and "RRGGBBAA" with optional leading "#" characters into native color formats.
 -  `MvxRGBIntColorConverter` registered under the name "RGBIntColor" - this converters `int` ViewModel properties into native color formats.
 
@@ -379,7 +379,7 @@ On Droid, the Color plugin also includes a couple of custom bindings to assist w
 - `TextView` `TextColor` binding
 - `View` `BackgroundColor` binding
 
-To use Color on each platform - for example, with a ViewModel property `public MvxColor CurrentColor { get; set; }` you can use:
+To use Color on each platform - for example, with a ViewModel property `public System.Drawing.Color CurrentColor { get; set; }` you can use:
 
 - Droid:
   

@@ -20,7 +20,7 @@ MvvmCross provides default presenters for each platform that support the most us
 
 Let's take a look now at the methods of that interface:
 
-- `Show(MvxViewModelRequest request)`: This method is in charge of deciding how a view should be presented and then show it. It takes a ViewModel request as parameter, which contains all the the information passed in `ShowViewModel`.
+- `Show(MvxViewModelRequest request)`: This method is in charge of deciding how a view should be presented and then show it. It takes a ViewModel request as parameter, which contains all the information passed in `ShowViewModel`.
 - `AddPresentationHintHandler<THint>(Func<THint, bool> action) where THint : MvxPresentationHint`: You can use this method to register your custom PresentationHints and their respective handlers (we will explore the PresentationHint concept a bit later).
 - `ChangePresentation(MvxPresentationHint hint)`: This method is the one that gets called whenever a PresentationHint is requested. It is responsible for handling the requested change.
 - `Close(IMvxViewModel toClose)`: As you can imagine, this method is used to handle the close request of a ViewModel. It takes the ViewModel instance to be closed as parameter.

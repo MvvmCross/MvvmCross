@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\MvvmCross.Forms.Wpf\MvvmCross.Forms.Platforms.Wpf.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Forms\MvvmCross.Forms.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\JsonLocalization\MvvmCross.Plugin.JsonLocalization.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Json\MvvmCross.Plugin.Json.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Wpf\MvvmCross.Platforms.Wpf.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj" />
+    <ProjectReference Include="..\Playground.Core\Playground.Core.csproj" />
+    <ProjectReference Include="..\Playground.Forms.UI\Playground.Forms.UI.csproj" />
+  </ItemGroup>
+
+</Project>
