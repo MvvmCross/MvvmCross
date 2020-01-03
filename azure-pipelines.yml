@@ -75,7 +75,7 @@ stages:
 
           - pwsh: |
               .\SignClient "Sign" `
-              --baseDirectory "$(Pipeline.Workspace)\UnsigedNuGetPackages" `
+              --baseDirectory "$(Pipeline.Workspace)\UnsignedNuGetPackages" `
               --input "**/*.nupkg" `
               --config "$(Pipeline.Workspace)\Signing\signclient.json" `
               --user "$(SIGNING_USER)" `
@@ -87,5 +87,5 @@ stages:
 
           - task: PublishBuildArtifacts@1
             inputs:
-              pathtoPublish: '$(Pipeline.Workspace)\UnsigedNuGetPackages'
+              pathtoPublish: '$(Pipeline.Workspace)\UnsignedNuGetPackages'
               artifactName: 'SignedNuGetPackages'
