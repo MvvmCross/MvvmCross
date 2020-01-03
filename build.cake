@@ -194,27 +194,21 @@ Task("UpdateChangelog")
     arguments.Append("--bug-labels {0}", "t/bug");
 
     // enhancement labels
-    arguments.Append("--enhancement-labels {0}", "t/feature");
-
-    // breaking labels (enable when github_changelog_generator 1.15 is released)
-    //arguments.Append("--breaking-labels {0}", "t/breaking");
+    arguments.Append("--enhancement-labels {0}", "t/feature,t/enhancement");
+    arguments.Append("--breaking-labels {0}", "t/breaking");
+    arguments.Append("--security-labels {0}", "t/security");
+    arguments.Append("--deprecated_labels {0}", "t/deprecated");
+    arguments.Append("--no-issues_wo_labels");
 
     arguments.Append("--max-issues 200");
+    arguments.Append("--user MvvmCross");
+    arguments.Append("--project MvvmCross");
 
-    if (!string.IsNullOrEmpty(sinceTag) && versionInfo.BranchName.Contains("release/"))
-    {
-        arguments.Append("--between-tags {0},{1}", sinceTag, versionInfo.MajorMinorPatch);
+    if (!string.IsNullOrEmpty(sinceTag))
+        arguments.Append("--since-tag {0}", sinceTag);
 
+    if (versionInfo.BranchName.Contains("release/"))
         arguments.Append("--future-release {0}", versionInfo.MajorMinorPatch);
-    }
-    else 
-    {
-        if (!string.IsNullOrEmpty(sinceTag))
-            arguments.Append("--since-tag {0}", sinceTag);
-
-        if (versionInfo.BranchName.Contains("release/"))
-            arguments.Append("--future-release {0}", versionInfo.MajorMinorPatch);
-    }
 
     Information("Starting github_changelog_generator with arguments: {0}", arguments.Render());
 
