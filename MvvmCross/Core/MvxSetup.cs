@@ -379,19 +379,25 @@ namespace MvvmCross.Core
         public virtual void LoadPlugins(IMvxPluginManager pluginManager)
         {
             var pluginAttribute = typeof(MvxPluginAttribute);
+            var pluginAssemblies = GetPluginAssemblies();
 
-            var pluginTypes =
-                GetPluginAssemblies()
-                    .SelectMany(assembly => assembly.ExceptionSafeGetTypes())
-                    .Where(TypeContainsPluginAttribute);
-
-            foreach (var pluginType in pluginTypes)
+            //Search Assemblies for Plugins
+            foreach (var pluginAssembly in pluginAssemblies)
             {
-                pluginManager.EnsurePluginLoaded(pluginType);
+                var assemblyTypes = pluginAssembly.ExceptionSafeGetTypes();
+
+                //Search Types for Valid Plugin
+                foreach (var type in assemblyTypes)
+                {
+                    if (TypeContainsPluginAttribute(type))
+                    {
+                        //Ensure Plugin has been loaded
+                        pluginManager.EnsurePluginLoaded(type);
+                    }
+                }
             }
 
-            bool TypeContainsPluginAttribute(Type type)
-                => (type.GetCustomAttributes(pluginAttribute, false)?.Length ?? 0) > 0;
+            bool TypeContainsPluginAttribute(Type type) => (type.GetCustomAttributes(pluginAttribute, false)?.Length ?? 0) > 0;
         }
 
         protected virtual IMvxApplication CreateMvxApplication()
@@ -457,12 +463,7 @@ namespace MvvmCross.Core
 
         protected virtual IEnumerable<Assembly> GetBootstrapOwningAssemblies()
         {
-            var assemblies = new List<Assembly>();
-            assemblies.AddRange(GetViewAssemblies());
-
-            //ideally we would also add ViewModelAssemblies here too :/
-            //assemblies.AddRange(GetViewModelAssemblies());
-            return assemblies.Distinct().ToArray();
+            return GetViewAssemblies().Distinct();
         }
 
         protected abstract IMvxNameMapping CreateViewToViewModelNaming();
