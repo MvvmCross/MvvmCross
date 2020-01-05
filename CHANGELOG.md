@@ -1,4 +1,51 @@
-# Change Log
+# Changelog
+
+## [6.4.2](https://github.com/MvvmCross/MvvmCross/tree/6.4.2) (2020-01-03)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.4.1...6.4.2)
+
+**Implemented enhancements:**
+
+- IMvxAndroidBindingResource singleton refactor [\#3649](https://github.com/MvvmCross/MvvmCross/issues/3649)
+- Added netcoreapp3.1 support [\#3666](https://github.com/MvvmCross/MvvmCross/pull/3666) ([HaraldMuehlhoffCC](https://github.com/HaraldMuehlhoffCC))
+- Add netcoreapp3.0 support [\#3596](https://github.com/MvvmCross/MvvmCross/pull/3596) ([mgochmuradov](https://github.com/mgochmuradov))
+
+**Fixed bugs:**
+
+- Color Plugin: ColorConverter should not convert null values [\#3632](https://github.com/MvvmCross/MvvmCross/issues/3632)
+- Possible unhandled NRE in IoCResolver [\#3615](https://github.com/MvvmCross/MvvmCross/issues/3615)
+- Running Playground.Wpf crashes with Reflection.TypeLoadException [\#3588](https://github.com/MvvmCross/MvvmCross/issues/3588)
+- WPF View lifetime does not handle app closing [\#3481](https://github.com/MvvmCross/MvvmCross/issues/3481)
+- MvxApplicationCallbacksCurrentTopActivity is lying about current Activity [\#3455](https://github.com/MvvmCross/MvvmCross/issues/3455)
+- Fix loader exception message. [\#3644](https://github.com/MvvmCross/MvvmCross/pull/3644) ([RayMMond](https://github.com/RayMMond))
+- 3615 Check for NRE in MvxIocContainer [\#3619](https://github.com/MvvmCross/MvvmCross/pull/3619) ([allexks](https://github.com/allexks))
+- Fix NullReferenceException in MvxAndroidBindingContextHelpers [\#3610](https://github.com/MvvmCross/MvvmCross/pull/3610) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix WPF app close view model lifecycle [\#3591](https://github.com/MvvmCross/MvvmCross/pull/3591) ([MartinZikmund](https://github.com/MartinZikmund))
+- Getting plugin types safely [\#3590](https://github.com/MvvmCross/MvvmCross/pull/3590) ([MartinZikmund](https://github.com/MartinZikmund))
+
+**Merged pull requests:**
+
+- Downgrade Xamarin.Build.Download to 0.4.11 as latest has a bug [\#3679](https://github.com/MvvmCross/MvvmCross/pull/3679) ([Cheesebaron](https://github.com/Cheesebaron))
+- Small Optimizations for Loading Plugins [\#3675](https://github.com/MvvmCross/MvvmCross/pull/3675) ([Strifex](https://github.com/Strifex))
+- Mvx bundle optimizations [\#3667](https://github.com/MvvmCross/MvvmCross/pull/3667) ([Strifex](https://github.com/Strifex))
+- Fix CurrentTopActivity returning null when App in background [\#3665](https://github.com/MvvmCross/MvvmCross/pull/3665) ([Cheesebaron](https://github.com/Cheesebaron))
+- remove duplicated words from readme [\#3657](https://github.com/MvvmCross/MvvmCross/pull/3657) ([mrlacey](https://github.com/mrlacey))
+- Refactor \#3649: Change MvxAndroidBindingResource to be registered and used with the IoC [\#3656](https://github.com/MvvmCross/MvvmCross/pull/3656) ([fedemkr](https://github.com/fedemkr))
+- MvvmCross.Plugin.Location.Fused refactoring [\#3651](https://github.com/MvvmCross/MvvmCross/pull/3651) ([pinkysek](https://github.com/pinkysek))
+- Bump Xamarin.Build.Download from 0.4.11 to 0.7.1 [\#3648](https://github.com/MvvmCross/MvvmCross/pull/3648) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.CodeAnalysis from 3.3.1 to 3.4.0 [\#3646](https://github.com/MvvmCross/MvvmCross/pull/3646) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.SourceLink.GitHub from 1.0.0-beta2-19554-01 to 1.0.0 [\#3641](https://github.com/MvvmCross/MvvmCross/pull/3641) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Newtonsoft.Json from 12.0.2 to 12.0.3 [\#3633](https://github.com/MvvmCross/MvvmCross/pull/3633) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.NET.Test.Sdk from 16.3.0 to 16.4.0 [\#3628](https://github.com/MvvmCross/MvvmCross/pull/3628) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Microsoft.SourceLink.GitHub from 1.0.0-beta2-19367-01 to 1.0.0-beta2-19554-01 [\#3625](https://github.com/MvvmCross/MvvmCross/pull/3625) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Corrected misspelling of Recycler [\#3613](https://github.com/MvvmCross/MvvmCross/pull/3613) ([pearsonallen](https://github.com/pearsonallen))
+- Bump Moq from 4.13.0 to 4.13.1 [\#3608](https://github.com/MvvmCross/MvvmCross/pull/3608) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Edited Installation Instructions  [\#3606](https://github.com/MvvmCross/MvvmCross/pull/3606) ([AceBurton](https://github.com/AceBurton))
+- Bump Serilog.Sinks.Xamarin from 0.1.29 to 0.1.37 [\#3604](https://github.com/MvvmCross/MvvmCross/pull/3604) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Serilog from 2.8.0 to 2.9.0 [\#3603](https://github.com/MvvmCross/MvvmCross/pull/3603) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Move signing into own stage [\#3600](https://github.com/MvvmCross/MvvmCross/pull/3600) ([Cheesebaron](https://github.com/Cheesebaron))
+- Chore\(readme\): use https [\#3599](https://github.com/MvvmCross/MvvmCross/pull/3599) ([imba-tjd](https://github.com/imba-tjd))
+- Android RecyclerView Workaround for GridLayoutManager [\#3598](https://github.com/MvvmCross/MvvmCross/pull/3598) ([dogukandemir](https://github.com/dogukandemir))
 
 ## [6.4.1](https://github.com/MvvmCross/MvvmCross/tree/6.4.1) (2019-09-30)
 [Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.4.0...6.4.1)
@@ -1060,5 +1107,4 @@
 
 ## [Release-3.0.8.1](https://github.com/MvvmCross/MvvmCross/tree/Release-3.0.8.1) (2013-06-09)
 
-
-\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
