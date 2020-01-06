@@ -146,15 +146,16 @@ namespace MvvmCross.Platforms.Android.Views
             //                intent.AddFlags(ActivityFlags.ClearTop);
         }
 
-        public virtual Tuple<Intent, int> GetIntentWithKeyFor(IMvxViewModel viewModel)
+        public virtual (Intent intent, int key) GetIntentWithKeyFor(IMvxViewModel viewModel, MvxViewModelRequest request)
         {
-            var request = MvxViewModelRequest.GetDefaultRequest(viewModel.GetType());
+            request = request ?? MvxViewModelRequest.GetDefaultRequest(viewModel.GetType());
             var intent = GetIntentFor(request);
 
-            var key = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>().Cache(viewModel);
+            var childViewModelCache = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>();
+            var key = childViewModelCache.Cache(viewModel);
             intent.PutExtra(SubViewModelKey, key);
 
-            return new Tuple<Intent, int>(intent, key);
+            return (intent, key);
         }
 
         public void RemoveSubViewModelWithKey(int key)

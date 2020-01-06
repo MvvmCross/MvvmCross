@@ -12,7 +12,7 @@ The default presenter supports every navigation pattern that Xamarin.Forms suppo
 
 - Tabs
 - MasterDetail
-- Childs
+- Children
 - Etc
 
 Also if your app needs another kind of presentation mode, you can easily extend it!

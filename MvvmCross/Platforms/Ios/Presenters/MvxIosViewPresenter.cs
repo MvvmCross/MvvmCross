@@ -30,6 +30,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
         public IMvxTabBarViewController TabBarViewController { get; protected set; }
 
+        public IMvxPageViewController PageViewController { get; protected set; }
+
         public IMvxSplitViewController SplitViewController { get; protected set; }
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
@@ -109,6 +111,14 @@ namespace MvvmCross.Platforms.Ios.Presenters
                     },
                     CloseTabViewController);
 
+            AttributeTypesToActionsDictionary.Register<MvxPagePresentationAttribute>(
+                (viewType, attribute, request) =>
+                    {
+                        var viewController = (UIViewController)this.CreateViewControllerFor(request);
+                        return ShowPageViewController(viewController, attribute, request);
+                    },
+                    ClosePageViewController);
+
             AttributeTypesToActionsDictionary.Register<MvxModalPresentationAttribute>(
                 (viewType, attribute, request) =>
                     {
@@ -156,6 +166,19 @@ namespace MvvmCross.Platforms.Ios.Presenters
             if (viewController is IMvxTabBarViewController tabBarController)
             {
                 TabBarViewController = tabBarController;
+
+                // set root
+                SetupWindowRootNavigation(viewController, attribute);
+
+                if (!await CloseModalViewControllers()) return false;
+                if (!await CloseSplitViewController()) return false;
+
+                return true;
+            }
+
+            if (viewController is IMvxPageViewController pageViewController)
+            {
+                PageViewController = pageViewController;
 
                 // set root
                 SetupWindowRootNavigation(viewController, attribute);
@@ -300,11 +323,41 @@ namespace MvvmCross.Platforms.Ios.Presenters
             return Task.FromResult(true);
         }
 
+        protected virtual Task<bool> ShowPageViewController(
+            UIViewController viewController,
+            MvxPagePresentationAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            if (PageViewController == null)
+                throw new MvxException("Trying to show a page without a PageViewController, this is not possible!");
+
+            /*if (viewController is IMvxTabBarItemViewController tabBarItem)
+            {
+                attribute.TabName = tabBarItem.TabName;
+                attribute.TabIconName = tabBarItem.TabIconName;
+                attribute.TabSelectedIconName = tabBarItem.TabSelectedIconName;
+            }*/
+
+            if (attribute.WrapInNavigationController)
+                viewController = CreateNavigationController(viewController);
+
+            PageViewController.AddPage(
+                viewController,
+                attribute);
+            return Task.FromResult(true);
+        }
+
         protected virtual Task<bool> ShowModalViewController(
             UIViewController viewController,
             MvxModalPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
+            // Content size should be set to a target view controller, not the navigation one
+            if (attribute.PreferredContentSize != default(CGSize))
+            {
+                viewController.PreferredContentSize = attribute.PreferredContentSize;
+            }
+
             // setup modal based on attribute
             if (attribute.WrapInNavigationController)
             {
@@ -313,8 +366,6 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             viewController.ModalPresentationStyle = attribute.ModalPresentationStyle;
             viewController.ModalTransitionStyle = attribute.ModalTransitionStyle;
-            if (attribute.PreferredContentSize != default(CGSize))
-                viewController.PreferredContentSize = attribute.PreferredContentSize;
 
             // Check if there is a modal already presented first. Otherwise use the window root
             var modalHost = ModalViewControllers.LastOrDefault() ?? _window.RootViewController;
@@ -388,6 +439,14 @@ namespace MvvmCross.Platforms.Ios.Presenters
         protected virtual Task<bool> CloseTabViewController(IMvxViewModel viewModel, MvxTabPresentationAttribute attribute)
         {
             if (TabBarViewController != null && TabBarViewController.CloseTabViewModel(viewModel))
+                return Task.FromResult(true);
+
+            return Task.FromResult(false);
+        }
+
+        protected virtual Task<bool> ClosePageViewController(IMvxViewModel viewModel, MvxPagePresentationAttribute attribute)
+        {
+            if (PageViewController != null && PageViewController.RemovePage(viewModel))
                 return Task.FromResult(true);
 
             return Task.FromResult(false);

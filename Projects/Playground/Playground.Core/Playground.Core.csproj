@@ -21,6 +21,11 @@
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\Network\MvvmCross.Plugin.Network.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj" />
     <ProjectReference Include="..\..\..\MvvmCross\MvvmCross.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Location\MvvmCross.Plugin.Location.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
   </ItemGroup>
 
 </Project>

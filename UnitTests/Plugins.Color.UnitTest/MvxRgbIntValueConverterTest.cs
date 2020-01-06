@@ -29,7 +29,7 @@ namespace MvvmCross.Plugin.Color.UnitTest
             var actual = converter.Convert(rgb, typeof(object), null, CultureInfo.CurrentUICulture);
             var wrapped = actual as WrappedColor;
             Assert.NotNull(wrapped);
-            Assert.Equal(argb, (uint)wrapped.Color.ARGB);
+            Assert.Equal(argb, (uint)wrapped.Color.ToArgb());
         }
     }
 }

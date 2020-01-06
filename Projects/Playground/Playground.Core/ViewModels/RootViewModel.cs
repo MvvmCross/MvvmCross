@@ -17,6 +17,7 @@ using MvvmCross.ViewModels;
 using Playground.Core.Models;
 using Playground.Core.Services;
 using Playground.Core.ViewModels.Bindings;
+using Playground.Core.ViewModels.Location;
 using Playground.Core.ViewModels.Navigation;
 using Playground.Core.ViewModels.Samples;
 
@@ -65,6 +66,8 @@ namespace Playground.Core.ViewModels
 
             ShowTabsCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<TabsRootViewModel>());
 
+            ShowPagesCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<PagesRootViewModel>());
+
             ShowSplitCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SplitRootViewModel>());
 
             ShowNativeCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<NativeViewModel>());
@@ -103,6 +106,8 @@ namespace Playground.Core.ViewModels
                 new MvxCommand(() => IsVisible = !IsVisible);
 
             FragmentCloseCommand = new MvxAsyncCommand(() => NavigationService.Navigate<FragmentCloseViewModel>());
+
+            ShowLocationCommand = new MvxAsyncCommand(() => NavigationService.Navigate<LocationViewModel>());
         }
 
         public MvxNotifyTask MyTask { get; set; }
@@ -116,6 +121,8 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowCustomBindingCommand { get; }
 
         public IMvxAsyncCommand ShowTabsCommand { get; }
+
+        public IMvxAsyncCommand ShowPagesCommand { get; }
 
         public IMvxAsyncCommand ShowSplitCommand { get; }
 
@@ -142,6 +149,9 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowCodeBehindViewCommand =>
             new MvxAsyncCommand(async () => await NavigationService.Navigate<CodeBehindViewModel>());
 
+        public IMvxAsyncCommand ShowNavigationCloseCommand =>
+            new MvxAsyncCommand(async () => await NavigationService.Navigate<NavigationCloseViewModel>());
+
         public IMvxAsyncCommand ShowContentViewCommand =>
             new MvxAsyncCommand(async () => await NavigationService.Navigate<ParentContentViewModel>());
 
@@ -159,6 +169,7 @@ namespace Playground.Core.ViewModels
         public IMvxCommand TriggerVisibilityCommand { get; }
 
         public IMvxCommand FragmentCloseCommand { get; }
+        public IMvxAsyncCommand ShowLocationCommand { get; }
 
         private bool _isVisible;
 

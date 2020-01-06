@@ -293,7 +293,7 @@ This may sound complicated... but actually it is quite simple.
  
 ### Using platform-specific Value Converters
 
-Most of the discussions so far have assumed that ValueConverters are placed in shared PCL code and are shared between platforms.
+Most of the discussions so far have assumed that ValueConverters are placed in shared .NET Standard code and are shared between platforms.
 
 Beyond this, ValueConverters can also of course be used within UI projects for platform specific functionality. This is seen particularly often for things like loading images and resources or for performing platform specific layout adjustments.
 
@@ -316,7 +316,7 @@ If you require other visibility logic - e.g. if you need a mapping for a `nullab
 
 To use these converters on each platform, use:
 
-- Droid (not that in Droid there is no support for the `Invisible` state - cross platform, we only support `Visible` and `Gone`):
+- Droid (note that in Droid there is no support for the `Invisible` state - cross platform, we only support `Visible` and `Gone`):
   
         local:MvxBind="Visibility Visibility(VMProperty)"
         
@@ -358,11 +358,11 @@ public class SayPleaseVisibilityValueConverter : MvxBaseVisibilityValueConverter
 
 ### The Mvx Color ValueConverters
 
-The Color plugin contains a couple of simple value converters which assist with `MvxColor` on each platform.
+The Color plugin contains a couple of simple value converters which assist with `System.Drawing.Color` on each platform.
 
 These are:
 
-- `MvxNativeColorValueConverter` registered as "NativeColor" - this converts `MvxColor` properties on the ViewModel to a native color format.
+- `MvxNativeColorValueConverter` registered as "NativeColor" - this converts `System.Drawing.Color` properties on the ViewModel to a native color format.
 -  `MvxRGBAValueConverter` registered as "RGBA" - this converts Hex ViewModel string properties like "RGB", "RRGGBB" and "RRGGBBAA" with optional leading "#" characters into native color formats.
 -  `MvxRGBIntColorConverter` registered under the name "RGBIntColor" - this converters `int` ViewModel properties into native color formats.
 
@@ -379,7 +379,7 @@ On Droid, the Color plugin also includes a couple of custom bindings to assist w
 - `TextView` `TextColor` binding
 - `View` `BackgroundColor` binding
 
-To use Color on each platform - for example, with a ViewModel property `public MvxColor CurrentColor { get; set; }` you can use:
+To use Color on each platform - for example, with a ViewModel property `public System.Drawing.Color CurrentColor { get; set; }` you can use:
 
 - Droid:
   

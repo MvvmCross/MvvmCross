@@ -172,7 +172,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return base.ChangePresentation(hint);
         }
 
-        private ViewPager FindViewPagerInFragmentPresentation(MvxViewPagerFragmentPresentationAttribute pagerFragmentAttribute)
+        protected virtual ViewPager FindViewPagerInFragmentPresentation(MvxViewPagerFragmentPresentationAttribute pagerFragmentAttribute)
         {
             ViewPager viewPager = null;
 
@@ -441,28 +441,23 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 throw new MvxException("ViewPager not found");
 
             var tag = attribute.Tag ?? attribute.ViewType.FragmentJavaName();
+            var fragmentInfo = new MvxViewPagerFragmentInfo(attribute.Title, tag, attribute.ViewType, request);
+
             if (viewPager.Adapter is MvxCachingFragmentStatePagerAdapter adapter)
             {
-                if (request is MvxViewModelInstanceRequest instanceRequest)
-                    adapter.FragmentsInfo.Add(new MvxViewPagerFragmentInfo(
-                        attribute.Title, tag, attribute.ViewType, instanceRequest.ViewModelInstance));
-                else
-                    adapter.FragmentsInfo.Add(new MvxViewPagerFragmentInfo(
-                        attribute.Title, tag, attribute.ViewType, attribute.ViewModelType));
-
+                adapter.FragmentsInfo.Add(fragmentInfo);
                 adapter.NotifyDataSetChanged();
             }
             else
             {
-                var fragments = new List<MvxViewPagerFragmentInfo>();
-                if (request is MvxViewModelInstanceRequest instanceRequest)
-                    fragments.Add(new MvxViewPagerFragmentInfo(
-                        attribute.Title, tag, attribute.ViewType, instanceRequest.ViewModelInstance));
-                else
-                    fragments.Add(new MvxViewPagerFragmentInfo(
-                        attribute.Title, tag, attribute.ViewType, attribute.ViewModelType));
-
-                viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(CurrentActivity, fragmentManager, fragments);
+                viewPager.Adapter = new MvxCachingFragmentStatePagerAdapter(
+                    CurrentActivity, 
+                    fragmentManager, 
+                    new List<MvxViewPagerFragmentInfo>
+                    {
+                        fragmentInfo
+                    }
+                );
             }
 
             return Task.FromResult(true);
@@ -509,13 +504,21 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         protected override Task<bool> CloseFragmentDialog(IMvxViewModel viewModel,
             MvxDialogFragmentPresentationAttribute attribute)
         {
-            var fragmentName = attribute.ViewType.FragmentJavaName();
-            var tag = attribute.Tag ?? fragmentName;
-            var toClose = CurrentFragmentManager.FindFragmentByTag(tag);
-            if (toClose != null && toClose is DialogFragment dialog)
+            try
             {
-                dialog.DismissAllowingStateLoss();
-                return Task.FromResult(true);
+                var fragmentName = attribute.ViewType.FragmentJavaName();
+                var tag = attribute.Tag ?? fragmentName;
+                var toClose = CurrentFragmentManager.FindFragmentByTag(tag);
+                if (toClose != null && toClose is DialogFragment dialog)
+                {
+                    dialog.DismissAllowingStateLoss();
+                    return Task.FromResult(true);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                MvxAndroidLog.Instance.Error("Cannot close fragment dialog", ex);
+                return Task.FromResult(false);
             }
             return Task.FromResult(false);
         }
@@ -557,7 +560,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             return Task.FromResult(false);
         }
 
-        private static MvxViewPagerFragmentInfo FindFragmentInfoFromAttribute(
+        protected virtual MvxViewPagerFragmentInfo FindFragmentInfoFromAttribute(
             MvxFragmentPresentationAttribute attribute, MvxCachingFragmentStatePagerAdapter adapter)
         {
             MvxViewPagerFragmentInfo fragmentInfo = null;
@@ -576,7 +579,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 var viewTypeMatches = info.FragmentType == attribute.ViewType;
 
                 if (attribute.ViewModelType != null)
-                    return viewTypeMatches && info.ViewModelType == attribute.ViewModelType;
+                    return viewTypeMatches && info.Request?.ViewModelType == attribute.ViewModelType;
 
                 return viewTypeMatches;
             }

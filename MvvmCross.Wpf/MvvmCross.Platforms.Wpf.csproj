@@ -1,6 +1,6 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
-    <TargetFramework>net461</TargetFramework>
+    <TargetFrameworks>net461;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
     <AssemblyName>MvvmCross.Platforms.Wpf</AssemblyName>
     <RootNamespace>MvvmCross.Platforms.Wpf</RootNamespace>
     <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
@@ -9,20 +9,13 @@ This package contains the 'MvvmCross.Platforms.Wpf' libraries for MvvmCross</Des
     <PackageId>MvvmCross.Platforms.Wpf</PackageId>
     <EnableDefaultItems>false</EnableDefaultItems>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-    <ExtrasEnableWpfProjectSetup>true</ExtrasEnableWpfProjectSetup>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="..\MvvmCross\Platforms\Wpf\**\*.cs" />
+  <ItemGroup Condition=" '$(OS)' == 'Windows_NT' ">
+    <Compile Include="..\MvvmCross\Platforms\Wpf\**\*.cs" />
     <ProjectReference Include="..\MvvmCross\MvvmCross.csproj" />
     <None Include="..\MvvmCross\readme.txt" pack="true" PackagePath="." />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   
 </Project>

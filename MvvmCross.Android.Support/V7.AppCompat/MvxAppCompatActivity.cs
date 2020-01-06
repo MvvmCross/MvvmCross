@@ -9,6 +9,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Core;
 using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.Views;
@@ -73,6 +74,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected override void AttachBaseContext(Context @base)
         {
+            if (this is IMvxSetupMonitor)
+            {
+                // Do not attach our inflater to splash screens.
+                base.AttachBaseContext(@base);
+                return;
+            }
             base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
 
@@ -81,12 +88,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             base.OnCreate(bundle);
             ViewModel?.ViewCreated();
         }
-
-        protected virtual object GetAppStartHint(object hint = null)
-        {
-            return hint;
-        }
-
+        
         protected override void OnDestroy()
         {
             base.OnDestroy();

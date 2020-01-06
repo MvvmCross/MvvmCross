@@ -114,24 +114,6 @@ namespace MvvmCross.Platforms.Android.Views
         {
             base.OnCreate(bundle);
             ViewModel?.ViewCreated();
-
-            if (!(this is IMvxSetupMonitor))
-            {
-                RunAppStart(bundle);
-            }
-        }
-        
-        protected virtual void RunAppStart(Bundle bundle)
-        {
-            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
-            {
-                startup.StartAsync(GetAppStartHint(bundle));
-            }
-        }
-
-        protected virtual object GetAppStartHint(object hint = null)
-        {
-            return hint;
         }
 
         protected override void OnDestroy()

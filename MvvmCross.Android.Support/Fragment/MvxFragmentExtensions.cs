@@ -34,11 +34,6 @@ namespace MvvmCross.Droid.Support.V4
             {
                 // check if ViewModel instance was cached. If so, clear it and ignore previous instance
                 cache.GetAndClear(fragmentView.ViewModel.GetType(), fragmentView.UniqueImmutableCacheTag);
-
-                //TODO call MvxViewModelLoader.Reload when it's added in MvvmCross, tracked by #1165
-                //until then, we're going to re-run the viewmodel lifecycle here.
-                Platforms.Android.Views.MvxFragmentExtensions.RunViewModelLifecycle(fragmentView.ViewModel, bundle, request);
-
                 return;
             }
 

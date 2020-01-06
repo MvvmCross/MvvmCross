@@ -181,7 +181,7 @@ namespace MvvmCross.Forms.Presenters
             try
             {
 #endif
-                var navigation = GetPageOfType<NavigationPage>().Navigation;
+                var navigation = GetPageOfType<NavigationPage>()?.Navigation;
                 if (hint is MvxPopToRootPresentationHint popToRootHint)
                 {
                     // Make sure all modals are closed
@@ -361,7 +361,9 @@ namespace MvvmCross.Forms.Presenters
         public virtual Task<bool> CloseCarouselPage(IMvxViewModel viewModel, MvxCarouselPagePresentationAttribute attribute)
         {
             if (attribute.Position == CarouselPosition.Root)
-                return ClosePage(FormsApplication.MainPage, null, attribute);
+            {
+                return FindAndCloseViewFromViewModel(viewModel, FormsApplication.MainPage, attribute);
+            }
             else
             {
                 var carouselHost = GetPageOfType<MvxCarouselPage>();
@@ -422,7 +424,7 @@ namespace MvvmCross.Forms.Presenters
 
         public virtual Task<bool> CloseContentPage(IMvxViewModel viewModel, MvxContentPagePresentationAttribute attribute)
         {
-            return ClosePage(FormsApplication.MainPage, null, attribute);
+            return FindAndCloseViewFromViewModel(viewModel, FormsApplication.MainPage, attribute);
         }
 
         public virtual async Task<bool> ShowMasterDetailPage(
@@ -489,7 +491,7 @@ namespace MvvmCross.Forms.Presenters
                 case MasterDetailPosition.Master:
                     return ClosePage(masterDetailHost.Master, null, attribute);
                 case MasterDetailPosition.Detail:
-                    return ClosePage(masterDetailHost.Detail, null, attribute);
+                    return FindAndCloseViewFromViewModel(viewModel, masterDetailHost.Detail, attribute);
             }
             return Task.FromResult(true);
         }
@@ -516,7 +518,7 @@ namespace MvvmCross.Forms.Presenters
                 {
                     // Either last isn't a nav page, or there is no last page
                     // So, wrap the current page in a nav page and push onto stack
-                    await FormsApplication.MainPage.Navigation.PushModalAsync(new NavigationPage(page));
+                    await FormsApplication.MainPage.Navigation.PushModalAsync(CreateNavigationPage(page));
                 }
             }
             else
@@ -556,9 +558,9 @@ namespace MvvmCross.Forms.Presenters
             return true;
         }
 
-        public virtual async Task<bool> CloseNavigationPage(IMvxViewModel viewModel, MvxNavigationPagePresentationAttribute attribute)
+        public virtual Task<bool> CloseNavigationPage(IMvxViewModel viewModel, MvxNavigationPagePresentationAttribute attribute)
         {
-            return await ClosePage(FormsApplication.MainPage, null, attribute);
+            return FindAndCloseViewFromViewModel(viewModel, FormsApplication.MainPage, attribute);
         }
 
         public virtual async Task<bool> ShowTabbedPage(
@@ -595,7 +597,9 @@ namespace MvvmCross.Forms.Presenters
         public virtual Task<bool> CloseTabbedPage(IMvxViewModel viewModel, MvxTabbedPagePresentationAttribute attribute)
         {
             if (attribute.Position == TabbedPosition.Root)
-                return ClosePage(FormsApplication.MainPage, null, attribute);
+            {
+                return FindAndCloseViewFromViewModel(viewModel, FormsApplication.MainPage, attribute);
+            }
             else
             {
                 var tabHost = GetPageOfType<MvxTabbedPage>();
@@ -916,6 +920,25 @@ namespace MvvmCross.Forms.Presenters
             {
                 throw new MvxException(ex, "Cannot replace MainPage root");
             }
+        }
+
+        protected virtual Task<bool> FindAndCloseViewFromViewModel(IMvxViewModel mvxViewModel, Page rootPage, MvxPagePresentationAttribute attribute)
+        {
+            var root = TopNavigationPage();
+            Page pageToClose = null;
+
+            // finding the view from viewmodel in navigation stack
+            pageToClose = root?.Navigation?.NavigationStack?
+                .OfType<IMvxPage>()
+                .FirstOrDefault(x => x.ViewModel == mvxViewModel) as Page;
+
+            if (pageToClose == null)
+            {
+                MvxFormsLog.Instance.Warn("Ignoring close for ViewModel - Matching View for ViewModel instance failed");
+                return Task.FromResult(false);
+            }
+
+            return ClosePage(rootPage, pageToClose, attribute);
         }
     }
 }

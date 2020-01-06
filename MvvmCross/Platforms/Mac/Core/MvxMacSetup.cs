@@ -85,11 +85,11 @@ namespace MvvmCross.Platforms.Mac.Core
             return new MvxMacViewDispatcher(_presenter);
         }
 
-        protected override void InitializePlatformServices()
+        protected override void InitializeFirstChance()
         {
             RegisterPresenter();
             RegisterLifetime();
-            base.InitializePlatformServices();
+            base.InitializeFirstChance();
         }
 
         protected virtual void RegisterLifetime()

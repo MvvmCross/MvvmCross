@@ -10,6 +10,7 @@ MvxSpinner is a wrapper around Android's Spinner View, which provides a drop dow
 
 Currently `MvxSpinner` supports binding to the following properties:
 - ItemsSource
+- SelectedItem
 - HandleItemSelected
 
 ## Getting started
@@ -21,7 +22,7 @@ Adding a `MvxSpinner` is fairly simple. You add the widget in your layout like s
     ...
     local:MvxItemTemplate="@layout/item_template"
     local:MvxDropDownItemTemplate="@layout/drop_down_item_template"
-    local:MvxBind="ItemsSource Items; HandleItemSelected ItemSelectedCommand"
+    local:MvxBind="ItemsSource Items; SelectedItem Item; HandleItemSelected ItemSelectedCommand"
     />
 ```
 
@@ -82,10 +83,11 @@ The `HandleItemSelected` command, can be bound to a command in your ViewModel. W
 
 ```csharp
 private MvxCommand<CountryViewModel> _countrySelectedCommand;
-public MvxCommand<DogViewModel> CountrySelectedCommand => _countrySelectedCommand = 
-    _countrySelectedCommand ?? new MvxCommand<DogViewModel>(OnCountrySelectedCommand);
+public MvxCommand<CountryViewModel> CountrySelectedCommand => _countrySelectedCommand = 
+    _countrySelectedCommand ?? new MvxCommand<CountryViewModel>(OnCountrySelectedCommand);
 
 private void OnCountrySelectedCommand(CountryViewModel country)
 {
     // write on country selected logic here
 }
+```

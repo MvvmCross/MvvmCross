@@ -24,9 +24,11 @@ namespace MvvmCross.ViewModels
                         where viewModelType != null
                         select new KeyValuePair<Type, Type>(viewModelType, candidateViewType);
 
+            var filteredViews = FilterViews(views);
+
             try
             {
-                return views.ToDictionary(x => x.Key, x => x.Value);
+                return filteredViews.ToDictionary(x => x.Key, x => x.Value);
             }
             catch (ArgumentException exception)
             {
@@ -34,7 +36,12 @@ namespace MvvmCross.ViewModels
             }
         }
 
-        private static Exception ReportBuildProblem(IEnumerable<KeyValuePair<Type, Type>> views,
+        protected virtual IEnumerable<KeyValuePair<Type, Type>> FilterViews(IEnumerable<KeyValuePair<Type, Type>> views)
+        {
+            return views;
+        }
+
+        protected virtual Exception ReportBuildProblem(IEnumerable<KeyValuePair<Type, Type>> views,
                                                     ArgumentException exception)
         {
             var overSizedCounts = views.GroupBy(x => x.Key)

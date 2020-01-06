@@ -34,15 +34,14 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual FragmentManager CurrentFragmentManager => CurrentActivity.FragmentManager;
 
-        private IMvxAndroidCurrentTopActivity _mvxAndroidCurrentTopActivity;
-
+        private IMvxAndroidCurrentTopActivity _androidCurrentTopActivity;
         protected virtual Activity CurrentActivity
         {
             get
             {
-                if (_mvxAndroidCurrentTopActivity == null)
-                    _mvxAndroidCurrentTopActivity = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>();
-                return _mvxAndroidCurrentTopActivity.Activity;
+                if (_androidCurrentTopActivity == null)
+                    _androidCurrentTopActivity = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>();
+                return _androidCurrentTopActivity.Activity;
             }
         }
 
@@ -229,6 +228,12 @@ namespace MvvmCross.Platforms.Android.Presenters
                     }
                 }
 
+                if(!transitionElementPairs.Any())
+                {
+                    MvxLog.Instance.Warn("No transition elements are provided");
+                    return bundle;
+                }
+
                 if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
                 {
                     var activityOptions = ActivityOptions.MakeSceneTransitionAnimation(CurrentActivity, transitionElementPairs.ToArray());
@@ -246,14 +251,19 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual Intent CreateIntentForRequest(MvxViewModelRequest request)
         {
-            IMvxAndroidViewModelRequestTranslator requestTranslator = Mvx.IoCProvider.Resolve<IMvxAndroidViewModelRequestTranslator>();
+            var requestTranslator = Mvx.IoCProvider.Resolve<IMvxAndroidViewModelRequestTranslator>();
 
-            if (request is MvxViewModelInstanceRequest viewModelInstanceRequest)
+            if (!(request is MvxViewModelInstanceRequest viewModelInstanceRequest))
             {
-                var instanceRequest = requestTranslator.GetIntentWithKeyFor(viewModelInstanceRequest.ViewModelInstance);
-                return instanceRequest.Item1;
+                return requestTranslator.GetIntentFor(request);
             }
-            return requestTranslator.GetIntentFor(request);
+
+            var intentWithKey = requestTranslator.GetIntentWithKeyFor(
+                viewModelInstanceRequest.ViewModelInstance,
+                viewModelInstanceRequest
+            );
+
+            return intentWithKey.intent;
         }
 
         protected virtual void ShowIntent(Intent intent, Bundle bundle)

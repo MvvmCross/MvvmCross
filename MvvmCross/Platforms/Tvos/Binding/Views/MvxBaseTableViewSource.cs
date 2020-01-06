@@ -92,8 +92,6 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
 
                 SelectedItem = null;
             }
-
-            base.RowDeselected(tableView, indexPath);
         }
 
         private object _selectedItem;

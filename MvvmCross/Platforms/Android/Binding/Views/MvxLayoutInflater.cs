@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -178,6 +178,19 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             return _bindingVisitor.OnViewCreated(view, Context, attrs);
         }
 
+#if __ANDROID_29__
+        public override View OnCreateView(Context viewContext, View parent, string name, IAttributeSet attrs)
+        {
+            if (Debug)
+                MvxLog.Instance.Trace(Tag, "... OnCreateView 4 ... {0}", name);
+
+            return _bindingVisitor.OnViewCreated(
+                base.OnCreateView(viewContext, parent, name, attrs),
+                viewContext,
+                attrs);
+        }
+#endif
+
         // Mimic PhoneLayoutInflater's OnCreateView.
         private View PhoneLayoutInflaterOnCreateView(string name, IAttributeSet attrs)
         {
@@ -301,32 +314,47 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
                 if (view == null)
                 {
-                    if (_constructorArgs == null)
+                    Object[] constructorArgsArr = null;
+                    Object lastContext = null;
+
+                    if (Build.VERSION.SdkInt <= BuildVersionCodes.P)
                     {
-                        Class layoutInflaterClass = Class.FromType(typeof(LayoutInflater));
-                        _constructorArgs = layoutInflaterClass.GetDeclaredField("mConstructorArgs");
-                        _constructorArgs.Accessible = true;
+                        if (_constructorArgs == null)
+                        {
+                            Class layoutInflaterClass = Class.FromType(typeof(LayoutInflater));
+                            _constructorArgs = layoutInflaterClass.GetDeclaredField("mConstructorArgs");
+                            _constructorArgs.Accessible = true;
+                        }
+
+                        constructorArgsArr = (Object[])_constructorArgs.Get(this);
+                        lastContext = constructorArgsArr[0];
+
+                        // The LayoutInflater actually finds out the correct context to use. We just need to set
+                        // it on the mConstructor for the internal method.
+                        // Set the constructor args up for the createView, not sure why we can't pass these in.
+                        constructorArgsArr[0] = viewContext;
+                        _constructorArgs.Set(this, constructorArgsArr);
                     }
-
-                    Object[] constructorArgsArr = (Object[])_constructorArgs.Get(this);
-                    Object lastContext = constructorArgsArr[0];
-
-                    // The LayoutInflater actually finds out the correct context to use. We just need to set
-                    // it on the mConstructor for the internal method.
-                    // Set the constructor args up for the createView, not sure why we can't pass these in.
-                    constructorArgsArr[0] = viewContext;
-                    _constructorArgs.Set(this, constructorArgsArr);
+                    
                     try
                     {
-                        view = CreateView(name, null, attrs);
+#if __ANDROID_29__
+                        if (Build.VERSION.SdkInt > BuildVersionCodes.P)
+                            view = CreateView(viewContext, name, null, attrs);
+                        else
+#endif
+                            view = CreateView(name, null, attrs);
                     }
                     catch (ClassNotFoundException) 
                     {
                     }
                     finally
                     {
-                        constructorArgsArr[0] = lastContext;
-                        _constructorArgs.Set(this, constructorArgsArr);
+                        if (Build.VERSION.SdkInt <= BuildVersionCodes.P)
+                        {
+                            constructorArgsArr[0] = lastContext;
+                            _constructorArgs.Set(this, constructorArgsArr);
+                        }
                     }
                 }
             }

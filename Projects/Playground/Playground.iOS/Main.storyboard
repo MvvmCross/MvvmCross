@@ -18,19 +18,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="32">
-                                <rect key="frame" x="168.5" y="268" width="77" height="30"/>
+                                <rect key="frame" x="168.5" y="321" width="77" height="30"/>
                                 <state key="normal" title="Show Child">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="33">
-                                <rect key="frame" x="165" y="333" width="84" height="30"/>
+                                <rect key="frame" x="165" y="386" width="84" height="30"/>
                                 <state key="normal" title="Show modal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45">
-                                <rect key="frame" x="77" y="200" width="167" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45">
+                                <rect key="frame" x="123.5" y="253" width="167" height="30"/>
                                 <state key="normal" title="Initiate Modal navigation">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -41,21 +41,27 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="143">
+                                <rect key="frame" x="127.5" y="145" width="159" height="30"/>
+                                <state key="normal" title="Initiate Page navigation">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="229">
-                                <rect key="frame" x="129.5" y="145" width="155" height="30"/>
+                                <rect key="frame" x="129.5" y="198" width="155" height="30"/>
                                 <state key="normal" title="Initiate Split navigation">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="481" misplaced="YES" ambiguous="YES">
-                                <rect key="frame" x="53" y="386" width="308" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="481" ambiguous="YES" misplaced="YES">
+                                <rect key="frame" x="53" y="439" width="308" height="30"/>
                                 <state key="normal" title="Show modal (override presentation attribute)">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1297" misplaced="YES">
-                                <rect key="frame" x="53" y="439" width="308" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1297">
+                                <rect key="frame" x="131.5" y="477" width="151" height="30"/>
                                 <state key="normal" title="Show Custom Binding">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -65,7 +71,9 @@
                         <constraints>
                             <constraint firstItem="142" firstAttribute="top" secondItem="3" secondAttribute="bottom" constant="72" id="230"/>
                             <constraint firstItem="142" firstAttribute="centerX" secondItem="7" secondAttribute="centerX" id="231"/>
-                            <constraint firstItem="229" firstAttribute="top" secondItem="142" secondAttribute="bottom" constant="23" id="232"/>
+                            <constraint firstItem="143" firstAttribute="centerX" secondItem="7" secondAttribute="centerX" id="231A"/>
+                            <constraint firstItem="143" firstAttribute="top" secondItem="142" secondAttribute="bottom" constant="23" id="232"/>
+                            <constraint firstItem="229" firstAttribute="top" secondItem="143" secondAttribute="bottom" constant="23" id="232A"/>
                             <constraint firstItem="229" firstAttribute="centerX" secondItem="7" secondAttribute="centerX" id="233"/>
                             <constraint firstItem="45" firstAttribute="top" secondItem="229" secondAttribute="bottom" constant="25" id="388"/>
                             <constraint firstItem="45" firstAttribute="centerX" secondItem="7" secondAttribute="centerX" id="389"/>
@@ -86,6 +94,7 @@
                         <outlet property="btnSplit" destination="229" id="name-outlet-229"/>
                         <outlet property="btnTabs" destination="142" id="name-outlet-142"/>
                         <outlet property="btnShowCustomBinding" destination="1297" id="name-outlet-1297"/>
+                        <outlet property="btnPages" destination="143" id="name-outlet-143"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -283,7 +292,7 @@
             <objects>
                 <tabBarController storyboardIdentifier="TabsRootView" id="FKA-Nj-OdK" customClass="TabsRootView" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IEQ-Tt-Rz4">
-                        <rect key="frame" x="0.0" y="687" width="414" height="49"/>
+                        <rect key="frame" x="0.0" y="686" width="414" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
@@ -745,6 +754,91 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="11378" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3304" y="1373"/>
+        </scene>
+        <scene sceneID="12319">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="12320" sceneMemberID="viewController" customClass="PagesRootView" storyboardIdentifier="PagesRootView"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="12321" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="660" y="2092"/>
+        </scene>
+        <scene sceneID="12829">
+            <objects>
+                <viewController storyboardIdentifier="Page1View" id="12830" sceneMemberID="viewController" customClass="Page1View">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="12827"/>
+                        <viewControllerLayoutGuide type="bottom" id="12828"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="12831">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Page 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="12975" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="171" y="224" width="111" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="12832" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1305" y="2105"/>
+        </scene>
+        <scene sceneID="12836">
+            <objects>
+                <viewController storyboardIdentifier="Page2View" id="12837" sceneMemberID="viewController" customClass="Page2View">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="12834"/>
+                        <viewControllerLayoutGuide type="bottom" id="12835"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="12838">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Page 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="13103" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="168" y="224" width="102" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="12839" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1967" y="2105"/>
+        </scene>
+        <scene sceneID="12843">
+            <objects>
+                <viewController storyboardIdentifier="Page3View" id="12844" sceneMemberID="viewController" customClass="Page3View">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="12841"/>
+                        <viewControllerLayoutGuide type="bottom" id="12842"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="12845">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Page 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="13104" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="170" y="224" width="102" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="12846" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2616" y="2101"/>
         </scene>
     </scenes>
 </document>
