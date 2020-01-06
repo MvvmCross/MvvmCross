@@ -8,10 +8,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
 using Android.OS;
+using Android.Runtime;
 using MvvmCross.Core;
 using MvvmCross.Platforms.Android;
 using MvvmCross.Platforms.Android.Core;
+using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
+using MvvmCross.Views;
 
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
@@ -28,8 +31,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     }
 
     /// <summary>
-    /// Mark all startup activities with this interface.
-    /// A startup activity is an activity that may be launched directly by Android using an intent filter.
+    /// Mark all statup activities with this interface.
+    /// A startup activity may be launched directly by Android using an intent filter.
     /// </summary>
     public interface IStartupActivity
     {
@@ -52,10 +55,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
     }
 
     /// <summary>
-    /// Mark all your root activities with this interface.
+    /// You MUST mark Activities that can shut downs the app with IShutdownActivity.
+    /// Otherwise opening the app again by tapping its icon will display nothing, and tapping the icon again will only display the splash screen.
     /// </summary>
     /// <remarks>
-    /// A root activity shuts down the mvvmcross application to free resources when it is destroyed.
+    /// An activity can shut downs the app if it is the last activity that can be displayed by the app.
+    /// ie: if the user taps "back" while this activity is displayed, the app is shut down.
     /// </remarks>
     public interface IShutdownActivity
     {
@@ -63,6 +68,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
     public class MvxStartupLifecycleCallback : Java.Lang.Object, Application.IActivityLifecycleCallbacks, IMvxSetupMonitor, IMvxAndroidCurrentTopActivity
     {
+        protected IMvxAndroidActivityLifetimeListener listener;
+        protected readonly List<string> startedActivityNames = new List<string>();
+
         protected int startedActivities;
         protected Activity startupActivity;
         protected bool isStartupActivityDisplayed;
@@ -75,45 +83,69 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         public Activity Activity => resumedActivities.LastOrDefault();
 
+        public MvxStartupLifecycleCallback()
+        {
+        }
+
+        [Android.Runtime.Preserve]
+        protected MvxStartupLifecycleCallback(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer)
+        {
+        }
+
         public virtual void OnActivityCreated(Activity activity, Bundle bundle)
         {
-            Console.WriteLine($"OnActivityCreated {activity.GetType().Name}. Is StartupActivity:{(activity is IStartupActivity ? "yes" : "no")}");
+            Console.WriteLine($"(SLC) OnActivityCreated {activity.GetType().Name}. Is StartupActivity:{(activity is IStartupActivity ? "yes" : "no")}");
 
             if (activity is IStartupActivity)
             {
-                if (Activity != null)
+                if (Activity == null)
                 {
-                    //IMvxLog is not available here
-                    Console.WriteLine($"OnActivityCreated IMvxAndroidCurrentTopActivity!=null :{Activity.GetType().Name}");
-                    return;
-                }
+                    _bundle = bundle;
 
-                _bundle = bundle;
-
-                //Non null when the app is launched from a push notification
-                var extras = activity.Intent?.Extras;
-                if (extras != null)
-                {
-                    var customData = new Dictionary<string, string>();
-                    foreach (var key in extras.KeySet())
+                    //Non null when the app is launched from a push notification
+                    var extras = activity.Intent?.Extras;
+                    if (extras != null)
                     {
-                        var o = extras.Get(key);
-                        if (o != null)
-                            customData.Add(key, o.ToString());
-                    }
+                        var customData = new Dictionary<string, string>();
+                        foreach (var key in extras.KeySet())
+                        {
+                            var o = extras.Get(key);
+                            if (o != null)
+                                customData.Add(key, o.ToString());
+                        }
 
-                    pushedData = customData;
+                        pushedData = customData;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"(SLC) OnActivityCreated IStartupActivity!=null :{Activity.GetType().Name}");
                 }
             }
+
+            if (activity is IMvxAndroidView mvxAndroidActivity)
+                mvxAndroidActivity.OnViewCreate(bundle);
+
+            if (activity is IMvxView mvxActivity)
+                mvxActivity.ViewModel?.ViewCreated();
+
+            listener?.OnCreate(activity, bundle);
         }
 
         public virtual void OnActivityDestroyed(Activity activity)
         {
-            //Console.WriteLine($"OnActivityDestroyed {activity.GetType().Name} istaskRoot:{activity.IsTaskRoot}");
+            //Console.WriteLine($"(SLC) OnActivityDestroyed {activity.GetType().Name} istaskRoot:{activity.IsTaskRoot} isShutdownActivity:{activity is IShutdownActivity} isFinishing:{activity.IsFinishing}");
+            listener?.OnDestroy(activity);
 
-            if (activity.IsTaskRoot && (activity is IShutdownActivity) && Mvx.IoCProvider != null)
+            if (activity is IMvxView mvxActivity)
+                DestroyActivity(mvxActivity);
+
+            if (activity.IsTaskRoot && activity is IShutdownActivity && Mvx.IoCProvider!=null && activity.IsFinishing)
             {
+                Console.WriteLine("(SLC) Application deactivated");
                 SetState(ApplicationState.Deactivation);
+                if(setupSingleton != null)
+                    Console.WriteLine("(SLC) setupSingleton monitor cancelled");
                 var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
                 startup.ResetStart();
                 setupSingleton?.CancelMonitor(this);
@@ -124,15 +156,19 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         public virtual void OnActivityPaused(Activity activity)
         {
-            //Console.WriteLine($"OnActivityPaused {activity.GetType().Name}");
+            //Console.WriteLine($"(SLC) OnActivityPaused {activity.GetType().Name}");
             resumedActivities.Remove(activity);
+            listener?.OnPause(activity);
+
+            if (activity is IMvxView mvxActivity)
+                mvxActivity.ViewModel?.ViewDisappearing();
         }
 
         public virtual void OnActivityResumed(Activity activity)
         {
             resumedActivities.Add(activity);
 
-            //Console.WriteLine($"OnActivityResumed {activity.GetType().Name} isStartupActivityDisplayed:{isStartupActivityDisplayed} isStartupActivity:{activity is IStartupActivity} startupActivity:{startupActivity?.GetType().Name ?? "-"} top:{Activity?.GetType().Name ?? "-"} startedActivities:{startedActivities}");
+            //Console.WriteLine($"(SLC) OnActivityResumed {activity.GetType().Name} isStartupActivityDisplayed:{isStartupActivityDisplayed} isStartupActivity:{activity is IStartupActivity} startupActivity:{startupActivity?.GetType().Name ?? "-"} top:{Activity?.GetType().Name??"-"} startedActivities:{startedActivities} {startedActivityNames.Aggregate(new StringBuilder(), (sb,s) => sb.Append(s).Append(','))}");
 
             //Note: on restart (tap on app icon), top.Activity = IStartupActivity and startupActivity = null
             var isFirstStart = Activity == null;
@@ -161,11 +197,18 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             {
                 SetState(ApplicationState.Foreground);
             }
+
+            if (activity is IMvxView mvxActivity)
+                mvxActivity.ViewModel?.ViewAppeared();
+
+            listener?.OnResume(activity);
         }
 
         public virtual void OnActivitySaveInstanceState(Activity activity, Bundle outState)
         {
+            //Console.WriteLine($"(SLC) OnActivitySaveInstanceState {activity.GetType().Name}");
             resumedActivities.Remove(activity);
+            listener?.OnSaveInstanceState(activity, outState);
         }
 
         /// <summary>
@@ -173,19 +216,33 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         /// </summary>
         public virtual void OnActivityStarted(Activity activity)
         {
-            Console.WriteLine($"OnActivityStarted {activity.GetType().Name}");
+            Console.WriteLine($"(SLC) OnActivityStarted {activity.GetType().Name}");
             startedActivities++;
+            startedActivityNames.Add(activity.GetType().Name);
+
+            if (activity is IMvxView mvxActivity)
+                mvxActivity.ViewModel?.ViewAppearing();
+
+            listener?.OnStart(activity);
         }
 
         public virtual void OnActivityStopped(Activity activity)
         {
-            Console.WriteLine($"OnActivityStopped {activity.GetType().Name} iStartupActivity:{activity is IStartupActivity} isStartupActivityDisplayed:{isStartupActivityDisplayed}");
+            Console.WriteLine($"(SLC) OnActivityStopped {activity.GetType().Name} iStartupActivity:{activity is IStartupActivity} isStartupActivityDisplayed:{isStartupActivityDisplayed} startedActivities:{startedActivities}");
 
             if (startedActivities == 1 && (!(activity is IStartupActivity) || isStartupActivityDisplayed))
                 SetState(ApplicationState.Background);
 
             if (startedActivities > 0)
+            {
                 startedActivities--;
+                startedActivityNames.RemoveAt(startedActivities);
+            }
+
+            if (activity is IMvxView mvxActivity)
+                mvxActivity.ViewModel?.ViewDisappeared();
+
+            listener?.OnStop(activity);
         }
 
         /// <summary>
@@ -200,15 +257,19 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
         protected virtual object GetAppStartHint(Bundle bundle)
         {
-            //if (bundle != null)
-            //    Console.WriteLine($"AppStartHint: {JsonConvert.SerializeObject(bundle)}");
+            //if(bundle != null)
+            //    Console.WriteLine($"(SLC) AppStartHint: {JsonConvert.SerializeObject(bundle)}");
             return null;
         }
 
         protected virtual async Task RunAppStartAsync(object hint)
         {
             var ioc = Mvx.IoCProvider;
+            ioc.CallbackWhenRegistered<IMvxAndroidActivityLifetimeListener>(() => listener = Mvx.IoCProvider.GetSingleton<IMvxAndroidActivityLifetimeListener>());
+
             var startup = ioc.Resolve<IMvxAppStart>();
+            //Console.WriteLine($"(SLC) RunAppStartAsync isStarted:{startup.IsStarted} isStartupActivityDisplayed:{isStartupActivityDisplayed} startupActivity:{startupActivity?.GetType().Name}");
+
 
             //Non null when the app is launched from a push notification
             if (pushedData != null)
@@ -216,7 +277,8 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
 
             if (startup.IsStarted)
             {
-                Console.WriteLine("Application activated");
+                //App has been reactivated from background (via a notification or a tap on the app's icon)
+                Console.WriteLine("(SLC) Application activated");
 
                 //When app is reactivated, splash screen activity is displayed.
                 //Remove it before triggering Activation state change.
@@ -232,7 +294,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                         activity = Activity;
                         if (i == 100)
                         {
-                            Console.WriteLine($"Error: startup activity {activity.GetType().Name} can not be destroyed.");
+                            Console.WriteLine($"(SLC) Error: startup activity {activity.GetType().Name} can not be destroyed.");
                             return;
                         }
                     }
@@ -245,8 +307,9 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
                 return;
             }
 
-            //App start
-            Console.WriteLine("Application (re) start");
+            //App 1st start
+            Console.WriteLine("(SLC) Application (re) start");
+
             await startup.StartAsync(hint);
         }
 
@@ -257,6 +320,12 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         protected virtual void SetState(ApplicationState applicationState)
         {
             Console.WriteLine($"Application state: {applicationState}");
+        }
+
+        protected virtual void DestroyActivity(IMvxView mvxActivity)
+        {
+            //(mvxActivity.ViewModel as IBackViewModel)?.NonCancellableBackCommand.Execute(null);
+            mvxActivity.ViewModel?.ViewDestroy();
         }
     }
 }
