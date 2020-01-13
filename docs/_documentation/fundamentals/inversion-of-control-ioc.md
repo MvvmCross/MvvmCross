@@ -571,7 +571,7 @@ public class Bar : IBar
     }
 }
 
-// Registered with Mvx.ConstructAndRegisterSingleton<IFooSingleton, FooSingleton>();
+// Registered with Mvx.IoCProvider.LazyConstructAndRegisterSingleton<IFooSingleton, FooSingleton>();
 public class FooSingleton : IFooSingleton
 {
     private readonly IBar _bar;
