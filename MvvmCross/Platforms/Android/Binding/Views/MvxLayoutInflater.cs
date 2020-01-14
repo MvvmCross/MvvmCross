@@ -130,7 +130,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 var currentBindingContext = MvxAndroidBindingContextHelpers.Current();
                 if (currentBindingContext != null)
                 {
-                    factory = FactoryFactory.Create(currentBindingContext.DataContext);
+                    factory = FactoryFactory?.Create(currentBindingContext.DataContext);
 
                     // Set the current factory used to generate bindings
                     if (factory != null)
@@ -171,7 +171,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             if (Debug)
                 MvxLog.Instance.Trace("{Tag} - ... OnCreateView 2 ... {name}", Tag, name);
 
-            View view = AndroidViewFactory.CreateView(null, name, Context, attrs) ??
+            View view = AndroidViewFactory?.CreateView(null, name, Context, attrs) ??
                         PhoneLayoutInflaterOnCreateView(name, attrs) ??
                         base.OnCreateView(name, attrs);
 
@@ -311,7 +311,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 // since we don't resolve those.
                 if (!name.StartsWith("com.android.internal."))
                 {
-                    view = AndroidViewFactory.CreateView(parent, name, viewContext, attrs);
+                    view = AndroidViewFactory?.CreateView(parent, name, viewContext, attrs);
                 }
 
                 if (view == null)
