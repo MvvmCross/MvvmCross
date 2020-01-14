@@ -255,6 +255,8 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 {
                     MvxLayoutInflaterCompat.SetFactory(this, new DelegateFactory2(Factory2, _bindingVisitor));
                 }
+
+                return; // we shouldn't set Factory if Factory2 is being set...
             }
 
             // Check for FactoryWrapper may be too loose
