@@ -363,10 +363,12 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             return view;
         }
 
-        protected IMvxAndroidViewFactory AndroidViewFactory => _androidViewFactory ?? (_androidViewFactory = Mvx.IoCProvider.Resolve<IMvxAndroidViewFactory>());
+        protected IMvxAndroidViewFactory AndroidViewFactory => 
+            _androidViewFactory = _androidViewFactory ?? Mvx.IoCProvider.Resolve<IMvxAndroidViewFactory>();
 
-        protected IMvxLayoutInflaterHolderFactoryFactory FactoryFactory => _layoutInflaterHolderFactoryFactory ??
-                                                                           (_layoutInflaterHolderFactoryFactory = Mvx.IoCProvider.Resolve<IMvxLayoutInflaterHolderFactoryFactory>());
+        protected IMvxLayoutInflaterHolderFactoryFactory FactoryFactory => 
+            _layoutInflaterHolderFactoryFactory = _layoutInflaterHolderFactoryFactory ??
+                Mvx.IoCProvider.Resolve<IMvxLayoutInflaterHolderFactoryFactory>();
 
         private class DelegateFactory2 : IMvxLayoutInflaterFactory
         {
