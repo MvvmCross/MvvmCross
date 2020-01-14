@@ -158,7 +158,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         protected override View OnCreateView(View parent, string name, IAttributeSet attrs)
         {
             if (Debug)
-                MvxLog.Instance.Trace(Tag, "... OnCreateView 3 ... {0}", name);
+                MvxLog.Instance.Trace("{Tag} - ... OnCreateView 3 ... {name}", Tag, name);
 
             return _bindingVisitor.OnViewCreated(
                 base.OnCreateView(parent, name, attrs),
@@ -169,7 +169,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         protected override View OnCreateView(string name, IAttributeSet attrs)
         {
             if (Debug)
-                MvxLog.Instance.Trace(Tag, "... OnCreateView 2 ... {0}", name);
+                MvxLog.Instance.Trace("{Tag} - ... OnCreateView 2 ... {name}", Tag, name);
 
             View view = AndroidViewFactory.CreateView(null, name, Context, attrs) ??
                         PhoneLayoutInflaterOnCreateView(name, attrs) ??
@@ -182,7 +182,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         public override View OnCreateView(Context viewContext, View parent, string name, IAttributeSet attrs)
         {
             if (Debug)
-                MvxLog.Instance.Trace(Tag, "... OnCreateView 4 ... {0}", name);
+                MvxLog.Instance.Trace("{Tag} - ... OnCreateView 4 ... {name}", Tag, name);
 
             return _bindingVisitor.OnViewCreated(
                 base.OnCreateView(viewContext, parent, name, attrs),
@@ -195,7 +195,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         private View PhoneLayoutInflaterOnCreateView(string name, IAttributeSet attrs)
         {
             if (Debug)
-                MvxLog.Instance.Trace(Tag, "... PhoneLayoutInflaterOnCreateView ... {0}", name);
+                MvxLog.Instance.Trace("{Tag} - ... PhoneLayoutInflaterOnCreateView ... {name}", Tag, name);
 
             foreach (var prefix in ClassPrefixList)
             {
@@ -301,7 +301,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             IAttributeSet attrs)
         {
             if (Debug)
-                MvxLog.Instance.Trace(Tag, "... CreateCustomViewInternal ... {0}", name);
+                MvxLog.Instance.Trace("{Tag} - ... CreateCustomViewInternal ... {name}", Tag, name);
 
             if (view == null && name.IndexOf('.') > -1)
             {
@@ -382,7 +382,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
-                    MvxLog.Instance.Trace(Tag, "... OnCreateView ... {0}", name);
+                    MvxLog.Instance.Trace("{Tag} - ... OnCreateView ... {name}", Tag, name);
 
                 return _factoryPlaceholder.OnViewCreated(
                     _factory.OnCreateView(parent, name, context, attrs),
@@ -406,7 +406,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
-                    MvxLog.Instance.Trace(Tag, "... OnCreateView ... {0}", name);
+                    MvxLog.Instance.Trace("{Tag} - ... OnCreateView ... {name}", Tag, name);
 
                 return _factoryPlaceholder.OnViewCreated(
                     _factory.OnCreateView(name, context, attrs),
@@ -438,7 +438,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             public View OnCreateView(string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
-                    MvxLog.Instance.Trace(Tag, "... OnCreateView 2 ... {0}", name);
+                    MvxLog.Instance.Trace("{Tag} - ... OnCreateView 2 ... {name}", Tag, name);
 
                 return _bindingVisitor.OnViewCreated(
                     // The activity's OnCreateView
@@ -449,7 +449,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
-                    MvxLog.Instance.Trace(Tag, "... OnCreateView 3 ... {0}", name);
+                    MvxLog.Instance.Trace("{Tag} - ... OnCreateView 3 ... {name}", Tag, name);
 
                 return _bindingVisitor.OnViewCreated(
                     _inflater.CreateCustomViewInternal(
