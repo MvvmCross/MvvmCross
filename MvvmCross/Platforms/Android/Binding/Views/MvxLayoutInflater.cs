@@ -363,12 +363,49 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             return view;
         }
 
-        protected IMvxAndroidViewFactory AndroidViewFactory => 
-            _androidViewFactory = _androidViewFactory ?? Mvx.IoCProvider.Resolve<IMvxAndroidViewFactory>();
+        protected IMvxAndroidViewFactory AndroidViewFactory 
+        {
+            get
+            {
+                if (_androidViewFactory != null)
+                    return _androidViewFactory;
 
-        protected IMvxLayoutInflaterHolderFactoryFactory FactoryFactory => 
-            _layoutInflaterHolderFactoryFactory = _layoutInflaterHolderFactoryFactory ??
-                Mvx.IoCProvider.Resolve<IMvxLayoutInflaterHolderFactoryFactory>();
+                if (Mvx.IoCProvider == null)
+                {
+                    MvxLog.Instance.Error("{Tag} - ... AndroidViewFactory IoCProvider is null!", Tag);
+                    return null;
+                }
+                
+                if (Mvx.IoCProvider.TryResolve(out IMvxAndroidViewFactory viewFactory))
+                {
+                    _androidViewFactory = viewFactory;
+                }
+
+                return _androidViewFactory;
+            }
+        }
+
+        protected IMvxLayoutInflaterHolderFactoryFactory FactoryFactory
+        {
+            get
+            {
+                if (_layoutInflaterHolderFactoryFactory != null)
+                    return _layoutInflaterHolderFactoryFactory;
+
+                if (Mvx.IoCProvider == null)
+                {
+                    MvxLog.Instance.Error("{Tag} - ... FactoryFactory IoCProvider is null!", Tag);
+                    return null;
+                }
+                
+                if (Mvx.IoCProvider.TryResolve(out IMvxLayoutInflaterHolderFactoryFactory factoryFactory))
+                {
+                    _layoutInflaterHolderFactoryFactory = factoryFactory;
+                }
+
+                return _layoutInflaterHolderFactoryFactory;
+            }
+        }
 
         private class DelegateFactory2 : IMvxLayoutInflaterFactory
         {
