@@ -33,6 +33,7 @@ namespace Playground.Droid
         public void Include(View view)
         {
             view.Click += (s, e) => view.ContentDescription = view.ContentDescription + "";
+            view.LongClick += (s, e) => view.ContentDescription = view.ContentDescription + "";
         }
 
         public void Include(TextView text)
