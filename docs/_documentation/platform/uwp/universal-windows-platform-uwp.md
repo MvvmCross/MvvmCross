@@ -32,7 +32,7 @@ using MvvmCross.IoC;
 
 namespace MvvmCrossDocs.Core
 {
-public class App : MvvmCross.Core.ViewModels.MvxApplication
+public class App : MvvmCross.ViewModels.MvxApplication
 {
     public override void Initialize()
     {
