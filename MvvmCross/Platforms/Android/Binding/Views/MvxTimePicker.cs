@@ -30,6 +30,16 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             : base(context, attrs)
         {
         }
+        
+        public MvxTimePicker(Context context, IAttributeSet attrs, int defStyleAttr) 
+            : base(context, attrs, defStyleAttr)
+        {
+        }
+        
+        public MvxTimePicker(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) 
+            : base(context, attrs, defStyleAttr, defStyleRes)
+        {
+        }
 
         protected MvxTimePicker(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
