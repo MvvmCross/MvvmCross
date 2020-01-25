@@ -7,15 +7,13 @@ using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource;
-using MvvmCross.Droid.Support.V4;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
 {
     [Register("mvvmcross.droid.support.v17.leanback.fragments.MvxDetailsSupportFragment")]
-    public class MvxDetailsSupportFragment
-        : MvxEventSourceDetailsSupportFragment, IMvxFragmentView
+    public class MvxDetailsSupportFragment : MvxEventSourceDetailsSupportFragment, IMvxFragmentView
     {
         /// <summary>
         /// Create new instance of a MvxDetailsSupportFragment
@@ -79,8 +77,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
         public string UniqueImmutableCacheTag => Tag;
     }
 
-    public abstract class MvxDetailsSupportFragment<TViewModel>
-        : MvxDetailsSupportFragment, IMvxFragmentView<TViewModel> 
+    public abstract class MvxDetailsSupportFragment<TViewModel> : MvxDetailsSupportFragment, IMvxFragmentView<TViewModel> 
         where TViewModel : class, IMvxViewModel
     {
         protected MvxDetailsSupportFragment()
@@ -96,6 +93,11 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxFragmentView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxFragmentView<TViewModel>, TViewModel>();
         }
     }
 }

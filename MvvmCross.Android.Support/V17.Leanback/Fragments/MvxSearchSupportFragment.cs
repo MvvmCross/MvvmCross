@@ -7,7 +7,6 @@ using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource;
-using MvvmCross.Droid.Support.V4;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
@@ -79,8 +78,7 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
         public string UniqueImmutableCacheTag => Tag;
     }
 
-    public abstract class MvxSearchSupportFragment<TViewModel>
-        : MvxSearchSupportFragment, IMvxFragmentView<TViewModel> 
+    public abstract class MvxSearchSupportFragment<TViewModel> : MvxSearchSupportFragment, IMvxFragmentView<TViewModel> 
         where TViewModel : class, IMvxViewModel
     {
         protected MvxSearchSupportFragment()
@@ -96,6 +94,11 @@ namespace MvvmCross.Droid.Support.V17.Leanback.Fragments
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxFragmentView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxFragmentView<TViewModel>, TViewModel>();
         }
     }
 }

@@ -8,11 +8,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Core;
 using MvvmCross.Droid.Support.V4.EventSource;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.Views;
-using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
@@ -114,14 +112,18 @@ namespace MvvmCross.Droid.Support.V4
         }
     }
 
-    public abstract class MvxFragmentActivity<TViewModel>
-        : MvxFragmentActivity, IMvxAndroidView<TViewModel>
+    public abstract class MvxFragmentActivity<TViewModel> : MvxFragmentActivity, IMvxAndroidView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxAndroidView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxAndroidView<TViewModel>, TViewModel>();
         }
     }
 }

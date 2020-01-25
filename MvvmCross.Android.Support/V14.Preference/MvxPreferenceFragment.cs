@@ -5,7 +5,6 @@
 using System;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Droid.Support.V4;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
@@ -63,8 +62,7 @@ namespace MvvmCross.Droid.Support.V14.Preference
         public string UniqueImmutableCacheTag => Tag;
     }
 
-    public abstract class MvxPreferenceFragment<TViewModel>
-        : MvxPreferenceFragment, IMvxFragmentView<TViewModel>
+    public abstract class MvxPreferenceFragment<TViewModel> : MvxPreferenceFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxPreferenceFragment()
@@ -80,6 +78,11 @@ namespace MvvmCross.Droid.Support.V14.Preference
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxFragmentView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxFragmentView<TViewModel>, TViewModel>();
         }
     }
 }

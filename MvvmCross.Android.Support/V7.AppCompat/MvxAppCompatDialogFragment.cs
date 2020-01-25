@@ -7,7 +7,6 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Droid.Support.V4;
 using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
@@ -120,8 +119,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
     }
 
-    public abstract class MvxAppCompatDialogFragment<TViewModel>
-        : MvxAppCompatDialogFragment, IMvxFragmentView<TViewModel>
+    public abstract class MvxAppCompatDialogFragment<TViewModel> : MvxAppCompatDialogFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxAppCompatDialogFragment()
@@ -137,6 +135,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxFragmentView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxFragmentView<TViewModel>, TViewModel>();
         }
     }
 }

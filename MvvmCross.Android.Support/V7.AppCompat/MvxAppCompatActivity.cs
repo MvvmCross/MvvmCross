@@ -126,8 +126,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
     }
 
-    public abstract class MvxAppCompatActivity<TViewModel>
-        : MvxAppCompatActivity, IMvxAndroidView<TViewModel>
+    public abstract class MvxAppCompatActivity<TViewModel> : MvxAppCompatActivity, IMvxAndroidView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxAppCompatActivity(IntPtr ptr, JniHandleOwnership ownership)
@@ -143,6 +142,11 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxAndroidView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxAndroidView<TViewModel>, TViewModel>();
         }
     }
 }

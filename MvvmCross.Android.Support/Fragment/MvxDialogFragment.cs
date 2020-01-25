@@ -119,8 +119,7 @@ namespace MvvmCross.Droid.Support.V4
         }
     }
 
-    public abstract class MvxDialogFragment<TViewModel>
-        : MvxDialogFragment, IMvxFragmentView<TViewModel>
+    public abstract class MvxDialogFragment<TViewModel> : MvxDialogFragment, IMvxFragmentView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
         protected MvxDialogFragment()
@@ -135,6 +134,11 @@ namespace MvvmCross.Droid.Support.V4
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxFragmentView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxFragmentView<TViewModel>, TViewModel>();
         }
     }
 }
