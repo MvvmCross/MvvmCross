@@ -101,8 +101,8 @@ namespace MvvmCross.Platforms.Tvos.Views
         }
     }
 
-    public class MvxViewController<TViewModel>
-        : MvxViewController, IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
+    public class MvxViewController<TViewModel> : MvxViewController, IMvxTvosView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         public MvxViewController()
         {
@@ -128,6 +128,11 @@ namespace MvvmCross.Platforms.Tvos.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxTvosView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxTvosView<TViewModel>, TViewModel>();
         }
     }
 }

@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-
 using MvvmCross.Binding.BindingContext;
 using Foundation;
 using MvvmCross.Platforms.Tvos.Views.Base;
@@ -134,6 +133,11 @@ namespace MvvmCross.Platforms.Tvos.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxTvosView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxTvosView<TViewModel>, TViewModel>();
         }
     }
 }
