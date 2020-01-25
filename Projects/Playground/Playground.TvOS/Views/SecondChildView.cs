@@ -1,6 +1,5 @@
 ﻿using System;
 using MvvmCross;
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Tvos.Presenters;
 using MvvmCross.Platforms.Tvos.Presenters.Attributes;
 using MvvmCross.Platforms.Tvos.Views;
@@ -21,7 +20,7 @@ namespace Playground.TvOS
         {
             base.ViewDidLoad();
 
-            var set = this.CreateBindingSet<SecondChildView, SecondChildViewModel>();
+            var set = CreateBindingSet();
             set.Bind(btnClose).To(vm => vm.CloseCommand);
             set.Apply();
         }
