@@ -1,5 +1,4 @@
 ﻿using System;
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using Playground.Core.ViewModels;
@@ -21,7 +20,7 @@ namespace Playground.iOS.Views
 
             View.BackgroundColor = UIColor.LightGray;
 
-            using (var set = this.CreateBindingSet<RootView, RootViewModel>())
+            using (var set = CreateBindingSet())
             {
                 set.Bind(btnTabs).To(vm => vm.ShowTabsCommand);
                 set.Bind(btnPages).To(vm => vm.ShowPagesCommand);

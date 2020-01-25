@@ -49,7 +49,7 @@ namespace Playground.iOS.Views
             _tableView.TopAnchor.ConstraintEqualTo(View.SafeAreaLayoutGuide.TopAnchor).Active = true;
             _tableView.BottomAnchor.ConstraintEqualTo(View.SafeAreaLayoutGuide.BottomAnchor).Active = true;
 
-            var set = this.CreateBindingSet<Page1View, Page1ViewModel>();
+            var set = CreateBindingSet();
             set.Bind(_source).To(vm => vm.Sections);
             set.Bind(_source).For(v => v.HeaderTappedCommand).To(vm => vm.HeaderTappedCommand);
             set.Apply();

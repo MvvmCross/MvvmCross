@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using ObjCRuntime;
@@ -43,7 +42,7 @@ namespace Playground.iOS.Views
             var textField = new UITextField(new RectangleF(10, 190, 300, 40));
             Add(textField);
 
-            var set = this.CreateBindingSet<CustomBindingView, CustomBindingViewModel>();
+            var set = CreateBindingSet();
             set.Bind(binaryEdit).For("MyCount").To(vm => vm.Counter);
             set.Bind(textField).To(vm => vm.Counter);
             set.Bind(_datePicker).For(v => v.Date).To(vm => vm.Date);

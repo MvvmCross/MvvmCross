@@ -1,5 +1,4 @@
 ﻿using System;
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Views;
 using UIKit;
 using Playground.Core.ViewModels;
@@ -21,11 +20,9 @@ namespace Playground.iOS.Views
 
             View.BackgroundColor = UIColor.Orange;
 
-            var set = this.CreateBindingSet<NestedModalView, NestedModalViewModel>();
-
+            var set = CreateBindingSet();
             set.Bind(btnTabs).To(vm => vm.ShowTabsCommand);
             set.Bind(btnClose).To(vm => vm.CloseCommand);
-
             set.Apply();
         }
     }
