@@ -46,7 +46,7 @@ namespace Playground.Droid.Fragments
             _outputText = view.FindViewById<TextView>(Resource.Id.outputText);
             var toggleButton = view.FindViewById<Button>(Resource.Id.toggleBtn);
 
-            var bindingSet = this.CreateBindingSet<FluentBindingView, FluentBindingViewModel>();
+            var bindingSet = CreateBindingSet();
             bindingSet.Bind(toggleButton).For(v => v.BindClick()).To(vm => vm.ClearBindingsCommand);
             bindingSet.Apply();
 
@@ -57,7 +57,7 @@ namespace Playground.Droid.Fragments
 
         void BindTextInput()
         {
-            var bindingSet = this.CreateBindingSet<FluentBindingView, FluentBindingViewModel>();
+            var bindingSet = CreateBindingSet();
             bindingSet.Bind(_inputText).For(v => v.Text).To(vm => vm.TextValue);
             bindingSet.Bind(_outputText).For(v => v.Text).To(vm => vm.TextValue);
             bindingSet.Bind(this).For(v => v.ClearBindingInteraction).To(vm => vm.ClearBindingInteraction);

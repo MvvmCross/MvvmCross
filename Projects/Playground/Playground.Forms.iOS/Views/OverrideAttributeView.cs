@@ -37,11 +37,9 @@ namespace Playground.iOS.Forms.Views
 
             View.BackgroundColor = UIColor.Cyan;
 
-            var set = this.CreateBindingSet<OverrideAttributeView, OverrideAttributeViewModel>();
-
+            var set = this.CreateBindingSet();
             set.Bind(btnTabs).To(vm => vm.ShowTabsCommand);
             set.Bind(btnClose).To(vm => vm.CloseCommand);
-
             set.Apply();
         }
     }
