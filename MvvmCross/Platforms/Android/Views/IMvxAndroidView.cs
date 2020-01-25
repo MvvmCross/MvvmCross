@@ -25,4 +25,3 @@ namespace MvvmCross.Platforms.Android.Views
         MvxFluentBindingDescriptionSet<IMvxAndroidView<TViewModel>, TViewModel> CreateBindingSet();
     }
 }
-}

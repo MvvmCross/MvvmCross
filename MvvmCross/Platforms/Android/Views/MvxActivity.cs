@@ -147,14 +147,18 @@ namespace MvvmCross.Platforms.Android.Views
         }
     }
 
-    public abstract class MvxActivity<TViewModel>
-        : MvxActivity
-        , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+    public abstract class MvxActivity<TViewModel> : MvxActivity, IMvxAndroidView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxAndroidView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxAndroidView<TViewModel>, TViewModel>();
         }
     }
 }
