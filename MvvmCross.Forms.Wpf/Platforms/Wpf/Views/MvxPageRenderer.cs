@@ -63,5 +63,10 @@ namespace MvvmCross.Forms.Platforms.Wpf.Views
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
         }
+
+        protected MvxFluentBindingDescriptionSet<MvxPageRenderer<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<MvxPageRenderer<TViewModel>, TViewModel>();
+        }
     }
 }
