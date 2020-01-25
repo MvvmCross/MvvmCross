@@ -1,5 +1,4 @@
 ﻿using System;
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Mac.Presenters.Attributes;
 using MvvmCross.Platforms.Mac.Views;
 using Playground.Core.ViewModels;
@@ -16,7 +15,7 @@ namespace Playground.Mac
         }
 
         public TabsRootView()
-        {            
+        {
         }
 
         public override void LoadView()
@@ -46,7 +45,7 @@ namespace Playground.Mac
         {
             base.ViewDidAppear();
 
-            var set = this.CreateBindingSet<TabsRootView, TabsRootViewModel>();
+            var set = CreateBindingSet();
             set.Bind(this).For(v => v.SelectedTabViewItemIndex).To(vm => vm.ItemIndex);
             set.Apply();
         }
