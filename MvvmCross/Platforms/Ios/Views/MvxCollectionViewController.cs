@@ -104,8 +104,8 @@ namespace MvvmCross.Platforms.Ios.Views
         }
     }
 
-    public class MvxCollectionViewController<TViewModel>
-        : MvxCollectionViewController, IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
+    public class MvxCollectionViewController<TViewModel> : MvxCollectionViewController, IMvxIosView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         public MvxCollectionViewController()
         {
@@ -135,6 +135,11 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxIosView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxIosView<TViewModel>, TViewModel>();
         }
     }
 }
