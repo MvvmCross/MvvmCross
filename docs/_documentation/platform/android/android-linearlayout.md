@@ -102,7 +102,7 @@ public class RepeatButtonView : MvxActivity<RepeatButtonViewModel>
 {
     protected override void OnCreate(Bundle b)
     {
-        base.OnCreat(b);
+        base.OnCreate(b);
 
         SetContentView(Resource.Layout.activity_repeatbutton);
     }

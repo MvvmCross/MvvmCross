@@ -8,15 +8,15 @@ MvvmCross tries to align Forms as much as possible with the native Xamarin featu
 
 # Startup
 
-You need to inherit the Forms variant of the startup point for the platform. For example: `MvxFormsAppdelegate`.
+You need to inherit the Forms variant of the startup point for the platform. For example: `MvxFormsApplicationDelegate`.
 
 # Setup
 
-Use the Forms specific Setup for each platform, and we will load up the neccesary bases. You can do this by extending from example `MvxFormsAndroidSetup`.
+Use the Forms specific Setup for each platform, and we will load up the necessary bases. You can do this by extending from example `MvxFormsAndroidSetup`.
 
 # Presenters
 
-On Forms every platform has it's own presenter that inherits from the native platform presenter. This enables us to navigate between native and Xamarin.Forms views. On top of that we have the `MvxFormsPagePresenter` which handles all the comon logic for Forms related navigation.
+On Forms every platform has it's own presenter that inherits from the native platform presenter. This enables us to navigate between native and Xamarin.Forms views. On top of that we have the `MvxFormsPagePresenter` which handles all the common logic for Forms related navigation.
 
 For more information about the Forms presenter see: [Xamarin.Forms view presenter](xamarin-forms-view-presenter.html)
 

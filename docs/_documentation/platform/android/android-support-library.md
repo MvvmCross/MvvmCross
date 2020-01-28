@@ -8,7 +8,7 @@ If your app will target the Android platform, you will probably want to make use
 
 If you don't really know what Android Support packages are about, we recommend that you read the [official documentation](https://developer.android.com/topic/libraries/support-library/).
 
-When using MvvmCross, all you need to do is to install the MvvmCros support packages. And then you will have access to the "app compat" objects / widgets, like:
+When using MvvmCross, all you need to do is to install the MvvmCross support packages. And then you will have access to the "app compat" objects / widgets, like:
 - AppCompatActivity -> MvxAppCompatActivity
 - Fragment -> MvxFragment
 
