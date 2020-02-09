@@ -5,7 +5,7 @@
 using System;
 using MvvmCross.Binding.BindingContext;
 
-namespace MvvmCross.Droid.Support.V7.RecyclerView
+namespace MvvmCross.AndroidXSupport.RecyclerView
 {
     public interface IMvxRecyclerViewHolder : IMvxBindingContextOwner
     {

@@ -7,13 +7,13 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Droid.Support.V4.EventSource;
+using MvvmCross.AndroidXSupport.Fragments.EventSource;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
-namespace MvvmCross.Droid.Support.V4
+namespace MvvmCross.AndroidX.Fragments
 {
-    [Register("mvvmcross.droid.support.v4.MvxDialogFragment")]
+    [Register("mvvmcross.androidx.fragments.MvxDialogFragment")]
     public abstract class MvxDialogFragment
         : MvxEventSourceDialogFragment, IMvxFragmentView
     {

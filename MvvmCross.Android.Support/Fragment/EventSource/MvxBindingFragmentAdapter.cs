@@ -4,7 +4,8 @@
 
 using System;
 using Android.OS;
-using Android.Support.V4.App;
+using AndroidX.Fragment.App;
+using MvvmCross.AndroidX.Fragments;
 using MvvmCross.Base;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Core;
@@ -12,7 +13,7 @@ using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
-namespace MvvmCross.Droid.Support.V4.EventSource
+namespace MvvmCross.AndroidXSupport.Fragments.EventSource
 {
     public class MvxBindingFragmentAdapter
         : MvxBaseFragmentAdapter

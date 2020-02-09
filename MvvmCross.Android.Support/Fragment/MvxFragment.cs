@@ -6,13 +6,13 @@ using System;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Droid.Support.V4.EventSource;
+using MvvmCross.AndroidXSupport.Fragments.EventSource;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
-namespace MvvmCross.Droid.Support.V4
+namespace MvvmCross.AndroidX.Fragments
 {
-    [Register("mvvmcross.droid.support.v4.MvxFragment")]
+    [Register("mvvmcross.androidx.fragments.MvxFragment")]
     public class MvxFragment
         : MvxEventSourceFragment, IMvxFragmentView
     {
@@ -32,7 +32,7 @@ namespace MvvmCross.Droid.Support.V4
 
         protected MvxFragment()
         {
-            V4.MvxFragmentExtensions.AddEventListeners(this);
+            MvxFragmentExtensions.AddEventListeners(this);
         }
 
         protected MvxFragment(IntPtr javaReference, JniHandleOwnership transfer)

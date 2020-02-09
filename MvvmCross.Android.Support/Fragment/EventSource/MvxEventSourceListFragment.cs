@@ -6,12 +6,12 @@ using System;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.V4.App;
+using AndroidX.Fragment.App;
 using Android.Views;
 using MvvmCross.Base;
 using MvvmCross.Platforms.Android.Views;
 
-namespace MvvmCross.Droid.Support.V4.EventSource
+namespace MvvmCross.AndroidXSupport.Fragments.EventSource
 {
     public class MvxEventSourceListFragment
         : ListFragment, IMvxEventSourceFragment

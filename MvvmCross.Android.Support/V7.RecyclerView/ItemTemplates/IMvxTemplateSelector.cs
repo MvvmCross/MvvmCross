@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-namespace MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates
+namespace MvvmCross.AndroidXSupport.RecyclerView.ItemTemplates
 {
     public interface IMvxTemplateSelector
     {

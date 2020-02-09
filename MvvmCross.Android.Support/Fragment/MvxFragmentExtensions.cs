@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.Support.V4.App;
+using AndroidX.Fragment.App;
 using Android.Views;
 using MvvmCross.Core;
-using MvvmCross.Droid.Support.V4.EventSource;
+using MvvmCross.AndroidXSupport.Fragments.EventSource;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
@@ -14,7 +14,7 @@ using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
-namespace MvvmCross.Droid.Support.V4
+namespace MvvmCross.AndroidX.Fragments
 {
     public static class MvxFragmentExtensions
     {

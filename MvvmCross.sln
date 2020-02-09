@@ -18,11 +18,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{77C7235F-1977-426F-86E8-77A29B5DF68F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Android.Support", "Android.Support", "{39679555-D062-48EB-8BED-FD52AA3046B6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AndroidX", "AndroidX", "{39679555-D062-48EB-8BED-FD52AA3046B6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzers", "Analyzers", "{8B503F48-F6C2-4D5E-9F39-83059EC92470}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.Core.UI", "MvvmCross.Android.Support\Core.UI\MvvmCross.Droid.Support.Core.UI.csproj", "{61A45F4D-7D56-4A5D-8D07-004E8C913FA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.AndroidXSupport.SwipeRefreshLayout", "MvvmCross.Android.Support\Core.UI\MvvmCross.AndroidXSupport.SwipeRefreshLayout.csproj", "{61A45F4D-7D56-4A5D-8D07-004E8C913FA9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.Design", "MvvmCross.Android.Support\Design\MvvmCross.Droid.Support.Design.csproj", "{45F63A4A-9A37-4929-9C80-48A91F346E0D}"
 EndProject
@@ -32,7 +32,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.V7.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.V7.Preference", "MvvmCross.Android.Support\V7.Preference\MvvmCross.Droid.Support.V7.Preference.csproj", "{91CDD4C3-DB1A-46EE-97FC-91749A48395F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.V7.RecyclerView", "MvvmCross.Android.Support\V7.RecyclerView\MvvmCross.Droid.Support.V7.RecyclerView.csproj", "{6F49CFE7-3FCB-463D-85DC-1798E2BE771E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.AndroidXSupport.RecyclerView", "MvvmCross.Android.Support\V7.RecyclerView\MvvmCross.AndroidXSupport.RecyclerView.csproj", "{6F49CFE7-3FCB-463D-85DC-1798E2BE771E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.V14.Preference", "MvvmCross.Android.Support\V14.Preference\MvvmCross.Droid.Support.V14.Preference.csproj", "{8B87A9A7-6D30-4894-BE53-915E522F7736}"
 EndProject

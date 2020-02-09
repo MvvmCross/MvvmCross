@@ -6,13 +6,12 @@ using System;
 using System.Windows.Input;
 using Android.Content;
 using Android.Runtime;
-using Android.Support.V4.Widget;
 using Android.Util;
 
-namespace MvvmCross.Droid.Support.V4 
+namespace MvvmCross.AndroidXSupport 
 {
-    [Register("mvvmcross.droid.support.v4.MvxSwipeRefreshLayout")]
-    public class MvxSwipeRefreshLayout : SwipeRefreshLayout 
+    [Register("mvvmcross.androidxsupport.MvxSwipeRefreshLayout")]
+    public class MvxSwipeRefreshLayout : AndroidX.SwipeRefreshLayout.Widget.SwipeRefreshLayout 
     {
         protected MvxSwipeRefreshLayout(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)

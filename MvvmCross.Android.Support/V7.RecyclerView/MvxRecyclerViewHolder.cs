@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Windows.Input;
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Base;
@@ -11,11 +10,11 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.WeakSubscription;
 
-namespace MvvmCross.Droid.Support.V7.RecyclerView
+namespace MvvmCross.AndroidXSupport.RecyclerView
 {
-    [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerViewHolder")]
+    [Register("mvvmcross.androidxsupport.recyclerview.MvxRecyclerViewHolder")]
     public class MvxRecyclerViewHolder 
-        : Android.Support.V7.Widget.RecyclerView.ViewHolder, IMvxRecyclerViewHolder
+        : AndroidX.RecyclerView.Widget.RecyclerView.ViewHolder, IMvxRecyclerViewHolder
     {
         private IMvxBindingContext _bindingContext;
         private IDisposable clickSubscription, longClickSubscription;

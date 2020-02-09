@@ -7,12 +7,12 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.V4.App;
+using AndroidX.Fragment.App;
 using MvvmCross.Base;
 using MvvmCross.Platforms.Android.Views.Base;
 using MvvmCross.ViewModels;
 
-namespace MvvmCross.Droid.Support.V4.EventSource
+namespace MvvmCross.AndroidXSupport.Fragments.EventSource
 {
     public abstract class MvxEventSourceFragmentActivity
         : FragmentActivity, IMvxEventSourceActivity

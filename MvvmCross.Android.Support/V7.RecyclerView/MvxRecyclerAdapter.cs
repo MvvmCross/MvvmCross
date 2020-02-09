@@ -13,18 +13,18 @@ using Android.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Extensions;
-using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
-using MvvmCross.Droid.Support.V7.RecyclerView.Model;
+using MvvmCross.AndroidXSupport.RecyclerView.ItemTemplates;
+using MvvmCross.AndroidXSupport.RecyclerView.Model;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.WeakSubscription;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Droid.Support.V7.RecyclerView
+namespace MvvmCross.AndroidXSupport.RecyclerView
 {
-    [Register("mvvmcross.droid.support.v7.recyclerview.MvxRecyclerAdapter")]
+    [Register("mvvmcross.androidxsupport.recyclerview.MvxRecyclerAdapter")]
     public class MvxRecyclerAdapter
-        : Android.Support.V7.Widget.RecyclerView.Adapter, IMvxRecyclerAdapter, IMvxRecyclerAdapterBindableHolder
+        : AndroidX.RecyclerView.Widget.RecyclerView.Adapter, IMvxRecyclerAdapter, IMvxRecyclerAdapterBindableHolder
     {
         private ICommand _itemClick, _itemLongClick;
         private IEnumerable _itemsSource;
@@ -128,7 +128,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             return viewType;
         }
 
-        public override Android.Support.V7.Widget.RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
+        public override AndroidX.RecyclerView.Widget.RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
             var itemBindingContext = new MvxAndroidBindingContext(parent.Context, BindingContext.LayoutInflaterHolder);
 
@@ -145,7 +145,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             return bindingContext.BindingInflate(viewType, parent, false);
         }
 
-        public override void OnBindViewHolder(Android.Support.V7.Widget.RecyclerView.ViewHolder holder, int position)
+        public override void OnBindViewHolder(AndroidX.RecyclerView.Widget.RecyclerView.ViewHolder holder, int position)
         {
             var dataContext = GetItem(position);
             var viewHolder = (IMvxRecyclerViewHolder)holder;
@@ -170,7 +170,7 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
             viewHolder.OnViewRecycled();
         }
 
-        public override void OnDetachedFromRecyclerView(Android.Support.V7.Widget.RecyclerView recyclerView)
+        public override void OnDetachedFromRecyclerView(AndroidX.RecyclerView.Widget.RecyclerView recyclerView)
         {
             base.OnDetachedFromRecyclerView(recyclerView);
             Clean(false);

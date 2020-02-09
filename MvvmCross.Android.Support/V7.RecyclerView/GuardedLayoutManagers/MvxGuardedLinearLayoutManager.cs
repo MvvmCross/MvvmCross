@@ -5,13 +5,13 @@
 using System;
 using Android.Content;
 using Android.Runtime;
-using Android.Support.V7.Widget;
+using AndroidX.RecyclerView.Widget;
 using Java.Lang;
 using MvvmCross.Logging;
 
-namespace MvvmCross.Droid.Support.V7.RecyclerView
+namespace MvvmCross.AndroidXSupport.RecyclerView
 {
-    [Register("mvvmcross.droid.support.v7.recyclerview.MvxGuardedLinearLayoutManager")]
+    [Register("mvvmcross.androidxsupport.recyclerview.MvxGuardedLinearLayoutManager")]
     public class MvxGuardedLinearLayoutManager : LinearLayoutManager
     {
         public MvxGuardedLinearLayoutManager(Context context) : base(context)
@@ -32,8 +32,8 @@ namespace MvvmCross.Droid.Support.V7.RecyclerView
         /// <summary>
         /// This should not be needed anymore, as it should be caused by SupportsPredictiveItemAnimations
         /// </summary>
-        public override void OnLayoutChildren(Android.Support.V7.Widget.RecyclerView.Recycler recycler,
-            Android.Support.V7.Widget.RecyclerView.State state)
+        public override void OnLayoutChildren(AndroidX.RecyclerView.Widget.RecyclerView.Recycler recycler,
+            AndroidX.RecyclerView.Widget.RecyclerView.State state)
         {
             try
             {

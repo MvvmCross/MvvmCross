@@ -8,16 +8,16 @@ using System.Linq;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.V4.App;
+using AndroidX.Fragment.App;
 using Java.Lang;
 using MvvmCross.Platforms.Android.Presenters;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 using JavaString = Java.Lang.String;
 
-namespace MvvmCross.Droid.Support.V4
+namespace MvvmCross.AndroidX.Fragments
 {
-    [Register("mvvmcross.droid.support.v4.MvxFragmentStatePagerAdapter")]
+    [Register("mvvmcross.androidx.fragments.MvxFragmentStatePagerAdapter")]
     public class MvxFragmentStatePagerAdapter : FragmentStatePagerAdapter
     {
         private readonly Context _context;

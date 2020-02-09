@@ -22,7 +22,7 @@ This package contains Support v17 Leanback support for MvvmCross.</Description>
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\Fragment\MvvmCross.Droid.Support.Fragment.csproj" />
-    <ProjectReference Include="..\V7.RecyclerView\MvvmCross.Droid.Support.V7.RecyclerView.csproj" />
+    <ProjectReference Include="..\V7.RecyclerView\MvvmCross.AndroidXSupport.RecyclerView.csproj" />
   </ItemGroup>
 
   <Import Project="..\..\XamarinBuild.targets" />
