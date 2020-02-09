@@ -121,8 +121,10 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\CustomBindingView.axml" />
     <AndroidResource Include="Resources\layout\location.axml">
-      <SubType></SubType>
-      <Generator></Generator>
+      <SubType>
+      </SubType>
+      <Generator>
+      </Generator>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
@@ -158,21 +160,21 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\MvvmCross.Android.Support\Design\MvvmCross.Droid.Support.Design.csproj">
+    <ProjectReference Include="..\..\..\MvvmCross.Android.Support\Design\MvvmCross.AndroidXSupport.Material.csproj">
       <Project>{45f63a4a-9a37-4929-9c80-48a91f346e0d}</Project>
-      <Name>MvvmCross.Droid.Support.Design</Name>
+      <Name>MvvmCross.AndroidXSupport.Material</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross.Android.Support\Fragment\MvvmCross.Droid.Support.Fragment.csproj">
+    <ProjectReference Include="..\..\..\MvvmCross.Android.Support\Fragment\MvvmCross.AndroidXSupport.Fragment.csproj">
       <Project>{fc0b3e3c-8b00-48fa-af93-981a45b2be4b}</Project>
-      <Name>MvvmCross.Droid.Support.Fragment</Name>
+      <Name>MvvmCross.AndroidXSupport.Fragment</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross.Android.Support\V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj">
       <Project>{fd67cbbc-4bac-40d6-9f4c-28aae6c8533e}</Project>
       <Name>MvvmCross.Droid.Support.V7.AppCompat</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross.Android.Support\V7.RecyclerView\MvvmCross.Droid.Support.V7.RecyclerView.csproj">
+    <ProjectReference Include="..\..\..\MvvmCross.Android.Support\V7.RecyclerView\MvvmCross.AndroidXSupport.RecyclerView.csproj">
       <Project>{6f49cfe7-3fcb-463d-85dc-1798e2be771e}</Project>
-      <Name>MvvmCross.Droid.Support.V7.RecyclerView</Name>
+      <Name>MvvmCross.AndroidXSupport.RecyclerView</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross.Plugins\Color\MvvmCross.Plugin.Color.csproj">
       <Project>{6fcbe659-3b43-4a42-932d-d9a2a7f439d3}</Project>

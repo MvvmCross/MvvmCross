@@ -7,7 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Example.Core.ViewModels;
 using MvvmCross.Droid.Views.Attributes;
-using MvvmCross.Droid.Support.V4;
+using MvvmCross.AndroidX.Fragments;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Platform.WeakSubscription;
 

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
-using Android.Support.V4.App;
+using AndroidX.Fragment.App;
 using Android.Support.V7.App;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
