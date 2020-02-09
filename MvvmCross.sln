@@ -24,9 +24,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzers", "Analyzers", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.AndroidXSupport.SwipeRefreshLayout", "MvvmCross.Android.Support\Core.UI\MvvmCross.AndroidXSupport.SwipeRefreshLayout.csproj", "{61A45F4D-7D56-4A5D-8D07-004E8C913FA9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.Design", "MvvmCross.Android.Support\Design\MvvmCross.Droid.Support.Design.csproj", "{45F63A4A-9A37-4929-9C80-48A91F346E0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.AndroidXSupport.Material", "MvvmCross.Android.Support\Design\MvvmCross.AndroidXSupport.Material.csproj", "{45F63A4A-9A37-4929-9C80-48A91F346E0D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.Fragment", "MvvmCross.Android.Support\Fragment\MvvmCross.Droid.Support.Fragment.csproj", "{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.AndroidXSupport.Fragment", "MvvmCross.Android.Support\Fragment\MvvmCross.AndroidXSupport.Fragment.csproj", "{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Droid.Support.V7.AppCompat", "MvvmCross.Android.Support\V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj", "{FD67CBBC-4BAC-40D6-9F4C-28AAE6C8533E}"
 EndProject
