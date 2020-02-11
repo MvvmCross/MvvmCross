@@ -80,19 +80,10 @@
   <ItemGroup Condition=" $(TargetFramework.StartsWith('monoandroid')) ">
     <Compile Include="Platforms\Android\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Android.Support.Compat" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Android.Support.Annotations" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Android.Support.Core.UI" Version="28.0.0.3" />
-    <PackageReference Include="Xamarin.Android.Support.Collections" Version="28.0.0.3" />
-    <ProjectReference Include="..\MvvmCross.Android.Support\V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj" />
-    <ProjectReference Include="..\MvvmCross.Android.Support\Fragment\MvvmCross.Droid.Support.Fragment.csproj" />
-    <ProjectReference Include="..\MvvmCross.Android.Support\Core.UI\MvvmCross.Droid.Support.Core.UI.csproj" />
-    <ProjectReference Include="..\MvvmCross.Android.Support\Design\MvvmCross.Droid.Support.Design.csproj" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.1.0-rc3" />
+    <PackageReference Include="Xamarin.AndroidX.CardView" Version="1.0.0-rc3" />
+    <ProjectReference Include="..\MvvmCross.Android.Support\V7.AppCompat\MvvmCross.DroidX.AppCompat.csproj" />
+    <ProjectReference Include="..\MvvmCross.Android.Support\Fragment\MvvmCross.DroidX.Fragment.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">
