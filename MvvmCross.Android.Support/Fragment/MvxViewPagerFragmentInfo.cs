@@ -6,7 +6,7 @@ using System;
 using AndroidX.Fragment.App;
 using MvvmCross.ViewModels;
 
-namespace MvvmCross.AndroidX.Fragments
+namespace MvvmCross.DroidX.Fragments
 {
     public class MvxViewPagerFragmentInfo
     {

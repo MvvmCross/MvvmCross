@@ -6,8 +6,8 @@ using System;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.Design.Widget;
 using Android.Views;
+using Google.Android.Material.BottomSheet;
 using MvvmCross.Base;
 using MvvmCross.Platforms.Android.Views;
 

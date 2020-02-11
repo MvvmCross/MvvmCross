@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using Android.OS;
-using Android.Support.V7.Widget;
+using AndroidX.AppCompat.Widget;
 using Android.Views;
 using Android.Widget;
-using MvvmCross.AndroidX.Fragments;
+using MvvmCross.DroidX.Fragments;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;

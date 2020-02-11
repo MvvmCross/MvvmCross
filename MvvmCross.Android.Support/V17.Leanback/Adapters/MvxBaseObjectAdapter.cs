@@ -6,13 +6,13 @@ using System;
 using System.Collections;
 using System.Collections.Specialized;
 using Android.Runtime;
-using Android.Support.V17.Leanback.Widget;
+using AndroidX.Leanback.Widget;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.WeakSubscription;
 
-namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
+namespace MvvmCross.DroidX.Leanback.Adapters
 {
     public abstract class MvxBaseObjectAdapter 
         : ObjectAdapter, IMvxObjectAdapter

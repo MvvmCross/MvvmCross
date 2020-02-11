@@ -13,16 +13,16 @@ using Android.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.Extensions;
-using MvvmCross.AndroidXSupport.RecyclerView.ItemTemplates;
-using MvvmCross.AndroidXSupport.RecyclerView.Model;
+using MvvmCross.DroidX.RecyclerView.ItemTemplates;
+using MvvmCross.DroidX.RecyclerView.Model;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.WeakSubscription;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.AndroidXSupport.RecyclerView
+namespace MvvmCross.DroidX.RecyclerView
 {
-    [Register("mvvmcross.androidxsupport.recyclerview.MvxRecyclerAdapter")]
+    [Register("mvvmcross.DroidX.recyclerview.MvxRecyclerAdapter")]
     public class MvxRecyclerAdapter
         : AndroidX.RecyclerView.Widget.RecyclerView.Adapter, IMvxRecyclerAdapter, IMvxRecyclerAdapterBindableHolder
     {

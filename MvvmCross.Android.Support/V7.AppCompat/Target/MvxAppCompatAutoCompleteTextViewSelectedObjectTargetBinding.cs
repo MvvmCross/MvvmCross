@@ -5,11 +5,11 @@
 using System;
 using System.Reflection;
 using MvvmCross.Binding;
-using MvvmCross.Droid.Support.V7.AppCompat.Widget;
+using MvvmCross.DroidX.AppCompat.Widget;
 using MvvmCross.Platforms.Android.WeakSubscription;
 using MvvmCross.Platforms.Android.Binding.Target;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat.Target
+namespace MvvmCross.DroidX.AppCompat.Target
 {
     public class MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding
         : MvxAndroidPropertyInfoTargetBinding<MvxAppCompatAutoCompleteTextView>

@@ -7,12 +7,11 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.V7.App;
+using AndroidX.AppCompat.App;
 using MvvmCross.Base;
 using MvvmCross.Platforms.Android.Views.Base;
-using MvvmCross.ViewModels;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat.EventSource
+namespace MvvmCross.DroidX.AppCompat.EventSource
 {
     public abstract class MvxEventSourceAppCompatActivity
         : AppCompatActivity, IMvxEventSourceActivity

@@ -18,9 +18,9 @@ using MvvmCross.ViewModels;
 using JavaObject = Java.Lang.Object;
 using JavaString = Java.Lang.String;
 
-namespace MvvmCross.AndroidX.Fragments
+namespace MvvmCross.DroidX.Fragments
 {
-    [Register("mvvmcross.androidx.fragments.MvxCachingFragmentStatePagerAdapter")]
+    [Register("mvvmcross.droidx.fragments.MvxCachingFragmentStatePagerAdapter")]
     public class MvxCachingFragmentStatePagerAdapter : MvxCachingFragmentPagerAdapter
     {
         private readonly Context _context;

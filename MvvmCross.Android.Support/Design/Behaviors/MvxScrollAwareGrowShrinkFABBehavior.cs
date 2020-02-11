@@ -5,10 +5,11 @@
 using System;
 using Android.Content;
 using Android.Runtime;
-using Android.Support.Design.Widget;
-using Android.Support.V4.View;
 using Android.Util;
 using Android.Views;
+using AndroidX.CoordinatorLayout.Widget;
+using AndroidX.Core.View;
+using Google.Android.Material.FloatingActionButton;
 using Object = Java.Lang.Object;
 
 namespace MvvmCross.Droid.Support.Design.Behaviors

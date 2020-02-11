@@ -8,7 +8,7 @@ using MvvmCross.Core;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat
+namespace MvvmCross.DroidX.AppCompat
 {
     public abstract class MvxAppCompatApplication<TMvxAndroidSetup, TApplication> : MvxAndroidApplication
   where TMvxAndroidSetup : MvxAppCompatSetup<TApplication>, new()

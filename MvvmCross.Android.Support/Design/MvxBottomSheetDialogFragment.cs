@@ -9,10 +9,9 @@ using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Droid.Support.Design.EventSource;
 using MvvmCross.Platforms.Android.Views;
-using MvvmCross.Platforms.Android.Views.Fragments;
 using MvvmCross.ViewModels;
 
-namespace MvvmCross.AndroidXSupport.Material
+namespace MvvmCross.DroidX.Material
 {
     [Register("mvvmcross.droid.support.design.MvxBottomSheetDialogFragment")]
     public abstract class MvxBottomSheetDialogFragment
@@ -20,7 +19,7 @@ namespace MvvmCross.AndroidXSupport.Material
     {
         protected MvxBottomSheetDialogFragment()
         {
-            V4.MvxFragmentExtensions.AddEventListeners(this);
+            Fragments.MvxFragmentExtensions.AddEventListeners(this);
         }
 
         protected MvxBottomSheetDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)

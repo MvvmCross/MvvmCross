@@ -7,7 +7,7 @@ using Android.Views;
 using Android.Widget;
 using MvvmCross.Base;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.AndroidX.Fragments;
+using MvvmCross.DroidX.Fragments;
 using MvvmCross.Platforms.Android.Binding;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;

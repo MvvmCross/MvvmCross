@@ -15,9 +15,9 @@ using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 using JavaString = Java.Lang.String;
 
-namespace MvvmCross.AndroidX.Fragments
+namespace MvvmCross.DroidX.Fragments
 {
-    [Register("mvvmcross.androidx.fragments.MvxFragmentStatePagerAdapter")]
+    [Register("mvvmcross.droidx.fragments.MvxFragmentStatePagerAdapter")]
     public class MvxFragmentStatePagerAdapter : FragmentStatePagerAdapter
     {
         private readonly Context _context;

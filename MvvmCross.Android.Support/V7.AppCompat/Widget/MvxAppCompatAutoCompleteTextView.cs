@@ -6,15 +6,15 @@ using System;
 using System.Collections;
 using Android.Content;
 using Android.Runtime;
-using Android.Support.V7.Widget;
+using AndroidX.AppCompat.Widget;
 using Android.Util;
 using Android.Widget;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Platforms.Android.Binding.Views;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
+namespace MvvmCross.DroidX.AppCompat.Widget
 {
-    [Register("mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatAutoCompleteTextView")]
+    [Register("mvvmcross.droidx.appcompat.widget.MvxAppCompatAutoCompleteTextView")]
     public class MvxAppCompatAutoCompleteTextView
         : AppCompatAutoCompleteTextView
     {

@@ -5,10 +5,10 @@
 using System;
 using Android.Content;
 using Android.Runtime;
-using Android.Support.Design.Widget;
-using Android.Support.V4.View;
 using Android.Util;
 using Android.Views;
+using AndroidX.CoordinatorLayout.Widget;
+using AndroidX.Core.View;
 using MvvmCross.Droid.Support.Design.Extensions;
 using Object = Java.Lang.Object;
 

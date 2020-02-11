@@ -6,9 +6,9 @@ using System;
 using Android.Runtime;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Droid.Support.V17.Leanback
+namespace MvvmCross.DroidX.Leanback
 {
-    [Register("mvvmcross.droid.support.v17.leanback.MvxObjectWrapper")]
+    [Register("mvvmcross.droidx.leanback.MvxObjectWrapper")]
     public class MvxObjectWrapper : Object
     {
         /// <summary>

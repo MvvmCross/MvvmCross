@@ -9,9 +9,9 @@ using AndroidX.RecyclerView.Widget;
 using Java.Lang;
 using MvvmCross.Logging;
 
-namespace MvvmCross.AndroidXSupport.RecyclerView
+namespace MvvmCross.DroidX.RecyclerView
 {
-    [Register("mvvmcross.androidxsupport.recyclerview.MvxGuardedGridLayoutManager")]
+    [Register("mvvmcross.DroidX.recyclerview.MvxGuardedGridLayoutManager")]
     public class MvxGuardedGridLayoutManager : GridLayoutManager
     {
         public MvxGuardedGridLayoutManager(Context context, int spanCount) : base(context, spanCount)

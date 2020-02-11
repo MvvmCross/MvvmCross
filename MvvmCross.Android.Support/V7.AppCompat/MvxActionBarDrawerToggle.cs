@@ -5,12 +5,12 @@
 using System;
 using Android.App;
 using Android.Runtime;
-using Android.Support.V4.Widget;
-using Android.Support.V7.App;
-using Android.Support.V7.Widget;
+using AndroidX.AppCompat.App;
 using Android.Views;
+using AndroidX.DrawerLayout.Widget;
+using AndroidX.AppCompat.Widget;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat
+namespace MvvmCross.DroidX.AppCompat
 {
     public class ActionBarDrawerEventArgs : EventArgs
     {
@@ -43,7 +43,7 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
         }
     }
 
-    [Register("mvvmcross.droid.support.v7.appcompat.MvxActionBarDrawerToggle")]
+    [Register("mvvmcross.droidx.appcompat.MvxActionBarDrawerToggle")]
     public sealed class MvxActionBarDrawerToggle : ActionBarDrawerToggle
     {
         public MvxActionBarDrawerToggle(IntPtr ptr, JniHandleOwnership ownership) 

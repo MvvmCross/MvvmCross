@@ -4,12 +4,12 @@
 
 using System;
 using Android.Graphics;
-using Android.Support.V7.Widget;
+using AndroidX.AppCompat.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Exceptions;
 using MvvmCross.Platforms.Android.Binding.Target;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat.Target
+namespace MvvmCross.DroidX.AppCompat.Target
 {
     public abstract class MvxAppCompatBaseImageViewTargetBinding
         : MvxAndroidTargetBinding

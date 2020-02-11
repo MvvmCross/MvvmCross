@@ -11,7 +11,7 @@ using AndroidX.Fragment.App;
 using MvvmCross.Base;
 using MvvmCross.Platforms.Android.Views;
 
-namespace MvvmCross.AndroidXSupport.Fragments.EventSource
+namespace MvvmCross.DroidX.Fragments.EventSource
 {
     public class MvxEventSourceDialogFragment
         : DialogFragment, IMvxEventSourceFragment

@@ -9,16 +9,16 @@ using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core;
-using MvvmCross.AndroidXSupport.Fragments.EventSource;
+using MvvmCross.DroidX.Fragments.EventSource;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.Views;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
-namespace MvvmCross.AndroidX.Fragments
+namespace MvvmCross.DroidX.Fragments
 {
-    [Register("mvvmcross.androidx.fragments.MvxFragmentActivity")]
+    [Register("mvvmcross.droidx.fragments.MvxFragmentActivity")]
     public class MvxFragmentActivity
         : MvxEventSourceFragmentActivity, IMvxAndroidView
     {

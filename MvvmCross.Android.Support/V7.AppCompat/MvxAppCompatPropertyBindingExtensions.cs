@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.Support.V7.Widget;
-using MvvmCross.Droid.Support.V7.AppCompat.Widget;
+using AndroidX.AppCompat.Widget;
+using MvvmCross.DroidX.AppCompat.Widget;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat
+namespace MvvmCross.DroidX.AppCompat
 {
     public static class MvxAppCompatPropertyBindingExtensions
     {

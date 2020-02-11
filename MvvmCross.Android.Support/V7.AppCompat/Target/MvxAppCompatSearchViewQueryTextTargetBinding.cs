@@ -3,12 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using Android.Support.V7.Widget;
+using AndroidX.AppCompat.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.WeakSubscription;
 using MvvmCross.Platforms.Android.Binding.Target;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat.Target
+namespace MvvmCross.DroidX.AppCompat.Target
 {
     public class MvxAppCompatSearchViewQueryTextTargetBinding 
         : MvxAndroidTargetBinding

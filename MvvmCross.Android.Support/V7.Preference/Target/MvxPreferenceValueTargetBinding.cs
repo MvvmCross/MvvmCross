@@ -6,18 +6,18 @@ using System;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.Binding.Target;
 
-namespace MvvmCross.Droid.Support.V7.Preference.Target
+namespace MvvmCross.DroidX.Preference.Target
 {
     public class MvxPreferenceValueTargetBinding : MvxAndroidTargetBinding
     {
-        public MvxPreferenceValueTargetBinding(Android.Support.V7.Preferences.Preference preference)
+        public MvxPreferenceValueTargetBinding(AndroidX.Preference.Preference preference)
             : base(preference)
         {
         }
 
-        public Android.Support.V7.Preferences.Preference Preference => Target as Android.Support.V7.Preferences.Preference;
+        public AndroidX.Preference.Preference Preference => Target as AndroidX.Preference.Preference;
 
-        public override Type TargetType => typeof(Android.Support.V7.Preferences.Preference);
+        public override Type TargetType => typeof(AndroidX.Preference.Preference);
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.TwoWay;
 
@@ -26,7 +26,7 @@ namespace MvvmCross.Droid.Support.V7.Preference.Target
             Preference.PreferenceChange += HandlePreferenceChange;
         }
 
-        protected void HandlePreferenceChange(object sender, Android.Support.V7.Preferences.Preference.PreferenceChangeEventArgs e)
+        protected void HandlePreferenceChange(object sender, AndroidX.Preference.Preference.PreferenceChangeEventArgs e)
         {
             if (e.Preference == Preference)
             {

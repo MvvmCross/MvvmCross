@@ -2,12 +2,12 @@
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
-using Android.Support.V7.Widget;
+using AndroidX.AppCompat.Widget;
 using Android.Views;
 using Android.Widget;
 using Example.Core.ViewModels;
 using MvvmCross.Droid.Views.Attributes;
-using MvvmCross.AndroidX.Fragments;
+using MvvmCross.DroidX.Fragments;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Platform.WeakSubscription;
 

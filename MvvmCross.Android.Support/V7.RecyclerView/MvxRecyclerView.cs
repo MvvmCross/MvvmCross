@@ -9,13 +9,13 @@ using Android.Content;
 using Android.Runtime;
 using Android.Util;
 using MvvmCross.Binding.Attributes;
-using MvvmCross.AndroidXSupport.RecyclerView.AttributeHelpers;
-using MvvmCross.AndroidXSupport.RecyclerView.ItemTemplates;
+using MvvmCross.DroidX.RecyclerView.AttributeHelpers;
+using MvvmCross.DroidX.RecyclerView.ItemTemplates;
 using MvvmCross.Platforms.Android.Binding.Views;
 
-namespace MvvmCross.AndroidXSupport.RecyclerView
+namespace MvvmCross.DroidX.RecyclerView
 {
-    [Register("mvvmcross.androidxsupport.recyclerview.MvxRecyclerView")]
+    [Register("mvvmcross.DroidX.recyclerview.MvxRecyclerView")]
     public class MvxRecyclerView : AndroidX.RecyclerView.Widget.RecyclerView
     {
         public MvxRecyclerView(Context context, IAttributeSet attrs) :

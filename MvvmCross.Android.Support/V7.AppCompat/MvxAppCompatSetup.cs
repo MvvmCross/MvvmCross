@@ -4,16 +4,15 @@
 
 using System.Collections.Generic;
 using System.Reflection;
-using Android.Support.V4.Widget;
-using Android.Support.V7.Widget;
+using AndroidX.AppCompat.Widget;
+using AndroidX.DrawerLayout.Widget;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.AndroidX.Fragments;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Presenters;
 using MvvmCross.ViewModels;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat
+namespace MvvmCross.DroidX.AppCompat
 {
     public abstract class MvxAppCompatSetup : MvxAndroidSetup
     {

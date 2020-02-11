@@ -8,7 +8,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using MvvmCross.AndroidX.Fragments;
+using MvvmCross.DroidX.Fragments;
 using Playground.Core.ViewModels;
 using System.Collections.Generic;
 using MvvmCross.Binding.BindingContext;

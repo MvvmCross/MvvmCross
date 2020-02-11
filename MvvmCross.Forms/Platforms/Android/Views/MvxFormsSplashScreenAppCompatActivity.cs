@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Core;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.DroidX.AppCompat;
 using MvvmCross.Forms.Platforms.Android.Core;
 using MvvmCross.ViewModels;
 using Xamarin.Forms;

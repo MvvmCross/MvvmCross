@@ -5,7 +5,7 @@
 using AndroidX.Fragment.App;
 using Android.Views;
 using MvvmCross.Core;
-using MvvmCross.AndroidXSupport.Fragments.EventSource;
+using MvvmCross.DroidX.Fragments.EventSource;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
@@ -14,7 +14,7 @@ using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 
-namespace MvvmCross.AndroidX.Fragments
+namespace MvvmCross.DroidX.Fragments
 {
     public static class MvxFragmentExtensions
     {

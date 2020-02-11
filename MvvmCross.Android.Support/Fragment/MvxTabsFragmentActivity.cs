@@ -17,9 +17,9 @@ using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.AndroidX.Fragments
+namespace MvvmCross.DroidX.Fragments
 {
-    [Register("mvvmcross.androidx.fragments.MvxTabsFragmentActivity")]
+    [Register("mvvmcross.droidx.fragments.MvxTabsFragmentActivity")]
     public abstract class MvxTabsFragmentActivity
         : MvxFragmentActivity, TabHost.IOnTabChangeListener
     {

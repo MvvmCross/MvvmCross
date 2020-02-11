@@ -10,9 +10,9 @@ using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.WeakSubscription;
 
-namespace MvvmCross.AndroidXSupport.RecyclerView
+namespace MvvmCross.DroidX.RecyclerView
 {
-    [Register("mvvmcross.androidxsupport.recyclerview.MvxRecyclerViewHolder")]
+    [Register("mvvmcross.DroidX.recyclerview.MvxRecyclerViewHolder")]
     public class MvxRecyclerViewHolder 
         : AndroidX.RecyclerView.Widget.RecyclerView.ViewHolder, IMvxRecyclerViewHolder
     {

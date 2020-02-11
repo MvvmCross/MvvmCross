@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.Support.V7.Preferences;
+using AndroidX.Preference;
 
-namespace MvvmCross.Droid.Support.V7.Preference.Target
+namespace MvvmCross.DroidX.Preference.Target
 {
     public class MvxEditTextPreferenceTextTargetBinding 
         : MvxPreferenceValueTargetBinding

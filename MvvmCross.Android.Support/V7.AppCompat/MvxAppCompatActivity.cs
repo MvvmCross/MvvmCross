@@ -10,15 +10,15 @@ using Android.Util;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core;
-using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
+using MvvmCross.DroidX.AppCompat.EventSource;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.Views;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat
+namespace MvvmCross.DroidX.AppCompat
 {
-    [Register("mvvmcross.droid.support.v7.appcompat.MvxAppCompatActivity")]
+    [Register("mvvmcross.droidx.appcompat.MvxAppCompatActivity")]
     public class MvxAppCompatActivity
         : MvxEventSourceAppCompatActivity, IMvxAndroidView
     {

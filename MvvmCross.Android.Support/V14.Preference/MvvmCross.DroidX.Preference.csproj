@@ -1,14 +1,14 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
     <TargetFrameworks>monoandroid90;monoandroid10.0;</TargetFrameworks>
-    <AssemblyName>MvvmCross.AndroidXSupport.RecyclerView</AssemblyName>
-    <RootNamespace>MvvmCross.AndroidXSupport.RecyclerView</RootNamespace>
+    <AssemblyName>MvvmCross.DroidX.Preference</AssemblyName>
+    <RootNamespace>MvvmCross.DroidX.Preference</RootNamespace>
     <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
-This package contains AndroidX RecyclerView support for MvvmCross.</Description>
-    <PackageId>MvvmCross.AndroidXSupport.RecyclerView</PackageId>
+This package contains AndroidX Preference support for MvvmCross.</Description>
+    <PackageId>MvvmCross.DroidX.Preference</PackageId>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <None Include="Resources\*.cs" />
     <Compile Remove="Resources\*.cs" />
@@ -16,11 +16,12 @@ This package contains AndroidX RecyclerView support for MvvmCross.</Description>
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.1.0-rc3" />
+    <PackageReference Include="Xamarin.AndroidX.Preference" Version="1.1.0-rc3" />
   </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
+    <ProjectReference Include="..\Fragment\MvvmCross.DroidX.Fragment.csproj" />
   </ItemGroup>
 
   <Import Project="..\..\XamarinBuild.targets" />

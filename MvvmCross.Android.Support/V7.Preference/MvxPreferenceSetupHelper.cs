@@ -2,17 +2,17 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.Support.V7.Preferences;
+using AndroidX.Preference;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Droid.Support.V7.Preference.Target;
+using MvvmCross.DroidX.Preference.Target;
 
-namespace MvvmCross.Droid.Support.V7.Preference
+namespace MvvmCross.DroidX.Preference
 {
     public static class MvxPreferenceSetupHelper
     {
         public static void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
-            registry.RegisterCustomBindingFactory<Android.Support.V7.Preferences.Preference>(
+            registry.RegisterCustomBindingFactory<AndroidX.Preference.Preference>(
                 MvxPreferencePropertyBinding.Preference_Value,
                 preference => new MvxPreferenceValueTargetBinding(preference));
 
@@ -28,7 +28,7 @@ namespace MvvmCross.Droid.Support.V7.Preference
                 MvxPreferencePropertyBinding.TwoStatePreference_Checked,
                 preference => new MvxTwoStatePreferenceCheckedTargetBinding(preference));
 
-            registry.RegisterCustomBindingFactory<Android.Support.V7.Preferences.Preference>(
+            registry.RegisterCustomBindingFactory<AndroidX.Preference.Preference>(
                 MvxPreferencePropertyBinding.Preference_Click,
                 preference => new MvxPreferenceClickTargetBinding(preference));
         }

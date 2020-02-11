@@ -5,7 +5,7 @@
 using System.Collections;
 using MvvmCross.Binding.Attributes;
 
-namespace MvvmCross.Droid.Support.V17.Leanback.Adapters
+namespace MvvmCross.DroidX.Leanback.Adapters
 {
     public interface IMvxObjectAdapter
     {

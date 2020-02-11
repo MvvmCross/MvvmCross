@@ -6,15 +6,15 @@ using System;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.V14.Preferences;
 using Android.Views;
+using AndroidX.Preference;
 using MvvmCross.Base;
 using MvvmCross.Platforms.Android.Views;
 
-namespace MvvmCross.Droid.Support.V14.Preference
+namespace MvvmCross.DroidX.Preference
 {
 	public abstract class MvxEventSourcePreferenceFragment 
-        : PreferenceFragment, IMvxEventSourceFragment
+        : PreferenceFragmentCompat, IMvxEventSourceFragment
 	{
 		public event EventHandler<MvxValueEventArgs<Context>> AttachCalled;
 		public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;

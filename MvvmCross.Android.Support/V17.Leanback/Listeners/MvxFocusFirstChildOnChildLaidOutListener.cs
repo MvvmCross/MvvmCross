@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.Support.V17.Leanback.Widget;
+using AndroidX.Leanback.Widget;
 using Android.Views;
 using Java.Lang;
 
-namespace MvvmCross.Droid.Support.V17.Leanback.Listeners
+namespace MvvmCross.DroidX.Leanback.Listeners
 {
 	/// <summary>
 	/// Requests focus for first laid out child.

@@ -4,7 +4,7 @@ using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.Binding.Target;
 using MvvmCross.Platforms.Android.WeakSubscription;
 
-namespace MvvmCross.Droid.Support.V7.Preference.Target
+namespace MvvmCross.DroidX.Preference.Target
 {
     public class MvxPreferenceClickTargetBinding : MvxAndroidTargetBinding
     {
@@ -13,19 +13,19 @@ namespace MvvmCross.Droid.Support.V7.Preference.Target
         private IDisposable _canExecuteSubscription;
         private readonly EventHandler<EventArgs> _canExecuteEventHandler;
 
-        protected Android.Support.V7.Preferences.Preference Preference => (Android.Support.V7.Preferences.Preference)Target;
+        protected AndroidX.Preference.Preference Preference => (AndroidX.Preference.Preference)Target;
 
-        public MvxPreferenceClickTargetBinding(Android.Support.V7.Preferences.Preference view)
+        public MvxPreferenceClickTargetBinding(AndroidX.Preference.Preference view)
             : base(view)
         {
             _canExecuteEventHandler = OnCanExecuteChanged;
 
-            _clickSubscription = Preference.WeakSubscribe<Android.Support.V7.Preferences.Preference, Android.Support.V7.Preferences.Preference.PreferenceClickEventArgs>(
+            _clickSubscription = Preference.WeakSubscribe<AndroidX.Preference.Preference, AndroidX.Preference.Preference.PreferenceClickEventArgs>(
                 nameof(Preference.PreferenceClick),
                 ViewOnPreferenceClick);
         }
 
-        private void ViewOnPreferenceClick(object sender, Android.Support.V7.Preferences.Preference.PreferenceClickEventArgs args)
+        private void ViewOnPreferenceClick(object sender, AndroidX.Preference.Preference.PreferenceClickEventArgs args)
         {
             if (_command == null)
                 return;

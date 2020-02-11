@@ -7,20 +7,19 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.AndroidX.Fragments;
-using MvvmCross.Droid.Support.V7.AppCompat.EventSource;
+using MvvmCross.DroidX.AppCompat.EventSource;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat
+namespace MvvmCross.DroidX.AppCompat
 {
-    [Register("mvvmcross.droid.support.v7.appcompat.MvxAppCompatDialogFragment")]
+    [Register("mvvmcross.droidx.appcompat.MvxAppCompatDialogFragment")]
     public abstract class MvxAppCompatDialogFragment
         : MvxEventSourceAppCompatDialogFragment, IMvxFragmentView
     {
         protected MvxAppCompatDialogFragment()
         {
-            V4.MvxFragmentExtensions.AddEventListeners(this);
+            Fragments.MvxFragmentExtensions.AddEventListeners(this);
         }
 
         protected MvxAppCompatDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)

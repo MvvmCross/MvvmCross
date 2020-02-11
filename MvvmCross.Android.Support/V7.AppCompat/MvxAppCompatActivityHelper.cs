@@ -5,9 +5,9 @@
 using Android.Content;
 using Android.Util;
 using Android.Views;
-using MvvmCross.Droid.Support.V7.AppCompat.Widget;
+using MvvmCross.DroidX.AppCompat.Widget;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat
+namespace MvvmCross.DroidX.AppCompat
 {
     public static class MvxAppCompatActivityHelper
     {

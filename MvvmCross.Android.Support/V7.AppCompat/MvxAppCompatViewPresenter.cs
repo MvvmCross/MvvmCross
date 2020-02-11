@@ -8,11 +8,9 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Android.OS;
-using Android.Support.Design.Widget;
 using AndroidX.Fragment.App;
-using Android.Support.V4.View;
 using Android.Views;
-using MvvmCross.AndroidX.Fragments;
+using MvvmCross.DroidX.Fragments;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Presenters;
@@ -22,8 +20,11 @@ using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
+using AndroidX.ViewPager.Widget;
+using AndroidX.Core.View;
+using Google.Android.Material.Tabs;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat
+namespace MvvmCross.DroidX.AppCompat
 {
     public class MvxAppCompatViewPresenter : MvxAndroidViewPresenter
     {

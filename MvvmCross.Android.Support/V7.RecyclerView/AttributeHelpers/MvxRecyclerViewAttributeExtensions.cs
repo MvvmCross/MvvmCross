@@ -6,11 +6,11 @@ using System;
 using Android.Content;
 using Android.Content.Res;
 using Android.Util;
-using MvvmCross.AndroidXSupport.RecyclerView.ItemTemplates;
+using MvvmCross.DroidX.RecyclerView.ItemTemplates;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.ResourceHelpers;
 
-namespace MvvmCross.AndroidXSupport.RecyclerView.AttributeHelpers
+namespace MvvmCross.DroidX.RecyclerView.AttributeHelpers
 {
     public static class MvxRecyclerViewAttributeExtensions
     {

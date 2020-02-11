@@ -11,9 +11,9 @@ using MvvmCross.Core;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.ViewModels;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat
+namespace MvvmCross.DroidX.AppCompat
 {
-    [Register("mvvmcross.droid.support.v7.appcompat." + nameof(MvxSplashScreenAppCompatActivity))]
+    [Register("mvvmcross.droidx.appcompat." + nameof(MvxSplashScreenAppCompatActivity))]
     public abstract class MvxSplashScreenAppCompatActivity
         : MvxAppCompatActivity, IMvxSetupMonitor
     {

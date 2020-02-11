@@ -3,9 +3,9 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.AndroidXSupport.RecyclerView.Model;
+using MvvmCross.DroidX.RecyclerView.Model;
 
-namespace MvvmCross.AndroidXSupport.RecyclerView
+namespace MvvmCross.DroidX.RecyclerView
 {
     public interface IMvxRecyclerAdapterBindableHolder
     {

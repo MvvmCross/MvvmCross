@@ -4,7 +4,7 @@ using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Views.Attributes;
-using MvvmCross.AndroidX.Fragments;
+using MvvmCross.DroidX.Fragments;
 using RoutingExample.Core.ViewModels;
 
 namespace RoutingExample.Droid

@@ -7,20 +7,20 @@ using System.Collections;
 using System.Windows.Input;
 using Android.Content;
 using Android.Runtime;
-using Android.Support.V17.Leanback.Widget;
+using AndroidX.Leanback.Widget;
 using Android.Util;
 using MvvmCross.Binding.Attributes;
-using MvvmCross.Droid.Support.V17.Leanback.Listeners;
-using MvvmCross.Droid.Support.V7.RecyclerView;
+using MvvmCross.DroidX.Leanback.Listeners;
+using MvvmCross.DroidX.RecyclerView;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Binding.Views;
 
-namespace MvvmCross.Droid.Support.V17.Leanback.Widgets
+namespace MvvmCross.DroidX.Leanback.Widgets
 {
     /// <remarks>
     /// This class is actually (almost) the same as MvxRecylerView. Please keep this in mind if fixing bugs or implementing improvements!
     /// </remarks>
-    [Register("mvvmcross.droid.support.v17.leanback.widgets.MvxHorizontalGridView")]
+    [Register("mvvmcross.droidx.leanback.widgets.MvxHorizontalGridView")]
     public class MvxHorizontalGridView 
         : HorizontalGridView
     {

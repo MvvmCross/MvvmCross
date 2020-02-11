@@ -2,7 +2,7 @@
 using Android.Runtime;
 using Android.Views;
 using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.AndroidX.Fragments;
+using MvvmCross.DroidX.Fragments;
 using MvvmCross.Droid.Views.Attributes;
 using RoutingExample.Core.ViewModels;
 

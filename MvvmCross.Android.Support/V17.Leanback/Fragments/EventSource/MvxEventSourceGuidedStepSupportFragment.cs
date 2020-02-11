@@ -6,12 +6,12 @@ using System;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.V17.Leanback.App;
+using AndroidX.Leanback.App;
 using Android.Views;
 using MvvmCross.Base;
 using MvvmCross.Platforms.Android.Views;
 
-namespace MvvmCross.Droid.Support.V17.Leanback.Fragments.EventSource
+namespace MvvmCross.DroidX.Leanback.Fragments.EventSource
 {
     public class MvxEventSourceGuidedStepSupportFragment
         : GuidedStepSupportFragment, IMvxEventSourceFragment

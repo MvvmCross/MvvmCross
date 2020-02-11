@@ -5,9 +5,9 @@
 using System.Collections;
 using System.Windows.Input;
 using MvvmCross.Binding.Attributes;
-using MvvmCross.AndroidXSupport.RecyclerView.ItemTemplates;
+using MvvmCross.DroidX.RecyclerView.ItemTemplates;
 
-namespace MvvmCross.AndroidXSupport.RecyclerView
+namespace MvvmCross.DroidX.RecyclerView
 {
     public interface IMvxRecyclerAdapter
     {

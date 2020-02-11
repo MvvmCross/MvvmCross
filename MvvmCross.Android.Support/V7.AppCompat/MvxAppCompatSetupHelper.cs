@@ -2,14 +2,14 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.Support.Design.Widget;
-using Android.Support.V7.Widget;
+using AndroidX.AppCompat.Widget;
+using Google.Android.Material.FloatingActionButton;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Droid.Support.V7.AppCompat.Target;
-using MvvmCross.Droid.Support.V7.AppCompat.Widget;
+using MvvmCross.DroidX.AppCompat.Target;
+using MvvmCross.DroidX.AppCompat.Widget;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat
+namespace MvvmCross.DroidX.AppCompat
 {
     public static class MvxAppCompatSetupHelper
     {

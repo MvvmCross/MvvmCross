@@ -3,15 +3,15 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using Android.Support.V7.Widget;
+using AndroidX.AppCompat.Widget;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding;
-using MvvmCross.Droid.Support.V7.AppCompat.Widget;
+using MvvmCross.DroidX.AppCompat.Widget;
 using MvvmCross.Platforms.Android.Binding.Target;
 using MvvmCross.WeakSubscription;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat.Target
+namespace MvvmCross.DroidX.AppCompat.Target
 {
     public class MvxAppCompatRadioGroupSelectedItemBinding
         : MvxAndroidTargetBinding

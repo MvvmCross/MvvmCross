@@ -8,7 +8,7 @@ using System.Collections.Specialized;
 using System.Threading;
 using Android.Content;
 using Android.Runtime;
-using Android.Support.V7.Widget;
+using AndroidX.AppCompat.Widget;
 using Android.Util;
 using Android.Widget;
 using MvvmCross.Binding;
@@ -16,9 +16,9 @@ using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.Views;
 
-namespace MvvmCross.Droid.Support.V7.AppCompat.Widget
+namespace MvvmCross.DroidX.AppCompat.Widget
 {
-    [Register("mvvmcross.droid.support.v7.appcompat.widget.MvxAppCompatRadioGroup")]
+    [Register("mvvmcross.droidx.appcompat.widget.MvxAppCompatRadioGroup")]
     public class MvxAppCompatRadioGroup : RadioGroup, IMvxWithChangeAdapter
     {
         public MvxAppCompatRadioGroup(Context context, IAttributeSet attrs)

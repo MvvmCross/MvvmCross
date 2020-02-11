@@ -6,12 +6,12 @@ using System;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.V7.Preferences;
 using Android.Views;
+using AndroidX.Preference;
 using MvvmCross.Base;
 using MvvmCross.Platforms.Android.Views;
 
-namespace MvvmCross.Droid.Support.V7.Preference
+namespace MvvmCross.DroidX.Preference
 {
     public abstract class MvxEventSourcePreferenceFragmentCompat : PreferenceFragmentCompat
         , IMvxEventSourceFragment

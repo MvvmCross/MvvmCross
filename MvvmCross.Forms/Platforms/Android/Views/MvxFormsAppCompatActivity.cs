@@ -10,7 +10,7 @@ using Android.Util;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.DroidX.AppCompat;
 using MvvmCross.Forms.Platforms.Android.Core;
 using MvvmCross.Forms.Platforms.Android.Views.Base;
 using MvvmCross.Forms.Presenters;

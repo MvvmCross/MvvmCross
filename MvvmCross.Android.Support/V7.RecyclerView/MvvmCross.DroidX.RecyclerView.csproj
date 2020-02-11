@@ -1,12 +1,12 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
     <TargetFrameworks>monoandroid90;monoandroid10.0;</TargetFrameworks>
-    <AssemblyName>MvvmCross.AndroidXSupport.SwipeRefreshLayout</AssemblyName>
-    <RootNamespace>MvvmCross.AndroidXSupport.SwipeRefreshLayout</RootNamespace>
+    <AssemblyName>MvvmCross.DroidX.RecyclerView</AssemblyName>
+    <RootNamespace>MvvmCross.DroidX.RecyclerView</RootNamespace>
     <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
 
-This package contains Support Core UI support for MvvmCross.</Description>
-    <PackageId>MvvmCross.AndroidXSupport.SwipeRefreshLayout</PackageId>
+This package contains AndroidX RecyclerView support for MvvmCross.</Description>
+    <PackageId>MvvmCross.DroidX.RecyclerView</PackageId>
   </PropertyGroup>
   
   <ItemGroup>
@@ -16,7 +16,7 @@ This package contains Support Core UI support for MvvmCross.</Description>
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.0.0-rc3" />
+    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.1.0-rc3" />
   </ItemGroup>
   
   <ItemGroup>
