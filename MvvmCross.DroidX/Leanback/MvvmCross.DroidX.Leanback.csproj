@@ -23,7 +23,7 @@ This package contains AndroidX Leanback support for MvvmCross.</Description>
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\Fragment\MvvmCross.DroidX.Fragment.csproj" />
-    <ProjectReference Include="..\V7.RecyclerView\MvvmCross.DroidX.RecyclerView.csproj" />
+    <ProjectReference Include="..\RecyclerView\MvvmCross.DroidX.RecyclerView.csproj" />
   </ItemGroup>
 
   <Import Project="..\..\XamarinBuild.targets" />

@@ -21,8 +21,8 @@ This package contains AndroidX AppCompat support for MvvmCross.</Description>
   
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
-    <ProjectReference Include="..\Core.UI\MvvmCross.DroidX.SwipeRefreshLayout.csproj" />
-    <ProjectReference Include="..\Design\MvvmCross.DroidX.Material.csproj" />
+    <ProjectReference Include="..\SwipeRefreshLayout\MvvmCross.DroidX.SwipeRefreshLayout.csproj" />
+    <ProjectReference Include="..\Material\MvvmCross.DroidX.Material.csproj" />
     <ProjectReference Include="..\Fragment\MvvmCross.DroidX.Fragment.csproj" />
   </ItemGroup>
 
