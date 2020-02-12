@@ -22,7 +22,7 @@ using Object = Java.Lang.Object;
 
 namespace MvvmCross.DroidX.RecyclerView
 {
-    [Register("mvvmcross.DroidX.recyclerview.MvxRecyclerAdapter")]
+    [Register("mvvmcross.droidx.recyclerview.MvxRecyclerAdapter")]
     public class MvxRecyclerAdapter
         : AndroidX.RecyclerView.Widget.RecyclerView.Adapter, IMvxRecyclerAdapter, IMvxRecyclerAdapterBindableHolder
     {

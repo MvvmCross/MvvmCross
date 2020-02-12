@@ -11,7 +11,7 @@ using MvvmCross.Logging;
 
 namespace MvvmCross.DroidX.RecyclerView
 {
-    [Register("mvvmcross.DroidX.recyclerview.MvxGuardedGridLayoutManager")]
+    [Register("mvvmcross.droidx.recyclerview.MvxGuardedGridLayoutManager")]
     public class MvxGuardedGridLayoutManager : GridLayoutManager
     {
         public MvxGuardedGridLayoutManager(Context context, int spanCount) : base(context, spanCount)

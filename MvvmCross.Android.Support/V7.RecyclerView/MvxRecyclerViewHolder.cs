@@ -12,7 +12,7 @@ using MvvmCross.Platforms.Android.WeakSubscription;
 
 namespace MvvmCross.DroidX.RecyclerView
 {
-    [Register("mvvmcross.DroidX.recyclerview.MvxRecyclerViewHolder")]
+    [Register("mvvmcross.droidx.recyclerview.MvxRecyclerViewHolder")]
     public class MvxRecyclerViewHolder 
         : AndroidX.RecyclerView.Widget.RecyclerView.ViewHolder, IMvxRecyclerViewHolder
     {

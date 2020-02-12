@@ -15,7 +15,7 @@ using MvvmCross.Platforms.Android.Binding.Views;
 
 namespace MvvmCross.DroidX.RecyclerView
 {
-    [Register("mvvmcross.DroidX.recyclerview.MvxRecyclerView")]
+    [Register("mvvmcross.droidx.recyclerview.MvxRecyclerView")]
     public class MvxRecyclerView : AndroidX.RecyclerView.Widget.RecyclerView
     {
         public MvxRecyclerView(Context context, IAttributeSet attrs) :

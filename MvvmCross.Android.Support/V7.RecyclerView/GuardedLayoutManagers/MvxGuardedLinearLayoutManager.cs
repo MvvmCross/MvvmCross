@@ -11,7 +11,7 @@ using MvvmCross.Logging;
 
 namespace MvvmCross.DroidX.RecyclerView
 {
-    [Register("mvvmcross.DroidX.recyclerview.MvxGuardedLinearLayoutManager")]
+    [Register("mvvmcross.droidx.recyclerview.MvxGuardedLinearLayoutManager")]
     public class MvxGuardedLinearLayoutManager : LinearLayoutManager
     {
         public MvxGuardedLinearLayoutManager(Context context) : base(context)
