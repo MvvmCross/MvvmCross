@@ -22,19 +22,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AndroidX", "AndroidX", "{39
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzers", "Analyzers", "{8B503F48-F6C2-4D5E-9F39-83059EC92470}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.DroidX.SwipeRefreshLayout", "MvvmCross.Android.Support\Core.UI\MvvmCross.DroidX.SwipeRefreshLayout.csproj", "{61A45F4D-7D56-4A5D-8D07-004E8C913FA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.DroidX.SwipeRefreshLayout", "MvvmCross.DroidX\SwipeRefreshLayout\MvvmCross.DroidX.SwipeRefreshLayout.csproj", "{61A45F4D-7D56-4A5D-8D07-004E8C913FA9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.DroidX.Material", "MvvmCross.Android.Support\Design\MvvmCross.DroidX.Material.csproj", "{45F63A4A-9A37-4929-9C80-48A91F346E0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.DroidX.Material", "MvvmCross.DroidX\Material\MvvmCross.DroidX.Material.csproj", "{45F63A4A-9A37-4929-9C80-48A91F346E0D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.DroidX.Fragment", "MvvmCross.Android.Support\Fragment\MvvmCross.DroidX.Fragment.csproj", "{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.DroidX.Fragment", "MvvmCross.DroidX\Fragment\MvvmCross.DroidX.Fragment.csproj", "{FC0B3E3C-8B00-48FA-AF93-981A45B2BE4B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.DroidX.AppCompat", "MvvmCross.Android.Support\V7.AppCompat\MvvmCross.DroidX.AppCompat.csproj", "{FD67CBBC-4BAC-40D6-9F4C-28AAE6C8533E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.DroidX.AppCompat", "MvvmCross.DroidX\AppCompat\MvvmCross.DroidX.AppCompat.csproj", "{FD67CBBC-4BAC-40D6-9F4C-28AAE6C8533E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.DroidX.Preference", "MvvmCross.Android.Support\V7.Preference\MvvmCross.DroidX.Preference.csproj", "{91CDD4C3-DB1A-46EE-97FC-91749A48395F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.DroidX.Preference", "MvvmCross.DroidX\Preference\MvvmCross.DroidX.Preference.csproj", "{91CDD4C3-DB1A-46EE-97FC-91749A48395F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.DroidX.RecyclerView", "MvvmCross.Android.Support\V7.RecyclerView\MvvmCross.DroidX.RecyclerView.csproj", "{6F49CFE7-3FCB-463D-85DC-1798E2BE771E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.DroidX.RecyclerView", "MvvmCross.DroidX\RecyclerView\MvvmCross.DroidX.RecyclerView.csproj", "{6F49CFE7-3FCB-463D-85DC-1798E2BE771E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.DroidX.Leanback", "MvvmCross.Android.Support\V17.Leanback\MvvmCross.DroidX.Leanback.csproj", "{88623C54-21BE-473E-95D3-DF9E6D869FC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.DroidX.Leanback", "MvvmCross.DroidX\Leanback\MvvmCross.DroidX.Leanback.csproj", "{88623C54-21BE-473E-95D3-DF9E6D869FC4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{9EA04A6A-1367-4316-A6E9-A5173A060475}"
 EndProject
