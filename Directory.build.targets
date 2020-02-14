@@ -2,7 +2,7 @@
   <PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
     <DefineConstants>$(DefineConstants);NETSTANDARD;PORTABLE</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('net4'))">
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net4')) Or $(TargetFramework.StartsWith('netcoreapp3'))">
     <DefineConstants>$(DefineConstants);NET;WPF;XAML</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="$(TargetFramework.StartsWith('uap'))">
