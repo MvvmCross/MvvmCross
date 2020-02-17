@@ -11,7 +11,7 @@ using Google.Android.Material.BottomSheet;
 using MvvmCross.Base;
 using MvvmCross.Platforms.Android.Views;
 
-namespace MvvmCross.Droid.Support.Design.EventSource
+namespace MvvmCross.DroidX.Material.EventSource
 {
 	public class MvxEventSourceBottomSheetDialogFragment
 		: BottomSheetDialogFragment, IMvxEventSourceFragment

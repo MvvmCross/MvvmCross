@@ -9,12 +9,12 @@ using Android.Util;
 using Android.Views;
 using AndroidX.CoordinatorLayout.Widget;
 using AndroidX.Core.View;
-using MvvmCross.Droid.Support.Design.Extensions;
+using MvvmCross.DroidX.Material.Extensions;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Droid.Support.Design.Behaviors
+namespace MvvmCross.DroidX.Material.Behaviors
 {
-    [Register("mvvmcross.droid.support.design.behaviors.MvxScrollAwareTranslationAutoHideBehavior")]
+    [Register("mvvmcross.droidx.material.behaviors.MvxScrollAwareTranslationAutoHideBehavior")]
     public class MvxScrollAwareTranslationHideBottomBarBehavior 
         : CoordinatorLayout.Behavior
     {

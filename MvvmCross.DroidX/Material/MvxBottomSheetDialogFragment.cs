@@ -7,13 +7,13 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Droid.Support.Design.EventSource;
+using MvvmCross.DroidX.Material.EventSource;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.DroidX.Material
 {
-    [Register("mvvmcross.droid.support.design.MvxBottomSheetDialogFragment")]
+    [Register("mvvmcross.droidx.material.MvxBottomSheetDialogFragment")]
     public abstract class MvxBottomSheetDialogFragment
         : MvxEventSourceBottomSheetDialogFragment, IMvxFragmentView
     {

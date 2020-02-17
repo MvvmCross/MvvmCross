@@ -12,9 +12,9 @@ using AndroidX.Core.View;
 using Google.Android.Material.FloatingActionButton;
 using Object = Java.Lang.Object;
 
-namespace MvvmCross.Droid.Support.Design.Behaviors
+namespace MvvmCross.DroidX.Material.Behaviors
 {
-    [Register("mvvmcross.droid.support.design.behaviors.MvxScrollAwareGrowShrinkFABBehavior")]
+    [Register("mvvmcross.droidx.material.behaviors.MvxScrollAwareGrowShrinkFABBehavior")]
     public class MvxScrollAwareGrowShrinkFABBehavior 
         : CoordinatorLayout.Behavior
     {
