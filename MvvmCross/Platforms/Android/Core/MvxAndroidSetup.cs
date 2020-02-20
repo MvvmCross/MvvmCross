@@ -27,6 +27,11 @@ using System.Linq;
 
 namespace MvvmCross.Platforms.Android.Core
 {
+    public interface IMvxActivityLifecycleCallbacksProvider
+    {
+        IMvxAndroidCurrentTopActivity AndroidCurrentTopActivityFinder { get; }
+    }
+
     public abstract class MvxAndroidSetup
         : MvxSetup, IMvxAndroidGlobals, IMvxAndroidSetup
     {
@@ -70,6 +75,9 @@ namespace MvvmCross.Platforms.Android.Core
 
         protected virtual IMvxAndroidCurrentTopActivity CreateAndroidCurrentTopActivity()
         {
+            if(MvxAndroidApplication.Instance is IMvxActivityLifecycleCallbacksProvider provider && provider.AndroidCurrentTopActivityFinder != null)
+                return provider.AndroidCurrentTopActivityFinder;
+
             var mvxApplication = MvxAndroidApplication.Instance;
             if (mvxApplication != null)
             {

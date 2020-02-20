@@ -4,6 +4,10 @@
 
 using Android.App;
 using Android.Content.PM;
+using Android.OS;
+using Android.Runtime;
+using Android.Support.V7.App;
+using Android.Views;
 using MvvmCross.Droid.Support.V7.AppCompat;
 
 namespace Playground.Droid
@@ -15,11 +19,22 @@ namespace Playground.Droid
         , Theme = "@style/AppTheme.Splash"
         , NoHistory = true
         , ScreenOrientation = ScreenOrientation.Portrait)]
-    public class SplashScreen : MvxSplashScreenAppCompatActivity
+    [Register("playground.SplashScreen")]
+    public class SplashScreen : AppCompatActivity, IStartupActivity
     {
-        public SplashScreen()
-            : base(Resource.Layout.SplashScreen)
+        protected override void OnCreate(Bundle bundle)
         {
+            base.OnCreate(bundle);
+
+            //Note: this could be moved into AppTheme.Splash
+            RequestWindowFeature(WindowFeatures.NoTitle);
+
+            SetContentView(Resource.Layout.SplashScreen);
+        }
+
+        public void FinishActivity()
+        {
+            Finish();
         }
     }
 }
