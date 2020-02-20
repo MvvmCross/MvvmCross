@@ -130,7 +130,7 @@ namespace Zoo.App
 }
 ```
 
-To use this `ItemTemplateSelctor` you will need to provide it in the `MvxTemplateSelector` attribute on the `MvxRecyclerView`. It must be of the format: `Fully.Qualified.ClassName,Assembly.Name`. Hence, for the example above. Let us say the assembly will be `Zoo.App.Droid` and as you see the namespace is `Zoo.App` then the string will be: `Zoo.App.AnimalTemplateSelector,Zoo.App.Droid`.
+To use this `ItemTemplateSelector` you will need to provide it in the `MvxTemplateSelector` attribute on the `MvxRecyclerView`. It must be of the format: `Fully.Qualified.ClassName,Assembly.Name`. Hence, for the example above. Let us say the assembly will be `Zoo.App.Droid` and as you see the namespace is `Zoo.App` then the string will be: `Zoo.App.AnimalTemplateSelector,Zoo.App.Droid`.
 
 ```xml
 <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView

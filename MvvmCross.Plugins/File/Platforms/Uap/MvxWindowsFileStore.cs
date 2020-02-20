@@ -220,7 +220,7 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             catch (Exception ex)
             {
                 MvxPluginLog.Instance.Trace("Exception in DeleteFolder - folderPath: {0} - {1}", folderPath, ex.ToLongString());
-                throw ex;
+                throw;
             }
         }
 

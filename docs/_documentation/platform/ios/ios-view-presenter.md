@@ -101,7 +101,7 @@ public partial class LoginView : MvxViewController<LoginViewModel>, IMvxOverride
                 {
                     WrapInNavigationController = true,
                     ModalPresentationStyle = UIModalPresentationStyle.OverFullScreen,
-                    ModalTransitionStyle = UIModalTransitionStyle.CrossDissolv
+                    ModalTransitionStyle = UIModalTransitionStyle.CrossDissolve
                 };
             }
         }
