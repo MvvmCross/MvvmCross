@@ -270,7 +270,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             var startup = ioc.Resolve<IMvxAppStart>();
             //Console.WriteLine($"(SLC) RunAppStartAsync isStarted:{startup.IsStarted} isStartupActivityDisplayed:{isStartupActivityDisplayed} startupActivity:{startupActivity?.GetType().Name}");
 
-
             //Non null when the app is launched from a push notification
             if (pushedData != null)
                 OnPushedReceived(pushedData);

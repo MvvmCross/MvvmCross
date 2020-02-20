@@ -11,6 +11,8 @@ using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 
+#pragma warning disable SA1402 // FileMayOnlyContainASingleType
+
 namespace MvvmCross.Droid.Support.V7.AppCompat
 {
     public abstract class MvxAppCompatApplication : MvxAndroidApplication, IMvxActivityLifecycleCallbacksProvider
@@ -53,7 +55,6 @@ namespace MvvmCross.Droid.Support.V7.AppCompat
             base.Dispose(disposing);
         }
     }
-
 
     public abstract class MvxAppCompatApplication<TMvxAndroidSetup, TApplication> : MvxAppCompatApplication
           where TMvxAndroidSetup : MvxAppCompatSetup<TApplication>, new()
