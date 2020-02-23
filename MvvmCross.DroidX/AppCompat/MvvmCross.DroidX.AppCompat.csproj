@@ -1,0 +1,30 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras">
+  <PropertyGroup>
+    <TargetFrameworks>monoandroid90;monoandroid10.0;</TargetFrameworks>
+    <AssemblyName>MvvmCross.DroidX.AppCompat</AssemblyName>
+    <RootNamespace>MvvmCross.DroidX.AppCompat</RootNamespace>
+    <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+This package contains AndroidX AppCompat support for MvvmCross.</Description>
+    <PackageId>MvvmCross.DroidX.AppCompat</PackageId>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Include="Resources\*.cs" />
+    <Compile Remove="Resources\*.cs" />
+    <AndroidResource Include="Resources\**\*.xml" Generator="MSBuild:UpdateAndroidResources" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.1.0-rc3" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
+    <ProjectReference Include="..\SwipeRefreshLayout\MvvmCross.DroidX.SwipeRefreshLayout.csproj" />
+    <ProjectReference Include="..\Material\MvvmCross.DroidX.Material.csproj" />
+    <ProjectReference Include="..\Fragment\MvvmCross.DroidX.Fragment.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\..\XamarinBuild.targets" />
+</Project>

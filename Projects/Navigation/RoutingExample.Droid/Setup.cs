@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Android.Content;
-using Android.Support.V4.App;
-using Android.Support.V7.App;
+using AndroidX.Fragment.App;
+using AndroidX.AppCompat.App;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Droid.Views;
@@ -10,7 +10,7 @@ using MvvmCross.Droid.Views.Attributes;
 using RoutingExample.Core;
 using System;
 using System.Threading.Tasks;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.DroidX.AppCompat;
 
 namespace RoutingExample.Droid
 {

@@ -4,10 +4,10 @@
 
 using Android.Content.Res;
 using Android.OS;
-using Android.Support.V7.Widget;
+using AndroidX.AppCompat.Widget;
 using Android.Views;
-using MvvmCross.Droid.Support.V4;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.DroidX.Fragments;
+using MvvmCross.DroidX.AppCompat;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.ViewModels;
 using Playground.Droid.Activities;

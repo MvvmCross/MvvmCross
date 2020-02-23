@@ -5,7 +5,7 @@
 using System;
 using Android.App;
 using Android.Runtime;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.DroidX.AppCompat;
 using Playground.Core;
 using Plugin.CurrentActivity;
 

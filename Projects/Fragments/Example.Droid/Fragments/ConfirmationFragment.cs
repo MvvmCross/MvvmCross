@@ -4,7 +4,7 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Example.Core.ViewModels;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.DroidX.AppCompat;
 using MvvmCross.Droid.Views.Attributes;
 
 namespace Example.Droid.Fragments

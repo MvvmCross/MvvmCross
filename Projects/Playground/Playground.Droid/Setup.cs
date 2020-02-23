@@ -5,7 +5,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.DroidX.AppCompat;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Logging;
 using MvvmCross.Plugin;

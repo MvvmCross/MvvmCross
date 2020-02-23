@@ -81,7 +81,7 @@ This package contains the 'PictureChooser' plugin for MvvmCross</Description>
     <Compile Include="Platforms\Android\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
     <AndroidResource Include="Resources\**\*.xml" SubType="Designer" Generator="MSBuild:UpdateAndroidResources" />
-    <PackageReference Include="Xamarin.Android.Support.Exif" Version="28.0.0.3" />
+    <PackageReference Include="Xamarin.AndroidX.ExifInterface" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">
