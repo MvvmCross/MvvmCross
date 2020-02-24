@@ -80,7 +80,7 @@
   <ItemGroup Condition=" $(TargetFramework.StartsWith('monoandroid')) ">
     <Compile Include="Platforms\Android\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.1.0-rc3" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.1.0" />
     <PackageReference Include="Xamarin.AndroidX.CardView" Version="1.0.0-rc3" />
     <ProjectReference Include="..\MvvmCross.DroidX\AppCompat\MvvmCross.DroidX.AppCompat.csproj" />
     <ProjectReference Include="..\MvvmCross.DroidX\Fragment\MvvmCross.DroidX.Fragment.csproj" />
