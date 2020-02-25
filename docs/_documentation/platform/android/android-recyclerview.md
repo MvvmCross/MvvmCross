@@ -23,7 +23,7 @@ Then adding your first `MvxRecyclerView` is fairly simple. You add the widget in
 <mvvmcross.droid.support.v7.recyclerview.MvxRecyclerView
     ...
     local:MvxItemTemplate="@layout/item_template"
-    local:MvxItemTemplateSelector="Fully.Qualified.Name,Assembly.Name"
+    local:MvxTemplateSelector="Fully.Qualified.Name,Assembly.Name"
     local:MvxBind="ItemsSource Items; ItemClick ItemClickCommand; ItemLongClick ItemLongClickCommand"
     />
 ```
@@ -90,7 +90,7 @@ So let us say are trying to keep track of animals in a zoo and you want a differ
 
 Assuming you have a ViewModel type for each of these group like: MammalViewModel, ReptileViewModel or some other way you could uniquely identify which View to present for the ViewModel, you could create a `ItemTemplateSelector` which could help you achieve this.
 
-To create your own `ItemTemplateSelector` you must create a class implementing the `IMvxItemTemplate` interface, which has two very important methods. `GetItemViewType(object forItemObject)` is used for the RecyclerView to determine how to recycle the Views. If you return `0` it will assume there is only one View type. Usually you would just return the layout id here. `GetItemLayoutId(int fromViewType)` this method is used to provide the actual id of the layout you want to use for the View type.
+To create your own `ItemTemplateSelector` you must create a class implementing the `IMvxTemplateSelector` interface, which has two very important methods. `GetItemViewType(object forItemObject)` is used for the RecyclerView to determine how to recycle the Views. If you return `0` it will assume there is only one View type. Usually you would just return the layout id here. `GetItemLayoutId(int fromViewType)` this method is used to provide the actual id of the layout you want to use for the View type.
 
 > Ensure you are returning something else than `0` from `GetItemViewType(object)` if you use multiple views in your `ItemTemplateSelector`.
 
