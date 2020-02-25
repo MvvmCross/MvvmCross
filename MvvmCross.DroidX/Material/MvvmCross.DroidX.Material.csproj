@@ -16,7 +16,7 @@ This package contains Support v7 Design support for MvvmCross.</Description>
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0-rc3" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0" />
   </ItemGroup>
   
   <ItemGroup>
