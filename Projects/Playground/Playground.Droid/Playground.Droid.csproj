@@ -30,6 +30,10 @@
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <AndroidDexTool>d8</AndroidDexTool>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -219,7 +223,7 @@
     <PackageReference Include="Xamarin.FFImageLoading">
       <Version>2.4.11.982</Version>
     </PackageReference>
-    <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+    <PackageReference Include="Plugin.Permissions" Version="6.0.0-beta" />
     <PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="71.1620.0" />
   </ItemGroup>
   <ItemGroup>
