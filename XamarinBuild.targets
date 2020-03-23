@@ -1,5 +1,5 @@
 <Project>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Build.Download" Version="0.9.0" />
+    <PackageReference Include="Xamarin.Build.Download" Version="0.10.0" />
   </ItemGroup>
 </Project>
