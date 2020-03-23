@@ -1,6 +1,6 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup Condition=" '$(TargetsToBuild)' == 'All' ">
-    <TargetFrameworks>netstandard2.0;xamarin.ios10;xamarin.mac20;xamarin.tvos10;xamarin.watchos10;monoandroid90;monoandroid10.0;tizen40;netcoreapp2.1;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;xamarin.ios10;xamarin.mac20;xamarin.tvos10;xamarin.watchos10;monoandroid90;monoandroid10.0;tizen40;netcoreapp2.1;netcoreapp3.0;netcoreapp3.1;net461</TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.16299;$(TargetFrameworks)</TargetFrameworks>
   </PropertyGroup>
 
@@ -36,7 +36,7 @@ This package contains the 'Visibility' plugin for MvvmCross</Description>
     <Compile Include="Platforms\Console\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) And '$(OS)' == 'Windows_NT' ">
+  <ItemGroup Condition=" ($(TargetFramework.StartsWith('net4')) Or $(TargetFramework.StartsWith('netcoreapp3'))) And '$(OS)' == 'Windows_NT' ">
     <Compile Include="Platforms\Net\**\*.cs" />
     <Compile Include="Platforms\Wpf\**\*.cs" />
     <Reference Include="PresentationCore" />
