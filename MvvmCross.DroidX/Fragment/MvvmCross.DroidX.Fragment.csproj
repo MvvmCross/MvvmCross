@@ -16,7 +16,7 @@ This package contains Support Fragment support for MvvmCross.</Description>
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.2.2" />
+    <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.2.3" />
   </ItemGroup>
   
   <ItemGroup>
