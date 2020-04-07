@@ -223,7 +223,7 @@
     <PackageReference Include="Xamarin.FFImageLoading">
       <Version>2.4.11.982</Version>
     </PackageReference>
-    <PackageReference Include="Plugin.Permissions" Version="6.0.0-beta" />
+    <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
     <PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="71.1620.0" />
   </ItemGroup>
   <ItemGroup>
