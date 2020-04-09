@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
@@ -15,6 +14,7 @@ using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Core;
+using Fragment = AndroidX.Fragment.App.Fragment;
 
 namespace MvvmCross.Platforms.Android.Views
 {

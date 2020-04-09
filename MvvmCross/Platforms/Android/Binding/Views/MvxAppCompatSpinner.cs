@@ -10,15 +10,14 @@ using Android.Runtime;
 using AndroidX.AppCompat.Widget;
 using Android.Util;
 using MvvmCross.Binding.Attributes;
-using MvvmCross.Platforms.Android.Binding.Views;
 
-namespace MvvmCross.DroidX.AppCompat.Widget
+namespace MvvmCross.Platforms.Android.Binding.Views
 {
     /// <summary>
     /// Tint-aware version of MvxSpinner styled properly with AppCompat V22.2+.
     /// TODO: We may want to figure out a way to delegate to a common class for both.
     /// </summary>
-    [Register("mvvmcross.droidx.appcompat.widget.MvxAppCompatSpinner")]
+    [Register("mvvmcross.platforms.android.binding.views.MvxAppCompatSpinner")]
     public class MvxAppCompatSpinner : AppCompatSpinner
     {
         public MvxAppCompatSpinner(Context context, IAttributeSet attrs)

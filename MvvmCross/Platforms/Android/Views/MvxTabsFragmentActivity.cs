@@ -1,16 +1,16 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using AndroidX.Fragment.App;
 using Java.Lang;
 using MvvmCross.Base;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
@@ -144,10 +144,10 @@ namespace MvvmCross.Platforms.Android.Views
             // Check to see if we already have a CachedFragment for this tab, probably
             // from a previously saved state.  If so, deactivate it, because our
             // initial state is that a tab isn't shown.
-            tabInfo.CachedFragment = activity.FragmentManager.FindFragmentByTag(tag);
+            tabInfo.CachedFragment = activity.SupportFragmentManager.FindFragmentByTag(tag);
             if (tabInfo.CachedFragment != null && !tabInfo.CachedFragment.IsDetached)
             {
-                var ft = activity.FragmentManager.BeginTransaction();
+                var ft = activity.SupportFragmentManager.BeginTransaction();
                 ft.Detach(tabInfo.CachedFragment);
                 ft.Commit();
                 activity.FragmentManager.ExecutePendingTransactions();
@@ -161,7 +161,7 @@ namespace MvvmCross.Platforms.Android.Views
             var newTab = _lookup[tag];
             if (_currentTab != newTab)
             {
-                var ft = FragmentManager.BeginTransaction();
+                var ft = SupportFragmentManager.BeginTransaction();
                 OnTabFragmentChanging(tag, ft);
                 if (_currentTab?.CachedFragment != null)
                 {

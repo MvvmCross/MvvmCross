@@ -7,9 +7,8 @@ using Android.Graphics;
 using AndroidX.AppCompat.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Exceptions;
-using MvvmCross.Platforms.Android.Binding.Target;
 
-namespace MvvmCross.DroidX.AppCompat.Target
+namespace MvvmCross.Platforms.Android.Binding.Target
 {
     public abstract class MvxAppCompatBaseImageViewTargetBinding
         : MvxAndroidTargetBinding
@@ -29,10 +28,10 @@ namespace MvvmCross.DroidX.AppCompat.Target
 
             try
             {
-                Bitmap bitmap;
-                if (!GetBitmap(value, out bitmap))
+                if (!GetBitmap(value, out var bitmap))
                     return;
-                SetImageBitmap(imageView, bitmap);
+                using (bitmap)
+                    SetImageBitmap(imageView, bitmap);
             }
             catch (Exception ex)
             {

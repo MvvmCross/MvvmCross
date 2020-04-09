@@ -7,20 +7,18 @@ using System.Collections.Generic;
 using System.Linq;
 using Android.OS;
 using Android.Runtime;
-using AndroidX.Fragment.App;
 using Android.Views;
+using AndroidX.Fragment.App;
+using AndroidX.ViewPager.Widget;
 using Java.Lang;
 using MvvmCross.Logging;
-using Object = Java.Lang.Object;
-using MvvmCross.Platforms.Android.Views;
-using AndroidX.ViewPager.Widget;
 
-namespace MvvmCross.DroidX.Fragments
+namespace MvvmCross.Platforms.Android.Views.ViewPager
 {
     //http://speakman.net.nz/blog/2014/02/20/a-bug-in-and-a-fix-for-the-way-fragmentstatepageradapter-handles-fragment-restoration/
     //https://github.com/adamsp/FragmentStatePagerIssueExample/blob/master/app/src/main/java/com/example/fragmentstatepagerissueexample/app/FixedFragmentStatePagerAdapter.java
     //https://android.googlesource.com/platform/frameworks/support/+/320113721c2e14bbc2403809046fa2959a665c11/fragment/src/main/java/androidx/fragment/app/FragmentStatePagerAdapter.java
-    [Register("mvvmcross.droidx.fragments.MvxCachingFragmentPagerAdapter")]
+    [Register("mvvmcross.platforms.android.views.viewpager.MvxCachingFragmentPagerAdapter")]
     public abstract class MvxCachingFragmentPagerAdapter : PagerAdapter
     {
         private Fragment _currentPrimaryItem;
@@ -49,7 +47,7 @@ namespace MvvmCross.DroidX.Fragments
 
         public abstract Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null);
 
-        public override void DestroyItem(ViewGroup container, int position, Object objectValue)
+        public override void DestroyItem(ViewGroup container, int position, Java.Lang.Object objectValue)
         {
             var fragment = (Fragment)objectValue;
 
@@ -57,7 +55,7 @@ namespace MvvmCross.DroidX.Fragments
                 _curTransaction = _fragmentManager.BeginTransaction();
 
 #if DEBUG
-            MvxAndroidLog.Instance.Trace(
+            MvxLog.Instance.Trace(
                 $"Removing item #{position}: f={objectValue} v={((Fragment)objectValue).View} t={fragment.Tag}");
 #endif
 
@@ -83,7 +81,7 @@ namespace MvvmCross.DroidX.Fragments
             _curTransaction = null;
         }
 
-        public override Object InstantiateItem(ViewGroup container, int position)
+        public override Java.Lang.Object InstantiateItem(ViewGroup container, int position)
         {
             // If we already have this item instantiated, there is nothing
             // to do.  This can happen when we are restoring the entire pager
@@ -120,7 +118,7 @@ namespace MvvmCross.DroidX.Fragments
             }
 
 #if DEBUG
-            MvxAndroidLog.Instance.Trace("Adding item #{0}: f={1} t={2}", position, fragment, fragmentTag);
+            MvxLog.Instance.Trace("Adding item #{0}: f={1} t={2}", position, fragment, fragmentTag);
 #endif
 
             while (_fragments.Count <= position)
@@ -134,7 +132,7 @@ namespace MvvmCross.DroidX.Fragments
             return fragment;
         }
 
-        public override bool IsViewFromObject(View view, Object objectValue)
+        public override bool IsViewFromObject(View view, Java.Lang.Object objectValue)
         {
             return ((Fragment)objectValue).View == view;
         }
@@ -218,7 +216,7 @@ namespace MvvmCross.DroidX.Fragments
             return state;
         }
 
-        public override void SetPrimaryItem(ViewGroup container, int position, Object objectValue)
+        public override void SetPrimaryItem(ViewGroup container, int position, Java.Lang.Object objectValue)
         {
             var fragment = (Fragment)objectValue;
             if (fragment == _currentPrimaryItem)

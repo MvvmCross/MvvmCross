@@ -14,11 +14,10 @@ using Android.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Attributes;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.Platforms.Android.Binding.Views;
 
-namespace MvvmCross.DroidX.AppCompat.Widget
+namespace MvvmCross.Platforms.Android.Binding.Views
 {
-    [Register("mvvmcross.droidx.appcompat.widget.MvxAppCompatRadioGroup")]
+    [Register("mvvmcross.platforms.android.binding.views.MvxAppCompatRadioGroup")]
     public class MvxAppCompatRadioGroup : RadioGroup, IMvxWithChangeAdapter
     {
         public MvxAppCompatRadioGroup(Context context, IAttributeSet attrs)

@@ -8,6 +8,7 @@ using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.DroidX.Leanback.Fragments.EventSource;
 using MvvmCross.Platforms.Android.Views;
+using MvvmCross.Platforms.Android.Views.Fragments;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.DroidX.Leanback.Fragments
@@ -32,7 +33,7 @@ namespace MvvmCross.DroidX.Leanback.Fragments
 
         protected MvxRowsSupportFragment()
         {
-            DroidX.Fragments.MvxFragmentExtensions.AddEventListeners(this);
+            var _ = new MvxBindingFragmentAdapter(this);
         }
 
         protected MvxRowsSupportFragment(IntPtr javaReference, JniHandleOwnership transfer)

@@ -7,11 +7,10 @@ using AndroidX.AppCompat.Widget;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding;
-using MvvmCross.DroidX.AppCompat.Widget;
-using MvvmCross.Platforms.Android.Binding.Target;
 using MvvmCross.WeakSubscription;
+using MvvmCross.Platforms.Android.Binding.Views;
 
-namespace MvvmCross.DroidX.AppCompat.Target
+namespace MvvmCross.Platforms.Android.Binding.Target
 {
     public class MvxAppCompatRadioGroupSelectedItemBinding
         : MvxAndroidTargetBinding

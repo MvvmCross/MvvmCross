@@ -9,6 +9,7 @@ using Android.Runtime;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.DroidX.Material.EventSource;
 using MvvmCross.Platforms.Android.Views;
+using MvvmCross.Platforms.Android.Views.Fragments;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.DroidX.Material
@@ -19,7 +20,7 @@ namespace MvvmCross.DroidX.Material
     {
         protected MvxBottomSheetDialogFragment()
         {
-            Fragments.MvxFragmentExtensions.AddEventListeners(this);
+            var _ = new MvxBindingFragmentAdapter(this);
         }
 
         protected MvxBottomSheetDialogFragment(IntPtr javaReference, JniHandleOwnership transfer)

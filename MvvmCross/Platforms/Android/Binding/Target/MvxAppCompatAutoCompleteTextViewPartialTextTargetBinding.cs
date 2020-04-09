@@ -5,45 +5,43 @@
 using System;
 using System.Reflection;
 using MvvmCross.Binding;
-using MvvmCross.DroidX.AppCompat.Widget;
 using MvvmCross.Platforms.Android.WeakSubscription;
-using MvvmCross.Platforms.Android.Binding.Target;
+using MvvmCross.Platforms.Android.Binding.Views;
 
-namespace MvvmCross.DroidX.AppCompat.Target
+namespace MvvmCross.Platforms.Android.Binding.Target
 {
-    public class MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding
-        : MvxAndroidPropertyInfoTargetBinding<MvxAppCompatAutoCompleteTextView>
+    public class MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding
+       : MvxAndroidPropertyInfoTargetBinding<MvxAppCompatAutoCompleteTextView>
     {
         private IDisposable _subscription;
 
-        public MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding(object target, PropertyInfo targetPropertyInfo)
+        public MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding(object target, PropertyInfo targetPropertyInfo)
             : base(target, targetPropertyInfo)
         {
-            var autoComplete = this.View;
+            var autoComplete = View;
             if (autoComplete == null)
             {
                 MvxBindingLog.Error(
-                    "Error - autoComplete is null in MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding");
+                    "Error - autoComplete is null in MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding");
             }
         }
 
-        private void AutoCompleteOnSelectedObjectChanged(object sender, EventArgs eventArgs)
+        private void AutoCompleteOnPartialTextChanged(object sender, EventArgs eventArgs)
         {
-            FireValueChanged(View.SelectedObject);
+            FireValueChanged(View.PartialText);
         }
 
         public override MvxBindingMode DefaultMode => MvxBindingMode.OneWayToSource;
 
         public override void SubscribeToEvents()
         {
-            var autoComplete = this.View;
-
+            var autoComplete = View;
             if (autoComplete == null)
                 return;
 
             _subscription = autoComplete.WeakSubscribe(
-                nameof(autoComplete.SelectedObjectChanged),
-                AutoCompleteOnSelectedObjectChanged);
+                nameof(autoComplete.PartialTextChanged),
+                AutoCompleteOnPartialTextChanged);
         }
 
         protected override void Dispose(bool isDisposing)

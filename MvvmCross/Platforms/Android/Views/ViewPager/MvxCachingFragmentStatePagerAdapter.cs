@@ -10,17 +10,15 @@ using Android.OS;
 using Android.Runtime;
 using AndroidX.Fragment.App;
 using Java.Lang;
-using MvvmCross.Platforms.Android;
 using MvvmCross.Platforms.Android.Presenters;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
-using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 using JavaObject = Java.Lang.Object;
 using JavaString = Java.Lang.String;
 
-namespace MvvmCross.DroidX.Fragments
+namespace MvvmCross.Platforms.Android.Views.ViewPager
 {
-    [Register("mvvmcross.droidx.fragments.MvxCachingFragmentStatePagerAdapter")]
+    [Register("mvvmcross.platforms.android.views.viewpager.MvxCachingFragmentStatePagerAdapter")]
     public class MvxCachingFragmentStatePagerAdapter : MvxCachingFragmentPagerAdapter
     {
         private readonly Context _context;
@@ -92,7 +90,7 @@ namespace MvvmCross.DroidX.Fragments
 
             return viewModelLoader.LoadViewModel(fragmentInfo.Request, null);
         }
-        
+
         private static Bundle GetArguments(MvxViewPagerFragmentInfo fragmentInfo)
         {
             var navigationSerializer = Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>();

@@ -12,6 +12,7 @@ using Android.Content;
 using Android.OS;
 using Android.Util;
 using Android.Views;
+using Java.Lang;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Core;
@@ -22,6 +23,11 @@ using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
+using Activity = AndroidX.AppCompat.App.AppCompatActivity;
+using DialogFragment = AndroidX.Fragment.App.DialogFragment;
+using Fragment = AndroidX.Fragment.App.Fragment;
+using FragmentManager = AndroidX.Fragment.App.FragmentManager;
+using FragmentTransaction = AndroidX.Fragment.App.FragmentTransaction;
 
 namespace MvvmCross.Platforms.Android.Presenters
 {
@@ -32,7 +38,7 @@ namespace MvvmCross.Platforms.Android.Presenters
         public const string SharedElementsBundleKey = "__sharedElementsKey";
         protected MvxViewModelRequest _pendingRequest;
 
-        protected virtual FragmentManager CurrentFragmentManager => CurrentActivity.FragmentManager;
+        protected virtual FragmentManager CurrentFragmentManager => CurrentActivity.SupportFragmentManager;
 
         private IMvxAndroidCurrentTopActivity _androidCurrentTopActivity;
         protected virtual Activity CurrentActivity
@@ -41,7 +47,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             {
                 if (_androidCurrentTopActivity == null)
                     _androidCurrentTopActivity = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>();
-                return _androidCurrentTopActivity.Activity;
+                return _androidCurrentTopActivity.Activity as Activity;
             }
         }
 
@@ -320,7 +326,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 if (CurrentActivity.FindViewById(attribute.FragmentContentId) == null)
                     throw new NullReferenceException("FrameLayout to show Fragment not found");
 
-                PerformShowFragmentTransaction(CurrentActivity.FragmentManager, attribute, request);
+                PerformShowFragmentTransaction(CurrentActivity.SupportFragmentManager, attribute, request);
             }
             return Task.FromResult(true);
         }
@@ -354,7 +360,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             {
                 fragment = (IMvxFragmentView)fragmentManager.FindFragmentByTag(fragmentName);
             }
-            fragment = fragment ?? CreateFragment(attribute, fragmentName);
+            fragment = fragment ?? CreateFragment(fragmentManager, attribute, attribute.ViewType);
 
             var fragmentView = fragment.ToFragment();
 
@@ -386,12 +392,12 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             OnBeforeFragmentChanging(ft, fragmentView, attribute, request);
 
-            if (attribute.AddToBackStack == true)
+            if (attribute.AddToBackStack)
                 ft.AddToBackStack(fragmentName);
 
             OnFragmentChanging(ft, fragmentView, attribute, request);
 
-            ft.Replace(attribute.FragmentContentId, (Fragment)fragment, fragmentName);
+            ft.Replace(attribute.FragmentContentId, fragmentView, fragmentName);
             ft.CommitAllowingStateLoss();
 
             OnFragmentChanged(ft, fragmentView, attribute, request);
@@ -451,7 +457,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             MvxViewModelRequest request)
         {
             var fragmentName = attribute.ViewType.FragmentJavaName();
-            IMvxFragmentView mvxFragmentView = CreateFragment(attribute, fragmentName);
+            IMvxFragmentView mvxFragmentView = CreateFragment(CurrentActivity.SupportFragmentManager, attribute, attribute.ViewType);
             var dialog = (DialogFragment)mvxFragmentView;
 
             // MvxNavigationService provides an already instantiated ViewModel here,
@@ -471,7 +477,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             OnBeforeFragmentChanging(ft, dialog, attribute, request);
 
-            if (attribute.AddToBackStack == true)
+            if (attribute.AddToBackStack)
                 ft.AddToBackStack(fragmentName);
 
             OnFragmentChanging(ft, dialog, attribute, request);
@@ -567,7 +573,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                         ? fragmentName
                         : fragmentAttribute.PopBackStackImmediateName;
 
-                    fragmentManager.PopBackStackImmediate(popBackStackFragmentName, fragmentAttribute.PopBackStackImmediateFlag.ToNativePopBackStackFlags());
+                    fragmentManager.PopBackStackImmediate(popBackStackFragmentName, (int)fragmentAttribute.PopBackStackImmediateFlag.ToNativePopBackStackFlags());
 
                     OnFragmentPopped(null, null, fragmentAttribute);
                     return true;
@@ -604,17 +610,18 @@ namespace MvvmCross.Platforms.Android.Presenters
         }
         #endregion
 
-        protected virtual IMvxFragmentView CreateFragment(MvxBasePresentationAttribute attribute,
-            string fragmentName)
+        protected virtual IMvxFragmentView CreateFragment(FragmentManager fragmentManager, MvxBasePresentationAttribute attribute,
+            Type fragmentType)
         {
             try
             {
-                var fragment = (IMvxFragmentView)Fragment.Instantiate(CurrentActivity, fragmentName);
+                var fragmentClass = Class.FromType(fragmentType);
+                var fragment = (IMvxFragmentView)fragmentManager.FragmentFactory.Instantiate(fragmentClass.ClassLoader, fragmentClass.Name);
                 return fragment;
             }
             catch (System.Exception ex)
             {
-                throw new MvxException(ex, $"Cannot create Fragment '{fragmentName}'. Use the MvxAppCompatViewPresenter when using Android Support Fragments");
+                throw new MvxException(ex, $"Cannot create Fragment '{fragmentType.Name}'");
             }
         }
 
