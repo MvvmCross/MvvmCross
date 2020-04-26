@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.Preferences;
+using AndroidX.Preference;
 using Android.Views;
 using Android.Webkit;
 using Android.Widget;
@@ -16,6 +16,7 @@ using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.ResourceHelpers;
 using MvvmCross.Platforms.Android.Binding.Target;
 using MvvmCross.Platforms.Android.Binding.Views;
+using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
 namespace MvvmCross.Platforms.Android.Binding
 {
@@ -240,6 +241,28 @@ namespace MvvmCross.Platforms.Android.Binding
             registry.RegisterCustomBindingFactory<WebView>(
                 MvxAndroidPropertyBinding.WebView_Html,
                 view => new MvxWebViewHtmlTargetBinding(view));
+
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding),
+                typeof(MvxAppCompatAutoCompleteTextView),
+                MvxAndroidPropertyBinding.MvxAppCompatAutoCompleteTextView_PartialText);
+
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding),
+                typeof(MvxAppCompatAutoCompleteTextView),
+                MvxAndroidPropertyBinding.MvxAppCompatAutoCompleteTextView_SelectedObject);
+
+            registry.RegisterCustomBindingFactory<MvxAppCompatSpinner>(
+                MvxAndroidPropertyBinding.MvxAppCompatSpinner_SelectedItem,
+                spinner => new MvxAppCompatSpinnerSelectedItemBinding(spinner));
+
+            registry.RegisterCustomBindingFactory<MvxAppCompatRadioGroup>(
+                MvxAndroidPropertyBinding.MvxAppCompatRadioGroup_SelectedItem,
+                radioGroup => new MvxAppCompatRadioGroupSelectedItemBinding(radioGroup));
+
+            registry.RegisterCustomBindingFactory<Toolbar>(
+                MvxAndroidPropertyBinding.Toolbar_Subtitle,
+                toolbar => new MvxToolbarSubtitleBinding(toolbar));
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)

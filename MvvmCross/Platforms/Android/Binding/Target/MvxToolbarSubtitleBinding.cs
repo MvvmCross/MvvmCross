@@ -7,7 +7,7 @@ using AndroidX.AppCompat.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target;
 
-namespace MvvmCross.DroidX.AppCompat.Target
+namespace MvvmCross.Platforms.Android.Binding.Target
 {
     public class MvxToolbarSubtitleBinding
         : MvxConvertingTargetBinding
@@ -22,7 +22,8 @@ namespace MvvmCross.DroidX.AppCompat.Target
 
         protected override void SetValueImpl(object target, object value)
         {
-            ((Toolbar)target).Subtitle = (string)value;
+            if (target is Toolbar toolbar)
+                toolbar.Subtitle = (string)value;
         }
 
         protected Toolbar Toolbar => (Toolbar)Target;

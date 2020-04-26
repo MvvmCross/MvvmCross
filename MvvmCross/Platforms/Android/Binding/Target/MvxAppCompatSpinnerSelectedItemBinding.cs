@@ -5,11 +5,10 @@
 using System;
 using Android.Widget;
 using MvvmCross.Binding;
-using MvvmCross.DroidX.AppCompat.Widget;
+using MvvmCross.Platforms.Android.Binding.Views;
 using MvvmCross.Platforms.Android.WeakSubscription;
-using MvvmCross.Platforms.Android.Binding.Target;
 
-namespace MvvmCross.DroidX.AppCompat.Target
+namespace MvvmCross.Platforms.Android.Binding.Target
 {
     public class MvxAppCompatSpinnerSelectedItemBinding
         : MvxAndroidTargetBinding

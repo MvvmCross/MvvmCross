@@ -168,14 +168,6 @@
       <Project>{45f63a4a-9a37-4929-9c80-48a91f346e0d}</Project>
       <Name>MvvmCross.DroidX.Material</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross.DroidX\Fragment\MvvmCross.DroidX.Fragment.csproj">
-      <Project>{fc0b3e3c-8b00-48fa-af93-981a45b2be4b}</Project>
-      <Name>MvvmCross.DroidX.Fragment</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross.DroidX\AppCompat\MvvmCross.DroidX.AppCompat.csproj">
-      <Project>{fd67cbbc-4bac-40d6-9f4c-28aae6c8533e}</Project>
-      <Name>MvvmCross.DroidX.AppCompat</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross.DroidX\RecyclerView\MvvmCross.DroidX.RecyclerView.csproj">
       <Project>{6f49cfe7-3fcb-463d-85dc-1798e2be771e}</Project>
       <Name>MvvmCross.DroidX.RecyclerView</Name>

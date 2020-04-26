@@ -6,11 +6,10 @@ using System;
 using AndroidX.AppCompat.Widget;
 using MvvmCross.Binding;
 using MvvmCross.Platforms.Android.WeakSubscription;
-using MvvmCross.Platforms.Android.Binding.Target;
 
-namespace MvvmCross.DroidX.AppCompat.Target
+namespace MvvmCross.Platforms.Android.Binding.Target
 {
-    public class MvxAppCompatSearchViewQueryTextTargetBinding 
+    public class MvxAppCompatSearchViewQueryTextTargetBinding
         : MvxAndroidTargetBinding
     {
         private IDisposable _subscription;
@@ -33,8 +32,11 @@ namespace MvvmCross.DroidX.AppCompat.Target
                 HandleQueryTextChanged);
         }
 
-        protected override void SetValueImpl(object target, object value) =>
-            ((SearchView)target).SetQuery((string)value, true);
+        protected override void SetValueImpl(object target, object value)
+        {
+            if (target is SearchView searchView)
+                searchView.SetQuery((string)value, true);
+        }
 
         protected override void Dispose(bool isDisposing)
         {

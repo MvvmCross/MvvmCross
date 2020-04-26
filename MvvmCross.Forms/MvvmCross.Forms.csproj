@@ -82,8 +82,6 @@
     <Compile Include="Platforms\Xamarin\**\*.cs" />
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.1.0" />
     <PackageReference Include="Xamarin.AndroidX.CardView" Version="1.0.0" />
-    <ProjectReference Include="..\MvvmCross.DroidX\AppCompat\MvvmCross.DroidX.AppCompat.csproj" />
-    <ProjectReference Include="..\MvvmCross.DroidX\Fragment\MvvmCross.DroidX.Fragment.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">

@@ -8,7 +8,7 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using MvvmCross.Base;
-using MvvmCross.ViewModels;
+using Activity = AndroidX.AppCompat.App.AppCompatActivity;
 
 namespace MvvmCross.Platforms.Android.Views.Base
 {
@@ -25,11 +25,11 @@ namespace MvvmCross.Platforms.Android.Views.Base
         {
         }
 
-        protected override void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
-            CreateWillBeCalled.Raise(this, bundle);
-            base.OnCreate(bundle);
-            CreateCalled.Raise(this, bundle);
+            CreateWillBeCalled.Raise(this, savedInstanceState);
+            base.OnCreate(savedInstanceState);
+            CreateCalled.Raise(this, savedInstanceState);
         }
 
         protected override void OnDestroy()
