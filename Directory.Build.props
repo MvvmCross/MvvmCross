@@ -70,7 +70,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <TargetsToBuildDeveloperOverride>Uap</TargetsToBuildDeveloperOverride>          
+    <TargetsToBuildDeveloperOverride>Android</TargetsToBuildDeveloperOverride>             
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">

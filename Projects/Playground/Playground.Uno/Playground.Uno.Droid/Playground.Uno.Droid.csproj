@@ -16,7 +16,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidUseIntermediateDesignerFile>True</AndroidUseIntermediateDesignerFile>
     <ResourcesDirectory>..\Playground.Uno.Shared\Strings</ResourcesDirectory>
@@ -65,7 +65,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Filter">
       <Version>1.1.1</Version>
     </PackageReference>
-    <PackageReference Include="Uno.UI" Version="1.46.196-dev.2440" />
+    <PackageReference Include="Uno.UI" Version="2.3.0-dev.98" />
     <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.32" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +91,10 @@
     <AndroidResource Include="Resources\values\Styles.xml" />
   </ItemGroup>
   <ItemGroup>
+    <!--<PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.1.0" />
+    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat.Resources" Version="1.1.0" />
+    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.1.0" />-->
     <ProjectReference Include="..\..\..\..\MvvmCross.Uno.Plugins\MvvmCross.Uno.Plugins.csproj">
       <Project>{5abb12b2-64d0-4fee-affb-80e0fd81ea50}</Project>
       <Name>MvvmCross.Uno.Plugins</Name>
