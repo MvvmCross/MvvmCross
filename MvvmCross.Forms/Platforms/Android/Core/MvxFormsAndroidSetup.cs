@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.Content;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Localization;
@@ -11,7 +10,6 @@ using System.Linq;
 using System.Reflection;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platforms.Android.Bindings;
-using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Presenters;
 using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
@@ -19,13 +17,12 @@ using MvvmCross.Platforms.Android;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.Forms.Platforms.Android.Presenters;
 using Xamarin.Forms;
-using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Core;
 using MvvmCross.IoC;
+using MvvmCross.Platforms.Android.Core;
 
 namespace MvvmCross.Forms.Platforms.Android.Core
 {
-    public abstract class MvxFormsAndroidSetup : MvxAppCompatSetup, IMvxFormsSetup
+    public abstract class MvxFormsAndroidSetup : MvxAndroidSetup, IMvxFormsSetup
     {
         private List<Assembly> _viewAssemblies;
         private Application _formsApplication;

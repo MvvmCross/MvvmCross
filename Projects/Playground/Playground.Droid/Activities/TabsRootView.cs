@@ -5,7 +5,7 @@
 using System.Threading.Tasks;
 using Android.App;
 using Android.OS;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.DroidX.AppCompat;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
 

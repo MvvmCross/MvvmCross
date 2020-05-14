@@ -1,10 +1,10 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
-using Android.App;
 using Android.OS;
+using AndroidX.Fragment.App;
 using MvvmCross.Base;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Core;
@@ -23,7 +23,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             : base(eventSource)
         {
             if (!(eventSource is IMvxFragmentView))
-                throw new ArgumentException("eventSource must be an IMvxFragmentView");
+                throw new ArgumentException("eventSource must be an IMvxFragmentView", nameof(eventSource));
         }
 
         protected override void HandleCreateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)

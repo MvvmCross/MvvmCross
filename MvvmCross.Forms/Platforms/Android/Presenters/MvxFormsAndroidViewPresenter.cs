@@ -2,22 +2,21 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Forms.Presenters;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Forms.Core;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Forms.Platforms.Android.Views;
 using Xamarin.Forms;
 using System.Threading.Tasks;
+using MvvmCross.Platforms.Android.Presenters;
 
 namespace MvvmCross.Forms.Platforms.Android.Presenters
 {
     public class MvxFormsAndroidViewPresenter
-        : MvxAppCompatViewPresenter, IMvxFormsViewPresenter
+        : MvxAndroidViewPresenter, IMvxFormsViewPresenter
     {
         public MvxFormsAndroidViewPresenter(IEnumerable<Assembly> androidViewAssemblies, Application formsApplication) : base(androidViewAssemblies)
         {
@@ -78,7 +77,7 @@ namespace MvvmCross.Forms.Platforms.Android.Presenters
         {
             CloseFragments();
             if (!(CurrentActivity is MvxFormsAppCompatActivity || CurrentActivity is MvxFormsApplicationActivity) &&
-                !(CurrentActivity is MvxSplashScreenActivity || CurrentActivity is MvxSplashScreenAppCompatActivity))
+                !(CurrentActivity is MvxSplashScreenActivity))
                 CurrentActivity?.Finish();
             return true;
         }

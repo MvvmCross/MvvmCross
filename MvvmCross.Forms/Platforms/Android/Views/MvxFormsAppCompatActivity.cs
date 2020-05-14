@@ -9,7 +9,6 @@ using Android.Util;
 using Android.Views;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core;
-using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Forms.Platforms.Android.Core;
 using MvvmCross.Forms.Platforms.Android.Views.Base;
 using MvvmCross.Forms.Presenters;
@@ -206,12 +205,6 @@ namespace MvvmCross.Forms.Platforms.Android.Views
             }
 
             MoveTaskToBack(true);
-        }
-
-        public override View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
-        {
-            var view = MvxAppCompatActivityHelper.OnCreateView(parent, name, context, attrs);
-            return view ?? base.OnCreateView(parent, name, context, attrs);
         }
 
         protected virtual void RegisterSetup()

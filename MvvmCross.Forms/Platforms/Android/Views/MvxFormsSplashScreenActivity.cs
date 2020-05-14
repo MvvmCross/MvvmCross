@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using MvvmCross.Core;
-using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Forms.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
@@ -11,7 +10,7 @@ using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platforms.Android.Views
 {
-    public abstract class MvxFormsSplashScreenActivity<TMvxAndroidSetup, TApplication, TFormsApplication> : MvxSplashScreenAppCompatActivity
+    public abstract class MvxFormsSplashScreenActivity<TMvxAndroidSetup, TApplication, TFormsApplication> : MvxSplashScreenActivity
             where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
             where TApplication : class, IMvxApplication, new()
             where TFormsApplication : Application, new()
