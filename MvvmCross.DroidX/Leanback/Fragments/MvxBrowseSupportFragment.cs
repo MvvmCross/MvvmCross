@@ -79,8 +79,7 @@ namespace MvvmCross.DroidX.Leanback.Fragments
         public string UniqueImmutableCacheTag => Tag;
     }
 
-    public abstract class MvxBrowseSupportFragment<TViewModel>
-        : MvxBrowseSupportFragment, IMvxFragmentView<TViewModel> 
+    public abstract class MvxBrowseSupportFragment<TViewModel> : MvxBrowseSupportFragment, IMvxFragmentView<TViewModel> 
         where TViewModel : class, IMvxViewModel
     {
         protected MvxBrowseSupportFragment()
@@ -96,6 +95,11 @@ namespace MvvmCross.DroidX.Leanback.Fragments
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxFragmentView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxFragmentView<TViewModel>, TViewModel>();
         }
     }
 }

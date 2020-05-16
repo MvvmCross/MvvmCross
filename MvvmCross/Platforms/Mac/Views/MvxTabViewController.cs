@@ -124,8 +124,8 @@ namespace MvvmCross.Platforms.Mac.Views
         }
     }
 
-    public class MvxTabViewController<TViewModel>
-        : MvxTabViewController, IMvxMacView<TViewModel> where TViewModel : class, IMvxViewModel
+    public class MvxTabViewController<TViewModel> : MvxTabViewController, IMvxMacView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         public MvxTabViewController()
         {
@@ -149,6 +149,11 @@ namespace MvvmCross.Platforms.Mac.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxMacView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxMacView<TViewModel>, TViewModel>();
         }
     }
 }

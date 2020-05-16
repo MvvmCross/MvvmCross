@@ -1,5 +1,4 @@
 ﻿using System;
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using Playground.Core.ViewModels;
@@ -18,13 +17,11 @@ namespace Playground.iOS.Views
         {
             base.ViewDidLoad();
 
-            var set = this.CreateBindingSet<Tab1View, Tab1ViewModel>();
-
+            var set = CreateBindingSet();
             set.Bind(btnModal).To(vm => vm.OpenModalCommand);
             set.Bind(btnNavModal).To(vm => vm.OpenNavModalCommand);
             set.Bind(btnChild).To(vm => vm.OpenChildCommand);
             set.Bind(btnTab2).To(vm => vm.OpenTab2Command);
-
             set.Apply();
         }
     }

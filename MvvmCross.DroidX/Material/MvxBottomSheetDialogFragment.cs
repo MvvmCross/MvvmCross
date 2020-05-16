@@ -119,9 +119,8 @@ namespace MvvmCross.DroidX.Material
         }
     }
 
-    public abstract class MvxBottomSheetDialogFragment<TViewModel>
-        : MvxBottomSheetDialogFragment
-        , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+    public abstract class MvxBottomSheetDialogFragment<TViewModel> : MvxBottomSheetDialogFragment, IMvxFragmentView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         public MvxBottomSheetDialogFragment()
         {
@@ -136,6 +135,11 @@ namespace MvvmCross.DroidX.Material
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxFragmentView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxFragmentView<TViewModel>, TViewModel>();
         }
     }
 }

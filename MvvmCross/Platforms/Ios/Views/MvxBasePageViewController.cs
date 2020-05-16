@@ -3,9 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
 using Foundation;
-using MvvmCross.Logging;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Views.Base;
 using MvvmCross.ViewModels;
@@ -163,6 +161,11 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxIosView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxIosView<TViewModel>, TViewModel>();
         }
     }
 }

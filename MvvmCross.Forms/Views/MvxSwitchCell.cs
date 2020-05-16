@@ -104,5 +104,10 @@ namespace MvvmCross.Forms.Views
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
         }
+
+        public MvxFluentBindingDescriptionSet<IMvxElement<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxElement<TViewModel>, TViewModel>();
+        }
     }
 }

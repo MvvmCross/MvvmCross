@@ -212,21 +212,25 @@ namespace MvvmCross.Forms.Platforms.Android.Views
         }
     }
 
-    public class MvxFormsAppCompatActivity<TViewModel>
-        : MvxFormsAppCompatActivity
-    , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+    public class MvxFormsAppCompatActivity<TViewModel> : MvxFormsAppCompatActivity, IMvxAndroidView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
         }
+
+        public MvxFluentBindingDescriptionSet<IMvxAndroidView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxAndroidView<TViewModel>, TViewModel>();
+        }
     }
 
     public abstract class MvxFormsAppCompatActivity<TMvxAndroidSetup, TApplication, TFormsApplication> : MvxFormsAppCompatActivity
-    where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
-    where TApplication : class, IMvxApplication, new()
-    where TFormsApplication : Application, new()
+        where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
+        where TApplication : class, IMvxApplication, new()
+        where TFormsApplication : Application, new()
     {
         protected override void RegisterSetup()
         {
@@ -235,10 +239,10 @@ namespace MvvmCross.Forms.Platforms.Android.Views
     }
 
     public abstract class MvxFormsAppCompatActivity<TMvxAndroidSetup, TApplication, TFormsApplication, TViewModel> : MvxFormsAppCompatActivity<TViewModel>
-    where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
-    where TApplication : class, IMvxApplication, new()
-    where TFormsApplication : Application, new()
-         where TViewModel : class, IMvxViewModel
+        where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
+        where TApplication : class, IMvxApplication, new()
+        where TFormsApplication : Application, new()
+        where TViewModel : class, IMvxViewModel
     {
         protected override void RegisterSetup()
         {

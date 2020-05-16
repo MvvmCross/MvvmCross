@@ -1,6 +1,5 @@
 ﻿using System;
 using MvvmCross;
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Platforms.Ios.Views;
 using Playground.Core.ViewModels;
@@ -21,10 +20,8 @@ namespace Playground.iOS.Views
 
             View.BackgroundColor = UIColor.Green;
 
-            var set = this.CreateBindingSet<SecondChildView, SecondChildViewModel>();
-
+            var set = CreateBindingSet();
             set.Bind(btnClose).To(vm => vm.CloseCommand);
-
             set.Apply();
         }
 

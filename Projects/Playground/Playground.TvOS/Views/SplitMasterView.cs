@@ -1,5 +1,4 @@
 ﻿using System;
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Tvos.Presenters.Attributes;
 using MvvmCross.Platforms.Tvos.Views;
 using Playground.Core.ViewModels;
@@ -18,7 +17,7 @@ namespace Playground.TvOS
         {
             base.ViewDidLoad();
 
-            var bindingSet = this.CreateBindingSet<SplitMasterView, SplitMasterViewModel>();
+            var bindingSet = CreateBindingSet();
             bindingSet.Bind(btnDetail).To(vm => vm.OpenDetailCommand);
             bindingSet.Bind(btnDetailNav).To(vm => vm.OpenDetailNavCommand);
             bindingSet.Bind(btnStackNav).To(vm => vm.ShowRootViewModel);

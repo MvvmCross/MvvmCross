@@ -1,5 +1,4 @@
 ﻿using System;
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using Playground.Core.ViewModels;
@@ -18,11 +17,9 @@ namespace Playground.iOS.Views
         {
             base.ViewDidLoad();
 
-            var set = this.CreateBindingSet<Tab2View, Tab2ViewModel>();
-
+            var set = CreateBindingSet();
             set.Bind(btnShowStack).To(vm => vm.ShowRootViewModelCommand);
             set.Bind(btnClose).To(vm => vm.CloseViewModelCommand);
-
             set.Apply();
         }
     }

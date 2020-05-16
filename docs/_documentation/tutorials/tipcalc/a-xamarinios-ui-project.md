@@ -156,7 +156,7 @@ public override void ViewDidLoad()
 {
     base.ViewDidLoad();
 
-    var set = this.CreateBindingSet<TipView, TipViewModel>();
+    var set = CreateBindingSet();
     set.Bind(TipLabel).To(vm => vm.Tip);
     set.Bind(SubTotalTextField).To(vm => vm.SubTotal);
     set.Bind(GenerositySlider).To(vm => vm.Generosity);
@@ -173,7 +173,6 @@ What this code does is to generate 'in code' exactly the same type of data-bindi
 Altogether this looks like:
 
 ```c#
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Views;
 using TipCalc.Core.ViewModels;
 using UIKit;
@@ -190,7 +189,7 @@ namespace TipCalc.iOS
         {
             base.ViewDidLoad();
 
-            var set = this.CreateBindingSet<TipView, TipViewModel>();
+            var set = CreateBindingSet();
             set.Bind(TipLabel).To(vm => vm.Tip);
             set.Bind(SubTotalTextField).To(vm => vm.SubTotal);
             set.Bind(GenerositySlider).To(vm => vm.Generosity);
