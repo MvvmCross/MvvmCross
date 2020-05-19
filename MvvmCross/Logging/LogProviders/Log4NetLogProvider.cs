@@ -112,7 +112,7 @@ namespace MvvmCross.Logging.LogProviders
 
         internal class Log4NetLogger
         {
-            private readonly dynamic _logger;
+            private readonly object _logger;
             private static Type s_callerStackBoundaryType;
             private static readonly object CallerStackBoundaryTypeSync = new object();
 
@@ -163,9 +163,9 @@ namespace MvvmCross.Logging.LogProviders
             }
 
             [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ILogger")]
-            internal Log4NetLogger(dynamic logger)
+            internal Log4NetLogger(object logger)
             {
-                _logger = logger.Logger;
+                _logger = logger.GetType().GetRuntimeProperty("Logger").GetValue(logger, null);
             }
 
             private static Action<object, object> GetLogDelegate(Type loggerType, Type loggingEventType, UnaryExpression instanceCast,

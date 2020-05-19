@@ -42,7 +42,7 @@ public string LoadingMessage
 private MvxCommand _refreshCommand;
 public ICommand RefreshCommand => _refreshCommand = _refreshCommand ?? new MvxCommand(DoRefreshCommand);
 
-private DoRefreshCommand()
+private void DoRefreshCommand()
 {
     IsLoading = true;
     LoadingMessage = "Loading dogs and kittens...";
@@ -63,7 +63,7 @@ RefreshControl = refreshControl;
 
 var set = this.CreateBindingSet<MyView, MyViewModel>();
 set.Bind(refreshControl).For(r => r.IsRefreshing).To(vm => vm.IsLoading);
-set.Bind(refreshControl).For(r => r.RefreshCommand).To(vm => vm.ReloadCommand);
+set.Bind(refreshControl).For(r => r.RefreshCommand).To(vm => vm.RefreshCommand);
 set.Bind(refreshControl).For(r => r.Message).To(vm => vm.LoadingMessage);
 set.Apply();
 ```

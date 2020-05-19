@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -98,9 +98,8 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
         }
     }
 
-    public abstract class MvxPreferenceFragment<TViewModel>
-        : MvxPreferenceFragment
-        , IMvxFragmentView<TViewModel> where TViewModel : class, IMvxViewModel
+    public abstract class MvxPreferenceFragment<TViewModel> : MvxPreferenceFragment, IMvxFragmentView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         protected MvxPreferenceFragment()
         {
@@ -114,6 +113,11 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxFragmentView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxFragmentView<TViewModel>, TViewModel>();
         }
     }
 }

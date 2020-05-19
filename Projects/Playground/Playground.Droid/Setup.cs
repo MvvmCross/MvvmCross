@@ -5,9 +5,10 @@
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.DroidX.AppCompat;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Logging;
+using MvvmCross.Plugin;
 using Playground.Core;
 using Playground.Droid.Bindings;
 using Playground.Droid.Controls;
@@ -42,6 +43,13 @@ namespace Playground.Droid
                 (arg) => new BinaryEditTargetBinding(arg));
 
             base.FillTargetFactories(registry);
+        }
+
+        public override void LoadPlugins(IMvxPluginManager pluginManager)
+        {
+            base.LoadPlugins(pluginManager);
+
+            pluginManager.EnsurePluginLoaded<MvvmCross.Plugin.Location.Fused.Plugin>();
         }
     }
 }

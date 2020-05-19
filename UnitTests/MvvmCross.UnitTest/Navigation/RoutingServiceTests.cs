@@ -10,6 +10,7 @@ using Moq;
 using MvvmCross.Core;
 using MvvmCross.Exceptions;
 using MvvmCross.Navigation;
+using MvvmCross.Navigation.EventArguments;
 using MvvmCross.Tests;
 using MvvmCross.UnitTest.Mocks.Dispatchers;
 using MvvmCross.UnitTest.Mocks.TestViewModels;
@@ -37,7 +38,6 @@ namespace MvvmCross.UnitTest.Navigation
             _fixture = fixture;
             _fixture.ClearAll();
 
-            MvxNavigationService.LoadRoutes(new[] { typeof(RoutingServiceTests).Assembly });
             // ReSharper disable once AssignNullToNotNullAttribute
             Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
@@ -48,9 +48,9 @@ namespace MvvmCross.UnitTest.Navigation
         {
             var mockLocator = new Mock<IMvxViewModelLocator>();
             mockLocator.Setup(
-                m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>())).Returns(() => new SimpleTestViewModel());
+                m => m.Load(It.IsAny<Type>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxNavigateEventArgs>())).Returns(() => new SimpleTestViewModel());
             mockLocator.Setup(
-                m => m.Reload(It.IsAny<IMvxViewModel>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>())).Returns(() => new SimpleTestViewModel());
+                m => m.Reload(It.IsAny<IMvxViewModel>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxNavigateEventArgs>())).Returns(() => new SimpleTestViewModel());
 
             var mockCollection = new Mock<IMvxViewModelLocatorCollection>();
             mockCollection.Setup(m => m.FindViewModelLocator(It.IsAny<MvxViewModelRequest>()))
@@ -64,6 +64,7 @@ namespace MvvmCross.UnitTest.Navigation
             {
                 ViewDispatcher = MockDispatcher.Object,
             };
+            RoutingService.LoadRoutes(new[] { typeof(RoutingServiceTests).Assembly });
             fixture.Ioc.RegisterSingleton(navigationService);
             fixture.Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());
         }

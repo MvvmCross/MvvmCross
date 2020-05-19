@@ -46,16 +46,20 @@ namespace MvvmCross.Forms.Bindings
                     bindingBuilder.Append($", FallbackValue={FallbackValue}");
                 }
 
-                Bindable.SetValue(La.ngProperty, bindingBuilder.ToString());
-            }
-            else if(!string.IsNullOrEmpty(Source) && Mvx.IoCProvider.CanResolve<IMvxTextProvider>())
-            {
-                if(Arguments == null)
-                    return new MvxLanguageBinder(NameSpaceKey, TypeKey).GetText(Source);
+                if (Bindable != null)
+                {
+                    Bindable.SetValue(La.ngProperty, bindingBuilder.ToString());
+                }
                 else
-                    return new MvxLanguageBinder(NameSpaceKey, TypeKey).GetText(Source, Arguments);
+                {
+                    MvxFormsLog.Instance.Trace("Can only use MvxLang on a bindable type");
+                }
             }
-            else if(BindableObjectRaw is IMarkupExtension ext)
+            else if (!string.IsNullOrEmpty(Source) && Mvx.IoCProvider.CanResolve<IMvxTextProvider>())
+            {
+                return GetStringFromLanguageBinder();
+            }
+            else if (BindableObjectRaw is IMarkupExtension ext)
             {
                 return ext.ProvideValue(serviceProvider);
             }
@@ -65,6 +69,14 @@ namespace MvvmCross.Forms.Bindings
             }
 
             return null;
+        }
+
+        private string GetStringFromLanguageBinder()
+        {
+            if (Arguments == null)
+                return new MvxLanguageBinder(NameSpaceKey, TypeKey).GetText(Source);
+            else
+                return new MvxLanguageBinder(NameSpaceKey, TypeKey).GetText(Source, Arguments);
         }
     }
 }

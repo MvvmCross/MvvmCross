@@ -7,14 +7,14 @@ order: 1
 
 In each deployed MvvmCross application there are two key classes which control how your app starts:
 
-* the App class in the core project - which provides the initialization for your core business logic and your viewmodels.
-* the Setup class in the native UI project - this Setup is a bootstrapper for the MvvmCross system and for your app.
+- The App class in the core project - which provides the initialization for your core business logic and your viewmodels.
+- The Setup class in the native UI project - this Setup is a bootstrapper for the MvvmCross system and for your app.
 
 ## App.cs
 
 Typically App.cs provides only initialization of:
 
-* simple rule-based IoC registration - e.g.:
+- Simple rule-based IoC registration - e.g.:
 
 ```c#
 CreatableTypes()
@@ -23,15 +23,14 @@ CreatableTypes()
     .RegisterAsLazySingleton();
 ```
 
-* the ViewModelLocator - how ViewModels are found or created when Views are displayed
-
-* the IMvxAppStart - which ViewModel or ViewModels are shown when the application is first started
+- The IMvxAppStart - which ViewModel or ViewModels are shown when the application is first started
 
 ## Setup.cs
 
 Internally the Setup bootstrapper performs many steps.
 
 You can see most of them in the MvxSetup.cs class source which includes a sequence like this:
+
 ```c#
     // IoC
     InitializeIoC();
@@ -60,11 +59,12 @@ You can see most of them in the MvxSetup.cs class source which includes a sequen
 ```
 
 Most of these steps are virtual - so they allow customization. Also most of these steps are implemented using virtual Create steps - which again should make customization easier:
+
 ```c#
 protected virtual void InitialiseFoo()
 {
     var foo = CreateFoo();
-    Mvx.RegisterSingleton<Foo>();
+    Mvx.IoCProvider.RegisterSingleton<Foo>();
 }
         
 protected virtual IFoo CreateFoo()
@@ -146,18 +146,18 @@ These two placeholders provide key places for you to create and register service
 For example, if you wanted to implement an EncryptionService which would provide native data-encryption for your application, then you could do this during Setup.InitializeFirstChance using:
 
 ```c#
- Mvx.RegisterType<IEncryption, MyEncryption>();
+ Mvx.IoCProvider.RegisterType<IEncryption, MyEncryption>();
 ```
 This would then allow all of your App code - including code executed during App.Initialize() to use calls like:
 
 ```c#
-var encryption = Mvx.Resolve<IEncryption>();
+var encryption = Mvx.IoCProvider.Resolve<IEncryption>();
 var safe = encryption.Encode(raw);
 ```
 
 Alternatively, if you wanted to implement a DialogService which would be used during normal UI flow, then you might choose to register this during Setup.InitializeLastChance as:
 ```c#
-Mvx.RegisterSingleton<IDialogService>(new MyDialogService());
+Mvx.IoCProvider.RegisterSingleton<IDialogService>(new MyDialogService());
 ```
 
 For many objects the choice of when to initialize - first or last - doesn't matter. For others, the key choice is whether the service needs to be available before or after the App is created and initialized.
@@ -251,18 +251,18 @@ protected override IMvxViewModelLocator CreateDefaultViewModelLocator()
 
 ## Custom Presenters
 
-For 'my first MvvmCross application' most people start with a 'full page' app in which each ShowViewModel causes a new View to be displayed, filling an entire screen at a time.
+For 'my very first MvvmCross application' most people start with a 'full page' app in which each navigation causes a new full-screen View to be displayed.
 
-There are many other possibilities for ViewModel->ViewModel navigation, including:
+There are many other possibilities for ViewModel -> ViewModel navigation, including:
 
-* tabbed displays
-* dialogs and flyouts
-* 'hamburger menus'
-* splitviews, master-detail displays, screen 'regions' and other screen division/fragmentation
+- Tabbed displays
+- Dialogs and flyouts
+- Hamburger menus
+- Splitviews, master-detail displays, screen 'regions' and other screen division/fragmentation
 
-To provide these alternative UI possibilities, MvvmCross allows each app to provide a custom presenter.
+To provide these alternative UI possibilities, MvvmCross provides a default ViewPresenter per platform, but you can always use your own custom presenter.
 
-For more on custom presenters, see several articles and videos linked from: http://slodge.blogspot.co.uk/2013/06/presenter-roundup.html
+For more on ViewPresenters, check out the [official documentation](https://www.mvvmcross.com/documentation/fundamentals/view-presenters).
 
 ## Providing ValueConverters
 
@@ -325,18 +325,18 @@ One final technique used for registering value converters is used by some of the
 
 This technique involves using the CallbackWhenRegistered IoC method on the IMvxValueConverterRegistry interface. This is used, for example, in the Visibility plugin as:
 ```c#
-Mvx.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
+Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(RegisterValueConverters);
     
     // ...
     
 private void RegisterValueConverters()
 {
-    var registry = Mvx.Resolve<IMvxValueConverterRegistry>();
+    var registry = Mvx.IoCProvider.Resolve<IMvxValueConverterRegistry>();
     registry.AddOrOverwriteFrom(GetType().Assembly);
 }   
 ```
 
-For more on creating ValueConverters, see the ValueConverter sample in: https://github.com/slodge/MvvmCross-Tutorials/tree/master/ValueConversion
+For more on creating ValueConverters, read the [official documentation](https://www.mvvmcross.com/documentation/fundamentals/value-converters) or read the ValueConverter sample in: https://github.com/MvvmCross/MvvmCross-Samples/tree/master/ValueConversion
 
 ## Providing Custom Views (Android)
 
@@ -443,7 +443,7 @@ protected override void InitializeViewLookup()
         { typeof (UmpteenthViewModel), typeof(UmpteenthView) },
     };
 
-    var container = Mvx.Resolve<IMvxViewsContainer>();
+    var container = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
     container.AddAll(viewModelViewLookup);
 }
 ```

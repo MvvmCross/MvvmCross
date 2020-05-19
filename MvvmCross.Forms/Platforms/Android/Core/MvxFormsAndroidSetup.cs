@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.Content;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Localization;
@@ -11,7 +10,6 @@ using System.Linq;
 using System.Reflection;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platforms.Android.Bindings;
-using MvvmCross.Platforms.Android.Core;
 using MvvmCross.Platforms.Android.Presenters;
 using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
@@ -19,12 +17,12 @@ using MvvmCross.Platforms.Android;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.Forms.Platforms.Android.Presenters;
 using Xamarin.Forms;
-using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Core;
+using MvvmCross.IoC;
+using MvvmCross.Platforms.Android.Core;
 
 namespace MvvmCross.Forms.Platforms.Android.Core
 {
-    public abstract class MvxFormsAndroidSetup : MvxAppCompatSetup, IMvxFormsSetup
+    public abstract class MvxFormsAndroidSetup : MvxAndroidSetup, IMvxFormsSetup
     {
         private List<Assembly> _viewAssemblies;
         private Application _formsApplication;
@@ -39,10 +37,11 @@ namespace MvvmCross.Forms.Platforms.Android.Core
             return _viewAssemblies;
         }
 
-        protected override void InitializeIoC()
+        protected override IMvxIoCProvider InitializeIoC()
         {
-            base.InitializeIoC();
-            Mvx.IoCProvider.RegisterSingleton<IMvxFormsSetup>(this);
+            var provider = base.InitializeIoC();
+            provider.RegisterSingleton<IMvxFormsSetup>(this);
+            return provider;
         }
 
         protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
@@ -59,7 +58,7 @@ namespace MvvmCross.Forms.Platforms.Android.Core
                 {
                     var activity = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>()?.Activity ?? ApplicationContext;
                     var asmb = activity.GetType().Assembly;
-                    Xamarin.Forms.Forms.Init(activity, null, ViewAssemblies.FirstOrDefault() ?? asmb);
+                    Xamarin.Forms.Forms.Init(activity, null, ExecutableAssembly ?? asmb);
                 }
                 if (_formsApplication == null)
                 {
@@ -78,7 +77,7 @@ namespace MvvmCross.Forms.Platforms.Android.Core
         protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
         {
             var formsPagePresenter = new MvxFormsPagePresenter(viewPresenter);
-            Mvx.IoCProvider.RegisterSingleton(formsPagePresenter);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFormsPagePresenter>(formsPagePresenter);
             return formsPagePresenter;
         }
 

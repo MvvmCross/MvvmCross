@@ -17,39 +17,38 @@ The following Api is available to use:
 ```c#
 public interface IMvxNavigationService
 {
-    event BeforeNavigateEventHandler BeforeNavigate;
-    event AfterNavigateEventHandler AfterNavigate;
-    event BeforeCloseEventHandler BeforeClose;
-    event AfterCloseEventHandler AfterClose;
-    event BeforeChangePresentationEventHandler BeforeChangePresentation;
     event AfterChangePresentationEventHandler AfterChangePresentation;
-
-    Task Navigate(IMvxViewModel viewModel, IMvxBundle presentationBundle = null);
-    Task Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle presentationBundle = null);
-    Task<TResult> Navigate<TResult>(IMvxViewModelResult<TResult> viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
-    Task<TResult> Navigate<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
-
-    Task Navigate(Type viewModelType, IMvxBundle presentationBundle = null);
-    Task Navigate<TParameter>(Type viewModelType, TParameter param, IMvxBundle presentationBundle = null);
-    Task<TResult> Navigate<TResult>(Type viewModelType, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
-    Task<TResult> Navigate<TParameter, TResult>(Type viewModelType, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
-
-    Task Navigate(string path, IMvxBundle presentationBundle = null);
-    Task Navigate<TParameter>(string path, TParameter param, IMvxBundle presentationBundle = null);
-    Task<TResult> Navigate<TResult>(string path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
-    Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
-
-    Task Navigate<TViewModel>(IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel;
-    Task Navigate<TViewModel, TParameter>(TParameter param, IMvxBundle presentationBundle = null) where TViewModel : IMvxViewModel<TParameter>;
-    Task<TResult> Navigate<TViewModel, TResult>(IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModelResult<TResult>;
+    event AfterCloseEventHandler AfterClose;
+    event BeforeCloseEventHandler BeforeClose;
+    event AfterNavigateEventHandler AfterNavigate;
+    event BeforeNavigateEventHandler BeforeNavigate;
+    event BeforeChangePresentationEventHandler BeforeChangePresentation;
+    
     Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModel<TParameter, TResult>;
-
+    Task<TResult> Navigate<TViewModel, TResult>(IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModelResult<TResult>;
+    Task<bool> Navigate<TViewModel, TParameter>(TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModel<TParameter>;
+    Task<TResult> Navigate<TParameter, TResult>(string path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+    Task<TResult> Navigate<TResult>(string path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> Navigate<TParameter>(string path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> Navigate(string path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+    Task<TResult> Navigate<TParameter, TResult>(Type viewModelType, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+    Task<TResult> Navigate<TResult>(Type viewModelType, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> Navigate<TParameter>(Type viewModelType, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> Navigate(Type viewModelType, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+    Task<TResult> Navigate<TParameter, TResult>(IMvxViewModel<TParameter, TResult> viewModel, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+    Task<TResult> Navigate<TResult>(IMvxViewModelResult<TResult> viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> Navigate<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> Navigate<TViewModel>(IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken)) where TViewModel : IMvxViewModel;
+    Task<bool> Navigate(IMvxViewModel viewModel, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken));    
+    
+    Task<bool> CanNavigate(Type viewModelType);
+    Task<bool> CanNavigate<TViewModel>() where TViewModel : IMvxViewModel;
     Task<bool> CanNavigate(string path);
-
-    Task<bool> Close(IMvxViewModel viewModel);
-    Task<bool> Close<TResult>(IMvxViewModelResult<TResult> viewModel, TResult result);
-
-    Task<bool> ChangePresentation(MvxPresentationHint hint);
+    
+    Task<bool> ChangePresentation(MvxPresentationHint hint, CancellationToken cancellationToken = default(CancellationToken));
+    
+    Task<bool> Close<TResult>(IMvxViewModelResult<TResult> viewModel, TResult result, CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> Close(IMvxViewModel viewModel, CancellationToken cancellationToken = default(CancellationToken));
 }
 ```
 
@@ -208,7 +207,7 @@ public override void ViewDestroy(bool viewFinishing = true)
 To check if you are able to navigate to a certain ViewModel you can use the `CanNavigate` method.
 
 ```c#
-if (Mvx.Resolve<IMvxNavigationService>().CanNavigate<NextViewModel>())
+if (Mvx.IoCProvider.Resolve<IMvxNavigationService>().CanNavigate<NextViewModel>())
 {
     //Do something
 }
@@ -217,7 +216,7 @@ if (Mvx.Resolve<IMvxNavigationService>().CanNavigate<NextViewModel>())
 If you want to intercept ViewModel navigation changes you can hook into the events of the NavigationService.
 
 ```c#
-Mvx.Resolve<IMvxNavigationService>().AfterClose += (object sender, NavigateEventArgs e) =>
+Mvx.IoCProvider.Resolve<IMvxNavigationService>().AfterClose += (object sender, IMvxNavigateEventArgs e) =>
  {
     //Do something with e.ViewModel
 };

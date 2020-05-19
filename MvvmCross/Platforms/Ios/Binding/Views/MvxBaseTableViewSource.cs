@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -14,7 +14,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 {
     public abstract class MvxBaseTableViewSource : UITableViewSource
     {
-        private readonly UITableView _tableView;
+        [Weak] private UITableView _tableView;
 
         protected MvxBaseTableViewSource(UITableView tableView)
         {
@@ -30,6 +30,8 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         protected UITableView TableView => _tableView;
 
         public bool DeselectAutomatically { get; set; }
+
+        public bool DeselectChangedEnabled { get; set; }
 
         public ICommand SelectionChangedCommand { get; set; }
 
@@ -50,7 +52,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         {
             try
             {
-                _tableView.ReloadData();
+                TableView.ReloadData();
             }
             catch (Exception exception)
             {
@@ -76,6 +78,20 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
                 command.Execute(item);
 
             SelectedItem = item;
+        }
+
+        public override void RowDeselected(UITableView tableView, NSIndexPath indexPath)
+        {
+            if (DeselectChangedEnabled && !DeselectAutomatically)
+            {
+                var item = GetItemAt(indexPath);
+
+                var command = SelectionChangedCommand;
+                if (command != null && command.CanExecute(item))
+                    command.Execute(item);
+
+                SelectedItem = null;
+            }
         }
 
         private object _selectedItem;
@@ -107,7 +123,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             {
                 var bindingContext = bindable.BindingContext as MvxTaskBasedBindingContext;
 
-                var isTaskBasedBindingContextAndHasAutomaticDimension = bindingContext != null && TableView.RowHeight == UITableView.AutomaticDimension;
+                var isTaskBasedBindingContextAndHasAutomaticDimension = bindingContext != null && tableView.RowHeight == UITableView.AutomaticDimension;
 
                 // RunSynchronously must be called before DataContext is set
                 if (isTaskBasedBindingContextAndHasAutomaticDimension)

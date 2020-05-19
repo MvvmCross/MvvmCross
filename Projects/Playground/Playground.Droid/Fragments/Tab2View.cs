@@ -5,7 +5,7 @@
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using MvvmCross.Droid.Support.V4;
+using MvvmCross.DroidX.Fragments;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
@@ -13,7 +13,7 @@ using Playground.Core.ViewModels;
 namespace Playground.Droid.Fragments
 {
     [MvxTabLayoutPresentation(TabLayoutResourceId = Resource.Id.tabs, ViewPagerResourceId = Resource.Id.viewpager, Title = "Tab 2", ActivityHostViewModelType = typeof(TabsRootViewModel))]
-    [MvxTabLayoutPresentation(TabLayoutResourceId = Resource.Id.tabs, ViewPagerResourceId = Resource.Id.viewpager, Title = "Tab 2", ActivityHostViewModelType = typeof(TabsRootBViewModel))]
+    [MvxTabLayoutPresentation(TabLayoutResourceId = Resource.Id.tabs, ViewPagerResourceId = Resource.Id.viewpager, Title = "Tab 2", FragmentHostViewType = typeof(TabsRootBView))]
     [Register(nameof(Tab2View))]
     public class Tab2View : MvxFragment<Tab2ViewModel>
     {

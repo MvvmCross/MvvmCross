@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -15,9 +15,7 @@ namespace MvvmCross.ViewModels
             var methods = viewModel
                 .GetType()
                 .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
-                .Where(m => m.Name == methodName)
-                .Where(m => !m.IsAbstract)
-                .ToList();
+                .Where(m => m.Name == methodName && !m.IsAbstract);
 
             foreach (var methodInfo in methods)
             {
@@ -30,24 +28,25 @@ namespace MvvmCross.ViewModels
             var parameters = methodInfo.GetParameters().ToArray();
 
             //Make sure we have a bundle that matches function parameters
-            if (bundle == null && parameters.Count() > 0)
+            if (bundle == null && parameters.Length > 0)
                 return;
             
-            if (parameters.Count() == 1
-                && parameters[0].ParameterType == typeof(IMvxBundle))
+            if (parameters.Length == 1)
             {
-                // this method is the 'normal' interface method
-                methodInfo.Invoke(viewModel, new object[] { bundle });
-                return;
-            }
+                if (parameters[0].ParameterType == typeof(IMvxBundle))
+                {
+                    // this method is the 'normal' interface method
+                    methodInfo.Invoke(viewModel, new object[] { bundle });
+                    return;
+                }
 
-            if (parameters.Count() == 1
-                && !MvxSingletonCache.Instance.Parser.TypeSupported(parameters[0].ParameterType))
-            {
-                // call method using typed object
-                var value = bundle.Read(parameters[0].ParameterType);
-                methodInfo.Invoke(viewModel, new[] { value });
-                return;
+                if (!MvxSingletonCache.Instance.Parser.TypeSupported(parameters[0].ParameterType))
+                {
+                    // call method using typed object
+                    var value = bundle.Read(parameters[0].ParameterType);
+                    methodInfo.Invoke(viewModel, new[] { value });
+                    return;
+                }
             }
 
             // call method using named method arguments. If bundle is null, the null-check makes sure that Init still is called.
@@ -61,9 +60,7 @@ namespace MvvmCross.ViewModels
             var toReturn = new MvxBundle();
             var methods = viewModel.GetType()
                                    .GetMethods()
-                                   .Where(m => m.Name == "SaveState")
-                                   .Where(m => m.ReturnType != typeof(void))
-                                   .Where(m => !m.GetParameters().Any());
+                                   .Where(m => m.Name == "SaveState" && m.ReturnType != typeof(void) && !m.GetParameters().Any());
 
             foreach (var methodInfo in methods)
             {

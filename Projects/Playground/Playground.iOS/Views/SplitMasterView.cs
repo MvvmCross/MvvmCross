@@ -1,5 +1,4 @@
 ﻿using System;
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using Playground.Core.ViewModels;
@@ -18,7 +17,7 @@ namespace Playground.iOS.Views
         {
             base.ViewDidLoad();
 
-            var set = this.CreateBindingSet<SplitMasterView, SplitMasterViewModel>();
+            var set = CreateBindingSet();
             set.Bind(btnDetail).To(vm => vm.OpenDetailCommand);
             set.Bind(btnDetailNav).To(vm => vm.OpenDetailNavCommand);
             set.Bind(btnStack).To(vm => vm.ShowRootViewModel);

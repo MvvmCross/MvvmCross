@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#880000">
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -20,7 +21,16 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="60dp"
         android:text="Show Child"
         local:MvxBind="Click ShowChildCommand" />
-</RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show Tabs"
+        local:MvxBind="Click ShowTabsCommand" />
+    <FrameLayout
+        android:id="@+id/tabs_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

@@ -38,6 +38,7 @@ namespace $YourNameSpace$
         {
             textField.Text = textField.Text + "";
             textField.EditingChanged += (sender, args) => { textField.Text = ""; };
+            textField.EditingDidEnd += (sender, args) => { textField.Text = ""; };
         }
 
         public void Include(UITextView textView)
@@ -121,6 +122,14 @@ namespace $YourNameSpace$
         public void Include(MvxNavigationService service, IMvxViewModelLoader loader)
         {
             service = new MvxNavigationService(null, loader);
+        }
+        
+        public void Include(UIImagePickerController uIImagePickerController)
+        {
+            var x = uIImagePickerController.SourceType;
+            uIImagePickerController.FinishedPickingMedia += (s, e) => { };
+            uIImagePickerController.FinishedPickingImage += (s, e) => { };
+            uIImagePickerController.Canceled += (s, e) => { };
         }
 
         public void Include(ConsoleColor color)

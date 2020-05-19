@@ -14,4 +14,4 @@ Inside the samples repository you will find the [StarWars Sample](https://github
 
 #### Give me the latest and greatest please!
 
-Inside our main repository there is a sample app which contains lots of test scenarios and supports every platform. Check it out: [Playground](https://github.com/MvvmCross/MvvmCross/tree/develop/Projects/Playground).
+Inside our main repository there is a sample app which contains lots of test scenarios and supports every platform. Check it out: [Playground](https://github.com/MvvmCross/MvvmCross/tree/master/Projects/Playground).

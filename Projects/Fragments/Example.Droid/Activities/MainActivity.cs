@@ -6,7 +6,7 @@ using Android.Support.V4.Widget;
 using Android.Views;
 using Android.Views.InputMethods;
 using Example.Core.ViewModels;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.DroidX.AppCompat;
 
 namespace Example.Droid.Activities
 {

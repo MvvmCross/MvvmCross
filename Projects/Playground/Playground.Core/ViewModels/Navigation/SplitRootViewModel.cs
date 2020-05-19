@@ -4,14 +4,15 @@
 
 using System.Threading.Tasks;
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class SplitRootViewModel : MvxViewModel
+    public class SplitRootViewModel : MvxNavigationViewModel
     {
-        public SplitRootViewModel()
+        public SplitRootViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
             ShowInitialMenuCommand = new MvxAsyncCommand(ShowInitialViewModel);
             ShowDetailCommand = new MvxAsyncCommand(ShowDetailViewModel);

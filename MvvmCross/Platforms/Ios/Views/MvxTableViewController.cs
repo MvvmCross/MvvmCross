@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -14,20 +14,27 @@ namespace MvvmCross.Platforms.Ios.Views
     public class MvxTableViewController
         : MvxEventSourceTableViewController, IMvxIosView
     {
-        protected MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
-            : base(style)
+        public MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain) : base(style)
         {
             this.AdaptForBinding();
         }
 
-        protected MvxTableViewController(IntPtr handle)
-            : base(handle)
+        public MvxTableViewController(NSCoder coder) : base(coder)
         {
             this.AdaptForBinding();
         }
 
-        protected MvxTableViewController(string nibName, NSBundle bundle)
-            : base(nibName, bundle)
+        protected MvxTableViewController(NSObjectFlag t) : base(t)
+        {
+            this.AdaptForBinding();
+        }
+
+        protected internal MvxTableViewController(IntPtr handle) : base(handle)
+        {
+            this.AdaptForBinding();
+        }
+
+        public MvxTableViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
         {
             this.AdaptForBinding();
         }
@@ -117,21 +124,26 @@ namespace MvvmCross.Platforms.Ios.Views
         }
     }
 
-    public class MvxTableViewController<TViewModel>
-        : MvxTableViewController, IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
+    public class MvxTableViewController<TViewModel> : MvxTableViewController, IMvxIosView<TViewModel>
+        where TViewModel : class, IMvxViewModel
     {
-        protected MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain)
-            : base(style)
+        public MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain) : base(style)
         {
         }
 
-        protected MvxTableViewController(IntPtr handle)
-            : base(handle)
+        public MvxTableViewController(NSCoder coder) : base(coder)
         {
         }
 
-        protected MvxTableViewController(string nibName, NSBundle bundle)
-            : base(nibName, bundle)
+        public MvxTableViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+        }
+
+        protected MvxTableViewController(NSObjectFlag t) : base(t)
+        {
+        }
+
+        protected internal MvxTableViewController(IntPtr handle) : base(handle)
         {
         }
 
@@ -139,6 +151,11 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxIosView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxIosView<TViewModel>, TViewModel>();
         }
     }
 }

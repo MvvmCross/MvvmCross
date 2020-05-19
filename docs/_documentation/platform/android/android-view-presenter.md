@@ -56,6 +56,9 @@ Use this attribute over a Fragment view class and customize its presentation by 
 | PopExitAnimation | `int` | Resource id for the animation that will be run when the fragment is retrieved from foreground. |
 | TransitionStyle | `int` | In case you want to use a Transition Style, use this property by setting its resource id. |
 | IsCacheableFragment | `bool` | Default value is false. You should leave it that way unless you really want/need to reuse a fragment view (for example, in case you are displaying a WebView, you might want to cache the already loaded URL). If it is set to `true`, the ViewPresenter will try to find a Fragment instance already present in the FragmentManager object before instantiating a new one and will reuse that object. |
+| Tag | `string` | Tag to use for the Fragment. The presenter uses this to add fragments to the fragment transactions and to find fragments again later. This is useful to use, if you want to use the same fragment in the same view multiple times. In such cases you would need to provide your own tag for each instance. Defaults to the Java class name of the Fragment. |
+| PopBackStackImmediateName  | `string` | The name to be passed into PopBackStackImmediate when closing the fragment. Assigning an empty string will default to using the FragmentJavaName. Assigning a null will pop the top fragment when `PopBackStackImmediateFlag` is set to `None`. |
+| PopBackStackImmediateFlag   | `MvxPopBackStack` | Flag to be used with PopBackStackImmediate. `None`, all entries up to but not including that entry will be removed. `Inclusive`, all matching entries will be consumed until one that doesn't match is found or the bottom of the stack is reached. |
 
 When providing a value for EnterAnimation you need to provide one for ExitAnimation as well, otherwise the animation won't work (same applies in the other way around). 
 
@@ -220,4 +223,5 @@ Bundle CreateActivityTransitionOptions(Intent intent, MvxActivityPresentationAtt
 ```
 
 ## Sample please!
-You can browse the code of the [Playground](https://github.com/MvvmCross/MvvmCross/tree/master/TestProjects/Playground) Android project to see this presenter in action.
+
+You can browse the code of the [Playground](https://github.com/MvvmCross/MvvmCross/blob/master/Projects/Playground/) (Android project) to see this presenter in action.

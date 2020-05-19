@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
+using System.Threading.Tasks;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -31,6 +33,11 @@ namespace MvvmCross.Platforms.Android.Views
         {
             RegisterSetup();
             _resourceId = resourceId;
+        }
+
+        protected MvxSplashScreenActivity(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(javaReference, transfer)
+        {
         }
 
         protected virtual void RequestWindowFeatures()
@@ -76,12 +83,32 @@ namespace MvvmCross.Platforms.Android.Views
             base.OnPause();
         }
 
-        public virtual void InitializationComplete()
+        public virtual async Task InitializationComplete()
         {
             if (!_isResumed)
                 return;
 
-            RunAppStart(_bundle);
+            await RunAppStartAsync(_bundle);
+        }
+
+        protected virtual async Task RunAppStartAsync(Bundle bundle)
+        {
+            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup))
+            {
+                if(!startup.IsStarted)
+                {
+                    await startup.StartAsync(GetAppStartHint(bundle));
+                }
+                else
+                {
+                    Finish();
+                }
+            }
+        }
+
+        protected virtual object GetAppStartHint(object hint = null)
+        {
+            return hint;
         }
 
         protected virtual void RegisterSetup()

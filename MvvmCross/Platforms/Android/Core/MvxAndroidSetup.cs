@@ -38,11 +38,11 @@ namespace MvvmCross.Platforms.Android.Core
             _applicationContext = applicationContext;
         }
 
-        public virtual Assembly ExecutableAssembly => ViewAssemblies.FirstOrDefault() ?? GetType().Assembly;
+        public virtual Assembly ExecutableAssembly => ViewAssemblies?.FirstOrDefault() ?? GetType().Assembly;
 
         public Context ApplicationContext => _applicationContext;
 
-        protected override void InitializePlatformServices()
+        protected override void InitializeFirstChance()
         {
             InitializeLifetimeMonitor();
             InitializeAndroidCurrentTopActivity();
@@ -59,7 +59,7 @@ namespace MvvmCross.Platforms.Android.Core
 
             var viewModelMultiTemporaryCache = new MvxMultipleViewModelCache();
             Mvx.IoCProvider.RegisterSingleton<IMvxMultipleViewModelCache>(viewModelMultiTemporaryCache);
-            base.InitializePlatformServices();
+            base.InitializeFirstChance();
         }
 
         protected virtual void InitializeAndroidCurrentTopActivity()
@@ -230,7 +230,8 @@ namespace MvvmCross.Platforms.Android.Core
 
         protected virtual IDictionary<string, string> ViewNamespaceAbbreviations => new Dictionary<string, string>
         {
-            { "Mvx", "MvvmCross.Binding.Droid.Views" }
+            { "Mvx", "mvvmcross.platforms.android.binding.views"
+            }
         };
 
         protected virtual IEnumerable<string> ViewNamespaces => new List<string>
@@ -238,7 +239,8 @@ namespace MvvmCross.Platforms.Android.Core
             "Android.Views",
             "Android.Widget",
             "Android.Webkit",
-            "MvvmCross.Binding.Droid.Views",
+            "MvvmCross.Platforms.Android.Views",
+            "MvvmCross.Platforms.Android.Binding.Views"
         };
 
         protected virtual IEnumerable<Assembly> AndroidViewAssemblies => new List<Assembly>()

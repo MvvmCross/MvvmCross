@@ -261,7 +261,7 @@ This `Activity` will act as our MVVM `View`. Please follow these steps:
 - This class should inherit from `MvxActivity<TipViewModel>`:
 
 ```c#
-public class TipView : MvxActivity<TipViewModel>"
+public class TipView : MvxActivity<TipViewModel>
 ```
 
 - Add an `Activity` attribute over the class and set the `MainLauncher` property to `true`. This attribute lets Xamarin.Android add it automatically to your AndroidManifest file:

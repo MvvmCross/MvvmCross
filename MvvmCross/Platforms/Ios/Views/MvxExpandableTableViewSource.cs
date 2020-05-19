@@ -1,12 +1,13 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using CoreGraphics;
+using System.Windows.Input;
 using Foundation;
 using MvvmCross.Base;
 using MvvmCross.Platforms.Ios.Binding.Views;
@@ -18,7 +19,7 @@ namespace MvvmCross.Platforms.Ios.Views
 {
     public abstract class MvxExpandableTableViewSource : MvxExpandableTableViewSource<IEnumerable<object>, object>
     {
-        public MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
+        protected MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
         {
         }
     }
@@ -26,54 +27,65 @@ namespace MvvmCross.Platforms.Ios.Views
     public abstract class MvxExpandableTableViewSource<TItemSource, TItem> : MvxTableViewSource where TItemSource : IEnumerable<TItem>
     {
 	    private SectionExpandableController _sectionExpandableController = new DefaultAllSectionsExpandableController();
-        private readonly EventHandler _headerButtonCommand;
 
-        private IEnumerable<TItemSource> _itemsSource;
-        public new IEnumerable<TItemSource> ItemsSource
+        private IEnumerable _itemsSource;
+        public new IEnumerable ItemsSource
         {
-            get
-            {
-                return _itemsSource;
-            }
+            get => _itemsSource;
             set
             {
-                _itemsSource = value;
-	            _sectionExpandableController.ResetState();
+                if (value is IEnumerable<TItemSource> itemsSource)
+                {
+                    _itemsSource = itemsSource;
+                    _sectionExpandableController.ResetState();
 
-                ReloadTableData();
+                    ReloadTableData();
+                }
+                else
+                {
+                    throw new ArgumentException("value must be of type IEnumerable<TItemSource>");
+                }
             }
         }
 
-        public MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
+        public ICommand HeaderTappedCommand { get; set; }
+
+        private IEnumerable<TItemSource> CastItemSource => ItemsSource as IEnumerable<TItemSource>;
+
+        protected MvxExpandableTableViewSource(UITableView tableView) : base(tableView)
         {
-            _headerButtonCommand = (sender, e) =>
+        }
+
+        private void OnHeaderButtonClicked(object sender, EventArgs e)
+        {
+            var button = sender as UIButton;
+            var section = button.Tag;
+
+            var changedSectionsResponse = _sectionExpandableController.ToggleState((int)section);
+            TableView.ReloadData();
+
+            var pathsToAnimate = new List<NSIndexPath>();
+
+            foreach (var changedSection in changedSectionsResponse.AllModifiedIndexes)
             {
-                var button = sender as UIButton;
-                var section = button.Tag;
+                // Animate the section cells
+                nint rowCountForSection = RowsInSection(TableView, changedSection);
 
-	            var changedSectionsResponse = _sectionExpandableController.ToggleState((int) section);
-                tableView.ReloadData();
+                for (int i = 0; i < rowCountForSection; i++)
+                    pathsToAnimate.Add(NSIndexPath.FromItemSection(i, changedSection));
+            }
 
-	            List<NSIndexPath> pathsToAnimate = new List<NSIndexPath>();
+            TableView.ReloadRows(pathsToAnimate.ToArray(), UITableViewRowAnimation.Automatic);
+            ScrollToSection(TableView, section);
 
-	            foreach (var changedSection in changedSectionsResponse.AllModifiedIndexes)
-	            {
-		            // Animate the section cells
-		            nint rowCountForSection = RowsInSection(tableView, changedSection);
+            if (changedSectionsResponse.CollapsedIndexes.Any())
+                OnSectionCollapsed(changedSectionsResponse.CollapsedIndexes);
 
-		            for (int i = 0; i < rowCountForSection; i++)
-						pathsToAnimate.Add(NSIndexPath.FromItemSection(i, changedSection));
-	            }
+            if (changedSectionsResponse.ExpandedIndexes.Any())
+                OnSectionExpanded(changedSectionsResponse.ExpandedIndexes);
 
-	            tableView.ReloadRows(pathsToAnimate.ToArray(), UITableViewRowAnimation.Automatic);
-	            ScrollToSection(tableView, section);
-
-	            if (changedSectionsResponse.CollapsedIndexes.Any())
-		            OnSectionCollapsed(changedSectionsResponse.CollapsedIndexes);
-
-	            if (changedSectionsResponse.ExpandedIndexes.Any())
-		            OnSectionExpanded(changedSectionsResponse.ExpandedIndexes);
-            };
+            if (HeaderTappedCommand != null && HeaderTappedCommand.CanExecute((int)section))
+                HeaderTappedCommand.Execute((int)section);
         }
 
 	    protected virtual void OnSectionExpanded(IEnumerable<int> sectionIndexes)
@@ -99,36 +111,36 @@ namespace MvvmCross.Platforms.Ios.Views
 
         public override nint RowsInSection(UITableView tableview, nint section)
         {
-            if (ItemsSource == null)
+            if (CastItemSource == null)
                 return 0;
             // If the section is not colapsed return the rows in that section otherwise return 0
-            if (ItemsSource.ElementAt((int)section).Any() && _sectionExpandableController.IsExpanded((int)section))
-                return ItemsSource.ElementAt((int)section).Count();
+            if (CastItemSource.ElementAt((int)section).Any() && _sectionExpandableController.IsExpanded((int)section))
+                return CastItemSource.ElementAt((int)section).Count();
             return 0;
         }
 
         public override nint NumberOfSections(UITableView tableView)
         {
-            if (ItemsSource == null)
+            if (CastItemSource == null)
                 return 0;
 
-            return ItemsSource.Count();
+            return CastItemSource.Count();
         }
 
         protected override object GetItemAt(NSIndexPath indexPath)
         {
-            if (ItemsSource == null)
+            if (CastItemSource == null)
                 return null;
 
-            return ((IEnumerable<object>)ItemsSource.ElementAt(indexPath.Section)).ElementAt(indexPath.Row);
+            return ((IEnumerable<object>)CastItemSource.ElementAt(indexPath.Section)).ElementAt(indexPath.Row);
         }
 
         protected object GetHeaderItemAt(nint section)
         {
-            if (ItemsSource == null)
+            if (CastItemSource == null)
                 return null;
 
-            return ItemsSource.ElementAt((int)section);
+            return CastItemSource.ElementAt((int)section);
         }
 
         public override UIView GetViewForHeader(UITableView tableView, nint section)
@@ -158,11 +170,13 @@ namespace MvvmCross.Platforms.Ios.Views
 
             if (!hasHiddenButton)
             {
-                // Create a button to make the header clickable
-                var buttonFrame = header.Frame;
-                buttonFrame.Width = UIScreen.MainScreen.ApplicationFrame.Width;
-                var hiddenButton = CreateHiddenHeaderButton(buttonFrame, section);
+                var hiddenButton = CreateHiddenHeaderButton(section);
                 header.ContentView.AddSubview(hiddenButton);
+                hiddenButton.LeadingAnchor.ConstraintEqualTo(header.ContentView.LeadingAnchor).Active = true;
+                hiddenButton.TrailingAnchor.ConstraintEqualTo(header.ContentView.TrailingAnchor).Active = true;
+                hiddenButton.TopAnchor.ConstraintEqualTo(header.ContentView.TopAnchor).Active = true;
+                hiddenButton.BottomAnchor.ConstraintEqualTo(header.ContentView.BottomAnchor).Active = true;
+                header.ContentView.SendSubviewToBack(hiddenButton);
             }
 
             // Set the header data context
@@ -172,11 +186,14 @@ namespace MvvmCross.Platforms.Ios.Views
             return header.ContentView;
         }
 
-        private HiddenHeaderButton CreateHiddenHeaderButton(CGRect frame, nint tag)
+        private HiddenHeaderButton CreateHiddenHeaderButton(nint tag)
         {
-            var button = new HiddenHeaderButton(frame);
-            button.Tag = tag;
-            button.TouchUpInside += _headerButtonCommand;
+            var button = new HiddenHeaderButton()
+            {
+                Tag = tag,
+                TranslatesAutoresizingMaskIntoConstraints = false
+            };
+            button.TouchUpInside += OnHeaderButtonClicked;
             return button;
         }
 
@@ -239,8 +256,5 @@ namespace MvvmCross.Platforms.Ios.Views
 
     public class HiddenHeaderButton : UIButton
     {
-        public HiddenHeaderButton(CGRect frame) : base(frame)
-        {
-        }
     }
 }

@@ -2,22 +2,22 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Forms.Presenters;
-using MvvmCross.Localization;
-using System.Collections.Generic;
-using System.Reflection;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platforms.Ios.Bindings;
+using MvvmCross.Forms.Platforms.Ios.Presenters;
+using MvvmCross.Forms.Presenters;
+using MvvmCross.IoC;
+using MvvmCross.Localization;
 using MvvmCross.Platforms.Ios.Core;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
-using UIKit;
-using MvvmCross.Forms.Platforms.Ios.Presenters;
 using Xamarin.Forms;
-using System.Linq;
 
 namespace MvvmCross.Forms.Platforms.Ios.Core
 {
@@ -36,10 +36,11 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
             return _viewAssemblies;
         }
 
-        protected override void InitializeIoC()
+        protected override IMvxIoCProvider InitializeIoC()
         {
-            base.InitializeIoC();
-            Mvx.IoCProvider.RegisterSingleton<IMvxFormsSetup>(this);
+            var provider = base.InitializeIoC();
+            provider.RegisterSingleton<IMvxFormsSetup>(this);
+            return provider;
         }
 
         protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
@@ -71,7 +72,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
         protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
         {
             var formsPagePresenter = new MvxFormsPagePresenter(viewPresenter);
-            Mvx.IoCProvider.RegisterSingleton(formsPagePresenter);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFormsPagePresenter>(formsPagePresenter);
             return formsPagePresenter;
         }
 

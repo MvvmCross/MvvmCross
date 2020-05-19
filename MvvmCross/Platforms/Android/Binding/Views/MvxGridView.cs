@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -6,8 +6,10 @@ using System;
 using System.Collections;
 using System.Windows.Input;
 using Android.Content;
+using Android.OS;
 using Android.Runtime;
 using Android.Util;
+using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding.Attributes;
 
@@ -122,7 +124,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             {
                 _itemLongClick = value;
                 if (_itemLongClick != null)
-                    EnsureItemLongClickOverloaded(); 
+                    EnsureItemLongClickOverloaded();
             }
         }
 
@@ -164,6 +166,25 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
 
             base.Dispose(disposing);
+        }
+
+        protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec)
+        {
+            if (Build.VERSION.SdkInt < BuildVersionCodes.Lollipop)
+            {
+                base.OnMeasure(widthMeasureSpec, heightMeasureSpec);
+                return;
+            }
+
+            if (NestedScrollingEnabled)
+                base.OnMeasure(widthMeasureSpec, heightMeasureSpec);
+            else
+            {
+                //expand the view to the full height of it's contents to disable scrolling
+                var expandSpec = MeasureSpec.MakeMeasureSpec(MeasuredSizeMask, MeasureSpecMode.AtMost);
+                base.OnMeasure(widthMeasureSpec, expandSpec);
+                LayoutParameters.Height = MeasuredHeight;
+            }
         }
     }
 }

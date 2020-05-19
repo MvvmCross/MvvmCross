@@ -8,10 +8,14 @@ using Android.OS;
 
 namespace MvvmCross.Platforms.Android.Views
 {
-    public class MvxApplicationCallbacksCurrentTopActivity : Java.Lang.Object, Application.IActivityLifecycleCallbacks, IMvxAndroidCurrentTopActivity
+    public class MvxApplicationCallbacksCurrentTopActivity 
+        : Java.Lang.Object, Application.IActivityLifecycleCallbacks, IMvxAndroidCurrentTopActivity
     {
-        private ConcurrentDictionary<string, ActivityInfo> _Activities = new ConcurrentDictionary<string, ActivityInfo>();
+        protected ConcurrentDictionary<string, ActivityInfo> Activities { get; }
+            = new ConcurrentDictionary<string, ActivityInfo>();
+
         public Activity Activity => GetCurrentActivity();
+        private Activity _lastKnownActivity;
 
         public void OnActivityCreated(Activity activity, Bundle savedInstanceState)
         {
@@ -21,7 +25,7 @@ namespace MvvmCross.Platforms.Android.Views
         public void OnActivityDestroyed(Activity activity)
         {
             var activityName = GetActivityName(activity);
-            _Activities.TryRemove(activityName, out ActivityInfo removed);
+            Activities.TryRemove(activityName, out var removed);
         }
 
         public void OnActivityPaused(Activity activity)
@@ -32,6 +36,8 @@ namespace MvvmCross.Platforms.Android.Views
         public void OnActivityResumed(Activity activity)
         {
             UpdateActivityListItem(activity, true);
+
+            _lastKnownActivity = activity;
         }
 
         public void OnActivitySaveInstanceState(Activity activity, Bundle outState)
@@ -41,6 +47,8 @@ namespace MvvmCross.Platforms.Android.Views
         public void OnActivityStarted(Activity activity)
         {
             UpdateActivityListItem(activity, true);
+
+            _lastKnownActivity = activity;
         }
 
         public void OnActivityStopped(Activity activity)
@@ -48,11 +56,11 @@ namespace MvvmCross.Platforms.Android.Views
             UpdateActivityListItem(activity, false);
         }
 
-        private void UpdateActivityListItem(Activity activity, bool isCurrent)
+        protected virtual void UpdateActivityListItem(Activity activity, bool isCurrent)
         {
             var toAdd = new ActivityInfo { Activity = activity, IsCurrent = isCurrent };
             var activityName = GetActivityName(activity);
-            _Activities.AddOrUpdate(activityName, toAdd, (key, existing) =>
+            Activities.AddOrUpdate(activityName, toAdd, (key, existing) =>
             {
                 existing.Activity = activity;
                 existing.IsCurrent = isCurrent;
@@ -60,30 +68,46 @@ namespace MvvmCross.Platforms.Android.Views
             });
         }
 
-        private Activity GetCurrentActivity()
+        protected virtual Activity GetCurrentActivity()
         {
-            if (_Activities.Count > 0)
+            if (Activities.Count > 0)
             {
-                var e = _Activities.GetEnumerator();
-                while (e.MoveNext())
+                Activity currentActivity = null;
+
+                using (var e = Activities.GetEnumerator())
                 {
-                    var current = e.Current;
-                    if (current.Value.IsCurrent)
+                    while (e.MoveNext())
                     {
-                        return current.Value.Activity;
+                        var (_, value) = e.Current;
+                        if (value.IsCurrent)
+                        {
+                            currentActivity = value.Activity;
+                            break;
+                        }
                     }
                 }
+
+                if (currentActivity == null)
+                {
+                    if (!_lastKnownActivity.IsActivityDead() && 
+                        _lastKnownActivity.GetType() != typeof(MvxSplashScreenActivity) &&
+                        _lastKnownActivity.GetType() != typeof(MvxSplashScreenActivity<,>))
+                        return _lastKnownActivity;
+                }
+
+                return currentActivity;
             }
 
             return null;
         }
 
-        protected string GetActivityName(Activity activity) => $"{activity.Class.SimpleName}_{activity.Handle.ToString()}";
+        protected virtual string GetActivityName(Activity activity) => 
+            $"{activity.Class.SimpleName}_{activity.Handle.ToString()}";
 
         /// <summary>
         /// Used to store additional info along with an activity.
         /// </summary>
-        private class ActivityInfo
+        protected class ActivityInfo
         {
             public bool IsCurrent { get; set; }
             public Activity Activity { get; set; }

@@ -22,7 +22,8 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+// [assembly: AssemblyVersion("6.5.0.0")]
+[assembly: AssemblyVersion("6.5.0.0")]
+[assembly: AssemblyFileVersion("6.5.0.0")]
 [assembly: ComVisible(false)]
+[assembly: AssemblyInformationalVersion("6.5.0-remove-framework-android-fragments.1+141.Branch.feature-remove-framework-android-fragments.Sha.cd279b4ed2c240c0b21cb2158e59cfceb6749660")]

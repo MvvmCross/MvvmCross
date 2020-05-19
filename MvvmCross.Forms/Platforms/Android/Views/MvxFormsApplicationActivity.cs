@@ -109,8 +109,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
         {
             InitializeForms(bundle);
 
-            var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
-            if (!startup.IsStarted)
+            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
                 startup.Start(GetAppStartHint(bundle));
 
             InitializeApplication();
@@ -118,7 +117,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
         protected virtual object GetAppStartHint(object hint = null)
         {
-            return null;
+            return hint;
         }
 
         public virtual void InitializeForms(Bundle bundle)
@@ -211,21 +210,25 @@ namespace MvvmCross.Forms.Platforms.Android.Views
         }
     }
 
-    public class MvxFormsApplicationActivity<TViewModel>
-        : MvxFormsApplicationActivity
-    , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+    public class MvxFormsApplicationActivity<TViewModel> : MvxFormsApplicationActivity, IMvxAndroidView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
         }
+
+        public MvxFluentBindingDescriptionSet<IMvxAndroidView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxAndroidView<TViewModel>, TViewModel>();
+        }
     }
 
     public abstract class MvxFormsApplicationActivity<TMvxAndroidSetup, TApplication, TFormsApplication> : MvxFormsApplicationActivity
-    where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
-    where TApplication : class, IMvxApplication, new()
-    where TFormsApplication : Application, new()
+        where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
+        where TApplication : class, IMvxApplication, new()
+        where TFormsApplication : Application, new()
     {
         protected override void RegisterSetup()
         {
@@ -234,10 +237,10 @@ namespace MvvmCross.Forms.Platforms.Android.Views
     }
 
     public abstract class MvxFormsApplicationActivity<TMvxAndroidSetup, TApplication, TFormsApplication, TViewModel> : MvxFormsApplicationActivity<TViewModel>
-    where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
-    where TApplication : class, IMvxApplication, new()
-    where TFormsApplication : Application, new()
-         where TViewModel : class, IMvxViewModel
+        where TMvxAndroidSetup : MvxFormsAndroidSetup<TApplication, TFormsApplication>, new()
+        where TApplication : class, IMvxApplication, new()
+        where TFormsApplication : Application, new()
+        where TViewModel : class, IMvxViewModel
     {
         protected override void RegisterSetup()
         {

@@ -7,7 +7,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.Support.V4.View;
 using Android.Support.V4.Widget;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.DroidX.AppCompat;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
 
@@ -16,7 +16,8 @@ namespace Playground.Droid.Activities
     [MvxActivityPresentation]
     [Activity(
         Theme = "@style/AppTheme",
-        LaunchMode = LaunchMode.SingleTop)]
+        LaunchMode = LaunchMode.SingleTop,
+        ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
     public class SplitRootView : MvxAppCompatActivity<SplitRootViewModel>
     {
         public DrawerLayout DrawerLayout { get; set; }

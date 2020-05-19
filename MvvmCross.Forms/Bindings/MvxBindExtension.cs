@@ -43,7 +43,14 @@ namespace MvvmCross.Forms.Bindings
                     bindingBuilder.Append($", CommandParameter={CommandParameter}");
                 }
 
-                Bindable.SetValue(Bi.ndProperty, bindingBuilder.ToString());
+                if (Bindable != null)
+                {
+                    Bindable.SetValue(Bi.ndProperty, bindingBuilder.ToString());
+                }
+                else
+                {
+                    MvxFormsLog.Instance.Trace("Can only use MvxBind on a bindable view");
+                }
             }
             else if (BindableObjectRaw is IMarkupExtension ext)
             {

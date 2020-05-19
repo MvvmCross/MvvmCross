@@ -49,7 +49,7 @@ When an MvvmCross app starts, this is what actually happens:
 4. When `App.Initialize` is called, your app is expected to provide an `AppStart` object, which is responsible for managing the first navigation step. The last step of `Setup` initialization consist on calling `AppStart.Startup(object hint)`.
 5. `AppStart.Startup(object hint)` runs and the first ViewModel / View of your app is shown.
 
-Note: In case you are wondering about the `hint` parameter on the `Startup` method, it's something you can use to pass initial parameters from your platform project to your Core layer. Super useful when implemeting push notifications, for example.
+Note: In case you are wondering about the `hint` parameter on the `Startup` method, it's something you can use to pass initial parameters from your platform project to your Core layer. Super useful when implementing push notifications, for example.
 
 ## The "Core" project
 
@@ -111,7 +111,7 @@ public class MainViewModel : MvxViewModel
     {
     }
 
-    private void Prepare()
+    public override void Prepare()
     {
         // This is the first method to be called after construction
     }
@@ -201,7 +201,7 @@ On Android, the easiest way to declare initialization is by adding a custom `App
 namespace MyAwesomeApp.Droid
 {
     [Application]
-    public class MainApplication : MvxAndroidApplication<MvxAndroidSetup, App>
+    public class MainApplication : MvxAndroidApplication<MvxAndroidSetup<App>, App>
     {
         public MainApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {

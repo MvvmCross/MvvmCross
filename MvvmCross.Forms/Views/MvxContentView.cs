@@ -77,9 +77,8 @@ namespace MvvmCross.Forms.Views
         }
     }
 
-    public class MvxContentView<TViewModel>
-        : MvxContentView
-    , IMvxElement<TViewModel> where TViewModel : class, IMvxViewModel
+    public class MvxContentView<TViewModel> : MvxContentView, IMvxElement<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         public new static readonly BindableProperty ViewModelProperty = BindableProperty.Create(nameof(ViewModel), typeof(TViewModel), typeof(IMvxElement<TViewModel>), default(TViewModel), BindingMode.Default, null, ViewModelChanged, null, null);
 
@@ -87,6 +86,11 @@ namespace MvvmCross.Forms.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxElement<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxElement<TViewModel>, TViewModel>();
         }
     }
 }

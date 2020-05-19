@@ -1,10 +1,11 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Wpf.Views
@@ -12,6 +13,7 @@ namespace MvvmCross.Platforms.Wpf.Views
     public class MvxWpfView : UserControl, IMvxWpfView, IDisposable
     {
         private IMvxViewModel _viewModel;
+        private IMvxBindingContext _bindingContext;
 
         public IMvxViewModel ViewModel
         {
@@ -20,7 +22,23 @@ namespace MvvmCross.Platforms.Wpf.Views
             {
                 _viewModel = value;
                 DataContext = value;
+                BindingContext.DataContext = value;
             }
+        }
+
+        public IMvxBindingContext BindingContext
+        {
+            get
+            {
+                if (_bindingContext != null)
+                    return _bindingContext;
+
+                if (Mvx.IoCProvider != null)
+                    this.CreateBindingContext();
+
+                return _bindingContext;
+            }
+            set => _bindingContext = value;
         }
 
         public MvxWpfView()
@@ -33,6 +51,7 @@ namespace MvvmCross.Platforms.Wpf.Views
         {
             ViewModel?.ViewDisappearing();
             ViewModel?.ViewDisappeared();
+            ViewModel?.ViewDestroy();
         }
 
         private void MvxWpfView_Loaded(object sender, RoutedEventArgs e)
@@ -62,14 +81,18 @@ namespace MvvmCross.Platforms.Wpf.Views
         }
     }
 
-    public class MvxWpfView<TViewModel>
-        : MvxWpfView
-          , IMvxWpfView<TViewModel> where TViewModel : class, IMvxViewModel
+    public class MvxWpfView<TViewModel> : MvxWpfView, IMvxWpfView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxWpfView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxWpfView<TViewModel>, TViewModel>();
         }
     }
 }

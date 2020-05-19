@@ -74,12 +74,27 @@ namespace MvvmCross.Forms.Views
 
         protected virtual void OnViewModelSet()
         {
+            ViewModel?.ViewCreated();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ViewModel?.ViewAppearing();
+            ViewModel?.ViewAppeared();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            ViewModel?.ViewDisappearing();
+            ViewModel?.ViewDisappeared();
+            ViewModel?.ViewDestroy();
         }
     }
 
-    public class MvxImageCell<TViewModel>
-        : MvxImageCell
-    , IMvxElement<TViewModel> where TViewModel : class, IMvxViewModel
+    public class MvxImageCell<TViewModel> : MvxImageCell, IMvxElement<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         public new static readonly BindableProperty ViewModelProperty = BindableProperty.Create(nameof(ViewModel), typeof(TViewModel), typeof(IMvxElement<TViewModel>), default(TViewModel), BindingMode.Default, null, ViewModelChanged, null, null);
 
@@ -87,6 +102,11 @@ namespace MvvmCross.Forms.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxElement<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxElement<TViewModel>, TViewModel>();
         }
     }
 }

@@ -3,7 +3,7 @@ using Android.Content;
 using Eventhooks.Core;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Droid.Platform;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.DroidX.AppCompat;
 
 namespace Eventhooks.Droid
 {

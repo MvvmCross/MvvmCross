@@ -2,33 +2,27 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Forms.Presenters;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using MvvmCross.Forms.Core;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Forms.Platforms.Android.Views;
 using Xamarin.Forms;
+using System.Threading.Tasks;
+using MvvmCross.Platforms.Android.Presenters;
 
 namespace MvvmCross.Forms.Platforms.Android.Presenters
 {
     public class MvxFormsAndroidViewPresenter
-        : MvxAppCompatViewPresenter, IMvxFormsViewPresenter
+        : MvxAndroidViewPresenter, IMvxFormsViewPresenter
     {
         public MvxFormsAndroidViewPresenter(IEnumerable<Assembly> androidViewAssemblies, Application formsApplication) : base(androidViewAssemblies)
         {
             FormsApplication = formsApplication ?? throw new ArgumentNullException(nameof(formsApplication), "MvxFormsApplication cannot be null");
         }
-
-        private Application _formsApplication;
-        public Application FormsApplication
-        {
-            get { return _formsApplication; }
-            set { _formsApplication = value; }
-        }
+        public Application FormsApplication { get; set; }
 
         private IMvxFormsPagePresenter _formsPagePresenter;
         public virtual IMvxFormsPagePresenter FormsPagePresenter
@@ -42,9 +36,9 @@ namespace MvvmCross.Forms.Platforms.Android.Presenters
             set { _formsPagePresenter = value; }
         }
 
-        public override void Show(MvxViewModelRequest request)
+        public override Task<bool> Show(MvxViewModelRequest request)
         {
-            FormsPagePresenter.Show(request);
+            return FormsPagePresenter.Show(request);
         }
 
         public override void RegisterAttributeTypes()
@@ -53,15 +47,15 @@ namespace MvvmCross.Forms.Platforms.Android.Presenters
             FormsPagePresenter.RegisterAttributeTypes();
         }
 
-        public override void ChangePresentation(MvxPresentationHint hint)
+        public override async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            FormsPagePresenter.ChangePresentation(hint);
-            base.ChangePresentation(hint);
+            if (!await FormsPagePresenter.ChangePresentation(hint)) return false;
+            return await base.ChangePresentation(hint);
         }
 
-        public override void Close(IMvxViewModel viewModel)
+        public override Task<bool> Close(IMvxViewModel viewModel)
         {
-            FormsPagePresenter.Close(viewModel);
+            return FormsPagePresenter.Close(viewModel);
         }
 
         public virtual bool ShowPlatformHost(Type hostViewModel = null)
@@ -83,7 +77,7 @@ namespace MvvmCross.Forms.Platforms.Android.Presenters
         {
             CloseFragments();
             if (!(CurrentActivity is MvxFormsAppCompatActivity || CurrentActivity is MvxFormsApplicationActivity) &&
-                !(CurrentActivity is MvxSplashScreenActivity || CurrentActivity is MvxSplashScreenAppCompatActivity))
+                !(CurrentActivity is MvxSplashScreenActivity))
                 CurrentActivity?.Finish();
             return true;
         }

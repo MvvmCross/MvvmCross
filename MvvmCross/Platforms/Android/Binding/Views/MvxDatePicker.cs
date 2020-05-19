@@ -26,6 +26,16 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             : base(context, attrs)
         {
         }
+        
+        public MvxDatePicker(Context context, IAttributeSet attrs, int defStyleAttr) 
+            : base(context, attrs, defStyleAttr)
+        {
+        }
+        
+        public MvxDatePicker(Context context, IAttributeSet attrs, int defStyleAttr, int defStyleRes) 
+            : base(context, attrs, defStyleAttr, defStyleRes)
+        {
+        }
 
         protected MvxDatePicker(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)

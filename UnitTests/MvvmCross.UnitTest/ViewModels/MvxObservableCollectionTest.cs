@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Specialized;
+using System.Threading.Tasks;
 using MvvmCross.Base;
 using MvvmCross.Tests;
 using MvvmCross.ViewModels;
@@ -20,17 +21,22 @@ namespace MvvmCross.UnitTest.ViewModels
         {
             _fixture = fixture;
             _fixture.ClearAll();
-            _fixture.Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(new DummyDispatcher());
+            _fixture.Ioc.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(new DummyDispatcher());
         }
 
-        public class DummyDispatcher : MvxSingleton<IMvxMainThreadDispatcher>, IMvxMainThreadDispatcher
+        public class DummyDispatcher : MvxSingleton<IMvxMainThreadAsyncDispatcher>, IMvxMainThreadAsyncDispatcher
         {
             public bool IsOnMainThread => true;
 
-            public bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+            public Task ExecuteOnMainThreadAsync(Action action, bool maskExceptions = true)
             {
                 action?.Invoke();
-                return true;
+                return Task.CompletedTask;
+            }
+
+            public Task ExecuteOnMainThreadAsync(Func<Task> action, bool maskExceptions = true)
+            {
+                return action?.Invoke();
             }
         }
 

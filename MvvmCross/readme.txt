@@ -14,7 +14,7 @@ See the documentation at https://www.mvvmcross.com/ to learn how to make full us
 1. Your solution already has a .NET Standard 2.x project where shared code will be located (often referred to as the Core project).
 2. Your solution already has a platform specific project for every platform you wish to support. 
    Platforms include Xamarin.iOS, Xamarin.Android, Xamarin.Mac, Xamarin.tvOS, Universal Windows Platform (UWP) and Windows Presentation Foundation (WPF).
-3. You have added this NuGet package (MvvmCross) to to all projects in your solution.
+3. You have added this NuGet package (MvvmCross) to all projects in your solution.
 4. Each of the platform specific projects have a reference to the Core project.
 
 -- Changes to make to your project (Traditional Xamarin Solution - No Xamarin.Forms) --
@@ -44,7 +44,7 @@ However, any $rootnamespace$ instances will need to be changed to your project's
 6. Add a new Android layout to the Resources/layout folder to correspond to the View class created in the previous step. (See Android/HomeView.axml.pp in sample files).
 
 Note: If you wish to use the AppCompat versions of Android classes, you can follow the above instructions with the following modifications
-7. Add the MvvmCross v7 Android AppCompat Support Libraries NuGet package (MvvmCross.Droid.Support.v7.AppCompat) to to your Android platform specific project.
+7. Add the MvvmCross v7 Android AppCompat Support Libraries NuGet package (MvvmCross.Droid.Support.v7.AppCompat) to your Android platform specific project.
 8. When changing the the inheritance for the SplashScreen activity class, use MvxSplashScreenAppCompatActivity instead of MvxSplashScreenActivity.
 9. Add a new XML file that defines an AppCompat theme to the Resources/values folder called styles.xml. (See Android/styles.xml.pp in sample files)
 10. Ensure the theme created in the previous step is referenced in the Attribute for the MainActivity class (Theme = "@style/MainTheme").

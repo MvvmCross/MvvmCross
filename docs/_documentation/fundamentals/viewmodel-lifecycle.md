@@ -43,7 +43,7 @@ public class MyViewModel : MvxViewModel
 If you need to send some parameters to a ViewModel, you will want to use this method. MvxViewModel can have two Prepare methods:
 
 - Parameterless `Prepare`: Called in every scenario.
-- `Prepare(TParameter parameter)`: Called when you are navigating to a ViewModel with initial parameters. You shouldn't perform any logics on this method more than saving the parameters.
+- `Prepare(TParameter parameter)`: Called when you are navigating to a ViewModel with initial parameters and after the parameterless version of it. You shouldn't perform any logics on this method more than saving the parameters.
 
 This is how a typical ViewModel with initial parameters look like:
 
@@ -57,7 +57,7 @@ public class MyViewModel : MvxViewModel<MyParameterModel>
         _myService = myService;
     }
 
-    public void Prepare(MyParameterModel parameter)
+    public override void Prepare(MyParameterModel parameter)
     {
 
     }
@@ -139,19 +139,18 @@ public class MyViewModel : MvxViewModel<MyParameterModel>
         _initialParameter = _jsonSerializer.Deserialize<MyParameterModel>(serializedParameter);
     }
 
-    public void Prepare()
+    public override void Prepare()
     {
     }
 
-    public void Prepare(MyParameterModel parameter)
+    public override void Prepare(MyParameterModel parameter)
     {
         _initialParameter = parameter;
     }
 
-    public async Task Initialize()
+    public override async Task Initialize()
     {
-        await base.Initialize();
-
+        await base.Initialize();        
         // do something with _initialParameter
     }
 
@@ -174,7 +173,7 @@ void ViewDisappearing();
 
 void ViewDisappeared();
 
-void ViewDestroy();
+void ViewDestroy (bool viewFinishing = true);
 ```
 
 The MvxViewController, MvxFragment(s), MvxActivity and the UWP views will call those methods when the platform specific events are fired. This will give you a more refined control of the ViewModel and its state. There may be certain bindings that you want to update or resources that you want to clean up in these calls.
@@ -259,7 +258,7 @@ public class DetailViewModel : MvxViewModel
 
     public DetailViewModel()
     {
-        repository = Mvx.Resolve<IDetailRepository>();
+        repository = Mvx.IoCProvider.Resolve<IDetailRepository>();
     }
 
     // ...

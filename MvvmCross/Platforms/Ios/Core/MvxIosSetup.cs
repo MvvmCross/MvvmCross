@@ -67,12 +67,12 @@ namespace MvvmCross.Platforms.Ios.Core
             return new MvxIosViewDispatcher(Presenter);
         }
 
-        protected override void InitializePlatformServices()
+        protected override void InitializeFirstChance()
         {
             RegisterPlatformProperties();
             RegisterPresenter();
             RegisterLifetime();
-            base.InitializePlatformServices();
+            base.InitializeFirstChance();
         }
 
         protected virtual void RegisterPlatformProperties()

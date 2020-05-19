@@ -260,3 +260,5 @@ artifacts/
 
 # dotnet tools
 .store/
+
+.AssemblyAttributes

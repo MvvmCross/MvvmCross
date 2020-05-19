@@ -4,6 +4,7 @@
 
 using Android.Preferences;
 using Android.Views;
+using Android.Webkit;
 using Android.Widget;
 using MvvmCross.Platforms.Android.Binding.Views;
 
@@ -95,6 +96,12 @@ namespace MvvmCross.Platforms.Android.Binding
         public static string BindChecked(this TwoStatePreference twoStatePreference)
             => MvxAndroidPropertyBinding.TwoStatePreference_Checked;
 
+        public static string BindDisplayedValues(this NumberPicker numberPicker)
+            => MvxAndroidPropertyBinding.NumberPicker_DisplayedValues;
+
+        public static string BindValue(this NumberPicker numberPicker)
+            => MvxAndroidPropertyBinding.NumberPicker_Value;
+
         public static string BindMargin(this View view)
             => MvxAndroidPropertyBinding.View_Margin;
 
@@ -115,5 +122,17 @@ namespace MvvmCross.Platforms.Android.Binding
 
         public static string BindMarginEnd(this View view)
             => MvxAndroidPropertyBinding.View_MarginEnd;
+        
+        public static string BindFocus(this View view)
+            => MvxAndroidPropertyBinding.View_Focus;
+        
+        public static string BindVideoUri(this VideoView view)
+            => MvxAndroidPropertyBinding.VideoView_Uri;
+        
+        public static string BindWebViewUri(this WebView view)
+            => MvxAndroidPropertyBinding.WebView_Uri;
+        
+        public static string BindWebViewHtml(this WebView view)
+            => MvxAndroidPropertyBinding.WebView_Html;
     }
 }

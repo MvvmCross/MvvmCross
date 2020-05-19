@@ -1,7 +1,8 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
 using MvvmCross.Base;
 using MvvmCross.Binding.Bindings;
@@ -9,18 +10,22 @@ using MvvmCross.Binding.Bindings;
 namespace MvvmCross.Binding.BindingContext
 {
     public class MvxFluentBindingDescriptionSet<TOwningTarget, TSource>
-        : MvxApplicable
+        : MvxApplicable, IDisposable
         where TOwningTarget : class, IMvxBindingContextOwner
     {
         private readonly List<IMvxApplicable> _applicables = new List<IMvxApplicable>();
         private readonly TOwningTarget _bindingContextOwner;
+        private readonly string _clearBindingKey;
 
         public MvxFluentBindingDescriptionSet(TOwningTarget bindingContextOwner)
         {
             _bindingContextOwner = bindingContextOwner;
         }
-
-        public MvxFluentBindingDescription<TOwningTarget, TSource> Bind()
+        public MvxFluentBindingDescriptionSet(TOwningTarget bindingContextOwner, string clearBindingKey):this (bindingContextOwner)
+        {
+            _clearBindingKey = clearBindingKey;
+        }
+            public MvxFluentBindingDescription<TOwningTarget, TSource> Bind()
         {
             var toReturn = new MvxFluentBindingDescription<TOwningTarget, TSource>(_bindingContextOwner,
                                                                                    _bindingContextOwner);
@@ -59,6 +64,35 @@ namespace MvvmCross.Binding.BindingContext
             foreach (var applicable in _applicables)
                 applicable.Apply();
             base.Apply();
+        }
+
+        public void ApplyWithClearBindingKey(object clearBindingKey)
+        {
+            foreach (var applicable in _applicables)
+            {
+                if (applicable is IMvxBaseFluentBindingDescription fluentBindingDescription)
+                {
+                    fluentBindingDescription.ClearBindingKey = clearBindingKey;
+                }
+                else
+                {
+                    MvxBindingLog.Warning("Fluent binding description must implement {0} in order to add {1}",
+                        nameof(IMvxBaseFluentBindingDescription),
+                        nameof(IMvxBaseFluentBindingDescription.ClearBindingKey));
+                }
+
+                applicable.Apply();
+            }
+
+            base.Apply();
+        }
+
+        public void Dispose()
+        {
+            if (string.IsNullOrEmpty(_clearBindingKey))
+                Apply();
+            else
+                ApplyWithClearBindingKey(_clearBindingKey);
         }
     }
 }

@@ -61,7 +61,7 @@ namespace MvvmCross.ViewModels
             ShouldAlwaysRaiseInpcOnUserInterfaceThread(alwaysOnUIThread);
             var raisePropertyChanging = MvxSingletonCache.Instance == null || MvxSingletonCache.Instance.Settings.ShouldRaisePropertyChanging;
             ShouldRaisePropertyChanging(raisePropertyChanging);
-            var shouldLogInpc = MvxSingletonCache.Instance == null || MvxSingletonCache.Instance.Settings.ShouldLogInpc;
+            var shouldLogInpc = MvxSingletonCache.Instance != null && MvxSingletonCache.Instance.Settings.ShouldLogInpc;
             ShouldLogInpc(shouldLogInpc);
         }
 
@@ -125,18 +125,43 @@ namespace MvvmCross.ViewModels
                 PropertyChanged?.Invoke(this, changedArgs);
             }
 
+            void exceptionMasked() => MvxMainThreadDispatcher.ExceptionMaskedAction(raiseChange, true);
+
             if (ShouldAlwaysRaiseInpcOnUserInterfaceThread())
             {
                 // check for subscription before potentially causing a cross-threaded call
                 if (PropertyChanged == null)
                     return;
 
-                await InvokeOnMainThreadAsync(raiseChange);
+                await InvokeOnMainThreadAsync(exceptionMasked);
             }
             else
             {
-                raiseChange();
+                exceptionMasked();
             }
+        }
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void SetProperty<T>(ref T storage, T value, Action<bool> action, [CallerMemberName] string propertyName = null)
+        {
+            if (action == null)
+            {
+                throw new ArgumentException($"{nameof(action)} should not be null", nameof(action));
+            }
+
+            action.Invoke(SetProperty(ref storage, value, propertyName));
+        }
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual bool SetProperty<T>(ref T storage, T value, Action afterAction, [CallerMemberName] string propertyName = null)
+        {
+            if (SetProperty(ref storage, value, propertyName))
+            {
+                afterAction?.Invoke();
+                return true;
+            }
+
+            return false;
         }
 
         [NotifyPropertyChangedInvocator]
@@ -158,6 +183,7 @@ namespace MvvmCross.ViewModels
             RaisePropertyChanged(propertyName);
             return true;
         }
+
         protected virtual MvxInpcInterceptionResult InterceptRaisePropertyChanged(PropertyChangedEventArgs changedArgs)
         {
             if (MvxSingletonCache.Instance != null)

@@ -4,14 +4,16 @@
 
 using System.Threading.Tasks;
 using MvvmCross.Commands;
+using MvvmCross.Logging;
 using MvvmCross.Navigation;
+using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
 
 namespace Playground.Core.ViewModels
 {
-    public class Tab1ViewModel : MvxViewModel<string>
+    public class Tab1ViewModel : MvxNavigationViewModel<string>
     {
-        public Tab1ViewModel()
+        public Tab1ViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
             OpenChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ChildViewModel>());
 
@@ -20,6 +22,8 @@ namespace Playground.Core.ViewModels
             OpenNavModalCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ModalNavViewModel>());
 
             CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
+
+            OpenTab2Command = new MvxAsyncCommand(async () => await NavigationService.ChangePresentation(new MvxPagePresentationHint(typeof(Tab2ViewModel))));
         }
 
         public override async Task Initialize()
@@ -43,6 +47,8 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand OpenModalCommand { get; private set; }
 
         public IMvxAsyncCommand OpenNavModalCommand { get; private set; }
+
+        public IMvxAsyncCommand OpenTab2Command { get; private set; }
 
         public IMvxAsyncCommand CloseCommand { get; private set; }
     }

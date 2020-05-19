@@ -23,10 +23,10 @@ namespace MvvmCross.Platforms.Tizen.Views
 
         public async Task<bool> ShowViewModel(MvxViewModelRequest request)
         {
-            Action action = () =>
+            Func<Task> action = () =>
             {
                 MvxLog.Instance.Trace("TizenNavigation", "Navigate requested");
-                _presenter.Show(request);
+                return _presenter.Show(request);
             };
             await ExecuteOnMainThreadAsync(action);
             return true;

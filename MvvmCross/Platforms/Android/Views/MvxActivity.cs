@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
@@ -15,6 +14,7 @@ using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.Views;
 using MvvmCross.ViewModels;
 using MvvmCross.Core;
+using Fragment = AndroidX.Fragment.App.Fragment;
 
 namespace MvvmCross.Platforms.Android.Views
 {
@@ -114,23 +114,6 @@ namespace MvvmCross.Platforms.Android.Views
         {
             base.OnCreate(bundle);
             ViewModel?.ViewCreated();
-
-            if (!(this is IMvxSetupMonitor))
-            {
-                RunAppStart(bundle);
-            }
-        }
-        
-        protected virtual void RunAppStart(Bundle bundle)
-        {
-            var startup = Mvx.IoCProvider.Resolve<IMvxAppStart>();
-            if (!startup.IsStarted)
-                startup.Start(GetAppStartHint(bundle));
-        }
-
-        protected virtual object GetAppStartHint(object hint = null)
-        {
-            return null;
         }
 
         protected override void OnDestroy()
@@ -164,14 +147,18 @@ namespace MvvmCross.Platforms.Android.Views
         }
     }
 
-    public abstract class MvxActivity<TViewModel>
-        : MvxActivity
-        , IMvxAndroidView<TViewModel> where TViewModel : class, IMvxViewModel
+    public abstract class MvxActivity<TViewModel> : MvxActivity, IMvxAndroidView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         public new TViewModel ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxAndroidView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxAndroidView<TViewModel>, TViewModel>();
         }
     }
 }

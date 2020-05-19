@@ -3,7 +3,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using MvvmCross.Core.Navigation;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.DroidX.AppCompat;
 using MvvmCross.Platform;
 using RoutingExample.Core.ViewModels;
 

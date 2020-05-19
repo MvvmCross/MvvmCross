@@ -248,7 +248,7 @@ With our `CalculationService` and our `TipViewModel` defined, we now just need t
 Our "Tip Calculation" App class will register the `ICalculationService` as a dynamic service:
 
 ```c#
-Mvx.RegisterType<ICalculationService, CalculationService>();
+Mvx.IoCProvider.RegisterType<ICalculationService, CalculationService>();
 ```
 
 The previous line tells the IoC Container that whenever any code requests an `ICalculationService` reference, an object of type `CalculationService` should be created and returned.
@@ -277,7 +277,7 @@ namespace TipCalc.Core
     {
         public override void Initialize()
         {
-            Mvx.RegisterType<ICalculationService, CalculationService>();
+            Mvx.IoCProvider.RegisterType<ICalculationService, CalculationService>();
 
             RegisterAppStart<TipViewModel>();
         }
@@ -305,7 +305,7 @@ These are the same steps that you need to go through for every new MvvmCross app
 
 The next step is about building a first UI for our MvvmCross application.
 
-[Next!](https://www.mvvmcross.com/documentation/tutorials/tipcalc/the-tip-calc-navigation)
+[Next!](https://www.mvvmcross.com/documentation/tutorials/tipcalc/a-xamarinandroid-ui-project)
 
 
 ## Side note: What is 'Inversion of Control'?
@@ -315,9 +315,9 @@ We won't go into depth here about what IoC - Inversion of Control - is.
 Instead, we will just say that:
 
 - Within each MvvmCross application, there is a very special object, which is a `singleton`.
-- This `singleton` lives within the `Mvx` static class.
-- The application startup code can use the `Mvx.Register...` methods to let `Mvx` know how to resolve certain requests during the lifetime of the app.
-- After the registration has been done, then when any code asks for an `interface` implementation, it can do that by using the `Mvx.Resolve` methods.
+- This `singleton` lives within the `Mvx.IoCProvider` singleton instance.
+- The application startup code can use the `Mvx.Register...` methods to let `Mvx.IoCProvider` know how to resolve certain requests during the lifetime of the app.
+- After the registration has been done, then when any code asks for an `interface` implementation, it can do that by using the `Mvx.IoCProvider.Resolve` methods.
 
 One common pattern the app is also using is 'constructor injection':
 
@@ -325,7 +325,7 @@ One common pattern the app is also using is 'constructor injection':
 - It presents a constructor like: `public TipViewModel(ICalculationService calculationService)`. 
 - When the app is running a part of the MvvmCross framework called the `ViewModelLocator` is used to find and create ViewModels.
 - When a `TipViewModel` is needed, the `ViewModelLocator` uses a call to `Mvx.IocConstruct` to create one.
-- This `Mvx.IocConstruct` call creates the `TipViewModel` using the `ICalculationService` implementation that it finds using `Mvx.Resolve`
+- This `Mvx.IocConstruct` call creates the `TipViewModel` using the `ICalculationService` implementation that it finds using `Mvx.IoCProvider.Resolve`
 
 This is obviously only a very brief introduction.
 

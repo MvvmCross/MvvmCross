@@ -2,21 +2,21 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.Graphics;
-using Android.Preferences;
+using AndroidX.Preference;
 using Android.Views;
+using Android.Webkit;
 using Android.Widget;
-using MvvmCross.Base;
-using MvvmCross.IoC;
 using MvvmCross.Binding;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Android.Binding.Binders;
 using MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.ResourceHelpers;
 using MvvmCross.Platforms.Android.Binding.Target;
 using MvvmCross.Platforms.Android.Binding.Views;
+using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
 namespace MvvmCross.Platforms.Android.Binding
 {
@@ -60,7 +60,13 @@ namespace MvvmCross.Platforms.Android.Binding
 
         protected virtual void InitializeBindingResources()
         {
-            MvxAndroidBindingResource.Initialize();
+            var mvxAndroidBindingResource = CreateAndroidBindingResource();
+            Mvx.IoCProvider.RegisterSingleton(mvxAndroidBindingResource);
+        }
+
+        protected virtual IMvxAndroidBindingResource CreateAndroidBindingResource()
+        {
+            return new MvxAndroidBindingResource();
         }
 
         protected virtual void InitializeAppResourceTypeFinder()
@@ -109,6 +115,15 @@ namespace MvvmCross.Platforms.Android.Binding
                 typeof(MvxSeekBarProgressTargetBinding),
                 typeof(SeekBar),
                 MvxAndroidPropertyBinding.SeekBar_Progress);
+
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxNumberPickerValueTargetBinding),
+                typeof(NumberPicker),
+                MvxAndroidPropertyBinding.NumberPicker_Value);
+
+            registry.RegisterCustomBindingFactory<NumberPicker>(
+                MvxAndroidPropertyBinding.NumberPicker_DisplayedValues, 
+                view => new MvxNumberPickerDisplayedValuesTargetBinding(view));
 
             registry.RegisterCustomBindingFactory<View>(
                 MvxAndroidPropertyBinding.View_Visible,
@@ -170,9 +185,9 @@ namespace MvvmCross.Platforms.Android.Binding
                 MvxAndroidPropertyBinding.MvxRadioGroup_SelectedItem,
                 radioGroup => new MvxRadioGroupSelectedItemBinding(radioGroup));
 
-            registry.RegisterCustomBindingFactory(
+            registry.RegisterCustomBindingFactory<EditText>(
                 MvxAndroidPropertyBinding.EditText_TextFocus,
-                (EditText view) => new MvxTextViewFocusTargetBinding(view));
+                editText => new MvxTextViewFocusTargetBinding(editText));
 
             registry.RegisterCustomBindingFactory<SearchView>(
                 MvxAndroidPropertyBinding.SearchView_Query,
@@ -210,6 +225,44 @@ namespace MvvmCross.Platforms.Android.Binding
                 registry.RegisterCustomBindingFactory<View>(
                     margin, view => new MvxViewMarginTargetBinding(view, margin));
             }
+            
+            registry.RegisterCustomBindingFactory<View>(
+                MvxAndroidPropertyBinding.View_Focus,
+                view => new MvxViewFocusChangedTargetbinding(view));
+            
+            registry.RegisterCustomBindingFactory<VideoView>(
+                MvxAndroidPropertyBinding.VideoView_Uri,
+                view => new MvxVideoViewUriTargetBinding(view));
+            
+            registry.RegisterCustomBindingFactory<WebView>(
+                MvxAndroidPropertyBinding.WebView_Uri,
+                view => new MvxWebViewUriTargetBinding(view));
+            
+            registry.RegisterCustomBindingFactory<WebView>(
+                MvxAndroidPropertyBinding.WebView_Html,
+                view => new MvxWebViewHtmlTargetBinding(view));
+
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxAppCompatAutoCompleteTextViewPartialTextTargetBinding),
+                typeof(MvxAppCompatAutoCompleteTextView),
+                MvxAndroidPropertyBinding.MvxAppCompatAutoCompleteTextView_PartialText);
+
+            registry.RegisterPropertyInfoBindingFactory(
+                typeof(MvxAppCompatAutoCompleteTextViewSelectedObjectTargetBinding),
+                typeof(MvxAppCompatAutoCompleteTextView),
+                MvxAndroidPropertyBinding.MvxAppCompatAutoCompleteTextView_SelectedObject);
+
+            registry.RegisterCustomBindingFactory<MvxAppCompatSpinner>(
+                MvxAndroidPropertyBinding.MvxAppCompatSpinner_SelectedItem,
+                spinner => new MvxAppCompatSpinnerSelectedItemBinding(spinner));
+
+            registry.RegisterCustomBindingFactory<MvxAppCompatRadioGroup>(
+                MvxAndroidPropertyBinding.MvxAppCompatRadioGroup_SelectedItem,
+                radioGroup => new MvxAppCompatRadioGroupSelectedItemBinding(radioGroup));
+
+            registry.RegisterCustomBindingFactory<Toolbar>(
+                MvxAndroidPropertyBinding.Toolbar_Subtitle,
+                toolbar => new MvxToolbarSubtitleBinding(toolbar));
         }
 
         protected override void FillDefaultBindingNames(IMvxBindingNameRegistry registry)
@@ -228,6 +281,10 @@ namespace MvvmCross.Platforms.Android.Binding
             registry.AddOrOverwrite(typeof(CompoundButton), MvxAndroidPropertyBinding.CompoundButton_Checked);
             registry.AddOrOverwrite(typeof(SeekBar), MvxAndroidPropertyBinding.SeekBar_Progress);
             registry.AddOrOverwrite(typeof(SearchView), MvxAndroidPropertyBinding.SearchView_Query);
+            registry.AddOrOverwrite(typeof(NumberPicker), MvxAndroidPropertyBinding.NumberPicker_Value);
+            registry.AddOrOverwrite(typeof(NumberPicker), MvxAndroidPropertyBinding.NumberPicker_DisplayedValues);
+            registry.AddOrOverwrite(typeof(VideoView), MvxAndroidPropertyBinding.VideoView_Uri);
+            registry.AddOrOverwrite(typeof(WebView), MvxAndroidPropertyBinding.WebView_Uri);
         }
 
         protected override void RegisterPlatformSpecificComponents()

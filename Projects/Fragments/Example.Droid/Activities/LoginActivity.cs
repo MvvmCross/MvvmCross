@@ -2,7 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 using Example.Core.ViewModels;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.DroidX.AppCompat;
 
 namespace Example.Droid.Activities
 {

@@ -12,7 +12,7 @@ namespace MvvmCross.Base
 {
     public abstract class MvxMainThreadDispatcher : MvxSingleton<IMvxMainThreadDispatcher>, IMvxMainThreadDispatcher
     {
-        protected static void ExceptionMaskedAction(Action action, bool maskExceptions)
+        public static void ExceptionMaskedAction(Action action, bool maskExceptions)
         {
             try
             {
@@ -24,7 +24,7 @@ namespace MvvmCross.Base
                 if (maskExceptions)
                     MvxLog.Instance.Trace("TargetInvocateException masked " + exception.InnerException.ToLongString());
                 else
-                    throw exception;
+                    throw;
             }
             catch (Exception exception)
             {
@@ -32,7 +32,7 @@ namespace MvvmCross.Base
                 if (maskExceptions)
                     MvxLog.Instance.Warn("Exception masked " + exception.ToLongString());
                 else
-                    throw exception;
+                    throw;
             }
         }
 

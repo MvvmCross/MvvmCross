@@ -57,11 +57,11 @@ namespace MvvmCross.Platforms.Uap.Core
             ActivationArguments = e;
         }
 
-        protected override void InitializePlatformServices()
+        protected override void InitializeFirstChance()
         {
             InitializeSuspensionManager();
             RegisterPresenter();
-            base.InitializePlatformServices();
+            base.InitializeFirstChance();
         }
 
         protected virtual void InitializeSuspensionManager()

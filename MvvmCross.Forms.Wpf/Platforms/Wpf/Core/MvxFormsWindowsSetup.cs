@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Controls;
 using MvvmCross.Binding;
+using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Forms.Core;
 using MvvmCross.Forms.Platforms.Wpf.Bindings;
@@ -34,7 +35,7 @@ namespace MvvmCross.Forms.Platforms.Wpf.Core
                 {
                     _formsApplication = CreateFormsApplication();
                 }
-                if(Application.Current != _formsApplication)
+                if (Application.Current != _formsApplication)
                 {
                     Application.Current = _formsApplication;
                 }
@@ -44,19 +45,39 @@ namespace MvvmCross.Forms.Platforms.Wpf.Core
 
         protected abstract Application CreateFormsApplication();
 
+        protected virtual IMvxFormsPagePresenter CreateFormsPagePresenter(IMvxFormsViewPresenter viewPresenter)
+        {
+            var formsPagePresenter = new MvxFormsPagePresenter(viewPresenter);
+            Mvx.IoCProvider.RegisterSingleton<IMvxFormsPagePresenter>(formsPagePresenter);
+            return formsPagePresenter;
+        }
+
         protected override IMvxWpfViewPresenter CreateViewPresenter(ContentControl contentControl)
         {
             var presenter = new MvxFormsWpfViewPresenter(contentControl, FormsApplication);
             Mvx.IoCProvider.RegisterSingleton<IMvxFormsViewPresenter>(presenter);
+            presenter.FormsPagePresenter = CreateFormsPagePresenter(presenter);
             return presenter;
         }
 
         protected override MvxBindingBuilder CreateBindingBuilder() => new MvxFormsWindowsBindingBuilder();
+
+        protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
+        {
+            MvxFormsSetupHelper.FillTargetFactories(registry);
+            base.FillTargetFactories(registry);
+        }
+
+        protected override void FillBindingNames(IMvxBindingNameRegistry registry)
+        {
+            MvxFormsSetupHelper.FillBindingNames(registry);
+            base.FillBindingNames(registry);
+        }
     }
 
     public class MvxFormsWpfSetup<TApplication, TFormsApplication> : MvxFormsWpfSetup
         where TApplication : class, IMvxApplication, new()
-        where TFormsApplication : Application, new()        
+        where TFormsApplication : Application, new()
     {
         public override IEnumerable<Assembly> GetViewAssemblies()
         {

@@ -1,9 +1,8 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
-
 using MvvmCross.Binding.BindingContext;
 using Foundation;
 using MvvmCross.Platforms.Tvos.Views.Base;
@@ -15,14 +14,27 @@ namespace MvvmCross.Platforms.Tvos.Views
     public class MvxBaseTabBarViewController
         : MvxEventSourceTabBarController, IMvxTvosView 
     {
-
         public MvxBaseTabBarViewController()
         {
             this.AdaptForBinding();
         }
 
-        protected MvxBaseTabBarViewController(IntPtr handle)
-            : base(handle)
+        public MvxBaseTabBarViewController(NSCoder coder) : base(coder)
+        {
+            this.AdaptForBinding();
+        }
+
+        protected MvxBaseTabBarViewController(NSObjectFlag t) : base(t)
+        {
+            this.AdaptForBinding();
+        }
+
+        protected internal MvxBaseTabBarViewController(IntPtr handle) : base(handle)
+        {
+            this.AdaptForBinding();
+        }
+
+        public MvxBaseTabBarViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
         {
             this.AdaptForBinding();
         }
@@ -97,12 +109,23 @@ namespace MvvmCross.Platforms.Tvos.Views
     public class MvxBaseTabBarViewController<TViewModel> : MvxBaseTabBarViewController, IMvxTvosView<TViewModel>
       where TViewModel : class, IMvxViewModel
     {
-        protected MvxBaseTabBarViewController()
+        public MvxBaseTabBarViewController()
         {
         }
 
-        protected MvxBaseTabBarViewController(IntPtr handle)
-            : base(handle)
+        public MvxBaseTabBarViewController(NSCoder coder) : base(coder)
+        {
+        }
+
+        public MvxBaseTabBarViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+        }
+
+        protected MvxBaseTabBarViewController(NSObjectFlag t) : base(t)
+        {
+        }
+
+        protected internal MvxBaseTabBarViewController(IntPtr handle) : base(handle)
         {
         }
 
@@ -110,6 +133,11 @@ namespace MvvmCross.Platforms.Tvos.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxTvosView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxTvosView<TViewModel>, TViewModel>();
         }
     }
 }

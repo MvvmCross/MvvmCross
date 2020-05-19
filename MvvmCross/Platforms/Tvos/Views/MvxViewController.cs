@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -19,14 +19,22 @@ namespace MvvmCross.Platforms.Tvos.Views
             this.AdaptForBinding();
         }
 
-        public MvxViewController(IntPtr handle)
-            : base(handle)
+        public MvxViewController(NSCoder coder) : base(coder)
         {
             this.AdaptForBinding();
         }
 
-        protected MvxViewController(string nibName, NSBundle bundle)
-            : base(nibName, bundle)
+        protected MvxViewController(NSObjectFlag t) : base(t)
+        {
+            this.AdaptForBinding();
+        }
+
+        protected internal MvxViewController(IntPtr handle) : base(handle)
+        {
+            this.AdaptForBinding();
+        }
+
+        public MvxViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
         {
             this.AdaptForBinding();
         }
@@ -93,20 +101,26 @@ namespace MvvmCross.Platforms.Tvos.Views
         }
     }
 
-    public class MvxViewController<TViewModel>
-        : MvxViewController, IMvxTvosView<TViewModel> where TViewModel : class, IMvxViewModel
+    public class MvxViewController<TViewModel> : MvxViewController, IMvxTvosView<TViewModel> 
+        where TViewModel : class, IMvxViewModel
     {
         public MvxViewController()
         {
         }
 
-        public MvxViewController(IntPtr handle)
-            : base(handle)
+        public MvxViewController(NSCoder coder) : base(coder)
         {
         }
 
-        protected MvxViewController(string nibName, NSBundle bundle)
-            : base(nibName, bundle)
+        public MvxViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+        }
+
+        protected MvxViewController(NSObjectFlag t) : base(t)
+        {
+        }
+
+        protected internal MvxViewController(IntPtr handle) : base(handle)
         {
         }
 
@@ -114,6 +128,11 @@ namespace MvvmCross.Platforms.Tvos.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxTvosView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxTvosView<TViewModel>, TViewModel>();
         }
     }
 }

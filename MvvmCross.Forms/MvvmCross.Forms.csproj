@@ -1,7 +1,17 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
+  <PropertyGroup Condition=" '$(TargetsToBuild)' == 'All' ">
+    <TargetFrameworks>netstandard2.0;xamarin.ios10;xamarin.mac20;monoandroid10.0;tizen40;netcoreapp3.1;net461</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.16299;$(TargetFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetsToBuild)' != 'All' ">
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Android' ">netstandard2.0;monoandroid10.0;</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Uap' ">netstandard2.0;uap10.0.16299</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'iOS' ">netstandard2.0;xamarin.ios10</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Tizen' ">netstandard2.0;tizen40</TargetFrameworks>
+  </PropertyGroup>
+
   <PropertyGroup>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;net461;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid81;tizen40;uap10.0.16299</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;net461;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid81;tizen40</TargetFrameworks>
     <AssemblyName>MvvmCross.Forms</AssemblyName>
     <RootNamespace>MvvmCross.Forms</RootNamespace>
     <Description>
@@ -25,66 +35,58 @@
     <Compile Include="Platforms\Netstandard\**\*.cs" />
   </ItemGroup>
 
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
+    <Compile Include="Platforms\Net\**\*.cs" />
+    <Compile Include="Platforms\Console\**\*.cs" />
+  </ItemGroup>
+
   <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
     <Compile Include="Platforms\Net\**\*.cs" />
     <Compile Include="Platforms\Console\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'!='netstandard2.0'">
-    <Compile Include="Platforms\Shared\**\*.cs" />
-  </ItemGroup>
-
   <ItemGroup Condition=" $(TargetFramework.StartsWith('uap')) ">
-    <Compile Include="Platforms\Windows-common\**\*.cs" />
-    <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="Platforms\Uap\**\*.cs" />
+    <Compile Include="Platforms\Windows\**\*.cs" />
+    <Compile Include="Platforms\Uap\**\*.cs" />
+    <Page Include="Platforms\Uap\**\*.xaml" SubType="Designer" Generator="MSBuild:Compile" />
+    <None Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
+    <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
-    <Compile Include="Platforms\Apple-common\**\*.cs" />
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.ios')) ">
+    <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Ios\**\*.cs" />
-    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+    <Compile Include="Platforms\Xamarin\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.Mac')) ">
-    <Compile Include="Platforms\Apple-common\**\*.cs" />
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.mac')) ">
+    <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Mac\**\*.cs" />
-    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+    <Compile Include="Platforms\Xamarin\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.TVOS')) ">
-    <Compile Include="Platforms\Apple-common\**\*.cs" />
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.tvos')) ">
+    <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Tvos\**\*.cs" />
-    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+    <Compile Include="Platforms\Xamarin\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.WatchOS')) ">
-    <Compile Include="Platforms\Apple-common\**\*.cs" />
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.watchos')) ">
+    <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Watchos\**\*.cs" />
-    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
+    <Compile Include="Platforms\Xamarin\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('monoandroid')) ">
     <Compile Include="Platforms\Android\**\*.cs" />
-    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
-    <PackageReference Include="Xamarin.Android.Support.v4" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.Compat" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.Annotations" Version="27.0.2" />
-    <ProjectReference Include="..\MvvmCross.Android.Support\V7.AppCompat\MvvmCross.Droid.Support.V7.AppCompat.csproj" />
-    <ProjectReference Include="..\MvvmCross.Android.Support\Fragment\MvvmCross.Droid.Support.Fragment.csproj" />
-    <ProjectReference Include="..\MvvmCross.Android.Support\Core.UI\MvvmCross.Droid.Support.Core.UI.csproj" />
-    <ProjectReference Include="..\MvvmCross.Android.Support\Design\MvvmCross.Droid.Support.Design.csproj" />
+    <Compile Include="Platforms\Xamarin\**\*.cs" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.1.0" />
+    <PackageReference Include="Xamarin.AndroidX.CardView" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">
     <Compile Include="Platforms\Tizen\**\*.cs" />
-    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
-    <PackageReference Include="Tizen.NET" Version="4.0.0">
-      <ExcludeAssets>Runtime</ExcludeAssets>
-    </PackageReference>
+    <Compile Include="Platforms\Xamarin\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -93,10 +95,10 @@
 
   <!-- There is something not working correctly w.r.t. multi-targetting so adding
     direct reference seems to help get the build to work -->
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.Mac')) ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.mac')) ">
     <Reference Include="netstandard" />
   </ItemGroup>
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('monoandroid')) ">
     <Reference Include="netstandard" />
   </ItemGroup>
 </Project>

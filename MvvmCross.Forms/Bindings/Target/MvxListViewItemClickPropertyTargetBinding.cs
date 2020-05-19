@@ -49,6 +49,12 @@ namespace MvvmCross.Forms.Bindings.Target
             var args = e as ItemTappedEventArgs;
             if (args == null) return;
 
+            if (view?.ItemClick == null)
+            {
+                MvxBindingLog.Error($"Error - ItemClick is null in {nameof(MvxListViewItemClickPropertyTargetBinding)}");
+                return;
+            }
+
             view.ItemClick.Execute(args.Item);
         }
 

@@ -17,7 +17,7 @@ using MvvmCross.Exceptions;
 namespace MvvmCross.Binding.BindingContext
 {
     public class MvxBaseFluentBindingDescription<TTarget>
-        : MvxApplicableTo<TTarget>
+        : MvxApplicableTo<TTarget>, IMvxBaseFluentBindingDescription
         where TTarget : class
     {
         private readonly TTarget _target;
@@ -162,6 +162,12 @@ namespace MvvmCross.Binding.BindingContext
         }
 
         protected object ClearBindingKey { get; set; }
+
+        object IMvxBaseFluentBindingDescription.ClearBindingKey
+        {
+            get => ClearBindingKey;
+            set => ClearBindingKey = value;
+        }
 
         protected MvxBindingDescription BindingDescription => _bindingDescription;
 
