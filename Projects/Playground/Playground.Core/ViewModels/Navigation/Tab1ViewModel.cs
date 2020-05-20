@@ -31,10 +31,18 @@ namespace Playground.Core.ViewModels
             await Task.Delay(3000);
         }
 
-        string para;
+
+        #region PassedParameter;
+        private string _passedParameter;
+        public string PassedParameter
+        {
+            get => _passedParameter;
+            set => SetProperty(ref _passedParameter, value);
+        }
+        #endregion
         public override void Prepare(string parameter)
         {
-            para = parameter;
+            PassedParameter = parameter;
         }
 
         public override void ViewAppeared()
