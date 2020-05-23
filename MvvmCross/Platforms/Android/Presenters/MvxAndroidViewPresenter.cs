@@ -640,6 +640,9 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected virtual Fragment FindFragmentInChildren(string fragmentName, FragmentManager fragManager)
         {
+            if (fragManager == null)
+                return null;
+
             if (fragManager.BackStackEntryCount == 0)
                 return null;
 
