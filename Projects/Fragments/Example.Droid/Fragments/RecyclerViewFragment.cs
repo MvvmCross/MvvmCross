@@ -8,7 +8,7 @@ using Android.Widget;
 using Example.Core.ViewModels;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Views.Attributes;
-using MvvmCross.DroidX.Fragments;
+using MvvmCross.Platforms.Android.Views.Fragments;
 using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Platform.WeakSubscription;
 

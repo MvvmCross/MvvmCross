@@ -1,4 +1,4 @@
-﻿using MvvmCross.Droid.Support.V7.RecyclerView.ItemTemplates;
+﻿using MvvmCross.DroidX.RecyclerView.ItemTemplates;
 using static Playground.Core.ViewModels.CollectionViewModel;
 
 namespace Playground.Droid.TemplateSelectors

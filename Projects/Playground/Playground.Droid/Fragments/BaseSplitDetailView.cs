@@ -10,6 +10,7 @@ using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Views.Fragments;
 using MvvmCross.ViewModels;
 using Playground.Droid.Activities;
+using MvvmCross.Platforms.Android.Views.AppCompat;
 
 namespace Playground.Droid.Fragments
 {
