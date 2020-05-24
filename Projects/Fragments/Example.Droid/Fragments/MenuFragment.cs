@@ -8,7 +8,7 @@ using Example.Core.ViewModels;
 using Example.Droid.Activities;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Droid.Views.Attributes;
-using MvvmCross.DroidX.Fragments;
+using MvvmCross.Platforms.Android.Views.Fragments;
 
 namespace Example.Droid.Fragments
 {

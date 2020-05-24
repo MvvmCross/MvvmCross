@@ -6,11 +6,11 @@ using Android.Content.Res;
 using Android.OS;
 using AndroidX.AppCompat.Widget;
 using Android.Views;
-using MvvmCross.DroidX.Fragments;
-using MvvmCross.DroidX.AppCompat;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
+using MvvmCross.Platforms.Android.Views.Fragments;
 using MvvmCross.ViewModels;
 using Playground.Droid.Activities;
+using MvvmCross.Platforms.Android.Views.AppCompat;
 
 namespace Playground.Droid.Fragments
 {

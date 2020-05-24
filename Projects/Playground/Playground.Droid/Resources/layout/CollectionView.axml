@@ -12,7 +12,7 @@
         android:text="Add More Animals"
         local:MvxBind="Click AddAnimalCommand, CommandParameter=10" />
 
-    <MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView
+    <mvvmcross.droidx.recyclerview.MvxRecyclerView
         android:id="@+id/animal_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-  <MvxRecyclerView
+  <mvvmcross.droidx.recyclerview.MvxRecyclerView
       android:id="@+id/my_recycler_view"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
