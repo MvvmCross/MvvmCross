@@ -150,8 +150,6 @@ Task("UnitTest")
     EnsureDirectoryExists(outputDir + "/Tests/");
 
     var testPaths = GetFiles("./UnitTests/*.UnitTest/*.UnitTest.csproj");
-    var testsFailed = false;
-
     var settings = new DotNetCoreTestSettings
     {
         Configuration = configuration,
@@ -169,7 +167,7 @@ Task("UnitTest")
         }
         catch
         {
-            testsFailed = true;
+            // ignore
         }
     }
 
@@ -185,9 +183,6 @@ Task("UnitTest")
         };
         TFBuild.Commands.PublishTestResults(data);
     }
-
-    if (testsFailed)
-        throw new Exception("Tests failed :(");
 });
 
 Task("CopyPackages")
