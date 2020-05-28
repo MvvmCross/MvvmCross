@@ -1,7 +1,9 @@
 #tool nuget:?package=GitVersion.CommandLine&version=5.0.1
 #tool nuget:?package=vswhere&version=2.7.1
+#tool nuget:?package=MSBuild.SonarQube.Runner.Tool&version=4.8.0
 #addin nuget:?package=Cake.Figlet&version=1.3.1
 #addin nuget:?package=Cake.Git&version=0.21.0
+#addin nuget:?package=Cake.Sonar&version=1.1.25
 
 var solutionName = "MvvmCross";
 var repoName = "mvvmcross/mvvmcross";
@@ -14,6 +16,7 @@ var outputDir = new DirectoryPath(artifactsDir);
 var gitVersionLog = new FilePath("./gitversion.log");
 var nuspecDir = new DirectoryPath("./nuspec");
 var verbosity = Verbosity.Minimal;
+var sonarKey = Argument("sonarKey", "");
 
 var githubToken = Argument("github_token", "");
 var githubTokenEnv = EnvironmentVariable("CHANGELOG_GITHUB_TOKEN");
@@ -50,12 +53,13 @@ Setup(context =>
     verbosity = (Verbosity) Enum.Parse(typeof(Verbosity), verbosityArg, true);
 });
 
-Task("Clean").Does(() =>
+Task("Clean")
+    .Does(() =>
 {
     EnsureDirectoryExists(outputDir.FullPath);
 
-    CleanDirectories("./**/bin");
-    CleanDirectories("./**/obj");
+    CleanDirectories("MvvmCross*/**/bin");
+    CleanDirectories("MvvmCross*/**/obj");
     CleanDirectories(outputDir.FullPath);
 
     CopyFile(gitVersionLog, outputDir + "/gitversion.log");
@@ -95,6 +99,31 @@ Task("PatchBuildProps")
 {
     var buildProp = new FilePath("./Directory.build.props");
     XmlPoke(buildProp, "//Project/PropertyGroup/Version", versionInfo.SemVer);
+});
+
+Task("SonarStart")
+    .WithCriteria(() => !string.IsNullOrEmpty(sonarKey))
+    .Does(() => 
+{
+    SonarBegin(new SonarBeginSettings
+    {
+        Key = "MvvmCross_MvvmCross",
+        Url = "https://sonarcloud.io",
+        Organization = "mvx",
+        Login = sonarKey,
+        Branch = versionInfo.BranchName,
+        XUnitReportsPath = new DirectoryPath(outputDir + "/Tests/").FullPath
+    });
+});
+
+Task("SonarEnd")
+    .WithCriteria(() => !string.IsNullOrEmpty(sonarKey))
+    .Does(() => 
+{   
+    SonarEnd(new SonarEndSettings
+    {
+        Login = sonarKey
+    });
 });
 
 Task("Build")
@@ -221,8 +250,11 @@ Task("UpdateChangelog")
 });
 
 Task("Default")
+    .IsDependentOn("Clean")
+    .IsDependentOn("SonarStart")
     .IsDependentOn("Build")
     .IsDependentOn("UnitTest")
+    .IsDependentOn("SonarEnd")
     .IsDependentOn("CopyPackages")
     .Does(() => 
 {
