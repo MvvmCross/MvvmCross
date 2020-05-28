@@ -12,6 +12,8 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
     public class MvxPathSourceStep : MvxSourceStep<MvxPathSourceStepDescription>
     {
         private IMvxSourceBinding _sourceBinding;
+        
+        private readonly object _sourceLocker = new object();
 
         public MvxPathSourceStep(MvxPathSourceStepDescription description)
             : base(description)
@@ -56,11 +58,14 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
 
         private void ClearPathSourceBinding()
         {
-            if (_sourceBinding != null)
+            lock (_sourceLocker)
             {
-                _sourceBinding.Changed -= SourceBindingOnChanged;
-                _sourceBinding.Dispose();
-                _sourceBinding = null;
+                if (_sourceBinding != null)
+                {
+                    _sourceBinding.Changed -= SourceBindingOnChanged;
+                    _sourceBinding.Dispose();
+                    _sourceBinding = null;
+                }
             }
         }
 
