@@ -65,7 +65,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Filter">
       <Version>1.1.1</Version>
     </PackageReference>
-    <PackageReference Include="Uno.UI" Version="2.3.0-dev.98" />
+    <PackageReference Include="Uno.UI" Version="2.4.4" />
     <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.32" />
   </ItemGroup>
   <ItemGroup>
