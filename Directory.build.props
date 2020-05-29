@@ -70,7 +70,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <TargetsToBuildDeveloperOverride>Android</TargetsToBuildDeveloperOverride>             
+    <TargetsToBuildDeveloperOverride>All</TargetsToBuildDeveloperOverride>              
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
