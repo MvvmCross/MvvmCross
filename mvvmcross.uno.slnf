@@ -2,18 +2,14 @@
   "solution": {
     "path": "MvvmCross.sln",
     "projects": [
-      "MvvmCross.Forms\\MvvmCross.Forms.csproj",
       "MvvmCross.Uno.Plugins\\MvvmCross.Uno.Plugins.csproj",
       "MvvmCross.Uno\\MvvmCross.Uno.csproj",
-      "MvvmCross\\MvvmCross.csproj",
-      "Projects\\Playground\\Playground.Core\\Playground.Core.csproj",
       "Projects\\Playground\\Playground.Uno\\Playground.Uno.Core\\Playground.Uno.Core.csproj",
       "Projects\\Playground\\Playground.Uno\\Playground.Uno.Droid\\Playground.Uno.Droid.csproj",
       "Projects\\Playground\\Playground.Uno\\Playground.Uno.Shared\\Playground.Uno.Shared.shproj",
       "Projects\\Playground\\Playground.Uno\\Playground.Uno.UWP\\Playground.Uno.UWP.csproj",
       "Projects\\Playground\\Playground.Uno\\Playground.Uno.Wasm\\Playground.Uno.Wasm.csproj",
-      "Projects\\Playground\\Playground.Uwp\\Playground.Uwp.csproj",
-      "Projects\\Playground\\Playground.Wpf\\Playground.Wpf.csproj"
+      "Projects\\Playground\\Playground.Uno\\Playground.Uno.iOS\\Playground.Uno.iOS.csproj"
     ]
   }
 }

@@ -6,8 +6,14 @@
     <WasmHead>true</WasmHead>
     <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
     <NoWarn>NU1701</NoWarn>
-    <MonoRuntimeDebuggerEnabled Condition="'$(Configuration)'=='Debug'">true</MonoRuntimeDebuggerEnabled>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
+    <DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
   <ItemGroup>
     <Content Include="..\Playground.Uno.UWP\Assets\*.png" Link="Assets\%(FileName)%(Extension)" />
     <Content Include="Fonts\winjs-symbols.woff2" />
@@ -20,23 +26,17 @@
     <LinkerDescriptor Include="LinkerConfig.xml" />
   </ItemGroup>
   <ItemGroup>
-    <!-- 
-    This item group is required by the project templace because of the
-    new SDK-Style project, otherwise some files are not aded automatically.
-    
-    You can safely remove this ItemGroup completely.
-    -->
-    <Compile Remove="Program.cs" />
-    <Compile Include="Program.cs" />
-    <Content Include="LinkerConfig.xml" />
-    <Content Include="wwwroot/web.config" />
+    <None Include="Program.cs" />
+    <None Include="LinkerConfig.xml" />
+    <None Include="wwwroot\web.config" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
     <PackageReference Include="Uno.UI" Version="2.4.4" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="2.4.4" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Uno.Wasm.Bootstrap" Version="1.3.0-dev.7" />
-    <DotNetCliToolReference Include="Uno.Wasm.Bootstrap.DevServer" Version="1.3.0-dev.7" />
+    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="1.3.0-dev.7" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\MvvmCross.Uno\MvvmCross.Uno.csproj" />

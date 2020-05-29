@@ -1,13 +1,13 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup Condition=" '$(TargetsToBuild)' == 'All' ">
-    <TargetFrameworks>netstandard2.0;xamarin.ios10;xamarin.mac20;xamarin.tvos10;xamarin.watchos10;monoandroid10.0;tizen40;netcoreapp3.1;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;xamarinios10;xamarinmac20;monoandroid10.0</TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.16299;$(TargetFrameworks)</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetsToBuild)' != 'All' ">
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Android' ">netstandard2.0;monoandroid10.0;</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Uap' ">netstandard2.0;uap10.0.16299</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'iOS' ">netstandard2.0;xamarin.ios10</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'iOS' ">netstandard2.0;xamarinios10</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Tizen' ">netstandard2.0;tizen40</TargetFrameworks>
   </PropertyGroup>
 
@@ -38,23 +38,29 @@
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|monoandroid10.0|AnyCPU'">
     <DefineConstants>$(DefineConstants);TRACE;</DefineConstants>
   </PropertyGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid10.0' or '$(TargetFramework)'=='netstandard2.0'">
-    <PackageReference Include="Uno.UI" Version="2.4.0" />
+  <ItemGroup Condition="'$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='xamarinmac20' or '$(TargetFramework)'=='monoandroid10.0' or '$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="Uno.UI" Version="2.4.4" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\MvvmCross\**\*.cs" Exclude="..\MvvmCross\Platforms\**\*.cs;..\MvvmCross\Resources\*.cs;..\MvvmCross\obj\**\*.*;..\MvvmCross\bin\**\*.*" />
     <Compile Include="..\MvvmCross\Platforms\Windows-common\**\*.cs" />
-    <Compile Condition=" '$(OS)' == 'Windows_NT' " Include="..\MvvmCross\Platforms\Uap\**\*.cs" />
+    <Compile Include="..\MvvmCross\Platforms\Uap\**\*.cs" />
     <!--<Page Include="..\MvvmCross\**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
     <Compile Update="**\*.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon> 
     </Compile>-->
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid10.0' ">
+  <ItemGroup Condition=" '$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='xamarinmac20' or '$(TargetFramework)'=='monoandroid10.0' ">
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="..\MvvmCross\Logging\LogProviders\Log4NetLogProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="AsyncFixer" Version="1.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
   <!--<ItemGroup>
     <UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
