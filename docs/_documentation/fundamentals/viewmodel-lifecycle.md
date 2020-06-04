@@ -88,7 +88,7 @@ public class MyViewModel : ApiViewModel
         
         try
         {
-            apiService.GetMyProfileAsync();
+            await apiService.GetMyProfileAsync();
         }
         catch (Exception e)
         {
