@@ -142,7 +142,8 @@ namespace MvvmCross.DroidX.RecyclerView
 
         protected virtual View InflateViewForHolder(ViewGroup parent, int viewType, IMvxAndroidBindingContext bindingContext)
         {
-            return bindingContext.BindingInflate(viewType, parent, false);
+            var layoutId = ItemTemplateSelector.GetItemLayoutId (viewType);
+            return bindingContext.BindingInflate(layoutId, parent, false);
         }
 
         public override void OnBindViewHolder(AndroidX.RecyclerView.Widget.RecyclerView.ViewHolder holder, int position)
