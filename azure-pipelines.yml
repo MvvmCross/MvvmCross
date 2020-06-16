@@ -34,12 +34,10 @@ stages:
         packageType: sdk
         version: 3.1.x
 
-    - task: PowerShell@2
-      displayName: 'Run Cake Build'
-      inputs:
-        targetType: filePath
-        filePath: .\build.ps1
-        arguments: "--verbosity=Normal --artifactsDir=$(Build.ArtifactStagingDirectory)"
+    - script: dotnet tool restore
+      displayName: Restore dotnet tools
+
+    - script: dotnet cake --verbosity=Normal --artifactsDir=$(Build.ArtifactStagingDirectory) --sonarKey=$(sonarKey)
 
     - task: PublishBuildArtifacts@1
       inputs:
