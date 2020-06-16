@@ -16,7 +16,7 @@ This package contains AndroidX RecyclerView support for MvvmCross.</Description>
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.1.0" />
+    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.1.0.1" />
   </ItemGroup>
   
   <ItemGroup>
