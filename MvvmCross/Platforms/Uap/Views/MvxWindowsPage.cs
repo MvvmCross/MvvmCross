@@ -101,6 +101,7 @@ namespace MvvmCross.Platforms.Uap.Views
             {
                 var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxWindowsViewModelLoader>();
                 ViewModel = viewModelLoader.Load(e.Parameter.ToString(), LoadStateBundle(e));
+                ViewModel?.ViewCreated();
             }
             _reqData = (string)e.Parameter;
 
