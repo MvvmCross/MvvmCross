@@ -106,15 +106,27 @@ Task("SonarStart")
     .WithCriteria(() => !string.IsNullOrEmpty(sonarKey))
     .Does(() => 
 {
-    SonarBegin(new SonarBeginSettings
+    var settings = new SonarBeginSettings
     {
         Key = "MvvmCross_MvvmCross",
         Url = "https://sonarcloud.io",
         Organization = "mvx",
         Login = sonarKey,
-        Branch = versionInfo.BranchName,
         XUnitReportsPath = new DirectoryPath(outputDir + "/Tests/").FullPath
-    });
+    };
+
+    if (AzurePipelines.Environment.PullRequest.IsPullRequest)
+    {
+        settings.PullRequestKey = AzurePipelines.Environment.PullRequest.Id;
+        settings.PullRequestBranch = AzurePipelines.Environment.PullRequest.SourceBranch;
+        settings.PullRequestBase = AzurePipelines.Environment.PullRequest.TargetBranch;
+    }
+    else
+    {
+        settings.Branch = versionInfo.BranchName;
+    }
+
+    SonarBegin(settings);
 });
 
 Task("SonarEnd")
