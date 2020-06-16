@@ -1,5 +1,6 @@
-#tool nuget:?package=GitVersion.CommandLine&version=5.0.1
-#tool nuget:?package=vswhere&version=2.7.1
+#module nuget:?package=Cake.DotNetTool.Module&version=0.4.0
+#tool dotnet:n?package=GitVersion.Tool&version=5.3.5
+#tool nuget:?package=vswhere&version=2.8.4
 #tool nuget:?package=MSBuild.SonarQube.Runner.Tool&version=4.8.0
 #addin nuget:?package=Cake.Figlet&version=1.3.1
 #addin nuget:?package=Cake.Git&version=0.21.0
@@ -22,7 +23,7 @@ var githubToken = Argument("github_token", "");
 var githubTokenEnv = EnvironmentVariable("CHANGELOG_GITHUB_TOKEN");
 var sinceTag = Argument("since_tag", "");
 
-var isRunningOnPipelines = TFBuild.IsRunningOnAzurePipelines || TFBuild.IsRunningOnAzurePipelinesHosted;
+var isRunningOnPipelines = AzurePipelines.IsRunningOnAzurePipelines || AzurePipelines.IsRunningOnAzurePipelinesHosted;
 GitVersion versionInfo = null;
 
 Setup(context => 
@@ -36,9 +37,9 @@ Setup(context =>
 
     if (isRunningOnPipelines)
     {
-        var buildNumber = versionInfo.InformationalVersion + "-" + TFBuild.Environment.Build.Number;
+        var buildNumber = versionInfo.InformationalVersion + "-" + AzurePipelines.Environment.Build.Number;
         buildNumber = buildNumber.Replace("/", "-");
-        TFBuild.Commands.UpdateBuildNumber(buildNumber);
+        AzurePipelines.Commands.UpdateBuildNumber(buildNumber);
     }
 
     var cakeVersion = typeof(ICakeContext).Assembly.GetName().Version.ToString();
@@ -173,15 +174,15 @@ Task("UnitTest")
 
     if (isRunningOnPipelines)
     {
-        var data = new TFBuildPublishTestResultsData
+        var data = new AzurePipelinesPublishTestResultsData
         {
             Configuration = configuration,
             TestResultsFiles = GetFiles(outputDir + "/Tests/*.xml").ToList(),
-            TestRunner = TFTestRunnerType.XUnit,
+            TestRunner = AzurePipelinesTestRunnerType.XUnit,
             TestRunTitle = "MvvmCross Unit Tests",
             MergeTestResults = true
         };
-        TFBuild.Commands.PublishTestResults(data);
+        AzurePipelines.Commands.PublishTestResults(data);
     }
 });
 
