@@ -18,6 +18,8 @@ namespace MvvmCross.Plugin.Messenger
     [Preserve(AllMembers = true)]
 	public class MvxMessengerHub : IMvxMessenger
     {
+        private readonly object _locker = new object();
+
         private readonly Dictionary<Type, Dictionary<Guid, BaseSubscription>> _subscriptions =
             new Dictionary<Type, Dictionary<Guid, BaseSubscription>>();
 
@@ -64,7 +66,7 @@ namespace MvvmCross.Plugin.Messenger
                     throw new ArgumentOutOfRangeException(nameof(reference), "reference type unexpected " + reference);
             }
 
-            lock (this)
+            lock (_locker)
             {
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
                 if (!_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
@@ -91,7 +93,7 @@ namespace MvvmCross.Plugin.Messenger
 
         private void InternalUnsubscribe<TMessage>(Guid subscriptionGuid) where TMessage : MvxMessage
         {
-            lock (this)
+            lock (_locker)
             {
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
 
@@ -128,7 +130,7 @@ namespace MvvmCross.Plugin.Messenger
         public bool HasSubscriptionsFor<TMessage>()
             where TMessage : MvxMessage
         {
-            lock (this)
+            lock (_locker)
             {
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
                 if (!_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
@@ -141,7 +143,7 @@ namespace MvvmCross.Plugin.Messenger
 
         public int CountSubscriptionsFor<TMessage>() where TMessage : MvxMessage
         {
-            lock (this)
+            lock (_locker)
             {
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
                 if (!_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
@@ -154,7 +156,7 @@ namespace MvvmCross.Plugin.Messenger
 
         public bool HasSubscriptionsForTag<TMessage>(string tag) where TMessage : MvxMessage
         {
-            lock (this)
+            lock (_locker)
             {
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
                 if (!_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
@@ -180,7 +182,7 @@ namespace MvvmCross.Plugin.Messenger
 
         public IList<string> GetSubscriptionTagsFor<TMessage>() where TMessage : MvxMessage
         {
-            lock (this)
+            lock (_locker)
             {
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
                 if (!_subscriptions.TryGetValue(typeof(TMessage), out messageSubscriptions))
@@ -216,7 +218,7 @@ namespace MvvmCross.Plugin.Messenger
             }
 
             List<BaseSubscription> toNotify = null;
-            lock (this)
+            lock (_locker)
             {
                 /*
 				MvxPluginLog.Instance.Trace("Found {0} subscriptions of all types", _subscriptions.Count);
@@ -259,7 +261,7 @@ namespace MvvmCross.Plugin.Messenger
 
         public void RequestPurgeAll()
         {
-            lock (this)
+            lock (_locker)
             {
                 SchedulePurge(_subscriptions.Keys.ToArray());
             }
@@ -269,7 +271,7 @@ namespace MvvmCross.Plugin.Messenger
 
         private void SchedulePurge(params Type[] messageTypes)
         {
-            lock (this)
+            lock (_locker)
             {
                 var threadPoolTaskAlreadyRequested = _scheduledPurges.Count > 0;
                 foreach (var messageType in messageTypes)
@@ -285,7 +287,7 @@ namespace MvvmCross.Plugin.Messenger
         private void DoPurge()
         {
             List<Type> toPurge = null;
-            lock (this)
+            lock (_locker)
             {
                 toPurge = _scheduledPurges.Select(x => x.Key).ToList();
                 _scheduledPurges.Clear();
@@ -299,7 +301,7 @@ namespace MvvmCross.Plugin.Messenger
 
         private void PurgeMessagesOfType(Type type)
         {
-            lock (this)
+            lock (_locker)
             {
                 Dictionary<Guid, BaseSubscription> messageSubscriptions;
                 if (!_subscriptions.TryGetValue(type, out messageSubscriptions))
