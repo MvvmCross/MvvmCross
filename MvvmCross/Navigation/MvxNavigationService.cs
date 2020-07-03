@@ -284,11 +284,11 @@ namespace MvvmCross.Navigation
             if (args.Cancel)
                 return false;
 
-            hasNavigated = await ViewDispatcher.ShowViewModel(request);
+            hasNavigated = await ViewDispatcher.ShowViewModel(request).ConfigureAwait(false);
             if (!hasNavigated)
                 return false;
 
-            if (viewModel.InitializeTask?.Task != null)
+            if (viewModel.InitializeTask?.Task.ConfigureAwait(false) != null)
                 await viewModel.InitializeTask.Task.ConfigureAwait(false);
 
             OnAfterNavigate(this, args);
@@ -305,7 +305,7 @@ namespace MvvmCross.Navigation
                 cancellationToken.Register(async () =>
                 {
                     if (hasNavigated && !tcs.Task.IsCompleted)
-                        await Close(viewModel, default(TResult));
+                        await Close(viewModel, default(TResult)).ConfigureAwait(false);
                 });
             }
 
@@ -318,7 +318,7 @@ namespace MvvmCross.Navigation
             if (cancellationToken.IsCancellationRequested)
                 return default(TResult);
 
-            hasNavigated = await ViewDispatcher.ShowViewModel(request);
+            hasNavigated = await ViewDispatcher.ShowViewModel(request).ConfigureAwait(false);
             if (!hasNavigated)
                 return default(TResult);
 
@@ -330,7 +330,7 @@ namespace MvvmCross.Navigation
 
             try
             {
-                return (TResult)await tcs.Task;
+                return (TResult)await tcs.Task.ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -346,7 +346,7 @@ namespace MvvmCross.Navigation
                 cancellationToken.Register(async () =>
                 {
                     if (hasNavigated)
-                        await Close(viewModel, default(TResult));
+                        await Close(viewModel, default(TResult)).ConfigureAwait(false);
                 });
             }
 
@@ -363,7 +363,7 @@ namespace MvvmCross.Navigation
             if (cancellationToken.IsCancellationRequested)
                 return default(TResult);
 
-            hasNavigated = await ViewDispatcher.ShowViewModel(request);
+            hasNavigated = await ViewDispatcher.ShowViewModel(request).ConfigureAwait(false);
 
             if (viewModel.InitializeTask?.Task != null)
                 await viewModel.InitializeTask.Task.ConfigureAwait(false);
@@ -372,7 +372,7 @@ namespace MvvmCross.Navigation
 
             try
             {
-                return (TResult)await tcs.Task;
+                return (TResult)await tcs.Task.ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -504,7 +504,7 @@ namespace MvvmCross.Navigation
             if (args.Cancel)
                 return false;
 
-            var result = await ViewDispatcher.ChangePresentation(hint);
+            var result = await ViewDispatcher.ChangePresentation(hint).ConfigureAwait(false);
 
             args.Result = result;
             OnAfterChangePresentation(this, args);
@@ -520,7 +520,7 @@ namespace MvvmCross.Navigation
             if (args.Cancel)
                 return false;
 
-            var close = await ViewDispatcher.ChangePresentation(new MvxClosePresentationHint(viewModel));
+            var close = await ViewDispatcher.ChangePresentation(new MvxClosePresentationHint(viewModel)).ConfigureAwait(false);
             OnAfterClose(this, args);
 
             return close;
@@ -535,7 +535,7 @@ namespace MvvmCross.Navigation
 
             try
             {
-                var closeResult = await Close(viewModel, cancellationToken);
+                var closeResult = await Close(viewModel, cancellationToken).ConfigureAwait(false);
                 if (closeResult)
                 {
                     _tcs?.TrySetResult(result);

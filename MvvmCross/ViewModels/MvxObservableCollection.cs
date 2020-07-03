@@ -259,7 +259,7 @@ namespace MvvmCross.ViewModels
 
         protected async override void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-            await InvokeOnMainThread(() => base.OnPropertyChanged(e));
+            await InvokeOnMainThread(() => base.OnPropertyChanged(e)).ConfigureAwait(false);
         }
     }
 }

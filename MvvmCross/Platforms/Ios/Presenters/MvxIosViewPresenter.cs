@@ -170,8 +170,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
                 // set root
                 SetupWindowRootNavigation(viewController, attribute);
 
-                if (!await CloseModalViewControllers()) return false;
-                if (!await CloseSplitViewController()) return false;
+                if (!await CloseModalViewControllers().ConfigureAwait(false)) return false;
+                if (!await CloseSplitViewController().ConfigureAwait(false)) return false;
 
                 return true;
             }
@@ -183,8 +183,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
                 // set root
                 SetupWindowRootNavigation(viewController, attribute);
 
-                if (!await CloseModalViewControllers()) return false;
-                if (!await CloseSplitViewController()) return false;
+                if (!await CloseModalViewControllers().ConfigureAwait(false)) return false;
+                if (!await CloseSplitViewController().ConfigureAwait(false)) return false;
 
                 return true;
             }
@@ -197,8 +197,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
                 // set root
                 SetupWindowRootNavigation(viewController, attribute);
 
-                if (!await CloseModalViewControllers()) return false;
-                if (!await CloseTabBarViewController()) return false;
+                if (!await CloseModalViewControllers().ConfigureAwait(false)) return false;
+                if (!await CloseTabBarViewController().ConfigureAwait(false)) return false;
 
                 return true;
             }
@@ -206,9 +206,9 @@ namespace MvvmCross.Platforms.Ios.Presenters
             // set root initiating stack navigation or just a plain controller
             SetupWindowRootNavigation(viewController, attribute);
 
-            if (!await CloseModalViewControllers()) return false;
-            if (!await CloseTabBarViewController()) return false;
-            if (!await CloseSplitViewController()) return false;
+            if (!await CloseModalViewControllers().ConfigureAwait(false)) return false;
+            if (!await CloseTabBarViewController().ConfigureAwait(false)) return false;
+            if (!await CloseSplitViewController().ConfigureAwait(false)) return false;
             return true;
         }
 
@@ -569,7 +569,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
         {
             while (ModalViewControllers.Any())
             {
-                if (!(await CloseModalViewController(ModalViewControllers.LastOrDefault(), new MvxModalPresentationAttribute()))) return false;
+                if (!(await CloseModalViewController(ModalViewControllers.LastOrDefault(), new MvxModalPresentationAttribute()).ConfigureAwait(false))) return false;
             }
             return true;
         }

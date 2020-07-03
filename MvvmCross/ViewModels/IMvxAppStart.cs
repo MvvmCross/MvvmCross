@@ -8,9 +8,7 @@ namespace MvvmCross.ViewModels
 {
     public interface IMvxAppStart
     {
-        void Start(object hint = null);
-
-        Task StartAsync(object hint = null);
+        Task Start(object hint = null);
 
         bool IsStarted { get; }
 

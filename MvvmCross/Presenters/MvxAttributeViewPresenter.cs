@@ -154,11 +154,11 @@ namespace MvvmCross.Presenters
 
         public override async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            if (await HandlePresentationChange(hint)) return true;
+            if (await HandlePresentationChange(hint).ConfigureAwait(false)) return true;
 
             if (hint is MvxClosePresentationHint presentationHint)
             {
-                return await Close(presentationHint.ViewModelToClose);
+                return await Close(presentationHint.ViewModelToClose).ConfigureAwait(false);
             }
 
             MvxLog.Instance.Warn("Hint ignored {0}", hint.GetType().Name);

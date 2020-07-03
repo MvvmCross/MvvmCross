@@ -88,7 +88,7 @@ namespace MvvmCross.Platforms.Android.Views
             if (!_isResumed)
                 return;
 
-            await RunAppStartAsync(_bundle);
+            await RunAppStartAsync(_bundle).ConfigureAwait(false);
         }
 
         protected virtual async Task RunAppStartAsync(Bundle bundle)
@@ -97,7 +97,7 @@ namespace MvvmCross.Platforms.Android.Views
             {
                 if(!startup.IsStarted)
                 {
-                    await startup.StartAsync(GetAppStartHint(bundle));
+                    await startup.Start(GetAppStartHint(bundle)).ConfigureAwait(false);
                 }
                 else
                 {

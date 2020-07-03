@@ -93,7 +93,7 @@ namespace MvvmCross.Core
             }
         }
 
-        public virtual void EnsureInitialized()
+        public virtual async Task EnsureInitialized()
         {
             lock (LockObject)
             {
@@ -113,7 +113,7 @@ namespace MvvmCross.Core
                     MvxLog.Instance.Trace("EnsureInitialized has already been called so now waiting for completion");
                 }
             }
-            IsInitialisedTaskCompletionSource.Task.GetAwaiter().GetResult();
+            await IsInitialisedTaskCompletionSource.Task.ConfigureAwait(false);
         }
 
         public virtual void InitializeAndMonitor(IMvxSetupMonitor setupMonitor)
@@ -211,9 +211,9 @@ namespace MvvmCross.Core
                     {
                         if (monitor != null)
                         {
-                            await monitor.InitializationComplete();
+                            await monitor.InitializationComplete().ConfigureAwait(false);
                         }
-                    });
+                    }).ConfigureAwait(false);
                 }
             });
         }

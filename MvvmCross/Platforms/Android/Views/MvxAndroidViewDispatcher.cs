@@ -22,7 +22,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         public async Task<bool> ShowViewModel(MvxViewModelRequest request)
         {
-            await ExecuteOnMainThreadAsync(() => _presenter.Show(request));
+            await ExecuteOnMainThreadAsync(() => _presenter.Show(request)).ConfigureAwait(false);
             return true;
         }
 

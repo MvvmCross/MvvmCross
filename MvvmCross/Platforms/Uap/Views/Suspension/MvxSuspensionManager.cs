@@ -69,11 +69,11 @@ namespace MvvmCross.Platforms.Uap.Views.Suspension
 
                 // Get an output stream for the SessionState file and write the state asynchronously
                 var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(SessionStateFilename, CreationCollisionOption.ReplaceExisting);
-                using (Stream fileStream = await file.OpenStreamForWriteAsync())
+                using (Stream fileStream = await file.OpenStreamForWriteAsync().ConfigureAwait(false))
                 {
                     sessionData.Seek(0, SeekOrigin.Begin);
-                    await sessionData.CopyToAsync(fileStream);
-                    await fileStream.FlushAsync();
+                    await sessionData.CopyToAsync(fileStream).ConfigureAwait(false);
+                    await fileStream.FlushAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception e)

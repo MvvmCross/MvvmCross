@@ -76,7 +76,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
 
             var navigationService = Mvx.IoCProvider.Resolve<IMvxNavigationService>();
 
-            backRequestedEventArgs.Handled = await navigationService.Close(currentView.ViewModel);
+            backRequestedEventArgs.Handled = await navigationService.Close(currentView.ViewModel).ConfigureAwait(false);
         }
 
         protected virtual string GetRequestText(MvxViewModelRequest request)
