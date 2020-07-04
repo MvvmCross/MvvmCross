@@ -28,7 +28,8 @@ namespace MvvmCross.Plugin.ResourceLoader
                         {
                             text = textReader.ReadToEnd();
                         }
-                    }).ConfigureAwait(false);
+                    })
+                    .ConfigureAwait(false);
                 return text;
             }
             //#if !NETFX_CORE

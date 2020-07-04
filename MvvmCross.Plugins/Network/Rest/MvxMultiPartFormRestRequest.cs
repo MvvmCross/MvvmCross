@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace MvvmCross.Plugin.Network.Rest
 {
     [Preserve(AllMembers = true)]
-	public class MvxMultiPartFormRestRequest
+    public class MvxMultiPartFormRestRequest
         : MvxTextBasedRestRequest
     {
         protected virtual string GenerateBoundary()
@@ -130,7 +130,8 @@ namespace MvvmCross.Plugin.Network.Rest
                         fileStream.CopyTo(stream);
                         stream.Flush();
                         return true;
-                    }).ConfigureAwait(false);
+                    })
+                    .ConfigureAwait(false);
 
                 if (!result)
                     throw new MvxException("Failed to read file for upload at {0}", Path);

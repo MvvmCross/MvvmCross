@@ -45,7 +45,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
             if (activationArgs.PrelaunchActivated == false)
             {
-                await RunAppStart(activationArgs); //.GetAwaiter().GetResult();
+                await RunAppStart(activationArgs).ConfigureAwait(false);
             }
 
             Window.Current.Activate();
@@ -58,7 +58,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
             var rootFrame = InitializeFrame(activationArgs);
 
-            await RunAppStart(activationArgs);//.GetAwaiter().GetResult();
+            await RunAppStart(activationArgs).ConfigureAwait(false);
 
             Window.Current.Activate();
         }

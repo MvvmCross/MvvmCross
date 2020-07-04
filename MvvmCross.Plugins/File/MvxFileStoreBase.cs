@@ -53,7 +53,8 @@ namespace MvvmCross.Plugin.File
                     }
                     return true;
 
-                }).ConfigureAwait(false);
+                })
+                .ConfigureAwait(false);
 
             return (toReturn, result);
         }
@@ -137,7 +138,9 @@ namespace MvvmCross.Plugin.File
                     content = await reader.ReadToEndAsync().ConfigureAwait(false);
                     return true;
                 };
-            }).ConfigureAwait(false);
+            })
+            .ConfigureAwait(false);
+
             return TryResult.Create(operationSucceeded, content);
         }
 
@@ -161,7 +164,8 @@ namespace MvvmCross.Plugin.File
                     }
                     return true;
                 };
-            }).ConfigureAwait(false);
+            })
+            .ConfigureAwait(false);
 
             return TryResult.Create(operationSucceeded, operationSucceeded ? contentStringBuilder.ToString() : string.Empty);
         }
@@ -177,7 +181,9 @@ namespace MvvmCross.Plugin.File
                     content = ms.ToArray();
                     return true;
                 }
-            }).ConfigureAwait(false);
+            })
+            .ConfigureAwait(false);
+
             return TryResult.Create(operationSucceeded, content);
         }
 
