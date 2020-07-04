@@ -5,16 +5,17 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Plugin.File
 {
     public interface IMvxFileStore
     {
-        bool TryReadTextFile(string path, out string contents);
+        ValueTask<(bool result, string contents)> TryReadTextFile(string path);
 
-        bool TryReadBinaryFile(string path, out byte[] contents);
+        ValueTask<(bool result, byte[] contents)> TryReadBinaryFile(string path);
 
-        bool TryReadBinaryFile(string path, Func<Stream, bool> readMethod);
+        ValueTask<bool> TryReadBinaryFile(string path, Func<Stream, bool> readMethod);
 
         void WriteFile(string path, string contents);
 
@@ -22,34 +23,34 @@ namespace MvvmCross.Plugin.File
 
         void WriteFile(string path, Action<Stream> writeMethod);
 
-		bool TryMove(string from, string to, bool overwrite);
+		ValueTask<bool> TryMove(string from, string to, bool overwrite);
 
-        bool TryCopy(string from, string to, bool overwrite);
+        ValueTask<bool> TryCopy(string from, string to, bool overwrite);
 
-        bool Exists(string path);
+        ValueTask<bool> Exists(string path);
 
-        bool FolderExists(string folderPath);
+        ValueTask<bool> FolderExists(string folderPath);
 
         string PathCombine(string items0, string items1);
 
         string NativePath(string path);
 
-        void EnsureFolderExists(string folderPath);
+        ValueTask EnsureFolderExists(string folderPath);
 
-        IEnumerable<string> GetFilesIn(string folderPath);
+        ValueTask<IEnumerable<string>> GetFilesIn(string folderPath);
 
-        IEnumerable<string> GetFoldersIn(string folderPath);
+        ValueTask<IEnumerable<string>> GetFoldersIn(string folderPath);
 
         void DeleteFile(string path);
 
-        void DeleteFolder(string folderPath, bool recursive);
+        ValueTask DeleteFolder(string folderPath, bool recursive);
 
-        Stream OpenRead(string path);
+        ValueTask<Stream> OpenRead(string path);
 
-        Stream OpenWrite(string path);
+        ValueTask<Stream> OpenWrite(string path);
 
-        long GetSize(string path);
+        ValueTask<long> GetSize(string path);
 
-        DateTime GetLastWriteTimeUtc(string path);
+        ValueTask<DateTime> GetLastWriteTimeUtc(string path);
     }
 }

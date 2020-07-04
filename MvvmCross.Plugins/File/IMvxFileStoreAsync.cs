@@ -15,30 +15,30 @@ namespace MvvmCross.Plugin.File
     /// </summary>
     public interface IMvxFileStoreAsync
     {
-        Task<TryResult<string>> TryReadTextFileAsync(string path);
+        ValueTask<TryResult<string>> TryReadTextFileAsync(string path);
 
-        Task<TryResult<string>> TryReadTextFileAsync(string path, CancellationToken cancellationToken);
+        ValueTask<TryResult<string>> TryReadTextFileAsync(string path, CancellationToken cancellationToken);
 
-        Task<TryResult<byte[]>> TryReadBinaryFileAsync(string path);
+        ValueTask<TryResult<byte[]>> TryReadBinaryFileAsync(string path);
 
-        Task<TryResult<byte[]>> TryReadBinaryFileAsync(string path, CancellationToken cancellationToken);
+        ValueTask<TryResult<byte[]>> TryReadBinaryFileAsync(string path, CancellationToken cancellationToken);
 
-        Task<bool> TryReadBinaryFileAsync(string path, Func<Stream, Task<bool>> readMethod);
+        ValueTask<bool> TryReadBinaryFileAsync(string path, Func<Stream, ValueTask<bool>> readMethod);
 
-        Task<bool> TryReadBinaryFileAsync(string path, Func<Stream, CancellationToken, Task<bool>> readMethod,
+        ValueTask<bool> TryReadBinaryFileAsync(string path, Func<Stream, CancellationToken, ValueTask<bool>> readMethod,
             CancellationToken cancellationToken);
 
-        Task WriteFileAsync(string path, string contents);
+        ValueTask WriteFileAsync(string path, string contents);
 
-        Task WriteFileAsync(string path, string contents, CancellationToken cancellationToken);
+        ValueTask WriteFileAsync(string path, string contents, CancellationToken cancellationToken);
 
-        Task WriteFileAsync(string path, IEnumerable<byte> contents);
+        ValueTask WriteFileAsync(string path, IEnumerable<byte> contents);
 
-        Task WriteFileAsync(string path, IEnumerable<byte> contents, CancellationToken cancellationToken);
+        ValueTask WriteFileAsync(string path, IEnumerable<byte> contents, CancellationToken cancellationToken);
 
-        Task WriteFileAsync(string path, Func<Stream, Task> writeMethod);
+        ValueTask WriteFileAsync(string path, Func<Stream, ValueTask> writeMethod);
 
-        Task WriteFileAsync(string path, Func<Stream, CancellationToken, Task> writeMethod,
+        ValueTask WriteFileAsync(string path, Func<Stream, CancellationToken, ValueTask> writeMethod,
             CancellationToken cancellationToken);
     }
 }

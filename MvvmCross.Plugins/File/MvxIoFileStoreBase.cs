@@ -21,58 +21,60 @@ namespace MvvmCross.Plugin.File
             AppendDefaultPath = appendDefaultPath;
         }
 
-        public override Stream OpenRead(string path)
+        public override ValueTask<Stream> OpenRead(string path)
         {
             var fullPath = FullPath(path);
             if (!System.IO.File.Exists(fullPath))
             {
-                return null;
+                return new ValueTask<Stream>((Stream)null);
             }
 
-            return System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            return new ValueTask<Stream>(System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
         }
 
-        public override Stream OpenWrite(string path)
+        public override ValueTask<Stream> OpenWrite(string path)
         {
             var fullPath = FullPath(path);
 
             if (!System.IO.File.Exists(fullPath))
             {
-                return System.IO.File.Create(fullPath);
+                return new ValueTask<Stream>(System.IO.File.Create(fullPath));
             }
 
-            return System.IO.File.OpenWrite(fullPath);
+            return new ValueTask<Stream>(System.IO.File.OpenWrite(fullPath));
         }
 
-        public override bool Exists(string path)
+        public override ValueTask<bool> Exists(string path)
         {
             var fullPath = FullPath(path);
-            return System.IO.File.Exists(fullPath);
+            return new ValueTask<bool>(System.IO.File.Exists(fullPath));
         }
 
-        public override bool FolderExists(string folderPath)
+        public override ValueTask<bool> FolderExists(string folderPath)
         {
             var fullPath = FullPath(folderPath);
-            return Directory.Exists(fullPath);
+            return new ValueTask<bool>(Directory.Exists(fullPath));
         }
 
-        public override void EnsureFolderExists(string folderPath)
+        public override ValueTask EnsureFolderExists(string folderPath)
         {
             var fullPath = FullPath(folderPath);
             if (!Directory.Exists(fullPath))
                 Directory.CreateDirectory(fullPath);
+
+            return new ValueTask();
         }
 
-        public override IEnumerable<string> GetFilesIn(string folderPath)
+        public override ValueTask<IEnumerable<string>> GetFilesIn(string folderPath)
         {
             var fullPath = FullPath(folderPath);
-            return Directory.GetFiles(fullPath);
+            return new ValueTask<IEnumerable<string>>(Directory.GetFiles(fullPath));
         }
 
-        public override IEnumerable<string> GetFoldersIn(string folderPath)
+        public override ValueTask<IEnumerable<string>> GetFoldersIn(string folderPath)
         {
             var fullPath = FullPath(folderPath);
-            return Directory.GetDirectories(fullPath);
+            return new ValueTask<IEnumerable<string>>(Directory.GetDirectories(fullPath));
         }
 
         public override void DeleteFile(string filePath)
@@ -81,13 +83,15 @@ namespace MvvmCross.Plugin.File
             System.IO.File.Delete(fullPath);
         }
 
-        public override void DeleteFolder(string folderPath, bool recursive)
+        public override ValueTask DeleteFolder(string folderPath, bool recursive)
         {
             var fullPath = FullPath(folderPath);
             Directory.Delete(fullPath, recursive);
+
+            return new ValueTask();
         }
 
-        public override bool TryMove(string from, string to, bool overwrite)
+        public override ValueTask<bool> TryMove(string from, string to, bool overwrite)
         {
             try
             {
@@ -97,7 +101,7 @@ namespace MvvmCross.Plugin.File
                 if (!System.IO.File.Exists(fullFrom))
                 {
                     MvxPluginLog.Instance.Error("Error during file move {0} : {1}. File does not exist!", from, to);
-                    return false;
+                    return new ValueTask<bool>(false);
                 }
 
                 if (System.IO.File.Exists(fullTo))
@@ -108,21 +112,21 @@ namespace MvvmCross.Plugin.File
                     }
                     else
                     {
-                        return false;
+                        return new ValueTask<bool>(false);
                     }
                 }
 
                 System.IO.File.Move(fullFrom, fullTo);
-                return true;
+                return new ValueTask<bool>(true);
             }
             catch (Exception exception)
             {
                 MvxPluginLog.Instance.Error("Error during file move {0} : {1} : {2}", from, to, exception.ToLongString());
-                return false;
+                return new ValueTask<bool>(false);
             }
         }
 
-        public override bool TryCopy(string from, string to, bool overwrite)
+        public override ValueTask<bool> TryCopy(string from, string to, bool overwrite)
         {
             try
             {
@@ -132,16 +136,16 @@ namespace MvvmCross.Plugin.File
                 if (!System.IO.File.Exists(fullFrom))
                 {
                     MvxPluginLog.Instance.Error("Error during file copy {0} : {1}. File does not exist!", from, to);
-                    return false;
+                    return new ValueTask<bool>(false);
                 }
 
                 System.IO.File.Copy(fullFrom, fullTo, overwrite);
-                return true;
+                return new ValueTask<bool>(true);
             }
             catch (Exception exception)
             {
                 MvxPluginLog.Instance.Error("Error during file copy {0} : {1} : {2}", from, to, exception.ToLongString());
-                return false;
+                return new ValueTask<bool>(false);
             }
         }
 
@@ -150,14 +154,18 @@ namespace MvvmCross.Plugin.File
             return FullPath(path);
         }
 
-        public override long GetSize(string path)
+        public override ValueTask<long> GetSize(string path)
         {
-            return new FileInfo(path).Length;
+            var length = new FileInfo(path).Length;
+
+            return new ValueTask<long>(length);
         }
 
-        public override DateTime GetLastWriteTimeUtc(string path)
+        public override ValueTask<DateTime> GetLastWriteTimeUtc(string path)
         {
-            return System.IO.File.GetLastWriteTimeUtc(path);
+            var timeUtc = System.IO.File.GetLastWriteTimeUtc(path);
+
+            return new ValueTask<DateTime>(timeUtc);
         }
 
         #endregion IMvxFileStore Members
@@ -166,7 +174,7 @@ namespace MvvmCross.Plugin.File
 
         protected bool AppendDefaultPath { get; }
 
-        protected override void WriteFileCommon(string path, Action<Stream> streamAction)
+        protected override ValueTask WriteFileCommon(string path, Action<Stream> streamAction)
         {
             var fullPath = FullPath(path);
             if (System.IO.File.Exists(fullPath))
@@ -178,23 +186,25 @@ namespace MvvmCross.Plugin.File
             {
                 streamAction?.Invoke(fileStream);
             }
+
+            return new ValueTask();
         }
 
-        protected override bool TryReadFileCommon(string path, Func<Stream, bool> streamAction)
+        protected override ValueTask<bool> TryReadFileCommon(string path, Func<Stream, bool> streamAction)
         {
             var fullPath = FullPath(path);
             if (!System.IO.File.Exists(fullPath))
             {
-                return false;
+                return new ValueTask<bool>(false);
             }
 
             using (var fileStream = System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
-                return streamAction(fileStream);
+                return new ValueTask<bool>(streamAction(fileStream));
             }
         }
 
-        protected override async Task WriteFileCommonAsync(string path, Func<Stream, Task> streamAction)
+        protected override async ValueTask WriteFileCommonAsync(string path, Func<Stream, ValueTask> streamAction)
         {
             var fullPath = FullPath(path);
             if (System.IO.File.Exists(fullPath))
@@ -209,7 +219,7 @@ namespace MvvmCross.Plugin.File
             }
         }
 
-        protected override async Task<bool> TryReadFileCommonAsync(string path, Func<Stream, Task<bool>> streamAction)
+        protected override async ValueTask<bool> TryReadFileCommonAsync(string path, Func<Stream, ValueTask<bool>> streamAction)
         {
             var fullPath = FullPath(path);
             if (!System.IO.File.Exists(fullPath))

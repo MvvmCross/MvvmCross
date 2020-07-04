@@ -19,48 +19,49 @@ namespace MvvmCross.Plugin.File
 
         #region IMvxFileStore Members
 
-        public abstract Stream OpenRead(string path);
+        public abstract ValueTask<Stream> OpenRead(string path);
 
-        public abstract Stream OpenWrite(string path);
+        public abstract ValueTask<Stream> OpenWrite(string path);
 
-        public abstract bool Exists(string path);
+        public abstract ValueTask<bool> Exists(string path);
 
-        public abstract bool FolderExists(string folderPath);
+        public abstract ValueTask<bool> FolderExists(string folderPath);
 
         public string PathCombine(string items0, string items1)
         {
             return Path.Combine(items0, items1);
         }
 
-        public abstract void EnsureFolderExists(string folderPath);
+        public abstract ValueTask EnsureFolderExists(string folderPath);
 
-        public abstract IEnumerable<string> GetFilesIn(string folderPath);
+        public abstract ValueTask<IEnumerable<string>> GetFilesIn(string folderPath);
 
-        public abstract IEnumerable<string> GetFoldersIn(string folderPath);
+        public abstract ValueTask<IEnumerable<string>> GetFoldersIn(string folderPath);
 
         public abstract void DeleteFile(string filePath);
 
-        public abstract void DeleteFolder(string folderPath, bool recursive);
+        public abstract ValueTask DeleteFolder(string folderPath, bool recursive);
 
-        public bool TryReadTextFile(string path, out string contents)
+        public async ValueTask<(bool result, string contents)> TryReadTextFile(string path)
         {
-            string result = null;
-            var toReturn = TryReadFileCommon(path, (stream) =>
+            string result = string.Empty;
+            var toReturn = await TryReadFileCommonAsync(path, async (stream) =>
                 {
                     using (var streamReader = new StreamReader(stream))
                     {
-                        result = streamReader.ReadToEnd();
+                        result = await streamReader.ReadToEndAsync().ConfigureAwait(false);
                     }
                     return true;
-                });
-            contents = result;
-            return toReturn;
+
+                }).ConfigureAwait(false);
+
+            return (toReturn, result);
         }
 
-        public bool TryReadBinaryFile(string path, out byte[] contents)
+        public async ValueTask<(bool result, byte[] contents)> TryReadBinaryFile(string path)
         {
             byte[] result = null;
-            var toReturn = TryReadFileCommon(path, (stream) =>
+            var toReturn = await TryReadFileCommon(path, (stream) =>
                 {
                     using (var binaryReader = new BinaryReader(stream))
                     {
@@ -74,11 +75,11 @@ namespace MvvmCross.Plugin.File
                         return true;
                     }
                 });
-            contents = result;
-            return toReturn;
+
+            return (toReturn, result);
         }
 
-        public bool TryReadBinaryFile(string path, Func<Stream, bool> readMethod)
+        public ValueTask<bool> TryReadBinaryFile(string path, Func<Stream, bool> readMethod)
         {
             return TryReadFileCommon(path, readMethod);
         }
@@ -112,21 +113,21 @@ namespace MvvmCross.Plugin.File
             WriteFileCommon(path, writeMethod);
         }
 
-        public abstract bool TryMove(string from, string to, bool overwrite);
+        public abstract ValueTask<bool> TryMove(string from, string to, bool overwrite);
 
         public abstract string NativePath(string path);
 
-		public abstract bool TryCopy(string from, string to, bool overwrite);
+		public abstract ValueTask<bool> TryCopy(string from, string to, bool overwrite);
 
-        public abstract long GetSize(string path);
+        public abstract ValueTask<long> GetSize(string path);
 
-        public abstract DateTime GetLastWriteTimeUtc(string path);
+        public abstract ValueTask<DateTime> GetLastWriteTimeUtc(string path);
 
         #endregion IMvxFileStore Members
 
         #region IMvxFileStore Async
 
-        public async Task<TryResult<string>> TryReadTextFileAsync(string path)
+        public async ValueTask<TryResult<string>> TryReadTextFileAsync(string path)
         {
             string content = "";
             bool operationSucceeded = await TryReadFileCommonAsync(path, async stream =>
@@ -140,7 +141,7 @@ namespace MvvmCross.Plugin.File
             return TryResult.Create(operationSucceeded, content);
         }
 
-        public async Task<TryResult<string>> TryReadTextFileAsync(string path, CancellationToken cancellationToken)
+        public async ValueTask<TryResult<string>> TryReadTextFileAsync(string path, CancellationToken cancellationToken)
         {
             var contentStringBuilder = new StringBuilder();
             var operationSucceeded = await TryReadFileCommonAsync(path, async stream =>
@@ -165,7 +166,7 @@ namespace MvvmCross.Plugin.File
             return TryResult.Create(operationSucceeded, operationSucceeded ? contentStringBuilder.ToString() : string.Empty);
         }
 
-        public async Task<TryResult<byte[]>> TryReadBinaryFileAsync(string path)
+        public async ValueTask<TryResult<byte[]>> TryReadBinaryFileAsync(string path)
         {
             byte[] content = null;
             bool operationSucceeded = await TryReadFileCommonAsync(path, async stream =>
@@ -180,7 +181,7 @@ namespace MvvmCross.Plugin.File
             return TryResult.Create(operationSucceeded, content);
         }
 
-        public async Task<TryResult<byte[]>> TryReadBinaryFileAsync(string path, CancellationToken cancellationToken)
+        public async ValueTask<TryResult<byte[]>> TryReadBinaryFileAsync(string path, CancellationToken cancellationToken)
         {
             byte[] content = null;
             var operationSucceeded = await TryReadFileCommonAsync(path, async stream =>
@@ -199,21 +200,21 @@ namespace MvvmCross.Plugin.File
             return TryResult.Create(operationSucceeded, content);
         }
 
-        public async Task<bool> TryReadBinaryFileAsync(string path, Func<Stream, Task<bool>> readMethod)
+        public async ValueTask<bool> TryReadBinaryFileAsync(string path, Func<Stream, ValueTask<bool>> readMethod)
         {
             return await TryReadFileCommonAsync(path,
                 async stream => await readMethod(stream).ConfigureAwait(false)).ConfigureAwait(false);
         }
 
-        public async Task<bool> TryReadBinaryFileAsync(string path,
-            Func<Stream, CancellationToken, Task<bool>> readMethod, CancellationToken cancellationToken)
+        public async ValueTask<bool> TryReadBinaryFileAsync(string path,
+            Func<Stream, CancellationToken, ValueTask<bool>> readMethod, CancellationToken cancellationToken)
         {
             return await TryReadFileCommonAsync(
                 path, async stream => await readMethod(stream, cancellationToken).ConfigureAwait(false))
                 .ConfigureAwait(false);
         }
 
-        public async Task WriteFileAsync(string path, string contents)
+        public async ValueTask WriteFileAsync(string path, string contents)
         {
             await WriteFileCommonAsync(path, async stream =>
             {
@@ -224,7 +225,7 @@ namespace MvvmCross.Plugin.File
             }).ConfigureAwait(false);
         }
 
-        public async Task WriteFileAsync(string path, string contents, CancellationToken cancellationToken)
+        public async ValueTask WriteFileAsync(string path, string contents, CancellationToken cancellationToken)
         {
             var contentsCharArray = contents.ToCharArray();
             await WriteFileCommonAsync(path, async stream =>
@@ -245,7 +246,7 @@ namespace MvvmCross.Plugin.File
             }).ConfigureAwait(false);
         }
 
-        public async Task WriteFileAsync(string path, byte[] contents)
+        public async ValueTask WriteFileAsync(string path, byte[] contents)
         {
             await WriteFileCommonAsync(path, async stream =>
             {
@@ -256,7 +257,7 @@ namespace MvvmCross.Plugin.File
             }).ConfigureAwait(false);
         }
 
-        public async Task WriteFileAsync(string path, byte[] contents, CancellationToken cancellationToken)
+        public async ValueTask WriteFileAsync(string path, byte[] contents, CancellationToken cancellationToken)
         {
             await WriteFileCommonAsync(path, async stream =>
             {
@@ -267,17 +268,17 @@ namespace MvvmCross.Plugin.File
             }).ConfigureAwait(false);
         }
 
-        public async Task WriteFileAsync(string path, IEnumerable<byte> contents)
+        public async ValueTask WriteFileAsync(string path, IEnumerable<byte> contents)
         {
             await WriteFileAsync(path, contents.ToArray()).ConfigureAwait(false);
         }
 
-        public async Task WriteFileAsync(string path, IEnumerable<byte> contents, CancellationToken cancellationToken)
+        public async ValueTask WriteFileAsync(string path, IEnumerable<byte> contents, CancellationToken cancellationToken)
         {
             await WriteFileAsync(path, contents.ToArray(), cancellationToken).ConfigureAwait(false);
         }
 
-        public async Task WriteFileAsync(string path, Func<Stream, Task> writeMethod)
+        public async ValueTask WriteFileAsync(string path, Func<Stream, ValueTask> writeMethod)
         {
             await WriteFileCommonAsync(path, async stream =>
             {
@@ -285,7 +286,7 @@ namespace MvvmCross.Plugin.File
             }).ConfigureAwait(false);
         }
 
-        public async Task WriteFileAsync(string path, Func<Stream, CancellationToken, Task> writeMethod,
+        public async ValueTask WriteFileAsync(string path, Func<Stream, CancellationToken, ValueTask> writeMethod,
             CancellationToken cancellationToken)
         {
             await WriteFileCommonAsync(path, async stream =>
@@ -296,13 +297,13 @@ namespace MvvmCross.Plugin.File
 
         #endregion IMvxFileStore Async
 
-        protected abstract void WriteFileCommon(string path, Action<Stream> streamAction);
+        protected abstract ValueTask WriteFileCommon(string path, Action<Stream> streamAction);
 
-        protected abstract bool TryReadFileCommon(string path, Func<Stream, bool> streamAction);
+        protected abstract ValueTask<bool> TryReadFileCommon(string path, Func<Stream, bool> streamAction);
 
-        protected abstract Task WriteFileCommonAsync(string path, Func<Stream, Task> streamAction);
+        protected abstract ValueTask WriteFileCommonAsync(string path, Func<Stream, ValueTask> streamAction);
 
-        protected abstract Task<bool> TryReadFileCommonAsync(string path, Func<Stream, Task<bool>> streamAction);
+        protected abstract ValueTask<bool> TryReadFileCommonAsync(string path, Func<Stream, ValueTask<bool>> streamAction);
     }
 }
 

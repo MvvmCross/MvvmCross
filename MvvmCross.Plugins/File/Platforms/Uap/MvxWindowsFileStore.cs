@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -17,12 +17,12 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
     // note that we use the full WindowsStore name here deliberately to avoid 'Store' naming confusion
     public class MvxWindowsFileStore : MvxFileStoreBase
     {
-        public override Stream OpenRead(string path)
+        public override async ValueTask<Stream> OpenRead(string path)
         {
             try
             {
-                var storageFile = StorageFileFromRelativePath(path);
-                var streamWithContentType = storageFile.OpenReadAsync().Await();
+                var storageFile = await StorageFileFromRelativePath(path).ConfigureAwait(false);
+                var streamWithContentType = await storageFile.OpenReadAsync();
                 return streamWithContentType.AsStreamForRead();
             }
             catch (Exception exception)
@@ -32,15 +32,15 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             }
         }
 
-        public override Stream OpenWrite(string path)
+        public override async ValueTask<Stream> OpenWrite(string path)
         {
             try
             {
                 StorageFile storageFile;
 
-                storageFile = Exists(path) ? StorageFileFromRelativePath(path) : CreateStorageFileFromRelativePathAsync(path).GetAwaiter().GetResult();
+                storageFile = await Exists(path) ? await StorageFileFromRelativePath(path).ConfigureAwait(false) : await CreateStorageFileFromRelativePath(path).ConfigureAwait(false);
 
-                var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).Await();
+                var streamWithContentType = await storageFile.OpenAsync(FileAccessMode.ReadWrite);
                 return streamWithContentType.AsStream();
             }
             catch (Exception exception)
@@ -50,15 +50,15 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             }
         }
 
-        public override bool TryMove(string from, string to, bool overwrite)
+        public override async ValueTask<bool> TryMove(string from, string to, bool overwrite)
         {
             try
             {
-                var fromFile = StorageFileFromRelativePath(from);
+                var fromFile = await StorageFileFromRelativePath(from);
 
                 if (overwrite)
                 {
-                    if (!SafeDeleteFile(to))
+                    if (! await SafeDeleteFile(to).ConfigureAwait(false))
                     {
                         return false;
                     }
@@ -67,8 +67,8 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
                 var fullToPath = ToFullPath(to);
                 var toDirectory = Path.GetDirectoryName(fullToPath);
                 var toFileName = Path.GetFileName(fullToPath);
-                var toStorageFolder = StorageFolder.GetFolderFromPathAsync(toDirectory).Await();
-                fromFile.MoveAsync(toStorageFolder, toFileName).Await();
+                var toStorageFolder = await StorageFolder.GetFolderFromPathAsync(toDirectory);
+                await fromFile.MoveAsync(toStorageFolder, toFileName);
                 return true;
             }
             catch (Exception exception)
@@ -78,11 +78,11 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             }
         }
 
-        public override bool TryCopy(string @from, string to, bool overwrite)
+        public override async ValueTask<bool> TryCopy(string @from, string to, bool overwrite)
         {
             try
             {
-                var fromFile = StorageFileFromRelativePath(from);
+                var fromFile = await StorageFileFromRelativePath(from);
 
                 var fullToPath = ToFullPath(to);
                 var toDirectory = Path.GetDirectoryName(fullToPath);
@@ -90,13 +90,13 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
 
                 if (overwrite)
                 {
-                    var toFile = StorageFileFromRelativePath(to);
-                    fromFile.CopyAndReplaceAsync(toFile).Await();
+                    var toFile = await StorageFileFromRelativePath(to).ConfigureAwait(false);
+                    await fromFile.CopyAndReplaceAsync(toFile);
                 }
                 else
                 {
-                    var toStorageFolder = StorageFolder.GetFolderFromPathAsync(toDirectory).Await();
-                    fromFile.CopyAsync(toStorageFolder, toFileName).Await();
+                    var toStorageFolder = await StorageFolder.GetFolderFromPathAsync(toDirectory);
+                    await fromFile.CopyAsync(toStorageFolder, toFileName);
                 }
                 return true;
             }
@@ -107,7 +107,7 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             }
         }
 
-        public override bool Exists(string path)
+        public override async ValueTask<bool> Exists(string path)
         {
             try
             {
@@ -115,11 +115,11 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
                 path = ToFullPath(path);
                 var fileName = Path.GetFileName(path);
                 var directoryPath = Path.GetDirectoryName(path);
-                if (!FolderExists(directoryPath))
+                if (!await FolderExists(directoryPath))
                     return false;
 
-                var directory = StorageFolder.GetFolderFromPathAsync(directoryPath).Await();
-                directory.GetFileAsync(fileName).Await();
+                var directory = await StorageFolder.GetFolderFromPathAsync(directoryPath);
+                await directory.GetFileAsync(fileName);
                 return true;
             }
             catch (FileNotFoundException)
@@ -133,7 +133,7 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             }
         }
 
-        public override bool FolderExists(string folderPath)
+        public override async ValueTask<bool> FolderExists(string folderPath)
         {
             // contributed by @AlexMortola via Stackoverflow creative commons
             // http://stackoverflow.com/questions/19890756/mvvmcross-notimplementedexception-calling-ensurefolderexists-method-of-imvxfile
@@ -142,7 +142,7 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
                 folderPath = ToFullPath(folderPath);
                 folderPath = folderPath.TrimEnd('\\');
 
-                var thisFolder = StorageFolder.GetFolderFromPathAsync(folderPath).Await();
+                var thisFolder = await StorageFolder.GetFolderFromPathAsync(folderPath);
                 return true;
             }
             catch (UnauthorizedAccessException)
@@ -160,17 +160,17 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             }
         }
 
-        public override void EnsureFolderExists(string folderPath)
+        public override async ValueTask EnsureFolderExists(string folderPath)
         {
-            if (FolderExists(folderPath))
+            if (await FolderExists(folderPath))
                 return;
 
             var rootFolder = ToFullPath(string.Empty);
-            var storageFolder = StorageFolder.GetFolderFromPathAsync(rootFolder).Await();
-            CreateFolderAsync(storageFolder, folderPath).GetAwaiter().GetResult();
+            var storageFolder = await StorageFolder.GetFolderFromPathAsync(rootFolder);
+            await CreateFolderAsync(storageFolder, folderPath).ConfigureAwait(false);
         }
 
-        private static async Task<StorageFolder> CreateFolderAsync(StorageFolder rootFolder, string folderPath)
+        private static async ValueTask<StorageFolder> CreateFolderAsync(StorageFolder rootFolder, string folderPath)
         {
             if (string.IsNullOrEmpty(folderPath))
                 return rootFolder;
@@ -181,20 +181,20 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             if (string.IsNullOrEmpty(folderName))
                 return currentFolder;
             else
-                return await currentFolder.CreateFolderAsync(Path.GetFileName(folderPath), CreationCollisionOption.OpenIfExists).AsTask().ConfigureAwait(false);
+                return await currentFolder.CreateFolderAsync(Path.GetFileName(folderPath), CreationCollisionOption.OpenIfExists);
         }
 
-        public override IEnumerable<string> GetFilesIn(string folderPath)
+        public override async ValueTask<IEnumerable<string>> GetFilesIn(string folderPath)
         {
-            var folder = StorageFolder.GetFolderFromPathAsync(ToFullPath(folderPath)).Await();
-            var files = folder.GetFilesAsync().Await();
+            var folder = await StorageFolder.GetFolderFromPathAsync(ToFullPath(folderPath));
+            var files = await folder.GetFilesAsync();
             return files.Select(x => x.Path);
         }
 
-        public override IEnumerable<string> GetFoldersIn(string folderPath)
+        public override async ValueTask<IEnumerable<string>> GetFoldersIn(string folderPath)
         {
-            var folder = StorageFolder.GetFolderFromPathAsync(ToFullPath(folderPath)).Await();
-            var files = folder.GetFoldersAsync().Await();
+            var folder = await StorageFolder.GetFolderFromPathAsync(ToFullPath(folderPath));
+            var files = await folder.GetFoldersAsync();
             return files.Select(x => x.Path);
         }
 
@@ -203,15 +203,15 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             SafeDeleteFile(path);
         }
 
-        public override void DeleteFolder(string folderPath, bool recursive)
+        public override async ValueTask DeleteFolder(string folderPath, bool recursive)
         {
             // contributed by @AlexMortola via Stackoverflow creative commons
             // http://stackoverflow.com/questions/19890756/mvvmcross-notimplementedexception-calling-ensurefolderexists-method-of-imvxfile
             try
             {
                 var directory = ToFullPath(folderPath);
-                var storageFolder = StorageFolder.GetFolderFromPathAsync(directory).Await();
-                storageFolder.DeleteAsync().Await();
+                var storageFolder = await StorageFolder.GetFolderFromPathAsync(directory);
+                await storageFolder.DeleteAsync();
             }
             catch (FileNotFoundException)
             {
@@ -224,7 +224,7 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             }
         }
 
-        protected override void WriteFileCommon(string path, Action<Stream> streamAction)
+        protected override async ValueTask WriteFileCommon(string path, Action<Stream> streamAction)
         {
             // from https://github.com/MvvmCross/MvvmCross/issues/500 we delete any existing file
             // before writing the new one
@@ -232,8 +232,8 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
 
             try
             {
-                var storageFile = CreateStorageFileFromRelativePathAsync(path).GetAwaiter().GetResult();
-                using (var streamWithContentType = storageFile.OpenAsync(FileAccessMode.ReadWrite).Await())
+                var storageFile = await CreateStorageFileFromRelativePath(path).ConfigureAwait(false);
+                using (var streamWithContentType = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
                 {
                     using (var stream = streamWithContentType.AsStreamForWrite())
                     {
@@ -248,7 +248,7 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             }
         }
 
-        protected override async Task WriteFileCommonAsync(string path, Func<Stream, Task> streamAction)
+        protected override async ValueTask WriteFileCommonAsync(string path, Func<Stream, ValueTask> streamAction)
         {
             // from https://github.com/MvvmCross/MvvmCross/issues/500 we delete any existing file
             // before writing the new one
@@ -256,9 +256,9 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
 
             try
             {
-                var storageFile = await CreateStorageFileFromRelativePathAsync(path).ConfigureAwait(false);
+                var storageFile = await CreateStorageFileFromRelativePath(path).ConfigureAwait(false);
                 using (var streamWithContentType =
-                        await storageFile.OpenAsync(FileAccessMode.ReadWrite).AsTask().ConfigureAwait(false))
+                        await storageFile.OpenAsync(FileAccessMode.ReadWrite))
                 {
                     using (var stream = streamWithContentType.AsStreamForWrite())
                     {
@@ -273,12 +273,12 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             }
         }
 
-        protected override bool TryReadFileCommon(string path, Func<Stream, bool> streamAction)
+        protected override async ValueTask<bool> TryReadFileCommon(string path, Func<Stream, bool> streamAction)
         {
             try
             {
-                var storageFile = StorageFileFromRelativePath(path);
-                using (var streamWithContentType = storageFile.OpenReadAsync().Await())
+                var storageFile = await StorageFileFromRelativePath(path);
+                using (var streamWithContentType = await storageFile.OpenReadAsync())
                 {
                     using (var stream = streamWithContentType.AsStreamForRead())
                     {
@@ -293,12 +293,12 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             }
         }
 
-        protected override async Task<bool> TryReadFileCommonAsync(string path, Func<Stream, Task<bool>> streamAction)
+        protected override async ValueTask<bool> TryReadFileCommonAsync(string path, Func<Stream, ValueTask<bool>> streamAction)
         {
             try
             {
-                var storageFile = await StorageFileFromRelativePathAsync(path).ConfigureAwait(false);
-                using (var streamWithContentType = await storageFile.OpenReadAsync().AsTask().ConfigureAwait(false))
+                var storageFile = await StorageFileFromRelativePath(path).ConfigureAwait(false);
+                using (var streamWithContentType = await storageFile.OpenReadAsync())
                 {
                     using (var stream = streamWithContentType.AsStreamForRead())
                     {
@@ -313,12 +313,12 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             }
         }
 
-        private static bool SafeDeleteFile(string path)
+        private static async ValueTask<bool> SafeDeleteFile(string path)
         {
             try
             {
-                var toFile = StorageFileFromRelativePath(path);
-                toFile.DeleteAsync().Await();
+                var toFile = await StorageFileFromRelativePath(path).ConfigureAwait(false);
+                await toFile.DeleteAsync();
                 return true;
             }
             catch (FileNotFoundException)
@@ -331,12 +331,12 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             }
         }
 
-        private static async Task<bool> SafeDeleteFileAsync(string path)
+        private static async ValueTask<bool> SafeDeleteFileAsync(string path)
         {
             try
             {
-                var toFile = await StorageFileFromRelativePathAsync(path).ConfigureAwait(false);
-                await toFile.DeleteAsync().AsTask().ConfigureAwait(false);
+                var toFile = await StorageFileFromRelativePath(path).ConfigureAwait(false);
+                await toFile.DeleteAsync();
                 return true;
             }
             catch (FileNotFoundException)
@@ -349,27 +349,20 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             }
         }
 
-        private static StorageFile StorageFileFromRelativePath(string path)
+        private static async ValueTask<StorageFile> StorageFileFromRelativePath(string path)
         {
             var fullPath = ToFullPath(path);
-            var storageFile = StorageFile.GetFileFromPathAsync(fullPath).Await();
+            var storageFile = await StorageFile.GetFileFromPathAsync(fullPath);
             return storageFile;
         }
 
-        private static async Task<StorageFile> StorageFileFromRelativePathAsync(string path)
-        {
-            var fullPath = ToFullPath(path);
-            var storageFile = await StorageFile.GetFileFromPathAsync(fullPath).AsTask().ConfigureAwait(false);
-            return storageFile;
-        }
-
-        private static async Task<StorageFile> CreateStorageFileFromRelativePathAsync(string path)
+        private static async ValueTask<StorageFile> CreateStorageFileFromRelativePath(string path)
         {
             var fullPath = ToFullPath(path);
             var directory = Path.GetDirectoryName(fullPath);
             var fileName = Path.GetFileName(fullPath);
-            var storageFolder = await StorageFolder.GetFolderFromPathAsync(directory).AsTask().ConfigureAwait(false);
-            var storageFile = await storageFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting).AsTask().ConfigureAwait(false);
+            var storageFolder = await StorageFolder.GetFolderFromPathAsync(directory);
+            var storageFile = await storageFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
             return storageFile;
         }
 
@@ -384,17 +377,17 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             return Path.Combine(localFolderPath, path);
         }
 
-        public override long GetSize(string path)
+        public override async ValueTask<long> GetSize(string path)
         {
-            var storageFile = StorageFileFromRelativePath(path);
-            var result = storageFile.GetBasicPropertiesAsync().GetAwaiter().GetResult();
+            var storageFile = await StorageFileFromRelativePath(path).ConfigureAwait(false);
+            var result = await storageFile.GetBasicPropertiesAsync();
             return (long)result.Size;
         }
 
-        public override DateTime GetLastWriteTimeUtc(string path)
+        public override async ValueTask<DateTime> GetLastWriteTimeUtc(string path)
         {
-            var storageFile = StorageFileFromRelativePath(path);
-            var result = storageFile.GetBasicPropertiesAsync().GetAwaiter().GetResult();
+            var storageFile = await StorageFileFromRelativePath(path).ConfigureAwait(false);
+            var result = await storageFile.GetBasicPropertiesAsync();
             return result.DateModified.UtcDateTime;
         }
     }
