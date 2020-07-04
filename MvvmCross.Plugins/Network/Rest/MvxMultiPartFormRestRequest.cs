@@ -130,8 +130,7 @@ namespace MvvmCross.Plugin.Network.Rest
                         fileStream.CopyTo(stream);
                         stream.Flush();
                         return true;
-                    })
-                    .ConfigureAwait(false);
+                    }).ConfigureAwait(false);
 
                 if (!result)
                     throw new MvxException("Failed to read file for upload at {0}", Path);

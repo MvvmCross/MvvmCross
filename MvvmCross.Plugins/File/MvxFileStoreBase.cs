@@ -160,9 +160,8 @@ namespace MvvmCross.Plugin.File
                         contentStringBuilder.Append(buffer, 0, charsRead);
                     }
                     return true;
-                };
-            })
-            .ConfigureAwait(false);
+                }
+            }).ConfigureAwait(false);
 
             return TryResult.Create(operationSucceeded, operationSucceeded ? contentStringBuilder.ToString() : string.Empty);
         }
@@ -178,8 +177,7 @@ namespace MvvmCross.Plugin.File
                     content = ms.ToArray();
                     return true;
                 }
-            })
-            .ConfigureAwait(false);
+            }).ConfigureAwait(false);
 
             return TryResult.Create(operationSucceeded, content);
         }
@@ -199,8 +197,7 @@ namespace MvvmCross.Plugin.File
                     content = ms.ToArray();
                     return true;
                 }
-            })
-            .ConfigureAwait(false);
+            }).ConfigureAwait(false);
 
             return TryResult.Create(operationSucceeded, content);
         }
@@ -227,8 +224,7 @@ namespace MvvmCross.Plugin.File
                 {
                     await writer.WriteAsync(contents).ConfigureAwait(false);
                 }
-            })
-            .ConfigureAwait(false);
+            }).ConfigureAwait(false);
         }
 
         public async ValueTask WriteFileAsync(string path, string contents, CancellationToken cancellationToken)
@@ -249,8 +245,7 @@ namespace MvvmCross.Plugin.File
                         startIndex += BufferSize;
                     }
                 }
-            })
-            .ConfigureAwait(false);
+            }).ConfigureAwait(false);
         }
 
         public async ValueTask WriteFileAsync(string path, byte[] contents)
@@ -261,8 +256,7 @@ namespace MvvmCross.Plugin.File
                 {
                     await ms.CopyToAsync(stream).ConfigureAwait(false);
                 }
-            })
-            .ConfigureAwait(false);
+            }).ConfigureAwait(false);
         }
 
         public async ValueTask WriteFileAsync(string path, byte[] contents, CancellationToken cancellationToken)
@@ -273,8 +267,7 @@ namespace MvvmCross.Plugin.File
                 {
                     await ms.CopyToAsync(stream, BufferSize, cancellationToken).ConfigureAwait(false);
                 }
-            })
-            .ConfigureAwait(false);
+            }).ConfigureAwait(false);
         }
 
         public ValueTask WriteFileAsync(string path, IEnumerable<byte> contents)
@@ -292,8 +285,7 @@ namespace MvvmCross.Plugin.File
             await WriteFileCommonAsync(path, async stream =>
             {
                 await writeMethod(stream).ConfigureAwait(false);
-            })
-            .ConfigureAwait(false);
+            }).ConfigureAwait(false);
         }
 
         public async ValueTask WriteFileAsync(string path, Func<Stream, CancellationToken, ValueTask> writeMethod,
@@ -302,8 +294,7 @@ namespace MvvmCross.Plugin.File
             await WriteFileCommonAsync(path, async stream =>
             {
                 await writeMethod(stream, cancellationToken).ConfigureAwait(false);
-            })
-            .ConfigureAwait(false);
+            }).ConfigureAwait(false);
         }
 
         #endregion IMvxFileStore Async
