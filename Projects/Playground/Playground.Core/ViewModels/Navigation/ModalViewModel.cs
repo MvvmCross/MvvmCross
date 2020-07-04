@@ -13,11 +13,11 @@ namespace Playground.Core.ViewModels
     {
         public ModalViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
-            ShowTabsCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<TabsRootViewModel>());
+            ShowTabsCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<TabsRootViewModel>().ConfigureAwait(false));
 
             CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
 
-            ShowNestedModalCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<NestedModalViewModel>());
+            ShowNestedModalCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<NestedModalViewModel>().ConfigureAwait(false));
         }
 
         public override System.Threading.Tasks.Task Initialize()

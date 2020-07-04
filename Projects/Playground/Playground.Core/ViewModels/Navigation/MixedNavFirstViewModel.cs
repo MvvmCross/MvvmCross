@@ -25,8 +25,8 @@ namespace Playground.Core.ViewModels
 
         private async Task GotoMasterDetailPage()
         {
-            await NavigationService.Navigate<MixedNavMasterDetailViewModel>();
-            await NavigationService.Navigate<MixedNavMasterRootContentViewModel>();
+            await NavigationService.Navigate<MixedNavMasterDetailViewModel>().ConfigureAwait(false);
+            await NavigationService.Navigate<MixedNavMasterRootContentViewModel>().ConfigureAwait(false);
         }
     }
 }

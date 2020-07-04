@@ -13,9 +13,9 @@ namespace Playground.Core.ViewModels
     {
         public SecondChildViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
-            ShowNestedChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<NestedChildViewModel>());
+            ShowNestedChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<NestedChildViewModel>().ConfigureAwait(false));
 
-            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
+            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this).ConfigureAwait(false));
         }
 
         public IMvxAsyncCommand ShowNestedChildCommand { get; private set; }

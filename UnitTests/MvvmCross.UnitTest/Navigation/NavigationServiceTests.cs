@@ -99,7 +99,7 @@ namespace MvvmCross.UnitTest.Navigation
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
 
-            await navigationService.Navigate<SimpleTestViewModel>();
+            await navigationService.Navigate<SimpleTestViewModel>().ConfigureAwait(false);
 
             MockLoader.Verify(loader => loader.LoadViewModel(It.Is<MvxViewModelRequest>(val => val.ViewModelType == typeof(SimpleTestViewModel)), It.IsAny<IMvxBundle>(), It.IsAny<IMvxNavigateEventArgs>()),
                               Times.Once);
@@ -132,7 +132,7 @@ namespace MvvmCross.UnitTest.Navigation
 
             var mockVm = new Mock<SimpleTestViewModel>();
 
-            await navigationService.Navigate(mockVm.Object);
+            await navigationService.Navigate(mockVm.Object).ConfigureAwait(false);
 
             MockLoader.Verify(loader => loader.ReloadViewModel(It.Is<SimpleTestViewModel>(val => mockVm.Object == val), It.IsAny<MvxViewModelRequest>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxNavigateEventArgs>()),
                               Times.Once);
@@ -150,7 +150,7 @@ namespace MvvmCross.UnitTest.Navigation
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
 
             var parameter = "hello";
-            await navigationService.Navigate<SimpleParameterTestViewModel, string>(parameter);
+            await navigationService.Navigate<SimpleParameterTestViewModel, string>(parameter).ConfigureAwait(false);
 
             MockLoader.Verify(loader => loader.LoadViewModel<string>(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(SimpleParameterTestViewModel)), It.Is<string>(val => val == parameter), It.IsAny<IMvxBundle>(), It.IsAny<IMvxNavigateEventArgs>()),
                               Times.Once);
@@ -170,7 +170,7 @@ namespace MvvmCross.UnitTest.Navigation
             var mockVm = new Mock<SimpleParameterTestViewModel>();
 
             var parameter = "hello";
-            await navigationService.Navigate<string>(mockVm.Object, parameter);
+            await navigationService.Navigate<string>(mockVm.Object, parameter).ConfigureAwait(false);
 
             MockLoader.Verify(loader => loader.ReloadViewModel<string>(It.Is<SimpleParameterTestViewModel>(val => mockVm.Object == val), It.Is<string>(val => val == parameter), It.IsAny<MvxViewModelRequest>(), It.IsAny<IMvxBundle>(), It.IsAny<IMvxNavigateEventArgs>()),
                               Times.Once);
@@ -187,7 +187,7 @@ namespace MvvmCross.UnitTest.Navigation
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
 
-            await navigationService.Navigate(typeof(SimpleTestViewModel));
+            await navigationService.Navigate(typeof(SimpleTestViewModel)).ConfigureAwait(false);
 
             MockLoader.Verify(loader => loader.LoadViewModel(It.Is<MvxViewModelRequest>(val => val.ViewModelType == typeof(SimpleTestViewModel)), It.IsAny<IMvxBundle>(), It.IsAny<IMvxNavigateEventArgs>()),
                               Times.Once);
@@ -217,7 +217,7 @@ namespace MvvmCross.UnitTest.Navigation
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
 
             var parameter = "hello";
-            await navigationService.Navigate<string>(typeof(SimpleParameterTestViewModel), parameter);
+            await navigationService.Navigate<string>(typeof(SimpleParameterTestViewModel), parameter).ConfigureAwait(false);
 
             MockLoader.Verify(loader => loader.LoadViewModel<string>(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(SimpleParameterTestViewModel)), It.Is<string>(val => val == parameter), It.IsAny<IMvxBundle>(), It.IsAny<IMvxNavigateEventArgs>()),
                               Times.Once);
@@ -234,7 +234,7 @@ namespace MvvmCross.UnitTest.Navigation
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
 
-            var result = await navigationService.Navigate<SimpleResultTestViewModel, bool>();
+            var result = await navigationService.Navigate<SimpleResultTestViewModel, bool>().ConfigureAwait(false);
 
             MockLoader.Verify(loader => loader.LoadViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(SimpleResultTestViewModel)), It.IsAny<IMvxBundle>(), It.IsAny<IMvxNavigateEventArgs>()),
                               Times.Once);

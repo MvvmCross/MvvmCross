@@ -51,7 +51,7 @@ namespace Playground.Core.ViewModels
                         return;
 
                     var vmType = item.ViewModelType;
-                    await NavigationService.Navigate(vmType);
+                    await NavigationService.Navigate(vmType).ConfigureAwait(false);
                 }));
             }
         }

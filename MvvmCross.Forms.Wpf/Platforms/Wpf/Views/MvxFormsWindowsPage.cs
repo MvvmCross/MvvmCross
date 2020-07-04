@@ -29,7 +29,7 @@ namespace MvvmCross.Forms.Platforms.Wpf.Views
             Initialized += MvxWindow_Initialized;
         }
 
-        private async void MvxWindow_Initialized(object sender, EventArgs e)
+        private void MvxWindow_Initialized(object sender, EventArgs e)
         {
             //    if (this == System.Windows.Application.Current.MainWindow)
             //    {
@@ -37,10 +37,10 @@ namespace MvvmCross.Forms.Platforms.Wpf.Views
             //    }
 
             //    LoadFormsApplication();
-            await RunAppStart(e).ConfigureAwait(false);
+            RunAppStart(e);
         }
 
-        protected virtual async Task RunAppStart(object hint = null)
+        protected virtual async void RunAppStart(object hint = null)
         {
             await MvxWpfSetupSingleton.EnsureSingletonAvailable(Dispatcher, this).EnsureInitialized().ConfigureAwait(false);
 

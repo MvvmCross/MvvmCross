@@ -13,11 +13,11 @@ namespace Playground.Core.ViewModels
     {
         public SplitMasterViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
-            OpenDetailCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SplitDetailViewModel>());
+            OpenDetailCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SplitDetailViewModel>().ConfigureAwait(false));
 
-            OpenDetailNavCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SplitDetailNavViewModel>());
+            OpenDetailNavCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SplitDetailNavViewModel>().ConfigureAwait(false));
 
-            ShowRootViewModel = new MvxAsyncCommand(async () => await NavigationService.Navigate<RootViewModel>());
+            ShowRootViewModel = new MvxAsyncCommand(async () => await NavigationService.Navigate<RootViewModel>().ConfigureAwait(false));
         }
 
         public string PaneText => "Text for the Master Pane";

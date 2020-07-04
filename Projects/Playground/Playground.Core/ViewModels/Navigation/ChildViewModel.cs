@@ -28,9 +28,9 @@ namespace Playground.Core.ViewModels
                 Value = 5.67m
             }));
 
-            ShowSecondChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SecondChildViewModel>());
+            ShowSecondChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SecondChildViewModel>().ConfigureAwait(false));
 
-            ShowRootCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<RootViewModel>());
+            ShowRootCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<RootViewModel>().ConfigureAwait(false));
 
             PropertyChanged += ChildViewModel_PropertyChanged;
         }

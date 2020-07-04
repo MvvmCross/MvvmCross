@@ -92,7 +92,7 @@ namespace Playground.Core.ViewModels
                 {
                     ParentNo = Count,
                     ChildNo = no
-                });
+                }).ConfigureAwait(false);
             });
 
             CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));

@@ -15,9 +15,9 @@ namespace Playground.Core.ViewModels
         {
             CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this));
 
-            ShowTabsCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<TabsRootViewModel>());
+            ShowTabsCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<TabsRootViewModel>().ConfigureAwait(false));
 
-            ShowSecondChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SecondChildViewModel>());
+            ShowSecondChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SecondChildViewModel>().ConfigureAwait(false));
         }
 
         public IMvxAsyncCommand ShowTabsCommand { get; private set; }
