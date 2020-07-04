@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Plugin.Email
 {
@@ -22,7 +23,7 @@ namespace MvvmCross.Plugin.Email
         /// <param name="attachments"><see cref="IEnumerable{T}"/> of <see cref="EmailAttachment"/> containing
         ///     attachments</param>
         /// <param name="dialogTitle">Title of the dialog shown on Android</param>
-        void ComposeEmail(IEnumerable<string> to, IEnumerable<string> cc = null, string subject = null,
+        ValueTask ComposeEmail(IEnumerable<string> to, IEnumerable<string> cc = null, string subject = null,
             string body = null, bool isHtml = false, IEnumerable<EmailAttachment> attachments = null,
             string dialogTitle = null);
 

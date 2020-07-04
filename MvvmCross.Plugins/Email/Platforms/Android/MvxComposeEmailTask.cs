@@ -1,10 +1,11 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Android.Content;
 using Android.Net;
 using Android.OS;
@@ -24,11 +25,11 @@ namespace MvvmCross.Plugin.Email.Platforms.Android
     {
         private List<File> filesToDelete;
 
-        public void ComposeEmail(string to, string cc = null, string subject = null, string body = null, bool isHtml = false, string dialogTitle = null)
+        public ValueTask ComposeEmail(string to, string cc = null, string subject = null, string body = null, bool isHtml = false, string dialogTitle = null)
         {
             var toArray = to == null ? null : new[] { to };
             var ccArray = cc == null ? null : new[] { cc };
-            ComposeEmail(
+            return ComposeEmail(
                 toArray,
                 ccArray,
                 subject,
@@ -38,7 +39,7 @@ namespace MvvmCross.Plugin.Email.Platforms.Android
                 dialogTitle);
         }
 
-        public void ComposeEmail(
+        public ValueTask ComposeEmail(
             IEnumerable<string> to, IEnumerable<string> cc = null, string subject = null,
             string body = null, bool isHtml = false,
             IEnumerable<EmailAttachment> attachments = null, string dialogTitle = null)
@@ -121,6 +122,8 @@ namespace MvvmCross.Plugin.Email.Platforms.Android
 
             // fix for GMail App 5.x (File not found / permission denied when using "StartActivity")
             StartActivityForResult(0, Intent.CreateChooser(emailIntent, dialogTitle ?? string.Empty));
+
+            return new ValueTask();
         }
 
         public bool CanSendEmail => true;

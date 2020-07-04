@@ -29,7 +29,7 @@ namespace MvvmCross.Plugin.Location.Fused
             _context = context;
         }
 
-        public async Task StartAsync(MvxLocationOptions options)
+        public Task StartAsync(MvxLocationOptions options)
         {
             EnsureGooglePlayServiceAvailable(_context);
 
@@ -40,7 +40,7 @@ namespace MvvmCross.Plugin.Location.Fused
             _request = CreateLocationRequest(options);
 
             // Start receiving location updates.
-            await _client.RequestLocationUpdatesAsync(_request, this, Looper.MainLooper);
+            return _client.RequestLocationUpdatesAsync(_request, this, Looper.MainLooper);
         }
 
         public async Task StopAsync()

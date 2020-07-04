@@ -2,6 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Threading.Tasks;
+
 namespace MvvmCross.Plugin.Email
 {
     public interface IMvxComposeEmailTask
@@ -15,7 +17,7 @@ namespace MvvmCross.Plugin.Email
         /// <param name="body">Body of the e-mail</param>
         /// <param name="isHtml">Set to true if the <see cref="body"/> contains HTML content</param>
         /// <param name="dialogTitle">Title of the dialog shown on Android</param>
-        void ComposeEmail(string to, string cc = null, string subject = null, string body = null,
+        ValueTask ComposeEmail(string to, string cc = null, string subject = null, string body = null,
             bool isHtml = false, string dialogTitle = null);
     }
 }

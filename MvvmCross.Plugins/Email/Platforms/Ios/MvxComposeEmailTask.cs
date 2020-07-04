@@ -1,10 +1,11 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Foundation;
 using MessageUI;
 using MvvmCross.Exceptions;
@@ -25,12 +26,12 @@ namespace MvvmCross.Plugin.Email.Platforms.Ios
         {
         }
 
-        public void ComposeEmail(string to, string cc = null, string subject = null, string body = null,
+        public ValueTask ComposeEmail(string to, string cc = null, string subject = null, string body = null,
             bool isHtml = false, string dialogTitle = null)
         {
             var toArray = to == null ? null : new[] { to };
             var ccArray = cc == null ? null : new[] { cc };
-            ComposeEmail(
+            return ComposeEmail(
                 toArray,
                 ccArray,
                 subject,
@@ -38,7 +39,7 @@ namespace MvvmCross.Plugin.Email.Platforms.Ios
                 isHtml);
         }
 
-        public void ComposeEmail(
+        public ValueTask ComposeEmail(
             IEnumerable<string> to, IEnumerable<string> cc = null, string subject = null,
             string body = null, bool isHtml = false,
             IEnumerable<EmailAttachment> attachments = null, string dialogTitle = null)
@@ -63,7 +64,9 @@ namespace MvvmCross.Plugin.Email.Platforms.Ios
             }
             _mail.Finished += HandleMailFinished;
 
-            UIApplication.SharedApplication.KeyWindow.GetTopModalHostViewController().PresentViewController(_mail, true, null);            
+            UIApplication.SharedApplication.KeyWindow.GetTopModalHostViewController().PresentViewController(_mail, true, null);
+
+            return new ValueTask();
         }
 
         public bool CanSendEmail => MFMailComposeViewController.CanSendMail;

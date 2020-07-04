@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -84,7 +84,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Uap
             return file;
         }
 
-        private static async Task<StorageFile> StorageFileFromDisk()
+        private static Task<StorageFile> StorageFileFromDisk()
         {
             var filePicker = new FileOpenPicker();
             filePicker.FileTypeFilter.Add(".jpg");
@@ -92,7 +92,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Uap
             filePicker.ViewMode = PickerViewMode.Thumbnail;
             filePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
 
-            return await filePicker.PickSingleFileAsync();
+            return filePicker.PickSingleFileAsync().AsTask();
         }
 
         private async Task<IRandomAccessStream> ResizeJpegStreamAsync(int maxPixelDimension, int percentQuality, IRandomAccessStream input)
