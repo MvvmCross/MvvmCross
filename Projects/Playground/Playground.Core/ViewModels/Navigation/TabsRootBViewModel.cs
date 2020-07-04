@@ -26,7 +26,7 @@ namespace Playground.Core.ViewModels
             var tasks = new List<Task>();
             tasks.Add(NavigationService.Navigate<Tab1ViewModel, string>("test"));
             tasks.Add(NavigationService.Navigate<Tab2ViewModel>());
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(false);
         }
 
         private int _itemIndex;
