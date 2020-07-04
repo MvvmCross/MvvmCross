@@ -198,9 +198,9 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
             return files.Select(x => x.Path);
         }
 
-        public override void DeleteFile(string path)
+        public override ValueTask DeleteFile(string path)
         {
-            SafeDeleteFile(path);
+            return new ValueTask(SafeDeleteFile(path).AsTask());
         }
 
         public override async ValueTask DeleteFolder(string folderPath, bool recursive)
@@ -228,7 +228,7 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
         {
             // from https://github.com/MvvmCross/MvvmCross/issues/500 we delete any existing file
             // before writing the new one
-            SafeDeleteFile(path);
+            await SafeDeleteFileAsync(path).ConfigureAwait(false);
 
             try
             {

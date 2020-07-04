@@ -16,10 +16,10 @@ namespace MvvmCross.Platforms.Console.Views
     {
         public override bool IsOnMainThread => throw new NotImplementedException();
 
-        public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override ValueTask<bool> RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             ExceptionMaskedAction(action, maskExceptions);
-            return true;
+            return new ValueTask<bool>(true);
         }
 
         public async Task<bool> ShowViewModel(MvxViewModelRequest request)

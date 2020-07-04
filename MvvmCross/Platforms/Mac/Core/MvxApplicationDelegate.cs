@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using AppKit;
 using MvvmCross.Core;
 using MvvmCross.ViewModels;
@@ -31,9 +32,9 @@ namespace MvvmCross.Platforms.Mac.Core
             RegisterSetup();
         }
 
-        public override void DidFinishLaunching(Foundation.NSNotification notification)
+        public override async void DidFinishLaunching(Foundation.NSNotification notification)
         {
-            MvxMacSetupSingleton.EnsureSingletonAvailable(this, MainWindow).EnsureInitialized();
+            await MvxMacSetupSingleton.EnsureSingletonAvailable(this, MainWindow).EnsureInitialized();
             RunAppStart(notification);
 
             FireLifetimeChanged(MvxLifetimeEvent.Launching);

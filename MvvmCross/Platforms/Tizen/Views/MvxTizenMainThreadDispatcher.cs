@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 using MvvmCross.Base;
-using Tizen.Applications;
 
 namespace MvvmCross.Platforms.Tizen.Views
 {
@@ -10,11 +8,11 @@ namespace MvvmCross.Platforms.Tizen.Views
     {
         public override bool IsOnMainThread => true;
 
-        public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override ValueTask<bool> RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             //TODO: implement
             ExceptionMaskedAction(action, maskExceptions);
-            return true;
+            return new ValueTask<bool>(true);
         }
     }
 }

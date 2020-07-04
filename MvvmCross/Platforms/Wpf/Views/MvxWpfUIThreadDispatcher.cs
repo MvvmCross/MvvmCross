@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using System.Windows.Threading;
 using MvvmCross.Base;
 
@@ -20,7 +21,7 @@ namespace MvvmCross.Platforms.Wpf.Views
 
         public override bool IsOnMainThread => _dispatcher.CheckAccess();
 
-        public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override ValueTask<bool> RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (IsOnMainThread)
             {
@@ -35,7 +36,7 @@ namespace MvvmCross.Platforms.Wpf.Views
             }
 
             // TODO - why return bool at all?
-            return true;
+            return new ValueTask<bool>(true);
         }
     }
 }

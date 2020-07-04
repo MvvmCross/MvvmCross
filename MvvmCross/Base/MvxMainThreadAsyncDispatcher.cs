@@ -27,7 +27,7 @@ namespace MvvmCross.Base
                 await action().ConfigureAwait(false);
                 completion.SetResult(true);
             });
-            RequestMainThreadAction(syncAction, maskExceptions);
+            await RequestMainThreadAction(syncAction, maskExceptions).ConfigureAwait(false);
 
             // If we're already on main thread, then the action will
             // have already completed at this point, so can just return

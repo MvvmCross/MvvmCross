@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using MvvmCross.Core;
 using MvvmCross.Platforms.Wpf.Core;
 using MvvmCross.ViewModels;
@@ -7,25 +8,25 @@ namespace MvvmCross.Platforms.Wpf.Views
 {
     public abstract class MvxApplication : Application
     {
-        public MvxApplication() : base()
+        protected MvxApplication() : base()
         {
             RegisterSetup();
         }
 
-        public virtual void ApplicationInitialized()
+        public virtual async Task ApplicationInitialized()
         {
             if (MainWindow == null) return;
 
-            MvxWpfSetupSingleton.EnsureSingletonAvailable(Dispatcher, MainWindow).EnsureInitialized();
+            await MvxWpfSetupSingleton.EnsureSingletonAvailable(Dispatcher, MainWindow).EnsureInitialized().ConfigureAwait(false);
 
-            RunAppStart();
+            await RunAppStart().ConfigureAwait(false);
         }
 
-        protected virtual void RunAppStart(object hint = null)
+        protected virtual async Task RunAppStart(object hint = null)
         {
             if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
             {
-                startup.Start(GetAppStartHint(hint));
+                await startup.Start(GetAppStartHint(hint)).ConfigureAwait(false);
             }
         }
 

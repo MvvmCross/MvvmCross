@@ -42,7 +42,7 @@ namespace MvvmCross.Platforms.Ios.Core
             if (Window == null)
                 Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            MvxIosSetupSingleton.EnsureSingletonAvailable(this, Window).EnsureInitialized();
+            MvxIosSetupSingleton.EnsureSingletonAvailable(this, Window).EnsureInitialized().Wait(); //.GetAwaiter().GetResult();
 
             RunAppStart(launchOptions);
 

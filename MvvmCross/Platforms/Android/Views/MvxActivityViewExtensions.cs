@@ -13,6 +13,7 @@ using MvvmCross.Platforms.Android.Core;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using MvvmCross.Core;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Platforms.Android.Views
 {
@@ -141,7 +142,7 @@ namespace MvvmCross.Platforms.Android.Views
             return viewModel;
         }
 
-        private static void EnsureSetupInitialized(this IMvxAndroidView androidView)
+        private static async Task EnsureSetupInitialized(this IMvxAndroidView androidView)
         {
             if (androidView is IMvxSetupMonitor)
             {
@@ -151,7 +152,7 @@ namespace MvvmCross.Platforms.Android.Views
 
             var activity = androidView.ToActivity();
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(activity.ApplicationContext);
-            setup.EnsureInitialized();
+            await setup.EnsureInitialized().ConfigureAwait(false);
         }
     }
 }

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using MvvmCross.Base;
 
 namespace MvvmCross.UnitTest.Mocks.Dispatchers
@@ -12,11 +13,11 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
     {
         public override bool IsOnMainThread => true;
 
-        public override bool RequestMainThreadAction(Action action, 
+        public override ValueTask<bool> RequestMainThreadAction(Action action, 
             bool maskExceptions = true)
         {
             ExceptionMaskedAction(action, maskExceptions);
-            return true;
+            return new ValueTask<bool>(true);
         }
     }
 }

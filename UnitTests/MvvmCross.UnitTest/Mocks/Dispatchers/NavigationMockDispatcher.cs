@@ -22,20 +22,20 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
 
         public bool IsOnMainThread => true;
 
-        public virtual bool RequestMainThreadAction(Action action,
+        public virtual ValueTask<bool> RequestMainThreadAction(Action action,
                                                     bool maskExceptions = true)
         {
             try
             {
                 action();
-                return true;
+                return new ValueTask<bool>(true);
             }
             catch (Exception)
             {
                 if (!maskExceptions)
                     throw;
 
-                return false;
+                return new ValueTask<bool>(false);
             }
         }
 

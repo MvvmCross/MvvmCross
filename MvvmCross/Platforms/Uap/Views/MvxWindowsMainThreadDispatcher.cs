@@ -5,6 +5,7 @@
 using System;
 using Windows.UI.Core;
 using MvvmCross.Base;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Platforms.Uap.Views
 {
@@ -19,7 +20,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         public override bool IsOnMainThread => _uiDispatcher.HasThreadAccess;
 
-        public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override async ValueTask<bool> RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (IsOnMainThread)
             {
@@ -27,7 +28,7 @@ namespace MvvmCross.Platforms.Uap.Views
                 return true;
             }
 
-            _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => 
+            await _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => 
             {
                 ExceptionMaskedAction(action, maskExceptions);
             });

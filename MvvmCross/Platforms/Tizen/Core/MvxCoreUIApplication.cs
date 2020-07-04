@@ -34,10 +34,10 @@ namespace MvvmCross.Platforms.Tizen.Core
             base.OnTerminate();
         }
 
-        protected override void OnCreate()
+        protected override async void OnCreate()
         {
             base.OnCreate();
-            MvxTizenSetupSingleton.EnsureSingletonAvailable(this).EnsureInitialized();
+            await MvxTizenSetupSingleton.EnsureSingletonAvailable(this).EnsureInitialized().ConfigureAwait(false);
             RunAppStart();
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
         }

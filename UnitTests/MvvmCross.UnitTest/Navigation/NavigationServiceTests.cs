@@ -110,7 +110,7 @@ namespace MvvmCross.UnitTest.Navigation
         }
 
         [Fact]
-        public async Task Test_NavigateWithBundle()
+        public Task Test_NavigateWithBundle()
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
 
@@ -119,7 +119,7 @@ namespace MvvmCross.UnitTest.Navigation
             var bundle = new MvxBundle();
             bundle.Write(new { hello = "world" });
 
-            await navigationService.Navigate(mockVm.Object, bundle);
+            return navigationService.Navigate(mockVm.Object, bundle);
 
             //TODO: fix NavigationService not allowing parameter values in request and only presentation values
             //mockVm.Verify(vm => vm.Init(It.Is<string>(s => s == "world")), Times.Once);
@@ -198,14 +198,14 @@ namespace MvvmCross.UnitTest.Navigation
         }
 
         [Fact]
-        public async Task Test_NavigateTypeOfWithBundle()
+        public Task Test_NavigateTypeOfWithBundle()
         {
             var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
 
             var bundle = new MvxBundle();
             bundle.Write(new { hello = "world" });
 
-            await navigationService.Navigate(typeof(SimpleTestViewModel), presentationBundle: bundle);
+            return navigationService.Navigate(typeof(SimpleTestViewModel), presentationBundle: bundle);
 
             //TODO: fix NavigationService not allowing parameter values in request and only presentation values
             //mockVm.Verify(vm => vm.Init(It.Is<string>(s => s == "world")), Times.Once);

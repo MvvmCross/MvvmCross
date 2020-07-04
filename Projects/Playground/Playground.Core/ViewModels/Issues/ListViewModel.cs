@@ -26,9 +26,10 @@ namespace Playground.Core.ViewModels
             });
         }
 
-        private async Task ItemClicked(TestItem arg)
+        private Task ItemClicked(TestItem arg)
         {
             var item = arg;
+            return Task.CompletedTask;
         }
     }
 

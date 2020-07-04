@@ -6,7 +6,6 @@ using System;
 using Android.App;
 using Android.Content;
 using Android.Runtime;
-using MvvmCross.Core;
 using MvvmCross.Platforms.Android.Core;
 
 namespace MvvmCross.Platforms.Android.Services
@@ -25,7 +24,7 @@ namespace MvvmCross.Platforms.Android.Services
         protected override void OnHandleIntent(Intent intent)
         {
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.EnsureInitialized();
+            setup.EnsureInitialized().ConfigureAwait(false);
        }
     }
 }

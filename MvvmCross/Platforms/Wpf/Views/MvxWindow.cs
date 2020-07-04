@@ -46,16 +46,16 @@ namespace MvvmCross.Platforms.Wpf.Views
         public MvxWindow()
         {
             Closed += MvxWindow_Closed;
-            Unloaded += MvxWindow_Unloaded;            
+            Unloaded += MvxWindow_Unloaded;
             Loaded += MvxWindow_Loaded;
             Initialized += MvxWindow_Initialized;
         }
 
-        private void MvxWindow_Initialized(object sender, EventArgs e)
+        private async void MvxWindow_Initialized(object sender, EventArgs e)
         {
             if (this == Application.Current.MainWindow)
             {
-                (Application.Current as MvxApplication).ApplicationInitialized();
+                await ((MvxApplication)Application.Current).ApplicationInitialized().ConfigureAwait(false);
             }
         }
 

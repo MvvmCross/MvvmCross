@@ -19,20 +19,20 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
     {
         protected abstract Type HostWindowsPageType();
 
-        protected override void RunAppStart(IActivatedEventArgs activationArgs)
+        protected override async Task RunAppStart(IActivatedEventArgs activationArgs)
         {
             if (RootFrame?.Content == null)
             {
-                MvxWindowsSetupSingleton.EnsureSingletonAvailable(RootFrame, activationArgs, nameof(Suspend)).EnsureInitialized();
+                await MvxWindowsSetupSingleton.EnsureSingletonAvailable(RootFrame, activationArgs, nameof(Suspend)).EnsureInitialized().ConfigureAwait(false);
 
                 if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
-                    startup.Start(GetAppStartHint(activationArgs));
+                    await startup.Start(GetAppStartHint(activationArgs)).ConfigureAwait(false);
 
                 var hostType = HostWindowsPageType();
                 RootFrame.Navigate(hostType, (activationArgs as LaunchActivatedEventArgs)?.Arguments);
             }
             else
-                base.RunAppStart(activationArgs);
+                await base.RunAppStart(activationArgs).ConfigureAwait(false);
         }
     }
 

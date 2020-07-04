@@ -4,6 +4,7 @@
 
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Android.App;
 using MvvmCross.Base;
 
@@ -13,10 +14,12 @@ namespace MvvmCross.Platforms.Android.Views
     {
         public override bool IsOnMainThread => Application.SynchronizationContext == SynchronizationContext.Current;
 
-        public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override ValueTask<bool> RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
             if (IsOnMainThread)
+            {
                 ExceptionMaskedAction(action, maskExceptions);
+            }
             else
             {
                 Application.SynchronizationContext.Post(ignored =>
@@ -25,7 +28,7 @@ namespace MvvmCross.Platforms.Android.Views
                 }, null);
             }
 
-            return true;
+            return new ValueTask<bool>(true);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace MvvmCross.Platforms.Uap.Views
             EnteredBackground += OnEnteredBackground;
             LeavingBackground += OnLeavingBackground;
             Suspending += OnSuspending;
-            Resuming += OnResuming;
+            Resuming += async (o, e) => await OnResuming(o, e).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace MvvmCross.Platforms.Uap.Views
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="activationArgs">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs activationArgs)
+        protected override async void OnLaunched(LaunchActivatedEventArgs activationArgs)
         {
             base.OnLaunched(activationArgs);
             ActivationArguments = activationArgs;
@@ -45,33 +45,33 @@ namespace MvvmCross.Platforms.Uap.Views
 
             if (activationArgs.PrelaunchActivated == false)
             {
-                RunAppStart(activationArgs);
+                await RunAppStart(activationArgs).ConfigureAwait(false);
             }
 
             Window.Current.Activate();
         }
 
-        protected override void OnActivated(IActivatedEventArgs activationArgs)
+        protected override async void OnActivated(IActivatedEventArgs activationArgs)
         {
             base.OnActivated(activationArgs);
             ActivationArguments = activationArgs;
 
             var rootFrame = InitializeFrame(activationArgs);
-            RunAppStart(activationArgs);
+            await RunAppStart(activationArgs).ConfigureAwait(false);
 
             Window.Current.Activate();
         }
 
-        protected virtual void RunAppStart(IActivatedEventArgs activationArgs)
+        protected virtual async Task RunAppStart(IActivatedEventArgs activationArgs)
         {
             var instance = MvxWindowsSetupSingleton.EnsureSingletonAvailable(RootFrame, ActivationArguments, nameof(Suspend));
             if (RootFrame.Content == null)
             {
-                instance.EnsureInitialized();
+                await instance.EnsureInitialized().ConfigureAwait(false);
 
                 if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
                 {
-                    startup.Start(GetAppStartHint(activationArgs));
+                    await startup.Start(GetAppStartHint(activationArgs)).ConfigureAwait(false);
                 }
             }
             else
@@ -135,9 +135,9 @@ namespace MvvmCross.Platforms.Uap.Views
             }
         }
 
-        protected virtual async Task EnteringBackground(IMvxSuspensionManager suspensionManager)
+        protected virtual Task EnteringBackground(IMvxSuspensionManager suspensionManager)
         {
-            await suspensionManager.SaveAsync().ConfigureAwait(false);
+            return suspensionManager.SaveAsync();
         }
 
         protected virtual async void OnLeavingBackground(object sender, LeavingBackgroundEventArgs e)
@@ -178,10 +178,10 @@ namespace MvvmCross.Platforms.Uap.Views
             }
         }
 
-        protected virtual async void OnResuming(object sender, object e)
+        protected virtual Task OnResuming(object sender, object e)
         {
             var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
-            await Resume(suspension).ConfigureAwait(false);
+            return Resume(suspension);
         }
 
         protected virtual Task Resume(IMvxSuspensionManager suspensionManager)

@@ -4,7 +4,7 @@
 
 using System;
 using System.Threading;
-
+using System.Threading.Tasks;
 using AppKit;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
@@ -23,7 +23,7 @@ namespace MvvmCross.Platforms.Mac.Views
                 throw new MvxException("SynchronizationContext must not be null - check to make sure Dispatcher is created on UI thread");
         }
 
-        public override bool RequestMainThreadAction(Action action,
+        public override ValueTask<bool> RequestMainThreadAction(Action action,
             bool maskExceptions = true)
         {
             if (IsOnMainThread)
@@ -33,7 +33,8 @@ namespace MvvmCross.Platforms.Mac.Views
                 {
                     ExceptionMaskedAction(action, maskExceptions);
                 });
-            return true;
+
+            return new ValueTask<bool>(true);
         }
 
         public override bool IsOnMainThread => _uiSynchronizationContext == SynchronizationContext.Current;

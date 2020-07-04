@@ -41,7 +41,7 @@ namespace MvvmCross.Plugin.File
 
         ValueTask<IEnumerable<string>> GetFoldersIn(string folderPath);
 
-        void DeleteFile(string path);
+        ValueTask DeleteFile(string path);
 
         ValueTask DeleteFolder(string folderPath, bool recursive);
 

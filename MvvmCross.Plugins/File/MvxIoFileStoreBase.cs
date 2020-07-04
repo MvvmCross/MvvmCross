@@ -77,10 +77,12 @@ namespace MvvmCross.Plugin.File
             return new ValueTask<IEnumerable<string>>(Directory.GetDirectories(fullPath));
         }
 
-        public override void DeleteFile(string filePath)
+        public override ValueTask DeleteFile(string filePath)
         {
             var fullPath = FullPath(filePath);
             System.IO.File.Delete(fullPath);
+
+            return new ValueTask();
         }
 
         public override ValueTask DeleteFolder(string folderPath, bool recursive)
