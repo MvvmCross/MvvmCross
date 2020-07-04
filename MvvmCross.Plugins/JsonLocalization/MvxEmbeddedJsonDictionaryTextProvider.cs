@@ -5,6 +5,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using MvvmCross.Exceptions;
 
 namespace MvvmCross.Plugin.JsonLocalization
@@ -18,12 +19,14 @@ namespace MvvmCross.Plugin.JsonLocalization
         {
         }
 
-        public override void LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath)
+        public override ValueTask LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath)
         {
             var json = GetTextFromEmbeddedResource(namespaceKey, resourcePath);
             if (string.IsNullOrEmpty(json))
                 throw new FileNotFoundException("Unable to find resource file " + resourcePath);
             LoadJsonFromText(namespaceKey, typeKey, json);
+
+            return new ValueTask();
         }
 
         protected virtual string GetTextFromEmbeddedResource(string namespaceKey, string resourcePath)

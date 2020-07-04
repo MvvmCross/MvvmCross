@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using MvvmCross.Base;
 
 namespace MvvmCross.Plugin.JsonLocalization
@@ -26,7 +27,7 @@ namespace MvvmCross.Plugin.JsonLocalization
             }
         }
         
-        public abstract void LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath);
+        public abstract ValueTask LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath);
 
         public virtual void LoadJsonFromText(string namespaceKey, string typeKey, string rawJson)
         {

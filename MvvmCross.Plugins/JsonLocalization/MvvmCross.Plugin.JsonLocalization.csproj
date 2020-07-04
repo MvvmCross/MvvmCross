@@ -13,5 +13,7 @@ This package contains the 'JsonLocalization' plugin for MvvmCross</Description>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
     <ProjectReference Include="..\Json\MvvmCross.Plugin.Json.csproj" />
     <ProjectReference Include="..\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj" />
+
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using MvvmCross.Exceptions;
 
 namespace MvvmCross.Plugin.ResourceLoader.Platforms.Ios
@@ -11,7 +12,7 @@ namespace MvvmCross.Plugin.ResourceLoader.Platforms.Ios
     public class MvxIosResourceLoader
         : MvxResourceLoader
     {
-        public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
+        public override ValueTask GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {
 			if (!System.IO.File.Exists(resourcePath))
 			{
@@ -22,6 +23,8 @@ namespace MvvmCross.Plugin.ResourceLoader.Platforms.Ios
 			{
 				streamAction?.Invoke(fileStream);
 			}
+
+            return new ValueTask();
         }
     }
 }

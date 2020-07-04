@@ -8,6 +8,7 @@ using System.IO;
 using System.Text;
 using MvvmCross.Exceptions;
 using MvvmCross.Plugin.File;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Plugin.Network.Rest
 {
@@ -64,7 +65,7 @@ namespace MvvmCross.Plugin.Network.Rest
             string FileName { get; }
             string ContentType { get; }
 
-            void WriteTo(Stream stream);
+            ValueTask WriteTo(Stream stream);
         }
 
         public abstract class StreamForUpload
@@ -81,7 +82,7 @@ namespace MvvmCross.Plugin.Network.Rest
             public string FileName { get; private set; }
             public string ContentType { get; private set; }
 
-            public abstract void WriteTo(Stream stream);
+            public abstract ValueTask WriteTo(Stream stream);
         }
 
         public class MemoryStreamForUpload
@@ -101,10 +102,12 @@ namespace MvvmCross.Plugin.Network.Rest
 
             public MemoryStream MemoryStream { get; set; }
 
-            public override void WriteTo(Stream stream)
+            public override ValueTask WriteTo(Stream stream)
             {
                 MemoryStream.CopyTo(stream);
                 stream.Flush();
+
+                return new ValueTask();
             }
         }
 
@@ -119,15 +122,15 @@ namespace MvvmCross.Plugin.Network.Rest
 
             public string Path { get; set; }
 
-            public override void WriteTo(Stream stream)
+            public override async ValueTask WriteTo(Stream stream)
             {
                 var file = Mvx.IoCProvider.Resolve<IMvxFileStore>();
-                var result = file.TryReadBinaryFile(Path, (fileStream) =>
+                var result = await file.TryReadBinaryFile(Path, (fileStream) =>
                     {
                         fileStream.CopyTo(stream);
                         stream.Flush();
                         return true;
-                    });
+                    }).ConfigureAwait(false);
 
                 if (!result)
                     throw new MvxException("Failed to read file for upload at {0}", Path);

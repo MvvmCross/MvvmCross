@@ -1,5 +1,5 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
-  <!--<PropertyGroup Condition=" '$(TargetsToBuild)' == 'All' ">
+  <PropertyGroup Condition=" '$(TargetsToBuild)' == 'All' ">
     <TargetFrameworks>netstandard2.0;xamarin.ios10;xamarin.mac20;xamarin.tvos10;xamarin.watchos10;monoandroid10.0;tizen40;netcoreapp3.1;net461</TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.16299;$(TargetFrameworks)</TargetFrameworks>
   </PropertyGroup>
@@ -9,12 +9,8 @@
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Uap' ">netstandard2.0;uap10.0.16299</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'iOS' ">netstandard2.0;xamarin.ios10</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Tizen' ">netstandard2.0;tizen40</TargetFrameworks>
-  </PropertyGroup>-->
-
-  <PropertyGroup>
-  <TargetFrameworks>netstandard2.0;tizen40</TargetFrameworks>
-
   </PropertyGroup>
+
   <PropertyGroup>
     <AssemblyName>MvvmCross.Plugin.File</AssemblyName>
     <RootNamespace>MvvmCross.Plugin.File</RootNamespace>

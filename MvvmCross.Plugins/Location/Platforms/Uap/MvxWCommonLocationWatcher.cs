@@ -1,10 +1,11 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using Windows.Devices.Geolocation;
 using MvvmCross.Exceptions;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Plugin.Location.Platforms.Uap
 {
@@ -33,20 +34,16 @@ namespace MvvmCross.Plugin.Location.Platforms.Uap
             _geolocator.PositionChanged += OnPositionChanged;
         }
 
-        public override MvxGeoLocation CurrentLocation
+        public override async ValueTask<MvxGeoLocation> GetCurrentLocation()
         {
-            get
-            {
-                if (_geolocator == null)
-                    throw new MvxException("Location Manager not started");
+            if (_geolocator == null)
+                throw new MvxException("Location Manager not started");
 
-#warning Add async API for GeoLocation.
-                var storeLocation = _geolocator.GetGeopositionAsync().AsTask().GetAwaiter().GetResult();
-                if (storeLocation == null)
-                    return null;
+            var storeLocation = await _geolocator.GetGeopositionAsync();
+            if (storeLocation == null)
+                return null;
 
-                return CreateLocation(storeLocation.Coordinate);
-            }
+            return CreateLocation(storeLocation.Coordinate);
         }
 
         protected override void PlatformSpecificStop()

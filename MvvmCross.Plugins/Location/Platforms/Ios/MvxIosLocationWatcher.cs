@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using CoreLocation;
 using Foundation;
 using MvvmCross.Exceptions;
@@ -12,7 +13,7 @@ using MvvmCross.Platforms.Ios;
 namespace MvvmCross.Plugin.Location.Platforms.Ios
 {
     [MvvmCross.Preserve(AllMembers = true)]
-	public sealed class MvxIosLocationWatcher
+    public sealed class MvxIosLocationWatcher
         : MvxLocationWatcher
     {
         private CLLocationManager _locationManager;
@@ -79,23 +80,20 @@ namespace MvvmCross.Plugin.Location.Platforms.Ios
             }
         }
 
-        public override MvxGeoLocation CurrentLocation
+        public override ValueTask<MvxGeoLocation> GetCurrentLocation()
         {
-            get
-            {
-                if (_locationManager == null)
-                    throw new MvxException("Location Manager not started");
+            if (_locationManager == null)
+                throw new MvxException("Location Manager not started");
 
-                var iosLocation = _locationManager.Location;
-                if (iosLocation == null)
-                    return null;
+            var iosLocation = _locationManager.Location;
+            if (iosLocation == null)
+                return new ValueTask<MvxGeoLocation>((MvxGeoLocation)null);
 
-                CLHeading heading = null;
-                if (CLLocationManager.HeadingAvailable)
-                    heading = _locationManager.Heading;
+            CLHeading heading = null;
+            if (CLLocationManager.HeadingAvailable)
+                heading = _locationManager.Heading;
 
-                return CreateLocation(iosLocation, heading);
-            }
+            return new ValueTask<MvxGeoLocation>(CreateLocation(iosLocation, heading));
         }
 
         protected override void SendLocation(MvxGeoLocation location)
@@ -184,12 +182,12 @@ namespace MvvmCross.Plugin.Location.Platforms.Ios
 
             public override void Failed(CLLocationManager manager, NSError error)
             {
-                _owner.SendError (ToMvxLocationErrorCode (manager, error));
+                _owner.SendError(ToMvxLocationErrorCode(manager, error));
             }
 
             public override void MonitoringFailed(CLLocationManager manager, CLRegion region, NSError error)
             {
-                _owner.SendError (ToMvxLocationErrorCode (manager, error, region));
+                _owner.SendError(ToMvxLocationErrorCode(manager, error, region));
             }
 
             public override void AuthorizationChanged(CLLocationManager manager, CLAuthorizationStatus status)
@@ -215,19 +213,22 @@ namespace MvvmCross.Plugin.Location.Platforms.Ios
                 }
             }
 
-            private MvxLocationErrorCode ToMvxLocationErrorCode (CLLocationManager manager, NSError error, CLRegion region = null)
+            private MvxLocationErrorCode ToMvxLocationErrorCode(CLLocationManager manager, NSError error, CLRegion region = null)
             {
                 var errorType = (CLError)(int)error.Code;
 
-                if (errorType == CLError.Denied) {
+                if (errorType == CLError.Denied)
+                {
                     return MvxLocationErrorCode.PermissionDenied;
                 }
 
-                if (errorType == CLError.Network) {
+                if (errorType == CLError.Network)
+                {
                     return MvxLocationErrorCode.Network;
                 }
 
-                if (errorType == CLError.DeferredCanceled) {
+                if (errorType == CLError.DeferredCanceled)
+                {
                     return MvxLocationErrorCode.Canceled;
                 }
 

@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Base
 {
@@ -11,8 +12,8 @@ namespace MvvmCross.Base
     {
         bool ResourceExists(string resourcePath);
 
-        string GetTextResource(string resourcePath);
+        ValueTask<string> GetTextResource(string resourcePath);
 
-        void GetResourceStream(string resourcePath, Action<Stream> streamAction);
+        ValueTask GetResourceStream(string resourcePath, Action<Stream> streamAction);
     }
 }

@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
 
@@ -13,12 +14,12 @@ namespace MvvmCross.Plugin.ResourceLoader
     {
         #region Implementation of IMvxResourceLoader
 
-        public string GetTextResource(string resourcePath)
+        public async ValueTask<string> GetTextResource(string resourcePath)
         {
             try
             {
                 string text = null;
-                GetResourceStream(resourcePath, (stream) =>
+                await GetResourceStream(resourcePath, (stream) =>
                     {
                         if (stream == null)
                             return;
@@ -27,7 +28,7 @@ namespace MvvmCross.Plugin.ResourceLoader
                         {
                             text = textReader.ReadToEnd();
                         }
-                    });
+                    }).ConfigureAwait(false);
                 return text;
             }
             //#if !NETFX_CORE
@@ -42,7 +43,7 @@ namespace MvvmCross.Plugin.ResourceLoader
             }
         }
 
-        public abstract void GetResourceStream(string resourcePath, Action<Stream> streamAction);
+        public abstract ValueTask GetResourceStream(string resourcePath, Action<Stream> streamAction);
 
         public virtual bool ResourceExists(string resourcePath)
         {

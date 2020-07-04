@@ -4,6 +4,7 @@
 
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Android.Content;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
@@ -29,19 +30,16 @@ namespace MvvmCross.Plugin.Location.Fused
 
         protected override void PlatformSpecificStop() => _locationHandler.StopAsync().GetAwaiter();
 
-        public override MvxGeoLocation CurrentLocation 
-		{
-			get 
-			{
-				if (_locationHandler == null)
-					throw new MvxException("Location Manager not started");
+        public override ValueTask<MvxGeoLocation> GetCurrentLocation()
+        {
+			if (_locationHandler == null)
+				throw new MvxException("Location Manager not started");
 
-                var androidLocation = _locationHandler.LastKnownLocation;
-                if (androidLocation == null)
-                    return null;
+            var androidLocation = _locationHandler.LastKnownLocation;
+            if (androidLocation == null)
+                return new ValueTask<MvxGeoLocation>((MvxGeoLocation)null);
 
-                return CreateLocation(androidLocation);
-            }
+            return new ValueTask<MvxGeoLocation>(CreateLocation(androidLocation));
 		}
 
         internal void OnLocationUpdated(global::Android.Locations.Location androidLocation)

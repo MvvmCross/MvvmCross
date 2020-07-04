@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace MvvmCross.Plugin.ResourceLoader.Platforms.Wpf
@@ -12,10 +13,12 @@ namespace MvvmCross.Plugin.ResourceLoader.Platforms.Wpf
     {
         #region Implementation of IMvxResourceLoader
 
-        public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
+        public override ValueTask GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {
             var streamInfo = Application.GetResourceStream(new Uri(resourcePath, UriKind.Relative));
             streamAction?.Invoke(streamInfo?.Stream);
+
+            return new ValueTask();
         }
 
         #endregion Implementation of IMvxResourceLoader

@@ -4,6 +4,7 @@
 
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using Android.Content.Res;
 using MvvmCross.Platforms.Android;
 
@@ -11,18 +12,19 @@ namespace MvvmCross.Plugin.ResourceLoader.Platforms.Android
 {
     [Preserve(AllMembers = true)]
 	public class MvxAndroidResourceLoader
-        : MvxResourceLoader          
+        : MvxResourceLoader       
     {
         private AssetManager _assets;
 
         #region Implementation of IMvxResourceLoader
 
-        public override void GetResourceStream(string resourcePath, Action<Stream> streamAction)
+        public override ValueTask GetResourceStream(string resourcePath, Action<Stream> streamAction)
         {
             using (var input = Assets.Open(resourcePath))
             {
                 streamAction?.Invoke(input);
             }
+            return new ValueTask();
         }
 
         #endregion

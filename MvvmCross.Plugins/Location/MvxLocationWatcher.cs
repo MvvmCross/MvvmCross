@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using MvvmCross.Base;
 
 namespace MvvmCross.Plugin.Location
@@ -61,7 +62,8 @@ namespace MvvmCross.Plugin.Location
 
         public bool Started { get; set; }
 
-        public abstract MvxGeoLocation CurrentLocation { get; }
+        public abstract ValueTask<MvxGeoLocation> GetCurrentLocation();
+
         public MvxGeoLocation LastSeenLocation { get; protected set; }
 
         protected abstract void PlatformSpecificStart(MvxLocationOptions options);

@@ -4,6 +4,7 @@
 
 using System;
 using System.Device.Location;
+using System.Threading.Tasks;
 using MvvmCross.Exceptions;
 
 namespace MvvmCross.Plugin.Location.Platforms.Wpf
@@ -42,18 +43,15 @@ namespace MvvmCross.Plugin.Location.Platforms.Wpf
             _geolocator.PositionChanged += OnPositionChanged;
         }
 
-        public override MvxGeoLocation CurrentLocation
+        public override ValueTask<MvxGeoLocation> GetCurrentLocation()
         {
-            get
+            if (_geolocator == null)
             {
-                if (_geolocator == null)
-                {
-                    throw new MvxException("Location Manager not started");
-                }
-                else
-                {
-                    return _lastKnownPosition;
-                }
+                throw new MvxException("Location Manager not started");
+            }
+            else
+            {
+                return new ValueTask<MvxGeoLocation>(_lastKnownPosition);
             }
         }
 

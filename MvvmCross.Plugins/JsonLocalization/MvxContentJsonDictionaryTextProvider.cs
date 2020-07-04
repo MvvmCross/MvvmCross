@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.IO;
+using System.Threading.Tasks;
 using MvvmCross.Base;
 
 namespace MvvmCross.Plugin.JsonLocalization
@@ -26,10 +27,10 @@ namespace MvvmCross.Plugin.JsonLocalization
         {
         }
 
-        public override void LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath)
+        public override async ValueTask LoadJsonFromResource(string namespaceKey, string typeKey, string resourcePath)
         {
             var service = ResourceLoader;
-            var json = service.GetTextResource(resourcePath);
+            var json = await service.GetTextResource(resourcePath).ConfigureAwait(false);
             if (string.IsNullOrEmpty(json))
                 throw new FileNotFoundException("Unable to find resource file " + resourcePath);
             LoadJsonFromText(namespaceKey, typeKey, json);

@@ -1,9 +1,10 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Android.Content;
 using Android.Locations;
 using Android.OS;
@@ -14,7 +15,7 @@ using MvvmCross.Platforms.Android;
 namespace MvvmCross.Plugin.Location.Platforms.Android
 {
     [Preserve(AllMembers = true)]
-	public sealed class MvxAndroidLocationWatcher
+    public sealed class MvxAndroidLocationWatcher
         : MvxLocationWatcher, IMvxLocationReceiver
     {
         private Context _context;
@@ -43,9 +44,9 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
                 return;
             }
             var criteria = new Criteria()
-                {
-                    Accuracy = options.Accuracy == MvxLocationAccuracy.Fine ? Accuracy.Fine : Accuracy.Coarse
-                };
+            {
+                Accuracy = options.Accuracy == MvxLocationAccuracy.Fine ? Accuracy.Fine : Accuracy.Coarse
+            };
             _bestProvider = _locationManager.GetBestProvider(criteria, true);
             if (_bestProvider == null)
             {
@@ -55,14 +56,14 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
             }
 
             _locationManager.RequestLocationUpdates(
-                _bestProvider, 
+                _bestProvider,
                 (long)options.TimeBetweenUpdates.TotalMilliseconds,
-                options.MovementThresholdInM, 
+                options.MovementThresholdInM,
                 _locationListener);
 
-			Permission = _locationManager.IsProviderEnabled (_bestProvider)
-				? MvxLocationPermission.Granted
-				: MvxLocationPermission.Denied;
+            Permission = _locationManager.IsProviderEnabled(_bestProvider)
+                ? MvxLocationPermission.Granted
+                : MvxLocationPermission.Denied;
         }
 
         protected override void PlatformSpecificStop()
@@ -103,19 +104,17 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
             return position;
         }
 
-        public override MvxGeoLocation CurrentLocation 
-        { 
-            get
-            {
-                if (_locationManager == null || _bestProvider == null)
-                    throw new MvxException("Location Manager not started");
+        public override ValueTask<MvxGeoLocation> GetCurrentLocation()
+        {
+            if (_locationManager == null || _bestProvider == null)
+                throw new MvxException("Location Manager not started");
 
-                var androidLocation = _locationManager.GetLastKnownLocation(_bestProvider);
-                if (androidLocation == null)
-                    return null;
+            var androidLocation = _locationManager.GetLastKnownLocation(_bestProvider);
+            if (androidLocation == null)
+                return new ValueTask<MvxGeoLocation>((MvxGeoLocation)null);
 
-                return CreateLocation(androidLocation);
-            }
+            var location = CreateLocation(androidLocation);
+            return new ValueTask<MvxGeoLocation>(location);
         }
 
         #region Implementation of ILocationListener
@@ -155,13 +154,13 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
 
         public void OnProviderDisabled(string provider)
         {
-			Permission = MvxLocationPermission.Denied;
+            Permission = MvxLocationPermission.Denied;
             SendError(MvxLocationErrorCode.ServiceUnavailable);
         }
 
         public void OnProviderEnabled(string provider)
         {
-			Permission = MvxLocationPermission.Granted;
+            Permission = MvxLocationPermission.Granted;
         }
 
         public void OnStatusChanged(string provider, Availability status, Bundle extras)
