@@ -82,9 +82,9 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         /// <summary>
         /// Wait for all animations to finish
         /// </summary>
-        public async Task WaitAnimationsCompletedAsync()
+        public Task WaitAnimationsCompletedAsync()
         {
-            await CollectionView.PerformBatchUpdatesAsync(() => { }).ConfigureAwait(false); 
+            return CollectionView.PerformBatchUpdatesAsync(() => { });
         }
 
         protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)

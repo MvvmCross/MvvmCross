@@ -281,14 +281,14 @@ namespace MvvmCross.Plugin.File
             .ConfigureAwait(false);
         }
 
-        public async ValueTask WriteFileAsync(string path, IEnumerable<byte> contents)
+        public ValueTask WriteFileAsync(string path, IEnumerable<byte> contents)
         {
-            await WriteFileAsync(path, contents.ToArray()).ConfigureAwait(false);
+            return WriteFileAsync(path, contents.ToArray());
         }
 
-        public async ValueTask WriteFileAsync(string path, IEnumerable<byte> contents, CancellationToken cancellationToken)
+        public ValueTask WriteFileAsync(string path, IEnumerable<byte> contents, CancellationToken cancellationToken)
         {
-            await WriteFileAsync(path, contents.ToArray(), cancellationToken).ConfigureAwait(false);
+            return WriteFileAsync(path, contents.ToArray(), cancellationToken);
         }
 
         public async ValueTask WriteFileAsync(string path, Func<Stream, ValueTask> writeMethod)
@@ -321,5 +321,3 @@ namespace MvvmCross.Plugin.File
         protected abstract ValueTask<bool> TryReadFileCommonAsync(string path, Func<Stream, ValueTask<bool>> streamAction);
     }
 }
-
-// ReSharper restore all
