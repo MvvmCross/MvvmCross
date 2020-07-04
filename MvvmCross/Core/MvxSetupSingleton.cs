@@ -9,6 +9,7 @@ using MvvmCross.Base;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
+//using Windows.ApplicationModel.UserDataTasks;
 
 namespace MvvmCross.Core
 {
@@ -113,7 +114,7 @@ namespace MvvmCross.Core
                     MvxLog.Instance.Trace("EnsureInitialized has already been called so now waiting for completion");
                 }
             }
-            await IsInitialisedTaskCompletionSource.Task.ConfigureAwait(false);
+            await IsInitialisedTaskCompletionSource.Task.ConfigureAwait(true);
         }
 
         public virtual void InitializeAndMonitor(IMvxSetupMonitor setupMonitor)
@@ -211,9 +212,9 @@ namespace MvvmCross.Core
                     {
                         if (monitor != null)
                         {
-                            await monitor.InitializationComplete().ConfigureAwait(false);
+                            await monitor.InitializationComplete().ConfigureAwait(true);
                         }
-                    }).ConfigureAwait(false);
+                    }).ConfigureAwait(true);
                 }
             });
         }

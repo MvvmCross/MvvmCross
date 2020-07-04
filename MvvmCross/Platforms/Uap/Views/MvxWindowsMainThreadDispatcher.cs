@@ -32,6 +32,7 @@ namespace MvvmCross.Platforms.Uap.Views
             {
                 ExceptionMaskedAction(action, maskExceptions);
             });
+
             return true;
         }
     }

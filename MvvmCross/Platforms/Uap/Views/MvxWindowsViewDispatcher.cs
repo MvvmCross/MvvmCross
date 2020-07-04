@@ -22,7 +22,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         public async Task<bool> ShowViewModel(MvxViewModelRequest request)
         {
-            await ExecuteOnMainThreadAsync(() => _presenter.Show(request)).ConfigureAwait(false);
+            await ExecuteOnMainThreadAsync(() => _presenter.Show(request)).ConfigureAwait(true);
             return true;
         }
 

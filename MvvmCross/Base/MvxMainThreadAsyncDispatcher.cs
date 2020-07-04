@@ -16,6 +16,7 @@ namespace MvvmCross.Base
                 action();
                 return Task.CompletedTask;
             });
+
             return ExecuteOnMainThreadAsync(asyncAction, maskExceptions);
         }
 
@@ -37,7 +38,7 @@ namespace MvvmCross.Base
             // Make sure we don't introduce weird locking issues  
             // blocking on the completion source by jumping onto
             // a new thread to wait
-            await Task.Run(async () => await completion.Task.ConfigureAwait(false)).ConfigureAwait(false);
+            await Task.Run(async () => await completion.Task.ConfigureAwait(false)).ConfigureAwait(true);
         }
 
         public abstract override bool IsOnMainThread { get; }

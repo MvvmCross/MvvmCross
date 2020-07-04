@@ -45,7 +45,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
             if (activationArgs.PrelaunchActivated == false)
             {
-                await RunAppStart(activationArgs).ConfigureAwait(false);
+                await RunAppStart(activationArgs); //.GetAwaiter().GetResult();
             }
 
             Window.Current.Activate();
@@ -57,7 +57,8 @@ namespace MvvmCross.Platforms.Uap.Views
             ActivationArguments = activationArgs;
 
             var rootFrame = InitializeFrame(activationArgs);
-            await RunAppStart(activationArgs).ConfigureAwait(false);
+
+            await RunAppStart(activationArgs);//.GetAwaiter().GetResult();
 
             Window.Current.Activate();
         }
@@ -71,7 +72,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
                 if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
                 {
-                    await startup.Start(GetAppStartHint(activationArgs)).ConfigureAwait(false);
+                    await startup.Start(GetAppStartHint(activationArgs)).ConfigureAwait(true);
                 }
             }
             else
