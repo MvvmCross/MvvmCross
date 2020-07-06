@@ -12,7 +12,6 @@ namespace MvvmCross.Platforms.Tizen.Views
         {
             //TODO: implement
             ExceptionMaskedAction(action, maskExceptions);
-            
         }
 
         public override ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)

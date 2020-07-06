@@ -14,16 +14,6 @@ namespace MvvmCross.Base
         : MvxSingleton<IMvxMainThreadDispatcher>,
         IMvxMainThreadDispatcher
     {
-        //public virtual void ExecuteOnMainThread(Action action, bool maskExceptions = true)
-        //{
-        //    ExecuteOnMainThread(action);
-        //}
-
-        //public virtual ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
-        //{
-        //    return ExceptionMaskedActionAsync(action, maskExceptions);
-        //}
-
         public abstract void ExecuteOnMainThread(Action action, bool maskExceptions = true);
 
         public abstract ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true);
@@ -81,6 +71,5 @@ namespace MvvmCross.Base
                     return true;
             }
         }
-
     }
 }

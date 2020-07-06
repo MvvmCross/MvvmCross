@@ -45,7 +45,6 @@ namespace MvvmCross.Platforms.Uap.Views
             {
                 await ExceptionMaskedActionAsync(action, maskExceptions).ConfigureAwait(false);
             });
-
         }
     }
 }
