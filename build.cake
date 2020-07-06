@@ -117,7 +117,7 @@ Task("SonarStart")
 
     if (AzurePipelines.Environment.PullRequest.IsPullRequest)
     {
-        settings.PullRequestKey = AzurePipelines.Environment.PullRequest.Id;
+        settings.PullRequestKey = AzurePipelines.Environment.PullRequest.Number;
         settings.PullRequestBranch = AzurePipelines.Environment.PullRequest.SourceBranch;
         settings.PullRequestBase = AzurePipelines.Environment.PullRequest.TargetBranch;
     }
