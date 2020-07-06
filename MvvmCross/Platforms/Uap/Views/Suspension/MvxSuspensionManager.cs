@@ -63,17 +63,19 @@ namespace MvvmCross.Platforms.Uap.Views.Suspension
 
                 // Serialize the session state synchronously to avoid asynchronous access to shared
                 // state
-                var sessionData = new MemoryStream();
-                var serializer = new DataContractSerializer(typeof(Dictionary<string, object>), KnownTypes);
-                serializer.WriteObject(sessionData, SessionState);
-
-                // Get an output stream for the SessionState file and write the state asynchronously
-                var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(SessionStateFilename, CreationCollisionOption.ReplaceExisting);
-                using (Stream fileStream = await file.OpenStreamForWriteAsync())
+                using (var memoryStream = new MemoryStream())
                 {
-                    sessionData.Seek(0, SeekOrigin.Begin);
-                    await sessionData.CopyToAsync(fileStream);
-                    await fileStream.FlushAsync();
+                    var serializer = new DataContractSerializer(typeof(Dictionary<string, object>), KnownTypes);
+                    serializer.WriteObject(memoryStream, SessionState);
+
+                    // Get an output stream for the SessionState file and write the state asynchronously
+                    var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(SessionStateFilename, CreationCollisionOption.ReplaceExisting);
+                    using (var fileStream = await file.OpenStreamForWriteAsync().ConfigureAwait(false))
+                    {
+                        memoryStream.Seek(0, SeekOrigin.Begin);
+                        await memoryStream.CopyToAsync(fileStream).ConfigureAwait(false);
+                        await fileStream.FlushAsync().ConfigureAwait(false);
+                    }
                 }
             }
             catch (Exception e)
