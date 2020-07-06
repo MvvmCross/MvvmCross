@@ -13,14 +13,24 @@ namespace MvvmCross.Base
 
         protected void InvokeOnMainThread(Action action, bool maskExceptions = true)
         {
-            InvokeOnMainThread(action, maskExceptions);
+            if (AsyncDispatcher == null)
+            {
+                try
+                {
+                    action();
+                }
+                catch
+                {
+                    if (!maskExceptions)
+                        throw;
+                }
+            }
+
+            AsyncDispatcher.ExecuteOnMainThread(action, maskExceptions);
         }
 
         protected ValueTask InvokeOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
         {
-            // this corner case should only happen when there is no IoC
-            // i.e. when running in a UnitTest environment, falling back
-            // to just executing action
             if (AsyncDispatcher == null)
             {
                 try
