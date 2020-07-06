@@ -10,11 +10,12 @@ using MvvmCross.Base;
 
 namespace MvvmCross.Platforms.Android.Views
 {
-    public class MvxAndroidMainThreadDispatcher : MvxMainThreadAsyncDispatcher
+    public class MvxAndroidMainThreadDispatcher
+        : MvxMainThreadDispatcher
     {
         public override bool IsOnMainThread => Application.SynchronizationContext == SynchronizationContext.Current;
 
-        public override ValueTask<bool> RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override void ExecuteOnMainThread(Action action, bool maskExceptions = true)
         {
             if (IsOnMainThread)
             {
@@ -27,8 +28,23 @@ namespace MvvmCross.Platforms.Android.Views
                     ExceptionMaskedAction(action, maskExceptions);
                 }, null);
             }
+        }
 
-            return new ValueTask<bool>(true);
+        public override ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
+        {
+            if (IsOnMainThread)
+            {
+                return ExceptionMaskedActionAsync(action, maskExceptions);
+            }
+            else
+            {
+                Application.SynchronizationContext.Post(async ignored =>
+                {
+                    await ExceptionMaskedActionAsync(action, maskExceptions).ConfigureAwait(true);
+                }, null);
+
+                return new ValueTask();
+            }
         }
     }
 }

@@ -4,15 +4,21 @@ using MvvmCross.Base;
 
 namespace MvvmCross.Platforms.Tizen.Views
 {
-    public class MvxTizenMainThreadDispatcher : MvxMainThreadAsyncDispatcher
+    public class MvxTizenMainThreadDispatcher : MvxMainThreadDispatcher
     {
         public override bool IsOnMainThread => true;
 
-        public override ValueTask<bool> RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override void ExecuteOnMainThread(Action action, bool maskExceptions = true)
         {
             //TODO: implement
             ExceptionMaskedAction(action, maskExceptions);
-            return new ValueTask<bool>(true);
+            
+        }
+
+        public override ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
+        {
+            //TODO: implement
+            return ExceptionMaskedActionAsync(action, maskExceptions);
         }
     }
 }

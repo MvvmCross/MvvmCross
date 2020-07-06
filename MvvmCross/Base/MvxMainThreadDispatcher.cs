@@ -10,34 +10,77 @@ using MvvmCross.Logging;
 
 namespace MvvmCross.Base
 {
-    public abstract class MvxMainThreadDispatcher : MvxSingleton<IMvxMainThreadDispatcher>, IMvxMainThreadDispatcher
+    public abstract class MvxMainThreadDispatcher
+        : MvxSingleton<IMvxMainThreadDispatcher>,
+        IMvxMainThreadDispatcher
     {
-        public static void ExceptionMaskedAction(Action action, bool maskExceptions)
+        //public virtual void ExecuteOnMainThread(Action action, bool maskExceptions = true)
+        //{
+        //    ExecuteOnMainThread(action);
+        //}
+
+        //public virtual ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
+        //{
+        //    return ExceptionMaskedActionAsync(action, maskExceptions);
+        //}
+
+        public abstract void ExecuteOnMainThread(Action action, bool maskExceptions = true);
+
+        public abstract ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true);
+
+        public abstract bool IsOnMainThread { get; }
+
+        protected internal static void ExceptionMaskedAction(Action action, bool maskExceptions)
         {
             try
             {
                 action();
             }
-            catch (TargetInvocationException exception)
+            catch (Exception ex)
             {
-                MvxLog.Instance.TraceException("Exception throw when invoking action via dispatcher", exception);
-                if (maskExceptions)
-                    MvxLog.Instance.Trace("TargetInvocateException masked " + exception.InnerException.ToLongString());
-                else
-                    throw;
-            }
-            catch (Exception exception)
-            {
-                MvxLog.Instance.TraceException("Exception throw when invoking action via dispatcher", exception);
-                if (maskExceptions)
-                    MvxLog.Instance.Warn("Exception masked " + exception.ToLongString());
-                else
+                if (TraceException(ex, maskExceptions))
                     throw;
             }
         }
 
-        public abstract ValueTask<bool> RequestMainThreadAction(Action action, bool maskExceptions = true);
+        protected internal static async ValueTask ExceptionMaskedActionAsync(Func<ValueTask> action, bool maskExceptions)
+        {
+            try
+            {
+                await action().ConfigureAwait(true);
+            }
+            catch (Exception ex)
+            {
+                if (TraceException(ex, maskExceptions))
+                    throw;
+            }
+        }
 
-        public abstract bool IsOnMainThread { get; }
+        private static bool TraceException(Exception exception, bool maskExceptions)
+        {
+            if(exception is TargetInvocationException targetInvocationException)
+            {
+                MvxLog.Instance.TraceException("Exception throw when invoking action via dispatcher", exception);
+                if (maskExceptions)
+                {
+                    MvxLog.Instance.Trace("TargetInvocateException masked " + exception.InnerException.ToLongString());
+                    return false;
+                }
+                else
+                    return true;
+            }
+            else
+            {
+                MvxLog.Instance.TraceException("Exception throw when invoking action via dispatcher", exception);
+                if (maskExceptions)
+                {
+                    MvxLog.Instance.Warn("Exception masked " + exception.ToLongString());
+                    return false;
+                }
+                else
+                    return true;
+            }
+        }
+
     }
 }

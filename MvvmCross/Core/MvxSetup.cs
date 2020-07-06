@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using MvvmCross.Base;
 using MvvmCross.Commands;
 using MvvmCross.IoC;
@@ -60,11 +61,11 @@ namespace MvvmCross.Core
 
         protected IMvxLog SetupLog { get; private set; }
 
-        public virtual void InitializePrimary()
+        public virtual ValueTask InitializePrimary()
         {
             if (State != MvxSetupState.Uninitialized)
             {
-                return;
+                return new ValueTask();
             }
             State = MvxSetupState.InitializingPrimary;
             var iocProvider = InitializeIoC();
@@ -87,13 +88,15 @@ namespace MvvmCross.Core
             SetupLog.Trace("Setup: ViewDispatcher start");
             InitializeViewDispatcher();
             State = MvxSetupState.InitializedPrimary;
+
+            return new ValueTask();
         }
 
-        public virtual void InitializeSecondary()
+        public virtual ValueTask InitializeSecondary()
         {
             if (State != MvxSetupState.InitializedPrimary)
             {
-                return;
+                return new ValueTask();
             }
             State = MvxSetupState.InitializingSecondary;
             SetupLog.Trace("Setup: Bootstrap actions");
@@ -130,6 +133,8 @@ namespace MvvmCross.Core
             InitializeLastChance();
             SetupLog.Trace("Setup: Secondary end");
             State = MvxSetupState.Initialized;
+
+            return new ValueTask();
         }
 
         protected virtual void InitializeSingletonCache()
@@ -430,7 +435,7 @@ namespace MvvmCross.Core
         {
             var dispatcher = CreateViewDispatcher();
             Mvx.IoCProvider.RegisterSingleton(dispatcher);
-            Mvx.IoCProvider.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(dispatcher);
+            Mvx.IoCProvider.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
             Mvx.IoCProvider.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);
         }
 

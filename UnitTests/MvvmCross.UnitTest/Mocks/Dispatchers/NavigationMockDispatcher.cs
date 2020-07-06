@@ -22,24 +22,33 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
 
         public bool IsOnMainThread => true;
 
-        public virtual ValueTask<bool> RequestMainThreadAction(Action action,
-                                                    bool maskExceptions = true)
+        public void ExecuteOnMainThread(Action action, bool maskExceptions = true)
         {
             try
             {
                 action();
-                return new ValueTask<bool>(true);
             }
             catch (Exception)
             {
                 if (!maskExceptions)
                     throw;
-
-                return new ValueTask<bool>(false);
             }
         }
 
-        public virtual Task<bool> ShowViewModel(MvxViewModelRequest request)
+        public async ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
+        {
+            try
+            {
+                await action().ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                if (!maskExceptions)
+                    throw;
+            }
+        }
+
+        public virtual ValueTask<bool> ShowViewModel(MvxViewModelRequest request)
         {
             var debugString = $"ShowViewModel: '{request.ViewModelType.Name}' ";
             if (request.ParameterValues != null)
@@ -49,42 +58,13 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
             MvxTestLog.Instance.Log(MvxLogLevel.Debug, () => debugString);
 
             Requests.Add(request);
-            return Task.FromResult(true);
+            return new ValueTask<bool>(true);
         }
 
-        public virtual Task<bool> ChangePresentation(MvxPresentationHint hint)
+        public virtual ValueTask<bool> ChangePresentation(MvxPresentationHint hint)
         {
             Hints.Add(hint);
-            return Task.FromResult(true);
-        }
-
-        public Task ExecuteOnMainThreadAsync(Action action, bool maskExceptions = true)
-        {
-            return Task.Run(() =>
-            {
-                try
-                {
-                    action();
-                }
-                catch (Exception)
-                {
-                    if (!maskExceptions)
-                        throw;
-                }
-            });
-        }
-
-        public async Task ExecuteOnMainThreadAsync(Func<Task> action, bool maskExceptions = true)
-        {
-            try
-            {
-                await action();
-            }
-            catch (Exception)
-            {
-                if (!maskExceptions)
-                    throw;
-            }
+            return new ValueTask<bool>(true);
         }
     }
 }

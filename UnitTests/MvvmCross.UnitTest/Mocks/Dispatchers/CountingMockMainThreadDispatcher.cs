@@ -9,17 +9,22 @@ using MvvmCross.Base;
 namespace MvvmCross.UnitTest.Mocks.Dispatchers
 {
     public class CountingMockMainThreadDispatcher
-        : MvxMainThreadAsyncDispatcher
+        : MvxMainThreadDispatcher
     {
         public int Count { get; set; }
 
         public override bool IsOnMainThread => true;
 
-        public override ValueTask<bool> RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override void ExecuteOnMainThread(Action action, bool maskExceptions = true)
         {
             ExceptionMaskedAction(action, maskExceptions);
             Count++;
-            return new ValueTask<bool>(true);
+        }
+
+        public override async ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
+        {
+            await ExceptionMaskedActionAsync(action, maskExceptions).ConfigureAwait(false);
+            Count++;
         }
     }
 }

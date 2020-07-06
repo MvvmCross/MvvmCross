@@ -32,7 +32,7 @@ namespace MvvmCross.Binding.Bindings
 
         private object _defaultTargetValue;
         private CancellationTokenSource _cancelSource = new CancellationTokenSource();
-        private IMvxMainThreadAsyncDispatcher dispatcher => MvxBindingSingletonCache.Instance.MainThreadDispatcher;
+        private IMvxMainThreadDispatcher dispatcher => MvxBindingSingletonCache.Instance.MainThreadDispatcher;
 
         public object DataContext
         {
@@ -161,7 +161,7 @@ namespace MvvmCross.Binding.Bindings
             _defaultTargetValue = _targetBinding.TargetType.CreateDefault();
         }
 
-        private async void UpdateTargetFromSource(object value, CancellationToken cancel)
+        private void UpdateTargetFromSource(object value, CancellationToken cancel)
         {
             if (value == MvxBindingConstant.DoNothing || cancel.IsCancellationRequested)
                 return;
@@ -169,7 +169,7 @@ namespace MvvmCross.Binding.Bindings
             if (value == MvxBindingConstant.UnsetValue)
                 value = _defaultTargetValue;
 
-            await dispatcher.ExecuteOnMainThreadAsync(() =>
+            dispatcher.ExecuteOnMainThread(() =>
             {
                 if (cancel.IsCancellationRequested)
                     return;
@@ -188,7 +188,7 @@ namespace MvvmCross.Binding.Bindings
                         _bindingDescription.ToString(),
                         exception.ToLongString());
                 }
-            }).ConfigureAwait(false);
+            });
         }
 
         private void UpdateSourceFromTarget(object value)

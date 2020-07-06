@@ -208,6 +208,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 intent.PutExtras(attribute.Extras);
 
             ShowIntent(intent, CreateActivityTransitionOptions(intent, attribute, request));
+
             return Task.FromResult(true);
         }
 

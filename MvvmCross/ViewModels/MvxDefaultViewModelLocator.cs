@@ -116,7 +116,7 @@ namespace MvvmCross.ViewModels
                 if (navigationArgs?.Cancel == true)
                     return;
 
-                viewModel.InitializeTask = MvxNotifyTask.Create(() => viewModel.Initialize());
+                viewModel.InitializeTask = MvxNotifyTask.Create(viewModel.Initialize);
             }
             catch (Exception exception)
             {
@@ -149,7 +149,7 @@ namespace MvvmCross.ViewModels
                 if (navigationArgs?.Cancel == true)
                     return;
 
-                viewModel.InitializeTask = MvxNotifyTask.Create(() => viewModel.Initialize());
+                viewModel.InitializeTask = MvxNotifyTask.Create(viewModel.Initialize);
             }
             catch (Exception exception)
             {

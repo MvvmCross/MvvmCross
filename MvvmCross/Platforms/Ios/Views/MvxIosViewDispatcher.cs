@@ -21,20 +21,24 @@ namespace MvvmCross.Platforms.Ios.Views
             _presenter = presenter;
         }
 
-        public async Task<bool> ShowViewModel(MvxViewModelRequest request)
+        public async ValueTask<bool> ShowViewModel(MvxViewModelRequest request)
         {
-            Func<Task> action = () =>
+            await ExecuteOnMainThreadAsync(async () =>
                 {
                     MvxLog.Instance.Trace("iOSNavigation", "Navigate requested");
-                    return _presenter.Show(request);
-                };
-            await ExecuteOnMainThreadAsync(action).ConfigureAwait(false);
+                    await _presenter.Show(request).ConfigureAwait(false);
+                }).ConfigureAwait(false);
+
             return true;
         }
 
-        public async Task<bool> ChangePresentation(MvxPresentationHint hint)
+        public async ValueTask<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            await ExecuteOnMainThreadAsync(() => _presenter.ChangePresentation(hint)).ConfigureAwait(false);
+            await ExecuteOnMainThreadAsync(async () =>
+            {
+                await _presenter.ChangePresentation(hint).ConfigureAwait(false);
+            }).ConfigureAwait(false);
+
             return true;
         }
     }

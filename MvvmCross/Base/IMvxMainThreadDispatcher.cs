@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.Base
 {
+    // Note: The long term goal should be to deprecate IMvxMainThreadDispatcher
+    // As such, even though the implementation of this interface also implements
+    // IMvxMainThreadDispatcher, this interface should not inherit from IMvxMainThreadDispatcher
     public interface IMvxMainThreadDispatcher
     {
-        [Obsolete("Use IMvxMainThreadAsyncDispatcher.ExecuteOnMainThreadAsync instead")]
-        ValueTask<bool> RequestMainThreadAction(Action action, bool maskExceptions = true);
-
+        void ExecuteOnMainThread(Action action, bool maskExceptions = true);
+        ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true);
         bool IsOnMainThread { get; }
     }
 }

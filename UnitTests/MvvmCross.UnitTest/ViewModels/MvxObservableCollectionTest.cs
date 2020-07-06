@@ -21,22 +21,21 @@ namespace MvvmCross.UnitTest.ViewModels
         {
             _fixture = fixture;
             _fixture.ClearAll();
-            _fixture.Ioc.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(new DummyDispatcher());
+            _fixture.Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(new DummyDispatcher());
         }
 
-        public class DummyDispatcher : MvxSingleton<IMvxMainThreadAsyncDispatcher>, IMvxMainThreadAsyncDispatcher
+        public class DummyDispatcher : MvxSingleton<IMvxMainThreadDispatcher>, IMvxMainThreadDispatcher
         {
             public bool IsOnMainThread => true;
 
-            public Task ExecuteOnMainThreadAsync(Action action, bool maskExceptions = true)
+            public void ExecuteOnMainThread(Action action, bool maskExceptions = true)
             {
-                action?.Invoke();
-                return Task.CompletedTask;
+                action();
             }
 
-            public Task ExecuteOnMainThreadAsync(Func<Task> action, bool maskExceptions = true)
+            public ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
             {
-                return action?.Invoke();
+                return action();
             }
         }
 

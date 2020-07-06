@@ -10,6 +10,7 @@ using MvvmCross.Forms.Presenters;
 using MvvmCross.ViewModels;
 using Xamarin.Forms.Platform.WPF;
 using MvvmCross.Platforms.Wpf.Core;
+using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platforms.Wpf.Views
 {
@@ -27,9 +28,14 @@ namespace MvvmCross.Forms.Platforms.Wpf.Views
             //    Loaded -= MvxFormsWindowsPage_Loaded;
 
             Initialized += MvxWindow_Initialized;
+
+            Xamarin.Forms.Forms.Init();
+            //RunAppStart().GetAwaiter().GetResult();
+
+            MvxWpfSetupSingleton.EnsureSingletonAvailable(Dispatcher, this).EnsureInitialized().GetAwaiter().GetResult();
         }
 
-        private void MvxWindow_Initialized(object sender, EventArgs e)
+        private async void MvxWindow_Initialized(object sender, EventArgs e)
         {
             //    if (this == System.Windows.Application.Current.MainWindow)
             //    {
@@ -37,17 +43,19 @@ namespace MvvmCross.Forms.Platforms.Wpf.Views
             //    }
 
             //    LoadFormsApplication();
-            RunAppStart(e);
+            await RunAppStart(e).ConfigureAwait(false);
         }
 
-        protected virtual async void RunAppStart(object hint = null)
+        protected virtual async Task RunAppStart(object hint = null)
         {
-            await MvxWpfSetupSingleton.EnsureSingletonAvailable(Dispatcher, this).EnsureInitialized().ConfigureAwait(false);
-
-            if(Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
-                await startup.Start(GetAppStartHint(hint)).ConfigureAwait(false);
+            //await MvxWpfSetupSingleton.EnsureSingletonAvailable(Dispatcher, this).EnsureInitialized().ConfigureAwait(false);
 
             LoadFormsApplication();
+
+            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
+                await startup.Start(GetAppStartHint(hint)).ConfigureAwait(false);
+
+            //LoadFormsApplication();
         }
 
         protected virtual object GetAppStartHint(object hint = null)

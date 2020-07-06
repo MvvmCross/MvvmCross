@@ -8,10 +8,10 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Views
 {
-    public interface IMvxViewDispatcher : IMvxMainThreadAsyncDispatcher, IMvxMainThreadDispatcher
+    public interface IMvxViewDispatcher : IMvxMainThreadDispatcher
     {
-        Task<bool> ShowViewModel(MvxViewModelRequest request);
+        ValueTask<bool> ShowViewModel(MvxViewModelRequest request);
 
-        Task<bool> ChangePresentation(MvxPresentationHint hint);
+        ValueTask<bool> ChangePresentation(MvxPresentationHint hint);
     }
 }

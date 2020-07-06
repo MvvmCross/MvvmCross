@@ -9,7 +9,7 @@ using MvvmCross.Base;
 namespace MvvmCross.UnitTest.Mocks.Dispatchers
 {
     public class CallbackMockMainThreadDispatcher
-        : MvxMainThreadAsyncDispatcher
+        : MvxMainThreadDispatcher
     {
         private readonly Func<Action, bool> _callback;
 
@@ -20,10 +20,22 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
 
         public override bool IsOnMainThread => true;
 
-        public override ValueTask<bool> RequestMainThreadAction(Action action,
-                                                    bool maskExceptions = true)
+        public override void ExecuteOnMainThread(Action action, bool maskExceptions = true)
         {
-            return new ValueTask<bool>(_callback(()=>ExceptionMaskedAction(action, maskExceptions)));
+            _callback(() =>
+            {
+                ExceptionMaskedAction(action, maskExceptions);
+            });
+        }
+
+        public override ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
+        {
+            _callback(async () =>
+            {
+                await ExceptionMaskedActionAsync(action, maskExceptions).ConfigureAwait(false);
+            });
+
+            return new ValueTask();
         }
     }
 }

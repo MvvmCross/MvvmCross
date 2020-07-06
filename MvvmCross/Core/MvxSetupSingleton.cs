@@ -39,8 +39,8 @@ namespace MvvmCross.Core
     public abstract class MvxSetupSingleton
        : MvxSingleton<MvxSetupSingleton>
     {
-        private static readonly object LockObject = new object();
-        private static TaskCompletionSource<bool> IsInitialisedTaskCompletionSource;
+        //private static readonly object LockObject = new object();
+        //private static TaskCompletionSource<bool> IsInitialisedTaskCompletionSource;
         private IMvxSetup _setup;
         private IMvxSetupMonitor _currentMonitor;
 
@@ -78,11 +78,15 @@ namespace MvvmCross.Core
         {
             // Double null - check before creating the setup singleton object
             if (Instance != null)
-                return Instance as TMvxSetupSingleton;
-            lock (LockObject)
             {
-                if (Instance != null)
-                    return Instance as TMvxSetupSingleton;
+                return Instance as TMvxSetupSingleton;
+            }
+            else
+            {
+                //lock (LockObject)
+                //{
+                //    if (Instance != null)
+                //        return Instance as TMvxSetupSingleton;
 
                 // Go ahead and create the setup singleton, and then
                 // create the setup instance. 
@@ -91,65 +95,66 @@ namespace MvvmCross.Core
                 var instance = new TMvxSetupSingleton();
                 instance.CreateSetup();
                 return Instance as TMvxSetupSingleton;
+                //}
             }
         }
 
-        public virtual async Task EnsureInitialized()
+        public virtual Task EnsureInitialized()
         {
-            lock (LockObject)
-            {
-                if (IsInitialisedTaskCompletionSource == null)
-                {
-                    StartSetupInitialization();
-                }
-                else
-                {
-                    if (IsInitialisedTaskCompletionSource.Task.IsCompleted)
-                    {
-                        if (IsInitialisedTaskCompletionSource.Task.IsFaulted)
-                            throw IsInitialisedTaskCompletionSource.Task.Exception;
-                        return;
-                    }
+            //lock (LockObject)
+            //{
+            //    if (IsInitialisedTaskCompletionSource == null)
+            //    {
+                    return StartSetupInitialization();
+            //    }
+            //    else
+            //    {
+            //        if (IsInitialisedTaskCompletionSource.Task.IsCompleted)
+            //        {
+            //            if (IsInitialisedTaskCompletionSource.Task.IsFaulted)
+            //                throw IsInitialisedTaskCompletionSource.Task.Exception;
+            //            return;
+            //        }
 
-                    MvxLog.Instance.Trace("EnsureInitialized has already been called so now waiting for completion");
-                }
-            }
-            await IsInitialisedTaskCompletionSource.Task.ConfigureAwait(true);
+            //        MvxLog.Instance.Trace("EnsureInitialized has already been called so now waiting for completion");
+            //    }
+            //}
+            //await IsInitialisedTaskCompletionSource.Task.ConfigureAwait(true);
         }
 
         public virtual void InitializeAndMonitor(IMvxSetupMonitor setupMonitor)
         {
-            lock (LockObject)
-            {
+            //lock (LockObject)
+            //{
                 _currentMonitor = setupMonitor;
 
-                // if the tcs is not null, it means the initialization is running
-                if (IsInitialisedTaskCompletionSource != null)
-                {
-                    // If the task is already completed at this point, let the monitor know it has finished. 
-                    // but don't do it otherwise because it's done elsewhere
-                    if (IsInitialisedTaskCompletionSource.Task.IsCompleted)
-                    {
-                        _currentMonitor?.InitializationComplete();
-                    }
+                //// if the tcs is not null, it means the initialization is running
+                //if (IsInitialisedTaskCompletionSource != null)
+                //{
+                //    // If the task is already completed at this point, let the monitor know it has finished. 
+                //    // but don't do it otherwise because it's done elsewhere
+                //    if (IsInitialisedTaskCompletionSource.Task.IsCompleted)
+                //    {
+                //        _currentMonitor?.InitializationComplete();
+                //    }
 
-                    return;
-                }
+                //    return;
+                //}
 
                 StartSetupInitialization();
-            }
+            //}
         }
 
         public virtual void CancelMonitor(IMvxSetupMonitor setupMonitor)
         {
-            lock (LockObject)
-            {
+            //lock (LockObject)
+            //{
                 if (setupMonitor != _currentMonitor)
                 {
                     throw new MvxException("The specified IMvxSetupMonitor is not the one registered in MvxSetupSingleton");
                 }
                 _currentMonitor = null;
-            }
+            //}
         }
 
         protected virtual void CreateSetup()
@@ -168,55 +173,55 @@ namespace MvvmCross.Core
         {
             if (isDisposing)
             {
-                lock (LockObject)
-                {
+                //lock (LockObject)
+                //{
                     _currentMonitor = null;
-                }
+                //}
             }
             base.Dispose(isDisposing);
         }
 
-        private void StartSetupInitialization()
+        private async Task StartSetupInitialization()
         {
-            IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
-            _setup.InitializePrimary();
-            Task.Run(async () =>
+            //IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
+            await _setup.InitializePrimary().ConfigureAwait(false);
+            await Task.Run(async () =>
             {
                 ExceptionDispatchInfo setupException = null;
                 try
                 {
-                    _setup.InitializeSecondary();
+                    await _setup.InitializeSecondary().ConfigureAwait(false);
                 }
                 catch(Exception ex)
                 {
                     setupException = ExceptionDispatchInfo.Capture(ex);
                 }
                 IMvxSetupMonitor monitor;
-                lock (LockObject)
-                {
-                    if (setupException == null)
-                    {
-                        IsInitialisedTaskCompletionSource.SetResult(true);
-                    }
-                    else
-                    {
-                        IsInitialisedTaskCompletionSource.SetException(setupException.SourceException);
-                    }
+                //lock (LockObject)
+                //{
+                    //if (setupException == null)
+                    //{
+                    //    IsInitialisedTaskCompletionSource.SetResult(true);
+                    //}
+                    //else
+                    //{
+                    //    IsInitialisedTaskCompletionSource.SetException(setupException.SourceException);
+                    //}
                     monitor = _currentMonitor;
-                }
+                //}
 
                 if (monitor != null)
                 {
-                    var dispatcher = Mvx.IoCProvider.GetSingleton<IMvxMainThreadAsyncDispatcher>();
+                    var dispatcher = Mvx.IoCProvider.GetSingleton<IMvxMainThreadDispatcher>();
                     await dispatcher.ExecuteOnMainThreadAsync(async () =>
                     {
                         if (monitor != null)
                         {
                             await monitor.InitializationComplete().ConfigureAwait(true);
                         }
-                    }).ConfigureAwait(true);
+                    }).ConfigureAwait(false);
                 }
-            });
+            }).ConfigureAwait(false);
         }
     }
 }

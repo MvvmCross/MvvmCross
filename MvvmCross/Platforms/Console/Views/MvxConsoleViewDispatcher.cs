@@ -11,29 +11,35 @@ using MvvmCross.Views;
 namespace MvvmCross.Platforms.Console.Views
 {
     public class MvxConsoleViewDispatcher
-        : MvxMainThreadAsyncDispatcher
+        : MvxMainThreadDispatcher
         , IMvxViewDispatcher
     {
-        public override bool IsOnMainThread => throw new NotImplementedException();
+        public override bool IsOnMainThread => true;
 
-        public override ValueTask<bool> RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override void ExecuteOnMainThread(Action action, bool maskExceptions = true)
         {
-            ExceptionMaskedAction(action, maskExceptions);
+            ExecuteOnMainThread(action);
+        }
+
+        public override ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
+        {
+            return ExceptionMaskedActionAsync(action, maskExceptions);
+        }
+
+        public ValueTask<bool> ShowViewModel(MvxViewModelRequest request)
+        {
+            var navigation = Mvx.IoCProvider.Resolve<IMvxConsoleNavigation>();
+            ExecuteOnMainThread(() => navigation.Show(request));
+
             return new ValueTask<bool>(true);
         }
 
-        public async Task<bool> ShowViewModel(MvxViewModelRequest request)
+        public ValueTask<bool> ChangePresentation(MvxPresentationHint hint)
         {
             var navigation = Mvx.IoCProvider.Resolve<IMvxConsoleNavigation>();
-            await ExecuteOnMainThreadAsync(() => navigation.Show(request)).ConfigureAwait(false);
-            return true;
-        }
+            ExecuteOnMainThread(() => navigation.ChangePresentation(hint));
 
-        public async Task<bool> ChangePresentation(MvxPresentationHint hint)
-        {
-            var navigation = Mvx.IoCProvider.Resolve<IMvxConsoleNavigation>();
-            await ExecuteOnMainThreadAsync(() => navigation.ChangePresentation(hint)).ConfigureAwait(false);
-            return true;
+            return new ValueTask<bool>(true);
         }
     }
 }

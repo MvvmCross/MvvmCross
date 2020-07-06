@@ -200,7 +200,7 @@ namespace Playground.Core.ViewModels
         {
             Log.Warn(() => "Testing log");
 
-            await base.Initialize();
+            await base.Initialize().ConfigureAwait(false);
 
             // Uncomment this to demonstrate use of StartAsync for async first navigation
             // await Task.Delay(5000);
@@ -213,7 +213,7 @@ namespace Playground.Core.ViewModels
                 },
                 null);
 
-            await MakeRequest();
+            await MakeRequest().ConfigureAwait(false);
         }
 
         public override void ViewAppearing()

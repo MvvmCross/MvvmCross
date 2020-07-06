@@ -22,25 +22,25 @@ namespace MvvmCross.Platforms.Mac.Views
             _presenter = presenter;
         }
 
-        public async Task<bool> ShowViewModel(MvxViewModelRequest request)
+        public async ValueTask<bool> ShowViewModel(MvxViewModelRequest request)
         {
-            Func<Task> action = () =>
+            await ExecuteOnMainThreadAsync(async () =>
             {
                 MvxLog.Instance.Trace("MacNavigation", "Navigate requested");
-                return _presenter.Show(request);
-            };
-            await ExecuteOnMainThreadAsync(action).ConfigureAwait(false);
+                await _presenter.Show(request).ConfigureAwait(false);
+            }).ConfigureAwait(false);
+
             return true;
         }
 
-        public async Task<bool> ChangePresentation(MvxPresentationHint hint)
+        public async ValueTask<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            Func<Task> action = () =>
-                                {
-                                    MvxLog.Instance.Trace("MacNavigation", "Change presentation requested");
-                                    return _presenter.ChangePresentation(hint);
-                                };
-            await ExecuteOnMainThreadAsync(action).ConfigureAwait(false);
+            await ExecuteOnMainThreadAsync(async () =>
+            {
+                MvxLog.Instance.Trace("MacNavigation", "Change presentation requested");
+                await _presenter.ChangePresentation(hint).ConfigureAwait(false);
+            }).ConfigureAwait(false);
+
             return true;
         }
     }

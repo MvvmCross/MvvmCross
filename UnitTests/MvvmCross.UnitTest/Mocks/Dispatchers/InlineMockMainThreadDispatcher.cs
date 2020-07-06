@@ -9,15 +9,18 @@ using MvvmCross.Base;
 namespace MvvmCross.UnitTest.Mocks.Dispatchers
 {
     public class InlineMockMainThreadDispatcher
-        : MvxMainThreadAsyncDispatcher
+        : MvxMainThreadDispatcher
     {
         public override bool IsOnMainThread => true;
 
-        public override ValueTask<bool> RequestMainThreadAction(Action action, 
-            bool maskExceptions = true)
+        public override void ExecuteOnMainThread(Action action, bool maskExceptions = true)
         {
             ExceptionMaskedAction(action, maskExceptions);
-            return new ValueTask<bool>(true);
+        }
+
+        public override ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
+        {
+            return ExceptionMaskedActionAsync(action, maskExceptions);
         }
     }
 }

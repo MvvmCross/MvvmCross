@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 using MvvmCross.Plugin;
 using MvvmCross.Logging;
 using System;
@@ -13,8 +14,8 @@ namespace MvvmCross.Core
 {
     public interface IMvxSetup
     {
-        void InitializePrimary();
-        void InitializeSecondary();
+        ValueTask InitializePrimary();
+        ValueTask InitializeSecondary();
 
         IEnumerable<Assembly> GetViewAssemblies();
         IEnumerable<Assembly> GetViewModelAssemblies();

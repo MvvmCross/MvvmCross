@@ -12,7 +12,7 @@ using MvvmCross.Exceptions;
 namespace MvvmCross.Platforms.Mac.Views
 {
     public abstract class MvxMacUIThreadDispatcher
-        : MvxMainThreadAsyncDispatcher
+        : MvxMainThreadDispatcher
     {
         private readonly SynchronizationContext _uiSynchronizationContext;
 
@@ -23,18 +23,36 @@ namespace MvvmCross.Platforms.Mac.Views
                 throw new MvxException("SynchronizationContext must not be null - check to make sure Dispatcher is created on UI thread");
         }
 
-        public override ValueTask<bool> RequestMainThreadAction(Action action,
-            bool maskExceptions = true)
+        public override void ExecuteOnMainThread(Action action, bool maskExceptions = true)
         {
             if (IsOnMainThread)
+            {
                 ExceptionMaskedAction(action, maskExceptions);
+            }
             else
+            {
                 NSApplication.SharedApplication.BeginInvokeOnMainThread(() =>
                 {
                     ExceptionMaskedAction(action, maskExceptions);
                 });
+            }
+        }
 
-            return new ValueTask<bool>(true);
+        public override ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
+        {
+            if (IsOnMainThread)
+            {
+                return ExceptionMaskedActionAsync(action, maskExceptions);
+            }
+            else
+            {
+                NSApplication.SharedApplication.BeginInvokeOnMainThread(async () =>
+                {
+                    await ExceptionMaskedActionAsync(action, maskExceptions).ConfigureAwait(false);
+                });
+
+                return new ValueTask();
+            }
         }
 
         public override bool IsOnMainThread => _uiSynchronizationContext == SynchronizationContext.Current;

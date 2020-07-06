@@ -9,14 +9,14 @@ namespace MvvmCross.Base
 {
     public abstract class MvxMainThreadDispatchingObject
     {
-        protected IMvxMainThreadAsyncDispatcher AsyncDispatcher => MvxMainThreadDispatcher.Instance as IMvxMainThreadAsyncDispatcher;
+        protected IMvxMainThreadDispatcher AsyncDispatcher => MvxMainThreadDispatcher.Instance as IMvxMainThreadDispatcher;
 
         protected void InvokeOnMainThread(Action action, bool maskExceptions = true)
         {
-            InvokeOnMainThreadAsync(action, maskExceptions);
+            InvokeOnMainThread(action, maskExceptions);
         }
 
-        protected Task InvokeOnMainThreadAsync(Action action, bool maskExceptions = true)
+        protected ValueTask InvokeOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
         {
             // this corner case should only happen when there is no IoC
             // i.e. when running in a UnitTest environment, falling back
@@ -25,15 +25,13 @@ namespace MvvmCross.Base
             {
                 try
                 {
-                    action();
+                    return action();
                 }
                 catch
                 {
                     if (!maskExceptions)
                         throw;
                 }
-                
-                return Task.CompletedTask;
             }
 
             return AsyncDispatcher.ExecuteOnMainThreadAsync(action, maskExceptions);

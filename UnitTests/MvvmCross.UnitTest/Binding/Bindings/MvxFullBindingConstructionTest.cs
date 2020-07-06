@@ -82,7 +82,7 @@ namespace MvvmCross.UnitTest.Binding.Bindings
         private void TestCommon(MvxBindingMode bindingMode, bool expectSourceBinding, bool expectTargetBinding)
         {
             _fixture.ClearAll();
-            _fixture.Ioc.RegisterSingleton<IMvxMainThreadAsyncDispatcher>(new InlineMockMainThreadDispatcher());
+            _fixture.Ioc.RegisterSingleton<IMvxMainThreadDispatcher>(new InlineMockMainThreadDispatcher());
 
             var mockSourceBindingFactory = new Mock<IMvxSourceBindingFactory>();
             _fixture.Ioc.RegisterSingleton(mockSourceBindingFactory.Object);

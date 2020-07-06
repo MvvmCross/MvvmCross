@@ -13,7 +13,7 @@ namespace MvvmCross.ViewModels
     /// </summary>
     public sealed class MvxNotifyTask : INotifyPropertyChanged
     {
-        private Action<Exception> _onException;
+        private readonly Action<Exception> _onException;
 
         /// <summary>
         /// Initializes a task notifier watching the specified task.
@@ -32,7 +32,7 @@ namespace MvvmCross.ViewModels
             try
             {
                 await Task.Yield();
-                await task.ConfigureAwait(false);
+                await task.ConfigureAwait(true);
             }
             catch(Exception e)
             {
@@ -187,7 +187,7 @@ namespace MvvmCross.ViewModels
         /// </summary>
         private readonly TResult _defaultResult;
 
-        private Action<Exception> _onException;
+        private readonly Action<Exception> _onException;
 
         /// <summary>
         /// Initializes a task notifier watching the specified task.
@@ -208,7 +208,7 @@ namespace MvvmCross.ViewModels
             try
             {
                 await System.Threading.Tasks.Task.Yield();
-                await task;
+                await task.ConfigureAwait(true);
             }
             catch(Exception e)
             {

@@ -10,7 +10,7 @@ using MvvmCross.Base;
 namespace MvvmCross.Platforms.Wpf.Views
 {
     public class MvxWpfUIThreadDispatcher
-        : MvxMainThreadAsyncDispatcher
+        : MvxMainThreadDispatcher
     {
         private readonly Dispatcher _dispatcher;
 
@@ -21,7 +21,7 @@ namespace MvvmCross.Platforms.Wpf.Views
 
         public override bool IsOnMainThread => _dispatcher.CheckAccess();
 
-        public override ValueTask<bool> RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public override void ExecuteOnMainThread(Action action, bool maskExceptions = true)
         {
             if (IsOnMainThread)
             {
@@ -34,9 +34,37 @@ namespace MvvmCross.Platforms.Wpf.Views
                     ExceptionMaskedAction(action, maskExceptions);
                 });
             }
+        }
 
-            // TODO - why return bool at all?
-            return new ValueTask<bool>(true);
+        public override async ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
+        {
+            if (IsOnMainThread)
+            {
+                await ExceptionMaskedActionAsync(action, maskExceptions).ConfigureAwait(true);
+            }
+            else
+            {
+                var doSomething = _dispatcher.Invoke<ValueTask>(() =>
+                {
+                    return ExceptionMaskedActionAsync(action, maskExceptions);
+                });
+
+                await doSomething;
+
+                //Action aa = () =>
+                //{
+
+                //};
+
+                //await _dispatcher.BeginInvoke(DispatcherPriority.Normal, aa);
+
+                //var doSomething = _dispatcher.InvokeAsync<ValueTask>(() =>
+                //{
+                //    return ExceptionMaskedActionAsync(action, maskExceptions);
+                //});
+
+                //doSomething.Wait();
+            }
         }
     }
 }

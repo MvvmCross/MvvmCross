@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.Platforms.Uap.Views
 {
-    public class MvxWindowsMainThreadDispatcher : MvxMainThreadAsyncDispatcher
+    public class MvxWindowsMainThreadDispatcher : MvxMainThreadDispatcher
     {
         private readonly CoreDispatcher _uiDispatcher;
 
@@ -20,20 +20,32 @@ namespace MvvmCross.Platforms.Uap.Views
 
         public override bool IsOnMainThread => _uiDispatcher.HasThreadAccess;
 
-        public override async ValueTask<bool> RequestMainThreadAction(Action action, bool maskExceptions = true)
+        public async override void ExecuteOnMainThread(Action action, bool maskExceptions = true)
         {
             if (IsOnMainThread)
             {
                 ExceptionMaskedAction(action, maskExceptions);
-                return true;
+                return;
             }
 
-            await _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => 
+            await _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 ExceptionMaskedAction(action, maskExceptions);
             });
+        }
 
-            return true;
+        public override async ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
+        {
+            if (IsOnMainThread)
+            {
+                await ExceptionMaskedActionAsync(action, maskExceptions).ConfigureAwait(false);
+            }
+
+            await _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            {
+                await ExceptionMaskedActionAsync(action, maskExceptions).ConfigureAwait(false);
+            });
+
         }
     }
 }

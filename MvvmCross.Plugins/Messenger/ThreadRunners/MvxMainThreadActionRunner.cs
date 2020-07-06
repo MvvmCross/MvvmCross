@@ -19,7 +19,7 @@ namespace MvvmCross.Plugin.Messenger.ThreadRunners
                 MvxPluginLog.Instance.Warn("Not able to deliver message - no ui thread dispatcher available");
                 return;
             }
-            dispatcher.RequestMainThreadAction(action);
+            dispatcher.ExecuteOnMainThread(action);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Playground.Core.ViewModels
             {
                 Message = "This returned correctly",
                 Value = 5.67m
-            }));
+            }).ConfigureAwait(false));
 
             ShowSecondChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SecondChildViewModel>().ConfigureAwait(false));
 
@@ -63,11 +63,11 @@ namespace Playground.Core.ViewModels
             base.ReloadFromBundle(state);
         }
 
-        public override async System.Threading.Tasks.Task Initialize()
+        public override async Task Initialize()
         {
-            await base.Initialize();
+            await base.Initialize().ConfigureAwait(false);
 
-            await Task.Delay(8500);
+            await Task.Delay(8500).ConfigureAwait(false);
         }
 
         public void Init()
@@ -91,7 +91,7 @@ namespace Playground.Core.ViewModels
 
             Task.Run(async () =>
             {
-                await Task.Delay(1000);
+                await Task.Delay(1000).ConfigureAwait(false);
                 BrokenTextValue = "This will throw exception in UI layer";
                 AnotherBrokenTextValue = "This will throw exception in page";
             });
