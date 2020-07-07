@@ -549,10 +549,10 @@ namespace MvvmCross.Platforms.Ios.Presenters
             MasterNavigationController = null;
         }
 
-        public virtual Task<bool> CloseModalViewController(UIViewController viewController, MvxModalPresentationAttribute attribute)
+        public virtual async Task<bool> CloseModalViewController(UIViewController viewController, MvxModalPresentationAttribute attribute)
         {
             if (viewController == null)
-                return Task.FromResult(true);
+                return true;
 
             if (viewController is UINavigationController modalNavController)
             {
@@ -560,9 +560,9 @@ namespace MvvmCross.Platforms.Ios.Presenters
                     item.DidMoveToParentViewController(null);
             }
 
-            viewController.DismissViewController(attribute.Animated, null);
+            await viewController.DismissViewControllerAsync(attribute.Animated);
             ModalViewControllers.Remove(viewController);
-            return Task.FromResult(true);
+            return true;
         }
 
         public virtual async Task<bool> CloseModalViewControllers()
