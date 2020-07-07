@@ -30,8 +30,6 @@ namespace MvvmCross.Forms.Platforms.Wpf.Views
             Initialized += MvxWindow_Initialized;
 
             Xamarin.Forms.Forms.Init();
-            //RunAppStart().GetAwaiter().GetResult();
-
             MvxWpfSetupSingleton.EnsureSingletonAvailable(Dispatcher, this).EnsureInitialized().GetAwaiter().GetResult();
         }
 
@@ -41,21 +39,15 @@ namespace MvvmCross.Forms.Platforms.Wpf.Views
             //    {
             //        (System.Windows.Application.Current as MvvmCross.Platforms.Wpf.Views.MvxApplication).ApplicationInitialized();
             //    }
-
-            //    LoadFormsApplication();
             await RunAppStart(e).ConfigureAwait(false);
         }
 
         protected virtual async Task RunAppStart(object hint = null)
         {
-            //await MvxWpfSetupSingleton.EnsureSingletonAvailable(Dispatcher, this).EnsureInitialized().ConfigureAwait(false);
-
             LoadFormsApplication();
 
             if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
                 await startup.Start(GetAppStartHint(hint)).ConfigureAwait(false);
-
-            //LoadFormsApplication();
         }
 
         protected virtual object GetAppStartHint(object hint = null)

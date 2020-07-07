@@ -18,7 +18,7 @@ namespace MvvmCross.Plugin.Location.Platforms.Uap
             EnsureStopped();
         }
 
-        protected override void PlatformSpecificStart(MvxLocationOptions options)
+        protected override ValueTask PlatformSpecificStart(MvxLocationOptions options)
         {
             if (_geolocator != null)
                 throw new MvxException("You cannot start the MvxLocation service more than once");
@@ -32,6 +32,8 @@ namespace MvvmCross.Plugin.Location.Platforms.Uap
 
             _geolocator.StatusChanged += OnStatusChanged;
             _geolocator.PositionChanged += OnPositionChanged;
+
+            return new ValueTask();
         }
 
         public override async ValueTask<MvxGeoLocation> GetCurrentLocation()

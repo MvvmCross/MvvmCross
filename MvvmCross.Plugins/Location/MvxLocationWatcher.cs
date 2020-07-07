@@ -66,7 +66,7 @@ namespace MvvmCross.Plugin.Location
 
         public MvxGeoLocation LastSeenLocation { get; protected set; }
 
-        protected abstract void PlatformSpecificStart(MvxLocationOptions options);
+        protected abstract ValueTask PlatformSpecificStart(MvxLocationOptions options);
 
         protected abstract void PlatformSpecificStop();
 

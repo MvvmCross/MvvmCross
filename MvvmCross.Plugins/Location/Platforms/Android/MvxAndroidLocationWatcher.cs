@@ -31,7 +31,7 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
 
         private Context Context => _context ?? (_context = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext);
 
-        protected override void PlatformSpecificStart(MvxLocationOptions options)
+        protected override ValueTask PlatformSpecificStart(MvxLocationOptions options)
         {
             if (_locationManager != null)
                 throw new MvxException("You cannot start the MvxLocation service more than once");
@@ -41,7 +41,7 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
             {
                 MvxPluginLog.Instance.Warn("Location Service Manager unavailable - returned null");
                 SendError(MvxLocationErrorCode.ServiceUnavailable);
-                return;
+                return new ValueTask();
             }
             var criteria = new Criteria()
             {
@@ -52,7 +52,7 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
             {
                 MvxPluginLog.Instance.Warn("Location Service Provider unavailable - returned null");
                 SendError(MvxLocationErrorCode.ServiceUnavailable);
-                return;
+                return new ValueTask();
             }
 
             _locationManager.RequestLocationUpdates(
@@ -64,6 +64,8 @@ namespace MvvmCross.Plugin.Location.Platforms.Android
             Permission = _locationManager.IsProviderEnabled(_bestProvider)
                 ? MvxLocationPermission.Granted
                 : MvxLocationPermission.Denied;
+
+            return new ValueTask();
         }
 
         protected override void PlatformSpecificStop()

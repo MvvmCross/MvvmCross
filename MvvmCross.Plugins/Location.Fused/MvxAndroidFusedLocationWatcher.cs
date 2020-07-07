@@ -20,12 +20,12 @@ namespace MvvmCross.Plugin.Location.Fused
         private Context Context => _context ?? (_context = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext);
         private FusedLocationHandler _locationHandler;
 
-		protected override void PlatformSpecificStart(MvxLocationOptions options)
+		protected override ValueTask PlatformSpecificStart(MvxLocationOptions options)
 		{
 			if (_locationHandler == null)
 				_locationHandler = new FusedLocationHandler(this, Context);
             
-            _locationHandler.StartAsync(options).GetAwaiter();
+            return new ValueTask(_locationHandler.StartAsync(options));
 		}
 
         protected override void PlatformSpecificStop() => _locationHandler.StopAsync().GetAwaiter();

@@ -37,7 +37,7 @@ namespace MvvmCross.Plugin.Location.Platforms.Ios
             EnsureStopped();
         }
 
-        protected override void PlatformSpecificStart(MvxLocationOptions options)
+        protected override ValueTask PlatformSpecificStart(MvxLocationOptions options)
         {
             lock (this)
             {
@@ -78,6 +78,8 @@ namespace MvvmCross.Plugin.Location.Platforms.Ios
 
                 _locationManager.StartUpdatingLocation();
             }
+
+            return new ValueTask();
         }
 
         public override ValueTask<MvxGeoLocation> GetCurrentLocation()
