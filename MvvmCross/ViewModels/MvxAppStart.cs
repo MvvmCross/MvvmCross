@@ -23,7 +23,7 @@ namespace MvvmCross.ViewModels
             NavigationService = navigationService;
         }
 
-        public async Task Start(object hint = null)
+        public async ValueTask Start(object hint = null)
         {
             // Check whether Start has commenced, and return if it has
             if (Interlocked.CompareExchange(ref startHasCommenced, 1, 0) == 1)
@@ -38,9 +38,9 @@ namespace MvvmCross.ViewModels
             await NavigateToFirstViewModel(applicationHint).ConfigureAwait(false);
         }
 
-        protected abstract Task NavigateToFirstViewModel(object hint = null);
+        protected abstract ValueTask NavigateToFirstViewModel(object hint = null);
 
-        protected virtual async Task<object> ApplicationStartup(object hint = null)
+        protected virtual async ValueTask<object> ApplicationStartup(object hint = null)
         {
             await Application.Startup().ConfigureAwait(false);
             return hint;
@@ -67,7 +67,7 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        protected override async Task NavigateToFirstViewModel(object hint = null)
+        protected override async ValueTask NavigateToFirstViewModel(object hint = null)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        protected override async Task<object> ApplicationStartup(object hint = null)
+        protected override async ValueTask<object> ApplicationStartup(object hint = null)
         {
             var applicationHint = await base.ApplicationStartup(hint).ConfigureAwait(false);
             if (applicationHint is TParameter parameter && Application is IMvxApplication<TParameter> typedApplication)
@@ -95,7 +95,7 @@ namespace MvvmCross.ViewModels
                 return applicationHint;
         }
 
-        protected override async Task NavigateToFirstViewModel(object hint = null)
+        protected override async ValueTask NavigateToFirstViewModel(object hint = null)
         {
             try
             {

@@ -19,7 +19,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
     {
         protected abstract Type HostWindowsPageType();
 
-        protected override async Task RunAppStart(IActivatedEventArgs activationArgs)
+        protected override async ValueTask RunAppStart(IActivatedEventArgs activationArgs)
         {
             if (RootFrame?.Content == null)
             {

@@ -21,7 +21,7 @@ namespace MvvmCross.Platforms.Wpf.Views
 
         public override bool IsOnMainThread => _dispatcher.CheckAccess();
 
-        public override void ExecuteOnMainThread(Action action, bool maskExceptions = true)
+        public override ValueTask ExecuteOnMainThread(Action action, bool maskExceptions = true)
         {
             if (IsOnMainThread)
             {
@@ -34,6 +34,8 @@ namespace MvvmCross.Platforms.Wpf.Views
                     ExceptionMaskedAction(action, maskExceptions);
                 });
             }
+
+            return new ValueTask();
         }
 
         public override async ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
@@ -49,21 +51,7 @@ namespace MvvmCross.Platforms.Wpf.Views
                     return ExceptionMaskedActionAsync(action, maskExceptions);
                 });
 
-                await doSomething;
-
-                //Action aa = () =>
-                //{
-
-                //};
-
-                //await _dispatcher.BeginInvoke(DispatcherPriority.Normal, aa);
-
-                //var doSomething = _dispatcher.InvokeAsync<ValueTask>(() =>
-                //{
-                //    return ExceptionMaskedActionAsync(action, maskExceptions);
-                //});
-
-                //doSomething.Wait();
+                await doSomething.ConfigureAwait(false);
             }
         }
     }

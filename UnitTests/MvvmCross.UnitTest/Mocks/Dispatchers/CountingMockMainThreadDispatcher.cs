@@ -15,10 +15,12 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
 
         public override bool IsOnMainThread => true;
 
-        public override void ExecuteOnMainThread(Action action, bool maskExceptions = true)
+        public override ValueTask ExecuteOnMainThread(Action action, bool maskExceptions = true)
         {
             ExceptionMaskedAction(action, maskExceptions);
             Count++;
+
+            return new ValueTask();
         }
 
         public override async ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)

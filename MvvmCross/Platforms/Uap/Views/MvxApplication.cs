@@ -63,7 +63,7 @@ namespace MvvmCross.Platforms.Uap.Views
             Window.Current.Activate();
         }
 
-        protected virtual async Task RunAppStart(IActivatedEventArgs activationArgs)
+        protected virtual async ValueTask RunAppStart(IActivatedEventArgs activationArgs)
         {
             var instance = MvxWindowsSetupSingleton.EnsureSingletonAvailable(RootFrame, ActivationArguments, nameof(Suspend));
             if (RootFrame.Content == null)

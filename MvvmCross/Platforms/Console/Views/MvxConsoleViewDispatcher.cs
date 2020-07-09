@@ -16,9 +16,9 @@ namespace MvvmCross.Platforms.Console.Views
     {
         public override bool IsOnMainThread => true;
 
-        public override void ExecuteOnMainThread(Action action, bool maskExceptions = true)
+        public override ValueTask ExecuteOnMainThread(Action action, bool maskExceptions = true)
         {
-            ExecuteOnMainThread(action);
+            return ExecuteOnMainThread(action);
         }
 
         public override ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
@@ -26,20 +26,20 @@ namespace MvvmCross.Platforms.Console.Views
             return ExceptionMaskedActionAsync(action, maskExceptions);
         }
 
-        public ValueTask<bool> ShowViewModel(MvxViewModelRequest request)
+        public async ValueTask<bool> ShowViewModel(MvxViewModelRequest request)
         {
             var navigation = Mvx.IoCProvider.Resolve<IMvxConsoleNavigation>();
-            ExecuteOnMainThread(() => navigation.Show(request));
+            await ExecuteOnMainThread(() => navigation.Show(request));
 
-            return new ValueTask<bool>(true);
+            return true;
         }
 
-        public ValueTask<bool> ChangePresentation(MvxPresentationHint hint)
+        public async ValueTask<bool> ChangePresentation(MvxPresentationHint hint)
         {
             var navigation = Mvx.IoCProvider.Resolve<IMvxConsoleNavigation>();
-            ExecuteOnMainThread(() => navigation.ChangePresentation(hint));
+            await ExecuteOnMainThread(() => navigation.ChangePresentation(hint));
 
-            return new ValueTask<bool>(true);
+            return true;
         }
     }
 }

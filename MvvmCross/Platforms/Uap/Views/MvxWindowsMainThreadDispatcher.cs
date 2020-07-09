@@ -20,7 +20,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         public override bool IsOnMainThread => _uiDispatcher.HasThreadAccess;
 
-        public async override void ExecuteOnMainThread(Action action, bool maskExceptions = true)
+        public override async ValueTask ExecuteOnMainThread(Action action, bool maskExceptions = true)
         {
             if (IsOnMainThread)
             {

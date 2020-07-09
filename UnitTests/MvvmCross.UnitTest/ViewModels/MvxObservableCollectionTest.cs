@@ -28,9 +28,11 @@ namespace MvvmCross.UnitTest.ViewModels
         {
             public bool IsOnMainThread => true;
 
-            public void ExecuteOnMainThread(Action action, bool maskExceptions = true)
+            public ValueTask ExecuteOnMainThread(Action action, bool maskExceptions = true)
             {
                 action();
+
+                return new ValueTask();
             }
 
             public ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)

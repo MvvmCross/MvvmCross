@@ -12,7 +12,7 @@ namespace MvvmCross.Base
     // IMvxMainThreadDispatcher, this interface should not inherit from IMvxMainThreadDispatcher
     public interface IMvxMainThreadDispatcher
     {
-        void ExecuteOnMainThread(Action action, bool maskExceptions = true);
+        ValueTask ExecuteOnMainThread(Action action, bool maskExceptions = true);
         ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true);
         bool IsOnMainThread { get; }
     }

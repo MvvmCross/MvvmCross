@@ -11,6 +11,9 @@ namespace MvvmCross.Base
     {
         protected IMvxMainThreadDispatcher AsyncDispatcher => MvxMainThreadDispatcher.Instance as IMvxMainThreadDispatcher;
 
+        // this corner case should only happen when there is no IoC
+        // i.e. when running in a UnitTest environment, falling back
+        // to just executing action
         protected void InvokeOnMainThread(Action action, bool maskExceptions = true)
         {
             if (AsyncDispatcher == null)
@@ -24,6 +27,8 @@ namespace MvvmCross.Base
                     if (!maskExceptions)
                         throw;
                 }
+
+                return;
             }
 
             AsyncDispatcher.ExecuteOnMainThread(action, maskExceptions);
@@ -31,6 +36,9 @@ namespace MvvmCross.Base
 
         protected ValueTask InvokeOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
         {
+            // this corner case should only happen when there is no IoC
+            // i.e. when running in a UnitTest environment, falling back
+            // to just executing action
             if (AsyncDispatcher == null)
             {
                 try
@@ -42,6 +50,8 @@ namespace MvvmCross.Base
                     if (!maskExceptions)
                         throw;
                 }
+
+                return new ValueTask();
             }
 
             return AsyncDispatcher.ExecuteOnMainThreadAsync(action, maskExceptions);

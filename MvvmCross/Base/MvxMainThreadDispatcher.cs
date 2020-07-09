@@ -14,7 +14,7 @@ namespace MvvmCross.Base
         : MvxSingleton<IMvxMainThreadDispatcher>,
         IMvxMainThreadDispatcher
     {
-        public abstract void ExecuteOnMainThread(Action action, bool maskExceptions = true);
+        public abstract ValueTask ExecuteOnMainThread(Action action, bool maskExceptions = true);
 
         public abstract ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true);
 

@@ -81,3 +81,6 @@ csharp_new_line_before_members_in_anonymous_types = true
 
 # Braces after if 
 csharp_prefer_braces = false
+
+#FxCop
+dotnet_code_quality.ca1000.api_surface = public

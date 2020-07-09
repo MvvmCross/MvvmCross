@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using MvvmCross.Exceptions;
 
 namespace MvvmCross.Base
@@ -24,26 +25,18 @@ namespace MvvmCross.Base
 
         protected abstract void Dispose(bool isDisposing);
 
-        private static readonly List<MvxSingleton> Singletons = new List<MvxSingleton>();
+        private static readonly ConcurrentBag<MvxSingleton> _singletons = new ConcurrentBag<MvxSingleton>();
 
         protected MvxSingleton()
         {
-            lock (Singletons)
-            {
-                Singletons.Add(this);
-            }
+            _singletons.Add(this);
         }
 
         public static void ClearAllSingletons()
         {
-            lock (Singletons)
+            while (_singletons.TryTake(out var s))
             {
-                foreach (var s in Singletons)
-                {
-                    s.Dispose();
-                }
-
-                Singletons.Clear();
+                s.Dispose();
             }
         }
     }

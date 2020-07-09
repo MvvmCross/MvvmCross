@@ -22,7 +22,7 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
 
         public bool IsOnMainThread => true;
 
-        public void ExecuteOnMainThread(Action action, bool maskExceptions = true)
+        public ValueTask ExecuteOnMainThread(Action action, bool maskExceptions = true)
         {
             try
             {
@@ -33,6 +33,8 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
                 if (!maskExceptions)
                     throw;
             }
+
+            return new ValueTask();
         }
 
         public async ValueTask ExecuteOnMainThreadAsync(Func<ValueTask> action, bool maskExceptions = true)
