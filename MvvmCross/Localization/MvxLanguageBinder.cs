@@ -12,6 +12,7 @@ namespace MvvmCross.Localization
     {
         private readonly string _namespaceName;
         private readonly string _typeName;
+        private readonly object _targetLocker = new object();
 
         public MvxLanguageBinder(Type owningObject)
             : this(owningObject.Namespace, owningObject.Name)
@@ -33,7 +34,7 @@ namespace MvvmCross.Localization
                 if (_cachedTextProvider != null)
                     return _cachedTextProvider;
 
-                lock (this)
+                lock (_targetLocker)
                 {
                     Mvx.IoCProvider.TryResolve(out _cachedTextProvider);
                     if (_cachedTextProvider == null)

@@ -16,10 +16,11 @@ namespace MvvmCross.Platforms.Console.Views
         : MvxBaseConsoleContainer
     {
         private readonly Stack<MvxViewModelRequest> _navigationStack = new Stack<MvxViewModelRequest>();
+        private readonly object _targetLocker = new object();
 
         public override Task<bool> Show(MvxViewModelRequest request)
         {
-            lock (this)
+            lock (_targetLocker)
             {
                 var viewType = GetViewType(request.ViewModelType);
                 if (viewType == null)
@@ -71,7 +72,7 @@ namespace MvvmCross.Platforms.Console.Views
 
         public override Task<bool> GoBack()
         {
-            lock (this)
+            lock (_targetLocker)
             {
                 if (!CanGoBack())
                 {
@@ -97,7 +98,7 @@ namespace MvvmCross.Platforms.Console.Views
 
         public override bool CanGoBack()
         {
-            lock (this)
+            lock (_targetLocker)
             {
                 if (_navigationStack.Count > 1)
                     return true;
