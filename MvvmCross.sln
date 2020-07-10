@@ -96,8 +96,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmCross.Plugins.ResxLocal
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projects", "Projects", "{3856C497-5206-4965-A701-0D90247829F7}"
 	ProjectSection(SolutionItems) = preProject
-		Projects\Directory.build.props = Projects\Directory.build.props
-		Projects\Directory.build.targets = Projects\Directory.build.targets
+		Projects\Directory.Build.props = Projects\Directory.Build.props
+		Projects\Directory.Build.targets = Projects\Directory.Build.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Playground", "Playground", "{5339E878-07CE-4A32-9BE3-C3C86388D6DE}"
