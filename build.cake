@@ -98,7 +98,7 @@ Task("Restore")
 Task("PatchBuildProps")
     .Does(() => 
 {
-    var buildProp = new FilePath("./Directory.build.props");
+    var buildProp = new FilePath("./Directory.Build.props");
     XmlPoke(buildProp, "//Project/PropertyGroup/Version", versionInfo.SemVer);
 });
 
