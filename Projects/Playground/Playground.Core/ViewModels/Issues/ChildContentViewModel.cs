@@ -17,7 +17,7 @@ namespace Playground.Core.ViewModels
             set { SetProperty(ref _test, value); }
         }
 
-        public override async Task Initialize()
+        public override async ValueTask Initialize()
         {
             //Test = "Bound Text";
             await Task.Yield();

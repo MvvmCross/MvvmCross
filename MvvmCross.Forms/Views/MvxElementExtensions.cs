@@ -38,7 +38,11 @@ namespace MvvmCross.Forms.Views
                 cached = cache.Get(element.FindAssociatedViewModelTypeOrNull());
             }
 
-            await element.OnViewCreate(async () => cached ?? await element.LoadViewModel().ConfigureAwait(false));
+            await element.OnViewCreate(async () =>
+                {
+                    return cached ?? await element.LoadViewModel().ConfigureAwait(false);
+                }
+            ).ConfigureAwait(false);
         }
 
         public static ValueTask OnBindingContextChanged(this IMvxElement element)

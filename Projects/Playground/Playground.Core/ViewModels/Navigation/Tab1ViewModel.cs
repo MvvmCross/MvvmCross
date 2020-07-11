@@ -26,7 +26,7 @@ namespace Playground.Core.ViewModels
             OpenTab2Command = new MvxAsyncCommand(async () => await NavigationService.ChangePresentation(new MvxPagePresentationHint(typeof(Tab2ViewModel))).ConfigureAwait(false));
         }
 
-        public override async Task Initialize()
+        public override async ValueTask Initialize()
         {
             await Task.Delay(3000).ConfigureAwait(false);
         }

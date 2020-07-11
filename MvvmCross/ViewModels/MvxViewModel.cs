@@ -75,9 +75,9 @@ namespace MvvmCross.ViewModels
             return new ValueTask();
         }
 
-        public virtual Task Initialize()
+        public virtual ValueTask Initialize()
         {
-            return Task.FromResult(true);
+            return new ValueTask();
         }
     }
 

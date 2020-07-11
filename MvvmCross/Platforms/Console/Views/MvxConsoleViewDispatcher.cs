@@ -29,7 +29,7 @@ namespace MvvmCross.Platforms.Console.Views
         public async ValueTask<bool> ShowViewModel(MvxViewModelRequest request)
         {
             var navigation = Mvx.IoCProvider.Resolve<IMvxConsoleNavigation>();
-            await ExecuteOnMainThread(() => navigation.Show(request));
+            await ExecuteOnMainThread(() => navigation.Show(request)).ConfigureAwait(false);
 
             return true;
         }
@@ -37,7 +37,7 @@ namespace MvvmCross.Platforms.Console.Views
         public async ValueTask<bool> ChangePresentation(MvxPresentationHint hint)
         {
             var navigation = Mvx.IoCProvider.Resolve<IMvxConsoleNavigation>();
-            await ExecuteOnMainThread(() => navigation.ChangePresentation(hint));
+            await ExecuteOnMainThread(() => navigation.ChangePresentation(hint)).ConfigureAwait(false);
 
             return true;
         }

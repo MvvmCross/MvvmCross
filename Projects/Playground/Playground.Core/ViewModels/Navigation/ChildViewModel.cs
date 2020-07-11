@@ -64,15 +64,11 @@ namespace Playground.Core.ViewModels
             base.ReloadFromBundle(state);
         }
 
-        public override async Task Initialize()
+        public override async ValueTask Initialize()
         {
             await base.Initialize().ConfigureAwait(false);
 
             await Task.Delay(8500).ConfigureAwait(false);
-        }
-
-        public void Init()
-        {
         }
 
         public override void Start()

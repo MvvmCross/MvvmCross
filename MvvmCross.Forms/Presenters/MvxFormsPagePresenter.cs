@@ -185,7 +185,7 @@ namespace MvvmCross.Forms.Presenters
                 if (hint is MvxPopToRootPresentationHint popToRootHint)
                 {
                     // Make sure all modals are closed
-                    await CloseAllModals(popToRootHint.Animated);
+                    await CloseAllModals(popToRootHint.Animated).ConfigureAwait(false);
 
                     // Double check we have a navigation page, otherwise
                     // we can just return as we must be already at the root page
@@ -193,16 +193,16 @@ namespace MvvmCross.Forms.Presenters
                         return true;
 
                     // Close all pages back to the root
-                    await navigation.PopToRootAsync(popToRootHint.Animated);
+                    await navigation.PopToRootAsync(popToRootHint.Animated).ConfigureAwait(false);
                     return true;
                 }
                 if (hint is MvxPopPresentationHint popHint)
                 {
-                    var matched = await PopModalToViewModel(navigation, popHint);
+                    var matched = await PopModalToViewModel(navigation, popHint).ConfigureAwait(false);
                     if (matched) return true;
 
 
-                    await PopToViewModel(navigation, popHint.ViewModelToPopTo, popHint.Animated);
+                    await PopToViewModel(navigation, popHint.ViewModelToPopTo, popHint.Animated).ConfigureAwait(false);
                     return true;
                 }
                 if (hint is MvxRemovePresentationHint removeHint)
@@ -234,9 +234,9 @@ namespace MvvmCross.Forms.Presenters
                     var levels = popRecursiveHint.LevelsDeep;
                     if (levels > navigation.NavigationStack.Count())
                         levels = navigation.NavigationStack.Count();
-                    for (int i = 0; i < levels; i++)
+                    for (var i = 0; i < levels; i++)
                     {
-                        await navigation.PopAsync(popRecursiveHint.Animated);
+                        await navigation.PopAsync(popRecursiveHint.Animated).ConfigureAwait(false);
                     }
 
                     return true;
@@ -278,12 +278,12 @@ namespace MvvmCross.Forms.Presenters
                 var modalNavPage = GetPageOfType<NavigationPage>(modalPage);
                 if (modalNavPage != null)
                 {
-                    var matched = await PopToViewModel(modalNavPage.Navigation, popHint.ViewModelToPopTo, popHint.Animated);
+                    var matched = await PopToViewModel(modalNavPage.Navigation, popHint.ViewModelToPopTo, popHint.Animated).ConfigureAwait(false);
                     if (matched)
                         return true;
                 }
 
-                await navigation.PopModalAsync();
+                await navigation.PopModalAsync().ConfigureAwait(false);
             }
 
             return false;
@@ -299,7 +299,7 @@ namespace MvvmCross.Forms.Presenters
 
                 if (navigation.NavigationStack.Count > 1)
                 {
-                    await navigation.PopAsync(animate);
+                    await navigation.PopAsync(animate).ConfigureAwait(false);
                 }
                 else
                 {
@@ -333,7 +333,7 @@ namespace MvvmCross.Forms.Presenters
             MvxCarouselPagePresentationAttribute? attribute,
             MvxViewModelRequest request)
         {
-            var page = await CloseAndCreatePage(view, request, attribute);
+            var page = await CloseAndCreatePage(view, request, attribute).ConfigureAwait(false);
 
             if (attribute.Position == CarouselPosition.Root)
             {
@@ -342,7 +342,7 @@ namespace MvvmCross.Forms.Presenters
                     throw new MvxException($"A root page should be of type {nameof(MvxCarouselPage)}");
                 }
 
-                await PushOrReplacePage(FormsApplication.MainPage, page, attribute);
+                await PushOrReplacePage(FormsApplication.MainPage, page, attribute).ConfigureAwait(false);
             }
             else
             {
@@ -351,7 +351,7 @@ namespace MvvmCross.Forms.Presenters
                 {
                     MvxFormsLog.Instance.Trace($"Current root is not a CarouselPage show your own first to use custom Host. Assuming we need to create one.");
                     carouselHost = new CarouselPage();
-                    await PushOrReplacePage(FormsApplication.MainPage, carouselHost, attribute);
+                    await PushOrReplacePage(FormsApplication.MainPage, carouselHost, attribute).ConfigureAwait(false);
                 }
                 carouselHost.Children.Add(page as ContentPage);
             }
@@ -437,7 +437,7 @@ namespace MvvmCross.Forms.Presenters
             MvxMasterDetailPagePresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            var page = await CloseAndCreatePage(view, request, attribute);
+            var page = await CloseAndCreatePage(view, request, attribute).ConfigureAwait(false);
 
             if (attribute.Position == MasterDetailPosition.Root)
             {
@@ -448,7 +448,7 @@ namespace MvvmCross.Forms.Presenters
                     if (masterDetailRoot.Detail == null)
                         masterDetailRoot.Detail = CreateContentPage().Build(cp => cp.Title = !string.IsNullOrEmpty(attribute.Title) ? attribute.Title : nameof(MvxMasterDetailPage));
 
-                    await PushOrReplacePage(FormsApplication.MainPage, page, attribute);
+                    await PushOrReplacePage(FormsApplication.MainPage, page, attribute).ConfigureAwait(false);
                 }
                 else
                     throw new MvxException($"A root page should be of type {nameof(MasterDetailPage)}");
@@ -471,16 +471,16 @@ namespace MvvmCross.Forms.Presenters
 
                     var masterDetailRootAttribute = new MvxMasterDetailPagePresentationAttribute { Position = MasterDetailPosition.Root, WrapInNavigationPage = attribute.WrapInNavigationPage, NoHistory = attribute.NoHistory };
 
-                    await PushOrReplacePage(FormsApplication.MainPage, masterDetailHost, masterDetailRootAttribute);
+                    await PushOrReplacePage(FormsApplication.MainPage, masterDetailHost, masterDetailRootAttribute).ConfigureAwait(false);
                 }
 
                 if (attribute.Position == MasterDetailPosition.Master)
                 {
-                    await PushOrReplacePage(masterDetailHost.Master, page, attribute);
+                    await PushOrReplacePage(masterDetailHost.Master, page, attribute).ConfigureAwait(false);
                 }
                 else
                 {
-                    await PushOrReplacePage(masterDetailHost.Detail, page, attribute);
+                    await PushOrReplacePage(masterDetailHost.Detail, page, attribute).ConfigureAwait(false);
                 }
             }
             return true;
@@ -523,13 +523,13 @@ namespace MvvmCross.Forms.Presenters
                 {
                     // Either last isn't a nav page, or there is no last page
                     // So, wrap the current page in a nav page and push onto stack
-                    await FormsApplication.MainPage.Navigation.PushModalAsync(CreateNavigationPage(page));
+                    await FormsApplication.MainPage.Navigation.PushModalAsync(CreateNavigationPage(page)).ConfigureAwait(false);
                 }
             }
             else
             {
                 // No navigation page required, so just push onto modal stack
-                await FormsApplication.MainPage.Navigation.PushModalAsync(page, attribute.Animated);
+                await FormsApplication.MainPage.Navigation.PushModalAsync(page, attribute.Animated).ConfigureAwait(false);
             }
             return true;
         }
@@ -539,11 +539,11 @@ namespace MvvmCross.Forms.Presenters
             var last = FormsApplication.MainPage.Navigation.ModalStack.LastOrDefault();
             if (last is NavigationPage navPage && navPage.Navigation.NavigationStack.Count > 1)
             {
-                await navPage.Navigation.PopAsync();
+                await navPage.Navigation.PopAsync().ConfigureAwait(false);
             }
             else
             {
-                await FormsApplication.MainPage.Navigation.PopModalAsync(attribute.Animated);
+                await FormsApplication.MainPage.Navigation.PopModalAsync(attribute.Animated).ConfigureAwait(false);
             }
 
             return true;
@@ -573,13 +573,13 @@ namespace MvvmCross.Forms.Presenters
             MvxTabbedPagePresentationAttribute? attribute,
             MvxViewModelRequest request)
         {
-            var page = await CloseAndCreatePage(view, request, attribute);
+            var page = await CloseAndCreatePage(view, request, attribute).ConfigureAwait(false);
 
             if (attribute.Position == TabbedPosition.Root)
             {
                 if (page is TabbedPage tabbedPageRoot)
                 {
-                    await PushOrReplacePage(FormsApplication.MainPage, page, attribute);
+                    await PushOrReplacePage(FormsApplication.MainPage, page, attribute).ConfigureAwait(false);
                 }
                 else
                     throw new MvxException($"A root page should be of type {nameof(TabbedPage)}");
@@ -591,7 +591,7 @@ namespace MvvmCross.Forms.Presenters
                 {
                     MvxFormsLog.Instance.Trace($"Current root is not a TabbedPage show your own first to use custom Host. Assuming we need to create one.");
                     tabHost = new TabbedPage();
-                    await PushOrReplacePage(FormsApplication.MainPage, tabHost, attribute);
+                    await PushOrReplacePage(FormsApplication.MainPage, tabHost, attribute).ConfigureAwait(false);
                 }
 
                 tabHost.Children.Add(page);
@@ -623,7 +623,7 @@ namespace MvvmCross.Forms.Presenters
             var navigation = FormsApplication.MainPage?.Navigation;
             while (navigation?.ModalStack.Any() ?? false)
             {
-                await navigation.PopModalAsync(animate);
+                await navigation.PopModalAsync(animate).ConfigureAwait(false);
             }
         }
 
@@ -640,7 +640,7 @@ namespace MvvmCross.Forms.Presenters
                 var nav = root?.Navigation;
                 if (nav != null)
                 {
-                    await nav.PopAsync(attribute.Animated);
+                    await nav.PopAsync(attribute.Animated).ConfigureAwait(false);
                 }
             }
             return true;
@@ -661,7 +661,7 @@ namespace MvvmCross.Forms.Presenters
             if (attribute.WrapInNavigationPage &&
                 navigationRootPage?.CurrentPage is NavigationPage navigationNestedPage)
             {
-                await PushOrReplacePage(navigationNestedPage, page, attribute);
+                await PushOrReplacePage(navigationNestedPage, page, attribute).ConfigureAwait(false);
                 return;
             }
 

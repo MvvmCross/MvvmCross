@@ -11,7 +11,7 @@ namespace Playground.Core.ViewModels
 {
     public class SharedElementRootChildViewModel : BaseViewModel
     {
-        public override Task Initialize()
+        public override ValueTask Initialize()
         {
             Items = new MvxObservableCollection<ListItemViewModel>
             {

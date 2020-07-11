@@ -199,7 +199,7 @@ namespace Playground.Core.ViewModels
 
         public string TotalTime { get; set; }
 
-        public override async Task Initialize()
+        public override async ValueTask Initialize()
         {
             Log.Warn(() => "Testing log");
 
@@ -208,13 +208,13 @@ namespace Playground.Core.ViewModels
             // Uncomment this to demonstrate use of StartAsync for async first navigation
             // await Task.Delay(5000);
 
-            _mvxViewModelLoader.LoadViewModel(MvxViewModelRequest.GetDefaultRequest(typeof(ChildViewModel)),
+            await _mvxViewModelLoader.LoadViewModel(MvxViewModelRequest.GetDefaultRequest(typeof(ChildViewModel)),
                 new SampleModel
                 {
                     Message = "From locator",
                     Value = 2
                 },
-                null);
+                null).ConfigureAwait(false);
 
             await MakeRequest().ConfigureAwait(false);
         }
