@@ -29,10 +29,10 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
             RunAppStart(e);
         }
 
-        protected virtual void RunAppStart(object hint = null)
+        protected virtual void RunAppStart(object? hint = null)
         {
             if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
-                startup.Start(GetAppStartHint(hint));
+                startup.Start(GetAppStartHint(hint)).GetAwaiter().GetResult();
 
             LoadFormsApplication();
         }

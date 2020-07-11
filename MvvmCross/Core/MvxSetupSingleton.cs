@@ -41,7 +41,7 @@ namespace MvvmCross.Core
     {
         private static readonly object _lockObject = new object();
         private IMvxSetup _setup;
-        private IMvxSetupMonitor _currentMonitor;
+        private IMvxSetupMonitor? _currentMonitor;
 
         protected virtual IMvxSetup Setup => _setup;
 
@@ -99,10 +99,13 @@ namespace MvvmCross.Core
             return StartSetupInitialization();
         }
 
-        public virtual async ValueTask InitializeAndMonitor(IMvxSetupMonitor setupMonitor)
+        public virtual async ValueTask InitializeAndMonitor(IMvxSetupMonitor? setupMonitor)
         {
             _currentMonitor = setupMonitor;
-            await _currentMonitor?.InitializationComplete();
+
+            if(_currentMonitor != null)
+                await _currentMonitor.InitializationComplete().ConfigureAwait(false);
+
             await StartSetupInitialization().ConfigureAwait(false);
         }
 

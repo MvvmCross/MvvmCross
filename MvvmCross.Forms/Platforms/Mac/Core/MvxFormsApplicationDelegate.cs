@@ -58,7 +58,7 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
         protected virtual void RunAppStart(object hint = null)
         {
             if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
-                startup.Start(GetAppStartHint(hint));
+                startup.Start(GetAppStartHint(hint)).GetAwaiter().GetResult();
 
             LoadFormsApplication();
         }

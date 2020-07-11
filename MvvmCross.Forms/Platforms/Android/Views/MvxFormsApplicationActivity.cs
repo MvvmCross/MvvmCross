@@ -111,7 +111,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
             InitializeForms(bundle);
 
             if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
-                startup.Start(GetAppStartHint(bundle));
+                startup.Start(GetAppStartHint(bundle)).GetAwaiter().GetResult();
 
             InitializeApplication();
         }

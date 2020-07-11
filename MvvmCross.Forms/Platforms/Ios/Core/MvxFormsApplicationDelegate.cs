@@ -37,12 +37,12 @@ namespace MvvmCross.Forms.Platforms.Ios.Core
         protected virtual void RunAppStart(object hint = null)
         {
             if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
-                startup.Start(GetAppStartHint(hint));
+                startup.Start(GetAppStartHint(hint)).GetAwaiter().GetResult();
 
             LoadFormsApplication();
         }
 
-        protected virtual object GetAppStartHint(object hint = null)
+        protected virtual object GetAppStartHint(object? hint = null)
         {
             return hint;
         }

@@ -23,7 +23,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         private Bundle _bundle;
 
-        public new MvxNullViewModel ViewModel
+        public new MvxNullViewModel? ViewModel
         {
             get { return base.ViewModel as MvxNullViewModel; }
             set { base.ViewModel = value; }
@@ -52,7 +52,7 @@ namespace MvvmCross.Platforms.Android.Views
             _bundle = bundle;
 
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.InitializeAndMonitor(this);
+            setup.InitializeAndMonitor(this).GetAwaiter().GetResult();
 
             base.OnCreate(bundle);
 
@@ -72,7 +72,7 @@ namespace MvvmCross.Platforms.Android.Views
             base.OnResume();
             _isResumed = true;
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.InitializeAndMonitor(this);
+            setup.InitializeAndMonitor(this).GetAwaiter().GetResult();
         }
 
         protected override void OnPause()
@@ -83,7 +83,7 @@ namespace MvvmCross.Platforms.Android.Views
             base.OnPause();
         }
 
-        public virtual async Task InitializationComplete()
+        public virtual async ValueTask InitializationComplete()
         {
             if (!_isResumed)
                 return;
@@ -106,7 +106,7 @@ namespace MvvmCross.Platforms.Android.Views
             }
         }
 
-        protected virtual object GetAppStartHint(object hint = null)
+        protected virtual object GetAppStartHint(object? hint = null)
         {
             return hint;
         }

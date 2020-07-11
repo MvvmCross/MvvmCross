@@ -68,7 +68,7 @@ namespace MvvmCross.Forms.Platforms.Android.Presenters
             if (hostViewModel != currentHostViewModelType)
             {
                 var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(hostViewModel);
-                Show(hostViewModelRequest);
+                Show(hostViewModelRequest).GetAwaiter().GetResult();
             }
             return true;
         }

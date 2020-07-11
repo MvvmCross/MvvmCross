@@ -17,9 +17,9 @@ namespace MvvmCross.Forms.Views
                 throw new ArgumentException("eventSource", "eventSource should be a IMvxElement");
         }
 
-        public override void HandleBindingContextChangedCalled(object sender, EventArgs e)
+        public override async void HandleBindingContextChangedCalled(object sender, EventArgs e)
         {
-            FormsView.OnBindingContextChanged();
+            await FormsView.OnBindingContextChanged().ConfigureAwait(false);
             base.HandleBindingContextChangedCalled(sender, e);
         }
     }

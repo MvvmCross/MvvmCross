@@ -17,9 +17,9 @@ namespace MvvmCross.Forms.Views
                 throw new ArgumentException("eventSource", "eventSource should be a IMvxCell");
         }
 
-        public override void HandleAppearingCalled(object sender, EventArgs e)
+        public override async void HandleAppearingCalled(object sender, EventArgs e)
         {
-            FormsView.OnViewAppearing();
+            await FormsView.OnViewAppearing().ConfigureAwait(false);
             base.HandleAppearingCalled(sender, e);
         }
     }

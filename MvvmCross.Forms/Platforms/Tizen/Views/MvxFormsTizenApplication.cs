@@ -56,7 +56,7 @@ namespace MvvmCross.Forms.Platforms.Tizen.Views
         {
             if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
             {
-                startup.Start();
+                startup.Start().GetAwaiter().GetResult();
             }
             LoadFormsApplication();
         }

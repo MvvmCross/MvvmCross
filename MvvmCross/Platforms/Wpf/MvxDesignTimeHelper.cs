@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -46,7 +46,7 @@ namespace MvvmCross.Platforms.Wpf
 
             MvxSetup.RegisterSetupType<MvxWpfSetup<App>>(System.Reflection.Assembly.GetExecutingAssembly());
             var instance = MvxWpfSetupSingleton.EnsureSingletonAvailable(Application.Current.Dispatcher, new Content());
-            instance.InitializeAndMonitor(null);
+            instance.InitializeAndMonitor(null).GetAwaiter().GetResult();
         }
 
         class App : ViewModels.MvxApplication
