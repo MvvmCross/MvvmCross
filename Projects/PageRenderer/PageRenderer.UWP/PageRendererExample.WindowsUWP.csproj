@@ -167,12 +167,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.3</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Forms">
-      <Version>2.5.0.280555</Version>
-    </PackageReference>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.10" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1080" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
