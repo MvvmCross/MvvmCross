@@ -43,14 +43,15 @@ namespace Playground.Core.ViewModels
                 throw new System.NotImplementedException();
         }
 
-        public override void Prepare()
+        public override ValueTask Prepare()
         {
-            base.Prepare();
+            return base.Prepare();
         }
 
-        public override void Prepare(SampleModel parameter)
+        public override ValueTask Prepare(SampleModel parameter)
         {
             _parameter = parameter;
+            return new ValueTask();
         }
 
         protected override void SaveStateToBundle(IMvxBundle bundle)

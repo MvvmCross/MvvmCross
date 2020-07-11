@@ -8,7 +8,7 @@ namespace MvvmCross.Logging
 {
     public interface IMvxLog
     {
-        bool Log(MvxLogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters);
+        bool Log(MvxLogLevel logLevel, Func<string>? messageFunc, Exception? exception = null, params object[] formatParameters);
 
         bool IsLogLevelEnabled(MvxLogLevel logLevel);
     }

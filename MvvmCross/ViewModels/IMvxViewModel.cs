@@ -21,30 +21,26 @@ namespace MvvmCross.ViewModels
 
         void ViewDestroy(bool viewFinishing = true);
 
-        void Init(IMvxBundle parameters);
+        void Init(IMvxBundle? parameters);
 
-        void ReloadState(IMvxBundle state);
+        void ReloadState(IMvxBundle? state);
 
         void Start();
 
-        void SaveState(IMvxBundle state);
+        void SaveState(IMvxBundle? state);
 
-        void Prepare();
-
-        Task Initialize();
-
-        MvxNotifyTask InitializeTask { get; set; }
+        ValueTask Prepare();
     }
 
     public interface IMvxViewModel<TParameter> : IMvxViewModel
     {
-        void Prepare(TParameter parameter);
+        ValueTask Prepare(TParameter parameter);
     }
 
     //TODO: Can we keep the IMvxViewModel syntax here? Compiler complains
     public interface IMvxViewModelResult<TResult> : IMvxViewModel
     {
-        TaskCompletionSource<object> CloseCompletionSource { get; set; }
+        TaskCompletionSource<object>? CloseCompletionSource { get; set; }
     }
 
     public interface IMvxViewModel<TParameter, TResult> : IMvxViewModel<TParameter>, IMvxViewModelResult<TResult>

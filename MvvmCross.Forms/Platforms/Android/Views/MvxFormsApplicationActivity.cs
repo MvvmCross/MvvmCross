@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Linq;
 using System.Reflection;
 using Android.Content;
 using Android.OS;
@@ -178,9 +179,8 @@ namespace MvvmCross.Forms.Platforms.Android.Views
             var presenter = Mvx.IoCProvider.Resolve<IMvxFormsPagePresenter>();
             var pages = presenter.CurrentPageTree;
 
-            for (var i = pages.Length - 1; i >= 0; i--)
+            foreach(var pg in pages.Reverse())
             {
-                var pg = pages[i];
                 if (pg is Xamarin.Forms.NavigationPage navPage)
                 {
                     if (pg.Navigation.ModalStack.Count > 0)

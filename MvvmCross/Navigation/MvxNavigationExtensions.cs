@@ -17,7 +17,7 @@ namespace MvvmCross.Navigation
         /// <param name="navigationService"></param>
         /// <param name="path">URI to route</param>
         /// <returns>True if the uri can be routed or false if it cannot.</returns>
-        public static Task<bool> CanNavigate(this IMvxNavigationService navigationService, Uri path)
+        public static ValueTask<bool> CanNavigate(this IMvxNavigationService navigationService, Uri path)
         {
             return navigationService.CanNavigate(path.ToString());
         }
@@ -30,22 +30,22 @@ namespace MvvmCross.Navigation
         /// <param name="presentationBundle"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>A task to await upon</returns>
-        public static Task Navigate(this IMvxNavigationService navigationService, Uri path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
+        public static ValueTask<bool> Navigate(this IMvxNavigationService navigationService, Uri path, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             return navigationService.Navigate(path.ToString(), presentationBundle, cancellationToken);
         }
 
-        public static Task Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
+        public static ValueTask<bool> Navigate<TParameter>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             return navigationService.Navigate<TParameter>(path.ToString(), param, presentationBundle, cancellationToken);
         }
 
-        public static Task Navigate<TResult>(this IMvxNavigationService navigationService, Uri path, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
+        public static ValueTask<TResult> Navigate<TResult>(this IMvxNavigationService navigationService, Uri path, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             return navigationService.Navigate<TResult>(path.ToString(), presentationBundle, cancellationToken);
         }
 
-        public static Task Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
+        public static ValueTask<TResult> Navigate<TParameter, TResult>(this IMvxNavigationService navigationService, Uri path, TParameter param, IMvxBundle? presentationBundle = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             return navigationService.Navigate<TParameter, TResult>(path.ToString(), param, presentationBundle, cancellationToken);
         }

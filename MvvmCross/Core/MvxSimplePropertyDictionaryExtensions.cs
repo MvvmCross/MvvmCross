@@ -22,12 +22,12 @@ namespace MvvmCross.Core
             if (input == null)
                 return new Dictionary<string, string>();
 
-            return input.ToDictionary(x => x.Key, x => x.Value?.ToStringInvariant());
+            return input.ToDictionary(x => x.Key, x => x.Value?.ToStringInvariant() ?? string.Empty);
         }
 
         public static IDictionary<string, string> SafeGetData(this IMvxBundle bundle)
         {
-            return bundle?.Data;
+            return bundle.Data;
         }
 
         public static void Write(this IDictionary<string, string> data, object toStore)
@@ -76,16 +76,16 @@ namespace MvvmCross.Core
             foreach (var requiredParameter in requiredParameters)
             {
                 var argumentValue = data.GetArgumentValue(requiredParameter, debugText);
-                argumentList.Add(argumentValue);
+                if(argumentValue != null)
+                    argumentList.Add(argumentValue);
             }
             return argumentList;
         }
 
-        public static object GetArgumentValue(this IDictionary<string, string> data, ParameterInfo requiredParameter, string debugText)
+        public static object? GetArgumentValue(this IDictionary<string, string> data, ParameterInfo requiredParameter, string debugText)
         {
-            string parameterValue;
             if (data == null ||
-                !data.TryGetValue(requiredParameter.Name, out parameterValue))
+                !data.TryGetValue(requiredParameter.Name, out var parameterValue))
             {
                 if (requiredParameter.IsOptional)
                 {
@@ -99,9 +99,8 @@ namespace MvvmCross.Core
                 parameterValue = null;
             }
 
-            var value = MvxSingletonCache.Instance.Parser.ReadValue(parameterValue, requiredParameter.ParameterType,
+            return MvxSingletonCache.Instance.Parser.ReadValue(parameterValue, requiredParameter.ParameterType,
                                                                     requiredParameter.Name);
-            return value;
         }
 
         public static IDictionary<string, string> ToSimplePropertyDictionary(this object input)
@@ -141,11 +140,11 @@ namespace MvvmCross.Core
             return dictionary;
         }
 
-        public static string GetPropertyValueAsString(this object input, PropertyInfo propertyInfo)
+        public static string? GetPropertyValueAsString(this object input, PropertyInfo propertyInfo)
         {
             try
             {
-                var value = propertyInfo.GetValue(input, new object[] { });
+                var value = propertyInfo.GetValue(input, Array.Empty<object>());
                 return value?.ToStringInvariant();
             }
             catch (Exception suspectedMethodAccessException)

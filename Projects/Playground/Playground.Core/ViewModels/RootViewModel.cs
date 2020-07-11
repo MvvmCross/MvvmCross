@@ -110,8 +110,6 @@ namespace Playground.Core.ViewModels
             ShowLocationCommand = new MvxAsyncCommand(() => NavigationService.Navigate<LocationViewModel>());
         }
 
-        public MvxNotifyTask MyTask { get; set; }
-
         public IMvxAsyncCommand ShowChildCommand { get; }
 
         public IMvxAsyncCommand ShowModalCommand { get; }
@@ -219,16 +217,6 @@ namespace Playground.Core.ViewModels
         public override void ViewAppearing()
         {
             base.ViewAppearing();
-
-            MyTask = MvxNotifyTask.Create(
-                async () =>
-                {
-                    await Task.Delay(300);
-
-                    WelcomeText = "Welcome to MvvmCross!";
-
-                    throw new Exception("Boom!");
-                }, exception => { });
         }
 
         protected override void SaveStateToBundle(IMvxBundle bundle)

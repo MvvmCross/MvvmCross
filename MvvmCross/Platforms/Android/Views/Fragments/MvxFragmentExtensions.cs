@@ -45,7 +45,10 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
 
             var cached = cache.GetAndClear(viewModelType, fragmentView.UniqueImmutableCacheTag);
 
-            view.OnViewCreate(() => cached ?? fragmentView.LoadViewModel(bundle, fragment.Activity.GetType(), request));
+            view.OnViewCreate(async () =>
+            {
+                return cached ?? await fragmentView.LoadViewModel(bundle, fragment.Activity.GetType(), request).ConfigureAwait(false);
+            }).GetAwaiter().GetResult();
         }
 
         public static Fragment ToFragment(this IMvxFragmentView fragmentView)
@@ -142,10 +145,10 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             return (TFragment)fragment;
         }
 
-        public static void LoadViewModelFrom(this Android.Views.IMvxFragmentView view, MvxViewModelRequest request, IMvxBundle savedState = null)
+        public static async ValueTask LoadViewModelFrom(this Android.Views.IMvxFragmentView view, MvxViewModelRequest request, IMvxBundle? savedState = null)
         {
             var loader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
-            var viewModel = loader.LoadViewModel(request, savedState);
+            var viewModel = await loader.LoadViewModel(request, savedState).ConfigureAwait(false);
             if (viewModel == null)
             {
                 MvxLog.Instance.Warn("ViewModel not loaded for {0}", request.ViewModelType.FullName);

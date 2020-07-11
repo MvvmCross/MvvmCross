@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -45,7 +46,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
 #endif
         }
 
-        public abstract Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null);
+        public abstract ValueTask<Fragment> GetItem(int position, Fragment.SavedState? fragmentSavedState = null);
 
         public override void DestroyItem(ViewGroup container, int position, Java.Lang.Object objectValue)
         {
@@ -99,7 +100,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
 
             var fragmentTag = GetTag(position);
 
-            Fragment.SavedState fss = null;
+            Fragment.SavedState? fss = null;
             if (_savedState.Count > position)
             {
                 var savedTag = _savedFragmentTags.ElementAtOrDefault(position);
@@ -107,7 +108,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
                     fss = _savedState.ElementAtOrDefault(position);
             }
 
-            var fragment = GetItem(position, fss);
+            var fragment = GetItem(position, fss).GetAwaiter().GetResult();
             if (fss != null)
                 fragment.SetInitialSavedState(fss);
 

@@ -16,7 +16,7 @@ namespace MvvmCross.Plugin.Sidebar.Views
 {
     public class MvxSidebarViewController : UIViewController, IMvxSidebarViewController
     {
-        private readonly UIViewController _subRootViewController;
+        private readonly UIViewController? _subRootViewController;
 
         private bool _menuSetupSet;
 
@@ -34,11 +34,11 @@ namespace MvvmCross.Plugin.Sidebar.Views
 
         public bool ToggleStatusBarHiddenOnOpen { get; set; } = false;
 
-        public new UINavigationController NavigationController { get; private set; }
+        public new UINavigationController? NavigationController { get; private set; }
 
-        public SidebarController LeftSidebarController { get; private set; }
+        public SidebarController? LeftSidebarController { get; private set; }
 
-        public SidebarController RightSidebarController { get; private set; }
+        public SidebarController? RightSidebarController { get; private set; }
 
         public bool HasLeftMenu
         {

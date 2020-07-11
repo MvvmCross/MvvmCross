@@ -15,7 +15,7 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
         }
 
         public MvxFragmentPresentationAttribute(
-            Type activityHostViewModelType = null,
+            Type? activityHostViewModelType = null,
             int fragmentContentId = global::Android.Resource.Id.Content,
             bool addToBackStack = false,
             int enterAnimation = int.MinValue,
@@ -23,9 +23,9 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             int popEnterAnimation = int.MinValue,
             int popExitAnimation = int.MinValue,
             int transitionStyle = int.MinValue,
-            Type fragmentHostViewType = null,
+            Type? fragmentHostViewType = null,
             bool isCacheableFragment = false,
-            string tag = null,
+            string? tag = null,
             string popBackStackImmediateName = "",
             MvxPopBackStack popBackStackImmediateFlag = MvxPopBackStack.Inclusive
         )
@@ -46,17 +46,17 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
         }
 
         public MvxFragmentPresentationAttribute(
-            Type activityHostViewModelType = null,
-            string fragmentContentResourceName = null,
+            Type? activityHostViewModelType = null,
+            string? fragmentContentResourceName = null,
             bool addToBackStack = false,
-            string enterAnimation = null,
-            string exitAnimation = null,
-            string popEnterAnimation = null,
-            string popExitAnimation = null,
-            string transitionStyle = null,
-            Type fragmentHostViewType = null,
+            string? enterAnimation = null,
+            string? exitAnimation = null,
+            string? popEnterAnimation = null,
+            string? popExitAnimation = null,
+            string? transitionStyle = null,
+            Type? fragmentHostViewType = null,
             bool isCacheableFragment = false,
-            string tag = null,
+            string? tag = null,
             string popBackStackImmediateName = "",
             MvxPopBackStack popBackStackImmediateFlag = MvxPopBackStack.Inclusive
         )
@@ -81,12 +81,12 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
         /// <summary>
         /// Fragment parent activity ViewModel Type. This activity is shown if the current hosting activity viewmodel is different.
         /// </summary>
-        public Type ActivityHostViewModelType { get; set; }
+        public Type? ActivityHostViewModelType { get; set; }
 
         /// <summary>
         /// Fragment parent View Type. When set ChildFragmentManager of this Fragment will be used
         /// </summary>
-        public Type FragmentHostViewType { get; set; }
+        public Type? FragmentHostViewType { get; set; }
 
         /// <summary>
         /// Content id - place where to show fragment.
@@ -132,9 +132,10 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
         /// <summary>
         /// Tag for the Fragment. Used in transactions and for finding the Fragment at a later time
         /// </summary>
-        public string Tag { get; set; }
+        public string? Tag { get; set; }
 
         public static string DefaultPopBackStackImmediateName = "";
+
         /// <summary>
         /// The name to be passed into PopBackStackImmediate.
         /// Assigning an empty string will default to using the FragmentJavaName

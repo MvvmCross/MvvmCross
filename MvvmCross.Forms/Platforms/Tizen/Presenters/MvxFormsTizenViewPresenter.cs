@@ -24,7 +24,7 @@ namespace MvvmCross.Forms.Platforms.Tizen.Presenters
 
         public Application FormsApplication { get; set; }
 
-        private IMvxFormsPagePresenter _formsPagePresenter;
+        private IMvxFormsPagePresenter? _formsPagePresenter;
         public virtual IMvxFormsPagePresenter FormsPagePresenter
         {
             get
@@ -36,7 +36,7 @@ namespace MvvmCross.Forms.Platforms.Tizen.Presenters
             set { _formsPagePresenter = value; }
         }
 
-        public override Task<bool> Show(MvxViewModelRequest request)
+        public override ValueTask<bool> Show(MvxViewModelRequest request)
         {
             return FormsPagePresenter.Show(request);
         }
@@ -47,26 +47,26 @@ namespace MvvmCross.Forms.Platforms.Tizen.Presenters
             FormsPagePresenter.RegisterAttributeTypes();
         }
 
-        public override async Task<bool> ChangePresentation(MvxPresentationHint hint)
+        public override async ValueTask<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            if (!await FormsPagePresenter.ChangePresentation(hint)) return false;
-            return await base.ChangePresentation(hint);
+            if (!await FormsPagePresenter.ChangePresentation(hint).ConfigureAwait(false)) return false;
+            return await base.ChangePresentation(hint).ConfigureAwait(false);
         }
 
-        public override Task<bool> Close(IMvxViewModel viewModel)
+        public override ValueTask<bool> Close(IMvxViewModel viewModel)
         {
             return FormsPagePresenter.Close(viewModel);
         }
 
-        public virtual bool ShowPlatformHost(Type hostViewModel = null)
+        public virtual bool ShowPlatformHost(Type? hostViewModel = null)
         {
             MvxFormsLog.Instance.Trace($"Showing of native host View in Forms is not supported.");
             return false;
         }
 
-        public virtual bool ClosePlatformViews()
+        public virtual ValueTask<bool> ClosePlatformViews()
         {
-            return true;
+            return new ValueTask<bool>(true);
         }
     }
 }

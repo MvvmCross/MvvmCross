@@ -8,13 +8,13 @@ namespace MvvmCross.Commands
 {
     public interface IMvxAsyncCommand : IMvxCommand
     {
-        Task ExecuteAsync(object parameter = null);
+        ValueTask ExecuteAsync(object? parameter = null);
         void Cancel();
     }
 
     public interface IMvxAsyncCommand<T> : IMvxCommand<T>
     {
-        Task ExecuteAsync(T parameter);
+        ValueTask ExecuteAsync(T parameter);
         void Cancel();
     }
 }

@@ -39,12 +39,12 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        public void Init(IMvxBundle parameters)
+        public void Init(IMvxBundle? parameters)
         {
             InitFromBundle(parameters);
         }
 
-        public void ReloadState(IMvxBundle state)
+        public void ReloadState(IMvxBundle? state)
         {
             ReloadFromBundle(state);
         }
@@ -53,53 +53,47 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        public void SaveState(IMvxBundle state)
+        public void SaveState(IMvxBundle? state)
         {
             SaveStateToBundle(state);
         }
 
-        protected virtual void InitFromBundle(IMvxBundle parameters)
+        protected virtual void InitFromBundle(IMvxBundle? parameters)
         {
         }
 
-        protected virtual void ReloadFromBundle(IMvxBundle state)
+        protected virtual void ReloadFromBundle(IMvxBundle? state)
         {
         }
 
-        protected virtual void SaveStateToBundle(IMvxBundle bundle)
+        protected virtual void SaveStateToBundle(IMvxBundle? bundle)
         {
         }
 
-        public virtual void Prepare()
+        public virtual ValueTask Prepare()
         {
+            return new ValueTask();
         }
 
         public virtual Task Initialize()
         {
             return Task.FromResult(true);
         }
-
-        private MvxNotifyTask _initializeTask;
-        public MvxNotifyTask InitializeTask
-        {
-            get => _initializeTask;
-            set => SetProperty(ref _initializeTask, value);
-        }
     }
 
     public abstract class MvxViewModel<TParameter> : MvxViewModel, IMvxViewModel<TParameter>
     {
-        public abstract void Prepare(TParameter parameter);
+        public abstract ValueTask Prepare(TParameter parameter);
     }
 
     //TODO: Not possible to name MvxViewModel, name is MvxViewModelResult for now
     public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult>
     {
-        public TaskCompletionSource<object> CloseCompletionSource { get; set; }
+        public TaskCompletionSource<object>? CloseCompletionSource { get; set; }
 
         public override void ViewDestroy(bool viewFinishing = true)
         {
-            if (viewFinishing && CloseCompletionSource != null && !CloseCompletionSource.Task.IsCompleted && !CloseCompletionSource.Task.IsFaulted)
+            if (viewFinishing && CloseCompletionSource?.Task.IsCompleted == false && !CloseCompletionSource.Task.IsFaulted)
                 CloseCompletionSource?.TrySetCanceled();
 
             base.ViewDestroy(viewFinishing);
@@ -108,6 +102,6 @@ namespace MvvmCross.ViewModels
 
     public abstract class MvxViewModel<TParameter, TResult> : MvxViewModelResult<TResult>, IMvxViewModel<TParameter, TResult>
     {
-        public abstract void Prepare(TParameter parameter);
+        public abstract ValueTask Prepare(TParameter parameter);
     }
 }

@@ -29,6 +29,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
                     await startup.Start(GetAppStartHint(activationArgs)).ConfigureAwait(false);
 
                 var hostType = HostWindowsPageType();
+
                 RootFrame.Navigate(hostType, (activationArgs as LaunchActivatedEventArgs)?.Arguments);
             }
             else

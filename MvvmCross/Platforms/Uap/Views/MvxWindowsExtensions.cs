@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -8,22 +8,24 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using MvvmCross.Platforms.Uap.Presenters.Attributes;
 using MvvmCross.ViewModels;
+using System.Threading.Tasks;
+using System.Reflection.Metadata.Ecma335;
 
 namespace MvvmCross.Platforms.Uap.Views
 {
     public static class MvxWindowsExtensions
     {
-        public static void OnViewCreate(this IMvxWindowsView storeView, string requestText, Func<IMvxBundle> bundleLoader)
+        public static ValueTask OnViewCreate(this IMvxWindowsView storeView, string requestText, Func<IMvxBundle> bundleLoader)
         {
-            storeView.OnViewCreate(() => { return storeView.LoadViewModel(requestText, bundleLoader()); });
+            return storeView.OnViewCreate(() => storeView.LoadViewModel(requestText, bundleLoader()));
         }
 
-        public static void OnViewCreate(this IMvxWindowsView storeView, Func<IMvxViewModel> viewModelLoader)
+        public static async ValueTask OnViewCreate(this IMvxWindowsView storeView, Func<ValueTask<IMvxViewModel>> viewModelLoader)
         {
             if (storeView.ViewModel != null)
                 return;
 
-            var viewModel = viewModelLoader();
+            var viewModel = await viewModelLoader().ConfigureAwait(false);
             storeView.ViewModel = viewModel;
         }
 
@@ -84,7 +86,7 @@ namespace MvvmCross.Platforms.Uap.Views
             return result;
         }
 
-        private static IMvxViewModel LoadViewModel(this IMvxWindowsView storeView,
+        private static ValueTask<IMvxViewModel> LoadViewModel(this IMvxWindowsView storeView,
                                                     string requestText,
                                                     IMvxBundle bundle)
         {

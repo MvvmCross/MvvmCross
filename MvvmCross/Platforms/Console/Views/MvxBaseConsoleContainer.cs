@@ -14,34 +14,34 @@ namespace MvvmCross.Platforms.Console.Views
     public abstract class MvxBaseConsoleContainer
         : MvxViewsContainer, IMvxConsoleNavigation
     {
-        private readonly Dictionary<Type, Func<MvxPresentationHint, Task<bool>>> _presentationHintHandlers = new Dictionary<Type, Func<MvxPresentationHint, Task<bool>>>();
+        private readonly Dictionary<Type, Func<MvxPresentationHint, ValueTask<bool>>> _presentationHintHandlers = new Dictionary<Type, Func<MvxPresentationHint, ValueTask<bool>>>();
 
-        public void AddPresentationHintHandler<THint>(Func<THint, Task<bool>> action) where THint : MvxPresentationHint
+        public void AddPresentationHintHandler<THint>(Func<THint, ValueTask<bool>> action) where THint : MvxPresentationHint
         {
             _presentationHintHandlers[typeof(THint)] = hint => action((THint)hint);
         }
 
-        protected Task<bool> HandlePresentationChange(MvxPresentationHint hint)
+        protected ValueTask<bool> HandlePresentationChange(MvxPresentationHint hint)
         {
-            Func<MvxPresentationHint, Task<bool>> handler;
+            Func<MvxPresentationHint, ValueTask<bool>> handler;
 
             if (_presentationHintHandlers.TryGetValue(hint.GetType(), out handler))
             {
                 return handler(hint);
             }
 
-            return Task.FromResult(false);
+            return new ValueTask<bool>(false);
         }
 
-        public abstract Task<bool> Show(MvxViewModelRequest request);
+        public abstract ValueTask<bool> Show(MvxViewModelRequest request);
 
-        public abstract Task<bool> GoBack();
+        public abstract ValueTask<bool> GoBack();
 
         public abstract void RemoveBackEntry();
 
         public abstract bool CanGoBack();
 
-        public virtual async Task<bool> ChangePresentation(MvxPresentationHint hint)
+        public virtual async ValueTask<bool> ChangePresentation(MvxPresentationHint hint)
         {
             if (await HandlePresentationChange(hint).ConfigureAwait(false)) return true;
 
@@ -49,6 +49,6 @@ namespace MvvmCross.Platforms.Console.Views
             return false;
         }
 
-        public abstract Task<bool> Close(IMvxViewModel toClose);
+        public abstract ValueTask<bool> Close(IMvxViewModel toClose);
     }
 }

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Threading.Tasks;
 using MvvmCross.Exceptions;
 using MvvmCross.Forms.Bindings;
 using MvvmCross.Forms.Views.Base;
@@ -28,29 +29,29 @@ namespace MvvmCross.Forms.Views
             var adapter = new MvxCellAdapter(cell);
         }
 
-        private static void LoadViewModelForElement(IMvxElement element)
+        private static async ValueTask LoadViewModelForElementAsync(IMvxElement element)
         {
-            IMvxViewModel cached = null;
+            IMvxViewModel? cached = null;
             if (!MvxDesignTimeChecker.IsDesignTime)
             {
                 var cache = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>();
                 cached = cache.Get(element.FindAssociatedViewModelTypeOrNull());
             }
 
-            element.OnViewCreate(() => cached ?? element.LoadViewModel());
+            await element.OnViewCreate(async () => cached ?? await element.LoadViewModel().ConfigureAwait(false));
         }
 
-        public static void OnBindingContextChanged(this IMvxElement element)
+        public static ValueTask OnBindingContextChanged(this IMvxElement element)
         {
-            LoadViewModelForElement(element);
+            return LoadViewModelForElementAsync(element);
         }
 
-        public static void OnViewAppearing(this IMvxElement element)
+        public static ValueTask OnViewAppearing(this IMvxElement element)
         {
-            LoadViewModelForElement(element);
+            return LoadViewModelForElementAsync(element);
         }
 
-        private static IMvxViewModel LoadViewModel(this IMvxElement element)
+        private static async ValueTask<IMvxViewModel?> LoadViewModel(this IMvxElement element)
         {
             if (MvxDesignTimeChecker.IsDesignTime)
                 return new MvxNullViewModel();
@@ -68,9 +69,11 @@ namespace MvvmCross.Forms.Views
             }
 
             var loader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
-            var viewModel = loader.LoadViewModel(new MvxViewModelRequest(viewModelType), null);
+            var viewModel = await loader.LoadViewModel(new MvxViewModelRequest(viewModelType), null).ConfigureAwait(false);
+
             if (viewModel == null)
                 throw new MvxException("ViewModel not loaded for " + viewModelType);
+
             return viewModel;
         }
     }

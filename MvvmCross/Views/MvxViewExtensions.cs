@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.ViewModels;
@@ -31,6 +32,26 @@ namespace MvvmCross.Views
             view.ViewModel = viewModel;
         }
 
+        public static async ValueTask OnViewCreate(this IMvxView view, Func<ValueTask<IMvxViewModel?>> viewModelLoader)
+        {
+            // note - we check the DataContent before the ViewModel to avoid casting errors
+            //       in the case of 'simple' binding code
+            if (view.DataContext != null)
+                return;
+
+            if (view.ViewModel != null)
+                return;
+
+            var viewModel = await viewModelLoader().ConfigureAwait(false);
+            if (viewModel == null)
+            {
+                MvxLog.Instance.Warn("ViewModel not loaded for view {0}", view.GetType().Name);
+                return;
+            }
+
+            view.ViewModel = viewModel;
+        }
+
         public static void OnViewNewIntent(this IMvxView view, Func<IMvxViewModel> viewModelLoader)
         {
             MvxLog.Instance.Warn(
@@ -43,7 +64,7 @@ namespace MvvmCross.Views
             // nothing needed currently
         }
 
-        public static Type FindAssociatedViewModelTypeOrNull(this IMvxView view)
+        public static Type? FindAssociatedViewModelTypeOrNull(this IMvxView view)
         {
             if (view == null)
                 return null;
@@ -59,11 +80,11 @@ namespace MvvmCross.Views
             return associatedTypeFinder.FindTypeOrNull(view.GetType());
         }
 
-        public static IMvxViewModel ReflectionGetViewModel(this IMvxView view)
+        public static IMvxViewModel? ReflectionGetViewModel(this IMvxView view)
         {
             var propertyInfo = view?.GetType().GetProperty("ViewModel");
 
-            return (IMvxViewModel) propertyInfo?.GetGetMethod().Invoke(view, new object[] { });
+            return (IMvxViewModel?) propertyInfo?.GetGetMethod().Invoke(view, Array.Empty<object>());
         }
 
         public static IMvxBundle CreateSaveStateBundle(this IMvxView view)

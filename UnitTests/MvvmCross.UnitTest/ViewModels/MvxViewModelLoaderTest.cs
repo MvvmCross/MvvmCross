@@ -4,7 +4,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Moq;
+using MvvmCross.Binding.Extensions;
 using MvvmCross.Exceptions;
 using MvvmCross.Navigation.EventArguments;
 using MvvmCross.Tests;
@@ -40,7 +42,7 @@ namespace MvvmCross.UnitTest.ViewModels
         }
 
         [Fact]
-        public void Test_NormalViewModel()
+        public async Task Test_NormalViewModel()
         {
             _fixture.ClearAll();
 
@@ -60,13 +62,13 @@ namespace MvvmCross.UnitTest.ViewModels
             var state = new MvxBundle();
             var loader = new MvxViewModelLoader(mockCollection.Object);
             var args = new MvxNavigateEventArgs(NavigationMode.Show);
-            var viewModel = loader.LoadViewModel(request, state, args);
+            var viewModel = await loader.LoadViewModel(request, state, args).ConfigureAwait(false);
 
             Assert.Equal(outViewModel, viewModel);
         }
 
         [Fact]
-        public void Test_FailedViewModel()
+        public async Task Test_FailedViewModel()
         {
             _fixture.ClearAll();
 
@@ -84,14 +86,14 @@ namespace MvvmCross.UnitTest.ViewModels
             var state = new MvxBundle();
             var loader = new MvxViewModelLoader(mockCollection.Object);
             var args = new MvxNavigateEventArgs(NavigationMode.Show);
-            Assert.Throws<MvxException>(() =>
+            await Assert.ThrowsAsync<MvxException>(async () =>
             {
-                var viewModel = loader.LoadViewModel(request, state, args);
-            });
+                var viewModel = await loader.LoadViewModel(request, state, args).ConfigureAwait(false);
+            }).ConfigureAwait(false);
         }
 
         [Fact]
-        public void Test_FailedViewModelLocatorCollection()
+        public async Task Test_FailedViewModelLocatorCollection()
         {
             _fixture.ClearAll();
 
@@ -104,10 +106,10 @@ namespace MvvmCross.UnitTest.ViewModels
             var state = new MvxBundle();
             var loader = new MvxViewModelLoader(mockCollection.Object);
             var args = new MvxNavigateEventArgs(NavigationMode.Show);
-            Assert.Throws<MvxException>(() =>
+            await Assert.ThrowsAsync<MvxException>(async () =>
             {
-                var viewModel = loader.LoadViewModel(request, state, args);
-            });
+                var viewModel = await loader.LoadViewModel(request, state, args).ConfigureAwait(false);
+            }).ConfigureAwait(false);
         }
     }
 }

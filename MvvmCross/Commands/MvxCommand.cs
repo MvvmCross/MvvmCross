@@ -18,7 +18,7 @@ namespace MvvmCross.Commands
     public class MvxStrongCommandHelper
         : IMvxCommandHelper
     {
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
 
         public void RaiseCanExecuteChanged(object sender)
         {
@@ -103,7 +103,9 @@ namespace MvvmCross.Commands
     {
         private readonly IMvxCommandHelper _commandHelper;
 
+#pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
         public MvxCommandBase()
+#pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
         {
             // fallback on MvxWeakCommandHelper if no IoC has been set up
             if (!Mvx.IoCProvider?.TryResolve(out _commandHelper) ?? true)
@@ -136,7 +138,7 @@ namespace MvvmCross.Commands
             }
             else
             {
-                _commandHelper.RaiseCanExecuteChanged(this);
+                _commandHelper?.RaiseCanExecuteChanged(this);
             }
         }
     }
@@ -145,7 +147,7 @@ namespace MvvmCross.Commands
         : MvxCommandBase
         , IMvxCommand
     {
-        private readonly Func<bool> _canExecute;
+        private readonly Func<bool>? _canExecute;
         private readonly Action _execute;
 
         public MvxCommand(Action execute)
@@ -153,19 +155,19 @@ namespace MvvmCross.Commands
         {
         }
 
-        public MvxCommand(Action execute, Func<bool> canExecute)
+        public MvxCommand(Action execute, Func<bool>? canExecute)
         {
             _execute = execute;
             _canExecute = canExecute;
         }
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
             => _canExecute == null || _canExecute();
 
         public bool CanExecute()
             => CanExecute(null);
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
             if (CanExecute(parameter))
             {
@@ -181,7 +183,7 @@ namespace MvvmCross.Commands
         : MvxCommandBase
         , IMvxCommand, IMvxCommand<T>
     {
-        private readonly Func<T, bool> _canExecute;
+        private readonly Func<T, bool>? _canExecute;
         private readonly Action<T> _execute;
 
         public MvxCommand(Action<T> execute)
@@ -189,13 +191,13 @@ namespace MvvmCross.Commands
         {
         }
 
-        public MvxCommand(Action<T> execute, Func<T, bool> canExecute)
+        public MvxCommand(Action<T> execute, Func<T, bool>? canExecute)
         {
             _execute = execute;
             _canExecute = canExecute;
         }
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
             => _canExecute == null || _canExecute((T)typeof(T).MakeSafeValueCore(parameter));
 
         public bool CanExecute()
@@ -204,7 +206,7 @@ namespace MvvmCross.Commands
         public bool CanExecute(T parameter)
             => _canExecute == null || _canExecute(parameter);
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
             if (!CanExecute(parameter)) return;
 

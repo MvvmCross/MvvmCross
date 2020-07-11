@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using MvvmCross.Presenters.Attributes;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
@@ -18,8 +19,8 @@ namespace MvvmCross.Presenters
         void RegisterAttributeTypes();
 
         //TODO: Maybe move those to helper class
-        MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request);
-        MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType);
-        MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType);
+        ValueTask<MvxBasePresentationAttribute?> GetPresentationAttribute(MvxViewModelRequest request);
+        ValueTask<MvxBasePresentationAttribute?> CreatePresentationAttribute(Type? viewModelType, Type? viewType);
+        ValueTask<MvxBasePresentationAttribute?> GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType);
     }
 }

@@ -36,7 +36,7 @@ namespace Playground.Core.ViewModels.Location
 
         private async Task DoStartCommand()
         {
-            var status = await RequestPermission();
+            var status = await RequestPermission().ConfigureAwait(false);
             if (!status)
                 return;
 
@@ -60,14 +60,14 @@ namespace Playground.Core.ViewModels.Location
             LastLocation = obj;
         }
 
-        private async Task<bool> RequestPermission()
+        private async ValueTask<bool> RequestPermission()
         {
             try
             {
-                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location).ConfigureAwait(false);
                 if (status != PermissionStatus.Granted)
                 {
-                    var result = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
+                    var result = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location).ConfigureAwait(false);
                     status = result[Permission.Location];
                 }
 

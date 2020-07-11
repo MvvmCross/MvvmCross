@@ -11,7 +11,7 @@ namespace MvvmCross.ViewModels
     public abstract class MvxNavigationViewModel
         : MvxViewModel
     {
-        private IMvxLog _log;
+        private IMvxLog? _log;
 
         protected MvxNavigationViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base()
         {
@@ -23,7 +23,7 @@ namespace MvvmCross.ViewModels
 
         protected virtual IMvxLogProvider LogProvider { get; }
 
-        protected virtual IMvxLog Log => _log ?? (_log = LogProvider.GetLogFor(GetType()));
+        protected virtual IMvxLog Log => _log ??= LogProvider.GetLogFor(GetType());
     }
 
     public abstract class MvxNavigationViewModel<TParameter> : MvxNavigationViewModel, IMvxViewModel<TParameter>
@@ -32,7 +32,7 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        public abstract void Prepare(TParameter parameter);
+        public abstract ValueTask Prepare(TParameter parameter);
     }
 
     //TODO: Not possible to name MvxViewModel, name is MvxViewModelResult for now
@@ -42,7 +42,7 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        public TaskCompletionSource<object> CloseCompletionSource { get; set; }
+        public TaskCompletionSource<object>? CloseCompletionSource { get; set; }
 
         public override void ViewDestroy(bool viewFinishing = true)
         {
@@ -59,6 +59,6 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        public abstract void Prepare(TParameter parameter);
+        public abstract ValueTask Prepare(TParameter parameter);
     }
 }

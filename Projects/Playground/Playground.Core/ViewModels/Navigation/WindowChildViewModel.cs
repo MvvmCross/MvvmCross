@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Threading.Tasks;
 using MvvmCross.Commands;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
@@ -20,8 +21,12 @@ namespace Playground.Core.ViewModels
         public int ParentNo => _param.ParentNo;
         public string Text => $"I'm No.{_param.ChildNo}. My parent is No.{_param.ParentNo}";
 
-        public IMvxAsyncCommand CloseCommand => new MvxAsyncCommand(async () => await NavigationService.Close(this));
+        public IMvxAsyncCommand CloseCommand => new MvxAsyncCommand(async () => await NavigationService.Close(this).ConfigureAwait(false));
 
-        public override void Prepare(WindowChildParam param) => _param = param;
+        public override ValueTask Prepare(WindowChildParam param)
+        {
+            _param = param;
+            return new ValueTask();
+        }
     }
 }

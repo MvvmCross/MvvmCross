@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using MvvmCross.Forms.Core;
 using MvvmCross.Presenters;
 using Xamarin.Forms;
@@ -14,7 +15,7 @@ namespace MvvmCross.Forms.Presenters
         Application FormsApplication { get; set; }
         IMvxFormsPagePresenter FormsPagePresenter { get; set; }
 
-        bool ClosePlatformViews();
-        bool ShowPlatformHost(Type hostViewModel = null);
+        ValueTask<bool> ClosePlatformViews();
+        bool ShowPlatformHost(Type? hostViewModel = null);
     }
 }

@@ -26,10 +26,10 @@ namespace Playground.Core.ViewModels
             });
         }
 
-        private Task ItemClicked(TestItem arg)
+        private ValueTask ItemClicked(TestItem arg)
         {
             var item = arg;
-            return Task.CompletedTask;
+            return new ValueTask();
         }
     }
 

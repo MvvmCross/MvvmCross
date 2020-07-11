@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
@@ -35,8 +36,8 @@ namespace MvvmCross.Platforms.Android.Views
             return viewModelType;
         }
 
-        public static IMvxViewModel LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle savedState, Type fragmentParentActivityType,
-            MvxViewModelRequest request = null)
+        public static async ValueTask<IMvxViewModel?> LoadViewModel(this IMvxFragmentView fragmentView, IMvxBundle? savedState, Type fragmentParentActivityType,
+            MvxViewModelRequest? request = null)
         {
             var viewModelType = fragmentView.FindAssociatedViewModelType(fragmentParentActivityType);
             if (viewModelType == typeof(MvxNullViewModel))
@@ -61,12 +62,10 @@ namespace MvvmCross.Platforms.Android.Views
             }
 
             var loaderService = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
-            var viewModel = loaderService.LoadViewModel(request, savedState);
-
-            return viewModel;
+            return await loaderService.LoadViewModel(request, savedState).ConfigureAwait(false);
         }
 
-        public static void RunViewModelLifecycle(IMvxViewModel viewModel, IMvxBundle savedState,
+        public static void RunViewModelLifecycle(this IMvxViewModel viewModel, IMvxBundle savedState,
             MvxViewModelRequest request)
         {
             try

@@ -33,7 +33,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
             SystemNavigationManager.GetForCurrentView().BackRequested += BackButtonOnBackRequested;
         }
 
-        private IMvxViewModelLoader _viewModelLoader;
+        private IMvxViewModelLoader? _viewModelLoader;
         public IMvxViewModelLoader ViewModelLoader
         {
             get
@@ -56,10 +56,11 @@ namespace MvvmCross.Platforms.Uap.Presenters
             AttributeTypesToActionsDictionary.Register<MvxDialogViewPresentationAttribute>(ShowDialog, CloseDialog);
         }
 
-        public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
+        public override ValueTask<MvxBasePresentationAttribute?> CreatePresentationAttribute(Type? viewModelType, Type? viewType)
         {
-            MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new page presentation");
-            return new MvxPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
+            MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType?.Name}. Assuming new page presentation");
+            var attribute = new MvxPagePresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
+            return new ValueTask<MvxBasePresentationAttribute?>(attribute);
         }
 
         protected virtual async void BackButtonOnBackRequested(object sender, BackRequestedEventArgs backRequestedEventArgs)
@@ -101,7 +102,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
                 _rootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
         }
 
-        protected virtual Task<bool> ShowSplitView(Type viewType, MvxSplitViewPresentationAttribute attribute, MvxViewModelRequest request)
+        protected virtual ValueTask<bool> ShowSplitView(Type viewType, MvxSplitViewPresentationAttribute? attribute, MvxViewModelRequest request)
         {
             var viewsContainer = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
 
@@ -110,7 +111,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
                 var splitView = currentPage.Content.FindControl<SplitView>();
                 if (splitView == null)
                 {
-                    return Task.FromResult(true);
+                    return new ValueTask<bool>(true);
                 }
 
                 if (attribute.Position == SplitPanePosition.Content)
@@ -136,15 +137,15 @@ namespace MvvmCross.Platforms.Uap.Presenters
                     nestedFrame.Navigate(viewType, requestText);
                 }
             }
-            return Task.FromResult(true);
+            return new ValueTask<bool>(true);
         }
 
-        protected virtual Task<bool> CloseSplitView(IMvxViewModel viewModel, MvxSplitViewPresentationAttribute attribute)
+        protected virtual ValueTask<bool> CloseSplitView(IMvxViewModel viewModel, MvxSplitViewPresentationAttribute? attribute)
         {
             return ClosePage(viewModel, attribute);
         }
 
-        protected virtual Task<bool> ShowRegionView(Type viewType, MvxRegionPresentationAttribute attribute, MvxViewModelRequest request)
+        protected virtual ValueTask<bool> ShowRegionView(Type viewType, MvxRegionPresentationAttribute? attribute, MvxViewModelRequest request)
         {
             if (viewType.HasRegionAttribute())
             {
@@ -155,13 +156,13 @@ namespace MvvmCross.Platforms.Uap.Presenters
                 if (containerView != null)
                 {
                     containerView.Navigate(viewType, requestText);
-                    return Task.FromResult(true);
+                    return new ValueTask<bool>(true);
                 }
             }
-            return Task.FromResult(true);
+            return new ValueTask<bool>(true);
         }
 
-        protected virtual Task<bool> CloseRegionView(IMvxViewModel viewModel, MvxRegionPresentationAttribute attribute)
+        protected virtual ValueTask<bool> CloseRegionView(IMvxViewModel viewModel, MvxRegionPresentationAttribute? attribute)
         {
             var viewFinder = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
             var viewType = viewFinder.GetViewType(viewModel.GetType());
@@ -175,42 +176,42 @@ namespace MvvmCross.Platforms.Uap.Presenters
                 if (containerView.CanGoBack)
                 {
                     containerView.GoBack();
-                    return Task.FromResult(true);
+                    return new ValueTask<bool>(true);
                 }
             }
 
             return ClosePage(viewModel, attribute);
         }
 
-        protected virtual Task<bool> ClosePage(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute)
+        protected virtual ValueTask<bool> ClosePage(IMvxViewModel viewModel, MvxBasePresentationAttribute? attribute)
         {
             var currentView = _rootFrame.Content as IMvxView;
             if (currentView == null)
             {
                 MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe has no current page");
-                return Task.FromResult(false);
+                return new ValueTask<bool>(false);
             }
 
             if (currentView.ViewModel != viewModel)
             {
                 MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
-                return Task.FromResult(false);
+                return new ValueTask<bool>(false);
             }
 
             if (!_rootFrame.CanGoBack)
             {
                 MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe refuses to go back");
-                return Task.FromResult(false);
+                return new ValueTask<bool>(false);
             }
 
             _rootFrame.GoBack();
 
             HandleBackButtonVisibility();
 
-            return Task.FromResult(true);
+            return new ValueTask<bool>(true);
         }
 
-        protected virtual Task<bool> ShowPage(Type viewType, MvxBasePresentationAttribute attribute, MvxViewModelRequest request)
+        protected virtual ValueTask<bool> ShowPage(Type viewType, MvxBasePresentationAttribute? attribute, MvxViewModelRequest request)
         {
             try
             {
@@ -220,21 +221,21 @@ namespace MvvmCross.Platforms.Uap.Presenters
                 _rootFrame.Navigate(viewType, requestText); //Frame won't allow serialization of it's nav-state if it gets a non-simple type as a nav param
 
                 HandleBackButtonVisibility();
-                return Task.FromResult(true);
+                return new ValueTask<bool>(true);
             }
             catch (Exception exception)
             {
                 MvxLog.Instance.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
                     exception.ToLongString());
-                return Task.FromResult(false);
+                return new ValueTask<bool>(false);
             }
         }
 
-        protected virtual async Task<bool> ShowDialog(Type viewType, MvxDialogViewPresentationAttribute attribute, MvxViewModelRequest request)
+        protected virtual async ValueTask<bool> ShowDialog(Type viewType, MvxDialogViewPresentationAttribute? attribute, MvxViewModelRequest request)
         {
             try
             {
-                var contentDialog = (ContentDialog)CreateControl(viewType, request, attribute);
+                var contentDialog = (ContentDialog)await CreateControl(viewType, request, attribute).ConfigureAwait(false);
                 if (contentDialog != null)
                 {
                     await contentDialog.ShowAsync(attribute.Placement);
@@ -251,17 +252,17 @@ namespace MvvmCross.Platforms.Uap.Presenters
             }
         }
 
-        public virtual Control CreateControl(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute)
+        public virtual async ValueTask<Control> CreateControl(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute)
         {
             try
             {
-                var control = Activator.CreateInstance(viewType) as Control;
+                var control = (Control)Activator.CreateInstance(viewType);
                 if (control is IMvxView mvxControl)
                 {
                     if (request is MvxViewModelInstanceRequest instanceRequest)
                         mvxControl.ViewModel = instanceRequest.ViewModelInstance;
                     else
-                        mvxControl.ViewModel = ViewModelLoader.LoadViewModel(request, null);
+                        mvxControl.ViewModel = await ViewModelLoader.LoadViewModel(request, null).ConfigureAwait(false);
                 }
 
                 return control;
@@ -272,7 +273,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
             }
         }
 
-        protected virtual Task<bool> CloseDialog(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute)
+        protected virtual ValueTask<bool> CloseDialog(IMvxViewModel viewModel, MvxBasePresentationAttribute? attribute)
         {
             var popups = VisualTreeHelper.GetOpenPopups(Window.Current).FirstOrDefault(p =>
             {
@@ -286,7 +287,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
 
             (popups?.Child as ContentDialog)?.Hide();
 
-            return Task.FromResult(true);
+            return new ValueTask<bool>(true);
         }
     }
 }

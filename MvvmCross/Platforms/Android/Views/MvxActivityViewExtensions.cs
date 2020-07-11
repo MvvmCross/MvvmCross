@@ -35,9 +35,9 @@ namespace MvvmCross.Platforms.Android.Views
             }
         }
 
-        public static void OnViewCreate(this IMvxAndroidView androidView, Bundle bundle)
+        public static async ValueTask OnViewCreate(this IMvxAndroidView androidView, Bundle bundle)
         {
-            androidView.EnsureSetupInitialized();
+            await androidView.EnsureSetupInitialized().ConfigureAwait(false);
             androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity, bundle));
 
             var cache = Mvx.IoCProvider.Resolve<IMvxSingleViewModelCache>();
@@ -45,10 +45,10 @@ namespace MvvmCross.Platforms.Android.Views
 
             var view = (IMvxView)androidView;
             var savedState = GetSavedStateFromBundle(bundle);
-            view.OnViewCreate(() => cached ?? androidView.LoadViewModel(savedState));
+            await view.OnViewCreate(async () => cached ?? await androidView.LoadViewModel(savedState).ConfigureAwait(false)).ConfigureAwait(false);
         }
 
-        private static IMvxBundle GetSavedStateFromBundle(Bundle bundle)
+        private static IMvxBundle? GetSavedStateFromBundle(Bundle bundle)
         {
             if (bundle == null)
                 return null;
@@ -121,7 +121,7 @@ namespace MvvmCross.Platforms.Android.Views
             return activity;
         }
 
-        private static IMvxViewModel LoadViewModel(this IMvxAndroidView androidView, IMvxBundle savedState)
+        private static async ValueTask<IMvxViewModel?> LoadViewModel(this IMvxAndroidView androidView, IMvxBundle? savedState)
         {
             var activity = androidView.ToActivity();
 
@@ -137,12 +137,10 @@ namespace MvvmCross.Platforms.Android.Views
             }
 
             var translatorService = Mvx.IoCProvider.Resolve<IMvxAndroidViewModelLoader>();
-            var viewModel = translatorService.Load(activity.Intent, savedState, viewModelType);
-
-            return viewModel;
+            return await translatorService.Load(activity.Intent, savedState, viewModelType).ConfigureAwait(false);
         }
 
-        private static async Task EnsureSetupInitialized(this IMvxAndroidView androidView)
+        private static async ValueTask EnsureSetupInitialized(this IMvxAndroidView androidView)
         {
             if (androidView is IMvxSetupMonitor)
             {

@@ -1,4 +1,5 @@
-﻿using MvvmCross;
+﻿using System.Threading.Tasks;
+using MvvmCross;
 using MvvmCross.Commands;
 using MvvmCross.ViewModels;
 
@@ -38,14 +39,14 @@ namespace Playground.Core.ViewModels
 
         public IMvxCommand ChangeButtonCmd2 => new MvxCommand(() => ChildBindingContext2.Test = (ChildBindingContext2.Test == "Bound Text 1" ? "Bound Text 2" : "Bound Text 1"));
 
-        public override void Prepare()
+        public override async ValueTask Prepare()
         {
-            var vm = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>().LoadViewModel(MvxViewModelRequest<ChildContentViewModel>.GetDefaultRequest(), null) as ChildContentViewModel;
+            var vm = await Mvx.IoCProvider.Resolve<IMvxViewModelLoader>().LoadViewModel(MvxViewModelRequest<ChildContentViewModel>.GetDefaultRequest(), null) as ChildContentViewModel;
             vm.Test = "Child 1";
             ChildViewModel1 = vm;
-            var bc = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>()
-                    .LoadViewModel(MvxViewModelRequest<ChildContentViewModel>.GetDefaultRequest(), null) as
-                ChildContentViewModel;
+            var bc = await Mvx.IoCProvider.Resolve<IMvxViewModelLoader>()
+                    .LoadViewModel(MvxViewModelRequest<ChildContentViewModel>.GetDefaultRequest(), null) as ChildContentViewModel;
+
             bc.Test = "Child 2";
             ChildBindingContext2 = bc;
         }

@@ -36,7 +36,7 @@ namespace MvvmCross.UnitTest.Navigation
         public RoutingServiceTests(NavigationTestFixture fixture)
         {
             _fixture = fixture;
-            _fixture.ClearAll();
+            _fixture?.ClearAll();
 
             // ReSharper disable once AssignNullToNotNullAttribute
             Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -74,10 +74,10 @@ namespace MvvmCross.UnitTest.Navigation
         {
             var url = "mvx://fail/?id=" + Guid.NewGuid();
 
-            var canNavigate = await RoutingService.CanNavigate(url);
+            var canNavigate = await RoutingService.CanNavigate(url).ConfigureAwait(false);
             Assert.False(canNavigate);
 
-            await Assert.ThrowsAsync<MvxException>(() => RoutingService.Navigate(url));
+            await Assert.ThrowsAsync<MvxException>(() => RoutingService.Navigate(url).AsTask()).ConfigureAwait(false);
 
             MockDispatcher.Verify(x => x.ShowViewModel(It.IsAny<MvxViewModelRequest>()), Times.Never);
         }
@@ -85,7 +85,9 @@ namespace MvvmCross.UnitTest.Navigation
         [Fact]
         public async Task TestDirectMatchRegexAsync()
         {
-            await RoutingService.Navigate("mvx://test/?id=" + Guid.Empty.ToString("N"));
+            var result = await RoutingService.Navigate("mvx://test/?id=" + Guid.Empty.ToString("N")).ConfigureAwait(false);
+
+            Assert.True(result);
 
             MockDispatcher.Verify(
                 x => x.ShowViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(ViewModelB))),
@@ -95,7 +97,9 @@ namespace MvvmCross.UnitTest.Navigation
         [Fact]
         public async Task TestRegexWithParametersAsync()
         {
-            await RoutingService.Navigate("mvx://test/?id=" + Guid.NewGuid().ToString("N"));
+            var result = await RoutingService.Navigate("mvx://test/?id=" + Guid.NewGuid().ToString("N")).ConfigureAwait(false);
+
+            Assert.True(result);
 
             MockDispatcher.Verify(
                 x => x.ShowViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(ViewModelC))),
@@ -105,7 +109,9 @@ namespace MvvmCross.UnitTest.Navigation
         [Fact]
         public async Task TestFacadeAsync()
         {
-            await RoutingService.Navigate("mvx://facade/?id=a");
+            var result = await RoutingService.Navigate("mvx://facade/?id=a").ConfigureAwait(false);
+
+            Assert.True(result);
 
             MockDispatcher.Verify(
                 x => x.ShowViewModel(It.Is<MvxViewModelRequest>(t => t.ViewModelType == typeof(ViewModelA))),

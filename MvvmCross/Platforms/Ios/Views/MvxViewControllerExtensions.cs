@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -33,7 +33,7 @@ namespace MvvmCross.Platforms.Ios.Views
             }
 
             var loader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
-            var viewModel = loader.LoadViewModel(iosView.Request, null /* no saved state on iOS currently */);
+            var viewModel = loader.LoadViewModel(iosView.Request, null /* no saved state on iOS currently */).GetAwaiter().GetResult();
             if (viewModel == null)
                 throw new MvxException("ViewModel not loaded for " + iosView.Request.ViewModelType);
             return viewModel;

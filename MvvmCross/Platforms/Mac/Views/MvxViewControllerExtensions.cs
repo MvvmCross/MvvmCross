@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Mac.Views
         public static void OnViewCreate(this IMvxMacView macView)
         {
             //var view = touchView as IMvxView<TViewModel>;
-            macView.OnViewCreate(() => { return macView.LoadViewModel(); });
+            macView.OnViewCreate(() => macView.LoadViewModel());
         }
 
         private static IMvxViewModel LoadViewModel(this IMvxMacView macView)
@@ -36,7 +36,7 @@ namespace MvvmCross.Platforms.Mac.Views
             }
 
             var loader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
-            var viewModel = loader.LoadViewModel(macView.Request, null /* no saved state on iOS currently */);
+            var viewModel = loader.LoadViewModel(macView.Request, null /* no saved state on iOS currently */).GetAwaiter().GetResult();
             if (viewModel == null)
                 throw new MvxException("ViewModel not loaded for " + macView.Request.ViewModelType);
             return viewModel;
@@ -47,9 +47,7 @@ namespace MvvmCross.Platforms.Mac.Views
             where TTargetViewModel : class, IMvxViewModel
         {
             return
-                view.CreateViewControllerFor<TTargetViewModel>(parameterObject == null
-                                                                   ? null
-                                                                   : parameterObject.ToSimplePropertyDictionary());
+                view.CreateViewControllerFor<TTargetViewModel>(parameterObject?.ToSimplePropertyDictionary());
         }
 
 #warning TODO - could this move down to IMvxView level?
@@ -81,7 +79,7 @@ namespace MvvmCross.Platforms.Mac.Views
 
         public static IMvxMacView CreateViewControllerFor(
             this IMvxCanCreateMacView view, Type viewType,
-            MvxViewModelRequest request)
+            MvxViewModelRequest? request)
         {
             return Mvx.IoCProvider.Resolve<IMvxMacViewCreator>().CreateViewOfType(viewType, request);
         }

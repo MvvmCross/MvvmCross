@@ -37,7 +37,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Presenters
             set { _formsPagePresenter = value; }
         }
 
-        public override async Task<bool> Show(MvxViewModelRequest request)
+        public override async ValueTask<bool> Show(MvxViewModelRequest request)
         {
             if (!await FormsPagePresenter.Show(request)) return false;
 
@@ -52,29 +52,29 @@ namespace MvvmCross.Forms.Platforms.Ios.Presenters
             FormsPagePresenter.RegisterAttributeTypes();
         }
 
-        public override async Task<bool> ChangePresentation(MvxPresentationHint hint)
+        public override async ValueTask<bool> ChangePresentation(MvxPresentationHint hint)
         {
             if (!await FormsPagePresenter.ChangePresentation(hint)) return false;
             return await base.ChangePresentation(hint);
         }
 
-        public override Task<bool> Close(IMvxViewModel viewModel)
+        public override ValueTask<bool> Close(IMvxViewModel viewModel)
         {
             return FormsPagePresenter.Close(viewModel);
         }
 
-        public virtual bool ShowPlatformHost(Type hostViewModel = null)
+        public virtual bool ShowPlatformHost(Type? hostViewModel = null)
         {
             MvxFormsLog.Instance.Trace($"Showing of native host View in Forms is not supported.");
             return false;
         }
 
-        public virtual bool ClosePlatformViews()
+        public virtual async ValueTask<bool> ClosePlatformViews()
         {
             CloseMasterNavigationController();
-            CloseModalViewControllers();
-            CloseTabBarViewController();
-            CloseSplitViewController();
+            await CloseModalViewControllers().ConfigureAwait(false);
+            await CloseTabBarViewController().ConfigureAwait(false);
+            await CloseSplitViewController().ConfigureAwait(false);
             return true;
         }
     }

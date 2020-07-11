@@ -22,13 +22,13 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected Frame RootFrame { get; set; }
 
-        public MvxApplication()
+        protected MvxApplication()
         {
             RegisterSetup();
             EnteredBackground += OnEnteredBackground;
             LeavingBackground += OnLeavingBackground;
             Suspending += OnSuspending;
-            Resuming += async (o, e) => await OnResuming(o, e).ConfigureAwait(false);
+            Resuming += OnResuming;
         }
 
         /// <summary>
@@ -88,9 +88,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected virtual Frame InitializeFrame(IActivatedEventArgs activationArgs)
         {
-            var rootFrame = Window.Current.Content as Frame;
-
-            if (rootFrame == null)
+            if (!(Window.Current.Content is Frame rootFrame))
             {
                 rootFrame = CreateFrame();
                 rootFrame.NavigationFailed += OnNavigationFailed;
@@ -179,15 +177,15 @@ namespace MvvmCross.Platforms.Uap.Views
             }
         }
 
-        protected virtual Task OnResuming(object sender, object e)
+        protected virtual void OnResuming(object sender, object e)
         {
             var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
-            return Resume(suspension);
+            Resume(suspension);
         }
 
-        protected virtual Task Resume(IMvxSuspensionManager suspensionManager)
+        protected virtual void Resume(IMvxSuspensionManager suspensionManager)
         {
-            return Task.CompletedTask;
+            //return Task.CompletedTask;
         }
 
         protected virtual void RegisterSetup()

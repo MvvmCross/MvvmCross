@@ -3,10 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using MvvmCross.Forms.Core;
-using MvvmCross.ViewModels;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
+using MvvmCross.ViewModels;
 using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Presenters
@@ -17,10 +18,10 @@ namespace MvvmCross.Forms.Presenters
 
         IMvxViewModelLoader ViewModelLoader { get; set; }
 
-        Page CreatePage(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute);
+        ValueTask<Page> CreatePage(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute);
 
-        Page[] CurrentPageTree { get; }
+        IEnumerable<Page> CurrentPageTree { get; }
 
-        NavigationPage TopNavigationPage(Page rootPage = null);
+        NavigationPage TopNavigationPage(Page? rootPage = null);
     }
 }

@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
@@ -42,7 +43,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             _activityType = Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>().Activity.GetType();
         }
 
-        public override Fragment GetItem(int position, Fragment.SavedState fragmentSavedState = null)
+        public override async ValueTask<Fragment> GetItem(int position, Fragment.SavedState? fragmentSavedState = null)
         {
             var fragmentInfo = FragmentsInfo.ElementAt(position);
             var fragment = Fragment.Instantiate(_context, fragmentInfo.FragmentType.FragmentJavaName());
@@ -57,7 +58,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
                 return fragment;
             }
 
-            mvxFragment.ViewModel = GetViewModel(fragmentInfo);
+            mvxFragment.ViewModel = await GetViewModel(fragmentInfo);
 
             fragment.Arguments = GetArguments(fragmentInfo);
 
@@ -79,7 +80,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
             return FragmentsInfo.ElementAt(position).Tag;
         }
 
-        private static IMvxViewModel GetViewModel(MvxViewPagerFragmentInfo fragmentInfo)
+        private static async ValueTask<IMvxViewModel> GetViewModel(MvxViewPagerFragmentInfo fragmentInfo)
         {
             if (fragmentInfo.Request is MvxViewModelInstanceRequest instanceRequest)
             {
@@ -88,7 +89,7 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
 
             var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
 
-            return viewModelLoader.LoadViewModel(fragmentInfo.Request, null);
+            return await viewModelLoader.LoadViewModel(fragmentInfo.Request, null).ConfigureAwait(false);
         }
 
         private static Bundle GetArguments(MvxViewPagerFragmentInfo fragmentInfo)

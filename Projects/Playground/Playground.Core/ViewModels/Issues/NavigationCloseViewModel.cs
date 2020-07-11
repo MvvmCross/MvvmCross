@@ -19,15 +19,15 @@ namespace Playground.Core.ViewModels
 
         public IMvxAsyncCommand TryToCloseNewViewModelCommand => new MvxAsyncCommand(TryToCloseNewViewModelAsync);
 
-        private async Task CloseThisAndOpenChildAsync()
+        private async ValueTask CloseThisAndOpenChildAsync()
         {
-            await _mvxNavigationService.Navigate<SecondChildViewModel>();
-            await _mvxNavigationService.Close(this);
+            await _mvxNavigationService.Navigate<SecondChildViewModel>().ConfigureAwait(false);
+            await _mvxNavigationService.Close(this).ConfigureAwait(false);
         }
 
-        private async Task TryToCloseNewViewModelAsync()
+        private async ValueTask TryToCloseNewViewModelAsync()
         {
-            await _mvxNavigationService.Close(Mvx.IoCProvider.Resolve<SecondChildViewModel>());
+            await _mvxNavigationService.Close(Mvx.IoCProvider.Resolve<SecondChildViewModel>()).ConfigureAwait(false);
         }
     }
 }

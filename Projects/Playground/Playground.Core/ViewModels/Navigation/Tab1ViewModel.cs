@@ -28,13 +28,15 @@ namespace Playground.Core.ViewModels
 
         public override async Task Initialize()
         {
-            await Task.Delay(3000);
+            await Task.Delay(3000).ConfigureAwait(false);
         }
 
         string para;
-        public override void Prepare(string parameter)
+        public override ValueTask Prepare(string parameter)
         {
             para = parameter;
+
+            return new ValueTask();
         }
 
         public override void ViewAppeared()

@@ -37,7 +37,7 @@ namespace MvvmCross.Base
         {
             try
             {
-                await action().ConfigureAwait(true);
+                await action().ConfigureAwait(false);
             }
             catch (Exception ex)
             {

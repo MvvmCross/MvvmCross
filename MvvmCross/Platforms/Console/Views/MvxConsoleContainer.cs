@@ -18,7 +18,7 @@ namespace MvvmCross.Platforms.Console.Views
         private readonly Stack<MvxViewModelRequest> _navigationStack = new Stack<MvxViewModelRequest>();
         private readonly object _targetLocker = new object();
 
-        public override Task<bool> Show(MvxViewModelRequest request)
+        public override ValueTask<bool> Show(MvxViewModelRequest request)
         {
             lock (_targetLocker)
             {
@@ -29,55 +29,55 @@ namespace MvvmCross.Platforms.Console.Views
                 }
                 var view = (IMvxConsoleView)Activator.CreateInstance(viewType);
                 var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
-                IMvxBundle savedState = null;
+                IMvxBundle? savedState = null;
                 var viewModel = viewModelLoader.LoadViewModel(request, savedState);
                 view.HackSetViewModel(viewModel);
                 Mvx.IoCProvider.Resolve<IMvxConsoleCurrentView>().CurrentView = view;
                 _navigationStack.Push(request);
             }
-            return Task.FromResult(true);
+            return new ValueTask<bool>(true);
         }
 
-        public override async Task<bool> ChangePresentation(MvxPresentationHint hint)
+        public override async ValueTask<bool> ChangePresentation(MvxPresentationHint hint)
         {
             if (await HandlePresentationChange(hint).ConfigureAwait(false)) return true;
 
-            if (hint is MvxClosePresentationHint)
+            if (hint is MvxClosePresentationHint closePresentationhint)
             {
-                return await Close((hint as MvxClosePresentationHint).ViewModelToClose).ConfigureAwait(false);
+                return await Close(closePresentationhint.ViewModelToClose).ConfigureAwait(false);
             }
 
             MvxLog.Instance.Warn("Hint ignored {0}", hint.GetType().Name);
             return false;
         }
 
-        public override Task<bool> Close(IMvxViewModel viewModel)
+        public override ValueTask<bool> Close(IMvxViewModel viewModel)
         {
             var currentView = Mvx.IoCProvider.Resolve<IMvxConsoleCurrentView>().CurrentView;
 
             if (currentView == null)
             {
                 MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe has no current page");
-                return Task.FromResult(true);
+                return new ValueTask<bool>(true);
             }
 
             if (currentView.ViewModel != viewModel)
             {
                 MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
-                return Task.FromResult(true);
+                return new ValueTask<bool>(true);
             }
 
             return GoBack();
         }
 
-        public override Task<bool> GoBack()
+        public override ValueTask<bool> GoBack()
         {
             lock (_targetLocker)
             {
                 if (!CanGoBack())
                 {
                     System.Console.WriteLine("Back not possible");
-                    return Task.FromResult(true);
+                    return new ValueTask<bool>(true);
                 }
 
                 // pop off the current view

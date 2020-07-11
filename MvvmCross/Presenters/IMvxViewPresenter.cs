@@ -10,12 +10,13 @@ namespace MvvmCross.Presenters
 {
     public interface IMvxViewPresenter
     {
-        Task<bool> Show(MvxViewModelRequest request);
+        ValueTask<bool> Show(MvxViewModelRequest request);
 
-        Task<bool> ChangePresentation(MvxPresentationHint hint);
+        ValueTask<bool> ChangePresentation(MvxPresentationHint hint);
 
-        void AddPresentationHintHandler<THint>(Func<THint, Task<bool>> action) where THint : MvxPresentationHint;
+        void AddPresentationHintHandler<THint>(Func<THint, ValueTask<bool>> action) 
+            where THint : MvxPresentationHint;
 
-        Task<bool> Close(IMvxViewModel toClose);
+        ValueTask<bool> Close(IMvxViewModel toClose);
     }
 }

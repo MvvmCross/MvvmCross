@@ -11,8 +11,8 @@ namespace MvvmCross.Presenters
 {
     public class MvxPresentationAttributeAction
     {
-        public Func<Type, IMvxPresentationAttribute, MvxViewModelRequest, Task<bool>> ShowAction { get; set; }
+        public Func<Type?, IMvxPresentationAttribute, MvxViewModelRequest, ValueTask<bool>>? ShowAction { get; set; }
 
-        public Func<IMvxViewModel, IMvxPresentationAttribute, Task<bool>> CloseAction { get; set; }
+        public Func<IMvxViewModel, IMvxPresentationAttribute, ValueTask<bool>>? CloseAction { get; set; }
     }
 }

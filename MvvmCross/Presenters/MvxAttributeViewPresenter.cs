@@ -16,7 +16,8 @@ namespace MvvmCross.Presenters
 {
     public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttributeViewPresenter
     {
-        protected IMvxViewModelTypeFinder _viewModelTypeFinder;
+        protected IMvxViewModelTypeFinder? _viewModelTypeFinder;
+
         public virtual IMvxViewModelTypeFinder ViewModelTypeFinder
         {
             get
@@ -31,7 +32,8 @@ namespace MvvmCross.Presenters
             }
         }
 
-        protected IMvxViewsContainer _viewsContainer;
+        protected IMvxViewsContainer? _viewsContainer;
+
         public virtual IMvxViewsContainer ViewsContainer
         {
             get
@@ -46,7 +48,7 @@ namespace MvvmCross.Presenters
             }
         }
 
-        protected IDictionary<Type, MvxPresentationAttributeAction> _attributeTypesActionsDictionary;
+        protected IDictionary<Type, MvxPresentationAttributeAction>? _attributeTypesActionsDictionary;
         public virtual IDictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
         {
             get
@@ -66,9 +68,9 @@ namespace MvvmCross.Presenters
 
         public abstract void RegisterAttributeTypes();
 
-        public abstract MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType);
+        public abstract ValueTask<MvxBasePresentationAttribute?> CreatePresentationAttribute(Type? viewModelType, Type? viewType);
 
-        public virtual MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
+        public virtual ValueTask<MvxBasePresentationAttribute?> GetOverridePresentationAttribute(MvxViewModelRequest request, Type? viewType)
         {
             if (viewType?.GetInterfaces().Contains(typeof(IMvxOverridePresentationAttribute)) ?? false)
             {
@@ -92,7 +94,7 @@ namespace MvvmCross.Presenters
                             presentationAttribute.ViewModelType = request.ViewModelType;
                         }
 
-                        return presentationAttribute;
+                        return new ValueTask<MvxBasePresentationAttribute?>(presentationAttribute);
                     }
                 }
                 finally
@@ -101,21 +103,20 @@ namespace MvvmCross.Presenters
                 }
             }
 
-            return null;
+            return new ValueTask<MvxBasePresentationAttribute?>((MvxBasePresentationAttribute?)null);
         }
 
-        public virtual MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request)
+        public virtual async ValueTask<MvxBasePresentationAttribute?> GetPresentationAttribute(MvxViewModelRequest request)
         {
             var viewType = ViewsContainer.GetViewType(request.ViewModelType);
 
-            var overrideAttribute = GetOverridePresentationAttribute(request, viewType);
+            var overrideAttribute = await GetOverridePresentationAttribute(request, viewType).ConfigureAwait(false);
             if (overrideAttribute != null)
                 return overrideAttribute;
 
-            var attribute = viewType
+            if (viewType?
                 .GetCustomAttributes(typeof(MvxBasePresentationAttribute), true)
-                .FirstOrDefault() as MvxBasePresentationAttribute;
-            if (attribute != null)
+                .FirstOrDefault() is MvxBasePresentationAttribute attribute)
             {
                 if (attribute.ViewType == null)
                     attribute.ViewType = viewType;
@@ -126,12 +127,15 @@ namespace MvvmCross.Presenters
                 return attribute;
             }
 
-            return CreatePresentationAttribute(request.ViewModelType, viewType);
+            return await CreatePresentationAttribute(request.ViewModelType, viewType).ConfigureAwait(false);
         }
 
-        protected virtual MvxPresentationAttributeAction GetPresentationAttributeAction(MvxViewModelRequest request, out MvxBasePresentationAttribute attribute)
+        protected virtual async ValueTask<(MvxPresentationAttributeAction action, MvxBasePresentationAttribute attribute)> GetPresentationAttributeAction(MvxViewModelRequest request)
         {
-            attribute = GetPresentationAttribute(request);
+            var attribute = await GetPresentationAttribute(request).ConfigureAwait(false);
+
+            if (attribute == null) throw new NullReferenceException(nameof(attribute));
+
             attribute.ViewModelType = request.ViewModelType;
             var viewType = attribute.ViewType;
             var attributeType = attribute.GetType();
@@ -146,13 +150,13 @@ namespace MvvmCross.Presenters
                 if (attributeAction.CloseAction == null)
                     throw new NullReferenceException($"attributeAction.CloseAction is null for attribute: {attributeType.Name}");
 
-                return attributeAction;
+                return (attributeAction, attribute);
             }
 
             throw new KeyNotFoundException($"The type {attributeType.Name} is not configured in the presenter dictionary");
         }
 
-        public override async Task<bool> ChangePresentation(MvxPresentationHint hint)
+        public override async ValueTask<bool> ChangePresentation(MvxPresentationHint hint)
         {
             if (await HandlePresentationChange(hint).ConfigureAwait(false)) return true;
 
@@ -165,14 +169,24 @@ namespace MvvmCross.Presenters
             return false;
         }
 
-        public override Task<bool> Close(IMvxViewModel viewModel)
+        public override async ValueTask<bool> Close(IMvxViewModel viewModel)
         {
-            return GetPresentationAttributeAction(new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute).CloseAction.Invoke(viewModel, attribute);
+            var (action, attribute) = await GetPresentationAttributeAction(new MvxViewModelInstanceRequest(viewModel)).ConfigureAwait(false);
+
+            if (action?.CloseAction != null && attribute != null)
+                return await action.CloseAction.Invoke(viewModel, attribute).ConfigureAwait(false);
+            else
+                return false;
         }
 
-        public override Task<bool> Show(MvxViewModelRequest request)
+        public override async ValueTask<bool> Show(MvxViewModelRequest request)
         {
-            return GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute).ShowAction.Invoke(attribute.ViewType, attribute, request);
+            var (action, attribute) = await GetPresentationAttributeAction(request).ConfigureAwait(false);
+
+            if (action?.ShowAction != null && attribute != null)
+                return await action.ShowAction.Invoke(attribute.ViewType, attribute, request).ConfigureAwait(false);
+            else
+                return false;
         }
     }
 }

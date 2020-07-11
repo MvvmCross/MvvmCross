@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
@@ -115,8 +116,6 @@ namespace MvvmCross.ViewModels
                 viewModel.Prepare();
                 if (navigationArgs?.Cancel == true)
                     return;
-
-                viewModel.InitializeTask = MvxNotifyTask.Create(viewModel.Initialize);
             }
             catch (Exception exception)
             {
@@ -148,8 +147,6 @@ namespace MvvmCross.ViewModels
                 viewModel.Prepare(param);
                 if (navigationArgs?.Cancel == true)
                     return;
-
-                viewModel.InitializeTask = MvxNotifyTask.Create(viewModel.Initialize);
             }
             catch (Exception exception)
             {

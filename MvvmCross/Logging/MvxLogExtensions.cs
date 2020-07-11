@@ -225,7 +225,7 @@ namespace MvvmCross.Logging
             }
         }
 
-        public static void Trace(this IMvxLog logger, string message, params object[] args)
+        public static void Trace(this IMvxLog logger, string? message, params object[] args)
         {
             logger.TraceFormat(message, args);
         }
@@ -235,7 +235,7 @@ namespace MvvmCross.Logging
             logger.TraceException(message, exception, args);
         }
 
-        public static void TraceFormat(this IMvxLog logger, string message, params object[] args)
+        public static void TraceFormat(this IMvxLog logger, string? message, params object[] args)
         {
             if (logger.IsTraceEnabled())
             {
@@ -300,9 +300,9 @@ namespace MvvmCross.Logging
             }
         }
 
-        private static void LogFormat(this IMvxLog logger, MvxLogLevel logLevel, string message, params object[] args)
+        private static void LogFormat(this IMvxLog logger, MvxLogLevel logLevel, string? message, params object[] args)
         {
-            logger.Log(logLevel, message.AsFunc(), null, args);
+            logger.Log(logLevel, message?.AsFunc(), null, args);
         }
 
         // Avoid the closure allocation, see https://gist.github.com/AArnott/d285feef75c18f6ecd2b

@@ -162,7 +162,7 @@ namespace MvvmCross.Core
                         }
                     }).ConfigureAwait(false);
                 }
-            }).ConfigureAwait(false);
+            }).ConfigureAwait(true);
         }
     }
 }

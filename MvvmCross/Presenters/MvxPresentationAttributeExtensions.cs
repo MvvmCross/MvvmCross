@@ -23,7 +23,7 @@ namespace MvvmCross.Presenters
         {
             var attributes = fromViewType.GetCustomAttributes(typeof(MvxBasePresentationAttribute), true);
 
-            if (!attributes.Any())
+            if (attributes.Length == 0)
                 throw new InvalidOperationException($"Type does not have {nameof(MvxBasePresentationAttribute)} attribute!");
 
             return attributes.Cast<MvxBasePresentationAttribute>();
@@ -34,7 +34,7 @@ namespace MvvmCross.Presenters
             return fromViewType.GetBasePresentationAttributes().FirstOrDefault();
         }
 
-        public static Type GetViewModelType(this Type viewType)
+        public static Type? GetViewModelType(this Type viewType)
         {
             if (!viewType.HasBasePresentationAttribute())
                 return null;
@@ -46,8 +46,8 @@ namespace MvvmCross.Presenters
 
         public static void Register<TMvxPresentationAttribute>(
             this IDictionary<Type, MvxPresentationAttributeAction> attributeTypesToActionsDictionary,
-            Func<Type, TMvxPresentationAttribute, MvxViewModelRequest, Task<bool>> showAction,
-            Func<IMvxViewModel, TMvxPresentationAttribute, Task<bool>> closeAction) where TMvxPresentationAttribute : class, IMvxPresentationAttribute
+            Func<Type, TMvxPresentationAttribute?, MvxViewModelRequest, ValueTask<bool>> showAction,
+            Func<IMvxViewModel, TMvxPresentationAttribute?, ValueTask<bool>> closeAction) where TMvxPresentationAttribute : class, IMvxPresentationAttribute
         {
             attributeTypesToActionsDictionary.Add(
                 typeof(TMvxPresentationAttribute),

@@ -17,7 +17,7 @@ namespace MvvmCross.Plugin.Sidebar
 {
     public class MvxSidebarPresenter : MvxIosViewPresenter
     {
-        protected virtual MvxSidebarViewController SideBarViewController { get; set; }
+        protected virtual MvxSidebarViewController? SideBarViewController { get; set; }
 
         public MvxSidebarPresenter(IUIApplicationDelegate applicationDelegate, UIWindow window)
                     : base(applicationDelegate, window)
@@ -37,16 +37,16 @@ namespace MvvmCross.Plugin.Sidebar
                     async (viewModel, attribute) => CloseSidebarViewController(viewModel, attribute));
         }
 
-        protected virtual async Task<bool> ShowSidebarViewController(
+        protected virtual async ValueTask<bool> ShowSidebarViewController(
             UIViewController viewController,
-            MvxSidebarPresentationAttribute attribute,
+            MvxSidebarPresentationAttribute? attribute,
             MvxViewModelRequest request)
         {
-            if (!await CloseModalViewControllers()) return false;
+            if (!await CloseModalViewControllers().ConfigureAwait(false)) return false;
             
             if (SideBarViewController == null)
             {
-                if (!await ShowRootViewController(new MvxSidebarViewController(), null, request)) return false;
+                if (!await ShowRootViewController(new MvxSidebarViewController(), null, request).ConfigureAwait(false)) return false;
             }
 
             switch (attribute.HintType)
@@ -76,7 +76,7 @@ namespace MvvmCross.Plugin.Sidebar
 
         protected virtual bool ShowPanelAndPopToRoot(MvxSidebarPresentationAttribute attribute, UIViewController viewController)
         {
-            var navigationController = (SideBarViewController as MvxSidebarViewController).NavigationController;
+            var navigationController = SideBarViewController?.NavigationController;
 
             if (navigationController == null)
                 return false;
@@ -89,7 +89,7 @@ namespace MvvmCross.Plugin.Sidebar
 
         protected virtual bool ShowPanelAndResetToRoot(MvxSidebarPresentationAttribute attribute, UIViewController viewController)
         {
-            var navigationController = (SideBarViewController as MvxSidebarViewController).NavigationController;
+            var navigationController = SideBarViewController?.NavigationController;
 
             if (navigationController == null)
                 return false;
@@ -145,7 +145,7 @@ namespace MvvmCross.Plugin.Sidebar
             return true;
         }
 
-        protected override async Task<bool> ShowRootViewController(UIViewController viewController, MvxRootPresentationAttribute attribute, MvxViewModelRequest request)
+        protected override async ValueTask<bool> ShowRootViewController(UIViewController viewController, MvxRootPresentationAttribute? attribute, MvxViewModelRequest request)
         {
             // check if viewController is a MvxSidebarPanelController
             if (viewController is MvxSidebarViewController sidebarView)
@@ -159,9 +159,9 @@ namespace MvvmCross.Plugin.Sidebar
 
                 Mvx.IoCProvider.RegisterSingleton<IMvxSidebarViewController>(SideBarViewController);
 
-                if (!await CloseModalViewControllers()) return false;
-                if (!await CloseTabBarViewController()) return false;
-                if (!await CloseSplitViewController()) return false;
+                if (!await CloseModalViewControllers().ConfigureAwait(false)) return false;
+                if (!await CloseTabBarViewController().ConfigureAwait(false)) return false;
+                if (!await CloseSplitViewController().ConfigureAwait(false)) return false;
                 CloseMasterNavigationController();
 
                 return true;
@@ -171,7 +171,7 @@ namespace MvvmCross.Plugin.Sidebar
                 SideBarViewController = null;
                 MasterNavigationController = null;
             
-                return await base.ShowRootViewController(viewController, attribute, request);
+                return await base.ShowRootViewController(viewController, attribute, request).ConfigureAwait(false);
             }
         }
 

@@ -23,20 +23,20 @@ namespace MvvmCross.Platforms.Mac.Presenters
     {
         private readonly INSApplicationDelegate _applicationDelegate;
 
-        public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
+        public override ValueTask<MvxBasePresentationAttribute?> CreatePresentationAttribute(Type? viewModelType, Type? viewType)
         {
-            MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. Assuming new window presentation");
-            return new MvxWindowPresentationAttribute();
+            MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType?.Name}. Assuming new window presentation");
+            return new ValueTask<MvxBasePresentationAttribute?>(new MvxWindowPresentationAttribute());
         }
 
-        public override MvxBasePresentationAttribute GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
+        public override ValueTask<MvxBasePresentationAttribute?> GetOverridePresentationAttribute(MvxViewModelRequest request, Type? viewType)
         {
             if (viewType?.GetInterface(nameof(IMvxOverridePresentationAttribute)) != null)
             {
                 var viewInstance = this.CreateViewControllerFor(viewType, null) as NSViewController;
                 using (viewInstance)
                 {
-                    var presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute(request);
+                    MvxBasePresentationAttribute? presentationAttribute = (viewInstance as IMvxOverridePresentationAttribute)?.PresentationAttribute(request);
 
                     if (presentationAttribute == null)
                     {
@@ -50,12 +50,12 @@ namespace MvvmCross.Platforms.Mac.Presenters
                         if (presentationAttribute.ViewModelType == null)
                             presentationAttribute.ViewModelType = request.ViewModelType;
 
-                        return presentationAttribute;
+                        return new ValueTask<MvxBasePresentationAttribute?>(presentationAttribute);
                     }
                 }
             }
 
-            return null;
+            return new ValueTask<MvxBasePresentationAttribute>((MvxBasePresentationAttribute)null);
         }
 
         protected virtual INSApplicationDelegate ApplicationDelegate => _applicationDelegate;
@@ -73,7 +73,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
                     (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
-                        return ShowWindowViewController(viewController, (MvxWindowPresentationAttribute)attribute, request);
+                        return ShowWindowViewController(viewController, attribute, request);
                     },
                     (viewModel, attribute) => Close(viewModel));
 
@@ -81,7 +81,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
                     (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
-                        return ShowContentViewController(viewController, (MvxContentPresentationAttribute)attribute, request);
+                        return ShowContentViewController(viewController, attribute, request);
                     },
                     (viewModel, attribute) => Close(viewModel));
 
@@ -89,7 +89,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
                     (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
-                        return ShowModalViewController(viewController, (MvxModalPresentationAttribute)attribute, request);
+                        return ShowModalViewController(viewController, attribute, request);
                     },
                     (viewModel, attribute) => Close(viewModel));
 
@@ -97,7 +97,7 @@ namespace MvvmCross.Platforms.Mac.Presenters
                     (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
-                        return ShowSheetViewController(viewController, (MvxSheetPresentationAttribute)attribute, request);
+                        return ShowSheetViewController(viewController, attribute, request);
                     },
                     (viewModel, attribute) => Close(viewModel));
 
@@ -105,18 +105,18 @@ namespace MvvmCross.Platforms.Mac.Presenters
                     (viewType, attribute, request) =>
                     {
                         var viewController = (NSViewController)this.CreateViewControllerFor(request);
-                        return ShowTabViewController(viewController, (MvxTabPresentationAttribute)attribute, request);
+                        return ShowTabViewController(viewController, attribute, request);
                     },
                     (viewModel, attribute) => Close(viewModel));
         }
 
-        protected virtual Task<bool> ShowWindowViewController(
+        protected virtual ValueTask<bool> ShowWindowViewController(
             NSViewController viewController,
-            MvxWindowPresentationAttribute attribute,
+            MvxWindowPresentationAttribute? attribute,
             MvxViewModelRequest request)
         {
-            NSWindow window = null;
-            MvxWindowController windowController = null;
+            NSWindow? window = null;
+            MvxWindowController? windowController = null;
 
             if (!string.IsNullOrEmpty(attribute.WindowControllerName))
             {
@@ -147,8 +147,8 @@ namespace MvvmCross.Platforms.Mac.Presenters
 
             window.ContentView = viewController.View;
             window.ContentViewController = viewController;
-            windowController.ShowWindow(null);
-            return Task.FromResult(true);
+            windowController?.ShowWindow(null);
+            return new ValueTask<bool>(true);
         }
 
         protected virtual void UpdateWindow(MvxWindowPresentationAttribute attribute, NSWindow window)
@@ -204,9 +204,9 @@ namespace MvvmCross.Platforms.Mac.Presenters
             return windowController;
         }
 
-        protected virtual Task<bool> ShowContentViewController(
+        protected virtual ValueTask<bool> ShowContentViewController(
             NSViewController viewController,
-            MvxContentPresentationAttribute attribute,
+            MvxContentPresentationAttribute? attribute,
             MvxViewModelRequest request)
         {
             var window = Windows.FirstOrDefault(w => w.Identifier == attribute.WindowIdentifier) ?? Windows.Last();
@@ -216,32 +216,36 @@ namespace MvvmCross.Platforms.Mac.Presenters
 
             window.ContentView = viewController.View;
             window.ContentViewController = viewController;
-            return Task.FromResult(true);
+            return new ValueTask<bool>(true);
         }
 
-        protected virtual Task<bool> ShowModalViewController(
+        protected virtual ValueTask<bool> ShowModalViewController(
             NSViewController viewController,
-            MvxModalPresentationAttribute attribute,
+            MvxModalPresentationAttribute? attribute,
             MvxViewModelRequest request)
         {
-            var window = Windows.FirstOrDefault(w => w.Identifier == attribute.WindowIdentifier) ?? Windows.Last();
+            if (attribute == null) throw new NullReferenceException(nameof(attribute));
+
+            var window = Windows?.FirstOrDefault(w => w.Identifier == attribute.WindowIdentifier) ?? Windows.Last();
 
             window.ContentViewController.PresentViewControllerAsModalWindow(viewController);
-            return Task.FromResult(true);
+            return new ValueTask<bool>(true);
         }
 
-        protected virtual Task<bool> ShowSheetViewController(
+        protected virtual ValueTask<bool> ShowSheetViewController(
             NSViewController viewController,
-            MvxSheetPresentationAttribute attribute,
+            MvxSheetPresentationAttribute? attribute,
             MvxViewModelRequest request)
         {
-            var window = Windows.FirstOrDefault(w => w.Identifier == attribute.WindowIdentifier) ?? Windows.Last();
+            if (attribute == null) throw new NullReferenceException(nameof(attribute));
+
+            var window = Windows?.FirstOrDefault(w => w.Identifier == attribute.WindowIdentifier) ?? Windows.Last();
 
             window.ContentViewController.PresentViewControllerAsSheet(viewController);
-            return Task.FromResult(true);
+            return new ValueTask<bool>(true);
         }
 
-        protected virtual Task<bool> ShowTabViewController(
+        protected virtual ValueTask<bool> ShowTabViewController(
             NSViewController viewController,
             MvxTabPresentationAttribute attribute,
             MvxViewModelRequest request)
@@ -253,45 +257,43 @@ namespace MvvmCross.Platforms.Mac.Presenters
                 throw new MvxException($"trying to display a tab but there is no TabViewController! View type: {viewController.GetType()}");
 
             tabViewController.ShowTabView(viewController, attribute.TabTitle);
-            return Task.FromResult(true);
+            return new ValueTask<bool>(true);
         }
 
-        public override Task<bool> Close(IMvxViewModel viewModel)
+        public override ValueTask<bool> Close(IMvxViewModel viewModel)
         {
             var currentWindows = Windows;
-            for (int i = currentWindows.Count - 1; i >= 0; i--)
+            foreach(var window in currentWindows.Reverse<NSWindow>())
             {
-                var window = currentWindows[i];
-
                 // if toClose is a sheet or modal
-                if (window.ContentViewController.PresentedViewControllers.Any())
+                if (window?.ContentViewController.PresentedViewControllers.Any() ?? false)
                 {
                     var modal = window.ContentViewController.PresentedViewControllers
                                       .Select(v => v as MvxViewController)
-                                      .FirstOrDefault(v => v.ViewModel == viewModel);
+                                      .FirstOrDefault(v => v?.ViewModel == viewModel);
 
                     if (modal != null)
                     {
                         window.ContentViewController.DismissViewController(modal);
-                        return Task.FromResult(true);
+                        return new ValueTask<bool>(true);
                     }
                 }
                 // if toClose is a tab
-                var tabViewController = window.ContentViewController as IMvxTabViewController;
+                var tabViewController = window?.ContentViewController as IMvxTabViewController;
                 if (tabViewController != null && tabViewController.CloseTabView(viewModel))
                 {
-                    return Task.FromResult(true);
+                    return new ValueTask<bool>(true);
                 }
 
                 // toClose is a content
-                var controller = window.ContentViewController as MvxViewController;
+                var controller = window?.ContentViewController as MvxViewController;
                 if (controller != null && controller.ViewModel == viewModel)
                 {
-                    window.Close();
-                    return Task.FromResult(true);
+                    window?.Close();
+                    return new ValueTask<bool>(true);
                 }
             }
-            return Task.FromResult(true);
+            return new ValueTask<bool>(true);
         }
 
         protected virtual MvxWindowController CreateWindowController(NSWindow window)

@@ -11,10 +11,10 @@ namespace MvvmCross.Platforms.Ios.Views
 {
     public interface IMvxSplitViewController
     {
-        void ShowMasterView(UIViewController viewController, MvxSplitViewPresentationAttribute attribute);
+        void ShowMasterView(UIViewController viewController, MvxSplitViewPresentationAttribute? attribute);
 
-        void ShowDetailView(UIViewController viewController, MvxSplitViewPresentationAttribute attribute);
+        void ShowDetailView(UIViewController viewController, MvxSplitViewPresentationAttribute? attribute);
 
-        bool CloseChildViewModel(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute);
+        bool CloseChildViewModel(IMvxViewModel viewModel, MvxBasePresentationAttribute? attribute);
     }
 }

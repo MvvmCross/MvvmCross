@@ -10,7 +10,7 @@ namespace MvvmCross.Platforms.Console.Views
     public interface IMvxConsoleNavigation
         : IMvxViewPresenter
     {
-        Task<bool> GoBack();
+        ValueTask<bool> GoBack();
 
         void RemoveBackEntry();
 

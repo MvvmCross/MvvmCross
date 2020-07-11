@@ -1,8 +1,9 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using MvvmCross.Exceptions;
 using MvvmCross.ViewModels;
@@ -14,13 +15,13 @@ namespace MvvmCross.Platforms.Wpf.Views
         : MvxViewsContainer
         , IMvxWpfViewsContainer
     {
-        public virtual FrameworkElement CreateView(MvxViewModelRequest request)
+        public virtual async ValueTask<FrameworkElement> CreateView(MvxViewModelRequest request)
         {
             var viewType = GetViewType(request.ViewModelType);
             if (viewType == null)
                 throw new MvxException("View Type not found for " + request.ViewModelType);
 
-            var wpfView = CreateView(viewType) as IMvxWpfView;        
+            var wpfView = await CreateView(viewType).ConfigureAwait(false) as IMvxWpfView;
 
             if (request is MvxViewModelInstanceRequest instanceRequest)
             {
@@ -29,27 +30,25 @@ namespace MvvmCross.Platforms.Wpf.Views
             else
             {
                 var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
-                wpfView.ViewModel = viewModelLoader.LoadViewModel(request, null);
+                wpfView.ViewModel = await viewModelLoader.LoadViewModel(request, null).ConfigureAwait(false);
             }
 
             return wpfView as FrameworkElement;
         }
 
-        public FrameworkElement CreateView(Type viewType)
+        public ValueTask<FrameworkElement> CreateView(Type viewType)
         {
             var viewObject = Activator.CreateInstance(viewType);
             if (viewObject == null)
                 throw new MvxException("View not loaded for " + viewType);
 
-            var wpfView = viewObject as IMvxWpfView;
-            if (wpfView == null)
+            if (!(viewObject is IMvxWpfView wpfView))
                 throw new MvxException("Loaded View does not have IMvxWpfView interface " + viewType);
 
-            var viewControl = viewObject as FrameworkElement;
-            if (viewControl == null)
+            if (!(viewObject is FrameworkElement viewControl))
                 throw new MvxException("Loaded View is not a FrameworkElement " + viewType);
 
-            return viewControl;
+            return new ValueTask<FrameworkElement>(viewControl);
         }
     }
 }

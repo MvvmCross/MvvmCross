@@ -19,10 +19,10 @@ namespace MvvmCross.Commands
     public interface IMvxCommand<T> : ICommand
     {
         [Obsolete("Use the strongly typed version of Execute instead", true)]
-        new void Execute(object parameter);
+        new void Execute(object? parameter);
 
         [Obsolete("Use the strongly typed version of CanExecute instead", true)]
-        new bool CanExecute(object parameter);
+        new bool CanExecute(object? parameter);
 
         void RaiseCanExecuteChanged();
 
