@@ -16,7 +16,9 @@ namespace Playground.Core.ViewModels
         {
         }
 
-        public IMvxAsyncCommand LoginCommand => new MvxAsyncCommand(GotoMasterDetailPage, CanLogin);
+        public IMvxAsyncCommand LoginCommand => new MvxAsyncCommand(
+            async ()=> await GotoMasterDetailPage().ConfigureAwait(false), 
+            CanLogin);
 
         private bool CanLogin()
         {

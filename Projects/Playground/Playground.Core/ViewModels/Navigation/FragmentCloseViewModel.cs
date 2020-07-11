@@ -11,8 +11,8 @@ namespace Playground.Core.ViewModels.Navigation
         public FragmentCloseViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService)
             : base(logProvider, navigationService)
         {
-            ForwardCommand = new MvxAsyncCommand(() => NavigationService.Navigate<FragmentCloseViewModel>());
-            CloseCommand = new MvxAsyncCommand(() => NavigationService.Close(this));
+            ForwardCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<FragmentCloseViewModel>().ConfigureAwait(false));
+            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this).ConfigureAwait(false));
 
             Description = $"View number {_counter++}";
         }

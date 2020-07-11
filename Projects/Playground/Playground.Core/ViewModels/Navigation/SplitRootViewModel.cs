@@ -14,8 +14,10 @@ namespace Playground.Core.ViewModels
     {
         public SplitRootViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
-            ShowInitialMenuCommand = new MvxAsyncCommand(ShowInitialViewModel);
-            ShowDetailCommand = new MvxAsyncCommand(ShowDetailViewModel);
+            ShowInitialMenuCommand = new MvxAsyncCommand(
+                async () => await ShowInitialViewModel().ConfigureAwait(false));
+            ShowDetailCommand = new MvxAsyncCommand(
+                async () => await ShowDetailViewModel().ConfigureAwait(false));
         }
 
         public IMvxAsyncCommand ShowInitialMenuCommand { get; private set; }

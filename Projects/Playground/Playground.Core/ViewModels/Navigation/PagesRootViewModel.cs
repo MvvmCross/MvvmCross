@@ -16,18 +16,21 @@ namespace Playground.Core.ViewModels
     {
         public PagesRootViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
-            ShowInitialViewModelsCommand = new MvxAsyncCommand(ShowInitialViewModels);
+            ShowInitialViewModelsCommand = new MvxAsyncCommand(
+                async () => await ShowInitialViewModels().ConfigureAwait(false));
         }
 
         public IMvxAsyncCommand ShowInitialViewModelsCommand { get; private set; }
 
         private async Task ShowInitialViewModels()
         {
-            var tasks = new List<Task>();
-            tasks.Add(NavigationService.Navigate<Page1ViewModel>());
-            tasks.Add(NavigationService.Navigate<Page2ViewModel>());
-            tasks.Add(NavigationService.Navigate<Page3ViewModel>());
-            await Task.WhenAll(tasks);
+            var tasks = new[]
+            {
+                NavigationService.Navigate<Page1ViewModel>().AsTask(),
+                NavigationService.Navigate<Page2ViewModel>().AsTask(),
+                NavigationService.Navigate<Page3ViewModel>().AsTask(),
+            };
+            await Task.WhenAll(tasks).ConfigureAwait(false);
         }
     }
 }

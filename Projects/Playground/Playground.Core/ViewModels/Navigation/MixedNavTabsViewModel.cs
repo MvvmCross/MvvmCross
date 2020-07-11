@@ -25,13 +25,16 @@ namespace Playground.Core.ViewModels
 
         private async Task ShowInitialViewModels()
         {
-            var tasks = new List<Task>();
-            tasks.Add(NavigationService.Navigate<MixedNavTab1ViewModel>());
-            tasks.Add(NavigationService.Navigate<MixedNavTab2ViewModel>());
-            //tasks.Add(NavigationService.Navigate<Tab1ViewModel, string>("test"));
-            //tasks.Add(NavigationService.Navigate<Tab2ViewModel>());
-            //tasks.Add(NavigationService.Navigate<Tab3ViewModel>());
-            await Task.WhenAll(tasks);
+            var tasks = new[]
+            {
+                NavigationService.Navigate<MixedNavTab1ViewModel>().AsTask(),
+                NavigationService.Navigate<MixedNavTab2ViewModel>().AsTask(),
+                //NavigationService.Navigate<Tab1ViewModel, string>("test").AsTask(),
+                //NavigationService.Navigate<Tab2ViewModel>().AsTask(),
+                //NavigationService.Navigate<Tab3ViewModel>().AsTask()
+            };
+
+            await Task.WhenAll(tasks).ConfigureAwait(false);
         }
     }
 }

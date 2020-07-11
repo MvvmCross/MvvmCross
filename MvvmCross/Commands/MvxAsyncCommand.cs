@@ -177,16 +177,6 @@ namespace MvvmCross.Commands
         private readonly Func<CancellationToken?, ValueTask> _execute;
         private readonly Func<bool>? _canExecute;
 
-        public MvxAsyncCommand(Func<Task> execute, Func<bool>? canExecute = null, bool allowConcurrentExecutions = false)
-            : base(allowConcurrentExecutions)
-        {
-            if (execute == null)
-                throw new ArgumentNullException(nameof(execute));
-
-            _execute = (cancellationToken) => new ValueTask(execute());
-            _canExecute = canExecute;
-        }
-
         public MvxAsyncCommand(Func<ValueTask> execute, Func<bool>? canExecute = null, bool allowConcurrentExecutions = false)
             : base(allowConcurrentExecutions)
         {
@@ -196,13 +186,6 @@ namespace MvvmCross.Commands
             _execute = (cancellationToken) => execute();
             _canExecute = canExecute;
         }
-
-        //public MvxAsyncCommand(Func<CancellationToken?, Task> execute, Func<bool>? canExecute = null, bool allowConcurrentExecutions = false)
-        //    : base(allowConcurrentExecutions)
-        //{
-        //    _execute = (cancellationToken) => new ValueTask(execute(cancellationToken));
-        //    _canExecute = canExecute;
-        //}
 
         public MvxAsyncCommand(Func<CancellationToken?, ValueTask> execute, Func<bool>? canExecute = null, bool allowConcurrentExecutions = false)
             : base(allowConcurrentExecutions)
@@ -221,20 +204,12 @@ namespace MvvmCross.Commands
             return _execute(CancelToken);
         }
 
-        //public static MvxAsyncCommand<T> CreateCommand<T>(Func<T, Task> execute, Func<T, bool>? canExecute = null, bool allowConcurrentExecutions = false)
-        //{
-        //    return new MvxAsyncCommand<T>(execute, canExecute, allowConcurrentExecutions);
-        //}
 
         public static MvxAsyncCommand<T> CreateCommand<T>(Func<T, ValueTask> execute, Func<T, bool>? canExecute = null, bool allowConcurrentExecutions = false)
         {
             return new MvxAsyncCommand<T>(execute, canExecute, allowConcurrentExecutions);
         }
 
-        //public static MvxAsyncCommand<T> CreateCommand<T>(Func<T, CancellationToken?, Task> execute, Func<T, bool>? canExecute = null, bool allowConcurrentExecutions = false)
-        //{
-        //    return new MvxAsyncCommand<T>(execute, canExecute, allowConcurrentExecutions);
-        //}
 
         public static MvxAsyncCommand<T> CreateCommand<T>(Func<T, CancellationToken?, ValueTask> execute, Func<T, bool>? canExecute = null, bool allowConcurrentExecutions = false)
         {
@@ -254,26 +229,12 @@ namespace MvvmCross.Commands
         private readonly Func<T, CancellationToken?, ValueTask> _execute;
         private readonly Func<T, bool>? _canExecute;
 
-        //public MvxAsyncCommand(Func<T, Task> execute, Func<T, bool>? canExecute = null, bool allowConcurrentExecutions = false)
-        //    : base(allowConcurrentExecutions)
-        //{
-        //    _execute = (p, _) => new ValueTask(execute(p));
-        //    _canExecute = canExecute;
-        //}
-
         public MvxAsyncCommand(Func<T, ValueTask> execute, Func<T, bool>? canExecute = null, bool allowConcurrentExecutions = false)
             : base(allowConcurrentExecutions)
         {
             _execute = (p, _) => execute(p);
             _canExecute = canExecute;
         }
-
-        //public MvxAsyncCommand(Func<T, CancellationToken?, Task> execute, Func<T, bool>? canExecute = null, bool allowConcurrentExecutions = false)
-        //    : base(allowConcurrentExecutions)
-        //{
-        //    _execute = (p, c) => new ValueTask(execute(p, c));
-        //    _canExecute = canExecute;
-        //}
 
         public MvxAsyncCommand(Func<T, CancellationToken?, ValueTask> execute, Func<T, bool>? canExecute = null, bool allowConcurrentExecutions = false)
             : base(allowConcurrentExecutions)

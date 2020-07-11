@@ -15,8 +15,10 @@ namespace Playground.Core.ViewModels
 
         public NativeViewModel(IMvxNavigationService navigationService)
         {
-            ForwardCommand = new MvxAsyncCommand(() => navigationService.Navigate<NativeViewModel>());
-            CloseCommand = new MvxAsyncCommand(() => navigationService.Close(this));
+            ForwardCommand = new MvxAsyncCommand(
+                async () => await navigationService.Navigate<NativeViewModel>().ConfigureAwait(false));
+            CloseCommand = new MvxAsyncCommand(
+                async () => await navigationService.Close(this).ConfigureAwait(false));
 
             Description = $"View number {_counter++}";
         }

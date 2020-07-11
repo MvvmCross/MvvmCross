@@ -16,16 +16,19 @@ namespace Playground.Core.ViewModels
     {
         public TabsRootBViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
-            ShowInitialViewModelsCommand = new MvxAsyncCommand(ShowInitialViewModels);
+            ShowInitialViewModelsCommand = new MvxAsyncCommand(
+                async () => await ShowInitialViewModels().ConfigureAwait(false));
         }
 
         public IMvxAsyncCommand ShowInitialViewModelsCommand { get; private set; }
 
         private async Task ShowInitialViewModels()
         {
-            var tasks = new List<Task>();
-            tasks.Add(NavigationService.Navigate<Tab1ViewModel, string>("test"));
-            tasks.Add(NavigationService.Navigate<Tab2ViewModel>());
+            var tasks = new[]
+            {
+                NavigationService.Navigate<Tab1ViewModel, string>("test").AsTask(),
+                NavigationService.Navigate<Tab2ViewModel>().AsTask()
+            };
             await Task.WhenAll(tasks).ConfigureAwait(false);
         }
 

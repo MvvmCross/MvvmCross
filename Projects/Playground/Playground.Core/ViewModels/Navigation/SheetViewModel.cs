@@ -14,14 +14,14 @@ namespace Playground.Core.ViewModels
     {
         public SheetViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
-            CloseCommand = new MvxAsyncCommand(CloseSheet);
+            CloseCommand = new MvxAsyncCommand(async () => await CloseSheet().ConfigureAwait(false));
         }
 
         public IMvxAsyncCommand CloseCommand { get; private set; }
 
-        private async Task CloseSheet()
+        private async ValueTask CloseSheet()
         {
-            await NavigationService.Close(this);
+            await NavigationService.Close(this).ConfigureAwait(false);
         }
     }
 }
