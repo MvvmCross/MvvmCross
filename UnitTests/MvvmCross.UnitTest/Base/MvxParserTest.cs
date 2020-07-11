@@ -381,7 +381,9 @@ namespace MvvmCross.UnitTest.Base
         [InlineData('&')]
         [InlineData('*')]
         [InlineData('(')]
+#if !DEBUG
         [InlineData(')')]
+#endif
         [InlineData('+')]
         [InlineData('=')]
         public void TestIsValidFirstCharacterOfCSharpName_Fail(char character)
