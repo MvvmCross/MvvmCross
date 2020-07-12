@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
@@ -42,10 +43,13 @@ namespace MvvmCross.Platforms.Tizen.Core
             }
         }
 
-        protected override void InitializeFirstChance()
+        protected override async Task InitializeFirstChance()
         {
-            RegisterPresenter();
-            base.InitializeFirstChance();
+            await Task.Run(() =>
+            {
+                RegisterPresenter();
+            }).ConfigureAwait(false);
+            await base.InitializeFirstChance().ConfigureAwait(false);
         }
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()

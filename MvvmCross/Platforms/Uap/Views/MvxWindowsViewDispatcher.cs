@@ -14,8 +14,8 @@ namespace MvvmCross.Platforms.Uap.Views
     {
         private readonly IMvxWindowsViewPresenter _presenter;
 
-        public MvxWindowsViewDispatcher(IMvxWindowsViewPresenter presenter, IMvxWindowsFrame rootFrame)
-            : base(rootFrame.UnderlyingControl.Dispatcher)
+        public MvxWindowsViewDispatcher(IMvxWindowsViewPresenter presenter, IMvxWindowsFrame? rootFrame)
+            : base(rootFrame?.UnderlyingControl.Dispatcher)
         {
             _presenter = presenter;
         }

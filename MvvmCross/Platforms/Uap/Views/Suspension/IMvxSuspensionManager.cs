@@ -31,7 +31,7 @@ namespace MvvmCross.Platforms.Uap.Views.Suspension
         /// <see cref="MvxSuspensionManager"/></param>
         /// <param name="sessionStateKey">A unique key into <see cref="MvxSuspensionManager.SessionState"/> used to
         /// store navigation-related information.</param>
-        void RegisterFrame(IMvxWindowsFrame frame, string sessionStateKey);
+        void RegisterFrame(IMvxWindowsFrame? frame, string sessionStateKey);
 
         /// <summary>
         /// Disassociates a <see cref="Frame"/> previously registered by <see cref="RegisterFrame"/>

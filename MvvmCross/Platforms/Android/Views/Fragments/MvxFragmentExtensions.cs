@@ -51,7 +51,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             }).GetAwaiter().GetResult();
         }
 
-        public static Fragment ToFragment(this IMvxFragmentView fragmentView)
+        public static Fragment? ToFragment(this IMvxFragmentView fragmentView)
         {
             return fragmentView as Fragment;
         }
@@ -97,7 +97,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             }
         }
 
-        public static Task EnsureSetupInitialized(this IMvxFragmentView fragmentView)
+        public static ValueTask EnsureSetupInitialized(this IMvxFragmentView fragmentView)
         {
             var fragment = fragmentView.ToFragment();
             if (fragment == null)

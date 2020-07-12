@@ -28,7 +28,7 @@ namespace MvvmCross.Forms.Platforms.Wpf.Views
             Initialized += MvxWindow_Initialized;
 
             Xamarin.Forms.Forms.Init();
-            MvxWpfSetupSingleton.EnsureSingletonAvailable(Dispatcher, this).EnsureInitialized().GetAwaiter().GetResult();
+            MvxWpfSetupSingleton.EnsureSingletonAvailable(Dispatcher, this).EnsureInitialized().AsTask().Wait();
         }
 
         private async void MvxWindow_Initialized(object sender, EventArgs e)

@@ -14,13 +14,13 @@ namespace MvvmCross.ViewModels
 {
     public abstract class MvxApplication : IMvxApplication
     {
-        private IMvxViewModelLocator _defaultLocator;
+        private IMvxViewModelLocator? _defaultLocator;
 
         private IMvxViewModelLocator DefaultLocator
         {
             get
             {
-                _defaultLocator = _defaultLocator ?? CreateDefaultViewModelLocator();
+                _defaultLocator ??= CreateDefaultViewModelLocator();
                 return _defaultLocator;
             }
         }

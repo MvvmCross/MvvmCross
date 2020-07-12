@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 using AppKit;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
@@ -85,11 +86,14 @@ namespace MvvmCross.Platforms.Mac.Core
             return new MvxMacViewDispatcher(_presenter);
         }
 
-        protected override void InitializeFirstChance()
+        protected override async Task InitializeFirstChance()
         {
-            RegisterPresenter();
-            RegisterLifetime();
-            base.InitializeFirstChance();
+            await Task.Run(() =>
+            {
+                RegisterPresenter();
+                RegisterLifetime();
+            }).ConfigureAwait(false);
+            await base.InitializeFirstChance().ConfigureAwait(false);
         }
 
         protected virtual void RegisterLifetime()

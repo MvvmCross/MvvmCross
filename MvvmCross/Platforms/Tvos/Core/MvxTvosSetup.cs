@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 using MvvmCross.Converters;
 using MvvmCross.Plugin;
 using MvvmCross.Binding;
@@ -70,12 +71,15 @@ namespace MvvmCross.Platforms.Tvos.Core
             return new MvxTvosViewDispatcher(Presenter);
         }
 
-        protected override void InitializeFirstChance()
+        protected override async Task InitializeFirstChance()
         {
-            RegisterPlatformProperties();
-            RegisterPresenter();
-            RegisterLifetime();
-            base.InitializeFirstChance();
+            await Task.Run(() =>
+            {
+                RegisterPlatformProperties();
+                RegisterPresenter();
+                RegisterLifetime();
+            }).ConfigureAwait(false);
+            await base.InitializeFirstChance().ConfigureAwait(false);
         }
 
         protected virtual void RegisterPlatformProperties()

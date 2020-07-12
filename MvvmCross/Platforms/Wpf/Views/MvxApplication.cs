@@ -22,7 +22,7 @@ namespace MvvmCross.Platforms.Wpf.Views
             await RunAppStart().ConfigureAwait(false);
         }
 
-        protected virtual async Task RunAppStart(object hint = null)
+        protected virtual async Task RunAppStart(object? hint = null)
         {
             if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
             {

@@ -4,44 +4,43 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
+using MvvmCross.Binding;
+using MvvmCross.Binding.Binders;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Converters;
-using MvvmCross.Exceptions;
-using MvvmCross.Plugin;
 using MvvmCross.Core;
+using MvvmCross.Exceptions;
+using MvvmCross.IoC;
 using MvvmCross.Platforms.Uap.Binding;
 using MvvmCross.Platforms.Uap.Presenters;
 using MvvmCross.Platforms.Uap.Views;
 using MvvmCross.Platforms.Uap.Views.Suspension;
+using MvvmCross.Presenters;
 using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Controls;
-using MvvmCross.Binding;
-using MvvmCross.Binding.BindingContext;
-using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Binding.Binders;
-using MvvmCross.Presenters;
-using MvvmCross.IoC;
 
 namespace MvvmCross.Platforms.Uap.Core
 {
     public abstract class MvxWindowsSetup
         : MvxSetup, IMvxWindowsSetup
     {
-        private IMvxWindowsFrame _rootFrame;
-        private string _suspensionManagerSessionStateKey;
-        private IMvxWindowsViewPresenter _presenter;
+        private IMvxWindowsFrame? _rootFrame;
+        private string? _suspensionManagerSessionStateKey;
+        private IMvxWindowsViewPresenter? _presenter;
 
         public virtual void PlatformInitialize(Frame rootFrame, IActivatedEventArgs activatedEventArgs,
-            string suspensionManagerSessionStateKey = null)
+            string? suspensionManagerSessionStateKey = null)
         {
             PlatformInitialize(rootFrame, suspensionManagerSessionStateKey);
             ActivationArguments = activatedEventArgs;
         }
 
-        public virtual void PlatformInitialize(Frame rootFrame, string suspensionManagerSessionStateKey = null)
+        public virtual void PlatformInitialize(Frame rootFrame, string? suspensionManagerSessionStateKey = null)
         {
             PlatformInitialize(new MvxWrappedFrame(rootFrame));
             _suspensionManagerSessionStateKey = suspensionManagerSessionStateKey;
@@ -57,11 +56,14 @@ namespace MvvmCross.Platforms.Uap.Core
             ActivationArguments = e;
         }
 
-        protected override void InitializeFirstChance()
+        protected override async Task InitializeFirstChance()
         {
-            InitializeSuspensionManager();
-            RegisterPresenter();
-            base.InitializeFirstChance();
+            await Task.Run(() =>
+            {
+                InitializeSuspensionManager();
+                RegisterPresenter();
+            }).ConfigureAwait(false);
+            await base.InitializeFirstChance().ConfigureAwait(false);
         }
 
         protected virtual void InitializeSuspensionManager()
@@ -113,7 +115,7 @@ namespace MvvmCross.Platforms.Uap.Core
             return new MvxWindowsViewPresenter(rootFrame);
         }
 
-        protected virtual MvxWindowsViewDispatcher CreateViewDispatcher(IMvxWindowsFrame rootFrame)
+        protected virtual MvxWindowsViewDispatcher CreateViewDispatcher(IMvxWindowsFrame? rootFrame)
         {
             return new MvxWindowsViewDispatcher(Presenter, rootFrame);
         }

@@ -42,7 +42,7 @@ namespace MvvmCross.Platforms.Ios.Core
             if (Window == null)
                 Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            MvxIosSetupSingleton.EnsureSingletonAvailable(this, Window).EnsureInitialized().Wait();
+            MvxIosSetupSingleton.EnsureSingletonAvailable(this, Window).EnsureInitialized().AsTask().Wait();
 
             RunAppStart(launchOptions);
 
@@ -50,7 +50,7 @@ namespace MvvmCross.Platforms.Ios.Core
             return true;
         }
 
-        protected virtual void RunAppStart(object hint = null)
+        protected virtual void RunAppStart(object? hint = null)
         {
             if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
             {
@@ -59,7 +59,7 @@ namespace MvvmCross.Platforms.Ios.Core
             Window.MakeKeyAndVisible();
         }
 
-        protected virtual object GetAppStartHint(object hint = null)
+        protected virtual object? GetAppStartHint(object? hint = null)
         {
             return hint;
         }

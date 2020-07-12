@@ -40,7 +40,7 @@ namespace MvvmCross.Core
        : MvxSingleton<MvxSetupSingleton>
     {
         private static readonly object _lockObject = new object();
-        private IMvxSetup _setup;
+        private IMvxSetup? _setup;
         private IMvxSetupMonitor? _currentMonitor;
 
         protected virtual IMvxSetup Setup => _setup;
@@ -77,12 +77,12 @@ namespace MvvmCross.Core
         {
             // Double null - check before creating the setup singleton object
             if (Instance != null)
-                return Instance as TMvxSetupSingleton;
+                return (TMvxSetupSingleton)Instance;
 
             lock (_lockObject)
             {
                 if (Instance != null)
-                    return Instance as TMvxSetupSingleton;
+                    return (TMvxSetupSingleton)Instance;
 
                 // Go ahead and create the setup singleton, and then
                 // create the setup instance. 
@@ -90,11 +90,11 @@ namespace MvvmCross.Core
                 // singleton constructor
                 var instance = new TMvxSetupSingleton();
                 instance.CreateSetup();
-                return Instance as TMvxSetupSingleton;
+                return (TMvxSetupSingleton)Instance;
             }
         }
 
-        public virtual Task EnsureInitialized()
+        public virtual ValueTask EnsureInitialized()
         {
             return StartSetupInitialization();
         }
@@ -103,7 +103,7 @@ namespace MvvmCross.Core
         {
             _currentMonitor = setupMonitor;
 
-            if(_currentMonitor != null)
+            if (_currentMonitor != null)
                 await _currentMonitor.InitializationComplete().ConfigureAwait(false);
 
             await StartSetupInitialization().ConfigureAwait(false);
@@ -145,27 +145,50 @@ namespace MvvmCross.Core
             base.Dispose(isDisposing);
         }
 
-        private async Task StartSetupInitialization()
+        private async ValueTask StartSetupInitialization()
         {
-            await _setup.InitializePrimary().ConfigureAwait(false);
-            await Task.Run(async () =>
+            if (_setup == null) throw new MvxException("Not is initialize 'setup'");
+
+            await _setup.InitializePrimary()
+            .ContinueWith(async (t) =>
             {
-                await _setup.InitializeSecondary().ConfigureAwait(false);
-
-                var monitor = _currentMonitor;
-
-                if (monitor != null)
+                if (t.IsCompleted)
                 {
-                    var dispatcher = Mvx.IoCProvider.GetSingleton<IMvxMainThreadDispatcher>();
-                    await dispatcher.ExecuteOnMainThreadAsync(async () =>
-                    {
-                        if (monitor != null)
+                    await _setup.InitializeSecondary()
+                    .ContinueWith(async (tt) =>
                         {
-                            await monitor.InitializationComplete().ConfigureAwait(true);
-                        }
-                    }).ConfigureAwait(false);
+                            if (tt.IsCompleted)
+                            {
+                                await RunMonitor().ConfigureAwait(false);
+                            }
+                            else
+                            {
+                                throw new MvxException("'InitializeSecondary' is not completed successfully.");
+                            }
+                        }, TaskScheduler.Current).Unwrap().ConfigureAwait(false);
                 }
-            }).ConfigureAwait(true);
+                else
+                {
+                    throw new MvxException("'InitializePrimary' is not completed successfully.");
+                }
+            }, TaskScheduler.Current).Unwrap().ConfigureAwait(false);
+        }
+
+        private async Task RunMonitor()
+        {
+            var monitor = _currentMonitor;
+
+            if (monitor != null)
+            {
+                var dispatcher = Mvx.IoCProvider.GetSingleton<IMvxMainThreadDispatcher>();
+                await dispatcher.ExecuteOnMainThreadAsync(async () =>
+                {
+                    if (monitor != null)
+                    {
+                        await monitor.InitializationComplete().ConfigureAwait(true);
+                    }
+                }).ConfigureAwait(false);
+            }
         }
     }
 }

@@ -14,8 +14,8 @@ namespace MvvmCross.Core
 {
     public interface IMvxSetup
     {
-        ValueTask InitializePrimary();
-        ValueTask InitializeSecondary();
+        Task InitializePrimary();
+        Task InitializeSecondary();
 
         IEnumerable<Assembly> GetViewAssemblies();
         IEnumerable<Assembly> GetViewModelAssemblies();
@@ -29,6 +29,7 @@ namespace MvvmCross.Core
         MvxLogProviderType GetDefaultLogProviderType();
 
         event EventHandler<MvxSetupStateEventArgs> StateChanged;
+
         MvxSetupState State { get; }
     }
 }

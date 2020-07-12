@@ -37,14 +37,14 @@ namespace MvvmCross.Forms.Platforms.Uap.Views
             LoadFormsApplication();
         }
 
-        protected virtual object GetAppStartHint(object hint = null)
+        protected virtual object? GetAppStartHint(object? hint = null)
         {
             return hint;
         }
 
         protected virtual void LoadFormsApplication()
         {
-            var presenter = Mvx.IoCProvider.Resolve<IMvxFormsViewPresenter>() as MvxFormsUwpViewPresenter;
+            var presenter = Mvx.IoCProvider.Resolve<IMvxFormsViewPresenter>();
             LoadApplication(presenter.FormsApplication);
         }
     }

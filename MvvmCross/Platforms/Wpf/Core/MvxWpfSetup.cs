@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using MvvmCross.Binding;
@@ -27,9 +28,9 @@ namespace MvvmCross.Platforms.Wpf.Core
     public abstract class MvxWpfSetup
     : MvxSetup, IMvxWpfSetup
     {
-        private Dispatcher _uiThreadDispatcher;
+        private Dispatcher? _uiThreadDispatcher;
         private ContentControl _root;
-        private IMvxWpfViewPresenter _presenter;
+        private IMvxWpfViewPresenter? _presenter;
 
         public void PlatformInitialize(Dispatcher uiThreadDispatcher, IMvxWpfViewPresenter presenter)
         {
@@ -79,11 +80,14 @@ namespace MvvmCross.Platforms.Wpf.Core
             return new MvxWpfViewDispatcher(_uiThreadDispatcher, Presenter);
         }
 
-        protected virtual void RegisterPresenter()
+        protected virtual Task RegisterPresenter()
         {
-            var presenter = Presenter;
-            Mvx.IoCProvider.RegisterSingleton(presenter);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
+            return Task.Run(() =>
+            {
+                var presenter = Presenter;
+                Mvx.IoCProvider.RegisterSingleton(presenter);
+                Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
+            });
         }
 
         protected override IMvxNameMapping CreateViewToViewModelNaming()
@@ -91,10 +95,10 @@ namespace MvvmCross.Platforms.Wpf.Core
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "Control");
         }
 
-        protected override void InitializeFirstChance()
+        protected override async Task InitializeFirstChance()
         {
-            RegisterPresenter();
-            base.InitializeFirstChance();
+            await RegisterPresenter().ConfigureAwait(false);
+            await base.InitializeFirstChance().ConfigureAwait(false);
         }
 
         protected override void InitializeLastChance()
