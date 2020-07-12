@@ -30,7 +30,7 @@ namespace MvvmCross.Platforms.Wpf.Views
             }
         }
 
-        protected virtual object GetAppStartHint(object hint = null)
+        protected virtual object? GetAppStartHint(object? hint = null)
         {
             return hint;
         }

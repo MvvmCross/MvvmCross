@@ -3,14 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Windows;
 using System.Threading.Tasks;
 using MvvmCross.Forms.Platforms.Wpf.Presenters;
 using MvvmCross.Forms.Presenters;
 using MvvmCross.ViewModels;
 using Xamarin.Forms.Platform.WPF;
 using MvvmCross.Platforms.Wpf.Core;
-using Xamarin.Forms;
 
 namespace MvvmCross.Forms.Platforms.Wpf.Views
 {
@@ -42,7 +40,7 @@ namespace MvvmCross.Forms.Platforms.Wpf.Views
             await RunAppStart(e).ConfigureAwait(false);
         }
 
-        protected virtual async Task RunAppStart(object hint = null)
+        protected virtual async Task RunAppStart(object? hint = null)
         {
             LoadFormsApplication();
 
@@ -50,14 +48,14 @@ namespace MvvmCross.Forms.Platforms.Wpf.Views
                 await startup.Start(GetAppStartHint(hint)).ConfigureAwait(false);
         }
 
-        protected virtual object GetAppStartHint(object hint = null)
+        protected virtual object? GetAppStartHint(object? hint = null)
         {
             return hint;
         }
 
         protected virtual void LoadFormsApplication()
         {
-            var presenter = Mvx.IoCProvider.Resolve<IMvxFormsViewPresenter>() as MvxFormsWpfViewPresenter;
+            var presenter = (MvxFormsWpfViewPresenter)Mvx.IoCProvider.Resolve<IMvxFormsViewPresenter>();
             LoadApplication(presenter.FormsApplication);
         }
     }
