@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using MvvmCross.Binding;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Forms.Core;
@@ -61,9 +62,9 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
             return provider;
         }
 
-        protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
+        protected override async Task InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
         {
-            base.InitializeApp(pluginManager, app);
+            await base.InitializeApp(pluginManager, app).ConfigureAwait(false);
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 

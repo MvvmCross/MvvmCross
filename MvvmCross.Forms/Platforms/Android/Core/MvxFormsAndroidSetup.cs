@@ -19,6 +19,7 @@ using MvvmCross.Forms.Platforms.Android.Presenters;
 using Xamarin.Forms;
 using MvvmCross.IoC;
 using MvvmCross.Platforms.Android.Core;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Forms.Platforms.Android.Core
 {
@@ -44,9 +45,9 @@ namespace MvvmCross.Forms.Platforms.Android.Core
             return provider;
         }
 
-        protected override void InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
+        protected override async Task InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
         {
-            base.InitializeApp(pluginManager, app);
+            await base.InitializeApp(pluginManager, app).ConfigureAwait(false);
             _viewAssemblies.AddRange(GetViewModelAssemblies());
         }
 
@@ -101,12 +102,15 @@ namespace MvvmCross.Forms.Platforms.Android.Core
             }
         }
 
-        protected override void InitializeBindingBuilder()
+        protected override Task InitializeBindingBuilder()
         {
-            MvxBindingBuilder bindingBuilder = CreateBindingBuilder();
+            return Task.Run(() =>
+            {
+                MvxBindingBuilder bindingBuilder = CreateBindingBuilder();
 
-            RegisterBindingBuilderCallbacks();
-            bindingBuilder.DoRegistration();
+                RegisterBindingBuilderCallbacks();
+                bindingBuilder.DoRegistration();
+            });
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
