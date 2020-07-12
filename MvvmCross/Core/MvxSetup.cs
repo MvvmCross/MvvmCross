@@ -89,7 +89,8 @@ namespace MvvmCross.Core
                 InitializeSettings(),
                 InitializeSingletonCache(),
                 InitializeViewDispatcher(),
-                InitializeApp()
+                InitializeApp(),
+                InitializeViewModelTypeFinder()
             }).ConfigureAwait(false);
 
             State = MvxSetupState.InitializedPrimary;
@@ -109,7 +110,6 @@ namespace MvvmCross.Core
                 InitializeStringToTypeParser(),
                 InitializeFillableStringToTypeParser(),
                 InitializeNavigationService(),
-                InitializeViewModelTypeFinder(),
                 InitializeViewsContainer(),
                 InitializeViewLookup(),
                 InitializeCommandCollectionBuilder(),

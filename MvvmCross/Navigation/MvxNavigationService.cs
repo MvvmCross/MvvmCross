@@ -66,7 +66,7 @@ namespace MvvmCross.Navigation
 
         public event AfterChangePresentationEventHandler? AfterChangePresentation;
 
-        public MvxNavigationService(IMvxNavigationCache navigationCache, IMvxViewModelLoader viewModelLoader)
+        public MvxNavigationService(IMvxNavigationCache? navigationCache, IMvxViewModelLoader viewModelLoader)
         {
             NavigationCache = navigationCache;
             ViewModelLoader = viewModelLoader;

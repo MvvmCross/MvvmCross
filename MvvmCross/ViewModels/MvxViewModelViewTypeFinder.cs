@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -23,7 +23,7 @@ namespace MvvmCross.ViewModels
             _viewToViewModelNameMapping = viewToViewModelNameMapping;
         }
 
-        public virtual Type FindTypeOrNull(Type candidateType)
+        public virtual Type? FindTypeOrNull(Type candidateType)
         {
             if (!CheckCandidateTypeIsAView(candidateType))
                 return null;
@@ -47,7 +47,7 @@ namespace MvvmCross.ViewModels
             return null;
         }
 
-        protected virtual Type LookupAttributedViewModelType(Type candidateType)
+        protected virtual Type? LookupAttributedViewModelType(Type candidateType)
         {
             var attribute = candidateType
                                 .GetCustomAttributes(typeof(MvxViewForAttribute), false)
@@ -66,7 +66,7 @@ namespace MvvmCross.ViewModels
             return toReturn;
         }
 
-        protected virtual Type LookupAssociatedConcreteViewModelType(Type candidateType)
+        protected virtual Type? LookupAssociatedConcreteViewModelType(Type candidateType)
         {
             var viewModelPropertyInfo = candidateType
                 .GetProperties()
