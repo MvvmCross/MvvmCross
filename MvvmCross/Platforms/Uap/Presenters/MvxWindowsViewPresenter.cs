@@ -104,7 +104,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
 
         protected virtual ValueTask<bool> ShowSplitView(Type viewType, MvxSplitViewPresentationAttribute? attribute, MvxViewModelRequest request)
         {
-            var viewsContainer = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
+            //var viewsContainer = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
 
             if (_rootFrame.Content is MvxWindowsPage currentPage)
             {
@@ -114,10 +114,9 @@ namespace MvvmCross.Platforms.Uap.Presenters
                     return new ValueTask<bool>(true);
                 }
 
-                if (attribute.Position == SplitPanePosition.Content)
+                if (attribute!.Position == SplitPanePosition.Content)
                 {
-                    var nestedFrame = splitView.Content as Frame;
-                    if (nestedFrame == null)
+                    if (!(splitView.Content is Frame nestedFrame))
                     {
                         nestedFrame = new Frame();
                         splitView.Content = nestedFrame;
@@ -127,8 +126,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
                 }
                 else if (attribute.Position == SplitPanePosition.Pane)
                 {
-                    var nestedFrame = splitView.Pane as Frame;
-                    if (nestedFrame == null)
+                    if (!(splitView.Pane is Frame nestedFrame))
                     {
                         nestedFrame = new Frame();
                         splitView.Pane = nestedFrame;
@@ -218,14 +216,14 @@ namespace MvvmCross.Platforms.Uap.Presenters
                 var requestText = GetRequestText(request);
                 var viewsContainer = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
 
-                _rootFrame.Navigate(viewType, requestText); //Frame won't allow serialization of it's nav-state if it gets a non-simple type as a nav param
+                var result = _rootFrame.Navigate(viewType, requestText); //Frame won't allow serialization of it's nav-state if it gets a non-simple type as a nav param
 
                 HandleBackButtonVisibility();
-                return new ValueTask<bool>(true);
+                return new ValueTask<bool>(result);
             }
             catch (Exception exception)
             {
-                MvxLog.Instance.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
+                MvxLog.Instance.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType!.Name,
                     exception.ToLongString());
                 return new ValueTask<bool>(false);
             }
@@ -246,7 +244,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
             }
             catch (Exception exception)
             {
-                MvxLog.Instance.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType.Name,
+                MvxLog.Instance.Trace("Error seen during navigation request to {0} - error {1}", request.ViewModelType!.Name,
                     exception.ToLongString());
                 return false;
             }
@@ -277,7 +275,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
         {
             var popups = VisualTreeHelper.GetOpenPopups(Window.Current).FirstOrDefault(p =>
             {
-                if (attribute.ViewType.IsAssignableFrom(p.Child.GetType())
+                if (attribute!.ViewType!.IsAssignableFrom(p.Child.GetType())
                     && p.Child is IMvxWindowsContentDialog dialog)
                 {
                     return dialog.ViewModel == viewModel;

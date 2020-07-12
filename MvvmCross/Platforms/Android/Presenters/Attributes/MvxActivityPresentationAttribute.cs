@@ -12,16 +12,13 @@ using MvvmCross.Presenters.Attributes;
 namespace MvvmCross.Platforms.Android.Presenters.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class MvxActivityPresentationAttribute : MvxBasePresentationAttribute
+    public sealed class MvxActivityPresentationAttribute : MvxBasePresentationAttribute
     {
-        public MvxActivityPresentationAttribute()
-        {
-        }
+        public static Bundle? DefaultExtras = null;
 
-        public static Bundle DefaultExtras = null;
         /// <summary>
         /// Add extras to the Intent that will be started for this Activity
         /// </summary>
-        public Bundle Extras { get; set; } = DefaultExtras;
+        public Bundle? Extras { get; set; } = DefaultExtras;
     }
 }

@@ -58,11 +58,9 @@ namespace MvvmCross.Platforms.Uap.Core
 
         protected override async Task InitializeFirstChance()
         {
-            await Task.Run(() =>
-            {
-                InitializeSuspensionManager();
-                RegisterPresenter();
-            }).ConfigureAwait(false);
+            InitializeSuspensionManager();
+            
+            await RegisterPresenter().ConfigureAwait(false);
             await base.InitializeFirstChance().ConfigureAwait(false);
         }
 
@@ -120,11 +118,15 @@ namespace MvvmCross.Platforms.Uap.Core
             return new MvxWindowsViewDispatcher(Presenter, rootFrame);
         }
 
-        protected virtual void RegisterPresenter()
+        protected virtual Task RegisterPresenter()
         {
             var presenter = Presenter;
-            Mvx.IoCProvider.RegisterSingleton(presenter);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
+
+            return Task.Run(() =>
+            {
+                Mvx.IoCProvider.RegisterSingleton(presenter);
+                Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
+            });
         }
 
         protected override async Task InitializeLastChance()

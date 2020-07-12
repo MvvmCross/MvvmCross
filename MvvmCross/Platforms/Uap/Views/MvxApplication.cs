@@ -18,9 +18,9 @@ namespace MvvmCross.Platforms.Uap.Views
 {
     public abstract class MvxApplication : Application
     {
-        protected IActivatedEventArgs ActivationArguments { get; private set; }
+        protected IActivatedEventArgs? ActivationArguments { get; private set; }
 
-        protected Frame RootFrame { get; set; }
+        protected Frame? RootFrame { get; set; }
 
         protected MvxApplication()
         {
@@ -38,17 +38,19 @@ namespace MvvmCross.Platforms.Uap.Views
         /// <param name="activationArgs">Details about the launch request and process.</param>
         protected override async void OnLaunched(LaunchActivatedEventArgs activationArgs)
         {
+            if (activationArgs == null) throw new ArgumentNullException(nameof(activationArgs));
+
             base.OnLaunched(activationArgs);
             ActivationArguments = activationArgs;
 
             var rootFrame = InitializeFrame(activationArgs);
 
-            if (activationArgs.PrelaunchActivated == false)
+            if (activationArgs!.PrelaunchActivated == false)
             {
-                await RunAppStart(activationArgs).ConfigureAwait(false);
-            }
+                await RunAppStart(activationArgs).ConfigureAwait(true);
 
-            Window.Current.Activate();
+                Window.Current.Activate();
+            }
         }
 
         protected override async void OnActivated(IActivatedEventArgs activationArgs)
@@ -65,8 +67,8 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected virtual async ValueTask RunAppStart(IActivatedEventArgs activationArgs)
         {
-            var instance = MvxWindowsSetupSingleton.EnsureSingletonAvailable(RootFrame, ActivationArguments, nameof(Suspend));
-            if (RootFrame.Content == null)
+            var instance = MvxWindowsSetupSingleton.EnsureSingletonAvailable(RootFrame!, ActivationArguments!, nameof(Suspend));
+            if (RootFrame?.Content == null)
             {
                 await instance.EnsureInitialized().ConfigureAwait(false);
 
@@ -81,13 +83,15 @@ namespace MvvmCross.Platforms.Uap.Views
             }
         }
 
-        protected virtual object GetAppStartHint(object hint = null)
+        protected virtual object? GetAppStartHint(object? hint = null)
         {
             return hint;
         }
 
         protected virtual Frame InitializeFrame(IActivatedEventArgs activationArgs)
         {
+            if (activationArgs == null) throw new ArgumentNullException(nameof(activationArgs));
+
             if (!(Window.Current.Content is Frame rootFrame))
             {
                 rootFrame = CreateFrame();
@@ -122,6 +126,8 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected virtual async void OnEnteredBackground(object sender, EnteredBackgroundEventArgs e)
         {
+            if (e == null) throw new ArgumentNullException(nameof(e));
+
             var deferral = e.GetDeferral();
             try
             {
@@ -136,11 +142,15 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected virtual Task EnteringBackground(IMvxSuspensionManager suspensionManager)
         {
+            if (suspensionManager == null) throw new ArgumentNullException(nameof(suspensionManager));
+
             return suspensionManager.SaveAsync();
         }
 
         protected virtual async void OnLeavingBackground(object sender, LeavingBackgroundEventArgs e)
         {
+            if (e == null) throw new NullReferenceException(nameof(e));
+
             var deferral = e.GetDeferral();
             try
             {
@@ -160,11 +170,15 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected virtual Task Suspend(IMvxSuspensionManager suspensionManager)
         {
+            if (suspensionManager == null) throw new ArgumentNullException(nameof(suspensionManager));
+
             return suspensionManager.SaveAsync();
         }
 
         protected virtual async void OnSuspending(object sender, SuspendingEventArgs e)
         {
+            if (e == null) throw new ArgumentNullException(nameof(e));
+
             var deferral = e.SuspendingOperation.GetDeferral();
             try
             {
@@ -185,7 +199,6 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected virtual void Resume(IMvxSuspensionManager suspensionManager)
         {
-            //return Task.CompletedTask;
         }
 
         protected virtual void RegisterSetup()

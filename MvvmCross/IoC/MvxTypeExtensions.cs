@@ -39,7 +39,7 @@ namespace MvvmCross.IoC
                 if (Debugger.IsAttached)
                     Debugger.Break();
 
-                return new Type[0];
+                return Array.Empty<Type>();
             }
         }
 
@@ -48,8 +48,7 @@ namespace MvvmCross.IoC
             return assembly
                 .ExceptionSafeGetTypes()
                 .Select(t => t.GetTypeInfo())
-                .Where(t => !t.IsAbstract)
-                .Where(t => t.DeclaredConstructors.Any(c => !c.IsStatic && c.IsPublic))
+                .Where(t => !t.IsAbstract && t.DeclaredConstructors.Any(c => !c.IsStatic && c.IsPublic))
                 .Select(t => t.AsType());
         }
 

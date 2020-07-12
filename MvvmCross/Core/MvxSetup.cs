@@ -486,10 +486,10 @@ namespace MvvmCross.Core
 
         protected virtual Task InitializeViewDispatcher()
         {
+            var dispatcher = CreateViewDispatcher();
+
             return Task.Run(() =>
             {
-                var dispatcher = CreateViewDispatcher();
-
                 SetupLog?.Trace("Setup: ViewDispatcher start");
                 Mvx.IoCProvider.RegisterSingleton(dispatcher);
                 Mvx.IoCProvider.RegisterSingleton<IMvxMainThreadDispatcher>(dispatcher);

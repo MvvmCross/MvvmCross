@@ -20,7 +20,7 @@ namespace MvvmCross.Presenters
 
         //TODO: Maybe move those to helper class
         ValueTask<MvxBasePresentationAttribute?> GetPresentationAttribute(MvxViewModelRequest request);
-        ValueTask<MvxBasePresentationAttribute?> CreatePresentationAttribute(Type? viewModelType, Type? viewType);
+        ValueTask<MvxBasePresentationAttribute?> CreatePresentationAttribute(Type viewModelType, Type viewType);
         ValueTask<MvxBasePresentationAttribute?> GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType);
     }
 }

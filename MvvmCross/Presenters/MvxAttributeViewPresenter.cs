@@ -16,7 +16,7 @@ namespace MvvmCross.Presenters
 {
     public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttributeViewPresenter
     {
-        protected IMvxViewModelTypeFinder? _viewModelTypeFinder;
+        private IMvxViewModelTypeFinder? _viewModelTypeFinder;
 
         public virtual IMvxViewModelTypeFinder ViewModelTypeFinder
         {
@@ -32,7 +32,7 @@ namespace MvvmCross.Presenters
             }
         }
 
-        protected IMvxViewsContainer? _viewsContainer;
+        private IMvxViewsContainer? _viewsContainer;
 
         public virtual IMvxViewsContainer ViewsContainer
         {
@@ -48,7 +48,7 @@ namespace MvvmCross.Presenters
             }
         }
 
-        protected IDictionary<Type, MvxPresentationAttributeAction>? _attributeTypesActionsDictionary;
+        private IDictionary<Type, MvxPresentationAttributeAction>? _attributeTypesActionsDictionary;
         public virtual IDictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
         {
             get
@@ -68,11 +68,13 @@ namespace MvvmCross.Presenters
 
         public abstract void RegisterAttributeTypes();
 
-        public abstract ValueTask<MvxBasePresentationAttribute?> CreatePresentationAttribute(Type? viewModelType, Type? viewType);
+        public abstract ValueTask<MvxBasePresentationAttribute?> CreatePresentationAttribute(Type viewModelType, Type viewType);
 
-        public virtual ValueTask<MvxBasePresentationAttribute?> GetOverridePresentationAttribute(MvxViewModelRequest request, Type? viewType)
+        public virtual ValueTask<MvxBasePresentationAttribute?> GetOverridePresentationAttribute(MvxViewModelRequest request, Type viewType)
         {
-            if (viewType?.GetInterfaces().Contains(typeof(IMvxOverridePresentationAttribute)) ?? false)
+            if (viewType == null) throw new NullReferenceException(nameof(viewType));
+
+            if (viewType!.GetInterfaces().Contains(typeof(IMvxOverridePresentationAttribute)))
             {
                 var viewInstance = Activator.CreateInstance(viewType) as IMvxOverridePresentationAttribute;
                 try
@@ -91,7 +93,7 @@ namespace MvvmCross.Presenters
 
                         if (presentationAttribute.ViewModelType == null)
                         {
-                            presentationAttribute.ViewModelType = request.ViewModelType;
+                            presentationAttribute.ViewModelType = request!.ViewModelType;
                         }
 
                         return new ValueTask<MvxBasePresentationAttribute?>(presentationAttribute);
@@ -108,7 +110,9 @@ namespace MvvmCross.Presenters
 
         public virtual async ValueTask<MvxBasePresentationAttribute?> GetPresentationAttribute(MvxViewModelRequest request)
         {
-            var viewType = ViewsContainer.GetViewType(request.ViewModelType);
+            if (request == null) throw new NullReferenceException(nameof(request));
+
+            var viewType = ViewsContainer.GetViewType(request!.ViewModelType!);
 
             var overrideAttribute = await GetOverridePresentationAttribute(request, viewType).ConfigureAwait(false);
             if (overrideAttribute != null)
@@ -127,17 +131,16 @@ namespace MvvmCross.Presenters
                 return attribute;
             }
 
-            return await CreatePresentationAttribute(request.ViewModelType, viewType).ConfigureAwait(false);
+            return await CreatePresentationAttribute(request.ViewModelType!, viewType!).ConfigureAwait(false);
         }
 
         protected virtual async ValueTask<(MvxPresentationAttributeAction action, MvxBasePresentationAttribute attribute)> GetPresentationAttributeAction(MvxViewModelRequest request)
         {
+            if (request == null) throw new NullReferenceException(nameof(request));
             var attribute = await GetPresentationAttribute(request).ConfigureAwait(false);
+            if (request == null) throw new NullReferenceException(nameof(attribute));
 
-            if (attribute == null) throw new NullReferenceException(nameof(attribute));
-
-            attribute.ViewModelType = request.ViewModelType;
-            var viewType = attribute.ViewType;
+            attribute!.ViewModelType = request.ViewModelType;
             var attributeType = attribute.GetType();
 
             if (AttributeTypesToActionsDictionary.TryGetValue(
@@ -184,7 +187,7 @@ namespace MvvmCross.Presenters
             var (action, attribute) = await GetPresentationAttributeAction(request).ConfigureAwait(false);
 
             if (action?.ShowAction != null && attribute != null)
-                return await action.ShowAction.Invoke(attribute.ViewType, attribute, request).ConfigureAwait(false);
+                return await action.ShowAction.Invoke(attribute.ViewType!, attribute, request).ConfigureAwait(false);
             else
                 return false;
         }

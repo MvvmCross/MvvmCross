@@ -8,6 +8,6 @@ namespace MvvmCross.Views
 {
     public interface IMvxViewFinder
     {
-        Type? GetViewType(Type? viewModelType);
+        Type GetViewType(Type viewModelType);
     }
 }

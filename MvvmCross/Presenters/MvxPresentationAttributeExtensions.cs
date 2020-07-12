@@ -46,15 +46,15 @@ namespace MvvmCross.Presenters
 
         public static void Register<TMvxPresentationAttribute>(
             this IDictionary<Type, MvxPresentationAttributeAction> attributeTypesToActionsDictionary,
-            Func<Type, TMvxPresentationAttribute?, MvxViewModelRequest, ValueTask<bool>> showAction,
-            Func<IMvxViewModel, TMvxPresentationAttribute?, ValueTask<bool>> closeAction) where TMvxPresentationAttribute : class, IMvxPresentationAttribute
+            Func<Type, TMvxPresentationAttribute, MvxViewModelRequest, ValueTask<bool>> showAction,
+            Func<IMvxViewModel, TMvxPresentationAttribute, ValueTask<bool>> closeAction) where TMvxPresentationAttribute : class, IMvxPresentationAttribute
         {
             attributeTypesToActionsDictionary.Add(
                 typeof(TMvxPresentationAttribute),
                 new MvxPresentationAttributeAction
                 {
-                    ShowAction = (view, attribute, request) => showAction(view, attribute as TMvxPresentationAttribute, request),
-                    CloseAction = (viewModel, attribute) => closeAction(viewModel, attribute as TMvxPresentationAttribute)
+                    ShowAction = (view, attribute, request) => showAction(view, (TMvxPresentationAttribute)attribute, request),
+                    CloseAction = (viewModel, attribute) => closeAction(viewModel, (TMvxPresentationAttribute)attribute)
                 });
         }
     }
