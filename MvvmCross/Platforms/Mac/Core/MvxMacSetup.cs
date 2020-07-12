@@ -11,6 +11,7 @@ using MvvmCross.Binding;
 using MvvmCross.Binding.Binders;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
+using MvvmCross.Binding.Extensions;
 using MvvmCross.Converters;
 using MvvmCross.Core;
 using MvvmCross.IoC;
@@ -122,17 +123,20 @@ namespace MvvmCross.Platforms.Mac.Core
             Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
-        protected override void InitializeLastChance()
+        protected override async Task InitializeLastChance()
         {
-            InitialiseBindingBuilder();
-            base.InitializeLastChance();
+            await InitialiseBindingBuilder().ConfigureAwait(false);
+            await base.InitializeLastChance().ConfigureAwait(false);
         }
 
-        protected virtual void InitialiseBindingBuilder()
+        protected virtual Task InitialiseBindingBuilder()
         {
-            RegisterBindingBuilderCallbacks();
-            var bindingBuilder = CreateBindingBuilder();
-            bindingBuilder.DoRegistration();
+            return Task.Run(() =>
+            {
+                RegisterBindingBuilderCallbacks();
+                var bindingBuilder = CreateBindingBuilder();
+                bindingBuilder.DoRegistration();
+            });
         }
 
         protected virtual void RegisterBindingBuilderCallbacks()

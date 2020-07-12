@@ -109,34 +109,15 @@ namespace MvvmCross.Core
                 InitializeStringToTypeParser(),
                 InitializeFillableStringToTypeParser(),
                 InitializeNavigationService(),
+                InitializeViewModelTypeFinder(),
+                InitializeViewsContainer(),
+                InitializeViewLookup(),
+                InitializeCommandCollectionBuilder(),
+                InitializeNavigationSerializer(),
+                InitializeInpcInterception(),
+                InitializeViewModelCache(),
+                InitializeLastChance()
             }).ConfigureAwait(false);
-
-            SetupLog?.Trace("Setup: ViewModelTypeFinder start");
-            InitializeViewModelTypeFinder();
-
-            SetupLog?.Trace("Setup: ViewsContainer start");
-            InitializeViewsContainer();
-
-            SetupLog?.Trace("Setup: Lookup Dictionary start");
-            var lookup = InitializeLookupDictionary();
-
-            SetupLog?.Trace("Setup: Views start");
-            InitializeViewLookup(lookup);
-
-            SetupLog?.Trace("Setup: CommandCollectionBuilder start");
-            InitializeCommandCollectionBuilder();
-
-            SetupLog?.Trace("Setup: NavigationSerializer start");
-            InitializeNavigationSerializer();
-
-            SetupLog?.Trace("Setup: InpcInterception start");
-            InitializeInpcInterception();
-
-            SetupLog?.Trace("Setup: InpcInterception start");
-            InitializeViewModelCache();
-
-            SetupLog?.Trace("Setup: LastChance start");
-            InitializeLastChance();
 
             SetupLog?.Trace("Setup: Secondary end");
             State = MvxSetupState.Initialized;
@@ -151,15 +132,22 @@ namespace MvvmCross.Core
             });
         }
 
-        protected virtual void InitializeInpcInterception()
+        protected virtual Task InitializeInpcInterception()
         {
-            // by default no Inpc calls are intercepted
+            return Task.Run(() =>
+            {
+                SetupLog?.Trace("Setup: InpcInterception start");
+                // by default no Inpc calls are intercepted
+            });
         }
 
-        protected virtual IMvxChildViewModelCache InitializeViewModelCache()
+        protected virtual Task InitializeViewModelCache()
         {
-            var cache = CreateViewModelCache();
-            return cache;
+            return Task.Run(() =>
+            {
+                SetupLog?.Trace("Setup: InpcInterception start");
+                _ = CreateViewModelCache();
+            });
         }
 
         protected virtual IMvxChildViewModelCache CreateViewModelCache()
@@ -227,10 +215,14 @@ namespace MvvmCross.Core
             });
         }
 
-        protected virtual IMvxNavigationSerializer InitializeNavigationSerializer()
+        protected virtual Task InitializeNavigationSerializer()
         {
-            var serializer = CreateNavigationSerializer();
-            return serializer;
+            return Task.Run(() =>
+            {
+                SetupLog?.Trace("Setup: NavigationSerializer start");
+
+                _ = CreateNavigationSerializer();
+            });
         }
 
         protected virtual IMvxNavigationSerializer CreateNavigationSerializer()
@@ -238,10 +230,13 @@ namespace MvvmCross.Core
             return Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>();
         }
 
-        protected virtual IMvxCommandCollectionBuilder InitializeCommandCollectionBuilder()
+        protected virtual Task InitializeCommandCollectionBuilder()
         {
-            var builder = CreateCommandCollectionBuilder();
-            return builder;
+            return Task.Run(() =>
+            {
+                SetupLog?.Trace("Setup: CommandCollectionBuilder start");
+                _ = CreateCommandCollectionBuilder();
+            });
         }
 
         protected virtual IMvxCommandCollectionBuilder CreateCommandCollectionBuilder()
@@ -478,11 +473,15 @@ namespace MvvmCross.Core
             });
         }
 
-        protected virtual IMvxViewsContainer InitializeViewsContainer()
+        protected virtual Task InitializeViewsContainer()
         {
-            var container = CreateViewsContainer();
-            Mvx.IoCProvider.RegisterSingleton(container);
-            return container;
+            return Task.Run(() =>
+            {
+                SetupLog?.Trace("Setup: ViewsContainer start");
+
+                var container = CreateViewsContainer();
+                Mvx.IoCProvider.RegisterSingleton(container);
+            });
         }
 
         protected virtual Task InitializeViewDispatcher()
@@ -547,44 +546,67 @@ namespace MvvmCross.Core
             return Mvx.IoCProvider.Resolve<IMvxViewModelByNameRegistry>();
         }
 
-        protected virtual IMvxNameMapping InitializeViewModelTypeFinder()
+        protected virtual Task InitializeViewModelTypeFinder()
         {
-            var viewModelByNameLookup = CreateViewModelByNameLookup();
-            var viewModelByNameRegistry = CreateViewModelByNameRegistry();
-
-            var viewModelAssemblies = GetViewModelAssemblies();
-            foreach (var assembly in viewModelAssemblies)
+            return Task.Run(() =>
             {
-                viewModelByNameRegistry.AddAll(assembly);
-            }
+                SetupLog?.Trace("Setup: ViewModelTypeFinder start");
 
-            var nameMappingStrategy = CreateViewToViewModelNaming();
-            Mvx.IoCProvider.RegisterSingleton(nameMappingStrategy);
-            return nameMappingStrategy;
+                var viewModelByNameLookup = CreateViewModelByNameLookup();
+                var viewModelByNameRegistry = CreateViewModelByNameRegistry();
+
+                var viewModelAssemblies = GetViewModelAssemblies();
+                foreach (var assembly in viewModelAssemblies)
+                {
+                    viewModelByNameRegistry.AddAll(assembly);
+                }
+
+                var nameMappingStrategy = CreateViewToViewModelNaming();
+                Mvx.IoCProvider.RegisterSingleton(nameMappingStrategy);
+            });
         }
 
-        protected virtual IDictionary<Type, Type> InitializeLookupDictionary()
+        private async Task InitializeViewLookup()
         {
-            var viewAssemblies = GetViewAssemblies();
-            var builder = Mvx.IoCProvider.Resolve<IMvxTypeToTypeLookupBuilder>();
-            var viewModelViewLookup = builder.Build(viewAssemblies);
-            return viewModelViewLookup;
+            SetupLog?.Trace("Setup: Lookup Dictionary start");
+            var lookup = await InitializeLookupDictionary().ConfigureAwait(false);
+
+            SetupLog?.Trace("Setup: Views start");
+            await InitializeViewLookup(lookup).ConfigureAwait(false);
         }
 
-        protected virtual IMvxViewsContainer? InitializeViewLookup(IDictionary<Type, Type> viewModelViewLookup)
+        protected virtual Task<IDictionary<Type, Type>> InitializeLookupDictionary()
         {
-            if (viewModelViewLookup == null)
-                return null;
-
-            var container = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
-            container.AddAll(viewModelViewLookup);
-            return container;
+            return Task.Run(() =>
+            {
+                var viewAssemblies = GetViewAssemblies();
+                var builder = Mvx.IoCProvider.Resolve<IMvxTypeToTypeLookupBuilder>();
+                var viewModelViewLookup = builder.Build(viewAssemblies);
+                return viewModelViewLookup;
+            });
         }
 
-        protected virtual void InitializeLastChance()
+        protected virtual Task<IMvxViewsContainer?> InitializeViewLookup(IDictionary<Type, Type> viewModelViewLookup)
         {
-            // always the very last thing to get initialized
-            // base class implementation is empty by default
+            return Task.Run(() =>
+            {
+                if (viewModelViewLookup == null)
+                    return null;
+
+                var container = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
+                container.AddAll(viewModelViewLookup);
+                return container;
+            });
+        }
+
+        protected virtual Task InitializeLastChance()
+        {
+            return Task.Run(() =>
+            {
+                SetupLog?.Trace("Setup: LastChance start");
+                // always the very last thing to get initialized
+                // base class implementation is empty by default
+            });
         }
 
         public IEnumerable<Type> CreatableTypes()

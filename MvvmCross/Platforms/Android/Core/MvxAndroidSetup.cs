@@ -100,10 +100,13 @@ namespace MvvmCross.Platforms.Android.Core
             return new MvxAndroidLifetimeMonitor();
         }
 
-        protected virtual void InitializeSavedStateConverter()
+        protected virtual Task InitializeSavedStateConverter()
         {
-            var converter = CreateSavedStateConverter();
-            Mvx.IoCProvider.RegisterSingleton(converter);
+            return Task.Run(() =>
+            {
+                var converter = CreateSavedStateConverter();
+                Mvx.IoCProvider.RegisterSingleton(converter);
+            });
         }
 
         protected virtual IMvxSavedStateConverter CreateSavedStateConverter()
@@ -148,12 +151,11 @@ namespace MvvmCross.Platforms.Android.Core
             Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
-        protected override void InitializeLastChance()
+        protected override async Task InitializeLastChance()
         {
-            InitializeSavedStateConverter();
-
-            InitializeBindingBuilder();
-            base.InitializeLastChance();
+            await InitializeSavedStateConverter().ConfigureAwait(false);
+            await InitializeBindingBuilder().ConfigureAwait(false);
+            await base.InitializeLastChance().ConfigureAwait(false);
         }
 
         protected virtual IMvxAndroidViewsContainer CreateViewsContainer(Context applicationContext)
@@ -161,11 +163,14 @@ namespace MvvmCross.Platforms.Android.Core
             return new MvxAndroidViewsContainer(applicationContext);
         }
 
-        protected virtual void InitializeBindingBuilder()
+        protected virtual Task InitializeBindingBuilder()
         {
-            var bindingBuilder = CreateBindingBuilder();
-            RegisterBindingBuilderCallbacks();
-            bindingBuilder.DoRegistration();
+            return Task.Run(() =>
+            {
+                var bindingBuilder = CreateBindingBuilder();
+                RegisterBindingBuilderCallbacks();
+                bindingBuilder.DoRegistration();
+            });
         }
 
         protected virtual void RegisterBindingBuilderCallbacks()

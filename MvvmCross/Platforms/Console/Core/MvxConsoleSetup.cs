@@ -9,6 +9,7 @@ using MvvmCross.ViewModels;
 using MvvmCross.Views;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace MvvmCross.Platforms.Console.Core
 {
@@ -20,11 +21,14 @@ namespace MvvmCross.Platforms.Console.Core
             return new MvxPostfixAwareViewToViewModelNameMapping("View");
         }
 
-        public virtual void InitializeMessagePump()
+        public virtual Task InitializeMessagePump()
         {
-            var messagePump = new MvxConsoleMessagePump();
-            Mvx.IoCProvider.RegisterSingleton<IMvxMessagePump>(messagePump);
-            Mvx.IoCProvider.RegisterSingleton<IMvxConsoleCurrentView>(messagePump);
+            return Task.Run(() =>
+            {
+                var messagePump = new MvxConsoleMessagePump();
+                Mvx.IoCProvider.RegisterSingleton<IMvxMessagePump>(messagePump);
+                Mvx.IoCProvider.RegisterSingleton<IMvxConsoleCurrentView>(messagePump);
+            });
         }
 
         protected override IMvxViewsContainer CreateViewsContainer()
@@ -44,9 +48,9 @@ namespace MvvmCross.Platforms.Console.Core
             return new MvxConsoleContainer();
         }
 
-        protected override void InitializeLastChance()
+        protected override Task InitializeLastChance()
         {
-            InitializeMessagePump();
+            return InitializeMessagePump();
         }
     }
 

@@ -127,17 +127,20 @@ namespace MvvmCross.Platforms.Uap.Core
             Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
-        protected override void InitializeLastChance()
+        protected override async Task InitializeLastChance()
         {
-            InitializeBindingBuilder();
-            base.InitializeLastChance();
+            await InitializeBindingBuilder().ConfigureAwait(false);
+            await base.InitializeLastChance().ConfigureAwait(false);
         }
 
-        protected virtual void InitializeBindingBuilder()
+        protected virtual Task InitializeBindingBuilder()
         {
-            RegisterBindingBuilderCallbacks();
-            var bindingBuilder = CreateBindingBuilder();
-            bindingBuilder.DoRegistration();
+            return Task.Run(() =>
+            {
+                RegisterBindingBuilderCallbacks();
+                var bindingBuilder = CreateBindingBuilder();
+                bindingBuilder.DoRegistration();
+            });
         }
 
         protected virtual void RegisterBindingBuilderCallbacks()
