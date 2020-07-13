@@ -17,7 +17,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
     public class MvxBindingFragmentAdapter
         : MvxBaseFragmentAdapter
     {
-        public IMvxFragmentView FragmentView => Fragment as IMvxFragmentView;
+        public IMvxFragmentView? FragmentView => Fragment as IMvxFragmentView;
 
         public MvxBindingFragmentAdapter(IMvxEventSourceFragment eventSource)
             : base(eventSource)
@@ -33,7 +33,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             // Create is called after Fragment is attached to Activity
             // it's safe to assume that Fragment has activity
 
-            var hostMvxView = Fragment.Activity as IMvxAndroidView;
+            var hostMvxView = Fragment!.Activity as IMvxAndroidView;
             if (hostMvxView == null)
             {
                 MvxLog.Instance.Warn($"Fragment host for fragment type {Fragment.GetType()} is not of type IMvxAndroidView");
@@ -51,8 +51,8 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
                 return;
             }
 
-            Bundle bundle = null;
-            MvxViewModelRequest request = null;
+            Bundle? bundle = null;
+            MvxViewModelRequest? request = null;
             if (bundleArgs?.Value != null)
             {
                 // saved state
@@ -91,7 +91,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
                 if (bundle != null)
                 {
                     var mvxBundle = converter.Read(bundle);
-                    FragmentView.OnCreate(mvxBundle, request);
+                    FragmentView!.OnCreate(mvxBundle, request!);
                 }
             }
         }
@@ -99,7 +99,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
         protected override void HandleCreateViewCalled(object sender,
                                                MvxValueEventArgs<MvxCreateViewParameters> args)
         {
-            FragmentView.EnsureBindingContextIsSet(args.Value.Inflater);
+            FragmentView!.EnsureBindingContextIsSet(args.Value.Inflater);
         }
 
         protected override void HandleSaveInstanceStateCalled(object sender, MvxValueEventArgs<Bundle> bundleArgs)
@@ -107,7 +107,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
             // it is guarannted that SaveInstanceState call will be executed before OnStop (thus before Fragment detach)
             // it is safe to assume that Fragment has activity attached
 
-            var mvxBundle = FragmentView.CreateSaveStateBundle();
+            var mvxBundle = FragmentView!.CreateSaveStateBundle();
             if (mvxBundle != null)
             {
                 IMvxSavedStateConverter converter;
@@ -121,18 +121,18 @@ namespace MvvmCross.Platforms.Android.Views.Fragments
                 }
             }
             var cache = Mvx.IoCProvider.Resolve<IMvxMultipleViewModelCache>();
-            cache.Cache(FragmentView.ViewModel, FragmentView.UniqueImmutableCacheTag);
+            cache.Cache(FragmentView!.ViewModel!, FragmentView.UniqueImmutableCacheTag);
         }
 
         protected override void HandleDestroyViewCalled(object sender, EventArgs e)
         {
-            FragmentView.BindingContext?.ClearAllBindings();
+            FragmentView!.BindingContext?.ClearAllBindings();
             base.HandleDestroyViewCalled(sender, e);
         }
 
         protected override void HandleDisposeCalled(object sender, EventArgs e)
         {
-            FragmentView.BindingContext?.ClearAllBindings();
+            FragmentView!.BindingContext?.ClearAllBindings();
             base.HandleDisposeCalled(sender, e);
         }
     }

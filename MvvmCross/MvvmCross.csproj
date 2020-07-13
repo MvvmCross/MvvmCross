@@ -1,4 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
+  <!--<PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+  </PropertyGroup>-->
   <PropertyGroup Condition=" '$(TargetsToBuild)' == 'All' ">
     <TargetFrameworks>netstandard2.0;xamarin.ios10;xamarin.mac20;xamarin.tvos10;xamarin.watchos10;monoandroid10.0;tizen40;netcoreapp3.1;net471</TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.16299;$(TargetFrameworks)</TargetFrameworks>

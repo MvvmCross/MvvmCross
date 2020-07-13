@@ -24,7 +24,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 {
     public abstract class MvxFormsAppCompatActivity : MvxEventSourceFormsAppCompatActivity, IMvxAndroidView
     {
-        private View _view;
+        private View? _view;
 
         protected MvxFormsAppCompatActivity()
         {
@@ -33,13 +33,13 @@ namespace MvvmCross.Forms.Platforms.Android.Views
             this.AddEventListeners();
         }
 
-        public object DataContext
+        public object? DataContext
         {
             get { return BindingContext.DataContext; }
             set { BindingContext.DataContext = value; }
         }
 
-        public IMvxViewModel ViewModel
+        public IMvxViewModel? ViewModel
         {
             get
             {
@@ -52,7 +52,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
             }
         }
 
-        private Application _formsApplication;
+        private Application? _formsApplication;
         protected Application FormsApplication
         {
             get
@@ -118,7 +118,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
             InitializeApplication();
         }
 
-        protected virtual object GetAppStartHint(object? hint = null)
+        protected virtual object? GetAppStartHint(object? hint = null)
         {
             return hint;
         }
@@ -215,7 +215,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
     public class MvxFormsAppCompatActivity<TViewModel> : MvxFormsAppCompatActivity, IMvxAndroidView<TViewModel> 
         where TViewModel : class, IMvxViewModel
     {
-        public new TViewModel ViewModel
+        public new TViewModel? ViewModel
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }

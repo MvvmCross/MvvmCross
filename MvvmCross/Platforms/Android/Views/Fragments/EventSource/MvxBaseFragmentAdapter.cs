@@ -14,7 +14,7 @@ namespace MvvmCross.Platforms.Android.Views.Fragments.EventSource
     {
         private readonly IMvxEventSourceFragment _eventSource;
 
-        protected Fragment Fragment => _eventSource as Fragment;
+        protected Fragment? Fragment => _eventSource as Fragment;
 
         public MvxBaseFragmentAdapter(IMvxEventSourceFragment eventSource)
         {

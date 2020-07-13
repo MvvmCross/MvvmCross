@@ -45,7 +45,7 @@ namespace MvvmCross.IoC
 
         void RegisterType(Type tFrom, Type tTo);
 
-        void RegisterSingleton<TInterface>(TInterface theObject)
+        void RegisterSingleton<TInterface>(TInterface? theObject)
             where TInterface : class;
 
         void RegisterSingleton(Type tInterface, object theObject);

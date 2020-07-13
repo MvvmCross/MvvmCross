@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using MvvmCross.Base;
 using MvvmCross.Commands;
+using MvvmCross.Exceptions;
 using MvvmCross.IoC;
 using MvvmCross.Logging;
 using MvvmCross.Logging.LogProviders;
@@ -66,7 +67,7 @@ namespace MvvmCross.Core
         {
             if (State != MvxSetupState.Uninitialized)
             {
-                return;
+                throw new MvxException("The primary is initialized.");
             }
 
             State = MvxSetupState.InitializingPrimary;
@@ -81,10 +82,9 @@ namespace MvvmCross.Core
             RegisterDefaultSetupDependencies(iocProvider);
             RegisterSetupDependencies?.Invoke(iocProvider);
 
-            InitializeLoggingServices();
-
             await Task.WhenAll(new[]
-                {
+            {
+                InitializeLoggingServices(),
                 InitializeFirstChance(),
                 InitializeSettings(),
                 InitializeSingletonCache(),
@@ -100,7 +100,7 @@ namespace MvvmCross.Core
         {
             if (State != MvxSetupState.InitializedPrimary)
             {
-                return;
+                throw new MvxException("The primary is not completed.");
             }
             State = MvxSetupState.InitializingSecondary;
 
@@ -185,7 +185,7 @@ namespace MvvmCross.Core
             return Mvx.IoCProvider.Resolve<IMvxStringToTypeParser>();
         }
 
-        protected virtual Task<IMvxFillableStringToTypeParser> InitializeFillableStringToTypeParser()
+        protected virtual Task<IMvxFillableStringToTypeParser?> InitializeFillableStringToTypeParser()
         {
             return Task.Run(() =>
             {
@@ -196,7 +196,7 @@ namespace MvvmCross.Core
             });
         }
 
-        protected virtual IMvxFillableStringToTypeParser CreateFillableStringToTypeParser()
+        protected virtual IMvxFillableStringToTypeParser? CreateFillableStringToTypeParser()
         {
             return Mvx.IoCProvider.Resolve<IMvxStringToTypeParser>() as IMvxFillableStringToTypeParser;
         }
@@ -295,16 +295,16 @@ namespace MvvmCross.Core
             });
         }
 
-        protected virtual void InitializeLoggingServices()
+        protected virtual Task InitializeLoggingServices()
         {
-            //return Task.Run(() =>
-            //{
-            var logProvider = CreateLogProvider();
-            SetupLog = logProvider.GetLogFor<MvxSetup>();
-            var globalLog = logProvider.GetLogFor<MvxLog>();
-            MvxLog.Instance = globalLog;
-            Mvx.IoCProvider.RegisterSingleton(globalLog);
-            //});
+            return Task.Run(() =>
+            {
+                var logProvider = CreateLogProvider();
+                SetupLog = logProvider.GetLogFor<MvxSetup>();
+                var globalLog = logProvider.GetLogFor<MvxLog>();
+                MvxLog.Instance = globalLog;
+                Mvx.IoCProvider.RegisterSingleton(globalLog);
+            });
         }
 
         public virtual MvxLogProviderType GetDefaultLogProviderType()

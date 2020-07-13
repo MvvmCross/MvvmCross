@@ -10,24 +10,25 @@ using Android.Views;
 using MvvmCross.Core;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.ViewModels;
+using Activity = AndroidX.AppCompat.App.AppCompatActivity;
 
 namespace MvvmCross.Platforms.Android.Views
 {
     [Register("mvvmcross.platforms.android.views.MvxSplashScreenActivity")]
     public abstract class MvxSplashScreenActivity
-        : MvxActivity, IMvxSetupMonitor
+        : Activity, IMvxSetupMonitor
     {
         protected const int NoContent = 0;
 
         private readonly int _resourceId;
 
-        private Bundle _bundle;
+        private Bundle? _bundle;
 
-        public new MvxNullViewModel? ViewModel
-        {
-            get { return base.ViewModel as MvxNullViewModel; }
-            set { base.ViewModel = value; }
-        }
+        //public new MvxNullViewModel? ViewModel
+        //{
+        //    get { return base.ViewModel as MvxNullViewModel; }
+        //    set { base.ViewModel = value; }
+        //}
 
         protected MvxSplashScreenActivity(int resourceId = NoContent)
         {
@@ -51,8 +52,15 @@ namespace MvvmCross.Platforms.Android.Views
 
             _bundle = bundle;
 
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.InitializeAndMonitor(this).GetAwaiter().GetResult();
+            //var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+
+            //await setup.InitializeAndMonitor(this).ConfigureAwait(false);
+            //new Handler().PostDelayed(async() =>
+            //{
+            //    await setup.InitializeAndMonitor(this).ConfigureAwait(false);
+            //}, 10000);
+
+            //Task.Run(async () => await setup.InitializeAndMonitor(this).ConfigureAwait(false)).Wait();
 
             base.OnCreate(bundle);
 
@@ -65,14 +73,53 @@ namespace MvvmCross.Platforms.Android.Views
             }
         }
 
+        //protected override void OnStart()
+        //{
+        //    var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+
+        //    Task.Run(async() => await setup.InitializeAndMonitor(this).ConfigureAwait(false)).Wait();
+
+        //    //new Handler().PostDelayed(async () =>
+        //    //{
+        //    //    await setup.InitializeAndMonitor(this).ConfigureAwait(false);
+        //    //}, 10000);
+
+        //    base.OnStart();
+        //}
+
         private bool _isResumed;
 
         protected override void OnResume()
         {
+            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            //Task.Run(async () => await setup.InitializeAndMonitor(this).ConfigureAwait(false));
+            Task.Run(async () => await Initialize(setup).ConfigureAwait(false));
+
+            //var handler = new Handler();
+
+            //handler.Post(async () => 
+            //{
+            //    await Initialize(setup).ConfigureAwait(false);
+            //    //await setup.InitializeAndMonitor(this).ConfigureAwait(false);
+            //    handler.Dispose();
+            //});
+
             base.OnResume();
             _isResumed = true;
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
-            setup.InitializeAndMonitor(this).GetAwaiter().GetResult();
+            //var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
+            //await setup.InitializeAndMonitor(this).ConfigureAwait(false);
+        }
+
+        private async Task Initialize(MvxAndroidSetupSingleton setup)
+        {
+            await setup.EnsureInitialized().ConfigureAwait(false);
+
+            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup) && !startup.IsStarted)
+            {
+                await startup.Start(GetAppStartHint(null)).ConfigureAwait(false);
+            }
+
+            base.Finish();
         }
 
         protected override void OnPause()
@@ -91,7 +138,7 @@ namespace MvvmCross.Platforms.Android.Views
             await RunAppStartAsync(_bundle).ConfigureAwait(false);
         }
 
-        protected virtual async Task RunAppStartAsync(Bundle bundle)
+        protected virtual async Task RunAppStartAsync(Bundle? bundle)
         {
             if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup))
             {
@@ -106,7 +153,7 @@ namespace MvvmCross.Platforms.Android.Views
             }
         }
 
-        protected virtual object GetAppStartHint(object? hint = null)
+        protected virtual object? GetAppStartHint(object? hint = null)
         {
             return hint;
         }

@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using MvvmCross.Base;
@@ -43,7 +44,7 @@ namespace MvvmCross.Core
         private IMvxSetup? _setup;
         private IMvxSetupMonitor? _currentMonitor;
 
-        protected virtual IMvxSetup Setup => _setup;
+        protected virtual IMvxSetup Setup => _setup!;
 
         /// <summary>
         /// Returns a platform specific instance of Setup
@@ -90,7 +91,7 @@ namespace MvvmCross.Core
                 // singleton constructor
                 var instance = new TMvxSetupSingleton();
                 instance.CreateSetup();
-                return (TMvxSetupSingleton)Instance;
+                return (TMvxSetupSingleton)Instance!;
             }
         }
 
@@ -99,24 +100,48 @@ namespace MvvmCross.Core
             return StartSetupInitialization();
         }
 
-        public virtual async ValueTask InitializeAndMonitor(IMvxSetupMonitor? setupMonitor)
-        {
-            _currentMonitor = setupMonitor;
+        //public async virtual ValueTask InitializeAndMonitor(IMvxSetupMonitor? setupMonitor)
+        //{
+        //    _currentMonitor = setupMonitor;
 
-            if (_currentMonitor != null)
-                await _currentMonitor.InitializationComplete().ConfigureAwait(false);
+        //    //if (_currentMonitor != null)
+        //    //    await _currentMonitor.InitializationComplete().ConfigureAwait(false);
 
-            await StartSetupInitialization().ConfigureAwait(false);
-        }
+        //    //try
+        //    //{
+        //    //    await Task.Run(() =>
+        //    //    {
+
+        //    //    }).ConfigureAwait(true);
+        //    //}
+        //    //catch (Exception EX)
+        //    //{
+
+        //    //}
+
+        //    //try
+        //    //{
+        //    //    await Task.Run(() =>
+        //    //    {
+
+        //    //    }).ConfigureAwait(true);
+        //    //}
+        //    //catch (Exception EX)
+        //    //{
+
+        //    //}
+
+        //    await StartSetupInitialization().ConfigureAwait(false);
+        //}
 
         public virtual void CancelMonitor(IMvxSetupMonitor setupMonitor)
         {
             //lock (LockObject)
             //{
-            if (setupMonitor != _currentMonitor)
-            {
-                throw new MvxException("The specified IMvxSetupMonitor is not the one registered in MvxSetupSingleton");
-            }
+            //if (setupMonitor != _currentMonitor)
+            //{
+            //    throw new MvxException("The specified IMvxSetupMonitor is not the one registered in MvxSetupSingleton");
+            //}
             _currentMonitor = null;
             //}
         }
@@ -151,44 +176,46 @@ namespace MvvmCross.Core
 
             await _setup.InitializePrimary()
             .ContinueWith(async (t) =>
-            {
-                if (t.IsCompleted)
                 {
-                    await _setup.InitializeSecondary()
-                    .ContinueWith(async (tt) =>
-                        {
-                            if (tt.IsCompleted)
-                            {
-                                await RunMonitor().ConfigureAwait(false);
-                            }
-                            else
-                            {
-                                throw new MvxException("'InitializeSecondary' is not completed successfully.");
-                            }
-                        }, TaskScheduler.Current).Unwrap().ConfigureAwait(false);
-                }
-                else
-                {
-                    throw new MvxException("'InitializePrimary' is not completed successfully.");
-                }
-            }, TaskScheduler.Current).Unwrap().ConfigureAwait(false);
-        }
-
-        private async Task RunMonitor()
-        {
-            var monitor = _currentMonitor;
-
-            if (monitor != null)
-            {
-                var dispatcher = Mvx.IoCProvider.GetSingleton<IMvxMainThreadDispatcher>();
-                await dispatcher.ExecuteOnMainThreadAsync(async () =>
-                {
-                    if (monitor != null)
+                    if (t.IsCompleted)
                     {
-                        await monitor.InitializationComplete().ConfigureAwait(true);
+                        await _setup.InitializeSecondary().ConfigureAwait(false);
+                        //.ContinueWith(async (tt) =>
+                        //    {
+                        //        if (tt.IsCompleted)
+                        //        {
+                        //            await RunMonitor().ConfigureAwait(false);
+                        //        }
+                        //        else
+                        //        {
+                        //            throw new MvxException("'InitializeSecondary' is not completed successfully.");
+                        //        }
+                        //    }, TaskScheduler.Default)
+                        //.Unwrap().ConfigureAwait(false);
                     }
-                }).ConfigureAwait(false);
-            }
+                    else
+                    {
+                        throw new MvxException("'InitializePrimary' is not completed successfully.");
+                    }
+                }, TaskScheduler.Default)
+            .Unwrap().ConfigureAwait(false);
         }
+
+        //private async Task RunMonitor()
+        //{
+        //    var monitor = _currentMonitor;
+
+        //    if (monitor != null)
+        //    {
+        //        var dispatcher = Mvx.IoCProvider.GetSingleton<IMvxMainThreadDispatcher>();
+        //        await dispatcher.ExecuteOnMainThreadAsync(async () =>
+        //        {
+        //            if (monitor != null)
+        //            {
+        //                await monitor.InitializationComplete().ConfigureAwait(true);
+        //            }
+        //        }).ConfigureAwait(false);
+        //    }
+        //}
     }
 }

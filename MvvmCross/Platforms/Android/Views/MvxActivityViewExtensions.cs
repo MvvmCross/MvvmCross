@@ -37,7 +37,6 @@ namespace MvvmCross.Platforms.Android.Views
 
         public static async ValueTask OnViewCreate(this IMvxAndroidView androidView, Bundle bundle)
         {
-            await androidView.EnsureSetupInitialized().ConfigureAwait(false);
             androidView.OnLifetimeEvent((listener, activity) => listener.OnCreate(activity, bundle));
 
             var cache = Mvx.IoCProvider.Resolve<IMvxSingleViewModelCache>();
