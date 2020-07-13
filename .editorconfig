@@ -89,5 +89,5 @@ csharp_prefer_braces = false
 dotnet_diagnostic.CA1000.severity = none
 # CA1303: Do not pass literals as localized parameters
 dotnet_diagnostic.CA1303.severity = none
-
-
+# CA1822: Mark members as static
+dotnet_diagnostic.CA1822.severity = silent
