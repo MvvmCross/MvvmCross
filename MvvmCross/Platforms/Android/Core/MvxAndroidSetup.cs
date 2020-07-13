@@ -31,8 +31,8 @@ namespace MvvmCross.Platforms.Android.Core
     public abstract class MvxAndroidSetup
         : MvxSetup, IMvxAndroidGlobals, IMvxAndroidSetup
     {
-        private Context _applicationContext;
-        private IMvxAndroidViewPresenter _presenter;
+        private Context? _applicationContext;
+        private IMvxAndroidViewPresenter?_presenter;
 
         public void PlatformInitialize(Context applicationContext)
         {
@@ -41,7 +41,7 @@ namespace MvvmCross.Platforms.Android.Core
 
         public virtual Assembly ExecutableAssembly => ViewAssemblies?.FirstOrDefault() ?? GetType().Assembly;
 
-        public Context ApplicationContext => _applicationContext;
+        public Context ApplicationContext => _applicationContext!;
 
         protected override Task InitializeFirstChance()
         {
@@ -116,7 +116,7 @@ namespace MvvmCross.Platforms.Android.Core
 
         protected sealed override IMvxViewsContainer CreateViewsContainer()
         {
-            var container = CreateViewsContainer(_applicationContext);
+            var container = CreateViewsContainer(_applicationContext!);
             Mvx.IoCProvider.RegisterSingleton<IMvxAndroidViewModelRequestTranslator>(container);
             Mvx.IoCProvider.RegisterSingleton<IMvxAndroidViewModelLoader>(container);
             var viewsContainer = container as MvxViewsContainer;

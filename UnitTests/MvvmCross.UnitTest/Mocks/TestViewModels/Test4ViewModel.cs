@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.UnitTest.Mocks.TestViewModels
@@ -16,7 +17,7 @@ namespace MvvmCross.UnitTest.Mocks.TestViewModels
             Thing = thing;
         }
 
-        public override void Start()
+        public override ValueTask Start()
         {
             throw new NullReferenceException();
         }

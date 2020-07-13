@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using MvvmCross.ViewModels;
 
 namespace MvvmCross.UnitTest.Mocks.TestViewModels
@@ -10,8 +11,8 @@ namespace MvvmCross.UnitTest.Mocks.TestViewModels
     public class Test1ViewModel : MvxViewModel
     {
         public ITestThing Thing { get; private set; }
-        public IMvxBundle BundleInit { get; private set; }
-        public IMvxBundle BundleState { get; private set; }
+        public IMvxBundle? BundleInit { get; private set; }
+        public IMvxBundle? BundleState { get; private set; }
         public bool StartCalled { get; private set; }
         public string TheInitString1Set { get; private set; }
         public Guid TheInitGuid1Set { get; private set; }
@@ -43,9 +44,11 @@ namespace MvvmCross.UnitTest.Mocks.TestViewModels
             TheInitBundleSet = bundle;
         }
 
-        protected override void InitFromBundle(IMvxBundle parameters)
+        protected override ValueTask InitFromBundle(IMvxBundle? parameters)
         {
             BundleInit = parameters;
+
+            return new ValueTask();
         }
 
         public void ReloadState(string TheString1)
@@ -64,14 +67,18 @@ namespace MvvmCross.UnitTest.Mocks.TestViewModels
             TheReloadBundleSet = bundle;
         }
 
-        protected override void ReloadFromBundle(IMvxBundle state)
+        protected override ValueTask ReloadFromBundle(IMvxBundle? state)
         {
             BundleState = state;
+
+            return new ValueTask();
         }
 
-        public override void Start()
+        public override ValueTask Start()
         {
             StartCalled = true;
+
+            return new ValueTask();
         }
     }
 }

@@ -46,7 +46,6 @@ namespace MvvmCross.Platforms.Wpf
 
             MvxSetup.RegisterSetupType<MvxWpfSetup<App>>(System.Reflection.Assembly.GetExecutingAssembly());
             var instance = MvxWpfSetupSingleton.EnsureSingletonAvailable(Application.Current.Dispatcher, new Content());
-            instance.InitializeAndMonitor(null).GetAwaiter().GetResult();
         }
 
         class App : ViewModels.MvxApplication

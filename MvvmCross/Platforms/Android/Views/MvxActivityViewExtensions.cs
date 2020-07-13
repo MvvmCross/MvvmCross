@@ -139,17 +139,11 @@ namespace MvvmCross.Platforms.Android.Views
             return await translatorService.Load(activity.Intent, savedState, viewModelType).ConfigureAwait(false);
         }
 
-        private static async ValueTask EnsureSetupInitialized(this IMvxAndroidView androidView)
+        private static ValueTask EnsureSetupInitialized(this IMvxAndroidView androidView)
         {
-            if (androidView is IMvxSetupMonitor)
-            {
-                // setup monitor views manage their own setup initialization
-                return;
-            }
-
             var activity = androidView.ToActivity();
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(activity.ApplicationContext);
-            await setup.EnsureInitialized().ConfigureAwait(false);
+            return setup.EnsureInitialized();
         }
     }
 }

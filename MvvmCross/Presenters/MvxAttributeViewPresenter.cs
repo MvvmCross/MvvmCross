@@ -16,7 +16,7 @@ namespace MvvmCross.Presenters
 {
     public abstract class MvxAttributeViewPresenter : MvxViewPresenter, IMvxAttributeViewPresenter
     {
-        private IMvxViewModelTypeFinder? _viewModelTypeFinder;
+        protected IMvxViewModelTypeFinder? _viewModelTypeFinder;
 
         public virtual IMvxViewModelTypeFinder ViewModelTypeFinder
         {
@@ -32,7 +32,7 @@ namespace MvvmCross.Presenters
             }
         }
 
-        private IMvxViewsContainer? _viewsContainer;
+        protected IMvxViewsContainer? _viewsContainer;
 
         public virtual IMvxViewsContainer ViewsContainer
         {
@@ -48,7 +48,7 @@ namespace MvvmCross.Presenters
             }
         }
 
-        private IDictionary<Type, MvxPresentationAttributeAction>? _attributeTypesActionsDictionary;
+        protected IDictionary<Type, MvxPresentationAttributeAction>? _attributeTypesActionsDictionary;
         public virtual IDictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
         {
             get

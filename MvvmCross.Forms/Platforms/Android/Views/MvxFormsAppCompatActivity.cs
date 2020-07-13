@@ -35,8 +35,8 @@ namespace MvvmCross.Forms.Platforms.Android.Views
 
         public object? DataContext
         {
-            get { return BindingContext.DataContext; }
-            set { BindingContext.DataContext = value; }
+            get { return BindingContext!.DataContext; }
+            set { BindingContext!.DataContext = value; }
         }
 
         public IMvxViewModel? ViewModel
@@ -76,24 +76,13 @@ namespace MvvmCross.Forms.Platforms.Android.Views
         {
         }
 
-        public IMvxBindingContext BindingContext { get; set; }
+        public IMvxBindingContext? BindingContext { get; set; }
 
         public override void SetContentView(int layoutResId)
         {
             _view = this.BindingInflate(layoutResId, null);
 
             SetContentView(_view);
-        }
-
-        protected override void AttachBaseContext(Context @base)
-        {
-            if (this is IMvxSetupMonitor)
-            {
-                // Do not attach our inflater to splash screens.
-                base.AttachBaseContext(@base);
-                return;
-            }
-            base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
         }
 
         protected override void OnCreate(Bundle bundle)

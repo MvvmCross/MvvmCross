@@ -77,17 +77,6 @@ namespace MvvmCross.Platforms.Android.Views
         {
         }
 
-        protected override void AttachBaseContext(Context @base)
-        {
-            if (this is IMvxSetupMonitor)
-            {
-                // Do not attach our inflater to splash screens.
-                base.AttachBaseContext(@base);
-                return;
-            }
-            base.AttachBaseContext(MvxContextWrapper.Wrap(@base, this));
-        }
-
         private readonly List<WeakReference<Fragment>> _fragList = new List<WeakReference<Fragment>>();
 
         public override void OnAttachFragment(Fragment fragment)
