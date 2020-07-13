@@ -48,11 +48,11 @@ namespace MvvmCross.Platforms.Uap.Views
             base.OnNavigatingFrom(e);
         }
 
-        private IMvxViewModel _viewModel;
+        private IMvxViewModel? _viewModel;
 
         public IMvxWindowsFrame WrappedFrame => new MvxWrappedFrame(Frame);
 
-        public IMvxViewModel ViewModel
+        public IMvxViewModel? ViewModel
         {
             get
             {
@@ -94,22 +94,26 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (e == null) throw new NullReferenceException(nameof(e));
+
             base.OnNavigatedTo(e);
             ViewModel?.ViewCreated();
 
             if (!string.IsNullOrEmpty(_reqData))
             {
                 var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxWindowsViewModelLoader>();
-                ViewModel = await viewModelLoader.Load(e.Parameter.ToString(), LoadStateBundle(e));
+                ViewModel = await viewModelLoader.Load(e.Parameter.ToString(), LoadStateBundle(e)).ConfigureAwait(false);
                 ViewModel?.ViewCreated();
             }
             _reqData = (string)e.Parameter;
 
-            this.OnViewCreate(_reqData, () => LoadStateBundle(e));
+            await this.OnViewCreate(_reqData, () => LoadStateBundle(e)).ConfigureAwait(false);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            if (e == null) throw new NullReferenceException(nameof(e));
+
             ViewModel?.ViewDisappeared();
             base.OnNavigatedFrom(e);
             var bundle = this.CreateSaveStateBundle();
@@ -140,24 +144,26 @@ namespace MvvmCross.Platforms.Uap.Views
             }
         }
 
-        private string _pageKey;
+        private string? _pageKey;
 
-        private IMvxSuspensionManager _suspensionManager;
+        private IMvxSuspensionManager? _suspensionManager;
         protected IMvxSuspensionManager SuspensionManager
         {
             get
             {
-                _suspensionManager = _suspensionManager ?? Mvx.IoCProvider.Resolve<IMvxSuspensionManager>();
+                _suspensionManager ??= Mvx.IoCProvider.Resolve<IMvxSuspensionManager>();
                 return _suspensionManager;
             }
         }
 
-        protected virtual IMvxBundle LoadStateBundle(NavigationEventArgs e)
+        protected virtual IMvxBundle? LoadStateBundle(NavigationEventArgs e)
         {
+            if (e == null) throw new NullReferenceException(nameof(e));
+
             // nothing loaded by default
             var frameState = SuspensionManager.SessionStateForFrame(WrappedFrame);
             _pageKey = "Page-" + Frame.BackStackDepth;
-             IMvxBundle bundle = null;
+            IMvxBundle? bundle = null;
 
             if (e.NavigationMode == NavigationMode.New)
             {
@@ -182,8 +188,10 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected virtual void SaveStateBundle(NavigationEventArgs navigationEventArgs, IMvxBundle bundle)
         {
+            if (bundle == null) throw new NullReferenceException(nameof(bundle));
+
             var frameState = SuspensionManager.SessionStateForFrame(WrappedFrame);
-            frameState[_pageKey] = bundle.Data;
+            frameState[_pageKey!] = bundle!.Data;
         }
 
         public void Dispose()
@@ -212,9 +220,9 @@ namespace MvvmCross.Platforms.Uap.Views
         : MvxWindowsPage
         , IMvxWindowsView<TViewModel> where TViewModel : class, IMvxViewModel
     {
-        public new TViewModel ViewModel
+        public new TViewModel? ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
+            get { return (TViewModel)base.ViewModel!; }
             set { base.ViewModel = value; }
         }
     }

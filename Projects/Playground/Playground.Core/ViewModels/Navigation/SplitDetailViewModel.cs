@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Threading.Tasks;
 using MvvmCross.Commands;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
@@ -24,9 +25,9 @@ namespace Playground.Core.ViewModels
 
         public string ContentText => "Text for the Content Area";
 
-        public override void ViewAppeared()
+        public override ValueTask ViewAppeared()
         {
-            base.ViewAppeared();
+            return base.ViewAppeared();
         }
     }
 }

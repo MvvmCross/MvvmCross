@@ -17,7 +17,7 @@ namespace Playground.Core.ViewModels
         }
 
         public IMvxAsyncCommand LoginCommand => new MvxAsyncCommand(
-            async ()=> await GotoMasterDetailPage().ConfigureAwait(false), 
+            async ()=> await GotoMasterDetailPage().ConfigureAwait(true), 
             CanLogin);
 
         private bool CanLogin()
@@ -27,8 +27,8 @@ namespace Playground.Core.ViewModels
 
         private async Task GotoMasterDetailPage()
         {
-            await NavigationService.Navigate<MixedNavMasterDetailViewModel>().ConfigureAwait(false);
-            await NavigationService.Navigate<MixedNavMasterRootContentViewModel>().ConfigureAwait(false);
+            await NavigationService.Navigate<MixedNavMasterDetailViewModel>().ConfigureAwait(true);
+            await NavigationService.Navigate<MixedNavMasterRootContentViewModel>().ConfigureAwait(true);
         }
     }
 }

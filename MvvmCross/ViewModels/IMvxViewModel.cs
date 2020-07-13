@@ -9,25 +9,25 @@ namespace MvvmCross.ViewModels
 {
     public interface IMvxViewModel
     {
-        void ViewCreated();
+        ValueTask ViewCreated();
 
-        void ViewAppearing();
+        ValueTask ViewAppearing();
 
-        void ViewAppeared();
+        ValueTask ViewAppeared();
 
-        void ViewDisappearing();
+        ValueTask ViewDisappearing();
 
-        void ViewDisappeared();
+        ValueTask ViewDisappeared();
 
-        void ViewDestroy(bool viewFinishing = true);
+        ValueTask ViewDestroy(bool viewFinishing = true);
 
-        void Init(IMvxBundle? parameters);
+        ValueTask Init(IMvxBundle? parameters);
 
-        void ReloadState(IMvxBundle? state);
+        ValueTask ReloadState(IMvxBundle? state);
 
-        void Start();
+        ValueTask Start();
 
-        void SaveState(IMvxBundle? state);
+        ValueTask SaveState(IMvxBundle? state);
 
         ValueTask Prepare();
     }

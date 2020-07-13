@@ -15,59 +15,69 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        public virtual void ViewCreated()
+        public virtual ValueTask ViewCreated()
         {
+            return new ValueTask();
         }
 
-        public virtual void ViewAppearing()
+        public virtual ValueTask ViewAppearing()
         {
+            return new ValueTask();
         }
 
-        public virtual void ViewAppeared()
+        public virtual ValueTask ViewAppeared()
         {
+            return new ValueTask();
         }
 
-        public virtual void ViewDisappearing()
+        public virtual ValueTask ViewDisappearing()
         {
+            return new ValueTask();
         }
 
-        public virtual void ViewDisappeared()
+        public virtual ValueTask ViewDisappeared()
         {
+            return new ValueTask();
         }
 
-        public virtual void ViewDestroy(bool viewFinishing = true)
+        public virtual ValueTask ViewDestroy(bool viewFinishing = true)
         {
+            return new ValueTask();
         }
 
-        public void Init(IMvxBundle? parameters)
+        public ValueTask Init(IMvxBundle? parameters)
         {
-            InitFromBundle(parameters);
+            return InitFromBundle(parameters);
         }
 
-        public void ReloadState(IMvxBundle? state)
+        public ValueTask ReloadState(IMvxBundle? state)
         {
-            ReloadFromBundle(state);
+            return ReloadFromBundle(state);
         }
 
-        public virtual void Start()
+        public virtual ValueTask Start()
         {
+            return new ValueTask();
         }
 
-        public void SaveState(IMvxBundle? state)
+        public ValueTask SaveState(IMvxBundle? state)
         {
-            SaveStateToBundle(state);
+            return SaveStateToBundle(state);
         }
 
-        protected virtual void InitFromBundle(IMvxBundle? parameters)
+        protected virtual ValueTask InitFromBundle(IMvxBundle? parameters)
         {
+            return new ValueTask();
         }
 
-        protected virtual void ReloadFromBundle(IMvxBundle? state)
+        protected virtual ValueTask ReloadFromBundle(IMvxBundle? state)
         {
+            return new ValueTask();
         }
 
-        protected virtual void SaveStateToBundle(IMvxBundle? bundle)
+        protected virtual ValueTask SaveStateToBundle(IMvxBundle? bundle)
         {
+            return new ValueTask();
         }
 
         public virtual ValueTask Prepare()
@@ -91,12 +101,12 @@ namespace MvvmCross.ViewModels
     {
         public TaskCompletionSource<object>? CloseCompletionSource { get; set; }
 
-        public override void ViewDestroy(bool viewFinishing = true)
+        public override ValueTask ViewDestroy(bool viewFinishing = true)
         {
             if (viewFinishing && CloseCompletionSource?.Task.IsCompleted == false && !CloseCompletionSource.Task.IsFaulted)
                 CloseCompletionSource?.TrySetCanceled();
 
-            base.ViewDestroy(viewFinishing);
+            return base.ViewDestroy(viewFinishing);
         }
     }
 

@@ -26,9 +26,9 @@ namespace Playground.Core.ViewModels
             return base.Initialize();
         }
 
-        public override void Start()
+        public override ValueTask Start()
         {
-            base.Start();
+            return base.Start();
         }
 
         public IMvxAsyncCommand ShowTabsCommand { get; private set; }

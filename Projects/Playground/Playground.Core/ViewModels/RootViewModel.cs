@@ -60,48 +60,48 @@ namespace Playground.Core.ViewModels
                 var testIfReturn = result;
             });
 
-            ShowModalCommand = new MvxAsyncCommand(async () => await Navigate().ConfigureAwait(false));
+            ShowModalCommand = new MvxAsyncCommand(async () => await Navigate().ConfigureAwait(true));
 
             ShowModalNavCommand =
-                new MvxAsyncCommand(async () => await NavigationService.Navigate<ModalNavViewModel>().ConfigureAwait(false));
+                new MvxAsyncCommand(async () => await NavigationService.Navigate<ModalNavViewModel>().ConfigureAwait(true));
 
-            ShowTabsCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<TabsRootViewModel>().ConfigureAwait(false));
+            ShowTabsCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<TabsRootViewModel>().ConfigureAwait(true));
 
-            ShowPagesCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<PagesRootViewModel>().ConfigureAwait(false));
+            ShowPagesCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<PagesRootViewModel>().ConfigureAwait(true));
 
-            ShowSplitCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SplitRootViewModel>().ConfigureAwait(false));
+            ShowSplitCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SplitRootViewModel>().ConfigureAwait(true));
 
-            ShowNativeCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<NativeViewModel>().ConfigureAwait(false));
+            ShowNativeCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<NativeViewModel>().ConfigureAwait(true));
 
             ShowOverrideAttributeCommand = new MvxAsyncCommand(async () =>
-                await NavigationService.Navigate<OverrideAttributeViewModel>().ConfigureAwait(false));
+                await NavigationService.Navigate<OverrideAttributeViewModel>().ConfigureAwait(true));
 
-            ShowSheetCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SheetViewModel>().ConfigureAwait(false));
+            ShowSheetCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SheetViewModel>().ConfigureAwait(true));
 
-            ShowWindowCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<WindowViewModel>().ConfigureAwait(false));
+            ShowWindowCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<WindowViewModel>().ConfigureAwait(true));
 
             ShowMixedNavigationCommand =
-                new MvxAsyncCommand(async () => await NavigationService.Navigate<MixedNavFirstViewModel>().ConfigureAwait(false));
+                new MvxAsyncCommand(async () => await NavigationService.Navigate<MixedNavFirstViewModel>().ConfigureAwait(true));
 
             ShowDictionaryBindingCommand = new MvxAsyncCommand(async () =>
-                await NavigationService.Navigate<DictionaryBindingViewModel>().ConfigureAwait(false));
+                await NavigationService.Navigate<DictionaryBindingViewModel>().ConfigureAwait(true));
 
             ShowCollectionViewCommand =
-                new MvxAsyncCommand(async () => await NavigationService.Navigate<CollectionViewModel>().ConfigureAwait(false));
+                new MvxAsyncCommand(async () => await NavigationService.Navigate<CollectionViewModel>().ConfigureAwait(true));
 
             ShowSharedElementsCommand = new MvxAsyncCommand(async () =>
-                await NavigationService.Navigate<SharedElementRootChildViewModel>().ConfigureAwait(false));
+                await NavigationService.Navigate<SharedElementRootChildViewModel>().ConfigureAwait(true));
 
             ShowCustomBindingCommand =
-                new MvxAsyncCommand(async () => await NavigationService.Navigate<CustomBindingViewModel>().ConfigureAwait(false));
+                new MvxAsyncCommand(async () => await NavigationService.Navigate<CustomBindingViewModel>().ConfigureAwait(true));
 
             ShowFluentBindingCommand =
-                new MvxAsyncCommand(async () => await NavigationService.Navigate<FluentBindingViewModel>().ConfigureAwait(false));
+                new MvxAsyncCommand(async () => await NavigationService.Navigate<FluentBindingViewModel>().ConfigureAwait(true));
 
             RegisterAndResolveWithReflectionCommand = new MvxAsyncCommand(
-                async () => await RegisterAndResolveWithReflection().ConfigureAwait(false));
+                async () => await RegisterAndResolveWithReflection().ConfigureAwait(true));
             RegisterAndResolveWithNoReflectionCommand = new MvxAsyncCommand(
-                async () => await RegisterAndResolveWithNoReflection().ConfigureAwait(false));
+                async () => await RegisterAndResolveWithNoReflection().ConfigureAwait(true));
 
             _counter = 3;
 
@@ -109,10 +109,10 @@ namespace Playground.Core.ViewModels
                 new MvxCommand(() => IsVisible = !IsVisible);
 
             FragmentCloseCommand = new MvxAsyncCommand(
-                async () => await NavigationService.Navigate<FragmentCloseViewModel>().ConfigureAwait(false));
+                async () => await NavigationService.Navigate<FragmentCloseViewModel>().ConfigureAwait(true));
 
             ShowLocationCommand = new MvxAsyncCommand(
-                async () => await NavigationService.Navigate<LocationViewModel>().ConfigureAwait(false));
+                async () => await NavigationService.Navigate<LocationViewModel>().ConfigureAwait(true));
         }
 
         public IMvxAsyncCommand ShowChildCommand { get; }
@@ -144,22 +144,22 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowCollectionViewCommand { get; }
 
         public IMvxAsyncCommand ShowListViewCommand =>
-            new MvxAsyncCommand(async () => await NavigationService.Navigate<ListViewModel>().ConfigureAwait(false));
+            new MvxAsyncCommand(async () => await NavigationService.Navigate<ListViewModel>().ConfigureAwait(true));
 
         public IMvxAsyncCommand ShowBindingsViewCommand =>
-            new MvxAsyncCommand(async () => await NavigationService.Navigate<BindingsViewModel>().ConfigureAwait(false));
+            new MvxAsyncCommand(async () => await NavigationService.Navigate<BindingsViewModel>().ConfigureAwait(true));
 
         public IMvxAsyncCommand ShowCodeBehindViewCommand =>
-            new MvxAsyncCommand(async () => await NavigationService.Navigate<CodeBehindViewModel>().ConfigureAwait(false));
+            new MvxAsyncCommand(async () => await NavigationService.Navigate<CodeBehindViewModel>().ConfigureAwait(true));
 
         public IMvxAsyncCommand ShowNavigationCloseCommand =>
-            new MvxAsyncCommand(async () => await NavigationService.Navigate<NavigationCloseViewModel>().ConfigureAwait(false));
+            new MvxAsyncCommand(async () => await NavigationService.Navigate<NavigationCloseViewModel>().ConfigureAwait(true));
 
         public IMvxAsyncCommand ShowContentViewCommand =>
-            new MvxAsyncCommand(async () => await NavigationService.Navigate<ParentContentViewModel>().ConfigureAwait(false));
+            new MvxAsyncCommand(async () => await NavigationService.Navigate<ParentContentViewModel>().ConfigureAwait(true));
 
         public IMvxAsyncCommand ConvertersCommand =>
-            new MvxAsyncCommand(async () => await NavigationService.Navigate<ConvertersViewModel>().ConfigureAwait(false));
+            new MvxAsyncCommand(async () => await NavigationService.Navigate<ConvertersViewModel>().ConfigureAwait(true));
 
         public IMvxAsyncCommand ShowSharedElementsCommand { get; }
 
@@ -219,21 +219,21 @@ namespace Playground.Core.ViewModels
             await MakeRequest().ConfigureAwait(false);
         }
 
-        public override void ViewAppearing()
+        public override ValueTask ViewAppearing()
         {
-            base.ViewAppearing();
+            return base.ViewAppearing();
         }
 
-        protected override void SaveStateToBundle(IMvxBundle bundle)
+        protected override async ValueTask SaveStateToBundle(IMvxBundle? bundle)
         {
-            base.SaveStateToBundle(bundle);
+            await base.SaveStateToBundle(bundle).ConfigureAwait(false);
 
-            bundle.Data["MyKey"] = _counter.ToString();
+            bundle!.Data["MyKey"] = _counter.ToString();
         }
 
-        protected override void ReloadFromBundle(IMvxBundle state)
+        protected override async ValueTask ReloadFromBundle(IMvxBundle state)
         {
-            base.ReloadFromBundle(state);
+            await base.ReloadFromBundle(state).ConfigureAwait(false);
 
             _counter = int.Parse(state.Data["MyKey"]);
         }
@@ -242,7 +242,7 @@ namespace Playground.Core.ViewModels
         {
             try
             {
-                await NavigationService.Navigate<ModalViewModel>();
+                await NavigationService.Navigate<ModalViewModel>().ConfigureAwait(true);
             }
             catch (Exception)
             {
@@ -258,7 +258,7 @@ namespace Playground.Core.ViewModels
                 {
                     var task = client.MakeRequestAsync(request);
 
-                    var result = await task;
+                    var result = await task.ConfigureAwait(true);
 
                     return result;
                 }
@@ -269,7 +269,7 @@ namespace Playground.Core.ViewModels
             return default(MvxRestResponse);
         }
 
-        private async Task RegisterAndResolveWithReflection()
+        private Task RegisterAndResolveWithReflection()
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -286,10 +286,10 @@ namespace Playground.Core.ViewModels
             TimeToRegister = $"Time to register using reflection - {registered}";
             TimeToResolve = $"Time to resolve using reflection - {resolved}";
             TotalTime = $"Total time using reflection - {total}";
-            await RaiseAllPropertiesChanged().ConfigureAwait(false);
+            return RaiseAllPropertiesChanged();
         }
 
-        private async Task RegisterAndResolveWithNoReflection()
+        private Task RegisterAndResolveWithNoReflection()
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -306,7 +306,7 @@ namespace Playground.Core.ViewModels
             TimeToRegister = $"Time to register - NO reflection - {registered}";
             TimeToResolve = $"Time to resolve - NO reflection - {resolved}";
             TotalTime = $"Total time - NO reflection - {total}";
-            await RaiseAllPropertiesChanged().ConfigureAwait(false);
+            return RaiseAllPropertiesChanged();
         }
     }
 }

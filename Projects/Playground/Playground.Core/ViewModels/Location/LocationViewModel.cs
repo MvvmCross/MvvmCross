@@ -23,7 +23,7 @@ namespace Playground.Core.ViewModels.Location
             _locationWatcher = locationWatcher;
 
             StartCommand = new MvxAsyncCommand(
-                async ()=> await DoStartCommand().ConfigureAwait(false), 
+                async ()=> await DoStartCommand().ConfigureAwait(true), 
                 () => !_locationWatcher.Started);
         }
 

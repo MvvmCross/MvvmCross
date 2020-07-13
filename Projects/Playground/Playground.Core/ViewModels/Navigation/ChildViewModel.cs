@@ -26,11 +26,11 @@ namespace Playground.Core.ViewModels
             {
                 Message = "This returned correctly",
                 Value = 5.67m
-            }).ConfigureAwait(false));
+            }).ConfigureAwait(true));
 
-            ShowSecondChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SecondChildViewModel>().ConfigureAwait(false));
+            ShowSecondChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SecondChildViewModel>().ConfigureAwait(true));
 
-            ShowRootCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<RootViewModel>().ConfigureAwait(false));
+            ShowRootCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<RootViewModel>().ConfigureAwait(true));
 
             PropertyChanged += ChildViewModel_PropertyChanged;
         }
@@ -54,14 +54,14 @@ namespace Playground.Core.ViewModels
             return new ValueTask();
         }
 
-        protected override void SaveStateToBundle(IMvxBundle bundle)
+        protected override ValueTask SaveStateToBundle(IMvxBundle bundle)
         {
-            base.SaveStateToBundle(bundle);
+            return base.SaveStateToBundle(bundle);
         }
 
-        protected override void ReloadFromBundle(IMvxBundle state)
+        protected override ValueTask ReloadFromBundle(IMvxBundle state)
         {
-            base.ReloadFromBundle(state);
+            return base.ReloadFromBundle(state);
         }
 
         public override async ValueTask Initialize()
@@ -71,9 +71,9 @@ namespace Playground.Core.ViewModels
             await Task.Delay(8500).ConfigureAwait(false);
         }
 
-        public override void Start()
+        public override ValueTask Start()
         {
-            base.Start();
+            return base.Start();
         }
 
         public IMvxAsyncCommand CloseCommand { get; private set; }
@@ -82,16 +82,16 @@ namespace Playground.Core.ViewModels
 
         public IMvxAsyncCommand ShowRootCommand { get; private set; }
 
-        public override void ViewAppeared()
+        public override ValueTask ViewAppeared()
         {
             base.ViewAppeared();
 
-            Task.Run(async () =>
+            return new ValueTask(Task.Run(async () =>
             {
-                await Task.Delay(1000).ConfigureAwait(false);
+                await Task.Delay(1000).ConfigureAwait(true);
                 BrokenTextValue = "This will throw exception in UI layer";
                 AnotherBrokenTextValue = "This will throw exception in page";
-            });
+            }));
         }
     }
 }

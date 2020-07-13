@@ -9,6 +9,6 @@ namespace MvvmCross.Platforms.Uap.Views
 {
     public interface IMvxWindowsViewModelLoader
     {
-        ValueTask<IMvxViewModel> Load(string requestText, IMvxBundle savedState);
+        ValueTask<IMvxViewModel> Load(string requestText, IMvxBundle? savedState);
     }
 }

@@ -15,20 +15,20 @@ namespace Playground.Core.ViewModels
     {
         public Tab1ViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
-            OpenChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ChildViewModel>().ConfigureAwait(false));
+            OpenChildCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ChildViewModel>().ConfigureAwait(true));
 
-            OpenModalCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ModalViewModel>().ConfigureAwait(false));
+            OpenModalCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ModalViewModel>().ConfigureAwait(true));
 
-            OpenNavModalCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ModalNavViewModel>().ConfigureAwait(false));
+            OpenNavModalCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<ModalNavViewModel>().ConfigureAwait(true));
 
-            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this).ConfigureAwait(false));
+            CloseCommand = new MvxAsyncCommand(async () => await NavigationService.Close(this).ConfigureAwait(true));
 
-            OpenTab2Command = new MvxAsyncCommand(async () => await NavigationService.ChangePresentation(new MvxPagePresentationHint(typeof(Tab2ViewModel))).ConfigureAwait(false));
+            OpenTab2Command = new MvxAsyncCommand(async () => await NavigationService.ChangePresentation(new MvxPagePresentationHint(typeof(Tab2ViewModel))).ConfigureAwait(true));
         }
 
-        public override async ValueTask Initialize()
+        public override ValueTask Initialize()
         {
-            await Task.Delay(3000).ConfigureAwait(false);
+            return new ValueTask(Task.Delay(3000));
         }
 
         string para;
@@ -39,9 +39,9 @@ namespace Playground.Core.ViewModels
             return new ValueTask();
         }
 
-        public override void ViewAppeared()
+        public override ValueTask ViewAppeared()
         {
-            base.ViewAppeared();
+            return base.ViewAppeared();
         }
 
         public IMvxAsyncCommand OpenChildCommand { get; private set; }

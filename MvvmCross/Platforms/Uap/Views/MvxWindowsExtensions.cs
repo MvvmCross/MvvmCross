@@ -15,13 +15,18 @@ namespace MvvmCross.Platforms.Uap.Views
 {
     public static class MvxWindowsExtensions
     {
-        public static ValueTask OnViewCreate(this IMvxWindowsView storeView, string requestText, Func<IMvxBundle> bundleLoader)
+        public static ValueTask OnViewCreate(this IMvxWindowsView storeView, string requestText, Func<IMvxBundle?> bundleLoader)
         {
+            if (bundleLoader == null) throw new NullReferenceException(nameof(bundleLoader));
+
             return storeView.OnViewCreate(() => storeView.LoadViewModel(requestText, bundleLoader()));
         }
 
         public static async ValueTask OnViewCreate(this IMvxWindowsView storeView, Func<ValueTask<IMvxViewModel>> viewModelLoader)
         {
+            if (storeView == null) throw new NullReferenceException(nameof(storeView));
+            if (viewModelLoader == null) throw new NullReferenceException(nameof(viewModelLoader));
+
             if (storeView.ViewModel != null)
                 return;
 
@@ -40,6 +45,8 @@ namespace MvvmCross.Platforms.Uap.Views
 
         public static bool HasRegionAttribute(this Type view)
         {
+            if (view == null) throw new NullReferenceException(nameof(view));
+
             var attributes = view
                 .GetCustomAttributes(typeof(MvxRegionPresentationAttribute), true);
 
@@ -48,6 +55,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         public static string GetRegionName(this Type view)
         {
+
             var attributes = view
                 .GetCustomAttributes(typeof(MvxRegionPresentationAttribute), true);
 
@@ -57,7 +65,7 @@ namespace MvvmCross.Platforms.Uap.Views
             return ((MvxRegionPresentationAttribute)attributes.First()).Name;
         }
 
-        public static T FindControl<T>(this UIElement parent, string name = null) where T : FrameworkElement
+        public static T? FindControl<T>(this UIElement parent, string? name = null) where T : FrameworkElement
         {
             if (parent == null)
             {
@@ -70,13 +78,13 @@ namespace MvvmCross.Platforms.Uap.Views
                 return typedParent;
             }
 
-            T result = null;
+            T? result = null;
             var count = VisualTreeHelper.GetChildrenCount(parent);
             for (var i = 0; i < count; i++)
             {
                 var child = VisualTreeHelper.GetChild(parent, i) as UIElement;
 
-                result = FindControl<T>(child, name);
+                result = FindControl<T>(child!, name);
                 if (result != null)
                 {
                     return result;
@@ -88,7 +96,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         private static ValueTask<IMvxViewModel> LoadViewModel(this IMvxWindowsView storeView,
                                                     string requestText,
-                                                    IMvxBundle bundle)
+                                                    IMvxBundle? bundle)
         {
 #warning ClearingBackStack disabled for now
 

@@ -15,28 +15,28 @@ namespace Playground.Core.ViewModels
         public SplitRootViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
             ShowInitialMenuCommand = new MvxAsyncCommand(
-                async () => await ShowInitialViewModel().ConfigureAwait(false));
+                async () => await ShowInitialViewModel().ConfigureAwait(true));
             ShowDetailCommand = new MvxAsyncCommand(
-                async () => await ShowDetailViewModel().ConfigureAwait(false));
+                async () => await ShowDetailViewModel().ConfigureAwait(true));
         }
 
         public IMvxAsyncCommand ShowInitialMenuCommand { get; private set; }
 
         public IMvxAsyncCommand ShowDetailCommand { get; private set; }
 
-        public override void ViewAppeared()
+        public override ValueTask ViewAppeared()
         {
-            Task.WaitAll(ShowInitialViewModel(), ShowDetailViewModel());
+            return new ValueTask(Task.WhenAll(ShowInitialViewModel(), ShowDetailViewModel()));
         }
 
-        private async Task ShowInitialViewModel()
+        private Task ShowInitialViewModel()
         {
-            await NavigationService.Navigate<SplitMasterViewModel>().ConfigureAwait(false);
+            return NavigationService.Navigate<SplitMasterViewModel>().AsTask();
         }
 
-        private async Task ShowDetailViewModel()
+        private Task ShowDetailViewModel()
         {
-            await NavigationService.Navigate<SplitDetailViewModel>().ConfigureAwait(false);
+            return NavigationService.Navigate<SplitDetailViewModel>().AsTask();
         }
     }
 }

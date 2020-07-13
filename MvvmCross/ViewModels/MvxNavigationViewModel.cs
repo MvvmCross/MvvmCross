@@ -44,12 +44,12 @@ namespace MvvmCross.ViewModels
 
         public TaskCompletionSource<object>? CloseCompletionSource { get; set; }
 
-        public override void ViewDestroy(bool viewFinishing = true)
+        public override ValueTask ViewDestroy(bool viewFinishing = true)
         {
             if (viewFinishing && CloseCompletionSource != null && !CloseCompletionSource.Task.IsCompleted && !CloseCompletionSource.Task.IsFaulted)
                 CloseCompletionSource?.TrySetCanceled();
 
-            base.ViewDestroy(viewFinishing);
+            return base.ViewDestroy(viewFinishing);
         }
     }
 

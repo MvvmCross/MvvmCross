@@ -10,12 +10,12 @@ namespace MvvmCross.Views
     public interface IMvxView
         : IMvxDataConsumer
     {
-        IMvxViewModel ViewModel { get; set; }
+        IMvxViewModel? ViewModel { get; set; }
     }
 
     public interface IMvxView<TViewModel>
         : IMvxView where TViewModel : class, IMvxViewModel
     {
-        new TViewModel ViewModel { get; set; }
+        new TViewModel? ViewModel { get; set; }
     }
 }

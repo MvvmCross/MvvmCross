@@ -17,13 +17,13 @@ namespace Playground.Core.ViewModels
         {
         }
 
-        public override async void ViewAppearing()
+        public override async ValueTask ViewAppearing()
         {
-            await ShowInitialViewModels();
-            base.ViewAppearing();
+            await ShowInitialViewModels().ConfigureAwait(false);
+            await base.ViewAppearing().ConfigureAwait(false);
         }
 
-        private async Task ShowInitialViewModels()
+        private Task ShowInitialViewModels()
         {
             var tasks = new[]
             {
@@ -34,7 +34,7 @@ namespace Playground.Core.ViewModels
                 //NavigationService.Navigate<Tab3ViewModel>().AsTask()
             };
 
-            await Task.WhenAll(tasks).ConfigureAwait(false);
+            return Task.WhenAll(tasks);
         }
     }
 }

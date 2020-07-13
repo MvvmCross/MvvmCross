@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System.Threading.Tasks;
 using MvvmCross.Commands;
 using MvvmCross.Localization;
 using MvvmCross.Logging;
@@ -77,16 +78,16 @@ namespace Playground.Core.ViewModels
             }
         }
 
-        protected override void SaveStateToBundle(IMvxBundle bundle)
+        protected override async ValueTask SaveStateToBundle(IMvxBundle bundle)
         {
-            base.SaveStateToBundle(bundle);
+            await base.SaveStateToBundle(bundle).ConfigureAwait(false);
 
             bundle.Data["MyKey"] = _counter.ToString();
         }
 
-        protected override void ReloadFromBundle(IMvxBundle state)
+        protected override async ValueTask ReloadFromBundle(IMvxBundle state)
         {
-            base.ReloadFromBundle(state);
+            await base.ReloadFromBundle(state).ConfigureAwait(false);
 
             _counter = int.Parse(state.Data["MyKey"]);
         }
