@@ -23,11 +23,11 @@ namespace MvvmCross.Core
 {
     public abstract class MvxSetup : IMvxSetup
     {
-        protected static Action<IMvxIoCProvider> RegisterSetupDependencies { get; set; }
+        protected static Action<IMvxIoCProvider>? RegisterSetupDependencies { get; set; }
 
-        protected static Func<IMvxSetup> SetupCreator { get; set; }
+        protected static Func<IMvxSetup>? SetupCreator { get; set; }
 
-        protected static Assembly[] ViewAssemblies { get; set; }
+        protected static IEnumerable<Assembly>? ViewAssemblies { get; set; }
 
         public static void RegisterSetupType<TMvxSetup>(params Assembly[] assemblies) where TMvxSetup : MvxSetup, new()
         {
@@ -255,6 +255,8 @@ namespace MvvmCross.Core
 
         protected virtual void RegisterDefaultSetupDependencies(IMvxIoCProvider iocProvider)
         {
+            if (iocProvider == null) throw new NullReferenceException(nameof(iocProvider));
+
             RegisterLogProvider(iocProvider);
             iocProvider.LazyConstructAndRegisterSingleton<IMvxSettings, MvxSettings>();
             iocProvider.LazyConstructAndRegisterSingleton<IMvxStringToTypeParser, MvxStringToTypeParser>();
@@ -414,6 +416,8 @@ namespace MvvmCross.Core
 
         public virtual void LoadPlugins(IMvxPluginManager pluginManager)
         {
+            if (pluginManager == null) throw new NullReferenceException(nameof(pluginManager));
+
             var pluginAttribute = typeof(MvxPluginAttribute);
             var pluginAssemblies = GetPluginAssemblies();
 
@@ -513,6 +517,8 @@ namespace MvvmCross.Core
 
         protected virtual void LoadNavigationServiceRoutes(IMvxNavigationService navigationService)
         {
+            if (navigationService == null) throw new NullReferenceException(nameof(navigationService));
+
             navigationService.LoadRoutes(GetViewModelAssemblies());
         }
 

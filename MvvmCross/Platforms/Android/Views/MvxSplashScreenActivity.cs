@@ -57,18 +57,14 @@ namespace MvvmCross.Platforms.Android.Views
             }
         }
 
-        private bool _isResumed;
-
         protected override void OnResume()
         {
             var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             Task.Run(async () => await Initialize(setup).ConfigureAwait(false));
-
             base.OnResume();
-            _isResumed = true;
         }
 
-        private async Task Initialize(MvxAndroidSetupSingleton setup)
+        private async ValueTask Initialize(MvxAndroidSetupSingleton setup)
         {
             await setup.EnsureInitialized().ConfigureAwait(false);
 
@@ -82,32 +78,7 @@ namespace MvvmCross.Platforms.Android.Views
 
         protected override void OnPause()
         {
-            _isResumed = false;
-            var setup = MvxAndroidSetupSingleton.EnsureSingletonAvailable(ApplicationContext);
             base.OnPause();
-        }
-
-        public virtual async ValueTask InitializationComplete()
-        {
-            if (!_isResumed)
-                return;
-
-            await RunAppStartAsync(_bundle).ConfigureAwait(false);
-        }
-
-        protected virtual async Task RunAppStartAsync(Bundle? bundle)
-        {
-            if (Mvx.IoCProvider.TryResolve(out IMvxAppStart startup))
-            {
-                if(!startup.IsStarted)
-                {
-                    await startup.Start(GetAppStartHint(bundle)).ConfigureAwait(false);
-                }
-                else
-                {
-                    Finish();
-                }
-            }
         }
 
         protected virtual object? GetAppStartHint(object? hint = null)
