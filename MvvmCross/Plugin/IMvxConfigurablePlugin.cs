@@ -6,6 +6,6 @@ namespace MvvmCross.Plugin
 {
     public interface IMvxConfigurablePlugin : IMvxPlugin
     {
-        void Configure(IMvxPluginConfiguration configuration);
+        void Configure(IMvxPluginConfiguration? configuration);
     }
 }

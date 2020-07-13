@@ -27,68 +27,68 @@ namespace MvvmCross.Platforms.Android.Views.Base
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            CreateWillBeCalled.Raise(this, savedInstanceState);
+            CreateWillBeCalled?.Raise(this, savedInstanceState);
             base.OnCreate(savedInstanceState);
-            CreateCalled.Raise(this, savedInstanceState);
+            CreateCalled?.Raise(this, savedInstanceState);
         }
 
         protected override void OnDestroy()
         {
-            DestroyCalled.Raise(this);
+            DestroyCalled?.Raise(this);
             base.OnDestroy();
         }
 
         protected override void OnNewIntent(Intent intent)
         {
             base.OnNewIntent(intent);
-            NewIntentCalled.Raise(this, intent);
+            NewIntentCalled?.Raise(this, intent);
         }
 
         protected override void OnResume()
         {
             base.OnResume();
-            ResumeCalled.Raise(this);
+            ResumeCalled?.Raise(this);
         }
 
         protected override void OnPause()
         {
-            PauseCalled.Raise(this);
+            PauseCalled?.Raise(this);
             base.OnPause();
         }
 
         protected override void OnStart()
         {
             base.OnStart();
-            StartCalled.Raise(this);
+            StartCalled?.Raise(this);
         }
 
         protected override void OnRestart()
         {
             base.OnRestart();
-            RestartCalled.Raise(this);
+            RestartCalled?.Raise(this);
         }
 
         protected override void OnStop()
         {
-            StopCalled.Raise(this);
+            StopCalled?.Raise(this);
             base.OnStop();
         }
 
         public override void StartActivityForResult(Intent intent, int requestCode)
         {
-            StartActivityForResultCalled.Raise(this, new MvxStartActivityForResultParameters(intent, requestCode));
+            StartActivityForResultCalled?.Raise(this, new MvxStartActivityForResultParameters(intent, requestCode));
             base.StartActivityForResult(intent, requestCode);
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
-            ActivityResultCalled.Raise(this, new MvxActivityResultParameters(requestCode, resultCode, data));
+            ActivityResultCalled?.Raise(this, new MvxActivityResultParameters(requestCode, resultCode, data));
             base.OnActivityResult(requestCode, resultCode, data);
         }
 
         protected override void OnSaveInstanceState(Bundle outState)
         {
-            SaveInstanceStateCalled.Raise(this, outState);
+            SaveInstanceStateCalled?.Raise(this, outState);
             base.OnSaveInstanceState(outState);
         }
 
@@ -96,35 +96,35 @@ namespace MvvmCross.Platforms.Android.Views.Base
         {
             if (disposing)
             {
-                DisposeCalled.Raise(this);
+                DisposeCalled?.Raise(this);
             }
             base.Dispose(disposing);
         }
 
-        public event EventHandler DisposeCalled;
+        public event EventHandler? DisposeCalled;
 
-        public event EventHandler<MvxValueEventArgs<Bundle>> CreateWillBeCalled;
+        public event EventHandler<MvxValueEventArgs<Bundle>>? CreateWillBeCalled;
 
-        public event EventHandler<MvxValueEventArgs<Bundle>> CreateCalled;
+        public event EventHandler<MvxValueEventArgs<Bundle>>? CreateCalled;
 
-        public event EventHandler DestroyCalled;
+        public event EventHandler? DestroyCalled;
 
-        public event EventHandler<MvxValueEventArgs<Intent>> NewIntentCalled;
+        public event EventHandler<MvxValueEventArgs<Intent>>? NewIntentCalled;
 
-        public event EventHandler ResumeCalled;
+        public event EventHandler? ResumeCalled;
 
-        public event EventHandler PauseCalled;
+        public event EventHandler? PauseCalled;
 
-        public event EventHandler StartCalled;
+        public event EventHandler? StartCalled;
 
-        public event EventHandler RestartCalled;
+        public event EventHandler? RestartCalled;
 
-        public event EventHandler StopCalled;
+        public event EventHandler? StopCalled;
 
-        public event EventHandler<MvxValueEventArgs<Bundle>> SaveInstanceStateCalled;
+        public event EventHandler<MvxValueEventArgs<Bundle>>? SaveInstanceStateCalled;
 
-        public event EventHandler<MvxValueEventArgs<MvxStartActivityForResultParameters>> StartActivityForResultCalled;
+        public event EventHandler<MvxValueEventArgs<MvxStartActivityForResultParameters>>? StartActivityForResultCalled;
 
-        public event EventHandler<MvxValueEventArgs<MvxActivityResultParameters>> ActivityResultCalled;
+        public event EventHandler<MvxValueEventArgs<MvxActivityResultParameters>>? ActivityResultCalled;
     }
 }

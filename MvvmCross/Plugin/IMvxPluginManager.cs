@@ -9,7 +9,7 @@ namespace MvvmCross.Plugin
 {
     public interface IMvxPluginManager
     {
-        Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; }
+        Func<Type, IMvxPluginConfiguration?> ConfigurationSource { get; }
 
         IEnumerable<Type> LoadedPlugins { get; }
 

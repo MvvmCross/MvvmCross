@@ -83,4 +83,11 @@ csharp_new_line_before_members_in_anonymous_types = true
 csharp_prefer_braces = false
 
 #FxCop
-dotnet_code_quality.ca1000.api_surface = public
+[*.{cs,vb}]
+
+# CA1000: Do not declare static members on generic types
+dotnet_diagnostic.CA1000.severity = none
+# CA1303: Do not pass literals as localized parameters
+dotnet_diagnostic.CA1303.severity = none
+
+

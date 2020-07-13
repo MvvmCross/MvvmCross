@@ -23,7 +23,7 @@ namespace MvvmCross.Platforms.Android.Views
         : MvxEventSourceActivity
         , IMvxAndroidView
     {
-        protected View _view;
+        protected View? _view;
 
         protected MvxActivity(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
@@ -36,13 +36,17 @@ namespace MvvmCross.Platforms.Android.Views
             this.AddEventListeners();
         }
 
-        public object DataContext
+        public object? DataContext
         {
-            get { return BindingContext.DataContext; }
-            set { BindingContext.DataContext = value; }
+            get { return BindingContext?.DataContext ?? null; }
+            set
+            {
+                if(BindingContext != null)
+                    BindingContext.DataContext = value;
+            }
         }
 
-        public IMvxViewModel ViewModel
+        public IMvxViewModel? ViewModel
         {
             get
             {
@@ -60,7 +64,7 @@ namespace MvvmCross.Platforms.Android.Views
             StartActivityForResult(intent, requestCode);
         }
 
-        public IMvxBindingContext BindingContext { get; set; }
+        public IMvxBindingContext? BindingContext { get; set; }
 
         public override void SetContentView(int layoutResId)
         {
@@ -150,9 +154,9 @@ namespace MvvmCross.Platforms.Android.Views
     public abstract class MvxActivity<TViewModel> : MvxActivity, IMvxAndroidView<TViewModel> 
         where TViewModel : class, IMvxViewModel
     {
-        public new TViewModel ViewModel
+        public new TViewModel? ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
+            get { return (TViewModel?)base.ViewModel; }
             set { base.ViewModel = value; }
         }
 

@@ -20,7 +20,6 @@ namespace MvvmCross.Core
         IEnumerable<Assembly> GetViewAssemblies();
         IEnumerable<Assembly> GetViewModelAssemblies();
         IEnumerable<Assembly> GetPluginAssemblies();
-
         IEnumerable<Type> CreatableTypes();
         IEnumerable<Type> CreatableTypes(Assembly assembly);
 

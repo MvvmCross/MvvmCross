@@ -11,24 +11,24 @@ namespace MvvmCross.Platforms.Wpf.Views
 {
     public class MvxWindow : Window, IMvxWindow, IMvxWpfView, IDisposable
     {
-        private IMvxViewModel _viewModel;
-        private IMvxBindingContext _bindingContext;
+        private IMvxViewModel? _viewModel;
+        private IMvxBindingContext? _bindingContext;
         private bool _unloaded = false;
 
-        public IMvxViewModel ViewModel
+        public IMvxViewModel? ViewModel
         {
             get => _viewModel;
             set
             {
                 _viewModel = value;
                 DataContext = value;
-                BindingContext.DataContext = value;
+                BindingContext!.DataContext = value;
             }
         }
 
-        public string Identifier { get; set; }
+        public string? Identifier { get; set; }
 
-        public IMvxBindingContext BindingContext
+        public IMvxBindingContext? BindingContext
         {
             get
             {
@@ -105,9 +105,9 @@ namespace MvvmCross.Platforms.Wpf.Views
     public class MvxWindow<TViewModel> : MvxWindow, IMvxWpfView<TViewModel>
         where TViewModel : class, IMvxViewModel
     {
-        public new TViewModel ViewModel
+        public new TViewModel? ViewModel
         {
-            get { return (TViewModel)base.ViewModel; }
+            get { return (TViewModel?)base.ViewModel; }
             set { base.ViewModel = value; }
         }
 

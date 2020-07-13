@@ -14,11 +14,11 @@ namespace MvvmCross.Plugin
         private readonly HashSet<Type> _loadedPlugins = new HashSet<Type>();
         private readonly object _targetLocker = new object();
 
-        public Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; }
+        public Func<Type, IMvxPluginConfiguration?> ConfigurationSource { get; }
 
         public IEnumerable<Type> LoadedPlugins => _loadedPlugins;
 
-        public MvxPluginManager(Func<Type, IMvxPluginConfiguration> configurationSource)
+        public MvxPluginManager(Func<Type, IMvxPluginConfiguration?> configurationSource)
         {
             ConfigurationSource = configurationSource;
         }
@@ -47,7 +47,7 @@ namespace MvvmCross.Plugin
             _loadedPlugins.Add(type);
         }
 
-        protected IMvxPluginConfiguration ConfigurationFor(Type toLoad) => ConfigurationSource?.Invoke(toLoad);
+        protected IMvxPluginConfiguration? ConfigurationFor(Type toLoad) => ConfigurationSource.Invoke(toLoad);
 
         public bool IsPluginLoaded<T>() where T : IMvxPlugin
             => IsPluginLoaded(typeof(T));

@@ -24,7 +24,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
 {
     public abstract class MvxFormsWindowsSetup : MvxWindowsSetup, IMvxFormsSetup
     {
-        private Application _formsApplication;
+        private Application? _formsApplication;
         public virtual Application FormsApplication
         {
             get
@@ -44,7 +44,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
             }
         }
 
-        private List<Assembly> _viewAssemblies;
+        private List<Assembly>? _viewAssemblies;
         public override IEnumerable<Assembly> GetViewAssemblies()
         {
             if (_viewAssemblies == null)
@@ -65,7 +65,7 @@ namespace MvvmCross.Forms.Platforms.Uap.Core
         protected override async Task InitializeApp(IMvxPluginManager pluginManager, IMvxApplication app)
         {
             await base.InitializeApp(pluginManager, app).ConfigureAwait(false);
-            _viewAssemblies.AddRange(GetViewModelAssemblies());
+            _viewAssemblies!.AddRange(GetViewModelAssemblies());
         }
 
         protected abstract Application CreateFormsApplication();

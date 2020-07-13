@@ -6,6 +6,6 @@ namespace MvvmCross.Base
 {
     public interface IMvxDataConsumer
     {
-        object DataContext { get; set; }
+        object? DataContext { get; set; }
     }
 }
