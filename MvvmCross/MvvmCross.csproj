@@ -1,6 +1,6 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup Condition=" '$(TargetsToBuild)' == 'All' ">
-    <TargetFrameworks>netstandard2.0;xamarin.ios10;xamarin.mac20;xamarin.tvos10;xamarin.watchos10;monoandroid10.0;tizen40;netcoreapp3.1;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;xamarin.ios10;xamarin.mac20;xamarin.tvos10;xamarin.watchos10;monoandroid10.0;tizen40;netcoreapp3.1;net472</TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.16299;$(TargetFrameworks)</TargetFrameworks>
   </PropertyGroup>
 
@@ -20,6 +20,7 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <PackageId>MvvmCross</PackageId>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
     <GenerateLibraryLayout Condition="$(TargetFramework.StartsWith('uap'))">true</GenerateLibraryLayout>
+    <UserSecretsId>6aa65537-690b-4607-8c64-f38bf18e1f07</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

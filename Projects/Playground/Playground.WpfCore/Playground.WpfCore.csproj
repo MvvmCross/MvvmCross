@@ -4,10 +4,15 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <PublishTrimmed>true</PublishTrimmed>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Assets\MvvmCross-logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="**\*.xaml" />
   </ItemGroup>
 
   <ItemGroup>

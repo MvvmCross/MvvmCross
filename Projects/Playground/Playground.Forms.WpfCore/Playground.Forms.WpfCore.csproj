@@ -4,7 +4,12 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <PublishTrimmed>true</PublishTrimmed>
   </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="**\*.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross.Forms.Wpf\MvvmCross.Forms.Platforms.Wpf.csproj" />
