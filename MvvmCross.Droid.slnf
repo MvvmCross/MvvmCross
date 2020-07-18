@@ -1,0 +1,24 @@
+{
+  "solution": {
+    "path": "MvvmCross.sln",
+    "projects": [
+      "MvvmCross.Analyzers\\CodeAnalysis\\MvvmCross.CodeAnalysis.csproj",
+      "MvvmCross.DroidX\\Leanback\\MvvmCross.DroidX.Leanback.csproj",
+      "MvvmCross.DroidX\\Material\\MvvmCross.DroidX.Material.csproj",
+      "MvvmCross.DroidX\\RecyclerView\\MvvmCross.DroidX.RecyclerView.csproj",
+      "MvvmCross.DroidX\\SwipeRefreshLayout\\MvvmCross.DroidX.SwipeRefreshLayout.csproj",
+      "MvvmCross.Plugins\\Color\\MvvmCross.Plugin.Color.csproj",
+      "MvvmCross.Plugins\\File\\MvvmCross.Plugin.File.csproj",
+      "MvvmCross.Plugins\\JsonLocalization\\MvvmCross.Plugin.JsonLocalization.csproj",
+      "MvvmCross.Plugins\\Json\\MvvmCross.Plugin.Json.csproj",
+      "MvvmCross.Plugins\\Location.Fused\\MvvmCross.Plugin.Location.Fused.csproj",
+      "MvvmCross.Plugins\\Location\\MvvmCross.Plugin.Location.csproj",
+      "MvvmCross.Plugins\\Messenger\\MvvmCross.Plugin.Messenger.csproj",
+      "MvvmCross.Plugins\\Network\\MvvmCross.Plugin.Network.csproj",
+      "MvvmCross.Plugins\\ResourceLoader\\MvvmCross.Plugin.ResourceLoader.csproj",
+      "MvvmCross\\MvvmCross.csproj",
+      "Projects\\Playground\\Playground.Core\\Playground.Core.csproj",
+      "Projects\\Playground\\Playground.Droid\\Playground.Droid.csproj"
+    ]
+  }
+}
