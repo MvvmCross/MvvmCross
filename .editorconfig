@@ -81,3 +81,9 @@ csharp_new_line_before_members_in_anonymous_types = true
 
 # Braces after if 
 csharp_prefer_braces = false
+
+#FxCop
+[*.{cs,vb}]
+
+# CA1303: Do not pass literals as localized parameters
+dotnet_diagnostic.CA1303.severity = none
