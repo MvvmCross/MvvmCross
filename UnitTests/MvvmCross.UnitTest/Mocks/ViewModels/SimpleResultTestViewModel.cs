@@ -15,9 +15,9 @@ namespace MvvmCross.UnitTest.Mocks.ViewModels
 
         public override async Task Initialize()
         {
-            await base.Initialize();
+            await base.Initialize().ConfigureAwait(false);
 
-            await Task.Delay(2000);
+            await Task.Delay(2000).ConfigureAwait(false);
             CloseCompletionSource.SetResult(true);
         }
     }

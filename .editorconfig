@@ -88,6 +88,9 @@ csharp_prefer_braces = false
 # CA1303: Do not pass literals as localized parameters
 dotnet_diagnostic.CA1303.severity = none
 
+# RCS1090: Call 'ConfigureAwait(false)'.
+dotnet_diagnostic.RCS1090.severity = error
+
 # AsyncFixer01: Unnecessary async/await usage
 dotnet_diagnostic.AsyncFixer01.severity = error
 # AsyncFixer02: Long-running or blocking operations inside an async method

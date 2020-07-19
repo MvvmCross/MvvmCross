@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -252,7 +252,7 @@ namespace MvvmCross.Plugin.File.Platforms.Uap
         {
             // from https://github.com/MvvmCross/MvvmCross/issues/500 we delete any existing file
             // before writing the new one
-            await SafeDeleteFileAsync(path);
+            await SafeDeleteFileAsync(path).ConfigureAwait(false);
 
             try
             {

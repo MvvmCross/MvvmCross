@@ -25,14 +25,14 @@ namespace MvvmCross.Platforms.Console.Views
         public async Task<bool> ShowViewModel(MvxViewModelRequest request)
         {
             var navigation = Mvx.IoCProvider.Resolve<IMvxConsoleNavigation>();
-            await ExecuteOnMainThreadAsync(() => navigation.Show(request));
+            await ExecuteOnMainThreadAsync(() => navigation.Show(request)).ConfigureAwait(false);
             return true;
         }
 
         public async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
             var navigation = Mvx.IoCProvider.Resolve<IMvxConsoleNavigation>();
-            await ExecuteOnMainThreadAsync(() => navigation.ChangePresentation(hint));
+            await ExecuteOnMainThreadAsync(() => navigation.ChangePresentation(hint)).ConfigureAwait(false);
             return true;
         }
     }

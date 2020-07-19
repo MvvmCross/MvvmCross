@@ -211,9 +211,9 @@ namespace MvvmCross.Core
                     {
                         if (monitor != null)
                         {
-                            await monitor.InitializationComplete();
+                            await monitor.InitializationComplete().ConfigureAwait(false);
                         }
-                    });
+                    }).ConfigureAwait(false);
                 }
             });
         }

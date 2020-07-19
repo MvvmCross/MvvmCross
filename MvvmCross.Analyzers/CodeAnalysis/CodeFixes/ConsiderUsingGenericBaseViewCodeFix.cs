@@ -80,7 +80,7 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
                     )
                 ).WithAdditionalAnnotations(Formatter.Annotation);
 
-            var editor = await DocumentEditor.CreateAsync(document, cancellationToken);
+            var editor = await DocumentEditor.CreateAsync(document, cancellationToken).ConfigureAwait(false);
             editor.RemoveNode(viewModelProperty);
             editor.ReplaceNode(derivingClass, genericClassDeclaration);
 

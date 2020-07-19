@@ -23,13 +23,13 @@ namespace MvvmCross.Platforms.Wpf.Views
 
         public async Task<bool> ShowViewModel(MvxViewModelRequest request)
         {
-            await ExecuteOnMainThreadAsync(() => _presenter.Show(request));
+            await ExecuteOnMainThreadAsync(() => _presenter.Show(request)).ConfigureAwait(false);
             return true;
         }
 
         public async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            await ExecuteOnMainThreadAsync(() => _presenter.ChangePresentation(hint));
+            await ExecuteOnMainThreadAsync(() => _presenter.ChangePresentation(hint)).ConfigureAwait(false);
             return true;
         }
     }

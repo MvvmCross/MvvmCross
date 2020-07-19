@@ -29,7 +29,7 @@ namespace MvvmCross.Platforms.Mac.Views
                 MvxLog.Instance.Trace("MacNavigation", "Navigate requested");
                 return _presenter.Show(request);
             };
-            await ExecuteOnMainThreadAsync(action);
+            await ExecuteOnMainThreadAsync(action).ConfigureAwait(false);
             return true;
         }
 
@@ -40,7 +40,7 @@ namespace MvvmCross.Platforms.Mac.Views
                                     MvxLog.Instance.Trace("MacNavigation", "Change presentation requested");
                                     return _presenter.ChangePresentation(hint);
                                 };
-            await ExecuteOnMainThreadAsync(action);
+            await ExecuteOnMainThreadAsync(action).ConfigureAwait(false);
             return true;
         }
     }

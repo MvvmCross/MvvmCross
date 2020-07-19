@@ -185,7 +185,7 @@ namespace MvvmCross.Forms.Platforms.Android.Views
                 {
                     if (pg.Navigation.ModalStack.Count > 0)
                     {
-                        await pg.Navigation.PopModalAsync();
+                        await pg.Navigation.PopModalAsync().ConfigureAwait(false);
                         return;
                     }
 

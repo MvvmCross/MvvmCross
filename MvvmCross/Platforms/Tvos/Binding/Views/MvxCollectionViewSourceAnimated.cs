@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -70,14 +70,14 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         private async Task CollectionChangedOnCollectionChangedAsync(NotifyCollectionChangedEventArgs args, Task existingTask, IEnumerable itemsSource)
         {
             MvxLog.Instance.Trace($"CollectionChanged received action:{args.Action} newItems:{args.NewItems?.Count} oldItems:{args.OldItems?.Count} itemsSourceCount:{itemsSource.Count()}");
-            await existingTask;
+            await existingTask.ConfigureAwait(false);
             MvxLog.Instance.Trace($"CollectionChanged starting action:{args.Action}");
             itemsSourceBeforeAnimation = itemsSource;
 
             if (args.NewItems?.Count > MaxAnimatedItems || args.OldItems?.Count > MaxAnimatedItems)
             {
                 //No animation change
-                await CollectionView.PerformBatchUpdatesAsync(() => { });
+                await CollectionView.PerformBatchUpdatesAsync(() => { }).ConfigureAwait(false);
                 ReloadData();
             }
             else if (args.Action == NotifyCollectionChangedAction.Move)
@@ -96,7 +96,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
                         indexes[i] = NSIndexPath.FromRowSection(startIndex + i, 0);
 
                     CollectionView.ReloadItems(indexes);
-                });
+                }).ConfigureAwait(false);
             }
             else if (args.Action == NotifyCollectionChangedAction.Remove)
             {
@@ -107,7 +107,7 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
                     for (int index = 0; index < indexPaths.Length; ++index)
                         indexPaths[index] = NSIndexPath.FromRowSection(oldStartingIndex + index, 0);
                     CollectionView.DeleteItems(indexPaths);
-                });
+                }).ConfigureAwait(false);
             }
             else if (args.Action == NotifyCollectionChangedAction.Add)
             {
@@ -118,11 +118,11 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
                     for (int index = 0; index < indexPaths.Length; ++index)
                         indexPaths[index] = NSIndexPath.FromRowSection(newStartingIndex + index, 0);
                     CollectionView.InsertItems(indexPaths);
-                });
+                }).ConfigureAwait(false);
             }
             else
             {
-                await CollectionView.PerformBatchUpdatesAsync(() => { });
+                await CollectionView.PerformBatchUpdatesAsync(() => { }).ConfigureAwait(false);
                 ReloadData();
             }
 

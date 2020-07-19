@@ -28,13 +28,13 @@ namespace MvvmCross.Platforms.Tvos.Views
                     MvxLog.Instance.Trace("tvOSNavigation", "Navigate requested");
                     return _presenter.Show(request);
                 };
-            await ExecuteOnMainThreadAsync(action);
+            await ExecuteOnMainThreadAsync(action).ConfigureAwait(false);
             return true;
         }
 
         public async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            await ExecuteOnMainThreadAsync(() => _presenter.ChangePresentation(hint));
+            await ExecuteOnMainThreadAsync(() => _presenter.ChangePresentation(hint)).ConfigureAwait(false);
             return true;
         }
     }

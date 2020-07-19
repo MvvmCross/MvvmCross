@@ -58,13 +58,13 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Uap
             dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
                 await
-                    Process(storageFile, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled);
+                    Process(storageFile, maxPixelDimension, percentQuality, pictureAvailable, assumeCancelled).ConfigureAwait(false);
             });
         }
 
         private async Task Process(Func<Task<StorageFile>> storageFile, int maxPixelDimension, int percentQuality, Action<Stream, string> pictureAvailable, Action assumeCancelled)
         {
-            var file = await storageFile();
+            var file = await storageFile().ConfigureAwait(false);
             if (file == null)
             {
                 assumeCancelled();
@@ -72,7 +72,7 @@ namespace MvvmCross.Plugin.PictureChooser.Platforms.Uap
             }
 
             var rawFileStream = await file.OpenAsync(FileAccessMode.Read);
-            var resizedStream = await ResizeJpegStreamAsync(maxPixelDimension, percentQuality, rawFileStream);
+            var resizedStream = await ResizeJpegStreamAsync(maxPixelDimension, percentQuality, rawFileStream).ConfigureAwait(false);
 
             pictureAvailable(resizedStream.AsStreamForRead(), file.DisplayName);
         }

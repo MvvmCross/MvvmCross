@@ -155,7 +155,7 @@ namespace MvvmCross.Plugin.File
                         if (cancellationToken.IsCancellationRequested)
                             return false;
 
-                        var charsRead = await reader.ReadAsync(buffer, 0, BufferSize);
+                        var charsRead = await reader.ReadAsync(buffer, 0, BufferSize).ConfigureAwait(false);
 
                         contentStringBuilder.Append(buffer, 0, charsRead);
                     }

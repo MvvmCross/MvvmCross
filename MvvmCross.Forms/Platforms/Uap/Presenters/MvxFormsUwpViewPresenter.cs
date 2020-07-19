@@ -49,8 +49,8 @@ namespace MvvmCross.Forms.Platforms.Uap.Presenters
 
         public override async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            if (!await FormsPagePresenter.ChangePresentation(hint)) return false;
-            return await base.ChangePresentation(hint);
+            if (!await FormsPagePresenter.ChangePresentation(hint).ConfigureAwait(false)) return false;
+            return await base.ChangePresentation(hint).ConfigureAwait(false);
         }
 
         public override Task<bool> Show(MvxViewModelRequest request)

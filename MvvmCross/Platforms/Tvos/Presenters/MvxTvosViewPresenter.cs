@@ -281,7 +281,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
         {
             if (SplitViewController != null &&
                 attribute.Position != MasterDetailPosition.Root &&
-                await CloseChildViewModel(viewModel))
+                await CloseChildViewModel(viewModel).ConfigureAwait(false))
                 return true;
             else if (attribute.Position == MasterDetailPosition.Root)
                 return false;
@@ -290,7 +290,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
 
         protected virtual async Task<bool> CloseDetailSplitViewController(IMvxViewModel viewModel, MvxMasterDetailPresentationAttribute attribute)
         {
-            if (SplitViewController != null && await CloseChildViewModel(viewModel))
+            if (SplitViewController != null && await CloseChildViewModel(viewModel).ConfigureAwait(false))
                 return true;
             return true;
         }
@@ -338,10 +338,10 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                 //NOTE clean up must be done first incase we are enbedding into a navigation controller
                 //before setting the tab view controller, otherwise this will reset the view stack and your tab
                 //controller will be null. 
-                await SetupWindowRootNavigation(viewController, attribute);
+                await SetupWindowRootNavigation(viewController, attribute).ConfigureAwait(false);
                 this.TabBarViewController = (IMvxTabBarViewController)viewController;
 
-                return await CloseModalViewControllers();
+                return await CloseModalViewControllers().ConfigureAwait(false);
             }
 
             if (viewController is IMvxPageViewController)
@@ -349,17 +349,17 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                 //NOTE clean up must be done first incase we are enbedding into a navigation controller
                 //before setting the page view controller, otherwise this will reset the view stack and your page
                 //controller will be null. 
-                await SetupWindowRootNavigation(viewController, attribute);
+                await SetupWindowRootNavigation(viewController, attribute).ConfigureAwait(false);
                 this.PageViewController = (IMvxPageViewController)viewController;
 
-                return await CloseModalViewControllers();
+                return await CloseModalViewControllers().ConfigureAwait(false);
             }
 
-            await SetupWindowRootNavigation(viewController, attribute);
+            await SetupWindowRootNavigation(viewController, attribute).ConfigureAwait(false);
 
-            if(!(await CloseModalViewControllers()))return false;
-            if(!(await CloseTabBarViewController()))return false;
-            if(!(await CloseSplitViewController()))return false;
+            if(!(await CloseModalViewControllers().ConfigureAwait(false)))return false;
+            if(!(await CloseTabBarViewController().ConfigureAwait(false)))return false;
+            if(!(await CloseSplitViewController().ConfigureAwait(false)))return false;
             return true;
         }
 
@@ -478,21 +478,21 @@ namespace MvvmCross.Platforms.Tvos.Presenters
         {
             if (SplitViewController != null && attribute.Position == MasterDetailPosition.Master)
             {
-                return await ShowMasterView(viewController, attribute.WrapInNavigationController);
+                return await ShowMasterView(viewController, attribute.WrapInNavigationController).ConfigureAwait(false);
             }
             else if (SplitViewController != null && attribute.Position == MasterDetailPosition.Detail)
             {
-                return await ShowDetailView(viewController, attribute.WrapInNavigationController);
+                return await ShowDetailView(viewController, attribute.WrapInNavigationController).ConfigureAwait(false);
             }
             else if (viewController is MvxSplitViewController && attribute.Position == MasterDetailPosition.Root)
             {
                 SplitViewController = (MvxSplitViewController)viewController;
 
                 // set root
-                await SetupSplitViewWindowRootNavigation(viewController, attribute);
+                await SetupSplitViewWindowRootNavigation(viewController, attribute).ConfigureAwait(false);
 
-                await CloseModalViewControllers();
-                await CloseTabBarViewController();
+                await CloseModalViewControllers().ConfigureAwait(false);
+                await CloseTabBarViewController().ConfigureAwait(false);
             }
             else
             {
@@ -616,7 +616,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
         {
             while (ModalViewControllers.Any())
             {
-                if(!(await CloseModalViewController(ModalViewControllers.LastOrDefault())))return false;
+                if(!(await CloseModalViewController(ModalViewControllers.LastOrDefault()).ConfigureAwait(false)))return false;
             }
             return true;
         }

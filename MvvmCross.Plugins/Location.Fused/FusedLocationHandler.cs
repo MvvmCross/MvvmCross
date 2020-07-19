@@ -46,7 +46,7 @@ namespace MvvmCross.Plugin.Location.Fused
         public async Task StopAsync()
         {
             if (_client != null)
-                await _client.RemoveLocationUpdatesAsync(this);
+                await _client.RemoveLocationUpdatesAsync(this).ConfigureAwait(false);
         }
 
         public override void OnLocationResult(LocationResult result)

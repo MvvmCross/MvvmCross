@@ -133,7 +133,7 @@ namespace MvvmCross.ViewModels
                 if (PropertyChanged == null)
                     return;
 
-                await InvokeOnMainThreadAsync(exceptionMasked);
+                await InvokeOnMainThreadAsync(exceptionMasked).ConfigureAwait(false);
             }
             else
             {

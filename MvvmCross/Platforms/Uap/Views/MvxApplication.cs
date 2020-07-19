@@ -127,7 +127,7 @@ namespace MvvmCross.Platforms.Uap.Views
             try
             {
                 var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
-                await EnteringBackground(suspension);
+                await EnteringBackground(suspension).ConfigureAwait(false);
             }
             finally
             {
@@ -146,7 +146,7 @@ namespace MvvmCross.Platforms.Uap.Views
             try
             {
                 var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
-                await LeaveBackground(suspension);
+                await LeaveBackground(suspension).ConfigureAwait(false);
             }
             finally
             {
@@ -170,7 +170,7 @@ namespace MvvmCross.Platforms.Uap.Views
             try
             {
                 var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
-                await Suspend(suspension);
+                await Suspend(suspension).ConfigureAwait(false);
             }
             finally
             {
@@ -178,10 +178,10 @@ namespace MvvmCross.Platforms.Uap.Views
             }
         }
 
-        protected virtual async void OnResuming(object sender, object e)
+        protected virtual void OnResuming(object sender, object e)
         {
             var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
-            await Resume(suspension).ConfigureAwait(false);
+            Resume(suspension);
         }
 
         protected virtual Task Resume(IMvxSuspensionManager suspensionManager)

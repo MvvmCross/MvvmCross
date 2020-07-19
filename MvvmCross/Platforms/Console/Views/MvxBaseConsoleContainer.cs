@@ -43,7 +43,7 @@ namespace MvvmCross.Platforms.Console.Views
 
         public virtual async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            if (await HandlePresentationChange(hint)) return true;
+            if (await HandlePresentationChange(hint).ConfigureAwait(false)) return true;
 
             MvxLog.Instance.Warn("Hint ignored {0}", hint.GetType().Name);
             return false;

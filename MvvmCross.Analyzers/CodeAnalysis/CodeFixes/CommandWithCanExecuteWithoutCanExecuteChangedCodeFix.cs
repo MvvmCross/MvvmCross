@@ -65,7 +65,7 @@ namespace MvvmCross.CodeAnalysis.CodeFixes
                 argumentListSyntax.Arguments[0]
             }));
 
-            var editor = await DocumentEditor.CreateAsync(document, cancellationToken);
+            var editor = await DocumentEditor.CreateAsync(document, cancellationToken).ConfigureAwait(false);
             editor.ReplaceNode(argumentListSyntax, newArgumentListSyntax);
             return editor.GetChangedDocument();
         }

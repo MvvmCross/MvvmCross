@@ -32,7 +32,7 @@ namespace MvvmCross.Plugin.Sidebar
                     async (viewType, attribute, request) =>
                     {
                         var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                        return await ShowSidebarViewController(viewController, attribute, request);
+                        return await ShowSidebarViewController(viewController, attribute, request).ConfigureAwait(false);
                     },
                     async (viewModel, attribute) => CloseSidebarViewController(viewModel, attribute));
         }
@@ -42,11 +42,11 @@ namespace MvvmCross.Plugin.Sidebar
             MvxSidebarPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
-            if (!await CloseModalViewControllers()) return false;
+            if (!await CloseModalViewControllers().ConfigureAwait(false)) return false;
             
             if (SideBarViewController == null)
             {
-                if (!await ShowRootViewController(new MvxSidebarViewController(), null, request)) return false;
+                if (!await ShowRootViewController(new MvxSidebarViewController(), null, request).ConfigureAwait(false)) return false;
             }
 
             switch (attribute.HintType)
@@ -159,9 +159,9 @@ namespace MvvmCross.Plugin.Sidebar
 
                 Mvx.IoCProvider.RegisterSingleton<IMvxSidebarViewController>(SideBarViewController);
 
-                if (!await CloseModalViewControllers()) return false;
-                if (!await CloseTabBarViewController()) return false;
-                if (!await CloseSplitViewController()) return false;
+                if (!await CloseModalViewControllers().ConfigureAwait(false)) return false;
+                if (!await CloseTabBarViewController().ConfigureAwait(false)) return false;
+                if (!await CloseSplitViewController().ConfigureAwait(false)) return false;
                 CloseMasterNavigationController();
 
                 return true;
@@ -171,7 +171,7 @@ namespace MvvmCross.Plugin.Sidebar
                 SideBarViewController = null;
                 MasterNavigationController = null;
             
-                return await base.ShowRootViewController(viewController, attribute, request);
+                return await base.ShowRootViewController(viewController, attribute, request).ConfigureAwait(false);
             }
         }
 

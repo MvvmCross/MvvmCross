@@ -39,7 +39,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Presenters
 
         public override async Task<bool> Show(MvxViewModelRequest request)
         {
-            if (!await FormsPagePresenter.Show(request)) return false;
+            if (!await FormsPagePresenter.Show(request).ConfigureAwait(false)) return false;
 
             if (_window.RootViewController == null)
                 SetWindowRootViewController(FormsApplication.MainPage.CreateViewController());
@@ -54,8 +54,8 @@ namespace MvvmCross.Forms.Platforms.Ios.Presenters
 
         public override async Task<bool> ChangePresentation(MvxPresentationHint hint)
         {
-            if (!await FormsPagePresenter.ChangePresentation(hint)) return false;
-            return await base.ChangePresentation(hint);
+            if (!await FormsPagePresenter.ChangePresentation(hint).ConfigureAwait(false)) return false;
+            return await base.ChangePresentation(hint).ConfigureAwait(false);
         }
 
         public override Task<bool> Close(IMvxViewModel viewModel)

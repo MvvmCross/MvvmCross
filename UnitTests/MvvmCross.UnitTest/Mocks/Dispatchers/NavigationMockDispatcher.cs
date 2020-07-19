@@ -78,7 +78,7 @@ namespace MvvmCross.UnitTest.Mocks.Dispatchers
         {
             try
             {
-                await action();
+                await action().ConfigureAwait(false);
             }
             catch (Exception)
             {

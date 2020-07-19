@@ -179,11 +179,11 @@ namespace MvvmCross.Platforms.Wpf.Presenters
         public override async Task<bool> Close(IMvxViewModel toClose)
         {
             // toClose is window
-            if (FrameworkElementsDictionary.Any(i => (i.Key as IMvxWpfView)?.ViewModel == toClose) && await CloseWindow(toClose))
+            if (FrameworkElementsDictionary.Any(i => (i.Key as IMvxWpfView)?.ViewModel == toClose) && await CloseWindow(toClose).ConfigureAwait(false))
                 return true;
 
             // toClose is content
-            if (FrameworkElementsDictionary.Any(i => i.Value.Any() && (i.Value.Peek() as IMvxWpfView)?.ViewModel == toClose) && await CloseContentView(toClose))
+            if (FrameworkElementsDictionary.Any(i => i.Value.Any() && (i.Value.Peek() as IMvxWpfView)?.ViewModel == toClose) && await CloseContentView(toClose).ConfigureAwait(false))
                 return true;
 
             MvxLog.Instance.Warn($"Could not close ViewModel type {toClose.GetType().Name}");
