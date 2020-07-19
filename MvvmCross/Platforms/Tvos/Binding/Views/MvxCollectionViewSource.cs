@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -82,9 +82,9 @@ namespace MvvmCross.Platforms.Tvos.Binding.Views
         /// <summary>
         /// Wait for all animations to finish
         /// </summary>
-        public async Task WaitAnimationsCompletedAsync()
+        public Task WaitAnimationsCompletedAsync()
         {
-            await CollectionView.PerformBatchUpdatesAsync(() => { }); 
+            return CollectionView.PerformBatchUpdatesAsync(() => { }); 
         }
 
         protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)

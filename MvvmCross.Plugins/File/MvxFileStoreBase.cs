@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -267,14 +268,14 @@ namespace MvvmCross.Plugin.File
             }).ConfigureAwait(false);
         }
 
-        public async Task WriteFileAsync(string path, IEnumerable<byte> contents)
+        public Task WriteFileAsync(string path, IEnumerable<byte> contents)
         {
-            await WriteFileAsync(path, contents.ToArray()).ConfigureAwait(false);
+            return WriteFileAsync(path, contents.ToArray());
         }
 
-        public async Task WriteFileAsync(string path, IEnumerable<byte> contents, CancellationToken cancellationToken)
+        public Task WriteFileAsync(string path, IEnumerable<byte> contents, CancellationToken cancellationToken)
         {
-            await WriteFileAsync(path, contents.ToArray(), cancellationToken).ConfigureAwait(false);
+            return WriteFileAsync(path, contents.ToArray(), cancellationToken);
         }
 
         public async Task WriteFileAsync(string path, Func<Stream, Task> writeMethod)

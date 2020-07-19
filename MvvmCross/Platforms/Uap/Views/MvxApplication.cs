@@ -135,9 +135,9 @@ namespace MvvmCross.Platforms.Uap.Views
             }
         }
 
-        protected virtual async Task EnteringBackground(IMvxSuspensionManager suspensionManager)
+        protected virtual Task EnteringBackground(IMvxSuspensionManager suspensionManager)
         {
-            await suspensionManager.SaveAsync();
+            return suspensionManager.SaveAsync();
         }
 
         protected virtual async void OnLeavingBackground(object sender, LeavingBackgroundEventArgs e)
@@ -159,9 +159,9 @@ namespace MvvmCross.Platforms.Uap.Views
             return Task.CompletedTask;
         }
 
-        protected virtual async Task Suspend(IMvxSuspensionManager suspensionManager)
+        protected virtual Task Suspend(IMvxSuspensionManager suspensionManager)
         {
-            await suspensionManager.SaveAsync();
+            return suspensionManager.SaveAsync();
         }
 
         protected virtual async void OnSuspending(object sender, SuspendingEventArgs e)
@@ -181,7 +181,7 @@ namespace MvvmCross.Platforms.Uap.Views
         protected virtual async void OnResuming(object sender, object e)
         {
             var suspension = Mvx.IoCProvider.GetSingleton<IMvxSuspensionManager>();
-            await Resume(suspension);
+            await Resume(suspension).ConfigureAwait(false);
         }
 
         protected virtual Task Resume(IMvxSuspensionManager suspensionManager)
