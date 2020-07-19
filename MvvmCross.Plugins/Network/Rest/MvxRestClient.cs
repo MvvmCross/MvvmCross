@@ -346,7 +346,7 @@ namespace MvvmCross.Plugin.Network.Rest
             using (var stream = await httpRequest.GetRequestStreamAsync().ConfigureAwait(false))
             {
                 restRequest.ProcessRequestStream(stream);
-                stream.Flush();
+                await stream.FlushAsync().ConfigureAwait(false);
             }
         }
     }

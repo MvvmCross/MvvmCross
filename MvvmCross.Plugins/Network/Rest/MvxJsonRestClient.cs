@@ -46,7 +46,7 @@ namespace MvvmCross.Plugin.Network.Rest
                     decodedResponse.StatusCode = HttpStatusCode.BadRequest;
                 } else {
                     using (var textReader = new StreamReader(streamResponse.Stream)) {
-                        var text = textReader.ReadToEnd();
+                        var text = await textReader.ReadToEndAsync().ConfigureAwait(false);
                         var result = JsonConverterProvider().DeserializeObject<T>(text);
 
                         decodedResponse.CookieCollection = streamResponse.CookieCollection;

@@ -87,3 +87,14 @@ csharp_prefer_braces = false
 
 # CA1303: Do not pass literals as localized parameters
 dotnet_diagnostic.CA1303.severity = none
+
+# AsyncFixer01: Unnecessary async/await usage
+dotnet_diagnostic.AsyncFixer01.severity = error
+# AsyncFixer02: Long-running or blocking operations inside an async method
+dotnet_diagnostic.AsyncFixer02.severity = error
+# AsyncFixer03: Fire & forget async void methods
+dotnet_diagnostic.AsyncFixer03.severity = warning
+# AsyncFixer04: Fire & forget async call inside a using block
+dotnet_diagnostic.AsyncFixer04.severity = warning
+# AsyncFixer05: Downcasting from a nested task to an outer task.
+dotnet_diagnostic.AsyncFixer05.severity = warning
