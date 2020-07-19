@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using MvvmCross.Converters;
+#nullable enable 
 
 namespace MvvmCross.Binding.Binders
 {
@@ -42,9 +43,8 @@ namespace MvvmCross.Binding.Binders
 
         public IMvxValueConverter Find(Type viewModelType, Type viewType)
         {
-            IMvxValueConverter result;
-            _lookup.TryGetValue(new Key(viewModelType, viewType), out result);
-            return result;
+            _lookup.TryGetValue(new Key(viewModelType, viewType), out var result);
+            return result!;
         }
 
         public void Register(Type viewModelType, Type viewType, IMvxValueConverter converter)

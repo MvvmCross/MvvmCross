@@ -15,7 +15,7 @@ using Object = Java.Lang.Object;
 namespace MvvmCross.DroidX.Material.Behaviors
 {
     [Register("mvvmcross.droidx.material.behaviors.MvxScrollAwareGrowShrinkFABBehavior")]
-    public class MvxScrollAwareGrowShrinkFABBehavior 
+    public class MvxScrollAwareGrowShrinkFABBehavior
         : CoordinatorLayout.Behavior
     {
         public MvxScrollAwareGrowShrinkFABBehavior(IntPtr handle, JniHandleOwnership ownership) 
@@ -48,6 +48,6 @@ namespace MvvmCross.DroidX.Material.Behaviors
                 floatingActionButtonChild.Hide();
             else if (dyConsumed < 0 && floatingActionButtonChild.Visibility != ViewStates.Visible)
                 floatingActionButtonChild.Show();
-        }    
+        }
     }
 }

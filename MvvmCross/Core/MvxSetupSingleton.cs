@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
-using MvvmCross.ViewModels;
+#nullable enable 
 
 namespace MvvmCross.Core
 {
@@ -39,11 +39,11 @@ namespace MvvmCross.Core
        : MvxSingleton<MvxSetupSingleton>
     {
         private static readonly object LockObject = new object();
-        private static TaskCompletionSource<bool> IsInitialisedTaskCompletionSource;
-        private IMvxSetup _setup;
-        private IMvxSetupMonitor _currentMonitor;
+        private static TaskCompletionSource<bool>? IsInitialisedTaskCompletionSource;
+        private IMvxSetup? _setup;
+        private IMvxSetupMonitor? _currentMonitor;
 
-        protected virtual IMvxSetup Setup => _setup;
+        protected virtual IMvxSetup? Setup => _setup;
 
         /// <summary>
         /// Returns a platform specific instance of Setup
@@ -57,7 +57,7 @@ namespace MvvmCross.Core
         {
             try
             {
-                return (TMvxSetup)Setup;
+                return (TMvxSetup)Setup!;
             }
             catch (Exception ex)
             {
@@ -72,7 +72,7 @@ namespace MvvmCross.Core
         /// </summary>
         /// <typeparam name="TMvxSetupSingleton">The platform specific setup singleton type</typeparam>
         /// <returns>A platform specific setup singleton</returns>
-        protected static TMvxSetupSingleton EnsureSingletonAvailable<TMvxSetupSingleton>()
+        protected static TMvxSetupSingleton? EnsureSingletonAvailable<TMvxSetupSingleton>()
            where TMvxSetupSingleton : MvxSetupSingleton, new()
         {
             // Double null - check before creating the setup singleton object
@@ -113,7 +113,7 @@ namespace MvvmCross.Core
                     MvxLog.Instance.Trace("EnsureInitialized has already been called so now waiting for completion");
                 }
             }
-            IsInitialisedTaskCompletionSource.Task.GetAwaiter().GetResult();
+            IsInitialisedTaskCompletionSource!.Task.GetAwaiter().GetResult();
         }
 
         public virtual void InitializeAndMonitor(IMvxSetupMonitor setupMonitor)
@@ -178,10 +178,10 @@ namespace MvvmCross.Core
         private void StartSetupInitialization()
         {
             IsInitialisedTaskCompletionSource = new TaskCompletionSource<bool>();
-            _setup.InitializePrimary();
+            _setup!.InitializePrimary();
             Task.Run(async () =>
             {
-                ExceptionDispatchInfo setupException = null;
+                ExceptionDispatchInfo? setupException = null;
                 try
                 {
                     _setup.InitializeSecondary();
@@ -190,7 +190,7 @@ namespace MvvmCross.Core
                 {
                     setupException = ExceptionDispatchInfo.Capture(ex);
                 }
-                IMvxSetupMonitor monitor;
+                IMvxSetupMonitor? monitor;
                 lock (LockObject)
                 {
                     if (setupException == null)
@@ -211,7 +211,7 @@ namespace MvvmCross.Core
                     {
                         if (monitor != null)
                         {
-                            await monitor.InitializationComplete();
+                            await monitor!.InitializationComplete();
                         }
                     });
                 }
