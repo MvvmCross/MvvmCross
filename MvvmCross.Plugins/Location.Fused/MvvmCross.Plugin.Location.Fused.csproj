@@ -10,7 +10,7 @@ This package contains the implementation of FusedLocationApi as 'Location' plugi
   </PropertyGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('monoandroid')) ">
-    <PackageReference Include="Xamarin.GooglePlayServices.Location" Version="71.1600.1" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Location" Version="71.1600.4" />
     <None Include="Resources\*.cs" />
     <Compile Remove="Resources\*.cs" />
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
