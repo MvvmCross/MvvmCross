@@ -216,7 +216,7 @@
       <Version>2.4.11.982</Version>
     </PackageReference>
     <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
-    <PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="71.1620.2" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="71.1620.4" />
     <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.2.0.1" />
     <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0.1" />
   </ItemGroup>
