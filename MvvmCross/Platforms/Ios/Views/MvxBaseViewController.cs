@@ -185,6 +185,7 @@ namespace MvvmCross.Platforms.Ios.Views
             }
             else
             {
+                keyboardFrame.Height -= scrollView.SafeAreaInsets.Bottom;
                 scrollView.CenterView(activeView, keyboardFrame);
             }
         }
