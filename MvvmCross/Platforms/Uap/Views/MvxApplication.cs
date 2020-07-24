@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Threading.Tasks;
 using MvvmCross.Core;
+using MvvmCross.Exceptions;
 using MvvmCross.Platforms.Uap.Core;
 using MvvmCross.Platforms.Uap.Views.Suspension;
 using MvvmCross.ViewModels;
@@ -118,7 +118,7 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected virtual void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName, e.Exception);
+            throw new MvxException($"Failed to load Page {e.SourcePageType.FullName}", e.Exception);
         }
 
         protected virtual async void OnEnteredBackground(object sender, EnteredBackgroundEventArgs e)
