@@ -16,7 +16,6 @@ namespace MvvmCross.Platforms.Ios.Views
 	/// </summary>
 	public abstract class MvxBaseViewController<TViewModel> : MvxViewController where TViewModel : IMvxViewModel
     {
-    
         private readonly MvxIosMajorVersionChecker _iosVersion11Checker = new MvxIosMajorVersionChecker(11);
     
         public MvxBaseViewController()
