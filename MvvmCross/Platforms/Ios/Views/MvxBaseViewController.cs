@@ -5,6 +5,7 @@
 using System;
 using CoreGraphics;
 using Foundation;
+using MvvmCross.Platforms.Ios;
 using MvvmCross.ViewModels;
 using UIKit;
 
@@ -15,6 +16,9 @@ namespace MvvmCross.Platforms.Ios.Views
 	/// </summary>
 	public abstract class MvxBaseViewController<TViewModel> : MvxViewController where TViewModel : IMvxViewModel
     {
+    
+        private readonly MvxIosMajorVersionChecker _iosVersion11Checker = new MvxIosMajorVersionChecker(11);
+    
         public MvxBaseViewController()
         {
         }
@@ -185,7 +189,8 @@ namespace MvvmCross.Platforms.Ios.Views
             }
             else
             {
-                keyboardFrame.Height -= scrollView.SafeAreaInsets.Bottom;
+                if (_iosVersion11Checker.IsVersionOrHigher)
+                    keyboardFrame.Height -= scrollView.SafeAreaInsets.Bottom;
                 scrollView.CenterView(activeView, keyboardFrame);
             }
         }
