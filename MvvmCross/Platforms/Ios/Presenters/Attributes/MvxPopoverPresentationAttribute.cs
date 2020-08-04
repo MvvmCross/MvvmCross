@@ -15,6 +15,5 @@ namespace MvvmCross.Platforms.Ios.Presenters.Attributes
         
         public static UIPopoverArrowDirection DefaultPermittedArrowDirections = UIPopoverArrowDirection.Any;
         public UIPopoverArrowDirection PermittedArrowDirections { get; set; } = DefaultPermittedArrowDirections;
-
     }
 }
