@@ -61,9 +61,9 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
 
-        public static bool Debug = false;
+        public static bool Debug { get; set; }
 
-        private static readonly string Tag = "MvxLayoutInflater";
+        private const string Tag = "MvxLayoutInflater";
 
         internal static BuildVersionCodes Sdk = Build.VERSION.SdkInt;
 
@@ -205,7 +205,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 {
                     return CreateView(name, prefix, attrs);
                 }
-                catch (ClassNotFoundException) 
+                catch (ClassNotFoundException)
                 {
                 }
             }
@@ -351,7 +351,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 #endif
                             view = CreateView(name, null, attrs);
                     }
-                    catch (ClassNotFoundException) 
+                    catch (ClassNotFoundException)
                     {
                     }
                     finally
@@ -367,7 +367,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             return view;
         }
 
-        protected IMvxAndroidViewFactory AndroidViewFactory 
+        protected IMvxAndroidViewFactory AndroidViewFactory
         {
             get
             {
@@ -413,7 +413,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         private class DelegateFactory2 : IMvxLayoutInflaterFactory
         {
-            private static readonly string Tag = "DelegateFactory2";
+            private const string Tag = "DelegateFactory2";
 
             private readonly IFactory2 _factory;
             private readonly MvxBindingVisitor _factoryPlaceholder;
@@ -437,7 +437,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         private class DelegateFactory1 : IMvxLayoutInflaterFactory
         {
-            private static readonly string Tag = "DelegateFactory1";
+            private const string Tag = "DelegateFactory1";
 
             private readonly IFactory _factory;
             private readonly MvxBindingVisitor _factoryPlaceholder;
@@ -461,7 +461,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         private class PrivateFactoryWrapper2 : Object, IFactory2
         {
-            private static readonly string Tag = "PrivateFactoryWrapper2";
+            private const string Tag = "PrivateFactoryWrapper2";
 
             private readonly IFactory2 _factory2;
             private readonly MvxBindingVisitor _bindingVisitor;
