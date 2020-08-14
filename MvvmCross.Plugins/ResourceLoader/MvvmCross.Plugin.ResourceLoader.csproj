@@ -4,6 +4,10 @@
     <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.16299;$(TargetFrameworks)</TargetFrameworks>
   </PropertyGroup>
 
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
   <PropertyGroup Condition=" '$(TargetsToBuild)' != 'All' ">
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Android' ">netstandard2.0;monoandroid10.0;</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Uap' ">netstandard2.0;uap10.0.16299</TargetFrameworks>
@@ -35,8 +39,6 @@ This package contains the 'ResourceLoader' plugin for MvvmCross</Description>
     <Compile Include="Platforms\Net\**\*.cs" />
     <Compile Include="Platforms\Console\**\*.cs" />
     <Compile Include="Platforms\Wpf\**\*.cs" />
-    <Reference Include="c:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\3.1.0\ref\netcoreapp3.1\PresentationFramework.dll" />
-    <Reference Include="c:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\3.1.0\ref\netcoreapp3.1\WindowsBase.dll" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) And '$(OS)' == 'Windows_NT' ">
