@@ -632,6 +632,21 @@ At this point you should be able to set the `TipCalc.Forms.WPF` as the startup p
 
 ![TipCalc WPF Run]({{ site.url }}/assets/img/tutorials/tipcalc/TipCalc_WPF.png)
 
+## WPF on .NET Core
+
+You don't need to sacrifice .NET Core to use WPF. WPF is supported since .NET Core 3.0 and can be used with Xamarin Forms too.
+
+The guide is very similar to WPF on .NET full framework. The only differences are:
+
+1. Create a WPF project based on .NET Core instead of .NET Framework
+1. Manually add to created `csproj` file:
+
+```xml
+  <ItemGroup>
+    <EmbeddedResource Remove="**\*.xaml" />
+  </ItemGroup>
+```
+
 ## Moving on...
 
 There's more we could do to make the Forms User Interface nicer and to make the app richer... but for this first application, we will leave it here for now.
