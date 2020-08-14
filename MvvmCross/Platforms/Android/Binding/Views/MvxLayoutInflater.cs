@@ -305,11 +305,13 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             if (Debug)
                 MvxLog.Instance.Trace("{Tag} - ... CreateCustomViewInternal ... {name}", Tag, name);
 
-            if (view == null && name.IndexOf('.') > -1)
+            if (view == null &&
+                !string.IsNullOrWhiteSpace(name) &&
+                name.IndexOf('.', StringComparison.InvariantCulture) > -1)
             {
                 // Attempt to inflate with MvvmCross unless we're trying to inflate an internal views
                 // since we don't resolve those.
-                if (!name.StartsWith("com.android.internal."))
+                if (!name.StartsWith("com.android.internal.", StringComparison.InvariantCulture))
                 {
                     view = AndroidViewFactory?.CreateView(parent, name, viewContext, attrs);
                 }
