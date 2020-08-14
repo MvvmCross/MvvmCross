@@ -222,8 +222,8 @@ Task("UpdateChangelog")
         "t/question",
         "s/wont-fix",
         "s/duplicate",
-        "s/deprecated",
-        "s/invalid"
+        "s/invalid",
+        "s/needs-more-info",
     };
     arguments.Append("--exclude-labels {0}", string.Join(",", excludeLabels));
 
