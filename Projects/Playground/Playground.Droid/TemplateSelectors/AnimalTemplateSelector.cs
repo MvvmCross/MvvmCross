@@ -1,38 +1,29 @@
-﻿using MvvmCross.DroidX.RecyclerView.ItemTemplates;
+﻿using System;
+using System.Collections.Generic;
+using MvvmCross.DroidX.RecyclerView.ItemTemplates;
 using static Playground.Core.ViewModels.CollectionViewModel;
 
 namespace Playground.Droid.TemplateSelectors
 {
-    public class AnimalTemplateSelector : MvxTemplateSelector<AnimalViewModel>
+    public class AnimalTemplateSelector : IMvxTemplateSelector
     {
-        public override int GetItemLayoutId(int fromViewType)
+        private readonly Dictionary<Type, int> _itemsTypeDictionary = new Dictionary<Type, int>
         {
-            switch(fromViewType)
-            {
-                case 0:
-                    return Resource.Layout.itemtemplate_cat;
-                case 1:
-                    return Resource.Layout.itemtemplate_dog;
-                case 2:
-                    return Resource.Layout.itemtemplate_monkey;
-            }
+            [typeof(CatViewModel)] = Resource.Layout.itemtemplate_cat,
+            [typeof(DogViewModel)] = Resource.Layout.itemtemplate_dog,
+            [typeof(MonkeyViewModel)] = Resource.Layout.itemtemplate_monkey,
+        };
 
-            return -1;
+        public int ItemTemplateId { get; set; }
+
+        public int GetItemLayoutId(int fromViewType)
+        {
+            return fromViewType;
         }
 
-        protected override int SelectItemViewType(AnimalViewModel forItemObject)
+        public int GetItemViewType(object forItemObject)
         {
-            switch(forItemObject)
-            {
-                case CatViewModel _:
-                    return 0;
-                case DogViewModel _:
-                    return 1;
-                case MonkeyViewModel _:
-                    return 2;
-            }
-
-            return -1;
+            return _itemsTypeDictionary[forItemObject.GetType()];
         }
     }
 }
