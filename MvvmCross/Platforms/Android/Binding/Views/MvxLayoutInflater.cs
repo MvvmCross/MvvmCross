@@ -61,9 +61,9 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
 
-        public static bool Debug = false;
+        public static bool Debug { get; set; }
 
-        private static readonly string Tag = "MvxLayoutInflater";
+        private const string Tag = "MvxLayoutInflater";
 
         internal static BuildVersionCodes Sdk = Build.VERSION.SdkInt;
 
@@ -98,6 +98,8 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         public MvxLayoutInflater(IntPtr handle, JniHandleOwnership transfer)
             : base(handle, transfer)
         {
+            _bindingVisitor = new MvxBindingVisitor();
+            SetupLayoutFactories(false);
         }
 
         public override LayoutInflater CloneInContext(Context newContext)
@@ -203,7 +205,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 {
                     return CreateView(name, prefix, attrs);
                 }
-                catch (ClassNotFoundException) 
+                catch (ClassNotFoundException)
                 {
                 }
             }
@@ -305,11 +307,13 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             if (Debug)
                 MvxLog.Instance.Trace("{Tag} - ... CreateCustomViewInternal ... {name}", Tag, name);
 
-            if (view == null && name.IndexOf('.') > -1)
+            if (view == null &&
+                !string.IsNullOrWhiteSpace(name) &&
+                name.IndexOf('.', StringComparison.InvariantCulture) > -1)
             {
                 // Attempt to inflate with MvvmCross unless we're trying to inflate an internal views
                 // since we don't resolve those.
-                if (!name.StartsWith("com.android.internal."))
+                if (!name.StartsWith("com.android.internal.", StringComparison.InvariantCulture))
                 {
                     view = AndroidViewFactory?.CreateView(parent, name, viewContext, attrs);
                 }
@@ -347,7 +351,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 #endif
                             view = CreateView(name, null, attrs);
                     }
-                    catch (ClassNotFoundException) 
+                    catch (ClassNotFoundException)
                     {
                     }
                     finally
@@ -363,7 +367,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             return view;
         }
 
-        protected IMvxAndroidViewFactory AndroidViewFactory 
+        protected IMvxAndroidViewFactory AndroidViewFactory
         {
             get
             {
@@ -409,7 +413,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         private class DelegateFactory2 : IMvxLayoutInflaterFactory
         {
-            private static readonly string Tag = "DelegateFactory2";
+            private const string Tag = "DelegateFactory2";
 
             private readonly IFactory2 _factory;
             private readonly MvxBindingVisitor _factoryPlaceholder;
@@ -433,7 +437,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         private class DelegateFactory1 : IMvxLayoutInflaterFactory
         {
-            private static readonly string Tag = "DelegateFactory1";
+            private const string Tag = "DelegateFactory1";
 
             private readonly IFactory _factory;
             private readonly MvxBindingVisitor _factoryPlaceholder;
@@ -457,7 +461,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         private class PrivateFactoryWrapper2 : Object, IFactory2
         {
-            private static readonly string Tag = "PrivateFactoryWrapper2";
+            private const string Tag = "PrivateFactoryWrapper2";
 
             private readonly IFactory2 _factory2;
             private readonly MvxBindingVisitor _bindingVisitor;
