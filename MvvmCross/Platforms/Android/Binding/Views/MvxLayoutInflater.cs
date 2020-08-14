@@ -98,6 +98,8 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         public MvxLayoutInflater(IntPtr handle, JniHandleOwnership transfer)
             : base(handle, transfer)
         {
+            _bindingVisitor = new MvxBindingVisitor();
+            SetupLayoutFactories(false);
         }
 
         public override LayoutInflater CloneInContext(Context newContext)
