@@ -3,16 +3,16 @@
 // See the LICENSE file in the project root for more information.
 
 using Android.OS;
-using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using MvvmCross.Droid.Support.V4;
-using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using Playground.Core.ViewModels;
 using Playground.Droid.Activities;
 using Playground.Droid.Adapter;
+using MvvmCross.Platforms.Android.Views.Fragments;
+using MvvmCross.DroidX.RecyclerView;
+using AndroidX.RecyclerView.Widget;
 
 namespace Playground.Droid.Fragments
 {

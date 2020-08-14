@@ -2,13 +2,12 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Threading.Tasks;
 using Android.App;
 using Android.Content.PM;
-using Android.Support.V4.View;
-using Android.Support.V4.Widget;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using AndroidX.Core.View;
+using AndroidX.DrawerLayout.Widget;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
+using MvvmCross.Platforms.Android.Views;
 using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Activities
@@ -18,7 +17,7 @@ namespace Playground.Droid.Activities
         Theme = "@style/AppTheme",
         LaunchMode = LaunchMode.SingleTop,
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
-    public class SplitRootView : MvxAppCompatActivity<SplitRootViewModel>
+    public class SplitRootView : MvxActivity<SplitRootViewModel>
     {
         public DrawerLayout DrawerLayout { get; set; }
 

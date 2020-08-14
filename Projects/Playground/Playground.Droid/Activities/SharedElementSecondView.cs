@@ -4,7 +4,6 @@
 
 using Android.App;
 using Android.OS;
-using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Platforms.Android.Views;
 using Playground.Core.ViewModels;
@@ -13,7 +12,7 @@ namespace Playground.Droid.Activities
 {
     [MvxActivityPresentation]
     [Activity(Theme = "@style/AppTheme")]
-    public class SharedElementSecondView : MvxAppCompatActivity<SharedElementSecondViewModel>
+    public class SharedElementSecondView : MvxActivity<SharedElementSecondViewModel>
     {
         protected override void OnCreate(Bundle bundle)
         {

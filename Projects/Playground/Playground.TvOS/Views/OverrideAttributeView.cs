@@ -1,5 +1,4 @@
 ﻿using System;
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Tvos.Presenters.Attributes;
 using MvvmCross.Platforms.Tvos.Views;
 using MvvmCross.Presenters;
@@ -32,11 +31,9 @@ namespace Playground.TvOS
 
             View.BackgroundColor = UIColor.Cyan;
 
-            var set = this.CreateBindingSet<OverrideAttributeView, OverrideAttributeViewModel>();
-
+            var set = CreateBindingSet();
             set.Bind(btnTabNav).To(vm => vm.ShowTabsCommand);
             set.Bind(btnClose).To(vm => vm.CloseCommand);
-
             set.Apply();
         }
 

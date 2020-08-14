@@ -6,7 +6,7 @@ We support only the latest version of MvvmCross which can be found on the [MvvmC
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 6.4.1   | :white_check_mark: |
+| 6.4.2   | :white_check_mark: |
 
 ## Reporting a Vulnerability
 

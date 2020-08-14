@@ -32,7 +32,7 @@ using MvvmCross.IoC;
 
 namespace MvvmCrossDocs.Core
 {
-public class App : MvvmCross.Core.ViewModels.MvxApplication
+public class App : MvvmCross.ViewModels.MvxApplication
 {
     public override void Initialize()
     {
@@ -185,7 +185,7 @@ Change the contents of the `TextBox`, and click elsewhere. The text below the `T
 ## Pages abstraction and ViewModel binding
 This section shows how to abstract Universal Windows Platform Page object to provide generic ViewModel binding.
 
-If you would like to provide generic way of binding Page with ViewModel, you would propably do it like presented below:
+If you would like to provide generic way of binding Page with ViewModel, you would probably do it like presented below:
 
 ```c#
  public sealed partial class LoginPage<LoginViewModel>

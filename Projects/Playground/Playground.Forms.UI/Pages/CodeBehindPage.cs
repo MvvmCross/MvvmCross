@@ -23,7 +23,7 @@ namespace Playground.Forms.UI.Pages
                 }
             };
 
-            var set = this.CreateBindingSet<CodeBehindPage, CodeBehindViewModel>();
+            var set = CreateBindingSet();
             set.Bind(_label).For(l => l.Text).To(vm => vm.BindableText);
             set.Bind(_entry).For(e => e.Text).To(vm => vm.BindableText);
             set.Apply();

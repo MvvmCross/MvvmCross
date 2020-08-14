@@ -1,12 +1,12 @@
 ﻿using Android.Content.Res;
 using Android.OS;
-using Android.Support.V7.Widget;
+using AndroidX.AppCompat.Widget;
 using Android.Views;
 using Example.Droid.Activities;
 using MvvmCross.Binding.Droid.BindingContext;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Support.V4;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.Platforms.Android.Views.Fragments;
+using MvvmCross.DroidX.AppCompat;
 
 namespace Example.Droid.Fragments
 {

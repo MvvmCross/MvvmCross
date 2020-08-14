@@ -43,12 +43,6 @@ namespace MvvmCross.Platforms.Wpf.Core
             _root = root;
         }
 
-        protected override void InitializePlatformServices()
-        {
-            RegisterPresenter();
-            base.InitializePlatformServices();
-        }
-
         public override IEnumerable<Assembly> GetViewAssemblies()
         {
             return base.GetViewAssemblies().Union(new[] { Assembly.GetEntryAssembly() });
@@ -95,6 +89,12 @@ namespace MvvmCross.Platforms.Wpf.Core
         protected override IMvxNameMapping CreateViewToViewModelNaming()
         {
             return new MvxPostfixAwareViewToViewModelNameMapping("View", "Control");
+        }
+
+        protected override void InitializeFirstChance()
+        {
+            RegisterPresenter();
+            base.InitializeFirstChance();
         }
 
         protected override void InitializeLastChance()

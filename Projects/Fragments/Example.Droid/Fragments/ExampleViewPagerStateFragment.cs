@@ -6,7 +6,7 @@ using Android.Support.V4.View;
 using Android.Views;
 using Example.Core.ViewModels;
 using MvvmCross.Droid.Views.Attributes;
-using MvvmCross.Droid.Support.V4;
+using MvvmCross.Platforms.Android.Views.Fragments;
 
 namespace Example.Droid.Fragments
 {

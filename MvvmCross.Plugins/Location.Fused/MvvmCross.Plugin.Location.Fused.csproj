@@ -1,6 +1,6 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
-    <TargetFrameworks>monoandroid90;monoandroid10.0;</TargetFrameworks>
+    <TargetFrameworks>monoandroid10.0;</TargetFrameworks>
     <AssemblyName>MvvmCross.Plugin.Location.Fused</AssemblyName>
     <RootNamespace>MvvmCross.Plugin.Location.Fused</RootNamespace>
     <Description>MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
@@ -10,7 +10,7 @@ This package contains the implementation of FusedLocationApi as 'Location' plugi
   </PropertyGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('monoandroid')) ">
-    <PackageReference Include="Xamarin.GooglePlayServices.Location" Version="71.1600.0" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Location" Version="71.1600.4" />
     <None Include="Resources\*.cs" />
     <Compile Remove="Resources\*.cs" />
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />

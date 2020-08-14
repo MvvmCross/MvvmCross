@@ -1,5 +1,4 @@
 ﻿using System;
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;
 using Playground.Core.ViewModels;
@@ -21,12 +20,10 @@ namespace Playground.iOS.Views
 
             View.BackgroundColor = UIColor.Red;
 
-            var set = this.CreateBindingSet<ModalNavView, ModalNavViewModel>();
-
+            var set = CreateBindingSet();
             set.Bind(btnShowChild).To(vm => vm.ShowChildCommand);
             set.Bind(btnClose).To(vm => vm.CloseCommand);
             set.Bind(btnNestedModal).To(vm => vm.ShowNestedModalCommand);
-
             set.Apply();
         }
     }

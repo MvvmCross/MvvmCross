@@ -1,5 +1,4 @@
 ﻿using System;
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Tvos.Presenters.Attributes;
 using MvvmCross.Platforms.Tvos.Views;
 using Playground.Core.ViewModels;
@@ -18,12 +17,10 @@ namespace Playground.TvOS
         {
             base.ViewDidLoad();
 
-            var set = this.CreateBindingSet<Tab1View, Tab1ViewModel>();
-
+            var set = CreateBindingSet();
             set.Bind(btnModal).To(vm => vm.OpenModalCommand);
             set.Bind(btnModalNav).To(vm => vm.OpenNavModalCommand);
             set.Bind(btnChild).To(vm => vm.OpenChildCommand);
-
             set.Apply();
         }
 	}

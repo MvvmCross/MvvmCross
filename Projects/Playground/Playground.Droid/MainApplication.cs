@@ -5,14 +5,13 @@
 using System;
 using Android.App;
 using Android.Runtime;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.Platforms.Android.Views;
 using Playground.Core;
-using Plugin.CurrentActivity;
 
 namespace Playground.Droid
 {
     [Application]
-    public class MainApplication : MvxAppCompatApplication<Setup, App>
+    public class MainApplication : MvxAndroidApplication<Setup, App>
     {
         public MainApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
@@ -22,7 +21,7 @@ namespace Playground.Droid
         {
             base.OnCreate();
 
-            CrossCurrentActivity.Current.Init(this);
+            //CrossCurrentActivity.Current.Init(this);
         }
     }
 }

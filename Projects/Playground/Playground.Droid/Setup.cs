@@ -5,18 +5,18 @@
 using System.Collections.Generic;
 using System.Reflection;
 using MvvmCross.Binding.Bindings.Target.Construction;
-using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Droid.Support.V7.RecyclerView;
 using MvvmCross.Logging;
 using MvvmCross.Plugin;
 using Playground.Core;
 using Playground.Droid.Bindings;
 using Playground.Droid.Controls;
 using Serilog;
+using MvvmCross.Platforms.Android.Core;
+using MvvmCross.DroidX.RecyclerView;
 
 namespace Playground.Droid
 {
-    public class Setup : MvxAppCompatSetup<App>
+    public class Setup : MvxAndroidSetup<App>
     {
         protected override IEnumerable<Assembly> AndroidViewAssemblies =>
             new List<Assembly>(base.AndroidViewAssemblies)

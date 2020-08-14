@@ -16,13 +16,13 @@ using MvvmCross.Platforms.Android.Views.Base;
 using Path = System.IO.Path;
 using Stream = System.IO.Stream;
 using Uri = Android.Net.Uri;
-using ExifInterface = Android.Support.Media.ExifInterface;
+using ExifInterface = AndroidX.ExifInterface.Media.ExifInterface;
 using MvvmCross.Logging;
 
 namespace MvvmCross.Plugin.PictureChooser.Platforms.Android
 {
     [Preserve(AllMembers = true)]
-    public class MvxPictureChooserTask
+    public class MvxPictureChooserTask 
         : MvxAndroidTask, IMvxPictureChooserTask
     {
         private Uri _cachedUriLocation;

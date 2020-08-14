@@ -58,5 +58,11 @@ namespace MvvmCross.Platforms.Android.Binding
         public const string VideoView_Uri = "Uri";
         public const string WebView_Uri = "Uri";
         public const string WebView_Html = "Html";
+
+        public const string MvxAppCompatAutoCompleteTextView_PartialText = "PartialText";
+        public const string MvxAppCompatAutoCompleteTextView_SelectedObject = "SelectedObject";
+        public const string MvxAppCompatSpinner_SelectedItem = "SelectedItem";
+        public const string MvxAppCompatRadioGroup_SelectedItem = "SelectedItem";
+        public const string Toolbar_Subtitle = "Subtitle";
     }
 }

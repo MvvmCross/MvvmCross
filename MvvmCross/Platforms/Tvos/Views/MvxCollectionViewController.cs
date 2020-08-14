@@ -136,5 +136,10 @@ namespace MvvmCross.Platforms.Tvos.Views
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
         }
+
+        public MvxFluentBindingDescriptionSet<IMvxTvosView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxTvosView<TViewModel>, TViewModel>();
+        }
     }
 }

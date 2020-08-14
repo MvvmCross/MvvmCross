@@ -1,14 +1,14 @@
 ﻿using Android.App;
 using Android.OS;
-using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
+using MvvmCross.Platforms.Android.Views;
 using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Activities
 {
     [MvxActivityPresentation]
     [Activity(Theme = "@style/AppTheme")]
-    public class CollectionView : MvxAppCompatActivity<CollectionViewModel>
+    public class CollectionView : MvxActivity<CollectionViewModel>
     {
         protected override void OnCreate(Bundle bundle)
         {

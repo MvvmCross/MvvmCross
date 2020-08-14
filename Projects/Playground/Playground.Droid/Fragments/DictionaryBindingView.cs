@@ -8,12 +8,12 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using MvvmCross.Droid.Support.V4;
 using Playground.Core.ViewModels;
 using System.Collections.Generic;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
+using MvvmCross.Platforms.Android.Views.Fragments;
 
 namespace Playground.Droid.Fragments
 {
@@ -33,7 +33,7 @@ namespace Playground.Droid.Fragments
             var background = view.FindViewById<LinearLayout>(Resource.Id.container);
             var descriptionLabel = view.FindViewById<TextView>(Resource.Id.txt_description);
 
-            var bindingSet = this.CreateBindingSet<DictionaryBindingView, DictionaryBindingViewModel>();
+            var bindingSet = CreateBindingSet();
             bindingSet.Bind(background).For(v => v.Background).To(vm => vm.Value)
                 .WithDictionaryConversion(new Dictionary<int, Drawable>
                 {

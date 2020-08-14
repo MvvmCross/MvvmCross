@@ -563,7 +563,7 @@ Now override the method `RegisterSetup` and use the object extension method `Reg
 ```c#
 protected override void RegisterSetup()
 {
-    this.RegisterSetupType<MvxFormsWpfSetup<App, FormsApp>>();
+    this.RegisterSetupType<MvxFormsWpfSetup<Core.App, FormsApp>>();
 }
 ```
 

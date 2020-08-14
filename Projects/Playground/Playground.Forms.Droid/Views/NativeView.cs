@@ -9,8 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
+using MvvmCross.Platforms.Android.Views;
 using Playground.Core.ViewModels;
 
 namespace Playground.Forms.Droid.Views
@@ -18,7 +18,7 @@ namespace Playground.Forms.Droid.Views
     [MvxActivityPresentation]
     [Activity(Theme = "@style/AppTheme",
     WindowSoftInputMode = SoftInput.AdjustPan)]
-    public class NativeView : MvxAppCompatActivity<NativeViewModel>
+    public class NativeView : MvxActivity<NativeViewModel>
     {
         protected override void OnCreate(Bundle bundle)
         {

@@ -5,10 +5,10 @@
 using Android.OS;
 using Android.Transitions;
 using Android.Views;
-using MvvmCross.Droid.Support.V4;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Platforms.Android.Views;
+using MvvmCross.Platforms.Android.Views.Fragments;
 using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Fragments

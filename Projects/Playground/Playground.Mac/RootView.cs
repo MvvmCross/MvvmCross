@@ -4,7 +4,6 @@ using System;
 using AppKit;
 using Playground.Core.ViewModels;
 using System.Linq;
-using MvvmCross.Binding.BindingContext;
 using MvvmCross.Platforms.Mac.Presenters.Attributes;
 using MvvmCross.Platforms.Mac.Views;
 using MvvmCross.ViewModels;
@@ -33,7 +32,7 @@ namespace Playground.Mac
         {
             base.ViewDidLoad();
 
-            var set = this.CreateBindingSet<RootView, RootViewModel>();
+            var set = CreateBindingSet();
             set.Bind(btnChild).To(vm => vm.ShowChildCommand);
             set.Bind(btnModal).To(vm => vm.ShowModalCommand);
             set.Bind(btnSheet).To(vm => vm.ShowSheetCommand);

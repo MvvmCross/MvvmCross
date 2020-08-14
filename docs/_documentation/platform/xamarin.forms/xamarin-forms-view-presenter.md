@@ -6,7 +6,7 @@ category: Platforms
 
 ## View Presenter Overview
 
-On Forms every platform has it's own presenter that inherits from the native platform presenter. This enables us to navigate between native and Xamarin.Forms views. On top of that we have the `MvxFormsPagePresenter` which handles all the comon logic for Forms related navigation.
+On Forms every platform has it's own presenter that inherits from the native platform presenter. This enables us to navigate between native and Xamarin.Forms views. On top of that we have the `MvxFormsPagePresenter` which handles all the common logic for Forms related navigation.
 
 The default presenter supports every navigation pattern that Xamarin.Forms supports itself:
 
@@ -36,7 +36,7 @@ This is the base class for the other Forms presentation attributes and cannot be
 
 ### MvxCarouselPagePresentationAttribute
 
-Used to navigate forward to one or multipel pages in a Carousel.
+Used to navigate forward to one or multiple pages in a Carousel.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |

@@ -124,8 +124,8 @@ namespace MvvmCross.Platforms.Ios.Views
         }
     }
 
-    public class MvxTableViewController<TViewModel>
-        : MvxTableViewController, IMvxIosView<TViewModel> where TViewModel : class, IMvxViewModel
+    public class MvxTableViewController<TViewModel> : MvxTableViewController, IMvxIosView<TViewModel>
+        where TViewModel : class, IMvxViewModel
     {
         public MvxTableViewController(UITableViewStyle style = UITableViewStyle.Plain) : base(style)
         {
@@ -151,6 +151,11 @@ namespace MvvmCross.Platforms.Ios.Views
         {
             get { return (TViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
+        }
+
+        public MvxFluentBindingDescriptionSet<IMvxIosView<TViewModel>, TViewModel> CreateBindingSet()
+        {
+            return this.CreateBindingSet<IMvxIosView<TViewModel>, TViewModel>();
         }
     }
 }

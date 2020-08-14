@@ -1121,7 +1121,7 @@ Android.Widget.SearchView | Query | BindQuery()
 Android.Widget.RatingBar | Rating | BindRating()
 Android.Widget.AdapterView | SelectedItemPosition | BindSelectedItemPosition()
 Android.Widget.NumberPicker | DisplayedValues | BindDisplayedValues() | 6.2.3 | Must be before `Value` binding
-Android.Widget.NumberPicker | Value | BindValue() | 6.2.3 | Must be after `DislayedValues` binding
+Android.Widget.NumberPicker | Value | BindValue() | 6.2.3 | Must be after `DisplayedValues` binding
 Android.Preferences.Preference | Value | BindValue()
 Android.Preferences.EditTextPreference | Text | BindText()
 Android.Preferences.ListPreference | Value | BindValue()

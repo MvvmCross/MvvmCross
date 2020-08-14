@@ -5,9 +5,9 @@
 using System;
 using Android.Runtime;
 using Android.Support.V4.View;
-using Android.Support.V7.Widget;
 using Android.Widget;
-using MvvmCross.Droid.Support.V7.RecyclerView;
+using AndroidX.RecyclerView.Widget;
+using MvvmCross.DroidX.RecyclerView;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 
 namespace Playground.Droid.Adapter

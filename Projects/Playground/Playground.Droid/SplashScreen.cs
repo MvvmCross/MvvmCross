@@ -4,7 +4,7 @@
 
 using Android.App;
 using Android.Content.PM;
-using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.Platforms.Android.Views;
 
 namespace Playground.Droid
 {
@@ -15,7 +15,7 @@ namespace Playground.Droid
         , Theme = "@style/AppTheme.Splash"
         , NoHistory = true
         , ScreenOrientation = ScreenOrientation.Portrait)]
-    public class SplashScreen : MvxSplashScreenAppCompatActivity
+    public class SplashScreen : MvxSplashScreenActivity
     {
         public SplashScreen()
             : base(Resource.Layout.SplashScreen)

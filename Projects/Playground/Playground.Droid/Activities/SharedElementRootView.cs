@@ -7,8 +7,7 @@ using Android.App;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using MvvmCross.Droid.Support.V7.AppCompat;
-using MvvmCross.Droid.Support.V7.RecyclerView;
+using MvvmCross.DroidX.RecyclerView;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
 using MvvmCross.Platforms.Android.Views;
 using MvvmCross.Presenters.Attributes;
@@ -19,7 +18,7 @@ namespace Playground.Droid.Activities
 {
     [MvxActivityPresentation]
     [Activity(Theme = "@style/AppTheme")]
-    public class SharedElementRootView : MvxAppCompatActivity<SharedElementRootViewModel>, IMvxAndroidSharedElements
+    public class SharedElementRootView : MvxActivity<SharedElementRootViewModel>, IMvxAndroidSharedElements
     {
         public int SelectedListItem { get; set; }
 

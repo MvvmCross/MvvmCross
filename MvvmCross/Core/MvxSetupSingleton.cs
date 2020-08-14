@@ -62,7 +62,7 @@ namespace MvvmCross.Core
             catch (Exception ex)
             {
                 MvxLog.Instance.Error(ex, "Unable to cast setup to {0}", typeof(TMvxSetup));
-                throw ex;
+                throw;
             }
         }
 

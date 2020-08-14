@@ -15,5 +15,6 @@ namespace MvvmCross.Forms.Views
     public interface IMvxElement<TViewModel>
         : IMvxElement, IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
     {
+        MvxFluentBindingDescriptionSet<IMvxElement<TViewModel>, TViewModel> CreateBindingSet();
     }
 }

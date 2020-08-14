@@ -17,5 +17,6 @@ namespace MvvmCross.Platforms.Wpf.Views
         : IMvxWpfView
         , IMvxView<TViewModel> where TViewModel : class, IMvxViewModel
     {
+        MvxFluentBindingDescriptionSet<IMvxWpfView<TViewModel>, TViewModel> CreateBindingSet();
     }
 }
