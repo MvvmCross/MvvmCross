@@ -34,6 +34,9 @@ This package contains the 'ResourceLoader' plugin for MvvmCross</Description>
   <ItemGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
     <Compile Include="Platforms\Net\**\*.cs" />
     <Compile Include="Platforms\Console\**\*.cs" />
+    <Compile Include="Platforms\Wpf\**\*.cs" />
+    <Reference Include="c:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\3.1.0\ref\netcoreapp3.1\PresentationFramework.dll" />
+    <Reference Include="c:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\3.1.0\ref\netcoreapp3.1\WindowsBase.dll" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) And '$(OS)' == 'Windows_NT' ">
