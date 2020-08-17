@@ -30,7 +30,7 @@ namespace MvvmCross.Platforms.Android
             if (activity.IsFinishing)
                 return true;
 
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.JellyBeanMr1 && activity.IsDestroyed)
+            if (activity.IsDestroyed)
                 return true;
 
             return false;

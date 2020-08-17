@@ -298,16 +298,9 @@ namespace MvvmCross.Platforms.Android.Presenters
                     return bundle;
                 }
 
-                if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
-                {
-                    var activityOptions = ActivityOptions.MakeSceneTransitionAnimation(CurrentActivity, transitionElementPairs.ToArray());
-                    intent.PutExtra(SharedElementsBundleKey, string.Join("|", elements));
-                    bundle = activityOptions.ToBundle();
-                }
-                else
-                {
-                    MvxLog.Instance.Warn("Shared element transition requires Android v21+.");
-                }
+                var activityOptions = ActivityOptions.MakeSceneTransitionAnimation(CurrentActivity, transitionElementPairs.ToArray());
+                intent.PutExtra(SharedElementsBundleKey, string.Join("|", elements));
+                bundle = activityOptions.ToBundle();
             }
 
             return bundle;

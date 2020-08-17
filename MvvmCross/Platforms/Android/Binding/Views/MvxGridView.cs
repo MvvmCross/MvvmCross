@@ -170,12 +170,6 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec)
         {
-            if (Build.VERSION.SdkInt < BuildVersionCodes.Lollipop)
-            {
-                base.OnMeasure(widthMeasureSpec, heightMeasureSpec);
-                return;
-            }
-
             if (NestedScrollingEnabled)
                 base.OnMeasure(widthMeasureSpec, heightMeasureSpec);
             else
