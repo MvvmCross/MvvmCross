@@ -25,13 +25,24 @@ Some packages are deprecated and have been moved into the main MvvmCross package
 
 ## Type and namespace changes
 
-| Old type                                                     | New type                                                          |
-|--------------------------------------------------------------|-------------------------------------------------------------------|
-| MvvmCross.Droid.Support.V4.MvxFragment                       | MvvmCross.Platforms.Android.Views.Fragments.MvxFragment           |
-| MvvmCross.Droid.Support.V4.MvxDialogFragment                 | MvvmCross.Platforms.Android.Views.Fragments.MvxDialogFragment     |
-| MvvmCross.Droid.Support.V14.Preference.MvxPreferenceFragment | MvvmCross.Platforms.Android.Views.Fragments.MvxPreferenceFragment |
-| MvvmCross.Droid.Support.V4.MvxFragment                       | MvvmCross.Platforms.Android.Views.Fragments.MvxFragment           |
-| MvvmCross.Droid.Support.V7.AppCompat.MvxAppCompatActivity    | MvvmCross.Platforms.Android.Views.MvxActivity                     |
+| Old type                                                                     | New type                                                                   |
+|------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| MvvmCross.Droid.Support.V4.MvxFragment                                       | MvvmCross.Platforms.Android.Views.Fragments.MvxFragment                    |
+| MvvmCross.Droid.Support.V4.MvxDialogFragment                                 | MvvmCross.Platforms.Android.Views.Fragments.MvxDialogFragment              |
+| MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout                             | MvvmCross.DroidX.MvxSwipeRefreshLayout                                     |
+| MvvmCross.Droid.Support.V7.RecyclerView                                      | MvvmCross.DroidX.RecyclerView                                              |
+| MvvmCross.Droid.Support.V7.RecyclerViewAdapter                               | MvvmCross.DroidX.RecyclerViewAdapter                                       |
+| MvvmCross.Droid.Support.V7.RecyclerViewHolder                                | MvvmCross.DroidX.RecyclerViewHolder                                        |
+| MvvmCross.Droid.Support.V7.AppCompat.MvxAppCompatActivity                    | MvvmCross.Platforms.Android.Views.MvxActivity                              |
+| MvvmCross.Droid.Support.V7.AppCompat.MvxAppCompatDialogFragment              | MvvmCross.Platforms.Android.Views.Fragments.MvxDialogFragment              |
+| MvvmCross.Droid.Support.V7.AppCompat.MvxSplashScreenAppCompatActivity        | MvvmCross.Platforms.Android.Views.MvxSplashScreenActivity                  |
+| MvvmCross.Droid.Support.V7.AppCompat.MvxAppCompatSetup                       | MvvmCross.Platforms.Android.Core.MvxAndroidSetup                           |
+| MvvmCross.Droid.Support.V7.AppCompat.MvxAppCompatViewPresenter               | MvvmCross.Platforms.Android.Presenters.MvxAndroidViewPresenter             |
+| MvvmCross.Droid.Support.V7.AppCompat.Widget.*                                | MvvmCross.Platforms.Android.Binding.Views.*                                |
+| MvvmCross.Droid.Support.V7.AppCompat.MvxActionBarDrawerToggle                | MvvmCross.Platforms.Android.Views.AppCompat.MvxActionBarDrawerToggle       |
+| MvvmCross.Droid.Support.Design.MvxBottomSheetDialogFragment                  | MvvmCross.DroidX.Material.MvxBottomSheetDialogFragment                     |
+| MvvmCross.Droid.Support.V14.Preference.MvxPreferenceFragment                 | MvvmCross.Platforms.Android.Views.Fragments.MvxPreferenceFragment          |
+| MvvmCross.Android.Support.V17.Leanback.*                                     | MvvmCross.DroidX.Leanback.*                                                |
 
 ## Removal of monodroid9.0 TFM
 
