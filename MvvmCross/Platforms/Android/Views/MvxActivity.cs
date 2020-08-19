@@ -156,6 +156,14 @@ namespace MvvmCross.Platforms.Android.Views
             set { base.ViewModel = value; }
         }
 
+        protected MvxActivity() : base()
+        {
+        }
+
+        protected MvxActivity(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
+
         public MvxFluentBindingDescriptionSet<IMvxAndroidView<TViewModel>, TViewModel> CreateBindingSet()
         {
             return this.CreateBindingSet<IMvxAndroidView<TViewModel>, TViewModel>();
