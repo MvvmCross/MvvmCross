@@ -85,7 +85,7 @@ This package contains the 'Core' libraries for MvvmCross</Description>
     <Compile Include="Platforms\Xamarin\**\*.cs" />
     <AndroidResource Include="Resources\**\*.xml" SubType="Designer" Generator="MSBuild:UpdateAndroidResources" />
   
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.1.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.2.0" />
     <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.2.4.1" />
     <PackageReference Include="Xamarin.AndroidX.Preference" Version="1.1.1.1" />
     <PackageReference Include="Xamarin.AndroidX.ViewPager" Version="1.0.0.1" />
