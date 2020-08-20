@@ -45,4 +45,6 @@ stages:
     - script: dotnet cake --bootstrap
       displayName: Bootstrap cake
 
-    - script: dotnet cake --verbosity=Normal --target=Sonar --sonarKey=$(sonarKey)
+    - pwsh: dotnet cake --verbosity=Normal --target=Sonar --sonarKey=$env:SONARY_KEY
+      env: 
+        SONARY_KEY: $(sonarKey)
