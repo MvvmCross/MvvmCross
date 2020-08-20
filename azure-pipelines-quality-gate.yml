@@ -34,7 +34,7 @@ stages:
         packageType: sdk
         version: 3.1.401
 
-    - script: |
+    - pwsh: |
         $jdkPath = $env:JAVA_HOME_11_X64
         Write-Host "##vso[task.setvariable variable=JAVA_HOME]$jdkPath"
       displayName: "Use JDK11 by default"        
