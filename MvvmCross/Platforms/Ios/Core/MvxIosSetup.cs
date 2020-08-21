@@ -71,6 +71,7 @@ namespace MvvmCross.Platforms.Ios.Core
         {
             RegisterPlatformProperties();
             RegisterPresenter();
+            RegisterPopoverPresentationSourceProvider();
             RegisterLifetime();
             base.InitializeFirstChance();
         }
@@ -109,6 +110,16 @@ namespace MvvmCross.Platforms.Ios.Core
             var presenter = Presenter;
             Mvx.IoCProvider.RegisterSingleton(presenter);
             Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
+        }
+
+        protected virtual void RegisterPopoverPresentationSourceProvider()
+        {
+            Mvx.IoCProvider.RegisterSingleton<IMvxPopoverPresentationSourceProvider>(CreatePopoverPresentationSourceProvider());
+        }
+
+        protected virtual IMvxPopoverPresentationSourceProvider CreatePopoverPresentationSourceProvider()
+        {
+            return new MvxPopoverPresentationSourceProvider();
         }
 
         protected override void InitializeLastChance()

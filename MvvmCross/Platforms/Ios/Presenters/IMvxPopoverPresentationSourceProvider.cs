@@ -5,7 +5,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
 {
     public interface IMvxPopoverPresentationSourceProvider
     {
-        CGRect PopoverSourceRect { get; }
-        UIView PopoverSourceView { get; }
+        UIView SourceView { get; set; }
+        UIBarButtonItem SourceBarButtonItem { get; set; }
+        public void SetSource(UIPopoverPresentationController popoverPresentationController);
     }
 }

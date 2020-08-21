@@ -440,8 +440,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
             
             var presentationController = viewController.PopoverPresentationController;
             presentationController.PermittedArrowDirections = attribute.PermittedArrowDirections;
-            presentationController.SourceRect = PopoverSourceProvider.PopoverSourceRect;
-            presentationController.SourceView = PopoverSourceProvider.PopoverSourceView;
+            var sourceProvider = Mvx.IoCProvider.Resolve<IMvxPopoverPresentationSourceProvider>();
+            sourceProvider.SetSource(presentationController);
             presentationController.Delegate = new MvxPopoverDelegate(this);
                 
             viewHost.PresentViewController(
