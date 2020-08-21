@@ -16,7 +16,7 @@ This package contains Support Core UI support for MvvmCross.</Description>
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.0.0.1" />
+    <PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.0.0.2" />
   </ItemGroup>
   
   <ItemGroup>
