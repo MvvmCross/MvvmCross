@@ -6,8 +6,10 @@ namespace MvvmCross.Platforms.Ios.Presenters
 {
     public class MvxPopoverDelegate : UIPopoverPresentationControllerDelegate
     {
-        public MvxPopoverDelegate()
+        private IMvxIosViewPresenter _presenter;
+        public MvxPopoverDelegate(IMvxIosViewPresenter presenter)
         {
+            _presenter = presenter;
         }
         
         public override UIModalPresentationStyle GetAdaptivePresentationStyle(UIPresentationController forPresentationController)
@@ -22,10 +24,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
         public override void DidDismissPopover(UIPopoverPresentationController popoverPresentationController)
         {
-            if (Mvx.IoCProvider.Resolve<IMvxIosViewPresenter>() is MvxIosViewPresenter presenter)
-            {
-                presenter.ClosedPopoverViewController();
-            }
+            _presenter.ClosedPopoverViewController();
         }
     }
 }
