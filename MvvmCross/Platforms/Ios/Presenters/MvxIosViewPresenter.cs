@@ -131,14 +131,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
                     },
                     CloseModalViewController);
             
-            AttributeTypesToActionsDictionary.Register<MvxPopoverPresentationAttribute>(
-                (viewType, attribute, request) =>
-                {
-                    var viewController = (UIViewController)this.CreateViewControllerFor(request);
-                    return ShowPopoverViewController(viewController, attribute, request);
-                },
-                ClosePopoverViewController);
-
+            RegisterPopoverAttributeType();
+            
             AttributeTypesToActionsDictionary.Register<MvxSplitViewPresentationAttribute>(
                 (viewType, attribute, request) =>
                     {
@@ -167,6 +161,17 @@ namespace MvvmCross.Platforms.Ios.Presenters
                                 return CloseDetailSplitViewController(viewModel, splitAttribute);
                         }
                     });
+        }
+
+        protected virtual void RegisterPopoverAttributeType()
+        {
+            AttributeTypesToActionsDictionary.Register<MvxPopoverPresentationAttribute>(
+                (viewType, attribute, request) =>
+                {
+                    var viewController = (UIViewController)this.CreateViewControllerFor(request);
+                    return ShowPopoverViewController(viewController, attribute, request);
+                },
+                ClosePopoverViewController);
         }
 
         protected virtual async Task<bool> ShowRootViewController(
