@@ -1,0 +1,50 @@
+trigger:
+  branches:
+    include:
+    - develop
+    - releases/*
+  paths:
+    exclude:
+    - '**/*.md'
+    - docs/*
+pr:
+  branches:
+    include:
+    - develop
+    - releases/*
+  paths:
+    exclude:
+    - '**/*.md'
+    - docs/*
+
+stages:
+- stage: Build
+  variables:
+    DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+  jobs:
+  - job: Build
+    pool:
+      vmImage: windows-latest
+
+    steps:
+    - task: UseDotNet@2
+      displayName: 'Use .NET Core sdk'
+      inputs:
+        packageType: sdk
+        version: 3.1.302
+
+    - pwsh: |
+        $jdkPath = $env:JAVA_HOME_11_X64
+        Write-Host "##vso[task.setvariable variable=JAVA_HOME]$jdkPath"
+      displayName: "Use JDK11 by default"        
+
+    - script: dotnet tool restore
+      displayName: Restore dotnet tools
+
+    - script: dotnet cake --bootstrap
+      displayName: Bootstrap cake
+
+    - pwsh: dotnet cake --verbosity=Normal --target=Sonar --sonarKey=$env:SONARY_KEY
+      env: 
+        SONARY_KEY: $(sonarKey)
