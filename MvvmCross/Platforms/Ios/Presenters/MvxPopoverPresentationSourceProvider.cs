@@ -11,6 +11,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
     {
         private UIView _sourceView;
         private UIBarButtonItem _sourceBarButtonItem;
+
         public UIView SourceView
         {
             get
@@ -21,6 +22,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             }
             set => _sourceView = value;
         }
+
         public UIBarButtonItem SourceBarButtonItem
         {
             get
@@ -31,6 +33,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             }
             set => _sourceBarButtonItem = value;
         }
+
         public void SetSource(UIPopoverPresentationController popoverPresentationController)
         {
             if (SourceView == null && SourceBarButtonItem == null)

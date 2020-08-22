@@ -27,9 +27,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
         public UINavigationController MasterNavigationController { get; protected set; }
 
         public UIViewController PopoverViewController { get; protected set; }
-        
-        public IMvxPopoverPresentationSourceProvider PopoverSourceProvider { get; set; }
-        
+
         public List<UIViewController> ModalViewControllers { get; protected set; } = new List<UIViewController>();
 
         public IMvxTabBarViewController TabBarViewController { get; protected set; }
@@ -130,9 +128,9 @@ namespace MvvmCross.Platforms.Ios.Presenters
                         return ShowModalViewController(viewController, attribute, request);
                     },
                     CloseModalViewController);
-            
+
             RegisterPopoverAttributeType();
-            
+
             AttributeTypesToActionsDictionary.Register<MvxSplitViewPresentationAttribute>(
                 (viewType, attribute, request) =>
                     {
@@ -301,7 +299,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
                     throw new MvxException($"Trying to show View type: {viewController.GetType().Name} as child, but there is currently a plain popover view presented!");
                 }
             }
-            
+
             if (ModalViewControllers.Any())
             {
                 if (ModalViewControllers.LastOrDefault() is UINavigationController modalNavController)
@@ -409,7 +407,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             ModalViewControllers.Add(viewController);
             return Task.FromResult(true);
         }
-        
+
         protected virtual Task<bool> ShowPopoverViewController(
             UIViewController viewController,
             MvxPopoverPresentationAttribute attribute,
@@ -417,10 +415,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
         {
             if (PopoverViewController != null)
                 throw new MvxException($"Trying to show View type: {viewController.GetType().Name} as popover, but there is already a popover present!");
-            
-            if (PopoverSourceProvider == null)
-                throw new MvxException($"Trying to show View type: {viewController.GetType().Name} as popover, but the popover host view controller is null! Did you forget to set it?");
-            
+
             // Content size should be set to a target view controller, not the navigation one
             if (attribute.PreferredContentSize != default(CGSize))
             {
@@ -432,18 +427,19 @@ namespace MvvmCross.Platforms.Ios.Presenters
             {
                 viewController = CreateNavigationController(viewController);
             }
-            
+
             // Check if there is a modal already presented first. Otherwise use the topmost view controller.
             var viewHost = ModalViewControllers.LastOrDefault() ?? _window.RootViewController;
-            
+
             viewController.ModalPresentationStyle = UIModalPresentationStyle.Popover;
-            
+
             var presentationController = viewController.PopoverPresentationController;
             presentationController.PermittedArrowDirections = attribute.PermittedArrowDirections;
+
             var sourceProvider = Mvx.IoCProvider.Resolve<IMvxPopoverPresentationSourceProvider>();
             sourceProvider.SetSource(presentationController);
             presentationController.Delegate = new MvxPopoverDelegate(this);
-                
+
             viewHost.PresentViewController(
                 viewController,
                 attribute.Animated,
@@ -697,7 +693,6 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             await viewController.DismissViewControllerAsync(attribute.Animated);
             PopoverViewController = null;
-            PopoverSourceProvider = null;
             return true;
         }
 
@@ -762,7 +757,6 @@ namespace MvvmCross.Platforms.Ios.Presenters
         public virtual void ClosedPopoverViewController()
         {
             PopoverViewController = null;
-            PopoverSourceProvider = null;
         }
     }
 }
