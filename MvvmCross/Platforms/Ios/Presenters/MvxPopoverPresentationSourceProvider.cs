@@ -18,6 +18,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             {
                 var sourceView = _sourceView;
                 _sourceView = null;
+                _sourceBarButtonItem = null;
                 return sourceView;
             }
             set => _sourceView = value;
@@ -29,6 +30,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             {
                 var sourceBarButtonItem = _sourceBarButtonItem;
                 _sourceBarButtonItem = null;
+                _sourceView = null;
                 return sourceBarButtonItem;
             }
             set => _sourceBarButtonItem = value;
