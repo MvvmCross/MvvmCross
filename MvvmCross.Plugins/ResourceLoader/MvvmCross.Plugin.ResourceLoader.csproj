@@ -4,7 +4,7 @@
     <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.16299;$(TargetFrameworks)</TargetFrameworks>
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp')) and '$(OS)' == 'Windows_NT' ">
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
