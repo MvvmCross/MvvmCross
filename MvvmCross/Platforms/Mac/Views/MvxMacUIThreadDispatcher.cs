@@ -8,6 +8,7 @@ using System.Threading;
 using AppKit;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
+using static MvvmCross.Base.MvxAsyncPump;
 
 namespace MvvmCross.Platforms.Mac.Views
 {
@@ -36,6 +37,18 @@ namespace MvvmCross.Platforms.Mac.Views
             return true;
         }
 
-        public override bool IsOnMainThread => _uiSynchronizationContext == SynchronizationContext.Current;
+        public override bool IsOnMainThread
+        {
+            get
+            {
+                if (_uiSynchronizationContext == SynchronizationContext.Current)
+                    return true;
+
+                if (SynchronizationContext.Current is SingleThreadSynchronizationContext)
+                    return true;
+
+                return false;
+            }
+        }
     }
 }

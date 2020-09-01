@@ -5,6 +5,8 @@
 using System;
 using Windows.UI.Core;
 using MvvmCross.Base;
+using System.Threading;
+using static MvvmCross.Base.MvxAsyncPump;
 
 namespace MvvmCross.Platforms.Uap.Views
 {
@@ -16,8 +18,6 @@ namespace MvvmCross.Platforms.Uap.Views
         {
             _uiDispatcher = uiDispatcher;
         }
-
-        public override bool IsOnMainThread => _uiDispatcher.HasThreadAccess;
 
         public override bool RequestMainThreadAction(Action action, bool maskExceptions = true)
         {
@@ -32,6 +32,20 @@ namespace MvvmCross.Platforms.Uap.Views
                 ExceptionMaskedAction(action, maskExceptions);
             });
             return true;
+        }
+
+        public override bool IsOnMainThread
+        {
+            get
+            {
+                if (_uiDispatcher.HasThreadAccess)
+                    return true;
+
+                if (SynchronizationContext.Current is SingleThreadSynchronizationContext)
+                    return true;
+
+                return false;
+            }
         }
     }
 }
