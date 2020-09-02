@@ -6,31 +6,33 @@
                       xmlns:app="using:Playground.Uwp.Views"
                       xmlns:views="using:MvvmCross.Platforms.Uap.Views"
                       mc:Ignorable="d">
-  <StackPanel>
-    <TextBlock Text="{StaticResource WelcomeText}" />
-    <Button Content="Show Child (Stack Navigation)"
-            Command="{Binding ShowChildCommand}"
-            Margin="5"
-            Padding="5" />
-    <Button Content="Show SplitView"
-            Command="{Binding ShowSplitCommand}"
-            Margin="5"
-            Padding="5" />
-    <Button Content="Show Modaliew"
-            Command="{Binding ShowModalCommand}"
-            Margin="5"
-            Padding="5" />
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel>
+            <TextBlock Text="{StaticResource WelcomeText}" />
+            <Button Content="Show Child (Stack Navigation)"
+                    Command="{Binding ShowChildCommand}"
+                    Margin="5"
+                    Padding="5" />
+            <Button Content="Show SplitView"
+                    Command="{Binding ShowSplitCommand}"
+                    Margin="5"
+                    Padding="5" />
+            <Button Content="Show Modaliew"
+                    Command="{Binding ShowModalCommand}"
+                    Margin="5"
+                    Padding="5" />
 
-    <Button Content="Register and Resolve With Reflection"
-            Command="{Binding RegisterAndResolveWithReflectionCommand}"
-            Margin="5"
-            Padding="5" />
-    <Button Content="Register and Resolve With No Reflection"
-            Command="{Binding RegisterAndResolveWithNoReflectionCommand}"
-            Margin="5"
-            Padding="5" />
-    <TextBlock Text="{Binding TimeToRegister}" />
-    <TextBlock Text="{Binding TimeToResolve}" />
-    <TextBlock Text="{Binding TotalTime}" />
-  </StackPanel>
+            <Button Content="Register and Resolve With Reflection"
+                    Command="{Binding RegisterAndResolveWithReflectionCommand}"
+                    Margin="5"
+                    Padding="5" />
+            <Button Content="Register and Resolve With No Reflection"
+                    Command="{Binding RegisterAndResolveWithNoReflectionCommand}"
+                    Margin="5"
+                    Padding="5" />
+            <TextBlock Text="{Binding TimeToRegister}" />
+            <TextBlock Text="{Binding TimeToResolve}" />
+            <TextBlock Text="{Binding TotalTime}" />
+        </StackPanel>
+    </Grid>
 </app:BaseRootViewPage>

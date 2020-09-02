@@ -13,6 +13,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)LinkerPleaseInclude.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlaygroundApp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ChildView.xaml.cs">
       <DependentUpon>ChildView.xaml</DependentUpon>
     </Compile>

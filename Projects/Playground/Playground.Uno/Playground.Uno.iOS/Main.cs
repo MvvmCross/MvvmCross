@@ -1,16 +1,26 @@
-﻿using Playground.Uwp;
-using UIKit;
+﻿using UIKit;
 
 namespace Playground.Uno.iOS
 {
-    public class Application
+	public class Application
+	{
+		// This is the main entry point of the application.
+		static void Main(string[] args)
+		{
+			// if you want to use a different Application Delegate class from "AppDelegate"
+			// you can specify it here.
+			UIApplication.Main(args, null, typeof(App));
+		}
+	}
+
+#if DEBUG
+    public class HotRestartDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
-        // This is the main entry point of the application.
-        static void Main(string[] args)
+        public override bool FinishedLaunching(UIApplication uiApplication, Foundation.NSDictionary launchOptions)
         {
-            // if you want to use a different Application Delegate class from "AppDelegate"
-            // you can specify it here.
-            UIApplication.Main(args, null, typeof(App));
+            Windows.UI.Xaml.Application.Start(_ => new App());
+            return base.FinishedLaunching(uiApplication, launchOptions);
         }
     }
+#endif
 }

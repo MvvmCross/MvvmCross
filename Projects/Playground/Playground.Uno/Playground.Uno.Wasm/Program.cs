@@ -1,4 +1,5 @@
-﻿using Playground.Uwp;
+﻿using System;
+using Windows.UI.Xaml;
 
 namespace Playground.Uno.Wasm
 {
@@ -6,7 +7,7 @@ namespace Playground.Uno.Wasm
     {
         private static App _app;
 
-        private static int Main(string[] args)
+        static int Main(string[] args)
         {
             Windows.UI.Xaml.Application.Start(_ => _app = new App());
 

@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="203f282c-3c7d-43dd-8efc-cdf17ba581e5"
-    Publisher="CN=com.example"
+    Name="e35b9d76-5a1e-4a51-af1b-556103108ed2"
+    Publisher="CN=NickRandolph"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="1897f84c-689e-44d3-a8b7-c521a62818ae" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="46f02a98-a871-4917-85da-29ad49618f01" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Playground.Uno</DisplayName>
@@ -30,7 +30,7 @@
   <Applications>
     <Application Id="App"
       Executable="Playground.Uno.exe"
-      EntryPoint="UnoQuickStart.App">
+      EntryPoint="Playground.Uno.App">
       <uap:VisualElements
         DisplayName="Playground.Uno"
         Square150x150Logo="Assets\Square150x150Logo.png"
