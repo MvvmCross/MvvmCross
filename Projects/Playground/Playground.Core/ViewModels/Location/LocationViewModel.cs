@@ -5,8 +5,8 @@ using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin.Location;
 using MvvmCross.ViewModels;
-using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
+//using Plugin.Permissions;
+//using Plugin.Permissions.Abstractions;
 
 namespace Playground.Core.ViewModels.Location
 {
@@ -62,24 +62,24 @@ namespace Playground.Core.ViewModels.Location
 
         private async Task<bool> RequestPermission()
         {
-            try
-            {
-                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
-                if (status != PermissionStatus.Granted)
-                {
-                    var result = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
-                    status = result[Permission.Location];
-                }
+            //try
+            //{
+            //    var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+            //    if (status != PermissionStatus.Granted)
+            //    {
+            //        var result = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
+            //        status = result[Permission.Location];
+            //    }
 
-                if (status == PermissionStatus.Granted)
-                {
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Permission Error: " + ex);
-            }
+            //    if (status == PermissionStatus.Granted)
+            //    {
+            //        return true;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    System.Diagnostics.Debug.WriteLine($"Permission Error: " + ex);
+            //}
 
             return false;
         }

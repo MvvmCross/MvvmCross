@@ -1,0 +1,13 @@
+﻿<linker>
+    <assembly fullname="MvvmCross.Uno" />
+    <assembly fullname="MvvmCross.Uno.Plugins" />
+    <assembly fullname="Playground.Uno.Core" />
+
+    <assembly fullname="Playground.Uno.Wasm" />
+    <assembly fullname="Uno.UI" />
+
+  <assembly fullname="System.Core">
+	<!-- This is required by JSon.NET and any expression.Compile caller -->
+	<type fullname="System.Linq.Expressions*" />
+  </assembly>
+</linker>

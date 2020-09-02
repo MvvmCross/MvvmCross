@@ -26,6 +26,7 @@
   
   <ItemGroup>
     <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.1" />
   </ItemGroup>
 
 </Project>

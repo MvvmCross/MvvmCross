@@ -1,8 +1,9 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Threading.Tasks;
 using Windows.Foundation;
 
 namespace MvvmCross.Platforms.Uap
@@ -28,6 +29,35 @@ namespace MvvmCross.Platforms.Uap
             try
             {
                 var task = operation.AsTask();
+                task.Wait();
+                return task.Result;
+            }
+            catch (AggregateException exception)
+            {
+                // TODO - this possibly oversimplifies the problem report
+                throw exception.InnerException;
+            }
+        }
+
+        public static void Await(this Task operation)
+        {
+            try
+            {
+                var task = operation;
+                task.Wait();
+            }
+            catch (AggregateException exception)
+            {
+                // TODO - this possibly oversimplifies the problem report
+                throw exception.InnerException;
+            }
+        }
+
+        public static TResult Await<TResult>(this Task<TResult> operation)
+        {
+            try
+            {
+                var task = operation;
                 task.Wait();
                 return task.Result;
             }
