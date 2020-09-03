@@ -28,6 +28,7 @@
     <IsTestProject>$(MSBuildProjectName.Contains('UnitTest'))</IsTestProject>
     <IsLibraryProject>$(MSBuildProjectName.Contains('MvvmCross'))</IsLibraryProject>
     <IsXamarinForms>$(MSBuildProjectName.Contains('.Forms'))</IsXamarinForms>
+    <IsUno>$(MSBuildProjectName.Contains('.Uno'))</IsUno>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -54,6 +55,10 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
+  <ItemGroup Condition="'$(IsLibraryProject)' == 'true' and '$(IsUno)' == 'false' ">
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" PrivateAssets="All" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(IsLibraryProject)' == 'true'">
     <None Include="$(MSBuildThisFileDirectory)\LICENSE" Pack="true" PackagePath="\" />
     <None Include="$(MSBuildThisFileDirectory)\icon.png" Pack="true" PackagePath="\" />
@@ -64,12 +69,12 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <TargetsToBuildDeveloperOverride>All</TargetsToBuildDeveloperOverride>              
+  </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <TargetsToBuild>All</TargetsToBuild> 
-    <!--<TargetsToBuild>Android</TargetsToBuild>-->
-    <!--<TargetsToBuild>Uap</TargetsToBuild>--> 
-    <!--<TargetsToBuild>iOS</TargetsToBuild>--> 
-    <!--<TargetsToBuild>Tizen</TargetsToBuild>--> 
+    <TargetsToBuild>$(TargetsToBuildDeveloperOverride)</TargetsToBuild> 
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' != 'Debug' ">

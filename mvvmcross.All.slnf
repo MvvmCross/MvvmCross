@@ -1,0 +1,29 @@
+{
+  "solution": {
+    "path": "MvvmCross.sln",
+    "projects": [
+      "MvvmCross.Analyzers\\CodeAnalysis\\MvvmCross.CodeAnalysis.csproj",
+      "MvvmCross.Android.Support\\Core.UI\\MvvmCross.Droid.Support.Core.UI.csproj",
+      "MvvmCross.Android.Support\\Core.Utils\\MvvmCross.Droid.Support.Core.Utils.csproj",
+      "MvvmCross.Android.Support\\Design\\MvvmCross.Droid.Support.Design.csproj",
+      "MvvmCross.Android.Support\\Fragment\\MvvmCross.Droid.Support.Fragment.csproj",
+      "MvvmCross.Android.Support\\V14.Preference\\MvvmCross.Droid.Support.V14.Preference.csproj",
+      "MvvmCross.Android.Support\\V17.Leanback\\MvvmCross.Droid.Support.V17.Leanback.csproj",
+      "MvvmCross.Android.Support\\V7.AppCompat\\MvvmCross.Droid.Support.V7.AppCompat.csproj",
+      "MvvmCross.Android.Support\\V7.Preference\\MvvmCross.Droid.Support.V7.Preference.csproj",
+      "MvvmCross.Android.Support\\V7.RecyclerView\\MvvmCross.Droid.Support.V7.RecyclerView.csproj",
+      "MvvmCross.Forms\\MvvmCross.Forms.csproj",
+      "MvvmCross.Plugins\\JsonLocalization\\MvvmCross.Plugin.JsonLocalization.csproj",
+      "MvvmCross.Plugins\\Json\\MvvmCross.Plugin.Json.csproj",
+      "MvvmCross.Plugins\\Messenger\\MvvmCross.Plugin.Messenger.csproj",
+      "MvvmCross.Plugins\\Network\\MvvmCross.Plugin.Network.csproj",
+      "MvvmCross.Plugins\\ResourceLoader\\MvvmCross.Plugin.ResourceLoader.csproj",
+      "MvvmCross.Tests\\MvvmCross.Tests.csproj",
+      "MvvmCross\\MvvmCross.csproj",
+      "Projects\\Playground\\Playground.Core\\Playground.Core.csproj",
+      "Projects\\Playground\\Playground.Forms.UI\\Playground.Forms.UI.csproj",
+      "UnitTests\\MvvmCross.UnitTest.Common\\MvvmCross.UnitTest.Common.csproj",
+      "UnitTests\\MvvmCross.UnitTest\\MvvmCross.UnitTest.csproj"
+    ]
+  }
+}

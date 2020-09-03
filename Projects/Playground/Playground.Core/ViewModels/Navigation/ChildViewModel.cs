@@ -13,6 +13,8 @@ namespace Playground.Core.ViewModels
 {
     public class ChildViewModel : MvxNavigationViewModel<SampleModel, SampleModel>
     {
+        public string ChildText { get; set; } = "Test text for Child";
+
         public string BrokenTextValue { get => _brokenTextValue; set => SetProperty(ref _brokenTextValue, value); }
         public string AnotherBrokenTextValue { get => _anotherBrokenTextValue; set => SetProperty(ref _anotherBrokenTextValue, value); }
 

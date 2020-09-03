@@ -1,0 +1,94 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras">
+  <PropertyGroup Condition=" '$(TargetsToBuild)' == 'All' ">
+    <TargetFrameworks>netstandard2.0;xamarinios10;xamarinmac20;monoandroid10.0</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.16299;$(TargetFrameworks)</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetsToBuild)' != 'All' ">
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Android' ">netstandard2.0;monoandroid10.0;</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Uap' ">netstandard2.0;uap10.0.16299</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'iOS' ">netstandard2.0;xamarin.ios10</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Tizen' ">netstandard2.0;tizen40</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <DefineConstants>UNO</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AssemblyName>MvvmCross.Uno.Plugins</AssemblyName>
+    <RootNamespace>MvvmCross.Plugin</RootNamespace>
+    <Description>
+      MvvmCross is the .NET MVVM framework for cross-platform solutions, including Xamarin iOS, Xamarin Android, Xamarin Forms, Windows and Mac.
+
+      This package contains the various 'Plugins' for MvvmCross built to be used by applications using the Uno platform
+    </Description>
+    <PackageId>MvvmCross.Uno.Plugins</PackageId>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='xamarinmac20' or '$(TargetFramework)'=='monoandroid10.0' or '$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="Uno.UI" Version="3.0.12" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Uno.SourceGenerationTasks" Version="3.0.0-dev.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MvvmCross.Uno\MvvmCross.Uno.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\MvvmCross.Plugins\Accelerometer\**\*.cs" Exclude="..\MvvmCross.Plugins\Accelerometer\Platforms\**\*.cs;..\MvvmCross.Plugins\Accelerometer\Resources\*.cs;..\MvvmCross.Plugins\Accelerometer\obj\**\*.*;..\MvvmCross.Plugins\Accelerometer\bin\**\*.*" />
+    <Compile Include="..\MvvmCross.Plugins\Accelerometer\Platforms\Windows-common\**\*.cs" />
+    <Compile Include="..\MvvmCross.Plugins\Accelerometer\Platforms\Uap\**\*.cs" />
+
+    <Compile Include="..\MvvmCross.Plugins\File\**\*.cs" Exclude="..\MvvmCross.Plugins\File\Platforms\**\*.cs;..\MvvmCross.Plugins\File\Resources\*.cs;..\MvvmCross.Plugins\File\obj\**\*.*;..\MvvmCross.Plugins\File\bin\**\*.*" />
+    <Compile Include="..\MvvmCross.Plugins\File\Platforms\Windows-common\**\*.cs" />
+    <Compile Include="..\MvvmCross.Plugins\File\Platforms\Uap\**\*.cs" />
+
+
+    <Compile Include="..\MvvmCross.Plugins\Json\**\*.cs" Exclude="..\MvvmCross.Plugins\Json\Platforms\**\*.cs;..\MvvmCross.Plugins\Json\Resources\*.cs;..\MvvmCross.Plugins\Json\obj\**\*.*;..\MvvmCross.Plugins\Json\bin\**\*.*" />
+    <Compile Include="..\MvvmCross.Plugins\Json\Platforms\Windows-common\**\*.cs" />
+    <Compile Include="..\MvvmCross.Plugins\Json\Platforms\Uap\**\*.cs" />
+
+    <Compile Include="..\MvvmCross.Plugins\JsonLocalization\**\*.cs" Exclude="..\MvvmCross.Plugins\JsonLocalization\Platforms\**\*.cs;..\MvvmCross.Plugins\JsonLocalization\Resources\*.cs;..\MvvmCross.Plugins\JsonLocalization\obj\**\*.*;..\MvvmCross.Plugins\JsonLocalization\bin\**\*.*" />
+    <Compile Include="..\MvvmCross.Plugins\JsonLocalization\Platforms\Windows-common\**\*.cs" />
+    <Compile Include="..\MvvmCross.Plugins\JsonLocalization\Platforms\Uap\**\*.cs" />
+
+    <Compile Include="..\MvvmCross.Plugins\Location\**\*.cs" Exclude="..\MvvmCross.Plugins\Location\Platforms\**\*.cs;..\MvvmCross.Plugins\Location\Resources\*.cs;..\MvvmCross.Plugins\Location\obj\**\*.*;..\MvvmCross.Plugins\Location\bin\**\*.*" />
+    <Compile Include="..\MvvmCross.Plugins\Location\Platforms\Windows-common\**\*.cs" />
+    <Compile Include="..\MvvmCross.Plugins\Location\Platforms\Uap\**\*.cs" />
+
+    <Compile Include="..\MvvmCross.Plugins\Messenger\**\*.cs" Exclude="..\MvvmCross.Plugins\Messenger\Platforms\**\*.cs;..\MvvmCross.Plugins\Messenger\Resources\*.cs;..\MvvmCross.Plugins\Messenger\obj\**\*.*;..\MvvmCross.Plugins\Messenger\bin\**\*.*" />
+    <Compile Include="..\MvvmCross.Plugins\Messenger\Platforms\Windows-common\**\*.cs" />
+    <Compile Include="..\MvvmCross.Plugins\Messenger\Platforms\Uap\**\*.cs" />
+
+
+    <Compile Include="..\MvvmCross.Plugins\Network\**\*.cs" Exclude="..\MvvmCross.Plugins\Network\Platforms\**\*.cs;..\MvvmCross.Plugins\Network\Resources\*.cs;..\MvvmCross.Plugins\Network\obj\**\*.*;..\MvvmCross.Plugins\Network\bin\**\*.*" />
+    <Compile Include="..\MvvmCross.Plugins\Network\Platforms\Windows-common\**\*.cs" />
+    <Compile Include="..\MvvmCross.Plugins\Network\Platforms\Uap\**\*.cs" />
+
+
+    <Compile Include="..\MvvmCross.Plugins\ResourceLoader\**\*.cs" Exclude="..\MvvmCross.Plugins\ResourceLoader\Platforms\**\*.cs;..\MvvmCross.Plugins\ResourceLoader\Resources\*.cs;..\MvvmCross.Plugins\ResourceLoader\obj\**\*.*;..\MvvmCross.Plugins\ResourceLoader\bin\**\*.*" />
+    <Compile Include="..\MvvmCross.Plugins\ResourceLoader\Platforms\Windows-common\**\*.cs" />
+    <Compile Include="..\MvvmCross.Plugins\ResourceLoader\Platforms\Uap\**\*.cs" />
+
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='xamarinmac20' or '$(TargetFramework)'=='monoandroid10.0' ">
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="AsyncFixer" Version="1.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>
+

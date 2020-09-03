@@ -107,7 +107,7 @@ namespace MvvmCross.Platforms.Uap.Presenters
 
             if (_rootFrame.Content is MvxWindowsPage currentPage)
             {
-                var splitView = currentPage.Content.FindControl<SplitView>();
+                var splitView = (currentPage.Content as UIElement).FindControl<SplitView>();
                 if (splitView == null)
                 {
                     return Task.FromResult(true);

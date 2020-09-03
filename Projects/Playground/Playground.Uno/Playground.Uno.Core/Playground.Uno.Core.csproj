@@ -1,0 +1,36 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Text.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\Playground.Core\**\*.cs" Exclude="..\..\Playground.Core\obj\**\*.*;..\..\Playground.Core\bin\**\*.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\Playground.Core\Resources\Text.json">
+      <Generator></Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Uno.SourceGenerationTasks" Version="3.0.0-dev.10" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <!--<ProjectReference Include="..\..\..\MvvmCross.Plugins\JsonLocalization\MvvmCross.Plugin.JsonLocalization.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Json\MvvmCross.Plugin.Json.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Messenger\MvvmCross.Plugin.Messenger.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\Network\MvvmCross.Plugin.Network.csproj" />
+    <ProjectReference Include="..\..\..\MvvmCross.Plugins\ResourceLoader\MvvmCross.Plugin.ResourceLoader.csproj" />-->
+    <ProjectReference Include="..\..\..\..\MvvmCross.Uno.Plugins\MvvmCross.Uno.Plugins.csproj" />
+    <ProjectReference Include="..\..\..\..\MvvmCross.Uno\MvvmCross.Uno.csproj" />
+  </ItemGroup>
+
+</Project>

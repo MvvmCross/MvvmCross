@@ -33,7 +33,7 @@ namespace Playground.Core.ViewModels
 
         public IMvxLanguageBinder TextSource
         {
-            get { return new MvxLanguageBinder("Playground.Core", "Text"); }
+            get { return new MvxLanguageBinder("Playground.Uno.Core", "Text"); }
         }
 
         public RootViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService, IMvxViewModelLoader mvxViewModelLoader) : base(logProvider, navigationService)

@@ -48,7 +48,7 @@ namespace MvvmCross.Platforms.Uap.Views
                 RunAppStart(activationArgs);
             }
 
-            Window.Current.Activate();
+            Windows.UI.Xaml.Window.Current.Activate();
         }
 
         protected override void OnActivated(IActivatedEventArgs activationArgs)
@@ -59,7 +59,7 @@ namespace MvvmCross.Platforms.Uap.Views
             var rootFrame = InitializeFrame(activationArgs);
             RunAppStart(activationArgs);
 
-            Window.Current.Activate();
+            Windows.UI.Xaml.Window.Current.Activate();
         }
 
         protected virtual void RunAppStart(IActivatedEventArgs activationArgs)
@@ -87,14 +87,14 @@ namespace MvvmCross.Platforms.Uap.Views
 
         protected virtual Frame InitializeFrame(IActivatedEventArgs activationArgs)
         {
-            var rootFrame = Window.Current.Content as Frame;
+            var rootFrame = Windows.UI.Xaml.Window.Current.Content as Frame;
 
             if (rootFrame == null)
             {
                 rootFrame = CreateFrame();
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                Window.Current.Content = rootFrame;
+                Windows.UI.Xaml.Window.Current.Content = rootFrame;
             }
 
             if (activationArgs.PreviousExecutionState == ApplicationExecutionState.Terminated)

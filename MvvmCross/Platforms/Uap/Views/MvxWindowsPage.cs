@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace MvvmCross.Platforms.Uap.Views
 {
-    public class MvxWindowsPage
+    public partial class MvxWindowsPage
         : Page
         , IMvxWindowsView
         , IDisposable
@@ -27,7 +27,7 @@ namespace MvvmCross.Platforms.Uap.Views
             Unloaded += MvxWindowsPage_Unloaded;
         }
 
-        private void MvxWindowsPage_Loading(FrameworkElement sender, object args)
+        private void MvxWindowsPage_Loading(object sender, object args)
         {
             ViewModel?.ViewAppearing();
         }
@@ -208,7 +208,7 @@ namespace MvvmCross.Platforms.Uap.Views
         }
     }
 
-    public class MvxWindowsPage<TViewModel>
+    public partial class MvxWindowsPage<TViewModel>
         : MvxWindowsPage
         , IMvxWindowsView<TViewModel> where TViewModel : class, IMvxViewModel
     {

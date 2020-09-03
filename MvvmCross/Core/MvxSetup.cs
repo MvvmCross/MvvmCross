@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Base;
@@ -289,11 +290,12 @@ namespace MvvmCross.Core
                 case MvxLogProviderType.EntLib:
                     logProviderCreator = () => new EntLibLogProvider();
                     break;
+#if !UNO
 
                 case MvxLogProviderType.Log4Net:
                     logProviderCreator = () => new Log4NetLogProvider();
                     break;
-
+#endif
                 case MvxLogProviderType.Loupe:
                     logProviderCreator = () => new LoupeLogProvider();
                     break;
@@ -351,15 +353,20 @@ namespace MvvmCross.Core
 
         public virtual IEnumerable<Assembly> GetPluginAssemblies()
         {
+            Debug.WriteLine("GetPluginAssemblies - start");
             var mvvmCrossAssemblyName = typeof(MvxPluginAttribute).Assembly.GetName().Name;
-
+            Debug.WriteLine($"GetPluginAssemblies: Assembly Name {mvvmCrossAssemblyName}");
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            Debug.WriteLine($"GetPluginAssemblies: Assemblies {string.Join(",", assemblies.Select(x => x.FullName))}");
 
             var pluginAssemblies =
                 assemblies
-                    .AsParallel()
-                    .Where(asmb => AssemblyReferencesMvvmCross(asmb, mvvmCrossAssemblyName));
 
+                    //.AsParallel()
+                    .Where(asmb => AssemblyReferencesMvvmCross(asmb, mvvmCrossAssemblyName));
+            Debug.WriteLine($"GetPluginAssemblies: Plugin Assemblies {string.Join(",", pluginAssemblies.Select(x => x.FullName))}");
+
+            Debug.WriteLine("GetPluginAssemblies - end");
             return pluginAssemblies;
         }
 
@@ -367,6 +374,7 @@ namespace MvvmCross.Core
         {
             try
             {
+                Debug.WriteLine("AssemblyReferencesMvvmCross");
                 return assembly.GetReferencedAssemblies().Any(a => a.Name == mvvmCrossAssemblyName);
             }
             catch (Exception)
@@ -397,7 +405,9 @@ namespace MvvmCross.Core
                 }
             }
 
-            bool TypeContainsPluginAttribute(Type type) => (type.GetCustomAttributes(pluginAttribute, false)?.Length ?? 0) > 0;
+            bool TypeContainsPluginAttribute(Type type)
+                => (type.GetCustomAttributes(pluginAttribute, false)?.Length ?? 0) > 0;
+            Debug.WriteLine("LoadPlugins - end");
         }
 
         protected virtual IMvxApplication CreateMvxApplication()
