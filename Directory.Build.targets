@@ -49,7 +49,7 @@
     <PackageReference Update="Xamarin.AndroidX.RecyclerView" Version="1.1.0.2" />
     <PackageReference Update="Xamarin.AndroidX.Leanback" Version="1.0.0.2" />
     <PackageReference Update="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.0.0.2" />
-    <PackageReference Update="Xamarin.AndroidX.CardView" Version="1.0.0.2" />
+    <PackageReference Update="Xamarin.AndroidX.CardView" Version="1.0.0.3" />
     <PackageReference Update="Xamarin.AndroidX.AppCompat" Version="1.1.0.2" />
     <PackageReference Update="Xamarin.AndroidX.Fragment" Version="1.2.4.2" />
     <PackageReference Update="Xamarin.AndroidX.Preference" Version="1.1.1.2" />
