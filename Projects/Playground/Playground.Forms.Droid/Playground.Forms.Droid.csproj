@@ -137,7 +137,7 @@
     <PackageReference Include="Serilog.Sinks.Xamarin">
       <Version>0.2.0.64</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.1.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.1.0.3" />
     <PackageReference Include="Xamarin.AndroidX.AppCompat.Resources" Version="1.1.0.1" />
     <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0.1" />
   </ItemGroup>
