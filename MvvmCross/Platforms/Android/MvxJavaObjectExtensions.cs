@@ -35,7 +35,5 @@ namespace MvvmCross.Platforms.Android
 
             return false;
         }
-
-        public static bool IsActivityAlive(this Activity activity) => !IsActivityDead(activity);
     }
 }
