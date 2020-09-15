@@ -413,52 +413,66 @@ namespace MvvmCross.Platforms.Android.Presenters
         {
             var fragmentName = attribute.ViewType.FragmentJavaName();
 
-            IMvxFragmentView fragment = null;
+            IMvxFragmentView fragmentView = null;
             if (attribute.IsCacheableFragment)
             {
-                fragment = (IMvxFragmentView)fragmentManager.FindFragmentByTag(fragmentName);
+                fragmentView = (IMvxFragmentView)fragmentManager.FindFragmentByTag(fragmentName);
             }
-            fragment = fragment ?? CreateFragment(fragmentManager, attribute, attribute.ViewType);
+            fragmentView = fragmentView ?? CreateFragment(fragmentManager, attribute, attribute.ViewType);
 
-            var fragmentView = fragment.ToFragment();
+            var fragment = fragmentView.ToFragment();
 
             // MvxNavigationService provides an already instantiated ViewModel here
             if (request is MvxViewModelInstanceRequest instanceRequest)
             {
-                fragment.ViewModel = instanceRequest.ViewModelInstance;
+                fragmentView.ViewModel = instanceRequest.ViewModelInstance;
             }
 
             // save MvxViewModelRequest in the Fragment's Arguments
+#pragma warning disable CA2000 // Dispose objects before losing scope
             var bundle = new Bundle();
+#pragma warning restore CA2000 // Dispose objects before losing scope
             var serializedRequest = NavigationSerializer.Serializer.SerializeObject(request);
             bundle.PutString(ViewModelRequestBundleKey, serializedRequest);
 
-            if (fragmentView != null)
+            if (fragment != null)
             {
-                if (fragmentView.Arguments == null)
+                if (fragment.Arguments == null)
                 {
-                    fragmentView.Arguments = bundle;
+                    fragment.Arguments = bundle;
                 }
                 else
                 {
-                    fragmentView.Arguments.Clear();
-                    fragmentView.Arguments.PutAll(bundle);
+                    fragment.Arguments.Clear();
+                    fragment.Arguments.PutAll(bundle);
                 }
             }
 
             var ft = fragmentManager.BeginTransaction();
 
-            OnBeforeFragmentChanging(ft, fragmentView, attribute, request);
+            OnBeforeFragmentChanging(ft, fragment, attribute, request);
 
             if (attribute.AddToBackStack)
                 ft.AddToBackStack(fragmentName);
 
-            OnFragmentChanging(ft, fragmentView, attribute, request);
+            OnFragmentChanging(ft, fragment, attribute, request);
 
-            ft.Replace(attribute.FragmentContentId, fragmentView, fragmentName);
+            if (attribute.AddFragment && fragment.IsAdded)
+            {
+                ft.Show(fragment);
+            }
+            else if (attribute.AddFragment)
+            {
+                ft.Add(attribute.FragmentContentId, fragment, fragmentName);
+            }
+            else
+            {
+                ft.Replace(attribute.FragmentContentId, fragment, fragmentName);
+            }
+
             ft.CommitAllowingStateLoss();
 
-            OnFragmentChanged(ft, fragmentView, attribute, request);
+            OnFragmentChanged(ft, fragment, attribute, request);
         }
 
         protected virtual void OnBeforeFragmentChanging(FragmentTransaction ft, Fragment fragment, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
