@@ -53,7 +53,7 @@
     <PackageReference Update="Xamarin.AndroidX.AppCompat" Version="1.1.0.2" />
     <PackageReference Update="Xamarin.AndroidX.Fragment" Version="1.2.4.2" />
     <PackageReference Update="Xamarin.AndroidX.Preference" Version="1.1.1.2" />
-    <PackageReference Update="Xamarin.AndroidX.ViewPager" Version="1.0.0.2" />
+    <PackageReference Update="Xamarin.AndroidX.ViewPager" Version="1.0.0.4" />
     <PackageReference Update="Xamarin.AndroidX.ExifInterface" Version="1.1.0.2" />
     <PackageReference Update="Xamarin.Google.Android.Material" Version="1.0.0.1" />
     <PackageReference Update="Xamarin.GooglePlayServices.Location" Version="71.1600.4" />
