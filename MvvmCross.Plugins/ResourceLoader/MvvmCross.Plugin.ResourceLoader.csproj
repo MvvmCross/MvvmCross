@@ -90,6 +90,5 @@ This package contains the 'ResourceLoader' plugin for MvvmCross</Description>
 
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
-    <ProjectReference Include="..\File\MvvmCross.Plugin.File.csproj" />
   </ItemGroup>
 </Project>
