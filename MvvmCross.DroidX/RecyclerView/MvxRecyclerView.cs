@@ -87,7 +87,9 @@ namespace MvvmCross.DroidX.RecyclerView
         }
 
         [MvxSetToNullAfterBinding]
+#pragma warning disable CA1721 // Property names should not match get methods
         public new IMvxRecyclerAdapter? Adapter
+#pragma warning restore CA1721 // Property names should not match get methods
         {
             get => GetAdapter() as IMvxRecyclerAdapter;
             set
