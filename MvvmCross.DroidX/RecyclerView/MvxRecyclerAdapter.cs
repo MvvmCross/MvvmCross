@@ -52,6 +52,7 @@ namespace MvvmCross.DroidX.RecyclerView
             BindingContext = bindingContext ?? MvxAndroidBindingContextHelpers.Current();
         }
 
+        [Android.Runtime.Preserve(Conditional = true)]
         protected MvxRecyclerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {
