@@ -3,6 +3,9 @@ layout: documentation
 title: File
 category: Plugins
 ---
+
+> Note: This plugin was removed in MvvmCross 7.1.0
+
 The `File` plugin provides cross-platform access to a File Store API.
 
 ```c#
