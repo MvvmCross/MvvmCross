@@ -408,16 +408,22 @@ namespace MvvmCross.Platforms.Ios.Presenters
             return Task.FromResult(true);
         }
 
-        protected virtual Task<bool> ShowPopoverViewController(
+        protected virtual async Task<bool> ShowPopoverViewController(
             UIViewController viewController,
             MvxPopoverPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
+            if (viewController == null)
+                throw new MvxException($"Tried to show a View as a popover, but the View was null!");
+
+            if (attribute == null)
+                throw new MvxException($"Trying to show View type: {viewController.GetType().Name} as popover, but presentation attribute is missing!");
+
             if (PopoverViewController != null)
                 throw new MvxException($"Trying to show View type: {viewController.GetType().Name} as popover, but there is already a popover present!");
 
             // Content size should be set to a target view controller, not the navigation one
-            if (attribute.PreferredContentSize != default(CGSize))
+            if (attribute.PreferredContentSize != default)
             {
                 viewController.PreferredContentSize = attribute.PreferredContentSize;
             }
@@ -430,6 +436,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             // Check if there is a modal already presented first. Otherwise use the topmost view controller.
             var viewHost = ModalViewControllers.LastOrDefault() ?? _window.RootViewController;
+            if (viewHost == null)
+                throw new MvxException($"Trying to show View type: {viewController.GetType().Name} as popover, but could not find a view host!");
 
             viewController.ModalPresentationStyle = UIModalPresentationStyle.Popover;
 
@@ -440,13 +448,9 @@ namespace MvvmCross.Platforms.Ios.Presenters
             sourceProvider.SetSource(presentationController);
             presentationController.Delegate = new MvxPopoverDelegate(this);
 
-            viewHost.PresentViewController(
-                viewController,
-                attribute.Animated,
-                null);
-
             PopoverViewController = viewController;
-            return Task.FromResult(true);
+            await viewHost.PresentViewControllerAsync(viewController, attribute.Animated);
+            return true;
         }
 
         protected virtual Task<bool> ShowMasterSplitViewController(
