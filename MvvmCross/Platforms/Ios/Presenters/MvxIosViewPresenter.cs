@@ -26,6 +26,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
         public UINavigationController MasterNavigationController { get; protected set; }
 
+        public UIViewController PopoverViewController { get; protected set; }
+
         public List<UIViewController> ModalViewControllers { get; protected set; } = new List<UIViewController>();
 
         public IMvxTabBarViewController TabBarViewController { get; protected set; }
@@ -127,6 +129,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
                     },
                     CloseModalViewController);
 
+            RegisterPopoverAttributeType();
+
             AttributeTypesToActionsDictionary.Register<MvxSplitViewPresentationAttribute>(
                 (viewType, attribute, request) =>
                     {
@@ -155,6 +159,17 @@ namespace MvvmCross.Platforms.Ios.Presenters
                                 return CloseDetailSplitViewController(viewModel, splitAttribute);
                         }
                     });
+        }
+
+        protected virtual void RegisterPopoverAttributeType()
+        {
+            AttributeTypesToActionsDictionary.Register<MvxPopoverPresentationAttribute>(
+                (viewType, attribute, request) =>
+                {
+                    var viewController = (UIViewController)this.CreateViewControllerFor(request);
+                    return ShowPopoverViewController(viewController, attribute, request);
+                },
+                ClosePopoverViewController);
         }
 
         protected virtual async Task<bool> ShowRootViewController(
@@ -271,6 +286,20 @@ namespace MvvmCross.Platforms.Ios.Presenters
             if (viewController is IMvxSplitViewController)
                 throw new MvxException("A SplitViewController cannot be presented as a child. Consider using Root instead");
 
+            if (PopoverViewController != null)
+            {
+                if (PopoverViewController is UINavigationController popoverNavController)
+                {
+                    PushViewControllerIntoStack(popoverNavController, viewController, attribute);
+
+                    return Task.FromResult(true);
+                }
+                else
+                {
+                    throw new MvxException($"Trying to show View type: {viewController.GetType().Name} as child, but there is currently a plain popover view presented!");
+                }
+            }
+
             if (ModalViewControllers.Any())
             {
                 if (ModalViewControllers.LastOrDefault() is UINavigationController modalNavController)
@@ -379,6 +408,51 @@ namespace MvvmCross.Platforms.Ios.Presenters
             return Task.FromResult(true);
         }
 
+        protected virtual async Task<bool> ShowPopoverViewController(
+            UIViewController viewController,
+            MvxPopoverPresentationAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            if (viewController == null)
+                throw new MvxException($"Tried to show a View as a popover, but the View was null!");
+
+            if (attribute == null)
+                throw new MvxException($"Trying to show View type: {viewController.GetType().Name} as popover, but presentation attribute is missing!");
+
+            if (PopoverViewController != null)
+                throw new MvxException($"Trying to show View type: {viewController.GetType().Name} as popover, but there is already a popover present!");
+
+            // Content size should be set to a target view controller, not the navigation one
+            if (attribute.PreferredContentSize != default)
+            {
+                viewController.PreferredContentSize = attribute.PreferredContentSize;
+            }
+
+            // setup popover based on attribute
+            if (attribute.WrapInNavigationController)
+            {
+                viewController = CreateNavigationController(viewController);
+            }
+
+            // Check if there is a modal already presented first. Otherwise use the topmost view controller.
+            var viewHost = ModalViewControllers.LastOrDefault() ?? _window.RootViewController;
+            if (viewHost == null)
+                throw new MvxException($"Trying to show View type: {viewController.GetType().Name} as popover, but could not find a view host!");
+
+            viewController.ModalPresentationStyle = UIModalPresentationStyle.Popover;
+
+            var presentationController = viewController.PopoverPresentationController;
+            presentationController.PermittedArrowDirections = attribute.PermittedArrowDirections;
+
+            var sourceProvider = Mvx.IoCProvider.Resolve<IMvxPopoverPresentationSourceProvider>();
+            sourceProvider.SetSource(presentationController);
+            presentationController.Delegate = new MvxPopoverDelegate(this);
+
+            PopoverViewController = viewController;
+            await viewHost.PresentViewControllerAsync(viewController, attribute.Animated);
+            return true;
+        }
+
         protected virtual Task<bool> ShowMasterSplitViewController(
             UIViewController viewController,
             MvxSplitViewPresentationAttribute attribute,
@@ -412,6 +486,13 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
         protected virtual Task<bool> CloseChildViewController(IMvxViewModel viewModel, MvxChildPresentationAttribute attribute)
         {
+            //if a popover is presented
+            if (PopoverViewController != null && PopoverViewController is UINavigationController popoverNav)
+            {
+                if (TryCloseViewControllerInsideStack(popoverNav, viewModel, attribute))
+                    return Task.FromResult(true);
+            }
+            
             // if there are modals presented
             if (ModalViewControllers.Any())
             {
@@ -498,6 +579,35 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             return Task.FromResult(false);
         }
+        
+        protected virtual Task<bool> ClosePopoverViewController(IMvxViewModel toClose, MvxPopoverPresentationAttribute attribute)
+        {
+            if (PopoverViewController == null)
+                return Task.FromResult(false);
+
+            // check for plain popover
+            if (PopoverViewController is IMvxIosView && PopoverViewController.GetIMvxIosView().ViewModel == toClose)
+            {
+                return ClosePopoverViewController(toClose, attribute);
+            }
+
+            // check for popover navigation stack
+            UIViewController controllerToClose = null;
+            if (PopoverViewController is UINavigationController vc)
+            {
+                var root = ((UINavigationController)vc).ViewControllers.FirstOrDefault();
+                if (root != null && root.GetIMvxIosView().ViewModel == toClose)
+                {
+                    controllerToClose = vc;
+                }
+            }
+            if (controllerToClose != null)
+            {
+                return ClosePopoverViewController(controllerToClose, attribute);
+            }
+
+            return Task.FromResult(false);
+        }
 
         protected virtual bool TryCloseViewControllerInsideStack(UINavigationController navController, IMvxViewModel toClose, MvxChildPresentationAttribute attribute)
         {
@@ -573,6 +683,22 @@ namespace MvvmCross.Platforms.Ios.Presenters
             }
             return true;
         }
+        
+        public virtual async Task<bool> ClosePopoverViewController(UIViewController viewController, MvxPopoverPresentationAttribute attribute)
+        {
+            if (viewController == null)
+                return true;
+
+            if (viewController is UINavigationController popoverNavController)
+            {
+                foreach (var item in popoverNavController.ViewControllers)
+                    item.DidMoveToParentViewController(null);
+            }
+
+            await viewController.DismissViewControllerAsync(attribute.Animated);
+            PopoverViewController = null;
+            return true;
+        }
 
         public virtual Task<bool> CloseTabBarViewController()
         {
@@ -629,6 +755,12 @@ namespace MvvmCross.Platforms.Ios.Presenters
                 _window, attribute.AnimationDuration, attribute.AnimationOptions,
                 () => _window.RootViewController = controller, null
             );
+        }
+        
+        // Called if popover was dismissed by tapping outside view.
+        public virtual void ClosedPopoverViewController()
+        {
+            PopoverViewController = null;
         }
     }
 }
