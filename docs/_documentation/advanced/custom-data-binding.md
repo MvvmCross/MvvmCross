@@ -127,7 +127,7 @@ This class is a subclass of [`MvxConvertingTargetBinding`](#mvxconvertingtargetb
 
 #### MvxWithEventPropertyInfoTargetBinding
 
-This class is a subclass of [`MvxPropertyInfoTargetBinding`](#mvxpropertyinfotargetbinding), which is a shortcut to adding `TwoWay` bindings based on a specific event. Similarly to `MvxPropertyInfoTargetBinding` it uses the `PropertyInfo` to implement the `SetValue()` method. Additionally it implements the `SubscribeToEvents()` method, based on the assumption that there is an event which is called the same as the name of the property, postfixed with `Changed`. So if your property is called `MyProperty` it assumes that the corresponding event is called `MyPropertChanged`.
+This class is a subclass of [`MvxPropertyInfoTargetBinding`](#mvxpropertyinfotargetbinding), which is a shortcut to adding `TwoWay` bindings based on a specific event. Similarly to `MvxPropertyInfoTargetBinding` it uses the `PropertyInfo` to implement the `SetValue()` method. Additionally it implements the `SubscribeToEvents()` method, based on the assumption that there is an event which is called the same as the name of the property, postfixed with `Changed`. So if your property is called `MyProperty` it assumes that the corresponding event is called `MyPropertyChanged`.
 
 #### MvxEventNameTargetBinding
 
