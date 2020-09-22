@@ -43,7 +43,7 @@ namespace MvvmCross.ViewModels
             IMvxBundle? parameterValues,
             IMvxBundle? savedState,
             IMvxNavigateEventArgs? navigationArgs = null)
-            where TParameter : class, new();
+            where TParameter : class;
 
         /// <summary>
         /// Reload ViewModel, runs start lifecycle in ViewModel.
@@ -75,7 +75,7 @@ namespace MvvmCross.ViewModels
             IMvxBundle? parameterValues,
             IMvxBundle? savedState,
             IMvxNavigateEventArgs? navigationArgs = null)
-            where TParameter : class, new();
+            where TParameter : class;
     }
 #nullable restore
 }

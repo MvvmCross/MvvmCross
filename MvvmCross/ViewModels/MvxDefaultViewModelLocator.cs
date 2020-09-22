@@ -42,7 +42,7 @@ namespace MvvmCross.ViewModels
             TParameter? param,
             IMvxBundle? parameterValues,
             IMvxBundle? savedState,
-            IMvxNavigateEventArgs? navigationArgs) where TParameter : class, new()
+            IMvxNavigateEventArgs? navigationArgs) where TParameter : class
         {
             if (viewModelType == null)
                 throw new ArgumentNullException(nameof(viewModelType));
@@ -78,7 +78,7 @@ namespace MvvmCross.ViewModels
             TParameter? param,
             IMvxBundle? parameterValues,
             IMvxBundle? savedState,
-            IMvxNavigateEventArgs? navigationArgs) where TParameter : class, new()
+            IMvxNavigateEventArgs? navigationArgs) where TParameter : class
         {
             RunViewModelLifecycle(viewModel, param, parameterValues, savedState, navigationArgs);
 
@@ -136,7 +136,7 @@ namespace MvvmCross.ViewModels
             TParameter? param,
             IMvxBundle? parameterValues,
             IMvxBundle? savedState,
-            IMvxNavigateEventArgs? navigationArgs) where TParameter : class, new()
+            IMvxNavigateEventArgs? navigationArgs) where TParameter : class
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
