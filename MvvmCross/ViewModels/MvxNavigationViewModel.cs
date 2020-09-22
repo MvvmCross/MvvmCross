@@ -26,7 +26,7 @@ namespace MvvmCross.ViewModels
         protected virtual IMvxLog Log => _log ?? (_log = LogProvider.GetLogFor(GetType()));
     }
 
-    public abstract class MvxNavigationViewModel<TParameter> : MvxNavigationViewModel, IMvxViewModel<TParameter>
+    public abstract class MvxNavigationViewModel<TParameter> : MvxNavigationViewModel, IMvxViewModel<TParameter> where TParameter : class, new()
     {
         protected MvxNavigationViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
@@ -36,7 +36,7 @@ namespace MvvmCross.ViewModels
     }
 
     //TODO: Not possible to name MvxViewModel, name is MvxViewModelResult for now
-    public abstract class MvxNavigationViewModelResult<TResult> : MvxNavigationViewModel, IMvxViewModelResult<TResult>
+    public abstract class MvxNavigationViewModelResult<TResult> : MvxNavigationViewModel, IMvxViewModelResult<TResult> where TResult : class, new()
     {
         protected MvxNavigationViewModelResult(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
@@ -53,7 +53,7 @@ namespace MvvmCross.ViewModels
         }
     }
 
-    public abstract class MvxNavigationViewModel<TParameter, TResult> : MvxNavigationViewModelResult<TResult>, IMvxViewModel<TParameter, TResult>
+    public abstract class MvxNavigationViewModel<TParameter, TResult> : MvxNavigationViewModelResult<TResult>, IMvxViewModel<TParameter, TResult> where TParameter : class, new() where TResult : class, new()
     {
         protected MvxNavigationViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
