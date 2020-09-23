@@ -105,6 +105,8 @@ Become a sponsor and get your logo on our README on Github with a link to your s
 <a href="https://opencollective.com/mvvmcross/sponsor/28/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/28/avatar.svg"></a>
 <a href="https://opencollective.com/mvvmcross/sponsor/29/website" target="_blank"><img src="https://opencollective.com/mvvmcross/sponsor/29/avatar.svg"></a>
 
+## Tested! Worked with Github Plugin For VS
+
 ## Installation
 
 Grab the latest [MvvmCross NuGet](https://www.nuget.org/packages/MvvmCross/) package and install in your solution.
