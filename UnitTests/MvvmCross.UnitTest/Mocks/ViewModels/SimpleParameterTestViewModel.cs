@@ -6,7 +6,12 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.UnitTest.Mocks.ViewModels
 {
-    public class SimpleParameterTestViewModel : MvxViewModel<string>
+    public class SimpleParameter
+    {
+        public string Hello { get; set; }
+    }
+
+    public class SimpleParameterTestViewModel : MvxViewModel<SimpleParameter>
     {
         public string Parameter { get; set; }
 
@@ -14,9 +19,9 @@ namespace MvvmCross.UnitTest.Mocks.ViewModels
         {
         }
 
-        public override void Prepare(string parameter)
+        public override void Prepare(SimpleParameter parameter)
         {
-            Parameter = parameter;
+            Parameter = parameter.Hello;
         }
     }
 }
