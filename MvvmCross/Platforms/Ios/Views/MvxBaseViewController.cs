@@ -159,6 +159,9 @@ namespace MvvmCross.Platforms.Ios.Views
             UIView.CommitAnimations();
         }
 
+        private CGRect _lastKeyboardFrame = CGRect.Empty;
+        [Weak] private UIView _lastActiveView;
+
         /// <summary>
         /// Override this method to apply custom logic when the keyboard is shown/hidden
         /// </summary>
@@ -173,21 +176,36 @@ namespace MvvmCross.Platforms.Ios.Views
             var activeView = ViewToCenterOnKeyboardShown ?? KeyboardGetActiveView();
             if (activeView == null)
             {
+                _lastKeyboardFrame = CGRect.Empty;
+                _lastActiveView = null;
                 return;
             }
 
             var scrollView = ScrollToCenterOnKeyboardShown ?? activeView.FindTopSuperviewOfType(View, typeof(UIScrollView)) as UIScrollView;
             if (scrollView == null)
             {
+                _lastKeyboardFrame = CGRect.Empty;
+                _lastActiveView = null;
                 return;
             }
 
             if (!visible)
             {
+                _lastKeyboardFrame = CGRect.Empty;
+                _lastActiveView = null;
                 scrollView.RestoreScrollPosition();
             }
             else
             {
+                //avoid recalculation if the activeView is the same.
+                if (_lastKeyboardFrame == keyboardFrame &&
+                    _lastActiveView?.Equals(activeView) == true)
+                {
+                    return;
+                }
+
+                _lastKeyboardFrame = keyboardFrame;
+                _lastActiveView = activeView;
                 if (_iosVersion11Checker.IsVersionOrHigher)
                     keyboardFrame.Height -= scrollView.SafeAreaInsets.Bottom;
                 scrollView.CenterView(activeView, keyboardFrame);
