@@ -322,8 +322,11 @@ namespace MvvmCross.Platforms.Android.Presenters
                 }
 
                 var activityOptions = ActivityOptions.MakeSceneTransitionAnimation(CurrentActivity, transitionElementPairs.ToArray());
-                intent.PutExtra(SharedElementsBundleKey, string.Join("|", elements));
-                bundle = activityOptions.ToBundle();
+                if (activityOptions != null && intent != null)
+                {
+                    intent.PutExtra(SharedElementsBundleKey, string.Join("|", elements));
+                    bundle = activityOptions.ToBundle();
+                }
             }
 
             return bundle!;
