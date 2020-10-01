@@ -257,12 +257,20 @@ Task("UpdateChangelog")
     }
 });
 
-Task("Default")
+Task("Sonar")
     .IsDependentOn("Clean")
     .IsDependentOn("SonarStart")
     .IsDependentOn("Build")
     .IsDependentOn("UnitTest")
     .IsDependentOn("SonarEnd")
+    .Does(() => 
+{
+});
+
+Task("Default")
+    .IsDependentOn("Clean")
+    .IsDependentOn("Build")
+    .IsDependentOn("UnitTest")
     .IsDependentOn("CopyPackages")
     .Does(() => 
 {
@@ -279,9 +287,9 @@ MSBuildSettings GetDefaultBuildSettings()
         Verbosity = verbosity
     };
 
-    // workaround for derped Java Home ENV vars
-    if (IsRunningOnWindows() && isRunningOnPipelines)
+    if (isRunningOnPipelines)
     {
+        // remove this when Xamarin.Android supports JDK11
         var javaSdkDir = EnvironmentVariable("JAVA_HOME_8_X64");
         Information("Setting JavaSdkDirectory to: " + javaSdkDir);
         settings = settings.WithProperty("JavaSdkDirectory", javaSdkDir);

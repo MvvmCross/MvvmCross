@@ -24,7 +24,7 @@ namespace MvvmCross.UnitTest
         {
             var navigationServiceMock = new Mock<IMvxNavigationService>();
             Ioc.RegisterSingleton(navigationServiceMock.Object);
-            Ioc.RegisterSingleton(new MvxDefaultViewModelLocator(navigationServiceMock.Object));
+            Ioc.RegisterSingleton(new MvxDefaultViewModelLocator());
         }
     }
 }
