@@ -4,52 +4,24 @@
 
 using System;
 using MvvmCross.Exceptions;
-using MvvmCross.Logging;
-using MvvmCross.Navigation;
 using MvvmCross.Navigation.EventArguments;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
+    /// <inheritdoc cref="IMvxViewModelLocator"/>
     public class MvxDefaultViewModelLocator
         : IMvxViewModelLocator
     {
-        private IMvxNavigationService _navigationService;
-        protected IMvxNavigationService NavigationService => _navigationService ?? (_navigationService = Mvx.IoCProvider.Resolve<IMvxNavigationService>());
-
-        private IMvxLogProvider _logProvider;
-        protected IMvxLogProvider LogProvider => _logProvider ?? (_logProvider = Mvx.IoCProvider.Resolve<IMvxLogProvider>());
-
-        public MvxDefaultViewModelLocator() : this(null) { }
-
-        public MvxDefaultViewModelLocator(IMvxNavigationService navigationService)
+        public virtual IMvxViewModel Load(
+            Type viewModelType,
+            IMvxBundle? parameterValues,
+            IMvxBundle? savedState,
+            IMvxNavigateEventArgs? navigationArgs)
         {
-            if (navigationService != null)
-                _navigationService = navigationService;
-        }
+            if (viewModelType == null)
+                throw new ArgumentNullException(nameof(viewModelType));
 
-        public virtual IMvxViewModel Reload(IMvxViewModel viewModel,
-                                            IMvxBundle parameterValues,
-                                            IMvxBundle savedState, IMvxNavigateEventArgs navigationArgs)
-        {
-            RunViewModelLifecycle(viewModel, parameterValues, savedState, navigationArgs);
-
-            return viewModel;
-        }
-
-        public virtual IMvxViewModel<TParameter> Reload<TParameter>(IMvxViewModel<TParameter> viewModel,
-                                                                    TParameter param,
-                                                                    IMvxBundle parameterValues,
-                                                                    IMvxBundle savedState, IMvxNavigateEventArgs navigationArgs)
-        {
-            RunViewModelLifecycle(viewModel, param, parameterValues, savedState, navigationArgs);
-
-            return viewModel;
-        }
-
-        public virtual IMvxViewModel Load(Type viewModelType,
-                                          IMvxBundle parameterValues,
-                                          IMvxBundle savedState, IMvxNavigateEventArgs navigationArgs)
-        {
             IMvxViewModel viewModel;
             try
             {
@@ -65,11 +37,16 @@ namespace MvvmCross.ViewModels
             return viewModel;
         }
 
-        public virtual IMvxViewModel<TParameter> Load<TParameter>(Type viewModelType,
-                                                                  TParameter param,
-                                                                  IMvxBundle parameterValues,
-                                                                  IMvxBundle savedState, IMvxNavigateEventArgs navigationArgs)
+        public virtual IMvxViewModel<TParameter> Load<TParameter>(
+            Type viewModelType,
+            TParameter? param,
+            IMvxBundle? parameterValues,
+            IMvxBundle? savedState,
+            IMvxNavigateEventArgs? navigationArgs) where TParameter : class
         {
+            if (viewModelType == null)
+                throw new ArgumentNullException(nameof(viewModelType));
+
             IMvxViewModel<TParameter> viewModel;
             try
             {
@@ -85,18 +62,48 @@ namespace MvvmCross.ViewModels
             return viewModel;
         }
 
-        protected virtual void CallCustomInitMethods(IMvxViewModel viewModel, IMvxBundle parameterValues)
+        public virtual IMvxViewModel Reload(
+            IMvxViewModel viewModel,
+            IMvxBundle? parameterValues,
+            IMvxBundle? savedState,
+            IMvxNavigateEventArgs? navigationArgs)
+        {
+            RunViewModelLifecycle(viewModel, parameterValues, savedState, navigationArgs);
+
+            return viewModel;
+        }
+
+        public virtual IMvxViewModel<TParameter> Reload<TParameter>(
+            IMvxViewModel<TParameter> viewModel,
+            TParameter? param,
+            IMvxBundle? parameterValues,
+            IMvxBundle? savedState,
+            IMvxNavigateEventArgs? navigationArgs) where TParameter : class
+        {
+            RunViewModelLifecycle(viewModel, param, parameterValues, savedState, navigationArgs);
+
+            return viewModel;
+        }
+
+        protected virtual void CallCustomInitMethods(IMvxViewModel viewModel, IMvxBundle? parameterValues)
         {
             viewModel.CallBundleMethods("Init", parameterValues);
         }
 
-        protected virtual void CallReloadStateMethods(IMvxViewModel viewModel, IMvxBundle savedState)
+        protected virtual void CallReloadStateMethods(IMvxViewModel viewModel, IMvxBundle? savedState)
         {
             viewModel.CallBundleMethods("ReloadState", savedState);
         }
 
-        protected void RunViewModelLifecycle(IMvxViewModel viewModel, IMvxBundle parameterValues, IMvxBundle savedState, IMvxNavigateEventArgs navigationArgs)
+        protected void RunViewModelLifecycle(
+            IMvxViewModel viewModel,
+            IMvxBundle? parameterValues,
+            IMvxBundle? savedState,
+            IMvxNavigateEventArgs? navigationArgs)
         {
+            if (viewModel == null)
+                throw new ArgumentNullException(nameof(viewModel));
+
             try
             {
                 CallCustomInitMethods(viewModel, parameterValues);
@@ -124,8 +131,16 @@ namespace MvvmCross.ViewModels
             }
         }
 
-        protected void RunViewModelLifecycle<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, IMvxBundle parameterValues, IMvxBundle savedState, IMvxNavigateEventArgs navigationArgs)
+        protected void RunViewModelLifecycle<TParameter>(
+            IMvxViewModel<TParameter> viewModel,
+            TParameter? param,
+            IMvxBundle? parameterValues,
+            IMvxBundle? savedState,
+            IMvxNavigateEventArgs? navigationArgs) where TParameter : class
         {
+            if (viewModel == null)
+                throw new ArgumentNullException(nameof(viewModel));
+
             try
             {
                 CallCustomInitMethods(viewModel, parameterValues);
@@ -157,4 +172,5 @@ namespace MvvmCross.ViewModels
             }
         }
     }
+#nullable restore
 }

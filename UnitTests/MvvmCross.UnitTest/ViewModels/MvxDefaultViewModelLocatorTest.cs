@@ -48,8 +48,7 @@ namespace MvvmCross.UnitTest.ViewModels
             var bundle = new MvxBundle();
             bundle.Write(testObject);
 
-            var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
-            var toTest = new MvxDefaultViewModelLocator(navigationService);
+            var toTest = new MvxDefaultViewModelLocator();
             var args = new MvxNavigateEventArgs(NavigationMode.Show);
 
             IMvxViewModel viewModel = toTest.Load(typeof(Test1ViewModel), bundle, null, args);
@@ -108,8 +107,7 @@ namespace MvvmCross.UnitTest.ViewModels
             var reloadBundle = new MvxBundle();
             reloadBundle.Write(reloadBundleObject);
 
-            var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
-            var toTest = new MvxDefaultViewModelLocator(navigationService);
+            var toTest = new MvxDefaultViewModelLocator();
             var args = new MvxNavigateEventArgs(NavigationMode.Show);
             IMvxViewModel viewModel = toTest.Load(typeof(Test1ViewModel), initBundle, reloadBundle, args);
 
@@ -136,8 +134,7 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var bundle = new MvxBundle();
 
-            var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
-            var toTest = new MvxDefaultViewModelLocator(navigationService);
+            var toTest = new MvxDefaultViewModelLocator();
             var args = new MvxNavigateEventArgs(NavigationMode.Show);
             Assert.Throws<MvxException>(() =>
             {
@@ -154,8 +151,7 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var bundle = new MvxBundle();
 
-            var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
-            var toTest = new MvxDefaultViewModelLocator(navigationService);
+            var toTest = new MvxDefaultViewModelLocator();
             var args = new MvxNavigateEventArgs(NavigationMode.Show);
 
             Assert.Throws<MvxException>(() =>
@@ -174,8 +170,7 @@ namespace MvvmCross.UnitTest.ViewModels
 
             var bundle = new MvxBundle();
 
-            var navigationService = _fixture.Ioc.Resolve<IMvxNavigationService>();
-            var toTest = new MvxDefaultViewModelLocator(navigationService);
+            var toTest = new MvxDefaultViewModelLocator();
             var args = new MvxNavigateEventArgs(NavigationMode.Show);
             Assert.Throws<MvxException>(() =>
             {

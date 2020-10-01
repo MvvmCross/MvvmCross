@@ -363,7 +363,9 @@ The Color plugin contains a couple of simple value converters which assist with 
 These are:
 
 - `MvxNativeColorValueConverter` registered as "NativeColor" - this converts `System.Drawing.Color` properties on the ViewModel to a native color format.
--  `MvxRGBAValueConverter` registered as "RGBA" - this converts Hex ViewModel string properties like "RGB", "RRGGBB" and "RRGGBBAA" with optional leading "#" characters into native color formats.
+-  `MvxRGBValueConverter` registered as "RGB" - this converts Hex ViewModel string properties like "RGB", "RGBA", "RRGGBB" and "RRGGBBAA" with optional leading "#" characters into native color formats.
+-  `MvxRGBAValueConverter` registered as "RGBA" - this works exactly as `MvxRGBValueConverter`
+-  `MvxARGBValueConverter` registered as "ARGB" - this converts Hex ViewModel string properties like "RGB", "ARGB", "RRGGBB" and "AARRGGBB" with optional leading "#" characters into native color formats.
 -  `MvxRGBIntColorConverter` registered under the name "RGBIntColor" - this converters `int` ViewModel properties into native color formats.
 
 The Color plugin also provides a base class - `MvxColorValueConverter` which you can inherit from in order to define your own cross-platform Color converters.
