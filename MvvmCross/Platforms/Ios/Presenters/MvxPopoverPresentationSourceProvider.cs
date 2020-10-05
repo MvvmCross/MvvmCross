@@ -9,31 +9,27 @@ namespace MvvmCross.Platforms.Ios.Presenters
 {
     public class MvxPopoverPresentationSourceProvider : IMvxPopoverPresentationSourceProvider
     {
-        private UIView _sourceView;
-        private UIBarButtonItem _sourceBarButtonItem;
+        [Weak] private UIView _sourceView;
+        [Weak] private UIBarButtonItem _sourceBarButtonItem;
 
         public UIView SourceView
         {
-            get
+            get => _sourceView;
+            set
             {
-                var sourceView = _sourceView;
-                _sourceView = null;
                 _sourceBarButtonItem = null;
-                return sourceView;
+                _sourceView = value;
             }
-            set => _sourceView = value;
         }
 
         public UIBarButtonItem SourceBarButtonItem
         {
-            get
+            get => _sourceBarButtonItem;
+            set
             {
-                var sourceBarButtonItem = _sourceBarButtonItem;
-                _sourceBarButtonItem = null;
                 _sourceView = null;
-                return sourceBarButtonItem;
+                _sourceBarButtonItem = value;
             }
-            set => _sourceBarButtonItem = value;
         }
 
         public void SetSource(UIPopoverPresentationController popoverPresentationController)
@@ -48,10 +44,12 @@ namespace MvvmCross.Platforms.Ios.Presenters
             {
                 popoverPresentationController.SourceView = SourceView;
                 popoverPresentationController.SourceRect = SourceView.Bounds;
+                SourceView = null;
             }
             else
             {
                 popoverPresentationController.BarButtonItem = SourceBarButtonItem;
+                SourceBarButtonItem = null;
             }
         }
     }
