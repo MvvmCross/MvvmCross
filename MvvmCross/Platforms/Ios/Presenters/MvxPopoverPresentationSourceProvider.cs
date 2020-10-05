@@ -47,7 +47,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             if (SourceView != null)
             {
                 popoverPresentationController.SourceView = SourceView;
-                popoverPresentationController.SourceRect = SourceView.Frame;
+                popoverPresentationController.SourceRect = SourceView.Bounds;
             }
             else
             {
