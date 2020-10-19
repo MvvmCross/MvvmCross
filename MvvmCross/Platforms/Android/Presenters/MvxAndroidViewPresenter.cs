@@ -46,7 +46,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         private readonly Lazy<IMvxNavigationSerializer> _navigationSerializer =
             new Lazy<IMvxNavigationSerializer>(() => Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>());
-        
+
         private readonly Lazy<IMvxLog> _logger =
             new Lazy<IMvxLog>(() => Mvx.IoCProvider.Resolve<IMvxLog>());
 
