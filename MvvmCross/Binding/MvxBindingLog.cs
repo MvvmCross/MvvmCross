@@ -6,9 +6,10 @@ using MvvmCross.Logging;
 
 namespace MvvmCross.Binding
 {
+#nullable enable
     public static class MvxBindingLog
     {
-        public static IMvxLog Instance { get; } = Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor("MvxBind");
+        public static IMvxLog? Instance { get; } = Mvx.IoCProvider?.Resolve<IMvxLogProvider>().GetLogFor("MvxBind");
 
         public static MvxLogLevel TraceBindingLevel = MvxLogLevel.Warn;
 
@@ -16,7 +17,7 @@ namespace MvvmCross.Binding
         {
             if (level < TraceBindingLevel) return;
 
-            Instance.Log(level, () => message, null, args);
+            Instance?.Log(level, () => message, null, args);
         }
 
         public static void Trace(string message, params object[] args)
@@ -34,4 +35,5 @@ namespace MvvmCross.Binding
             Trace(MvxLogLevel.Error, message, args);
         }
     }
+#nullable restore
 }
