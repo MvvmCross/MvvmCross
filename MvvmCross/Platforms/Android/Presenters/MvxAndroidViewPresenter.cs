@@ -835,7 +835,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             }
 
             // Close fragment. If it isn't successful, then close the current Activity
-            if (TryPerformCloseFragmentTransaction(CurrentFragmentManager, attribute))
+            if (CurrentFragmentManager != null && TryPerformCloseFragmentTransaction(CurrentFragmentManager, attribute))
             {
                 return Task.FromResult(true);
             }
