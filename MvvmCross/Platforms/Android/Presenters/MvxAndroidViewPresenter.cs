@@ -328,54 +328,70 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             var bundle = Bundle.Empty!;
 
-            if (CurrentActivity is IMvxAndroidSharedElements sharedElementsActivity)
+            if (CurrentActivity.IsActivityAlive() && 
+                CurrentActivity is IMvxAndroidSharedElements sharedElementsActivity && 
+                Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
             {
-                var elements = new List<string>();
-                var transitionElementPairs = new List<Pair>();
-
-                foreach (KeyValuePair<string, View> item in sharedElementsActivity.FetchSharedElementsToAnimate(attribute, request))
-                {
-                    var transitionName = item.Value.GetTransitionNameSupport();
-                    if (!string.IsNullOrEmpty(transitionName))
-                    {
-                        var pair = Pair.Create(item.Value, transitionName);
-                        if (pair != null)
-                        {
-                            transitionElementPairs.Add(pair);
-                            elements.Add($"{item.Key}:{transitionName}");
-                        }
-                    }
-                    else
-                    {
-                        _logger.Value?.Warn("A XML transitionName is required in order to transition a control when navigating.");
-                    }
-                }
+                var (elements, transitionElementPairs) =
+                    GetTransitionElements(attribute, request, sharedElementsActivity);
 
                 if (transitionElementPairs.Count == 0)
                 {
                     _logger.Value?.Warn("No transition elements are provided");
                     return bundle;
                 }
+                
+                var transitionElementsBundle = CreateTransitionElementsBundle(intent, transitionElementPairs, elements);
+                if (transitionElementsBundle != null)
+                    return transitionElementsBundle;
+            }
+            else
+            {
+                _logger.Value?.Warn("Shared element transition requires Android v21+.");
+            }
 
-                if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+            return bundle;
+        }
+
+        private Bundle? CreateTransitionElementsBundle(
+            Intent intent, IEnumerable<Pair> transitionElementPairs, IEnumerable<string> elements)
+        {
+            var activityOptions = ActivityOptions.MakeSceneTransitionAnimation(
+                CurrentActivity, transitionElementPairs.ToArray());
+            if (activityOptions == null)
+                return null;
+            
+            intent.PutExtra(SharedElementsBundleKey, string.Join("|", elements));
+            var activityOptionsBundle = activityOptions.ToBundle();
+            return activityOptionsBundle;
+        }
+
+        private (List<string> elements, List<Pair> transitionElementPairs) GetTransitionElements(
+            MvxBasePresentationAttribute attribute, MvxViewModelRequest request,
+            IMvxAndroidSharedElements sharedElementsActivity)
+        {
+            var elements = new List<string>();
+            var transitionElementPairs = new List<Pair>();
+
+            foreach (var (key, value) in sharedElementsActivity.FetchSharedElementsToAnimate(attribute, request))
+            {
+                var transitionName = value.GetTransitionNameSupport();
+                if (!string.IsNullOrEmpty(transitionName))
                 {
-                    var activityOptions = ActivityOptions.MakeSceneTransitionAnimation(
-                        CurrentActivity, transitionElementPairs.ToArray());
-                    if (activityOptions != null)
+                    var pair = Pair.Create(value, transitionName);
+                    if (pair != null)
                     {
-                        intent.PutExtra(SharedElementsBundleKey, string.Join("|", elements));
-                        var activityOptionsBundle = activityOptions.ToBundle();
-                        if (activityOptionsBundle != null)
-                            bundle = activityOptionsBundle;
+                        transitionElementPairs.Add(pair);
+                        elements.Add($"{key}:{transitionName}");
                     }
                 }
                 else
                 {
-                    _logger.Value?.Warn("Shared element transition requires Android v21+.");
+                    _logger.Value?.Warn("A XML transitionName is required in order to transition a control when navigating.");
                 }
             }
 
-            return bundle;
+            return (elements, transitionElementPairs);
         }
 
         protected virtual Intent CreateIntentForRequest(MvxViewModelRequest? request)
