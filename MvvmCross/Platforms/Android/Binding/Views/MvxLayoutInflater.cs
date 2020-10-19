@@ -304,7 +304,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         }
 
         internal View? CreateCustomViewInternal(View? parent, View? view, string name, Context viewContext,
-            IAttributeSet? attrs)
+            IAttributeSet attrs)
         {
             if (Debug)
                 MvxLog.Instance?.Trace("{Tag} - ... CreateCustomViewInternal ... {name}", Tag, name);
@@ -322,56 +322,73 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
                 if (view == null)
                 {
-                    Object[]? constructorArgsArr = null;
-                    Object? lastContext = null;
+                    var (constructorArgsArr, lastContext) = GetConstructorArgs(viewContext);
 
-                    if (Build.VERSION.SdkInt <= BuildVersionCodes.P)
-                    {
-                        if (_constructorArgs == null)
-                        {
-                            Class layoutInflaterClass = Class.FromType(typeof(LayoutInflater));
-                            _constructorArgs = layoutInflaterClass.GetDeclaredField("mConstructorArgs");
-                            _constructorArgs.Accessible = true;
-                        }
-
-                        constructorArgsArr = (Object[]?)_constructorArgs!.Get(this);
-                        lastContext = constructorArgsArr?[0];
-
-                        // The LayoutInflater actually finds out the correct context to use. We just need to set
-                        // it on the mConstructor for the internal method.
-                        // Set the constructor args up for the createView, not sure why we can't pass these in.
-                        if (constructorArgsArr != null)
-                        {
-                            constructorArgsArr[0] = viewContext;
-                            _constructorArgs.Set(this, constructorArgsArr);    
-                        }
-                    }
-                    
                     try
                     {
-#if __ANDROID_29__
-                        if (Build.VERSION.SdkInt > BuildVersionCodes.P)
-                            view = CreateView(viewContext, name, null, attrs);
-                        else
-#endif
-                            view = CreateView(name, null, attrs);
+                        view = CreateViewCompat(viewContext, name, attrs);
                     }
                     catch (ClassNotFoundException)
                     {
                     }
                     finally
                     {
-                        if (Build.VERSION.SdkInt <= BuildVersionCodes.P)
-                        {
-                            if (constructorArgsArr != null && lastContext != null)
-                            {
-                                constructorArgsArr[0] = lastContext;
-                                _constructorArgs?.Set(this, constructorArgsArr);
-                            }
-                        }
+                        RestoreConstructorArgs(constructorArgsArr, lastContext);
                     }
                 }
             }
+
+            return view;
+        }
+
+        private (Object[]? constructorArgs, Object? lastContext) GetConstructorArgs(Context viewContext)
+        {
+            if (Build.VERSION.SdkInt > BuildVersionCodes.P)
+            {
+                return (null, null);
+            }
+
+            if (_constructorArgs == null)
+            {
+                Class layoutInflaterClass = Class.FromType(typeof(LayoutInflater));
+                _constructorArgs = layoutInflaterClass.GetDeclaredField("mConstructorArgs");
+                _constructorArgs.Accessible = true;
+            }
+
+            var constructorArgsArr = (Object[]?) _constructorArgs!.Get(this);
+            var lastContext = constructorArgsArr?[0];
+
+            // The LayoutInflater actually finds out the correct context to use. We just need to set
+            // it on the mConstructor for the internal method.
+            // Set the constructor args up for the createView, not sure why we can't pass these in.
+            if (constructorArgsArr != null)
+            {
+                constructorArgsArr[0] = viewContext;
+                _constructorArgs.Set(this, constructorArgsArr);
+            }
+
+            return (constructorArgsArr, lastContext);
+        }
+
+        private void RestoreConstructorArgs(Object[]? constructorArgsArr, Object? lastContext)
+        {
+            if (Build.VERSION.SdkInt > BuildVersionCodes.P || constructorArgsArr == null || lastContext == null)
+                return;
+
+            constructorArgsArr[0] = lastContext;
+            _constructorArgs?.Set(this, constructorArgsArr);
+        }
+
+        private View? CreateViewCompat(Context viewContext, string name, IAttributeSet attrs)
+        {
+            View? view;
+#if __ANDROID_29__
+            if (Build.VERSION.SdkInt > BuildVersionCodes.P)
+                view = CreateView(viewContext, name, null, attrs);
+            else
+#endif
+                view = CreateView(name, null, attrs);
+
             return view;
         }
 
