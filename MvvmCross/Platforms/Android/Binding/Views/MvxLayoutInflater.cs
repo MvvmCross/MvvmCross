@@ -175,9 +175,11 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             if (Debug)
                 MvxLog.Instance?.Trace("{Tag} - ... OnCreateView 2 ... {name}", Tag, name);
 
-            View? view = AndroidViewFactory?.CreateView(null, name, Context, attrs) ??
-                        PhoneLayoutInflaterOnCreateView(name, attrs) ??
-                        base.OnCreateView(name, attrs);
+            View? view = null;
+            if (name != null && Context != null && attrs != null)
+                view = AndroidViewFactory?.CreateView(null, name, Context, attrs);
+            
+            view ??= PhoneLayoutInflaterOnCreateView(name, attrs) ?? base.OnCreateView(name, attrs);
 
             return _bindingVisitor.OnViewCreated(view, Context, attrs);
         }
