@@ -431,7 +431,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 _factoryPlaceholder = binder;
             }
 
-            public View? OnCreateView(View parent, string name, Context context, IAttributeSet? attrs)
+            public View? OnCreateView(View? parent, string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
                     MvxLog.Instance?.Trace("{Tag} - ... OnCreateView ... {name}", DelegateFactory2Tag, name);
@@ -455,7 +455,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 _factoryPlaceholder = bindingVisitor;
             }
 
-            public View? OnCreateView(View parent, string name, Context context, IAttributeSet? attrs)
+            public View? OnCreateView(View? parent, string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
                     MvxLog.Instance?.Trace("{Tag} - ... OnCreateView ... {name}", DelegateFactory1Tag, name);
