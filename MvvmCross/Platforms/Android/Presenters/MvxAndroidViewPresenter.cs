@@ -120,8 +120,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         public override MvxBasePresentationAttribute? GetPresentationAttribute(MvxViewModelRequest request)
         {
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
+            ValidateArguments(request);
 
             var viewType = ViewsContainer.GetViewType(request.ViewModelType);
 
@@ -140,37 +139,13 @@ namespace MvvmCross.Platforms.Android.Presenters
                     var fragmentAttributes = attributes.OfType<MvxFragmentPresentationAttribute>().ToArray();
 
                     // check if fragment can be displayed as child fragment first
-                    foreach (var item in fragmentAttributes.Where(att => att.FragmentHostViewType != null))
-                    {
-                        var fragment = GetFragmentByViewType(item.FragmentHostViewType);
-
-                        // if the fragment exists, and is on top, then use the current attribute 
-                        if (fragment?.IsVisible == true && fragment.View.FindViewById(item.FragmentContentId) != null)
-                        {
-                            attribute = item;
-                            break;
-                        }
-                    }
+                    attribute = GetAttributeForFragmentChildPresentation(fragmentAttributes);
 
                     // if attribute is still null, check if fragment can be displayed in current activity
-                    if (attribute == null)
-                    {
-                        var currentActivityHostViewModelType = GetCurrentActivityViewModelType();
-                        foreach (var item in fragmentAttributes.Where(att => att.ActivityHostViewModelType != null))
-                        {
-                            if (CurrentActivity.IsActivityDead())
-                                break;
-
-                            if (CurrentActivity!.FindViewById(item.FragmentContentId) != null &&
-                                item.ActivityHostViewModelType == currentActivityHostViewModelType)
-                            {
-                                attribute = item;
-                                break;
-                            }
-                        }
-                    }
+                    attribute ??= GetAttributeForFragmentPresentation(fragmentAttributes);
                 }
 
+                // fallback to first attribute
                 attribute ??= attributes[0];
                 attribute.ViewType = viewType;
 
@@ -178,6 +153,51 @@ namespace MvvmCross.Platforms.Android.Presenters
             }
 
             return CreatePresentationAttribute(request.ViewModelType, viewType);
+        }
+
+        private MvxBasePresentationAttribute? GetAttributeForFragmentPresentation(
+            IEnumerable<MvxFragmentPresentationAttribute> fragmentAttributes)
+        {
+            MvxBasePresentationAttribute? attribute = null;
+
+            var currentActivityHostViewModelType = GetCurrentActivityViewModelType();
+
+            foreach (var item in fragmentAttributes.Where(
+                att => att.ActivityHostViewModelType != null))
+            {
+                if (CurrentActivity.IsActivityDead())
+                    break;
+
+                if (CurrentActivity!.FindViewById(item.FragmentContentId) != null &&
+                    item.ActivityHostViewModelType == currentActivityHostViewModelType)
+                {
+                    attribute = item;
+                    break;
+                }
+            }
+
+            return attribute;
+        }
+
+        private MvxBasePresentationAttribute? GetAttributeForFragmentChildPresentation(
+            IEnumerable<MvxFragmentPresentationAttribute> fragmentAttributes)
+        {
+            MvxBasePresentationAttribute? attribute = null;
+
+            foreach (var item in fragmentAttributes.Where(
+                att => att.FragmentHostViewType != null))
+            {
+                var fragment = GetFragmentByViewType(item.FragmentHostViewType);
+
+                // if the fragment exists, and is on top, then use the current attribute 
+                if (fragment?.IsVisible != true || fragment.View.FindViewById(item.FragmentContentId) == null)
+                    continue;
+
+                attribute = item;
+                break;
+            }
+
+            return attribute;
         }
 
         public override MvxBasePresentationAttribute? CreatePresentationAttribute(Type? viewModelType, Type? viewType)
@@ -1105,14 +1125,19 @@ namespace MvvmCross.Platforms.Android.Presenters
         {
             ValidateArguments(attribute);
 
-            if (request == null)
-                throw new ArgumentNullException(nameof(request));
+            ValidateArguments(request);
         }
 
         private static void ValidateArguments(MvxBasePresentationAttribute? attribute)
         {
             if (attribute == null)
                 throw new ArgumentNullException(nameof(attribute));
+        }
+        
+        private static void ValidateArguments(MvxViewModelRequest? request)
+        {
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
         }
     }
 #nullable restore
