@@ -96,13 +96,14 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             SetupLayoutFactories(cloned);
         }
 
+        [Preserve(Conditional = true)]
         public MvxLayoutInflater(IntPtr handle, JniHandleOwnership transfer)
             : base(handle, transfer)
         {
             _bindingVisitor = new MvxBindingVisitor();
             SetupLayoutFactories(false);
         }
-        
+
         public override LayoutInflater CloneInContext(Context? newContext)
         {
             return new MvxLayoutInflater(this, newContext, _bindingVisitor, true);
@@ -210,7 +211,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 {
                 }
             }
-            
+
             return null;
         }
 
