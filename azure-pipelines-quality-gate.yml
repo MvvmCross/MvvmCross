@@ -32,7 +32,7 @@ stages:
       displayName: 'Use .NET Core sdk'
       inputs:
         packageType: sdk
-        version: 3.1.302
+        version: 3.1.402
 
     - pwsh: |
         $jdkPath = $env:JAVA_HOME_11_X64
