@@ -7,12 +7,13 @@ using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Presenters
 {
+#nullable enable
     public class MvxPopoverPresentationSourceProvider : IMvxPopoverPresentationSourceProvider
     {
-        [Weak] private UIView _sourceView;
-        [Weak] private UIBarButtonItem _sourceBarButtonItem;
+        [Weak] private UIView? _sourceView;
+        [Weak] private UIBarButtonItem? _sourceBarButtonItem;
 
-        public UIView SourceView
+        public UIView? SourceView
         {
             get => _sourceView;
             set
@@ -22,7 +23,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             }
         }
 
-        public UIBarButtonItem SourceBarButtonItem
+        public UIBarButtonItem? SourceBarButtonItem
         {
             get => _sourceBarButtonItem;
             set
@@ -34,12 +35,16 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
         public void SetSource(UIPopoverPresentationController popoverPresentationController)
         {
+            if (popoverPresentationController == null)
+                throw new ArgumentNullException(nameof(popoverPresentationController));
+
             if (SourceView == null && SourceBarButtonItem == null)
             {
                 throw new InvalidOperationException(
                     $"{nameof(IMvxPopoverPresentationSourceProvider)} should contain a source for popover."
                 );
             }
+
             if (SourceView != null)
             {
                 popoverPresentationController.SourceView = SourceView;
@@ -53,4 +58,5 @@ namespace MvvmCross.Platforms.Ios.Presenters
             }
         }
     }
+#nullable restore
 }
