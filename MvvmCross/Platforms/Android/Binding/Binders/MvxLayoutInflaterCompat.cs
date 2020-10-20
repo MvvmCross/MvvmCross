@@ -15,17 +15,21 @@ using Object = Java.Lang.Object;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders
 {
+#nullable enable
     public static class MvxLayoutInflaterCompat
     {
-        private static readonly int SdkInt = (int)Build.VERSION.SdkInt;
-        private static Field _layoutInflaterFactory2Field;
+        private static readonly BuildVersionCodes Sdk = Build.VERSION.SdkInt;
+        private static Field? _layoutInflaterFactory2Field;
         private static bool _checkedField;
 
         internal class FactoryWrapper : Object, LayoutInflater.IFactory
         {
             protected readonly IMvxLayoutInflaterFactory DelegateFactory;
 
+            [Preserve(Conditional = true)]
+#pragma warning disable 8618
             public FactoryWrapper(IntPtr handle, JniHandleOwnership ownership)
+#pragma warning restore 8618
                 : base(handle, ownership)
             {
             }
@@ -35,7 +39,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
                 DelegateFactory = delegateFactory;
             }
 
-            public View OnCreateView(string name, Context context, IAttributeSet attrs)
+            public View? OnCreateView(string name, Context context, IAttributeSet attrs)
             {
                 return DelegateFactory.OnCreateView(null, name, context, attrs);
             }
@@ -43,6 +47,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
 
         internal class FactoryWrapper2 : FactoryWrapper, LayoutInflater.IFactory2
         {
+            [Preserve(Conditional = true)]
             public FactoryWrapper2(IntPtr handle, JniHandleOwnership ownership)
                 : base(handle, ownership)
             {
@@ -53,24 +58,24 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             {
             }
 
-            public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
+            public View? OnCreateView(View? parent, string name, Context context, IAttributeSet attrs)
             {
                 return DelegateFactory.OnCreateView(parent, name, context, attrs);
             }
         }
 
-        public static void SetFactory(LayoutInflater layoutInflater, IMvxLayoutInflaterFactory factory)
+        public static void SetFactory(LayoutInflater layoutInflater, IMvxLayoutInflaterFactory? factory)
         {
-            if (SdkInt >= 21)
+            if (Sdk >= BuildVersionCodes.Lollipop)
             {
                 layoutInflater.Factory2 = factory != null ? new FactoryWrapper2(factory) : null;
             }
-            else if (SdkInt >= 11)
+            else if (Sdk >= BuildVersionCodes.Honeycomb)
             {
                 var factory2 = factory != null ? new FactoryWrapper2(factory) : null;
                 layoutInflater.Factory2 = factory2;
 
-                LayoutInflater.IFactory f = layoutInflater.Factory;
+                LayoutInflater.IFactory? f = layoutInflater.Factory;
                 var f2 = f as LayoutInflater.IFactory2;
 
                 // The merged factory is now set to Factory, but not Factory2 (pre-v21).
@@ -89,7 +94,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
         // Factory2 from being merged properly if set after a cloneInContext from a LayoutInflater
         // that already had a Factory2 registered. We work around that bug here. If we can't we
         // log an error.
-        private static void ForceSetFactory2(LayoutInflater inflater, LayoutInflater.IFactory2 factory)
+        private static void ForceSetFactory2(LayoutInflater inflater, LayoutInflater.IFactory2? factory)
         {
             if (!_checkedField)
             {
@@ -108,7 +113,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
                 _checkedField = true;
             }
 
-            if (_layoutInflaterFactory2Field != null)
+            if (_layoutInflaterFactory2Field != null && factory != null)
             {
                 try
                 {
@@ -116,9 +121,10 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
                 }
                 catch (IllegalAccessException)
                 {
-                    MvxLog.Instance.Error("ForceSetFactory2 could not set the Factory2 on LayoutInflater {0} ; inflation may have unexpected results.", inflater);
+                    MvxLog.Instance?.Error("ForceSetFactory2 could not set the Factory2 on LayoutInflater {0} ; inflation may have unexpected results.", inflater);
                 }
             }
         }
     }
+#nullable restore
 }
