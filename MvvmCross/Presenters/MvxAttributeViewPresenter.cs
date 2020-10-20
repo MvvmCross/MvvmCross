@@ -46,7 +46,7 @@ namespace MvvmCross.Presenters
 
         public abstract MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType);
 
-        public virtual object CreateOverridePresentationAttributeViewInstance(Type viewType)
+        public virtual object? CreateOverridePresentationAttributeViewInstance(Type viewType)
         {
             if (viewType == null)
                 throw new ArgumentNullException(nameof(viewType));
@@ -67,10 +67,14 @@ namespace MvvmCross.Presenters
             if (!hasInterface)
                 return null;
 
-            var viewInstance = (IMvxOverridePresentationAttribute)CreateOverridePresentationAttributeViewInstance(viewType);
+            var viewInstance =
+                CreateOverridePresentationAttributeViewInstance(viewType) as IMvxOverridePresentationAttribute;
             try
             {
-                var presentationAttribute = viewInstance.PresentationAttribute(request);
+                var presentationAttribute = viewInstance?.PresentationAttribute(request);
+                if (presentationAttribute == null)
+                    return null;
+
                 if (presentationAttribute.ViewType == null)
                 {
                     presentationAttribute.ViewType = viewType;
@@ -138,12 +142,16 @@ namespace MvvmCross.Presenters
                 out MvxPresentationAttributeAction attributeAction))
             {
                 if (attributeAction.ShowAction == null)
-                    throw new NullReferenceException(
+                {
+                    throw new InvalidOperationException(
                         $"attributeAction.ShowAction is null for attribute: {attributeType.Name}");
+                }
 
                 if (attributeAction.CloseAction == null)
-                    throw new NullReferenceException(
+                {
+                    throw new InvalidOperationException(
                         $"attributeAction.CloseAction is null for attribute: {attributeType.Name}");
+                }
 
                 return attributeAction;
             }

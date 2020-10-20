@@ -63,7 +63,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             return new MvxChildPresentationAttribute { ViewType = viewType, ViewModelType = viewModelType };
         }
 
-        public override object CreateOverridePresentationAttributeViewInstance(Type viewType)
+        public override object? CreateOverridePresentationAttributeViewInstance(Type viewType)
         {
             if (viewType == null)
                 throw new ArgumentNullException(nameof(viewType));
@@ -522,14 +522,13 @@ namespace MvvmCross.Platforms.Ios.Presenters
             // if a popover is presented
             if (PopoverViewController is UINavigationController popoverNav &&
                 TryCloseViewControllerInsideStack(popoverNav, viewModel, attribute))
+            {
                 return Task.FromResult(true);
+            }
 
             // if there are modals presented
-            if (ModalViewControllers.Count > 0)
-            {
-                if (CloseModalChildViewController(viewModel, attribute))
-                    return Task.FromResult(true);
-            }
+            if (ModalViewControllers.Count > 0 && CloseModalChildViewController(viewModel, attribute))
+                return Task.FromResult(true);
 
             // if the current root is a TabBarViewController, delegate close responsibility to it
             if (TabBarViewController?.CloseChildViewModel(viewModel) == true)
@@ -834,7 +833,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             PopoverViewController = null;
         }
 
-        private void ValidateArguments(Type viewModelType, Type viewType)
+        private static void ValidateArguments(Type viewModelType, Type viewType)
         {
             if (viewModelType == null)
                 throw new ArgumentNullException(nameof(viewModelType));
@@ -843,7 +842,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
                 throw new ArgumentNullException(nameof(viewType));
         }
 
-        private void ValidateArguments(UIViewController viewController, MvxBasePresentationAttribute attribute)
+        private static void ValidateArguments(UIViewController viewController, MvxBasePresentationAttribute attribute)
         {
             if (viewController == null)
                 throw new ArgumentNullException(nameof(viewController));
@@ -852,7 +851,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
                 throw new ArgumentNullException(nameof(attribute));
         }
 
-        private void ValidateArguments(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute)
+        private static void ValidateArguments(IMvxViewModel viewModel, MvxBasePresentationAttribute attribute)
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));

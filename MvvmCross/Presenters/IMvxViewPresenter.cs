@@ -17,7 +17,7 @@ namespace MvvmCross.Presenters
 
         void AddPresentationHintHandler<THint>(Func<THint, Task<bool>> action) where THint : MvxPresentationHint;
 
-        Task<bool> Close(IMvxViewModel toClose);
+        Task<bool> Close(IMvxViewModel viewModel);
     }
 #nullable restore
 }

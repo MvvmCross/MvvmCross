@@ -17,6 +17,9 @@ namespace MvvmCross.Presenters
 
         public void AddPresentationHintHandler<THint>(Func<THint, Task<bool>> action) where THint : MvxPresentationHint
         {
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
+
             _presentationHintHandlers[typeof(THint)] = hint => action((THint)hint);
         }
 
