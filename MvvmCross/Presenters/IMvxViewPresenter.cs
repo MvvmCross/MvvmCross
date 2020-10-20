@@ -8,6 +8,7 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters
 {
+#nullable enable
     public interface IMvxViewPresenter
     {
         Task<bool> Show(MvxViewModelRequest request);
@@ -18,4 +19,5 @@ namespace MvvmCross.Presenters
 
         Task<bool> Close(IMvxViewModel toClose);
     }
+#nullable restore
 }
