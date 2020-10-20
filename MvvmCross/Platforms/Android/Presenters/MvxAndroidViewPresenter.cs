@@ -328,8 +328,8 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             var bundle = Bundle.Empty!;
 
-            if (CurrentActivity.IsActivityAlive() && 
-                CurrentActivity is IMvxAndroidSharedElements sharedElementsActivity && 
+            if (CurrentActivity.IsActivityAlive() &&
+                CurrentActivity is IMvxAndroidSharedElements sharedElementsActivity &&
                 Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
             {
                 var (elements, transitionElementPairs) =
@@ -340,7 +340,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                     _logger.Value?.Warn("No transition elements are provided");
                     return bundle;
                 }
-                
+
                 var transitionElementsBundle = CreateTransitionElementsBundle(intent, transitionElementPairs, elements);
                 if (transitionElementsBundle != null)
                     return transitionElementsBundle;
@@ -360,7 +360,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 CurrentActivity, transitionElementPairs.ToArray());
             if (activityOptions == null)
                 return null;
-            
+
             intent.PutExtra(SharedElementsBundleKey, string.Join("|", elements));
             var activityOptionsBundle = activityOptions.ToBundle();
             return activityOptionsBundle;
@@ -1149,7 +1149,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             if (attribute == null)
                 throw new ArgumentNullException(nameof(attribute));
         }
-        
+
         private static void ValidateArguments(MvxViewModelRequest? request)
         {
             if (request == null)
