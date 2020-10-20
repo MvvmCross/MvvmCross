@@ -25,7 +25,7 @@ Same as we did with the _Core_ project, we will use a standard template to creat
 
 ## Create a new Android project
 
-Add a new project to your solution - a 'Blank App (Android)' application with name `TipCalc.Droid`
+Add a new project to your solution - a 'Blank App (Android)' application with name `TipCalc.Droid`. Make sure you change the target android version in the project properties to **Android 10.0 (Q)** or above.
 
 Within this, you'll find the normal Android application constructs:
 
