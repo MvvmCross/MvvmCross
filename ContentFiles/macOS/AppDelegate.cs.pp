@@ -8,7 +8,7 @@ namespace $rootnamespace$
     {
 		public override void DidFinishLaunching(NSNotification notification)
 		{
-			MvxMacSetupSingleton.EnsureSingletonAvailable(this, MainWindow).EnsureInitialized();
+			MvxMacSetupSingleton.EnsureSingletonAvailable(this).EnsureInitialized();
 			RunAppStart();
 		}
 	}
