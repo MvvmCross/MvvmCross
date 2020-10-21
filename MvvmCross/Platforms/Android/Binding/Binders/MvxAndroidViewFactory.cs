@@ -13,17 +13,18 @@ using MvvmCross.Platforms.Android.Binding.Binders.ViewTypeResolvers;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders
 {
+#nullable enable
     public class MvxAndroidViewFactory
         : IMvxAndroidViewFactory
     {
-        private IMvxViewTypeResolver _viewTypeResolver;
+        private IMvxViewTypeResolver? _viewTypeResolver;
 
-        protected IMvxViewTypeResolver ViewTypeResolver => _viewTypeResolver ?? (_viewTypeResolver = Mvx.IoCProvider.Resolve<IMvxViewTypeResolver>());
+        protected IMvxViewTypeResolver? ViewTypeResolver => _viewTypeResolver ??= Mvx.IoCProvider?.Resolve<IMvxViewTypeResolver>();
 
-        public virtual View CreateView(View parent, string name, Context context, IAttributeSet attrs)
+        public virtual View? CreateView(View? parent, string name, Context context, IAttributeSet attrs)
         {
             // resolve the tag name to a type
-            var viewType = ViewTypeResolver.Resolve(name);
+            var viewType = ViewTypeResolver?.Resolve(name);
 
             if (viewType == null)
             {
@@ -37,7 +38,7 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
                 if (view == null)
                 {
                     MvxBindingLog.Error( "Unable to load view {0} from type {1}", name,
-                                          viewType.FullName);
+                                          viewType.FullName ?? string.Empty);
                 }
                 return view;
             }
@@ -49,9 +50,10 @@ namespace MvvmCross.Platforms.Android.Binding.Binders
             {
                 MvxBindingLog.Error(
                                       "Exception during creation of {0} from type {1} - exception {2}", name,
-                                      viewType.FullName, exception.ToLongString());
+                                      viewType.FullName ?? string.Empty, exception.ToLongString());
                 return null;
             }
         }
     }
+#nullable restore
 }

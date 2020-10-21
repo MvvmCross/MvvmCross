@@ -7,16 +7,19 @@ using UIKit;
 
 namespace MvvmCross.Platforms.Ios.Views
 {
+#nullable enable
     public static class UIViewControllerExtensions
     {
-        public static IMvxIosView GetIMvxIosView(this UIViewController viewController)
+        public static IMvxIosView? GetIMvxIosView(this UIViewController? viewController)
         {
-            var mvxView = viewController as IMvxIosView;
-            if (mvxView == null)
+            if (viewController is IMvxIosView iosView)
             {
-                MvxLog.Instance.Warn($"Could not get IMvxIosView from ViewController {viewController.GetType().Name}");
+                return iosView;
             }
-            return mvxView;
+
+            MvxLog.Instance?.Warn($"Could not get IMvxIosView from ViewController {viewController?.GetType().Name}");
+            return null;
         }
     }
+#nullable restore
 }

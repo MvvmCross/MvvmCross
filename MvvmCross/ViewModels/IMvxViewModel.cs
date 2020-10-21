@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
-using MvvmCross.Navigation;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public interface IMvxViewModel
     {
         void ViewCreated();
@@ -36,18 +36,24 @@ namespace MvvmCross.ViewModels
         MvxNotifyTask InitializeTask { get; set; }
     }
 
-    public interface IMvxViewModel<TParameter> : IMvxViewModel
+    public interface IMvxViewModel<TParameter>
+        : IMvxViewModel where TParameter : class
     {
-        void Prepare(TParameter parameter);
+        void Prepare(TParameter? parameter);
     }
 
-    //TODO: Can we keep the IMvxViewModel syntax here? Compiler complains
-    public interface IMvxViewModelResult<TResult> : IMvxViewModel
+    public interface IMvxViewModelResult<TResult>
+        : IMvxViewModel
+        where TResult : class
     {
-        TaskCompletionSource<object> CloseCompletionSource { get; set; }
+        TaskCompletionSource<object>? CloseCompletionSource { get; set; }
     }
 
-    public interface IMvxViewModel<TParameter, TResult> : IMvxViewModel<TParameter>, IMvxViewModelResult<TResult>
+    public interface IMvxViewModel<TParameter, TResult>
+        : IMvxViewModel<TParameter>, IMvxViewModelResult<TResult>
+        where TParameter : class
+        where TResult : class
     {
     }
+#nullable restore
 }

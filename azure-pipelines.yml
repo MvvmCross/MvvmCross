@@ -32,7 +32,7 @@ stages:
       displayName: 'Use .NET Core sdk'
       inputs:
         packageType: sdk
-        version: 3.1.300
+        version: 3.1.402
 
     - script: dotnet tool restore
       displayName: Restore dotnet tools
@@ -40,7 +40,7 @@ stages:
     - script: dotnet cake --bootstrap
       displayName: Bootstrap cake
 
-    - script: dotnet cake --verbosity=Normal --artifactsDir=$(Build.ArtifactStagingDirectory) --sonarKey=$(sonarKey)
+    - script: dotnet cake --verbosity=Normal --artifactsDir=$(Build.ArtifactStagingDirectory)
 
     - task: PublishBuildArtifacts@1
       inputs:

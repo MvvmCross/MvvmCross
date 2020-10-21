@@ -1,12 +1,64 @@
 # Changelog
 
-## [7.0.1](https://github.com/MvvmCross/MvvmCross/tree/7.0.1) (2020-09-19)
+## [7.1.0](https://github.com/MvvmCross/MvvmCross/tree/7.1.0) (2020-10-21)
 
-[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/6.4.2...7.0.0)
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/7.0.1...7.1.0)
+
+**Breaking changes:**
+
+- Enable nullable attributes on MvxIosViewPresenter and friends [\#3961](https://github.com/MvvmCross/MvvmCross/pull/3961) ([Cheesebaron](https://github.com/Cheesebaron))
+- Fix Mac playground and MvxMacViewPresenter [\#3959](https://github.com/MvvmCross/MvvmCross/pull/3959) ([ivmirx](https://github.com/ivmirx))
+- Enable Nullable References on MvxDefaultViewModelLocator [\#3934](https://github.com/MvvmCross/MvvmCross/pull/3934) ([Cheesebaron](https://github.com/Cheesebaron))
+- Remove Network and File plugins [\#3932](https://github.com/MvvmCross/MvvmCross/pull/3932) ([Cheesebaron](https://github.com/Cheesebaron))
+- Mark MvxAndroidViewPresenter nullable and fix all the null issues [\#3916](https://github.com/MvvmCross/MvvmCross/pull/3916) ([Cheesebaron](https://github.com/Cheesebaron))
+- Clean up Android Presenter [\#3912](https://github.com/MvvmCross/MvvmCross/pull/3912) ([Cheesebaron](https://github.com/Cheesebaron))
+
+**Implemented enhancements:**
+
+- Added MvxPopoverPresentationAttribute [\#3857](https://github.com/MvvmCross/MvvmCross/pull/3857) ([Hackmodford](https://github.com/Hackmodford))
 
 **Fixed bugs:**
 
-- Revert change to InflateViewForHolder in #3802 [\#3930](https://github.com/MvvmCross/MvvmCross/issues/3930)
+- No windows is presented when trying to launch Mac app [\#3830](https://github.com/MvvmCross/MvvmCross/issues/3830)
+- fix for adjusting scrollview insets twice [\#3950](https://github.com/MvvmCross/MvvmCross/pull/3950) ([Hackmodford](https://github.com/Hackmodford))
+
+**Closed issues:**
+
+- Fragment.Instantiate is deprecated [\#3949](https://github.com/MvvmCross/MvvmCross/issues/3949)
+- Poll: Removal of Plugins File and Network [\#3915](https://github.com/MvvmCross/MvvmCross/issues/3915)
+
+**Merged pull requests:**
+
+- Bump Xamarin.GooglePlayServices.Basement from 71.1620.4 to 117.1.1 [\#3965](https://github.com/MvvmCross/MvvmCross/pull/3965) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Moq from 4.14.5 to 4.14.7 [\#3964](https://github.com/MvvmCross/MvvmCross/pull/3964) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- CI and project updates [\#3962](https://github.com/MvvmCross/MvvmCross/pull/3962) ([Cheesebaron](https://github.com/Cheesebaron))
+- Change Slack links to Discord links in the docs [\#3960](https://github.com/MvvmCross/MvvmCross/pull/3960) ([ivmirx](https://github.com/ivmirx))
+- Fix nullable references in Android Presenter [\#3956](https://github.com/MvvmCross/MvvmCross/pull/3956) ([Cheesebaron](https://github.com/Cheesebaron))
+- Replace deprecated Fragment.Instantiate by FragmentFactory.Instantiate [\#3953](https://github.com/MvvmCross/MvvmCross/pull/3953) ([Prin53](https://github.com/Prin53))
+- Bump Xamarin.AndroidX.Lifecycle.LiveData from 2.2.0.2 to 2.2.0.3 [\#3944](https://github.com/MvvmCross/MvvmCross/pull/3944) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Legacy.Support.V4 from 1.0.0.4 to 1.0.0.5 [\#3943](https://github.com/MvvmCross/MvvmCross/pull/3943) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.MediaRouter from 1.1.0.4 to 1.1.0.5 [\#3940](https://github.com/MvvmCross/MvvmCross/pull/3940) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Serilog from 2.9.0 to 2.10.0 [\#3929](https://github.com/MvvmCross/MvvmCross/pull/3929) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Roslynator.Analyzers from 2.3.0 to 3.0.0 [\#3928](https://github.com/MvvmCross/MvvmCross/pull/3928) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Add ability to Add fragment instead of always replacing it [\#3911](https://github.com/MvvmCross/MvvmCross/pull/3911) ([Cheesebaron](https://github.com/Cheesebaron))
+- Bump Microsoft.NET.Test.Sdk from 16.7.0 to 16.7.1 [\#3895](https://github.com/MvvmCross/MvvmCross/pull/3895) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Move Sonar into own pipeline [\#3891](https://github.com/MvvmCross/MvvmCross/pull/3891) ([Cheesebaron](https://github.com/Cheesebaron))
+- Centralize NuGet package versions + bump AndroidX packages [\#3890](https://github.com/MvvmCross/MvvmCross/pull/3890) ([Cheesebaron](https://github.com/Cheesebaron))
+- Bump Xamarin.AndroidX.MediaRouter from 1.1.0.1 to 1.1.0.2 [\#3886](https://github.com/MvvmCross/MvvmCross/pull/3886) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Legacy.Support.V4 from 1.0.0.1 to 1.0.0.2 [\#3882](https://github.com/MvvmCross/MvvmCross/pull/3882) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Bump Xamarin.AndroidX.Lifecycle.LiveData from 2.2.0.1 to 2.2.0.2 [\#3881](https://github.com/MvvmCross/MvvmCross/pull/3881) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+## [7.0.1](https://github.com/MvvmCross/MvvmCross/tree/7.0.1) (2020-09-19)
+
+[Full Changelog](https://github.com/MvvmCross/MvvmCross/compare/7.0.0...7.0.1)
+
+**Fixed bugs:**
+
+- Revert change to InflateViewForHolder in \#3802 [\#3930](https://github.com/MvvmCross/MvvmCross/pull/3930) ([Cheesebaron](https://github.com/Cheesebaron))
+
+**Merged pull requests:**
+
+- Update release 7.0.0 blog post with more type changes [\#3875](https://github.com/MvvmCross/MvvmCross/pull/3875) ([Cheesebaron](https://github.com/Cheesebaron))
 
 ## [7.0.0](https://github.com/MvvmCross/MvvmCross/tree/7.0.0) (2020-08-14)
 

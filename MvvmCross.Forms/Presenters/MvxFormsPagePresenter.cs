@@ -63,6 +63,7 @@ namespace MvvmCross.Forms.Presenters
             }
         }
 
+        private IMvxViewsContainer _viewsContainer;
         public override IMvxViewsContainer ViewsContainer
         {
             get
@@ -71,9 +72,9 @@ namespace MvvmCross.Forms.Presenters
                     _viewsContainer = PlatformPresenter.ViewsContainer;
                 return base.ViewsContainer;
             }
-            set => base.ViewsContainer = value;
         }
 
+        private IMvxViewModelTypeFinder _viewModelTypeFinder;
         public override IMvxViewModelTypeFinder ViewModelTypeFinder
         {
             get
@@ -82,9 +83,9 @@ namespace MvvmCross.Forms.Presenters
                     _viewModelTypeFinder = PlatformPresenter.ViewModelTypeFinder;
                 return base.ViewModelTypeFinder;
             }
-            set => base.ViewModelTypeFinder = value;
         }
 
+        private IDictionary<Type, MvxPresentationAttributeAction> _attributeTypesActionsDictionary;
         public override IDictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
         {
             get
@@ -95,7 +96,6 @@ namespace MvvmCross.Forms.Presenters
                 }
                 return _attributeTypesActionsDictionary;
             }
-            set => base.AttributeTypesToActionsDictionary = value;
         }
 
         public virtual Page CreatePage(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute)

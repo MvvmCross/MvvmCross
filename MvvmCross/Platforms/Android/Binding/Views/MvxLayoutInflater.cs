@@ -20,6 +20,7 @@ using Object = Java.Lang.Object;
 
 namespace MvvmCross.Platforms.Android.Binding.Views
 {
+#nullable enable
     /// <summary>
     /// Custom LayoutInflater responsible for inflating views and hooking up bindings
     /// Typically this is attached to MvxActivity and co via our MvxContextWrapper.
@@ -43,11 +44,11 @@ namespace MvvmCross.Platforms.Android.Binding.Views
     {
         public class MvxBindingVisitor
         {
-            private static readonly Boolean TheTruth = Boolean.True;
+            private static readonly Boolean TheTruth = Boolean.True!;
 
-            public IMvxLayoutInflaterHolderFactory Factory { get; set; }
+            public IMvxLayoutInflaterHolderFactory? Factory { get; set; }
 
-            public View OnViewCreated(View view, Context context, IAttributeSet attrs)
+            public View? OnViewCreated(View? view, Context? context, IAttributeSet? attrs)
             {
                 if (Factory != null && view != null && view.GetTag(Resource.Id.MvvmCrossTagId) != TheTruth)
                 {
@@ -65,7 +66,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         private const string Tag = "MvxLayoutInflater";
 
-        internal static BuildVersionCodes Sdk = Build.VERSION.SdkInt;
+        private static readonly BuildVersionCodes Sdk = Build.VERSION.SdkInt;
 
         private static readonly string[] ClassPrefixList = {
             "android.widget.",
@@ -75,9 +76,9 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         private readonly MvxBindingVisitor _bindingVisitor;
 
-        private IMvxAndroidViewFactory _androidViewFactory;
-        private IMvxLayoutInflaterHolderFactoryFactory _layoutInflaterHolderFactoryFactory;
-        private Field _constructorArgs;
+        private IMvxAndroidViewFactory? _androidViewFactory;
+        private IMvxLayoutInflaterHolderFactoryFactory? _layoutInflaterHolderFactoryFactory;
+        private Field? _constructorArgs;
         private bool _setPrivateFactory;
 
         public MvxLayoutInflater(Context context)
@@ -87,7 +88,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             SetupLayoutFactories(false);
         }
 
-        public MvxLayoutInflater(LayoutInflater original, Context newContext, MvxBindingVisitor bindingVisitor, bool cloned)
+        public MvxLayoutInflater(LayoutInflater original, Context? newContext, MvxBindingVisitor? bindingVisitor, bool cloned)
             : base(original, newContext)
         {
             _bindingVisitor = bindingVisitor ?? new MvxBindingVisitor();
@@ -95,6 +96,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             SetupLayoutFactories(cloned);
         }
 
+        [Preserve(Conditional = true)]
         public MvxLayoutInflater(IntPtr handle, JniHandleOwnership transfer)
             : base(handle, transfer)
         {
@@ -102,7 +104,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             SetupLayoutFactories(false);
         }
 
-        public override LayoutInflater CloneInContext(Context newContext)
+        public override LayoutInflater CloneInContext(Context? newContext)
         {
             return new MvxLayoutInflater(this, newContext, _bindingVisitor, true);
         }
@@ -115,18 +117,18 @@ namespace MvvmCross.Platforms.Android.Binding.Views
         //}
 
         // Calligraphy doesn't override this one...
-        public override View Inflate(int resource, ViewGroup root, bool attachToRoot)
+        public override View? Inflate(int resource, ViewGroup? root, bool attachToRoot)
         {
             // Make sure our private factory is set since LayoutInflater > Honeycomb
             // uses a private factory.
             SetPrivateFactoryInternal();
 
             // Save the old factory in case we are recursing because of an MvxAdapter etc.
-            IMvxLayoutInflaterHolderFactory originalFactory = _bindingVisitor.Factory;
+            IMvxLayoutInflaterHolderFactory? originalFactory = _bindingVisitor.Factory;
 
             try
             {
-                IMvxLayoutInflaterHolderFactory factory = null;
+                IMvxLayoutInflaterHolderFactory? factory = null;
 
                 // Get the current binding context
                 var currentBindingContext = MvxAndroidBindingContextHelpers.Current();
@@ -157,10 +159,10 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
 
-        protected override View OnCreateView(View parent, string name, IAttributeSet attrs)
+        protected override View? OnCreateView(View? parent, string? name, IAttributeSet? attrs)
         {
             if (Debug)
-                MvxLog.Instance.Trace("{Tag} - ... OnCreateView 3 ... {name}", Tag, name);
+                MvxLog.Instance?.Trace("{Tag} - ... OnCreateView 3 ... {name}", Tag, name);
 
             return _bindingVisitor.OnViewCreated(
                 base.OnCreateView(parent, name, attrs),
@@ -168,23 +170,25 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 attrs);
         }
 
-        protected override View OnCreateView(string name, IAttributeSet attrs)
+        protected override View? OnCreateView(string? name, IAttributeSet? attrs)
         {
             if (Debug)
-                MvxLog.Instance.Trace("{Tag} - ... OnCreateView 2 ... {name}", Tag, name);
+                MvxLog.Instance?.Trace("{Tag} - ... OnCreateView 2 ... {name}", Tag, name);
 
-            View view = AndroidViewFactory?.CreateView(null, name, Context, attrs) ??
-                        PhoneLayoutInflaterOnCreateView(name, attrs) ??
-                        base.OnCreateView(name, attrs);
+            View? view = null;
+            if (name != null && Context != null && attrs != null)
+                view = AndroidViewFactory?.CreateView(null, name, Context, attrs);
+            
+            view ??= PhoneLayoutInflaterOnCreateView(name, attrs) ?? base.OnCreateView(name, attrs);
 
             return _bindingVisitor.OnViewCreated(view, Context, attrs);
         }
 
 #if __ANDROID_29__
-        public override View OnCreateView(Context viewContext, View parent, string name, IAttributeSet attrs)
+        public override View? OnCreateView(Context viewContext, View? parent, string name, IAttributeSet? attrs)
         {
             if (Debug)
-                MvxLog.Instance.Trace("{Tag} - ... OnCreateView 4 ... {name}", Tag, name);
+                MvxLog.Instance?.Trace("{Tag} - ... OnCreateView 4 ... {name}", Tag, name);
 
             return _bindingVisitor.OnViewCreated(
                 base.OnCreateView(viewContext, parent, name, attrs),
@@ -194,10 +198,10 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 #endif
 
         // Mimic PhoneLayoutInflater's OnCreateView.
-        private View PhoneLayoutInflaterOnCreateView(string name, IAttributeSet attrs)
+        private View? PhoneLayoutInflaterOnCreateView(string? name, IAttributeSet? attrs)
         {
             if (Debug)
-                MvxLog.Instance.Trace("{Tag} - ... PhoneLayoutInflaterOnCreateView ... {name}", Tag, name);
+                MvxLog.Instance?.Trace("{Tag} - ... PhoneLayoutInflaterOnCreateView ... {name}", Tag, name);
 
             foreach (var prefix in ClassPrefixList)
             {
@@ -209,6 +213,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 {
                 }
             }
+
             return null;
         }
 
@@ -282,30 +287,27 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 return;
             }
 
-            Class layoutInflaterClass = Class.FromType(typeof(LayoutInflater));
-            Method setPrivateFactoryMethod = layoutInflaterClass.GetMethod("setPrivateFactory", Class.FromType(typeof(IFactory2)));
-            if (setPrivateFactoryMethod != null)
+            try
             {
-                try
-                {
-                    setPrivateFactoryMethod.Accessible = true;
-                    setPrivateFactoryMethod.Invoke(this,
-                        new PrivateFactoryWrapper2((IFactory2)Context, this, _bindingVisitor));
-                }
-                catch (Exception ex)
-                {
-                    MvxLog.Instance.Warn("Cannot invoke LayoutInflater.setPrivateFactory :\n{0}", ex.StackTrace);
-                }
+                Class layoutInflaterClass = Class.FromType(typeof(LayoutInflater));
+                Method setPrivateFactoryMethod = layoutInflaterClass.GetMethod("setPrivateFactory", Class.FromType(typeof(IFactory2)));
+                setPrivateFactoryMethod.Accessible = true;
+                setPrivateFactoryMethod.Invoke(this,
+                    new PrivateFactoryWrapper2((IFactory2)Context, this, _bindingVisitor));
+            }
+            catch (Exception ex)
+            {
+                MvxLog.Instance?.Warn("Cannot invoke LayoutInflater.setPrivateFactory :\n{0}", ex.StackTrace);
             }
 
             _setPrivateFactory = true;
         }
 
-        protected View CreateCustomViewInternal(View parent, View view, string name, Context viewContext,
+        internal View? CreateCustomViewInternal(View? parent, View? view, string name, Context viewContext,
             IAttributeSet attrs)
         {
             if (Debug)
-                MvxLog.Instance.Trace("{Tag} - ... CreateCustomViewInternal ... {name}", Tag, name);
+                MvxLog.Instance?.Trace("{Tag} - ... CreateCustomViewInternal ... {name}", Tag, name);
 
             if (view == null &&
                 !string.IsNullOrWhiteSpace(name) &&
@@ -320,54 +322,77 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
                 if (view == null)
                 {
-                    Object[] constructorArgsArr = null;
-                    Object lastContext = null;
+                    var (constructorArgsArr, lastContext) = GetConstructorArgs(viewContext);
 
-                    if (Build.VERSION.SdkInt <= BuildVersionCodes.P)
-                    {
-                        if (_constructorArgs == null)
-                        {
-                            Class layoutInflaterClass = Class.FromType(typeof(LayoutInflater));
-                            _constructorArgs = layoutInflaterClass.GetDeclaredField("mConstructorArgs");
-                            _constructorArgs.Accessible = true;
-                        }
-
-                        constructorArgsArr = (Object[])_constructorArgs.Get(this);
-                        lastContext = constructorArgsArr[0];
-
-                        // The LayoutInflater actually finds out the correct context to use. We just need to set
-                        // it on the mConstructor for the internal method.
-                        // Set the constructor args up for the createView, not sure why we can't pass these in.
-                        constructorArgsArr[0] = viewContext;
-                        _constructorArgs.Set(this, constructorArgsArr);
-                    }
-                    
                     try
                     {
-#if __ANDROID_29__
-                        if (Build.VERSION.SdkInt > BuildVersionCodes.P)
-                            view = CreateView(viewContext, name, null, attrs);
-                        else
-#endif
-                            view = CreateView(name, null, attrs);
+                        view = CreateViewCompat(viewContext, name, attrs);
                     }
                     catch (ClassNotFoundException)
                     {
                     }
                     finally
                     {
-                        if (Build.VERSION.SdkInt <= BuildVersionCodes.P)
-                        {
-                            constructorArgsArr[0] = lastContext;
-                            _constructorArgs.Set(this, constructorArgsArr);
-                        }
+                        RestoreConstructorArgs(constructorArgsArr, lastContext);
                     }
                 }
             }
+
             return view;
         }
 
-        protected IMvxAndroidViewFactory AndroidViewFactory
+        private (Object[]? constructorArgs, Object? lastContext) GetConstructorArgs(Context viewContext)
+        {
+            if (Build.VERSION.SdkInt > BuildVersionCodes.P)
+            {
+                return (null, null);
+            }
+
+            if (_constructorArgs == null)
+            {
+                Class layoutInflaterClass = Class.FromType(typeof(LayoutInflater));
+                _constructorArgs = layoutInflaterClass.GetDeclaredField("mConstructorArgs");
+                _constructorArgs.Accessible = true;
+            }
+
+            var constructorArgsArr = (Object[]?) _constructorArgs!.Get(this);
+            var lastContext = constructorArgsArr?[0];
+
+            // The LayoutInflater actually finds out the correct context to use. We just need to set
+            // it on the mConstructor for the internal method.
+            // Set the constructor args up for the createView, not sure why we can't pass these in.
+            if (constructorArgsArr != null)
+            {
+                constructorArgsArr[0] = viewContext;
+                _constructorArgs.Set(this, constructorArgsArr);
+            }
+
+            return (constructorArgsArr, lastContext);
+        }
+
+        private void RestoreConstructorArgs(Object[]? constructorArgsArr, Object? lastContext)
+        {
+            if (Build.VERSION.SdkInt > BuildVersionCodes.P || constructorArgsArr == null || lastContext == null)
+                return;
+
+            constructorArgsArr[0] = lastContext;
+            _constructorArgs?.Set(this, constructorArgsArr);
+        }
+
+        private View? CreateViewCompat(Context viewContext, string name, IAttributeSet attrs)
+        {
+            View? view;
+#if __ANDROID_29__
+            if (Build.VERSION.SdkInt > BuildVersionCodes.P)
+                view = CreateView(viewContext, name, null, attrs);
+            else
+#endif
+                view = CreateView(name, null, attrs);
+
+            return view;
+        }
+
+        protected IMvxAndroidViewFactory? AndroidViewFactory
         {
             get
             {
@@ -376,7 +401,8 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
                 if (Mvx.IoCProvider == null)
                 {
-                    MvxLog.Instance.Error("{Tag} - ... AndroidViewFactory IoCProvider is null!", Tag);
+                    // if IoCProvider is null, Log instance will probably be null too
+                    MvxLog.Instance?.Error("{Tag} - ... AndroidViewFactory IoCProvider is null!", Tag);
                     return null;
                 }
                 
@@ -389,7 +415,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
 
-        protected IMvxLayoutInflaterHolderFactoryFactory FactoryFactory
+        protected IMvxLayoutInflaterHolderFactoryFactory? FactoryFactory
         {
             get
             {
@@ -398,7 +424,8 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
                 if (Mvx.IoCProvider == null)
                 {
-                    MvxLog.Instance.Error("{Tag} - ... FactoryFactory IoCProvider is null!", Tag);
+                    // if IoCProvider is null, Log instance will probably be null too
+                    MvxLog.Instance?.Error("{Tag} - ... FactoryFactory IoCProvider is null!", Tag);
                     return null;
                 }
                 
@@ -413,7 +440,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         private class DelegateFactory2 : IMvxLayoutInflaterFactory
         {
-            private const string Tag = "DelegateFactory2";
+            private const string DelegateFactory2Tag = "DelegateFactory2";
 
             private readonly IFactory2 _factory;
             private readonly MvxBindingVisitor _factoryPlaceholder;
@@ -424,10 +451,10 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 _factoryPlaceholder = binder;
             }
 
-            public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
+            public View? OnCreateView(View? parent, string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
-                    MvxLog.Instance.Trace("{Tag} - ... OnCreateView ... {name}", Tag, name);
+                    MvxLog.Instance?.Trace("{Tag} - ... OnCreateView ... {name}", DelegateFactory2Tag, name);
 
                 return _factoryPlaceholder.OnViewCreated(
                     _factory.OnCreateView(parent, name, context, attrs),
@@ -437,7 +464,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         private class DelegateFactory1 : IMvxLayoutInflaterFactory
         {
-            private const string Tag = "DelegateFactory1";
+            private const string DelegateFactory1Tag = "DelegateFactory1";
 
             private readonly IFactory _factory;
             private readonly MvxBindingVisitor _factoryPlaceholder;
@@ -448,10 +475,10 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 _factoryPlaceholder = bindingVisitor;
             }
 
-            public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
+            public View? OnCreateView(View? parent, string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
-                    MvxLog.Instance.Trace("{Tag} - ... OnCreateView ... {name}", Tag, name);
+                    MvxLog.Instance?.Trace("{Tag} - ... OnCreateView ... {name}", DelegateFactory1Tag, name);
 
                 return _factoryPlaceholder.OnViewCreated(
                     _factory.OnCreateView(name, context, attrs),
@@ -461,7 +488,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         private class PrivateFactoryWrapper2 : Object, IFactory2
         {
-            private const string Tag = "PrivateFactoryWrapper2";
+            private const string PrivateFactoryWrapper2Tag = "PrivateFactoryWrapper2";
 
             private readonly IFactory2 _factory2;
             private readonly MvxBindingVisitor _bindingVisitor;
@@ -475,15 +502,18 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                 _bindingVisitor = bindingVisitor;
             }
 
+            [Preserve(Conditional = true)]
+#pragma warning disable 8618
             public PrivateFactoryWrapper2(IntPtr handle, JniHandleOwnership transfer)
+#pragma warning restore 8618
                 : base(handle, transfer)
             {
             }
 
-            public View OnCreateView(string name, Context context, IAttributeSet attrs)
+            public View? OnCreateView(string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
-                    MvxLog.Instance.Trace("{Tag} - ... OnCreateView 2 ... {name}", Tag, name);
+                    MvxLog.Instance?.Trace("{Tag} - ... OnCreateView 2 ... {name}", PrivateFactoryWrapper2Tag, name);
 
                 return _bindingVisitor.OnViewCreated(
                     // The activity's OnCreateView
@@ -491,10 +521,10 @@ namespace MvvmCross.Platforms.Android.Binding.Views
                     context, attrs);
             }
 
-            public View OnCreateView(View parent, string name, Context context, IAttributeSet attrs)
+            public View? OnCreateView(View? parent, string name, Context context, IAttributeSet attrs)
             {
                 if (Debug)
-                    MvxLog.Instance.Trace("{Tag} - ... OnCreateView 3 ... {name}", Tag, name);
+                    MvxLog.Instance?.Trace("{Tag} - ... OnCreateView 3 ... {name}", PrivateFactoryWrapper2Tag, name);
 
                 return _bindingVisitor.OnViewCreated(
                     _inflater.CreateCustomViewInternal(
@@ -506,4 +536,5 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             }
         }
     }
+#nullable restore
 }

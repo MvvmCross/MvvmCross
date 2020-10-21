@@ -7,8 +7,10 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters
 {
+#nullable enable
     public interface IMvxOverridePresentationAttribute
     {
         MvxBasePresentationAttribute PresentationAttribute(MvxViewModelRequest request);
     }
+#nullable restore
 }

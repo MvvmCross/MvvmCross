@@ -82,6 +82,9 @@ csharp_new_line_before_members_in_anonymous_types = true
 # Braces after if 
 csharp_prefer_braces = false
 
+# Nullable
+dotnet_code_quality.CA1062.null_check_validation_methods = ValidateArguments, GuardAgainstNullLogger
+
 #FxCop
 [*.{cs,vb}]
 

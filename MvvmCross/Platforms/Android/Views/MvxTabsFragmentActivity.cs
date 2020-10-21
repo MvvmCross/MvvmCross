@@ -150,7 +150,7 @@ namespace MvvmCross.Platforms.Android.Views
                 var ft = activity.SupportFragmentManager.BeginTransaction();
                 ft.Detach(tabInfo.CachedFragment);
                 ft.Commit();
-                activity.FragmentManager.ExecutePendingTransactions();
+                activity.SupportFragmentManager.ExecutePendingTransactions();
             }
 
             tabHost.AddTab(tabSpec);
@@ -171,9 +171,12 @@ namespace MvvmCross.Platforms.Android.Views
                 {
                     if (newTab.CachedFragment == null)
                     {
-                        newTab.CachedFragment = Fragment.Instantiate(this,
-                                                                     FragmentJavaName(newTab.FragmentType),
-                                                                     newTab.Bundle);
+                        var fragmentClass = Class.FromType(newTab.FragmentType);
+                        newTab.CachedFragment = SupportFragmentManager.FragmentFactory.Instantiate(
+                            fragmentClass.ClassLoader,
+                            fragmentClass.Name
+                        );
+
                         FixupDataContext(newTab);
                         ft.Add(_tabContentId, newTab.CachedFragment, newTab.Tag);
                     }
@@ -186,7 +189,7 @@ namespace MvvmCross.Platforms.Android.Views
 
                 _currentTab = newTab;
                 ft.Commit();
-                FragmentManager.ExecutePendingTransactions();
+                SupportFragmentManager.ExecutePendingTransactions();
             }
         }
 

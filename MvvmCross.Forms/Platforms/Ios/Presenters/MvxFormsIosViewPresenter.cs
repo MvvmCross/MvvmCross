@@ -41,7 +41,7 @@ namespace MvvmCross.Forms.Platforms.Ios.Presenters
         {
             if (!await FormsPagePresenter.Show(request)) return false;
 
-            if (_window.RootViewController == null)
+            if (Window.RootViewController == null)
                 SetWindowRootViewController(FormsApplication.MainPage.CreateViewController());
             return true;
         }

@@ -27,7 +27,8 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             bool isCacheableFragment = false,
             string tag = null,
             string popBackStackImmediateName = "",
-            MvxPopBackStack popBackStackImmediateFlag = MvxPopBackStack.Inclusive
+            MvxPopBackStack popBackStackImmediateFlag = MvxPopBackStack.Inclusive,
+            bool addFragment = false
         )
         {
             ActivityHostViewModelType = activityHostViewModelType;
@@ -43,6 +44,7 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             Tag = tag;
             PopBackStackImmediateName = popBackStackImmediateName;
             PopBackStackImmediateFlag = popBackStackImmediateFlag;
+            AddFragment = addFragment;
         }
 
         public MvxFragmentPresentationAttribute(
@@ -58,7 +60,8 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             bool isCacheableFragment = false,
             string tag = null,
             string popBackStackImmediateName = "",
-            MvxPopBackStack popBackStackImmediateFlag = MvxPopBackStack.Inclusive
+            MvxPopBackStack popBackStackImmediateFlag = MvxPopBackStack.Inclusive,
+            bool addFragment = false
         )
         {
             var context = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext;
@@ -76,6 +79,7 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             Tag = tag;
             PopBackStackImmediateName = popBackStackImmediateName;
             PopBackStackImmediateFlag = popBackStackImmediateFlag;
+            AddFragment = addFragment;
         }
 
         /// <summary>
@@ -124,6 +128,7 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
         public int TransitionStyle { get; set; } = DefaultTransitionStyle;
 
         public static bool DefaultIsCacheableFragment = false;
+
         /// <summary>
         /// Indicates if the fragment can be cached. False by default.
         /// </summary>
@@ -135,6 +140,7 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
         public string Tag { get; set; }
 
         public static string DefaultPopBackStackImmediateName = "";
+
         /// <summary>
         /// The name to be passed into PopBackStackImmediate.
         /// Assigning an empty string will default to using the FragmentJavaName
@@ -143,9 +149,15 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
         public string PopBackStackImmediateName { get; set; } = DefaultPopBackStackImmediateName;
 
         public static MvxPopBackStack DefaultPopBackStackImmediateFlag = MvxPopBackStack.Inclusive;
+
         /// <summary>
         /// Flag to be used with PopBackStackImmediate. 
         /// </summary>
         public MvxPopBackStack PopBackStackImmediateFlag { get; set; } = DefaultPopBackStackImmediateFlag;
+
+        /// <summary>
+        /// Setting this to true, will use Add instead of Replace on the Fragment transaction
+        /// </summary>
+        public bool AddFragment { get; set; }
     }
 }

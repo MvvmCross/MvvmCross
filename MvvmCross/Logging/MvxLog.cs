@@ -7,11 +7,12 @@ using MvvmCross.Logging.LogProviders;
 
 namespace MvvmCross.Logging
 {
+#nullable enable
     internal class MvxLog : IMvxLog
     {
-        internal static IMvxLog Instance { get; set; }
+        internal static IMvxLog? Instance { get; set; }
 
-        internal const string FailedToGenerateLogMessage = "Failed to generate log message";
+        private const string FailedToGenerateLogMessage = "Failed to generate log message";
 
         private readonly Logger _logger;
 
@@ -22,12 +23,12 @@ namespace MvvmCross.Logging
 
         public bool IsLogLevelEnabled(MvxLogLevel logLevel) => _logger(logLevel, null);
 
-        public bool Log(MvxLogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters)
+        public bool Log(MvxLogLevel logLevel, Func<string>? messageFunc, Exception? exception = null, params object[] formatParameters)
         {
             if (messageFunc == null)
                 return _logger(logLevel, null);
 
-            Func<string> wrappedMessageFunc = () =>
+            string? WrappedMessageFunc()
             {
                 try
                 {
@@ -39,9 +40,10 @@ namespace MvvmCross.Logging
                 }
 
                 return null;
-            };
+            }
 
-            return _logger(logLevel, wrappedMessageFunc, exception, formatParameters);
+            return _logger(logLevel, WrappedMessageFunc, exception, formatParameters);
         }
     }
+#nullable restore
 }

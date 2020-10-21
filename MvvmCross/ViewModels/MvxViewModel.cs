@@ -87,13 +87,13 @@ namespace MvvmCross.ViewModels
         }
     }
 
-    public abstract class MvxViewModel<TParameter> : MvxViewModel, IMvxViewModel<TParameter>
+    public abstract class MvxViewModel<TParameter> : MvxViewModel, IMvxViewModel<TParameter> where TParameter : class
     {
         public abstract void Prepare(TParameter parameter);
     }
 
     //TODO: Not possible to name MvxViewModel, name is MvxViewModelResult for now
-    public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult>
+    public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult> where TResult : class
     {
         public TaskCompletionSource<object> CloseCompletionSource { get; set; }
 
@@ -106,7 +106,7 @@ namespace MvvmCross.ViewModels
         }
     }
 
-    public abstract class MvxViewModel<TParameter, TResult> : MvxViewModelResult<TResult>, IMvxViewModel<TParameter, TResult>
+    public abstract class MvxViewModel<TParameter, TResult> : MvxViewModelResult<TResult>, IMvxViewModel<TParameter, TResult> where TParameter : class where TResult : class
     {
         public abstract void Prepare(TParameter parameter);
     }
