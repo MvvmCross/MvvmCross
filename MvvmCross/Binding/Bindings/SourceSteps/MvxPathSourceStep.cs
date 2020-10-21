@@ -12,7 +12,7 @@ namespace MvvmCross.Binding.Bindings.SourceSteps
     public class MvxPathSourceStep : MvxSourceStep<MvxPathSourceStepDescription>
     {
         private IMvxSourceBinding _sourceBinding;
-        
+
         private readonly object _sourceLocker = new object();
 
         public MvxPathSourceStep(MvxPathSourceStepDescription description)
