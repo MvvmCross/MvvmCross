@@ -38,6 +38,9 @@ namespace MvvmCross.Platforms.Android.Presenters
 #nullable enable
     public class MvxAndroidViewPresenter : MvxAttributeViewPresenter, IMvxAndroidViewPresenter
     {
+        public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
+        public const string SharedElementsBundleKey = "__sharedElementsKey";
+
         private readonly Lazy<IMvxAndroidCurrentTopActivity> _androidCurrentTopActivity =
             new Lazy<IMvxAndroidCurrentTopActivity>(() => Mvx.IoCProvider.Resolve<IMvxAndroidCurrentTopActivity>());
 
@@ -51,10 +54,8 @@ namespace MvvmCross.Platforms.Android.Presenters
             new Lazy<IMvxLog>(() => Mvx.IoCProvider.Resolve<IMvxLog>());
 
         protected IEnumerable<Assembly> AndroidViewAssemblies { get; set; }
-        public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
-        public const string SharedElementsBundleKey = "__sharedElementsKey";
 
-        protected MvxViewModelRequest? PendingRequest { get; private set; }
+        protected MvxViewModelRequest? PendingRequest { get; set; }
 
         protected virtual FragmentManager? CurrentFragmentManager
         {
@@ -67,7 +68,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             }
         }
 
-        protected virtual Activity? CurrentActivity => 
+        protected virtual Activity? CurrentActivity =>
             _androidCurrentTopActivity.Value?.Activity as Activity;
 
         protected IMvxAndroidActivityLifetimeListener ActivityLifetimeListener =>
@@ -105,7 +106,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
         protected Type GetAssociatedViewModelType(Type fromFragmentType)
         {
-            Type viewModelType = ViewModelTypeFinder.FindTypeOrNull(fromFragmentType);
+            var viewModelType = ViewModelTypeFinder?.FindTypeOrNull(fromFragmentType);
             return viewModelType ?? fromFragmentType.GetBasePresentationAttributes().First().ViewModelType;
         }
 
@@ -118,11 +119,13 @@ namespace MvvmCross.Platforms.Android.Presenters
             AttributeTypesToActionsDictionary.Register<MvxViewPagerFragmentPresentationAttribute>(ShowViewPagerFragment, CloseViewPagerFragment);
         }
 
-        public override MvxBasePresentationAttribute? GetPresentationAttribute(MvxViewModelRequest request)
+        public override MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request)
         {
             ValidateArguments(request);
 
-            var viewType = ViewsContainer.GetViewType(request.ViewModelType);
+            var viewType = ViewsContainer?.GetViewType(request.ViewModelType);
+            if (viewType == null)
+                throw new InvalidOperationException($"Could not get view type for ViewModel Type: {request.ViewModelType}");
 
             var overrideAttribute = GetOverridePresentationAttribute(request, viewType);
             if (overrideAttribute != null)
@@ -200,7 +203,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             return attribute;
         }
 
-        public override MvxBasePresentationAttribute? CreatePresentationAttribute(Type? viewModelType, Type? viewType)
+        public override MvxBasePresentationAttribute CreatePresentationAttribute(Type? viewModelType, Type? viewType)
         {
             if (viewType == null)
                 throw new ArgumentNullException(nameof(viewType));
@@ -223,7 +226,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 return new MvxActivityPresentationAttribute() { ViewType = viewType, ViewModelType = viewModelType };
             }
 
-            return null;
+            throw new InvalidOperationException($"Don't know how to create a presentation attribute for type {viewType}");
         }
 
         public override Task<bool> ChangePresentation(MvxPresentationHint hint)
@@ -298,7 +301,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             if (CurrentActivity.IsActivityAlive())
                 currentActivityType = CurrentActivity!.GetType();
 
-            var activityViewModelType = ViewModelTypeFinder.FindTypeOrNull(currentActivityType);
+            var activityViewModelType = ViewModelTypeFinder?.FindTypeOrNull(currentActivityType);
             return activityViewModelType;
         }
 
@@ -444,8 +447,8 @@ namespace MvvmCross.Platforms.Android.Presenters
         {
             ValidateArguments(attribute);
 
-            var viewType = ViewsContainer.GetViewType(attribute.ActivityHostViewModelType);
-            if (!viewType.IsSubclassOf(typeof(Activity)))
+            var viewType = ViewsContainer?.GetViewType(attribute.ActivityHostViewModelType);
+            if (viewType?.IsSubclassOf(typeof(Activity)) != true)
                 throw new MvxException("The host activity doesn't inherit Activity");
 
             var hostViewModelRequest = MvxViewModelRequest.GetDefaultRequest(attribute.ActivityHostViewModelType);
@@ -501,7 +504,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             // current implementation only supports one level of nesting 
 
-            var fragmentHost = GetFragmentByViewType(attribute.FragmentHostViewType);
+            var fragmentHost = GetFragmentByViewType(attribute!.FragmentHostViewType);
             if (fragmentHost == null)
                 throw new InvalidOperationException($"Fragment host not found when trying to show View {view.Name} as Nested Fragment");
 
@@ -528,7 +531,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             {
                 fragmentView = (IMvxFragmentView)fragmentManager.FindFragmentByTag(fragmentName);
             }
-            fragmentView = fragmentView ?? CreateFragment(fragmentManager, attribute, attribute.ViewType);
+            fragmentView ??= CreateFragment(fragmentManager, attribute, attribute.ViewType);
 
             var fragment = fragmentView.ToFragment();
             if (fragment == null)
@@ -602,13 +605,13 @@ namespace MvvmCross.Platforms.Android.Presenters
             {
                 var elements = new List<string>();
 
-                foreach (KeyValuePair<string, View> item in sharedElementsActivity.FetchSharedElementsToAnimate(attribute, request))
+                foreach (var (key, value) in sharedElementsActivity.FetchSharedElementsToAnimate(attribute, request))
                 {
-                    var transitionName = item.Value.GetTransitionNameSupport();
+                    var transitionName = value.GetTransitionNameSupport();
                     if (!string.IsNullOrEmpty(transitionName))
                     {
-                        fragmentTransaction.AddSharedElement(item.Value, transitionName);
-                        elements.Add($"{item.Key}:{transitionName}");
+                        fragmentTransaction.AddSharedElement(value, transitionName);
+                        elements.Add($"{key}:{transitionName}");
                     }
                     else
                     {
@@ -704,7 +707,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             FragmentManager? fragmentManager = null;
 
             // check for a ViewPager inside a Fragment
-            if (attribute!.FragmentHostViewType != null)
+            if (attribute.FragmentHostViewType != null)
             {
                 var fragment = GetFragmentByViewType(attribute.FragmentHostViewType);
                 if (fragment == null)
@@ -778,7 +781,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             TabLayout? tabLayout = null;
 
             // check for a ViewPager inside a Fragment
-            if (attribute?.FragmentHostViewType != null)
+            if (attribute.FragmentHostViewType != null)
             {
                 var fragment = GetFragmentByViewType(attribute.FragmentHostViewType);
 
@@ -833,7 +836,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             string tag = attribute.ViewType.FragmentJavaName();
             var toClose = CurrentFragmentManager?.FindFragmentByTag(tag);
-            if (toClose != null && toClose is DialogFragment dialog)
+            if (toClose is DialogFragment dialog)
             {
                 dialog.DismissAllowingStateLoss();
                 return Task.FromResult(true);
