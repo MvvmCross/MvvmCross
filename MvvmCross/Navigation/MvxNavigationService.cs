@@ -34,8 +34,6 @@ namespace MvvmCross.Navigation
 
         protected Dictionary<Regex, Type> Routes { get; } = new Dictionary<Regex, Type>();
 
-        protected virtual IMvxNavigationCache NavigationCache { get; }
-
         protected IMvxViewModelLoader ViewModelLoader { get; set; }
 
         protected ConditionalWeakTable<IMvxViewModel, TaskCompletionSource<object>> TaskCompletionResults { get; } =
@@ -53,11 +51,11 @@ namespace MvvmCross.Navigation
 
         public event EventHandler<ChangePresentationEventArgs>? DidChangePresentation;
 
-        public MvxNavigationService(IMvxNavigationCache navigationCache, IMvxViewModelLoader viewModelLoader)
+        public MvxNavigationService(IMvxViewModelLoader viewModelLoader,
+            IMvxViewDispatcher viewDispatcher)
         {
-            NavigationCache = navigationCache;
             ViewModelLoader = viewModelLoader;
-            ViewDispatcher = (IMvxViewDispatcher)MvxMainThreadDispatcher.Instance;
+            ViewDispatcher = viewDispatcher;
             ViewsContainer = new Lazy<IMvxViewsContainer>(() => Mvx.IoCProvider.Resolve<IMvxViewsContainer>());
         }
 
