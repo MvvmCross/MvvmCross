@@ -54,7 +54,7 @@ namespace MvvmCross.Platforms.Android.Presenters
         public const string ViewModelRequestBundleKey = "__mvxViewModelRequest";
         public const string SharedElementsBundleKey = "__sharedElementsKey";
 
-        protected MvxViewModelRequest? PendingRequest { get; private set; }
+        protected MvxViewModelRequest? PendingRequest { get; set; }
 
         protected virtual FragmentManager? CurrentFragmentManager
         {
