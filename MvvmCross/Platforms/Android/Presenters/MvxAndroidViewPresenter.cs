@@ -531,7 +531,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             {
                 fragmentView = (IMvxFragmentView)fragmentManager.FindFragmentByTag(fragmentName);
             }
-            fragmentView = fragmentView ?? CreateFragment(fragmentManager, attribute, attribute.ViewType);
+            fragmentView ??= CreateFragment(fragmentManager, attribute, attribute.ViewType);
 
             var fragment = fragmentView.ToFragment();
             if (fragment == null)
@@ -605,13 +605,13 @@ namespace MvvmCross.Platforms.Android.Presenters
             {
                 var elements = new List<string>();
 
-                foreach (KeyValuePair<string, View> item in sharedElementsActivity.FetchSharedElementsToAnimate(attribute, request))
+                foreach (var (key, value) in sharedElementsActivity.FetchSharedElementsToAnimate(attribute, request))
                 {
-                    var transitionName = item.Value.GetTransitionNameSupport();
+                    var transitionName = value.GetTransitionNameSupport();
                     if (!string.IsNullOrEmpty(transitionName))
                     {
-                        fragmentTransaction.AddSharedElement(item.Value, transitionName);
-                        elements.Add($"{item.Key}:{transitionName}");
+                        fragmentTransaction.AddSharedElement(value, transitionName);
+                        elements.Add($"{key}:{transitionName}");
                     }
                     else
                     {
