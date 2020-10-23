@@ -85,7 +85,9 @@ namespace MvvmCross.ViewModels
         }
     }
 
-    public class MvxAppStart<TViewModel, TParameter> : MvxAppStart<TViewModel> where TViewModel : IMvxViewModel<TParameter> where TParameter : class
+    public class MvxAppStart<TViewModel, TParameter> : MvxAppStart<TViewModel>
+        where TViewModel : IMvxViewModel<TParameter>
+        where TParameter : notnull
     {
         public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService) : base(application, navigationService)
         {
