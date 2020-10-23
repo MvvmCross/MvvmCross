@@ -39,10 +39,11 @@ namespace MvvmCross.ViewModels
 
         public virtual IMvxViewModel<TParameter> Load<TParameter>(
             Type viewModelType,
-            TParameter? param,
+            TParameter param,
             IMvxBundle? parameterValues,
             IMvxBundle? savedState,
-            IMvxNavigateEventArgs? navigationArgs) where TParameter : class
+            IMvxNavigateEventArgs? navigationArgs)
+            where TParameter : notnull
         {
             if (viewModelType == null)
                 throw new ArgumentNullException(nameof(viewModelType));
@@ -75,10 +76,11 @@ namespace MvvmCross.ViewModels
 
         public virtual IMvxViewModel<TParameter> Reload<TParameter>(
             IMvxViewModel<TParameter> viewModel,
-            TParameter? param,
+            TParameter param,
             IMvxBundle? parameterValues,
             IMvxBundle? savedState,
-            IMvxNavigateEventArgs? navigationArgs) where TParameter : class
+            IMvxNavigateEventArgs? navigationArgs)
+            where TParameter : notnull
         {
             RunViewModelLifecycle(viewModel, param, parameterValues, savedState, navigationArgs);
 
@@ -133,10 +135,11 @@ namespace MvvmCross.ViewModels
 
         protected void RunViewModelLifecycle<TParameter>(
             IMvxViewModel<TParameter> viewModel,
-            TParameter? param,
+            TParameter param,
             IMvxBundle? parameterValues,
             IMvxBundle? savedState,
-            IMvxNavigateEventArgs? navigationArgs) where TParameter : class
+            IMvxNavigateEventArgs? navigationArgs)
+            where TParameter : notnull
         {
             if (viewModel == null)
                 throw new ArgumentNullException(nameof(viewModel));
