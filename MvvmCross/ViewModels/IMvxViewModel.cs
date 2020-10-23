@@ -37,22 +37,22 @@ namespace MvvmCross.ViewModels
     }
 
     public interface IMvxViewModel<TParameter>
-        : IMvxViewModel where TParameter : class
+        : IMvxViewModel where TParameter : notnull
     {
-        void Prepare(TParameter? parameter);
+        void Prepare(TParameter parameter);
     }
 
     public interface IMvxViewModelResult<TResult>
         : IMvxViewModel
-        where TResult : class
+        where TResult : notnull
     {
         TaskCompletionSource<object>? CloseCompletionSource { get; set; }
     }
 
     public interface IMvxViewModel<TParameter, TResult>
         : IMvxViewModel<TParameter>, IMvxViewModelResult<TResult>
-        where TParameter : class
-        where TResult : class
+        where TParameter : notnull
+        where TResult : notnull
     {
     }
 #nullable restore
