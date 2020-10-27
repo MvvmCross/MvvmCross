@@ -11,6 +11,18 @@ namespace MvvmCross.Forms.Presenters.Attributes
     {
         public MvxModalPresentationAttribute()
         {
+
         }
+
+        public ModalPresentationStyle PresentationStyle { get; set; }
+    }
+
+    public enum ModalPresentationStyle
+    {
+        FullScreen = 0,
+        FormSheet = 1,
+        Automatic = 2,
+        OverFullScreen = 3,
+        PageSheet = 4
     }
 }

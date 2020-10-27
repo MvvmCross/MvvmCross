@@ -502,6 +502,7 @@ namespace MvvmCross.Forms.Presenters
             MvxViewModelRequest request)
         {
             var page = await CloseAndCreatePage(view, request, attribute, closeModal: false);
+            page.SetModalPagePresentationStyle(attribute.PresentationStyle);
 
             if (FormsApplication.MainPage == null)
                 FormsApplication.MainPage = CreateNavigationPage(CreateContentPage().Build(cp => cp.Title = nameof(ContentPage)));
