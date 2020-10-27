@@ -11,7 +11,6 @@ namespace MvvmCross.Forms.Presenters.Attributes
     {
         public MvxModalPresentationAttribute()
         {
-
         }
 
         /// <summary>
