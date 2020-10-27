@@ -7,7 +7,10 @@ using MvvmCross.Presenters;
 
 namespace MvvmCross.Platforms.Ios.Presenters
 {
+#nullable enable
     public interface IMvxIosViewPresenter : IMvxViewPresenter, IMvxCanCreateIosView
-    {    
+    {
+        public void ClosedPopoverViewController();
     }
+#nullable restore
 }

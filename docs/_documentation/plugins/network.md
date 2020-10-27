@@ -3,6 +3,10 @@ layout: documentation
 title: Network
 category: Plugins
 ---
+
+> Note: This plugin was removed in MvvmCross 7.1.0
+
+
 The purpose of the `Network` plugin is to provide an implementation `IMvxReachability`. It is currently implemented for iOS, Android, UWP and WPF.
 
 ```c#

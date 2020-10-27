@@ -26,7 +26,6 @@ namespace MvvmCross.Platforms.Mac.Core
         : MvxSetup, IMvxMacSetup
     {
         private IMvxApplicationDelegate _applicationDelegate;
-        private NSWindow _window;
 
         private IMvxMacViewPresenter _presenter;
 
@@ -35,21 +34,10 @@ namespace MvvmCross.Platforms.Mac.Core
             _applicationDelegate = applicationDelegate;
         }
 
-        public void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, NSWindow window)
-        {
-            PlatformInitialize(applicationDelegate);
-            _window = window;
-        }
-
         public void PlatformInitialize(IMvxApplicationDelegate applicationDelegate, IMvxMacViewPresenter presenter)
         {
             PlatformInitialize(applicationDelegate);
             _presenter = presenter;
-        }
-
-        protected NSWindow Window
-        {
-            get { return _window; }
         }
 
         protected IMvxApplicationDelegate ApplicationDelegate

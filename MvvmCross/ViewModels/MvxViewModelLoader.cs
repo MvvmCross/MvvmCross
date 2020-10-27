@@ -39,6 +39,7 @@ namespace MvvmCross.ViewModels
         }
 
         public IMvxViewModel ReloadViewModel<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, MvxViewModelRequest request, IMvxBundle savedState, IMvxNavigateEventArgs navigationArgs)
+            where TParameter : notnull
         {
             var viewModelLocator = FindViewModelLocator(request);
 
@@ -82,6 +83,7 @@ namespace MvvmCross.ViewModels
         }
 
         public IMvxViewModel LoadViewModel<TParameter>(MvxViewModelRequest request, TParameter param, IMvxBundle savedState, IMvxNavigateEventArgs navigationArgs)
+            where TParameter : notnull
         {
             if (request.ViewModelType == typeof(MvxNullViewModel))
             {

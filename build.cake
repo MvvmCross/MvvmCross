@@ -98,7 +98,7 @@ Task("Restore")
 Task("PatchBuildProps")
     .Does(() => 
 {
-    var buildProp = new FilePath("./Directory.build.props");
+    var buildProp = new FilePath("./Directory.Build.props");
     XmlPoke(buildProp, "//Project/PropertyGroup/Version", versionInfo.SemVer);
 });
 
@@ -117,7 +117,7 @@ Task("SonarStart")
 
     if (AzurePipelines.Environment.PullRequest.IsPullRequest)
     {
-        settings.PullRequestKey = AzurePipelines.Environment.PullRequest.Id;
+        settings.PullRequestKey = AzurePipelines.Environment.PullRequest.Number;
         settings.PullRequestBranch = AzurePipelines.Environment.PullRequest.SourceBranch;
         settings.PullRequestBase = AzurePipelines.Environment.PullRequest.TargetBranch;
     }
@@ -222,8 +222,8 @@ Task("UpdateChangelog")
         "t/question",
         "s/wont-fix",
         "s/duplicate",
-        "s/deprecated",
-        "s/invalid"
+        "s/invalid",
+        "s/needs-more-info",
     };
     arguments.Append("--exclude-labels {0}", string.Join(",", excludeLabels));
 
@@ -257,12 +257,20 @@ Task("UpdateChangelog")
     }
 });
 
-Task("Default")
+Task("Sonar")
     .IsDependentOn("Clean")
     .IsDependentOn("SonarStart")
     .IsDependentOn("Build")
     .IsDependentOn("UnitTest")
     .IsDependentOn("SonarEnd")
+    .Does(() => 
+{
+});
+
+Task("Default")
+    .IsDependentOn("Clean")
+    .IsDependentOn("Build")
+    .IsDependentOn("UnitTest")
     .IsDependentOn("CopyPackages")
     .Does(() => 
 {
@@ -279,9 +287,9 @@ MSBuildSettings GetDefaultBuildSettings()
         Verbosity = verbosity
     };
 
-    // workaround for derped Java Home ENV vars
-    if (IsRunningOnWindows() && isRunningOnPipelines)
+    if (isRunningOnPipelines)
     {
+        // remove this when Xamarin.Android supports JDK11
         var javaSdkDir = EnvironmentVariable("JAVA_HOME_8_X64");
         Information("Setting JavaSdkDirectory to: " + javaSdkDir);
         settings = settings.WithProperty("JavaSdkDirectory", javaSdkDir);

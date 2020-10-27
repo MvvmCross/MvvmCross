@@ -3,8 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading.Tasks;
-using MvvmCross.Logging;
-using MvvmCross.Navigation;
 
 namespace MvvmCross.ViewModels
 {
@@ -88,12 +86,14 @@ namespace MvvmCross.ViewModels
     }
 
     public abstract class MvxViewModel<TParameter> : MvxViewModel, IMvxViewModel<TParameter>
+        where TParameter : notnull
     {
         public abstract void Prepare(TParameter parameter);
     }
 
     //TODO: Not possible to name MvxViewModel, name is MvxViewModelResult for now
     public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult>
+        where TResult : notnull
     {
         public TaskCompletionSource<object> CloseCompletionSource { get; set; }
 
@@ -107,6 +107,8 @@ namespace MvvmCross.ViewModels
     }
 
     public abstract class MvxViewModel<TParameter, TResult> : MvxViewModelResult<TResult>, IMvxViewModel<TParameter, TResult>
+        where TParameter : notnull
+        where TResult : notnull
     {
         public abstract void Prepare(TParameter parameter);
     }

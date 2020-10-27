@@ -48,7 +48,7 @@ namespace Playground.Mac
 
         public MvxBasePresentationAttribute PresentationAttribute(MvxViewModelRequest request)
         {
-            if (!NSApplication.SharedApplication.Windows.Any())
+            if (!NSApplication.SharedApplication.DangerousWindows.Any())
                 return null;
 
             return new MvxContentPresentationAttribute

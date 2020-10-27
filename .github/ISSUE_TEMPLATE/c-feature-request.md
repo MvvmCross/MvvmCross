@@ -22,3 +22,4 @@ about: Want to see something new included in the Framework? Submit it!
 - [ ] :apple: MacOS
 - [ ] :tv: tvOS
 - [ ] :monkey: Xamarin.Forms
+- [ ] :🌍: Blazor
