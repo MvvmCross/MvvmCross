@@ -502,7 +502,6 @@ namespace MvvmCross.Forms.Presenters
             MvxViewModelRequest request)
         {
             var page = await CloseAndCreatePage(view, request, attribute, closeModal: false);
-            page.SetModalPagePresentationStyle(attribute.PresentationStyle);
 
             if (FormsApplication.MainPage == null)
                 FormsApplication.MainPage = CreateNavigationPage(CreateContentPage().Build(cp => cp.Title = nameof(ContentPage)));
@@ -519,11 +518,16 @@ namespace MvvmCross.Forms.Presenters
                 {
                     // Either last isn't a nav page, or there is no last page
                     // So, wrap the current page in a nav page and push onto stack
-                    await FormsApplication.MainPage.Navigation.PushModalAsync(CreateNavigationPage(page));
+                    var navigationPage = CreateNavigationPage(page);
+                    navigationPage.SetModalPagePresentationStyle(attribute.PresentationStyle);
+
+                    await FormsApplication.MainPage.Navigation.PushModalAsync(navigationPage);
                 }
             }
             else
             {
+                page.SetModalPagePresentationStyle(attribute.PresentationStyle);
+
                 // No navigation page required, so just push onto modal stack
                 await FormsApplication.MainPage.Navigation.PushModalAsync(page, attribute.Animated);
             }
