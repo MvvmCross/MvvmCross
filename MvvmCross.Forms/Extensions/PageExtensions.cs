@@ -8,7 +8,7 @@ namespace MvvmCross.Forms.Presenters
 {
     public static class PageExtensions
     {
-        public static void SetModalPagePresentationStyle(this XFPage page, ModalPresentationStyle presentationStyle)
+        public static void SetModalPagePresentationStyle(this XFPage page, MvxFormsModalPresentationStyle presentationStyle)
         {
             if (page == null)
             {

@@ -58,7 +58,7 @@ Will show the Page as a Modal.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| PresentationStyle | `ModalPresentationStyle` | Use this to set the modal presentation style of the modal. This is used for iOS devices for setting different types of modals. |
+| PresentationStyle | `MvxFormsModalPresentationStyle` | Use this to set the modal presentation style of the modal. This is used for iOS devices for setting different types of modals. |
 
 ### MvxNavigationPagePresentationAttribute
 
