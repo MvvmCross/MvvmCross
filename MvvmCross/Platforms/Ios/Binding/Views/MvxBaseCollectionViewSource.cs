@@ -14,12 +14,13 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 {
     public abstract class MvxBaseCollectionViewSource : UICollectionViewSource
     {
+        public event EventHandler SelectedItemChanged;
+
+        private object _selectedItem;
+
         public static readonly NSString UnknownCellIdentifier = NSString.Empty;
 
-        private readonly NSString _cellIdentifier;
-        [Weak] private readonly UICollectionView _collectionView;
-
-        protected virtual NSString DefaultCellIdentifier => _cellIdentifier;
+        protected virtual NSString DefaultCellIdentifier { get; }
 
         protected MvxBaseCollectionViewSource(UICollectionView collectionView)
             : this(collectionView, UnknownCellIdentifier)
@@ -29,11 +30,12 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         protected MvxBaseCollectionViewSource(UICollectionView collectionView,
                                               NSString cellIdentifier)
         {
-            _collectionView = collectionView;
-            _cellIdentifier = cellIdentifier;
+            CollectionView = collectionView;
+            DefaultCellIdentifier = cellIdentifier;
         }
 
-        protected UICollectionView CollectionView => _collectionView;
+        [field: Weak]
+        protected UICollectionView CollectionView { get; }
 
         public ICommand SelectionChangedCommand { get; set; }
 
@@ -49,33 +51,19 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
         }
 
-        protected virtual UICollectionViewCell GetOrCreateCellFor(UICollectionView collectionView, NSIndexPath indexPath,
-                                                                  object item)
-        {
-            return (UICollectionViewCell)collectionView.DequeueReusableCell(DefaultCellIdentifier, indexPath);
-        }
-
-        protected abstract object GetItemAt(NSIndexPath indexPath);
-
         public override void ItemSelected(UICollectionView collectionView, NSIndexPath indexPath)
         {
             var item = GetItemAt(indexPath);
 
-            var command = SelectionChangedCommand;
-            if (command != null && command.CanExecute(item))
-                command.Execute(item);
+            if (SelectionChangedCommand?.CanExecute(item) == true)
+                SelectionChangedCommand.Execute(item);
 
             SelectedItem = item;
         }
 
-        private object _selectedItem;
-
         public object SelectedItem
         {
-            get
-            {
-                return _selectedItem;
-            }
+            get => _selectedItem;
             set
             {
                 // note that we only expect this to be called from the control/Table
@@ -85,15 +73,12 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
         }
 
-        public event EventHandler SelectedItemChanged;
-
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {
             var item = GetItemAt(indexPath);
             var cell = GetOrCreateCellFor(collectionView, indexPath, item);
 
-            var bindable = cell as IMvxDataConsumer;
-            if (bindable != null)
+            if (cell is IMvxDataConsumer bindable)
                 bindable.DataContext = item;
 
             return cell;
@@ -119,5 +104,13 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         {
             return 0;
         }
+
+        protected virtual UICollectionViewCell GetOrCreateCellFor(UICollectionView collectionView, NSIndexPath indexPath,
+            object item)
+        {
+            return (UICollectionViewCell)collectionView.DequeueReusableCell(DefaultCellIdentifier, indexPath);
+        }
+
+        protected abstract object GetItemAt(NSIndexPath indexPath);
     }
 }
