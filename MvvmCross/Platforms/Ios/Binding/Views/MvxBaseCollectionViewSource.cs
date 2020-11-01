@@ -115,5 +115,10 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         {
             return 1;
         }
+
+        public override nint GetItemsCount(UICollectionView collectionView, nint section)
+        {
+            return 0;
+        }
     }
 }
