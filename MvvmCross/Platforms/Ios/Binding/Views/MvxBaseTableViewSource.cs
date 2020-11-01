@@ -14,7 +14,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 {
     public abstract class MvxBaseTableViewSource : UITableViewSource
     {
-        [Weak] private UITableView _tableView;
+        [Weak] private readonly UITableView _tableView;
 
         protected MvxBaseTableViewSource(UITableView tableView)
         {
@@ -155,5 +155,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         {
             return 1;
         }
+        
+        
     }
 }

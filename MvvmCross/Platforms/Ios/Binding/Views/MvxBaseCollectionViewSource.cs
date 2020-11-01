@@ -14,10 +14,10 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 {
     public abstract class MvxBaseCollectionViewSource : UICollectionViewSource
     {
-        public static readonly NSString UnknownCellIdentifier = null;
+        public static readonly NSString UnknownCellIdentifier = NSString.Empty;
 
         private readonly NSString _cellIdentifier;
-        [Weak] private UICollectionView _collectionView;
+        [Weak] private readonly UICollectionView _collectionView;
 
         protected virtual NSString DefaultCellIdentifier => _cellIdentifier;
 
@@ -81,8 +81,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
                 // note that we only expect this to be called from the control/Table
                 // we don't have any multi-select or any scroll into view functionality here
                 _selectedItem = value;
-                var handler = SelectedItemChanged;
-                handler?.Invoke(this, EventArgs.Empty);
+                SelectedItemChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
