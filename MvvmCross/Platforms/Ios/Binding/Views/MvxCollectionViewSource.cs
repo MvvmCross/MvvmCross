@@ -26,22 +26,8 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         {
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_subscription != null)
-                {
-                    _subscription.Dispose();
-                    _subscription = null;
-                }
-            }
-
-            base.Dispose(disposing);
-        }
-
         public MvxCollectionViewSource(UICollectionView collectionView,
-                                       NSString defaultCellIdentifier)
+            NSString defaultCellIdentifier)
             : base(collectionView, defaultCellIdentifier)
         {
         }
@@ -57,47 +43,62 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             {
                 if (ReferenceEquals(_itemsSource, value)
                     && !ReloadOnAllItemsSourceSets)
+                {
                     return;
+                }
 
                 if (_subscription != null)
                 {
                     _subscription.Dispose();
                     _subscription = null;
                 }
+
                 _itemsSource = value;
-                var collectionChanged = _itemsSource as INotifyCollectionChanged;
-                if (collectionChanged != null)
+
+                if (_itemsSource is INotifyCollectionChanged collectionChanged)
                 {
                     _subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
                 }
+
                 ReloadData();
             }
         }
 
         protected override object GetItemAt(NSIndexPath indexPath)
         {
+            if (indexPath == null)
+                return null;
+
             return ItemsSource?.ElementAt(indexPath.Row);
         }
-            
+
         /// <summary>
         /// Wait for all animations to finish
         /// </summary>
-        public async Task WaitAnimationsCompletedAsync()
+        public Task WaitAnimationsCompletedAsync()
         {
-            await CollectionView.PerformBatchUpdatesAsync(() => { }); 
+            return CollectionView.PerformBatchUpdatesAsync(() => { });
         }
 
         protected virtual void CollectionChangedOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
             ReloadData();
         }
-        
+
         public override nint GetItemsCount(UICollectionView collectionView, nint section)
         {
-            if (ItemsSource == null)
-                return 0;
+            return ItemsSource?.Count() ?? 0;
+        }
 
-            return ItemsSource.Count();
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && _subscription != null)
+            {
+                _subscription.Dispose();
+                _subscription = null;
+            }
+
+            base.Dispose(disposing);
         }
     }
 }

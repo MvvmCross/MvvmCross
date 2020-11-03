@@ -31,32 +31,17 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             MvxLog.Instance.Warn("TableViewSource IntPtr constructor used - we expect this only to be called during memory leak debugging - see https://github.com/MvvmCross/MvvmCross/pull/467");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_subscription != null)
-                {
-                    _subscription.Dispose();
-                    _subscription = null;
-                }
-            }
-
-            base.Dispose(disposing);
-        }
-
         [MvxSetToNullAfterBinding]
         public virtual IEnumerable ItemsSource
         {
-            get
-            {
-                return _itemsSource;
-            }
+            get => _itemsSource;
             set
             {
                 if (ReferenceEquals(_itemsSource, value)
                     && !ReloadOnAllItemsSourceSets)
+                {
                     return;
+                }
 
                 if (_subscription != null)
                 {
@@ -66,8 +51,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
 
                 _itemsSource = value;
 
-                var collectionChanged = _itemsSource as INotifyCollectionChanged;
-                if (collectionChanged != null)
+                if (_itemsSource is INotifyCollectionChanged collectionChanged)
                 {
                     _subscription = collectionChanged.WeakSubscribe(CollectionChangedOnCollectionChanged);
                 }
@@ -76,21 +60,26 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
         }
 
-        protected override object GetItemAt(NSIndexPath indexPath)
-        {
-            return ItemsSource?.ElementAt(indexPath.Row);
-        }
-
         public bool ReloadOnAllItemsSourceSets { get; set; }
         public bool UseAnimations { get; set; }
         public UITableViewRowAnimation AddAnimation { get; set; }
         public UITableViewRowAnimation RemoveAnimation { get; set; }
         public UITableViewRowAnimation ReplaceAnimation { get; set; }
 
+        public override nint RowsInSection(UITableView tableview, nint section)
+        {
+            return ItemsSource?.Count() ?? 0;
+        }
+
+        protected override object GetItemAt(NSIndexPath indexPath)
+        {
+            return ItemsSource?.ElementAt(indexPath.Row);
+        }
+
         protected virtual void CollectionChangedOnCollectionChanged(object sender,
                                                                     NotifyCollectionChangedEventArgs args)
         {
-            Action action = () =>
+            void Action()
             {
                 if (!UseAnimations)
                 {
@@ -98,55 +87,57 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
                 }
                 else
                 {
-                    if (TryDoAnimatedChange(args))
-                        return;
+                    if (TryDoAnimatedChange(args)) return;
 
                     ReloadTableData();
                 }
-            };
+            }
 
             if (NSThread.IsMain)
-                action();
+                Action();
             else
-                InvokeOnMainThread(action);
+                InvokeOnMainThread(Action);
         }
 
         protected bool TryDoAnimatedChange(NotifyCollectionChangedEventArgs args)
         {
+            if (args == null)
+                return false;
+
             switch (args.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    {
-                        var newIndexPaths = CreateNSIndexPathArray(args.NewStartingIndex, args.NewItems.Count);
-                        TableView.InsertRows(newIndexPaths, AddAnimation);
-                        return true;
-                    }
+                {
+                    var newIndexPaths = CreateNSIndexPathArray(args.NewStartingIndex, args.NewItems.Count);
+                    TableView.InsertRows(newIndexPaths, AddAnimation);
+                    return true;
+                }
                 case NotifyCollectionChangedAction.Remove:
-                    {
-                        var oldIndexPaths = CreateNSIndexPathArray(args.OldStartingIndex, args.OldItems.Count);
-                        TableView.DeleteRows(oldIndexPaths, RemoveAnimation);
-                        return true;
-                    }
+                {
+                    var oldIndexPaths = CreateNSIndexPathArray(args.OldStartingIndex, args.OldItems.Count);
+                    TableView.DeleteRows(oldIndexPaths, RemoveAnimation);
+                    return true;
+                }
                 case NotifyCollectionChangedAction.Move:
-                    {
-                        if (args.NewItems.Count != 1 && args.OldItems.Count != 1)
-                            return false;
+                {
+                    if (args.NewItems.Count != 1 && args.OldItems.Count != 1)
+                        return false;
 
-                        var oldIndexPath = NSIndexPath.FromRowSection(args.OldStartingIndex, 0);
-                        var newIndexPath = NSIndexPath.FromRowSection(args.NewStartingIndex, 0);
-                        TableView.MoveRow(oldIndexPath, newIndexPath);
-                        return true;
-                    }
+                    var oldIndexPath = NSIndexPath.FromRowSection(args.OldStartingIndex, 0);
+                    var newIndexPath = NSIndexPath.FromRowSection(args.NewStartingIndex, 0);
+                    TableView.MoveRow(oldIndexPath, newIndexPath);
+                    return true;
+                }
                 case NotifyCollectionChangedAction.Replace:
-                    {
-                        if (args.NewItems.Count != args.OldItems.Count)
-                            return false;
+                {
+                    if (args.NewItems.Count != args.OldItems.Count)
+                        return false;
 
-                        var indexPaths = Enumerable.Range(args.NewStartingIndex, args.NewItems.Count)
-                            .Select(index => NSIndexPath.FromRowSection(index, 0)).ToArray();
-                        TableView.ReloadRows(indexPaths, ReplaceAnimation);
-                        return true;
-                    }
+                    var indexPaths = Enumerable.Range(args.NewStartingIndex, args.NewItems.Count)
+                        .Select(index => NSIndexPath.FromRowSection(index, 0)).ToArray();
+                    TableView.ReloadRows(indexPaths, ReplaceAnimation);
+                    return true;
+                }
                 default:
                     return false;
             }
@@ -162,12 +153,15 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             return newIndexPaths;
         }
 
-        public override nint RowsInSection(UITableView tableview, nint section)
+        protected override void Dispose(bool disposing)
         {
-            if (ItemsSource == null)
-                return 0;
+            if (disposing && _subscription != null)
+            {
+                _subscription.Dispose();
+                _subscription = null;
+            }
 
-            return ItemsSource.Count();
+            base.Dispose(disposing);
         }
     }
 }
