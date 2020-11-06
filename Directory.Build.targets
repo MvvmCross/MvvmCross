@@ -46,7 +46,7 @@
   <Import Project="XamarinForms.targets" Condition="'$(IsXamarinForms)' == 'true'"/>
 
   <ItemGroup>
-    <PackageReference Update="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.0.0.5" />
+    <PackageReference Update="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0" />
     <PackageReference Update="Xamarin.AndroidX.CardView" Version="1.0.0.5" />
     <PackageReference Update="Xamarin.AndroidX.Leanback" Version="1.0.0.5" />
     <PackageReference Update="Xamarin.AndroidX.RecyclerView" Version="1.1.0.5" />
