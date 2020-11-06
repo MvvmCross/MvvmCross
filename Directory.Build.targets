@@ -50,7 +50,7 @@
     <PackageReference Update="Xamarin.AndroidX.CardView" Version="1.0.0.5" />
     <PackageReference Update="Xamarin.AndroidX.Leanback" Version="1.0.0.5" />
     <PackageReference Update="Xamarin.AndroidX.RecyclerView" Version="1.1.0.5" />
-    <PackageReference Update="Xamarin.AndroidX.AppCompat" Version="1.2.0.4" />
+    <PackageReference Update="Xamarin.AndroidX.AppCompat" Version="1.2.0.5" />
     <PackageReference Update="Xamarin.AndroidX.Fragment" Version="1.2.5.3" />
     <PackageReference Update="Xamarin.AndroidX.ViewPager" Version="1.0.0.5" />
     <PackageReference Update="Xamarin.AndroidX.Preference" Version="1.1.1.5" />
