@@ -58,7 +58,7 @@
     <PackageReference Update="Xamarin.Google.Android.Material" Version="1.1.0.5" />
     <PackageReference Update="Xamarin.GooglePlayServices.Location" Version="117.0.0" />
 
-    <PackageReference Update="Microsoft.CodeAnalysis" Version="3.7.0" />
+    <PackageReference Update="Microsoft.CodeAnalysis" Version="3.8.0" />
 
     <PackageReference Update="Newtonsoft.Json" Version="12.0.3" />
 
