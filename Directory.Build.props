@@ -3,9 +3,7 @@
     <Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
     <PackageLicenseExpression>MS-PL</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/MvvmCross/MvvmCross</PackageProjectUrl>
-    <PackageIconUrl>http://i.imgur.com/Baucn8c.png</PackageIconUrl>
-    <!--<PackageIcon>icon.png</PackageIcon>
-    <PackageIconFullPath>$(MSBuildThisFileDirectory)icon.png</PackageIconFullPath>-->
+    <PackageIcon>icon.png</PackageIcon>
     <Authors>.NET Foundation and Contributors</Authors>
     <Owners>MvvmCross;slodge;cheesebaron;martijn00</Owners>
     <PackageTags>mvvm;mvvmcross;xamarin;android;ios;mac;forms;monodroid;monotouch;xamarin.android;xamarin.ios;xamarin.forms;xamarin.mac;wpf;net;net45;uwp;tizen</PackageTags>
@@ -13,7 +11,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <NeutralLanguage>en-US</NeutralLanguage>
     <MinClientVersion>2.12</MinClientVersion>
-	
+
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <RepositoryUrl>https://github.com/MvvmCross/MvvmCross</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -24,7 +22,7 @@
     <LangVersion>8.0</LangVersion>
     <NoWarn>$(NoWarn);1591;1701;1702;1705;VSX1000;CS0109;CS0108;CS0618;CS0114;NU1603</NoWarn>
     <Platform>AnyCPU</Platform>
-    
+
     <IsTestProject>$(MSBuildProjectName.Contains('UnitTest'))</IsTestProject>
     <IsLibraryProject>$(MSBuildProjectName.Contains('MvvmCross'))</IsLibraryProject>
     <IsXamarinForms>$(MSBuildProjectName.Contains('.Forms'))</IsXamarinForms>
@@ -35,19 +33,19 @@
     <IncludeSymbols>true</IncludeSymbols>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    
+
     <DesignTimeBuild>false</DesignTimeBuild>
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
-	
+
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild Condition=" '$(IsTestProject)' != 'true'">true</GeneratePackageOnBuild>
   </PropertyGroup>
 
-	<PropertyGroup Condition="'$(IsTestProject)' != 'true' and '$(TF_BUILD)' == 'true'">
-	  <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-	  <Deterministic>true</Deterministic>
-	</PropertyGroup>
+  <PropertyGroup Condition="'$(IsTestProject)' != 'true' and '$(TF_BUILD)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugType>full</DebugType>
@@ -65,23 +63,17 @@
   </ItemGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <TargetsToBuild>All</TargetsToBuild> 
-    <!--<TargetsToBuild>Android</TargetsToBuild>-->
-    <!--<TargetsToBuild>Uap</TargetsToBuild>--> 
-    <!--<TargetsToBuild>iOS</TargetsToBuild>--> 
-    <!--<TargetsToBuild>Tizen</TargetsToBuild>--> 
+    <TargetsToBuild>All</TargetsToBuild>
+    <!-- <TargetsToBuild>Android</TargetsToBuild> -->
+    <!-- <TargetsToBuild>Uap</TargetsToBuild> -->
+    <!-- <TargetsToBuild>iOS</TargetsToBuild> -->
+    <!-- <TargetsToBuild>Tizen</TargetsToBuild> -->
+    <!-- <TargetsToBuild>Mac</TargetsToBuild> -->
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' != 'Debug' ">
     <TargetsToBuild>All</TargetsToBuild>
   </PropertyGroup>
-  
-  <PropertyGroup>
-    <TargetFrameworkMonikerAssemblyAttributesPath>$([System.IO.Path]::Combine('$(IntermediateOutputPath)','$(TargetFrameworkMoniker).AssemblyAttributes$(DefaultLanguageSourceExtension)'))</TargetFrameworkMonikerAssemblyAttributesPath>
-  </PropertyGroup>
-  <ItemGroup>
-    <EmbeddedFiles Include="$(GeneratedAssemblyInfoFile)"/>
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Roslynator.Analyzers" Version="3.0.0">
@@ -92,9 +84,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0">
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.14.0.22654">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 

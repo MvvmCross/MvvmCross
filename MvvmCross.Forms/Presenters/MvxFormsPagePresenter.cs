@@ -63,6 +63,7 @@ namespace MvvmCross.Forms.Presenters
             }
         }
 
+        private IMvxViewsContainer _viewsContainer;
         public override IMvxViewsContainer ViewsContainer
         {
             get
@@ -71,9 +72,9 @@ namespace MvvmCross.Forms.Presenters
                     _viewsContainer = PlatformPresenter.ViewsContainer;
                 return base.ViewsContainer;
             }
-            set => base.ViewsContainer = value;
         }
 
+        private IMvxViewModelTypeFinder _viewModelTypeFinder;
         public override IMvxViewModelTypeFinder ViewModelTypeFinder
         {
             get
@@ -82,9 +83,9 @@ namespace MvvmCross.Forms.Presenters
                     _viewModelTypeFinder = PlatformPresenter.ViewModelTypeFinder;
                 return base.ViewModelTypeFinder;
             }
-            set => base.ViewModelTypeFinder = value;
         }
 
+        private IDictionary<Type, MvxPresentationAttributeAction> _attributeTypesActionsDictionary;
         public override IDictionary<Type, MvxPresentationAttributeAction> AttributeTypesToActionsDictionary
         {
             get
@@ -95,7 +96,6 @@ namespace MvvmCross.Forms.Presenters
                 }
                 return _attributeTypesActionsDictionary;
             }
-            set => base.AttributeTypesToActionsDictionary = value;
         }
 
         public virtual Page CreatePage(Type viewType, MvxViewModelRequest request, MvxBasePresentationAttribute attribute)
@@ -518,11 +518,16 @@ namespace MvvmCross.Forms.Presenters
                 {
                     // Either last isn't a nav page, or there is no last page
                     // So, wrap the current page in a nav page and push onto stack
-                    await FormsApplication.MainPage.Navigation.PushModalAsync(CreateNavigationPage(page));
+                    var navigationPage = CreateNavigationPage(page);
+                    navigationPage.SetModalPagePresentationStyle(attribute.PresentationStyle);
+
+                    await FormsApplication.MainPage.Navigation.PushModalAsync(navigationPage);
                 }
             }
             else
             {
+                page.SetModalPagePresentationStyle(attribute.PresentationStyle);
+
                 // No navigation page required, so just push onto modal stack
                 await FormsApplication.MainPage.Navigation.PushModalAsync(page, attribute.Animated);
             }

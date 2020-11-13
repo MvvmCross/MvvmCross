@@ -11,21 +11,6 @@ namespace MvvmCross.Platforms.Mac.Core
 {
     public abstract class MvxApplicationDelegate : NSApplicationDelegate, IMvxApplicationDelegate
     {
-        private NSWindow window;
-        public virtual NSWindow MainWindow
-        {
-            get {
-                if (window == null)
-                {
-                    var style = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
-                    var rect = new CoreGraphics.CGRect(200, 1000, 1024, 768);
-                    window = new NSWindow(rect, style, NSBackingStore.Buffered, false);
-                }
-                return window;
-            }
-            set { window = value; }
-        }
-
         public MvxApplicationDelegate() : base()
         {
             RegisterSetup();
@@ -33,7 +18,7 @@ namespace MvvmCross.Platforms.Mac.Core
 
         public override void DidFinishLaunching(Foundation.NSNotification notification)
         {
-            MvxMacSetupSingleton.EnsureSingletonAvailable(this, MainWindow).EnsureInitialized();
+            MvxMacSetupSingleton.EnsureSingletonAvailable(this).EnsureInitialized();
             RunAppStart(notification);
 
             FireLifetimeChanged(MvxLifetimeEvent.Launching);
@@ -80,8 +65,8 @@ namespace MvvmCross.Platforms.Mac.Core
     }
 
     public class MvxApplicationDelegate<TMvxMacSetup, TApplication> : MvxApplicationDelegate
-   where TMvxMacSetup : MvxMacSetup<TApplication>, new()
-   where TApplication : class, IMvxApplication, new()
+        where TMvxMacSetup : MvxMacSetup<TApplication>, new()
+        where TApplication : class, IMvxApplication, new()
     {
         protected override void RegisterSetup()
         {

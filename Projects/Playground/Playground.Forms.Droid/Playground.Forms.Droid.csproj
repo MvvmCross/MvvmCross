@@ -32,10 +32,6 @@
     <AndroidDexTool>d8</AndroidDexTool>
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
-    <AotAssemblies>false</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
-    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
-    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -137,22 +133,14 @@
     <PackageReference Include="Serilog.Sinks.Xamarin">
       <Version>0.2.0.64</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.1.0.4" />
+    <PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.2.0" />
     <PackageReference Include="Xamarin.AndroidX.AppCompat.Resources" Version="1.1.0.1" />
-    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0.1" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.1.0.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross.DroidX\Material\MvvmCross.DroidX.Material.csproj">
       <Project>{45f63a4a-9a37-4929-9c80-48a91f346e0d}</Project>
       <Name>MvvmCross.DroidX.Material</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross.DroidX\Fragment\MvvmCross.DroidX.Fragment.csproj">
-      <Project>{fc0b3e3c-8b00-48fa-af93-981a45b2be4b}</Project>
-      <Name>MvvmCross.DroidX.Fragment</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\MvvmCross.DroidX\AppCompat\MvvmCross.DroidX.AppCompat.csproj">
-      <Project>{fd67cbbc-4bac-40d6-9f4c-28aae6c8533e}</Project>
-      <Name>MvvmCross.DroidX.AppCompat</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\MvvmCross.Forms\MvvmCross.Forms.csproj">
       <Project>{013bb2b2-8204-43bd-aa7b-e494007f0b94}</Project>

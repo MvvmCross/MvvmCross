@@ -9,6 +9,9 @@ This package contains the 'MvvmCross.Forms.Platforms.Wpf' libraries for MvvmCros
     <PackageId>MvvmCross.Forms.Platforms.Wpf</PackageId>
     <EnableDefaultItems>false</EnableDefaultItems>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(OS)' == 'Windows_NT' ">
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 

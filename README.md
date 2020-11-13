@@ -172,7 +172,7 @@ Note that code submissions will be reviewed and tested. Only code that meets qua
 
 * [StackOverflow](https://stackoverflow.com/questions/tagged/mvvmcross)
 * [Xamarin forums](https://forums.xamarin.com)
-* [Slack](https://xamarinchat.herokuapp.com/) join the #mvvmcross channel after you are in
+* [Discord](https://aka.ms/dotnet-discord) #mvvmcross channel
 
 ### Licensing
 

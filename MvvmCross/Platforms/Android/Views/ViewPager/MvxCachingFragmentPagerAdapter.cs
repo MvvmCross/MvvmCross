@@ -28,6 +28,8 @@ namespace MvvmCross.Platforms.Android.Views.ViewPager
         private List<string> _savedFragmentTags = new List<string>();
         private readonly List<Fragment.SavedState> _savedState = new List<Fragment.SavedState>();
 
+        protected FragmentFactory FragmentFactory => _fragmentManager.FragmentFactory;
+
         protected MvxCachingFragmentPagerAdapter(IntPtr javaReference, JniHandleOwnership transfer)
             : base(javaReference, transfer)
         {

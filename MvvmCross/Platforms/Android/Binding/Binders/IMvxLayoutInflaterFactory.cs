@@ -8,8 +8,10 @@ using Android.Views;
 
 namespace MvvmCross.Platforms.Android.Binding.Binders
 {
+#nullable enable
     public interface IMvxLayoutInflaterFactory
     {
-        View OnCreateView(View parent, string name, Context context, IAttributeSet attrs);
+        View? OnCreateView(View? parent, string name, Context context, IAttributeSet attrs);
     }
+#nullable restore
 }

@@ -42,7 +42,7 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
 
         public override void DidFinishLaunching(Foundation.NSNotification notification)
         {
-            var instance = MvxMacSetupSingleton.EnsureSingletonAvailable(this, MainWindow);
+            var instance = MvxMacSetupSingleton.EnsureSingletonAvailable(this);
             instance.EnsureInitialized();
 
             RunAppStart(notification);
@@ -70,7 +70,7 @@ namespace MvvmCross.Forms.Platforms.Mac.Core
 
         protected virtual void LoadFormsApplication()
         {
-            var instance = MvxMacSetupSingleton.EnsureSingletonAvailable(this, MainWindow);
+            var instance = MvxMacSetupSingleton.EnsureSingletonAvailable(this);
             LoadApplication(instance.PlatformSetup<MvxFormsMacSetup>().FormsApplication);
         }
 

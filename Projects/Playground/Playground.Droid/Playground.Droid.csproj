@@ -30,10 +30,6 @@
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <AndroidDexTool>d8</AndroidDexTool>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
-    <AotAssemblies>false</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
-    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
-    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -212,9 +208,9 @@
       <Version>2.4.11.982</Version>
     </PackageReference>
     <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
-    <PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="71.1620.4" />
-    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.2.0.2" />
-    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0.4" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="117.2.1" />
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.2.0.3" />
+    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0.5" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\mvvmcross_logo.png" />
