@@ -640,7 +640,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
             // check for plain popover
             if (PopoverViewController is IMvxIosView iosView && iosView.ViewModel == viewModel)
             {
-                return ClosePopoverViewController(viewModel, attribute);
+                return ClosePopoverViewController(PopoverViewController, attribute);
             }
 
             // check for popover navigation stack
