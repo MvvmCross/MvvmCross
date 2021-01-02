@@ -6,6 +6,7 @@ using System;
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public static class MvxDelegateExtensions
     {
         public static void Raise(this EventHandler eventHandler, object sender)
@@ -18,4 +19,5 @@ namespace MvvmCross.Base
             eventHandler?.Invoke(sender, new MvxValueEventArgs<T>(value));
         }
     }
+#nullable restore
 }
