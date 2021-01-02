@@ -66,9 +66,9 @@ namespace MvvmCross.ViewModels
             ShouldLogInpc(shouldLogInpc);
         }
 
-        public bool RaisePropertyChanging<T>(T newValue, Expression<Func<T>> property)
+        public bool RaisePropertyChanging<T>(T newValue, Expression<Func<T>> propertyExpression)
         {
-            var name = this.GetPropertyNameFromExpression(property);
+            var name = this.GetPropertyNameFromExpression(propertyExpression);
             return RaisePropertyChanging(newValue, name);
         }
 
@@ -98,10 +98,17 @@ namespace MvvmCross.ViewModels
             return !changingArgs.Cancel;
         }
 
-        [NotifyPropertyChangedInvocator]
-        public Task RaisePropertyChanged<T>(Expression<Func<T>> property)
+#pragma warning disable CA1030 // Use events where appropriate
+        public virtual Task RaiseAllPropertiesChanged()
+#pragma warning restore CA1030 // Use events where appropriate
         {
-            var name = this.GetPropertyNameFromExpression(property);
+            return RaisePropertyChanged(AllPropertiesChanged);
+        }
+
+        [NotifyPropertyChangedInvocator]
+        public Task RaisePropertyChanged<T>(Expression<Func<T>> propertyExpression)
+        {
+            var name = this.GetPropertyNameFromExpression(propertyExpression);
             return RaisePropertyChanged(name);
         }
 
@@ -110,13 +117,6 @@ namespace MvvmCross.ViewModels
         {
             var changedArgs = new PropertyChangedEventArgs(whichProperty);
             return RaisePropertyChanged(changedArgs);
-        }
-
-#pragma warning disable CA1030 // Use events where appropriate
-        public virtual Task RaiseAllPropertiesChanged()
-#pragma warning restore CA1030 // Use events where appropriate
-        {
-            return RaisePropertyChanged(AllPropertiesChanged);
         }
 
         public virtual async Task RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
