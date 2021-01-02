@@ -6,10 +6,12 @@ using System.Reflection;
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public interface IMvxNamedInstanceRegistry<in T>
     {
         void AddOrOverwrite(string name, T instance);
 
         void AddOrOverwriteFrom(Assembly assembly);
     }
+#nullable restore
 }

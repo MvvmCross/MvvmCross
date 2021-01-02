@@ -7,12 +7,14 @@ using System.IO;
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public interface IMvxResourceLoader
     {
         bool ResourceExists(string resourcePath);
 
-        string GetTextResource(string resourcePath);
+        string? GetTextResource(string resourcePath);
 
         void GetResourceStream(string resourcePath, Action<Stream> streamAction);
     }
+#nullable restore
 }

@@ -6,10 +6,12 @@ using System;
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public interface IMvxMainThreadDispatcher
     {
         [Obsolete("Use IMvxMainThreadAsyncDispatcher.ExecuteOnMainThreadAsync instead")]
         bool RequestMainThreadAction(Action action, bool maskExceptions = true);
         bool IsOnMainThread { get; }
     }
+#nullable restore
 }

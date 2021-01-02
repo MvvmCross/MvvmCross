@@ -11,20 +11,38 @@ using MvvmCross.Exceptions;
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public abstract class MvxParser
     {
-        protected string FullText { get; private set; }
+        protected string? FullText { get; private set; }
         protected int CurrentIndex { get; private set; }
 
         protected virtual void Reset(string textToParse)
         {
+            if (textToParse == null)
+                throw new ArgumentNullException(nameof(textToParse));
+
             FullText = textToParse;
             CurrentIndex = 0;
         }
 
-        protected bool IsComplete => CurrentIndex >= FullText.Length;
+        protected bool IsComplete
+        {
+            get
+            {
+                CheckFullTextValid();
+                return CurrentIndex >= FullText!.Length;
+            }
+        }
 
-        protected char CurrentChar => FullText[CurrentIndex];
+        protected char CurrentChar
+        {
+            get
+            {
+                CheckFullTextValid();
+                return FullText![CurrentIndex];
+            }
+        }
 
         protected string ReadQuotedString()
         {
@@ -33,8 +51,9 @@ namespace MvvmCross.Base
 
             if (quoteDelimiterChar != '\'' && quoteDelimiterChar != '\"')
             {
-                throw new MvxException("Error parsing string indexer - unexpected quote character {0} in text {1}",
-                                       quoteDelimiterChar, FullText);
+                throw new MvxException(
+                    "Error parsing string indexer - unexpected quote character {0} in text {1}",
+                    quoteDelimiterChar, FullText);
             }
 
             MoveNext();
@@ -75,8 +94,7 @@ namespace MvvmCross.Base
                 textBuilder.Append(currentChar);
             }
 
-            var text = textBuilder.ToString();
-            return text;
+            return textBuilder.ToString();
         }
 
         protected uint ReadUnsignedInteger()
@@ -164,7 +182,7 @@ namespace MvvmCross.Base
         private char ReadFourDigitUnicodeCharacter()
         {
             var digits = ReadNDigits(4);
-            var number = uint.Parse(digits, NumberStyles.HexNumber);
+            var number = uint.Parse(digits, NumberStyles.HexNumber, NumberFormatInfo.InvariantInfo);
             if (number > ushort.MaxValue)
                 throw new MvxException("\\u unicode character {0} out of range in {1}", number, FullText);
             return (char)number;
@@ -202,6 +220,9 @@ namespace MvvmCross.Base
 
         protected void SkipWhitespaceAndCharacters(IEnumerable<char> toSkip)
         {
+            if (toSkip == null)
+                throw new ArgumentNullException(nameof(toSkip));
+
             var skipChars = toSkip.ToArray();
             while (!IsComplete
                    && IsWhiteSpaceOrCharacter(CurrentChar, skipChars))
@@ -212,6 +233,9 @@ namespace MvvmCross.Base
 
         protected void SkipWhitespaceAndCharacters(Dictionary<char, bool> toSkip)
         {
+            if (toSkip == null)
+                throw new ArgumentNullException(nameof(toSkip));
+
             while (!IsComplete
                    && IsWhiteSpaceOrCharacter(CurrentChar, toSkip))
             {
@@ -238,10 +262,9 @@ namespace MvvmCross.Base
             return char.IsWhiteSpace(charToTest) || toSkip.Contains(charToTest);
         }
 
-        protected object ReadValue()
+        protected object? ReadValue()
         {
-            object toReturn;
-            if (!TryReadValue(AllowNonQuotedText.Allow, out toReturn))
+            if (!TryReadValue(AllowNonQuotedText.Allow, out var toReturn))
                 throw new MvxException("Unable to read value");
             return toReturn;
         }
@@ -252,7 +275,7 @@ namespace MvvmCross.Base
             DoNotAllow
         }
 
-        protected bool TryReadValue(AllowNonQuotedText allowNonQuotedText, out object value)
+        protected bool TryReadValue(AllowNonQuotedText allowNonQuotedText, out object? value)
         {
             SkipWhitespace();
 
@@ -299,6 +322,12 @@ namespace MvvmCross.Base
 
         protected bool TestKeywordInPeekString(string uppercaseKeyword, string peekString)
         {
+            if (peekString == null)
+                return false;
+
+            if (uppercaseKeyword == null)
+                return false;
+
             if (peekString.Length < uppercaseKeyword.Length)
                 return false;
 
@@ -306,7 +335,7 @@ namespace MvvmCross.Base
                 && IsValidMidCharacterOfCSharpName(peekString[uppercaseKeyword.Length]))
                 return false;
 
-            if (!peekString.StartsWith(uppercaseKeyword))
+            if (!peekString.StartsWith(uppercaseKeyword, StringComparison.Ordinal))
                 return false;
 
             return true;
@@ -348,10 +377,10 @@ namespace MvvmCross.Base
 
         protected string SafePeekString(int length)
         {
-            var safeLength = Math.Min(length, FullText.Length - CurrentIndex);
-            if (safeLength == 0)
+            var safeLength = Math.Min(length, (FullText?.Length ?? 0) - CurrentIndex);
+            if (safeLength <= 0)
                 return string.Empty;
-            return FullText.Substring(CurrentIndex, safeLength);
+            return FullText!.Substring(CurrentIndex, safeLength);
         }
 
         protected ValueType ReadNumber()
@@ -393,6 +422,9 @@ namespace MvvmCross.Base
 
         protected ValueType NumberFromText(string numberText)
         {
+            if (numberText == null)
+                throw new ArgumentNullException(nameof(numberText));
+
             return NumberFromText(numberText, numberText.Contains("."));
         }
 
@@ -425,6 +457,9 @@ namespace MvvmCross.Base
 
         protected object ReadEnumerationValue(Type enumerationType, bool ignoreCase = true)
         {
+            if (enumerationType == null)
+                throw new ArgumentNullException(nameof(enumerationType));
+
             var name = ReadValidCSharpName();
             try
             {
@@ -508,5 +543,14 @@ namespace MvvmCross.Base
         {
             return char.IsLetterOrDigit(firstChar) || firstChar == '_';
         }
+
+        private void CheckFullTextValid()
+        {
+            if (FullText == null)
+            {
+                throw new InvalidOperationException("Please call Reset first");
+            }
+        }
     }
+#nullable restore
 }

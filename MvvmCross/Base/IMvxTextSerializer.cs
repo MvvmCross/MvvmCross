@@ -6,6 +6,7 @@ using System;
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public interface IMvxTextSerializer
     {
         T DeserializeObject<T>(string inputText);
@@ -14,4 +15,5 @@ namespace MvvmCross.Base
 
         string SerializeObject(object toSerialise);
     }
+#nullable restore
 }
