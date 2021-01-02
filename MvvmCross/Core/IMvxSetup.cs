@@ -7,7 +7,6 @@ using System.Reflection;
 using MvvmCross.Plugin;
 using MvvmCross.Logging;
 using System;
-using static MvvmCross.Core.MvxSetup;
 
 namespace MvvmCross.Core
 {

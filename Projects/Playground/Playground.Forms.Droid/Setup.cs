@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using Android.Content;
 using MvvmCross.Forms.Platforms.Android.Core;
+using MvvmCross.IoC;
 using MvvmCross.Logging;
 using Playground.Forms.UI;
 using Serilog;
@@ -15,13 +15,13 @@ namespace Playground.Forms.Droid
         public override MvxLogProviderType GetDefaultLogProviderType()
             => MvxLogProviderType.Serilog;
 
-        protected override IMvxLogProvider CreateLogProvider()
+        protected override IMvxLogProvider CreateLogProvider(IMvxIoCProvider iocProvider)
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.AndroidLog()
                 .CreateLogger();
-            return base.CreateLogProvider();
+            return base.CreateLogProvider(iocProvider);
         }
     }
 }
