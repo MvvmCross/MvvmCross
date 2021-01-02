@@ -8,6 +8,7 @@ using MvvmCross.Converters;
 
 namespace MvvmCross.Binding.Binders
 {
+#nullable enable
     public class MvxAutoValueConverters
         : IMvxAutoValueConverters
     {
@@ -53,4 +54,5 @@ namespace MvvmCross.Binding.Binders
             _lookup[new Key(viewModelType, viewType)] = converter;
         }
     }
+#nullable restore
 }
