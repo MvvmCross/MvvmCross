@@ -4,13 +4,16 @@
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public interface IMvxApplicableTo
     {
         void ApplyTo(object what);
     }
 
     public interface IMvxApplicableTo<in T>
+        where T : notnull
     {
         void ApplyTo(T what);
     }
+#nullable restore
 }
