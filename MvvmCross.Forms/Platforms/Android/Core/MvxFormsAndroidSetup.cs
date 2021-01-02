@@ -101,11 +101,11 @@ namespace MvvmCross.Forms.Platforms.Android.Core
             }
         }
 
-        protected override void InitializeBindingBuilder()
+        protected override void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
         {
             MvxBindingBuilder bindingBuilder = CreateBindingBuilder();
 
-            RegisterBindingBuilderCallbacks();
+            RegisterBindingBuilderCallbacks(iocProvider);
             bindingBuilder.DoRegistration();
         }
 

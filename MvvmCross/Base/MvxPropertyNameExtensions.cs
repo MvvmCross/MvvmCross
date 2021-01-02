@@ -8,6 +8,7 @@ using System.Reflection;
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public static class MvxPropertyNameExtensions
     {
         private const string WrongExpressionMessage =
@@ -56,7 +57,7 @@ namespace MvvmCross.Base
             return member.Name;
         }
 
-        private static MemberExpression FindMemberExpression<T>(Expression<Func<T>> expression)
+        private static MemberExpression? FindMemberExpression<T>(Expression<Func<T>> expression)
         {
             var body = expression.Body as UnaryExpression;
             if (body != null)
@@ -71,4 +72,5 @@ namespace MvvmCross.Base
             return expression.Body as MemberExpression;
         }
     }
+#nullable restore
 }

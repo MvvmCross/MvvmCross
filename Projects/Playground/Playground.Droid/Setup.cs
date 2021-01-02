@@ -13,6 +13,7 @@ using Playground.Droid.Controls;
 using Serilog;
 using MvvmCross.Platforms.Android.Core;
 using MvvmCross.DroidX.RecyclerView;
+using MvvmCross.IoC;
 
 namespace Playground.Droid
 {
@@ -27,13 +28,13 @@ namespace Playground.Droid
         public override MvxLogProviderType GetDefaultLogProviderType()
             => MvxLogProviderType.Serilog;
 
-        protected override IMvxLogProvider CreateLogProvider()
+        protected override IMvxLogProvider CreateLogProvider(IMvxIoCProvider iocProvider)
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.AndroidLog()
                 .CreateLogger();
-            return base.CreateLogProvider();
+            return base.CreateLogProvider(iocProvider);
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)

@@ -25,6 +25,9 @@ namespace MvvmCross.Base
 
         protected virtual void Run(Type type)
         {
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+
             try
             {
                 var toRun = Activator.CreateInstance(type);
@@ -37,7 +40,9 @@ namespace MvvmCross.Base
 
                 bootstrapAction.Run();
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception exception)
+#pragma warning restore CA1031 // Do not catch general exception types
             {
                 // pokemon handling
                 MvxLog.Instance.Warn("Error running startup task {0} - error {1}", type.Name, exception.ToLongString());

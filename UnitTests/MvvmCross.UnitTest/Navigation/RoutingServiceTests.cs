@@ -60,10 +60,7 @@ namespace MvvmCross.UnitTest.Navigation
 
             var loader = new MvxViewModelLoader(mockCollection.Object);
             MockDispatcher = new Mock<NavigationMockDispatcher>(MockBehavior.Loose) { CallBase = true };
-            var navigationService = RoutingService = new MvxNavigationService(null, loader)
-            {
-                ViewDispatcher = MockDispatcher.Object,
-            };
+            var navigationService = RoutingService = new MvxNavigationService(loader, MockDispatcher.Object);
             RoutingService.LoadRoutes(new[] { typeof(RoutingServiceTests).Assembly });
             fixture.Ioc.RegisterSingleton(navigationService);
             fixture.Ioc.RegisterSingleton<IMvxStringToTypeParser>(new MvxStringToTypeParser());

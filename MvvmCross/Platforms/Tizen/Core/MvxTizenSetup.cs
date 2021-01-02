@@ -22,36 +22,39 @@ using Tizen.Applications;
 
 namespace MvvmCross.Platforms.Tizen.Core
 {
+#nullable enable
     public abstract class MvxTizenSetup
         : MvxSetup, IMvxTizenSetup
     {
-        protected CoreApplication CoreApplication { get; private set; }
+        protected CoreApplication? CoreApplication { get; private set; }
 
         public virtual void PlatformInitialize(CoreApplication coreApplication)
         {
             CoreApplication = coreApplication;
         }
 
-        private IMvxTizenViewPresenter _presenter;
+        private IMvxTizenViewPresenter? _presenter;
         protected IMvxTizenViewPresenter Presenter
         {
             get
             {
-                _presenter = _presenter ?? CreateViewPresenter();
+                _presenter ??= CreateViewPresenter();
                 return _presenter;
             }
         }
 
-        protected override void InitializeFirstChance()
+        protected override void InitializeFirstChance(IMvxIoCProvider iocProvider)
         {
-            RegisterPresenter();
-            base.InitializeFirstChance();
+            RegisterPresenter(iocProvider);
+            base.InitializeFirstChance(iocProvider);
         }
 
-        protected sealed override IMvxViewsContainer CreateViewsContainer()
+        protected sealed override IMvxViewsContainer CreateViewsContainer(IMvxIoCProvider iocProvider)
         {
+            ValidateArguments(iocProvider);
+
             var container = CreateTizenViewsContainer();
-            Mvx.IoCProvider.RegisterSingleton(container);
+            iocProvider.RegisterSingleton(container);
             return container;
         }
 
@@ -65,31 +68,35 @@ namespace MvvmCross.Platforms.Tizen.Core
             return new MvxTizenViewPresenter();
         }
 
-        protected virtual void RegisterPresenter()
+        protected virtual void RegisterPresenter(IMvxIoCProvider iocProvider)
         {
+            ValidateArguments(iocProvider);
+
             var presenter = Presenter;
-            Mvx.IoCProvider.RegisterSingleton(presenter);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
+            iocProvider.RegisterSingleton(presenter);
+            iocProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
-        protected override void InitializeLastChance()
+        protected override void InitializeLastChance(IMvxIoCProvider iocProvider)
         {
-            InitializeBindingBuilder();
-            base.InitializeLastChance();
+            InitializeBindingBuilder(iocProvider);
+            base.InitializeLastChance(iocProvider);
         }
 
-        protected virtual void InitializeBindingBuilder()
+        protected virtual void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
         {
-            RegisterBindingBuilderCallbacks();
+            RegisterBindingBuilderCallbacks(iocProvider);
             var bindingBuilder = CreateBindingBuilder();
             bindingBuilder.DoRegistration();
         }
 
-        protected virtual void RegisterBindingBuilderCallbacks()
+        protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
         {
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+            ValidateArguments(iocProvider);
+
+            iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
+            iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
         }
 
         protected virtual MvxBindingBuilder CreateBindingBuilder()
@@ -147,4 +154,5 @@ namespace MvvmCross.Platforms.Tizen.Core
             return new[] { typeof(TApplication).GetTypeInfo().Assembly };
         }
     }
+#nullable restore
 }

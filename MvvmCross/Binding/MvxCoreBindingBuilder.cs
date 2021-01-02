@@ -91,9 +91,6 @@ namespace MvvmCross.Binding
         protected virtual void RegisterCore()
         {
             Mvx.IoCProvider.RegisterSingleton<IMvxBinder>(new MvxFromTextBinder());
-
-            //To get the old behavior back, you can override this registration with
-            //Mvx.IoCProvider.RegisterType<IMvxBindingContext, MvxBindingContext>();
             Mvx.IoCProvider.RegisterType<IMvxBindingContext, MvxTaskBasedBindingContext>();
         }
 

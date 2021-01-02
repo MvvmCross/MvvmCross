@@ -76,7 +76,7 @@ namespace MvvmCross.Commands
         {
             Execute(null);
         }
-        
+
         protected async Task ExecuteAsync(object parameter, bool hideCanceledException)
         {
             if (CanExecuteImpl(parameter))
@@ -246,7 +246,7 @@ namespace MvvmCross.Commands
 
         public Task ExecuteAsync(T parameter)
             => ExecuteAsync(parameter, false);
-    
+
         public void Execute(T parameter)
             => base.Execute(parameter);
 

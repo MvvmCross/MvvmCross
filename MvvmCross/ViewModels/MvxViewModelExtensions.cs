@@ -2,16 +2,21 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Linq;
 using System.Reflection;
 using MvvmCross.Base;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public static class MvxViewModelExtensions
     {
-        public static void CallBundleMethods(this IMvxViewModel viewModel, string methodName, IMvxBundle bundle)
+        public static void CallBundleMethods(this IMvxViewModel viewModel, string methodName, IMvxBundle? bundle)
         {
+            if (viewModel == null)
+                throw new ArgumentNullException(nameof(viewModel));
+
             var methods = viewModel
                 .GetType()
                 .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
@@ -23,15 +28,21 @@ namespace MvvmCross.ViewModels
             }
         }
 
-        public static void CallBundleMethod(this IMvxViewModel viewModel, MethodInfo methodInfo, IMvxBundle bundle)
+        public static void CallBundleMethod(this IMvxViewModel viewModel, MethodInfo methodInfo, IMvxBundle? bundle)
         {
+            if (viewModel == null)
+                throw new ArgumentNullException(nameof(viewModel));
+
+            if (methodInfo == null)
+                throw new ArgumentNullException(nameof(methodInfo));
+
             var parameters = methodInfo.GetParameters().ToArray();
 
-            //Make sure we have a bundle that matches function parameters
+            // Make sure we have a bundle that matches function parameters
             if (bundle == null && parameters.Length > 0)
                 return;
             
-            if (parameters.Length == 1)
+            if (bundle != null && parameters.Length == 1)
             {
                 if (parameters[0].ParameterType == typeof(IMvxBundle))
                 {
@@ -57,6 +68,9 @@ namespace MvvmCross.ViewModels
 
         public static IMvxBundle SaveStateBundle(this IMvxViewModel viewModel)
         {
+            if (viewModel == null)
+                throw new ArgumentNullException(nameof(viewModel));
+
             var toReturn = new MvxBundle();
             var methods = viewModel.GetType()
                                    .GetMethods()
@@ -65,7 +79,7 @@ namespace MvvmCross.ViewModels
             foreach (var methodInfo in methods)
             {
                 // use methods like `public T SaveState()`
-                var stateObject = methodInfo.Invoke(viewModel, new object[0]);
+                var stateObject = methodInfo.Invoke(viewModel, Array.Empty<object>());
                 if (stateObject != null)
                 {
                     toReturn.Write(stateObject);
@@ -78,4 +92,5 @@ namespace MvvmCross.ViewModels
             return toReturn;
         }
     }
+#nullable restore
 }

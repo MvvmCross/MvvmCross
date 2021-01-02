@@ -8,6 +8,7 @@ using MvvmCross.Exceptions;
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public abstract class MvxSingleton
         : IDisposable
     {
@@ -60,7 +61,7 @@ namespace MvvmCross.Base
             Instance = this as TInterface;
         }
 
-        public static TInterface Instance { get; private set; }
+        public static TInterface? Instance { get; private set; }
 
         protected override void Dispose(bool isDisposing)
         {
@@ -70,4 +71,5 @@ namespace MvvmCross.Base
             }
         }
     }
+#nullable restore
 }

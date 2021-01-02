@@ -8,10 +8,11 @@ using MvvmCross.Converters;
 
 namespace MvvmCross.Binding.Binders
 {
+#nullable enable
     public class MvxAutoValueConverters
         : IMvxAutoValueConverters
     {
-        public class Key
+        private struct Key : IEquatable<Key>
         {
             public Key(Type viewModel, Type view)
             {
@@ -22,19 +23,20 @@ namespace MvvmCross.Binding.Binders
             public Type ViewModelType { get; }
             public Type ViewType { get; }
 
-            public override bool Equals(object obj)
-            {
-                var rhs = obj as Key;
-                if (rhs == null)
-                    return false;
-
-                return ViewModelType == rhs.ViewModelType
-                       && ViewType == rhs.ViewType;
-            }
-
             public override int GetHashCode()
             {
                 return ViewModelType.GetHashCode() + ViewType.GetHashCode();
+            }
+
+            public bool Equals(Key other)
+            {
+                return ViewModelType == other.ViewModelType
+                    && ViewType == other.ViewType;
+            }
+
+            public override bool Equals(object obj)
+            {
+                return obj is Key key && Equals(key);
             }
         }
 
@@ -52,4 +54,5 @@ namespace MvvmCross.Binding.Binders
             _lookup[new Key(viewModelType, viewType)] = converter;
         }
     }
+#nullable restore
 }

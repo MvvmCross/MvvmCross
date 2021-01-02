@@ -2,14 +2,19 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System.Threading.Tasks;
+using System;
 
 namespace MvvmCross.Core
 {
 #nullable enable
-    public interface IMvxSetupMonitor
+    public class MvxSetupStateEventArgs : EventArgs
     {
-        Task InitializationComplete();
+        public MvxSetupStateEventArgs(MvxSetupState setupState)
+        {
+            SetupState = setupState;
+        }
+
+        public MvxSetupState SetupState { get; }
     }
 #nullable restore
 }

@@ -9,6 +9,7 @@ using MvvmCross.IoC;
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public static class MvxCoreExtensions
     {
         // core implementation of ConvertToBoolean
@@ -37,6 +38,11 @@ namespace MvvmCross.Base
         // core implementation of MakeSafeValue
         public static object MakeSafeValueCore(this Type propertyType, object value)
         {
+            if (propertyType == null)
+            {
+                return value;
+            }
+
             if (value == null)
             {
                 return propertyType.CreateDefault();
@@ -52,12 +58,18 @@ namespace MvvmCross.Base
                 else if (propertyType.GetTypeInfo().IsEnum)
                 {
                     var s = value as string;
-                    safeValue = s != null ? Enum.Parse(propertyType, s, true) : Enum.ToObject(propertyType, value);
+                    safeValue =
+                        s != null ?
+                            Enum.Parse(propertyType, s, true) :
+                            Enum.ToObject(propertyType, value);
                 }
                 else if (propertyType.GetTypeInfo().IsValueType)
                 {
                     var underlyingType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
-                    safeValue = underlyingType == typeof(bool) ? value.ConvertToBooleanCore() : ErrorMaskedConvert(value, underlyingType, CultureInfo.CurrentUICulture);
+                    safeValue =
+                        underlyingType == typeof(bool) ?
+                            value.ConvertToBooleanCore() :
+                            ErrorMaskedConvert(value, underlyingType, CultureInfo.CurrentUICulture);
                 }
                 else
                 {
@@ -73,11 +85,14 @@ namespace MvvmCross.Base
             {
                 return Convert.ChangeType(value, type, cultureInfo);
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception)
+#pragma warning restore CA1031 // Do not catch general exception types
             {
                 // pokemon - mask the error
                 return value;
             }
         }
     }
+#nullable restore
 }

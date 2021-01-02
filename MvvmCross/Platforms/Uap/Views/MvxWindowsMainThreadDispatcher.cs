@@ -27,7 +27,7 @@ namespace MvvmCross.Platforms.Uap.Views
                 return true;
             }
 
-            _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => 
+            _uiDispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
                 ExceptionMaskedAction(action, maskExceptions);
             });

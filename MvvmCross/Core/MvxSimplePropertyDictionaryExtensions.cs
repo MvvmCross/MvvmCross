@@ -109,8 +109,8 @@ namespace MvvmCross.Core
             if (input == null)
                 return new Dictionary<string, string>();
 
-            if (input is IDictionary<string, string>)
-                return (IDictionary<string, string>)input;
+            if (input is IDictionary<string, string> inputDict)
+                return inputDict;
 
             var propertyInfos = from property in input.GetType()
                                                       .GetProperties(BindingFlags.Instance | BindingFlags.Public |
