@@ -6,10 +6,12 @@ using System;
 
 namespace MvvmCross.Core
 {
+#nullable enable
     public interface IMvxStringToTypeParser
     {
         bool TypeSupported(Type targetType);
 
         object ReadValue(string rawValue, Type targetType, string fieldOrParameterName);
     }
+#nullable restore
 }

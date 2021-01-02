@@ -11,6 +11,7 @@ using static MvvmCross.Core.MvxSetup;
 
 namespace MvvmCross.Core
 {
+#nullable enable
     public interface IMvxSetup
     {
         void InitializePrimary();
@@ -27,7 +28,8 @@ namespace MvvmCross.Core
 
         MvxLogProviderType GetDefaultLogProviderType();
 
-        event EventHandler<MvxSetupStateEventArgs> StateChanged;
+        event EventHandler<MvxSetupStateEventArgs>? StateChanged;
         MvxSetupState State { get; }
     }
+#nullable restore
 }
