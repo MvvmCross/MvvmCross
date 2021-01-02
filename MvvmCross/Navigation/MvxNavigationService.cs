@@ -10,7 +10,6 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using MvvmCross.Base;
 using MvvmCross.Core;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
