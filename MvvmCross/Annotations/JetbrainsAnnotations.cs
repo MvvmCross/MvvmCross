@@ -32,6 +32,10 @@ using System.Diagnostics;
 // ReSharper disable MemberCanBeProtected.Global
 // ReSharper disable InconsistentNaming
 
+#pragma warning disable S101
+#pragma warning disable S2344
+#pragma warning disable S4070
+
 namespace JetBrains.Annotations
 {
     /// <summary>
