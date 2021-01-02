@@ -1,0 +1,32 @@
+<Project>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.AndroidX.SwipeRefreshLayout" Version="1.1.0" />
+    <PackageReference Include="Xamarin.AndroidX.CardView" Version="1.0.0.5" />
+    <PackageReference Include="Xamarin.AndroidX.Leanback" Version="1.0.0.5" />
+    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.1.0.5" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.2.0.5" />
+    <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.2.5.3" />
+    <PackageReference Include="Xamarin.AndroidX.ViewPager" Version="1.0.0.5" />
+    <PackageReference Include="Xamarin.AndroidX.Preference" Version="1.1.1.5" />
+    <PackageReference Include="Xamarin.AndroidX.ExifInterface" Version="1.3.2" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.2.1" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Location" Version="117.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="3.8.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="SidebarNavigation" Version="2.1.0" />
+    <PackageReference Include="Xamarin.Build.Download" Version="0.10.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.847" />
+    <PackageReference Include="Xamarin.Forms.Platform.WPF" Version="4.6.0.847" />
+    <PackageReference Include="Roslynator.Analyzers" Version="3.0.0" />
+    <PackageReference Include="AsyncFixer" Version="1.3.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.2" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.15.0.24505" />
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
+    <PackageReference Include="Moq" Version="4.15.2" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
+    <PackageReference Include="XunitXml.TestLogger" Version="2.1.26" />
+  </ItemGroup>
+</Project>
