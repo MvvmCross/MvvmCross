@@ -528,24 +528,6 @@ namespace MvvmCross.Core
             return assembly.CreatableTypes();
         }
 
-        public enum MvxSetupState
-        {
-            Uninitialized,
-            InitializingPrimary,
-            InitializedPrimary,
-            InitializingSecondary,
-            Initialized
-        }
-
-        public class MvxSetupStateEventArgs : EventArgs
-        {
-            public MvxSetupStateEventArgs(MvxSetupState setupState)
-            {
-                SetupState = setupState;
-            }
-
-            public MvxSetupState SetupState { get; private set; }
-        }
 
         public event EventHandler<MvxSetupStateEventArgs> StateChanged;
 
