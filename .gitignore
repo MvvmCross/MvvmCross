@@ -262,3 +262,5 @@ artifacts/
 .store/
 
 .AssemblyAttributes
+
+*.GeneratedMSBuildEditorConfig.editorconfig
