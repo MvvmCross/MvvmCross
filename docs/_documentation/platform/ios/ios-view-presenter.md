@@ -50,6 +50,94 @@ There are several attribute members that the view class can customize:
 | PreferredContentSize | `CGSize` | Corresponds to the `PreferredContentSize` property of UIViewController. The property works for iPad only. |
 | Animated | `bool` | If set to true, the presentation will be animated. The default value is `true`. |
 
+### MvxPopoverPresentationAttribute
+Used to display a view as _Popover_. You should use this attribute over a view class to present the view as a popover.
+There are several attribute members that the view class can customize:
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| WrapInNavigationController | `bool` | If set to `true`, a popover navigation stack will be initiated (following child presentations will be displayed inside the popover stack). The default value is `false`. |
+| PreferredContentSize | `CGSize` | Corresponds to the `PreferredContentSize` property of UIViewController. |
+| PermittedArrowDirections | `UIPopoverArrowDirection` | Corresponds to the `PermittedArrowDirections` property of UIPopoverPresentationController. |
+| Animated | `bool` | If set to true, the presentation will be animated. The default value is `true`. |
+
+iOS requires popovers to have a _source_ view in order to determine arrow direction and view position. Each time before calling Navigate in your view model, make sure you set the sourve view using the `IMvxPopoverPresentationSourceProvider`.
+
+Here is an example of how this can be done using an `IMvxInteraction`.
+
+```C#
+public class FirstViewModel : MvxViewModel
+{
+    /// <summary>
+    /// Request used to setup popover presentation source on iOS.
+    /// </summary>
+    private readonly MvxInteraction<Action> _iosSetPopoverSourceInteraction = new MvxInteraction<Action>();
+    public IMvxInteraction<Action> IosSetPopoverSourceInteraction => _iosSetPopoverSourceInteraction;
+    
+    private void ShowPopover()
+    {
+        //In real life, make sure to check running on iOS, otherwise call Navigate as normal!
+        _iosSetPopoverSource.Raise(() =>
+        {
+            _navigationService.Navigate<PopoverViewModel>();
+        });
+    }
+}
+```
+
+```C#
+public class FirstViewController : MvxViewController<FirstViewModel>
+{
+    /// <summary>
+    /// Interaction needed to setup popover presentation source when displaying
+    /// the results popover.
+    /// </summary>
+    private IMvxInteraction<Action> _setPopoverSourceInteraction;
+    public IMvxInteraction<Action> SetPopoverInteractionSourceInteraction
+    {
+        get => _setPopoverSourceInteraction;
+        set
+        {
+            if (_setPopoverSourceInteraction != null)
+                _interaction.Requested -= OnSetPopoverSourceInteractionRequested;
+            
+            _setPopoverSourceInteraction = value;
+            _setPopoverSourceInteraction.Requested += OnSetPopoverSourceInteractionRequested;
+        }
+    }
+    
+    public override void ViewDidLoad()
+    {
+        base.ViewDidLoad();
+        
+        var set = CreateBindingSet();
+        set.Bind(this)
+            .For(v => v.SetPopoverSourceInteraction)
+            .To(vm => vm.IosSetPopoverSourceInteraction)
+            .OneWay();
+        set.Apply();
+    }
+    
+    /// <summary>
+    /// Prepares a popover to be presented.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs">Value is true if can enter</param>
+    private void OnSetPopoverInteractionRequested(object sender, MvxValueEventArgs<Action> eventArgs)
+    {
+        var provider = Mvx.IoCProvider.Resolve<IMvxPopoverPresentationSourceProvider>();
+        provider.SourceView = View;    
+    }
+}
+```
+
+```C#
+[MvxPopoverPresentationAttribute(PermittedArrowDirections = 0)] // allow any arrow direction
+public class PopoverViewController : MvxViewController<PopoverViewModel>
+{
+    ...
+}
+```
 
 ### MvxTabPresentationAttribute
 This attribute is only useful (and should only be used) when the current _Root_ view is a `IMvxTabBarViewController`.
