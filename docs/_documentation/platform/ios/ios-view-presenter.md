@@ -14,6 +14,7 @@ The default presenter for iOS named `MvxIosViewPresenter` offers out of the box 
 - Modal
 - Modal navigation
 - Nested modals
+- Popover
 
 Also if your app needs another kind of presentation mode, you can easily extend it!
 
