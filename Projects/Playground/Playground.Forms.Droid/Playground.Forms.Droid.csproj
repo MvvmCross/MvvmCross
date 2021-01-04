@@ -135,7 +135,7 @@
     </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.2.0.1" />
     <PackageReference Include="Xamarin.AndroidX.AppCompat.Resources" Version="1.1.0.1" />
-    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.2.1" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.2.1.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\MvvmCross.DroidX\Material\MvvmCross.DroidX.Material.csproj">
