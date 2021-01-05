@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
@@ -21,6 +22,8 @@ namespace MvvmCross.Platforms.Ios.Presenters
 #nullable enable
     public class MvxIosViewPresenter : MvxAttributeViewPresenter, IMvxIosViewPresenter
     {
+        private readonly MvxIosMajorVersionChecker _iosVersion13Checker = new MvxIosMajorVersionChecker(13);
+        
         protected IUIApplicationDelegate ApplicationDelegate { get; }
         protected UIWindow Window { get; }
 
@@ -418,6 +421,11 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             viewController.ModalPresentationStyle = attribute.ModalPresentationStyle;
             viewController.ModalTransitionStyle = attribute.ModalTransitionStyle;
+            if (_iosVersion13Checker.IsVersionOrHigher)
+            {
+                viewController.PresentationController.Delegate =
+                    new MvxModalPresentationControllerDelegate(this, viewController, attribute);
+            }
 
             // Check if there is a modal already presented first. Otherwise use the window root
             var modalHost = ModalViewControllers.LastOrDefault() ?? Window.RootViewController;
@@ -470,7 +478,7 @@ namespace MvvmCross.Platforms.Ios.Presenters
 
             var sourceProvider = Mvx.IoCProvider.Resolve<IMvxPopoverPresentationSourceProvider>();
             sourceProvider.SetSource(presentationController);
-            presentationController.Delegate = new MvxPopoverDelegate(this);
+            presentationController.Delegate = new MvxPopoverPresentationControllerDelegate(this);
 
             PopoverViewController = viewController;
             await viewHost.PresentViewControllerAsync(viewController, attribute.Animated).ConfigureAwait(true);
@@ -831,6 +839,13 @@ namespace MvvmCross.Platforms.Ios.Presenters
         public virtual void ClosedPopoverViewController()
         {
             PopoverViewController = null;
+        }
+
+        // Called if the modal was dismissed by user (perhaps tapped background or form sheet swiped down)
+        public virtual ConfiguredTaskAwaitable<bool> ClosedModalViewController(UIViewController viewController,
+            MvxModalPresentationAttribute attribute)
+        {
+            return CloseModalViewController(viewController, attribute).ConfigureAwait(false);
         }
 
         private static void ValidateArguments(Type viewModelType, Type viewType)
