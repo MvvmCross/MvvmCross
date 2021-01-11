@@ -110,14 +110,14 @@ To add your own `MvxPresentationHint` you should follow these steps:
 
 3. Implement `HandleMyCustomHint` method, which will return true if the presentation change was successfully handled or false otherwise:
     ```c#
-    private bool HandleMyCustomHint(MyCustomHint hint)
+    private Task<bool> HandleMyCustomHint(MyCustomHint hint)
     {
         bool result;
 
         if(hint.ImportantInformation != null)
         // your code
 
-        return result;
+        return Task.FromResult(result);
     }
     ```
     **Now repeat steps 2 and 3 for each platform (if a platform should just ignore the MvxPresentationHint, it's not necessary to do anything).**
