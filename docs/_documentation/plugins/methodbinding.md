@@ -24,6 +24,15 @@ public void Include(MvvmCross.Plugin.MethodBinding.Plugin p)
 }
 ```
 
+Alternatively you can ensure that plugin is loaded in your MvxApplication class.
+
+```C#
+public override void LoadPlugins(IMvxPluginManager pluginManager)
+{
+    pluginManager.EnsurePluginLoaded<MvvmCross.Plugin.MethodBinding.Plugin>();
+}
+```
+
 ## Example
 
 An example of a Rio-based ViewModel using MethodBinding:
