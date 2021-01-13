@@ -11,38 +11,35 @@ When MethodBinding is loaded, then MvvmCross data-binding:
 
 - can use public methods as well as `ICommand` properties for action/command binding.
 
-An example, Rio-based ViewModel using both FieldBinding and MethodBinding is:
+## Setup
+
+Since this plugin is typically not explicitly referenced in a MvvmCross project, it is necessary to reference it to ensure that MvvmCross loads it at startup. 
+
+Placing a reference in your `LinkerPleaseInclude.cs` file is a good place to do this.
+
+```C#
+public void Include(MvvmCross.Plugin.MethodBinding.Plugin p)
+{
+    var _ = p;
+}
+```
+
+## Example
+
+An example of a Rio-based ViewModel using MethodBinding:
 
 ```c#
 public class FirstViewModel
     : MvxViewModel
 {
-    private readonly IDataStore _dataStore;
-
-    public FirstViewModel(IDataStore dataStore)
+    public FirstViewModel()
     {
-        _dataStore = dataStore;
+        
     }
-
-    public void Init(int id)
-    {
-        var person = _dataStore.Get<Person>(id);
-        Id.Value = id;
-        FirstName.Value = person.FirstName;
-        LastName.Value = person.LastName;
-    }
-
-    public readonly INC<int> Id = new NC<int>();
-    public readonly INC<string> FirstName = new NC<string>();
-    public readonly INC<string> LastName = new NC<string>();
 
     public void Save()
     {
-        var person = _dataStore.Get<Person>(id);
-        person.FirstName = FirstName.Value;
-        person.LastName = LastName.Value;
-        _dataStore.Update(person);
-        Close(this);
+        ... your code here
     }
 }
 ```
@@ -56,6 +53,18 @@ The `Save` method in this class could be accessed using Android syntax:
         android:text='Save'
         local:MvxBind='Click Save' />
 ```
+
+And as follows for FluentBinding in iOS or Android.
+
+```C#
+var set = CreateBindingSet();
+set.Bind(_button).To(nameof(ViewModel.Save));
+set.Apply();
+```
+
+Note the use of `nameof`. You cannot use `vm => vm.Save` for fluent method binding. Using nameof will ensure that the compiler will catch errors if you rename the method at a later date.
+
+## References
 
 For more on Rio MethodBinding see N=36 on http://slodge.blogspot.co.uk/2013/07/n36-rio-binding-carnival.html
 
