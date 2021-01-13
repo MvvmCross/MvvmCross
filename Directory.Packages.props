@@ -29,5 +29,16 @@
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.3" />
     <PackageVersion Include="XunitXml.TestLogger" Version="2.1.26" />
     <PackageVersion Include="System.Console" Version="4.3.1" />
+    <PackageVersion Include="Plugin.Permissions" Version="6.0.1" />
+    <PackageVersion Include="Xamarin.AndroidX.MediaRouter" Version="1.2.0.1" />
+    <PackageVersion Include="Xamarin.AndroidX.AppCompat.Resources" Version="1.1.0.1" />
+    <PackageVersion Include="Xamarin.Google.Android.Material" Version="1.2.1.1" />
+    <PackageVersion Include="Newtonsoft.Json" Version="12.0.3"/>
+    <PackageVersion Include="Serilog" Version="2.10.0"/>
+    <PackageVersion Include="Serilog.Sinks.Xamarin" Version="0.2.0.64"/>
+    <PackageVersion Include="Xamarin.GooglePlayServices.Basement" Version="117.5.0" />
+    <PackageVersion Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.2.0.4" />
+    <PackageVersion Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0.6" />
+    <PackageVersion Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
   </ItemGroup>
 </Project>
