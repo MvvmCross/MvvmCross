@@ -32,6 +32,45 @@ The easiest way to start a new MvvmCross based project is to use Plac3hold3r's [
 
 *Window's users have the ability to use a Visual Studio Extension (complete with a GUI!) to create a new project.*
 
+## Why use the Templates?
+
+All of the boilerplate to have a running MvvmCross application is done for you.
+
+The template creates a solution with the following projects and nugets:
+
+* Core (.net standard 2.0)
+    * MvvmCross 7.1.2
+* Droid (Android Project)
+    * MvvmCross 7.1.2
+* iOS (iOS Project)
+    * MvvmCross 7.1.2
+    * [Cirrious.FluentLayout](https://github.com/FluentLayout/Cirrious.FluentLayout)
+    
+*The solution structure is not that different from the standard Xamarin template provided by Microsoft. The key difference here is the core project is a .net standard project instead of a share project. Also mono.android.export is automatically added as a reference to the Droid project (a requirement of MvvmCross).*
+
+### Core
+
+* A project with a single ViewModel is created.
+* MvxApplication class is created that will navigate to the ViewModel.
+
+### iOS
+
+* The template encourages the use of Cirrious.FluentLayout to create iOS views completely in code that utilize auto layout. 
+* Base classes are provided for UIViewController that add methods to create, layout, and bind the view.
+* The AppDelegate is subclassed from MvxApplicationDelegate (this is how MvvmCross connects to the shared MvxApplication class)
+* An empty Setup class is provided. (This is where you initialize platform specific components.)
+
+### Android
+
+* The template sets up an android project that uses a base activity with the main view behind hosted as a fragment inside the base activity.
+* Base classes are provided for Activity and Fragment with a property for the android layouts.
+* Application and SplashScreen classes are created.
+* An empty Setup class is provided. (This is where you initialize platform specific components.)
+
+### Customization
+
+If there's something you don't like about the default template there are plenty of options available. See the documentation [here](https://github.com/Plac3hold3r/MvxScaffolding/blob/develop/docs/template_dotnet_cli.md).
+
 ## Installing the Templates
 
 ### System Requirements
