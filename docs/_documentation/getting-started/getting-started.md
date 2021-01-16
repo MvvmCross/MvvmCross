@@ -46,7 +46,7 @@ The template creates a solution with the following projects and nugets:
     * MvvmCross 7.1.2
     * [Cirrious.FluentLayout](https://github.com/FluentLayout/Cirrious.FluentLayout)
     
-*The solution structure is not that different from the standard Xamarin template provided by Microsoft. The key difference here is the core project is a .net standard project instead of a share project. Also mono.android.export is automatically added as a reference to the Droid project (a requirement of MvvmCross).*
+*The solution structure is not that different from the standard Xamarin template provided by Microsoft. The key difference here is the core project is a .net standard project instead of a shared project. Also mono.android.export is automatically added as a reference to the Droid project (a requirement of MvvmCross).*
 
 ### Core
 
