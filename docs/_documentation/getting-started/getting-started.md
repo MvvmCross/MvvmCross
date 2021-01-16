@@ -30,6 +30,8 @@ It doesn't matter if your next app is will be made using Xamarin traditional or 
 
 The easiest way to start a new MvvmCross based project is to use Plac3hold3r's [MvxScaffolding](https://github.com/Plac3hold3r/MvxScaffolding) templates. This guide will use the commandline version as it can be utilized by both Windows and macOS users.
 
+*Window's users have the ability to use a Visual Studio Extension (complete with a GUI!) to create a new project.*
+
 ## Installing the Templates
 
 ### System Requirements
