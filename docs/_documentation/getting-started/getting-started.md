@@ -89,15 +89,11 @@ dotnet new mvxforms --help
 
 [Source](https://github.com/Plac3hold3r/MvxScaffolding#dotnet-cli)
 
-# Show me some code please!
+# Dive in to MvvmCross!
 
 Please check [this document](https://www.mvvmcross.com/documentation/getting-started/mvvmcross-overview) to get an overview of how MvvmCross works.
 
-# Hold my hand
-
-Alternatively you can follow the TipCalc tutorial, which will guide you through the basics.
-
-You can find it [here](https://www.mvvmcross.com/documentation/tutorials/tipcalc/the-tip-calc-tutorial).
+You can also follow the [TipCalc tutorial](https://www.mvvmcross.com/documentation/tutorials/tipcalc/the-tip-calc-tutorial) which provides step by step instructions that will guide you through creating a simple tip calculator.
 
 # Additional MvvmCross Templates
 
