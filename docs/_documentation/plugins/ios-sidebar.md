@@ -4,6 +4,19 @@ title: iOS Sidebar
 category: Plugins
 ---
 
+## Setup
+
+You must override `CreateViewPresenter` in your `MvxIosSetup` class too tell MvvmCross to use the `MvxSidebarPresenter` instead of the default [iOS ViewPresenter](https://www.mvvmcross.com/documentation/platform/ios/ios-view-presenter?scroll=678).
+
+```c#
+protected override IMvxIosViewPresenter CreateViewPresenter()
+{
+    return new MvxSidebarPresenter((MvxApplicationDelegate) ApplicationDelegate, Window);
+}
+```
+
+<I>Don't worry, `MvxSidebarPresenter` inherits all of the capabilities of the default view presenter.</I>
+
 ## MvxSidebarPresenter
 
 This presenter provides 3 panels as view "targets", a main central panel, a right side panel and a left side panel. Where views appear in the UI and how they are shown is controlled through the decoration of a view controller using  class level attribute.
