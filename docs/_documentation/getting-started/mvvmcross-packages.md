@@ -14,18 +14,14 @@ Name | Description | Link
 `MvvmCross.CodeAnalysis`       | Code fixes for MvvmCross | [NuGet](https://www.nuget.org/packages/MvvmCross.CodeAnalysis/)
 
 
-## Android Support
+## AndroidX
 
 Name | Description | Link
 ---- | ----------- | ----
-`MvvmCross.Droid.Support.V7.AppCompat`    | AppCompat for MvvmCross | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V7.AppCompat/)
-`MvvmCross.Droid.Support.V7.Preference`   |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V7.Preference/)
-`MvvmCross.Droid.Support.V7.RecyclerView` |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V7.RecyclerView/)
-`MvvmCross.Droid.Support.V14.Preference`  |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V14.Preference/)
-`MvvmCross.Droid.Support.V17.Leanback`    |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.V17.Leanback/)
-`MvvmCross.Droid.Support.Fragment`        |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.Fragment/)
-`MvvmCross.Droid.Support.Design`          |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.Design/)
-`MvvmCross.Droid.Support.Core.UI`         |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Droid.Support.Core.UI/)
+[`MvvmCross.DroidX.RecyclerView`](https://www.mvvmcross.com/documentation/platform/android/android-recyclerview)    |  | [NuGet](https://www.nuget.org/packages/MvvmCross.DroidX.RecyclerView/)
+`MvvmCross.DroidX.Material`   |  | [NuGet](https://www.nuget.org/packages/MvvmCross.DroidX.Material/)
+`MvvmCross.DroidX.SwipeRefreshLayout` |  | [NuGet](https://www.nuget.org/packages/MvvmCross.DroidX.SwipeRefreshLayout/)
+`MvvmCross.DroidX.Leanback`  |  | [NuGet](https://www.nuget.org/packages/MvvmCross.DroidX.Leanback/)
 
 
 ## Plugins
@@ -33,22 +29,22 @@ Name | Description | Link
 Name | Description | Link
 ---- | ----------- | ----
 `MvvmCross.Plugin.All`              |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.All/)
-`MvvmCross.Plugin.Accelerometer`    | Manage the accelerometer from your shared code | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Accelerometer/)
-`MvvmCross.Plugin.Color`            |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Color/)
-`MvvmCross.Plugin.Email`            |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Email/)
-`MvvmCross.Plugin.FieldBinding`     |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.FieldBinding/)
-`MvvmCross.Plugin.File`             |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.File/)
-`MvvmCross.Plugin.Json`             |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Json/)
-`MvvmCross.Plugin.JsonLocalization` |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.JsonLocalization/)
-`MvvmCross.Plugin.Location`         |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Location/)
-`MvvmCross.Plugin.Messenger`        |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Messenger/)
-`MvvmCross.Plugin.MethodBinding`    |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.MethodBinding/)
-`MvvmCross.Plugin.Network`          |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Network/)
-`MvvmCross.Plugin.PhoneCall`          |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.PhoneCall/)
-`MvvmCross.Plugin.PictureChooser`   |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.PictureChooser/)
-`MvvmCross.Plugin.ResourceLoader`   |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.ResourceLoader/)
-`MvvmCross.Plugin.Share`            |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Share/)
-`MvvmCross.Plugin.Visibility`       |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Visibility/)
-`MvvmCross.Plugin.WebBrowser`       |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.WebBrowser/)
+[`MvvmCross.Plugin.Accelerometer`](https://www.mvvmcross.com/documentation/plugins/accelerometer) | Manage the accelerometer from your shared code | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Accelerometer/)
+[`MvvmCross.Plugin.Color`](https://www.mvvmcross.com/documentation/plugins/color) |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Color/)
+[`MvvmCross.Plugin.Email`](https://www.mvvmcross.com/documentation/plugins/email) |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Email/)
+[`MvvmCross.Plugin.FieldBinding`](https://www.mvvmcross.com/documentation/plugins/fieldbinding)     |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.FieldBinding/)
+[`MvvmCross.Plugin.Json`](https://www.mvvmcross.com/documentation/plugins/json)             |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Json/)
+[`MvvmCross.Plugin.JsonLocalization`](https://www.mvvmcross.com/documentation/plugins/jsonlocalisation) |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.JsonLocalization/)
+[`MvvmCross.Plugin.Location`](https://www.mvvmcross.com/documentation/plugins/location)         |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Location/)
+`MvvmCross.Plugin.Location.Fused`         |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Location.Fused/)
+[`MvvmCross.Plugin.Messenger`](https://www.mvvmcross.com/documentation/plugins/messenger)        |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Messenger/)
+[`MvvmCross.Plugin.MethodBinding`](https://www.mvvmcross.com/documentation/plugins/methodbinding)    |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.MethodBinding/)
+[`MvvmCross.Plugin.PhoneCall`](https://www.mvvmcross.com/documentation/plugins/phonecall)          |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.PhoneCall/)
+[`MvvmCross.Plugin.PictureChooser`](https://www.mvvmcross.com/documentation/plugins/picturechooser)   |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.PictureChooser/)
+[`MvvmCross.Plugin.ResourceLoader`](https://www.mvvmcross.com/documentation/plugins/resourceloader)   |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.ResourceLoader/)
+[`MvvmCross.Plugin.ResxLocalization`](https://www.mvvmcross.com/documentation/plugins/resxlocalization)   |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.ResxLocalization/)
+[`MvvmCross.Plugin.Share`](https://www.mvvmcross.com/documentation/plugins/share)            |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Share/)
+[`MvvmCross.Plugin.Visibility`](https://www.mvvmcross.com/documentation/plugins/visibility)       |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Visibility/)
+[`MvvmCross.Plugin.WebBrowser`](https://www.mvvmcross.com/documentation/plugins/webbrowser)       |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.WebBrowser/)
 `MvvmCross.Plugin.Sidebar`          |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Sidebar/)
 
