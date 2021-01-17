@@ -46,5 +46,5 @@ Name | Description | Link
 [`MvvmCross.Plugin.Share`](https://www.mvvmcross.com/documentation/plugins/share)            |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Share/)
 [`MvvmCross.Plugin.Visibility`](https://www.mvvmcross.com/documentation/plugins/visibility)       |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Visibility/)
 [`MvvmCross.Plugin.WebBrowser`](https://www.mvvmcross.com/documentation/plugins/webbrowser)       |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.WebBrowser/)
-`MvvmCross.Plugin.Sidebar`          |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Sidebar/)
+[`MvvmCross.Plugin.Sidebar`](https://www.mvvmcross.com/documentation/plugins/ios-sidebar?scroll=1271)          | [ViewPresenter](https://www.mvvmcross.com/documentation/fundamentals/view-presenters?scroll=38) for iOS that adds support for a sidebar menu | [NuGet](https://www.nuget.org/packages/MvvmCross.Plugin.Sidebar/)
 
