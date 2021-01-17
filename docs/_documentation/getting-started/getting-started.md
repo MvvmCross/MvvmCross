@@ -96,6 +96,14 @@ dotnet new --install MvxScaffolding.Templates
 ```
 ## Using the Templates
 
+At this point you need to decide if you wish to create a Xamarin.Forms or Native project.
+While there's no reason you cannot use Forms, Native is where MvvmCross really shines.
+
+| Project Type     | Pros                                 | Cons |
+| ---------------- | ------------------------------------ | --------------------------------------------- |
+| Native           | Easier for native mobile developers<br>Finer control of view implementation | Must create views for each platform        |
+| Forms            | Easier for dotnet developers with no mobile experience<br>UI is shared via xaml implementation | UI is a subset of common elements from each platform (with exceptions) |
+
 ### MvxNative - Xamarin Native Template
 
 To scaffold a new MvvmCross Xamarin application you must use the `mvxnative` command. To specify a name for the projects you can use the `-n|--name` option and `-sln|--solution-name` for the solution name.
