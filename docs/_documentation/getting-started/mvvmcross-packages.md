@@ -12,7 +12,8 @@ Name | Description | Link
 `MvvmCross.Forms`              | Main nuget for Xamarin Forms. | [NuGet](https://www.nuget.org/packages/MvvmCross.Forms/)
 `MvvmCross.Tests`              | Test helpers | [NuGet](https://www.nuget.org/packages/MvvmCross.Tests/)
 `MvvmCross.CodeAnalysis`       | Code fixes for MvvmCross | [NuGet](https://www.nuget.org/packages/MvvmCross.CodeAnalysis/)
-
+`MvvmCross.Platforms.Wpf`      |  | [NuGet](https://www.nuget.org/packages/MvvmCross.Platforms.Wpf/)
+`MvvmCross.Forms.Platforms.Wpf`|  | [NuGet](https://www.nuget.org/packages/MvvmCross.Forms.Platforms.Wpf/)
 
 ## AndroidX
 
