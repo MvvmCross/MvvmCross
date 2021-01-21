@@ -144,7 +144,7 @@ If you're using a custom ViewPresenter that extends the default provided by Mvvm
 - On `MvxAndroidViewPresenter`, `ShowIntent` has a new parameter.
 - On `MvxAppCompatViewPresenter`, `CreateActivityTransitionOptions` changed its return type.
 - As part of the shared elements evolution, `MvxActivityPresentationAttribute` and `MvxFragmentPresentationAttribute` have lost some properties - they were deprecated.
-- On both presenters, callback methods like `OnBeforeFragmentChanging` and `OnFragmentChanged` now forward the `MvxViewVodelRequest` object as a parameter.
+- On both presenters, callback methods like `OnBeforeFragmentChanging` and `OnFragmentChanged` now forward the `MvxViewModelRequest` object as a parameter.
 
 ### WPF
 - `MvxBaseWpfViewPresenter` and `MvxSimpleWpfViewPresenter` were removed. It is highly recommended that you migrate to `MvxWpfViewPresenter`.
