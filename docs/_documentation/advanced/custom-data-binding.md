@@ -91,6 +91,17 @@ protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry reg
 }
 ```
 
+### Using a Custom Binding
+
+Once you have registered a custom binding target, you can use it in your views as follows:
+
+```C#
+MyView aView;
+set.Bind(aView).For("MyProperty").To(vm => vm.value);
+```
+
+If you do not wish to specify `For("MyProperty")` you can setup a default binding name in your `Setup` class. You can learn more about this [here](https://www.mvvmcross.com/documentation/advanced/customizing-using-App-and-Setup?scroll=76#registering-default-binding-names).
+
 ### Internals Of A Target Binding
 
 All target bindings are a subclass of `MvxTargetBinding`, there are a couple of subclasses of this, which MvvmCross provides, which contain some additions to help prevent issues such as infinte call loops. Adding support for converters, adding platform specifics and overcoming View quirks.
