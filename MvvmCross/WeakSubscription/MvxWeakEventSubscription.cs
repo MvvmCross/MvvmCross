@@ -8,6 +8,7 @@ using MvvmCross.Exceptions;
 
 namespace MvvmCross.WeakSubscription
 {
+#nullable enable
     public class MvxWeakEventSubscription<TSource, TEventArgs> : IDisposable
         where TSource : class
     {
@@ -38,7 +39,7 @@ namespace MvvmCross.WeakSubscription
             EventHandler<TEventArgs> targetEventHandler)
         {
             if (source == null)
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(source), "missing source in MvxWeakEventSubscription");
 
             if (sourceEventInfo == null)
                 throw new ArgumentNullException(nameof(sourceEventInfo),
@@ -117,7 +118,7 @@ namespace MvvmCross.WeakSubscription
         private void AddEventHandler()
         {
             if (_subscribed)
-                throw new MvxException("Should not call _subscribed twice");
+                throw new MvxException("Should not call AddEventHandler twice");
 
             TSource source;
             if (_sourceReference.TryGetTarget(out source))
@@ -158,7 +159,7 @@ namespace MvvmCross.WeakSubscription
             EventHandler targetEventHandler)
         {
             if (source == null)
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(source), "missing source in MvxWeakEventSubscription");
 
             if (sourceEventInfo == null)
                 throw new ArgumentNullException(nameof(sourceEventInfo),
@@ -237,7 +238,7 @@ namespace MvvmCross.WeakSubscription
         private void AddEventHandler()
         {
             if (_subscribed)
-                throw new MvxException("Should not call _subscribed twice");
+                throw new MvxException("Should not call AddEventHandler() twice");
 
             TSource source;
             if (_sourceReference.TryGetTarget(out source))
@@ -247,4 +248,5 @@ namespace MvvmCross.WeakSubscription
             }
         }
     }
+#nullable restore
 }
