@@ -98,10 +98,18 @@ namespace MvvmCross.WeakSubscription
             if (!_subscribed)
                 return;
 
-            TSource source;
-            if (_sourceReference.TryGetTarget(out source))
+            try
             {
-                _sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] { _ourEventHandler });
+                TSource source;
+                if (_sourceReference.TryGetTarget(out source))
+                {
+                    _sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] { _ourEventHandler });
+                    _subscribed = false;
+                }
+            }
+            catch (TargetInvocationException tie) when (tie.InnerException is ObjectDisposedException)
+            {
+                // we don't care if source has already been disposed
                 _subscribed = false;
             }
         }
@@ -210,10 +218,18 @@ namespace MvvmCross.WeakSubscription
             if (!_subscribed)
                 return;
 
-            TSource source;
-            if (_sourceReference.TryGetTarget(out source))
+            try
             {
-                _sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] { _ourEventHandler });
+                TSource source;
+                if (_sourceReference.TryGetTarget(out source))
+                {
+                    _sourceEventInfo.GetRemoveMethod().Invoke(source, new object[] { _ourEventHandler });
+                    _subscribed = false;
+                }
+            }
+            catch (TargetInvocationException tie) when (tie.InnerException is ObjectDisposedException)
+            {
+                // we don't care if source has already been disposed
                 _subscribed = false;
             }
         }
