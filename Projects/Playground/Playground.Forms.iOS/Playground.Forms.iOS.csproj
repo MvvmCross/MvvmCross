@@ -135,7 +135,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
+    <PackageReference Include="Plugin.Permissions"/>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -160,6 +160,5 @@
     <BundleResource Include="Resources\MvvmCross%402x.png" />
     <BundleResource Include="Resources\MvvmCross%403x.png" />
   </ItemGroup>
-  <Import Project="..\..\..\XamarinForms.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

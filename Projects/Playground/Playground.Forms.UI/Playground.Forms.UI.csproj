@@ -15,5 +15,4 @@
     <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
   </ItemGroup>
   
-  <Import Project="..\..\..\XamarinForms.targets" />
 </Project>

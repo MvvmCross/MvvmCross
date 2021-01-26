@@ -118,9 +118,9 @@ namespace Playground.Forms.iOS
             changed.PropertyChanged += (sender, e) => { var test = e.PropertyName; };
         }
 
-        public void Include(MvxNavigationService service, IMvxViewModelLoader loader)
+        public void Include(MvxNavigationService service, IMvxViewModelLoader loader, MvvmCross.Views.IMvxViewDispatcher dispatcher)
         {
-            service = new MvxNavigationService(null, loader);
+            service = new MvxNavigationService(null, dispatcher);
         }
 
         public void Include(ConsoleColor color)
