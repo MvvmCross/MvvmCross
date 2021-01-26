@@ -8,10 +8,11 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters.Hints
 {
+#nullable enable
     public class MvxRemovePresentationHint
         : MvxPresentationHint
     {
-        public MvxRemovePresentationHint(Type viewModelToRemove) : base()
+        public MvxRemovePresentationHint(Type viewModelToRemove)
         {
             ViewModelToRemove = viewModelToRemove;
         }
@@ -21,10 +22,12 @@ namespace MvvmCross.Presenters.Hints
             ViewModelToRemove = viewModelToRemove;
         }
 
-        public MvxRemovePresentationHint(Type viewModelToRemove, IDictionary<string, string> hints) : this(viewModelToRemove, new MvxBundle(hints))
+        public MvxRemovePresentationHint(Type viewModelToRemove, IDictionary<string, string> hints)
+            : this(viewModelToRemove, new MvxBundle(hints))
         {
         }
 
-        public Type ViewModelToRemove { get; private set; }
+        public Type ViewModelToRemove { get; }
     }
+#nullable restore
 }
