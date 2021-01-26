@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -7,6 +7,7 @@ using System.ComponentModel;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     /// <summary>
     /// Provides a cache for <see cref="PropertyChangedEventArgs"/> instances.
     /// </summary>
@@ -15,7 +16,8 @@ namespace MvvmCross.ViewModels
         /// <summary>
         /// The underlying dictionary. This instance is its own mutex.
         /// </summary>
-        private readonly Dictionary<string, PropertyChangedEventArgs> _cache = new Dictionary<string, PropertyChangedEventArgs>();
+        private readonly Dictionary<string, PropertyChangedEventArgs> _cache =
+            new Dictionary<string, PropertyChangedEventArgs>();
 
         /// <summary>
         /// Private constructor to prevent other instances.
@@ -27,7 +29,8 @@ namespace MvvmCross.ViewModels
         /// <summary>
         /// The global instance of the cache.
         /// </summary>
-        public static PropertyChangedEventArgsCache Instance { get; } = new PropertyChangedEventArgsCache();
+        public static PropertyChangedEventArgsCache Instance { get; } =
+            new PropertyChangedEventArgsCache();
 
         /// <summary>
         /// Retrieves a <see cref="PropertyChangedEventArgs"/> instance for the specified property, creating it and adding it to the cache if necessary.
@@ -46,4 +49,5 @@ namespace MvvmCross.ViewModels
             }
         }
     }
+#nullable restore
 }

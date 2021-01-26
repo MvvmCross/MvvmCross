@@ -10,6 +10,7 @@ using MvvmCross.Navigation;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public abstract class MvxAppStart : IMvxAppStart
     {
         protected readonly IMvxNavigationService NavigationService;
@@ -17,18 +18,18 @@ namespace MvvmCross.ViewModels
 
         private int startHasCommenced;
 
-        public MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService)
+        protected MvxAppStart(IMvxApplication application, IMvxNavigationService navigationService)
         {
             Application = application;
             NavigationService = navigationService;
         }
 
-        public void Start(object hint = null)
+        public void Start(object? hint = null)
         {
             StartAsync(hint).GetAwaiter().GetResult();
         }
 
-        public async Task StartAsync(object hint = null)
+        public async Task StartAsync(object? hint = null)
         {
             // Check whether Start has commenced, and return if it has
             if (Interlocked.CompareExchange(ref startHasCommenced, 1, 0) == 1)
@@ -43,9 +44,9 @@ namespace MvvmCross.ViewModels
             await NavigateToFirstViewModel(applicationHint);
         }
 
-        protected abstract Task NavigateToFirstViewModel(object hint = null);
+        protected abstract Task NavigateToFirstViewModel(object? hint = null);
 
-        protected virtual async Task<object> ApplicationStartup(object hint = null)
+        protected virtual async Task<object?> ApplicationStartup(object? hint = null)
         {
             await Application.Startup();
             return hint;
@@ -72,7 +73,7 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        protected override async Task NavigateToFirstViewModel(object hint = null)
+        protected override async Task NavigateToFirstViewModel(object? hint = null)
         {
             try
             {
@@ -93,7 +94,7 @@ namespace MvvmCross.ViewModels
         {
         }
 
-        protected override async Task<object> ApplicationStartup(object hint = null)
+        protected override async Task<object?> ApplicationStartup(object? hint = null)
         {
             var applicationHint = await base.ApplicationStartup(hint);
             if (applicationHint is TParameter parameter && Application is IMvxApplication<TParameter> typedApplication)
@@ -102,7 +103,7 @@ namespace MvvmCross.ViewModels
                 return applicationHint;
         }
 
-        protected override async Task NavigateToFirstViewModel(object hint = null)
+        protected override async Task NavigateToFirstViewModel(object? hint = null)
         {
             try
             {
@@ -120,4 +121,5 @@ namespace MvvmCross.ViewModels
             }
         }
     }
+#nullable restore
 }

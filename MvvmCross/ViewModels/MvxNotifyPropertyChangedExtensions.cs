@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public static class MvxNotifyPropertyChangedExtensions
     {
         private static bool RaiseIfChanging<TSource, TReturn>(
@@ -18,7 +19,7 @@ namespace MvvmCross.ViewModels
             Func<bool> raiseAction)
             where TSource : IMvxNotifyPropertyChanged
         {
-            if (EqualityComparer<TReturn>.Default.Equals(backingField, newValue) == false)
+            if (!EqualityComparer<TReturn>.Default.Equals(backingField, newValue))
             {
                 return raiseAction();
             }
@@ -56,7 +57,7 @@ namespace MvvmCross.ViewModels
             TActionParameter raiseActionParameter)
             where TSource : IMvxNotifyPropertyChanged
         {
-            if (EqualityComparer<TReturn>.Default.Equals(backingField, newValue) == false)
+            if (!EqualityComparer<TReturn>.Default.Equals(backingField, newValue))
             {
                 backingField = newValue;
                 raiseAction(raiseActionParameter);
@@ -92,4 +93,5 @@ namespace MvvmCross.ViewModels
                 args);
         }
     }
+#nullable restore
 }

@@ -91,7 +91,7 @@ namespace MvvmCross.ViewModels
             }
 
             if (ShouldLogInpc())
-                MvxLog.Instance.Trace($"Property '{changingArgs.PropertyName}' changing value to {changingArgs.NewValue}");
+                MvxLog.Instance?.Trace($"Property '{changingArgs.PropertyName}' changing value to {changingArgs.NewValue}");
 
             PropertyChanging?.Invoke(this, changingArgs);
 
@@ -131,7 +131,7 @@ namespace MvvmCross.ViewModels
             void raiseChange()
             {
                 if (ShouldLogInpc())
-                    MvxLog.Instance.Trace($"Property '{changedArgs.PropertyName}' value changed");
+                    MvxLog.Instance?.Trace($"Property '{changedArgs.PropertyName}' value changed");
                 PropertyChanged?.Invoke(this, changedArgs);
             }
 

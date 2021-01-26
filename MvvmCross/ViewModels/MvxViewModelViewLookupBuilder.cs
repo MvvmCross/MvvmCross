@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,6 +11,7 @@ using MvvmCross.IoC;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public class MvxViewModelViewLookupBuilder
         : IMvxTypeToTypeLookupBuilder
     {
@@ -41,14 +42,15 @@ namespace MvvmCross.ViewModels
             return views;
         }
 
-        protected virtual Exception ReportBuildProblem(IEnumerable<KeyValuePair<Type, Type>> views,
-                                                    ArgumentException exception)
+        protected virtual Exception ReportBuildProblem(
+            IEnumerable<KeyValuePair<Type, Type>> views, ArgumentException exception)
         {
-            var overSizedCounts = views.GroupBy(x => x.Key)
-                                       .Select(x => new { x.Key.Name, Count = x.Count(), ViewNames = x.Select(v => v.Value.Name).ToList() })
-                                       .Where(x => x.Count > 1)
-                                       .Select(x => $"{x.Count}*{x.Name} ({string.Join(",", x.ViewNames)})")
-                                       .ToArray();
+            var overSizedCounts = 
+                views.GroupBy(x => x.Key)
+                .Select(x => new { x.Key.Name, Count = x.Count(), ViewNames = x.Select(v => v.Value.Name).ToList() })
+                .Where(x => x.Count > 1)
+                .Select(x => $"{x.Count}*{x.Name} ({string.Join(",", x.ViewNames)})")
+                .ToArray();
 
             if (overSizedCounts.Length == 0)
             {
@@ -64,4 +66,5 @@ namespace MvvmCross.ViewModels
             }
         }
     }
+#nullable restore
 }
