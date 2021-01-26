@@ -18,16 +18,16 @@
     <PackageVersion Include="Xamarin.Forms" Version="4.6.0.847" />
     <PackageVersion Include="Xamarin.Forms.Platform.WPF" Version="4.6.0.847" />
     <PackageVersion Include="Roslynator.Analyzers" Version="3.0.0" />
-    <PackageVersion Include="AsyncFixer" Version="1.3.0" />
+    <PackageVersion Include="AsyncFixer" Version="1.5.1" />
     <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="8.16.0.25740" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="8.17.0.26580" />
     <PackageVersion Include="SourceLink.Create.CommandLine" Version="2.8.3" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
-    <PackageVersion Include="Moq" Version="4.15.2" />
+    <PackageVersion Include="Moq" Version="4.16.0" />
     <PackageVersion Include="xunit" Version="2.4.1" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.3" />
-    <PackageVersion Include="XunitXml.TestLogger" Version="2.1.26" />
+    <PackageVersion Include="XunitXml.TestLogger" Version="2.1.45" />
     <PackageVersion Include="System.Console" Version="4.3.1" />
     <PackageVersion Include="Plugin.Permissions" Version="6.0.1" />
     <PackageVersion Include="Xamarin.AndroidX.MediaRouter" Version="1.2.0.1" />
