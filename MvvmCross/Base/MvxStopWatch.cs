@@ -7,32 +7,41 @@ using MvvmCross.Logging;
 
 namespace MvvmCross.Base
 {
-    public class MvxStopWatch
+#nullable enable
+    public sealed class MvxStopWatch
         : IDisposable
     {
-        private static readonly IMvxLog _defaultLog = Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor("mvxStopWatch");
-        
-        private readonly IMvxLog _log;
+        private readonly IMvxLog? _log;
         private readonly string _message;
         private readonly int _startTickCount;
 
         private MvxStopWatch(string text, params object[] args)
         {
-            _log = _defaultLog;
+            _log = GetLog(nameof(MvxStopWatch));
             _startTickCount = Environment.TickCount;
             _message = string.Format(text, args);
         }
 
         private MvxStopWatch(string tag, string text, params object[] args)
         {
-            _log = Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor(tag);
+            _log = GetLog(tag);
             _startTickCount = Environment.TickCount;
             _message = string.Format(text, args);
         }
 
+        private static IMvxLog? GetLog(string tag)
+        {
+            if (Mvx.IoCProvider.TryResolve(out IMvxLogProvider logProvider))
+            {
+                return logProvider.GetLogFor(tag);
+            }
+
+            return null;
+        }
+
         public void Dispose()
         {
-            MvxLog.Instance.Trace("{0} - {1}", Environment.TickCount - _startTickCount, _message);
+            _log?.Trace("{0} - {1}", Environment.TickCount - _startTickCount, _message);
             GC.SuppressFinalize(this);
         }
 
@@ -46,4 +55,5 @@ namespace MvvmCross.Base
             return new MvxStopWatch(tag, text, args);
         }
     }
+#nullable restore
 }

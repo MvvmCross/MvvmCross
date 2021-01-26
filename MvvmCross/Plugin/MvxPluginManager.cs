@@ -9,8 +9,10 @@ using MvvmCross.Logging;
 
 namespace MvvmCross.Plugin
 {
+#nullable enable
     public class MvxPluginManager : IMvxPluginManager
     {
+        private readonly object _lockObject = new object();
         private readonly HashSet<Type> _loadedPlugins = new HashSet<Type>();
 
         public Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; }
@@ -29,8 +31,9 @@ namespace MvvmCross.Plugin
 
         public virtual void EnsurePluginLoaded(Type type, bool forceLoad = false)
         {
-            if (forceLoad == false && IsPluginLoaded(type)) return;
-            
+            if (!forceLoad && IsPluginLoaded(type))
+                return;
+
             var plugin = Activator.CreateInstance(type) as IMvxPlugin;
             if (plugin == null)
                 throw new MvxException($"Type {type} is not an IMvxPlugin");
@@ -43,17 +46,21 @@ namespace MvvmCross.Plugin
 
             plugin.Load();
 
-            _loadedPlugins.Add(type);
+            lock (_lockObject)
+            {
+                _loadedPlugins.Add(type);
+            }
         }
 
-        protected IMvxPluginConfiguration ConfigurationFor(Type toLoad) => ConfigurationSource?.Invoke(toLoad);
+        protected IMvxPluginConfiguration ConfigurationFor(Type toLoad) =>
+            ConfigurationSource.Invoke(toLoad);
 
-        public bool IsPluginLoaded<T>() where T : IMvxPlugin    
+        public bool IsPluginLoaded<T>() where T : IMvxPlugin
             => IsPluginLoaded(typeof(T));
 
         public bool IsPluginLoaded(Type type)
         {
-            lock (this)
+            lock (_lockObject)
             {
                 return _loadedPlugins.Contains(type);
             }
@@ -76,4 +83,5 @@ namespace MvvmCross.Plugin
             }
         }
     }
+#nullable restore
 }

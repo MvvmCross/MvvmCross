@@ -4,8 +4,10 @@
 
 namespace MvvmCross.Plugin
 {
+#nullable enable
     public interface IMvxConfigurablePlugin : IMvxPlugin
     {
         void Configure(IMvxPluginConfiguration configuration);
     }
+#nullable restore
 }

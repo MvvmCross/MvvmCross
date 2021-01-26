@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace MvvmCross.Plugin
 {
+#nullable enable
     public interface IMvxPluginManager
     {
         Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; }
@@ -19,10 +20,13 @@ namespace MvvmCross.Plugin
 
         void EnsurePluginLoaded(Type type, bool forceLoad = false);
         
-        void EnsurePluginLoaded<TPlugin>(bool forceLoad = false) where TPlugin : IMvxPlugin;
+        void EnsurePluginLoaded<TPlugin>(bool forceLoad = false)
+            where TPlugin : IMvxPlugin;
 
         bool TryEnsurePluginLoaded(Type type, bool forceLoad = false);
         
-        bool TryEnsurePluginLoaded<TPlugin>(bool forceLoad = false) where TPlugin : IMvxPlugin;
+        bool TryEnsurePluginLoaded<TPlugin>(bool forceLoad = false)
+            where TPlugin : IMvxPlugin;
      }
+#nullable restore
 }
