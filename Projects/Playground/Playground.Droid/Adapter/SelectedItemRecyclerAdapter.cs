@@ -4,7 +4,6 @@
 
 using System;
 using Android.Runtime;
-using Android.Support.V4.View;
 using Android.Widget;
 using AndroidX.RecyclerView.Widget;
 using MvvmCross.DroidX.RecyclerView;
@@ -29,7 +28,7 @@ namespace Playground.Droid.Adapter
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             var itemLogo = holder.ItemView.FindViewById<ImageView>(Resource.Id.img_logo);
-            ViewCompat.SetTransitionName(itemLogo, "anim_img" + position);
+            AndroidX.Core.View.ViewCompat.SetTransitionName(itemLogo, "anim_img" + position);
 
             base.OnBindViewHolder(holder, position);
         }

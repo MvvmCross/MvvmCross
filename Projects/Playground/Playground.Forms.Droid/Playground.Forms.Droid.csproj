@@ -124,9 +124,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\hamburger.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json"/>
-    <PackageReference Include="Serilog"/>
-    <PackageReference Include="Serilog.Sinks.Xamarin"/>
+    <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="Serilog" />
+    <PackageReference Include="Serilog.Sinks.Xamarin" />
     <PackageReference Include="Xamarin.AndroidX.MediaRouter" />
     <PackageReference Include="Xamarin.AndroidX.AppCompat.Resources" />
     <PackageReference Include="Xamarin.Google.Android.Material" />
@@ -178,4 +178,9 @@
     </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties TriggeredFromHotReload="False" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
