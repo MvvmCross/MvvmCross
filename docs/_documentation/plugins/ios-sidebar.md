@@ -6,7 +6,7 @@ category: Plugins
 
 ## Setup
 
-You must override `CreateViewPresenter` in your `MvxIosSetup` class too tell MvvmCross to use the `MvxSidebarPresenter` instead of the default [iOS ViewPresenter](https://www.mvvmcross.com/documentation/platform/ios/ios-view-presenter?scroll=678).
+You must override `CreateViewPresenter` in your `MvxIosSetup` class too tell MvvmCross to use the `MvxSidebarPresenter` instead of the default [iOS ViewPresenter](https://www.mvvmcross.com/documentation/platform/ios/ios-view-presenter).
 
 ```c#
 protected override IMvxIosViewPresenter CreateViewPresenter()
