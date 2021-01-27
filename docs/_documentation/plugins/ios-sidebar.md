@@ -15,7 +15,7 @@ protected override IMvxIosViewPresenter CreateViewPresenter()
 }
 ```
 
-<I>Don't worry, `MvxSidebarPresenter` inherits all of the capabilities of the default view presenter.</I>
+> Note: `MvxSidebarPresenter` inherits all of the capabilities of the default view presenter
 
 ## MvxSidebarPresenter
 
