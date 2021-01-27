@@ -19,7 +19,7 @@ namespace Playground.Forms.UI.Pages
             InitializeComponent();
 
 #if __IOS__
-            if(Parent is MasterDetailPage master)
+            if(Parent is FlyoutPage master)
                 master.IsGestureEnabled = false;
 #endif
         }
@@ -30,7 +30,7 @@ namespace Playground.Forms.UI.Pages
             ViewModel.PropertyChanged += (sender, e) => {
                 if (e.PropertyName == nameof(ViewModel.SelectedMenu))
                 {
-                    if (Parent is MasterDetailPage master)
+                    if (Parent is FlyoutPage master)
                     {
                         //master.MasterBehavior = MasterBehavior.Popover;
                         master.IsPresented = !master.IsPresented;
