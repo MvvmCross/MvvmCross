@@ -4,8 +4,10 @@
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public interface IMvxNameMapping
     {
         string Map(string inputName);
     }
+#nullable restore
 }

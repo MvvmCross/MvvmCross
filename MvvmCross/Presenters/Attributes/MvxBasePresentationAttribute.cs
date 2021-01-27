@@ -6,13 +6,15 @@ using System;
 
 namespace MvvmCross.Presenters.Attributes
 {
+#nullable enable
     [AttributeUsage(AttributeTargets.Class)]
     public abstract class MvxBasePresentationAttribute : Attribute, IMvxPresentationAttribute
     {
         /// <inheritdoc />
-        public Type ViewModelType { get; set; }
+        public Type? ViewModelType { get; set; }
 
         /// <inheritdoc />
-        public Type ViewType { get; set; }
+        public Type? ViewType { get; set; }
     }
+#nullable restore
 }

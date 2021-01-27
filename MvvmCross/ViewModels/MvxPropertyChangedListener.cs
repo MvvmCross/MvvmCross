@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -12,6 +12,7 @@ using MvvmCross.WeakSubscription;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public class MvxPropertyChangedListener
         : IDisposable
     {
@@ -35,7 +36,7 @@ namespace MvvmCross.ViewModels
         {
             var whichProperty = propertyChangedEventArgs.PropertyName;
 
-            List<PropertyChangedEventHandler> handlers = null;
+            List<PropertyChangedEventHandler>? handlers = null;
             if (string.IsNullOrEmpty(whichProperty))
             {
                 // if whichProperty is empty, then it means everything has changed
@@ -83,14 +84,8 @@ namespace MvvmCross.ViewModels
             return Listen(property, (s, e) => handler());
         }
 
-        //TODO - is this method in or out? All depends on JIT compilation on MonoTouch
-        //public MvxPropertyChangedListener Listen<TProperty>(Expression<Func<TProperty>> property, Action<TProperty> handler)
-        //{
-        //    return Listen<TProperty>(property, new PropertyChangedEventHandler((s, e) => handler(property.Compile().Invoke())));
-        //}
-
-        public MvxPropertyChangedListener Listen<TProperty>(Expression<Func<TProperty>> propertyExpression,
-                                                            PropertyChangedEventHandler handler)
+        public MvxPropertyChangedListener Listen<TProperty>(
+            Expression<Func<TProperty>> propertyExpression, PropertyChangedEventHandler handler)
         {
             var propertyName = _notificationObject.GetPropertyNameFromExpression(propertyExpression);
             return Listen(propertyName, handler);
@@ -103,8 +98,7 @@ namespace MvvmCross.ViewModels
 
         public MvxPropertyChangedListener Listen(string propertyName, PropertyChangedEventHandler handler)
         {
-            List<PropertyChangedEventHandler> handlers = null;
-            if (!_handlersLookup.TryGetValue(propertyName, out handlers))
+            if (!_handlersLookup.TryGetValue(propertyName, out List<PropertyChangedEventHandler> handlers))
             {
                 handlers = new List<PropertyChangedEventHandler>();
                 _handlersLookup.Add(propertyName, handlers);
@@ -114,4 +108,5 @@ namespace MvvmCross.ViewModels
             return this;
         }
     }
+#nullable restore
 }

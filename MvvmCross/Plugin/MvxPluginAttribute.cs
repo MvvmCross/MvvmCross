@@ -6,8 +6,10 @@ using System;
 
 namespace MvvmCross.Plugin
 {
+#nullable enable
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class MvxPluginAttribute : Attribute
     {
     }
+#nullable restore
 }

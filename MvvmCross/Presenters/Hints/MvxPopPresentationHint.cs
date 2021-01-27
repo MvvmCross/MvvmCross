@@ -8,10 +8,11 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters.Hints
 {
+#nullable enable
     public class MvxPopPresentationHint
         : MvxPresentationHint
     {
-        public MvxPopPresentationHint(Type viewModelToPopTo, bool animated = false) : base()
+        public MvxPopPresentationHint(Type viewModelToPopTo, bool animated = false)
         {
             ViewModelToPopTo = viewModelToPopTo;
             Animated = animated;
@@ -23,12 +24,14 @@ namespace MvvmCross.Presenters.Hints
             Animated = animated;
         }
 
-        public MvxPopPresentationHint(IDictionary<string, string> hints, Type viewModelToPopTo, bool animated = true) : this(new MvxBundle(hints), viewModelToPopTo, animated)
+        public MvxPopPresentationHint(IDictionary<string, string> hints, Type viewModelToPopTo, bool animated = true)
+            : this(new MvxBundle(hints), viewModelToPopTo, animated)
         {
         }
 
-        public Type ViewModelToPopTo { get; private set; }
+        public Type ViewModelToPopTo { get; }
 
         public bool Animated { get; set; }
     }
+#nullable restore
 }

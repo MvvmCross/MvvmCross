@@ -12,15 +12,16 @@ using MvvmCross.Plugin;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public abstract class MvxApplication : IMvxApplication
     {
-        private IMvxViewModelLocator _defaultLocator;
+        private IMvxViewModelLocator? _defaultLocator;
 
         private IMvxViewModelLocator DefaultLocator
         {
             get
             {
-                _defaultLocator = _defaultLocator ?? CreateDefaultViewModelLocator();
+                _defaultLocator ??= CreateDefaultViewModelLocator();
                 return _defaultLocator;
             }
         }
@@ -48,7 +49,7 @@ namespace MvvmCross.ViewModels
         /// </summary>
         public virtual Task Startup()
         {
-            MvxLog.Instance.Trace("AppStart: Application Startup - On UI thread");
+            MvxLog.Instance?.Trace("AppStart: Application Startup - On UI thread");
             return Task.CompletedTask;
         }
 
@@ -103,10 +104,10 @@ namespace MvvmCross.ViewModels
 
     public class MvxApplication<TParameter> : MvxApplication, IMvxApplication<TParameter>
     {
-        public virtual TParameter Startup(TParameter parameter)
+        public virtual Task<TParameter> Startup(TParameter hint)
         {
-            // do nothing, so just return the original hint
-            return parameter;
+            return Task.FromResult(hint);
         }
     }
+#nullable restore
 }

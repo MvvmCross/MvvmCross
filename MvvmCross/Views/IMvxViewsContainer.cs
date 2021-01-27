@@ -8,6 +8,7 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Views
 {
+#nullable enable
     public interface IMvxViewsContainer : IMvxViewFinder
     {
         void AddAll(IDictionary<Type, Type> viewModelViewLookup);
@@ -22,4 +23,5 @@ namespace MvvmCross.Views
 
         void SetLastResort(IMvxViewFinder finder);
     }
+#nullable restore
 }

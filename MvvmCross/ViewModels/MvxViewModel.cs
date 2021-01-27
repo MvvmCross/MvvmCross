@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public abstract class MvxViewModel
         : MvxNotifyPropertyChanged, IMvxViewModel
     {
@@ -77,8 +78,8 @@ namespace MvvmCross.ViewModels
             return Task.FromResult(true);
         }
 
-        private MvxNotifyTask _initializeTask;
-        public MvxNotifyTask InitializeTask
+        private MvxNotifyTask? _initializeTask;
+        public MvxNotifyTask? InitializeTask
         {
             get => _initializeTask;
             set => SetProperty(ref _initializeTask, value);
@@ -91,16 +92,19 @@ namespace MvvmCross.ViewModels
         public abstract void Prepare(TParameter parameter);
     }
 
-    //TODO: Not possible to name MvxViewModel, name is MvxViewModelResult for now
     public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult>
         where TResult : notnull
     {
-        public TaskCompletionSource<object> CloseCompletionSource { get; set; }
+        public TaskCompletionSource<object>? CloseCompletionSource { get; set; }
 
         public override void ViewDestroy(bool viewFinishing = true)
         {
-            if (viewFinishing && CloseCompletionSource != null && !CloseCompletionSource.Task.IsCompleted && !CloseCompletionSource.Task.IsFaulted)
-                CloseCompletionSource?.TrySetCanceled();
+            if (viewFinishing && CloseCompletionSource != null &&
+                !CloseCompletionSource.Task.IsCompleted &&
+                !CloseCompletionSource.Task.IsFaulted)
+            {
+                CloseCompletionSource.TrySetCanceled();
+            }
 
             base.ViewDestroy(viewFinishing);
         }
@@ -112,4 +116,5 @@ namespace MvvmCross.ViewModels
     {
         public abstract void Prepare(TParameter parameter);
     }
+#nullable restore
 }

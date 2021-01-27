@@ -15,7 +15,6 @@ namespace MvvmCross.ViewModels
 {
     public class MvxObservableCollection<T>
         : ObservableCollection<T>
-        , IList<T>
     {
         protected struct SuppressEventsDisposable : IDisposable
         {

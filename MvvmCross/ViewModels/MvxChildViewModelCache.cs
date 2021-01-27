@@ -5,15 +5,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MvvmCross.ViewModels;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public class MvxChildViewModelCache : IMvxChildViewModelCache
     {
-        private static int _unique = 1;
-
         private readonly Dictionary<int, IMvxViewModel> _viewModels = new Dictionary<int, IMvxViewModel>();
+        private int _unique = 1;
 
         public int Cache(IMvxViewModel viewModel)
         {
@@ -29,8 +28,7 @@ namespace MvvmCross.ViewModels
 
         public IMvxViewModel Get(int index)
         {
-            IMvxViewModel viewModel;
-            _viewModels.TryGetValue(index, out viewModel);
+            _viewModels.TryGetValue(index, out IMvxViewModel viewModel);
             return viewModel;
         }
 
@@ -49,4 +47,5 @@ namespace MvvmCross.ViewModels
             _viewModels.Remove(_viewModels.FirstOrDefault(x => x.Value.GetType() == viewModelType).Key);
         }
     }
+#nullable restore
 }

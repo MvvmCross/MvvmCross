@@ -4,6 +4,7 @@
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public class MvxViewToViewModelNameMapping
         : IMvxNameMapping
     {
@@ -19,4 +20,5 @@ namespace MvvmCross.ViewModels
             return inputName + ViewModelPostfix;
         }
     }
+#nullable restore
 }

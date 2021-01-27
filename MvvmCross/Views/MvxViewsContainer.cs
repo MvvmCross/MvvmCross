@@ -8,21 +8,22 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Views
 {
+#nullable enable
     public abstract class MvxViewsContainer
         : IMvxViewsContainer
     {
         private readonly Dictionary<Type, Type> _bindingMap = new Dictionary<Type, Type>();
         private readonly List<IMvxViewFinder> _secondaryViewFinders;
-        private IMvxViewFinder _lastResortViewFinder;
+        private IMvxViewFinder? _lastResortViewFinder;
 
         protected MvxViewsContainer()
         {
             _secondaryViewFinders = new List<IMvxViewFinder>();
         }
 
-        public void AddAll(IDictionary<Type, Type> lookup)
+        public void AddAll(IDictionary<Type, Type> viewModelViewLookup)
         {
-            foreach (var pair in lookup)
+            foreach (var pair in viewModelViewLookup)
             {
                 Add(pair.Key, pair.Value);
             }
@@ -79,4 +80,5 @@ namespace MvvmCross.Views
             _lastResortViewFinder = finder;
         }
     }
+#nullable restore
 }

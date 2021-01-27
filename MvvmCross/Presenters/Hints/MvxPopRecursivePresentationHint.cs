@@ -8,10 +8,11 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Presenters.Hints
 {
+#nullable enable
     public class MvxPopRecursivePresentationHint
         : MvxPresentationHint
     {
-        public MvxPopRecursivePresentationHint(int levelsDeep, bool animated = false) : base()
+        public MvxPopRecursivePresentationHint(int levelsDeep, bool animated = false)
         {
             LevelsDeep = levelsDeep;
             Animated = animated;
@@ -23,12 +24,14 @@ namespace MvvmCross.Presenters.Hints
             Animated = animated;
         }
 
-        public MvxPopRecursivePresentationHint(IDictionary<string, string> hints, int levelsDeep, bool animated = true) : this(new MvxBundle(hints), levelsDeep, animated)
+        public MvxPopRecursivePresentationHint(IDictionary<string, string> hints, int levelsDeep, bool animated = true)
+            : this(new MvxBundle(hints), levelsDeep, animated)
         {
         }
 
-        public int LevelsDeep { get; private set; }
+        public int LevelsDeep { get; }
 
         public bool Animated { get; set; }
     }
+#nullable restore
 }

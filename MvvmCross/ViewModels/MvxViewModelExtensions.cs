@@ -51,7 +51,7 @@ namespace MvvmCross.ViewModels
                     return;
                 }
 
-                if (!MvxSingletonCache.Instance.Parser.TypeSupported(parameters[0].ParameterType))
+                if (MvxSingletonCache.Instance?.Parser.TypeSupported(parameters[0].ParameterType) == false)
                 {
                     // call method using typed object
                     var value = bundle.Read(parameters[0].ParameterType);

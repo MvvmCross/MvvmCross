@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,6 +11,7 @@ using MvvmCross.Views;
 
 namespace MvvmCross.ViewModels
 {
+#nullable enable
     public class MvxViewModelViewTypeFinder
         : IMvxViewModelTypeFinder
     {
@@ -23,7 +24,7 @@ namespace MvvmCross.ViewModels
             _viewToViewModelNameMapping = viewToViewModelNameMapping;
         }
 
-        public virtual Type FindTypeOrNull(Type candidateType)
+        public virtual Type? FindTypeOrNull(Type candidateType)
         {
             if (!CheckCandidateTypeIsAView(candidateType))
                 return null;
@@ -43,15 +44,15 @@ namespace MvvmCross.ViewModels
             if (typeByName != null)
                 return typeByName;
 
-            MvxLog.Instance.Trace("No view model association found for candidate view {0}", candidateType.Name);
+            MvxLog.Instance?.Trace("No view model association found for candidate view {0}", candidateType.Name);
             return null;
         }
 
-        protected virtual Type LookupAttributedViewModelType(Type candidateType)
+        protected virtual Type? LookupAttributedViewModelType(Type candidateType)
         {
             var attribute = candidateType
-                                .GetCustomAttributes(typeof(MvxViewForAttribute), false)
-                                .FirstOrDefault() as MvxViewForAttribute;
+                .GetCustomAttributes(typeof(MvxViewForAttribute), false)
+                .FirstOrDefault() as MvxViewForAttribute;
 
             return attribute?.ViewModel;
         }
@@ -61,18 +62,18 @@ namespace MvvmCross.ViewModels
             var viewName = candidateType.Name;
             var viewModelName = _viewToViewModelNameMapping.Map(viewName);
 
-            Type toReturn;
-            _viewModelByNameLookup.TryLookupByName(viewModelName, out toReturn);
+            _viewModelByNameLookup.TryLookupByName(viewModelName, out Type toReturn);
             return toReturn;
         }
 
-        protected virtual Type LookupAssociatedConcreteViewModelType(Type candidateType)
+        protected virtual Type? LookupAssociatedConcreteViewModelType(Type candidateType)
         {
             var viewModelPropertyInfo = candidateType
                 .GetProperties()
-                .FirstOrDefault(x => x.Name == "ViewModel"
-                                     && !x.PropertyType.GetTypeInfo().IsInterface
-                                     && !x.PropertyType.GetTypeInfo().IsAbstract);
+                .FirstOrDefault(
+                    x => x.Name == "ViewModel" && 
+                    !x.PropertyType.GetTypeInfo().IsInterface &&
+                    !x.PropertyType.GetTypeInfo().IsAbstract);
 
             return viewModelPropertyInfo?.PropertyType;
         }
@@ -91,4 +92,5 @@ namespace MvvmCross.ViewModels
             return true;
         }
     }
+#nullable restore
 }

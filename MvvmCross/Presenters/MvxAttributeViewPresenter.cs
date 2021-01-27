@@ -98,6 +98,9 @@ namespace MvvmCross.Presenters
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
+            if (request.ViewModelType == null)
+                throw new InvalidOperationException($"Cannot get view types for null ViewModelType");
+
             if (ViewsContainer == null)
                 throw new InvalidOperationException($"Cannot get view types from null {nameof(ViewsContainer)}");
 
@@ -177,15 +180,15 @@ namespace MvvmCross.Presenters
         {
             return GetPresentationAttributeAction(
                 new MvxViewModelInstanceRequest(viewModel), out MvxBasePresentationAttribute attribute)
-                    .CloseAction
-                    .Invoke(viewModel, attribute);
+                    .CloseAction?
+                    .Invoke(viewModel, attribute) ?? Task.FromResult(false);
         }
 
         public override Task<bool> Show(MvxViewModelRequest request)
         {
             return GetPresentationAttributeAction(request, out MvxBasePresentationAttribute attribute)
-                .ShowAction
-                .Invoke(attribute.ViewType, attribute, request);
+                .ShowAction?
+                .Invoke(attribute.ViewType, attribute, request) ?? Task.FromResult(false);
         }
     }
 #nullable restore
