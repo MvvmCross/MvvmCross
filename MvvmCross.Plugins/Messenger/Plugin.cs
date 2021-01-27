@@ -4,6 +4,7 @@
 
 namespace MvvmCross.Plugin.Messenger
 {
+#nullable enable
     [MvxPlugin]
     [Preserve(AllMembers = true)]
     public class Plugin : IMvxPlugin
@@ -13,4 +14,5 @@ namespace MvvmCross.Plugin.Messenger
             Mvx.IoCProvider.RegisterSingleton<IMvxMessenger>(new MvxMessengerHub());
         }
     }
+#nullable restore
 }

@@ -6,8 +6,21 @@ using MvvmCross.Logging;
 
 namespace MvvmCross.Plugin.Messenger
 {
+#nullable enable
     internal static class MvxPluginLog
     {
-        internal static IMvxLog Instance { get; } = Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor("MvxPlugin");
+        internal static IMvxLog? Instance
+        {
+            get
+            {
+                if (Mvx.IoCProvider.TryResolve(out IMvxLogProvider logProvider))
+                {
+                    return logProvider.GetLogFor("MvxPlugin");
+                }
+
+                return null;
+            }
+        }
     }
+#nullable restore
 }
