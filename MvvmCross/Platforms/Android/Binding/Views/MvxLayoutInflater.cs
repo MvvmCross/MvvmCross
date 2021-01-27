@@ -66,8 +66,6 @@ namespace MvvmCross.Platforms.Android.Binding.Views
 
         private const string Tag = "MvxLayoutInflater";
 
-        private static readonly BuildVersionCodes Sdk = Build.VERSION.SdkInt;
-
         private static readonly string[] ClassPrefixList = {
             "android.widget.",
             "android.webkit.",
@@ -227,8 +225,7 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             // Wrap the incoming factory if we need to.
             if (!(factory is MvxLayoutInflaterCompat.FactoryWrapper))
             {
-                Factory =
-                    new MvxLayoutInflaterCompat.FactoryWrapper(new DelegateFactory1(factory, _bindingVisitor));
+                Factory = new MvxLayoutInflaterCompat.FactoryWrapper(new DelegateFactory1(factory, _bindingVisitor));
                 return;
             }
 
@@ -241,10 +238,10 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             // Wrap the incoming factory if we need to.
             if (!(factory2 is MvxLayoutInflaterCompat.FactoryWrapper2))
             {
-                Factory2 =
-                    new MvxLayoutInflaterCompat.FactoryWrapper2(new DelegateFactory2(factory2, _bindingVisitor));
+                Factory2 = new MvxLayoutInflaterCompat.FactoryWrapper2(new DelegateFactory2(factory2, _bindingVisitor));
                 return;
             }
+
             Factory2 = factory2;
         }
 
@@ -253,32 +250,16 @@ namespace MvvmCross.Platforms.Android.Binding.Views
             if (cloned)
                 return;
 
-            // If factories are already set we need to wrap them in our
-            // own secret sauce.
-            if (Sdk > BuildVersionCodes.Honeycomb)
+            // Check for FactoryWrapper2 may be too loose
+            if (Factory2 != null && !(Factory2 is MvxLayoutInflaterCompat.FactoryWrapper2))
             {
-                // Check for FactoryWrapper2 may be too loose
-                if (Factory2 != null && !(Factory2 is MvxLayoutInflaterCompat.FactoryWrapper2))
-                {
-                    MvxLayoutInflaterCompat.SetFactory(this, new DelegateFactory2(Factory2, _bindingVisitor));
-                }
-
-                return; // we shouldn't set Factory if Factory2 is being set...
-            }
-
-            // Check for FactoryWrapper may be too loose
-            if (Factory != null && !(Factory is MvxLayoutInflaterCompat.FactoryWrapper))
-            {
-                MvxLayoutInflaterCompat.SetFactory(this, new DelegateFactory1(Factory, _bindingVisitor));
+                MvxLayoutInflaterCompat.SetFactory(this, new DelegateFactory2(Factory2, _bindingVisitor));
             }
         }
 
         private void SetPrivateFactoryInternal()
         {
             if (_setPrivateFactory)
-                return;
-
-            if (Build.VERSION.SdkInt < BuildVersionCodes.Honeycomb)
                 return;
 
             if (!(Context is IFactory2))

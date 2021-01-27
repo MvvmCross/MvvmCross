@@ -8,7 +8,6 @@ namespace Playground.iOS
 {
     public class Setup : MvxIosSetup<App>
     {
-
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)
         {
             registry.RegisterCustomBindingFactory<BinaryEdit>(
@@ -17,7 +16,5 @@ namespace Playground.iOS
 
             base.FillTargetFactories(registry);
         }
-
-
     }
 }

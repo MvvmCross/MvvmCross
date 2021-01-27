@@ -332,8 +332,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             var bundle = Bundle.Empty!;
 
             if (CurrentActivity.IsActivityAlive() &&
-                CurrentActivity is IMvxAndroidSharedElements sharedElementsActivity &&
-                Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+                CurrentActivity is IMvxAndroidSharedElements sharedElementsActivity)
             {
                 var (elements, transitionElementPairs) =
                     GetTransitionElements(attribute, request, sharedElementsActivity);

@@ -16,6 +16,9 @@ namespace Playground.Mac
     [MvxWindowPresentation(PositionX = 300)]
     public partial class RootView : MvxViewController<RootViewModel>, IMvxOverridePresentationAttribute
     {
+        // prevents presentation in a new window when navigating back to root from a child
+        private static bool WasPresentedInWindow = false;
+
         public bool MyValue { get; set; } = true;
 
         public RootView(IntPtr handle) : base(handle)
@@ -48,8 +51,11 @@ namespace Playground.Mac
 
         public MvxBasePresentationAttribute PresentationAttribute(MvxViewModelRequest request)
         {
-            if (!NSApplication.SharedApplication.DangerousWindows.Any())
+            if (!WasPresentedInWindow)
+            {
+                WasPresentedInWindow = true;
                 return null;
+            }
 
             return new MvxContentPresentationAttribute
             {

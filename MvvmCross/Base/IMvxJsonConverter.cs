@@ -6,8 +6,10 @@ using System.IO;
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public interface IMvxJsonConverter : IMvxTextSerializer
     {
 		T DeserializeObject<T>(Stream stream);
     }
+#nullable restore
 }

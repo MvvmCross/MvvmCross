@@ -3,14 +3,15 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Threading.Tasks;
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public interface IMvxMainThreadDispatcher
     {
         [Obsolete("Use IMvxMainThreadAsyncDispatcher.ExecuteOnMainThreadAsync instead")]
         bool RequestMainThreadAction(Action action, bool maskExceptions = true);
         bool IsOnMainThread { get; }
     }
+#nullable restore
 }

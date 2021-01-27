@@ -20,15 +20,6 @@ namespace MvvmCross.Binding.BindingContext
             return new MvxFluentBindingDescriptionSet<TTarget, TSource>(target, clearBindingKey);
         }
 
-        /*
-         * removed for now - it's too confusing in app code
-        public static MvxFluentBindingDescriptionSet<TTarget, TSource> CreateBindingSet<TTarget, TSource>(this TTarget target, TSource justUsedForTypeInference)
-            where TTarget : class, IMvxBindingContextOwner
-        {
-            return new MvxFluentBindingDescriptionSet<TTarget, TSource>(target);
-        }
-         */
-
         public static MvxFluentBindingDescription<TTarget> CreateBinding<TTarget>(this TTarget target)
             where TTarget : class, IMvxBindingContextOwner
         {

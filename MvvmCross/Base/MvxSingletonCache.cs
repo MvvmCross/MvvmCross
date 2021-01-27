@@ -8,7 +8,8 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Base
 {
-    public class MvxSingletonCache
+#nullable enable
+    public sealed class MvxSingletonCache
         : MvxSingleton<IMvxSingletonCache>, IMvxSingletonCache
     {
         public static MvxSingletonCache Initialize()
@@ -16,8 +17,7 @@ namespace MvvmCross.Base
             if (Instance != null)
                 throw new MvxException("You should only initialize MvxBindingSingletonCache once");
 
-            var instance = new MvxSingletonCache();
-            return instance;
+            return new MvxSingletonCache();
         }
 
         private MvxSingletonCache()
@@ -25,14 +25,14 @@ namespace MvvmCross.Base
         }
 
         private bool _inpcInterceptorResolveAttempted;
-        private IMvxInpcInterceptor _inpcInterceptor;
+        private IMvxInpcInterceptor? _inpcInterceptor;
 
         public IMvxInpcInterceptor InpcInterceptor
         {
             get
             {
                 if (_inpcInterceptorResolveAttempted)
-                    return _inpcInterceptor;
+                    return _inpcInterceptor!;
 
                 Mvx.IoCProvider.TryResolve<IMvxInpcInterceptor>(out _inpcInterceptor);
                 _inpcInterceptorResolveAttempted = true;
@@ -40,26 +40,27 @@ namespace MvvmCross.Base
             }
         }
 
-        private IMvxStringToTypeParser _parser;
+        private IMvxStringToTypeParser? _parser;
 
         public IMvxStringToTypeParser Parser
         {
             get
             {
-                _parser = _parser ?? Mvx.IoCProvider.Resolve<IMvxStringToTypeParser>();
+                _parser ??= Mvx.IoCProvider.Resolve<IMvxStringToTypeParser>();
                 return _parser;
             }
         }
 
-        private IMvxSettings _settings;
+        private IMvxSettings? _settings;
 
         public IMvxSettings Settings
         {
             get
             {
-                _settings = _settings ?? Mvx.IoCProvider.Resolve<IMvxSettings>();
+                _settings ??= Mvx.IoCProvider.Resolve<IMvxSettings>();
                 return _settings;
             }
         }
     }
+#nullable restore
 }

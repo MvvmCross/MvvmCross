@@ -7,6 +7,7 @@ using MvvmCross.Logging;
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public abstract class MvxApplicable
         : IMvxApplicable
     {
@@ -14,7 +15,7 @@ namespace MvvmCross.Base
 
         ~MvxApplicable()
         {
-            MvxLog.Instance.Trace("Finaliser called on {0} - suggests that  Apply() was never called", GetType().Name);
+            MvxLog.Instance?.Trace("Finaliser called on {0} - suggests that  Apply() was never called", GetType().Name);
         }
 
         protected void SuppressFinalizer()
@@ -23,7 +24,11 @@ namespace MvvmCross.Base
                 return;
 
             _finalizerSuppressed = true;
+#pragma warning disable CA1816 // Dispose methods should call SuppressFinalize
+#pragma warning disable S3971 // "GC.SuppressFinalize" should not be called
             GC.SuppressFinalize(this);
+#pragma warning restore S3971 // "GC.SuppressFinalize" should not be called
+#pragma warning restore CA1816 // Dispose methods should call SuppressFinalize
         }
 
         public virtual void Apply()
@@ -31,4 +36,5 @@ namespace MvvmCross.Base
             SuppressFinalizer();
         }
     }
+#nullable restore
 }

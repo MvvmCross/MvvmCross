@@ -1,5 +1,5 @@
 <Project>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms.Platform.WPF" Version="5.0.0.1874" />
+    <PackageReference Include="Xamarin.Forms.Platform.WPF" />
   </ItemGroup>
 </Project>

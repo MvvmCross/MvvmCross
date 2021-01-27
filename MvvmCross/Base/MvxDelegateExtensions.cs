@@ -6,9 +6,12 @@ using System;
 
 namespace MvvmCross.Base
 {
+#nullable enable
     public static class MvxDelegateExtensions
     {
+#pragma warning disable CA1030 // Use events where appropriate
         public static void Raise(this EventHandler eventHandler, object sender)
+
         {
             eventHandler?.Invoke(sender, EventArgs.Empty);
         }
@@ -17,5 +20,7 @@ namespace MvvmCross.Base
         {
             eventHandler?.Invoke(sender, new MvxValueEventArgs<T>(value));
         }
+#pragma warning restore CA1030 // Use events where appropriate
     }
+#nullable restore
 }

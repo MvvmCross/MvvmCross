@@ -4,44 +4,43 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using MvvmCross.Converters;
-using MvvmCross.Exceptions;
-using MvvmCross.Plugin;
-using MvvmCross.Core;
-using MvvmCross.Platforms.Uap.Binding;
-using MvvmCross.Platforms.Uap.Presenters;
-using MvvmCross.Platforms.Uap.Views;
-using MvvmCross.Platforms.Uap.Views.Suspension;
-using MvvmCross.ViewModels;
-using MvvmCross.Views;
-using Windows.ApplicationModel.Activation;
-using Windows.UI.Xaml.Controls;
 using MvvmCross.Binding;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Binders;
-using MvvmCross.Presenters;
+using MvvmCross.Converters;
+using MvvmCross.Core;
+using MvvmCross.Exceptions;
 using MvvmCross.IoC;
+using MvvmCross.Platforms.Uap.Binding;
+using MvvmCross.Platforms.Uap.Presenters;
+using MvvmCross.Platforms.Uap.Views;
+using MvvmCross.Platforms.Uap.Views.Suspension;
+using MvvmCross.Presenters;
+using MvvmCross.ViewModels;
+using MvvmCross.Views;
+using Windows.ApplicationModel.Activation;
+using Windows.UI.Xaml.Controls;
 
 namespace MvvmCross.Platforms.Uap.Core
 {
+#nullable enable
     public abstract class MvxWindowsSetup
         : MvxSetup, IMvxWindowsSetup
     {
-        private IMvxWindowsFrame _rootFrame;
-        private string _suspensionManagerSessionStateKey;
-        private IMvxWindowsViewPresenter _presenter;
+        private IMvxWindowsFrame? _rootFrame;
+        private string? _suspensionManagerSessionStateKey;
+        private IMvxWindowsViewPresenter? _presenter;
 
         public virtual void PlatformInitialize(Frame rootFrame, IActivatedEventArgs activatedEventArgs,
-            string suspensionManagerSessionStateKey = null)
+            string? suspensionManagerSessionStateKey = null)
         {
             PlatformInitialize(rootFrame, suspensionManagerSessionStateKey);
             ActivationArguments = activatedEventArgs;
         }
 
-        public virtual void PlatformInitialize(Frame rootFrame, string suspensionManagerSessionStateKey = null)
+        public virtual void PlatformInitialize(Frame rootFrame, string? suspensionManagerSessionStateKey = null)
         {
             PlatformInitialize(new MvxWrappedFrame(rootFrame));
             _suspensionManagerSessionStateKey = suspensionManagerSessionStateKey;
@@ -57,17 +56,19 @@ namespace MvvmCross.Platforms.Uap.Core
             ActivationArguments = e;
         }
 
-        protected override void InitializeFirstChance()
+        protected override void InitializeFirstChance(IMvxIoCProvider iocProvider)
         {
-            InitializeSuspensionManager();
-            RegisterPresenter();
-            base.InitializeFirstChance();
+            InitializeSuspensionManager(iocProvider);
+            RegisterPresenter(iocProvider);
+            base.InitializeFirstChance(iocProvider);
         }
 
-        protected virtual void InitializeSuspensionManager()
+        protected virtual void InitializeSuspensionManager(IMvxIoCProvider iocProvider)
         {
+            ValidateArguments(iocProvider);
+
             var suspensionManager = CreateSuspensionManager();
-            Mvx.IoCProvider.RegisterSingleton(suspensionManager);
+            iocProvider.RegisterSingleton(suspensionManager);
 
             if (_suspensionManagerSessionStateKey != null)
                 suspensionManager.RegisterFrame(_rootFrame, _suspensionManagerSessionStateKey);
@@ -78,7 +79,7 @@ namespace MvvmCross.Platforms.Uap.Core
             return new MvxSuspensionManager();
         }
 
-        protected sealed override IMvxViewsContainer CreateViewsContainer()
+        protected sealed override IMvxViewsContainer CreateViewsContainer(IMvxIoCProvider iocProvider)
         {
             var container = CreateStoreViewsContainer();
             Mvx.IoCProvider.RegisterSingleton<IMvxWindowsViewModelRequestTranslator>(container);
@@ -94,16 +95,13 @@ namespace MvvmCross.Platforms.Uap.Core
             return new MvxWindowsViewsContainer();
         }
 
-        protected override IMvxViewDispatcher CreateViewDispatcher()
-        {
-            return CreateViewDispatcher(_rootFrame);
-        }
-
         protected IMvxWindowsViewPresenter Presenter
         {
             get
             {
-                _presenter = _presenter ?? CreateViewPresenter(_rootFrame);
+                if (_rootFrame == null)
+                    throw new InvalidOperationException("Cannot create View Presenter with null root frame");
+                _presenter ??= CreateViewPresenter(_rootFrame);
                 return _presenter;
             }
         }
@@ -118,31 +116,42 @@ namespace MvvmCross.Platforms.Uap.Core
             return new MvxWindowsViewDispatcher(Presenter, rootFrame);
         }
 
-        protected virtual void RegisterPresenter()
+        protected override IMvxViewDispatcher CreateViewDispatcher()
         {
+            if (_rootFrame == null)
+                throw new InvalidOperationException("Cannot create View Dispatcher with null root frame");
+            return CreateViewDispatcher(_rootFrame);
+        }
+
+        protected virtual void RegisterPresenter(IMvxIoCProvider iocProvider)
+        {
+            ValidateArguments(iocProvider);
+
             var presenter = Presenter;
-            Mvx.IoCProvider.RegisterSingleton(presenter);
-            Mvx.IoCProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
+            iocProvider.RegisterSingleton(presenter);
+            iocProvider.RegisterSingleton<IMvxViewPresenter>(presenter);
         }
 
-        protected override void InitializeLastChance()
+        protected override void InitializeLastChance(IMvxIoCProvider iocProvider)
         {
-            InitializeBindingBuilder();
-            base.InitializeLastChance();
+            InitializeBindingBuilder(iocProvider);
+            base.InitializeLastChance(iocProvider);
         }
 
-        protected virtual void InitializeBindingBuilder()
+        protected virtual void InitializeBindingBuilder(IMvxIoCProvider iocProvider)
         {
-            RegisterBindingBuilderCallbacks();
+            RegisterBindingBuilderCallbacks(iocProvider);
             var bindingBuilder = CreateBindingBuilder();
             bindingBuilder.DoRegistration();
         }
 
-        protected virtual void RegisterBindingBuilderCallbacks()
+        protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
         {
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
-            Mvx.IoCProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
+            ValidateArguments(iocProvider);
+
+            iocProvider.CallbackWhenRegistered<IMvxValueConverterRegistry>(FillValueConverters);
+            iocProvider.CallbackWhenRegistered<IMvxTargetBindingFactoryRegistry>(FillTargetFactories);
+            iocProvider.CallbackWhenRegistered<IMvxBindingNameRegistry>(FillBindingNames);
         }
 
         protected virtual void FillBindingNames(IMvxBindingNameRegistry registry)
@@ -161,7 +170,7 @@ namespace MvvmCross.Platforms.Uap.Core
             // this base class does nothing
         }
 
-        protected IActivatedEventArgs ActivationArguments { get; private set; }
+        protected IActivatedEventArgs? ActivationArguments { get; private set; }
 
         protected virtual List<Type> ValueConverterHolders => new List<Type>();
 
@@ -197,4 +206,5 @@ namespace MvvmCross.Platforms.Uap.Core
 
         protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
     }
+#nullable restore
 }

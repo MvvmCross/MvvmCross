@@ -39,11 +39,11 @@ namespace MvvmCross.ViewModels
         /// <returns>Returns a ViewModel</returns>
         IMvxViewModel<TParameter> Load<TParameter>(
             Type viewModelType,
-            TParameter? param,
+            TParameter param,
             IMvxBundle? parameterValues,
             IMvxBundle? savedState,
             IMvxNavigateEventArgs? navigationArgs = null)
-            where TParameter : class;
+            where TParameter : notnull;
 
         /// <summary>
         /// Reload ViewModel, runs start lifecycle in ViewModel.
@@ -71,11 +71,11 @@ namespace MvvmCross.ViewModels
         /// <returns>Returns reloaded ViewModel</returns>
         IMvxViewModel<TParameter> Reload<TParameter>(
             IMvxViewModel<TParameter> viewModel,
-            TParameter? param,
+            TParameter param,
             IMvxBundle? parameterValues,
             IMvxBundle? savedState,
             IMvxNavigateEventArgs? navigationArgs = null)
-            where TParameter : class;
+            where TParameter : notnull;
     }
 #nullable restore
 }

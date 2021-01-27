@@ -1,4 +1,6 @@
 <Project>
+  <Import Project="..\Directory.Build.props" />
+
   <PropertyGroup>
     <Copyright>Copyright (c) .NET Foundation and Contributors</Copyright>
     <Authors>.NET Foundation and Contributors</Authors>
