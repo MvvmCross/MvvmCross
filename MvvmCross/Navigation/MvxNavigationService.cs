@@ -35,8 +35,8 @@ namespace MvvmCross.Navigation
 
         protected IMvxViewModelLoader ViewModelLoader { get; set; }
 
-        protected ConditionalWeakTable<IMvxViewModel, TaskCompletionSource<object>> TaskCompletionResults { get; } =
-            new ConditionalWeakTable<IMvxViewModel, TaskCompletionSource<object>>();
+        protected ConditionalWeakTable<IMvxViewModel, TaskCompletionSource<object?>> TaskCompletionResults { get; } =
+            new ConditionalWeakTable<IMvxViewModel, TaskCompletionSource<object?>>();
 
         public event EventHandler<IMvxNavigateEventArgs>? WillNavigate;
 
@@ -305,15 +305,15 @@ namespace MvvmCross.Navigation
             ValidateArguments(request, viewModel);
 
             var hasNavigated = false;
-            var tcs = new TaskCompletionSource<object>();
+            var tcs = new TaskCompletionSource<object?>();
 
             if (cancellationToken != default)
             {
-                cancellationToken.Register(async () =>
+                cancellationToken.Register(() =>
                 {
                     // ReSharper disable once AccessToModifiedClosure
                     if (hasNavigated && !tcs.Task.IsCompleted)
-                        await Close(viewModel, default).ConfigureAwait(false);
+                        Task.Run(() => Close(viewModel, default, CancellationToken.None), CancellationToken.None);
                 });
             }
 
@@ -336,7 +336,7 @@ namespace MvvmCross.Navigation
 
             try
             {
-                return (TResult)await tcs.Task.ConfigureAwait(false);
+                return (TResult?)await tcs.Task.ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -355,11 +355,11 @@ namespace MvvmCross.Navigation
             var hasNavigated = false;
             if (cancellationToken != default)
             {
-                cancellationToken.Register(async () =>
+                cancellationToken.Register(() =>
                 {
                     // ReSharper disable once AccessToModifiedClosure
                     if (hasNavigated)
-                        await Close(viewModel, default).ConfigureAwait(false);
+                        Task.Run(() => Close(viewModel, default, CancellationToken.None), CancellationToken.None);
                 });
             }
 
@@ -367,7 +367,7 @@ namespace MvvmCross.Navigation
 
             OnWillNavigate(this, args);
 
-            var tcs = new TaskCompletionSource<object>();
+            var tcs = new TaskCompletionSource<object?>();
             viewModel.CloseCompletionSource = tcs;
             TaskCompletionResults.Add(viewModel, tcs);
 
@@ -380,7 +380,7 @@ namespace MvvmCross.Navigation
 
             OnDidNavigate(this, args);
 
-            return (TResult)await tcs.Task.ConfigureAwait(false);
+            return (TResult?)await tcs.Task.ConfigureAwait(false);
         }
 
         public virtual async Task<bool> Navigate(
@@ -592,7 +592,7 @@ namespace MvvmCross.Navigation
         }
 
         public virtual async Task<bool> Close<TResult>(
-            IMvxViewModelResult<TResult> viewModel, TResult result, CancellationToken cancellationToken = default)
+            IMvxViewModelResult<TResult> viewModel, TResult? result, CancellationToken cancellationToken = default)
             where TResult : class
         {
             ValidateArguments(viewModel);
