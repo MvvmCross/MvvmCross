@@ -39,7 +39,7 @@ namespace MvvmCross.Binding.BindingContext
                                                              , MvxBindingMode bindingMode = MvxBindingMode.OneTime)
         {
             var parser = PropertyExpressionParser;
-            var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
+            var targetPath = MvxBindingSingletonCache.Instance?.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
             var sourcePath = parser.Parse(textProvider).Print();
             owner.BindLanguage(target, targetPath, sourceKey, sourcePath, bindingMode: bindingMode);
         }
