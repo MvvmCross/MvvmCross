@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,15 +11,14 @@ using MvvmCross.Converters;
 namespace MvvmCross.Binding.Combiners
 {
     public class MvxInvertedValueCombiner
-			: MvxBooleanValueCombiner
-	{
-		protected override bool TryCombine(List<bool> stepValues, out object value)
-		{
-			value = stepValues.Any(x => !x)
-							  && true;
-			return true;
-		}
-	}
+            : MvxBooleanValueCombiner
+    {
+        protected override bool TryCombine(List<bool> stepValues, out object value)
+        {
+            value = stepValues.Any(x => !x);
+            return true;
+        }
+    }
 
     public class MvxAndValueCombiner
         : MvxBooleanValueCombiner
