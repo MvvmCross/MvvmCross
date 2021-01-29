@@ -78,8 +78,8 @@ namespace MvvmCross.Binding.Parse.Binding
             MvxSerializableBindingSpecification specification;
             if (!parser.TryParseBindingSpecification(text, out specification))
             {
-                MvxBindingLog.Error("Failed to parse binding specification starting with {0}",
-                    text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
+                MvxBindingLog.Error("Failed to parse binding description starting with {0}",
+                    GetErrorTextParameter(text));
                 return Array.Empty<MvxBindingDescription>();
             }
 
@@ -102,9 +102,8 @@ namespace MvvmCross.Binding.Parse.Binding
             var parser = BindingParser;
             if (!parser.TryParseBindingDescription(text, out description))
             {
-                MvxBindingLog.Error(
-                                      "Failed to parse binding description starting with {0}",
-                                      text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
+                MvxBindingLog.Error("Failed to parse binding description starting with {0}", 
+                    GetErrorTextParameter(text));
                 return null;
             }
 
@@ -112,6 +111,17 @@ namespace MvvmCross.Binding.Parse.Binding
                 return null;
 
             return SerializableBindingToBinding(null, description);
+        }
+
+        private string GetErrorTextParameter(string? text)
+        {
+            if (text == null)
+                return string.Empty;
+
+            if (text.Length > 20)
+                return text.Substring(0, 20);
+
+            return text;
         }
 
         public MvxBindingDescription SerializableBindingToBinding(string targetName,
