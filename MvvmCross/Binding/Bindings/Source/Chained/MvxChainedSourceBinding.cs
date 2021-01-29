@@ -28,14 +28,11 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
 
         protected override void Dispose(bool isDisposing)
         {
-            if (isDisposing)
+            if (isDisposing && _currentChildBinding != null)
             {
-                if (_currentChildBinding != null)
-                {
-                    _currentChildBinding.Changed -= ChildSourceBindingChanged;
-                    _currentChildBinding.Dispose();
-                    _currentChildBinding = null;
-                }
+                _currentChildBinding.Changed -= ChildSourceBindingChanged;
+                _currentChildBinding.Dispose();
+                _currentChildBinding = null;
             }
 
             base.Dispose(isDisposing);

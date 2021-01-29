@@ -51,15 +51,12 @@ namespace MvvmCross.Binding.Bindings.Target.Construction
             }
 
             var targetEventInfo = target.GetType().GetEvent(targetName);
-            if (targetEventInfo != null)
+            if (targetEventInfo != null && targetEventInfo.EventHandlerType == typeof(EventHandler))
             {
                 // we only handle EventHandler's here
                 // other event types will need to be handled by custom bindings
-                if (targetEventInfo.EventHandlerType == typeof(EventHandler))
-                {
-                    binding = new MvxEventHandlerEventInfoTargetBinding(target, targetEventInfo);
-                    return true;
-                }
+                binding = new MvxEventHandlerEventInfoTargetBinding(target, targetEventInfo);
+                return true;
             }
 
             binding = null;
