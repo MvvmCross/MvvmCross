@@ -22,14 +22,14 @@ namespace MvvmCross.Commands
         [Obsolete("Use the strongly typed version of Execute instead", true)]
         new void Execute(object parameter);
 
+        void Execute(TParameter parameter);
+
         [Obsolete("Use the strongly typed version of CanExecute instead", true)]
         new bool CanExecute(object parameter);
 
-        void RaiseCanExecuteChanged();
-
-        void Execute(TParameter parameter);
-
         bool CanExecute(TParameter parameter);
+
+        void RaiseCanExecuteChanged();
     }
 #nullable restore
 }
