@@ -98,8 +98,8 @@ namespace MvvmCross.Binding.BindingContext
                                         , string converterName = null
                                         , MvxBindingMode bindingMode = MvxBindingMode.OneTime)
         {
-            converterName = converterName ?? LanguageParser.DefaultConverterName;
-            sourcePropertyName = sourcePropertyName ?? LanguageParser.DefaultTextSourceName;
+            converterName ??= LanguageParser.DefaultConverterName;
+            sourcePropertyName ??= LanguageParser.DefaultTextSourceName;
 
             var converter = ValueConverterLookup.Find(converterName);
 
