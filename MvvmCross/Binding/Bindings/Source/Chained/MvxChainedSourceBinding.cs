@@ -72,7 +72,6 @@ namespace MvvmCross.Binding.Bindings.Source.Chained
             if (currentValue == null)
             {
                 // value will be missing... so end consumer will need to use fallback values
-                return;
             }
             else
             {

@@ -20,7 +20,6 @@ namespace MvvmCross.Binding.Bindings.Target
             if (target == null)
             {
                 MvxBindingLog.Error("Error - target is null in MvxWithEventPropertyInfoTargetBinding");
-                return;
             }
         }
 
