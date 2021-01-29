@@ -125,11 +125,8 @@ namespace MvvmCross.Binding.Bindings.Target
         {
             if (isDisposing)
             {
-                if (_subscription != null)
-                {
-                    _subscription.Dispose();
-                    _subscription = null;
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
 
             base.Dispose(isDisposing);
