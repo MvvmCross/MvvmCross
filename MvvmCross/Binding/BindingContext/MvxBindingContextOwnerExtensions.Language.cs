@@ -19,8 +19,7 @@ namespace MvvmCross.Binding.BindingContext
                                                  , TTarget target
                                                  , string sourceKey)
         {
-            var parser = PropertyExpressionParser;
-            var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
+            var targetPath = MvxBindingSingletonCache.Instance?.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
             owner.BindLanguage(target, targetPath, sourceKey);
         }
 
@@ -29,8 +28,7 @@ namespace MvvmCross.Binding.BindingContext
                                                  , string sourceKey
                                                  , MvxBindingMode bindingMode)
         {
-            var parser = PropertyExpressionParser;
-            var targetPath = MvxBindingSingletonCache.Instance.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
+            var targetPath = MvxBindingSingletonCache.Instance?.DefaultBindingNameLookup.DefaultFor(typeof(TTarget));
             owner.BindLanguage(target, targetPath, sourceKey, bindingMode: bindingMode);
         }
 
