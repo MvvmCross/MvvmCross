@@ -9,6 +9,7 @@ using System.Reflection;
 
 namespace MvvmCross.Commands
 {
+#nullable enable
     public class MvxCommandCollectionBuilder
         : IMvxCommandCollectionBuilder
     {
@@ -16,7 +17,7 @@ namespace MvvmCross.Commands
         private const string DefaultCanExecutePrefix = "CanExecute";
 
         public string CommandSuffix { get; set; }
-        public IEnumerable<string> AdditionalCommandSuffixes { get; set; }
+        public IEnumerable<string>? AdditionalCommandSuffixes { get; set; }
         public string CanExecutePrefix { get; set; }
 
         public MvxCommandCollectionBuilder()
@@ -65,7 +66,7 @@ namespace MvvmCross.Commands
             collection.Add(command, commandName, helper.CanExecutePropertyName);
         }
 
-        protected virtual PropertyInfo CanExecutePropertyInfo(Type type, MethodInfo commandMethod)
+        protected virtual PropertyInfo? CanExecutePropertyInfo(Type type, MethodInfo commandMethod)
         {
             var canExecuteName = CanExecuteProperyName(commandMethod);
             if (string.IsNullOrEmpty(canExecuteName))
@@ -81,7 +82,7 @@ namespace MvvmCross.Commands
             return canExecute;
         }
 
-        protected virtual string GetCommandNameOrNull(MethodInfo method)
+        protected virtual string? GetCommandNameOrNull(MethodInfo method)
         {
             var commandAttribute = CommandAttribute(method);
             if (commandAttribute != null)
@@ -104,7 +105,7 @@ namespace MvvmCross.Commands
             return null;
         }
 
-        protected virtual string GetConventionalCommandNameOrNull(MethodInfo method, string suffix)
+        protected virtual string? GetConventionalCommandNameOrNull(MethodInfo method, string suffix)
         {
             if (!method.Name.EndsWith(suffix))
                 return null;
@@ -121,7 +122,7 @@ namespace MvvmCross.Commands
             return (MvxCommandAttribute)method.GetCustomAttributes(typeof(MvxCommandAttribute), true).FirstOrDefault();
         }
 
-        protected virtual string CanExecuteProperyName(MethodInfo method)
+        protected virtual string? CanExecuteProperyName(MethodInfo method)
         {
             var commandAttribute = CommandAttribute(method);
             if (commandAttribute != null)
@@ -136,19 +137,19 @@ namespace MvvmCross.Commands
         {
             IMvxCommand ToCommand(object owner);
 
-            string CanExecutePropertyName { get; }
+            string? CanExecutePropertyName { get; }
         }
 
         public abstract class MvxBaseCommandBuilder : IMvxCommandBuilder
         {
             private readonly MethodInfo _executeMethodInfo;
-            private readonly PropertyInfo _canExecutePropertyInfo;
+            private readonly PropertyInfo? _canExecutePropertyInfo;
 
             protected MethodInfo ExecuteMethodInfo => _executeMethodInfo;
 
-            protected PropertyInfo CanExecutePropertyInfo => _canExecutePropertyInfo;
+            protected PropertyInfo? CanExecutePropertyInfo => _canExecutePropertyInfo;
 
-            protected MvxBaseCommandBuilder(MethodInfo executeMethodInfo, PropertyInfo canExecutePropertyInfo)
+            protected MvxBaseCommandBuilder(MethodInfo executeMethodInfo, PropertyInfo? canExecutePropertyInfo)
             {
                 _executeMethodInfo = executeMethodInfo;
                 _canExecutePropertyInfo = canExecutePropertyInfo;
@@ -156,12 +157,12 @@ namespace MvvmCross.Commands
 
             public abstract IMvxCommand ToCommand(object owner);
 
-            public string CanExecutePropertyName => _canExecutePropertyInfo?.Name;
+            public string? CanExecutePropertyName => _canExecutePropertyInfo?.Name;
         }
 
         public class MvxCommandBuilder : MvxBaseCommandBuilder
         {
-            public MvxCommandBuilder(MethodInfo executeMethodInfo, PropertyInfo canExecutePropertyInfo)
+            public MvxCommandBuilder(MethodInfo executeMethodInfo, PropertyInfo? canExecutePropertyInfo)
                 : base(executeMethodInfo, canExecutePropertyInfo)
             {
             }
@@ -169,7 +170,7 @@ namespace MvvmCross.Commands
             public override IMvxCommand ToCommand(object owner)
             {
                 var executeAction = new Action(() => ExecuteMethodInfo.Invoke(owner, new object[0]));
-                Func<bool> canExecuteFunc = null;
+                Func<bool>? canExecuteFunc = null;
                 if (CanExecutePropertyInfo != null)
                     canExecuteFunc = () => (bool)CanExecutePropertyInfo.GetValue(owner, null);
 
@@ -179,7 +180,7 @@ namespace MvvmCross.Commands
 
         public class MvxParameterizedCommandBuilder : MvxBaseCommandBuilder
         {
-            public MvxParameterizedCommandBuilder(MethodInfo executeMethodInfo, PropertyInfo canExecutePropertyInfo)
+            public MvxParameterizedCommandBuilder(MethodInfo executeMethodInfo, PropertyInfo? canExecutePropertyInfo)
                 : base(executeMethodInfo, canExecutePropertyInfo)
             {
             }
@@ -187,7 +188,7 @@ namespace MvvmCross.Commands
             public override IMvxCommand ToCommand(object owner)
             {
                 var executeAction = new Action<object>((obj) => ExecuteMethodInfo.Invoke(owner, new[] { obj }));
-                Func<object, bool> canExecuteFunc = null;
+                Func<object, bool>? canExecuteFunc = null;
                 if (CanExecutePropertyInfo != null)
                     canExecuteFunc = (ignored) => (bool)CanExecutePropertyInfo.GetValue(owner, null);
 
@@ -218,4 +219,5 @@ namespace MvvmCross.Commands
 
         #endregion Nested classes for building commands by reflection - 'hidden as nested' currently as they are not used anywhere else
     }
+#nullable restore
 }

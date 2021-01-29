@@ -4,8 +4,10 @@
 
 namespace MvvmCross.Commands
 {
+#nullable enable
     public interface IMvxCommandCollectionBuilder
     {
         IMvxCommandCollection BuildCollectionFor(object owner);
     }
+#nullable restore
 }

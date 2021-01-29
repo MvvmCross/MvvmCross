@@ -7,6 +7,7 @@ using System.Windows.Input;
 
 namespace MvvmCross.Commands
 {
+#nullable enable
     public interface IMvxCommand : ICommand
     {
         void RaiseCanExecuteChanged();
@@ -16,7 +17,7 @@ namespace MvvmCross.Commands
         bool CanExecute();
     }
 
-    public interface IMvxCommand<T> : ICommand
+    public interface IMvxCommand<in TParameter> : ICommand
     {
         [Obsolete("Use the strongly typed version of Execute instead", true)]
         new void Execute(object parameter);
@@ -26,8 +27,9 @@ namespace MvvmCross.Commands
 
         void RaiseCanExecuteChanged();
 
-        void Execute(T parameter);
+        void Execute(TParameter parameter);
 
-        bool CanExecute(T parameter);
+        bool CanExecute(TParameter parameter);
     }
+#nullable restore
 }

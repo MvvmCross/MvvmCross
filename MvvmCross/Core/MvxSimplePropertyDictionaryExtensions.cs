@@ -14,6 +14,7 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Core
 {
+#nullable enable
     public static class MvxSimplePropertyDictionaryExtensions
     {
         public static IDictionary<string, string> ToSimpleStringPropertyDictionary(
@@ -22,10 +23,10 @@ namespace MvvmCross.Core
             if (input == null)
                 return new Dictionary<string, string>();
 
-            return input.ToDictionary(x => x.Key, x => x.Value?.ToStringInvariant());
+            return input.ToDictionary(x => x.Key, x => x.Value?.ToStringInvariant() ?? string.Empty);
         }
 
-        public static IDictionary<string, string> SafeGetData(this IMvxBundle bundle)
+        public static IDictionary<string, string>? SafeGetData(this IMvxBundle? bundle)
         {
             return bundle?.Data;
         }
@@ -51,37 +52,37 @@ namespace MvvmCross.Core
         public static object Read(this IDictionary<string, string> data, Type type)
         {
             var t = Activator.CreateInstance(type);
-            var propertyList =
-                type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(p => p.CanWrite);
 
-            foreach (var propertyInfo in propertyList)
+            foreach (var propertyInfo in type.GetProperties(
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(p => p.CanWrite))
             {
                 string textValue;
                 if (!data.TryGetValue(propertyInfo.Name, out textValue))
                     continue;
 
-                var typedValue = MvxSingletonCache.Instance.Parser.ReadValue(textValue, propertyInfo.PropertyType,
-                                                                             propertyInfo.Name);
-                propertyInfo.SetValue(t, typedValue, new object[0]);
+                var typedValue = MvxSingletonCache.Instance?.Parser.ReadValue(
+                    textValue, propertyInfo.PropertyType, propertyInfo.Name);
+                if (typedValue != null)
+                    propertyInfo.SetValue(t, typedValue, new object[0]);
             }
 
             return t;
         }
 
-        public static IEnumerable<object> CreateArgumentList(this IDictionary<string, string> data,
-                                                             IEnumerable<ParameterInfo> requiredParameters,
-                                                             string debugText)
+        public static IEnumerable<object> CreateArgumentList(
+            this IDictionary<string, string> data, IEnumerable<ParameterInfo> requiredParameters, string? debugText)
         {
             var argumentList = new List<object>();
             foreach (var requiredParameter in requiredParameters)
             {
                 var argumentValue = data.GetArgumentValue(requiredParameter, debugText);
-                argumentList.Add(argumentValue);
+                if (argumentValue != null)
+                    argumentList.Add(argumentValue);
             }
             return argumentList;
         }
 
-        public static object GetArgumentValue(this IDictionary<string, string> data, ParameterInfo requiredParameter, string debugText)
+        public static object? GetArgumentValue(this IDictionary<string, string> data, ParameterInfo requiredParameter, string? debugText)
         {
             string parameterValue;
             if (data == null ||
@@ -92,16 +93,14 @@ namespace MvvmCross.Core
                     return Type.Missing;
                 }
 
-                MvxLog.Instance.Trace(
-                    "Missing parameter for call to {0} - missing parameter {1} - asssuming null - this may fail for value types!",
-                    debugText,
-                    requiredParameter.Name);
-                parameterValue = null;
+                MvxLog.Instance?.Trace(
+                    $"Missing parameter for call to {debugText} - missing parameter {requiredParameter.Name} - asssuming null - this may fail for value types!");
+
+                parameterValue = string.Empty;
             }
 
-            var value = MvxSingletonCache.Instance.Parser.ReadValue(parameterValue, requiredParameter.ParameterType,
-                                                                    requiredParameter.Name);
-            return value;
+            return MvxSingletonCache.Instance?.Parser.ReadValue(
+                parameterValue, requiredParameter.ParameterType, requiredParameter.Name);
         }
 
         public static IDictionary<string, string> ToSimplePropertyDictionary(this object input)
@@ -112,16 +111,16 @@ namespace MvvmCross.Core
             if (input is IDictionary<string, string> inputDict)
                 return inputDict;
 
-            var propertyInfos = from property in input.GetType()
-                                                      .GetProperties(BindingFlags.Instance | BindingFlags.Public |
-                                                                     BindingFlags.FlattenHierarchy)
-                                where property.CanRead
-                                select new
-                                {
-                                    CanSerialize =
-                                    MvxSingletonCache.Instance.Parser.TypeSupported(property.PropertyType),
-                                    Property = property
-                                };
+            var propertyInfos =
+                from property in input.GetType()
+                    .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
+                where property.CanRead
+                select new
+                {
+                    CanSerialize =
+                    MvxSingletonCache.Instance?.Parser.TypeSupported(property.PropertyType) ?? false,
+                    Property = property
+                };
 
             var dictionary = new Dictionary<string, string>();
             foreach (var propertyInfo in propertyInfos)
@@ -132,7 +131,7 @@ namespace MvvmCross.Core
                 }
                 else
                 {
-                    MvxLog.Instance.Trace(
+                    MvxLog.Instance?.Trace(
                         "Skipping serialization of property {0} - don't know how to serialize type {1} - some answers on http://stackoverflow.com/questions/16524236/custom-types-in-navigation-parameters-in-v3",
                         propertyInfo.Property.Name,
                         propertyInfo.Property.PropertyType.Name);
@@ -146,7 +145,7 @@ namespace MvvmCross.Core
             try
             {
                 var value = propertyInfo.GetValue(input, new object[] { });
-                return value?.ToStringInvariant();
+                return value?.ToStringInvariant() ?? string.Empty;
             }
             catch (Exception suspectedMethodAccessException)
             {
@@ -167,4 +166,5 @@ namespace MvvmCross.Core
             }
         }
     }
+#nullable restore
 }

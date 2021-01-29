@@ -10,7 +10,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
 #nullable enable
     public class MvxStringDictionaryWriter : IMvxStringDictionaryWriter
     {
-        public string Write(IDictionary<string, string> dictionary)
+        public string Write(IDictionary<string, string>? dictionary)
         {
             if (dictionary == null ||
                 dictionary.Count == 0)

@@ -44,7 +44,7 @@ namespace MvvmCross.Views
             // nothing needed currently
         }
 
-        public static Type FindAssociatedViewModelTypeOrNull(this IMvxView view)
+        public static Type? FindAssociatedViewModelTypeOrNull(this IMvxView view)
         {
             if (view == null)
                 throw new ArgumentNullException(nameof(view));

@@ -8,19 +8,25 @@ using MvvmCross.Converters;
 
 namespace MvvmCross.Localization
 {
+#nullable enable
     public class MvxLanguageConverter
         : MvxValueConverter
     {
-        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object Convert(object value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             var binder = value as IMvxLanguageBinder;
             if (binder == null)
-                return null;
+                return MvxBindingConstant.UnsetValue;
 
             if (parameter == null)
-                return null;
+                return MvxBindingConstant.UnsetValue;
 
-            return binder.GetText(parameter.ToString());
+            var translatedText = binder.GetText(parameter.ToString());
+            if (translatedText != null)
+                return translatedText;
+
+            return MvxBindingConstant.UnsetValue;
         }
     }
+#nullable restore
 }

@@ -9,7 +9,7 @@ namespace MvvmCross.Views
 #nullable enable
     public interface IMvxViewFinder
     {
-        Type GetViewType(Type viewModelType);
+        Type? GetViewType(Type? viewModelType);
     }
 #nullable restore
 }

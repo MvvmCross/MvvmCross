@@ -91,7 +91,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
             return stringDictionaryWriter.Write(dictionary);
         }
 
-        protected virtual string SerializeViewModelName(Type viewModelType)
+        protected virtual string SerializeViewModelName(Type? viewModelType)
         {
             if (viewModelType == null)
                 throw new ArgumentNullException(nameof(viewModelType));

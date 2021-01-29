@@ -11,7 +11,7 @@ namespace MvvmCross.Core
     {
         bool TypeSupported(Type targetType);
 
-        object ReadValue(string rawValue, Type targetType, string fieldOrParameterName);
+        object? ReadValue(string rawValue, Type targetType, string fieldOrParameterName);
     }
 #nullable restore
 }

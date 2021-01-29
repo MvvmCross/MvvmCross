@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MvvmCross.Binding.Binders;
@@ -72,28 +73,27 @@ namespace MvvmCross.Binding.Parse.Binding
             return Parse(text, parser);
         }
 
-        public IEnumerable<MvxBindingDescription> LanguageParse(string text)
-        {
-            var parser = LanguageBindingParser;
-            return Parse(text, parser);
-        }
-
         public IEnumerable<MvxBindingDescription> Parse(string text, IMvxBindingParser parser)
         {
             MvxSerializableBindingSpecification specification;
             if (!parser.TryParseBindingSpecification(text, out specification))
             {
-                MvxBindingLog.Error(
-                                      "Failed to parse binding specification starting with {0}",
-                                      text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
-                return null;
+                MvxBindingLog.Error("Failed to parse binding specification starting with {0}",
+                    text == null ? "" : (text.Length > 20 ? text.Substring(0, 20) : text));
+                return Array.Empty<MvxBindingDescription>();
             }
 
             if (specification == null)
-                return null;
+                return Array.Empty<MvxBindingDescription>();
 
             return from item in specification
                    select SerializableBindingToBinding(item.Key, item.Value);
+        }
+
+        public IEnumerable<MvxBindingDescription> LanguageParse(string text)
+        {
+            var parser = LanguageBindingParser;
+            return Parse(text, parser);
         }
 
         public MvxBindingDescription ParseSingle(string text)
