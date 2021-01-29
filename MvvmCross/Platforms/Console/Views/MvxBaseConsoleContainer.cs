@@ -49,6 +49,6 @@ namespace MvvmCross.Platforms.Console.Views
             return false;
         }
 
-        public abstract Task<bool> Close(IMvxViewModel toClose);
+        public abstract Task<bool> Close(IMvxViewModel viewModel);
     }
 }

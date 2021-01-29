@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -61,7 +61,7 @@ namespace MvvmCross.Binding.Combiners
             return true;
         }
 
-        protected override bool CombineDoubleAndObject(double double1, object object1, out object value)
+        protected override bool CombineDoubleAndObject(double input1, object input2, out object value)
         {
             value = true;
             return true;
@@ -91,7 +91,7 @@ namespace MvvmCross.Binding.Combiners
             return true;
         }
 
-        protected override bool CombineLongAndObject(long int1, object object1, out object value)
+        protected override bool CombineLongAndObject(long input1, object input2, out object value)
         {
             value = true;
             return true;

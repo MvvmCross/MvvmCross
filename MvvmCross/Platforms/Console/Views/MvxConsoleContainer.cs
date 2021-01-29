@@ -50,7 +50,7 @@ namespace MvvmCross.Platforms.Console.Views
             return false;
         }
 
-        public override Task<bool> Close(IMvxViewModel viewModel)
+        public override Task<bool> Close(IMvxViewModel toClose)
         {
             var currentView = Mvx.IoCProvider.Resolve<IMvxConsoleCurrentView>().CurrentView;
 
@@ -60,7 +60,7 @@ namespace MvvmCross.Platforms.Console.Views
                 return Task.FromResult(true);
             }
 
-            if (currentView.ViewModel != viewModel)
+            if (currentView.ViewModel != toClose)
             {
                 MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
                 return Task.FromResult(true);

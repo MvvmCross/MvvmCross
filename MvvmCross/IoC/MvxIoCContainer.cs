@@ -195,15 +195,15 @@ namespace MvvmCross.IoC
             return CanResolve(typeof(T));
         }
 
-        public bool CanResolve(Type t)
+        public bool CanResolve(Type type)
         {
             lock (_lockObject)
             {
-                if (_resolvers.ContainsKey(t))
+                if (_resolvers.ContainsKey(type))
                 {
                     return true;
                 }
-                if (_parentProvider != null && _parentProvider.CanResolve(t))
+                if (_parentProvider != null && _parentProvider.CanResolve(type))
                 {
                     return true;
                 }
@@ -242,14 +242,14 @@ namespace MvvmCross.IoC
             return (T)Resolve(typeof(T));
         }
 
-        public object Resolve(Type t)
+        public object Resolve(Type type)
         {
             lock (_lockObject)
             {
                 object resolved;
-                if (!InternalTryResolve(t, out resolved))
+                if (!InternalTryResolve(type, out resolved))
                 {
-                    throw new MvxIoCResolveException("Failed to resolve type {0}", t.FullName);
+                    throw new MvxIoCResolveException("Failed to resolve type {0}", type.FullName);
                 }
                 return resolved;
             }
@@ -261,14 +261,14 @@ namespace MvvmCross.IoC
             return (T)GetSingleton(typeof(T));
         }
 
-        public object GetSingleton(Type t)
+        public object GetSingleton(Type type)
         {
             lock (_lockObject)
             {
                 object resolved;
-                if (!InternalTryResolve(t, ResolverType.Singleton, out resolved))
+                if (!InternalTryResolve(type, ResolverType.Singleton, out resolved))
                 {
-                    throw new MvxIoCResolveException("Failed to resolve type {0}", t.FullName);
+                    throw new MvxIoCResolveException("Failed to resolve type {0}", type.FullName);
                 }
                 return resolved;
             }
@@ -280,14 +280,14 @@ namespace MvvmCross.IoC
             return (T)Create(typeof(T));
         }
 
-        public object Create(Type t)
+        public object Create(Type type)
         {
             lock (_lockObject)
             {
                 object resolved;
-                if (!InternalTryResolve(t, ResolverType.DynamicPerResolve, out resolved))
+                if (!InternalTryResolve(type, ResolverType.DynamicPerResolve, out resolved))
                 {
-                    throw new MvxIoCResolveException("Failed to resolve type {0}", t.FullName);
+                    throw new MvxIoCResolveException("Failed to resolve type {0}", type.FullName);
                 }
                 return resolved;
             }
@@ -321,19 +321,19 @@ namespace MvvmCross.IoC
             InternalSetResolver(t, resolver);
         }
 
-        public void RegisterType(Type interfaceType, Type constructType)
+        public void RegisterType(Type tFrom, Type tTo)
         {
             IResolver resolver = null;
-            if (interfaceType.GetTypeInfo().IsGenericTypeDefinition)
+            if (tFrom.GetTypeInfo().IsGenericTypeDefinition)
             {
-                resolver = new ConstructingOpenGenericResolver(constructType, this);
+                resolver = new ConstructingOpenGenericResolver(tTo, this);
             }
             else
             {
-                resolver = new ConstructingResolver(constructType, this);
+                resolver = new ConstructingResolver(tTo, this);
             }
 
-            InternalSetResolver(interfaceType, resolver);
+            InternalSetResolver(tFrom, resolver);
         }
 
         public void RegisterSingleton<TInterface>(TInterface theObject)
@@ -342,9 +342,9 @@ namespace MvvmCross.IoC
             RegisterSingleton(typeof(TInterface), theObject);
         }
 
-        public void RegisterSingleton(Type interfaceType, object theObject)
+        public void RegisterSingleton(Type tInterface, object theObject)
         {
-            InternalSetResolver(interfaceType, new SingletonResolver(theObject));
+            InternalSetResolver(tInterface, new SingletonResolver(theObject));
         }
 
         public void RegisterSingleton<TInterface>(Func<TInterface> theConstructor)
@@ -353,9 +353,9 @@ namespace MvvmCross.IoC
             RegisterSingleton(typeof(TInterface), theConstructor);
         }
 
-        public void RegisterSingleton(Type interfaceType, Func<object> theConstructor)
+        public void RegisterSingleton(Type tInterface, Func<object> theConstructor)
         {
-            InternalSetResolver(interfaceType, new ConstructingSingletonResolver(theConstructor));
+            InternalSetResolver(tInterface, new ConstructingSingletonResolver(theConstructor));
         }
 
         public object IoCConstruct(Type type)
