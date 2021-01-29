@@ -70,10 +70,6 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
         private void ParseMode(string block, MvxSerializableBindingDescription description)
         {
             ParseEquals(block);
-            //if (description.Mode != MvxBindingMode.Default)
-            //{
-            //    MvxBindingLog.Warning("Mode specified multiple times in binding in {0} - for readability either use <,>,<1,<> or use (Mode=...) - not both", FullText);
-            //}
             description.Mode = ReadBindingMode();
         }
 
@@ -192,14 +188,14 @@ namespace MvvmCross.Binding.Parse.Binding.Swiss
             }
         }
 
-        protected override MvxSerializableBindingDescription ParseBindingDescription() => 
-            ParseBindingDescription(ParentIsLookingForComma.ParentIsNotLookingForComma);
-
         protected enum ParentIsLookingForComma
         {
             ParentIsLookingForComma,
             ParentIsNotLookingForComma
         }
+
+        protected override MvxSerializableBindingDescription ParseBindingDescription() =>
+            ParseBindingDescription(ParentIsLookingForComma.ParentIsNotLookingForComma);
 
         protected virtual MvxSerializableBindingDescription ParseBindingDescription(
             ParentIsLookingForComma parentIsLookingForComma)

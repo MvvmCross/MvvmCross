@@ -526,38 +526,6 @@ namespace MvvmCross.IoC
             return InternalTryResolve(type, resolver, out resolved);
         }
 
-        private bool TryGetResolver(Type type, out IResolver resolver)
-        {
-            if (_resolvers.TryGetValue(type, out resolver))
-            {
-                return true;
-            }
-
-            if (!type.GetTypeInfo().IsGenericType)
-            {
-                return false;
-            }
-
-            return _resolvers.TryGetValue(type.GetTypeInfo().GetGenericTypeDefinition(), out resolver);
-        }
-
-        private bool ShouldDetectCircularReferencesFor(IResolver resolver)
-        {
-            switch (resolver.ResolveType)
-            {
-                case ResolverType.DynamicPerResolve:
-                    return Options.TryToDetectDynamicCircularReferences;
-
-                case ResolverType.Singleton:
-                    return Options.TryToDetectSingletonCircularReferences;
-
-                case ResolverType.Unknown:
-                    throw new MvxException("A resolver must have a known type - error in {0}", resolver.GetType().Name);
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(resolver), "unknown resolveType of " + resolver.ResolveType);
-            }
-        }
-
         private bool InternalTryResolve(Type type, IResolver resolver, out object resolved)
         {
             var detectingCircular = ShouldDetectCircularReferencesFor(resolver);
@@ -605,6 +573,38 @@ namespace MvvmCross.IoC
                 {
                     _circularTypeDetection.Remove(type);
                 }
+            }
+        }
+
+        private bool TryGetResolver(Type type, out IResolver resolver)
+        {
+            if (_resolvers.TryGetValue(type, out resolver))
+            {
+                return true;
+            }
+
+            if (!type.GetTypeInfo().IsGenericType)
+            {
+                return false;
+            }
+
+            return _resolvers.TryGetValue(type.GetTypeInfo().GetGenericTypeDefinition(), out resolver);
+        }
+
+        private bool ShouldDetectCircularReferencesFor(IResolver resolver)
+        {
+            switch (resolver.ResolveType)
+            {
+                case ResolverType.DynamicPerResolve:
+                    return Options.TryToDetectDynamicCircularReferences;
+
+                case ResolverType.Singleton:
+                    return Options.TryToDetectSingletonCircularReferences;
+
+                case ResolverType.Unknown:
+                    throw new MvxException("A resolver must have a known type - error in {0}", resolver.GetType().Name);
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(resolver), "unknown resolveType of " + resolver.ResolveType);
             }
         }
 

@@ -27,20 +27,6 @@ namespace MvvmCross.IoC
             return candidateType.SatisfiesConditionalConventions();
         }
 
-        public static bool SatisfiesConditionalConventions(this Type candidateType)
-        {
-            var conditionalAttributes =
-                candidateType.GetCustomAttributes(typeof(MvxConditionalConventionalAttribute), true);
-
-            foreach (MvxConditionalConventionalAttribute conditional in conditionalAttributes)
-            {
-                var result = conditional.IsConditionSatisfied;
-                if (!result)
-                    return false;
-            }
-            return true;
-        }
-
         /// <summary>
         /// A propertyInfo is conventional if and only it is:
         /// - not marked with an unconventional attribute
@@ -56,6 +42,20 @@ namespace MvvmCross.IoC
                 return false;
 
             return propertyInfo.SatisfiesConditionalConventions();
+        }
+
+        public static bool SatisfiesConditionalConventions(this Type candidateType)
+        {
+            var conditionalAttributes =
+                candidateType.GetCustomAttributes(typeof(MvxConditionalConventionalAttribute), true);
+
+            foreach (MvxConditionalConventionalAttribute conditional in conditionalAttributes)
+            {
+                var result = conditional.IsConditionSatisfied;
+                if (!result)
+                    return false;
+            }
+            return true;
         }
 
         public static bool SatisfiesConditionalConventions(this PropertyInfo propertyInfo)
