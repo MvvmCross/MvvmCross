@@ -12,9 +12,9 @@ namespace MvvmCross.Core.Parse.StringDictionary
     public class MvxStringDictionaryParser
         : MvxParser, IMvxStringDictionaryParser
     {
-        protected Dictionary<string, string>? CurrentEntries { get; private set; }
+        protected Dictionary<string, string?>? CurrentEntries { get; private set; }
 
-        public IDictionary<string, string> Parse(string textToParse)
+        public IDictionary<string, string?> Parse(string textToParse)
         {
             Reset(textToParse);
 
@@ -29,7 +29,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
 
         protected override void Reset(string textToParse)
         {
-            CurrentEntries = new Dictionary<string, string>();
+            CurrentEntries = new Dictionary<string, string?>();
             base.Reset(textToParse);
         }
 
@@ -61,7 +61,11 @@ namespace MvvmCross.Core.Parse.StringDictionary
             SkipWhitespace();
 
             var value = ReadValue();
-            if (value is string stringValue)
+            if(value == null)
+            {
+                CurrentEntries![(string)key] = null;
+            }
+            else if (value is string stringValue)
             {
                 CurrentEntries![(string)key] = stringValue;
             }
