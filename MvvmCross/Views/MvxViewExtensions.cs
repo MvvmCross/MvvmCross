@@ -64,7 +64,7 @@ namespace MvvmCross.Views
         {
             var propertyInfo = view?.GetType().GetProperty("ViewModel");
 
-            return propertyInfo?.GetGetMethod().Invoke(view, new object[] { }) as IMvxViewModel;
+            return propertyInfo?.GetGetMethod().Invoke(view, Array.Empty<object>()) as IMvxViewModel;
         }
 
         public static IMvxBundle CreateSaveStateBundle(this IMvxView view)
