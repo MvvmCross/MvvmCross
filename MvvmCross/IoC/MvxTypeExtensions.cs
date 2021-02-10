@@ -12,6 +12,7 @@ using MvvmCross.Logging;
 
 namespace MvvmCross.IoC
 {
+#nullable enable
     public static class MvxTypeExtensions
     {
         public static IEnumerable<Type> ExceptionSafeGetTypes(this Assembly assembly)
@@ -222,7 +223,7 @@ namespace MvvmCross.IoC
             }
         }
 
-        public static object CreateDefault(this Type type)
+        public static object? CreateDefault(this Type type)
         {
             if (type == null)
             {
@@ -240,7 +241,7 @@ namespace MvvmCross.IoC
             return Activator.CreateInstance(type);
         }
         
-        public static ConstructorInfo FindApplicableConstructor(this Type type, IDictionary<string, object> arguments)
+        public static ConstructorInfo? FindApplicableConstructor(this Type type, IDictionary<string, object> arguments)
         {
             var constructors = type.GetConstructors();
             if (arguments == null || arguments.Count == 0)
@@ -270,7 +271,7 @@ namespace MvvmCross.IoC
             return null;
         }
         
-        public static ConstructorInfo FindApplicableConstructor(this Type type, object[] arguments)
+        public static ConstructorInfo? FindApplicableConstructor(this Type type, object[] arguments)
         {
             var constructors = type.GetConstructors();
             if (arguments == null || arguments.Length == 0)
@@ -301,4 +302,5 @@ namespace MvvmCross.IoC
             return null;
         }
     }
+#nullable restore
 }

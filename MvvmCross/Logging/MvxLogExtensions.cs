@@ -6,6 +6,7 @@ using System;
 
 namespace MvvmCross.Logging
 {
+#nullable enable
     public static class MvxLogExtensions
     {
         public static bool IsDebugEnabled(this IMvxLog logger)
@@ -243,7 +244,7 @@ namespace MvvmCross.Logging
             }
         }
 
-        public static void TraceException(this IMvxLog logger, string message, Exception exception, params object[] formatParams)
+        public static void TraceException(this IMvxLog logger, string message, Exception exception, params object?[] formatParams)
         {
             if (logger.IsTraceEnabled())
             {
@@ -265,17 +266,17 @@ namespace MvvmCross.Logging
             }
         }
 
-        public static void Warn(this IMvxLog logger, string message, params object[] args)
+        public static void Warn(this IMvxLog logger, string message, params object?[] args)
         {
             logger.WarnFormat(message, args);
         }
 
-        public static void Warn(this IMvxLog logger, Exception exception, string message, params object[] args)
+        public static void Warn(this IMvxLog logger, Exception exception, string message, params object?[] args)
         {
             logger.WarnException(message, exception, args);
         }
 
-        public static void WarnFormat(this IMvxLog logger, string message, params object[] args)
+        public static void WarnFormat(this IMvxLog logger, string message, params object?[] args)
         {
             if (logger.IsWarnEnabled())
             {
@@ -283,7 +284,7 @@ namespace MvvmCross.Logging
             }
         }
 
-        public static void WarnException(this IMvxLog logger, string message, Exception exception, params object[] formatParams)
+        public static void WarnException(this IMvxLog logger, string message, Exception exception, params object?[] formatParams)
         {
             if (logger.IsWarnEnabled())
             {
@@ -300,7 +301,7 @@ namespace MvvmCross.Logging
             }
         }
 
-        private static void LogFormat(this IMvxLog logger, MvxLogLevel logLevel, string message, params object[] args)
+        private static void LogFormat(this IMvxLog logger, MvxLogLevel logLevel, string message, params object?[] args)
         {
             logger.Log(logLevel, message.AsFunc(), null, args);
         }
@@ -316,4 +317,5 @@ namespace MvvmCross.Logging
             return value;
         }
     }
+#nullable restore
 }

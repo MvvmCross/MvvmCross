@@ -8,6 +8,7 @@ namespace MvvmCross.Base
 {
 #nullable enable
     public interface IMvxNamedInstanceRegistry<in T>
+        where T : class
     {
         void AddOrOverwrite(string name, T instance);
 

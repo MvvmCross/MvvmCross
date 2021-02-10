@@ -7,6 +7,7 @@ using MvvmCross.Presenters;
 
 namespace MvvmCross.Platforms.Console.Views
 {
+#nullable enable
     public interface IMvxConsoleNavigation
         : IMvxViewPresenter
     {
@@ -16,4 +17,5 @@ namespace MvvmCross.Platforms.Console.Views
 
         bool CanGoBack();
     }
+#nullable restore
 }

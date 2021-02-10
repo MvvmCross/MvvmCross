@@ -28,20 +28,20 @@ namespace MvvmCross.Localization
 
         private IMvxTextProvider? _cachedTextProvider;
 
-        protected virtual IMvxTextProvider GetTextProvider()
+        protected virtual IMvxTextProvider? GetTextProvider()
         {
             lock (_lockObject)
             {
                 if (_cachedTextProvider != null)
                     return _cachedTextProvider;
 
-                Mvx.IoCProvider.TryResolve(out _cachedTextProvider);
-                if (_cachedTextProvider == null)
+                if (Mvx.IoCProvider.TryResolve(out IMvxTextProvider cachedTextProvider))
                 {
                     throw new MvxException(
                         "Missing text provider - please initialize IoC with a suitable IMvxTextProvider");
                 }
-                return _cachedTextProvider;
+
+                return _cachedTextProvider = cachedTextProvider;
             }
         }
 
@@ -58,7 +58,7 @@ namespace MvvmCross.Localization
 
         protected virtual string? GetText(string? namespaceKey, string? typeKey, string entryKey)
         {
-            return GetTextProvider().GetText(namespaceKey, typeKey, entryKey);
+            return GetTextProvider()?.GetText(namespaceKey, typeKey, entryKey);
         }
     }
 #nullable restore

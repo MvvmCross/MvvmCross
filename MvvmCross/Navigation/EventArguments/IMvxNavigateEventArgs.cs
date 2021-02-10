@@ -10,6 +10,6 @@ namespace MvvmCross.Navigation.EventArguments
     {
         bool Cancel { get; set; }
         NavigationMode Mode { get; set; }
-        IMvxViewModel ViewModel { get; set; }
+        IMvxViewModel? ViewModel { get; set; }
     }
 }

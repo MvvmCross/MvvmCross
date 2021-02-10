@@ -23,12 +23,12 @@ namespace MvvmCross.Logging
 
         public bool IsLogLevelEnabled(MvxLogLevel logLevel) => _logger(logLevel, null);
 
-        public bool Log(MvxLogLevel logLevel, Func<string>? messageFunc, Exception? exception = null, params object[] formatParameters)
+        public bool Log(MvxLogLevel logLevel, Func<string>? messageFunc, Exception? exception = null, params object?[] formatParameters)
         {
             if (messageFunc == null)
                 return _logger(logLevel, null);
 
-            string? WrappedMessageFunc()
+            string WrappedMessageFunc()
             {
                 try
                 {
@@ -39,7 +39,7 @@ namespace MvvmCross.Logging
                     Log(MvxLogLevel.Error, () => FailedToGenerateLogMessage, ex);
                 }
 
-                return null;
+                return string.Empty;
             }
 
             return _logger(logLevel, WrappedMessageFunc, exception, formatParameters);

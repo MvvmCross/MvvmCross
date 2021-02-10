@@ -12,28 +12,31 @@ using MvvmCross.ViewModels;
 
 namespace MvvmCross.Platforms.Console.Views
 {
+#nullable enable
     public class MvxConsoleContainer
         : MvxBaseConsoleContainer
     {
+        private readonly object _lockObject = new object();
         private readonly Stack<MvxViewModelRequest> _navigationStack = new Stack<MvxViewModelRequest>();
 
         public override Task<bool> Show(MvxViewModelRequest request)
         {
-            lock (this)
+            lock (_lockObject)
             {
                 var viewType = GetViewType(request.ViewModelType);
                 if (viewType == null)
                 {
                     throw new MvxException("View Type not found for " + request.ViewModelType);
                 }
-                var view = (IMvxConsoleView)Activator.CreateInstance(viewType);
+                var view = Activator.CreateInstance(viewType) as IMvxConsoleView;
                 var viewModelLoader = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
-                IMvxBundle savedState = null;
+                IMvxBundle? savedState = null;
                 var viewModel = viewModelLoader.LoadViewModel(request, savedState);
-                view.HackSetViewModel(viewModel);
+                view?.HackSetViewModel(viewModel);
                 Mvx.IoCProvider.Resolve<IMvxConsoleCurrentView>().CurrentView = view;
                 _navigationStack.Push(request);
             }
+
             return Task.FromResult(true);
         }
 
@@ -41,28 +44,28 @@ namespace MvvmCross.Platforms.Console.Views
         {
             if (await HandlePresentationChange(hint)) return true;
 
-            if (hint is MvxClosePresentationHint)
+            if (hint is MvxClosePresentationHint closeHint)
             {
-                return await Close((hint as MvxClosePresentationHint).ViewModelToClose);
+                return await Close(closeHint.ViewModelToClose);
             }
 
-            MvxLog.Instance.Warn("Hint ignored {0}", hint.GetType().Name);
+            MvxLog.Instance?.Warn("Hint ignored {0}", hint.GetType().Name);
             return false;
         }
 
-        public override Task<bool> Close(IMvxViewModel toClose)
+        public override Task<bool> Close(IMvxViewModel viewModel)
         {
             var currentView = Mvx.IoCProvider.Resolve<IMvxConsoleCurrentView>().CurrentView;
 
             if (currentView == null)
             {
-                MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe has no current page");
+                MvxLog.Instance?.Warn("Ignoring close for viewmodel - rootframe has no current page");
                 return Task.FromResult(true);
             }
 
-            if (currentView.ViewModel != toClose)
+            if (currentView.ViewModel != viewModel)
             {
-                MvxLog.Instance.Warn("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
+                MvxLog.Instance?.Warn("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
                 return Task.FromResult(true);
             }
 
@@ -71,7 +74,7 @@ namespace MvvmCross.Platforms.Console.Views
 
         public override Task<bool> GoBack()
         {
-            lock (this)
+            lock (_lockObject)
             {
                 if (!CanGoBack())
                 {
@@ -97,7 +100,7 @@ namespace MvvmCross.Platforms.Console.Views
 
         public override bool CanGoBack()
         {
-            lock (this)
+            lock (_lockObject)
             {
                 if (_navigationStack.Count > 1)
                     return true;
@@ -106,4 +109,5 @@ namespace MvvmCross.Platforms.Console.Views
             }
         }
     }
+#nullable restore
 }

@@ -17,11 +17,8 @@ namespace MvvmCross.Base
         protected string? FullText { get; private set; }
         protected int CurrentIndex { get; private set; }
 
-        protected virtual void Reset(string textToParse)
+        protected virtual void Reset(string? textToParse)
         {
-            if (textToParse == null)
-                throw new ArgumentNullException(nameof(textToParse));
-
             FullText = textToParse;
             CurrentIndex = 0;
         }

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -8,22 +8,23 @@ using MvvmCross.Views;
 
 namespace MvvmCross.Platforms.Console.Views
 {
+#nullable enable
     public class MvxConsoleView<T>
         : IMvxConsoleView
         where T : IMvxViewModel
     {
-        public object DataContext { get; set; }
+        public object? DataContext { get; set; }
 
         public T ViewModel
         {
-            get { return (T)DataContext; }
-            set { DataContext = value; }
+            get => (T)DataContext;
+            set => DataContext = value;
         }
 
-        IMvxViewModel IMvxView.ViewModel
+        IMvxViewModel? IMvxView.ViewModel
         {
-            get { return (IMvxViewModel)DataContext; }
-            set { DataContext = (T)value; }
+            get => DataContext as IMvxViewModel;
+            set => DataContext = (T)value;
         }
 
         public Type ViewModelType => typeof(T);
@@ -45,4 +46,5 @@ namespace MvvmCross.Platforms.Console.Views
         {
         }
     }
+#nullable restore
 }
