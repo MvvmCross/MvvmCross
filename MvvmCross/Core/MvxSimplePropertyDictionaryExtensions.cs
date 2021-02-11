@@ -56,14 +56,13 @@ namespace MvvmCross.Core
             foreach (var propertyInfo in type.GetProperties(
                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy).Where(p => p.CanWrite))
             {
-                string textValue;
-                if (!data.TryGetValue(propertyInfo.Name, out textValue))
+                if (!data.TryGetValue(propertyInfo.Name, out var textValue))
                     continue;
 
                 var typedValue = MvxSingletonCache.Instance?.Parser.ReadValue(
                     textValue, propertyInfo.PropertyType, propertyInfo.Name);
                 if (typedValue != null)
-                    propertyInfo.SetValue(t, typedValue, new object[0]);
+                    propertyInfo.SetValue(t, typedValue, Array.Empty<object>());
             }
 
             return t;
@@ -84,7 +83,7 @@ namespace MvvmCross.Core
 
         public static object? GetArgumentValue(this IDictionary<string, string> data, ParameterInfo requiredParameter, string? debugText)
         {
-            string parameterValue;
+            string? parameterValue;
             if (data == null ||
                 !data.TryGetValue(requiredParameter.Name, out parameterValue))
             {
@@ -144,7 +143,7 @@ namespace MvvmCross.Core
         {
             try
             {
-                var value = propertyInfo.GetValue(input, new object[] { });
+                var value = propertyInfo.GetValue(input, Array.Empty<object>());
                 return value?.ToStringInvariant() ?? string.Empty;
             }
             catch (Exception suspectedMethodAccessException)
