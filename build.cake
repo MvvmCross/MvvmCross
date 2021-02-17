@@ -3,7 +3,6 @@
 #tool nuget:?package=vswhere&version=2.8.4
 #tool nuget:?package=MSBuild.SonarQube.Runner.Tool&version=4.8.0
 #addin nuget:?package=Cake.Figlet&version=1.3.1
-#addin nuget:?package=Cake.Git&version=0.21.0
 #addin nuget:?package=Cake.Sonar&version=1.1.25
 
 var solutionName = "MvvmCross";
