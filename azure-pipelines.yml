@@ -17,10 +17,12 @@ pr:
     - '**/*.md'
     - docs/*
 
+variables:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  NUGET_PACKAGES: '$(Pipeline.Workspace)/.nuget/packages'
+
 stages:
 - stage: Build
-  variables:
-    DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 
   jobs:
   - job: Build
@@ -28,17 +30,7 @@ stages:
       vmImage: windows-latest
 
     steps:
-    - task: UseDotNet@2
-      displayName: 'Use .NET Core sdk'
-      inputs:
-        packageType: sdk
-        version: 3.1.402
-
-    - script: dotnet tool restore
-      displayName: Restore dotnet tools
-
-    - script: dotnet cake --bootstrap
-      displayName: Bootstrap cake
+    - template: azure-pipelines-shared.yml
 
     - script: dotnet cake --verbosity=Normal --artifactsDir=$(Build.ArtifactStagingDirectory)
 

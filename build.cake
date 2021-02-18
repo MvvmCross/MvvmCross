@@ -1,9 +1,8 @@
 #module nuget:?package=Cake.DotNetTool.Module&version=0.4.0
-#tool dotnet:n?package=GitVersion.Tool&version=5.3.5
+#tool dotnet:n?package=GitVersion.Tool&version=5.6.6
 #tool nuget:?package=vswhere&version=2.8.4
 #tool nuget:?package=MSBuild.SonarQube.Runner.Tool&version=4.8.0
 #addin nuget:?package=Cake.Figlet&version=1.3.1
-#addin nuget:?package=Cake.Git&version=0.21.0
 #addin nuget:?package=Cake.Sonar&version=1.1.25
 
 var solutionName = "MvvmCross";
@@ -173,7 +172,7 @@ Task("UnitTest")
     {
         var projectName = project.GetFilenameWithoutExtension();
         var testXml = MakeAbsolute(new FilePath(outputDir + "/Tests/" + projectName + ".xml"));
-        settings.Logger = $"xunit;LogFilePath={testXml.FullPath}";
+        settings.Loggers = new string[] { $"xunit;LogFilePath={testXml.FullPath}" };
         try 
         {
             DotNetCoreTest(project.ToString(), settings);
