@@ -18,7 +18,7 @@ pr:
     - docs/*
 
 variables:
-  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_NOLOGO: true
   NUGET_PACKAGES: '$(Pipeline.Workspace)/.nuget/packages'
 
 stages:
