@@ -46,7 +46,7 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
         {
             if (!NSThread.IsMain)
             {
-                InvokeOnMainThread(() => CollectionChangedOnCollectionChanged(sender, args));
+                BeginInvokeOnMainThread(() => CollectionChangedOnCollectionChanged(sender, args));
                 return;
             }
             
