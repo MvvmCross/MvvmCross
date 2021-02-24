@@ -37,7 +37,7 @@
     <PackageVersion Include="Serilog" Version="2.10.0"/>
     <PackageVersion Include="Serilog.Sinks.Xamarin" Version="0.2.0.64"/>
     <PackageVersion Include="Xamarin.GooglePlayServices.Basement" Version="117.6.0" />
-    <PackageVersion Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.2.0.4" />
+    <PackageVersion Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.3.0.1" />
     <PackageVersion Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0.6" />
     <PackageVersion Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
   </ItemGroup>
