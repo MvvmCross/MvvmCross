@@ -79,7 +79,7 @@ namespace MvvmCross.Plugin
             }
             catch (Exception ex)
             {
-                MvxLog.Instance.Warn("Failed to load plugin {0} with exception {1}", type.FullName, ex.ToLongString());
+                MvxLog.Instance?.Warn("Failed to load plugin {0} with exception {1}", type.FullName, ex.ToLongString());
                 return false;
             }
         }
