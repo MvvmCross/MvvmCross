@@ -36,7 +36,7 @@ namespace MvvmCross.Base
         }
 
         // core implementation of MakeSafeValue
-        public static object MakeSafeValueCore(this Type propertyType, object? value)
+        public static object? MakeSafeValueCore(this Type propertyType, object? value)
         {
             if (value == null)
             {
