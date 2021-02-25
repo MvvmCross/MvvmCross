@@ -224,8 +224,7 @@ namespace MvvmCross.Commands
     }
 
     public class MvxAsyncCommand<T>
-        : MvxAsyncCommandBase
-        , IMvxCommand, IMvxAsyncCommand<T>
+        : MvxAsyncCommandBase, IMvxCommand, IMvxAsyncCommand<T>
     {
         private readonly Func<T, CancellationToken, Task> _execute;
         private readonly Func<T, bool>? _canExecute;

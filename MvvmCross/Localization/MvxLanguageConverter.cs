@@ -21,11 +21,8 @@ namespace MvvmCross.Localization
             if (parameter == null)
                 return MvxBindingConstant.UnsetValue;
 
-            var translatedText = binder.GetText(parameter.ToString());
-            if (translatedText != null)
-                return translatedText;
-
-            return MvxBindingConstant.UnsetValue;
+            var translatedText = binder.GetText(parameter!.ToString());
+            return translatedText ?? (object)MvxBindingConstant.UnsetValue;
         }
     }
 #nullable restore

@@ -254,7 +254,9 @@ namespace MvvmCross.IoC
             {
                 foreach (var parameter in constructor.GetParameters())
                 {
-                    if (unusedKeys.Contains(parameter.Name) && parameter.ParameterType.IsInstanceOfType(arguments[parameter.Name]))
+                    if (parameter?.Name != null &&
+                        unusedKeys.Contains(parameter.Name) &&
+                        parameter.ParameterType.IsInstanceOfType(arguments[parameter.Name]))
                     {
                         unusedKeys.Remove(parameter.Name);
                     }

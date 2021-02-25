@@ -10,6 +10,7 @@ namespace MvvmCross.Converters
 {
 #nullable enable
     public class MvxDictionaryValueConverter<TKey, TValue> : MvxValueConverter<TKey, TValue>
+        where TKey : notnull
     {
         protected override TValue Convert(TKey value, Type? targetType, object? parameter, CultureInfo? culture)
         {

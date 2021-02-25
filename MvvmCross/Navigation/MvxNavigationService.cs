@@ -560,7 +560,7 @@ namespace MvvmCross.Navigation
         {
             ValidateArguments(hint);
 
-            MvxLog.Instance.Trace("Requesting presentation change");
+            MvxLog.Instance?.Trace("Requesting presentation change");
             var args = new ChangePresentationEventArgs(hint, cancellationToken);
             OnWillChangePresentation(this, args);
 

@@ -221,7 +221,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             {
                 _logger.Value?.Trace("PresentationAttribute not found for {0}. Assuming Fragment presentation", viewType.Name);
                 return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), global::Android.Resource.Id.Content)
-                { 
+                {
                     ViewType = viewType, ViewModelType = viewModelType
                 };
             }
@@ -266,9 +266,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                     var index = adapter.FragmentsInfo.IndexOf(fragmentInfo);
                     if (index < 0)
                     {
-                        _logger.Value?.Trace("Did not find ViewPager index for {0}, skipping presentation change...",
-                            pagerFragmentAttribute.Tag);
-
+                        _logger.Value?.Trace($"Did not find ViewPager index for {pagerFragmentAttribute.Tag}, skipping presentation change...");
                         return true;
                     }
 
@@ -493,8 +491,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             var currentHostViewModelType = GetCurrentActivityViewModelType();
             if (attribute.ActivityHostViewModelType != currentHostViewModelType)
             {
-                _logger.Value?.Trace("Activity host with ViewModelType {0} is not CurrentTopActivity. Showing Activity before showing Fragment for {1}",
-                    attribute.ActivityHostViewModelType, attribute.ViewModelType);
+                _logger.Value?.Trace($"Activity host with ViewModelType {attribute.ActivityHostViewModelType} is not CurrentTopActivity. Showing Activity before showing Fragment for {attribute.ViewModelType}");
                 PendingRequest = request;
                 ShowHostActivity(attribute);
             }

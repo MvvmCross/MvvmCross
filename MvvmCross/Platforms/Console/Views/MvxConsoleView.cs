@@ -11,20 +11,20 @@ namespace MvvmCross.Platforms.Console.Views
 #nullable enable
     public class MvxConsoleView<T>
         : IMvxConsoleView
-        where T : IMvxViewModel
+        where T : class, IMvxViewModel
     {
         public object? DataContext { get; set; }
 
-        public T ViewModel
+        public T? ViewModel
         {
-            get => (T)DataContext;
+            get => (T?)DataContext;
             set => DataContext = value;
         }
 
         IMvxViewModel? IMvxView.ViewModel
         {
             get => DataContext as IMvxViewModel;
-            set => DataContext = (T)value;
+            set => DataContext = (T?)value;
         }
 
         public Type ViewModelType => typeof(T);

@@ -54,7 +54,7 @@ namespace MvvmCross.Binding.Binders
                 registry.AddOrOverwrite(pair.Name, pair.Converter);
             }
         }
-        
+
         public virtual void FillFrom(IMvxNamedInstanceRegistry<T> registry, Type type)
         {
             if (type.GetTypeInfo().IsAbstract)

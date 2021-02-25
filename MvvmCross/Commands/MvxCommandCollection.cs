@@ -40,7 +40,7 @@ namespace MvvmCross.Commands
                 return;
             }
 
-            if (_canExecuteLookup.TryGetValue(args.PropertyName, out List<IMvxCommand> commands))
+            if (_canExecuteLookup.TryGetValue(args.PropertyName, out List<IMvxCommand>? commands))
             {
                 foreach (var command in commands)
                 {

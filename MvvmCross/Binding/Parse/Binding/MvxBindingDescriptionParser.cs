@@ -25,7 +25,7 @@ namespace MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                _bindingParser = _bindingParser ?? Mvx.IoCProvider.Resolve<IMvxBindingParser>();
+                _bindingParser ??= Mvx.IoCProvider.Resolve<IMvxBindingParser>();
                 return _bindingParser;
             }
         }
@@ -36,7 +36,7 @@ namespace MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                _languageBindingParser = _languageBindingParser ?? Mvx.IoCProvider.Resolve<IMvxLanguageBindingParser>();
+                _languageBindingParser ??= Mvx.IoCProvider.Resolve<IMvxLanguageBindingParser>();
                 return _languageBindingParser;
             }
         }
@@ -45,7 +45,7 @@ namespace MvvmCross.Binding.Parse.Binding
         {
             get
             {
-                _valueConverterLookup = _valueConverterLookup ?? Mvx.IoCProvider.Resolve<IMvxValueConverterLookup>();
+                _valueConverterLookup ??= Mvx.IoCProvider.Resolve<IMvxValueConverterLookup>();
                 return _valueConverterLookup;
             }
         }
@@ -102,7 +102,7 @@ namespace MvvmCross.Binding.Parse.Binding
             var parser = BindingParser;
             if (!parser.TryParseBindingDescription(text, out description))
             {
-                MvxBindingLog.Error("Failed to parse binding description starting with {0}", 
+                MvxBindingLog.Error("Failed to parse binding description starting with {0}",
                     GetErrorTextParameter(text));
                 return null;
             }
@@ -113,7 +113,7 @@ namespace MvvmCross.Binding.Parse.Binding
             return SerializableBindingToBinding(null, description);
         }
 
-        private string GetErrorTextParameter(string? text)
+        private string GetErrorTextParameter(string text)
         {
             if (text == null)
                 return string.Empty;
@@ -124,8 +124,8 @@ namespace MvvmCross.Binding.Parse.Binding
             return text;
         }
 
-        public MvxBindingDescription SerializableBindingToBinding(string targetName,
-                                                                  MvxSerializableBindingDescription description)
+        public MvxBindingDescription SerializableBindingToBinding(
+            string targetName, MvxSerializableBindingDescription description)
         {
             return new MvxBindingDescription
             {

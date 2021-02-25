@@ -17,15 +17,16 @@ namespace MvvmCross.Platforms.Android.Presenters.Attributes
             if (!fragmentType.HasBasePresentationAttribute())
                 return false;
 
-            var fragmentAttributes = fragmentType.GetBasePresentationAttributes()
-                                                 .Select(baseAttribute => baseAttribute as MvxFragmentPresentationAttribute)
-                                                 .Where(fragmentAttribute => fragmentAttribute != null);
+            var fragmentAttributes =
+                fragmentType.GetBasePresentationAttributes()
+                    .Select(baseAttribute => baseAttribute as MvxFragmentPresentationAttribute)
+                    .Where(fragmentAttribute => fragmentAttribute != null);
 
             var currentAttribute = fragmentAttributes.FirstOrDefault(
                 fragmentAttribute => fragmentAttribute != null &&
                 fragmentAttribute.ActivityHostViewModelType == fragmentActivityParentType);
 
-            return currentAttribute != null && currentAttribute.IsCacheableFragment;
+            return currentAttribute?.IsCacheableFragment == true;
         }
 
         public static PopBackStackFlags ToNativePopBackStackFlags(this MvxPopBackStack mvxPopBackStack)

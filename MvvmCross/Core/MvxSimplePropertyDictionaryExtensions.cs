@@ -36,8 +36,7 @@ namespace MvvmCross.Core
             if (toStore == null)
                 return;
 
-            var propertyDictionary = toStore.ToSimplePropertyDictionary();
-            foreach (var kvp in propertyDictionary)
+            foreach (var kvp in toStore.ToSimplePropertyDictionary())
             {
                 data[kvp.Key] = kvp.Value;
             }
@@ -155,14 +154,14 @@ namespace MvvmCross.Core
 
         private static string ToStringInvariant(this object value)
         {
-            switch (value)
+            return value switch
             {
-                case DateTime dateTime: return dateTime.ToString("o", CultureInfo.InvariantCulture);
-                case double doubleValue: return doubleValue.ToString("r", CultureInfo.InvariantCulture);
-                case float floatValue: return floatValue.ToString("r", CultureInfo.InvariantCulture);
-                case IFormattable formattableValue: return formattableValue.ToString(null, CultureInfo.InvariantCulture);
-                default: return value.ToString();
-            }
+                DateTime dateTime => dateTime.ToString("o", CultureInfo.InvariantCulture),
+                double doubleValue => doubleValue.ToString("r", CultureInfo.InvariantCulture),
+                float floatValue => floatValue.ToString("r", CultureInfo.InvariantCulture),
+                IFormattable formattableValue => formattableValue.ToString(null, CultureInfo.InvariantCulture),
+                _ => value?.ToString() ?? string.Empty,
+            };
         }
     }
 #nullable restore
