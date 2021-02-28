@@ -11,7 +11,7 @@ Tibet binding (see [wiki/Databinding](https://www.mvvmcross.com/documentation/fu
 
          local:MvxBind="Text Format('{0} {1} {2}', Greeting(Gender), FirstName, LastName)"
          
-The rules and mechanisms for registering ValueCombiners are similar to those for registering ValueConverters. However, because combiners are not commonly declared in user code, MvvmCross doesn't currenty perform a Reflection sweep across your Core or UI assemblies. If you do want to add by default, then a ValueCombiner class named `FooValueCombiner` will be registered under the name `Foo`.
+The rules and mechanisms for registering ValueCombiners are similar to those for registering ValueConverters. However, because combiners are not commonly declared in user code, MvvmCross doesn't currently perform a Reflection sweep across your Core or UI assemblies. If you do want to add by default, then a ValueCombiner class named `FooValueCombiner` will be registered under the name `Foo`.
           
 Please be aware that withing the MvvmCross Tibet binding syntax, ValueCombiners and ValueConverters share the same 'registered name' space - because both of them are expressed as 'functions' then it's impossible to have both a `Foo` ValueConverter and a `Foo` ValueCombiner - if both are registered then the ValueConverter will always be used rather than the ValueCombiner. 
           
