@@ -41,10 +41,10 @@ namespace MvvmCross.Views
             Add(typeof(TViewModel), typeof(TView));
         }
 
-        public Type GetViewType(Type viewModelType)
+        public Type GetViewType(Type? viewModelType)
         {
-            Type binding;
-            if (_bindingMap.TryGetValue(viewModelType, out binding))
+            Type? binding;
+            if (viewModelType != null && _bindingMap.TryGetValue(viewModelType, out binding))
             {
                 return binding;
             }

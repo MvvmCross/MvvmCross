@@ -15,11 +15,11 @@ namespace MvvmCross.Plugin
         private readonly object _lockObject = new object();
         private readonly HashSet<Type> _loadedPlugins = new HashSet<Type>();
 
-        public Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; }
+        public Func<Type, IMvxPluginConfiguration?> ConfigurationSource { get; }
 
         public IEnumerable<Type> LoadedPlugins => _loadedPlugins;
 
-        public MvxPluginManager(Func<Type, IMvxPluginConfiguration> configurationSource)
+        public MvxPluginManager(Func<Type, IMvxPluginConfiguration?> configurationSource)
         {
             ConfigurationSource = configurationSource;
         }
@@ -41,7 +41,8 @@ namespace MvvmCross.Plugin
             if (plugin is IMvxConfigurablePlugin configurablePlugin)
             {
                 var configuration = ConfigurationFor(type);
-                configurablePlugin.Configure(configuration);
+                if (configuration != null)
+                    configurablePlugin.Configure(configuration);
             }
 
             plugin.Load();
@@ -52,7 +53,7 @@ namespace MvvmCross.Plugin
             }
         }
 
-        protected IMvxPluginConfiguration ConfigurationFor(Type toLoad) =>
+        protected IMvxPluginConfiguration? ConfigurationFor(Type toLoad) =>
             ConfigurationSource.Invoke(toLoad);
 
         public bool IsPluginLoaded<T>() where T : IMvxPlugin
@@ -78,7 +79,7 @@ namespace MvvmCross.Plugin
             }
             catch (Exception ex)
             {
-                MvxLog.Instance.Warn("Failed to load plugin {0} with exception {1}", type.FullName, ex.ToLongString());
+                MvxLog.Instance?.Warn("Failed to load plugin {0} with exception {1}", type.FullName, ex.ToLongString());
                 return false;
             }
         }

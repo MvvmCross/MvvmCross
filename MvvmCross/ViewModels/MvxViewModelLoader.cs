@@ -20,7 +20,7 @@ namespace MvvmCross.ViewModels
         }
 
         // Reload should be used to re-run cached ViewModels lifecycle if required.
-        public IMvxViewModel ReloadViewModel(IMvxViewModel viewModel, MvxViewModelRequest request, IMvxBundle savedState, IMvxNavigateEventArgs? navigationArgs = null)
+        public IMvxViewModel ReloadViewModel(IMvxViewModel viewModel, MvxViewModelRequest request, IMvxBundle? savedState, IMvxNavigateEventArgs? navigationArgs = null)
         {
             var viewModelLocator = FindViewModelLocator(request);
 
@@ -32,14 +32,13 @@ namespace MvvmCross.ViewModels
             catch (Exception exception)
             {
                 throw exception.MvxWrap(
-                    "Failed to reload a previously created created ViewModel for type {0} from locator {1} - check InnerException for more information",
-                    request.ViewModelType, viewModelLocator.GetType().Name);
+                    $"Failed to construct and initialize ViewModel for type {request.ViewModelType} from locator {viewModelLocator.GetType().Name} - check InnerException for more information");
             }
 
             return viewModel;
         }
 
-        public IMvxViewModel ReloadViewModel<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, MvxViewModelRequest request, IMvxBundle savedState, IMvxNavigateEventArgs? navigationArgs = null)
+        public IMvxViewModel ReloadViewModel<TParameter>(IMvxViewModel<TParameter> viewModel, TParameter param, MvxViewModelRequest request, IMvxBundle? savedState, IMvxNavigateEventArgs? navigationArgs = null)
             where TParameter : notnull
         {
             var viewModelLocator = FindViewModelLocator(request);
@@ -52,12 +51,11 @@ namespace MvvmCross.ViewModels
             catch (Exception exception)
             {
                 throw exception.MvxWrap(
-                    "Failed to reload a previously created created ViewModel for type {0} from locator {1} - check InnerException for more information",
-                    request.ViewModelType, viewModelLocator.GetType().Name);
+                    $"Failed to construct and initialize ViewModel for type {request.ViewModelType} from locator {viewModelLocator.GetType().Name} - check InnerException for more information");
             }
         }
 
-        public IMvxViewModel LoadViewModel(MvxViewModelRequest request, IMvxBundle savedState, IMvxNavigateEventArgs? navigationArgs = null)
+        public IMvxViewModel LoadViewModel(MvxViewModelRequest request, IMvxBundle? savedState, IMvxNavigateEventArgs? navigationArgs = null)
         {
             if (request.ViewModelType == typeof(MvxNullViewModel))
             {
@@ -74,12 +72,11 @@ namespace MvvmCross.ViewModels
             catch (Exception exception)
             {
                 throw exception.MvxWrap(
-                    "Failed to construct and initialize ViewModel for type {0} from locator {1} - check InnerException for more information",
-                    request.ViewModelType, viewModelLocator.GetType().Name);
+                    $"Failed to construct and initialize ViewModel for type {request.ViewModelType} from locator {viewModelLocator.GetType().Name} - check InnerException for more information");
             }
         }
 
-        public IMvxViewModel LoadViewModel<TParameter>(MvxViewModelRequest request, TParameter param, IMvxBundle savedState, IMvxNavigateEventArgs? navigationArgs = null)
+        public IMvxViewModel LoadViewModel<TParameter>(MvxViewModelRequest request, TParameter param, IMvxBundle? savedState, IMvxNavigateEventArgs? navigationArgs = null)
             where TParameter : notnull
         {
             if (request.ViewModelType == typeof(MvxNullViewModel))
@@ -97,8 +94,7 @@ namespace MvvmCross.ViewModels
             catch (Exception exception)
             {
                 throw exception.MvxWrap(
-                    "Failed to construct and initialize ViewModel for type {0} from locator {1} - check InnerException for more information",
-                    request.ViewModelType, viewModelLocator.GetType().Name);
+                    $"Failed to construct and initialize ViewModel for type {request.ViewModelType} from locator {viewModelLocator.GetType().Name} - check InnerException for more information");
             }
         }
 

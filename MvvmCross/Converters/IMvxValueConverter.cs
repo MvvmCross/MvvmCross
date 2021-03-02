@@ -7,10 +7,12 @@ using System.Globalization;
 
 namespace MvvmCross.Converters
 {
+#nullable enable
     public interface IMvxValueConverter
     {
-        object Convert(object value, Type targetType, object parameter, CultureInfo culture);
+        object Convert(object value, Type? targetType, object? parameter, CultureInfo? culture);
 
-        object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture);
+        object ConvertBack(object value, Type? targetType, object? parameter, CultureInfo? culture);
     }
+#nullable restore
 }

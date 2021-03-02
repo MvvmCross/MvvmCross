@@ -10,7 +10,7 @@ namespace MvvmCross.Plugin
 #nullable enable
     public interface IMvxPluginManager
     {
-        Func<Type, IMvxPluginConfiguration> ConfigurationSource { get; }
+        Func<Type, IMvxPluginConfiguration?> ConfigurationSource { get; }
 
         IEnumerable<Type> LoadedPlugins { get; }
 

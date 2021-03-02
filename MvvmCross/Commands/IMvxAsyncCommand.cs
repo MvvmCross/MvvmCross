@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace MvvmCross.Commands
 {
+#nullable enable
     public interface IMvxAsyncCommand : IMvxCommand
     {
-        Task ExecuteAsync(object parameter = null);
+        Task ExecuteAsync(object? parameter = null);
         void Cancel();
     }
 
-    public interface IMvxAsyncCommand<T> : IMvxCommand<T>
+    public interface IMvxAsyncCommand<in TParameter> : IMvxCommand<TParameter>
     {
-        Task ExecuteAsync(T parameter);
+        Task ExecuteAsync(TParameter parameter);
         void Cancel();
     }
+#nullable restore
 }

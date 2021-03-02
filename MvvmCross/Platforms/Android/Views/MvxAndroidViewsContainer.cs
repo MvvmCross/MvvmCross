@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -11,6 +11,7 @@ using MvvmCross.Views;
 
 namespace MvvmCross.Platforms.Android.Views
 {
+#nullable enable
     public class MvxAndroidViewsContainer
         : MvxViewsContainer
          , IMvxAndroidViewsContainer
@@ -27,52 +28,52 @@ namespace MvvmCross.Platforms.Android.Views
 
         #region Implementation of IMvxAndroidViewModelRequestTranslator
 
-        public virtual IMvxViewModel Load(Intent intent, IMvxBundle savedState)
+        public virtual IMvxViewModel? Load(Intent intent, IMvxBundle? savedState)
         {
             return Load(intent, null, null);
         }
 
-        public virtual IMvxViewModel Load(Intent intent, IMvxBundle savedState, Type viewModelTypeHint)
+        public virtual IMvxViewModel? Load(Intent intent, IMvxBundle? savedState, Type? viewModelTypeHint)
         {
             if (intent == null)
             {
-                MvxLog.Instance.Error("Null Intent seen when creating ViewModel");
+                MvxLog.Instance?.Error("Null Intent seen when creating ViewModel");
                 return null;
             }
 
             if (intent.Action == Intent.ActionMain)
             {
-                MvxLog.Instance.Trace("Creating ViewModel for ActionMain");
+                MvxLog.Instance?.Trace("Creating ViewModel for ActionMain");
                 return DirectLoad(savedState, viewModelTypeHint);
             }
 
             if (intent.Extras == null)
             {
-                MvxLog.Instance.Trace("Null Extras seen on Intent when creating ViewModel - have you tried to navigate to an MvvmCross View directly? Will try direct load");
+                MvxLog.Instance?.Trace("Null Extras seen on Intent when creating ViewModel - have you tried to navigate to an MvvmCross View directly? Will try direct load");
                 return DirectLoad(savedState, viewModelTypeHint);
             }
 
-            IMvxViewModel mvxViewModel;
+            IMvxViewModel? mvxViewModel;
             if (TryGetEmbeddedViewModel(intent, out mvxViewModel))
             {
-                MvxLog.Instance.Trace("Embedded ViewModel used");
+                MvxLog.Instance?.Trace("Embedded ViewModel used");
                 return mvxViewModel;
             }
 
-            MvxLog.Instance.Trace("Attempting to load new ViewModel from Intent with Extras");
+            MvxLog.Instance?.Trace("Attempting to load new ViewModel from Intent with Extras");
             var toReturn = CreateViewModelFromIntent(intent, savedState);
             if (toReturn != null)
                 return toReturn;
 
-            MvxLog.Instance.Trace("ViewModel not loaded from Extras - will try DirectLoad");
+            MvxLog.Instance?.Trace("ViewModel not loaded from Extras - will try DirectLoad");
             return DirectLoad(savedState, viewModelTypeHint);
         }
 
-        protected virtual IMvxViewModel DirectLoad(IMvxBundle savedState, Type viewModelTypeHint)
+        protected virtual IMvxViewModel? DirectLoad(IMvxBundle? savedState, Type? viewModelTypeHint)
         {
             if (viewModelTypeHint == null)
             {
-                MvxLog.Instance.Error("Unable to load viewmodel - no type hint provided");
+                MvxLog.Instance?.Error("Unable to load viewmodel - no type hint provided");
                 return null;
             }
 
@@ -82,9 +83,9 @@ namespace MvvmCross.Platforms.Android.Views
             return viewModel;
         }
 
-        protected virtual IMvxViewModel CreateViewModelFromIntent(Intent intent, IMvxBundle savedState)
+        protected virtual IMvxViewModel? CreateViewModelFromIntent(Intent intent, IMvxBundle? savedState)
         {
-            var extraData = intent.Extras.GetString(ExtrasKey);
+            var extraData = intent.Extras?.GetString(ExtrasKey);
             if (extraData == null)
                 return null;
 
@@ -94,27 +95,25 @@ namespace MvvmCross.Platforms.Android.Views
             return ViewModelFromRequest(viewModelRequest, savedState);
         }
 
-        protected virtual IMvxViewModel ViewModelFromRequest(MvxViewModelRequest viewModelRequest, IMvxBundle savedState)
+        protected virtual IMvxViewModel? ViewModelFromRequest(MvxViewModelRequest viewModelRequest, IMvxBundle? savedState)
         {
             var loaderService = Mvx.IoCProvider.Resolve<IMvxViewModelLoader>();
-            var viewModel = loaderService.LoadViewModel(viewModelRequest, savedState);
-            return viewModel;
+            return loaderService.LoadViewModel(viewModelRequest, savedState);
         }
 
-        protected virtual bool TryGetEmbeddedViewModel(Intent intent, out IMvxViewModel mvxViewModel)
+        protected virtual bool TryGetEmbeddedViewModel(Intent intent, out IMvxViewModel? mvxViewModel)
         {
-            var embeddedViewModelKey = intent.Extras.GetInt(SubViewModelKey);
-            if (embeddedViewModelKey != 0)
+            var embeddedViewModelKey = intent.Extras?.GetInt(SubViewModelKey);
+            if (embeddedViewModelKey != null && embeddedViewModelKey.Value != 0)
             {
+                mvxViewModel = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>().Get(embeddedViewModelKey.Value);
+                if (mvxViewModel != null)
                 {
-                    mvxViewModel = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>().Get(embeddedViewModelKey);
-                    if (mvxViewModel != null)
-                    {
-                        RemoveSubViewModelWithKey(embeddedViewModelKey);
-                        return true;
-                    }
+                    RemoveSubViewModelWithKey(embeddedViewModelKey.Value);
+                    return true;
                 }
             }
+
             mvxViewModel = null;
             return false;
         }
@@ -146,13 +145,13 @@ namespace MvvmCross.Platforms.Android.Views
             //                intent.AddFlags(ActivityFlags.ClearTop);
         }
 
-        public virtual (Intent intent, int key) GetIntentWithKeyFor(IMvxViewModel viewModel, MvxViewModelRequest request)
+        public virtual (Intent intent, int key) GetIntentWithKeyFor(IMvxViewModel existingViewModelToUse, MvxViewModelRequest? request)
         {
-            request = request ?? MvxViewModelRequest.GetDefaultRequest(viewModel.GetType());
+            request ??= MvxViewModelRequest.GetDefaultRequest(existingViewModelToUse.GetType());
             var intent = GetIntentFor(request);
 
             var childViewModelCache = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>();
-            var key = childViewModelCache.Cache(viewModel);
+            var key = childViewModelCache.Cache(existingViewModelToUse);
             intent.PutExtra(SubViewModelKey, key);
 
             return (intent, key);
@@ -165,4 +164,5 @@ namespace MvvmCross.Platforms.Android.Views
 
         #endregion Implementation of IMvxAndroidViewModelRequestTranslator
     }
+#nullable restore
 }

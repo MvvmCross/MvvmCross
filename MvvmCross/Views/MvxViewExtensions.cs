@@ -44,7 +44,7 @@ namespace MvvmCross.Views
             // nothing needed currently
         }
 
-        public static Type FindAssociatedViewModelTypeOrNull(this IMvxView view)
+        public static Type? FindAssociatedViewModelTypeOrNull(this IMvxView view)
         {
             if (view == null)
                 throw new ArgumentNullException(nameof(view));
@@ -64,7 +64,7 @@ namespace MvvmCross.Views
         {
             var propertyInfo = view?.GetType().GetProperty("ViewModel");
 
-            return propertyInfo?.GetGetMethod().Invoke(view, new object[] { }) as IMvxViewModel;
+            return propertyInfo?.GetGetMethod().Invoke(view, Array.Empty<object>()) as IMvxViewModel;
         }
 
         public static IMvxBundle CreateSaveStateBundle(this IMvxView view)

@@ -63,11 +63,8 @@ namespace MvvmCross.Binding.Bindings.Source
         {
             if (isDisposing)
             {
-                if (_subscription != null)
-                {
-                    _subscription.Dispose();
-                    _subscription = null;
-                }
+                _subscription?.Dispose();
+                _subscription = null;
             }
         }
 

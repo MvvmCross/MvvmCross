@@ -12,7 +12,8 @@ using System.Runtime.CompilerServices;
 
 namespace MvvmCross.Logging.LogProviders
 {
-    public delegate bool Logger(MvxLogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters);
+#nullable enable
+    public delegate bool Logger(MvxLogLevel logLevel, Func<string>? messageFunc, Exception? exception = null, params object?[] formatParameters);
 
     public abstract class MvxBaseLogProvider : IMvxLogProvider
     {
@@ -55,4 +56,5 @@ namespace MvvmCross.Logging.LogProviders
         protected virtual OpenMdc GetOpenMdcMethod()
             => (_, __) => NoopDisposableInstance;
     }
+#nullable restore
 }

@@ -41,9 +41,7 @@ namespace MvvmCross.Binding.Extensions
             var itemsList = items as IList;
             if (itemsList != null)
             {
-                {
-                    return itemsList.IndexOf(item);
-                }
+                return itemsList.IndexOf(item);
             }
 
             var enumerator = items.GetEnumerator();
@@ -90,7 +88,7 @@ namespace MvvmCross.Binding.Extensions
         public static IEnumerable Filter(this IEnumerable items, Func<object, bool> predicate)
         {
             if (items == null)
-                return null;
+                return Array.Empty<object>();
 
             var matchList = new List<object>();
             foreach (var item in items)
@@ -101,7 +99,7 @@ namespace MvvmCross.Binding.Extensions
             }
 
             if (matchList.Count == 0)
-                return null;
+                return Array.Empty<object>();
 
             return matchList;
         }

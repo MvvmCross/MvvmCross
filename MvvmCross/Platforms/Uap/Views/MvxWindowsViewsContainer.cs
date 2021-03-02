@@ -48,13 +48,13 @@ namespace MvvmCross.Platforms.Uap.Views
             return requestText;
         }
 
-        public string GetRequestTextWithKeyFor(IMvxViewModel viewModel)
+        public string GetRequestTextWithKeyFor(IMvxViewModel existingViewModelToUse)
         {
             var returnData = new Dictionary<string, string>();
             var converter = Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>();
-            var request = MvxViewModelRequest.GetDefaultRequest(viewModel.GetType());
+            var request = MvxViewModelRequest.GetDefaultRequest(existingViewModelToUse.GetType());
 
-            var key = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>().Cache(viewModel);
+            var key = Mvx.IoCProvider.Resolve<IMvxChildViewModelCache>().Cache(existingViewModelToUse);
             returnData.Add(ExtrasKey, converter.Serializer.SerializeObject(request));
             returnData.Add(SubViewModelKey, key.ToString());
 

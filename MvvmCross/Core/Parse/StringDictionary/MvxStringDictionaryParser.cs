@@ -45,16 +45,14 @@ namespace MvvmCross.Core.Parse.StringDictionary
             var key = ReadValue();
             if (!(key is string))
             {
-                throw new MvxException("Unexpected object in key for keyvalue pair {0} at position {1}",
-                                       key?.GetType().Name, CurrentIndex);
+                throw new MvxException($"Unexpected object in key for keyvalue pair {key?.GetType().Name} at position {CurrentIndex}");
             }
 
             SkipWhitespace();
 
             if (CurrentChar != '=')
             {
-                throw new MvxException("Unexpected character in keyvalue pair {0} at position {1}", CurrentChar,
-                                       CurrentIndex);
+                throw new MvxException($"Unexpected character in keyvalue pair {CurrentChar} at position {CurrentIndex}");
             }
 
             MoveNext();
@@ -71,8 +69,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
             }
             else
             {
-                throw new MvxException("Unexpected object in value for keyvalue pair {0} for key {1} at position {2}",
-                                       value?.GetType().Name, key, CurrentIndex);
+                throw new MvxException($"Unexpected object in value for keyvalue pair {value?.GetType().Name} for key {key} at position {CurrentIndex}");
             }
         }
     }

@@ -50,10 +50,14 @@ namespace MvvmCross.WeakSubscription
             _sourceReference = new WeakReference<TSource>(source);
             _sourceEventInfo = sourceEventInfo;
 
-            // TODO: need to move this virtual call out of the constructor - need to implement a separate Init() method
-            _ourEventHandler = CreateEventHandler();
+            _ourEventHandler = Init();
 
             AddEventHandler();
+        }
+
+        private Delegate Init()
+        {
+            return CreateEventHandler();
         }
 
         protected virtual Delegate CreateEventHandler()

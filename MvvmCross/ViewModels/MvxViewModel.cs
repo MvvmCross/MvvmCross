@@ -95,7 +95,7 @@ namespace MvvmCross.ViewModels
     public abstract class MvxViewModelResult<TResult> : MvxViewModel, IMvxViewModelResult<TResult>
         where TResult : notnull
     {
-        public TaskCompletionSource<object>? CloseCompletionSource { get; set; }
+        public TaskCompletionSource<object?>? CloseCompletionSource { get; set; }
 
         public override void ViewDestroy(bool viewFinishing = true)
         {

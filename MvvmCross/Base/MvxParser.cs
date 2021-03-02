@@ -17,11 +17,8 @@ namespace MvvmCross.Base
         protected string? FullText { get; private set; }
         protected int CurrentIndex { get; private set; }
 
-        protected virtual void Reset(string textToParse)
+        protected virtual void Reset(string? textToParse)
         {
-            if (textToParse == null)
-                throw new ArgumentNullException(nameof(textToParse));
-
             FullText = textToParse;
             CurrentIndex = 0;
         }
@@ -52,14 +49,13 @@ namespace MvvmCross.Base
             if (quoteDelimiterChar != '\'' && quoteDelimiterChar != '\"')
             {
                 throw new MvxException(
-                    "Error parsing string indexer - unexpected quote character {0} in text {1}",
-                    quoteDelimiterChar, FullText);
+                    $"Error parsing string indexer - unexpected quote character {quoteDelimiterChar} in text {FullText}");
             }
 
             MoveNext();
             if (IsComplete)
             {
-                throw new MvxException("Error parsing string indexer - unterminated in text {0}", FullText);
+                throw new MvxException($"Error parsing string indexer - unterminated in text {FullText}");
             }
 
             var textBuilder = new StringBuilder();
@@ -67,7 +63,7 @@ namespace MvvmCross.Base
             {
                 if (IsComplete)
                 {
-                    throw new MvxException("Error parsing string indexer - unterminated in text {0}", FullText);
+                    throw new MvxException($"Error parsing string indexer - unterminated in text {FullText}");
                 }
 
                 if (nextCharEscaped)
@@ -109,7 +105,7 @@ namespace MvvmCross.Base
             var integerText = integerStringBuilder.ToString();
             if (!uint.TryParse(integerText, out index))
             {
-                throw new MvxException("Unable to parse integer text from {0} in {1}", integerText, FullText);
+                throw new MvxException($"Unable to parse integer text from {integerText} in {FullText}");
             }
             return index;
         }
@@ -170,7 +166,7 @@ namespace MvvmCross.Base
                     // Unicode hexa escape (exactly 8 digits, first four must be 0000)
                     var firstFourDigits = ReadNDigits(4);
                     if (firstFourDigits != "0000")
-                        throw new MvxException("\\U unicode character does not start with 0000 in {1}", FullText);
+                        throw new MvxException($"\\U unicode character does not start with 0000 in {FullText}");
                     return ReadFourDigitUnicodeCharacter();
 
                 default:
@@ -184,7 +180,7 @@ namespace MvvmCross.Base
             var digits = ReadNDigits(4);
             var number = uint.Parse(digits, NumberStyles.HexNumber, NumberFormatInfo.InvariantInfo);
             if (number > ushort.MaxValue)
-                throw new MvxException("\\u unicode character {0} out of range in {1}", number, FullText);
+                throw new MvxException($"\\u unicode character {number} out of range in {FullText}");
             return (char)number;
         }
 
@@ -194,12 +190,11 @@ namespace MvvmCross.Base
             for (int i = 0; i < count; i++)
             {
                 if (IsComplete)
-                    throw new MvxException("Error while reading {0} of {1} digits in {2}", i + 1, count, FullText);
+                    throw new MvxException($"Error while reading {i + 1} of {count} digits in {FullText}");
 
                 var currentChar = CurrentChar;
                 if (!char.IsDigit(currentChar))
-                    throw new MvxException("Error while reading {0} of {1} digits in {2} - not a char {3}", i + 1, count,
-                                           FullText, currentChar);
+                    throw new MvxException($"Error while reading {i + 1} of {count} digits in {FullText} - not a char {currentChar}");
 
                 toReturn.Append(currentChar);
                 MoveNext();
@@ -281,7 +276,7 @@ namespace MvvmCross.Base
 
             if (IsComplete)
             {
-                throw new MvxException("Unexpected termination while reading value in {0}", FullText);
+                throw new MvxException($"Unexpected termination while reading value in {FullText}");
             }
 
             var currentChar = CurrentChar;
@@ -403,8 +398,7 @@ namespace MvvmCross.Base
                 if (currentChar == '.')
                 {
                     if (decimalPeriodSeen)
-                        throw new MvxException("Multiple decimal places seen in number in {0} at position {1}", FullText,
-                                               CurrentIndex);
+                        throw new MvxException($"Multiple decimal places seen in number in {FullText} at position {CurrentIndex}");
                     decimalPeriodSeen = true;
                 }
                 else if (!char.IsDigit(currentChar))
@@ -439,7 +433,7 @@ namespace MvvmCross.Base
                                     out doubleResult))
                     return doubleResult;
 
-                throw new MvxException("Failed to parse double from {0} in {1}", numberText, FullText);
+                throw new MvxException($"Failed to parse double from {numberText} in {FullText}");
             }
             else
             {
@@ -451,7 +445,7 @@ namespace MvvmCross.Base
                                    out intResult))
                     return intResult;
 
-                throw new MvxException("Failed to parse Int64 from {0} in {1}", numberText, FullText);
+                throw new MvxException($"Failed to parse Int64 from {numberText} in {FullText}");
             }
         }
 
@@ -467,7 +461,7 @@ namespace MvvmCross.Base
             }
             catch (ArgumentException exception)
             {
-                throw exception.MvxWrap("Problem parsing {0} from {1} in {2}", enumerationType.Name, name, FullText);
+                throw exception.MvxWrap($"Problem parsing {enumerationType.Name} from {name} in {FullText}");
             }
         }
 
@@ -514,8 +508,7 @@ namespace MvvmCross.Base
             var firstChar = CurrentChar;
             if (!IsValidFirstCharacterOfCSharpName(firstChar))
             {
-                throw new MvxException("PropertyName must start with letter - position {0} in {1} - char {2}",
-                                       CurrentIndex, FullText, firstChar);
+                throw new MvxException($"PropertyName must start with letter - position {CurrentIndex} in {FullText} - char {firstChar}");
             }
             var toReturn = new StringBuilder();
             toReturn.Append(firstChar);

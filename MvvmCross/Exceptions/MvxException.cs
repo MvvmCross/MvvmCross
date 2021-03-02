@@ -20,14 +20,14 @@ namespace MvvmCross.Exceptions
         {
         }
 
-        public MvxException(string messageFormat, params object[] messageFormatArguments)
+        public MvxException(string messageFormat, params object?[] messageFormatArguments)
             : base(string.Format(messageFormat, messageFormatArguments))
         {
         }
 
         // the order of parameters here is slightly different to that normally expected in an exception
         // - but this order allows us to put string.Format in place
-        public MvxException(Exception innerException, string messageFormat, params object[] formatArguments)
+        public MvxException(Exception innerException, string messageFormat, params object?[] formatArguments)
             : base(string.Format(messageFormat, formatArguments), innerException)
         {
         }

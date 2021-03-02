@@ -89,10 +89,19 @@ namespace MvvmCross.Binding.BindingContext
 
         public void Dispose()
         {
-            if (string.IsNullOrEmpty(_clearBindingKey))
-                Apply();
-            else
-                ApplyWithClearBindingKey(_clearBindingKey);
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (string.IsNullOrEmpty(_clearBindingKey))
+                    Apply();
+                else
+                    ApplyWithClearBindingKey(_clearBindingKey);
+            }
         }
     }
 }

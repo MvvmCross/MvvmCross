@@ -10,6 +10,7 @@ using MvvmCross.Views;
 
 namespace MvvmCross.Platforms.Console.Views
 {
+#nullable enable
     public class MvxConsoleViewDispatcher
         : MvxMainThreadAsyncDispatcher
         , IMvxViewDispatcher
@@ -36,4 +37,5 @@ namespace MvvmCross.Platforms.Console.Views
             return true;
         }
     }
+#nullable restore
 }

@@ -6,12 +6,13 @@ using System;
 
 namespace MvvmCross.Navigation
 {
+#nullable enable
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
     public sealed class MvxNavigationAttribute : Attribute
     {
-        public Type ViewModelOrFacade { get; private set; }
-        
-        public string UriRegex { get; private set; }
+        public Type ViewModelOrFacade { get; }
+
+        public string UriRegex { get; }
 
         public MvxNavigationAttribute(Type viewModelOrFacade, string uriRegex)
         {
@@ -19,4 +20,5 @@ namespace MvvmCross.Navigation
             UriRegex = uriRegex;
         }
     }
+#nullable restore
 }

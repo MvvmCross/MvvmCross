@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
@@ -53,6 +53,13 @@ namespace MvvmCross.Binding.BindingContext
             }
         }
 
+        public static void AddBinding(this IMvxBindingContextOwner view, object target,
+                                      MvxBindingDescription bindingDescription, object clearKey = null)
+        {
+            var descriptions = new[] { bindingDescription };
+            view.AddBindings(target, descriptions, clearKey);
+        }
+
         public static void AddBindings(this IMvxBindingContextOwner view, object target, IEnumerable<IMvxUpdateableBinding> bindings, object clearKey = null)
         {
             if (bindings == null)
@@ -66,13 +73,6 @@ namespace MvvmCross.Binding.BindingContext
         {
             var bindings = Binder.Bind(view.BindingContext.DataContext, target, bindingText);
             view.AddBindings(target, bindings, clearKey);
-        }
-
-        public static void AddBinding(this IMvxBindingContextOwner view, object target,
-                                      MvxBindingDescription bindingDescription, object clearKey = null)
-        {
-            var descriptions = new[] { bindingDescription };
-            view.AddBindings(target, descriptions, clearKey);
         }
 
         public static void AddBindings(this IMvxBindingContextOwner view, object target,

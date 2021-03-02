@@ -9,7 +9,7 @@ namespace MvvmCross.Core.Parse.StringDictionary
 #nullable enable
     public interface IMvxStringDictionaryWriter
     {
-        string Write(IDictionary<string, string> dictionary);
+        string Write(IDictionary<string, string>? dictionary);
     }
 #nullable restore
 }

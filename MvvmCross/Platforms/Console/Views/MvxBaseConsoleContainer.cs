@@ -11,6 +11,7 @@ using MvvmCross.Views;
 
 namespace MvvmCross.Platforms.Console.Views
 {
+#nullable enable
     public abstract class MvxBaseConsoleContainer
         : MvxViewsContainer, IMvxConsoleNavigation
     {
@@ -23,7 +24,7 @@ namespace MvvmCross.Platforms.Console.Views
 
         protected Task<bool> HandlePresentationChange(MvxPresentationHint hint)
         {
-            Func<MvxPresentationHint, Task<bool>> handler;
+            Func<MvxPresentationHint, Task<bool>>? handler;
 
             if (_presentationHintHandlers.TryGetValue(hint.GetType(), out handler))
             {
@@ -45,10 +46,11 @@ namespace MvvmCross.Platforms.Console.Views
         {
             if (await HandlePresentationChange(hint)) return true;
 
-            MvxLog.Instance.Warn("Hint ignored {0}", hint.GetType().Name);
+            MvxLog.Instance?.Warn("Hint ignored {0}", hint.GetType().Name);
             return false;
         }
 
-        public abstract Task<bool> Close(IMvxViewModel toClose);
+        public abstract Task<bool> Close(IMvxViewModel viewModel);
     }
+#nullable restore
 }
