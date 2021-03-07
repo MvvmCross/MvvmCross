@@ -46,6 +46,31 @@ If this was using MvxPanelEnum.Left for instance this would be shown in the left
 
 If the last value set in the attribute was set to false this would simply add the view to the left hand panel but leave the view hidden until the user performed some action in the UI that would result in that panel being shown.
 
+## IMvxSidebarMenu
+
+An optional `IMvxSidebarMenu` interface is provided for ViewControllers that use the `MvxSidebarPresentation` attribute with their panel set to left or right.
+
+Implementing the interface provides the following lifecycle callbacks:
+
+* `MenuWillOpen()`
+* `MenuDidOpen()`
+* `MenuWillClose()`
+* `MenuDidClose()`
+
+And the following configuration options:
+
+* `bool AnimateMenu`
+* `bool DisablePanGesture`
+* `float DarkOverlayAlpha`
+* `bool HasDarkOverlay`
+* `bool HasShadowing`
+* `float ShadowOpacity`
+* `float ShadowRadius`
+* `UIColor ShadowColor`
+* `UIImage MenuButtonImage`
+* `int MenuWidth`
+* `bool ReopenOnRotate`
+
 ## MvxSplitViewBehaviour
 
 The MvxSidePanelsPresenter also contains a feature to allow this use of UISplitViewControllers "inline" with normal view controllers.  The presenter will automatically detect if the application is running on a large screen device (iPad) and provided the attribute details some behaviour other than None will respond accordingly.
