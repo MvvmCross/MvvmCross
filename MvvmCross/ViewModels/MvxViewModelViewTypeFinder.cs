@@ -5,6 +5,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.IoC;
 using MvvmCross.Logging;
 using MvvmCross.Views;
@@ -44,7 +45,7 @@ namespace MvvmCross.ViewModels
             if (typeByName != null)
                 return typeByName;
 
-            MvxLog.Instance?.Trace("No view model association found for candidate view {0}", candidateType.Name);
+            MvxLogHost.Default?.Log(LogLevel.Warning, "No view model association found for candidate view {name}", candidateType.Name);
             return null;
         }
 
@@ -71,7 +72,7 @@ namespace MvvmCross.ViewModels
             var viewModelPropertyInfo = candidateType
                 .GetProperties()
                 .FirstOrDefault(
-                    x => x.Name == "ViewModel" && 
+                    x => x.Name == "ViewModel" &&
                     !x.PropertyType.GetTypeInfo().IsInterface &&
                     !x.PropertyType.GetTypeInfo().IsAbstract);
 

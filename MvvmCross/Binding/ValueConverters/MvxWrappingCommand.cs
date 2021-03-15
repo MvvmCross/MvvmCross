@@ -5,6 +5,7 @@
 using System;
 using System.Reflection;
 using System.Windows.Input;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.WeakSubscription;
 
@@ -42,7 +43,7 @@ namespace MvvmCross.Binding.ValueConverters
                 return false;
 
             if (parameter != null)
-                MvxLog.Instance.Warn("Non-null parameter will be ignored in MvxWrappingCommand.CanExecute");
+                MvxLogHost.Default?.Log(LogLevel.Warning, "Non-null parameter will be ignored in MvxWrappingCommand.CanExecute");
 
             return _wrapped.CanExecute(_commandParameterOverride);
         }
@@ -53,7 +54,7 @@ namespace MvvmCross.Binding.ValueConverters
                 return;
 
             if (parameter != null)
-                MvxLog.Instance.Warn("Non-null parameter overridden in MvxWrappingCommand");
+                MvxLogHost.Default?.Log(LogLevel.Warning, "Non-null parameter overridden in MvxWrappingCommand");
             _wrapped.Execute(_commandParameterOverride);
         }
 

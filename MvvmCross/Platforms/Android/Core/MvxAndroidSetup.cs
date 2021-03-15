@@ -184,7 +184,7 @@ namespace MvvmCross.Platforms.Android.Core
 
             var bindingBuilder = CreateBindingBuilder();
             RegisterBindingBuilderCallbacks(iocProvider);
-            bindingBuilder.DoRegistration();
+            bindingBuilder.DoRegistration(iocProvider);
         }
 
         protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)
@@ -296,7 +296,7 @@ namespace MvvmCross.Platforms.Android.Core
         }
     }
 
-    public class MvxAndroidSetup<TApplication> : MvxAndroidSetup
+    public abstract class MvxAndroidSetup<TApplication> : MvxAndroidSetup
         where TApplication : class, IMvxApplication, new()
     {
         protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();

@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Logging;
 
@@ -91,7 +92,10 @@ namespace MvvmCross.ViewModels
             }
 
             if (ShouldLogInpc())
-                MvxLog.Instance?.Trace($"Property '{changingArgs.PropertyName}' changing value to {changingArgs.NewValue}");
+            {
+                MvxLogHost.Default?.Log(LogLevel.Trace, "Property '{propertyName}' changing value to {newValue}",
+                    changingArgs.PropertyName, changingArgs.NewValue);
+            }
 
             PropertyChanging?.Invoke(this, changingArgs);
 
@@ -131,7 +135,7 @@ namespace MvvmCross.ViewModels
             void raiseChange()
             {
                 if (ShouldLogInpc())
-                    MvxLog.Instance?.Trace($"Property '{changedArgs.PropertyName}' value changed");
+                    MvxLogHost.Default?.Log(LogLevel.Trace, "Property '{propertyName}' value changed", changedArgs.PropertyName);
                 PropertyChanged?.Invoke(this, changedArgs);
             }
 

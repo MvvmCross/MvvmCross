@@ -6,11 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Commands;
 using MvvmCross.IoC;
-using MvvmCross.Logging;
-using MvvmCross.Logging.LogProviders;
 using MvvmCross.Navigation;
 using MvvmCross.Plugin;
 using MvvmCross.ViewModels;
@@ -32,7 +31,7 @@ namespace MvvmCross.Core
 
         protected static List<Assembly> ViewAssemblies { get; } = new List<Assembly>();
 
-        protected IMvxLog? SetupLog { get; private set; }
+        protected ILogger? SetupLog { get; private set; }
 
         public MvxSetupState State
         {
@@ -94,14 +93,14 @@ namespace MvvmCross.Core
             RegisterDefaultSetupDependencies(_iocProvider);
             RegisterSetupDependencies?.Invoke(_iocProvider);
             InitializeLoggingServices(_iocProvider);
-            SetupLog?.Trace("Setup: Primary start");
-            SetupLog?.Trace("Setup: FirstChance start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: Primary start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: FirstChance start");
             InitializeFirstChance(_iocProvider);
-            SetupLog?.Trace("Setup: MvvmCross settings start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: MvvmCross settings start");
             InitializeSettings(_iocProvider);
-            SetupLog?.Trace("Setup: Singleton Cache start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: Singleton Cache start");
             InitializeSingletonCache();
-            SetupLog?.Trace("Setup: ViewDispatcher start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: ViewDispatcher start");
             InitializeViewDispatcher(_iocProvider);
             State = MvxSetupState.InitializedPrimary;
         }
@@ -119,39 +118,39 @@ namespace MvvmCross.Core
             }
 
             State = MvxSetupState.InitializingSecondary;
-            SetupLog?.Trace("Setup: Bootstrap actions");
+            SetupLog?.Log(LogLevel.Trace, "Setup: Bootstrap actions");
             PerformBootstrapActions();
-            SetupLog?.Trace("Setup: StringToTypeParser start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: StringToTypeParser start");
             InitializeStringToTypeParser(_iocProvider);
-            SetupLog?.Trace("Setup: FillableStringToTypeParser start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: FillableStringToTypeParser start");
             InitializeFillableStringToTypeParser(_iocProvider);
-            SetupLog?.Trace("Setup: PluginManagerFramework start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: PluginManagerFramework start");
             var pluginManager = InitializePluginFramework(_iocProvider);
-            SetupLog?.Trace("Setup: Create App");
+            SetupLog?.Log(LogLevel.Trace, "Setup: Create App");
             var app = InitializeMvxApplication(_iocProvider);
-            SetupLog?.Trace("Setup: NavigationService");
+            SetupLog?.Log(LogLevel.Trace, "Setup: NavigationService");
             InitializeNavigationService(_iocProvider);
-            SetupLog?.Trace("Setup: App start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: App start");
             InitializeApp(pluginManager, app);
-            SetupLog?.Trace("Setup: ViewModelTypeFinder start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: ViewModelTypeFinder start");
             InitializeViewModelTypeFinder(_iocProvider);
-            SetupLog?.Trace("Setup: ViewsContainer start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: ViewsContainer start");
             InitializeViewsContainer(_iocProvider);
-            SetupLog?.Trace("Setup: Lookup Dictionary start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: Lookup Dictionary start");
             var lookup = InitializeLookupDictionary(_iocProvider);
-            SetupLog?.Trace("Setup: Views start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: Views start");
             InitializeViewLookup(lookup, _iocProvider);
-            SetupLog?.Trace("Setup: CommandCollectionBuilder start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: CommandCollectionBuilder start");
             InitializeCommandCollectionBuilder(_iocProvider);
-            SetupLog?.Trace("Setup: NavigationSerializer start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: NavigationSerializer start");
             InitializeNavigationSerializer(_iocProvider);
-            SetupLog?.Trace("Setup: InpcInterception start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: InpcInterception start");
             InitializeInpcInterception(_iocProvider);
-            SetupLog?.Trace("Setup: InpcInterception start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: InpcInterception start");
             InitializeViewModelCache(_iocProvider);
-            SetupLog?.Trace("Setup: LastChance start");
+            SetupLog?.Log(LogLevel.Trace, "Setup: LastChance start");
             InitializeLastChance(_iocProvider);
-            SetupLog?.Trace("Setup: Secondary end");
+            SetupLog?.Log(LogLevel.Trace, "Setup: Secondary end");
             State = MvxSetupState.Initialized;
         }
 
@@ -275,7 +274,6 @@ namespace MvvmCross.Core
         {
             ValidateArguments(iocProvider);
 
-            RegisterLogProvider(iocProvider);
             iocProvider.LazyConstructAndRegisterSingleton<IMvxSettings, MvxSettings>();
             iocProvider.LazyConstructAndRegisterSingleton<IMvxStringToTypeParser, MvxStringToTypeParser>();
             iocProvider.RegisterSingleton<IMvxPluginManager>(() => new MvxPluginManager(GetPluginConfiguration));
@@ -315,42 +313,19 @@ namespace MvvmCross.Core
         {
             ValidateArguments(iocProvider);
 
-            var logProvider = CreateLogProvider(iocProvider);
-            SetupLog = logProvider.GetLogFor<MvxSetup>();
-            var globalLog = logProvider.GetLogFor<MvxLog>();
-            MvxLog.Instance = globalLog;
-            iocProvider.RegisterSingleton(globalLog);
+            var logProvider = CreateLogProvider();
+
+            var loggerFactory = CreateLogFactory();
+            loggerFactory.AddProvider(logProvider);
+
+            iocProvider.RegisterSingleton(logProvider);
+            iocProvider.RegisterSingleton(loggerFactory);
+
+            SetupLog = loggerFactory.CreateLogger<MvxSetup>();
         }
 
-        public virtual MvxLogProviderType GetDefaultLogProviderType()
-            => MvxLogProviderType.Console;
-
-        protected virtual void RegisterLogProvider(IMvxIoCProvider iocProvider)
-        {
-            if (iocProvider == null)
-                throw new ArgumentNullException(nameof(iocProvider));
-
-            Func<IMvxLogProvider>? logProviderCreator = GetDefaultLogProviderType() switch
-            {
-                MvxLogProviderType.Console => () => new ConsoleLogProvider(),
-                MvxLogProviderType.EntLib => () => new EntLibLogProvider(),
-                MvxLogProviderType.Log4Net => () => new Log4NetLogProvider(),
-                MvxLogProviderType.Loupe => () => new LoupeLogProvider(),
-                MvxLogProviderType.NLog => () => new NLogLogProvider(),
-                MvxLogProviderType.Serilog => () => new SerilogLogProvider(),
-                _ => null,
-            };
-
-            if (logProviderCreator != null)
-                iocProvider.RegisterSingleton(logProviderCreator);
-        }
-
-        protected virtual IMvxLogProvider CreateLogProvider(IMvxIoCProvider iocProvider)
-        {
-            ValidateArguments(iocProvider);
-
-            return iocProvider.Resolve<IMvxLogProvider>();
-        }
+        protected abstract ILoggerProvider CreateLogProvider();
+        protected abstract ILoggerFactory CreateLogFactory();
 
         protected virtual IMvxViewModelLoader CreateViewModelLoader(IMvxIoCProvider iocProvider)
         {
@@ -462,7 +437,7 @@ namespace MvvmCross.Core
                 throw new ArgumentNullException(nameof(app));
 
             app.LoadPlugins(pluginManager);
-            SetupLog?.Trace("Setup: Application Initialize - On background thread");
+            SetupLog?.Log(LogLevel.Trace, "Setup: Application Initialize - On background thread");
             app.Initialize();
         }
 
@@ -491,7 +466,7 @@ namespace MvvmCross.Core
 
             CreateViewModelLoader(iocProvider);
             var navigationService = CreateNavigationService(iocProvider);
-            SetupLog?.Trace("Setup: Load navigation routes");
+            SetupLog?.Log(LogLevel.Trace, "Setup: Load navigation routes");
             LoadNavigationServiceRoutes(navigationService, iocProvider);
             return navigationService;
         }

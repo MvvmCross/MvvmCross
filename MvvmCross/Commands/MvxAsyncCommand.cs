@@ -5,6 +5,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Logging;
 
@@ -38,7 +39,7 @@ namespace MvvmCross.Commands
             {
                 if (_cts == null)
                 {
-                    MvxLog.Instance?.Warn( "MvxAsyncCommand : Attempt to cancel a task that is not running");
+                    MvxLogHost.Default?.Log(LogLevel.Warning, "MvxAsyncCommand : Attempt to cancel a task that is not running");
                 }
                 else
                 {
@@ -70,7 +71,7 @@ namespace MvvmCross.Commands
             }
             catch (Exception e)
             {
-                MvxLog.Instance?.Error("MvxAsyncCommand : exception executing task : ", e);
+                MvxLogHost.Default?.Log(LogLevel.Error, e, "MvxAsyncCommand : exception executing task");
                 throw;
             }
         }
@@ -101,7 +102,7 @@ namespace MvvmCross.Commands
                     }
                     else if (!_allowConcurrentExecutions)
                     {
-                        MvxLog.Instance?.Info("MvxAsyncCommand : execute ignored, already running.");
+                        MvxLogHost.Default?.Log(LogLevel.Information, "MvxAsyncCommand : execute ignored, already running.");
                         return;
                     }
                     _concurrentExecutions++;
@@ -121,7 +122,7 @@ namespace MvvmCross.Commands
                     }
                     catch (OperationCanceledException e)
                     {
-                        MvxLog.Instance?.Trace("MvxAsyncCommand : OperationCanceledException");
+                        MvxLogHost.Default?.Log(LogLevel.Trace, "MvxAsyncCommand : OperationCanceledException");
                         //Rethrow if the exception does not come from the current cancellation token
                         if (!hideCanceledException || e.CancellationToken != CancelToken)
                         {
@@ -154,7 +155,7 @@ namespace MvvmCross.Commands
         {
             if (_cts == null)
             {
-                MvxLog.Instance?.Error("MvxAsyncCommand : Unexpected ClearCancellationTokenSource, no token available!");
+                MvxLogHost.Default?.Log(LogLevel.Error, "MvxAsyncCommand : Unexpected ClearCancellationTokenSource, no token available!");
             }
             else
             {
@@ -167,7 +168,7 @@ namespace MvvmCross.Commands
         {
             if (_cts != null)
             {
-                MvxLog.Instance?.Error("MvxAsyncCommand : Unexpected InitCancellationTokenSource, a token is already available!");
+                MvxLogHost.Default?.Log(LogLevel.Error, "MvxAsyncCommand : Unexpected InitCancellationTokenSource, a token is already available!");
             }
             _cts = new CancellationTokenSource();
         }

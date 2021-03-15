@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 
@@ -79,7 +80,7 @@ namespace MvvmCross.Plugin
             }
             catch (Exception ex)
             {
-                MvxLog.Instance?.Warn("Failed to load plugin {0} with exception {1}", type.FullName, ex.ToLongString());
+                MvxLogHost.Default?.Log(LogLevel.Warning, ex, "Failed to load plugin {fullPluginName}", type.FullName);
                 return false;
             }
         }

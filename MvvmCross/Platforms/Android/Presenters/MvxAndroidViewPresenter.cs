@@ -15,6 +15,7 @@ using Android.Views;
 using AndroidX.ViewPager.Widget;
 using Google.Android.Material.Tabs;
 using Java.Lang;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Android.Core;
@@ -50,8 +51,8 @@ namespace MvvmCross.Platforms.Android.Presenters
         private readonly Lazy<IMvxNavigationSerializer> _navigationSerializer =
             new Lazy<IMvxNavigationSerializer>(() => Mvx.IoCProvider.Resolve<IMvxNavigationSerializer>());
 
-        private readonly Lazy<IMvxLog> _logger =
-            new Lazy<IMvxLog>(() => Mvx.IoCProvider.Resolve<IMvxLog>());
+        private readonly Lazy<ILogger?> _logger =
+            new Lazy<ILogger?>(() => MvxLogHost.GetLog<MvxAndroidViewPresenter>());
 
         protected IEnumerable<Assembly> AndroidViewAssemblies { get; set; }
 
@@ -210,7 +211,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             if (viewType.IsSubclassOf(typeof(DialogFragment)))
             {
-                _logger.Value?.Trace("PresentationAttribute not found for {0}. Assuming DialogFragment presentation", viewType.Name);
+                _logger.Value?.Log(LogLevel.Trace, "PresentationAttribute not found for {viewName}. Assuming DialogFragment presentation", viewType.Name);
                 return new MvxDialogFragmentPresentationAttribute(enterAnimation: int.MinValue)
                 {
                     ViewType = viewType, ViewModelType = viewModelType
@@ -219,7 +220,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             if (viewType.IsSubclassOf(typeof(Fragment)))
             {
-                _logger.Value?.Trace("PresentationAttribute not found for {0}. Assuming Fragment presentation", viewType.Name);
+                _logger.Value?.Log(LogLevel.Trace, "PresentationAttribute not found for {viewName}. Assuming Fragment presentation", viewType.Name);
                 return new MvxFragmentPresentationAttribute(GetCurrentActivityViewModelType(), global::Android.Resource.Id.Content)
                 {
                     ViewType = viewType, ViewModelType = viewModelType
@@ -228,7 +229,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             if (viewType.IsSubclassOf(typeof(Activity)))
             {
-                _logger.Value?.Trace("PresentationAttribute not found for {0}. Assuming Activity presentation", viewType.Name);
+                _logger.Value?.Log(LogLevel.Trace, "PresentationAttribute not found for {viewName}. Assuming Activity presentation", viewType.Name);
                 return new MvxActivityPresentationAttribute
                 {
                     ViewType = viewType, ViewModelType = viewModelType
@@ -266,7 +267,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                     var index = adapter.FragmentsInfo.IndexOf(fragmentInfo);
                     if (index < 0)
                     {
-                        _logger.Value?.Trace($"Did not find ViewPager index for {pagerFragmentAttribute.Tag}, skipping presentation change...");
+                        _logger.Value?.Log(LogLevel.Trace, "Did not find ViewPager index for {fragment}, skipping presentation change...", pagerFragmentAttribute.Tag);
                         return true;
                     }
 
@@ -348,7 +349,7 @@ namespace MvvmCross.Platforms.Android.Presenters
 
                 if (transitionElementPairs.Count == 0)
                 {
-                    _logger.Value?.Warn("No transition elements are provided");
+                    _logger.Value?.Log(LogLevel.Warning, "No transition elements are provided");
                     return bundle;
                 }
 
@@ -358,7 +359,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             }
             else
             {
-                _logger.Value?.Warn("Shared element transition requires Android v21+.");
+                _logger.Value?.Log(LogLevel.Warning, "Shared element transition requires Android v21+.");
             }
 
             return bundle;
@@ -398,7 +399,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 }
                 else
                 {
-                    _logger.Value?.Warn("A XML transitionName is required in order to transition a control when navigating.");
+                    _logger.Value?.Log(LogLevel.Warning, "A XML transitionName is required in order to transition a control when navigating.");
                 }
             }
 
@@ -430,7 +431,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             var activity = CurrentActivity;
             if (activity.IsActivityDead())
             {
-                _logger.Value?.Warn("Cannot Resolve current top activity. Creating new activity from Application Context");
+                _logger.Value?.Log(LogLevel.Warning, "Cannot Resolve current top activity. Creating new activity from Application Context");
                 intent.AddFlags(ActivityFlags.NewTask);
                 StartActivity(Application.Context, intent, bundle);
                 return;
@@ -491,7 +492,8 @@ namespace MvvmCross.Platforms.Android.Presenters
             var currentHostViewModelType = GetCurrentActivityViewModelType();
             if (attribute.ActivityHostViewModelType != currentHostViewModelType)
             {
-                _logger.Value?.Trace($"Activity host with ViewModelType {attribute.ActivityHostViewModelType} is not CurrentTopActivity. Showing Activity before showing Fragment for {attribute.ViewModelType}");
+                _logger.Value?.Log(LogLevel.Warning, "Activity host with ViewModelType {activityHostViewModelType} is not CurrentTopActivity. Showing Activity before showing Fragment for {viewModelType}",
+                    attribute.ActivityHostViewModelType, attribute.ViewModelType);
                 PendingRequest = request;
                 ShowHostActivity(attribute);
             }
@@ -519,7 +521,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                 throw new InvalidOperationException($"Fragment host not found when trying to show View {view.Name} as Nested Fragment");
 
             if (!fragmentHost.IsVisible)
-                _logger.Value?.Warn("Fragment host is not visible when trying to show View {0} as Nested Fragment", view!.Name);
+                _logger.Value?.Log(LogLevel.Warning, "Fragment host is not visible when trying to show View {viewName} as Nested Fragment", view!.Name);
 
             PerformShowFragmentTransaction(fragmentHost.ChildFragmentManager, attribute, request);
         }
@@ -627,7 +629,7 @@ namespace MvvmCross.Platforms.Android.Presenters
                     }
                     else
                     {
-                        _logger.Value?.Warn("A XML transitionName is required in order to transition a control when navigating.");
+                        _logger.Value?.Log(LogLevel.Warning, "A XML transitionName is required in order to transition a control when navigating.");
                     }
                 }
 
@@ -827,13 +829,13 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             if (currentView == null)
             {
-                _logger.Value?.Warn("Ignoring close for viewmodel - rootframe has no current page");
+                _logger.Value?.Log(LogLevel.Warning, "Ignoring close for viewmodel - rootframe has no current page");
                 return Task.FromResult(false);
             }
 
             if (currentView.ViewModel != viewModel)
             {
-                _logger.Value?.Warn("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
+                _logger.Value?.Log(LogLevel.Warning, "Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
                 return Task.FromResult(false);
             }
 
@@ -869,7 +871,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             catch (System.Exception ex)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                _logger.Value?.Trace("Cannot close any fragments", ex);
+                _logger.Value?.Log(LogLevel.Warning, ex, "Cannot close any fragments");
             }
             return true;
         }
@@ -932,7 +934,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             catch (System.Exception ex)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                _logger.Value?.Error("Cannot close fragment transaction", ex);
+                _logger.Value?.Log(LogLevel.Error, ex, "Cannot close fragment transaction");
                 return false;
             }
 
@@ -1090,6 +1092,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             }
             catch (System.Exception ex)
             {
+                _logger.Value?.Log(LogLevel.Error, ex, "Cannot create Fragment {fragmentName}", fragmentType.Name);
                 throw new MvxException(ex, $"Cannot create Fragment '{fragmentType.Name}'");
             }
         }

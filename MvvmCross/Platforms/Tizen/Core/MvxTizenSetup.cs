@@ -87,7 +87,7 @@ namespace MvvmCross.Platforms.Tizen.Core
         {
             RegisterBindingBuilderCallbacks(iocProvider);
             var bindingBuilder = CreateBindingBuilder();
-            bindingBuilder.DoRegistration();
+            bindingBuilder.DoRegistration(iocProvider);
         }
 
         protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)

@@ -121,7 +121,7 @@ namespace MvvmCross.Platforms.Mac.Core
         {
             RegisterBindingBuilderCallbacks(iocProvider);
             var bindingBuilder = CreateBindingBuilder();
-            bindingBuilder.DoRegistration();
+            bindingBuilder.DoRegistration(iocProvider);
         }
 
         protected virtual void RegisterBindingBuilderCallbacks(IMvxIoCProvider iocProvider)

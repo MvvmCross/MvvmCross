@@ -106,7 +106,7 @@ namespace MvvmCross.Forms.Platforms.Android.Core
             MvxBindingBuilder bindingBuilder = CreateBindingBuilder();
 
             RegisterBindingBuilderCallbacks(iocProvider);
-            bindingBuilder.DoRegistration();
+            bindingBuilder.DoRegistration(iocProvider);
         }
 
         protected override void FillTargetFactories(IMvxTargetBindingFactoryRegistry registry)

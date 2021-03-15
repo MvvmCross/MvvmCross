@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Core;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
@@ -24,8 +25,8 @@ namespace MvvmCross.Navigation
     /// <inheritdoc cref="IMvxNavigationService"/>
     public class MvxNavigationService : IMvxNavigationService
     {
-        private readonly Lazy<IMvxLog> _log = new Lazy<IMvxLog>(() =>
-            Mvx.IoCProvider.Resolve<IMvxLogProvider>().GetLogFor<MvxNavigationService>());
+        private readonly Lazy<ILogger?> _log = new Lazy<ILogger?>(() =>
+            MvxLogHost.GetLog<MvxNavigationService>());
 
         public IMvxViewDispatcher ViewDispatcher { get; }
 
@@ -85,7 +86,7 @@ namespace MvvmCross.Navigation
                 {
                     case 0:
                         entry = default;
-                        _log.Value.Trace("Unable to find routing for {0}", path);
+                        _log.Value?.Log(LogLevel.Trace, "Unable to find routing for {path}", path);
                         return false;
 
                     case 1:
@@ -101,7 +102,7 @@ namespace MvvmCross.Navigation
                     return true;
                 }
 
-                _log.Value.Warn("The following regular expressions match the provided url ({0}), each RegEx must be unique (otherwise try using IMvxRoutingFacade): {1}",
+                _log.Value?.Log(LogLevel.Warning, "The following regular expressions match the provided url ({count}), each RegEx must be unique (otherwise try using IMvxRoutingFacade): {matches}",
                     matches.Count - 1,
                     string.Join(", ", matches.Select(t => t.Key.ToString())));
 
@@ -111,7 +112,7 @@ namespace MvvmCross.Navigation
             }
             catch (Exception ex)
             {
-                _log.Value.Error("MvxNavigationService", "Unable to determine routability: {0}", ex);
+                _log.Value?.Log(LogLevel.Error, ex, "Unable to determine routability");
                 entry = default;
                 return false;
             }
@@ -389,7 +390,7 @@ namespace MvvmCross.Navigation
             var request = await NavigationRouteRequest(path, presentationBundle).ConfigureAwait(false);
             if (request.ViewModelInstance == null)
             {
-                _log.Value.Warn("Navigation Route Request doesn't have a ViewModelInstance");
+                _log.Value?.Log(LogLevel.Warning, "Navigation Route Request doesn't have a ViewModelInstance");
                 return false;
             }
 
@@ -403,7 +404,7 @@ namespace MvvmCross.Navigation
             var request = await NavigationRouteRequest(path, param, presentationBundle).ConfigureAwait(false);
             if (request.ViewModelInstance == null)
             {
-                _log.Value.Warn("Navigation Route Request doesn't have a ViewModelInstance");
+                _log.Value?.Log(LogLevel.Warning, "Navigation Route Request doesn't have a ViewModelInstance");
                 return false;
             }
             return await Navigate(request, request.ViewModelInstance, presentationBundle, cancellationToken).ConfigureAwait(false);
@@ -416,7 +417,7 @@ namespace MvvmCross.Navigation
             var request = await NavigationRouteRequest(path, presentationBundle).ConfigureAwait(false);
             if (request.ViewModelInstance == null)
             {
-                _log.Value.Warn("Navigation Route Request doesn't have a ViewModelInstance");
+                _log.Value?.Log(LogLevel.Warning, "Navigation Route Request doesn't have a ViewModelInstance");
                 return null;
             }
             return await Navigate(request, (IMvxViewModelResult<TResult>)request.ViewModelInstance, presentationBundle, cancellationToken).ConfigureAwait(false);
@@ -430,7 +431,7 @@ namespace MvvmCross.Navigation
             var request = await NavigationRouteRequest(path, param, presentationBundle).ConfigureAwait(false);
             if (request.ViewModelInstance == null)
             {
-                _log.Value.Warn("Navigation Route Request doesn't have a ViewModelInstance");
+                _log.Value?.Log(LogLevel.Warning, "Navigation Route Request doesn't have a ViewModelInstance");
                 return null;
             }
             return await Navigate(request, (IMvxViewModel<TParameter, TResult>)request.ViewModelInstance, param, presentationBundle, cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -560,7 +561,7 @@ namespace MvvmCross.Navigation
         {
             ValidateArguments(hint);
 
-            MvxLog.Instance?.Trace("Requesting presentation change");
+            _log.Value?.Log(LogLevel.Trace, "Requesting presentation change");
             var args = new ChangePresentationEventArgs(hint, cancellationToken);
             OnWillChangePresentation(this, args);
 
