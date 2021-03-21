@@ -128,7 +128,6 @@
     <PackageReference Include="Serilog" />
     <PackageReference Include="Serilog.Sinks.Xamarin" />
     <PackageReference Include="Xamarin.AndroidX.MediaRouter" />
-    <PackageReference Include="Xamarin.AndroidX.AppCompat.Resources" />
     <PackageReference Include="Xamarin.Google.Android.Material" />
   </ItemGroup>
   <ItemGroup>
