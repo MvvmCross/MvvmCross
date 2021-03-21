@@ -168,7 +168,7 @@ namespace MvvmCross.Platforms.Mac.Core
         }
     }
 
-    public class MvxMacSetup<TApplication> : MvxMacSetup
+    public abstract class MvxMacSetup<TApplication> : MvxMacSetup
         where TApplication : class, IMvxApplication, new()
     {
         protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();

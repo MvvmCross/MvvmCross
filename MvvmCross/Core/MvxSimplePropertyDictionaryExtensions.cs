@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
@@ -91,8 +92,9 @@ namespace MvvmCross.Core
                     return Type.Missing;
                 }
 
-                MvxLog.Instance?.Trace(
-                    $"Missing parameter for call to {debugText} - missing parameter {requiredParameter.Name} - asssuming null - this may fail for value types!");
+                MvxLogHost.Default?.Log(LogLevel.Trace,
+                    "Missing parameter for call to {debugText} - missing parameter {requiredParameterName} - asssuming null - this may fail for value types!",
+                    debugText, requiredParameter.Name);
 
                 parameterValue = string.Empty;
             }
@@ -129,8 +131,8 @@ namespace MvvmCross.Core
                 }
                 else
                 {
-                    MvxLog.Instance?.Trace(
-                        "Skipping serialization of property {0} - don't know how to serialize type {1} - some answers on http://stackoverflow.com/questions/16524236/custom-types-in-navigation-parameters-in-v3",
+                    MvxLogHost.Default?.Log(LogLevel.Trace,
+                        "Skipping serialization of property {propertyName} - don't know how to serialize type {propertyTypeName} - some answers on http://stackoverflow.com/questions/16524236/custom-types-in-navigation-parameters-in-v3",
                         propertyInfo.Property.Name,
                         propertyInfo.Property.PropertyType.Name);
                 }

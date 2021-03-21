@@ -5,8 +5,8 @@
 using System;
 using System.Windows.Input;
 using Foundation;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Base;
-using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using UIKit;
 
@@ -47,7 +47,8 @@ namespace MvvmCross.Platforms.Ios.Binding.Views
             }
             catch (Exception exception)
             {
-                MvxLog.Instance.Warn("Exception masked during CollectionView ReloadData {0}", exception.ToLongString());
+                MvxLogHost.GetLog<MvxBaseCollectionViewSource>()?.Log(LogLevel.Warning, exception,
+                    "Exception masked during CollectionView ReloadData");
             }
         }
 

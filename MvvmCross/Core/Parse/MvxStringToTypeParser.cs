@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 
 namespace MvvmCross.Core
@@ -43,8 +44,8 @@ namespace MvvmCross.Core
                 }
                 catch (Exception)
                 {
-                    MvxLog.Instance?.Error(
-                        "Failed to parse enum parameter {0} from string {1}", 
+                    MvxLogHost.Default?.Log(LogLevel.Error,
+                        "Failed to parse enum parameter {fieldOrParameterName} from string {input}",
                         fieldOrParameterName,
                         input);
                 }
@@ -57,8 +58,9 @@ namespace MvvmCross.Core
                     }
                     catch (Exception)
                     {
-                        MvxLog.Instance?.Error("Failed to create default enum value for {0} - will return null",
-                                       fieldOrParameterName);
+                        MvxLogHost.Default?.Log(LogLevel.Error,
+                            "Failed to create default enum value for {fieldOrParameterName} - will return null",
+                            fieldOrParameterName);
                     }
                 }
                 return enumValue;
@@ -82,8 +84,9 @@ namespace MvvmCross.Core
                 object result;
                 if (!TryParse(input, out result))
                 {
-                    MvxLog.Instance?.Error("Failed to parse {0} parameter {1} from string {2}",
-                                   GetType().Name, fieldOrParameterName, input);
+                    MvxLogHost.Default?.Log(LogLevel.Error,
+                        "Failed to parse {type} parameter {fieldOrParameterName} from string {input}",
+                        GetType().Name, fieldOrParameterName, input);
                 }
                 return result;
             }
@@ -228,8 +231,9 @@ namespace MvvmCross.Core
                 return extra.ReadValue(targetType, rawValue, fieldOrParameterName);
             }
 
-            MvxLog.Instance?.Error("Parameter {0} is invalid targetType {1}", fieldOrParameterName,
-                           targetType.Name);
+            MvxLogHost.Default?.Log(LogLevel.Error,
+                "Parameter {parameterName} is invalid targetType {typeName}",
+                fieldOrParameterName, targetType.Name);
             return null;
         }
     }

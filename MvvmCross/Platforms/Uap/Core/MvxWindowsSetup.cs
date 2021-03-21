@@ -82,8 +82,8 @@ namespace MvvmCross.Platforms.Uap.Core
         protected sealed override IMvxViewsContainer CreateViewsContainer(IMvxIoCProvider iocProvider)
         {
             var container = CreateStoreViewsContainer();
-            Mvx.IoCProvider.RegisterSingleton<IMvxWindowsViewModelRequestTranslator>(container);
-            Mvx.IoCProvider.RegisterSingleton<IMvxWindowsViewModelLoader>(container);
+            iocProvider.RegisterSingleton<IMvxWindowsViewModelRequestTranslator>(container);
+            iocProvider.RegisterSingleton<IMvxWindowsViewModelLoader>(container);
             var viewsContainer = container as MvxViewsContainer;
             if (viewsContainer == null)
                 throw new MvxException("CreateViewsContainer must return an MvxViewsContainer");
@@ -196,7 +196,7 @@ namespace MvvmCross.Platforms.Uap.Core
         }
     }
 
-    public class MvxWindowsSetup<TApplication> : MvxWindowsSetup
+    public abstract class MvxWindowsSetup<TApplication> : MvxWindowsSetup
          where TApplication : class, IMvxApplication, new()
     {
         public override IEnumerable<Assembly> GetViewModelAssemblies()

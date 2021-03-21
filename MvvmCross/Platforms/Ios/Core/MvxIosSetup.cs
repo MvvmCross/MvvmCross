@@ -191,7 +191,7 @@ namespace MvvmCross.Platforms.Ios.Core
         }
     }
 
-    public class MvxIosSetup<TApplication> : MvxIosSetup
+    public abstract class MvxIosSetup<TApplication> : MvxIosSetup
         where TApplication : class, IMvxApplication, new()
     {
         protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();

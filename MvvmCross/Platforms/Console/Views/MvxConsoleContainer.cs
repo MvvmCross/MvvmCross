@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Exceptions;
 using MvvmCross.Logging;
 using MvvmCross.Presenters.Hints;
@@ -49,7 +50,7 @@ namespace MvvmCross.Platforms.Console.Views
                 return await Close(closeHint.ViewModelToClose).ConfigureAwait(true);
             }
 
-            MvxLog.Instance?.Warn("Hint ignored {0}", hint.GetType().Name);
+            MvxLogHost.GetLog<MvxConsoleContainer>()?.Log(LogLevel.Trace, "Hint ignored {0}", hint.GetType().Name);
             return false;
         }
 
@@ -59,13 +60,13 @@ namespace MvvmCross.Platforms.Console.Views
 
             if (currentView == null)
             {
-                MvxLog.Instance?.Warn("Ignoring close for viewmodel - rootframe has no current page");
+                MvxLogHost.GetLog<MvxConsoleContainer>()?.Log(LogLevel.Warning, "Ignoring close for viewmodel - rootframe has no current page");
                 return Task.FromResult(true);
             }
 
             if (currentView.ViewModel != viewModel)
             {
-                MvxLog.Instance?.Warn("Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
+                MvxLogHost.GetLog<MvxConsoleContainer>()?.Log(LogLevel.Warning, "Ignoring close for viewmodel - rootframe's current page is not the view for the requested viewmodel");
                 return Task.FromResult(true);
             }
 

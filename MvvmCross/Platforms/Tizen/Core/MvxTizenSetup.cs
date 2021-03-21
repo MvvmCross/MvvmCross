@@ -144,7 +144,7 @@ namespace MvvmCross.Platforms.Tizen.Core
         }
     }
 
-    public class MvxTizenSetup<TApplication> : MvxTizenSetup
+    public abstract class MvxTizenSetup<TApplication> : MvxTizenSetup
         where TApplication : class, IMvxApplication, new()
     {
         protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();

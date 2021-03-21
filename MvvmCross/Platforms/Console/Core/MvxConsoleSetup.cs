@@ -58,7 +58,7 @@ namespace MvvmCross.Platforms.Console.Core
         }
     }
 
-    public class MvxConsoleSetup<TApplication> : MvxConsoleSetup
+    public abstract class MvxConsoleSetup<TApplication> : MvxConsoleSetup
         where TApplication : class, IMvxApplication, new()
     {
         protected override IMvxApplication CreateApp() => Mvx.IoCProvider.IoCConstruct<TApplication>();
