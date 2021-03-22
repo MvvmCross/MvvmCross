@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MvvmCross.Logging;
 using MvvmCross.Platforms.Ios.Presenters;
 using MvvmCross.ViewModels;
@@ -23,11 +23,12 @@ namespace MvvmCross.Platforms.Ios.Views
 
         public async Task<bool> ShowViewModel(MvxViewModelRequest request)
         {
-            Func<Task> action = () =>
-                {
-                    MvxLog.Instance.Trace("iOSNavigation", "Navigate requested");
-                    return _presenter.Show(request);
-                };
+            Task action()
+            {
+                MvxLogHost.GetLog<MvxIosViewDispatcher>()?.LogTrace(
+                    "Navigate requested to {viewModelType}", request?.ViewModelType);
+                return _presenter.Show(request);
+            }
             await ExecuteOnMainThreadAsync(action);
             return true;
         }
