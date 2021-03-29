@@ -15,6 +15,7 @@ using MvvmCross.Presenters;
 using UIKit;
 using MvvmCross.Presenters.Attributes;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace MvvmCross.Platforms.Tvos.Presenters
 {
@@ -25,6 +26,8 @@ namespace MvvmCross.Platforms.Tvos.Presenters
         protected IUIApplicationDelegate ApplicationDelegate => _applicationDelegate;
 
         private readonly UIWindow _window;
+        private readonly ILogger<MvxTvosViewPresenter> _logger;
+
         protected UIWindow Window => _window;
 
         public UINavigationController MasterNavigationController { get; protected set; }
@@ -41,6 +44,8 @@ namespace MvvmCross.Platforms.Tvos.Presenters
         {
             _applicationDelegate = applicationDelegate;
             _window = window;
+
+            _logger = MvxLogHost.GetLog<MvxTvosViewPresenter>();
         }
 
         public override MvxBasePresentationAttribute CreatePresentationAttribute(Type viewModelType, Type viewType)
@@ -48,8 +53,9 @@ namespace MvvmCross.Platforms.Tvos.Presenters
             if (MasterNavigationController == null &&
                (TabBarViewController == null || !TabBarViewController.CanShowChildView()))
             {
-                MvxLog.Instance.Trace($"PresentationAttribute nor MasterNavigationController found for {viewType.Name}. " +
-                    $"Assuming Root presentation");
+                _logger?.LogTrace(
+                    "PresentationAttribute nor MasterNavigationController found for {viewTypeName}. Assuming Root presentation",
+                    viewType.Name);
                 return new MvxRootPresentationAttribute()
                 {
                     WrapInNavigationController = true,
@@ -57,8 +63,10 @@ namespace MvvmCross.Platforms.Tvos.Presenters
                     ViewModelType = viewModelType
                 };
             }
-            MvxLog.Instance.Trace($"PresentationAttribute not found for {viewType.Name}. " +
-                $"Assuming animated Child presentation");
+
+            _logger?.LogTrace(
+                    "PresentationAttribute not found for {viewTypeName}. Assuming Root presentation",
+                    viewType.Name);
             return new MvxChildPresentationAttribute()
             {
                 ViewType = viewType,
@@ -78,7 +86,7 @@ namespace MvvmCross.Platforms.Tvos.Presenters
 
                     if (presentationAttribute == null)
                     {
-                        MvxLog.Instance.Warn("Override PresentationAttribute null. Falling back to existing attribute.");
+                        _logger?.LogWarning("Override PresentationAttribute null. Falling back to existing attribute.");
                     }
                     else
                     {
@@ -149,7 +157,8 @@ namespace MvvmCross.Platforms.Tvos.Presenters
         protected virtual Task<bool> CloseRootViewController(IMvxViewModel viewModel,
                                      MvxRootPresentationAttribute attribute)
         {
-            MvxLog.Instance.Warn($"Ignored attempt to close the window root (ViewModel type: {viewModel.GetType().Name}");
+            _logger?.LogWarning("Ignored attempt to close the window root (ViewModel type: {viewModelName}",
+                viewModel.GetType().Name);
             return Task.FromResult(false);
         }
 
