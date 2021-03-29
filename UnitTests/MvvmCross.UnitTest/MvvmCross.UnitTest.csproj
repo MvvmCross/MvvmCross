@@ -19,7 +19,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross.Tests\MvvmCross.Tests.csproj" />
     <ProjectReference Include="..\..\MvvmCross\MvvmCross.csproj" />
-    <ProjectReference Include="..\MvvmCross.UnitTest.Common\MvvmCross.UnitTest.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

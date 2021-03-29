@@ -7,14 +7,11 @@ using MvvmCross.Base;
 using MvvmCross.Binding;
 using MvvmCross.Core;
 using MvvmCross.IoC;
-using MvvmCross.Logging;
 
 namespace MvvmCross.Tests
 {
     public class MvxIoCSupportingTest
     {
-        private TestLogger _logger;
-
         public IMvxIoCProvider Ioc { get; private set; }
 
         public void Setup()
@@ -37,12 +34,8 @@ namespace MvvmCross.Tests
         {
             // fake set up of the IoC
             Reset();
-            var logProvider = CreateLogProvider();
-            var log = CreateLog(logProvider);
             Ioc = MvxIoCProvider.Initialize(options ?? CreateIocOptions());
             Ioc.RegisterSingleton(Ioc);
-            Ioc.RegisterSingleton(logProvider);
-            Ioc.RegisterSingleton(log);
 
             InitializeSingletonCache();
             InitializeMvxSettings();
@@ -65,31 +58,6 @@ namespace MvvmCross.Tests
 
         protected virtual void AdditionalSetup()
         {
-        }
-
-        public void SetupTestLogger(TestLogger logger)
-        {
-            _logger = logger;
-
-            var logProvider = CreateLogProvider();
-            var log = CreateLog(logProvider);
-
-            Ioc.RegisterSingleton(logProvider);
-            Ioc.RegisterSingleton(log);
-        }
-
-        protected virtual IMvxLogProvider CreateLogProvider()
-        {
-            var logProvider = new TestLogProvider(_logger);
-            return logProvider;
-        }
-
-        protected virtual IMvxLog CreateLog(IMvxLogProvider logProvider)
-        {
-            var globalLog = logProvider.GetLogFor<MvxIoCSupportingTest>();
-            MvxLog.Instance = globalLog;
-
-            return globalLog;
         }
 
         public void SetInvariantCulture()
