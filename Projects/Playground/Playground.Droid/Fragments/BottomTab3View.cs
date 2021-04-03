@@ -5,9 +5,9 @@
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
-using MvvmCross.Droid.Support.V4;
 using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
+using MvvmCross.Platforms.Android.Views.Fragments;
 using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Fragments
@@ -16,13 +16,6 @@ namespace Playground.Droid.Fragments
     [Register(nameof(BottomTab3View))]
     public class BottomTab3View : MvxFragment<BottomTab3ViewModel>
     {
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-
-            // Create your fragment here
-        }
-
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);

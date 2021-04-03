@@ -43,13 +43,15 @@ namespace Playground.Core.ViewModels
 
         public IMvxAsyncCommand ShowInitialViewModelsCommand { get; private set; }
 
-        private async Task ShowInitialViewModels()
+        private Task ShowInitialViewModels()
         {
-            var tasks = new List<Task>();
-            tasks.Add(NavigationService.Navigate<BottomTab1ViewModel>());
-            tasks.Add(NavigationService.Navigate<BottomTab2ViewModel>());
-            tasks.Add(NavigationService.Navigate<BottomTab3ViewModel>());
-            await Task.WhenAll(tasks);
+            var tasks = new List<Task>
+            {
+                NavigationService.Navigate<BottomTab1ViewModel>(),
+                NavigationService.Navigate<BottomTab2ViewModel>(),
+                NavigationService.Navigate<BottomTab3ViewModel>()
+            };
+            return Task.WhenAll(tasks);
         }
     }
 }

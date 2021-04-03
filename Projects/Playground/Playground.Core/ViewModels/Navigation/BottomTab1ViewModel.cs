@@ -2,8 +2,6 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.Threading.Tasks;
 using MvvmCross.Commands;
 using MvvmCross.Logging;
 using MvvmCross.Navigation;
@@ -20,12 +18,6 @@ namespace Playground.Core.ViewModels
 
             OpenBottomTab3Command = new MvxAsyncCommand(async () => await NavigationService.ChangePresentation(new MvxPagePresentationHint(typeof(BottomTab3ViewModel))));
         }
-
-        public override void ViewAppeared()
-        {
-            base.ViewAppeared();
-        }
-
         public IMvxAsyncCommand OpenBottomTab2Command { get; private set; }
 
         public IMvxAsyncCommand OpenBottomTab3Command { get; private set; }

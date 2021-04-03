@@ -1,41 +1,74 @@
-﻿using System;
-using MvvmCross;
-using MvvmCross.Platforms.Android;
-using MvvmCross.Platforms.Android.Presenters.Attributes;
-using MvvmCross.Presenters.Attributes;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MS-PL license.
+// See the LICENSE file in the project root for more information.
+
+#nullable enable
+using System;
 
 namespace MvvmCross.Platforms.Android.Presenters.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class MvxBottomNavigationViewPresentationAttribute : MvxFragmentPresentationAttribute
     {
-        public MvxBottomNavigationViewPresentationAttribute()
-        {
-        }
-
-        public MvxBottomNavigationViewPresentationAttribute(int bottomNavigationResourceId, string title, int drawableItemId = int.MinValue,
-            Type activityHostViewModelType = null, int fragmentContentId = int.MinValue, bool addToBackStack = false, Type fragmentHostViewType = null,
-            bool isCacheableFragment = false, string tag = null)
-            : base(activityHostViewModelType, fragmentContentId, addToBackStack,
-                  int.MinValue, int.MinValue, int.MinValue, int.MinValue, int.MinValue, fragmentHostViewType,
-                  isCacheableFragment, tag)
+        public MvxBottomNavigationViewPresentationAttribute(
+            int bottomNavigationResourceId, 
+            string title,
+            int drawableItemId = int.MinValue,
+            Type activityHostViewModelType = null!,
+            int fragmentContentId = int.MinValue,
+            bool addToBackStack = false,
+            Type fragmentHostViewType = null!,
+            bool isCacheableFragment = false,
+            string tag = null!)
+            : base(activityHostViewModelType,
+                fragmentContentId,
+                addToBackStack,
+                int.MinValue,
+                int.MinValue,
+                int.MinValue,
+                int.MinValue,
+                int.MinValue,
+                fragmentHostViewType,
+                isCacheableFragment,
+                tag)
         {
             BottomNavigationResourceId = bottomNavigationResourceId;
             DrawableItemId = drawableItemId;
             Title = title;
         }
 
-        public MvxBottomNavigationViewPresentationAttribute(string bottomNavigationResourceName, string title, int drawableItemId = int.MinValue,
-            Type activityHostViewModelType = null, bool addToBackStack = false, Type fragmentHostViewType = null,
-            bool isCacheableFragment = false, string tag = null)
-            : base(activityHostViewModelType, null, addToBackStack, null, null, null,
-                null, null, fragmentHostViewType, isCacheableFragment, tag)
+        public MvxBottomNavigationViewPresentationAttribute(
+            string bottomNavigationResourceName,
+            string title,
+            int drawableItemId = int.MinValue,
+            Type activityHostViewModelType = null!,
+            bool addToBackStack = false,
+            Type fragmentHostViewType = null!,
+            bool isCacheableFragment = false,
+            string tag = null!)
+            : base(
+                activityHostViewModelType,
+                null,
+                addToBackStack,
+                null,
+                null,
+                null,
+                null,
+                null,
+                fragmentHostViewType,
+                isCacheableFragment,
+                tag)
         {
-            var context = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext;
+            if (Mvx.IoCProvider.TryResolve(out IMvxAndroidGlobals globals) &&
+                globals.ApplicationContext.Resources != null)
+            {
+                var context = globals.ApplicationContext;
 
-            BottomNavigationResourceId = !string.IsNullOrEmpty(bottomNavigationResourceName)
-                ? context.Resources.GetIdentifier(bottomNavigationResourceName, "id", context.PackageName)
-                : global::Android.Resource.Id.Content;
+                BottomNavigationResourceId = !string.IsNullOrEmpty(bottomNavigationResourceName)
+                    ? context.Resources.GetIdentifier(bottomNavigationResourceName, "id", context.PackageName)
+                    : global::Android.Resource.Id.Content;
+            }
+
             DrawableItemId = drawableItemId;
             Title = title;
         }

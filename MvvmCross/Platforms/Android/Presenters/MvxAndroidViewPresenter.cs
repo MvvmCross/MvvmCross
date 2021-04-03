@@ -117,6 +117,7 @@ namespace MvvmCross.Platforms.Android.Presenters
             AttributeTypesToActionsDictionary.Register<MvxDialogFragmentPresentationAttribute>(ShowDialogFragment, CloseFragmentDialog);
             AttributeTypesToActionsDictionary.Register<MvxTabLayoutPresentationAttribute>(ShowTabLayout, CloseViewPagerFragment);
             AttributeTypesToActionsDictionary.Register<MvxViewPagerFragmentPresentationAttribute>(ShowViewPagerFragment, CloseViewPagerFragment);
+            AttributeTypesToActionsDictionary.Register<MvxBottomNavigationViewPresentationAttribute>(ShowBottomNavigationFragment, CloseFragment);
         }
 
         public override MvxBasePresentationAttribute GetPresentationAttribute(MvxViewModelRequest request)
@@ -266,11 +267,49 @@ namespace MvvmCross.Platforms.Android.Presenters
                     var index = adapter.FragmentsInfo.IndexOf(fragmentInfo);
                     if (index < 0)
                     {
-                        _logger.Value?.Trace($"Did not find ViewPager index for {pagerFragmentAttribute.Tag}, skipping presentation change...");
+                        _logger.Value?.Trace(
+                            $"Did not find ViewPager index for {pagerFragmentAttribute.Tag}, skipping presentation change...");
                         return true;
                     }
 
                     viewPager.SetCurrentItem(index, true);
+                    return true;
+                }
+            }
+            
+            if (attribute is MvxBottomNavigationViewPresentationAttribute bottomNavigationViewAttribute)
+            {
+                var bottomNavigationView =
+                    FindBottomNavigationViewInFragmentPresentation(bottomNavigationViewAttribute);
+
+                if (bottomNavigationView != null)
+                {
+                    var menuItem = bottomNavigationView.FindItemByViewModel(pagePresentationHint.ViewModel);
+
+                    if (menuItem == null)
+                    {
+                        _logger.Value?.Trace($"Did not find a menu item which corresponds to {pagePresentationHint.ViewModel}, skipping presentation change...");
+                        return false;
+                    }
+
+                    if (CurrentFragmentManager is null)
+                    {
+                        return false;
+                    }
+
+                    // If we are deeper in our back stack, we want to make sure that we remove the stack
+                    if (CurrentFragmentManager.BackStackEntryCount > 0)
+                    {
+                        var name = CurrentFragmentManager.GetBackStackEntryAt(0).Name;
+                        CurrentFragmentManager.PopBackStackImmediate(name, 1);
+                    }
+
+                    PerformShowFragmentTransaction(CurrentFragmentManager, bottomNavigationViewAttribute,
+                        new MvxViewModelRequest(pagePresentationHint.ViewModel));
+
+                    bottomNavigationView.FindItemByViewModel(pagePresentationHint.ViewModel)
+                        .SetChecked(true);
+
                     return true;
                 }
             }
@@ -301,6 +340,27 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             return viewPager;
         }
+        
+        protected virtual MvxBottomNavigationView? FindBottomNavigationViewInFragmentPresentation(MvxBottomNavigationViewPresentationAttribute pagerFragmentAttribute)
+        {
+            MvxBottomNavigationView? bottomNavigationView = null;
+
+            // check for a ViewPager inside a Fragment
+            if (pagerFragmentAttribute.FragmentHostViewType != null)
+            {
+                var fragment = GetFragmentByViewType(pagerFragmentAttribute.FragmentHostViewType);
+                bottomNavigationView = fragment?.View.FindViewById<MvxBottomNavigationView>(pagerFragmentAttribute.BottomNavigationResourceId);
+            }
+
+            // check for a ViewPager inside an Activity
+            if (bottomNavigationView == null && pagerFragmentAttribute.ActivityHostViewModelType != null)
+            {
+                bottomNavigationView = CurrentActivity?.FindViewById<MvxBottomNavigationView>(pagerFragmentAttribute.BottomNavigationResourceId);
+            }
+
+            return bottomNavigationView;
+        }
+
 
         protected Type? GetCurrentActivityViewModelType()
         {
@@ -778,6 +838,28 @@ namespace MvvmCross.Platforms.Android.Presenters
                 );
             }
 
+            return Task.FromResult(true);
+        }
+        
+        protected virtual Task<bool> ShowBottomNavigationFragment(
+            Type view,
+            MvxBottomNavigationViewPresentationAttribute attribute,
+            MvxViewModelRequest request)
+        {
+            ValidateArguments(view, attribute, request);
+            
+            var mvxBottomNavigationView = FindBottomNavigationViewInFragmentPresentation(attribute);
+            if (mvxBottomNavigationView == null)
+            {
+                throw new MvxException("BottomNavigationView not found");
+            }
+
+            var menuItem = mvxBottomNavigationView.Menu.Add(attribute.Title);
+            if (attribute.DrawableItemId != int.MinValue)
+            {
+                menuItem?.SetIcon(attribute.DrawableItemId);
+            }
+            mvxBottomNavigationView.AddItem(menuItem, request.ViewModelType);
             return Task.FromResult(true);
         }
 

@@ -7,6 +7,7 @@ using MvvmCross.Logging;
 using MvvmCross.Navigation;
 using MvvmCross.Presenters.Hints;
 using MvvmCross.ViewModels;
+using Playground.Core.ViewModels.Navigation;
 
 namespace Playground.Core.ViewModels
 {

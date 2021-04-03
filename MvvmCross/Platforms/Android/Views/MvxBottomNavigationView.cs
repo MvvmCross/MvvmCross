@@ -1,34 +1,36 @@
-﻿using System;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MS-PL license.
+// See the LICENSE file in the project root for more information.
+
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using Android.Content;
 using Android.Runtime;
-using Android.Widget;
 using Android.Util;
 using Android.Views;
-using Android.Support.Design.Widget;
-using System.Linq;
+using Google.Android.Material.BottomNavigation;
 
-namespace MvvmCross.Droid.Support.Design
+namespace MvvmCross.Platforms.Android.Views
 {
-    [Register("mvvmcross.droid.support.design.MvxBottomNavigationView")]
+    [Register("mvvmcross.platforms.android.views.MvxBottomNavigationView")]
     public class MvxBottomNavigationView : BottomNavigationView, BottomNavigationView.IOnNavigationItemSelectedListener
     {
         private readonly Dictionary<IMenuItem, Type> _lookup = new Dictionary<IMenuItem, Type>();
 
+        private bool _didSetListener;
+
         public MvxBottomNavigationView(Context context) : base(context)
         {
-            this.SetOnNavigationItemSelectedListener(this);
         }
 
         public MvxBottomNavigationView(Context context, IAttributeSet attrs) : base(context, attrs)
         {
-            this.SetOnNavigationItemSelectedListener(this);
         }
 
         public MvxBottomNavigationView(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
         {
-            this.SetOnNavigationItemSelectedListener(this);
         }
 
         protected MvxBottomNavigationView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
@@ -37,9 +39,14 @@ namespace MvvmCross.Droid.Support.Design
 
         public void AddItem(IMenuItem item, Type viewModel)
         {
+            if (!_didSetListener)
+            {
+                SetOnNavigationItemSelectedListener(this);
+                _didSetListener = true;
+            }
             _lookup.Add(item, viewModel);
 
-            // The first item is autoselected
+            // The first item is auto-selected
             if (_lookup.Count == 1)
             {
                 OnNavigationItemSelected(item);
@@ -48,7 +55,7 @@ namespace MvvmCross.Droid.Support.Design
 
         public bool OnNavigationItemSelected(IMenuItem item)
         {
-            var viewModelType = this.FindItemByMenuItem(item);
+            var viewModelType = FindItemByMenuItem(item);
 
             if (viewModelType != null && HandleNavigate.CanExecute(viewModelType))
             {
@@ -76,6 +83,7 @@ namespace MvvmCross.Droid.Support.Design
             if (disposing)
             {
                 SetOnNavigationItemSelectedListener(null);
+                _didSetListener = false;
             }
 
             base.Dispose(disposing);

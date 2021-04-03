@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/navigation" 
         android:layout_marginTop="20dp"/>
-    <mvvmcross.droid.support.design.MvxBottomNavigationView
+    <mvvmcross.platforms.android.views.MvxBottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
