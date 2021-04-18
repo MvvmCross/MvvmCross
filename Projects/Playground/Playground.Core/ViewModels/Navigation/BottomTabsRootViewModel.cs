@@ -18,29 +18,8 @@ namespace Playground.Core.ViewModels
         public BottomTabsRootViewModel(IMvxLogProvider logProvider, IMvxNavigationService navigationService) : base(logProvider, navigationService)
         {
             ShowInitialViewModelsCommand = new MvxAsyncCommand(ShowInitialViewModels);
-
-            NavigateCommand = new MvxAsyncCommand<Type>(async (viewModelType) =>
-            {
-                if (viewModelType == typeof(BottomTab1ViewModel))
-                {
-                    await NavigationService.ChangePresentation(new MvxPagePresentationHint(typeof(BottomTab1ViewModel)));
-                    return;
-                }
-                if (viewModelType == typeof(BottomTab2ViewModel))
-                {
-                    await NavigationService.ChangePresentation(new MvxPagePresentationHint(typeof(BottomTab2ViewModel)));
-                    return;
-                }
-                if (viewModelType == typeof(BottomTab3ViewModel))
-                {
-                    await NavigationService.ChangePresentation(new MvxPagePresentationHint(typeof(BottomTab3ViewModel)));
-                    return;
-                }
-            });
         }
-
-        public IMvxAsyncCommand<Type> NavigateCommand { get; private set; }
-
+        
         public IMvxAsyncCommand ShowInitialViewModelsCommand { get; private set; }
 
         private Task ShowInitialViewModels()

@@ -12,7 +12,7 @@ using Playground.Core.ViewModels;
 
 namespace Playground.Droid.Fragments
 {
-    [MvxBottomNavigationViewPresentation(Resource.Id.navigation, "Tab 1", ActivityHostViewModelType = typeof(BottomTabsRootViewModel), FragmentContentId = Resource.Id.content_frame)]
+    [MvxBottomNavigationViewPresentation("Tab 1", Resource.Id.viewpager, Resource.Id.navigation, ActivityHostViewModelType = typeof(BottomTabsRootViewModel), FragmentContentId = Resource.Id.content_frame)]
     [Register(nameof(BottomTab1View))]
     public class BottomTab1View : MvxFragment<BottomTab1ViewModel>
     {

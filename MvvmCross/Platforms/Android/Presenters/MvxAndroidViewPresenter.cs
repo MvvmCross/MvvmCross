@@ -277,43 +277,6 @@ namespace MvvmCross.Platforms.Android.Presenters
                 }
             }
             
-            if (attribute is MvxBottomNavigationViewPresentationAttribute bottomNavigationViewAttribute)
-            {
-                var bottomNavigationView =
-                    FindBottomNavigationViewInFragmentPresentation(bottomNavigationViewAttribute);
-
-                if (bottomNavigationView != null)
-                {
-                    var menuItem = bottomNavigationView.FindItemByViewModel(pagePresentationHint.ViewModel);
-
-                    if (menuItem == null)
-                    {
-                        _logger.Value?.Trace($"Did not find a menu item which corresponds to {pagePresentationHint.ViewModel}, skipping presentation change...");
-                        return false;
-                    }
-
-                    if (CurrentFragmentManager is null)
-                    {
-                        return false;
-                    }
-
-                    // If we are deeper in our back stack, we want to make sure that we remove the stack
-                    if (CurrentFragmentManager.BackStackEntryCount > 0)
-                    {
-                        var name = CurrentFragmentManager.GetBackStackEntryAt(0).Name;
-                        CurrentFragmentManager.PopBackStackImmediate(name, 1);
-                    }
-
-                    PerformShowFragmentTransaction(CurrentFragmentManager, bottomNavigationViewAttribute,
-                        new MvxViewModelRequest(pagePresentationHint.ViewModel));
-
-                    bottomNavigationView.FindItemByViewModel(pagePresentationHint.ViewModel)
-                        .SetChecked(true);
-
-                    return true;
-                }
-            }
-
             return false;
         }
 
@@ -341,27 +304,6 @@ namespace MvvmCross.Platforms.Android.Presenters
             return viewPager;
         }
         
-        protected virtual MvxBottomNavigationView? FindBottomNavigationViewInFragmentPresentation(MvxBottomNavigationViewPresentationAttribute pagerFragmentAttribute)
-        {
-            MvxBottomNavigationView? bottomNavigationView = null;
-
-            // check for a ViewPager inside a Fragment
-            if (pagerFragmentAttribute.FragmentHostViewType != null)
-            {
-                var fragment = GetFragmentByViewType(pagerFragmentAttribute.FragmentHostViewType);
-                bottomNavigationView = fragment?.View.FindViewById<MvxBottomNavigationView>(pagerFragmentAttribute.BottomNavigationResourceId);
-            }
-
-            // check for a ViewPager inside an Activity
-            if (bottomNavigationView == null && pagerFragmentAttribute.ActivityHostViewModelType != null)
-            {
-                bottomNavigationView = CurrentActivity?.FindViewById<MvxBottomNavigationView>(pagerFragmentAttribute.BottomNavigationResourceId);
-            }
-
-            return bottomNavigationView;
-        }
-
-
         protected Type? GetCurrentActivityViewModelType()
         {
             Type? currentActivityType = null;
@@ -840,27 +782,57 @@ namespace MvvmCross.Platforms.Android.Presenters
 
             return Task.FromResult(true);
         }
-        
-        protected virtual Task<bool> ShowBottomNavigationFragment(
+        protected virtual async Task<bool> ShowBottomNavigationFragment(
             Type view,
             MvxBottomNavigationViewPresentationAttribute attribute,
             MvxViewModelRequest request)
         {
             ValidateArguments(view, attribute, request);
-            
-            var mvxBottomNavigationView = FindBottomNavigationViewInFragmentPresentation(attribute);
-            if (mvxBottomNavigationView == null)
+
+            var showViewPagerFragment = await ShowViewPagerFragment(view, attribute, request).ConfigureAwait(true);
+            if (!showViewPagerFragment)
+                return false;
+
+            ViewPager? viewPager = null;
+            MvxBottomNavigationView? bottomNavigationView = null;
+
+            // check for a ViewPager inside a Fragment
+            if (attribute.FragmentHostViewType != null)
             {
-                throw new MvxException("BottomNavigationView not found");
+                var fragment = GetFragmentByViewType(attribute.FragmentHostViewType);
+
+                viewPager = fragment?.View.FindViewById<ViewPager>(attribute.ViewPagerResourceId);
+                bottomNavigationView = fragment?.View.FindViewById<MvxBottomNavigationView>(attribute.BottomNavigationViewResourceId);
             }
 
-            var menuItem = mvxBottomNavigationView.Menu.Add(attribute.Title);
-            if (attribute.DrawableItemId != int.MinValue)
+            // check for a ViewPager inside an Activity
+            if (CurrentActivity.IsActivityAlive() && attribute?.ActivityHostViewModelType != null)
             {
-                menuItem?.SetIcon(attribute.DrawableItemId);
+                viewPager = CurrentActivity?.FindViewById<ViewPager>(attribute.ViewPagerResourceId);
+                bottomNavigationView = CurrentActivity?.FindViewById<MvxBottomNavigationView>(attribute.BottomNavigationViewResourceId);
             }
-            mvxBottomNavigationView.AddItem(menuItem, request.ViewModelType);
-            return Task.FromResult(true);
+
+            if (viewPager == null || bottomNavigationView == null)
+                throw new MvxException("ViewPager or BottomNavigationView not found");
+
+            bottomNavigationView.ViewPager ??= viewPager;
+            if (!bottomNavigationView.DidRegisterViewModelType(request.ViewModelType!))
+            {
+                // item id should match index of page.
+                var menuItem = bottomNavigationView.Menu.Add(0, viewPager.Adapter.Count - 1, 0, attribute?.Title);
+                
+                if (menuItem is null)
+                    throw new MvxException("Failed to create BottomNavigationView MenuItem");
+                
+                if (attribute!.IconDrawableResourceId != int.MinValue)
+                {
+                    menuItem.SetIcon(attribute.IconDrawableResourceId);
+                }
+
+                bottomNavigationView.RegisterViewModel(menuItem, request.ViewModelType);
+            }
+
+            return true;
         }
 
         protected virtual async Task<bool> ShowTabLayout(

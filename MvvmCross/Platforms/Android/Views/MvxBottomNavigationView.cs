@@ -2,10 +2,9 @@
 // The .NET Foundation licenses this file to you under the MS-PL license.
 // See the LICENSE file in the project root for more information.
 
+#nullable enable
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Input;
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
@@ -15,11 +14,29 @@ using Google.Android.Material.BottomNavigation;
 namespace MvvmCross.Platforms.Android.Views
 {
     [Register("mvvmcross.platforms.android.views.MvxBottomNavigationView")]
-    public class MvxBottomNavigationView : BottomNavigationView, BottomNavigationView.IOnNavigationItemSelectedListener
+    public class MvxBottomNavigationView : BottomNavigationView, IMvxBottomNavigationView, BottomNavigationView.IOnNavigationItemSelectedListener, AndroidX.ViewPager.Widget.ViewPager.IOnPageChangeListener
     {
-        private readonly Dictionary<IMenuItem, Type> _lookup = new Dictionary<IMenuItem, Type>();
+        private AndroidX.ViewPager.Widget.ViewPager? _viewPager;
+        public AndroidX.ViewPager.Widget.ViewPager? ViewPager
+        {
+            get => _viewPager;
+            set
+            {
+                _viewPager?.RemoveOnPageChangeListener(this);
+                _viewPager = value;
+                _viewPager?.AddOnPageChangeListener(this);
+            }
+        }
+
+        private readonly Dictionary<Type, IMenuItem> _lookup = new Dictionary<Type, IMenuItem>();
 
         private bool _didSetListener;
+
+        private IMenuItem? _previousMenuItem;
+
+        protected MvxBottomNavigationView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        {
+        }
 
         public MvxBottomNavigationView(Context context) : base(context)
         {
@@ -33,60 +50,58 @@ namespace MvvmCross.Platforms.Android.Views
         {
         }
 
-        protected MvxBottomNavigationView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        public virtual bool DidRegisterViewModelType(Type viewModelType)
         {
+            return _lookup.ContainsKey(viewModelType);
         }
 
-        public void AddItem(IMenuItem item, Type viewModel)
+        public virtual void RegisterViewModel(IMenuItem menuItem, Type viewModelType)
         {
             if (!_didSetListener)
             {
                 SetOnNavigationItemSelectedListener(this);
                 _didSetListener = true;
             }
-            _lookup.Add(item, viewModel);
-
-            // The first item is auto-selected
+            _lookup.Add(viewModelType, menuItem);
             if (_lookup.Count == 1)
             {
-                OnNavigationItemSelected(item);
+                OnPageSelected(0);
             }
         }
 
-        public bool OnNavigationItemSelected(IMenuItem item)
+        public virtual bool OnNavigationItemSelected(IMenuItem item)
         {
-            var viewModelType = FindItemByMenuItem(item);
-
-            if (viewModelType != null && HandleNavigate.CanExecute(viewModelType))
-            {
-                HandleNavigate.Execute(viewModelType);
-                return true;
-            }
-
-            return false;
+            ViewPager?.SetCurrentItem(item.ItemId, true);
+            return true;
         }
-
-        public IMenuItem FindItemByViewModel(Type viewModel)
-        {
-            return _lookup.FirstOrDefault(i => i.Value == viewModel).Key;
-        }
-
-        public Type FindItemByMenuItem(IMenuItem item)
-        {
-            return _lookup[item];
-        }
-
-        public ICommand HandleNavigate { get; set; }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
                 SetOnNavigationItemSelectedListener(null);
+                _viewPager?.RemoveOnPageChangeListener(this);
                 _didSetListener = false;
+                ViewPager = null;
             }
 
             base.Dispose(disposing);
+        }
+
+        public virtual void OnPageScrollStateChanged(int state)
+        {
+        }
+
+        public virtual void OnPageScrolled(int position, float positionOffset, int positionOffsetPixels)
+        {
+        }
+
+        public virtual void OnPageSelected(int position)
+        {
+            // update menu items
+            _previousMenuItem?.SetChecked(false);
+            Menu.GetItem(position)?.SetChecked(true);
+            _previousMenuItem = Menu.GetItem(position);
         }
     }
 }

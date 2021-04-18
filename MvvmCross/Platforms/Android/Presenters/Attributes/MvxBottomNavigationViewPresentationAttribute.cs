@@ -8,84 +8,52 @@ using System;
 namespace MvvmCross.Platforms.Android.Presenters.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public class MvxBottomNavigationViewPresentationAttribute : MvxFragmentPresentationAttribute
+    public class MvxBottomNavigationViewPresentationAttribute : MvxViewPagerFragmentPresentationAttribute
     {
+        
         public MvxBottomNavigationViewPresentationAttribute(
-            int bottomNavigationResourceId, 
             string title,
-            int drawableItemId = int.MinValue,
-            Type activityHostViewModelType = null!,
-            int fragmentContentId = int.MinValue,
+            int viewPagerResourceId,
+            int bottomNavigationViewResourceId,
+            int iconDrawableResourceId = int.MinValue,
+            Type activityHostViewModelType = null,
             bool addToBackStack = false,
-            Type fragmentHostViewType = null!,
-            bool isCacheableFragment = false,
-            string tag = null!)
-            : base(activityHostViewModelType,
-                fragmentContentId,
-                addToBackStack,
-                int.MinValue,
-                int.MinValue,
-                int.MinValue,
-                int.MinValue,
-                int.MinValue,
-                fragmentHostViewType,
-                isCacheableFragment,
-                tag)
+            Type fragmentHostViewType = null,
+            bool isCacheableFragment = false) : base(title, viewPagerResourceId, activityHostViewModelType,
+            addToBackStack, fragmentHostViewType, isCacheableFragment)
         {
-            BottomNavigationResourceId = bottomNavigationResourceId;
-            DrawableItemId = drawableItemId;
-            Title = title;
+            BottomNavigationViewResourceId = bottomNavigationViewResourceId;
+            IconDrawableResourceId = iconDrawableResourceId;
         }
 
         public MvxBottomNavigationViewPresentationAttribute(
-            string bottomNavigationResourceName,
             string title,
-            int drawableItemId = int.MinValue,
-            Type activityHostViewModelType = null!,
+            string viewPagerResourceId,
+            string bottomNavigationViewResourceId,
+            int iconDrawableResourceId = int.MinValue,
+            Type activityHostViewModelType = null,
             bool addToBackStack = false,
-            Type fragmentHostViewType = null!,
-            bool isCacheableFragment = false,
-            string tag = null!)
-            : base(
-                activityHostViewModelType,
-                null,
-                addToBackStack,
-                null,
-                null,
-                null,
-                null,
-                null,
-                fragmentHostViewType,
-                isCacheableFragment,
-                tag)
+            Type fragmentHostViewType = null,
+            bool isCacheableFragment = false) : base(title, viewPagerResourceId,
+            activityHostViewModelType, addToBackStack, fragmentHostViewType, isCacheableFragment)
         {
-            if (Mvx.IoCProvider.TryResolve(out IMvxAndroidGlobals globals) &&
-                globals.ApplicationContext.Resources != null)
-            {
-                var context = globals.ApplicationContext;
+            var context = Mvx.IoCProvider.Resolve<IMvxAndroidGlobals>().ApplicationContext;
 
-                BottomNavigationResourceId = !string.IsNullOrEmpty(bottomNavigationResourceName)
-                    ? context.Resources.GetIdentifier(bottomNavigationResourceName, "id", context.PackageName)
-                    : global::Android.Resource.Id.Content;
-            }
+            BottomNavigationViewResourceId = !string.IsNullOrEmpty(bottomNavigationViewResourceId)
+                ? context.Resources!.GetIdentifier(bottomNavigationViewResourceId, "id", context.PackageName)
+                : global::Android.Resource.Id.Content;
 
-            DrawableItemId = drawableItemId;
-            Title = title;
+            IconDrawableResourceId = iconDrawableResourceId;
         }
 
         /// <summary>
-        ///     The resource used to get the BottomNavigation from the view
+        /// The resource id used to get the BottomNavigationView from the view
         /// </summary>
-        public int BottomNavigationResourceId { get; set; }
+        public int BottomNavigationViewResourceId { get; set; }
 
         /// <summary>
-        ///     The resource used to get the menu item from the view
+        /// The resource id used to get the menu item from the view
         /// </summary>
-        public int DrawableItemId { get; set; }
-
-        /// <summary>
-        ///     The title for the bottom navigation menu item
-        /// </summary>
-        public string Title { get; set; }
+        public int IconDrawableResourceId { get; set; }
     }
 }
