@@ -1,0 +1,33 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: Xamarin.AndroidX.Fragment
+    versions:
+    - 1.3.0
+    - 1.3.0.1
+    - 1.3.1
+  - dependency-name: Xamarin.AndroidX.Lifecycle.LiveData
+    versions:
+    - 2.3.0
+    - 2.3.0.1
+  - dependency-name: Xamarin.AndroidX.RecyclerView
+    versions:
+    - 1.1.0.7
+    - 1.1.0.8
+  - dependency-name: Xamarin.AndroidX.Preference
+    versions:
+    - 1.1.1.7
+  - dependency-name: Xamarin.Google.Android.Material
+    versions:
+    - 1.3.0
+  - dependency-name: Xamarin.AndroidX.MediaRouter
+    versions:
+    - 1.2.2
+  - dependency-name: XunitXml.TestLogger
+    versions:
+    - 3.0.56
