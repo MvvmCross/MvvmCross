@@ -71,6 +71,52 @@ public partial class ChildView : MvxWpfView<ChildViewModel>
 }
 ```
 
+### MvxRegionPresentationAttribute
+
+Used to set a view as a *tab item*. The view that will be displayed as a `Content` object of the `TabItem` in a `TabControl`.
+
+The view should be the following type:
+
+* `MvxWpfView` (that inherits `UserControl` and implements `IMvxWpfView`)
+
+You can customize how the content will look through the following properties:
+
+| Name             | Type     | Description                                                  |
+| ---------------- | -------- | ------------------------------------------------------------ |
+| WindowIdentifier | `string` | You can choose in which window should this view be displayed by using this property. If the identifier is not provided, the view will be displayed in the last opened window. |
+| RegionName       | `string` | The view class will try to find the `Frame` with the specific `RegionName` in the window specified by `WindowIdentifier`. If there is no correct `Frame` element, the navigation will fail. |
+
+The view with this attribute like this:
+
+```csharp
+[MvxRegionPresentation(RegionName = "Tab1Region", WindowIdentifier = "TabsRootView")]
+[MvxViewFor(typeof(Tab1ViewModel))]
+public partial class Tab1View
+{
+    public Tab1View()
+    {
+        InitializeComponent();
+    }
+}
+```
+
+You should also have a window that contains the below `TabControl`:
+
+```xaml
+<TabControl>
+    <TabItem Header="TabItem1">
+        <Frame x:Name="Tab1Region" NavigationUIVisibility="Hidden" />
+    </TabItem>
+    <TabItem Header="TabItem2">
+        <Frame x:Name="Tab2Region" NavigationUIVisibility="Hidden" />
+    </TabItem>
+    <TabItem Header="TabItem3">
+        <Frame x:Name="Tab3Region" NavigationUIVisibility="Hidden" />
+    </TabItem>
+</TabControl>
+```
+
+Please check `Playground.WpfCore` project for more detail.
 
 ## Views without attributes: Default values
 

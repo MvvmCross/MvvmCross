@@ -11,5 +11,7 @@
         <Button Content="Show Child (Stack Navigation)" Command="{Binding ShowChildCommand}" Margin="5" Padding="5" />
         <Button Content="Show New Window (Multiple Windows and Non-stack Navigation)" Command="{Binding ShowWindowCommand}" Margin="5" Padding="5" />
         <Button Content="Show Modal" Command="{Binding ShowModalCommand}" Margin="5" Padding="5" />
+        <Button Content="Show Tabs" Command="{Binding ShowTabsCommand}" Margin="5" Padding="5" />
+
     </StackPanel>
 </views:MvxWpfView>

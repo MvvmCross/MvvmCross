@@ -14,6 +14,7 @@ using MvvmCross.ViewModels;
 using MvvmCross.Presenters;
 using MvvmCross.Presenters.Attributes;
 using System.Threading.Tasks;
+using MvvmCross.Views;
 
 namespace MvvmCross.Platforms.Wpf.Presenters
 {
@@ -69,6 +70,13 @@ namespace MvvmCross.Platforms.Wpf.Presenters
                     {
                         var view = WpfViewLoader.CreateView(request);
                         return ShowContentView(view, (MvxContentPresentationAttribute)attribute, request);
+                    },
+                    (viewModel, attribute) => CloseContentView(viewModel));
+            AttributeTypesToActionsDictionary.Register<MvxRegionPresentationAttribute>(
+                    (viewType, attribute, request) =>
+                    {
+                        var view = WpfViewLoader.CreateView(request);
+                        return ShowRegionContentView(view, (MvxRegionPresentationAttribute)attribute, request);
                     },
                     (viewModel, attribute) => CloseContentView(viewModel));
         }
@@ -229,5 +237,28 @@ namespace MvvmCross.Platforms.Wpf.Presenters
 
             return Task.FromResult(false);
         }
+
+        protected virtual Task<bool> ShowRegionContentView(FrameworkElement element, MvxRegionPresentationAttribute attribute, MvxViewModelRequest request)
+        {
+            var contentControl = FrameworkElementsDictionary.Keys.FirstOrDefault(w => (w as MvxWindow)?.Identifier == attribute.WindowIdentifier) ?? FrameworkElementsDictionary.Keys.Last();
+            var viewFinder = Mvx.IoCProvider.Resolve<IMvxViewsContainer>();
+            var viewType = viewFinder.GetViewType(request.ViewModelType);
+            if (viewType.HasRegionAttribute())
+            {
+                var loader = Mvx.IoCProvider.Resolve<IMvxWpfViewLoader>();
+                var view = loader.CreateView(request);
+
+                var region = viewType.GetRegionName();
+                
+                var containerView = LogicalTreeHelper.FindLogicalNode(contentControl, region) as Frame;
+                if (containerView != null)
+                {
+                    containerView.Navigate(view);
+                    return Task.FromResult(true);
+                }
+            }
+            return Task.FromResult(false);
+        }
+
     }
 }
