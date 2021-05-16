@@ -50,12 +50,16 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\BottomTabsRootView.cs" />
     <Compile Include="Activities\CustomBindingView.cs" />
     <Compile Include="Adapter\SelectedItemRecyclerAdapter.cs" />
     <Compile Include="Adapter\SelectedItemRecyclerAdapter.SelectedItemEventArgs.cs" />
     <Compile Include="Bindings\BinaryEditTargetBinding.cs" />
     <Compile Include="Controls\BinaryEdit.cs" />
     <Compile Include="Fragments\BaseSplitDetailView.cs" />
+    <Compile Include="Fragments\BottomTab1View.cs" />
+    <Compile Include="Fragments\BottomTab2View.cs" />
+    <Compile Include="Fragments\BottomTab3View.cs" />
     <Compile Include="Fragments\FluentBindingView.cs" />
     <Compile Include="Fragments\FragmentCloseView.cs" />
     <Compile Include="Fragments\TabsRootBView.cs" />
@@ -97,6 +101,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\layout\BottomTab1View.axml" />
+    <AndroidResource Include="Resources\layout\BottomTab2View.axml" />
+    <AndroidResource Include="Resources\layout\BottomTab3View.axml" />
+    <AndroidResource Include="Resources\layout\BottomTabsRootView.axml" />
     <AndroidResource Include="Resources\layout\dictionary_view.axml" />
     <AndroidResource Include="Resources\layout\CollectionView.axml">
       <SubType>Designer</SubType>

@@ -66,6 +66,8 @@ namespace Playground.Core.ViewModels
 
             ShowPagesCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<PagesRootViewModel>());
 
+            ShowBottomTabsCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<BottomTabsRootViewModel>());
+
             ShowSplitCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<SplitRootViewModel>());
 
             ShowNativeCommand = new MvxAsyncCommand(async () => await NavigationService.Navigate<NativeViewModel>());
@@ -121,6 +123,8 @@ namespace Playground.Core.ViewModels
         public IMvxAsyncCommand ShowTabsCommand { get; }
 
         public IMvxAsyncCommand ShowPagesCommand { get; }
+
+        public IMvxAsyncCommand ShowBottomTabsCommand { get; }
 
         public IMvxAsyncCommand ShowSplitCommand { get; }
 
